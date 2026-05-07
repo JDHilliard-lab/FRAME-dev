@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Frame</title>
+    <title>Master Studio - Integrated Workspace v5</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -21,12 +19,12 @@
         <button class="nav-add-tab" onclick="addNewElevationTab()">+ Add Wall</button>
         
         <div style="margin-left: auto; display: flex; gap: 8px; align-items: center;">
-            <button class="action-btn btn-secondary" style="width:auto; padding: 0 8px;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
-            <button class="action-btn btn-ghost btn-sm" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
-            <button class="action-btn btn-sm" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
+            <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
         </div>
     </div>
 
@@ -34,25 +32,31 @@
 
         <div id="view-dashboard" class="view-container active">
             <div class="dash-left-pane">
-                <div class="top-section">
-                    <div class="pane-header">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <h2>Frame Database</h2>
-                            <div style="display:flex; gap:5px;">
-                                <button class="action-btn btn-outline btn-sm" onclick="addDashRow()">+ Add Item</button>
-                                <button class="action-btn btn-danger btn-sm" onclick="deleteDashRow()">− Delete</button>
-                            </div>
-                        </div>
-                        <button class="action-btn btn-ghost btn-sm" onclick="exportDashCSV()">Export CSV</button>
-                    </div>
-                    <div class="global-meta">
+                <div class="top-grey-section">
+                    <div class="global-meta" style="padding: 8px 20px 6px;">
                         <div><label>Project Name</label><input type="text" id="g_projName" value="Project X"></div>
                         <div><label>Description</label><input type="text" id="g_desc" value="Production Specs"></div>
                         <div><label>Date</label><input type="date" id="g_date"></div>
                         <div><label>Issued By</label><input type="text" id="g_issued" value="Studio"></div>
-                        <div><label>Client</label><input type="text" id="g_client" value="Client X"></div>
-                        <div><label>Attn</label><input type="text" id="g_attn" value="PM"></div>
+                        <div><label>Client Name</label><input type="text" id="g_client" value="Client X"></div>
+                        <div><label>Attn:</label><input type="text" id="g_attn" value="PM"></div>
                         <div><label>Delivery</label><input type="text" id="g_delivery" value="TBD"></div>
+                    </div>
+                    <div class="pane-header" style="border-top: 1px solid var(--border-color); border-bottom: none; padding: 6px 20px;">
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="addDashRow()">+ Add Item</button>
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="duplicateDashRow()">Duplicate Item</button>
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="deleteDashRow()">- Delete Item</button>
+                        </div>
+                        <div style="display:flex; gap:5px; align-items: center;">
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('csvImport').click()">Import CSV</button>
+                            <input type="file" id="csvImport" accept=".csv" style="display:none;" onchange="importDashCSV(event)">
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="exportDashCSV()">Export Database</button>
+                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Batch Download All Frames as PNG" onclick="batchDownloadAllFrames()">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v10M7 7l5 5 5-5M4 14v5a1 1 0 001 1h14a1 1 0 001-1v-5M3 14h18"/></svg>
+                                <span style="font-size:0.65rem; margin-left:3px;">Batch PNGs</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
@@ -60,12 +64,15 @@
                     <table id="rfiTable">
                         <thead>
                             <tr>
-                                <th>Lvl</th><th>Qty</th><th>Item Code</th><th>Product</th><th>Location</th><th>Img Code</th>
+                                <th>Qty</th><th>Item Code</th><th>Product</th><th>Location</th><th>Img Code</th>
                                 <th>OD W</th><th>OD H</th><th>Open W</th><th>Open H</th>
-                                <th class="accent-col">Print W</th><th class="accent-col">Print H</th>
+                                <th style="color:var(--accent);">Print W</th><th style="color:var(--accent);">Print H</th>
                                 <th>Cnv Dp</th><th>Cnv Wrp</th>
-                                <th>Mat Color</th><th>Mat T</th><th>Mat R</th><th>Mat B</th><th>Mat L</th><th>Mat 2</th>
-                                <th>Glass</th><th>Frame Code</th><th>Fr. W</th><th>Hardware</th><th>Backing</th><th>Mount</th>
+                                <th>Mat 1</th><th>Mat T</th><th>Mat B</th><th>Mat L</th><th>Mat R</th>
+                                <th>Mat 2</th><th>Mat 2 Rvl</th>
+                                <th>Glass</th>
+                                <th>Paper Type</th><th>Paper W</th><th>Paper H</th><th>White Brdr</th>
+                                <th>Frame Code</th><th>Fr. W</th><th>Fr. H</th><th>Hardware</th><th>Substrate</th><th>Mount</th>
                                 <th>Notes</th><th>Prod Notes</th>
                             </tr>
                         </thead>
@@ -78,54 +85,56 @@
                 <div class="preview-wrapper">
                     <div class="preview-container">
                         <div id="dash-frame-visual" class="frame-vis frame-vis-image" style="position:relative;">
-                            <div class="frame-rail rail-top"><div class="rail-bg"></div></div>
-                            <div class="frame-rail rail-bottom"><div class="rail-bg"></div></div>
-                            <div class="frame-rail rail-left"><div class="rail-bg"></div></div>
-                            <div class="frame-rail rail-right"><div class="rail-bg"></div></div>
-                            <div id="dash-mat1-visual" class="mat-visual"></div>
-                            <div id="dash-mat2-visual" class="mat2-visual"></div>
-                            <div id="dash-art-visual" class="art-visual">0 × 0</div>
-                        </div>
+                            </div>
                     </div>
-                </div>
-
-                <div class="controls">
-                    <div class="dash-toolbar">
-                        <select id="dashPushSelector" class="no-arrow" style="flex: 1; min-width: 90px; height: 26px; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-strong); border-radius: 4px; font-size: 0.65rem; padding: 0 4px; font-family: inherit; font-weight: bold;">
-                            <option value="">-- Push to Wall --</option>
-                        </select>
-                        <button class="action-btn" style="width: auto; height: 26px; margin: 0; padding: 0 8px; font-size: 0.65rem;" onclick="pushFrameToElevation()">Send</button>
+                    <div class="dash-toolbar" style="width:100%; margin-bottom:0; flex-shrink: 0; display:flex; gap:6px;">
                         
-                        <div style="width: 1px; height: 18px; background: var(--border-strong); margin: 0 2px;"></div>
+                        <div style="display: flex; gap: 4px; align-items: center; flex: 2.5;">
+                            <div style="position: relative; flex: 1;">
+                                <select id="dashPushSelector" class="action-btn btn-secondary" style="font-size: 0.7rem; justify-content: space-between; padding: 0 8px; width: 100%; -webkit-appearance: none; appearance: none; cursor:pointer;">
+                                    <option value="">-- Push to Wall --</option>
+                                </select>
+                                <svg class="svg-icon" style="width:12px; height:12px; position:absolute; right:8px; top:7px; pointer-events:none;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </div>
+                            <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px;" onclick="pushFrameToElevation()">Send</button>
+                        </div>
                         
-                        <div class="unit-toggle" style="margin: 0; height: 26px; flex-shrink: 0; border: 1px solid var(--border-color);">
+                        <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 2px;"></div>
+                        
+                        <div class="unit-toggle" style="flex: 1;">
                             <button id="dashBtnInch" class="active" onclick="setDashUnit('in')">IN</button>
                             <button id="dashBtnCm" onclick="setDashUnit('cm')">CM</button>
                         </div>
 
-                        <div style="width: 1px; height: 18px; background: var(--border-strong); margin: 0 2px;"></div>
+                        <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 2px;"></div>
 
-                        <button class="action-btn btn-secondary" style="width: 26px; height: 26px; padding:0; margin: 0; display:flex; justify-content:center; align-items:center;" title="Download PNG" onclick="exportDashNativePNG()">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                        <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Download Frame PNG" onclick="exportDashNativePNG()">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>
                         </button>
-                        <button class="action-btn btn-secondary" style="width: auto; height: 26px; padding: 0 8px; margin: 0; font-size: 0.65rem;" onclick="saveFramePreset()">Save Preset</button>
-                        <button class="action-btn btn-secondary" style="width: auto; height: 26px; padding: 0 8px; margin: 0; font-size: 0.65rem;" onclick="document.getElementById('loadPresetInput').click()">Load Preset</button>
+                        <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Save Preset" onclick="saveFramePreset()">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                        </button>
+                        <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Load Preset" onclick="document.getElementById('loadPresetInput').click()">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"/><rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+                        </button>
                         <input type="file" id="loadPresetInput" accept=".json" style="display:none;" onchange="loadFramePreset(event)">
                     </div>
+                </div>
 
-                    <div id="linkedWarningBanner" class="linked-banner">
-                        <svg class="svg-icon" style="color: var(--accent); flex-shrink: 0;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        <span><b>Linked Object:</b> On <span id="linkedCount">X</span> wall(s). Edits sync to all.</span>
-                        <button class="action-btn btn-sm" style="width:auto; background: var(--accent); color: #000;" onclick="detachDashRow()">Detach</button>
+                <div class="controls">
+                    <div id="linkedWarningBanner" style="display: none; gap: 6px; margin-bottom: 10px; background: rgba(255, 193, 7, 0.15); padding: 8px; border-radius: 6px; border: 1px solid #ffc107; align-items: center;">
+                        <svg class="svg-icon" style="color: #ffc107;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <span style="font-size: 0.65rem; color: var(--text-strong); flex: 1;">Linked on <span id="linkedCount">X</span> wall(s). Edits update all.</span>
+                        <button class="action-btn" style="width: auto; padding: 4px 8px; font-size: 0.6rem; background: #ffc107; color: #000; border:none;" onclick="detachDashRow()">Detach to New Spec</button>
                     </div>
 
-                    <div class="section-title" onclick="toggleDashSection('sec-meta', this)">Item Metadata <span>▼</span></div>
+                    <div class="section-title" onclick="toggleDashSection('sec-meta', this)">Item Metadata <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="sec-meta" class="collapsible-section open">
                         <div class="grid-custom-meta">
                             <div><label>Item Code</label><input type="text" id="m_itemCode" oninput="syncDashAndCalculate()"></div>
                             <div><label>Image Code</label><input type="text" id="m_imageCode" oninput="syncDashAndCalculate()"></div>
                             <div><label>Level</label><input type="text" id="m_level" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Qty</label><input type="number" id="m_qty" oninput="syncDashAndCalculate()" disabled title="Auto-Calculated"></div>
+                            <div><label>Qty</label><input type="number" id="m_qty" oninput="syncDashAndCalculate()" disabled title="Auto-Calculated by Elevations"></div>
                         </div>
                         
                         <div class="grid-row-2">
@@ -141,105 +150,217 @@
                             <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
                         </div>
 
-                        <div class="grid-row-4">
+                        <!-- Artist / Title / Art Type were visible form fields earlier in
+                             the build; per studio decision they're now hand-entered as
+                             captions next to the image in InDesign instead of auto-flowing
+                             into the spec block. The fields stay in the data model as
+                             hidden inputs so saved projects + CSV columns still work. -->
+                        <input type="hidden" id="m_artist" value="">
+                        <input type="hidden" id="m_artworkTitle" value="">
+                        <input type="hidden" id="m_artType" value="">
+
+                        <!-- OD + frame profile geometry. Fr. W is the visible frame face;
+                             Fr. H is the total profile depth from front to back; Rabbet is
+                             the L-pocket depth where art/glass/backing stack up. -->
+                        <div class="grid-row-5" style="display:grid; grid-template-columns: repeat(5, 1fr); gap: 4px;">
                             <div><label>OD W</label><input type="number" step="0.125" id="extW" oninput="syncDashAndCalculate()"></div>
                             <div><label>OD H</label><input type="number" step="0.125" id="extH" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Fr. W</label><input type="number" step="0.125" id="fW" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Style</label>
-                                <select id="fType" class="no-arrow" onchange="syncDashAndCalculate()">
-                                    <option value="image">Library</option>
-                                    <option value="color">Solid</option>
-                                </select>
+                            <div><label title="Visible frame face width">Fr. W</label><input type="number" step="0.125" id="fW" oninput="syncDashAndCalculate()"></div>
+                            <div><label title="Total profile depth front-to-back">Fr. H</label><input type="number" step="0.0625" id="fHeight" oninput="syncDashAndCalculate()" placeholder="depth"></div>
+                            <div><label title="Depth of L-pocket where art sits">Rabbet</label><input type="number" step="0.0625" id="rabbetDepth" oninput="handleRabbetChange()" placeholder="depth"></div>
+                        </div>
+
+                        <!-- FRAME STYLE: tight section with a Library/Solid toggle + sync folder icon. -->
+                        <div class="section-title section-title-static" style="margin-top:8px;">Frame Style</div>
+                        <!-- FRAME STYLE: folder | LIBRARY toggle | COLOR toggle | color swatch — all one row.
+                             When LIBRARY is active, the COLOR side dims. When COLOR is active, the LIBRARY side dims. -->
+                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
+                            <input type="file" id="libFolderInput" webkitdirectory directory multiple style="display:none;" onchange="syncDashLibraryFolder(event)">
+                            <button id="libFolderBtn" class="icon-btn fstyle-lib-side" style="width:26px; height:26px; border:1px solid var(--border-color); background:var(--btn-secondary); cursor:pointer; flex-shrink:0; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sync Folder — import a folder of frame swatches" onclick="openLibrarySyncModal()">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+                            </button>
+                            <div class="unit-toggle" style="flex: 1;">
+                                <button id="fTypeBtnLibrary" class="active fstyle-lib-side" type="button" onclick="setFrameStyle('image')">LIBRARY</button>
+                                <button id="fTypeBtnSolid" class="fstyle-color-side" type="button" onclick="setFrameStyle('color')">COLOR</button>
                             </div>
+                            <input type="color" id="fColor" class="color-swatch-flat fstyle-color-side" oninput="syncDashAndCalculate()" style="width:26px; height:26px;" title="Frame color">
+                            <!-- Hidden field preserves the existing data flow: syncDashAndCalculate reads getStr('fType') -->
+                            <input type="hidden" id="fType" value="image">
                         </div>
-
-                        <div id="colorControls" style="display:none; margin-bottom:8px;">
-                            <input type="color" id="fColor" oninput="syncDashAndCalculate()" style="width:100%; height:26px;">
-                        </div>
+                        <!-- Legacy container kept (empty) so any code paths that flip its display don't error -->
+                        <div id="colorControls" style="display:none;"></div>
                         
-                        <div id="imageControls" style="display:flex; align-items:center; gap:4px; margin-bottom:8px; width:100%;">
-                            <select id="libVendor" class="no-arrow" style="flex:1; height:26px; font-size:0.62rem; min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
-                            <select id="libCollection" class="no-arrow" style="flex:1; height:26px; font-size:0.62rem; min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
+                        <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px; width: 100%;">
+                            <select id="libVendor" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
+                            <select id="libCollection" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
 
-                            <div id="customSwatchContainer" style="flex:1.2; position:relative; min-width:0; height:26px;">
+                            <div id="customSwatchContainer" style="flex: 1.2; position: relative; min-width: 0; height: 26px;">
                                 <div id="swatchSelectedDisplay" style="border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.65rem; height: 26px; padding: 0 4px; background: var(--bg-input); cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong);" onclick="toggleDashSwatchDropdown()">Frame</div>
                                 <ul id="swatchDropdownList" class="custom-dropdown-list"></ul>
                             </div>
 
                             <div id="swatchThumbPreview" style="width:26px; height:26px; border-radius:4px; border:1px solid var(--border-color); background-size:cover; background-position:center; background-color:var(--bg-subpanel); flex-shrink:0;"></div>
                             
-                            <button class="action-btn btn-secondary" style="width:26px; height:26px; padding:0; flex-shrink:0; display:flex; align-items:center; justify-content:center;" title="Cloud Sync from GitHub" onclick="syncFromCloud(false)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M8 17l4 4 4-4M12 12v9"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
-                            </button>
-                            
-                            <div class="file-upload-wrapper" style="margin:0; width: 26px; height:26px; flex-shrink:0;">
-                                <input type="file" id="libFolderInput" webkitdirectory directory multiple style="display:none;" onchange="syncDashLibraryFolder(event)">
-                                <label for="libFolderInput" class="action-btn btn-secondary" style="height:26px; border-radius:4px; padding: 0; display:flex; align-items:center; justify-content:center; cursor:pointer; margin:0;" title="Local Folder Sync">
-                                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                                </label>
-                            </div>
-
-                            <div class="file-upload-wrapper" style="margin:0; width: 26px; height:26px; flex-shrink:0;">
+                            <div class="file-upload-wrapper" style="margin:0; width: 26px; height:26px;">
                                 <input type="file" id="swatchUpload" class="file-upload-input" accept="image/*" onchange="loadDashCustomSwatch(event)">
-                                <label for="swatchUpload" class="action-btn btn-secondary" style="height:26px; border-radius:4px; padding: 0; display:flex; align-items:center; justify-content:center; cursor:pointer; margin:0;" title="Upload Single Image">
-                                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                <label for="swatchUpload" class="btn-secondary" style="height:26px; border-radius:4px; padding: 0; display:flex; align-items:center; justify-content:center; cursor:pointer;" title="Upload Single Image">
+                                    <svg class="svg-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="grid-row-2" id="canvasSettings" style="display:none;">
-                            <div><label>Cnv. Depth</label><input type="number" step="0.125" id="canvasDepth" oninput="syncDashAndCalculate()"></div>
+                        <div class="grid-row-3" id="canvasSettings" style="display:none;">
+                            <div><label>Cnv. Depth</label><input type="number" step="0.125" id="canvasDepth" oninput="handleCanvasDepthChange()"></div>
                             <div><label>Cnv. Wrap</label><input type="number" step="0.125" id="canvasWrap" oninput="syncDashAndCalculate()"></div>
+                            <div><label title="Distance from frame inner edge to canvas image: covers canvas face + shadow gap">Inset</label><input type="number" step="0.125" id="floaterInset" oninput="syncDashAndCalculate()" title="Inset from frame inner edge to canvas image opening (covers visible canvas face + shadow gap, typically 0.75&quot;)"></div>
                         </div>
 
                         <div class="grid-custom-bleed" id="bleedSettings">
-                            <div><label>Open W</label><div class="calc-box" id="disp_openW">0</div></div>
-                            <div><label>Open H</label><div class="calc-box" id="disp_openH">0</div></div>
+                            <div><label>Open W</label><div class="calc-box calc-box-blue" id="disp_openW">0</div></div>
+                            <div><label>Open H</label><div class="calc-box calc-box-blue" id="disp_openH">0</div></div>
                             <div><label>Bleed</label><input type="number" step="0.125" id="m_bleed" value="0.25" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Print File</label><div class="calc-box" id="printFileDisplay">0 × 0</div></div>
+                            <div><label>Print File</label><div class="calc-box calc-box-blue" id="printFileDisplay">0 x 0</div></div>
                         </div>
                     </div>
 
                     <div id="matWrapper">
-                        <div class="section-title" onclick="toggleDashSection('sec-mats', this)">Mat Controls <span>▼</span></div>
+                        <div class="section-title" onclick="toggleDashSection('sec-mats', this)">
+                            <span id="matFloatTitle">Mat Controls</span>
+                            <span style="display:flex; align-items:center; gap: 8px;">
+                                <!-- MAT / FLOAT MOUNT mode toggle. Click bubbles up to section-title's
+                                     collapse handler — stop propagation in the buttons so they don't
+                                     accidentally collapse/expand the section. -->
+                                <span class="unit-toggle" id="matFloatToggle" style="height: 18px; min-width: 110px;" onclick="event.stopPropagation()">
+                                    <button id="matModeBtnMat" class="active" type="button" onclick="event.stopPropagation(); setMatFloatMode('mat')">MAT</button>
+                                    <button id="matModeBtnFloat" type="button" onclick="event.stopPropagation(); setMatFloatMode('float')">FLOAT</button>
+                                </span>
+                                <svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </span>
+                        </div>
                         <div id="sec-mats" class="collapsible-section open">
-                            <div class="flex-row-tight">
-                                <div style="flex:0 0 70px; border-right:1px solid var(--border-color); padding-right:8px;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                                        <span style="font-size:0.55rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em;">Mat 2</span>
-                                        <button id="m2Toggle" class="toggle-status active" onclick="toggleDashMat('m2')">ON</button>
-                                    </div>
-                                    <input type="number" step="0.001" class="nano-input" id="m2" oninput="syncDashAndCalculate()">
-                                </div>
-                                <div style="flex:1; padding-left:8px;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:5px;">
-                                        <span style="font-size:0.55rem; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em;">Mat 1 — T / B / L / R</span>
-                                        <div style="display:flex; gap:4px;">
+
+                            <!-- MAT MODE PANEL: Mat 1 (left) | link | Mat 2 (right) -->
+                            <div id="matModePanel" class="flex-row-tight" style="align-items: center; justify-content: space-between; padding: 6px; border-radius: 6px;">
+                                
+                                <!-- MAT 1 (left) -->
+                                <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                        <span style="font-size: 0.55rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Mat 1</span>
+                                        <div style="display:flex; gap: 4px;">
                                             <button id="m1Toggle" class="toggle-status active" onclick="toggleDashMat('m1')">ON</button>
                                             <button id="m1Lock" class="toggle-status" onclick="toggleDashLock()">UNLOCKED</button>
                                         </div>
                                     </div>
-                                    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:4px;">
-                                        <input type="number" step="0.001" class="nano-input m1-input" id="m1T" oninput="handleDashMatSync('m1T')">
-                                        <input type="number" step="0.001" class="nano-input m1-input" id="m1B" oninput="handleDashMatSync('m1B')">
-                                        <input type="number" step="0.001" class="nano-input m1-input" id="m1L" oninput="handleDashMatSync('m1L')">
-                                        <input type="number" step="0.001" class="nano-input m1-input" id="m1R" oninput="handleDashMatSync('m1R')">
+                                    <div style="display:flex; gap:4px; margin-bottom:4px;">
+                                        <input type="text" id="m1_color" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;">
+                                        <input type="color" id="m1_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()">
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;">
+                                        <div class="mat-input-cell">
+                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1T" oninput="handleDashMatSync('m1T')" title="Top mat width">
+                                            <span class="mat-input-label">T</span>
+                                        </div>
+                                        <div class="mat-input-cell">
+                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1B" oninput="handleDashMatSync('m1B')" title="Bottom mat width">
+                                            <span class="mat-input-label">B</span>
+                                        </div>
+                                        <div class="mat-input-cell">
+                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1L" oninput="handleDashMatSync('m1L')" title="Left mat width">
+                                            <span class="mat-input-label">L</span>
+                                        </div>
+                                        <div class="mat-input-cell">
+                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1R" oninput="handleDashMatSync('m1R')" title="Right mat width">
+                                            <span class="mat-input-label">R</span>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <button id="matLinkBtn" class="icon-btn active" title="Sync Mat Colors" onclick="toggleMatLink()" style="margin: 0 8px; color: var(--accent); background:transparent; flex-shrink:0;">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                </button>
+
+                                <!-- MAT 2 (right) -->
+                                <div style="display: flex; flex-direction: column; width: 92px; flex-shrink:0;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                                        <span style="font-size: 0.55rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Mat 2</span>
+                                        <button id="m2Toggle" class="toggle-status" onclick="toggleDashMat('m2')">OFF</button>
+                                    </div>
+                                    <div style="display:flex; gap:4px; margin-bottom:4px;">
+                                        <input type="text" id="m2_color" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;">
+                                        <input type="color" id="m2_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()">
+                                    </div>
+                                    <input type="number" step="0.125" class="nano-input" id="m2" oninput="syncDashAndCalculate()" style="width:100%;" title="Mat 2 Reveal">
+                                </div>
                             </div>
-                            <div class="grid-row-2" style="margin-top:6px;">
-                                <div><label>Mat Code / Color</label><input type="text" id="m_color" oninput="syncDashAndCalculate()"></div>
-                                <div><label>Glass</label><input type="text" id="m_glass" oninput="syncDashAndCalculate()"></div>
+
+                            <!-- FLOAT MOUNT PANEL: 3 cols × 2 rows + a Paper Type row at the bottom.
+                                 Col 1: backer/paper colors. Col 2: paper margin/border.
+                                 Col 3: edge toggle (Straight/Deckled — internal values stay clean/torn). -->
+                            <div id="floatMountPanel" class="flex-row-tight" style="display:none; padding: 6px; border-radius: 6px; flex-direction:column; gap: 6px;">
+
+                                <!-- Top: 3-col grid (colors, margins, edge) -->
+                                <div style="display:flex; gap:8px;">
+
+                                    <!-- Col 1: Backer + Paper colors -->
+                                    <div style="flex:1.4; min-width:0; display:flex; flex-direction:column; gap:4px;">
+                                        <div style="display:flex; align-items:center; gap:4px;">
+                                            <span class="fm-label">Backer</span>
+                                            <input type="text" id="sbBackerColorName" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;">
+                                            <input type="color" id="sbBackerColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()" title="Backer color">
+                                        </div>
+                                        <div style="display:flex; align-items:center; gap:4px;">
+                                            <span class="fm-label">Paper</span>
+                                            <input type="text" id="m_paperType" value="Fine Art Paper" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;" placeholder="e.g. Fine Art Paper, Digital Photo Print">
+                                            <input type="color" id="sbPaperColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()" title="Paper tone (visual reference)">
+                                        </div>
+                                    </div>
+
+                                    <!-- Col 2: Paper margin + border -->
+                                    <div style="flex:0.8; min-width:0; display:flex; flex-direction:column; gap:4px;">
+                                        <div style="display:flex; align-items:center; gap:4px;">
+                                            <span class="fm-label" title="Distance from frame inner edge to outer edge of paper (backer is visible in this gap).">Margin</span>
+                                            <input type="number" step="0.125" id="sbPaperMargin" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0; text-align:center;" title="Distance from frame inner edge to outer edge of paper">
+                                        </div>
+                                        <div style="display:flex; align-items:center; gap:4px;">
+                                            <span class="fm-label" title="Distance from outer edge of paper to image hole. 0 = full bleed.">Border</span>
+                                            <input type="number" step="0.125" id="sbPaperBorder" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0; text-align:center;" title="White border around image inside the paper. 0 = full bleed (image fills paper).">
+                                        </div>
+                                    </div>
+
+                                    <!-- Col 3: Edge toggle. Label sits to the left of buttons, buttons stack vertically. -->
+                                    <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; justify-content:center;">
+                                        <div style="display:flex; align-items:center; gap:4px;">
+                                            <span class="fm-label">Edge</span>
+                                            <div class="unit-toggle" style="flex:1; height:48px; flex-direction:column;">
+                                                <button id="sbEdgeBtnClean" class="active" type="button" onclick="setShadowBoxEdge('clean')" style="flex:1; padding: 2px 4px; font-size:0.6rem;">STRAIGHT</button>
+                                                <button id="sbEdgeBtnTorn" type="button" onclick="setShadowBoxEdge('torn')" style="flex:1; padding: 2px 4px; font-size:0.6rem;">DECKLED</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- sbPaperColorName preserved as hidden field for backward compat with
+                                     saved projects. The visible Paper input is now Paper Type instead. -->
+                                <input type="hidden" id="sbPaperColorName" value="White">
+                                <input type="hidden" id="sbPaperEdge" value="clean">
                             </div>
                         </div>
                     </div>
 
-                    <div class="section-title" onclick="toggleDashSection('sec-notes', this)">Hardware & Notes <span>▼</span></div>
+                    <div class="section-title" onclick="toggleDashSection('sec-notes', this)">Hardware & Notes <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="sec-notes" class="collapsible-section open">
+                        <!-- Row 1: print-related descriptors -->
                         <div class="grid-row-3">
+                            <div><label>Glass</label><input type="text" id="m_glass" oninput="syncDashAndCalculate()"></div>
                             <div><label>Frame Code</label><input type="text" id="m_fCode" oninput="syncDashAndCalculate()"></div>
+                            <div><label title="Human-readable finish for client-facing specs">Frame Color</label><input type="text" id="m_fColorName" oninput="syncDashAndCalculate()" placeholder="e.g. Black Maple"></div>
+                        </div>
+                        <!-- Row 2: production / hanging descriptors -->
+                        <div class="grid-row-3">
                             <div><label>Hardware</label><input type="text" id="m_hardware" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Mount/Backing</label><input type="text" id="m_mount" oninput="syncDashAndCalculate()"></div>
+                            <div><label>Substrate</label><input type="text" id="m_backing" oninput="syncDashAndCalculate()" placeholder="e.g. Foamcore"></div>
+                            <div><label>Mount</label><input type="text" id="m_mount" oninput="syncDashAndCalculate()"></div>
                         </div>
                         <div class="grid-row-2">
                             <div><label>Notes</label><textarea id="m_notes" oninput="syncDashAndCalculate()"></textarea></div>
@@ -254,55 +375,75 @@
         <div id="view-elevation" class="view-container">
             <div class="elev-sidebar">
                 <div class="elev-sidebar-header">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <input type="text" id="elev-title-input" value="Elevation Editor" style="margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: bold; border: none; background: transparent; padding: 0; outline: none; border-bottom: 1px dashed var(--border-color);" onchange="updateElevationNameFromInput(this.value)">
-                        <div class="unit-toggle" style="margin-left:8px;">
-                            <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
-                            <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
-                        </div>
                     </div>
 
-                    <div style="margin-bottom: 10px; background: var(--bg-subpanel); padding: 6px; border-radius: 6px; border: 1px solid var(--border-color); position: relative;">
-                        <button class="action-btn btn-secondary" style="font-size: 0.7rem;" onclick="toggleBulkDropdown()">
-                            <span>Bulk Import from Dashboard</span>
-                            <svg class="svg-icon" style="width:12px; height:12px; margin-left:auto;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </button>
-                        <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box;">
-                            <div id="bulkImportCheckboxes"></div>
-                            <button class="action-btn" style="background: var(--accent); margin-top: 6px;" onclick="importSelectedFramesBulk()">+ Add Selected</button>
+                    <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 10px; background: var(--bg-subpanel); padding: 6px; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <div style="position: relative; flex: 1;">
+                            <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: 0.7rem; justify-content: space-between; padding: 0 8px; width:100%; cursor:pointer;" onclick="toggleBulkDropdown()">
+                                <span>Import Frames</span>
+                                <svg class="svg-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            </button>
+                            <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
+                                <div id="bulkImportCheckboxes"></div>
+                            </div>
                         </div>
+                        <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px;" onclick="importSelectedFramesBulk()">+ Add Selected</button>
                     </div>
 
                     <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px; background: var(--bg-subpanel); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color);">
-                        <label style="margin:0; font-size:0.65rem; color:var(--text-muted);">Zoom</label>
-                        <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="flex: 1; margin:0;" oninput="updateElevZoom(this.value)">
+                        <label style="margin:0; font-size:0.65rem; color:var(--text-muted); width: auto; flex-shrink:0;">Zoom</label>
+                        <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="flex: 1; margin:0; accent-color: #888;" oninput="updateElevZoom(this.value)">
                         <button class="action-btn btn-secondary" style="margin:0; padding: 4px 8px; width: auto; font-size: 0.65rem;" onclick="fitElevZoom()">Fit</button>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr auto auto auto; gap: 6px; align-items: end; margin-bottom: 10px;">
                         <div><label style="font-size: 0.6rem;">Wall Width</label><input type="number" id="wallW" style="padding: 6px; font-size: 0.8rem;" value="185" oninput="updateElevWall()"></div>
                         <div><label style="font-size: 0.6rem;">Wall Height</label><input type="number" id="wallH" style="padding: 6px; font-size: 0.8rem;" value="108" oninput="updateElevWall()"></div>
+                        <div><label style="font-size: 0.6rem;">Font Size</label><input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()" style="padding: 6px; font-size: 0.8rem; width: 45px; text-align: center;"></div>
+                        <div class="unit-toggle" style="height:26px;">
+                            <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
+                            <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
+                        </div>
+                        <button class="action-btn btn-secondary" style="width:30px; height:26px; padding:0; flex-shrink:0;" title="Export Elevation PNG" onclick="exportElevPNG()">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>
+                        </button>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 10px;">
-                        <button class="toggle-status active" id="labelToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('label-layer', this)">Labels</button>
-                        <button class="toggle-status active" id="odToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('od-layer', this)">OD</button>
-                        <button class="toggle-status active" id="dimToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('dim-layer', this)">Spacing</button>
-                        <button class="toggle-status active" id="guideToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('guide-layer', this)">Guides</button>
-                        <button class="toggle-status" id="gridToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('grid-layer', this)">Grid</button>
-                        <button class="toggle-status active" id="frameCenterToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('frame-center-layer', this)">Centers</button>
-                    </div>
-
-                    <div style="display: flex; gap: 6px; margin-bottom: 10px;">
-                        <button class="action-btn" style="flex:2;" onclick="exportElevPNG()">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export PNG
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 4px; margin-bottom: 10px;">
+                        <button class="toggle-status" id="labelToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('label-layer', this)">Labels</button>
+                        <button class="toggle-status" id="odToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('od-layer', this)">OD</button>
+                        <button class="toggle-status" id="dimToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('dim-layer', this)">Spacing</button>
+                        
+                        <button class="toggle-status" id="personToggle" style="grid-row: span 2; padding: 0; width: 34px; display: flex; align-items: center; justify-content: center;" onclick="toggleElevLayer('person-wrap', this)">
+                            <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px; height:18px;"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1.5 19v-5.5H9V10c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v5.5h-1.5V21h-3z"/></svg>
                         </button>
-                        <button class="action-btn btn-secondary" style="flex:1; font-size: 0.7rem;" onclick="autoElevRelabel()">Sort A-Z</button>
+                        
+                        <button class="toggle-status" id="guideToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('guide-layer', this)">Guides</button>
+                        <button class="toggle-status" id="gridToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('grid-layer', this)">Grid</button>
+                        <button class="toggle-status" id="frameCenterToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('frame-center-layer', this)">Centers</button>
                     </div>
                     
                 </div>
                 
                 <div class="elev-frame-list">
+                    <div class="elev-col-header">
+                        <div class="elev-col-left">
+                            <button class="action-btn btn-secondary elev-sort-btn" onclick="autoElevRelabel()">Sort A–Z</button>
+                        </div>
+                        <div class="elev-col-icons">
+                            <div class="elev-col-label" style="width:38px;"><span>On/Off</span></div>
+                            <div class="elev-col-label" style="width:26px;">
+                                <button class="elev-col-iconbtn" title="Toggle Group All — link/unlink every frame so they move together" onclick="toggleGroupAllElevFrames(event)" id="groupAllBtn">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:11px; height:11px; stroke-width:2.4;"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>
+                                </button>
+                            </div>
+                            <div class="elev-col-label" style="width:26px;"><span>Edit</span></div>
+                            <div class="elev-col-label" style="width:26px;"><span>Dupe</span></div>
+                            <div class="elev-col-label" style="width:26px;"><span>Del</span></div>
+                        </div>
+                    </div>
                     <div id="frame-controls"></div>
                 </div>
             </div>
@@ -318,13 +459,8 @@
                         <div id="od-layer" class="od-layer"></div>
                         <div id="label-layer" class="label-layer"></div>
                         
-                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:20;">
-                            <div id="person-measure" class="person-dim" style="left:-6px;">
-                                <div class="tick" style="top:0; left:-6px;"></div>
-                                <div class="tick" style="bottom:0; left:-6px;"></div>
-                                <span class="arch-label" style="transform:rotate(-90deg); left:-12px;">72"</span>
-                            </div>
-                            <img src="https://cdn-icons-png.flaticon.com/512/10/10522.png" id="person" class="person" style="display:block; filter: brightness(0.5);">
+                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:20; display:none;">
+                            <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
                         </div>
                         <div id="frame-layer"></div>
                     </div>
@@ -332,30 +468,61 @@
             </div>
         </div>
 
-        <div id="duplicateModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
-            <div style="background: var(--bg-panel); padding: 24px; border-radius: 8px; width: 340px; border: 1px solid var(--border-color); box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-                <h3 style="margin: 0 0 12px 0; font-size: 1.1rem; color: var(--text-strong);">Duplicate Frame</h3>
-                <p style="margin: 0 0 20px 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">Do you want to create a brand new spec in your dashboard for this duplicate, or keep them linked together?</p>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <button class="action-btn" onclick="confirmDuplicate('link')">Duplicate & Link (Edit updates both)</button>
-                    <button class="action-btn" style="background: var(--btn-secondary); color: var(--text-strong); border: 1px solid var(--border-color);" onclick="confirmDuplicate('new')">Duplicate as New (Independent)</button>
-                    <button class="action-btn btn-outline" style="margin-top: 8px;" onclick="closeDuplicateModal()">Cancel</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="infoModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
-            <div style="background: var(--bg-panel); padding: 24px; border-radius: 8px; width: 340px; border: 1px solid var(--border-color); box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-                <h3 id="infoModalTitle" style="margin: 0 0 12px 0; font-size: 1.1rem; color: var(--text-strong);">Notice</h3>
-                <p id="infoModalBody" style="margin: 0 0 20px 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;"></p>
-                <div id="infoModalButtons" style="display: flex; flex-direction: column; gap: 8px;">
-                    <button class="action-btn" onclick="document.getElementById('infoModal').style.display='none'">OK</button>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
+
+<div id="duplicateModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:320px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Duplicate Frame</h3>
+        <p style="font-size:0.75rem; color:var(--text-main); margin-bottom:20px; line-height: 1.4;">How would you like to duplicate this frame?</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="action-btn" style="height: 32px;" onclick="confirmDuplicate('instance')">Create Linked Instance</button>
+            <button class="action-btn btn-secondary" style="height: 32px;" onclick="confirmDuplicate('new')">Add as New Spec</button>
+            <button class="action-btn btn-outline" style="height: 32px; margin-top: 5px; color: var(--text-main); border-color: var(--border-color);" onclick="closeDuplicateModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Generic info / confirm modal. Replaces window.alert() and window.confirm() calls
+     with the studio's themed modal styling so popups feel consistent. Reused via
+     showInfoModal() / showConfirmModal() helpers in app.js. -->
+<div id="infoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:340px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 id="infoModalTitle" style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Notice</h3>
+        <p id="infoModalBody" style="font-size:0.75rem; color:var(--text-main); margin-bottom:20px; line-height: 1.4;">…</p>
+        <div id="infoModalButtons" style="display:flex; flex-direction:column; gap:10px;">
+            <!-- Buttons injected dynamically by showInfoModal / showConfirmModal -->
+        </div>
+    </div>
+</div>
+
+<!-- Library Sync modal. Two ways to load swatches: drop a folder onto the dropzone,
+     or click the Browse button to open the native folder picker. Either path ends
+     up calling the same processFolderEntries / syncDashLibraryFolder logic. -->
+<div id="librarySyncModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:420px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Load Frame Library</h3>
+        <p style="font-size:0.75rem; color:var(--text-main); margin-bottom: 6px; line-height: 1.4;">Drop your Frame Library folder below, or browse to locate it.</p>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom: 16px; line-height: 1.4; font-style: italic;">Your browser will ask permission to access the folder &mdash; this is normal, click "Upload" or "Allow" when it appears.</p>
+        <div id="libraryDropZone" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 24px; text-align: center; margin-bottom: 16px; background: var(--bg-main); transition: all 0.15s; cursor: pointer;" onclick="document.getElementById('libFolderInput').click()">
+            <svg viewBox="0 0 24 24" style="width: 32px; height: 32px; margin: 0 auto 8px; display: block; opacity: 0.5;" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+            <div id="libraryDropZoneText" style="font-size: 0.8rem; color: var(--text-main);">Drop folder here</div>
+            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">or click to browse</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="closeLibrarySyncModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Drop-zone visual states. .drag-over fires while a drag is hovering over the
+     zone; .processing while files are being read. -->
+<style>
+    #libraryDropZone.drag-over { border-color: var(--accent); background: rgba(74, 144, 226, 0.08); }
+    #libraryDropZone.processing { opacity: 0.5; pointer-events: none; }
+</style>
 
 <script src="app.js"></script>
 
