@@ -166,42 +166,64 @@ function initMasterApp() {
 //
 // On 404 (no manifest yet), we fail silently so the app still works for users
 // who only ever sync local folders.
+
+ // =========================================================================
+// GITHUB CLOUD LIBRARY SYNC
+// =========================================================================
+const GITHUB_USERNAME = "JDHilliard-lab"; 
+const GITHUB_REPO = "FRAME";     
+const GITHUB_BRANCH = "main";                   
+
+const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+
 async function loadBundledLibrary() {
     try {
-        const res = await fetch('library-manifest.json', { cache: 'no-cache' });
-        if (!res.ok) return; // no manifest published yet — that's fine
+        // Fetch the manifest directly from your GitHub repo
+        const manifestUrl = GITHUB_RAW_BASE + 'library-manifest.json';
+        const res = await fetch(manifestUrl, { cache: 'no-cache' });
+        
+        if (!res.ok) {
+            console.warn('Bundled library manifest not found at:', manifestUrl);
+            return; 
+        }
+        
         const items = await res.json();
         if (!Array.isArray(items) || items.length === 0) return;
+        
         items.forEach(it => {
             if (!it.vendor || !it.collection || !it.code || !it.path) return;
+            
             if (!dashLocalLibrary[it.vendor]) dashLocalLibrary[it.vendor] = {};
             if (!dashLocalLibrary[it.vendor][it.collection]) dashLocalLibrary[it.vendor][it.collection] = [];
-            // Skip if a duplicate code is already present (manual sync took priority)
+            
+            // Skip if a duplicate code is already present (e.g., if you manually synced a local folder)
             if (dashLocalLibrary[it.vendor][it.collection].some(x => x.code === it.code)) return;
+            
             const entry = {
                 code: it.code,
                 width: parseFloat(it.width) || 1.25,
-                file: it.path, // string path — _libEntryToUrl/_libEntryToDataUrl handle the URL case
+                // Prepend the GitHub Raw URL so it streams the image directly from the cloud
+                file: GITHUB_RAW_BASE + it.path, 
             };
-            // Floater swatches carry a faceWidth (canvas face visible from front);
-            // floaterInset = faceWidth + FLOATER_SHADOW_REVEAL is computed at swatch-pick time.
+            
+            // Preserve floater and depth geometry
             if (it.faceWidth !== undefined && it.faceWidth !== null && !isNaN(parseFloat(it.faceWidth))) {
                 entry.faceWidth = parseFloat(it.faceWidth);
             }
-            // Optional profile depth (Fr.H) and rabbet depth — captured from
-            // filename tags _d<depth> and _r<rabbet>. Both auto-populate the
-            // dashboard form fields when this swatch is picked.
             if (it.depth !== undefined && it.depth !== null && !isNaN(parseFloat(it.depth))) {
                 entry.depth = parseFloat(it.depth);
             }
             if (it.rabbet !== undefined && it.rabbet !== null && !isNaN(parseFloat(it.rabbet))) {
                 entry.rabbet = parseFloat(it.rabbet);
             }
+            
             dashLocalLibrary[it.vendor][it.collection].push(entry);
         });
+        
         populateDashVendorDropdown();
+        console.log(`☁️ Cloud Library Loaded: ${items.length} swatches streamed from GitHub!`);
+        
     } catch (e) {
-        // network error, parse error, etc. — non-fatal, app still works.
         console.warn('Bundled library manifest could not be loaded:', e);
     }
 }
