@@ -190,14 +190,22 @@
                         <!-- Legacy container kept (empty) so any code paths that flip its display don't error -->
                         <div id="colorControls" style="display:none;"></div>
                         
-                        <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px; width: 100%;">
-                            <select id="libVendor" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
-                            <select id="libCollection" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
+                        <div id="imageControls" style="display:flex; align-items:center; gap:4px; margin-bottom:8px; width:100%;">
+                        <button class="action-btn btn-outline" style="flex: 0 0 auto; height: 26px; padding: 0 8px; font-size: 0.65rem;" onclick="syncFromCloud()">☁️ Cloud Sync</button>
+    
+                        <label for="libFolderInput" class="btn-secondary" style="margin:0; flex: 0 0 auto; height: 26px; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.65rem; font-weight: bold; display:flex; align-items:center;">Local Sync</label>
+                         <input type="file" id="libFolderInput" webkitdirectory directory multiple style="display:none;" onchange="syncDashLibraryFolder(event)">
+    
+                        <select id="libVendor" class="no-arrow" style="flex:1; height:26px; font-size:0.62rem; min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
+                        <select id="libCollection" class="no-arrow" style="flex:1; height:26px; font-size:0.62rem; min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
 
-                            <div id="customSwatchContainer" style="flex: 1.2; position: relative; min-width: 0; height: 26px;">
-                                <div id="swatchSelectedDisplay" style="border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.65rem; height: 26px; padding: 0 4px; background: var(--bg-input); cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong);" onclick="toggleDashSwatchDropdown()">Frame</div>
-                                <ul id="swatchDropdownList" class="custom-dropdown-list"></ul>
-                            </div>
+                         <div id="customSwatchContainer" style="flex:1.2; position:relative; min-width:0; height:26px;">
+                            <div id="swatchSelectedDisplay" onclick="toggleDashSwatchDropdown()">Frame</div>
+                             <ul id="swatchDropdownList" class="custom-dropdown-list"></ul>
+                         </div>
+
+                        <div id="swatchThumbPreview"></div>
+                        </div>
 
                             <div id="swatchThumbPreview" style="width:26px; height:26px; border-radius:4px; border:1px solid var(--border-color); background-size:cover; background-position:center; background-color:var(--bg-subpanel); flex-shrink:0;"></div>
                             
