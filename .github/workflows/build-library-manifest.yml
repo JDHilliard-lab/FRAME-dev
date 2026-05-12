@@ -1,0 +1,44 @@
+name: Build Library Manifest
+
+# Auto-generate library-manifest.json whenever swatches are added/changed.
+# This means: drop a new image into library/<vendor>/<collection>/, push, done.
+# About 30 seconds later GitHub Pages will serve the updated manifest and the
+# new swatch shows up in the app's Library dropdown for everyone.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'library/**'
+      - '.github/workflows/build-library-manifest.yml'
+      - 'scripts/build-library-manifest.js'
+  workflow_dispatch:  # also lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write  # so the workflow can commit the regenerated manifest back
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Generate library-manifest.json
+        run: node scripts/build-library-manifest.js
+
+      - name: Commit manifest if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add library-manifest.json
+          if git diff --cached --quiet; then
+            echo "No manifest changes to commit."
+          else
+            git commit -m "chore: rebuild library-manifest.json [skip ci]"
+            git push
+          fi
