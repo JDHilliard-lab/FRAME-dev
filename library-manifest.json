@@ -1,0 +1,82 @@
+[
+  {
+    "vendor": "larson_juhl",
+    "collection": "cranbrook",
+    "code": "LJ 613674",
+    "width": 0.75,
+    "path": "library/larson_juhl/cranbrook/LJ 613674_0.75.jpg"
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-41-12",
+    "width": 1.25,
+    "path": "library/michaelangelo/avant-garde/MICH-41-12_1.25_d1.125_r0.75.jpg",
+    "depth": 1.125,
+    "rabbet": 0.75
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-41-233",
+    "width": 1.25,
+    "path": "library/michaelangelo/avant-garde/MICH-41-233_1.25_d1.125_r0.75.jpg",
+    "depth": 1.125,
+    "rabbet": 0.75
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-41-33",
+    "width": 1.25,
+    "path": "library/michaelangelo/avant-garde/MICH-41-33_1.25_d1.125_r0.75.jpg",
+    "depth": 1.125,
+    "rabbet": 0.75
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-41-35",
+    "width": 1.25,
+    "path": "library/michaelangelo/avant-garde/MICH-41-35_1.25_d1.125_r0.75.jpg",
+    "depth": 1.125,
+    "rabbet": 0.75
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "floaters",
+    "code": "MICH 515-49",
+    "width": 1.5,
+    "path": "library/michaelangelo/floaters/MICH 515-49_1.5_d2.125_r1.75_f0.5.jpg",
+    "faceWidth": 0.5,
+    "depth": 2.125,
+    "rabbet": 1.75
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "floaters",
+    "code": "MICH-301-22",
+    "width": 1.5,
+    "path": "library/michaelangelo/floaters/MICH-301-22_1.5_d1.875_r1.625_f0.5.jpg",
+    "faceWidth": 0.5,
+    "depth": 1.875,
+    "rabbet": 1.625
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "floaters",
+    "code": "MICH-306-30",
+    "width": 1.75,
+    "path": "library/michaelangelo/floaters/MICH-306-30_1.75_d1.5_r1_f0.625.jpg",
+    "faceWidth": 0.625,
+    "depth": 1.5,
+    "rabbet": 1
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "golden",
+    "code": "MICH-16-250",
+    "width": 2,
+    "path": "library/michaelangelo/golden/MICH-16-250_2.0.jpg"
+  }
+]
