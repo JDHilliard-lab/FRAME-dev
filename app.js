@@ -469,14 +469,83 @@ function pushUpdatesToElevations(dashIndex) {
     const d = dashProjectData[dashIndex];
     let factor = (dashUnit === 'cm' && elevUnit === 'in') ? (1/2.54) : (dashUnit === 'in' && elevUnit === 'cm') ? 2.54 : 1;
 
+    // Sync all dashboard-owned fields onto every matching elevation frame.
+    // Earlier this only synced 9 basic fields (geometry + mats), leaving
+    // useFloatMount / canvas / float-mount paper / frame profile / etc. stale
+    // on elevations. That meant changes like Mat ↔ Float, edge style, paper
+    // border, canvas depth, rabbet, frame color name, etc. all silently
+    // failed to propagate. The set below mirrors the renderer's read sites:
+    // anything that affects how an elevation frame draws gets synced.
+    //
+    // We don't touch elevation-local state (x, y, isOpen, isGrouped, dimTo,
+    // active) — those are positioning/grouping concerns owned by the elevation,
+    // not the dashboard.
     elevations.forEach(elev => {
         elev.frames.forEach(f => {
             if (f.id === d.id) {
-                f.w = (parseFloat(d.extW) || 24) * factor; f.h = (parseFloat(d.extH) || 30) * factor;
-                f.fW = (parseFloat(d.fW) || 1.25) * factor; f.fType = d.fType; f.fColor = d.fColor; f.swatchDataUrl = d.swatchDataUrl;
-                f.m1T = (parseFloat(d.m1T) || 0) * factor; f.m1B = (parseFloat(d.m1B) || 0) * factor; f.m1L = (parseFloat(d.m1L) || 0) * factor; f.m1R = (parseFloat(d.m1R) || 0) * factor;
-                f.m1A = d.m1A !== false; f.m1ColorHex = d.m1ColorHex;
-                f.m2 = (parseFloat(d.m2) || 0) * factor; f.m2A = d.m2A; f.m2ColorHex = d.m2ColorHex;
+                // Product type + mode flags
+                f.product = d.product || '';
+                f.useFloatMount = d.useFloatMount === true;
+
+                // Geometry — dimensions in elevation units
+                f.w = (parseFloat(d.extW) || 24) * factor;
+                f.h = (parseFloat(d.extH) || 30) * factor;
+                f.fW = (parseFloat(d.fW) || 1.25) * factor;
+                f.fHeight = (parseFloat(d.fHeight) || 0) * factor;
+                f.rabbetDepth = (parseFloat(d.rabbetDepth) || 0) * factor;
+                f.bleed = (parseFloat(d.bleed) || 0) * factor;
+
+                // Frame appearance
+                f.fType = d.fType;
+                f.fColor = d.fColor;
+                f.fColorName = d.fColorName || '';
+                f.fCode = d.fCode || '';
+                f.swatchDataUrl = d.swatchDataUrl;
+
+                // Mats (standard mount)
+                f.m1A = d.m1A !== false;
+                f.m1T = (parseFloat(d.m1T) || 0) * factor;
+                f.m1B = (parseFloat(d.m1B) || 0) * factor;
+                f.m1L = (parseFloat(d.m1L) || 0) * factor;
+                f.m1R = (parseFloat(d.m1R) || 0) * factor;
+                f.m1ColorName = d.m1ColorName || '';
+                f.m1ColorHex = d.m1ColorHex;
+                f.m2A = d.m2A;
+                f.m2 = (parseFloat(d.m2) || 0) * factor;
+                f.m2ColorName = d.m2ColorName || '';
+                f.m2ColorHex = d.m2ColorHex;
+
+                // Canvas (floater + frameless)
+                f.canvasDepth = d.canvasDepth;
+                f.canvasWrap = d.canvasWrap;
+                f.floaterInset = (parseFloat(d.floaterInset) || 0.75) * factor;
+                f._faceWidth = d._faceWidth;
+
+                // Float mount (paper + backer + edge)
+                f.sbBackerColorHex = d.sbBackerColorHex || '#ffffff';
+                f.sbBackerColorName = d.sbBackerColorName || 'B 97 White';
+                f.sbPaperColorHex = d.sbPaperColorHex || '#ffffff';
+                f.sbPaperColorName = d.sbPaperColorName || 'White';
+                f.sbPaperMargin = (parseFloat(d.sbPaperMargin) || 1.5) * factor;
+                f.sbPaperBorder = (parseFloat(d.sbPaperBorder) || 0.5) * factor;
+                f.sbPaperEdge = d.sbPaperEdge || 'clean';
+                f.sbPaperEdgeSeed = d.sbPaperEdgeSeed || 0;
+                f.paperType = d.paperType || '';
+
+                // Production / spec
+                f.glass = d.glass || '';
+                f.hardware = d.hardware || '';
+                f.backing = d.backing || '';
+                f.mount = d.mount || '';
+                f.notes = d.notes || '';
+                f.prodNotes = d.prodNotes || '';
+                f.location = d.location || '';
+                f.imageCode = d.imageCode || '';
+
+                // Caption fields (hidden in form but persisted)
+                f.artist = d.artist || '';
+                f.artworkTitle = d.artworkTitle || '';
+                f.artType = d.artType || '';
             }
         });
     });
