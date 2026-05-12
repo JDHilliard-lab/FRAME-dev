@@ -656,21 +656,80 @@ function loadDashDataIntoControls(data) {
     updateDashboardWarnings();
 }
 
-function dashHtIn(idx, field, val) {
+// Update table from a table input. The fourth arg (`fromTable`) lets the caller
+// signal that the update came from a table-row input — in that case we DON'T
+// re-render the whole tbody, because doing so would destroy the input the user
+// is currently typing into and kick focus away (the "can only type one digit"
+// bug). We instead update just the calculated cells of the affected row in
+// place. Form-side and other callers leave fromTable undefined → full re-render.
+function dashHtIn(idx, field, val, fromTable) {
     let row = dashProjectData[idx];
-    if(['qty','extW','extH','fW','m1T','m1R','m1B','m1L','m2','m_bleed','canvasDepth','canvasWrap'].includes(field)) val = parseFloat(val) || 0;
+    if(['qty','extW','extH','fW','fHeight','m1T','m1R','m1B','m1L','m2','m_bleed','canvasDepth','canvasWrap'].includes(field)) val = parseFloat(val) || 0;
     if (field === 'id') { const oldId = row.id; elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = val; }); }); }
     row[field] = val;
 
     if (idx === dashSelectedRowIndex) {
-        const map = { 'id':'m_itemCode', 'imageCode':'m_imageCode', 'level':'m_level', 'qty':'m_qty', 'location':'m_location', 'extW':'extW', 'extH':'extH', 'fCode':'m_fCode', 'fW':'fW', 'canvasDepth':'canvasDepth', 'canvasWrap':'canvasWrap', 'm1ColorName':'m1_color', 'm1ColorHex':'m1_colorHex', 'm2ColorName':'m2_color', 'm2ColorHex':'m2_colorHex', 'm1T':'m1T', 'm1R':'m1R', 'm1B':'m1B', 'm1L':'m1L', 'm2':'m2', 'glass':'m_glass', 'hardware':'m_hardware', 'backing':'m_backing', 'mount':'m_mount', 'notes':'m_notes', 'prodNotes':'m_prodNotes' };
+        const map = { 'id':'m_itemCode', 'imageCode':'m_imageCode', 'level':'m_level', 'qty':'m_qty', 'location':'m_location', 'extW':'extW', 'extH':'extH', 'fCode':'m_fCode', 'fW':'fW', 'fHeight':'fHeight', 'canvasDepth':'canvasDepth', 'canvasWrap':'canvasWrap', 'm1ColorName':'m1_color', 'm1ColorHex':'m1_colorHex', 'm2ColorName':'m2_color', 'm2ColorHex':'m2_colorHex', 'm1T':'m1T', 'm1R':'m1R', 'm1B':'m1B', 'm1L':'m1L', 'm2':'m2', 'glass':'m_glass', 'hardware':'m_hardware', 'backing':'m_backing', 'mount':'m_mount', 'notes':'m_notes', 'prodNotes':'m_prodNotes' };
         if(map[field] && document.getElementById(map[field])) document.getElementById(map[field]).value = field.includes('Color') ? val : dashFmt(row[field]);
         if(field === 'product') { document.getElementById('m_product').value = row.product; handleDashProductChange(false); }
         updateDashVisualsFromDOM();
         pushUpdatesToElevations(idx);
     }
-    renderDashTable(); 
+
+    if (fromTable) {
+        // Lightweight in-place update: refresh the affected row's calculated
+        // cells (Open W/H, Print W/H) without rebuilding the row, so the
+        // input the user is typing into stays alive.
+        updateTableRowCalcs(idx);
+    } else {
+        // Form-side update or product change — full re-render is fine since
+        // user isn't typing into a table input.
+        renderDashTable();
+    }
     if (field === 'id') recalculateDashboardQuantities();
+}
+
+// Update only the calculated (display-only) cells of a table row.
+// Called from dashHtIn when the change came from a table input — avoids the
+// destroy-and-recreate cycle that kills focus during typing.
+function updateTableRowCalcs(idx) {
+    const row = dashProjectData[idx];
+    if (!row) return;
+    const isC = (row.product === "Framed Canvas (Floater)");
+    const isFL = (row.product === "Frameless Canvas (Wrapped)");
+    const useFM = !isC && !isFL && (row.useFloatMount === true);
+    const sbPM = useFM ? (parseFloat(row.sbPaperMargin) || 0) : 0;
+    const sbPB = useFM ? (parseFloat(row.sbPaperBorder) || 0) : 0;
+    const insetVal = isC ? (parseFloat(row.floaterInset) || 0.75) : 0;
+    const mT = (row.m1A !== false && !isC && !isFL && !useFM) ? (parseFloat(row.m1T) || 0) : 0;
+    const mB = (row.m1A !== false && !isC && !isFL && !useFM) ? (parseFloat(row.m1B) || 0) : 0;
+    const mL = (row.m1A !== false && !isC && !isFL && !useFM) ? (parseFloat(row.m1L) || 0) : 0;
+    const mR = (row.m1A !== false && !isC && !isFL && !useFM) ? (parseFloat(row.m1R) || 0) : 0;
+    const m2v = (row.m2A && !isC && !isFL && !useFM) ? (parseFloat(row.m2) || 0) : 0;
+    const fW = parseFloat(row.fW) || 0;
+
+    let finalW, finalH;
+    if (isC) { finalW = row.extW - insetVal*2; finalH = row.extH - insetVal*2; }
+    else if (isFL) { finalW = row.extW; finalH = row.extH; }
+    else if (useFM) { finalW = row.extW - (fW*2) - sbPM*2 - sbPB*2; finalH = row.extH - (fW*2) - sbPM*2 - sbPB*2; }
+    else { finalW = row.extW - (fW*2) - mL - mR - (m2v*2); finalH = row.extH - (fW*2) - mT - mB - (m2v*2); }
+
+    let imgW, imgH;
+    if (isC) { imgW = finalW; imgH = finalH; }
+    else if (isFL) {
+        const wrap = parseFloat(row.canvasWrap) || 0;
+        imgW = finalW + wrap*2; imgH = finalH + wrap*2;
+    }
+    else { imgW = finalW + ((row.bleed || 0) * 2); imgH = finalH + ((row.bleed || 0) * 2); }
+
+    const setCell = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = dashFmt(Math.max(0, val));
+    };
+    setCell(`calc-openW-${idx}`, finalW);
+    setCell(`calc-openH-${idx}`, finalH);
+    setCell(`calc-printW-${idx}`, imgW);
+    setCell(`calc-printH-${idx}`, imgH);
 }
 
 function syncDashAndCalculate() {
@@ -3021,37 +3080,33 @@ function renderDashTable() {
         
         tr.innerHTML = `
             <td><input class="tbl-in" type="number" value="${row.qty}" disabled style="width:30px; opacity:0.6; background:transparent;"></td>
-            <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" oninput="dashHtIn(${index}, 'id', this.value)" style="width:80px; font-weight:bold;"></td>
+            <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" oninput="dashHtIn(${index}, 'id', this.value, true)" ondragstart="event.preventDefault()" style="width:80px; font-weight:bold;"></td>
             <td><select class="tbl-in no-arrow" onchange="dashHtIn(${index}, 'product', this.value)">${FRAME_PRODUCTS.map(p => `<option ${row.product === p ? 'selected' : ''}>${p}</option>`).join('')}</select></td>
-            <td><input class="tbl-in" type="text" value="${row.location}" oninput="dashHtIn(${index}, 'location', this.value)" style="width:90px;"></td>
-            <td><input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value)" style="width:200px;"></td>
-            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extW)}" oninput="dashHtIn(${index}, 'extW', this.value)" style="width:45px;"></td>
-            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extH)}" oninput="dashHtIn(${index}, 'extH', this.value)" style="width:45px;"></td>
+            <td><input class="tbl-in" type="text" value="${row.location}" oninput="dashHtIn(${index}, 'location', this.value, true)" ondragstart="event.preventDefault()" style="width:90px;"></td>
+            <td><input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value, true)" ondragstart="event.preventDefault()" style="width:200px;"></td>
+            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extW)}" oninput="dashHtIn(${index}, 'extW', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
+            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extH)}" oninput="dashHtIn(${index}, 'extH', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
             <td id="calc-openW-${index}" style="padding: 4px 8px; color:var(--accent); font-weight:bold;">${dashFmt(Math.max(0, finalW))}</td><td id="calc-openH-${index}" style="padding: 4px 8px; color:var(--accent); font-weight:bold;">${dashFmt(Math.max(0, finalH))}</td><td id="calc-printW-${index}" style="color:var(--accent); font-weight:bold; padding: 4px 8px;">${imgW}</td><td id="calc-printH-${index}" style="color:var(--accent); font-weight:bold; padding: 4px 8px;">${imgH}</td>
-            <td><input class="tbl-in" type="number" step="0.125" value="${row.canvasDepth || ''}" oninput="dashHtIn(${index}, 'canvasDepth', this.value)" style="width:45px;"></td>
-            <td><input class="tbl-in" type="number" step="0.125" value="${row.canvasWrap || ''}" oninput="dashHtIn(${index}, 'canvasWrap', this.value)" style="width:45px;"></td>
-            <td><input class="tbl-in" type="text" value="${row.m1ColorName}" oninput="dashHtIn(${index}, 'm1ColorName', this.value)" style="width:80px;"></td>
-            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1T)}" oninput="dashHtIn(${index}, 'm1T', this.value)" style="width:40px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1B)}" oninput="dashHtIn(${index}, 'm1B', this.value)" style="width:40px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1L)}" oninput="dashHtIn(${index}, 'm1L', this.value)" style="width:40px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1R)}" oninput="dashHtIn(${index}, 'm1R', this.value)" style="width:40px;"></td>
-            <td><input class="tbl-in" type="text" value="${row.m2ColorName}" oninput="dashHtIn(${index}, 'm2ColorName', this.value)" style="width:80px;"></td>
-            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m2)}" oninput="dashHtIn(${index}, 'm2', this.value)" style="width:40px;"></td>
-            <td><input class="tbl-in" type="text" value="${row.glass}" oninput="dashHtIn(${index}, 'glass', this.value)" style="width:80px;"></td>${(() => {
-                // Paper Type / Paper Size W/H / White Border AA — only meaningful for
-                // float-mounted rows. For other products the cells render blank
-                // since paper geometry doesn't apply. Math mirrors the CSV export.
+            <td><input class="tbl-in" type="number" step="0.125" value="${row.canvasDepth || ''}" oninput="dashHtIn(${index}, 'canvasDepth', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
+            <td><input class="tbl-in" type="number" step="0.125" value="${row.canvasWrap || ''}" oninput="dashHtIn(${index}, 'canvasWrap', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
+            <td><input class="tbl-in" type="text" value="${row.m1ColorName}" oninput="dashHtIn(${index}, 'm1ColorName', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td>
+            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1T)}" oninput="dashHtIn(${index}, 'm1T', this.value, true)" ondragstart="event.preventDefault()" style="width:40px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1B)}" oninput="dashHtIn(${index}, 'm1B', this.value, true)" ondragstart="event.preventDefault()" style="width:40px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1L)}" oninput="dashHtIn(${index}, 'm1L', this.value, true)" ondragstart="event.preventDefault()" style="width:40px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m1R)}" oninput="dashHtIn(${index}, 'm1R', this.value, true)" ondragstart="event.preventDefault()" style="width:40px;"></td>
+            <td><input class="tbl-in" type="text" value="${row.m2ColorName}" oninput="dashHtIn(${index}, 'm2ColorName', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td>
+            <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.m2)}" oninput="dashHtIn(${index}, 'm2', this.value, true)" ondragstart="event.preventDefault()" style="width:40px;"></td>
+            <td><input class="tbl-in" type="text" value="${row.glass}" oninput="dashHtIn(${index}, 'glass', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td>${(() => {
                 if (!useFM) {
                     return `<td></td><td></td><td></td><td></td>`;
                 }
                 const edgeWord = (row.sbPaperEdge === 'torn') ? 'Deckled Edge' : 'Straight Cut';
                 const paperTypeText = `${row.paperType || 'Fine Art Paper'} / ${edgeWord}`;
-                // artW/artH = finalW/finalH already computed above. Paper Size = art + border×2.
                 const paperW = Math.max(0, finalW + sbPaperBorder * 2);
                 const paperH = Math.max(0, finalH + sbPaperBorder * 2);
                 return `<td style="font-size:0.7em;">${paperTypeText}</td>` +
                        `<td>${dashFmt(paperW)}</td>` +
                        `<td>${dashFmt(paperH)}</td>` +
                        `<td>${dashFmt(sbPaperBorder)}</td>`;
-            })()}<td><input class="tbl-in" type="text" value="${row.fCode}" oninput="dashHtIn(${index}, 'fCode', this.value)" style="width:80px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.fW)}" oninput="dashHtIn(${index}, 'fW', this.value)" style="width:45px;"></td><td><input class="tbl-in" type="number" step="0.0625" value="${row.fHeight ? dashFmt(row.fHeight) : ''}" oninput="dashHtIn(${index}, 'fHeight', this.value)" style="width:45px;" placeholder="depth"></td>
-            <td><input class="tbl-in" type="text" value="${row.hardware}" oninput="dashHtIn(${index}, 'hardware', this.value)" style="width:80px;"></td><td><input class="tbl-in" type="text" value="${row.backing}" oninput="dashHtIn(${index}, 'backing', this.value)" style="width:80px;"></td><td><input class="tbl-in" type="text" value="${row.mount}" oninput="dashHtIn(${index}, 'mount', this.value)" style="width:80px;"></td><td><input class="tbl-in" type="text" value="${row.notes}" oninput="dashHtIn(${index}, 'notes', this.value)" style="width:90px;"></td><td><input class="tbl-in" type="text" value="${row.prodNotes}" oninput="dashHtIn(${index}, 'prodNotes', this.value)" style="width:90px;"></td>
+            })()}<td><input class="tbl-in" type="text" value="${row.fCode}" oninput="dashHtIn(${index}, 'fCode', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td><td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.fW)}" oninput="dashHtIn(${index}, 'fW', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td><td><input class="tbl-in" type="number" step="0.0625" value="${row.fHeight ? dashFmt(row.fHeight) : ''}" oninput="dashHtIn(${index}, 'fHeight', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;" placeholder="depth"></td>
+            <td><input class="tbl-in" type="text" value="${row.hardware}" oninput="dashHtIn(${index}, 'hardware', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td><td><input class="tbl-in" type="text" value="${row.backing}" oninput="dashHtIn(${index}, 'backing', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td><td><input class="tbl-in" type="text" value="${row.mount}" oninput="dashHtIn(${index}, 'mount', this.value, true)" ondragstart="event.preventDefault()" style="width:80px;"></td><td><input class="tbl-in" type="text" value="${row.notes}" oninput="dashHtIn(${index}, 'notes', this.value, true)" ondragstart="event.preventDefault()" style="width:90px;"></td><td><input class="tbl-in" type="text" value="${row.prodNotes}" oninput="dashHtIn(${index}, 'prodNotes', this.value, true)" ondragstart="event.preventDefault()" style="width:90px;"></td>
         `;
         tbody.appendChild(tr);
     });
