@@ -3625,10 +3625,9 @@ function drawElevGuides(wallW, wallH) {
     createElevArchDim(0, wallH + offsetDist, wallW, wallH + offsetDist, 'h', `${elevFmt(wallW)}${elevUnit === 'in' ? '"' : ' cm'}`, archLayer, true);
     createElevArchDim(-offsetDist, 0, -offsetDist, wallH, 'v', `${elevFmt(wallH)}${elevUnit === 'in' ? '"' : ' cm'}`, archLayer, true);
 
-    const pHeight = elevUnit === 'in' ? 72 : parseFloat((72 * 2.54).toFixed(2));
-    const pLabel = elevUnit === 'in' ? `72"` : `182.9 cm`;
-    const pX = elevPersonPos.x - (elevUnit === 'in' ? 4 : 10.16); 
-    createElevArchDim(pX, 0, pX, pHeight, 'v', pLabel, archLayer, true);
+    // The character figure is a known 72" tall scale reference, so we don't render
+    // an explicit height dimension next to it. Per studio convention all designers
+    // assume this height; printing the label was visual noise.
 }
 
 function drawElevTargetedSpacing() {
@@ -3787,6 +3786,44 @@ async function exportElevPNG() {
 
     const oldOverflow = ws.style.overflow; ws.style.overflow = 'visible';
     const oldWallBg = wall.style.background; wall.style.background = 'transparent';
+
+    // Character clip-fix: the character (#person-wrap) is position:absolute inside
+    // #wall, which means its bounds don't contribute to #export-wrap's auto-sized
+    // max-content width/height. The existing 80px padding on #export-wrap
+    // accommodates SMALL character overflow but not when designers place the
+    // character right next to the outer dimension line. So before export we
+    // measure the character's actual bounding rect relative to #export-wrap
+    // and inflate the padding inline so html2canvas captures the full region.
+    // Restored in the finally block.
+    const exportWrap = document.getElementById('export-wrap');
+    const oldExportWrapPadding = exportWrap.style.padding;
+    {
+        const personWrapForBounds = document.getElementById('person-wrap');
+        const personIsVisibleForPad = personWrapForBounds && getComputedStyle(personWrapForBounds).display !== 'none';
+        if (personIsVisibleForPad) {
+            const wrapRect = exportWrap.getBoundingClientRect();
+            const personRect = personWrapForBounds.getBoundingClientRect();
+            // Compute how far the character extends OUTSIDE the current export-wrap padding-box
+            // on each side. A positive value means overflow we need to absorb.
+            const overflowLeft = Math.max(0, wrapRect.left - personRect.left);
+            const overflowRight = Math.max(0, personRect.right - wrapRect.right);
+            const overflowTop = Math.max(0, wrapRect.top - personRect.top);
+            const overflowBottom = Math.max(0, personRect.bottom - wrapRect.bottom);
+            // Add a small safety margin (20px) beyond the strict overflow so the
+            // figure doesn't sit flush against the export edge.
+            const SAFETY = 20;
+            // Base padding from CSS is 80px on all sides. Build new shorthand:
+            const PAD_BASE = 80;
+            const padTop    = PAD_BASE + Math.ceil(overflowTop)    + (overflowTop    > 0 ? SAFETY : 0);
+            const padRight  = PAD_BASE + Math.ceil(overflowRight)  + (overflowRight  > 0 ? SAFETY : 0);
+            const padBottom = PAD_BASE + Math.ceil(overflowBottom) + (overflowBottom > 0 ? SAFETY : 0);
+            const padLeft   = PAD_BASE + Math.ceil(overflowLeft)   + (overflowLeft   > 0 ? SAFETY : 0);
+            exportWrap.style.padding = `${padTop}px ${padRight}px ${padBottom}px ${padLeft}px`;
+            // Force a reflow + an extra frame so html2canvas sees the new layout
+            void exportWrap.offsetWidth;
+            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+        }
+    }
 
     // PERSON: html2canvas can fail to capture <img src="*.svg"> reliably. Same fix
     // we used for frames — pre-render to a canvas and overlay it. Inlining the SVG
@@ -3955,6 +3992,9 @@ async function exportElevPNG() {
         if (wasDark) document.body.classList.remove('light-theme');
         ws.style.overflow = oldOverflow;
         wall.style.background = oldWallBg;
+        // Restore the export-wrap padding (was temporarily inflated to include
+        // the character when they extended past the wall edges).
+        exportWrap.style.padding = oldExportWrapPadding;
         // Restore the person element (overlay canvas removed, img re-shown / src restored)
         if (personImg) {
             if (personOverlayCanvas && personOverlayCanvas.parentNode) {
