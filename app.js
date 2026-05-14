@@ -91,6 +91,13 @@ const dashDefaultData = {
     // The Shadow Box product auto-flips this to true on selection. The fields
     // themselves coexist with mat fields on every row — only one path renders at a time.
     useFloatMount: false,
+    // Faux Mat: in standard mat mode (useFloatMount=false), if useFauxMat is on,
+    // the print has a white border baked into the paper. Same as float mount's
+    // sbPaperBorder concept — same field is reused — but it stacks below any
+    // mat 1 / mat 2 instead of being the only treatment. Lets designers fake
+    // a mat look without a real mat board, or add a paper white border under
+    // existing mats for production reasons.
+    useFauxMat: false,
     sbBackerColorName: "B 97 White", sbBackerColorHex: "#ffffff",
     sbPaperColorName: "White", sbPaperColorHex: "#ffffff",
     sbPaperMargin: 1.5, sbPaperBorder: 0.5,
@@ -486,6 +493,7 @@ function pushUpdatesToElevations(dashIndex) {
                 // Product type + mode flags
                 f.product = d.product || '';
                 f.useFloatMount = d.useFloatMount === true;
+                f.useFauxMat = d.useFauxMat === true;
 
                 // Geometry — dimensions in elevation units
                 f.w = (parseFloat(d.extW) || 24) * factor;
@@ -715,6 +723,21 @@ function loadDashDataIntoControls(data) {
     
     setVal('m1T', dashFmt(data.m1T)); setVal('m1B', dashFmt(data.m1B)); setVal('m1L', dashFmt(data.m1L)); setVal('m1R', dashFmt(data.m1R)); setVal('m2', dashFmt(data.m2));
 
+    // Faux Mat: restore toggle + border input from row data. Shares sbPaperBorder
+    // with the float mount panel — the active input depends on mode, but the
+    // underlying value is the same.
+    const fauxOn = data.useFauxMat === true;
+    const fauxBtn = document.getElementById('fauxMatToggle');
+    if (fauxBtn) {
+        fauxBtn.classList.toggle('active', fauxOn);
+        fauxBtn.innerText = fauxOn ? 'ON' : 'OFF';
+    }
+    const fauxBorderInput = document.getElementById('fauxBorder');
+    if (fauxBorderInput) {
+        fauxBorderInput.value = fauxOn ? dashFmt(data.sbPaperBorder || 0) : '';
+        fauxBorderInput.disabled = !fauxOn;
+    }
+
     handleDashProductChange(false);
     document.getElementById('swatchSelectedDisplay').textContent = (data.fType === 'image' && data.swatchName) ? data.swatchName : 'Frame';
 
@@ -850,12 +873,19 @@ function syncDashAndCalculate() {
         // random seed (preserved from the prior row data so the torn outline doesn't
         // shift on every sync). useFloatMount is the toggle state, persisted per-row.
         useFloatMount: row.useFloatMount === true,
+        // Faux Mat (mat-mode equivalent of float mount's paper-with-border idea).
+        // Only meaningful when useFloatMount is false; ignored in float mode.
+        useFauxMat: row.useFloatMount !== true && document.getElementById('fauxMatToggle').classList.contains('active'),
         sbBackerColorName: getStr('sbBackerColorName') || 'B 97 White',
         sbBackerColorHex: getStr('sbBackerColorHex') || '#ffffff',
         sbPaperColorName: getStr('sbPaperColorName') || 'White',
         sbPaperColorHex: getStr('sbPaperColorHex') || '#ffffff',
         sbPaperMargin: getVal('sbPaperMargin') || 0,
-        sbPaperBorder: getVal('sbPaperBorder') || 0,
+        // Reused field for both float-mount paper border AND faux mat border —
+        // same semantic (white margin around image on print paper). The active
+        // input field depends on which mode is on: float mode uses #sbPaperBorder,
+        // mat mode with faux mat uses #fauxBorder. Same data field, two inputs.
+        sbPaperBorder: row.useFloatMount === true ? (getVal('sbPaperBorder') || 0) : (getVal('fauxBorder') || 0),
         sbPaperEdge: getStr('sbPaperEdge') || 'clean',
         sbPaperEdgeSeed: row.sbPaperEdgeSeed || 0,
         glass: getStr('m_glass'), hardware: getStr('m_hardware'), mount: getStr('m_mount'), backing: getStr('m_backing'), notes: getStr('m_notes'), prodNotes: getStr('m_prodNotes')
@@ -995,6 +1025,34 @@ function updateDashVisualsFromDOM() {
         m2Vis.style.top = m2TopOffset + "px"; m2Vis.style.left = m2LeftOffset + "px"; 
         m2Vis.style.width = ((data.extW - (data.fW * 2) - effM1L - effM1R) * ratio) + "px"; m2Vis.style.height = ((data.extH - (data.fW * 2) - effM1T - effM1B) * ratio) + "px"; 
         m2Vis.style.borderWidth = (data.m2 * ratio) + 'px'; m2Vis.style.borderColor = mat2Color; viewObj.style.setProperty('--m2-color', mat2Color); fVis.appendChild(m2Vis);
+    }
+
+    // FAUX MAT preview: print has a white border baked in. Visible white band
+    // around the image area. Sits inside whatever opening is above (mat 2 if on,
+    // mat 1 if on, frame if no mats). Only active in standard mat mode — float
+    // mount uses its own paper rendering above.
+    const effFauxOn = (data.useFauxMat === true && !isCanvas && !isFrameless && !useFM);
+    if (effFauxOn) {
+        const border = parseFloat(data.sbPaperBorder) || 0;
+        if (border > 0) {
+            const fauxVis = document.createElement('div');
+            fauxVis.className = 'faux-mat-visual';
+            // Position: sits inside the innermost mat opening, or inside the frame
+            // if no mats. Math accumulates the inset from each layer above.
+            const frameInset = (data.fType === 'color') ? 0 : (data.fW * ratio);
+            const m1InsetT = effM1A ? data.m1T * ratio : 0;
+            const m1InsetB = effM1A ? data.m1B * ratio : 0;
+            const m1InsetL = effM1A ? data.m1L * ratio : 0;
+            const m1InsetR = effM1A ? data.m1R * ratio : 0;
+            const m2Inset = effM2A ? data.m2 * ratio : 0;
+            const top = frameInset + m1InsetT + m2Inset;
+            const left = frameInset + m1InsetL + m2Inset;
+            const width = (data.extW * ratio) - frameInset * 2 - m1InsetL - m1InsetR - m2Inset * 2;
+            const height = (data.extH * ratio) - frameInset * 2 - m1InsetT - m1InsetB - m2Inset * 2;
+            // White paper showing as a band. The border (CSS) width is the white border value.
+            fauxVis.style.cssText = `position:absolute; top:${top}px; left:${left}px; width:${Math.max(0, width)}px; height:${Math.max(0, height)}px; border:${border * ratio}px solid #ffffff; box-sizing:border-box; pointer-events:none;`;
+            fVis.appendChild(fauxVis);
+        }
     }
 
     // FLOAT MOUNT preview: backer fills frame interior; paper sits inside with drop shadow.
@@ -1243,6 +1301,21 @@ function importDashCSV(e) {
                 d.paperType = ptInfo.type;
                 // Edge from FM column wins; fall back to paper type cell parsing
                 if (!cellOr(cols, 'FM Paper Edge', '')) d.sbPaperEdge = ptInfo.edge;
+            } else {
+                // Faux Mat detection (non-float-mount rows): a Paper Type cell or
+                // a positive White Border AA value indicates the row uses a paper
+                // with white border under the mats. No dedicated column — we
+                // reconstruct from these signals so the CSV format stays compact.
+                const wbAA = cellNum(cols, 'White Border AA', 0);
+                const paperTypeCell = cellOr(cols, 'Paper Type', '');
+                if (wbAA > 0 || paperTypeCell) {
+                    d.useFauxMat = true;
+                    d.sbPaperBorder = wbAA;
+                    if (paperTypeCell) {
+                        const ptInfo = parsePaperTypeCell(paperTypeCell);
+                        d.paperType = ptInfo.type;
+                    }
+                }
             }
 
             // Hidden columns — Artist/Title/Art Type for caption use
@@ -1403,6 +1476,21 @@ function toggleDashMat(id) {
         m2Btn.style.cursor = m1On ? 'pointer' : 'not-allowed';
     } else {
         document.getElementById('m2').disabled = !b.classList.contains('active');
+    }
+    syncDashAndCalculate();
+}
+
+function toggleDashFauxMat() {
+    const b = document.getElementById('fauxMatToggle');
+    b.classList.toggle('active');
+    const isOn = b.classList.contains('active');
+    b.innerText = isOn ? 'ON' : 'OFF';
+    const borderInput = document.getElementById('fauxBorder');
+    borderInput.disabled = !isOn;
+    // First-enable: seed border to 0.5" so the user has a sensible default
+    // (matches float mount's typical border value). User can override.
+    if (isOn && (!borderInput.value || parseFloat(borderInput.value) === 0)) {
+        borderInput.value = dashFmt(dashUnit === 'cm' ? 1.27 : 0.5);
     }
     syncDashAndCalculate();
 }
@@ -2875,9 +2963,36 @@ function buildSpecStrings(r) {
         // Wrapped canvas: just Stretcher Bar (no frame, no reveal)
         if (stretcherLine) lines.push({ label: 'Stretcher Bar', value: stretcherLine });
     } else {
-        // Standard framed art: Mat 1, optional Mat 2
+        // Standard framed art: Mat 1, optional Mat 2, optional Faux Mat (paper with border)
         if (mat1Line) lines.push({ label: 'Mat 1', value: mat1Line });
         if (mat2Line) lines.push({ label: 'Mat 2', value: mat2Line });
+        // Faux Mat: print with white border baked into paper. Adds Paper Size +
+        // White Border lines. Paper size = image opening + border × 2; image
+        // opening depends on what's above (frame only, or +mat 1, or +mat 1 + mat 2 reveal).
+        if (r.useFauxMat === true) {
+            const fauxBorder = parseFloat(r.sbPaperBorder) || 0;
+            if (fauxBorder > 0) {
+                const fW = parseFloat(r.fW) || 0;
+                const extW = parseFloat(r.extW) || 0;
+                const extH = parseFloat(r.extH) || 0;
+                const mT = m1On ? (parseFloat(r.m1T) || 0) : 0;
+                const mB = m1On ? (parseFloat(r.m1B) || 0) : 0;
+                const mL = m1On ? (parseFloat(r.m1L) || 0) : 0;
+                const mR = m1On ? (parseFloat(r.m1R) || 0) : 0;
+                const m2v = m2On ? (parseFloat(r.m2) || 0) : 0;
+                // Image opening = OD - frame×2 - mat 1 dimensions - mat 2 reveal×2.
+                const imgW = Math.max(0, extW - fW * 2 - mL - mR - m2v * 2);
+                const imgH = Math.max(0, extH - fW * 2 - mT - mB - m2v * 2);
+                const paperW = imgW + fauxBorder * 2;
+                const paperH = imgH + fauxBorder * 2;
+                if (paperW > 0 && paperH > 0) {
+                    const wStr = (paperW % 1 === 0) ? paperW.toFixed(0) : paperW.toString();
+                    const hStr = (paperH % 1 === 0) ? paperH.toFixed(0) : paperH.toString();
+                    lines.push({ label: 'Paper Size', value: `${wStr}"W × ${hStr}"H` });
+                }
+                lines.push({ label: 'White Border', value: `${fmt(fauxBorder)}" AA` });
+            }
+        }
     }
 
     // Production attributes
@@ -2967,10 +3082,15 @@ function exportDashCSV() {
 
     // Composite Paper Type cell: "Fine Art Paper / Straight Cut" or "Fine Art Paper / Deckled Edge".
     // Only meaningful when float mount is active. Empty for other products.
-    const buildPaperTypeCell = (r, iFM) => {
-        if (!iFM) return '';
+    // Paper Type cell. Used for any product where the print has a meaningful
+    // paper description: float mount AND faux mat. Composes:
+    //   <paperType> / <edge style>
+    // Edge is always "Straight Cut" for faux mat (the paper is hidden under
+    // the mat and isn't deckled). Float mount respects the user's edge toggle.
+    const buildPaperTypeCell = (r, iFM, isFauxMat) => {
+        if (!iFM && !isFauxMat) return '';
         const base = (r.paperType || 'Fine Art Paper').trim();
-        const edge = r.sbPaperEdge === 'torn' ? 'Deckled Edge' : 'Straight Cut';
+        const edge = (iFM && r.sbPaperEdge === 'torn') ? 'Deckled Edge' : 'Straight Cut';
         return `${base} / ${edge}`;
     };
 
@@ -3024,19 +3144,20 @@ function exportDashCSV() {
         }
         else { imgW = artW + (r.bleed*2); imgH = artH + (r.bleed*2); }
 
-        // Paper Size (only meaningful for float mount). Per the studio's spec PDF:
-        //   paperSize = imageSize + (whiteBorder × 2)
-        // where imageSize is the visible artwork (artW, artH) and whiteBorder is the
-        // white margin around the image inside the paper. When border = 0 (full bleed),
-        // paperSize = artW = imgW (since the image fills the paper edge-to-edge).
-        const whiteBorder = iFM ? sbPB : 0;
-        const paperSizeW = iFM ? (artW + whiteBorder * 2) : 0;
-        const paperSizeH = iFM ? (artH + whiteBorder * 2) : 0;
+        // Paper Size: covers BOTH float mount AND faux mat (mat-mode print w/ border).
+        //   Float mount: paperSize = imageSize + whiteBorder × 2
+        //   Faux Mat:    paperSize = imageSize + fauxBorder × 2 (same math, different semantic)
+        //   Where imageSize is the visible artwork (artW, artH).
+        // When border = 0, paperSize = artW (image fills paper edge-to-edge).
+        const isFauxMat = !iC && !iFL && !iFM && r.useFauxMat === true;
+        const whiteBorder = iFM ? sbPB : (isFauxMat ? (parseFloat(r.sbPaperBorder) || 0) : 0);
+        const paperSizeW = (iFM || isFauxMat) ? (artW + whiteBorder * 2) : 0;
+        const paperSizeH = (iFM || isFauxMat) ? (artH + whiteBorder * 2) : 0;
 
         // Composite cells
         const matCell = buildMatCell(r, matsHidden);
         const frameCell = buildFrameCell(r);
-        const paperTypeCell = buildPaperTypeCell(r, iFM);
+        const paperTypeCell = buildPaperTypeCell(r, iFM, isFauxMat);
 
         // Pre-formatted spec strings for InDesign auto-spec script consumption
         const specs = buildSpecStrings(r);
@@ -3056,9 +3177,9 @@ function exportDashCSV() {
             (r.m1A !== false && !matsHidden) ? dashFmt(r.m1L) : '',
             r.glass || '',
             paperTypeCell,
-            iFM ? dashFmt(Math.max(0, paperSizeW)) : '',
-            iFM ? dashFmt(Math.max(0, paperSizeH)) : '',
-            iFM ? dashFmt(whiteBorder) : '',
+            (iFM || isFauxMat) ? dashFmt(Math.max(0, paperSizeW)) : '',
+            (iFM || isFauxMat) ? dashFmt(Math.max(0, paperSizeH)) : '',
+            (iFM || isFauxMat) ? dashFmt(whiteBorder) : '',
             frameCell,
             numOrBlank(r.fW),
             numOrBlank(r.fHeight),
