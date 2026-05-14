@@ -1038,8 +1038,16 @@ function updateDashVisualsFromDOM() {
             const fauxVis = document.createElement('div');
             fauxVis.className = 'faux-mat-visual';
             // Position: sits inside the innermost mat opening, or inside the frame
-            // if no mats. Math accumulates the inset from each layer above.
+            // if no mats. The conditional frameInset (0 for color mode where the
+            // frame is a CSS border on fVis, fW*ratio for library mode where rails
+            // sit inside fVis) matches what Mat 1 / Mat 2 do for top/left offset.
+            // The WIDTH calculation, however, always subtracts the full frame on
+            // both sides regardless of mode — same as Mat 1's width formula on
+            // line ~1015. Without this, the faux mat was offset correctly in
+            // color mode but its width still spanned the OD instead of the inner
+            // opening, making it look misaligned vs the mat.
             const frameInset = (data.fType === 'color') ? 0 : (data.fW * ratio);
+            const frameSizeDeduction = data.fW * 2 * ratio;
             const m1InsetT = effM1A ? data.m1T * ratio : 0;
             const m1InsetB = effM1A ? data.m1B * ratio : 0;
             const m1InsetL = effM1A ? data.m1L * ratio : 0;
@@ -1047,8 +1055,8 @@ function updateDashVisualsFromDOM() {
             const m2Inset = effM2A ? data.m2 * ratio : 0;
             const top = frameInset + m1InsetT + m2Inset;
             const left = frameInset + m1InsetL + m2Inset;
-            const width = (data.extW * ratio) - frameInset * 2 - m1InsetL - m1InsetR - m2Inset * 2;
-            const height = (data.extH * ratio) - frameInset * 2 - m1InsetT - m1InsetB - m2Inset * 2;
+            const width = (data.extW * ratio) - frameSizeDeduction - m1InsetL - m1InsetR - m2Inset * 2;
+            const height = (data.extH * ratio) - frameSizeDeduction - m1InsetT - m1InsetB - m2Inset * 2;
             // White paper showing as a band. The border (CSS) width is the white border value.
             fauxVis.style.cssText = `position:absolute; top:${top}px; left:${left}px; width:${Math.max(0, width)}px; height:${Math.max(0, height)}px; border:${border * ratio}px solid #ffffff; box-sizing:border-box; pointer-events:none;`;
             fVis.appendChild(fauxVis);
