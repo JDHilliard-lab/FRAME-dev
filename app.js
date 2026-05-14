@@ -2479,6 +2479,52 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.strokeStyle = "#cccccc"; x.lineWidth = 1; x.strokeRect(m2X, m2Y, m2W, m2H);
     }
 
+    // FAUX MAT layer: a white paper that sits inside whatever opening is above
+    // (mat 2 if on, mat 1 if on, frame if no mats). The mat above casts an inset
+    // shadow onto the paper, same as the frame casts onto mat 1. The paper
+    // itself has no thickness, so it does NOT cast a shadow onto the image
+    // hole — the image is flat against the paper.
+    //
+    // Layout: the white paper fills the innermost-mat-or-frame opening. The
+    // image hole, calculated later as aX/aY/aW/aH, will be repositioned inside
+    // the paper offset by sbPaperBorder on each side, leaving the visible
+    // white band ("faux mat" effect).
+    const useFauxMat = !isC && !useFM && (d.useFauxMat === true);
+    let fauxX = 0, fauxY = 0, fauxW = 0, fauxH = 0;
+    if (useFauxMat) {
+        // Determine the bounds of the white paper based on what's above:
+        //   - Mat 2 on → paper fills mat 2's opening (m2 reveal already accounted for in art-opening math below)
+        //   - Mat 1 on (no mat 2) → paper fills mat 1's opening
+        //   - No mats → paper fills frame's opening (iX, iY, iW, iH already point there)
+        // Mat 2 is special: its "opening" is m2W minus m2 reveal × 2, so we apply that offset here.
+        if (m2On) {
+            const m2RevPx = (parseFloat(d.m2) || 0) * dpi;
+            fauxX = m2X + m2RevPx; fauxY = m2Y + m2RevPx;
+            fauxW = m2W - m2RevPx * 2; fauxH = m2H - m2RevPx * 2;
+        } else if (m1On) {
+            fauxX = m2X; fauxY = m2Y;
+            fauxW = m2W; fauxH = m2H;
+        } else {
+            fauxX = iX; fauxY = iY;
+            fauxW = iW; fauxH = iH;
+        }
+        if (fauxW > 0 && fauxH > 0) {
+            x.fillStyle = '#ffffff';
+            x.fillRect(fauxX, fauxY, fauxW, fauxH);
+            // Cast shadow of the mat (or frame, if no mats) above onto the white paper.
+            // Magnitude matches the shadow Mat 2 / Mat 1 would project onto each other.
+            if (m1On || m2On) {
+                dIS(fauxX, fauxY, fauxW, fauxH, 20, 8, 0.45);
+            } else {
+                // No mats — the frame casts a stronger shadow (same as Mat 1 would get)
+                dIS(fauxX, fauxY, fauxW, fauxH, 35, 14, 0.6);
+            }
+            // Subtle outline so the paper edge is visible against the mat above
+            x.strokeStyle = "#cccccc"; x.lineWidth = 1;
+            x.strokeRect(fauxX, fauxY, fauxW, fauxH);
+        }
+    }
+
     // FLOAT MOUNT layers: backer fills the frame interior; paper sits on top of
     // the backer offset by paperMargin; image hole is inside the paper offset
     // by paperBorder (set to 0 for full bleed).
@@ -2584,6 +2630,13 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         const paperBorderPx = (parseFloat(d.sbPaperBorder) || 0) * dpi;
         aX = sbPaperX + paperBorderPx; aY = sbPaperY + paperBorderPx;
         aW = sbPaperW - paperBorderPx * 2; aH = sbPaperH - paperBorderPx * 2;
+    } else if (useFauxMat && fauxW > 0 && fauxH > 0) {
+        // Faux mat: image hole sits inside the white paper at fauxBorder offset.
+        // Reuses sbPaperBorder (same data field, same semantic — white border
+        // around image on the print paper).
+        const fauxBorderPx = (parseFloat(d.sbPaperBorder) || 0) * dpi;
+        aX = fauxX + fauxBorderPx; aY = fauxY + fauxBorderPx;
+        aW = fauxW - fauxBorderPx * 2; aH = fauxH - fauxBorderPx * 2;
     }
     x.clearRect(aX, aY, aW, aH);
 
@@ -2600,11 +2653,11 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.lineWidth = 6; x.strokeStyle = '#000';
         x.strokeRect(aX + 4, aY + 4, aW - 8, aH - 8);
         x.restore();
-    } else if (useFM) {
-        // FLOAT MOUNT: per user spec — image opening must NOT cast a shadow onto the
-        // paper layer. The opening is clean transparent. The only shadow on the paper
-        // is the drop shadow under the paper's outer edge falling onto the backer,
-        // which is handled by the paper-fill block above.
+    } else if (useFM || useFauxMat) {
+        // FLOAT MOUNT / FAUX MAT: per user spec — image opening must NOT cast a
+        // shadow onto the paper layer. The print is flat against the paper, no
+        // thickness, no shadow. The only shadow on the paper comes from the
+        // mat above, handled in the faux mat / paper fill blocks above.
         // (Intentionally no shadow drawn here.)
     } else {
         dIS(aX, aY, aW, aH, 8, 3, 0.25);
