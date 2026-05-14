@@ -1252,7 +1252,10 @@ function importDashCSV(e) {
 
             // Production fields
             d.hardware = cellOr(cols, 'Security Hardware', '');
-            d.backing = cellOr(cols, 'Substrate', '');
+            // The column was renamed from "Substrate" → "Backing Board" — accept either
+            // so old CSVs from before the rename still load. New "Backing Board" wins
+            // if both are somehow present (shouldn't happen, but tie-breaker).
+            d.backing = cellOr(cols, 'Backing Board', cellOr(cols, 'Substrate', ''));
             d.mount = cellOr(cols, 'Mount', '');
             d.notes = cellOr(cols, 'Notes', '');
             d.prodNotes = cellOr(cols, 'Production Notes', '');
@@ -2885,16 +2888,13 @@ function buildSpecStrings(r) {
         lines.push({ label: 'Glass', value: r.glass.trim() });
     }
 
-    // Physical: substrate label varies by product context.
-    //   - Canvas products (Wrapped + Floater): "Backing Board" — rigid panel
-    //     behind the canvas to prevent sagging. Materials like Hardback, Foamcore.
-    //   - Framed art (Standard + Float Mount): "Substrate" — the mounting layer
-    //     the print sits on. Materials like Foamcore, Dibond.
-    // Same underlying data field; different terminology matches how framers
-    // talk about each role in production.
+    // Physical: rigid panel behind the artwork providing structural support.
+    // Called "Backing Board" across all current product types. The internal
+    // data field is `backing` (no rename — internal stability) but the user-
+    // facing label in dashboard, CSV, and spec block all read "Backing Board"
+    // for consistency.
     if (substrateLine) {
-        const substrateLabel = (isC || isFL) ? 'Backing Board' : 'Substrate';
-        lines.push({ label: substrateLabel, value: substrateLine });
+        lines.push({ label: 'Backing Board', value: substrateLine });
     }
 
     // Notes (if user typed something — auto-fill is intentionally skipped per
@@ -2987,7 +2987,7 @@ function exportDashCSV() {
         `Glass,` +
         `Paper Type,Paper Size W${u},Paper Size H${u},White Border AA${u},` +
         `Frame Code-Color,Frame (Width)${u},Frame (Height)${u},` +
-        `Security Hardware,Substrate,Mount,Notes,Production Notes,` +
+        `Security Hardware,Backing Board,Mount,Notes,Production Notes,` +
         // — End visible columns. Below this point: InDesign helpers + backend data. —
         `Artist,Artwork Title,Art Type,Rabbet Depth${u},` +
         `Application,Matboard Description,Spec Lines,` +
