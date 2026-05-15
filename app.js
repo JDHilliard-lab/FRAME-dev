@@ -76,6 +76,19 @@ const svgEdit = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.
 const svgDup = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
 const svgTrash = `<svg class="svg-icon" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/></svg>`;
 
+// Short, square-proportioned arrows for the EDGE GAP toggles. Each is a
+// stubby arrow with a clearly visible head and a short shaft — no long
+// tails like the Unicode ↑↓←→ characters. 24x24 viewBox so they sit at
+// the same visual weight as the other icon-btn SVGs in the icon row.
+//
+// Geometry: shaft from center (12,12) out to a tip near the edge, with
+// two diagonal lines forming the chevron head. Head spans ~6px wide
+// for a balanced, "square-ish" look.
+const svgArrowUp    = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 18V8M8 12l4-4 4 4"/></svg>`;
+const svgArrowDown  = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 6v10M8 12l4 4 4-4"/></svg>`;
+const svgArrowLeft  = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 12H8M12 8l-4 4 4 4"/></svg>`;
+const svgArrowRight = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 12h10M12 8l4 4-4 4"/></svg>`;
+
 const dashDefaultData = { 
     id: "ART.001", imageCode: "TBD", level: "1", qty: 0, product: "Framed Art", location: "LOBBY", 
     // Phase A additions: artwork attribution + frame profile depth + paper type.
@@ -3421,25 +3434,21 @@ function initElevControls() {
                     <div style="display:flex; gap:2px; margin-top:2px; flex-wrap:wrap;">${targetButtons}</div>
                 </div>
                 <div class="frame-item-icons">
-                    <!-- EDGE GAP column: 4 distance-to-wall toggles grouped under
-                         a visible label. Per-frame state lives in f.distToggles.
-                         Label uses the muted-text style so it's discoverable but
-                         not visually competing with the actual button content. -->
+                    <!-- EDGE GAP column: 4 distance-to-wall toggles. Label lives
+                         in the column header (one EDGE GAP label total, above
+                         the whole list). Per-frame state lives in f.distToggles. -->
                     <div class="edge-gap-group">
-                        <div class="edge-gap-label">EDGE GAP</div>
-                        <div class="edge-gap-buttons">
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.ceiling?'active':''}" title="Distance to Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">↑</button>
-                            </div>
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.floor?'active':''}" title="Distance to Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">↓</button>
-                            </div>
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.left?'active':''}" title="Distance to Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">←</button>
-                            </div>
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.right?'active':''}" title="Distance to Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">→</button>
-                            </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn ${dt.ceiling?'active':''}" title="Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">${svgArrowUp}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn ${dt.floor?'active':''}" title="Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">${svgArrowDown}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn ${dt.left?'active':''}" title="Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">${svgArrowLeft}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn ${dt.right?'active':''}" title="Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">${svgArrowRight}</button>
                         </div>
                     </div>
                     <div style="width:38px; display:flex; justify-content:center;">
