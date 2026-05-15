@@ -305,7 +305,7 @@ body.dragging-frame .frame-vis:hover {
 .arch-label-new { font-size: var(--dim-font-size); font-family: "Times New Roman", Times, serif; font-weight: bold; color: #000; padding: 0 6px; white-space: nowrap; background: transparent; }
 
 .hang-guide { position: absolute; width: 100%; border-top: 1.5px dashed var(--guide-color); display: flex; align-items: center; justify-content: flex-end; }
-.hang-label { color: var(--guide-color); font-size: 10px; font-weight: bold; padding-right: 10px; transform: translateY(-12px); }
+.hang-label { color: var(--guide-color); font-size: 10px; font-weight: bold; padding-right: 10px; background: var(--bg-panel); padding: 1px 6px; border-radius: 3px; }
 .center-guide { position: absolute; height: 100%; border-left: 1.5px dashed var(--guide-color); display: flex; justify-content: center; }
 .center-label { position: absolute; top: 10px; color: var(--guide-color); font-size: 10px; font-weight: bold; left: 5px; }
 .crosshair-h { position: absolute; height: 1px; border-top: 1px dashed #aaa; }
