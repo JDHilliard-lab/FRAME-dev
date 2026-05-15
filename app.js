@@ -3565,6 +3565,130 @@ async function batchDownloadAllFrames() {
 
 function elevFmt(val) { return elevUnit === 'in' ? Math.round(val).toString() : parseFloat(val).toFixed(1); }
 
+// Centralized hang-height getter — reads the user-editable input, falls back
+// to studio standard (57" / 144.78 cm) if blank or invalid. Used by the guide
+// line, alignment helpers, and floor/ceiling dimension layer.
+function getHangHeight() {
+    const el = document.getElementById('hangHeight');
+    const v = el ? parseFloat(el.value) : NaN;
+    if (!isNaN(v) && v > 0) return v;
+    return elevUnit === 'in' ? 57 : 144.78;
+}
+
+// ──────────── ALIGNMENT & DISTRIBUTION HELPERS ────────────
+// Module-level state: which axis the spacing operation uses. Persists between
+// dialog opens so the user's last choice is remembered until they change it.
+let alignAxis = 'h';
+
+function openAlignmentDialog() {
+    // Refresh the unit label to match current elevation unit
+    const unitLabel = document.getElementById('alignGapUnit');
+    if (unitLabel) unitLabel.textContent = elevUnit === 'cm' ? 'cm' : 'in';
+    document.getElementById('alignModal').style.display = 'flex';
+}
+
+function setAlignAxis(axis) {
+    alignAxis = axis;
+    document.getElementById('alignAxisH').classList.toggle('active', axis === 'h');
+    document.getElementById('alignAxisV').classList.toggle('active', axis === 'v');
+}
+
+// Distribute active frames evenly along the chosen axis with the specified gap.
+// HORIZONTAL: sort frames left-to-right by x, place them in sequence starting
+// from the leftmost frame's current x. Each subsequent frame's x =
+// previous frame's right edge + gap.
+// VERTICAL: same logic but bottom-to-top by y, building upward.
+// Frames are NOT centered or moved as a group — we preserve the leftmost
+// (or bottommost) frame's position and pack the rest against it.
+function applyAutoSpace() {
+    const activeFrames = elevFrames.filter(f => f.active);
+    if (activeFrames.length < 2) {
+        showInfoModal('Need More Frames', 'Auto-spacing requires at least 2 visible frames in this elevation.');
+        return;
+    }
+    const gap = parseFloat(document.getElementById('alignGapValue').value) || 0;
+    if (gap < 0) {
+        showInfoModal('Invalid Gap', 'Gap must be 0 or greater.');
+        return;
+    }
+
+    if (alignAxis === 'h') {
+        // Sort by x ascending, then pack left-to-right with the gap between each
+        const sorted = [...activeFrames].sort((a, b) => a.x - b.x);
+        let cursor = sorted[0].x; // anchor: leftmost frame stays put
+        sorted.forEach((f, i) => {
+            if (i === 0) {
+                cursor = f.x + f.w; // first frame's right edge is the next cursor
+            } else {
+                f.x = cursor + gap;
+                cursor = f.x + f.w;
+            }
+        });
+    } else {
+        // Vertical: sort by y ascending, pack bottom-to-top
+        const sorted = [...activeFrames].sort((a, b) => a.y - b.y);
+        let cursor = sorted[0].y;
+        sorted.forEach((f, i) => {
+            if (i === 0) {
+                cursor = f.y + f.h;
+            } else {
+                f.y = cursor + gap;
+                cursor = f.y + f.h;
+            }
+        });
+    }
+    drawElevAll();
+    initElevControls();
+}
+
+// Shift the entire group of active frames horizontally so the group's
+// bounding box is centered on the wall. Vertical positions are preserved.
+// "Group center" = midpoint between leftmost edge and rightmost edge of
+// any active frame.
+function centerGroupOnWall() {
+    const activeFrames = elevFrames.filter(f => f.active);
+    if (activeFrames.length === 0) {
+        showInfoModal('No Visible Frames', 'No active frames to center. Toggle on the frames you want to align.');
+        return;
+    }
+    const wallW = parseFloat(document.getElementById('wallW').value) || 1;
+    let minX = Infinity, maxX = -Infinity;
+    activeFrames.forEach(f => {
+        if (f.x < minX) minX = f.x;
+        if (f.x + f.w > maxX) maxX = f.x + f.w;
+    });
+    const groupCenterX = (minX + maxX) / 2;
+    const wallCenterX = wallW / 2;
+    const shift = wallCenterX - groupCenterX;
+    activeFrames.forEach(f => { f.x += shift; });
+
+    drawElevAll();
+    initElevControls();
+}
+
+// Align each active frame's VERTICAL CENTER to the hang-height line.
+// Independent of horizontal position. After this, all frames will have
+// their center at exactly hangHeight, regardless of frame size — meaning
+// taller frames will extend further above/below shorter ones, but all
+// share the same center line. This matches the gallery convention of
+// "57-inch center of art" hanging.
+function alignToHangHeight() {
+    const activeFrames = elevFrames.filter(f => f.active);
+    if (activeFrames.length === 0) {
+        showInfoModal('No Visible Frames', 'No active frames to align. Toggle on the frames you want to align.');
+        return;
+    }
+    const hangY = getHangHeight();
+    activeFrames.forEach(f => {
+        // f.y is the BOTTOM of the frame. We want the vertical center at hangY.
+        // So bottom = hangY - h/2.
+        f.y = hangY - f.h / 2;
+    });
+
+    drawElevAll();
+    initElevControls();
+}
+
 function drawElevAll() {
     const wallW = parseFloat(document.getElementById('wallW').value) || 1; const wallH = parseFloat(document.getElementById('wallH').value) || 1;
     const workspace = document.querySelector('#view-elevation .workspace');
@@ -3762,7 +3886,7 @@ function drawElevAll() {
     });
 
     makeElevDraggable(pWrap, 'person');
-    drawElevTargetedSpacing(); drawElevGuides(wallW, wallH);
+    drawElevTargetedSpacing(); drawFloorCeilingDims(); drawElevGuides(wallW, wallH);
 }
 
 function makeElevDraggable(el, idx) {
@@ -3795,7 +3919,7 @@ function drawElevGuides(wallW, wallH) {
     cl.innerHTML = `<span class="center-label">WALL CENTER</span>`;
     guideLayer.appendChild(cl);
 
-    const hangVal = elevUnit === 'in' ? 57 : 144.78;
+    const hangVal = getHangHeight();
     if(hangVal < wallH) {
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
@@ -3840,6 +3964,33 @@ function drawElevTargetedSpacing() {
                 }
             }
         });
+    });
+}
+
+// Draw floor + ceiling distance dimensions for every active frame.
+// One vertical line per measurement, anchored to a column just inside the
+// frame's horizontal extent so the line doesn't crowd adjacent frames.
+// Toggle controls visibility via display:none on the layer.
+function drawFloorCeilingDims() {
+    const layer = document.getElementById('floor-ceiling-layer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    const wallH = parseFloat(document.getElementById('wallH').value) || 1;
+
+    elevFrames.forEach(f => {
+        if (!f.active) return;
+        // Anchor the dim line just inside the frame's left edge — keeps it
+        // visually associated with the frame without overlapping the frame face.
+        // Could parameterize this later for a UI offset preference.
+        const anchorX = f.x + Math.min(8, f.w * 0.15);
+        const floorDist = f.y;
+        const ceilingDist = wallH - (f.y + f.h);
+        if (floorDist > 0) {
+            createElevArchSpacing(anchorX, 0, anchorX, f.y, 'v', layer, elevFmt(floorDist));
+        }
+        if (ceilingDist > 0) {
+            createElevArchSpacing(anchorX, f.y + f.h, anchorX, wallH, 'v', layer, elevFmt(ceilingDist));
+        }
     });
 }
 
@@ -3913,6 +4064,21 @@ function setElevUnit(u) {
     elevUnit = u;
     document.getElementById('wallW').value = elevations[currentElevIndex].wallW;
     document.getElementById('wallH').value = elevations[currentElevIndex].wallH;
+    // Convert the hang height value too. If empty, leave it for default to fill in.
+    const hangEl = document.getElementById('hangHeight');
+    if (hangEl && hangEl.value) {
+        const converted = parseFloat((parseFloat(hangEl.value) * f).toFixed(2));
+        hangEl.value = converted;
+    }
+    // Convert the alignment gap value to the new unit, if any. Keep the user's
+    // numeric intent intact (4" stays 4" worth of space; converted to ~10.16cm).
+    const gapEl = document.getElementById('alignGapValue');
+    if (gapEl && gapEl.value) {
+        gapEl.value = parseFloat((parseFloat(gapEl.value) * f).toFixed(2));
+    }
+    const gapUnitEl = document.getElementById('alignGapUnit');
+    if (gapUnitEl) gapUnitEl.textContent = u === 'cm' ? 'cm' : 'in';
+
     document.getElementById('elevBtnInch').classList.toggle('active', elevUnit==='in'); 
     document.getElementById('elevBtnCm').classList.toggle('active', elevUnit==='cm');
     initElevControls(); drawElevAll();
