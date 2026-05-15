@@ -4206,6 +4206,14 @@ async function exportElevPNG() {
     const wrap = document.getElementById('export-wrap');
     const wall = document.getElementById('wall');
 
+    // Zoom-independent export: temporarily reset the zoom factor to 1
+    // (natural fit-to-workspace scale) so the exported PNG is identical
+    // regardless of how the user has zoomed in or out while working.
+    // This affects rendered text size, line widths, and frame positions.
+    // Restored in the finally block.
+    const oldZoomFactor = elevZoomFactor;
+    elevZoomFactor = 1;
+
     // Force light theme for export (consistency with print/PDF), restore after.
     const wasDark = !document.body.classList.contains('light-theme');
     document.body.classList.add('light-theme');
@@ -4215,42 +4223,80 @@ async function exportElevPNG() {
     const oldOverflow = ws.style.overflow; ws.style.overflow = 'visible';
     const oldWallBg = wall.style.background; wall.style.background = 'transparent';
 
-    // Character clip-fix: the character (#person-wrap) is position:absolute inside
-    // #wall, which means its bounds don't contribute to #export-wrap's auto-sized
-    // max-content width/height. The existing 80px padding on #export-wrap
-    // accommodates SMALL character overflow but not when designers place the
-    // character right next to the outer dimension line. So before export we
-    // measure the character's actual bounding rect relative to #export-wrap
-    // and inflate the padding inline so html2canvas captures the full region.
-    // Restored in the finally block.
+    // Character clip-fix + flush-right + flush-bottom export padding.
+    // The character is position:absolute inside #wall so it doesn't contribute
+    // to #export-wrap's max-content sizing — we measure where it actually is
+    // and adjust the padding inline.
+    //
+    // Per user request: bottom is flush with the wall-width arch dim line
+    // (trim away the empty space below it), right is flush with the rightmost
+    // content (wall right edge or character if further right), top and left
+    // keep their default 80px padding so the left & top arch dim lines have
+    // room to render. All restored in the finally block.
     const exportWrap = document.getElementById('export-wrap');
     const oldExportWrapPadding = exportWrap.style.padding;
     {
+        const PAD_BASE = 80;            // Top + Left default padding
+        const TIGHT_PAD = 8;            // Minimal trim on flush sides — keeps content from sitting
+                                        // literally at the pixel edge of the PNG (some clipping safety).
+        const SAFETY = 20;              // Extra room added when character overflows the base padding
+
+        // Find what's furthest right & bottom in the export.
+        // Right candidates: wall's right edge, character's right (if active & to the right).
+        // Bottom candidates: the wall-width arch dim line BELOW the wall.
+        const wrapRect = exportWrap.getBoundingClientRect();
+        const wallRect = wall.getBoundingClientRect();
+
+        // Bottom dim line: lives in #arch-dim-layer, positioned below the wall.
+        // We find the bottom-most element in there to compute the trim point.
+        let dimBottomY = wallRect.bottom;  // fallback to wall bottom if no dim found
+        const archDimEls = document.querySelectorAll('#arch-dim-layer .arch-dim, #arch-dim-layer .arch-dim-h, #arch-dim-layer .arch-dim-v');
+        archDimEls.forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.bottom > dimBottomY) dimBottomY = r.bottom;
+        });
+
+        // Character bounds (if visible)
         const personWrapForBounds = document.getElementById('person-wrap');
-        const personIsVisibleForPad = personWrapForBounds && getComputedStyle(personWrapForBounds).display !== 'none';
-        if (personIsVisibleForPad) {
-            const wrapRect = exportWrap.getBoundingClientRect();
-            const personRect = personWrapForBounds.getBoundingClientRect();
-            // Compute how far the character extends OUTSIDE the current export-wrap padding-box
-            // on each side. A positive value means overflow we need to absorb.
-            const overflowLeft = Math.max(0, wrapRect.left - personRect.left);
-            const overflowRight = Math.max(0, personRect.right - wrapRect.right);
-            const overflowTop = Math.max(0, wrapRect.top - personRect.top);
-            const overflowBottom = Math.max(0, personRect.bottom - wrapRect.bottom);
-            // Add a small safety margin (20px) beyond the strict overflow so the
-            // figure doesn't sit flush against the export edge.
-            const SAFETY = 20;
-            // Base padding from CSS is 80px on all sides. Build new shorthand:
-            const PAD_BASE = 80;
-            const padTop    = PAD_BASE + Math.ceil(overflowTop)    + (overflowTop    > 0 ? SAFETY : 0);
-            const padRight  = PAD_BASE + Math.ceil(overflowRight)  + (overflowRight  > 0 ? SAFETY : 0);
-            const padBottom = PAD_BASE + Math.ceil(overflowBottom) + (overflowBottom > 0 ? SAFETY : 0);
-            const padLeft   = PAD_BASE + Math.ceil(overflowLeft)   + (overflowLeft   > 0 ? SAFETY : 0);
-            exportWrap.style.padding = `${padTop}px ${padRight}px ${padBottom}px ${padLeft}px`;
-            // Force a reflow + an extra frame so html2canvas sees the new layout
-            void exportWrap.offsetWidth;
-            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-        }
+        const personVisible = personWrapForBounds && getComputedStyle(personWrapForBounds).display !== 'none';
+        let personRect = null;
+        if (personVisible) personRect = personWrapForBounds.getBoundingClientRect();
+
+        // ── TOP padding: base 80px, plus character overflow above if any ──
+        let overflowTop = 0;
+        if (personRect) overflowTop = Math.max(0, wrapRect.top - personRect.top);
+        const padTop = PAD_BASE + Math.ceil(overflowTop) + (overflowTop > 0 ? SAFETY : 0);
+
+        // ── LEFT padding: base 80px, plus character overflow left if any ──
+        let overflowLeft = 0;
+        if (personRect) overflowLeft = Math.max(0, wrapRect.left - personRect.left);
+        const padLeft = PAD_BASE + Math.ceil(overflowLeft) + (overflowLeft > 0 ? SAFETY : 0);
+
+        // ── RIGHT padding: flush to rightmost content with a small breathing room ──
+        // Find the rightmost edge: wall right, or character right if it sticks out.
+        let rightmost = wallRect.right;
+        if (personRect && personRect.right > rightmost) rightmost = personRect.right;
+        // Convert "distance from wrap-content-right to rightmost" to padding.
+        // wrapRect.right - currentPadRight = wrap-padding-box right edge
+        // We want: new wrap-padding-box right edge = rightmost + TIGHT_PAD
+        // current right padding (in px) = the CSS padding-right value
+        const currentRightPad = parseFloat(getComputedStyle(exportWrap).paddingRight) || PAD_BASE;
+        const wrapContentRight = wrapRect.right - currentRightPad;
+        // The wall is laid out via flex centering inside wrap content. So wallRect.right
+        // tells us where the wall ends; we want the new padding-right edge at
+        // rightmost + TIGHT_PAD. New padding = (rightmost + TIGHT_PAD) - wrapContentRight.
+        const padRight = Math.max(TIGHT_PAD, Math.ceil(rightmost + TIGHT_PAD - wrapContentRight));
+
+        // ── BOTTOM padding: flush at the wall-width dim line bottom ──
+        const currentBottomPad = parseFloat(getComputedStyle(exportWrap).paddingBottom) || PAD_BASE;
+        const wrapContentBottom = wrapRect.bottom - currentBottomPad;
+        // Find required padding so the new wrap-padding-box bottom = dimBottomY + TIGHT_PAD
+        const padBottom = Math.max(TIGHT_PAD, Math.ceil(dimBottomY + TIGHT_PAD - wrapContentBottom));
+
+        exportWrap.style.padding = `${padTop}px ${padRight}px ${padBottom}px ${padLeft}px`;
+        // Force reflow + extra frame so html2canvas sees the new layout
+        void exportWrap.offsetWidth;
+        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
     }
 
     // PERSON: html2canvas can fail to capture <img src="*.svg"> reliably. Same fix
@@ -4423,6 +4469,9 @@ async function exportElevPNG() {
         // Restore the export-wrap padding (was temporarily inflated to include
         // the character when they extended past the wall edges).
         exportWrap.style.padding = oldExportWrapPadding;
+        // Restore zoom factor and re-render at user's zoom level
+        elevZoomFactor = oldZoomFactor;
+        drawElevAll();
         // Restore the person element (overlay canvas removed, img re-shown / src restored)
         if (personImg) {
             if (personOverlayCanvas && personOverlayCanvas.parentNode) {
