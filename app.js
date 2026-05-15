@@ -3403,25 +3403,36 @@ function initElevControls() {
         // Tiny so they fit alongside the existing letter targets. Tooltips clarify.
         // distToggles is per-frame state — default false, persists with the frame.
         const dt = f.distToggles || { ceiling: false, floor: false, left: false, right: false };
-        const distButtons = `
-            <button class="toggle-status ${dt.ceiling?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to CEILING" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">↑</button>
-            <button class="toggle-status ${dt.floor?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to FLOOR" onclick="toggleFrameDistDim(${idx}, 'floor', event)">↓</button>
-            <button class="toggle-status ${dt.left?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to LEFT wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">←</button>
-            <button class="toggle-status ${dt.right?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to RIGHT wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">→</button>
-        `;
 
         // data-frame-letter attaches the letter for hover pairing — pure-CSS hover
         // wouldn't work since the elements aren't siblings in the DOM, so we use
         // JS event handlers (added after render) that look up the matching panel
         // / frame by this attribute.
+        //
+        // Layout: distance dim toggles sit at the LEFT END of the icon row,
+        // styled as icon-btn (same as Move/Edit/Duplicate/Remove). Active state
+        // uses .active class on icon-btn which matches the .grouped treatment
+        // (accent background, white arrow). Tooltips use the consistent
+        // "Distance to <wall>" pattern.
         html += `
             <div class="compact-frame-item" data-frame-letter="${f.letter}">
                 <div style="flex:1; min-width:0; display:flex; flex-direction:column;">
                     <span style="font-weight:bold; font-size:0.75rem; color:var(--text-strong);">${f.letter} <span style="font-weight:normal; font-size:0.65rem; color:var(--text-muted);">(${f.id})</span></span>
                     <div style="display:flex; gap:2px; margin-top:2px; flex-wrap:wrap;">${targetButtons}</div>
-                    <div style="display:flex; gap:2px; margin-top:3px;">${distButtons}</div>
                 </div>
                 <div class="frame-item-icons">
+                    <div style="width:26px; display:flex; justify-content:center;">
+                        <button class="icon-btn ${dt.ceiling?'active':''}" title="Distance to Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">↑</button>
+                    </div>
+                    <div style="width:26px; display:flex; justify-content:center;">
+                        <button class="icon-btn ${dt.floor?'active':''}" title="Distance to Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">↓</button>
+                    </div>
+                    <div style="width:26px; display:flex; justify-content:center;">
+                        <button class="icon-btn ${dt.left?'active':''}" title="Distance to Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">←</button>
+                    </div>
+                    <div style="width:26px; display:flex; justify-content:center;">
+                        <button class="icon-btn ${dt.right?'active':''}" title="Distance to Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">→</button>
+                    </div>
                     <div style="width:38px; display:flex; justify-content:center;">
                         <button class="toggle-status ${f.active?'active':''}" style="font-size:0.5rem; padding:2px 5px;" onclick="toggleElevActive(${idx}, event)">${f.active?'ON':'OFF'}</button>
                     </div>
