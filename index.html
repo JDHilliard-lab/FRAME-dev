@@ -417,9 +417,10 @@
                         <button class="action-btn btn-secondary" style="margin:0; padding: 4px 8px; width: auto; font-size: 0.65rem;" onclick="fitElevZoom()">Fit</button>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr auto auto auto; gap: 6px; align-items: end; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr auto auto auto auto; gap: 6px; align-items: end; margin-bottom: 10px;">
                         <div><label style="font-size: 0.6rem;">Wall Width</label><input type="number" id="wallW" style="padding: 6px; font-size: 0.8rem;" value="185" oninput="updateElevWall()"></div>
                         <div><label style="font-size: 0.6rem;">Wall Height</label><input type="number" id="wallH" style="padding: 6px; font-size: 0.8rem;" value="108" oninput="updateElevWall()"></div>
+                        <div><label style="font-size: 0.6rem;" title="Center of art height — typical gallery/museum standard is 57&quot;">Hang Height</label><input type="number" id="hangHeight" style="padding: 6px; font-size: 0.8rem; width: 55px;" value="57" oninput="drawElevAll()"></div>
                         <div><label style="font-size: 0.6rem;">Font Size</label><input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()" style="padding: 6px; font-size: 0.8rem; width: 45px; text-align: center;"></div>
                         <div class="unit-toggle" style="height:26px;">
                             <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
@@ -430,10 +431,11 @@
                         </button>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 4px; margin-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr) auto; gap: 4px; margin-bottom: 10px;">
                         <button class="toggle-status" id="labelToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('label-layer', this)">Labels</button>
                         <button class="toggle-status" id="odToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('od-layer', this)">OD</button>
                         <button class="toggle-status" id="dimToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('dim-layer', this)">Spacing</button>
+                        <button class="toggle-status" id="floorCeilingToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('floor-ceiling-layer', this)" title="Show distance from each frame to floor and ceiling">Floor/Ceil</button>
                         
                         <button class="toggle-status" id="personToggle" style="grid-row: span 2; padding: 0; width: 34px; display: flex; align-items: center; justify-content: center;" onclick="toggleElevLayer('person-wrap', this)">
                             <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px; height:18px;"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1.5 19v-5.5H9V10c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v5.5h-1.5V21h-3z"/></svg>
@@ -442,6 +444,7 @@
                         <button class="toggle-status" id="guideToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('guide-layer', this)">Guides</button>
                         <button class="toggle-status" id="gridToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('grid-layer', this)">Grid</button>
                         <button class="toggle-status" id="frameCenterToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('frame-center-layer', this)">Centers</button>
+                        <button class="action-btn btn-secondary" id="alignBtn" style="padding: 4px; font-size: 0.65rem;" onclick="openAlignmentDialog()" title="Align / space frames">Align</button>
                     </div>
                     
                 </div>
@@ -474,6 +477,7 @@
                         <div id="frame-center-layer" class="frame-center-layer"></div>
                         <div id="arch-dim-layer" class="arch-dim-layer"></div>
                         <div id="dim-layer" class="dim-layer"></div>
+                        <div id="floor-ceiling-layer" class="dim-layer" style="display:none;"></div>
                         <div id="guide-layer" class="guide-layer"></div>
                         <div id="od-layer" class="od-layer"></div>
                         <div id="label-layer" class="label-layer"></div>
@@ -512,6 +516,44 @@
         <div id="infoModalButtons" style="display:flex; flex-direction:column; gap:10px;">
             <!-- Buttons injected dynamically by showInfoModal / showConfirmModal -->
         </div>
+    </div>
+</div>
+
+<!-- Alignment & Spacing modal. Operates on all currently-visible (active) frames
+     on the elevation. Three actions: distribute (with axis + gap), center group
+     horizontally on the wall, and align each frame's vertical center to the
+     hang-height line. -->
+<div id="alignModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:360px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Align &amp; Space Frames</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Operates on all visible frames in this elevation. Tip: toggle off frames you don't want included.</p>
+
+        <!-- DISTRIBUTE SECTION -->
+        <div style="border:1px solid var(--border-color); border-radius:6px; padding:12px; margin-bottom:12px;">
+            <div style="font-size:0.7rem; font-weight:bold; color:var(--text-strong); margin-bottom:8px; text-transform:uppercase;">Distribute Evenly</div>
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+                <span style="font-size:0.65rem; color:var(--text-muted); width:50px;">Axis:</span>
+                <div class="unit-toggle" style="height:24px; flex:1;">
+                    <button id="alignAxisH" class="active" type="button" onclick="setAlignAxis('h')">HORIZONTAL</button>
+                    <button id="alignAxisV" type="button" onclick="setAlignAxis('v')">VERTICAL</button>
+                </div>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; margin-bottom:10px;">
+                <span style="font-size:0.65rem; color:var(--text-muted); width:50px;">Gap:</span>
+                <input type="number" id="alignGapValue" value="4" step="0.5" style="flex:1; padding:4px 6px; font-size:0.75rem;">
+                <span id="alignGapUnit" style="font-size:0.65rem; color:var(--text-muted);">in</span>
+            </div>
+            <button class="action-btn" style="width:100%; height:30px; font-size:0.7rem;" onclick="applyAutoSpace()">Apply Spacing</button>
+        </div>
+
+        <!-- CENTER & ALIGN SECTION -->
+        <div style="border:1px solid var(--border-color); border-radius:6px; padding:12px; margin-bottom:12px;">
+            <div style="font-size:0.7rem; font-weight:bold; color:var(--text-strong); margin-bottom:8px; text-transform:uppercase;">Center &amp; Align</div>
+            <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem; margin-bottom:6px;" onclick="centerGroupOnWall()" title="Shift the cluster of frames horizontally so its center matches the wall's center. Relative positions preserved.">Center Group on Wall</button>
+            <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="alignToHangHeight()" title="Align each frame's vertical center to the hang height line.">Align to Hang Height</button>
+        </div>
+
+        <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="document.getElementById('alignModal').style.display='none'">Close</button>
     </div>
 </div>
 
