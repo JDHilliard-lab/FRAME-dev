@@ -3421,17 +3421,26 @@ function initElevControls() {
                     <div style="display:flex; gap:2px; margin-top:2px; flex-wrap:wrap;">${targetButtons}</div>
                 </div>
                 <div class="frame-item-icons">
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn ${dt.ceiling?'active':''}" title="Distance to Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">↑</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn ${dt.floor?'active':''}" title="Distance to Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">↓</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn ${dt.left?'active':''}" title="Distance to Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">←</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn ${dt.right?'active':''}" title="Distance to Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">→</button>
+                    <!-- EDGE GAP column: 4 distance-to-wall toggles grouped under
+                         a visible label. Per-frame state lives in f.distToggles.
+                         Label uses the muted-text style so it's discoverable but
+                         not visually competing with the actual button content. -->
+                    <div class="edge-gap-group">
+                        <div class="edge-gap-label">EDGE GAP</div>
+                        <div class="edge-gap-buttons">
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.ceiling?'active':''}" title="Distance to Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">↑</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.floor?'active':''}" title="Distance to Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">↓</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.left?'active':''}" title="Distance to Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">←</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.right?'active':''}" title="Distance to Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">→</button>
+                            </div>
+                        </div>
                     </div>
                     <div style="width:38px; display:flex; justify-content:center;">
                         <button class="toggle-status ${f.active?'active':''}" style="font-size:0.5rem; padding:2px 5px;" onclick="toggleElevActive(${idx}, event)">${f.active?'ON':'OFF'}</button>
@@ -4080,6 +4089,11 @@ function makeElevDraggable(el, idx) {
     el.onmousedown = function(e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
         e.preventDefault(); let sx = e.clientX, sy = e.clientY;
+        // Suspend highlight transitions during drag — drawElevAll fires many
+        // times per second, recreating frame elements each time, and CSS
+        // transitions on the rebuilt elements caused a visible flicker.
+        // Body class is removed on mouseup so highlights animate normally again.
+        document.body.classList.add('dragging-frame');
         document.onmousemove = function(e) {
             let dx = (sx - e.clientX)/elevScale, dy = (sy - e.clientY)/elevScale; sx = e.clientX; sy = e.clientY;
             const snap = elevUnit === 'in' ? 1 : 2.54;
@@ -4093,7 +4107,10 @@ function makeElevDraggable(el, idx) {
             }
             drawElevAll();
         };
-        document.onmouseup = () => document.onmousemove = null;
+        document.onmouseup = () => {
+            document.onmousemove = null;
+            document.body.classList.remove('dragging-frame');
+        };
     };
 }
 
