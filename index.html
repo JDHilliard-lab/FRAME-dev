@@ -56,6 +56,10 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v10M7 7l5 5 5-5M4 14v5a1 1 0 001 1h14a1 1 0 001-1v-5M3 14h18"/></svg>
                                 <span style="font-size:0.65rem; margin-left:3px;">Batch PNGs</span>
                             </button>
+                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Download the InDesign script (AutoFrameSpecs.jsx) for generating spec sheets" onclick="downloadInDesignScript()">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 13l2 2 2-2M12 11v6"/></svg>
+                                <span style="font-size:0.65rem; margin-left:3px;">InDesign Script</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -516,6 +520,59 @@
         <div id="infoModalButtons" style="display:flex; flex-direction:column; gap:10px;">
             <!-- Buttons injected dynamically by showInfoModal / showConfirmModal -->
         </div>
+    </div>
+</div>
+
+<!-- InDesign Script install instructions modal. Triggered by the "InDesign Script"
+     download button. Wider than the info modal to fit numbered steps + paths. -->
+<div id="installModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:520px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.1rem; color:var(--text-strong);">Install the InDesign Script</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:16px;">AutoFrameSpecs.jsx has been downloaded. Follow these steps to install it in InDesign.</p>
+
+        <!-- STEP 1: locate scripts folder -->
+        <div style="margin-bottom:14px;">
+            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">1. Open the Scripts panel in InDesign</div>
+            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
+                Window → Utilities → Scripts (or press <code style="background:var(--bg-subpanel); padding:1px 5px; border-radius:3px; font-size:0.65rem;">Ctrl+Alt+F11</code> on Windows / <code style="background:var(--bg-subpanel); padding:1px 5px; border-radius:3px; font-size:0.65rem;">Cmd+Opt+F11</code> on Mac).
+            </div>
+        </div>
+
+        <!-- STEP 2: open User scripts folder -->
+        <div style="margin-bottom:14px;">
+            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">2. Open the User Scripts folder</div>
+            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
+                In the Scripts panel, right-click on <strong>"User"</strong> → <strong>Reveal in Finder</strong> (Mac) or <strong>Reveal in Explorer</strong> (Windows). Inside that folder, open the <strong>Scripts Panel</strong> subfolder.
+            </div>
+        </div>
+
+        <!-- STEP 3: drop the file in -->
+        <div style="margin-bottom:14px;">
+            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">3. Drop AutoFrameSpecs.jsx into that folder</div>
+            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
+                Move the downloaded file into the <strong>Scripts Panel</strong> folder. The Scripts panel in InDesign should update immediately and show <strong>AutoFrameSpecs.jsx</strong> under "User".
+            </div>
+        </div>
+
+        <!-- STEP 4: run it -->
+        <div style="margin-bottom:14px;">
+            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">4. Run the script</div>
+            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
+                Open a new InDesign document. Double-click <strong>AutoFrameSpecs.jsx</strong> in the Scripts panel. A file picker will appear — choose the CSV you exported from this tool. The script generates spec sheets automatically.
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <div style="margin-bottom:18px; padding:10px 12px; background:var(--bg-subpanel); border-radius:6px; border-left:3px solid var(--accent);">
+            <div style="font-size:0.7rem; color:var(--text-strong); font-weight:bold; margin-bottom:4px;">Tips</div>
+            <ul style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin:0; padding-left:18px;">
+                <li>The CSV must be one you exported from <em>this tool</em> — other CSVs will not parse correctly.</li>
+                <li>If you also exported PNG frames, the script will look for them in the same folder as the CSV.</li>
+                <li>Update the script anytime by re-downloading: changes to the tool's spec format may require the latest script.</li>
+            </ul>
+        </div>
+
+        <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('installModal').style.display='none'">Got it</button>
     </div>
 </div>
 
