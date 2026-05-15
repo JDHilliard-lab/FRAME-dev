@@ -390,7 +390,11 @@ function importSelectedFramesBulk() {
             m1T: (parseFloat(f.m1T) || 0) * factor, m1B: (parseFloat(f.m1B) || 0) * factor, m1L: (parseFloat(f.m1L) || 0) * factor, m1R: (parseFloat(f.m1R) || 0) * factor,
             m1A: f.m1A !== false, m1Locked: f.m1Locked || false, m1ColorHex: f.m1ColorHex || '#ffffff',
             m2: (parseFloat(f.m2) || 0) * factor, m2A: f.m2A || false, m2ColorHex: f.m2ColorHex || '#ffffff',
-            x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true
+            x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true,
+            // Per-frame distance dimension toggles. Each frame independently controls
+            // which architectural distance dims it shows (to ceiling/floor/left/right
+            // walls). Default all off — designer enables per-frame in the ABC panel.
+            distToggles: { ceiling: false, floor: false, left: false, right: false }
         };
         elevFrames.push(newFrame); startX += (newFrame.w + 5); cb.checked = false; 
     });
@@ -442,7 +446,8 @@ function pushFrameToElevation() {
         m1T: (parseFloat(f.m1T) || 0) * factor, m1B: (parseFloat(f.m1B) || 0) * factor, m1L: (parseFloat(f.m1L) || 0) * factor, m1R: (parseFloat(f.m1R) || 0) * factor,
         m1A: f.m1A !== false, m1Locked: f.m1Locked || false, m1ColorHex: f.m1ColorHex || '#ffffff',
         m2: (parseFloat(f.m2) || 0) * factor, m2A: f.m2A || false, m2ColorHex: f.m2ColorHex || '#ffffff',
-        x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true
+        x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true,
+        distToggles: { ceiling: false, floor: false, left: false, right: false }
     });
     
     recalculateDashboardQuantities(); alert(`Pushed ${f.id} to ${targetElev.name}!`);
@@ -3394,11 +3399,27 @@ function initElevControls() {
         const activeNeighbors = elevFrames.filter(n => n.letter !== f.letter && n.active);
         const targetButtons = activeNeighbors.map(n => `<button class="toggle-status ${f.dimTo.includes(n.letter)?'active':''}" style="padding:1px 3px; font-size:8px; border-radius:2px;" onclick="toggleElevDimTarget(${idx}, '${n.letter}', event)">${n.letter}</button>`).join('');
 
+        // 4 distance-dim icon buttons: ↑ ceiling, ↓ floor, ← left wall, → right wall.
+        // Tiny so they fit alongside the existing letter targets. Tooltips clarify.
+        // distToggles is per-frame state — default false, persists with the frame.
+        const dt = f.distToggles || { ceiling: false, floor: false, left: false, right: false };
+        const distButtons = `
+            <button class="toggle-status ${dt.ceiling?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to CEILING" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">↑</button>
+            <button class="toggle-status ${dt.floor?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to FLOOR" onclick="toggleFrameDistDim(${idx}, 'floor', event)">↓</button>
+            <button class="toggle-status ${dt.left?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to LEFT wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">←</button>
+            <button class="toggle-status ${dt.right?'active':''}" style="padding:1px 4px; font-size:9px; border-radius:2px; line-height:1;" title="Show distance to RIGHT wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">→</button>
+        `;
+
+        // data-frame-letter attaches the letter for hover pairing — pure-CSS hover
+        // wouldn't work since the elements aren't siblings in the DOM, so we use
+        // JS event handlers (added after render) that look up the matching panel
+        // / frame by this attribute.
         html += `
-            <div class="compact-frame-item">
+            <div class="compact-frame-item" data-frame-letter="${f.letter}">
                 <div style="flex:1; min-width:0; display:flex; flex-direction:column;">
                     <span style="font-weight:bold; font-size:0.75rem; color:var(--text-strong);">${f.letter} <span style="font-weight:normal; font-size:0.65rem; color:var(--text-muted);">(${f.id})</span></span>
                     <div style="display:flex; gap:2px; margin-top:2px; flex-wrap:wrap;">${targetButtons}</div>
+                    <div style="display:flex; gap:2px; margin-top:3px;">${distButtons}</div>
                 </div>
                 <div class="frame-item-icons">
                     <div style="width:38px; display:flex; justify-content:center;">
@@ -3420,6 +3441,74 @@ function initElevControls() {
             </div>`;
     });
     container.innerHTML = html;
+    // Hover-pair wiring is done by drawElevAll after frame DOM is rendered,
+    // since panels and frames need their events attached at the same time
+    // and frame elements only exist after drawElevAll runs.
+}
+
+// Per-frame distance dimension toggle. Stores under f.distToggles[which].
+// Re-renders both the panel (to flip active state) and the wall (to draw or
+// hide the dim line).
+function toggleFrameDistDim(idx, which, e) {
+    e.stopPropagation();
+    const f = elevFrames[idx];
+    if (!f.distToggles) f.distToggles = { ceiling: false, floor: false, left: false, right: false };
+    f.distToggles[which] = !f.distToggles[which];
+    initElevControls();
+    drawElevAll();
+}
+
+// Hover pairing: hovering a frame on the wall highlights its ABC panel and
+// vice versa. Implemented as JS event handlers attached after each render
+// because the .compact-frame-item and the .frame-element are not siblings,
+// so pure CSS :hover sibling selectors can't reach across.
+//
+// When isGroupAll is true (all frames grouped), all panels and frames stay
+// highlighted permanently.
+function wireElevHoverPairing() {
+    const allActive = elevFrames.length > 0 && elevFrames.every(f => f.isGrouped);
+
+    document.querySelectorAll('#frame-controls .compact-frame-item').forEach(panel => {
+        const letter = panel.dataset.frameLetter;
+        if (!letter) return;
+        // Permanent highlight when group-all
+        if (allActive) panel.classList.add('selection-highlight');
+        else panel.classList.remove('selection-highlight');
+
+        // Hover events
+        panel.addEventListener('mouseenter', () => {
+            panel.classList.add('selection-highlight');
+            const frameEl = document.querySelector(`#frame-layer [data-frame-letter="${letter}"]`);
+            if (frameEl) frameEl.classList.add('selection-highlight');
+        });
+        panel.addEventListener('mouseleave', () => {
+            if (!allActive) {
+                panel.classList.remove('selection-highlight');
+                const frameEl = document.querySelector(`#frame-layer [data-frame-letter="${letter}"]`);
+                if (frameEl) frameEl.classList.remove('selection-highlight');
+            }
+        });
+    });
+
+    document.querySelectorAll('#frame-layer [data-frame-letter]').forEach(frameEl => {
+        const letter = frameEl.dataset.frameLetter;
+        if (!letter) return;
+        if (allActive) frameEl.classList.add('selection-highlight');
+        else frameEl.classList.remove('selection-highlight');
+
+        frameEl.addEventListener('mouseenter', () => {
+            frameEl.classList.add('selection-highlight');
+            const panel = document.querySelector(`#frame-controls [data-frame-letter="${letter}"]`);
+            if (panel) panel.classList.add('selection-highlight');
+        });
+        frameEl.addEventListener('mouseleave', () => {
+            if (!allActive) {
+                frameEl.classList.remove('selection-highlight');
+                const panel = document.querySelector(`#frame-controls [data-frame-letter="${letter}"]`);
+                if (panel) panel.classList.remove('selection-highlight');
+            }
+        });
+    });
 }
 
 function toggleElevDimTarget(idx, targetLetter, e) {
@@ -3755,6 +3844,7 @@ function drawElevAll() {
         if(!f.active) return;
         
         const el = document.createElement('div'); el.className = 'draggable frame-vis';
+        el.dataset.frameLetter = f.letter;
         el.style.cssText = `width:${f.w*elevScale}px; height:${f.h*elevScale}px; left:${f.x*elevScale}px; bottom:${f.y*elevScale}px;`;
         
         // For floaters, rails draw at structural fW like normal frames. The visible-
@@ -3967,6 +4057,12 @@ function drawElevAll() {
 
     makeElevDraggable(pWrap, 'person');
     drawElevTargetedSpacing(); drawFloorCeilingDims(); drawElevGuides(wallW, wallH);
+    // Re-wire hover pairing AFTER frames are rendered. The wiring is also done
+    // in initElevControls (to handle panel-side events), but frame elements get
+    // re-created by drawElevAll, so we re-attach here. The wireElevHoverPairing
+    // function is idempotent — re-running it doesn't double-bind because it
+    // uses fresh DOM selection on each call.
+    wireElevHoverPairing();
 }
 
 function makeElevDraggable(el, idx) {
@@ -4047,32 +4143,67 @@ function drawElevTargetedSpacing() {
     });
 }
 
-// Draw floor + ceiling distance dimensions for every active frame.
-// One vertical line per measurement, anchored to a column just inside the
-// frame's horizontal extent so the line doesn't crowd adjacent frames.
-// Toggle controls visibility via display:none on the layer.
-function drawFloorCeilingDims() {
+// Draw per-frame architectural distance dimensions. Each frame stores its own
+// `distToggles` object (ceiling/floor/left/right booleans) — only the ones
+// the user has toggled ON in that frame's ABC panel get drawn. This replaces
+// the earlier global floor/ceiling toggle (removed) so designers can show
+// distance dims independently for each frame.
+//
+// Anchoring strategy: vertical dims (ceiling, floor) anchor at an x-column
+// just inside the frame's horizontal extent. Horizontal dims (left, right
+// wall) anchor at a y-row just inside the frame's vertical extent. This
+// keeps the dim line "associated with" the frame without overlapping
+// adjacent frames or the frame face.
+function drawPerFrameDistanceDims() {
     const layer = document.getElementById('floor-ceiling-layer');
     if (!layer) return;
     layer.innerHTML = '';
+    const wallW = parseFloat(document.getElementById('wallW').value) || 1;
     const wallH = parseFloat(document.getElementById('wallH').value) || 1;
 
     elevFrames.forEach(f => {
         if (!f.active) return;
-        // Anchor the dim line just inside the frame's left edge — keeps it
-        // visually associated with the frame without overlapping the frame face.
-        // Could parameterize this later for a UI offset preference.
-        const anchorX = f.x + Math.min(8, f.w * 0.15);
-        const floorDist = f.y;
-        const ceilingDist = wallH - (f.y + f.h);
-        if (floorDist > 0) {
-            createElevArchSpacing(anchorX, 0, anchorX, f.y, 'v', layer, elevFmt(floorDist));
+        const dt = f.distToggles || { ceiling: false, floor: false, left: false, right: false };
+
+        // Vertical anchor: a column slightly inside frame's left edge (so dim
+        // lines associated with this frame don't crowd adjacent frames).
+        const verticalAnchorX = f.x + Math.min(8, f.w * 0.15);
+        // Horizontal anchor: a row slightly inside frame's bottom edge.
+        const horizontalAnchorY = f.y + Math.min(8, f.h * 0.15);
+
+        // CEILING distance: from top of frame up to wallH
+        if (dt.ceiling) {
+            const ceilingDist = wallH - (f.y + f.h);
+            if (ceilingDist > 0) {
+                createElevArchSpacing(verticalAnchorX, f.y + f.h, verticalAnchorX, wallH, 'v', layer, elevFmt(ceilingDist));
+            }
         }
-        if (ceilingDist > 0) {
-            createElevArchSpacing(anchorX, f.y + f.h, anchorX, wallH, 'v', layer, elevFmt(ceilingDist));
+        // FLOOR distance: from bottom of frame down to 0
+        if (dt.floor) {
+            const floorDist = f.y;
+            if (floorDist > 0) {
+                createElevArchSpacing(verticalAnchorX, 0, verticalAnchorX, f.y, 'v', layer, elevFmt(floorDist));
+            }
+        }
+        // LEFT WALL distance: from left of frame back to 0
+        if (dt.left) {
+            const leftDist = f.x;
+            if (leftDist > 0) {
+                createElevArchSpacing(0, horizontalAnchorY, f.x, horizontalAnchorY, 'h', layer, elevFmt(leftDist));
+            }
+        }
+        // RIGHT WALL distance: from right of frame to wallW
+        if (dt.right) {
+            const rightDist = wallW - (f.x + f.w);
+            if (rightDist > 0) {
+                createElevArchSpacing(f.x + f.w, horizontalAnchorY, wallW, horizontalAnchorY, 'h', layer, elevFmt(rightDist));
+            }
         }
     });
 }
+
+// Legacy alias — older callers may still reference the previous name.
+function drawFloorCeilingDims() { drawPerFrameDistanceDims(); }
 
 function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) {
     const dim = document.createElement('div');
