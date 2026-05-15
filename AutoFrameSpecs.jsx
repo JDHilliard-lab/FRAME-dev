@@ -118,13 +118,27 @@ function main() {
     }
 
     function parseCSVLine(lineStr) {
+        // CSV-RFC-style parser. Two important behaviors:
+        //   1. A bare " toggles whether we're inside a quoted field.
+        //   2. Inside a quoted field, "" is an ESCAPED literal " — must
+        //      contribute a single " to the cell value, not a no-op toggle.
+        // The original implementation only handled #1, which broke any cell
+        // containing escaped quotes (e.g. JSON values like the Spec Lines
+        // column). Result was that eval() saw ""label"" instead of "label"
+        // and threw, falling back silently to legacy mode.
         var result = [];
         var current = "";
         var inQuotes = false;
         for (var j = 0; j < lineStr.length; j++) {
             var c = lineStr[j];
             if (c === '"') {
-                inQuotes = !inQuotes;
+                if (inQuotes && lineStr[j + 1] === '"') {
+                    // Escaped quote inside a quoted field: contribute a literal "
+                    current += '"';
+                    j++; // skip the second " of the pair
+                } else {
+                    inQuotes = !inQuotes;
+                }
             } else if (c === ',' && !inQuotes) {
                 result.push(current.replace(/^\s+|\s+$/g, ''));
                 current = "";
@@ -303,9 +317,21 @@ function main() {
                     var v = (ln.value !== undefined && ln.value !== null) ? String(ln.value) : "";
                     content += ln.label + rightTab + v + "\r";
                 }
-                // Always append Art Dimensions + Overall Dimensions at the end.
+                // Append product-specific dimension lines at the end.
+                // Per studio convention:
+                //   - Framed Canvas (Floater):   "Image Size" + "Overall Dimensions"
+                //                                ("Image Size" = Art Size col = visible canvas)
+                //   - Frameless Canvas (Wrapped): "Overall Dimensions" only (image=overall)
+                //   - All other products:        "Art Dimensions" + "Overall Dimensions"
                 // Unit conversion via formatDim() — uses the user's IN/CM choice.
-                content += "Art Dimensions" + rightTab + formatDim(aW, "W") + " \xD7 " + formatDim(aH, "H") + "\r";
+                var rowProduct = (idxProd > -1) ? rowData[idxProd] : "";
+                var isFloater = (rowProduct === "Framed Canvas (Floater)");
+                var isWrapped = (rowProduct === "Frameless Canvas (Wrapped)");
+                if (isFloater) {
+                    content += "Image Size" + rightTab + formatDim(aW, "W") + " \xD7 " + formatDim(aH, "H") + "\r";
+                } else if (!isWrapped) {
+                    content += "Art Dimensions" + rightTab + formatDim(aW, "W") + " \xD7 " + formatDim(aH, "H") + "\r";
+                }
                 content += "Overall Dimensions" + rightTab + formatDim(oW, "W") + " \xD7 " + formatDim(oH, "H");
             } else {
                 // Legacy 5-line fallback for older CSVs.
