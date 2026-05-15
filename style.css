@@ -337,28 +337,17 @@ body.dragging-frame .compact-frame-item { transition: none; }
 .dim-btn.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
 .frame-item-icons { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
 
-/* EDGE GAP group: 4 directional toggle arrows with a label floating above.
- * The label is absolutely positioned so the group's height matches a single
- * button row (26px) — that way it lines up vertically with the other
- * icon-row buttons. position:relative on the group anchors the label. */
-.edge-gap-group { position: relative; display: flex; align-items: center; margin-right: 8px; }
-.edge-gap-label {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    right: 0;
-    text-align: center;
-    font-size: 0.55rem;
-    font-weight: bold;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-bottom: 1px;
-    line-height: 1;
-    white-space: nowrap;
-    pointer-events: none;
+/* EDGE GAP group: 4 directional toggle arrows (↑↓←→). Matches the column
+ * header width (112px) + margin (8px) so the buttons line up under the
+ * header label. The label itself lives once in the column header at the
+ * top of the frame list, not repeated per row. */
+.edge-gap-group {
+    display: flex;
+    align-items: center;
+    width: 112px;
+    margin-right: 8px;
+    gap: 2px;
 }
-.edge-gap-buttons { display: flex; gap: 2px; }
 
 .elev-col-header { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 10px 4px; border-bottom: 1px solid var(--border-color); margin-bottom: 2px; gap: 6px; }
 .elev-col-left { flex: 1; min-width: 0; }
