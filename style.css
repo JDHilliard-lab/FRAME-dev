@@ -247,6 +247,20 @@ select.no-arrow::-ms-expand { display: none; }
     outline-offset: 4px;
     z-index: 50;
 }
+
+/* During an active drag, drawElevAll re-creates frame elements many times per
+ * second. The mouseenter event doesn't refire when DOM mutates under the cursor,
+ * so the JS-set highlight class is briefly absent each redraw — appearing as a
+ * flicker. CSS :hover IS re-evaluated each redraw though, so during drag we
+ * fall back to that for instant highlight without waiting for the JS event.
+ * Also: kill transitions during drag so any class change is instant, not
+ * animated (which would compound the flicker). */
+body.dragging-frame .frame-vis { transition: none; }
+body.dragging-frame .frame-vis:hover {
+    outline: 2px solid #2196f3;
+    outline-offset: 4px;
+    z-index: 50;
+}
 .frame-vis-solid { border-style: solid; box-sizing: border-box; }
 .frame-vis-image { box-sizing: border-box; }
 
@@ -309,6 +323,10 @@ select.no-arrow::-ms-expand { display: none; }
     box-shadow: 0 0 0 1px #2196f3, 0 2px 6px rgba(33, 150, 243, 0.2);
     background: rgba(33, 150, 243, 0.05);
 }
+
+/* Suppress panel transitions during drag (matches frame-side; prevents
+ * highlight flicker when frames recreate at high frequency). */
+body.dragging-frame .compact-frame-item { transition: none; }
 .icon-btn { width: 26px; height: 26px; border-radius: 4px; border: 1px solid transparent; cursor: pointer; color: var(--text-strong); display: flex; align-items: center; justify-content: center; background: transparent; transition: 0.2s; font-size: 0.75rem; flex-shrink: 0; }
 .icon-btn:hover { background: var(--border-color); }
 .icon-btn.grouped { background: var(--accent) !important; color: white; }
@@ -318,6 +336,29 @@ select.no-arrow::-ms-expand { display: none; }
 .icon-btn.active { background: var(--accent) !important; color: white; }
 .dim-btn.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
 .frame-item-icons { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+
+/* EDGE GAP group: 4 directional toggle arrows with a label floating above.
+ * The label is absolutely positioned so the group's height matches a single
+ * button row (26px) — that way it lines up vertically with the other
+ * icon-row buttons. position:relative on the group anchors the label. */
+.edge-gap-group { position: relative; display: flex; align-items: center; margin-right: 8px; }
+.edge-gap-label {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 0.55rem;
+    font-weight: bold;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 1px;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+}
+.edge-gap-buttons { display: flex; gap: 2px; }
 
 .elev-col-header { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 10px 4px; border-bottom: 1px solid var(--border-color); margin-bottom: 2px; gap: 6px; }
 .elev-col-left { flex: 1; min-width: 0; }
