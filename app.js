@@ -3563,6 +3563,42 @@ async function batchDownloadAllFrames() {
     alert(`Batch download complete! ${dashProjectData.length} frame(s) saved.`);
 }
 
+// Download the InDesign script (AutoFrameSpecs.jsx). Fetched from the deployed
+// site root, which on GitHub Pages serves the same file that lives at the repo
+// root. Wrapping in a Blob with application/javascript MIME type ensures the
+// browser triggers a download instead of trying to display the JSX as text.
+// After download succeeds, the install instructions modal pops up. If the
+// fetch fails (offline, file missing from deploy), a helpful fallback message
+// points the user to the GitHub raw URL.
+async function downloadInDesignScript() {
+    try {
+        const res = await fetch('AutoFrameSpecs.jsx');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        // Validate it's actually the script and not an HTML 404 page
+        if (text.length < 100 || text.toLowerCase().includes('<!doctype html')) {
+            throw new Error('File appears to be empty or wrong content type');
+        }
+        const blob = new Blob([text], { type: 'application/javascript' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'AutoFrameSpecs.jsx';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        // Show install instructions
+        document.getElementById('installModal').style.display = 'flex';
+    } catch (err) {
+        console.error('Download failed:', err);
+        showInfoModal(
+            'Download Failed',
+            `Could not download AutoFrameSpecs.jsx. You can grab the latest version directly from GitHub: https://github.com/JDHilliard-lab/FRAME/blob/main/AutoFrameSpecs.jsx`
+        );
+    }
+}
+
 function elevFmt(val) { return elevUnit === 'in' ? Math.round(val).toString() : parseFloat(val).toFixed(1); }
 
 // Centralized hang-height getter — reads the user-editable input, falls back
