@@ -3799,33 +3799,49 @@ function applyAutoSpace() {
 // bounding box is centered on the wall. Vertical positions are preserved.
 // "Group center" = midpoint between leftmost edge and rightmost edge of
 // any active frame.
+//
+// Behavior splits on grouping: if any active frames are grouped (Group All
+// or individual group toggles set), only the GROUPED frames get moved as a
+// unit. If nothing is grouped, all active frames move as one group.
 function centerGroupOnWall() {
     const activeFrames = elevFrames.filter(f => f.active);
     if (activeFrames.length === 0) {
         showInfoModal('No Visible Frames', 'No active frames to center. Toggle on the frames you want to align.');
         return;
     }
+    // Use grouped subset if any are grouped, otherwise all active
+    const anyGrouped = activeFrames.some(f => f.isGrouped);
+    const movingFrames = anyGrouped ? activeFrames.filter(f => f.isGrouped) : activeFrames;
+    if (movingFrames.length === 0) return;
+
     const wallW = parseFloat(document.getElementById('wallW').value) || 1;
     let minX = Infinity, maxX = -Infinity;
-    activeFrames.forEach(f => {
+    movingFrames.forEach(f => {
         if (f.x < minX) minX = f.x;
         if (f.x + f.w > maxX) maxX = f.x + f.w;
     });
     const groupCenterX = (minX + maxX) / 2;
     const wallCenterX = wallW / 2;
     const shift = wallCenterX - groupCenterX;
-    activeFrames.forEach(f => { f.x += shift; });
+    movingFrames.forEach(f => { f.x += shift; });
 
     drawElevAll();
     initElevControls();
 }
 
-// Align each active frame's VERTICAL CENTER to the hang-height line.
-// Independent of horizontal position. After this, all frames will have
-// their center at exactly hangHeight, regardless of frame size — meaning
-// taller frames will extend further above/below shorter ones, but all
-// share the same center line. This matches the gallery convention of
-// "57-inch center of art" hanging.
+// Align the active frames to the hang-height line.
+//
+// Two modes based on grouping:
+//   - If ANY active frames are grouped: treat the grouped frames as a UNIT.
+//     Compute their bounding-box vertical center, shift all grouped frames
+//     by the same delta so the group's center lands on hang height.
+//     Relative vertical positions WITHIN the group are preserved — useful
+//     when you want to center a multi-frame layout as a single composition
+//     rather than collapsing every frame to the same line.
+//   - If NO frames are grouped: per-frame alignment — each frame's own
+//     vertical center sits on the hang line, regardless of size. Convenient
+//     for hanging a row of mismatched-size frames at the same gallery-
+//     standard center-of-art height.
 function alignToHangHeight() {
     const activeFrames = elevFrames.filter(f => f.active);
     if (activeFrames.length === 0) {
@@ -3833,11 +3849,26 @@ function alignToHangHeight() {
         return;
     }
     const hangY = getHangHeight();
-    activeFrames.forEach(f => {
-        // f.y is the BOTTOM of the frame. We want the vertical center at hangY.
-        // So bottom = hangY - h/2.
-        f.y = hangY - f.h / 2;
-    });
+    const anyGrouped = activeFrames.some(f => f.isGrouped);
+
+    if (anyGrouped) {
+        // GROUP mode: preserve relative positions, shift the group as a unit
+        const groupedFrames = activeFrames.filter(f => f.isGrouped);
+        if (groupedFrames.length === 0) return;
+        let minY = Infinity, maxY = -Infinity;
+        groupedFrames.forEach(f => {
+            if (f.y < minY) minY = f.y;
+            if (f.y + f.h > maxY) maxY = f.y + f.h;
+        });
+        const groupCenterY = (minY + maxY) / 2;
+        const shift = hangY - groupCenterY;
+        groupedFrames.forEach(f => { f.y += shift; });
+    } else {
+        // PER-FRAME mode: each frame's own center → hang line
+        activeFrames.forEach(f => {
+            f.y = hangY - f.h / 2;
+        });
+    }
 
     drawElevAll();
     initElevControls();
