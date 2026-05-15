@@ -3829,6 +3829,50 @@ function drawElevAll() {
             m2.style.boxShadow = `0 0 0 1.5px ${m2Color}, inset 0 ${2 * elevScale}px ${6 * elevScale}px rgba(0,0,0,0.3), 0 ${2 * elevScale}px ${5 * elevScale}px rgba(0,0,0,0.15)`;
             el.appendChild(m2);
         }
+
+        // FAUX MAT layer in elevation: a white paper band visible between the
+        // innermost mat (or frame inner edge if no mats) and the image. Same
+        // logic as the dashboard preview and canvas export — third renderer
+        // for the same feature. The mat above casts an inset shadow onto the
+        // white paper; the paper itself does NOT shadow the image (print is
+        // flat against paper, no thickness, no shadow).
+        const useFauxMat = !isFloater && !isFrameless && !useFM && (f.useFauxMat === true);
+        if (useFauxMat) {
+            const border = parseFloat(f.sbPaperBorder) || 0;
+            if (border > 0) {
+                const faux = document.createElement('div');
+                faux.className = 'faux-mat-visual';
+                // Position: sits inside whatever opening is above it. Same conditional
+                // pattern as Mat 1/2 — frameInset is 0 when frame is a CSS border
+                // (color mode), or fW*elevScale when frame is composed of rail divs
+                // (library mode). Size deduction is always fW*2 regardless of mode.
+                const frameInset = (f.fType === 'color' || isFrameless) ? 0 : (effFw * elevScale);
+                const frameDeduct = effFw * 2 * elevScale;
+                const m1IT = m1Active ? f.m1T * elevScale : 0;
+                const m1IB = m1Active ? f.m1B * elevScale : 0;
+                const m1IL = m1Active ? f.m1L * elevScale : 0;
+                const m1IR = m1Active ? f.m1R * elevScale : 0;
+                const m2I = m2Active ? m2Val * elevScale : 0;
+                const top = frameInset + m1IT + m2I;
+                const left = frameInset + m1IL + m2I;
+                const width = (f.w * elevScale) - frameDeduct - m1IL - m1IR - m2I * 2;
+                const height = (f.h * elevScale) - frameDeduct - m1IT - m1IB - m2I * 2;
+                // CSS-border approach: faux mat is a div with white CSS border.
+                // The inner area (cleared by the existing art-fill) reveals what's
+                // beneath. The border IS the visible white band.
+                const borderPx = border * elevScale;
+                faux.style.cssText = `position:absolute; top:${top}px; left:${left}px; width:${Math.max(0, width)}px; height:${Math.max(0, height)}px; border:${borderPx}px solid #ffffff; box-sizing:border-box; pointer-events:none;`;
+                // Inset shadow from the mat (or frame) above onto the white paper.
+                // Magnitude similar to mat 2's inset shadow but slightly stronger
+                // when no mats above (frame casts directly).
+                if (m1Active || m2Active) {
+                    faux.style.boxShadow = `inset 0 ${2 * elevScale}px ${6 * elevScale}px rgba(0,0,0,0.3)`;
+                } else {
+                    faux.style.boxShadow = `inset 0 ${4 * elevScale}px ${10 * elevScale}px rgba(0,0,0,0.45)`;
+                }
+                el.appendChild(faux);
+            }
+        }
         
         // Use effective values — when Mat 1 is off, mat dimensions don't push the art inward
         const effM1T = m1Active ? f.m1T : 0; const effM1B = m1Active ? f.m1B : 0;
