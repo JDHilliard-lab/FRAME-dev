@@ -4541,6 +4541,133 @@ function drawElevAll() {
     };
 }
 
+// ─────────────────────────────────────────────────────────────────────
+// SNAP-TO-OTHER-FRAMES while dragging
+// ─────────────────────────────────────────────────────────────────────
+// When a frame is dragged, after the normal whole-inch snapping, we check
+// if any of its key alignment points (left edge, right edge, center) come
+// within a small threshold of another frame's or the wall's alignment
+// points. If so, we snap to exact alignment and draw a guide line so the
+// user sees what they're aligning to.
+//
+// Threshold is defined in PIXELS so it stays consistent at any zoom level;
+// converted to data units (inches/cm) per call by dividing by elevScale.
+const SNAP_THRESHOLD_PX = 6;
+
+// Compute snap targets for a frame given its candidate new position.
+// Returns { snappedX, snappedY, guides } where guides is an array of
+// { kind: 'v'|'h', value: number } — vertical or horizontal lines to draw.
+// The frame being dragged itself is excluded from the snap pool.
+//
+// Geometry: for each (dragged-frame-anchor) × (target-anchor) pair, compute
+// the candidate dragged x/y position that would align them. Dragged anchors:
+// left/right/center. Target anchors: same set for each other frame, plus
+// wall edges/center and the hang line. 9 candidates per neighbor + wall + hang.
+function computeSnapForDrag(draggedIdx, candX, candY) {
+    const f = elevFrames[draggedIdx];
+    if (!f) return { snappedX: candX, snappedY: candY, guides: [] };
+    const wallW = parseFloat(document.getElementById('wallW').value) || 1;
+    const wallH = parseFloat(document.getElementById('wallH').value) || 1;
+    const threshold = SNAP_THRESHOLD_PX / elevScale;
+    const hangVal = (typeof getHangHeight === 'function') ? getHangHeight() : 57;
+
+    // Collect target anchor X values: vertical lines that the dragged frame's
+    // left edge, right edge, or center could snap to.
+    const xTargets = [];  // { value, kind }
+    xTargets.push({ value: 0, kind: 'wall-left' });
+    xTargets.push({ value: wallW, kind: 'wall-right' });
+    xTargets.push({ value: wallW / 2, kind: 'wall-center' });
+    elevFrames.forEach((other, i) => {
+        if (i === draggedIdx || !other.active) return;
+        xTargets.push({ value: other.x, kind: 'frame-left' });
+        xTargets.push({ value: other.x + other.w, kind: 'frame-right' });
+        xTargets.push({ value: other.x + other.w / 2, kind: 'frame-center' });
+    });
+
+    // Same for Y (target horizontal lines)
+    const yTargets = [];
+    yTargets.push({ value: 0, kind: 'wall-bottom' });
+    yTargets.push({ value: wallH, kind: 'wall-top' });
+    yTargets.push({ value: hangVal, kind: 'hang' });
+    elevFrames.forEach((other, i) => {
+        if (i === draggedIdx || !other.active) return;
+        yTargets.push({ value: other.y, kind: 'frame-bottom' });
+        yTargets.push({ value: other.y + other.h, kind: 'frame-top' });
+        yTargets.push({ value: other.y + other.h / 2, kind: 'frame-vcenter' });
+    });
+
+    // For each (dragged-anchor × target) pair, compute the candidate dragged x
+    // position. Then pick the one closest to candX within threshold.
+    // Dragged X anchors: f.x (left), f.x + f.w (right), f.x + f.w/2 (center).
+    // For an anchor to LAND at target.value, the corresponding f.x is:
+    //   left anchor:   f.x = target.value
+    //   right anchor:  f.x = target.value - f.w
+    //   center anchor: f.x = target.value - f.w/2
+    let bestX = null, bestXDist = threshold;
+    xTargets.forEach(t => {
+        [
+            { x: t.value,           anchor: 'left' },
+            { x: t.value - f.w,     anchor: 'right' },
+            { x: t.value - f.w / 2, anchor: 'center' },
+        ].forEach(c => {
+            const d = Math.abs(c.x - candX);
+            if (d < bestXDist) { bestXDist = d; bestX = { x: c.x, guideValue: t.value, kind: t.kind, anchor: c.anchor }; }
+        });
+    });
+
+    let bestY = null, bestYDist = threshold;
+    yTargets.forEach(t => {
+        [
+            { y: t.value,           anchor: 'bottom' },
+            { y: t.value - f.h,     anchor: 'top' },
+            { y: t.value - f.h / 2, anchor: 'center' },
+        ].forEach(c => {
+            const d = Math.abs(c.y - candY);
+            if (d < bestYDist) { bestYDist = d; bestY = { y: c.y, guideValue: t.value, kind: t.kind, anchor: c.anchor }; }
+        });
+    });
+
+    const guides = [];
+    let snappedX = candX, snappedY = candY;
+    if (bestX) {
+        snappedX = bestX.x;
+        guides.push({ axis: 'v', value: bestX.guideValue });
+    }
+    if (bestY) {
+        snappedY = bestY.y;
+        guides.push({ axis: 'h', value: bestY.guideValue });
+    }
+    return { snappedX, snappedY, guides };
+}
+
+// Render snap guide lines in the snap-guide-layer. Cleared on each call.
+// 'v' guides span full wall height at a given x; 'h' guides span full wall
+// width at a given y. Distinct color (red) so they stand out against the
+// dashed gray spacing dims and accent-colored hang line.
+function renderSnapGuides(guides) {
+    const layer = document.getElementById('snap-guide-layer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    guides.forEach(g => {
+        const el = document.createElement('div');
+        el.className = 'snap-guide';
+        if (g.axis === 'v') {
+            el.style.cssText = `position:absolute; left:${g.value * elevScale}px; bottom:0; top:0; width:0; border-left:1px solid #ff3b3b; pointer-events:none; z-index:60;`;
+        } else {
+            el.style.cssText = `position:absolute; left:0; right:0; bottom:${g.value * elevScale}px; height:0; border-bottom:1px solid #ff3b3b; pointer-events:none; z-index:60;`;
+        }
+        layer.appendChild(el);
+    });
+}
+
+function clearSnapGuides() {
+    const layer = document.getElementById('snap-guide-layer');
+    if (layer) layer.innerHTML = '';
+}
+// ─────────────────────────────────────────────────────────────────────
+// END SNAP-TO-OTHER-FRAMES
+// ─────────────────────────────────────────────────────────────────────
+
 function makeElevDraggable(el, idx) {
     el.onmousedown = function(e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
@@ -4548,6 +4675,9 @@ function makeElevDraggable(el, idx) {
         const startX = e.clientX, startY = e.clientY;
         let sx = e.clientX, sy = e.clientY;
         let totalMove = 0;  // Tracks cumulative absolute movement to distinguish click from drag
+        // Capture modifier state at mousedown time. By mouseup the user may
+        // have released the keys; we want the state at the moment of click.
+        const isModifierClick = e.ctrlKey || e.metaKey || e.shiftKey;
 
         // Suspend highlight transitions during drag — drawElevAll fires many
         // times per second, recreating frame elements each time, and CSS
@@ -4563,26 +4693,54 @@ function makeElevDraggable(el, idx) {
                 elevPersonPos.x -= dx; 
             } else { 
                 let frame = elevFrames[idx]; let prevX = frame.x; let prevY = frame.y;
-                frame.x = Math.round((frame.x - dx)/snap)*snap; frame.y = Math.round((frame.y + dy)/snap)*snap; 
+                // Step 1: whole-unit snap (existing behavior)
+                let newX = Math.round((frame.x - dx)/snap)*snap;
+                let newY = Math.round((frame.y + dy)/snap)*snap;
+                // Step 2: snap-to-alignment with other frames + wall + hang line.
+                // Only engaged for SINGLE-FRAME drags. Grouped drags keep relative
+                // spacing within the group, so frame-to-frame snapping would
+                // produce surprising jumps as group members snap independently.
+                let activeGuides = [];
+                if (!frame.isGrouped) {
+                    const snapResult = computeSnapForDrag(idx, newX, newY);
+                    newX = snapResult.snappedX;
+                    newY = snapResult.snappedY;
+                    activeGuides = snapResult.guides;
+                }
+                frame.x = newX; frame.y = newY;
                 let actualDx = frame.x - prevX; let actualDy = frame.y - prevY;
                 if(frame.isGrouped) { elevFrames.forEach((f, i) => { if(i !== idx && f.active && f.isGrouped) { f.x += actualDx; f.y += actualDy; } }); }
+                // Render snap guides (or clear them if no snap is active)
+                renderSnapGuides(activeGuides);
             }
             drawElevAll();
         };
         document.onmouseup = (upEvent) => {
             document.onmousemove = null;
             document.body.classList.remove('dragging-frame');
+            clearSnapGuides();
 
             // Discriminate CLICK vs DRAG: total movement < 3px = treat as click.
-            // For frames only (idx is a number), a click toggles the selected state.
-            // Person element (idx === 'person') skips the click-to-select since
-            // there's no meaningful selection concept for the scale figure.
+            // Selection behavior:
+            //   - Plain click on a frame: select ONLY that frame (clear others)
+            //   - Ctrl/Cmd/Shift+click: toggle that frame's selection (multi-select)
+            //   - Plain click on an already-selected solo frame: deselect it
+            //   - Person element (idx === 'person'): no selection concept
             const dxFromStart = Math.abs((upEvent?.clientX ?? sx) - startX);
             const dyFromStart = Math.abs((upEvent?.clientY ?? sy) - startY);
             const totalDelta = dxFromStart + dyFromStart;
             const isClick = totalDelta < 3;
             if (isClick && typeof idx === 'number' && elevFrames[idx]) {
-                elevFrames[idx].selected = !elevFrames[idx].selected;
+                if (isModifierClick) {
+                    // Multi-select: toggle THIS frame, leave others alone
+                    elevFrames[idx].selected = !elevFrames[idx].selected;
+                } else {
+                    // Single-select: clear all other selections, select THIS one.
+                    // If it was the only one selected, treat re-click as deselect.
+                    const wasSolo = elevFrames[idx].selected && elevFrames.filter(f => f.selected).length === 1;
+                    elevFrames.forEach(f => { f.selected = false; });
+                    if (!wasSolo) elevFrames[idx].selected = true;
+                }
                 drawElevAll();
                 // Selection state is NOT pushed to history — it's pure UI state,
                 // not project data. Undo should restore the position of frames,
