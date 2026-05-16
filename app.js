@@ -282,17 +282,29 @@ document.addEventListener('keydown', function(e) {
 //   Ctrl+D / Cmd+D   Duplicate the FIRST selected frame (single-target action)
 //   Ctrl+G / Cmd+G   Toggle group on all selected frames
 //
-// Nudge step is hardcoded to sensible defaults; can be lifted into a
-// settings panel later. In CM mode, steps become 1cm / 10cm (rounded
-// metric values rather than 2.54cm / 25.4cm raw conversion).
-const NUDGE_SMALL_IN = 1;    // inches
-const NUDGE_BIG_IN = 10;     // inches
-const NUDGE_SMALL_CM = 1;    // cm
-const NUDGE_BIG_CM = 10;     // cm
+// Default nudge steps. Used as fallback if the DOM inputs aren't present
+// or have invalid values. User can override via inputs in the elevation
+// sidebar. Values are interpreted in whatever the current unit (in/cm) is.
+const NUDGE_SMALL_DEFAULT = 1;
+const NUDGE_BIG_DEFAULT = 10;
 
 function getNudgeStep(big) {
-    if (elevUnit === 'cm') return big ? NUDGE_BIG_CM : NUDGE_SMALL_CM;
-    return big ? NUDGE_BIG_IN : NUDGE_SMALL_IN;
+    const id = big ? 'nudgeBig' : 'nudgeSmall';
+    const el = document.getElementById(id);
+    if (el) {
+        const val = parseFloat(el.value);
+        if (!isNaN(val) && val > 0) return val;
+    }
+    return big ? NUDGE_BIG_DEFAULT : NUDGE_SMALL_DEFAULT;
+}
+
+// Called on every input change to the nudge fields. Currently does nothing
+// (values are read fresh on each keypress) but reserved for future side
+// effects like saving to localStorage.
+function updateNudgeSteps() {
+    // No-op for now — values are read live by getNudgeStep on each keypress.
+    // If we later want to persist these across page loads, save to
+    // localStorage here.
 }
 
 // Returns array of selected-and-active frames (refs into elevFrames).
@@ -4788,6 +4800,20 @@ function setElevUnit(u) {
     }
     const gapUnitEl = document.getElementById('alignGapUnit');
     if (gapUnitEl) gapUnitEl.textContent = u === 'cm' ? 'cm' : 'in';
+
+    // Convert nudge step inputs to the new unit. If user set them to "1in",
+    // they expect "2.54cm" after the toggle. Update the adjacent unit
+    // labels (nudgeUnitLabel1/2) to match.
+    const nudgeSmallEl = document.getElementById('nudgeSmall');
+    const nudgeBigEl = document.getElementById('nudgeBig');
+    if (nudgeSmallEl && nudgeSmallEl.value) {
+        nudgeSmallEl.value = parseFloat((parseFloat(nudgeSmallEl.value) * f).toFixed(2));
+    }
+    if (nudgeBigEl && nudgeBigEl.value) {
+        nudgeBigEl.value = parseFloat((parseFloat(nudgeBigEl.value) * f).toFixed(2));
+    }
+    const nudgeUnitLabels = [document.getElementById('nudgeUnitLabel1'), document.getElementById('nudgeUnitLabel2')];
+    nudgeUnitLabels.forEach(el => { if (el) el.textContent = u === 'cm' ? 'cm' : 'in'; });
 
     document.getElementById('elevBtnInch').classList.toggle('active', elevUnit==='in'); 
     document.getElementById('elevBtnCm').classList.toggle('active', elevUnit==='cm');
