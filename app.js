@@ -143,6 +143,142 @@ let elevZoomFactor = 1;
 
 let pendingDuplicateIndex = null;
 
+// ─────────────────────────────────────────────────────────────────────
+// UNDO / REDO HISTORY SYSTEM
+// ─────────────────────────────────────────────────────────────────────
+// Two stacks of project snapshots. A snapshot is a deep JSON-clone of all
+// project state (dashboard rows, elevations, active index). On user action,
+// the change is applied normally and then pushHistory() captures a new
+// snapshot. Undo restores the previous snapshot; redo replays a snapshot
+// that was previously undone.
+//
+// Contract for callers:
+//   1. Apply the state change first (mutate dashProjectData / elevations).
+//   2. Update the UI (drawElevAll, initElevControls, etc).
+//   3. THEN call pushHistory().
+// This order means "the snapshot represents the state AFTER the change."
+// On undo, we pop one snapshot and restore the one BEFORE it — which is
+// why we also push an initial snapshot of the starting state on load.
+//
+// Drag operations push only on mouseup (not on every move frame) — they
+// represent ONE undoable action even though they fire many mousemove events.
+const MAX_HISTORY = 50;
+let undoStack = [];
+let redoStack = [];
+
+// Snapshot current project state as a plain JS object (deep-cloned).
+function snapshotProjectState() {
+    return {
+        dashProjectData: JSON.parse(JSON.stringify(dashProjectData)),
+        elevations: JSON.parse(JSON.stringify(elevations)),
+        currentElevIndex: currentElevIndex,
+    };
+}
+
+// Restore the given snapshot in-place. Re-binds derived references
+// (elevFrames, elevPersonPos) so existing code keeps working.
+function restoreProjectState(snap) {
+    // Replace the arrays' contents in-place instead of reassigning,
+    // because some code holds references to the original arrays.
+    dashProjectData.length = 0;
+    snap.dashProjectData.forEach(r => dashProjectData.push(r));
+    elevations.length = 0;
+    snap.elevations.forEach(e => elevations.push(e));
+    currentElevIndex = snap.currentElevIndex;
+    // Re-bind derived globals
+    if (elevations[currentElevIndex]) {
+        elevFrames = elevations[currentElevIndex].frames;
+        elevPersonPos = elevations[currentElevIndex].personPos;
+    }
+}
+
+// After a state change, capture it for undo. Clears the redo stack
+// (any new action invalidates the redo timeline). Caps history depth.
+function pushHistory() {
+    undoStack.push(snapshotProjectState());
+    if (undoStack.length > MAX_HISTORY) undoStack.shift();
+    redoStack.length = 0;  // new action invalidates future
+    updateUndoButtons();
+}
+
+// Undo: pop current state into redo, restore previous state.
+// We need at least 2 snapshots: current and the one we're going back to.
+function undo() {
+    if (undoStack.length < 2) return;  // nothing to undo
+    const current = undoStack.pop();
+    redoStack.push(current);
+    const previous = undoStack[undoStack.length - 1];
+    restoreProjectState(previous);
+    refreshAllViews();
+    updateUndoButtons();
+}
+
+// Redo: pop from redo stack, push back to undo stack, restore.
+function redo() {
+    if (redoStack.length === 0) return;
+    const next = redoStack.pop();
+    undoStack.push(next);
+    restoreProjectState(next);
+    refreshAllViews();
+    updateUndoButtons();
+}
+
+// Re-render everything after a state restore. Called by undo/redo.
+// Both views are refreshed so the user sees the change wherever they
+// happen to be looking. Also syncs DOM inputs (wall width/height) from
+// the restored data — otherwise input fields would show stale values.
+function refreshAllViews() {
+    // Sync wall dimension inputs from restored elevation data
+    const ce = elevations[currentElevIndex];
+    if (ce) {
+        const wW = document.getElementById('wallW');
+        const wH = document.getElementById('wallH');
+        if (wW && ce.wallW != null) wW.value = ce.wallW;
+        if (wH && ce.wallH != null) wH.value = ce.wallH;
+    }
+    // Dashboard refresh — recalculate quantities and refresh visuals
+    if (typeof recalculateDashboardQuantities === 'function') recalculateDashboardQuantities();
+    if (typeof renderDashboard === 'function') renderDashboard();
+    // Elevation refresh — re-render panels and wall
+    if (typeof initElevControls === 'function') initElevControls();
+    if (typeof drawElevAll === 'function') drawElevAll();
+    // Tab list refresh (in case elevations array length changed)
+    if (typeof renderElevationTabs === 'function') renderElevationTabs();
+}
+
+// Update Undo/Redo button enabled state based on stack contents.
+// Buttons are disabled when there's nothing to undo/redo.
+function updateUndoButtons() {
+    const undoBtn = document.getElementById('undoBtn');
+    const redoBtn = document.getElementById('redoBtn');
+    if (undoBtn) undoBtn.disabled = undoStack.length < 2;
+    if (redoBtn) redoBtn.disabled = redoStack.length === 0;
+}
+
+// Keyboard shortcuts: Ctrl+Z / Cmd+Z = undo, Ctrl+Shift+Z / Ctrl+Y = redo.
+// Listening at document level so it works from anywhere in the tool.
+// Skips shortcut if focus is in a text input/textarea (so users can still
+// undo their typing inside form fields without it triggering app undo).
+document.addEventListener('keydown', function(e) {
+    const inField = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable;
+    if (inField) return;
+    const mod = e.ctrlKey || e.metaKey;
+    if (!mod) return;
+    if (e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
+    else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') { e.preventDefault(); redo(); }
+});
+
+// Capture initial state on load so the first undo has somewhere to go back to.
+// Wrapped in DOMContentLoaded so the rest of the app has finished initializing.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => pushHistory());
+} else {
+    pushHistory();
+}
+// ─────────────────────────────────────────────────────────────────────
+// END UNDO / REDO HISTORY SYSTEM
+// ─────────────────────────────────────────────────────────────────────
+
 // =========================================================================
 // INITIALIZATION & NAVIGATION
 // =========================================================================
@@ -3526,6 +3662,7 @@ function toggleFrameDistDim(idx, which, e) {
     f.distToggles[which] = !f.distToggles[which];
     initElevControls();
     drawElevAll();
+    pushHistory();
 }
 
 // Hover pairing + click-to-select highlight: panels and frames on the wall
@@ -3593,12 +3730,12 @@ function toggleElevDimTarget(idx, targetLetter, e) {
     e.stopPropagation(); const arr = elevFrames[idx].dimTo || [];
     if (arr.includes(targetLetter)) elevFrames[idx].dimTo = arr.filter(l => l !== targetLetter);
     else elevFrames[idx].dimTo.push(targetLetter);
-    initElevControls(); drawElevAll();
+    initElevControls(); drawElevAll(); pushHistory();
 }
 
-function toggleElevGroup(idx, e) { e.stopPropagation(); elevFrames[idx].isGrouped = !elevFrames[idx].isGrouped; initElevControls(); }
-function removeElevFrame(idx, e) { e.stopPropagation(); elevFrames.splice(idx, 1); elevFrames.forEach((f, i) => f.letter = getElevLetter(i)); initElevControls(); drawElevAll(); recalculateDashboardQuantities(); }
-function toggleElevActive(idx, e) { e.stopPropagation(); elevFrames[idx].active = !elevFrames[idx].active; initElevControls(); drawElevAll(); recalculateDashboardQuantities(); }
+function toggleElevGroup(idx, e) { e.stopPropagation(); elevFrames[idx].isGrouped = !elevFrames[idx].isGrouped; initElevControls(); pushHistory(); }
+function removeElevFrame(idx, e) { e.stopPropagation(); elevFrames.splice(idx, 1); elevFrames.forEach((f, i) => f.letter = getElevLetter(i)); initElevControls(); drawElevAll(); recalculateDashboardQuantities(); pushHistory(); }
+function toggleElevActive(idx, e) { e.stopPropagation(); elevFrames[idx].active = !elevFrames[idx].active; initElevControls(); drawElevAll(); recalculateDashboardQuantities(); pushHistory(); }
 
 // Global ON/OFF for all frames on the current elevation. If every frame is
 // active, turn them all OFF. Otherwise (any frame is inactive), turn them
@@ -3614,6 +3751,7 @@ function toggleAllElevActive() {
     initElevControls();
     drawElevAll();
     recalculateDashboardQuantities();
+    pushHistory();
 }
 
 function duplicateElevFrame(idx, e) { 
@@ -3705,6 +3843,7 @@ function confirmDuplicate(type) {
     elevFrames.push(nF); 
     initElevControls(); drawElevAll(); recalculateDashboardQuantities(); 
     closeDuplicateModal();
+    pushHistory();
 }
 
 function toggleElevLayer(id, btn) {
@@ -3858,6 +3997,7 @@ function applyAutoSpace() {
     }
     drawElevAll();
     initElevControls();
+    pushHistory();
 }
 
 // Shift the entire group of active frames horizontally so the group's
@@ -3892,6 +4032,7 @@ function centerGroupOnWall() {
 
     drawElevAll();
     initElevControls();
+    pushHistory();
 }
 
 // Align the active frames to the hang-height line.
@@ -3937,6 +4078,7 @@ function alignToHangHeight() {
 
     drawElevAll();
     initElevControls();
+    pushHistory();
 }
 
 // Per-frame quick alignment: snap ONE frame's OD center to the hang line.
@@ -3949,6 +4091,7 @@ function snapFrameToHang(idx, e) {
     const hangY = getHangHeight();
     f.y = hangY - f.h / 2;
     drawElevAll();
+    pushHistory();
 }
 
 // Per-frame quick alignment: snap ONE frame's horizontal center to the wall's
@@ -3961,6 +4104,7 @@ function snapFrameToWallCenter(idx, e) {
     const wallW = parseFloat(document.getElementById('wallW').value) || 1;
     f.x = (wallW - f.w) / 2;
     drawElevAll();
+    pushHistory();
 }
 
 function drawElevAll() {
@@ -4268,6 +4412,14 @@ function makeElevDraggable(el, idx) {
             if (isClick && typeof idx === 'number' && elevFrames[idx]) {
                 elevFrames[idx].selected = !elevFrames[idx].selected;
                 drawElevAll();
+                // Selection state is NOT pushed to history — it's pure UI state,
+                // not project data. Undo should restore the position of frames,
+                // not what was selected.
+            } else if (!isClick && typeof idx === 'number') {
+                // Real drag moved a frame (or grouped frames). One snapshot for
+                // the whole drag operation — pushed on mouseup so it represents
+                // the final position, not every intermediate mousemove.
+                pushHistory();
             }
         };
     };
