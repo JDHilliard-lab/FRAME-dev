@@ -3445,7 +3445,7 @@ function initElevControls() {
             <div class="compact-frame-item" data-frame-letter="${f.letter}">
                 <div class="frame-item-top-row">
                     <div class="frame-item-label">
-                        <span style="font-weight:bold; font-size:0.75rem; color:var(--text-strong);">${f.letter} <span style="font-weight:normal; font-size:0.65rem; color:var(--text-muted);">(${f.id})</span></span>
+                        <span class="frame-letter-large">${f.letter}</span>
                     </div>
                     <div class="frame-item-icons">
                         <!-- WALL ALIGN column: 2 quick-snap buttons (to hang height,
@@ -3477,7 +3477,9 @@ function initElevControls() {
                             </div>
                         </div>
                         <div style="width:38px; display:flex; justify-content:center;">
-                            <button class="toggle-status ${f.active?'active':''}" style="font-size:0.5rem; padding:2px 5px;" onclick="toggleElevActive(${idx}, event)">${f.active?'ON':'OFF'}</button>
+                            <button class="pill-toggle ${f.active?'active':''}" title="${f.active?'Hide on elevation':'Show on elevation'}" onclick="toggleElevActive(${idx}, event)">
+                                <span class="pill-toggle-knob"></span>
+                            </button>
                         </div>
                         <div style="width:28px; display:flex; justify-content:center;">
                             <button class="icon-btn ${f.isGrouped ? 'grouped' : ''}" title="Move/Group" onclick="toggleElevGroup(${idx}, event)">${svgMove}</button>
@@ -3493,6 +3495,7 @@ function initElevControls() {
                         </div>
                     </div>
                 </div>
+                <div class="frame-item-id">(${f.id})</div>
                 ${targetButtons ? `<div class="frame-item-targets">${targetButtons}</div>` : ''}
             </div>`;
     });
