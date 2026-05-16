@@ -178,13 +178,20 @@ function snapshotProjectState() {
 // Restore the given snapshot in-place. Re-binds derived references
 // (elevFrames, elevPersonPos) so existing code keeps working.
 function restoreProjectState(snap) {
+    // CRITICAL: deep-clone the snapshot BEFORE installing into live state.
+    // Without this, the live state shares object references with the snapshot
+    // stored in undoStack. Any subsequent mutation to elevFrames or any
+    // elevation property would mutate the stored snapshot too — corrupting
+    // the history. (Previously caused "import frames again after undo" to
+    // overwrite the post-undo snapshot, breaking the timeline.)
+    const cloned = JSON.parse(JSON.stringify(snap));
     // Replace the arrays' contents in-place instead of reassigning,
     // because some code holds references to the original arrays.
     dashProjectData.length = 0;
-    snap.dashProjectData.forEach(r => dashProjectData.push(r));
+    cloned.dashProjectData.forEach(r => dashProjectData.push(r));
     elevations.length = 0;
-    snap.elevations.forEach(e => elevations.push(e));
-    currentElevIndex = snap.currentElevIndex;
+    cloned.elevations.forEach(e => elevations.push(e));
+    currentElevIndex = cloned.currentElevIndex;
     // Re-bind derived globals
     if (elevations[currentElevIndex]) {
         elevFrames = elevations[currentElevIndex].frames;
@@ -244,6 +251,10 @@ function refreshAllViews() {
     if (typeof drawElevAll === 'function') drawElevAll();
     // Tab list refresh (in case elevations array length changed)
     if (typeof renderElevationTabs === 'function') renderElevationTabs();
+    // Import dropdown — repopulate from restored dashProjectData so its checkbox
+    // value indices match the actual data. Without this, ctrl+z past an "add
+    // dashboard row" event would leave the dropdown showing stale row counts.
+    if (typeof populateElevBulkList === 'function') populateElevBulkList();
 }
 
 // Update Undo/Redo button enabled state based on stack contents.
@@ -697,6 +708,10 @@ function importSelectedFramesBulk() {
 
     cbs.forEach(cb => {
         const f = dashProjectData[parseInt(cb.value)];
+        // Defensive: if the dropdown is out of sync with dashProjectData
+        // (e.g. after an undo restored older state), the checkbox value may
+        // point to a row that no longer exists. Skip it rather than crash.
+        if (!f) return;
         const newFrame = {
             id: f.id, letter: getElevLetter(elevFrames.length),
             w: (parseFloat(f.extW) || 24) * factor, h: (parseFloat(f.extH) || 30) * factor,
@@ -735,6 +750,7 @@ function importSelectedFramesBulk() {
     
     document.getElementById('bulkDropdownList').style.display = 'none';
     initElevControls(); drawElevAll(); recalculateDashboardQuantities();
+    pushHistory();
 }
 
 function populateDashPushSelector() {
@@ -785,7 +801,9 @@ function pushFrameToElevation() {
         distToggles: { ceiling: false, floor: false, left: false, right: false }
     });
     
-    recalculateDashboardQuantities(); alert(`Pushed ${f.id} to ${targetElev.name}!`);
+    recalculateDashboardQuantities(); 
+    pushHistory();
+    alert(`Pushed ${f.id} to ${targetElev.name}!`);
 }
 
 function jumpToDashboard(frameId) {
