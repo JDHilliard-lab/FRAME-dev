@@ -347,7 +347,19 @@ body.dragging-frame .compact-frame-item { transition: none; }
  * active state. Used by the per-frame distance dim toggles (↑↓←→). */
 .icon-btn.active { background: var(--accent) !important; color: white; }
 .dim-btn.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
-.frame-item-icons { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.frame-item-icons { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+
+/* WALL ALIGN group: 2 quick-snap buttons (snap to hang, snap to wall center).
+ * Sits at the FAR LEFT of the icon row. Matches column header width
+ * (52px = 2 × 26px buttons) + 8px right margin so buttons line up under
+ * the header label. */
+.wall-align-group {
+    display: flex;
+    align-items: center;
+    width: 52px;
+    margin-right: 8px;
+    gap: 2px;
+}
 
 /* EDGE GAP group: 4 directional toggle arrows (↑↓←→). Matches the column
  * header width (112px) + margin (8px) so the buttons line up under the
