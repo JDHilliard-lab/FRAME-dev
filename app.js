@@ -243,14 +243,28 @@ function refreshAllViews() {
         if (wW && ce.wallW != null) wW.value = ce.wallW;
         if (wH && ce.wallH != null) wH.value = ce.wallH;
     }
-    // Dashboard refresh — recalculate quantities and refresh visuals
+
+    // Dashboard refresh: re-render the table, reload the form inputs from
+    // the currently selected row, refresh the push-to-wall selector.
+    if (typeof renderDashTable === 'function') renderDashTable();
+    if (typeof loadDashDataIntoControls === 'function' && dashProjectData[dashSelectedRowIndex]) {
+        // Clamp selected row index in case current selection no longer exists
+        if (dashSelectedRowIndex >= dashProjectData.length) {
+            dashSelectedRowIndex = Math.max(0, dashProjectData.length - 1);
+        }
+        loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+    }
+    if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
     if (typeof recalculateDashboardQuantities === 'function') recalculateDashboardQuantities();
-    if (typeof renderDashboard === 'function') renderDashboard();
+
     // Elevation refresh — re-render panels and wall
     if (typeof initElevControls === 'function') initElevControls();
     if (typeof drawElevAll === 'function') drawElevAll();
-    // Tab list refresh (in case elevations array length changed)
-    if (typeof renderElevationTabs === 'function') renderElevationTabs();
+
+    // Nav tabs — re-render so tab list reflects current elevations array
+    // and the active tab highlight follows the current view.
+    if (typeof renderNavTabs === 'function') renderNavTabs();
+
     // Import dropdown — repopulate from restored dashProjectData so its checkbox
     // value indices match the actual data. Without this, ctrl+z past an "add
     // dashboard row" event would leave the dropdown showing stale row counts.
@@ -587,6 +601,7 @@ function deleteElevation(idx, e) {
         if (currentElevIndex === idx || elevations.length === 1) switchView('dashboard');
         
         renderNavTabs(); populateDashPushSelector(); recalculateDashboardQuantities();
+        pushHistory();
     }
 }
 
@@ -598,6 +613,7 @@ function addNewElevationTab() {
     
     elevations.push({ name: "Elevation " + (newIndex + 1), frames: [], wallW: w, wallH: h, personPos: {x: px} });
     renderNavTabs(); populateDashPushSelector(); switchView('elevation', newIndex);
+    pushHistory();
 }
 
 function switchView(viewType, index = 0) {
@@ -986,6 +1002,7 @@ function addDashRow() {
     dashSelectedRowIndex = dashProjectData.length - 1;
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(newRow.id);
+    pushHistory();
 }
 
 function duplicateDashRow() {
@@ -996,6 +1013,7 @@ function duplicateDashRow() {
     dashSelectedRowIndex = dashProjectData.length - 1;
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(newRow.id);
+    pushHistory();
 }
 
 function detachDashRow() {
@@ -1018,6 +1036,7 @@ function deleteDashRow() {
     
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(dashProjectData[dashSelectedRowIndex].id);
+    pushHistory();
 }
 
 function loadDashDataIntoControls(data) {
