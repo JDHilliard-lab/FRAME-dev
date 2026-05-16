@@ -3448,6 +3448,17 @@ function initElevControls() {
                     <div style="display:flex; gap:2px; margin-top:2px; flex-wrap:wrap;">${targetButtons}</div>
                 </div>
                 <div class="frame-item-icons">
+                    <!-- WALL ALIGN column: 2 quick-snap buttons (to hang height,
+                         to wall center). Header lives once in column header above.
+                         Operates per-frame, independent of selection/grouping. -->
+                    <div class="wall-align-group">
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn" title="Snap to Hang Height" onclick="snapFrameToHang(${idx}, event)">${svgSnapHang}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
+                        </div>
+                    </div>
                     <!-- EDGE GAP column: 4 distance-to-wall toggles. Label lives
                          in the column header (one EDGE GAP label total, above
                          the whole list). Per-frame state lives in f.distToggles. -->
@@ -3470,12 +3481,6 @@ function initElevControls() {
                     </div>
                     <div style="width:28px; display:flex; justify-content:center;">
                         <button class="icon-btn ${f.isGrouped ? 'grouped' : ''}" title="Move/Group" onclick="toggleElevGroup(${idx}, event)">${svgMove}</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn" title="Snap to Hang Height" onclick="snapFrameToHang(${idx}, event)">${svgSnapHang}</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
                     </div>
                     <div style="width:26px; display:flex; justify-content:center;">
                         <button class="icon-btn" title="Edit Master" onclick="jumpToDashboard('${f.id}')">${svgEdit}</button>
