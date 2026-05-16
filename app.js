@@ -268,6 +268,166 @@ document.addEventListener('keydown', function(e) {
     else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') { e.preventDefault(); redo(); }
 });
 
+// ─────────────────────────────────────────────────────────────────────
+// KEYBOARD SHORTCUTS FOR ELEVATION VIEW
+// ─────────────────────────────────────────────────────────────────────
+// Bindings (only fire when elevation view is active, focus is outside any
+// text input, and at least one frame is selected for the operations that
+// need a selection target):
+//
+//   ←  ↑  →  ↓       Nudge selected frames by SMALL step (defaults: 1" or 1cm)
+//   Shift+arrows     Nudge selected frames by BIG step (defaults: 10" or 10cm)
+//   Delete / Backspace   Remove all selected frames
+//   Escape           Deselect all (also closes modals — see modal handlers)
+//   Ctrl+D / Cmd+D   Duplicate the FIRST selected frame (single-target action)
+//   Ctrl+G / Cmd+G   Toggle group on all selected frames
+//
+// Nudge step is hardcoded to sensible defaults; can be lifted into a
+// settings panel later. In CM mode, steps become 1cm / 10cm (rounded
+// metric values rather than 2.54cm / 25.4cm raw conversion).
+const NUDGE_SMALL_IN = 1;    // inches
+const NUDGE_BIG_IN = 10;     // inches
+const NUDGE_SMALL_CM = 1;    // cm
+const NUDGE_BIG_CM = 10;     // cm
+
+function getNudgeStep(big) {
+    if (elevUnit === 'cm') return big ? NUDGE_BIG_CM : NUDGE_SMALL_CM;
+    return big ? NUDGE_BIG_IN : NUDGE_SMALL_IN;
+}
+
+// Returns array of selected-and-active frames (refs into elevFrames).
+// Selection-only contract per user decision — no fallback to all-active.
+function getSelectedFrames() {
+    return elevFrames.filter(f => f.selected && f.active);
+}
+
+// Nudge selected frames by (dx, dy) inches. dx negative = left, dy negative = down.
+function nudgeSelectedFrames(dx, dy) {
+    const sel = getSelectedFrames();
+    if (!sel.length) return;
+    sel.forEach(f => { f.x += dx; f.y += dy; });
+    drawElevAll();
+    pushHistory();
+}
+
+// Remove all selected frames. Confirms via showInfoModal-style prompt
+// only if multiple are selected, to prevent accidents.
+function deleteSelectedFrames() {
+    const sel = getSelectedFrames();
+    if (!sel.length) return;
+    // Find indices in elevFrames (reverse order so splice doesn't shift remaining indices)
+    const indicesToRemove = [];
+    elevFrames.forEach((f, i) => { if (f.selected && f.active) indicesToRemove.push(i); });
+    indicesToRemove.sort((a, b) => b - a);
+    indicesToRemove.forEach(i => elevFrames.splice(i, 1));
+    // Re-letter remaining frames so labels stay sequential A, B, C...
+    elevFrames.forEach((f, i) => { f.letter = getElevLetter(i); });
+    initElevControls();
+    drawElevAll();
+    if (typeof recalculateDashboardQuantities === 'function') recalculateDashboardQuantities();
+    pushHistory();
+}
+
+// Duplicate the first selected frame using existing duplicate logic.
+// Opens the duplicate modal (which asks new ID vs same ID) — same as
+// clicking the per-frame Duplicate button.
+function duplicateSelectedFrames() {
+    const sel = getSelectedFrames();
+    if (!sel.length) return;
+    // Find the index of the first selected frame in elevFrames
+    const idx = elevFrames.findIndex(f => f.selected && f.active);
+    if (idx >= 0) {
+        pendingDuplicateIndex = idx;
+        document.getElementById('duplicateModal').style.display = 'flex';
+    }
+}
+
+// Toggle group on all selected frames. If any are not grouped, group all.
+// If all are grouped, ungroup all. Same selection-as-input pattern.
+function toggleGroupSelectedFrames() {
+    const sel = getSelectedFrames();
+    if (!sel.length) return;
+    const anyNotGrouped = sel.some(f => !f.isGrouped);
+    sel.forEach(f => { f.isGrouped = anyNotGrouped; });
+    initElevControls();
+    drawElevAll();
+    pushHistory();
+}
+
+// Clear all selections (Escape key).
+function deselectAllFrames() {
+    let changed = false;
+    elevFrames.forEach(f => { if (f.selected) { f.selected = false; changed = true; } });
+    if (changed) drawElevAll();
+    // Selection isn't undoable so no pushHistory()
+}
+
+// Returns true if elevation view is the currently active view.
+function isElevationViewActive() {
+    const elev = document.getElementById('view-elevation');
+    return elev && getComputedStyle(elev).display !== 'none';
+}
+
+document.addEventListener('keydown', function(e) {
+    // Skip if user is typing into a field — they need normal text input behavior
+    const inField = e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable;
+    if (inField) return;
+    // Only operate in elevation view (these all act on elevation frames)
+    if (!isElevationViewActive()) return;
+    const ctrlOrMeta = e.ctrlKey || e.metaKey;
+
+    // Arrow keys: nudge selected frames
+    if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
+        const sel = getSelectedFrames();
+        if (!sel.length) return;  // nothing to nudge; let key event pass through
+        const step = getNudgeStep(e.shiftKey);
+        let dx = 0, dy = 0;
+        if (e.key === 'ArrowLeft')  dx = -step;
+        if (e.key === 'ArrowRight') dx =  step;
+        if (e.key === 'ArrowUp')    dy =  step;   // y is up-positive in elevation coords
+        if (e.key === 'ArrowDown')  dy = -step;
+        e.preventDefault();
+        nudgeSelectedFrames(dx, dy);
+        return;
+    }
+
+    // Delete / Backspace: remove selected frames
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+        const sel = getSelectedFrames();
+        if (!sel.length) return;
+        e.preventDefault();
+        deleteSelectedFrames();
+        return;
+    }
+
+    // Escape: deselect all
+    if (e.key === 'Escape') {
+        deselectAllFrames();
+        return;
+    }
+
+    // Ctrl+D / Cmd+D: duplicate first selected frame
+    if (ctrlOrMeta && (e.key === 'd' || e.key === 'D')) {
+        const sel = getSelectedFrames();
+        if (!sel.length) return;
+        e.preventDefault();  // prevent browser's "bookmark this page"
+        duplicateSelectedFrames();
+        return;
+    }
+
+    // Ctrl+G / Cmd+G: toggle group on selected
+    if (ctrlOrMeta && (e.key === 'g' || e.key === 'G')) {
+        const sel = getSelectedFrames();
+        if (!sel.length) return;
+        e.preventDefault();  // prevent browser's "find next"
+        toggleGroupSelectedFrames();
+        return;
+    }
+});
+// ─────────────────────────────────────────────────────────────────────
+// END KEYBOARD SHORTCUTS
+// ─────────────────────────────────────────────────────────────────────
+
 // Capture initial state on load so the first undo has somewhere to go back to.
 // Wrapped in DOMContentLoaded so the rest of the app has finished initializing.
 if (document.readyState === 'loading') {
