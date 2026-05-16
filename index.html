@@ -460,7 +460,11 @@
                         <div class="elev-col-icons">
                             <div class="elev-col-label wall-align-header-label" style="width:52px; margin-right:8px;"><span>Wall Align</span></div>
                             <div class="elev-col-label edge-gap-header-label" style="width:112px; margin-right:2px;"><span>Edge Gap</span></div>
-                            <div class="elev-col-label" style="width:38px;"><span>On/Off</span></div>
+                            <div style="width:38px; display:flex; align-items:center; justify-content:center; padding-bottom:2px;">
+                                <button class="pill-toggle pill-toggle-global" id="globalActiveToggle" title="Show / hide all frames" onclick="toggleAllElevActive()">
+                                    <span class="pill-toggle-knob"></span>
+                                </button>
+                            </div>
                             <div class="elev-col-label" style="width:26px;">
                                 <button class="elev-col-iconbtn" title="Toggle Group All — link/unlink every frame so they move together" onclick="toggleGroupAllElevFrames(event)" id="groupAllBtn">
                                     <svg class="svg-icon" viewBox="0 0 24 24" style="width:11px; height:11px; stroke-width:2.4;"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>
