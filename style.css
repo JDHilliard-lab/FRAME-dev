@@ -324,7 +324,7 @@ body.dragging-frame .frame-vis:hover {
 .crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
 
 /* COMPACT ELEVATION FRAMES */
-.compact-frame-item { display: flex; flex-direction: column; padding: 6px 10px; border: 1px solid var(--border-color); background: var(--bg-subpanel); border-radius: 6px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); gap: 4px; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+.compact-frame-item { display: flex; flex-direction: column; padding: 6px 10px; border: 1px solid var(--border-color); background: var(--bg-subpanel); border-radius: 6px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); gap: 2px; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
 
 /* Top row of a frame panel: letter + ID on the left, icons (Wall Align, Edge
  * Gap, ON, Move, etc.) on the right. Uses justify-content:space-between so
@@ -339,17 +339,28 @@ body.dragging-frame .frame-vis:hover {
 }
 .frame-item-label { flex: 1; min-width: 0; }
 
-/* Letter-target sub-row: dim-to-other-frames buttons that span the full
- * panel width BELOW the top row. Only rendered when there's at least one
- * active neighbor (conditional in JS). Wraps to multiple lines if many
- * targets, but doesn't push the icon row taller — that's the win of this
- * layout: predictable 1- or 2-row panel height regardless of frame count. */
-.frame-item-targets {
+/* Frame ID + letter-target row: lives directly below the top icon row.
+ * Contains the (ART.001) ID and the letter target buttons inline. Wraps
+ * to multiple visual rows if there are many target buttons, without
+ * pushing the icon row taller. */
+.frame-item-id-row {
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 2px;
+}
+.frame-item-id {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+.frame-item-targets-inline {
+    display: inline-flex;
     flex-wrap: wrap;
     gap: 2px;
-    padding-top: 2px;
-    border-top: 1px solid var(--border-color);
+    align-items: center;
 }
 
 /* Large letter label (A, B, C, ...) on the top row of each frame panel.
@@ -378,9 +389,9 @@ body.dragging-frame .frame-vis:hover {
  * familiar "tap to toggle" feel of mobile UIs. */
 .pill-toggle {
     position: relative;
-    width: 34px;
-    height: 18px;
-    border-radius: 9px;
+    width: 28px;
+    height: 14px;
+    border-radius: 7px;
     border: none;
     background: var(--border-color);
     cursor: pointer;
@@ -394,14 +405,14 @@ body.dragging-frame .frame-vis:hover {
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 14px;
-    height: 14px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
     background: #fff;
     transition: left 0.18s, transform 0.18s;
     box-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
-.pill-toggle.active .pill-toggle-knob { left: 18px; }
+.pill-toggle.active .pill-toggle-knob { left: 16px; }
 
 /* Selection highlight on the panel side — matches the frame outline color
  * (#2196f3 blue). When a frame is hovered (or group-all is on), the matching
