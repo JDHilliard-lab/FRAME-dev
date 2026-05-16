@@ -89,6 +89,14 @@ const svgArrowDown  = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 6v
 const svgArrowLeft  = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 12H8M12 8l-4 4 4 4"/></svg>`;
 const svgArrowRight = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 12h10M12 8l4 4-4 4"/></svg>`;
 
+// Per-frame quick-alignment icons.
+// svgSnapHang: frame outline with a horizontal line through its middle —
+//   suggests "snap this frame's center to a horizontal reference line."
+// svgSnapWallCenter: frame outline with a vertical line through its middle —
+//   suggests "snap this frame's center to a vertical wall-center reference."
+const svgSnapHang = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="6" y="7" width="12" height="10" rx="1"/><path d="M3 12h18" stroke-dasharray="2 2"/></svg>`;
+const svgSnapWallCenter = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="12" rx="1"/><path d="M12 3v18" stroke-dasharray="2 2"/></svg>`;
+
 const dashDefaultData = { 
     id: "ART.001", imageCode: "TBD", level: "1", qty: 0, product: "Framed Art", location: "LOBBY", 
     // Phase A additions: artwork attribution + frame profile depth + paper type.
@@ -404,6 +412,11 @@ function importSelectedFramesBulk() {
             m1A: f.m1A !== false, m1Locked: f.m1Locked || false, m1ColorHex: f.m1ColorHex || '#ffffff',
             m2: (parseFloat(f.m2) || 0) * factor, m2A: f.m2A || false, m2ColorHex: f.m2ColorHex || '#ffffff',
             x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true,
+            // Click-to-select state. False by default. Set true by mousedown
+            // (without drag) on the frame element. Persists until user clicks
+            // the wall background to clear all selections. Triggers blue
+            // outline + ABC panel highlight (same visual as hover).
+            selected: false,
             // Per-frame distance dimension toggles. Each frame independently controls
             // which architectural distance dims it shows (to ceiling/floor/left/right
             // walls). Default all off — designer enables per-frame in the ABC panel.
@@ -460,6 +473,7 @@ function pushFrameToElevation() {
         m1A: f.m1A !== false, m1Locked: f.m1Locked || false, m1ColorHex: f.m1ColorHex || '#ffffff',
         m2: (parseFloat(f.m2) || 0) * factor, m2A: f.m2A || false, m2ColorHex: f.m2ColorHex || '#ffffff',
         x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true,
+        selected: false,
         distToggles: { ceiling: false, floor: false, left: false, right: false }
     });
     
@@ -3458,6 +3472,12 @@ function initElevControls() {
                         <button class="icon-btn ${f.isGrouped ? 'grouped' : ''}" title="Move/Group" onclick="toggleElevGroup(${idx}, event)">${svgMove}</button>
                     </div>
                     <div style="width:26px; display:flex; justify-content:center;">
+                        <button class="icon-btn" title="Snap to Hang Height" onclick="snapFrameToHang(${idx}, event)">${svgSnapHang}</button>
+                    </div>
+                    <div style="width:26px; display:flex; justify-content:center;">
+                        <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
+                    </div>
+                    <div style="width:26px; display:flex; justify-content:center;">
                         <button class="icon-btn" title="Edit Master" onclick="jumpToDashboard('${f.id}')">${svgEdit}</button>
                     </div>
                     <div style="width:26px; display:flex; justify-content:center;">
@@ -3487,31 +3507,39 @@ function toggleFrameDistDim(idx, which, e) {
     drawElevAll();
 }
 
-// Hover pairing: hovering a frame on the wall highlights its ABC panel and
-// vice versa. Implemented as JS event handlers attached after each render
-// because the .compact-frame-item and the .frame-element are not siblings,
-// so pure CSS :hover sibling selectors can't reach across.
+// Hover pairing + click-to-select highlight: panels and frames on the wall
+// stay visually paired. The highlight class is applied when:
+//   (a) the frame is `selected` (click-set, persists until cleared)
+//   (b) the frame is part of group-all (every frame isGrouped)
+//   (c) the user is currently hovering the frame or panel (temporary)
 //
-// When isGroupAll is true (all frames grouped), all panels and frames stay
-// highlighted permanently.
+// Mouseleave removes the highlight ONLY if neither (a) nor (b) apply —
+// otherwise the selection/group highlight persists.
 function wireElevHoverPairing() {
-    const allActive = elevFrames.length > 0 && elevFrames.every(f => f.isGrouped);
+    const allGrouped = elevFrames.length > 0 && elevFrames.every(f => f.isGrouped);
+
+    // Returns true if the frame at this letter should stay highlighted
+    // independent of hover state.
+    const isStickyHighlight = (letter) => {
+        if (allGrouped) return true;
+        const f = elevFrames.find(fr => fr.letter === letter);
+        return f && f.selected === true;
+    };
 
     document.querySelectorAll('#frame-controls .compact-frame-item').forEach(panel => {
         const letter = panel.dataset.frameLetter;
         if (!letter) return;
-        // Permanent highlight when group-all
-        if (allActive) panel.classList.add('selection-highlight');
+        // Apply sticky state at render time
+        if (isStickyHighlight(letter)) panel.classList.add('selection-highlight');
         else panel.classList.remove('selection-highlight');
 
-        // Hover events
         panel.addEventListener('mouseenter', () => {
             panel.classList.add('selection-highlight');
             const frameEl = document.querySelector(`#frame-layer [data-frame-letter="${letter}"]`);
             if (frameEl) frameEl.classList.add('selection-highlight');
         });
         panel.addEventListener('mouseleave', () => {
-            if (!allActive) {
+            if (!isStickyHighlight(letter)) {
                 panel.classList.remove('selection-highlight');
                 const frameEl = document.querySelector(`#frame-layer [data-frame-letter="${letter}"]`);
                 if (frameEl) frameEl.classList.remove('selection-highlight');
@@ -3522,7 +3550,7 @@ function wireElevHoverPairing() {
     document.querySelectorAll('#frame-layer [data-frame-letter]').forEach(frameEl => {
         const letter = frameEl.dataset.frameLetter;
         if (!letter) return;
-        if (allActive) frameEl.classList.add('selection-highlight');
+        if (isStickyHighlight(letter)) frameEl.classList.add('selection-highlight');
         else frameEl.classList.remove('selection-highlight');
 
         frameEl.addEventListener('mouseenter', () => {
@@ -3531,7 +3559,7 @@ function wireElevHoverPairing() {
             if (panel) panel.classList.add('selection-highlight');
         });
         frameEl.addEventListener('mouseleave', () => {
-            if (!allActive) {
+            if (!isStickyHighlight(letter)) {
                 frameEl.classList.remove('selection-highlight');
                 const panel = document.querySelector(`#frame-controls [data-frame-letter="${letter}"]`);
                 if (panel) panel.classList.remove('selection-highlight');
@@ -3874,6 +3902,30 @@ function alignToHangHeight() {
     initElevControls();
 }
 
+// Per-frame quick alignment: snap ONE frame's OD center to the hang line.
+// Independent of selection/grouping — operates on the indexed frame only.
+// Used by the per-frame "snap to hang" icon button in the ABC panel.
+function snapFrameToHang(idx, e) {
+    if (e) e.stopPropagation();
+    const f = elevFrames[idx];
+    if (!f) return;
+    const hangY = getHangHeight();
+    f.y = hangY - f.h / 2;
+    drawElevAll();
+}
+
+// Per-frame quick alignment: snap ONE frame's horizontal center to the wall's
+// horizontal center. Independent of selection/grouping. Used by the per-frame
+// "snap to wall center" icon button in the ABC panel.
+function snapFrameToWallCenter(idx, e) {
+    if (e) e.stopPropagation();
+    const f = elevFrames[idx];
+    if (!f) return;
+    const wallW = parseFloat(document.getElementById('wallW').value) || 1;
+    f.x = (wallW - f.w) / 2;
+    drawElevAll();
+}
+
 function drawElevAll() {
     const wallW = parseFloat(document.getElementById('wallW').value) || 1; const wallH = parseFloat(document.getElementById('wallH').value) || 1;
     const workspace = document.querySelector('#view-elevation .workspace');
@@ -4123,19 +4175,36 @@ function drawElevAll() {
     // function is idempotent — re-running it doesn't double-bind because it
     // uses fresh DOM selection on each call.
     wireElevHoverPairing();
+
+    // Wall-background click handler: clicking on the wall but NOT on a frame
+    // clears all selections. event.target === wall ensures we only clear when
+    // the click is on the wall itself, not on a child element (frames, hang
+    // line, person, etc). Idempotent — replaces any previous binding.
+    wall.onclick = function(e) {
+        if (e.target === wall && elevFrames.some(f => f.selected)) {
+            elevFrames.forEach(f => f.selected = false);
+            drawElevAll();
+        }
+    };
 }
 
 function makeElevDraggable(el, idx) {
     el.onmousedown = function(e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-        e.preventDefault(); let sx = e.clientX, sy = e.clientY;
+        e.preventDefault();
+        const startX = e.clientX, startY = e.clientY;
+        let sx = e.clientX, sy = e.clientY;
+        let totalMove = 0;  // Tracks cumulative absolute movement to distinguish click from drag
+
         // Suspend highlight transitions during drag — drawElevAll fires many
         // times per second, recreating frame elements each time, and CSS
         // transitions on the rebuilt elements caused a visible flicker.
         // Body class is removed on mouseup so highlights animate normally again.
         document.body.classList.add('dragging-frame');
+
         document.onmousemove = function(e) {
             let dx = (sx - e.clientX)/elevScale, dy = (sy - e.clientY)/elevScale; sx = e.clientX; sy = e.clientY;
+            totalMove += Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY);
             const snap = elevUnit === 'in' ? 1 : 2.54;
             if(idx === 'person') { 
                 elevPersonPos.x -= dx; 
@@ -4147,9 +4216,22 @@ function makeElevDraggable(el, idx) {
             }
             drawElevAll();
         };
-        document.onmouseup = () => {
+        document.onmouseup = (upEvent) => {
             document.onmousemove = null;
             document.body.classList.remove('dragging-frame');
+
+            // Discriminate CLICK vs DRAG: total movement < 3px = treat as click.
+            // For frames only (idx is a number), a click toggles the selected state.
+            // Person element (idx === 'person') skips the click-to-select since
+            // there's no meaningful selection concept for the scale figure.
+            const dxFromStart = Math.abs((upEvent?.clientX ?? sx) - startX);
+            const dyFromStart = Math.abs((upEvent?.clientY ?? sy) - startY);
+            const totalDelta = dxFromStart + dyFromStart;
+            const isClick = totalDelta < 3;
+            if (isClick && typeof idx === 'number' && elevFrames[idx]) {
+                elevFrames[idx].selected = !elevFrames[idx].selected;
+                drawElevAll();
+            }
         };
     };
 }
