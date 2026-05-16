@@ -90,6 +90,14 @@ textarea { width: 100%; padding: 6px; border: 1px solid var(--border-color); bor
 
 .action-btn { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; padding: 6px 10px; border: 1px solid transparent; border-radius: 4px; font-size: 0.7rem; font-weight: bold; color: white; cursor: pointer; transition: 0.2s; background: var(--accent); height: 26px; box-sizing: border-box;}
 .action-btn:hover { background: var(--accent-hover); }
+.action-btn:disabled, .action-btn[disabled] { 
+    opacity: 0.4; 
+    cursor: not-allowed; 
+    background: var(--border-color);
+}
+.action-btn:disabled:hover, .action-btn[disabled]:hover { 
+    background: var(--border-color);
+}
 .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
 .btn-outline:hover { background: rgba(58, 134, 255, 0.1); }
 .btn-secondary { background: var(--btn-secondary); color: var(--text-strong); border: 1px solid var(--border-color);}
