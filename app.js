@@ -3495,14 +3495,25 @@ function initElevControls() {
                         </div>
                     </div>
                 </div>
-                <div class="frame-item-id">(${f.id})</div>
-                ${targetButtons ? `<div class="frame-item-targets">${targetButtons}</div>` : ''}
+                <div class="frame-item-id-row">
+                    <span class="frame-item-id">(${f.id})</span>
+                    ${targetButtons ? `<span class="frame-item-targets-inline">${targetButtons}</span>` : ''}
+                </div>
             </div>`;
     });
     container.innerHTML = html;
     // Hover-pair wiring is done by drawElevAll after frame DOM is rendered,
     // since panels and frames need their events attached at the same time
     // and frame elements only exist after drawElevAll runs.
+
+    // Sync global ON/OFF pill toggle in the column header. It's "active" only
+    // when EVERY frame on this elevation is active; otherwise off (so that
+    // clicking it flips ALL frames to a single uniform state).
+    const globalToggle = document.getElementById('globalActiveToggle');
+    if (globalToggle) {
+        const allOn = elevFrames.length > 0 && elevFrames.every(f => f.active);
+        globalToggle.classList.toggle('active', allOn);
+    }
 }
 
 // Per-frame distance dimension toggle. Stores under f.distToggles[which].
@@ -3588,6 +3599,22 @@ function toggleElevDimTarget(idx, targetLetter, e) {
 function toggleElevGroup(idx, e) { e.stopPropagation(); elevFrames[idx].isGrouped = !elevFrames[idx].isGrouped; initElevControls(); }
 function removeElevFrame(idx, e) { e.stopPropagation(); elevFrames.splice(idx, 1); elevFrames.forEach((f, i) => f.letter = getElevLetter(i)); initElevControls(); drawElevAll(); recalculateDashboardQuantities(); }
 function toggleElevActive(idx, e) { e.stopPropagation(); elevFrames[idx].active = !elevFrames[idx].active; initElevControls(); drawElevAll(); recalculateDashboardQuantities(); }
+
+// Global ON/OFF for all frames on the current elevation. If every frame is
+// active, turn them all OFF. Otherwise (any frame is inactive), turn them
+// all ON. Bound to the pill toggle in the column header row between Edge
+// Gap and the Move icon. The header pill's visual state (knob position +
+// track color) reflects "ALL frames active" — set in initElevControls
+// based on whether elevFrames.every(f => f.active).
+function toggleAllElevActive() {
+    if (!elevFrames.length) return;
+    const allOn = elevFrames.every(f => f.active);
+    const newState = !allOn;
+    elevFrames.forEach(f => { f.active = newState; });
+    initElevControls();
+    drawElevAll();
+    recalculateDashboardQuantities();
+}
 
 function duplicateElevFrame(idx, e) { 
     e.stopPropagation(); 
