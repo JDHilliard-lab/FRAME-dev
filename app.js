@@ -201,11 +201,21 @@ function restoreProjectState(snap) {
 
 // After a state change, capture it for undo. Clears the redo stack
 // (any new action invalidates the redo timeline). Caps history depth.
+// Also marks the project as having unsaved changes and schedules an
+// autosave to localStorage. The initial snapshot on page load is the
+// exception — it doesn't represent a user change so doesn't mark dirty.
+let _isFirstHistoryPush = true;
 function pushHistory() {
     undoStack.push(snapshotProjectState());
     if (undoStack.length > MAX_HISTORY) undoStack.shift();
     redoStack.length = 0;  // new action invalidates future
     updateUndoButtons();
+    if (_isFirstHistoryPush) {
+        _isFirstHistoryPush = false;
+    } else {
+        markDirty();
+        scheduleAutosave();
+    }
 }
 
 // Undo: pop current state into redo, restore previous state.
@@ -476,6 +486,195 @@ if (document.readyState === 'loading') {
 // END UNDO / REDO HISTORY SYSTEM
 // ─────────────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────────────
+// SAVE / AUTOSAVE / UNSAVED-CHANGES INDICATOR
+// ─────────────────────────────────────────────────────────────────────
+// "Dirty" tracking: a flag indicating the project has changes not yet saved
+// to a JSON file. Set by pushHistory() on every state change. Cleared when
+// the user explicitly saves via the Save Project button or Ctrl+S, or
+// loads a fresh project.
+//
+// Autosave: a separate mechanism that periodically writes the current state
+// to localStorage so a browser crash or accidental close doesn't lose work.
+// Doesn't replace explicit save — that's still file-based. On page load we
+// check for a recent autosave and offer to restore it.
+//
+// Indicator: a small visible dot in the page title area showing the
+// project has unsaved changes. Also a beforeunload handler that prompts
+// before closing the tab if there are unsaved changes.
+
+let _isDirty = false;
+const AUTOSAVE_KEY = 'frame-tool-autosave';
+const AUTOSAVE_DEBOUNCE_MS = 500;  // wait this long after last change before autosaving
+let _autosaveTimer = null;
+
+// Mark the project as having unsaved changes. Updates the visual indicator.
+function markDirty() {
+    if (!_isDirty) {
+        _isDirty = true;
+        updateDirtyIndicator();
+    }
+}
+
+// Mark the project as clean (saved). Called by save and load operations.
+function markClean() {
+    if (_isDirty) {
+        _isDirty = false;
+        updateDirtyIndicator();
+    }
+}
+
+// Update the small "unsaved" dot next to the Save Project button. Created
+// on first call if not present. Hidden via display:none when clean. Placed
+// next to the Save button so the visual marker is paired with the action
+// that clears it.
+function updateDirtyIndicator() {
+    let dot = document.getElementById('unsavedIndicator');
+    if (!dot) {
+        dot = document.createElement('span');
+        dot.id = 'unsavedIndicator';
+        dot.title = 'Unsaved changes — press Ctrl+S to save';
+        dot.style.cssText = 'display:none; width:10px; height:10px; border-radius:50%; background:#ff8c00; flex-shrink:0; box-shadow: 0 0 6px rgba(255,140,0,0.5);';
+        // Insert right before the Save Project button so the dot lives next
+        // to its remedy. Find the Save button by its visible text.
+        const buttons = document.querySelectorAll('.app-top-nav button');
+        let saveBtn = null;
+        buttons.forEach(b => { if (b.textContent.trim() === 'Save Project') saveBtn = b; });
+        if (saveBtn && saveBtn.parentNode) {
+            saveBtn.parentNode.insertBefore(dot, saveBtn);
+        } else {
+            // Fallback: stick it in the top nav somewhere
+            const topNav = document.querySelector('.app-top-nav');
+            if (topNav) topNav.appendChild(dot);
+        }
+    }
+    dot.style.display = _isDirty ? 'inline-block' : 'none';
+}
+
+// Schedule an autosave to localStorage. Debounced — repeated calls within
+// AUTOSAVE_DEBOUNCE_MS reset the timer, so rapid changes only trigger one
+// save at the end of the burst.
+function scheduleAutosave() {
+    if (_autosaveTimer) clearTimeout(_autosaveTimer);
+    _autosaveTimer = setTimeout(performAutosave, AUTOSAVE_DEBOUNCE_MS);
+}
+
+// Actually write to localStorage. Wrapped in try/catch because localStorage
+// can throw on quota exceeded (~5MB limit), private browsing mode, or
+// disabled storage. We silently skip on error rather than crashing the app.
+function performAutosave() {
+    try {
+        const projName = (document.getElementById('g_projName') || {}).value || 'Untitled';
+        const payload = {
+            type: 'master-studio-autosave-v1',
+            timestamp: Date.now(),
+            projName: projName,
+            data: snapshotProjectState(),  // reuses the undo snapshot format
+        };
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(payload));
+    } catch (err) {
+        // Quota exceeded, private mode, etc. Silent failure — autosave is a
+        // safety net, not a primary feature.
+        console.warn('Autosave failed:', err);
+    }
+}
+
+// Clear the autosave slot. Called after a successful save or load — at
+// that point the in-memory state matches a known file, so the autosave
+// is no longer the most-recent unsaved work.
+function clearAutosave() {
+    try { localStorage.removeItem(AUTOSAVE_KEY); } catch (err) {}
+}
+
+// On page load, check for an autosave. If one exists from this session
+// (less than 7 days old to avoid restoring ancient work) and the current
+// project hasn't been modified, offer to restore.
+function checkAutosaveOnLoad() {
+    try {
+        const raw = localStorage.getItem(AUTOSAVE_KEY);
+        if (!raw) return;
+        const payload = JSON.parse(raw);
+        if (payload.type !== 'master-studio-autosave-v1') return;
+        const ageDays = (Date.now() - payload.timestamp) / (1000 * 60 * 60 * 24);
+        if (ageDays > 7) {
+            // Stale — clear and skip
+            clearAutosave();
+            return;
+        }
+        // Format a human-readable "how long ago"
+        const minutesAgo = Math.round((Date.now() - payload.timestamp) / 60000);
+        let timeStr;
+        if (minutesAgo < 1) timeStr = 'less than a minute ago';
+        else if (minutesAgo < 60) timeStr = `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
+        else timeStr = `${Math.round(minutesAgo / 60)} hour${minutesAgo < 120 ? '' : 's'} ago`;
+
+        // Don't auto-restore — ask. Use a small custom prompt rather than
+        // confirm() so we can style it consistently.
+        const projName = payload.projName || 'Untitled';
+        if (confirm(`Found unsaved work from ${timeStr}\n("${projName}")\n\nRestore it?\n\nClick OK to restore, Cancel to discard.`)) {
+            restoreProjectState(payload.data);
+            refreshAllViews();
+            // After restore, push fresh history (clearing prior so undo doesn't
+            // jump back to the pre-restore empty state).
+            undoStack.length = 0;
+            redoStack.length = 0;
+            _isFirstHistoryPush = true;
+            pushHistory();
+            markDirty();  // the restored state isn't yet saved to a file
+        } else {
+            clearAutosave();
+        }
+    } catch (err) {
+        console.warn('Autosave check failed:', err);
+    }
+}
+
+// Save the project to a JSON file with a sensible name. Thin wrapper over
+// saveMasterProject for use by the Ctrl+S handler. saveMasterProject itself
+// handles markClean and clearAutosave so we don't need to duplicate here.
+function saveProjectWithIndicator() {
+    if (typeof saveMasterProject === 'function') saveMasterProject();
+}
+
+// Beforeunload handler: warn before closing/refreshing if there are unsaved
+// changes. The browser shows its own generic message; we just need to
+// returnValue to a non-empty string to trigger it.
+window.addEventListener('beforeunload', function(e) {
+    if (_isDirty) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+    }
+});
+
+// Ctrl+S to save. Works anywhere in the app, including when focus is in a
+// text field — saving is a global action users expect to always work.
+// Browser's default "save page as" is suppressed.
+document.addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        saveProjectWithIndicator();
+    }
+});
+
+// Initialize dirty indicator on app load (creates the dot, hidden).
+// Wrapped in DOMContentLoaded so DOM is ready.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        updateDirtyIndicator();
+        // Check for autosave AFTER a small delay so the rest of the app's
+        // init code (which calls pushHistory) has finished. Otherwise the
+        // restore would be overwritten by the initial pushHistory.
+        setTimeout(checkAutosaveOnLoad, 200);
+    });
+} else {
+    updateDirtyIndicator();
+    setTimeout(checkAutosaveOnLoad, 200);
+}
+// ─────────────────────────────────────────────────────────────────────
+// END SAVE / AUTOSAVE / UNSAVED-CHANGES
+// ─────────────────────────────────────────────────────────────────────
+
 // =========================================================================
 // INITIALIZATION & NAVIGATION
 // =========================================================================
@@ -643,6 +842,16 @@ function switchView(viewType, index = 0) {
     renderNavTabs();
 }
 
+// Helper: turn a free-form string into a filesystem-safe slug.
+// Spaces → underscores; strips anything not alphanumeric / dash / underscore.
+// If the result is empty (e.g. user only had emoji or non-Latin), falls
+// back to 'Untitled' so we never download "_2026-05-16.json" with no name.
+function slugifyForFilename(s) {
+    if (!s) return 'Untitled';
+    const slug = String(s).trim().replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
+    return slug || 'Untitled';
+}
+
 function saveMasterProject() {
     if(currentView === 'elevation' && elevations[currentElevIndex]) {
         elevations[currentElevIndex].wallW = parseFloat(document.getElementById('wallW').value) || 185;
@@ -652,7 +861,15 @@ function saveMasterProject() {
     const globalMeta = { projName: getStr('g_projName'), desc: getStr('g_desc'), date: getStr('g_date'), issued: getStr('g_issued'), client: getStr('g_client'), attn: getStr('g_attn'), delivery: getStr('g_delivery') };
     const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations };
     const blob = new Blob([JSON.stringify(masterData, null, 2)], { type: 'application/json' });
-    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = `Master_Studio_Project.json`; link.click();
+    // Filename uses the user's Project Name + today's date so multiple
+    // projects don't overwrite each other in Downloads.
+    const projSlug = slugifyForFilename(globalMeta.projName);
+    const dateStr = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
+    const filename = `${projSlug}_${dateStr}.json`;
+    const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = filename; link.click();
+    // Successful save → no longer dirty, clear autosave (file is canonical now).
+    if (typeof markClean === 'function') markClean();
+    if (typeof clearAutosave === 'function') clearAutosave();
 }
 
 function loadMasterProject(event) {
@@ -675,7 +892,18 @@ function loadMasterProject(event) {
             document.getElementById('dashBtnInch').classList.toggle('active', dashUnit === 'in'); document.getElementById('dashBtnCm').classList.toggle('active', dashUnit === 'cm');
             document.getElementById('elevBtnInch').classList.toggle('active', elevUnit === 'in'); document.getElementById('elevBtnCm').classList.toggle('active', elevUnit === 'cm');
             
-            recalculateDashboardQuantities(); selectDashRow(0); renderNavTabs(); switchView('dashboard'); 
+            recalculateDashboardQuantities(); selectDashRow(0); renderNavTabs(); switchView('dashboard');
+            // Loaded project becomes the new canonical state. Reset undo
+            // history (no point in being able to undo back to "before the
+            // load") and clear dirty flag.
+            if (typeof undoStack !== 'undefined') {
+                undoStack.length = 0;
+                redoStack.length = 0;
+                _isFirstHistoryPush = true;
+                pushHistory();
+            }
+            if (typeof markClean === 'function') markClean();
+            if (typeof clearAutosave === 'function') clearAutosave();
         } catch (err) { alert("Invalid project file."); }
     };
     reader.readAsText(file); event.target.value = '';
