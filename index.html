@@ -515,6 +515,12 @@
                             <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
                         </div>
                         <div id="frame-layer"></div>
+                        <!-- Snap-to-alignment guide lines. Appear during drag
+                             when a frame's edge or center aligns with another
+                             frame, wall, or hang line. Always rendered on top
+                             of frames so the alignment is visible. Cleared on
+                             mouseup. -->
+                        <div id="snap-guide-layer" style="position:absolute; inset:0; pointer-events:none; z-index:55;"></div>
                     </div>
                 </div>
             </div>
