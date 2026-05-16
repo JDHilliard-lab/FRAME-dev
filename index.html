@@ -455,7 +455,21 @@
                         <button class="toggle-status" id="frameCenterToggle" style="padding: 4px; font-size: 0.65rem;" onclick="toggleElevLayer('frame-center-layer', this)">Centers</button>
                         <button class="action-btn btn-secondary" id="alignBtn" style="padding: 4px; font-size: 0.65rem;" onclick="openAlignmentDialog()" title="Align / space frames">Align</button>
                     </div>
-                    
+
+                    <!-- Nudge step inputs. Configure how far arrow-keys move selected
+                         frames. Small = arrow alone; Big = Shift+arrow. Values are in
+                         the currently-active unit (in or cm). Saved into globals on
+                         change so the keyboard handler reads them live. -->
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom: 10px; font-size: 0.65rem; color: var(--text-muted);" title="Configure arrow-key nudge step. Press an arrow key on a selected frame to move it by 'Small'. Shift+Arrow moves it by 'Big'.">
+                        <span style="flex-shrink:0;">Nudge:</span>
+                        <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 4px; font-size: 0.7rem; width: 45px; text-align: center;" oninput="updateNudgeSteps()" title="Arrow-key step (small)">
+                        <span style="flex-shrink:0;" id="nudgeUnitLabel1">in</span>
+                        <span style="flex-shrink:0; opacity:0.6;">·</span>
+                        <span style="flex-shrink:0;">Shift:</span>
+                        <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 4px; font-size: 0.7rem; width: 45px; text-align: center;" oninput="updateNudgeSteps()" title="Shift+Arrow step (big)">
+                        <span style="flex-shrink:0;" id="nudgeUnitLabel2">in</span>
+                    </div>
+
                 </div>
                 
                 <div class="elev-frame-list">
