@@ -324,7 +324,33 @@ body.dragging-frame .frame-vis:hover {
 .crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
 
 /* COMPACT ELEVATION FRAMES */
-.compact-frame-item { display: flex; align-items: center; justify-content: space-between; padding: 6px 10px; border: 1px solid var(--border-color); background: var(--bg-subpanel); border-radius: 6px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); gap: 6px; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+.compact-frame-item { display: flex; flex-direction: column; padding: 6px 10px; border: 1px solid var(--border-color); background: var(--bg-subpanel); border-radius: 6px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); gap: 4px; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+
+/* Top row of a frame panel: letter + ID on the left, icons (Wall Align, Edge
+ * Gap, ON, Move, etc.) on the right. Uses justify-content:space-between so
+ * the icons cluster against the right edge of the panel regardless of how
+ * short the letter+ID text is. */
+.frame-item-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+}
+.frame-item-label { flex: 1; min-width: 0; }
+
+/* Letter-target sub-row: dim-to-other-frames buttons that span the full
+ * panel width BELOW the top row. Only rendered when there's at least one
+ * active neighbor (conditional in JS). Wraps to multiple lines if many
+ * targets, but doesn't push the icon row taller — that's the win of this
+ * layout: predictable 1- or 2-row panel height regardless of frame count. */
+.frame-item-targets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding-top: 2px;
+    border-top: 1px solid var(--border-color);
+}
 
 /* Selection highlight on the panel side — matches the frame outline color
  * (#2196f3 blue). When a frame is hovered (or group-all is on), the matching
@@ -362,14 +388,15 @@ body.dragging-frame .compact-frame-item { transition: none; }
 }
 
 /* EDGE GAP group: 4 directional toggle arrows (↑↓←→). Matches the column
- * header width (112px) + margin (8px) so the buttons line up under the
- * header label. The label itself lives once in the column header at the
- * top of the frame list, not repeated per row. */
+ * header width (112px) so the buttons line up under the header label.
+ * The label itself lives once in the column header at the top of the
+ * frame list, not repeated per row. 2px right margin keeps this group
+ * visually tight against ON/OFF — they're in the same icon cluster. */
 .edge-gap-group {
     display: flex;
     align-items: center;
     width: 112px;
-    margin-right: 8px;
+    margin-right: 2px;
     gap: 2px;
 }
 
