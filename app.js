@@ -3443,55 +3443,57 @@ function initElevControls() {
         // "Distance to <wall>" pattern.
         html += `
             <div class="compact-frame-item" data-frame-letter="${f.letter}">
-                <div style="flex:1; min-width:0; display:flex; flex-direction:column;">
-                    <span style="font-weight:bold; font-size:0.75rem; color:var(--text-strong);">${f.letter} <span style="font-weight:normal; font-size:0.65rem; color:var(--text-muted);">(${f.id})</span></span>
-                    <div style="display:flex; gap:2px; margin-top:2px; flex-wrap:wrap;">${targetButtons}</div>
+                <div class="frame-item-top-row">
+                    <div class="frame-item-label">
+                        <span style="font-weight:bold; font-size:0.75rem; color:var(--text-strong);">${f.letter} <span style="font-weight:normal; font-size:0.65rem; color:var(--text-muted);">(${f.id})</span></span>
+                    </div>
+                    <div class="frame-item-icons">
+                        <!-- WALL ALIGN column: 2 quick-snap buttons (to hang height,
+                             to wall center). Header lives once in column header above.
+                             Operates per-frame, independent of selection/grouping. -->
+                        <div class="wall-align-group">
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn" title="Snap to Hang Height" onclick="snapFrameToHang(${idx}, event)">${svgSnapHang}</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
+                            </div>
+                        </div>
+                        <!-- EDGE GAP column: 4 distance-to-wall toggles. Label lives
+                             in the column header (one EDGE GAP label total, above
+                             the whole list). Per-frame state lives in f.distToggles. -->
+                        <div class="edge-gap-group">
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.ceiling?'active':''}" title="Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">${svgArrowUp}</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.floor?'active':''}" title="Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">${svgArrowDown}</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.left?'active':''}" title="Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">${svgArrowLeft}</button>
+                            </div>
+                            <div style="width:26px; display:flex; justify-content:center;">
+                                <button class="icon-btn ${dt.right?'active':''}" title="Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">${svgArrowRight}</button>
+                            </div>
+                        </div>
+                        <div style="width:38px; display:flex; justify-content:center;">
+                            <button class="toggle-status ${f.active?'active':''}" style="font-size:0.5rem; padding:2px 5px;" onclick="toggleElevActive(${idx}, event)">${f.active?'ON':'OFF'}</button>
+                        </div>
+                        <div style="width:28px; display:flex; justify-content:center;">
+                            <button class="icon-btn ${f.isGrouped ? 'grouped' : ''}" title="Move/Group" onclick="toggleElevGroup(${idx}, event)">${svgMove}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn" title="Edit Master" onclick="jumpToDashboard('${f.id}')">${svgEdit}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn" title="Duplicate" onclick="duplicateElevFrame(${idx}, event)">${svgDup}</button>
+                        </div>
+                        <div style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn" title="Remove" onclick="removeElevFrame(${idx}, event)">${svgTrash}</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="frame-item-icons">
-                    <!-- WALL ALIGN column: 2 quick-snap buttons (to hang height,
-                         to wall center). Header lives once in column header above.
-                         Operates per-frame, independent of selection/grouping. -->
-                    <div class="wall-align-group">
-                        <div style="width:26px; display:flex; justify-content:center;">
-                            <button class="icon-btn" title="Snap to Hang Height" onclick="snapFrameToHang(${idx}, event)">${svgSnapHang}</button>
-                        </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
-                            <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
-                        </div>
-                    </div>
-                    <!-- EDGE GAP column: 4 distance-to-wall toggles. Label lives
-                         in the column header (one EDGE GAP label total, above
-                         the whole list). Per-frame state lives in f.distToggles. -->
-                    <div class="edge-gap-group">
-                        <div style="width:26px; display:flex; justify-content:center;">
-                            <button class="icon-btn ${dt.ceiling?'active':''}" title="Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">${svgArrowUp}</button>
-                        </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
-                            <button class="icon-btn ${dt.floor?'active':''}" title="Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">${svgArrowDown}</button>
-                        </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
-                            <button class="icon-btn ${dt.left?'active':''}" title="Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">${svgArrowLeft}</button>
-                        </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
-                            <button class="icon-btn ${dt.right?'active':''}" title="Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">${svgArrowRight}</button>
-                        </div>
-                    </div>
-                    <div style="width:38px; display:flex; justify-content:center;">
-                        <button class="toggle-status ${f.active?'active':''}" style="font-size:0.5rem; padding:2px 5px;" onclick="toggleElevActive(${idx}, event)">${f.active?'ON':'OFF'}</button>
-                    </div>
-                    <div style="width:28px; display:flex; justify-content:center;">
-                        <button class="icon-btn ${f.isGrouped ? 'grouped' : ''}" title="Move/Group" onclick="toggleElevGroup(${idx}, event)">${svgMove}</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn" title="Edit Master" onclick="jumpToDashboard('${f.id}')">${svgEdit}</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn" title="Duplicate" onclick="duplicateElevFrame(${idx}, event)">${svgDup}</button>
-                    </div>
-                    <div style="width:26px; display:flex; justify-content:center;">
-                        <button class="icon-btn" title="Remove" onclick="removeElevFrame(${idx}, event)">${svgTrash}</button>
-                    </div>
-                </div>
+                ${targetButtons ? `<div class="frame-item-targets">${targetButtons}</div>` : ''}
             </div>`;
     });
     container.innerHTML = html;
