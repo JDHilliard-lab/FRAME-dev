@@ -174,6 +174,24 @@ let dashProjectData = [ JSON.parse(JSON.stringify(dashDefaultData)) ];
 let warnedLinkedFrames = new Set(); 
 
 let elevUnit = 'in';
+
+// Unit info table. Single source of truth for unit-specific values used
+// throughout the tool. When adding/changing units, update only this.
+// - factor: multiplier from INCHES to this unit (1 in = factor of <unit>)
+// - suffix: how the unit appears next to a dimension value (e.g. '24"')
+// - label: short text for unit toggles
+// - decimals: how many decimal places to show in displayed dimensions
+const UNIT_INFO = {
+    in: { factor: 1,    suffix: '"',   label: 'IN', decimals: 0 },
+    cm: { factor: 2.54, suffix: ' cm', label: 'CM', decimals: 1 },
+    mm: { factor: 25.4, suffix: ' mm', label: 'MM', decimals: 0 },
+};
+function unitInfo(u) { return UNIT_INFO[u] || UNIT_INFO.in; }
+// Conversion multiplier between any two units. unitFactor('in', 'cm') = 2.54.
+// Math: 1 in = X (unit_to / unit_from) means factor = UNIT[to]/UNIT[from].
+function unitFactor(from, to) {
+    return unitInfo(to).factor / unitInfo(from).factor;
+}
 let elevations = [{ name: "Elevation 1", frames: [], wallW: 185, wallH: 108, personPos: { x: -60 } }];
 let currentElevIndex = 0;
 let elevFrames = elevations[0].frames;
@@ -857,9 +875,10 @@ function deleteElevation(idx, e) {
     if(confirm("Delete this entire elevation wall? This cannot be undone.")) {
         elevations.splice(idx, 1);
         if (elevations.length === 0) {
-            let w = elevUnit === 'cm' ? parseFloat((185 * 2.54).toFixed(2)) : 185;
-            let h = elevUnit === 'cm' ? parseFloat((108 * 2.54).toFixed(2)) : 108;
-            let px = elevUnit === 'cm' ? parseFloat((-60 * 2.54).toFixed(2)) : -60;
+            const uf = unitFactor('in', elevUnit);
+            let w = parseFloat((185 * uf).toFixed(2));
+            let h = parseFloat((108 * uf).toFixed(2));
+            let px = parseFloat((-60 * uf).toFixed(2));
             elevations.push({ name: "Elevation 1", frames: [], wallW: w, wallH: h, personPos: {x: px} });
             currentElevIndex = 0;
         } else if (currentElevIndex > idx) { currentElevIndex--; }
@@ -872,9 +891,10 @@ function deleteElevation(idx, e) {
 
 function addNewElevationTab() {
     let newIndex = elevations.length;
-    let w = elevUnit === 'cm' ? parseFloat((185 * 2.54).toFixed(2)) : 185;
-    let h = elevUnit === 'cm' ? parseFloat((108 * 2.54).toFixed(2)) : 108;
-    let px = elevUnit === 'cm' ? parseFloat((-60 * 2.54).toFixed(2)) : -60;
+    const uf = unitFactor('in', elevUnit);
+    let w = parseFloat((185 * uf).toFixed(2));
+    let h = parseFloat((108 * uf).toFixed(2));
+    let px = parseFloat((-60 * uf).toFixed(2));
     
     elevations.push({ name: "Elevation " + (newIndex + 1), frames: [], wallW: w, wallH: h, personPos: {x: px} });
     renderNavTabs(); populateDashPushSelector(); switchView('elevation', newIndex);
@@ -956,7 +976,9 @@ function loadMasterProject(event) {
             } else { return alert("Invalid format. Please build a new project in Master Studio."); }
 
             document.getElementById('dashBtnInch').classList.toggle('active', dashUnit === 'in'); document.getElementById('dashBtnCm').classList.toggle('active', dashUnit === 'cm');
-            document.getElementById('elevBtnInch').classList.toggle('active', elevUnit === 'in'); document.getElementById('elevBtnCm').classList.toggle('active', elevUnit === 'cm');
+            const ebI = document.getElementById('elevBtnInch'); if (ebI) ebI.classList.toggle('active', elevUnit === 'in');
+            const ebC = document.getElementById('elevBtnCm'); if (ebC) ebC.classList.toggle('active', elevUnit === 'cm');
+            const ebM = document.getElementById('elevBtnMm'); if (ebM) ebM.classList.toggle('active', elevUnit === 'mm');
             
             recalculateDashboardQuantities(); selectDashRow(0); renderNavTabs(); switchView('dashboard');
             // Loaded project becomes the new canonical state. Reset undo
@@ -1008,7 +1030,7 @@ function importSelectedFramesBulk() {
     const cbs = document.querySelectorAll('.bulk-import-cb:checked');
     if(cbs.length === 0) return alert("Select at least one frame from the list!");
     
-    let factor = (dashUnit === 'cm' && elevUnit === 'in') ? (1/2.54) : (dashUnit === 'in' && elevUnit === 'cm') ? 2.54 : 1;
+    let factor = unitFactor(dashUnit, elevUnit);
     let startX = 10;
     if (elevFrames.length > 0) {
         let maxRight = 0;
@@ -1079,7 +1101,7 @@ function pushFrameToElevation() {
     const targetElev = elevations[eIdx];
     const f = dashProjectData[dashSelectedRowIndex];
     
-    let factor = (dashUnit === 'cm' && elevUnit === 'in') ? (1/2.54) : (dashUnit === 'in' && elevUnit === 'cm') ? 2.54 : 1;
+    let factor = unitFactor(dashUnit, elevUnit);
     let startX = 10;
     if (targetElev.frames.length > 0) {
         let maxRight = 0;
@@ -1142,7 +1164,7 @@ function checkGlobalEditingWarning(id) {
 
 function pushUpdatesToElevations(dashIndex) {
     const d = dashProjectData[dashIndex];
-    let factor = (dashUnit === 'cm' && elevUnit === 'in') ? (1/2.54) : (dashUnit === 'in' && elevUnit === 'cm') ? 2.54 : 1;
+    let factor = unitFactor(dashUnit, elevUnit);
 
     // Sync all dashboard-owned fields onto every matching elevation frame.
     // Earlier this only synced 9 basic fields (geometry + mats), leaving
@@ -4331,7 +4353,7 @@ function confirmDuplicate(type) {
     const temp = elevFrames[idx]; 
     const nF = JSON.parse(JSON.stringify(temp));
     nF.letter = getElevLetter(elevFrames.length); 
-    const moveFactor = elevUnit === 'in' ? 10 : 25.4;
+    const moveFactor = 10 * unitFactor('in', elevUnit);
     nF.x = temp.x + moveFactor; nF.y = temp.y - moveFactor; 
 
     if(type === 'new') {
@@ -4368,7 +4390,7 @@ function toggleElevLayer(id, btn) {
             // Place just inside the left edge — accounting for the figure's
             // visual width. The person SVG is roughly 20 inches wide so we
             // offset by 6 inches to leave a small margin.
-            elevPersonPos.x = elevUnit === 'cm' ? parseFloat((6 * 2.54).toFixed(2)) : 6;
+            elevPersonPos.x = parseFloat((6 * unitFactor('in', elevUnit)).toFixed(2));
             drawElevAll();
             pushHistory();
         }
@@ -4443,16 +4465,21 @@ async function downloadInDesignScript() {
     }
 }
 
-function elevFmt(val) { return elevUnit === 'in' ? Math.round(val).toString() : parseFloat(val).toFixed(1); }
+function elevFmt(val) {
+    // Display precision per unit. INCHES default to whole numbers; CM to 1 decimal;
+    // MM to whole numbers (mm precision is already very fine).
+    const dec = unitInfo(elevUnit).decimals;
+    return dec === 0 ? Math.round(val).toString() : parseFloat(val).toFixed(dec);
+}
 
 // Centralized hang-height getter — reads the user-editable input, falls back
-// to studio standard (57" / 144.78 cm) if blank or invalid. Used by the guide
-// line, alignment helpers, and floor/ceiling dimension layer.
+// to studio standard (57" worth, in whatever unit is active) if blank.
+// Used by the guide line, alignment helpers, and floor/ceiling dim layer.
 function getHangHeight() {
     const el = document.getElementById('hangHeight');
     const v = el ? parseFloat(el.value) : NaN;
     if (!isNaN(v) && v > 0) return v;
-    return elevUnit === 'in' ? 57 : 144.78;
+    return 57 * unitFactor('in', elevUnit);
 }
 
 // ──────────── ALIGNMENT & DISTRIBUTION HELPERS ────────────
@@ -4463,7 +4490,7 @@ let alignAxis = 'h';
 function openAlignmentDialog() {
     // Refresh the unit label to match current elevation unit
     const unitLabel = document.getElementById('alignGapUnit');
-    if (unitLabel) unitLabel.textContent = elevUnit === 'cm' ? 'cm' : 'in';
+    if (unitLabel) unitLabel.textContent = elevUnit;
     document.getElementById('alignModal').style.display = 'flex';
 }
 
@@ -4653,7 +4680,7 @@ function drawElevAll() {
     gridLayer.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(to top, rgba(0,0,0,0.06) 1px, transparent 1px)';
 
     const personHeightIn = 72; 
-    const personHeight = elevUnit === 'in' ? personHeightIn : parseFloat((personHeightIn * 2.54).toFixed(2)); 
+    const personHeight = parseFloat((personHeightIn * unitFactor('in', elevUnit)).toFixed(2));
     const pWrap = document.getElementById('person-wrap');
     document.getElementById('person').style.height = (personHeight * elevScale) + 'px';
     pWrap.style.left = (elevPersonPos.x * elevScale) + 'px';
@@ -4854,7 +4881,7 @@ function drawElevAll() {
             art.style.boxShadow = `inset 0 ${2 * elevScale}px ${8 * elevScale}px rgba(0,0,0,0.2)`;
         }
         
-        const unitSuffix = elevUnit === 'in' ? '"' : ' cm';
+        const unitSuffix = unitInfo(elevUnit).suffix;
         art.innerText = (artW > 0) ? `${artW.toFixed(1)}${unitSuffix}\nx\n${artH.toFixed(1)}${unitSuffix}` : "";
         el.appendChild(art);
         
@@ -4864,12 +4891,14 @@ function drawElevAll() {
 
         const odTag = document.createElement('div'); odTag.className = 'od-id-tag';
         odTag.style.left = ((f.x + f.w) * elevScale) + 'px'; odTag.style.bottom = ((f.y + f.h) * elevScale) + 'px';
-        const odSuffix = elevUnit === 'in' ? '"' : 'cm';
+        // OD label appends the unit directly without leading space ('24"x36"', '60x90cm')
+        const odSuffix = elevUnit === 'in' ? '"' : elevUnit;
         odTag.innerText = `OD: ${f.w.toFixed(1)}x${f.h.toFixed(1)}${odSuffix}`; odLayer.appendChild(odTag);
 
         const crossH = document.createElement('div'); crossH.className = 'crosshair-h';
-        const chPad = elevUnit === 'in' ? 6 : 15.24;
-        const chHalf = elevUnit === 'in' ? 3 : 7.62;
+        // Crosshair padding: 6 inches worth in whatever unit we're in
+        const chPad = 6 * unitFactor('in', elevUnit);
+        const chHalf = chPad / 2;
         crossH.style.width = ((f.w + chPad) * elevScale) + 'px'; crossH.style.left = ((f.x - chHalf) * elevScale) + 'px'; crossH.style.bottom = ((f.y + f.h/2) * elevScale) + 'px';
         const crossV = document.createElement('div'); crossV.className = 'crosshair-v';
         crossV.style.height = ((f.h + chPad) * elevScale) + 'px'; crossV.style.left = ((f.x + f.w/2) * elevScale) + 'px'; crossV.style.bottom = ((f.y - chHalf) * elevScale) + 'px';
@@ -5049,7 +5078,7 @@ function makeElevDraggable(el, idx) {
             // Drag snap-to-grid increment. User-configurable via the Settings
             // modal (dragSnap input). Defaults to 1in / 1cm if input is
             // missing or invalid. Independent of the visual grid size.
-            let snap = elevUnit === 'in' ? 1 : 2.54;
+            let snap = 1 * unitFactor('in', elevUnit);
             const dragSnapEl = document.getElementById('dragSnap');
             if (dragSnapEl) {
                 const v = parseFloat(dragSnapEl.value);
@@ -5134,13 +5163,14 @@ function drawElevGuides(wallW, wallH) {
     if(hangVal < wallH) {
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
-        hl.innerHTML = `<span class="hang-label">HANG HEIGHT: ${elevFmt(hangVal)}${elevUnit==='in'?'"':''}</span>`;
+        hl.innerHTML = `<span class="hang-label">HANG HEIGHT: ${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</span>`;
         guideLayer.appendChild(hl);
     }
     
-    const offsetDist = elevUnit === 'in' ? 6 : 15.24;
-    createElevArchDim(0, wallH + offsetDist, wallW, wallH + offsetDist, 'h', `${elevFmt(wallW)}${elevUnit === 'in' ? '"' : ' cm'}`, archLayer, true);
-    createElevArchDim(-offsetDist, 0, -offsetDist, wallH, 'v', `${elevFmt(wallH)}${elevUnit === 'in' ? '"' : ' cm'}`, archLayer, true);
+    const offsetDist = 6 * unitFactor('in', elevUnit);
+    const suffix = unitInfo(elevUnit).suffix;
+    createElevArchDim(0, wallH + offsetDist, wallW, wallH + offsetDist, 'h', `${elevFmt(wallW)}${suffix}`, archLayer, true);
+    createElevArchDim(-offsetDist, 0, -offsetDist, wallH, 'v', `${elevFmt(wallH)}${suffix}`, archLayer, true);
 
     // The character figure is a known 72" tall scale reference, so we don't render
     // an explicit height dimension next to it. Per studio convention all designers
@@ -5249,7 +5279,7 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
     dim.style.left = left + 'px';
     dim.style.bottom = bottom + 'px';
 
-    const offset = (elevUnit === 'in' ? 6 : 15.24) * elevScale; 
+    const offset = 6 * unitFactor('in', elevUnit) * elevScale;
 
     if(type === 'h') {
         const width = Math.abs(x2 - x1) * elevScale;
@@ -5295,7 +5325,9 @@ function setElevUnit(u) {
         elevations[currentElevIndex].wallW = parseFloat(document.getElementById('wallW').value) || elevations[currentElevIndex].wallW;
         elevations[currentElevIndex].wallH = parseFloat(document.getElementById('wallH').value) || elevations[currentElevIndex].wallH;
     }
-    const f = u === 'cm' ? 2.54 : (1/2.54);
+    // Use the helper for general N-way conversion. Replaces the old 2-way
+    // IN↔CM logic that hardcoded 2.54.
+    const f = unitFactor(elevUnit, u);
     elevations.forEach(elev => {
         elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
         elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
@@ -5306,28 +5338,26 @@ function setElevUnit(u) {
         });
         elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
     });
-    
+
     elevUnit = u;
+    const newSuffix = unitInfo(u).suffix.trim() || 'in';  // for labels: 'in'/'cm'/'mm'
+    const labelText = u === 'in' ? 'in' : (u === 'cm' ? 'cm' : 'mm');
     document.getElementById('wallW').value = elevations[currentElevIndex].wallW;
     document.getElementById('wallH').value = elevations[currentElevIndex].wallH;
-    // Convert the hang height value too. If empty, leave it for default to fill in.
+    // Convert hang height value if present
     const hangEl = document.getElementById('hangHeight');
     if (hangEl && hangEl.value) {
-        const converted = parseFloat((parseFloat(hangEl.value) * f).toFixed(2));
-        hangEl.value = converted;
+        hangEl.value = parseFloat((parseFloat(hangEl.value) * f).toFixed(2));
     }
-    // Convert the alignment gap value to the new unit, if any. Keep the user's
-    // numeric intent intact (4" stays 4" worth of space; converted to ~10.16cm).
+    // Alignment gap value + unit label
     const gapEl = document.getElementById('alignGapValue');
     if (gapEl && gapEl.value) {
         gapEl.value = parseFloat((parseFloat(gapEl.value) * f).toFixed(2));
     }
     const gapUnitEl = document.getElementById('alignGapUnit');
-    if (gapUnitEl) gapUnitEl.textContent = u === 'cm' ? 'cm' : 'in';
+    if (gapUnitEl) gapUnitEl.textContent = labelText;
 
-    // Convert nudge step inputs to the new unit. If user set them to "1in",
-    // they expect "2.54cm" after the toggle. Update the adjacent unit
-    // labels (nudgeUnitLabel1/2) to match.
+    // Nudge step inputs + labels
     const nudgeSmallEl = document.getElementById('nudgeSmall');
     const nudgeBigEl = document.getElementById('nudgeBig');
     if (nudgeSmallEl && nudgeSmallEl.value) {
@@ -5337,11 +5367,9 @@ function setElevUnit(u) {
         nudgeBigEl.value = parseFloat((parseFloat(nudgeBigEl.value) * f).toFixed(2));
     }
     const nudgeUnitLabels = [document.getElementById('nudgeUnitLabel1'), document.getElementById('nudgeUnitLabel2')];
-    nudgeUnitLabels.forEach(el => { if (el) el.textContent = u === 'cm' ? 'cm' : 'in'; });
+    nudgeUnitLabels.forEach(el => { if (el) el.textContent = labelText; });
 
-    // Same treatment for Grid Size and Drag Snap inputs. If user set grid
-    // to 6in, after switching to cm it becomes 15.24cm. Unit labels next
-    // to the inputs (gridSizeUnitLabel, dragSnapUnitLabel) follow.
+    // Grid Size + Drag Snap inputs + labels
     const gridSizeEl = document.getElementById('gridSize');
     const dragSnapEl = document.getElementById('dragSnap');
     if (gridSizeEl && gridSizeEl.value) {
@@ -5351,12 +5379,17 @@ function setElevUnit(u) {
         dragSnapEl.value = parseFloat((parseFloat(dragSnapEl.value) * f).toFixed(2));
     }
     const gridUnitLbl = document.getElementById('gridSizeUnitLabel');
-    if (gridUnitLbl) gridUnitLbl.textContent = u === 'cm' ? 'cm' : 'in';
+    if (gridUnitLbl) gridUnitLbl.textContent = labelText;
     const dragSnapUnitLbl = document.getElementById('dragSnapUnitLabel');
-    if (dragSnapUnitLbl) dragSnapUnitLbl.textContent = u === 'cm' ? 'cm' : 'in';
+    if (dragSnapUnitLbl) dragSnapUnitLbl.textContent = labelText;
 
-    document.getElementById('elevBtnInch').classList.toggle('active', elevUnit==='in'); 
-    document.getElementById('elevBtnCm').classList.toggle('active', elevUnit==='cm');
+    // Unit toggle buttons (3 of them now: IN, CM, MM)
+    const btnIn = document.getElementById('elevBtnInch');
+    const btnCm = document.getElementById('elevBtnCm');
+    const btnMm = document.getElementById('elevBtnMm');
+    if (btnIn) btnIn.classList.toggle('active', elevUnit === 'in');
+    if (btnCm) btnCm.classList.toggle('active', elevUnit === 'cm');
+    if (btnMm) btnMm.classList.toggle('active', elevUnit === 'mm');
     initElevControls(); drawElevAll();
 }
 
