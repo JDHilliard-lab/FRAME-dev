@@ -283,15 +283,21 @@ select.no-arrow::-ms-expand { display: none; }
 /* Add & Arrange fixed strip — pinned between the collapsible header sections
  * and the frame panel list. Always visible since these are the most-used
  * controls in the elevation view (importing frames, sorting, aligning).
- * Padding matches .elev-sidebar-header for visual continuity. */
+ * Horizontal padding is 10px because the inner emphasis card adds its own
+ * 10px padding, totaling 20px to content — which matches the 20px padding
+ * other sections use, so everything aligns vertically on the sidebar's
+ * left edge. The static section title gets its own left margin so it
+ * also lands at the 20px alignment column. */
 .elev-add-arrange-fixed {
-    padding: 8px 20px 10px;
+    padding: 8px 10px 10px;
     border-bottom: 1px solid var(--border-color);
     background: var(--bg-panel);
     flex-shrink: 0;
 }
 .elev-add-arrange-fixed .section-title {
     margin-top: 0;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /* Layout Guides grid: 4 icon-only buttons per row. No text labels — the
