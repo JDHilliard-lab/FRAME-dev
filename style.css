@@ -234,44 +234,10 @@ select.no-arrow::-ms-expand { display: none; }
 .elev-sidebar { width: 440px; background: var(--bg-panel); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 100; flex-shrink: 0; }
 .elev-sidebar-header { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
 
-/* Section container — small block grouping related controls. Subtle border
- * at the bottom acts as a divider between sections. Last section in the
- * header (Add & Arrange) gets a stronger visual via .elev-section-emphasis. */
-.elev-section {
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border-color);
-}
-.elev-section:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
-
-/* Section header label: small caps, muted, low visual weight so the
- * controls themselves are the focus, not the labels. */
-.elev-section-label {
-    font-size: 0.6rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.7px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-/* Emphasis variant: used for "Add & Arrange" which is the highest-traffic
- * section. Subtle background tint distinguishes it without being loud. */
-.elev-section-emphasis {
-    background: var(--bg-subpanel);
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid var(--border-color);
-    margin-bottom: 0;
-}
-.elev-section-emphasis .elev-section-label {
-    color: var(--text-strong);
-    margin-bottom: 8px;
-}
-
-/* Input with an inline icon. The icon sits on the left inside the input's
- * visual bounds, the input itself takes remaining space. Used for wall
- * dims and font-size where a tiny icon hints at what's being measured. */
+/* Input with an inline icon. The icon (and optional prefix label like "W:")
+ * sits on the left inside the input's visual bounds; the input takes the
+ * remaining space. Used for wall dims, hang, and font-size where a tiny
+ * icon + prefix hints at what's being measured. */
 .elev-input-with-icon {
     display: flex;
     align-items: center;
@@ -280,7 +246,7 @@ select.no-arrow::-ms-expand { display: none; }
     border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 0 6px;
-    height: 26px;
+    height: 30px;
     transition: border-color 0.15s;
 }
 .elev-input-with-icon:focus-within {
@@ -304,25 +270,94 @@ select.no-arrow::-ms-expand { display: none; }
     opacity: 0.6;
     stroke-width: 2;
 }
+/* Prefix label inside an input wrapper: small caps, muted, like "W:" or
+ * "Hang:". Sits before the icon (or alone if there's no icon). */
+.elev-input-prefix {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    flex-shrink: 0;
+    line-height: 1;
+}
 
-/* Toggle-status buttons (Labels, OD, Spacing, etc.) when they contain an
- * inline icon AND text label. Icon sits above the text in a compact stack
- * so the button stays a reasonable size while showing both. */
-.toggle-status.toggle-with-icon {
+/* Layout Guides grid: 4 cells per row, each cell has a label TEXT above a
+ * square icon button. Matches the frame panel icon-btn dimensions (26px)
+ * so the visual rhythm of the sidebar is consistent. */
+.layout-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+.layout-guide-cell {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 2px;
-    padding: 4px 2px;
-    font-size: 0.6rem;
-    line-height: 1;
-    min-height: 36px;
+    gap: 3px;
 }
-.toggle-status.toggle-with-icon .svg-icon {
+.layout-guide-label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    line-height: 1;
+    text-align: center;
+}
+.layout-guide-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-input);
+    transition: 0.18s;
+    padding: 0;
+    font-size: 0;  /* hide any accidental text children */
+}
+.layout-guide-btn:hover {
+    background: var(--border-color);
+    border-color: var(--text-muted);
+}
+.layout-guide-btn .svg-icon {
     width: 14px;
     height: 14px;
     stroke-width: 2;
+}
+.layout-guide-btn.toggle-status.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Emphasis container for Add & Arrange contents. Subtle background tint
+ * inside the collapsible-section, since the section itself uses the
+ * dashboard's section-title pattern (no built-in emphasis). */
+.elev-section-emphasis-inner {
+    background: var(--bg-subpanel);
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+/* Keyboard shortcut chip — styled inline kbd element used in the Precision
+ * modal's shortcut reference table. Gives shortcuts a visually distinct
+ * look from prose so users can scan the list quickly. */
+.kbd-key {
+    display: inline-block;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+    font-size: 0.65rem;
+    color: var(--text-strong);
+    box-shadow: 0 1px 0 var(--border-color);
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.3;
 }
 .elev-frame-list { flex: 1; overflow-y: auto; padding: 10px 20px; }
 .workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
