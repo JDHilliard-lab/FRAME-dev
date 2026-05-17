@@ -97,6 +97,46 @@ const svgArrowRight = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 12h
 const svgSnapHang = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="6" y="7" width="12" height="10" rx="1"/><path d="M3 12h18" stroke-dasharray="2 2"/></svg>`;
 const svgSnapWallCenter = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="12" rx="1"/><path d="M12 3v18" stroke-dasharray="2 2"/></svg>`;
 
+// ─── Sidebar icon set ────────────────────────────────────────────────────
+// Used by the elevation sidebar's section headers and inline button icons.
+// All 24x24 viewBox, single-stroke style so they harmonize with each other.
+// svgImport: down-arrow into a tray — "bring frames in"
+const svgImport = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>`;
+// svgPlus: simple plus — Add Selected button
+const svgPlus = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>`;
+// svgZoom: magnifying glass with plus inside (zoom in) — generic zoom icon
+const svgZoom = `<svg class="svg-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M8 11h6M11 8v6"/></svg>`;
+// svgFit: corners pointing outward — fit content to viewport
+const svgFit = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/></svg>`;
+// svgDownload: down-arrow over baseline — export/download (used for PNG export)
+const svgDownload = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>`;
+// svgWallWidth: horizontal arrows between two posts — width measurement
+const svgWallWidth = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 6v12M20 6v12M6 12h12M6 12l3-3M6 12l3 3M18 12l-3-3M18 12l-3 3"/></svg>`;
+// svgWallHeight: vertical arrows between top/bottom — height measurement
+const svgWallHeight = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 4h12M6 20h12M12 6v12M12 6l-3 3M12 6l3 3M12 18l-3-3M12 18l3-3"/></svg>`;
+// svgHang: small picture-frame at a hang line — "where art centers vertically"
+const svgHang = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="8" rx="1"/><path d="M3 18h18"/></svg>`;
+// svgFont: capital A with subtle baseline — font-size adjust
+const svgFont = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M5 20l5-14h4l5 14M7 15h10"/></svg>`;
+// svgLabel: text "A" — labels toggle (existing button became icon)
+const svgLabelIcon = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M5 20l5-14h4l5 14M7 15h10"/></svg>`;
+// svgOd: measurement bracket [ — ] — OD dimensions
+const svgOdIcon = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 6v12M21 6v12M3 12h18"/></svg>`;
+// svgSpacing: dashed horizontal line with end-ticks — spacing dims
+const svgSpacingIcon = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>`;
+// svgPersonIcon: simple person silhouette — already in HTML, kept here for reference
+const svgPersonIcon = `<svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1.5 19v-5.5H9V10c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v5.5h-1.5V21h-3z"/></svg>`;
+// svgGuides: vertical ruler with tick marks
+const svgGuidesIcon = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M9 6h6M9 10h6M9 14h6M9 18h6"/></svg>`;
+// svgGrid: 3x3 grid
+const svgGridIcon = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>`;
+// svgCenters: crosshair
+const svgCentersIcon = `<svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>`;
+// svgAlign: stacked horizontal lines (alignment indicator)
+const svgAlign = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 6h12M3 12h18M3 18h9"/></svg>`;
+// svgSort: A above Z with down-arrow — alphabetical sort
+const svgSort = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>`;
+
 const dashDefaultData = { 
     id: "ART.001", imageCode: "TBD", level: "1", qty: 0, product: "Framed Art", location: "LOBBY", 
     // Phase A additions: artwork attribution + frame profile depth + paper type.
