@@ -408,85 +408,115 @@
                         <input type="text" id="elev-title-input" value="Elevation Editor" style="margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: bold; border: none; background: transparent; padding: 0; outline: none; border-bottom: 1px dashed var(--border-color);" onchange="updateElevationNameFromInput(this.value)">
                     </div>
 
-                    <!-- ─── WALL SETUP ─────────────────────────────────────
-                         Set up the room: width × height × hang height. Done
-                         once per elevation, rarely touched afterward. Compact
-                         row with icons that read as physical measurements. -->
-                    <div class="elev-section">
-                        <div class="elev-section-label">Wall</div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 6px; align-items: end;">
+                    <!-- ─── WALL DIMENSIONS ────────────────────────────────
+                         Set up the room dimensions. Collapsible (matches the
+                         dashboard form pattern). Inputs use W: / H: prefixes
+                         so the role is clear even with the icon hint. CM/IN
+                         toggle sits at the end of the row. -->
+                    <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">Wall Dimensions <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div id="elev-sec-wall" class="collapsible-section open">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; margin-bottom: 8px;">
                             <div class="elev-input-with-icon" title="Wall width">
+                                <span class="elev-input-prefix">W:</span>
                                 <svg class="svg-icon elev-input-icon" viewBox="0 0 24 24"><path d="M4 6v12M20 6v12M6 12h12M6 12l3-3M6 12l3 3M18 12l-3-3M18 12l-3 3"/></svg>
                                 <input type="number" id="wallW" value="185" oninput="updateElevWall()" onchange="pushHistory()">
                             </div>
                             <div class="elev-input-with-icon" title="Wall height">
+                                <span class="elev-input-prefix">H:</span>
                                 <svg class="svg-icon elev-input-icon" viewBox="0 0 24 24"><path d="M6 4h12M6 20h12M12 6v12M12 6l-3 3M12 6l3 3M12 18l-3-3M12 18l3-3"/></svg>
                                 <input type="number" id="wallH" value="108" oninput="updateElevWall()" onchange="pushHistory()">
                             </div>
-                            <div class="elev-input-with-icon" title="Hang height — center of art height. Gallery/museum standard is 57&quot;">
-                                <svg class="svg-icon elev-input-icon" viewBox="0 0 24 24"><rect x="7" y="6" width="10" height="8" rx="1"/><path d="M3 18h18"/></svg>
-                                <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()">
-                            </div>
-                            <div class="unit-toggle" style="height:26px;">
+                            <div class="unit-toggle" style="height:30px;">
                                 <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
                                 <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ─── VIEW ───────────────────────────────────────────
-                         Layer toggles for things that overlay the elevation:
-                         labels, dimensions, scale figure, etc. Plus the font
-                         size for dim text (logically a display setting, not
-                         a wall property). Kept visible per design decision
-                         so designers can see at a glance what's on/off. -->
-                    <div class="elev-section">
-                        <div class="elev-section-label">View</div>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 4px;">
-                            <button class="toggle-status toggle-with-icon" id="labelToggle" title="Show/hide frame labels (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M5 20l5-14h4l5 14M7 15h10"/></svg>
-                                <span>Labels</span>
-                            </button>
-                            <button class="toggle-status toggle-with-icon" id="odToggle" title="Show/hide outer-dimension brackets" onclick="toggleElevLayer('od-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 6v12M21 6v12M3 12h18"/></svg>
-                                <span>OD</span>
-                            </button>
-                            <button class="toggle-status toggle-with-icon" id="dimToggle" title="Show/hide spacing dimensions between frames" onclick="toggleElevLayer('dim-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>
-                                <span>Spacing</span>
-                            </button>
-                            <button class="toggle-status toggle-with-icon" id="personToggle" title="Show/hide scale figure (6 ft person)" onclick="toggleElevLayer('person-wrap', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1.5 19v-5.5H9V10c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v5.5h-1.5V21h-3z"/></svg>
-                                <span>Person</span>
-                            </button>
+                    <!-- ─── LAYOUT GUIDES ─────────────────────────────────
+                         Overlays and visual aids: dimensions, labels, scale
+                         figure, reference grid, hang line. Plus font-size
+                         (display setting) and the Precision tool button.
+                         Toggles are square buttons matching frame panel
+                         icon dimensions, with title TEXT above each icon. -->
+                    <div class="section-title" onclick="toggleDashSection('elev-sec-layout', this)">Layout Guides <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div id="elev-sec-layout" class="collapsible-section open">
+                        <!-- Row 1: layer toggles (4 across) -->
+                        <div class="layout-guides-grid" style="margin-bottom: 6px;">
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Labels</span>
+                                <button class="layout-guide-btn toggle-status" id="labelToggle" title="Show/hide frame letter labels (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
+                                    <!-- Sticker icon: tag/label shape with a small dot/hole at one corner like a peeled sticker -->
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><circle cx="16" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
+                                </button>
+                            </div>
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Frame OD</span>
+                                <button class="layout-guide-btn toggle-status" id="odToggle" title="Show/hide outer-dimension brackets around each frame" onclick="toggleElevLayer('od-layer', this)">
+                                    <!-- OD icon: small frame with corner brackets indicating outer measurement -->
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="0.5"/><path d="M3 5V3h2M3 19v2h2M21 5V3h-2M21 19v2h-2"/></svg>
+                                </button>
+                            </div>
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Spacing</span>
+                                <button class="layout-guide-btn toggle-status" id="dimToggle" title="Show/hide spacing dimensions between frames and walls" onclick="toggleElevLayer('dim-layer', this)">
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>
+                                </button>
+                            </div>
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Person</span>
+                                <button class="layout-guide-btn toggle-status" id="personToggle" title="Show/hide 6 ft scale figure" onclick="toggleElevLayer('person-wrap', this)">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1.5 19v-5.5H9V10c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v5.5h-1.5V21h-3z"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 4px;">
-                            <button class="toggle-status toggle-with-icon" id="guideToggle" title="Show/hide reference guide lines" onclick="toggleElevLayer('guide-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M9 6h6M9 10h6M9 14h6M9 18h6"/></svg>
-                                <span>Guides</span>
-                            </button>
-                            <button class="toggle-status toggle-with-icon" id="gridToggle" title="Show/hide background grid" onclick="toggleElevLayer('grid-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-                                <span>Grid</span>
-                            </button>
-                            <button class="toggle-status toggle-with-icon" id="frameCenterToggle" title="Show/hide frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
-                                <span>Centers</span>
-                            </button>
-                            <div class="elev-input-with-icon" title="Dimension text font size" style="width: 60px;">
-                                <svg class="svg-icon elev-input-icon" viewBox="0 0 24 24"><path d="M5 20l5-14h4l5 14M7 15h10"/></svg>
+                        <!-- Row 2: more toggles + utilities (4 across) -->
+                        <div class="layout-guides-grid" style="margin-bottom: 6px;">
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Guides</span>
+                                <button class="layout-guide-btn toggle-status" id="guideToggle" title="Show/hide reference guide lines" onclick="toggleElevLayer('guide-layer', this)">
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M9 6h6M9 10h6M9 14h6M9 18h6"/></svg>
+                                </button>
+                            </div>
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Grid</span>
+                                <button class="layout-guide-btn toggle-status" id="gridToggle" title="Show/hide background grid" onclick="toggleElevLayer('grid-layer', this)">
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+                                </button>
+                            </div>
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Centers</span>
+                                <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Show/hide frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
+                                </button>
+                            </div>
+                            <div class="layout-guide-cell">
+                                <span class="layout-guide-label">Nudge</span>
+                                <button class="layout-guide-btn" title="Configure arrow-key nudge step + see shortcuts" onclick="openPrecisionModal()">
+                                    <!-- Gear icon -->
+                                    <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Row 3: numeric inputs — hang height + font size -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                            <div class="elev-input-with-icon" title="Hang height — center of art height. Gallery/museum standard is 57&quot;">
+                                <span class="elev-input-prefix">Hang:</span>
+                                <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()">
+                            </div>
+                            <div class="elev-input-with-icon" title="Dimension text font size">
+                                <span class="elev-input-prefix">Font:</span>
                                 <input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()">
                             </div>
                         </div>
                     </div>
 
                     <!-- ─── ZOOM & EXPORT ─────────────────────────────────
-                         Pan/zoom controls plus the elevation export. Grouped
-                         because they're all about "how I see and capture
-                         this elevation" rather than what's in it. -->
-                    <div class="elev-section">
-                        <div class="elev-section-label">Zoom &amp; Export</div>
-                        <div style="display: flex; gap: 8px; align-items: center;">
+                         Pan/zoom + PNG export. Grouped because they're all
+                         about how you see and capture the elevation. -->
+                    <div class="section-title" onclick="toggleDashSection('elev-sec-zoom', this)">Zoom &amp; Export <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div id="elev-sec-zoom" class="collapsible-section open">
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
                             <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; opacity:0.7;"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M8 11h6M11 8v6"/></svg>
                             <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="flex: 1; margin:0; accent-color: #888;" oninput="updateElevZoom(this.value)">
                             <button class="action-btn btn-secondary" style="margin:0; padding: 4px 8px; width: auto; font-size: 0.65rem; display: flex; align-items: center; gap: 4px;" onclick="fitElevZoom()" title="Fit elevation to window">
@@ -499,55 +529,35 @@
                         </div>
                     </div>
 
-                    <!-- ─── PRECISION ─────────────────────────────────────
-                         Arrow-key nudge step config. Tucked at the bottom
-                         of the tool config since it's a power-user feature
-                         and rarely needs touching once set. -->
-                    <div class="elev-section">
-                        <div class="elev-section-label" title="Configure arrow-key nudge step. Arrow alone = Small, Shift+Arrow = Big.">Precision</div>
-                        <div style="display:flex; align-items:center; gap:6px; font-size: 0.7rem; color: var(--text-muted);">
-                            <span style="flex-shrink:0;">Nudge:</span>
-                            <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 4px; font-size: 0.7rem; width: 50px; text-align: center;" oninput="updateNudgeSteps()" title="Arrow-key step">
-                            <span style="flex-shrink:0;" id="nudgeUnitLabel1">in</span>
-                            <span style="flex-shrink:0; opacity:0.5;">·</span>
-                            <span style="flex-shrink:0;">Shift:</span>
-                            <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 4px; font-size: 0.7rem; width: 50px; text-align: center;" oninput="updateNudgeSteps()" title="Shift+Arrow step">
-                            <span style="flex-shrink:0;" id="nudgeUnitLabel2">in</span>
-                        </div>
-                    </div>
-
-                    <!-- ─── ADD & ARRANGE ────────────────────────────────
-                         The frequently-used controls for getting frames into
-                         the elevation and organizing them. Placed directly
-                         above the frame panel list per user request — these
-                         operations belong next to what they affect. -->
-                    <div class="elev-section elev-section-emphasis">
-                        <div class="elev-section-label">Add &amp; Arrange</div>
-                        <div style="display: flex; gap: 6px; align-items: center; margin-bottom: 6px;">
-                            <div style="position: relative; flex: 1;">
-                                <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: 0.75rem; justify-content: space-between; padding: 0 8px; width:100%; cursor:pointer; display:flex; align-items:center; gap:6px;" onclick="toggleBulkDropdown()">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                                    <span style="flex: 1; text-align:left;">Import Frames</span>
-                                    <svg class="svg-icon" style="width:12px; height:12px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </button>
-                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
-                                    <div id="bulkImportCheckboxes"></div>
+                    <!-- ─── ADD & ARRANGE ─────────────────────────────────
+                         The high-frequency section: get frames in, organize
+                         them. Single row, with Sort and Align as icon-only
+                         buttons to fit. Emphasized via subtle background. -->
+                    <div class="section-title" onclick="toggleDashSection('elev-sec-add', this)">Add &amp; Arrange <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                    <div id="elev-sec-add" class="collapsible-section open">
+                        <div class="elev-section-emphasis-inner">
+                            <div style="display: flex; gap: 6px; align-items: center;">
+                                <div style="position: relative; flex: 1; min-width: 0;">
+                                    <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: 0.7rem; justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
+                                        <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                                        <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
+                                        <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                    </button>
+                                    <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
+                                        <div id="bulkImportCheckboxes"></div>
+                                    </div>
                                 </div>
+                                <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
+                                    Add
+                                </button>
+                                <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
+                                </button>
+                                <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
+                                </button>
                             </div>
-                            <button class="action-btn" style="width:auto; font-size: 0.75rem; padding: 0 10px; display:flex; align-items:center; gap:4px;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-                                Add
-                            </button>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
-                            <button class="action-btn btn-secondary" style="font-size: 0.7rem; padding: 4px 8px; display:flex; align-items:center; justify-content:center; gap:5px;" onclick="autoElevRelabel()" title="Re-letter frames A, B, C… by horizontal position">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
-                                Sort A–Z
-                            </button>
-                            <button class="action-btn btn-secondary" id="alignBtn" style="font-size: 0.7rem; padding: 4px 8px; display:flex; align-items:center; justify-content:center; gap:5px;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
-                                Align
-                            </button>
                         </div>
                     </div>
 
@@ -685,6 +695,60 @@
         </div>
 
         <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('installModal').style.display='none'">Got it</button>
+    </div>
+</div>
+
+<!-- Precision / Nudge config modal. Opened from the "Nudge" gear button in
+     the Layout Guides section. Configures arrow-key step sizes and shows
+     a reference of all keyboard shortcuts so users can discover them
+     without leaving the tool. The nudge inputs keep their original IDs
+     (nudgeSmall, nudgeBig, nudgeUnitLabel1/2) so existing handlers work. -->
+<div id="precisionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:420px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;">
+        <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.1rem; color:var(--text-strong);">Precision &amp; Shortcuts</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Configure how far selected frames move when you press the arrow keys.</p>
+
+        <!-- Nudge step inputs -->
+        <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color); margin-bottom:14px;">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div>
+                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Arrow alone (small step)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
+                        <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel1">in</span>
+                    </div>
+                </div>
+                <div>
+                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Shift + Arrow (big step)</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
+                        <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel2">in</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard shortcuts reference. Two columns: shortcut + what it does.
+             Built as a discoverability aid since keyboard shortcuts were
+             previously invisible to new users. -->
+        <div style="margin-bottom:14px; padding:12px; background:var(--bg-subpanel); border-radius:6px; border-left:3px solid var(--accent);">
+            <div style="font-size:0.7rem; color:var(--text-strong); font-weight:bold; margin-bottom:8px;">Keyboard Shortcuts</div>
+            <div style="display:grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size:0.7rem; color:var(--text-main); line-height: 1.5;">
+                <kbd class="kbd-key">←&nbsp;↑&nbsp;→&nbsp;↓</kbd><span>Nudge selected frames by small step</span>
+                <kbd class="kbd-key">Shift&nbsp;+&nbsp;Arrow</kbd><span>Nudge by big step</span>
+                <kbd class="kbd-key">Delete</kbd><span>Remove selected frames</span>
+                <kbd class="kbd-key">Esc</kbd><span>Deselect all frames</span>
+                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;D</kbd><span>Duplicate selected frame</span>
+                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;G</kbd><span>Group / ungroup selected frames</span>
+                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Z</kbd><span>Undo</span>
+                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;Z</kbd><span>Redo</span>
+                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;S</kbd><span>Save project</span>
+                <kbd class="kbd-key">Click</kbd><span>Select one frame</span>
+                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Click</kbd><span>Add/remove from multi-selection</span>
+            </div>
+        </div>
+
+        <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('precisionModal').style.display='none'">Done</button>
     </div>
 </div>
 
