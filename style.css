@@ -232,7 +232,98 @@ select.no-arrow::-ms-expand { display: none; }
 /* ELEVATION SPECIFIC CSS                    */
 /* ========================================= */
 .elev-sidebar { width: 440px; background: var(--bg-panel); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 100; flex-shrink: 0; }
-.elev-sidebar-header { padding: 15px 20px; border-bottom: 1px solid var(--border-color); }
+.elev-sidebar-header { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+
+/* Section container — small block grouping related controls. Subtle border
+ * at the bottom acts as a divider between sections. Last section in the
+ * header (Add & Arrange) gets a stronger visual via .elev-section-emphasis. */
+.elev-section {
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+.elev-section:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+/* Section header label: small caps, muted, low visual weight so the
+ * controls themselves are the focus, not the labels. */
+.elev-section-label {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+/* Emphasis variant: used for "Add & Arrange" which is the highest-traffic
+ * section. Subtle background tint distinguishes it without being loud. */
+.elev-section-emphasis {
+    background: var(--bg-subpanel);
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+.elev-section-emphasis .elev-section-label {
+    color: var(--text-strong);
+    margin-bottom: 8px;
+}
+
+/* Input with an inline icon. The icon sits on the left inside the input's
+ * visual bounds, the input itself takes remaining space. Used for wall
+ * dims and font-size where a tiny icon hints at what's being measured. */
+.elev-input-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0 6px;
+    height: 26px;
+    transition: border-color 0.15s;
+}
+.elev-input-with-icon:focus-within {
+    border-color: var(--accent);
+}
+.elev-input-with-icon input {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 0.8rem;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    outline: none;
+    color: var(--text-strong);
+}
+.elev-input-with-icon .elev-input-icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    stroke-width: 2;
+}
+
+/* Toggle-status buttons (Labels, OD, Spacing, etc.) when they contain an
+ * inline icon AND text label. Icon sits above the text in a compact stack
+ * so the button stays a reasonable size while showing both. */
+.toggle-status.toggle-with-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 4px 2px;
+    font-size: 0.6rem;
+    line-height: 1;
+    min-height: 36px;
+}
+.toggle-status.toggle-with-icon .svg-icon {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2;
+}
 .elev-frame-list { flex: 1; overflow-y: auto; padding: 10px 20px; }
 .workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
 #export-wrap { padding: 80px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
