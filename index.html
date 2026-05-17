@@ -409,17 +409,15 @@
                     </div>
 
                     <!-- ─── WALL DIMENSIONS ────────────────────────────────
-                         Now serves as the master setup section: physical
-                         wall measurements (W, H, Hang, Font) on row 1, then
-                         display controls (Zoom slider, Fit, Export PNG) on
-                         row 2. Both rows of "things you set up at the start
-                         of working on this elevation". -->
+                         Just the physical wall measurements (W, H) plus the
+                         IN/CM toggle. Hang Height and Font Size moved into
+                         the Settings modal since they're "set-once-per-
+                         elevation" values rather than ongoing controls.
+                         Row 2 keeps zoom + Fit + Export PNG. -->
                     <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">Wall Dimensions <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="elev-sec-wall" class="collapsible-section open">
-                        <!-- Row 1: physical measurements + font + units. Five
-                             items in one tight grid. Inputs get prefix labels
-                             rather than icons since 5 across is already busy. -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 5px; align-items: center; margin-bottom: 8px;">
+                        <!-- Row 1: just W, H, IN/CM. Hang and Font are now in Settings. -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; margin-bottom: 8px;">
                             <div class="elev-input-with-icon" title="Wall width">
                                 <span class="elev-input-prefix">W:</span>
                                 <input type="number" id="wallW" value="185" oninput="updateElevWall()" onchange="pushHistory()">
@@ -427,14 +425,6 @@
                             <div class="elev-input-with-icon" title="Wall height">
                                 <span class="elev-input-prefix">H:</span>
                                 <input type="number" id="wallH" value="108" oninput="updateElevWall()" onchange="pushHistory()">
-                            </div>
-                            <div class="elev-input-with-icon" title="Hang height — center of art height. Gallery/museum standard is 57&quot;">
-                                <span class="elev-input-prefix">Hang:</span>
-                                <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()">
-                            </div>
-                            <div class="elev-input-with-icon" title="Dimension text font size">
-                                <span class="elev-input-prefix">Font:</span>
-                                <input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()">
                             </div>
                             <div class="unit-toggle" style="height:30px;">
                                 <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
@@ -472,7 +462,8 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>
                             </button>
                             <button class="layout-guide-btn toggle-status" id="personToggle" title="Person — show/hide 6 ft scale figure" onclick="toggleElevLayer('person-wrap', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm-1.5 19v-5.5H9V10c0-1.1.9-2 2-2h2c1.1 0 2 .9 2 2v5.5h-1.5V21h-3z"/></svg>
+                                <!-- Stick figure: head (small circle), body line, arms out, legs splayed -->
+                                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v8M8 11l4-2 4 2M12 15l-3 5M12 15l3 5"/></svg>
                             </button>
                         </div>
                         <div class="layout-guides-grid">
@@ -485,7 +476,7 @@
                             <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Centers — show/hide frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
                             </button>
-                            <button class="layout-guide-btn" title="Nudge &amp; Shortcuts — configure arrow-key step + view keyboard shortcuts" onclick="openPrecisionModal()">
+                            <button class="layout-guide-btn" title="Settings — Hang height, font size, nudge step, keyboard shortcuts" onclick="openPrecisionModal()">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                             </button>
                         </div>
@@ -662,31 +653,50 @@
     </div>
 </div>
 
-<!-- Precision / Nudge config modal. Opened from the "Nudge" gear button in
-     the Layout Guides section. Configures arrow-key step sizes and shows
-     a reference of all keyboard shortcuts so users can discover them
-     without leaving the tool. The nudge inputs keep their original IDs
-     (nudgeSmall, nudgeBig, nudgeUnitLabel1/2) so existing handlers work. -->
+<!-- Settings modal. Opened from the gear icon in Layout Guides. Houses the
+     "set once" controls (Hang height, font size) plus the nudge step
+     config and a keyboard shortcuts reference. Hang/Font inputs share IDs
+     with their previous sidebar locations so existing handlers work. -->
 <div id="precisionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:420px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;">
-        <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.1rem; color:var(--text-strong);">Precision &amp; Shortcuts</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Configure how far selected frames move when you press the arrow keys.</p>
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:440px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;">
+        <h3 style="margin-top:0; margin-bottom: 14px; font-size:1.1rem; color:var(--text-strong);">Settings</h3>
 
-        <!-- Nudge step inputs -->
-        <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color); margin-bottom:14px;">
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <div>
-                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Arrow alone (small step)</label>
-                    <div style="display:flex; align-items:center; gap:6px;">
-                        <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
-                        <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel1">in</span>
+        <!-- HEIGHTS: hang line + dim font size. The "set once" measurements
+             that don't need to clutter the sidebar all the time. -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Heights</div>
+            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div>
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Center of art height. Gallery/museum standard is 57&quot;">Hang Height</label>
+                        <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()" style="padding: 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Dimension Font Size</label>
+                        <input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()" style="padding: 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box;">
                     </div>
                 </div>
-                <div>
-                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Shift + Arrow (big step)</label>
-                    <div style="display:flex; align-items:center; gap:6px;">
-                        <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
-                        <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel2">in</span>
+            </div>
+        </div>
+
+        <!-- NUDGE STEP: arrow-key step sizes -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Nudge Step (Arrow Keys)</div>
+            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div>
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Arrow alone (small)</label>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
+                            <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel1">in</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Shift + Arrow (big)</label>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
+                            <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel2">in</span>
+                        </div>
                     </div>
                 </div>
             </div>
