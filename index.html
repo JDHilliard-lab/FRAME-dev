@@ -452,28 +452,28 @@
                     <div class="section-title" onclick="toggleDashSection('elev-sec-layout', this)">Layout Guides <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="elev-sec-layout" class="collapsible-section open">
                         <div class="layout-guides-grid" style="margin-bottom: 6px;">
-                            <button class="layout-guide-btn toggle-status" id="labelToggle" title="Labels - Add letter labels to organize your frames (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="labelToggle" title="Labels — show/hide frame letter labels (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><circle cx="16" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="odToggle" title="Frame - overall dimensions" onclick="toggleElevLayer('od-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="odToggle" title="Frame OD — show/hide outer-dimension brackets around each frame" onclick="toggleElevLayer('od-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="0.5"/><path d="M3 5V3h2M3 19v2h2M21 5V3h-2M21 19v2h-2"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="dimToggle" title="Spacing - call out spacing dimensions between frames and wall edges" onclick="toggleElevLayer('dim-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="dimToggle" title="Spacing — show/hide spacing dimensions between frames and walls" onclick="toggleElevLayer('dim-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="personToggle" title="Person - Add 6 foot tall character to reference scale" onclick="toggleElevLayer('person-wrap', this)">
+                            <button class="layout-guide-btn toggle-status" id="personToggle" title="Person — show/hide 6 ft scale figure" onclick="toggleElevLayer('person-wrap', this)">
                                 <!-- Stick figure: head (small circle), body line, arms out, legs splayed -->
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v8M8 11l4-2 4 2M12 15l-3 5M12 15l3 5"/></svg>
                             </button>
                         </div>
                         <div class="layout-guides-grid">
-                            <button class="layout-guide-btn toggle-status" id="guideToggle" title="Guides - show center and hanging height guide lines" onclick="toggleElevLayer('guide-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="guideToggle" title="Guides — show/hide reference guide lines" onclick="toggleElevLayer('guide-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M9 6h6M9 10h6M9 14h6M9 18h6"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="gridToggle" title="Grid — Show grid to help layout adjust in settings" onclick="toggleElevLayer('grid-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="gridToggle" title="Grid — show/hide background grid" onclick="toggleElevLayer('grid-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Centers — Show frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Centers — show/hide frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
                             </button>
                             <button class="layout-guide-btn" title="Settings — Hang height, font size, nudge step, keyboard shortcuts" onclick="openPrecisionModal()">
@@ -674,6 +674,34 @@
                     <div>
                         <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Dimension Font Size</label>
                         <input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()" style="padding: 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GRID & SNAP: visual grid spacing + drag snap-to-grid increment.
+             These are independent: grid is purely visual (how far apart the
+             gridlines render), snap controls what the dragged frame's
+             position rounds to during a drag. User can set them the same
+             for "everything aligns to the grid lines I see" or differently
+             for "see a coarse grid but position frames finely". -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Grid &amp; Snap</div>
+            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div>
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Visual grid spacing on the elevation. Toggle grid visibility from Layout Guides.">Grid Size</label>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="number" id="gridSize" value="1" min="0.25" step="0.25" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateGridSize()">
+                            <span style="font-size:0.75rem; color:var(--text-muted);" id="gridSizeUnitLabel">in</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Increment that frame positions snap to when dragging.">Drag Snap</label>
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <input type="number" id="dragSnap" value="1" min="0.25" step="0.25" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateDragSnap()">
+                            <span style="font-size:0.75rem; color:var(--text-muted);" id="dragSnapUnitLabel">in</span>
+                        </div>
                     </div>
                 </div>
             </div>
