@@ -280,7 +280,31 @@ select.no-arrow::-ms-expand { display: none; }
     line-height: 1;
 }
 
-/* Add & Arrange fixed strip — pinned between the collapsible header sections
+/* Inline action button living in a section-title row (e.g. Settings gear
+ * next to the chevron). Borderless, low visual weight, hover lifts it.
+ * Click should call event.stopPropagation() in onclick so it doesn't bubble
+ * up to the title's collapse handler. */
+.section-title-action {
+    background: transparent;
+    border: none;
+    padding: 2px 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    transition: 0.15s;
+}
+.section-title-action:hover {
+    color: var(--text-strong);
+    background: var(--border-color);
+}
+
+/* 3-segment variant of unit-toggle (IN/CM/MM). Each button gets ~1/3 of
+ * the container width. Active segment uses the same accent treatment as
+ * the 2-segment version. */
+.unit-toggle-3 { display: flex; }
+.unit-toggle-3 button { flex: 1; }
  * and the frame panel list. Always visible since these are the most-used
  * controls in the elevation view (importing frames, sorting, aligning).
  * Horizontal padding is 10px because the inner emphasis card adds its own
