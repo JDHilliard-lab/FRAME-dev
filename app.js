@@ -3516,6 +3516,18 @@ function buildSpecStrings(r) {
         return (n % 1 === 0) ? n.toFixed(0) : n.toString();
     };
 
+    // Unit suffix used in human-readable strings throughout this function.
+    // Two variants to preserve the legacy formatting conventions:
+    //   sufTight — between a value and a single-letter direction (W/D/T/B/L/R).
+    //              For inches, no space: "1.25\"W". CM/MM use spaces because
+    //              "1.25cmW" reads worse than "1.25 cm W".
+    //   sufLoose — between a value and a multi-letter word (AA, Reveal).
+    //              For inches, a trailing space: "3\" AA". CM/MM same as tight.
+    // This matches what buildSpecStrings produced before MM support was added.
+    const _u = (typeof dashUnit !== 'undefined') ? dashUnit : 'in';
+    const sufTight = _u === 'in' ? '"' : (_u === 'cm' ? ' cm ' : ' mm ');
+    const sufLoose = _u === 'in' ? '" ' : (_u === 'cm' ? ' cm ' : ' mm ');
+
     // ── Application ────────────────────────────────────────────────────────
     let application;
     if (isC)        application = "Framed Canvas (Floater)";
@@ -3523,7 +3535,7 @@ function buildSpecStrings(r) {
     else if (isFM)  application = (r.product === "Framed Art (Shadow Box)") ? "Framed Art (Shadow Box)" : "Framed Art";
     else            application = "Framed Art";
 
-    // ── Frame Size: "<W>\"W × <D>\"D, Rabbet <R>\"D" ───────────────────────
+    // ── Frame Size: "<W><suf>W × <D><suf>D, Rabbet <R><suf>D" ─────────────
     // Skipped entirely for Wrapped Canvas (no frame at all).
     let frameSize = '';
     if (!isFL) {
@@ -3531,10 +3543,10 @@ function buildSpecStrings(r) {
         const fhStr = fmt(r.fHeight);
         const rabStr = fmt(r.rabbetDepth);
         const parts = [];
-        if (fwStr) parts.push(`${fwStr}"W`);
-        if (fhStr) parts.push(`${fhStr}"D`);
+        if (fwStr) parts.push(`${fwStr}${sufTight}W`);
+        if (fhStr) parts.push(`${fhStr}${sufTight}D`);
         let primary = parts.join(' × ');
-        if (rabStr) primary = primary ? `${primary}, Rabbet ${rabStr}"D` : `Rabbet ${rabStr}"D`;
+        if (rabStr) primary = primary ? `${primary}, Rabbet ${rabStr}${sufTight}D` : `Rabbet ${rabStr}${sufTight}D`;
         frameSize = primary;
     }
 
@@ -3563,9 +3575,9 @@ function buildSpecStrings(r) {
         const R = parseFloat(r.m1R) || 0;
         let dims;
         if (T === B && T === L && T === R && T > 0) {
-            dims = `${fmt(T)}" AA`;
+            dims = `${fmt(T)}${sufLoose}AA`;
         } else if (T + B + L + R > 0) {
-            dims = `${fmt(T) || 0}"T × ${fmt(B) || 0}"B × ${fmt(L) || 0}"L × ${fmt(R) || 0}"R`;
+            dims = `${fmt(T) || 0}${sufTight}T × ${fmt(B) || 0}${sufTight}B × ${fmt(L) || 0}${sufTight}L × ${fmt(R) || 0}${sufTight}R`;
         } else {
             dims = '';
         }
@@ -3578,8 +3590,8 @@ function buildSpecStrings(r) {
         const m2v = parseFloat(r.m2) || 0;
         const m2Name = (r.m2ColorName || '').trim();
         const m2Str = fmt(m2v);
-        if (m2Str && m2Name) mat2Line = `${m2Str}" Reveal, ${m2Name}`;
-        else if (m2Str) mat2Line = `${m2Str}" Reveal`;
+        if (m2Str && m2Name) mat2Line = `${m2Str}${sufLoose}Reveal, ${m2Name}`;
+        else if (m2Str) mat2Line = `${m2Str}${sufLoose}Reveal`;
         else if (m2Name) mat2Line = m2Name;
     }
 
@@ -3630,13 +3642,13 @@ function buildSpecStrings(r) {
         if (paperW > 0 && paperH > 0) {
             const wStr = (paperW % 1 === 0) ? paperW.toFixed(0) : paperW.toString();
             const hStr = (paperH % 1 === 0) ? paperH.toFixed(0) : paperH.toString();
-            paperSizeLine = `${wStr}"W × ${hStr}"H`;
+            paperSizeLine = `${wStr}${sufTight}W × ${hStr}${sufTight}H`;
         }
 
         // White Border: only when border value is greater than 0. Full-bleed
         // (0 border) doesn't get a line since there's nothing to show.
         if (sbPB > 0) {
-            whiteBorderLine = `${fmt(sbPB)}" AA`;
+            whiteBorderLine = `${fmt(sbPB)}${sufLoose}AA`;
         }
     }
 
