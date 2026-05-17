@@ -339,8 +339,12 @@ document.addEventListener('keydown', function(e) {
     if (inField) return;
     const mod = e.ctrlKey || e.metaKey;
     if (!mod) return;
-    if (e.key === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
-    else if ((e.key === 'z' && e.shiftKey) || e.key === 'y') { e.preventDefault(); redo(); }
+    // Normalize key to lowercase because Shift makes letter keys uppercase
+    // in e.key. Without this, the e.shiftKey + e.key==='z' check would
+    // never match (it'd be 'Z' instead) and Ctrl+Shift+Z wouldn't redo.
+    const key = e.key.toLowerCase();
+    if (key === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
+    else if ((key === 'z' && e.shiftKey) || key === 'y') { e.preventDefault(); redo(); }
 });
 
 // ─────────────────────────────────────────────────────────────────────
