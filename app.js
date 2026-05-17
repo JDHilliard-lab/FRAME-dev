@@ -382,6 +382,14 @@ function updateNudgeSteps() {
     // localStorage here.
 }
 
+// Open the Precision modal — shows nudge config + keyboard shortcuts cheatsheet.
+// Triggered by the gear icon in the Layout Guides section. The modal shares
+// nudgeSmall/nudgeBig inputs with the (now-removed) sidebar inputs, so
+// existing getNudgeStep() still works since it looks up by ID.
+function openPrecisionModal() {
+    document.getElementById('precisionModal').style.display = 'flex';
+}
+
 // Returns array of selected-and-active frames (refs into elevFrames).
 // Selection-only contract per user decision — no fallback to all-active.
 function getSelectedFrames() {
