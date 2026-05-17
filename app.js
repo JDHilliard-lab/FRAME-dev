@@ -386,6 +386,20 @@ function updateNudgeSteps() {
     // localStorage here.
 }
 
+// Called when user changes the visual Grid Size in Settings. Re-renders
+// the elevation so the grid lines update at the new spacing immediately.
+function updateGridSize() {
+    if (typeof drawElevAll === 'function') drawElevAll();
+}
+
+// Called when user changes the Drag Snap increment in Settings. No
+// immediate visual change — the new value is read on the next drag.
+// Kept as a function for symmetry with updateGridSize and future use
+// (e.g. saving to localStorage, showing a hint).
+function updateDragSnap() {
+    // No-op for now; value is read live by the drag handler.
+}
+
 // Open the Precision modal — shows nudge config + keyboard shortcuts cheatsheet.
 // Triggered by the gear icon in the Layout Guides section. The modal shares
 // nudgeSmall/nudgeBig inputs with the (now-removed) sidebar inputs, so
@@ -4626,7 +4640,15 @@ function drawElevAll() {
     wall.style.width = (wallW * elevScale) + 'px'; wall.style.height = (wallH * elevScale) + 'px';
 
     const gridLayer = document.getElementById('grid-layer');
-    const gridCellSize = (elevUnit === 'in' ? 1 : 2.54) * elevScale;
+    // Grid cell size — visual grid spacing in inches/cm. User-configurable
+    // via Settings (gridSize input). Defaults to 1 if input not present.
+    let gridUnitVal = 1;
+    const gridSizeEl = document.getElementById('gridSize');
+    if (gridSizeEl) {
+        const v = parseFloat(gridSizeEl.value);
+        if (!isNaN(v) && v > 0) gridUnitVal = v;
+    }
+    const gridCellSize = gridUnitVal * elevScale;
     gridLayer.style.backgroundSize = gridCellSize + 'px ' + gridCellSize + 'px';
     gridLayer.style.backgroundImage = 'linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px), linear-gradient(to top, rgba(0,0,0,0.06) 1px, transparent 1px)';
 
@@ -5024,7 +5046,15 @@ function makeElevDraggable(el, idx) {
         document.onmousemove = function(e) {
             let dx = (sx - e.clientX)/elevScale, dy = (sy - e.clientY)/elevScale; sx = e.clientX; sy = e.clientY;
             totalMove += Math.abs(e.clientX - startX) + Math.abs(e.clientY - startY);
-            const snap = elevUnit === 'in' ? 1 : 2.54;
+            // Drag snap-to-grid increment. User-configurable via the Settings
+            // modal (dragSnap input). Defaults to 1in / 1cm if input is
+            // missing or invalid. Independent of the visual grid size.
+            let snap = elevUnit === 'in' ? 1 : 2.54;
+            const dragSnapEl = document.getElementById('dragSnap');
+            if (dragSnapEl) {
+                const v = parseFloat(dragSnapEl.value);
+                if (!isNaN(v) && v > 0) snap = v;
+            }
             if(idx === 'person') { 
                 elevPersonPos.x -= dx; 
             } else { 
@@ -5308,6 +5338,22 @@ function setElevUnit(u) {
     }
     const nudgeUnitLabels = [document.getElementById('nudgeUnitLabel1'), document.getElementById('nudgeUnitLabel2')];
     nudgeUnitLabels.forEach(el => { if (el) el.textContent = u === 'cm' ? 'cm' : 'in'; });
+
+    // Same treatment for Grid Size and Drag Snap inputs. If user set grid
+    // to 6in, after switching to cm it becomes 15.24cm. Unit labels next
+    // to the inputs (gridSizeUnitLabel, dragSnapUnitLabel) follow.
+    const gridSizeEl = document.getElementById('gridSize');
+    const dragSnapEl = document.getElementById('dragSnap');
+    if (gridSizeEl && gridSizeEl.value) {
+        gridSizeEl.value = parseFloat((parseFloat(gridSizeEl.value) * f).toFixed(2));
+    }
+    if (dragSnapEl && dragSnapEl.value) {
+        dragSnapEl.value = parseFloat((parseFloat(dragSnapEl.value) * f).toFixed(2));
+    }
+    const gridUnitLbl = document.getElementById('gridSizeUnitLabel');
+    if (gridUnitLbl) gridUnitLbl.textContent = u === 'cm' ? 'cm' : 'in';
+    const dragSnapUnitLbl = document.getElementById('dragSnapUnitLabel');
+    if (dragSnapUnitLbl) dragSnapUnitLbl.textContent = u === 'cm' ? 'cm' : 'in';
 
     document.getElementById('elevBtnInch').classList.toggle('active', elevUnit==='in'); 
     document.getElementById('elevBtnCm').classList.toggle('active', elevUnit==='cm');
