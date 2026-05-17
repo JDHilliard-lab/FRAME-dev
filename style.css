@@ -305,6 +305,8 @@ select.no-arrow::-ms-expand { display: none; }
  * the 2-segment version. */
 .unit-toggle-3 { display: flex; }
 .unit-toggle-3 button { flex: 1; }
+
+/* Add & Arrange fixed strip — pinned between the collapsible header sections
  * and the frame panel list. Always visible since these are the most-used
  * controls in the elevation view (importing frames, sorting, aligning).
  * Horizontal padding is 10px because the inner emphasis card adds its own
