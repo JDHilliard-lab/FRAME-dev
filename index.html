@@ -409,24 +409,19 @@
                     </div>
 
                     <!-- ─── WALL DIMENSIONS ────────────────────────────────
-                         Just W and H now. Unit toggle (IN/CM/MM) moved into
-                         Settings modal. Settings gear lives in this section's
-                         title row so it's quick to reach (Settings is mostly
-                         "set up" config). The gear's click handler stops
-                         propagation so it doesn't trigger the section
-                         collapse on the parent title element. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">
-                        <span>Wall Dimensions</span>
-                        <span style="display:flex; align-items:center; gap:8px;">
-                            <button class="section-title-action" title="Settings - Hang height, font size, units, grid, nudge, keyboard shortcuts" onclick="event.stopPropagation(); openPrecisionModal();">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px; height:13px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                            </button>
-                            <svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                        </span>
-                    </div>
+                         W and H + a Settings gear button on the right of the
+                         row (taking the slot the old IN/CM toggle used).
+                         Title row is simple again (text + chevron) so the
+                         dashboard-style toggleDashSection collapse function
+                         can find and update the chevron span correctly. -->
+                    <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">Wall Dimensions <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="elev-sec-wall" class="collapsible-section open">
-                        <!-- Row 1: just W, H. Unit toggle moved to Settings. -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; align-items: center; margin-bottom: 8px;">
+                        <!-- Row 1: W, H, Settings gear. Gear lives here so it's
+                             reachable from the always-visible Wall row even
+                             when other sections collapse. Above the PNG
+                             export on row 2 (similar pattern to the existing
+                             pairing of inputs above utility buttons). -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; margin-bottom: 8px;">
                             <div class="elev-input-with-icon" title="Wall width">
                                 <span class="elev-input-prefix">W:</span>
                                 <input type="number" id="wallW" value="185" oninput="updateElevWall()" onchange="pushHistory()">
@@ -435,6 +430,9 @@
                                 <span class="elev-input-prefix">H:</span>
                                 <input type="number" id="wallH" value="108" oninput="updateElevWall()" onchange="pushHistory()">
                             </div>
+                            <button class="action-btn btn-secondary" style="width:30px; height:30px; padding:0; flex-shrink:0;" title="Settings - Hang height, font size, units, grid, nudge, keyboard shortcuts" onclick="openPrecisionModal()">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            </button>
                         </div>
                         <!-- Row 2: zoom slider, Fit button, Export PNG button -->
                         <div style="display: flex; gap: 6px; align-items: center;">
