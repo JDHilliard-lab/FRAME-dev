@@ -280,6 +280,20 @@ select.no-arrow::-ms-expand { display: none; }
     line-height: 1;
 }
 
+/* Add & Arrange fixed strip — pinned between the collapsible header sections
+ * and the frame panel list. Always visible since these are the most-used
+ * controls in the elevation view (importing frames, sorting, aligning).
+ * Padding matches .elev-sidebar-header for visual continuity. */
+.elev-add-arrange-fixed {
+    padding: 8px 20px 10px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-panel);
+    flex-shrink: 0;
+}
+.elev-add-arrange-fixed .section-title {
+    margin-top: 0;
+}
+
 /* Layout Guides grid: 4 icon-only buttons per row. No text labels — the
  * buttons carry meaning via their icon + tooltip. Bigger than the
  * previous labeled version (34px instead of 28px) to give the icon
