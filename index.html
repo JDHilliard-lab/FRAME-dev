@@ -409,15 +409,24 @@
                     </div>
 
                     <!-- ─── WALL DIMENSIONS ────────────────────────────────
-                         Just the physical wall measurements (W, H) plus the
-                         IN/CM toggle. Hang Height and Font Size moved into
-                         the Settings modal since they're "set-once-per-
-                         elevation" values rather than ongoing controls.
-                         Row 2 keeps zoom + Fit + Export PNG. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">Wall Dimensions <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+                         Just W and H now. Unit toggle (IN/CM/MM) moved into
+                         Settings modal. Settings gear lives in this section's
+                         title row so it's quick to reach (Settings is mostly
+                         "set up" config). The gear's click handler stops
+                         propagation so it doesn't trigger the section
+                         collapse on the parent title element. -->
+                    <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">
+                        <span>Wall Dimensions</span>
+                        <span style="display:flex; align-items:center; gap:8px;">
+                            <button class="section-title-action" title="Settings - Hang height, font size, units, grid, nudge, keyboard shortcuts" onclick="event.stopPropagation(); openPrecisionModal();">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px; height:13px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                            </button>
+                            <svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                        </span>
+                    </div>
                     <div id="elev-sec-wall" class="collapsible-section open">
-                        <!-- Row 1: just W, H, IN/CM. Hang and Font are now in Settings. -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; margin-bottom: 8px;">
+                        <!-- Row 1: just W, H. Unit toggle moved to Settings. -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; align-items: center; margin-bottom: 8px;">
                             <div class="elev-input-with-icon" title="Wall width">
                                 <span class="elev-input-prefix">W:</span>
                                 <input type="number" id="wallW" value="185" oninput="updateElevWall()" onchange="pushHistory()">
@@ -425,10 +434,6 @@
                             <div class="elev-input-with-icon" title="Wall height">
                                 <span class="elev-input-prefix">H:</span>
                                 <input type="number" id="wallH" value="108" oninput="updateElevWall()" onchange="pushHistory()">
-                            </div>
-                            <div class="unit-toggle" style="height:30px;">
-                                <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
-                                <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
                             </div>
                         </div>
                         <!-- Row 2: zoom slider, Fit button, Export PNG button -->
@@ -447,37 +452,34 @@
 
                     <!-- ─── LAYOUT GUIDES ─────────────────────────────────
                          Overlay toggles: labels, frame OD, spacing dims,
-                         scale figure, guides, grid, centers. Plus the gear
-                         button opening the Precision/Shortcuts modal. -->
+                         scale figure, guides, grid, centers. Settings gear
+                         moved to the Wall Dimensions title row. -->
                     <div class="section-title" onclick="toggleDashSection('elev-sec-layout', this)">Layout Guides <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="elev-sec-layout" class="collapsible-section open">
                         <div class="layout-guides-grid" style="margin-bottom: 6px;">
-                            <button class="layout-guide-btn toggle-status" id="labelToggle" title="Labels — show/hide frame letter labels (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="labelToggle" title="Labels - Add letter labels to organize your frames (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><circle cx="16" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="odToggle" title="Frame OD — show/hide outer-dimension brackets around each frame" onclick="toggleElevLayer('od-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="odToggle" title="Frame - overall dimensions" onclick="toggleElevLayer('od-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="0.5"/><path d="M3 5V3h2M3 19v2h2M21 5V3h-2M21 19v2h-2"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="dimToggle" title="Spacing — show/hide spacing dimensions between frames and walls" onclick="toggleElevLayer('dim-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="dimToggle" title="Spacing - call out spacing dimensions between frames and wall edges" onclick="toggleElevLayer('dim-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="personToggle" title="Person — show/hide 6 ft scale figure" onclick="toggleElevLayer('person-wrap', this)">
+                            <button class="layout-guide-btn toggle-status" id="personToggle" title="Person - Add 6 foot tall character to reference scale" onclick="toggleElevLayer('person-wrap', this)">
                                 <!-- Stick figure: head (small circle), body line, arms out, legs splayed -->
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v8M8 11l4-2 4 2M12 15l-3 5M12 15l3 5"/></svg>
                             </button>
                         </div>
-                        <div class="layout-guides-grid">
-                            <button class="layout-guide-btn toggle-status" id="guideToggle" title="Guides — show/hide reference guide lines" onclick="toggleElevLayer('guide-layer', this)">
+                        <div class="layout-guides-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <button class="layout-guide-btn toggle-status" id="guideToggle" title="Guides - show center and hanging height guide lines" onclick="toggleElevLayer('guide-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M9 6h6M9 10h6M9 14h6M9 18h6"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="gridToggle" title="Grid — show/hide background grid" onclick="toggleElevLayer('grid-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="gridToggle" title="Grid — Show grid to help layout, adjust size in Settings" onclick="toggleElevLayer('grid-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
                             </button>
-                            <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Centers — show/hide frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
+                            <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Centers — Show frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
-                            </button>
-                            <button class="layout-guide-btn" title="Settings — Hang height, font size, nudge step, keyboard shortcuts" onclick="openPrecisionModal()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                             </button>
                         </div>
                     </div>
@@ -660,6 +662,18 @@
 <div id="precisionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
     <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:440px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;">
         <h3 style="margin-top:0; margin-bottom: 14px; font-size:1.1rem; color:var(--text-strong);">Settings</h3>
+
+        <!-- UNIT: in, cm, mm. Single source of truth for unit choice;
+             moved out of the Wall row to free up sidebar space. Calls
+             setElevUnit() which converts all stored values + labels. -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Units</div>
+            <div class="unit-toggle unit-toggle-3" style="height:34px; width:100%;">
+                <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
+                <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
+                <button id="elevBtnMm" onclick="setElevUnit('mm')">MM</button>
+            </div>
+        </div>
 
         <!-- HEIGHTS: hang line + dim font size. The "set once" measurements
              that don't need to clutter the sidebar all the time. -->
