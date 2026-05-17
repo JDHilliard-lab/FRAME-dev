@@ -4339,7 +4339,26 @@ function toggleElevLayer(id, btn) {
     const layer = document.getElementById(id);
     const isHidden = (layer.style.display === 'none' || layer.style.display === '');
     layer.style.display = isHidden ? 'block' : 'none';
-    btn.classList.toggle('active', isHidden); 
+    btn.classList.toggle('active', isHidden);
+
+    // Special behavior: when turning Person ON, if the figure is currently
+    // outside the visible wall (which is the default at x=-60), pull it
+    // back to just inside the left edge so the user can see it. Otherwise
+    // users have to zoom out, find the figure, and drag it onto the wall
+    // — a confusing experience. If they HAVE placed it on the wall, we
+    // respect their position and don't move it.
+    if (id === 'person-wrap' && isHidden && elevPersonPos) {
+        const wallW = parseFloat(document.getElementById('wallW').value) || 185;
+        const isOffWall = elevPersonPos.x < 0 || elevPersonPos.x > wallW;
+        if (isOffWall) {
+            // Place just inside the left edge — accounting for the figure's
+            // visual width. The person SVG is roughly 20 inches wide so we
+            // offset by 6 inches to leave a small margin.
+            elevPersonPos.x = elevUnit === 'cm' ? parseFloat((6 * 2.54).toFixed(2)) : 6;
+            drawElevAll();
+            pushHistory();
+        }
+    }
 }
 
 function selectAllElevFrames() {
