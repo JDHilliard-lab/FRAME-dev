@@ -280,31 +280,18 @@ select.no-arrow::-ms-expand { display: none; }
     line-height: 1;
 }
 
-/* Layout Guides grid: 4 cells per row, each cell has a label TEXT above a
- * square icon button. Matches the frame panel icon-btn dimensions (26px)
- * so the visual rhythm of the sidebar is consistent. */
+/* Layout Guides grid: 4 icon-only buttons per row. No text labels — the
+ * buttons carry meaning via their icon + tooltip. Bigger than the
+ * previous labeled version (34px instead of 28px) to give the icon
+ * enough presence to be recognizable on its own. */
 .layout-guides-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 6px;
 }
-.layout-guide-cell {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-}
-.layout-guide-label {
-    font-size: 0.6rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    line-height: 1;
-    text-align: center;
-}
 .layout-guide-btn {
-    width: 28px;
-    height: 28px;
+    width: 100%;
+    height: 34px;
     border-radius: 4px;
     border: 1px solid var(--border-color);
     cursor: pointer;
@@ -315,15 +302,15 @@ select.no-arrow::-ms-expand { display: none; }
     background: var(--bg-input);
     transition: 0.18s;
     padding: 0;
-    font-size: 0;  /* hide any accidental text children */
+    font-size: 0;
 }
 .layout-guide-btn:hover {
     background: var(--border-color);
     border-color: var(--text-muted);
 }
 .layout-guide-btn .svg-icon {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     stroke-width: 2;
 }
 .layout-guide-btn.toggle-status.active {
