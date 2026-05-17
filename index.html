@@ -409,12 +409,17 @@
                     </div>
 
                     <!-- ─── WALL DIMENSIONS ────────────────────────────────
-                         Physical room dimensions: width, height, hang height.
-                         All three are measurements of the installation space.
-                         CM/IN toggle ends the row. -->
+                         Now serves as the master setup section: physical
+                         wall measurements (W, H, Hang, Font) on row 1, then
+                         display controls (Zoom slider, Fit, Export PNG) on
+                         row 2. Both rows of "things you set up at the start
+                         of working on this elevation". -->
                     <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">Wall Dimensions <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="elev-sec-wall" class="collapsible-section open">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 6px; align-items: center; margin-bottom: 8px;">
+                        <!-- Row 1: physical measurements + font + units. Five
+                             items in one tight grid. Inputs get prefix labels
+                             rather than icons since 5 across is already busy. -->
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 5px; align-items: center; margin-bottom: 8px;">
                             <div class="elev-input-with-icon" title="Wall width">
                                 <span class="elev-input-prefix">W:</span>
                                 <input type="number" id="wallW" value="185" oninput="updateElevWall()" onchange="pushHistory()">
@@ -427,28 +432,40 @@
                                 <span class="elev-input-prefix">Hang:</span>
                                 <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()">
                             </div>
+                            <div class="elev-input-with-icon" title="Dimension text font size">
+                                <span class="elev-input-prefix">Font:</span>
+                                <input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()">
+                            </div>
                             <div class="unit-toggle" style="height:30px;">
                                 <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
                                 <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
                             </div>
                         </div>
+                        <!-- Row 2: zoom slider, Fit button, Export PNG button -->
+                        <div style="display: flex; gap: 6px; align-items: center;">
+                            <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; opacity:0.7;"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M8 11h6M11 8v6"/></svg>
+                            <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="flex: 1; margin:0; accent-color: #888;" oninput="updateElevZoom(this.value)">
+                            <button class="action-btn btn-secondary" style="margin:0; padding: 4px 8px; width: auto; font-size: 0.65rem; display: flex; align-items: center; gap: 4px; flex-shrink:0;" onclick="fitElevZoom()" title="Fit elevation to window">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:11px; height:11px;"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/></svg>
+                                Fit
+                            </button>
+                            <button class="action-btn btn-secondary" style="width:30px; height:26px; padding:0; flex-shrink:0;" title="Export elevation as PNG" onclick="exportElevPNG()">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- ─── LAYOUT GUIDES ─────────────────────────────────
-                         Overlays/aids on the elevation: labels, frame OD,
-                         spacing dims, scale figure, guides, grid, centers.
-                         Icon-only buttons; tooltip carries the name. Plus
-                         a gear button that opens the Precision modal for
-                         nudge config + keyboard shortcuts reference. -->
+                         Overlay toggles: labels, frame OD, spacing dims,
+                         scale figure, guides, grid, centers. Plus the gear
+                         button opening the Precision/Shortcuts modal. -->
                     <div class="section-title" onclick="toggleDashSection('elev-sec-layout', this)">Layout Guides <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="elev-sec-layout" class="collapsible-section open">
                         <div class="layout-guides-grid" style="margin-bottom: 6px;">
                             <button class="layout-guide-btn toggle-status" id="labelToggle" title="Labels — show/hide frame letter labels (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
-                                <!-- Sticker/tag shape with a corner hole/notch -->
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><circle cx="16" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
                             </button>
                             <button class="layout-guide-btn toggle-status" id="odToggle" title="Frame OD — show/hide outer-dimension brackets around each frame" onclick="toggleElevLayer('od-layer', this)">
-                                <!-- Frame with corner brackets -->
                                 <svg class="svg-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="0.5"/><path d="M3 5V3h2M3 19v2h2M21 5V3h-2M21 19v2h-2"/></svg>
                             </button>
                             <button class="layout-guide-btn toggle-status" id="dimToggle" title="Spacing — show/hide spacing dimensions between frames and walls" onclick="toggleElevLayer('dim-layer', this)">
@@ -474,67 +491,42 @@
                         </div>
                     </div>
 
-                    <!-- ─── ZOOM & EXPORT ─────────────────────────────────
-                         Display & output: zoom level, fit-to-window, PNG
-                         export, dimension font size. All "how I see / share
-                         the elevation" controls together. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-zoom', this)">Zoom &amp; Export <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="elev-sec-zoom" class="collapsible-section open">
-                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
-                            <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; opacity:0.7;"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M8 11h6M11 8v6"/></svg>
-                            <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="flex: 1; margin:0; accent-color: #888;" oninput="updateElevZoom(this.value)">
-                            <button class="action-btn btn-secondary" style="margin:0; padding: 4px 8px; width: auto; font-size: 0.65rem; display: flex; align-items: center; gap: 4px;" onclick="fitElevZoom()" title="Fit elevation to window">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:11px; height:11px;"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/></svg>
-                                Fit
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:30px; height:26px; padding:0; flex-shrink:0;" title="Export elevation as PNG" onclick="exportElevPNG()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>
-                            </button>
-                        </div>
-                        <!-- Dimension font size: small input, lives here because it's
-                             a display-only concern (how big the dim text appears). -->
-                        <div style="display: flex; gap: 8px; align-items: center;">
-                            <div class="elev-input-with-icon" style="flex: 1;" title="Dimension text font size">
-                                <span class="elev-input-prefix">Font:</span>
-                                <input type="number" id="elevDimFontSize" value="12" min="6" max="24" oninput="updateDimFontSize()">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ─── ADD & ARRANGE ─────────────────────────────────
-                         The high-frequency section: get frames in, organize
-                         them. Single row, with Sort and Align as icon-only
-                         buttons to fit. Emphasized via subtle background. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-add', this)">Add &amp; Arrange <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="elev-sec-add" class="collapsible-section open">
-                        <div class="elev-section-emphasis-inner">
-                            <div style="display: flex; gap: 6px; align-items: center;">
-                                <div style="position: relative; flex: 1; min-width: 0;">
-                                    <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: 0.7rem; justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
-                                        <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                                        <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
-                                        <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                    </button>
-                                    <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
-                                        <div id="bulkImportCheckboxes"></div>
-                                    </div>
-                                </div>
-                                <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
-                                    Add
-                                </button>
-                                <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
-                                </button>
-                                <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                
+
+                <!-- ─── ADD & ARRANGE (fixed, always visible) ────────────
+                     This is the high-traffic section. Pinned between the
+                     collapsible header sections and the frame panel list
+                     so it's always accessible regardless of which header
+                     sections the user has collapsed. Uses a static label
+                     (no chevron, not clickable) to signal it can't be
+                     hidden. -->
+                <div class="elev-add-arrange-fixed">
+                    <div class="section-title section-title-static">Add &amp; Arrange</div>
+                    <div class="elev-section-emphasis-inner">
+                        <div style="display: flex; gap: 6px; align-items: center;">
+                            <div style="position: relative; flex: 1; min-width: 0;">
+                                <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: 0.7rem; justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                                    <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
+                                    <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
+                                    <div id="bulkImportCheckboxes"></div>
+                                </div>
+                            </div>
+                            <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
+                                Add
+                            </button>
+                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
+                            </button>
+                            <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <div class="elev-frame-list">
                     <div class="elev-col-header">
                         <div class="elev-col-left">
