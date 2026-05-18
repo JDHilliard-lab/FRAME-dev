@@ -965,7 +965,13 @@ function loadMasterProject(event) {
         try {
             const data = JSON.parse(e.target.result);
             if (data.type && data.type.startsWith('master-studio')) {
-                dashUnit = data.dashUnit || 'in'; elevUnit = data.elevUnit || 'in';
+                // Unit handling: prefer dashUnit (it's the CSV-canonical one).
+                // If only elevUnit exists (older format edge case) use that.
+                // Force both internal vars equal to the chosen value since
+                // they're now treated as one unified setting.
+                const chosenUnit = data.dashUnit || data.elevUnit || 'in';
+                dashUnit = chosenUnit;
+                elevUnit = chosenUnit;
                 if (data.globalMeta) {
                     const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; };
                     setVal('g_projName', data.globalMeta.projName); setVal('g_desc', data.globalMeta.desc); setVal('g_date', data.globalMeta.date);
@@ -973,12 +979,41 @@ function loadMasterProject(event) {
                 }
                 if (data.dashProjectData) dashProjectData = data.dashProjectData;
                 if (data.elevations) elevations = data.elevations;
+                // If the loaded project had divergent dashUnit / elevUnit
+                // (a relic of the pre-unified era), the elevations array
+                // values are in elevUnit while dashProjectData is in
+                // dashUnit. We picked dashUnit as canonical, so convert
+                // elevation values to match. Skip if they were already equal.
+                const origElevUnit = data.elevUnit || chosenUnit;
+                if (origElevUnit !== chosenUnit) {
+                    const f = unitFactor(origElevUnit, chosenUnit);
+                    elevations.forEach(elev => {
+                        elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
+                        elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
+                        elev.frames.forEach(fr => {
+                            ['w','h','fW','fHeight','rabbetDepth','floaterInset','sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2','x','y'].forEach(p => {
+                                fr[p] = parseFloat((parseFloat(fr[p] || 0) * f).toFixed(4));
+                            });
+                        });
+                        if (elev.personPos) elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
+                    });
+                }
             } else { return alert("Invalid format. Please build a new project in Master Studio."); }
 
-            document.getElementById('dashBtnInch').classList.toggle('active', dashUnit === 'in'); document.getElementById('dashBtnCm').classList.toggle('active', dashUnit === 'cm');
-            const ebI = document.getElementById('elevBtnInch'); if (ebI) ebI.classList.toggle('active', elevUnit === 'in');
-            const ebC = document.getElementById('elevBtnCm'); if (ebC) ebC.classList.toggle('active', elevUnit === 'cm');
-            const ebM = document.getElementById('elevBtnMm'); if (ebM) ebM.classList.toggle('active', elevUnit === 'mm');
+            // Sync all 3 toggle-button trios. Each guarded since not every
+            // trio is present in every state.
+            [
+                ['dashBtnInch', 'dashBtnCm', 'dashBtnMm'],
+                ['elevBtnInch', 'elevBtnCm', 'elevBtnMm'],
+                ['globalBtnInch', 'globalBtnCm', 'globalBtnMm'],
+            ].forEach(([inId, cmId, mmId]) => {
+                const inEl = document.getElementById(inId);
+                const cmEl = document.getElementById(cmId);
+                const mmEl = document.getElementById(mmId);
+                if (inEl) inEl.classList.toggle('active', dashUnit === 'in');
+                if (cmEl) cmEl.classList.toggle('active', dashUnit === 'cm');
+                if (mmEl) mmEl.classList.toggle('active', dashUnit === 'mm');
+            });
             
             recalculateDashboardQuantities(); selectDashRow(0); renderNavTabs(); switchView('dashboard');
             // Loaded project becomes the new canonical state. Reset undo
@@ -1285,17 +1320,92 @@ function toggleDashSwatchDropdown() {
 }
 
 function setDashUnit(newUnit) {
-    if(dashUnit === newUnit) return;
-    const factor = newUnit === 'cm' ? 2.54 : (1/2.54);
+    setUnit(newUnit);
+}
+
+// Unified unit setter. Called by all 3 toggle locations (dashboard, elevation
+// Settings modal, header bar). Converts dashboard rows AND elevation frames
+// AND all unit-aware inputs to the new unit, then updates all button states
+// so all toggles stay in sync. Keeps dashUnit and elevUnit always equal —
+// they exist as separate variables only because lots of call sites read
+// them independently, but they're functionally one value now.
+function setUnit(newUnit) {
+    if (!UNIT_INFO[newUnit]) return;  // unknown unit, ignore
+    if (dashUnit === newUnit && elevUnit === newUnit) return;  // already set
+
+    // Conversion factor based on whichever was the "active" old unit. Since
+    // we keep them in sync going forward, dashUnit is the canonical "from"
+    // (it's where CSV exports originate). On first call after a load where
+    // they might differ, we fall back to dashUnit too.
+    const oldUnit = dashUnit;
+    const f = unitFactor(oldUnit, newUnit);
+
+    // Convert dashboard rows
     dashProjectData.forEach(row => {
         ['extW', 'extH', 'fW', 'fHeight', 'rabbetDepth', 'bleed', 'canvasDepth', 'canvasWrap', 'floaterInset', 'sbPaperMargin', 'sbPaperBorder', 'm1T', 'm1B', 'm1L', 'm1R', 'm2'].forEach(prop => {
-            if (row[prop] !== "" && row[prop] !== undefined && !isNaN(row[prop])) row[prop] = dashFmt(row[prop] * factor);
+            if (row[prop] !== "" && row[prop] !== undefined && !isNaN(row[prop])) {
+                row[prop] = dashFmt(row[prop] * f);
+            }
         });
     });
     dashUnit = newUnit;
-    document.getElementById('dashBtnInch').classList.toggle('active', dashUnit === 'in');
-    document.getElementById('dashBtnCm').classList.toggle('active', dashUnit === 'cm');
-    loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]); 
+
+    // Convert elevation data — frames, wall dimensions, person position.
+    // Must use the SAME factor (oldUnit→newUnit) since elevUnit was equal
+    // to oldUnit when this call started.
+    elevations.forEach(elev => {
+        elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
+        elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
+        elev.frames.forEach(fr => {
+            ['w','h','fW','fHeight','rabbetDepth','floaterInset','sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2','x','y'].forEach(p => {
+                fr[p] = parseFloat((parseFloat(fr[p] || 0) * f).toFixed(4));
+            });
+        });
+        if (elev.personPos) elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
+    });
+    elevUnit = newUnit;
+
+    // Update wall inputs if elevation view is loaded
+    const wallWEl = document.getElementById('wallW');
+    const wallHEl = document.getElementById('wallH');
+    if (wallWEl && elevations[currentElevIndex]) wallWEl.value = elevations[currentElevIndex].wallW;
+    if (wallHEl && elevations[currentElevIndex]) wallHEl.value = elevations[currentElevIndex].wallH;
+
+    // Convert all settings-modal inputs (Hang, Font, Nudge, Grid, Drag Snap)
+    // and their unit labels.
+    const labelText = newUnit === 'in' ? 'in' : (newUnit === 'cm' ? 'cm' : 'mm');
+    [['hangHeight', null], ['nudgeSmall', null], ['nudgeBig', null],
+     ['gridSize', null], ['dragSnap', null], ['alignGapValue', null]].forEach(([id, _]) => {
+        const el = document.getElementById(id);
+        if (el && el.value) el.value = parseFloat((parseFloat(el.value) * f).toFixed(2));
+    });
+    ['nudgeUnitLabel1', 'nudgeUnitLabel2', 'gridSizeUnitLabel', 'dragSnapUnitLabel', 'alignGapUnit'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = labelText;
+    });
+
+    // Update ALL three trio button-states. Each may or may not exist in the
+    // DOM (depending on which view is active and whether modal is built),
+    // so guard each.
+    [
+        ['dashBtnInch', 'dashBtnCm', 'dashBtnMm'],
+        ['elevBtnInch', 'elevBtnCm', 'elevBtnMm'],
+        ['globalBtnInch', 'globalBtnCm', 'globalBtnMm'],
+    ].forEach(([inId, cmId, mmId]) => {
+        const inEl = document.getElementById(inId);
+        const cmEl = document.getElementById(cmId);
+        const mmEl = document.getElementById(mmId);
+        if (inEl) inEl.classList.toggle('active', newUnit === 'in');
+        if (cmEl) cmEl.classList.toggle('active', newUnit === 'cm');
+        if (mmEl) mmEl.classList.toggle('active', newUnit === 'mm');
+    });
+
+    // Re-render both views so the new unit is reflected immediately.
+    if (typeof loadDashDataIntoControls === 'function' && dashProjectData[dashSelectedRowIndex]) {
+        loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+    }
+    if (typeof initElevControls === 'function') initElevControls();
+    if (typeof drawElevAll === 'function') drawElevAll();
 }
 
 function selectDashRow(index) {
@@ -5332,77 +5442,7 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label) {
 }
 
 function setElevUnit(u) {
-    if(elevUnit === u) return;
-    if (elevations[currentElevIndex]) {
-        elevations[currentElevIndex].wallW = parseFloat(document.getElementById('wallW').value) || elevations[currentElevIndex].wallW;
-        elevations[currentElevIndex].wallH = parseFloat(document.getElementById('wallH').value) || elevations[currentElevIndex].wallH;
-    }
-    // Use the helper for general N-way conversion. Replaces the old 2-way
-    // IN↔CM logic that hardcoded 2.54.
-    const f = unitFactor(elevUnit, u);
-    elevations.forEach(elev => {
-        elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
-        elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
-        elev.frames.forEach(fr => {
-            ['w','h','fW','fHeight','rabbetDepth','floaterInset','sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2','x','y'].forEach(p => {
-                fr[p] = parseFloat((parseFloat(fr[p] || 0) * f).toFixed(4));
-            });
-        });
-        elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
-    });
-
-    elevUnit = u;
-    const newSuffix = unitInfo(u).suffix.trim() || 'in';  // for labels: 'in'/'cm'/'mm'
-    const labelText = u === 'in' ? 'in' : (u === 'cm' ? 'cm' : 'mm');
-    document.getElementById('wallW').value = elevations[currentElevIndex].wallW;
-    document.getElementById('wallH').value = elevations[currentElevIndex].wallH;
-    // Convert hang height value if present
-    const hangEl = document.getElementById('hangHeight');
-    if (hangEl && hangEl.value) {
-        hangEl.value = parseFloat((parseFloat(hangEl.value) * f).toFixed(2));
-    }
-    // Alignment gap value + unit label
-    const gapEl = document.getElementById('alignGapValue');
-    if (gapEl && gapEl.value) {
-        gapEl.value = parseFloat((parseFloat(gapEl.value) * f).toFixed(2));
-    }
-    const gapUnitEl = document.getElementById('alignGapUnit');
-    if (gapUnitEl) gapUnitEl.textContent = labelText;
-
-    // Nudge step inputs + labels
-    const nudgeSmallEl = document.getElementById('nudgeSmall');
-    const nudgeBigEl = document.getElementById('nudgeBig');
-    if (nudgeSmallEl && nudgeSmallEl.value) {
-        nudgeSmallEl.value = parseFloat((parseFloat(nudgeSmallEl.value) * f).toFixed(2));
-    }
-    if (nudgeBigEl && nudgeBigEl.value) {
-        nudgeBigEl.value = parseFloat((parseFloat(nudgeBigEl.value) * f).toFixed(2));
-    }
-    const nudgeUnitLabels = [document.getElementById('nudgeUnitLabel1'), document.getElementById('nudgeUnitLabel2')];
-    nudgeUnitLabels.forEach(el => { if (el) el.textContent = labelText; });
-
-    // Grid Size + Drag Snap inputs + labels
-    const gridSizeEl = document.getElementById('gridSize');
-    const dragSnapEl = document.getElementById('dragSnap');
-    if (gridSizeEl && gridSizeEl.value) {
-        gridSizeEl.value = parseFloat((parseFloat(gridSizeEl.value) * f).toFixed(2));
-    }
-    if (dragSnapEl && dragSnapEl.value) {
-        dragSnapEl.value = parseFloat((parseFloat(dragSnapEl.value) * f).toFixed(2));
-    }
-    const gridUnitLbl = document.getElementById('gridSizeUnitLabel');
-    if (gridUnitLbl) gridUnitLbl.textContent = labelText;
-    const dragSnapUnitLbl = document.getElementById('dragSnapUnitLabel');
-    if (dragSnapUnitLbl) dragSnapUnitLbl.textContent = labelText;
-
-    // Unit toggle buttons (3 of them now: IN, CM, MM)
-    const btnIn = document.getElementById('elevBtnInch');
-    const btnCm = document.getElementById('elevBtnCm');
-    const btnMm = document.getElementById('elevBtnMm');
-    if (btnIn) btnIn.classList.toggle('active', elevUnit === 'in');
-    if (btnCm) btnCm.classList.toggle('active', elevUnit === 'cm');
-    if (btnMm) btnMm.classList.toggle('active', elevUnit === 'mm');
-    initElevControls(); drawElevAll();
+    setUnit(u);
 }
 
 // Helper: load an image from a data URL and resolve when ready (or reject on error)
