@@ -3102,8 +3102,11 @@ function loadFramePreset(e) {
 // inch exports of the same physical frame. Always render in inches.
 function _frameDataInInches(d, sourceUnit) {
     if (sourceUnit === 'in') return d;  // no conversion needed
-    const factor = 1 / 2.54;             // cm → in
-    // Only scale the dimensional fields the renderer reads
+    // Convert from sourceUnit to inches. unitFactor handles all 3 units
+    // (in/cm/mm). Was hardcoded to 1/2.54 (CM only) before — MM input was
+    // getting multiplied by 0.394 instead of 0.039, producing a canvas
+    // 10× too big and silently failing to render.
+    const factor = unitFactor(sourceUnit, 'in');
     const out = Object.assign({}, d);
     ['extW', 'extH', 'fW', 'fHeight', 'rabbetDepth', 'm1T', 'm1B', 'm1L', 'm1R', 'm2', 'floaterInset', 'sbPaperMargin', 'sbPaperBorder'].forEach(k => {
         if (out[k] !== undefined && out[k] !== '' && !isNaN(parseFloat(out[k]))) {
