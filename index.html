@@ -28,6 +28,16 @@
             <button class="action-btn btn-secondary" style="width:auto;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
+            <!-- Global unit toggle. Lives in the header so it's always visible
+                 regardless of view. Calls setUnit() which converts all stored
+                 values across dashboard rows + elevation frames + all input
+                 fields, then syncs the other unit toggles (dashboard, Settings
+                 modal) so all three stay in lockstep. -->
+            <div class="unit-toggle unit-toggle-3" id="globalUnitToggle" style="height:28px;" title="Project units (applies to dashboard and elevation)">
+                <button id="globalBtnInch" class="active" onclick="setUnit('in')">IN</button>
+                <button id="globalBtnCm" onclick="setUnit('cm')">CM</button>
+                <button id="globalBtnMm" onclick="setUnit('mm')">MM</button>
+            </div>
             <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
@@ -109,13 +119,6 @@
                             <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px;" onclick="pushFrameToElevation()">Send</button>
                         </div>
                         
-                        <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 2px;"></div>
-                        
-                        <div class="unit-toggle" style="flex: 1;">
-                            <button id="dashBtnInch" class="active" onclick="setDashUnit('in')">IN</button>
-                            <button id="dashBtnCm" onclick="setDashUnit('cm')">CM</button>
-                        </div>
-
                         <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 2px;"></div>
 
                         <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Download Frame PNG" onclick="exportDashNativePNG()">
