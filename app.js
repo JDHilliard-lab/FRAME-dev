@@ -1424,9 +1424,11 @@ function selectDashRow(index) {
 function addDashRow() {
     const newRow = JSON.parse(JSON.stringify(dashDefaultData)); 
     newRow.id = generateNextItemCode();
-    newRow.extW = dashUnit === 'cm' ? dashFmt(24*2.54) : 24; 
-    newRow.extH = dashUnit === 'cm' ? dashFmt(24*2.54) : 24; 
-    newRow.fW = dashUnit === 'cm' ? dashFmt(0.75*2.54) : 0.75;
+    // Defaults in inches, converted to whatever the current unit is.
+    const _f = unitFactor('in', dashUnit);
+    newRow.extW = dashFmt(24 * _f); 
+    newRow.extH = dashFmt(24 * _f); 
+    newRow.fW = dashFmt(0.75 * _f);
     newRow.fType = "color"; newRow.fColor = "#000000"; newRow.fCode = "Standard Black";
     
     dashProjectData.push(newRow);
@@ -1928,7 +1930,9 @@ function updateDashVisualsFromDOM() {
     
     artVis.style.top = artTopOffset + "px"; artVis.style.left = artLeftOffset + "px";
     artVis.style.width = (Math.max(0, finalW) * ratio) + "px"; artVis.style.height = (Math.max(0, finalH) * ratio) + "px";
-    artVis.innerText = `${dashFmt(Math.max(0, finalW))}${dashUnit === 'in' ? '"' : ' cm'} × ${dashFmt(Math.max(0, finalH))}${dashUnit === 'in' ? '"' : ' cm'}`;
+    // Suffix matches the unit. unitInfo() gives '"' for IN, ' cm' for CM, ' mm' for MM.
+    const dashSuf = unitInfo(dashUnit).suffix;
+    artVis.innerText = `${dashFmt(Math.max(0, finalW))}${dashSuf} × ${dashFmt(Math.max(0, finalH))}${dashSuf}`;
     fVis.appendChild(artVis);
 }
 
@@ -2306,7 +2310,7 @@ function toggleDashFauxMat() {
     // First-enable: seed border to 0.5" so the user has a sensible default
     // (matches float mount's typical border value). User can override.
     if (isOn && (!borderInput.value || parseFloat(borderInput.value) === 0)) {
-        borderInput.value = dashFmt(dashUnit === 'cm' ? 1.27 : 0.5);
+        borderInput.value = dashFmt(0.5 * unitFactor('in', dashUnit));
     }
     syncDashAndCalculate();
 }
@@ -2976,7 +2980,10 @@ function loadDashFromCustomLibrary(idx) {
     if(!v || !c || idx === undefined) return;
     const item = dashLocalLibrary[v][c][idx];
     _libEntryToDataUrl(item.file).then(u => {
-        const w = dashUnit === 'cm' ? dashFmt(item.width*2.54) : item.width;
+        // Library swatches store dimensions in inches; convert to whatever
+        // the dashboard unit is via unitFactor (works for IN/CM/MM).
+        const _uf = unitFactor('in', dashUnit);
+        const w = dashFmt(item.width * _uf);
         document.getElementById('fW').value = w; document.getElementById('m_fCode').value = item.code;
         dashProjectData[dashSelectedRowIndex].fType = 'image'; dashProjectData[dashSelectedRowIndex].fW = w; dashProjectData[dashSelectedRowIndex].fCode = item.code;
         dashProjectData[dashSelectedRowIndex].swatchDataUrl = u; dashProjectData[dashSelectedRowIndex].swatchName = item.code;
@@ -3004,30 +3011,28 @@ function loadDashFromCustomLibrary(idx) {
         // Only applies to floaters; the input remains user-editable for tweaks.
         if (isFloaterCollection && item.faceWidth !== undefined) {
             const computedInset = parseFloat(item.faceWidth) + FLOATER_SHADOW_REVEAL;
-            const insetInUnits = dashUnit === 'cm' ? dashFmt(computedInset * 2.54) : computedInset;
+            const insetInUnits = dashFmt(computedInset * _uf);
             const insetInput = document.getElementById('floaterInset');
             if (insetInput) insetInput.value = insetInUnits;
             dashProjectData[dashSelectedRowIndex].floaterInset = insetInUnits;
             // Persist the swatch's faceWidth on the row too (in display units) so
             // buildSpecStrings can compute Float Reveal = floaterInset - faceWidth.
             // Without this we'd have to assume the studio-default 0.25" reveal.
-            const faceInUnits = dashUnit === 'cm'
-                ? dashFmt(parseFloat(item.faceWidth) * 2.54)
-                : parseFloat(item.faceWidth);
+            const faceInUnits = dashFmt(parseFloat(item.faceWidth) * _uf);
             dashProjectData[dashSelectedRowIndex]._faceWidth = faceInUnits;
         }
 
         // Auto-fill Frame Height (profile depth) and Rabbet Depth from the swatch's
         // metadata if encoded in the filename (_d<depth> and _r<rabbet> tags).
         // Both are starting values — the user can edit them after for vendor-specific
-        // adjustments. Convert to current display units (cm vs in) before writing.
+        // adjustments. Convert to current display units (IN/CM/MM) before writing.
         if (item.depth !== undefined) {
-            const depthInUnits = dashUnit === 'cm' ? dashFmt(parseFloat(item.depth) * 2.54) : parseFloat(item.depth);
+            const depthInUnits = dashFmt(parseFloat(item.depth) * _uf);
             const fHeightInput = document.getElementById('fHeight');
             if (fHeightInput) fHeightInput.value = depthInUnits;
         }
         if (item.rabbet !== undefined) {
-            const rabbetInUnits = dashUnit === 'cm' ? dashFmt(parseFloat(item.rabbet) * 2.54) : parseFloat(item.rabbet);
+            const rabbetInUnits = dashFmt(parseFloat(item.rabbet) * _uf);
             const rabbetInput = document.getElementById('rabbetDepth');
             if (rabbetInput) rabbetInput.value = rabbetInUnits;
         }
@@ -3071,7 +3076,9 @@ function loadFramePreset(e) {
                 const c = dashProjectData[dashSelectedRowIndex];
                 d.frame.id = c.id; d.frame.location = c.location; d.frame.level = c.level; d.frame.qty = c.qty; d.frame.imageCode = c.imageCode;
                 if(d.unit && d.unit !== dashUnit) {
-                    const factor = (dashUnit === 'in') ? (1/2.54) : 2.54;
+                    // Preset stores its source unit; convert to current dash unit.
+                    // unitFactor handles all 6 transitions for in/cm/mm.
+                    const factor = unitFactor(d.unit, dashUnit);
                     ['extW','extH','fW','fHeight','rabbetDepth','bleed','canvasDepth','canvasWrap','m1T','m1B','m1L','m1R','m2'].forEach(p => { if(d.frame[p] !== undefined && !isNaN(d.frame[p])) d.frame[p] = dashFmt(d.frame[p]*factor); });
                 }
                 dashProjectData[dashSelectedRowIndex] = d.frame; loadDashDataIntoControls(d.frame); renderDashTable(); pushUpdatesToElevations(dashSelectedRowIndex);
@@ -3474,7 +3481,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
 
     // Optional art-opening size label (for elevation export — dashboard already shows this elsewhere)
     if (opts.showArtLabel && aW > 0 && aH > 0) {
-        const unitSuffix = (opts.unit || 'in') === 'in' ? '"' : ' cm';
+        const unitSuffix = unitInfo(opts.unit || 'in').suffix;
         const fontSize = Math.max(10, Math.min(aW, aH) * 0.08);
         x.fillStyle = 'rgba(60,60,60,0.65)';
         x.font = `bold ${fontSize}px system-ui, -apple-system, sans-serif`;
@@ -3625,10 +3632,15 @@ function buildSpecStrings(r) {
     const m2On = m1On && r.m2A === true;
 
     // Format a number naturally — drop trailing zeros (1.0 → "1", 1.250 → "1.25").
+    // Format a number naturally — round to 3 decimals to kill float noise
+    // from unit conversions (e.g. 18.5 * 2.54 = 46.99000000000001 in float
+    // math), then strip trailing zeros via parseFloat (1.250 → "1.25",
+    // 24.000 → "24"). Returns null for zero/empty so calling code can
+    // detect "not set" vs "set to zero".
     const fmt = (v) => {
         const n = parseFloat(v);
-        if (isNaN(n) || n === 0) return null;  // zero/empty is "not set"
-        return (n % 1 === 0) ? n.toFixed(0) : n.toString();
+        if (isNaN(n) || n === 0) return null;
+        return parseFloat(n.toFixed(3)).toString();
     };
 
     // Unit suffix used in human-readable strings throughout this function.
@@ -3755,8 +3767,11 @@ function buildSpecStrings(r) {
         const paperW = artW + sbPB * 2;
         const paperH = artH + sbPB * 2;
         if (paperW > 0 && paperH > 0) {
-            const wStr = (paperW % 1 === 0) ? paperW.toFixed(0) : paperW.toString();
-            const hStr = (paperH % 1 === 0) ? paperH.toFixed(0) : paperH.toString();
+            // Round to 3 decimals + strip trailing zeros to kill float noise.
+            // 18.5 * 25.4 = 469.90000000000003 in float math; we want 469.9.
+            // parseFloat(toFixed(3)) handles both (469.900 → 469.9, 24.000 → 24).
+            const wStr = parseFloat(paperW.toFixed(3)).toString();
+            const hStr = parseFloat(paperH.toFixed(3)).toString();
             paperSizeLine = `${wStr}${sufTight}W × ${hStr}${sufTight}H`;
         }
 
@@ -3867,11 +3882,11 @@ function buildSpecStrings(r) {
                 const paperW = imgW + fauxBorder * 2;
                 const paperH = imgH + fauxBorder * 2;
                 if (paperW > 0 && paperH > 0) {
-                    const wStr = (paperW % 1 === 0) ? paperW.toFixed(0) : paperW.toString();
-                    const hStr = (paperH % 1 === 0) ? paperH.toFixed(0) : paperH.toString();
-                    lines.push({ label: 'Paper Size', value: `${wStr}"W × ${hStr}"H` });
+                    const wStr = parseFloat(paperW.toFixed(3)).toString();
+                    const hStr = parseFloat(paperH.toFixed(3)).toString();
+                    lines.push({ label: 'Paper Size', value: `${wStr}${sufTight}W × ${hStr}${sufTight}H` });
                 }
-                lines.push({ label: 'White Border', value: `${fmt(fauxBorder)}" AA` });
+                lines.push({ label: 'White Border', value: `${fmt(fauxBorder)}${sufLoose}AA` });
             }
         }
     }
@@ -3993,9 +4008,24 @@ function exportDashCSV() {
         `Artist,Artwork Title,Art Type,Rabbet Depth${u},` +
         `Application,Matboard Description,Spec Lines,` +
         `FM Backer Name,FM Backer Hex,FM Paper Name,FM Paper Hex,FM Paper Edge,FM Paper Margin${u},Frame Code,Frame Color Name,Frame Color Hex,` +
-        `Image_Filename\n`;
+        `Image_Filename,` +
+        // — Raw-inch canonical columns for InDesign unit-independent processing —
+        // These mirror the dimensions that get baked into spec lines, but always
+        // in inches regardless of the dashboard unit. The InDesign script reads
+        // these to rebuild Frame Size / Mat 1 / Mat 2 / Paper Size / White Border
+        // in whatever output unit the user picks, so one CSV can be re-rendered
+        // in any of IN/CM/MM cleanly.
+        `RAW Frame W (in),RAW Frame H (in),RAW Rabbet (in),` +
+        `RAW Mat T (in),RAW Mat B (in),RAW Mat L (in),RAW Mat R (in),` +
+        `RAW Mat 2 Reveal (in),` +
+        `RAW Paper W (in),RAW Paper H (in),RAW White Border (in)\n`;
 
     dashProjectData.forEach(r => {
+        // Factor to convert this row's display values back to inches.
+        // Used for the RAW columns at the end of the row so InDesign can
+        // re-render in any output unit without unit-suffix parsing.
+        const _toIn = unitFactor(dashUnit, 'in');
+
         const iC = (r.product === "Framed Canvas (Floater)");
         const iFL = (r.product === "Frameless Canvas (Wrapped)");
         const iFM = !iC && !iFL && (r.useFloatMount === true);
@@ -4086,7 +4116,21 @@ function exportDashCSV() {
             r.fCode || '',
             r.fColorName || '',
             r.fColor || '',
-            `${r.id}.png`
+            `${r.id}.png`,
+            // — Raw-inch canonical values. Each is the display value converted
+            //   back to inches via unitFactor. Empty for fields that don't apply
+            //   to this product (mats hidden for canvas, paper for non-mount). —
+            dashFmt((parseFloat(r.fW) || 0) * _toIn),
+            dashFmt((parseFloat(r.fHeight) || 0) * _toIn),
+            r.rabbetDepth ? dashFmt(parseFloat(r.rabbetDepth) * _toIn) : '',
+            (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1T) || 0) * _toIn) : '',
+            (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1B) || 0) * _toIn) : '',
+            (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1L) || 0) * _toIn) : '',
+            (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1R) || 0) * _toIn) : '',
+            (r.m2A && !matsHidden) ? dashFmt((parseFloat(r.m2) || 0) * _toIn) : '',
+            (iFM || isFauxMat) ? dashFmt(Math.max(0, paperSizeW) * _toIn) : '',
+            (iFM || isFauxMat) ? dashFmt(Math.max(0, paperSizeH) * _toIn) : '',
+            (iFM || isFauxMat) ? dashFmt(whiteBorder * _toIn) : ''
         ];
         csv += d.map(s => `"${String(s).replace(/"/g, '""')}"`).join(',') + '\n';
     });
