@@ -288,7 +288,10 @@
                                     </div>
                                 </div>
 
-                                <button id="matLinkBtn" class="icon-btn active" title="Sync Mat Colors" onclick="toggleMatLink()" style="margin: 0 8px; color: var(--accent); background:transparent; flex-shrink:0;">
+                                <!-- Sync mat colors button. Margin tightened to 2px each side
+                                     (was 8px) so Mat 1's flex:1 column has more horizontal room
+                                     for T/B/L/R inputs — which need to fit larger numbers in MM. -->
+                                <button id="matLinkBtn" class="icon-btn active" title="Sync Mat Colors" onclick="toggleMatLink()" style="margin: 0 2px; color: var(--accent); background:transparent; flex-shrink:0;">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
                                 </button>
 
@@ -311,8 +314,10 @@
                                      same field as float mount's paper border, since the semantic is the same
                                      (white margin around image on the print paper). Only meaningful in
                                      standard mat mode (not float mount). The label "Faux Mat" reads better
-                                     to designers than "Print w/ Border" — same idea. -->
-                                <div style="display: flex; flex-direction: column; width: 92px; flex-shrink:0;">
+                                     to designers than "Print w/ Border" — same idea.
+                                     Width tightened to 72px (was 92px) so Mat 1 gets more room. The single
+                                     border input fits comfortably at the narrower size. -->
+                                <div style="display: flex; flex-direction: column; width: 72px; flex-shrink:0;">
                                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
                                         <span style="font-size: 0.55rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase;" title="Print with a white border baked in. Stacks with mats above. Use alone to fake a mat without an actual mat board.">Faux Mat</span>
                                         <button id="fauxMatToggle" class="toggle-status" onclick="toggleDashFauxMat()">OFF</button>
