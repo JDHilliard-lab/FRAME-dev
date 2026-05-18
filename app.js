@@ -1404,6 +1404,11 @@ function setUnit(newUnit) {
     if (typeof loadDashDataIntoControls === 'function' && dashProjectData[dashSelectedRowIndex]) {
         loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     }
+    // Critical: renderDashTable rebuilds the CSV preview area. Without this,
+    // changing the unit updates the form inputs but the CSV stays in the
+    // old unit until the user navigates away and back (which triggers a
+    // re-render via switchView). User reported this as a bug.
+    if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof initElevControls === 'function') initElevControls();
     if (typeof drawElevAll === 'function') drawElevAll();
 }
