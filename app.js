@@ -4158,6 +4158,27 @@ function exportDashCSV() {
 
 function renderDashTable() {
     const tbody = document.getElementById('rfiBody'); tbody.innerHTML = '';
+
+    // Empty state: when no frames have been added yet (or all deleted), show
+    // a friendly hint row in the table spanning all columns. The + Add and
+    // Import CSV buttons in the toolbar above remain clickable — this is
+    // pure guidance, not a blocker.
+    if (dashProjectData.length === 0) {
+        const emptyRow = document.createElement('tr');
+        emptyRow.className = 'dash-empty-row';
+        emptyRow.innerHTML = `
+            <td colspan="40" style="text-align:center; padding: 36px 20px; color: var(--text-muted);">
+                <div style="display:inline-block; max-width: 380px;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:32px; height:32px; opacity:0.55; margin-bottom:10px; color: var(--text-muted);"><rect x="4" y="6" width="16" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="3 2"/><path d="M4 10h16" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 1.5"/></svg>
+                    <h4 style="margin:0 0 6px; font-size: 0.85rem; color: var(--text-strong); font-weight:600;">No frames yet</h4>
+                    <p style="margin:0; font-size: 0.72rem; line-height:1.45;">Click <strong style="color:var(--text-main);">+ Add</strong> in the toolbar to create your first frame, or <strong style="color:var(--text-main);">Import CSV</strong> to load an existing project.</p>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(emptyRow);
+        return;
+    }
+
     dashProjectData.forEach((row, index) => {
         const isCanvas = (row.product === "Framed Canvas (Floater)");
         const isFrameless = (row.product === "Frameless Canvas (Wrapped)");
@@ -4272,6 +4293,22 @@ function autoElevRelabel() {
 
 function initElevControls() {
     const container = document.getElementById('frame-controls');
+    // Empty state: when no frames are placed yet on this elevation, show a
+    // helpful hint about the dashboard→elevation workflow. The container is
+    // re-populated on every state change, so this hint auto-clears the
+    // moment the user adds a frame. The message is intentionally compact
+    // since the panel sidebar is narrow.
+    if (elevFrames.length === 0) {
+        container.innerHTML = `
+            <div class="elev-empty-state">
+                <svg class="svg-icon elev-empty-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+                <h4>No frames on this wall yet</h4>
+                <p>Build frames in the <strong>Frame Dashboard</strong>, then use <strong>Push to Wall</strong> to send them here.</p>
+                <p class="elev-empty-tip">Or click <strong>+ Add</strong> above to place a generic frame and customize it inline.</p>
+            </div>
+        `;
+        return;
+    }
     let html = ``;
     elevFrames.forEach((f, idx) => {
         const activeNeighbors = elevFrames.filter(n => n.letter !== f.letter && n.active);
@@ -4534,6 +4571,356 @@ function showConfirmModal(title, body, yesLabel, noLabel, onYes, onNo) {
     btnRow.appendChild(yesBtn);
     btnRow.appendChild(noBtn);
     document.getElementById('infoModal').style.display = 'flex';
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// HELP MODAL
+// ──────────────────────────────────────────────────────────────────────────
+// Opens via the ? button in the header. Two tabs: Video (placeholder until
+// HELP_VIDEO_URL is set) and Reference (curated docs for every feature).
+//
+// To plug in a tutorial video later, set HELP_VIDEO_URL to one of:
+//   - A YouTube embed URL: "https://www.youtube.com/embed/VIDEO_ID"
+//   - A Vimeo embed URL:   "https://player.vimeo.com/video/VIDEO_ID"
+//   - A direct MP4 path:   "tutorial.mp4" (place file in repo root)
+// The renderer auto-detects which form by the extension/host. To override
+// detection set HELP_VIDEO_TYPE to 'youtube' | 'vimeo' | 'mp4'.
+let HELP_VIDEO_URL = '';   // empty until a video is produced
+let HELP_VIDEO_TYPE = '';  // optional override
+
+// Module state remembers which tab + section was last viewed so reopening
+// the modal returns to where the user left off.
+let _helpActiveTab = 'video';
+let _helpActiveSection = 'getting-started';
+
+// Reference content. Each section is a group of entries. Entry titles
+// match the visible UI labels users will search for. Body HTML supports
+// inline <strong>, <span class="help-kbd">…</span> for keyboard chips.
+const HELP_REFERENCE_DATA = [
+    {
+        id: 'getting-started',
+        title: 'Getting Started',
+        intro: 'The tool has two main views — the Frame Dashboard, where you spec individual frames, and Elevations, where you arrange them on walls.',
+        entries: [
+            {
+                title: 'The Workflow',
+                body: 'Spec a frame in the <strong>Frame Dashboard</strong> (set the product, frame profile, mats, finish), then use <strong>Push to Wall</strong> to send it to the active elevation. Once frames are on the wall, drag them into place and use the alignment tools to lock the layout in.'
+            },
+            {
+                title: 'Project Units',
+                body: 'The unit toggle in the header (<strong>IN / CM / MM</strong>) applies to the whole project. All values across the dashboard, elevations, and CSV export convert automatically when you switch. Pick the unit your team works in.'
+            },
+            {
+                title: 'Save & Load Projects',
+                body: '<strong>Save Project</strong> downloads a .json file containing every frame, elevation, and setting. <strong>Load Project</strong> restores it. The tool also auto-saves locally to your browser; if you close the tab and come back, you\'ll be offered to restore.'
+            },
+            {
+                title: 'Export for Production',
+                body: 'When the project is final, export the CSV (toolbar in dashboard) and the PNG frame swatches (single via the download icon per row, or <strong>Batch PNGs</strong> for everything in one ZIP). The CSV feeds the AutoFrameSpecs.jsx InDesign script to generate spec sheets.'
+            }
+        ]
+    },
+    {
+        id: 'dashboard',
+        title: 'Frame Dashboard',
+        intro: 'Build and edit individual frames. The selected row syncs with the form and preview on the right.',
+        entries: [
+            {
+                title: '+ Add (new row)',
+                body: 'Creates a new row with default values. The new row inherits the current unit. Each row gets an auto-generated ITEM CODE like <strong>ART.001</strong>.'
+            },
+            {
+                title: 'Product Type',
+                body: 'Five options: <strong>Framed Art</strong>, <strong>Framed Art (Shadow Box)</strong>, <strong>Framed Canvas (Floater)</strong>, <strong>Frameless Canvas (Wrapped)</strong>, or <strong>Sourced Object</strong>. Selecting Canvas variants hides mat controls. Sourced Object skips frame and mat fields entirely.'
+            },
+            {
+                title: 'Frame Profile (Library / Solid)',
+                body: '<strong>Library</strong> pulls real frame profiles from the synced folder (with depth and rabbet metadata if encoded in the filename). <strong>Solid</strong> uses a flat color for quick mockups. Toggle between them with the buttons under the swatch.'
+            },
+            {
+                title: 'Mat 1, Mat 2, Faux Mat',
+                body: '<strong>Mat 1</strong> is the primary mat — set T/B/L/R values (or use AA for "all around"). <strong>Mat 2</strong> adds a contrasting reveal under Mat 1. <strong>Faux Mat</strong> is a printed white border on the paper instead of an actual mat board (use for cheap or modern looks).'
+            },
+            {
+                title: 'Sync Mat Colors (Chain Icon)',
+                body: 'Between Mat 1 and Mat 2: when active (blue), Mat 2\'s color matches Mat 1 automatically. Turn it off to set them independently. Useful for the common case of matching mats with a small reveal.'
+            },
+            {
+                title: 'Float Mount Mode',
+                body: 'Activates when you switch the panel to <strong>FLOAT</strong> mode. The art floats above a paper backing with white margin around it (no traditional mat). Sets Paper Size, Paper Margin, and White Border separately.'
+            },
+            {
+                title: 'Lock Mat Values',
+                body: 'The <strong>UNLOCKED / LOCKED</strong> toggle next to Mat 1 controls whether T/B/L/R sync. When locked, editing one updates all four (treats them as AA). Convenient for symmetric mats; turn off when you want offset mats.'
+            },
+            {
+                title: 'Download PNG (single frame)',
+                body: 'The download icon in the toolbar exports the currently-selected row as a standalone PNG showing the frame, mats, and art opening with dim labels.'
+            },
+            {
+                title: 'Batch PNGs',
+                body: 'Exports every row as a PNG and bundles them with the project CSV into a single ZIP. Progress modal shows during work. ZIP filename uses your project name + today\'s date.'
+            },
+            {
+                title: 'Import / Export CSV',
+                body: 'The CSV roundtrips — export to share with collaborators or feed into the InDesign script, then re-import to continue editing. Includes raw-inch columns at the end so the InDesign script can render in any output unit.'
+            }
+        ]
+    },
+    {
+        id: 'elevation',
+        title: 'Elevation View',
+        intro: 'Arrange frames on walls. Each tab at the top is a separate elevation (wall).',
+        entries: [
+            {
+                title: 'Push to Wall',
+                body: 'On the dashboard, pick a frame from the <strong>Push to Wall</strong> dropdown and click <strong>Send</strong>. The frame appears on the active elevation, ready to position. Resending a frame creates additional copies (each copy is independent).'
+            },
+            {
+                title: '+ Add (in elevation)',
+                body: 'Adds a generic frame directly to the wall without going through the dashboard. Useful for placeholders. Customize it inline or push a designed frame later to override.'
+            },
+            {
+                title: 'Drag to Position',
+                body: 'Click and drag any frame to move it. Drag snaps to a configurable grid (set in <strong>Settings → Drag Snap</strong>). Shift-click to select multiple frames; drag any selected frame to move the group.'
+            },
+            {
+                title: 'Multi-Select',
+                body: 'Click one frame, then Shift-click others to add to the selection. Or drag a marquee box around them. <span class="help-kbd">Esc</span> deselects everything.'
+            },
+            {
+                title: 'Grouping',
+                body: 'Select multiple frames and press <span class="help-kbd">Ctrl+G</span> (or click the group icon in the panel). Grouped frames move together as one unit. Press again to ungroup.'
+            },
+            {
+                title: 'Align & Distribute',
+                body: 'Click the <strong>Align</strong> icon in the panel header to open the alignment dialog. Options: equal vertical gap, equal horizontal gap, snap-tops, snap-centers, snap-bottoms, distribute. Works on the current selection.'
+            },
+            {
+                title: 'Sort A-Z',
+                body: 'Reorders the frame panel list alphabetically by frame letter (A, B, C…). Visual placement on the wall is unchanged.'
+            },
+            {
+                title: 'Wall Dimensions + Settings Gear',
+                body: 'The W and H inputs set the wall size. The gear icon next to them opens <strong>Settings</strong>: units, hang height, font size, grid, drag snap, nudge step, and keyboard shortcut reference.'
+            },
+            {
+                title: 'Layout Guides',
+                body: 'Seven toggle icons control overlays: <strong>Labels</strong> (A, B, C…), <strong>Frame OD</strong> (outer dimensions), <strong>Spacing</strong> (dim callouts), <strong>Person</strong> (6ft scale figure), <strong>Guides</strong> (center + hang height lines), <strong>Grid</strong>, <strong>Centers</strong> (frame crosshairs).'
+            },
+            {
+                title: 'Zoom + Fit',
+                body: 'The slider zooms the elevation in/out. The <strong>Fit</strong> button auto-fits the wall to the available viewport area.'
+            },
+            {
+                title: 'Export Elevation as PNG',
+                body: 'The download icon in the Wall Dimensions row exports the current elevation including all visible guides as a single PNG. Hide guides you don\'t want baked in before exporting.'
+            }
+        ]
+    },
+    {
+        id: 'settings',
+        title: 'Settings',
+        intro: 'Open via the gear icon next to Wall Dimensions in the elevation view.',
+        entries: [
+            {
+                title: 'Hang Height',
+                body: 'The vertical center line where the average viewer\'s eyes land. Studio standard is <strong>57"</strong> (144.78 cm / 1447.8 mm). The Guides overlay draws a horizontal line at this height for reference.'
+            },
+            {
+                title: 'Dimension Font Size',
+                body: 'Controls the size of all on-canvas labels (frame letters, OD callouts, spacing dimensions). Increase for client review screenshots, decrease for dense walls.'
+            },
+            {
+                title: 'Grid Size',
+                body: 'The visible grid spacing when the Grid layer is on. Independent of Drag Snap — you can have a 6" visible grid but a 1" snap, or vice versa.'
+            },
+            {
+                title: 'Drag Snap',
+                body: 'How far frames "snap" to when dragged. Smaller = more freedom but more fiddly. Larger = cleaner grid alignment but less flexibility. 1" is a good default.'
+            },
+            {
+                title: 'Nudge Step',
+                body: 'Arrow keys nudge selected frames by the <strong>small</strong> value; <span class="help-kbd">Shift+Arrow</span> nudges by the <strong>big</strong> value. Defaults are 1" small and 10" big.'
+            }
+        ]
+    },
+    {
+        id: 'shortcuts',
+        title: 'Keyboard Shortcuts',
+        intro: 'Available throughout the elevation view (when no input field is focused).',
+        entries: [
+            {
+                title: 'Selection',
+                body: '<span class="help-kbd">Click</span> selects one frame. <span class="help-kbd">Ctrl+Click</span> adds/removes from multi-selection. <span class="help-kbd">Esc</span> deselects everything.'
+            },
+            {
+                title: 'Nudging',
+                body: '<span class="help-kbd">↑</span> <span class="help-kbd">↓</span> <span class="help-kbd">←</span> <span class="help-kbd">→</span> nudge selected frames by the small step. Hold <span class="help-kbd">Shift</span> for the big step.'
+            },
+            {
+                title: 'Duplicate',
+                body: '<span class="help-kbd">Ctrl+D</span> duplicates the selected frame(s) with an offset so they\'re visible.'
+            },
+            {
+                title: 'Group / Ungroup',
+                body: '<span class="help-kbd">Ctrl+G</span> toggles grouping on the current selection.'
+            },
+            {
+                title: 'Delete',
+                body: '<span class="help-kbd">Delete</span> removes selected frames from the wall (not from the dashboard).'
+            },
+            {
+                title: 'Undo / Redo',
+                body: '<span class="help-kbd">Ctrl+Z</span> undoes the last action. <span class="help-kbd">Ctrl+Shift+Z</span> or <span class="help-kbd">Ctrl+Y</span> redoes.'
+            },
+            {
+                title: 'Save',
+                body: '<span class="help-kbd">Ctrl+S</span> triggers Save Project (downloads the .json).'
+            }
+        ]
+    },
+    {
+        id: 'export-indesign',
+        title: 'Export & InDesign',
+        intro: 'Hand the CSV + PNG pack off to InDesign for spec sheet generation.',
+        entries: [
+            {
+                title: 'Get the InDesign Script',
+                body: 'Click the <strong>InDesign Script</strong> button to download <strong>AutoFrameSpecs.jsx</strong>. The install instructions modal explains where to place it in your InDesign Scripts folder.'
+            },
+            {
+                title: 'Run the Script',
+                body: 'In InDesign, with a document open and frame images selected on the page, open <strong>Window → Utilities → Scripts</strong>, double-click AutoFrameSpecs.jsx, point it at the project CSV, and pick your output unit (IN / CM / MM). The script generates spec blocks under each image.'
+            },
+            {
+                title: 'One CSV, Any Output Unit',
+                body: 'The CSV includes raw-inch canonical columns so you can export once and run the script in any unit. Dashboard set to IN? Run the script in MM — it converts everything cleanly with no mixed-unit output.'
+            },
+            {
+                title: 'Batch PNGs (ZIP Export)',
+                body: 'The <strong>Batch PNGs</strong> button bundles every frame plus the project CSV into a single ZIP. Unzip into a folder, place all PNGs in your InDesign doc, then run AutoFrameSpecs.jsx pointed at the CSV in the same folder — the script auto-matches each image to its data.'
+            }
+        ]
+    },
+    {
+        id: 'tips',
+        title: 'Tips & Gotchas',
+        entries: [
+            {
+                title: 'Match Mat Color With Reveal',
+                body: 'For the classic "white mat with thin black reveal" look: set Mat 1 to white, turn off the chain icon, set Mat 2 reveal to 0.25" with black color. Or click the chain to sync mat colors when you want them to match.'
+            },
+            {
+                title: 'Float Mount Needs Enough Rabbet',
+                body: 'The float mount stack (paper + spacer + glass + backing) needs at least <strong>0.625" rabbet depth</strong>. The tool warns when rabbet is too shallow for float mount. Increase rabbet or switch to a deeper frame profile.'
+            },
+            {
+                title: 'Sourced Object — No Frame Spec',
+                body: 'For 3D objects, sculptures, or pre-framed pieces from other vendors: pick <strong>Sourced Object</strong> as the product. The dashboard hides frame/mat fields. The wall layout still shows the object\'s overall dimensions.'
+            },
+            {
+                title: 'Use Custom Frame Profiles',
+                body: 'Put profile images in a folder (one PNG per profile), click the folder icon in the Frame Library section, and select that folder. The tool reads filenames for code, width, depth, and rabbet — e.g. <strong>MICH-41-12_1.75_0.625.png</strong> means code MICH-41-12, 1.75" wide, 0.625" rabbet.'
+            },
+            {
+                title: 'Switching Themes',
+                body: 'The sun/moon icon in the header toggles light/dark. The choice persists between sessions.'
+            }
+        ]
+    }
+];
+
+function openHelpModal() {
+    document.getElementById('helpModal').style.display = 'flex';
+    // Populate the reference sidebar + content (idempotent — re-rendering
+    // is cheap and ensures any data updates take effect).
+    populateHelpReference();
+    setHelpTab(_helpActiveTab);
+    // If a video URL is configured, render it; otherwise the empty-state
+    // placeholder stays visible.
+    if (HELP_VIDEO_URL) renderHelpVideo();
+}
+
+function closeHelpModal() {
+    document.getElementById('helpModal').style.display = 'none';
+}
+
+function setHelpTab(name) {
+    _helpActiveTab = name;
+    document.getElementById('helpTabVideo').classList.toggle('active', name === 'video');
+    document.getElementById('helpTabReference').classList.toggle('active', name === 'reference');
+    document.getElementById('helpVideoPanel').style.display = (name === 'video') ? 'block' : 'none';
+    document.getElementById('helpReferencePanel').style.display = (name === 'reference') ? 'flex' : 'none';
+}
+
+// Build the Reference tab's sidebar + content from HELP_REFERENCE_DATA.
+// Idempotent — safe to call repeatedly.
+function populateHelpReference() {
+    const nav = document.getElementById('helpRefNav');
+    nav.innerHTML = '';
+    HELP_REFERENCE_DATA.forEach(section => {
+        const b = document.createElement('button');
+        b.textContent = section.title;
+        b.dataset.section = section.id;
+        b.onclick = () => renderHelpRefSection(section.id);
+        if (section.id === _helpActiveSection) b.classList.add('active');
+        nav.appendChild(b);
+    });
+    renderHelpRefSection(_helpActiveSection);
+}
+
+// Render a single section's content into the right panel and update the
+// nav's active state.
+function renderHelpRefSection(sectionId) {
+    _helpActiveSection = sectionId;
+    const section = HELP_REFERENCE_DATA.find(s => s.id === sectionId);
+    if (!section) return;
+    const content = document.getElementById('helpRefContent');
+    let html = `<h4>${section.title}</h4>`;
+    if (section.intro) html += `<p class="help-section-intro">${section.intro}</p>`;
+    section.entries.forEach(e => {
+        html += `<div class="help-entry"><h5>${e.title}</h5><p>${e.body}</p></div>`;
+    });
+    content.innerHTML = html;
+    // Update active nav button
+    document.querySelectorAll('#helpRefNav button').forEach(b => {
+        b.classList.toggle('active', b.dataset.section === sectionId);
+    });
+    // Scroll the content panel back to top when switching sections
+    content.scrollTop = 0;
+}
+
+// Render the configured video URL into the Video panel. Auto-detects type
+// from URL unless HELP_VIDEO_TYPE is set explicitly.
+function renderHelpVideo() {
+    const url = HELP_VIDEO_URL;
+    if (!url) return;
+    let type = HELP_VIDEO_TYPE;
+    if (!type) {
+        if (/youtube\.com|youtu\.be/i.test(url)) type = 'youtube';
+        else if (/vimeo\.com/i.test(url)) type = 'vimeo';
+        else type = 'mp4';
+    }
+    const embed = document.getElementById('helpVideoEmbed');
+    const empty = document.getElementById('helpVideoEmpty');
+    if (type === 'youtube' || type === 'vimeo') {
+        embed.innerHTML = `<iframe src="${url}" style="width:100%; height:100%; border:0; border-radius: 6px;" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    } else {
+        embed.innerHTML = `<video src="${url}" controls style="width:100%; height:100%; border-radius: 6px; background: black;"></video>`;
+    }
+    empty.style.display = 'none';
+    embed.style.display = 'block';
+}
+
+// Public API to set the video URL at runtime (used when plugging in a video
+// later). Sets the URL and re-renders if the modal is already open.
+function setHelpVideoUrl(url, type) {
+    HELP_VIDEO_URL = url || '';
+    HELP_VIDEO_TYPE = type || '';
+    if (document.getElementById('helpModal').style.display === 'flex') {
+        if (HELP_VIDEO_URL) renderHelpVideo();
+    }
 }
 
 function confirmDuplicate(type) {
