@@ -4304,7 +4304,7 @@ function initElevControls() {
                 <svg class="svg-icon elev-empty-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
                 <h4>No frames on this wall yet</h4>
                 <p>Build frames in the <strong>Frame Dashboard</strong>, then use <strong>Push to Wall</strong> to send them here.</p>
-                <p class="elev-empty-tip">Or click <strong>+ Add</strong> above to place a generic frame and customize it inline.</p>
+                <p class="elev-empty-tip">Or click <strong>Import Frames</strong> and select frames from the dropdown, then click <strong>+ Add</strong> above to place a generic frame and customize it inline.</p>
             </div>
         `;
         return;
