@@ -3944,7 +3944,13 @@ function buildSpecStrings(r) {
     return { application, matboard, lines };
 }
 
-function exportDashCSV() {
+// Build the project CSV as a string. Returns the full CSV text without
+// triggering any download. Used by both:
+//   - exportDashCSV (single CSV download)
+//   - batchDownloadAllFramesAsZip (CSV inside a ZIP)
+// The split exists so the ZIP path can capture the CSV bytes without going
+// through a synthetic <a> click.
+function buildDashCSVString() {
     const g = (id) => document.getElementById(id).value; const u = ` (${dashUnit})`;
 
     // Helper: format a number for output, blank string for zero/missing.
@@ -4137,7 +4143,17 @@ function exportDashCSV() {
         ];
         csv += d.map(s => `"${String(s).replace(/"/g, '""')}"`).join(',') + '\n';
     });
-    const b = new Blob([csv], { type: 'text/csv;charset=utf-8;' }); const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = `RFI_Project_Tracker.csv`; a.click();
+    return csv;
+}
+
+// Public download trigger. Builds the CSV string then triggers a save.
+function exportDashCSV() {
+    const csv = buildDashCSVString();
+    const b = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(b);
+    a.download = `RFI_Project_Tracker.csv`;
+    a.click();
 }
 
 function renderDashTable() {
@@ -4590,17 +4606,189 @@ function toggleGroupAllElevFrames(e) {
     initElevControls();
 }
 
+// Module-level flag the batch loop polls each iteration to honor Cancel
+// clicks. Reset to false at the start of every batch run.
+let _batchZipCancelled = false;
+
+// Public entry point — kept as the same name so the existing button onclick
+// in index.html continues to work. Calls the new ZIP-based implementation.
 async function batchDownloadAllFrames() {
-    if (dashProjectData.length === 0) return alert("No frames to download.");
-    const origIndex = dashSelectedRowIndex;
-    for (let i = 0; i < dashProjectData.length; i++) {
-        selectDashRow(i);
-        await new Promise(resolve => setTimeout(resolve, 80));
-        exportDashNativePNG();
-        await new Promise(resolve => setTimeout(resolve, 150));
+    return batchDownloadAllFramesAsZip();
+}
+
+// New batch export: collect all frame PNGs + the project CSV into a single
+// ZIP and trigger one download. Replaces the old N-individual-downloads flow
+// which produced N save dialogs (painful for projects with 25–100 frames).
+//
+// Flow:
+//   1. Show progress modal in 'running' state
+//   2. For each row:
+//      a. Load its swatch image (if any) using _loadImg
+//      b. Render the frame to a canvas via _frameDataInInches +
+//         renderFrameToCanvas (same path as the single-frame export, so the
+//         output is pixel-identical)
+//      c. Convert the canvas to a Blob (PNG)
+//      d. Add to the ZIP under a collision-safe filename
+//      e. Update progress UI and yield with a 0ms timeout so the browser
+//         actually paints the new progress state before the next iteration
+//   3. Add the project CSV (built via buildDashCSVString — no second
+//      download is triggered, just the string)
+//   4. Generate the final ZIP blob and trigger one download
+//   5. Switch modal to 'done' state with a summary
+//
+// Cancellation: at the top of each iteration we check _batchZipCancelled.
+// If true, we abort, hide the modal, and produce nothing. Partial ZIPs are
+// discarded — either the user gets a complete pack or nothing.
+async function batchDownloadAllFramesAsZip() {
+    if (dashProjectData.length === 0) {
+        return showInfoModal('Nothing to Pack', 'There are no frames in the project yet. Add some via the Dashboard before running a batch export.');
     }
-    selectDashRow(origIndex);
-    alert(`Batch download complete! ${dashProjectData.length} frame(s) saved.`);
+    if (typeof JSZip === 'undefined') {
+        return showInfoModal('Library Not Loaded', 'JSZip failed to load (network issue?). Refresh the page and try again — if it keeps failing the CDN may be blocked by your network.');
+    }
+
+    // Reset cancel flag for this run; show modal in 'running' state
+    _batchZipCancelled = false;
+    const modal = document.getElementById('batchZipModal');
+    document.getElementById('batchZipRunning').style.display = 'block';
+    document.getElementById('batchZipDone').style.display = 'none';
+    document.getElementById('batchZipError').style.display = 'none';
+    document.getElementById('batchZipProgressBar').style.width = '0%';
+    document.getElementById('batchZipPercentLabel').textContent = '0%';
+    document.getElementById('batchZipCountLabel').textContent = `0 / ${dashProjectData.length}`;
+    document.getElementById('batchZipCurrentFile').textContent = '';
+    modal.style.display = 'flex';
+
+    const zip = new JSZip();
+    const totalFrames = dashProjectData.length;
+    let successCount = 0;
+    let failureCount = 0;
+    const failures = [];
+    // Track used filenames to detect collisions (defensive — ITEM CODE should
+    // be unique in practice). On collision append `-2`, `-3`, etc.
+    const usedNames = {};
+
+    try {
+        for (let i = 0; i < totalFrames; i++) {
+            if (_batchZipCancelled) {
+                modal.style.display = 'none';
+                return;
+            }
+
+            const row = dashProjectData[i];
+            const baseName = (row.id || `Frame_${i + 1}`).replace(/[\\/:*?"<>|]/g, '_');
+            let fileName = `${baseName}.png`;
+            if (usedNames[fileName]) {
+                let n = 2;
+                while (usedNames[`${baseName}-${n}.png`]) n++;
+                fileName = `${baseName}-${n}.png`;
+            }
+            usedNames[fileName] = true;
+
+            // Update progress UI BEFORE the heavy work so the user sees movement
+            document.getElementById('batchZipCurrentFile').textContent = `Rendering ${fileName}…`;
+            document.getElementById('batchZipCountLabel').textContent = `${i} / ${totalFrames}`;
+            const pct = Math.round((i / totalFrames) * 100);
+            document.getElementById('batchZipProgressBar').style.width = pct + '%';
+            document.getElementById('batchZipPercentLabel').textContent = pct + '%';
+            // Yield so the browser can paint the new progress state
+            await new Promise(r => setTimeout(r, 0));
+
+            try {
+                const swatchImg = row.swatchDataUrl ? await _loadImg(row.swatchDataUrl) : null;
+                const dInches = _frameDataInInches(row, dashUnit);
+                const { canvas } = renderFrameToCanvas(dInches, swatchImg, { dpi: 72, pad: 40 });
+                // canvas.toBlob is async via a callback — wrap in a Promise so
+                // we can await it. Quality arg N/A for PNG (it's lossless).
+                const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+                if (!blob) throw new Error('canvas.toBlob returned null');
+                zip.file(fileName, blob);
+                successCount++;
+            } catch (frameErr) {
+                failureCount++;
+                failures.push(`${row.id || `Row ${i + 1}`}: ${frameErr.message || frameErr}`);
+                // Continue on failure — one bad frame shouldn't tank the whole batch
+            }
+        }
+
+        if (_batchZipCancelled) {
+            modal.style.display = 'none';
+            return;
+        }
+
+        // Include the project CSV. Built via buildDashCSVString (no download).
+        document.getElementById('batchZipCurrentFile').textContent = 'Adding project CSV…';
+        await new Promise(r => setTimeout(r, 0));
+        try {
+            const csvText = buildDashCSVString();
+            zip.file('RFI_Project_Tracker.csv', csvText);
+        } catch (csvErr) {
+            // Don't fail the whole batch over a CSV problem
+            failures.push(`CSV: ${csvErr.message || csvErr}`);
+        }
+
+        // Generate final ZIP. JSZip's generateAsync supports a progress callback
+        // which we use to push the bar past the rendering phase smoothly.
+        document.getElementById('batchZipCurrentFile').textContent = 'Compressing…';
+        const zipBlob = await zip.generateAsync(
+            { type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } },
+            (metadata) => {
+                // metadata.percent is 0-100 of the compression phase
+                const pct = Math.round(metadata.percent);
+                document.getElementById('batchZipProgressBar').style.width = pct + '%';
+                document.getElementById('batchZipPercentLabel').textContent = pct + '%';
+            }
+        );
+
+        if (_batchZipCancelled) {
+            modal.style.display = 'none';
+            return;
+        }
+
+        // Build a meaningful ZIP filename. Prefer the project name from the
+        // global meta field if present; fall back to a date-stamped default.
+        const projName = (document.getElementById('g_projName')?.value || '').trim();
+        const dateStr = new Date().toISOString().slice(0, 10);
+        const safeName = projName ? projName.replace(/[\\/:*?"<>|]/g, '_') : 'Frame_Pack';
+        const zipFileName = `${safeName}_${dateStr}.zip`;
+
+        // Trigger the single download
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(zipBlob);
+        a.download = zipFileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        // Revoke after a short delay to ensure the browser has started the download
+        setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+
+        // Switch modal to 'done' state with summary
+        document.getElementById('batchZipRunning').style.display = 'none';
+        document.getElementById('batchZipDone').style.display = 'block';
+        let msg = `${successCount} frame${successCount === 1 ? '' : 's'} packed into <strong>${zipFileName}</strong>.`;
+        if (failureCount > 0) {
+            msg += `<br><br><span style="color:#e87474;">${failureCount} frame${failureCount === 1 ? '' : 's'} failed:</span><br>` +
+                failures.slice(0, 5).map(f => `• ${f}`).join('<br>') +
+                (failures.length > 5 ? `<br>…and ${failures.length - 5} more` : '');
+        }
+        document.getElementById('batchZipDoneMsg').innerHTML = msg;
+
+    } catch (err) {
+        // Catastrophic failure (e.g. JSZip itself failing, out of memory)
+        document.getElementById('batchZipRunning').style.display = 'none';
+        document.getElementById('batchZipError').style.display = 'block';
+        document.getElementById('batchZipErrorMsg').textContent =
+            `An unexpected error stopped the batch: ${err.message || err}`;
+    }
+}
+
+// Set the cancellation flag. The running loop polls this and bails on the
+// next iteration. Doesn't synchronously stop work — the current frame may
+// finish rendering before the loop notices.
+function cancelBatchZip() {
+    _batchZipCancelled = true;
+    // Update modal to show cancellation is in progress
+    document.getElementById('batchZipCurrentFile').textContent = 'Cancelling…';
 }
 
 // Download the InDesign script (AutoFrameSpecs.jsx). Fetched from the deployed
