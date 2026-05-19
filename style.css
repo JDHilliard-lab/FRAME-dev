@@ -393,6 +393,168 @@ select.no-arrow::-ms-expand { display: none; }
     line-height: 1.3;
 }
 .elev-frame-list { flex: 1; overflow-y: auto; padding: 10px 20px; }
+
+/* Empty-state shown inside #frame-controls when an elevation has no frames.
+ * Centered, muted, with a soft dashed-square icon. The strong tags inside
+ * the copy ("Frame Dashboard", "Push to Wall", "+ Add") match the actual
+ * UI labels users will look for. */
+.elev-empty-state {
+    padding: 20px 14px 24px;
+    text-align: center;
+    color: var(--text-muted);
+}
+.elev-empty-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--text-muted);
+    opacity: 0.55;
+    margin: 0 auto 10px;
+    display: block;
+}
+.elev-empty-state h4 {
+    font-size: 0.78rem;
+    color: var(--text-strong);
+    margin: 0 0 8px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+.elev-empty-state p {
+    font-size: 0.7rem;
+    line-height: 1.45;
+    margin: 0 0 10px;
+    color: var(--text-muted);
+}
+.elev-empty-state p.elev-empty-tip {
+    font-size: 0.65rem;
+    opacity: 0.85;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+}
+.elev-empty-state strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* ──────────────── HELP MODAL ────────────────
+ * Two-tab modal (Video, Reference). Tabs are flat buttons with a colored
+ * underline for the active state. Reference is a two-column layout: left
+ * sidebar of section names, right content panel. Active section in the
+ * sidebar gets an accent background. */
+.help-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border-color);
+}
+.help-tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.15s;
+    margin-bottom: -1px;  /* overlap parent's border so active tab "owns" the seam */
+}
+.help-tab:hover {
+    color: var(--text-main);
+}
+.help-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Reference: sidebar of sections */
+.help-ref-nav {
+    width: 180px;
+    border-right: 1px solid var(--border-color);
+    padding: 14px 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+    background: var(--bg-main);
+}
+.help-ref-nav button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 8px 18px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.15s;
+    border-left: 2px solid transparent;
+}
+.help-ref-nav button:hover {
+    color: var(--text-main);
+    background: var(--bg-panel);
+}
+.help-ref-nav button.active {
+    color: var(--accent);
+    background: var(--bg-panel);
+    border-left-color: var(--accent);
+    font-weight: 600;
+}
+
+/* Reference: content panel */
+.help-ref-content {
+    flex: 1;
+    padding: 20px 26px;
+    overflow-y: auto;
+    color: var(--text-main);
+}
+.help-ref-content h4 {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+    color: var(--text-strong);
+    font-weight: 600;
+}
+.help-ref-content .help-section-intro {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin: 0 0 18px;
+    line-height: 1.45;
+}
+.help-ref-content .help-entry {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+}
+.help-ref-content .help-entry:last-child {
+    border-bottom: none;
+}
+.help-ref-content .help-entry h5 {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    color: var(--text-strong);
+    font-weight: 600;
+}
+.help-ref-content .help-entry p {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text-main);
+}
+.help-ref-content .help-entry strong {
+    color: var(--text-strong);
+    font-weight: 600;
+}
+.help-ref-content .help-kbd {
+    display: inline-block;
+    padding: 1px 6px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: var(--text-main);
+    margin: 0 1px;
+}
 .workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
 #export-wrap { padding: 80px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
 
