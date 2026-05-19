@@ -32,6 +32,13 @@
             <button class="action-btn btn-secondary" style="width:auto;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
+            <!-- Help button. Opens a modal with tabs: a tutorial video (placeholder
+                 until a URL is plugged in) and a Reference section explaining
+                 every feature. Lives next to the theme toggle so help is always
+                 reachable, never blocks workflow. -->
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="openHelpModal()" title="Help — features, shortcuts, and tutorial">
+                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </button>
             <!-- Global unit toggle. Lives in the header so it's always visible
                  regardless of view. Calls setUnit() which converts all stored
                  values across dashboard rows + elevation frames + all input
@@ -648,6 +655,66 @@
             <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:#e87474;">Batch Export Failed</h3>
             <p id="batchZipErrorMsg" style="font-size:0.75rem; color:var(--text-main); margin: 0 0 18px 0; line-height: 1.4;">…</p>
             <button class="action-btn btn-secondary" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('batchZipModal').style.display='none'">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Help modal. Opens via the ? button in the header. Two tabs: Video
+     (placeholder until a tutorial URL is set in HELP_VIDEO_URL in app.js)
+     and Reference (detailed feature documentation). Wider than other modals
+     since reference content benefits from horizontal space — left sidebar
+     for section navigation, right panel for content. -->
+<div id="helpModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); border-radius:8px; width:760px; max-width: 95vw; height:80vh; max-height:720px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); display:flex; flex-direction: column; overflow: hidden;">
+
+        <!-- Header: title + tab strip + close button -->
+        <div style="padding: 16px 20px 0; flex-shrink: 0;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                <div>
+                    <h3 style="margin: 0 0 2px; font-size:1.1rem; color:var(--text-strong);">Help</h3>
+                    <p style="font-size:0.7rem; color:var(--text-muted); margin: 0;">Features, shortcuts, and the workflow at a glance.</p>
+                </div>
+                <button class="icon-btn" style="border:none; background:transparent; color:var(--text-muted); cursor:pointer; padding: 4px 8px; font-size: 1.2rem; line-height: 1;" onclick="closeHelpModal()" title="Close help">×</button>
+            </div>
+            <!-- Tab strip -->
+            <div class="help-tabs">
+                <button class="help-tab active" id="helpTabVideo" onclick="setHelpTab('video')">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px; margin-right:5px;"><polygon points="23 7 16 12 23 17 23 7" fill="currentColor"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                    Video
+                </button>
+                <button class="help-tab" id="helpTabReference" onclick="setHelpTab('reference')">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px; margin-right:5px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2.5A2.5 2.5 0 0 0 17.5 0H6.5A2.5 2.5 0 0 0 4 2.5z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+                    Reference
+                </button>
+            </div>
+        </div>
+
+        <!-- Body: swaps based on which tab is active -->
+        <div style="flex: 1; overflow: hidden; display: flex;">
+
+            <!-- VIDEO TAB CONTENT -->
+            <div id="helpVideoPanel" style="flex: 1; padding: 20px 24px; overflow-y: auto;">
+                <div id="helpVideoEmpty" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--text-muted);">
+                    <svg viewBox="0 0 24 24" style="width:56px; height:56px; opacity:0.4; margin-bottom: 16px;" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                    <h4 style="margin: 0 0 8px; font-size: 0.95rem; color: var(--text-strong);">Tutorial video coming soon</h4>
+                    <p style="font-size: 0.78rem; max-width: 380px; line-height: 1.5; margin: 0 0 18px;">A walkthrough video is in production. Once it's ready, you'll be able to watch it here without leaving the tool.</p>
+                    <p style="font-size: 0.72rem; max-width: 380px; line-height: 1.5;">In the meantime, the <strong style="color: var(--text-main);">Reference</strong> tab covers every feature with short descriptions.</p>
+                </div>
+                <!-- When a video URL is plugged in, this container gets populated by setHelpVideoUrl() -->
+                <div id="helpVideoEmbed" style="display:none; width:100%; height:100%;"></div>
+            </div>
+
+            <!-- REFERENCE TAB CONTENT -->
+            <div id="helpReferencePanel" style="flex: 1; display: none; overflow: hidden;">
+                <!-- Section nav (left) -->
+                <div class="help-ref-nav" id="helpRefNav">
+                    <!-- Populated by populateHelpReference() -->
+                </div>
+                <!-- Content (right) -->
+                <div class="help-ref-content" id="helpRefContent">
+                    <!-- Populated by populateHelpReference() and renderHelpRefSection() -->
+                </div>
+            </div>
         </div>
     </div>
 </div>
