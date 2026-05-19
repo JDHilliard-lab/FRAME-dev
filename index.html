@@ -10,6 +10,10 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- JSZip: vendored locally (lib-jszip.min.js) so the batch ZIP export
+         works even when CDNs are unreachable. ~95KB. Used by
+         batchDownloadAllFramesAsZip() to bundle PNGs + CSV into one download. -->
+    <script src="lib-jszip.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -604,6 +608,46 @@
         <p id="infoModalBody" style="font-size:0.75rem; color:var(--text-main); margin-bottom:20px; line-height: 1.4;">…</p>
         <div id="infoModalButtons" style="display:flex; flex-direction:column; gap:10px;">
             <!-- Buttons injected dynamically by showInfoModal / showConfirmModal -->
+        </div>
+    </div>
+</div>
+
+<!-- Batch ZIP progress modal. Shown while batchDownloadAllFramesAsZip is
+     generating PNGs and bundling them. Three content states swap based on
+     job phase: 'running' (during), 'done' (success), 'error' (failure).
+     Modal is dismissible via Cancel during run, Close after done. -->
+<div id="batchZipModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:380px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+
+        <!-- RUNNING STATE -->
+        <div id="batchZipRunning">
+            <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.05rem; color:var(--text-strong);">Building Frame Pack</h3>
+            <p style="font-size:0.7rem; color:var(--text-muted); margin: 0 0 16px 0;">
+                Generating PNG files and bundling with the project CSV into a single ZIP.
+            </p>
+            <div style="background: var(--border-color); border-radius: 4px; height: 8px; overflow:hidden; margin-bottom: 8px;">
+                <div id="batchZipProgressBar" style="background: var(--accent); height: 100%; width: 0%; transition: width 0.2s ease;"></div>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-main); margin-bottom: 14px;">
+                <span id="batchZipCountLabel">0 / 0</span>
+                <span id="batchZipPercentLabel">0%</span>
+            </div>
+            <p id="batchZipCurrentFile" style="font-size:0.7rem; color:var(--text-muted); margin: 0 0 18px 0; font-style: italic; min-height: 1em;"></p>
+            <button class="action-btn btn-secondary" style="width:100%; height:32px; font-size:0.75rem;" onclick="cancelBatchZip()">Cancel</button>
+        </div>
+
+        <!-- DONE STATE -->
+        <div id="batchZipDone" style="display:none;">
+            <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:var(--text-strong);">Frame Pack Ready</h3>
+            <p id="batchZipDoneMsg" style="font-size:0.75rem; color:var(--text-main); margin: 0 0 18px 0; line-height: 1.4;">…</p>
+            <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('batchZipModal').style.display='none'">Close</button>
+        </div>
+
+        <!-- ERROR STATE -->
+        <div id="batchZipError" style="display:none;">
+            <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:#e87474;">Batch Export Failed</h3>
+            <p id="batchZipErrorMsg" style="font-size:0.75rem; color:var(--text-main); margin: 0 0 18px 0; line-height: 1.4;">…</p>
+            <button class="action-btn btn-secondary" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('batchZipModal').style.display='none'">Close</button>
         </div>
     </div>
 </div>
