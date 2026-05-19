@@ -207,7 +207,7 @@ tr.selected { background: var(--table-row-selected); border-left: 4px solid var(
    events blocked so nothing inside can be clicked. A note line above explains why. */
 .disabled-section { opacity: 0.4; pointer-events: none; filter: grayscale(50%); position: relative; }
 .disabled-section::after { content: 'Mats not used for this product'; position: absolute; top: 24px; left: 0; right: 0; text-align: center; font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; pointer-events: none; }
-.toggle-status { padding: 2px 6px; border-radius: 4px; font-size: 0.5rem; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); cursor: pointer; font-weight: bold; transition: 0.15s; }
+.toggle-status { padding: 2px 6px; border-radius: 4px; font-size: 0.5rem; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); cursor: pointer; font-weight: bold; transition: 0.15s; min-width: 30px; text-align: center; box-sizing: border-box; }
 .toggle-status.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
 .calc-box { width: 100%; padding: 4px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 0.75rem; background: var(--bg-subpanel); color: var(--text-strong); font-weight: bold; text-align: center; height: 26px; display: flex; align-items: center; justify-content: center; }
 .calc-box-blue { color: var(--accent) !important; }
