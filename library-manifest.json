@@ -9,6 +9,49 @@
   {
     "vendor": "michaelangelo",
     "collection": "avant-garde",
+    "code": "MICH-241-11",
+    "width": 1.25,
+    "path": "library/michaelangelo/avant-garde/MICH-241-11_1.25_d2.125_r1.875.jpg",
+    "depth": 2.125,
+    "rabbet": 1.875
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-247-79",
+    "width": 0.75,
+    "path": "library/michaelangelo/avant-garde/MICH-247-79_0.75_d0.75_r0.625.jpg",
+    "depth": 0.75,
+    "rabbet": 0.625
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-247-81",
+    "width": 0.75,
+    "path": "library/michaelangelo/avant-garde/MICH-247-81_0.75_d0.75_r0.625.jpg",
+    "depth": 0.75,
+    "rabbet": 0.625
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-247-82",
+    "width": 0.75,
+    "path": "library/michaelangelo/avant-garde/MICH-247-82_0.75.jpg"
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-32-22",
+    "width": 0.875,
+    "path": "library/michaelangelo/avant-garde/MICH-32-22_0.875_d1.25_r1.png",
+    "depth": 1.25,
+    "rabbet": 1
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
     "code": "MICH-41-12",
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-12_1.25_d1.125_r0.75.jpg",
@@ -41,6 +84,69 @@
     "path": "library/michaelangelo/avant-garde/MICH-41-35_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
     "rabbet": 0.75
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-432-20",
+    "width": 0.875,
+    "path": "library/michaelangelo/avant-garde/MICH-432-20_0.875_d1.25_r1.jpg",
+    "depth": 1.25,
+    "rabbet": 1
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-432-29",
+    "width": 0.875,
+    "path": "library/michaelangelo/avant-garde/MICH-432-29_0.875_d1.25_r1.jpg",
+    "depth": 1.25,
+    "rabbet": 1
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-432-52",
+    "width": 0.875,
+    "path": "library/michaelangelo/avant-garde/MICH-432-52_0.875_d1.25_r1.jpg",
+    "depth": 1.25,
+    "rabbet": 1
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-432-55",
+    "width": 0.875,
+    "path": "library/michaelangelo/avant-garde/MICH-432-55_0.875_d1.25_r1.jpg",
+    "depth": 1.25,
+    "rabbet": 1
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-436-112",
+    "width": 0.875,
+    "path": "library/michaelangelo/avant-garde/MICH-436-112_0.875_d1.125_r0.875.jpg",
+    "depth": 1.125,
+    "rabbet": 0.875
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-516-152",
+    "width": 1.25,
+    "path": "library/michaelangelo/avant-garde/MICH-516-152_1.25_d0.625_r0.375.jpg",
+    "depth": 0.625,
+    "rabbet": 0.375
+  },
+  {
+    "vendor": "michaelangelo",
+    "collection": "avant-garde",
+    "code": "MICH-575-52",
+    "width": 1,
+    "path": "library/michaelangelo/avant-garde/MICH-575-52_1_d0.75_r0.375.jpg",
+    "depth": 0.75,
+    "rabbet": 0.375
   },
   {
     "vendor": "michaelangelo",
