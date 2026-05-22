@@ -1,5 +1,14 @@
 [
   {
+    "vendor": "international-moulding",
+    "collection": "Standard",
+    "code": "IM-2465-35",
+    "width": 1.25,
+    "path": "library/international-moulding/Standard/IM-2465-35_1.25_d1_r0.75.png",
+    "depth": 1,
+    "rabbet": 0.75
+  },
+  {
     "vendor": "larson_juhl",
     "collection": "cranbrook",
     "code": "LJ 613674",
@@ -184,5 +193,23 @@
     "code": "MICH-16-250",
     "width": 2,
     "path": "library/michaelangelo/golden/MICH-16-250_2.0.jpg"
+  },
+  {
+    "vendor": "universal",
+    "collection": "Standard",
+    "code": "UA-EC2403",
+    "width": 1.25,
+    "path": "library/universal/Standard/UA-EC2403_1.25_d1.25_r0.875.jpg",
+    "depth": 1.25,
+    "rabbet": 0.875
+  },
+  {
+    "vendor": "universal",
+    "collection": "Standard",
+    "code": "UA-N2611",
+    "width": 1.5,
+    "path": "library/universal/Standard/UA-N2611_1.5_d1.25_r0.875.jpg",
+    "depth": 1.25,
+    "rabbet": 0.875
   }
 ]
