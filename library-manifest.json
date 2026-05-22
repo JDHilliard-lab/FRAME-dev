@@ -26,6 +26,15 @@
   },
   {
     "vendor": "michaelangelo",
+    "collection": "Ornate",
+    "code": "MICH-24-250",
+    "width": 1.25,
+    "path": "library/michaelangelo/Ornate/MICH-24-250_1.25_d1_r0.375.jpg",
+    "depth": 1,
+    "rabbet": 0.375
+  },
+  {
+    "vendor": "michaelangelo",
     "collection": "avant-garde",
     "code": "MICH-241-11",
     "width": 1.25,
