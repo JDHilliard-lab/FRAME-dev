@@ -887,7 +887,24 @@ function updateElevationNameFromInput(newName) {
 function deleteElevation(idx, e) {
     e.stopPropagation();
     if(confirm("Delete this entire elevation wall? This cannot be undone.")) {
+        // If deleting the source of any variations, promote those variations
+        // to primary status. Otherwise they'd stay flagged as `isVariation`
+        // and get skipped by recalculateDashboardQuantities, making qty
+        // unexpectedly 0 for frames that ARE physically being ordered.
+        elevations.forEach(other => {
+            if (other.variationOf === idx) {
+                delete other.isVariation;
+                delete other.variationOf;
+            }
+        });
         elevations.splice(idx, 1);
+        // Fix up any remaining variationOf indices to account for the splice.
+        // variationOf indices >= idx need to shift down by 1.
+        elevations.forEach(other => {
+            if (typeof other.variationOf === 'number' && other.variationOf > idx) {
+                other.variationOf--;
+            }
+        });
         if (elevations.length === 0) {
             const uf = unitFactor('in', elevUnit);
             let w = parseFloat((185 * uf).toFixed(2));
@@ -901,6 +918,47 @@ function deleteElevation(idx, e) {
         renderNavTabs(); populateDashPushSelector(); recalculateDashboardQuantities();
         pushHistory();
     }
+}
+
+// Duplicate the currently-active elevation into a new tab inserted right
+// after it. Used when the user wants to show layout variations of the same
+// approved design (e.g. three different arrangements for a client review).
+//
+// Important: the duplicate references the SAME dashboard rows (same .id
+// values on frames) — variations share their underlying product list with
+// the original. This means editing a frame's spec in the dashboard affects
+// every variation that uses it (usually desirable: 'change the mat color
+// once, applies everywhere it's shown').
+//
+// To avoid double-counting in the dashboard's qty column, duplicates are
+// flagged `isVariation: true`. recalculateDashboardQuantities() skips
+// flagged elevations so the qty reflects the number of UNIQUE physical
+// frames, not the number of times they're visualized across variations.
+function duplicateCurrentElevation() {
+    if (currentView !== 'elevation') return;
+    const srcIdx = currentElevIndex;
+    const src = elevations[srcIdx];
+    if (!src) return;
+
+    // Deep clone so subsequent edits to the copy don't bleed into the
+    // original. JSON roundtrip is safe here because everything in an
+    // elevation is plain data (no functions, no DOM refs).
+    const copy = JSON.parse(JSON.stringify(src));
+    copy.name = `${src.name} (Copy)`;
+    copy.isVariation = true;
+    copy.variationOf = srcIdx;
+
+    // Insert right after the source so variations sit next to their
+    // original in the tab strip. Then switch to it so the user lands
+    // on the new tab ready to edit.
+    elevations.splice(srcIdx + 1, 0, copy);
+    currentElevIndex = srcIdx + 1;
+
+    renderNavTabs();
+    populateDashPushSelector();
+    switchView('elevation', srcIdx + 1);
+    recalculateDashboardQuantities();
+    pushHistory();
 }
 
 function addNewElevationTab() {
@@ -1051,7 +1109,13 @@ function loadMasterProject(event) {
 // =========================================================================
 function recalculateDashboardQuantities() {
     let counts = {};
-    elevations.forEach(elev => { elev.frames.forEach(f => { if (f.active && f.id) counts[f.id] = (counts[f.id] || 0) + 1; }); });
+    // Skip variations: a duplicated elevation visualizes the same physical
+    // frames as its source, so counting them would double-bill. Quantities
+    // reflect the number of UNIQUE physical frames across primary walls.
+    elevations.forEach(elev => {
+        if (elev.isVariation) return;
+        elev.frames.forEach(f => { if (f.active && f.id) counts[f.id] = (counts[f.id] || 0) + 1; });
+    });
     dashProjectData.forEach(d => { d.qty = counts[d.id] !== undefined ? counts[d.id] : 0; });
     if (currentView === 'dashboard') { loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]); renderDashTable(); }
 }
