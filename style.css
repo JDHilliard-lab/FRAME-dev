@@ -91,6 +91,51 @@ body:not(.light-theme) .logo-dark { display: block !important; }
 }
 .nav-tab.drop-before::before { left: -1px; }
 .nav-tab.drop-after::after { right: -1px; }
+
+/* ──────────────────────────────────────────────────────────────────────
+ * DASHBOARD ROW DRAG-TO-REORDER
+ * Drag handle column on the left of each row + visual drop indicators
+ * (3px accent bars on top or bottom edges of the target row).
+ * ────────────────────────────────────────────────────────────────────── */
+.drag-handle-col,
+.drag-handle-cell {
+    width: 22px;
+    padding: 0;
+    text-align: center;
+    user-select: none;
+}
+.drag-handle-cell {
+    cursor: grab;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.15s, color 0.15s;
+}
+.drag-handle-cell:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+.drag-handle-cell:active {
+    cursor: grabbing;
+}
+.drag-handle-cell .svg-icon {
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+}
+
+/* Dragging state on the row being moved */
+#rfiBody tr.row-dragging { opacity: 0.4; }
+
+/* Drop position indicators: use box-shadow inset to draw a 3px accent bar
+ * on the top or bottom edge of the target row. Pseudo-elements on table
+ * cells have unreliable positioning due to table layout quirks; box-shadow
+ * is simpler and works across the full row width without breaking layout. */
+#rfiBody tr.drop-above {
+    box-shadow: inset 0 3px 0 0 var(--accent);
+}
+#rfiBody tr.drop-below {
+    box-shadow: inset 0 -3px 0 0 var(--accent);
+}
 .tab-close { font-size: 14px; font-weight: bold; opacity: 0.5; transition: 0.2s; }
 .tab-close:hover { opacity: 1; color: var(--btn-danger); }
 
