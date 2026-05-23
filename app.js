@@ -872,12 +872,154 @@ function renderNavTabs() {
     
     elevations.forEach((elev, idx) => {
         let isActive = (currentView === 'elevation' && currentElevIndex === idx) ? 'active' : '';
-        html += `<div class="nav-tab ${isActive}" onclick="switchView('elevation', ${idx})">
+        // draggable=true enables HTML5 drag-and-drop. data-tab-idx is read by
+        // the drag handlers to know which tab is being moved + where it's
+        // being dropped. The drag/dragover/drop handlers are wired up
+        // imperatively after innerHTML assignment (cleaner than inline
+        // attributes since they need access to the event object's dataTransfer).
+        html += `<div class="nav-tab ${isActive}" draggable="true" data-tab-idx="${idx}" onclick="switchView('elevation', ${idx})">
                     <span>${elev.name}</span>
                     <span class="tab-close" onclick="deleteElevation(${idx}, event)" title="Delete Wall">×</span>
                  </div>`;
     });
     container.innerHTML = html;
+    // Wire up drag-and-drop on the elevation tabs (skip the Frame Dashboard
+    // tab — it always stays first).
+    container.querySelectorAll('.nav-tab[draggable="true"]').forEach(tab => {
+        tab.addEventListener('dragstart', handleTabDragStart);
+        tab.addEventListener('dragover', handleTabDragOver);
+        tab.addEventListener('dragleave', handleTabDragLeave);
+        tab.addEventListener('drop', handleTabDrop);
+        tab.addEventListener('dragend', handleTabDragEnd);
+    });
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// ELEVATION TAB DRAG-TO-REORDER
+// ──────────────────────────────────────────────────────────────────────────
+// HTML5 drag-and-drop implementation. The dragged tab's index is stored in
+// dataTransfer (string, since DataTransfer only accepts strings). During
+// dragover, we compute which side of the hovered target the cursor is on
+// to decide whether the drop will be "before" or "after" that target,
+// and apply a CSS class to show a visual drop indicator (colored border).
+// On drop, we splice the elevations array, fix up currentElevIndex so the
+// active tab follows the move, fix up variationOf references, re-render
+// tabs, and push history.
+
+let _draggingTabIdx = null;
+
+function handleTabDragStart(e) {
+    _draggingTabIdx = parseInt(e.currentTarget.dataset.tabIdx, 10);
+    // Use 'move' effect to signal a reorder (vs 'copy'). dataTransfer needs
+    // something set to avoid browsers rejecting the drop in some cases.
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', String(_draggingTabIdx));
+    e.currentTarget.classList.add('dragging');
+}
+
+function handleTabDragOver(e) {
+    e.preventDefault();  // required to enable drop
+    e.dataTransfer.dropEffect = 'move';
+    const tab = e.currentTarget;
+    const targetIdx = parseInt(tab.dataset.tabIdx, 10);
+    if (targetIdx === _draggingTabIdx) return;  // can't drop on self
+    // Decide before-or-after based on cursor position vs tab midpoint
+    const rect = tab.getBoundingClientRect();
+    const midX = rect.left + rect.width / 2;
+    const dropBefore = e.clientX < midX;
+    // Clear both classes on all tabs first, then set the right one on
+    // this target. (Cleaner than tracking which tab last had the indicator.)
+    document.querySelectorAll('.nav-tab.drop-before, .nav-tab.drop-after')
+        .forEach(t => t.classList.remove('drop-before', 'drop-after'));
+    tab.classList.add(dropBefore ? 'drop-before' : 'drop-after');
+}
+
+function handleTabDragLeave(e) {
+    // Only clear if we're really leaving the tab (not just moving over a child)
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+        e.currentTarget.classList.remove('drop-before', 'drop-after');
+    }
+}
+
+function handleTabDrop(e) {
+    e.preventDefault();
+    const targetTab = e.currentTarget;
+    const targetIdx = parseInt(targetTab.dataset.tabIdx, 10);
+    targetTab.classList.remove('drop-before', 'drop-after');
+    if (_draggingTabIdx === null || _draggingTabIdx === targetIdx) return;
+    // Same before-or-after calc as in dragover
+    const rect = targetTab.getBoundingClientRect();
+    const midX = rect.left + rect.width / 2;
+    const dropBefore = e.clientX < midX;
+    let insertIdx = dropBefore ? targetIdx : targetIdx + 1;
+    // Adjust if removing the dragged item from earlier in the array shifts
+    // the target's effective position
+    if (_draggingTabIdx < insertIdx) insertIdx--;
+    reorderElevation(_draggingTabIdx, insertIdx);
+}
+
+function handleTabDragEnd(e) {
+    e.currentTarget.classList.remove('dragging');
+    document.querySelectorAll('.nav-tab.drop-before, .nav-tab.drop-after')
+        .forEach(t => t.classList.remove('drop-before', 'drop-after'));
+    _draggingTabIdx = null;
+}
+
+// Move the elevation at `fromIdx` to `toIdx` in the elevations array.
+// Also fixes up currentElevIndex (so the active tab stays active after
+// the move) and variationOf references (so variation→source links survive
+// the reorder). Pushes history so the reorder is undoable.
+function reorderElevation(fromIdx, toIdx) {
+    if (fromIdx === toIdx) return;
+    if (fromIdx < 0 || fromIdx >= elevations.length) return;
+    if (toIdx < 0 || toIdx >= elevations.length) return;
+
+    // Track which elevation was active so we can restore currentElevIndex
+    // after the splice. Use object identity rather than index because the
+    // index changes during the move.
+    const wasActive = elevations[currentElevIndex];
+
+    // Move via splice-remove + splice-insert. Standard array reorder pattern.
+    const [moved] = elevations.splice(fromIdx, 1);
+    elevations.splice(toIdx, 0, moved);
+
+    // Rebuild variationOf indices. The cleanest way is to map each
+    // variation's old source identity to its new index. We do this by
+    // remembering the source object reference, then looking it up after
+    // the splice. variationOf is just an integer hint; if the source can't
+    // be found (deleted), we clear it.
+    //
+    // Note: this requires us to capture identities BEFORE the splice for
+    // any variations that referenced fromIdx or any index between fromIdx
+    // and toIdx. Easier approach: since variationOf is metadata (currently
+    // unused by any feature), just clear it if the index is now stale.
+    // Simpler and avoids the bookkeeping.
+    elevations.forEach((elev, i) => {
+        if (typeof elev.variationOf !== 'number') return;
+        // If it pointed at the moved item, update to the moved item's new pos
+        if (elev.variationOf === fromIdx) {
+            elev.variationOf = toIdx;
+            return;
+        }
+        // Otherwise, the index may have shifted due to the splice
+        // The moved item went from fromIdx to toIdx; everything between
+        // shifts by 1 in the opposite direction.
+        if (fromIdx < toIdx) {
+            // Moved right: indices in (fromIdx, toIdx] shift left by 1
+            if (elev.variationOf > fromIdx && elev.variationOf <= toIdx) elev.variationOf--;
+        } else {
+            // Moved left: indices in [toIdx, fromIdx) shift right by 1
+            if (elev.variationOf >= toIdx && elev.variationOf < fromIdx) elev.variationOf++;
+        }
+    });
+
+    // Restore currentElevIndex by object identity
+    const newActiveIdx = elevations.indexOf(wasActive);
+    if (newActiveIdx >= 0) currentElevIndex = newActiveIdx;
+
+    renderNavTabs();
+    populateDashPushSelector();
+    pushHistory();
 }
 
 function updateElevationNameFromInput(newName) {
