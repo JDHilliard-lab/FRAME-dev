@@ -4331,8 +4331,29 @@ function initElevControls() {
         return;
     }
     let html = ``;
-    elevFrames.forEach((f, idx) => {
-        const activeNeighbors = elevFrames.filter(n => n.letter !== f.letter && n.active);
+    // Render rows sorted by letter (A, B, C, D, ...) regardless of the
+    // underlying elevFrames array order. This decouples panel order from
+    // array storage order — important because various code paths can leave
+    // the array order desynced from letter order (e.g. after some sequences
+    // of sort + view switch + edit). The original index is preserved as
+    // `idx` so event handlers (which look up elevFrames[idx]) still work.
+    const renderOrder = elevFrames
+        .map((f, idx) => ({ f, idx }))
+        .sort((a, b) => {
+            // Letter comparison handles single-letter (A < B) and multi-letter
+            // labels (Z < AA) by length-then-string sort.
+            const la = a.f.letter || '';
+            const lb = b.f.letter || '';
+            if (la.length !== lb.length) return la.length - lb.length;
+            return la < lb ? -1 : la > lb ? 1 : 0;
+        });
+    renderOrder.forEach(({ f, idx }) => {
+        const activeNeighbors = elevFrames.filter(n => n.letter !== f.letter && n.active).slice().sort((a, b) => {
+            const la = a.letter || '';
+            const lb = b.letter || '';
+            if (la.length !== lb.length) return la.length - lb.length;
+            return la < lb ? -1 : la > lb ? 1 : 0;
+        });
         const targetButtons = activeNeighbors.map(n => `<button class="toggle-status ${f.dimTo.includes(n.letter)?'active':''}" style="padding:1px 3px; font-size:8px; border-radius:2px;" onclick="toggleElevDimTarget(${idx}, '${n.letter}', event)">${n.letter}</button>`).join('');
 
         // 4 distance-dim icon buttons: ↑ ceiling, ↓ floor, ← left wall, → right wall.
