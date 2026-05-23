@@ -790,6 +790,35 @@ body.dragging-frame .frame-vis:hover {
     line-height: 1.2;
     flex-shrink: 0;
 }
+
+/* Editable ITEM CODE input — disguised as a muted label until you interact
+ * with it. Hover/focus brings up a subtle background + border to signal
+ * editability. The bordered "active" state matches the project's input
+ * styling elsewhere. */
+.frame-item-id-edit {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-family: inherit;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    width: 80px;
+    height: 18px;
+    outline: none;
+    transition: 0.15s;
+    box-sizing: border-box;
+}
+.frame-item-id-edit:hover {
+    background: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+.frame-item-id-edit:focus {
+    background: var(--bg-input);
+    border-color: var(--accent);
+    color: var(--text-strong);
+}
 .frame-item-targets-inline {
     display: inline-flex;
     flex-wrap: wrap;
