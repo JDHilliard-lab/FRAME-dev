@@ -543,6 +543,13 @@
                             <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
                             </button>
+                            <!-- Re-number button. Opens a modal where the user picks a
+                                 template + location number, then bulk-renames all frame
+                                 ITEM CODES in this elevation to follow that pattern.
+                                 Optionally reorders the dashboard rows to match. -->
+                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openRenumberModal()" title="Re-number all ITEM CODES in this elevation">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+                            </button>
                             <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
                             </button>
@@ -727,6 +734,50 @@
                     <!-- Populated by populateHelpReference() and renderHelpRefSection() -->
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Re-number ITEM CODES modal. Triggered by the # button in the elevation
+     toolbar. User specifies a template + location number, sees a preview of
+     what the codes will become, optionally enables dashboard reorder, then
+     clicks Apply to commit. -->
+<div id="renumberModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:480px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Re-number ITEM CODES</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
+            Bulk-rename every frame's ITEM CODE in this elevation using a template. Changes propagate to all elevations referencing these frames.
+        </p>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Template</label>
+            <input type="text" id="renumberTemplate" value="ART.{LOC}-{LET}" oninput="updateRenumberPreview()" style="width:100%; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;">
+            <p style="font-size:0.65rem; color:var(--text-muted); margin:4px 0 0; line-height:1.4;">
+                Tokens: <code style="background:var(--bg-input); padding:0 4px; border-radius:2px;">{LOC}</code> = location number, <code style="background:var(--bg-input); padding:0 4px; border-radius:2px;">{LET}</code> = elevation letter (A, B, C…)
+            </p>
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Location Number</label>
+            <input type="text" id="renumberLoc" value="001" oninput="updateRenumberPreview()" style="width:80px; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+            <p style="font-size:0.65rem; color:var(--text-muted); margin:4px 0 0;">Padded to 3 digits if numeric.</p>
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Preview</label>
+            <div id="renumberPreview" style="background:var(--bg-input); border:1px solid var(--border-color); border-radius:4px; padding:8px 10px; font-family:monospace; font-size:0.75rem; color:var(--text-main); line-height:1.5; max-height:160px; overflow-y:auto;">
+                <!-- populated by updateRenumberPreview() -->
+            </div>
+        </div>
+
+        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:18px; font-size:0.75rem; color:var(--text-main);">
+            <input type="checkbox" id="renumberReorderDash" checked style="cursor:pointer;">
+            <span>Also reorder dashboard rows to match elevation order</span>
+        </label>
+
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('renumberModal').style.display='none'">Cancel</button>
+            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyRenumber()">Apply</button>
         </div>
     </div>
 </div>
