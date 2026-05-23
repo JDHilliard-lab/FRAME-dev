@@ -52,6 +52,11 @@
             <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
+            <!-- Version pill: rendered into by renderVersionPill() in app.js
+                 using APP_VERSION + APP_BUILD constants. Green dot = prod,
+                 orange dot = dev. Click opens Help → Version section so
+                 users can see what version they're on and any release notes. -->
+            <div id="versionPill" class="version-pill" onclick="openVersionInfo()" title="Click for version info"></div>
         </div>
     </div>
 
@@ -424,7 +429,13 @@
             <div class="elev-sidebar">
                 <div class="elev-sidebar-header">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <input type="text" id="elev-title-input" value="Elevation Editor" style="margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: bold; border: none; background: transparent; padding: 0; outline: none; border-bottom: 1px dashed var(--border-color);" onchange="updateElevationNameFromInput(this.value)">
+                        <input type="text" id="elev-title-input" value="Elevation Editor" style="margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: bold; border: none; background: transparent; padding: 0; outline: none; border-bottom: 1px dashed var(--border-color); flex: 1;" onchange="updateElevationNameFromInput(this.value)">
+                        <!-- Duplicate-wall button. Clones the current elevation into a
+                             new tab inserted right after this one. Useful for showing
+                             layout variations to clients without losing the original. -->
+                        <button class="icon-btn" id="dupElevBtn" onclick="duplicateCurrentElevation()" title="Duplicate this wall" style="margin-left: 6px; flex-shrink: 0;">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                        </button>
                     </div>
 
                     <!-- ─── WALL DIMENSIONS ────────────────────────────────
@@ -754,7 +765,7 @@
         <div style="margin-bottom:14px;">
             <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">4. Run the script</div>
             <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
-                Select one or more of your exported frame PNGs while in your InDesign document. Double-click <strong>AutoFrameSpecs.jsx</strong> in the Scripts panel. A file picker will appear — choose the CSV you exported from this tool. The script generates spec sheets automatically.
+                Open a new InDesign document. Double-click <strong>AutoFrameSpecs.jsx</strong> in the Scripts panel. A file picker will appear — choose the CSV you exported from this tool. The script generates spec sheets automatically.
             </div>
         </div>
 
