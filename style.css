@@ -69,9 +69,28 @@ body:not(.light-theme) .logo-dark { display: block !important; }
 .nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
 .nav-tabs::-webkit-scrollbar { display: none; }
 
-.nav-tab { display: flex; align-items: center; gap: 8px; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: bold; height: 100%; padding: 0 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; border-bottom: 3px solid transparent; }
+.nav-tab { display: flex; align-items: center; gap: 8px; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: bold; height: 100%; padding: 0 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; border-bottom: 3px solid transparent; position: relative; }
 .nav-tab:hover { background: var(--bg-subpanel); color: var(--text-strong); }
 .nav-tab.active { background: var(--bg-main); color: var(--accent); border-bottom: 3px solid var(--accent); }
+
+/* Drag-to-reorder visual states for elevation tabs.
+ * .dragging fades the tab being moved so the user sees what they grabbed.
+ * .drop-before / .drop-after show a 3px colored bar on the appropriate edge
+ *   of the target tab indicating where the dragged tab will land on release.
+ * Uses the accent color to feel consistent with active-tab styling. */
+.nav-tab.dragging { opacity: 0.4; }
+.nav-tab.drop-before::before,
+.nav-tab.drop-after::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    pointer-events: none;
+}
+.nav-tab.drop-before::before { left: -1px; }
+.nav-tab.drop-after::after { right: -1px; }
 .tab-close { font-size: 14px; font-weight: bold; opacity: 0.5; transition: 0.2s; }
 .tab-close:hover { opacity: 1; color: var(--btn-danger); }
 
@@ -554,6 +573,47 @@ select.no-arrow::-ms-expand { display: none; }
     font-size: 0.7rem;
     color: var(--text-main);
     margin: 0 1px;
+}
+
+/* Version pill in the header — shows "v1.0" + colored status dot.
+ * Green dot when APP_BUILD='prod', orange when 'dev', so it's visually
+ * obvious which build users are on. Click opens Help → Version section. */
+.version-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    font-size: 0.65rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.15s;
+    user-select: none;
+    background: var(--bg-input);
+}
+.version-pill:hover {
+    color: var(--text-strong);
+    border-color: var(--text-muted);
+}
+.version-pill::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #46c772;        /* default prod green */
+    flex-shrink: 0;
+}
+/* When the pill carries the 'dev' modifier, the dot turns orange and the
+ * pill border picks up a faint orange tint to make the development build
+ * unmistakable at a glance. */
+.version-pill.dev::before {
+    background: #f0883e;
+}
+.version-pill.dev {
+    border-color: #f0883e88;
+    color: #f0883e;
 }
 .workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
 #export-wrap { padding: 80px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
