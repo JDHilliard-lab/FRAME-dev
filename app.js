@@ -4631,6 +4631,222 @@ function autoElevRelabel() {
     pushHistory();
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// ITEM CODE EDITING (from the elevation panel)
+// ──────────────────────────────────────────────────────────────────────────
+// Two entry points:
+//   - renameFrameId: single-frame rename triggered by the inline input under
+//     each panel row. User types a new code → it's applied to the underlying
+//     dashboard row (which propagates everywhere by id reference).
+//   - renumberElevation: bulk re-number all frames in the active elevation
+//     using a template like "ART.{LOC}-{LET}". Optionally reorders the
+//     dashboard rows to match the elevation's letter order.
+//
+// Both functions share the same invariant: ITEM CODE is a property of the
+// dashboard row. Frames in elevations reference the row by id. So renaming
+// the row's id requires updating every frame in every elevation that
+// referenced the OLD id. The dashboard row itself is the single source of
+// truth; we keep all frame.id references in sync.
+
+// Apply a single rename from the inline editor input.
+// inputEl is the <input>; idx is the frame's index in elevFrames.
+function renameFrameId(inputEl, idx) {
+    const newId = (inputEl.value || '').trim();
+    const oldId = inputEl.dataset.originalId;
+    if (!newId || newId === oldId) {
+        inputEl.value = oldId;  // restore if blank
+        return;
+    }
+    // Collision check: is newId already used by a DIFFERENT dashboard row?
+    const collidingRow = dashProjectData.find(r => r.id === newId && r.id !== oldId);
+    if (collidingRow) {
+        showInfoModal(
+            'Code already in use',
+            `"${newId}" is already used by another dashboard row. Pick a different code, or delete the conflicting row first.`
+        );
+        inputEl.value = oldId;
+        return;
+    }
+    applyIdRename(oldId, newId);
+    inputEl.dataset.originalId = newId;
+    pushHistory();
+}
+
+// Core rename: update the dashboard row's id + every frame.id reference in
+// every elevation. Caller is responsible for collision-checking and for
+// pushing history.
+function applyIdRename(oldId, newId) {
+    if (oldId === newId) return;
+    // Rename in dashboard
+    const dashRow = dashProjectData.find(r => r.id === oldId);
+    if (dashRow) dashRow.id = newId;
+    // Update every elevation's frame references
+    elevations.forEach(elev => {
+        elev.frames.forEach(f => { if (f.id === oldId) f.id = newId; });
+    });
+    // Re-render to show the change
+    initElevControls();
+    drawElevAll();
+    if (currentView === 'dashboard') renderDashTable();
+    populateDashPushSelector();
+}
+
+// Bulk re-number all frames in the current elevation following a template.
+// Default template: "ART.{LOC}-{LET}" where {LOC} is a 3-digit location
+// number (padded) and {LET} is the frame's elevation letter (A, B, C...).
+//
+// Two passes to avoid temporary collisions during the rename:
+//   1. Rename everything to a temporary unique prefix ("__TMP_<idx>__")
+//   2. Rename from temp → final code
+// This way if the final code "ART.001-A" happens to match another existing
+// id mid-rename, we won't trip the collision check.
+//
+// If reorderDashboard is true, also reorders dashProjectData so the
+// re-numbered rows appear contiguously at the top in elevation letter order.
+function renumberElevation(template, locValue, reorderDashboard) {
+    if (!elevFrames || elevFrames.length === 0) return;
+    template = template || 'ART.{LOC}-{LET}';
+    const locStr = String(locValue || '001').padStart(3, '0');
+
+    // Compute the target id for each frame based on its current letter.
+    // We sort by letter so the iteration order is deterministic (A, B, C...).
+    // The output map preserves original order for the reorder step.
+    const sortedFrames = [...elevFrames].sort((a, b) => {
+        const la = a.letter || '', lb = b.letter || '';
+        if (la.length !== lb.length) return la.length - lb.length;
+        return la < lb ? -1 : la > lb ? 1 : 0;
+    });
+
+    // Build the rename plan: [{oldId, newId}, ...]
+    const plan = sortedFrames.map(f => ({
+        oldId: f.id,
+        newId: template.replace('{LOC}', locStr).replace('{LET}', f.letter || ''),
+        letter: f.letter,
+    }));
+
+    // Validate: any duplicate newIds in the plan itself?
+    const seen = new Set();
+    for (const p of plan) {
+        if (seen.has(p.newId)) {
+            showInfoModal(
+                'Template Produces Duplicate Codes',
+                `The template "${template}" with location "${locStr}" would produce duplicate codes (e.g. "${p.newId}"). Try a template that includes {LET} so each frame gets a unique suffix.`
+            );
+            return;
+        }
+        seen.add(p.newId);
+    }
+
+    // Validate: any newIds that collide with EXISTING dashboard rows not in
+    // this elevation? (Frames already in this elevation are OK — they're
+    // the ones being renamed.)
+    const frameIdsInThisElev = new Set(elevFrames.map(f => f.id));
+    for (const p of plan) {
+        // Skip if this code is one we're currently renaming away from
+        if (frameIdsInThisElev.has(p.newId)) continue;
+        // Skip if newId is the row's own oldId (no real change)
+        if (p.newId === p.oldId) continue;
+        // Otherwise check the dashboard
+        if (dashProjectData.some(r => r.id === p.newId)) {
+            showInfoModal(
+                'Code Conflict',
+                `"${p.newId}" is already used by a dashboard row outside this elevation. Pick a different location number or delete the conflicting row first.`
+            );
+            return;
+        }
+    }
+
+    // Two-pass rename. Pass 1: every frame → unique temp id.
+    // Capturing stamp ONCE outside the loop is critical — each Date.now()
+    // call returns a different value, which would mean pass 1 writes to one
+    // temp id and pass 2 looks for a different one. Single stamp ensures
+    // pass 1's outputs are exactly what pass 2 reads.
+    const stamp = Date.now();
+    plan.forEach((p, i) => {
+        applyIdRename(p.oldId, `__RNTMP_${i}_${stamp}__`);
+    });
+    // Pass 2: temp id → final newId.
+    plan.forEach((p, i) => {
+        applyIdRename(`__RNTMP_${i}_${stamp}__`, p.newId);
+    });
+
+    // Optional: reorder dashboard rows so the re-numbered ones are contiguous
+    // at the top of the table in elevation letter order. Preserves the
+    // selection by identity.
+    if (reorderDashboard) {
+        const reorderedIds = plan.map(p => p.newId);
+        const selectedRow = dashProjectData[dashSelectedRowIndex];
+        // Partition: rows in our plan (in plan order), then everything else
+        // in its current relative order.
+        const inPlan = [];
+        const rest = [];
+        dashProjectData.forEach(row => {
+            const idx = reorderedIds.indexOf(row.id);
+            if (idx >= 0) inPlan[idx] = row;
+            else rest.push(row);
+        });
+        // Filter out any undefined gaps (defensive — every reorderedId
+        // should resolve to a row, but just in case)
+        const ordered = inPlan.filter(Boolean);
+        dashProjectData.length = 0;
+        ordered.forEach(r => dashProjectData.push(r));
+        rest.forEach(r => dashProjectData.push(r));
+        // Restore selection by identity
+        const newIdx = dashProjectData.indexOf(selectedRow);
+        if (newIdx >= 0) dashSelectedRowIndex = newIdx;
+        if (currentView === 'dashboard') renderDashTable();
+    }
+
+    pushHistory();
+}
+
+// Modal: open with sensible defaults. Location defaults to the current
+// elevation's index + 1 (so wall 1 = "001", wall 2 = "002") padded to 3 digits.
+function openRenumberModal() {
+    if (currentView !== 'elevation' || !elevFrames || elevFrames.length === 0) {
+        showInfoModal('Nothing to re-number', 'Add some frames to this elevation first, then come back to this button.');
+        return;
+    }
+    const defaultLoc = String((currentElevIndex || 0) + 1).padStart(3, '0');
+    document.getElementById('renumberLoc').value = defaultLoc;
+    // Don't reset template — let it persist across opens so a project's
+    // chosen convention sticks
+    if (!document.getElementById('renumberTemplate').value) {
+        document.getElementById('renumberTemplate').value = 'ART.{LOC}-{LET}';
+    }
+    document.getElementById('renumberReorderDash').checked = true;
+    updateRenumberPreview();
+    document.getElementById('renumberModal').style.display = 'flex';
+}
+
+// Refresh the preview area based on current template + location inputs.
+// Shows each frame's letter → resulting ITEM CODE, one line per frame.
+function updateRenumberPreview() {
+    const tmpl = document.getElementById('renumberTemplate').value || 'ART.{LOC}-{LET}';
+    const locRaw = document.getElementById('renumberLoc').value || '';
+    // Pad if pure-numeric, otherwise leave as-is (lets user put alpha codes like "LBY")
+    const loc = /^\d+$/.test(locRaw) ? locRaw.padStart(3, '0') : locRaw;
+    const sortedFrames = [...elevFrames].sort((a, b) => {
+        const la = a.letter || '', lb = b.letter || '';
+        if (la.length !== lb.length) return la.length - lb.length;
+        return la < lb ? -1 : la > lb ? 1 : 0;
+    });
+    const lines = sortedFrames.map(f => {
+        const newId = tmpl.replace('{LOC}', loc).replace('{LET}', f.letter || '');
+        return `${f.letter || '?'}: <strong>${f.id}</strong> → <strong style="color:var(--accent);">${newId}</strong>`;
+    });
+    document.getElementById('renumberPreview').innerHTML = lines.join('<br>');
+}
+
+// Read modal inputs and run renumberElevation. Closes the modal on success.
+function applyRenumber() {
+    const tmpl = document.getElementById('renumberTemplate').value || 'ART.{LOC}-{LET}';
+    const loc = document.getElementById('renumberLoc').value || '001';
+    const reorder = document.getElementById('renumberReorderDash').checked;
+    document.getElementById('renumberModal').style.display = 'none';
+    renumberElevation(tmpl, loc, reorder);
+}
+
 function initElevControls() {
     const container = document.getElementById('frame-controls');
     // Empty state: when no frames are placed yet on this elevation, show a
@@ -4745,7 +4961,18 @@ function initElevControls() {
                     </div>
                 </div>
                 <div class="frame-item-id-row">
-                    <span class="frame-item-id">(${f.id})</span>
+                    <!-- Editable ITEM CODE field. Renaming here renames the
+                         underlying dashboard row (which propagates to every
+                         elevation referencing this frame since they link by
+                         id). The new value passes through renameFrameId
+                         which detects collisions and pushes history. -->
+                    <input type="text" class="frame-item-id frame-item-id-edit"
+                           value="${f.id}"
+                           data-original-id="${f.id}"
+                           onchange="renameFrameId(this, ${idx})"
+                           onclick="event.stopPropagation()"
+                           ondragstart="event.preventDefault()"
+                           title="Edit ITEM CODE — applies to all elevations using this frame">
                     ${targetButtons ? `<span class="frame-item-targets-inline">${targetButtons}</span>` : ''}
                 </div>
             </div>`;
