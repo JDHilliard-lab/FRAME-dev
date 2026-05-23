@@ -1,6 +1,14 @@
 // =========================================================================
 // GLOBAL APP STATE & ICONS
 // =========================================================================
+
+// Version indicator. Shown in the header bar (small label + colored dot).
+// Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
+// repo fork — the version pill turns orange to make it visually obvious
+// you're on the development build, not the production one users see.
+const APP_VERSION = '1.0';
+const APP_BUILD = 'prod';  // 'prod' (green dot) or 'dev' (orange dot)
+
 let currentView = 'dashboard';
 let dashUnit = 'in';
 const emptyImgUrl = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
@@ -561,10 +569,16 @@ document.addEventListener('keydown', function(e) {
 
 // Capture initial state on load so the first undo has somewhere to go back to.
 // Wrapped in DOMContentLoaded so the rest of the app has finished initializing.
+// Also renders the version pill in the header (depends on the #versionPill
+// element existing in the DOM).
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => pushHistory());
+    document.addEventListener('DOMContentLoaded', () => {
+        pushHistory();
+        renderVersionPill();
+    });
 } else {
     pushHistory();
+    renderVersionPill();
 }
 // ─────────────────────────────────────────────────────────────────────
 // END UNDO / REDO HISTORY SYSTEM
@@ -4288,7 +4302,14 @@ function autoElevRelabel() {
     let letterMap = {};
     sortedFrames.forEach((f, i) => { letterMap[f.letter] = getElevLetter(i); f.letter = getElevLetter(i); });
     sortedFrames.forEach(f => { if (f.dimTo && f.dimTo.length > 0) f.dimTo = f.dimTo.map(t => letterMap[t] || t); });
-    elevFrames = sortedFrames; initElevControls(); drawElevAll();
+    elevFrames = sortedFrames;
+    // CRITICAL: also assign the sorted array back into the elevation's stored
+    // .frames slot, otherwise switching views will overwrite elevFrames from
+    // the stale unsorted reference and lose the sort. This was the bug behind
+    // "Sort A-Z gets undone after switching views and coming back."
+    if (elevations[currentElevIndex]) elevations[currentElevIndex].frames = sortedFrames;
+    initElevControls(); drawElevAll();
+    pushHistory();
 }
 
 function initElevControls() {
@@ -4304,7 +4325,7 @@ function initElevControls() {
                 <svg class="svg-icon elev-empty-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
                 <h4>No frames on this wall yet</h4>
                 <p>Build frames in the <strong>Frame Dashboard</strong>, then use <strong>Push to Wall</strong> to send them here.</p>
-                <p class="elev-empty-tip">Or click <strong>Import Frames</strong> and select frames from the dropdown, then click <strong>+ Add</strong> above to place a generic frame and customize it inline.</p>
+                <p class="elev-empty-tip">Or click <strong>+ Add</strong> above to place a generic frame and customize it inline.</p>
             </div>
         `;
         return;
@@ -4828,6 +4849,28 @@ const HELP_REFERENCE_DATA = [
                 body: 'The sun/moon icon in the header toggles light/dark. The choice persists between sessions.'
             }
         ]
+    },
+    {
+        id: 'version',
+        title: 'Version',
+        intro: 'About this build of the FRAME tool.',
+        entries: [
+            {
+                title: 'Current Version',
+                // Body is built dynamically when the section renders so it
+                // picks up the live APP_VERSION / APP_BUILD constants. The
+                // marker placeholders below are replaced at render time.
+                body: '<strong>Version:</strong> {{APP_VERSION}}<br><strong>Build:</strong> {{APP_BUILD}}<br><br>The colored dot in the header pill indicates which build you\'re on at a glance: <strong style="color:#46c772;">green</strong> for production, <strong style="color:#f0883e;">orange</strong> for development.'
+            },
+            {
+                title: 'What\'s New',
+                body: 'Edit this section in <code>HELP_REFERENCE_DATA</code> (in <code>app.js</code>) to list changes per release. Suggested format: most recent changes at the top, dated.<br><br>Example:<br><strong>v1.0</strong> — Initial production release. MM/CM/IN unit support, Mat 1 + Mat 2 + Faux Mat + Float Mount, batch ZIP PNG export, InDesign AutoFrameSpecs integration with raw-inch CSV columns.'
+            },
+            {
+                title: 'Reporting Issues',
+                body: 'If something\'s not working as expected, note your version (shown above) and the steps to reproduce. Screenshots help. Send to the project maintainer.'
+            }
+        ]
     }
 ];
 
@@ -4877,10 +4920,22 @@ function renderHelpRefSection(sectionId) {
     const section = HELP_REFERENCE_DATA.find(s => s.id === sectionId);
     if (!section) return;
     const content = document.getElementById('helpRefContent');
+    // Placeholder substitution: any {{TOKEN}} in entry bodies gets replaced
+    // with the live value from this map. Keeps the data structure static
+    // while letting dynamic values (current version, build) flow through.
+    const replacements = {
+        '{{APP_VERSION}}': APP_VERSION,
+        '{{APP_BUILD}}': APP_BUILD,
+    };
+    const fill = (s) => {
+        let out = s;
+        for (const k in replacements) out = out.split(k).join(replacements[k]);
+        return out;
+    };
     let html = `<h4>${section.title}</h4>`;
-    if (section.intro) html += `<p class="help-section-intro">${section.intro}</p>`;
+    if (section.intro) html += `<p class="help-section-intro">${fill(section.intro)}</p>`;
     section.entries.forEach(e => {
-        html += `<div class="help-entry"><h5>${e.title}</h5><p>${e.body}</p></div>`;
+        html += `<div class="help-entry"><h5>${e.title}</h5><p>${fill(e.body)}</p></div>`;
     });
     content.innerHTML = html;
     // Update active nav button
@@ -4921,6 +4976,27 @@ function setHelpVideoUrl(url, type) {
     if (document.getElementById('helpModal').style.display === 'flex') {
         if (HELP_VIDEO_URL) renderHelpVideo();
     }
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// VERSION PILL
+// ──────────────────────────────────────────────────────────────────────────
+// Populates the version indicator in the header bar using APP_VERSION and
+// APP_BUILD constants from the top of this file. Called once on page load.
+// The pill shows e.g. "v1.0" with a colored dot — green for production,
+// orange for development. Click opens Help modal scrolled to Version section.
+function renderVersionPill() {
+    const pill = document.getElementById('versionPill');
+    if (!pill) return;
+    pill.textContent = 'v' + APP_VERSION + (APP_BUILD === 'dev' ? '-dev' : '');
+    pill.classList.toggle('dev', APP_BUILD === 'dev');
+}
+
+function openVersionInfo() {
+    // Open the help modal, jump to the version section, scroll into view.
+    openHelpModal();
+    setHelpTab('reference');
+    renderHelpRefSection('version');
 }
 
 function confirmDuplicate(type) {
