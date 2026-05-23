@@ -1820,7 +1820,13 @@ function dashHtIn(idx, field, val, fromTable) {
         // user isn't typing into a table input.
         renderDashTable();
     }
-    if (field === 'id') recalculateDashboardQuantities();
+    // Recalc qty after id changes — but only for non-table edits. Calling
+    // recalculateDashboardQuantities from a table input re-renders the whole
+    // table, which destroys the input the user is typing into (causes focus
+    // loss + scroll jumps). For renames, the qty is functionally unchanged
+    // anyway (the new id propagates to all elev frame refs at the top of
+    // this function, so total references stay the same).
+    if (field === 'id' && !fromTable) recalculateDashboardQuantities();
 }
 
 // Update only the calculated (display-only) cells of a table row.
@@ -4479,7 +4485,7 @@ function renderDashTable() {
         
         tr.innerHTML = `
             <td class="drag-handle-cell" title="Drag to reorder">
-                <svg class="svg-icon" viewBox="0 0 24 24"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+                ${svgMove}
             </td>
             <td><input class="tbl-in" type="number" value="${row.qty}" disabled style="width:30px; opacity:0.6; background:transparent;"></td>
             <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" oninput="dashHtIn(${index}, 'id', this.value, true)" ondragstart="event.preventDefault()" style="width:80px; font-weight:bold;"></td>
@@ -4531,6 +4537,16 @@ function renderDashTable() {
 let _draggingDashRowIdx = null;
 
 function handleDashRowDragStart(e) {
+    // Only start a drag if the initial mousedown was on the drag-handle cell
+    // (the leftmost column with the grip icon). Without this guard, clicking
+    // and dragging text inside any input would also start a row drag —
+    // breaking normal text-selection behavior. The browser only fires
+    // dragstart for elements with draggable=true; we use the event target
+    // (where mousedown actually was) to filter.
+    if (!e.target.closest('.drag-handle-cell')) {
+        e.preventDefault();
+        return;
+    }
     _draggingDashRowIdx = parseInt(e.currentTarget.dataset.rowIdx, 10);
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/plain', String(_draggingDashRowIdx));
