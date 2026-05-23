@@ -1651,8 +1651,14 @@ function addDashRow() {
     newRow.fW = dashFmt(0.75 * _f);
     newRow.fType = "color"; newRow.fColor = "#000000"; newRow.fCode = "Standard Black";
     
-    dashProjectData.push(newRow);
-    dashSelectedRowIndex = dashProjectData.length - 1;
+    // Insert right after the currently-selected row (so the new row appears
+    // visually adjacent to where the user was working). Falls back to
+    // pushing at the end if the selection is out of bounds (e.g. empty table).
+    const insertAt = (dashSelectedRowIndex >= 0 && dashSelectedRowIndex < dashProjectData.length)
+        ? dashSelectedRowIndex + 1
+        : dashProjectData.length;
+    dashProjectData.splice(insertAt, 0, newRow);
+    dashSelectedRowIndex = insertAt;
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(newRow.id);
     pushHistory();
@@ -1662,8 +1668,14 @@ function duplicateDashRow() {
     const newRow = JSON.parse(JSON.stringify(dashProjectData[dashSelectedRowIndex])); 
     newRow.id = generateNextItemCode(); 
     newRow.qty = 0; 
-    dashProjectData.push(newRow);
-    dashSelectedRowIndex = dashProjectData.length - 1;
+    // Insert right after the source row so the dupe lands visually next to
+    // its original. (Was previously pushing to the end of the array, which
+    // forced users to scroll/search to find the dupe and reorder manually.)
+    const insertAt = (dashSelectedRowIndex >= 0 && dashSelectedRowIndex < dashProjectData.length)
+        ? dashSelectedRowIndex + 1
+        : dashProjectData.length;
+    dashProjectData.splice(insertAt, 0, newRow);
+    dashSelectedRowIndex = insertAt;
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(newRow.id);
     pushHistory();
@@ -4452,8 +4464,23 @@ function renderDashTable() {
             tr.title = rowWarnings.map(w => '⚠ ' + w.message).join('\n');
         }
         tr.addEventListener('click', () => { if (dashSelectedRowIndex !== index) selectDashRow(index); });
+        // Drag-to-reorder support. draggable=true on the tr enables the
+        // browser's HTML5 drag API. data-row-idx stores the row's position
+        // so the drag/drop handlers know which row to move. The handlers
+        // themselves are wired up in renderDashTable's post-render loop
+        // (see below).
+        tr.draggable = true;
+        tr.dataset.rowIdx = String(index);
+        tr.addEventListener('dragstart', handleDashRowDragStart);
+        tr.addEventListener('dragover', handleDashRowDragOver);
+        tr.addEventListener('dragleave', handleDashRowDragLeave);
+        tr.addEventListener('drop', handleDashRowDrop);
+        tr.addEventListener('dragend', handleDashRowDragEnd);
         
         tr.innerHTML = `
+            <td class="drag-handle-cell" title="Drag to reorder">
+                <svg class="svg-icon" viewBox="0 0 24 24"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+            </td>
             <td><input class="tbl-in" type="number" value="${row.qty}" disabled style="width:30px; opacity:0.6; background:transparent;"></td>
             <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" oninput="dashHtIn(${index}, 'id', this.value, true)" ondragstart="event.preventDefault()" style="width:80px; font-weight:bold;"></td>
             <td><select class="tbl-in no-arrow" onchange="dashHtIn(${index}, 'product', this.value)">${FRAME_PRODUCTS.map(p => `<option ${row.product === p ? 'selected' : ''}>${p}</option>`).join('')}</select></td>
@@ -4485,6 +4512,92 @@ function renderDashTable() {
         `;
         tbody.appendChild(tr);
     });
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// DASHBOARD ROW DRAG-TO-REORDER
+// ──────────────────────────────────────────────────────────────────────────
+// HTML5 drag-and-drop on table rows. Drag any row up or down — a horizontal
+// blue line appears on the target row showing where the drop will land
+// (above or below depending on which half of the target the cursor is on).
+// Releasing the drag moves the row in dashProjectData via reorderDashRow,
+// which preserves the user's selection by object identity (so the same row
+// stays "selected" before and after the move).
+//
+// Why drag the whole row vs just a handle: simpler interaction model, and
+// the input fields already block dragstart via ondragstart="event.preventDefault()"
+// so they remain editable without triggering accidental drags.
+
+let _draggingDashRowIdx = null;
+
+function handleDashRowDragStart(e) {
+    _draggingDashRowIdx = parseInt(e.currentTarget.dataset.rowIdx, 10);
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', String(_draggingDashRowIdx));
+    e.currentTarget.classList.add('row-dragging');
+}
+
+function handleDashRowDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const row = e.currentTarget;
+    const targetIdx = parseInt(row.dataset.rowIdx, 10);
+    if (targetIdx === _draggingDashRowIdx) return;
+    // Decide above-or-below based on cursor position vs row vertical midpoint
+    const rect = row.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    const dropAbove = e.clientY < midY;
+    // Clear all existing drop indicators, then set the right one on target
+    document.querySelectorAll('#rfiBody tr.drop-above, #rfiBody tr.drop-below')
+        .forEach(t => t.classList.remove('drop-above', 'drop-below'));
+    row.classList.add(dropAbove ? 'drop-above' : 'drop-below');
+}
+
+function handleDashRowDragLeave(e) {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+        e.currentTarget.classList.remove('drop-above', 'drop-below');
+    }
+}
+
+function handleDashRowDrop(e) {
+    e.preventDefault();
+    const targetRow = e.currentTarget;
+    const targetIdx = parseInt(targetRow.dataset.rowIdx, 10);
+    targetRow.classList.remove('drop-above', 'drop-below');
+    if (_draggingDashRowIdx === null || _draggingDashRowIdx === targetIdx) return;
+    const rect = targetRow.getBoundingClientRect();
+    const midY = rect.top + rect.height / 2;
+    const dropAbove = e.clientY < midY;
+    let insertIdx = dropAbove ? targetIdx : targetIdx + 1;
+    if (_draggingDashRowIdx < insertIdx) insertIdx--;
+    reorderDashRow(_draggingDashRowIdx, insertIdx);
+}
+
+function handleDashRowDragEnd(e) {
+    e.currentTarget.classList.remove('row-dragging');
+    document.querySelectorAll('#rfiBody tr.drop-above, #rfiBody tr.drop-below')
+        .forEach(t => t.classList.remove('drop-above', 'drop-below'));
+    _draggingDashRowIdx = null;
+}
+
+// Move the dashboard row at `fromIdx` to `toIdx`. Preserves the selection
+// by tracking row identity (not index). Pushes history so the reorder is
+// undoable. The dashboard rows are referenced externally by .id, not index,
+// so no other state needs fixing up.
+function reorderDashRow(fromIdx, toIdx) {
+    if (fromIdx === toIdx) return;
+    if (fromIdx < 0 || fromIdx >= dashProjectData.length) return;
+    if (toIdx < 0 || toIdx >= dashProjectData.length) return;
+    // Remember which row was selected by identity so the selection follows
+    // the move (or stays put if a different row was selected).
+    const selectedRow = dashProjectData[dashSelectedRowIndex];
+    const [moved] = dashProjectData.splice(fromIdx, 1);
+    dashProjectData.splice(toIdx, 0, moved);
+    // Restore selection by identity
+    const newSelectedIdx = dashProjectData.indexOf(selectedRow);
+    if (newSelectedIdx >= 0) dashSelectedRowIndex = newSelectedIdx;
+    renderDashTable();
+    pushHistory();
 }
 
 // =========================================================================
