@@ -856,10 +856,14 @@ input.frame-item-id-inline {
 
 /* Container for the target letter chips, now on its own row below the
  * top-row controls. Only renders when there are actual targets, so frames
- * with no dimensions to peers stay single-row-tall. */
+ * with no dimensions to peers stay single-row-tall. Tight padding + starts
+ * at the letter column so chips appear directly below the frame letter. */
 .frame-item-targets-row {
-    padding-top: 4px;
-    padding-left: 28px;  /* aligns with text after the large letter label */
+    padding-top: 2px;
+    padding-left: 0;
+}
+.frame-item-targets-row .frame-item-targets-inline {
+    gap: 1px;
 }
 
 /* Collapsed edge-gap group — single button instead of 4. Width matches the
@@ -1004,7 +1008,17 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
  * active state. Used by the per-frame distance dim toggles (↑↓←→). */
 .icon-btn.active { background: var(--accent) !important; color: white; }
 .dim-btn.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
-.frame-item-icons { display: flex; align-items: center; gap: 2px; flex-shrink: 0; }
+.frame-item-icons { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+/* Generic column wrapper inside .frame-item-icons. Each .frame-col gets an
+ * explicit width inline that exactly matches its corresponding header column,
+ * so columns line up. align-items:center keeps button glyphs centered
+ * vertically within the row. */
+.frame-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
 
 /* WALL ALIGN group: 2 quick-snap buttons (snap to hang, snap to wall center).
  * Sits at the FAR LEFT of the icon row. Matches column header width
