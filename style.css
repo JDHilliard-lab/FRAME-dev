@@ -844,14 +844,19 @@ input.frame-item-id-edit:focus {
 }
 
 /* Inline ITEM CODE variant — used in the top row of the panel item. Sized
- * to fit between the Letter label and the Wall Align icons. Prefixed with
- * `input.` to override the global `input[type="text"] { width: 100% }` rule. */
+ * to fill its grid column (which is 100px wide). Border always visible so
+ * users know it's editable; hover/focus intensify the border + background.
+ * Prefixed with `input.` to override the global `input[type="text"] { width: 100% }`
+ * rule (attribute selector specificity would otherwise win). */
 input.frame-item-id-inline {
-    width: 70px;
-    max-width: 70px;
-    margin-right: 8px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     flex-shrink: 0;
     flex-grow: 0;
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    color: var(--text-main);
 }
 
 /* Container for the target letter chips, now on its own row below the
@@ -1008,16 +1013,24 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
  * active state. Used by the per-frame distance dim toggles (↑↓←→). */
 .icon-btn.active { background: var(--accent) !important; color: white; }
 .dim-btn.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
-.frame-item-icons { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-/* Generic column wrapper inside .frame-item-icons. Each .frame-col gets an
- * explicit width inline that exactly matches its corresponding header column,
- * so columns line up. align-items:center keeps button glyphs centered
- * vertically within the row. */
+.frame-item-icons {
+    /* Use CSS Grid with the same template as the header for guaranteed
+     * column alignment. .elev-col-icons uses the same template via the
+     * --elev-col-template CSS variable. Each column has an explicit width
+     * matching the header. */
+    display: grid;
+    grid-template-columns: var(--elev-col-template);
+    align-items: center;
+    column-gap: 4px;
+    flex-shrink: 0;
+}
+/* Generic column wrapper inside .frame-item-icons. The grid handles widths
+ * (the inline width attribute is now redundant but harmless). */
 .frame-col {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    min-width: 0;
 }
 
 /* WALL ALIGN group: 2 quick-snap buttons (snap to hang, snap to wall center).
@@ -1045,10 +1058,22 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
     gap: 2px;
 }
 
+/* Shared grid template — both .elev-col-icons (header) and .frame-item-icons
+ * (row) use this exact template, guaranteeing column-by-column alignment.
+ * Columns: Item Code | Wall Align | Edge | Toggle | Move | Edit | Dupe | Del */
+.elev-sidebar {
+    --elev-col-template: 100px 52px 26px 38px 26px 26px 26px 26px;
+}
 .elev-col-header { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 10px 4px; border-bottom: 1px solid var(--border-color); margin-bottom: 2px; gap: 6px; }
 .elev-col-left { flex: 1; min-width: 0; }
 .elev-sort-btn { width: auto; font-size: 0.6rem; padding: 3px 8px; height: 22px; }
-.elev-col-icons { display: flex; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.elev-col-icons {
+    display: grid;
+    grid-template-columns: var(--elev-col-template);
+    align-items: flex-end;
+    column-gap: 4px;
+    flex-shrink: 0;
+}
 .elev-col-label { display: flex; align-items: flex-end; justify-content: center; text-align: center; }
 .elev-col-label span { font-size: 0.45rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; line-height: 1.2; }
 .elev-col-iconbtn { background: transparent; border: none; padding: 0; margin: 0; color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
