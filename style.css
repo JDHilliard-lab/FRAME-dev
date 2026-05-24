@@ -196,6 +196,12 @@ th { background: var(--table-header); position: sticky; top: 0; font-weight: bol
 tr { transition: 0.1s; background: var(--bg-panel); }
 tr:hover { background: var(--table-row-hover); }
 tr.selected { background: var(--table-row-selected); border-left: 4px solid var(--accent); }
+/* Multi-selected secondaries — same idea as .selected but muted, so the
+ * primary still reads as "the active row" (form panel reflects it). */
+tr.multi-selected {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-left: 4px solid color-mix(in srgb, var(--accent) 50%, transparent);
+}
 .tbl-in { width: 100%; border: none; background: transparent; font-size: inherit; font-family: inherit; padding: 2px; margin: 0; outline: none; color: inherit; box-sizing: border-box;}
 .tbl-in:focus { border-bottom: 1px solid var(--accent); }
 
