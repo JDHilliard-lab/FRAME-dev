@@ -107,6 +107,11 @@ const svgArrowDown  = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 6v
 const svgArrowLeft  = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M18 12H8M12 8l-4 4 4 4"/></svg>`;
 const svgArrowRight = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 12h10M12 8l4 4-4 4"/></svg>`;
 
+// Edge-gap collapsed icon: a central rectangle (the frame) with four short
+// arrows pointing outward to suggest "distance to wall edges in all 4
+// directions." Compact, distinct from the individual direction icons.
+const svgEdgeGap = `<svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" fill="none"/><path d="M12 7V3M12 21v-4M7 12H3M21 12h-4"/></svg>`;
+
 // Per-frame quick-alignment icons.
 // svgSnapHang: frame outline with a horizontal line through its middle —
 //   suggests "snap this frame's center to a horizontal reference line."
@@ -5199,12 +5204,27 @@ function initElevControls() {
         // uses .active class on icon-btn which matches the .grouped treatment
         // (accent background, white arrow). Tooltips use the consistent
         // "Distance to <wall>" pattern.
+        // Count of active edge-gap toggles — used for the indicator dot on
+        // the collapsed edge-gap button. Showing the count instead of just
+        // a binary on/off makes it possible to glance at the row and see
+        // "ah, this frame has 2 distance dims set."
+        const dtActiveCount = (dt.ceiling?1:0) + (dt.floor?1:0) + (dt.left?1:0) + (dt.right?1:0);
         html += `
             <div class="compact-frame-item" data-frame-letter="${f.letter}">
                 <div class="frame-item-top-row">
                     <div class="frame-item-label">
                         <span class="frame-letter-large">${f.letter}</span>
                     </div>
+                    <!-- ITEM CODE editable input, moved into the top row to free
+                         vertical space. Compact width fits the common code
+                         shape (ART.001-A) without dominating the row. -->
+                    <input type="text" class="frame-item-id frame-item-id-edit frame-item-id-inline"
+                           value="${f.id}"
+                           data-original-id="${f.id}"
+                           onchange="renameFrameId(this, ${idx})"
+                           onclick="event.stopPropagation()"
+                           ondragstart="event.preventDefault()"
+                           title="Edit ITEM CODE — applies to all elevations using this frame">
                     <div class="frame-item-icons">
                         <!-- WALL ALIGN column: 2 quick-snap buttons (to hang height,
                              to wall center). Header lives once in column header above.
@@ -5217,21 +5237,16 @@ function initElevControls() {
                                 <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
                             </div>
                         </div>
-                        <!-- EDGE GAP column: 4 distance-to-wall toggles. Label lives
-                             in the column header (one EDGE GAP label total, above
-                             the whole list). Per-frame state lives in f.distToggles. -->
-                        <div class="edge-gap-group">
+                        <!-- EDGE GAP collapsed: single button that opens a popover
+                             with the 4 direction toggles. Indicator dot (badge) shows
+                             how many are currently active so the user sees state at
+                             a glance without opening the popover. -->
+                        <div class="edge-gap-group edge-gap-group-collapsed">
                             <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.ceiling?'active':''}" title="Ceiling" onclick="toggleFrameDistDim(${idx}, 'ceiling', event)">${svgArrowUp}</button>
-                            </div>
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.floor?'active':''}" title="Floor" onclick="toggleFrameDistDim(${idx}, 'floor', event)">${svgArrowDown}</button>
-                            </div>
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.left?'active':''}" title="Left Wall" onclick="toggleFrameDistDim(${idx}, 'left', event)">${svgArrowLeft}</button>
-                            </div>
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn ${dt.right?'active':''}" title="Right Wall" onclick="toggleFrameDistDim(${idx}, 'right', event)">${svgArrowRight}</button>
+                                <button class="icon-btn edge-gap-trigger ${dtActiveCount>0?'has-active':''}" title="Edge Gap — distance to wall edges" onclick="openEdgeGapPopover(${idx}, this, event)">
+                                    ${svgEdgeGap}
+                                    ${dtActiveCount>0 ? `<span class="edge-gap-badge">${dtActiveCount}</span>` : ''}
+                                </button>
                             </div>
                         </div>
                         <div style="width:38px; display:flex; justify-content:center;">
@@ -5253,21 +5268,7 @@ function initElevControls() {
                         </div>
                     </div>
                 </div>
-                <div class="frame-item-id-row">
-                    <!-- Editable ITEM CODE field. Renaming here renames the
-                         underlying dashboard row (which propagates to every
-                         elevation referencing this frame since they link by
-                         id). The new value passes through renameFrameId
-                         which detects collisions and pushes history. -->
-                    <input type="text" class="frame-item-id frame-item-id-edit"
-                           value="${f.id}"
-                           data-original-id="${f.id}"
-                           onchange="renameFrameId(this, ${idx})"
-                           onclick="event.stopPropagation()"
-                           ondragstart="event.preventDefault()"
-                           title="Edit ITEM CODE — applies to all elevations using this frame">
-                    ${targetButtons ? `<span class="frame-item-targets-inline">${targetButtons}</span>` : ''}
-                </div>
+                ${targetButtons ? `<div class="frame-item-targets-row"><span class="frame-item-targets-inline">${targetButtons}</span></div>` : ''}
             </div>`;
     });
     container.innerHTML = html;
@@ -5296,6 +5297,141 @@ function toggleFrameDistDim(idx, which, e) {
     initElevControls();
     drawElevAll();
     pushHistory();
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// EDGE GAP POPOVER
+// ──────────────────────────────────────────────────────────────────────────
+// One global popover element, repositioned and repopulated each time it
+// opens. Clicking a direction toggle inside the popover updates the canvas
+// + the trigger's badge WITHOUT rebuilding the panel — so the popover stays
+// open for fast multi-toggle workflows. Click outside or on the trigger
+// again to close.
+//
+// State:
+//   _edgeGapPopoverOpen: bool — whether the popover is currently shown
+//   _edgeGapPopoverIdx:  frame index whose toggles the popover controls
+//   _edgeGapPopoverTrigger: the button that opened it (for re-anchoring)
+
+let _edgeGapPopoverOpen = false;
+let _edgeGapPopoverIdx = null;
+let _edgeGapPopoverTrigger = null;
+
+function openEdgeGapPopover(idx, triggerBtn, e) {
+    if (e) e.stopPropagation();
+    // Toggle behavior: clicking the same trigger again closes the popover
+    if (_edgeGapPopoverOpen && _edgeGapPopoverIdx === idx) {
+        closeEdgeGapPopover();
+        return;
+    }
+    _edgeGapPopoverIdx = idx;
+    _edgeGapPopoverTrigger = triggerBtn;
+    _edgeGapPopoverOpen = true;
+
+    let pop = document.getElementById('edgeGapPopover');
+    if (!pop) {
+        pop = document.createElement('div');
+        pop.id = 'edgeGapPopover';
+        pop.className = 'edge-gap-popover';
+        document.body.appendChild(pop);
+    }
+    renderEdgeGapPopover();
+    positionEdgeGapPopover();
+    // Bind outside-click dismissal on next tick so the current click doesn't
+    // immediately dismiss the popover we just opened.
+    setTimeout(() => {
+        document.addEventListener('click', edgeGapPopoverOutsideClick, true);
+    }, 0);
+}
+
+function closeEdgeGapPopover() {
+    _edgeGapPopoverOpen = false;
+    _edgeGapPopoverIdx = null;
+    _edgeGapPopoverTrigger = null;
+    const pop = document.getElementById('edgeGapPopover');
+    if (pop) pop.style.display = 'none';
+    document.removeEventListener('click', edgeGapPopoverOutsideClick, true);
+}
+
+function edgeGapPopoverOutsideClick(e) {
+    const pop = document.getElementById('edgeGapPopover');
+    if (!pop) return;
+    if (pop.contains(e.target)) return;
+    // Also don't close if user clicked the trigger button (its own onclick
+    // will toggle the popover off — letting outside-click ALSO close would
+    // re-open it via the toggle logic, which is confusing).
+    if (_edgeGapPopoverTrigger && _edgeGapPopoverTrigger.contains(e.target)) return;
+    closeEdgeGapPopover();
+}
+
+function renderEdgeGapPopover() {
+    const pop = document.getElementById('edgeGapPopover');
+    if (!pop) return;
+    const f = elevFrames[_edgeGapPopoverIdx];
+    if (!f) return;
+    const dt = f.distToggles || { ceiling: false, floor: false, left: false, right: false };
+    pop.innerHTML = `
+        <div class="edge-gap-popover-grid">
+            <div></div>
+            <button class="icon-btn ${dt.ceiling?'active':''}" title="Ceiling" onclick="toggleEdgeGapFromPopover('ceiling')">${svgArrowUp}</button>
+            <div></div>
+            <button class="icon-btn ${dt.left?'active':''}" title="Left Wall" onclick="toggleEdgeGapFromPopover('left')">${svgArrowLeft}</button>
+            <div class="edge-gap-popover-center"></div>
+            <button class="icon-btn ${dt.right?'active':''}" title="Right Wall" onclick="toggleEdgeGapFromPopover('right')">${svgArrowRight}</button>
+            <div></div>
+            <button class="icon-btn ${dt.floor?'active':''}" title="Floor" onclick="toggleEdgeGapFromPopover('floor')">${svgArrowDown}</button>
+            <div></div>
+        </div>
+    `;
+    pop.style.display = 'block';
+}
+
+function positionEdgeGapPopover() {
+    const pop = document.getElementById('edgeGapPopover');
+    if (!pop || !_edgeGapPopoverTrigger) return;
+    const rect = _edgeGapPopoverTrigger.getBoundingClientRect();
+    // Anchor below the trigger by default, but flip above if not enough room
+    const popHeight = 116;  // approximate; refine if content changes
+    const popWidth = 110;
+    let top = rect.bottom + 4;
+    let left = rect.left + rect.width / 2 - popWidth / 2;
+    // Clamp to viewport
+    if (top + popHeight > window.innerHeight - 8) {
+        top = rect.top - popHeight - 4;
+    }
+    if (left < 8) left = 8;
+    if (left + popWidth > window.innerWidth - 8) left = window.innerWidth - popWidth - 8;
+    pop.style.top = top + 'px';
+    pop.style.left = left + 'px';
+}
+
+// Toggle a direction from inside the popover. Updates frame state, redraws
+// the canvas dimensions, and updates the trigger's badge in place — without
+// rebuilding the panel, so the popover stays open for multiple toggles.
+function toggleEdgeGapFromPopover(which) {
+    const idx = _edgeGapPopoverIdx;
+    if (idx === null) return;
+    const f = elevFrames[idx];
+    if (!f.distToggles) f.distToggles = { ceiling: false, floor: false, left: false, right: false };
+    f.distToggles[which] = !f.distToggles[which];
+    drawElevAll();
+    pushHistory();
+    // Re-render the popover so its own active states refresh
+    renderEdgeGapPopover();
+    // Update the trigger button's badge in place
+    if (_edgeGapPopoverTrigger) {
+        const dt = f.distToggles;
+        const count = (dt.ceiling?1:0)+(dt.floor?1:0)+(dt.left?1:0)+(dt.right?1:0);
+        const oldBadge = _edgeGapPopoverTrigger.querySelector('.edge-gap-badge');
+        if (oldBadge) oldBadge.remove();
+        _edgeGapPopoverTrigger.classList.toggle('has-active', count > 0);
+        if (count > 0) {
+            const badge = document.createElement('span');
+            badge.className = 'edge-gap-badge';
+            badge.textContent = String(count);
+            _edgeGapPopoverTrigger.appendChild(badge);
+        }
+    }
 }
 
 // Hover pairing + click-to-select highlight: panels and frames on the wall
