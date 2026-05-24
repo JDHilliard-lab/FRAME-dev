@@ -565,12 +565,15 @@
                 <div class="elev-frame-list">
                     <div class="elev-col-header">
                         <div class="elev-col-left">
-                            <span style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Frames</span>
+                            <!-- "Frames" label removed for v2; column headers below
+                                 fully describe what each column is. The space here
+                                 holds only the letter column (~28px) which doesn't
+                                 need a header label. -->
                         </div>
                         <div class="elev-col-icons">
-                            <div class="elev-col-label item-code-header-label" style="width:80px; margin-right:8px;"><span>Item Code</span></div>
-                            <div class="elev-col-label wall-align-header-label" style="width:52px; margin-right:8px;"><span>Wall Align</span></div>
-                            <div class="elev-col-label edge-gap-header-label" style="width:26px; margin-right:2px;"><span>Edge</span></div>
+                            <div class="elev-col-label item-code-header-label" style="width:70px;"><span>Item Code</span></div>
+                            <div class="elev-col-label wall-align-header-label" style="width:52px;"><span>Wall Align</span></div>
+                            <div class="elev-col-label edge-gap-header-label" style="width:26px;"><span>Edge</span></div>
                             <div style="width:38px; display:flex; align-items:center; justify-content:center; padding-bottom:2px;">
                                 <button class="pill-toggle pill-toggle-global" id="globalActiveToggle" title="Show / hide all frames" onclick="toggleAllElevActive()">
                                     <span class="pill-toggle-knob"></span>
