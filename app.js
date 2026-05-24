@@ -15,6 +15,16 @@ const emptyImgUrl = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAAL
 let dashActiveImageObj = new Image(); 
 dashActiveImageObj.src = emptyImgUrl;
 let dashSelectedRowIndex = 0;
+// Multi-selection state for the dashboard table.
+// - dashMultiSelectedIndices: Set of row indices included in the multi-selection
+//   (the primary dashSelectedRowIndex is always conceptually part of it, but
+//    we don't store it in the Set to avoid double-tracking).
+// - dashLastClickedIndex: anchor for shift-range selection. When the user
+//   shift-clicks, the range from this anchor to the new click is selected.
+//   Updated on plain-click and ctrl-click; NOT updated on shift-click so
+//   repeated shift-clicks extend from the same anchor.
+let dashMultiSelectedIndices = new Set();
+let dashLastClickedIndex = 0;
 let dashTempHoverUrl = null;
 let dashLocalLibrary = {}; 
 
@@ -539,9 +549,13 @@ document.addEventListener('keydown', function(e) {
         return;
     }
 
-    // Escape: deselect all
+    // Escape: deselect all (dashboard clears multi-select; elevation deselects frames)
     if (e.key === 'Escape') {
-        deselectAllFrames();
+        if (currentView === 'dashboard') {
+            clearDashMultiSelection();
+        } else {
+            deselectAllFrames();
+        }
         return;
     }
 
@@ -1637,8 +1651,137 @@ function selectDashRow(index) {
     if (index >= dashProjectData.length) return; 
     dashSelectedRowIndex = index;
     loadDashDataIntoControls(dashProjectData[index]);
-    document.querySelectorAll('#rfiBody tr').forEach((tr, i) => { tr.classList.toggle('selected', i === index); });
+    applyDashSelectionStyling();
     checkGlobalEditingWarning(dashProjectData[index].id);
+}
+
+// Multi-selection helpers
+// ───────────────────────
+// Visual states layered on each row:
+//   .selected         = the primary selected row (form panel shows this one)
+//   .multi-selected   = also part of the multi-selection but not the primary
+// The primary is always conceptually part of the multi-selection too, but
+// we don't add it to the Set to keep the data clean.
+
+function applyDashSelectionStyling() {
+    document.querySelectorAll('#rfiBody tr').forEach((tr, i) => {
+        tr.classList.toggle('selected', i === dashSelectedRowIndex);
+        tr.classList.toggle('multi-selected', dashMultiSelectedIndices.has(i) && i !== dashSelectedRowIndex);
+    });
+}
+
+// Toggle a row in/out of the multi-selection. If the primary is being
+// toggled OFF, promote one of the remaining multi-selected indices to
+// primary (or clear primary if multi is empty).
+function dashToggleMultiSelect(index) {
+    if (index === dashSelectedRowIndex) {
+        // Toggling off the primary: promote one of the multi-selected to primary,
+        // or if multi is empty, just leave primary (single click would do
+        // that — we're just being graceful for ctrl-click on primary).
+        if (dashMultiSelectedIndices.size > 0) {
+            const next = dashMultiSelectedIndices.values().next().value;
+            dashMultiSelectedIndices.delete(next);
+            selectDashRow(next);
+        }
+        return;
+    }
+    if (dashMultiSelectedIndices.has(index)) {
+        dashMultiSelectedIndices.delete(index);
+    } else {
+        dashMultiSelectedIndices.add(index);
+    }
+    applyDashSelectionStyling();
+}
+
+// Select an inclusive range from `from` to `to`. The primary becomes `to`
+// (mimics standard list-selection UX: shift-click sets the focused row).
+function dashSelectRange(from, to) {
+    if (from > to) [from, to] = [to, from];
+    dashMultiSelectedIndices.clear();
+    for (let i = from; i <= to; i++) {
+        if (i !== to) dashMultiSelectedIndices.add(i);
+    }
+    selectDashRow(to);
+}
+
+// Clear the multi-selection. Primary selection stays. Bound to Esc on
+// the dashboard.
+function clearDashMultiSelection() {
+    if (dashMultiSelectedIndices.size === 0) return;
+    dashMultiSelectedIndices.clear();
+    applyDashSelectionStyling();
+}
+
+// Return all currently-selected row indices in ascending order, including
+// the primary. Used by group operations (drag, move-to).
+function dashGetSelectedIndices() {
+    const set = new Set(dashMultiSelectedIndices);
+    set.add(dashSelectedRowIndex);
+    return Array.from(set).sort((a, b) => a - b);
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// MOVE TO MODAL
+// ──────────────────────────────────────────────────────────────────────────
+// User picks a target ITEM CODE + Above/Below to relocate selected row(s).
+// Works for single selection (one row) and multi-selection (a group moves
+// together preserving relative order). Helpful when the table has many
+// rows and dragging would be tedious — and matches the "PDF order tracks
+// CSV order" workflow goal.
+
+function openMoveToModal() {
+    if (!dashProjectData || dashProjectData.length < 2) {
+        showInfoModal('Nothing to move', 'You need at least two rows for Move To to make sense.');
+        return;
+    }
+    const selected = dashGetSelectedIndices();
+    const summary = document.getElementById('moveToSummary');
+    if (selected.length === 1) {
+        const row = dashProjectData[selected[0]];
+        summary.innerHTML = `Move <strong>${row.id}</strong> to a new position.`;
+    } else {
+        summary.innerHTML = `Move <strong>${selected.length}</strong> selected rows as a group.`;
+    }
+    // Populate the dropdown with all rows that are NOT in the current
+    // selection (you can't reference yourself).
+    const sel = new Set(selected);
+    const select = document.getElementById('moveToTarget');
+    select.innerHTML = '';
+    dashProjectData.forEach((row, i) => {
+        if (sel.has(i)) return;
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent = row.id || `Row ${i + 1}`;
+        select.appendChild(opt);
+    });
+    if (select.options.length === 0) {
+        showInfoModal('No targets', 'There are no other rows to move next to.');
+        return;
+    }
+    // Default position: above (the radio's default checked attribute already
+    // sets this, but reset in case the user previously chose below)
+    document.querySelector('input[name="moveToPos"][value="above"]').checked = true;
+    document.getElementById('moveToModal').style.display = 'flex';
+}
+
+function applyMoveTo() {
+    const select = document.getElementById('moveToTarget');
+    const targetIdx = parseInt(select.value, 10);
+    if (isNaN(targetIdx)) return;
+    const pos = document.querySelector('input[name="moveToPos"]:checked').value;
+    const insertBefore = pos === 'above' ? targetIdx : targetIdx + 1;
+
+    document.getElementById('moveToModal').style.display = 'none';
+
+    const selected = dashGetSelectedIndices();
+    if (selected.length === 1) {
+        // Single-row move. Adjust insert index if the source was before target.
+        let insertIdx = insertBefore;
+        if (selected[0] < insertIdx) insertIdx--;
+        reorderDashRow(selected[0], insertIdx);
+    } else {
+        reorderDashRows(selected, insertBefore);
+    }
 }
 
 function addDashRow() {
@@ -4469,7 +4612,30 @@ function renderDashTable() {
             tr.classList.add('constraint-warning-row');
             tr.title = rowWarnings.map(w => '⚠ ' + w.message).join('\n');
         }
-        tr.addEventListener('click', () => { if (dashSelectedRowIndex !== index) selectDashRow(index); });
+        tr.addEventListener('click', (ev) => {
+            // Don't intercept clicks meant for inputs/buttons/etc inside the row —
+            // those need to focus the input or run their own onclick.
+            const t = ev.target;
+            if (t && t.matches && t.matches('input, textarea, select, button, [contenteditable]')) return;
+
+            if (ev.shiftKey) {
+                // Shift-click: select range from anchor to this row (inclusive).
+                // Doesn't update the anchor — so repeated shift-clicks expand
+                // from the original anchor, matching standard list selection UX.
+                dashSelectRange(dashLastClickedIndex, index);
+            } else if (ev.ctrlKey || ev.metaKey) {
+                // Ctrl/Cmd-click: toggle this row in the multi-selection.
+                // Updates the anchor so subsequent shift-clicks span from here.
+                dashToggleMultiSelect(index);
+                dashLastClickedIndex = index;
+            } else {
+                // Plain click: single-select, clear any multi-selection.
+                if (dashSelectedRowIndex !== index) selectDashRow(index);
+                dashMultiSelectedIndices.clear();
+                dashLastClickedIndex = index;
+                applyDashSelectionStyling();
+            }
+        });
         // Drag-to-reorder support. draggable=true on the tr enables the
         // browser's HTML5 drag API. data-row-idx stores the row's position
         // so the drag/drop handlers know which row to move. The handlers
@@ -4537,20 +4703,52 @@ function renderDashTable() {
 let _draggingDashRowIdx = null;
 
 function handleDashRowDragStart(e) {
-    // Only start a drag if the initial mousedown was on the drag-handle cell
-    // (the leftmost column with the grip icon). Without this guard, clicking
-    // and dragging text inside any input would also start a row drag —
-    // breaking normal text-selection behavior. The browser only fires
-    // dragstart for elements with draggable=true; we use the event target
-    // (where mousedown actually was) to filter.
-    if (!e.target.closest('.drag-handle-cell')) {
-        e.preventDefault();
-        return;
+    // Bug 2 fix: don't start a row drag when the user is interacting with
+    // an editable element (input/textarea/select/contenteditable). Without
+    // this guard, mousedown on an input would start a row drag instead of
+    // text selection.
+    //
+    // Earlier attempt: WHITELIST approach (must be inside .drag-handle-cell).
+    // That failed because SVG hit-testing is unreliable — when the user
+    // mousedowns visually on the SVG icon inside the handle, the browser
+    // often reports e.target as the TR (not the SVG) due to how it walks
+    // empty spaces between SVG strokes. Result: legitimate drags from the
+    // handle got blocked.
+    //
+    // Current: BLACKLIST approach. Drag is allowed everywhere EXCEPT on
+    // editable elements. Catches the text-selection case without false
+    // positives for SVG hit-test quirks.
+    const t = e.target;
+    if (t && t.matches) {
+        const isEditable = t.matches('input, textarea, select, [contenteditable], [contenteditable=""], [contenteditable="true"]');
+        if (isEditable) {
+            e.preventDefault();
+            return;
+        }
     }
     _draggingDashRowIdx = parseInt(e.currentTarget.dataset.rowIdx, 10);
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('text/plain', String(_draggingDashRowIdx));
-    e.currentTarget.classList.add('row-dragging');
+    // If the dragged row is part of the current selection, drag ALL selected
+    // rows as a group — apply row-dragging to each so the user sees what
+    // they're moving. If the dragged row is NOT selected, clear selection
+    // and drag just this one (standard Finder/Explorer behavior).
+    const selected = dashGetSelectedIndices();
+    if (selected.includes(_draggingDashRowIdx) && selected.length > 1) {
+        selected.forEach(i => {
+            const tr = document.querySelector(`#rfiBody tr[data-row-idx="${i}"]`);
+            if (tr) tr.classList.add('row-dragging');
+        });
+    } else {
+        // Not part of multi-select — clear it so the drag affects only this row
+        dashMultiSelectedIndices.clear();
+        if (dashSelectedRowIndex !== _draggingDashRowIdx) {
+            dashSelectedRowIndex = _draggingDashRowIdx;
+            loadDashDataIntoControls(dashProjectData[_draggingDashRowIdx]);
+        }
+        applyDashSelectionStyling();
+        e.currentTarget.classList.add('row-dragging');
+    }
 }
 
 function handleDashRowDragOver(e) {
@@ -4580,17 +4778,32 @@ function handleDashRowDrop(e) {
     const targetRow = e.currentTarget;
     const targetIdx = parseInt(targetRow.dataset.rowIdx, 10);
     targetRow.classList.remove('drop-above', 'drop-below');
-    if (_draggingDashRowIdx === null || _draggingDashRowIdx === targetIdx) return;
+    if (_draggingDashRowIdx === null) return;
     const rect = targetRow.getBoundingClientRect();
     const midY = rect.top + rect.height / 2;
     const dropAbove = e.clientY < midY;
-    let insertIdx = dropAbove ? targetIdx : targetIdx + 1;
-    if (_draggingDashRowIdx < insertIdx) insertIdx--;
-    reorderDashRow(_draggingDashRowIdx, insertIdx);
+    const insertBefore = dropAbove ? targetIdx : targetIdx + 1;
+
+    // If the dragged row is part of a multi-selection (>1 rows), move them
+    // all as a group preserving their internal order. Otherwise move just
+    // the single dragged row.
+    const selected = dashGetSelectedIndices();
+    if (selected.includes(_draggingDashRowIdx) && selected.length > 1) {
+        // Don't drop into the selection block
+        if (selected.includes(targetIdx)) return;
+        reorderDashRows(selected, insertBefore);
+    } else {
+        if (_draggingDashRowIdx === targetIdx) return;
+        let insertIdx = insertBefore;
+        if (_draggingDashRowIdx < insertIdx) insertIdx--;
+        reorderDashRow(_draggingDashRowIdx, insertIdx);
+    }
 }
 
 function handleDashRowDragEnd(e) {
-    e.currentTarget.classList.remove('row-dragging');
+    // Clear row-dragging from ALL rows (group drag could have applied it to many)
+    document.querySelectorAll('#rfiBody tr.row-dragging')
+        .forEach(t => t.classList.remove('row-dragging'));
     document.querySelectorAll('#rfiBody tr.drop-above, #rfiBody tr.drop-below')
         .forEach(t => t.classList.remove('drop-above', 'drop-below'));
     _draggingDashRowIdx = null;
@@ -4612,6 +4825,51 @@ function reorderDashRow(fromIdx, toIdx) {
     // Restore selection by identity
     const newSelectedIdx = dashProjectData.indexOf(selectedRow);
     if (newSelectedIdx >= 0) dashSelectedRowIndex = newSelectedIdx;
+    renderDashTable();
+    pushHistory();
+}
+
+// Move multiple rows (by their CURRENT indices) to a new position. The rows
+// are moved as a contiguous block in their original relative order. The
+// target position is given in CURRENT indexing (where to insert "before"
+// counting from the unmoved array). After the move, the same rows remain
+// selected (multi-select preserved by row identity).
+//
+// Implementation: pull the selected rows out of the array (captured by
+// identity), compute the insert index after removal accounting for which
+// of the removed rows came before the target, then splice them back in.
+function reorderDashRows(indices, insertBefore) {
+    if (!indices || indices.length === 0) return;
+    // Sort ascending so the slice/splice math is straightforward
+    const sortedIdx = [...indices].sort((a, b) => a - b);
+
+    // Capture the row objects by identity (so we can find them after splice)
+    const movingRows = sortedIdx.map(i => dashProjectData[i]);
+    const primaryRow = dashProjectData[dashSelectedRowIndex];
+
+    // Adjust insertBefore: every selected row before insertBefore shifts the
+    // target down by one when we remove them.
+    let adjustedInsert = insertBefore;
+    for (const i of sortedIdx) {
+        if (i < insertBefore) adjustedInsert--;
+    }
+
+    // Remove the selected rows (descending so indices stay valid)
+    for (let i = sortedIdx.length - 1; i >= 0; i--) {
+        dashProjectData.splice(sortedIdx[i], 1);
+    }
+    // Insert the block at the adjusted position
+    dashProjectData.splice(adjustedInsert, 0, ...movingRows);
+
+    // Restore primary + multi selection by identity
+    const newPrimary = dashProjectData.indexOf(primaryRow);
+    if (newPrimary >= 0) dashSelectedRowIndex = newPrimary;
+    dashMultiSelectedIndices.clear();
+    movingRows.forEach(r => {
+        const i = dashProjectData.indexOf(r);
+        if (i >= 0 && i !== dashSelectedRowIndex) dashMultiSelectedIndices.add(i);
+    });
+
     renderDashTable();
     pushHistory();
 }
