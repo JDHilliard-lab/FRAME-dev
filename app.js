@@ -4643,6 +4643,7 @@ function renderDashTable() {
         // (see below).
         tr.draggable = true;
         tr.dataset.rowIdx = String(index);
+        tr.addEventListener('mousedown', handleDashRowMouseDown);
         tr.addEventListener('dragstart', handleDashRowDragStart);
         tr.addEventListener('dragover', handleDashRowDragOver);
         tr.addEventListener('dragleave', handleDashRowDragLeave);
@@ -4703,21 +4704,10 @@ function renderDashTable() {
 let _draggingDashRowIdx = null;
 
 function handleDashRowDragStart(e) {
-    // Bug 2 fix: don't start a row drag when the user is interacting with
-    // an editable element (input/textarea/select/contenteditable). Without
-    // this guard, mousedown on an input would start a row drag instead of
-    // text selection.
-    //
-    // Earlier attempt: WHITELIST approach (must be inside .drag-handle-cell).
-    // That failed because SVG hit-testing is unreliable — when the user
-    // mousedowns visually on the SVG icon inside the handle, the browser
-    // often reports e.target as the TR (not the SVG) due to how it walks
-    // empty spaces between SVG strokes. Result: legitimate drags from the
-    // handle got blocked.
-    //
-    // Current: BLACKLIST approach. Drag is allowed everywhere EXCEPT on
-    // editable elements. Catches the text-selection case without false
-    // positives for SVG hit-test quirks.
+    // Defense-in-depth: even with the mousedown-based toggle below, also
+    // bail here if the dragstart's target is somehow editable. The browser's
+    // dragstart can fire with target=TR even when mousedown was on an input,
+    // so the real fix is the mousedown handler — this is just a safety net.
     const t = e.target;
     if (t && t.matches) {
         const isEditable = t.matches('input, textarea, select, [contenteditable], [contenteditable=""], [contenteditable="true"]');
@@ -4748,6 +4738,35 @@ function handleDashRowDragStart(e) {
         }
         applyDashSelectionStyling();
         e.currentTarget.classList.add('row-dragging');
+    }
+}
+
+// On mousedown, if the user clicked on an editable element (input/textarea/
+// select/contenteditable), temporarily disable the row's draggable attribute
+// so the browser doesn't start a drag — text-selection-by-drag works normally.
+// Restore draggable on mouseup or mouseleave.
+//
+// This is more reliable than checking dragstart's e.target because the
+// browser's hit-testing between mousedown and dragstart can shift target
+// to the TR even when the user pressed down on an input. The mousedown
+// target is what they actually clicked, before any drag motion.
+function handleDashRowMouseDown(e) {
+    const t = e.target;
+    if (!t || !t.matches) return;
+    const isEditable = t.matches('input, textarea, select, [contenteditable], [contenteditable=""], [contenteditable="true"]');
+    if (isEditable) {
+        const tr = e.currentTarget;
+        tr.draggable = false;
+        // Restore after the click/drag interaction is over. We listen for
+        // mouseup anywhere (in case user releases outside the row) and also
+        // mouseleave on the row as a safety net.
+        const restore = () => {
+            tr.draggable = true;
+            document.removeEventListener('mouseup', restore);
+            tr.removeEventListener('mouseleave', restore);
+        };
+        document.addEventListener('mouseup', restore);
+        tr.addEventListener('mouseleave', restore);
     }
 }
 
