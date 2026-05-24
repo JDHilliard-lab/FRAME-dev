@@ -5215,21 +5215,20 @@ function initElevControls() {
                     <div class="frame-item-label">
                         <span class="frame-letter-large">${f.letter}</span>
                     </div>
-                    <!-- ITEM CODE editable input, moved into the top row to free
-                         vertical space. Compact width fits the common code
-                         shape (ART.001-A) without dominating the row. -->
-                    <input type="text" class="frame-item-id frame-item-id-edit frame-item-id-inline"
-                           value="${f.id}"
-                           data-original-id="${f.id}"
-                           onchange="renameFrameId(this, ${idx})"
-                           onclick="event.stopPropagation()"
-                           ondragstart="event.preventDefault()"
-                           title="Edit ITEM CODE — applies to all elevations using this frame">
                     <div class="frame-item-icons">
-                        <!-- WALL ALIGN column: 2 quick-snap buttons (to hang height,
-                             to wall center). Header lives once in column header above.
-                             Operates per-frame, independent of selection/grouping. -->
-                        <div class="wall-align-group">
+                        <!-- ITEM CODE — first column, matches header's item-code-header-label.
+                             70px to match. -->
+                        <div class="frame-col" style="width:70px;">
+                            <input type="text" class="frame-item-id frame-item-id-edit frame-item-id-inline"
+                                   value="${f.id}"
+                                   data-original-id="${f.id}"
+                                   onchange="renameFrameId(this, ${idx})"
+                                   onclick="event.stopPropagation()"
+                                   ondragstart="event.preventDefault()"
+                                   title="Edit ITEM CODE — applies to all elevations using this frame">
+                        </div>
+                        <!-- WALL ALIGN — 52px wide (= 2 × 26px buttons), matches header. -->
+                        <div class="frame-col" style="width:52px; display:flex; gap:0;">
                             <div style="width:26px; display:flex; justify-content:center;">
                                 <button class="icon-btn" title="Snap to Hang Height" onclick="snapFrameToHang(${idx}, event)">${svgSnapHang}</button>
                             </div>
@@ -5237,33 +5236,33 @@ function initElevControls() {
                                 <button class="icon-btn" title="Snap to Wall Center" onclick="snapFrameToWallCenter(${idx}, event)">${svgSnapWallCenter}</button>
                             </div>
                         </div>
-                        <!-- EDGE GAP collapsed: single button that opens a popover
-                             with the 4 direction toggles. Indicator dot (badge) shows
-                             how many are currently active so the user sees state at
-                             a glance without opening the popover. -->
-                        <div class="edge-gap-group edge-gap-group-collapsed">
-                            <div style="width:26px; display:flex; justify-content:center;">
-                                <button class="icon-btn edge-gap-trigger ${dtActiveCount>0?'has-active':''}" title="Edge Gap — distance to wall edges" onclick="openEdgeGapPopover(${idx}, this, event)">
-                                    ${svgEdgeGap}
-                                    ${dtActiveCount>0 ? `<span class="edge-gap-badge">${dtActiveCount}</span>` : ''}
-                                </button>
-                            </div>
+                        <!-- EDGE GAP collapsed: 26px to match header. Opens popover. -->
+                        <div class="frame-col" style="width:26px; display:flex; justify-content:center;">
+                            <button class="icon-btn edge-gap-trigger ${dtActiveCount>0?'has-active':''}" title="Edge Gap — distance to wall edges" onclick="openEdgeGapPopover(${idx}, this, event)">
+                                ${svgEdgeGap}
+                                ${dtActiveCount>0 ? `<span class="edge-gap-badge">${dtActiveCount}</span>` : ''}
+                            </button>
                         </div>
-                        <div style="width:38px; display:flex; justify-content:center;">
+                        <!-- Toggle — 38px to match header pill width. -->
+                        <div class="frame-col" style="width:38px; display:flex; justify-content:center;">
                             <button class="pill-toggle ${f.active?'active':''}" title="${f.active?'Hide on elevation':'Show on elevation'}" onclick="toggleElevActive(${idx}, event)">
                                 <span class="pill-toggle-knob"></span>
                             </button>
                         </div>
-                        <div style="width:28px; display:flex; justify-content:center;">
+                        <!-- Move/Group — 26px to match header. -->
+                        <div class="frame-col" style="width:26px; display:flex; justify-content:center;">
                             <button class="icon-btn ${f.isGrouped ? 'grouped' : ''}" title="Move/Group" onclick="toggleElevGroup(${idx}, event)">${svgMove}</button>
                         </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
+                        <!-- Edit — 26px. -->
+                        <div class="frame-col" style="width:26px; display:flex; justify-content:center;">
                             <button class="icon-btn" title="Edit Master" onclick="jumpToDashboard('${f.id}')">${svgEdit}</button>
                         </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
+                        <!-- Dupe — 26px. -->
+                        <div class="frame-col" style="width:26px; display:flex; justify-content:center;">
                             <button class="icon-btn" title="Duplicate" onclick="duplicateElevFrame(${idx}, event)">${svgDup}</button>
                         </div>
-                        <div style="width:26px; display:flex; justify-content:center;">
+                        <!-- Del — 26px. -->
+                        <div class="frame-col" style="width:26px; display:flex; justify-content:center;">
                             <button class="icon-btn" title="Remove" onclick="removeElevFrame(${idx}, event)">${svgTrash}</button>
                         </div>
                     </div>
