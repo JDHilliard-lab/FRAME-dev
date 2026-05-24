@@ -804,8 +804,13 @@ body.dragging-frame .frame-vis:hover {
 /* Editable ITEM CODE input — disguised as a muted label until you interact
  * with it. Hover/focus brings up a subtle background + border to signal
  * editability. The bordered "active" state matches the project's input
- * styling elsewhere. */
-.frame-item-id-edit {
+ * styling elsewhere.
+ *
+ * Note on specificity: the global `input[type="text"]` rule sets width:100%,
+ * which would otherwise override these 80px widths in flex containers
+ * (because attribute-selector specificity beats plain class). We use
+ * `input.frame-item-id-edit` so class+element beats attribute+element. */
+input.frame-item-id-edit {
     background: transparent;
     border: 1px solid transparent;
     border-radius: 3px;
@@ -814,17 +819,19 @@ body.dragging-frame .frame-vis:hover {
     font-size: 0.7rem;
     color: var(--text-muted);
     width: 80px;
+    max-width: 80px;
+    min-width: 0;
     height: 18px;
     outline: none;
     transition: 0.15s;
     box-sizing: border-box;
 }
-.frame-item-id-edit:hover {
+input.frame-item-id-edit:hover {
     background: var(--bg-input);
     border-color: var(--border-color);
     color: var(--text-main);
 }
-.frame-item-id-edit:focus {
+input.frame-item-id-edit:focus {
     background: var(--bg-input);
     border-color: var(--accent);
     color: var(--text-strong);
@@ -837,11 +844,14 @@ body.dragging-frame .frame-vis:hover {
 }
 
 /* Inline ITEM CODE variant — used in the top row of the panel item. Sized
- * to fit between the Letter label and the Wall Align icons. */
-.frame-item-id-inline {
-    width: 80px;
+ * to fit between the Letter label and the Wall Align icons. Prefixed with
+ * `input.` to override the global `input[type="text"] { width: 100% }` rule. */
+input.frame-item-id-inline {
+    width: 70px;
+    max-width: 70px;
     margin-right: 8px;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
 /* Container for the target letter chips, now on its own row below the
