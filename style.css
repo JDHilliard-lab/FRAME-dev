@@ -777,7 +777,11 @@ body.dragging-frame .frame-vis:hover {
     gap: 6px;
     width: 100%;
 }
-.frame-item-label { flex: 1; min-width: 0; }
+/* Natural width — just contains the large letter. The ITEM CODE input
+ * (frame-item-id-inline) sits to the right of this. The icon row pushes
+ * to the far right via margin-left:auto. */
+.frame-item-label { min-width: 0; flex-shrink: 0; }
+.frame-item-top-row .frame-item-icons { margin-left: auto; }
 
 /* Frame ID + letter-target row: lives directly below the top icon row.
  * Contains the (ART.001) ID and the letter target buttons inline. Wraps
@@ -830,6 +834,83 @@ body.dragging-frame .frame-vis:hover {
     flex-wrap: wrap;
     gap: 2px;
     align-items: center;
+}
+
+/* Inline ITEM CODE variant — used in the top row of the panel item. Sized
+ * to fit between the Letter label and the Wall Align icons. */
+.frame-item-id-inline {
+    width: 80px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* Container for the target letter chips, now on its own row below the
+ * top-row controls. Only renders when there are actual targets, so frames
+ * with no dimensions to peers stay single-row-tall. */
+.frame-item-targets-row {
+    padding-top: 4px;
+    padding-left: 28px;  /* aligns with text after the large letter label */
+}
+
+/* Collapsed edge-gap group — single button instead of 4. Width matches the
+ * column header (26px). */
+.edge-gap-group-collapsed {
+    width: 26px;
+}
+
+/* The edge-gap trigger button + its count badge.
+ * .has-active changes the button background so it stands out when any
+ * direction is toggled on, even before noticing the badge. */
+.edge-gap-trigger {
+    position: relative;
+}
+.edge-gap-trigger.has-active {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+}
+.edge-gap-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 13px;
+    height: 13px;
+    padding: 0 3px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Floating popover for the 4 edge-gap direction toggles. Anchored to the
+ * trigger button by positionEdgeGapPopover; centered around the button. */
+.edge-gap-popover {
+    position: fixed;
+    z-index: 1000;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    display: none;
+}
+.edge-gap-popover-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 28px);
+    grid-template-rows: repeat(3, 28px);
+    gap: 2px;
+    place-items: center;
+}
+.edge-gap-popover-center {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
 }
 
 /* Large letter label (A, B, C, ...) on the top row of each frame panel.
