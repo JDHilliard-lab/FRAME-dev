@@ -2835,13 +2835,15 @@ function handleDashProductChange(shouldSync = true) {
 
     // FLOATER & FRAMELESS CANVAS: both hide the mat/float wrapper since neither
     // uses traditional mats or float-mounted paper. Both show canvas settings
-    // (depth, wrap, optional inset). Both hide bleed since canvas is wrapped,
-    // not printed-with-bleed-margin. The Inset field is only meaningful for
-    // Floater (canvas face + shadow gap); Frameless ignores it (no frame to inset from).
+    // (depth, wrap, optional inset). bleedSettings stays visible — Print File
+    // is computed correctly for canvas (uses wrap instead of bleed), and
+    // designers want to see canvas print dimensions for production.
+    // The Inset field is only meaningful for Floater (canvas face + shadow
+    // gap); Frameless ignores it (no frame to inset from).
     if (isFloater || isFrameless) {
         matWrapper.style.display = 'none';
         canvasSettings.style.display = 'grid';
-        bleedSettings.style.display = 'none';
+        bleedSettings.style.display = 'grid';
         // For frameless canvas, dim out the Inset field (it's irrelevant — there's no frame).
         const insetCell = document.getElementById('floaterInset');
         if (insetCell && insetCell.parentElement) {
