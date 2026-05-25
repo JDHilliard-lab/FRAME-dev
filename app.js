@@ -167,7 +167,7 @@ const dashDefaultData = {
     // are optional: empty values render as blank cells in CSV and are skipped
     // in InDesign spec blocks (no "TBD" placeholders).
     artist: "", artworkTitle: "", artType: "",
-    fColorName: "Standard Black", fHeight: 0, rabbetDepth: 0,
+    fColorName: "", fHeight: 0, rabbetDepth: 0,
     paperType: "Fine Art Paper",
     bleed: 0.25, canvasDepth: "", canvasWrap: "", floaterInset: 0.75,
     // Float Mount fields. useFloatMount controls whether the row uses Mat Controls
