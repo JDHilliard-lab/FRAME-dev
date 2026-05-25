@@ -1789,6 +1789,270 @@ function applyMoveTo() {
     }
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// BULK EDIT + DUPLICATE AS SERIES
+// ──────────────────────────────────────────────────────────────────────────
+// Two operations that work on the dashboard multi-selection:
+//   - Bulk Edit: set ONE field to the same value on all selected rows
+//   - Duplicate as Series: from one source row, create N copies with
+//     sequential IDs (e.g. ART.001 → ART.002…ART.012)
+//
+// Both push a single history entry (so Ctrl+Z reverts the whole batch).
+
+// Metadata for which fields can be bulk-edited and how their value input
+// should render. Order here is the order they appear in the dropdown.
+// Notes:
+//   - ITEM CODE, art dimensions, image filename are intentionally excluded
+//     (they're per-row unique, or computed)
+//   - 'select' type uses the options array; 'text' is a free-text input;
+//     'number' is a numeric input
+//   - The 'apply' field stores the property key on the row object
+const BULK_EDITABLE_FIELDS = [
+    { key: 'product',       label: 'Product Type',  type: 'select', options: FRAME_PRODUCTS },
+    { key: 'location',      label: 'Location',      type: 'text' },
+    { key: 'level',         label: 'Level',         type: 'text' },
+    // Note: 'qty' is intentionally excluded — it's a derived value computed
+    // by recalculateDashboardQuantities from elevation frame counts. Bulk
+    // editing it would be silently overwritten on the next recalc.
+    { key: 'artType',       label: 'Art Type',      type: 'text' },
+    { key: 'paperType',     label: 'Paper Type',    type: 'text' },
+    { key: 'fCode',         label: 'Frame Code',    type: 'text' },
+    { key: 'fColorName',    label: 'Frame Color Name', type: 'text' },
+    { key: 'glass',         label: 'Glass',         type: 'text' },
+    { key: 'mount',         label: 'Mount',         type: 'text' },
+    { key: 'hardware',      label: 'Hardware',      type: 'text' },
+    { key: 'backing',       label: 'Backing Board', type: 'text' },
+    { key: 'm1ColorName',   label: 'Mat 1 Color Name', type: 'text' },
+    { key: 'm2ColorName',   label: 'Mat 2 Color Name', type: 'text' },
+    { key: 'prodNotes',     label: 'Production Notes', type: 'text' },
+];
+
+function openBulkEditModal() {
+    if (!dashProjectData || dashProjectData.length === 0) {
+        showInfoModal('Nothing to edit', 'Add some rows first.');
+        return;
+    }
+    const selected = dashGetSelectedIndices();
+    const summary = document.getElementById('bulkEditSummary');
+    if (selected.length === 1) {
+        const row = dashProjectData[selected[0]];
+        summary.innerHTML = `Editing <strong>${row.id}</strong>. Tip: select multiple rows (Shift/Ctrl-click) to edit them all at once.`;
+    } else {
+        summary.innerHTML = `Editing <strong>${selected.length}</strong> selected rows.`;
+    }
+    // Populate the field dropdown
+    const fieldSelect = document.getElementById('bulkEditField');
+    fieldSelect.innerHTML = '';
+    BULK_EDITABLE_FIELDS.forEach((f, i) => {
+        const opt = document.createElement('option');
+        opt.value = String(i);
+        opt.textContent = f.label;
+        fieldSelect.appendChild(opt);
+    });
+    fieldSelect.value = '0';
+    renderBulkEditValueInput();
+    document.getElementById('bulkEditModal').style.display = 'flex';
+}
+
+// Render the value input appropriate to the selected field. Called on modal
+// open and whenever the field dropdown changes. Also updates the preview line.
+function renderBulkEditValueInput() {
+    const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
+    const field = BULK_EDITABLE_FIELDS[fieldIdx];
+    if (!field) return;
+    const container = document.getElementById('bulkEditValueContainer');
+    container.innerHTML = '';
+    let input;
+    if (field.type === 'select') {
+        input = document.createElement('select');
+        field.options.forEach(opt => {
+            const o = document.createElement('option');
+            o.value = opt;
+            o.textContent = opt;
+            input.appendChild(o);
+        });
+    } else if (field.type === 'number') {
+        input = document.createElement('input');
+        input.type = 'number';
+    } else {
+        input = document.createElement('input');
+        input.type = 'text';
+    }
+    input.id = 'bulkEditValueInput';
+    input.style.cssText = 'width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;';
+    // Pre-fill with the primary selected row's current value as a hint
+    const selected = dashGetSelectedIndices();
+    if (selected.length > 0) {
+        const cur = dashProjectData[dashSelectedRowIndex][field.key];
+        if (cur !== undefined && cur !== null) input.value = String(cur);
+    }
+    input.oninput = updateBulkEditPreview;
+    input.onchange = updateBulkEditPreview;
+    container.appendChild(input);
+    updateBulkEditPreview();
+}
+
+function updateBulkEditPreview() {
+    const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
+    const field = BULK_EDITABLE_FIELDS[fieldIdx];
+    if (!field) return;
+    const input = document.getElementById('bulkEditValueInput');
+    const newVal = input ? input.value : '';
+    const selected = dashGetSelectedIndices();
+    const preview = document.getElementById('bulkEditPreview');
+    preview.innerHTML = `Will set <strong>${field.label}</strong> to "<strong>${newVal}</strong>" on ${selected.length} row${selected.length===1?'':'s'}.`;
+}
+
+function applyBulkEdit() {
+    const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
+    const field = BULK_EDITABLE_FIELDS[fieldIdx];
+    if (!field) return;
+    const input = document.getElementById('bulkEditValueInput');
+    if (!input) return;
+    let newVal = input.value;
+    if (field.type === 'number') {
+        const n = parseFloat(newVal);
+        if (isNaN(n)) {
+            showInfoModal('Invalid value', `"${newVal}" isn't a valid number for ${field.label}.`);
+            return;
+        }
+        newVal = n;
+    }
+    const selected = dashGetSelectedIndices();
+    if (selected.length === 0) return;
+
+    // Apply to every selected row
+    selected.forEach(idx => {
+        dashProjectData[idx][field.key] = newVal;
+    });
+
+    // If product was bulk-edited, mirror the Shadow Box auto-flip behavior
+    // (Shadow Box flips useFloatMount to true; everything else flips it to
+    // false). Matches what handleDashProductChange() does for single-row edits.
+    if (field.key === 'product') {
+        selected.forEach(idx => {
+            dashProjectData[idx].useFloatMount = (newVal === 'Framed Art (Shadow Box)');
+        });
+    }
+
+    // Recalc overall dims and re-render. recalculateDashboardQuantities also
+    // refreshes the table view. If the form panel was reflecting one of the
+    // changed rows, reload it so the user sees the new value.
+    recalculateDashboardQuantities();
+    renderDashTable();
+    if (selected.indexOf(dashSelectedRowIndex) >= 0) {
+        loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+    }
+    pushHistory();
+    document.getElementById('bulkEditModal').style.display = 'none';
+}
+
+// ── DUPLICATE AS SERIES ──
+
+function openDuplicateSeriesModal() {
+    if (!dashProjectData || dashProjectData.length === 0) {
+        showInfoModal('Nothing to duplicate', 'Add a row first.');
+        return;
+    }
+    const sourceIdx = dashSelectedRowIndex;
+    const source = dashProjectData[sourceIdx];
+    document.getElementById('dupSeriesSummary').innerHTML =
+        `Duplicating <strong>${source.id}</strong>. New rows inherit all its settings.`;
+
+    // Default pattern: try to detect the source's ID pattern and reuse it.
+    // E.g. ART.005 → pattern "ART.{n}", starting at 006 (or whatever's next free).
+    const patternInput = document.getElementById('dupSeriesPattern');
+    const startInput = document.getElementById('dupSeriesStart');
+    const padInput = document.getElementById('dupSeriesPad');
+    // Parse source ID: looks for trailing digits
+    const m = source.id.match(/^(.*?)(\d+)(\D*)$/);
+    if (m) {
+        patternInput.value = m[1] + '{n}' + m[3];
+        startInput.value = String(parseInt(m[2], 10) + 1);
+        padInput.value = String(m[2].length);
+    } else {
+        patternInput.value = source.id + '.{n}';
+        startInput.value = '1';
+        padInput.value = '3';
+    }
+    document.getElementById('dupSeriesCount').value = '5';
+    updateDupSeriesPreview();
+    document.getElementById('duplicateSeriesModal').style.display = 'flex';
+}
+
+function buildDupSeriesIds() {
+    const count = parseInt(document.getElementById('dupSeriesCount').value, 10) || 0;
+    const pattern = document.getElementById('dupSeriesPattern').value || 'ART.{n}';
+    const start = parseInt(document.getElementById('dupSeriesStart').value, 10) || 1;
+    const pad = parseInt(document.getElementById('dupSeriesPad').value, 10) || 1;
+    const ids = [];
+    for (let i = 0; i < count; i++) {
+        const n = String(start + i).padStart(pad, '0');
+        ids.push(pattern.replace('{n}', n));
+    }
+    return ids;
+}
+
+function updateDupSeriesPreview() {
+    const ids = buildDupSeriesIds();
+    const previewDiv = document.getElementById('dupSeriesPreview');
+    if (ids.length === 0) {
+        previewDiv.innerHTML = '<span style="color:var(--text-muted);">(no IDs to preview)</span>';
+        return;
+    }
+    // Find collisions with existing rows
+    const existing = new Set(dashProjectData.map(r => r.id));
+    const lines = ids.map(id => {
+        if (existing.has(id)) {
+            return `<span style="color:#e74c3c;">${id} ⚠ collision</span>`;
+        }
+        return id;
+    });
+    previewDiv.innerHTML = lines.join('<br>');
+}
+
+function applyDuplicateSeries() {
+    const ids = buildDupSeriesIds();
+    if (ids.length === 0) {
+        showInfoModal('Nothing to do', 'Set a count of at least 1.');
+        return;
+    }
+    // Validate: check for collisions with existing IDs and with each other
+    const existing = new Set(dashProjectData.map(r => r.id));
+    const collisions = [];
+    const seen = new Set();
+    ids.forEach(id => {
+        if (existing.has(id)) collisions.push(id + ' (exists)');
+        else if (seen.has(id)) collisions.push(id + ' (duplicate in series)');
+        seen.add(id);
+    });
+    if (collisions.length > 0) {
+        showInfoModal('ID collision',
+            `These IDs would collide with existing rows or each other:\n${collisions.slice(0, 8).join('\n')}` +
+            (collisions.length > 8 ? `\n…and ${collisions.length - 8} more` : '') +
+            '\n\nAdjust the starting number or pattern.');
+        return;
+    }
+
+    // Generate the new rows. Source = primary selected row. Each copy deep-
+    // clones the source then overrides the id. Inserted directly after the
+    // source, in order.
+    const sourceIdx = dashSelectedRowIndex;
+    const source = dashProjectData[sourceIdx];
+    const newRows = ids.map(id => {
+        const copy = JSON.parse(JSON.stringify(source));
+        copy.id = id;
+        return copy;
+    });
+    // Insert all new rows just after source
+    dashProjectData.splice(sourceIdx + 1, 0, ...newRows);
+
+    recalculateDashboardQuantities();
+    renderDashTable();
+    pushHistory();
+    document.getElementById('duplicateSeriesModal').style.display = 'none';
+}
+
 function addDashRow() {
     const newRow = JSON.parse(JSON.stringify(dashDefaultData)); 
     newRow.id = generateNextItemCode();
