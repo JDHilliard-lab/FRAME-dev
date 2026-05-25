@@ -85,6 +85,12 @@
                                  Useful when the table is too long to drag rows around
                                  conveniently. -->
                             <button class="action-btn btn-secondary" style="width:auto;" onclick="openMoveToModal()">Move To…</button>
+                            <!-- Bulk Edit: change one field on all selected rows at once.
+                                 Single-field-per-run keeps the UI simple. -->
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkEditModal()">Bulk Edit…</button>
+                            <!-- Duplicate as Series: from one source row, create N copies
+                                 with sequential IDs (e.g., ART.001 → ART.002…ART.012). -->
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openDuplicateSeriesModal()">Duplicate as Series…</button>
                         </div>
                         <div style="display:flex; gap:5px; align-items: center;">
                             <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('csvImport').click()">Import CSV</button>
@@ -744,6 +750,90 @@
                     <!-- Populated by populateHelpReference() and renderHelpRefSection() -->
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Edit modal. Set one field on all currently-selected rows.
+     Field dropdown lists only bulk-safe fields (no ITEM CODE, no per-frame
+     unique dimensions). Value input type swaps based on selected field —
+     text/number/select — handled in renderBulkEditValueInput. -->
+<div id="bulkEditModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:480px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Bulk Edit</h3>
+        <p id="bulkEditSummary" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
+            <!-- populated by openBulkEditModal -->
+        </p>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Field to edit</label>
+            <select id="bulkEditField" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" onchange="renderBulkEditValueInput()">
+                <!-- populated by openBulkEditModal -->
+            </select>
+        </div>
+
+        <div style="margin-bottom:18px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">New value</label>
+            <div id="bulkEditValueContainer">
+                <!-- input rendered by renderBulkEditValueInput based on field type -->
+            </div>
+        </div>
+
+        <p id="bulkEditPreview" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 18px 0; min-height:1.4em;">
+            <!-- live preview text -->
+        </p>
+
+        <div style="display:flex; gap:8px; justify-content:flex-end;">
+            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('bulkEditModal').style.display='none'">Cancel</button>
+            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyBulkEdit()">Apply</button>
+        </div>
+    </div>
+</div>
+
+<!-- Duplicate as Series modal. From the primary selected row, create N
+     copies with auto-incrementing IDs based on a pattern. Useful for
+     populating a project with many similar frames quickly. -->
+<div id="duplicateSeriesModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:480px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Duplicate as Series</h3>
+        <p id="dupSeriesSummary" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
+            <!-- populated by openDuplicateSeriesModal -->
+        </p>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Number of copies</label>
+            <input type="number" id="dupSeriesCount" min="1" max="100" value="5" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" oninput="updateDupSeriesPreview()">
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">
+                ID pattern <span style="font-weight:normal; text-transform:none;">(use {n} for the sequence number)</span>
+            </label>
+            <input type="text" id="dupSeriesPattern" placeholder="ART.{n}" style="width:100%; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" oninput="updateDupSeriesPreview()">
+        </div>
+
+        <div style="margin-bottom:12px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Starting number</label>
+            <input type="number" id="dupSeriesStart" min="1" max="9999" value="2" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" oninput="updateDupSeriesPreview()">
+        </div>
+
+        <div style="margin-bottom:8px;">
+            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Pad to digits</label>
+            <select id="dupSeriesPad" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" onchange="updateDupSeriesPreview()">
+                <option value="1">No padding (1, 2, 3…)</option>
+                <option value="2">2 digits (01, 02, 03…)</option>
+                <option value="3" selected>3 digits (001, 002, 003…)</option>
+                <option value="4">4 digits (0001, 0002…)</option>
+            </select>
+        </div>
+
+        <div id="dupSeriesPreview" style="font-size:0.7rem; color:var(--text-muted); margin:12px 0 0 0; padding:8px 10px; background:var(--bg-input); border:1px solid var(--border-color); border-radius:4px; font-family:monospace; max-height:140px; overflow-y:auto; min-height:40px;">
+            <!-- live preview of generated IDs -->
+        </div>
+
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:16px;">
+            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('duplicateSeriesModal').style.display='none'">Cancel</button>
+            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyDuplicateSeries()">Apply</button>
         </div>
     </div>
 </div>
