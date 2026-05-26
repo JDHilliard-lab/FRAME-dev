@@ -4357,8 +4357,43 @@ function buildSpecStrings(r) {
     }
 
     // ── Mat 1 / Mat 2 — separate lines per the studio template ────────────
-    // Mat 1 dimensions: "3" AA" if all sides equal, else "3"T × 3"B × 3"L × 3"R".
-    // Combined with color: "3" AA, B 97 White".
+    // formatMatSides groups equal-valued sides for readability:
+    //   [3,3,3,3]   → "3" AA"            (all equal — special "all-around" form)
+    //   [3,10,3,3]  → "3" T/L/R × 10" B"   (3 sides match)
+    //   [3,3,5,5]   → "3" T/B × 5" L/R"   (two pairs)
+    //   [3,3,5,6]   → "3" T/B × 5" L × 6" R"
+    //   [3,5,4,6]   → "3" T × 5" B × 4" L × 6" R"  (fully asymmetric — current fallback)
+    //
+    // Algorithm: collect (label, value) pairs; group by value; output groups
+    // in canonical T-B-L-R order; within each group, sort labels in T-B-L-R
+    // order and join with "/". For the all-equal case, switch to "AA".
+    const formatMatSides = (T, B, L, R) => {
+        // All zero/missing → no dims string at all (caller decides what to do).
+        if (T + B + L + R === 0) return '';
+        // All 4 equal AND positive → "3" AA"
+        if (T === B && T === L && T === R && T > 0) {
+            return `${fmt(T)}${sufLoose}AA`;
+        }
+        // Group sides by value. Build a map: value → ordered list of labels.
+        // Iterate in canonical T-B-L-R order so groups stay in reading order.
+        const sides = [['T', T], ['B', B], ['L', L], ['R', R]];
+        const groups = [];  // preserves insertion order
+        const groupIdx = {};
+        for (const [label, val] of sides) {
+            const key = String(val);
+            if (groupIdx[key] === undefined) {
+                groupIdx[key] = groups.length;
+                groups.push({ val, labels: [label] });
+            } else {
+                groups[groupIdx[key]].labels.push(label);
+            }
+        }
+        // Emit each group as "<val><sufTight><labels-joined>". For values of 0
+        // we still emit the side (a 0" side is a valid spec) so all 4 sides
+        // are represented in the output.
+        return groups.map(g => `${fmt(g.val) || 0}${sufTight}${g.labels.join('/')}`).join(' × ');
+    };
+
     let mat1Line = '';
     let mat2Line = '';
     if (m1On) {
@@ -4366,26 +4401,35 @@ function buildSpecStrings(r) {
         const B = parseFloat(r.m1B) || 0;
         const L = parseFloat(r.m1L) || 0;
         const R = parseFloat(r.m1R) || 0;
-        let dims;
-        if (T === B && T === L && T === R && T > 0) {
-            dims = `${fmt(T)}${sufLoose}AA`;
-        } else if (T + B + L + R > 0) {
-            dims = `${fmt(T) || 0}${sufTight}T × ${fmt(B) || 0}${sufTight}B × ${fmt(L) || 0}${sufTight}L × ${fmt(R) || 0}${sufTight}R`;
-        } else {
-            dims = '';
-        }
+        const dims = formatMatSides(T, B, L, R);
         const matName = (r.m1ColorName || '').trim();
         if (dims && matName) mat1Line = `${dims}, ${matName}`;
         else if (dims) mat1Line = dims;
         else if (matName) mat1Line = matName;
     }
     if (m2On) {
-        const m2v = parseFloat(r.m2) || 0;
+        // Mat 2 is a uniform reveal added to every side of Mat 1. Express it
+        // in the same side-grouped form so the relationship to Mat 1 is
+        // immediately readable:
+        //   Mat 1: 3" T/L/R × 10" B
+        //   Mat 2: 4" T/L/R × 11" B   (reveal = 1")
+        // If reveal is 0 the Mat 2 line is omitted (no visible exposure to
+        // describe). Mat 2 name alone still shows for the unusual case of
+        // a 0 reveal with a named board (matches prior behavior).
+        const reveal = parseFloat(r.m2) || 0;
         const m2Name = (r.m2ColorName || '').trim();
-        const m2Str = fmt(m2v);
-        if (m2Str && m2Name) mat2Line = `${m2Str}${sufLoose}Reveal, ${m2Name}`;
-        else if (m2Str) mat2Line = `${m2Str}${sufLoose}Reveal`;
-        else if (m2Name) mat2Line = m2Name;
+        if (reveal > 0) {
+            const T = (parseFloat(r.m1T) || 0) + reveal;
+            const B = (parseFloat(r.m1B) || 0) + reveal;
+            const L = (parseFloat(r.m1L) || 0) + reveal;
+            const R = (parseFloat(r.m1R) || 0) + reveal;
+            const dims = formatMatSides(T, B, L, R);
+            if (dims && m2Name) mat2Line = `${dims}, ${m2Name}`;
+            else if (dims) mat2Line = dims;
+            else if (m2Name) mat2Line = m2Name;
+        } else if (m2Name) {
+            mat2Line = m2Name;
+        }
     }
 
     // ── Matboard (legacy float mount description) ─────────────────────────
