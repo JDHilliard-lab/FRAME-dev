@@ -286,6 +286,16 @@ tr.multi-selected {
 .section-title:hover { color: var(--accent); }
 .section-title.section-title-static { cursor: default; }
 .section-title.section-title-static:hover { color: var(--text-strong); }
+
+/* fl-disabled: applied to sections/inputs that don't apply to the current
+ * product type. Examples: Frame Style section + Fr.W/Fr.H/Rabbet fields are
+ * irrelevant for Frameless Canvas. Greys them out + blocks input but leaves
+ * the underlying data intact so switching products doesn't lose state. */
+.fl-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+}
 .collapsible-section { display: none; margin-bottom: 4px; }
 .collapsible-section.open { display: block; }
 
