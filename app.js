@@ -4799,8 +4799,14 @@ function buildDashCSVString() {
             dashFmt(r.extW), dashFmt(r.extH),
             dashFmt(Math.max(0, artW)), dashFmt(Math.max(0, artH)),
             dashFmt(Math.max(0, imgW)), dashFmt(Math.max(0, imgH)),
-            r.canvasDepth ? dashFmt(r.canvasDepth) : '',
-            r.canvasWrap ? dashFmt(r.canvasWrap) : '',
+            // Canvas columns filtered by product: only emit values for actual
+            // canvas products. Without this, a row that visited canvas then
+            // switched back to Framed Art would emit stale canvasDepth/Wrap
+            // values from when the auto-fill set them to "2"/"2". Filtering at
+            // export time keeps the row data intact (so the user can switch
+            // back to canvas without re-typing) while keeping the CSV clean.
+            (iC || iFL) ? (r.canvasDepth ? dashFmt(r.canvasDepth) : '') : '',
+            (iC || iFL) ? (r.canvasWrap ? dashFmt(r.canvasWrap) : '') : '',
             matCell,
             (r.m1A !== false && !matsHidden) ? dashFmt(r.m1T) : '',
             (r.m1A !== false && !matsHidden) ? dashFmt(r.m1R) : '',
@@ -4811,9 +4817,13 @@ function buildDashCSVString() {
             (iFM || isFauxMat) ? dashFmt(Math.max(0, paperSizeW)) : '',
             (iFM || isFauxMat) ? dashFmt(Math.max(0, paperSizeH)) : '',
             (iFM || isFauxMat) ? dashFmt(whiteBorder) : '',
-            frameCell,
-            numOrBlank(r.fW),
-            numOrBlank(r.fHeight),
+            // Frame columns filtered for Frameless Canvas: no frame applies,
+            // so fW/fHeight/rabbet/frameCell are all empty regardless of
+            // what's stored on the row from a previous product switch.
+            // Floater is NOT filtered — it has a real frame around the canvas.
+            iFL ? '' : frameCell,
+            iFL ? '' : numOrBlank(r.fW),
+            iFL ? '' : numOrBlank(r.fHeight),
             r.hardware || '',
             r.backing || '',
             r.mount || '',
@@ -4823,7 +4833,7 @@ function buildDashCSVString() {
             r.artist || '',
             r.artworkTitle || '',
             r.artType || '',
-            numOrBlank(r.rabbetDepth),
+            iFL ? '' : numOrBlank(r.rabbetDepth),
             specs.application,
             specs.matboard,
             JSON.stringify(specs.lines || []),
@@ -4839,10 +4849,11 @@ function buildDashCSVString() {
             `${r.id}.png`,
             // — Raw-inch canonical values. Each is the display value converted
             //   back to inches via unitFactor. Empty for fields that don't apply
-            //   to this product (mats hidden for canvas, paper for non-mount). —
-            dashFmt((parseFloat(r.fW) || 0) * _toIn),
-            dashFmt((parseFloat(r.fHeight) || 0) * _toIn),
-            r.rabbetDepth ? dashFmt(parseFloat(r.rabbetDepth) * _toIn) : '',
+            //   to this product (mats hidden for canvas, frame hidden for
+            //   Frameless, paper for non-mount). —
+            iFL ? '' : dashFmt((parseFloat(r.fW) || 0) * _toIn),
+            iFL ? '' : dashFmt((parseFloat(r.fHeight) || 0) * _toIn),
+            iFL ? '' : (r.rabbetDepth ? dashFmt(parseFloat(r.rabbetDepth) * _toIn) : ''),
             (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1T) || 0) * _toIn) : '',
             (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1B) || 0) * _toIn) : '',
             (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1L) || 0) * _toIn) : '',
