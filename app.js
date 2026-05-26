@@ -1921,22 +1921,10 @@ function applyBulkEdit() {
     const selected = dashGetSelectedIndices();
     if (selected.length === 0) return;
 
-    // Apply to every selected row. For product changes, capture the old
-    // product per row so we can clean up stale fields after the write —
-    // without this, switching multiple rows to/from canvas products would
-    // leave dead canvasDepth/Wrap (or mat) values on each row.
-    if (field.key === 'product') {
-        selected.forEach(idx => {
-            const row = dashProjectData[idx];
-            const oldProduct = row.product;
-            row.product = newVal;
-            clearStaleProductFields(row, oldProduct, newVal);
-        });
-    } else {
-        selected.forEach(idx => {
-            dashProjectData[idx][field.key] = newVal;
-        });
-    }
+    // Apply to every selected row
+    selected.forEach(idx => {
+        dashProjectData[idx][field.key] = newVal;
+    });
 
     // If product was bulk-edited, mirror the Shadow Box auto-flip behavior
     // (Shadow Box flips useFloatMount to true; everything else flips it to
@@ -2224,18 +2212,7 @@ function dashHtIn(idx, field, val, fromTable) {
     let row = dashProjectData[idx];
     if(['qty','extW','extH','fW','fHeight','m1T','m1R','m1B','m1L','m2','m_bleed','canvasDepth','canvasWrap'].includes(field)) val = parseFloat(val) || 0;
     if (field === 'id') { const oldId = row.id; elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = val; }); }); }
-    // For product changes via inline-table-edit: capture the OLD product value
-    // BEFORE `row[field] = val` overwrites it, so we can clean up stale
-    // fields from the previous product family. Without this, the cleanup in
-    // handleDashProductChange would see row.product === new value (no
-    // transition detected) and skip the clearing — canvas data would leak
-    // into framed-art rows when switched via the table.
-    let _oldProduct = null;
-    if (field === 'product') _oldProduct = row.product;
     row[field] = val;
-    if (field === 'product' && _oldProduct !== null) {
-        clearStaleProductFields(row, _oldProduct, val);
-    }
 
     if (idx === dashSelectedRowIndex) {
         const map = { 'id':'m_itemCode', 'imageCode':'m_imageCode', 'level':'m_level', 'qty':'m_qty', 'location':'m_location', 'extW':'extW', 'extH':'extH', 'fCode':'m_fCode', 'fW':'fW', 'fHeight':'fHeight', 'canvasDepth':'canvasDepth', 'canvasWrap':'canvasWrap', 'm1ColorName':'m1_color', 'm1ColorHex':'m1_colorHex', 'm2ColorName':'m2_color', 'm2ColorHex':'m2_colorHex', 'm1T':'m1T', 'm1R':'m1R', 'm1B':'m1B', 'm1L':'m1L', 'm2':'m2', 'glass':'m_glass', 'hardware':'m_hardware', 'backing':'m_backing', 'mount':'m_mount', 'notes':'m_notes', 'prodNotes':'m_prodNotes' };
@@ -2845,76 +2822,6 @@ function importDashCSV(e) {
 }
 
 // RESTORED SYNC & DB FUNCTIONS
-// Clear fields on a dashboard row that don't apply to the new product type.
-// Called whenever a row's product changes, from three places:
-//   1. handleDashProductChange — form dropdown change
-//   2. dashHtIn — inline table cell edit
-//   3. applyBulkEdit — bulk edit of multiple rows
-//
-// Callers must pass the OLD product (before the switch) and the NEW one, so
-// this function can decide whether the transition crosses a product-family
-// boundary (canvas ↔ framed-art) and clear accordingly.
-//
-// Transitions handled:
-//   - Canvas → Framed-Art family: clear canvasDepth, canvasWrap; reset
-//     floaterInset to default (0.75)
-//   - Framed-Art family → Canvas: clear mat 1/2 sides + reveal, color names,
-//     useFloatMount flag, shadow-box paper margin/border, backer color
-//
-// Within-family changes (e.g., Framed Art → Shadow Box, or Floater → Frameless)
-// don't clear anything — those products share enough state that wholesale
-// clearing would lose valid user input.
-//
-// If `data` is the currently-selected row, also sync the cleared values to
-// the form inputs so syncDashAndCalculate doesn't re-read stale values from
-// the form and clobber our clearing.
-function clearStaleProductFields(data, oldProduct, newProduct) {
-    if (!data || oldProduct === newProduct) return;
-    const isCanvasProduct = (p) =>
-        (p === "Framed Canvas (Floater)" || p === "Frameless Canvas (Wrapped)");
-    const wasCanvas = isCanvasProduct(oldProduct);
-    const isCanvas = isCanvasProduct(newProduct);
-
-    // Helper: only update form input if `data` is the currently-displayed row.
-    const isCurrentRow = (dashProjectData[dashSelectedRowIndex] === data);
-    const setFormVal = (id, v) => {
-        if (!isCurrentRow) return;
-        const el = document.getElementById(id);
-        if (el) el.value = v;
-    };
-
-    if (wasCanvas && !isCanvas) {
-        // Leaving canvas → framed family. Clear canvas-only fields back to
-        // defaults so they don't pollute CSV export.
-        data.canvasDepth = "";
-        data.canvasWrap = "";
-        data.floaterInset = 0.75;
-        setFormVal('canvasDepth', '');
-        setFormVal('canvasWrap', '');
-        setFormVal('floaterInset', '0.75');
-    }
-    if (!wasCanvas && isCanvas) {
-        // Entering canvas. Clear mat & shadow-box fields back to zero/empty.
-        data.m1T = 0; data.m1B = 0; data.m1L = 0; data.m1R = 0;
-        data.m2 = 0;
-        data.m1ColorName = "";
-        data.m2ColorName = "";
-        data.useFloatMount = false;
-        data.sbPaperMargin = 0;
-        data.sbPaperBorder = 0;
-        data.sbBackerColorName = "";
-        // Update form inputs so syncDashAndCalculate reads clean values when
-        // it rebuilds row data from the form (matWrapper might be hidden by
-        // the caller, but the inputs themselves still hold values).
-        setFormVal('m1T', 0); setFormVal('m1B', 0); setFormVal('m1L', 0); setFormVal('m1R', 0);
-        setFormVal('m2', 0);
-        setFormVal('m1_color', '');
-        setFormVal('m2_color', '');
-        setFormVal('sbPaperMargin', 0);
-        setFormVal('sbPaperBorder', 0);
-    }
-}
-
 function handleDashProductChange(shouldSync = true) {
     const val = document.getElementById('m_product').value;
     const matWrapper = document.getElementById('matWrapper');
@@ -2926,14 +2833,9 @@ function handleDashProductChange(shouldSync = true) {
     const isShadowBox = (val === "Framed Art (Shadow Box)");
     const data = dashProjectData[dashSelectedRowIndex];
 
-    // Product-transition data cleanup. clearStaleProductFields handles both
-    // the data update AND the form-input sync, so syncDashAndCalculate later
-    // in this function reads consistent values from the form.
-    if (data) {
-        const prev = data.product || '';
-        clearStaleProductFields(data, prev, val);
-        data.product = val;
-    }
+    // Persist the chosen product to the row so subsequent reads see the
+    // current state. CSV export picks up data.product directly.
+    if (data) data.product = val;
 
     // Frameless Canvas: no frame applies, so visually disable the Frame
     // Style section and the Fr.W / Fr.H / Rabbet cells. The data underneath
