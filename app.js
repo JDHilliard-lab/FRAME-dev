@@ -2833,6 +2833,17 @@ function handleDashProductChange(shouldSync = true) {
     const isShadowBox = (val === "Framed Art (Shadow Box)");
     const data = dashProjectData[dashSelectedRowIndex];
 
+    // Frameless Canvas: no frame applies, so visually disable the Frame
+    // Style section and the Fr.W / Fr.H / Rabbet cells. The data underneath
+    // stays intact so switching back to a framed product restores prior
+    // values. Other canvas (Floater) keeps these enabled — Floater DOES
+    // have a frame around the canvas.
+    const frameStyleSection = document.getElementById('frameStyleSection');
+    if (frameStyleSection) frameStyleSection.classList.toggle('fl-disabled', isFrameless);
+    document.querySelectorAll('.frame-dim-cell').forEach(el => {
+        el.classList.toggle('fl-disabled', isFrameless);
+    });
+
     // FLOATER & FRAMELESS CANVAS: both hide the mat/float wrapper since neither
     // uses traditional mats or float-mounted paper. Both show canvas settings
     // (depth, wrap, optional inset). bleedSettings stays visible — Print File
@@ -2850,20 +2861,20 @@ function handleDashProductChange(shouldSync = true) {
             insetCell.parentElement.style.opacity = isFrameless ? '0.4' : '1';
             insetCell.disabled = isFrameless;
         }
-        // Default Frameless Canvas to a 2"D stretcher bar when the field is empty.
-        // Studio standard for wrapped canvas. Also auto-fills wrap = depth (no
-        // safety margin per studio convention). User can override after.
-        // Doesn't trigger when switching to Floater since that has its own
-        // rabbet→stretcher relationship.
-        if (isFrameless) {
-            const depthEl = document.getElementById('canvasDepth');
-            const wrapEl = document.getElementById('canvasWrap');
-            const currentDepth = parseFloat(depthEl ? depthEl.value : '') || 0;
-            if (depthEl && currentDepth === 0) {
-                depthEl.value = '2';
-                if (wrapEl && (parseFloat(wrapEl.value) || 0) === 0) {
-                    wrapEl.value = '2';
-                }
+        // Default canvas products (Floater AND Frameless) to a 2"D stretcher
+        // bar + 2" wrap when the field is empty. Studio standard: 2" stretcher
+        // bars are the most common size, and image wraps 2" around the sides
+        // (the remaining stretcher depth becomes back-staple area). User can
+        // override after. Both Floater and Frameless use the same default
+        // because the physical canvas object is identical — what differs is
+        // whether it sits inside a floater frame or not.
+        const depthEl = document.getElementById('canvasDepth');
+        const wrapEl = document.getElementById('canvasWrap');
+        const currentDepth = parseFloat(depthEl ? depthEl.value : '') || 0;
+        if (depthEl && currentDepth === 0) {
+            depthEl.value = '2';
+            if (wrapEl && (parseFloat(wrapEl.value) || 0) === 0) {
+                wrapEl.value = '2';
             }
         }
         if(shouldSync) syncDashAndCalculate();
