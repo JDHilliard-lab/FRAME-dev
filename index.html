@@ -207,9 +207,9 @@
                         <div class="grid-row-5" style="display:grid; grid-template-columns: repeat(5, 1fr); gap: 4px;">
                             <div><label>OD W</label><input type="number" step="0.125" id="extW" oninput="syncDashAndCalculate()"></div>
                             <div><label>OD H</label><input type="number" step="0.125" id="extH" oninput="syncDashAndCalculate()"></div>
-                            <div><label title="Visible frame face width">Fr. W</label><input type="number" step="0.125" id="fW" oninput="syncDashAndCalculate()"></div>
-                            <div><label title="Total profile depth front-to-back">Fr. H</label><input type="number" step="0.0625" id="fHeight" oninput="syncDashAndCalculate()" placeholder="depth"></div>
-                            <div><label title="Depth of L-pocket where art sits">Rabbet</label><input type="number" step="0.0625" id="rabbetDepth" oninput="handleRabbetChange()" placeholder="depth"></div>
+                            <div class="frame-dim-cell"><label title="Visible frame face width">Fr. W</label><input type="number" step="0.125" id="fW" oninput="syncDashAndCalculate()"></div>
+                            <div class="frame-dim-cell"><label title="Total profile depth front-to-back">Fr. H</label><input type="number" step="0.0625" id="fHeight" oninput="syncDashAndCalculate()" placeholder="depth"></div>
+                            <div class="frame-dim-cell"><label title="Depth of L-pocket where art sits">Rabbet</label><input type="number" step="0.0625" id="rabbetDepth" oninput="handleRabbetChange()" placeholder="depth"></div>
                         </div>
 
                         <!-- Open W / Open H / Bleed / Print File. Moved up from inside the
@@ -223,7 +223,12 @@
                             <div><label>Print File</label><div class="calc-box calc-box-blue" id="printFileDisplay">0 x 0</div></div>
                         </div>
 
-                        <!-- FRAME STYLE: tight section with a Library/Solid toggle + sync folder icon. -->
+                        <!-- FRAME STYLE: tight section with a Library/Solid toggle + sync folder icon.
+                             Wrapped in #frameStyleSection so the whole section can be greyed out
+                             via .fl-disabled when Frameless Canvas is selected (no frame applies).
+                             canvasSettings stays OUTSIDE this wrapper since canvas products
+                             still need to edit canvas depth/wrap/inset. -->
+                        <div id="frameStyleSection">
                         <div class="section-title section-title-static" style="margin-top:8px;">Frame Style</div>
                         <!-- ROW 1: folder + upload icons | LIBRARY/COLOR toggle | color picker.
                              Upload was moved up from the old imageControls row so both
@@ -255,23 +260,11 @@
                         <!-- Legacy container kept (empty) so any code paths that flip its display don't error -->
                         <div id="colorControls" style="display:none;"></div>
 
-                        <!-- ROW 2: Frame Code + Color / Texture. Always visible regardless
-                             of LIBRARY vs COLOR mode — both fields apply either way. This
-                             positioning (between the mode toggle and the vendor/collection
-                             menus) means designers see them right when they pick a frame
-                             treatment, eliminating the "Standard Black" left on a wood-grain
-                             swatch bug. Was previously hidden inside the Hardware & Notes
-                             section where they were too easy to forget. -->
-                        <div class="grid-row-2" style="margin-bottom: 6px;">
-                            <div><label>Frame Code</label><input type="text" id="m_fCode" oninput="syncDashAndCalculate()"></div>
-                            <div><label title="Human-readable finish for client-facing specs">Color / Texture</label><input type="text" id="m_fColorName" oninput="syncDashAndCalculate()" placeholder="e.g. Standard Black, Black Maple"></div>
-                        </div>
-
-                        <!-- ROW 3: Vendor / Collection / Swatch selectors. Visible only in
+                        <!-- ROW 2: Vendor / Collection / Swatch selectors. Visible only in
                              LIBRARY mode (dimmed in COLOR mode via .fstyle-lib-side). The
                              upload-single-image button + redundant thumb preview were
                              removed from this row in the v2 reshuffle. -->
-                        <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px; width: 100%;">
+                        <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px; width: 100%;">
                             <select id="libVendor" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
                             <select id="libCollection" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
 
@@ -284,6 +277,19 @@
                                  break — it just never renders visually. -->
                             <div id="swatchThumbPreview" style="display:none;"></div>
                         </div>
+
+                        <!-- ROW 3: Frame Code + Color / Texture. Placed below the swatch
+                             picker so the workflow reads top-down: pick a frame (visual),
+                             then describe it (text). Always visible regardless of LIBRARY
+                             vs COLOR mode — both fields apply either way. Was previously
+                             buried in the Hardware & Notes section where designers would
+                             forget to update them (e.g., leave "Standard Black" on a
+                             wood-grain swatch). -->
+                        <div class="grid-row-2" style="margin-bottom: 8px;">
+                            <div><label>Frame Code</label><input type="text" id="m_fCode" oninput="syncDashAndCalculate()"></div>
+                            <div><label title="Human-readable finish for client-facing specs">Color / Texture</label><input type="text" id="m_fColorName" oninput="syncDashAndCalculate()" placeholder="e.g. Standard Black, Black Maple"></div>
+                        </div>
+                        </div><!-- /frameStyleSection -->
 
                         <div class="grid-row-3" id="canvasSettings" style="display:none;">
                             <div><label>Cnv. Depth</label><input type="number" step="0.125" id="canvasDepth" oninput="handleCanvasDepthChange()"></div>
