@@ -209,6 +209,51 @@ tr.multi-selected {
 .preview-container { background: var(--bg-input); border-radius: 8px; width: 100%; max-width: 320px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-image: linear-gradient(45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(128,128,128,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(128,128,128,0.1) 75%); background-size: 20px 20px; border: 1px solid var(--border-color); margin-bottom: 10px;}
 .controls { padding: 8px 15px; flex-shrink: 0; display: flex; flex-direction: column; }
 
+/* Dashboard view mode 2 — vertical stack on the left.
+ * Activated by `body.dash-view-2`. The JS (toggleDashView) moves
+ * .preview-wrapper from .dash-right-pane into .dash-left-pane so the
+ * preview sits directly below the CSV table.
+ *
+ * Layout result:
+ *   ┌──────────────────────┬─────────────┐
+ *   │ CSV table (250px)    │             │
+ *   ├──────────────────────┤  Form panel │
+ *   │                      │  (440px)    │
+ *   │  Frame preview       │             │
+ *   │  (fills rest)        │             │
+ *   └──────────────────────┴─────────────┘
+ *
+ * The compact table acts as a frame selector — click a row to load it
+ * into the form/preview. Horizontal scroll inside the table works the
+ * same as before (the table is wider than the container). */
+body.dash-view-2 #view-dashboard .table-container {
+    flex: 0 0 250px;
+    border-bottom: 1px solid var(--border-color);
+}
+body.dash-view-2 #view-dashboard .dash-left-pane .preview-wrapper {
+    /* When moved into the left pane, preview-wrapper should fill remaining
+     * vertical space instead of being sticky at the top of its scrolling
+     * parent (which the right pane is, but the left pane is not). */
+    position: static;
+    flex: 1;
+    border-bottom: none;
+    /* Center the preview within the freed vertical space — looks better
+     * than top-aligning a small square against a tall container. */
+    justify-content: center;
+}
+body.dash-view-2 #view-dashboard .preview-container {
+    /* Allow the preview to grow much larger now that it has the full
+     * vertical space of the left pane (minus the 250px table). */
+    max-width: 700px;
+}
+/* When the toggle is active, give the button a tinted background so the
+ * user can see at a glance which mode is active. */
+#dashViewToggle.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
 /* Dashboard Toolbar */
 .dash-toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; background: var(--bg-subpanel); padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); align-items: center; }
 .dash-toolbar > * { margin: 0; }
