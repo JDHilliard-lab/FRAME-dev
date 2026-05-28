@@ -209,39 +209,37 @@ tr.multi-selected {
 .preview-container { background: var(--bg-input); border-radius: 8px; width: 100%; max-width: 320px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-image: linear-gradient(45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(128,128,128,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(128,128,128,0.1) 75%); background-size: 20px 20px; border: 1px solid var(--border-color); margin-bottom: 10px;}
 .controls { padding: 8px 15px; flex-shrink: 0; display: flex; flex-direction: column; }
 
-/* Dashboard view mode 2 — preview as a floating overlay.
- * Activated by `body.dash-view-2`. The base Mode 1 layout is COMPLETELY
- * UNCHANGED — the header, project toolbar, table, and form all stay in
- * their original positions and dimensions. Only the .preview-wrapper
- * lifts up out of its normal flow and becomes an absolutely-positioned
- * floating panel above the table area.
+/* Dashboard view mode 2 — preview as a resizable floating overlay.
+ * Activated by `body.dash-view-2`. The base Mode 1 layout (header, project
+ * toolbar, table, form pane) is COMPLETELY UNCHANGED. Only the
+ * .preview-wrapper lifts out of flow and becomes a fixed-positioned panel
+ * anchored to the right side of the table area.
  *
- * Mental model: a "layer" of preview sitting over the table layer. The
- * table is still scrollable behind/around the preview — visible rows below
- * the preview can be clicked normally.
+ * The preview-container INSIDE the wrapper is sized by JS (see
+ * updateDashPreviewContainerSize) to match the current frame's aspect
+ * ratio at the user's preferred "longest dimension" — so the frame
+ * always fits with minimal empty space. The user can drag the LEFT edge
+ * of the panel to make it bigger (dashPreviewSize grows, both W and H
+ * scale up proportionally).
  *
  *   ┌──[Project header — UNCHANGED]──────────────────────┐
- *   │ ┌──────────────────────┐                           │
- *   │ │  Preview (floating)  │     Form (440px)          │
- *   │ │  + canvas toolbar    │     unchanged             │
- *   │ └──────────────────────┘                           │
- *   │ [visible table rows below the preview]             │
+ *   │ [table — visible behind/around the floating panel] │
+ *   │                  ┌────────────────┐  ┌─────────┐   │
+ *   │                  │  Preview       │  │  Form   │   │
+ *   │                  │  (sized to     │  │ (440px) │   │
+ *   │                  │   frame aspect)│  │         │   │
+ *   │                  │  + toolbar     │  │         │   │
+ *   │                  └────────────────┘  │         │   │
+ *   │                  ↑ left edge is      └─────────┘   │
+ *   │                    drag handle                      │
  *   └────────────────────────────────────────────────────┘
- *
- * The preview-wrapper element is NOT moved in the DOM — only positioned
- * via CSS. (Earlier versions moved it; this version doesn't.) */
+ */
 body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper {
     position: fixed;
-    /* top: below the page header (~50px) + global meta (~52px) + pane-header
-     *      with project toolbar (~50px) = ~152px from viewport top.
-     * left: small inset from left edge
-     * right: 460px reserves room for the 440px form pane + 20px gap
-     * bottom: 20px gives the canvas toolbar buttons a small margin from the
-     *         viewport bottom */
     top: 156px;
-    left: 20px;
-    right: 460px;
-    bottom: 20px;
+    right: 460px; /* anchored to the right, just left of the 440px form pane */
+    left: auto;
+    bottom: auto;
     width: auto;
     z-index: 50;
     background: var(--bg-panel);
@@ -249,23 +247,25 @@ body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper {
     border-radius: 8px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
     padding: 20px;
-    /* Override the default sticky positioning from Mode 1 */
+    padding-left: 24px;  /* extra space on the left edge to make the drag handle reachable */
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;  /* preview-container first, then toolbar below */
+    /* Drag handle hint: a subtle accent-colored vertical strip on the left
+     * edge. Becomes more visible on hover (via cursor change in JS, plus
+     * this static hint). */
+    border-left: 4px solid var(--accent);
 }
 body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper .preview-container {
-    /* Preview container expands to fill the available floating-panel space.
-     * The aspect-ratio:1/1 keeps it square; max-width lets the square shrink
-     * to the panel's narrower dimension. */
+    /* JS sets explicit width/height via inline style (see
+     * updateDashPreviewContainerSize). These rules override the Mode 1
+     * defaults (320px max-width, 1/1 aspect ratio) so JS can take control. */
     max-width: none;
-    max-height: calc(100% - 50px); /* leave 50px for the canvas toolbar below */
-    flex: 1;
-    min-height: 0;
+    max-height: none;
+    width: 400px;  /* default before JS sets actual size */
+    height: 400px;
+    aspect-ratio: auto;
+    margin-bottom: 10px;
 }
-/* The form pane keeps its normal layout but the preview-wrapper INSIDE it
- * is hoisted out of flow (position:fixed), so the form's controls slide up
- * to fill the space the preview used to occupy. We don't need to do
- * anything extra — fixed positioning removes the element from flow. */
 
 /* When the toggle is active, give the button a tinted background so the
  * user can see at a glance which mode is active. */
