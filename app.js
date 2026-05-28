@@ -1070,14 +1070,29 @@ function setupDashPreviewDragHandle() {
         const delta = dragState.startX - e.clientX;
         let newSize = dragState.startSize + delta;
         if (newSize < DASH_PREVIEW_SIZE_MIN) newSize = DASH_PREVIEW_SIZE_MIN;
-        // Soft cap based on viewport so the container can't grow off-screen.
-        // computeDashPreviewDims also clamps, but capping `size` here gives
-        // smoother visual feedback (cursor matches the actual edge).
+        // Aspect-aware max-size clamp. `size` is the longest dimension of
+        // the container. Whether that's the WIDTH or the HEIGHT depends on
+        // the current frame's aspect ratio. The other (shorter) dimension
+        // is size/aspect (for landscape) or size*aspect (for portrait), and
+        // it ALSO needs to fit within its viewport limit. So we compute the
+        // max-size in two ways and use the tighter.
         const vpW = window.innerWidth;
         const vpH = window.innerHeight;
-        const maxByW = vpW - 460 - 80;
-        const maxByH = vpH - 256;
-        const maxSize = Math.max(DASH_PREVIEW_SIZE_MIN, Math.min(maxByW, maxByH));
+        const maxByW = vpW - 460 - 80;  // form pane + side margins
+        const maxByH = vpH - 256;       // top + bottom + toolbar
+        const data = dashProjectData[dashSelectedRowIndex];
+        const ew = Math.max(1, parseFloat(data && data.extW) || 1);
+        const eh = Math.max(1, parseFloat(data && data.extH) || 1);
+        const aspect = ew / eh;
+        let maxSize;
+        if (aspect >= 1) {
+            // Landscape: size = width. Width≤maxByW, height = size/aspect ≤ maxByH
+            maxSize = Math.min(maxByW, maxByH * aspect);
+        } else {
+            // Portrait: size = height. Height≤maxByH, width = size*aspect ≤ maxByW
+            maxSize = Math.min(maxByH, maxByW / aspect);
+        }
+        if (maxSize < DASH_PREVIEW_SIZE_MIN) maxSize = DASH_PREVIEW_SIZE_MIN;
         if (newSize > maxSize) newSize = maxSize;
         dashPreviewSize = newSize;
         updateDashPreviewContainerSize();
