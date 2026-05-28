@@ -209,55 +209,64 @@ tr.multi-selected {
 .preview-container { background: var(--bg-input); border-radius: 8px; width: 100%; max-width: 320px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-image: linear-gradient(45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(128,128,128,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(128,128,128,0.1) 75%); background-size: 20px 20px; border: 1px solid var(--border-color); margin-bottom: 10px;}
 .controls { padding: 8px 15px; flex-shrink: 0; display: flex; flex-direction: column; }
 
-/* Dashboard view mode 2 — side-by-side three-column layout.
- * Activated by `body.dash-view-2`. The JS (applyDashViewMode) moves
- * .preview-wrapper out of .dash-right-pane and into #view-dashboard so
- * it becomes a sibling/middle column between the two panes.
+/* Dashboard view mode 2 — preview as a floating overlay.
+ * Activated by `body.dash-view-2`. The base Mode 1 layout is COMPLETELY
+ * UNCHANGED — the header, project toolbar, table, and form all stay in
+ * their original positions and dimensions. Only the .preview-wrapper
+ * lifts up out of its normal flow and becomes an absolutely-positioned
+ * floating panel above the table area.
  *
- * Resulting layout:
- *   ┌────────────────┬──────────────────────┬──────────────┐
- *   │ Table (500px,  │                      │              │
- *   │ horiz scroll)  │  Preview (large)     │  Form panel  │
- *   │                │  + canvas toolbar    │  (440px)     │
- *   │ full vertical  │                      │              │
- *   │ height         │                      │  full        │
- *   │                │                      │  vertical    │
- *   └────────────────┴──────────────────────┴──────────────┘
+ * Mental model: a "layer" of preview sitting over the table layer. The
+ * table is still scrollable behind/around the preview — visible rows below
+ * the preview can be clicked normally.
  *
- * Project toolbar (Add Item, Delete, Import CSV, etc.) at top of left pane
- * stays visible in Mode 2 — only the table-container itself is constrained
- * horizontally; everything else in the left pane (header, toolbar) is
- * unchanged.
+ *   ┌──[Project header — UNCHANGED]──────────────────────┐
+ *   │ ┌──────────────────────┐                           │
+ *   │ │  Preview (floating)  │     Form (440px)          │
+ *   │ │  + canvas toolbar    │     unchanged             │
+ *   │ └──────────────────────┘                           │
+ *   │ [visible table rows below the preview]             │
+ *   └────────────────────────────────────────────────────┘
  *
- * Preview sizing is constrained by viewport HEIGHT first, so the canvas
- * toolbar buttons below the preview (Push to Wall, Send, Download, Save
- * Preset, Load Preset) always remain visible without horizontal/vertical
- * scrolling the browser window. */
-body.dash-view-2 #view-dashboard .dash-left-pane {
-    flex: 0 0 500px;
-}
-body.dash-view-2 #view-dashboard > .preview-wrapper {
-    /* Middle column. Takes the freed horizontal space, centers content. */
-    flex: 1;
-    position: static;
+ * The preview-wrapper element is NOT moved in the DOM — only positioned
+ * via CSS. (Earlier versions moved it; this version doesn't.) */
+body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper {
+    position: fixed;
+    /* top: below the page header (~50px) + global meta (~52px) + pane-header
+     *      with project toolbar (~50px) = ~152px from viewport top.
+     * left: small inset from left edge
+     * right: 460px reserves room for the 440px form pane + 20px gap
+     * bottom: 20px gives the canvas toolbar buttons a small margin from the
+     *         viewport bottom */
+    top: 156px;
+    left: 20px;
+    right: 460px;
+    bottom: 20px;
+    width: auto;
+    z-index: 50;
     background: var(--bg-panel);
-    padding: 15px;
-    border-bottom: none;
-    border-right: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    /* Override the default sticky positioning from Mode 1 */
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
-body.dash-view-2 #view-dashboard > .preview-wrapper .preview-container {
-    /* Cap by BOTH width AND height. The min() ensures the preview never
-     * pushes the canvas-toolbar buttons below the viewport.
-     * 240px reserves space for: header (~50) + global meta row (~50) +
-     * project toolbar (~50) + canvas toolbar buttons (~32) + padding/gaps (~58). */
-    max-width: min(700px, calc(100vh - 240px));
-    max-height: calc(100vh - 240px);
+body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper .preview-container {
+    /* Preview container expands to fill the available floating-panel space.
+     * The aspect-ratio:1/1 keeps it square; max-width lets the square shrink
+     * to the panel's narrower dimension. */
+    max-width: none;
+    max-height: calc(100% - 50px); /* leave 50px for the canvas toolbar below */
+    flex: 1;
+    min-height: 0;
 }
+/* The form pane keeps its normal layout but the preview-wrapper INSIDE it
+ * is hoisted out of flow (position:fixed), so the form's controls slide up
+ * to fill the space the preview used to occupy. We don't need to do
+ * anything extra — fixed positioning removes the element from flow. */
+
 /* When the toggle is active, give the button a tinted background so the
  * user can see at a glance which mode is active. */
 #dashViewToggle.active {
