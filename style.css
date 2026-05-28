@@ -209,42 +209,54 @@ tr.multi-selected {
 .preview-container { background: var(--bg-input); border-radius: 8px; width: 100%; max-width: 320px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-image: linear-gradient(45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(128,128,128,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(128,128,128,0.1) 75%); background-size: 20px 20px; border: 1px solid var(--border-color); margin-bottom: 10px;}
 .controls { padding: 8px 15px; flex-shrink: 0; display: flex; flex-direction: column; }
 
-/* Dashboard view mode 2 — vertical stack on the left.
- * Activated by `body.dash-view-2`. The JS (toggleDashView) moves
- * .preview-wrapper from .dash-right-pane into .dash-left-pane so the
- * preview sits directly below the CSV table.
+/* Dashboard view mode 2 — side-by-side three-column layout.
+ * Activated by `body.dash-view-2`. The JS (applyDashViewMode) moves
+ * .preview-wrapper out of .dash-right-pane and into #view-dashboard so
+ * it becomes a sibling/middle column between the two panes.
  *
- * Layout result:
- *   ┌──────────────────────┬─────────────┐
- *   │ CSV table (250px)    │             │
- *   ├──────────────────────┤  Form panel │
- *   │                      │  (440px)    │
- *   │  Frame preview       │             │
- *   │  (fills rest)        │             │
- *   └──────────────────────┴─────────────┘
+ * Resulting layout:
+ *   ┌────────────────┬──────────────────────┬──────────────┐
+ *   │ Table (500px,  │                      │              │
+ *   │ horiz scroll)  │  Preview (large)     │  Form panel  │
+ *   │                │  + canvas toolbar    │  (440px)     │
+ *   │ full vertical  │                      │              │
+ *   │ height         │                      │  full        │
+ *   │                │                      │  vertical    │
+ *   └────────────────┴──────────────────────┴──────────────┘
  *
- * The compact table acts as a frame selector — click a row to load it
- * into the form/preview. Horizontal scroll inside the table works the
- * same as before (the table is wider than the container). */
-body.dash-view-2 #view-dashboard .table-container {
-    flex: 0 0 250px;
-    border-bottom: 1px solid var(--border-color);
+ * Project toolbar (Add Item, Delete, Import CSV, etc.) at top of left pane
+ * stays visible in Mode 2 — only the table-container itself is constrained
+ * horizontally; everything else in the left pane (header, toolbar) is
+ * unchanged.
+ *
+ * Preview sizing is constrained by viewport HEIGHT first, so the canvas
+ * toolbar buttons below the preview (Push to Wall, Send, Download, Save
+ * Preset, Load Preset) always remain visible without horizontal/vertical
+ * scrolling the browser window. */
+body.dash-view-2 #view-dashboard .dash-left-pane {
+    flex: 0 0 500px;
 }
-body.dash-view-2 #view-dashboard .dash-left-pane .preview-wrapper {
-    /* When moved into the left pane, preview-wrapper should fill remaining
-     * vertical space instead of being sticky at the top of its scrolling
-     * parent (which the right pane is, but the left pane is not). */
-    position: static;
+body.dash-view-2 #view-dashboard > .preview-wrapper {
+    /* Middle column. Takes the freed horizontal space, centers content. */
     flex: 1;
+    position: static;
+    background: var(--bg-panel);
+    padding: 15px;
     border-bottom: none;
-    /* Center the preview within the freed vertical space — looks better
-     * than top-aligning a small square against a tall container. */
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
-body.dash-view-2 #view-dashboard .preview-container {
-    /* Allow the preview to grow much larger now that it has the full
-     * vertical space of the left pane (minus the 250px table). */
-    max-width: 700px;
+body.dash-view-2 #view-dashboard > .preview-wrapper .preview-container {
+    /* Cap by BOTH width AND height. The min() ensures the preview never
+     * pushes the canvas-toolbar buttons below the viewport.
+     * 240px reserves space for: header (~50) + global meta row (~50) +
+     * project toolbar (~50) + canvas toolbar buttons (~32) + padding/gaps (~58). */
+    max-width: min(700px, calc(100vh - 240px));
+    max-height: calc(100vh - 240px);
 }
 /* When the toggle is active, give the button a tinted background so the
  * user can see at a glance which mode is active. */
