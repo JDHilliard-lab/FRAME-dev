@@ -888,15 +888,10 @@ async function loadBundledLibrary() {
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
 
 // Dashboard view-mode toggle. Switches between:
-//   Mode 1 (default): three-column — table | preview | form
-//   Mode 2: vertical stack on the left — table on top, preview below, with
-//           form on the right. Compact table acts as a frame selector while
-//           the preview takes the freed vertical space.
-//
-// Implementation: in Mode 2, the .preview-wrapper element gets moved out of
-// its default location (first child of .dash-right-pane) and appended to
-// .dash-left-pane so it sits below .table-container. Returning to Mode 1
-// moves it back. CSS handles the sizing and centering.
+//   Mode 1 (default): three columns — table (1.5x) | preview+form bundled on right
+//   Mode 2: same three-column arrangement BUT the table is narrowed and the
+//           preview-container grows wider. Layout stays side-by-side; CSS in
+//           style.css under `body.dash-view-2` handles the sizing.
 //
 // State persists in localStorage so colleagues with a preferred layout
 // don't have to re-toggle every session.
@@ -904,21 +899,23 @@ function applyDashViewMode(mode2) {
     document.body.classList.toggle('dash-view-2', mode2);
     const btn = document.getElementById('dashViewToggle');
     if (btn) btn.classList.toggle('active', mode2);
-    // Move the preview-wrapper between panes. Guards against repeated calls
-    // (e.g. multiple toggles) by only moving if it isn't already in the
-    // target parent.
+    // DOM move: in Mode 2, the preview-wrapper becomes a middle column
+    // (sibling of .dash-left-pane and .dash-right-pane). In Mode 1, it sits
+    // inside the right pane above the form (its original home).
     const preview = document.querySelector('.preview-wrapper');
+    const viewDashboard = document.getElementById('view-dashboard');
     const leftPane = document.querySelector('.dash-left-pane');
     const rightPane = document.querySelector('.dash-right-pane');
-    if (!preview || !leftPane || !rightPane) return;
+    if (!preview || !viewDashboard || !leftPane || !rightPane) return;
     if (mode2) {
-        // Move to bottom of left pane (after the table-container)
-        if (preview.parentElement !== leftPane) {
-            leftPane.appendChild(preview);
+        // Place preview-wrapper between the two panes as a sibling.
+        // insertBefore(preview, rightPane) puts it just before the right pane,
+        // which is exactly the middle position.
+        if (preview.parentElement !== viewDashboard) {
+            viewDashboard.insertBefore(preview, rightPane);
         }
     } else {
-        // Move back to top of right pane (it was the first child originally,
-        // so insertBefore the existing first child)
+        // Restore to first child of right pane (its original DOM position).
         if (preview.parentElement !== rightPane) {
             rightPane.insertBefore(preview, rightPane.firstChild);
         }
