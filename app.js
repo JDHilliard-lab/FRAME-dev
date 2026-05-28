@@ -887,20 +887,108 @@ async function loadBundledLibrary() {
 
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
 
-// Dashboard view-mode toggle. Switches between:
-//   Mode 1 (default): three columns — table (1.5x) | preview+form bundled on right
-//   Mode 2: same three-column arrangement BUT the table is narrowed and the
-//           preview-container grows wider. Layout stays side-by-side; CSS in
-//           style.css under `body.dash-view-2` handles the sizing.
+// ──────────────────────────────────────────────────────────────────────────
+// DASHBOARD VIEW MODE 2 (preview overlay with resizable container)
+// ──────────────────────────────────────────────────────────────────────────
+// Mode 2 floats the preview-wrapper as a fixed-positioned panel anchored to
+// the right side of the table area. The user can drag the LEFT edge of the
+// preview wider to see the frame in more detail. The container's aspect
+// ratio always matches the CURRENT frame's aspect — so a 12×12 frame shows
+// in a square container, a 31×12 frame shows in a wide rectangle, etc.
+// Empty space around the frame is minimized regardless of frame proportions.
 //
-// State persists in localStorage so colleagues with a preferred layout
-// don't have to re-toggle every session.
+// State persisted to localStorage:
+//   dashViewMode  — '1' or '2'
+//   dashPreviewSize — user-chosen "longest dimension" in px (e.g. 400)
+
+// User-controlled longest dimension for the Mode 2 preview container. The
+// actual container W/H are derived from this + the current frame aspect.
+let dashPreviewSize = 400;
+const DASH_PREVIEW_SIZE_MIN = 200;
+const DASH_PREVIEW_SIZE_DEFAULT = 400;
+
+// Compute the container W and H for Mode 2 given the frame's real dimensions.
+// Returns { w, h } in CSS pixels. The longer of the two dimensions equals the
+// user's preferred size; the shorter scales proportionally. Then both are
+// clamped to viewport-safe maxes so the preview never overflows the screen.
+function computeDashPreviewDims(extW, extH) {
+    const ew = Math.max(1, parseFloat(extW) || 1);
+    const eh = Math.max(1, parseFloat(extH) || 1);
+    const aspect = ew / eh;
+    let w, h;
+    if (aspect >= 1) {
+        // Landscape or square — width is the longer dimension
+        w = dashPreviewSize;
+        h = dashPreviewSize / aspect;
+    } else {
+        // Portrait — height is the longer dimension
+        h = dashPreviewSize;
+        w = dashPreviewSize * aspect;
+    }
+    // Viewport-safe clamps. The preview panel has 20px padding around
+    // the container + ~50px for the canvas toolbar below it = ~90px chrome.
+    // Plus the panel sits at top:156 and the right edge is 460px from
+    // viewport right (form pane room).
+    const vpW = window.innerWidth;
+    const vpH = window.innerHeight;
+    const maxW = vpW - 460 - 40 - 40; // form pane + left margin + panel padding
+    const maxH = vpH - 156 - 20 - 50 - 40; // top + bottom margin + toolbar + padding
+    if (w > maxW) {
+        const k = maxW / w;
+        w *= k; h *= k;
+    }
+    if (h > maxH) {
+        const k = maxH / h;
+        w *= k; h *= k;
+    }
+    return { w: Math.max(50, Math.round(w)), h: Math.max(50, Math.round(h)) };
+}
+
+// Apply the computed dims to the preview container's inline style. Only
+// has effect when Mode 2 is active (CSS for Mode 1 keeps its own sizing).
+// Called from updateDashVisualsFromDOM whenever the frame is re-rendered,
+// and from the drag handler during a resize.
+function updateDashPreviewContainerSize() {
+    if (!document.body.classList.contains('dash-view-2')) return;
+    const data = dashProjectData[dashSelectedRowIndex];
+    if (!data) return;
+    const container = document.querySelector('.preview-container');
+    if (!container) return;
+    const dims = computeDashPreviewDims(data.extW, data.extH);
+    container.style.width = dims.w + 'px';
+    container.style.height = dims.h + 'px';
+    container.style.aspectRatio = 'auto';   // override the 1/1 default
+    container.style.maxWidth = 'none';
+    container.style.maxHeight = 'none';
+}
+
 function applyDashViewMode(mode2) {
     document.body.classList.toggle('dash-view-2', mode2);
     const btn = document.getElementById('dashViewToggle');
     if (btn) btn.classList.toggle('active', mode2);
-    // Re-render the preview after the layout shifts (CSS positioning change)
-    // so the frame visual sizes itself to the new container dimensions.
+    if (mode2) {
+        // Restore the saved size before first render so the container is
+        // correct on entry.
+        try {
+            const saved = parseFloat(localStorage.getItem('dashPreviewSize'));
+            if (!isNaN(saved) && saved >= DASH_PREVIEW_SIZE_MIN) {
+                dashPreviewSize = saved;
+            }
+        } catch (e) { /* ignore */ }
+    } else {
+        // Returning to Mode 1: clear the inline style so the CSS-driven
+        // 1/1 aspect + 320px max applies again.
+        const container = document.querySelector('.preview-container');
+        if (container) {
+            container.style.width = '';
+            container.style.height = '';
+            container.style.aspectRatio = '';
+            container.style.maxWidth = '';
+            container.style.maxHeight = '';
+        }
+    }
+    // Re-render the preview after the layout shifts so the frame visual
+    // sizes itself to the new container dimensions.
     if (typeof updateDashVisualsFromDOM === 'function') {
         requestAnimationFrame(() => updateDashVisualsFromDOM());
     }
@@ -918,25 +1006,108 @@ function toggleDashView() {
 // existing init flow alongside theme restoration.
 function initDashViewMode() {
     try {
+        const savedSize = parseFloat(localStorage.getItem('dashPreviewSize'));
+        if (!isNaN(savedSize) && savedSize >= DASH_PREVIEW_SIZE_MIN) {
+            dashPreviewSize = savedSize;
+        }
         const saved = localStorage.getItem('dashViewMode');
         if (saved === '2') {
             applyDashViewMode(true);
         }
     } catch (e) {
-        // Ignore — start in default Mode 1
+        // Ignore — start in default Mode 1 at default size
     }
+    // Wire up the drag handle for Mode 2 resize. Runs once on first load.
+    setupDashPreviewDragHandle();
+}
+
+// Wire up the left-edge drag handle that lets the user resize the Mode 2
+// preview. The handle is a CSS pseudo-element on .preview-wrapper but we
+// attach the actual drag handlers to the wrapper itself, gated to only
+// react when the mousedown is in the leftmost 10px (the handle region).
+//
+// During drag we update dashPreviewSize based on cursor movement, then call
+// updateDashPreviewContainerSize to apply, then re-render the frame visual
+// so it scales with the new container size. Persist on mouseup.
+function setupDashPreviewDragHandle() {
+    const wrapper = document.querySelector('.preview-wrapper');
+    if (!wrapper) return;
+    if (wrapper.dataset.dragWired) return; // idempotent
+    wrapper.dataset.dragWired = '1';
+    const HANDLE_WIDTH = 10;  // leftmost N pixels react as a drag handle
+    let dragState = null;     // { startX, startSize } when actively dragging
+
+    // Hover state: only show resize cursor when in Mode 2 AND mouse is over
+    // the leftmost N pixels. Pure JS (vs CSS) so we don't need to add a
+    // separate handle element.
+    wrapper.addEventListener('mousemove', (e) => {
+        if (!document.body.classList.contains('dash-view-2')) return;
+        if (dragState) return; // cursor is locked during active drag
+        const rect = wrapper.getBoundingClientRect();
+        const onHandle = (e.clientX - rect.left) < HANDLE_WIDTH;
+        wrapper.style.cursor = onHandle ? 'ew-resize' : '';
+    });
+    wrapper.addEventListener('mouseleave', () => {
+        if (!dragState) wrapper.style.cursor = '';
+    });
+
+    wrapper.addEventListener('mousedown', (e) => {
+        if (!document.body.classList.contains('dash-view-2')) return;
+        const rect = wrapper.getBoundingClientRect();
+        const inHandle = (e.clientX - rect.left) < HANDLE_WIDTH;
+        if (!inHandle) return;
+        e.preventDefault();
+        e.stopPropagation();
+        dragState = { startX: e.clientX, startSize: dashPreviewSize };
+        document.body.style.cursor = 'ew-resize';
+        document.body.style.userSelect = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!dragState) return;
+        // Dragging LEFT (negative delta from start) GROWS the container.
+        // Dragging RIGHT shrinks it.
+        const delta = dragState.startX - e.clientX;
+        let newSize = dragState.startSize + delta;
+        if (newSize < DASH_PREVIEW_SIZE_MIN) newSize = DASH_PREVIEW_SIZE_MIN;
+        // Soft cap based on viewport so the container can't grow off-screen.
+        // computeDashPreviewDims also clamps, but capping `size` here gives
+        // smoother visual feedback (cursor matches the actual edge).
+        const vpW = window.innerWidth;
+        const vpH = window.innerHeight;
+        const maxByW = vpW - 460 - 80;
+        const maxByH = vpH - 256;
+        const maxSize = Math.max(DASH_PREVIEW_SIZE_MIN, Math.min(maxByW, maxByH));
+        if (newSize > maxSize) newSize = maxSize;
+        dashPreviewSize = newSize;
+        updateDashPreviewContainerSize();
+        if (typeof updateDashVisualsFromDOM === 'function') {
+            updateDashVisualsFromDOM();
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (!dragState) return;
+        dragState = null;
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+        // Persist the chosen size
+        try {
+            localStorage.setItem('dashPreviewSize', String(dashPreviewSize));
+        } catch (e) { /* ignore */ }
+    });
 }
 
 // Re-render the preview when the window resizes. The frame visual is sized
-// from the preview-container's actual dimensions (since the v3 change to
-// container-aware ratio), so a window resize needs to trigger a redraw to
-// avoid the frame appearing too small or clipped. Debounced to avoid
-// hammering the renderer during a drag-resize.
+// from the preview-container's actual dimensions, so a window resize needs
+// to trigger a redraw + size recalculation (so Mode 2's viewport-bound
+// clamps stay valid). Debounced to avoid hammering the renderer.
 (function setupDashResizeListener() {
     let resizeTimer = null;
     window.addEventListener('resize', () => {
         if (resizeTimer) clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
+            updateDashPreviewContainerSize();
             if (typeof updateDashVisualsFromDOM === 'function') {
                 updateDashVisualsFromDOM();
             }
@@ -2495,20 +2666,22 @@ function updateDashVisualsFromDOM() {
     document.getElementById('printFileDisplay').innerText = `${dashFmt(printW)} x ${dashFmt(printH)}`;
 
     // Frame visual ratio: how many CSS pixels per "real" inch.
-    // Sized to the actual preview-container so the frame fills the available
-    // space (Mode 1: ~320px container, Mode 2: much larger). The 0.92 factor
-    // leaves a small margin of breathing room around the frame.
-    // Fallback to 300 if the container can't be measured (rare; safe default).
+    // In Mode 2, the preview-container's aspect ratio is set to match the
+    // current frame's aspect (via updateDashPreviewContainerSize), so the
+    // frame fits with minimal empty space. We compute ratio as the minimum
+    // of (container_w / frame_w) and (container_h / frame_h), times 0.95
+    // for a small breathing margin. This works for any container shape.
+    updateDashPreviewContainerSize();
     const previewContainer = document.querySelector('.preview-container');
-    let containerSize = 300;
+    let ratio = 300 / Math.max(data.extW, data.extH); // fallback
     if (previewContainer) {
         const r = previewContainer.getBoundingClientRect();
-        // Use the smaller dimension since the container is square (aspect-ratio:1/1).
-        // Guard against zero (can happen during initial layout).
-        const d = Math.min(r.width, r.height);
-        if (d > 50) containerSize = d * 0.92;
+        if (r.width > 50 && r.height > 50) {
+            const rByW = r.width / data.extW;
+            const rByH = r.height / data.extH;
+            ratio = Math.min(rByW, rByH) * 0.95;
+        }
     }
-    const ratio = containerSize / Math.max(data.extW, data.extH);
     
     fVis.innerHTML = ''; 
     fVis.style.width = (data.extW * ratio) + "px"; fVis.style.height = (data.extH * ratio) + "px";
