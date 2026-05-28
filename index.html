@@ -32,6 +32,22 @@
             <button class="action-btn btn-secondary" style="width:auto;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
+            <!-- Dashboard view-mode toggle. Switches between:
+                 Mode 1 (default): three-pane layout — CSV table on left, preview
+                   in middle, form on right.
+                 Mode 2: CSV table hidden; preview + form fill the screen, with
+                   the preview taking the freed-up horizontal space on the left.
+                 State persists in localStorage as 'dashViewMode'. Icon = a
+                 larger square containing two stacked squares, visually hinting
+                 at layout reflow. Only affects the Frame Dashboard view —
+                 Elevation tabs are unchanged. -->
+            <button id="dashViewToggle" class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;" onclick="toggleDashView()" title="Toggle Dashboard view layout">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
+                    <rect x="3" y="3" width="18" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <rect x="7" y="6.5" width="10" height="4" rx="0.5" fill="currentColor" stroke="none"/>
+                    <rect x="7" y="13.5" width="10" height="4" rx="0.5" fill="currentColor" stroke="none"/>
+                </svg>
+            </button>
             <!-- Help button. Opens a modal with tabs: a tutorial video (placeholder
                  until a URL is plugged in) and a Reference section explaining
                  every feature. Lives next to the theme toggle so help is always
