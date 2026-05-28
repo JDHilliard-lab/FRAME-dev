@@ -594,10 +594,12 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         pushHistory();
         renderVersionPill();
+        initDashViewMode();
     });
 } else {
     pushHistory();
     renderVersionPill();
+    initDashViewMode();
 }
 // ─────────────────────────────────────────────────────────────────────
 // END UNDO / REDO HISTORY SYSTEM
@@ -884,6 +886,69 @@ async function loadBundledLibrary() {
 }
 
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
+
+// Dashboard view-mode toggle. Switches between:
+//   Mode 1 (default): three-column — table | preview | form
+//   Mode 2: vertical stack on the left — table on top, preview below, with
+//           form on the right. Compact table acts as a frame selector while
+//           the preview takes the freed vertical space.
+//
+// Implementation: in Mode 2, the .preview-wrapper element gets moved out of
+// its default location (first child of .dash-right-pane) and appended to
+// .dash-left-pane so it sits below .table-container. Returning to Mode 1
+// moves it back. CSS handles the sizing and centering.
+//
+// State persists in localStorage so colleagues with a preferred layout
+// don't have to re-toggle every session.
+function applyDashViewMode(mode2) {
+    document.body.classList.toggle('dash-view-2', mode2);
+    const btn = document.getElementById('dashViewToggle');
+    if (btn) btn.classList.toggle('active', mode2);
+    // Move the preview-wrapper between panes. Guards against repeated calls
+    // (e.g. multiple toggles) by only moving if it isn't already in the
+    // target parent.
+    const preview = document.querySelector('.preview-wrapper');
+    const leftPane = document.querySelector('.dash-left-pane');
+    const rightPane = document.querySelector('.dash-right-pane');
+    if (!preview || !leftPane || !rightPane) return;
+    if (mode2) {
+        // Move to bottom of left pane (after the table-container)
+        if (preview.parentElement !== leftPane) {
+            leftPane.appendChild(preview);
+        }
+    } else {
+        // Move back to top of right pane (it was the first child originally,
+        // so insertBefore the existing first child)
+        if (preview.parentElement !== rightPane) {
+            rightPane.insertBefore(preview, rightPane.firstChild);
+        }
+    }
+    // Re-render the preview after layout shift so it fits its new container
+    if (typeof updateDashVisualsFromDOM === 'function') {
+        requestAnimationFrame(() => updateDashVisualsFromDOM());
+    }
+}
+
+function toggleDashView() {
+    const wasMode2 = document.body.classList.contains('dash-view-2');
+    applyDashViewMode(!wasMode2);
+    try {
+        localStorage.setItem('dashViewMode', !wasMode2 ? '2' : '1');
+    } catch (e) { /* private mode — skip persistence */ }
+}
+
+// Restore the saved dashboard view mode on page load. Called from the
+// existing init flow alongside theme restoration.
+function initDashViewMode() {
+    try {
+        const saved = localStorage.getItem('dashViewMode');
+        if (saved === '2') {
+            applyDashViewMode(true);
+        }
+    } catch (e) {
+        // Ignore — start in default Mode 1
+    }
+}
 
 function renderNavTabs() {
     const container = document.getElementById('nav-tabs-container');
