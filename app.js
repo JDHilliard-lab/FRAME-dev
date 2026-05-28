@@ -899,28 +899,8 @@ function applyDashViewMode(mode2) {
     document.body.classList.toggle('dash-view-2', mode2);
     const btn = document.getElementById('dashViewToggle');
     if (btn) btn.classList.toggle('active', mode2);
-    // DOM move: in Mode 2, the preview-wrapper becomes a middle column
-    // (sibling of .dash-left-pane and .dash-right-pane). In Mode 1, it sits
-    // inside the right pane above the form (its original home).
-    const preview = document.querySelector('.preview-wrapper');
-    const viewDashboard = document.getElementById('view-dashboard');
-    const leftPane = document.querySelector('.dash-left-pane');
-    const rightPane = document.querySelector('.dash-right-pane');
-    if (!preview || !viewDashboard || !leftPane || !rightPane) return;
-    if (mode2) {
-        // Place preview-wrapper between the two panes as a sibling.
-        // insertBefore(preview, rightPane) puts it just before the right pane,
-        // which is exactly the middle position.
-        if (preview.parentElement !== viewDashboard) {
-            viewDashboard.insertBefore(preview, rightPane);
-        }
-    } else {
-        // Restore to first child of right pane (its original DOM position).
-        if (preview.parentElement !== rightPane) {
-            rightPane.insertBefore(preview, rightPane.firstChild);
-        }
-    }
-    // Re-render the preview after layout shift so it fits its new container
+    // Re-render the preview after the layout shifts (CSS positioning change)
+    // so the frame visual sizes itself to the new container dimensions.
     if (typeof updateDashVisualsFromDOM === 'function') {
         requestAnimationFrame(() => updateDashVisualsFromDOM());
     }
@@ -946,6 +926,23 @@ function initDashViewMode() {
         // Ignore — start in default Mode 1
     }
 }
+
+// Re-render the preview when the window resizes. The frame visual is sized
+// from the preview-container's actual dimensions (since the v3 change to
+// container-aware ratio), so a window resize needs to trigger a redraw to
+// avoid the frame appearing too small or clipped. Debounced to avoid
+// hammering the renderer during a drag-resize.
+(function setupDashResizeListener() {
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (typeof updateDashVisualsFromDOM === 'function') {
+                updateDashVisualsFromDOM();
+            }
+        }, 200);
+    });
+})();
 
 function renderNavTabs() {
     const container = document.getElementById('nav-tabs-container');
@@ -2497,7 +2494,21 @@ function updateDashVisualsFromDOM() {
     }
     document.getElementById('printFileDisplay').innerText = `${dashFmt(printW)} x ${dashFmt(printH)}`;
 
-    const ratio = 300 / Math.max(data.extW, data.extH); 
+    // Frame visual ratio: how many CSS pixels per "real" inch.
+    // Sized to the actual preview-container so the frame fills the available
+    // space (Mode 1: ~320px container, Mode 2: much larger). The 0.92 factor
+    // leaves a small margin of breathing room around the frame.
+    // Fallback to 300 if the container can't be measured (rare; safe default).
+    const previewContainer = document.querySelector('.preview-container');
+    let containerSize = 300;
+    if (previewContainer) {
+        const r = previewContainer.getBoundingClientRect();
+        // Use the smaller dimension since the container is square (aspect-ratio:1/1).
+        // Guard against zero (can happen during initial layout).
+        const d = Math.min(r.width, r.height);
+        if (d > 50) containerSize = d * 0.92;
+    }
+    const ratio = containerSize / Math.max(data.extW, data.extH);
     
     fVis.innerHTML = ''; 
     fVis.style.width = (data.extW * ratio) + "px"; fVis.style.height = (data.extH * ratio) + "px";
