@@ -1080,6 +1080,64 @@ let dashPreviewSize = 400;
 const DASH_PREVIEW_SIZE_MIN = 200;
 const DASH_PREVIEW_SIZE_DEFAULT = 400;
 
+// ──────────────────────────────────────────────────────────────────────────
+// OUTER SHADOW TOGGLE
+// ──────────────────────────────────────────────────────────────────────────
+// Global flag: when false, all OUTER drop shadows (frame casting onto the
+// wall) are suppressed in the preview, PNG export, and elevation views.
+// This addresses the workflow problem of dropping exported PNGs into
+// InDesign boxes where the drop shadow shows up as unwanted bleed area
+// outside the frame.
+//
+// INNER shadows (frame casting onto mat 1, mat 1 onto mat 2, etc.) are
+// NOT affected by this toggle — they describe real physical depth and are
+// always rendered. They also get a global ~25% bump in intensity to keep
+// the frame visually grounded when outer shadows are off.
+let dashOuterShadowsOn = true;
+
+// Re-render everything that uses shadows after a toggle change. The CSS
+// classes drive the live preview (via .no-outer-shadows on body), but the
+// PNG renderer and elevation rendering need explicit re-rendering since
+// their shadow values are baked into the draw calls.
+function applyOuterShadowsState(on) {
+    dashOuterShadowsOn = !!on;
+    document.body.classList.toggle('no-outer-shadows', !on);
+    const btn = document.getElementById('outerShadowToggle');
+    if (btn) btn.classList.toggle('active', !on); // button "active" = shadow OFF state
+    // Re-render the dashboard preview (CSS box-shadow on .frame-vis updates
+    // via the class, but the float-mount paper shadow is inline-style so we
+    // also need to re-run updateDashVisualsFromDOM).
+    if (typeof updateDashVisualsFromDOM === 'function') {
+        updateDashVisualsFromDOM();
+    }
+    // Re-render any open elevation view.
+    if (typeof drawElevAll === 'function' && typeof elevations !== 'undefined' && elevations.length > 0) {
+        drawElevAll();
+    }
+}
+
+function toggleOuterShadows() {
+    applyOuterShadowsState(!dashOuterShadowsOn);
+    try {
+        localStorage.setItem('dashOuterShadowsOn', dashOuterShadowsOn ? '1' : '0');
+    } catch (e) { /* private mode — skip persistence */ }
+}
+
+function initOuterShadowsToggle() {
+    try {
+        const saved = localStorage.getItem('dashOuterShadowsOn');
+        if (saved === '0') {
+            // Apply the OFF state. Don't call applyOuterShadowsState until DOM
+            // is ready — set the class directly now, defer render to first
+            // updateDashVisualsFromDOM call.
+            dashOuterShadowsOn = false;
+            document.body.classList.add('no-outer-shadows');
+            const btn = document.getElementById('outerShadowToggle');
+            if (btn) btn.classList.add('active');
+        }
+    } catch (e) { /* ignore */ }
+}
+
 // Compute the container W and H for Mode 2 given the frame's real dimensions.
 // Returns { w, h } in CSS pixels. The longer of the two dimensions equals the
 // user's preferred size; the shorter scales proportionally. Then both are
@@ -1192,6 +1250,8 @@ function initDashViewMode() {
     }
     // Wire up the drag handle for Mode 2 resize. Runs once on first load.
     setupDashPreviewDragHandle();
+    // Restore the outer-shadow toggle state (default ON).
+    initOuterShadowsToggle();
 }
 
 // Wire up the left-edge drag handle that lets the user resize the Mode 2
@@ -2885,7 +2945,10 @@ function updateDashVisualsFromDOM() {
         fVis.className = 'frame-vis';
         fVis.style.border = 'none';
         fVis.style.background = 'transparent';
-        fVis.style.boxShadow = '0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)';
+        // Outer shadow gated by dashOuterShadowsOn.
+        fVis.style.boxShadow = dashOuterShadowsOn
+            ? '0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)'
+            : 'none';
     } else if (data.fType === 'color') {
         fVis.className = 'frame-vis frame-vis-solid';
         fVis.style.border = `${effFw_dash * ratio}px solid ${data.fColor}`;
@@ -2980,7 +3043,7 @@ function updateDashVisualsFromDOM() {
         const isTorn = (data.sbPaperEdge || 'clean') === 'torn';
         // Torn edge gets a dashed border in the preview as a visual hint; the export
         // does the actual irregular outline via the canvas renderer.
-        paperVis.style.cssText = `position:absolute; top:${paperY}px; left:${paperX}px; width:${paperW}px; height:${paperH}px; background:${paperColor}; box-shadow: 2px 4px 12px rgba(0,0,0,0.45); ${isTorn ? 'border:1px dashed rgba(0,0,0,0.4); border-radius:2px;' : ''} pointer-events:none;`;
+        paperVis.style.cssText = `position:absolute; top:${paperY}px; left:${paperX}px; width:${paperW}px; height:${paperH}px; background:${paperColor}; box-shadow: 2px 4px 12px rgba(0,0,0,0.56); ${isTorn ? 'border:1px dashed rgba(0,0,0,0.4); border-radius:2px;' : ''} pointer-events:none;`;
         fVis.appendChild(paperVis);
     }
     
@@ -4333,10 +4396,15 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         c.height = h + (pad * 2);
         const x = c.getContext('2d');
         x.translate(pad, pad);
-        // Outer drop shadow (matches the floater's ambient shadow strength)
-        x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 35; x.shadowOffsetY = 18;
-        x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
-        x.shadowColor = 'transparent';
+        // Outer drop shadow (matches the floater's ambient shadow strength).
+        // Gated on the global toggle — when off, no outer shadow is painted,
+        // resulting in a cleaner PNG for compositing in InDesign without an
+        // unwanted bleed halo around the frame.
+        if (dashOuterShadowsOn) {
+            x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 35; x.shadowOffsetY = 18;
+            x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
+            x.shadowColor = 'transparent';
+        }
         // Cut a transparent hole for the entire face — the artwork composited behind
         // shows through. No baked inner shadow (frameless canvas has no surrounding
         // material to project a shadow onto the artwork).
@@ -4362,10 +4430,18 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     x.translate(pad, pad);
 
     // Outer drop shadow under the whole frame — strong enough to read in elevation
-    // exports where the frame sits on a wall background.
-    x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 35; x.shadowOffsetY = 18;
-    x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
-    x.shadowColor = 'transparent';
+    // exports where the frame sits on a wall background. Gated on the global
+    // toggle — when off, no outer shadow is painted, giving cleaner PNGs for
+    // InDesign compositing without an unwanted bleed halo.
+    if (dashOuterShadowsOn) {
+        x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 35; x.shadowOffsetY = 18;
+        x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
+        x.shadowColor = 'transparent';
+    } else {
+        // Still paint the base frame rectangle so the rails / interior render
+        // correctly on top, just without the drop-shadow layer underneath.
+        x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
+    }
 
     // Shade a color toward black (negative pct) or white (positive pct).
     // pct is a fraction in [-1, 1]. Used by the color-mode 3D shading helpers
@@ -4460,9 +4536,15 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     // The stroke must lie entirely OUTSIDE the clip — if it touches the clip boundary
     // its anti-aliasing leaks across as a 1px black line. Stroke center at (bx-15, by-15)
     // with width 10 means the stroke spans (bx-20..bx-10) — fully outside (bx, by, bw, bh).
+    //
+    // op (opacity) gets multiplied by the global INNER_SHADOW_BOOST factor (~1.25)
+    // so all inner shadows render slightly darker than their original calibration.
+    // This makes the frame look properly "grounded" even when the outer drop
+    // shadow is off (user toggle). Clamped to 1.0 so we don't oversaturate.
     function dIS(bx, by, bw, bh, bl, os, op) {
+        const boostedOp = Math.min(1.0, op * 1.25);
         x.save(); x.beginPath(); x.rect(bx,by,bw,bh); x.clip();
-        x.shadowColor = `rgba(0,0,0,${op})`; x.shadowBlur = bl; x.shadowOffsetY = os;
+        x.shadowColor = `rgba(0,0,0,${boostedOp})`; x.shadowBlur = bl; x.shadowOffsetY = os;
         x.lineWidth = 10; x.strokeStyle = '#000'; x.strokeRect(bx-15, by-15, bw+30, bh+30);
         x.restore();
     }
@@ -4616,9 +4698,11 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         }
 
         // Drop shadow under the paper, projecting onto the backer.
+        // Inner shadow — boosted by ~25% to match other inner-shadow values
+        // (rgba opacity 0.55 * 1.25 = ~0.69, rounded to 0.7).
         // Use a separate save/restore so the shadow doesn't bleed onto subsequent draws.
         x.save();
-        x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 18; x.shadowOffsetX = 2; x.shadowOffsetY = 4;
+        x.shadowColor = 'rgba(0,0,0,0.7)'; x.shadowBlur = 18; x.shadowOffsetX = 2; x.shadowOffsetY = 4;
         x.fillStyle = paperColor;
         x.fill(paperPath);
         x.restore();
@@ -7515,25 +7599,36 @@ function drawElevAll() {
         const sbPaperBorderVal = useFM ? (parseFloat(f.sbPaperBorder) || 0) : 0;
         const effFw = f.fW;
 
+        // Outer drop-shadow strings (used by all three render branches below).
+        // Gated on dashOuterShadowsOn: when off, the shadow halo is suppressed
+        // so elevations match the toggle-off PNG export look.
+        const elevOuterShadow = dashOuterShadowsOn
+            ? `0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`
+            : 'none';
+
         if (isFrameless) {
             // Frameless canvas: no rails, no border. Just a drop shadow halo
             // around the canvas-face area to suggest depth on the wall.
             el.classList.add('frame-vis-solid');
             el.style.border = 'none';
             el.style.background = 'transparent';
-            el.style.boxShadow = `0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`;
+            el.style.boxShadow = elevOuterShadow;
         } else if (f.fType === 'color') {
             el.classList.add('frame-vis-solid');
             el.style.border = `${effFw * elevScale}px solid ${f.fColor || '#1a1a1a'}`;
             el.style.setProperty('--frame-color', f.fColor || '#1a1a1a');
-            // Outer drop shadow: deeper ambient + tighter contact shadow for clear lift
-            el.style.boxShadow = `0 0 0 1.5px ${f.fColor || '#1a1a1a'}, 0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`;
+            // Frame color outline (1.5px) is part of the frame visual, NOT an
+            // outer shadow, so it stays regardless of the toggle. Only the
+            // ambient/contact shadows are conditional.
+            el.style.boxShadow = dashOuterShadowsOn
+                ? `0 0 0 1.5px ${f.fColor || '#1a1a1a'}, 0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`
+                : `0 0 0 1.5px ${f.fColor || '#1a1a1a'}`;
         } else {
             el.classList.add('frame-vis-image');
             el.style.setProperty('--fW', (effFw * elevScale) + 'px');
             el.style.setProperty('--frame-W', (f.w * elevScale) + 'px');
             el.style.setProperty('--frame-bg', `url(${f.swatchDataUrl})`);
-            el.style.boxShadow = `0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`;
+            el.style.boxShadow = elevOuterShadow;
             const rails = ['top', 'bottom', 'left', 'right'];
             rails.forEach(pos => {
                 const rail = document.createElement('div'); rail.className = `frame-rail rail-${pos}`; rail.innerHTML = `<div class="rail-bg"></div>`; el.appendChild(rail);
