@@ -275,6 +275,19 @@ body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper .preview-cont
     border-color: var(--accent);
 }
 
+/* Outer-shadow toggle. Active (= shadows OFF) gets the same accent tint so
+ * the user can see at a glance that shadow suppression is on. */
+#outerShadowToggle.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+/* When shadows are OFF (active state), dim the "shadow trail" rect in the
+ * icon so the SVG visually mirrors the on/off state. */
+#outerShadowToggle.active svg rect[opacity] {
+    opacity: 0;
+}
+
 /* Dashboard Toolbar */
 .dash-toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; background: var(--bg-subpanel); padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); align-items: center; }
 .dash-toolbar > * { margin: 0; }
