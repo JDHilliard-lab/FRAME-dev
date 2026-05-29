@@ -803,7 +803,12 @@ function initMasterApp() {
     selectDashRow(0); 
     populateDashPushSelector();
     updateDimFontSize();
-    loadBundledLibrary(); // fetch library-manifest.json if present, populate dropdowns
+    loadBundledLibrary().then(() => {
+        // After the bundled library is loaded, restore any swatches the user
+        // previously uploaded. Saved entries override bundled ones with the
+        // same code, matching the precedence rule of live syncDashLibraryFolder.
+        restoreCustomLibraryFromStorage();
+    });
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -883,6 +888,174 @@ async function loadBundledLibrary() {
         // network error, parse error, etc. — non-fatal, app still works.
         console.warn('Bundled library manifest could not be loaded:', e);
     }
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// CUSTOM LIBRARY PERSISTENCE (localStorage)
+// ──────────────────────────────────────────────────────────────────────────
+// User-uploaded swatches (from the Sync Folder workflow) get auto-resized
+// to a max dimension and saved to localStorage so they persist across
+// browser sessions. The bundled GitHub library is unaffected — bundled
+// entries store URL paths (strings), not data URLs, so they're naturally
+// excluded from persistence (we serialise only data-URL entries).
+//
+// Size tradeoff: localStorage is ~5MB per domain. Resizing swatches to
+// 600px max keeps each one to ~50-100KB after base64 encoding, so users
+// can store ~50 swatches before hitting the limit.
+//
+// Override semantics: a saved entry with the same vendor/collection/code
+// as a bundled entry wins (matches the existing manual-sync behaviour).
+
+const CUSTOM_LIBRARY_STORAGE_KEY = 'dashCustomLibrary';
+const CUSTOM_LIBRARY_MAX_DIMENSION = 600; // px on the longest side
+const CUSTOM_LIBRARY_QUOTA_BYTES = 5 * 1024 * 1024; // 5MB conservative estimate
+
+// Resize a data URL to fit within maxSize on its longest dimension. Returns
+// the resized data URL via callback. Preserves aspect ratio. PNG output so
+// transparency is kept (frame swatches sometimes use transparent corners).
+// If the source is already smaller than maxSize, pass through unchanged.
+function resizeImageDataUrl(srcDataUrl, maxSize, callback) {
+    const img = new Image();
+    img.onload = () => {
+        const w = img.naturalWidth;
+        const h = img.naturalHeight;
+        if (w <= maxSize && h <= maxSize) {
+            // Already small enough — no resize needed
+            callback(srcDataUrl);
+            return;
+        }
+        const scale = maxSize / Math.max(w, h);
+        const newW = Math.round(w * scale);
+        const newH = Math.round(h * scale);
+        const c = document.createElement('canvas');
+        c.width = newW; c.height = newH;
+        const ctx = c.getContext('2d');
+        ctx.drawImage(img, 0, 0, newW, newH);
+        // PNG (lossless) preserves transparency in frame swatches. The size
+        // saving comes from the dimension reduction, not lossy compression.
+        callback(c.toDataURL('image/png'));
+    };
+    img.onerror = () => callback(srcDataUrl); // fall back to original on error
+    img.src = srcDataUrl;
+}
+
+// Serialise every user-uploaded swatch to localStorage. We walk the
+// dashLocalLibrary structure and only persist entries whose `file` is a
+// data URL string (which is the format manually uploaded swatches use after
+// being read by FileReader.readAsDataURL). Bundled entries have URL paths
+// like "library/vendor/collection/file.png" and are NOT data URLs, so they
+// pass through this filter naturally.
+function saveCustomLibraryToStorage() {
+    try {
+        const customEntries = [];
+        Object.keys(dashLocalLibrary).forEach(vendor => {
+            Object.keys(dashLocalLibrary[vendor]).forEach(collection => {
+                dashLocalLibrary[vendor][collection].forEach(entry => {
+                    // file may be a File object, a URL string (bundled), or a
+                    // data URL string (manually uploaded + resized). We only
+                    // persist data URLs.
+                    if (typeof entry.file === 'string' && entry.file.startsWith('data:')) {
+                        const persisted = {
+                            vendor, collection,
+                            code: entry.code,
+                            width: entry.width,
+                            file: entry.file,
+                        };
+                        if (entry.faceWidth !== undefined) persisted.faceWidth = entry.faceWidth;
+                        if (entry.depth !== undefined) persisted.depth = entry.depth;
+                        if (entry.rabbet !== undefined) persisted.rabbet = entry.rabbet;
+                        customEntries.push(persisted);
+                    }
+                });
+            });
+        });
+        const serialized = JSON.stringify(customEntries);
+        localStorage.setItem(CUSTOM_LIBRARY_STORAGE_KEY, serialized);
+        return { ok: true, count: customEntries.length, bytes: serialized.length };
+    } catch (err) {
+        // Most likely cause: QuotaExceededError. Don't blow up — return the
+        // failure so the caller can surface a friendly message.
+        return { ok: false, error: err.message || String(err) };
+    }
+}
+
+// Restore previously-saved swatches into dashLocalLibrary. Called once on
+// startup AFTER loadBundledLibrary completes. A saved entry overrides a
+// bundled entry with the same vendor/collection/code (same precedence rule
+// as the live syncDashLibraryFolder workflow). After hydration, refreshes
+// the vendor dropdown so the user immediately sees their library.
+function restoreCustomLibraryFromStorage() {
+    try {
+        const raw = localStorage.getItem(CUSTOM_LIBRARY_STORAGE_KEY);
+        if (!raw) return;
+        const entries = JSON.parse(raw);
+        if (!Array.isArray(entries) || entries.length === 0) return;
+        entries.forEach(e => {
+            if (!e.vendor || !e.collection || !e.code || !e.file) return;
+            if (!dashLocalLibrary[e.vendor]) dashLocalLibrary[e.vendor] = {};
+            if (!dashLocalLibrary[e.vendor][e.collection]) dashLocalLibrary[e.vendor][e.collection] = [];
+            const arr = dashLocalLibrary[e.vendor][e.collection];
+            const existing = arr.find(x => x.code === e.code);
+            const entry = {
+                code: e.code,
+                width: e.width,
+                file: e.file, // data URL
+            };
+            if (e.faceWidth !== undefined) entry.faceWidth = e.faceWidth;
+            if (e.depth !== undefined) entry.depth = e.depth;
+            if (e.rabbet !== undefined) entry.rabbet = e.rabbet;
+            if (existing) {
+                // Saved entry overrides bundled (matches sync-folder behaviour)
+                Object.assign(existing, entry);
+            } else {
+                arr.push(entry);
+            }
+        });
+        populateDashVendorDropdown();
+    } catch (err) {
+        // Corrupted JSON or unexpected error — non-fatal. User still gets the
+        // bundled library, just loses their previous personal swatches.
+        console.warn('Could not restore custom library from storage:', err);
+    }
+}
+
+// Return stats about persisted library size for the UI indicator.
+function getCustomLibraryStorageStats() {
+    try {
+        const raw = localStorage.getItem(CUSTOM_LIBRARY_STORAGE_KEY) || '';
+        const bytes = raw.length; // approximate; UTF-16 internally but base64 is ASCII
+        const entries = raw ? JSON.parse(raw) : [];
+        const count = Array.isArray(entries) ? entries.length : 0;
+        const pct = Math.round((bytes / CUSTOM_LIBRARY_QUOTA_BYTES) * 100);
+        return { count, bytes, percentOfLimit: pct };
+    } catch (e) {
+        return { count: 0, bytes: 0, percentOfLimit: 0 };
+    }
+}
+
+// Wipe all persisted custom swatches and remove them from the in-memory
+// library. Used by the "Clear my swatches" UI affordance.
+function clearCustomLibrary() {
+    try {
+        localStorage.removeItem(CUSTOM_LIBRARY_STORAGE_KEY);
+    } catch (e) { /* ignore */ }
+    // Remove all data-URL-backed entries from dashLocalLibrary in memory.
+    Object.keys(dashLocalLibrary).forEach(vendor => {
+        Object.keys(dashLocalLibrary[vendor]).forEach(collection => {
+            dashLocalLibrary[vendor][collection] = dashLocalLibrary[vendor][collection].filter(
+                e => !(typeof e.file === 'string' && e.file.startsWith('data:'))
+            );
+            // Clean up empty collections
+            if (dashLocalLibrary[vendor][collection].length === 0) {
+                delete dashLocalLibrary[vendor][collection];
+            }
+        });
+        // Clean up empty vendors
+        if (Object.keys(dashLocalLibrary[vendor]).length === 0) {
+            delete dashLocalLibrary[vendor];
+        }
+    });
+    populateDashVendorDropdown();
 }
 
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
@@ -3538,45 +3711,89 @@ function syncDashLibraryFolder(e, getPath) {
     if(!f || f.length === 0) return;
     // Note: we MERGE into dashLocalLibrary instead of wiping it, so the bundled
     // library stays available alongside whatever the user is syncing in.
+    //
+    // Each swatch goes through: FileReader (file → data URL) → resize to
+    // CUSTOM_LIBRARY_MAX_DIMENSION → store as a data URL string in entry.file.
+    // After all files finish, persist to localStorage so the swatches survive
+    // browser sessions. The FileReader / resize step is async, so we count
+    // completed files and only finalize once all are done.
     let c = 0;
-    
+    let pendingFiles = 0;
+    let processedFiles = 0;
+
+    const finalize = () => {
+        // Persist all data-URL entries to localStorage. Show the result modal
+        // here (after the saveSync) so the user gets accurate feedback about
+        // both swatches synced AND storage state.
+        const result = saveCustomLibraryToStorage();
+        populateDashVendorDropdown();
+        closeLibrarySyncModal();
+        if (result.ok) {
+            const stats = getCustomLibraryStorageStats();
+            showInfoModal('Library Synced',
+                `Synced ${c} swatches from your local folder.\n\n` +
+                `Persisted ${stats.count} custom swatches to browser storage (${stats.percentOfLimit}% of limit used).\n\n` +
+                `These will reload automatically next time you open the tool.`);
+        } else {
+            showInfoModal('Storage Limit Reached',
+                `Synced ${c} swatches into memory, but couldn't save them all to browser storage:\n\n${result.error}\n\n` +
+                `Try removing some custom swatches via Clear, or push your swatches to the GitHub library for permanent storage.`);
+        }
+    };
+
     for(let file of f) {
         const ext = file.name.split('.').pop().toLowerCase();
         const isImage = file.type.startsWith('image/') || ['jpg', 'jpeg', 'png', 'webp', 'svg'].includes(ext);
         if(!isImage) continue;
-        
+
         const relPath = getPath ? getPath(file) : file.webkitRelativePath;
         const parts = relPath.split('/');
-        const filename = parts[parts.length - 1]; 
+        const filename = parts[parts.length - 1];
         const vendor = parts.length > 2 ? parts[parts.length - 3] : (parts.length > 1 ? parts[parts.length - 2] : parts[0]);
         const collection = parts.length > 2 ? parts[parts.length - 2] : "General";
-        
+
         const parsed = parseSwatchFilename(filename);
         const code = parsed.code;
         const w = parsed.width;
-        
+
         if(!dashLocalLibrary[vendor]) dashLocalLibrary[vendor] = {};
         if(!dashLocalLibrary[vendor][collection]) dashLocalLibrary[vendor][collection] = [];
-        // Avoid pushing a duplicate of an existing bundled entry with the same code
-        const existing = dashLocalLibrary[vendor][collection].find(x => x.code === code);
-        const entry = { code, width: w, file };
-        if (parsed.faceWidth !== undefined) entry.faceWidth = parsed.faceWidth;
-        if (parsed.depth !== undefined) entry.depth = parsed.depth;
-        if (parsed.rabbet !== undefined) entry.rabbet = parsed.rabbet;
-        if (existing) {
-            // user's manual sync overrides bundled entry
-            existing.file = file; existing.width = w;
-            if (parsed.faceWidth !== undefined) existing.faceWidth = parsed.faceWidth;
-            if (parsed.depth !== undefined) existing.depth = parsed.depth;
-            if (parsed.rabbet !== undefined) existing.rabbet = parsed.rabbet;
-        } else {
-            dashLocalLibrary[vendor][collection].push(entry);
-        }
+
         c++;
+        pendingFiles++;
+
+        // Read file → resize → store as data URL. We close over the parsed
+        // metadata + position so each callback knows where to put its result.
+        const reader = new FileReader();
+        // eslint-disable-next-line no-loop-func -- closures intentional here
+        reader.onload = (ev) => {
+            resizeImageDataUrl(ev.target.result, CUSTOM_LIBRARY_MAX_DIMENSION, (resizedDataUrl) => {
+                const existing = dashLocalLibrary[vendor][collection].find(x => x.code === code);
+                const entry = { code, width: w, file: resizedDataUrl };
+                if (parsed.faceWidth !== undefined) entry.faceWidth = parsed.faceWidth;
+                if (parsed.depth !== undefined) entry.depth = parsed.depth;
+                if (parsed.rabbet !== undefined) entry.rabbet = parsed.rabbet;
+                if (existing) {
+                    Object.assign(existing, entry);
+                } else {
+                    dashLocalLibrary[vendor][collection].push(entry);
+                }
+                processedFiles++;
+                if (processedFiles === pendingFiles) finalize();
+            });
+        };
+        reader.onerror = () => {
+            processedFiles++;
+            if (processedFiles === pendingFiles) finalize();
+        };
+        reader.readAsDataURL(file);
     }
-    populateDashVendorDropdown();
-    closeLibrarySyncModal();
-    showInfoModal('Library Synced', `Synced ${c} swatches from your local folder.`);
+
+    // Edge case: no valid images at all (counter never increments)
+    if (pendingFiles === 0) {
+        closeLibrarySyncModal();
+        showInfoModal('No images found', 'The folder contained no image files.');
+    }
 }
 
 // =====================================================================
@@ -3593,6 +3810,58 @@ function openLibrarySyncModal() {
     const zone = document.getElementById('libraryDropZone');
     zone.classList.remove('drag-over', 'processing');
     document.getElementById('libraryDropZoneText').innerText = 'Drop folder here';
+    // Refresh the storage indicator each time the modal opens — counts/bytes
+    // are live so the user always sees current state.
+    refreshLibraryStorageStatus();
+    // Reset the clear button to its idle label (in case it was in
+    // confirm-armed state from a previous open).
+    const clearBtn = document.getElementById('libraryClearBtn');
+    if (clearBtn) {
+        clearBtn.textContent = 'Clear My Saved Swatches';
+        clearBtn.dataset.confirmArmed = '0';
+    }
+}
+
+// Populate the saved-swatches status row inside the sync modal. Called on
+// modal open and after every sync. Reads stats directly from localStorage
+// so the numbers are always live.
+function refreshLibraryStorageStatus() {
+    const el = document.getElementById('libraryStorageStatus');
+    if (!el) return;
+    const stats = getCustomLibraryStorageStats();
+    if (stats.count === 0) {
+        el.innerHTML = '<strong>No saved swatches yet.</strong> Swatches you sync here will persist in your browser for next time.';
+        return;
+    }
+    const kb = (stats.bytes / 1024).toFixed(0);
+    el.innerHTML =
+        `<strong>${stats.count} swatch${stats.count === 1 ? '' : 'es'} saved</strong> in your browser ` +
+        `(${kb} KB, ${stats.percentOfLimit}% of storage used). ` +
+        `Auto-reloads next time you open the tool.`;
+}
+
+// Clear button uses two-step confirm: first click warns + arms; second click
+// within 5 seconds actually clears. Prevents accidental wipes.
+function handleClearCustomLibrary() {
+    const btn = document.getElementById('libraryClearBtn');
+    if (!btn) return;
+    if (btn.dataset.confirmArmed !== '1') {
+        btn.textContent = 'Click again to confirm — this clears all saved swatches';
+        btn.dataset.confirmArmed = '1';
+        // Auto-disarm after 5 seconds so the user doesn't accidentally hit it
+        // later thinking it's the normal button.
+        setTimeout(() => {
+            if (btn.dataset.confirmArmed === '1') {
+                btn.textContent = 'Clear My Saved Swatches';
+                btn.dataset.confirmArmed = '0';
+            }
+        }, 5000);
+        return;
+    }
+    clearCustomLibrary();
+    btn.textContent = 'Clear My Saved Swatches';
+    btn.dataset.confirmArmed = '0';
+    refreshLibraryStorageStatus();
 }
 
 function closeLibrarySyncModal() {
