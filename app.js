@@ -4904,7 +4904,12 @@ function exportDashNativePNG() {
     const d = dashProjectData[dashSelectedRowIndex];
     // Always render in inches so cm-mode and in-mode exports look identical.
     const dInches = _frameDataInInches(d, dashUnit);
-    const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: 40 });
+    // Pad reserves transparent space for the drop shadow to render into.
+    // When shadows are off, designers don't want the empty margin — it
+    // makes alignment in InDesign harder (the frame edge ≠ the bounding
+    // box edge). So pad:0 when shadows are off; pad:40 when on.
+    const exportPad = dashOuterShadowsOn ? 40 : 0;
+    const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: exportPad });
     const a = document.createElement('a');
     a.download = buildPngFilename(d);
     a.href = canvas.toDataURL("image/png");
@@ -7224,7 +7229,10 @@ async function batchDownloadAllFramesAsZip() {
             try {
                 const swatchImg = row.swatchDataUrl ? await _loadImg(row.swatchDataUrl) : null;
                 const dInches = _frameDataInInches(row, dashUnit);
-                const { canvas } = renderFrameToCanvas(dInches, swatchImg, { dpi: 72, pad: 40 });
+                // Match single-PNG export: no pad when shadows are off so the
+                // bounding box equals the frame edge (easier InDesign alignment).
+                const exportPad = dashOuterShadowsOn ? 40 : 0;
+                const { canvas } = renderFrameToCanvas(dInches, swatchImg, { dpi: 72, pad: exportPad });
                 // canvas.toBlob is async via a callback — wrap in a Promise so
                 // we can await it. Quality arg N/A for PNG (it's lossless).
                 const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
