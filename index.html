@@ -1195,7 +1195,17 @@
             <div id="libraryDropZoneText" style="font-size: 0.8rem; color: var(--text-main);">Drop folder here</div>
             <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">or click to browse</div>
         </div>
+        <!-- Persistence indicator + clear control. Synced swatches save to the
+             browser's localStorage so they reload automatically next session.
+             The indicator shows how much of the ~5MB quota is used so the user
+             can see when they're approaching the limit. Clearing wipes only
+             the user's custom swatches; bundled library entries stay. -->
+        <div id="libraryStorageStatus" style="font-size: 0.7rem; color: var(--text-muted); padding: 8px 10px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 12px; line-height: 1.4;">
+            <!-- populated by openLibrarySyncModal -->
+            Loading storage info…
+        </div>
         <div style="display:flex; flex-direction:column; gap:10px;">
+            <button id="libraryClearBtn" class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="handleClearCustomLibrary()">Clear My Saved Swatches</button>
             <button class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="closeLibrarySyncModal()">Cancel</button>
         </div>
     </div>
