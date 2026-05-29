@@ -48,6 +48,23 @@
                     <rect x="7" y="13.5" width="10" height="4" rx="0.5" fill="currentColor" stroke="none"/>
                 </svg>
             </button>
+            <!-- Outer-shadow toggle. When active (button tinted), the drop
+                 shadow that normally projects from the frame onto the "wall"
+                 is suppressed across the live preview, PNG export, and
+                 elevation views. Inner shadows (mat bevels, art recess) are
+                 unaffected and stay slightly boosted to keep visual depth.
+                 Default ON — colleagues who don't care about InDesign
+                 compositing get the original look. Persists to localStorage
+                 as 'dashOuterShadowsOn'. Icon = a small square with a soft
+                 shadow underneath, slashed when off. -->
+            <button id="outerShadowToggle" class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;" onclick="toggleOuterShadows()" title="Toggle outer drop shadows (off = cleaner PNGs for InDesign)">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
+                    <!-- Soft "shadow" trail below the square — gets visually
+                         "cut" by the .active state CSS rule. -->
+                    <rect x="7" y="14" width="14" height="3" rx="1" fill="currentColor" opacity="0.35"/>
+                    <rect x="3" y="4" width="14" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </button>
             <!-- Help button. Opens a modal with tabs: a tutorial video (placeholder
                  until a URL is plugged in) and a Reference section explaining
                  every feature. Lives next to the theme toggle so help is always
