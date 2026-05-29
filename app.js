@@ -4427,13 +4427,133 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     return { canvas: c, pad: pad, frameW: w, frameH: h };
 }
 
+// Build a Self-Explanatory PNG filename for a row.
+// Format: ITEM_CODE_PRODUCT_FRAMECODE_WxH_M..._R...png
+// Per the FRAME File Naming Proposal:
+//   ART.001_FA_MICH-41-35_24x36_M3_R0.25.png
+//
+// Tokens appear conditionally based on product type and row state.
+// The ITEM CODE is always first — InDesign's AutoFrameSpecs matches by
+// the ART.NNN_ prefix, so users can rename safely as long as they leave
+// the prefix intact.
+//
+// Numeric values in the filename use whatever unit the project is in. To
+// keep names short, the team should export with the project set to inches
+// when possible. Numbers drop trailing zeros (3 instead of 3.0, 2.5
+// instead of 2.50).
+function buildPngFilename(row) {
+    if (!row) return 'Frame.png';
+    // Strip characters that are invalid in filenames on Windows/macOS/Linux.
+    // Slashes, colons, quotes, etc. become underscores; parens are removed
+    // (they're noise in filenames).
+    const sanitize = (s) => String(s || '')
+        .replace(/[\\/:*?"<>|]/g, '_')
+        .replace(/[()]/g, '')
+        .replace(/\s+/g, '_');
+    const itemCode = sanitize(row.id) || 'Frame';
+
+    // Format a numeric value: drop trailing zeros so 3.000 → 3 and 2.500 → 2.5.
+    // Numbers are written in the project's current unit (whatever the row data
+    // is stored in). Values < 0.0001 are treated as 0.
+    const num = (v) => {
+        const n = parseFloat(v);
+        if (isNaN(n) || Math.abs(n) < 0.0001) return '0';
+        // toFixed(4) then strip trailing zeros and trailing dot.
+        let s = n.toFixed(4).replace(/0+$/, '').replace(/\.$/, '');
+        return s;
+    };
+
+    // Product code per the proposal's decoder ring.
+    const product = row.product || '';
+    const useFM = (row.useFloatMount === true);
+    let productCode;
+    if (product === 'Frameless Canvas (Wrapped)') productCode = 'FLW';
+    else if (product === 'Framed Canvas (Floater)') productCode = 'FCF';
+    else if (product === 'Sourced Object')          productCode = 'SO';
+    else if (product === 'Framed Art (Shadow Box)') productCode = 'FAFM';  // Shadow Box = Float Mount
+    else if (useFM)                                 productCode = 'FAFM';  // any other product flagged float-mount
+    else                                            productCode = 'FA';    // Framed Art (default)
+
+    const tokens = [itemCode, productCode];
+
+    // FRAME CODE — sanitized. Omitted for Frameless (no frame) and Sourced
+    // Object (no frame applies). Other products include it even if empty,
+    // skipping only when the field is blank.
+    const frameCodeOmitted = (productCode === 'FLW' || productCode === 'SO');
+    if (!frameCodeOmitted) {
+        const fCode = sanitize(row.fCode);
+        if (fCode) tokens.push(fCode);
+    }
+
+    // SIZE — always included. WxH using extW × extH.
+    const sizeToken = `${num(row.extW)}x${num(row.extH)}`;
+    tokens.push(sizeToken);
+
+    // MAT 1 — only for Framed Art (FA) and Framed Art Shadow Box (FAFM).
+    // Canvas products and Sourced Object don't have mats.
+    const hasMats = (productCode === 'FA');  // standard mat only; FAFM uses float-mount instead
+    if (hasMats && row.m1A !== false) {
+        const T = parseFloat(row.m1T) || 0;
+        const B = parseFloat(row.m1B) || 0;
+        const L = parseFloat(row.m1L) || 0;
+        const R = parseFloat(row.m1R) || 0;
+        if (T + B + L + R > 0) {
+            // Equal on all 4 sides → M<n>; otherwise M<T>T-<B>B-<L>L-<R>R
+            if (T === B && T === L && T === R) {
+                tokens.push(`M${num(T)}`);
+            } else {
+                tokens.push(`M${num(T)}T-${num(B)}B-${num(L)}L-${num(R)}R`);
+            }
+        }
+    }
+
+    // MAT 2 REVEAL — only for Framed Art with Mat 2 active and reveal > 0
+    if (hasMats && row.m2A === true) {
+        const rev = parseFloat(row.m2) || 0;
+        if (rev > 0) tokens.push(`R${num(rev)}`);
+    }
+
+    // FAUX MAT (printed paper border under standard mats) — Framed Art only
+    if (hasMats && row.useFauxMat === true) {
+        const fx = parseFloat(row.sbPaperBorder) || 0;
+        if (fx > 0) tokens.push(`FX${num(fx)}`);
+    }
+
+    // FLOAT MOUNT white border — Shadow Box / Float Mount only
+    if (productCode === 'FAFM') {
+        const fm = parseFloat(row.sbPaperBorder) || 0;
+        // FM0 IS meaningful (bleed edge — no border) per the proposal
+        tokens.push(`FM${num(fm)}`);
+    }
+
+    // FLOATER INSET — Floater canvas only
+    if (productCode === 'FCF') {
+        const inset = parseFloat(row.floaterInset);
+        // Only include if non-default and non-zero. Floater default is 0.75
+        // but spec includes it always since it's the defining gap measurement.
+        if (!isNaN(inset) && inset > 0) {
+            tokens.push(`I${num(inset)}`);
+        }
+    }
+
+    // CANVAS DEPTH — Frameless Canvas only
+    if (productCode === 'FLW') {
+        const depth = parseFloat(row.canvasDepth);
+        if (!isNaN(depth) && depth > 0) {
+            tokens.push(`D${num(depth)}`);
+        }
+    }
+
+    return tokens.join('_') + '.png';
+}
+
 function exportDashNativePNG() {
     const d = dashProjectData[dashSelectedRowIndex];
     // Always render in inches so cm-mode and in-mode exports look identical.
     const dInches = _frameDataInInches(d, dashUnit);
     const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: 40 });
     const a = document.createElement('a');
-    a.download = `${d.id || 'Frame'}.png`;
+    a.download = buildPngFilename(d);
     a.href = canvas.toDataURL("image/png");
     a.click();
 }
@@ -5107,7 +5227,7 @@ function buildDashCSVString() {
             r.fCode || '',
             r.fColorName || '',
             r.fColor || '',
-            `${r.id}.png`,
+            buildPngFilename(r),
             // — Raw-inch canonical values. Each is the display value converted
             //   back to inches via unitFactor. Empty for fields that don't apply
             //   to this product (mats hidden for canvas, frame hidden for
@@ -6730,7 +6850,7 @@ async function batchDownloadAllFramesAsZip() {
             }
 
             const row = dashProjectData[i];
-            const baseName = (row.id || `Frame_${i + 1}`).replace(/[\\/:*?"<>|]/g, '_');
+            const baseName = buildPngFilename(row).replace(/\.png$/i, '');
             let fileName = `${baseName}.png`;
             if (usedNames[fileName]) {
                 let n = 2;
