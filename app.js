@@ -9065,5 +9065,250 @@ async function exportElevPNG() {
     }
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// SVG (VECTOR) ELEVATION EXPORT
+// ──────────────────────────────────────────────────────────────────────────
+// Exports the current elevation as an SVG: all annotations (dimension lines,
+// ticks, text, group boxes, guides, legend) become crisp native vector;
+// frame swatch textures embed as base64 raster <image> (they're photos, so
+// raster is correct). Opens cleanly in Illustrator / InDesign.
+//
+// Approach: render the elevation at a fixed export scale, then walk the
+// rendered DOM inside #wall and translate each element into SVG. Walking the
+// live DOM (rather than re-deriving geometry) guarantees the SVG matches
+// exactly what's on screen, including all dimension geometry.
+
+// Escape text for safe inclusion in SVG.
+function _svgEsc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Parse a CSS color + border shorthand into {width, style, color}.
+function _parseBorder(borderStr) {
+    if (!borderStr || borderStr === 'none') return null;
+    // e.g. "2px dashed rgb(224, 0, 0)" — color may contain spaces (rgb()).
+    const m = borderStr.match(/^([\d.]+)px\s+(solid|dashed|dotted)\s+(.+)$/);
+    if (!m) return null;
+    return { width: parseFloat(m[1]), style: m[2], color: m[3].trim() };
+}
+
+async function exportElevSVG() {
+    const wall = document.getElementById('wall');
+    if (!wall) return;
+
+    // Fixed export scale (independent of on-screen zoom) so output is
+    // consistent. We temporarily set zoom to 1 and force light theme, render,
+    // serialize, then restore.
+    const oldZoom = elevZoomFactor;
+    const wasDark = !document.body.classList.contains('light-theme');
+    elevZoomFactor = 1;
+    document.body.classList.add('light-theme');
+    drawElevAll();
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+    try {
+        const wallW = parseFloat(document.getElementById('wallW').value) || 1;
+        const wallH = parseFloat(document.getElementById('wallH').value) || 1;
+        const wallWpx = wallW * elevScale;
+        const wallHpx = wallH * elevScale;
+
+        // Padding around the wall so outer dims + labels aren't clipped.
+        const PAD = 90;
+        const svgW = wallWpx + PAD * 2;
+        const svgH = wallHpx + PAD * 2;
+
+        // We position everything relative to the wall's top-left. The wall
+        // sits at (PAD, PAD) in SVG coords. DOM elements give us positions
+        // relative to #wall via getBoundingClientRect minus the wall's rect.
+        const wallRect = wall.getBoundingClientRect();
+        const ox = PAD - wallRect.left;
+        const oy = PAD - wallRect.top;
+
+        const parts = [];
+        parts.push(`<?xml version="1.0" encoding="UTF-8"?>`);
+        parts.push(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${svgW.toFixed(1)}" height="${svgH.toFixed(1)}" viewBox="0 0 ${svgW.toFixed(1)} ${svgH.toFixed(1)}">`);
+        // White background
+        parts.push(`<rect x="0" y="0" width="${svgW.toFixed(1)}" height="${svgH.toFixed(1)}" fill="#ffffff"/>`);
+
+        // Resolve the unified dim color from CSS for vector strokes/text.
+        const cssRoot = getComputedStyle(document.documentElement);
+        const dimColor = (cssRoot.getPropertyValue('--dim-color') || '#e00000').trim();
+        const dimFont = (cssRoot.getPropertyValue('--dim-font-family') || 'sans-serif').trim();
+        const wallLine = (cssRoot.getPropertyValue('--wall-line') || '#333').trim();
+
+        // ── WALL outline ──
+        parts.push(`<rect x="${PAD}" y="${PAD}" width="${wallWpx.toFixed(1)}" height="${wallHpx.toFixed(1)}" fill="#f0f2f5" stroke="${wallLine}" stroke-width="2"/>`);
+
+        // Helper: convert a DOM rect to wall-relative SVG x/y.
+        const rectToSvg = (el) => {
+            const r = el.getBoundingClientRect();
+            return { x: r.left + ox, y: r.top + oy, w: r.width, h: r.height };
+        };
+
+        // ── FRAMES: render each via renderFrameToCanvas, embed as <image> ──
+        for (const f of elevFrames) {
+            if (!f.active) continue;
+            const el = wall.querySelector(`.frame-vis[data-frame-letter="${f.letter}"]`);
+            if (!el) continue;
+            const pos = rectToSvg(el);
+            try {
+                const swatchImg = f.swatchDataUrl ? await _loadImg(f.swatchDataUrl) : null;
+                // Elevation frames store w/h (overall size in elevUnit); the
+                // frame renderer expects extW/extH. Map them, then convert to
+                // inches. Carry through the product/mat/frame fields renderer needs.
+                const renderData = Object.assign({}, f, {
+                    extW: f.w, extH: f.h,
+                });
+                const dInches = _frameDataInInches(renderData, elevUnit);
+                // No outer shadow + no pad → tight frame raster for embedding.
+                const prevShadow = dashOuterShadowsOn;
+                dashOuterShadowsOn = false;
+                const { canvas } = renderFrameToCanvas(dInches, swatchImg, { dpi: 150, pad: 0 });
+                dashOuterShadowsOn = prevShadow;
+                if (!canvas.width || !canvas.height) throw new Error('zero-size canvas');
+                const dataUrl = canvas.toDataURL('image/png');
+                parts.push(`<image x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" xlink:href="${dataUrl}" preserveAspectRatio="none"/>`);
+            } catch (err) {
+                // Fallback: solid rect if frame render fails
+                parts.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${f.fColor || '#222'}"/>`);
+            }
+        }
+
+        // ── ANNOTATION ELEMENTS: walk the dim/guide/label/group layers ──
+        // Each leaf element is either a line (0-height/0-width with a border),
+        // a box (border on all sides), or text (has textContent).
+        const annotationLayers = [
+            'arch-dim-layer', 'dim-layer', 'floor-ceiling-layer',
+            'frame-center-layer', 'guide-layer', 'label-layer',
+            'od-layer', 'group-dim-layer',
+        ];
+
+        const emitEl = (el) => {
+            const cs = getComputedStyle(el);
+            if (cs.display === 'none' || cs.visibility === 'hidden') return;
+
+            const txt = (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3)
+                ? el.textContent.trim() : '';
+
+            // TEXT node
+            if (txt) {
+                const pos = rectToSvg(el);
+                const fontSize = parseFloat(cs.fontSize) || 13;
+                const color = cs.color || dimColor;
+                const fw = cs.fontWeight || '600';
+                // Background chip (if the label has a non-transparent bg)
+                const bg = cs.backgroundColor;
+                const hasBg = bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
+                // Handle rotation (height/floor labels rotate -90deg)
+                const transform = cs.transform;
+                let rotate = 0;
+                if (transform && transform !== 'none' && transform.includes('matrix')) {
+                    const m = transform.match(/matrix\(([^)]+)\)/);
+                    if (m) {
+                        const v = m[1].split(',').map(parseFloat);
+                        rotate = Math.round(Math.atan2(v[1], v[0]) * 180 / Math.PI);
+                    }
+                }
+                const cx = pos.x + pos.w / 2;
+                const cy = pos.y + pos.h / 2;
+                if (hasBg) {
+                    // approximate chip: text width box
+                    const padX = 4, padY = 2;
+                    const chipW = pos.w, chipH = pos.h;
+                    const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
+                    parts.push(`<g${g}>`);
+                    parts.push(`<rect x="${(cx - chipW/2).toFixed(1)}" y="${(cy - chipH/2).toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" fill="#ffffff" rx="2"/>`);
+                    parts.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
+                    parts.push(`</g>`);
+                } else {
+                    const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
+                    parts.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}"${g} font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
+                }
+                return;
+            }
+
+            // BOX or LINE — look at borders
+            const pos = rectToSvg(el);
+            const bTop = _parseBorder(cs.borderTop);
+            const bLeft = _parseBorder(cs.borderLeft);
+            const bBottom = _parseBorder(cs.borderBottom);
+            const bRight = _parseBorder(cs.borderRight);
+
+            // Full box (all four borders present + has area)
+            if (bTop && bLeft && bBottom && bRight && pos.w > 2 && pos.h > 2) {
+                const dash = bTop.style === 'dashed' ? ` stroke-dasharray="${bTop.width*3},${bTop.width*2}"` : '';
+                parts.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="none" stroke="${bTop.color}" stroke-width="${bTop.width}"${dash}/>`);
+                return;
+            }
+            // Horizontal line (border-top, near-zero height)
+            if (bTop && pos.h < 4 && pos.w >= 2) {
+                const dash = bTop.style === 'dashed' ? ` stroke-dasharray="${bTop.width*3},${bTop.width*2}"` : '';
+                const y = pos.y + bTop.width / 2;
+                parts.push(`<line x1="${pos.x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(pos.x+pos.w).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${bTop.color}" stroke-width="${bTop.width}"${dash}/>`);
+                return;
+            }
+            // Vertical line (border-left, near-zero width)
+            if (bLeft && pos.w < 4 && pos.h >= 2) {
+                const dash = bLeft.style === 'dashed' ? ` stroke-dasharray="${bLeft.width*3},${bLeft.width*2}"` : '';
+                const x = pos.x + bLeft.width / 2;
+                parts.push(`<line x1="${x.toFixed(1)}" y1="${pos.y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(pos.y+pos.h).toFixed(1)}" stroke="${bLeft.color}" stroke-width="${bLeft.width}"${dash}/>`);
+                return;
+            }
+            // Solid-background thin bar (dim-line-segment uses background, not border)
+            const bg = cs.backgroundColor;
+            const hasBg = bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
+            if (hasBg && (pos.w < 4 || pos.h < 4) && (pos.w >= 2 || pos.h >= 2)) {
+                if (pos.h <= pos.w) {
+                    const y = pos.y + pos.h / 2;
+                    parts.push(`<line x1="${pos.x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(pos.x+pos.w).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${bg}" stroke-width="${Math.max(1,pos.h).toFixed(1)}"/>`);
+                } else {
+                    const x = pos.x + pos.w / 2;
+                    parts.push(`<line x1="${x.toFixed(1)}" y1="${pos.y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(pos.y+pos.h).toFixed(1)}" stroke="${bg}" stroke-width="${Math.max(1,pos.w).toFixed(1)}"/>`);
+                }
+            }
+        };
+
+        // Recursively walk a layer, emitting leaf elements.
+        const walk = (node) => {
+            for (const child of node.children) {
+                if (child.children.length > 0) {
+                    // Container — but it may also have its own border (group box).
+                    // Emit it (for borders) then recurse for inner content.
+                    emitEl(child);
+                    walk(child);
+                } else {
+                    emitEl(child);
+                }
+            }
+        };
+
+        annotationLayers.forEach(layerId => {
+            const layer = document.getElementById(layerId);
+            if (!layer) return;
+            const cs = getComputedStyle(layer);
+            if (cs.display === 'none') return; // respect hidden layers
+            walk(layer);
+        });
+
+        parts.push(`</svg>`);
+        const svgStr = parts.join('\n');
+
+        // Download
+        const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const elevName = (elevations[currentElevIndex] && elevations[currentElevIndex].name) || `Elevation_${currentElevIndex + 1}`;
+        a.download = elevName.replace(/[\\/:*?"<>|]/g, '_') + '.svg';
+        a.href = url;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } finally {
+        if (wasDark) document.body.classList.remove('light-theme');
+        elevZoomFactor = oldZoom;
+        drawElevAll();
+    }
+}
+
 // BOOT UP THE ENGINE
 initMasterApp();
