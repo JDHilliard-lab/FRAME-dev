@@ -1215,17 +1215,9 @@ function saveDimVisibility() {
 // layer-level ones we set display; for sub-elements drawElevAll + the
 // renderers consult dimVisibility directly.
 function applyDimVisibility() {
-    const setLayer = (id, show) => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = show ? '' : 'none';
-    };
-    // NOTE: these override the Layout Guides toggles' display while a flag is
-    // OFF. When a flag is ON we don't force display, so the Layout Guides
-    // toggle still governs. (Hide panel can only HIDE, not force-show.)
-    if (!dimVisibility.letters) setLayer('label-layer', false);
-    if (!dimVisibility.wall) setLayer('arch-dim-layer', false);
-    if (!dimVisibility.spacing) setLayer('dim-layer', false);
-    // group box + floor-art are sub-elements; re-render handles them.
+    // Actual display is computed in drawElevAll (effective = toggle AND flag).
+    // Here we just trigger a redraw; group box + floor-art are handled by the
+    // renderers consulting dimVisibility directly.
     drawElevAll();
 }
 
@@ -7327,18 +7319,16 @@ function toggleElevLayer(id, btn) {
 
     // Special behavior: when turning Person ON, if the figure is currently
     // outside the visible wall (which is the default at x=-60), pull it
-    // back to just inside the left edge so the user can see it. Otherwise
-    // users have to zoom out, find the figure, and drag it onto the wall
-    // — a confusing experience. If they HAVE placed it on the wall, we
-    // respect their position and don't move it.
+    // Person first-show convenience: if the figure has NEVER been moved by
+    // the user (still at its default spawn position and not yet flagged as
+    // placed), pull it just inside the left edge so it's findable. Once the
+    // user has dragged it anywhere — including parking it beside the wall —
+    // we lock that position and never auto-move it again.
     if (id === 'person-wrap' && isHidden && elevPersonPos) {
-        const wallW = parseFloat(document.getElementById('wallW').value) || 185;
-        const isOffWall = elevPersonPos.x < 0 || elevPersonPos.x > wallW;
-        if (isOffWall) {
-            // Place just inside the left edge — accounting for the figure's
-            // visual width. The person SVG is roughly 20 inches wide so we
-            // offset by 6 inches to leave a small margin.
+        const neverPlaced = !elevPersonPos.placed;
+        if (neverPlaced) {
             elevPersonPos.x = parseFloat((6 * unitFactor('in', elevUnit)).toFixed(2));
+            elevPersonPos.placed = true; // from now on, respect user position
             drawElevAll();
             pushHistory();
         }
@@ -8055,14 +8045,21 @@ function drawElevAll() {
     // for the current elevation. Done after frames so the boxes overlay them.
     renderGroupDims();
 
-    // Reassert per-element hide flags for layer-level items so they stay
-    // hidden across redraws. Done inline (not via applyDimVisibility, which
-    // would recurse into drawElevAll).
+    // Reassert layer visibility = (Layout Guides toggle active) AND (hide
+    // flag on). Both systems cooperate: the toggle governs the base on/off,
+    // the hide flag can additionally force-hide for a clean export. Done
+    // inline (not via applyDimVisibility, which recurses into drawElevAll).
     if (typeof dimVisibility !== 'undefined') {
-        const setL = (id, show) => { const el = document.getElementById(id); if (el && !show) el.style.display = 'none'; };
-        setL('label-layer', dimVisibility.letters);
-        setL('arch-dim-layer', dimVisibility.wall);
-        setL('dim-layer', dimVisibility.spacing);
+        const combine = (id, btnId, flag) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const btn = document.getElementById(btnId);
+            const toggleOn = btn ? btn.classList.contains('active') : true;
+            el.style.display = (toggleOn && flag) ? 'block' : 'none';
+        };
+        combine('label-layer', 'labelToggle', dimVisibility.letters);
+        combine('arch-dim-layer', null, dimVisibility.wall);
+        combine('dim-layer', 'dimToggle', dimVisibility.spacing);
     }
 
     // Wall-background click handler: clicking on the wall but NOT on a frame
@@ -8145,14 +8142,16 @@ function renderGroupDims() {
             }
             return d;
         };
-        // Measurement label.
+        // Measurement label — opaque background + subtle border so the
+        // number stays readable even where dimension/extension lines cross.
         const mkLabel = (text, cx, cy) => {
             const l = document.createElement('div');
             l.textContent = text;
             l.style.cssText =
                 `position:absolute; left:${cx}px; top:${cy}px; transform:translate(-50%,-50%);` +
-                `color:${color}; font-size:${fontSize}px; font-weight:600; white-space:nowrap;` +
-                `background:rgba(255,255,255,0.85); padding:0 3px; pointer-events:none; z-index:2;`;
+                `color:${color}; font-size:${fontSize}px; font-weight:700; white-space:nowrap;` +
+                `background:#fff; padding:1px 5px; border-radius:3px; border:1px solid ${color};` +
+                `box-shadow:0 1px 3px rgba(0,0,0,0.15); pointer-events:none; z-index:4;`;
             return l;
         };
 
@@ -8407,6 +8406,7 @@ function makeElevDraggable(el, idx) {
             }
             if(idx === 'person') { 
                 elevPersonPos.x -= dx; 
+                elevPersonPos.placed = true; // user moved it — lock position
             } else { 
                 let frame = elevFrames[idx]; let prevX = frame.x; let prevY = frame.y;
                 // Step 1: whole-unit snap (existing behavior)
@@ -8482,11 +8482,11 @@ function drawElevGuides(wallW, wallH) {
 
     const hangVal = getHangHeight();
     if(hangVal < wallH) {
-        // Horizontal hang line — just the dashed line now, no inline text.
-        // The HANG HEIGHT wording + measurement live on the vertical
-        // floor-to-hangline dimension on the left (below).
+        // Horizontal hang line with "HANG HEIGHT" label horizontal above it.
+        // The measurement number lives on the vertical floor-to-hangline dim.
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
+        hl.innerHTML = `<span class="hang-label">HANG HEIGHT</span>`;
         guideLayer.appendChild(hl);
 
         // Floor-to-hangline vertical dimension. Shows the hang height as a
@@ -8512,12 +8512,9 @@ function drawElevGuides(wallW, wallH) {
             `<div style="position:absolute; left:${-TICK}px; bottom:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
             // hang-line tick
             `<div style="position:absolute; left:${-TICK}px; top:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
-            // "HANG HEIGHT" words stacked vertically ABOVE the line (top end),
-            // using vertical writing-mode so they read bottom-to-top like the
-            // line itself. Positioned just above the top tick.
-            `<div style="position:absolute; left:0; top:-8px; transform:translate(-50%,-100%); writing-mode:vertical-rl; text-orientation:mixed; transform-origin:center; color:var(--dim-color); font-family:var(--dim-font-family); font-size:calc(var(--dim-font-size) * 0.8); font-weight:600; letter-spacing:1px; white-space:nowrap;">HANG HEIGHT</div>` +
             // ONLY the number, centered between the line ends (rotated to read
-            // along the vertical line).
+            // along the vertical line). The "HANG HEIGHT" words are on the
+            // horizontal hang line above.
             `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</div>`;
         guideLayer.appendChild(fh);
         } // end floorArt visibility guard
