@@ -862,12 +862,13 @@ body.dragging-frame .frame-vis:hover {
 .hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
 .hang-label { 
     position: absolute; 
-    bottom: 2px;  /* sits just above the dashed line */
-    right: 10px; 
+    bottom: 4px;  /* sits just above the dashed line */
+    right: 40px; 
     color: var(--dim-color); 
     font-family: var(--dim-font-family);
     font-size: var(--dim-font-size); 
     font-weight: 600; 
+    letter-spacing: 0.5px;
     background: rgba(255,255,255,0.85); 
     padding: 1px 6px; 
     border-radius: 3px; 
