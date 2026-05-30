@@ -647,7 +647,7 @@
                             </button>
                             <!-- Annotation style settings: color / weight / dash for
                                  group-dimension callouts (and later text + lines). -->
-                            <button class="action-btn btn-secondary" id="annotStyleBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAnnotationStyleModal()" title="Annotation style — color, line weight, dashed/solid">
+                            <button class="action-btn btn-secondary" id="annotStyleBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAnnotationStyleModal()" title="Label & dimension style — color, font, line weight, dashed/solid (applies to all dims)">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                             </button>
                         </div>
@@ -1177,8 +1177,8 @@
      hang-height line. -->
 <div id="annotationStyleModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
     <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:340px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Annotation Style</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Controls the look of group-dimension callouts. Applies to all callouts in every elevation.</p>
+        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Label & Dimension Style</h3>
+        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Controls the look of every dimension and label in the elevation &mdash; frame dims, wall dims, OD tags, center lines, and group dimensions.</p>
 
         <div style="display:flex; flex-direction:column; gap:14px;">
             <div style="display:flex; align-items:center; gap:10px;">
