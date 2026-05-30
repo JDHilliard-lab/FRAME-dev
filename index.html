@@ -597,14 +597,15 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
                             </button>
                         </div>
-                        <!-- Hide/show individual dimension types for a clean
-                             export (e.g. frames + character only). Eye icon
-                             opens a checklist popup. Independent of the layer
-                             toggles above. -->
-                        <div class="layout-guides-grid" style="grid-template-columns: 1fr; margin-top:6px;">
-                            <button class="layout-guide-btn" id="dimHideBtn" title="Show/Hide dimensions — pick which annotations to hide for a clean export" onclick="openDimHideModal()" style="display:flex; align-items:center; justify-content:center; gap:6px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px;height:14px;"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
-                                <span style="font-size:0.6rem; text-transform:uppercase; letter-spacing:0.5px;">Show / Hide Dims</span>
+                        <!-- Group Dimension Box + Edge Gap toggles. These turn
+                             blue (active) when the corresponding annotation
+                             exists, and clicking them shows/hides it. -->
+                        <div class="layout-guides-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:6px;">
+                            <button class="layout-guide-btn toggle-status" id="groupBoxToggle" title="Group Dimension Box — show/hide the dashed group dimension callouts" onclick="toggleGroupBoxVisibility(this)">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" fill="none" stroke-dasharray="3 2"/><line x1="4" y1="4" x2="20" y2="4"/><line x1="4" y1="2.5" x2="4" y2="5.5"/><line x1="20" y1="2.5" x2="20" y2="5.5"/></svg>
+                            </button>
+                            <button class="layout-guide-btn toggle-status" id="edgeGapToggle" title="Edge Gap — show/hide distance-to-wall-edge dimensions" onclick="toggleEdgeGapVisibility(this)">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" fill="none"/><path d="M12 7V3M12 21v-4M7 12H3M21 12h-4"/></svg>
                             </button>
                         </div>
                     </div>
@@ -1060,41 +1061,6 @@
         </div>
 
         <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('installModal').style.display='none'">Got it</button>
-    </div>
-</div>
-
-<div id="dimHideModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:320px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Show / Hide Dimensions</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Check an item to hide it. Useful for exporting just the frames and character without annotation clutter.</p>
-
-        <div style="display:flex; flex-direction:column; gap:10px;">
-            <label style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--text-main); cursor:pointer;">
-                <input type="checkbox" id="hideGroupBox" onchange="onDimHideCheckbox('hideGroupBox')" style="width:16px; height:16px; cursor:pointer;">
-                Group dimension box
-            </label>
-            <label style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--text-main); cursor:pointer;">
-                <input type="checkbox" id="hideFloorArt" onchange="onDimHideCheckbox('hideFloorArt')" style="width:16px; height:16px; cursor:pointer;">
-                Floor-to-artwork (hang height) dimension
-            </label>
-            <label style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--text-main); cursor:pointer;">
-                <input type="checkbox" id="hideLetters" onchange="onDimHideCheckbox('hideLetters')" style="width:16px; height:16px; cursor:pointer;">
-                Letter labels
-            </label>
-            <label style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--text-main); cursor:pointer;">
-                <input type="checkbox" id="hideSpacing" onchange="onDimHideCheckbox('hideSpacing')" style="width:16px; height:16px; cursor:pointer;">
-                Spacing dimensions (between frames)
-            </label>
-            <label style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--text-main); cursor:pointer;">
-                <input type="checkbox" id="hideWall" onchange="onDimHideCheckbox('hideWall')" style="width:16px; height:16px; cursor:pointer;">
-                Wall dimensions
-            </label>
-        </div>
-
-        <div style="display:flex; gap:10px; margin-top:18px;">
-            <button class="action-btn btn-outline" style="flex:1; height:32px; font-size:0.75rem; color:var(--text-main); border-color:var(--border-color);" onclick="showAllDims()">Show All</button>
-            <button class="action-btn" style="flex:1; height:32px; font-size:0.75rem;" onclick="closeDimHideModal()">Done</button>
-        </div>
     </div>
 </div>
 
