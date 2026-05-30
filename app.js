@@ -9179,6 +9179,117 @@ function _parseBorder(borderStr) {
     return { width: parseFloat(m[1]), style: m[2], color: m[3].trim() };
 }
 
+// Build a frame as nested VECTOR shapes for the SVG export (rail + mats +
+// reveal + faux mat + float paper + art opening), mirroring the PNG
+// renderer's geometry. `pos` is the on-canvas rect {x,y,w,h} in SVG px.
+// `frameColor` is the rail color (frame fColor, or sampled swatch average for
+// image swatches). Returns an array of SVG element strings.
+function buildFrameSVG(f, pos, unit, frameColor) {
+    const parts = [];
+    const px = pos.x, py = pos.y, pw = pos.w, ph = pos.h;
+    // Scale: px per (unit) — the frame's overall w maps to pw.
+    const sclX = pw / (f.w || 1);
+    const sclY = ph / (f.h || 1);
+    const S = (sclX + sclY) / 2; // near-uniform; frames aren't distorted much
+
+    const isC = (f.product === 'Framed Canvas (Floater)');
+    const isFrameless = (f.product === 'Frameless Canvas (Wrapped)');
+    const useFM = !isC && (f.useFloatMount === true);
+
+    // Helper to shade a hex color (−1..1; neg=darker).
+    const shade = (hex, pct) => {
+        const m = /^#?([\da-f]{3}|[\da-f]{6})$/i.exec(hex || '');
+        if (!m) return hex;
+        let h = m[1]; if (h.length === 3) h = h.split('').map(c => c + c).join('');
+        let r = parseInt(h.slice(0,2),16), g = parseInt(h.slice(2,4),16), b = parseInt(h.slice(4,6),16);
+        const adj = v => pct >= 0 ? Math.round(v + (255-v)*pct) : Math.round(v*(1+pct));
+        return '#' + [adj(r),adj(g),adj(b)].map(v => Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');
+    };
+    const rect = (x,y,w,h,fill,stroke,sw) =>
+        `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}"${fill?` fill="${fill}"`:' fill="none"'}${stroke?` stroke="${stroke}" stroke-width="${sw||1}"`:''}/>`;
+
+    if (isFrameless) {
+        // Just the canvas face outline (no frame, no mats).
+        parts.push(rect(px, py, pw, ph, '#e8e4dc', shade(frameColor||'#888', -0.2), 1));
+        return parts;
+    }
+
+    const fwPx = (f.fW || 1.25) * S;
+
+    // ── FRAME RAIL: outer rect filled with frame color, inner hole shows mats.
+    // We draw the rail as a filled outer rect, then everything inside paints over.
+    parts.push(rect(px, py, pw, ph, frameColor || '#333', null, 0));
+    // Miter lines (corner joints) for the moulded look
+    const mc = shade(frameColor || '#333', -0.35);
+    const ix = px + fwPx, iy = py + fwPx, iw = pw - fwPx*2, ih = ph - fwPx*2;
+    parts.push(`<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${ix.toFixed(1)}" y2="${iy.toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
+    parts.push(`<line x1="${(px+pw).toFixed(1)}" y1="${py.toFixed(1)}" x2="${(ix+iw).toFixed(1)}" y2="${iy.toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
+    parts.push(`<line x1="${px.toFixed(1)}" y1="${(py+ph).toFixed(1)}" x2="${ix.toFixed(1)}" y2="${(iy+ih).toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
+    parts.push(`<line x1="${(px+pw).toFixed(1)}" y1="${(py+ph).toFixed(1)}" x2="${(ix+iw).toFixed(1)}" y2="${(iy+ih).toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
+    // Inner rail edge highlight (subtle) — gives the rail dimensional read
+    parts.push(rect(px+0.5, py+0.5, pw-1, ph-1, null, shade(frameColor||'#333', 0.15), 0.5));
+
+    if (isC) {
+        // Floater: canvas face inset by floaterInset, with a shadow-gap ring.
+        const insetPx = ((f.floaterInset !== undefined ? f.floaterInset : 0.75)) * S;
+        const fx = px + insetPx, fy = py + insetPx, fw2 = pw - insetPx*2, fh2 = ph - insetPx*2;
+        // gap ring (dark) then canvas face
+        parts.push(rect(px, py, pw, ph, shade(frameColor||'#333',-0.5), null, 0));
+        parts.push(rect(fx, fy, fw2, fh2, '#e8e4dc', shade(frameColor||'#333',-0.2), 1));
+        return parts;
+    }
+
+    // Interior opening (inside the rail)
+    let curX = ix, curY = iy, curW = iw, curH = ih;
+
+    // MATS
+    const m1On = (f.m1A !== false && !useFM);
+    const m2On = (m1On && f.m2A === true);
+    const mat1Color = f.m1ColorHex || '#ffffff';
+    const mat2Color = f.m2ColorHex || '#ffffff';
+
+    if (useFM) {
+        // Float mount: backer fills interior, paper inset by margin, art inside paper.
+        const backerColor = f.sbBackerColorHex || '#ffffff';
+        const paperColor = f.sbPaperColorHex || '#ffffff';
+        const marginPx = (parseFloat(f.sbPaperMargin)||0) * S;
+        const borderPx = (parseFloat(f.sbPaperBorder)||0) * S;
+        parts.push(rect(ix, iy, iw, ih, backerColor, '#cccccc', 0.75));
+        const ppx = ix+marginPx, ppy = iy+marginPx, ppw = iw-marginPx*2, pph = ih-marginPx*2;
+        parts.push(rect(ppx, ppy, ppw, pph, paperColor, shade(paperColor,-0.15), 0.75));
+        // art opening inside paper
+        const ax = ppx+borderPx, ay = ppy+borderPx, aw = ppw-borderPx*2, ah = pph-borderPx*2;
+        if (aw>0 && ah>0) parts.push(rect(ax, ay, aw, ah, '#d8d2c8', '#999', 0.5));
+        return parts;
+    }
+
+    if (m1On) {
+        parts.push(rect(ix, iy, iw, ih, mat1Color, '#cccccc', 0.75));
+        const mT=(f.m1T||0)*S, mB=(f.m1B||0)*S, mL=(f.m1L||0)*S, mR=(f.m1R||0)*S;
+        curX = ix+mL; curY = iy+mT; curW = iw-mL-mR; curH = ih-mT-mB;
+        if (m2On) {
+            parts.push(rect(curX, curY, curW, curH, mat2Color, '#cccccc', 0.75));
+            const revPx = (parseFloat(f.m2)||0) * S;
+            curX += revPx; curY += revPx; curW -= revPx*2; curH -= revPx*2;
+        }
+    }
+
+    // Faux mat (white paper inside the opening)
+    const useFauxMat = !useFM && (f.useFauxMat === true);
+    if (useFauxMat) {
+        parts.push(rect(curX, curY, curW, curH, '#ffffff', '#cccccc', 0.75));
+        const fbPx = (parseFloat(f.sbPaperBorder)||0) * S;
+        curX += fbPx; curY += fbPx; curW -= fbPx*2; curH -= fbPx*2;
+    }
+
+    // Art opening (the artwork area) — light placeholder fill
+    if (curW > 0 && curH > 0) {
+        parts.push(rect(curX, curY, curW, curH, '#d8d2c8', '#999', 0.5));
+    }
+
+    return parts;
+}
+
 async function exportElevSVG() {
     const wall = document.getElementById('wall');
     if (!wall) return;
@@ -9282,14 +9393,16 @@ async function exportElevSVG() {
                 const swatchImg = f.swatchDataUrl ? await _loadImg(f.swatchDataUrl) : null;
 
                 if (svgFrameMode === 'autocolor') {
-                    // Vector rect colored to match the frame. For image swatches,
-                    // sample the average color; for solid-color frames use fColor.
-                    let fill = f.fColor || '#333333';
+                    // Build the frame as a vector construction (rail + mats +
+                    // reveal + paper + art opening) instead of a flat square.
+                    // For image swatches, sample the average color for the rail.
+                    let railColor = f.fColor || '#333333';
                     if (swatchImg) {
                         const avg = averageColorOfImage(swatchImg);
-                        if (avg) fill = avg;
+                        if (avg) railColor = avg;
                     }
-                    backLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${fill}" stroke="#000000" stroke-width="0.5"/>`);
+                    const frameParts = buildFrameSVG(f, pos, elevUnit, railColor);
+                    frameParts.forEach(s => backLayer.push(s));
                     continue;
                 }
 
