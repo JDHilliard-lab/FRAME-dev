@@ -35,7 +35,8 @@
      * sans-serif, medium weight, dashed. */
     --dim-color: #e00000;
     --dim-font-size: 13px;
-    --dim-font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --dim-font-family: Arial, Helvetica, sans-serif;
+    --dim-font-weight: 600;
     --dim-weight: 2px;
     --dim-line-style: dashed;
 
@@ -858,7 +859,7 @@ body.dragging-frame .frame-vis:hover {
 .dim-line-segment { flex: 1; height: var(--dim-weight); background: var(--arch-line); }
 .dim-line-segment-v { flex: 1; width: var(--dim-weight); background: var(--arch-line); }
 
-.arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: 600; color: var(--dim-color); padding: 1px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; }
+.arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: var(--dim-font-weight); color: var(--dim-color); padding: 1px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; }
 
 .hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
 .hang-label { 
@@ -876,7 +877,7 @@ body.dragging-frame .frame-vis:hover {
     white-space: nowrap;
 }
 .center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
-.center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: 600; left: 5px; background: rgba(255,255,255,0.8); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+.center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: var(--dim-font-weight); left: 5px; background: rgba(255,255,255,0.8); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
 .crosshair-h { position: absolute; height: 1px; border-top: 1px dashed #aaa; }
 .crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
 
