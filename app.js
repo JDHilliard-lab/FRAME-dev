@@ -460,6 +460,43 @@ function seedAnnotationStyleInputs() {
     if (w) { w.value = annotationStyle.weight; const wv = document.getElementById('annotWeightVal'); if (wv) wv.textContent = annotationStyle.weight + 'px'; }
     if (fs) { fs.value = annotationStyle.fontSize; const fv = document.getElementById('annotFontSizeVal'); if (fv) fv.textContent = annotationStyle.fontSize + 'px'; }
     setAnnotDash(annotationStyle.dash);
+    // Font family dropdown
+    const ff = document.getElementById('annotFontFamily');
+    if (ff) ff.value = annotationStyle.fontFamily || 'Arial, Helvetica, sans-serif';
+    // Weight buttons
+    const fw = annotationStyle.fontWeight || 600;
+    const wReg = document.getElementById('annotWeightReg');
+    const wSemi = document.getElementById('annotWeightSemi');
+    const wBold = document.getElementById('annotWeightBold');
+    if (wReg) wReg.classList.toggle('active', fw === 400);
+    if (wSemi) wSemi.classList.toggle('active', fw === 600);
+    if (wBold) wBold.classList.toggle('active', fw === 700);
+    // SVG frame mode buttons
+    const mTex = document.getElementById('svgModeTexture');
+    const mCol = document.getElementById('svgModeColor');
+    if (mTex) mTex.classList.toggle('active', svgFrameMode === 'texture');
+    if (mCol) mCol.classList.toggle('active', svgFrameMode === 'autocolor');
+}
+
+function setAnnotFontWeight(wt) {
+    annotationStyle.fontWeight = wt;
+    ['annotWeightReg','annotWeightSemi','annotWeightBold'].forEach(id => {
+        const b = document.getElementById(id);
+        if (b) b.classList.remove('active');
+    });
+    const map = { 400: 'annotWeightReg', 600: 'annotWeightSemi', 700: 'annotWeightBold' };
+    const b = document.getElementById(map[wt]);
+    if (b) b.classList.add('active');
+    applyAnnotationStyleFromModal();
+}
+
+function setSvgFrameMode(mode) {
+    svgFrameMode = mode;
+    saveSvgFrameMode();
+    const mTex = document.getElementById('svgModeTexture');
+    const mCol = document.getElementById('svgModeColor');
+    if (mTex) mTex.classList.toggle('active', mode === 'texture');
+    if (mCol) mCol.classList.toggle('active', mode === 'autocolor');
 }
 
 // Returns array of selected-and-active frames (refs into elevFrames).
@@ -484,7 +521,49 @@ let annotationStyle = {
     weight: 2,          // line weight in px
     dash: true,         // dashed (true) vs solid (false)
     fontSize: 13,       // measurement label font size in px
+    // Font family for all dimension text. Arial is installed on virtually
+    // every Mac and PC, so SVG exports open without missing-font errors in
+    // Illustrator/InDesign regardless of platform.
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontWeight: 600,    // 400=Regular, 600=Semibold, 700=Bold
 };
+
+// SVG export frame mode: 'texture' embeds the rendered frame raster (crisp
+// but large files); 'autocolor' draws frames as solid vector rects colored to
+// match the swatch's average color (tiny files, fully vector). Persisted.
+let svgFrameMode = 'texture';
+
+function loadSvgFrameMode() {
+    try {
+        const v = localStorage.getItem('svgFrameMode');
+        if (v === 'autocolor' || v === 'texture') svgFrameMode = v;
+    } catch (e) { /* default */ }
+}
+function saveSvgFrameMode() {
+    try { localStorage.setItem('svgFrameMode', svgFrameMode); } catch (e) {}
+}
+
+// Compute the average color of an image (drawn small for speed). Returns a
+// hex string. Used by autocolor SVG mode so a wood-grain swatch becomes a
+// representative solid color.
+function averageColorOfImage(img) {
+    try {
+        const c = document.createElement('canvas');
+        const S = 16;
+        c.width = S; c.height = S;
+        const x = c.getContext('2d');
+        x.drawImage(img, 0, 0, S, S);
+        const data = x.getImageData(0, 0, S, S).data;
+        let r = 0, g = 0, b = 0, n = 0;
+        for (let i = 0; i < data.length; i += 4) {
+            if (data[i + 3] < 128) continue; // skip transparent
+            r += data[i]; g += data[i + 1]; b += data[i + 2]; n++;
+        }
+        if (n === 0) return null;
+        r = Math.round(r / n); g = Math.round(g / n); b = Math.round(b / n);
+        return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+    } catch (e) { return null; }
+}
 
 function loadAnnotationStyle() {
     try {
@@ -509,6 +588,8 @@ function applyAnnotationStyleToCSSVars() {
     root.style.setProperty('--dim-font-size', (annotationStyle.fontSize || 13) + 'px');
     root.style.setProperty('--dim-weight', (annotationStyle.weight || 2) + 'px');
     root.style.setProperty('--dim-line-style', annotationStyle.dash ? 'dashed' : 'solid');
+    root.style.setProperty('--dim-font-family', annotationStyle.fontFamily || 'Arial, Helvetica, sans-serif');
+    root.style.setProperty('--dim-font-weight', annotationStyle.fontWeight || 600);
 }
 
 function saveAnnotationStyle() {
@@ -935,6 +1016,7 @@ function initMasterApp() {
     loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
     loadDimVisibility();   // restore saved per-element dimension hide flags
     loadUnitSuffixPref();  // restore interior unit-suffix on/off preference
+    loadSvgFrameMode();    // restore SVG frame export mode (texture/autocolor)
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -8175,9 +8257,11 @@ function renderGroupDims() {
         const mkLabel = (text, cx, cy) => {
             const l = document.createElement('div');
             l.textContent = text;
+            const fam = (st.fontFamily || annotationStyle.fontFamily || 'Arial, Helvetica, sans-serif');
+            const fwt = (st.fontWeight || annotationStyle.fontWeight || 600);
             l.style.cssText =
                 `position:absolute; left:${cx}px; top:${cy}px; transform:translate(-50%,-50%);` +
-                `color:${color}; font-size:${fontSize}px; font-weight:700; white-space:nowrap;` +
+                `color:${color}; font-size:${fontSize}px; font-weight:${fwt}; font-family:${fam}; white-space:nowrap;` +
                 `background:#fff; padding:1px 5px; border-radius:3px;` +
                 `pointer-events:none; z-index:4;`;
             return l;
@@ -8307,6 +8391,8 @@ function applyAnnotationStyleFromModal() {
     if (c) { annotationStyle.color = c.value; const hx = document.getElementById('annotColorHex'); if (hx) hx.textContent = c.value; }
     if (w) { annotationStyle.weight = parseInt(w.value, 10) || 2; const wv = document.getElementById('annotWeightVal'); if (wv) wv.textContent = annotationStyle.weight + 'px'; }
     if (fs) { annotationStyle.fontSize = parseInt(fs.value, 10) || 13; const fv = document.getElementById('annotFontSizeVal'); if (fv) fv.textContent = annotationStyle.fontSize + 'px'; }
+    const ff = document.getElementById('annotFontFamily');
+    if (ff) annotationStyle.fontFamily = ff.value;
     // Propagate to every existing group dim across ALL elevations so the
     // style is consistent project-wide.
     elevations.forEach(elev => {
@@ -9117,18 +9203,53 @@ async function exportElevSVG() {
         //  - LEFT: extra room for the character if parked outside the wall, plus
         //    the wall-height dimension that sits outside the left edge.
         //  - TOP: normal room for the wall-width dimension above.
-        const PAD_TOP = 70;
-        const PAD_LEFT = 160;   // extra for character + left wall-height dim
-        const PAD_RIGHT = 24;   // tight — flush-ish to the right
-        const PAD_BOTTOM = 48;  // room for the wall-width dim below the floor
+        // Measure the ACTUAL rendered content bounds (wall + frames + dims +
+        // character + labels) so the artboard hugs the real content. We then
+        // anchor flush to the right + bottom (tiny safety margin) for easy
+        // corner-snapping in InDesign, and keep generous room on the left
+        // (character) + top (wall-width dim).
+        const wallRect0 = wall.getBoundingClientRect();
+        let minL = wallRect0.left, minT = wallRect0.top;
+        let maxR = wallRect0.right, maxB = wallRect0.bottom;
+        // Walk every rendered element inside the elevation that contributes
+        // visible content, expanding the bounds.
+        const boundsEls = [];
+        ['frame-layer','arch-dim-layer','dim-layer','floor-ceiling-layer',
+         'frame-center-layer','guide-layer','label-layer','od-layer',
+         'group-dim-layer'].forEach(id => {
+            const lyr = document.getElementById(id);
+            if (lyr && getComputedStyle(lyr).display !== 'none') boundsEls.push(lyr);
+        });
+        const personWrapB = document.getElementById('person-wrap');
+        if (personWrapB && getComputedStyle(personWrapB).display !== 'none') {
+            boundsEls.push(document.getElementById('person'));
+        }
+        boundsEls.forEach(container => {
+            const kids = container.id ? container.querySelectorAll('*') : [container];
+            const list = container.tagName === 'IMG' ? [container] : kids;
+            list.forEach(el => {
+                const r = el.getBoundingClientRect();
+                if (r.width === 0 && r.height === 0) return;
+                if (r.left < minL) minL = r.left;
+                if (r.top < minT) minT = r.top;
+                if (r.right > maxR) maxR = r.right;
+                if (r.bottom > maxB) maxB = r.bottom;
+            });
+        });
 
-        const svgW = wallWpx + PAD_LEFT + PAD_RIGHT;
-        const svgH = wallHpx + PAD_TOP + PAD_BOTTOM;
+        const SAFE = 6;          // tiny margin so content isn't literally at the edge
+        const LEFT_EXTRA = 40;   // a little extra breathing room on the left for the character
+        const contentLeft = minL - LEFT_EXTRA;
+        const contentTop = minT - SAFE;
+        const contentRight = maxR + SAFE;
+        const contentBottom = maxB + SAFE;
 
-        // Wall's top-left maps to (PAD_LEFT, PAD_TOP).
-        const wallRect = wall.getBoundingClientRect();
-        const ox = PAD_LEFT - wallRect.left;
-        const oy = PAD_TOP - wallRect.top;
+        const svgW = contentRight - contentLeft;
+        const svgH = contentBottom - contentTop;
+
+        // Map screen coords → SVG coords: content's top-left → (0,0).
+        const ox = -contentLeft;
+        const oy = -contentTop;
 
         const cssRoot = getComputedStyle(document.documentElement);
         const dimColor = (cssRoot.getPropertyValue('--dim-color') || '#e00000').trim();
@@ -9146,7 +9267,10 @@ async function exportElevSVG() {
         };
 
         // ── WALL outline: transparent fill (no fill), just the stroke ──
-        midLayer.push(`<rect x="${PAD_LEFT}" y="${PAD_TOP}" width="${wallWpx.toFixed(1)}" height="${wallHpx.toFixed(1)}" fill="none" stroke="${wallLine}" stroke-width="2"/>`);
+        {
+            const wp = rectToSvg(wall);
+            midLayer.push(`<rect x="${wp.x.toFixed(1)}" y="${wp.y.toFixed(1)}" width="${wp.w.toFixed(1)}" height="${wp.h.toFixed(1)}" fill="none" stroke="${wallLine}" stroke-width="2"/>`);
+        }
 
         // ── FRAMES (back layer): embed as <image> ──
         for (const f of elevFrames) {
@@ -9156,6 +9280,20 @@ async function exportElevSVG() {
             const pos = rectToSvg(el);
             try {
                 const swatchImg = f.swatchDataUrl ? await _loadImg(f.swatchDataUrl) : null;
+
+                if (svgFrameMode === 'autocolor') {
+                    // Vector rect colored to match the frame. For image swatches,
+                    // sample the average color; for solid-color frames use fColor.
+                    let fill = f.fColor || '#333333';
+                    if (swatchImg) {
+                        const avg = averageColorOfImage(swatchImg);
+                        if (avg) fill = avg;
+                    }
+                    backLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${fill}" stroke="#000000" stroke-width="0.5"/>`);
+                    continue;
+                }
+
+                // texture mode: embed the rendered frame raster
                 const renderData = Object.assign({}, f, { extW: f.w, extH: f.h });
                 const dInches = _frameDataInInches(renderData, elevUnit);
                 const prevShadow = dashOuterShadowsOn;
