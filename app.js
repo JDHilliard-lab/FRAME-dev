@@ -934,6 +934,7 @@ function initMasterApp() {
     });
     loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
     loadDimVisibility();   // restore saved per-element dimension hide flags
+    loadUnitSuffixPref();  // restore interior unit-suffix on/off preference
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -1190,6 +1191,7 @@ function clearCustomLibrary() {
 let dimVisibility = {
     groupBox: true,   // group dimension callouts
     edgeGap: true,    // edge-gap (distance-to-wall) dimensions
+    wallDims: true,   // overall wall width/height dimensions (default ON)
 };
 
 function loadDimVisibility() {
@@ -1238,6 +1240,15 @@ function syncLayoutGuideButtonStates() {
         egBtn.classList.toggle('active', exists && dimVisibility.edgeGap);
         egBtn.style.opacity = exists ? '1' : '0.4';
     }
+    // Wall dims: always available (not conditional on existence). Keep the
+    // arch-dim-layer display + button blue state in sync with the flag.
+    const wdBtn = document.getElementById('wallDimToggle');
+    const archLayer = document.getElementById('arch-dim-layer');
+    if (archLayer) archLayer.style.display = dimVisibility.wallDims ? 'block' : 'none';
+    if (wdBtn) wdBtn.classList.toggle('active', dimVisibility.wallDims);
+    // Unit suffix toggle: active when interior suffix is shown.
+    const usBtn = document.getElementById('unitSuffixToggle');
+    if (usBtn) usBtn.classList.toggle('active', showUnitSuffix);
 }
 
 // Toggle group-box visibility (only meaningful if one exists).
@@ -1253,6 +1264,16 @@ function toggleEdgeGapVisibility(btn) {
     if (!anyEdgeGapActive()) return;
     dimVisibility.edgeGap = !dimVisibility.edgeGap;
     saveDimVisibility();
+    drawElevAll();
+}
+
+// Toggle wall dimension visibility (arch-dim-layer). Default ON.
+function toggleWallDims(btn) {
+    dimVisibility.wallDims = !dimVisibility.wallDims;
+    saveDimVisibility();
+    const layer = document.getElementById('arch-dim-layer');
+    if (layer) layer.style.display = dimVisibility.wallDims ? 'block' : 'none';
+    if (btn) btn.classList.toggle('active', dimVisibility.wallDims);
     drawElevAll();
 }
 
@@ -8042,6 +8063,23 @@ function drawElevAll() {
     // for the current elevation. Done after frames so the boxes overlay them.
     renderGroupDims();
 
+    // Unit legend (top-left corner of the wall). Shown only when the interior
+    // suffix is OFF — so the reader knows what unit the bare numbers are in.
+    // When the suffix is ON, every number is self-labeling and the legend is
+    // hidden to avoid redundancy.
+    (function renderUnitLegend() {
+        const wallEl = document.getElementById('wall');
+        if (!wallEl) return;
+        let legend = document.getElementById('elev-unit-legend');
+        if (legend) legend.remove();
+        if (showUnitSuffix) return; // suffix on → no legend needed
+        legend = document.createElement('div');
+        legend.id = 'elev-unit-legend';
+        legend.className = 'elev-unit-legend';
+        legend.textContent = unitLegendText();
+        wallEl.appendChild(legend);
+    })();
+
     // Sync the Group Box + Edge Gap Layout Guides buttons' blue state to
     // reflect whether those annotations currently exist + are visible.
     if (typeof syncLayoutGuideButtonStates === 'function') {
@@ -8090,11 +8128,14 @@ function renderGroupDims() {
         const dashCss = st.dash ? `${Math.max(4, weight * 3)}px ${Math.max(3, weight * 2)}px` : 'none';
         const fontSize = st.fontSize || 13;
 
-        // Bounding box in layer pixels.
-        const boxLeft = sx(bbox.minX);
-        const boxTop = pxTopOf(bbox.minY, bbox.h);
-        const boxW = sx(bbox.w);
-        const boxH = sx(bbox.h);
+        // Bounding box in layer pixels. Expanded OUTWARD by GAP so the dashed
+        // line sits just outside the frames rather than overlapping their
+        // edges. Dimension + extension lines anchor to this expanded box.
+        const GAP = 5;
+        const boxLeft = sx(bbox.minX) - GAP;
+        const boxTop = pxTopOf(bbox.minY, bbox.h) - GAP;
+        const boxW = sx(bbox.w) + GAP * 2;
+        const boxH = sx(bbox.h) + GAP * 2;
 
         // ── Inner bounding rectangle: DASHED (per client convention) ──
         const rect = document.createElement('div');
@@ -8153,7 +8194,7 @@ function renderGroupDims() {
             // Dashed extension lines from box corners up to the dim line
             layer.appendChild(mkLine(boxLeft, lineY, 0, OFFSET, 'dashed'));
             layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, OFFSET, 'dashed'));
-            layer.appendChild(mkLabel(elevFmt(bbox.w) + unitSuffix(), boxLeft + boxW / 2, lineY));
+            layer.appendChild(mkLabel(elevFmtU(bbox.w), boxLeft + boxW / 2, lineY));
         }
 
         // ── HEIGHT dimension line (left of the box) — SOLID line, DASHED extensions ──
@@ -8165,7 +8206,7 @@ function renderGroupDims() {
             // Dashed extension lines from box corners out to the dim line
             layer.appendChild(mkLine(lineX, boxTop, OFFSET, 0, 'dashed'));
             layer.appendChild(mkLine(lineX, boxTop + boxH, OFFSET, 0, 'dashed'));
-            const hl = mkLabel(elevFmt(bbox.h) + unitSuffix(), lineX, boxTop + boxH / 2);
+            const hl = mkLabel(elevFmtU(bbox.h), lineX, boxTop + boxH / 2);
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
             layer.appendChild(hl);
         }
@@ -8194,6 +8235,46 @@ function renderGroupDims() {
 function unitSuffix() {
     if (elevUnit === 'in') return '"';
     return ' ' + elevUnit;
+}
+
+// Whether INTERIOR dimension labels (spacing, group box, hang height, edge
+// gaps) include the unit suffix. Default OFF for a cleaner look that fits
+// tight spaces; a corner legend shows the active unit instead. The OUTER
+// wall dimensions ALWAYS show their suffix regardless (plenty of room
+// outside the elevation), so they bypass this toggle.
+let showUnitSuffix = false;
+
+function loadUnitSuffixPref() {
+    try {
+        const raw = localStorage.getItem('showUnitSuffix');
+        if (raw !== null) showUnitSuffix = (raw === '1');
+    } catch (e) { /* default */ }
+}
+
+function saveUnitSuffixPref() {
+    try { localStorage.setItem('showUnitSuffix', showUnitSuffix ? '1' : '0'); }
+    catch (e) { /* ignore */ }
+}
+
+// Format an INTERIOR dimension value: number + suffix only when the toggle
+// is on. Use this everywhere except the outer wall dims.
+function elevFmtU(val) {
+    return elevFmt(val) + (showUnitSuffix ? unitSuffix() : '');
+}
+
+// Human-readable unit name for the corner legend.
+function unitLegendText() {
+    const names = { in: 'INCHES', cm: 'CENTIMETERS', mm: 'MILLIMETERS' };
+    return 'ALL DIMENSIONS IN ' + (names[elevUnit] || elevUnit.toUpperCase());
+}
+
+// Toggle the interior-suffix preference + re-render. Updates the button
+// state and the legend visibility.
+function toggleUnitSuffix(btn) {
+    showUnitSuffix = !showUnitSuffix;
+    saveUnitSuffixPref();
+    if (btn) btn.classList.toggle('active', showUnitSuffix);
+    drawElevAll();
 }
 
 // ── Annotation style modal ──
@@ -8501,7 +8582,7 @@ function drawElevGuides(wallW, wallH) {
             `<div style="position:absolute; left:0; top:-6px; transform:translate(-50%,-100%); color:var(--dim-color); font-family:var(--dim-font-family); font-size:calc(var(--dim-font-size) * 0.85); font-weight:600; letter-spacing:0.5px; white-space:nowrap; background:rgba(255,255,255,0.85); padding:1px 5px; border-radius:3px;">HANG HEIGHT</div>` +
             // the number, centered between the line ends (rotated to read
             // along the vertical line).
-            `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</div>`;
+            `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmtU(hangVal)}</div>`;
         guideLayer.appendChild(fh);
     }
     
@@ -8530,14 +8611,14 @@ function drawElevTargetedSpacing() {
                         let gapX = rightF.x - (leftF.x + leftF.w);
                         let oTop = Math.max(leftF.y, rightF.y); let oBot = Math.min(leftF.y + leftF.h, rightF.y + rightF.h);
                         let anchorY = oBot > oTop ? oTop + (oBot - oTop)/2 : (leftF.y + leftF.h/2 + rightF.y + rightF.h/2)/2;
-                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmt(gapX));
+                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX));
                     }
                     let botF = f1.y < f2.y ? f1 : f2; let topF = f1.y < f2.y ? f2 : f1;
                     if (topF.y >= botF.y + botF.h) {
                         let gapY = topF.y - (botF.y + botF.h);
                         let oLeft = Math.max(botF.x, topF.x); let oRight = Math.min(botF.x + botF.w, topF.x + topF.w);
                         let anchorX = oRight > oLeft ? oLeft + (oRight - oLeft)/2 : (botF.x + botF.w/2 + topF.x + topF.w/2)/2;
-                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmt(gapY));
+                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY));
                     }
                     drawnPairs.add(pairId);
                 }
@@ -8580,28 +8661,28 @@ function drawPerFrameDistanceDims() {
         if (dt.ceiling) {
             const ceilingDist = wallH - (f.y + f.h);
             if (ceilingDist > 0) {
-                createElevArchSpacing(verticalAnchorX, f.y + f.h, verticalAnchorX, wallH, 'v', layer, elevFmt(ceilingDist));
+                createElevArchSpacing(verticalAnchorX, f.y + f.h, verticalAnchorX, wallH, 'v', layer, elevFmtU(ceilingDist));
             }
         }
         // FLOOR distance: from bottom of frame down to 0
         if (dt.floor) {
             const floorDist = f.y;
             if (floorDist > 0) {
-                createElevArchSpacing(verticalAnchorX, 0, verticalAnchorX, f.y, 'v', layer, elevFmt(floorDist));
+                createElevArchSpacing(verticalAnchorX, 0, verticalAnchorX, f.y, 'v', layer, elevFmtU(floorDist));
             }
         }
         // LEFT WALL distance: from left of frame back to 0
         if (dt.left) {
             const leftDist = f.x;
             if (leftDist > 0) {
-                createElevArchSpacing(0, horizontalAnchorY, f.x, horizontalAnchorY, 'h', layer, elevFmt(leftDist));
+                createElevArchSpacing(0, horizontalAnchorY, f.x, horizontalAnchorY, 'h', layer, elevFmtU(leftDist));
             }
         }
         // RIGHT WALL distance: from right of frame to wallW
         if (dt.right) {
             const rightDist = wallW - (f.x + f.w);
             if (rightDist > 0) {
-                createElevArchSpacing(f.x + f.w, horizontalAnchorY, wallW, horizontalAnchorY, 'h', layer, elevFmt(rightDist));
+                createElevArchSpacing(f.x + f.w, horizontalAnchorY, wallW, horizontalAnchorY, 'h', layer, elevFmtU(rightDist));
             }
         }
     });
