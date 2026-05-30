@@ -8363,6 +8363,33 @@ function drawElevGuides(wallW, wallH) {
         hl.style.bottom = (hangVal * elevScale) + 'px';
         hl.innerHTML = `<span class="hang-label">HANG HEIGHT: ${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</span>`;
         guideLayer.appendChild(hl);
+
+        // Floor-to-hangline vertical dimension. Shows the hang height as a
+        // measured callout from the floor up to the hang line. Positioned a
+        // small inset from the left wall edge so it doesn't overlap the
+        // wall-height arch dim that sits just outside the wall on the left.
+        const dimXIn = 8 * unitFactor('in', elevUnit); // inset from left edge
+        const dimXpx = dimXIn * elevScale;
+        const hangPx = hangVal * elevScale;
+        const wallHpx = wallH * elevScale;
+        const TICK = 6;
+
+        const fh = document.createElement('div');
+        fh.className = 'floor-hang-dim';
+        // The line spans from floor (bottom:0) up to the hang line.
+        // Container positioned absolutely; children drawn relative to it.
+        fh.style.cssText =
+            `position:absolute; left:${dimXpx}px; bottom:0; height:${hangPx}px; width:0; z-index:1;`;
+        // Vertical dimension line
+        fh.innerHTML =
+            `<div style="position:absolute; left:0; top:0; bottom:0; width:0; border-left:var(--dim-weight) solid var(--dim-color);"></div>` +
+            // floor tick
+            `<div style="position:absolute; left:${-TICK}px; bottom:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
+            // hang-line tick
+            `<div style="position:absolute; left:${-TICK}px; top:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
+            // measurement label (rotated, vertically centered on the line)
+            `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</div>`;
+        guideLayer.appendChild(fh);
     }
     
     const offsetDist = 6 * unitFactor('in', elevUnit);
