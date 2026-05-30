@@ -455,6 +455,100 @@ function getSelectedFrames() {
     return elevFrames.filter(f => f.selected && f.active);
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// GROUP DIMENSION CALLOUTS
+// ──────────────────────────────────────────────────────────────────────────
+// A group-dimension is a dashed bounding box drawn around a set of selected
+// frames, with width + height measurement callouts. Stored per-elevation in
+// elevations[i].groupDims. Each entry references frames by LETTER so the box
+// auto-recomputes (tracks frame moves) on every render. Style is per-entry,
+// seeded from the global default below, and editable in the settings popup.
+
+// Global default style for new annotations (group dims, and later text/lines).
+// Persisted to localStorage so a user's preferred look sticks across sessions.
+let annotationStyle = {
+    color: '#e00000',   // red, matching the client's install-drawing convention
+    weight: 2,          // line weight in px
+    dash: true,         // dashed (true) vs solid (false)
+    fontSize: 13,       // measurement label font size in px
+};
+
+function loadAnnotationStyle() {
+    try {
+        const raw = localStorage.getItem('annotationStyle');
+        if (raw) {
+            const s = JSON.parse(raw);
+            if (s && typeof s === 'object') annotationStyle = Object.assign(annotationStyle, s);
+        }
+    } catch (e) { /* keep defaults */ }
+}
+
+function saveAnnotationStyle() {
+    try { localStorage.setItem('annotationStyle', JSON.stringify(annotationStyle)); }
+    catch (e) { /* ignore */ }
+}
+
+// Ensure the current elevation has a groupDims array (older saved projects
+// won't have it). Returns the array.
+function getElevGroupDims() {
+    const ce = elevations[currentElevIndex];
+    if (!ce) return [];
+    if (!Array.isArray(ce.groupDims)) ce.groupDims = [];
+    return ce.groupDims;
+}
+
+// Create a group-dimension callout from the currently-selected frames.
+// Needs at least 1 selected frame (1 frame = its own bounding box, which is
+// occasionally useful, but we require 2+ to be meaningful as a "group").
+let groupDimSeq = 0;
+function createGroupDimFromSelection() {
+    const sel = getSelectedFrames();
+    if (sel.length < 2) {
+        showInfoModal('Select Frames First',
+            'Select at least two frames (Shift-click or drag a selection box) before adding a group dimension.');
+        return;
+    }
+    const dims = getElevGroupDims();
+    const entry = {
+        id: 'gd_' + (Date.now().toString(36)) + '_' + (groupDimSeq++),
+        frameLetters: sel.map(f => f.letter),
+        showWidth: true,
+        showHeight: true,
+        // Per-entry style snapshot from the current global default.
+        style: Object.assign({}, annotationStyle),
+    };
+    dims.push(entry);
+    drawElevAll();
+    pushHistory();
+}
+
+// Remove a group dimension by id.
+function removeGroupDim(id) {
+    const dims = getElevGroupDims();
+    const idx = dims.findIndex(d => d.id === id);
+    if (idx >= 0) {
+        dims.splice(idx, 1);
+        drawElevAll();
+        pushHistory();
+    }
+}
+
+// Compute the bounding box (in inches, elevation coords) of the frames a
+// group-dim references. Returns null if no referenced frames are still
+// present/active (e.g. user deleted them after creating the callout).
+function computeGroupDimBBox(entry) {
+    const refs = elevFrames.filter(f => f.active && entry.frameLetters.indexOf(f.letter) >= 0);
+    if (refs.length === 0) return null;
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    refs.forEach(f => {
+        if (f.x < minX) minX = f.x;
+        if (f.y < minY) minY = f.y;
+        if (f.x + f.w > maxX) maxX = f.x + f.w;
+        if (f.y + f.h > maxY) maxY = f.y + f.h;
+    });
+    return { minX, minY, maxX, maxY, w: maxX - minX, h: maxY - minY };
+}
+
 // Nudge selected frames by (dx, dy) inches. dx negative = left, dy negative = down.
 function nudgeSelectedFrames(dx, dy) {
     const sel = getSelectedFrames();
@@ -809,6 +903,7 @@ function initMasterApp() {
         // same code, matching the precedence rule of live syncDashLibraryFolder.
         restoreCustomLibraryFromStorage();
     });
+    loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -7586,6 +7681,7 @@ function drawElevAll() {
     const labelLayer = document.getElementById('label-layer'); labelLayer.innerHTML = '';
     const odLayer = document.getElementById('od-layer'); odLayer.innerHTML = '';
     const centerLayer = document.getElementById('frame-center-layer'); centerLayer.innerHTML = '';
+    const groupDimLayer = document.getElementById('group-dim-layer'); if (groupDimLayer) groupDimLayer.innerHTML = '';
     
     elevFrames.forEach((f, idx) => {
         if(!f.active) return;
@@ -7824,6 +7920,10 @@ function drawElevAll() {
     // uses fresh DOM selection on each call.
     wireElevHoverPairing();
 
+    // Render group-dimension callouts (dashed bounding boxes + measurements)
+    // for the current elevation. Done after frames so the boxes overlay them.
+    renderGroupDims();
+
     // Wall-background click handler: clicking on the wall but NOT on a frame
     // clears all selections. event.target === wall ensures we only clear when
     // the click is on the wall itself, not on a child element (frames, hang
@@ -7836,8 +7936,182 @@ function drawElevAll() {
     };
 }
 
-// ─────────────────────────────────────────────────────────────────────
-// SNAP-TO-OTHER-FRAMES while dragging
+// Render all group-dimension callouts for the current elevation into
+// #group-dim-layer. Each callout = dashed bbox + width line (above) + height
+// line (left) + measurement labels. Recomputed every drawElevAll so the box
+// tracks frame moves automatically.
+function renderGroupDims() {
+    const layer = document.getElementById('group-dim-layer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    const dims = getElevGroupDims();
+    if (!dims.length) return;
+
+    const wallH = parseFloat(document.getElementById('wallH').value) || 1;
+    // Convert elevation-inch coords → layer pixels. x grows right; the layer's
+    // y grows DOWN, but frame y is measured from the BOTTOM, so we flip:
+    //   pxTop = (wallH - (y + h)) * scale
+    const sx = (inches) => inches * elevScale;
+    const pxTopOf = (yBottomInches, hInches) => (wallH - (yBottomInches + hInches)) * elevScale;
+
+    dims.forEach(entry => {
+        const bbox = computeGroupDimBBox(entry);
+        if (!bbox) return; // referenced frames gone
+
+        const st = entry.style || annotationStyle;
+        const color = st.color || '#e00000';
+        const weight = st.weight || 2;
+        const dashCss = st.dash ? `${Math.max(4, weight * 3)}px ${Math.max(3, weight * 2)}px` : 'none';
+        const fontSize = st.fontSize || 13;
+
+        // Bounding box in layer pixels.
+        const boxLeft = sx(bbox.minX);
+        const boxTop = pxTopOf(bbox.minY, bbox.h);
+        const boxW = sx(bbox.w);
+        const boxH = sx(bbox.h);
+
+        // ── Dashed bounding rectangle ──
+        const rect = document.createElement('div');
+        rect.style.cssText =
+            `position:absolute; left:${boxLeft}px; top:${boxTop}px; width:${boxW}px; height:${boxH}px;` +
+            `border:${weight}px ${st.dash ? 'dashed' : 'solid'} ${color}; box-sizing:border-box;` +
+            `pointer-events:none; z-index:1;`;
+        layer.appendChild(rect);
+
+        // Helper to make a dimension line (thin div) with optional dashes.
+        const mkLine = (x, y, w, h) => {
+            const d = document.createElement('div');
+            d.style.cssText =
+                `position:absolute; left:${x}px; top:${y}px; ` +
+                (w > h
+                    ? `width:${w}px; height:0; border-top:${weight}px ${st.dash ? 'dashed' : 'solid'} ${color};`
+                    : `height:${h}px; width:0; border-left:${weight}px ${st.dash ? 'dashed' : 'solid'} ${color};`) +
+                `pointer-events:none; z-index:1;`;
+            return d;
+        };
+        // Small end-tick perpendicular to a dimension line.
+        const mkTick = (cx, cy, vertical) => {
+            const TICK = 6;
+            const d = document.createElement('div');
+            if (vertical) {
+                d.style.cssText = `position:absolute; left:${cx}px; top:${cy - TICK}px; height:${TICK * 2}px; width:0; border-left:${weight}px solid ${color}; pointer-events:none; z-index:1;`;
+            } else {
+                d.style.cssText = `position:absolute; left:${cx - TICK}px; top:${cy}px; width:${TICK * 2}px; height:0; border-top:${weight}px solid ${color}; pointer-events:none; z-index:1;`;
+            }
+            return d;
+        };
+        // Measurement label.
+        const mkLabel = (text, cx, cy) => {
+            const l = document.createElement('div');
+            l.textContent = text;
+            l.style.cssText =
+                `position:absolute; left:${cx}px; top:${cy}px; transform:translate(-50%,-50%);` +
+                `color:${color}; font-size:${fontSize}px; font-weight:600; white-space:nowrap;` +
+                `background:rgba(255,255,255,0.85); padding:0 3px; pointer-events:none; z-index:2;`;
+            return l;
+        };
+
+        const OFFSET = 26; // px gap between bbox and dimension line
+
+        // ── WIDTH dimension line (above the box) ──
+        if (entry.showWidth !== false) {
+            const lineY = boxTop - OFFSET;
+            layer.appendChild(mkLine(boxLeft, lineY, boxW, 0));
+            layer.appendChild(mkTick(boxLeft, lineY, true));
+            layer.appendChild(mkTick(boxLeft + boxW, lineY, true));
+            // Extension lines from box corners up to the dim line
+            layer.appendChild(mkLine(boxLeft, lineY, 0, OFFSET));
+            layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, OFFSET));
+            layer.appendChild(mkLabel(elevFmt(bbox.w) + unitSuffix(), boxLeft + boxW / 2, lineY));
+        }
+
+        // ── HEIGHT dimension line (left of the box) ──
+        if (entry.showHeight !== false) {
+            const lineX = boxLeft - OFFSET;
+            layer.appendChild(mkLine(lineX, boxTop, 0, boxH));
+            layer.appendChild(mkTick(lineX, boxTop, false));
+            layer.appendChild(mkTick(lineX, boxTop + boxH, false));
+            // Extension lines from box corners out to the dim line
+            layer.appendChild(mkLine(lineX, boxTop, OFFSET, 0));
+            layer.appendChild(mkLine(lineX, boxTop + boxH, OFFSET, 0));
+            const hl = mkLabel(elevFmt(bbox.h) + unitSuffix(), lineX, boxTop + boxH / 2);
+            hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
+            layer.appendChild(hl);
+        }
+
+        // ── Delete affordance: small × at the box's top-right corner ──
+        const del = document.createElement('div');
+        del.textContent = '×';
+        del.title = 'Remove group dimension';
+        del.style.cssText =
+            `position:absolute; left:${boxLeft + boxW - 8}px; top:${boxTop - 8}px;` +
+            `width:18px; height:18px; line-height:16px; text-align:center; border-radius:50%;` +
+            `background:${color}; color:#fff; font-size:14px; font-weight:bold; cursor:pointer;` +
+            `z-index:5; opacity:0; transition:opacity 0.15s; user-select:none;`;
+        del.onmouseenter = () => { del.style.opacity = '1'; };
+        del.onmouseleave = () => { del.style.opacity = '0'; };
+        // Keep it discoverable: fade in when hovering the box region too.
+        rect.style.pointerEvents = 'none';
+        del.onclick = (e) => { e.stopPropagation(); removeGroupDim(entry.id); };
+        // Make the × always faintly visible so users can find it.
+        del.style.opacity = '0.55';
+        layer.appendChild(del);
+    });
+}
+
+// Unit suffix for measurement labels (", cm, mm).
+function unitSuffix() {
+    if (elevUnit === 'in') return '"';
+    return ' ' + elevUnit;
+}
+
+// ── Annotation style modal ──
+function openAnnotationStyleModal() {
+    // Seed inputs from current global style
+    const c = document.getElementById('annotColor');
+    const w = document.getElementById('annotWeight');
+    const fs = document.getElementById('annotFontSize');
+    if (c) { c.value = annotationStyle.color; document.getElementById('annotColorHex').textContent = annotationStyle.color; }
+    if (w) { w.value = annotationStyle.weight; document.getElementById('annotWeightVal').textContent = annotationStyle.weight + 'px'; }
+    if (fs) { fs.value = annotationStyle.fontSize; document.getElementById('annotFontSizeVal').textContent = annotationStyle.fontSize + 'px'; }
+    setAnnotDash(annotationStyle.dash);
+    document.getElementById('annotationStyleModal').style.display = 'flex';
+}
+
+function closeAnnotationStyleModal() {
+    document.getElementById('annotationStyleModal').style.display = 'none';
+    pushHistory(); // the style changes to existing callouts are undoable
+}
+
+function setAnnotDash(on) {
+    annotationStyle.dash = !!on;
+    const onBtn = document.getElementById('annotDashOn');
+    const offBtn = document.getElementById('annotDashOff');
+    if (onBtn) onBtn.classList.toggle('active', !!on);
+    if (offBtn) offBtn.classList.toggle('active', !on);
+    applyAnnotationStyleFromModal();
+}
+
+// Read the modal inputs into annotationStyle, propagate to all existing
+// group dims, persist, and re-render. Called live on every input change so
+// the user sees the effect immediately.
+function applyAnnotationStyleFromModal() {
+    const c = document.getElementById('annotColor');
+    const w = document.getElementById('annotWeight');
+    const fs = document.getElementById('annotFontSize');
+    if (c) { annotationStyle.color = c.value; const hx = document.getElementById('annotColorHex'); if (hx) hx.textContent = c.value; }
+    if (w) { annotationStyle.weight = parseInt(w.value, 10) || 2; const wv = document.getElementById('annotWeightVal'); if (wv) wv.textContent = annotationStyle.weight + 'px'; }
+    if (fs) { annotationStyle.fontSize = parseInt(fs.value, 10) || 13; const fv = document.getElementById('annotFontSizeVal'); if (fv) fv.textContent = annotationStyle.fontSize + 'px'; }
+    // Propagate to every existing group dim across ALL elevations so the
+    // style is consistent project-wide.
+    elevations.forEach(elev => {
+        if (Array.isArray(elev.groupDims)) {
+            elev.groupDims.forEach(gd => { gd.style = Object.assign({}, annotationStyle); });
+        }
+    });
+    saveAnnotationStyle();
+    drawElevAll();
+}
 // ─────────────────────────────────────────────────────────────────────
 // When a frame is dragged, after the normal whole-inch snapping, we check
 // if any of its key alignment points (left edge, right edge, center) come
