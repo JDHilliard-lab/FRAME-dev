@@ -1201,3 +1201,22 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+/* Unit legend — top-left corner of the elevation wall. Shown when the
+ * interior dimension suffix is toggled off, so bare numbers are unambiguous. */
+.elev-unit-legend {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 22;
+    color: var(--dim-color);
+    font-family: var(--dim-font-family);
+    font-size: calc(var(--dim-font-size) * 0.9);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--dim-color);
+    border-radius: 3px;
+    padding: 3px 8px;
+    pointer-events: none;
+    white-space: nowrap;
+}
