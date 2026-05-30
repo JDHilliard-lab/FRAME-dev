@@ -932,6 +932,7 @@ function initMasterApp() {
         restoreCustomLibraryFromStorage();
     });
     loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
+    loadDimVisibility();   // restore saved per-element dimension hide flags
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -1179,6 +1180,100 @@ function clearCustomLibrary() {
         }
     });
     populateDashVendorDropdown();
+}
+
+// Per-element dimension visibility flags, controlled by the eye/hide panel
+// in Layout Guides. Independent of the layer-level Layout Guides toggles.
+// Lets the user hide specific annotation types (e.g. for a clean
+// frames-only export). Persisted to localStorage. Default: all visible.
+let dimVisibility = {
+    groupBox: true,    // group dimension callouts
+    floorArt: true,    // floor-to-hangline (floor-to-artwork) dimension
+    letters: true,     // frame letter labels
+    spacing: true,     // spacing dimensions between frames
+    wall: true,        // wall (architectural) dimensions
+};
+
+function loadDimVisibility() {
+    try {
+        const raw = localStorage.getItem('dimVisibility');
+        if (raw) {
+            const v = JSON.parse(raw);
+            if (v && typeof v === 'object') dimVisibility = Object.assign(dimVisibility, v);
+        }
+    } catch (e) { /* defaults */ }
+}
+
+function saveDimVisibility() {
+    try { localStorage.setItem('dimVisibility', JSON.stringify(dimVisibility)); }
+    catch (e) { /* ignore */ }
+}
+
+// Apply the visibility flags. Some elements are whole layers (letters →
+// label-layer, wall → arch-dim-layer, spacing → dim-layer); others are
+// sub-elements re-rendered each draw (group box, floor-art). For the
+// layer-level ones we set display; for sub-elements drawElevAll + the
+// renderers consult dimVisibility directly.
+function applyDimVisibility() {
+    const setLayer = (id, show) => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = show ? '' : 'none';
+    };
+    // NOTE: these override the Layout Guides toggles' display while a flag is
+    // OFF. When a flag is ON we don't force display, so the Layout Guides
+    // toggle still governs. (Hide panel can only HIDE, not force-show.)
+    if (!dimVisibility.letters) setLayer('label-layer', false);
+    if (!dimVisibility.wall) setLayer('arch-dim-layer', false);
+    if (!dimVisibility.spacing) setLayer('dim-layer', false);
+    // group box + floor-art are sub-elements; re-render handles them.
+    drawElevAll();
+}
+
+function toggleDimVisibility(key, on) {
+    if (!(key in dimVisibility)) return;
+    dimVisibility[key] = !!on;
+    saveDimVisibility();
+    applyDimVisibility();
+}
+
+function openDimHideModal() {
+    // Seed checkboxes from current state
+    const map = {
+        hideGroupBox: 'groupBox', hideFloorArt: 'floorArt',
+        hideLetters: 'letters', hideSpacing: 'spacing', hideWall: 'wall',
+    };
+    Object.keys(map).forEach(cbId => {
+        const cb = document.getElementById(cbId);
+        if (cb) cb.checked = !dimVisibility[map[cbId]]; // checkbox = "hide" so invert
+    });
+    document.getElementById('dimHideModal').style.display = 'flex';
+}
+
+function closeDimHideModal() {
+    document.getElementById('dimHideModal').style.display = 'none';
+}
+
+// Reset all dimension types to visible (uncheck all hide boxes).
+function showAllDims() {
+    Object.keys(dimVisibility).forEach(k => { dimVisibility[k] = true; });
+    saveDimVisibility();
+    ['hideGroupBox', 'hideFloorArt', 'hideLetters', 'hideSpacing', 'hideWall'].forEach(id => {
+        const cb = document.getElementById(id);
+        if (cb) cb.checked = false;
+    });
+    applyDimVisibility();
+}
+
+// Called by each checkbox. cbId maps to a flag; checkbox checked = hide.
+function onDimHideCheckbox(cbId) {
+    const map = {
+        hideGroupBox: 'groupBox', hideFloorArt: 'floorArt',
+        hideLetters: 'letters', hideSpacing: 'spacing', hideWall: 'wall',
+    };
+    const key = map[cbId];
+    if (!key) return;
+    const cb = document.getElementById(cbId);
+    toggleDimVisibility(key, !cb.checked); // checked = hide → flag = false
 }
 
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
@@ -7960,6 +8055,16 @@ function drawElevAll() {
     // for the current elevation. Done after frames so the boxes overlay them.
     renderGroupDims();
 
+    // Reassert per-element hide flags for layer-level items so they stay
+    // hidden across redraws. Done inline (not via applyDimVisibility, which
+    // would recurse into drawElevAll).
+    if (typeof dimVisibility !== 'undefined') {
+        const setL = (id, show) => { const el = document.getElementById(id); if (el && !show) el.style.display = 'none'; };
+        setL('label-layer', dimVisibility.letters);
+        setL('arch-dim-layer', dimVisibility.wall);
+        setL('dim-layer', dimVisibility.spacing);
+    }
+
     // Wall-background click handler: clicking on the wall but NOT on a frame
     // clears all selections. event.target === wall ensures we only clear when
     // the click is on the wall itself, not on a child element (frames, hang
@@ -7980,6 +8085,8 @@ function renderGroupDims() {
     const layer = document.getElementById('group-dim-layer');
     if (!layer) return;
     layer.innerHTML = '';
+    // Hide panel: skip group boxes entirely when hidden.
+    if (typeof dimVisibility !== 'undefined' && !dimVisibility.groupBox) return;
     const dims = getElevGroupDims();
     if (!dims.length) return;
 
@@ -8006,26 +8113,28 @@ function renderGroupDims() {
         const boxW = sx(bbox.w);
         const boxH = sx(bbox.h);
 
-        // ── Dashed bounding rectangle ──
+        // ── Inner bounding rectangle: DASHED (per client convention) ──
         const rect = document.createElement('div');
         rect.style.cssText =
             `position:absolute; left:${boxLeft}px; top:${boxTop}px; width:${boxW}px; height:${boxH}px;` +
-            `border:${weight}px ${st.dash ? 'dashed' : 'solid'} ${color}; box-sizing:border-box;` +
+            `border:${weight}px dashed ${color}; box-sizing:border-box;` +
             `pointer-events:none; z-index:1;`;
         layer.appendChild(rect);
 
-        // Helper to make a dimension line (thin div) with optional dashes.
-        const mkLine = (x, y, w, h) => {
+        // mkLine: a straight line. `lineStyle` ('solid' | 'dashed') lets us
+        // make dimension lines solid and extension lines dashed.
+        const mkLine = (x, y, w, h, lineStyle) => {
+            const ls = lineStyle || 'solid';
             const d = document.createElement('div');
             d.style.cssText =
                 `position:absolute; left:${x}px; top:${y}px; ` +
                 (w > h
-                    ? `width:${w}px; height:0; border-top:${weight}px ${st.dash ? 'dashed' : 'solid'} ${color};`
-                    : `height:${h}px; width:0; border-left:${weight}px ${st.dash ? 'dashed' : 'solid'} ${color};`) +
+                    ? `width:${w}px; height:0; border-top:${weight}px ${ls} ${color};`
+                    : `height:${h}px; width:0; border-left:${weight}px ${ls} ${color};`) +
                 `pointer-events:none; z-index:1;`;
             return d;
         };
-        // Small end-tick perpendicular to a dimension line.
+        // Small end-tick perpendicular to a dimension line (always solid).
         const mkTick = (cx, cy, vertical) => {
             const TICK = 6;
             const d = document.createElement('div');
@@ -8049,27 +8158,27 @@ function renderGroupDims() {
 
         const OFFSET = 26; // px gap between bbox and dimension line
 
-        // ── WIDTH dimension line (above the box) ──
+        // ── WIDTH dimension line (above the box) — SOLID line, DASHED extensions ──
         if (entry.showWidth !== false) {
             const lineY = boxTop - OFFSET;
-            layer.appendChild(mkLine(boxLeft, lineY, boxW, 0));
+            layer.appendChild(mkLine(boxLeft, lineY, boxW, 0, 'solid'));   // solid dim line
             layer.appendChild(mkTick(boxLeft, lineY, true));
             layer.appendChild(mkTick(boxLeft + boxW, lineY, true));
-            // Extension lines from box corners up to the dim line
-            layer.appendChild(mkLine(boxLeft, lineY, 0, OFFSET));
-            layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, OFFSET));
+            // Dashed extension lines from box corners up to the dim line
+            layer.appendChild(mkLine(boxLeft, lineY, 0, OFFSET, 'dashed'));
+            layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, OFFSET, 'dashed'));
             layer.appendChild(mkLabel(elevFmt(bbox.w) + unitSuffix(), boxLeft + boxW / 2, lineY));
         }
 
-        // ── HEIGHT dimension line (left of the box) ──
+        // ── HEIGHT dimension line (left of the box) — SOLID line, DASHED extensions ──
         if (entry.showHeight !== false) {
             const lineX = boxLeft - OFFSET;
-            layer.appendChild(mkLine(lineX, boxTop, 0, boxH));
+            layer.appendChild(mkLine(lineX, boxTop, 0, boxH, 'solid'));    // solid dim line
             layer.appendChild(mkTick(lineX, boxTop, false));
             layer.appendChild(mkTick(lineX, boxTop + boxH, false));
-            // Extension lines from box corners out to the dim line
-            layer.appendChild(mkLine(lineX, boxTop, OFFSET, 0));
-            layer.appendChild(mkLine(lineX, boxTop + boxH, OFFSET, 0));
+            // Dashed extension lines from box corners out to the dim line
+            layer.appendChild(mkLine(lineX, boxTop, OFFSET, 0, 'dashed'));
+            layer.appendChild(mkLine(lineX, boxTop + boxH, OFFSET, 0, 'dashed'));
             const hl = mkLabel(elevFmt(bbox.h) + unitSuffix(), lineX, boxTop + boxH / 2);
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
             layer.appendChild(hl);
@@ -8373,37 +8482,45 @@ function drawElevGuides(wallW, wallH) {
 
     const hangVal = getHangHeight();
     if(hangVal < wallH) {
+        // Horizontal hang line — just the dashed line now, no inline text.
+        // The HANG HEIGHT wording + measurement live on the vertical
+        // floor-to-hangline dimension on the left (below).
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
-        hl.innerHTML = `<span class="hang-label">HANG HEIGHT: ${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</span>`;
         guideLayer.appendChild(hl);
 
         // Floor-to-hangline vertical dimension. Shows the hang height as a
         // measured callout from the floor up to the hang line. Positioned a
         // small inset from the left wall edge so it doesn't overlap the
         // wall-height arch dim that sits just outside the wall on the left.
+        // Tagged data-dim-type="floor-art" so the hide panel can target it.
+        if (typeof dimVisibility === 'undefined' || dimVisibility.floorArt) {
         const dimXIn = 8 * unitFactor('in', elevUnit); // inset from left edge
         const dimXpx = dimXIn * elevScale;
         const hangPx = hangVal * elevScale;
-        const wallHpx = wallH * elevScale;
         const TICK = 6;
 
         const fh = document.createElement('div');
         fh.className = 'floor-hang-dim';
-        // The line spans from floor (bottom:0) up to the hang line.
-        // Container positioned absolutely; children drawn relative to it.
+        fh.setAttribute('data-dim-type', 'floor-art');
         fh.style.cssText =
             `position:absolute; left:${dimXpx}px; bottom:0; height:${hangPx}px; width:0; z-index:1;`;
-        // Vertical dimension line
         fh.innerHTML =
+            // vertical dimension line
             `<div style="position:absolute; left:0; top:0; bottom:0; width:0; border-left:var(--dim-weight) solid var(--dim-color);"></div>` +
             // floor tick
             `<div style="position:absolute; left:${-TICK}px; bottom:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
             // hang-line tick
             `<div style="position:absolute; left:${-TICK}px; top:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
-            // measurement label (rotated, vertically centered on the line)
+            // "HANG HEIGHT" words stacked vertically ABOVE the line (top end),
+            // using vertical writing-mode so they read bottom-to-top like the
+            // line itself. Positioned just above the top tick.
+            `<div style="position:absolute; left:0; top:-8px; transform:translate(-50%,-100%); writing-mode:vertical-rl; text-orientation:mixed; transform-origin:center; color:var(--dim-color); font-family:var(--dim-font-family); font-size:calc(var(--dim-font-size) * 0.8); font-weight:600; letter-spacing:1px; white-space:nowrap;">HANG HEIGHT</div>` +
+            // ONLY the number, centered between the line ends (rotated to read
+            // along the vertical line).
             `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</div>`;
         guideLayer.appendChild(fh);
+        } // end floorArt visibility guard
     }
     
     const offsetDist = 6 * unitFactor('in', elevUnit);
