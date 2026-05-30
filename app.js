@@ -546,6 +546,7 @@ function createGroupDimFromSelection() {
         style: Object.assign({}, annotationStyle),
     };
     dims.push(entry);
+    if (typeof dimVisibility !== 'undefined') { dimVisibility.groupBox = true; saveDimVisibility(); }
     drawElevAll();
     pushHistory();
 }
@@ -1182,16 +1183,13 @@ function clearCustomLibrary() {
     populateDashVendorDropdown();
 }
 
-// Per-element dimension visibility flags, controlled by the eye/hide panel
-// in Layout Guides. Independent of the layer-level Layout Guides toggles.
-// Lets the user hide specific annotation types (e.g. for a clean
-// frames-only export). Persisted to localStorage. Default: all visible.
+// Visibility flags for the two Layout Guides toggle buttons that don't map
+// to a simple layer (group box + edge gaps). letters/spacing/wall already
+// have their own Layout Guides layer toggles, so they're not duplicated here.
+// Persisted to localStorage. Default: visible.
 let dimVisibility = {
-    groupBox: true,    // group dimension callouts
-    floorArt: true,    // floor-to-hangline (floor-to-artwork) dimension
-    letters: true,     // frame letter labels
-    spacing: true,     // spacing dimensions between frames
-    wall: true,        // wall (architectural) dimensions
+    groupBox: true,   // group dimension callouts
+    edgeGap: true,    // edge-gap (distance-to-wall) dimensions
 };
 
 function loadDimVisibility() {
@@ -1209,63 +1207,53 @@ function saveDimVisibility() {
     catch (e) { /* ignore */ }
 }
 
-// Apply the visibility flags. Some elements are whole layers (letters →
-// label-layer, wall → arch-dim-layer, spacing → dim-layer); others are
-// sub-elements re-rendered each draw (group box, floor-art). For the
-// layer-level ones we set display; for sub-elements drawElevAll + the
-// renderers consult dimVisibility directly.
-function applyDimVisibility() {
-    // Actual display is computed in drawElevAll (effective = toggle AND flag).
-    // Here we just trigger a redraw; group box + floor-art are handled by the
-    // renderers consulting dimVisibility directly.
+// Does the current elevation have at least one group dimension?
+function anyGroupDimExists() {
+    const ce = elevations[currentElevIndex];
+    return !!(ce && Array.isArray(ce.groupDims) && ce.groupDims.length > 0);
+}
+
+// Does any frame in the current elevation have an edge-gap toggle enabled?
+function anyEdgeGapActive() {
+    return elevFrames.some(f => {
+        const dt = f.distToggles;
+        return dt && (dt.ceiling || dt.floor || dt.left || dt.right);
+    });
+}
+
+// Sync the two Layout Guides toggle buttons' blue (active) state:
+//   - Group Box button: blue when a group dim exists AND it's visible
+//   - Edge Gap button: blue when any edge gap is active AND visible
+// Called after drawElevAll and after creating/removing group dims or edge gaps.
+function syncLayoutGuideButtonStates() {
+    const gbBtn = document.getElementById('groupBoxToggle');
+    if (gbBtn) {
+        const exists = anyGroupDimExists();
+        gbBtn.classList.toggle('active', exists && dimVisibility.groupBox);
+        gbBtn.style.opacity = exists ? '1' : '0.4'; // dim when nothing to toggle
+    }
+    const egBtn = document.getElementById('edgeGapToggle');
+    if (egBtn) {
+        const exists = anyEdgeGapActive();
+        egBtn.classList.toggle('active', exists && dimVisibility.edgeGap);
+        egBtn.style.opacity = exists ? '1' : '0.4';
+    }
+}
+
+// Toggle group-box visibility (only meaningful if one exists).
+function toggleGroupBoxVisibility(btn) {
+    if (!anyGroupDimExists()) return; // nothing to toggle
+    dimVisibility.groupBox = !dimVisibility.groupBox;
+    saveDimVisibility();
     drawElevAll();
 }
 
-function toggleDimVisibility(key, on) {
-    if (!(key in dimVisibility)) return;
-    dimVisibility[key] = !!on;
+// Toggle edge-gap dimension visibility (only meaningful if one exists).
+function toggleEdgeGapVisibility(btn) {
+    if (!anyEdgeGapActive()) return;
+    dimVisibility.edgeGap = !dimVisibility.edgeGap;
     saveDimVisibility();
-    applyDimVisibility();
-}
-
-function openDimHideModal() {
-    // Seed checkboxes from current state
-    const map = {
-        hideGroupBox: 'groupBox', hideFloorArt: 'floorArt',
-        hideLetters: 'letters', hideSpacing: 'spacing', hideWall: 'wall',
-    };
-    Object.keys(map).forEach(cbId => {
-        const cb = document.getElementById(cbId);
-        if (cb) cb.checked = !dimVisibility[map[cbId]]; // checkbox = "hide" so invert
-    });
-    document.getElementById('dimHideModal').style.display = 'flex';
-}
-
-function closeDimHideModal() {
-    document.getElementById('dimHideModal').style.display = 'none';
-}
-
-// Reset all dimension types to visible (uncheck all hide boxes).
-function showAllDims() {
-    Object.keys(dimVisibility).forEach(k => { dimVisibility[k] = true; });
-    saveDimVisibility();
-    ['hideGroupBox', 'hideFloorArt', 'hideLetters', 'hideSpacing', 'hideWall'].forEach(id => {
-        const cb = document.getElementById(id);
-        if (cb) cb.checked = false;
-    });
-    applyDimVisibility();
-}
-
-// Called by each checkbox. cbId maps to a flag; checkbox checked = hide.
-function onDimHideCheckbox(cbId) {
-    const map = {
-        hideGroupBox: 'groupBox', hideFloorArt: 'floorArt',
-        hideLetters: 'letters', hideSpacing: 'spacing', hideWall: 'wall',
-    };
-    const key = map[cbId];
-    if (!key) return;
-    const cb = document.getElementById(cbId);
-    toggleDimVisibility(key, !cb.checked); // checked = hide → flag = false
+    drawElevAll();
 }
 
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
@@ -6585,6 +6573,11 @@ function toggleFrameDistDim(idx, which, e) {
     const f = elevFrames[idx];
     if (!f.distToggles) f.distToggles = { ceiling: false, floor: false, left: false, right: false };
     f.distToggles[which] = !f.distToggles[which];
+    // If enabling, make sure edge-gap dims are visible so it shows.
+    if (f.distToggles[which] && typeof dimVisibility !== 'undefined') {
+        dimVisibility.edgeGap = true;
+        saveDimVisibility();
+    }
     initElevControls();
     drawElevAll();
     pushHistory();
@@ -6705,6 +6698,10 @@ function toggleEdgeGapFromPopover(which) {
     const f = elevFrames[idx];
     if (!f.distToggles) f.distToggles = { ceiling: false, floor: false, left: false, right: false };
     f.distToggles[which] = !f.distToggles[which];
+    if (f.distToggles[which] && typeof dimVisibility !== 'undefined') {
+        dimVisibility.edgeGap = true;
+        saveDimVisibility();
+    }
     drawElevAll();
     pushHistory();
     // Re-render the popover so its own active states refresh
@@ -8045,21 +8042,10 @@ function drawElevAll() {
     // for the current elevation. Done after frames so the boxes overlay them.
     renderGroupDims();
 
-    // Reassert layer visibility = (Layout Guides toggle active) AND (hide
-    // flag on). Both systems cooperate: the toggle governs the base on/off,
-    // the hide flag can additionally force-hide for a clean export. Done
-    // inline (not via applyDimVisibility, which recurses into drawElevAll).
-    if (typeof dimVisibility !== 'undefined') {
-        const combine = (id, btnId, flag) => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const btn = document.getElementById(btnId);
-            const toggleOn = btn ? btn.classList.contains('active') : true;
-            el.style.display = (toggleOn && flag) ? 'block' : 'none';
-        };
-        combine('label-layer', 'labelToggle', dimVisibility.letters);
-        combine('arch-dim-layer', null, dimVisibility.wall);
-        combine('dim-layer', 'dimToggle', dimVisibility.spacing);
+    // Sync the Group Box + Edge Gap Layout Guides buttons' blue state to
+    // reflect whether those annotations currently exist + are visible.
+    if (typeof syncLayoutGuideButtonStates === 'function') {
+        syncLayoutGuideButtonStates();
     }
 
     // Wall-background click handler: clicking on the wall but NOT on a frame
@@ -8142,16 +8128,17 @@ function renderGroupDims() {
             }
             return d;
         };
-        // Measurement label — opaque background + subtle border so the
-        // number stays readable even where dimension/extension lines cross.
+        // Measurement label — opaque white background so the number stays
+        // readable even where dimension/extension lines cross. No border
+        // (cleaner look per user preference).
         const mkLabel = (text, cx, cy) => {
             const l = document.createElement('div');
             l.textContent = text;
             l.style.cssText =
                 `position:absolute; left:${cx}px; top:${cy}px; transform:translate(-50%,-50%);` +
                 `color:${color}; font-size:${fontSize}px; font-weight:700; white-space:nowrap;` +
-                `background:#fff; padding:1px 5px; border-radius:3px; border:1px solid ${color};` +
-                `box-shadow:0 1px 3px rgba(0,0,0,0.15); pointer-events:none; z-index:4;`;
+                `background:#fff; padding:1px 5px; border-radius:3px;` +
+                `pointer-events:none; z-index:4;`;
             return l;
         };
 
@@ -8482,19 +8469,17 @@ function drawElevGuides(wallW, wallH) {
 
     const hangVal = getHangHeight();
     if(hangVal < wallH) {
-        // Horizontal hang line with "HANG HEIGHT" label horizontal above it.
-        // The measurement number lives on the vertical floor-to-hangline dim.
+        // Horizontal hang line — just the dashed line. The "HANG HEIGHT" label
+        // sits above the vertical floor-to-hang dimension on the left.
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
-        hl.innerHTML = `<span class="hang-label">HANG HEIGHT</span>`;
         guideLayer.appendChild(hl);
 
         // Floor-to-hangline vertical dimension. Shows the hang height as a
         // measured callout from the floor up to the hang line. Positioned a
         // small inset from the left wall edge so it doesn't overlap the
         // wall-height arch dim that sits just outside the wall on the left.
-        // Tagged data-dim-type="floor-art" so the hide panel can target it.
-        if (typeof dimVisibility === 'undefined' || dimVisibility.floorArt) {
+        // Shown whenever guides are visible (part of the guide layer).
         const dimXIn = 8 * unitFactor('in', elevUnit); // inset from left edge
         const dimXpx = dimXIn * elevScale;
         const hangPx = hangVal * elevScale;
@@ -8512,12 +8497,12 @@ function drawElevGuides(wallW, wallH) {
             `<div style="position:absolute; left:${-TICK}px; bottom:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
             // hang-line tick
             `<div style="position:absolute; left:${-TICK}px; top:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
-            // ONLY the number, centered between the line ends (rotated to read
-            // along the vertical line). The "HANG HEIGHT" words are on the
-            // horizontal hang line above.
+            // "HANG HEIGHT" label, horizontal, above the top tick of this line
+            `<div style="position:absolute; left:0; top:-6px; transform:translate(-50%,-100%); color:var(--dim-color); font-family:var(--dim-font-family); font-size:calc(var(--dim-font-size) * 0.85); font-weight:600; letter-spacing:0.5px; white-space:nowrap; background:rgba(255,255,255,0.85); padding:1px 5px; border-radius:3px;">HANG HEIGHT</div>` +
+            // the number, centered between the line ends (rotated to read
+            // along the vertical line).
             `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmt(hangVal)}${unitInfo(elevUnit).suffix}</div>`;
         guideLayer.appendChild(fh);
-        } // end floorArt visibility guard
     }
     
     const offsetDist = 6 * unitFactor('in', elevUnit);
@@ -8576,6 +8561,8 @@ function drawPerFrameDistanceDims() {
     const layer = document.getElementById('floor-ceiling-layer');
     if (!layer) return;
     layer.innerHTML = '';
+    // Edge Gap toggle (Layout Guides): when off, hide all distance dims.
+    if (typeof dimVisibility !== 'undefined' && !dimVisibility.edgeGap) return;
     const wallW = parseFloat(document.getElementById('wallW').value) || 1;
     const wallH = parseFloat(document.getElementById('wallH').value) || 1;
 
