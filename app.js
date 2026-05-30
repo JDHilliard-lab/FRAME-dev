@@ -481,6 +481,21 @@ function loadAnnotationStyle() {
             if (s && typeof s === 'object') annotationStyle = Object.assign(annotationStyle, s);
         }
     } catch (e) { /* keep defaults */ }
+    applyAnnotationStyleToCSSVars();
+}
+
+// Push the current annotationStyle into the :root CSS variables that drive
+// every dimension/label type (arch dims, frame dims, OD tags, center lines,
+// floor/ceiling dims). This is what makes the single style panel control
+// ALL dimension callouts, not just the group dims. The group-dim renderer
+// reads annotationStyle directly (its elements are JS-positioned), but it
+// uses the same source object, so everything stays consistent.
+function applyAnnotationStyleToCSSVars() {
+    const root = document.documentElement;
+    root.style.setProperty('--dim-color', annotationStyle.color);
+    root.style.setProperty('--dim-font-size', (annotationStyle.fontSize || 13) + 'px');
+    root.style.setProperty('--dim-weight', (annotationStyle.weight || 2) + 'px');
+    root.style.setProperty('--dim-line-style', annotationStyle.dash ? 'dashed' : 'solid');
 }
 
 function saveAnnotationStyle() {
@@ -8109,6 +8124,7 @@ function applyAnnotationStyleFromModal() {
             elev.groupDims.forEach(gd => { gd.style = Object.assign({}, annotationStyle); });
         }
     });
+    applyAnnotationStyleToCSSVars(); // update arch dims, frame dims, OD tags, etc.
     saveAnnotationStyle();
     drawElevAll();
 }
@@ -8467,7 +8483,7 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
         const width = Math.abs(x2 - x1) * elevScale;
         dim.style.width = width + 'px';
         dim.innerHTML = `
-            ${isWallOuter ? `<div style="position:absolute; left:0; top:0; width:1px; height:${offset}px; border-left:1.5px dashed var(--guide-color);"></div><div style="position:absolute; right:0; top:0; width:1px; height:${offset}px; border-left:1.5px dashed var(--guide-color);"></div>` : ''}
+            ${isWallOuter ? `<div style="position:absolute; left:0; top:0; width:1px; height:${offset}px; border-left:var(--dim-weight) dashed var(--dim-color);"></div><div style="position:absolute; right:0; top:0; width:1px; height:${offset}px; border-left:var(--dim-weight) dashed var(--dim-color);"></div>` : ''}
             <div class="dim-line-segment"></div>
             <span class="arch-label-new">${label}</span>
             <div class="dim-line-segment"></div>
@@ -8476,7 +8492,7 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
         const height = Math.abs(y2 - y1) * elevScale;
         dim.style.height = height + 'px';
         dim.innerHTML = `
-            ${isWallOuter ? `<div style="position:absolute; left:0; bottom:0; height:1px; width:${offset}px; border-top:1.5px dashed var(--guide-color);"></div><div style="position:absolute; left:0; top:0; height:1px; width:${offset}px; border-top:1.5px dashed var(--guide-color);"></div>` : ''}
+            ${isWallOuter ? `<div style="position:absolute; left:0; bottom:0; height:1px; width:${offset}px; border-top:var(--dim-weight) dashed var(--dim-color);"></div><div style="position:absolute; left:0; top:0; height:1px; width:${offset}px; border-top:var(--dim-weight) dashed var(--dim-color);"></div>` : ''}
             <div class="dim-line-segment-v"></div>
             <span class="arch-label-new">${label}</span>
             <div class="dim-line-segment-v"></div>
