@@ -1,1286 +1,1222 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRAME - Integrated Workspace</title>
-    <!-- Favicon: served from the repo root alongside index.html. PNG works in
-         all modern browsers; apple-touch-icon covers iOS home-screen
-         bookmarks. Same file used for both since we only have one image. -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <!-- JSZip: vendored locally (lib-jszip.min.js) so the batch ZIP export
-         works even when CDNs are unreachable. ~95KB. Used by
-         batchDownloadAllFramesAsZip() to bundle PNGs + CSV into one download. -->
-    <script src="lib-jszip.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<div style="display: flex; flex-direction: column; height: 100vh; width: 100%; overflow: hidden;">
+/* ========================================= */
+/* THEME ENGINE & VARIABLES                  */
+/* ========================================= */
+:root { 
+    /* DARK THEME (DEFAULT) */
+    --accent: #3a86ff; 
+    --accent-hover: #2170ed;
+    --bg-main: #1e1e1e;
+    --bg-nav: #252526;
+    --bg-panel: #2d2d30;
+    --bg-subpanel: #333333;
+    --bg-input: #3e3e42;
+    --border-color: #444444;
+    --text-strong: #ffffff;
+    --text-main: #cccccc;
+    --text-muted: #888888;
     
-    <div class="app-top-nav">
-        <div class="nav-brand" style="padding: 0 20px; border-right: 1px solid var(--border-color); margin-right: 10px; display:flex; align-items:center; height:100%;">
-            <img class="nav-logo logo-dark" src="Frame_logo_light.svg" alt="Frame Logo" style="height:28px; display:block;">
-            <img class="nav-logo logo-light" src="Frame_logo_Dark.svg" alt="Frame Logo" style="height:28px; display:none;">
-        </div>
-        <div class="nav-tabs" id="nav-tabs-container"></div>
-        <button class="nav-add-tab" onclick="addNewElevationTab()">+ Add Wall</button>
-        
-        <div style="margin-left: auto; display: flex; gap: 8px; align-items: center;">
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
-                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
-            <!-- Dashboard view-mode toggle. Switches between:
-                 Mode 1 (default): three-pane layout — CSV table on left, preview
-                   in middle, form on right.
-                 Mode 2: CSV table hidden; preview + form fill the screen, with
-                   the preview taking the freed-up horizontal space on the left.
-                 State persists in localStorage as 'dashViewMode'. Icon = a
-                 larger square containing two stacked squares, visually hinting
-                 at layout reflow. Only affects the Frame Dashboard view —
-                 Elevation tabs are unchanged. -->
-            <button id="dashViewToggle" class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;" onclick="toggleDashView()" title="Toggle Dashboard view layout">
-                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
-                    <rect x="3" y="3" width="18" height="18" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <rect x="7" y="6.5" width="10" height="4" rx="0.5" fill="currentColor" stroke="none"/>
-                    <rect x="7" y="13.5" width="10" height="4" rx="0.5" fill="currentColor" stroke="none"/>
-                </svg>
-            </button>
-            <!-- Outer-shadow toggle. When active (button tinted), the drop
-                 shadow that normally projects from the frame onto the "wall"
-                 is suppressed across the live preview, PNG export, and
-                 elevation views. Inner shadows (mat bevels, art recess) are
-                 unaffected and stay slightly boosted to keep visual depth.
-                 Default ON — colleagues who don't care about InDesign
-                 compositing get the original look. Persists to localStorage
-                 as 'dashOuterShadowsOn'. Icon = a small square with a soft
-                 shadow underneath, slashed when off. -->
-            <button id="outerShadowToggle" class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;" onclick="toggleOuterShadows()" title="Toggle outer drop shadows (off = cleaner PNGs for InDesign)">
-                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
-                    <!-- Soft "shadow" trail below the square — gets visually
-                         "cut" by the .active state CSS rule. -->
-                    <rect x="7" y="14" width="14" height="3" rx="1" fill="currentColor" opacity="0.35"/>
-                    <rect x="3" y="4" width="14" height="14" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/>
-                </svg>
-            </button>
-            <!-- Help button. Opens a modal with tabs: a tutorial video (placeholder
-                 until a URL is plugged in) and a Reference section explaining
-                 every feature. Lives next to the theme toggle so help is always
-                 reachable, never blocks workflow. -->
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="openHelpModal()" title="Help — features, shortcuts, and tutorial">
-                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </button>
-            <!-- Global unit toggle. Lives in the header so it's always visible
-                 regardless of view. Calls setUnit() which converts all stored
-                 values across dashboard rows + elevation frames + all input
-                 fields, then syncs the other unit toggles (dashboard, Settings
-                 modal) so all three stay in lockstep. -->
-            <div class="unit-toggle unit-toggle-3" id="globalUnitToggle" style="height:28px;" title="Project units (applies to dashboard and elevation)">
-                <button id="globalBtnInch" class="active" onclick="setUnit('in')">IN</button>
-                <button id="globalBtnCm" onclick="setUnit('cm')">CM</button>
-                <button id="globalBtnMm" onclick="setUnit('mm')">MM</button>
-            </div>
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
-            <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
-            <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
-            <!-- Version pill: rendered into by renderVersionPill() in app.js
-                 using APP_VERSION + APP_BUILD constants. Green dot = prod,
-                 orange dot = dev. Click opens Help → Version section so
-                 users can see what version they're on and any release notes. -->
-            <div id="versionPill" class="version-pill" onclick="openVersionInfo()" title="Click for version info"></div>
-        </div>
-    </div>
-
-    <div class="app-content">
-
-        <div id="view-dashboard" class="view-container active">
-            <div class="dash-left-pane">
-                <div class="top-grey-section">
-                    <div class="global-meta" style="padding: 8px 20px 6px;">
-                        <div><label>Project Name</label><input type="text" id="g_projName" value="Project X"></div>
-                        <div><label>Description</label><input type="text" id="g_desc" value="Production Specs"></div>
-                        <div><label>Date</label><input type="date" id="g_date"></div>
-                        <div><label>Issued By</label><input type="text" id="g_issued" value="Studio"></div>
-                        <div><label>Client Name</label><input type="text" id="g_client" value="Client X"></div>
-                        <div><label>Attn:</label><input type="text" id="g_attn" value="PM"></div>
-                        <div><label>Delivery</label><input type="text" id="g_delivery" value="TBD"></div>
-                    </div>
-                    <div class="pane-header" style="border-top: 1px solid var(--border-color); border-bottom: none; padding: 6px 20px;">
-                        <div style="display:flex; align-items:center; gap:5px;">
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="addDashRow()">+ Add Item</button>
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="duplicateDashRow()">Duplicate Item</button>
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="deleteDashRow()">- Delete Item</button>
-                            <!-- Move To: opens a modal where the user selects a target
-                                 ITEM CODE and Above/Below. Moves the currently-selected
-                                 row(s) — including multi-selection — to that position.
-                                 Useful when the table is too long to drag rows around
-                                 conveniently. -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMoveToModal()">Move To…</button>
-                            <!-- Bulk Edit: change one field on all selected rows at once.
-                                 Single-field-per-run keeps the UI simple. -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkEditModal()">Bulk Edit…</button>
-                            <!-- Duplicate as Series: from one source row, create N copies
-                                 with sequential IDs (e.g., ART.001 → ART.002…ART.012). -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openDuplicateSeriesModal()">Duplicate as Series…</button>
-                        </div>
-                        <div style="display:flex; gap:5px; align-items: center;">
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('csvImport').click()">Import CSV</button>
-                            <input type="file" id="csvImport" accept=".csv" style="display:none;" onchange="importDashCSV(event)">
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="exportDashCSV()">Export Database</button>
-                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Batch Download All Frames as PNG" onclick="batchDownloadAllFrames()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v10M7 7l5 5 5-5M4 14v5a1 1 0 001 1h14a1 1 0 001-1v-5M3 14h18"/></svg>
-                                <span style="font-size:0.65rem; margin-left:3px;">Batch PNGs</span>
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Download the InDesign script (AutoFrameSpecs.jsx) for generating spec sheets" onclick="downloadInDesignScript()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 13l2 2 2-2M12 11v6"/></svg>
-                                <span style="font-size:0.65rem; margin-left:3px;">InDesign Script</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="table-container">
-                    <table id="rfiTable">
-                        <thead>
-                            <tr>
-                                <th class="drag-handle-col" title="Drag rows to reorder"></th>
-                                <th>Qty</th><th>Item Code</th><th>Product</th><th>Location</th><th>Img Code</th>
-                                <th>OD W</th><th>OD H</th><th>Open W</th><th>Open H</th>
-                                <th style="color:var(--accent);">Print W</th><th style="color:var(--accent);">Print H</th>
-                                <th>Cnv Dp</th><th>Cnv Wrp</th>
-                                <th>Mat 1</th><th>Mat T</th><th>Mat B</th><th>Mat L</th><th>Mat R</th>
-                                <th>Mat 2</th><th>Mat 2 Rvl</th>
-                                <th>Glass</th>
-                                <th>Paper Type</th><th>Paper W</th><th>Paper H</th><th>White Brdr</th>
-                                <th>Frame Code</th><th>Fr. W</th><th>Fr. H</th><th>Hardware</th><th>Backing Board</th><th>Mount</th>
-                                <th>Notes</th><th>Prod Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody id="rfiBody"></tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="dash-right-pane">
-                <div class="preview-wrapper">
-                    <div class="preview-container">
-                        <div id="dash-frame-visual" class="frame-vis frame-vis-image" style="position:relative;">
-                            </div>
-                    </div>
-                    <div class="dash-toolbar" style="width:100%; margin-bottom:0; flex-shrink: 0; display:flex; gap:6px;">
-                        
-                        <div style="display: flex; gap: 4px; align-items: center; flex: 2.5;">
-                            <div style="position: relative; flex: 1;">
-                                <select id="dashPushSelector" class="action-btn btn-secondary" style="font-size: 0.7rem; justify-content: space-between; padding: 0 8px; width: 100%; -webkit-appearance: none; appearance: none; cursor:pointer;">
-                                    <option value="">-- Push to Wall --</option>
-                                </select>
-                                <svg class="svg-icon" style="width:12px; height:12px; position:absolute; right:8px; top:7px; pointer-events:none;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </div>
-                            <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px;" onclick="pushFrameToElevation()">Send</button>
-                        </div>
-                        
-                        <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 2px;"></div>
-
-                        <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Download Frame PNG" onclick="exportDashNativePNG()">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>
-                        </button>
-                        <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Save Preset" onclick="saveFramePreset()">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
-                        </button>
-                        <button class="action-btn btn-secondary" style="flex: 0 0 26px; padding:0;" title="Load Preset" onclick="document.getElementById('loadPresetInput').click()">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"/><rect x="7" y="7" width="10" height="10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-                        </button>
-                        <input type="file" id="loadPresetInput" accept=".json" style="display:none;" onchange="loadFramePreset(event)">
-                    </div>
-                </div>
-
-                <div class="controls">
-                    <div id="linkedWarningBanner" style="display: none; gap: 6px; margin-bottom: 10px; background: rgba(255, 193, 7, 0.15); padding: 8px; border-radius: 6px; border: 1px solid #ffc107; align-items: center;">
-                        <svg class="svg-icon" style="color: #ffc107;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        <span style="font-size: 0.65rem; color: var(--text-strong); flex: 1;">Linked on <span id="linkedCount">X</span> wall(s). Edits update all.</span>
-                        <button class="action-btn" style="width: auto; padding: 4px 8px; font-size: 0.6rem; background: #ffc107; color: #000; border:none;" onclick="detachDashRow()">Detach to New Spec</button>
-                    </div>
-
-                    <div class="section-title" onclick="toggleDashSection('sec-meta', this)">Item Metadata <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="sec-meta" class="collapsible-section open">
-                        <div class="grid-custom-meta">
-                            <div><label>Item Code</label><input type="text" id="m_itemCode" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Image Code</label><input type="text" id="m_imageCode" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Level</label><input type="text" id="m_level" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Qty</label><input type="number" id="m_qty" oninput="syncDashAndCalculate()" disabled title="Auto-Calculated by Elevations"></div>
-                        </div>
-                        
-                        <div class="grid-row-2">
-                            <div><label>Product</label>
-                                <select id="m_product" class="no-arrow" onchange="handleDashProductChange()">
-                                    <option value="Framed Art">Framed Art</option>
-                                    <option value="Framed Art (Shadow Box)">Framed Art (Shadow Box)</option>
-                                    <option value="Framed Canvas (Floater)">Framed Canvas (Floater)</option>
-                                    <option value="Frameless Canvas (Wrapped)">Frameless Canvas (Wrapped)</option>
-                                    <option value="Sourced Object">Sourced Object</option>
-                                </select>
-                            </div>
-                            <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
-                        </div>
-
-                        <!-- Artist / Title / Art Type were visible form fields earlier in
-                             the build; per studio decision they're now hand-entered as
-                             captions next to the image in InDesign instead of auto-flowing
-                             into the spec block. The fields stay in the data model as
-                             hidden inputs so saved projects + CSV columns still work. -->
-                        <input type="hidden" id="m_artist" value="">
-                        <input type="hidden" id="m_artworkTitle" value="">
-                        <input type="hidden" id="m_artType" value="">
-
-                        <!-- OD + frame profile geometry. Fr. W is the visible frame face;
-                             Fr. H is the total profile depth from front to back; Rabbet is
-                             the L-pocket depth where art/glass/backing stack up. -->
-                        <div class="grid-row-5" style="display:grid; grid-template-columns: repeat(5, 1fr); gap: 4px;">
-                            <div><label>OD W</label><input type="number" step="0.125" id="extW" oninput="syncDashAndCalculate()"></div>
-                            <div><label>OD H</label><input type="number" step="0.125" id="extH" oninput="syncDashAndCalculate()"></div>
-                            <div class="frame-dim-cell"><label title="Visible frame face width">Fr. W</label><input type="number" step="0.125" id="fW" oninput="syncDashAndCalculate()"></div>
-                            <div class="frame-dim-cell"><label title="Total profile depth front-to-back">Fr. H</label><input type="number" step="0.0625" id="fHeight" oninput="syncDashAndCalculate()" placeholder="depth"></div>
-                            <div class="frame-dim-cell"><label title="Depth of L-pocket where art sits">Rabbet</label><input type="number" step="0.0625" id="rabbetDepth" oninput="handleRabbetChange()" placeholder="depth"></div>
-                        </div>
-
-                        <!-- Open W / Open H / Bleed / Print File. Moved up from inside the
-                             Frame Style section so all dimensions stack together at the top.
-                             The IDs (disp_openW, disp_openH, m_bleed, printFileDisplay) are
-                             unchanged so existing JS lookups by ID keep working. -->
-                        <div class="grid-custom-bleed" id="bleedSettings" style="margin-top: 4px;">
-                            <div><label>Open W</label><div class="calc-box calc-box-blue" id="disp_openW">0</div></div>
-                            <div><label>Open H</label><div class="calc-box calc-box-blue" id="disp_openH">0</div></div>
-                            <div><label>Bleed</label><input type="number" step="0.125" id="m_bleed" value="0.25" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Print File</label><div class="calc-box calc-box-blue" id="printFileDisplay">0 x 0</div></div>
-                        </div>
-
-                        <!-- FRAME STYLE: tight section with a Library/Solid toggle + sync folder icon.
-                             Wrapped in #frameStyleSection so the whole section can be greyed out
-                             via .fl-disabled when Frameless Canvas is selected (no frame applies).
-                             canvasSettings stays OUTSIDE this wrapper since canvas products
-                             still need to edit canvas depth/wrap/inset. -->
-                        <div id="frameStyleSection">
-                        <div class="section-title section-title-static" style="margin-top:8px;">Frame Style</div>
-                        <!-- ROW 1: folder + upload icons | LIBRARY/COLOR toggle | color picker.
-                             Upload was moved up from the old imageControls row so both
-                             file-input icons live together (they're both "where do swatches
-                             come from"). When LIBRARY is active, the COLOR side dims via
-                             the .fstyle-color-side / .fstyle-lib-side classes. -->
-                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                            <input type="file" id="libFolderInput" webkitdirectory directory multiple style="display:none;" onchange="syncDashLibraryFolder(event)">
-                            <button id="libFolderBtn" class="icon-btn fstyle-lib-side" style="width:26px; height:26px; border:1px solid var(--border-color); background:var(--btn-secondary); cursor:pointer; flex-shrink:0; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sync Folder — import a folder of frame swatches" onclick="openLibrarySyncModal()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                            </button>
-                            <!-- Upload single image — moved up from old imageControls row.
-                                 Visually grouped with the folder button since both feed
-                                 swatches into the LIBRARY side. -->
-                            <div class="file-upload-wrapper fstyle-lib-side" style="margin:0; width: 26px; height:26px; flex-shrink:0;">
-                                <input type="file" id="swatchUpload" class="file-upload-input" accept="image/*" onchange="loadDashCustomSwatch(event)">
-                                <label for="swatchUpload" class="btn-secondary" style="height:26px; width:26px; border-radius:4px; padding: 0; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid var(--border-color);" title="Upload Single Image">
-                                    <svg class="svg-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-                                </label>
-                            </div>
-                            <div class="unit-toggle" style="flex: 1;">
-                                <button id="fTypeBtnLibrary" class="active fstyle-lib-side" type="button" onclick="setFrameStyle('image')">LIBRARY</button>
-                                <button id="fTypeBtnSolid" class="fstyle-color-side" type="button" onclick="setFrameStyle('color')">COLOR</button>
-                            </div>
-                            <input type="color" id="fColor" class="color-swatch-flat fstyle-color-side" oninput="syncDashAndCalculate()" style="width:26px; height:26px;" title="Frame color">
-                            <!-- Hidden field preserves the existing data flow: syncDashAndCalculate reads getStr('fType') -->
-                            <input type="hidden" id="fType" value="image">
-                        </div>
-                        <!-- Legacy container kept (empty) so any code paths that flip its display don't error -->
-                        <div id="colorControls" style="display:none;"></div>
-
-                        <!-- ROW 2: Vendor / Collection / Swatch selectors. Visible only in
-                             LIBRARY mode (dimmed in COLOR mode via .fstyle-lib-side). The
-                             upload-single-image button + redundant thumb preview were
-                             removed from this row in the v2 reshuffle. -->
-                        <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px; width: 100%;">
-                            <select id="libVendor" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
-                            <select id="libCollection" class="no-arrow" style="flex: 1; padding: 2px; font-size: 0.65rem; min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
-
-                            <div id="customSwatchContainer" style="flex: 1.2; position: relative; min-width: 0; height: 26px;">
-                                <div id="swatchSelectedDisplay" style="border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.65rem; height: 26px; padding: 0 4px; background: var(--bg-input); cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong);" onclick="toggleDashSwatchDropdown()">Frame</div>
-                                <ul id="swatchDropdownList" class="custom-dropdown-list"></ul>
-                            </div>
-                            <!-- Hidden thumb preview kept in the DOM as a sink so any JS that
-                                 writes to swatchThumbPreview.style.backgroundImage doesn't
-                                 break — it just never renders visually. -->
-                            <div id="swatchThumbPreview" style="display:none;"></div>
-                        </div>
-
-                        <!-- ROW 3: Frame Code + Color / Texture. Placed below the swatch
-                             picker so the workflow reads top-down: pick a frame (visual),
-                             then describe it (text). Always visible regardless of LIBRARY
-                             vs COLOR mode — both fields apply either way. Was previously
-                             buried in the Hardware & Notes section where designers would
-                             forget to update them (e.g., leave "Standard Black" on a
-                             wood-grain swatch). -->
-                        <div class="grid-row-2" style="margin-bottom: 8px;">
-                            <div><label>Frame Code</label><input type="text" id="m_fCode" oninput="syncDashAndCalculate()"></div>
-                            <div><label title="Human-readable finish for client-facing specs">Color / Texture</label><input type="text" id="m_fColorName" oninput="syncDashAndCalculate()" placeholder="e.g. Standard Black, Black Maple"></div>
-                        </div>
-                        </div><!-- /frameStyleSection -->
-
-                        <div class="grid-row-3" id="canvasSettings" style="display:none;">
-                            <div><label>Cnv. Depth</label><input type="number" step="0.125" id="canvasDepth" oninput="handleCanvasDepthChange()"></div>
-                            <div><label>Cnv. Wrap</label><input type="number" step="0.125" id="canvasWrap" oninput="syncDashAndCalculate()"></div>
-                            <div><label title="Distance from frame inner edge to canvas image: covers canvas face + shadow gap">Inset</label><input type="number" step="0.125" id="floaterInset" oninput="syncDashAndCalculate()" title="Inset from frame inner edge to canvas image opening (covers visible canvas face + shadow gap, typically 0.75&quot;)"></div>
-                        </div>
-                        <!-- bleedSettings (Open W / Open H / Bleed / Print File) was here.
-                             Moved to live directly under the OD row at the top of the form
-                             so all dimensions are visually grouped together. -->
-                    </div>
-
-                    <div id="matWrapper">
-                        <div class="section-title" onclick="toggleDashSection('sec-mats', this)">
-                            <span id="matFloatTitle">Mat Controls</span>
-                            <span style="display:flex; align-items:center; gap: 8px;">
-                                <!-- MAT / FLOAT MOUNT mode toggle. Click bubbles up to section-title's
-                                     collapse handler — stop propagation in the buttons so they don't
-                                     accidentally collapse/expand the section. -->
-                                <span class="unit-toggle" id="matFloatToggle" style="height: 18px; min-width: 110px;" onclick="event.stopPropagation()">
-                                    <button id="matModeBtnMat" class="active" type="button" onclick="event.stopPropagation(); setMatFloatMode('mat')">MAT</button>
-                                    <button id="matModeBtnFloat" type="button" onclick="event.stopPropagation(); setMatFloatMode('float')">FLOAT</button>
-                                </span>
-                                <svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                            </span>
-                        </div>
-                        <div id="sec-mats" class="collapsible-section open">
-
-                            <!-- MAT MODE PANEL: Mat 1 (left) | link | Mat 2 (right) | Faux Mat (far right) -->
-                            <div id="matModePanel" class="flex-row-tight" style="align-items: center; justify-content: space-between; gap: 8px; padding: 6px; border-radius: 6px;">
-                                
-                                <!-- MAT 1 (left) -->
-                                <div style="flex: 1; display: flex; flex-direction: column; min-width: 0;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                        <span style="font-size: 0.55rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Mat 1</span>
-                                        <div style="display:flex; gap: 4px;">
-                                            <button id="m1Toggle" class="toggle-status active" onclick="toggleDashMat('m1')">ON</button>
-                                            <button id="m1Lock" class="toggle-status" onclick="toggleDashLock()">UNLOCKED</button>
-                                        </div>
-                                    </div>
-                                    <div style="display:flex; gap:4px; margin-bottom:4px;">
-                                        <input type="text" id="m1_color" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;">
-                                        <input type="color" id="m1_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()">
-                                    </div>
-                                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;">
-                                        <div class="mat-input-cell">
-                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1T" oninput="handleDashMatSync('m1T')" title="Top mat width">
-                                            <span class="mat-input-label">T</span>
-                                        </div>
-                                        <div class="mat-input-cell">
-                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1B" oninput="handleDashMatSync('m1B')" title="Bottom mat width">
-                                            <span class="mat-input-label">B</span>
-                                        </div>
-                                        <div class="mat-input-cell">
-                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1L" oninput="handleDashMatSync('m1L')" title="Left mat width">
-                                            <span class="mat-input-label">L</span>
-                                        </div>
-                                        <div class="mat-input-cell">
-                                            <input type="number" step="0.125" class="nano-input m1-input" id="m1R" oninput="handleDashMatSync('m1R')" title="Right mat width">
-                                            <span class="mat-input-label">R</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Sync mat colors button. Margin tightened to 2px each side
-                                     (was 8px) so Mat 1's flex:1 column has more horizontal room
-                                     for T/B/L/R inputs — which need to fit larger numbers in MM. -->
-                                <button id="matLinkBtn" class="icon-btn active" title="Sync Mat Colors" onclick="toggleMatLink()" style="margin: 0 2px; color: var(--accent); background:transparent; flex-shrink:0;">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px; height:16px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                                </button>
-
-                                <!-- MAT 2 (right) -->
-                                <div style="display: flex; flex-direction: column; width: 92px; flex-shrink:0;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                        <span style="font-size: 0.55rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase;">Mat 2</span>
-                                        <button id="m2Toggle" class="toggle-status" onclick="toggleDashMat('m2')">OFF</button>
-                                    </div>
-                                    <div style="display:flex; gap:4px; margin-bottom:4px;">
-                                        <input type="text" id="m2_color" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;">
-                                        <input type="color" id="m2_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()">
-                                    </div>
-                                    <input type="number" step="0.125" class="nano-input" id="m2" oninput="syncDashAndCalculate()" style="width:100%;" title="Mat 2 Reveal">
-                                </div>
-
-                                <!-- FAUX MAT (right of Mat 2): print has a white border baked into the paper.
-                                     Can stack with mats above (mat 1 / mat 2) or be used alone to fake a mat
-                                     look without an actual mat board. Reuses sbPaperBorder for the value —
-                                     same field as float mount's paper border, since the semantic is the same
-                                     (white margin around image on the print paper). Only meaningful in
-                                     standard mat mode (not float mount). The label "Faux Mat" reads better
-                                     to designers than "Print w/ Border" — same idea.
-                                     Width tightened to 72px (was 92px) so Mat 1 gets more room. The single
-                                     border input fits comfortably at the narrower size. -->
-                                <div style="display: flex; flex-direction: column; width: 72px; flex-shrink:0;">
-                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                                        <span style="font-size: 0.55rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; white-space: nowrap;" title="Print with a white border baked in. Stacks with mats above. Use alone to fake a mat without an actual mat board.">Faux Mat</span>
-                                        <button id="fauxMatToggle" class="toggle-status" onclick="toggleDashFauxMat()">OFF</button>
-                                    </div>
-                                    <!-- Spacer to align the border input with mat 2's reveal input row.
-                                         Mat 2 has color text/swatch row above its reveal; faux mat has nothing
-                                         above the border input, so we add a visual placeholder. -->
-                                    <div style="height: 22px; margin-bottom: 4px;"></div>
-                                    <input type="number" step="0.125" class="nano-input" id="fauxBorder" oninput="syncDashAndCalculate()" style="width:100%;" title="White border around image on the print paper" placeholder="border">
-                                </div>
-                            </div>
-
-                            <!-- FLOAT MOUNT PANEL: 3 cols × 2 rows + a Paper Type row at the bottom.
-                                 Col 1: backer/paper colors. Col 2: paper margin/border.
-                                 Col 3: edge toggle (Straight/Deckled — internal values stay clean/torn). -->
-                            <div id="floatMountPanel" class="flex-row-tight" style="display:none; padding: 6px; border-radius: 6px; flex-direction:column; gap: 6px;">
-
-                                <!-- Top: 3-col grid (colors, margins, edge) -->
-                                <div style="display:flex; gap:8px;">
-
-                                    <!-- Col 1: Backer + Paper colors -->
-                                    <div style="flex:1.4; min-width:0; display:flex; flex-direction:column; gap:4px;">
-                                        <div style="display:flex; align-items:center; gap:4px;">
-                                            <span class="fm-label">Backer</span>
-                                            <input type="text" id="sbBackerColorName" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;">
-                                            <input type="color" id="sbBackerColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()" title="Backer color">
-                                        </div>
-                                        <div style="display:flex; align-items:center; gap:4px;">
-                                            <span class="fm-label">Paper</span>
-                                            <input type="text" id="m_paperType" value="Fine Art Paper" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0;" placeholder="e.g. Fine Art Paper, Digital Photo Print">
-                                            <input type="color" id="sbPaperColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()" title="Paper tone (visual reference)">
-                                        </div>
-                                    </div>
-
-                                    <!-- Col 2: Paper margin + border -->
-                                    <div style="flex:0.8; min-width:0; display:flex; flex-direction:column; gap:4px;">
-                                        <div style="display:flex; align-items:center; gap:4px;">
-                                            <span class="fm-label" title="Distance from frame inner edge to outer edge of paper (backer is visible in this gap).">Margin</span>
-                                            <input type="number" step="0.125" id="sbPaperMargin" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0; text-align:center;" title="Distance from frame inner edge to outer edge of paper">
-                                        </div>
-                                        <div style="display:flex; align-items:center; gap:4px;">
-                                            <span class="fm-label" title="Distance from outer edge of paper to image hole. 0 = full bleed.">Border</span>
-                                            <input type="number" step="0.125" id="sbPaperBorder" oninput="syncDashAndCalculate()" style="flex:1; font-size:0.65rem; height:22px; padding:2px 4px; min-width:0; text-align:center;" title="White border around image inside the paper. 0 = full bleed (image fills paper).">
-                                        </div>
-                                    </div>
-
-                                    <!-- Col 3: Edge toggle. Label sits to the left of buttons, buttons stack vertically. -->
-                                    <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:4px; justify-content:center;">
-                                        <div style="display:flex; align-items:center; gap:4px;">
-                                            <span class="fm-label">Edge</span>
-                                            <div class="unit-toggle" style="flex:1; height:48px; flex-direction:column;">
-                                                <button id="sbEdgeBtnClean" class="active" type="button" onclick="setShadowBoxEdge('clean')" style="flex:1; padding: 2px 4px; font-size:0.6rem;">STRAIGHT</button>
-                                                <button id="sbEdgeBtnTorn" type="button" onclick="setShadowBoxEdge('torn')" style="flex:1; padding: 2px 4px; font-size:0.6rem;">DECKLED</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <!-- sbPaperColorName preserved as hidden field for backward compat with
-                                     saved projects. The visible Paper input is now Paper Type instead. -->
-                                <input type="hidden" id="sbPaperColorName" value="White">
-                                <input type="hidden" id="sbPaperEdge" value="clean">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="section-title" onclick="toggleDashSection('sec-notes', this)">Hardware & Notes <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="sec-notes" class="collapsible-section open">
-                        <!-- Row 1: Glass / Mount / Hardware. After Frame Code + Frame Color
-                             moved up to the Frame Style section, this row consolidates the
-                             three print/install descriptors that were previously split
-                             across two rows. -->
-                        <div class="grid-row-3">
-                            <div><label>Glass</label><input type="text" id="m_glass" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Mount</label><input type="text" id="m_mount" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Hardware</label><input type="text" id="m_hardware" oninput="syncDashAndCalculate()"></div>
-                        </div>
-                        <!-- Row 2: Backing Board on its own with empty cells. Using grid-row-3
-                             so the width matches Row 1's columns. -->
-                        <div class="grid-row-3">
-                            <div><label>Backing Board</label><input type="text" id="m_backing" oninput="syncDashAndCalculate()" placeholder="e.g. Foamcore"></div>
-                            <div></div>
-                            <div></div>
-                        </div>
-                        <!-- Row 3: free-form notes (visible to all) + production-only notes -->
-                        <div class="grid-row-2">
-                            <div><label>Notes</label><textarea id="m_notes" oninput="syncDashAndCalculate()"></textarea></div>
-                            <div><label>Prod. Notes</label><textarea id="m_prodNotes" oninput="syncDashAndCalculate()"></textarea></div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="view-elevation" class="view-container">
-            <div class="elev-sidebar">
-                <div class="elev-sidebar-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <input type="text" id="elev-title-input" value="Elevation Editor" style="margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: bold; border: none; background: transparent; padding: 0; outline: none; border-bottom: 1px dashed var(--border-color); flex: 1;" onchange="updateElevationNameFromInput(this.value)">
-                        <!-- Duplicate-wall button. Clones the current elevation into a
-                             new tab inserted right after this one. Useful for showing
-                             layout variations to clients without losing the original. -->
-                        <button class="icon-btn" id="dupElevBtn" onclick="duplicateCurrentElevation()" title="Duplicate this wall" style="margin-left: 6px; flex-shrink: 0;">
-                            <svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-                        </button>
-                    </div>
-
-                    <!-- ─── WALL DIMENSIONS ────────────────────────────────
-                         W and H + a Settings gear button on the right of the
-                         row (taking the slot the old IN/CM toggle used).
-                         Title row is simple again (text + chevron) so the
-                         dashboard-style toggleDashSection collapse function
-                         can find and update the chevron span correctly. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-wall', this)">Wall Dimensions <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="elev-sec-wall" class="collapsible-section open">
-                        <!-- Row 1: W, H, Settings gear. Gear lives here so it's
-                             reachable from the always-visible Wall row even
-                             when other sections collapse. Above the PNG
-                             export on row 2 (similar pattern to the existing
-                             pairing of inputs above utility buttons). -->
-                        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px; align-items: center; margin-bottom: 8px;">
-                            <div class="elev-input-with-icon" title="Wall width">
-                                <span class="elev-input-prefix">W:</span>
-                                <input type="number" id="wallW" value="185" oninput="updateElevWall()" onchange="pushHistory()">
-                            </div>
-                            <div class="elev-input-with-icon" title="Wall height">
-                                <span class="elev-input-prefix">H:</span>
-                                <input type="number" id="wallH" value="108" oninput="updateElevWall()" onchange="pushHistory()">
-                            </div>
-                            <button class="action-btn btn-secondary" style="width:30px; height:30px; padding:0; flex-shrink:0;" title="Settings - Hang height, font size, units, grid, nudge, keyboard shortcuts" onclick="openPrecisionModal()">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                            </button>
-                        </div>
-                        <!-- Row 2: zoom slider, Fit button, Export PNG button -->
-                        <div style="display: flex; gap: 6px; align-items: center;">
-                            <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; opacity:0.7;"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5M8 11h6M11 8v6"/></svg>
-                            <input type="range" id="zoomSlider" min="0.5" max="3" step="0.1" value="1" style="flex: 1; margin:0; accent-color: #888;" oninput="updateElevZoom(this.value)">
-                            <button class="action-btn btn-secondary" style="margin:0; padding: 4px 8px; width: auto; font-size: 0.65rem; display: flex; align-items: center; gap: 4px; flex-shrink:0;" onclick="fitElevZoom()" title="Fit elevation to window">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:11px; height:11px;"><path d="M3 8V3h5M21 8V3h-5M3 16v5h5M21 16v5h-5"/></svg>
-                                Fit
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:30px; height:26px; padding:0; flex-shrink:0;" title="Export elevation as PNG" onclick="exportElevPNG()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 15V3M7 10l5 5 5-5M3 19h18"/></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- ─── LAYOUT GUIDES ─────────────────────────────────
-                         Overlay toggles: labels, frame OD, spacing dims,
-                         scale figure, guides, grid, centers. Settings gear
-                         moved to the Wall Dimensions title row. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-layout', this)">Layout Guides <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="elev-sec-layout" class="collapsible-section open">
-                        <div class="layout-guides-grid" style="margin-bottom: 6px;">
-                            <button class="layout-guide-btn toggle-status" id="labelToggle" title="Labels - Add letter labels to organize your frames (A, B, C…)" onclick="toggleElevLayer('label-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 4h11l5 5v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><circle cx="16" cy="8" r="1.5" fill="currentColor" stroke="none"/></svg>
-                            </button>
-                            <button class="layout-guide-btn toggle-status" id="odToggle" title="Frame - overall dimensions" onclick="toggleElevLayer('od-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="8" y="8" width="8" height="8" rx="0.5"/><path d="M3 5V3h2M3 19v2h2M21 5V3h-2M21 19v2h-2"/></svg>
-                            </button>
-                            <button class="layout-guide-btn toggle-status" id="dimToggle" title="Spacing - call out spacing dimensions between frames and wall edges" onclick="toggleElevLayer('dim-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 12h2M9 12h2M14 12h2M19 12h2M4 8v8M21 8v8"/></svg>
-                            </button>
-                            <button class="layout-guide-btn toggle-status" id="personToggle" title="Person - Add 6 foot tall character to reference scale" onclick="toggleElevLayer('person-wrap', this)">
-                                <!-- Stick figure: head (small circle), body line, arms out, legs splayed -->
-                                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v8M8 11l4-2 4 2M12 15l-3 5M12 15l3 5"/></svg>
-                            </button>
-                        </div>
-                        <div class="layout-guides-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <button class="layout-guide-btn toggle-status" id="guideToggle" title="Guides - show center and hanging height guide lines" onclick="toggleElevLayer('guide-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v18M9 6h6M9 10h6M9 14h6M9 18h6"/></svg>
-                            </button>
-                            <button class="layout-guide-btn toggle-status" id="gridToggle" title="Grid — Show grid to help layout, adjust size in Settings" onclick="toggleElevLayer('grid-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-                            </button>
-                            <button class="layout-guide-btn toggle-status" id="frameCenterToggle" title="Centers — Show frame center crosshairs" onclick="toggleElevLayer('frame-center-layer', this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/></svg>
-                            </button>
-                        </div>
-                        <!-- Group Dimension Box + Edge Gap toggles. These turn
-                             blue (active) when the corresponding annotation
-                             exists, and clicking them shows/hides it. -->
-                        <div class="layout-guides-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:6px;">
-                            <button class="layout-guide-btn toggle-status" id="groupBoxToggle" title="Group Dimension Box — show/hide the dashed group dimension callouts" onclick="toggleGroupBoxVisibility(this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" fill="none" stroke-dasharray="3 2"/><line x1="4" y1="4" x2="20" y2="4"/><line x1="4" y1="2.5" x2="4" y2="5.5"/><line x1="20" y1="2.5" x2="20" y2="5.5"/></svg>
-                            </button>
-                            <button class="layout-guide-btn toggle-status" id="edgeGapToggle" title="Edge Gap — show/hide distance-to-wall-edge dimensions" onclick="toggleEdgeGapVisibility(this)">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="6" fill="none"/><path d="M12 7V3M12 21v-4M7 12H3M21 12h-4"/></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- ─── ADD & ARRANGE (fixed, always visible) ────────────
-                     This is the high-traffic section. Pinned between the
-                     collapsible header sections and the frame panel list
-                     so it's always accessible regardless of which header
-                     sections the user has collapsed. Uses a static label
-                     (no chevron, not clickable) to signal it can't be
-                     hidden. -->
-                <div class="elev-add-arrange-fixed">
-                    <div class="section-title section-title-static">Add &amp; Arrange</div>
-                    <div class="elev-section-emphasis-inner">
-                        <div style="display: flex; gap: 6px; align-items: center;">
-                            <div style="position: relative; flex: 1; min-width: 0;">
-                                <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: 0.7rem; justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                                    <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
-                                    <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </button>
-                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
-                                    <div id="bulkImportCheckboxes"></div>
-                                </div>
-                            </div>
-                            <button class="action-btn" style="width:auto; font-size: 0.7rem; padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
-                                Add
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
-                            </button>
-                            <!-- Re-number button. Opens a modal where the user picks a
-                                 template + location number, then bulk-renames all frame
-                                 ITEM CODES in this elevation to follow that pattern.
-                                 Optionally reorders the dashboard rows to match. -->
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openRenumberModal()" title="Re-number all ITEM CODES in this elevation">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
-                            </button>
-                            <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
-                            </button>
-                            <!-- Group dimension: draws a dashed bounding box with width +
-                                 height measurement callouts around the selected frames.
-                                 Mirrors the client's install-drawing convention. -->
-                            <button class="action-btn btn-secondary" id="groupDimBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="createGroupDimFromSelection()" title="Add group dimension box around selected frames">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="6" width="18" height="12" fill="none" stroke-dasharray="3 2"/><path d="M3 3h0M21 3h0" /><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="1.5" x2="3" y2="4.5"/><line x1="21" y1="1.5" x2="21" y2="4.5"/></svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="elev-frame-list">
-                    <div class="elev-col-header">
-                        <div class="elev-col-left">
-                            <!-- "Frames" label removed for v2; column headers below
-                                 fully describe what each column is. The space here
-                                 holds only the letter column (~28px) which doesn't
-                                 need a header label. -->
-                        </div>
-                        <div class="elev-col-icons">
-                            <div class="elev-col-label item-code-header-label"><span>Item Code</span></div>
-                            <div class="elev-col-label wall-align-header-label"><span>Wall Align</span></div>
-                            <div class="elev-col-label edge-gap-header-label"><span>Edge</span></div>
-                            <div style="display:flex; align-items:center; justify-content:center; padding-bottom:2px;">
-                                <button class="pill-toggle pill-toggle-global" id="globalActiveToggle" title="Show / hide all frames" onclick="toggleAllElevActive()">
-                                    <span class="pill-toggle-knob"></span>
-                                </button>
-                            </div>
-                            <div class="elev-col-label">
-                                <button class="elev-col-iconbtn" title="Toggle Group All — link/unlink every frame so they move together" onclick="toggleGroupAllElevFrames(event)" id="groupAllBtn">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:11px; height:11px; stroke-width:2.4;"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>
-                                </button>
-                            </div>
-                            <div class="elev-col-label"><span>Edit</span></div>
-                            <div class="elev-col-label"><span>Dupe</span></div>
-                            <div class="elev-col-label"><span>Del</span></div>
-                        </div>
-                    </div>
-                    <div id="frame-controls"></div>
-                </div>
-            </div>
-
-            <div class="workspace" id="scrollArea">
-                <div id="export-wrap">
-                    <div id="wall">
-                        <div id="grid-layer" class="grid-layer"></div>
-                        <div id="frame-center-layer" class="frame-center-layer"></div>
-                        <div id="arch-dim-layer" class="arch-dim-layer"></div>
-                        <div id="dim-layer" class="dim-layer"></div>
-                        <div id="floor-ceiling-layer" class="dim-layer"></div>
-                        <div id="guide-layer" class="guide-layer"></div>
-                        <div id="od-layer" class="od-layer"></div>
-                        <div id="group-dim-layer" class="group-dim-layer"></div>
-                        <div id="label-layer" class="label-layer"></div>
-                        
-                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:20; display:none;">
-                            <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
-                        </div>
-                        <div id="frame-layer"></div>
-                        <!-- Snap-to-alignment guide lines. Appear during drag
-                             when a frame's edge or center aligns with another
-                             frame, wall, or hang line. Always rendered on top
-                             of frames so the alignment is visible. Cleared on
-                             mouseup. -->
-                        <div id="snap-guide-layer" style="position:absolute; inset:0; pointer-events:none; z-index:55;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div id="duplicateModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:320px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Duplicate Frame</h3>
-        <p style="font-size:0.75rem; color:var(--text-main); margin-bottom:20px; line-height: 1.4;">How would you like to duplicate this frame?</p>
-        <div style="display:flex; flex-direction:column; gap:10px;">
-            <button class="action-btn" style="height: 32px;" onclick="confirmDuplicate('instance')">Create Linked Instance</button>
-            <button class="action-btn btn-secondary" style="height: 32px;" onclick="confirmDuplicate('new')">Add as New Spec</button>
-            <button class="action-btn btn-outline" style="height: 32px; margin-top: 5px; color: var(--text-main); border-color: var(--border-color);" onclick="closeDuplicateModal()">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<!-- Generic info / confirm modal. Replaces window.alert() and window.confirm() calls
-     with the studio's themed modal styling so popups feel consistent. Reused via
-     showInfoModal() / showConfirmModal() helpers in app.js. -->
-<div id="infoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:340px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 id="infoModalTitle" style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Notice</h3>
-        <p id="infoModalBody" style="font-size:0.75rem; color:var(--text-main); margin-bottom:20px; line-height: 1.4;">…</p>
-        <div id="infoModalButtons" style="display:flex; flex-direction:column; gap:10px;">
-            <!-- Buttons injected dynamically by showInfoModal / showConfirmModal -->
-        </div>
-    </div>
-</div>
-
-<!-- Batch ZIP progress modal. Shown while batchDownloadAllFramesAsZip is
-     generating PNGs and bundling them. Three content states swap based on
-     job phase: 'running' (during), 'done' (success), 'error' (failure).
-     Modal is dismissible via Cancel during run, Close after done. -->
-<div id="batchZipModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:380px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-
-        <!-- RUNNING STATE -->
-        <div id="batchZipRunning">
-            <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.05rem; color:var(--text-strong);">Building Frame Pack</h3>
-            <p style="font-size:0.7rem; color:var(--text-muted); margin: 0 0 16px 0;">
-                Generating PNG files and bundling with the project CSV into a single ZIP.
-            </p>
-            <div style="background: var(--border-color); border-radius: 4px; height: 8px; overflow:hidden; margin-bottom: 8px;">
-                <div id="batchZipProgressBar" style="background: var(--accent); height: 100%; width: 0%; transition: width 0.2s ease;"></div>
-            </div>
-            <div style="display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-main); margin-bottom: 14px;">
-                <span id="batchZipCountLabel">0 / 0</span>
-                <span id="batchZipPercentLabel">0%</span>
-            </div>
-            <p id="batchZipCurrentFile" style="font-size:0.7rem; color:var(--text-muted); margin: 0 0 18px 0; font-style: italic; min-height: 1em;"></p>
-            <button class="action-btn btn-secondary" style="width:100%; height:32px; font-size:0.75rem;" onclick="cancelBatchZip()">Cancel</button>
-        </div>
-
-        <!-- DONE STATE -->
-        <div id="batchZipDone" style="display:none;">
-            <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:var(--text-strong);">Frame Pack Ready</h3>
-            <p id="batchZipDoneMsg" style="font-size:0.75rem; color:var(--text-main); margin: 0 0 18px 0; line-height: 1.4;">…</p>
-            <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('batchZipModal').style.display='none'">Close</button>
-        </div>
-
-        <!-- ERROR STATE -->
-        <div id="batchZipError" style="display:none;">
-            <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:#e87474;">Batch Export Failed</h3>
-            <p id="batchZipErrorMsg" style="font-size:0.75rem; color:var(--text-main); margin: 0 0 18px 0; line-height: 1.4;">…</p>
-            <button class="action-btn btn-secondary" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('batchZipModal').style.display='none'">Close</button>
-        </div>
-    </div>
-</div>
-
-<!-- Help modal. Opens via the ? button in the header. Two tabs: Video
-     (placeholder until a tutorial URL is set in HELP_VIDEO_URL in app.js)
-     and Reference (detailed feature documentation). Wider than other modals
-     since reference content benefits from horizontal space — left sidebar
-     for section navigation, right panel for content. -->
-<div id="helpModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); border-radius:8px; width:760px; max-width: 95vw; height:80vh; max-height:720px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); display:flex; flex-direction: column; overflow: hidden;">
-
-        <!-- Header: title + tab strip + close button -->
-        <div style="padding: 16px 20px 0; flex-shrink: 0;">
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
-                <div>
-                    <h3 style="margin: 0 0 2px; font-size:1.1rem; color:var(--text-strong);">Help</h3>
-                    <p style="font-size:0.7rem; color:var(--text-muted); margin: 0;">Features, shortcuts, and the workflow at a glance.</p>
-                </div>
-                <button class="icon-btn" style="border:none; background:transparent; color:var(--text-muted); cursor:pointer; padding: 4px 8px; font-size: 1.2rem; line-height: 1;" onclick="closeHelpModal()" title="Close help">×</button>
-            </div>
-            <!-- Tab strip -->
-            <div class="help-tabs">
-                <button class="help-tab active" id="helpTabVideo" onclick="setHelpTab('video')">
-                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px; margin-right:5px;"><polygon points="23 7 16 12 23 17 23 7" fill="currentColor"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-                    Video
-                </button>
-                <button class="help-tab" id="helpTabReference" onclick="setHelpTab('reference')">
-                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px; margin-right:5px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2.5A2.5 2.5 0 0 0 17.5 0H6.5A2.5 2.5 0 0 0 4 2.5z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
-                    Reference
-                </button>
-            </div>
-        </div>
-
-        <!-- Body: swaps based on which tab is active -->
-        <div style="flex: 1; overflow: hidden; display: flex;">
-
-            <!-- VIDEO TAB CONTENT -->
-            <div id="helpVideoPanel" style="flex: 1; padding: 20px 24px; overflow-y: auto;">
-                <div id="helpVideoEmpty" style="height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: var(--text-muted);">
-                    <svg viewBox="0 0 24 24" style="width:56px; height:56px; opacity:0.4; margin-bottom: 16px;" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-                    <h4 style="margin: 0 0 8px; font-size: 0.95rem; color: var(--text-strong);">Tutorial video coming soon</h4>
-                    <p style="font-size: 0.78rem; max-width: 380px; line-height: 1.5; margin: 0 0 18px;">A walkthrough video is in production. Once it's ready, you'll be able to watch it here without leaving the tool.</p>
-                    <p style="font-size: 0.72rem; max-width: 380px; line-height: 1.5;">In the meantime, the <strong style="color: var(--text-main);">Reference</strong> tab covers every feature with short descriptions.</p>
-                </div>
-                <!-- When a video URL is plugged in, this container gets populated by setHelpVideoUrl() -->
-                <div id="helpVideoEmbed" style="display:none; width:100%; height:100%;"></div>
-            </div>
-
-            <!-- REFERENCE TAB CONTENT -->
-            <div id="helpReferencePanel" style="flex: 1; display: none; overflow: hidden;">
-                <!-- Section nav (left) -->
-                <div class="help-ref-nav" id="helpRefNav">
-                    <!-- Populated by populateHelpReference() -->
-                </div>
-                <!-- Content (right) -->
-                <div class="help-ref-content" id="helpRefContent">
-                    <!-- Populated by populateHelpReference() and renderHelpRefSection() -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bulk Edit modal. Set one field on all currently-selected rows.
-     Field dropdown lists only bulk-safe fields (no ITEM CODE, no per-frame
-     unique dimensions). Value input type swaps based on selected field —
-     text/number/select — handled in renderBulkEditValueInput. -->
-<div id="bulkEditModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:480px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Bulk Edit</h3>
-        <p id="bulkEditSummary" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
-            <!-- populated by openBulkEditModal -->
-        </p>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Field to edit</label>
-            <select id="bulkEditField" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" onchange="renderBulkEditValueInput()">
-                <!-- populated by openBulkEditModal -->
-            </select>
-        </div>
-
-        <div style="margin-bottom:18px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">New value</label>
-            <div id="bulkEditValueContainer">
-                <!-- input rendered by renderBulkEditValueInput based on field type -->
-            </div>
-        </div>
-
-        <p id="bulkEditPreview" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 18px 0; min-height:1.4em;">
-            <!-- live preview text -->
-        </p>
-
-        <div style="display:flex; gap:8px; justify-content:flex-end;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('bulkEditModal').style.display='none'">Cancel</button>
-            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyBulkEdit()">Apply</button>
-        </div>
-    </div>
-</div>
-
-<!-- Duplicate as Series modal. From the primary selected row, create N
-     copies with auto-incrementing IDs based on a pattern. Useful for
-     populating a project with many similar frames quickly. -->
-<div id="duplicateSeriesModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:480px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Duplicate as Series</h3>
-        <p id="dupSeriesSummary" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
-            <!-- populated by openDuplicateSeriesModal -->
-        </p>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Number of copies</label>
-            <input type="number" id="dupSeriesCount" min="1" max="100" value="5" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" oninput="updateDupSeriesPreview()">
-        </div>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">
-                ID pattern <span style="font-weight:normal; text-transform:none;">(use {n} for the sequence number)</span>
-            </label>
-            <input type="text" id="dupSeriesPattern" placeholder="ART.{n}" style="width:100%; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" oninput="updateDupSeriesPreview()">
-        </div>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Starting number</label>
-            <input type="number" id="dupSeriesStart" min="1" max="9999" value="2" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" oninput="updateDupSeriesPreview()">
-        </div>
-
-        <div style="margin-bottom:8px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Pad to digits</label>
-            <select id="dupSeriesPad" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;" onchange="updateDupSeriesPreview()">
-                <option value="1">No padding (1, 2, 3…)</option>
-                <option value="2">2 digits (01, 02, 03…)</option>
-                <option value="3" selected>3 digits (001, 002, 003…)</option>
-                <option value="4">4 digits (0001, 0002…)</option>
-            </select>
-        </div>
-
-        <div id="dupSeriesPreview" style="font-size:0.7rem; color:var(--text-muted); margin:12px 0 0 0; padding:8px 10px; background:var(--bg-input); border:1px solid var(--border-color); border-radius:4px; font-family:monospace; max-height:140px; overflow-y:auto; min-height:40px;">
-            <!-- live preview of generated IDs -->
-        </div>
-
-        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:16px;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('duplicateSeriesModal').style.display='none'">Cancel</button>
-            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyDuplicateSeries()">Apply</button>
-        </div>
-    </div>
-</div>
-
-<!-- Move To modal. Triggered by the "Move To…" button on the dashboard
-     toolbar. Lets the user pick a target ITEM CODE and Above/Below to
-     reposition the currently-selected row(s). Works with single selection
-     and multi-selection. -->
-<div id="moveToModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:420px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Move To</h3>
-        <p id="moveToSummary" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
-            <!-- populated by openMoveToModal -->
-        </p>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Reference ITEM CODE</label>
-            <select id="moveToTarget" style="width:100%; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;">
-                <!-- populated by openMoveToModal -->
-            </select>
-        </div>
-
-        <div style="margin-bottom:18px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:6px;">Position</label>
-            <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; margin-right:16px; font-size:0.8rem; color:var(--text-main);">
-                <input type="radio" name="moveToPos" value="above" checked style="cursor:pointer;">
-                Above
-            </label>
-            <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer; font-size:0.8rem; color:var(--text-main);">
-                <input type="radio" name="moveToPos" value="below" style="cursor:pointer;">
-                Below
-            </label>
-        </div>
-
-        <div style="display:flex; gap:8px; justify-content:flex-end;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('moveToModal').style.display='none'">Cancel</button>
-            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyMoveTo()">Apply</button>
-        </div>
-    </div>
-</div>
-
-<!-- Re-number ITEM CODES modal. Triggered by the # button in the elevation
-     toolbar. User specifies a template + location number, sees a preview of
-     what the codes will become, optionally enables dashboard reorder, then
-     clicks Apply to commit. -->
-<div id="renumberModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:480px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Re-number ITEM CODES</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;">
-            Bulk-rename every frame's ITEM CODE in this elevation using a template. Changes propagate to all elevations referencing these frames.
-        </p>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Template</label>
-            <input type="text" id="renumberTemplate" value="ART.{LOC}-{LET}" oninput="updateRenumberPreview()" style="width:100%; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;">
-            <p style="font-size:0.65rem; color:var(--text-muted); margin:4px 0 0; line-height:1.4;">
-                Tokens: <code style="background:var(--bg-input); padding:0 4px; border-radius:2px;">{LOC}</code> = location number, <code style="background:var(--bg-input); padding:0 4px; border-radius:2px;">{LET}</code> = elevation letter (A, B, C…)
-            </p>
-        </div>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Location Number</label>
-            <input type="text" id="renumberLoc" value="001" oninput="updateRenumberPreview()" style="width:80px; font-family:monospace; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
-            <p style="font-size:0.65rem; color:var(--text-muted); margin:4px 0 0;">Padded to 3 digits if numeric.</p>
-        </div>
-
-        <div style="margin-bottom:12px;">
-            <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Preview</label>
-            <div id="renumberPreview" style="background:var(--bg-input); border:1px solid var(--border-color); border-radius:4px; padding:8px 10px; font-family:monospace; font-size:0.75rem; color:var(--text-main); line-height:1.5; max-height:160px; overflow-y:auto;">
-                <!-- populated by updateRenumberPreview() -->
-            </div>
-        </div>
-
-        <label style="display:flex; align-items:center; gap:8px; cursor:pointer; margin-bottom:18px; font-size:0.75rem; color:var(--text-main);">
-            <input type="checkbox" id="renumberReorderDash" checked style="cursor:pointer;">
-            <span>Also reorder dashboard rows to match elevation order</span>
-        </label>
-
-        <div style="display:flex; gap:8px; justify-content:flex-end;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('renumberModal').style.display='none'">Cancel</button>
-            <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applyRenumber()">Apply</button>
-        </div>
-    </div>
-</div>
-
-<!-- InDesign Script install instructions modal. Triggered by the "InDesign Script"
-     download button. Wider than the info modal to fit numbered steps + paths. -->
-<div id="installModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:520px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.1rem; color:var(--text-strong);">Install the InDesign Script</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:16px;">AutoFrameSpecs.jsx has been downloaded. Follow these steps to install it in InDesign.</p>
-
-        <!-- STEP 1: locate scripts folder -->
-        <div style="margin-bottom:14px;">
-            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">1. Open the Scripts panel in InDesign</div>
-            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
-                Window → Utilities → Scripts (or press <code style="background:var(--bg-subpanel); padding:1px 5px; border-radius:3px; font-size:0.65rem;">Ctrl+Alt+F11</code> on Windows / <code style="background:var(--bg-subpanel); padding:1px 5px; border-radius:3px; font-size:0.65rem;">Cmd+Opt+F11</code> on Mac).
-            </div>
-        </div>
-
-        <!-- STEP 2: open User scripts folder -->
-        <div style="margin-bottom:14px;">
-            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">2. Open the User Scripts folder</div>
-            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
-                In the Scripts panel, right-click on <strong>"User"</strong> → <strong>Reveal in Finder</strong> (Mac) or <strong>Reveal in Explorer</strong> (Windows). Inside that folder, open the <strong>Scripts Panel</strong> subfolder.
-            </div>
-        </div>
-
-        <!-- STEP 3: drop the file in -->
-        <div style="margin-bottom:14px;">
-            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">3. Drop AutoFrameSpecs.jsx into that folder</div>
-            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
-                Move the downloaded file into the <strong>Scripts Panel</strong> folder. The Scripts panel in InDesign should update immediately and show <strong>AutoFrameSpecs.jsx</strong> under "User".
-            </div>
-        </div>
-
-        <!-- STEP 4: run it -->
-        <div style="margin-bottom:14px;">
-            <div style="font-size:0.75rem; font-weight:bold; color:var(--text-strong); margin-bottom:6px;">4. Run the script</div>
-            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-left:14px;">
-                Open a new InDesign document. Double-click <strong>AutoFrameSpecs.jsx</strong> in the Scripts panel. A file picker will appear — choose the CSV you exported from this tool. The script generates spec sheets automatically.
-            </div>
-        </div>
-
-        <!-- Tips -->
-        <div style="margin-bottom:18px; padding:10px 12px; background:var(--bg-subpanel); border-radius:6px; border-left:3px solid var(--accent);">
-            <div style="font-size:0.7rem; color:var(--text-strong); font-weight:bold; margin-bottom:4px;">Tips</div>
-            <ul style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin:0; padding-left:18px;">
-                <li>The CSV must be one you exported from <em>this tool</em> — other CSVs will not parse correctly.</li>
-                <li>If you also exported PNG frames, the script will look for them in the same folder as the CSV.</li>
-                <li>Update the script anytime by re-downloading: changes to the tool's spec format may require the latest script.</li>
-            </ul>
-        </div>
-
-        <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('installModal').style.display='none'">Got it</button>
-    </div>
-</div>
-
-<!-- Settings modal. Opened from the gear icon in Layout Guides. Houses the
-     "set once" controls (Hang height, font size) plus the nudge step
-     config and a keyboard shortcuts reference. Hang/Font inputs share IDs
-     with their previous sidebar locations so existing handlers work. -->
-<div id="precisionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:440px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;">
-        <h3 style="margin-top:0; margin-bottom: 14px; font-size:1.1rem; color:var(--text-strong);">Settings</h3>
-
-        <!-- UNIT: in, cm, mm. Single source of truth for unit choice;
-             moved out of the Wall row to free up sidebar space. Calls
-             setElevUnit() which converts all stored values + labels. -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Units</div>
-            <div class="unit-toggle unit-toggle-3" style="height:34px; width:100%;">
-                <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
-                <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
-                <button id="elevBtnMm" onclick="setElevUnit('mm')">MM</button>
-            </div>
-        </div>
-
-        <!-- HEIGHTS: hang line. Font size moved to the Label & Dimension
-             Style section below (single source of truth for dim font size). -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Heights</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
-                <div>
-                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Center of art height. Gallery/museum standard is 57&quot;">Hang Height</label>
-                    <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()" style="padding: 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box;">
-                </div>
-            </div>
-        </div>
-
-        <!-- LABEL & DIMENSION STYLE: controls the look of every dimension and
-             label in the elevation (frame dims, wall dims, OD tags, center
-             line, hang line, group dimensions). Single source of truth. Wired
-             to applyAnnotationStyleFromModal() which updates CSS vars + all
-             group dims live and persists to localStorage. -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Label &amp; Dimension Style</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color); display:flex; flex-direction:column; gap:12px;">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Color</span>
-                    <input type="color" id="annotColor" value="#e00000" style="width:40px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; cursor:pointer;" oninput="applyAnnotationStyleFromModal()">
-                    <span id="annotColorHex" style="font-size:0.65rem; color:var(--text-muted); font-family:monospace;">#e00000</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Weight</span>
-                    <input type="range" id="annotWeight" min="1" max="6" step="1" value="2" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
-                    <span id="annotWeightVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">2px</span>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Style</span>
-                    <div class="unit-toggle" style="height:26px; flex:1;">
-                        <button id="annotDashOn" type="button" class="active" onclick="setAnnotDash(true)">DASHED</button>
-                        <button id="annotDashOff" type="button" onclick="setAnnotDash(false)">SOLID</button>
-                    </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Label Size</span>
-                    <input type="range" id="annotFontSize" min="9" max="22" step="1" value="13" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
-                    <span id="annotFontSizeVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">13px</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- GRID & SNAP: visual grid spacing + drag snap-to-grid increment.
-             These are independent: grid is purely visual (how far apart the
-             gridlines render), snap controls what the dragged frame's
-             position rounds to during a drag. User can set them the same
-             for "everything aligns to the grid lines I see" or differently
-             for "see a coarse grid but position frames finely". -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Grid &amp; Snap</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                    <div>
-                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Visual grid spacing on the elevation. Toggle grid visibility from Layout Guides.">Grid Size</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="gridSize" value="1" min="0.25" step="0.25" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateGridSize()">
-                            <span style="font-size:0.75rem; color:var(--text-muted);" id="gridSizeUnitLabel">in</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Increment that frame positions snap to when dragging.">Drag Snap</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="dragSnap" value="1" min="0.25" step="0.25" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateDragSnap()">
-                            <span style="font-size:0.75rem; color:var(--text-muted);" id="dragSnapUnitLabel">in</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- NUDGE STEP: arrow-key step sizes -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Nudge Step (Arrow Keys)</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                    <div>
-                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Arrow alone (small)</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
-                            <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel1">in</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;">Shift + Arrow (big)</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 6px; font-size: 0.85rem; flex:1; text-align: center;" oninput="updateNudgeSteps()">
-                            <span style="font-size:0.75rem; color:var(--text-muted);" id="nudgeUnitLabel2">in</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Keyboard shortcuts reference. Two columns: shortcut + what it does.
-             Built as a discoverability aid since keyboard shortcuts were
-             previously invisible to new users. -->
-        <div style="margin-bottom:14px; padding:12px; background:var(--bg-subpanel); border-radius:6px; border-left:3px solid var(--accent);">
-            <div style="font-size:0.7rem; color:var(--text-strong); font-weight:bold; margin-bottom:8px;">Keyboard Shortcuts</div>
-            <div style="display:grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size:0.7rem; color:var(--text-main); line-height: 1.5;">
-                <kbd class="kbd-key">←&nbsp;↑&nbsp;→&nbsp;↓</kbd><span>Nudge selected frames by small step</span>
-                <kbd class="kbd-key">Shift&nbsp;+&nbsp;Arrow</kbd><span>Nudge by big step</span>
-                <kbd class="kbd-key">Delete</kbd><span>Remove selected frames</span>
-                <kbd class="kbd-key">Esc</kbd><span>Deselect all frames</span>
-                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;D</kbd><span>Duplicate selected frame</span>
-                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;G</kbd><span>Group / ungroup selected frames</span>
-                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Z</kbd><span>Undo</span>
-                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;Z</kbd><span>Redo</span>
-                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;S</kbd><span>Save project</span>
-                <kbd class="kbd-key">Click</kbd><span>Select one frame</span>
-                <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Click</kbd><span>Add/remove from multi-selection</span>
-            </div>
-        </div>
-
-        <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="closeAnnotationStyleModal()">Done</button>
-    </div>
-</div>
-
-<!-- Alignment & Spacing modal. Operates on all currently-visible (active) frames
-     on the elevation. Three actions: distribute (with axis + gap), center group
-     horizontally on the wall, and align each frame's vertical center to the
-     hang-height line. -->
-<div id="alignModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:360px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Align &amp; Space Frames</h3>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Operates on all visible frames in this elevation. Tip: toggle off frames you don't want included.</p>
-
-        <!-- DISTRIBUTE SECTION -->
-        <div style="border:1px solid var(--border-color); border-radius:6px; padding:12px; margin-bottom:12px;">
-            <div style="font-size:0.7rem; font-weight:bold; color:var(--text-strong); margin-bottom:8px; text-transform:uppercase;">Distribute Evenly</div>
-            <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
-                <span style="font-size:0.65rem; color:var(--text-muted); width:50px;">Axis:</span>
-                <div class="unit-toggle" style="height:24px; flex:1;">
-                    <button id="alignAxisH" class="active" type="button" onclick="setAlignAxis('h')">HORIZONTAL</button>
-                    <button id="alignAxisV" type="button" onclick="setAlignAxis('v')">VERTICAL</button>
-                </div>
-            </div>
-            <div style="display:flex; gap:8px; align-items:center; margin-bottom:10px;">
-                <span style="font-size:0.65rem; color:var(--text-muted); width:50px;">Gap:</span>
-                <input type="number" id="alignGapValue" value="4" step="0.5" style="flex:1; padding:4px 6px; font-size:0.75rem;">
-                <span id="alignGapUnit" style="font-size:0.65rem; color:var(--text-muted);">in</span>
-            </div>
-            <button class="action-btn" style="width:100%; height:30px; font-size:0.7rem;" onclick="applyAutoSpace()">Apply Spacing</button>
-        </div>
-
-        <!-- CENTER & ALIGN SECTION -->
-        <div style="border:1px solid var(--border-color); border-radius:6px; padding:12px; margin-bottom:12px;">
-            <div style="font-size:0.7rem; font-weight:bold; color:var(--text-strong); margin-bottom:8px; text-transform:uppercase;">Center &amp; Align</div>
-            <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem; margin-bottom:6px;" onclick="centerGroupOnWall()" title="Shift the cluster of frames horizontally so its center matches the wall's center. Relative positions preserved.">Center Group on Wall</button>
-            <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="alignToHangHeight()" title="Align each frame's vertical center to the hang height line.">Align to Hang Height</button>
-        </div>
-
-        <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="document.getElementById('alignModal').style.display='none'">Close</button>
-    </div>
-</div>
-
-<!-- Library Sync modal. Two ways to load swatches: drop a folder onto the dropzone,
-     or click the Browse button to open the native folder picker. Either path ends
-     up calling the same processFolderEntries / syncDashLibraryFolder logic. -->
-<div id="librarySyncModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:420px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Load Frame Library</h3>
-        <p style="font-size:0.75rem; color:var(--text-main); margin-bottom: 6px; line-height: 1.4;">Drop your Frame Library folder below, or browse to locate it.</p>
-        <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom: 16px; line-height: 1.4; font-style: italic;">Your browser will ask permission to access the folder &mdash; this is normal, click "Upload" or "Allow" when it appears.</p>
-        <div id="libraryDropZone" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 24px; text-align: center; margin-bottom: 16px; background: var(--bg-main); transition: all 0.15s; cursor: pointer;" onclick="document.getElementById('libFolderInput').click()">
-            <svg viewBox="0 0 24 24" style="width: 32px; height: 32px; margin: 0 auto 8px; display: block; opacity: 0.5;" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-            </svg>
-            <div id="libraryDropZoneText" style="font-size: 0.8rem; color: var(--text-main);">Drop folder here</div>
-            <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 4px;">or click to browse</div>
-        </div>
-        <!-- Persistence indicator + clear control. Synced swatches save to the
-             browser's localStorage so they reload automatically next session.
-             The indicator shows how much of the ~5MB quota is used so the user
-             can see when they're approaching the limit. Clearing wipes only
-             the user's custom swatches; bundled library entries stay. -->
-        <div id="libraryStorageStatus" style="font-size: 0.7rem; color: var(--text-muted); padding: 8px 10px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 4px; margin-bottom: 12px; line-height: 1.4;">
-            <!-- populated by openLibrarySyncModal -->
-            Loading storage info…
-        </div>
-        <div style="display:flex; flex-direction:column; gap:10px;">
-            <button id="libraryClearBtn" class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="handleClearCustomLibrary()">Clear My Saved Swatches</button>
-            <button class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="closeLibrarySyncModal()">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<!-- Drop-zone visual states. .drag-over fires while a drag is hovering over the
-     zone; .processing while files are being read. -->
-<style>
-    #libraryDropZone.drag-over { border-color: var(--accent); background: rgba(74, 144, 226, 0.08); }
-    #libraryDropZone.processing { opacity: 0.5; pointer-events: none; }
-</style>
-
-<script src="app.js"></script>
-
-</body>
-</html>
+    --btn-primary: #3a86ff;
+    --btn-secondary: #444444;
+    --btn-danger: #d32f2f;
+    --btn-hover: #555555;
+    
+    --table-header: #252526;
+    --table-row-hover: #2a2d35;
+    --table-row-selected: #1e3a5f;
+
+    --art-color: rgba(100, 100, 100, 0.4); 
+    --guide-color: #555555; 
+
+    /* ── Unified dimension & label style ──
+     * Every dimension/label type (frame dims, wall/arch dims, OD tags,
+     * group dims, center lines) reads these. The Label & Dimension Style
+     * panel writes them as inline styles on :root via JS, overriding these
+     * defaults. Default look matches the group-dimension callouts: red,
+     * sans-serif, medium weight, dashed. */
+    --dim-color: #e00000;
+    --dim-font-size: 13px;
+    --dim-font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --dim-weight: 2px;
+    --dim-line-style: dashed;
+
+    /* Legacy alias — arch dims used --arch-line for their black color.
+     * Repointed to the unified --dim-color so they follow the panel. */
+    --arch-line: var(--dim-color);
+}
+
+.light-theme {
+    /* LIGHT THEME OVERRIDES */
+    --bg-main: #f0f2f5;
+    --bg-nav: #ffffff;
+    --bg-panel: #ffffff;
+    --bg-subpanel: #f8f9fa;
+    --bg-input: #ffffff;
+    --border-color: #d1d5da;
+    --text-strong: #111111;
+    --text-main: #444444;
+    --text-muted: #666666;
+    
+    --btn-secondary: #e2e6ea;
+    --btn-hover: #d3d7db;
+    
+    --table-header: #f8f9fa;
+    --table-row-hover: #f0f7ff;
+    --table-row-selected: #e0efff;
+}
+
+body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-main); color: var(--text-main); margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: background 0.3s, color 0.3s; }
+
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; }
+
+/* ========================================= */
+/* MASTER LAYOUT & NAVIGATION                */
+/* ========================================= */
+.app-top-nav { display: flex; align-items: center; background: var(--bg-nav); height: 45px; flex-shrink: 0; padding-right: 15px; border-bottom: 1px solid var(--border-color); z-index: 1000; transition: background 0.3s;}
+.nav-brand { display: flex; align-items: center; height: 100%; }
+.light-theme .logo-dark { display: none !important; }
+.light-theme .logo-light { display: block !important; }
+body:not(.light-theme) .logo-light { display: none !important; }
+body:not(.light-theme) .logo-dark { display: block !important; }
+
+.nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab { display: flex; align-items: center; gap: 8px; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: bold; height: 100%; padding: 0 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; border-bottom: 3px solid transparent; position: relative; }
+.nav-tab:hover { background: var(--bg-subpanel); color: var(--text-strong); }
+.nav-tab.active { background: var(--bg-main); color: var(--accent); border-bottom: 3px solid var(--accent); }
+
+/* Drag-to-reorder visual states for elevation tabs.
+ * .dragging fades the tab being moved so the user sees what they grabbed.
+ * .drop-before / .drop-after show a 3px colored bar on the appropriate edge
+ *   of the target tab indicating where the dragged tab will land on release.
+ * Uses the accent color to feel consistent with active-tab styling. */
+.nav-tab.dragging { opacity: 0.4; }
+.nav-tab.drop-before::before,
+.nav-tab.drop-after::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    pointer-events: none;
+}
+.nav-tab.drop-before::before { left: -1px; }
+.nav-tab.drop-after::after { right: -1px; }
+
+/* ──────────────────────────────────────────────────────────────────────
+ * DASHBOARD ROW DRAG-TO-REORDER
+ * Drag handle column on the left of each row + visual drop indicators
+ * (3px accent bars on top or bottom edges of the target row).
+ * ────────────────────────────────────────────────────────────────────── */
+.drag-handle-col,
+.drag-handle-cell {
+    width: 22px;
+    padding: 0;
+    text-align: center;
+    user-select: none;
+}
+.drag-handle-cell {
+    cursor: grab;
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: opacity 0.15s, color 0.15s;
+}
+.drag-handle-cell:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+.drag-handle-cell:active {
+    cursor: grabbing;
+}
+.drag-handle-cell .svg-icon {
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+}
+
+/* Dragging state on the row being moved */
+#rfiBody tr.row-dragging { opacity: 0.4; }
+
+/* Drop position indicators: use box-shadow inset to draw a 3px accent bar
+ * on the top or bottom edge of the target row. Pseudo-elements on table
+ * cells have unreliable positioning due to table layout quirks; box-shadow
+ * is simpler and works across the full row width without breaking layout. */
+#rfiBody tr.drop-above {
+    box-shadow: inset 0 3px 0 0 var(--accent);
+}
+#rfiBody tr.drop-below {
+    box-shadow: inset 0 -3px 0 0 var(--accent);
+}
+.tab-close { font-size: 14px; font-weight: bold; opacity: 0.5; transition: 0.2s; }
+.tab-close:hover { opacity: 1; color: var(--btn-danger); }
+
+.tab-divider { width: 1px; height: 20px; background: var(--border-color); margin: 0 5px; }
+.nav-add-tab { background: transparent; border: 1px dashed var(--text-muted); color: var(--text-muted); font-size: 0.7rem; font-weight: bold; height: 26px; padding: 0 10px; cursor: pointer; border-radius: 4px; margin-left: 10px; transition: 0.2s; white-space: nowrap;}
+.nav-add-tab:hover { border-color: var(--text-strong); color: var(--text-strong); }
+
+.app-content { flex: 1; display: flex; overflow: hidden; background: var(--bg-main); }
+.view-container { display: none; width: 100%; height: 100%; }
+.view-container.active { display: flex; }
+
+label { display: block; font-size: 0.55rem; font-weight: bold; color: var(--text-muted); margin-bottom: 2px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+input[type="text"], input[type="number"], input[type="date"], select { width: 100%; padding: 4px 6px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 0.75rem; height: 26px; background: var(--bg-input); color: var(--text-strong); transition: 0.2s;}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+textarea { width: 100%; padding: 6px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 0.75rem; resize: vertical; min-height: 28px; font-family: inherit; background: var(--bg-input); color: var(--text-strong);}
+
+.action-btn { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; padding: 6px 10px; border: 1px solid transparent; border-radius: 4px; font-size: 0.7rem; font-weight: bold; color: white; cursor: pointer; transition: 0.2s; background: var(--accent); height: 26px; box-sizing: border-box;}
+.action-btn:hover { background: var(--accent-hover); }
+.action-btn:disabled, .action-btn[disabled] { 
+    opacity: 0.4; 
+    cursor: not-allowed; 
+    background: var(--border-color);
+}
+.action-btn:disabled:hover, .action-btn[disabled]:hover { 
+    background: var(--border-color);
+}
+.btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.btn-outline:hover { background: rgba(58, 134, 255, 0.1); }
+.btn-secondary { background: var(--btn-secondary); color: var(--text-strong); border: 1px solid var(--border-color);}
+.btn-secondary:hover { background: var(--btn-hover); }
+.btn-danger { background: var(--btn-danger); }
+.btn-danger:hover { background: #b71c1c; }
+
+.unit-toggle { display: flex; background: var(--bg-input); padding: 2px; border-radius: 4px; border: 1px solid var(--border-color); height: 26px; box-sizing: border-box;}
+.unit-toggle button { flex: 1; border: none; padding: 0 8px; border-radius: 3px; cursor: pointer; font-weight: bold; font-size: 0.65rem; color: var(--text-muted); background: transparent; transition: 0.2s; }
+/* Active toggle button: combine the existing background color with a 1px accent
+   outline. The outline makes the selected state unmistakable on glance — without
+   it, the contrast against the toggle's own backplate was too subtle. */
+.unit-toggle button.active { background: var(--btn-secondary); color: var(--text-strong); box-shadow: 0 0 0 1px var(--accent) inset; }
+
+.svg-icon { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ========================================= */
+/* DASHBOARD SPECIFIC CSS                    */
+/* ========================================= */
+.dash-left-pane { flex: 1.5; display: flex; flex-direction: column; background: var(--bg-panel); border-right: 1px solid var(--border-color); overflow: hidden; z-index: 10; }
+.dash-right-pane { width: 440px; flex-shrink: 0; display: flex; flex-direction: column; align-items: stretch; padding: 0; overflow-y: auto; overflow-x: hidden; background: var(--bg-panel); box-shadow: inset 5px 0 15px rgba(0,0,0,0.03); z-index: 20; position: relative; }
+.top-grey-section { background: var(--bg-subpanel); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; flex-shrink: 0; z-index: 5; }
+.pane-header { padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); }
+.pane-header h2 { margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: 900; }
+.global-meta { padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.global-meta > div { display: flex; flex-direction: column; }
+.global-meta input#g_projName, .global-meta input#g_desc { width: 200px; }
+.table-container { flex: 1; overflow: auto; padding: 0; background: var(--bg-main); }
+table { width: max-content; border-collapse: collapse; font-size: 0.7rem; color: var(--text-main); }
+th, td { border: 1px solid var(--border-color); padding: 4px 8px; text-align: left; white-space: nowrap; height: 26px; }
+th { background: var(--table-header); position: sticky; top: 0; font-weight: bold; color: var(--text-strong); text-transform: uppercase; font-size: 0.6rem; z-index: 10; box-shadow: 0 1px 0 var(--border-color); }
+tr { transition: 0.1s; background: var(--bg-panel); }
+tr:hover { background: var(--table-row-hover); }
+tr.selected { background: var(--table-row-selected); border-left: 4px solid var(--accent); }
+/* Multi-selected secondaries — same idea as .selected but muted, so the
+ * primary still reads as "the active row" (form panel reflects it). */
+tr.multi-selected {
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border-left: 4px solid color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.tbl-in { width: 100%; border: none; background: transparent; font-size: inherit; font-family: inherit; padding: 2px; margin: 0; outline: none; color: inherit; box-sizing: border-box;}
+.tbl-in:focus { border-bottom: 1px solid var(--accent); }
+
+.preview-wrapper { position: sticky; top: 0; background: var(--bg-panel); z-index: 100; padding: 15px; border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+.preview-container { background: var(--bg-input); border-radius: 8px; width: 100%; max-width: 320px; aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background-image: linear-gradient(45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(128,128,128,0.1) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(128,128,128,0.1) 75%), linear-gradient(-45deg, transparent 75%, rgba(128,128,128,0.1) 75%); background-size: 20px 20px; border: 1px solid var(--border-color); margin-bottom: 10px;}
+.controls { padding: 8px 15px; flex-shrink: 0; display: flex; flex-direction: column; }
+
+/* Dashboard view mode 2 — preview as a resizable floating overlay.
+ * Activated by `body.dash-view-2`. The base Mode 1 layout (header, project
+ * toolbar, table, form pane) is COMPLETELY UNCHANGED. Only the
+ * .preview-wrapper lifts out of flow and becomes a fixed-positioned panel
+ * anchored to the right side of the table area.
+ *
+ * The preview-container INSIDE the wrapper is sized by JS (see
+ * updateDashPreviewContainerSize) to match the current frame's aspect
+ * ratio at the user's preferred "longest dimension" — so the frame
+ * always fits with minimal empty space. The user can drag the LEFT edge
+ * of the panel to make it bigger (dashPreviewSize grows, both W and H
+ * scale up proportionally).
+ *
+ *   ┌──[Project header — UNCHANGED]──────────────────────┐
+ *   │ [table — visible behind/around the floating panel] │
+ *   │                  ┌────────────────┐  ┌─────────┐   │
+ *   │                  │  Preview       │  │  Form   │   │
+ *   │                  │  (sized to     │  │ (440px) │   │
+ *   │                  │   frame aspect)│  │         │   │
+ *   │                  │  + toolbar     │  │         │   │
+ *   │                  └────────────────┘  │         │   │
+ *   │                  ↑ left edge is      └─────────┘   │
+ *   │                    drag handle                      │
+ *   └────────────────────────────────────────────────────┘
+ */
+body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper {
+    position: fixed;
+    top: 156px;
+    right: 460px; /* anchored to the right, just left of the 440px form pane */
+    left: auto;
+    bottom: auto;
+    width: auto;
+    z-index: 50;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    padding-left: 24px;  /* extra space on the left edge to make the drag handle reachable */
+    align-items: center;
+    justify-content: flex-start;  /* preview-container first, then toolbar below */
+    /* Drag handle hint: a subtle accent-colored vertical strip on the left
+     * edge. Becomes more visible on hover (via cursor change in JS, plus
+     * this static hint). */
+    border-left: 4px solid var(--accent);
+}
+body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper .preview-container {
+    /* JS sets explicit width/height via inline style (see
+     * updateDashPreviewContainerSize). These rules override the Mode 1
+     * defaults (320px max-width, 1/1 aspect ratio) so JS can take control. */
+    max-width: none;
+    max-height: none;
+    width: 400px;  /* default before JS sets actual size */
+    height: 400px;
+    aspect-ratio: auto;
+    margin-bottom: 10px;
+}
+
+/* When the toggle is active, give the button a tinted background so the
+ * user can see at a glance which mode is active. */
+#dashViewToggle.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Outer-shadow toggle. Active (= shadows OFF) gets the same accent tint so
+ * the user can see at a glance that shadow suppression is on. */
+#outerShadowToggle.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+/* When shadows are OFF (active state), dim the "shadow trail" rect in the
+ * icon so the SVG visually mirrors the on/off state. */
+#outerShadowToggle.active svg rect[opacity] {
+    opacity: 0;
+}
+
+/* Dashboard Toolbar */
+.dash-toolbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; background: var(--bg-subpanel); padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); align-items: center; }
+.dash-toolbar > * { margin: 0; }
+.dash-toolbar .select-wrapper { flex: 1; min-width: 120px; }
+
+.grid-custom-meta { display: grid; grid-template-columns: 2fr 3fr 1fr 1.2fr; gap: 4px; margin-bottom: 3px; }
+.grid-custom-bleed { display: grid; grid-template-columns: 1fr 1fr 0.8fr 1.5fr; gap: 4px; margin-bottom: 3px; }
+.grid-row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 3px; }
+.grid-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 3px; }
+.grid-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; margin-bottom: 3px; }
+
+.file-upload-wrapper { position: relative; width: 100%; height: 26px;}
+.file-upload-input { opacity: 0; position: absolute; z-index: -1; width: 0; height: 0; }
+.file-upload-btn { display: flex; align-items: center; justify-content: center; width: 100%; height: 26px; background: var(--btn-secondary); border: 1px solid var(--border-color); border-radius: 4px; font-size: 0.65rem; font-weight: bold; color: var(--text-strong); cursor: pointer; box-sizing: border-box; transition: 0.2s;}
+.file-upload-btn:hover { background: var(--btn-hover); }
+
+.flex-row-tight { display: flex; align-items: center; background: var(--bg-subpanel); padding: 4px 6px; border-radius: 6px; border: 1px solid var(--border-color); margin-bottom: 6px; }
+.nano-input { padding: 2px; font-size: 0.7rem; text-align: center; border: 1px solid var(--border-color); border-radius: 4px; width: 100%; box-sizing: border-box; height: 22px; background: var(--bg-input); color: var(--text-strong);}
+
+/* Flat color swatch — no box-within-a-box. Strip the native color input's inner chrome
+   so we get a single solid color block with one border. */
+.color-swatch-flat { width: 22px; height: 22px; flex-shrink: 0; padding: 0; border: 1px solid var(--border-color); border-radius: 3px; cursor: pointer; background: transparent; -webkit-appearance: none; -moz-appearance: none; appearance: none; box-sizing: border-box; overflow: hidden; }
+.color-swatch-flat::-webkit-color-swatch-wrapper { padding: 0; border: none; border-radius: 0; }
+.color-swatch-flat::-webkit-color-swatch { border: none; border-radius: 0; }
+.color-swatch-flat::-moz-color-swatch { border: none; border-radius: 0; }
+
+/* Frame Style row: dim the inactive side so it's clear which mode is in effect. */
+.fstyle-disabled { opacity: 0.35; pointer-events: none; filter: grayscale(60%); }
+
+/* Mat 1 directional inputs: tiny T/B/L/R labels under each input so users know
+   which input controls which side without having to hover for the tooltip. */
+.mat-input-cell { display: flex; flex-direction: column; align-items: stretch; gap: 1px; }
+.mat-input-label { font-size: 0.45rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; text-align: center; line-height: 1; letter-spacing: 0.05em; }
+
+/* Float Mount panel: tight uppercase labels for the 3-col compact layout */
+.fm-label { font-size: 0.55rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; line-height: 1; letter-spacing: 0.05em; width: 50px; flex-shrink: 0; }
+
+/* Constraint validation warnings. The .constraint-warning-field class lights up
+   the field's label cell with a subtle yellow tint; the .constraint-warning-icon
+   sits in the top-right of the cell, hovering above the input. Hover the icon
+   for the tooltip explaining the rule. */
+.constraint-warning-field { position: relative; }
+.constraint-warning-field input,
+.constraint-warning-field select { box-shadow: 0 0 0 1px rgba(255, 180, 0, 0.6) inset; }
+.constraint-warning-icon {
+    position: absolute;
+    top: 0px;
+    right: 4px;
+    font-size: 0.85rem;
+    color: #ffb400;
+    cursor: help;
+    z-index: 5;
+    line-height: 1;
+    pointer-events: auto;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+}
+.constraint-warning-icon:hover { color: #ffc833; }
+
+/* Project table rows that have constraint violations get a yellow left edge.
+   Hover the row to see the tooltip listing all violations. */
+.constraint-warning-row td:first-child { box-shadow: inset 4px 0 0 0 #ffb400; }
+.constraint-warning-row { cursor: help; }
+
+/* When a section is locked (e.g. mats while a floater or shadow box frame is
+   selected) — fully greyed out, no interaction. The whole subtree dims; pointer
+   events blocked so nothing inside can be clicked. A note line above explains why. */
+.disabled-section { opacity: 0.4; pointer-events: none; filter: grayscale(50%); position: relative; }
+.disabled-section::after { content: 'Mats not used for this product'; position: absolute; top: 24px; left: 0; right: 0; text-align: center; font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; pointer-events: none; }
+.toggle-status { padding: 2px 6px; border-radius: 4px; font-size: 0.5rem; border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); cursor: pointer; font-weight: bold; transition: 0.15s; min-width: 30px; text-align: center; box-sizing: border-box; }
+.toggle-status.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
+.calc-box { width: 100%; padding: 4px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 0.75rem; background: var(--bg-subpanel); color: var(--text-strong); font-weight: bold; text-align: center; height: 26px; display: flex; align-items: center; justify-content: center; }
+.calc-box-blue { color: var(--accent) !important; }
+
+.section-title { font-size: 0.65rem; font-weight: 900; color: var(--text-strong); margin-top: 4px; margin-bottom: 2px; padding-bottom: 2px; border-bottom: 2px solid var(--border-color); text-transform: uppercase; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+.section-title:hover { color: var(--accent); }
+.section-title.section-title-static { cursor: default; }
+.section-title.section-title-static:hover { color: var(--text-strong); }
+
+/* fl-disabled: applied to sections/inputs that don't apply to the current
+ * product type. Examples: Frame Style section + Fr.W/Fr.H/Rabbet fields are
+ * irrelevant for Frameless Canvas. Greys them out + blocks input but leaves
+ * the underlying data intact so switching products doesn't lose state. */
+.fl-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    user-select: none;
+}
+.collapsible-section { display: none; margin-bottom: 4px; }
+.collapsible-section.open { display: block; }
+
+.custom-dropdown-list { display: none; position: absolute; top: 100%; left: 0; width: 240px; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 280px; overflow-y: auto; list-style: none; padding: 0; margin: 0; z-index: 1000; border-radius: 4px;}
+.custom-dropdown-list li { padding: 5px 8px; font-size: 0.7rem; cursor: pointer; border-bottom: 1px solid var(--border-color); color: var(--text-strong); background: var(--bg-panel); min-height: 32px; box-sizing: border-box; }
+.custom-dropdown-list li:hover { background: var(--accent); color: white; }
+select option { background: var(--bg-panel); color: var(--text-strong); }
+#bulkDropdownList { background: var(--bg-panel) !important; color: var(--text-strong); }
+#bulkDropdownList label { color: var(--text-strong) !important; }
+.no-arrow { -webkit-appearance: none !important; -moz-appearance: none !important; appearance: none !important; text-align: center; cursor: pointer; }
+select.no-arrow::-ms-expand { display: none; }
+
+/* ========================================= */
+/* ELEVATION SPECIFIC CSS                    */
+/* ========================================= */
+.elev-sidebar { width: 440px; background: var(--bg-panel); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 100; flex-shrink: 0; }
+.elev-sidebar-header { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+
+/* Input with an inline icon. The icon (and optional prefix label like "W:")
+ * sits on the left inside the input's visual bounds; the input takes the
+ * remaining space. Used for wall dims, hang, and font-size where a tiny
+ * icon + prefix hints at what's being measured. */
+.elev-input-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 0 6px;
+    height: 30px;
+    transition: border-color 0.15s;
+}
+.elev-input-with-icon:focus-within {
+    border-color: var(--accent);
+}
+.elev-input-with-icon input {
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 0.8rem;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    outline: none;
+    color: var(--text-strong);
+}
+.elev-input-with-icon .elev-input-icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    stroke-width: 2;
+}
+/* Prefix label inside an input wrapper: small caps, muted, like "W:" or
+ * "Hang:". Sits before the icon (or alone if there's no icon). */
+.elev-input-prefix {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* Inline action button living in a section-title row (e.g. Settings gear
+ * next to the chevron). Borderless, low visual weight, hover lifts it.
+ * Click should call event.stopPropagation() in onclick so it doesn't bubble
+ * up to the title's collapse handler. */
+.section-title-action {
+    background: transparent;
+    border: none;
+    padding: 2px 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    transition: 0.15s;
+}
+.section-title-action:hover {
+    color: var(--text-strong);
+    background: var(--border-color);
+}
+
+/* 3-segment variant of unit-toggle (IN/CM/MM). Each button gets ~1/3 of
+ * the container width. Active segment uses the same accent treatment as
+ * the 2-segment version. */
+.unit-toggle-3 { display: flex; }
+.unit-toggle-3 button { flex: 1; }
+
+/* Add & Arrange fixed strip — pinned between the collapsible header sections
+ * and the frame panel list. Always visible since these are the most-used
+ * controls in the elevation view (importing frames, sorting, aligning).
+ * Horizontal padding is 10px because the inner emphasis card adds its own
+ * 10px padding, totaling 20px to content — which matches the 20px padding
+ * other sections use, so everything aligns vertically on the sidebar's
+ * left edge. The static section title gets its own left margin so it
+ * also lands at the 20px alignment column. */
+.elev-add-arrange-fixed {
+    padding: 8px 10px 10px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-panel);
+    flex-shrink: 0;
+}
+.elev-add-arrange-fixed .section-title {
+    margin-top: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Layout Guides grid: 4 icon-only buttons per row. No text labels — the
+ * buttons carry meaning via their icon + tooltip. Bigger than the
+ * previous labeled version (34px instead of 28px) to give the icon
+ * enough presence to be recognizable on its own. */
+.layout-guides-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+.layout-guide-btn {
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-input);
+    transition: 0.18s;
+    padding: 0;
+    font-size: 0;
+}
+.layout-guide-btn:hover {
+    background: var(--border-color);
+    border-color: var(--text-muted);
+}
+.layout-guide-btn .svg-icon {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+}
+.layout-guide-btn.toggle-status.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+/* Emphasis container for Add & Arrange contents. Subtle background tint
+ * inside the collapsible-section, since the section itself uses the
+ * dashboard's section-title pattern (no built-in emphasis). */
+.elev-section-emphasis-inner {
+    background: var(--bg-subpanel);
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+/* Keyboard shortcut chip — styled inline kbd element used in the Precision
+ * modal's shortcut reference table. Gives shortcuts a visually distinct
+ * look from prose so users can scan the list quickly. */
+.kbd-key {
+    display: inline-block;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: ui-monospace, 'SF Mono', Consolas, monospace;
+    font-size: 0.65rem;
+    color: var(--text-strong);
+    box-shadow: 0 1px 0 var(--border-color);
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.3;
+}
+.elev-frame-list { flex: 1; overflow-y: auto; padding: 10px 20px; }
+
+/* Empty-state shown inside #frame-controls when an elevation has no frames.
+ * Centered, muted, with a soft dashed-square icon. The strong tags inside
+ * the copy ("Frame Dashboard", "Push to Wall", "+ Add") match the actual
+ * UI labels users will look for. */
+.elev-empty-state {
+    padding: 20px 14px 24px;
+    text-align: center;
+    color: var(--text-muted);
+}
+.elev-empty-icon {
+    width: 36px;
+    height: 36px;
+    color: var(--text-muted);
+    opacity: 0.55;
+    margin: 0 auto 10px;
+    display: block;
+}
+.elev-empty-state h4 {
+    font-size: 0.78rem;
+    color: var(--text-strong);
+    margin: 0 0 8px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+.elev-empty-state p {
+    font-size: 0.7rem;
+    line-height: 1.45;
+    margin: 0 0 10px;
+    color: var(--text-muted);
+}
+.elev-empty-state p.elev-empty-tip {
+    font-size: 0.65rem;
+    opacity: 0.85;
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+}
+.elev-empty-state strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+/* ──────────────── HELP MODAL ────────────────
+ * Two-tab modal (Video, Reference). Tabs are flat buttons with a colored
+ * underline for the active state. Reference is a two-column layout: left
+ * sidebar of section names, right content panel. Active section in the
+ * sidebar gets an accent background. */
+.help-tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 1px solid var(--border-color);
+}
+.help-tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: 0.15s;
+    margin-bottom: -1px;  /* overlap parent's border so active tab "owns" the seam */
+}
+.help-tab:hover {
+    color: var(--text-main);
+}
+.help-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+/* Reference: sidebar of sections */
+.help-ref-nav {
+    width: 180px;
+    border-right: 1px solid var(--border-color);
+    padding: 14px 0;
+    overflow-y: auto;
+    flex-shrink: 0;
+    background: var(--bg-main);
+}
+.help-ref-nav button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 8px 18px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: 0.15s;
+    border-left: 2px solid transparent;
+}
+.help-ref-nav button:hover {
+    color: var(--text-main);
+    background: var(--bg-panel);
+}
+.help-ref-nav button.active {
+    color: var(--accent);
+    background: var(--bg-panel);
+    border-left-color: var(--accent);
+    font-weight: 600;
+}
+
+/* Reference: content panel */
+.help-ref-content {
+    flex: 1;
+    padding: 20px 26px;
+    overflow-y: auto;
+    color: var(--text-main);
+}
+.help-ref-content h4 {
+    margin: 0 0 4px;
+    font-size: 0.95rem;
+    color: var(--text-strong);
+    font-weight: 600;
+}
+.help-ref-content .help-section-intro {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin: 0 0 18px;
+    line-height: 1.45;
+}
+.help-ref-content .help-entry {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--border-color);
+}
+.help-ref-content .help-entry:last-child {
+    border-bottom: none;
+}
+.help-ref-content .help-entry h5 {
+    margin: 0 0 4px;
+    font-size: 0.78rem;
+    color: var(--text-strong);
+    font-weight: 600;
+}
+.help-ref-content .help-entry p {
+    margin: 0;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--text-main);
+}
+.help-ref-content .help-entry strong {
+    color: var(--text-strong);
+    font-weight: 600;
+}
+.help-ref-content .help-kbd {
+    display: inline-block;
+    padding: 1px 6px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: var(--text-main);
+    margin: 0 1px;
+}
+
+/* Version pill in the header — shows "v1.0" + colored status dot.
+ * Green dot when APP_BUILD='prod', orange when 'dev', so it's visually
+ * obvious which build users are on. Click opens Help → Version section. */
+.version-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 8px;
+    font-size: 0.65rem;
+    font-family: monospace;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.15s;
+    user-select: none;
+    background: var(--bg-input);
+}
+.version-pill:hover {
+    color: var(--text-strong);
+    border-color: var(--text-muted);
+}
+.version-pill::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #46c772;        /* default prod green */
+    flex-shrink: 0;
+}
+/* When the pill carries the 'dev' modifier, the dot turns orange and the
+ * pill border picks up a faint orange tint to make the development build
+ * unmistakable at a glance. */
+.version-pill.dev::before {
+    background: #f0883e;
+}
+.version-pill.dev {
+    border-color: #f0883e88;
+    color: #f0883e;
+}
+.workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
+#export-wrap { padding: 80px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
+
+/* Light grey wall default for crisp dimensional text contrast */
+#wall { background: #f0f2f5; border-bottom: 4px solid var(--wall-line, #333); border-left: 1px solid var(--wall-line, #333); border-right: 1px solid var(--wall-line, #333); border-top: 1px solid var(--wall-line, #333); position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+
+.draggable { position: absolute; cursor: move; user-select: none; z-index: 10; }
+.person { opacity: 0.9; z-index: 20; pointer-events: none; }
+
+/* ENGINE (Dashboard Preview Basics - Elevation matches perfectly via JS shadows) */
+.frame-vis { display: flex; position: absolute; background: transparent; transition: all 0.2s ease-out; }
+
+/* Selection highlight: thin blue outline drawn outside the frame's box without
+ * affecting layout. Pairs with the matching ABC panel highlight (below). The
+ * outline uses an offset so it sits clear of any frame face / drop shadow that
+ * extends slightly past the box. */
+.frame-vis.selection-highlight {
+    outline: 2px solid #2196f3;
+    outline-offset: 4px;
+    z-index: 50;
+}
+
+/* During an active drag, drawElevAll re-creates frame elements many times per
+ * second. The mouseenter event doesn't refire when DOM mutates under the cursor,
+ * so the JS-set highlight class is briefly absent each redraw — appearing as a
+ * flicker. CSS :hover IS re-evaluated each redraw though, so during drag we
+ * fall back to that for instant highlight without waiting for the JS event.
+ * Also: kill transitions during drag so any class change is instant, not
+ * animated (which would compound the flicker). */
+body.dragging-frame .frame-vis { transition: none; }
+body.dragging-frame .frame-vis:hover {
+    outline: 2px solid #2196f3;
+    outline-offset: 4px;
+    z-index: 50;
+}
+.frame-vis-solid { border-style: solid; box-sizing: border-box; }
+.frame-vis-image { box-sizing: border-box; }
+
+.frame-rail { position: absolute; box-sizing: border-box; overflow: hidden; z-index: 1; }
+.rail-bg { position: absolute; background-color: var(--frame-color); }
+.frame-vis-image .rail-bg { background-image: var(--frame-bg); background-repeat: repeat-y; background-size: 100% auto; }
+.rail-left { top: 0; left: 0; width: var(--fW); height: 100%; clip-path: polygon(0 0, 100% var(--fW), 100% calc(100% - var(--fW)), 0 100%); }
+.rail-left .rail-bg { top: 0; left: 0; width: 100%; height: 100%; background-position: left center; }
+.rail-right { top: 0; right: 0; width: var(--fW); height: 100%; clip-path: polygon(0 var(--fW), 100% 0, 100% 100%, 0 calc(100% - var(--fW))); }
+.rail-right .rail-bg { top: 0; left: 0; width: 100%; height: 100%; background-position: right center; transform: scaleX(-1); }
+.rail-top { top: 0; left: 0; width: 100%; height: var(--fW); clip-path: polygon(0 0, 100% 0, calc(100% - var(--fW)) 100%, var(--fW) 100%); }
+.rail-bottom { bottom: 0; left: 0; width: 100%; height: var(--fW); clip-path: polygon(var(--fW) 0, calc(100% - var(--fW)) 0, 100% 100%, 0 100%); }
+.rail-top .rail-bg, .rail-bottom .rail-bg { width: var(--fW); height: var(--frame-W); top: 50%; left: 50%; }
+.rail-top .rail-bg { transform: translate(-50%, -50%) rotate(90deg); }
+.rail-bottom .rail-bg { transform: translate(-50%, -50%) rotate(-90deg); }
+
+/* Dashboard Fallback Visuals */
+/* CRITICAL: border-color must default to the explicit mat color variable, NOT inherit from text/theme.
+   Inline border-color set by JS always wins; this is just a safety net. */
+.mat-visual { border-style: solid; border-color: var(--m1-color, #ffffff); box-sizing: border-box; position: absolute; z-index: 2; box-shadow: inset 0 2px 6px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.15); pointer-events: none; background: transparent; }
+.mat2-visual { border-style: solid; border-color: var(--m2-color, #ffffff); box-sizing: border-box; position: absolute; z-index: 3; box-shadow: inset 0 2px 6px rgba(0,0,0,0.3), 0 2px 5px rgba(0,0,0,0.15); pointer-events: none; background: transparent; }
+.art-visual { background: var(--art-color); display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: bold; position: absolute; z-index: 4; border: 1px solid #aaa; box-sizing: border-box; box-shadow: inset 0 2px 8px rgba(0,0,0,0.2); text-align: center; pointer-events: none; transition: background 0.1s, color 0.1s;}
+
+/* Clean ID Tags - No White Fuzz, pure transparency box.
+ * Color + font now driven by the unified --dim-* variables. Relative size
+ * multipliers preserved so the visual hierarchy stays (frame tags larger,
+ * OD tags smaller). */
+.frame-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(4px, -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 1.2); background: rgba(255,255,255,0.8); padding: 1px 3px; border-radius: 2px; }
+.od-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(calc(-100% - 4px), -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 0.85); background: rgba(255,255,255,0.8); padding: 1px 3px; border-radius: 2px; }
+
+/* All grid layers hidden by default */
+#label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
+.dim-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 20; }
+/* Guide layer (wall-center + hang-height lines + floor-to-hang dim) sits
+ * ABOVE frames (z-index 10) so these reference lines read over the artwork.
+ * The dimension layers above sit even higher so dim callouts win over the
+ * guide lines where they overlap (keeps numbers readable). */
+.guide-layer { position: absolute; inset: 0; pointer-events: none; z-index: 15; }
+/* Group-dimension callouts. The layer itself ignores pointer events so it
+ * doesn't block frame interaction; only the delete (×) buttons inside opt
+ * back into pointer-events. Slightly higher z-index so dashed boxes read
+ * above frames. */
+.group-dim-layer { position: absolute; inset: 0; pointer-events: none; z-index: 21; }
+.group-dim-layer > div[title] { pointer-events: auto; }
+.grid-layer { z-index: 2; } 
+
+/* ========================================= */
+/* ARCHITECTURAL DIMENSIONS                  */
+/* ========================================= */
+.arch-dim { position: absolute; display: flex; align-items: center; justify-content: center; z-index: 40; }
+.arch-dim-h { height: 1px; flex-direction: row; }
+.arch-dim-v { width: 1px; flex-direction: column; }
+.dim-line-segment { flex: 1; height: var(--dim-weight); background: var(--arch-line); }
+.dim-line-segment-v { flex: 1; width: var(--dim-weight); background: var(--arch-line); }
+
+.arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: 600; color: var(--dim-color); padding: 1px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; }
+
+.hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
+.hang-label { 
+    position: absolute; 
+    bottom: 4px;  /* sits just above the dashed line */
+    right: 40px; 
+    color: var(--dim-color); 
+    font-family: var(--dim-font-family);
+    font-size: var(--dim-font-size); 
+    font-weight: 600; 
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.85); 
+    padding: 1px 6px; 
+    border-radius: 3px; 
+    white-space: nowrap;
+}
+.center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
+.center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: 600; left: 5px; background: rgba(255,255,255,0.8); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+.crosshair-h { position: absolute; height: 1px; border-top: 1px dashed #aaa; }
+.crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
+
+/* COMPACT ELEVATION FRAMES */
+.compact-frame-item { display: flex; flex-direction: column; padding: 6px 10px; border: 1px solid var(--border-color); background: var(--bg-subpanel); border-radius: 6px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); gap: 2px; transition: border-color 0.15s, background 0.15s, box-shadow 0.15s; }
+
+/* Top row of a frame panel: letter + ID on the left, icons (Wall Align, Edge
+ * Gap, ON, Move, etc.) on the right. Uses justify-content:space-between so
+ * the icons cluster against the right edge of the panel regardless of how
+ * short the letter+ID text is. */
+.frame-item-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+}
+/* Natural width — just contains the large letter. The ITEM CODE input
+ * (frame-item-id-inline) sits to the right of this. The icon row pushes
+ * to the far right via margin-left:auto. */
+.frame-item-label { min-width: 0; flex-shrink: 0; }
+.frame-item-top-row .frame-item-icons { margin-left: auto; }
+
+/* Frame ID + letter-target row: lives directly below the top icon row.
+ * Contains the (ART.001) ID and the letter target buttons inline. Wraps
+ * to multiple visual rows if there are many target buttons, without
+ * pushing the icon row taller. */
+.frame-item-id-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 2px;
+}
+.frame-item-id {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+/* Editable ITEM CODE input — disguised as a muted label until you interact
+ * with it. Hover/focus brings up a subtle background + border to signal
+ * editability. The bordered "active" state matches the project's input
+ * styling elsewhere.
+ *
+ * Note on specificity: the global `input[type="text"]` rule sets width:100%,
+ * which would otherwise override these 80px widths in flex containers
+ * (because attribute-selector specificity beats plain class). We use
+ * `input.frame-item-id-edit` so class+element beats attribute+element. */
+input.frame-item-id-edit {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-family: inherit;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    width: 80px;
+    max-width: 80px;
+    min-width: 0;
+    height: 18px;
+    outline: none;
+    transition: 0.15s;
+    box-sizing: border-box;
+}
+input.frame-item-id-edit:hover {
+    background: var(--bg-input);
+    border-color: var(--border-color);
+    color: var(--text-main);
+}
+input.frame-item-id-edit:focus {
+    background: var(--bg-input);
+    border-color: var(--accent);
+    color: var(--text-strong);
+}
+.frame-item-targets-inline {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+}
+
+/* Inline ITEM CODE variant — used in the top row of the panel item. Sized
+ * to fill its grid column (which is 100px wide). Border always visible so
+ * users know it's editable; hover/focus intensify the border + background.
+ * Prefixed with `input.` to override the global `input[type="text"] { width: 100% }`
+ * rule (attribute selector specificity would otherwise win). */
+input.frame-item-id-inline {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    color: var(--text-main);
+}
+
+/* Container for the target letter chips, now on its own row below the
+ * top-row controls. Only renders when there are actual targets, so frames
+ * with no dimensions to peers stay single-row-tall. Tight padding + starts
+ * at the letter column so chips appear directly below the frame letter. */
+.frame-item-targets-row {
+    padding-top: 2px;
+    padding-left: 0;
+}
+.frame-item-targets-row .frame-item-targets-inline {
+    gap: 1px;
+}
+
+/* Collapsed edge-gap group — single button instead of 4. Width matches the
+ * column header (26px). */
+.edge-gap-group-collapsed {
+    width: 26px;
+}
+
+/* The edge-gap trigger button + its count badge.
+ * .has-active changes the button background so it stands out when any
+ * direction is toggled on, even before noticing the badge. */
+.edge-gap-trigger {
+    position: relative;
+}
+.edge-gap-trigger.has-active {
+    background: color-mix(in srgb, var(--accent) 18%, transparent);
+    color: var(--accent);
+}
+.edge-gap-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.55rem;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 13px;
+    height: 13px;
+    padding: 0 3px;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Floating popover for the 4 edge-gap direction toggles. Anchored to the
+ * trigger button by positionEdgeGapPopover; centered around the button. */
+.edge-gap-popover {
+    position: fixed;
+    z-index: 1000;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    display: none;
+}
+.edge-gap-popover-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 28px);
+    grid-template-rows: repeat(3, 28px);
+    gap: 2px;
+    place-items: center;
+}
+.edge-gap-popover-center {
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+}
+
+/* Large letter label (A, B, C, ...) on the top row of each frame panel.
+ * Bigger and bolder than the previous inline letter — designed to be the
+ * primary visual anchor for the panel, matching the reference design. */
+.frame-letter-large {
+    font-weight: bold;
+    font-size: 1.05rem;
+    color: var(--text-strong);
+    line-height: 1;
+}
+
+/* Frame ID line (e.g. "(ART.001A)") sits on its own row below the top row.
+ * Smaller and muted so it doesn't compete visually with the letter, but
+ * still readable. */
+.frame-item-id {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    line-height: 1.2;
+}
+
+/* Pill-style ON/OFF toggle switch — iOS-style sliding toggle, replacing
+ * the rectangular "ON"/"OFF" text button. The track is a fixed-size pill;
+ * the knob is a circle absolutely positioned inside, sliding between left
+ * (off) and right (on) via the .active class. Smooth transition gives the
+ * familiar "tap to toggle" feel of mobile UIs. */
+.pill-toggle {
+    position: relative;
+    width: 28px;
+    height: 14px;
+    border-radius: 7px;
+    border: none;
+    background: var(--border-color);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.18s;
+    flex-shrink: 0;
+}
+.pill-toggle:hover { filter: brightness(1.15); }
+.pill-toggle.active { background: var(--accent); }
+.pill-toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    transition: left 0.18s, transform 0.18s;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.pill-toggle.active .pill-toggle-knob { left: 16px; }
+
+/* Selection highlight on the panel side — matches the frame outline color
+ * (#2196f3 blue). When a frame is hovered (or group-all is on), the matching
+ * ABC panel shows this blue accent so users can quickly find which row of
+ * the panel list corresponds to which frame on the wall. */
+.compact-frame-item.selection-highlight {
+    border-color: #2196f3;
+    box-shadow: 0 0 0 1px #2196f3, 0 2px 6px rgba(33, 150, 243, 0.2);
+    background: rgba(33, 150, 243, 0.05);
+}
+
+/* Suppress panel transitions during drag (matches frame-side; prevents
+ * highlight flicker when frames recreate at high frequency). */
+body.dragging-frame .compact-frame-item { transition: none; }
+.icon-btn { width: 26px; height: 26px; border-radius: 4px; border: 1px solid transparent; cursor: pointer; color: var(--text-strong); display: flex; align-items: center; justify-content: center; background: transparent; transition: 0.2s; font-size: 0.75rem; flex-shrink: 0; }
+.icon-btn:hover { background: var(--border-color); }
+.icon-btn.grouped { background: var(--accent) !important; color: white; }
+/* Specific rules for the chain-link sync button on the dashboard mat row.
+ * The generic .icon-btn.active fills the button blue with white icon —
+ * but for the sync button, we only want the chain icon STROKE to be blue
+ * (indicating "synced/linked"), with no filled background. When inactive,
+ * the chain is muted grey. */
+button#matLinkBtn { background: transparent !important; color: var(--text-muted); }
+button#matLinkBtn:hover { background: transparent !important; color: var(--text-strong); }
+button#matLinkBtn.active { background: transparent !important; color: var(--accent); }
+button#matLinkBtn.active:hover { background: transparent !important; color: var(--accent); filter: brightness(1.15); }
+/* Generic "toggled-on" state for icon buttons. Uses the same accent treatment
+ * as .grouped so any icon-style toggle button can use this class to show
+ * active state. Used by the per-frame distance dim toggles (↑↓←→). */
+.icon-btn.active { background: var(--accent) !important; color: white; }
+.dim-btn.active { background: var(--text-strong); color: var(--bg-main); border-color: var(--text-strong); }
+.frame-item-icons {
+    /* Use CSS Grid with the same template as the header for guaranteed
+     * column alignment. .elev-col-icons uses the same template via the
+     * --elev-col-template CSS variable. Each column has an explicit width
+     * matching the header. */
+    display: grid;
+    grid-template-columns: var(--elev-col-template);
+    align-items: center;
+    column-gap: 4px;
+    flex-shrink: 0;
+}
+/* Generic column wrapper inside .frame-item-icons. The grid handles widths
+ * (the inline width attribute is now redundant but harmless). */
+.frame-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+/* WALL ALIGN group: 2 quick-snap buttons (snap to hang, snap to wall center).
+ * Sits at the FAR LEFT of the icon row. Matches column header width
+ * (52px = 2 × 26px buttons) + 8px right margin so buttons line up under
+ * the header label. */
+.wall-align-group {
+    display: flex;
+    align-items: center;
+    width: 52px;
+    margin-right: 8px;
+    gap: 2px;
+}
+
+/* EDGE GAP group: 4 directional toggle arrows (↑↓←→). Matches the column
+ * header width (112px) so the buttons line up under the header label.
+ * The label itself lives once in the column header at the top of the
+ * frame list, not repeated per row. 2px right margin keeps this group
+ * visually tight against ON/OFF — they're in the same icon cluster. */
+.edge-gap-group {
+    display: flex;
+    align-items: center;
+    width: 112px;
+    margin-right: 2px;
+    gap: 2px;
+}
+
+/* Shared grid template — both .elev-col-icons (header) and .frame-item-icons
+ * (row) use this exact template, guaranteeing column-by-column alignment.
+ * Columns: Item Code | Wall Align | Edge | Toggle | Move | Edit | Dupe | Del */
+.elev-sidebar {
+    --elev-col-template: 100px 52px 26px 38px 26px 26px 26px 26px;
+}
+.elev-col-header { display: flex; align-items: flex-end; justify-content: space-between; padding: 0 10px 4px; border-bottom: 1px solid var(--border-color); margin-bottom: 2px; gap: 6px; }
+.elev-col-left { flex: 1; min-width: 0; }
+.elev-sort-btn { width: auto; font-size: 0.6rem; padding: 3px 8px; height: 22px; }
+.elev-col-icons {
+    display: grid;
+    grid-template-columns: var(--elev-col-template);
+    align-items: flex-end;
+    column-gap: 4px;
+    flex-shrink: 0;
+}
+.elev-col-label { display: flex; align-items: flex-end; justify-content: center; text-align: center; }
+.elev-col-label span { font-size: 0.45rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; line-height: 1.2; }
+.elev-col-iconbtn { background: transparent; border: none; padding: 0; margin: 0; color: var(--text-muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; line-height: 1; }
+.elev-col-iconbtn:hover { color: var(--accent); }
+.elev-col-iconbtn.active { color: var(--accent); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+/* Unit legend — top-left corner of the elevation wall. Shown when the
+ * interior dimension suffix is toggled off, so bare numbers are unambiguous. */
+.elev-unit-legend {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 22;
+    color: var(--dim-color);
+    font-family: var(--dim-font-family);
+    font-size: calc(var(--dim-font-size) * 0.9);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid var(--dim-color);
+    border-radius: 3px;
+    padding: 3px 8px;
+    pointer-events: none;
+    white-space: nowrap;
+}
