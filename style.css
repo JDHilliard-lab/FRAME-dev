@@ -820,6 +820,12 @@ body.dragging-frame .frame-vis:hover {
 /* All grid layers hidden by default */
 #label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
 .dim-layer, .guide-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+/* Group-dimension callouts. The layer itself ignores pointer events so it
+ * doesn't block frame interaction; only the delete (×) buttons inside opt
+ * back into pointer-events. Slightly higher z-index so dashed boxes read
+ * above frames. */
+.group-dim-layer { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
+.group-dim-layer > div[title] { pointer-events: auto; }
 .grid-layer { z-index: 2; } 
 
 /* ========================================= */
