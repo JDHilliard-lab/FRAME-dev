@@ -830,8 +830,8 @@ body.dragging-frame .frame-vis:hover {
  * Color + font now driven by the unified --dim-* variables. Relative size
  * multipliers preserved so the visual hierarchy stays (frame tags larger,
  * OD tags smaller). */
-.frame-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(4px, -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 1.2); }
-.od-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(calc(-100% - 4px), -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 0.85); }
+.frame-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(4px, -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 1.2); background: rgba(255,255,255,0.8); padding: 1px 3px; border-radius: 2px; }
+.od-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(calc(-100% - 4px), -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 0.85); background: rgba(255,255,255,0.8); padding: 1px 3px; border-radius: 2px; }
 
 /* All grid layers hidden by default */
 #label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
@@ -858,7 +858,7 @@ body.dragging-frame .frame-vis:hover {
 .dim-line-segment { flex: 1; height: var(--dim-weight); background: var(--arch-line); }
 .dim-line-segment-v { flex: 1; width: var(--dim-weight); background: var(--arch-line); }
 
-.arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: 600; color: var(--dim-color); padding: 0 6px; white-space: nowrap; background: transparent; }
+.arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: 600; color: var(--dim-color); padding: 1px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; }
 
 .hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
 .hang-label { 
@@ -876,7 +876,7 @@ body.dragging-frame .frame-vis:hover {
     white-space: nowrap;
 }
 .center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
-.center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: 600; left: 5px; }
+.center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: 600; left: 5px; background: rgba(255,255,255,0.8); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
 .crosshair-h { position: absolute; height: 1px; border-top: 1px dashed #aaa; }
 .crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
 
