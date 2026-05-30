@@ -1135,6 +1135,33 @@
                     <input type="range" id="annotFontSize" min="9" max="22" step="1" value="13" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
                     <span id="annotFontSizeVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">13px</span>
                 </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Font</span>
+                    <select id="annotFontFamily" onchange="applyAnnotationStyleFromModal()" style="flex:1; padding:5px; font-size:0.75rem;">
+                        <option value="Arial, Helvetica, sans-serif">Arial (universal)</option>
+                        <option value="Helvetica, Arial, sans-serif">Helvetica</option>
+                        <option value="'Segoe UI', Tahoma, sans-serif">Segoe UI</option>
+                        <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                        <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+                        <option value="'Courier New', monospace">Courier New</option>
+                    </select>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Weight</span>
+                    <div class="unit-toggle" style="height:26px; flex:1;">
+                        <button id="annotWeightReg" type="button" onclick="setAnnotFontWeight(400)">REGULAR</button>
+                        <button id="annotWeightSemi" type="button" class="active" onclick="setAnnotFontWeight(600)">SEMIBOLD</button>
+                        <button id="annotWeightBold" type="button" onclick="setAnnotFontWeight(700)">BOLD</button>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; border-top:1px solid var(--border-color); padding-top:12px;">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">SVG Frames</span>
+                    <div class="unit-toggle" style="height:26px; flex:1;">
+                        <button id="svgModeTexture" type="button" class="active" onclick="setSvgFrameMode('texture')" title="Embed frame textures (crisp, larger files)">TEXTURE</button>
+                        <button id="svgModeColor" type="button" onclick="setSvgFrameMode('autocolor')" title="Solid color matched to frame (small files, all vector)">AUTO COLOR</button>
+                    </div>
+                </div>
+                <p style="font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.4;">SVG export: <b>Texture</b> embeds frame photos (crisp, larger). <b>Auto Color</b> fills frames with a matching solid color (tiny files, fully vector \u2014 best for many elevations in InDesign).</p>
             </div>
         </div>
 
