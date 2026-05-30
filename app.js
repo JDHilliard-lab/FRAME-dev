@@ -9097,9 +9097,6 @@ async function exportElevSVG() {
     const wall = document.getElementById('wall');
     if (!wall) return;
 
-    // Fixed export scale (independent of on-screen zoom) so output is
-    // consistent. We temporarily set zoom to 1 and force light theme, render,
-    // serialize, then restore.
     const oldZoom = elevZoomFactor;
     const wasDark = !document.body.classList.contains('light-theme');
     elevZoomFactor = 1;
@@ -9113,40 +9110,45 @@ async function exportElevSVG() {
         const wallWpx = wallW * elevScale;
         const wallHpx = wallH * elevScale;
 
-        // Padding around the wall so outer dims + labels aren't clipped.
-        const PAD = 90;
-        const svgW = wallWpx + PAD * 2;
-        const svgH = wallHpx + PAD * 2;
+        // Asymmetric padding (mirrors the PNG export rules):
+        //  - BOTTOM + RIGHT: tight, so the elevation anchors to the bottom-right
+        //    corner of the floor — easy to snap to a guide/corner in InDesign.
+        //    Small TIGHT margin keeps outer dims from being clipped at the edge.
+        //  - LEFT: extra room for the character if parked outside the wall, plus
+        //    the wall-height dimension that sits outside the left edge.
+        //  - TOP: normal room for the wall-width dimension above.
+        const PAD_TOP = 70;
+        const PAD_LEFT = 160;   // extra for character + left wall-height dim
+        const PAD_RIGHT = 24;   // tight — flush-ish to the right
+        const PAD_BOTTOM = 48;  // room for the wall-width dim below the floor
 
-        // We position everything relative to the wall's top-left. The wall
-        // sits at (PAD, PAD) in SVG coords. DOM elements give us positions
-        // relative to #wall via getBoundingClientRect minus the wall's rect.
+        const svgW = wallWpx + PAD_LEFT + PAD_RIGHT;
+        const svgH = wallHpx + PAD_TOP + PAD_BOTTOM;
+
+        // Wall's top-left maps to (PAD_LEFT, PAD_TOP).
         const wallRect = wall.getBoundingClientRect();
-        const ox = PAD - wallRect.left;
-        const oy = PAD - wallRect.top;
+        const ox = PAD_LEFT - wallRect.left;
+        const oy = PAD_TOP - wallRect.top;
 
-        const parts = [];
-        parts.push(`<?xml version="1.0" encoding="UTF-8"?>`);
-        parts.push(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${svgW.toFixed(1)}" height="${svgH.toFixed(1)}" viewBox="0 0 ${svgW.toFixed(1)} ${svgH.toFixed(1)}">`);
-        // White background
-        parts.push(`<rect x="0" y="0" width="${svgW.toFixed(1)}" height="${svgH.toFixed(1)}" fill="#ffffff"/>`);
-
-        // Resolve the unified dim color from CSS for vector strokes/text.
         const cssRoot = getComputedStyle(document.documentElement);
         const dimColor = (cssRoot.getPropertyValue('--dim-color') || '#e00000').trim();
         const dimFont = (cssRoot.getPropertyValue('--dim-font-family') || 'sans-serif').trim();
         const wallLine = (cssRoot.getPropertyValue('--wall-line') || '#333').trim();
 
-        // ── WALL outline ──
-        parts.push(`<rect x="${PAD}" y="${PAD}" width="${wallWpx.toFixed(1)}" height="${wallHpx.toFixed(1)}" fill="#f0f2f5" stroke="${wallLine}" stroke-width="2"/>`);
+        // Z-buckets — concatenated back→front at the end so numbers always win.
+        const backLayer = [];   // frames + person (behind everything)
+        const midLayer = [];    // lines, boxes, guides
+        const frontLayer = [];  // ALL text / numbers / labels
 
-        // Helper: convert a DOM rect to wall-relative SVG x/y.
         const rectToSvg = (el) => {
             const r = el.getBoundingClientRect();
             return { x: r.left + ox, y: r.top + oy, w: r.width, h: r.height };
         };
 
-        // ── FRAMES: render each via renderFrameToCanvas, embed as <image> ──
+        // ── WALL outline: transparent fill (no fill), just the stroke ──
+        midLayer.push(`<rect x="${PAD_LEFT}" y="${PAD_TOP}" width="${wallWpx.toFixed(1)}" height="${wallHpx.toFixed(1)}" fill="none" stroke="${wallLine}" stroke-width="2"/>`);
+
+        // ── FRAMES (back layer): embed as <image> ──
         for (const f of elevFrames) {
             if (!f.active) continue;
             const el = wall.querySelector(`.frame-vis[data-frame-letter="${f.letter}"]`);
@@ -9154,30 +9156,51 @@ async function exportElevSVG() {
             const pos = rectToSvg(el);
             try {
                 const swatchImg = f.swatchDataUrl ? await _loadImg(f.swatchDataUrl) : null;
-                // Elevation frames store w/h (overall size in elevUnit); the
-                // frame renderer expects extW/extH. Map them, then convert to
-                // inches. Carry through the product/mat/frame fields renderer needs.
-                const renderData = Object.assign({}, f, {
-                    extW: f.w, extH: f.h,
-                });
+                const renderData = Object.assign({}, f, { extW: f.w, extH: f.h });
                 const dInches = _frameDataInInches(renderData, elevUnit);
-                // No outer shadow + no pad → tight frame raster for embedding.
                 const prevShadow = dashOuterShadowsOn;
                 dashOuterShadowsOn = false;
                 const { canvas } = renderFrameToCanvas(dInches, swatchImg, { dpi: 150, pad: 0 });
                 dashOuterShadowsOn = prevShadow;
                 if (!canvas.width || !canvas.height) throw new Error('zero-size canvas');
                 const dataUrl = canvas.toDataURL('image/png');
-                parts.push(`<image x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" xlink:href="${dataUrl}" preserveAspectRatio="none"/>`);
+                backLayer.push(`<image x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" xlink:href="${dataUrl}" preserveAspectRatio="none"/>`);
             } catch (err) {
-                // Fallback: solid rect if frame render fails
-                parts.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${f.fColor || '#222'}"/>`);
+                backLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${f.fColor || '#222'}"/>`);
             }
         }
 
-        // ── ANNOTATION ELEMENTS: walk the dim/guide/label/group layers ──
-        // Each leaf element is either a line (0-height/0-width with a border),
-        // a box (border on all sides), or text (has textContent).
+        // ── PERSON (back layer): inline the character SVG as editable vector ──
+        const personWrap = document.getElementById('person-wrap');
+        const personImg = document.getElementById('person');
+        if (personWrap && personImg && getComputedStyle(personWrap).display !== 'none') {
+            try {
+                const pos = rectToSvg(personImg);
+                // Fetch the character SVG source so we can inline it (editable
+                // vector). _personSvgDataUrl caches a data URL; decode it.
+                let svgText = null;
+                const dataUrl = await _getPersonSvgDataUrl();
+                if (dataUrl && dataUrl.startsWith('data:image/svg')) {
+                    const comma = dataUrl.indexOf(',');
+                    const meta = dataUrl.substring(0, comma);
+                    const payload = dataUrl.substring(comma + 1);
+                    svgText = meta.includes('base64') ? atob(payload) : decodeURIComponent(payload);
+                }
+                if (svgText) {
+                    // Extract the inner SVG content + its viewBox so we can scale
+                    // it into the target box via a nested <svg>.
+                    const vbMatch = svgText.match(/viewBox\s*=\s*"([^"]+)"/i);
+                    const inner = svgText.replace(/^[\s\S]*?<svg[^>]*>/i, '').replace(/<\/svg>\s*$/i, '');
+                    const vb = vbMatch ? vbMatch[1] : `0 0 ${pos.w} ${pos.h}`;
+                    backLayer.push(`<svg x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" viewBox="${vb}" preserveAspectRatio="xMidYMid meet">${inner}</svg>`);
+                } else {
+                    // Fallback: embed as <image> using the data URL
+                    backLayer.push(`<image x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" xlink:href="${dataUrl}" preserveAspectRatio="xMidYMid meet"/>`);
+                }
+            } catch (err) { /* skip person on error */ }
+        }
+
+        // ── ANNOTATION ELEMENTS: walk layers, route text→front, lines→mid ──
         const annotationLayers = [
             'arch-dim-layer', 'dim-layer', 'floor-ceiling-layer',
             'frame-center-layer', 'guide-layer', 'label-layer',
@@ -9191,16 +9214,14 @@ async function exportElevSVG() {
             const txt = (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3)
                 ? el.textContent.trim() : '';
 
-            // TEXT node
             if (txt) {
+                // TEXT → front layer (always on top of lines).
                 const pos = rectToSvg(el);
                 const fontSize = parseFloat(cs.fontSize) || 13;
                 const color = cs.color || dimColor;
                 const fw = cs.fontWeight || '600';
-                // Background chip (if the label has a non-transparent bg)
                 const bg = cs.backgroundColor;
                 const hasBg = bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
-                // Handle rotation (height/floor labels rotate -90deg)
                 const transform = cs.transform;
                 let rotate = 0;
                 if (transform && transform !== 'none' && transform.includes('matrix')) {
@@ -9212,89 +9233,81 @@ async function exportElevSVG() {
                 }
                 const cx = pos.x + pos.w / 2;
                 const cy = pos.y + pos.h / 2;
+                const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
                 if (hasBg) {
-                    // approximate chip: text width box
-                    const padX = 4, padY = 2;
-                    const chipW = pos.w, chipH = pos.h;
-                    const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
-                    parts.push(`<g${g}>`);
-                    parts.push(`<rect x="${(cx - chipW/2).toFixed(1)}" y="${(cy - chipH/2).toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" fill="#ffffff" rx="2"/>`);
-                    parts.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
-                    parts.push(`</g>`);
+                    frontLayer.push(`<g${g}>`);
+                    frontLayer.push(`<rect x="${(cx - pos.w/2).toFixed(1)}" y="${(cy - pos.h/2).toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="#ffffff" rx="2"/>`);
+                    frontLayer.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
+                    frontLayer.push(`</g>`);
                 } else {
-                    const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
-                    parts.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}"${g} font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
+                    frontLayer.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}"${g} font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
                 }
                 return;
             }
 
-            // BOX or LINE — look at borders
+            // LINES / BOXES → mid layer.
             const pos = rectToSvg(el);
             const bTop = _parseBorder(cs.borderTop);
             const bLeft = _parseBorder(cs.borderLeft);
             const bBottom = _parseBorder(cs.borderBottom);
             const bRight = _parseBorder(cs.borderRight);
 
-            // Full box (all four borders present + has area)
             if (bTop && bLeft && bBottom && bRight && pos.w > 2 && pos.h > 2) {
                 const dash = bTop.style === 'dashed' ? ` stroke-dasharray="${bTop.width*3},${bTop.width*2}"` : '';
-                parts.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="none" stroke="${bTop.color}" stroke-width="${bTop.width}"${dash}/>`);
+                midLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="none" stroke="${bTop.color}" stroke-width="${bTop.width}"${dash}/>`);
                 return;
             }
-            // Horizontal line (border-top, near-zero height)
             if (bTop && pos.h < 4 && pos.w >= 2) {
                 const dash = bTop.style === 'dashed' ? ` stroke-dasharray="${bTop.width*3},${bTop.width*2}"` : '';
                 const y = pos.y + bTop.width / 2;
-                parts.push(`<line x1="${pos.x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(pos.x+pos.w).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${bTop.color}" stroke-width="${bTop.width}"${dash}/>`);
+                midLayer.push(`<line x1="${pos.x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(pos.x+pos.w).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${bTop.color}" stroke-width="${bTop.width}"${dash}/>`);
                 return;
             }
-            // Vertical line (border-left, near-zero width)
             if (bLeft && pos.w < 4 && pos.h >= 2) {
                 const dash = bLeft.style === 'dashed' ? ` stroke-dasharray="${bLeft.width*3},${bLeft.width*2}"` : '';
                 const x = pos.x + bLeft.width / 2;
-                parts.push(`<line x1="${x.toFixed(1)}" y1="${pos.y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(pos.y+pos.h).toFixed(1)}" stroke="${bLeft.color}" stroke-width="${bLeft.width}"${dash}/>`);
+                midLayer.push(`<line x1="${x.toFixed(1)}" y1="${pos.y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(pos.y+pos.h).toFixed(1)}" stroke="${bLeft.color}" stroke-width="${bLeft.width}"${dash}/>`);
                 return;
             }
-            // Solid-background thin bar (dim-line-segment uses background, not border)
             const bg = cs.backgroundColor;
             const hasBg = bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
             if (hasBg && (pos.w < 4 || pos.h < 4) && (pos.w >= 2 || pos.h >= 2)) {
                 if (pos.h <= pos.w) {
                     const y = pos.y + pos.h / 2;
-                    parts.push(`<line x1="${pos.x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(pos.x+pos.w).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${bg}" stroke-width="${Math.max(1,pos.h).toFixed(1)}"/>`);
+                    midLayer.push(`<line x1="${pos.x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(pos.x+pos.w).toFixed(1)}" y2="${y.toFixed(1)}" stroke="${bg}" stroke-width="${Math.max(1,pos.h).toFixed(1)}"/>`);
                 } else {
                     const x = pos.x + pos.w / 2;
-                    parts.push(`<line x1="${x.toFixed(1)}" y1="${pos.y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(pos.y+pos.h).toFixed(1)}" stroke="${bg}" stroke-width="${Math.max(1,pos.w).toFixed(1)}"/>`);
+                    midLayer.push(`<line x1="${x.toFixed(1)}" y1="${pos.y.toFixed(1)}" x2="${x.toFixed(1)}" y2="${(pos.y+pos.h).toFixed(1)}" stroke="${bg}" stroke-width="${Math.max(1,pos.w).toFixed(1)}"/>`);
                 }
             }
         };
 
-        // Recursively walk a layer, emitting leaf elements.
         const walk = (node) => {
             for (const child of node.children) {
-                if (child.children.length > 0) {
-                    // Container — but it may also have its own border (group box).
-                    // Emit it (for borders) then recurse for inner content.
-                    emitEl(child);
-                    walk(child);
-                } else {
-                    emitEl(child);
-                }
+                emitEl(child);
+                if (child.children.length > 0) walk(child);
             }
         };
 
         annotationLayers.forEach(layerId => {
             const layer = document.getElementById(layerId);
             if (!layer) return;
-            const cs = getComputedStyle(layer);
-            if (cs.display === 'none') return; // respect hidden layers
+            if (getComputedStyle(layer).display === 'none') return;
             walk(layer);
         });
 
+        // Assemble: back (frames+person) → mid (lines/boxes) → front (text).
+        const parts = [];
+        parts.push(`<?xml version="1.0" encoding="UTF-8"?>`);
+        parts.push(`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${svgW.toFixed(1)}" height="${svgH.toFixed(1)}" viewBox="0 0 ${svgW.toFixed(1)} ${svgH.toFixed(1)}">`);
+        // NOTE: no background rect — keeps the SVG transparent so it composites
+        // cleanly in InDesign. (The wall itself is transparent/stroke-only.)
+        parts.push(`<g id="frames-and-character">`); parts.push(...backLayer); parts.push(`</g>`);
+        parts.push(`<g id="lines-and-boxes">`); parts.push(...midLayer); parts.push(`</g>`);
+        parts.push(`<g id="numbers-and-labels">`); parts.push(...frontLayer); parts.push(`</g>`);
         parts.push(`</svg>`);
         const svgStr = parts.join('\n');
 
-        // Download
         const blob = new Blob([svgStr], { type: 'image/svg+xml' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
