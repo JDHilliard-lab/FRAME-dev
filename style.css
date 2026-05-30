@@ -835,7 +835,11 @@ body.dragging-frame .frame-vis:hover {
 
 /* All grid layers hidden by default */
 #label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
-.dim-layer, .guide-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+.dim-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+/* Guide layer (wall-center + hang-height lines) sits ABOVE frames (z-index 10)
+ * so these reference lines read over the artwork — they're alignment guides
+ * the installer needs to see on top. */
+.guide-layer { position: absolute; inset: 0; pointer-events: none; z-index: 15; }
 /* Group-dimension callouts. The layer itself ignores pointer events so it
  * doesn't block frame interaction; only the delete (×) buttons inside opt
  * back into pointer-events. Slightly higher z-index so dashed boxes read
@@ -855,19 +859,19 @@ body.dragging-frame .frame-vis:hover {
 
 .arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: 600; color: var(--dim-color); padding: 0 6px; white-space: nowrap; background: transparent; }
 
-.hang-guide { position: absolute; width: 100%; border-top: 2px dashed var(--accent); }
+.hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
 .hang-label { 
     position: absolute; 
     bottom: 2px;  /* sits just above the dashed line */
     right: 10px; 
-    color: var(--accent); 
-    font-size: 10px; 
-    font-weight: bold; 
-    background: var(--bg-panel); 
+    color: var(--dim-color); 
+    font-family: var(--dim-font-family);
+    font-size: var(--dim-font-size); 
+    font-weight: 600; 
+    background: rgba(255,255,255,0.85); 
     padding: 1px 6px; 
     border-radius: 3px; 
     white-space: nowrap;
-    border: 1px solid var(--accent);
 }
 .center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
 .center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: 600; left: 5px; }
