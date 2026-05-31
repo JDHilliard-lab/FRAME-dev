@@ -2372,22 +2372,26 @@ function setUnit(newUnit) {
     // Must use the SAME factor (oldUnit→newUnit) since elevUnit was equal
     // to oldUnit when this call started.
     elevations.forEach(elev => {
-        elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
-        elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
+        // Use the SAME rounding precision (4 decimals) for wall, frames, and
+        // person so they don't drift relative to each other across repeated
+        // unit toggles. Mixed precision (wall .toFixed(2) vs frames .toFixed(4))
+        // was causing dimension lines to visibly jitter when switching units.
+        elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(4));
+        elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(4));
         elev.frames.forEach(fr => {
             ['w','h','fW','fHeight','rabbetDepth','floaterInset','sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2','x','y'].forEach(p => {
                 fr[p] = parseFloat((parseFloat(fr[p] || 0) * f).toFixed(4));
             });
         });
-        if (elev.personPos) elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
+        if (elev.personPos) elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(4));
     });
     elevUnit = newUnit;
 
     // Update wall inputs if elevation view is loaded
     const wallWEl = document.getElementById('wallW');
     const wallHEl = document.getElementById('wallH');
-    if (wallWEl && elevations[currentElevIndex]) wallWEl.value = elevations[currentElevIndex].wallW;
-    if (wallHEl && elevations[currentElevIndex]) wallHEl.value = elevations[currentElevIndex].wallH;
+    if (wallWEl && elevations[currentElevIndex]) wallWEl.value = parseFloat(elevations[currentElevIndex].wallW.toFixed(2));
+    if (wallHEl && elevations[currentElevIndex]) wallHEl.value = parseFloat(elevations[currentElevIndex].wallH.toFixed(2));
 
     // Convert all settings-modal inputs (Hang, Font, Nudge, Grid, Drag Snap)
     // and their unit labels.
@@ -7870,7 +7874,18 @@ function snapFrameToWallCenter(idx, e) {
 }
 
 function drawElevAll() {
-    const wallW = parseFloat(document.getElementById('wallW').value) || 1; const wallH = parseFloat(document.getElementById('wallH').value) || 1;
+    // Prefer the precise stored wall dims over the input field (which displays
+    // a 2-decimal rounded value). Reading the rounded field while frames use
+    // precise values caused the wall to drift relative to the frames on unit
+    // toggles (dimension-line jitter). If the stored value rounds to the same
+    // 2-decimal display as the input, the user hasn't just typed a new number,
+    // so we use the precise stored value; otherwise honor the input edit.
+    const _ce = elevations[currentElevIndex];
+    const _wwInput = parseFloat(document.getElementById('wallW').value) || 1;
+    const _whInput = parseFloat(document.getElementById('wallH').value) || 1;
+    let wallW = _wwInput, wallH = _whInput;
+    if (_ce && typeof _ce.wallW === 'number' && parseFloat(_ce.wallW.toFixed(2)) === _wwInput) wallW = _ce.wallW;
+    if (_ce && typeof _ce.wallH === 'number' && parseFloat(_ce.wallH.toFixed(2)) === _whInput) wallH = _ce.wallH;
     const workspace = document.querySelector('#view-elevation .workspace');
     
     let baseScale = Math.min((workspace.clientWidth - 160)/wallW, (workspace.clientHeight - 160)/wallH);
