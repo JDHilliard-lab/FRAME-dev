@@ -9590,22 +9590,25 @@ async function exportElevSVG() {
                 }
                 const cx = pos.x + pos.w / 2;
                 const cy = pos.y + pos.h / 2;
+                // Illustrator doesn't reliably honor dominant-baseline="central"
+                // (it falls back to the alphabetic baseline, pushing text to the
+                // top of the chip). Instead, place the baseline explicitly at the
+                // chip center plus ~0.35em, which visually centers the text in
+                // every renderer. We drop dominant-baseline entirely.
+                const baselineY = cy + fontSize * 0.35;
                 const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
                 if (hasBg) {
-                    // Snug chip sized to the MEASURED text, not the DOM box
-                    // (the DOM box includes padding/offsets, which made the
-                    // chip look misaligned). Measure via canvas with the same
-                    // font, then pad slightly.
+                    // Snug chip sized to the MEASURED text, then pad slightly.
                     const tm = _measureSvgText(txt, fontSize, fw, dimFont);
                     const padX = 4, padY = 2;
                     const chipW = tm + padX * 2;
                     const chipH = fontSize + padY * 2;
                     frontLayer.push(`<g${g}>`);
                     frontLayer.push(`<rect x="${(cx - chipW/2).toFixed(1)}" y="${(cy - chipH/2).toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" fill="#ffffff" rx="2"/>`);
-                    frontLayer.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
+                    frontLayer.push(`<text x="${cx.toFixed(1)}" y="${baselineY.toFixed(1)}" font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle">${_svgEsc(txt)}</text>`);
                     frontLayer.push(`</g>`);
                 } else {
-                    frontLayer.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}"${g} font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
+                    frontLayer.push(`<text x="${cx.toFixed(1)}" y="${baselineY.toFixed(1)}"${g} font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle">${_svgEsc(txt)}</text>`);
                 }
                 return;
             }
