@@ -220,6 +220,11 @@ let currentElevIndex = 0;
 let elevFrames = elevations[0].frames;
 let elevPersonPos = elevations[0].personPos;
 let elevScale = 1;
+// Precise wall dims resolved each drawElevAll (full precision, not the
+// rounded input field). Sub-renderers read these so edge-gap and other
+// wall-dependent dims don't drift/jitter on unit toggles.
+let elevResolvedWallW = 1;
+let elevResolvedWallH = 1;
 let elevZoomFactor = 1;
 
 let pendingDuplicateIndex = null;
@@ -447,6 +452,8 @@ function updateDragSnap() {
 // existing getNudgeStep() still works since it looks up by ID.
 function openPrecisionModal() {
     seedAnnotationStyleInputs();
+    const snapCb = document.getElementById('snapEnabledToggle');
+    if (snapCb) snapCb.checked = elevSnapEnabled;
     document.getElementById('precisionModal').style.display = 'flex';
 }
 
@@ -1017,6 +1024,7 @@ function initMasterApp() {
     loadDimVisibility();   // restore saved per-element dimension hide flags
     loadUnitSuffixPref();  // restore interior unit-suffix on/off preference
     loadSvgFrameMode();    // restore SVG frame export mode (texture/autocolor)
+    loadSnapPref();        // restore snap-to-align on/off preference
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -7886,6 +7894,11 @@ function drawElevAll() {
     let wallW = _wwInput, wallH = _whInput;
     if (_ce && typeof _ce.wallW === 'number' && parseFloat(_ce.wallW.toFixed(2)) === _wwInput) wallW = _ce.wallW;
     if (_ce && typeof _ce.wallH === 'number' && parseFloat(_ce.wallH.toFixed(2)) === _whInput) wallH = _ce.wallH;
+    // Publish the resolved precise wall dims so sub-renderers (edge-gap dims,
+    // group dims, etc.) use the SAME values and don't re-read the rounded
+    // input field (which caused edge-gap lines to jitter on unit toggles).
+    elevResolvedWallW = wallW;
+    elevResolvedWallH = wallH;
     const workspace = document.querySelector('#view-elevation .workspace');
     
     let baseScale = Math.min((workspace.clientWidth - 160)/wallW, (workspace.clientHeight - 160)/wallH);
@@ -8225,10 +8238,10 @@ function renderGroupDims() {
         const dashCss = st.dash ? `${Math.max(4, weight * 3)}px ${Math.max(3, weight * 2)}px` : 'none';
         const fontSize = st.fontSize || 13;
 
-        // Bounding box in layer pixels. Expanded OUTWARD by GAP so the dashed
-        // line sits just outside the frames rather than overlapping their
-        // edges. Dimension + extension lines anchor to this expanded box.
-        const GAP = 5;
+        // Bounding box in layer pixels. GAP=0 so the dashed line sits exactly
+        // on the frames' bounding edge (box-sizing:border-box keeps the stroke
+        // centered on that edge). Dimension + extension lines anchor to this box.
+        const GAP = 0;
         const boxLeft = sx(bbox.minX) - GAP;
         const boxTop = pxTopOf(bbox.minY, bbox.h) - GAP;
         const boxW = sx(bbox.w) + GAP * 2;
@@ -8309,6 +8322,24 @@ function renderGroupDims() {
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
             layer.appendChild(hl);
         }
+
+        // ── Delete affordance: small × at the box's top-right corner. Tagged
+        // so the SVG/PNG export skips it (it's an editor control, not artwork).
+        const del = document.createElement('div');
+        del.className = 'group-dim-delete';
+        del.setAttribute('data-export-skip', '1');
+        del.setAttribute('data-html2canvas-ignore', 'true');
+        del.textContent = '×';
+        del.title = 'Remove group dimension';
+        del.style.cssText =
+            `position:absolute; left:${boxLeft + boxW - 9}px; top:${boxTop - 9}px;` +
+            `width:18px; height:18px; line-height:16px; text-align:center; border-radius:50%;` +
+            `background:${color}; color:#fff; font-size:14px; font-weight:bold; cursor:pointer;` +
+            `z-index:6; opacity:0.6; transition:opacity 0.15s; user-select:none; pointer-events:auto;`;
+        del.onmouseenter = () => { del.style.opacity = '1'; };
+        del.onmouseleave = () => { del.style.opacity = '0.6'; };
+        del.onclick = (e) => { e.stopPropagation(); removeGroupDim(entry.id); };
+        layer.appendChild(del);
     });
 }
 
@@ -8411,6 +8442,23 @@ function applyAnnotationStyleFromModal() {
 // Threshold is defined in PIXELS so it stays consistent at any zoom level;
 // converted to data units (inches/cm) per call by dividing by elevScale.
 const SNAP_THRESHOLD_PX = 6;
+// Snap-to-align on/off (the red alignment guide lines while dragging). Default
+// on; user can disable it in elevation settings when it feels intrusive.
+let elevSnapEnabled = true;
+function loadSnapPref() {
+    try { const v = localStorage.getItem('elevSnapEnabled'); if (v !== null) elevSnapEnabled = (v === '1'); }
+    catch (e) {}
+}
+function saveSnapPref() {
+    try { localStorage.setItem('elevSnapEnabled', elevSnapEnabled ? '1' : '0'); } catch (e) {}
+}
+function toggleSnapEnabled(on) {
+    elevSnapEnabled = (typeof on === 'boolean') ? on : !elevSnapEnabled;
+    saveSnapPref();
+    const cb = document.getElementById('snapEnabledToggle');
+    if (cb) cb.checked = elevSnapEnabled;
+    if (!elevSnapEnabled && typeof clearSnapGuides === 'function') clearSnapGuides();
+}
 
 // Compute snap targets for a frame given its candidate new position.
 // Returns { snappedX, snappedY, guides } where guides is an array of
@@ -8568,7 +8616,7 @@ function makeElevDraggable(el, idx) {
                 // spacing within the group, so frame-to-frame snapping would
                 // produce surprising jumps as group members snap independently.
                 let activeGuides = [];
-                if (!frame.isGrouped) {
+                if (!frame.isGrouped && (typeof elevSnapEnabled === 'undefined' || elevSnapEnabled)) {
                     const snapResult = computeSnapForDrag(idx, newX, newY);
                     newX = snapResult.snappedX;
                     newY = snapResult.snappedY;
@@ -8727,18 +8775,23 @@ function drawPerFrameDistanceDims() {
     layer.innerHTML = '';
     // Edge Gap toggle (Layout Guides): when off, hide all distance dims.
     if (typeof dimVisibility !== 'undefined' && !dimVisibility.edgeGap) return;
-    const wallW = parseFloat(document.getElementById('wallW').value) || 1;
-    const wallH = parseFloat(document.getElementById('wallH').value) || 1;
+    // Use the precise resolved wall dims (set by drawElevAll) so edge-gap
+    // lines don't drift relative to frames on unit toggles.
+    const wallW = elevResolvedWallW;
+    const wallH = elevResolvedWallH;
 
     elevFrames.forEach(f => {
         if (!f.active) return;
         const dt = f.distToggles || { ceiling: false, floor: false, left: false, right: false };
 
         // Vertical anchor: a column slightly inside frame's left edge (so dim
-        // lines associated with this frame don't crowd adjacent frames).
-        const verticalAnchorX = f.x + Math.min(8, f.w * 0.15);
+        // lines associated with this frame don't crowd adjacent frames). The
+        // inset cap (8") must be unit-converted, else it's a different physical
+        // distance per unit and the line jumps on unit toggles.
+        const insetCap = 8 * unitFactor('in', elevUnit);
+        const verticalAnchorX = f.x + Math.min(insetCap, f.w * 0.15);
         // Horizontal anchor: a row slightly inside frame's bottom edge.
-        const horizontalAnchorY = f.y + Math.min(8, f.h * 0.15);
+        const horizontalAnchorY = f.y + Math.min(insetCap, f.h * 0.15);
 
         // CEILING distance: from top of frame up to wallH
         if (dt.ceiling) {
@@ -8779,7 +8832,13 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
     dim.className = 'arch-dim ' + (type === 'h' ? 'arch-dim-h' : 'arch-dim-v');
     
     const left = Math.min(x1, x2) * elevScale;
-    const bottom = Math.min(y1, y2) * elevScale;
+    let bottom = Math.min(y1, y2) * elevScale;
+    // The wall's floor is a 4px bottom border sitting just below content-box
+    // bottom (bottom:0). A line anchored at the floor (y≈0) would stop at the
+    // border's inner edge, leaving a 4px gap. Extend it down to touch the floor.
+    const FLOOR_BORDER = 4;
+    let floorExtend = 0;
+    if (type !== 'h' && Math.min(y1, y2) < 0.001) { bottom = -FLOOR_BORDER; floorExtend = FLOOR_BORDER; }
     dim.style.left = left + 'px';
     dim.style.bottom = bottom + 'px';
 
@@ -8795,7 +8854,7 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
             <div class="dim-line-segment"></div>
         `;
     } else {
-        const height = Math.abs(y2 - y1) * elevScale;
+        const height = Math.abs(y2 - y1) * elevScale + floorExtend;
         dim.style.height = height + 'px';
         dim.innerHTML = `
             ${isWallOuter ? `<div style="position:absolute; left:0; bottom:0; height:1px; width:${offset}px; border-top:var(--dim-weight) dashed var(--dim-color);"></div><div style="position:absolute; left:0; top:0; height:1px; width:${offset}px; border-top:var(--dim-weight) dashed var(--dim-color);"></div>` : ''}
@@ -8816,7 +8875,11 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label) {
         dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment"></div>`;
     } else {
-        const height = Math.abs(y2 - y1) * elevScale; const left = x1 * elevScale; const bottom = Math.min(y1, y2) * elevScale;
+        let height = Math.abs(y2 - y1) * elevScale; const left = x1 * elevScale;
+        let bottom = Math.min(y1, y2) * elevScale;
+        // Floor-anchored lines (y≈0) extend down past the content box to touch
+        // the 4px floor border, so they don't stop 4px short of the floor.
+        if (Math.min(y1, y2) < 0.001) { bottom = -4; height += 4; }
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
     }
@@ -9502,6 +9565,7 @@ async function exportElevSVG() {
         const emitEl = (el) => {
             const cs = getComputedStyle(el);
             if (cs.display === 'none' || cs.visibility === 'hidden') return;
+            if (el.getAttribute && el.getAttribute('data-export-skip')) return; // editor-only control
 
             const txt = (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3)
                 ? el.textContent.trim() : '';
