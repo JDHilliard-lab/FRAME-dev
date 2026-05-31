@@ -8294,24 +8294,6 @@ function renderGroupDims() {
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
             layer.appendChild(hl);
         }
-
-        // ── Delete affordance: small × at the box's top-right corner ──
-        const del = document.createElement('div');
-        del.textContent = '×';
-        del.title = 'Remove group dimension';
-        del.style.cssText =
-            `position:absolute; left:${boxLeft + boxW - 8}px; top:${boxTop - 8}px;` +
-            `width:18px; height:18px; line-height:16px; text-align:center; border-radius:50%;` +
-            `background:${color}; color:#fff; font-size:14px; font-weight:bold; cursor:pointer;` +
-            `z-index:5; opacity:0; transition:opacity 0.15s; user-select:none;`;
-        del.onmouseenter = () => { del.style.opacity = '1'; };
-        del.onmouseleave = () => { del.style.opacity = '0'; };
-        // Keep it discoverable: fade in when hovering the box region too.
-        rect.style.pointerEvents = 'none';
-        del.onclick = (e) => { e.stopPropagation(); removeGroupDim(entry.id); };
-        // Make the × always faintly visible so users can find it.
-        del.style.opacity = '0.55';
-        layer.appendChild(del);
     });
 }
 
@@ -9210,7 +9192,7 @@ function buildFrameSVG(f, pos, unit, frameColor) {
 
     if (isFrameless) {
         // Just the canvas face outline (no frame, no mats).
-        parts.push(rect(px, py, pw, ph, '#e8e4dc', shade(frameColor||'#888', -0.2), 1));
+        parts.push(rect(px, py, pw, ph, null, shade(frameColor||'#888', -0.2), 1)); // transparent art opening
         return parts;
     }
 
@@ -9235,7 +9217,7 @@ function buildFrameSVG(f, pos, unit, frameColor) {
         const fx = px + insetPx, fy = py + insetPx, fw2 = pw - insetPx*2, fh2 = ph - insetPx*2;
         // gap ring (dark) then canvas face
         parts.push(rect(px, py, pw, ph, shade(frameColor||'#333',-0.5), null, 0));
-        parts.push(rect(fx, fy, fw2, fh2, '#e8e4dc', shade(frameColor||'#333',-0.2), 1));
+        parts.push(rect(fx, fy, fw2, fh2, null, shade(frameColor||'#333',-0.2), 1)); // transparent art opening
         return parts;
     }
 
@@ -9259,7 +9241,7 @@ function buildFrameSVG(f, pos, unit, frameColor) {
         parts.push(rect(ppx, ppy, ppw, pph, paperColor, shade(paperColor,-0.15), 0.75));
         // art opening inside paper
         const ax = ppx+borderPx, ay = ppy+borderPx, aw = ppw-borderPx*2, ah = pph-borderPx*2;
-        if (aw>0 && ah>0) parts.push(rect(ax, ay, aw, ah, '#d8d2c8', '#999', 0.5));
+        if (aw>0 && ah>0) parts.push(rect(ax, ay, aw, ah, null, '#999', 0.5)); // transparent art opening
         return parts;
     }
 
@@ -9284,10 +9266,20 @@ function buildFrameSVG(f, pos, unit, frameColor) {
 
     // Art opening (the artwork area) — light placeholder fill
     if (curW > 0 && curH > 0) {
-        parts.push(rect(curX, curY, curW, curH, '#d8d2c8', '#999', 0.5));
+        parts.push(rect(curX, curY, curW, curH, null, '#999', 0.5)); // transparent art opening
     }
 
     return parts;
+}
+
+// Measure rendered text width (px) for snug SVG chip sizing.
+let _svgMeasureCtx = null;
+function _measureSvgText(text, fontSize, fontWeight, fontFamily) {
+    if (!_svgMeasureCtx) {
+        _svgMeasureCtx = document.createElement('canvas').getContext('2d');
+    }
+    _svgMeasureCtx.font = `${fontWeight || 600} ${fontSize}px ${fontFamily || 'Arial, sans-serif'}`;
+    return _svgMeasureCtx.measureText(text).width;
 }
 
 async function exportElevSVG() {
@@ -9486,8 +9478,16 @@ async function exportElevSVG() {
                 const cy = pos.y + pos.h / 2;
                 const g = rotate ? ` transform="rotate(${rotate} ${cx.toFixed(1)} ${cy.toFixed(1)})"` : '';
                 if (hasBg) {
+                    // Snug chip sized to the MEASURED text, not the DOM box
+                    // (the DOM box includes padding/offsets, which made the
+                    // chip look misaligned). Measure via canvas with the same
+                    // font, then pad slightly.
+                    const tm = _measureSvgText(txt, fontSize, fw, dimFont);
+                    const padX = 4, padY = 2;
+                    const chipW = tm + padX * 2;
+                    const chipH = fontSize + padY * 2;
                     frontLayer.push(`<g${g}>`);
-                    frontLayer.push(`<rect x="${(cx - pos.w/2).toFixed(1)}" y="${(cy - pos.h/2).toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="#ffffff" rx="2"/>`);
+                    frontLayer.push(`<rect x="${(cx - chipW/2).toFixed(1)}" y="${(cy - chipH/2).toFixed(1)}" width="${chipW.toFixed(1)}" height="${chipH.toFixed(1)}" fill="#ffffff" rx="2"/>`);
                     frontLayer.push(`<text x="${cx.toFixed(1)}" y="${cy.toFixed(1)}" font-family="${_svgEsc(dimFont)}" font-size="${fontSize}" font-weight="${fw}" fill="${color}" text-anchor="middle" dominant-baseline="central">${_svgEsc(txt)}</text>`);
                     frontLayer.push(`</g>`);
                 } else {
