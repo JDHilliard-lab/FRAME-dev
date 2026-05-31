@@ -9169,16 +9169,14 @@ function _parseBorder(borderStr) {
 function buildFrameSVG(f, pos, unit, frameColor) {
     const parts = [];
     const px = pos.x, py = pos.y, pw = pos.w, ph = pos.h;
-    // Scale: px per (unit) — the frame's overall w maps to pw.
     const sclX = pw / (f.w || 1);
     const sclY = ph / (f.h || 1);
-    const S = (sclX + sclY) / 2; // near-uniform; frames aren't distorted much
+    const S = (sclX + sclY) / 2;
 
     const isC = (f.product === 'Framed Canvas (Floater)');
     const isFrameless = (f.product === 'Frameless Canvas (Wrapped)');
     const useFM = !isC && (f.useFloatMount === true);
 
-    // Helper to shade a hex color (−1..1; neg=darker).
     const shade = (hex, pct) => {
         const m = /^#?([\da-f]{3}|[\da-f]{6})$/i.exec(hex || '');
         if (!m) return hex;
@@ -9187,86 +9185,122 @@ function buildFrameSVG(f, pos, unit, frameColor) {
         const adj = v => pct >= 0 ? Math.round(v + (255-v)*pct) : Math.round(v*(1+pct));
         return '#' + [adj(r),adj(g),adj(b)].map(v => Math.max(0,Math.min(255,v)).toString(16).padStart(2,'0')).join('');
     };
-    const rect = (x,y,w,h,fill,stroke,sw) =>
-        `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}"${fill?` fill="${fill}"`:' fill="none"'}${stroke?` stroke="${stroke}" stroke-width="${sw||1}"`:''}/>`;
+    // A rectangle with a rectangular hole punched out (fill-rule evenodd).
+    // outer = {x,y,w,h}, hole = {x,y,w,h}. Paints only the ring between them,
+    // leaving the hole transparent down to whatever's behind the SVG.
+    const ringPath = (outer, hole, fill) => {
+        const o = `M ${outer.x.toFixed(1)} ${outer.y.toFixed(1)} h ${outer.w.toFixed(1)} v ${outer.h.toFixed(1)} h ${(-outer.w).toFixed(1)} Z`;
+        const hpath = `M ${hole.x.toFixed(1)} ${hole.y.toFixed(1)} h ${hole.w.toFixed(1)} v ${hole.h.toFixed(1)} h ${(-hole.w).toFixed(1)} Z`;
+        return `<path d="${o} ${hpath}" fill-rule="evenodd" fill="${fill}"/>`;
+    };
+    const strokeRect = (x,y,w,h,stroke,sw) =>
+        `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="none" stroke="${stroke}" stroke-width="${sw||1}"/>`;
 
     if (isFrameless) {
-        // Just the canvas face outline (no frame, no mats).
-        parts.push(rect(px, py, pw, ph, null, shade(frameColor||'#888', -0.2), 1)); // transparent art opening
+        // No frame, no mats — just an outline marking the canvas face. Fully
+        // open (transparent) so artwork behind shows through.
+        parts.push(strokeRect(px, py, pw, ph, shade(frameColor||'#888', -0.2), 1));
         return parts;
     }
 
     const fwPx = (f.fW || 1.25) * S;
-
-    // ── FRAME RAIL: outer rect filled with frame color, inner hole shows mats.
-    // We draw the rail as a filled outer rect, then everything inside paints over.
-    parts.push(rect(px, py, pw, ph, frameColor || '#333', null, 0));
-    // Miter lines (corner joints) for the moulded look
-    const mc = shade(frameColor || '#333', -0.35);
     const ix = px + fwPx, iy = py + fwPx, iw = pw - fwPx*2, ih = ph - fwPx*2;
+
+    // ── Compute the FINAL art-opening rectangle for this product ──
+    let aX, aY, aW, aH;
+    if (isC) {
+        const insetPx = ((f.floaterInset !== undefined ? f.floaterInset : 0.75)) * S;
+        aX = px + insetPx; aY = py + insetPx; aW = pw - insetPx*2; aH = ph - insetPx*2;
+    } else if (useFM) {
+        const marginPx = (parseFloat(f.sbPaperMargin)||0) * S;
+        const borderPx = (parseFloat(f.sbPaperBorder)||0) * S;
+        aX = ix + marginPx + borderPx; aY = iy + marginPx + borderPx;
+        aW = iw - (marginPx+borderPx)*2; aH = ih - (marginPx+borderPx)*2;
+    } else {
+        let cX = ix, cY = iy, cW = iw, cH = ih;
+        const m1On = (f.m1A !== false);
+        const m2On = (m1On && f.m2A === true);
+        if (m1On) {
+            const mT=(f.m1T||0)*S, mB=(f.m1B||0)*S, mL=(f.m1L||0)*S, mR=(f.m1R||0)*S;
+            cX = ix+mL; cY = iy+mT; cW = iw-mL-mR; cH = ih-mT-mB;
+            if (m2On) {
+                const revPx = (parseFloat(f.m2)||0) * S;
+                cX += revPx; cY += revPx; cW -= revPx*2; cH -= revPx*2;
+            }
+        }
+        if (f.useFauxMat === true) {
+            const fbPx = (parseFloat(f.sbPaperBorder)||0) * S;
+            cX += fbPx; cY += fbPx; cW -= fbPx*2; cH -= fbPx*2;
+        }
+        aX = cX; aY = cY; aW = cW; aH = cH;
+    }
+    if (aW < 0) aW = 0; if (aH < 0) aH = 0;
+    const hole = { x: aX, y: aY, w: aW, h: aH };
+
+    // ── FRAME RAIL: full outer rect minus the art opening, as a ring ──
+    parts.push(ringPath({x:px,y:py,w:pw,h:ph}, hole, frameColor || '#333'));
+    // Miter lines
+    const mc = shade(frameColor || '#333', -0.35);
     parts.push(`<line x1="${px.toFixed(1)}" y1="${py.toFixed(1)}" x2="${ix.toFixed(1)}" y2="${iy.toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
     parts.push(`<line x1="${(px+pw).toFixed(1)}" y1="${py.toFixed(1)}" x2="${(ix+iw).toFixed(1)}" y2="${iy.toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
     parts.push(`<line x1="${px.toFixed(1)}" y1="${(py+ph).toFixed(1)}" x2="${ix.toFixed(1)}" y2="${(iy+ih).toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
     parts.push(`<line x1="${(px+pw).toFixed(1)}" y1="${(py+ph).toFixed(1)}" x2="${(ix+iw).toFixed(1)}" y2="${(iy+ih).toFixed(1)}" stroke="${mc}" stroke-width="0.75"/>`);
-    // Inner rail edge highlight (subtle) — gives the rail dimensional read
-    parts.push(rect(px+0.5, py+0.5, pw-1, ph-1, null, shade(frameColor||'#333', 0.15), 0.5));
+    // Rail inner edge outline
+    parts.push(strokeRect(ix, iy, iw, ih, shade(frameColor||'#333', -0.2), 0.75));
 
     if (isC) {
-        // Floater: canvas face inset by floaterInset, with a shadow-gap ring.
-        const insetPx = ((f.floaterInset !== undefined ? f.floaterInset : 0.75)) * S;
-        const fx = px + insetPx, fy = py + insetPx, fw2 = pw - insetPx*2, fh2 = ph - insetPx*2;
-        // gap ring (dark) then canvas face
-        parts.push(rect(px, py, pw, ph, shade(frameColor||'#333',-0.5), null, 0));
-        parts.push(rect(fx, fy, fw2, fh2, null, shade(frameColor||'#333',-0.2), 1)); // transparent art opening
+        // Floater: dark shadow-gap ring between rail inner edge and the opening.
+        parts.push(ringPath({x:ix,y:iy,w:iw,h:ih}, hole, shade(frameColor||'#333',-0.5)));
+        parts.push(strokeRect(aX, aY, aW, aH, shade(frameColor||'#333',-0.2), 1));
         return parts;
     }
 
-    // Interior opening (inside the rail)
-    let curX = ix, curY = iy, curW = iw, curH = ih;
+    if (useFM) {
+        const backerColor = f.sbBackerColorHex || '#ffffff';
+        const paperColor = f.sbPaperColorHex || '#ffffff';
+        const marginPx = (parseFloat(f.sbPaperMargin)||0) * S;
+        // Backer ring: frame interior minus opening
+        parts.push(ringPath({x:ix,y:iy,w:iw,h:ih}, hole, backerColor));
+        parts.push(strokeRect(ix, iy, iw, ih, '#cccccc', 0.75));
+        // Paper ring: paper rect minus opening
+        const ppx = ix+marginPx, ppy = iy+marginPx, ppw = iw-marginPx*2, pph = ih-marginPx*2;
+        parts.push(ringPath({x:ppx,y:ppy,w:ppw,h:pph}, hole, paperColor));
+        parts.push(strokeRect(ppx, ppy, ppw, pph, shade(paperColor,-0.15), 0.75));
+        parts.push(strokeRect(aX, aY, aW, aH, '#999', 0.5));
+        return parts;
+    }
 
-    // MATS
-    const m1On = (f.m1A !== false && !useFM);
+    // STANDARD MATS — each painted as a ring (its rect minus the art opening),
+    // so no layer ever covers the opening.
+    const m1On = (f.m1A !== false);
     const m2On = (m1On && f.m2A === true);
     const mat1Color = f.m1ColorHex || '#ffffff';
     const mat2Color = f.m2ColorHex || '#ffffff';
 
-    if (useFM) {
-        // Float mount: backer fills interior, paper inset by margin, art inside paper.
-        const backerColor = f.sbBackerColorHex || '#ffffff';
-        const paperColor = f.sbPaperColorHex || '#ffffff';
-        const marginPx = (parseFloat(f.sbPaperMargin)||0) * S;
-        const borderPx = (parseFloat(f.sbPaperBorder)||0) * S;
-        parts.push(rect(ix, iy, iw, ih, backerColor, '#cccccc', 0.75));
-        const ppx = ix+marginPx, ppy = iy+marginPx, ppw = iw-marginPx*2, pph = ih-marginPx*2;
-        parts.push(rect(ppx, ppy, ppw, pph, paperColor, shade(paperColor,-0.15), 0.75));
-        // art opening inside paper
-        const ax = ppx+borderPx, ay = ppy+borderPx, aw = ppw-borderPx*2, ah = pph-borderPx*2;
-        if (aw>0 && ah>0) parts.push(rect(ax, ay, aw, ah, null, '#999', 0.5)); // transparent art opening
-        return parts;
-    }
-
     if (m1On) {
-        parts.push(rect(ix, iy, iw, ih, mat1Color, '#cccccc', 0.75));
+        // Mat 1 fills the rail interior (minus opening)
+        parts.push(ringPath({x:ix,y:iy,w:iw,h:ih}, hole, mat1Color));
+        parts.push(strokeRect(ix, iy, iw, ih, '#cccccc', 0.75));
         const mT=(f.m1T||0)*S, mB=(f.m1B||0)*S, mL=(f.m1L||0)*S, mR=(f.m1R||0)*S;
-        curX = ix+mL; curY = iy+mT; curW = iw-mL-mR; curH = ih-mT-mB;
+        const m2rX = ix+mL, m2rY = iy+mT, m2rW = iw-mL-mR, m2rH = ih-mT-mB;
         if (m2On) {
-            parts.push(rect(curX, curY, curW, curH, mat2Color, '#cccccc', 0.75));
-            const revPx = (parseFloat(f.m2)||0) * S;
-            curX += revPx; curY += revPx; curW -= revPx*2; curH -= revPx*2;
+            // Mat 2 ring: its rect minus opening, painted over mat1's inner area
+            parts.push(ringPath({x:m2rX,y:m2rY,w:m2rW,h:m2rH}, hole, mat2Color));
+            parts.push(strokeRect(m2rX, m2rY, m2rW, m2rH, '#cccccc', 0.75));
         }
     }
 
-    // Faux mat (white paper inside the opening)
-    const useFauxMat = !useFM && (f.useFauxMat === true);
-    if (useFauxMat) {
-        parts.push(rect(curX, curY, curW, curH, '#ffffff', '#cccccc', 0.75));
+    if (f.useFauxMat === true) {
+        // White paper ring sits just outside the art opening
         const fbPx = (parseFloat(f.sbPaperBorder)||0) * S;
-        curX += fbPx; curY += fbPx; curW -= fbPx*2; curH -= fbPx*2;
+        const fxr = { x: aX - fbPx, y: aY - fbPx, w: aW + fbPx*2, h: aH + fbPx*2 };
+        parts.push(ringPath(fxr, hole, '#ffffff'));
+        parts.push(strokeRect(fxr.x, fxr.y, fxr.w, fxr.h, '#cccccc', 0.75));
     }
 
-    // Art opening (the artwork area) — light placeholder fill
-    if (curW > 0 && curH > 0) {
-        parts.push(rect(curX, curY, curW, curH, null, '#999', 0.5)); // transparent art opening
+    // Art-opening outline (the hole is already transparent through all rings)
+    if (aW > 0 && aH > 0) {
+        parts.push(strokeRect(aX, aY, aW, aH, '#999', 0.5));
     }
 
     return parts;
