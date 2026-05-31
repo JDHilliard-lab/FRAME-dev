@@ -8289,8 +8289,9 @@ function renderGroupDims() {
             const fwt = (st.fontWeight || annotationStyle.fontWeight || 600);
             l.style.cssText =
                 `position:absolute; left:${cx}px; top:${cy}px; transform:translate(-50%,-50%);` +
+                `display:inline-flex; align-items:center; justify-content:center; line-height:1;` +
                 `color:${color}; font-size:${fontSize}px; font-weight:${fwt}; font-family:${fam}; white-space:nowrap;` +
-                `background:#fff; padding:1px 5px; border-radius:3px;` +
+                `background:#fff; padding:2px 5px; border-radius:3px; box-sizing:border-box;` +
                 `pointer-events:none; z-index:4;`;
             return l;
         };
