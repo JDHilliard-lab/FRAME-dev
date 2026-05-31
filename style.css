@@ -831,8 +831,8 @@ body.dragging-frame .frame-vis:hover {
  * Color + font now driven by the unified --dim-* variables. Relative size
  * multipliers preserved so the visual hierarchy stays (frame tags larger,
  * OD tags smaller). */
-.frame-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(4px, -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 1.2); background: rgba(255,255,255,0.8); padding: 1px 3px; border-radius: 2px; }
-.od-id-tag { position: absolute; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(calc(-100% - 4px), -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 0.85); background: rgba(255,255,255,0.8); padding: 1px 3px; border-radius: 2px; }
+.frame-id-tag { position: absolute; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(4px, -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 1.2); background: rgba(255,255,255,0.8); padding: 2px 3px; border-radius: 2px; }
+.od-id-tag { position: absolute; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: var(--dim-color); font-family: var(--dim-font-family); line-height: 1; z-index: 30; pointer-events: none; transform: translate(calc(-100% - 4px), -4px); text-shadow: none; font-size: calc(var(--dim-font-size) * 0.85); background: rgba(255,255,255,0.8); padding: 2px 3px; border-radius: 2px; }
 
 /* All grid layers hidden by default */
 #label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
@@ -859,7 +859,7 @@ body.dragging-frame .frame-vis:hover {
 .dim-line-segment { flex: 1; height: var(--dim-weight); background: var(--arch-line); }
 .dim-line-segment-v { flex: 1; width: var(--dim-weight); background: var(--arch-line); }
 
-.arch-label-new { font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: var(--dim-font-weight); color: var(--dim-color); padding: 1px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; }
+.arch-label-new { display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: var(--dim-font-weight); color: var(--dim-color); padding: 2px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; box-sizing: border-box; }
 
 .hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
 .hang-label { 
@@ -877,7 +877,7 @@ body.dragging-frame .frame-vis:hover {
     white-space: nowrap;
 }
 .center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
-.center-label { position: absolute; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: var(--dim-font-weight); left: 5px; background: rgba(255,255,255,0.8); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+.center-label { position: absolute; display: inline-flex; align-items: center; line-height: 1; top: 10px; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: var(--dim-font-weight); left: 5px; background: rgba(255,255,255,0.8); padding: 2px 5px; border-radius: 3px; white-space: nowrap; }
 .crosshair-h { position: absolute; height: 1px; border-top: 1px dashed #aaa; }
 .crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
 
