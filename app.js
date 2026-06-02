@@ -8677,15 +8677,20 @@ function drawElevGuides(wallW, wallH) {
     
     const cl = document.createElement('div'); cl.className = 'center-guide';
     cl.style.left = ((wallW / 2) * elevScale) + 'px'; cl.style.bottom = '0px';
+    // WALL CENTER label sits OUTSIDE the wall, just above the top of the
+    // center line (was inside near the top, where it clashed with frames/dims).
     cl.innerHTML = `<span class="center-label">WALL CENTER</span>`;
     guideLayer.appendChild(cl);
 
     const hangVal = getHangHeight();
     if(hangVal < wallH) {
-        // Horizontal hang line — just the dashed line. The "HANG HEIGHT" label
-        // sits above the vertical floor-to-hang dimension on the left.
+        // Horizontal hang line with "HANG HEIGHT" label OUTSIDE the wall on
+        // the left, vertically centered on the dashed line. Because it's a
+        // child of the hang line (positioned at the hang height), it always
+        // tracks the line when the hang height changes.
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
+        hl.innerHTML = `<span class="hang-label">HANG HEIGHT</span>`;
         guideLayer.appendChild(hl);
 
         // Floor-to-hangline vertical dimension. Shows the hang height as a
@@ -8710,10 +8715,8 @@ function drawElevGuides(wallW, wallH) {
             `<div style="position:absolute; left:${-TICK}px; bottom:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
             // hang-line tick
             `<div style="position:absolute; left:${-TICK}px; top:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
-            // "HANG HEIGHT" label, horizontal, above the top tick of this line
-            `<div style="position:absolute; left:0; top:-6px; transform:translate(-50%,-100%); color:var(--dim-color); font-family:var(--dim-font-family); font-size:calc(var(--dim-font-size) * 0.85); font-weight:600; letter-spacing:0.5px; white-space:nowrap; background:rgba(255,255,255,0.85); padding:1px 5px; border-radius:3px;">HANG HEIGHT</div>` +
             // the number, centered between the line ends (rotated to read
-            // along the vertical line).
+            // along the vertical line). HANG HEIGHT wording is on the hang line.
             `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmtU(hangVal)}</div>`;
         guideLayer.appendChild(fh);
     }
