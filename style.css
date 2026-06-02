@@ -1230,3 +1230,8 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
     pointer-events: none;
     white-space: nowrap;
 }
+
+/* Drag grip for manually repositioning dimension lines. Excluded from exports
+ * via data-export-skip / data-html2canvas-ignore. */
+.dim-drag-grip { pointer-events: auto; }
+.arch-dim:hover .dim-drag-grip { opacity: 0.85; }
