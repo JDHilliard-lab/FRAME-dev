@@ -8731,6 +8731,49 @@ function drawElevGuides(wallW, wallH) {
     // assume this height; printing the label was visual noise.
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// MANUAL DIMENSION OFFSETS
+// ──────────────────────────────────────────────────────────────────────────
+// Lets the user slide a dimension line along its perpendicular (drag handle)
+// to arrange where it sits, without changing the measured value (endpoints
+// stay locked to what they measure). Offsets are stored per-elevation, keyed
+// by a stable dim id, in the CURRENT unit's terms but we normalize to inches
+// for unit-independence. Survives redraws, save/load, and unit toggles.
+//
+// Dim id formats:
+//   spacing-h-A-B   horizontal spacing dim between frames A,B (slides in Y)
+//   spacing-v-A-B   vertical spacing dim between frames A,B (slides in X)
+//   edge-<letter>-<side>   edge gap dim (side: ceiling/floor/left/right)
+//   group-<id>-w | group-<id>-h   group box width/height dim
+function getElevDimOffsets() {
+    const ce = elevations[currentElevIndex];
+    if (!ce) return {};
+    if (!ce.dimOffsets || typeof ce.dimOffsets !== 'object') ce.dimOffsets = {};
+    return ce.dimOffsets;
+}
+// Offset stored in INCHES (unit-independent). Returns offset in the CURRENT
+// elevation unit for use in rendering math.
+function getDimOffset(id) {
+    const off = getElevDimOffsets()[id];
+    if (typeof off !== 'number') return 0;
+    return off * unitFactor('in', elevUnit); // inches → current unit
+}
+function setDimOffset(id, valueInCurrentUnit) {
+    const offs = getElevDimOffsets();
+    // store normalized to inches
+    offs[id] = valueInCurrentUnit * unitFactor(elevUnit, 'in');
+}
+function resetDimOffsets() {
+    const ce = elevations[currentElevIndex];
+    if (ce) ce.dimOffsets = {};
+    drawElevAll();
+    if (typeof pushHistory === 'function') pushHistory();
+}
+function anyDimOffsetsSet() {
+    const offs = getElevDimOffsets();
+    return Object.keys(offs).some(k => Math.abs(offs[k]) > 0.001);
+}
+
 function drawElevTargetedSpacing() {
     const layer = document.getElementById('dim-layer'); layer.innerHTML = '';
     let drawnPairs = new Set();
@@ -8746,14 +8789,18 @@ function drawElevTargetedSpacing() {
                         let gapX = rightF.x - (leftF.x + leftF.w);
                         let oTop = Math.max(leftF.y, rightF.y); let oBot = Math.min(leftF.y + leftF.h, rightF.y + rightF.h);
                         let anchorY = oBot > oTop ? oTop + (oBot - oTop)/2 : (leftF.y + leftF.h/2 + rightF.y + rightF.h/2)/2;
-                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX));
+                        const hId = 'spacing-h-' + pairId;
+                        anchorY += getDimOffset(hId);
+                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX), hId);
                     }
                     let botF = f1.y < f2.y ? f1 : f2; let topF = f1.y < f2.y ? f2 : f1;
                     if (topF.y >= botF.y + botF.h) {
                         let gapY = topF.y - (botF.y + botF.h);
                         let oLeft = Math.max(botF.x, topF.x); let oRight = Math.min(botF.x + botF.w, topF.x + topF.w);
                         let anchorX = oRight > oLeft ? oLeft + (oRight - oLeft)/2 : (botF.x + botF.w/2 + topF.x + topF.w/2)/2;
-                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY));
+                        const vId = 'spacing-v-' + pairId;
+                        anchorX += getDimOffset(vId);
+                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY), vId);
                     }
                     drawnPairs.add(pairId);
                 }
@@ -8801,28 +8848,36 @@ function drawPerFrameDistanceDims() {
         if (dt.ceiling) {
             const ceilingDist = wallH - (f.y + f.h);
             if (ceilingDist > 0) {
-                createElevArchSpacing(verticalAnchorX, f.y + f.h, verticalAnchorX, wallH, 'v', layer, elevFmtU(ceilingDist));
+                const id = 'edge-' + f.letter + '-ceiling';
+                const ax = verticalAnchorX + getDimOffset(id);
+                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, elevFmtU(ceilingDist), id);
             }
         }
         // FLOOR distance: from bottom of frame down to 0
         if (dt.floor) {
             const floorDist = f.y;
             if (floorDist > 0) {
-                createElevArchSpacing(verticalAnchorX, 0, verticalAnchorX, f.y, 'v', layer, elevFmtU(floorDist));
+                const id = 'edge-' + f.letter + '-floor';
+                const ax = verticalAnchorX + getDimOffset(id);
+                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, elevFmtU(floorDist), id);
             }
         }
         // LEFT WALL distance: from left of frame back to 0
         if (dt.left) {
             const leftDist = f.x;
             if (leftDist > 0) {
-                createElevArchSpacing(0, horizontalAnchorY, f.x, horizontalAnchorY, 'h', layer, elevFmtU(leftDist));
+                const id = 'edge-' + f.letter + '-left';
+                const ay = horizontalAnchorY + getDimOffset(id);
+                createElevArchSpacing(0, ay, f.x, ay, 'h', layer, elevFmtU(leftDist), id);
             }
         }
         // RIGHT WALL distance: from right of frame to wallW
         if (dt.right) {
             const rightDist = wallW - (f.x + f.w);
             if (rightDist > 0) {
-                createElevArchSpacing(f.x + f.w, horizontalAnchorY, wallW, horizontalAnchorY, 'h', layer, elevFmtU(rightDist));
+                const id = 'edge-' + f.letter + '-right';
+                const ay = horizontalAnchorY + getDimOffset(id);
+                createElevArchSpacing(f.x + f.w, ay, wallW, ay, 'h', layer, elevFmtU(rightDist), id);
             }
         }
     });
@@ -8870,7 +8925,7 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
     container.appendChild(dim);
 }
 
-function createElevArchSpacing(x1, y1, x2, y2, type, container, label) {
+function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId) {
     const dim = document.createElement('div'); 
     dim.className = 'arch-dim ' + (type === 'h' ? 'arch-dim-h' : 'arch-dim-v');
     
@@ -8887,7 +8942,60 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label) {
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
     }
+    // Draggable grip handle (perpendicular slide). Only for dims with an id.
+    if (dimId) attachDimDragHandle(dim, type, dimId);
     container.appendChild(dim);
+}
+
+// Attach a small draggable grip to a dimension line. Dragging it slides the
+// dim along its perpendicular axis (h-dim → vertical drag; v-dim → horizontal
+// drag), updating the stored offset for `dimId`. The grip is excluded from
+// exports. The line's measured value never changes.
+function attachDimDragHandle(dim, type, dimId) {
+    const grip = document.createElement('div');
+    grip.className = 'dim-drag-grip';
+    grip.setAttribute('data-export-skip', '1');
+    grip.setAttribute('data-html2canvas-ignore', 'true');
+    grip.title = 'Drag to reposition this dimension';
+    // Centered on the line midpoint.
+    grip.style.cssText =
+        'position:absolute; width:14px; height:14px; border-radius:50%;' +
+        'background:var(--dim-color); opacity:0.5; cursor:' + (type === 'h' ? 'ns-resize' : 'ew-resize') + ';' +
+        'left:50%; top:50%; transform:translate(-50%,-50%); z-index:50; pointer-events:auto;' +
+        'border:2px solid #fff; box-sizing:border-box; transition:opacity 0.12s;';
+    grip.onmouseenter = () => { grip.style.opacity = '0.95'; };
+    grip.onmouseleave = () => { grip.style.opacity = '0.5'; };
+
+    grip.onmousedown = (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const startX = e.clientX, startY = e.clientY;
+        const startOffset = getDimOffset(dimId); // current unit
+        document.body.style.cursor = (type === 'h') ? 'ns-resize' : 'ew-resize';
+        const onMove = (mv) => {
+            // Perpendicular delta in px → elevation units. h-dim slides in Y
+            // (screen down = smaller bottom = NEGATIVE elevation y), v-dim in X.
+            let deltaPx, newOffset;
+            if (type === 'h') {
+                deltaPx = mv.clientY - startY;
+                // screen-down is +clientY but elevation y grows UP, so invert
+                newOffset = startOffset - (deltaPx / elevScale);
+            } else {
+                deltaPx = mv.clientX - startX;
+                newOffset = startOffset + (deltaPx / elevScale);
+            }
+            setDimOffset(dimId, newOffset);
+            drawElevAll();
+        };
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.body.style.cursor = '';
+            if (typeof pushHistory === 'function') pushHistory();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    };
+    dim.appendChild(grip);
 }
 
 function setElevUnit(u) {
