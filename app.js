@@ -9591,6 +9591,14 @@ async function exportElevSVG() {
                         rotate = Math.round(Math.atan2(v[1], v[0]) * 180 / Math.PI);
                     }
                 }
+                // Vertical writing-mode (e.g. the HANG HEIGHT label) isn't part
+                // of the transform matrix. Map it to an explicit rotation so the
+                // SVG text reads vertically too. vertical-rl + rotate(180deg)
+                // → reads bottom-to-top → -90° of horizontal text.
+                const wm = cs.writingMode || '';
+                if (wm.indexOf('vertical') === 0) {
+                    rotate = (Math.abs(rotate) >= 90) ? -90 : 90;
+                }
                 const cx = pos.x + pos.w / 2;
                 const cy = pos.y + pos.h / 2;
                 // Illustrator doesn't reliably honor dominant-baseline="central"
