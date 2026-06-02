@@ -866,17 +866,22 @@ body.dragging-frame .frame-vis:hover {
     position: absolute; 
     right: 100%;            /* sit OUTSIDE the wall, left of its left edge */
     top: 50%;
-    transform: translateY(-50%);
-    margin-right: 6px;      /* small gap from the wall edge */
+    /* Vertical orientation, reading bottom-to-top (conventional for a
+       left-side label), centered on the dashed hang line. */
+    writing-mode: vertical-rl;
+    transform: translateY(-50%) rotate(180deg);
+    transform-origin: center;
+    margin-right: 6px;      /* gap from the wall edge */
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     line-height: 1;
     color: var(--dim-color); 
     font-family: var(--dim-font-family);
     font-size: var(--dim-font-size); 
     font-weight: var(--dim-font-weight); 
     background: rgba(255,255,255,0.85); 
-    padding: 2px 6px; 
+    padding: 6px 2px; 
     border-radius: 3px; 
     white-space: nowrap;
 }
