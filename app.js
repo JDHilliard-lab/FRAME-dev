@@ -2485,7 +2485,7 @@ function setUnit(newUnit) {
     // Convert all settings-modal inputs (Hang, Font, Nudge, Grid, Drag Snap)
     // and their unit labels.
     const labelText = newUnit === 'in' ? 'in' : (newUnit === 'cm' ? 'cm' : 'mm');
-    [['hangHeight', null], ['nudgeSmall', null], ['nudgeBig', null],
+    [['hangHeight', null], ['baseboardHeight', null], ['nudgeSmall', null], ['nudgeBig', null],
      ['gridSize', null], ['dragSnap', null], ['alignGapValue', null]].forEach(([id, _]) => {
         const el = document.getElementById(id);
         if (el && el.value) el.value = parseFloat((parseFloat(el.value) * f).toFixed(2));
@@ -7788,6 +7788,17 @@ function getHangHeight() {
     return 57 * unitFactor('in', elevUnit);
 }
 
+// Baseboard height (current unit). 0/blank = no baseboard. Read directly from
+// the input like the hang height; converted alongside other values on unit
+// change via setElevUnit's input-conversion pass.
+function getBaseboardHeight() {
+    const el = document.getElementById('baseboardHeight');
+    const v = el ? parseFloat(el.value) : NaN;
+    if (!isNaN(v) && v > 0) return v;
+    return 0;
+}
+function updateBaseboard() { drawElevAll(); }
+
 // ──────────── ALIGNMENT & DISTRIBUTION HELPERS ────────────
 // Module-level state: which axis the spacing operation uses. Persists between
 // dialog opens so the user's last choice is remembered until they change it.
@@ -7987,6 +7998,26 @@ function drawElevAll() {
     
     const wall = document.getElementById('wall');
     wall.style.width = (wallW * elevScale) + 'px'; wall.style.height = (wallH * elevScale) + 'px';
+
+    // Baseboard: a horizontal line at the baseboard height from the floor,
+    // spanning the wall width, drawn with the wall lineweight. 0 = none.
+    {
+        const old = document.getElementById('baseboard-line');
+        if (old) old.remove();
+        const bb = getBaseboardHeight();
+        if (bb > 0 && bb < wallH) {
+            const cs = getComputedStyle(wall);
+            const lw = Math.max(1, Math.round(parseFloat(cs.borderTopWidth) || 1));
+            const line = document.createElement('div');
+            line.id = 'baseboard-line';
+            line.setAttribute('data-baseboard', '1');
+            const wallLineColor = (getComputedStyle(document.documentElement).getPropertyValue('--wall-line') || '#333').trim();
+            line.style.cssText =
+                `position:absolute; left:0; right:0; bottom:${bb * elevScale}px; height:0;` +
+                `border-top:${lw}px solid ${wallLineColor}; pointer-events:none; z-index:2;`;
+            wall.appendChild(line);
+        }
+    }
 
     const gridLayer = document.getElementById('grid-layer');
     // Grid cell size — visual grid spacing in inches/cm. User-configurable
@@ -9587,10 +9618,10 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
     
     const left = Math.min(x1, x2) * elevScale;
     let bottom = Math.min(y1, y2) * elevScale;
-    // The wall's floor is a 4px bottom border sitting just below content-box
-    // bottom (bottom:0). A line anchored at the floor (y≈0) would stop at the
-    // border's inner edge, leaving a 4px gap. Extend it down to touch the floor.
-    const FLOOR_BORDER = 4;
+    // The wall's floor is now a 1px bottom border (same as the other sides).
+    // Extend a floor-anchored vertical line down by that 1px so it sits flush
+    // on the floor edge rather than stopping at the content-box inner edge.
+    const FLOOR_BORDER = 1;
     let floorExtend = 0;
     if (type !== 'h' && Math.min(y1, y2) < 0.001) { bottom = -FLOOR_BORDER; floorExtend = FLOOR_BORDER; }
     dim.style.left = left + 'px';
@@ -10712,21 +10743,23 @@ async function exportElevSVG() {
             return { x: r.left + ox, y: r.top + oy, w: r.width, h: r.height };
         };
 
-        // ── WALL outline: transparent fill, thin stroke on top/left/right, and
-        //    a separate THICK floor line at the bottom (matching the on-screen
-        //    4px floor border). Without the thick floor, vertical dims that
-        //    touch the ground look like they're floating. ──
+        // ── WALL outline: transparent fill, uniform thin stroke all around
+        //    (the thick floor is gone). A baseboard line is drawn separately if
+        //    the user set a baseboard height. ──
         {
             const wp = rectToSvg(wall);
             const wallCs = getComputedStyle(wall);
-            const floorPx = Math.max(2, Math.round(parseFloat(wallCs.borderBottomWidth) || 4));
             const thinPx = Math.max(1, Math.round(parseFloat(wallCs.borderTopWidth) || 1));
-            // thin outline (all four sides — bottom will be overdrawn by floor)
             midLayer.push(`<rect x="${wp.x.toFixed(1)}" y="${wp.y.toFixed(1)}" width="${wp.w.toFixed(1)}" height="${wp.h.toFixed(1)}" fill="none" stroke="${wallLine}" stroke-width="${thinPx}"/>`);
-            // thick floor: a horizontal line along the bottom edge, centered on
-            // the border so it sits exactly where the screen floor is.
-            const floorY = (wp.y + wp.h).toFixed(1);
-            midLayer.push(`<line x1="${wp.x.toFixed(1)}" y1="${floorY}" x2="${(wp.x + wp.w).toFixed(1)}" y2="${floorY}" stroke="${wallLine}" stroke-width="${floorPx}" stroke-linecap="square"/>`);
+            // Baseboard: horizontal line at the baseboard height (from the
+            // floor), same lineweight as the wall. Uses the live rendered
+            // element so it matches the screen exactly.
+            const bbEl = wall.querySelector('#baseboard-line');
+            if (bbEl) {
+                const br = rectToSvg(bbEl);
+                const by = br.y.toFixed(1);
+                midLayer.push(`<line x1="${wp.x.toFixed(1)}" y1="${by}" x2="${(wp.x + wp.w).toFixed(1)}" y2="${by}" stroke="${wallLine}" stroke-width="${thinPx}"/>`);
+            }
         }
 
         // ── FRAMES (back layer): embed as <image> ──
