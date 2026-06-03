@@ -8901,6 +8901,24 @@ function getElevDimOffsets() {
     if (!ce.dimOffsets || typeof ce.dimOffsets !== 'object') ce.dimOffsets = {};
     return ce.dimOffsets;
 }
+// Per-elevation set of dim ids the user has hidden via the × button.
+function getElevHiddenDims() {
+    const ce = elevations[currentElevIndex];
+    if (!ce) return {};
+    if (!ce.hiddenDims || typeof ce.hiddenDims !== 'object') ce.hiddenDims = {};
+    return ce.hiddenDims;
+}
+function isDimHidden(id) { return !!getElevHiddenDims()[id]; }
+function hideDim(id) {
+    getElevHiddenDims()[id] = true;
+    if (typeof pushHistory === 'function') pushHistory();
+    drawElevAll();
+}
+function restoreHiddenDims() {
+    const ce = elevations[currentElevIndex];
+    if (ce) ce.hiddenDims = {};
+    drawElevAll();
+}
 // Offset stored in INCHES (unit-independent). Returns offset in the CURRENT
 // elevation unit for use in rendering math.
 function getDimOffset(id) {
@@ -8913,9 +8931,19 @@ function setDimOffset(id, valueInCurrentUnit) {
     // store normalized to inches
     offs[id] = valueInCurrentUnit * unitFactor(elevUnit, 'in');
 }
+// Label-along-line offset (slides the number along the dim line to avoid
+// overlaps). Stored separately under id+'-lbl', in inches.
+function getLabelOffset(id) {
+    const off = getElevDimOffsets()[id + '-lbl'];
+    if (typeof off !== 'number') return 0;
+    return off * unitFactor('in', elevUnit);
+}
+function setLabelOffset(id, valueInCurrentUnit) {
+    getElevDimOffsets()[id + '-lbl'] = valueInCurrentUnit * unitFactor(elevUnit, 'in');
+}
 function resetDimOffsets() {
     const ce = elevations[currentElevIndex];
-    if (ce) ce.dimOffsets = {};
+    if (ce) { ce.dimOffsets = {}; ce.hiddenDims = {}; }
     drawElevAll();
     if (typeof pushHistory === 'function') pushHistory();
 }
@@ -8947,6 +8975,14 @@ function toggleLineTool(on) {
     lineToolActive = (typeof on === 'boolean') ? on : !lineToolActive;
     lineToolFirstPt = null;
     lineToolFirstAnchor = null;
+    // Turning the draw tool on must make custom lines visible — otherwise new
+    // lines are created but hidden, which looks like the tool isn't working.
+    if (lineToolActive && typeof dimVisibility !== 'undefined' && !dimVisibility.customLines) {
+        dimVisibility.customLines = true;
+        if (typeof saveDimVisibility === 'function') saveDimVisibility();
+        const clBtn = document.getElementById('customLinesToggle');
+        if (clBtn) clBtn.classList.add('active');
+    }
     const btn = document.getElementById('lineToolBtn');
     if (btn) btn.classList.toggle('active', lineToolActive);
     const wall = document.getElementById('wall');
@@ -9519,6 +9555,7 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
 
 function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, offsetAmt) {
     offsetAmt = offsetAmt || 0;
+    if (dimId && isDimHidden(dimId)) return; // user hid this dim via its ×
     const dim = document.createElement('div'); 
     dim.className = 'arch-dim ' + (type === 'h' ? 'arch-dim-h' : 'arch-dim-v');
     
@@ -9560,7 +9597,70 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
     }
     // Draggable grip handle (perpendicular slide). Only for dims with an id.
     if (dimId) attachDimDragHandle(dim, type, dimId);
+    // Label slide-along-line: shift the number along the axis + make it
+    // draggable (h → left/right; v → up/down) so overlapping numbers can be
+    // separated. Move cursor signals the drag.
+    if (dimId) {
+        const lblEl = dim.querySelector('.arch-label-new');
+        if (lblEl) {
+            const lblOff = getLabelOffset(dimId) * elevScale; // px along line
+            if (type === 'h') lblEl.style.transform = `translateX(${lblOff}px)`;
+            else lblEl.style.transform = `translateY(${-lblOff}px)`; // up = +offset
+            lblEl.style.cursor = 'move';
+            lblEl.style.pointerEvents = 'auto';
+            attachLabelDrag(lblEl, type, dimId);
+        }
+    }
+    // × hide button (only for dims with an id). Hover-reveal, excluded from export.
+    if (dimId) {
+        const del = document.createElement('div');
+        del.className = 'dim-hide-x';
+        del.setAttribute('data-export-skip', '1');
+        del.setAttribute('data-html2canvas-ignore', 'true');
+        del.textContent = '×';
+        del.title = 'Hide this dimension';
+        del.style.cssText =
+            'position:absolute; width:15px; height:15px; line-height:13px; text-align:center; border-radius:50%;' +
+            'background:var(--dim-color); color:#fff; font-size:12px; font-weight:bold; cursor:pointer;' +
+            'z-index:55; opacity:0; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
+            (type === 'h' ? 'right:-7px; top:50%; transform:translateY(-50%);' : 'left:50%; top:-7px; transform:translateX(-50%);');
+        del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); hideDim(dimId); });
+        dim.appendChild(del);
+        dim.addEventListener('mouseenter', () => { del.style.opacity = '0.7'; });
+        dim.addEventListener('mouseleave', () => { del.style.opacity = '0'; });
+    }
     container.appendChild(dim);
+}
+
+// Drag the number/label ALONG the line (h-dim: left/right; v-dim: up/down) to
+// separate overlapping numbers. Updates the label-along offset for dimId.
+function attachLabelDrag(lblEl, type, dimId) {
+    lblEl.addEventListener('mousedown', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const startX = e.clientX, startY = e.clientY;
+        const startOff = getLabelOffset(dimId); // current unit
+        document.body.style.cursor = 'move';
+        const onMove = (mv) => {
+            let deltaPx, newOff;
+            if (type === 'h') {
+                deltaPx = mv.clientX - startX;       // along x
+                newOff = startOff + deltaPx / elevScale;
+            } else {
+                deltaPx = mv.clientY - startY;       // screen down → along -y(up=+)
+                newOff = startOff - deltaPx / elevScale;
+            }
+            setLabelOffset(dimId, newOff);
+            drawElevAll();
+        };
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.body.style.cursor = '';
+            if (typeof pushHistory === 'function') pushHistory();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    });
 }
 
 // Attach an arrow-style drag handle to a dimension line. Horizontal lines
@@ -9593,13 +9693,22 @@ function attachDimDragHandle(dim, type, dimId) {
             'cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
         grip.innerHTML = chevron('up') + chevron('down');
     } else {
-        // Left/right chevrons flanking the number (the .arch-label-new sits at
-        // the line's center; we place a wide handle spanning across it).
+        // Left/right chevrons flanking the number; gap sized to the label
+        // width so the arrows stay just OUTSIDE the white box as it grows or
+        // shrinks (e.g. unit changes). Measured once the dim is in the DOM.
         grip.style.cssText =
             'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);' +
             'display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0;' +
             'cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
         grip.innerHTML = chevron('left') + chevron('right');
+        // After layout, set the gap to the label's width + margin.
+        requestAnimationFrame(() => {
+            const lbl = dim.querySelector('.arch-label-new');
+            if (lbl) {
+                const w = lbl.getBoundingClientRect().width;
+                if (w > 0) grip.style.gap = (w + 14) + 'px';
+            }
+        });
     }
     grip.onmouseenter = () => { grip.style.opacity = '1'; };
     grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
