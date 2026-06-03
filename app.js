@@ -8910,6 +8910,25 @@ function getElevHiddenDims() {
 }
 function isDimHidden(id) { return !!getElevHiddenDims()[id]; }
 function hideDim(id) {
+    // Keep the panel view in sync: edge-gap and spacing dims are driven by
+    // per-frame settings, so hiding one here also clears the matching control.
+    const edgeMatch = /^edge-(.+)-(ceiling|floor|left|right)$/.exec(id);
+    const spacingMatch = /^spacing-[hv]-(.+)-(.+)$/.exec(id);
+    if (edgeMatch) {
+        const f = elevFrames.find(fr => fr.letter === edgeMatch[1]);
+        if (f && f.distToggles) { f.distToggles[edgeMatch[2]] = false; if (typeof initElevControls === 'function') { try { initElevControls(); } catch(e){} } drawElevAll(); if (typeof pushHistory === 'function') pushHistory(); return; }
+    } else if (spacingMatch) {
+        const [, l1, l2] = spacingMatch;
+        const f1 = elevFrames.find(fr => fr.letter === l1);
+        const f2 = elevFrames.find(fr => fr.letter === l2);
+        if (f1 && Array.isArray(f1.dimTo)) f1.dimTo = f1.dimTo.filter(x => x !== l2);
+        if (f2 && Array.isArray(f2.dimTo)) f2.dimTo = f2.dimTo.filter(x => x !== l1);
+        if (typeof initElevControls === 'function') { try { initElevControls(); } catch(e){} }
+        drawElevAll();
+        if (typeof pushHistory === 'function') pushHistory();
+        return;
+    }
+    // Fallback: generic hidden flag (custom or other dims).
     getElevHiddenDims()[id] = true;
     if (typeof pushHistory === 'function') pushHistory();
     drawElevAll();
@@ -9596,10 +9615,11 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
         }
     }
     // Draggable grip handle (perpendicular slide). Only for dims with an id.
+    // Lower z so it sits BEHIND the number — the label must win pointer events
+    // so the number can be grabbed and dragged along the line.
     if (dimId) attachDimDragHandle(dim, type, dimId);
-    // Label slide-along-line: shift the number along the axis + make it
-    // draggable (h → left/right; v → up/down) so overlapping numbers can be
-    // separated. Move cursor signals the drag.
+    // Label slide-along-line + hover-reveal × delete, grouped at the number so
+    // the × is reachable (the dim strip itself is too thin to hover toward).
     if (dimId) {
         const lblEl = dim.querySelector('.arch-label-new');
         if (lblEl) {
@@ -9608,26 +9628,35 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
             else lblEl.style.transform = `translateY(${-lblOff}px)`; // up = +offset
             lblEl.style.cursor = 'move';
             lblEl.style.pointerEvents = 'auto';
+            lblEl.style.position = 'relative';
+            lblEl.style.zIndex = '56'; // above the arrow grip (50)
             attachLabelDrag(lblEl, type, dimId);
+
+            // × hide button attached to the label, revealed when hovering the
+            // label (a real, hoverable target — unlike the 1px line).
+            const del = document.createElement('div');
+            del.className = 'dim-hide-x';
+            del.setAttribute('data-export-skip', '1');
+            del.setAttribute('data-html2canvas-ignore', 'true');
+            del.textContent = '×';
+            del.title = 'Hide this dimension';
+            del.style.cssText =
+                'position:absolute; width:15px; height:15px; line-height:13px; text-align:center; border-radius:50%;' +
+                'background:var(--dim-color); color:#fff; font-size:12px; font-weight:bold; cursor:pointer;' +
+                'z-index:57; opacity:0; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
+                'left:100%; top:50%; transform:translate(4px,-50%);';
+            del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); hideDim(dimId); });
+            lblEl.appendChild(del);
+            // Reveal × while hovering the label OR the × itself; a tiny grace
+            // delay so moving from number → × doesn't drop it.
+            let hideTimer = null;
+            const show = () => { if (hideTimer) clearTimeout(hideTimer); del.style.opacity = '0.85'; };
+            const hide = () => { hideTimer = setTimeout(() => { del.style.opacity = '0'; }, 250); };
+            lblEl.addEventListener('mouseenter', show);
+            lblEl.addEventListener('mouseleave', hide);
+            del.addEventListener('mouseenter', show);
+            del.addEventListener('mouseleave', hide);
         }
-    }
-    // × hide button (only for dims with an id). Hover-reveal, excluded from export.
-    if (dimId) {
-        const del = document.createElement('div');
-        del.className = 'dim-hide-x';
-        del.setAttribute('data-export-skip', '1');
-        del.setAttribute('data-html2canvas-ignore', 'true');
-        del.textContent = '×';
-        del.title = 'Hide this dimension';
-        del.style.cssText =
-            'position:absolute; width:15px; height:15px; line-height:13px; text-align:center; border-radius:50%;' +
-            'background:var(--dim-color); color:#fff; font-size:12px; font-weight:bold; cursor:pointer;' +
-            'z-index:55; opacity:0; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
-            (type === 'h' ? 'right:-7px; top:50%; transform:translateY(-50%);' : 'left:50%; top:-7px; transform:translateX(-50%);');
-        del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); hideDim(dimId); });
-        dim.appendChild(del);
-        dim.addEventListener('mouseenter', () => { del.style.opacity = '0.7'; });
-        dim.addEventListener('mouseleave', () => { del.style.opacity = '0'; });
     }
     container.appendChild(dim);
 }
