@@ -842,7 +842,7 @@ body.dragging-frame .frame-vis:hover {
  * ABOVE frames (z-index 10) so these reference lines read over the artwork.
  * The dimension layers above sit even higher so dim callouts win over the
  * guide lines where they overlap (keeps numbers readable). */
-.guide-layer { position: absolute; inset: 0; pointer-events: none; z-index: 15; }
+.guide-layer { position: absolute; inset: 0; pointer-events: none; z-index: 29; }
 /* Group-dimension callouts. The layer itself ignores pointer events so it
  * doesn't block frame interaction; only the delete (×) buttons inside opt
  * back into pointer-events. Slightly higher z-index so dashed boxes read
