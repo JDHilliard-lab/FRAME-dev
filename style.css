@@ -773,7 +773,7 @@ select.no-arrow::-ms-expand { display: none; }
 #export-wrap { padding: 80px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
 
 /* Light grey wall default for crisp dimensional text contrast */
-#wall { background: #f0f2f5; border-bottom: 4px solid var(--wall-line, #333); border-left: 1px solid var(--wall-line, #333); border-right: 1px solid var(--wall-line, #333); border-top: 1px solid var(--wall-line, #333); position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+#wall { background: #f0f2f5; border-bottom: 1px solid var(--wall-line, #333); border-left: 1px solid var(--wall-line, #333); border-right: 1px solid var(--wall-line, #333); border-top: 1px solid var(--wall-line, #333); position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
 
 .draggable { position: absolute; cursor: move; user-select: none; z-index: 10; }
 .person { opacity: 0.9; z-index: 20; pointer-events: none; }
