@@ -8406,10 +8406,7 @@ function renderGroupDims() {
             wLbl.style.pointerEvents = 'auto'; wLbl.style.cursor = 'move'; wLbl.style.zIndex = '52';
             attachGroupLabelDrag(wLbl, 'h', wId, boxW * 0.5 * elevScale);
             layer.appendChild(wLbl);
-            // Arrow drag handle (slides up/down) — nudged above the line so it
-            // doesn't sit under the number (which sits on the line and slides
-            // horizontally).
-            attachGroupDimHandle(layer, 'h', wId, boxLeft + boxW / 2, lineY - 16);
+            buildGroupArrows(wLbl, 'h', wId, boxW * 0.5 * elevScale);
         }
 
         // ── HEIGHT dimension line (left of the box) — SOLID line, DASHED extensions ──
@@ -8430,9 +8427,7 @@ function renderGroupDims() {
             hl.style.pointerEvents = 'auto'; hl.style.cursor = 'move'; hl.style.zIndex = '52';
             attachGroupLabelDrag(hl, 'v', hId, boxH * 0.5 * elevScale);
             layer.appendChild(hl);
-            // Arrow drag handle (slides left/right) — nudged left of the line
-            // so it doesn't sit under the number.
-            attachGroupDimHandle(layer, 'v', hId, lineX - 16, boxTop + boxH / 2);
+            buildGroupArrows(hl, 'v', hId, boxH * 0.5 * elevScale);
         }
 
         // ── Delete affordance: small × at the box's top-right corner. Tagged
@@ -8863,7 +8858,9 @@ function drawElevGuides(wallW, wallH) {
         const dimXIn = 8 * unitFactor('in', elevUnit) + hangDimOffIn * unitFactor('in', elevUnit);
         const dimXpx = dimXIn * elevScale;
         const hangPx = hangVal * elevScale;
-        const lblShiftPx = hangLblOffIn * unitFactor('in', elevUnit) * elevScale; // up = +
+        const hangHalfSpan = Math.max(0, hangPx / 2 - 14); // keep number on the line
+        let lblShiftPx = hangLblOffIn * unitFactor('in', elevUnit) * elevScale; // up = +
+        lblShiftPx = Math.max(-hangHalfSpan, Math.min(hangHalfSpan, lblShiftPx));
         const TICK = 6;
 
         const fh = document.createElement('div');
@@ -8881,8 +8878,8 @@ function drawElevGuides(wallW, wallH) {
             // the number, centered between the line ends (rotated to read along
             // the vertical line), shifted by the user's up/down offset.
             `<div class="hang-dim-num" style="position:absolute; left:0; top:calc(50% - ${lblShiftPx}px); transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px; pointer-events:auto; cursor:ns-resize;">${elevFmtU(hangVal)}</div>`;
-        attachHangDimHandle(fh);
         guideLayer.appendChild(fh);
+        attachHangDimHandle(fh, { halfSpanPx: hangHalfSpan });
     }
     
     const offsetDist = 6 * unitFactor('in', elevUnit);
@@ -9336,77 +9333,88 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
     layer.appendChild(dim);
 }
 
-// Drag handle for the floor-to-hang dimension: slides it left/right (changes
-// its horizontal position only; the height value comes from settings).
-function attachHangDimHandle(fh) {
+// 4-way control for the floor-to-hang dimension. Arrows are attached to the
+// (unrotated) fh container around the number's visual box so they don't
+// overlap the rotated number. Up/Down move the NUMBER along the line (clamped
+// to the line ends); Left/Right move the whole LINE horizontally. No ×.
+function attachHangDimHandle(fh, opts) {
+    opts = opts || {};
     const ce = elevations[currentElevIndex];
     const toIn = unitFactor(elevUnit, 'in');
     const num = fh.querySelector('.hang-dim-num');
     if (!num) return;
-    num.style.position = 'relative'; // anchor arrows to the number box
+    num.style.cursor = 'ns-resize';
     num.style.zIndex = '56';
+
+    const halfSpan = (typeof opts.halfSpanPx === 'number') ? opts.halfSpanPx : 1e9;
+    const numCenterTopPx = (typeof opts.numCenterTopPx === 'number') ? opts.numCenterTopPx : null;
 
     const chev = (dir) => {
         const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
         return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     };
-    // NOTE: the number is rotated -90°, so its visual up/down is the box's
-    // left/right and vice-versa. We position arrows in the box's local frame
-    // but map drags to screen axes explicitly below.
-    const makeArrow = (screenDir) => {
-        // screenDir is the on-screen direction the user perceives.
-        const a = document.createElement('div');
-        a.className = 'dim-arrow';
-        a.setAttribute('data-export-skip', '1');
-        a.setAttribute('data-html2canvas-ignore', 'true');
-        // The number is rotated -90°: box-right = screen-up, box-left =
-        // screen-down, box-up = screen-left, box-down = screen-right. Place the
-        // glyph in the box-local edge that renders to the desired screen edge.
-        const boxEdge = { up:'right', down:'left', left:'up', right:'down' }[screenDir];
-        const glyph = { up:'up', down:'down', left:'left', right:'right' }[screenDir];
-        const pos = {
-            left:  'right:100%; top:50%; transform:translateY(-50%) rotate(90deg); margin-right:3px;',
-            right: 'left:100%; top:50%; transform:translateY(-50%) rotate(90deg); margin-left:3px;',
-            up:    'bottom:100%; left:50%; transform:translateX(-50%) rotate(90deg); margin-bottom:3px;',
-            down:  'top:100%; left:50%; transform:translateX(-50%) rotate(90deg); margin-top:3px;',
-        }[boxEdge];
-        const cur = (screenDir === 'left' || screenDir === 'right') ? 'ew-resize' : 'ns-resize';
-        a.style.cssText = `position:absolute; ${pos} z-index:58; pointer-events:auto; cursor:${cur}; opacity:0.5; transition:opacity 0.12s; line-height:0;`;
-        a.innerHTML = chev(glyph);
-        a.onmouseenter = () => { a.style.opacity = '1'; };
-        a.onmouseleave = () => { a.style.opacity = '0.5'; };
-        a.addEventListener('mousedown', (e) => {
-            e.preventDefault(); e.stopPropagation();
-            const startX = e.clientX, startY = e.clientY;
-            const startLine = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
-            const startLbl = (ce && typeof ce.hangDimLblOffset === 'number') ? ce.hangDimLblOffset : 0;
-            document.body.style.cursor = cur;
-            const onMove = (mv) => {
-                if (screenDir === 'left' || screenDir === 'right') {
-                    // move the whole line horizontally
-                    const dIn = ((mv.clientX - startX) / elevScale) * toIn;
-                    if (ce) ce.hangDimXOffset = startLine + dIn;
-                } else {
-                    // move the number up/down (up = +)
-                    const dIn = (-(mv.clientY - startY) / elevScale) * toIn;
-                    if (ce) ce.hangDimLblOffset = startLbl + dIn;
-                }
-                drawElevAll();
-            };
-            const onUp = () => {
-                document.removeEventListener('mousemove', onMove);
-                document.removeEventListener('mouseup', onUp);
-                document.body.style.cursor = '';
-                if (typeof pushHistory === 'function') pushHistory();
-            };
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('mouseup', onUp);
-        });
-        return a;
-    };
-    ['left','right','up','down'].forEach(d => num.appendChild(makeArrow(d)));
 
-    // Drag the number itself up/down (no X — height is from settings).
+    // The number is rotated -90°, so its visual half-extent along the line is
+    // roughly half its (pre-rotation) WIDTH, and across the line half its
+    // HEIGHT. Measure now (fh is already in the DOM) for precise placement.
+    {
+        const nb = num.getBoundingClientRect();
+        const fhb = fh.getBoundingClientRect();
+        // number center within fh, in px (fh is width:0 at the line; y grows down)
+        const cxInFh = nb.left + nb.width / 2 - fhb.left;
+        const cyInFh = nb.top + nb.height / 2 - fhb.top;
+        const halfW = nb.width / 2;
+        const halfH = nb.height / 2;
+        const GAP = 6;
+        const mk = (screenDir) => {
+            const a = document.createElement('div');
+            a.className = 'dim-arrow';
+            a.setAttribute('data-export-skip', '1');
+            a.setAttribute('data-html2canvas-ignore', 'true');
+            const cur = (screenDir === 'left' || screenDir === 'right') ? 'ew-resize' : 'ns-resize';
+            let left = cxInFh, top = cyInFh;
+            if (screenDir === 'up')    top = cyInFh - halfH - GAP;
+            if (screenDir === 'down')  top = cyInFh + halfH + GAP;
+            if (screenDir === 'left')  left = cxInFh - halfW - GAP;
+            if (screenDir === 'right') left = cxInFh + halfW + GAP;
+            a.style.cssText = `position:absolute; left:${left}px; top:${top}px; transform:translate(-50%,-50%); z-index:58; pointer-events:auto; cursor:${cur}; opacity:0.5; transition:opacity 0.12s; line-height:0;`;
+            a.innerHTML = chev(screenDir);
+            a.onmouseenter = () => { a.style.opacity = '1'; };
+            a.onmouseleave = () => { a.style.opacity = '0.5'; };
+            a.addEventListener('mousedown', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                const startX = e.clientX, startY = e.clientY;
+                const startLine = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
+                const startLbl = (ce && typeof ce.hangDimLblOffset === 'number') ? ce.hangDimLblOffset : 0;
+                document.body.style.cursor = cur;
+                const onMove = (mv) => {
+                    if (screenDir === 'left' || screenDir === 'right') {
+                        const dIn = ((mv.clientX - startX) / elevScale) * toIn;
+                        if (ce) ce.hangDimXOffset = startLine + dIn;
+                    } else {
+                        const dIn = (-(mv.clientY - startY) / elevScale) * toIn; // up=+
+                        // clamp to the line span
+                        let nextPx = (startLbl + dIn) * unitFactor('in', elevUnit) * elevScale;
+                        nextPx = Math.max(-halfSpan, Math.min(halfSpan, nextPx));
+                        if (ce) ce.hangDimLblOffset = (nextPx / elevScale) * toIn;
+                    }
+                    drawElevAll();
+                };
+                const onUp = () => {
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                    document.body.style.cursor = '';
+                    if (typeof pushHistory === 'function') pushHistory();
+                };
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            });
+            return a;
+        };
+        ['left','right','up','down'].forEach(d => fh.appendChild(mk(d)));
+    }
+
+    // Drag the number itself up/down (clamped to the line ends).
     num.addEventListener('mousedown', (e) => {
         e.preventDefault(); e.stopPropagation();
         const startY = e.clientY;
@@ -9414,7 +9422,9 @@ function attachHangDimHandle(fh) {
         document.body.style.cursor = 'ns-resize';
         const onMove = (mv) => {
             const dIn = (-(mv.clientY - startY) / elevScale) * toIn; // up = +
-            if (ce) ce.hangDimLblOffset = startLbl + dIn;
+            let nextPx = (startLbl + dIn) * unitFactor('in', elevUnit) * elevScale;
+            nextPx = Math.max(-halfSpan, Math.min(halfSpan, nextPx));
+            if (ce) ce.hangDimLblOffset = (nextPx / elevScale) * toIn;
             drawElevAll();
         };
         const onUp = () => {
@@ -9947,6 +9957,84 @@ function attachDimDragHandle(dim, type, dimId, lblOffPx) {
 // positioned absolutely at (cxPx, cyPx). type 'h' = width line (drag up/down),
 // 'v' = height line (drag left/right). Offset stored in dimOffsets[id], where
 // positive = the line sits further from the box.
+// 4-way arrows around a group-dim number, matching the other dimension lines.
+// type 'h' (width line): L/R move the NUMBER along the line (clamped), U/D move
+// the LINE. type 'v' (height line): U/D move the NUMBER (clamped), L/R move the
+// LINE. Arrows are positioned around the label's visual box (post-layout).
+function buildGroupArrows(lblEl, type, id, halfSpanPx) {
+    const layer = document.getElementById('group-dim-layer');
+    if (!layer) return;
+    const clampPx = Math.max(0, halfSpanPx - 12);
+    const chev = (dir) => {
+        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
+        return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+    {
+        const lb = lblEl.getBoundingClientRect();
+        const layb = layer.getBoundingClientRect();
+        const cx = lb.left + lb.width / 2 - layb.left;
+        const cy = lb.top + lb.height / 2 - layb.top;
+        const halfW = lb.width / 2, halfH = lb.height / 2;
+        const GAP = 6;
+        const mk = (screenDir) => {
+            const a = document.createElement('div');
+            a.className = 'dim-arrow';
+            a.setAttribute('data-export-skip', '1');
+            a.setAttribute('data-html2canvas-ignore', 'true');
+            const cur = (screenDir === 'left' || screenDir === 'right') ? 'ew-resize' : 'ns-resize';
+            let left = cx, top = cy;
+            if (screenDir === 'up')    top = cy - halfH - GAP;
+            if (screenDir === 'down')  top = cy + halfH + GAP;
+            if (screenDir === 'left')  left = cx - halfW - GAP;
+            if (screenDir === 'right') left = cx + halfW + GAP;
+            a.style.cssText = `position:absolute; left:${left}px; top:${top}px; transform:translate(-50%,-50%); z-index:53; pointer-events:auto; cursor:${cur}; opacity:0.5; transition:opacity 0.12s; line-height:0;`;
+            a.innerHTML = chev(screenDir);
+            a.onmouseenter = () => { a.style.opacity = '1'; };
+            a.onmouseleave = () => { a.style.opacity = '0.5'; };
+            // Which action: for h line, L/R = number, U/D = line. For v line,
+            // U/D = number, L/R = line.
+            const isNumberAxis = (type === 'h') ? (screenDir === 'left' || screenDir === 'right')
+                                                : (screenDir === 'up' || screenDir === 'down');
+            a.addEventListener('mousedown', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                const startX = e.clientX, startY = e.clientY;
+                const startLbl = getLabelOffset(id);   // current unit
+                const startLine = getDimOffset(id);
+                document.body.style.cursor = cur;
+                const onMove = (mv) => {
+                    if (isNumberAxis) {
+                        let v;
+                        if (type === 'h') v = startLbl + (mv.clientX - startX) / elevScale; // L/R
+                        else v = startLbl - (mv.clientY - startY) / elevScale;              // U/D up=+
+                        const px = Math.max(-clampPx, Math.min(clampPx, v * elevScale));
+                        setLabelOffset(id, px / elevScale);
+                    } else {
+                        // move the line (perpendicular). Larger offset = further
+                        // from the box (matches attachGroupDimHandle semantics).
+                        let v;
+                        if (type === 'h') v = startLine + (startY - mv.clientY) / elevScale; // U/D, up=larger
+                        else v = startLine + (startX - mv.clientX) / elevScale;              // L/R, left=larger
+                        if (v < 0) v = 0;
+                        const snapped = snapDimOffset(v, id);
+                        setDimOffset(id, Math.max(0, snapped.value));
+                    }
+                    drawElevAll();
+                };
+                const onUp = () => {
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                    document.body.style.cursor = '';
+                    if (typeof pushHistory === 'function') pushHistory();
+                };
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            });
+            return a;
+        };
+        ['left','right','up','down'].forEach(d => layer.appendChild(mk(d)));
+    }
+}
+
 // Slide a group-dim number along its line (h: left/right, v: up/down), clamped
 // to the line span. Stores via the label-offset helper (group-<id>-w/h-lbl).
 function attachGroupLabelDrag(lblEl, type, lblId, halfSpanPx) {
