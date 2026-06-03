@@ -707,6 +707,9 @@
                 <button class="action-btn btn-secondary" id="shortcutsBtn" title="Keyboard shortcuts" onclick="document.getElementById('shortcutsModal').style.display='flex'" style="position:absolute; top:10px; left:10px; z-index:50; width:32px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;">
                     <svg class="svg-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><rect x="2" y="6" width="20" height="12" rx="2" fill="none"/><line x1="6" y1="10" x2="6" y2="10"/><line x1="10" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="14" y2="10"/><line x1="18" y1="10" x2="18" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>
                 </button>
+                <button class="action-btn btn-secondary" id="lineToolBtn" title="Measure tool (M) — click two points to draw a custom dimension line. Snaps to frame/wall/floor/ceiling edges. Horizontal or vertical." onclick="toggleLineTool()" style="position:absolute; top:10px; left:50px; z-index:50; width:32px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;">
+                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M3 17 L17 3" stroke-width="1.6"/><path d="M2 14 L6 18 M5 11 L9 15 M8 8 L12 12 M11 5 L15 9" stroke-width="1.2"/></svg>
+                </button>
                 <div id="export-wrap">
                     <div id="wall">
                         <div id="grid-layer" class="grid-layer"></div>
@@ -717,6 +720,7 @@
                         <div id="guide-layer" class="guide-layer"></div>
                         <div id="od-layer" class="od-layer"></div>
                         <div id="group-dim-layer" class="group-dim-layer"></div>
+                        <div id="custom-lines-layer" class="dim-layer" style="z-index:23;"></div>
                         <div id="label-layer" class="label-layer"></div>
                         
                         <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:20; display:none;">
@@ -1200,6 +1204,10 @@
                 <label style="display:flex; align-items:center; gap:8px; margin-top:10px; font-size:0.7rem; color:var(--text-main); cursor:pointer;" title="Show red alignment guide lines that snap frames to each other, the wall, and the hang line while dragging.">
                     <input type="checkbox" id="snapEnabledToggle" checked onchange="toggleSnapEnabled(this.checked)" style="width:15px; height:15px; cursor:pointer;">
                     Snap to alignment guides (red lines while dragging)
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:0.7rem; color:var(--text-main); cursor:pointer;" title="When dragging a dimension line, snap its position to whole-inch increments and align it with other dimension lines (e.g. matching left/right edge-gap lines).">
+                    <input type="checkbox" id="dimSnapEnabledToggle" checked onchange="toggleDimSnapEnabled(this.checked)" style="width:15px; height:15px; cursor:pointer;">
+                    Snap dimension lines (increments &amp; align to each other)
                 </label>
             </div>
         </div>
