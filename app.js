@@ -9729,8 +9729,8 @@ function buildDimControls(opts) {
     hit.setAttribute('data-export-skip', '1');
     hit.setAttribute('data-html2canvas-ignore', 'true');
     hit.style.cssText = (type === 'h')
-        ? 'position:absolute; left:0; right:0; top:50%; height:12px; transform:translateY(-50%); cursor:pointer; z-index:40;'
-        : 'position:absolute; top:0; bottom:0; left:50%; width:12px; transform:translateX(-50%); cursor:pointer; z-index:40;';
+        ? 'position:absolute; left:0; right:0; top:50%; height:12px; transform:translateY(-50%); cursor:pointer; z-index:40; pointer-events:auto;'
+        : 'position:absolute; top:0; bottom:0; left:50%; width:12px; transform:translateX(-50%); cursor:pointer; z-index:40; pointer-events:auto;';
     hit.addEventListener('mousedown', (e) => {
         e.stopPropagation();
         select();
@@ -9751,7 +9751,7 @@ function buildDimControls(opts) {
         del.style.cssText =
             'position:absolute; width:16px; height:16px; line-height:14px; text-align:center; border-radius:50%;' +
             'background:var(--dim-color); color:#fff; font-size:13px; font-weight:bold; cursor:pointer;' +
-            'z-index:60; opacity:0.95; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
+            'z-index:60; opacity:0.95; user-select:none; border:1.5px solid #fff; box-sizing:border-box; pointer-events:auto;' +
             (type === 'h'
                 ? 'left:100%; top:50%; transform:translate(7px,-50%);'   // right end
                 : 'left:50%; bottom:100%; transform:translate(-50%,-7px);'); // top end
