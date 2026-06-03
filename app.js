@@ -8295,7 +8295,8 @@ function drawElevAll() {
         if (!wallEl) return;
         let legend = document.getElementById('elev-unit-legend');
         if (legend) legend.remove();
-        if (showUnitSuffix) return; // suffix on → no legend needed
+        // Always show the legend (full-word unit) — when the suffix is OFF it
+        // explains the unit, and when ON the user also wants it included.
         legend = document.createElement('div');
         legend.id = 'elev-unit-legend';
         legend.className = 'elev-unit-legend';
@@ -8910,7 +8911,7 @@ function drawElevGuides(wallW, wallH) {
             // the vertical line), shifted by the user's up/down offset.
             `<div class="hang-dim-num" style="position:absolute; left:0; top:calc(50% - ${lblShiftPx}px); transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px; pointer-events:auto; cursor:ns-resize;">${elevFmtU(hangVal)}</div>`;
         guideLayer.appendChild(fh);
-        attachHangDimHandle(fh, { halfSpanPx: hangHalfSpan });
+        attachHangDimHandle(fh, { halfSpanPx: hangHalfSpan, numCenterTopPx: (hangPx / 2 - lblShiftPx) });
     }
     
     const offsetDist = 6 * unitFactor('in', elevUnit);
@@ -9385,17 +9386,23 @@ function attachHangDimHandle(fh, opts) {
         return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     };
 
-    // The number is rotated -90°, so its visual half-extent along the line is
-    // roughly half its (pre-rotation) WIDTH, and across the line half its
-    // HEIGHT. Measure now (fh is already in the DOM) for precise placement.
+    // Position arrows deterministically from the number's KNOWN center and an
+    // estimated box size. Measuring the rotated number's getBoundingClientRect
+    // is unreliable on first paint (transform/font not settled), which made the
+    // arrows bunch up until the next redraw. The number is rotated -90°, so its
+    // visual height ≈ text width and visual width ≈ font size.
     {
-        const nb = num.getBoundingClientRect();
-        const fhb = fh.getBoundingClientRect();
-        // number center within fh, in px (fh is width:0 at the line; y grows down)
-        const cxInFh = nb.left + nb.width / 2 - fhb.left;
-        const cyInFh = nb.top + nb.height / 2 - fhb.top;
-        const halfW = nb.width / 2;
-        const halfH = nb.height / 2;
+        const fontSizePx = parseFloat(getComputedStyle(num).fontSize) || 13;
+        const txt = (num.textContent || '').replace('×','').trim();
+        // estimate the (pre-rotation) text width; rotated, this becomes the
+        // number's VISUAL height (extent along the vertical line).
+        const estTextW = Math.max(18, txt.length * fontSizePx * 0.6 + 10);
+        const halfH = estTextW / 2;             // visual half-height (along line)
+        const halfW = (fontSizePx + 8) / 2;     // visual half-width (across line)
+        // number center within fh: fh is the vertical line (bottom:0, height
+        // hangPx); the number sits at top:calc(50% - lblShiftPx).
+        const cyInFh = (typeof numCenterTopPx === 'number') ? numCenterTopPx : 0;
+        const cxInFh = 0; // the line is at x=0 in fh's frame
         const GAP = 6;
         const mk = (screenDir) => {
             const a = document.createElement('div');
@@ -10759,6 +10766,20 @@ async function exportElevSVG() {
                 const br = rectToSvg(bbEl);
                 const by = br.y.toFixed(1);
                 midLayer.push(`<line x1="${wp.x.toFixed(1)}" y1="${by}" x2="${(wp.x + wp.w).toFixed(1)}" y2="${by}" stroke="${wallLine}" stroke-width="${thinPx}"/>`);
+            }
+            // Unit legend ("ALL DIMENSIONS IN …") — emit as text so it appears
+            // in the SVG like on screen.
+            const legEl = wall.querySelector('#elev-unit-legend');
+            if (legEl && legEl.textContent) {
+                const lr = rectToSvg(legEl);
+                const lcs = getComputedStyle(legEl);
+                const lfs = parseFloat(lcs.fontSize) || 11;
+                const lcolor = lcs.color || wallLine;
+                const lfw = lcs.fontWeight || '600';
+                // baseline ~ top + fontSize*0.8 (text sits near the top-left of its box)
+                const lx = lr.x.toFixed(1);
+                const ly = (lr.y + lfs * 0.85).toFixed(1);
+                frontLayer.push(`<text x="${lx}" y="${ly}" font-family="Arial, Helvetica, sans-serif" font-size="${lfs.toFixed(1)}" font-weight="${lfw}" fill="${lcolor}">${legEl.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`);
             }
         }
 
