@@ -1035,9 +1035,10 @@ function initMasterApp() {
     if (wallEl) {
         wallEl.addEventListener('mousedown', function (e) {
             if (lineToolActive) { handleLineToolClick(e); return; }
-            // Click on empty space (not a custom line) deselects.
-            if (selectedCustomLine && !e.target.closest('.custom-line')) {
+            // Click on empty space (not a dim/line) deselects.
+            if ((selectedCustomLine || selectedDimId) && !e.target.closest('.custom-line') && !e.target.closest('.arch-dim')) {
                 selectedCustomLine = null;
+                selectedDimId = null;
                 drawElevAll();
             }
         }, true);
@@ -1079,10 +1080,11 @@ function initMasterApp() {
                 if (typeof pushHistory === 'function') pushHistory();
                 drawElevAll();
             }
-        } else if (e.key === 'Escape' && (lineToolActive || lineToolFirstPt || selectedCustomLine)) {
+        } else if (e.key === 'Escape' && (lineToolActive || lineToolFirstPt || selectedCustomLine || selectedDimId)) {
             lineToolFirstPt = null;
             lineToolFirstAnchor = null;
             selectedCustomLine = null;
+            selectedDimId = null;
             if (lineToolActive) toggleLineTool(false); else drawElevAll();
         }
     });
@@ -8983,6 +8985,7 @@ let lineToolActive = false;
 let lineToolFirstPt = null;   // {x,y} in inches, the pending first click
 let lineToolFirstAnchor = null; // the tagged anchor of the pending first click
 let selectedCustomLine = null; // id of selected custom line
+let selectedDimId = null;      // id of selected spacing/edge-gap dim
 
 function getElevCustomLines() {
     const ce = elevations[currentElevIndex];
@@ -9287,113 +9290,36 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--accent,#3b82f6); outline-offset:3px;' : '');
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
     }
+    const L = getElevCustomLines().find(l => l.id === id);
 
-    // Click to select + drag the whole line (but NOT when grabbing the number).
+    // Whole-line drag by grabbing the line body (not the number/arrows).
     dim.addEventListener('mousedown', (e) => {
-        if (lineToolActive) return; // don't select while drawing
-        if (e.target.closest('.arch-label-new')) return; // number handles its own drag
+        if (lineToolActive) return;
+        if (e.target.closest('.arch-label-new')) return; // number/arrows handle themselves
         e.stopPropagation();
-        selectedCustomLine = id;
+        selectedCustomLine = id; selectedDimId = null;
         startCustomLineDrag(e, id);
         drawElevAll();
     });
 
-    // Number slide-along-line: shift the label's slot via asymmetric segments
-    // (everything moves together, no gap), and let the number be dragged.
-    const L = getElevCustomLines().find(l => l.id === id);
-    const lblEl = dim.querySelector('.arch-label-new');
-    if (lblEl && L) {
-        const lblOffPx = ((L.lblOff || 0) * unitFactor('in', elevUnit)) * elevScale;
-        const segs = dim.querySelectorAll('.dim-line-segment, .dim-line-segment-v');
-        if (segs.length === 2) {
-            if (type === 'h') {
-                segs[0].style.flex = `1 1 calc(50% + ${lblOffPx}px)`;
-                segs[1].style.flex = `1 1 calc(50% - ${lblOffPx}px)`;
-            } else {
-                segs[0].style.flex = `1 1 calc(50% - ${lblOffPx}px)`;
-                segs[1].style.flex = `1 1 calc(50% + ${lblOffPx}px)`;
-            }
-        }
-        lblEl.style.cursor = 'move';
-        lblEl.style.pointerEvents = 'auto';
-        lblEl.style.position = 'relative';
-        lblEl.style.zIndex = '56';
-        lblEl.addEventListener('mousedown', (e) => {
-            if (lineToolActive) return;
-            e.preventDefault(); e.stopPropagation();
-            selectedCustomLine = id;
-            const startX = e.clientX, startY = e.clientY;
-            const toIn = unitFactor(elevUnit, 'in');
-            const startOff = L.lblOff || 0; // inches
-            document.body.style.cursor = 'move';
-            const onMove = (mv) => {
-                let deltaIn;
-                if (type === 'h') deltaIn = ((mv.clientX - startX) / elevScale) * toIn;
-                else deltaIn = (-(mv.clientY - startY) / elevScale) * toIn; // up = +
-                L.lblOff = startOff + deltaIn;
-                drawElevAll();
-            };
-            const onUp = () => {
-                document.removeEventListener('mousemove', onMove);
-                document.removeEventListener('mouseup', onUp);
-                document.body.style.cursor = '';
-                if (typeof pushHistory === 'function') pushHistory();
-            };
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('mouseup', onUp);
+    // Unified 4-way controls + select + ×, same as the other dim types.
+    if (L) {
+        const spanPx = spanLen * elevScale;
+        const inFromStore = unitFactor('in', elevUnit);
+        const toStore = unitFactor(elevUnit, 'in');
+        buildDimControls({
+            dim, type, container: layer,
+            id,
+            isSelected: () => selectedCustomLine === id,
+            select: () => { selectedCustomLine = id; selectedDimId = null; },
+            getLabelOff: () => (L.lblOff || 0) * inFromStore,        // inches→cur
+            setLabelOff: (v) => { L.lblOff = v * toStore; },
+            getLineOff: () => (L.off || 0) * inFromStore,
+            setLineOff: (v) => { L.off = v * toStore; },
+            onDelete: () => deleteCustomLine(id),
+            spanPx,
         });
     }
-
-    // × delete button (excluded from export).
-    const del = document.createElement('div');
-    del.className = 'custom-line-delete';
-    del.setAttribute('data-export-skip', '1');
-    del.setAttribute('data-html2canvas-ignore', 'true');
-    del.textContent = '×';
-    del.title = 'Delete this line';
-    del.style.cssText =
-        'position:absolute; width:16px; height:16px; line-height:14px; text-align:center; border-radius:50%;' +
-        'background:var(--dim-color); color:#fff; font-size:13px; font-weight:bold; cursor:pointer;' +
-        'z-index:61; opacity:' + (sel ? '0.95' : '0') + '; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
-        (type === 'h' ? 'right:-8px; top:50%; transform:translateY(-50%);' : 'left:50%; top:-8px; transform:translateX(-50%);');
-    del.onclick = (e) => { e.stopPropagation(); };
-    del.addEventListener('mousedown', (e) => {
-        // Run on mousedown + stop propagation so the parent line's drag-start
-        // handler doesn't fire (which would redraw and swallow the click).
-        e.stopPropagation();
-        e.preventDefault();
-        deleteCustomLine(id);
-    });
-    dim.appendChild(del);
-    dim.addEventListener('mouseenter', () => { if (!sel) del.style.opacity = '0.6'; });
-    dim.addEventListener('mouseleave', () => { if (!sel) del.style.opacity = '0'; });
-
-    // Arrow chevron drag handle (matches the other dimension lines).
-    const grip = document.createElement('div');
-    grip.className = 'dim-drag-grip';
-    grip.setAttribute('data-export-skip', '1');
-    grip.setAttribute('data-html2canvas-ignore', 'true');
-    const chev = (dir) => {
-        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
-        return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-    };
-    if (type === 'h') {
-        grip.style.cssText = `position:absolute; left:calc(50% + ${((L&&L.lblOff)||0)*unitFactor('in',elevUnit)*elevScale}px); top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; line-height:0; cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;`;
-        grip.innerHTML = chev('up') + chev('down');
-    } else {
-        grip.style.cssText = `position:absolute; left:50%; top:calc(50% - ${((L&&L.lblOff)||0)*unitFactor('in',elevUnit)*elevScale}px); transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0; cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;`;
-        grip.innerHTML = chev('left') + chev('right');
-    }
-    grip.onmouseenter = () => { grip.style.opacity = '1'; };
-    grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
-    grip.addEventListener('mousedown', (e) => {
-        if (lineToolActive) return;
-        e.stopPropagation();
-        selectedCustomLine = id;
-        startCustomLineDrag(e, id);
-        drawElevAll();
-    });
-    dim.appendChild(grip);
 
     layer.appendChild(dim);
 }
@@ -9661,69 +9587,169 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
             });
         }
     }
-    // Draggable grip handle (perpendicular slide). Lower z so it sits BEHIND
-    // the number. We pass the label-along offset so the arrows follow the
-    // number when it's slid along the line.
-    const lblOffPx = dimId ? getLabelOffset(dimId) * elevScale : 0;
-    if (dimId) attachDimDragHandle(dim, type, dimId, lblOffPx);
-    // Label slide-along-line + hover-reveal × delete, grouped at the number so
-    // the × is reachable (the dim strip itself is too thin to hover toward).
+    // Unified 4-way controls (arrows around the number + select + ×). The
+    // line's pixel span sets the clamp so the number can't slide past the ends.
     if (dimId) {
-        const lblEl = dim.querySelector('.arch-label-new');
-        if (lblEl) {
-            // Move the number's SLOT along the line by making the two line
-            // segments asymmetric (no gap left behind — the line stays whole on
-            // both sides). For h: positive offset → label moves right → left
-            // segment grows. For v: the flex column is bottom→top in DOM order
-            // but renders top→bottom, so positive (up) grows the second seg.
-            const segs = dim.querySelectorAll('.dim-line-segment, .dim-line-segment-v');
-            if (segs.length === 2) {
-                // Express offset as a flex-basis nudge in px on each side.
-                const half = lblOffPx; // px to bias toward one side
-                if (type === 'h') {
-                    segs[0].style.flex = `1 1 calc(50% + ${half}px)`;
-                    segs[1].style.flex = `1 1 calc(50% - ${half}px)`;
-                } else {
-                    // vertical column: DOM order top→bottom; up = +offset means
-                    // label moves up → top segment (segs[0]) shrinks.
-                    segs[0].style.flex = `1 1 calc(50% - ${half}px)`;
-                    segs[1].style.flex = `1 1 calc(50% + ${half}px)`;
-                }
-            }
-            lblEl.style.cursor = 'move';
-            lblEl.style.pointerEvents = 'auto';
-            lblEl.style.position = 'relative';
-            lblEl.style.zIndex = '56'; // above the arrow grip (50)
-            attachLabelDrag(lblEl, type, dimId);
-
-            // × hide button attached to the label, revealed when hovering the
-            // label (a real, hoverable target — unlike the 1px line).
-            const del = document.createElement('div');
-            del.className = 'dim-hide-x';
-            del.setAttribute('data-export-skip', '1');
-            del.setAttribute('data-html2canvas-ignore', 'true');
-            del.textContent = '×';
-            del.title = 'Hide this dimension';
-            del.style.cssText =
-                'position:absolute; width:15px; height:15px; line-height:13px; text-align:center; border-radius:50%;' +
-                'background:var(--dim-color); color:#fff; font-size:12px; font-weight:bold; cursor:pointer;' +
-                'z-index:57; opacity:0; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
-                'left:100%; top:50%; transform:translate(4px,-50%);';
-            del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); hideDim(dimId); });
-            lblEl.appendChild(del);
-            // Reveal × while hovering the label OR the × itself; a tiny grace
-            // delay so moving from number → × doesn't drop it.
-            let hideTimer = null;
-            const show = () => { if (hideTimer) clearTimeout(hideTimer); del.style.opacity = '0.85'; };
-            const hide = () => { hideTimer = setTimeout(() => { del.style.opacity = '0'; }, 250); };
-            lblEl.addEventListener('mouseenter', show);
-            lblEl.addEventListener('mouseleave', hide);
-            del.addEventListener('mouseenter', show);
-            del.addEventListener('mouseleave', hide);
-        }
+        const spanPx = (type === 'h') ? Math.abs(x2 - x1) * elevScale : Math.abs(y2 - y1) * elevScale;
+        buildDimControls({
+            dim, type, container,
+            id: dimId,
+            isSelected: () => selectedDimId === dimId,
+            select: () => { selectedDimId = dimId; selectedCustomLine = null; },
+            getLabelOff: () => getLabelOffset(dimId),          // current unit
+            setLabelOff: (v) => setLabelOffset(dimId, v),
+            getLineOff: () => getDimOffset(dimId),
+            setLineOff: (v) => setDimOffset(dimId, snapDimOffset(v, dimId).value),
+            onDelete: () => hideDim(dimId),
+            spanPx,
+        });
     }
     container.appendChild(dim);
 }
+
+// ── UNIFIED DIMENSION CONTROLS ──────────────────────────────────────────────
+// Builds a consistent control scheme for any measurement line:
+//  • 4 arrows locked around the number/box (L,R,U,D)
+//  • horizontal line: L/R move the number along the line, U/D move the line
+//  • vertical line:   U/D move the number along the line, L/R move the line
+//  • number slide is clamped so it can't pass the line's ends
+//  • click to select (highlight + ×), × deletes/hides
+// opts: { dim, type, container, id, isSelected, select, getLabelOff, setLabelOff,
+//         getLineOff, setLineOff, onDelete, spanPx }
+function buildDimControls(opts) {
+    const { dim, type, id, isSelected, select, getLabelOff, setLabelOff,
+            getLineOff, setLineOff, onDelete, spanPx } = opts;
+    const sel = isSelected();
+    const lblEl = dim.querySelector('.arch-label-new');
+    if (!lblEl) return;
+
+    // Clamp helper: keep the number within the line ends (with a margin).
+    const halfSpan = Math.max(0, spanPx / 2 - 14); // 14px margin from each end
+    const clampLabel = (vCurUnit) => {
+        const px = vCurUnit * elevScale;
+        const cl = Math.max(-halfSpan, Math.min(halfSpan, px));
+        return cl / elevScale;
+    };
+
+    // Apply the current label-along offset (clamped to the line) by biasing the
+    // two line segments (no gap left behind).
+    const lblOffPx0 = clampLabel(getLabelOff()) * elevScale;
+    const segs = dim.querySelectorAll('.dim-line-segment, .dim-line-segment-v');
+    if (segs.length === 2) {
+        if (type === 'h') {
+            segs[0].style.flex = `1 1 calc(50% + ${lblOffPx0}px)`;
+            segs[1].style.flex = `1 1 calc(50% - ${lblOffPx0}px)`;
+        } else {
+            segs[0].style.flex = `1 1 calc(50% - ${lblOffPx0}px)`;
+            segs[1].style.flex = `1 1 calc(50% + ${lblOffPx0}px)`;
+        }
+    }
+    lblEl.style.position = 'relative';
+    lblEl.style.zIndex = '56';
+    lblEl.style.cursor = 'pointer';
+    lblEl.style.pointerEvents = 'auto';
+    if (sel) dim.style.outline = '1px dashed var(--accent,#3b82f6)';
+
+    // Click number to select.
+    lblEl.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        select();
+        drawElevAll();
+    });
+
+    // The 4 arrows, locked just outside the box edges.
+    const chevron = (dir, w) => {
+        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
+        return `<svg viewBox="0 0 16 16" width="${w||13}" height="${w||13}" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+    // mover: which axis each arrow drives depends on the line orientation.
+    // horizontal line → L/R = number(along), U/D = line(perp)
+    // vertical line   → U/D = number(along), L/R = line(perp)
+    const makeArrow = (dir) => {
+        const a = document.createElement('div');
+        a.className = 'dim-arrow';
+        a.setAttribute('data-export-skip', '1');
+        a.setAttribute('data-html2canvas-ignore', 'true');
+        const isNumberAxis = (type === 'h') ? (dir === 'left' || dir === 'right')
+                                            : (dir === 'up' || dir === 'down');
+        const cur = (dir === 'left' || dir === 'right') ? 'ew-resize' : 'ns-resize';
+        // Position locked to the box edge.
+        const pos = {
+            left:  'right:100%; top:50%; transform:translateY(-50%); margin-right:3px;',
+            right: 'left:100%; top:50%; transform:translateY(-50%); margin-left:3px;',
+            up:    'bottom:100%; left:50%; transform:translateX(-50%); margin-bottom:3px;',
+            down:  'top:100%; left:50%; transform:translateX(-50%); margin-top:3px;',
+        }[dir];
+        a.style.cssText = `position:absolute; ${pos} z-index:58; pointer-events:auto; cursor:${cur};`
+            + `opacity:${sel ? '0.9' : '0.35'}; transition:opacity 0.12s; line-height:0;`;
+        a.innerHTML = chevron(dir);
+        a.onmouseenter = () => { a.style.opacity = '1'; };
+        a.onmouseleave = () => { a.style.opacity = sel ? '0.9' : '0.35'; };
+        a.addEventListener('mousedown', (e) => {
+            e.preventDefault(); e.stopPropagation();
+            select(); 
+            const startX = e.clientX, startY = e.clientY;
+            const startLabel = getLabelOff();
+            const startLine = getLineOff();
+            document.body.style.cursor = cur;
+            const onMove = (mv) => {
+                const dxIn = (mv.clientX - startX) / elevScale;
+                const dyIn = (mv.clientY - startY) / elevScale;
+                if (isNumberAxis) {
+                    // move the number along the line
+                    let v;
+                    if (type === 'h') v = startLabel + dxIn;       // L/R
+                    else v = startLabel - dyIn;                    // U/D (up=+)
+                    setLabelOff(clampLabel(v));
+                } else {
+                    // move the whole line (perpendicular)
+                    let v;
+                    if (type === 'h') v = startLine - dyIn;        // U/D
+                    else v = startLine + dxIn;                     // L/R
+                    setLineOff(v);
+                }
+                drawElevAll();
+            };
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.body.style.cursor = '';
+                if (typeof pushHistory === 'function') pushHistory();
+            };
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        });
+        return a;
+    };
+    ['left','right','up','down'].forEach(d => lblEl.appendChild(makeArrow(d)));
+
+    // × delete — shown when selected or hovering the number.
+    const del = document.createElement('div');
+    del.className = 'dim-hide-x';
+    del.setAttribute('data-export-skip', '1');
+    del.setAttribute('data-html2canvas-ignore', 'true');
+    del.textContent = '×';
+    del.title = 'Delete this dimension';
+    del.style.cssText =
+        'position:absolute; width:15px; height:15px; line-height:13px; text-align:center; border-radius:50%;' +
+        'background:var(--dim-color); color:#fff; font-size:12px; font-weight:bold; cursor:pointer;' +
+        'z-index:59; opacity:' + (sel ? '0.95' : '0') + '; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
+        'left:100%; bottom:100%; transform:translate(2px,4px);';
+    del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); onDelete(); });
+    lblEl.appendChild(del);
+    if (!sel) {
+        let t = null;
+        const show = () => { if (t) clearTimeout(t); del.style.opacity = '0.85'; };
+        const hide = () => { t = setTimeout(() => { if (!isSelected()) del.style.opacity = '0'; }, 250); };
+        lblEl.addEventListener('mouseenter', show);
+        lblEl.addEventListener('mouseleave', hide);
+        del.addEventListener('mouseenter', show);
+        del.addEventListener('mouseleave', hide);
+    }
+}
+
+// Drag the number/label ALONG the line (h-dim: left/right; v-dim: up/down) to
+// separate overlapping numbers. Updates the label-along offset for dimId.
 
 // Drag the number/label ALONG the line (h-dim: left/right; v-dim: up/down) to
 // separate overlapping numbers. Updates the label-along offset for dimId.
