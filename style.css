@@ -1235,3 +1235,9 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
  * via data-export-skip / data-html2canvas-ignore. */
 .dim-drag-grip { pointer-events: auto; }
 .arch-dim:hover .dim-drag-grip { opacity: 0.85; }
+
+/* Custom measured-line tool button active state */
+#lineToolBtn.active { background: var(--accent, #3b82f6); color: #fff; border-color: var(--accent, #3b82f6); }
+#lineToolBtn.active .svg-icon { stroke: #fff; }
+.custom-line { pointer-events: auto; cursor: move; }
+.custom-line .arch-label-new { pointer-events: auto; }
