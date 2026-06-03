@@ -836,7 +836,8 @@ body.dragging-frame .frame-vis:hover {
 
 /* All grid layers hidden by default */
 #label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
-.dim-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 20; }
+.dim-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
+#frame-layer { position: absolute; inset: 0; z-index: 18; }
 /* Guide layer (wall-center + hang-height lines + floor-to-hang dim) sits
  * ABOVE frames (z-index 10) so these reference lines read over the artwork.
  * The dimension layers above sit even higher so dim callouts win over the
@@ -846,7 +847,7 @@ body.dragging-frame .frame-vis:hover {
  * doesn't block frame interaction; only the delete (×) buttons inside opt
  * back into pointer-events. Slightly higher z-index so dashed boxes read
  * above frames. */
-.group-dim-layer { position: absolute; inset: 0; pointer-events: none; z-index: 21; }
+.group-dim-layer { position: absolute; inset: 0; pointer-events: none; z-index: 31; }
 .group-dim-layer > div[title] { pointer-events: auto; }
 .grid-layer { z-index: 2; } 
 
