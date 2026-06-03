@@ -2928,11 +2928,16 @@ function applyDuplicateSeries() {
 function addDashRow() {
     const newRow = JSON.parse(JSON.stringify(dashDefaultData)); 
     newRow.id = generateNextItemCode();
-    // Defaults in inches, converted to whatever the current unit is.
+    // dashDefaultData holds INCH values. Convert every dimensional (length)
+    // field to the current unit so a fresh item is the same physical size
+    // regardless of the active unit (e.g. a 3" mat stays 3" → ~76mm in mm).
     const _f = unitFactor('in', dashUnit);
-    newRow.extW = dashFmt(24 * _f); 
-    newRow.extH = dashFmt(24 * _f); 
-    newRow.fW = dashFmt(0.75 * _f);
+    const lenFields = ['extW','extH','fW','fHeight','rabbetDepth','bleed','floaterInset',
+        'sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2'];
+    lenFields.forEach(k => {
+        const v = parseFloat(newRow[k]);
+        if (!isNaN(v)) newRow[k] = dashFmt(v * _f);
+    });
     newRow.fType = "color"; newRow.fColor = "#000000"; newRow.fCode = "Standard Black";
     
     // Insert right after the currently-selected row (so the new row appears
@@ -8874,10 +8879,18 @@ function drawElevGuides(wallW, wallH) {
         // the left, vertically centered on the dashed line. Because it's a
         // child of the hang line (positioned at the hang height), it always
         // tracks the line when the hang height changes.
+        const ceHL = elevations[currentElevIndex];
+        const hangLabelYOff = (ceHL && typeof ceHL.hangLabelYOffset === 'number') ? ceHL.hangLabelYOffset : 0;
         const hl = document.createElement('div'); hl.className = 'hang-guide';
         hl.style.bottom = (hangVal * elevScale) + 'px';
-        hl.innerHTML = `<span class="hang-label">HANG HEIGHT</span>`;
+        // The "HANG HEIGHT" word can be nudged up/down to avoid colliding with
+        // the wall-height dimension (notably in mm). Offset stored in inches
+        // and applied to the label's `top` (its transform is used by CSS for
+        // the vertical rotation, so we must not override it).
+        const hlYpx = hangLabelYOff * unitFactor('in', elevUnit) * elevScale;
+        hl.innerHTML = `<span class="hang-label" style="top:calc(50% - ${hlYpx}px); cursor:ns-resize; pointer-events:auto;">HANG HEIGHT</span>`;
         guideLayer.appendChild(hl);
+        attachHangLabelDrag(hl, hl.querySelector('.hang-label'), hlYpx);
 
         // Floor-to-hangline vertical dimension. Shows the hang height as a
         // measured callout from the floor up to the hang line. Positioned a
@@ -9363,6 +9376,62 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
     }
 
     layer.appendChild(dim);
+}
+
+// Drag the "HANG HEIGHT" word up/down (stored as hangLabelYOffset, inches) so
+// it can be moved clear of the wall-height dimension. Up/down arrows are placed
+// on the (unrotated) hang-guide next to the label.
+function attachHangLabelDrag(guide, lbl, lblYpx) {
+    if (!lbl) return;
+    const ce = elevations[currentElevIndex];
+    const toIn = unitFactor(elevUnit, 'in');
+    const startDrag = (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const startY = e.clientY;
+        const startOff = (ce && typeof ce.hangLabelYOffset === 'number') ? ce.hangLabelYOffset : 0;
+        document.body.style.cursor = 'ns-resize';
+        const onMove = (mv) => {
+            const dIn = (-(mv.clientY - startY) / elevScale) * toIn; // up = +
+            if (ce) ce.hangLabelYOffset = startOff + dIn;
+            drawElevAll();
+        };
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.body.style.cursor = '';
+            if (typeof pushHistory === 'function') pushHistory();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    };
+    lbl.addEventListener('mousedown', startDrag);
+
+    // Up/down arrows on the unrotated guide, next to the label. The label sits
+    // OUTSIDE the wall on the left (right:100%); place the arrows just left of
+    // it, stacked vertically, centered on the label's current vertical offset.
+    const chev = (dir) => {
+        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5' }[dir];
+        return `<svg viewBox="0 0 16 16" width="12" height="12" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+    const mkArrow = (dir) => {
+        const a = document.createElement('div');
+        a.className = 'dim-arrow';
+        a.setAttribute('data-export-skip', '1');
+        a.setAttribute('data-html2canvas-ignore', 'true');
+        // guide is full-width with the dashed line at top; the label is at
+        // right:100% (just left of the wall). Put arrows a bit further left,
+        // vertically offset by the label's current shift.
+        const yShift = -(lblYpx || 0);
+        const vy = (dir === 'up') ? (yShift - 12) : (yShift + 12);
+        a.style.cssText = `position:absolute; right:calc(100% + 64px); top:calc(0px + ${vy}px); transform:translateY(-50%); z-index:58; pointer-events:auto; cursor:ns-resize; opacity:0.5; transition:opacity 0.12s; line-height:0;`;
+        a.innerHTML = chev(dir);
+        a.onmouseenter = () => { a.style.opacity = '1'; };
+        a.onmouseleave = () => { a.style.opacity = '0.5'; };
+        a.addEventListener('mousedown', startDrag);
+        return a;
+    };
+    guide.appendChild(mkArrow('up'));
+    guide.appendChild(mkArrow('down'));
 }
 
 // 4-way control for the floor-to-hang dimension. Arrows are attached to the
