@@ -9288,14 +9288,61 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
     }
 
-    // Click to select.
+    // Click to select + drag the whole line (but NOT when grabbing the number).
     dim.addEventListener('mousedown', (e) => {
         if (lineToolActive) return; // don't select while drawing
+        if (e.target.closest('.arch-label-new')) return; // number handles its own drag
         e.stopPropagation();
         selectedCustomLine = id;
         startCustomLineDrag(e, id);
         drawElevAll();
     });
+
+    // Number slide-along-line: shift the label's slot via asymmetric segments
+    // (everything moves together, no gap), and let the number be dragged.
+    const L = getElevCustomLines().find(l => l.id === id);
+    const lblEl = dim.querySelector('.arch-label-new');
+    if (lblEl && L) {
+        const lblOffPx = ((L.lblOff || 0) * unitFactor('in', elevUnit)) * elevScale;
+        const segs = dim.querySelectorAll('.dim-line-segment, .dim-line-segment-v');
+        if (segs.length === 2) {
+            if (type === 'h') {
+                segs[0].style.flex = `1 1 calc(50% + ${lblOffPx}px)`;
+                segs[1].style.flex = `1 1 calc(50% - ${lblOffPx}px)`;
+            } else {
+                segs[0].style.flex = `1 1 calc(50% - ${lblOffPx}px)`;
+                segs[1].style.flex = `1 1 calc(50% + ${lblOffPx}px)`;
+            }
+        }
+        lblEl.style.cursor = 'move';
+        lblEl.style.pointerEvents = 'auto';
+        lblEl.style.position = 'relative';
+        lblEl.style.zIndex = '56';
+        lblEl.addEventListener('mousedown', (e) => {
+            if (lineToolActive) return;
+            e.preventDefault(); e.stopPropagation();
+            selectedCustomLine = id;
+            const startX = e.clientX, startY = e.clientY;
+            const toIn = unitFactor(elevUnit, 'in');
+            const startOff = L.lblOff || 0; // inches
+            document.body.style.cursor = 'move';
+            const onMove = (mv) => {
+                let deltaIn;
+                if (type === 'h') deltaIn = ((mv.clientX - startX) / elevScale) * toIn;
+                else deltaIn = (-(mv.clientY - startY) / elevScale) * toIn; // up = +
+                L.lblOff = startOff + deltaIn;
+                drawElevAll();
+            };
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.body.style.cursor = '';
+                if (typeof pushHistory === 'function') pushHistory();
+            };
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        });
+    }
 
     // × delete button (excluded from export).
     const del = document.createElement('div');
@@ -9331,10 +9378,10 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
         return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     };
     if (type === 'h') {
-        grip.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; line-height:0; cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+        grip.style.cssText = `position:absolute; left:calc(50% + ${((L&&L.lblOff)||0)*unitFactor('in',elevUnit)*elevScale}px); top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; line-height:0; cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;`;
         grip.innerHTML = chev('up') + chev('down');
     } else {
-        grip.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0; cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+        grip.style.cssText = `position:absolute; left:50%; top:calc(50% - ${((L&&L.lblOff)||0)*unitFactor('in',elevUnit)*elevScale}px); transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0; cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;`;
         grip.innerHTML = chev('left') + chev('right');
     }
     grip.onmouseenter = () => { grip.style.opacity = '1'; };
@@ -9614,18 +9661,35 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
             });
         }
     }
-    // Draggable grip handle (perpendicular slide). Only for dims with an id.
-    // Lower z so it sits BEHIND the number — the label must win pointer events
-    // so the number can be grabbed and dragged along the line.
-    if (dimId) attachDimDragHandle(dim, type, dimId);
+    // Draggable grip handle (perpendicular slide). Lower z so it sits BEHIND
+    // the number. We pass the label-along offset so the arrows follow the
+    // number when it's slid along the line.
+    const lblOffPx = dimId ? getLabelOffset(dimId) * elevScale : 0;
+    if (dimId) attachDimDragHandle(dim, type, dimId, lblOffPx);
     // Label slide-along-line + hover-reveal × delete, grouped at the number so
     // the × is reachable (the dim strip itself is too thin to hover toward).
     if (dimId) {
         const lblEl = dim.querySelector('.arch-label-new');
         if (lblEl) {
-            const lblOff = getLabelOffset(dimId) * elevScale; // px along line
-            if (type === 'h') lblEl.style.transform = `translateX(${lblOff}px)`;
-            else lblEl.style.transform = `translateY(${-lblOff}px)`; // up = +offset
+            // Move the number's SLOT along the line by making the two line
+            // segments asymmetric (no gap left behind — the line stays whole on
+            // both sides). For h: positive offset → label moves right → left
+            // segment grows. For v: the flex column is bottom→top in DOM order
+            // but renders top→bottom, so positive (up) grows the second seg.
+            const segs = dim.querySelectorAll('.dim-line-segment, .dim-line-segment-v');
+            if (segs.length === 2) {
+                // Express offset as a flex-basis nudge in px on each side.
+                const half = lblOffPx; // px to bias toward one side
+                if (type === 'h') {
+                    segs[0].style.flex = `1 1 calc(50% + ${half}px)`;
+                    segs[1].style.flex = `1 1 calc(50% - ${half}px)`;
+                } else {
+                    // vertical column: DOM order top→bottom; up = +offset means
+                    // label moves up → top segment (segs[0]) shrinks.
+                    segs[0].style.flex = `1 1 calc(50% - ${half}px)`;
+                    segs[1].style.flex = `1 1 calc(50% + ${half}px)`;
+                }
+            }
             lblEl.style.cursor = 'move';
             lblEl.style.pointerEvents = 'auto';
             lblEl.style.position = 'relative';
@@ -9696,7 +9760,8 @@ function attachLabelDrag(lblEl, type, dimId) {
 // (drag up/down) get stacked up/down chevrons at the midpoint. Vertical lines
 // (drag left/right) get left/right chevrons flanking the number. Faded at
 // rest, prominent on hover. Excluded from exports. Value never changes.
-function attachDimDragHandle(dim, type, dimId) {
+function attachDimDragHandle(dim, type, dimId, lblOffPx) {
+    lblOffPx = lblOffPx || 0;
     const grip = document.createElement('div');
     grip.className = 'dim-drag-grip';
     grip.setAttribute('data-export-skip', '1');
@@ -9715,9 +9780,10 @@ function attachDimDragHandle(dim, type, dimId) {
     };
 
     if (type === 'h') {
-        // Stacked up/down chevrons, centered on the line.
+        // Stacked up/down chevrons, centered on the line + label offset so they
+        // follow the number when it's slid along the line.
         grip.style.cssText =
-            'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);' +
+            `position:absolute; left:calc(50% + ${lblOffPx}px); top:50%; transform:translate(-50%,-50%);` +
             'display:flex; flex-direction:column; align-items:center; line-height:0;' +
             'cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
         grip.innerHTML = chevron('up') + chevron('down');
@@ -9725,8 +9791,9 @@ function attachDimDragHandle(dim, type, dimId) {
         // Left/right chevrons flanking the number; gap sized to the label
         // width so the arrows stay just OUTSIDE the white box as it grows or
         // shrinks (e.g. unit changes). Measured once the dim is in the DOM.
+        // top offset follows the number along the vertical line (up = +).
         grip.style.cssText =
-            'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);' +
+            `position:absolute; left:50%; top:calc(50% - ${lblOffPx}px); transform:translate(-50%,-50%);` +
             'display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0;' +
             'cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
         grip.innerHTML = chevron('left') + chevron('right');
