@@ -9723,28 +9723,40 @@ function buildDimControls(opts) {
     };
     ['left','right','up','down'].forEach(d => lblEl.appendChild(makeArrow(d)));
 
-    // × delete — shown when selected or hovering the number.
-    const del = document.createElement('div');
-    del.className = 'dim-hide-x';
-    del.setAttribute('data-export-skip', '1');
-    del.setAttribute('data-html2canvas-ignore', 'true');
-    del.textContent = '×';
-    del.title = 'Delete this dimension';
-    del.style.cssText =
-        'position:absolute; width:15px; height:15px; line-height:13px; text-align:center; border-radius:50%;' +
-        'background:var(--dim-color); color:#fff; font-size:12px; font-weight:bold; cursor:pointer;' +
-        'z-index:59; opacity:' + (sel ? '0.95' : '0') + '; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
-        'left:100%; bottom:100%; transform:translate(2px,4px);';
-    del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); onDelete(); });
-    lblEl.appendChild(del);
-    if (!sel) {
-        let t = null;
-        const show = () => { if (t) clearTimeout(t); del.style.opacity = '0.85'; };
-        const hide = () => { t = setTimeout(() => { if (!isSelected()) del.style.opacity = '0'; }, 250); };
-        lblEl.addEventListener('mouseenter', show);
-        lblEl.addEventListener('mouseleave', hide);
-        del.addEventListener('mouseenter', show);
-        del.addEventListener('mouseleave', hide);
+    // Fat transparent hit-strip so the whole (thin) line is clickable to
+    // select — like the custom drawn lines. Sits behind the number/arrows.
+    const hit = document.createElement('div');
+    hit.setAttribute('data-export-skip', '1');
+    hit.setAttribute('data-html2canvas-ignore', 'true');
+    hit.style.cssText = (type === 'h')
+        ? 'position:absolute; left:0; right:0; top:50%; height:12px; transform:translateY(-50%); cursor:pointer; z-index:40;'
+        : 'position:absolute; top:0; bottom:0; left:50%; width:12px; transform:translateX(-50%); cursor:pointer; z-index:40;';
+    hit.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        select();
+        drawElevAll();
+    });
+    dim.insertBefore(hit, dim.firstChild);
+
+    // × delete — only when selected, positioned at the END of the line (far
+    // from the arrow cluster so it isn't hit by accident). Appended to the dim
+    // so it anchors to the line end, not the number.
+    if (sel) {
+        const del = document.createElement('div');
+        del.className = 'dim-hide-x';
+        del.setAttribute('data-export-skip', '1');
+        del.setAttribute('data-html2canvas-ignore', 'true');
+        del.textContent = '×';
+        del.title = 'Delete this dimension';
+        del.style.cssText =
+            'position:absolute; width:16px; height:16px; line-height:14px; text-align:center; border-radius:50%;' +
+            'background:var(--dim-color); color:#fff; font-size:13px; font-weight:bold; cursor:pointer;' +
+            'z-index:60; opacity:0.95; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
+            (type === 'h'
+                ? 'left:100%; top:50%; transform:translate(7px,-50%);'   // right end
+                : 'left:50%; bottom:100%; transform:translate(-50%,-7px);'); // top end
+        del.addEventListener('mousedown', (e) => { e.stopPropagation(); e.preventDefault(); onDelete(); });
+        dim.appendChild(del);
     }
 }
 
@@ -10602,8 +10614,21 @@ async function exportElevSVG() {
             if (cs.display === 'none' || cs.visibility === 'hidden') return;
             if (el.getAttribute && el.getAttribute('data-export-skip')) return; // editor-only control
 
-            const txt = (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3)
-                ? el.textContent.trim() : '';
+            // Text is the element's own direct text node(s), even if it also
+            // contains export-skipped children (arrows, × button). Previously
+            // this required exactly one child, so labels with arrow/X children
+            // emitted no text → blank gaps in the SVG.
+            let txt = '';
+            let hasElementChild = false;
+            for (const n of el.childNodes) {
+                if (n.nodeType === 3) txt += n.textContent;
+                else if (n.nodeType === 1) {
+                    // Ignore export-skipped helper children when deciding if
+                    // this is a "text element".
+                    if (!(n.getAttribute && n.getAttribute('data-export-skip'))) hasElementChild = true;
+                }
+            }
+            txt = hasElementChild ? '' : txt.trim();
 
             if (txt) {
                 // TEXT → front layer (always on top of lines).
