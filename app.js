@@ -8403,11 +8403,13 @@ function renderGroupDims() {
             layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, totalGap, 'dashed'));
             const wLblOffPx = getLabelOffset(wId) * elevScale;
             const wLbl = mkLabel(elevFmtU(bbox.w), boxLeft + boxW / 2 + wLblOffPx, lineY);
-            wLbl.style.pointerEvents = 'auto'; wLbl.style.cursor = 'move'; wLbl.style.zIndex = '7';
+            wLbl.style.pointerEvents = 'auto'; wLbl.style.cursor = 'move'; wLbl.style.zIndex = '52';
             attachGroupLabelDrag(wLbl, 'h', wId, boxW * 0.5 * elevScale);
             layer.appendChild(wLbl);
-            // Arrow drag handle (slides up/down) at the line midpoint.
-            attachGroupDimHandle(layer, 'h', wId, boxLeft + boxW / 2, lineY);
+            // Arrow drag handle (slides up/down) — nudged above the line so it
+            // doesn't sit under the number (which sits on the line and slides
+            // horizontally).
+            attachGroupDimHandle(layer, 'h', wId, boxLeft + boxW / 2, lineY - 16);
         }
 
         // ── HEIGHT dimension line (left of the box) — SOLID line, DASHED extensions ──
@@ -8425,11 +8427,12 @@ function renderGroupDims() {
             const hLblOffPx = getLabelOffset(hId) * elevScale; // up = +
             const hl = mkLabel(elevFmtU(bbox.h), lineX, boxTop + boxH / 2 - hLblOffPx);
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
-            hl.style.pointerEvents = 'auto'; hl.style.cursor = 'move'; hl.style.zIndex = '7';
+            hl.style.pointerEvents = 'auto'; hl.style.cursor = 'move'; hl.style.zIndex = '52';
             attachGroupLabelDrag(hl, 'v', hId, boxH * 0.5 * elevScale);
             layer.appendChild(hl);
-            // Arrow drag handle (slides left/right) at the line midpoint.
-            attachGroupDimHandle(layer, 'v', hId, lineX, boxTop + boxH / 2);
+            // Arrow drag handle (slides left/right) — nudged left of the line
+            // so it doesn't sit under the number.
+            attachGroupDimHandle(layer, 'v', hId, lineX - 16, boxTop + boxH / 2);
         }
 
         // ── Delete affordance: small × at the box's top-right corner. Tagged
