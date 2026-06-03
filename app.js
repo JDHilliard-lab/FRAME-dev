@@ -1034,7 +1034,12 @@ function initMasterApp() {
     const wallEl = document.getElementById('wall');
     if (wallEl) {
         wallEl.addEventListener('mousedown', function (e) {
-            if (lineToolActive) handleLineToolClick(e);
+            if (lineToolActive) { handleLineToolClick(e); return; }
+            // Click on empty space (not a custom line) deselects.
+            if (selectedCustomLine && !e.target.closest('.custom-line')) {
+                selectedCustomLine = null;
+                drawElevAll();
+            }
         }, true);
         // Live anchor-point indicator: blue dot snaps to the nearest anchor
         // while the measure tool is active.
@@ -1058,9 +1063,26 @@ function initMasterApp() {
         } else if ((e.key === 'Delete' || e.key === 'Backspace') && selectedCustomLine) {
             e.preventDefault();
             deleteCustomLine(selectedCustomLine);
-        } else if (e.key === 'Escape' && (lineToolActive || lineToolFirstPt)) {
+        } else if (selectedCustomLine && e.key.indexOf('Arrow') === 0) {
+            // Nudge the selected custom line's perpendicular offset.
+            e.preventDefault();
+            const L = getElevCustomLines().find(l => l.id === selectedCustomLine);
+            if (L) {
+                const stepIn = (e.shiftKey ? 5 : 1); // inches per press
+                if (L.type === 'h') {
+                    if (e.key === 'ArrowUp') L.off = (L.off || 0) + stepIn;
+                    else if (e.key === 'ArrowDown') L.off = (L.off || 0) - stepIn;
+                } else {
+                    if (e.key === 'ArrowRight') L.off = (L.off || 0) + stepIn;
+                    else if (e.key === 'ArrowLeft') L.off = (L.off || 0) - stepIn;
+                }
+                if (typeof pushHistory === 'function') pushHistory();
+                drawElevAll();
+            }
+        } else if (e.key === 'Escape' && (lineToolActive || lineToolFirstPt || selectedCustomLine)) {
             lineToolFirstPt = null;
             lineToolFirstAnchor = null;
+            selectedCustomLine = null;
             if (lineToolActive) toggleLineTool(false); else drawElevAll();
         }
     });
@@ -8312,6 +8334,14 @@ function renderGroupDims() {
             `border:${weight}px dashed ${color}; box-sizing:border-box;` +
             `pointer-events:none; z-index:1;`;
         layer.appendChild(rect);
+        // Small transparent hover zone around the × corner only (doesn't cover
+        // the whole box, so it won't block frame interaction underneath).
+        const hoverZone = document.createElement('div');
+        hoverZone.setAttribute('data-export-skip', '1');
+        hoverZone.setAttribute('data-html2canvas-ignore', 'true');
+        hoverZone.style.cssText =
+            `position:absolute; left:${boxLeft + boxW - 20}px; top:${boxTop - 20}px; width:40px; height:40px;` +
+            `pointer-events:auto; background:transparent; z-index:5;`;
 
         // mkLine: a straight line. `lineStyle` ('solid' | 'dashed') lets us
         // make dimension lines solid and extension lines dashed.
@@ -8405,10 +8435,15 @@ function renderGroupDims() {
             `position:absolute; left:${boxLeft + boxW - 9}px; top:${boxTop - 9}px;` +
             `width:18px; height:18px; line-height:16px; text-align:center; border-radius:50%;` +
             `background:${color}; color:#fff; font-size:14px; font-weight:bold; cursor:pointer;` +
-            `z-index:6; opacity:0.6; transition:opacity 0.15s; user-select:none; pointer-events:auto;`;
-        del.onmouseenter = () => { del.style.opacity = '1'; };
-        del.onmouseleave = () => { del.style.opacity = '0.6'; };
+            `z-index:6; opacity:0; transition:opacity 0.15s; user-select:none; pointer-events:auto;`;
+        const showDel = () => { del.style.opacity = '0.95'; };
+        const hideDel = () => { del.style.opacity = '0'; };
+        del.onmouseenter = showDel;
+        del.onmouseleave = hideDel;
+        hoverZone.onmouseenter = showDel;
+        hoverZone.onmouseleave = hideDel;
         del.onclick = (e) => { e.stopPropagation(); removeGroupDim(entry.id); };
+        layer.appendChild(hoverZone);
         layer.appendChild(del);
     });
 }
@@ -8807,10 +8842,12 @@ function drawElevGuides(wallW, wallH) {
 
         // Floor-to-hangline vertical dimension. Shows the hang height as a
         // measured callout from the floor up to the hang line. Positioned a
-        // small inset from the left wall edge so it doesn't overlap the
-        // wall-height arch dim that sits just outside the wall on the left.
-        // Shown whenever guides are visible (part of the guide layer).
-        const dimXIn = 8 * unitFactor('in', elevUnit); // inset from left edge
+        // small inset from the left wall edge, plus a user drag offset so it
+        // can be slid left/right (the HEIGHT VALUE stays controlled by
+        // settings — only the line's horizontal position moves).
+        const ce = elevations[currentElevIndex];
+        const hangDimOffIn = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
+        const dimXIn = 8 * unitFactor('in', elevUnit) + hangDimOffIn * unitFactor('in', elevUnit);
         const dimXpx = dimXIn * elevScale;
         const hangPx = hangVal * elevScale;
         const TICK = 6;
@@ -8830,6 +8867,7 @@ function drawElevGuides(wallW, wallH) {
             // the number, centered between the line ends (rotated to read
             // along the vertical line). HANG HEIGHT wording is on the hang line.
             `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmtU(hangVal)}</div>`;
+        attachHangDimHandle(fh);
         guideLayer.appendChild(fh);
     }
     
@@ -8959,7 +8997,15 @@ function resolveAnchor(a) {
     const xcVal = (x, w, xc) => xc === 'x0' ? x : xc === 'x1' ? x + w : x + w / 2;
     const ycVal = (y, h, yc) => yc === 'y0' ? y : yc === 'y1' ? y + h : y + h / 2;
     if (a.ref === 'wall') {
-        return { x: xcVal(0, elevResolvedWallW, a.xc), y: ycVal(0, elevResolvedWallH, a.yc) };
+        // Wall-edge anchors may have one free axis (snapped along the edge).
+        // The free coordinate is stored in inches; convert to current unit.
+        const inFromStore = unitFactor('in', elevUnit);
+        let x, y;
+        if (a.xc === 'xfree') x = (typeof a.x === 'number' ? a.x * inFromStore : 0);
+        else x = xcVal(0, elevResolvedWallW, a.xc);
+        if (a.yc === 'yfree') y = (typeof a.y === 'number' ? a.y * inFromStore : 0);
+        else y = ycVal(0, elevResolvedWallH, a.yc);
+        return { x, y };
     }
     if (a.ref === 'frame') {
         const f = elevFrames.find(fr => fr.letter === a.letter && fr.active);
@@ -8969,16 +9015,30 @@ function resolveAnchor(a) {
     return (typeof a.x === 'number' && typeof a.y === 'number') ? { x: a.x, y: a.y } : null;
 }
 // Nearest anchor point to a given inches position, within tolerance. Returns
-// the tagged anchor (with ref/letter/xc/yc + x/y) or null.
+// the tagged anchor (with ref/letter/xc/yc + x/y) or null. Also snaps to a
+// point anywhere ALONG a wall outer edge (projected), so the blue dot appears
+// on the wall edges just like on frames.
 function nearestAnchorPoint(xIn, yIn) {
-    const tolIn = 6; // ~6" capture radius (generous; feels magnetic)
+    const tolIn = 6; // ~6" capture radius
     let best = tolIn, found = null;
     anchorPointsForSnap().forEach(pt => {
         const d = Math.hypot(pt.x - xIn, pt.y - yIn);
         if (d < best) { best = d; found = pt; }
     });
+    // Wall-edge projection: if near a wall edge but not a discrete anchor,
+    // snap onto the edge at the cursor's position along it.
+    const W = elevResolvedWallW, H = elevResolvedWallH;
+    const edgeTol = 6;
+    const consider = (cand, dist) => { if (dist < best) { best = dist; found = cand; } };
+    // left/right edges (vertical): x fixed, y free
+    if (xIn >= -edgeTol && xIn <= edgeTol) consider({ x:0, y: clamp(yIn,0,H), ref:'wall', xc:'x0', yc:'yfree', yfree:true }, Math.abs(xIn - 0));
+    if (Math.abs(xIn - W) <= edgeTol)      consider({ x:W, y: clamp(yIn,0,H), ref:'wall', xc:'x1', yc:'yfree', yfree:true }, Math.abs(xIn - W));
+    // floor/ceiling edges (horizontal): y fixed, x free
+    if (yIn >= -edgeTol && yIn <= edgeTol) consider({ x: clamp(xIn,0,W), y:0, ref:'wall', xc:'xfree', yc:'y0', xfree:true }, Math.abs(yIn - 0));
+    if (Math.abs(yIn - H) <= edgeTol)      consider({ x: clamp(xIn,0,W), y:H, ref:'wall', xc:'xfree', yc:'y1', xfree:true }, Math.abs(yIn - H));
     return found;
 }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 function snapCoord(val, candidates) {
     let best = 1.0, snapped = val;
     candidates.forEach(c => { const d = Math.abs(c - val); if (d < best) { best = d; snapped = c; } });
@@ -9029,9 +9089,16 @@ function handleLineToolClick(e) {
 // Keep only the reference fields (+ a fixed x/y fallback in inches) for storage.
 function stripAnchor(a) {
     if (a.ref === 'frame') return { ref: 'frame', letter: a.letter, xc: a.xc, yc: a.yc };
-    if (a.ref === 'wall')  return { ref: 'wall', xc: a.xc, yc: a.yc };
+    if (a.ref === 'wall') {
+        const toIn = unitFactor(elevUnit, 'in');
+        const out = { ref: 'wall', xc: a.xc, yc: a.yc };
+        // Store the free-axis coordinate (in inches) if this is an edge anchor.
+        if (a.xc === 'xfree') out.x = a.x * toIn;
+        if (a.yc === 'yfree') out.y = a.y * toIn;
+        return out;
+    }
     const toIn = unitFactor(elevUnit, 'in');
-    return { ref: 'free', x: a.x * toIn, y: a.y * toIn }; // store free coords in inches
+    return { ref: 'free', x: a.x * toIn, y: a.y * toIn };
 }
 // Resolve a stored endpoint anchor → live inches (current unit).
 function resolveStoredAnchor(a) {
@@ -9227,6 +9294,45 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
     dim.appendChild(grip);
 
     layer.appendChild(dim);
+}
+
+// Drag handle for the floor-to-hang dimension: slides it left/right (changes
+// its horizontal position only; the height value comes from settings).
+function attachHangDimHandle(fh) {
+    const grip = document.createElement('div');
+    grip.className = 'dim-drag-grip';
+    grip.setAttribute('data-export-skip', '1');
+    grip.setAttribute('data-html2canvas-ignore', 'true');
+    const chev = (dir) => {
+        const pts = { left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
+        return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+    grip.style.cssText = 'position:absolute; left:0; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:26px; line-height:0; cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+    grip.innerHTML = chev('left') + chev('right');
+    grip.onmouseenter = () => { grip.style.opacity = '1'; };
+    grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
+    grip.addEventListener('mousedown', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const startX = e.clientX;
+        const ce = elevations[currentElevIndex];
+        const startOff = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
+        const toIn = unitFactor(elevUnit, 'in');
+        document.body.style.cursor = 'ew-resize';
+        const onMove = (mv) => {
+            const deltaIn = ((mv.clientX - startX) / elevScale) * toIn;
+            if (ce) ce.hangDimXOffset = startOff + deltaIn;
+            drawElevAll();
+        };
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.body.style.cursor = '';
+            if (typeof pushHistory === 'function') pushHistory();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    });
+    fh.appendChild(grip);
 }
 
 // Drag a whole custom line (slides perpendicular via its 'off' offset; the
@@ -10257,7 +10363,7 @@ async function exportElevSVG() {
         const annotationLayers = [
             'arch-dim-layer', 'dim-layer', 'floor-ceiling-layer',
             'frame-center-layer', 'guide-layer', 'label-layer',
-            'od-layer', 'group-dim-layer',
+            'od-layer', 'group-dim-layer', 'custom-lines-layer',
         ];
 
         const emitEl = (el) => {
