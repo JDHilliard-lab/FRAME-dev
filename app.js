@@ -8296,32 +8296,43 @@ function renderGroupDims() {
             return l;
         };
 
-        const OFFSET = 26; // px gap between bbox and dimension line
+        const OFFSET = 26; // base px gap between bbox and dimension line
 
         // ── WIDTH dimension line (above the box) — SOLID line, DASHED extensions ──
         if (entry.showWidth !== false) {
-            const lineY = boxTop - OFFSET;
+            const wId = 'group-' + entry.id + '-w';
+            // Drag offset stored in inches; convert to px (further UP = larger gap).
+            const wOffPx = getDimOffset(wId) * elevScale;
+            const lineY = boxTop - OFFSET - Math.max(0, wOffPx);
+            const totalGap = boxTop - lineY;
             layer.appendChild(mkLine(boxLeft, lineY, boxW, 0, 'solid'));   // solid dim line
             layer.appendChild(mkTick(boxLeft, lineY, true));
             layer.appendChild(mkTick(boxLeft + boxW, lineY, true));
             // Dashed extension lines from box corners up to the dim line
-            layer.appendChild(mkLine(boxLeft, lineY, 0, OFFSET, 'dashed'));
-            layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, OFFSET, 'dashed'));
+            layer.appendChild(mkLine(boxLeft, lineY, 0, totalGap, 'dashed'));
+            layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, totalGap, 'dashed'));
             layer.appendChild(mkLabel(elevFmtU(bbox.w), boxLeft + boxW / 2, lineY));
+            // Arrow drag handle (slides up/down) at the line midpoint.
+            attachGroupDimHandle(layer, 'h', wId, boxLeft + boxW / 2, lineY);
         }
 
         // ── HEIGHT dimension line (left of the box) — SOLID line, DASHED extensions ──
         if (entry.showHeight !== false) {
-            const lineX = boxLeft - OFFSET;
+            const hId = 'group-' + entry.id + '-h';
+            const hOffPx = getDimOffset(hId) * elevScale;
+            const lineX = boxLeft - OFFSET - Math.max(0, hOffPx);
+            const totalGap = boxLeft - lineX;
             layer.appendChild(mkLine(lineX, boxTop, 0, boxH, 'solid'));    // solid dim line
             layer.appendChild(mkTick(lineX, boxTop, false));
             layer.appendChild(mkTick(lineX, boxTop + boxH, false));
             // Dashed extension lines from box corners out to the dim line
-            layer.appendChild(mkLine(lineX, boxTop, OFFSET, 0, 'dashed'));
-            layer.appendChild(mkLine(lineX, boxTop + boxH, OFFSET, 0, 'dashed'));
+            layer.appendChild(mkLine(lineX, boxTop, totalGap, 0, 'dashed'));
+            layer.appendChild(mkLine(lineX, boxTop + boxH, totalGap, 0, 'dashed'));
             const hl = mkLabel(elevFmtU(bbox.h), lineX, boxTop + boxH / 2);
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
             layer.appendChild(hl);
+            // Arrow drag handle (slides left/right) at the line midpoint.
+            attachGroupDimHandle(layer, 'v', hId, lineX, boxTop + boxH / 2);
         }
 
         // ── Delete affordance: small × at the box's top-right corner. Tagged
@@ -8790,8 +8801,9 @@ function drawElevTargetedSpacing() {
                         let oTop = Math.max(leftF.y, rightF.y); let oBot = Math.min(leftF.y + leftF.h, rightF.y + rightF.h);
                         let anchorY = oBot > oTop ? oTop + (oBot - oTop)/2 : (leftF.y + leftF.h/2 + rightF.y + rightF.h/2)/2;
                         const hId = 'spacing-h-' + pairId;
-                        anchorY += getDimOffset(hId);
-                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX), hId);
+                        const hOff = getDimOffset(hId);
+                        anchorY += hOff;
+                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX), hId, hOff);
                     }
                     let botF = f1.y < f2.y ? f1 : f2; let topF = f1.y < f2.y ? f2 : f1;
                     if (topF.y >= botF.y + botF.h) {
@@ -8799,8 +8811,9 @@ function drawElevTargetedSpacing() {
                         let oLeft = Math.max(botF.x, topF.x); let oRight = Math.min(botF.x + botF.w, topF.x + topF.w);
                         let anchorX = oRight > oLeft ? oLeft + (oRight - oLeft)/2 : (botF.x + botF.w/2 + topF.x + topF.w/2)/2;
                         const vId = 'spacing-v-' + pairId;
-                        anchorX += getDimOffset(vId);
-                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY), vId);
+                        const vOff = getDimOffset(vId);
+                        anchorX += vOff;
+                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY), vId, vOff);
                     }
                     drawnPairs.add(pairId);
                 }
@@ -8849,8 +8862,8 @@ function drawPerFrameDistanceDims() {
             const ceilingDist = wallH - (f.y + f.h);
             if (ceilingDist > 0) {
                 const id = 'edge-' + f.letter + '-ceiling';
-                const ax = verticalAnchorX + getDimOffset(id);
-                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, elevFmtU(ceilingDist), id);
+                const o = getDimOffset(id); const ax = verticalAnchorX + o;
+                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, elevFmtU(ceilingDist), id, o);
             }
         }
         // FLOOR distance: from bottom of frame down to 0
@@ -8858,8 +8871,8 @@ function drawPerFrameDistanceDims() {
             const floorDist = f.y;
             if (floorDist > 0) {
                 const id = 'edge-' + f.letter + '-floor';
-                const ax = verticalAnchorX + getDimOffset(id);
-                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, elevFmtU(floorDist), id);
+                const o = getDimOffset(id); const ax = verticalAnchorX + o;
+                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, elevFmtU(floorDist), id, o);
             }
         }
         // LEFT WALL distance: from left of frame back to 0
@@ -8867,8 +8880,8 @@ function drawPerFrameDistanceDims() {
             const leftDist = f.x;
             if (leftDist > 0) {
                 const id = 'edge-' + f.letter + '-left';
-                const ay = horizontalAnchorY + getDimOffset(id);
-                createElevArchSpacing(0, ay, f.x, ay, 'h', layer, elevFmtU(leftDist), id);
+                const o = getDimOffset(id); const ay = horizontalAnchorY + o;
+                createElevArchSpacing(0, ay, f.x, ay, 'h', layer, elevFmtU(leftDist), id, o);
             }
         }
         // RIGHT WALL distance: from right of frame to wallW
@@ -8876,8 +8889,8 @@ function drawPerFrameDistanceDims() {
             const rightDist = wallW - (f.x + f.w);
             if (rightDist > 0) {
                 const id = 'edge-' + f.letter + '-right';
-                const ay = horizontalAnchorY + getDimOffset(id);
-                createElevArchSpacing(f.x + f.w, ay, wallW, ay, 'h', layer, elevFmtU(rightDist), id);
+                const o = getDimOffset(id); const ay = horizontalAnchorY + o;
+                createElevArchSpacing(f.x + f.w, ay, wallW, ay, 'h', layer, elevFmtU(rightDist), id, o);
             }
         }
     });
@@ -8925,7 +8938,8 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
     container.appendChild(dim);
 }
 
-function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId) {
+function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, offsetAmt) {
+    offsetAmt = offsetAmt || 0;
     const dim = document.createElement('div'); 
     dim.className = 'arch-dim ' + (type === 'h' ? 'arch-dim-h' : 'arch-dim-v');
     
@@ -8933,6 +8947,18 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId) {
         const width = Math.abs(x2 - x1) * elevScale; const left = Math.min(x1, x2) * elevScale; const bottom = y1 * elevScale;
         dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment"></div>`;
+        // Leader extensions: when dragged off (offsetAmt != 0), connect both
+        // endpoints back to the un-offset y with dashed verticals.
+        if (Math.abs(offsetAmt) > 0.01) {
+            const origY = (y1 - offsetAmt) * elevScale;   // un-offset position
+            const lo = Math.min(bottom, origY), hi = Math.max(bottom, origY);
+            [Math.min(x1,x2)*elevScale, Math.max(x1,x2)*elevScale].forEach(xpx => {
+                const ext = document.createElement('div');
+                ext.className = 'dim-leader';
+                ext.style.cssText = `position:absolute; left:${xpx}px; bottom:${lo}px; height:${(hi-lo)}px; width:0; border-left:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
+                container.appendChild(ext);
+            });
+        }
     } else {
         let height = Math.abs(y2 - y1) * elevScale; const left = x1 * elevScale;
         let bottom = Math.min(y1, y2) * elevScale;
@@ -8941,30 +8967,63 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId) {
         if (Math.min(y1, y2) < 0.001) { bottom = -4; height += 4; }
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
+        // Leader extensions: connect both endpoints back to the un-offset x.
+        if (Math.abs(offsetAmt) > 0.01) {
+            const origX = (x1 - offsetAmt) * elevScale;
+            const lo = Math.min(left, origX), hi = Math.max(left, origX);
+            [Math.min(y1,y2)*elevScale, Math.max(y1,y2)*elevScale].forEach(ypx => {
+                const ext = document.createElement('div');
+                ext.className = 'dim-leader';
+                ext.style.cssText = `position:absolute; bottom:${ypx}px; left:${lo}px; width:${(hi-lo)}px; height:0; border-top:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
+                container.appendChild(ext);
+            });
+        }
     }
     // Draggable grip handle (perpendicular slide). Only for dims with an id.
     if (dimId) attachDimDragHandle(dim, type, dimId);
     container.appendChild(dim);
 }
 
-// Attach a small draggable grip to a dimension line. Dragging it slides the
-// dim along its perpendicular axis (h-dim → vertical drag; v-dim → horizontal
-// drag), updating the stored offset for `dimId`. The grip is excluded from
-// exports. The line's measured value never changes.
+// Attach an arrow-style drag handle to a dimension line. Horizontal lines
+// (drag up/down) get stacked up/down chevrons at the midpoint. Vertical lines
+// (drag left/right) get left/right chevrons flanking the number. Faded at
+// rest, prominent on hover. Excluded from exports. Value never changes.
 function attachDimDragHandle(dim, type, dimId) {
     const grip = document.createElement('div');
     grip.className = 'dim-drag-grip';
     grip.setAttribute('data-export-skip', '1');
     grip.setAttribute('data-html2canvas-ignore', 'true');
     grip.title = 'Drag to reposition this dimension';
-    // Centered on the line midpoint.
-    grip.style.cssText =
-        'position:absolute; width:14px; height:14px; border-radius:50%;' +
-        'background:var(--dim-color); opacity:0.5; cursor:' + (type === 'h' ? 'ns-resize' : 'ew-resize') + ';' +
-        'left:50%; top:50%; transform:translate(-50%,-50%); z-index:50; pointer-events:auto;' +
-        'border:2px solid #fff; box-sizing:border-box; transition:opacity 0.12s;';
-    grip.onmouseenter = () => { grip.style.opacity = '0.95'; };
-    grip.onmouseleave = () => { grip.style.opacity = '0.5'; };
+
+    const chevron = (dir) => {
+        // dir: 'up','down','left','right'
+        const pts = {
+            up:    '4,11 8,5 12,11',
+            down:  '4,5 8,11 12,5',
+            left:  '11,4 5,8 11,12',
+            right: '5,4 11,8 5,12',
+        }[dir];
+        return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+
+    if (type === 'h') {
+        // Stacked up/down chevrons, centered on the line.
+        grip.style.cssText =
+            'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);' +
+            'display:flex; flex-direction:column; align-items:center; line-height:0;' +
+            'cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+        grip.innerHTML = chevron('up') + chevron('down');
+    } else {
+        // Left/right chevrons flanking the number (the .arch-label-new sits at
+        // the line's center; we place a wide handle spanning across it).
+        grip.style.cssText =
+            'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);' +
+            'display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0;' +
+            'cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+        grip.innerHTML = chevron('left') + chevron('right');
+    }
+    grip.onmouseenter = () => { grip.style.opacity = '1'; };
+    grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
 
     grip.onmousedown = (e) => {
         e.preventDefault(); e.stopPropagation();
@@ -8972,13 +9031,10 @@ function attachDimDragHandle(dim, type, dimId) {
         const startOffset = getDimOffset(dimId); // current unit
         document.body.style.cursor = (type === 'h') ? 'ns-resize' : 'ew-resize';
         const onMove = (mv) => {
-            // Perpendicular delta in px → elevation units. h-dim slides in Y
-            // (screen down = smaller bottom = NEGATIVE elevation y), v-dim in X.
             let deltaPx, newOffset;
             if (type === 'h') {
                 deltaPx = mv.clientY - startY;
-                // screen-down is +clientY but elevation y grows UP, so invert
-                newOffset = startOffset - (deltaPx / elevScale);
+                newOffset = startOffset - (deltaPx / elevScale); // screen-down → elevation-down
             } else {
                 deltaPx = mv.clientX - startX;
                 newOffset = startOffset + (deltaPx / elevScale);
@@ -8996,6 +9052,61 @@ function attachDimDragHandle(dim, type, dimId) {
         document.addEventListener('mouseup', onUp);
     };
     dim.appendChild(grip);
+}
+
+// Arrow drag handle for a GROUP-BOX dimension line. Unlike spacing dims, the
+// group dim lines are loose elements in the group-dim-layer, so the handle is
+// positioned absolutely at (cxPx, cyPx). type 'h' = width line (drag up/down),
+// 'v' = height line (drag left/right). Offset stored in dimOffsets[id], where
+// positive = the line sits further from the box.
+function attachGroupDimHandle(layer, type, id, cxPx, cyPx) {
+    const grip = document.createElement('div');
+    grip.className = 'dim-drag-grip';
+    grip.setAttribute('data-export-skip', '1');
+    grip.setAttribute('data-html2canvas-ignore', 'true');
+    grip.title = 'Drag to reposition this dimension';
+    const chevron = (dir) => {
+        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
+        return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+    const common = `position:absolute; left:${cxPx}px; top:${cyPx}px; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s; line-height:0;`;
+    if (type === 'h') {
+        grip.style.cssText = common + 'transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; cursor:ns-resize;';
+        grip.innerHTML = chevron('up') + chevron('down');
+    } else {
+        grip.style.cssText = common + 'transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:6px; cursor:ew-resize;';
+        grip.innerHTML = chevron('left') + chevron('right');
+    }
+    grip.onmouseenter = () => { grip.style.opacity = '1'; };
+    grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
+    grip.onmousedown = (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const startX = e.clientX, startY = e.clientY;
+        const startOffset = getDimOffset(id);
+        document.body.style.cursor = (type === 'h') ? 'ns-resize' : 'ew-resize';
+        const onMove = (mv) => {
+            let newOffset;
+            if (type === 'h') {
+                // drag UP (screen -clientY) → larger gap above box → larger offset
+                newOffset = startOffset + ((startY - mv.clientY) / elevScale);
+            } else {
+                // drag LEFT (screen -clientX) → larger gap left of box → larger offset
+                newOffset = startOffset + ((startX - mv.clientX) / elevScale);
+            }
+            if (newOffset < 0) newOffset = 0; // can't go inside the box
+            setDimOffset(id, newOffset);
+            drawElevAll();
+        };
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.body.style.cursor = '';
+            if (typeof pushHistory === 'function') pushHistory();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    };
+    layer.appendChild(grip);
 }
 
 function setElevUnit(u) {
