@@ -454,6 +454,8 @@ function openPrecisionModal() {
     seedAnnotationStyleInputs();
     const snapCb = document.getElementById('snapEnabledToggle');
     if (snapCb) snapCb.checked = elevSnapEnabled;
+    const dimSnapCb = document.getElementById('dimSnapEnabledToggle');
+    if (dimSnapCb) dimSnapCb.checked = elevDimSnapEnabled;
     document.getElementById('precisionModal').style.display = 'flex';
 }
 
@@ -1025,6 +1027,32 @@ function initMasterApp() {
     loadUnitSuffixPref();  // restore interior unit-suffix on/off preference
     loadSvgFrameMode();    // restore SVG frame export mode (texture/autocolor)
     loadSnapPref();        // restore snap-to-align on/off preference
+    loadDimSnapPref();     // restore dimension-drag snap preference
+
+    // Custom measured-line tool: wall click (capture phase so it runs before
+    // frame handlers when the tool is active), 'M' shortcut, Delete to remove.
+    const wallEl = document.getElementById('wall');
+    if (wallEl) {
+        wallEl.addEventListener('mousedown', function (e) {
+            if (lineToolActive) handleLineToolClick(e);
+        }, true);
+    }
+    document.addEventListener('keydown', function (e) {
+        const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || '');
+        if (typing) return;
+        // Only act when the elevation view is visible.
+        const elevVisible = (() => { const v = document.getElementById('view-elevation'); return v && getComputedStyle(v).display !== 'none'; })();
+        if (!elevVisible) return;
+        if ((e.key === 'm' || e.key === 'M') && !e.ctrlKey && !e.metaKey) {
+            toggleLineTool();
+        } else if ((e.key === 'Delete' || e.key === 'Backspace') && selectedCustomLine) {
+            e.preventDefault();
+            deleteCustomLine(selectedCustomLine);
+        } else if (e.key === 'Escape' && (lineToolActive || lineToolFirstPt)) {
+            lineToolFirstPt = null;
+            if (lineToolActive) toggleLineTool(false); else drawElevAll();
+        }
+    });
     
     document.addEventListener('click', function(event) {
         const container = document.getElementById('customSwatchContainer');
@@ -8172,6 +8200,7 @@ function drawElevAll() {
     // Render group-dimension callouts (dashed bounding boxes + measurements)
     // for the current elevation. Done after frames so the boxes overlay them.
     renderGroupDims();
+    renderCustomLines();
 
     // Unit legend (top-left corner of the wall). Shown only when the interior
     // suffix is OFF — so the reader knows what unit the bare numbers are in.
@@ -8470,6 +8499,49 @@ function toggleSnapEnabled(on) {
     const cb = document.getElementById('snapEnabledToggle');
     if (cb) cb.checked = elevSnapEnabled;
     if (!elevSnapEnabled && typeof clearSnapGuides === 'function') clearSnapGuides();
+}
+
+// Dimension-drag snap: when dragging a measurement line, snap its offset to a
+// round increment AND to alignment with other dimension lines' offsets (so
+// e.g. left/right edge-gap lines line up at the same height). Toggleable in
+// elevation settings. Increment is in inches (unit-independent feel).
+let elevDimSnapEnabled = true;
+const DIM_SNAP_INCREMENT_IN = 1;     // round to nearest inch
+const DIM_SNAP_ALIGN_TOL_IN = 0.75;  // align to another dim within this
+function loadDimSnapPref() {
+    try { const v = localStorage.getItem('elevDimSnapEnabled'); if (v !== null) elevDimSnapEnabled = (v === '1'); }
+    catch (e) {}
+}
+function saveDimSnapPref() {
+    try { localStorage.setItem('elevDimSnapEnabled', elevDimSnapEnabled ? '1' : '0'); } catch (e) {}
+}
+function toggleDimSnapEnabled(on) {
+    elevDimSnapEnabled = (typeof on === 'boolean') ? on : !elevDimSnapEnabled;
+    saveDimSnapPref();
+    const cb = document.getElementById('dimSnapEnabledToggle');
+    if (cb) cb.checked = elevDimSnapEnabled;
+}
+// Snap an offset value (in CURRENT unit) for a dim being dragged. `selfId` is
+// excluded from the alignment pool. Returns { value, aligned } where aligned
+// is the id we snapped to (for an optional guide), or null.
+function snapDimOffset(valueCurrentUnit, selfId) {
+    if (!elevDimSnapEnabled) return { value: valueCurrentUnit, aligned: null };
+    // Work in inches for unit-independence.
+    const inToCur = unitFactor('in', elevUnit);
+    let valIn = valueCurrentUnit * unitFactor(elevUnit, 'in');
+    // 1) align to another dim's offset (inches) if within tolerance
+    const offs = getElevDimOffsets();
+    let aligned = null, best = DIM_SNAP_ALIGN_TOL_IN;
+    Object.keys(offs).forEach(id => {
+        if (id === selfId) return;
+        const d = Math.abs(offs[id] - valIn);
+        if (d < best) { best = d; valIn = offs[id]; aligned = id; }
+    });
+    // 2) if not aligned to a neighbor, snap to the round increment
+    if (!aligned) {
+        valIn = Math.round(valIn / DIM_SNAP_INCREMENT_IN) * DIM_SNAP_INCREMENT_IN;
+    }
+    return { value: valIn * inToCur, aligned };
 }
 
 // Compute snap targets for a frame given its candidate new position.
@@ -8785,6 +8857,219 @@ function anyDimOffsetsSet() {
     return Object.keys(offs).some(k => Math.abs(offs[k]) > 0.001);
 }
 
+// ──────────────────────────────────────────────────────────────────────────
+// CUSTOM MEASURED-LINE TOOL
+// ──────────────────────────────────────────────────────────────────────────
+// A "measure tool" (like Illustrator's dimension tool): toggle it on, click a
+// start point and an end point (both snapping to frame/wall/floor/ceiling
+// edges), and a measured horizontal or vertical dimension line is created.
+// Lines are draggable afterward and deletable (× button or select+Delete).
+// Stored per-elevation in inches; rendered to #custom-lines-layer; exported.
+let lineToolActive = false;
+let lineToolFirstPt = null;   // {x,y} in inches, the pending first click
+let selectedCustomLine = null; // id of selected custom line
+
+function getElevCustomLines() {
+    const ce = elevations[currentElevIndex];
+    if (!ce) return [];
+    if (!Array.isArray(ce.customLines)) ce.customLines = [];
+    return ce.customLines;
+}
+function toggleLineTool(on) {
+    lineToolActive = (typeof on === 'boolean') ? on : !lineToolActive;
+    lineToolFirstPt = null;
+    const btn = document.getElementById('lineToolBtn');
+    if (btn) btn.classList.toggle('active', lineToolActive);
+    const wall = document.getElementById('wall');
+    if (wall) wall.style.cursor = lineToolActive ? 'crosshair' : '';
+    drawElevAll();
+}
+
+// Gather candidate snap coordinates (in inches) from frames + wall bounds.
+// Returns { xs:[...], ys:[...] } of x and y edge positions.
+function customLineSnapTargets() {
+    const xs = [0, elevResolvedWallW];   // left + right wall
+    const ys = [0, elevResolvedWallH];   // floor + ceiling
+    elevFrames.forEach(f => {
+        if (!f.active) return;
+        xs.push(f.x, f.x + f.w, f.x + f.w / 2);
+        ys.push(f.y, f.y + f.h, f.y + f.h / 2);
+    });
+    return { xs, ys };
+}
+function snapCoord(val, candidates) {
+    const tolIn = 1.0 * unitFactor('in', elevUnit); // ~1" snap radius (in current unit terms via px? use inches)
+    // val is in inches here; tolerance ~1 inch
+    let best = 1.0, snapped = val;
+    candidates.forEach(c => { const d = Math.abs(c - val); if (d < best) { best = d; snapped = c; } });
+    return snapped;
+}
+
+// Convert a mouse event to elevation inches relative to the wall (y grows up).
+function eventToElevInches(e) {
+    const wall = document.getElementById('wall');
+    const r = wall.getBoundingClientRect();
+    const xPx = e.clientX - r.left;
+    const yPxFromTop = e.clientY - r.top;
+    const xIn = xPx / elevScale;
+    const yIn = (r.height - yPxFromTop) / elevScale; // flip: bottom = 0
+    return { x: xIn, y: yIn };
+}
+
+// Handle a click on the wall while the line tool is active.
+function handleLineToolClick(e) {
+    if (!lineToolActive) return;
+    e.preventDefault(); e.stopPropagation();
+    const pt = eventToElevInches(e);
+    const tg = customLineSnapTargets();
+    pt.x = snapCoord(pt.x, tg.xs);
+    pt.y = snapCoord(pt.y, tg.ys);
+    if (!lineToolFirstPt) {
+        lineToolFirstPt = pt;
+        drawElevAll(); // show the pending marker
+        return;
+    }
+    // Second click: constrain to horizontal or vertical (whichever is larger).
+    const a = lineToolFirstPt, b = pt;
+    const dx = Math.abs(b.x - a.x), dy = Math.abs(b.y - a.y);
+    let line;
+    const id = 'cl-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+    if (dx >= dy) {
+        // horizontal: same y, snap that y to first point's y
+        line = { id, type: 'h', x1: a.x, x2: b.x, y: a.y };
+    } else {
+        line = { id, type: 'v', y1: a.y, y2: b.y, x: a.x };
+    }
+    // Store in inches (convert from current unit to inches)
+    const toIn = unitFactor(elevUnit, 'in');
+    const stored = { id, type: line.type };
+    if (line.type === 'h') { stored.x1 = line.x1 * toIn; stored.x2 = line.x2 * toIn; stored.y = line.y * toIn; }
+    else { stored.y1 = line.y1 * toIn; stored.y2 = line.y2 * toIn; stored.x = line.x * toIn; }
+    getElevCustomLines().push(stored);
+    lineToolFirstPt = null;
+    if (typeof pushHistory === 'function') pushHistory();
+    drawElevAll();
+}
+
+function deleteCustomLine(id) {
+    const ce = elevations[currentElevIndex];
+    if (!ce || !Array.isArray(ce.customLines)) return;
+    ce.customLines = ce.customLines.filter(l => l.id !== id);
+    if (selectedCustomLine === id) selectedCustomLine = null;
+    if (typeof pushHistory === 'function') pushHistory();
+    drawElevAll();
+}
+
+// Render all custom measured lines for the current elevation.
+function renderCustomLines() {
+    const layer = document.getElementById('custom-lines-layer');
+    if (!layer) return;
+    layer.innerHTML = '';
+    const inFromStore = unitFactor('in', elevUnit); // inches → current unit
+    const lines = getElevCustomLines();
+
+    // Pending first-point marker while drawing.
+    if (lineToolActive && lineToolFirstPt) {
+        const m = document.createElement('div');
+        m.setAttribute('data-export-skip', '1');
+        m.setAttribute('data-html2canvas-ignore', 'true');
+        m.style.cssText = `position:absolute; left:${lineToolFirstPt.x*elevScale}px; bottom:${lineToolFirstPt.y*elevScale}px; width:8px; height:8px; transform:translate(-50%,50%); background:var(--accent,#3b82f6); border-radius:50%; z-index:60;`;
+        layer.appendChild(m);
+    }
+
+    lines.forEach(L => {
+        // Convert stored inches → current unit for rendering.
+        const type = L.type;
+        let aX, aY, len, value;
+        if (type === 'h') {
+            const x1 = L.x1 * inFromStore, x2 = L.x2 * inFromStore, y = L.y * inFromStore;
+            value = Math.abs(x2 - x1);
+            renderOneCustomLine(layer, L.id, 'h', Math.min(x1,x2), y, value, value);
+        } else {
+            const y1 = L.y1 * inFromStore, y2 = L.y2 * inFromStore, x = L.x * inFromStore;
+            value = Math.abs(y2 - y1);
+            renderOneCustomLine(layer, L.id, 'v', x, Math.min(y1,y2), value, value);
+        }
+    });
+}
+
+// Render a single custom line (similar visual to spacing dims) with ticks,
+// label, an × delete button, selection highlight, and drag-to-move.
+function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) {
+    const dim = document.createElement('div');
+    dim.className = 'arch-dim custom-line ' + (type === 'h' ? 'arch-dim-h' : 'arch-dim-v');
+    dim.setAttribute('data-custom-line', id);
+    const sel = (selectedCustomLine === id);
+    const label = elevFmtU(value);
+
+    if (type === 'h') {
+        const width = spanLen * elevScale, left = originX * elevScale, bottom = originY * elevScale;
+        dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--accent,#3b82f6); outline-offset:3px;' : '');
+        dim.innerHTML = `<div class="dim-line-segment"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment"></div>`;
+    } else {
+        const height = spanLen * elevScale, left = originX * elevScale, bottom = originY * elevScale;
+        dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--accent,#3b82f6); outline-offset:3px;' : '');
+        dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
+    }
+
+    // Click to select.
+    dim.addEventListener('mousedown', (e) => {
+        if (lineToolActive) return; // don't select while drawing
+        e.stopPropagation();
+        selectedCustomLine = id;
+        startCustomLineDrag(e, id);
+        drawElevAll();
+    });
+
+    // × delete button (excluded from export).
+    const del = document.createElement('div');
+    del.className = 'custom-line-delete';
+    del.setAttribute('data-export-skip', '1');
+    del.setAttribute('data-html2canvas-ignore', 'true');
+    del.textContent = '×';
+    del.title = 'Delete this line';
+    del.style.cssText =
+        'position:absolute; width:16px; height:16px; line-height:14px; text-align:center; border-radius:50%;' +
+        'background:var(--dim-color); color:#fff; font-size:13px; font-weight:bold; cursor:pointer;' +
+        'z-index:61; opacity:' + (sel ? '0.95' : '0') + '; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
+        (type === 'h' ? 'right:-8px; top:50%; transform:translateY(-50%);' : 'left:50%; top:-8px; transform:translateX(-50%);');
+    del.onclick = (e) => { e.stopPropagation(); deleteCustomLine(id); };
+    dim.appendChild(del);
+    dim.addEventListener('mouseenter', () => { if (!sel) del.style.opacity = '0.6'; });
+    dim.addEventListener('mouseleave', () => { if (!sel) del.style.opacity = '0'; });
+
+    layer.appendChild(dim);
+}
+
+// Drag a whole custom line (slides perpendicular; endpoints stay).
+function startCustomLineDrag(e, id) {
+    const lines = getElevCustomLines();
+    const L = lines.find(l => l.id === id);
+    if (!L) return;
+    const startX = e.clientX, startY = e.clientY;
+    const toIn = unitFactor(elevUnit, 'in');
+    const orig = Object.assign({}, L);
+    const onMove = (mv) => {
+        const dxIn = ((mv.clientX - startX) / elevScale) * toIn;
+        const dyIn = ((mv.clientY - startY) / elevScale) * toIn; // screen down
+        if (L.type === 'h') {
+            // slide vertically (y), keep x endpoints
+            L.y = orig.y - dyIn; // screen-down → elevation-down
+        } else {
+            // slide horizontally (x), keep y endpoints
+            L.x = orig.x + dxIn;
+        }
+        drawElevAll();
+    };
+    const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+        if (typeof pushHistory === 'function') pushHistory();
+    };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+}
+
 function drawElevTargetedSpacing() {
     const layer = document.getElementById('dim-layer'); layer.innerHTML = '';
     let drawnPairs = new Set();
@@ -9039,7 +9324,8 @@ function attachDimDragHandle(dim, type, dimId) {
                 deltaPx = mv.clientX - startX;
                 newOffset = startOffset + (deltaPx / elevScale);
             }
-            setDimOffset(dimId, newOffset);
+            const snapped = snapDimOffset(newOffset, dimId);
+            setDimOffset(dimId, snapped.value);
             drawElevAll();
         };
         const onUp = () => {
@@ -9094,7 +9380,8 @@ function attachGroupDimHandle(layer, type, id, cxPx, cyPx) {
                 newOffset = startOffset + ((startX - mv.clientX) / elevScale);
             }
             if (newOffset < 0) newOffset = 0; // can't go inside the box
-            setDimOffset(id, newOffset);
+            const snapped = snapDimOffset(newOffset, id);
+            setDimOffset(id, Math.max(0, snapped.value));
             drawElevAll();
         };
         const onUp = () => {
