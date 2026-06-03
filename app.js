@@ -1060,6 +1060,7 @@ function initMasterApp() {
             deleteCustomLine(selectedCustomLine);
         } else if (e.key === 'Escape' && (lineToolActive || lineToolFirstPt)) {
             lineToolFirstPt = null;
+            lineToolFirstAnchor = null;
             if (lineToolActive) toggleLineTool(false); else drawElevAll();
         }
     });
@@ -8895,6 +8896,7 @@ function anyDimOffsetsSet() {
 // Stored per-elevation in inches; rendered to #custom-lines-layer; exported.
 let lineToolActive = false;
 let lineToolFirstPt = null;   // {x,y} in inches, the pending first click
+let lineToolFirstAnchor = null; // the tagged anchor of the pending first click
 let selectedCustomLine = null; // id of selected custom line
 
 function getElevCustomLines() {
@@ -8906,6 +8908,7 @@ function getElevCustomLines() {
 function toggleLineTool(on) {
     lineToolActive = (typeof on === 'boolean') ? on : !lineToolActive;
     lineToolFirstPt = null;
+    lineToolFirstAnchor = null;
     const btn = document.getElementById('lineToolBtn');
     if (btn) btn.classList.toggle('active', lineToolActive);
     const wall = document.getElementById('wall');
@@ -8926,27 +8929,47 @@ function customLineSnapTargets() {
     return { xs, ys };
 }
 
-// Discrete anchor POINTS (in inches) the measure tool snaps to: frame corners,
-// frame mid-edge points, and wall corners + mid-edges. Used for the live blue
-// dot indicator and to snap clicks to a real point.
+// Discrete anchor POINTS the measure tool snaps to: frame corners, frame
+// mid-edge points, and wall corners + mid-edges. Each carries a reference tag
+// (ref/letter/xc/yc) describing WHAT it's attached to, so a custom line stays
+// dynamic when frames move. xc/yc are semantic: x0=left, xm=center, x1=right;
+// y0=bottom, ym=middle, y1=top. Coordinates are in inches (current state).
 function anchorPointsForSnap() {
     const pts = [];
     const W = elevResolvedWallW, H = elevResolvedWallH;
-    // Wall corners + edge midpoints
-    pts.push({x:0,y:0},{x:W,y:0},{x:0,y:H},{x:W,y:H});
-    pts.push({x:W/2,y:0},{x:W/2,y:H},{x:0,y:H/2},{x:W,y:H/2});
+    const wallPt = (x, y, xc, yc) => ({ x, y, ref: 'wall', xc, yc });
+    pts.push(wallPt(0,0,'x0','y0'), wallPt(W,0,'x1','y0'), wallPt(0,H,'x0','y1'), wallPt(W,H,'x1','y1'));
+    pts.push(wallPt(W/2,0,'xm','y0'), wallPt(W/2,H,'xm','y1'), wallPt(0,H/2,'x0','ym'), wallPt(W,H/2,'x1','ym'));
     elevFrames.forEach(f => {
         if (!f.active) return;
         const x0=f.x, x1=f.x+f.w, y0=f.y, y1=f.y+f.h, xm=f.x+f.w/2, ym=f.y+f.h/2;
+        const fp = (x,y,xc,yc) => ({ x, y, ref:'frame', letter:f.letter, xc, yc });
         // corners
-        pts.push({x:x0,y:y0},{x:x1,y:y0},{x:x0,y:y1},{x:x1,y:y1});
+        pts.push(fp(x0,y0,'x0','y0'), fp(x1,y0,'x1','y0'), fp(x0,y1,'x0','y1'), fp(x1,y1,'x1','y1'));
         // mid outside edges
-        pts.push({x:xm,y:y0},{x:xm,y:y1},{x:x0,y:ym},{x:x1,y:ym});
+        pts.push(fp(xm,y0,'xm','y0'), fp(xm,y1,'xm','y1'), fp(x0,ym,'x0','ym'), fp(x1,ym,'x1','ym'));
     });
     return pts;
 }
+// Resolve a stored anchor reference into live { x, y } inches from current
+// frame/wall geometry. Falls back to the stored x/y for 'free' anchors or if
+// the referenced frame no longer exists.
+function resolveAnchor(a) {
+    if (!a) return null;
+    const xcVal = (x, w, xc) => xc === 'x0' ? x : xc === 'x1' ? x + w : x + w / 2;
+    const ycVal = (y, h, yc) => yc === 'y0' ? y : yc === 'y1' ? y + h : y + h / 2;
+    if (a.ref === 'wall') {
+        return { x: xcVal(0, elevResolvedWallW, a.xc), y: ycVal(0, elevResolvedWallH, a.yc) };
+    }
+    if (a.ref === 'frame') {
+        const f = elevFrames.find(fr => fr.letter === a.letter && fr.active);
+        if (f) return { x: xcVal(f.x, f.w, a.xc), y: ycVal(f.y, f.h, a.yc) };
+        // frame gone → fall back to stored fixed position if present
+    }
+    return (typeof a.x === 'number' && typeof a.y === 'number') ? { x: a.x, y: a.y } : null;
+}
 // Nearest anchor point to a given inches position, within tolerance. Returns
-// the point or null.
+// the tagged anchor (with ref/letter/xc/yc + x/y) or null.
 function nearestAnchorPoint(xIn, yIn) {
     const tolIn = 6; // ~6" capture radius (generous; feels magnetic)
     let best = tolIn, found = null;
@@ -8978,40 +9001,45 @@ function handleLineToolClick(e) {
     if (!lineToolActive) return;
     e.preventDefault(); e.stopPropagation();
     let pt = eventToElevInches(e);
-    // Snap to nearest discrete anchor point if close; else snap coordinates.
-    const anc = nearestAnchorPoint(pt.x, pt.y);
-    if (anc) { pt = { x: anc.x, y: anc.y }; }
-    else {
+    // Snap to nearest discrete anchor (tagged) if close; else a free point.
+    let anchor = nearestAnchorPoint(pt.x, pt.y);
+    if (!anchor) {
         const tg = customLineSnapTargets();
-        pt.x = snapCoord(pt.x, tg.xs);
-        pt.y = snapCoord(pt.y, tg.ys);
+        anchor = { ref: 'free', x: snapCoord(pt.x, tg.xs), y: snapCoord(pt.y, tg.ys) };
     }
-    if (!lineToolFirstPt) {
-        lineToolFirstPt = pt;
-        drawElevAll(); // show the pending marker
+    if (!lineToolFirstAnchor) {
+        lineToolFirstAnchor = anchor;
+        lineToolFirstPt = { x: anchor.x, y: anchor.y };
+        drawElevAll();
         return;
     }
-    // Second click: constrain to horizontal or vertical (whichever is larger).
-    const a = lineToolFirstPt, b = pt;
-    const dx = Math.abs(b.x - a.x), dy = Math.abs(b.y - a.y);
+    // Second click: build a line from the two anchors. Orientation = whichever
+    // span is larger. Store both anchor refs; resolved live at render time.
+    const a = lineToolFirstAnchor, b = anchor;
+    const ax = a.x, ay = a.y, bx = b.x, by = b.y;
+    const dx = Math.abs(bx - ax), dy = Math.abs(by - ay);
     const id = 'cl-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-    const toIn = unitFactor(elevUnit, 'in');
-    const stored = { id };
-    if (dx >= dy) {
-        // horizontal line at y = a.y, spanning a.x..b.x. Store the true clicked
-        // anchor points so leaders can connect the line back to them.
-        stored.type = 'h';
-        stored.x1 = a.x * toIn; stored.x2 = b.x * toIn; stored.y = a.y * toIn;
-        stored.ay1 = a.y * toIn; stored.ay2 = b.y * toIn; // original click y's for leaders
-    } else {
-        stored.type = 'v';
-        stored.y1 = a.y * toIn; stored.y2 = b.y * toIn; stored.x = a.x * toIn;
-        stored.ax1 = a.x * toIn; stored.ax2 = b.x * toIn; // original click x's for leaders
-    }
+    const stored = { id, a: stripAnchor(a), b: stripAnchor(b), type: (dx >= dy ? 'h' : 'v'), off: 0 };
     getElevCustomLines().push(stored);
+    lineToolFirstAnchor = null;
     lineToolFirstPt = null;
     if (typeof pushHistory === 'function') pushHistory();
     drawElevAll();
+}
+// Keep only the reference fields (+ a fixed x/y fallback in inches) for storage.
+function stripAnchor(a) {
+    if (a.ref === 'frame') return { ref: 'frame', letter: a.letter, xc: a.xc, yc: a.yc };
+    if (a.ref === 'wall')  return { ref: 'wall', xc: a.xc, yc: a.yc };
+    const toIn = unitFactor(elevUnit, 'in');
+    return { ref: 'free', x: a.x * toIn, y: a.y * toIn }; // store free coords in inches
+}
+// Resolve a stored endpoint anchor → live inches (current unit).
+function resolveStoredAnchor(a) {
+    if (a.ref === 'free') {
+        const inFromStore = unitFactor('in', elevUnit);
+        return { x: a.x * inFromStore, y: a.y * inFromStore };
+    }
+    return resolveAnchor(a); // frame/wall → live geometry (already current unit)
 }
 
 // Live anchor indicator while the measure tool is active. Shows a blue dot at
@@ -9073,26 +9101,26 @@ function renderCustomLines() {
     if (hidden) return; // toggle off — draw nothing else
 
     lines.forEach(L => {
-        // Convert stored inches → current unit for rendering.
-        const type = L.type;
-        let value;
-        if (type === 'h') {
-            const x1 = L.x1 * inFromStore, x2 = L.x2 * inFromStore, y = L.y * inFromStore;
-            value = Math.abs(x2 - x1);
-            renderOneCustomLine(layer, L.id, 'h', Math.min(x1,x2), y, value, value);
-            // Dashed leaders from each endpoint's clicked anchor y up/down to the line y.
-            const ay1 = (typeof L.ay1 === 'number' ? L.ay1 : L.y) * inFromStore;
-            const ay2 = (typeof L.ay2 === 'number' ? L.ay2 : L.y) * inFromStore;
-            addCustomLeader(layer, 'v', x1, y, ay1);
-            addCustomLeader(layer, 'v', x2, y, ay2);
+        const pa = resolveStoredAnchor(L.a);
+        const pb = resolveStoredAnchor(L.b);
+        if (!pa || !pb) return;
+        const off = (L.off || 0) * inFromStore; // drag offset (stored inches → unit)
+        if (L.type === 'h') {
+            // Span across x; line sits at a chosen y (anchor a's y) + offset.
+            const x1 = pa.x, x2 = pb.x;
+            const lineY = pa.y + off;
+            const value = Math.abs(x2 - x1);
+            renderOneCustomLine(layer, L.id, 'h', Math.min(x1,x2), lineY, value, value);
+            // Leaders from each endpoint's anchor point up/down to the line.
+            addCustomLeader(layer, 'v', x1, lineY, pa.y);
+            addCustomLeader(layer, 'v', x2, lineY, pb.y);
         } else {
-            const y1 = L.y1 * inFromStore, y2 = L.y2 * inFromStore, x = L.x * inFromStore;
-            value = Math.abs(y2 - y1);
-            renderOneCustomLine(layer, L.id, 'v', x, Math.min(y1,y2), value, value);
-            const ax1 = (typeof L.ax1 === 'number' ? L.ax1 : L.x) * inFromStore;
-            const ax2 = (typeof L.ax2 === 'number' ? L.ax2 : L.x) * inFromStore;
-            addCustomLeader(layer, 'h', y1, x, ax1);
-            addCustomLeader(layer, 'h', y2, x, ax2);
+            const y1 = pa.y, y2 = pb.y;
+            const lineX = pa.x + off;
+            const value = Math.abs(y2 - y1);
+            renderOneCustomLine(layer, L.id, 'v', lineX, Math.min(y1,y2), value, value);
+            addCustomLeader(layer, 'h', y1, lineX, pa.x);
+            addCustomLeader(layer, 'h', y2, lineX, pb.x);
         }
     });
 }
@@ -9201,24 +9229,24 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
     layer.appendChild(dim);
 }
 
-// Drag a whole custom line (slides perpendicular; endpoints stay).
+// Drag a whole custom line (slides perpendicular via its 'off' offset; the
+// endpoints stay anchored to their frames/wall).
 function startCustomLineDrag(e, id) {
     const lines = getElevCustomLines();
     const L = lines.find(l => l.id === id);
     if (!L) return;
     const startX = e.clientX, startY = e.clientY;
     const toIn = unitFactor(elevUnit, 'in');
-    const orig = Object.assign({}, L);
+    const startOff = L.off || 0; // stored inches
     const onMove = (mv) => {
-        const dxIn = ((mv.clientX - startX) / elevScale) * toIn;
-        const dyIn = ((mv.clientY - startY) / elevScale) * toIn; // screen down
+        let deltaIn;
         if (L.type === 'h') {
-            // slide vertically (y), keep x endpoints
-            L.y = orig.y - dyIn; // screen-down → elevation-down
+            // screen-down (+clientY) → elevation-down → decrease offset
+            deltaIn = (-(mv.clientY - startY) / elevScale) * toIn;
         } else {
-            // slide horizontally (x), keep y endpoints
-            L.x = orig.x + dxIn;
+            deltaIn = ((mv.clientX - startX) / elevScale) * toIn;
         }
+        L.off = startOff + deltaIn;
         drawElevAll();
     };
     const onUp = () => {
