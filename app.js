@@ -8401,7 +8401,11 @@ function renderGroupDims() {
             // Dashed extension lines from box corners up to the dim line
             layer.appendChild(mkLine(boxLeft, lineY, 0, totalGap, 'dashed'));
             layer.appendChild(mkLine(boxLeft + boxW, lineY, 0, totalGap, 'dashed'));
-            layer.appendChild(mkLabel(elevFmtU(bbox.w), boxLeft + boxW / 2, lineY));
+            const wLblOffPx = getLabelOffset(wId) * elevScale;
+            const wLbl = mkLabel(elevFmtU(bbox.w), boxLeft + boxW / 2 + wLblOffPx, lineY);
+            wLbl.style.pointerEvents = 'auto'; wLbl.style.cursor = 'move'; wLbl.style.zIndex = '7';
+            attachGroupLabelDrag(wLbl, 'h', wId, boxW * 0.5 * elevScale);
+            layer.appendChild(wLbl);
             // Arrow drag handle (slides up/down) at the line midpoint.
             attachGroupDimHandle(layer, 'h', wId, boxLeft + boxW / 2, lineY);
         }
@@ -8418,8 +8422,11 @@ function renderGroupDims() {
             // Dashed extension lines from box corners out to the dim line
             layer.appendChild(mkLine(lineX, boxTop, totalGap, 0, 'dashed'));
             layer.appendChild(mkLine(lineX, boxTop + boxH, totalGap, 0, 'dashed'));
-            const hl = mkLabel(elevFmtU(bbox.h), lineX, boxTop + boxH / 2);
+            const hLblOffPx = getLabelOffset(hId) * elevScale; // up = +
+            const hl = mkLabel(elevFmtU(bbox.h), lineX, boxTop + boxH / 2 - hLblOffPx);
             hl.style.transform = 'translate(-50%,-50%) rotate(-90deg)';
+            hl.style.pointerEvents = 'auto'; hl.style.cursor = 'move'; hl.style.zIndex = '7';
+            attachGroupLabelDrag(hl, 'v', hId, boxH * 0.5 * elevScale);
             layer.appendChild(hl);
             // Arrow drag handle (slides left/right) at the line midpoint.
             attachGroupDimHandle(layer, 'v', hId, lineX, boxTop + boxH / 2);
@@ -8849,9 +8856,11 @@ function drawElevGuides(wallW, wallH) {
         // settings — only the line's horizontal position moves).
         const ce = elevations[currentElevIndex];
         const hangDimOffIn = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
+        const hangLblOffIn = (ce && typeof ce.hangDimLblOffset === 'number') ? ce.hangDimLblOffset : 0;
         const dimXIn = 8 * unitFactor('in', elevUnit) + hangDimOffIn * unitFactor('in', elevUnit);
         const dimXpx = dimXIn * elevScale;
         const hangPx = hangVal * elevScale;
+        const lblShiftPx = hangLblOffIn * unitFactor('in', elevUnit) * elevScale; // up = +
         const TICK = 6;
 
         const fh = document.createElement('div');
@@ -8866,9 +8875,9 @@ function drawElevGuides(wallW, wallH) {
             `<div style="position:absolute; left:${-TICK}px; bottom:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
             // hang-line tick
             `<div style="position:absolute; left:${-TICK}px; top:0; width:${TICK * 2}px; height:0; border-top:var(--dim-weight) solid var(--dim-color);"></div>` +
-            // the number, centered between the line ends (rotated to read
-            // along the vertical line). HANG HEIGHT wording is on the hang line.
-            `<div style="position:absolute; left:0; top:50%; transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px;">${elevFmtU(hangVal)}</div>`;
+            // the number, centered between the line ends (rotated to read along
+            // the vertical line), shifted by the user's up/down offset.
+            `<div class="hang-dim-num" style="position:absolute; left:0; top:calc(50% - ${lblShiftPx}px); transform:translate(-50%,-50%) rotate(-90deg); color:var(--dim-color); font-family:var(--dim-font-family); font-size:var(--dim-font-size); font-weight:600; white-space:nowrap; background:rgba(255,255,255,0.85); padding:0 4px; pointer-events:auto; cursor:ns-resize;">${elevFmtU(hangVal)}</div>`;
         attachHangDimHandle(fh);
         guideLayer.appendChild(fh);
     }
@@ -9327,28 +9336,82 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
 // Drag handle for the floor-to-hang dimension: slides it left/right (changes
 // its horizontal position only; the height value comes from settings).
 function attachHangDimHandle(fh) {
-    const grip = document.createElement('div');
-    grip.className = 'dim-drag-grip';
-    grip.setAttribute('data-export-skip', '1');
-    grip.setAttribute('data-html2canvas-ignore', 'true');
+    const ce = elevations[currentElevIndex];
+    const toIn = unitFactor(elevUnit, 'in');
+    const num = fh.querySelector('.hang-dim-num');
+    if (!num) return;
+    num.style.position = 'relative'; // anchor arrows to the number box
+    num.style.zIndex = '56';
+
     const chev = (dir) => {
-        const pts = { left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
+        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
         return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     };
-    grip.style.cssText = 'position:absolute; left:0; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:26px; line-height:0; cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
-    grip.innerHTML = chev('left') + chev('right');
-    grip.onmouseenter = () => { grip.style.opacity = '1'; };
-    grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
-    grip.addEventListener('mousedown', (e) => {
+    // NOTE: the number is rotated -90°, so its visual up/down is the box's
+    // left/right and vice-versa. We position arrows in the box's local frame
+    // but map drags to screen axes explicitly below.
+    const makeArrow = (screenDir) => {
+        // screenDir is the on-screen direction the user perceives.
+        const a = document.createElement('div');
+        a.className = 'dim-arrow';
+        a.setAttribute('data-export-skip', '1');
+        a.setAttribute('data-html2canvas-ignore', 'true');
+        // The number is rotated -90°: box-right = screen-up, box-left =
+        // screen-down, box-up = screen-left, box-down = screen-right. Place the
+        // glyph in the box-local edge that renders to the desired screen edge.
+        const boxEdge = { up:'right', down:'left', left:'up', right:'down' }[screenDir];
+        const glyph = { up:'up', down:'down', left:'left', right:'right' }[screenDir];
+        const pos = {
+            left:  'right:100%; top:50%; transform:translateY(-50%) rotate(90deg); margin-right:3px;',
+            right: 'left:100%; top:50%; transform:translateY(-50%) rotate(90deg); margin-left:3px;',
+            up:    'bottom:100%; left:50%; transform:translateX(-50%) rotate(90deg); margin-bottom:3px;',
+            down:  'top:100%; left:50%; transform:translateX(-50%) rotate(90deg); margin-top:3px;',
+        }[boxEdge];
+        const cur = (screenDir === 'left' || screenDir === 'right') ? 'ew-resize' : 'ns-resize';
+        a.style.cssText = `position:absolute; ${pos} z-index:58; pointer-events:auto; cursor:${cur}; opacity:0.5; transition:opacity 0.12s; line-height:0;`;
+        a.innerHTML = chev(glyph);
+        a.onmouseenter = () => { a.style.opacity = '1'; };
+        a.onmouseleave = () => { a.style.opacity = '0.5'; };
+        a.addEventListener('mousedown', (e) => {
+            e.preventDefault(); e.stopPropagation();
+            const startX = e.clientX, startY = e.clientY;
+            const startLine = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
+            const startLbl = (ce && typeof ce.hangDimLblOffset === 'number') ? ce.hangDimLblOffset : 0;
+            document.body.style.cursor = cur;
+            const onMove = (mv) => {
+                if (screenDir === 'left' || screenDir === 'right') {
+                    // move the whole line horizontally
+                    const dIn = ((mv.clientX - startX) / elevScale) * toIn;
+                    if (ce) ce.hangDimXOffset = startLine + dIn;
+                } else {
+                    // move the number up/down (up = +)
+                    const dIn = (-(mv.clientY - startY) / elevScale) * toIn;
+                    if (ce) ce.hangDimLblOffset = startLbl + dIn;
+                }
+                drawElevAll();
+            };
+            const onUp = () => {
+                document.removeEventListener('mousemove', onMove);
+                document.removeEventListener('mouseup', onUp);
+                document.body.style.cursor = '';
+                if (typeof pushHistory === 'function') pushHistory();
+            };
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onUp);
+        });
+        return a;
+    };
+    ['left','right','up','down'].forEach(d => num.appendChild(makeArrow(d)));
+
+    // Drag the number itself up/down (no X — height is from settings).
+    num.addEventListener('mousedown', (e) => {
         e.preventDefault(); e.stopPropagation();
-        const startX = e.clientX;
-        const ce = elevations[currentElevIndex];
-        const startOff = (ce && typeof ce.hangDimXOffset === 'number') ? ce.hangDimXOffset : 0;
-        const toIn = unitFactor(elevUnit, 'in');
-        document.body.style.cursor = 'ew-resize';
+        const startY = e.clientY;
+        const startLbl = (ce && typeof ce.hangDimLblOffset === 'number') ? ce.hangDimLblOffset : 0;
+        document.body.style.cursor = 'ns-resize';
         const onMove = (mv) => {
-            const deltaIn = ((mv.clientX - startX) / elevScale) * toIn;
-            if (ce) ce.hangDimXOffset = startOff + deltaIn;
+            const dIn = (-(mv.clientY - startY) / elevScale) * toIn; // up = +
+            if (ce) ce.hangDimLblOffset = startLbl + dIn;
             drawElevAll();
         };
         const onUp = () => {
@@ -9360,7 +9423,6 @@ function attachHangDimHandle(fh) {
         document.addEventListener('mousemove', onMove);
         document.addEventListener('mouseup', onUp);
     });
-    fh.appendChild(grip);
 }
 
 // Drag a whole custom line (slides perpendicular via its 'off' offset; the
@@ -9882,6 +9944,37 @@ function attachDimDragHandle(dim, type, dimId, lblOffPx) {
 // positioned absolutely at (cxPx, cyPx). type 'h' = width line (drag up/down),
 // 'v' = height line (drag left/right). Offset stored in dimOffsets[id], where
 // positive = the line sits further from the box.
+// Slide a group-dim number along its line (h: left/right, v: up/down), clamped
+// to the line span. Stores via the label-offset helper (group-<id>-w/h-lbl).
+function attachGroupLabelDrag(lblEl, type, lblId, halfSpanPx) {
+    const clampPx = Math.max(0, halfSpanPx - 12);
+    lblEl.addEventListener('mousedown', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const startX = e.clientX, startY = e.clientY;
+        const startOff = getLabelOffset(lblId); // current unit
+        document.body.style.cursor = 'move';
+        const onMove = (mv) => {
+            let deltaIn;
+            if (type === 'h') deltaIn = (mv.clientX - startX) / elevScale;
+            else deltaIn = -(mv.clientY - startY) / elevScale; // up = +
+            let v = startOff + deltaIn;
+            // clamp to the line
+            const px = v * elevScale;
+            v = Math.max(-clampPx, Math.min(clampPx, px)) / elevScale;
+            setLabelOffset(lblId, v);
+            drawElevAll();
+        };
+        const onUp = () => {
+            document.removeEventListener('mousemove', onMove);
+            document.removeEventListener('mouseup', onUp);
+            document.body.style.cursor = '';
+            if (typeof pushHistory === 'function') pushHistory();
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+    });
+}
+
 function attachGroupDimHandle(layer, type, id, cxPx, cyPx) {
     const grip = document.createElement('div');
     grip.className = 'dim-drag-grip';
@@ -10528,10 +10621,21 @@ async function exportElevSVG() {
             return { x: r.left + ox, y: r.top + oy, w: r.width, h: r.height };
         };
 
-        // ── WALL outline: transparent fill (no fill), just the stroke ──
+        // ── WALL outline: transparent fill, thin stroke on top/left/right, and
+        //    a separate THICK floor line at the bottom (matching the on-screen
+        //    4px floor border). Without the thick floor, vertical dims that
+        //    touch the ground look like they're floating. ──
         {
             const wp = rectToSvg(wall);
-            midLayer.push(`<rect x="${wp.x.toFixed(1)}" y="${wp.y.toFixed(1)}" width="${wp.w.toFixed(1)}" height="${wp.h.toFixed(1)}" fill="none" stroke="${wallLine}" stroke-width="2"/>`);
+            const wallCs = getComputedStyle(wall);
+            const floorPx = Math.max(2, Math.round(parseFloat(wallCs.borderBottomWidth) || 4));
+            const thinPx = Math.max(1, Math.round(parseFloat(wallCs.borderTopWidth) || 1));
+            // thin outline (all four sides — bottom will be overdrawn by floor)
+            midLayer.push(`<rect x="${wp.x.toFixed(1)}" y="${wp.y.toFixed(1)}" width="${wp.w.toFixed(1)}" height="${wp.h.toFixed(1)}" fill="none" stroke="${wallLine}" stroke-width="${thinPx}"/>`);
+            // thick floor: a horizontal line along the bottom edge, centered on
+            // the border so it sits exactly where the screen floor is.
+            const floorY = (wp.y + wp.h).toFixed(1);
+            midLayer.push(`<line x1="${wp.x.toFixed(1)}" y1="${floorY}" x2="${(wp.x + wp.w).toFixed(1)}" y2="${floorY}" stroke="${wallLine}" stroke-width="${floorPx}" stroke-linecap="square"/>`);
         }
 
         // ── FRAMES (back layer): embed as <image> ──
