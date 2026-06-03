@@ -1036,6 +1036,16 @@ function initMasterApp() {
         wallEl.addEventListener('mousedown', function (e) {
             if (lineToolActive) handleLineToolClick(e);
         }, true);
+        // Live anchor-point indicator: blue dot snaps to the nearest anchor
+        // while the measure tool is active.
+        wallEl.addEventListener('mousemove', function (e) {
+            if (!lineToolActive) return;
+            updateAnchorHoverDot(e);
+        });
+        wallEl.addEventListener('mouseleave', function () {
+            const d = document.getElementById('anchor-hover-dot');
+            if (d) d.style.display = 'none';
+        });
     }
     document.addEventListener('keydown', function (e) {
         const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((e.target && e.target.tagName) || '');
@@ -1310,6 +1320,7 @@ let dimVisibility = {
     groupBox: true,   // group dimension callouts
     edgeGap: true,    // edge-gap (distance-to-wall) dimensions
     wallDims: true,   // overall wall width/height dimensions (default ON)
+    customLines: true, // custom measure-tool lines
 };
 
 function loadDimVisibility() {
@@ -1367,6 +1378,13 @@ function syncLayoutGuideButtonStates() {
     // Unit suffix toggle: active when interior suffix is shown.
     const usBtn = document.getElementById('unitSuffixToggle');
     if (usBtn) usBtn.classList.toggle('active', showUnitSuffix);
+    // Custom lines toggle: blue when lines exist + visible; dim when none.
+    const clBtn = document.getElementById('customLinesToggle');
+    if (clBtn) {
+        const exists = (typeof getElevCustomLines === 'function') && getElevCustomLines().length > 0;
+        clBtn.classList.toggle('active', exists && dimVisibility.customLines);
+        clBtn.style.opacity = exists ? '1' : '0.4';
+    }
 }
 
 // Toggle group-box visibility (only meaningful if one exists).
@@ -1392,6 +1410,16 @@ function toggleWallDims(btn) {
     const layer = document.getElementById('arch-dim-layer');
     if (layer) layer.style.display = dimVisibility.wallDims ? 'block' : 'none';
     if (btn) btn.classList.toggle('active', dimVisibility.wallDims);
+    drawElevAll();
+}
+
+// Toggle custom measure-tool line visibility (Layout Guides ruler button).
+function toggleCustomLinesVisibility(btn) {
+    const anyLines = getElevCustomLines().length > 0;
+    if (!anyLines) return;
+    dimVisibility.customLines = !dimVisibility.customLines;
+    saveDimVisibility();
+    if (btn) btn.classList.toggle('active', dimVisibility.customLines);
     drawElevAll();
 }
 
@@ -8897,9 +8925,38 @@ function customLineSnapTargets() {
     });
     return { xs, ys };
 }
+
+// Discrete anchor POINTS (in inches) the measure tool snaps to: frame corners,
+// frame mid-edge points, and wall corners + mid-edges. Used for the live blue
+// dot indicator and to snap clicks to a real point.
+function anchorPointsForSnap() {
+    const pts = [];
+    const W = elevResolvedWallW, H = elevResolvedWallH;
+    // Wall corners + edge midpoints
+    pts.push({x:0,y:0},{x:W,y:0},{x:0,y:H},{x:W,y:H});
+    pts.push({x:W/2,y:0},{x:W/2,y:H},{x:0,y:H/2},{x:W,y:H/2});
+    elevFrames.forEach(f => {
+        if (!f.active) return;
+        const x0=f.x, x1=f.x+f.w, y0=f.y, y1=f.y+f.h, xm=f.x+f.w/2, ym=f.y+f.h/2;
+        // corners
+        pts.push({x:x0,y:y0},{x:x1,y:y0},{x:x0,y:y1},{x:x1,y:y1});
+        // mid outside edges
+        pts.push({x:xm,y:y0},{x:xm,y:y1},{x:x0,y:ym},{x:x1,y:ym});
+    });
+    return pts;
+}
+// Nearest anchor point to a given inches position, within tolerance. Returns
+// the point or null.
+function nearestAnchorPoint(xIn, yIn) {
+    const tolIn = 6; // ~6" capture radius (generous; feels magnetic)
+    let best = tolIn, found = null;
+    anchorPointsForSnap().forEach(pt => {
+        const d = Math.hypot(pt.x - xIn, pt.y - yIn);
+        if (d < best) { best = d; found = pt; }
+    });
+    return found;
+}
 function snapCoord(val, candidates) {
-    const tolIn = 1.0 * unitFactor('in', elevUnit); // ~1" snap radius (in current unit terms via px? use inches)
-    // val is in inches here; tolerance ~1 inch
     let best = 1.0, snapped = val;
     candidates.forEach(c => { const d = Math.abs(c - val); if (d < best) { best = d; snapped = c; } });
     return snapped;
@@ -8920,10 +8977,15 @@ function eventToElevInches(e) {
 function handleLineToolClick(e) {
     if (!lineToolActive) return;
     e.preventDefault(); e.stopPropagation();
-    const pt = eventToElevInches(e);
-    const tg = customLineSnapTargets();
-    pt.x = snapCoord(pt.x, tg.xs);
-    pt.y = snapCoord(pt.y, tg.ys);
+    let pt = eventToElevInches(e);
+    // Snap to nearest discrete anchor point if close; else snap coordinates.
+    const anc = nearestAnchorPoint(pt.x, pt.y);
+    if (anc) { pt = { x: anc.x, y: anc.y }; }
+    else {
+        const tg = customLineSnapTargets();
+        pt.x = snapCoord(pt.x, tg.xs);
+        pt.y = snapCoord(pt.y, tg.ys);
+    }
     if (!lineToolFirstPt) {
         lineToolFirstPt = pt;
         drawElevAll(); // show the pending marker
@@ -8932,23 +8994,54 @@ function handleLineToolClick(e) {
     // Second click: constrain to horizontal or vertical (whichever is larger).
     const a = lineToolFirstPt, b = pt;
     const dx = Math.abs(b.x - a.x), dy = Math.abs(b.y - a.y);
-    let line;
     const id = 'cl-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
-    if (dx >= dy) {
-        // horizontal: same y, snap that y to first point's y
-        line = { id, type: 'h', x1: a.x, x2: b.x, y: a.y };
-    } else {
-        line = { id, type: 'v', y1: a.y, y2: b.y, x: a.x };
-    }
-    // Store in inches (convert from current unit to inches)
     const toIn = unitFactor(elevUnit, 'in');
-    const stored = { id, type: line.type };
-    if (line.type === 'h') { stored.x1 = line.x1 * toIn; stored.x2 = line.x2 * toIn; stored.y = line.y * toIn; }
-    else { stored.y1 = line.y1 * toIn; stored.y2 = line.y2 * toIn; stored.x = line.x * toIn; }
+    const stored = { id };
+    if (dx >= dy) {
+        // horizontal line at y = a.y, spanning a.x..b.x. Store the true clicked
+        // anchor points so leaders can connect the line back to them.
+        stored.type = 'h';
+        stored.x1 = a.x * toIn; stored.x2 = b.x * toIn; stored.y = a.y * toIn;
+        stored.ay1 = a.y * toIn; stored.ay2 = b.y * toIn; // original click y's for leaders
+    } else {
+        stored.type = 'v';
+        stored.y1 = a.y * toIn; stored.y2 = b.y * toIn; stored.x = a.x * toIn;
+        stored.ax1 = a.x * toIn; stored.ax2 = b.x * toIn; // original click x's for leaders
+    }
     getElevCustomLines().push(stored);
     lineToolFirstPt = null;
     if (typeof pushHistory === 'function') pushHistory();
     drawElevAll();
+}
+
+// Live anchor indicator while the measure tool is active. Shows a blue dot at
+// the nearest anchor point; when over one, the cursor hides (the dot is the
+// indicator) and clicking will snap there. Also draws a live dashed preview
+// from the pending first point.
+function updateAnchorHoverDot(e) {
+    const layer = document.getElementById('custom-lines-layer');
+    if (!layer) return;
+    let dot = document.getElementById('anchor-hover-dot');
+    if (!dot) {
+        dot = document.createElement('div');
+        dot.id = 'anchor-hover-dot';
+        dot.setAttribute('data-export-skip', '1');
+        dot.setAttribute('data-html2canvas-ignore', 'true');
+        dot.style.cssText = 'position:absolute; width:11px; height:11px; border-radius:50%; background:var(--accent,#3b82f6); border:2px solid #fff; box-shadow:0 0 0 1px var(--accent,#3b82f6); transform:translate(-50%,50%); z-index:70; pointer-events:none; display:none;';
+        layer.appendChild(dot);
+    }
+    const pt = eventToElevInches(e);
+    const anc = nearestAnchorPoint(pt.x, pt.y);
+    const wall = document.getElementById('wall');
+    if (anc) {
+        dot.style.left = (anc.x * elevScale) + 'px';
+        dot.style.bottom = (anc.y * elevScale) + 'px';
+        dot.style.display = 'block';
+        if (wall) wall.style.cursor = 'none'; // dot replaces crosshair on anchor
+    } else {
+        dot.style.display = 'none';
+        if (wall) wall.style.cursor = 'crosshair';
+    }
 }
 
 function deleteCustomLine(id) {
@@ -8967,8 +9060,9 @@ function renderCustomLines() {
     layer.innerHTML = '';
     const inFromStore = unitFactor('in', elevUnit); // inches → current unit
     const lines = getElevCustomLines();
+    const hidden = (typeof dimVisibility !== 'undefined' && !dimVisibility.customLines);
 
-    // Pending first-point marker while drawing.
+    // Pending first-point marker while drawing (always shown when drawing).
     if (lineToolActive && lineToolFirstPt) {
         const m = document.createElement('div');
         m.setAttribute('data-export-skip', '1');
@@ -8976,21 +9070,53 @@ function renderCustomLines() {
         m.style.cssText = `position:absolute; left:${lineToolFirstPt.x*elevScale}px; bottom:${lineToolFirstPt.y*elevScale}px; width:8px; height:8px; transform:translate(-50%,50%); background:var(--accent,#3b82f6); border-radius:50%; z-index:60;`;
         layer.appendChild(m);
     }
+    if (hidden) return; // toggle off — draw nothing else
 
     lines.forEach(L => {
         // Convert stored inches → current unit for rendering.
         const type = L.type;
-        let aX, aY, len, value;
+        let value;
         if (type === 'h') {
             const x1 = L.x1 * inFromStore, x2 = L.x2 * inFromStore, y = L.y * inFromStore;
             value = Math.abs(x2 - x1);
             renderOneCustomLine(layer, L.id, 'h', Math.min(x1,x2), y, value, value);
+            // Dashed leaders from each endpoint's clicked anchor y up/down to the line y.
+            const ay1 = (typeof L.ay1 === 'number' ? L.ay1 : L.y) * inFromStore;
+            const ay2 = (typeof L.ay2 === 'number' ? L.ay2 : L.y) * inFromStore;
+            addCustomLeader(layer, 'v', x1, y, ay1);
+            addCustomLeader(layer, 'v', x2, y, ay2);
         } else {
             const y1 = L.y1 * inFromStore, y2 = L.y2 * inFromStore, x = L.x * inFromStore;
             value = Math.abs(y2 - y1);
             renderOneCustomLine(layer, L.id, 'v', x, Math.min(y1,y2), value, value);
+            const ax1 = (typeof L.ax1 === 'number' ? L.ax1 : L.x) * inFromStore;
+            const ax2 = (typeof L.ax2 === 'number' ? L.ax2 : L.x) * inFromStore;
+            addCustomLeader(layer, 'h', y1, x, ax1);
+            addCustomLeader(layer, 'h', y2, x, ax2);
         }
     });
+}
+
+// Dashed leader connecting a measurement-line endpoint back to the clicked
+// anchor. dir 'v' = vertical leader (connects along y) at a fixed x = posPerp;
+// dir 'h' = horizontal leader at a fixed y = posPerp. `lineCoord` is the line's
+// position on the perpendicular axis; `anchorCoord` is the clicked anchor's.
+function addCustomLeader(layer, dir, alongCoord, lineCoord, anchorCoord) {
+    if (Math.abs(lineCoord - anchorCoord) < 0.05) return; // coincident → no leader
+    const ext = document.createElement('div');
+    ext.className = 'dim-leader';
+    if (dir === 'v') {
+        // vertical dashed at x=alongCoord, from anchorCoord(y) to lineCoord(y)
+        const lo = Math.min(lineCoord, anchorCoord) * elevScale;
+        const hi = Math.max(lineCoord, anchorCoord) * elevScale;
+        ext.style.cssText = `position:absolute; left:${alongCoord*elevScale}px; bottom:${lo}px; height:${hi-lo}px; width:0; border-left:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
+    } else {
+        // horizontal dashed at y=alongCoord, from anchorCoord(x) to lineCoord(x)
+        const lo = Math.min(lineCoord, anchorCoord) * elevScale;
+        const hi = Math.max(lineCoord, anchorCoord) * elevScale;
+        ext.style.cssText = `position:absolute; bottom:${alongCoord*elevScale}px; left:${lo}px; width:${hi-lo}px; height:0; border-top:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
+    }
+    layer.appendChild(ext);
 }
 
 // Render a single custom line (similar visual to spacing dims) with ticks,
@@ -9033,10 +9159,44 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
         'background:var(--dim-color); color:#fff; font-size:13px; font-weight:bold; cursor:pointer;' +
         'z-index:61; opacity:' + (sel ? '0.95' : '0') + '; transition:opacity 0.12s; user-select:none; border:1.5px solid #fff; box-sizing:border-box;' +
         (type === 'h' ? 'right:-8px; top:50%; transform:translateY(-50%);' : 'left:50%; top:-8px; transform:translateX(-50%);');
-    del.onclick = (e) => { e.stopPropagation(); deleteCustomLine(id); };
+    del.onclick = (e) => { e.stopPropagation(); };
+    del.addEventListener('mousedown', (e) => {
+        // Run on mousedown + stop propagation so the parent line's drag-start
+        // handler doesn't fire (which would redraw and swallow the click).
+        e.stopPropagation();
+        e.preventDefault();
+        deleteCustomLine(id);
+    });
     dim.appendChild(del);
     dim.addEventListener('mouseenter', () => { if (!sel) del.style.opacity = '0.6'; });
     dim.addEventListener('mouseleave', () => { if (!sel) del.style.opacity = '0'; });
+
+    // Arrow chevron drag handle (matches the other dimension lines).
+    const grip = document.createElement('div');
+    grip.className = 'dim-drag-grip';
+    grip.setAttribute('data-export-skip', '1');
+    grip.setAttribute('data-html2canvas-ignore', 'true');
+    const chev = (dir) => {
+        const pts = { up:'4,11 8,5 12,11', down:'4,5 8,11 12,5', left:'11,4 5,8 11,12', right:'5,4 11,8 5,12' }[dir];
+        return `<svg viewBox="0 0 16 16" width="13" height="13" style="display:block;"><polyline points="${pts}" fill="none" stroke="var(--dim-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    };
+    if (type === 'h') {
+        grip.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; line-height:0; cursor:ns-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+        grip.innerHTML = chev('up') + chev('down');
+    } else {
+        grip.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; flex-direction:row; align-items:center; gap:30px; line-height:0; cursor:ew-resize; z-index:50; pointer-events:auto; opacity:0.35; transition:opacity 0.12s;';
+        grip.innerHTML = chev('left') + chev('right');
+    }
+    grip.onmouseenter = () => { grip.style.opacity = '1'; };
+    grip.onmouseleave = () => { grip.style.opacity = '0.35'; };
+    grip.addEventListener('mousedown', (e) => {
+        if (lineToolActive) return;
+        e.stopPropagation();
+        selectedCustomLine = id;
+        startCustomLineDrag(e, id);
+        drawElevAll();
+    });
+    dim.appendChild(grip);
 
     layer.appendChild(dim);
 }
