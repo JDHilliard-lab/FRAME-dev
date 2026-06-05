@@ -9594,7 +9594,10 @@ function drawElevTargetedSpacing() {
                         const hId = 'spacing-h-' + pairId;
                         const hOff = getDimOffset(hId);
                         anchorY += hOff;
-                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX), hId, hOff, { bandLo: oTop > oBot ? null : oTop, bandHi: oTop > oBot ? null : oBot });
+                        createElevArchSpacing(leftF.x + leftF.w, anchorY, rightF.x, anchorY, 'h', layer, elevFmtU(gapX), hId, hOff, {
+                            band1: { lo: leftF.y, hi: leftF.y + leftF.h },
+                            band2: { lo: rightF.y, hi: rightF.y + rightF.h },
+                        });
                     }
                     let botF = f1.y < f2.y ? f1 : f2; let topF = f1.y < f2.y ? f2 : f1;
                     if (topF.y >= botF.y + botF.h) {
@@ -9604,7 +9607,10 @@ function drawElevTargetedSpacing() {
                         const vId = 'spacing-v-' + pairId;
                         const vOff = getDimOffset(vId);
                         anchorX += vOff;
-                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY), vId, vOff, { bandLo: oRight > oLeft ? oLeft : null, bandHi: oRight > oLeft ? oRight : null });
+                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, elevFmtU(gapY), vId, vOff, {
+                            band1: { lo: botF.x, hi: botF.x + botF.w },
+                            band2: { lo: topF.x, hi: topF.x + topF.w },
+                        });
                     }
                     drawnPairs.add(pairId);
                 }
@@ -9654,7 +9660,10 @@ function drawPerFrameDistanceDims() {
             if (ceilingDist > 0) {
                 const id = 'edge-' + f.letter + '-ceiling';
                 const o = getDimOffset(id); const ax = verticalAnchorX + o;
-                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, elevFmtU(ceilingDist), id, o);
+                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, elevFmtU(ceilingDist), id, o, {
+                    band1: { lo: f.x, hi: f.x + f.w }, // frame endpoint (y = f.y+f.h)
+                    band2: null,                        // wall (ceiling) endpoint
+                });
             }
         }
         // FLOOR distance: from bottom of frame down to 0
@@ -9663,7 +9672,10 @@ function drawPerFrameDistanceDims() {
             if (floorDist > 0) {
                 const id = 'edge-' + f.letter + '-floor';
                 const o = getDimOffset(id); const ax = verticalAnchorX + o;
-                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, elevFmtU(floorDist), id, o);
+                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, elevFmtU(floorDist), id, o, {
+                    band1: null,                        // wall (floor) endpoint (y = 0)
+                    band2: { lo: f.x, hi: f.x + f.w },  // frame endpoint (y = f.y)
+                });
             }
         }
         // LEFT WALL distance: from left of frame back to 0
@@ -9672,7 +9684,10 @@ function drawPerFrameDistanceDims() {
             if (leftDist > 0) {
                 const id = 'edge-' + f.letter + '-left';
                 const o = getDimOffset(id); const ay = horizontalAnchorY + o;
-                createElevArchSpacing(0, ay, f.x, ay, 'h', layer, elevFmtU(leftDist), id, o);
+                createElevArchSpacing(0, ay, f.x, ay, 'h', layer, elevFmtU(leftDist), id, o, {
+                    band1: null,                        // wall (left) endpoint (x = 0)
+                    band2: { lo: f.y, hi: f.y + f.h },  // frame endpoint (x = f.x)
+                });
             }
         }
         // RIGHT WALL distance: from right of frame to wallW
@@ -9681,7 +9696,10 @@ function drawPerFrameDistanceDims() {
             if (rightDist > 0) {
                 const id = 'edge-' + f.letter + '-right';
                 const o = getDimOffset(id); const ay = horizontalAnchorY + o;
-                createElevArchSpacing(f.x + f.w, ay, wallW, ay, 'h', layer, elevFmtU(rightDist), id, o);
+                createElevArchSpacing(f.x + f.w, ay, wallW, ay, 'h', layer, elevFmtU(rightDist), id, o, {
+                    band1: { lo: f.y, hi: f.y + f.h },  // frame endpoint (x = f.x+f.w)
+                    band2: null,                         // wall (right) endpoint (x = wallW)
+                });
             }
         }
     });
@@ -9746,34 +9764,24 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
         const width = Math.abs(x2 - x1) * elevScale; const left = Math.min(x1, x2) * elevScale; const bottom = y1 * elevScale;
         dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment"></div>`;
-        // Leader extensions: only when the line has been pulled OUTSIDE the
-        // frame band (so it's no longer alongside the frames). Connect each
-        // endpoint to the NEAREST band edge — never run dashes along the frame.
+        // Leader extensions: per-endpoint. Each endpoint connects to ITS OWN
+        // frame's nearest edge, and only when the line is pulled OUTSIDE that
+        // frame's band (so no dashes run alongside an offset/taller frame).
         const lineY = y1; // inches
-        const hasBand = (typeof bandOpt.bandLo === 'number' && typeof bandOpt.bandHi === 'number');
-        if (Math.abs(offsetAmt) > 0.01 && hasBand) {
-            const bLo = bandOpt.bandLo, bHi = bandOpt.bandHi;
-            let edgeY = null;
-            if (lineY > bHi + 0.02) edgeY = bHi;        // pulled above → connect to top edge
-            else if (lineY < bLo - 0.02) edgeY = bLo;   // pulled below → connect to bottom edge
-            // else: line is within the band (touching/alongside) → no leader
-            if (edgeY !== null) {
+        if (Math.abs(offsetAmt) > 0.01) {
+            const ends = [
+                { xv: x1, band: bandOpt.band1 },
+                { xv: x2, band: bandOpt.band2 },
+            ];
+            ends.forEach(({ xv, band }) => {
+                if (atWallX(xv)) return;          // wall side → never
+                if (!band) return;                // no frame band → skip
+                let edgeY = null;
+                if (lineY > band.hi + 0.02) edgeY = band.hi;       // pulled above this frame
+                else if (lineY < band.lo - 0.02) edgeY = band.lo;  // pulled below this frame
+                // else: line still alongside THIS frame → no leader for it
+                if (edgeY === null) return;
                 const lo = Math.min(bottom, edgeY * elevScale), hi = Math.max(bottom, edgeY * elevScale);
-                [x1, x2].forEach(xv => {
-                    if (atWallX(xv)) return;
-                    const ext = document.createElement('div');
-                    ext.className = 'dim-leader';
-                    ext.style.cssText = `position:absolute; left:${xv*elevScale}px; bottom:${lo}px; height:${(hi-lo)}px; width:0; border-left:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
-                    container.appendChild(ext);
-                });
-            }
-        } else if (Math.abs(offsetAmt) > 0.01 && !hasBand) {
-            // No band info (e.g. edge-gap dim): fall back to connecting to the
-            // un-offset position, still skipping wall-side endpoints.
-            const origY = (y1 - offsetAmt) * elevScale;
-            const lo = Math.min(bottom, origY), hi = Math.max(bottom, origY);
-            [x1, x2].forEach(xv => {
-                if (atWallX(xv)) return;
                 const ext = document.createElement('div');
                 ext.className = 'dim-leader';
                 ext.style.cssText = `position:absolute; left:${xv*elevScale}px; bottom:${lo}px; height:${(hi-lo)}px; width:0; border-left:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
@@ -9788,31 +9796,22 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
         if (Math.min(y1, y2) < 0.001) { bottom = -1; height += 1; }
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
-        // Leader extensions: only when the line is pulled OUTSIDE the frame
-        // band horizontally. Connect to the nearest band edge; no dashes along
-        // the frame side.
+        // Leader extensions: per-endpoint, each to ITS OWN frame's nearest x
+        // edge, only when pulled outside that frame's band.
         const lineX = x1; // inches
-        const hasBandV = (typeof bandOpt.bandLo === 'number' && typeof bandOpt.bandHi === 'number');
-        if (Math.abs(offsetAmt) > 0.01 && hasBandV) {
-            const bLo = bandOpt.bandLo, bHi = bandOpt.bandHi;
-            let edgeX = null;
-            if (lineX > bHi + 0.02) edgeX = bHi;
-            else if (lineX < bLo - 0.02) edgeX = bLo;
-            if (edgeX !== null) {
-                const lo = Math.min(left, edgeX * elevScale), hi = Math.max(left, edgeX * elevScale);
-                [y1, y2].forEach(yv => {
-                    if (atWallY(yv)) return;
-                    const ext = document.createElement('div');
-                    ext.className = 'dim-leader';
-                    ext.style.cssText = `position:absolute; bottom:${yv*elevScale}px; left:${lo}px; width:${(hi-lo)}px; height:0; border-top:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
-                    container.appendChild(ext);
-                });
-            }
-        } else if (Math.abs(offsetAmt) > 0.01 && !hasBandV) {
-            const origX = (x1 - offsetAmt) * elevScale;
-            const lo = Math.min(left, origX), hi = Math.max(left, origX);
-            [y1, y2].forEach(yv => {
+        if (Math.abs(offsetAmt) > 0.01) {
+            const ends = [
+                { yv: y1, band: bandOpt.band1 },
+                { yv: y2, band: bandOpt.band2 },
+            ];
+            ends.forEach(({ yv, band }) => {
                 if (atWallY(yv)) return;
+                if (!band) return;
+                let edgeX = null;
+                if (lineX > band.hi + 0.02) edgeX = band.hi;
+                else if (lineX < band.lo - 0.02) edgeX = band.lo;
+                if (edgeX === null) return;
+                const lo = Math.min(left, edgeX * elevScale), hi = Math.max(left, edgeX * elevScale);
                 const ext = document.createElement('div');
                 ext.className = 'dim-leader';
                 ext.style.cssText = `position:absolute; bottom:${yv*elevScale}px; left:${lo}px; width:${(hi-lo)}px; height:0; border-top:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
