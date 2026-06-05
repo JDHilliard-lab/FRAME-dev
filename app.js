@@ -8300,8 +8300,9 @@ function drawElevAll() {
         if (!wallEl) return;
         let legend = document.getElementById('elev-unit-legend');
         if (legend) legend.remove();
-        // Always show the legend (full-word unit) — when the suffix is OFF it
-        // explains the unit, and when ON the user also wants it included.
+        // Legend and per-number suffixes are mutually exclusive: when suffixes
+        // are ON each number carries its unit, so the legend is hidden.
+        if (showUnitSuffix) return;
         legend = document.createElement('div');
         legend.id = 'elev-unit-legend';
         legend.className = 'elev-unit-legend';
@@ -9279,6 +9280,7 @@ function renderCustomLines() {
     }
     if (hidden) return; // toggle off — draw nothing else
 
+    const isFrameAnchor = (a) => a && a.ref === 'frame';
     lines.forEach(L => {
         const pa = resolveStoredAnchor(L.a);
         const pb = resolveStoredAnchor(L.b);
@@ -9290,16 +9292,16 @@ function renderCustomLines() {
             const lineY = pa.y + off;
             const value = Math.abs(x2 - x1);
             renderOneCustomLine(layer, L.id, 'h', Math.min(x1,x2), lineY, value, value);
-            // Leaders from each endpoint's anchor point up/down to the line.
-            addCustomLeader(layer, 'v', x1, lineY, pa.y);
-            addCustomLeader(layer, 'v', x2, lineY, pb.y);
+            // Leaders only for FRAME-anchored endpoints (skip wall edges).
+            if (isFrameAnchor(L.a)) addCustomLeader(layer, 'v', x1, lineY, pa.y);
+            if (isFrameAnchor(L.b)) addCustomLeader(layer, 'v', x2, lineY, pb.y);
         } else {
             const y1 = pa.y, y2 = pb.y;
             const lineX = pa.x + off;
             const value = Math.abs(y2 - y1);
             renderOneCustomLine(layer, L.id, 'v', lineX, Math.min(y1,y2), value, value);
-            addCustomLeader(layer, 'h', y1, lineX, pa.x);
-            addCustomLeader(layer, 'h', y2, lineX, pb.x);
+            if (isFrameAnchor(L.a)) addCustomLeader(layer, 'h', y1, lineX, pa.x);
+            if (isFrameAnchor(L.b)) addCustomLeader(layer, 'h', y2, lineX, pb.x);
         }
     });
 }
@@ -9732,20 +9734,31 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
     if (dimId && isDimHidden(dimId)) return; // user hid this dim via its ×
     const dim = document.createElement('div'); 
     dim.className = 'arch-dim ' + (type === 'h' ? 'arch-dim-h' : 'arch-dim-v');
-    
+
+    // Wall bounds in inches — endpoints sitting on these are wall edges
+    // (floor/ceiling/left/right) and should NOT get a dashed leader.
+    const WB = 0.02; // tolerance
+    const atWallX = (xv) => Math.abs(xv) < WB || Math.abs(xv - elevResolvedWallW) < WB;
+    const atWallY = (yv) => Math.abs(yv) < WB || Math.abs(yv - elevResolvedWallH) < WB;
+
     if(type === 'h') {
         const width = Math.abs(x2 - x1) * elevScale; const left = Math.min(x1, x2) * elevScale; const bottom = y1 * elevScale;
         dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment"></div>`;
-        // Leader extensions: when dragged off (offsetAmt != 0), connect both
-        // endpoints back to the un-offset y with dashed verticals.
+        // Leader extensions: when dragged off (offsetAmt != 0), connect each
+        // endpoint back to the un-offset y — but ONLY for endpoints at a frame
+        // edge (skip the floor/ceiling so no stray dashed line on the wall).
         if (Math.abs(offsetAmt) > 0.01) {
             const origY = (y1 - offsetAmt) * elevScale;   // un-offset position
             const lo = Math.min(bottom, origY), hi = Math.max(bottom, origY);
-            [Math.min(x1,x2)*elevScale, Math.max(x1,x2)*elevScale].forEach(xpx => {
+            // For a horizontal spacing line, the un-offset y is the frame edge
+            // it measures between; draw a leader at each x endpoint unless that
+            // endpoint x is a wall side.
+            [x1, x2].forEach(xv => {
+                if (atWallX(xv)) return; // endpoint at a wall side → no leader
                 const ext = document.createElement('div');
                 ext.className = 'dim-leader';
-                ext.style.cssText = `position:absolute; left:${xpx}px; bottom:${lo}px; height:${(hi-lo)}px; width:0; border-left:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
+                ext.style.cssText = `position:absolute; left:${xv*elevScale}px; bottom:${lo}px; height:${(hi-lo)}px; width:0; border-left:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
                 container.appendChild(ext);
             });
         }
@@ -9753,18 +9766,20 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
         let height = Math.abs(y2 - y1) * elevScale; const left = x1 * elevScale;
         let bottom = Math.min(y1, y2) * elevScale;
         // Floor-anchored lines (y≈0) extend down past the content box to touch
-        // the 4px floor border, so they don't stop 4px short of the floor.
-        if (Math.min(y1, y2) < 0.001) { bottom = -4; height += 4; }
+        // the 1px floor border, so they sit flush on the floor.
+        if (Math.min(y1, y2) < 0.001) { bottom = -1; height += 1; }
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;`;
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>`;
-        // Leader extensions: connect both endpoints back to the un-offset x.
+        // Leader extensions: connect each endpoint back to the un-offset x, but
+        // only for endpoints at a frame edge (skip floor/ceiling y bounds).
         if (Math.abs(offsetAmt) > 0.01) {
             const origX = (x1 - offsetAmt) * elevScale;
             const lo = Math.min(left, origX), hi = Math.max(left, origX);
-            [Math.min(y1,y2)*elevScale, Math.max(y1,y2)*elevScale].forEach(ypx => {
+            [y1, y2].forEach(yv => {
+                if (atWallY(yv)) return; // endpoint at floor/ceiling → no leader
                 const ext = document.createElement('div');
                 ext.className = 'dim-leader';
-                ext.style.cssText = `position:absolute; bottom:${ypx}px; left:${lo}px; width:${(hi-lo)}px; height:0; border-top:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
+                ext.style.cssText = `position:absolute; bottom:${yv*elevScale}px; left:${lo}px; width:${(hi-lo)}px; height:0; border-top:1px dashed var(--dim-color); opacity:0.7; pointer-events:none;`;
                 container.appendChild(ext);
             });
         }
