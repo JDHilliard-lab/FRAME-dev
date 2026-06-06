@@ -9281,6 +9281,25 @@ function renderCustomLines() {
     if (hidden) return; // toggle off — draw nothing else
 
     const isFrameAnchor = (a) => a && a.ref === 'frame';
+    // Perpendicular band of the frame an endpoint is anchored to. For an h-line
+    // the leader is vertical → band is the frame's y-extent; for a v-line the
+    // leader is horizontal → band is the frame's x-extent.
+    const frameBand = (a, axis) => {
+        if (!isFrameAnchor(a)) return null;
+        const f = elevFrames.find(fr => fr.letter === a.letter && fr.active);
+        if (!f) return null;
+        return axis === 'y' ? { lo: f.y, hi: f.y + f.h } : { lo: f.x, hi: f.x + f.w };
+    };
+    // Draw a leader from the line to the nearest frame edge, ONLY when the line
+    // is pulled outside the frame's band (so no dashes run alongside the frame).
+    const frameLeader = (dir, alongCoord, linePerp, band) => {
+        if (!band) return;
+        let edge = null;
+        if (linePerp > band.hi + 0.02) edge = band.hi;
+        else if (linePerp < band.lo - 0.02) edge = band.lo;
+        if (edge === null) return; // line still alongside the frame → no leader
+        addCustomLeader(layer, dir, alongCoord, linePerp, edge);
+    };
     lines.forEach(L => {
         const pa = resolveStoredAnchor(L.a);
         const pb = resolveStoredAnchor(L.b);
@@ -9292,16 +9311,17 @@ function renderCustomLines() {
             const lineY = pa.y + off;
             const value = Math.abs(x2 - x1);
             renderOneCustomLine(layer, L.id, 'h', Math.min(x1,x2), lineY, value, value);
-            // Leaders only for FRAME-anchored endpoints (skip wall edges).
-            if (isFrameAnchor(L.a)) addCustomLeader(layer, 'v', x1, lineY, pa.y);
-            if (isFrameAnchor(L.b)) addCustomLeader(layer, 'v', x2, lineY, pb.y);
+            // Vertical leaders to each frame's nearest horizontal edge.
+            frameLeader('v', x1, lineY, frameBand(L.a, 'y'));
+            frameLeader('v', x2, lineY, frameBand(L.b, 'y'));
         } else {
             const y1 = pa.y, y2 = pb.y;
             const lineX = pa.x + off;
             const value = Math.abs(y2 - y1);
             renderOneCustomLine(layer, L.id, 'v', lineX, Math.min(y1,y2), value, value);
-            if (isFrameAnchor(L.a)) addCustomLeader(layer, 'h', y1, lineX, pa.x);
-            if (isFrameAnchor(L.b)) addCustomLeader(layer, 'h', y2, lineX, pb.x);
+            // Horizontal leaders to each frame's nearest vertical edge.
+            frameLeader('h', y1, lineX, frameBand(L.a, 'x'));
+            frameLeader('h', y2, lineX, frameBand(L.b, 'x'));
         }
     });
 }
