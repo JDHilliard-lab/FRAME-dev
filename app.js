@@ -3648,6 +3648,14 @@ function importDashCSV(e) {
             d.fW = cellNum(cols, 'Frame (Width)', 1.25);
             d.fHeight = cellNum(cols, 'Frame (Height)', 0);
             d.rabbetDepth = cellNum(cols, 'Rabbet Depth', 0);
+            // Floater face width (swatch _f tag), stored in inches in the CSV.
+            // Restore in the current dashboard unit. Only meaningful for floaters.
+            {
+                const rawFace = cellOr(cols, 'RAW Frame Face W (in)', '');
+                if (rawFace !== '' && !isNaN(parseFloat(rawFace))) {
+                    d._faceWidth = dashFmt(parseFloat(rawFace) * unitFactor('in', dashUnit));
+                }
+            }
 
             // Float mount fields. These are populated only when product is float-mount-active.
             // Auto-detect by reading the FM Backer Name column — if present, the row uses float mount.
@@ -5474,7 +5482,13 @@ function buildSpecStrings(r) {
     // Skipped entirely for Wrapped Canvas (no frame at all).
     let frameSize = '';
     if (!isFL) {
-        const fwStr = fmt(r.fW);
+        // For floaters, the visible frame "width" is the canvas FACE width (the
+        // swatch _f tag, stored as _faceWidth), not the moulding profile width.
+        let widthForSize = r.fW;
+        if (isC && r._faceWidth !== undefined && r._faceWidth !== null && r._faceWidth !== '' && parseFloat(r._faceWidth) > 0) {
+            widthForSize = r._faceWidth;
+        }
+        const fwStr = fmt(widthForSize);
         const fhStr = fmt(r.fHeight);
         const rabStr = fmt(r.rabbetDepth);
         const parts = [];
@@ -5874,6 +5888,7 @@ function buildDashCSVString() {
         // in whatever output unit the user picks, so one CSV can be re-rendered
         // in any of IN/CM/MM cleanly.
         `RAW Frame W (in),RAW Frame H (in),RAW Rabbet (in),` +
+        `RAW Frame Face W (in),` +
         `RAW Mat T (in),RAW Mat B (in),RAW Mat L (in),RAW Mat R (in),` +
         `RAW Mat 2 Reveal (in),` +
         `RAW Paper W (in),RAW Paper H (in),RAW White Border (in)\n`;
@@ -5992,6 +6007,11 @@ function buildDashCSVString() {
             iFL ? '' : dashFmt((parseFloat(r.fW) || 0) * _toIn),
             iFL ? '' : dashFmt((parseFloat(r.fHeight) || 0) * _toIn),
             iFL ? '' : (r.rabbetDepth ? dashFmt(parseFloat(r.rabbetDepth) * _toIn) : ''),
+            // Floater face width (the swatch's _f tag): the visible frame face
+            // on a floater. Used by the InDesign spec script as the floater's
+            // "Frame Size" width. Only floaters have it; blank otherwise.
+            (iC && r._faceWidth !== undefined && r._faceWidth !== null && r._faceWidth !== '')
+                ? dashFmt((parseFloat(r._faceWidth) || 0) * _toIn) : '',
             (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1T) || 0) * _toIn) : '',
             (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1B) || 0) * _toIn) : '',
             (r.m1A !== false && !matsHidden) ? dashFmt((parseFloat(r.m1L) || 0) * _toIn) : '',
