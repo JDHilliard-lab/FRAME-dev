@@ -8871,7 +8871,7 @@ function drawElevGuides(wallW, wallH) {
     cl.style.left = ((wallW / 2) * elevScale) + 'px'; cl.style.bottom = '0px';
     // WALL CENTER label sits OUTSIDE the wall, just above the top of the
     // center line (was inside near the top, where it clashed with frames/dims).
-    cl.innerHTML = `<span class="center-label">WALL CENTER</span>`;
+    cl.innerHTML = `<span class="center-label">WALL\u00A0CENTER</span>`;
     guideLayer.appendChild(cl);
 
     const hangVal = getHangHeight();
@@ -10575,6 +10575,19 @@ async function exportElevPNG() {
             scale: 3,
             useCORS: true,
             allowTaint: true,
+            onclone: (clonedDoc) => {
+                // html2canvas renders `writing-mode: vertical-rl` + rotate(180)
+                // upside-down. In the CLONE only, swap the hang label to plain
+                // horizontal text rotated -90° (same visual, reads bottom→top)
+                // which rasterizes correctly. Screen/SVG output is unaffected.
+                clonedDoc.querySelectorAll('.hang-label').forEach(el => {
+                    el.style.writingMode = 'horizontal-tb';
+                    el.style.transform = 'translateY(-50%) rotate(-90deg)';
+                    el.style.transformOrigin = 'center';
+                    // padding was tuned for vertical text; swap to horizontal
+                    el.style.padding = '2px 6px';
+                });
+            },
         });
         const a = document.createElement('a');
         a.download = `${elevations[currentElevIndex].name.replace(/[^a-z0-9]/gi, '_')}.png`;
