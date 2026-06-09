@@ -10577,15 +10577,27 @@ async function exportElevPNG() {
             allowTaint: true,
             onclone: (clonedDoc) => {
                 // html2canvas renders `writing-mode: vertical-rl` + rotate(180)
-                // upside-down. In the CLONE only, swap the hang label to plain
-                // horizontal text rotated -90° (same visual, reads bottom→top)
-                // which rasterizes correctly. Screen/SVG output is unaffected.
+                // upside-down. In the CLONE only, rebuild the hang label as
+                // plain horizontal text rotated -90° (reads bottom→top, matching
+                // the screen). Screen/SVG output is unaffected.
+                //
+                // Positioning must NOT depend on the text width: when horizontal
+                // the box is wide, so anchoring by right:100% pushes it too far
+                // left (onto the wall-height dim line). Instead we rotate about
+                // the element's CENTER and use percentage translates (which
+                // reference the element's own border-box) so the rotated block
+                // lands centered just-left-of the wall edge, on the hang line,
+                // regardless of how long the label text is.
                 clonedDoc.querySelectorAll('.hang-label').forEach(el => {
                     el.style.writingMode = 'horizontal-tb';
-                    el.style.transform = 'translateY(-50%) rotate(-90deg)';
-                    el.style.transformOrigin = 'center';
-                    // padding was tuned for vertical text; swap to horizontal
+                    el.style.whiteSpace = 'nowrap';
                     el.style.padding = '2px 6px';
+                    el.style.marginRight = '0';
+                    el.style.transformOrigin = 'center';
+                    // translate(50%,-50%) rotate(-90deg): centers the rotated
+                    // block at the wall's left edge on the line; the -20px in X
+                    // tucks it just outside the wall (clear of the red dim line).
+                    el.style.transform = 'translate(calc(50% - 20px), -50%) rotate(-90deg)';
                 });
             },
         });
