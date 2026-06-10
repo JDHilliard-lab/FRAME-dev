@@ -53,6 +53,15 @@
   },
   {
     "vendor": "michaelangelo",
+    "collection": "Shadow-Boxes",
+    "code": "MICH-331-09",
+    "width": 0.875,
+    "path": "library/michaelangelo/Shadow-Boxes/MICH-331-09_0.875_d2.75_r2.4375.jpg",
+    "depth": 2.75,
+    "rabbet": 2.4375
+  },
+  {
+    "vendor": "michaelangelo",
     "collection": "avant-garde",
     "code": "MICH-241-11",
     "width": 1.25,
