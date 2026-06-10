@@ -5425,7 +5425,7 @@ function suggestedCanvasWrapFromRabbet(r) {
 //     matboard:    <legacy>,   // kept for old InDesign scripts that expect it
 //     lines:       [           // new rich format — array of label/value pairs
 //       { label: "Application",  value: "Framed Art" },
-//       { label: "Frame Size",   value: "1.25\"W × 1.625\"D, Rabbet 0.625\"D" },
+//       { label: "Frame Size",   value: "1.25\"W × 1.625\"D, Rabbet 0.625\"" },
 //       ...
 //     ]
 //   }
@@ -5495,7 +5495,7 @@ function buildSpecStrings(r) {
         if (fwStr) parts.push(`${fwStr}${sufTight}W`);
         if (fhStr) parts.push(`${fhStr}${sufTight}D`);
         let primary = parts.join(' × ');
-        if (rabStr) primary = primary ? `${primary}, Rabbet ${rabStr}${sufTight}D` : `Rabbet ${rabStr}${sufTight}D`;
+        if (rabStr) primary = primary ? `${primary}, Rabbet ${rabStr}${sufTight}` : `Rabbet ${rabStr}${sufTight}`;
         frameSize = primary;
     }
 
