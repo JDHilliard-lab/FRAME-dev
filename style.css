@@ -80,8 +80,11 @@ input[type="number"] { -moz-appearance: textfield; }
 body:not(.light-theme) .logo-light { display: none !important; }
 body:not(.light-theme) .logo-dark { display: block !important; }
 
-.nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
-.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; -ms-overflow-style: auto; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
+.nav-tabs::-webkit-scrollbar { height: 5px; }
+.nav-tabs::-webkit-scrollbar-track { background: transparent; }
+.nav-tabs::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+.nav-tabs::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 .nav-tab { display: flex; align-items: center; gap: 8px; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: bold; height: 100%; padding: 0 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; border-bottom: 3px solid transparent; position: relative; }
 .nav-tab:hover { background: var(--bg-subpanel); color: var(--text-strong); }
