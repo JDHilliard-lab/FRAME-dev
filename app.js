@@ -1779,6 +1779,31 @@ function renderNavTabs() {
         tab.addEventListener('drop', handleTabDrop);
         tab.addEventListener('dragend', handleTabDragEnd);
     });
+
+    // Overflow ergonomics for projects with many elevations:
+    // 1) Vertical mouse-wheel over the tab bar scrolls it horizontally
+    //    (wired once — guarded by a flag on the container).
+    if (!container._wheelWired) {
+        container._wheelWired = true;
+        container.addEventListener('wheel', (e) => {
+            // Only intercept when the bar actually overflows and the wheel is
+            // predominantly vertical (trackpads emit real deltaX themselves).
+            if (container.scrollWidth <= container.clientWidth) return;
+            if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+            e.preventDefault();
+            container.scrollLeft += e.deltaY;
+        }, { passive: false });
+    }
+    // 2) Keep the ACTIVE tab visible — when switching/adding elevations the
+    //    active tab may sit past the right edge; bring it into view.
+    const activeTab = container.querySelector('.nav-tab.active');
+    if (activeTab && container.scrollWidth > container.clientWidth) {
+        const cRect = container.getBoundingClientRect();
+        const tRect = activeTab.getBoundingClientRect();
+        if (tRect.left < cRect.left || tRect.right > cRect.right) {
+            activeTab.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+        }
+    }
 }
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -7645,6 +7670,11 @@ async function batchDownloadAllFramesAsZip() {
     document.getElementById('batchZipPercentLabel').textContent = '0%';
     document.getElementById('batchZipCountLabel').textContent = `0 / ${dashProjectData.length}`;
     document.getElementById('batchZipCurrentFile').textContent = '';
+    // The modal is shared with the bulk elevation export — re-assert the
+    // frame-pack wording in case the other feature ran last.
+    (function(){ const t=document.getElementById('batchZipTitle'); if(t) t.textContent='Building Frame Pack';
+        const d=document.getElementById('batchZipDesc'); if(d) d.textContent='Generating PNG files and bundling with the project CSV into a single ZIP.';
+        const dt=document.getElementById('batchZipDoneTitle'); if(dt) dt.textContent='Frame Pack Ready'; })();
     modal.style.display = 'flex';
 
     const zip = new JSZip();
@@ -7780,6 +7810,142 @@ function cancelBatchZip() {
     _batchZipCancelled = true;
     // Update modal to show cancellation is in progress
     document.getElementById('batchZipCurrentFile').textContent = 'Cancelling…';
+}
+
+// ──────────────────────────────────────────────────────────────────────────
+// BULK ELEVATION EXPORT (ZIP)
+// ──────────────────────────────────────────────────────────────────────────
+// Renders EVERY elevation to SVG or PNG and bundles them into one ZIP.
+// Reuses the batch ZIP modal (progress bar + cancel) and the single-export
+// renderers via their returnBlob mode, so bulk output is pixel/byte-identical
+// to individual exports. The user's current elevation is restored at the end.
+// Per-elevation failures are recorded and reported without aborting the run.
+async function bulkExportElevations(format) {
+    const isSvg = (format === 'svg');
+    if (!elevations.length) {
+        return showInfoModal('Nothing to Export', 'There are no elevations in the project yet.');
+    }
+    if (typeof JSZip === 'undefined') {
+        return showInfoModal('Library Not Loaded', 'JSZip failed to load. Refresh the page and try again.');
+    }
+
+    // Remember where the user was so we can put them back afterwards.
+    const origView = currentView;
+    const origIndex = currentElevIndex;
+
+    _batchZipCancelled = false;
+    const setTxt = (id, t) => { const el = document.getElementById(id); if (el) el.textContent = t; };
+    const modal = document.getElementById('batchZipModal');
+    document.getElementById('batchZipRunning').style.display = 'block';
+    document.getElementById('batchZipDone').style.display = 'none';
+    document.getElementById('batchZipError').style.display = 'none';
+    document.getElementById('batchZipProgressBar').style.width = '0%';
+    setTxt('batchZipPercentLabel', '0%');
+    setTxt('batchZipCountLabel', `0 / ${elevations.length}`);
+    setTxt('batchZipCurrentFile', '');
+    setTxt('batchZipTitle', isSvg ? 'Exporting All Elevations (SVG)' : 'Exporting All Elevations (PNG)');
+    setTxt('batchZipDesc', 'Rendering each elevation and bundling everything into a single ZIP.');
+    modal.style.display = 'flex';
+
+    const zip = new JSZip();
+    const total = elevations.length;
+    let successCount = 0;
+    let failureCount = 0;
+    const failures = [];
+    const usedNames = {};
+    const restoreUserView = () => {
+        if (origView === 'elevation' && elevations[origIndex]) switchView('elevation', origIndex);
+        else if (origView === 'dashboard') switchView('dashboard');
+    };
+
+    try {
+        for (let i = 0; i < total; i++) {
+            if (_batchZipCancelled) {
+                modal.style.display = 'none';
+                restoreUserView();
+                return;
+            }
+
+            // Load this elevation into the live view (the renderers read the
+            // live DOM) and let layout settle before capturing.
+            switchView('elevation', i);
+            await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+            const elevName = (elevations[i] && elevations[i].name) || `Elevation_${i + 1}`;
+            setTxt('batchZipCurrentFile', `Rendering ${elevName}…`);
+            setTxt('batchZipCountLabel', `${i} / ${total}`);
+            const pct = Math.round((i / total) * 100);
+            document.getElementById('batchZipProgressBar').style.width = pct + '%';
+            setTxt('batchZipPercentLabel', pct + '%');
+            await new Promise(r => setTimeout(r, 0));  // let the modal paint
+
+            try {
+                const res = isSvg
+                    ? await exportElevSVG({ returnBlob: true })
+                    : await exportElevPNG({ returnBlob: true });
+                if (!res || !res.blob) throw new Error('renderer returned no data');
+                // Collision-safe filenames (two elevations could share a name)
+                const ext = isSvg ? '.svg' : '.png';
+                const base = res.filename.replace(new RegExp(ext.replace('.', '\\.') + '$', 'i'), '');
+                let fileName = base + ext;
+                if (usedNames[fileName]) {
+                    let n = 2;
+                    while (usedNames[`${base}-${n}${ext}`]) n++;
+                    fileName = `${base}-${n}${ext}`;
+                }
+                usedNames[fileName] = true;
+                zip.file(fileName, res.blob);
+                successCount++;
+            } catch (elevErr) {
+                failureCount++;
+                failures.push(`${elevName}: ${elevErr.message || elevErr}`);
+            }
+        }
+
+        // Put the user back on their elevation before the (possibly slow)
+        // ZIP generation so the workspace looks normal again immediately.
+        restoreUserView();
+
+        if (_batchZipCancelled) { modal.style.display = 'none'; return; }
+        if (successCount === 0) {
+            document.getElementById('batchZipRunning').style.display = 'none';
+            document.getElementById('batchZipError').style.display = 'block';
+            setTxt('batchZipErrorMsg', `No elevations could be rendered. ${failures.join(' · ')}`);
+            return;
+        }
+
+        setTxt('batchZipCurrentFile', 'Building ZIP…');
+        const zipBlob = await zip.generateAsync(
+            { type: 'blob', compression: 'DEFLATE', compressionOptions: { level: 6 } },
+            (meta) => {
+                document.getElementById('batchZipProgressBar').style.width = meta.percent.toFixed(0) + '%';
+                setTxt('batchZipPercentLabel', meta.percent.toFixed(0) + '%');
+            }
+        );
+
+        const projEl = document.getElementById('g_projName');
+        const projSlug = slugifyForFilename(projEl ? projEl.value : '');
+        const zipName = `${projSlug}-Elevations-${isSvg ? 'SVG' : 'PNG'}.zip`;
+        const url = URL.createObjectURL(zipBlob);
+        const a = document.createElement('a');
+        a.download = zipName;
+        a.href = url;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+        document.getElementById('batchZipRunning').style.display = 'none';
+        document.getElementById('batchZipDone').style.display = 'block';
+        setTxt('batchZipDoneTitle', 'Elevations Exported');
+        let doneMsg = `${successCount} elevation${successCount === 1 ? '' : 's'} exported to ${zipName}.`;
+        if (failureCount > 0) doneMsg += ` ${failureCount} failed: ${failures.join(' · ')}`;
+        setTxt('batchZipDoneMsg', doneMsg);
+    } catch (err) {
+        console.error('Bulk elevation export failed:', err);
+        restoreUserView();
+        document.getElementById('batchZipRunning').style.display = 'none';
+        document.getElementById('batchZipError').style.display = 'block';
+        setTxt('batchZipErrorMsg', `An unexpected error stopped the export: ${err.message || err}`);
+    }
 }
 
 // Download the InDesign script (AutoFrameSpecs.jsx). Fetched from the deployed
@@ -10377,7 +10543,7 @@ async function _getPersonSvgDataUrl() {
     }
 }
 
-async function exportElevPNG() {
+async function exportElevPNG(opts) {
     const ws = document.querySelector('#view-elevation .workspace');
     const wrap = document.getElementById('export-wrap');
     const wall = document.getElementById('wall');
@@ -10643,12 +10809,23 @@ async function exportElevPNG() {
                 });
             },
         });
+        const pngName = `${elevations[currentElevIndex].name.replace(/[^a-z0-9]/gi, '_')}.png`;
+        // Bulk-export mode: hand the blob back instead of downloading.
+        // The finally block still restores theme/zoom/person/etc.
+        if (opts && opts.returnBlob) {
+            const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+            if (!blob) throw new Error('canvas.toBlob returned null');
+            return { blob: blob, filename: pngName };
+        }
         const a = document.createElement('a');
-        a.download = `${elevations[currentElevIndex].name.replace(/[^a-z0-9]/gi, '_')}.png`;
+        a.download = pngName;
         a.href = canvas.toDataURL("image/png");
         a.click();
     } catch (err) {
         console.error(err);
+        // Bulk mode: let the ZIP loop record the failure (one alert per
+        // elevation would be hostile). Single export keeps the alert.
+        if (opts && opts.returnBlob) throw err;
         alert("Image Export Failed: " + (err && err.message ? err.message : "Unknown error") +
               "\n\nIf you opened this file directly (file://...), browser security blocks local file access. Please serve the folder via a local web server (e.g. VS Code Live Server) and try again.");
     } finally {
@@ -10869,7 +11046,7 @@ function _measureSvgText(text, fontSize, fontWeight, fontFamily) {
     return _svgMeasureCtx.measureText(text).width;
 }
 
-async function exportElevSVG() {
+async function exportElevSVG(opts) {
     const wall = document.getElementById('wall');
     if (!wall) return;
 
@@ -11199,10 +11376,14 @@ async function exportElevSVG() {
         const svgStr = parts.join('\n');
 
         const blob = new Blob([svgStr], { type: 'image/svg+xml' });
+        const elevName = (elevations[currentElevIndex] && elevations[currentElevIndex].name) || `Elevation_${currentElevIndex + 1}`;
+        const fname = elevName.replace(/[\\/:*?"<>|]/g, '_') + '.svg';
+        // Bulk-export mode: hand the blob back to the caller (ZIP loop)
+        // instead of downloading. The finally block still restores theme/zoom.
+        if (opts && opts.returnBlob) return { blob: blob, filename: fname };
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        const elevName = (elevations[currentElevIndex] && elevations[currentElevIndex].name) || `Elevation_${currentElevIndex + 1}`;
-        a.download = elevName.replace(/[\\/:*?"<>|]/g, '_') + '.svg';
+        a.download = fname;
         a.href = url;
         a.click();
         setTimeout(() => URL.revokeObjectURL(url), 1000);
