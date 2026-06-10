@@ -565,6 +565,12 @@
                             <button class="action-btn btn-secondary" style="width:38px; height:26px; padding:0; flex-shrink:0; font-size:0.6rem; font-weight:700; letter-spacing:0.5px;" title="Export elevation as SVG (crisp vector — opens in Illustrator/InDesign)" onclick="exportElevSVG()">
                                 SVG
                             </button>
+                            <button class="action-btn btn-secondary" style="width:54px; height:26px; padding:0; flex-shrink:0; font-size:0.55rem; font-weight:700; letter-spacing:0.4px;" title="Export ALL elevations as PNG into a single ZIP" onclick="bulkExportElevations('png')">
+                                ALL PNG
+                            </button>
+                            <button class="action-btn btn-secondary" style="width:54px; height:26px; padding:0; flex-shrink:0; font-size:0.55rem; font-weight:700; letter-spacing:0.4px;" title="Export ALL elevations as SVG into a single ZIP" onclick="bulkExportElevations('svg')">
+                                ALL SVG
+                            </button>
                         </div>
                     </div>
 
@@ -778,8 +784,8 @@
 
         <!-- RUNNING STATE -->
         <div id="batchZipRunning">
-            <h3 style="margin-top:0; margin-bottom: 4px; font-size:1.05rem; color:var(--text-strong);">Building Frame Pack</h3>
-            <p style="font-size:0.7rem; color:var(--text-muted); margin: 0 0 16px 0;">
+            <h3 id="batchZipTitle" style="margin-top:0; margin-bottom: 4px; font-size:1.05rem; color:var(--text-strong);">Building Frame Pack</h3>
+            <p id="batchZipDesc" style="font-size:0.7rem; color:var(--text-muted); margin: 0 0 16px 0;">
                 Generating PNG files and bundling with the project CSV into a single ZIP.
             </p>
             <div style="background: var(--border-color); border-radius: 4px; height: 8px; overflow:hidden; margin-bottom: 8px;">
@@ -795,7 +801,7 @@
 
         <!-- DONE STATE -->
         <div id="batchZipDone" style="display:none;">
-            <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:var(--text-strong);">Frame Pack Ready</h3>
+            <h3 id="batchZipDoneTitle" style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:var(--text-strong);">Frame Pack Ready</h3>
             <p id="batchZipDoneMsg" style="font-size:0.75rem; color:var(--text-main); margin: 0 0 18px 0; line-height: 1.4;">…</p>
             <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="document.getElementById('batchZipModal').style.display='none'">Close</button>
         </div>
