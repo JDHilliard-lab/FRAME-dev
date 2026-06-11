@@ -10826,7 +10826,7 @@ async function exportElevPNG(opts) {
                 });
             },
         });
-        const pngName = `${elevations[currentElevIndex].name.replace(/[^a-z0-9]/gi, '_')}.png`;
+        const pngName = `${elevations[currentElevIndex].name.replace(/[\\/:*?"<>|]/g, '_')}.png`;
         // Bulk-export mode: hand the blob back instead of downloading.
         // The finally block still restores theme/zoom/person/etc.
         if (opts && opts.returnBlob) {
