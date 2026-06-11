@@ -80,7 +80,8 @@ input[type="number"] { -moz-appearance: textfield; }
 body:not(.light-theme) .logo-light { display: none !important; }
 body:not(.light-theme) .logo-dark { display: block !important; }
 
-.nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; -ms-overflow-style: auto; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
+.nav-tabs-fixed { display: flex; height: 100%; align-items: center; flex-shrink: 0; }
+.nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; overflow-y: hidden; -ms-overflow-style: auto; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
 .nav-tabs::-webkit-scrollbar { height: 5px; }
 .nav-tabs::-webkit-scrollbar-track { background: transparent; }
 .nav-tabs::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
