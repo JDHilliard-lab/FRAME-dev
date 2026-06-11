@@ -1755,8 +1755,24 @@ function setupDashPreviewDragHandle() {
 
 function renderNavTabs() {
     const container = document.getElementById('nav-tabs-container');
-    let html = `<div class="nav-tab ${currentView==='dashboard'?'active':''}" onclick="switchView('dashboard')">Frame Dashboard</div><div class="tab-divider"></div>`;
-    
+    const fixed = document.getElementById('nav-tabs-fixed');
+    const dashHtml = `<div class="nav-tab ${currentView==='dashboard'?'active':''}" onclick="switchView('dashboard')">Frame Dashboard</div><div class="tab-divider"></div>`;
+
+    // Preserve the horizontal scroll position across rebuilds — innerHTML
+    // assignment resets scrollLeft to 0, which made the bar jump to the far
+    // left after deleting/renaming a far-right elevation.
+    const prevScroll = container.scrollLeft;
+
+    let html = '';
+    if (fixed) {
+        // Frame Dashboard tab lives in the fixed (non-scrolling) container so
+        // it stays pinned while the elevation tabs scroll beside it.
+        fixed.innerHTML = dashHtml;
+    } else {
+        // Fallback for stale HTML: keep the old single-container layout.
+        html = dashHtml;
+    }
+
     elevations.forEach((elev, idx) => {
         let isActive = (currentView === 'elevation' && currentElevIndex === idx) ? 'active' : '';
         // draggable=true enables HTML5 drag-and-drop. data-tab-idx is read by
@@ -1770,6 +1786,7 @@ function renderNavTabs() {
                  </div>`;
     });
     container.innerHTML = html;
+    container.scrollLeft = prevScroll;
     // Wire up drag-and-drop on the elevation tabs (skip the Frame Dashboard
     // tab — it always stays first).
     container.querySelectorAll('.nav-tab[draggable="true"]').forEach(tab => {
