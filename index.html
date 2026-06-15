@@ -1256,17 +1256,27 @@
     <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:380px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 style="margin-top:0; margin-bottom:12px; font-size:1.1rem; color:var(--text-strong);">Keyboard Shortcuts</h3>
         <div style="display:grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size:0.75rem; color:var(--text-main); line-height: 1.5;">
+            <div style="grid-column:1/-1; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); font-weight:700; margin-top:2px;">Frames</div>
             <kbd class="kbd-key">&larr;&nbsp;&uarr;&nbsp;&rarr;&nbsp;&darr;</kbd><span>Nudge selected frames by small step</span>
             <kbd class="kbd-key">Shift&nbsp;+&nbsp;Arrow</kbd><span>Nudge by big step</span>
             <kbd class="kbd-key">Delete</kbd><span>Remove selected frames</span>
             <kbd class="kbd-key">Esc</kbd><span>Deselect all frames</span>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;D</kbd><span>Duplicate selected frame</span>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;G</kbd><span>Group / ungroup selected frames</span>
+            <kbd class="kbd-key">Click</kbd><span>Select one frame</span>
+            <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Click</kbd><span>Add/remove from multi-selection</span>
+
+            <div style="grid-column:1/-1; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); font-weight:700; margin-top:8px;">Measure Line Tool</div>
+            <kbd class="kbd-key">M</kbd><span>Toggle the measure-line tool on / off</span>
+            <kbd class="kbd-key">&larr;&nbsp;&uarr;&nbsp;&rarr;&nbsp;&darr;</kbd><span>Move the selected measure line (small step)</span>
+            <kbd class="kbd-key">Shift&nbsp;+&nbsp;Arrow</kbd><span>Move the selected measure line (big step)</span>
+            <kbd class="kbd-key">Delete</kbd><span>Remove the selected measure line</span>
+            <kbd class="kbd-key">Esc</kbd><span>Exit the tool / clear the selected line</span>
+
+            <div style="grid-column:1/-1; font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); font-weight:700; margin-top:8px;">Project</div>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Z</kbd><span>Undo</span>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;Z</kbd><span>Redo</span>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;S</kbd><span>Save project</span>
-            <kbd class="kbd-key">Click</kbd><span>Select one frame</span>
-            <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Click</kbd><span>Add/remove from multi-selection</span>
         </div>
         <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem; margin-top:16px;" onclick="document.getElementById('shortcutsModal').style.display='none'">Done</button>
     </div>
