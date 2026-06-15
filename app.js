@@ -2722,9 +2722,16 @@ function applyMoveTo() {
 //     'number' is a numeric input
 //   - The 'apply' field stores the property key on the row object
 const BULK_EDITABLE_FIELDS = [
+    // Special: apply a full LIBRARY swatch (profile, width, depth, rabbet,
+    // code, color, and floater inset/faceWidth) to all selected rows.
+    { key: '__swatch',     label: 'Frame Swatch (Library)', type: 'swatch' },
+    // Special: set a SOLID frame color (switches fType to color).
+    { key: 'fColor',       label: 'Solid Frame Color',      type: 'color' },
     { key: 'product',       label: 'Product Type',  type: 'select', options: FRAME_PRODUCTS },
     { key: 'location',      label: 'Location',      type: 'text' },
     { key: 'level',         label: 'Level',         type: 'text' },
+    { key: 'room',          label: 'Room',          type: 'text' },
+    { key: 'designer',      label: 'Designer',      type: 'text' },
     // Note: 'qty' is intentionally excluded — it's a derived value computed
     // by recalculateDashboardQuantities from elevation frame counts. Bulk
     // editing it would be silently overwritten on the next recalc.
@@ -2732,12 +2739,16 @@ const BULK_EDITABLE_FIELDS = [
     { key: 'paperType',     label: 'Paper Type',    type: 'text' },
     { key: 'fCode',         label: 'Frame Code',    type: 'text' },
     { key: 'fColorName',    label: 'Frame Color Name', type: 'text' },
-    { key: 'glass',         label: 'Glass',         type: 'text' },
+    { key: 'fVendor',       label: 'Frame Vendor',  type: 'text' },
+    { key: 'fFinish',       label: 'Frame Finish',  type: 'text' },
+    { key: 'glass',         label: 'Glass / Glazing', type: 'text' },
     { key: 'mount',         label: 'Mount',         type: 'text' },
+    { key: 'spacer',        label: 'Spacer',        type: 'text' },
     { key: 'hardware',      label: 'Hardware',      type: 'text' },
     { key: 'backing',       label: 'Backing Board', type: 'text' },
     { key: 'm1ColorName',   label: 'Mat 1 Color Name', type: 'text' },
     { key: 'm2ColorName',   label: 'Mat 2 Color Name', type: 'text' },
+    { key: 'installNotes',  label: 'Install Notes', type: 'text' },
     { key: 'prodNotes',     label: 'Production Notes', type: 'text' },
 ];
 
@@ -2776,6 +2787,67 @@ function renderBulkEditValueInput() {
     if (!field) return;
     const container = document.getElementById('bulkEditValueContainer');
     container.innerHTML = '';
+
+    // ── Special: Frame Swatch (Library) — cascading Vendor → Collection → Swatch
+    if (field.type === 'swatch') {
+        const vendors = Object.keys(dashLocalLibrary || {});
+        if (vendors.length === 0) {
+            container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted);">No library swatches are loaded. Pick a swatch on a row first, or load your library, then try again.</div>';
+            updateBulkEditPreview();
+            return;
+        }
+        const mkSelect = (id, placeholder) => {
+            const sel = document.createElement('select');
+            sel.id = id;
+            sel.style.cssText = 'width:100%; font-size:0.85rem; padding:6px 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;';
+            const o = document.createElement('option'); o.value = ''; o.textContent = placeholder; sel.appendChild(o);
+            return sel;
+        };
+        const vSel = mkSelect('bulkSwatchVendor', 'Vendor…');
+        vendors.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; vSel.appendChild(o); });
+        const cSel = mkSelect('bulkSwatchCollection', 'Collection…');
+        const sSel = mkSelect('bulkSwatchItem', 'Swatch…');
+        container.appendChild(vSel); container.appendChild(cSel); container.appendChild(sSel);
+
+        vSel.onchange = () => {
+            cSel.innerHTML = ''; sSel.innerHTML = '';
+            const ph = document.createElement('option'); ph.value=''; ph.textContent='Collection…'; cSel.appendChild(ph);
+            const sph = document.createElement('option'); sph.value=''; sph.textContent='Swatch…'; sSel.appendChild(sph);
+            const cols = vSel.value ? Object.keys(dashLocalLibrary[vSel.value]) : [];
+            cols.forEach(c => { const o = document.createElement('option'); o.value=c; o.textContent=c; cSel.appendChild(o); });
+            updateBulkEditPreview();
+        };
+        cSel.onchange = () => {
+            sSel.innerHTML = '';
+            const sph = document.createElement('option'); sph.value=''; sph.textContent='Swatch…'; sSel.appendChild(sph);
+            const items = (vSel.value && cSel.value) ? dashLocalLibrary[vSel.value][cSel.value] : [];
+            items.forEach((it, i) => { const o = document.createElement('option'); o.value=String(i); o.textContent = it.code || ('Swatch ' + (i+1)); sSel.appendChild(o); });
+            updateBulkEditPreview();
+        };
+        sSel.onchange = updateBulkEditPreview;
+        updateBulkEditPreview();
+        return;
+    }
+
+    // ── Special: Solid Frame Color — color picker + hex text, kept in sync
+    if (field.type === 'color') {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex; gap:8px; align-items:center;';
+        const picker = document.createElement('input');
+        picker.type = 'color'; picker.id = 'bulkEditColorPicker';
+        picker.value = (dashProjectData[dashSelectedRowIndex] && dashProjectData[dashSelectedRowIndex].fColor) || '#1a1a1a';
+        picker.style.cssText = 'width:48px; height:34px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+        const hex = document.createElement('input');
+        hex.type = 'text'; hex.id = 'bulkEditValueInput'; hex.value = picker.value;
+        hex.style.cssText = 'flex:1; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;';
+        picker.oninput = () => { hex.value = picker.value; updateBulkEditPreview(); };
+        hex.oninput = () => { if (/^#?[0-9a-fA-F]{6}$/.test(hex.value)) picker.value = hex.value.startsWith('#') ? hex.value : '#' + hex.value; updateBulkEditPreview(); };
+        wrap.appendChild(picker); wrap.appendChild(hex);
+        container.appendChild(wrap);
+        updateBulkEditPreview();
+        return;
+    }
+
     let input;
     if (field.type === 'select') {
         input = document.createElement('select');
@@ -2810,17 +2882,91 @@ function updateBulkEditPreview() {
     const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
     const field = BULK_EDITABLE_FIELDS[fieldIdx];
     if (!field) return;
-    const input = document.getElementById('bulkEditValueInput');
-    const newVal = input ? input.value : '';
     const selected = dashGetSelectedIndices();
     const preview = document.getElementById('bulkEditPreview');
-    preview.innerHTML = `Will set <strong>${field.label}</strong> to "<strong>${newVal}</strong>" on ${selected.length} row${selected.length===1?'':'s'}.`;
+    const n = selected.length;
+    const rowWord = `${n} row${n===1?'':'s'}`;
+
+    if (field.type === 'swatch') {
+        const vSel = document.getElementById('bulkSwatchVendor');
+        const cSel = document.getElementById('bulkSwatchCollection');
+        const sSel = document.getElementById('bulkSwatchItem');
+        if (vSel && cSel && sSel && vSel.value && cSel.value && sSel.value !== '') {
+            const item = dashLocalLibrary[vSel.value][cSel.value][parseInt(sSel.value, 10)];
+            preview.innerHTML = `Will apply swatch <strong>${item.code}</strong> (${cSel.value}) to ${rowWord} — sets profile, width, depth, rabbet, code${/floater/i.test(cSel.value) ? ', and floater inset' : ''}.`;
+        } else {
+            preview.innerHTML = `Pick a vendor, collection, and swatch to apply to ${rowWord}.`;
+        }
+        return;
+    }
+    if (field.type === 'color') {
+        const hex = document.getElementById('bulkEditValueInput');
+        preview.innerHTML = `Will set a solid frame color <strong>${hex ? hex.value : ''}</strong> on ${rowWord} (switches those frames to a solid color).`;
+        return;
+    }
+    const input = document.getElementById('bulkEditValueInput');
+    const newVal = input ? input.value : '';
+    preview.innerHTML = `Will set <strong>${field.label}</strong> to "<strong>${newVal}</strong>" on ${rowWord}.`;
 }
 
 function applyBulkEdit() {
     const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
     const field = BULK_EDITABLE_FIELDS[fieldIdx];
     if (!field) return;
+    const selected = dashGetSelectedIndices();
+    if (selected.length === 0) return;
+
+    const finalize = () => {
+        recalculateDashboardQuantities();
+        renderDashTable();
+        if (selected.indexOf(dashSelectedRowIndex) >= 0) {
+            loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+        }
+        pushHistory();
+        document.getElementById('bulkEditModal').style.display = 'none';
+    };
+
+    // ── Frame Swatch (Library): resolve the image ONCE, then apply to all rows
+    if (field.type === 'swatch') {
+        const vSel = document.getElementById('bulkSwatchVendor');
+        const cSel = document.getElementById('bulkSwatchCollection');
+        const sSel = document.getElementById('bulkSwatchItem');
+        if (!vSel || !cSel || !sSel || !vSel.value || !cSel.value || sSel.value === '') {
+            showInfoModal('Pick a swatch', 'Choose a vendor, collection, and swatch before applying.');
+            return;
+        }
+        const collection = cSel.value;
+        const item = dashLocalLibrary[vSel.value][collection][parseInt(sSel.value, 10)];
+        _libEntryToDataUrl(item.file).then(u => {
+            selected.forEach(idx => applySwatchToRow(idx, collection, item, u));
+            finalize();
+        }).catch(err => {
+            console.error('Bulk swatch apply failed', err);
+            showInfoModal('Swatch Error', 'Could not load that swatch from the library.');
+        });
+        return;
+    }
+
+    // ── Solid Frame Color: switch those frames to a solid color
+    if (field.type === 'color') {
+        const hex = document.getElementById('bulkEditValueInput');
+        let val = hex ? hex.value.trim() : '';
+        if (!/^#?[0-9a-fA-F]{6}$/.test(val)) {
+            showInfoModal('Invalid color', `"${val}" isn't a valid 6-digit hex color.`);
+            return;
+        }
+        if (!val.startsWith('#')) val = '#' + val;
+        selected.forEach(idx => {
+            dashProjectData[idx].fType = 'color';
+            dashProjectData[idx].fColor = val;
+            dashProjectData[idx].swatchDataUrl = '';
+            dashProjectData[idx].swatchName = '';
+        });
+        finalize();
+        return;
+    }
+
+    // ── Standard field (select / number / text)
     const input = document.getElementById('bulkEditValueInput');
     if (!input) return;
     let newVal = input.value;
@@ -2832,33 +2978,15 @@ function applyBulkEdit() {
         }
         newVal = n;
     }
-    const selected = dashGetSelectedIndices();
-    if (selected.length === 0) return;
-
-    // Apply to every selected row
     selected.forEach(idx => {
         dashProjectData[idx][field.key] = newVal;
     });
-
-    // If product was bulk-edited, mirror the Shadow Box auto-flip behavior
-    // (Shadow Box flips useFloatMount to true; everything else flips it to
-    // false). Matches what handleDashProductChange() does for single-row edits.
     if (field.key === 'product') {
         selected.forEach(idx => {
             dashProjectData[idx].useFloatMount = (newVal === 'Framed Art (Shadow Box)');
         });
     }
-
-    // Recalc overall dims and re-render. recalculateDashboardQuantities also
-    // refreshes the table view. If the form panel was reflecting one of the
-    // changed rows, reload it so the user sees the new value.
-    recalculateDashboardQuantities();
-    renderDashTable();
-    if (selected.indexOf(dashSelectedRowIndex) >= 0) {
-        loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
-    }
-    pushHistory();
-    document.getElementById('bulkEditModal').style.display = 'none';
+    finalize();
 }
 
 // ── DUPLICATE AS SERIES ──
@@ -4684,67 +4812,65 @@ function updateDashCustomSwatchDropdown() {
     s.onmouseleave = restoreDashThumbnail;
 }
 
+// Core swatch applier — writes a library swatch's full data onto a row's data
+// object (profile image, width, code, type=image; plus depth/rabbet and, for
+// floater collections, inset + faceWidth). Pure data: no DOM/form writes, so
+// it's safe to call in a loop for bulk edits. `dataUrl` is the resolved image.
+// Returns true if it changed the row.
+function applySwatchToRow(rowIdx, collectionName, item, dataUrl) {
+    const row = dashProjectData[rowIdx];
+    if (!row || !item) return false;
+    const _uf = unitFactor('in', dashUnit);
+    row.fType = 'image';
+    row.fW = dashFmt(item.width * _uf);
+    row.fCode = item.code;
+    row.swatchDataUrl = dataUrl;
+    row.swatchName = item.code;
+
+    // Floater collections: switch product + derive inset/faceWidth.
+    const isFloaterCollection = /floater/i.test(collectionName || '');
+    if (isFloaterCollection) {
+        row.product = 'Framed Canvas (Floater)';
+        row.useFloatMount = false;
+        if (item.faceWidth !== undefined) {
+            row.floaterInset = dashFmt((parseFloat(item.faceWidth) + FLOATER_SHADOW_REVEAL) * _uf);
+            row._faceWidth = dashFmt(parseFloat(item.faceWidth) * _uf);
+        }
+    }
+    // Depth / rabbet from the swatch metadata if encoded.
+    if (item.depth !== undefined) row.fHeight = dashFmt(parseFloat(item.depth) * _uf);
+    if (item.rabbet !== undefined) row.rabbetDepth = dashFmt(parseFloat(item.rabbet) * _uf);
+    return true;
+}
+
 function loadDashFromCustomLibrary(idx) {
     const v = document.getElementById('libVendor').value; const c = document.getElementById('libCollection').value;
     if(!v || !c || idx === undefined) return;
     const item = dashLocalLibrary[v][c][idx];
     _libEntryToDataUrl(item.file).then(u => {
-        // Library swatches store dimensions in inches; convert to whatever
-        // the dashboard unit is via unitFactor (works for IN/CM/MM).
-        const _uf = unitFactor('in', dashUnit);
-        const w = dashFmt(item.width * _uf);
-        document.getElementById('fW').value = w; document.getElementById('m_fCode').value = item.code;
-        dashProjectData[dashSelectedRowIndex].fType = 'image'; dashProjectData[dashSelectedRowIndex].fW = w; dashProjectData[dashSelectedRowIndex].fCode = item.code;
-        dashProjectData[dashSelectedRowIndex].swatchDataUrl = u; dashProjectData[dashSelectedRowIndex].swatchName = item.code;
+        // Apply the full swatch to the active row (single source of truth).
+        applySwatchToRow(dashSelectedRowIndex, c, item, u);
+        const row = dashProjectData[dashSelectedRowIndex];
+
+        // Reflect the new values in the form controls.
+        document.getElementById('fW').value = row.fW;
+        document.getElementById('m_fCode').value = row.fCode;
         document.getElementById('view-dashboard').style.setProperty('--frame-bg', `url(${u})`);
-        // Sync the Library/Solid toggle and trigger the redraw via syncDashAndCalculate
         document.getElementById('fType').value = 'image';
         document.getElementById('fTypeBtnLibrary').classList.add('active');
         document.getElementById('fTypeBtnSolid').classList.remove('active');
 
-        // Auto-detect floater profiles: if the collection name contains "Floater" (case-insensitive),
-        // switch the product to "Framed Canvas (Floater)" so mats get disabled and the floater inset
-        // takes effect. The user can override the product manually after if it's a misclassification.
-        const isFloaterCollection = /floater/i.test(c);
         const productSelect = document.getElementById('m_product');
-        if (isFloaterCollection && productSelect && productSelect.value !== "Framed Canvas (Floater)") {
+        if (/floater/i.test(c) && productSelect && productSelect.value !== "Framed Canvas (Floater)") {
             productSelect.value = "Framed Canvas (Floater)";
-            // handleDashProductChange toggles the canvasSettings panel; pass shouldSync=false because
-            // we're about to sync below via dashActiveImageObj.onload.
             handleDashProductChange(false);
         }
-
-        // Auto-derive the floater inset from the swatch's encoded face width:
-        //   inset = faceWidth + FLOATER_SHADOW_REVEAL (studio standard 0.25")
-        // This means a swatch named MICH-306-30_1.75_0.625 gets inset 0.875" automatically.
-        // Only applies to floaters; the input remains user-editable for tweaks.
-        if (isFloaterCollection && item.faceWidth !== undefined) {
-            const computedInset = parseFloat(item.faceWidth) + FLOATER_SHADOW_REVEAL;
-            const insetInUnits = dashFmt(computedInset * _uf);
-            const insetInput = document.getElementById('floaterInset');
-            if (insetInput) insetInput.value = insetInUnits;
-            dashProjectData[dashSelectedRowIndex].floaterInset = insetInUnits;
-            // Persist the swatch's faceWidth on the row too (in display units) so
-            // buildSpecStrings can compute Float Reveal = floaterInset - faceWidth.
-            // Without this we'd have to assume the studio-default 0.25" reveal.
-            const faceInUnits = dashFmt(parseFloat(item.faceWidth) * _uf);
-            dashProjectData[dashSelectedRowIndex]._faceWidth = faceInUnits;
-        }
-
-        // Auto-fill Frame Height (profile depth) and Rabbet Depth from the swatch's
-        // metadata if encoded in the filename (_d<depth> and _r<rabbet> tags).
-        // Both are starting values — the user can edit them after for vendor-specific
-        // adjustments. Convert to current display units (IN/CM/MM) before writing.
-        if (item.depth !== undefined) {
-            const depthInUnits = dashFmt(parseFloat(item.depth) * _uf);
-            const fHeightInput = document.getElementById('fHeight');
-            if (fHeightInput) fHeightInput.value = depthInUnits;
-        }
-        if (item.rabbet !== undefined) {
-            const rabbetInUnits = dashFmt(parseFloat(item.rabbet) * _uf);
-            const rabbetInput = document.getElementById('rabbetDepth');
-            if (rabbetInput) rabbetInput.value = rabbetInUnits;
-        }
+        const insetInput = document.getElementById('floaterInset');
+        if (insetInput && row.floaterInset !== undefined) insetInput.value = row.floaterInset;
+        const fHeightInput = document.getElementById('fHeight');
+        if (fHeightInput && row.fHeight !== undefined) fHeightInput.value = row.fHeight;
+        const rabbetInput = document.getElementById('rabbetDepth');
+        if (rabbetInput && row.rabbetDepth !== undefined) rabbetInput.value = row.rabbetDepth;
 
         dashActiveImageObj.src = u; dashActiveImageObj.onload = () => syncDashAndCalculate();
     }).catch(err => {
