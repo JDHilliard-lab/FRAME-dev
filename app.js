@@ -7206,7 +7206,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Export for Production',
-                body: 'When the project is final, export the CSV (toolbar in dashboard) and the PNG frame swatches (single via the download icon per row, or <strong>Batch PNGs</strong> for everything in one ZIP). The CSV feeds the AutoFrameSpecs.jsx InDesign script to generate spec sheets.'
+                body: 'When the project is final, export the CSV (toolbar in dashboard) and the PNG frame swatches (single via the download icon per row, or <strong>Batch PNGs</strong> for everything in one ZIP). Export elevations individually or use <strong>ALL PNG / ALL SVG</strong> to bundle every wall into one ZIP. The CSV feeds the AutoFrameSpecs.jsx InDesign script to generate spec sheets.'
             }
         ]
     },
@@ -7296,7 +7296,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Layout Guides',
-                body: 'Seven toggle icons control overlays: <strong>Labels</strong> (A, B, C…), <strong>Frame OD</strong> (outer dimensions), <strong>Spacing</strong> (dim callouts), <strong>Person</strong> (6ft scale figure), <strong>Guides</strong> (center + hang height lines), <strong>Grid</strong>, <strong>Centers</strong> (frame crosshairs).'
+                body: 'Toggle icons control on-canvas overlays: <strong>Labels</strong> (A, B, C…), <strong>Frame OD</strong> (outer dimensions), <strong>Spacing</strong> (dim callouts), <strong>Person</strong> (6ft scale figure), <strong>Guides</strong> (center + hang height lines), <strong>Grid</strong>, <strong>Centers</strong> (frame crosshairs), <strong>Custom Lines</strong> (your drawn measure lines), and the <strong>Unit Suffix</strong> toggle.'
             },
             {
                 title: 'Zoom + Fit',
@@ -7305,6 +7305,30 @@ const HELP_REFERENCE_DATA = [
             {
                 title: 'Export Elevation as PNG',
                 body: 'The download icon in the Wall Dimensions row exports the current elevation including all visible guides as a single PNG. Hide guides you don\'t want baked in before exporting.'
+            },
+            {
+                title: 'Measure Line Tool (M)',
+                body: 'Press <span class="help-kbd">M</span> or click the measure-line button to draw your own dimension lines. Click two points to place a line — endpoints snap to frame corners, frame mid-edges, and wall edges (a blue dot shows the snap target). Drag a placed line away from a frame and a dashed leader bridges the gap only once it clears the frame edge. Select a line and use the arrow handles to slide it, the number to reposition the value, or <span class="help-kbd">Delete</span> to remove it. Toggle line visibility under Layout Guides.'
+            },
+            {
+                title: 'Adjustable Dimension Lines',
+                body: 'Every measurement type — spacing, edge-gap, hang-height, group-box, and drawn measure lines — behaves the same way. Click a line to select it, then drag its 4-way arrows to move the line, drag the number to slide it along the line, and use the × to hide it (where applicable). Dashed leaders only appear when a line is pulled clear of a frame, and never run along floor, ceiling, wall, or frame edges.'
+            },
+            {
+                title: 'Baseboard',
+                body: 'Set a baseboard height in <strong>Settings</strong> (shares the row with Units and Hang Height). It draws a horizontal line at that height across the wall, at the wall lineweight, and exports to SVG/PNG. Set it to 0 to turn it off. Default is 4".'
+            },
+            {
+                title: 'Unit Suffix & Legend',
+                body: 'The <strong>Unit Suffix</strong> toggle in Layout Guides controls how units appear. On: every number shows its unit (3", 6.3 cm, 64 mm). Off: numbers are bare and a single <strong>ALL DIMENSIONS IN INCHES / CENTIMETERS / MILLIMETERS</strong> legend is shown instead (and exported) — useful when per-number suffixes take up too much space.'
+            },
+            {
+                title: 'Export All Elevations (Bulk ZIP)',
+                body: 'The <strong>ALL PNG</strong> and <strong>ALL SVG</strong> buttons render every elevation in the project and bundle them into a single ZIP, one file per elevation named exactly like its tab. A progress bar shows during the run (with Cancel), and you\'re returned to the elevation you were working on when it finishes.'
+            },
+            {
+                title: 'Managing Elevation Tabs',
+                body: 'Each wall is a tab at the top. <strong>Drag tabs</strong> to reorder them. With many elevations the tab strip scrolls horizontally — use the scrollbar or hover and scroll your mouse wheel. The <strong>Frame Dashboard</strong> tab stays pinned on the left. Use <strong>+ Add Wall</strong> to create a new elevation and the × on a tab to delete one.'
             }
         ]
     },
@@ -7315,7 +7339,11 @@ const HELP_REFERENCE_DATA = [
         entries: [
             {
                 title: 'Hang Height',
-                body: 'The vertical center line where the average viewer\'s eyes land. Studio standard is <strong>57"</strong> (144.78 cm / 1447.8 mm). The Guides overlay draws a horizontal line at this height for reference.'
+                body: 'The vertical center line where the average viewer\'s eyes land. Studio standard is <strong>57"</strong> (144.78 cm / 1447.8 mm). The Guides overlay draws a horizontal line at this height for reference. Shares the top row of Settings with Units and Baseboard.'
+            },
+            {
+                title: 'Baseboard',
+                body: 'Draws a horizontal line at the set height from the floor, at the wall lineweight, on the elevation and in SVG/PNG exports. Default <strong>4"</strong>; set to 0 to turn it off. Converts automatically when you switch units.'
             },
             {
                 title: 'Dimension Font Size',
@@ -7358,7 +7386,11 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Delete',
-                body: '<span class="help-kbd">Delete</span> removes selected frames from the wall (not from the dashboard).'
+                body: '<span class="help-kbd">Delete</span> removes selected frames from the wall (not from the dashboard). With a measure line selected, it removes that line.'
+            },
+            {
+                title: 'Measure Line Tool',
+                body: '<span class="help-kbd">M</span> toggles the measure-line tool. With a line selected, the arrow keys move it (<span class="help-kbd">Shift</span> for a bigger step) and <span class="help-kbd">Esc</span> exits the tool or clears the selected line.'
             },
             {
                 title: 'Undo / Redo',
@@ -7390,6 +7422,18 @@ const HELP_REFERENCE_DATA = [
             {
                 title: 'Batch PNGs (ZIP Export)',
                 body: 'The <strong>Batch PNGs</strong> button bundles every frame plus the project CSV into a single ZIP. Unzip into a folder, place all PNGs in your InDesign doc, then run AutoFrameSpecs.jsx pointed at the CSV in the same folder — the script auto-matches each image to its data.'
+            },
+            {
+                title: 'Bulk Elevation Export',
+                body: 'In the elevation view, <strong>ALL PNG</strong> / <strong>ALL SVG</strong> export every wall into one ZIP, each file named after its elevation tab. SVG opens crisp in Illustrator/InDesign; PNG is a flat raster.'
+            },
+            {
+                title: 'Floater Frame Width in Specs',
+                body: 'For floater frames, the spec\'s Frame Size width reports the visible canvas <strong>face width</strong> (the swatch\'s <code>_f</code> value), not the full moulding profile. The Float Reveal defaults to 0.25" and renders in whatever unit you run the script in.'
+            },
+            {
+                title: 'Consistent Units in Output',
+                body: 'Every dimension in the generated spec — Frame Size, Rabbet, mats, paper, Float Reveal, Stretcher — renders in the single unit you pick when running the script, regardless of the unit the CSV was exported in. No mixed in/cm/mm output.'
             }
         ]
     },
@@ -7433,7 +7477,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'What\'s New',
-                body: 'Edit this section in <code>HELP_REFERENCE_DATA</code> (in <code>app.js</code>) to list changes per release. Suggested format: most recent changes at the top, dated.<br><br>Example:<br><strong>v1.0</strong> — Initial production release. MM/CM/IN unit support, Mat 1 + Mat 2 + Faux Mat + Float Mount, batch ZIP PNG export, InDesign AutoFrameSpecs integration with raw-inch CSV columns.'
+                body: '<strong>v1.1</strong> — Measure-line (M) tool with frame/wall snapping; unified, draggable dimension lines (spacing, edge-gap, hang-height, group-box, custom) with smart dashed leaders that only appear once a line clears a frame; adjustable baseboard; unit-suffix legend; flush-to-floor vertical dims. Bulk elevation export (ALL PNG / ALL SVG to one ZIP); draggable + scrolling elevation tabs with a pinned dashboard tab; export filenames preserved exactly as named. InDesign AutoFrameSpecs: floater face-width in Frame Size, consistent units across all spec lines (incl. Float Reveal + Stretcher), Rabbet without trailing "D", natural-case text, no frame stroke or breaker line, and adjustable below-image gap/width.<br><br><em>Maintainers: edit this list in <code>HELP_REFERENCE_DATA</code> in <code>app.js</code>.</em>'
             },
             {
                 title: 'Reporting Issues',
