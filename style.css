@@ -383,24 +383,12 @@ body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper .preview-cont
 .section-title:hover { color: var(--accent); }
 .section-title.section-title-static { cursor: default; }
 .section-title.section-title-static:hover { color: var(--text-strong); }
-/* ── Bulk Edit panel (section-based, mirrors the dashboard form) ── */
-.bulk-section { margin-bottom: 14px; }
-.bulk-section-body { padding: 4px 2px 2px; }
-.bulk-field-row { display: grid; grid-template-columns: 20px 1fr; gap: 8px; align-items: center; margin-bottom: 8px; }
-.bulk-field-row > label.bulk-apply { display: flex; align-items: center; justify-content: center; margin: 0; }
-.bulk-field-row .bulk-field-main { min-width: 0; }
-.bulk-field-row .bulk-field-main > label { display: block; font-size: 0.6rem; font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px; }
-.bulk-field-row .bulk-field-main input[type=text],
-.bulk-field-row .bulk-field-main select { width: 100%; font-size: 0.8rem; padding: 5px 8px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; }
-.bulk-field-row .bulk-field-main select { text-overflow: ellipsis; }
-.bulk-field-row.disabled .bulk-field-main { opacity: 0.4; pointer-events: none; }
-.bulk-inline { display: flex; gap: 8px; align-items: center; }
-.bulk-inline > * { min-width: 0; }
-.bulk-swatch-thumb { width: 30px; height: 30px; border: 1px solid var(--border-color); border-radius: 4px; flex-shrink: 0; background-size: cover; background-position: center; background-color: var(--bg-input); }
-.bulk-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, 38px); gap: 6px; max-height: 132px; overflow-y: auto; padding: 6px; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-input); margin-top: 4px; }
-.bulk-swatch-cell { width: 38px; height: 38px; border: 2px solid transparent; border-radius: 4px; cursor: pointer; background-size: cover; background-position: center; }
-.bulk-swatch-cell:hover { border-color: var(--text-muted); }
-.bulk-swatch-cell.selected { border-color: var(--accent); }
+/* ── Bulk Edit: the real dashboard form panel is moved into the modal ── */
+#dashRightPane.bulk-mode { width: 430px; max-width: 92vw; padding: 14px 18px; box-sizing: border-box; height: auto; }
+#dashRightPane.bulk-mode .dash-toolbar,
+#dashRightPane.bulk-mode .preview-wrapper { display: none !important; }  /* preview + Push-to-Wall hidden in bulk */
+.bulk-locked-field { opacity: 0.42; }
+.bulk-locked-field input, .bulk-locked-field select { cursor: not-allowed !important; }
 
 /* fl-disabled: applied to sections/inputs that don't apply to the current
  * product type. Examples: Frame Style section + Fr.W/Fr.H/Rabbet fields are
