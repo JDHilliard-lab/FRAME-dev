@@ -2243,8 +2243,8 @@ function importSelectedFramesBulk() {
             useFloatMount: f.useFloatMount === true,
             sbBackerColorHex: f.sbBackerColorHex || '#ffffff', sbBackerColorName: f.sbBackerColorName || 'B 97 White',
             sbPaperColorHex: f.sbPaperColorHex || '#ffffff', sbPaperColorName: f.sbPaperColorName || 'White',
-            sbPaperMargin: (parseFloat(f.sbPaperMargin) || 1.5) * factor,
-            sbPaperBorder: (parseFloat(f.sbPaperBorder) || 0.5) * factor,
+            sbPaperMargin: (isNaN(parseFloat(f.sbPaperMargin)) ? 1.5 : parseFloat(f.sbPaperMargin)) * factor,
+            sbPaperBorder: (isNaN(parseFloat(f.sbPaperBorder)) ? 0.5 : parseFloat(f.sbPaperBorder)) * factor,
             sbPaperEdge: f.sbPaperEdge || 'clean',
             sbPaperEdgeSeed: f.sbPaperEdgeSeed || 0,
             m1T: (parseFloat(f.m1T) || 0) * factor, m1B: (parseFloat(f.m1B) || 0) * factor, m1L: (parseFloat(f.m1L) || 0) * factor, m1R: (parseFloat(f.m1R) || 0) * factor,
@@ -2305,8 +2305,8 @@ function pushFrameToElevation() {
         useFloatMount: f.useFloatMount === true,
         sbBackerColorHex: f.sbBackerColorHex || '#ffffff', sbBackerColorName: f.sbBackerColorName || 'B 97 White',
         sbPaperColorHex: f.sbPaperColorHex || '#ffffff', sbPaperColorName: f.sbPaperColorName || 'White',
-        sbPaperMargin: (parseFloat(f.sbPaperMargin) || 1.5) * factor,
-        sbPaperBorder: (parseFloat(f.sbPaperBorder) || 0.5) * factor,
+        sbPaperMargin: (isNaN(parseFloat(f.sbPaperMargin)) ? 1.5 : parseFloat(f.sbPaperMargin)) * factor,
+        sbPaperBorder: (isNaN(parseFloat(f.sbPaperBorder)) ? 0.5 : parseFloat(f.sbPaperBorder)) * factor,
         sbPaperEdge: f.sbPaperEdge || 'clean',
         sbPaperEdgeSeed: f.sbPaperEdgeSeed || 0,
         m1T: (parseFloat(f.m1T) || 0) * factor, m1B: (parseFloat(f.m1B) || 0) * factor, m1L: (parseFloat(f.m1L) || 0) * factor, m1R: (parseFloat(f.m1R) || 0) * factor,
@@ -2408,8 +2408,8 @@ function pushUpdatesToElevations(dashIndex) {
                 f.sbBackerColorName = d.sbBackerColorName || 'B 97 White';
                 f.sbPaperColorHex = d.sbPaperColorHex || '#ffffff';
                 f.sbPaperColorName = d.sbPaperColorName || 'White';
-                f.sbPaperMargin = (parseFloat(d.sbPaperMargin) || 1.5) * factor;
-                f.sbPaperBorder = (parseFloat(d.sbPaperBorder) || 0.5) * factor;
+                f.sbPaperMargin = (isNaN(parseFloat(d.sbPaperMargin)) ? 1.5 : parseFloat(d.sbPaperMargin)) * factor;
+                f.sbPaperBorder = (isNaN(parseFloat(d.sbPaperBorder)) ? 0.5 : parseFloat(d.sbPaperBorder)) * factor;
                 f.sbPaperEdge = d.sbPaperEdge || 'clean';
                 f.sbPaperEdgeSeed = d.sbPaperEdgeSeed || 0;
                 f.paperType = d.paperType || '';
