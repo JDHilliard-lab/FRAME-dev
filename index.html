@@ -226,6 +226,16 @@
                             <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
                         </div>
 
+                        <!-- Artwork image: uploaded per row, shown inside the frame
+                             opening in the elevation "beauty" view + presentation PDF. -->
+                        <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                            <label style="margin:0; white-space:nowrap;">Artwork Image</label>
+                            <div id="m_artworkThumb" style="width:30px; height:30px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input) center/cover no-repeat; flex-shrink:0;"></div>
+                            <button type="button" class="action-btn btn-secondary" style="height:28px; padding:0 10px; font-size:0.68rem;" onclick="document.getElementById('m_artworkFile').click()">Upload</button>
+                            <button type="button" id="m_artworkClear" class="action-btn btn-secondary" style="height:28px; padding:0 10px; font-size:0.68rem; display:none;" onclick="clearDashArtwork()">Clear</button>
+                            <input type="file" id="m_artworkFile" accept="image/*" style="display:none;" onchange="handleDashArtworkUpload(event)">
+                        </div>
+
                         <!-- Artist / Title / Art Type were visible form fields earlier in
                              the build; per studio decision they're now hand-entered as
                              captions next to the image in InDesign instead of auto-flowing
