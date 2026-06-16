@@ -8807,6 +8807,13 @@ function drawElevAll() {
             artH = f.h - effFw*2 - effM1T - effM1B - m2Val*2;
             artTopOffset = (f.fType === 'color') ? ((effM1T + m2Val) * elevScale) : ((effFw + effM1T + m2Val) * elevScale);
             artLeftOffset = (f.fType === 'color') ? ((effM1L + m2Val) * elevScale) : ((effFw + effM1L + m2Val) * elevScale);
+            // Faux mat: the visible artwork sits inside the white faux border, so
+            // inset the opening by that border on each side (band shows around art).
+            if (f.useFauxMat === true) {
+                const fb = parseFloat(f.sbPaperBorder) || 0;
+                artW -= fb*2; artH -= fb*2;
+                artTopOffset += fb * elevScale; artLeftOffset += fb * elevScale;
+            }
         }
         const art = document.createElement('div'); art.className = 'art-visual';
         
@@ -8833,15 +8840,22 @@ function drawElevAll() {
             art.style.boxShadow = `inset 0 ${2 * elevScale}px ${8 * elevScale}px rgba(0,0,0,0.2)`;
         }
         if (hasArtwork) {
-            art.style.backgroundImage = `url(${f.artworkUrl})`;
-            art.style.backgroundSize = 'cover';
-            art.style.backgroundPosition = 'center';
-            art.style.backgroundRepeat = 'no-repeat';
+            // Render as a real <img> child (not a CSS background): html2canvas —
+            // used by the PNG export — reliably rasterizes <img> but drops CSS
+            // background-image data URLs. object-fit:cover matches the screen.
+            art.style.overflow = 'hidden';
             art.style.boxShadow = 'none';
+            const aimg = document.createElement('img');
+            aimg.className = 'art-img';
+            aimg.src = f.artworkUrl;
+            aimg.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;';
+            art.appendChild(aimg);
         }
         
         const unitSuffix = unitInfo(elevUnit).suffix;
-        art.innerText = (hasArtwork) ? "" : ((artW > 0) ? `${artW.toFixed(1)}${unitSuffix}\nx\n${artH.toFixed(1)}${unitSuffix}` : "");
+        if (!hasArtwork) {
+            art.innerText = (artW > 0) ? `${artW.toFixed(1)}${unitSuffix}\nx\n${artH.toFixed(1)}${unitSuffix}` : "";
+        }
         el.appendChild(art);
         
         const labelTag = document.createElement('div'); labelTag.className = 'frame-id-tag';
@@ -11821,4 +11835,3 @@ async function exportElevSVG(opts) {
 
 // BOOT UP THE ENGINE
 initMasterApp();
-        
