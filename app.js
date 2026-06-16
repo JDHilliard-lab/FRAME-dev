@@ -3554,6 +3554,9 @@ function updateDashVisualsFromDOM() {
     const artVis = document.createElement('div'); artVis.className = 'art-visual'; artVis.id = 'dash-art-visual';
     // For floater, frameless, & float mount: subtle dashed border (suggests transparent opening) instead of a heavy 4px black stroke.
     artVis.style.border = (isCanvas || isFrameless || useFM) ? "1px dashed rgba(0,0,0,0.25)" : "1px solid #aaa";
+    // Float mount / frameless: opaque print fill so the white paper beneath
+    // doesn't bleed through (keeps dashboard + elevation identical).
+    if (isFrameless || useFM) artVis.style.background = 'rgb(120,120,120)';
     
     let artTopOffset, artLeftOffset;
     if (isCanvas) {
@@ -8585,6 +8588,11 @@ function drawElevAll() {
             // Frameless canvas & float mount: dashed outline only — NO inner shadow.
             // Frameless has no surrounding material; float mount per spec must not cast shadow on paper.
             art.style.border = '1px dashed rgba(0,0,0,0.25)';
+            // Opaque fill: a print/canvas isn't see-through, so the white paper
+            // beneath must not bleed through (that translucent-over-white bleed
+            // read as a spurious white border in the elevation). Only a real
+            // paper margin / white border should show white.
+            art.style.background = 'rgb(120,120,120)';
         } else {
             art.style.boxShadow = `inset 0 ${2 * elevScale}px ${8 * elevScale}px rgba(0,0,0,0.2)`;
         }
