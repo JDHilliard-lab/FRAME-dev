@@ -2713,44 +2713,8 @@ function applyMoveTo() {
 //
 // Both push a single history entry (so Ctrl+Z reverts the whole batch).
 
-// Metadata for which fields can be bulk-edited and how their value input
-// should render. Order here is the order they appear in the dropdown.
-// Notes:
-//   - ITEM CODE, art dimensions, image filename are intentionally excluded
-//     (they're per-row unique, or computed)
-//   - 'select' type uses the options array; 'text' is a free-text input;
-//     'number' is a numeric input
-//   - The 'apply' field stores the property key on the row object
-const BULK_EDITABLE_FIELDS = [
-    // Special: apply a full LIBRARY swatch (profile, width, depth, rabbet,
-    // code, color, and floater inset/faceWidth) to all selected rows.
-    { key: '__swatch',     label: 'Frame Swatch (Library)', type: 'swatch' },
-    // Special: set a SOLID frame color (switches fType to color).
-    { key: 'fColor',       label: 'Solid Frame Color',      type: 'color' },
-    { key: 'product',       label: 'Product Type',  type: 'select', options: FRAME_PRODUCTS },
-    { key: 'location',      label: 'Location',      type: 'text' },
-    { key: 'level',         label: 'Level',         type: 'text' },
-    { key: 'room',          label: 'Room',          type: 'text' },
-    { key: 'designer',      label: 'Designer',      type: 'text' },
-    // Note: 'qty' is intentionally excluded — it's a derived value computed
-    // by recalculateDashboardQuantities from elevation frame counts. Bulk
-    // editing it would be silently overwritten on the next recalc.
-    { key: 'artType',       label: 'Art Type',      type: 'text' },
-    { key: 'paperType',     label: 'Paper Type',    type: 'text' },
-    { key: 'fCode',         label: 'Frame Code',    type: 'text' },
-    { key: 'fColorName',    label: 'Frame Color Name', type: 'text' },
-    { key: 'fVendor',       label: 'Frame Vendor',  type: 'text' },
-    { key: 'fFinish',       label: 'Frame Finish',  type: 'text' },
-    { key: 'glass',         label: 'Glass / Glazing', type: 'text' },
-    { key: 'mount',         label: 'Mount',         type: 'text' },
-    { key: 'spacer',        label: 'Spacer',        type: 'text' },
-    { key: 'hardware',      label: 'Hardware',      type: 'text' },
-    { key: 'backing',       label: 'Backing Board', type: 'text' },
-    { key: 'm1ColorName',   label: 'Mat 1 Color Name', type: 'text' },
-    { key: 'm2ColorName',   label: 'Mat 2 Color Name', type: 'text' },
-    { key: 'installNotes',  label: 'Install Notes', type: 'text' },
-    { key: 'prodNotes',     label: 'Production Notes', type: 'text' },
-];
+// (The old single-field BULK_EDITABLE_FIELDS metadata was replaced by the
+// section-based Bulk Edit form below; see buildBulkEditForm + BULK_DETAIL_FIELDS.)
 
 function openBulkEditModal() {
     if (!dashProjectData || dashProjectData.length === 0) {
@@ -2765,227 +2729,256 @@ function openBulkEditModal() {
     } else {
         summary.innerHTML = `Editing <strong>${selected.length}</strong> selected rows.`;
     }
-    // Populate the field dropdown
-    const fieldSelect = document.getElementById('bulkEditField');
-    fieldSelect.innerHTML = '';
-    BULK_EDITABLE_FIELDS.forEach((f, i) => {
-        const opt = document.createElement('option');
-        opt.value = String(i);
-        opt.textContent = f.label;
-        fieldSelect.appendChild(opt);
-    });
-    fieldSelect.value = '0';
-    renderBulkEditValueInput();
+    // Build the section-based form (Frame Style / Mat Controls / Details).
+    buildBulkEditForm();
+    updateBulkEditPreview();
     document.getElementById('bulkEditModal').style.display = 'flex';
 }
 
-// Render the value input appropriate to the selected field. Called on modal
-// open and whenever the field dropdown changes. Also updates the preview line.
-function renderBulkEditValueInput() {
-    const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
-    const field = BULK_EDITABLE_FIELDS[fieldIdx];
-    if (!field) return;
-    const container = document.getElementById('bulkEditValueContainer');
-    container.innerHTML = '';
+// ──────────────────────────────────────────────────────────────────────────
+// BULK EDIT — section-based form
+// ──────────────────────────────────────────────────────────────────────────
+// Mirrors the dashboard form: a Frame Style section (library swatch picker +
+// solid color + code/texture), a Mat Controls section (mat color swatch + name),
+// and a Details section (text/select fields). Every field has an "apply this"
+// checkbox; only ticked fields are written, which also gives multi-field edits.
 
-    // ── Special: Frame Swatch (Library) — cascading Vendor → Collection → Swatch
-    if (field.type === 'swatch') {
-        const vendors = Object.keys(dashLocalLibrary || {});
-        if (vendors.length === 0) {
-            container.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted);">No library swatches are loaded. Pick a swatch on a row first, or load your library, then try again.</div>';
-            updateBulkEditPreview();
-            return;
-        }
-        const mkSelect = (id, placeholder) => {
-            const sel = document.createElement('select');
-            sel.id = id;
-            sel.style.cssText = 'width:100%; font-size:0.85rem; padding:6px 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;';
-            const o = document.createElement('option'); o.value = ''; o.textContent = placeholder; sel.appendChild(o);
-            return sel;
-        };
-        const vSel = mkSelect('bulkSwatchVendor', 'Vendor…');
-        vendors.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v; vSel.appendChild(o); });
-        const cSel = mkSelect('bulkSwatchCollection', 'Collection…');
-        const sSel = mkSelect('bulkSwatchItem', 'Swatch…');
-        container.appendChild(vSel); container.appendChild(cSel); container.appendChild(sSel);
+// Field groups → which dashboard section they render under.
+const BULK_DETAIL_FIELDS = [
+    { key: 'product',      label: 'Product Type', type: 'select', options: FRAME_PRODUCTS },
+    { key: 'location',     label: 'Location',     type: 'text' },
+    { key: 'level',        label: 'Level',        type: 'text' },
+    { key: 'room',         label: 'Room',         type: 'text' },
+    { key: 'designer',     label: 'Designer',     type: 'text' },
+    { key: 'artType',      label: 'Art Type',     type: 'text' },
+    { key: 'paperType',    label: 'Paper Type',   type: 'text' },
+    { key: 'fVendor',      label: 'Frame Vendor', type: 'text' },
+    { key: 'fFinish',      label: 'Frame Finish', type: 'text' },
+    { key: 'glass',        label: 'Glass / Glazing', type: 'text' },
+    { key: 'mount',        label: 'Mount',        type: 'text' },
+    { key: 'spacer',       label: 'Spacer',       type: 'text' },
+    { key: 'hardware',     label: 'Hardware',     type: 'text' },
+    { key: 'backing',      label: 'Backing Board', type: 'text' },
+    { key: 'installNotes', label: 'Install Notes', type: 'text' },
+    { key: 'prodNotes',    label: 'Production Notes', type: 'text' },
+];
+
+// Holds the chosen library swatch for the Frame Style section between render
+// and apply: { vendor, collection, index, item } or null.
+let _bulkChosenSwatch = null;
+
+// Make a field row: [apply checkbox] [label + control]. The checkbox toggles
+// the control's enabled state and refreshes the preview.
+function _bulkFieldRow(applyId, labelText, controlEl) {
+    const row = document.createElement('div');
+    row.className = 'bulk-field-row disabled';
+    const applyLabel = document.createElement('label');
+    applyLabel.className = 'bulk-apply';
+    applyLabel.title = 'Tick to apply this field';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.id = applyId;
+    cb.onchange = () => { row.classList.toggle('disabled', !cb.checked); updateBulkEditPreview(); };
+    applyLabel.appendChild(cb);
+    const main = document.createElement('div');
+    main.className = 'bulk-field-main';
+    if (labelText) { const l = document.createElement('label'); l.textContent = labelText; main.appendChild(l); }
+    main.appendChild(controlEl);
+    row.appendChild(applyLabel);
+    row.appendChild(main);
+    return row;
+}
+
+function buildBulkEditForm() {
+    _bulkChosenSwatch = null;
+    const primary = dashProjectData[dashSelectedRowIndex] || {};
+
+    // ── FRAME STYLE ──
+    const frame = document.getElementById('bulkSecFrame');
+    frame.innerHTML = '';
+
+    // Frame swatch (library) — thumbnail grid via cascading vendor/collection.
+    const swatchWrap = document.createElement('div');
+    const vendors = Object.keys(dashLocalLibrary || {});
+    if (vendors.length === 0) {
+        swatchWrap.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted);">No library swatches loaded yet — pick one on a row first, or load your library.</div>';
+    } else {
+        const vSel = document.createElement('select'); vSel.id = 'bulkSwatchVendor';
+        const cSel = document.createElement('select'); cSel.id = 'bulkSwatchCollection';
+        [['Vendor…', vSel], ['Collection…', cSel]].forEach(([ph, sel]) => {
+            const o = document.createElement('option'); o.value=''; o.textContent=ph; sel.appendChild(o);
+        });
+        vendors.forEach(v => { const o=document.createElement('option'); o.value=v; o.textContent=v; vSel.appendChild(o); });
+        const inline = document.createElement('div'); inline.className='bulk-inline';
+        inline.appendChild(vSel); inline.appendChild(cSel);
+        const grid = document.createElement('div'); grid.className='bulk-swatch-grid'; grid.id='bulkSwatchGrid';
+        grid.style.display = 'none';
+        swatchWrap.appendChild(inline); swatchWrap.appendChild(grid);
 
         vSel.onchange = () => {
-            cSel.innerHTML = ''; sSel.innerHTML = '';
-            const ph = document.createElement('option'); ph.value=''; ph.textContent='Collection…'; cSel.appendChild(ph);
-            const sph = document.createElement('option'); sph.value=''; sph.textContent='Swatch…'; sSel.appendChild(sph);
-            const cols = vSel.value ? Object.keys(dashLocalLibrary[vSel.value]) : [];
-            cols.forEach(c => { const o = document.createElement('option'); o.value=c; o.textContent=c; cSel.appendChild(o); });
-            updateBulkEditPreview();
+            cSel.innerHTML=''; const ph=document.createElement('option'); ph.value=''; ph.textContent='Collection…'; cSel.appendChild(ph);
+            (vSel.value ? Object.keys(dashLocalLibrary[vSel.value]) : []).forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; cSel.appendChild(o); });
+            grid.style.display='none'; grid.innerHTML='';
         };
         cSel.onchange = () => {
-            sSel.innerHTML = '';
-            const sph = document.createElement('option'); sph.value=''; sph.textContent='Swatch…'; sSel.appendChild(sph);
+            grid.innerHTML=''; _bulkChosenSwatch=null;
             const items = (vSel.value && cSel.value) ? dashLocalLibrary[vSel.value][cSel.value] : [];
-            items.forEach((it, i) => { const o = document.createElement('option'); o.value=String(i); o.textContent = it.code || ('Swatch ' + (i+1)); sSel.appendChild(o); });
-            updateBulkEditPreview();
+            if (!items.length) { grid.style.display='none'; return; }
+            grid.style.display='grid';
+            items.forEach((it, i) => {
+                const cell = document.createElement('div'); cell.className='bulk-swatch-cell'; cell.title = it.code || ('Swatch '+(i+1));
+                _libEntryToDataUrl(it.file).then(u => { cell.style.backgroundImage = `url(${u})`; }).catch(()=>{});
+                cell.onclick = () => {
+                    grid.querySelectorAll('.bulk-swatch-cell').forEach(c=>c.classList.remove('selected'));
+                    cell.classList.add('selected');
+                    _bulkChosenSwatch = { vendor: vSel.value, collection: cSel.value, index: i, item: it };
+                    document.getElementById('bulkApply__swatch').checked = true;
+                    document.getElementById('bulkApply__swatch').closest('.bulk-field-row').classList.remove('disabled');
+                    updateBulkEditPreview();
+                };
+                grid.appendChild(cell);
+            });
         };
-        sSel.onchange = updateBulkEditPreview;
-        updateBulkEditPreview();
-        return;
     }
+    frame.appendChild(_bulkFieldRow('bulkApply__swatch', 'Frame Swatch (Library)', swatchWrap));
 
-    // ── Special: Solid Frame Color — color picker + hex text, kept in sync
-    if (field.type === 'color') {
-        const wrap = document.createElement('div');
-        wrap.style.cssText = 'display:flex; gap:8px; align-items:center;';
-        const picker = document.createElement('input');
-        picker.type = 'color'; picker.id = 'bulkEditColorPicker';
-        picker.value = (dashProjectData[dashSelectedRowIndex] && dashProjectData[dashSelectedRowIndex].fColor) || '#1a1a1a';
-        picker.style.cssText = 'width:48px; height:34px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
-        const hex = document.createElement('input');
-        hex.type = 'text'; hex.id = 'bulkEditValueInput'; hex.value = picker.value;
-        hex.style.cssText = 'flex:1; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;';
-        picker.oninput = () => { hex.value = picker.value; updateBulkEditPreview(); };
-        hex.oninput = () => { if (/^#?[0-9a-fA-F]{6}$/.test(hex.value)) picker.value = hex.value.startsWith('#') ? hex.value : '#' + hex.value; updateBulkEditPreview(); };
-        wrap.appendChild(picker); wrap.appendChild(hex);
-        container.appendChild(wrap);
-        updateBulkEditPreview();
-        return;
-    }
+    // Solid frame color — picker + hex.
+    const colorWrap = document.createElement('div'); colorWrap.className='bulk-inline';
+    const picker = document.createElement('input'); picker.type='color'; picker.id='bulkColorPicker';
+    picker.className='color-swatch-flat'; picker.style.cssText='width:30px;height:30px;';
+    picker.value = (primary.fColor && /^#[0-9a-fA-F]{6}$/.test(primary.fColor)) ? primary.fColor : '#1a1a1a';
+    const hex = document.createElement('input'); hex.type='text'; hex.id='bulkColorHex'; hex.value=picker.value;
+    picker.oninput = () => { hex.value=picker.value; document.getElementById('bulkApply__color').checked=true; document.getElementById('bulkApply__color').closest('.bulk-field-row').classList.remove('disabled'); updateBulkEditPreview(); };
+    hex.oninput = () => { if(/^#?[0-9a-fA-F]{6}$/.test(hex.value)) picker.value = hex.value.startsWith('#')?hex.value:'#'+hex.value; updateBulkEditPreview(); };
+    colorWrap.appendChild(picker); colorWrap.appendChild(hex);
+    frame.appendChild(_bulkFieldRow('bulkApply__color', 'Solid Frame Color', colorWrap));
 
-    let input;
-    if (field.type === 'select') {
-        input = document.createElement('select');
-        field.options.forEach(opt => {
-            const o = document.createElement('option');
-            o.value = opt;
-            o.textContent = opt;
-            input.appendChild(o);
-        });
-    } else if (field.type === 'number') {
-        input = document.createElement('input');
-        input.type = 'number';
-    } else {
-        input = document.createElement('input');
-        input.type = 'text';
-    }
-    input.id = 'bulkEditValueInput';
-    input.style.cssText = 'width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;';
-    // Pre-fill with the primary selected row's current value as a hint
-    const selected = dashGetSelectedIndices();
-    if (selected.length > 0) {
-        const cur = dashProjectData[dashSelectedRowIndex][field.key];
-        if (cur !== undefined && cur !== null) input.value = String(cur);
-    }
-    input.oninput = updateBulkEditPreview;
-    input.onchange = updateBulkEditPreview;
-    container.appendChild(input);
-    updateBulkEditPreview();
+    // Frame Code + Color/Texture text.
+    frame.appendChild(_bulkFieldRow('bulkApply_fCode', 'Frame Code', _bulkTextInput('bulkVal_fCode', primary.fCode)));
+    frame.appendChild(_bulkFieldRow('bulkApply_fColorName', 'Color / Texture', _bulkTextInput('bulkVal_fColorName', primary.fColorName)));
+
+    // ── MAT CONTROLS ──
+    const mats = document.getElementById('bulkSecMats');
+    mats.innerHTML = '';
+    mats.appendChild(_bulkFieldRow('bulkApply_m1', 'Mat 1 Color', _bulkColorNameRow('bulkM1Picker', 'bulkVal_m1ColorName', primary.m1ColorHex, primary.m1ColorName, 'bulkApply_m1')));
+    mats.appendChild(_bulkFieldRow('bulkApply_m2', 'Mat 2 Color', _bulkColorNameRow('bulkM2Picker', 'bulkVal_m2ColorName', primary.m2ColorHex, primary.m2ColorName, 'bulkApply_m2')));
+
+    // ── DETAILS ──
+    const details = document.getElementById('bulkSecDetails');
+    details.innerHTML = '';
+    BULK_DETAIL_FIELDS.forEach(f => {
+        let ctrl;
+        if (f.type === 'select') {
+            ctrl = document.createElement('select'); ctrl.id = 'bulkVal_' + f.key;
+            f.options.forEach(opt => { const o=document.createElement('option'); o.value=opt; o.textContent=opt; ctrl.appendChild(o); });
+            if (primary[f.key]) ctrl.value = primary[f.key];
+        } else {
+            ctrl = _bulkTextInput('bulkVal_' + f.key, primary[f.key]);
+        }
+        ctrl.oninput = updateBulkEditPreview; ctrl.onchange = updateBulkEditPreview;
+        details.appendChild(_bulkFieldRow('bulkApply_' + f.key, f.label, ctrl));
+    });
+}
+
+function _bulkTextInput(id, val) {
+    const i = document.createElement('input'); i.type='text'; i.id=id;
+    if (val !== undefined && val !== null) i.value = String(val);
+    i.oninput = updateBulkEditPreview;
+    return i;
+}
+
+// Mat color row: a color picker + a name text field, side by side.
+function _bulkColorNameRow(pickerId, nameId, hex, name, applyId) {
+    const wrap = document.createElement('div'); wrap.className='bulk-inline';
+    const picker = document.createElement('input'); picker.type='color'; picker.id=pickerId;
+    picker.className='color-swatch-flat'; picker.style.cssText='width:30px;height:30px;';
+    picker.value = (hex && /^#[0-9a-fA-F]{6}$/.test(hex)) ? hex : '#ffffff';
+    const nm = document.createElement('input'); nm.type='text'; nm.id=nameId; nm.placeholder='Color name'; nm.style.flex='1';
+    if (name) nm.value = name;
+    const tick = () => { const cb=document.getElementById(applyId); cb.checked=true; cb.closest('.bulk-field-row').classList.remove('disabled'); updateBulkEditPreview(); };
+    picker.oninput = tick; nm.oninput = tick;
+    wrap.appendChild(picker); wrap.appendChild(nm);
+    return wrap;
 }
 
 function updateBulkEditPreview() {
-    const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
-    const field = BULK_EDITABLE_FIELDS[fieldIdx];
-    if (!field) return;
     const selected = dashGetSelectedIndices();
-    const preview = document.getElementById('bulkEditPreview');
     const n = selected.length;
-    const rowWord = `${n} row${n===1?'':'s'}`;
+    const changes = _bulkCollectChanges();
+    const preview = document.getElementById('bulkEditPreview');
+    if (changes.length === 0) {
+        preview.innerHTML = `Tick a field to change, then Apply to ${n} row${n===1?'':'s'}.`;
+        return;
+    }
+    preview.innerHTML = `Will update <strong>${changes.join(', ')}</strong> on ${n} row${n===1?'':'s'}.`;
+}
 
-    if (field.type === 'swatch') {
-        const vSel = document.getElementById('bulkSwatchVendor');
-        const cSel = document.getElementById('bulkSwatchCollection');
-        const sSel = document.getElementById('bulkSwatchItem');
-        if (vSel && cSel && sSel && vSel.value && cSel.value && sSel.value !== '') {
-            const item = dashLocalLibrary[vSel.value][cSel.value][parseInt(sSel.value, 10)];
-            preview.innerHTML = `Will apply swatch <strong>${item.code}</strong> (${cSel.value}) to ${rowWord} — sets profile, width, depth, rabbet, code${/floater/i.test(cSel.value) ? ', and floater inset' : ''}.`;
-        } else {
-            preview.innerHTML = `Pick a vendor, collection, and swatch to apply to ${rowWord}.`;
-        }
-        return;
-    }
-    if (field.type === 'color') {
-        const hex = document.getElementById('bulkEditValueInput');
-        preview.innerHTML = `Will set a solid frame color <strong>${hex ? hex.value : ''}</strong> on ${rowWord} (switches those frames to a solid color).`;
-        return;
-    }
-    const input = document.getElementById('bulkEditValueInput');
-    const newVal = input ? input.value : '';
-    preview.innerHTML = `Will set <strong>${field.label}</strong> to "<strong>${newVal}</strong>" on ${rowWord}.`;
+// Walk the form and collect which fields are ticked + their values.
+function _bulkCollectChanges() {
+    const out = [];
+    const on = (id) => { const cb = document.getElementById(id); return cb && cb.checked; };
+    if (on('bulkApply__swatch') && _bulkChosenSwatch) out.push('Frame Swatch');
+    if (on('bulkApply__color')) out.push('Solid Frame Color');
+    if (on('bulkApply_fCode')) out.push('Frame Code');
+    if (on('bulkApply_fColorName')) out.push('Color/Texture');
+    if (on('bulkApply_m1')) out.push('Mat 1 Color');
+    if (on('bulkApply_m2')) out.push('Mat 2 Color');
+    BULK_DETAIL_FIELDS.forEach(f => { if (on('bulkApply_' + f.key)) out.push(f.label); });
+    return out;
 }
 
 function applyBulkEdit() {
-    const fieldIdx = parseInt(document.getElementById('bulkEditField').value, 10);
-    const field = BULK_EDITABLE_FIELDS[fieldIdx];
-    if (!field) return;
     const selected = dashGetSelectedIndices();
     if (selected.length === 0) return;
+    const on = (id) => { const cb = document.getElementById(id); return cb && cb.checked; };
+    const val = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
 
     const finalize = () => {
         recalculateDashboardQuantities();
         renderDashTable();
-        if (selected.indexOf(dashSelectedRowIndex) >= 0) {
-            loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
-        }
+        if (selected.indexOf(dashSelectedRowIndex) >= 0) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
         pushHistory();
         document.getElementById('bulkEditModal').style.display = 'none';
     };
 
-    // ── Frame Swatch (Library): resolve the image ONCE, then apply to all rows
-    if (field.type === 'swatch') {
-        const vSel = document.getElementById('bulkSwatchVendor');
-        const cSel = document.getElementById('bulkSwatchCollection');
-        const sSel = document.getElementById('bulkSwatchItem');
-        if (!vSel || !cSel || !sSel || !vSel.value || !cSel.value || sSel.value === '') {
-            showInfoModal('Pick a swatch', 'Choose a vendor, collection, and swatch before applying.');
-            return;
-        }
-        const collection = cSel.value;
-        const item = dashLocalLibrary[vSel.value][collection][parseInt(sSel.value, 10)];
+    // Validate solid color up front (only if ticked).
+    let solidColor = null;
+    if (on('bulkApply__color')) {
+        let c = val('bulkColorHex').trim();
+        if (!/^#?[0-9a-fA-F]{6}$/.test(c)) { showInfoModal('Invalid color', `"${c}" isn't a valid 6-digit hex color.`); return; }
+        solidColor = c.startsWith('#') ? c : '#' + c;
+    }
+
+    // Apply all non-swatch fields synchronously.
+    const applyNonSwatch = () => {
+        selected.forEach(idx => {
+            const row = dashProjectData[idx];
+            if (solidColor) { row.fType='color'; row.fColor=solidColor; row.swatchDataUrl=''; row.swatchName=''; }
+            if (on('bulkApply_fCode'))      row.fCode = val('bulkVal_fCode');
+            if (on('bulkApply_fColorName')) row.fColorName = val('bulkVal_fColorName');
+            if (on('bulkApply_m1')) { row.m1ColorHex = val('bulkM1Picker'); row.m1ColorName = val('bulkVal_m1ColorName'); }
+            if (on('bulkApply_m2')) { row.m2ColorHex = val('bulkM2Picker'); row.m2ColorName = val('bulkVal_m2ColorName'); }
+            BULK_DETAIL_FIELDS.forEach(f => {
+                if (on('bulkApply_' + f.key)) {
+                    row[f.key] = val('bulkVal_' + f.key);
+                    if (f.key === 'product') row.useFloatMount = (row[f.key] === 'Framed Art (Shadow Box)');
+                }
+            });
+        });
+    };
+
+    // Swatch is async (image resolve). Do it first if ticked, then the rest.
+    if (on('bulkApply__swatch') && _bulkChosenSwatch) {
+        const { collection, item } = _bulkChosenSwatch;
         _libEntryToDataUrl(item.file).then(u => {
             selected.forEach(idx => applySwatchToRow(idx, collection, item, u));
+            applyNonSwatch();
             finalize();
-        }).catch(err => {
-            console.error('Bulk swatch apply failed', err);
-            showInfoModal('Swatch Error', 'Could not load that swatch from the library.');
-        });
+        }).catch(err => { console.error('Bulk swatch apply failed', err); showInfoModal('Swatch Error', 'Could not load that swatch from the library.'); });
         return;
     }
 
-    // ── Solid Frame Color: switch those frames to a solid color
-    if (field.type === 'color') {
-        const hex = document.getElementById('bulkEditValueInput');
-        let val = hex ? hex.value.trim() : '';
-        if (!/^#?[0-9a-fA-F]{6}$/.test(val)) {
-            showInfoModal('Invalid color', `"${val}" isn't a valid 6-digit hex color.`);
-            return;
-        }
-        if (!val.startsWith('#')) val = '#' + val;
-        selected.forEach(idx => {
-            dashProjectData[idx].fType = 'color';
-            dashProjectData[idx].fColor = val;
-            dashProjectData[idx].swatchDataUrl = '';
-            dashProjectData[idx].swatchName = '';
-        });
-        finalize();
-        return;
-    }
-
-    // ── Standard field (select / number / text)
-    const input = document.getElementById('bulkEditValueInput');
-    if (!input) return;
-    let newVal = input.value;
-    if (field.type === 'number') {
-        const n = parseFloat(newVal);
-        if (isNaN(n)) {
-            showInfoModal('Invalid value', `"${newVal}" isn't a valid number for ${field.label}.`);
-            return;
-        }
-        newVal = n;
-    }
-    selected.forEach(idx => {
-        dashProjectData[idx][field.key] = newVal;
-    });
-    if (field.key === 'product') {
-        selected.forEach(idx => {
-            dashProjectData[idx].useFloatMount = (newVal === 'Framed Art (Shadow Box)');
-        });
-    }
+    if (_bulkCollectChanges().length === 0) { document.getElementById('bulkEditModal').style.display='none'; return; }
+    applyNonSwatch();
     finalize();
 }
 
