@@ -218,6 +218,9 @@ function unitFactor(from, to) {
 let elevations = [{ name: "Elevation 1", frames: [], wallW: 185, wallH: 108, personPos: { x: -60 } }];
 let currentElevIndex = 0;
 let elevFrames = elevations[0].frames;
+// When true, uploaded artwork images fill frame openings in the elevation.
+// The PDF "beauty" page uses true; the technical drawing page sets it false.
+let _showArtwork = true;
 let elevPersonPos = elevations[0].personPos;
 let elevScale = 1;
 // Precise wall dims resolved each drawElevAll (full precision, not the
@@ -2234,7 +2237,7 @@ function importSelectedFramesBulk() {
             fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
             product: f.product || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
             // Phase A fields carried through. Dimensional ones get factor-converted; text fields pass through.
-            artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '',
+            artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '',
             fColorName: f.fColorName || '', paperType: f.paperType || '',
             fHeight: (parseFloat(f.fHeight) || 0) * factor,
             rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
@@ -2298,7 +2301,7 @@ function pushFrameToElevation() {
         w: (parseFloat(f.extW) || 24) * factor, h: (parseFloat(f.extH) || 30) * factor,
         fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
         product: f.product || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
-        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '',
+        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '',
         fColorName: f.fColorName || '', paperType: f.paperType || '',
         fHeight: (parseFloat(f.fHeight) || 0) * factor,
         rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
@@ -3095,6 +3098,7 @@ function loadDashDataIntoControls(data) {
     setVal('m_artist', data.artist !== undefined ? data.artist : '');
     setVal('m_artworkTitle', data.artworkTitle !== undefined ? data.artworkTitle : '');
     setVal('m_artType', data.artType !== undefined ? data.artType : '');
+    updateDashArtworkThumb(data.artworkUrl || '');
     setVal('m_fColorName', data.fColorName !== undefined ? data.fColorName : 'Standard Black');
     // Render zero-valued numeric fields as blank instead of "0" so the input is
     // empty when the user clicks in. Otherwise the leading "0" gets prepended to
@@ -3280,6 +3284,7 @@ function syncDashAndCalculate() {
         // Phase A artwork attribution fields. Empty values are preserved as-is — they
         // render as blank cells in CSV and skipped lines in the InDesign spec block.
         artist: getStr('m_artist'), artworkTitle: getStr('m_artworkTitle'), artType: getStr('m_artType'),
+        artworkUrl: row.artworkUrl || '',
         // Frame profile geometry: face width (fW) is the visible frame edge; fHeight is the
         // total profile depth front-to-back; rabbetDepth is the L-pocket depth where
         // mat/print/glass/backing stack up. fHeight ≥ rabbetDepth (rabbet is a notch in the rail).
@@ -4755,6 +4760,54 @@ function updateDashCustomSwatchDropdown() {
 // floater collections, inset + faceWidth). Pure data: no DOM/form writes, so
 // it's safe to call in a loop for bulk edits. `dataUrl` is the resolved image.
 // Returns true if it changed the row.
+// ── Artwork image (per-row) ──────────────────────────────────────────────
+// Uploaded image that fills the frame opening in the elevation "beauty" view
+// and the presentation PDF. Downscaled on import to bound memory/project size
+// while keeping presentation-grade resolution.
+function handleDashArtworkUpload(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+            const MAX = 1200;
+            let w = img.naturalWidth, h = img.naturalHeight;
+            if (w > MAX || h > MAX) {
+                const s = MAX / Math.max(w, h);
+                w = Math.round(w * s); h = Math.round(h * s);
+            }
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            c.getContext('2d').drawImage(img, 0, 0, w, h);
+            // JPEG keeps data-URL size reasonable for photos; quality 0.85.
+            const dataUrl = c.toDataURL('image/jpeg', 0.85);
+            const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+            if (row) row.artworkUrl = dataUrl;
+            updateDashArtworkThumb(dataUrl);
+            syncDashAndCalculate();
+        };
+        img.onerror = () => showInfoModal('Image Error', 'That file could not be read as an image.');
+        img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';  // allow re-uploading the same file
+}
+
+function clearDashArtwork() {
+    const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+    if (row) row.artworkUrl = '';
+    updateDashArtworkThumb('');
+    syncDashAndCalculate();
+}
+
+function updateDashArtworkThumb(dataUrl) {
+    const thumb = document.getElementById('m_artworkThumb');
+    const clearBtn = document.getElementById('m_artworkClear');
+    if (thumb) thumb.style.backgroundImage = dataUrl ? `url(${dataUrl})` : 'none';
+    if (clearBtn) clearBtn.style.display = dataUrl ? 'inline-block' : 'none';
+}
+
 function applySwatchToRow(rowIdx, collectionName, item, dataUrl) {
     // In bulk-edit mode, target the scratch object (the form's data source),
     // never a real project row. rowIdx is ignored while bulk editing.
@@ -8580,6 +8633,11 @@ function drawElevAll() {
         const art = document.createElement('div'); art.className = 'art-visual';
         
         art.style.cssText = `top:${artTopOffset}px; left:${artLeftOffset}px; width:${artW*elevScale}px; height:${artH*elevScale}px; z-index:4;`;
+        // Uploaded artwork: when present, fill the opening with the image
+        // (cover-fit) rather than the grey placeholder. _showArtwork is a global
+        // view toggle so the "beauty" presentation shows art and the technical
+        // drawing can hide it.
+        const hasArtwork = f.artworkUrl && (typeof _showArtwork === 'undefined' || _showArtwork);
         if (isFloater) {
             // Floater: subtle dashed outline + inner shadow (image opening recessed into the canvas).
             art.style.boxShadow = `inset 0 0 ${10 * elevScale}px rgba(0,0,0,0.35)`;
@@ -8596,9 +8654,16 @@ function drawElevAll() {
         } else {
             art.style.boxShadow = `inset 0 ${2 * elevScale}px ${8 * elevScale}px rgba(0,0,0,0.2)`;
         }
+        if (hasArtwork) {
+            art.style.backgroundImage = `url(${f.artworkUrl})`;
+            art.style.backgroundSize = 'cover';
+            art.style.backgroundPosition = 'center';
+            art.style.backgroundRepeat = 'no-repeat';
+            art.style.boxShadow = 'none';
+        }
         
         const unitSuffix = unitInfo(elevUnit).suffix;
-        art.innerText = (artW > 0) ? `${artW.toFixed(1)}${unitSuffix}\nx\n${artH.toFixed(1)}${unitSuffix}` : "";
+        art.innerText = (hasArtwork) ? "" : ((artW > 0) ? `${artW.toFixed(1)}${unitSuffix}\nx\n${artH.toFixed(1)}${unitSuffix}` : "");
         el.appendChild(art);
         
         const labelTag = document.createElement('div'); labelTag.className = 'frame-id-tag';
