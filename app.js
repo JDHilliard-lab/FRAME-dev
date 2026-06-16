@@ -3605,7 +3605,18 @@ function updateDashVisualsFromDOM() {
     }
     
     artVis.style.top = artTopOffset + "px"; artVis.style.left = artLeftOffset + "px";
-    artVis.style.width = (Math.max(0, finalW) * ratio) + "px"; artVis.style.height = (Math.max(0, finalH) * ratio) + "px";
+    // Faux mat: the visible artwork sits INSIDE the white faux border. Inset the
+    // art opening by the border on each side so the white band shows around the
+    // uploaded image (without this, the image covered the faux mat entirely).
+    let artW = Math.max(0, finalW), artH = Math.max(0, finalH);
+    let artT = artTopOffset, artL = artLeftOffset;
+    if (effFauxOn) {
+        const fb = (parseFloat(data.sbPaperBorder) || 0);
+        artT += fb * ratio; artL += fb * ratio;
+        artW = Math.max(0, finalW - fb * 2); artH = Math.max(0, finalH - fb * 2);
+        artVis.style.top = artT + "px"; artVis.style.left = artL + "px";
+    }
+    artVis.style.width = (artW * ratio) + "px"; artVis.style.height = (artH * ratio) + "px";
     // Uploaded artwork fills the opening (cover-fit), matching the elevation.
     const dashHasArt = !!data.artworkUrl;
     if (dashHasArt) {
@@ -11176,6 +11187,22 @@ async function exportElevPNG(opts) {
                     // block at the wall's left edge on the line; the -20px in X
                     // tucks it just outside the wall (clear of the red dim line).
                     el.style.transform = 'translate(calc(50% - 20px), -50%) rotate(-90deg)';
+                });
+                // html2canvas can drop CSS background-image data URLs. For any
+                // art opening that has artwork, inject a real <img> (object-fit:
+                // cover) into the clone so the image rasterizes reliably into the
+                // exported PNG, matching the on-screen + SVG output.
+                clonedDoc.querySelectorAll('.art-visual').forEach(el => {
+                    const bg = el.style.backgroundImage || '';
+                    const m = bg.match(/url\(["']?(data:[^"')]+)["']?\)/);
+                    if (!m) return;
+                    el.style.backgroundImage = 'none';
+                    if (getComputedStyle(el).position === 'static') el.style.position = 'relative';
+                    el.style.overflow = 'hidden';
+                    const img = clonedDoc.createElement('img');
+                    img.src = m[1];
+                    img.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;';
+                    el.appendChild(img);
                 });
             },
         });
