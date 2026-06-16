@@ -3547,7 +3547,7 @@ function updateDashVisualsFromDOM() {
         const isTorn = (data.sbPaperEdge || 'clean') === 'torn';
         // Torn edge gets a dashed border in the preview as a visual hint; the export
         // does the actual irregular outline via the canvas renderer.
-        paperVis.style.cssText = `position:absolute; top:${paperY}px; left:${paperX}px; width:${paperW}px; height:${paperH}px; background:${paperColor}; box-shadow: 2px 4px 12px rgba(0,0,0,0.56); ${isTorn ? 'border:1px dashed rgba(0,0,0,0.4); border-radius:2px;' : ''} pointer-events:none;`;
+        paperVis.style.cssText = `position:absolute; box-sizing:border-box; top:${paperY}px; left:${paperX}px; width:${paperW}px; height:${paperH}px; background:${paperColor}; box-shadow: 2px 4px 12px rgba(0,0,0,0.56); ${isTorn ? 'border:1px dashed rgba(0,0,0,0.4); border-radius:2px;' : ''} pointer-events:none;`;
         fVis.appendChild(paperVis);
     }
     
@@ -8549,7 +8549,7 @@ function drawElevAll() {
             paper.className = 'sb-paper-visual';
             const paperPx = sbPaperMarginVal * elevScale;
             const isTorn = (f.sbPaperEdge || 'clean') === 'torn';
-            paper.style.cssText = `position:absolute; top:${frameInsetPx + paperPx}px; left:${frameInsetPx + paperPx}px; width:${(f.w - effFw*2 - sbPaperMarginVal*2) * elevScale}px; height:${(f.h - effFw*2 - sbPaperMarginVal*2) * elevScale}px; background:${paperColor}; box-shadow: ${2 * elevScale}px ${4 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.45); ${isTorn ? `border: 1px dashed rgba(0,0,0,0.4);` : ''} pointer-events:none; z-index:3;`;
+            paper.style.cssText = `position:absolute; box-sizing:border-box; top:${frameInsetPx + paperPx}px; left:${frameInsetPx + paperPx}px; width:${(f.w - effFw*2 - sbPaperMarginVal*2) * elevScale}px; height:${(f.h - effFw*2 - sbPaperMarginVal*2) * elevScale}px; background:${paperColor}; box-shadow: ${2 * elevScale}px ${4 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.45); ${isTorn ? `border: 1px dashed rgba(0,0,0,0.4);` : ''} pointer-events:none; z-index:3;`;
             el.appendChild(paper);
         }
 
