@@ -4823,12 +4823,7 @@ function processArtworkFile(file, onReady) {
 function handleDashArtworkUpload(e) {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
-    processArtworkFile(file, (dataUrl, baseName) => {
-        const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-        if (row) { row.artworkUrl = dataUrl; row.artworkFile = baseName; }
-        updateDashArtworkThumb(dataUrl);
-        syncDashAndCalculate();
-    });
+    processArtworkFile(file, (dataUrl, baseName) => applyArtworkToCurrentRow(dataUrl, baseName));
     e.target.value = '';  // allow re-uploading the same file
 }
 
@@ -4836,7 +4831,13 @@ function handleDashArtworkUpload(e) {
 // preview drops). Honors bulk-edit scratch mode.
 function applyArtworkToCurrentRow(dataUrl, baseName) {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-    if (row) { row.artworkUrl = dataUrl; row.artworkFile = baseName; }
+    if (row) {
+        row.artworkUrl = dataUrl; row.artworkFile = baseName;
+        // Auto-populate the Image Code from the dropped filename (this is what
+        // flows to the CSV + the bottom-right caption in InDesign).
+        row.imageCode = baseName;
+        const ic = document.getElementById('m_imageCode'); if (ic) ic.value = baseName;
+    }
     updateDashArtworkThumb(dataUrl);
     syncDashAndCalculate();
 }
@@ -4847,8 +4848,12 @@ function applyArtworkToRowIndex(idx, dataUrl, baseName) {
     const row = dashProjectData[idx];
     if (!row) return;
     row.artworkUrl = dataUrl; row.artworkFile = baseName;
+    row.imageCode = baseName;
     pushUpdatesToElevations(idx);
-    if (idx === dashSelectedRowIndex) updateDashArtworkThumb(dataUrl);
+    if (idx === dashSelectedRowIndex) {
+        updateDashArtworkThumb(dataUrl);
+        const ic = document.getElementById('m_imageCode'); if (ic) ic.value = baseName;
+    }
     drawElevAll();
     pushHistory();
 }
@@ -4937,7 +4942,8 @@ function wireElevArtworkDrop() {
 
 function clearDashArtwork() {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-    if (row) { row.artworkUrl = ''; row.artworkFile = ''; }
+    if (row) { row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = ''; }
+    const ic = document.getElementById('m_imageCode'); if (ic) ic.value = '';
     updateDashArtworkThumb('');
     syncDashAndCalculate();
 }
@@ -5472,6 +5478,23 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.strokeStyle = "#aaaaaa"; x.lineWidth = 1; x.strokeRect(aX, aY, aW, aH);
     }
 
+    // Optional artwork fill: paint the uploaded image cover-fit into the opening,
+    // ON TOP of the opening treatment (which would otherwise overpaint it). Default
+    // (no artworkImg) leaves the opening transparent for InDesign compositing.
+    if (opts.artworkImg && aW > 0 && aH > 0) {
+        x.save();
+        x.beginPath(); x.rect(aX, aY, aW, aH); x.clip();
+        const iw = opts.artworkImg.naturalWidth || opts.artworkImg.width;
+        const ih = opts.artworkImg.naturalHeight || opts.artworkImg.height;
+        if (iw && ih) {
+            const scale = Math.max(aW / iw, aH / ih);   // cover
+            const dw = iw * scale, dh = ih * scale;
+            const dx = aX + (aW - dw) / 2, dy = aY + (aH - dh) / 2;
+            x.drawImage(opts.artworkImg, dx, dy, dw, dh);
+        }
+        x.restore();
+    }
+
     // Optional art-opening size label (for elevation export — dashboard already shows this elsewhere)
     if (opts.showArtLabel && aW > 0 && aH > 0) {
         const unitSuffix = unitInfo(opts.unit || 'in').suffix;
@@ -5609,16 +5632,17 @@ function buildPngFilename(row) {
     return tokens.join('_') + '.png';
 }
 
-function exportDashNativePNG() {
+async function exportDashNativePNG() {
     const d = dashProjectData[dashSelectedRowIndex];
     // Always render in inches so cm-mode and in-mode exports look identical.
     const dInches = _frameDataInInches(d, dashUnit);
-    // Pad reserves transparent space for the drop shadow to render into.
-    // When shadows are off, designers don't want the empty margin — it
-    // makes alignment in InDesign harder (the frame edge ≠ the bounding
-    // box edge). So pad:0 when shadows are off; pad:40 when on.
     const exportPad = dashOuterShadowsOn ? 40 : 0;
-    const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: exportPad });
+    // Fill the opening with the uploaded artwork when present + shown.
+    let artworkImg = null;
+    if (d.artworkUrl && (typeof _showArtwork === 'undefined' || _showArtwork)) {
+        try { artworkImg = await _loadImg(d.artworkUrl); } catch (e) { artworkImg = null; }
+    }
+    const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: exportPad, artworkImg });
     const a = document.createElement('a');
     a.download = buildPngFilename(d);
     a.href = canvas.toDataURL("image/png");
