@@ -11094,6 +11094,14 @@ async function exportElevPNG(opts) {
             (f.fType === 'image' && f.swatchDataUrl) ? _loadImg(f.swatchDataUrl) : Promise.resolve(null)
         );
         const loadedImages = await Promise.all(imagePromises);
+        // Pre-load artwork images too (only when the Artwork toggle is on), so we
+        // can bake them into each frame's overlay canvas — the overlay is what
+        // html2canvas screenshots, and the live art-visual is hidden during export.
+        const showArt = (typeof _showArtwork === 'undefined' || _showArtwork);
+        const artPromises = visibleFrames.map(f =>
+            (showArt && f.artworkUrl) ? _loadImg(f.artworkUrl) : Promise.resolve(null)
+        );
+        const loadedArt = await Promise.all(artPromises);
 
         // For each visible frame: render a high-res canvas using the same routine
         // as the Frame Dashboard PNG export, then drop it on top of the frame's
@@ -11106,6 +11114,7 @@ async function exportElevPNG(opts) {
             const f = visibleFrames[frameIdx];
             if (!f) return;
             const swatchImg = loadedImages[frameIdx];
+            const artworkImg = loadedArt[frameIdx];
             frameIdx++;
 
             // Elevation frames store dimensions as f.w / f.h (set from d.extW / d.extH at import time).
@@ -11130,6 +11139,7 @@ async function exportElevPNG(opts) {
                 pad: elevPad,
                 showArtLabel: false,
                 unit: 'in',  // we converted, so renderer is now in inches
+                artworkImg: artworkImg,  // bake uploaded artwork into the opening
             });
 
             // Sanity check the canvas before we try to drawImage from it
@@ -11173,30 +11183,6 @@ async function exportElevPNG(opts) {
         await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
         // Capture the elevation
-        // Capture artwork openings relative to the export root NOW (same layout
-        // state html2canvas will see). We composite these onto the output canvas
-        // ourselves after rasterization — html2canvas is unreliable with both CSS
-        // background images AND dynamically-injected <img>, so we don't trust it
-        // for artwork. Coordinates are relative to `wrap`; scaled to canvas px after.
-        const _wrapRect = wrap.getBoundingClientRect();
-        const _artComposites = [];
-        if (typeof _showArtwork === 'undefined' || _showArtwork) {
-            document.querySelectorAll('#frame-layer .frame-vis').forEach(fv => {
-                const letter = fv.getAttribute('data-frame-letter');
-                const frame = elevFrames.find(f => f.letter === letter);
-                if (!frame || !frame.artworkUrl) return;
-                const artEl = fv.querySelector('.art-visual');
-                if (!artEl) return;
-                const r = artEl.getBoundingClientRect();
-                _artComposites.push({
-                    url: frame.artworkUrl,
-                    x: r.left - _wrapRect.left,
-                    y: r.top - _wrapRect.top,
-                    w: r.width, h: r.height
-                });
-            });
-        }
-
         const canvas = await html2canvas(wrap, {
             backgroundColor: null,
             scale: 3,
@@ -11228,29 +11214,6 @@ async function exportElevPNG(opts) {
                 });
             },
         });
-        // Composite artwork onto the rasterized canvas ourselves (reliable).
-        if (_artComposites.length && _wrapRect.width > 0) {
-            const sx = canvas.width / _wrapRect.width;
-            const sy = canvas.height / _wrapRect.height;
-            const cctx = canvas.getContext('2d');
-            for (const a of _artComposites) {
-                try {
-                    const img = await _loadImg(a.url);
-                    if (!img) continue;
-                    const dx = a.x * sx, dy = a.y * sy, dw = a.w * sx, dh = a.h * sy;
-                    if (dw <= 0 || dh <= 0) continue;
-                    cctx.save();
-                    cctx.beginPath(); cctx.rect(dx, dy, dw, dh); cctx.clip();
-                    const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
-                    if (iw && ih) {
-                        const sc = Math.max(dw / iw, dh / ih);    // cover
-                        const rw = iw * sc, rh = ih * sc;
-                        cctx.drawImage(img, dx + (dw - rw) / 2, dy + (dh - rh) / 2, rw, rh);
-                    }
-                    cctx.restore();
-                } catch (e) { /* skip this artwork on error */ }
-            }
-        }
         const pngName = `${elevations[currentElevIndex].name.replace(/[\\/:*?"<>|]/g, '_')}.png`;
         // Bulk-export mode: hand the blob back instead of downloading.
         // The finally block still restores theme/zoom/person/etc.
