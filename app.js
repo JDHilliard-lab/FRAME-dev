@@ -1353,6 +1353,7 @@ let dimVisibility = {
     edgeGap: true,    // edge-gap (distance-to-wall) dimensions
     wallDims: true,   // overall wall width/height dimensions (default ON)
     customLines: true, // custom measure-tool lines
+    imageCode: false,  // artwork image-code caption beneath each frame (opt-in)
 };
 
 function loadDimVisibility() {
@@ -1417,6 +1418,9 @@ function syncLayoutGuideButtonStates() {
         clBtn.classList.toggle('active', exists && dimVisibility.customLines);
         clBtn.style.opacity = exists ? '1' : '0.4';
     }
+    // Image-code caption toggle: active when the flag is on.
+    const icBtn = document.getElementById('imageCodeToggle');
+    if (icBtn) icBtn.classList.toggle('active', dimVisibility.imageCode);
 }
 
 // Toggle group-box visibility (only meaningful if one exists).
@@ -1458,6 +1462,13 @@ function toggleCustomLinesVisibility(btn) {
 function toggleArtworkVisibility(btn) {
     _showArtwork = !_showArtwork;
     if (btn) btn.classList.toggle('active', _showArtwork);
+    drawElevAll();
+}
+
+function toggleImageCodeVisibility(btn) {
+    dimVisibility.imageCode = !dimVisibility.imageCode;
+    saveDimVisibility();
+    if (btn) btn.classList.toggle('active', dimVisibility.imageCode);
     drawElevAll();
 }
 
@@ -4962,7 +4973,12 @@ function clearDashArtwork() {
 function updateDashArtworkThumb(dataUrl) {
     const thumb = document.getElementById('m_artworkThumb');
     const clearBtn = document.getElementById('m_artworkClear');
-    if (thumb) thumb.style.backgroundImage = dataUrl ? `url(${dataUrl})` : 'none';
+    if (thumb) {
+        thumb.style.backgroundImage = dataUrl ? `url(${dataUrl})` : 'none';
+        // Hide the placeholder icon when an image is shown.
+        const icon = thumb.querySelector('svg');
+        if (icon) icon.style.display = dataUrl ? 'none' : '';
+    }
     if (clearBtn) clearBtn.style.display = dataUrl ? 'inline-block' : 'none';
 }
 
@@ -8878,6 +8894,19 @@ function drawElevAll() {
         centerLayer.appendChild(crossH); centerLayer.appendChild(crossV);
         
         makeElevDraggable(el, idx); frameLayer.appendChild(el);
+
+        // Image-code caption beneath the frame, right-aligned to the frame's
+        // right edge. Opt-in via the Image Code layout-guide toggle. Rendered as
+        // a frameLayer sibling so it isn't hidden by the PNG export's per-frame
+        // overlay swap (text is captured fine by html2canvas; SVG adds its own).
+        if (dimVisibility.imageCode && f.imageCode) {
+            const cap = document.createElement('div');
+            cap.className = 'frame-imgcode-caption';
+            cap.textContent = f.imageCode;
+            const capGap = 5; // px below the frame
+            cap.style.cssText = `position:absolute; left:${(f.x)*elevScale}px; bottom:${(f.y*elevScale) - capGap}px; width:${f.w*elevScale}px; transform:translateY(100%); text-align:right; font-size:10px; line-height:1.1; color:#222; pointer-events:none; white-space:nowrap; overflow:visible;`;
+            frameLayer.appendChild(cap);
+        }
     });
 
     makeElevDraggable(pWrap, 'person');
@@ -11592,6 +11621,19 @@ async function exportElevSVG(opts) {
                 const ly = (lr.y + lfs * 0.85).toFixed(1);
                 frontLayer.push(`<text x="${lx}" y="${ly}" font-family="Arial, Helvetica, sans-serif" font-size="${lfs.toFixed(1)}" font-weight="${lfw}" fill="${lcolor}">${legEl.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`);
             }
+            // Image-code captions beneath frames (right-aligned). Read the live
+            // caption elements so they match the screen + the Image Code toggle.
+            document.querySelectorAll('#frame-layer .frame-imgcode-caption').forEach(capEl => {
+                if (!capEl.textContent) return;
+                const cr = rectToSvg(capEl);
+                const ccs = getComputedStyle(capEl);
+                const cfs = parseFloat(ccs.fontSize) || 10;
+                const ccolor = ccs.color || '#222';
+                // right-aligned: anchor at the caption box's right edge
+                const cxr = (cr.x + cr.w).toFixed(1);
+                const cyr = (cr.y + cfs * 0.85).toFixed(1);
+                frontLayer.push(`<text x="${cxr}" y="${cyr}" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="${cfs.toFixed(1)}" fill="${ccolor}">${capEl.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`);
+            });
         }
 
         // ── FRAMES (back layer): embed as <image> ──
