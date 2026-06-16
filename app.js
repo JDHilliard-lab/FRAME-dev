@@ -1001,10 +1001,14 @@ if (document.readyState === 'loading') {
         // init code (which calls pushHistory) has finished. Otherwise the
         // restore would be overwritten by the initial pushHistory.
         setTimeout(checkAutosaveOnLoad, 200);
+        if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
+        if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
     });
 } else {
     updateDirtyIndicator();
     setTimeout(checkAutosaveOnLoad, 200);
+    if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
+    if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
 }
 // ─────────────────────────────────────────────────────────────────────
 // END SAVE / AUTOSAVE / UNSAVED-CHANGES
@@ -4787,37 +4791,148 @@ function updateDashCustomSwatchDropdown() {
 // Uploaded image that fills the frame opening in the elevation "beauty" view
 // and the presentation PDF. Downscaled on import to bound memory/project size
 // while keeping presentation-grade resolution.
-function handleDashArtworkUpload(e) {
-    const file = e.target.files && e.target.files[0];
-    if (!file) return;
+// Shared artwork importer: downscales any image File to a bounded JPEG data URL
+// and hands back {dataUrl, baseName} via callback. Used by the file picker and
+// all drag-and-drop targets so behavior is identical everywhere.
+function processArtworkFile(file, onReady) {
+    if (!file || !/^image\//.test(file.type)) {
+        showInfoModal('Not an image', 'Please drop or choose an image file (JPG, PNG, etc.).');
+        return;
+    }
     const reader = new FileReader();
     reader.onload = (ev) => {
         const img = new Image();
         img.onload = () => {
             const MAX = 1200;
             let w = img.naturalWidth, h = img.naturalHeight;
-            if (w > MAX || h > MAX) {
-                const s = MAX / Math.max(w, h);
-                w = Math.round(w * s); h = Math.round(h * s);
-            }
+            if (w > MAX || h > MAX) { const s = MAX / Math.max(w, h); w = Math.round(w * s); h = Math.round(h * s); }
             const c = document.createElement('canvas');
             c.width = w; c.height = h;
             c.getContext('2d').drawImage(img, 0, 0, w, h);
-            // JPEG keeps data-URL size reasonable for photos; quality 0.85.
             const dataUrl = c.toDataURL('image/jpeg', 0.85);
-            const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-            // Capture the source filename with the extension dropped (.jpg/.png/.eps
-            // etc.) — used for the CSV column and the presentation caption.
             const baseName = (file.name || '').replace(/\.[^.]+$/, '');
-            if (row) { row.artworkUrl = dataUrl; row.artworkFile = baseName; }
-            updateDashArtworkThumb(dataUrl);
-            syncDashAndCalculate();
+            onReady(dataUrl, baseName);
         };
         img.onerror = () => showInfoModal('Image Error', 'That file could not be read as an image.');
         img.src = ev.target.result;
     };
     reader.readAsDataURL(file);
+}
+
+// File-picker path (Upload button / explorer).
+function handleDashArtworkUpload(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    processArtworkFile(file, (dataUrl, baseName) => {
+        const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+        if (row) { row.artworkUrl = dataUrl; row.artworkFile = baseName; }
+        updateDashArtworkThumb(dataUrl);
+        syncDashAndCalculate();
+    });
     e.target.value = '';  // allow re-uploading the same file
+}
+
+// Assign artwork to the currently-selected dashboard row (used by form + dash
+// preview drops). Honors bulk-edit scratch mode.
+function applyArtworkToCurrentRow(dataUrl, baseName) {
+    const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+    if (row) { row.artworkUrl = dataUrl; row.artworkFile = baseName; }
+    updateDashArtworkThumb(dataUrl);
+    syncDashAndCalculate();
+}
+
+// Assign artwork to a specific dashboard row by index, then live-sync to its
+// elevation frames. Used when dropping onto an elevation frame (mapped by id).
+function applyArtworkToRowIndex(idx, dataUrl, baseName) {
+    const row = dashProjectData[idx];
+    if (!row) return;
+    row.artworkUrl = dataUrl; row.artworkFile = baseName;
+    pushUpdatesToElevations(idx);
+    if (idx === dashSelectedRowIndex) updateDashArtworkThumb(dataUrl);
+    drawElevAll();
+    pushHistory();
+}
+
+// ── Drag-and-drop wiring ─────────────────────────────────────────────────
+// A small helper to make any element a highlightable image drop zone.
+function _wireImageDropZone(el, onFile, opts) {
+    if (!el || el._artDropWired) return;
+    el._artDropWired = true;
+    const hi = (opts && opts.highlightClass) || 'art-drop-hover';
+    el.addEventListener('dragover', (e) => {
+        if (!e.dataTransfer) return;
+        // Only react to file drags.
+        if (Array.from(e.dataTransfer.types || []).indexOf('Files') === -1) return;
+        e.preventDefault(); e.stopPropagation();
+        e.dataTransfer.dropEffect = 'copy';
+        el.classList.add(hi);
+    });
+    el.addEventListener('dragleave', (e) => { el.classList.remove(hi); });
+    el.addEventListener('drop', (e) => {
+        if (!e.dataTransfer) return;
+        const file = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (!file) return;
+        e.preventDefault(); e.stopPropagation();
+        el.classList.remove(hi);
+        onFile(file, e);
+    });
+}
+
+// Wire the dashboard drop zones (form artwork row + the preview opening).
+// Called once after DOM is ready; safe to call repeatedly (guarded).
+function wireDashArtworkDrops() {
+    const formZone = document.getElementById('m_artworkDrop');
+    if (formZone) _wireImageDropZone(formZone, (file) => {
+        processArtworkFile(file, (u, n) => applyArtworkToCurrentRow(u, n));
+    });
+    // The dashboard preview opening (delegated: the .art-visual is rebuilt each
+    // render, so wire the stable container and check the target on drop).
+    const previewWrap = document.getElementById('dash-frame-visual');
+    if (previewWrap) _wireImageDropZone(previewWrap, (file) => {
+        processArtworkFile(file, (u, n) => applyArtworkToCurrentRow(u, n));
+    });
+}
+
+// Elevation: dropping an image onto a frame maps it to that frame's dashboard
+// row (by id). Delegated on the stable #frame-layer; resolves which frame from
+// the drop target.
+function wireElevArtworkDrop() {
+    const layer = document.getElementById('frame-layer');
+    if (!layer || layer._artDropWired) return;
+    layer._artDropWired = true;
+    const clearHi = () => layer.querySelectorAll('.art-drop-hover').forEach(n => n.classList.remove('art-drop-hover'));
+    layer.addEventListener('dragover', (e) => {
+        if (!e.dataTransfer || Array.from(e.dataTransfer.types || []).indexOf('Files') === -1) return;
+        const fEl = e.target.closest && e.target.closest('.frame-vis');
+        if (!fEl) return;
+        e.preventDefault(); e.stopPropagation(); e.dataTransfer.dropEffect = 'copy';
+        clearHi(); fEl.classList.add('art-drop-hover');
+    });
+    layer.addEventListener('dragleave', (e) => {
+        const fEl = e.target.closest && e.target.closest('.frame-vis');
+        if (fEl) fEl.classList.remove('art-drop-hover');
+    });
+    layer.addEventListener('drop', (e) => {
+        if (!e.dataTransfer) return;
+        const fEl = e.target.closest && e.target.closest('.frame-vis');
+        const file = e.dataTransfer.files && e.dataTransfer.files[0];
+        if (!fEl || !file) return;
+        e.preventDefault(); e.stopPropagation();
+        clearHi();
+        const letter = fEl.getAttribute('data-frame-letter');
+        const frame = elevFrames.find(f => f.letter === letter);
+        if (!frame) { showInfoModal('No frame', 'Could not match that frame.'); return; }
+        // Map to the dashboard row by id.
+        const rowIdx = dashProjectData.findIndex(r => r.id === frame.id);
+        processArtworkFile(file, (u, n) => {
+            if (rowIdx >= 0) {
+                applyArtworkToRowIndex(rowIdx, u, n);
+            } else {
+                // Frame not linked to a dashboard row — set on the frame directly.
+                frame.artworkUrl = u; frame.artworkFile = n; drawElevAll(); pushHistory();
+            }
+        });
+    });
 }
 
 function clearDashArtwork() {
@@ -8400,6 +8515,7 @@ function snapFrameToWallCenter(idx, e) {
 }
 
 function drawElevAll() {
+    if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
     // Prefer the precise stored wall dims over the input field (which displays
     // a 2-decimal rounded value). Reading the rounded field while frames use
     // precise values caused the wall to drift relative to the frames on unit
