@@ -1451,6 +1451,12 @@ function toggleCustomLinesVisibility(btn) {
     drawElevAll();
 }
 
+function toggleArtworkVisibility(btn) {
+    _showArtwork = !_showArtwork;
+    if (btn) btn.classList.toggle('active', _showArtwork);
+    drawElevAll();
+}
+
 function toggleTheme() { document.body.classList.toggle('light-theme'); }
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -2431,6 +2437,12 @@ function pushUpdatesToElevations(dashIndex) {
                 f.artist = d.artist || '';
                 f.artworkTitle = d.artworkTitle || '';
                 f.artType = d.artType || '';
+
+                // Uploaded artwork image + its source filename (extension dropped).
+                // Syncing here is what makes artwork appear live in the elevation
+                // when added on the dashboard (previously required a re-import).
+                f.artworkUrl = d.artworkUrl || '';
+                f.artworkFile = d.artworkFile || '';
             }
         });
     });
@@ -3285,6 +3297,7 @@ function syncDashAndCalculate() {
         // render as blank cells in CSV and skipped lines in the InDesign spec block.
         artist: getStr('m_artist'), artworkTitle: getStr('m_artworkTitle'), artType: getStr('m_artType'),
         artworkUrl: row.artworkUrl || '',
+        artworkFile: row.artworkFile || '',
         // Frame profile geometry: face width (fW) is the visible frame edge; fHeight is the
         // total profile depth front-to-back; rabbetDepth is the L-pocket depth where
         // mat/print/glass/backing stack up. fHeight ≥ rabbetDepth (rabbet is a notch in the rail).
@@ -3589,9 +3602,18 @@ function updateDashVisualsFromDOM() {
     
     artVis.style.top = artTopOffset + "px"; artVis.style.left = artLeftOffset + "px";
     artVis.style.width = (Math.max(0, finalW) * ratio) + "px"; artVis.style.height = (Math.max(0, finalH) * ratio) + "px";
+    // Uploaded artwork fills the opening (cover-fit), matching the elevation.
+    const dashHasArt = !!data.artworkUrl;
+    if (dashHasArt) {
+        artVis.style.backgroundImage = `url(${data.artworkUrl})`;
+        artVis.style.backgroundSize = 'cover';
+        artVis.style.backgroundPosition = 'center';
+        artVis.style.backgroundRepeat = 'no-repeat';
+        artVis.style.boxShadow = 'none';
+    }
     // Suffix matches the unit. unitInfo() gives '"' for IN, ' cm' for CM, ' mm' for MM.
     const dashSuf = unitInfo(dashUnit).suffix;
-    artVis.innerText = `${dashFmt(Math.max(0, finalW))}${dashSuf} × ${dashFmt(Math.max(0, finalH))}${dashSuf}`;
+    artVis.innerText = dashHasArt ? "" : `${dashFmt(Math.max(0, finalW))}${dashSuf} × ${dashFmt(Math.max(0, finalH))}${dashSuf}`;
     fVis.appendChild(artVis);
 }
 
@@ -3808,6 +3830,7 @@ function importDashCSV(e) {
             // Hidden columns — Artist/Title/Art Type for caption use
             d.artist = cellOr(cols, 'Artist', '');
             d.artworkTitle = cellOr(cols, 'Artwork Title', '');
+            d.artworkFile = cellOr(cols, 'Artwork Filename', '');
             d.artType = cellOr(cols, 'Art Type', '');
 
             // Production fields
@@ -4783,7 +4806,10 @@ function handleDashArtworkUpload(e) {
             // JPEG keeps data-URL size reasonable for photos; quality 0.85.
             const dataUrl = c.toDataURL('image/jpeg', 0.85);
             const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-            if (row) row.artworkUrl = dataUrl;
+            // Capture the source filename with the extension dropped (.jpg/.png/.eps
+            // etc.) — used for the CSV column and the presentation caption.
+            const baseName = (file.name || '').replace(/\.[^.]+$/, '');
+            if (row) { row.artworkUrl = dataUrl; row.artworkFile = baseName; }
             updateDashArtworkThumb(dataUrl);
             syncDashAndCalculate();
         };
@@ -4796,7 +4822,7 @@ function handleDashArtworkUpload(e) {
 
 function clearDashArtwork() {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-    if (row) row.artworkUrl = '';
+    if (row) { row.artworkUrl = ''; row.artworkFile = ''; }
     updateDashArtworkThumb('');
     syncDashAndCalculate();
 }
@@ -6042,7 +6068,7 @@ function buildDashCSVString() {
         `Frame Code-Color,Frame (Width)${u},Frame (Height)${u},` +
         `Security Hardware,Backing Board,Mount,Notes,Production Notes,` +
         // — End visible columns. Below this point: InDesign helpers + backend data. —
-        `Artist,Artwork Title,Art Type,Rabbet Depth${u},` +
+        `Artist,Artwork Title,Art Type,Artwork Filename,Rabbet Depth${u},` +
         `Application,Matboard Description,Spec Lines,` +
         `FM Backer Name,FM Backer Hex,FM Paper Name,FM Paper Hex,FM Paper Edge,FM Paper Margin${u},Frame Code,Frame Color Name,Frame Color Hex,` +
         `Image_Filename,` +
@@ -6152,6 +6178,7 @@ function buildDashCSVString() {
             r.artist || '',
             r.artworkTitle || '',
             r.artType || '',
+            r.artworkFile || '',
             iFL ? '' : numOrBlank(r.rabbetDepth),
             specs.application,
             specs.matboard,
@@ -11249,6 +11276,29 @@ function _measureSvgText(text, fontSize, fontWeight, fontFamily) {
     return _svgMeasureCtx.measureText(text).width;
 }
 
+// Layer a frame's uploaded artwork into the exported SVG, clipped to the
+// frame's art opening (the live .art-visual rect), cover-fit. No-op when the
+// Artwork toggle is off or the frame has no image. Each call adds a unique
+// clipPath so multiple frames don't collide.
+let _svgArtClipCounter = 0;
+function _maybeAddArtworkToSvg(f, frameEl, backLayer, rectToSvg) {
+    try {
+        if (typeof _showArtwork !== 'undefined' && !_showArtwork) return;
+        if (!f || !f.artworkUrl || !frameEl) return;
+        const artEl = frameEl.querySelector('.art-visual');
+        if (!artEl) return;
+        const r = rectToSvg(artEl);
+        if (!r || r.w <= 0 || r.h <= 0) return;
+        const id = 'artclip' + (_svgArtClipCounter++);
+        // clipPath bounds the image to the opening; preserveAspectRatio
+        // 'xMidYMid slice' gives cover-fit (fill + crop), matching the screen.
+        backLayer.push(
+            `<clipPath id="${id}"><rect x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}"/></clipPath>` +
+            `<image clip-path="url(#${id})" x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}" xlink:href="${f.artworkUrl}" preserveAspectRatio="xMidYMid slice"/>`
+        );
+    } catch (e) { /* skip artwork on error */ }
+}
+
 async function exportElevSVG(opts) {
     const wall = document.getElementById('wall');
     if (!wall) return;
@@ -11389,6 +11439,7 @@ async function exportElevSVG(opts) {
                     }
                     const frameParts = buildFrameSVG(f, pos, elevUnit, railColor);
                     frameParts.forEach(s => backLayer.push(s));
+                    _maybeAddArtworkToSvg(f, el, backLayer, rectToSvg);
                     continue;
                 }
 
@@ -11402,6 +11453,10 @@ async function exportElevSVG(opts) {
                 if (!canvas.width || !canvas.height) throw new Error('zero-size canvas');
                 const dataUrl = canvas.toDataURL('image/png');
                 backLayer.push(`<image x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" xlink:href="${dataUrl}" preserveAspectRatio="none"/>`);
+                // Uploaded artwork: layer into the opening (cover-fit, clipped) so
+                // the exported SVG matches the on-screen "beauty" view. Honors the
+                // Artwork layout-guide toggle via _showArtwork.
+                _maybeAddArtworkToSvg(f, el, backLayer, rectToSvg);
             } catch (err) {
                 backLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${f.fColor || '#222'}"/>`);
             }
