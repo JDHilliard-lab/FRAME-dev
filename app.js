@@ -3322,7 +3322,7 @@ function syncDashAndCalculate() {
 }
 
 function updateDashVisualsFromDOM() {
-    const data = dashProjectData[dashSelectedRowIndex];
+    const data = _bulkEditing ? (_bulkScratch || {}) : dashProjectData[dashSelectedRowIndex];
     const fVis = document.getElementById('dash-frame-visual');
     const viewObj = document.getElementById('view-dashboard');
     
@@ -4734,7 +4734,9 @@ function updateDashCustomSwatchDropdown() {
 // it's safe to call in a loop for bulk edits. `dataUrl` is the resolved image.
 // Returns true if it changed the row.
 function applySwatchToRow(rowIdx, collectionName, item, dataUrl) {
-    const row = dashProjectData[rowIdx];
+    // In bulk-edit mode, target the scratch object (the form's data source),
+    // never a real project row. rowIdx is ignored while bulk editing.
+    const row = _bulkEditing ? _bulkScratch : dashProjectData[rowIdx];
     if (!row || !item) return false;
     const _uf = unitFactor('in', dashUnit);
     row.fType = 'image';
@@ -4766,7 +4768,7 @@ function loadDashFromCustomLibrary(idx) {
     _libEntryToDataUrl(item.file).then(u => {
         // Apply the full swatch to the active row (single source of truth).
         applySwatchToRow(dashSelectedRowIndex, c, item, u);
-        const row = dashProjectData[dashSelectedRowIndex];
+        const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
 
         // Reflect the new values in the form controls.
         document.getElementById('fW').value = row.fW;
@@ -6290,6 +6292,12 @@ function renderDashTable() {
         `;
         tbody.appendChild(tr);
     });
+    // Re-apply selection highlighting — the innerHTML rebuild above drops the
+    // .selected / .multi-selected classes, so without this a table refresh
+    // (e.g. after editing any field) visually clears a shift/ctrl selection
+    // even though the selection set is still intact. This is what made
+    // shift-select appear to "stop highlighting" after editing.
+    applyDashSelectionStyling();
 }
 
 // ──────────────────────────────────────────────────────────────────────────
