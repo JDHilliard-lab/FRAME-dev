@@ -226,13 +226,15 @@
                             <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
                         </div>
 
-                        <!-- Artwork image: uploaded per row, shown inside the frame
-                             opening in the elevation "beauty" view + presentation PDF. -->
-                        <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <!-- Artwork image: uploaded per row (Upload button or drag-drop),
+                             shown inside the frame opening in the elevation "beauty"
+                             view + presentation PDF. -->
+                        <div id="m_artworkDrop" class="art-drop-zone" style="display:flex; align-items:center; gap:8px; margin-top:6px; padding:6px; border:1px dashed transparent; border-radius:5px;">
                             <label style="margin:0; white-space:nowrap;">Artwork Image</label>
                             <div id="m_artworkThumb" style="width:30px; height:30px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input) center/cover no-repeat; flex-shrink:0;"></div>
                             <button type="button" class="action-btn btn-secondary" style="height:28px; padding:0 10px; font-size:0.68rem;" onclick="document.getElementById('m_artworkFile').click()">Upload</button>
                             <button type="button" id="m_artworkClear" class="action-btn btn-secondary" style="height:28px; padding:0 10px; font-size:0.68rem; display:none;" onclick="clearDashArtwork()">Clear</button>
+                            <span style="font-size:0.6rem; color:var(--text-muted); white-space:nowrap;">or drag an image here</span>
                             <input type="file" id="m_artworkFile" accept="image/*" style="display:none;" onchange="handleDashArtworkUpload(event)">
                         </div>
 
