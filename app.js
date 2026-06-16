@@ -2744,7 +2744,15 @@ const BULK_FIELD_ELEMENTS = {
     backing: ['m_backing'], notes: ['m_notes'], prodNotes: ['m_prodNotes'],
     canvasDepth: ['canvasDepth'], canvasWrap: ['canvasWrap'], floaterInset: ['floaterInset'],
     bleed: ['m_bleed'],
+    // Float Mount paper fields (the panel shown when FLOAT mode is on).
+    sbBackerColorName: ['sbBackerColorName'], sbBackerColorHex: ['sbBackerColorHex'],
+    sbPaperColorName: ['sbPaperColorName'], sbPaperColorHex: ['sbPaperColorHex'],
+    sbPaperMargin: ['sbPaperMargin'], sbPaperBorder: ['sbPaperBorder'],
 };
+// Mode/data keys with NO single dedicated input (driven by toggle buttons or
+// derived) that must still be diffed + carried on Apply so things like the
+// MAT↔FLOAT mode switch, faux-mat toggle, and paper-edge style propagate.
+const BULK_EXTRA_KEYS = ['useFloatMount', 'useFauxMat', 'sbPaperEdge'];
 // Keys that are inherently per-row and must never be bulk-applied.
 const BULK_LOCKED_ELEMENTS = ['m_itemCode', 'm_imageCode', 'extW', 'extH', 'm_qty'];
 
@@ -2834,6 +2842,16 @@ function applyBulkEdit() {
         const a = _bulkScratch[key], b = _bulkBaseline[key];
         if (String(a === undefined ? '' : a) !== String(b === undefined ? '' : b)) changedKeys.push(key);
     });
+    // Mode/derived keys without a dedicated input (MAT↔FLOAT, faux mat, edge).
+    BULK_EXTRA_KEYS.forEach(key => {
+        const a = _bulkScratch[key], b = _bulkBaseline[key];
+        if (String(a === undefined ? '' : a) !== String(b === undefined ? '' : b)) changedKeys.push(key);
+    });
+    // If the MAT↔FLOAT mode itself changed, carry the complete float-paper field
+    // set so every selected row fully switches mode (not just the toggle flag).
+    const floatModeChanged = changedKeys.indexOf('useFloatMount') >= 0;
+    const floatCarry = ['useFloatMount', 'sbBackerColorName', 'sbBackerColorHex', 'sbPaperColorName', 'sbPaperColorHex', 'sbPaperMargin', 'sbPaperBorder', 'sbPaperEdge'];
+
     // Frame swatch: if the user picked a library swatch, fType becomes 'image'
     // and swatchDataUrl/swatchName/fW/fHeight/rabbet change — carry those too.
     const swatchChanged = _bulkScratch.swatchDataUrl !== _bulkBaseline.swatchDataUrl || _bulkScratch.swatchName !== _bulkBaseline.swatchName || _bulkScratch.fType !== _bulkBaseline.fType;
@@ -2844,6 +2862,7 @@ function applyBulkEdit() {
     _bulkSelected.forEach(idx => {
         const target = dashProjectData[idx];
         changedKeys.forEach(k => { target[k] = _bulkScratch[k]; });
+        if (floatModeChanged) floatCarry.forEach(k => { if (_bulkScratch[k] !== undefined) target[k] = _bulkScratch[k]; });
         if (swatchChanged) carryWithSwatch.forEach(k => { if (_bulkScratch[k] !== undefined) target[k] = _bulkScratch[k]; });
         // Keep the Shadow Box float-mount flag consistent if product changed.
         if (changedKeys.indexOf('product') >= 0) target.useFloatMount = (_bulkScratch.product === 'Framed Art (Shadow Box)');
@@ -4127,7 +4146,7 @@ function setShadowBoxEdge(val) {
 // switching modes just changes which one renders.
 function setMatFloatMode(mode) {
     const useFloat = (mode === 'float');
-    const row = dashProjectData[dashSelectedRowIndex];
+    const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
     if (row) row.useFloatMount = useFloat;
     applyMatFloatModeUI(useFloat);
     syncDashAndCalculate();
