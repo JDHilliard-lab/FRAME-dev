@@ -2713,8 +2713,40 @@ function applyMoveTo() {
 //
 // Both push a single history entry (so Ctrl+Z reverts the whole batch).
 
-// (The old single-field BULK_EDITABLE_FIELDS metadata was replaced by the
-// section-based Bulk Edit form below; see buildBulkEditForm + BULK_DETAIL_FIELDS.)
+// ── BULK EDIT (real dashboard form, scratch-edited) ──────────────────────────
+// Instead of a separate mini-form, Bulk Edit MOVES the actual dashboard form
+// panel into a blurred "Bulk Edit" modal. Because it's the real form node
+// (moved, not cloned), it's a 1:1 of the dashboard with no invented fields and
+// the frame code + swatch visible together. Edits go to a standalone SCRATCH
+// object (see syncDashAndCalculate's _bulkEditing branch) so NOTHING in the
+// project changes until Apply. Fields whose values differ across the selected
+// rows are greyed out — you can only bulk-change fields the rows already share.
+
+let _bulkEditing = false;
+let _bulkScratch = null;       // the row object the moved form reads/writes
+let _bulkBaseline = null;      // snapshot of the scratch at open (to diff on Apply)
+let _bulkSelected = [];        // real selected row indices to apply to
+let _bulkFormHome = null;      // { parent, next } to restore the moved panel
+let _bulkSavedIndex = 0;       // dashSelectedRowIndex to restore
+
+// Map each comparable data key → the input element id(s) it lives in, so we can
+// (a) detect which fields differ across the selection and (b) grey those out.
+// Item Code / Image Code / dimensions are per-row unique and always locked.
+const BULK_FIELD_ELEMENTS = {
+    product: ['m_product'], location: ['m_location'], level: ['m_level'],
+    artType: ['m_artType'], paperType: ['m_paperType'],
+    fW: ['fW'], fHeight: ['fHeight'], rabbetDepth: ['rabbetDepth'],
+    fColor: ['fColor'], fCode: ['m_fCode'], fColorName: ['m_fColorName'],
+    m1T: ['m1T'], m1B: ['m1B'], m1L: ['m1L'], m1R: ['m1R'],
+    m1ColorName: ['m1_color'], m1ColorHex: ['m1_colorHex'],
+    m2: ['m2'], m2ColorName: ['m2_color'], m2ColorHex: ['m2_colorHex'],
+    glass: ['m_glass'], hardware: ['m_hardware'], mount: ['m_mount'],
+    backing: ['m_backing'], notes: ['m_notes'], prodNotes: ['m_prodNotes'],
+    canvasDepth: ['canvasDepth'], canvasWrap: ['canvasWrap'], floaterInset: ['floaterInset'],
+    bleed: ['m_bleed'],
+};
+// Keys that are inherently per-row and must never be bulk-applied.
+const BULK_LOCKED_ELEMENTS = ['m_itemCode', 'm_imageCode', 'extW', 'extH', 'm_qty'];
 
 function openBulkEditModal() {
     if (!dashProjectData || dashProjectData.length === 0) {
@@ -2722,265 +2754,144 @@ function openBulkEditModal() {
         return;
     }
     const selected = dashGetSelectedIndices();
+    _bulkSelected = selected.slice();
+    _bulkSavedIndex = dashSelectedRowIndex;
+
+    // Header summary.
     const summary = document.getElementById('bulkEditSummary');
     if (selected.length === 1) {
-        const row = dashProjectData[selected[0]];
-        summary.innerHTML = `Editing <strong>${row.id}</strong>. Tip: select multiple rows (Shift/Ctrl-click) to edit them all at once.`;
+        summary.innerHTML = `Editing <strong>${dashProjectData[selected[0]].id}</strong>. Tip: select multiple rows (Shift/Ctrl-click) to bulk edit. Greyed fields differ across the selection.`;
     } else {
-        summary.innerHTML = `Editing <strong>${selected.length}</strong> selected rows.`;
+        summary.innerHTML = `Editing <strong>${selected.length}</strong> rows. Greyed-out fields differ across the selection — only fields the rows share can be changed together.`;
     }
-    // Build the section-based form (Frame Style / Mat Controls / Details).
-    buildBulkEditForm();
-    updateBulkEditPreview();
+
+    // Scratch = deep copy of the PRIMARY row. The form edits this, never the
+    // real data. (structuredClone falls back to JSON for older engines.)
+    const primary = dashProjectData[dashSelectedRowIndex];
+    _bulkScratch = (typeof structuredClone === 'function') ? structuredClone(primary) : JSON.parse(JSON.stringify(primary));
+
+    _bulkEditing = true;
+
+    // Move the real form panel into the modal mount, then load the scratch.
+    const pane = document.getElementById('dashRightPane');
+    const mount = document.getElementById('bulkFormMount');
+    if (pane && mount) {
+        _bulkFormHome = { parent: pane.parentNode, next: pane.nextSibling };
+        mount.appendChild(pane);
+        pane.classList.add('bulk-mode');
+    }
+    loadDashDataIntoControls(_bulkScratch);
+
+    // Grey out fields that differ across the selection (+ always-locked ones).
+    _bulkApplyDifferingGreyout(selected);
+
+    // Baseline AFTER loading the form, so Apply diffs only the user's changes.
+    _bulkBaseline = (typeof structuredClone === 'function') ? structuredClone(_bulkScratch) : JSON.parse(JSON.stringify(_bulkScratch));
+
     document.getElementById('bulkEditModal').style.display = 'flex';
 }
 
-// ──────────────────────────────────────────────────────────────────────────
-// BULK EDIT — section-based form
-// ──────────────────────────────────────────────────────────────────────────
-// Mirrors the dashboard form: a Frame Style section (library swatch picker +
-// solid color + code/texture), a Mat Controls section (mat color swatch + name),
-// and a Details section (text/select fields). Every field has an "apply this"
-// checkbox; only ticked fields are written, which also gives multi-field edits.
-
-// Field groups → which dashboard section they render under.
-const BULK_DETAIL_FIELDS = [
-    { key: 'product',      label: 'Product Type', type: 'select', options: FRAME_PRODUCTS },
-    { key: 'location',     label: 'Location',     type: 'text' },
-    { key: 'level',        label: 'Level',        type: 'text' },
-    { key: 'room',         label: 'Room',         type: 'text' },
-    { key: 'designer',     label: 'Designer',     type: 'text' },
-    { key: 'artType',      label: 'Art Type',     type: 'text' },
-    { key: 'paperType',    label: 'Paper Type',   type: 'text' },
-    { key: 'fVendor',      label: 'Frame Vendor', type: 'text' },
-    { key: 'fFinish',      label: 'Frame Finish', type: 'text' },
-    { key: 'glass',        label: 'Glass / Glazing', type: 'text' },
-    { key: 'mount',        label: 'Mount',        type: 'text' },
-    { key: 'spacer',       label: 'Spacer',       type: 'text' },
-    { key: 'hardware',     label: 'Hardware',     type: 'text' },
-    { key: 'backing',      label: 'Backing Board', type: 'text' },
-    { key: 'installNotes', label: 'Install Notes', type: 'text' },
-    { key: 'prodNotes',    label: 'Production Notes', type: 'text' },
-];
-
-// Holds the chosen library swatch for the Frame Style section between render
-// and apply: { vendor, collection, index, item } or null.
-let _bulkChosenSwatch = null;
-
-// Make a field row: [apply checkbox] [label + control]. The checkbox toggles
-// the control's enabled state and refreshes the preview.
-function _bulkFieldRow(applyId, labelText, controlEl) {
-    const row = document.createElement('div');
-    row.className = 'bulk-field-row disabled';
-    const applyLabel = document.createElement('label');
-    applyLabel.className = 'bulk-apply';
-    applyLabel.title = 'Tick to apply this field';
-    const cb = document.createElement('input');
-    cb.type = 'checkbox'; cb.id = applyId;
-    cb.onchange = () => { row.classList.toggle('disabled', !cb.checked); updateBulkEditPreview(); };
-    applyLabel.appendChild(cb);
-    const main = document.createElement('div');
-    main.className = 'bulk-field-main';
-    if (labelText) { const l = document.createElement('label'); l.textContent = labelText; main.appendChild(l); }
-    main.appendChild(controlEl);
-    row.appendChild(applyLabel);
-    row.appendChild(main);
-    return row;
-}
-
-function buildBulkEditForm() {
-    _bulkChosenSwatch = null;
-    const primary = dashProjectData[dashSelectedRowIndex] || {};
-
-    // ── FRAME STYLE ──
-    const frame = document.getElementById('bulkSecFrame');
-    frame.innerHTML = '';
-
-    // Frame swatch (library) — thumbnail grid via cascading vendor/collection.
-    const swatchWrap = document.createElement('div');
-    const vendors = Object.keys(dashLocalLibrary || {});
-    if (vendors.length === 0) {
-        swatchWrap.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted);">No library swatches loaded yet — pick one on a row first, or load your library.</div>';
-    } else {
-        const vSel = document.createElement('select'); vSel.id = 'bulkSwatchVendor';
-        const cSel = document.createElement('select'); cSel.id = 'bulkSwatchCollection';
-        [['Vendor…', vSel], ['Collection…', cSel]].forEach(([ph, sel]) => {
-            const o = document.createElement('option'); o.value=''; o.textContent=ph; sel.appendChild(o);
-        });
-        vendors.forEach(v => { const o=document.createElement('option'); o.value=v; o.textContent=v; vSel.appendChild(o); });
-        const inline = document.createElement('div'); inline.className='bulk-inline';
-        inline.appendChild(vSel); inline.appendChild(cSel);
-        const grid = document.createElement('div'); grid.className='bulk-swatch-grid'; grid.id='bulkSwatchGrid';
-        grid.style.display = 'none';
-        swatchWrap.appendChild(inline); swatchWrap.appendChild(grid);
-
-        vSel.onchange = () => {
-            cSel.innerHTML=''; const ph=document.createElement('option'); ph.value=''; ph.textContent='Collection…'; cSel.appendChild(ph);
-            (vSel.value ? Object.keys(dashLocalLibrary[vSel.value]) : []).forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; cSel.appendChild(o); });
-            grid.style.display='none'; grid.innerHTML='';
-        };
-        cSel.onchange = () => {
-            grid.innerHTML=''; _bulkChosenSwatch=null;
-            const items = (vSel.value && cSel.value) ? dashLocalLibrary[vSel.value][cSel.value] : [];
-            if (!items.length) { grid.style.display='none'; return; }
-            grid.style.display='grid';
-            items.forEach((it, i) => {
-                const cell = document.createElement('div'); cell.className='bulk-swatch-cell'; cell.title = it.code || ('Swatch '+(i+1));
-                _libEntryToDataUrl(it.file).then(u => { cell.style.backgroundImage = `url(${u})`; }).catch(()=>{});
-                cell.onclick = () => {
-                    grid.querySelectorAll('.bulk-swatch-cell').forEach(c=>c.classList.remove('selected'));
-                    cell.classList.add('selected');
-                    _bulkChosenSwatch = { vendor: vSel.value, collection: cSel.value, index: i, item: it };
-                    document.getElementById('bulkApply__swatch').checked = true;
-                    document.getElementById('bulkApply__swatch').closest('.bulk-field-row').classList.remove('disabled');
-                    updateBulkEditPreview();
-                };
-                grid.appendChild(cell);
-            });
-        };
-    }
-    frame.appendChild(_bulkFieldRow('bulkApply__swatch', 'Frame Swatch (Library)', swatchWrap));
-
-    // Solid frame color — picker + hex.
-    const colorWrap = document.createElement('div'); colorWrap.className='bulk-inline';
-    const picker = document.createElement('input'); picker.type='color'; picker.id='bulkColorPicker';
-    picker.className='color-swatch-flat'; picker.style.cssText='width:30px;height:30px;';
-    picker.value = (primary.fColor && /^#[0-9a-fA-F]{6}$/.test(primary.fColor)) ? primary.fColor : '#1a1a1a';
-    const hex = document.createElement('input'); hex.type='text'; hex.id='bulkColorHex'; hex.value=picker.value;
-    picker.oninput = () => { hex.value=picker.value; document.getElementById('bulkApply__color').checked=true; document.getElementById('bulkApply__color').closest('.bulk-field-row').classList.remove('disabled'); updateBulkEditPreview(); };
-    hex.oninput = () => { if(/^#?[0-9a-fA-F]{6}$/.test(hex.value)) picker.value = hex.value.startsWith('#')?hex.value:'#'+hex.value; updateBulkEditPreview(); };
-    colorWrap.appendChild(picker); colorWrap.appendChild(hex);
-    frame.appendChild(_bulkFieldRow('bulkApply__color', 'Solid Frame Color', colorWrap));
-
-    // Frame Code + Color/Texture text.
-    frame.appendChild(_bulkFieldRow('bulkApply_fCode', 'Frame Code', _bulkTextInput('bulkVal_fCode', primary.fCode)));
-    frame.appendChild(_bulkFieldRow('bulkApply_fColorName', 'Color / Texture', _bulkTextInput('bulkVal_fColorName', primary.fColorName)));
-
-    // ── MAT CONTROLS ──
-    const mats = document.getElementById('bulkSecMats');
-    mats.innerHTML = '';
-    mats.appendChild(_bulkFieldRow('bulkApply_m1', 'Mat 1 Color', _bulkColorNameRow('bulkM1Picker', 'bulkVal_m1ColorName', primary.m1ColorHex, primary.m1ColorName, 'bulkApply_m1')));
-    mats.appendChild(_bulkFieldRow('bulkApply_m2', 'Mat 2 Color', _bulkColorNameRow('bulkM2Picker', 'bulkVal_m2ColorName', primary.m2ColorHex, primary.m2ColorName, 'bulkApply_m2')));
-
-    // ── DETAILS ──
-    const details = document.getElementById('bulkSecDetails');
-    details.innerHTML = '';
-    BULK_DETAIL_FIELDS.forEach(f => {
-        let ctrl;
-        if (f.type === 'select') {
-            ctrl = document.createElement('select'); ctrl.id = 'bulkVal_' + f.key;
-            f.options.forEach(opt => { const o=document.createElement('option'); o.value=opt; o.textContent=opt; ctrl.appendChild(o); });
-            if (primary[f.key]) ctrl.value = primary[f.key];
-        } else {
-            ctrl = _bulkTextInput('bulkVal_' + f.key, primary[f.key]);
+// Disable inputs for keys whose value isn't shared by every selected row, plus
+// the always-locked per-row fields. Differing inputs get a title hint + dim.
+function _bulkApplyDifferingGreyout(selected) {
+    const sameAcross = (key) => {
+        const first = dashProjectData[selected[0]][key];
+        return selected.every(i => String(dashProjectData[i][key] === undefined ? '' : dashProjectData[i][key]) === String(first === undefined ? '' : first));
+    };
+    const setDisabled = (id, off, reason) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.disabled = off;
+        const cell = el.closest('div');
+        if (cell) cell.classList.toggle('bulk-locked-field', off);
+        if (off && reason) el.title = reason;
+    };
+    // Reset any previous greyout first.
+    Object.values(BULK_FIELD_ELEMENTS).flat().concat(BULK_LOCKED_ELEMENTS).forEach(id => setDisabled(id, false, ''));
+    // Per-row unique fields: always locked.
+    BULK_LOCKED_ELEMENTS.forEach(id => setDisabled(id, true, 'Per-row value — not bulk-editable'));
+    // Differing fields: lock.
+    Object.keys(BULK_FIELD_ELEMENTS).forEach(key => {
+        if (!sameAcross(key)) {
+            BULK_FIELD_ELEMENTS[key].forEach(id => setDisabled(id, true, 'Differs across selected rows — change them individually'));
         }
-        ctrl.oninput = updateBulkEditPreview; ctrl.onchange = updateBulkEditPreview;
-        details.appendChild(_bulkFieldRow('bulkApply_' + f.key, f.label, ctrl));
     });
 }
 
-function _bulkTextInput(id, val) {
-    const i = document.createElement('input'); i.type='text'; i.id=id;
-    if (val !== undefined && val !== null) i.value = String(val);
-    i.oninput = updateBulkEditPreview;
-    return i;
-}
-
-// Mat color row: a color picker + a name text field, side by side.
-function _bulkColorNameRow(pickerId, nameId, hex, name, applyId) {
-    const wrap = document.createElement('div'); wrap.className='bulk-inline';
-    const picker = document.createElement('input'); picker.type='color'; picker.id=pickerId;
-    picker.className='color-swatch-flat'; picker.style.cssText='width:30px;height:30px;';
-    picker.value = (hex && /^#[0-9a-fA-F]{6}$/.test(hex)) ? hex : '#ffffff';
-    const nm = document.createElement('input'); nm.type='text'; nm.id=nameId; nm.placeholder='Color name'; nm.style.flex='1';
-    if (name) nm.value = name;
-    const tick = () => { const cb=document.getElementById(applyId); cb.checked=true; cb.closest('.bulk-field-row').classList.remove('disabled'); updateBulkEditPreview(); };
-    picker.oninput = tick; nm.oninput = tick;
-    wrap.appendChild(picker); wrap.appendChild(nm);
-    return wrap;
-}
-
-function updateBulkEditPreview() {
-    const selected = dashGetSelectedIndices();
-    const n = selected.length;
-    const changes = _bulkCollectChanges();
-    const preview = document.getElementById('bulkEditPreview');
-    if (changes.length === 0) {
-        preview.innerHTML = `Tick a field to change, then Apply to ${n} row${n===1?'':'s'}.`;
-        return;
-    }
-    preview.innerHTML = `Will update <strong>${changes.join(', ')}</strong> on ${n} row${n===1?'':'s'}.`;
-}
-
-// Walk the form and collect which fields are ticked + their values.
-function _bulkCollectChanges() {
-    const out = [];
-    const on = (id) => { const cb = document.getElementById(id); return cb && cb.checked; };
-    if (on('bulkApply__swatch') && _bulkChosenSwatch) out.push('Frame Swatch');
-    if (on('bulkApply__color')) out.push('Solid Frame Color');
-    if (on('bulkApply_fCode')) out.push('Frame Code');
-    if (on('bulkApply_fColorName')) out.push('Color/Texture');
-    if (on('bulkApply_m1')) out.push('Mat 1 Color');
-    if (on('bulkApply_m2')) out.push('Mat 2 Color');
-    BULK_DETAIL_FIELDS.forEach(f => { if (on('bulkApply_' + f.key)) out.push(f.label); });
-    return out;
-}
-
+// Apply: diff the scratch against its baseline; copy changed + editable fields
+// to every selected row. Excludes locked/differing fields (their inputs are
+// disabled, so they can't have changed anyway).
 function applyBulkEdit() {
-    const selected = dashGetSelectedIndices();
-    if (selected.length === 0) return;
-    const on = (id) => { const cb = document.getElementById(id); return cb && cb.checked; };
-    const val = (id) => { const el = document.getElementById(id); return el ? el.value : ''; };
+    if (!_bulkEditing || !_bulkScratch || !_bulkBaseline) { _bulkTeardown(false); return; }
 
-    const finalize = () => {
+    // Which data keys did the user actually change?
+    const changedKeys = [];
+    const lockedIds = new Set(BULK_LOCKED_ELEMENTS);
+    Object.keys(BULK_FIELD_ELEMENTS).forEach(key => {
+        // Skip if any mapped input is disabled (locked/differing).
+        const anyDisabled = BULK_FIELD_ELEMENTS[key].some(id => { const el = document.getElementById(id); return el && el.disabled; });
+        if (anyDisabled) return;
+        const a = _bulkScratch[key], b = _bulkBaseline[key];
+        if (String(a === undefined ? '' : a) !== String(b === undefined ? '' : b)) changedKeys.push(key);
+    });
+    // Frame swatch: if the user picked a library swatch, fType becomes 'image'
+    // and swatchDataUrl/swatchName/fW/fHeight/rabbet change — carry those too.
+    const swatchChanged = _bulkScratch.swatchDataUrl !== _bulkBaseline.swatchDataUrl || _bulkScratch.swatchName !== _bulkBaseline.swatchName || _bulkScratch.fType !== _bulkBaseline.fType;
+    const carryWithSwatch = ['fType', 'swatchDataUrl', 'swatchName', 'fW', 'fHeight', 'rabbetDepth', 'fCode', 'product', 'floaterInset', '_faceWidth', 'useFloatMount'];
+
+    if (changedKeys.length === 0 && !swatchChanged) { _bulkTeardown(false); return; }
+
+    _bulkSelected.forEach(idx => {
+        const target = dashProjectData[idx];
+        changedKeys.forEach(k => { target[k] = _bulkScratch[k]; });
+        if (swatchChanged) carryWithSwatch.forEach(k => { if (_bulkScratch[k] !== undefined) target[k] = _bulkScratch[k]; });
+        // Keep the Shadow Box float-mount flag consistent if product changed.
+        if (changedKeys.indexOf('product') >= 0) target.useFloatMount = (_bulkScratch.product === 'Framed Art (Shadow Box)');
+    });
+
+    _bulkTeardown(true);
+}
+
+// Restore: move the form panel home, exit bulk mode, reload the real row.
+// commit=true means we just applied (recalc/render/history + push elevations).
+function _bulkTeardown(commit) {
+    _bulkEditing = false;
+    const pane = document.getElementById('dashRightPane');
+    if (pane && _bulkFormHome && _bulkFormHome.parent) {
+        pane.classList.remove('bulk-mode');
+        _bulkFormHome.parent.insertBefore(pane, _bulkFormHome.next);
+    }
+    _bulkFormHome = null;
+
+    // Clear any greyout so the live form is fully editable again.
+    Object.values(BULK_FIELD_ELEMENTS).flat().concat(BULK_LOCKED_ELEMENTS).forEach(id => {
+        const el = document.getElementById(id); if (el) { el.disabled = false; const c = el.closest('div'); if (c) c.classList.remove('bulk-locked-field'); }
+    });
+    // m_qty is genuinely always disabled (auto-calculated) — restore that.
+    const qty = document.getElementById('m_qty'); if (qty) qty.disabled = true;
+
+    document.getElementById('bulkEditModal').style.display = 'none';
+
+    // Restore selection + the live form to the real primary row.
+    dashSelectedRowIndex = Math.min(_bulkSavedIndex, dashProjectData.length - 1);
+    _bulkScratch = null; _bulkBaseline = null;
+
+    if (commit) {
         recalculateDashboardQuantities();
         renderDashTable();
-        if (selected.indexOf(dashSelectedRowIndex) >= 0) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+        _bulkSelected.forEach(idx => { if (typeof pushUpdatesToElevations === 'function') pushUpdatesToElevations(idx); });
+        if (typeof loadDashDataIntoControls === 'function' && dashProjectData[dashSelectedRowIndex]) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+        if (typeof updateDashVisualsFromDOM === 'function') updateDashVisualsFromDOM();
         pushHistory();
-        document.getElementById('bulkEditModal').style.display = 'none';
-    };
-
-    // Validate solid color up front (only if ticked).
-    let solidColor = null;
-    if (on('bulkApply__color')) {
-        let c = val('bulkColorHex').trim();
-        if (!/^#?[0-9a-fA-F]{6}$/.test(c)) { showInfoModal('Invalid color', `"${c}" isn't a valid 6-digit hex color.`); return; }
-        solidColor = c.startsWith('#') ? c : '#' + c;
+    } else {
+        if (typeof loadDashDataIntoControls === 'function' && dashProjectData[dashSelectedRowIndex]) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
+        if (typeof updateDashVisualsFromDOM === 'function') updateDashVisualsFromDOM();
+        renderDashTable();
     }
-
-    // Apply all non-swatch fields synchronously.
-    const applyNonSwatch = () => {
-        selected.forEach(idx => {
-            const row = dashProjectData[idx];
-            if (solidColor) { row.fType='color'; row.fColor=solidColor; row.swatchDataUrl=''; row.swatchName=''; }
-            if (on('bulkApply_fCode'))      row.fCode = val('bulkVal_fCode');
-            if (on('bulkApply_fColorName')) row.fColorName = val('bulkVal_fColorName');
-            if (on('bulkApply_m1')) { row.m1ColorHex = val('bulkM1Picker'); row.m1ColorName = val('bulkVal_m1ColorName'); }
-            if (on('bulkApply_m2')) { row.m2ColorHex = val('bulkM2Picker'); row.m2ColorName = val('bulkVal_m2ColorName'); }
-            BULK_DETAIL_FIELDS.forEach(f => {
-                if (on('bulkApply_' + f.key)) {
-                    row[f.key] = val('bulkVal_' + f.key);
-                    if (f.key === 'product') row.useFloatMount = (row[f.key] === 'Framed Art (Shadow Box)');
-                }
-            });
-        });
-    };
-
-    // Swatch is async (image resolve). Do it first if ticked, then the rest.
-    if (on('bulkApply__swatch') && _bulkChosenSwatch) {
-        const { collection, item } = _bulkChosenSwatch;
-        _libEntryToDataUrl(item.file).then(u => {
-            selected.forEach(idx => applySwatchToRow(idx, collection, item, u));
-            applyNonSwatch();
-            finalize();
-        }).catch(err => { console.error('Bulk swatch apply failed', err); showInfoModal('Swatch Error', 'Could not load that swatch from the library.'); });
-        return;
-    }
-
-    if (_bulkCollectChanges().length === 0) { document.getElementById('bulkEditModal').style.display='none'; return; }
-    applyNonSwatch();
-    finalize();
 }
+
+function cancelBulkEdit() { _bulkTeardown(false); }
+
 
 // ── DUPLICATE AS SERIES ──
 
@@ -3328,10 +3239,10 @@ function syncDashAndCalculate() {
     const getRaw = (id) => { const el = document.getElementById(id); return el ? el.value : ""; };
     const getVal = (id) => parseFloat(getRaw(id)) || 0;
     const getStr = (id) => getRaw(id);
-    const row = dashProjectData[dashSelectedRowIndex];
+    const row = _bulkEditing ? (_bulkScratch || {}) : dashProjectData[dashSelectedRowIndex];
     
     const oldId = row.id; const newId = getStr('m_itemCode');
-    if (oldId !== newId) { elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = newId; }); }); }
+    if (!_bulkEditing && oldId !== newId) { elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = newId; }); }); }
 
     const isColor = getStr('fType') === 'color';
     const isLinked = document.getElementById('matLinkBtn').classList.contains('active');
@@ -3345,7 +3256,7 @@ function syncDashAndCalculate() {
     // M2 can never be active if M1 is off (M2 sits inside M1).
     const m2Active = m1Active && document.getElementById('m2Toggle').classList.contains('active');
 
-    dashProjectData[dashSelectedRowIndex] = {
+    const _assembledRow = {
         id: newId, imageCode: getStr('m_imageCode'), level: getStr('m_level'), qty: getVal('m_qty'), product: getStr('m_product'), location: getStr('m_location'),
         // Phase A artwork attribution fields. Empty values are preserved as-is — they
         // render as blank cells in CSV and skipped lines in the InDesign spec block.
@@ -3390,7 +3301,19 @@ function syncDashAndCalculate() {
         sbPaperEdgeSeed: row.sbPaperEdgeSeed || 0,
         glass: getStr('m_glass'), hardware: getStr('m_hardware'), mount: getStr('m_mount'), backing: getStr('m_backing'), notes: getStr('m_notes'), prodNotes: getStr('m_prodNotes')
     };
-    
+
+    // BULK EDIT scratch mode: the moved-in dashboard form edits a standalone
+    // scratch object — NOT real project data. We only refresh the live preview;
+    // no table render, no elevation push, no recalc. Nothing is committed until
+    // the user clicks Apply (which diffs the scratch against its baseline).
+    if (_bulkEditing) {
+        _bulkScratch = _assembledRow;
+        updateDashVisualsFromDOM();
+        return;
+    }
+
+    dashProjectData[dashSelectedRowIndex] = _assembledRow;
+
     updateDashVisualsFromDOM(); renderDashTable(); pushUpdatesToElevations(dashSelectedRowIndex);
     // Validate the just-saved row and update warning indicators on the dashboard form.
     // The project table renders its own warnings via renderDashTable() above.
