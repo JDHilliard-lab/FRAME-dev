@@ -5829,6 +5829,131 @@ function buildPngFilename(row) {
     return tokens.join('_') + '.png';
 }
 
+// ── Presentation PDF: individual spec page (one piece per page) ───────────
+// Structure mirrors the studio reference: item code top-left, frame swatch
+// chip, the framed artwork with its filename caption, a dotted-leader spec
+// block, and a footer (page number). Built in-browser with jsPDF (vendored),
+// reusing renderFrameToCanvas (artwork baked in) + buildSpecStrings. This is a
+// clean structural first version — exact styling is meant to be iterated on.
+async function exportSpecPagePDF(opts) {
+    opts = opts || {};
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+        showInfoModal('PDF unavailable', 'The PDF engine failed to load. Try a hard refresh.');
+        return;
+    }
+    const { jsPDF } = window.jspdf;
+    // Which rows: current selection, or all rows if opts.all.
+    let rows;
+    if (opts.all) rows = dashProjectData.filter(r => r && (r.id || r.artworkUrl));
+    else rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
+    if (!rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
+
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'letter' });
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;                  // page margin
+    const COL_X = M;               // left column (artwork + spec) start
+    const ART_MAX_W = PW * 0.40;   // artwork max width
+    const ART_MAX_H = PH * 0.42;   // artwork max height
+
+    for (let i = 0; i < rows.length; i++) {
+        const r = rows[i];
+        if (i > 0) doc.addPage();
+
+        // — Item code (top-left, large bold) —
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(26);
+        doc.setTextColor(20, 20, 20);
+        doc.text((r.id || '').toString(), M, M + 14);
+
+        // — Frame swatch chip (thin strip under the code) —
+        let cursorY = M + 28;
+        if (r.fType === 'image' && r.swatchDataUrl) {
+            try { doc.addImage(r.swatchDataUrl, 'JPEG', M, cursorY, 120, 16); } catch (e) {}
+        } else if (r.fColor) {
+            doc.setFillColor(r.fColor);
+            doc.rect(M, cursorY, 120, 16, 'F');
+        }
+        cursorY += 16 + 18;
+
+        // — Framed artwork render (reuse the per-frame canvas, artwork baked in) —
+        const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+        let artworkImg = null;
+        if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+        const { canvas } = renderFrameToCanvas(dInches, (r.fType === 'image' ? await _loadImg(r.swatchDataUrl) : null), {
+            dpi: 96, pad: 0, artworkImg,
+            artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY },
+        });
+        // Fit the rendered frame into the art box, preserving aspect.
+        const cw = canvas.width, ch = canvas.height;
+        const fit = Math.min(ART_MAX_W / cw, ART_MAX_H / ch);
+        const aw = cw * fit, ah = ch * fit;
+        const artX = COL_X, artY = cursorY;
+
+        // Filename caption (italic, above-right of the artwork) — like the reference.
+        if (r.artworkFile || r.imageCode) {
+            doc.setFont('helvetica', 'italic');
+            doc.setFontSize(7.5);
+            doc.setTextColor(90, 90, 90);
+            const cap = (r.artworkFile || r.imageCode) + '';
+            doc.text(cap, artX + aw, artY - 4, { align: 'right' });
+        }
+        // Flatten onto white (JPEG has no alpha → transparent areas would go
+        // black). Keeps the PDF light while avoiding black artifacts.
+        let frameDataUrl;
+        try {
+            const flat = document.createElement('canvas');
+            flat.width = canvas.width; flat.height = canvas.height;
+            const fx = flat.getContext('2d');
+            fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height);
+            fx.drawImage(canvas, 0, 0);
+            frameDataUrl = flat.toDataURL('image/jpeg', 0.85);
+        } catch (e) { frameDataUrl = canvas.toDataURL('image/jpeg', 0.85); }
+        try { doc.addImage(frameDataUrl, 'JPEG', artX, artY, aw, ah); } catch (e) {}
+
+        // — Spec block (dotted-leader rows) beneath the artwork —
+        const specs = buildSpecStrings(r);
+        const blockTop = artY + ah + 22;
+        const rowH = 13;
+        const blockW = Math.max(aw, 300);
+        doc.setFontSize(8.5);
+        let sy = blockTop;
+        specs.lines.forEach(ln => {
+            // label (bold, left)
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(20, 20, 20);
+            doc.text(ln.label, COL_X, sy);
+            const labelW = doc.getTextWidth(ln.label);
+            // value (right)
+            doc.setFont('helvetica', 'normal');
+            const valStr = (ln.value || '') + '';
+            const valW = doc.getTextWidth(valStr);
+            const valX = COL_X + blockW - valW;
+            doc.text(valStr, valX, sy);
+            // dotted leader between label and value
+            const dotStart = COL_X + labelW + 4;
+            const dotEnd = valX - 4;
+            if (dotEnd > dotStart) {
+                doc.setLineDashPattern([0.5, 1.5], 0);
+                doc.setDrawColor(160, 160, 160);
+                doc.setLineWidth(0.5);
+                doc.line(dotStart, sy - 2, dotEnd, sy - 2);
+                doc.setLineDashPattern([], 0);
+            }
+            sy += rowH;
+        });
+
+        // — Footer: page number (left) —
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.setTextColor(120, 120, 120);
+        doc.text(String(i + 1), M, PH - 20);
+    }
+
+    const fname = opts.all ? 'FRAME_Spec_Pages.pdf' : `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf`;
+    doc.save(fname);
+}
+
 async function exportDashNativePNG() {
     const d = dashProjectData[dashSelectedRowIndex];
     // Always render in inches so cm-mode and in-mode exports look identical.
