@@ -249,10 +249,8 @@
                             <div id="m_artCropControls" style="display:none; align-items:center; gap:8px; margin-top:6px;">
                                 <span style="font-size:0.6rem; color:var(--text-muted); white-space:nowrap;">Drag image to pan · Zoom</span>
                                 <input type="range" id="m_artZoom" min="1" max="3" step="0.05" value="1" style="flex:1;" oninput="setArtZoomFromSlider()">
-                                <button type="button" class="action-btn btn-secondary" style="height:26px; padding:0 10px; font-size:0.62rem; white-space:nowrap;" onclick="resetArtCrop()">Reset</button>
-                                <button type="button" id="m_fitToImageBtn" class="action-btn btn-secondary" title="Fit OD to image ratio — resize the frame so the opening matches the artwork's proportions" onclick="fitODToImage()" style="flex:0 0 28px; width:28px; height:26px; padding:0; display:flex; align-items:center; justify-content:center;">
-                                    <svg class="svg-icon" style="width:14px; height:14px;" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="1" fill="none"/><text x="12" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="currentColor" stroke="none">1:1</text></svg>
-                                </button>
+                                <button type="button" class="action-btn btn-secondary" style="flex:1 1 0; min-width:0; height:26px; padding:0 6px; font-size:0.62rem; white-space:nowrap;" onclick="resetArtCrop()">Reset</button>
+                                <button type="button" id="m_fitToImageBtn" class="action-btn btn-secondary" title="Fit OD to image ratio — resize the frame so the opening matches the artwork's proportions" onclick="fitODToImage()" style="flex:1 1 0; min-width:0; height:26px; padding:0 6px; font-size:0.62rem; font-weight:700; white-space:nowrap;">1:1</button>
                             </div>
                         </div>
 
@@ -271,9 +269,9 @@
                         <div class="grid-row-5" style="display:grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 4px; align-items:end;">
                             <div>
                                 <label>OD W × H</label>
-                                <div style="display:flex; align-items:center; gap:3px;">
+                                <div style="display:flex; align-items:stretch; gap:3px;">
                                     <input type="number" step="0.125" id="extW" oninput="handleODInput('W')" style="min-width:0; flex:1;">
-                                    <button type="button" id="odLockBtn" title="Lock OD width/height ratio — when on, changing one scales the other to keep the proportion" onclick="toggleODLock()" style="flex:0 0 22px; width:22px; height:30px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-panel); color:var(--text-muted); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                                    <button type="button" id="odLockBtn" title="Lock OD width/height ratio — when on, changing one scales the other to keep the proportion" onclick="toggleODLock()" style="flex:0 0 22px; width:22px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-panel); color:var(--text-muted); display:flex; align-items:center; justify-content:center; cursor:pointer;">
                                         <svg class="svg-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
                                     </button>
                                     <input type="number" step="0.125" id="extH" oninput="handleODInput('H')" style="min-width:0; flex:1;">
