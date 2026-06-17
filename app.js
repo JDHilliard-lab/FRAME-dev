@@ -190,7 +190,10 @@ const dashDefaultData = {
     swatchDataUrl: "", swatchName: "",
     m1A: true, m1T: 3, m1B: 3, m1L: 3, m1R: 3, m1Locked: false, m1ColorName: "B 97 White", m1ColorHex: "#ffffff",
     m2A: false, m2: 0.25, m2ColorName: "B 97 White", m2ColorHex: "#ffffff", matsLinked: true,
-    glass: "2mm Standard", hardware: "3-Point Security", mount: "Standard Mount", backing: "Foamcore", notes: "", prodNotes: "" 
+    glass: "2mm Standard", hardware: "3-Point Security", mount: "Standard Mount", backing: "Foamcore", notes: "", prodNotes: "",
+    // Floorplan markup: normalized pin position (0–1) on the plan, and art
+    // category (drives pin/list color + legend). null = not yet placed.
+    planX: null, planY: null, category: ""
 };
 let dashProjectData = [ JSON.parse(JSON.stringify(dashDefaultData)) ];
 
@@ -254,6 +257,26 @@ let pendingDuplicateIndex = null;
 const MAX_HISTORY = 50;
 let undoStack = [];
 let redoStack = [];
+
+// Floorplan image used by the Floorplan Key page + Mark Up Floorplan tool.
+// Held as a data URL on a project-level global so it persists with save/load
+// and autosave (added to those payloads), unlike the earlier session-only var.
+let floorplanImageData = '';
+let floorplanImageName = '';
+
+// Art categories — drive the numbered-pin colors on the floorplan and the
+// page legend, matching the studio's Primary/Secondary/Tertiary convention.
+// A row's `category` field holds one of these keys ('' = none/neutral).
+const ART_CATEGORIES = [
+    { key: '',          label: 'None',      color: '#444444' },
+    { key: 'primary',   label: 'Primary',   color: '#E2231A' },
+    { key: 'secondary', label: 'Secondary', color: '#1F9E4A' },
+    { key: 'tertiary',  label: 'Tertiary',  color: '#2D5BD6' },
+];
+function categoryColor(key) {
+    const c = ART_CATEGORIES.find(c => c.key === (key || ''));
+    return c ? c.color : '#444444';
+}
 
 // Snapshot current project state as a plain JS object (deep-cloned).
 function snapshotProjectState() {
@@ -905,6 +928,8 @@ function performAutosave() {
             type: 'master-studio-autosave-v1',
             timestamp: Date.now(),
             projName: projName,
+            floorplan: floorplanImageData,
+            floorplanName: floorplanImageName,
             data: snapshotProjectState(),  // reuses the undo snapshot format
         };
         localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(payload));
@@ -949,6 +974,8 @@ function checkAutosaveOnLoad() {
         const projName = payload.projName || 'Untitled';
         if (confirm(`Found unsaved work from ${timeStr}\n("${projName}")\n\nRestore it?\n\nClick OK to restore, Cancel to discard.`)) {
             restoreProjectState(payload.data);
+            floorplanImageData = payload.floorplan || '';
+            floorplanImageName = payload.floorplanName || '';
             refreshAllViews();
             // After restore, push fresh history (clearing prior so undo doesn't
             // jump back to the pre-restore empty state).
@@ -2161,7 +2188,7 @@ function saveMasterProject() {
     }
     const getStr = (id) => document.getElementById(id).value;
     const globalMeta = { projName: getStr('g_projName'), desc: getStr('g_desc'), date: getStr('g_date'), issued: getStr('g_issued'), client: getStr('g_client'), attn: getStr('g_attn'), delivery: getStr('g_delivery') };
-    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations };
+    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName };
     const blob = new Blob([JSON.stringify(masterData, null, 2)], { type: 'application/json' });
     // Filename uses the user's Project Name + today's date so multiple
     // projects don't overwrite each other in Downloads.
@@ -2195,6 +2222,8 @@ function loadMasterProject(event) {
                 }
                 if (data.dashProjectData) dashProjectData = data.dashProjectData;
                 if (data.elevations) elevations = data.elevations;
+                floorplanImageData = data.floorplanImage || '';
+                floorplanImageName = data.floorplanImageName || '';
                 // If the loaded project had divergent dashUnit / elevUnit
                 // (a relic of the pre-unified era), the elevations array
                 // values are in elevUnit while dashProjectData is in
@@ -3373,6 +3402,12 @@ function syncDashAndCalculate() {
         artZoom: row.artZoom || 1,
         artPanX: row.artPanX || 0,
         artPanY: row.artPanY || 0,
+        // Floorplan markup: pin position (normalized 0–1) + art category. Not
+        // surfaced in this form — set via the Mark Up Floorplan tool — so carry
+        // them through unchanged on every sync, or they'd be wiped on edit.
+        planX: (row.planX === undefined ? null : row.planX),
+        planY: (row.planY === undefined ? null : row.planY),
+        category: row.category || '',
         // Frame profile geometry: face width (fW) is the visible frame edge; fHeight is the
         // total profile depth front-to-back; rabbetDepth is the L-pocket depth where
         // mat/print/glass/backing stack up. fHeight ≥ rabbetDepth (rabbet is a notch in the rail).
@@ -6170,7 +6205,7 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    const ACCENT = [40, 40, 40];   // neutral bubble (category colors are a follow-up)
+    const hx = (h) => { const m = (h || '#444444').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
 
     // — Title —
     doc.setFont('helvetica', 'bold');
@@ -6183,13 +6218,40 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
     doc.text('PROPOSED FLOOR PLAN', M, M + 30);
     doc.setTextColor(20, 20, 20);
 
-    // — Layout: list (left ~38%), plan (right) —
+    // — Floorplan image (right) — drawn first so pins can sit on its rect —
+    const planX = PW * 0.42;
+    const planY = M + 30;
+    const planW = PW - M - planX;
+    const planH = PH - planY - 60;
+    let planRect = null;
+    if (planImg && (planImg.naturalWidth || planImg.width)) {
+        const iw = planImg.naturalWidth || planImg.width;
+        const ih = planImg.naturalHeight || planImg.height;
+        const fit = Math.min(planW / iw, planH / ih);
+        const dw = iw * fit, dh = ih * fit;
+        const dx = planX + (planW - dw) / 2, dy = planY + (planH - dh) / 2;
+        try { doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
+            try { doc.addImage(planImg, 'PNG', dx, dy, dw, dh); } catch (e2) {}
+        }
+        planRect = { dx, dy, dw, dh };
+    } else {
+        doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.75);
+        doc.setLineDashPattern([4, 4], 0);
+        doc.rect(planX, planY, planW, planH, 'S');
+        doc.setLineDashPattern([], 0);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+        doc.setTextColor(160, 160, 160);
+        doc.text('FLOORPLAN IMAGE \u2014 upload one in the Presentation PDF dialog', planX + planW / 2, planY + planH / 2, { align: 'center' });
+        doc.setTextColor(20, 20, 20);
+    }
+
+    // — Callout list (left ~38%) —
     const listX = M;
     const listTop = M + 56;
     const listRight = PW * 0.40;
     const listW = listRight - listX;
     const rowH = 16;
-    const availH = PH - 60 - listTop;        // leave room above footer
+    const availH = PH - 72 - listTop;        // leave room above footer + legend
     const rowsPerCol = Math.max(1, Math.floor(availH / rowH));
     const cols = (items.length > rowsPerCol) ? 2 : 1;
     const colW = listW / cols;
@@ -6207,15 +6269,14 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
         const x = listX + col * colW;
         const y = listTop + rowInCol * rowH;
         const num = String(i + 1).padStart(2, '0');
+        const [cr, cg, cb] = hx(categoryColor(it.category));
         const br = 6;                         // bubble radius
         const bcx = x + br, bcy = y + 4;
-        // Numbered bubble
-        doc.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+        doc.setFillColor(cr, cg, cb);
         doc.circle(bcx, bcy, br, 'F');
         doc.setTextColor(255, 255, 255);
         doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5);
         doc.text(num, bcx, bcy + 0.5, { align: 'center', baseline: 'middle' });
-        // Label: "ART-01 | LOCATION"
         doc.setTextColor(20, 20, 20);
         doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
         const idStr = (it.id || '').toString();
@@ -6224,33 +6285,46 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
         const tx = x + br * 2 + 8;
         const fitted = doc.splitTextToSize(label, colW - (br * 2 + 12))[0] || label;
         doc.text(fitted, tx, bcy, { baseline: 'middle' });
-        // Clickable -> spec page (only when this item has one)
         const target = idToPage && idToPage[it.id];
         if (target) doc.link(x, y - 4, colW - 6, rowH, { pageNumber: target });
     });
 
-    // — Floorplan image (right) —
-    const planX = PW * 0.42;
-    const planY = M + 30;
-    const planW = PW - M - planX;
-    const planH = PH - planY - 60;
-    if (planImg && (planImg.naturalWidth || planImg.width)) {
-        const iw = planImg.naturalWidth || planImg.width;
-        const ih = planImg.naturalHeight || planImg.height;
-        const fit = Math.min(planW / iw, planH / ih);
-        const dw = iw * fit, dh = ih * fit;
-        const dx = planX + (planW - dw) / 2, dy = planY + (planH - dh) / 2;
-        try { doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
-            try { doc.addImage(planImg, 'PNG', dx, dy, dw, dh); } catch (e2) {}
-        }
-    } else {
-        doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.75);
-        doc.setLineDashPattern([4, 4], 0);
-        doc.rect(planX, planY, planW, planH, 'S');
-        doc.setLineDashPattern([], 0);
+    // — Pins on the plan (only placed items) —
+    if (planRect) {
+        items.forEach((it, i) => {
+            if (it.planX == null || it.planY == null) return;
+            const px = planRect.dx + it.planX * planRect.dw;
+            const py = planRect.dy + it.planY * planRect.dh;
+            const [cr, cg, cb] = hx(categoryColor(it.category));
+            const pr = 8;
+            doc.setFillColor(cr, cg, cb);
+            doc.setDrawColor(255, 255, 255); doc.setLineWidth(1);
+            doc.circle(px, py, pr, 'FD');
+            doc.setTextColor(255, 255, 255);
+            doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
+            doc.text(String(i + 1).padStart(2, '0'), px, py + 0.5, { align: 'center', baseline: 'middle' });
+            doc.setTextColor(20, 20, 20);
+            const target = idToPage && idToPage[it.id];
+            if (target) doc.link(px - pr, py - pr, pr * 2, pr * 2, { pageNumber: target });
+        });
+    }
+
+    // — Legend (categories actually used) —
+    const usedKeys = [];
+    items.forEach(it => { const k = it.category || ''; if (k && usedKeys.indexOf(k) < 0) usedKeys.push(k); });
+    if (usedKeys.length) {
+        let lx = M, ly = PH - 50;
         doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
-        doc.setTextColor(160, 160, 160);
-        doc.text('FLOORPLAN IMAGE \u2014 upload one in the Presentation PDF dialog', planX + planW / 2, planY + planH / 2, { align: 'center' });
+        usedKeys.forEach(k => {
+            const cat = ART_CATEGORIES.find(c => c.key === k);
+            if (!cat) return;
+            const [r, g, b] = hx(cat.color);
+            doc.setFillColor(r, g, b);
+            doc.rect(lx, ly, 9, 9, 'F');
+            doc.setTextColor(60, 60, 60);
+            doc.text(cat.label, lx + 13, ly + 7);
+            lx += 13 + doc.getTextWidth(cat.label) + 18;
+        });
         doc.setTextColor(20, 20, 20);
     }
 
@@ -6340,7 +6414,7 @@ function openSpecPdfModal() {
     if (verEl && !verEl.value) verEl.value = meta.version || 'V1';
     set('specPdfLocation', meta.location || '');
     const fpStatus = document.getElementById('specPdfFloorplanStatus');
-    if (fpStatus) fpStatus.textContent = window._specPdfFloorplanName || 'No file chosen';
+    if (fpStatus) fpStatus.textContent = floorplanImageName || 'No file chosen';
     m.style.display = 'flex';
 }
 
@@ -6361,24 +6435,221 @@ function applySpecPdfModal() {
     };
     const m = document.getElementById('specPdfModal');
     if (m) m.style.display = 'none';
-    exportSpecPagePDF({ all: true, meta, include, preset });
+    exportSpecPagePDF({ all: true, meta, include, preset, preview: true });
 }
 
 // Read a floorplan image from the modal's file picker into a data URL used by
 // the Floorplan Key page. Session-scoped for now (window._specPdfFloorplan);
 // persisting it into the project save format is a follow-up.
-function loadSpecPdfFloorplan(event) {
+function loadSpecPdfFloorplan(event, fromMarkup) {
     const file = event && event.target && event.target.files && event.target.files[0];
     const status = document.getElementById('specPdfFloorplanStatus');
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-        window._specPdfFloorplan = reader.result;
-        window._specPdfFloorplanName = file.name;
+        floorplanImageData = reader.result;
+        floorplanImageName = file.name;
         if (status) status.textContent = file.name;
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        const mk = document.getElementById('fpMarkupModal');
+        if (fromMarkup || (mk && mk.style.display !== 'none')) renderFloorplanMarkup();
     };
     reader.onerror = () => { if (status) status.textContent = 'Could not read file'; };
     reader.readAsDataURL(file);
+    if (event.target) event.target.value = '';   // allow re-picking the same file
+}
+
+// ── Mark Up Floorplan tool ────────────────────────────────────────────────
+// Interactive modal: shows the plan image with a tray of item codes. Click an
+// item, then click the plan to drop its numbered pin; drag a pin to move it;
+// double-click to remove. A per-item category select drives the pin color.
+// Coords are stored normalized (0–1) on the row (planX/planY), so they survive
+// scaling and persist with save/load. Numbers match the Floorplan Key list.
+let _fpArmedId = null;
+let _fpDragId = null;
+let _fpDragPin = null;
+
+function _esc(s) { return (s + '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+
+function openFloorplanMarkup() {
+    const m = document.getElementById('fpMarkupModal');
+    if (!m) return;
+    _fpArmedId = null;
+    renderFloorplanMarkup();
+    m.style.display = 'flex';
+}
+
+function closeFloorplanMarkup() {
+    const m = document.getElementById('fpMarkupModal');
+    if (m) m.style.display = 'none';
+    _fpArmedId = null;
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (typeof renderDashTable === 'function') renderDashTable();
+}
+
+function renderFloorplanMarkup() {
+    const area = document.getElementById('fpPlanArea');
+    const tray = document.getElementById('fpTray');
+    if (!area || !tray) return;
+    const items = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
+
+    // — Plan area —
+    area.innerHTML = '';
+    if (!floorplanImageData) {
+        const b = document.createElement('button');
+        b.className = 'action-btn btn-secondary';
+        b.style.cssText = 'width:auto; height:32px; padding:0 14px; font-size:0.8rem;';
+        b.textContent = 'Choose plan image…';
+        b.onclick = () => document.getElementById('fpMarkupFile').click();
+        area.appendChild(b);
+    } else {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
+        const img = document.createElement('img');
+        img.id = 'fpPlanImg';
+        img.src = floorplanImageData;
+        img.draggable = false;
+        img.style.cssText = 'display:block; max-width:100%; max-height:74vh; user-select:none; -webkit-user-drag:none; cursor:' + (_fpArmedId ? 'crosshair' : 'default') + ';';
+        img.onclick = _fpPlaceFromEvent;
+        wrap.appendChild(img);
+        items.forEach((it, i) => {
+            if (it.planX == null || it.planY == null) return;
+            wrap.appendChild(_fpMakePin(it, i));
+        });
+        area.appendChild(wrap);
+    }
+
+    // — Tray —
+    tray.innerHTML = '';
+    items.forEach((it, i) => {
+        const placed = (it.planX != null && it.planY != null);
+        const armed = (_fpArmedId === it.id);
+        const rowEl = document.createElement('div');
+        rowEl.style.cssText = 'display:flex; align-items:center; gap:8px; padding:6px; border-radius:5px; cursor:pointer; margin-bottom:3px; ' +
+            (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid #6a6aff;' : 'background:transparent;');
+        const num = document.createElement('span');
+        num.textContent = String(i + 1).padStart(2, '0');
+        num.style.cssText = 'flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:700; color:#fff; background:' + categoryColor(it.category) + ';';
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'flex:1; min-width:0; overflow:hidden;';
+        lbl.innerHTML = '<div style="font-size:0.74rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(it.id || '') +
+            '</div><div style="font-size:0.62rem; color:' + (placed ? 'var(--text-muted)' : '#c08a2e') + '; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' +
+            (placed ? _esc(it.location || '') : 'click, then click the plan') + '</div>';
+        const sel = document.createElement('select');
+        sel.style.cssText = 'flex:0 0 auto; font-size:0.62rem; padding:2px 4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+        ART_CATEGORIES.forEach(c => {
+            const o = document.createElement('option'); o.value = c.key; o.textContent = c.label;
+            if ((it.category || '') === c.key) o.selected = true;
+            sel.appendChild(o);
+        });
+        sel.onclick = (e) => e.stopPropagation();
+        sel.onchange = (e) => _fpSetCategory(it.id, e.target.value);
+        rowEl.appendChild(num); rowEl.appendChild(lbl); rowEl.appendChild(sel);
+        rowEl.onclick = () => _fpArmItem(it.id);
+        tray.appendChild(rowEl);
+    });
+
+    const hint = document.getElementById('fpMarkupHint');
+    if (hint) hint.textContent = _fpArmedId
+        ? 'Now click the plan to drop ' + _fpArmedId + ' — or pick another item.'
+        : 'Click an item, then click the plan to drop its pin. Drag a pin to move; double-click to remove.';
+}
+
+function _fpMakePin(it, i) {
+    const pin = document.createElement('div');
+    pin.style.cssText = 'position:absolute; left:' + (it.planX * 100) + '%; top:' + (it.planY * 100) + '%; transform:translate(-50%,-50%); width:22px; height:22px; border-radius:50%; background:' + categoryColor(it.category) + '; color:#fff; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:0.58rem; font-weight:700; cursor:grab; user-select:none;';
+    pin.textContent = String(i + 1).padStart(2, '0');
+    pin.title = (it.id || '') + (it.location ? ' \u2014 ' + it.location : '');
+    pin.onmousedown = (e) => _fpPinMouseDown(e, it.id);
+    pin.ondblclick = (e) => { e.stopPropagation(); _fpRemovePin(it.id); };
+    return pin;
+}
+
+function _fpFindRow(id) { return (dashProjectData || []).find(r => r && r.id === id); }
+
+function _fpArmItem(id) { _fpArmedId = (_fpArmedId === id) ? null : id; renderFloorplanMarkup(); }
+
+function _fpSetCategory(id, key) {
+    const row = _fpFindRow(id);
+    if (!row) return;
+    row.category = key || '';
+    if (typeof pushHistory === 'function') pushHistory();
+    renderFloorplanMarkup();
+}
+
+function _fpRemovePin(id) {
+    const row = _fpFindRow(id);
+    if (!row) return;
+    row.planX = null; row.planY = null;
+    if (typeof pushHistory === 'function') pushHistory();
+    renderFloorplanMarkup();
+}
+
+function _fpNormFromEvent(e) {
+    const img = document.getElementById('fpPlanImg');
+    if (!img) return null;
+    const r = img.getBoundingClientRect();
+    if (!r.width || !r.height) return null;
+    let x = (e.clientX - r.left) / r.width;
+    let y = (e.clientY - r.top) / r.height;
+    return { x: Math.max(0, Math.min(1, x)), y: Math.max(0, Math.min(1, y)) };
+}
+
+function _fpPlaceFromEvent(e) {
+    if (!_fpArmedId) return;
+    const n = _fpNormFromEvent(e);
+    if (!n) return;
+    const row = _fpFindRow(_fpArmedId);
+    if (!row) return;
+    row.planX = n.x; row.planY = n.y;
+    _fpArmedId = null;
+    if (typeof pushHistory === 'function') pushHistory();
+    renderFloorplanMarkup();
+}
+
+function _fpPinMouseDown(e, id) {
+    e.preventDefault(); e.stopPropagation();
+    _fpDragId = id;
+    _fpDragPin = e.currentTarget;
+    if (_fpDragPin) _fpDragPin.style.cursor = 'grabbing';
+    document.addEventListener('mousemove', _fpDragMove);
+    document.addEventListener('mouseup', _fpDragUp);
+}
+function _fpDragMove(e) {
+    if (!_fpDragId) return;
+    const n = _fpNormFromEvent(e);
+    if (!n) return;
+    const row = _fpFindRow(_fpDragId);
+    if (!row) return;
+    row.planX = n.x; row.planY = n.y;
+    if (_fpDragPin) { _fpDragPin.style.left = (n.x * 100) + '%'; _fpDragPin.style.top = (n.y * 100) + '%'; }
+}
+function _fpDragUp() {
+    document.removeEventListener('mousemove', _fpDragMove);
+    document.removeEventListener('mouseup', _fpDragUp);
+    if (_fpDragId && typeof pushHistory === 'function') pushHistory();
+    _fpDragId = null; _fpDragPin = null;
+    renderFloorplanMarkup();
+}
+
+// ── In-app PDF preview ────────────────────────────────────────────────────
+function showSpecPdfPreview(doc, fname) {
+    window._lastSpecDoc = doc;
+    window._lastSpecName = fname || 'FRAME_Presentation.pdf';
+    const modal = document.getElementById('specPdfPreviewModal');
+    const frame = document.getElementById('specPdfPreviewFrame');
+    if (!modal || !frame) { try { doc.save(window._lastSpecName); } catch (e) {} return; }
+    try { frame.src = doc.output('bloburl'); } catch (e) {}
+    modal.style.display = 'flex';
+}
+function closeSpecPdfPreview() {
+    const modal = document.getElementById('specPdfPreviewModal');
+    if (modal) modal.style.display = 'none';
+    const frame = document.getElementById('specPdfPreviewFrame');
+    if (frame) frame.src = 'about:blank';
+}
+function downloadSpecPdfPreview() {
+    if (window._lastSpecDoc) { try { window._lastSpecDoc.save(window._lastSpecName || 'FRAME_Presentation.pdf'); } catch (e) {} }
 }
 
 async function _buildSpecPagePDF(opts) {
@@ -6427,7 +6698,7 @@ async function _buildSpecPagePDF(opts) {
         const idToPage = {};
         if (inc.spec) rows.forEach((r, i) => { if (r && r.id) idToPage[r.id] = fpKeyPageNum + 1 + i; });
         let planImg = null;
-        if (window._specPdfFloorplan) { try { planImg = await _loadImg(window._specPdfFloorplan); } catch (e) {} }
+        if (floorplanImageData) { try { planImg = await _loadImg(floorplanImageData); } catch (e) {} }
         _drawFloorplanKeyPage(doc, logos, pageNum, meta, dashProjectData, idToPage, planImg);
     }
 
@@ -6572,7 +6843,8 @@ async function _buildSpecPagePDF(opts) {
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     const single = !opts.all && rows[0];
     const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
-    doc.save(fname);
+    if (opts.preview) { showSpecPdfPreview(doc, fname); }
+    else { doc.save(fname); }
 }
 
 async function exportDashNativePNG() {
