@@ -1,0 +1,559 @@
+%!Adobe-FontList 1.24
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Invalid
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/AdobeFnt24.lst
+FileLength:2254
+FileModTime:767826672
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:Druk-Bold
+FamilyName:Druk
+StyleName:Bold
+MenuName:Druk Bold
+StyleBits:0
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Druk Bold
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/Druk-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:131744
+FileModTime:765757182
+NameArray:0,Mac,4,Druk Bold
+NameArray:0,Win,1,Druk Bold
+NameArray:0,Win,16,Druk
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MessinaSerif-Bold
+FamilyName:Messina Serif
+StyleName:Bold
+MenuName:Messina Serif
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Messina Serif Bold
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/MessinaSerif-Bold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:51876
+FileModTime:765757183
+NameArray:0,Mac,4,Messina Serif Bold
+NameArray:0,Win,1,Messina Serif
+NameArray:0,Win,16,Messina Serif
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MessinaSerif-Book
+FamilyName:Messina Serif
+StyleName:Book
+MenuName:Messina Serif Book
+StyleBits:0
+WeightClass:350
+WidthClass:5
+AngleClass:0
+FullName:Messina Serif Book
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/MessinaSerif-Book.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:52296
+FileModTime:765757182
+NameArray:0,Mac,4,Messina Serif Book
+NameArray:0,Win,1,Messina Serif Book
+NameArray:0,Win,16,Messina Serif
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MessinaSerif-BookItalic
+FamilyName:Messina Serif
+StyleName:Book Italic
+MenuName:Messina Serif Book
+StyleBits:1
+WeightClass:350
+WidthClass:5
+AngleClass:1
+FullName:Messina Serif Book Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/MessinaSerif-BookItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:53572
+FileModTime:765757182
+NameArray:0,Mac,4,Messina Serif Book Italic
+NameArray:0,Win,1,Messina Serif Book
+NameArray:0,Win,16,Messina Serif
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MessinaSerif-Regular
+FamilyName:Messina Serif
+StyleName:Regular
+MenuName:Messina Serif
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Messina Serif Regular
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/MessinaSerif-Regular.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:51156
+FileModTime:765757182
+NameArray:0,Mac,4,Messina Serif Regular
+NameArray:0,Win,1,Messina Serif
+NameArray:0,Win,16,Messina Serif
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MessinaSerif-RegularItalic
+FamilyName:Messina Serif
+StyleName:Regular Italic
+MenuName:Messina Serif
+StyleBits:1
+WeightClass:400
+WidthClass:5
+AngleClass:1
+FullName:Messina Serif Regular Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/MessinaSerif-RegularItalic.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:51504
+FileModTime:765757181
+NameArray:0,Mac,4,Messina Serif Regular Italic
+NameArray:0,Win,1,Messina Serif
+NameArray:0,Win,16,Messina Serif
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:Type1
+FontName:MessinaSerif-SemiBold
+FamilyName:Messina Serif
+StyleName:SemiBold
+MenuName:Messina Serif SemiBold
+StyleBits:0
+WeightClass:600
+WidthClass:5
+AngleClass:0
+FullName:Messina Serif SemiBold
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/MessinaSerif-SemiBold.otf
+DataFormat:sfntData
+UsesStandardEncoding:yes
+isCFF:yes
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:53120
+FileModTime:765757182
+NameArray:0,Mac,4,Messina Serif SemiBold
+NameArray:0,Win,1,Messina Serif SemiBold
+NameArray:0,Win,16,Messina Serif
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue
+FamilyName:Helvetica Neue
+StyleName:Regular
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:400
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:80
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-Bold
+FamilyName:Helvetica Neue
+StyleName:Bold
+MenuName:Helvetica Neue
+StyleBits:2
+WeightClass:700
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue Bold
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:396
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Bold
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-BoldItalic
+FamilyName:Helvetica Neue
+StyleName:Bold Italic
+MenuName:Helvetica Neue
+StyleBits:3
+WeightClass:700
+WidthClass:5
+AngleClass:1
+FullName:Helvetica Neue Bold Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:1108
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Bold Italic
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-CondensedBlack
+FamilyName:Helvetica Neue
+StyleName:Condensed Black
+MenuName:Helvetica Neue
+StyleBits:2
+WeightClass:900
+WidthClass:3
+AngleClass:0
+FullName:Helvetica Neue Condensed Black
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:3228
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Condensed Black
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-CondensedBold
+FamilyName:Helvetica Neue
+StyleName:Condensed Bold
+MenuName:Helvetica Neue
+StyleBits:2
+WeightClass:700
+WidthClass:3
+AngleClass:0
+FullName:Helvetica Neue Condensed Bold
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:1472
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Condensed Bold
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-Italic
+FamilyName:Helvetica Neue
+StyleName:Italic
+MenuName:Helvetica Neue
+StyleBits:1
+WeightClass:400
+WidthClass:5
+AngleClass:1
+FullName:Helvetica Neue Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:744
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Italic
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-Light
+FamilyName:Helvetica Neue
+StyleName:Light
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:300
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue Light
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:2532
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Light
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-LightItalic
+FamilyName:Helvetica Neue
+StyleName:Light Italic
+MenuName:Helvetica Neue
+StyleBits:1
+WeightClass:300
+WidthClass:5
+AngleClass:1
+FullName:Helvetica Neue Light Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:2880
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Light Italic
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-Medium
+FamilyName:Helvetica Neue
+StyleName:Medium
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:500
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue Medium
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:3592
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Medium
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-MediumItalic
+FamilyName:Helvetica Neue
+StyleName:Medium Italic
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:500
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue Medium Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:3940
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Medium Italic
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-Thin
+FamilyName:Helvetica Neue
+StyleName:Thin
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:200
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue Thin
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:4208
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Thin
+NameArray:0,Win,1,Helvetica Neue
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-ThinItalic
+FamilyName:Helvetica Neue
+StyleName:Thin Italic
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:200
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue Thin Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:4524
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue Thin Italic
+NameArray:0,Win,1,Helvetica Neue
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-UltraLight
+FamilyName:Helvetica Neue
+StyleName:UltraLight
+MenuName:Helvetica Neue
+StyleBits:0
+WeightClass:100
+WidthClass:5
+AngleClass:0
+FullName:Helvetica Neue UltraLight
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:1836
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue UltraLight
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:HelveticaNeue-UltraLightItalic
+FamilyName:Helvetica Neue
+StyleName:UltraLight Italic
+MenuName:Helvetica Neue
+StyleBits:1
+WeightClass:100
+WidthClass:5
+AngleClass:1
+FullName:Helvetica Neue UltraLight Italic
+WritingScript:Roman
+OutlineFileName:/Users/Louise/Library/CloudStorage/Dropbox-FarmboyDropbox/01 CREATIVE TEAM/02. DESIGN TEMPLATE 2025/241129.DESIGN.TEMPLATE.V2/Document fonts/HelveticaNeue.ttc
+TTCOffset:2168
+DataFormat:sfntData
+hasSVG:no
+hasSBIX:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:4472724
+FileModTime:765757184
+NameArray:0,Mac,4,Helvetica Neue UltraLight Italic
+%EndFont
+
