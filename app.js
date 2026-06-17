@@ -6159,6 +6159,104 @@ function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
+// Floorplan KEY page — the clickable hub. Real data-driven version: title +
+// numbered callout list (id + location from each row) + the floorplan image
+// (uploaded via the Presentation PDF modal; placeholder if none). Each list
+// row links to that item's spec page when one exists (idToPage map). Numbered
+// PINS placed ON the plan are deferred until per-item coordinates exist; the
+// list numbers still establish the legend the pins will use. `items` is the
+// full row set; `idToPage` maps item id -> spec page number.
+function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planImg) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    const ACCENT = [40, 40, 40];   // neutral bubble (category colors are a follow-up)
+
+    // — Title —
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(26);
+    doc.setTextColor(20, 20, 20);
+    doc.text('FLOORPLAN', M, M + 14);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    doc.setTextColor(110, 110, 110);
+    doc.text('PROPOSED FLOOR PLAN', M, M + 30);
+    doc.setTextColor(20, 20, 20);
+
+    // — Layout: list (left ~38%), plan (right) —
+    const listX = M;
+    const listTop = M + 56;
+    const listRight = PW * 0.40;
+    const listW = listRight - listX;
+    const rowH = 16;
+    const availH = PH - 60 - listTop;        // leave room above footer
+    const rowsPerCol = Math.max(1, Math.floor(availH / rowH));
+    const cols = (items.length > rowsPerCol) ? 2 : 1;
+    const colW = listW / cols;
+
+    if (!items.length) {
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(140, 140, 140);
+        doc.text('No items yet.', listX, listTop + 12);
+        doc.setTextColor(20, 20, 20);
+    }
+
+    items.forEach((it, i) => {
+        const col = Math.floor(i / rowsPerCol);
+        if (col >= cols) return;             // overflow guard (rare)
+        const rowInCol = i % rowsPerCol;
+        const x = listX + col * colW;
+        const y = listTop + rowInCol * rowH;
+        const num = String(i + 1).padStart(2, '0');
+        const br = 6;                         // bubble radius
+        const bcx = x + br, bcy = y + 4;
+        // Numbered bubble
+        doc.setFillColor(ACCENT[0], ACCENT[1], ACCENT[2]);
+        doc.circle(bcx, bcy, br, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(6.5);
+        doc.text(num, bcx, bcy + 0.5, { align: 'center', baseline: 'middle' });
+        // Label: "ART-01 | LOCATION"
+        doc.setTextColor(20, 20, 20);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
+        const idStr = (it.id || '').toString();
+        const loc = (it.location || '').toString();
+        const label = loc ? `${idStr}  |  ${loc}` : idStr;
+        const tx = x + br * 2 + 8;
+        const fitted = doc.splitTextToSize(label, colW - (br * 2 + 12))[0] || label;
+        doc.text(fitted, tx, bcy, { baseline: 'middle' });
+        // Clickable -> spec page (only when this item has one)
+        const target = idToPage && idToPage[it.id];
+        if (target) doc.link(x, y - 4, colW - 6, rowH, { pageNumber: target });
+    });
+
+    // — Floorplan image (right) —
+    const planX = PW * 0.42;
+    const planY = M + 30;
+    const planW = PW - M - planX;
+    const planH = PH - planY - 60;
+    if (planImg && (planImg.naturalWidth || planImg.width)) {
+        const iw = planImg.naturalWidth || planImg.width;
+        const ih = planImg.naturalHeight || planImg.height;
+        const fit = Math.min(planW / iw, planH / ih);
+        const dw = iw * fit, dh = ih * fit;
+        const dx = planX + (planW - dw) / 2, dy = planY + (planH - dh) / 2;
+        try { doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
+            try { doc.addImage(planImg, 'PNG', dx, dy, dw, dh); } catch (e2) {}
+        }
+    } else {
+        doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.75);
+        doc.setLineDashPattern([4, 4], 0);
+        doc.rect(planX, planY, planW, planH, 'S');
+        doc.setLineDashPattern([], 0);
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
+        doc.setTextColor(160, 160, 160);
+        doc.text('FLOORPLAN IMAGE \u2014 upload one in the Presentation PDF dialog', planX + planW / 2, planY + planH / 2, { align: 'center' });
+        doc.setTextColor(20, 20, 20);
+    }
+
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
 // Cover / title page using the project metadata fields (g_projName etc.).
 function _drawCoverPage(doc, logos) {
     const PW = doc.internal.pageSize.getWidth();
@@ -6241,6 +6339,8 @@ function openSpecPdfModal() {
     const verEl = document.getElementById('specPdfVersion');
     if (verEl && !verEl.value) verEl.value = meta.version || 'V1';
     set('specPdfLocation', meta.location || '');
+    const fpStatus = document.getElementById('specPdfFloorplanStatus');
+    if (fpStatus) fpStatus.textContent = window._specPdfFloorplanName || 'No file chosen';
     m.style.display = 'flex';
 }
 
@@ -6262,6 +6362,23 @@ function applySpecPdfModal() {
     const m = document.getElementById('specPdfModal');
     if (m) m.style.display = 'none';
     exportSpecPagePDF({ all: true, meta, include, preset });
+}
+
+// Read a floorplan image from the modal's file picker into a data URL used by
+// the Floorplan Key page. Session-scoped for now (window._specPdfFloorplan);
+// persisting it into the project save format is a follow-up.
+function loadSpecPdfFloorplan(event) {
+    const file = event && event.target && event.target.files && event.target.files[0];
+    const status = document.getElementById('specPdfFloorplanStatus');
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+        window._specPdfFloorplan = reader.result;
+        window._specPdfFloorplanName = file.name;
+        if (status) status.textContent = file.name;
+    };
+    reader.onerror = () => { if (status) status.textContent = 'Could not read file'; };
+    reader.readAsDataURL(file);
 }
 
 async function _buildSpecPagePDF(opts) {
@@ -6292,6 +6409,7 @@ async function _buildSpecPagePDF(opts) {
     const inc = opts.include || { cover: !!opts.all, spec: true };
 
     let pageNum = 0;               // 1-based footer counter
+    let fpKeyPageNum = 0;          // page of the floorplan key (for back-links)
     const newPage = () => { if (pageNum > 0) doc.addPage(); pageNum += 1; return pageNum; };
 
     // — Cover —
@@ -6300,8 +6418,18 @@ async function _buildSpecPagePDF(opts) {
     if (inc.narrative) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'ART NARRATIVE', 'Narrative copy for the project'); }
     // — Frame Recommendations (placeholder; will consume the frame library) —
     if (inc.frameRec) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'FRAME RECOMMENDATIONS', 'Frame swatches + codes from the frame library'); }
-    // — Floorplan Key (placeholder; the clickable hub) —
-    if (inc.floorplanKey) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'FLOORPLAN', 'Plan with numbered callouts'); }
+    // — Floorplan Key (real): list + plan image + links to each item's spec page —
+    if (inc.floorplanKey) {
+        newPage();
+        fpKeyPageNum = pageNum;
+        // Spec pages follow immediately, one per artworked row, so their page
+        // numbers are deterministic: row i sits at fpKeyPageNum + 1 + i.
+        const idToPage = {};
+        if (inc.spec) rows.forEach((r, i) => { if (r && r.id) idToPage[r.id] = fpKeyPageNum + 1 + i; });
+        let planImg = null;
+        if (window._specPdfFloorplan) { try { planImg = await _loadImg(window._specPdfFloorplan); } catch (e) {} }
+        _drawFloorplanKeyPage(doc, logos, pageNum, meta, dashProjectData, idToPage, planImg);
+    }
 
     // — Spec pages (the real, existing generator) —
     if (inc.spec) for (let i = 0; i < rows.length; i++) {
@@ -6418,6 +6546,18 @@ async function _buildSpecPagePDF(opts) {
                 doc.setTextColor(120, 120, 120);
                 doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
             }
+        }
+
+        // — Back-link to the floorplan key (top-right), when that page exists —
+        if (fpKeyPageNum) {
+            doc.setFont('helvetica', 'bold');
+            doc.setFontSize(8);
+            doc.setTextColor(90, 90, 90);
+            const blText = '\u2190 Floorplan';
+            doc.text(blText, PW - M, M + 4, { align: 'right' });
+            const blW = doc.getTextWidth(blText);
+            doc.link(PW - M - blW, M - 4, blW + 2, 12, { pageNumber: fpKeyPageNum });
+            doc.setTextColor(20, 20, 20);
         }
 
         // — Footer (page number + project line) on every spec page —
