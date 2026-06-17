@@ -5886,6 +5886,74 @@ function _drawScaleCluster(doc, x, y, w, h, pieces) {
     });
 }
 
+// Composite an entire elevation onto a canvas (beauty view: artwork baked in),
+// with one frame featured (full color) and the others faded. Used by the spec
+// page so the elevation itself carries the scale + context. Self-contained:
+// reuses renderFrameToCanvas, draws its own wall + person, does NOT touch the
+// live elevation DOM. Returns { canvas, wIn, hIn } or null.
+async function renderElevationToCanvas(elev, featuredId, opts) {
+    opts = opts || {};
+    if (!elev || !elev.frames || !elev.frames.length) return null;
+    const dpi = opts.dpi || 24;            // px per inch for the WHOLE wall (placed small)
+    const unit = (typeof elevUnit !== 'undefined') ? elevUnit : 'in';
+    // Work in inches for the canvas geometry.
+    const toIn = (v) => parseFloat(v) * unitFactor(unit, 'in');
+    const wallWin = toIn(elev.wallW) || 120;
+    const wallHin = toIn(elev.wallH) || 96;
+    const ppi = dpi;                       // canvas px per inch
+    const cw = Math.round(wallWin * ppi);
+    const ch = Math.round(wallHin * ppi);
+    if (cw <= 0 || ch <= 0 || cw * ch > 40e6) return null;  // sanity guard
+    const c = document.createElement('canvas');
+    c.width = cw; c.height = ch;
+    const x = c.getContext('2d');
+
+    // Wall background + baseboard.
+    x.fillStyle = '#ffffff'; x.fillRect(0, 0, cw, ch);
+    const baseInTop = ch - Math.round(4 * ppi);  // 4" baseboard
+    x.strokeStyle = '#d8d8d8'; x.lineWidth = Math.max(1, ppi * 0.02);
+    x.beginPath(); x.moveTo(0, baseInTop); x.lineTo(cw, baseInTop); x.stroke();
+
+    // Person silhouette (6 ft) at the left for scale.
+    const figH = 72 * ppi;
+    const figX = Math.round(2 * ppi);
+    const baseY = baseInTop;
+    x.fillStyle = 'rgba(40,40,40,0.85)';
+    const fw = figH * 0.16, fcx = figX + fw / 2, headR = figH * 0.045;
+    x.beginPath(); x.arc(fcx, baseY - figH + headR, headR, 0, Math.PI * 2); x.fill();
+    const torsoTop = baseY - figH + headR * 2 + ppi * 0.5;
+    const torsoH = (baseY - torsoTop) * 0.55;
+    x.fillRect(fcx - fw / 2, torsoTop, fw, torsoH);
+    const legW = fw * 0.34, legGap = fw * 0.12, legTop = torsoTop + torsoH;
+    x.fillRect(fcx - legGap / 2 - legW, legTop, legW, baseY - legTop);
+    x.fillRect(fcx + legGap / 2, legTop, legW, baseY - legTop);
+
+    // Frames — featured full opacity, others faded.
+    for (const f of elev.frames) {
+        if (!f || f.active === false) continue;
+        const fWin = toIn(f.w), fHin = toIn(f.h);
+        const fx = toIn(f.x) * ppi;
+        const fy = ch - (toIn(f.y) + fHin) * ppi;   // y is from the floor (bottom)
+        const isFeatured = (f.id === featuredId);
+        // Render this frame to its own canvas (artwork baked in = beauty view).
+        let artworkImg = null;
+        if (f.artworkUrl) { try { artworkImg = await _loadImg(f.artworkUrl); } catch (e) {} }
+        let swatchImg = null;
+        if (f.fType === 'image' && f.swatchDataUrl) { try { swatchImg = await _loadImg(f.swatchDataUrl); } catch (e) {} }
+        const dInches = _frameDataInInches(Object.assign({}, f, { extW: fWin, extH: fHin }), 'in');
+        const fr = renderFrameToCanvas(dInches, swatchImg, {
+            dpi, pad: 0, artworkImg,
+            artCrop: { zoom: f.artZoom, panX: f.artPanX, panY: f.artPanY },
+        });
+        if (!fr || !fr.canvas) continue;
+        x.save();
+        x.globalAlpha = isFeatured ? 1 : 0.28;     // fade the non-featured pieces
+        x.drawImage(fr.canvas, fx, fy, fWin * ppi, fHin * ppi);
+        x.restore();
+    }
+    return { canvas: c, wIn: wallWin, hIn: wallHin };
+}
+
 async function exportSpecPagePDF(opts) {
     opts = opts || {};
     if (window._specPdfBusy) return;
@@ -6001,17 +6069,40 @@ async function _buildSpecPagePDF(opts) {
             sy += rowH;
         });
 
-        // — Scale cluster (bottom-right): 6-ft figure + true-scale thumbnail —
-        // Overall framed size in inches (dInches is already inch-normalized).
-        const overallWin = parseFloat(dInches.extW) || 0;
-        const overallHin = parseFloat(dInches.extH) || 0;
-        if (overallWin > 0 && overallHin > 0) {
-            const clW = 200, clH = 130;
-            const clX = PW - M - clW;
-            const clY = PH - M - clH;
-            _drawScaleCluster(doc, clX, clY, clW, clH, [
-                { dataUrl: frameDataUrl, wIn: overallWin, hIn: overallHin }
-            ]);
+        // — Elevation context (lower-right, prominent): the wall this piece
+        //   lives on, beauty view, with THIS piece full-color and the rest faded. —
+        let elevForPiece = null;
+        for (const e of elevations) {
+            if (e.frames && e.frames.some(fr => fr.id === r.id)) { elevForPiece = e; break; }
+        }
+        if (elevForPiece) {
+            const elevRender = await renderElevationToCanvas(elevForPiece, r.id, { dpi: 28 });
+            if (elevRender && elevRender.canvas) {
+                // Flatten onto white for JPEG.
+                let elevUrl;
+                try {
+                    const flat = document.createElement('canvas');
+                    flat.width = elevRender.canvas.width; flat.height = elevRender.canvas.height;
+                    const ex = flat.getContext('2d');
+                    ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height);
+                    ex.drawImage(elevRender.canvas, 0, 0);
+                    elevUrl = flat.toDataURL('image/jpeg', 0.82);
+                } catch (e) { elevUrl = elevRender.canvas.toDataURL('image/jpeg', 0.82); }
+                // Prominent box in the right ~half, lower area.
+                const boxW = PW * 0.46;
+                const boxMaxH = PH * 0.42;
+                const ecw = elevRender.canvas.width, ech = elevRender.canvas.height;
+                const efit = Math.min(boxW / ecw, boxMaxH / ech);
+                const ew = ecw * efit, eh = ech * efit;
+                const ex0 = PW - M - ew;
+                const ey0 = PH - M - 14 - eh;   // leave room above footer
+                try { doc.addImage(elevUrl, 'JPEG', ex0, ey0, ew, eh); } catch (e) {}
+                // Caption under the elevation: the wall name.
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(7.5);
+                doc.setTextColor(120, 120, 120);
+                doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
+            }
         }
 
         // — Footer: page number (left) —
