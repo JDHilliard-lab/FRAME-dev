@@ -239,6 +239,11 @@
                                 <button type="button" id="m_artworkClear" class="action-btn btn-secondary" style="flex:0 0 auto; width:48px; height:34px; padding:0; font-size:0.62rem; display:none;" onclick="clearDashArtwork()">Clear</button>
                                 <input type="file" id="m_artworkFile" accept="image/*" style="display:none;" onchange="handleDashArtworkUpload(event)">
                             </div>
+                            <div id="m_artCropControls" style="display:none; align-items:center; gap:8px; margin-top:6px;">
+                                <span style="font-size:0.6rem; color:var(--text-muted); white-space:nowrap;">Drag image to pan · Zoom</span>
+                                <input type="range" id="m_artZoom" min="1" max="3" step="0.05" value="1" style="flex:1;" oninput="setArtZoomFromSlider()">
+                                <button type="button" class="action-btn btn-secondary" style="height:26px; padding:0 10px; font-size:0.62rem; white-space:nowrap;" onclick="resetArtCrop()">Reset</button>
+                            </div>
                         </div>
 
                         <!-- Artist / Title / Art Type were visible form fields earlier in
