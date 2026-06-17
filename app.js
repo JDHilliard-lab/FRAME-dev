@@ -5099,9 +5099,6 @@ function _syncArtCropControls() {
     if (wrap) wrap.style.display = has ? 'flex' : 'none';
     const zs = document.getElementById('m_artZoom');
     if (zs && row) zs.value = row.artZoom || 1;
-    // Fit-to-image button only makes sense when there's artwork.
-    const fitRow = document.getElementById('m_fitToImageRow');
-    if (fitRow) fitRow.style.display = has ? 'block' : 'none';
 }
 
 // OD aspect-ratio lock. When on, editing OD W or OD H scales the other to keep
