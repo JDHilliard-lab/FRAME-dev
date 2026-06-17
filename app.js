@@ -5835,6 +5835,57 @@ function buildPngFilename(row) {
 // block, and a footer (page number). Built in-browser with jsPDF (vendored),
 // reusing renderFrameToCanvas (artwork baked in) + buildSpecStrings. This is a
 // clean structural first version — exact styling is meant to be iterated on.
+// Draw the bottom-right scale cluster: a thin-bordered box containing a 6-ft
+// person silhouette and the piece thumbnail(s) drawn at the SAME real-world
+// scale, so viewers can read the art's size against the figure. `pieces` is an
+// array of { dataUrl, wIn, hIn } (overall framed size in inches).
+function _drawScaleCluster(doc, x, y, w, h, pieces) {
+    // Box
+    doc.setDrawColor(180, 180, 180);
+    doc.setLineWidth(0.75);
+    doc.setFillColor(255, 255, 255);
+    doc.rect(x, y, w, h, 'S');
+
+    const pad = 10;
+    const innerH = h - pad * 2;
+    const baseY = y + h - pad;            // feet sit on this baseline
+    // Person is 6 ft = 72". Fit the figure to ~85% of the inner height.
+    const figH = innerH * 0.85;
+    const ptPerIn = figH / 72;            // shared real-world scale for the box
+    const figX = x + pad;
+    // — Person silhouette (simple, drawn in vector) —
+    doc.setFillColor(40, 40, 40);
+    const fw = figH * 0.16;               // shoulder width ~ proportional
+    const cx = figX + fw / 2;
+    const headR = figH * 0.045;
+    // head
+    doc.circle(cx, baseY - figH + headR, headR, 'F');
+    // body (rounded rect-ish: torso + legs as a tapered blob via two rects)
+    const torsoTop = baseY - figH + headR * 2 + 1;
+    const torsoH = (baseY - torsoTop) * 0.55;
+    doc.setFillColor(40, 40, 40);
+    doc.roundedRect(cx - fw / 2, torsoTop, fw, torsoH, fw * 0.3, fw * 0.3, 'F');
+    // legs (two narrow rects)
+    const legW = fw * 0.34, legGap = fw * 0.12;
+    const legTop = torsoTop + torsoH - 1;
+    const legH = baseY - legTop;
+    doc.rect(cx - legGap / 2 - legW, legTop, legW, legH, 'F');
+    doc.rect(cx + legGap / 2, legTop, legW, legH, 'F');
+
+    // — Thumbnails to the right of the figure, same scale, bottom-aligned —
+    let tx = figX + fw + 12;
+    pieces.forEach(pc => {
+        if (!pc.dataUrl || !pc.wIn || !pc.hIn) return;
+        const tw = pc.wIn * ptPerIn, th = pc.hIn * ptPerIn;
+        // clamp to the box if a piece is very tall
+        const scale = Math.min(1, innerH / th);
+        const dw = tw * scale, dh = th * scale;
+        if (tx + dw > x + w - pad) return;  // out of room — skip overflow
+        try { doc.addImage(pc.dataUrl, 'JPEG', tx, baseY - dh, dw, dh); } catch (e) {}
+        tx += dw + 8;
+    });
+}
+
 async function exportSpecPagePDF(opts) {
     opts = opts || {};
     if (window._specPdfBusy) return;
@@ -5880,17 +5931,10 @@ async function _buildSpecPagePDF(opts) {
         doc.setTextColor(20, 20, 20);
         doc.text((r.id || '').toString(), M, M + 14);
 
-        // — Frame swatch chip (thin strip under the code) —
-        let cursorY = M + 28;
-        if (r.fType === 'image' && r.swatchDataUrl) {
-            try { doc.addImage(r.swatchDataUrl, 'JPEG', M, cursorY, 120, 16); } catch (e) {}
-        } else if (r.fColor) {
-            doc.setFillColor(r.fColor);
-            doc.rect(M, cursorY, 120, 16, 'F');
-        }
-        cursorY += 16 + 18;
-
         // — Framed artwork render (reuse the per-frame canvas, artwork baked in) —
+        // (No separate frame swatch chip — the framed mockup below already shows
+        //  the moulding, so a swatch strip would be redundant.)
+        let cursorY = M + 30;
         const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
         let artworkImg = null;
         if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
@@ -5956,6 +6000,19 @@ async function _buildSpecPagePDF(opts) {
             }
             sy += rowH;
         });
+
+        // — Scale cluster (bottom-right): 6-ft figure + true-scale thumbnail —
+        // Overall framed size in inches (dInches is already inch-normalized).
+        const overallWin = parseFloat(dInches.extW) || 0;
+        const overallHin = parseFloat(dInches.extH) || 0;
+        if (overallWin > 0 && overallHin > 0) {
+            const clW = 200, clH = 130;
+            const clX = PW - M - clW;
+            const clY = PH - M - clH;
+            _drawScaleCluster(doc, clX, clY, clW, clH, [
+                { dataUrl: frameDataUrl, wIn: overallWin, hIn: overallHin }
+            ]);
+        }
 
         // — Footer: page number (left) —
         doc.setFont('helvetica', 'normal');
