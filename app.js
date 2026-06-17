@@ -455,6 +455,7 @@ function updateDragSnap() {
 // existing getNudgeStep() still works since it looks up by ID.
 function openPrecisionModal() {
     seedAnnotationStyleInputs();
+    _syncImageCodeStyleControls();
     const snapCb = document.getElementById('snapEnabledToggle');
     if (snapCb) snapCb.checked = elevSnapEnabled;
     const dimSnapCb = document.getElementById('dimSnapEnabledToggle');
@@ -1355,6 +1356,52 @@ let dimVisibility = {
     customLines: true, // custom measure-tool lines
     imageCode: false,  // artwork image-code caption beneath each frame (opt-in)
 };
+
+// Styling for the image-code caption beneath each frame. Persisted separately
+// so codes can be made subtle (e.g. light grey) without affecting dimensions.
+let imageCodeStyle = {
+    color: '#222222',
+    size: 10,
+    font: 'Arial, Helvetica, sans-serif',
+    weight: 400,
+};
+function saveImageCodeStyle() {
+    try { localStorage.setItem('frameImageCodeStyle', JSON.stringify(imageCodeStyle)); } catch (e) {}
+}
+function loadImageCodeStyle() {
+    try {
+        const v = JSON.parse(localStorage.getItem('frameImageCodeStyle'));
+        if (v && typeof v === 'object') imageCodeStyle = Object.assign(imageCodeStyle, v);
+    } catch (e) {}
+}
+loadImageCodeStyle();
+
+function _syncImageCodeStyleControls() {
+    const c = document.getElementById('imgCodeColor'); if (c) c.value = imageCodeStyle.color;
+    const ch = document.getElementById('imgCodeColorHex'); if (ch) ch.textContent = imageCodeStyle.color;
+    const s = document.getElementById('imgCodeFontSize'); if (s) s.value = imageCodeStyle.size;
+    const sv = document.getElementById('imgCodeFontSizeVal'); if (sv) sv.textContent = imageCodeStyle.size + 'px';
+    const f = document.getElementById('imgCodeFontFamily'); if (f) f.value = imageCodeStyle.font;
+    [['imgCodeWeightReg',400],['imgCodeWeightSemi',600],['imgCodeWeightBold',700]].forEach(([id,w]) => {
+        const btn = document.getElementById(id); if (btn) btn.classList.toggle('active', imageCodeStyle.weight === w);
+    });
+}
+function applyImageCodeStyleFromModal() {
+    const c = document.getElementById('imgCodeColor');
+    const s = document.getElementById('imgCodeFontSize');
+    const f = document.getElementById('imgCodeFontFamily');
+    if (c) { imageCodeStyle.color = c.value; const ch = document.getElementById('imgCodeColorHex'); if (ch) ch.textContent = c.value; }
+    if (s) { imageCodeStyle.size = parseInt(s.value, 10) || 10; const sv = document.getElementById('imgCodeFontSizeVal'); if (sv) sv.textContent = imageCodeStyle.size + 'px'; }
+    if (f) imageCodeStyle.font = f.value;
+    saveImageCodeStyle();
+    drawElevAll();
+}
+function setImageCodeWeight(w) {
+    imageCodeStyle.weight = w;
+    _syncImageCodeStyleControls();
+    saveImageCodeStyle();
+    drawElevAll();
+}
 
 function loadDimVisibility() {
     try {
@@ -8904,7 +8951,7 @@ function drawElevAll() {
             cap.className = 'frame-imgcode-caption';
             cap.textContent = f.imageCode;
             const capGap = 5; // px below the frame
-            cap.style.cssText = `position:absolute; left:${(f.x)*elevScale}px; bottom:${(f.y*elevScale) - capGap}px; width:${f.w*elevScale}px; transform:translateY(100%); text-align:right; font-size:10px; line-height:1.1; color:#222; pointer-events:none; white-space:nowrap; overflow:visible;`;
+            cap.style.cssText = `position:absolute; left:${(f.x)*elevScale}px; bottom:${(f.y*elevScale) - capGap}px; width:${f.w*elevScale}px; transform:translateY(100%); text-align:right; font-size:${imageCodeStyle.size}px; font-family:${imageCodeStyle.font}; font-weight:${imageCodeStyle.weight}; line-height:1.1; color:${imageCodeStyle.color}; pointer-events:none; white-space:nowrap; overflow:visible;`;
             frameLayer.appendChild(cap);
         }
     });
@@ -11629,10 +11676,12 @@ async function exportElevSVG(opts) {
                 const ccs = getComputedStyle(capEl);
                 const cfs = parseFloat(ccs.fontSize) || 10;
                 const ccolor = ccs.color || '#222';
+                const cfw = ccs.fontWeight || '400';
+                const cff = ccs.fontFamily || 'Arial, Helvetica, sans-serif';
                 // right-aligned: anchor at the caption box's right edge
                 const cxr = (cr.x + cr.w).toFixed(1);
                 const cyr = (cr.y + cfs * 0.85).toFixed(1);
-                frontLayer.push(`<text x="${cxr}" y="${cyr}" text-anchor="end" font-family="Arial, Helvetica, sans-serif" font-size="${cfs.toFixed(1)}" fill="${ccolor}">${capEl.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`);
+                frontLayer.push(`<text x="${cxr}" y="${cyr}" text-anchor="end" font-family="${cff.replace(/"/g,'')}" font-size="${cfs.toFixed(1)}" font-weight="${cfw}" fill="${ccolor}">${capEl.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`);
             });
         }
 
