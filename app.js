@@ -5985,6 +5985,87 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
     return { canvas: c, wIn: totalWin, hIn: totalHin };
 }
 
+// Logo cache — load once per session. Files live in the repo root (upload the
+// Ford + Farmboy logos there). Missing logos are skipped gracefully.
+let _pdfLogoCache = null;
+async function _getPdfLogos() {
+    if (_pdfLogoCache) return _pdfLogoCache;
+    const out = { farmboy: null, farmboyAR: 8 };
+    try {
+        const fb = await _loadImg('Farmboy_WordmarkIcon_K.jpg');
+        if (fb && (fb.naturalWidth || fb.width)) { out.farmboy = fb; out.farmboyAR = (fb.naturalWidth || fb.width) / (fb.naturalHeight || fb.height); }
+    } catch (e) {}
+    _pdfLogoCache = out;
+    return out;
+}
+
+// Footer drawn on every page: page number (left), Ford badge + Farmboy wordmark
+// (right). Logos optional. `pageNum` is 1-based.
+function _drawPdfFooter(doc, logos, pageNum) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    const fy = PH - 26;            // footer baseline-ish
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(120, 120, 120);
+    doc.text(String(pageNum), M, PH - 20);
+    // Right side: Farmboy wordmark only (matches the studio's own pages).
+    const rx = PW - M;
+    if (logos && logos.farmboy) {
+        const ar = logos.farmboyAR || 8;
+        const h = 11, w = h * ar;
+        try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 27, w, h); } catch (e) {}
+    }
+}
+
+// Cover / title page using the project metadata fields (g_projName etc.).
+function _drawCoverPage(doc, logos) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 56;
+    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+    const projName = g('g_projName') || 'Art Program';
+    const client = g('g_client');
+    const desc = g('g_desc');
+    const date = g('g_date');
+    const issued = g('g_issued');
+
+    // Big project title, vertically centered-ish in the upper third.
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(20, 20, 20);
+    doc.setFontSize(34);
+    const titleY = PH * 0.40;
+    const titleLines = doc.splitTextToSize(projName, PW - M * 2);
+    doc.text(titleLines, M, titleY);
+
+    // Sub-line: client / description.
+    let sy = titleY + 24 + (titleLines.length - 1) * 30;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(13);
+    doc.setTextColor(90, 90, 90);
+    if (client) { doc.text(client, M, sy); sy += 18; }
+    if (desc) { doc.text(doc.splitTextToSize(desc, PW - M * 2), M, sy); sy += 16; }
+
+    // Meta block lower-left: date / issued by.
+    doc.setFontSize(9);
+    doc.setTextColor(130, 130, 130);
+    let my = PH - 90;
+    if (date) { doc.text('Date: ' + date, M, my); my += 13; }
+    if (issued) { doc.text('Issued by: ' + issued, M, my); my += 13; }
+
+    // Logo lower-right on the cover: Farmboy wordmark only.
+    const rx = PW - M;
+    if (logos && logos.farmboy) {
+        const ar = logos.farmboyAR || 8;
+        const h = 20, w = h * ar;
+        try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 84, w, h); } catch (e) {}
+    }
+    // Thin rule under the title.
+    doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.75);
+    doc.line(M, titleY + 10, PW - M, titleY + 10);
+}
+
 async function exportSpecPagePDF(opts) {
     opts = opts || {};
     if (window._specPdfBusy) return;
@@ -6020,9 +6101,19 @@ async function _buildSpecPagePDF(opts) {
     const ART_MAX_W = PW * 0.40;   // artwork max width
     const ART_MAX_H = PH * 0.42;   // artwork max height
 
+    const logos = await _getPdfLogos();
+    // Cover page: default for the multi-page (ALL) export; opt-in for single.
+    const includeCover = (opts.cover !== undefined) ? opts.cover : !!opts.all;
+    let pageNum = 0;               // 1-based footer counter (cover is page 1)
+    if (includeCover) {
+        _drawCoverPage(doc, logos);
+        pageNum = 1;
+    }
+
     for (let i = 0; i < rows.length; i++) {
         const r = rows[i];
-        if (i > 0) doc.addPage();
+        if (includeCover || i > 0) doc.addPage();
+        pageNum += 1;
 
         // — Item code (top-left, large bold) —
         doc.setFont('helvetica', 'bold');
@@ -6136,11 +6227,8 @@ async function _buildSpecPagePDF(opts) {
             }
         }
 
-        // — Footer: page number (left) —
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(8);
-        doc.setTextColor(120, 120, 120);
-        doc.text(String(i + 1), M, PH - 20);
+        // — Footer (page number + logos) on every spec page —
+        _drawPdfFooter(doc, logos, pageNum);
     }
 
     const fname = opts.all ? 'FRAME_Spec_Pages.pdf' : `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf`;
