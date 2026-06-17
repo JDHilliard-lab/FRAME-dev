@@ -1003,12 +1003,14 @@ if (document.readyState === 'loading') {
         // restore would be overwritten by the initial pushHistory.
         setTimeout(checkAutosaveOnLoad, 200);
         if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
+        if (typeof _wireArtPan === 'function') _wireArtPan();
         if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
     });
 } else {
     updateDirtyIndicator();
     setTimeout(checkAutosaveOnLoad, 200);
     if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
+        if (typeof _wireArtPan === 'function') _wireArtPan();
     if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
 }
 // ─────────────────────────────────────────────────────────────────────
@@ -2305,7 +2307,7 @@ function importSelectedFramesBulk() {
             fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
             product: f.product || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
             // Phase A fields carried through. Dimensional ones get factor-converted; text fields pass through.
-            artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '',
+            artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
             fColorName: f.fColorName || '', paperType: f.paperType || '',
             fHeight: (parseFloat(f.fHeight) || 0) * factor,
             rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
@@ -2369,7 +2371,7 @@ function pushFrameToElevation() {
         w: (parseFloat(f.extW) || 24) * factor, h: (parseFloat(f.extH) || 30) * factor,
         fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
         product: f.product || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
-        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '',
+        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
         fColorName: f.fColorName || '', paperType: f.paperType || '',
         fHeight: (parseFloat(f.fHeight) || 0) * factor,
         rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
@@ -2505,6 +2507,11 @@ function pushUpdatesToElevations(dashIndex) {
                 // when added on the dashboard (previously required a re-import).
                 f.artworkUrl = d.artworkUrl || '';
                 f.artworkFile = d.artworkFile || '';
+                f.artworkW = d.artworkW || 0;
+                f.artworkH = d.artworkH || 0;
+                f.artZoom = d.artZoom || 1;
+                f.artPanX = d.artPanX || 0;
+                f.artPanY = d.artPanY || 0;
             }
         });
     });
@@ -3173,6 +3180,7 @@ function loadDashDataIntoControls(data) {
     setVal('m_artworkTitle', data.artworkTitle !== undefined ? data.artworkTitle : '');
     setVal('m_artType', data.artType !== undefined ? data.artType : '');
     updateDashArtworkThumb(data.artworkUrl || '');
+    if (typeof _syncArtCropControls === 'function') _syncArtCropControls();
     setVal('m_fColorName', data.fColorName !== undefined ? data.fColorName : 'Standard Black');
     // Render zero-valued numeric fields as blank instead of "0" so the input is
     // empty when the user clicks in. Otherwise the leading "0" gets prepended to
@@ -3360,6 +3368,11 @@ function syncDashAndCalculate() {
         artist: getStr('m_artist'), artworkTitle: getStr('m_artworkTitle'), artType: getStr('m_artType'),
         artworkUrl: row.artworkUrl || '',
         artworkFile: row.artworkFile || '',
+        artworkW: row.artworkW || 0,
+        artworkH: row.artworkH || 0,
+        artZoom: row.artZoom || 1,
+        artPanX: row.artPanX || 0,
+        artPanY: row.artPanY || 0,
         // Frame profile geometry: face width (fW) is the visible frame edge; fHeight is the
         // total profile depth front-to-back; rabbetDepth is the L-pocket depth where
         // mat/print/glass/backing stack up. fHeight ≥ rabbetDepth (rabbet is a notch in the rail).
@@ -3675,18 +3688,27 @@ function updateDashVisualsFromDOM() {
         artVis.style.top = artT + "px"; artVis.style.left = artL + "px";
     }
     artVis.style.width = (artW * ratio) + "px"; artVis.style.height = (artH * ratio) + "px";
-    // Uploaded artwork fills the opening (cover-fit), matching the elevation.
+    // Uploaded artwork: positioned inner <img> using the shared crop geometry
+    // (pan/zoom), clipped to the opening. Matches the elevation + exports exactly.
     const dashHasArt = !!data.artworkUrl;
     if (dashHasArt) {
-        artVis.style.backgroundImage = `url(${data.artworkUrl})`;
-        artVis.style.backgroundSize = 'cover';
-        artVis.style.backgroundPosition = 'center';
-        artVis.style.backgroundRepeat = 'no-repeat';
         artVis.style.boxShadow = 'none';
+        artVis.style.overflow = 'hidden';
+        artVis.style.cursor = 'grab';
+        const ow = artW * ratio, oh = artH * ratio;
+        const ar = (data.artworkW && data.artworkH) ? (data.artworkW / data.artworkH) : 0;
+        const rect = computeArtDrawRect(ow, oh, ar, data.artZoom, data.artPanX, data.artPanY);
+        const aimg = document.createElement('img');
+        aimg.src = data.artworkUrl;
+        aimg.draggable = false;
+        aimg.style.cssText = `position:absolute; left:${rect.dx}px; top:${rect.dy}px; width:${rect.dw}px; height:${rect.dh}px; pointer-events:none; user-select:none; display:block;`;
+        artVis.appendChild(aimg);
     }
     // Suffix matches the unit. unitInfo() gives '"' for IN, ' cm' for CM, ' mm' for MM.
     const dashSuf = unitInfo(dashUnit).suffix;
-    artVis.innerText = dashHasArt ? "" : `${dashFmt(Math.max(0, finalW))}${dashSuf} × ${dashFmt(Math.max(0, finalH))}${dashSuf}`;
+    if (!dashHasArt) {
+        artVis.innerText = `${dashFmt(Math.max(0, finalW))}${dashSuf} × ${dashFmt(Math.max(0, finalH))}${dashSuf}`;
+    }
     fVis.appendChild(artVis);
 }
 
@@ -4880,7 +4902,7 @@ function processArtworkFile(file, onReady) {
             c.getContext('2d').drawImage(img, 0, 0, w, h);
             const dataUrl = c.toDataURL('image/jpeg', 0.85);
             const baseName = (file.name || '').replace(/\.[^.]+$/, '');
-            onReady(dataUrl, baseName);
+            onReady(dataUrl, baseName, w, h);
         };
         img.onerror = () => showInfoModal('Image Error', 'That file could not be read as an image.');
         img.src = ev.target.result;
@@ -4888,40 +4910,70 @@ function processArtworkFile(file, onReady) {
     reader.readAsDataURL(file);
 }
 
+// ── Artwork crop geometry (single source of truth) ───────────────────────
+// Given an opening (openW × openH) and the artwork aspect ratio, plus the
+// per-frame crop {zoom, panX, panY}, return the image's draw rect in the
+// opening's own coordinate space (origin = opening top-left). Cover-fit at
+// zoom=1; pan shifts which part shows; result is clamped so the opening is
+// always fully covered (no gaps). Used identically by every render path so
+// the preview, elevation, PNG, and SVG can never drift.
+function computeArtDrawRect(openW, openH, ar, zoom, panX, panY) {
+    zoom = zoom || 1; panX = panX || 0; panY = panY || 0;
+    if (!ar || !isFinite(ar) || ar <= 0) ar = (openH > 0 ? openW / openH : 1); // fallback: fill, no crop
+    const openAr = (openH > 0) ? openW / openH : 1;
+    let dw, dh;
+    if (ar > openAr) { dh = openH; dw = openH * ar; }   // image wider → match height
+    else { dw = openW; dh = openW / ar; }               // image taller → match width
+    dw *= zoom; dh *= zoom;
+    let dx = (openW - dw) / 2 + panX * openW;
+    let dy = (openH - dh) / 2 + panY * openH;
+    // Clamp so the image always covers the opening (no transparent gaps).
+    dx = Math.min(0, Math.max(openW - dw, dx));
+    dy = Math.min(0, Math.max(openH - dh, dy));
+    return { dx, dy, dw, dh };
+}
+
 // File-picker path (Upload button / explorer).
 function handleDashArtworkUpload(e) {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
-    processArtworkFile(file, (dataUrl, baseName) => applyArtworkToCurrentRow(dataUrl, baseName));
+    processArtworkFile(file, (dataUrl, baseName, w, h) => applyArtworkToCurrentRow(dataUrl, baseName, w, h));
     e.target.value = '';  // allow re-uploading the same file
 }
 
 // Assign artwork to the currently-selected dashboard row (used by form + dash
 // preview drops). Honors bulk-edit scratch mode.
-function applyArtworkToCurrentRow(dataUrl, baseName) {
+function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
     if (row) {
         row.artworkUrl = dataUrl; row.artworkFile = baseName;
+        if (w) row.artworkW = w; if (h) row.artworkH = h;
+        // Fresh image → reset crop to centered cover.
+        row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
         // Auto-populate the Image Code from the dropped filename (this is what
         // flows to the CSV + the bottom-right caption in InDesign).
         row.imageCode = baseName;
         const ic = document.getElementById('m_imageCode'); if (ic) ic.value = baseName;
     }
     updateDashArtworkThumb(dataUrl);
+    _syncArtCropControls();
     syncDashAndCalculate();
 }
 
 // Assign artwork to a specific dashboard row by index, then live-sync to its
 // elevation frames. Used when dropping onto an elevation frame (mapped by id).
-function applyArtworkToRowIndex(idx, dataUrl, baseName) {
+function applyArtworkToRowIndex(idx, dataUrl, baseName, w, h) {
     const row = dashProjectData[idx];
     if (!row) return;
     row.artworkUrl = dataUrl; row.artworkFile = baseName;
+    if (w) row.artworkW = w; if (h) row.artworkH = h;
+    row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
     row.imageCode = baseName;
     pushUpdatesToElevations(idx);
     if (idx === dashSelectedRowIndex) {
         updateDashArtworkThumb(dataUrl);
         const ic = document.getElementById('m_imageCode'); if (ic) ic.value = baseName;
+        _syncArtCropControls();
     }
     drawElevAll();
     pushHistory();
@@ -5011,10 +5063,81 @@ function wireElevArtworkDrop() {
 
 function clearDashArtwork() {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
-    if (row) { row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = ''; }
+    if (row) {
+        row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = '';
+        row.artZoom = 1; row.artPanX = 0; row.artPanY = 0; row.artworkW = 0; row.artworkH = 0;
+    }
     const ic = document.getElementById('m_imageCode'); if (ic) ic.value = '';
     updateDashArtworkThumb('');
+    _syncArtCropControls();
     syncDashAndCalculate();
+}
+
+// The row whose crop the dashboard controls edit (bulk-aware).
+function _artCropRow() {
+    return _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+}
+
+// Show/seed the zoom slider + reset row only when the selected row has artwork.
+function _syncArtCropControls() {
+    const wrap = document.getElementById('m_artCropControls');
+    const row = _artCropRow();
+    const has = !!(row && row.artworkUrl);
+    if (wrap) wrap.style.display = has ? 'flex' : 'none';
+    const zs = document.getElementById('m_artZoom');
+    if (zs && row) zs.value = row.artZoom || 1;
+}
+
+function setArtZoomFromSlider() {
+    const row = _artCropRow(); if (!row) return;
+    const zs = document.getElementById('m_artZoom');
+    row.artZoom = parseFloat(zs.value) || 1;
+    // Re-clamp pan against the new zoom by re-applying current pan (clamped in render).
+    syncDashAndCalculate();
+}
+
+function resetArtCrop() {
+    const row = _artCropRow(); if (!row) return;
+    row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
+    _syncArtCropControls();
+    syncDashAndCalculate();
+}
+
+// Drag-to-pan inside the dashboard preview opening. Wired (guarded) on the
+// #dash-frame-visual; only active when the selected row has artwork. Pan is
+// stored as a fraction of the opening, so it maps 1:1 to every render path.
+function _wireArtPan() {
+    const fv = document.getElementById('dash-frame-visual');
+    if (!fv || fv._artPanWired) return;
+    fv._artPanWired = true;
+    let dragging = false, startX = 0, startY = 0, startPanX = 0, startPanY = 0, openW = 0, openH = 0;
+    fv.addEventListener('mousedown', (e) => {
+        const row = _artCropRow();
+        if (!row || !row.artworkUrl) return;
+        const art = fv.querySelector('.art-visual');
+        if (!art) return;
+        const r = art.getBoundingClientRect();
+        // Only start a pan if the press is within the opening.
+        if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) return;
+        dragging = true; startX = e.clientX; startY = e.clientY;
+        startPanX = row.artPanX || 0; startPanY = row.artPanY || 0;
+        openW = r.width; openH = r.height;
+        e.preventDefault();
+        fv.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', (e) => {
+        if (!dragging) return;
+        const row = _artCropRow(); if (!row) return;
+        row.artPanX = startPanX + (e.clientX - startX) / openW;
+        row.artPanY = startPanY + (e.clientY - startY) / openH;
+        // Live re-render of just the preview (cheap) — full sync on mouseup.
+        updateDashVisualsFromDOM();
+    });
+    window.addEventListener('mouseup', () => {
+        if (!dragging) return;
+        dragging = false; fv.style.cursor = '';
+        syncDashAndCalculate();  // commit + push to elevation + history
+    });
 }
 
 function updateDashArtworkThumb(dataUrl) {
@@ -5561,10 +5684,10 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         const iw = opts.artworkImg.naturalWidth || opts.artworkImg.width;
         const ih = opts.artworkImg.naturalHeight || opts.artworkImg.height;
         if (iw && ih) {
-            const scale = Math.max(aW / iw, aH / ih);   // cover
-            const dw = iw * scale, dh = ih * scale;
-            const dx = aX + (aW - dw) / 2, dy = aY + (aH - dh) / 2;
-            x.drawImage(opts.artworkImg, dx, dy, dw, dh);
+            const crop = opts.artCrop || {};
+            const ar = iw / ih;
+            const r = computeArtDrawRect(aW, aH, ar, crop.zoom, crop.panX, crop.panY);
+            x.drawImage(opts.artworkImg, aX + r.dx, aY + r.dy, r.dw, r.dh);
         }
         x.restore();
     }
@@ -5716,7 +5839,7 @@ async function exportDashNativePNG() {
     if (d.artworkUrl && (typeof _showArtwork === 'undefined' || _showArtwork)) {
         try { artworkImg = await _loadImg(d.artworkUrl); } catch (e) { artworkImg = null; }
     }
-    const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: exportPad, artworkImg });
+    const { canvas } = renderFrameToCanvas(dInches, dashActiveImageObj, { dpi: 72, pad: exportPad, artworkImg, artCrop: { zoom: d.artZoom, panX: d.artPanX, panY: d.artPanY } });
     const a = document.createElement('a');
     a.download = buildPngFilename(d);
     a.href = canvas.toDataURL("image/png");
@@ -8905,13 +9028,18 @@ function drawElevAll() {
         if (hasArtwork) {
             // Render as a real <img> child (not a CSS background): html2canvas —
             // used by the PNG export — reliably rasterizes <img> but drops CSS
-            // background-image data URLs. object-fit:cover matches the screen.
+            // background-image data URLs. Positioned via the shared crop helper
+            // so pan/zoom matches the dashboard preview + exports.
             art.style.overflow = 'hidden';
             art.style.boxShadow = 'none';
+            const ow = artW * elevScale, oh = artH * elevScale;
+            const ar = (f.artworkW && f.artworkH) ? (f.artworkW / f.artworkH) : 0;
+            const rect = computeArtDrawRect(ow, oh, ar, f.artZoom, f.artPanX, f.artPanY);
             const aimg = document.createElement('img');
             aimg.className = 'art-img';
             aimg.src = f.artworkUrl;
-            aimg.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;';
+            aimg.draggable = false;
+            aimg.style.cssText = `position:absolute; left:${rect.dx}px; top:${rect.dy}px; width:${rect.dw}px; height:${rect.dh}px; display:block; pointer-events:none;`;
             art.appendChild(aimg);
         }
         
@@ -11216,6 +11344,7 @@ async function exportElevPNG(opts) {
                 showArtLabel: false,
                 unit: 'in',  // we converted, so renderer is now in inches
                 artworkImg: artworkImg,  // bake uploaded artwork into the opening
+                artCrop: { zoom: f.artZoom, panX: f.artPanX, panY: f.artPanY },
             });
 
             // Sanity check the canvas before we try to drawImage from it
@@ -11541,11 +11670,16 @@ function _maybeAddArtworkToSvg(f, frameEl, backLayer, rectToSvg) {
         const r = rectToSvg(artEl);
         if (!r || r.w <= 0 || r.h <= 0) return;
         const id = 'artclip' + (_svgArtClipCounter++);
-        // clipPath bounds the image to the opening; preserveAspectRatio
-        // 'xMidYMid slice' gives cover-fit (fill + crop), matching the screen.
+        // Position the image via the shared crop helper so pan/zoom matches every
+        // other render path. The image rect is in opening-local coords; offset by
+        // the opening's SVG position. Clipped to the opening.
+        const ar = (f.artworkW && f.artworkH) ? (f.artworkW / f.artworkH) : 0;
+        const g = computeArtDrawRect(r.w, r.h, ar, f.artZoom, f.artPanX, f.artPanY);
+        const ix = (r.x + g.dx).toFixed(1), iy = (r.y + g.dy).toFixed(1);
+        const iw = g.dw.toFixed(1), ih = g.dh.toFixed(1);
         backLayer.push(
             `<clipPath id="${id}"><rect x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}"/></clipPath>` +
-            `<image clip-path="url(#${id})" x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}" xlink:href="${f.artworkUrl}" preserveAspectRatio="xMidYMid slice"/>`
+            `<image clip-path="url(#${id})" x="${ix}" y="${iy}" width="${iw}" height="${ih}" xlink:href="${f.artworkUrl}" preserveAspectRatio="none"/>`
         );
     } catch (e) { /* skip artwork on error */ }
 }
