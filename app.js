@@ -5894,48 +5894,79 @@ function _drawScaleCluster(doc, x, y, w, h, pieces) {
 async function renderElevationToCanvas(elev, featuredId, opts) {
     opts = opts || {};
     if (!elev || !elev.frames || !elev.frames.length) return null;
-    const dpi = opts.dpi || 24;            // px per inch for the WHOLE wall (placed small)
+    const dpi = opts.dpi || 28;            // px per inch for the WHOLE wall (placed small)
     const unit = (typeof elevUnit !== 'undefined') ? elevUnit : 'in';
-    // Work in inches for the canvas geometry.
     const toIn = (v) => parseFloat(v) * unitFactor(unit, 'in');
+    const ppi = dpi;
     const wallWin = toIn(elev.wallW) || 120;
     const wallHin = toIn(elev.wallH) || 96;
-    const ppi = dpi;                       // canvas px per inch
-    const cw = Math.round(wallWin * ppi);
-    const ch = Math.round(wallHin * ppi);
-    if (cw <= 0 || ch <= 0 || cw * ch > 40e6) return null;  // sanity guard
+
+    // Person: real silhouette at 72". Its x (elevation units) may be negative
+    // (standing left of the wall) — reserve canvas margin so it fits.
+    const personHin = 72;
+    let personXin = elev.personPos ? toIn(elev.personPos.x || 0) : -toIn(20);
+    const padIn = 6;
+    const leftExtraIn = Math.max(0, -(personXin)) + padIn;
+    const totalWin = leftExtraIn + wallWin + padIn;
+    const totalHin = wallHin + padIn;
+
+    const cw = Math.round(totalWin * ppi);
+    const ch = Math.round(totalHin * ppi);
+    if (cw <= 0 || ch <= 0 || cw * ch > 40e6) return null;
     const c = document.createElement('canvas');
     c.width = cw; c.height = ch;
     const x = c.getContext('2d');
-
-    // Wall background + baseboard.
     x.fillStyle = '#ffffff'; x.fillRect(0, 0, cw, ch);
-    const baseInTop = ch - Math.round(4 * ppi);  // 4" baseboard
-    x.strokeStyle = '#d8d8d8'; x.lineWidth = Math.max(1, ppi * 0.02);
-    x.beginPath(); x.moveTo(0, baseInTop); x.lineTo(cw, baseInTop); x.stroke();
 
-    // Person silhouette (6 ft) at the left for scale.
-    const figH = 72 * ppi;
-    const figX = Math.round(2 * ppi);
-    const baseY = baseInTop;
-    x.fillStyle = 'rgba(40,40,40,0.85)';
-    const fw = figH * 0.16, fcx = figX + fw / 2, headR = figH * 0.045;
-    x.beginPath(); x.arc(fcx, baseY - figH + headR, headR, 0, Math.PI * 2); x.fill();
-    const torsoTop = baseY - figH + headR * 2 + ppi * 0.5;
-    const torsoH = (baseY - torsoTop) * 0.55;
-    x.fillRect(fcx - fw / 2, torsoTop, fw, torsoH);
-    const legW = fw * 0.34, legGap = fw * 0.12, legTop = torsoTop + torsoH;
-    x.fillRect(fcx - legGap / 2 - legW, legTop, legW, baseY - legTop);
-    x.fillRect(fcx + legGap / 2, legTop, legW, baseY - legTop);
+    // Wall origin within the canvas.
+    const wallLeftPx = leftExtraIn * ppi;
+    const wallTopPx = padIn * ppi;
+    const floorPx = wallTopPx + wallHin * ppi;        // wall bottom = floor
+    const wallW_px = wallWin * ppi, wallH_px = wallHin * ppi;
+    const lw = Math.max(1, Math.round(ppi * 0.06));   // wall lineweight
 
-    // Frames — featured full opacity, others faded.
+    // — Wall outline (the wall lines) —
+    x.strokeStyle = '#333333'; x.lineWidth = lw;
+    x.strokeRect(wallLeftPx, wallTopPx, wallW_px, wallH_px);
+
+    // — Baseboard line at the real baseboard height from the floor —
+    let bbIn = 4;
+    try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = toIn(b); } catch (e) {}
+    if (bbIn > 0 && bbIn < wallHin) {
+        const by = floorPx - bbIn * ppi;
+        x.beginPath(); x.moveTo(wallLeftPx, by); x.lineTo(wallLeftPx + wallW_px, by); x.stroke();
+    }
+
+    // — Person silhouette: real SVG asset (fallback to a drawn figure) —
+    const pPx = wallLeftPx + personXin * ppi;
+    const pH = personHin * ppi;
+    let drewSvg = false;
+    try {
+        const psvg = await _loadImg('Character_Lady_walk.svg');
+        if (psvg && (psvg.naturalWidth || psvg.width)) {
+            const ar = (psvg.naturalWidth || psvg.width) / (psvg.naturalHeight || psvg.height);
+            x.drawImage(psvg, pPx, floorPx - pH, pH * ar, pH);
+            drewSvg = true;
+        }
+    } catch (e) {}
+    if (!drewSvg) {
+        x.fillStyle = 'rgba(40,40,40,0.9)';
+        const fw = pH * 0.16, fcx = pPx + fw / 2, headR = pH * 0.045, baseY = floorPx;
+        x.beginPath(); x.arc(fcx, baseY - pH + headR, headR, 0, Math.PI * 2); x.fill();
+        const torsoTop = baseY - pH + headR * 2 + ppi * 0.5, torsoH = (baseY - torsoTop) * 0.55;
+        x.fillRect(fcx - fw / 2, torsoTop, fw, torsoH);
+        const legW = fw * 0.34, legGap = fw * 0.12, legTop = torsoTop + torsoH;
+        x.fillRect(fcx - legGap / 2 - legW, legTop, legW, baseY - legTop);
+        x.fillRect(fcx + legGap / 2, legTop, legW, baseY - legTop);
+    }
+
+    // — Frames: featured full opacity, others faded —
     for (const f of elev.frames) {
         if (!f || f.active === false) continue;
         const fWin = toIn(f.w), fHin = toIn(f.h);
-        const fx = toIn(f.x) * ppi;
-        const fy = ch - (toIn(f.y) + fHin) * ppi;   // y is from the floor (bottom)
+        const fx = wallLeftPx + toIn(f.x) * ppi;
+        const fy = floorPx - (toIn(f.y) + fHin) * ppi;   // y from floor (bottom)
         const isFeatured = (f.id === featuredId);
-        // Render this frame to its own canvas (artwork baked in = beauty view).
         let artworkImg = null;
         if (f.artworkUrl) { try { artworkImg = await _loadImg(f.artworkUrl); } catch (e) {} }
         let swatchImg = null;
@@ -5947,11 +5978,11 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
         });
         if (!fr || !fr.canvas) continue;
         x.save();
-        x.globalAlpha = isFeatured ? 1 : 0.28;     // fade the non-featured pieces
+        x.globalAlpha = isFeatured ? 1 : 0.28;
         x.drawImage(fr.canvas, fx, fy, fWin * ppi, fHin * ppi);
         x.restore();
     }
-    return { canvas: c, wIn: wallWin, hIn: wallHin };
+    return { canvas: c, wIn: totalWin, hIn: totalHin };
 }
 
 async function exportSpecPagePDF(opts) {
