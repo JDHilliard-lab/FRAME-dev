@@ -2307,7 +2307,7 @@ function importSelectedFramesBulk() {
             fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
             product: f.product || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
             // Phase A fields carried through. Dimensional ones get factor-converted; text fields pass through.
-            artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
+            artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', imageCode: f.imageCode || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
             fColorName: f.fColorName || '', paperType: f.paperType || '',
             fHeight: (parseFloat(f.fHeight) || 0) * factor,
             rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
@@ -2371,7 +2371,7 @@ function pushFrameToElevation() {
         w: (parseFloat(f.extW) || 24) * factor, h: (parseFloat(f.extH) || 30) * factor,
         fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
         product: f.product || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
-        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
+        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', imageCode: f.imageCode || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
         fColorName: f.fColorName || '', paperType: f.paperType || '',
         fHeight: (parseFloat(f.fHeight) || 0) * factor,
         rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
@@ -5146,23 +5146,31 @@ function fitODToImage() {
         return;
     }
     const artAR = row.artworkW / row.artworkH;          // image aspect (W/H)
-    const odW = parseFloat(row.extW) || parseFloat(document.getElementById('extW').value) || 0;
+    const num = (id, fallback) => { const v = parseFloat((document.getElementById(id) || {}).value); return isNaN(v) ? (fallback || 0) : v; };
+    const odW = num('extW', parseFloat(row.extW) || 0);
     if (odW <= 0) return;
-    // Border that surrounds the opening on each axis (frame face + mat reveal),
-    // in the dashboard unit. Opening = OD − 2×border. We keep OD width fixed and
-    // solve OD height so opening height = openingW / artAR.
-    const fW = parseFloat(document.getElementById('fW').value) || 0;
-    const m1 = (row.m1A ? Math.max(parseFloat(row.m1L) || 0, parseFloat(row.m1R) || 0,
-                                   parseFloat(row.m1T) || 0, parseFloat(row.m1B) || 0) : 0);
-    const borderW = fW + m1;                            // approx per-side border on width
-    const borderH = fW + m1;                            // approx per-side border on height
+
+    // Total border between the OD edge and the VISIBLE artwork, computed per axis
+    // (horizontal = left side, vertical = top side) so it matches every layer the
+    // renderer insets by: frame face + mat1 + mat2 + faux-mat border.
+    const isColor = (row.fType === 'color');
+    const fW = isColor ? 0 : num('fW');
+    const m1On = (row.m1A === true) || (document.getElementById('m1Active') && document.getElementById('m1Active').checked);
+    const m1L = m1On ? num('m1L', parseFloat(row.m1L) || 0) : 0;
+    const m1T = m1On ? num('m1T', parseFloat(row.m1T) || 0) : 0;
+    const m2 = num('m2', parseFloat(row.m2) || 0);      // mat2 reveal (applies both axes)
+    const fauxOn = (row.useFauxMat === true);
+    const faux = fauxOn ? (parseFloat(row.sbPaperBorder) || num('sbPaperBorder')) : 0;
+    const borderW = fW + m1L + m2 + faux;               // per-side, horizontal
+    const borderH = fW + m1T + m2 + faux;               // per-side, vertical
+
     const openingW = odW - 2 * borderW;
-    if (openingW <= 0) { showInfoModal('Too small', 'The frame width is too small for this operation.'); return; }
+    if (openingW <= 0) { showInfoModal('Too small', 'The frame width is too small for this operation. Reduce mats or increase OD width.'); return; }
     const openingH = openingW / artAR;
     const newODH = +(openingH + 2 * borderH).toFixed(3);
     document.getElementById('extH').value = newODH;
-    if (row) row.extH = newODH;
-    // Reset crop so the fitted image sits cleanly (it now matches the opening).
+    row.extH = newODH;
+    // Reset crop — the opening now matches the image, so it sits edge-to-edge.
     row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
     _syncArtCropControls();
     syncDashAndCalculate();
