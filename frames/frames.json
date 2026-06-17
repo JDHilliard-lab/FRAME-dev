@@ -1,0 +1,79 @@
+{
+  "_comment": "Frame library index for FRAME. The app fetches this on load and builds a { code -> frame } lookup. To add a frame: upload corners/{id}.jpg, then add a block here. faceWidth (inches) is the value FRAME uses for geometry; sizeText is printed verbatim in the spec table.",
+  "version": 1,
+  "imageBase": "frames/corners/",
+  "frames": [
+    {
+      "id": "MICH_41-50",
+      "code": "MICH 41-50",
+      "vendor": "MICH",
+      "finish": "Shiny Gold",
+      "type": "standard",
+      "faceWidth": 1.25,
+      "height": 1.125,
+      "rabbet": 0.75,
+      "sizeText": "1.25\"W \u00d7 1.125\"H, R 0.75\"D",
+      "corner": "MICH_41-50.jpg"
+    },
+    {
+      "id": "MICH_41-29",
+      "code": "MICH 41-29",
+      "vendor": "MICH",
+      "finish": "Black",
+      "type": "standard",
+      "faceWidth": 1.25,
+      "height": 1.125,
+      "rabbet": 0.75,
+      "sizeText": "1.25\"W \u00d7 1.125\"H, R 0.75\"D",
+      "corner": "MICH_41-29.jpg"
+    },
+    {
+      "id": "MICH_301-10",
+      "code": "MICH 301-10",
+      "vendor": "MICH",
+      "finish": "Satin Gold",
+      "type": "floater",
+      "faceWidth": 0.5,
+      "height": 1.875,
+      "rabbet": 1.625,
+      "sizeText": "0.5\"W \u00d7 1.875\"H, R 1.625\"D",
+      "corner": "MICH_301-10.jpg"
+    },
+    {
+      "id": "MICH_432-09",
+      "code": "MICH 432-09",
+      "vendor": "MICH",
+      "finish": "Black Lacquer",
+      "type": "standard",
+      "faceWidth": 0.875,
+      "height": 1.25,
+      "rabbet": 1.0,
+      "sizeText": "0.875\"W \u00d7 1.25\"H, R 1\"D",
+      "corner": "MICH_432-09.jpg"
+    },
+    {
+      "id": "MICH_240-50",
+      "code": "MICH 240-50",
+      "vendor": "MICH",
+      "finish": "Shiny Gold",
+      "type": "shadowbox",
+      "faceWidth": 1.0,
+      "height": 2.0,
+      "rabbet": 1.625,
+      "sizeText": "1\"W \u00d7 2\"H, R 1.625\"D",
+      "corner": "MICH_240-50.jpg"
+    },
+    {
+      "id": "MICH_348-09",
+      "code": "MICH 348-09",
+      "vendor": "MICH",
+      "finish": "Black Lacquer",
+      "type": "floater",
+      "faceWidth": 0.375,
+      "height": 2.1875,
+      "rabbet": 1.8125,
+      "sizeText": "0.375\"W \u00d7 2.1875\"H, R 1.8125\"D",
+      "corner": "MICH_348-09.jpg"
+    }
+  ]
+}
