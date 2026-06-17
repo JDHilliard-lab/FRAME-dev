@@ -3702,6 +3702,19 @@ function updateDashVisualsFromDOM() {
         aimg.src = data.artworkUrl;
         aimg.draggable = false;
         aimg.style.cssText = `position:absolute; left:${rect.dx}px; top:${rect.dy}px; width:${rect.dw}px; height:${rect.dh}px; pointer-events:none; user-select:none; display:block;`;
+        // Self-heal: if we don't have the artwork's real dimensions yet (e.g. it
+        // was uploaded before dimensions were tracked), capture them from the
+        // loaded image and re-render so the true aspect ratio is used (prevents
+        // the image stretching to fill the opening when the frame is resized).
+        if (!data.artworkW || !data.artworkH) {
+            aimg.addEventListener('load', () => {
+                const nw = aimg.naturalWidth, nh = aimg.naturalHeight;
+                if (nw && nh && (!data.artworkW || !data.artworkH)) {
+                    data.artworkW = nw; data.artworkH = nh;
+                    updateDashVisualsFromDOM();
+                }
+            });
+        }
         artVis.appendChild(aimg);
     }
     // Suffix matches the unit. unitInfo() gives '"' for IN, ' cm' for CM, ' mm' for MM.
@@ -5086,7 +5099,78 @@ function _syncArtCropControls() {
     if (wrap) wrap.style.display = has ? 'flex' : 'none';
     const zs = document.getElementById('m_artZoom');
     if (zs && row) zs.value = row.artZoom || 1;
+    // Fit-to-image button only makes sense when there's artwork.
+    const fitRow = document.getElementById('m_fitToImageRow');
+    if (fitRow) fitRow.style.display = has ? 'block' : 'none';
 }
+
+// OD aspect-ratio lock. When on, editing OD W or OD H scales the other to keep
+// the overall-dimension proportion (handy for resizing without distorting).
+let _odLocked = false;
+function toggleODLock() {
+    _odLocked = !_odLocked;
+    const btn = document.getElementById('odLockBtn');
+    if (btn) {
+        btn.classList.toggle('active', _odLocked);
+        btn.style.background = _odLocked ? 'var(--accent)' : 'var(--bg-panel)';
+        btn.style.color = _odLocked ? '#fff' : 'var(--text-muted)';
+        btn.style.borderColor = _odLocked ? 'var(--accent)' : 'var(--border-color)';
+    }
+}
+
+// OD input handler — honors the lock by scaling the partner dimension.
+let _odSyncing = false;
+function handleODInput(which) {
+    if (_odLocked && !_odSyncing) {
+        const wEl = document.getElementById('extW');
+        const hEl = document.getElementById('extH');
+        const w = parseFloat(wEl.value), h = parseFloat(hEl.value);
+        // Use the value BEFORE this edit to derive the ratio: pull from the row.
+        const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+        const prevW = row ? parseFloat(row.extW) : NaN;
+        const prevH = row ? parseFloat(row.extH) : NaN;
+        if (prevW > 0 && prevH > 0) {
+            const ratio = prevW / prevH;
+            _odSyncing = true;
+            if (which === 'W' && w > 0) hEl.value = +(w / ratio).toFixed(3);
+            else if (which === 'H' && h > 0) wEl.value = +(h * ratio).toFixed(3);
+            _odSyncing = false;
+        }
+    }
+    syncDashAndCalculate();
+}
+
+// Resize the frame so the OPENING matches the artwork's aspect ratio. Keeps the
+// current OD width and adjusts OD height (opening = OD minus frame face + mats).
+function fitODToImage() {
+    const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+    if (!row || !row.artworkUrl || !row.artworkW || !row.artworkH) {
+        showInfoModal('No artwork', 'Add artwork to this piece first, then fit the frame to its ratio.');
+        return;
+    }
+    const artAR = row.artworkW / row.artworkH;          // image aspect (W/H)
+    const odW = parseFloat(row.extW) || parseFloat(document.getElementById('extW').value) || 0;
+    if (odW <= 0) return;
+    // Border that surrounds the opening on each axis (frame face + mat reveal),
+    // in the dashboard unit. Opening = OD − 2×border. We keep OD width fixed and
+    // solve OD height so opening height = openingW / artAR.
+    const fW = parseFloat(document.getElementById('fW').value) || 0;
+    const m1 = (row.m1A ? Math.max(parseFloat(row.m1L) || 0, parseFloat(row.m1R) || 0,
+                                   parseFloat(row.m1T) || 0, parseFloat(row.m1B) || 0) : 0);
+    const borderW = fW + m1;                            // approx per-side border on width
+    const borderH = fW + m1;                            // approx per-side border on height
+    const openingW = odW - 2 * borderW;
+    if (openingW <= 0) { showInfoModal('Too small', 'The frame width is too small for this operation.'); return; }
+    const openingH = openingW / artAR;
+    const newODH = +(openingH + 2 * borderH).toFixed(3);
+    document.getElementById('extH').value = newODH;
+    if (row) row.extH = newODH;
+    // Reset crop so the fitted image sits cleanly (it now matches the opening).
+    row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
+    _syncArtCropControls();
+    syncDashAndCalculate();
+}
+
 
 function setArtZoomFromSlider() {
     const row = _artCropRow(); if (!row) return;
@@ -9446,6 +9530,12 @@ function drawElevAll() {
             aimg.src = f.artworkUrl;
             aimg.draggable = false;
             aimg.style.cssText = `position:absolute; left:${rect.dx}px; top:${rect.dy}px; width:${rect.dw}px; height:${rect.dh}px; display:block; pointer-events:none;`;
+            if (!f.artworkW || !f.artworkH) {
+                aimg.addEventListener('load', () => {
+                    const nw = aimg.naturalWidth, nh = aimg.naturalHeight;
+                    if (nw && nh && (!f.artworkW || !f.artworkH)) { f.artworkW = nw; f.artworkH = nh; drawElevAll(); }
+                });
+            }
             art.appendChild(aimg);
         }
         
