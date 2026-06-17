@@ -5837,15 +5837,29 @@ function buildPngFilename(row) {
 // clean structural first version — exact styling is meant to be iterated on.
 async function exportSpecPagePDF(opts) {
     opts = opts || {};
+    if (window._specPdfBusy) return;
     if (!window.jspdf || !window.jspdf.jsPDF) {
         showInfoModal('PDF unavailable', 'The PDF engine failed to load. Try a hard refresh.');
         return;
     }
+    window._specPdfBusy = true;
+    try {
+        await _buildSpecPagePDF(opts);
+    } finally {
+        window._specPdfBusy = false;
+    }
+}
+
+async function _buildSpecPagePDF(opts) {
     const { jsPDF } = window.jspdf;
     // Which rows: current selection, or all rows if opts.all.
     let rows;
-    if (opts.all) rows = dashProjectData.filter(r => r && (r.id || r.artworkUrl));
-    else rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
+    if (opts.all) {
+        rows = dashProjectData.filter(r => r && r.artworkUrl);
+        if (!rows.length) { showInfoModal('No artwork', 'No rows have artwork yet. Add images to the pieces you want spec pages for, then try again.'); return; }
+    } else {
+        rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
+    }
     if (!rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
 
     const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'letter' });
