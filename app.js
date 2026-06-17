@@ -6331,6 +6331,138 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
+// ── Frame Recommendations (data-driven) ───────────────────────────────────
+// Loads frames/frames.json once and caches it. Matching is tolerant: codes are
+// normalized (uppercase, strip non-alphanumerics) so "MICH 301-10",
+// "MICH-301-10", and the id "MICH_301-10" all resolve to the same entry.
+let _frameLibCache = null;
+async function _loadFrameLibrary() {
+    if (_frameLibCache) return _frameLibCache;
+    const norm = (s) => (s || '').toString().toUpperCase().replace(/[^A-Z0-9]/g, '');
+    try {
+        const r = await fetch('frames/frames.json', { cache: 'no-store' });
+        if (!r.ok) throw new Error(r.status);
+        const data = await r.json();
+        const map = {};
+        (data.frames || []).forEach(f => { if (f.code) map[norm(f.code)] = f; if (f.id) map[norm(f.id)] = f; });
+        _frameLibCache = { map, base: data.imageBase || 'frames/corners/', norm };
+    } catch (e) {
+        _frameLibCache = { map: {}, base: 'frames/corners/', norm, error: String(e) };
+    }
+    return _frameLibCache;
+}
+
+// Frame size string from a row, used when the library has no entry (e.g. plain
+// color frames). Mirrors the buildSpecStrings format: "<W>"W × <D>"D, R <r>"".
+function _frameSizeStringForRow(row) {
+    const u = (typeof dashUnit !== 'undefined') ? dashUnit : 'in';
+    const suf = u === 'in' ? '"' : (' ' + u + ' ');
+    const fmt = (v) => { const n = parseFloat(v); if (isNaN(n) || n === 0) return null; return parseFloat(n.toFixed(3)).toString(); };
+    const w = fmt(row.fW), h = fmt(row.fHeight), rb = fmt(row.rabbetDepth);
+    const parts = [];
+    if (w) parts.push(`${w}${suf}W`);
+    if (h) parts.push(`${h}${suf}D`);
+    let s = parts.join(' \u00D7 ');
+    if (rb) s = s ? `${s}, R ${rb}${suf}` : `R ${rb}${suf}`;
+    return s || '';
+}
+
+// Build the unique set of frames specified across all rows, with swatch image,
+// size string, and a usage count. Image priority: library corner (by code) →
+// the row's own image swatch → a flat color chip. Wrapped canvas has no frame.
+async function _collectProjectFrames() {
+    const lib = await _loadFrameLibrary();
+    const items = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
+    const byKey = {};
+    const order = [];
+    for (const r of items) {
+        if (!r) continue;
+        if (r.product === 'Frameless Canvas (Wrapped)') continue;   // no frame
+        const code = (r.fCode || '').trim();
+        const finish = (r.fColorName || '').trim();
+        if (!code && !finish && !(r.fType === 'image' && r.swatchDataUrl)) continue;
+        const key = (code + '|' + finish).toUpperCase();
+        if (!byKey[key]) { byKey[key] = { code, finish, count: 0, row: r }; order.push(key); }
+        byKey[key].count++;
+    }
+    const out = [];
+    for (const key of order) {
+        const e = byKey[key];
+        const entry = lib.map[lib.norm(e.code)] || null;
+        let img = null, color = null;
+        if (entry && entry.corner) { try { img = await _loadImg(lib.base + entry.corner); } catch (x) {} }
+        if (!img && e.row.fType === 'image' && e.row.swatchDataUrl) { try { img = await _loadImg(e.row.swatchDataUrl); } catch (x) {} }
+        if (!img && e.row.fType === 'color') color = e.row.fColor || '#000000';
+        const sizeText = (entry && entry.sizeText) ? entry.sizeText : _frameSizeStringForRow(e.row);
+        const codeDisp = e.code.replace(/^([A-Za-z]+)-(\d)/, '$1 $2');
+        out.push({ code: codeDisp, finish: e.finish, sizeText, count: e.count, img, color });
+    }
+    return out;
+}
+
+// One Frame Recommendations page: a 3-column grid of frame cards (swatch + code
+// + finish + size + usage count). `frames` is one page's worth (≤ 9).
+function _drawFrameRecPage(doc, logos, pageNum, meta, frames) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    const hx = (h) => { const m = (h || '#000000').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+    doc.text('FRAME RECOMMENDATIONS', M, M + 14);
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(110, 110, 110);
+    doc.text('Frames specified across the project', M, M + 30);
+    doc.setTextColor(20, 20, 20);
+
+    if (!frames.length) {
+        doc.setFontSize(9); doc.setTextColor(140, 140, 140);
+        doc.text('No frames specified yet. Set frame codes on your pieces, then regenerate.', M, M + 60);
+        doc.setTextColor(20, 20, 20);
+        _drawPdfFooter(doc, logos, pageNum, meta);
+        return;
+    }
+
+    const cols = 3, gap = 22, rowGap = 20;
+    const gridTop = M + 50, gridLeft = M;
+    const cardW = (PW - 2 * M - (cols - 1) * gap) / cols;
+    const swatchH = 92, textH = 58, cardH = swatchH + textH;
+
+    frames.forEach((f, i) => {
+        const c = i % cols, rr = Math.floor(i / cols);
+        const x = gridLeft + c * (cardW + gap);
+        const y = gridTop + rr * (cardH + rowGap);
+        // Swatch
+        if (f.img && (f.img.naturalWidth || f.img.width)) {
+            const iw = f.img.naturalWidth || f.img.width, ih = f.img.naturalHeight || f.img.height;
+            const fit = Math.min(cardW / iw, swatchH / ih);
+            const dw = iw * fit, dh = ih * fit;
+            const dx = x + (cardW - dw) / 2, dy = y + (swatchH - dh) / 2;
+            try { doc.addImage(f.img, 'JPEG', dx, dy, dw, dh); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, dy, dw, dh); } catch (e2) {} }
+        } else if (f.color) {
+            const [r, g, b] = hx(f.color); doc.setFillColor(r, g, b); doc.rect(x, y, cardW, swatchH, 'F');
+        } else {
+            doc.setDrawColor(210, 210, 210); doc.setLineWidth(0.5);
+            doc.setLineDashPattern([3, 3], 0); doc.rect(x, y, cardW, swatchH, 'S'); doc.setLineDashPattern([], 0);
+            doc.setFont('helvetica', 'normal'); doc.setFontSize(7); doc.setTextColor(170, 170, 170);
+            doc.text('no swatch', x + cardW / 2, y + swatchH / 2, { align: 'center', baseline: 'middle' });
+            doc.setTextColor(20, 20, 20);
+        }
+        doc.setDrawColor(225, 225, 225); doc.setLineWidth(0.5); doc.rect(x, y, cardW, swatchH, 'S');
+        // Text block
+        let ty = y + swatchH + 13;
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(20, 20, 20);
+        doc.text(f.code || '\u2014', x, ty); ty += 12;
+        doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(80, 80, 80);
+        if (f.finish) { doc.text(doc.splitTextToSize(f.finish, cardW)[0] || f.finish, x, ty); ty += 11; }
+        if (f.sizeText) { doc.text(doc.splitTextToSize(f.sizeText, cardW)[0] || f.sizeText, x, ty); ty += 11; }
+        doc.setFontSize(7); doc.setTextColor(140, 140, 140);
+        doc.text(`Used on ${f.count} piece${f.count === 1 ? '' : 's'}`, x, ty);
+        doc.setTextColor(20, 20, 20);
+    });
+
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
 // Cover / title page using the project metadata fields (g_projName etc.).
 function _drawCoverPage(doc, logos) {
     const PW = doc.internal.pageSize.getWidth();
@@ -6687,8 +6819,13 @@ async function _buildSpecPagePDF(opts) {
     if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
     // — Narrative (placeholder) —
     if (inc.narrative) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'ART NARRATIVE', 'Narrative copy for the project'); }
-    // — Frame Recommendations (placeholder; will consume the frame library) —
-    if (inc.frameRec) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'FRAME RECOMMENDATIONS', 'Frame swatches + codes from the frame library'); }
+    // — Frame Recommendations (real): summary of frames specified across rows —
+    if (inc.frameRec) {
+        const projFrames = await _collectProjectFrames();
+        const perPage = 9;   // 3 columns × 3 rows
+        if (!projFrames.length) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, []); }
+        else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
+    }
     // — Floorplan Key (real): list + plan image + links to each item's spec page —
     if (inc.floorplanKey) {
         newPage();
