@@ -6123,6 +6123,64 @@ async function _getPdfLogos() {
     return out;
 }
 
+// ── Brand font embedding ──────────────────────────────────────────────────
+// jsPDF can only embed TrueType, so the studio OTFs were converted to TTF
+// (Druk-Bold, MessinaSerif Regular/Bold/Italic) and live in /fonts. They're
+// fetched once, base64'd, cached, and registered into each generated PDF.
+// Roles: display = Druk (titles), serif = Messina (footer line, cover subhead),
+// everything else stays on jsPDF's built-in Helvetica. Missing/failed fonts
+// fall back to Helvetica so export never breaks.
+const PDF_FONT_FACES = [
+    { file: 'Druk-Bold.ttf',                  family: 'Druk',    style: 'bold' },
+    { file: 'Druk-Bold.ttf',                  family: 'Druk',    style: 'normal' },
+    { file: 'MessinaSerif-Regular.ttf',       family: 'Messina', style: 'normal' },
+    { file: 'MessinaSerif-Bold.ttf',          family: 'Messina', style: 'bold' },
+    { file: 'MessinaSerif-RegularItalic.ttf', family: 'Messina', style: 'italic' },
+];
+let _pdfFontB64 = null;       // { filename: base64 } — fetched once per session
+let _pdfFontFams = {};        // { family: true } — what registered into the current doc
+
+function _abToB64(buf) {
+    let bin = ''; const bytes = new Uint8Array(buf); const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+    return btoa(bin);
+}
+
+async function _loadPdfFontData() {
+    if (_pdfFontB64) return _pdfFontB64;
+    const files = Array.from(new Set(PDF_FONT_FACES.map(f => f.file)));
+    const out = {};
+    for (const file of files) {
+        try {
+            const r = await fetch('fonts/' + file, { cache: 'force-cache' });
+            if (!r.ok) throw new Error(r.status);
+            out[file] = _abToB64(await r.arrayBuffer());
+        } catch (e) { /* missing/failed font — fallback to Helvetica applies */ }
+    }
+    _pdfFontB64 = out;
+    return out;
+}
+
+async function _registerPdfFonts(doc) {
+    _pdfFontFams = {};
+    const data = await _loadPdfFontData();
+    PDF_FONT_FACES.forEach(face => {
+        const b64 = data[face.file];
+        if (!b64) return;
+        try {
+            doc.addFileToVFS(face.file, b64);
+            doc.addFont(face.file, face.family, face.style);
+            _pdfFontFams[face.family] = true;
+        } catch (e) {}
+    });
+}
+
+// Resolve a role to a registered family, else Helvetica.
+function _font(role) {
+    const fam = role === 'display' ? 'Druk' : (role === 'serif' ? 'Messina' : null);
+    return (fam && _pdfFontFams[fam]) ? fam : 'helvetica';
+}
+
 // Footer drawn on every page: page number + project line (left), Farmboy
 // wordmark (right). Logos optional. `pageNum` is 1-based. `meta` (optional)
 // holds { code, version, location } from the Presentation PDF modal; when
@@ -6148,6 +6206,7 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
         if (loc) line += ' \u2013 ' + loc;
         if (code) line += '   |   ' + code + (ver ? '.' + ver : '');
         line += '    Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
+        doc.setFont(_font('serif'), 'normal');
         doc.setFontSize(5.8);
         doc.text(line, M + 14, PH - 20);
     }
@@ -6175,7 +6234,7 @@ function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
     doc.rect(M, M, PW - M * 2, PH - M * 2 - 16, 'S');
     doc.setLineDashPattern([], 0);
     // Title (top-left, matching the studio page-title treatment).
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(_font('display'), 'bold');
     doc.setFontSize(22);
     doc.setTextColor(20, 20, 20);
     doc.text((title || 'SECTION').toString(), M + 24, M + 44);
@@ -6208,7 +6267,7 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
     const hx = (h) => { const m = (h || '#444444').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
 
     // — Title —
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(_font('display'), 'bold');
     doc.setFontSize(26);
     doc.setTextColor(20, 20, 20);
     doc.text('FLOORPLAN', M, M + 14);
@@ -6408,7 +6467,7 @@ function _drawFrameRecPage(doc, logos, pageNum, meta, frames) {
     const M = 40;
     const hx = (h) => { const m = (h || '#000000').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
 
-    doc.setFont('helvetica', 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
     doc.text('FRAME RECOMMENDATIONS', M, M + 14);
     doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(110, 110, 110);
     doc.text('Frames specified across the project', M, M + 30);
@@ -6476,7 +6535,7 @@ function _drawCoverPage(doc, logos) {
     const issued = g('g_issued');
 
     // Big project title, vertically centered-ish in the upper third.
-    doc.setFont('helvetica', 'bold');
+    doc.setFont(_font('display'), 'bold');
     doc.setTextColor(20, 20, 20);
     doc.setFontSize(34);
     const titleY = PH * 0.40;
@@ -6485,7 +6544,7 @@ function _drawCoverPage(doc, logos) {
 
     // Sub-line: client / description.
     let sy = titleY + 24 + (titleLines.length - 1) * 30;
-    doc.setFont('helvetica', 'normal');
+    doc.setFont(_font('serif'), 'normal');
     doc.setFontSize(13);
     doc.setTextColor(90, 90, 90);
     if (client) { doc.text(client, M, sy); sy += 18; }
@@ -6802,6 +6861,7 @@ async function _buildSpecPagePDF(opts) {
     // all draw code reads PW/PH from the page so layouts reflow automatically.
     const PAGE_FORMAT = [936, 540];   // pt — 936/540 ≈ 1.733, the reference aspect
     const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: PAGE_FORMAT });
+    await _registerPdfFonts(doc);   // embed brand TTFs (Druk/Messina); Helvetica fallback
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;                  // page margin
@@ -6849,7 +6909,7 @@ async function _buildSpecPagePDF(opts) {
         newPage();
 
         // — Item code (top-left, large bold) —
-        doc.setFont('helvetica', 'bold');
+        doc.setFont(_font('display'), 'bold');
         doc.setFontSize(26);
         doc.setTextColor(20, 20, 20);
         doc.text((r.id || '').toString(), M, M + 14);
