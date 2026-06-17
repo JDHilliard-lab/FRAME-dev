@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FRAME · Spec Page PDF Prototype</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  :root { --ink:#111; --line:#ddd; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--ink); }
+  header { padding:14px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px; }
+  header h1 { font-size:15px; margin:0; font-weight:700; letter-spacing:.02em; }
+  header .meta { color:#666; font-size:12px; }
+  .bar { padding:12px 18px; display:flex; gap:10px; align-items:center; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  button { font:inherit; font-weight:600; padding:8px 14px; border:1px solid #111; background:#111; color:#fff; border-radius:6px; cursor:pointer; }
+  button.secondary { background:#fff; color:#111; }
+  #status { font-size:12px; color:#444; margin-left:6px; }
+  #status b { color:#111; }
+  .ok { color:#1a7f37; } .warn { color:#9a6700; } .err { color:#b3261e; }
+  iframe { width:100%; height:calc(100vh - 132px); border:0; background:#525659; }
+</style>
+</head>
+<body>
+<header>
+  <h1>FRAME · Spec Page PDF Prototype</h1>
+  <span class="meta">vector-first jsPDF · frame-library wired · 2-page linked output</span>
+</header>
+<div class="bar">
+  <button id="gen">Generate PDF</button>
+  <button id="save" class="secondary">Save .pdf</button>
+  <span id="status">Ready. Click <b>Generate PDF</b>.</span>
+</div>
+<iframe id="preview" title="PDF preview"></iframe>
+
+<script>
+/* =====================================================================
+   CONFIG — everything here will come from project.json / FRAME state.
+   Hard-coded for the prototype so the layout & pipeline can be reviewed.
+   ===================================================================== */
+
+const FRAMES_URL = 'frames/frames.json'; // place this file at the repo root
+
+const PROJECT = {
+  code: 'MARN-CAESARS-PALACE-HIGH-LIMIT',
+  name: 'CAESARS PALACE HIGH LIMIT GAMING SPACE',
+  location: 'LAS VEGAS, NV',
+  version: 'V4',
+  year: 2026,
+  // {page} {name} {location} {code} {version} {year} are substituted per page
+  footer: '{page}   {name} – {location}   |   {code}.{version}    Copyright \u00A9 {year} Farmboy Fine Arts Inc. | All rights reserved',
+  categories: [
+    { key:'primary',   label:'Primary',   sub:'Fine Art Original',      color:'#E2231A' },
+    { key:'secondary', label:'Secondary', sub:'Licensed Reproduction',  color:'#1F9E4A' },
+    { key:'tertiary',  label:'Tertiary',  sub:'Licensed Reproduction',  color:'#2D5BD6' },
+  ],
+};
+
+// One art location + chosen artwork option. In FRAME this is a dashboard row.
+const ITEM = {
+  code:'ART-01', room:'MAIN GAMING ENTRY', option:5, category:'primary',
+  artist:'Vian Sora',
+  title:'The First Time I Saw Myself Reflected In Well Water, I Became Light, 2025',
+  application:'Oil, Acrylic and Pigments on Canvas',
+  artType:'Fine Art Original',
+  frameCode:'MICH 301-10',           // <-- looked up in the frame library
+  mount:'Float Mount', reveal:0.25,  // float mount: overall = art + 2*(reveal + faceWidth)
+  hardware:'3-Point Security', glass:'N/A',
+  artW:75, artH:90, artDepth:'TBC',
+  // Image slots. Missing files fall back to labeled placeholders.
+  artworkImg:'assets/sample-artwork.jpg',
+  elevationImg:'assets/sample-elevation.jpg',
+  floorplanImg:'assets/sample-locator.jpg',
+  note:'Availability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered.',
+};
+
+/* =====================================================================
+   HELPERS
+   ===================================================================== */
+
+function tpl(str, map){ return str.replace(/\{(\w+)\}/g, (_,k)=> (k in map ? map[k] : '{'+k+'}')); }
+function fmt(n){ return Number.isInteger(n) ? String(n) : String(parseFloat(n.toFixed(4))); }
+function hexToRgb(h){ const m = h.replace('#',''); return [parseInt(m.slice(0,2),16), parseInt(m.slice(2,4),16), parseInt(m.slice(4,6),16)]; }
+
+function loadImage(url){
+  return new Promise(res => {
+    if(!url){ res(null); return; }
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => res(img);
+    img.onerror = () => res(null);
+    img.src = url;
+  });
+}
+
+async function loadFrames(){
+  try {
+    const r = await fetch(FRAMES_URL, { cache:'no-store' });
+    if(!r.ok) throw new Error(r.status);
+    const data = await r.json();
+    const map = {};
+    (data.frames||[]).forEach(f => { map[f.code] = f; });
+    return { map, base: data.imageBase || 'frames/corners/' };
+  } catch(e){
+    return { map:{}, base:'frames/corners/', error:String(e) };
+  }
+}
+
+// Overall dimensions derived from art size + frame profile + mount reveal.
+// This is the computation FRAME already performs for rendering.
+function computeOverall(item, frame){
+  if(!frame) return null;
+  const isFloat = /float/i.test(item.mount);
+  const add = isFloat ? 2*(item.reveal + frame.faceWidth) : 2*frame.faceWidth;
+  return { w: item.artW + add, h: item.artH + add, d: frame.height };
+}
+
+/* =====================================================================
+   PDF PRIMITIVES (reusable across page templates)
+   ===================================================================== */
+
+function setFill(doc, hex){ const [r,g,b]=hexToRgb(hex); doc.setFillColor(r,g,b); }
+function setDraw(doc, hex){ const [r,g,b]=hexToRgb(hex); doc.setDrawColor(r,g,b); }
+
+// Placeholder when an image asset isn't present yet.
+function placeholder(doc, x, y, w, h, label){
+  doc.setFillColor(244,244,244); doc.setDrawColor(204,204,204); doc.setLineWidth(0.5);
+  doc.rect(x,y,w,h,'FD');
+  doc.setTextColor(150,150,150); doc.setFont('helvetica','normal'); doc.setFontSize(7);
+  doc.text(label, x+w/2, y+h/2, { align:'center', baseline:'middle' });
+  doc.setTextColor(17,17,17);
+}
+
+// Fit an image into a box preserving aspect; returns the drawn rect.
+function drawImageFit(doc, img, x, y, w, h, fallbackLabel){
+  if(!img){ placeholder(doc, x, y, w, h, fallbackLabel); return; }
+  const ar = img.naturalWidth / img.naturalHeight;
+  let dw = w, dh = w/ar;
+  if(dh > h){ dh = h; dw = h*ar; }
+  const dx = x + (w-dw)/2, dy = y + (h-dh)/2;
+  doc.addImage(img, 'JPEG', dx, dy, dw, dh);
+  doc.setDrawColor(220,220,220); doc.setLineWidth(0.5); doc.rect(dx,dy,dw,dh);
+}
+
+function caption(doc, text, x, y){
+  doc.setFont('helvetica','normal'); doc.setFontSize(6.5); doc.setTextColor(120,120,120);
+  doc.text(text.toUpperCase(), x, y, { baseline:'top' });
+  doc.setTextColor(17,17,17);
+}
+
+function drawFooter(doc, W, H, pageNum){
+  const txt = tpl(PROJECT.footer, {
+    page:String(pageNum), name:PROJECT.name, location:PROJECT.location,
+    code:PROJECT.code, version:PROJECT.version, year:PROJECT.year,
+  });
+  doc.setFont('helvetica','normal'); doc.setFontSize(5.6); doc.setTextColor(110,110,110);
+  doc.text(txt, 36, H-16, { baseline:'top' });
+  doc.setFont('helvetica','bold'); doc.setFontSize(9); doc.setTextColor(17,17,17);
+  doc.text('FARMBOY', W-36, H-18, { align:'right', baseline:'top' });
+  doc.setTextColor(17,17,17);
+}
+
+// label/value rows with wrapping; returns the y after the last row.
+function drawSpecTable(doc, rows, x, y, labelW, valueW){
+  const lh = 9.5, gap = 4.5;
+  rows.forEach(([label, value]) => {
+    doc.setFont('helvetica','bold'); doc.setFontSize(7);
+    doc.text(label, x, y, { baseline:'top' });
+    doc.setFont('helvetica','normal'); doc.setFontSize(7.5);
+    const lines = doc.splitTextToSize(String(value), valueW);
+    doc.text(lines, x+labelW, y, { baseline:'top' });
+    y += Math.max(1, lines.length)*lh + gap;
+  });
+  return y;
+}
+
+/* =====================================================================
+   PAGE TEMPLATES
+   ===================================================================== */
+
+// Page 1 — minimal floorplan KEY page, present only to prove the links.
+function pageFloorplanKey(doc, W, H){
+  const M = 36;
+  doc.setFont('helvetica','bold'); doc.setFontSize(20);
+  doc.text('FLOORPLAN', M, M, { baseline:'top' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.5); doc.setTextColor(90,90,90);
+  doc.text('PALACE COURT — PROPOSED FLOOR PLAN', M, M+26, { baseline:'top' });
+  doc.setTextColor(17,17,17);
+
+  // Callout list (one clickable row -> detail page 2)
+  const cat = PROJECT.categories.find(c=>c.key===ITEM.category) || PROJECT.categories[0];
+  const rowY = 110, rowH = 22, bubbleR = 8, listX = M;
+  setFill(doc, cat.color); doc.circle(listX+bubbleR, rowY+rowH/2, bubbleR, 'F');
+  doc.setFont('helvetica','bold'); doc.setFontSize(7.5); doc.setTextColor(255,255,255);
+  doc.text('01', listX+bubbleR, rowY+rowH/2, { align:'center', baseline:'middle' });
+  doc.setTextColor(17,17,17); doc.setFontSize(11);
+  doc.text(ITEM.code+'   |   '+ITEM.room.replace(/\b\w+/g, w=>w[0]+w.slice(1).toLowerCase()),
+           listX+bubbleR*2+10, rowY+rowH/2, { baseline:'middle' });
+  doc.link(listX, rowY, 300, rowH, { pageNumber: 2 }); // list -> detail
+
+  // Floorplan placeholder with a clickable numbered bubble.
+  const planX = W*0.45, planY = 70, planW = W-planX-M, planH = H-planY-70;
+  placeholder(doc, planX, planY, planW, planH, 'FLOORPLAN IMAGE (placeholder)');
+  const bx = planX+planW*0.62, by = planY+planH*0.40;
+  setFill(doc, cat.color); doc.circle(bx, by, 9, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(8);
+  doc.text('01', bx, by, { align:'center', baseline:'middle' });
+  doc.setTextColor(17,17,17);
+  doc.link(bx-9, by-9, 18, 18, { pageNumber: 2 }); // bubble -> detail
+
+  // Legend
+  let ly = H-110;
+  PROJECT.categories.forEach(c => {
+    setFill(doc, c.color); doc.rect(M, ly, 10, 10, 'F');
+    doc.setFont('helvetica','normal'); doc.setFontSize(8);
+    doc.text(c.label+'  |  '+c.sub, M+16, ly+1, { baseline:'top' });
+    ly += 16;
+  });
+
+  drawFooter(doc, W, H, 1);
+}
+
+// Page 2 — the spec / detail page (the real target).
+function pageDetail(doc, W, H, frame, overall, imgs){
+  const M = 36;
+
+  // Header
+  doc.setFont('helvetica','bold'); doc.setFontSize(17);
+  doc.text(ITEM.code+'  |  '+ITEM.room, M, M, { baseline:'top' });
+  doc.setFont('helvetica','normal'); doc.setFontSize(10); doc.setTextColor(120,120,120);
+  doc.text('OPTION '+ITEM.option, M, M+22, { baseline:'top' });
+  doc.setTextColor(17,17,17);
+  setDraw(doc,'#dddddd'); doc.setLineWidth(0.7); doc.line(M, M+40, W-M, M+40);
+
+  // Thumbnail row: Floorplan | Elevation | Frame
+  const thumbY = 92, thumbH = 96, thumbW = 132, gap = 14;
+  let tx = M;
+  caption(doc, 'Floorplan', tx, thumbY-9);
+  drawImageFit(doc, imgs.floorplan, tx, thumbY, thumbW, thumbH, 'LOCATOR');
+  doc.link(tx, thumbY, thumbW, thumbH, { pageNumber:1 }); // locator -> plan
+  tx += thumbW+gap;
+  caption(doc, 'Elevation', tx, thumbY-9);
+  drawImageFit(doc, imgs.elevation, tx, thumbY, thumbW, thumbH, 'ELEVATION');
+  tx += thumbW+gap;
+  caption(doc, 'Frame  '+ITEM.frameCode, tx, thumbY-9);
+  drawImageFit(doc, imgs.frame, tx, thumbY, thumbW*0.75, thumbH, 'CORNER');
+
+  // Spec table (left column)
+  const frameSizeVal = frame ? frame.sizeText : 'N/A';
+  const frameCodeVal = frame ? (frame.code+', '+frame.finish) : ITEM.frameCode;
+  const overallVal = overall
+    ? fmt(overall.w)+'"W \u00D7 '+fmt(overall.h)+'"H \u00D7 '+fmt(overall.d)+'"D'
+    : 'N/A';
+  const rows = [
+    ['Artist', ITEM.artist],
+    ['Title', ITEM.title],
+    ['Application', ITEM.application],
+    ['Art Type', ITEM.artType],
+    ['Frame Size', frameSizeVal],
+    ['Frame Code', frameCodeVal],
+    ['Mount', ITEM.mount+', '+ITEM.reveal+'" Reveal'],
+    ['Hardware', ITEM.hardware],
+    ['Glass', ITEM.glass],
+    ['Art Dimensions', fmt(ITEM.artW)+'"W \u00D7 '+fmt(ITEM.artH)+'"H \u00D7 '+ITEM.artDepth+'"D'],
+    ['Overall Dimensions', overallVal],
+  ];
+  const tableY = thumbY+thumbH+22;
+  const endY = drawSpecTable(doc, rows, M, tableY, 92, 290);
+
+  // Availability note
+  doc.setFont('helvetica','bold'); doc.setFontSize(6.5);
+  doc.text('NOTE', M, endY+6, { baseline:'top' });
+  doc.setFont('helvetica','normal');
+  doc.setTextColor(110,110,110);
+  doc.text(doc.splitTextToSize(ITEM.note, 382), M+30, endY+6, { baseline:'top' });
+  doc.setTextColor(17,17,17);
+
+  // Large artwork (right column)
+  const artX = W*0.50, artY = 92, artW = W-artX-M, artH = H-artY-70;
+  caption(doc, 'Artwork', artX, artY-9);
+  drawImageFit(doc, imgs.artwork, artX, artY, artW, artH, 'ARTWORK IMAGE');
+
+  // Back-to-plan link
+  doc.setFont('helvetica','bold'); doc.setFontSize(7); setDraw(doc,'#111111');
+  doc.setTextColor(17,17,17);
+  doc.text('\u2190 FLOORPLAN', W-M, M+2, { align:'right', baseline:'top' });
+  doc.link(W-M-70, M, 70, 12, { pageNumber:1 });
+
+  drawFooter(doc, W, H, 2);
+}
+
+/* =====================================================================
+   BUILD
+   ===================================================================== */
+
+let lastDoc = null;
+
+async function build(){
+  const status = document.getElementById('status');
+  status.innerHTML = 'Loading frame library\u2026';
+
+  const { map, base, error } = await loadFrames();
+  const frame = map[ITEM.frameCode] || null;
+
+  // Resolve images (all optional; placeholders if absent).
+  const cornerUrl = frame ? base + frame.corner : null;
+  const [artwork, elevation, floorplan, frameImg] = await Promise.all([
+    loadImage(ITEM.artworkImg), loadImage(ITEM.elevationImg),
+    loadImage(ITEM.floorplanImg), loadImage(cornerUrl),
+  ]);
+
+  const overall = computeOverall(ITEM, frame);
+
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'pt', format:[960,540], orientation:'landscape' });
+  const W = doc.internal.pageSize.getWidth();
+  const H = doc.internal.pageSize.getHeight();
+
+  pageFloorplanKey(doc, W, H);
+  doc.addPage([960,540], 'landscape');
+  pageDetail(doc, W, H, frame, overall, { artwork, elevation, floorplan, frame:frameImg });
+
+  lastDoc = doc;
+  document.getElementById('preview').src = doc.output('bloburl');
+
+  // Verification readout
+  const parts = [];
+  if(error) parts.push('<span class="warn">frames.json not loaded ('+error+') — using placeholders</span>');
+  else parts.push('<span class="ok">frames.json loaded</span>');
+  parts.push(frame ? '<span class="ok">frame '+ITEM.frameCode+' found</span>'
+                   : '<span class="err">frame '+ITEM.frameCode+' MISSING</span>');
+  parts.push(frameImg ? '<span class="ok">corner image loaded</span>'
+                      : '<span class="warn">corner image missing</span>');
+  if(overall) parts.push('overall computed = <b>'+fmt(overall.w)+'\u00D7'+fmt(overall.h)+
+                         '</b> (V4 expects 76.5\u00D791.5)');
+  status.innerHTML = parts.join(' &nbsp;·&nbsp; ');
+}
+
+document.getElementById('gen').addEventListener('click', () => { build().catch(e=>{
+  document.getElementById('status').innerHTML = '<span class="err">'+e+'</span>';
+}); });
+document.getElementById('save').addEventListener('click', () => {
+  if(lastDoc) lastDoc.save(ITEM.code+'-OPT'+ITEM.option+'-spec.pdf');
+});
+</script>
+</body>
+</html>
