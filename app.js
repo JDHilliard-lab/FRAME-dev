@@ -6088,17 +6088,34 @@ async function _getPdfLogos() {
     return out;
 }
 
-// Footer drawn on every page: page number (left), Ford badge + Farmboy wordmark
-// (right). Logos optional. `pageNum` is 1-based.
-function _drawPdfFooter(doc, logos, pageNum) {
+// Footer drawn on every page: page number + project line (left), Farmboy
+// wordmark (right). Logos optional. `pageNum` is 1-based. `meta` (optional)
+// holds { code, version, location } from the Presentation PDF modal; when
+// present, the rich studio footer line is drawn, otherwise just the number.
+function _drawPdfFooter(doc, logos, pageNum, meta) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    const fy = PH - 26;            // footer baseline-ish
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(8);
     doc.setTextColor(120, 120, 120);
     doc.text(String(pageNum), M, PH - 20);
+    // Rich project line, e.g.:
+    //   "PROJECT NAME – LOCATION  |  CODE.VERSION   Copyright © YEAR Farmboy …"
+    if (meta) {
+        const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+        const name = (g('g_projName') || 'Art Program').toUpperCase();
+        const loc = (meta.location || '').trim().toUpperCase();
+        const code = (meta.code || '').trim();
+        const ver = (meta.version || '').trim();
+        const year = new Date().getFullYear();
+        let line = name;
+        if (loc) line += ' \u2013 ' + loc;
+        if (code) line += '   |   ' + code + (ver ? '.' + ver : '');
+        line += '    Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
+        doc.setFontSize(5.8);
+        doc.text(line, M + 14, PH - 20);
+    }
     // Right side: Farmboy wordmark only (matches the studio's own pages).
     const rx = PW - M;
     if (logos && logos.farmboy) {
@@ -6106,6 +6123,40 @@ function _drawPdfFooter(doc, logos, pageNum) {
         const h = 11, w = h * ar;
         try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 27, w, h); } catch (e) {}
     }
+}
+
+// Placeholder page for deck sections not yet built (floorplan key, frame
+// recommendations, narrative, contacts, slogan). Emits a clearly-labeled page
+// in correct deck order so the full presentation skeleton — order, footer,
+// page count — is visible and reviewable before each section is implemented.
+function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    // Dashed "to be built" frame filling the live area.
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.75);
+    doc.setLineDashPattern([4, 4], 0);
+    doc.rect(M, M, PW - M * 2, PH - M * 2 - 16, 'S');
+    doc.setLineDashPattern([], 0);
+    // Title (top-left, matching the studio page-title treatment).
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.setTextColor(20, 20, 20);
+    doc.text((title || 'SECTION').toString(), M + 24, M + 44);
+    if (subtitle) {
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(110, 110, 110);
+        doc.text(subtitle.toString(), M + 24, M + 64);
+    }
+    // Centered "placeholder" tag.
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.setTextColor(180, 180, 180);
+    doc.text('PLACEHOLDER \u2014 NOT YET BUILT', PW / 2, PH / 2, { align: 'center' });
+    doc.setTextColor(20, 20, 20);
+    _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
 // Cover / title page using the project metadata fields (g_projName etc.).
@@ -6170,17 +6221,61 @@ async function exportSpecPagePDF(opts) {
     }
 }
 
+// ── Presentation PDF setup modal ──────────────────────────────────────────
+// The "Spec PDF" button opens this instead of exporting immediately. It
+// collects the elements FRAME can't auto-derive (project code / version /
+// location for the footer) and a per-section include checklist. Sections not
+// yet built emit labeled placeholder pages so the full deck skeleton is
+// visible. Last-used values are remembered on window._specPdfMeta.
+function openSpecPdfModal() {
+    const m = document.getElementById('specPdfModal');
+    if (!m) return;
+    const data = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
+    const withArt = data.filter(r => r && r.artworkUrl).length;
+    const sum = document.getElementById('specPdfSummary');
+    if (sum) sum.textContent = `${data.length} item${data.length === 1 ? '' : 's'} · ${withArt} with artwork`;
+    // Pre-fill meta from last use (fall back to blanks / V1).
+    const meta = window._specPdfMeta || {};
+    const set = (id, v) => { const el = document.getElementById(id); if (el && (el.value === '' || v)) el.value = v || el.value; };
+    set('specPdfCode', meta.code || '');
+    const verEl = document.getElementById('specPdfVersion');
+    if (verEl && !verEl.value) verEl.value = meta.version || 'V1';
+    set('specPdfLocation', meta.location || '');
+    m.style.display = 'flex';
+}
+
+function applySpecPdfModal() {
+    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+    const ck = (id) => { const el = document.getElementById(id); return !!(el && el.checked); };
+    const meta = { code: g('specPdfCode'), version: g('specPdfVersion'), location: g('specPdfLocation') };
+    window._specPdfMeta = meta;   // remember for next time
+    const preset = g('specPdfPreset');
+    const include = {
+        cover: ck('specInc_cover'),
+        narrative: ck('specInc_narrative'),
+        frameRec: ck('specInc_frameRec'),
+        floorplanKey: ck('specInc_floorplanKey'),
+        spec: ck('specInc_spec'),
+        slogan: ck('specInc_slogan'),
+        contacts: ck('specInc_contacts'),
+    };
+    const m = document.getElementById('specPdfModal');
+    if (m) m.style.display = 'none';
+    exportSpecPagePDF({ all: true, meta, include, preset });
+}
+
 async function _buildSpecPagePDF(opts) {
     const { jsPDF } = window.jspdf;
+    const wantSpec = opts.include ? !!opts.include.spec : true;
     // Which rows: current selection, or all rows if opts.all.
-    let rows;
+    let rows = [];
     if (opts.all) {
         rows = dashProjectData.filter(r => r && r.artworkUrl);
-        if (!rows.length) { showInfoModal('No artwork', 'No rows have artwork yet. Add images to the pieces you want spec pages for, then try again.'); return; }
+        if (wantSpec && !rows.length) { showInfoModal('No artwork', 'No rows have artwork yet. Add images to the pieces you want spec pages for, then try again.'); return; }
     } else {
         rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
+        if (wantSpec && !rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
     }
-    if (!rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
 
     const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'letter' });
     const PW = doc.internal.pageSize.getWidth();
@@ -6191,18 +6286,27 @@ async function _buildSpecPagePDF(opts) {
     const ART_MAX_H = PH * 0.42;   // artwork max height
 
     const logos = await _getPdfLogos();
-    // Cover page: default for the multi-page (ALL) export; opt-in for single.
-    const includeCover = (opts.cover !== undefined) ? opts.cover : !!opts.all;
-    let pageNum = 0;               // 1-based footer counter (cover is page 1)
-    if (includeCover) {
-        _drawCoverPage(doc, logos);
-        pageNum = 1;
-    }
+    const meta = opts.meta || null;
+    // Which sections to include. Defaults preserve legacy behavior: a bare
+    // exportSpecPagePDF({all:true}) still produces cover + spec pages.
+    const inc = opts.include || { cover: !!opts.all, spec: true };
 
-    for (let i = 0; i < rows.length; i++) {
+    let pageNum = 0;               // 1-based footer counter
+    const newPage = () => { if (pageNum > 0) doc.addPage(); pageNum += 1; return pageNum; };
+
+    // — Cover —
+    if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
+    // — Narrative (placeholder) —
+    if (inc.narrative) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'ART NARRATIVE', 'Narrative copy for the project'); }
+    // — Frame Recommendations (placeholder; will consume the frame library) —
+    if (inc.frameRec) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'FRAME RECOMMENDATIONS', 'Frame swatches + codes from the frame library'); }
+    // — Floorplan Key (placeholder; the clickable hub) —
+    if (inc.floorplanKey) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'FLOORPLAN', 'Plan with numbered callouts'); }
+
+    // — Spec pages (the real, existing generator) —
+    if (inc.spec) for (let i = 0; i < rows.length; i++) {
         const r = rows[i];
-        if (includeCover || i > 0) doc.addPage();
-        pageNum += 1;
+        newPage();
 
         // — Item code (top-left, large bold) —
         doc.setFont('helvetica', 'bold');
@@ -6316,11 +6420,18 @@ async function _buildSpecPagePDF(opts) {
             }
         }
 
-        // — Footer (page number + logos) on every spec page —
-        _drawPdfFooter(doc, logos, pageNum);
+        // — Footer (page number + project line) on every spec page —
+        _drawPdfFooter(doc, logos, pageNum, meta);
     }
 
-    const fname = opts.all ? 'FRAME_Spec_Pages.pdf' : `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf`;
+    // — Good Art. Good People. (placeholder) —
+    if (inc.slogan) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'GOOD ART. GOOD PEOPLE.', ''); }
+    // — Thank You / contacts (placeholder) —
+    if (inc.contacts) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'THANK YOU', 'Contact block'); }
+
+    if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
+    const single = !opts.all && rows[0];
+    const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
     doc.save(fname);
 }
 
