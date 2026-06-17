@@ -6797,7 +6797,11 @@ async function _buildSpecPagePDF(opts) {
         if (wantSpec && !rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
     }
 
-    const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: 'letter' });
+    // Page format: widescreen to match the studio's reference decks (~1.73:1),
+    // not US-Letter. One constant drives both the first page and every addPage;
+    // all draw code reads PW/PH from the page so layouts reflow automatically.
+    const PAGE_FORMAT = [936, 540];   // pt — 936/540 ≈ 1.733, the reference aspect
+    const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: PAGE_FORMAT });
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;                  // page margin
@@ -6813,7 +6817,7 @@ async function _buildSpecPagePDF(opts) {
 
     let pageNum = 0;               // 1-based footer counter
     let fpKeyPageNum = 0;          // page of the floorplan key (for back-links)
-    const newPage = () => { if (pageNum > 0) doc.addPage(); pageNum += 1; return pageNum; };
+    const newPage = () => { if (pageNum > 0) doc.addPage(PAGE_FORMAT, 'landscape'); pageNum += 1; return pageNum; };
 
     // — Cover —
     if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
@@ -6822,7 +6826,7 @@ async function _buildSpecPagePDF(opts) {
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
         const projFrames = await _collectProjectFrames();
-        const perPage = 9;   // 3 columns × 3 rows
+        const perPage = 6;   // 3 columns × 2 rows, fits the widescreen page
         if (!projFrames.length) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, []); }
         else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
     }
