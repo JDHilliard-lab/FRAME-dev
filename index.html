@@ -1174,6 +1174,20 @@
         </div>
         <div style="padding:10px 14px; border-top:1px solid var(--border-color); display:flex; align-items:center; gap:8px;">
             <input id="mbCaption" type="text" placeholder="Select an element" disabled oninput="_mbInput(this.value)" style="flex:1; font-size:0.75rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+            <div id="mbImgCtl" style="display:none; align-items:center; gap:6px;">
+                <span style="font-size:0.66rem; color:var(--text-muted);">Caption</span>
+                <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                    <button onclick="_mbNudgeCapSize(-0.003)" title="Smaller" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
+                    <span id="mbCapSizeVal" style="min-width:24px; text-align:center; font-size:0.7rem; color:var(--text-muted);">20</span>
+                    <button onclick="_mbNudgeCapSize(0.003)" title="Larger" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
+                </span>
+                <select id="mbCapSide" onchange="_mbSetCapSide(this.value)" title="Caption position" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                    <option value="bottom">Bottom</option>
+                    <option value="top">Top</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
             <div id="mbTextCtl" style="display:none; align-items:center; gap:6px;">
                 <select id="mbFont" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
                     <option value="display">Druk (display)</option>
