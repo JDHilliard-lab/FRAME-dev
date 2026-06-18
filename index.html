@@ -1069,7 +1069,7 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_understanding" checked style="cursor:pointer;"> Project Understanding <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_strategy" checked style="cursor:pointer;"> Art Collection Strategy <span style="color:var(--text-muted); font-size:0.7rem;">(3 tiers below)</span></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_moodboard" checked style="cursor:pointer;"> Moodboard <span style="color:var(--text-muted); font-size:0.7rem;">(images below)</span></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_moodboard" checked style="cursor:pointer;"> Layout pages <span style="color:var(--text-muted); font-size:0.7rem;">(moodboard / breaker / etc.)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_frameRec" checked style="cursor:pointer;"> Frame Recommendations <span style="color:var(--text-muted); font-size:0.7rem;">(frames used in project)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_floorplanKey" checked style="cursor:pointer;"> Floorplan Key <span style="color:var(--text-muted); font-size:0.7rem;">(plan + pins)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_spec" checked style="cursor:pointer;"> Spec Pages <span style="color:var(--text-muted); font-size:0.7rem;">(one per artworked piece)</span></label>
@@ -1093,8 +1093,8 @@
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Moodboard</label>
         <div style="display:flex; align-items:center; gap:8px;">
-            <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openMoodboardModal()">Manage images…</button>
-            <span id="specPdfMoodboardCount" style="font-size:0.72rem; color:var(--text-muted);">0 images</span>
+            <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openMoodboardModal()">Edit layout pages…</button>
+            <span id="specPdfMoodboardCount" style="font-size:0.72rem; color:var(--text-muted);">0 pages</span>
         </div>
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Contacts <span style="font-weight:normal; text-transform:none;">(one per line: Name | Role | Email | Phone)</span></label>
@@ -1163,9 +1163,22 @@
                 <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="addMoodboardText()">Add text</button>
                 <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="addMoodboardArrow()">Add arrow</button>
                 <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="addMoodboardElbow()">Add elbow</button>
+                <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openDeckStyles()">Styles…</button>
                 <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="closeMoodboardModal()">Done</button>
                 <input type="file" id="moodboardFile" accept="image/*" multiple style="display:none;" onchange="addMoodboardImages(event)">
             </div>
+        </div>
+        <div style="padding:8px 14px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <div id="moodboardPages" style="display:flex; gap:5px; overflow-x:auto; flex:1; min-width:120px;"><!-- page tabs --></div>
+            <button class="action-btn btn-secondary" title="Move page left" style="width:auto; height:26px; padding:0 8px; font-size:0.72rem;" onclick="moveLayoutPage(-1)">◀</button>
+            <button class="action-btn btn-secondary" title="Move page right" style="width:auto; height:26px; padding:0 8px; font-size:0.72rem;" onclick="moveLayoutPage(1)">▶</button>
+            <select id="mbPageType" onchange="_mbSetPageType(this.value)" title="Page type" style="height:26px; font-size:0.7rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                <option value="moodboard">Moodboard</option><option value="breaker">Breaker</option><option value="keyword">Keyword</option><option value="inspo">Inspo</option>
+            </select>
+            <input id="mbPageTitle" type="text" placeholder="Page title" oninput="_mbSetPageTitle(this.value)" style="width:130px; height:26px; font-size:0.72rem; padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+            <button class="action-btn btn-secondary" style="width:auto; height:26px; padding:0 10px; font-size:0.72rem;" onclick="addLayoutPage('moodboard')">+ Page</button>
+            <button class="action-btn btn-secondary" style="width:auto; height:26px; padding:0 10px; font-size:0.72rem;" onclick="duplicateLayoutPage()">Duplicate</button>
+            <button class="action-btn btn-secondary" style="width:auto; height:26px; padding:0 10px; font-size:0.72rem;" onclick="deleteLayoutPage()">Delete page</button>
         </div>
         <div style="flex:1; display:flex; align-items:center; justify-content:center; padding:14px; overflow:auto; background:rgba(0,0,0,0.14); min-height:0;">
             <div id="moodboardCanvas" style="position:relative; width:100%; max-width:880px; aspect-ratio:936/540; background:#ffffff; box-shadow:0 2px 14px rgba(0,0,0,0.35);">
@@ -1234,6 +1247,65 @@
                     <button class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="saveCopyEditor()">Save</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Default styles: one place to set arrow / text / caption defaults for the
+     whole deck, plus a reapply so existing elements stay consistent. -->
+<div id="deckStylesModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:10001; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:90vw; max-width:460px; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <div style="padding:14px 18px; border-bottom:1px solid var(--border-color);">
+            <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Default styles</h3>
+            <p style="margin:2px 0 0; font-size:0.7rem; color:var(--text-muted);">New elements use these. "Reapply" pushes them onto everything already in the layout.</p>
+        </div>
+        <div style="padding:16px 18px; display:flex; flex-direction:column; gap:14px;">
+            <div>
+                <div style="font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:6px;">Arrows</div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <label style="font-size:0.75rem; color:var(--text-main); display:flex; align-items:center; gap:6px;">Color <input id="dsArrowColor" type="color" oninput="_dsSet('arrowColor', this.value)" style="width:30px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:none; cursor:pointer;"></label>
+                    <label style="font-size:0.75rem; color:var(--text-main); display:flex; align-items:center; gap:6px;">Weight
+                        <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                            <button onclick="_dsNudge('arrowWeight', -0.3, 0.5, 6)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">−</button>
+                            <span id="dsArrowWtVal" style="min-width:30px; text-align:center; font-size:0.72rem; color:var(--text-muted);">1.2</span>
+                            <button onclick="_dsNudge('arrowWeight', 0.3, 0.5, 6)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">+</button>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:6px;">Text</div>
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                    <select id="dsTextFont" onchange="_dsSet('textFont', this.value)" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                        <option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option>
+                    </select>
+                    <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                        <button onclick="_dsNudge('textSize', -0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
+                        <span id="dsTextSizeVal" style="min-width:26px; text-align:center; font-size:0.72rem; color:var(--text-muted);">45</span>
+                        <button onclick="_dsNudge('textSize', 0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
+                    </span>
+                    <label style="font-size:0.75rem; color:var(--text-main); display:flex; align-items:center; gap:6px;">Color <input id="dsTextColor" type="color" oninput="_dsSet('textColor', this.value)" style="width:30px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:none; cursor:pointer;"></label>
+                </div>
+            </div>
+            <div>
+                <div style="font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:6px;">Image captions</div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                        <button onclick="_dsNudge('capSize', -0.003, 0.01, 0.08)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
+                        <span id="dsCapSizeVal" style="min-width:26px; text-align:center; font-size:0.72rem; color:var(--text-muted);">20</span>
+                        <button onclick="_dsNudge('capSize', 0.003, 0.01, 0.08)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
+                    </span>
+                    <label style="font-size:0.75rem; color:var(--text-main); display:flex; align-items:center; gap:6px;">Position
+                        <select id="dsCapSide" onchange="_dsSet('capSide', this.value)" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                            <option value="bottom">Bottom</option><option value="top">Top</option><option value="left">Left</option><option value="right">Right</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div style="padding:12px 18px; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
+            <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:0.74rem;" onclick="_mbReapplyStyles()" title="Apply these defaults to every element already in the layout">Reapply to everything</button>
+            <button class="action-btn" style="width:auto; height:32px; padding:0 18px; font-size:0.75rem;" onclick="closeDeckStyles()">Done</button>
         </div>
     </div>
 </div>
