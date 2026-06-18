@@ -1173,6 +1173,27 @@
         </div>
         <div style="padding:10px 14px; border-top:1px solid var(--border-color); display:flex; align-items:center; gap:8px;">
             <input id="mbCaption" type="text" placeholder="Select an element" disabled oninput="_mbInput(this.value)" style="flex:1; font-size:0.75rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+            <div id="mbTextCtl" style="display:none; align-items:center; gap:6px;">
+                <select id="mbFont" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                    <option value="display">Druk (display)</option>
+                    <option value="serif">Messina (serif)</option>
+                    <option value="sans">Helvetica (sans)</option>
+                </select>
+                <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                    <button onclick="_mbNudgeSize(-0.005)" title="Smaller" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
+                    <span id="mbSizeVal" style="min-width:26px; text-align:center; font-size:0.7rem; color:var(--text-muted);">45</span>
+                    <button onclick="_mbNudgeSize(0.005)" title="Larger" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
+                </span>
+                <input id="mbTextColor" type="color" value="#222222" oninput="_mbSetTextColor(this.value)" title="Text color" style="width:30px; height:30px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:none; cursor:pointer;">
+            </div>
+            <div id="mbArrowCtl" style="display:none; align-items:center; gap:6px;">
+                <input id="mbArrowColor" type="color" value="#9aa0a6" oninput="_mbSetArrowColor(this.value)" title="Arrow color" style="width:30px; height:30px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:none; cursor:pointer;">
+                <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                    <button onclick="_mbNudgeWeight(-0.3)" title="Thinner" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">−</button>
+                    <span id="mbWtVal" style="min-width:30px; text-align:center; font-size:0.7rem; color:var(--text-muted);">1.2</span>
+                    <button onclick="_mbNudgeWeight(0.3)" title="Thicker" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">+</button>
+                </span>
+            </div>
             <button id="mbFront" class="action-btn btn-secondary" disabled style="width:auto; height:30px; padding:0 12px; font-size:0.72rem;" onclick="_mbToFront()">Bring to front</button>
             <button id="mbBack" class="action-btn btn-secondary" disabled style="width:auto; height:30px; padding:0 12px; font-size:0.72rem;" onclick="_mbToBack()">Send to back</button>
             <button id="mbDelete" class="action-btn btn-secondary" disabled style="width:auto; height:30px; padding:0 12px; font-size:0.72rem;" onclick="_mbDelete()">Delete</button>
