@@ -1068,6 +1068,7 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_understanding" checked style="cursor:pointer;"> Project Understanding <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_strategy" checked style="cursor:pointer;"> Art Collection Strategy <span style="color:var(--text-muted); font-size:0.7rem;">(3 tiers below)</span></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_moodboard" checked style="cursor:pointer;"> Moodboard <span style="color:var(--text-muted); font-size:0.7rem;">(images below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_frameRec" checked style="cursor:pointer;"> Frame Recommendations <span style="color:var(--text-muted); font-size:0.7rem;">(frames used in project)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_floorplanKey" checked style="cursor:pointer;"> Floorplan Key <span style="color:var(--text-muted); font-size:0.7rem;">(plan + pins)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_spec" checked style="cursor:pointer;"> Spec Pages <span style="color:var(--text-muted); font-size:0.7rem;">(one per artworked piece)</span></label>
@@ -1085,6 +1086,12 @@
         <textarea id="specPdfStrategyPrimary" rows="2" placeholder="Primary — Fine Art Original: …" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; border-left:3px solid #E2231A;"></textarea>
         <textarea id="specPdfStrategySecondary" rows="2" placeholder="Secondary — Licensed Reproduction: …" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; border-left:3px solid #1F9E4A;"></textarea>
         <textarea id="specPdfStrategyTertiary" rows="2" placeholder="Tertiary — Licensed Reproduction: …" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; border-left:3px solid #2D5BD6;"></textarea>
+
+        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Moodboard</label>
+        <div style="display:flex; align-items:center; gap:8px;">
+            <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openMoodboardModal()">Manage images…</button>
+            <span id="specPdfMoodboardCount" style="font-size:0.72rem; color:var(--text-muted);">0 images</span>
+        </div>
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Contacts <span style="font-weight:normal; text-transform:none;">(one per line: Name | Role | Email | Phone)</span></label>
         <textarea id="specPdfContacts" rows="3" placeholder="Laurenn Machin | Creative Director | lmachin@farmboyfinearts.com | 604-200-4018" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; font-family:monospace;"></textarea>
@@ -1135,6 +1142,27 @@
             </div>
         </div>
         <iframe id="specPdfPreviewFrame" title="PDF preview" style="flex:1; width:100%; border:0; background:#525659;"></iframe>
+    </div>
+</div>
+
+<!-- Moodboard manager. Add/caption/remove reference images for the moodboard
+     page(s). Images are downscaled on import and saved with the project. -->
+<div id="moodboardModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:90vw; max-width:920px; height:84vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <div style="padding:14px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
+            <div>
+                <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Moodboard</h3>
+                <p style="margin:2px 0 0; font-size:0.7rem; color:var(--text-muted);">Add reference images and caption them. They render as a captioned grid, six per page.</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+                <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="document.getElementById('moodboardFile').click()">Add images</button>
+                <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="closeMoodboardModal()">Done</button>
+                <input type="file" id="moodboardFile" accept="image/*" multiple style="display:none;" onchange="addMoodboardImages(event)">
+            </div>
+        </div>
+        <div id="moodboardGrid" style="flex:1; overflow-y:auto; padding:14px; display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px; align-content:start;">
+            <!-- tiles injected by renderMoodboard -->
+        </div>
     </div>
 </div>
 
