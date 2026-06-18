@@ -267,8 +267,9 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '' };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '' }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222' } }; }
+function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222' }; return editorialContent.styles; }
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
@@ -6669,6 +6670,19 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles) {
             doc.setFillColor(c[0], c[1], c[2]); doc.triangle(Bx, By, p1x, p1y, p2x, p2y, 'F');
             return;
         }
+        if (ty === 'elbow') {
+            const pts = (t.pts || []).map(p => ({ x: (p.x || 0) * PW, y: (p.y || 0) * PH }));
+            if (pts.length >= 2) {
+                const c = _hex(t.color || '#9aa0a6'), wt = Math.max(0.4, t.weight || 1.2);
+                doc.setDrawColor(c[0], c[1], c[2]); doc.setLineWidth(wt);
+                for (let k = 0; k < pts.length - 1; k++) doc.line(pts[k].x, pts[k].y, pts[k + 1].x, pts[k + 1].y);
+                const a = pts[pts.length - 2], b = pts[pts.length - 1];
+                const ang = Math.atan2(b.y - a.y, b.x - a.x), hl = 6 + wt * 2.2, ha = Math.PI / 7;
+                doc.setFillColor(c[0], c[1], c[2]);
+                doc.triangle(b.x, b.y, b.x - hl * Math.cos(ang - ha), b.y - hl * Math.sin(ang - ha), b.x - hl * Math.cos(ang + ha), b.y - hl * Math.sin(ang + ha), 'F');
+            }
+            return;
+        }
         if (ty === 'text') {
             const fs = Math.max(6, Math.min(60, (t.size || 0.045) * PH));
             const c = _hex(t.color || '#222222');
@@ -7159,6 +7173,10 @@ function _normalizeMoodboard() {
             if (typeof t.y2 !== 'number') t.y2 = 0.48;
             if (typeof t.color !== 'string') t.color = '#9aa0a6';
             if (typeof t.weight !== 'number') t.weight = 1.2;
+        } else if (ty === 'elbow') {
+            if (!Array.isArray(t.pts) || t.pts.length < 2) t.pts = [{ x: 0.4, y: 0.4 }, { x: 0.6, y: 0.4 }, { x: 0.6, y: 0.5 }];
+            if (typeof t.color !== 'string') t.color = '#9aa0a6';
+            if (typeof t.weight !== 'number') t.weight = 1.2;
         }
     });
 }
@@ -7186,17 +7204,54 @@ function openMoodboardModal() {
     _normalizeMoodboard();
     m.style.display = 'flex';
     window.addEventListener('resize', _mbOnResize);
+    document.addEventListener('keydown', _mbKeyDelete);
     _mbBackfillAspects(renderMoodboardCanvas);
     renderMoodboardCanvas();
+}
+function _mbKeyDelete(e) {
+    if (_mbPlacing) return;
+    if (e.key !== 'Delete' && e.key !== 'Backspace') return;
+    const a = document.activeElement;
+    if (a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT' || a.isContentEditable)) return;
+    if (_mbSelected < 0) return;
+    e.preventDefault();
+    _mbDelete();
 }
 function closeMoodboardModal() {
     const m = document.getElementById('moodboardModal');
     if (m) m.style.display = 'none';
     _mbSelected = -1;
+    if (_mbPlacing) { _mbPlacing = false; _mbDraft = null; document.removeEventListener('keydown', _mbPlaceKey); }
     window.removeEventListener('resize', _mbOnResize);
+    document.removeEventListener('keydown', _mbKeyDelete);
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     const cnt = document.getElementById('specPdfMoodboardCount');
     if (cnt) { const n = (editorialContent.moodboard || []).filter(e => _elType(e) === 'image').length; cnt.textContent = n + ' image' + (n === 1 ? '' : 's'); }
+}
+
+// One arrow segment as a rotated element with a wide transparent hit band so
+// thin lines are easy to grab. Returns the wrapper (caller wires idx/handlers).
+function _mbSegEl(Ax, Ay, Bx, By, color, wt, withHead, sel) {
+    const len = Math.hypot(Bx - Ax, By - Ay), ang = Math.atan2(By - Ay, Bx - Ax) * 180 / Math.PI;
+    const hit = Math.max(wt, 13);
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:absolute; left:' + Ax + 'px; top:' + (Ay - hit / 2) + 'px; width:' + len + 'px; height:' + hit + 'px; transform-origin:0 50%; transform:rotate(' + ang + 'deg); cursor:grab;';
+    const line = document.createElement('div');
+    line.style.cssText = 'position:absolute; left:0; top:' + (hit / 2 - wt / 2) + 'px; width:100%; height:' + wt + 'px; background:' + color + ';' + (sel ? ' box-shadow:0 0 0 1px #6a6aff;' : '');
+    wrap.appendChild(line);
+    if (withHead) {
+        const hH = 3 + wt * 1.2, hL = 6 + wt * 2.2;
+        const head = document.createElement('div');
+        head.style.cssText = 'position:absolute; right:-1px; top:' + (hit / 2 - hH) + 'px; width:0; height:0; border-left:' + hL + 'px solid ' + color + '; border-top:' + hH + 'px solid transparent; border-bottom:' + hH + 'px solid transparent;';
+        wrap.appendChild(head);
+    }
+    return wrap;
+}
+function _mbDot(px, py, onDown, color) {
+    const hnd = document.createElement('div');
+    hnd.style.cssText = 'position:absolute; left:' + (px - 6) + 'px; top:' + (py - 6) + 'px; width:12px; height:12px; background:' + (color || '#6a6aff') + '; border:2px solid #fff; border-radius:50%; cursor:move; z-index:20;';
+    if (onDown) hnd.onmousedown = onDown;
+    return hnd;
 }
 
 function renderMoodboardCanvas() {
@@ -7206,38 +7261,40 @@ function renderMoodboardCanvas() {
     const els = editorialContent.moodboard || [];
     const cr = canvas.getBoundingClientRect();
     canvas.innerHTML = '';
-    canvas.onmousedown = (e) => { if (e.target === canvas) { _mbSelected = -1; renderMoodboardCanvas(); } };
-    if (!els.length) {
-        const p = document.createElement('p');
-        p.style.cssText = 'color:#888; font-size:0.85rem; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); margin:0; text-align:center;';
-        p.textContent = 'Empty layout — add images, text notes, or arrows.';
-        canvas.appendChild(p);
-        _mbUpdateToolbar(); return;
+    if (_mbPlacing) {
+        canvas.style.cursor = 'crosshair';
+        canvas.onmousedown = null;
+        canvas.onclick = _mbPlaceClick;
+        canvas.ondblclick = (e) => { e.preventDefault(); _mbFinishElbow(); };
+    } else {
+        canvas.style.cursor = '';
+        canvas.onclick = null; canvas.ondblclick = null;
+        canvas.onmousedown = (e) => { if (e.target === canvas) { _mbSelected = -1; renderMoodboardCanvas(); } };
     }
     const order = els.map((t, i) => i).sort((a, b) => (els[a].z || 0) - (els[b].z || 0));
     order.forEach(i => {
         const t = els[i]; const sel = (i === _mbSelected); const ty = _elType(t);
         if (ty === 'arrow') {
             const Ax = t.x1 * cr.width, Ay = t.y1 * cr.height, Bx = t.x2 * cr.width, By = t.y2 * cr.height;
-            const len = Math.hypot(Bx - Ax, By - Ay), ang = Math.atan2(By - Ay, Bx - Ax) * 180 / Math.PI;
             const wt = Math.max(0.5, t.weight || 1.2), col = t.color || '#9aa0a6';
-            const hL = 6 + wt * 2.2, hH = 3 + wt * 1.2;
-            const line = document.createElement('div');
-            line.dataset.idx = i;
-            line.style.cssText = 'position:absolute; left:' + Ax + 'px; top:' + (Ay - wt / 2) + 'px; width:' + len + 'px; height:' + wt + 'px; background:' + col + '; transform-origin:0 50%; transform:rotate(' + ang + 'deg); cursor:grab;' + (sel ? ' box-shadow:0 0 0 1px #6a6aff;' : '');
-            const head = document.createElement('div');
-            head.style.cssText = 'position:absolute; right:-1px; top:' + (wt / 2 - hH) + 'px; width:0; height:0; border-left:' + hL + 'px solid ' + col + '; border-top:' + hH + 'px solid transparent; border-bottom:' + hH + 'px solid transparent;';
-            line.appendChild(head);
-            line.onmousedown = (e) => _mbTileDown(e, i);
-            canvas.appendChild(line);
+            const wrap = _mbSegEl(Ax, Ay, Bx, By, col, wt, true, sel);
+            wrap.dataset.idx = i; wrap.onmousedown = (e) => _mbTileDown(e, i);
+            canvas.appendChild(wrap);
             if (sel) {
-                [['A', Ax, Ay], ['B', Bx, By]].forEach(pt => {
-                    const hnd = document.createElement('div');
-                    hnd.style.cssText = 'position:absolute; left:' + (pt[1] - 6) + 'px; top:' + (pt[2] - 6) + 'px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:50%; cursor:move; z-index:20;';
-                    hnd.onmousedown = (e) => _mbArrowHandleDown(e, i, pt[0]);
-                    canvas.appendChild(hnd);
-                });
+                canvas.appendChild(_mbDot(Ax, Ay, (e) => _mbArrowHandleDown(e, i, 'A')));
+                canvas.appendChild(_mbDot(Bx, By, (e) => _mbArrowHandleDown(e, i, 'B')));
             }
+            return;
+        }
+        if (ty === 'elbow') {
+            const pts = t.pts || []; const wt = Math.max(0.5, t.weight || 1.2), col = t.color || '#9aa0a6';
+            for (let k = 0; k < pts.length - 1; k++) {
+                const Ax = pts[k].x * cr.width, Ay = pts[k].y * cr.height, Bx = pts[k + 1].x * cr.width, By = pts[k + 1].y * cr.height;
+                const wrap = _mbSegEl(Ax, Ay, Bx, By, col, wt, k === pts.length - 2, sel);
+                wrap.dataset.idx = i; wrap.onmousedown = (e) => _mbTileDown(e, i);
+                canvas.appendChild(wrap);
+            }
+            if (sel) pts.forEach((p, k) => canvas.appendChild(_mbDot(p.x * cr.width, p.y * cr.height, (e) => _mbElbowAnchorDown(e, i, k))));
             return;
         }
         const box = document.createElement('div'); box.dataset.idx = i;
@@ -7267,6 +7324,23 @@ function renderMoodboardCanvas() {
         box.onmousedown = (e) => _mbTileDown(e, i);
         canvas.appendChild(box);
     });
+    if (!els.length && !_mbPlacing) {
+        const p = document.createElement('p');
+        p.style.cssText = 'color:#888; font-size:0.85rem; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); margin:0; text-align:center;';
+        p.textContent = 'Empty layout — add images, text notes, or arrows.';
+        canvas.appendChild(p);
+    }
+    if (_mbPlacing && _mbDraft) {
+        const pts = _mbDraft.pts, col = _mbDraft.color || '#6a6aff';
+        for (let k = 0; k < pts.length - 1; k++) {
+            canvas.appendChild(_mbSegEl(pts[k].x * cr.width, pts[k].y * cr.height, pts[k + 1].x * cr.width, pts[k + 1].y * cr.height, col, Math.max(0.5, _mbDraft.weight || 1.2), k === pts.length - 2, false));
+        }
+        pts.forEach(p => { const d = _mbDot(p.x * cr.width, p.y * cr.height, null, col); d.style.cursor = 'crosshair'; canvas.appendChild(d); });
+        const banner = document.createElement('div');
+        banner.style.cssText = 'position:absolute; left:50%; top:8px; transform:translateX(-50%); background:rgba(20,20,20,0.85); color:#fff; font-size:0.72rem; padding:5px 12px; border-radius:5px; pointer-events:none; white-space:nowrap;';
+        banner.textContent = 'Click to add points · double-click or Enter to finish · Esc to cancel';
+        canvas.appendChild(banner);
+    }
     _mbDrawGuides(canvas);
     _mbUpdateToolbar();
 }
@@ -7302,16 +7376,30 @@ function _mbUpdateToolbar() {
         if (document.activeElement !== inp) inp.value = el ? (ty === 'text' ? (el.text || '') : (el.caption || '')) : '';
     }
     const tctl = document.getElementById('mbTextCtl'); if (tctl) tctl.style.display = (ty === 'text') ? 'flex' : 'none';
-    const actl = document.getElementById('mbArrowCtl'); if (actl) actl.style.display = (ty === 'arrow') ? 'flex' : 'none';
+    const actl = document.getElementById('mbArrowCtl'); if (actl) actl.style.display = (ty === 'arrow' || ty === 'elbow') ? 'flex' : 'none';
     if (ty === 'text') {
         const f = document.getElementById('mbFont'); if (f) f.value = el.font || 'serif';
         const sv = document.getElementById('mbSizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 1000);
         const c = document.getElementById('mbTextColor'); if (c) c.value = el.color || '#222222';
-    } else if (ty === 'arrow') {
+    } else if (ty === 'arrow' || ty === 'elbow') {
         const c = document.getElementById('mbArrowColor'); if (c) c.value = el.color || '#9aa0a6';
         const wv = document.getElementById('mbWtVal'); if (wv) wv.textContent = (el.weight || 1.2).toFixed(1);
     }
     ['mbFront', 'mbBack', 'mbDelete'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = !el; });
+}
+function _mbApplyToAll(kind) {
+    const el = _mbSelEl(); if (!el) return;
+    const s = _deckStyles(); const arr = editorialContent.moodboard || [];
+    if (kind === 'arrow') {
+        s.arrowColor = el.color; s.arrowWeight = el.weight;
+        arr.forEach(o => { const ty = _elType(o); if (ty === 'arrow' || ty === 'elbow') { o.color = el.color; o.weight = el.weight; } });
+    } else if (kind === 'text') {
+        s.textFont = el.font; s.textSize = el.size; s.textColor = el.color;
+        arr.forEach(o => { if (_elType(o) === 'text') { o.font = el.font; o.size = el.size; o.color = el.color; } });
+    }
+    if (typeof pushHistory === 'function') pushHistory();
+    renderMoodboardCanvas();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
 function _mbSelEl() { return (_mbSelected >= 0) ? editorialContent.moodboard[_mbSelected] : null; }
 function _mbSetFont(v) { const el = _mbSelEl(); if (el) { el.font = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
@@ -7327,7 +7415,7 @@ function _mbTileDown(e, i) {
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = editorialContent.moodboard[i];
-    _mbDrag = { mode: 'move', i, startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ox1: t.x1, oy1: t.y1, ox2: t.x2, oy2: t.y2 };
+    _mbDrag = { mode: 'move', i, startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ox1: t.x1, oy1: t.y1, ox2: t.x2, oy2: t.y2, opts: Array.isArray(t.pts) ? t.pts.map(p => ({ x: p.x, y: p.y })) : null };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
     renderMoodboardCanvas();
@@ -7352,6 +7440,17 @@ function _mbArrowHandleDown(e, i, which) {
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
 }
+function _mbElbowAnchorDown(e, i, k) {
+    e.preventDefault(); e.stopPropagation();
+    const canvas = document.getElementById('moodboardCanvas');
+    const r = canvas ? canvas.getBoundingClientRect() : null;
+    if (!r) return;
+    const t = editorialContent.moodboard[i];
+    _mbSelected = i;
+    _mbDrag = { mode: 'elbowAnchor', i, k, startX: e.clientX, startY: e.clientY, r, opx: t.pts[k].x, opy: t.pts[k].y };
+    document.addEventListener('mousemove', _mbMove);
+    document.addEventListener('mouseup', _mbUp);
+}
 function _mbMove(e) {
     if (!_mbDrag) return;
     const t = editorialContent.moodboard[_mbDrag.i]; if (!t) return;
@@ -7362,10 +7461,19 @@ function _mbMove(e) {
         if (e.shiftKey) { if (Math.abs(dx * r.width) >= Math.abs(dy * r.height)) mdy = 0; else mdx = 0; }
         if (ty === 'arrow') {
             t.x1 = _mbDrag.ox1 + mdx; t.y1 = _mbDrag.oy1 + mdy; t.x2 = _mbDrag.ox2 + mdx; t.y2 = _mbDrag.oy2 + mdy;
+        } else if (ty === 'elbow' && _mbDrag.opts) {
+            t.pts.forEach((p, k) => { p.x = _mbDrag.opts[k].x + mdx; p.y = _mbDrag.opts[k].y + mdy; });
         } else {
             t.x = Math.max(-0.1, Math.min(1.05, _mbDrag.ox + mdx));
             t.y = Math.max(-0.1, Math.min(1.05, _mbDrag.oy + mdy));
         }
+    } else if (_mbDrag.mode === 'elbowAnchor') {
+        let nx = _mbDrag.opx + dx, ny = _mbDrag.opy + dy;
+        if (e.shiftKey) {   // axis-lock to the previous anchor for clean right angles
+            const prev = t.pts[_mbDrag.k - 1] || t.pts[_mbDrag.k + 1];
+            if (prev) { if (Math.abs((nx - prev.x) * r.width) >= Math.abs((ny - prev.y) * r.height)) ny = prev.y; else nx = prev.x; }
+        }
+        t.pts[_mbDrag.k].x = nx; t.pts[_mbDrag.k].y = ny;
     } else if (_mbDrag.mode === 'resize') {
         t.w = Math.max(0.06, Math.min(1.0, (_mbDrag.ow || 0.28) + dx));   // shapes box / image width
     } else if (_mbDrag.mode === 'arrowA' || _mbDrag.mode === 'arrowB') {
@@ -7412,17 +7520,65 @@ function _mbInput(v) {
 }
 function addMoodboardText() {
     if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
+    const s = _deckStyles();
     const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
-    arr.push({ type: 'text', text: 'New note', x: 0.12, y: 0.14, w: 0.4, size: 0.05, color: '#222222', font: 'serif', z: mz + 1 });
+    arr.push({ type: 'text', text: 'New note', x: 0.12, y: 0.14, w: 0.4, size: s.textSize || 0.05, color: s.textColor || '#222222', font: s.textFont || 'serif', z: mz + 1 });
     _mbSelected = arr.length - 1;
     _mbCommit();
 }
 function addMoodboardArrow() {
     if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
+    const s = _deckStyles();
     const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
-    arr.push({ type: 'arrow', x1: 0.4, y1: 0.42, x2: 0.6, y2: 0.5, color: '#9aa0a6', weight: 1.2, z: mz + 1 });
+    arr.push({ type: 'arrow', x1: 0.4, y1: 0.42, x2: 0.6, y2: 0.5, color: s.arrowColor || '#9aa0a6', weight: s.arrowWeight || 1.2, z: mz + 1 });
     _mbSelected = arr.length - 1;
     _mbCommit();
+}
+// Elbow (multi-segment) arrow: click points on the canvas; segments snap to
+// right angles; finish with double-click / Enter, cancel with Esc.
+let _mbPlacing = false;
+let _mbDraft = null;
+function addMoodboardElbow() {
+    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
+    const s = _deckStyles();
+    _mbPlacing = true;
+    _mbDraft = { type: 'elbow', pts: [], color: s.arrowColor || '#9aa0a6', weight: s.arrowWeight || 1.2 };
+    _mbSelected = -1;
+    document.addEventListener('keydown', _mbPlaceKey);
+    renderMoodboardCanvas();
+}
+function _mbPlaceKey(e) {
+    if (!_mbPlacing) return;
+    if (e.key === 'Enter') { e.preventDefault(); _mbFinishElbow(); }
+    else if (e.key === 'Escape') { e.preventDefault(); _mbCancelElbow(); }
+}
+function _mbPlaceClick(e) {
+    if (!_mbPlacing || !_mbDraft) return;
+    const canvas = document.getElementById('moodboardCanvas');
+    const r = canvas.getBoundingClientRect();
+    let nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height;
+    const pts = _mbDraft.pts;
+    if (pts.length) {  // snap each new point to a right angle off the previous
+        const p = pts[pts.length - 1];
+        if (Math.abs((nx - p.x) * r.width) >= Math.abs((ny - p.y) * r.height)) ny = p.y; else nx = p.x;
+        if (Math.abs(nx - p.x) < 0.004 && Math.abs(ny - p.y) < 0.004) return;  // ignore near-duplicate (e.g. 2nd click of a double-click)
+    }
+    pts.push({ x: nx, y: ny });
+    renderMoodboardCanvas();
+}
+function _mbFinishElbow() {
+    document.removeEventListener('keydown', _mbPlaceKey);
+    const d = _mbDraft; _mbPlacing = false; _mbDraft = null;
+    if (d && d.pts.length >= 2) {
+        const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
+        d.z = mz + 1; arr.push(d); _mbSelected = arr.length - 1;
+        _mbCommit();
+    } else { renderMoodboardCanvas(); }
+}
+function _mbCancelElbow() {
+    document.removeEventListener('keydown', _mbPlaceKey);
+    _mbPlacing = false; _mbDraft = null;
+    renderMoodboardCanvas();
 }
 
 function addMoodboardImages(event) {
