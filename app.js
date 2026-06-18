@@ -267,9 +267,91 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222' } }; }
-function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222' }; return editorialContent.styles; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
+
+// ── Layout pages ──────────────────────────────────────────────────────────
+// The freeform canvas edits ONE page (_mbPageIndex); the deck emits them all.
+// _mbEls() returns the current page's element array, so the editor functions
+// stay page-agnostic. Legacy single-array projects fold into page 1.
+let _mbPageIndex = 0;
+function _mbDefaultTitle(type) { return type === 'keyword' ? 'KEYWORDS' : type === 'inspo' ? 'INSPIRATION' : type === 'breaker' ? '' : 'MOODBOARD'; }
+function _mbMigratePages() {
+    const ec = editorialContent;
+    if (!Array.isArray(ec.layoutPages) || !ec.layoutPages.length) {
+        ec.layoutPages = [{ id: 'pg' + Date.now(), type: 'moodboard', title: 'MOODBOARD', elements: [] }];
+    }
+    if (Array.isArray(ec.moodboard) && ec.moodboard.length && !(ec.layoutPages[0].elements || []).length) {
+        ec.layoutPages[0].elements = ec.moodboard;   // fold legacy single moodboard in
+    }
+    if ('moodboard' in ec) { try { delete ec.moodboard; } catch (e) { ec.moodboard = undefined; } }
+    ec.layoutPages.forEach(p => {
+        if (!p.id) p.id = 'pg' + Math.random().toString(36).slice(2);
+        if (typeof p.type !== 'string') p.type = 'moodboard';
+        if (typeof p.title !== 'string') p.title = _mbDefaultTitle(p.type);
+        if (!Array.isArray(p.elements)) p.elements = [];
+    });
+    if (_mbPageIndex < 0 || _mbPageIndex >= ec.layoutPages.length) _mbPageIndex = 0;
+}
+function _mbPage() { _mbMigratePages(); return editorialContent.layoutPages[_mbPageIndex]; }
+function _mbEls() { return _mbPage().elements; }
+function _mbAutosave() { if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+function _mbSwitchPage(i) {
+    _mbMigratePages();
+    if (i < 0 || i >= editorialContent.layoutPages.length) return;
+    _mbPageIndex = i; _mbSelected = -1;
+    if (_mbPlacing) { _mbPlacing = false; _mbDraft = null; }
+    renderMoodboardCanvas();
+}
+function addLayoutPage(type) {
+    _mbMigratePages();
+    const t = type || 'moodboard';
+    editorialContent.layoutPages.splice(_mbPageIndex + 1, 0, { id: 'pg' + Math.random().toString(36).slice(2), type: t, title: _mbDefaultTitle(t), elements: [] });
+    _mbPageIndex += 1; _mbSelected = -1;
+    renderMoodboardCanvas(); _mbAutosave();
+}
+function duplicateLayoutPage() {
+    _mbMigratePages();
+    const src = editorialContent.layoutPages[_mbPageIndex];
+    editorialContent.layoutPages.splice(_mbPageIndex + 1, 0, { id: 'pg' + Math.random().toString(36).slice(2), type: src.type, title: src.title, elements: JSON.parse(JSON.stringify(src.elements || [])) });
+    _mbPageIndex += 1; _mbSelected = -1;
+    renderMoodboardCanvas(); _mbAutosave();
+}
+function deleteLayoutPage() {
+    _mbMigratePages();
+    const pages = editorialContent.layoutPages;
+    if (pages.length <= 1) { pages[0].elements = []; }
+    else { pages.splice(_mbPageIndex, 1); if (_mbPageIndex >= pages.length) _mbPageIndex = pages.length - 1; }
+    _mbSelected = -1; renderMoodboardCanvas(); _mbAutosave();
+}
+function moveLayoutPage(dir) {
+    _mbMigratePages();
+    const pages = editorialContent.layoutPages;
+    const j = _mbPageIndex + dir;
+    if (j < 0 || j >= pages.length) return;
+    const tmp = pages[_mbPageIndex]; pages[_mbPageIndex] = pages[j]; pages[j] = tmp;
+    _mbPageIndex = j; renderMoodboardCanvas(); _mbAutosave();
+}
+function _mbSetPageType(v) { const p = _mbPage(); p.type = v; p.title = _mbDefaultTitle(v); renderMoodboardCanvas(); _mbAutosave(); }
+function _mbSetPageTitle(v) { _mbPage().title = v; _mbAutosave(); }
+function _mbRenderPageStrip() {
+    const strip = document.getElementById('moodboardPages');
+    if (!strip) return;
+    _mbMigratePages();
+    const pages = editorialContent.layoutPages;
+    strip.innerHTML = '';
+    pages.forEach((p, i) => {
+        const b = document.createElement('button');
+        b.textContent = (i + 1) + (p.title ? ' · ' + p.title : ' · ' + (p.type || 'page'));
+        b.title = 'Switch to page ' + (i + 1);
+        b.onclick = () => _mbSwitchPage(i);
+        b.style.cssText = 'height:26px; padding:0 10px; font-size:0.7rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; white-space:nowrap; ' + (i === _mbPageIndex ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);');
+        strip.appendChild(b);
+    });
+    const pt = document.getElementById('mbPageType'); if (pt) pt.value = pages[_mbPageIndex].type || 'moodboard';
+    const ti = document.getElementById('mbPageTitle'); if (ti && document.activeElement !== ti) ti.value = pages[_mbPageIndex].title || '';
+}
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
@@ -6648,12 +6730,12 @@ function _drawStrategyPage(doc, logos, pageNum, meta, strategy) {
 
 // Moodboard page: freeform layout of image / text / arrow elements, drawn
 // back-to-front by z. Elements carry normalized coords + a loaded _img (images).
-function _drawMoodboardPage(doc, logos, pageNum, meta, tiles) {
+function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text('MOODBOARD', M, M + 14);
+    const title = (typeof pageTitle === 'string') ? pageTitle : 'MOODBOARD';
+    if (title) { doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20); doc.text(title, M, M + 14); }
 
     const order = tiles.map((t, i) => i).sort((a, b) => (tiles[a].z || 0) - (tiles[b].z || 0));
     const _hex = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); if (!m) return [55, 55, 55]; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
@@ -6872,7 +6954,7 @@ function openSpecPdfModal() {
     const ss = document.getElementById('specPdfStrategySecondary'); if (ss) ss.value = st.secondary || '';
     const stt = document.getElementById('specPdfStrategyTertiary'); if (stt) stt.value = st.tertiary || '';
     const mbCount = document.getElementById('specPdfMoodboardCount');
-    if (mbCount) { const n = (editorialContent.moodboard || []).length; mbCount.textContent = n + ' image' + (n === 1 ? '' : 's'); }
+    if (mbCount) { _mbMigratePages(); const n = (editorialContent.layoutPages || []).length; mbCount.textContent = n + ' page' + (n === 1 ? '' : 's'); }
     m.style.display = 'flex';
 }
 
@@ -7125,7 +7207,7 @@ function downloadSpecPdfPreview() {
 }
 
 // ── Moodboard image manager ───────────────────────────────────────────────
-// editorialContent.moodboard is an array of { img: dataURL, caption }. Images
+// _mbEls() is an array of { img: dataURL, caption }. Images
 // are downscaled on import (keeps save/autosave small) and persist with the
 // project. Rendered as a captioned grid in the deck.
 function _downscaleImageFile(file, maxDim, quality, cb) {
@@ -7156,7 +7238,7 @@ let _mbDrag = null;   // { mode, i, startX, startY, ox, oy, ow, r, el }
 
 function _elType(t) { return (t && t.type) ? t.type : 'image'; }
 function _normalizeMoodboard() {
-    const els = editorialContent.moodboard || [];
+    const els = _mbEls() || [];
     let maxZ = 0;
     els.forEach(t => { if (typeof t.z === 'number') maxZ = Math.max(maxZ, t.z); });
     els.forEach(t => {
@@ -7192,7 +7274,7 @@ function _normalizeMoodboard() {
     });
 }
 function _mbBackfillAspects(cb) {
-    const els = editorialContent.moodboard || [];
+    const els = _mbEls() || [];
     let pending = 0;
     els.forEach(t => {
         if (_elType(t) !== 'image') return;
@@ -7208,7 +7290,6 @@ function _mbBackfillAspects(cb) {
 
 function _mbOnResize() { const m = document.getElementById('moodboardModal'); if (m && m.style.display !== 'none') renderMoodboardCanvas(); }
 function openMoodboardModal() {
-    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     const m = document.getElementById('moodboardModal');
     if (!m) return;
     _mbSelected = -1;
@@ -7237,7 +7318,7 @@ function closeMoodboardModal() {
     document.removeEventListener('keydown', _mbKeyDelete);
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     const cnt = document.getElementById('specPdfMoodboardCount');
-    if (cnt) { const n = (editorialContent.moodboard || []).filter(e => _elType(e) === 'image').length; cnt.textContent = n + ' image' + (n === 1 ? '' : 's'); }
+    if (cnt) { const n = (editorialContent.layoutPages || []).length; cnt.textContent = n + ' page' + (n === 1 ? '' : 's'); }
 }
 
 // One arrow segment as a rotated element with a wide transparent hit band so
@@ -7269,7 +7350,7 @@ function renderMoodboardCanvas() {
     const canvas = document.getElementById('moodboardCanvas');
     if (!canvas) return;
     _normalizeMoodboard();
-    const els = editorialContent.moodboard || [];
+    const els = _mbEls() || [];
     const cr = canvas.getBoundingClientRect();
     canvas.innerHTML = '';
     if (_mbPlacing) {
@@ -7360,6 +7441,7 @@ function renderMoodboardCanvas() {
     }
     _mbDrawGuides(canvas);
     _mbUpdateToolbar();
+    _mbRenderPageStrip();
 }
 
 // Map a font role to a CSS stack for the editor preview (PDF uses the real
@@ -7383,7 +7465,7 @@ function _mbDrawGuides(canvas) {
 }
 
 function _mbUpdateToolbar() {
-    const el = (_mbSelected >= 0) ? (editorialContent.moodboard || [])[_mbSelected] : null;
+    const el = (_mbSelected >= 0) ? (_mbEls() || [])[_mbSelected] : null;
     const ty = el ? _elType(el) : null;
     const inp = document.getElementById('mbCaption');
     if (inp) {
@@ -7412,7 +7494,7 @@ function _mbNudgeCapSize(d) { const el = _mbSelEl(); if (el) { el.capSize = Math
 function _mbSetCapSide(v) { const el = _mbSelEl(); if (el) { el.capSide = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbApplyToAll(kind) {
     const el = _mbSelEl(); if (!el) return;
-    const s = _deckStyles(); const arr = editorialContent.moodboard || [];
+    const s = _deckStyles(); const arr = _mbEls() || [];
     if (kind === 'arrow') {
         s.arrowColor = el.color; s.arrowWeight = el.weight;
         arr.forEach(o => { const ty = _elType(o); if (ty === 'arrow' || ty === 'elbow') { o.color = el.color; o.weight = el.weight; } });
@@ -7424,7 +7506,34 @@ function _mbApplyToAll(kind) {
     renderMoodboardCanvas();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
-function _mbSelEl() { return (_mbSelected >= 0) ? editorialContent.moodboard[_mbSelected] : null; }
+
+// ── Default styles panel: single source of truth for new elements + a
+// one-click reapply so the whole layout stays consistent. ──────────────────
+function openDeckStyles() { const m = document.getElementById('deckStylesModal'); if (!m) return; _dsPopulate(); m.style.display = 'flex'; }
+function closeDeckStyles() { const m = document.getElementById('deckStylesModal'); if (m) m.style.display = 'none'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+function _dsPopulate() {
+    const s = _deckStyles();
+    const set = (id, v) => { const e = document.getElementById(id); if (e) e.value = v; };
+    const txt = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+    set('dsArrowColor', s.arrowColor || '#9aa0a6'); txt('dsArrowWtVal', (s.arrowWeight || 1.2).toFixed(1));
+    set('dsTextFont', s.textFont || 'serif'); txt('dsTextSizeVal', Math.round((s.textSize || 0.045) * 1000)); set('dsTextColor', s.textColor || '#222222');
+    txt('dsCapSizeVal', Math.round((s.capSize || 0.02) * 1000)); set('dsCapSide', s.capSide || 'bottom');
+}
+function _dsSet(key, v) { _deckStyles()[key] = v; if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+function _dsNudge(key, d, min, max) { const s = _deckStyles(); s[key] = Math.max(min, Math.min(max, (s[key] || 0) + d)); _dsPopulate(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+function _mbReapplyStyles() {
+    const s = _deckStyles(); const arr = _mbEls() || [];
+    arr.forEach(o => {
+        const ty = _elType(o);
+        if (ty === 'arrow' || ty === 'elbow') { o.color = s.arrowColor; o.weight = s.arrowWeight; }
+        else if (ty === 'text') { o.font = s.textFont; o.size = s.textSize; o.color = s.textColor; }
+        else if (ty === 'image') { o.capSize = s.capSize; o.capSide = s.capSide; }
+    });
+    if (typeof pushHistory === 'function') pushHistory();
+    renderMoodboardCanvas();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+function _mbSelEl() { return (_mbSelected >= 0) ? _mbEls()[_mbSelected] : null; }
 function _mbSetFont(v) { const el = _mbSelEl(); if (el) { el.font = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbNudgeSize(d) { const el = _mbSelEl(); if (el) { el.size = Math.max(0.02, Math.min(0.22, (el.size || 0.045) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetTextColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
@@ -7437,7 +7546,7 @@ function _mbTileDown(e, i) {
     const canvas = document.getElementById('moodboardCanvas');
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
-    const t = editorialContent.moodboard[i];
+    const t = _mbEls()[i];
     _mbDrag = { mode: 'move', i, startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ox1: t.x1, oy1: t.y1, ox2: t.x2, oy2: t.y2, opts: Array.isArray(t.pts) ? t.pts.map(p => ({ x: p.x, y: p.y })) : null };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
@@ -7448,7 +7557,7 @@ function _mbResizeDown(e, i) {
     const canvas = document.getElementById('moodboardCanvas');
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
-    const t = editorialContent.moodboard[i];
+    const t = _mbEls()[i];
     _mbDrag = { mode: 'resize', i, startX: e.clientX, startY: e.clientY, r, ow: t.w, os: t.size };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
@@ -7458,7 +7567,7 @@ function _mbArrowHandleDown(e, i, which) {
     const canvas = document.getElementById('moodboardCanvas');
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
-    const t = editorialContent.moodboard[i];
+    const t = _mbEls()[i];
     _mbDrag = { mode: 'arrow' + which, i, startX: e.clientX, startY: e.clientY, r, ox1: t.x1, oy1: t.y1, ox2: t.x2, oy2: t.y2 };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
@@ -7468,7 +7577,7 @@ function _mbElbowAnchorDown(e, i, k) {
     const canvas = document.getElementById('moodboardCanvas');
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
-    const t = editorialContent.moodboard[i];
+    const t = _mbEls()[i];
     _mbSelected = i;
     _mbDrag = { mode: 'elbowAnchor', i, k, startX: e.clientX, startY: e.clientY, r, opx: t.pts[k].x, opy: t.pts[k].y };
     document.addEventListener('mousemove', _mbMove);
@@ -7476,7 +7585,7 @@ function _mbElbowAnchorDown(e, i, k) {
 }
 function _mbMove(e) {
     if (!_mbDrag) return;
-    const t = editorialContent.moodboard[_mbDrag.i]; if (!t) return;
+    const t = _mbEls()[_mbDrag.i]; if (!t) return;
     const r = _mbDrag.r; const ty = _elType(t);
     const dx = (e.clientX - _mbDrag.startX) / r.width, dy = (e.clientY - _mbDrag.startY) / r.height;
     if (_mbDrag.mode === 'move') {
@@ -7530,11 +7639,11 @@ function _mbCommit() {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     renderMoodboardCanvas();
 }
-function _mbToFront() { const t = editorialContent.moodboard[_mbSelected]; if (!t) return; let mx = 0; editorialContent.moodboard.forEach(o => mx = Math.max(mx, o.z || 0)); t.z = mx + 1; _mbCommit(); }
-function _mbToBack() { const t = editorialContent.moodboard[_mbSelected]; if (!t) return; let mn = 0; editorialContent.moodboard.forEach(o => mn = Math.min(mn, o.z || 0)); t.z = mn - 1; _mbCommit(); }
-function _mbDelete() { if (_mbSelected < 0) return; editorialContent.moodboard.splice(_mbSelected, 1); _mbSelected = -1; _mbCommit(); }
+function _mbToFront() { const t = _mbEls()[_mbSelected]; if (!t) return; let mx = 0; _mbEls().forEach(o => mx = Math.max(mx, o.z || 0)); t.z = mx + 1; _mbCommit(); }
+function _mbToBack() { const t = _mbEls()[_mbSelected]; if (!t) return; let mn = 0; _mbEls().forEach(o => mn = Math.min(mn, o.z || 0)); t.z = mn - 1; _mbCommit(); }
+function _mbDelete() { if (_mbSelected < 0) return; _mbEls().splice(_mbSelected, 1); _mbSelected = -1; _mbCommit(); }
 function _mbInput(v) {
-    const el = (_mbSelected >= 0) ? editorialContent.moodboard[_mbSelected] : null;
+    const el = (_mbSelected >= 0) ? _mbEls()[_mbSelected] : null;
     if (!el) return;
     const ty = _elType(el);
     if (ty === 'image') { el.caption = v; renderMoodboardCanvas(); }
@@ -7542,17 +7651,15 @@ function _mbInput(v) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
 function addMoodboardText() {
-    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     const s = _deckStyles();
-    const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
+    const arr = _mbEls(); let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
     arr.push({ type: 'text', text: 'New note', x: 0.12, y: 0.14, w: 0.4, size: s.textSize || 0.05, color: s.textColor || '#222222', font: s.textFont || 'serif', z: mz + 1 });
     _mbSelected = arr.length - 1;
     _mbCommit();
 }
 function addMoodboardArrow() {
-    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     const s = _deckStyles();
-    const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
+    const arr = _mbEls(); let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
     arr.push({ type: 'arrow', x1: 0.4, y1: 0.42, x2: 0.6, y2: 0.5, color: s.arrowColor || '#9aa0a6', weight: s.arrowWeight || 1.2, z: mz + 1 });
     _mbSelected = arr.length - 1;
     _mbCommit();
@@ -7562,7 +7669,6 @@ function addMoodboardArrow() {
 let _mbPlacing = false;
 let _mbDraft = null;
 function addMoodboardElbow() {
-    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     const s = _deckStyles();
     _mbPlacing = true;
     _mbDraft = { type: 'elbow', pts: [], color: s.arrowColor || '#9aa0a6', weight: s.arrowWeight || 1.2 };
@@ -7593,7 +7699,7 @@ function _mbFinishElbow() {
     document.removeEventListener('keydown', _mbPlaceKey);
     const d = _mbDraft; _mbPlacing = false; _mbDraft = null;
     if (d && d.pts.length >= 2) {
-        const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
+        const arr = _mbEls(); let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
         d.z = mz + 1; arr.push(d); _mbSelected = arr.length - 1;
         _mbCommit();
     } else { renderMoodboardCanvas(); }
@@ -7607,15 +7713,15 @@ function _mbCancelElbow() {
 function addMoodboardImages(event) {
     const files = (event && event.target) ? Array.from(event.target.files || []) : [];
     if (!files.length) return;
-    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     let pending = files.length;
     files.forEach(f => _downscaleImageFile(f, 1000, 0.82, (url, name, w, h) => {
         if (url) {
-            const arr = editorialContent.moodboard;
+            const arr = _mbEls();
+            const s = _deckStyles();
             const idx = arr.length;
             const col = idx % 3, row = Math.floor(idx / 3);
             let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
-            arr.push({ type: 'image', img: url, caption: '', aspect: (w && h) ? (w / h) : 1.33, _aspectReal: true, x: 0.06 + col * 0.31, y: 0.12 + (row % 2) * 0.34, w: 0.28, z: mz + 1 });
+            arr.push({ type: 'image', img: url, caption: '', aspect: (w && h) ? (w / h) : 1.33, _aspectReal: true, x: 0.06 + col * 0.31, y: 0.12 + (row % 2) * 0.34, w: 0.28, capSize: s.capSize || 0.02, capSide: s.capSide || 'bottom', z: mz + 1 });
         }
         if (--pending === 0) { renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
     }));
@@ -7723,15 +7829,20 @@ async function _buildSpecPagePDF(opts) {
     if (inc.narrative) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.'); }
     // — Art Collection Strategy (real): three tier columns —
     if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
-    // — Moodboard (real): freeform image / text / arrow layout, single page —
-    if (inc.moodboard && Array.isArray(editorialContent.moodboard) && editorialContent.moodboard.length) {
-        const src = editorialContent.moodboard;
-        const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-        for (let ti = 0; ti < src.length; ti++) {
-            if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+    // — Layout pages (real): each freeform image / text / arrow page in order —
+    if (inc.moodboard) {
+        _mbMigratePages();
+        const pages = editorialContent.layoutPages || [];
+        for (const page of pages) {
+            const src = page.elements || [];
+            if (!src.length) continue;
+            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+            for (let ti = 0; ti < src.length; ti++) {
+                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+            }
+            newPage();
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title);
         }
-        newPage();
-        _drawMoodboardPage(doc, logos, pageNum, meta, tiles);
     }
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
