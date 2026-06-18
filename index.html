@@ -1065,6 +1065,7 @@
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:8px;">Include pages</label>
         <div style="display:flex; flex-direction:column; gap:7px; margin-bottom:14px; font-size:0.8rem; color:var(--text-main);">
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_cover" checked style="cursor:pointer;"> Cover</label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_timeline" checked style="cursor:pointer;"> Process &amp; Timeline <span style="color:var(--text-muted); font-size:0.7rem;">(phases below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_understanding" checked style="cursor:pointer;"> Project Understanding <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_strategy" checked style="cursor:pointer;"> Art Collection Strategy <span style="color:var(--text-muted); font-size:0.7rem;">(3 tiers below)</span></label>
@@ -1076,7 +1077,10 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <span style="color:var(--text-muted); font-size:0.7rem;">(contacts below)</span></label>
         </div>
 
-        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Project understanding <span style="font-weight:normal; text-transform:none;">(body copy)</span></label>
+        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Process &amp; timeline <span style="font-weight:normal; text-transform:none;">(one per line: Phase | Timeframe)</span></label>
+        <textarea id="specPdfTimeline" rows="3" placeholder="Concept &amp; Narrative | Weeks 1–2&#10;Art Development | Weeks 3–6&#10;Specification | Weeks 7–8&#10;Production &amp; Install | Weeks 9–14" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; font-family:monospace;"></textarea>
+
+        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Project understanding <span style="font-weight:normal; text-transform:none;">(body copy)</span></label>
         <textarea id="specPdfUnderstanding" rows="3" placeholder="Our understanding of the space and audience…" style="width:100%; font-size:0.78rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical;"></textarea>
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Art narrative <span style="font-weight:normal; text-transform:none;">(body copy for the narrative page)</span></label>
