@@ -264,6 +264,11 @@ let redoStack = [];
 let floorplanImageData = '';
 let floorplanImageName = '';
 
+// Editorial copy for the narrative + thank-you pages. Persisted with the
+// project (save/load + autosave), edited in the Presentation PDF dialog.
+// contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
+let editorialContent = { narrative: '', contacts: '' };
+
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
 // A row's `category` field holds one of these keys ('' = none/neutral).
@@ -930,6 +935,7 @@ function performAutosave() {
             projName: projName,
             floorplan: floorplanImageData,
             floorplanName: floorplanImageName,
+            editorial: editorialContent,
             data: snapshotProjectState(),  // reuses the undo snapshot format
         };
         localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(payload));
@@ -976,6 +982,7 @@ function checkAutosaveOnLoad() {
             restoreProjectState(payload.data);
             floorplanImageData = payload.floorplan || '';
             floorplanImageName = payload.floorplanName || '';
+            editorialContent = Object.assign({ narrative: '', contacts: '' }, payload.editorial || {});
             refreshAllViews();
             // After restore, push fresh history (clearing prior so undo doesn't
             // jump back to the pre-restore empty state).
@@ -2188,7 +2195,7 @@ function saveMasterProject() {
     }
     const getStr = (id) => document.getElementById(id).value;
     const globalMeta = { projName: getStr('g_projName'), desc: getStr('g_desc'), date: getStr('g_date'), issued: getStr('g_issued'), client: getStr('g_client'), attn: getStr('g_attn'), delivery: getStr('g_delivery') };
-    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName };
+    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, editorial: editorialContent };
     const blob = new Blob([JSON.stringify(masterData, null, 2)], { type: 'application/json' });
     // Filename uses the user's Project Name + today's date so multiple
     // projects don't overwrite each other in Downloads.
@@ -2224,6 +2231,7 @@ function loadMasterProject(event) {
                 if (data.elevations) elevations = data.elevations;
                 floorplanImageData = data.floorplanImage || '';
                 floorplanImageName = data.floorplanImageName || '';
+                editorialContent = Object.assign({ narrative: '', contacts: '' }, data.editorial || {});
                 // If the loaded project had divergent dashUnit / elevUnit
                 // (a relic of the pre-unified era), the elevations array
                 // values are in elevUnit while dashProjectData is in
@@ -6522,6 +6530,88 @@ function _drawFrameRecPage(doc, logos, pageNum, meta, frames) {
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
+// Studio block for the Thank You page (stable across projects).
+const STUDIO_ADDRESS = ['FARMBOY FINE ARTS\u00AE', 'Suite 307 - 1930 Pandora St', 'Vancouver, BC, Canada  V5L 0C7', 'farmboyfinearts.com'];
+const STUDIO_COPYRIGHT = 'All rights reserved. No part of this document may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of Farmboy Fine Arts.';
+
+// Art Narrative page: title (display) + body copy (serif).
+function _drawNarrativePage(doc, logos, pageNum, meta, narrative) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+    doc.text('ART NARRATIVE', M, M + 14);
+    const body = (narrative || '').trim();
+    if (!body) {
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
+        doc.text('Add narrative copy in the Presentation PDF dialog.', M, M + 50);
+        doc.setTextColor(20, 20, 20);
+    } else {
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(12); doc.setTextColor(45, 45, 45);
+        doc.setLineHeightFactor(1.5);
+        const lines = doc.splitTextToSize(body, PW * 0.60);
+        doc.text(lines, M, M + 56, { baseline: 'top' });
+        doc.setLineHeightFactor(1.15);
+        doc.setTextColor(20, 20, 20);
+    }
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
+// "Good Art. Good People." slogan page (display).
+function _drawSloganPage(doc, logos, pageNum, meta) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.setFontSize(54);
+    const cy = PH * 0.42;
+    doc.text('GOOD ART.', M, cy);
+    doc.text('GOOD PEOPLE.', M, cy + 52);
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
+// Thank You / contacts page. contactsRaw: one per line, fields separated by
+// "|" or "," as Name, Role, Email, Phone. Renders a grid + studio block.
+function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.setFontSize(26);
+    doc.text('THANK YOU FOR', M, M + 18);
+    doc.text('YOUR CONSIDERATION.', M, M + 18 + 28);
+
+    const contacts = (contactsRaw || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+        const p = l.split(/\s*[|,]\s*/);
+        return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' };
+    });
+    const gridTop = M + 96;
+    const cols = Math.min(4, Math.max(1, contacts.length));
+    const colW = (PW - 2 * M) / Math.max(cols, 1);
+    contacts.forEach((c, i) => {
+        const cc = i % cols, rr = Math.floor(i / cols);
+        const x = M + cc * colW;
+        let y = gridTop + rr * 66;
+        doc.setFont(_font('serif'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
+        doc.text(c.name, x, y); y += 13;
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8); doc.setTextColor(90, 90, 90);
+        if (c.role) { doc.text(c.role, x, y); y += 11; }
+        if (c.email) { doc.text(c.email, x, y); y += 11; }
+        if (c.phone) { doc.text(c.phone, x, y); y += 11; }
+        doc.setTextColor(20, 20, 20);
+    });
+
+    let ay = PH - 122;
+    doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8); doc.setTextColor(60, 60, 60);
+    STUDIO_ADDRESS.forEach(line => { doc.text(line, M, ay); ay += 11; });
+    ay += 6;
+    doc.setFontSize(6.5); doc.setTextColor(120, 120, 120);
+    const year = new Date().getFullYear();
+    const cLines = doc.splitTextToSize('\u00A9' + year + ' Farmboy Fine Arts Inc. ' + STUDIO_COPYRIGHT, PW * 0.5);
+    doc.text(cLines, M, ay, { baseline: 'top' });
+    doc.setTextColor(20, 20, 20);
+
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
 // Cover / title page using the project metadata fields (g_projName etc.).
 function _drawCoverPage(doc, logos) {
     const PW = doc.internal.pageSize.getWidth();
@@ -6606,6 +6696,10 @@ function openSpecPdfModal() {
     set('specPdfLocation', meta.location || '');
     const fpStatus = document.getElementById('specPdfFloorplanStatus');
     if (fpStatus) fpStatus.textContent = floorplanImageName || 'No file chosen';
+    const naEl = document.getElementById('specPdfNarrative');
+    if (naEl) naEl.value = editorialContent.narrative || '';
+    const coEl = document.getElementById('specPdfContacts');
+    if (coEl) coEl.value = editorialContent.contacts || '';
     m.style.display = 'flex';
 }
 
@@ -6614,6 +6708,9 @@ function applySpecPdfModal() {
     const ck = (id) => { const el = document.getElementById(id); return !!(el && el.checked); };
     const meta = { code: g('specPdfCode'), version: g('specPdfVersion'), location: g('specPdfLocation') };
     window._specPdfMeta = meta;   // remember for next time
+    editorialContent.narrative = g('specPdfNarrative');
+    editorialContent.contacts = g('specPdfContacts');
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
     const preset = g('specPdfPreset');
     const include = {
         cover: ck('specInc_cover'),
@@ -6881,8 +6978,8 @@ async function _buildSpecPagePDF(opts) {
 
     // — Cover —
     if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
-    // — Narrative (placeholder) —
-    if (inc.narrative) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'ART NARRATIVE', 'Narrative copy for the project'); }
+    // — Art Narrative (real): heading + body copy —
+    if (inc.narrative) { newPage(); _drawNarrativePage(doc, logos, pageNum, meta, editorialContent.narrative); }
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
         const projFrames = await _collectProjectFrames();
@@ -7036,10 +7133,10 @@ async function _buildSpecPagePDF(opts) {
         _drawPdfFooter(doc, logos, pageNum, meta);
     }
 
-    // — Good Art. Good People. (placeholder) —
-    if (inc.slogan) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'GOOD ART. GOOD PEOPLE.', ''); }
-    // — Thank You / contacts (placeholder) —
-    if (inc.contacts) { newPage(); _drawPlaceholderPage(doc, logos, pageNum, meta, 'THANK YOU', 'Contact block'); }
+    // — Good Art. Good People. (real) —
+    if (inc.slogan) { newPage(); _drawSloganPage(doc, logos, pageNum, meta); }
+    // — Thank You / contacts (real) —
+    if (inc.contacts) { newPage(); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     const single = !opts.all && rows[0];
