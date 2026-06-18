@@ -6655,20 +6655,24 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles) {
     doc.text('MOODBOARD', M, M + 14);
 
     const order = tiles.map((t, i) => i).sort((a, b) => (tiles[a].z || 0) - (tiles[b].z || 0));
+    const _hex = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); if (!m) return [55, 55, 55]; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
+    const _fontRole = (f) => f === 'display' ? _font('display') : (f === 'sans' ? 'helvetica' : _font('serif'));
     order.forEach(idx => {
         const t = tiles[idx]; const ty = t.type || 'image';
         if (ty === 'arrow') {
             const Ax = (t.x1 || 0) * PW, Ay = (t.y1 || 0) * PH, Bx = (t.x2 || 0) * PW, By = (t.y2 || 0) * PH;
-            doc.setDrawColor(55, 55, 55); doc.setLineWidth(1.3); doc.line(Ax, Ay, Bx, By);
-            const ang = Math.atan2(By - Ay, Bx - Ax), hl = 9, ha = Math.PI / 7;
+            const c = _hex(t.color || '#9aa0a6'), wt = Math.max(0.4, t.weight || 1.2);
+            doc.setDrawColor(c[0], c[1], c[2]); doc.setLineWidth(wt); doc.line(Ax, Ay, Bx, By);
+            const ang = Math.atan2(By - Ay, Bx - Ax), hl = 6 + wt * 2.2, ha = Math.PI / 7;
             const p1x = Bx - hl * Math.cos(ang - ha), p1y = By - hl * Math.sin(ang - ha);
             const p2x = Bx - hl * Math.cos(ang + ha), p2y = By - hl * Math.sin(ang + ha);
-            doc.setFillColor(55, 55, 55); doc.triangle(Bx, By, p1x, p1y, p2x, p2y, 'F');
+            doc.setFillColor(c[0], c[1], c[2]); doc.triangle(Bx, By, p1x, p1y, p2x, p2y, 'F');
             return;
         }
         if (ty === 'text') {
             const fs = Math.max(6, Math.min(60, (t.size || 0.045) * PH));
-            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(fs); doc.setTextColor(34, 34, 34);
+            const c = _hex(t.color || '#222222');
+            doc.setFont(_fontRole(t.font), 'normal'); doc.setFontSize(fs); doc.setTextColor(c[0], c[1], c[2]);
             doc.text(doc.splitTextToSize(t.text || '', (t.w || 0.4) * PW), (t.x || 0) * PW, (t.y || 0) * PH, { baseline: 'top' });
             doc.setTextColor(20, 20, 20);
             return;
@@ -7146,11 +7150,15 @@ function _normalizeMoodboard() {
             if (typeof t.x !== 'number') t.x = 0.12;
             if (typeof t.y !== 'number') t.y = 0.14;
             if (typeof t.text !== 'string') t.text = 'Text';
+            if (typeof t.color !== 'string') t.color = '#222222';
+            if (typeof t.font !== 'string') t.font = 'serif';
         } else if (ty === 'arrow') {
             if (typeof t.x1 !== 'number') t.x1 = 0.4;
             if (typeof t.y1 !== 'number') t.y1 = 0.4;
             if (typeof t.x2 !== 'number') t.x2 = 0.6;
             if (typeof t.y2 !== 'number') t.y2 = 0.48;
+            if (typeof t.color !== 'string') t.color = '#9aa0a6';
+            if (typeof t.weight !== 'number') t.weight = 1.2;
         }
     });
 }
@@ -7212,11 +7220,13 @@ function renderMoodboardCanvas() {
         if (ty === 'arrow') {
             const Ax = t.x1 * cr.width, Ay = t.y1 * cr.height, Bx = t.x2 * cr.width, By = t.y2 * cr.height;
             const len = Math.hypot(Bx - Ax, By - Ay), ang = Math.atan2(By - Ay, Bx - Ax) * 180 / Math.PI;
+            const wt = Math.max(0.5, t.weight || 1.2), col = t.color || '#9aa0a6';
+            const hL = 6 + wt * 2.2, hH = 3 + wt * 1.2;
             const line = document.createElement('div');
             line.dataset.idx = i;
-            line.style.cssText = 'position:absolute; left:' + Ax + 'px; top:' + (Ay - 1) + 'px; width:' + len + 'px; height:2px; background:#333; transform-origin:0 50%; transform:rotate(' + ang + 'deg); cursor:grab;' + (sel ? ' box-shadow:0 0 0 1px #6a6aff;' : '');
+            line.style.cssText = 'position:absolute; left:' + Ax + 'px; top:' + (Ay - wt / 2) + 'px; width:' + len + 'px; height:' + wt + 'px; background:' + col + '; transform-origin:0 50%; transform:rotate(' + ang + 'deg); cursor:grab;' + (sel ? ' box-shadow:0 0 0 1px #6a6aff;' : '');
             const head = document.createElement('div');
-            head.style.cssText = 'position:absolute; right:-1px; top:-4px; width:0; height:0; border-left:9px solid #333; border-top:5px solid transparent; border-bottom:5px solid transparent;';
+            head.style.cssText = 'position:absolute; right:-1px; top:' + (wt / 2 - hH) + 'px; width:0; height:0; border-left:' + hL + 'px solid ' + col + '; border-top:' + hH + 'px solid transparent; border-bottom:' + hH + 'px solid transparent;';
             line.appendChild(head);
             line.onmousedown = (e) => _mbTileDown(e, i);
             canvas.appendChild(line);
@@ -7233,7 +7243,7 @@ function renderMoodboardCanvas() {
         const box = document.createElement('div'); box.dataset.idx = i;
         if (ty === 'text') {
             const fs = Math.max(8, (t.size || 0.045) * cr.height);
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:Georgia, "Times New Roman", serif;' + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:' + _mbFontCss(t.font) + ';' + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
             box.textContent = t.text || 'Text';
         } else {
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; aspect-ratio:' + (t.aspect || 1.33) + '; cursor:grab; box-shadow:0 1px 6px rgba(0,0,0,0.35);' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
@@ -7257,7 +7267,28 @@ function renderMoodboardCanvas() {
         box.onmousedown = (e) => _mbTileDown(e, i);
         canvas.appendChild(box);
     });
+    _mbDrawGuides(canvas);
     _mbUpdateToolbar();
+}
+
+// Map a font role to a CSS stack for the editor preview (PDF uses the real
+// embedded faces). display ≈ Druk (condensed bold sans), serif ≈ Messina.
+function _mbFontCss(font) {
+    if (font === 'display') return '"Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif';
+    if (font === 'sans') return 'Helvetica, Arial, sans-serif';
+    return 'Georgia, "Times New Roman", serif';
+}
+// Faded, non-interactive guides showing where the title, footer, and page
+// margins print — so elements don't get buried under deck chrome.
+function _mbDrawGuides(canvas) {
+    const mk = (css, text) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute; pointer-events:none; ' + css; if (text) d.textContent = text; canvas.appendChild(d); };
+    // page margin frame (≈40pt on a 936×540 page)
+    mk('left:4.3%; top:7.4%; right:4.3%; bottom:7.4%; border:1px dashed rgba(0,0,0,0.16);');
+    // title zone (top-left, where the page title prints)
+    mk('left:4.3%; top:3.5%; font:700 16px "Arial Narrow",sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.16);', 'TITLE');
+    // footer band
+    mk('left:4.3%; right:4.3%; bottom:2.6%; border-top:1px solid rgba(0,0,0,0.12);');
+    mk('left:4.3%; bottom:1.0%; font:10px Georgia,serif; color:rgba(0,0,0,0.18);', 'PROJECT – CITY, COUNTRY | CODE   ·   footer');
 }
 
 function _mbUpdateToolbar() {
@@ -7270,8 +7301,24 @@ function _mbUpdateToolbar() {
         else { inp.disabled = true; inp.placeholder = 'Select an element'; }
         if (document.activeElement !== inp) inp.value = el ? (ty === 'text' ? (el.text || '') : (el.caption || '')) : '';
     }
+    const tctl = document.getElementById('mbTextCtl'); if (tctl) tctl.style.display = (ty === 'text') ? 'flex' : 'none';
+    const actl = document.getElementById('mbArrowCtl'); if (actl) actl.style.display = (ty === 'arrow') ? 'flex' : 'none';
+    if (ty === 'text') {
+        const f = document.getElementById('mbFont'); if (f) f.value = el.font || 'serif';
+        const sv = document.getElementById('mbSizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 1000);
+        const c = document.getElementById('mbTextColor'); if (c) c.value = el.color || '#222222';
+    } else if (ty === 'arrow') {
+        const c = document.getElementById('mbArrowColor'); if (c) c.value = el.color || '#9aa0a6';
+        const wv = document.getElementById('mbWtVal'); if (wv) wv.textContent = (el.weight || 1.2).toFixed(1);
+    }
     ['mbFront', 'mbBack', 'mbDelete'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = !el; });
 }
+function _mbSelEl() { return (_mbSelected >= 0) ? editorialContent.moodboard[_mbSelected] : null; }
+function _mbSetFont(v) { const el = _mbSelEl(); if (el) { el.font = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _mbNudgeSize(d) { const el = _mbSelEl(); if (el) { el.size = Math.max(0.02, Math.min(0.22, (el.size || 0.045) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _mbSetTextColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _mbSetArrowColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _mbNudgeWeight(d) { const el = _mbSelEl(); if (el) { el.weight = Math.max(0.5, Math.min(6, (el.weight || 1.2) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 
 function _mbTileDown(e, i) {
     e.preventDefault();
@@ -7311,19 +7358,30 @@ function _mbMove(e) {
     const r = _mbDrag.r; const ty = _elType(t);
     const dx = (e.clientX - _mbDrag.startX) / r.width, dy = (e.clientY - _mbDrag.startY) / r.height;
     if (_mbDrag.mode === 'move') {
+        let mdx = dx, mdy = dy;
+        if (e.shiftKey) { if (Math.abs(dx * r.width) >= Math.abs(dy * r.height)) mdy = 0; else mdx = 0; }
         if (ty === 'arrow') {
-            t.x1 = _mbDrag.ox1 + dx; t.y1 = _mbDrag.oy1 + dy; t.x2 = _mbDrag.ox2 + dx; t.y2 = _mbDrag.oy2 + dy;
+            t.x1 = _mbDrag.ox1 + mdx; t.y1 = _mbDrag.oy1 + mdy; t.x2 = _mbDrag.ox2 + mdx; t.y2 = _mbDrag.oy2 + mdy;
         } else {
-            t.x = Math.max(-0.1, Math.min(1.05, _mbDrag.ox + dx));
-            t.y = Math.max(-0.1, Math.min(1.05, _mbDrag.oy + dy));
+            t.x = Math.max(-0.1, Math.min(1.05, _mbDrag.ox + mdx));
+            t.y = Math.max(-0.1, Math.min(1.05, _mbDrag.oy + mdy));
         }
     } else if (_mbDrag.mode === 'resize') {
-        if (ty === 'text') t.size = Math.max(0.02, Math.min(0.22, (_mbDrag.os || 0.045) + dy));
-        else t.w = Math.max(0.06, Math.min(1.0, (_mbDrag.ow || 0.28) + dx));
-    } else if (_mbDrag.mode === 'arrowA') {
-        t.x1 = _mbDrag.ox1 + dx; t.y1 = _mbDrag.oy1 + dy;
-    } else if (_mbDrag.mode === 'arrowB') {
-        t.x2 = _mbDrag.ox2 + dx; t.y2 = _mbDrag.oy2 + dy;
+        t.w = Math.max(0.06, Math.min(1.0, (_mbDrag.ow || 0.28) + dx));   // shapes box / image width
+    } else if (_mbDrag.mode === 'arrowA' || _mbDrag.mode === 'arrowB') {
+        const movingA = (_mbDrag.mode === 'arrowA');
+        const fx = movingA ? _mbDrag.ox2 : _mbDrag.ox1;
+        const fy = movingA ? _mbDrag.oy2 : _mbDrag.oy1;
+        let nx = (movingA ? _mbDrag.ox1 : _mbDrag.ox2) + dx;
+        let ny = (movingA ? _mbDrag.oy1 : _mbDrag.oy2) + dy;
+        if (e.shiftKey) {   // snap to nearest 45° in screen space
+            const vpx = (nx - fx) * r.width, vpy = (ny - fy) * r.height;
+            const len = Math.hypot(vpx, vpy);
+            const snap = Math.round(Math.atan2(vpy, vpx) / (Math.PI / 4)) * (Math.PI / 4);
+            nx = fx + (Math.cos(snap) * len) / r.width;
+            ny = fy + (Math.sin(snap) * len) / r.height;
+        }
+        if (movingA) { t.x1 = nx; t.y1 = ny; } else { t.x2 = nx; t.y2 = ny; }
     }
     renderMoodboardCanvas();
 }
@@ -7355,14 +7413,14 @@ function _mbInput(v) {
 function addMoodboardText() {
     if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
-    arr.push({ type: 'text', text: 'New note', x: 0.12, y: 0.14, w: 0.4, size: 0.05, z: mz + 1 });
+    arr.push({ type: 'text', text: 'New note', x: 0.12, y: 0.14, w: 0.4, size: 0.05, color: '#222222', font: 'serif', z: mz + 1 });
     _mbSelected = arr.length - 1;
     _mbCommit();
 }
 function addMoodboardArrow() {
     if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
     const arr = editorialContent.moodboard; let mz = 0; arr.forEach(o => mz = Math.max(mz, o.z || 0));
-    arr.push({ type: 'arrow', x1: 0.4, y1: 0.42, x2: 0.6, y2: 0.5, z: mz + 1 });
+    arr.push({ type: 'arrow', x1: 0.4, y1: 0.42, x2: 0.6, y2: 0.5, color: '#9aa0a6', weight: 1.2, z: mz + 1 });
     _mbSelected = arr.length - 1;
     _mbCommit();
 }
