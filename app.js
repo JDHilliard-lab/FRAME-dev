@@ -7288,6 +7288,61 @@ function addMoodboardImages(event) {
     if (event.target) event.target.value = '';
 }
 
+// ── Copy editor popup ─────────────────────────────────────────────────────
+// Focused editor for prose fields. Each has a soft word limit tuned to how
+// much fits that page's text column, with a live count that warns before copy
+// would run off the page. Writes back to the field and persists immediately.
+const COPY_LIMITS = {
+    specPdfUnderstanding: 300,
+    specPdfNarrative: 300,
+    specPdfStrategyPrimary: 110,
+    specPdfStrategySecondary: 110,
+    specPdfStrategyTertiary: 110,
+};
+function _copyWordCount(s) { s = (s || '').trim(); return s ? s.split(/\s+/).length : 0; }
+function _syncCopyField(id, v) {
+    if (id === 'specPdfUnderstanding') editorialContent.understanding = v;
+    else if (id === 'specPdfNarrative') editorialContent.narrative = v;
+    else if (id === 'specPdfStrategyPrimary' || id === 'specPdfStrategySecondary' || id === 'specPdfStrategyTertiary') {
+        editorialContent.strategy = editorialContent.strategy || { primary: '', secondary: '', tertiary: '' };
+        const key = id === 'specPdfStrategyPrimary' ? 'primary' : (id === 'specPdfStrategySecondary' ? 'secondary' : 'tertiary');
+        editorialContent.strategy[key] = v;
+    }
+}
+function openCopyEditor(targetId, title) {
+    const modal = document.getElementById('copyEditModal');
+    if (!modal) return;
+    const src = document.getElementById(targetId);
+    window._copyEditTarget = targetId;
+    const tEl = document.getElementById('copyEditTitle');
+    if (tEl) tEl.textContent = title || 'Edit copy';
+    const area = document.getElementById('copyEditArea');
+    if (area) area.value = src ? src.value : '';
+    updateCopyCount();
+    modal.style.display = 'flex';
+    if (area) setTimeout(() => area.focus(), 30);
+}
+function updateCopyCount() {
+    const area = document.getElementById('copyEditArea');
+    const el = document.getElementById('copyEditCount');
+    if (!area || !el) return;
+    const limit = COPY_LIMITS[window._copyEditTarget] || 300;
+    const w = _copyWordCount(area.value);
+    let color = 'var(--text-muted)', note = '';
+    if (w > limit) { color = '#c0392b'; note = ' \u2014 over by ' + (w - limit) + ', may run off the page'; }
+    else if (w > limit * 0.85) { color = '#b8860b'; note = ' \u2014 approaching limit'; }
+    el.style.color = color;
+    el.textContent = w + ' / ' + limit + ' words' + note;
+}
+function saveCopyEditor() {
+    const area = document.getElementById('copyEditArea');
+    const id = window._copyEditTarget;
+    const src = document.getElementById(id);
+    if (src && area) { src.value = area.value; _syncCopyField(id, area.value); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+    closeCopyEditor();
+}
+function closeCopyEditor() { const m = document.getElementById('copyEditModal'); if (m) m.style.display = 'none'; }
+
 async function _buildSpecPagePDF(opts) {
     const { jsPDF } = window.jspdf;
     const wantSpec = opts.include ? !!opts.include.spec : true;
