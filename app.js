@@ -267,8 +267,8 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [] };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [] }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '' };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [], timeline: '' }; }
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
@@ -6536,6 +6536,49 @@ const STUDIO_ADDRESS = ['FARMBOY FINE ARTS\u00AE', 'Suite 307 - 1930 Pandora St'
 const STUDIO_COPYRIGHT = 'All rights reserved. No part of this document may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of Farmboy Fine Arts.';
 
 // Art Narrative page: title (display) + body copy (serif).
+// Process & Timeline page: a horizontal phase timeline. raw is one phase per
+// line, "Label | Timeframe" (commas also accepted).
+function _drawTimelinePage(doc, logos, pageNum, meta, raw) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+    doc.text('PROCESS & TIMELINE', M, M + 14);
+
+    const phases = (raw || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+        const p = l.split(/\s*[|,]\s*/);
+        return { label: p[0] || '', when: p[1] || '' };
+    });
+    if (!phases.length) {
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
+        doc.text('Add phases in the Presentation PDF dialog (one per line: Phase | Timeframe).', M, M + 50);
+        doc.setTextColor(20, 20, 20);
+        _drawPdfFooter(doc, logos, pageNum, meta);
+        return;
+    }
+    const n = phases.length;
+    const x0 = M + 24, x1 = PW - M - 24;
+    const midY = PH * 0.50;
+    const step = n > 1 ? (x1 - x0) / (n - 1) : 0;
+    const wrapW = (step ? step * 0.92 : (x1 - x0));
+    doc.setDrawColor(205, 205, 205); doc.setLineWidth(1); doc.line(x0, midY, x1, midY);
+    phases.forEach((p, i) => {
+        const cx = n > 1 ? x0 + i * step : (x0 + x1) / 2;
+        doc.setFillColor(40, 40, 40); doc.setDrawColor(255, 255, 255); doc.setLineWidth(1.5);
+        doc.circle(cx, midY, 5, 'FD');
+        doc.setFont(_font('display'), 'bold'); doc.setFontSize(15); doc.setTextColor(20, 20, 20);
+        doc.text(String(i + 1).padStart(2, '0'), cx, midY - 48, { align: 'center' });
+        doc.setFont(_font('serif'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
+        doc.text(doc.splitTextToSize(p.label, wrapW), cx, midY - 32, { align: 'center', baseline: 'top' });
+        if (p.when) {
+            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8.5); doc.setTextColor(110, 110, 110);
+            doc.text(doc.splitTextToSize(p.when, wrapW), cx, midY + 18, { align: 'center', baseline: 'top' });
+            doc.setTextColor(20, 20, 20);
+        }
+    });
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
 // Generic prose page: display title + serif body column. Reused by Art
 // Narrative and Project Understanding.
 function _drawProsePage(doc, logos, pageNum, meta, title, body, hint) {
@@ -6785,6 +6828,8 @@ function openSpecPdfModal() {
     if (coEl) coEl.value = editorialContent.contacts || '';
     const unEl = document.getElementById('specPdfUnderstanding');
     if (unEl) unEl.value = editorialContent.understanding || '';
+    const tlEl = document.getElementById('specPdfTimeline');
+    if (tlEl) tlEl.value = editorialContent.timeline || '';
     const st = editorialContent.strategy || {};
     const sp = document.getElementById('specPdfStrategyPrimary'); if (sp) sp.value = st.primary || '';
     const ss = document.getElementById('specPdfStrategySecondary'); if (ss) ss.value = st.secondary || '';
@@ -6802,6 +6847,7 @@ function applySpecPdfModal() {
     editorialContent.narrative = g('specPdfNarrative');
     editorialContent.contacts = g('specPdfContacts');
     editorialContent.understanding = g('specPdfUnderstanding');
+    editorialContent.timeline = g('specPdfTimeline');
     editorialContent.strategy = {
         primary: g('specPdfStrategyPrimary'),
         secondary: g('specPdfStrategySecondary'),
@@ -6811,6 +6857,7 @@ function applySpecPdfModal() {
     const preset = g('specPdfPreset');
     const include = {
         cover: ck('specInc_cover'),
+        timeline: ck('specInc_timeline'),
         understanding: ck('specInc_understanding'),
         narrative: ck('specInc_narrative'),
         strategy: ck('specInc_strategy'),
@@ -7167,6 +7214,8 @@ async function _buildSpecPagePDF(opts) {
 
     // — Cover —
     if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
+    // — Process & Timeline (real) —
+    if (inc.timeline) { newPage(); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
     // — Project Understanding (real): heading + body copy —
     if (inc.understanding) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); }
     // — Art Narrative (real): heading + body copy —
