@@ -267,8 +267,8 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [] };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, moodboard: [] }; }
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
@@ -6602,6 +6602,44 @@ function _drawStrategyPage(doc, logos, pageNum, meta, strategy) {
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
+// Moodboard page: captioned image grid (3×2 per page). `tiles` is one page's
+// worth, each { _img: HTMLImage|null, caption }.
+function _drawMoodboardPage(doc, logos, pageNum, meta, tiles) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+    doc.text('MOODBOARD', M, M + 14);
+
+    const cols = 3, rows = 2, gap = 20, capH = 16;
+    const gridTop = M + 50;
+    const cardW = (PW - 2 * M - (cols - 1) * gap) / cols;
+    const availH = PH - gridTop - 44;
+    const cellH = (availH - (rows - 1) * gap) / rows;
+    const imgH = cellH - capH;
+    tiles.forEach((t, i) => {
+        const c = i % cols, rr = Math.floor(i / cols);
+        const x = M + c * (cardW + gap);
+        const y = gridTop + rr * (cellH + gap);
+        const im = t._img;
+        if (im && (im.naturalWidth || im.width)) {
+            const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height;
+            const fit = Math.min(cardW / iw, imgH / ih);
+            const dw = iw * fit, dh = ih * fit;
+            const dx = x + (cardW - dw) / 2, dy = y + (imgH - dh) / 2;
+            try { doc.addImage(im, 'JPEG', dx, dy, dw, dh); } catch (e) { try { doc.addImage(im, 'PNG', dx, dy, dw, dh); } catch (e2) {} }
+        } else {
+            doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.5); doc.rect(x, y, cardW, imgH, 'S');
+        }
+        if (t.caption) {
+            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8); doc.setTextColor(80, 80, 80);
+            doc.text(doc.splitTextToSize(t.caption, cardW)[0] || t.caption, x, y + imgH + 11);
+            doc.setTextColor(20, 20, 20);
+        }
+    });
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
 // "Good Art. Good People." slogan page (display).
 function _drawSloganPage(doc, logos, pageNum, meta) {
     const PW = doc.internal.pageSize.getWidth();
@@ -6751,6 +6789,8 @@ function openSpecPdfModal() {
     const sp = document.getElementById('specPdfStrategyPrimary'); if (sp) sp.value = st.primary || '';
     const ss = document.getElementById('specPdfStrategySecondary'); if (ss) ss.value = st.secondary || '';
     const stt = document.getElementById('specPdfStrategyTertiary'); if (stt) stt.value = st.tertiary || '';
+    const mbCount = document.getElementById('specPdfMoodboardCount');
+    if (mbCount) { const n = (editorialContent.moodboard || []).length; mbCount.textContent = n + ' image' + (n === 1 ? '' : 's'); }
     m.style.display = 'flex';
 }
 
@@ -6774,6 +6814,7 @@ function applySpecPdfModal() {
         understanding: ck('specInc_understanding'),
         narrative: ck('specInc_narrative'),
         strategy: ck('specInc_strategy'),
+        moodboard: ck('specInc_moodboard'),
         frameRec: ck('specInc_frameRec'),
         floorplanKey: ck('specInc_floorplanKey'),
         spec: ck('specInc_spec'),
@@ -6999,6 +7040,95 @@ function downloadSpecPdfPreview() {
     if (window._lastSpecDoc) { try { window._lastSpecDoc.save(window._lastSpecName || 'FRAME_Presentation.pdf'); } catch (e) {} }
 }
 
+// ── Moodboard image manager ───────────────────────────────────────────────
+// editorialContent.moodboard is an array of { img: dataURL, caption }. Images
+// are downscaled on import (keeps save/autosave small) and persist with the
+// project. Rendered as a captioned grid in the deck.
+function _downscaleImageFile(file, maxDim, quality, cb) {
+    const reader = new FileReader();
+    reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+            let w = img.naturalWidth, h = img.naturalHeight;
+            const scale = Math.min(1, maxDim / Math.max(w, h || 1));
+            w = Math.max(1, Math.round(w * scale)); h = Math.max(1, Math.round(h * scale));
+            try {
+                const c = document.createElement('canvas'); c.width = w; c.height = h;
+                c.getContext('2d').drawImage(img, 0, 0, w, h);
+                cb(c.toDataURL('image/jpeg', quality || 0.82), file.name);
+            } catch (e) { cb(reader.result, file.name); }
+        };
+        img.onerror = () => cb(null, file.name);
+        img.src = reader.result;
+    };
+    reader.onerror = () => cb(null, file.name);
+    reader.readAsDataURL(file);
+}
+
+function openMoodboardModal() {
+    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
+    const m = document.getElementById('moodboardModal');
+    if (!m) return;
+    renderMoodboard();
+    m.style.display = 'flex';
+}
+function closeMoodboardModal() {
+    const m = document.getElementById('moodboardModal');
+    if (m) m.style.display = 'none';
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    const btn = document.getElementById('specPdfMoodboardCount');
+    if (btn) btn.textContent = (editorialContent.moodboard || []).length + ' image' + ((editorialContent.moodboard || []).length === 1 ? '' : 's');
+}
+function renderMoodboard() {
+    const grid = document.getElementById('moodboardGrid');
+    if (!grid) return;
+    const tiles = editorialContent.moodboard || [];
+    grid.innerHTML = '';
+    if (!tiles.length) {
+        const p = document.createElement('p');
+        p.style.cssText = 'color:var(--text-muted); font-size:0.8rem; grid-column:1/-1;';
+        p.textContent = 'No images yet. Click "Add images" to build your moodboard.';
+        grid.appendChild(p);
+        return;
+    }
+    tiles.forEach((t, i) => {
+        const cell = document.createElement('div');
+        cell.style.cssText = 'border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:var(--bg-input); display:flex; flex-direction:column;';
+        const imgWrap = document.createElement('div');
+        imgWrap.style.cssText = 'position:relative; height:120px; background:rgba(0,0,0,0.18); display:flex; align-items:center; justify-content:center;';
+        const img = document.createElement('img');
+        img.src = t.img; img.style.cssText = 'max-width:100%; max-height:100%; display:block;';
+        const rm = document.createElement('button');
+        rm.textContent = '\u00D7'; rm.title = 'Remove';
+        rm.style.cssText = 'position:absolute; top:4px; right:4px; width:22px; height:22px; border:0; border-radius:50%; background:rgba(0,0,0,0.6); color:#fff; cursor:pointer; font-size:14px; line-height:1;';
+        rm.onclick = () => removeMoodboardImage(i);
+        imgWrap.appendChild(img); imgWrap.appendChild(rm);
+        const cap = document.createElement('input');
+        cap.type = 'text'; cap.value = t.caption || ''; cap.placeholder = 'Caption';
+        cap.style.cssText = 'border:0; border-top:1px solid var(--border-color); padding:6px 8px; font-size:0.72rem; background:var(--bg-panel); color:var(--text-main); width:100%; box-sizing:border-box;';
+        cap.oninput = (e) => { editorialContent.moodboard[i].caption = e.target.value; };
+        cap.onchange = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
+        cell.appendChild(imgWrap); cell.appendChild(cap);
+        grid.appendChild(cell);
+    });
+}
+function addMoodboardImages(event) {
+    const files = (event && event.target) ? Array.from(event.target.files || []) : [];
+    if (!files.length) return;
+    if (!Array.isArray(editorialContent.moodboard)) editorialContent.moodboard = [];
+    let pending = files.length;
+    files.forEach(f => _downscaleImageFile(f, 1000, 0.82, (url) => {
+        if (url) editorialContent.moodboard.push({ img: url, caption: '' });
+        if (--pending === 0) { renderMoodboard(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+    }));
+    if (event.target) event.target.value = '';
+}
+function removeMoodboardImage(i) {
+    (editorialContent.moodboard || []).splice(i, 1);
+    renderMoodboard();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+
 async function _buildSpecPagePDF(opts) {
     const { jsPDF } = window.jspdf;
     const wantSpec = opts.include ? !!opts.include.spec : true;
@@ -7043,6 +7173,14 @@ async function _buildSpecPagePDF(opts) {
     if (inc.narrative) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.'); }
     // — Art Collection Strategy (real): three tier columns —
     if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
+    // — Moodboard (real): captioned image grid, paginated —
+    if (inc.moodboard && Array.isArray(editorialContent.moodboard) && editorialContent.moodboard.length) {
+        const src = editorialContent.moodboard;
+        const tiles = src.map(t => ({ caption: t.caption, _img: null }));
+        for (let ti = 0; ti < src.length; ti++) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+        const per = 6;   // 3 × 2
+        for (let i = 0; i < tiles.length; i += per) { newPage(); _drawMoodboardPage(doc, logos, pageNum, meta, tiles.slice(i, i + per)); }
+    }
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
         const projFrames = await _collectProjectFrames();
