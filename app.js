@@ -267,16 +267,17 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '' };
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' } }; }
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
 // A row's `category` field holds one of these keys ('' = none/neutral).
 const ART_CATEGORIES = [
-    { key: '',          label: 'None',      color: '#444444' },
-    { key: 'primary',   label: 'Primary',   color: '#E2231A' },
-    { key: 'secondary', label: 'Secondary', color: '#1F9E4A' },
-    { key: 'tertiary',  label: 'Tertiary',  color: '#2D5BD6' },
+    { key: '',          label: 'None',      sub: '',                      color: '#444444' },
+    { key: 'primary',   label: 'Primary',   sub: 'Fine Art Original',     color: '#E2231A' },
+    { key: 'secondary', label: 'Secondary', sub: 'Licensed Reproduction', color: '#1F9E4A' },
+    { key: 'tertiary',  label: 'Tertiary',  sub: 'Licensed Reproduction', color: '#2D5BD6' },
 ];
 function categoryColor(key) {
     const c = ART_CATEGORIES.find(c => c.key === (key || ''));
@@ -982,7 +983,7 @@ function checkAutosaveOnLoad() {
             restoreProjectState(payload.data);
             floorplanImageData = payload.floorplan || '';
             floorplanImageName = payload.floorplanName || '';
-            editorialContent = Object.assign({ narrative: '', contacts: '' }, payload.editorial || {});
+            editorialContent = Object.assign(_editorialDefaults(), payload.editorial || {});
             refreshAllViews();
             // After restore, push fresh history (clearing prior so undo doesn't
             // jump back to the pre-restore empty state).
@@ -2231,7 +2232,7 @@ function loadMasterProject(event) {
                 if (data.elevations) elevations = data.elevations;
                 floorplanImageData = data.floorplanImage || '';
                 floorplanImageName = data.floorplanImageName || '';
-                editorialContent = Object.assign({ narrative: '', contacts: '' }, data.editorial || {});
+                editorialContent = Object.assign(_editorialDefaults(), data.editorial || {});
                 // If the loaded project had divergent dashUnit / elevUnit
                 // (a relic of the pre-unified era), the elevations array
                 // values are in elevUnit while dashProjectData is in
@@ -6535,25 +6536,69 @@ const STUDIO_ADDRESS = ['FARMBOY FINE ARTS\u00AE', 'Suite 307 - 1930 Pandora St'
 const STUDIO_COPYRIGHT = 'All rights reserved. No part of this document may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of Farmboy Fine Arts.';
 
 // Art Narrative page: title (display) + body copy (serif).
-function _drawNarrativePage(doc, logos, pageNum, meta, narrative) {
+// Generic prose page: display title + serif body column. Reused by Art
+// Narrative and Project Understanding.
+function _drawProsePage(doc, logos, pageNum, meta, title, body, hint) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
     doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text('ART NARRATIVE', M, M + 14);
-    const body = (narrative || '').trim();
-    if (!body) {
+    doc.text(title, M, M + 14);
+    const text = (body || '').trim();
+    if (!text) {
         doc.setFont(_font('serif'), 'normal'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
-        doc.text('Add narrative copy in the Presentation PDF dialog.', M, M + 50);
+        doc.text(hint || 'Add copy in the Presentation PDF dialog.', M, M + 50);
         doc.setTextColor(20, 20, 20);
     } else {
         doc.setFont(_font('serif'), 'normal'); doc.setFontSize(12); doc.setTextColor(45, 45, 45);
         doc.setLineHeightFactor(1.5);
-        const lines = doc.splitTextToSize(body, PW * 0.60);
+        const lines = doc.splitTextToSize(text, PW * 0.60);
         doc.text(lines, M, M + 56, { baseline: 'top' });
         doc.setLineHeightFactor(1.15);
         doc.setTextColor(20, 20, 20);
     }
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
+
+// Art Collection Strategy: three tier columns (Primary/Secondary/Tertiary),
+// each a color bar + tier label + sublabel + description. strategy is
+// { primary, secondary, tertiary } of editorial copy.
+function _drawStrategyPage(doc, logos, pageNum, meta, strategy) {
+    const PW = doc.internal.pageSize.getWidth();
+    const PH = doc.internal.pageSize.getHeight();
+    const M = 40;
+    const hx = (h) => { const m = (h || '#444444').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
+    doc.text('ART COLLECTION STRATEGY', M, M + 14);
+
+    const tiers = ART_CATEGORIES.filter(c => c.key);   // drop "None"
+    const s = strategy || {};
+    const gap = 28;
+    const colW = (PW - 2 * M - (tiers.length - 1) * gap) / tiers.length;
+    const top = M + 64;
+    tiers.forEach((cat, i) => {
+        const x = M + i * (colW + gap);
+        const [r, g, b] = hx(cat.color);
+        doc.setFillColor(r, g, b);
+        doc.rect(x, top, colW, 6, 'F');               // tier color bar
+        doc.setFont(_font('display'), 'bold'); doc.setFontSize(15); doc.setTextColor(20, 20, 20);
+        doc.text(cat.label.toUpperCase(), x, top + 26);
+        if (cat.sub) {
+            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9); doc.setTextColor(110, 110, 110);
+            doc.text(cat.sub, x, top + 40);
+        }
+        const copy = (s[cat.key] || '').trim();
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(10); doc.setTextColor(50, 50, 50);
+        doc.setLineHeightFactor(1.45);
+        if (copy) {
+            doc.text(doc.splitTextToSize(copy, colW), x, top + 58, { baseline: 'top' });
+        } else {
+            doc.setTextColor(170, 170, 170);
+            doc.text(doc.splitTextToSize('Add ' + cat.label.toLowerCase() + ' strategy copy in the dialog.', colW), x, top + 58, { baseline: 'top' });
+        }
+        doc.setLineHeightFactor(1.15);
+        doc.setTextColor(20, 20, 20);
+    });
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
@@ -6700,6 +6745,12 @@ function openSpecPdfModal() {
     if (naEl) naEl.value = editorialContent.narrative || '';
     const coEl = document.getElementById('specPdfContacts');
     if (coEl) coEl.value = editorialContent.contacts || '';
+    const unEl = document.getElementById('specPdfUnderstanding');
+    if (unEl) unEl.value = editorialContent.understanding || '';
+    const st = editorialContent.strategy || {};
+    const sp = document.getElementById('specPdfStrategyPrimary'); if (sp) sp.value = st.primary || '';
+    const ss = document.getElementById('specPdfStrategySecondary'); if (ss) ss.value = st.secondary || '';
+    const stt = document.getElementById('specPdfStrategyTertiary'); if (stt) stt.value = st.tertiary || '';
     m.style.display = 'flex';
 }
 
@@ -6710,11 +6761,19 @@ function applySpecPdfModal() {
     window._specPdfMeta = meta;   // remember for next time
     editorialContent.narrative = g('specPdfNarrative');
     editorialContent.contacts = g('specPdfContacts');
+    editorialContent.understanding = g('specPdfUnderstanding');
+    editorialContent.strategy = {
+        primary: g('specPdfStrategyPrimary'),
+        secondary: g('specPdfStrategySecondary'),
+        tertiary: g('specPdfStrategyTertiary'),
+    };
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     const preset = g('specPdfPreset');
     const include = {
         cover: ck('specInc_cover'),
+        understanding: ck('specInc_understanding'),
         narrative: ck('specInc_narrative'),
+        strategy: ck('specInc_strategy'),
         frameRec: ck('specInc_frameRec'),
         floorplanKey: ck('specInc_floorplanKey'),
         spec: ck('specInc_spec'),
@@ -6978,8 +7037,12 @@ async function _buildSpecPagePDF(opts) {
 
     // — Cover —
     if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
+    // — Project Understanding (real): heading + body copy —
+    if (inc.understanding) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); }
     // — Art Narrative (real): heading + body copy —
-    if (inc.narrative) { newPage(); _drawNarrativePage(doc, logos, pageNum, meta, editorialContent.narrative); }
+    if (inc.narrative) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.'); }
+    // — Art Collection Strategy (real): three tier columns —
+    if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
         const projFrames = await _collectProjectFrames();
