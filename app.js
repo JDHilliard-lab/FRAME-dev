@@ -6703,8 +6703,17 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles) {
             doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.5); doc.rect(x, y, w, h, 'S');
         }
         if (t.caption) {
-            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(7.5); doc.setTextColor(90, 90, 90);
-            doc.text(doc.splitTextToSize(t.caption, Math.max(w, 60))[0] || t.caption, x, y + h + 10);
+            const cs = Math.max(6, Math.min(40, (t.capSize || 0.02) * PH));
+            const side = t.capSide || 'bottom';
+            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(cs); doc.setTextColor(90, 90, 90);
+            const lineH = cs * 1.2;
+            const lines = doc.splitTextToSize(t.caption, w);
+            const totalH = lines.length * lineH;
+            let cx = x, cy = y + h + 3, align = 'left';
+            if (side === 'top') { cy = y - 3 - totalH; }
+            else if (side === 'left') { cx = x - 5; cy = y; align = 'right'; }
+            else if (side === 'right') { cx = x + w + 5; cy = y; }
+            doc.text(lines, cx, cy, { baseline: 'top', align: align });
             doc.setTextColor(20, 20, 20);
         }
     });
@@ -7158,6 +7167,8 @@ function _normalizeMoodboard() {
             if (typeof t.w !== 'number') t.w = 0.28;
             if (typeof t.x !== 'number') t.x = 0.1;
             if (typeof t.y !== 'number') t.y = 0.15;
+            if (typeof t.capSize !== 'number') t.capSize = 0.02;
+            if (typeof t.capSide !== 'string') t.capSide = 'bottom';
         } else if (ty === 'text') {
             if (typeof t.w !== 'number') t.w = 0.4;
             if (typeof t.size !== 'number') t.size = 0.045;
@@ -7311,7 +7322,13 @@ function renderMoodboardCanvas() {
             if (t.caption) {
                 const cap = document.createElement('div');
                 cap.textContent = t.caption;
-                cap.style.cssText = 'position:absolute; left:0; bottom:-15px; font-size:9px; color:#555; white-space:nowrap; overflow:hidden; max-width:160%;';
+                const cfs = Math.max(7, (t.capSize || 0.02) * cr.height);
+                const side = t.capSide || 'bottom';
+                let pos = 'left:0; top:100%; width:100%; margin-top:3px; text-align:left;';
+                if (side === 'top') pos = 'left:0; bottom:100%; width:100%; margin-bottom:3px; text-align:left;';
+                else if (side === 'left') pos = 'right:100%; top:0; width:100%; margin-right:5px; text-align:right;';
+                else if (side === 'right') pos = 'left:100%; top:0; width:100%; margin-left:5px; text-align:left;';
+                cap.style.cssText = 'position:absolute; ' + pos + ' font-size:' + cfs + 'px; line-height:1.2; color:#555; white-space:normal; overflow-wrap:break-word; pointer-events:none; font-family:Georgia, serif;';
                 box.appendChild(cap);
             }
         }
@@ -7377,6 +7394,7 @@ function _mbUpdateToolbar() {
     }
     const tctl = document.getElementById('mbTextCtl'); if (tctl) tctl.style.display = (ty === 'text') ? 'flex' : 'none';
     const actl = document.getElementById('mbArrowCtl'); if (actl) actl.style.display = (ty === 'arrow' || ty === 'elbow') ? 'flex' : 'none';
+    const ictl = document.getElementById('mbImgCtl'); if (ictl) ictl.style.display = (ty === 'image') ? 'flex' : 'none';
     if (ty === 'text') {
         const f = document.getElementById('mbFont'); if (f) f.value = el.font || 'serif';
         const sv = document.getElementById('mbSizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 1000);
@@ -7384,9 +7402,14 @@ function _mbUpdateToolbar() {
     } else if (ty === 'arrow' || ty === 'elbow') {
         const c = document.getElementById('mbArrowColor'); if (c) c.value = el.color || '#9aa0a6';
         const wv = document.getElementById('mbWtVal'); if (wv) wv.textContent = (el.weight || 1.2).toFixed(1);
+    } else if (ty === 'image') {
+        const cv = document.getElementById('mbCapSizeVal'); if (cv) cv.textContent = Math.round((el.capSize || 0.02) * 1000);
+        const ss = document.getElementById('mbCapSide'); if (ss) ss.value = el.capSide || 'bottom';
     }
     ['mbFront', 'mbBack', 'mbDelete'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = !el; });
 }
+function _mbNudgeCapSize(d) { const el = _mbSelEl(); if (el) { el.capSize = Math.max(0.01, Math.min(0.08, (el.capSize || 0.02) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _mbSetCapSide(v) { const el = _mbSelEl(); if (el) { el.capSide = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbApplyToAll(kind) {
     const el = _mbSelEl(); if (!el) return;
     const s = _deckStyles(); const arr = editorialContent.moodboard || [];
@@ -7514,7 +7537,7 @@ function _mbInput(v) {
     const el = (_mbSelected >= 0) ? editorialContent.moodboard[_mbSelected] : null;
     if (!el) return;
     const ty = _elType(el);
-    if (ty === 'image') el.caption = v;
+    if (ty === 'image') { el.caption = v; renderMoodboardCanvas(); }
     else if (ty === 'text') { el.text = v; renderMoodboardCanvas(); }
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
