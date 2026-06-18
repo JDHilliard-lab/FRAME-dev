@@ -1080,13 +1080,13 @@
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Process &amp; timeline <span style="font-weight:normal; text-transform:none;">(one per line: Phase | Timeframe)</span></label>
         <textarea id="specPdfTimeline" rows="3" placeholder="Concept &amp; Narrative | Weeks 1–2&#10;Art Development | Weeks 3–6&#10;Specification | Weeks 7–8&#10;Production &amp; Install | Weeks 9–14" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; font-family:monospace;"></textarea>
 
-        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Project understanding <span style="font-weight:normal; text-transform:none;">(body copy)</span></label>
+        <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;"><span>Project understanding <span style="font-weight:normal; text-transform:none;">(body copy)</span></span><button type="button" onclick="openCopyEditor('specPdfUnderstanding','Project Understanding')" style="font-size:0.6rem; text-transform:none; letter-spacing:0; padding:1px 7px; background:transparent; color:var(--text-muted); border:1px solid var(--border-color); border-radius:3px; cursor:pointer;">Edit &#8599;</button></label>
         <textarea id="specPdfUnderstanding" rows="3" placeholder="Our understanding of the space and audience…" style="width:100%; font-size:0.78rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical;"></textarea>
 
-        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Art narrative <span style="font-weight:normal; text-transform:none;">(body copy for the narrative page)</span></label>
+        <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;"><span>Art narrative <span style="font-weight:normal; text-transform:none;">(body copy for the narrative page)</span></span><button type="button" onclick="openCopyEditor('specPdfNarrative','Art Narrative')" style="font-size:0.6rem; text-transform:none; letter-spacing:0; padding:1px 7px; background:transparent; color:var(--text-muted); border:1px solid var(--border-color); border-radius:3px; cursor:pointer;">Edit &#8599;</button></label>
         <textarea id="specPdfNarrative" rows="3" placeholder="The art program for…" style="width:100%; font-size:0.78rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical;"></textarea>
 
-        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Art collection strategy <span style="font-weight:normal; text-transform:none;">(one short paragraph per tier)</span></label>
+        <label style="display:flex; align-items:center; justify-content:space-between; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;"><span>Art collection strategy <span style="font-weight:normal; text-transform:none;">(one short paragraph per tier)</span></span><span style="display:flex; gap:4px;"><button type="button" title="Edit Primary" onclick="openCopyEditor('specPdfStrategyPrimary','Strategy &mdash; Primary')" style="font-size:0.6rem; text-transform:none; letter-spacing:0; padding:1px 7px; background:transparent; color:var(--text-muted); border:1px solid var(--border-color); border-radius:3px; cursor:pointer;">P &#8599;</button><button type="button" title="Edit Secondary" onclick="openCopyEditor('specPdfStrategySecondary','Strategy &mdash; Secondary')" style="font-size:0.6rem; text-transform:none; letter-spacing:0; padding:1px 7px; background:transparent; color:var(--text-muted); border:1px solid var(--border-color); border-radius:3px; cursor:pointer;">S &#8599;</button><button type="button" title="Edit Tertiary" onclick="openCopyEditor('specPdfStrategyTertiary','Strategy &mdash; Tertiary')" style="font-size:0.6rem; text-transform:none; letter-spacing:0; padding:1px 7px; background:transparent; color:var(--text-muted); border:1px solid var(--border-color); border-radius:3px; cursor:pointer;">T &#8599;</button></span></label>
         <textarea id="specPdfStrategyPrimary" rows="2" placeholder="Primary — Fine Art Original: …" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; border-left:3px solid #E2231A;"></textarea>
         <textarea id="specPdfStrategySecondary" rows="2" placeholder="Secondary — Licensed Reproduction: …" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; border-left:3px solid #1F9E4A;"></textarea>
         <textarea id="specPdfStrategyTertiary" rows="2" placeholder="Tertiary — Licensed Reproduction: …" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; border-left:3px solid #2D5BD6;"></textarea>
@@ -1174,6 +1174,26 @@
             <button id="mbFront" class="action-btn btn-secondary" disabled style="width:auto; height:30px; padding:0 12px; font-size:0.72rem;" onclick="_mbToFront()">Bring to front</button>
             <button id="mbBack" class="action-btn btn-secondary" disabled style="width:auto; height:30px; padding:0 12px; font-size:0.72rem;" onclick="_mbToBack()">Send to back</button>
             <button id="mbDelete" class="action-btn btn-secondary" disabled style="width:auto; height:30px; padding:0 12px; font-size:0.72rem;" onclick="_mbDelete()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<!-- Copy editor popup. Focused writing area for a prose field with a live word
+     count + soft limit tuned to that page's text column. -->
+<div id="copyEditModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:10001; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:90vw; max-width:680px; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <div style="padding:14px 18px; border-bottom:1px solid var(--border-color);">
+            <h3 id="copyEditTitle" style="margin:0; font-size:1.05rem; color:var(--text-strong);">Edit copy</h3>
+        </div>
+        <div style="padding:16px 18px;">
+            <textarea id="copyEditArea" rows="12" oninput="updateCopyCount()" style="width:100%; font-size:0.92rem; line-height:1.5; padding:10px 12px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical;"></textarea>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-top:10px;">
+                <span id="copyEditCount" style="font-size:0.72rem; color:var(--text-muted);">0 / 0 words</span>
+                <div style="display:flex; gap:8px;">
+                    <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="closeCopyEditor()">Cancel</button>
+                    <button class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="saveCopyEditor()">Save</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
