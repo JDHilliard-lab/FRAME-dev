@@ -7650,6 +7650,61 @@ function openContactsEditor() {
 function closeContactsEditor() { const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none'; }
 function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '' }); _contactsRender(); _contactsCommit(); }
 function removeContact(i) { _contactsDraft.splice(i, 1); if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '' }]; _contactsRender(); _contactsCommit(); }
+
+// ── Add project artwork to a layout page (spec-showcase) ────────────────────
+// Bakes a framed-artwork mockup (reusing renderFrameToCanvas, artwork baked in)
+// into an image element, plus a spec text block (buildSpecStrings), so framed
+// pieces can be arranged salon-style with all the normal canvas tools.
+function _mbArtPickerOpen() {
+    const list = document.getElementById('artPickerList'); if (!list) return;
+    const rows = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
+    list.innerHTML = '';
+    if (!rows.length) { list.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; margin:6px 2px;">No artworks in the project yet. Add frames in the Frame Dashboard first.</p>'; }
+    rows.forEach((r, i) => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 4px; border-bottom:1px solid var(--border-color);';
+        const label = document.createElement('div');
+        label.style.cssText = 'font-size:0.76rem; color:var(--text-main); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+        label.textContent = (r.id || ('Item ' + (i + 1))) + (r.product ? ' · ' + r.product : '') + (r.fCode ? ' · ' + r.fCode : '');
+        const b = document.createElement('button');
+        b.textContent = 'Add'; b.className = 'action-btn'; b.style.cssText = 'width:auto; height:26px; padding:0 12px; font-size:0.7rem; flex:0 0 auto;';
+        b.onclick = () => _mbAddArtwork(i);
+        row.appendChild(label); row.appendChild(b); list.appendChild(row);
+    });
+    const m = document.getElementById('artPickerModal'); if (m) m.style.display = 'flex';
+}
+function _mbCloseArtPicker() { const m = document.getElementById('artPickerModal'); if (m) m.style.display = 'none'; }
+async function _mbAddArtwork(i) {
+    const r = (dashProjectData || [])[i]; if (!r) return;
+    let dataUrl = null, aspect = 1.33;
+    try {
+        const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+        let artworkImg = null;
+        if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+        const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+        const out = renderFrameToCanvas(dInches, swatch, { dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+        const canvas = out.canvas;
+        const flat = document.createElement('canvas'); flat.width = canvas.width; flat.height = canvas.height;
+        const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(canvas, 0, 0);
+        dataUrl = flat.toDataURL('image/jpeg', 0.85);
+        aspect = canvas.width / canvas.height || 1.33;
+    } catch (e) { if (typeof showInfoModal === 'function') showInfoModal('Could not render', 'That artwork could not be rendered into a mockup.'); return; }
+    const els = _mbEls();
+    const n = els.length;
+    const ox = 0.07 + (n % 3) * 0.30;
+    const oy = 0.14 + (Math.floor(n / 3) % 2) * 0.06;
+    const w = 0.26;
+    const h = w * (936 / 540) / (aspect || 1.33);
+    const z = els.reduce((m, e) => Math.max(m, e.z || 0), 0) + 1;
+    els.push({ type: 'image', img: dataUrl, caption: '', aspect: aspect, x: ox, y: oy, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z });
+    let specText = (r.id || '') + '';
+    try { const specs = buildSpecStrings(r); if (specs && specs.lines) specText += '\n' + specs.lines.map(l => l.label + '  ' + (l.value || '')).join('\n'); } catch (e) {}
+    els.push({ type: 'text', text: specText, x: ox, y: Math.min(0.9, oy + h + 0.015), w: w, size: 0.017, color: '#333333', font: 'sans', z: z + 1 });
+    if (typeof pushHistory === 'function') pushHistory();
+    renderMoodboardCanvas();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _mbCloseArtPicker();
+}
 function _mbKeyDelete(e) {
     if (_mbPlacing) return;
     if (e.key !== 'Delete' && e.key !== 'Backspace') return;
