@@ -7674,8 +7674,32 @@ function _mbArtPickerOpen() {
     const m = document.getElementById('artPickerModal'); if (m) m.style.display = 'flex';
 }
 function _mbCloseArtPicker() { const m = document.getElementById('artPickerModal'); if (m) m.style.display = 'none'; }
-async function _mbAddArtwork(i) {
-    const r = (dashProjectData || [])[i]; if (!r) return;
+function _artSpecText(r, compact) {
+    let title = (r.id || '') + '';
+    let lines = [];
+    try {
+        const specs = buildSpecStrings(r);
+        const arr = (specs && specs.lines) ? specs.lines.slice() : [];
+        if (compact) {
+            const keep = {};
+            arr.forEach(l => { if (l.label === 'Application') keep.type = l.value; if (l.label === 'Matboard') keep.mat = l.value; });
+            const u = (typeof dashUnit !== 'undefined') ? dashUnit : 'in';
+            const fmtN = (v) => { const n = parseFloat(v); return isNaN(n) ? null : parseFloat(n.toFixed(3)).toString(); };
+            const ow = fmtN(r.extW), oh = fmtN(r.extH);
+            const ul = u === 'in' ? '"' : (' ' + u);
+            const out = [];
+            if (keep.type) out.push('Art Type  ' + keep.type);
+            if (keep.mat) out.push('Matboard  ' + keep.mat);
+            if (ow && oh) out.push('Overall  ' + ow + ul + ' W × ' + oh + ul + ' H');
+            lines = out;
+        } else {
+            lines = arr.map(l => l.label + '  ' + (l.value || ''));
+        }
+    } catch (e) {}
+    return title + (lines.length ? '\n' + lines.join('\n') : '');
+}
+async function _mbBakeArtworkIntoPage(r, compact) {
+    if (!r) return false;
     let dataUrl = null, aspect = 1.33;
     try {
         const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
@@ -7688,7 +7712,7 @@ async function _mbAddArtwork(i) {
         const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(canvas, 0, 0);
         dataUrl = flat.toDataURL('image/jpeg', 0.85);
         aspect = canvas.width / canvas.height || 1.33;
-    } catch (e) { if (typeof showInfoModal === 'function') showInfoModal('Could not render', 'That artwork could not be rendered into a mockup.'); return; }
+    } catch (e) { return false; }
     const els = _mbEls();
     const n = els.length;
     const ox = 0.07 + (n % 3) * 0.30;
@@ -7697,12 +7721,26 @@ async function _mbAddArtwork(i) {
     const h = w * (936 / 540) / (aspect || 1.33);
     const z = els.reduce((m, e) => Math.max(m, e.z || 0), 0) + 1;
     els.push({ type: 'image', img: dataUrl, caption: '', aspect: aspect, x: ox, y: oy, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z });
-    let specText = (r.id || '') + '';
-    try { const specs = buildSpecStrings(r); if (specs && specs.lines) specText += '\n' + specs.lines.map(l => l.label + '  ' + (l.value || '')).join('\n'); } catch (e) {}
-    els.push({ type: 'text', text: specText, x: ox, y: Math.min(0.9, oy + h + 0.015), w: w, size: 0.017, color: '#333333', font: 'sans', z: z + 1 });
+    els.push({ type: 'text', text: _artSpecText(r, compact), x: ox, y: Math.min(0.9, oy + h + 0.015), w: w, size: 0.017, color: '#333333', font: 'sans', z: z + 1 });
+    return true;
+}
+function _artCompactOn() { const c = document.getElementById('artCompactSpec'); return !!(c && c.checked); }
+async function _mbAddArtwork(i) {
+    const r = (dashProjectData || [])[i];
+    const ok = await _mbBakeArtworkIntoPage(r, _artCompactOn());
+    if (!ok) { if (typeof showInfoModal === 'function') showInfoModal('Could not render', 'That artwork could not be rendered into a mockup.'); return; }
     if (typeof pushHistory === 'function') pushHistory();
     renderMoodboardCanvas();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _mbCloseArtPicker();
+}
+async function _mbAddAllArtwork() {
+    const rows = (dashProjectData || []);
+    if (!rows.length) return;
+    const compact = _artCompactOn();
+    let any = false;
+    for (const r of rows) { const ok = await _mbBakeArtworkIntoPage(r, compact); if (ok) any = true; }
+    if (any) { if (typeof pushHistory === 'function') pushHistory(); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
     _mbCloseArtPicker();
 }
 function _mbKeyDelete(e) {
