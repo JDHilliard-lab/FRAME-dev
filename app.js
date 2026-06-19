@@ -267,8 +267,8 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -296,6 +296,7 @@ function _mbMigratePages() {
     if (_mbPageIndex < 0 || _mbPageIndex >= ec.layoutPages.length) _mbPageIndex = 0;
     if (!Array.isArray(ec.templates)) ec.templates = [];
     if (!ec.coverPage || !Array.isArray(ec.coverPage.elements)) ec.coverPage = { elements: [] };
+    if (!ec.narrativePage || !Array.isArray(ec.narrativePage.elements)) ec.narrativePage = { elements: [] };
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
@@ -430,6 +431,18 @@ function _mbRenderPageStrip() {
 function _tImg(x, y, w, h, z) { return { type: 'image', img: '', aspect: 1.33, x: x, y: y, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z || 1 }; }
 function _tTxt(text, x, y, w, size, z, font, color) { return { type: 'text', text: text, x: x, y: y, w: w, size: size || 0.05, color: color || '#222222', font: font || 'display', z: z || 5 }; }
 const LAYOUT_TEMPLATES = {
+    cover: [
+        { name: 'Hero', els: () => [_tImg(0, 0, 1, 1), _tTxt('PROJECT NAME', .06, .72, .7, .085, 5, 'display', '#ffffff'), _tTxt('Art Program', .06, .84, .6, .032, 6, 'serif', '#ffffff')] },
+        { name: 'Centered', els: () => [_tImg(0, 0, 1, 1), _tTxt('PROJECT NAME', .1, .42, .8, .1, 5, 'display', '#ffffff')] },
+        { name: 'Lower band', els: () => [_tImg(0, 0, 1, .74), _tTxt('PROJECT NAME', .06, .8, .7, .08, 5, 'display', '#1a1a1a'), _tTxt('Art Program', .06, .91, .5, .03, 6, 'serif', '#555555')] },
+        { name: 'Split', els: () => [_tImg(0, 0, .54, 1), _tTxt('PROJECT NAME', .6, .4, .36, .075, 5, 'display', '#1a1a1a'), _tTxt('Art Program', .6, .52, .34, .03, 6, 'serif', '#555555')] }
+    ],
+    narrative: [
+        { name: 'Classic', els: () => [_tTxt('ART NARRATIVE', .06, .12, .6, .06, 6, 'display', '#1a1a1a'), _tTxt('Tell the story of the collection here.', .06, .26, .54, .03, 5, 'serif', '#222222')] },
+        { name: 'Two column', els: () => [_tTxt('ART NARRATIVE', .06, .12, .6, .06, 6, 'display', '#1a1a1a'), _tTxt('First column of the narrative copy.', .06, .26, .42, .026, 5, 'serif', '#222222'), _tTxt('Second column of the narrative copy.', .52, .26, .42, .026, 5, 'serif', '#222222')] },
+        { name: 'Image + copy', els: () => [_tImg(.06, .14, .4, .66, 1), _tTxt('ART NARRATIVE', .52, .14, .42, .055, 6, 'display', '#1a1a1a'), _tTxt('Narrative copy beside the image.', .52, .27, .42, .028, 5, 'serif', '#222222')] },
+        { name: 'Lead image', els: () => [_tImg(.06, .12, .88, .4, 1), _tTxt('ART NARRATIVE', .06, .56, .6, .05, 6, 'display', '#1a1a1a'), _tTxt('Narrative copy below the lead image.', .06, .67, .88, .026, 5, 'serif', '#222222')] }
+    ],
     moodboard: [
         { name: 'Grid 2×3', els: () => [_tImg(.06, .15, .28, .33), _tImg(.36, .15, .28, .33), _tImg(.66, .15, .28, .33), _tImg(.06, .52, .28, .33), _tImg(.36, .52, .28, .33), _tImg(.66, .52, .28, .33)] },
         { name: 'Hero + three', els: () => [_tImg(.06, .15, .46, .7), _tImg(.55, .15, .39, .21), _tImg(.55, .39, .39, .21), _tImg(.55, .63, .39, .21)] },
@@ -460,7 +473,8 @@ function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.7
 function openTemplatesModal() {
     const m = document.getElementById('templatesModal'); if (!m) return;
     _mbMigratePages();
-    const ct = _mbPage().type; _tplType = LAYOUT_TEMPLATES[ct] ? ct : 'moodboard';
+    if (_mbEditTarget && LAYOUT_TEMPLATES[_mbEditTarget.key]) { _tplType = _mbEditTarget.key; }
+    else { const ct = _mbPage().type; _tplType = LAYOUT_TEMPLATES[ct] ? ct : 'moodboard'; }
     _tplRenderCards(_tplType); m.style.display = 'flex';
 }
 function closeTemplatesModal() { const m = document.getElementById('templatesModal'); if (m) m.style.display = 'none'; }
@@ -469,9 +483,13 @@ function _tplApply(els, type, asNew) {
     const copy = JSON.parse(JSON.stringify(els || []));
     if (asNew && !_mbEditTarget) addLayoutPage(type);
     const pg = _mbPage();
-    const wasDefault = (!pg.title || pg.title === _mbDefaultTitle(pg.type));
-    pg.elements = copy; pg.type = type;
-    if (wasDefault) pg.title = _mbDefaultTitle(type);
+    if (_mbEditTarget) {
+        pg.elements = copy;   // fixed page keeps its intrinsic type (cover/narrative)
+    } else {
+        const wasDefault = (!pg.title || pg.title === _mbDefaultTitle(pg.type));
+        pg.elements = copy; pg.type = type;
+        if (wasDefault) pg.title = _mbDefaultTitle(type);
+    }
     _mbSelected = -1;
     if (typeof pushHistory === 'function') pushHistory();
     closeTemplatesModal();
@@ -540,7 +558,7 @@ function _mbDropImage(e, i) {
 function _tplRenderCards(type) {
     const wrap = document.getElementById('tplCards'); if (!wrap) return;
     _mbMigratePages();
-    ['moodboard', 'breaker', 'keyword', 'inspo'].forEach(tp => { const b = document.getElementById('tplTab_' + tp); if (b) b.style.cssText = _tplTabCss(tp === type); });
+    ['cover', 'narrative', 'moodboard', 'breaker', 'keyword', 'inspo'].forEach(tp => { const b = document.getElementById('tplTab_' + tp); if (b) b.style.cssText = _tplTabCss(tp === type); });
     wrap.innerHTML = '';
     const W = 150, H = Math.round(150 * 540 / 936);
     const cards = (LAYOUT_TEMPLATES[type] || []).map(b => ({ name: b.name, els: b.els(), user: false }));
@@ -7546,6 +7564,14 @@ function openFixedPageEditor(key) {
             page.elements = [_tImg(0, 0, 1, 1, 1), _tTxt(nm, .08, .66, .84, .085, 5, 'display', '#ffffff'), _tTxt('Art Program', .08, .8, .84, .04, 6, 'serif', '#ffffff')];
         }
         page.type = 'breaker';   // full-bleed treatment in editor + PDF
+    } else if (key === 'narrative') {
+        if (!editorialContent.narrativePage || !Array.isArray(editorialContent.narrativePage.elements)) editorialContent.narrativePage = { elements: [] };
+        page = editorialContent.narrativePage; label = 'Art Narrative';
+        if (!page.elements.length) {
+            const body = (editorialContent.narrative || 'Add the art narrative here — the story behind the collection, the themes, and how the work connects to the space.');
+            page.elements = [_tTxt('ART NARRATIVE', .06, .12, .5, .06, 6, 'display', '#1a1a1a'), _tTxt(body, .06, .26, .52, .03, 5, 'serif', '#222222'), _tImg(.62, .14, .32, .62, 1)];
+        }
+        page.type = 'narrative';
     } else { return; }
     _mbEditTarget = { key: key, label: label, page: page };
     const m = document.getElementById('moodboardModal'); if (!m) return;
@@ -8263,8 +8289,21 @@ async function _buildSpecPagePDF(opts) {
     // — Project Understanding (real): heading + body copy —
     if (inc.understanding) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); }
     await emitLayout('afterUnderstanding');
-    // — Art Narrative (real): heading + body copy —
-    if (inc.narrative) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.'); }
+    // — Art Narrative (real): custom freeform page if built, else prose —
+    if (inc.narrative) {
+        newPage();
+        const nv = editorialContent.narrativePage;
+        if (nv && Array.isArray(nv.elements) && nv.elements.length) {
+            const src = nv.elements;
+            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+            for (let ti = 0; ti < src.length; ti++) {
+                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+            }
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'narrative');
+        } else {
+            _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.');
+        }
+    }
     await emitLayout('afterNarrative');
     // — Art Collection Strategy (real): three tier columns —
     if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
