@@ -287,6 +287,39 @@ function _fpNumbers() {
     (dashProjectData || []).forEach(it => { if (!it) return; const lv = it.level || 0; counts[lv] = (counts[lv] || 0) + 1; map[it.id] = counts[lv]; });
     return map;
 }
+// Plan callout numbers come from the ART code itself, not a running count.
+// Set-pieces (ART.005-A, -B, -C, -D) share one group → one pin labelled "05".
+function _artGroupKey(code) {
+    const c = (code || '').trim();
+    const stripped = c.replace(/[-_\s]*[A-Za-z]\d*$/, '');   // drop a trailing piece suffix (-A, -B1…)
+    return (/\d/.test(stripped) && stripped) ? stripped : c; // keep pure-letter codes intact
+}
+function _artGroupNum(code) {
+    const key = _artGroupKey(code);
+    const m = key.match(/(\d+(?:\.\d+)?)\s*$/);              // last numeric token (allow dotted, e.g. 3.26)
+    if (!m) return (key || '').slice(-2) || '00';
+    const tok = m[1];
+    if (tok.indexOf('.') >= 0) return tok;                   // dotted codes keep their form
+    const n = parseInt(tok, 10);
+    return isNaN(n) ? tok : String(n).padStart(2, '0');      // 005 → "05", 1 → "01"
+}
+// Collapse dashProjectData into placement groups (one pin per group). Placement
+// (planX/planY/level) is taken from the first placed member.
+function _fpGroups() {
+    const order = [], map = {};
+    (dashProjectData || []).forEach(r => {
+        if (!r) return;
+        const k = _artGroupKey(r.id || '');
+        if (!map[k]) { map[k] = { key: k, num: _artGroupNum(r.id || ''), ids: [], rows: [], level: (r.level || 0), category: r.category || '', location: r.location || '', planX: null, planY: null }; order.push(k); }
+        const g = map[k];
+        g.ids.push(r.id || ''); g.rows.push(r);
+        if (r.planX != null && r.planY != null && g.planX == null) { g.planX = r.planX; g.planY = r.planY; g.level = (r.level || 0); }
+        if (!g.category && r.category) g.category = r.category;
+        if (!g.location && r.location) g.location = r.location;
+    });
+    return order.map(k => map[k]);
+}
+function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
@@ -6628,7 +6661,7 @@ function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
 // PINS placed ON the plan are deferred until per-item coordinates exist; the
 // list numbers still establish the legend the pins will use. `items` is the
 // full row set; `idToPage` maps item id -> spec page number.
-function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planImg, levelName) {
+function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, levelName) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
@@ -6680,23 +6713,23 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
     const rowH = 16;
     const availH = PH - 72 - listTop;        // leave room above footer + legend
     const rowsPerCol = Math.max(1, Math.floor(availH / rowH));
-    const cols = (items.length > rowsPerCol) ? 2 : 1;
+    const cols = (entries.length > rowsPerCol) ? 2 : 1;
     const colW = listW / cols;
 
-    if (!items.length) {
+    if (!entries.length) {
         doc.setFont('helvetica', 'normal'); doc.setFontSize(9); doc.setTextColor(140, 140, 140);
         doc.text('No items yet.', listX, listTop + 12);
         doc.setTextColor(20, 20, 20);
     }
 
-    items.forEach((it, i) => {
+    entries.forEach((en, i) => {
         const col = Math.floor(i / rowsPerCol);
         if (col >= cols) return;             // overflow guard (rare)
         const rowInCol = i % rowsPerCol;
         const x = listX + col * colW;
         const y = listTop + rowInCol * rowH;
-        const num = String(i + 1).padStart(2, '0');
-        const [cr, cg, cb] = hx(categoryColor(it.category));
+        const num = (en.num || '').toString();
+        const [cr, cg, cb] = hx(categoryColor(en.category));
         const br = 6;                         // bubble radius
         const bcx = x + br, bcy = y + 4;
         doc.setFillColor(cr, cg, cb);
@@ -6706,39 +6739,37 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
         doc.text(num, bcx, bcy + 0.5, { align: 'center', baseline: 'middle' });
         doc.setTextColor(20, 20, 20);
         doc.setFont('helvetica', 'normal'); doc.setFontSize(8.5);
-        const idStr = (it.id || '').toString();
-        const loc = (it.location || '').toString();
-        const label = loc ? `${idStr}  |  ${loc}` : idStr;
+        const codes = (en.codes || '').toString();
+        const loc = (en.location || '').toString();
+        const label = loc ? `${codes}  |  ${loc}` : codes;
         const tx = x + br * 2 + 8;
         const fitted = doc.splitTextToSize(label, colW - (br * 2 + 12))[0] || label;
         doc.text(fitted, tx, bcy, { baseline: 'middle' });
-        const target = idToPage && idToPage[it.id];
-        if (target) doc.link(x, y - 4, colW - 6, rowH, { pageNumber: target });
+        if (en.linkPage) doc.link(x, y - 4, colW - 6, rowH, { pageNumber: en.linkPage });
     });
 
-    // — Pins on the plan (only placed items) —
+    // — Pins on the plan (one per placed group) —
     if (planRect) {
-        items.forEach((it, i) => {
-            if (it.planX == null || it.planY == null) return;
-            const px = planRect.dx + it.planX * planRect.dw;
-            const py = planRect.dy + it.planY * planRect.dh;
-            const [cr, cg, cb] = hx(categoryColor(it.category));
+        entries.forEach((en) => {
+            if (en.planX == null || en.planY == null) return;
+            const px = planRect.dx + en.planX * planRect.dw;
+            const py = planRect.dy + en.planY * planRect.dh;
+            const [cr, cg, cb] = hx(categoryColor(en.category));
             const pr = 8;
             doc.setFillColor(cr, cg, cb);
             doc.setDrawColor(255, 255, 255); doc.setLineWidth(1);
             doc.circle(px, py, pr, 'FD');
             doc.setTextColor(255, 255, 255);
             doc.setFont('helvetica', 'bold'); doc.setFontSize(7.5);
-            doc.text(String(i + 1).padStart(2, '0'), px, py + 0.5, { align: 'center', baseline: 'middle' });
+            doc.text((en.num || '').toString(), px, py + 0.5, { align: 'center', baseline: 'middle' });
             doc.setTextColor(20, 20, 20);
-            const target = idToPage && idToPage[it.id];
-            if (target) doc.link(px - pr, py - pr, pr * 2, pr * 2, { pageNumber: target });
+            if (en.linkPage) doc.link(px - pr, py - pr, pr * 2, pr * 2, { pageNumber: en.linkPage });
         });
     }
 
     // — Legend (categories actually used) —
     const usedKeys = [];
-    items.forEach(it => { const k = it.category || ''; if (k && usedKeys.indexOf(k) < 0) usedKeys.push(k); });
+    entries.forEach(en => { const k = en.category || ''; if (k && usedKeys.indexOf(k) < 0) usedKeys.push(k); });
     if (usedKeys.length) {
         let lx = M, ly = PH - 50;
         doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
@@ -7330,7 +7361,7 @@ function renderFloorplanMarkup() {
 
     _fpMigrate();
     _fpRenderLevelBar();
-    const nums = _fpNumbers();
+    const groups = _fpGroups();
     const active = _fpActive();
     // — Plan area —
     area.innerHTML = '';
@@ -7351,76 +7382,77 @@ function renderFloorplanMarkup() {
         img.style.cssText = 'display:block; max-width:100%; max-height:70vh; user-select:none; -webkit-user-drag:none; cursor:' + (_fpArmedId ? 'crosshair' : 'default') + ';';
         img.onclick = _fpPlaceFromEvent;
         wrap.appendChild(img);
-        items.forEach((it) => {
-            if ((it.level || 0) !== _fpLevel) return;
-            if (it.planX == null || it.planY == null) return;
-            wrap.appendChild(_fpMakePin(it, nums[it.id] || 1));
+        groups.forEach((g) => {
+            if ((g.level || 0) !== _fpLevel) return;
+            if (g.planX == null || g.planY == null) return;
+            wrap.appendChild(_fpMakePin(g));
         });
         area.appendChild(wrap);
     }
 
-    // — Tray —
+    // — Tray (one entry per placement group) —
     tray.innerHTML = '';
-    items.forEach((it, i) => {
-        const placed = (it.planX != null && it.planY != null);
-        const armed = (_fpArmedId === it.id);
+    groups.forEach((g) => {
+        const placed = (g.planX != null && g.planY != null);
+        const armed = (_fpArmedId === g.key);
         const rowEl = document.createElement('div');
         rowEl.style.cssText = 'display:flex; align-items:center; gap:8px; padding:6px; border-radius:5px; cursor:pointer; margin-bottom:3px; ' +
             (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid #6a6aff;' : 'background:transparent;');
         const num = document.createElement('span');
-        num.textContent = String(nums[it.id] || 1).padStart(2, '0');
-        num.style.cssText = 'flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:700; color:#fff; background:' + categoryColor(it.category) + ';';
+        num.textContent = g.num;
+        num.style.cssText = 'flex:0 0 auto; min-width:20px; height:20px; padding:0 4px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:700; color:#fff; background:' + categoryColor(g.category) + ';';
+        const codes = g.ids.filter(Boolean).join(', ');
         const lbl = document.createElement('div');
         lbl.style.cssText = 'flex:1; min-width:0; overflow:hidden;';
-        lbl.innerHTML = '<div style="font-size:0.74rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(it.id || '') +
+        lbl.innerHTML = '<div style="font-size:0.74rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(codes || g.key) +
             '</div><div style="font-size:0.62rem; color:' + (placed ? 'var(--text-muted)' : '#c08a2e') + '; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' +
-            (placed ? _esc(((it.level || 0) !== _fpLevel ? '[' + ((floorplanLevels[it.level || 0] || {}).name || ('Level ' + ((it.level || 0) + 1))) + '] ' : '') + (it.location || '')) : 'click, then click the plan') + '</div>';
+            (placed ? _esc(((g.level || 0) !== _fpLevel ? '[' + ((floorplanLevels[g.level || 0] || {}).name || ('Level ' + ((g.level || 0) + 1))) + '] ' : '') + (g.location || '')) : 'click, then click the plan') + '</div>';
         const sel = document.createElement('select');
         sel.style.cssText = 'flex:0 0 auto; font-size:0.62rem; padding:2px 4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
         ART_CATEGORIES.forEach(c => {
             const o = document.createElement('option'); o.value = c.key; o.textContent = c.label;
-            if ((it.category || '') === c.key) o.selected = true;
+            if ((g.category || '') === c.key) o.selected = true;
             sel.appendChild(o);
         });
         sel.onclick = (e) => e.stopPropagation();
-        sel.onchange = (e) => _fpSetCategory(it.id, e.target.value);
+        sel.onchange = (e) => _fpSetCategory(g.key, e.target.value);
         rowEl.appendChild(num); rowEl.appendChild(lbl); rowEl.appendChild(sel);
-        rowEl.onclick = () => _fpArmItem(it.id);
+        rowEl.onclick = () => _fpArmItem(g.key);
         tray.appendChild(rowEl);
     });
 
     const hint = document.getElementById('fpMarkupHint');
     if (hint) hint.textContent = _fpArmedId
-        ? 'Now click the plan to drop ' + _fpArmedId + ' — or pick another item.'
-        : 'Click an item, then click the plan to drop its pin. Drag a pin to move; double-click to remove.';
+        ? 'Now click the plan to drop ' + _fpArmedId + ' — or pick another group.'
+        : 'Click a group, then click the plan to drop its pin. Set-pieces (-A/-B/…) share one pin. Drag to move; double-click to remove.';
 }
 
-function _fpMakePin(it, i) {
+function _fpMakePin(g) {
     const pin = document.createElement('div');
-    pin.style.cssText = 'position:absolute; left:' + (it.planX * 100) + '%; top:' + (it.planY * 100) + '%; transform:translate(-50%,-50%); width:22px; height:22px; border-radius:50%; background:' + categoryColor(it.category) + '; color:#fff; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:0.58rem; font-weight:700; cursor:grab; user-select:none;';
-    pin.textContent = String(i + 1).padStart(2, '0');
-    pin.title = (it.id || '') + (it.location ? ' \u2014 ' + it.location : '');
-    pin.onmousedown = (e) => _fpPinMouseDown(e, it.id);
-    pin.ondblclick = (e) => { e.stopPropagation(); _fpRemovePin(it.id); };
+    pin.style.cssText = 'position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:22px; height:22px; padding:0 5px; border-radius:11px; background:' + categoryColor(g.category) + '; color:#fff; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:0.58rem; font-weight:700; cursor:grab; user-select:none;';
+    pin.textContent = g.num;
+    pin.title = g.ids.filter(Boolean).join(', ') + (g.location ? ' \u2014 ' + g.location : '');
+    pin.onmousedown = (e) => _fpPinMouseDown(e, g.key);
+    pin.ondblclick = (e) => { e.stopPropagation(); _fpRemovePin(g.key); };
     return pin;
 }
 
 function _fpFindRow(id) { return (dashProjectData || []).find(r => r && r.id === id); }
 
-function _fpArmItem(id) { _fpArmedId = (_fpArmedId === id) ? null : id; renderFloorplanMarkup(); }
+function _fpArmItem(key) { _fpArmedId = (_fpArmedId === key) ? null : key; renderFloorplanMarkup(); }
 
-function _fpSetCategory(id, key) {
-    const row = _fpFindRow(id);
-    if (!row) return;
-    row.category = key || '';
+function _fpSetCategory(key, cat) {
+    const g = _fpFindGroup(key);
+    if (!g) return;
+    g.rows.forEach(r => { r.category = cat || ''; });
     if (typeof pushHistory === 'function') pushHistory();
     renderFloorplanMarkup();
 }
 
-function _fpRemovePin(id) {
-    const row = _fpFindRow(id);
-    if (!row) return;
-    row.planX = null; row.planY = null;
+function _fpRemovePin(key) {
+    const g = _fpFindGroup(key);
+    if (!g) return;
+    g.rows.forEach(r => { r.planX = null; r.planY = null; });
     if (typeof pushHistory === 'function') pushHistory();
     renderFloorplanMarkup();
 }
@@ -7439,9 +7471,9 @@ function _fpPlaceFromEvent(e) {
     if (!_fpArmedId) return;
     const n = _fpNormFromEvent(e);
     if (!n) return;
-    const row = _fpFindRow(_fpArmedId);
-    if (!row) return;
-    row.planX = n.x; row.planY = n.y; row.level = _fpLevel;   // pin belongs to the active level
+    const g = _fpFindGroup(_fpArmedId);
+    if (!g) return;
+    g.rows.forEach(r => { r.planX = n.x; r.planY = n.y; r.level = _fpLevel; });   // whole group lands together
     _fpArmedId = null;
     if (typeof pushHistory === 'function') pushHistory();
     renderFloorplanMarkup();
@@ -7519,9 +7551,9 @@ function _fpDragMove(e) {
     if (!_fpDragId) return;
     const n = _fpNormFromEvent(e);
     if (!n) return;
-    const row = _fpFindRow(_fpDragId);
-    if (!row) return;
-    row.planX = n.x; row.planY = n.y;
+    const g = _fpFindGroup(_fpDragId);
+    if (!g) return;
+    g.rows.forEach(r => { r.planX = n.x; r.planY = n.y; });
     if (_fpDragPin) { _fpDragPin.style.left = (n.x * 100) + '%'; _fpDragPin.style.top = (n.y * 100) + '%'; }
 }
 function _fpDragUp() {
@@ -8584,10 +8616,18 @@ async function _buildSpecPagePDF(opts) {
             const li = emitLevels[k];
             newPage();
             _fpLevelKeyPage[li] = pageNum;
-            const items = (dashProjectData || []).filter(it => (it.level || 0) === li);
+            const levelGroups = _fpGroups().filter(g => (g.level || 0) === li);
+            const entries = levelGroups.map(g => {
+                let linkPage = null;
+                for (const id of g.ids) { if (idToPage[id]) { linkPage = idToPage[id]; break; } }
+                const codesLabel = (g.ids.length > 1)
+                    ? (g.key + ' (' + g.ids.map(id => { const s = id.indexOf(g.key) === 0 ? id.slice(g.key.length).replace(/^[-_\s]*/, '') : id; return s || id; }).join('/') + ')')
+                    : (g.ids[0] || g.key);
+                return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage };
+            });
             let planImg = null;
             if (levels[li].imageData) { try { planImg = await _loadImg(levels[li].imageData); } catch (e) {} }
-            _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planImg, levels[li].name || ('Level ' + (li + 1)));
+            _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, levels[li].name || ('Level ' + (li + 1)));
         }
         fpKeyPageNum = _fpLevelKeyPage[emitLevels[0]];   // fallback for any unlevelled back-link
     }
