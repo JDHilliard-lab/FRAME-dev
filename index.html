@@ -1064,17 +1064,17 @@
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:8px;">Include pages</label>
         <div style="display:flex; flex-direction:column; gap:7px; margin-bottom:14px; font-size:0.8rem; color:var(--text-main);">
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_cover" checked style="cursor:pointer;"> Cover <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openFixedPageEditor('cover')">Edit…</button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_cover" checked style="cursor:pointer;"> Cover <button type="button" class="icon-btn" title="Edit cover" onclick="openFixedPageEditor('cover')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_timeline" checked style="cursor:pointer;"> Process &amp; Timeline <span style="color:var(--text-muted); font-size:0.7rem;">(phases below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_understanding" checked style="cursor:pointer;"> Project Understanding <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openFixedPageEditor('narrative')">Edit…</button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <button type="button" class="icon-btn" title="Edit narrative" onclick="openFixedPageEditor('narrative')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_strategy" checked style="cursor:pointer;"> Art Collection Strategy <span style="color:var(--text-muted); font-size:0.7rem;">(3 tiers below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_moodboard" checked style="cursor:pointer;"> Layout pages <span style="color:var(--text-muted); font-size:0.7rem;">(moodboard / breaker / etc.)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_frameRec" checked style="cursor:pointer;"> Frame Recommendations <span style="color:var(--text-muted); font-size:0.7rem;">(frames used in project)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_floorplanKey" checked style="cursor:pointer;"> Floorplan Key <span style="color:var(--text-muted); font-size:0.7rem;">(plan + pins)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_spec" checked style="cursor:pointer;"> Spec Pages <span style="color:var(--text-muted); font-size:0.7rem;">(one per artworked piece)</span></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_slogan" checked style="cursor:pointer;"> Good Art. Good People. <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openFixedPageEditor('slogan')">Edit…</button></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openContactsEditor()">Edit…</button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_slogan" checked style="cursor:pointer;"> Good Art. Good People. <button type="button" class="icon-btn" title="Edit Good Art Good People" onclick="openFixedPageEditor('slogan')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <button type="button" class="icon-btn" title="Edit contacts" onclick="openContactsEditor()"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
         </div>
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Process &amp; timeline <span style="font-weight:normal; text-transform:none;">(one per line: Phase | Timeframe)</span></label>
@@ -1165,6 +1165,7 @@
                 <button class="action-btn btn-secondary" title="Add elbow arrow" style="width:34px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="addMoodboardElbow()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 4 5 15 17 15"/><polyline points="13 11 17 15 13 19"/></svg></button>
                 <button class="action-btn btn-secondary" title="Default styles" style="width:34px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="openDeckStyles()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
                 <span id="mbModeLabel" style="font-size:0.78rem; color:var(--text-muted); margin-left:8px;"></span>
+                <button class="action-btn btn-secondary" title="Add project artwork (framed mockup + spec)" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="_mbArtPickerOpen()">Artwork</button>
                 <button class="action-btn btn-secondary" title="Layout templates" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openTemplatesModal()">Templates</button>
                 <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="closeMoodboardModal()">Done</button>
                 <input type="file" id="moodboardFile" accept="image/*" multiple style="display:none;" onchange="addMoodboardImages(event)">
@@ -1275,6 +1276,20 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Artwork picker: drop a project frame (mockup + spec) onto a layout page -->
+<div id="artPickerModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:10002; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:92vw; max-width:560px; max-height:82vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <div style="padding:14px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
+            <div>
+                <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Add artwork</h3>
+                <p style="margin:2px 0 0; font-size:0.7rem; color:var(--text-muted);">Drops a framed mockup + its spec onto this page. Arrange them salon-style.</p>
+            </div>
+            <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="_mbCloseArtPicker()">Done</button>
+        </div>
+        <div id="artPickerList" style="flex:1; overflow-y:auto; padding:10px 18px;"><!-- artwork rows --></div>
     </div>
 </div>
 
