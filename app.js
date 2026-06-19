@@ -267,8 +267,8 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -297,6 +297,7 @@ function _mbMigratePages() {
     if (!Array.isArray(ec.templates)) ec.templates = [];
     if (!ec.coverPage || !Array.isArray(ec.coverPage.elements)) ec.coverPage = { elements: [] };
     if (!ec.narrativePage || !Array.isArray(ec.narrativePage.elements)) ec.narrativePage = { elements: [] };
+    if (!ec.sloganPage || !Array.isArray(ec.sloganPage.elements)) ec.sloganPage = { elements: [] };
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
@@ -431,6 +432,12 @@ function _mbRenderPageStrip() {
 function _tImg(x, y, w, h, z) { return { type: 'image', img: '', aspect: 1.33, x: x, y: y, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z || 1 }; }
 function _tTxt(text, x, y, w, size, z, font, color) { return { type: 'text', text: text, x: x, y: y, w: w, size: size || 0.05, color: color || '#222222', font: font || 'display', z: z || 5 }; }
 const LAYOUT_TEMPLATES = {
+    slogan: [
+        { name: 'Good Art Good People', els: () => [_tTxt('GOOD ART.', .08, .34, .84, .14, 5, 'display', '#1a1a1a'), _tTxt('GOOD PEOPLE.', .08, .54, .84, .14, 6, 'display', '#1a1a1a')] },
+        { name: 'Centered', els: () => [_tTxt('GOOD ART. GOOD PEOPLE.', .08, .42, .84, .1, 5, 'display', '#1a1a1a')] },
+        { name: 'Over image', els: () => [_tImg(0, 0, 1, 1), _tTxt('GOOD ART.', .08, .36, .84, .13, 5, 'display', '#ffffff'), _tTxt('GOOD PEOPLE.', .08, .55, .84, .13, 6, 'display', '#ffffff')] },
+        { name: 'Statement + tag', els: () => [_tTxt('GOOD ART. GOOD PEOPLE.', .08, .38, .84, .1, 5, 'display', '#1a1a1a'), _tTxt('Farmboy Fine Arts', .08, .56, .6, .03, 6, 'serif', '#555555')] }
+    ],
     cover: [
         { name: 'Hero', els: () => [_tImg(0, 0, 1, 1), _tTxt('PROJECT NAME', .06, .72, .7, .085, 5, 'display', '#ffffff'), _tTxt('Art Program', .06, .84, .6, .032, 6, 'serif', '#ffffff')] },
         { name: 'Centered', els: () => [_tImg(0, 0, 1, 1), _tTxt('PROJECT NAME', .1, .42, .8, .1, 5, 'display', '#ffffff')] },
@@ -558,7 +565,7 @@ function _mbDropImage(e, i) {
 function _tplRenderCards(type) {
     const wrap = document.getElementById('tplCards'); if (!wrap) return;
     _mbMigratePages();
-    ['cover', 'narrative', 'moodboard', 'breaker', 'keyword', 'inspo'].forEach(tp => { const b = document.getElementById('tplTab_' + tp); if (b) b.style.cssText = _tplTabCss(tp === type); });
+    ['cover', 'narrative', 'slogan', 'moodboard', 'breaker', 'keyword', 'inspo'].forEach(tp => { const b = document.getElementById('tplTab_' + tp); if (b) b.style.cssText = _tplTabCss(tp === type); });
     wrap.innerHTML = '';
     const W = 150, H = Math.round(150 * 540 / 936);
     const cards = (LAYOUT_TEMPLATES[type] || []).map(b => ({ name: b.name, els: b.els(), user: false }));
@@ -7572,6 +7579,13 @@ function openFixedPageEditor(key) {
             page.elements = [_tTxt('ART NARRATIVE', .06, .12, .5, .06, 6, 'display', '#1a1a1a'), _tTxt(body, .06, .26, .52, .03, 5, 'serif', '#222222'), _tImg(.62, .14, .32, .62, 1)];
         }
         page.type = 'narrative';
+    } else if (key === 'slogan') {
+        if (!editorialContent.sloganPage || !Array.isArray(editorialContent.sloganPage.elements)) editorialContent.sloganPage = { elements: [] };
+        page = editorialContent.sloganPage; label = 'Good Art. Good People.';
+        if (!page.elements.length) {
+            page.elements = [_tTxt('GOOD ART.', .08, .34, .84, .14, 5, 'display', '#1a1a1a'), _tTxt('GOOD PEOPLE.', .08, .54, .84, .14, 6, 'display', '#1a1a1a')];
+        }
+        page.type = 'breaker';   // clean full-page statement, no footer
     } else { return; }
     _mbEditTarget = { key: key, label: label, page: page };
     const m = document.getElementById('moodboardModal'); if (!m) return;
@@ -8466,7 +8480,20 @@ async function _buildSpecPagePDF(opts) {
 
     await emitLayout('beforeContacts');
     // — Good Art. Good People. (real) —
-    if (inc.slogan) { newPage(); _drawSloganPage(doc, logos, pageNum, meta); }
+    if (inc.slogan) {
+        newPage();
+        const sg = editorialContent.sloganPage;
+        if (sg && Array.isArray(sg.elements) && sg.elements.length) {
+            const src = sg.elements;
+            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+            for (let ti = 0; ti < src.length; ti++) {
+                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+            }
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker');
+        } else {
+            _drawSloganPage(doc, logos, pageNum, meta);
+        }
+    }
     // — Thank You / contacts (real) —
     if (inc.contacts) { newPage(); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts); }
 
