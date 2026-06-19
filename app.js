@@ -7362,7 +7362,7 @@ function _deckMockHTML(desc, w, h) {
     }
     if (desc.kind === 'prose' || (desc.kind === 'fixed') || desc.kind === 'card') {
         const body = (desc.text || '').toString();
-        const bodyHtml = body ? _esc(body).replace(/\n/g, '<br>') : '<span style="color:#bbb;">(empty — add copy in the Presentation PDF dialog)</span>';
+        const bodyHtml = body ? _esc(body).replace(/\n/g, '<br>') : '<span style="color:#bbb;">(empty — add a template or copy via this page\u2019s tools)</span>';
         return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px;"><div style="font-weight:800; color:#111; font-size:' + fs(0.08) + 'px; text-transform:uppercase; letter-spacing:0.02em;">' + _esc(desc.title) + '</div><div style="color:#333; font-size:' + fs(0.04) + 'px; line-height:1.5; margin-top:' + Math.round(h * 0.05) + 'px; max-height:' + Math.round(h * 0.7) + 'px; overflow:hidden;">' + bodyHtml + '</div></div>');
     }
     if (desc.kind === 'floorplan') {
@@ -7393,14 +7393,37 @@ function _deckMockHTML(desc, w, h) {
     }
     return wrap('<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:' + fs(0.05) + 'px;">' + _esc(desc.title) + '</div>');
 }
-function openDeckStudio() {
-    _dsPages = _deckPageList();
-    if (_dsIndex >= _dsPages.length) _dsIndex = 0;
+let _dsActiveTab = 'project';
+function openDeckStudio(tab) {
     const m = document.getElementById('deckStudioModal'); if (!m) return;
+    // Reparent the Project settings panel into the Project tab (once).
+    const proj = document.getElementById('dsTabProject');
+    const panel = document.getElementById('specPdfPanel');
+    if (proj && panel && panel.parentElement !== proj) {
+        panel.style.width = '100%'; panel.style.maxWidth = '600px'; panel.style.maxHeight = 'none';
+        panel.style.boxShadow = 'none'; panel.style.border = 'none'; panel.style.padding = '4px 8px';
+        proj.appendChild(panel);
+    }
+    if (typeof _specPdfPrefill === 'function') _specPdfPrefill();
     const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
     m.style.display = 'flex';
-    _dsRenderRail(); _dsRenderTools();
-    requestAnimationFrame(_dsRenderCenter);
+    _dsTab(tab || 'project');
+}
+function _dsTab(which) {
+    _dsActiveTab = which;
+    const p = document.getElementById('dsTabProject'), g = document.getElementById('dsTabPages');
+    if (p) p.style.display = (which === 'project') ? 'flex' : 'none';
+    if (g) g.style.display = (which === 'pages') ? 'flex' : 'none';
+    const bp = document.getElementById('dsTabBtnProject'), bg = document.getElementById('dsTabBtnPages');
+    const on = 'background:#6a6aff; color:#fff;', off = 'background:var(--bg-input); color:var(--text-main);';
+    if (bp) bp.style.cssText = 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (which === 'project' ? on : off);
+    if (bg) bg.style.cssText = 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (which === 'pages' ? on : off);
+    if (which === 'pages') {
+        _dsPages = _deckPageList();
+        if (_dsIndex >= _dsPages.length) _dsIndex = 0;
+        _dsRenderRail(); _dsRenderTools();
+        requestAnimationFrame(_dsRenderCenter);
+    }
 }
 function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
@@ -7619,16 +7642,26 @@ function _dsRenderTools() {
     if (desc.kind === 'layout') addBtn('Open in layout editor', () => { const idx = (editorialContent.layoutPages || []).indexOf(desc.page); if (idx >= 0) _mbPageIndex = idx; closeDeckStudio(); openMoodboardModal(); }, !!cat);
     else if (desc.kind === 'fixed') addBtn('Open in layout editor', () => { closeDeckStudio(); openFixedPageEditor(desc.fixed); }, !!cat);
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
-    else if (desc.type === 'contacts') addBtn('Edit contacts', () => { closeDeckStudio(); openContactsEditor(); });
-    else if (desc.kind === 'prose' || desc.kind === 'card') addBtn('Edit copy (Presentation PDF dialog)', () => { closeDeckStudio(); openSpecPdfModal(); });
+    else if (desc.type === 'contacts') addBtn('Edit contacts', () => { openContactsEditor(); });
+    else if (desc.type === 'timeline') {
+        const lab = document.createElement('div'); lab.textContent = 'Phases (one per line: Phase | Timeframe)'; lab.style.cssText = 'font-size:0.7rem; color:var(--text-muted); margin-bottom:6px;';
+        const ta = document.createElement('textarea'); ta.rows = 8;
+        ta.style.cssText = 'width:100%; box-sizing:border-box; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; resize:vertical; font-family:monospace;';
+        ta.value = editorialContent.timeline || '';
+        ta.oninput = () => { editorialContent.timeline = ta.value; const hid = document.getElementById('specPdfTimeline'); if (hid) hid.value = ta.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
+        ta.onblur = () => { _dsRenderRail(); _dsRenderCenter(); };
+        t.appendChild(lab); t.appendChild(ta);
+    }
 
     const note = document.createElement('p');
     note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin-top:6px; line-height:1.5;';
     note.textContent = cat
         ? 'Applying a template replaces this page\u2019s layout (images are filled in the editor). Use the editor for fine adjustments.'
-        : (desc.kind === 'prose'
-            ? 'This section is text-only today. Cover, Art Narrative, Good Art Good People, and layout/art-collection pages offer templates.'
-            : 'Inline floorplan number placement on the preview is coming next.');
+        : (desc.type === 'timeline'
+            ? 'Phases render on the Process / Timeline page. Edits here save with the project.'
+            : (desc.kind === 'floorplan'
+                ? 'Drag pins on the preview, or open the full markup tool.'
+                : 'Edits to this page save with the project.'));
     t.appendChild(note);
 }
 function _dsSave() {
@@ -7637,7 +7670,7 @@ function _dsSave() {
     const b = document.getElementById('dsSaveBtn'); if (b) { const o = b.textContent; b.textContent = 'Saved \u2713'; setTimeout(() => { b.textContent = o; }, 1200); }
     _dsRefresh();
 }
-window.addEventListener('resize', () => { const m = document.getElementById('deckStudioModal'); if (m && m.style.display && m.style.display !== 'none') _dsRenderCenter(); });
+window.addEventListener('resize', () => { const m = document.getElementById('deckStudioModal'); if (m && m.style.display && m.style.display !== 'none' && _dsActiveTab === 'pages') _dsRenderCenter(); });
 
 // ── Presentation PDF setup modal ──────────────────────────────────────────
 // The "Spec PDF" button opens this instead of exporting immediately. It
@@ -7645,14 +7678,11 @@ window.addEventListener('resize', () => { const m = document.getElementById('dec
 // location for the footer) and a per-section include checklist. Sections not
 // yet built emit labeled placeholder pages so the full deck skeleton is
 // visible. Last-used values are remembered on window._specPdfMeta.
-function openSpecPdfModal() {
-    const m = document.getElementById('specPdfModal');
-    if (!m) return;
+function _specPdfPrefill() {
     const data = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
     const withArt = data.filter(r => r && r.artworkUrl).length;
     const sum = document.getElementById('specPdfSummary');
     if (sum) sum.textContent = `${data.length} item${data.length === 1 ? '' : 's'} · ${withArt} with artwork`;
-    // Pre-fill meta from last use (fall back to blanks / V1).
     const meta = window._specPdfMeta || {};
     const set = (id, v) => { const el = document.getElementById(id); if (el && (el.value === '' || v)) el.value = v || el.value; };
     set('specPdfCode', meta.code || '');
@@ -7675,8 +7705,8 @@ function openSpecPdfModal() {
     const stt = document.getElementById('specPdfStrategyTertiary'); if (stt) stt.value = st.tertiary || '';
     const mbCount = document.getElementById('specPdfMoodboardCount');
     if (mbCount) { _mbMigratePages(); const n = (editorialContent.layoutPages || []).length; mbCount.textContent = n + ' page' + (n === 1 ? '' : 's'); }
-    m.style.display = 'flex';
 }
+function openSpecPdfModal() { openDeckStudio('project'); }
 
 function applySpecPdfModal() {
     const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
