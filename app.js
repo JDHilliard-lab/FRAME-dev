@@ -263,6 +263,30 @@ let redoStack = [];
 // and autosave (added to those payloads), unlike the earlier session-only var.
 let floorplanImageData = '';
 let floorplanImageName = '';
+// Multiple floor-plan levels (Level 1/2/3…). Each row carries a `level` index.
+// Legacy single-plan projects migrate into Level 1.
+let floorplanLevels = [];        // [{ name, imageData, imageName }]
+let _fpLevel = 0;                // active level in the markup tool
+function _fpMigrate() {
+    if (!Array.isArray(floorplanLevels) || !floorplanLevels.length) {
+        floorplanLevels = [{ name: 'Level 1', imageData: floorplanImageData || '', imageName: floorplanImageName || '' }];
+    }
+    floorplanLevels.forEach((lv, i) => {
+        if (!lv || typeof lv !== 'object') { floorplanLevels[i] = { name: 'Level ' + (i + 1), imageData: '', imageName: '' }; return; }
+        if (typeof lv.name !== 'string' || !lv.name) lv.name = 'Level ' + (i + 1);
+        if (typeof lv.imageData !== 'string') lv.imageData = '';
+        if (typeof lv.imageName !== 'string') lv.imageName = '';
+    });
+    if (_fpLevel < 0 || _fpLevel >= floorplanLevels.length) _fpLevel = 0;
+}
+function _fpActive() { _fpMigrate(); return floorplanLevels[_fpLevel]; }
+// Per-level 1-based callout number for each item (in dashProjectData order),
+// matching the Floorplan Key page numbering exactly.
+function _fpNumbers() {
+    const counts = {}, map = {};
+    (dashProjectData || []).forEach(it => { if (!it) return; const lv = it.level || 0; counts[lv] = (counts[lv] || 0) + 1; map[it.id] = counts[lv]; });
+    return map;
+}
 
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
@@ -1266,6 +1290,7 @@ function performAutosave() {
             projName: projName,
             floorplan: floorplanImageData,
             floorplanName: floorplanImageName,
+            floorplanLevels: floorplanLevels,
             editorial: editorialContent,
             data: snapshotProjectState(),  // reuses the undo snapshot format
         };
@@ -1313,6 +1338,8 @@ function checkAutosaveOnLoad() {
             restoreProjectState(payload.data);
             floorplanImageData = payload.floorplan || '';
             floorplanImageName = payload.floorplanName || '';
+            floorplanLevels = Array.isArray(payload.floorplanLevels) ? payload.floorplanLevels : [];
+            _fpLevel = 0; _fpMigrate();
             editorialContent = Object.assign(_editorialDefaults(), payload.editorial || {});
             refreshAllViews();
             // After restore, push fresh history (clearing prior so undo doesn't
@@ -2526,7 +2553,7 @@ function saveMasterProject() {
     }
     const getStr = (id) => document.getElementById(id).value;
     const globalMeta = { projName: getStr('g_projName'), desc: getStr('g_desc'), date: getStr('g_date'), issued: getStr('g_issued'), client: getStr('g_client'), attn: getStr('g_attn'), delivery: getStr('g_delivery') };
-    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, editorial: editorialContent };
+    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, floorplanLevels: floorplanLevels, editorial: editorialContent };
     const blob = new Blob([JSON.stringify(masterData, null, 2)], { type: 'application/json' });
     // Filename uses the user's Project Name + today's date so multiple
     // projects don't overwrite each other in Downloads.
@@ -2562,6 +2589,8 @@ function loadMasterProject(event) {
                 if (data.elevations) elevations = data.elevations;
                 floorplanImageData = data.floorplanImage || '';
                 floorplanImageName = data.floorplanImageName || '';
+                floorplanLevels = Array.isArray(data.floorplanLevels) ? data.floorplanLevels : [];
+                _fpLevel = 0; _fpMigrate();
                 editorialContent = Object.assign(_editorialDefaults(), data.editorial || {});
                 // If the loaded project had divergent dashUnit / elevUnit
                 // (a relic of the pre-unified era), the elevations array
@@ -6599,7 +6628,7 @@ function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
 // PINS placed ON the plan are deferred until per-item coordinates exist; the
 // list numbers still establish the legend the pins will use. `items` is the
 // full row set; `idToPage` maps item id -> spec page number.
-function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planImg) {
+function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planImg, levelName) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
@@ -6613,7 +6642,7 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planI
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(110, 110, 110);
-    doc.text('PROPOSED FLOOR PLAN', M, M + 30);
+    doc.text((levelName ? ('PROPOSED FLOOR PLAN \u2014 ' + levelName.toUpperCase()) : 'PROPOSED FLOOR PLAN'), M, M + 30);
     doc.setTextColor(20, 20, 20);
 
     // — Floorplan image (right) — drawn first so pins can sit on its rect —
@@ -7252,8 +7281,9 @@ function loadSpecPdfFloorplan(event, fromMarkup) {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-        floorplanImageData = reader.result;
-        floorplanImageName = file.name;
+        const lv = _fpActive();
+        lv.imageData = reader.result; lv.imageName = file.name;
+        floorplanImageData = lv.imageData; floorplanImageName = lv.imageName;   // legacy mirror
         if (status) status.textContent = file.name;
         if (typeof scheduleAutosave === 'function') scheduleAutosave();
         const mk = document.getElementById('fpMarkupModal');
@@ -7298,13 +7328,17 @@ function renderFloorplanMarkup() {
     if (!area || !tray) return;
     const items = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
 
+    _fpMigrate();
+    _fpRenderLevelBar();
+    const nums = _fpNumbers();
+    const active = _fpActive();
     // — Plan area —
     area.innerHTML = '';
-    if (!floorplanImageData) {
+    if (!active.imageData) {
         const b = document.createElement('button');
         b.className = 'action-btn btn-secondary';
         b.style.cssText = 'width:auto; height:32px; padding:0 14px; font-size:0.8rem;';
-        b.textContent = 'Choose plan image…';
+        b.textContent = 'Choose plan image for ' + (active.name || 'this level') + '…';
         b.onclick = () => document.getElementById('fpMarkupFile').click();
         area.appendChild(b);
     } else {
@@ -7312,14 +7346,15 @@ function renderFloorplanMarkup() {
         wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
         const img = document.createElement('img');
         img.id = 'fpPlanImg';
-        img.src = floorplanImageData;
+        img.src = active.imageData;
         img.draggable = false;
-        img.style.cssText = 'display:block; max-width:100%; max-height:74vh; user-select:none; -webkit-user-drag:none; cursor:' + (_fpArmedId ? 'crosshair' : 'default') + ';';
+        img.style.cssText = 'display:block; max-width:100%; max-height:70vh; user-select:none; -webkit-user-drag:none; cursor:' + (_fpArmedId ? 'crosshair' : 'default') + ';';
         img.onclick = _fpPlaceFromEvent;
         wrap.appendChild(img);
-        items.forEach((it, i) => {
+        items.forEach((it) => {
+            if ((it.level || 0) !== _fpLevel) return;
             if (it.planX == null || it.planY == null) return;
-            wrap.appendChild(_fpMakePin(it, i));
+            wrap.appendChild(_fpMakePin(it, nums[it.id] || 1));
         });
         area.appendChild(wrap);
     }
@@ -7333,13 +7368,13 @@ function renderFloorplanMarkup() {
         rowEl.style.cssText = 'display:flex; align-items:center; gap:8px; padding:6px; border-radius:5px; cursor:pointer; margin-bottom:3px; ' +
             (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid #6a6aff;' : 'background:transparent;');
         const num = document.createElement('span');
-        num.textContent = String(i + 1).padStart(2, '0');
+        num.textContent = String(nums[it.id] || 1).padStart(2, '0');
         num.style.cssText = 'flex:0 0 auto; width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.6rem; font-weight:700; color:#fff; background:' + categoryColor(it.category) + ';';
         const lbl = document.createElement('div');
         lbl.style.cssText = 'flex:1; min-width:0; overflow:hidden;';
         lbl.innerHTML = '<div style="font-size:0.74rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(it.id || '') +
             '</div><div style="font-size:0.62rem; color:' + (placed ? 'var(--text-muted)' : '#c08a2e') + '; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' +
-            (placed ? _esc(it.location || '') : 'click, then click the plan') + '</div>';
+            (placed ? _esc(((it.level || 0) !== _fpLevel ? '[' + ((floorplanLevels[it.level || 0] || {}).name || ('Level ' + ((it.level || 0) + 1))) + '] ' : '') + (it.location || '')) : 'click, then click the plan') + '</div>';
         const sel = document.createElement('select');
         sel.style.cssText = 'flex:0 0 auto; font-size:0.62rem; padding:2px 4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
         ART_CATEGORIES.forEach(c => {
@@ -7406,9 +7441,69 @@ function _fpPlaceFromEvent(e) {
     if (!n) return;
     const row = _fpFindRow(_fpArmedId);
     if (!row) return;
-    row.planX = n.x; row.planY = n.y;
+    row.planX = n.x; row.planY = n.y; row.level = _fpLevel;   // pin belongs to the active level
     _fpArmedId = null;
     if (typeof pushHistory === 'function') pushHistory();
+    renderFloorplanMarkup();
+}
+// ── Floor-plan level management ────────────────────────────────────────────
+function _fpRenderLevelBar() {
+    const bar = document.getElementById('fpLevelBar');
+    if (!bar) return;
+    _fpMigrate();
+    bar.innerHTML = '';
+    floorplanLevels.forEach((lv, i) => {
+        const b = document.createElement('button');
+        b.textContent = lv.name || ('Level ' + (i + 1));
+        b.title = 'Switch to ' + (lv.name || ('Level ' + (i + 1)));
+        b.onclick = () => _fpSwitchLevel(i);
+        b.style.cssText = 'height:26px; padding:0 10px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; white-space:nowrap; ' + (i === _fpLevel ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);');
+        bar.appendChild(b);
+    });
+    const add = document.createElement('button');
+    add.textContent = '+ Level'; add.title = 'Add a floor level';
+    add.onclick = _fpAddLevel;
+    add.style.cssText = 'height:26px; padding:0 10px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; background:var(--bg-input); color:var(--text-main);';
+    bar.appendChild(add);
+    const ren = document.createElement('button');
+    ren.textContent = 'Rename'; ren.title = 'Rename this level';
+    ren.onclick = _fpRenameLevel;
+    ren.style.cssText = add.style.cssText;
+    bar.appendChild(ren);
+    if (floorplanLevels.length > 1) {
+        const del = document.createElement('button');
+        del.textContent = 'Delete level'; del.title = 'Delete this level';
+        del.onclick = _fpDeleteLevel;
+        del.style.cssText = add.style.cssText;
+        bar.appendChild(del);
+    }
+}
+function _fpSwitchLevel(i) { _fpMigrate(); if (i < 0 || i >= floorplanLevels.length) return; _fpLevel = i; _fpArmedId = null; const a = _fpActive(); floorplanImageData = a.imageData; floorplanImageName = a.imageName; renderFloorplanMarkup(); }
+function _fpAddLevel() { _fpMigrate(); floorplanLevels.push({ name: 'Level ' + (floorplanLevels.length + 1), imageData: '', imageName: '' }); _fpLevel = floorplanLevels.length - 1; if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup(); }
+function _fpRenameLevel() {
+    _fpMigrate();
+    const lv = floorplanLevels[_fpLevel];
+    const nm = (window.prompt('Level name:', lv.name || ('Level ' + (_fpLevel + 1))) || '').trim();
+    if (!nm) return;
+    lv.name = nm; if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup();
+}
+function _fpDeleteLevel() {
+    _fpMigrate();
+    if (floorplanLevels.length <= 1) return;
+    const removed = _fpLevel;
+    if (!window.confirm('Delete "' + (floorplanLevels[removed].name || ('Level ' + (removed + 1))) + '"? Pins on it will be cleared.')) return;
+    // clear pins for rows on the removed level; shift higher levels down
+    (dashProjectData || []).forEach(r => {
+        if (!r) return;
+        const rl = r.level || 0;
+        if (rl === removed) { r.planX = null; r.planY = null; r.level = 0; }
+        else if (rl > removed) r.level = rl - 1;
+    });
+    floorplanLevels.splice(removed, 1);
+    if (_fpLevel >= floorplanLevels.length) _fpLevel = floorplanLevels.length - 1;
+    const a = _fpActive(); floorplanImageData = a.imageData; floorplanImageName = a.imageName;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
     renderFloorplanMarkup();
 }
 
@@ -8469,17 +8564,32 @@ async function _buildSpecPagePDF(opts) {
         else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
     }
     await emitLayout('beforeFloorplan');
-    // — Floorplan Key (real): list + plan image + links to each item's spec page —
+    // — Floorplan Key (real): one key page per level, each linking to spec pages —
+    const _fpLevelKeyPage = {};
     if (inc.floorplanKey) {
-        newPage();
-        fpKeyPageNum = pageNum;
-        // Spec pages follow immediately, one per artworked row, so their page
-        // numbers are deterministic: row i sits at fpKeyPageNum + 1 + i.
+        _fpMigrate();
+        const levels = floorplanLevels;
+        const emitLevels = [];
+        levels.forEach((lv, li) => {
+            const used = (li === 0) || !!lv.imageData || (dashProjectData || []).some(it => (it.level || 0) === li);
+            if (used) emitLevels.push(li);
+        });
+        if (!emitLevels.length) emitLevels.push(0);
+        const nKeys = emitLevels.length;
+        // Spec pages follow ALL key pages, contiguous in row order, so each row's
+        // spec page = (page before keys) + nKeys + 1 + rowIndex.
         const idToPage = {};
-        if (inc.spec) rows.forEach((r, i) => { if (r && r.id) idToPage[r.id] = fpKeyPageNum + 1 + i; });
-        let planImg = null;
-        if (floorplanImageData) { try { planImg = await _loadImg(floorplanImageData); } catch (e) {} }
-        _drawFloorplanKeyPage(doc, logos, pageNum, meta, dashProjectData, idToPage, planImg);
+        if (inc.spec) rows.forEach((r, i) => { if (r && r.id) idToPage[r.id] = pageNum + nKeys + 1 + i; });
+        for (let k = 0; k < emitLevels.length; k++) {
+            const li = emitLevels[k];
+            newPage();
+            _fpLevelKeyPage[li] = pageNum;
+            const items = (dashProjectData || []).filter(it => (it.level || 0) === li);
+            let planImg = null;
+            if (levels[li].imageData) { try { planImg = await _loadImg(levels[li].imageData); } catch (e) {} }
+            _drawFloorplanKeyPage(doc, logos, pageNum, meta, items, idToPage, planImg, levels[li].name || ('Level ' + (li + 1)));
+        }
+        fpKeyPageNum = _fpLevelKeyPage[emitLevels[0]];   // fallback for any unlevelled back-link
     }
 
     // — Spec pages (the real, existing generator) —
@@ -8599,15 +8709,16 @@ async function _buildSpecPagePDF(opts) {
             }
         }
 
-        // — Back-link to the floorplan key (top-right), when that page exists —
-        if (fpKeyPageNum) {
+        // — Back-link to the floorplan key for THIS item's level —
+        const backPage = _fpLevelKeyPage[(r.level || 0)] || fpKeyPageNum;
+        if (backPage) {
             doc.setFont('helvetica', 'bold');
             doc.setFontSize(8);
             doc.setTextColor(90, 90, 90);
             const blText = '\u2190 Floorplan';
             doc.text(blText, PW - M, M + 4, { align: 'right' });
             const blW = doc.getTextWidth(blText);
-            doc.link(PW - M - blW, M - 4, blW + 2, 12, { pageNumber: fpKeyPageNum });
+            doc.link(PW - M - blW, M - 4, blW + 2, 12, { pageNumber: backPage });
             doc.setTextColor(20, 20, 20);
         }
 
