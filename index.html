@@ -1074,7 +1074,7 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_floorplanKey" checked style="cursor:pointer;"> Floorplan Key <span style="color:var(--text-muted); font-size:0.7rem;">(plan + pins)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_spec" checked style="cursor:pointer;"> Spec Pages <span style="color:var(--text-muted); font-size:0.7rem;">(one per artworked piece)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_slogan" checked style="cursor:pointer;"> Good Art. Good People. <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openFixedPageEditor('slogan')">Edit…</button></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <span style="color:var(--text-muted); font-size:0.7rem;">(contacts below)</span></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openContactsEditor()">Edit…</button></label>
         </div>
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Process &amp; timeline <span style="font-weight:normal; text-transform:none;">(one per line: Phase | Timeframe)</span></label>
@@ -1274,6 +1274,23 @@
                     <button class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="saveCopyEditor()">Save</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contacts editor: structured add/remove for the Thank You page -->
+<div id="contactsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:10001; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:92vw; max-width:680px; max-height:84vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <div style="padding:14px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
+            <div>
+                <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Thank You — contacts</h3>
+                <p style="margin:2px 0 0; font-size:0.7rem; color:var(--text-muted);">These appear on the Thank You page. Add or remove people as needed.</p>
+            </div>
+            <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="closeContactsEditor()">Done</button>
+        </div>
+        <div id="contactsRows" style="flex:1; overflow-y:auto; padding:16px 18px;"><!-- contact rows --></div>
+        <div style="padding:12px 18px; border-top:1px solid var(--border-color);">
+            <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:0.74rem;" onclick="addContact()">+ Add contact</button>
         </div>
     </div>
 </div>
