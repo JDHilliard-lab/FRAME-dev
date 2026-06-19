@@ -582,6 +582,7 @@ function snapshotProjectState() {
         dashProjectData: JSON.parse(JSON.stringify(dashProjectData)),
         elevations: JSON.parse(JSON.stringify(elevations)),
         currentElevIndex: currentElevIndex,
+        editorial: JSON.parse(JSON.stringify(editorialContent)),
     };
 }
 
@@ -602,6 +603,7 @@ function restoreProjectState(snap) {
     elevations.length = 0;
     cloned.elevations.forEach(e => elevations.push(e));
     currentElevIndex = cloned.currentElevIndex;
+    if (cloned.editorial) editorialContent = cloned.editorial;
     // Re-bind derived globals
     if (elevations[currentElevIndex]) {
         elevFrames = elevations[currentElevIndex].frames;
@@ -689,6 +691,17 @@ function refreshAllViews() {
     // value indices match the actual data. Without this, ctrl+z past an "add
     // dashboard row" event would leave the dropdown showing stale row counts.
     if (typeof populateElevBulkList === 'function') populateElevBulkList();
+
+    // Layout editor — if open, reflect restored layout/cover content and
+    // re-resolve the fixed-page edit target (its object was replaced).
+    if (typeof renderMoodboardCanvas === 'function') {
+        if (_mbEditTarget && _mbEditTarget.key === 'cover') {
+            if (!editorialContent.coverPage || !Array.isArray(editorialContent.coverPage.elements)) editorialContent.coverPage = { elements: [] };
+            _mbEditTarget.page = editorialContent.coverPage;
+        }
+        const mm = document.getElementById('moodboardModal');
+        if (mm && mm.style.display !== 'none') { _mbSelected = -1; renderMoodboardCanvas(); }
+    }
 }
 
 // Update Undo/Redo button enabled state based on stack contents.
@@ -7670,8 +7683,10 @@ function renderMoodboardCanvas() {
         const box = document.createElement('div'); box.dataset.idx = i;
         if (ty === 'text') {
             const fs = Math.max(8, (t.size || 0.045) * cr.height);
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:' + _mbFontCss(t.font) + ';' + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
             box.textContent = t.text || 'Text';
+            box.title = 'Double-click to edit text';
+            box.ondblclick = (e) => { e.stopPropagation(); _mbBeginTextEdit(box, i); };
         } else {
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:0 1px 6px rgba(0,0,0,0.35);' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
             const boxW = t.w * cr.width, boxH = (t.h || 0.2) * cr.height;
@@ -7860,8 +7875,57 @@ function _mbSetTextColor(v) { const el = _mbSelEl(); if (el) { el.color = v; ren
 function _mbSetArrowColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbNudgeWeight(d) { const el = _mbSelEl(); if (el) { el.weight = Math.max(0.5, Math.min(6, (el.weight || 1.2) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 
+// Inline text editing: double-click a text box to type directly in it.
+let _mbTextEditing = false;
+function _mbBeginTextEdit(box, i) {
+    if (_mbTextEditing) return;
+    _mbTextEditing = true;
+    box.contentEditable = 'true';
+    box.style.cursor = 'text';
+    box.focus();
+    try { const r = document.createRange(); r.selectNodeContents(box); r.collapse(false); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
+    box.oninput = () => { const t = _mbEls()[i]; if (t) t.text = box.innerText; };
+    box.onblur = () => {
+        _mbTextEditing = false;
+        box.contentEditable = 'false';
+        const t = _mbEls()[i]; if (t) t.text = box.innerText.replace(/\n$/, '');
+        if (typeof pushHistory === 'function') pushHistory();
+        renderMoodboardCanvas();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    };
+}
+
+// Paragraph styles: pick a named style to set a text box's font/size/color.
+const PARA_STYLES = {
+    heading: { label: 'Heading', font: 'display', size: 0.07, color: '#1a1a1a' },
+    subhead: { label: 'Subhead', font: 'display', size: 0.045, color: '#444444' },
+    body: { label: 'Body', font: 'serif', size: 0.03, color: '#222222' },
+    caption: { label: 'Caption', font: 'serif', size: 0.022, color: '#777777' },
+    quote: { label: 'Quote', font: 'serif', size: 0.052, color: '#222222' }
+};
+function _mbApplyParaStyle(name) {
+    const sel = document.getElementById('mbParaStyle'); if (sel) sel.value = '';
+    const el = _mbSelEl(); const s = PARA_STYLES[name];
+    if (!el || _elType(el) !== 'text' || !s) return;
+    el.font = s.font; el.size = s.size; el.color = s.color;
+    if (typeof pushHistory === 'function') pushHistory();
+    renderMoodboardCanvas();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+
+let _mbLastTextDown = null;
 function _mbTileDown(e, i) {
+    if (_mbTextEditing) return;   // let clicks place the cursor while editing text
     e.preventDefault();
+    const t0 = _mbEls()[i];
+    const now = Date.now();
+    if (t0 && _elType(t0) === 'text' && _mbLastTextDown && _mbLastTextDown.i === i && (now - _mbLastTextDown.t) < 400) {
+        _mbLastTextDown = null;
+        _mbSelected = i;
+        _mbBeginTextEdit(e.currentTarget, i);
+        return;
+    }
+    _mbLastTextDown = (t0 && _elType(t0) === 'text') ? { i: i, t: now } : null;
     _mbSelected = i;
     const canvas = document.getElementById('moodboardCanvas');
     const r = canvas ? canvas.getBoundingClientRect() : null;
