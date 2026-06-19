@@ -1221,6 +1221,14 @@
                 </select>
             </div>
             <div id="mbTextCtl" style="display:none; align-items:center; gap:6px;">
+                <select id="mbParaStyle" onchange="_mbApplyParaStyle(this.value)" title="Apply a paragraph style" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                    <option value="">Style…</option>
+                    <option value="heading">Heading</option>
+                    <option value="subhead">Subhead</option>
+                    <option value="body">Body</option>
+                    <option value="caption">Caption</option>
+                    <option value="quote">Quote</option>
+                </select>
                 <select id="mbFont" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
                     <option value="display">Druk (display)</option>
                     <option value="serif">Messina (serif)</option>
