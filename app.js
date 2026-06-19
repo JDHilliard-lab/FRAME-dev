@@ -7605,6 +7605,51 @@ function _mbApplyModeUI() {
     const rail = document.getElementById('moodboardPages'); if (rail) rail.style.display = fixed ? 'none' : 'flex';
     const lab = document.getElementById('mbModeLabel'); if (lab) lab.textContent = fixed ? ('Editing: ' + (_mbEditTarget.label || 'Page')) : '';
 }
+
+// ── Contacts editor: structured add/remove for the Thank You page. Reads and
+// writes editorialContent.contacts (the "Name | Role | Email | Phone" string),
+// so the deck renderer and persistence are unchanged. ──────────────────────
+let _contactsDraft = [];
+function _contactsParse(str) {
+    return (str || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const p = l.split(/\s*[|,]\s*/); return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' }; });
+}
+function _contactsSerialize(arr) {
+    return (arr || []).filter(c => (c.name || c.role || c.email || c.phone)).map(c => [c.name || '', c.role || '', c.email || '', c.phone || ''].join(' | ')).join('\n');
+}
+function _contactsCommit() {
+    const str = _contactsSerialize(_contactsDraft);
+    editorialContent.contacts = str;
+    const ta = document.getElementById('specPdfContacts'); if (ta) ta.value = str;
+    if (typeof markDirty === 'function') markDirty();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+function _contactsRender() {
+    const wrap = document.getElementById('contactsRows'); if (!wrap) return;
+    wrap.innerHTML = '';
+    _contactsDraft.forEach((c, i) => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; gap:6px; align-items:center; margin-bottom:6px;';
+        const mk = (ph, field, w) => { const inp = document.createElement('input'); inp.type = 'text'; inp.value = c[field] || ''; inp.placeholder = ph; inp.oninput = () => { _contactsDraft[i][field] = inp.value; _contactsCommit(); }; inp.style.cssText = 'flex:' + w + '; min-width:0; height:30px; font-size:0.74rem; padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;'; return inp; };
+        row.appendChild(mk('Name', 'name', '2'));
+        row.appendChild(mk('Role', 'role', '2'));
+        row.appendChild(mk('Email', 'email', '3'));
+        row.appendChild(mk('Phone', 'phone', '2'));
+        const del = document.createElement('button'); del.textContent = '✕'; del.title = 'Remove contact'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:30px; height:30px; padding:0; font-size:0.75rem; flex:0 0 auto;'; del.onclick = () => removeContact(i);
+        row.appendChild(del);
+        wrap.appendChild(row);
+    });
+}
+function openContactsEditor() {
+    const ta = document.getElementById('specPdfContacts');
+    const cur = ta ? ta.value : (editorialContent.contacts || '');
+    _contactsDraft = _contactsParse(cur);
+    if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '' }];
+    _contactsRender();
+    const m = document.getElementById('contactsModal'); if (m) m.style.display = 'flex';
+}
+function closeContactsEditor() { const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none'; }
+function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '' }); _contactsRender(); _contactsCommit(); }
+function removeContact(i) { _contactsDraft.splice(i, 1); if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '' }]; _contactsRender(); _contactsCommit(); }
 function _mbKeyDelete(e) {
     if (_mbPlacing) return;
     if (e.key !== 'Delete' && e.key !== 'Backspace') return;
