@@ -335,19 +335,68 @@ function moveLayoutPage(dir) {
 }
 function _mbSetPageType(v) { const p = _mbPage(); p.type = v; p.title = _mbDefaultTitle(v); renderMoodboardCanvas(); _mbAutosave(); }
 function _mbSetPageTitle(v) { _mbPage().title = v; _mbAutosave(); }
+let _mbDragPageFrom = -1;
+function _mbEscapeHtml(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+// Read-only miniature render of a page's elements into an HTML string.
+function _mbThumbInner(page, wpx, hpx) {
+    const els = (page.elements || []).slice().sort((a, b) => (a.z || 0) - (b.z || 0));
+    let html = '', svg = '';
+    els.forEach(t => {
+        const ty = _elType(t);
+        if (ty === 'image' && t.img) {
+            const boxW = (t.w || 0.28) * wpx, boxH = (typeof t.h === 'number' ? t.h : (t.w || 0.28) * (936 / 540) / (t.aspect || 1.33)) * hpx;
+            const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
+            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + boxW + 'px;height:' + boxH + 'px;overflow:hidden;">'
+                + '<img src="' + t.img + '" style="position:absolute;left:' + cv.offX + 'px;top:' + cv.offY + 'px;width:' + cv.dW + 'px;height:' + cv.dH + 'px;max-width:none;"></div>';
+        } else if (ty === 'text') {
+            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + ((t.w || 0.3) * wpx) + 'px;font-size:' + Math.max(2, (t.size || 0.045) * hpx) + 'px;line-height:1.1;color:' + (t.color || '#222') + ';overflow:hidden;font-family:Georgia,serif;">' + _mbEscapeHtml(t.text || '') + '</div>';
+        } else if (ty === 'arrow') {
+            svg += '<line x1="' + ((t.x1 || 0) * wpx) + '" y1="' + ((t.y1 || 0) * hpx) + '" x2="' + ((t.x2 || 0) * wpx) + '" y2="' + ((t.y2 || 0) * hpx) + '" stroke="' + (t.color || '#9aa0a6') + '" stroke-width="' + Math.max(0.5, (t.weight || 1.2) * 0.6) + '"/>';
+        } else if (ty === 'elbow' && Array.isArray(t.pts) && t.pts.length > 1) {
+            const pts = t.pts.map(p => ((p.x || 0) * wpx) + ',' + ((p.y || 0) * hpx)).join(' ');
+            svg += '<polyline points="' + pts + '" fill="none" stroke="' + (t.color || '#9aa0a6') + '" stroke-width="' + Math.max(0.5, (t.weight || 1.2) * 0.6) + '"/>';
+        }
+    });
+    if (svg) html += '<svg width="' + wpx + '" height="' + hpx + '" style="position:absolute;left:0;top:0;pointer-events:none;">' + svg + '</svg>';
+    if (page.title) html += '<div style="position:absolute;left:2px;top:1px;font:700 ' + Math.max(3, 0.06 * hpx) + 'px Arial, sans-serif;color:#111;">' + _mbEscapeHtml(page.title) + '</div>';
+    return html;
+}
+function _mbReorderPages(from, to) {
+    _mbMigratePages();
+    const pages = editorialContent.layoutPages;
+    if (from === to || from < 0 || from >= pages.length || to < 0 || to >= pages.length) return;
+    const curId = pages[_mbPageIndex] && pages[_mbPageIndex].id;
+    const moved = pages.splice(from, 1)[0];
+    pages.splice(to, 0, moved);
+    const ni = pages.findIndex(p => p.id === curId);
+    _mbPageIndex = ni >= 0 ? ni : Math.min(to, pages.length - 1);
+    renderMoodboardCanvas(); _mbAutosave();
+}
 function _mbRenderPageStrip() {
     const strip = document.getElementById('moodboardPages');
     if (!strip) return;
+    if (_mbDrag) return;   // don't rebuild thumbnails mid element-drag (perf)
     _mbMigratePages();
     const pages = editorialContent.layoutPages;
+    const W = 104, H = Math.round(104 * 540 / 936);
     strip.innerHTML = '';
     pages.forEach((p, i) => {
-        const b = document.createElement('button');
-        b.textContent = (i + 1) + (p.title ? ' · ' + p.title : ' · ' + (p.type || 'page'));
-        b.title = 'Switch to page ' + (i + 1);
-        b.onclick = () => _mbSwitchPage(i);
-        b.style.cssText = 'height:26px; padding:0 10px; font-size:0.7rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; white-space:nowrap; ' + (i === _mbPageIndex ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);');
-        strip.appendChild(b);
+        const tile = document.createElement('div');
+        tile.draggable = true;
+        tile.style.cssText = 'flex:0 0 auto; width:' + W + 'px; cursor:pointer; border-radius:4px; padding:2px; background:' + (i === _mbPageIndex ? '#6a6aff' : 'transparent') + ';';
+        const inner = document.createElement('div');
+        inner.style.cssText = 'position:relative; width:' + W + 'px; height:' + H + 'px; background:#fff; overflow:hidden; border:1px solid var(--border-color); border-radius:3px;';
+        inner.innerHTML = _mbThumbInner(p, W, H);
+        const lab = document.createElement('div');
+        lab.textContent = (i + 1) + (p.title ? ' · ' + p.title : ' · ' + (p.type || 'page'));
+        lab.style.cssText = 'font-size:0.6rem; color:' + (i === _mbPageIndex ? '#fff' : 'var(--text-muted)') + '; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px;';
+        tile.appendChild(inner); tile.appendChild(lab);
+        tile.onclick = () => _mbSwitchPage(i);
+        tile.ondragstart = (e) => { _mbDragPageFrom = i; try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', String(i)); } catch (_) {} };
+        tile.ondragover = (e) => { e.preventDefault(); try { e.dataTransfer.dropEffect = 'move'; } catch (_) {} tile.style.outline = '2px dashed #6a6aff'; };
+        tile.ondragleave = () => { tile.style.outline = ''; };
+        tile.ondrop = (e) => { e.preventDefault(); tile.style.outline = ''; if (_mbDragPageFrom >= 0 && _mbDragPageFrom !== i) _mbReorderPages(_mbDragPageFrom, i); _mbDragPageFrom = -1; };
+        strip.appendChild(tile);
     });
     const pt = document.getElementById('mbPageType'); if (pt) pt.value = pages[_mbPageIndex].type || 'moodboard';
     const ti = document.getElementById('mbPageTitle'); if (ti && document.activeElement !== ti) ti.value = pages[_mbPageIndex].title || '';
