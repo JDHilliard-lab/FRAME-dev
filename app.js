@@ -290,6 +290,7 @@ function _mbMigratePages() {
         if (!p.id) p.id = 'pg' + Math.random().toString(36).slice(2);
         if (typeof p.type !== 'string') p.type = 'moodboard';
         if (typeof p.title !== 'string') p.title = _mbDefaultTitle(p.type);
+        if (typeof p.place !== 'string') p.place = 'afterStrategy';
         if (!Array.isArray(p.elements)) p.elements = [];
     });
     if (_mbPageIndex < 0 || _mbPageIndex >= ec.layoutPages.length) _mbPageIndex = 0;
@@ -334,7 +335,9 @@ function moveLayoutPage(dir) {
     _mbPageIndex = j; renderMoodboardCanvas(); _mbAutosave();
 }
 function _mbSetPageType(v) { const p = _mbPage(); p.type = v; p.title = _mbDefaultTitle(v); renderMoodboardCanvas(); _mbAutosave(); }
-function _mbSetPageTitle(v) { _mbPage().title = v; _mbAutosave(); }
+function _mbSetPageTitle(v) { _mbPage().title = v; renderMoodboardCanvas(); _mbAutosave(); }
+function _mbSetPagePlace(v) { _mbPage().place = v; _mbAutosave(); }
+function _mbMoveToPos(v) { const to = parseInt(v, 10) - 1; if (!isNaN(to)) _mbReorderPages(_mbPageIndex, to); }
 let _mbDragPageFrom = -1;
 function _mbEscapeHtml(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 // Read-only miniature render of a page's elements into an HTML string.
@@ -400,6 +403,13 @@ function _mbRenderPageStrip() {
     });
     const pt = document.getElementById('mbPageType'); if (pt) pt.value = pages[_mbPageIndex].type || 'moodboard';
     const ti = document.getElementById('mbPageTitle'); if (ti && document.activeElement !== ti) ti.value = pages[_mbPageIndex].title || '';
+    const pl = document.getElementById('mbPagePlace'); if (pl) pl.value = pages[_mbPageIndex].place || 'afterStrategy';
+    const mv = document.getElementById('mbMoveTo');
+    if (mv) {
+        let opt = '';
+        for (let k = 0; k < pages.length; k++) opt += '<option value="' + (k + 1) + '"' + (k === _mbPageIndex ? ' selected' : '') + '>' + (k + 1) + '</option>';
+        mv.innerHTML = opt;
+    }
 }
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
@@ -7548,11 +7558,22 @@ function _mbDrawGuides(canvas) {
     const mk = (css, text) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute; pointer-events:none; ' + css; if (text) d.textContent = text; canvas.appendChild(d); };
     // page margin frame (≈40pt on a 936×540 page)
     mk('left:4.3%; top:7.4%; right:4.3%; bottom:7.4%; border:1px dashed rgba(0,0,0,0.16);');
-    // title zone (top-left, where the page title prints)
-    mk('left:4.3%; top:3.5%; font:700 16px "Arial Narrow",sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.16);', 'TITLE');
-    // footer band
+    // real page title (faded), where the PDF prints it (top-left)
+    const pg = (typeof _mbPage === 'function') ? _mbPage() : null;
+    const title = pg && pg.title ? pg.title : '';
+    if (title) mk('left:4.3%; top:3.0%; font:700 17px "Arial Narrow",Arial,sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.22); text-transform:uppercase;', title);
+    // footer band + the real footer line built from the current project meta
     mk('left:4.3%; right:4.3%; bottom:2.6%; border-top:1px solid rgba(0,0,0,0.12);');
-    mk('left:4.3%; bottom:1.0%; font:10px Georgia,serif; color:rgba(0,0,0,0.18);', 'PROJECT – CITY, COUNTRY | CODE   ·   footer');
+    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+    const name = (g('g_projName') || 'PROJECT NAME').toUpperCase();
+    const loc = g('specPdfLocation').toUpperCase();
+    const code = g('specPdfCode'), ver = g('specPdfVersion');
+    let line = name;
+    if (loc) line += ' \u2013 ' + loc;
+    if (code) line += '   |   ' + code + (ver ? '.' + ver : '');
+    line += '    Copyright \u00A9 ' + new Date().getFullYear() + ' Farmboy Fine Arts Inc.';
+    mk('left:6.0%; right:14%; bottom:1.1%; font:9px Georgia,serif; color:rgba(0,0,0,0.24); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;', line);
+    mk('right:4.3%; bottom:1.3%; font:700 8px Arial,sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.20);', 'FARMBOY');
 }
 
 function _mbUpdateToolbar() {
@@ -7930,21 +7951,14 @@ async function _buildSpecPagePDF(opts) {
     let pageNum = 0;               // 1-based footer counter
     let fpKeyPageNum = 0;          // page of the floorplan key (for back-links)
     const newPage = () => { if (pageNum > 0) doc.addPage(PAGE_FORMAT, 'landscape'); pageNum += 1; return pageNum; };
-
-    // — Cover —
-    if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
-    // — Process & Timeline (real) —
-    if (inc.timeline) { newPage(); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
-    // — Project Understanding (real): heading + body copy —
-    if (inc.understanding) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); }
-    // — Art Narrative (real): heading + body copy —
-    if (inc.narrative) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.'); }
-    // — Art Collection Strategy (real): three tier columns —
-    if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
-    // — Layout pages (real): each freeform image / text / arrow page in order —
-    if (inc.moodboard) {
+    // Emit the layout pages anchored to a given point in the deck. Default
+    // anchor 'afterStrategy' = the classic layout block. NOTE: we never anchor
+    // between the Floorplan Key and Spec pages — their page numbers must stay
+    // adjacent for the key's clickable links to resolve.
+    const emitLayout = async (anchor) => {
+        if (!inc.moodboard) return;
         _mbMigratePages();
-        const pages = editorialContent.layoutPages || [];
+        const pages = (editorialContent.layoutPages || []).filter(p => (p.place || 'afterStrategy') === anchor);
         for (const page of pages) {
             const src = page.elements || [];
             if (!src.length) continue;
@@ -7955,7 +7969,24 @@ async function _buildSpecPagePDF(opts) {
             newPage();
             _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title);
         }
-    }
+    };
+
+    // — Cover —
+    if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
+    await emitLayout('afterCover');
+    // — Process & Timeline (real) —
+    if (inc.timeline) { newPage(); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
+    await emitLayout('afterTimeline');
+    // — Project Understanding (real): heading + body copy —
+    if (inc.understanding) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); }
+    await emitLayout('afterUnderstanding');
+    // — Art Narrative (real): heading + body copy —
+    if (inc.narrative) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.'); }
+    await emitLayout('afterNarrative');
+    // — Art Collection Strategy (real): three tier columns —
+    if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
+    // — Layout pages (default anchor): freeform image / text / arrow pages —
+    await emitLayout('afterStrategy');
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
         const projFrames = await _collectProjectFrames();
@@ -7963,6 +7994,7 @@ async function _buildSpecPagePDF(opts) {
         if (!projFrames.length) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, []); }
         else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
     }
+    await emitLayout('beforeFloorplan');
     // — Floorplan Key (real): list + plan image + links to each item's spec page —
     if (inc.floorplanKey) {
         newPage();
@@ -8108,7 +8140,9 @@ async function _buildSpecPagePDF(opts) {
         // — Footer (page number + project line) on every spec page —
         _drawPdfFooter(doc, logos, pageNum, meta);
     }
+    await emitLayout('afterSpec');
 
+    await emitLayout('beforeContacts');
     // — Good Art. Good People. (real) —
     if (inc.slogan) { newPage(); _drawSloganPage(doc, logos, pageNum, meta); }
     // — Thank You / contacts (real) —
