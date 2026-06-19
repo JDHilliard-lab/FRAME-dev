@@ -8596,27 +8596,46 @@ async function _buildSpecPagePDF(opts) {
         else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
     }
     await emitLayout('beforeFloorplan');
-    // — Floorplan Key (real): one key page per level, each linking to spec pages —
+    // — Build the emission plan: interleave each level's floorplan key with that
+    //   level's spec pages (Level 1 plan → Level 1 specs → Level 2 plan → …),
+    //   breaker-style. Page numbers are precomputed so every key→spec forward
+    //   link and spec→key back-link resolves exactly. —
     const _fpLevelKeyPage = {};
-    if (inc.floorplanKey) {
-        _fpMigrate();
-        const levels = floorplanLevels;
+    _fpMigrate();
+    const _doKeys = !!inc.floorplanKey;
+    const _specRows = inc.spec ? rows.slice() : [];
+    const plan = [];
+    if (_doKeys) {
         const emitLevels = [];
-        levels.forEach((lv, li) => {
-            const used = (li === 0) || !!lv.imageData || (dashProjectData || []).some(it => (it.level || 0) === li);
+        floorplanLevels.forEach((lv, li) => {
+            const used = (li === 0) || !!lv.imageData || _specRows.some(r => (r.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li);
             if (used) emitLevels.push(li);
         });
         if (!emitLevels.length) emitLevels.push(0);
-        const nKeys = emitLevels.length;
-        // Spec pages follow ALL key pages, contiguous in row order, so each row's
-        // spec page = (page before keys) + nKeys + 1 + rowIndex.
-        const idToPage = {};
-        if (inc.spec) rows.forEach((r, i) => { if (r && r.id) idToPage[r.id] = pageNum + nKeys + 1 + i; });
-        for (let k = 0; k < emitLevels.length; k++) {
-            const li = emitLevels[k];
-            newPage();
-            _fpLevelKeyPage[li] = pageNum;
-            const levelGroups = _fpGroups().filter(g => (g.level || 0) === li);
+        const covered = {};
+        emitLevels.forEach(li => {
+            covered[li] = true;
+            plan.push({ type: 'key', li: li });
+            _specRows.filter(r => (r.level || 0) === li).forEach(r => plan.push({ type: 'spec', r: r, li: li }));
+        });
+        _specRows.forEach(r => { const li = r.level || 0; if (!covered[li]) plan.push({ type: 'spec', r: r, li: li }); });
+    } else {
+        _specRows.forEach(r => plan.push({ type: 'spec', r: r, li: (r.level || 0) }));
+    }
+    // Every step (key or spec) consumes one page; record where each spec lands.
+    const idToPage = {};
+    {
+        let _p = pageNum;
+        for (const step of plan) { _p++; if (step.type === 'spec' && step.r && step.r.id) idToPage[step.r.id] = _p; }
+    }
+
+    // — Emit the plan: floorplan keys and spec pages, interleaved per level —
+    for (const step of plan) {
+        newPage();
+        if (step.type === 'key') {
+            _fpLevelKeyPage[step.li] = pageNum;
+            const lv = floorplanLevels[step.li] || {};
+            const levelGroups = _fpGroups().filter(g => (g.level || 0) === step.li);
             const entries = levelGroups.map(g => {
                 let linkPage = null;
                 for (const id of g.ids) { if (idToPage[id]) { linkPage = idToPage[id]; break; } }
@@ -8626,16 +8645,12 @@ async function _buildSpecPagePDF(opts) {
                 return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage };
             });
             let planImg = null;
-            if (levels[li].imageData) { try { planImg = await _loadImg(levels[li].imageData); } catch (e) {} }
-            _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, levels[li].name || ('Level ' + (li + 1)));
+            if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
+            _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, lv.name || ('Level ' + (step.li + 1)));
+            if (!fpKeyPageNum) fpKeyPageNum = pageNum;
+            continue;
         }
-        fpKeyPageNum = _fpLevelKeyPage[emitLevels[0]];   // fallback for any unlevelled back-link
-    }
-
-    // — Spec pages (the real, existing generator) —
-    if (inc.spec) for (let i = 0; i < rows.length; i++) {
-        const r = rows[i];
-        newPage();
+        const r = step.r;
 
         // — Item code (top-left, large bold) —
         doc.setFont(_font('display'), 'bold');
