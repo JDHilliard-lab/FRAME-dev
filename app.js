@@ -6777,10 +6777,13 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle) {
         const x = (typeof t.x === 'number' ? t.x : 0.06) * PW;
         const y = (typeof t.y === 'number' ? t.y : 0.12) * PH;
         const w = (typeof t.w === 'number' ? t.w : 0.28) * PW;
-        const asp = (im && im.naturalWidth && im.naturalHeight) ? (im.naturalWidth / im.naturalHeight) : (t.aspect || 1.33);
-        const h = w / asp;
+        const aspImg = (im && im.naturalWidth && im.naturalHeight) ? (im.naturalWidth / im.naturalHeight) : (t.aspect || 1.33);
+        const h = (typeof t.h === 'number' ? t.h : (t.w * (936 / 540) / (t.aspect || 1.33))) * PH;
         if (im && (im.naturalWidth || im.width)) {
-            try { doc.addImage(im, 'JPEG', x, y, w, h); } catch (e) { try { doc.addImage(im, 'PNG', x, y, w, h); } catch (e2) {} }
+            try {
+                const cropped = _cropToCanvas(im, w, h, aspImg, t.zoom || 1, t.panX || 0, t.panY || 0);
+                doc.addImage(cropped, 'JPEG', x, y, w, h);
+            } catch (e) { try { doc.addImage(im, 'JPEG', x, y, w, h); } catch (e2) {} }
         } else {
             doc.setDrawColor(220, 220, 220); doc.setLineWidth(0.5); doc.rect(x, y, w, h, 'S');
         }
@@ -7249,6 +7252,10 @@ function _normalizeMoodboard() {
             if (typeof t.w !== 'number') t.w = 0.28;
             if (typeof t.x !== 'number') t.x = 0.1;
             if (typeof t.y !== 'number') t.y = 0.15;
+            if (typeof t.h !== 'number') t.h = t.w * (936 / 540) / (t.aspect || 1.33);   // default box matches image aspect (no crop)
+            if (typeof t.zoom !== 'number') t.zoom = 1;
+            if (typeof t.panX !== 'number') t.panX = 0;
+            if (typeof t.panY !== 'number') t.panY = 0;
             if (typeof t.capSize !== 'number') t.capSize = 0.02;
             if (typeof t.capSide !== 'string') t.capSide = 'bottom';
         } else if (ty === 'text') {
@@ -7346,6 +7353,31 @@ function _mbDot(px, py, onDown, color) {
     return hnd;
 }
 
+// Cover-fit an image of `aspect` into a box, scaled by zoom and panned. pan is
+// -1..1 (fraction of the overflow). Returns draw size + top-left offset.
+function _coverRect(boxW, boxH, aspect, zoom, panX, panY) {
+    let dW0, dH0;
+    if (aspect > boxW / boxH) { dH0 = boxH; dW0 = boxH * aspect; }
+    else { dW0 = boxW; dH0 = boxW / aspect; }
+    const dW = dW0 * (zoom || 1), dH = dH0 * (zoom || 1);
+    const slackX = dW - boxW, slackY = dH - boxH;
+    const offX = -slackX / 2 + (panX || 0) * slackX / 2;
+    const offY = -slackY / 2 + (panY || 0) * slackY / 2;
+    return { dW: dW, dH: dH, offX: offX, offY: offY, slackX: slackX, slackY: slackY };
+}
+
+// Render an image cropped/zoomed/panned to a box into an offscreen canvas (for
+// the PDF, which can't clip addImage directly).
+function _cropToCanvas(img, boxWpt, boxHpt, aspect, zoom, panX, panY) {
+    const R = 2;
+    const cw = Math.max(1, Math.round(boxWpt * R)), ch = Math.max(1, Math.round(boxHpt * R));
+    const c = document.createElement('canvas'); c.width = cw; c.height = ch;
+    const ctx = c.getContext('2d');
+    const cv = _coverRect(cw, ch, aspect, zoom, panX, panY);
+    ctx.drawImage(img, cv.offX, cv.offY, cv.dW, cv.dH);
+    return c;
+}
+
 function renderMoodboardCanvas() {
     const canvas = document.getElementById('moodboardCanvas');
     if (!canvas) return;
@@ -7395,10 +7427,12 @@ function renderMoodboardCanvas() {
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:' + _mbFontCss(t.font) + ';' + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
             box.textContent = t.text || 'Text';
         } else {
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; aspect-ratio:' + (t.aspect || 1.33) + '; cursor:grab; box-shadow:0 1px 6px rgba(0,0,0,0.35);' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:0 1px 6px rgba(0,0,0,0.35);' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
+            const boxW = t.w * cr.width, boxH = (t.h || 0.2) * cr.height;
+            const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
             const img = document.createElement('img');
             img.src = t.img; img.draggable = false;
-            img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block; pointer-events:none; user-select:none;';
+            img.style.cssText = 'position:absolute; left:' + cv.offX + 'px; top:' + cv.offY + 'px; width:' + cv.dW + 'px; height:' + cv.dH + 'px; max-width:none; display:block; pointer-events:none; user-select:none;';
             box.appendChild(img);
             if (t.caption) {
                 const cap = document.createElement('div');
@@ -7409,8 +7443,16 @@ function renderMoodboardCanvas() {
                 if (side === 'top') pos = 'left:0; bottom:100%; width:100%; margin-bottom:3px; text-align:left;';
                 else if (side === 'left') pos = 'right:100%; top:0; width:100%; margin-right:5px; text-align:right;';
                 else if (side === 'right') pos = 'left:100%; top:0; width:100%; margin-left:5px; text-align:left;';
-                cap.style.cssText = 'position:absolute; ' + pos + ' font-size:' + cfs + 'px; line-height:1.2; color:#555; white-space:normal; overflow-wrap:break-word; pointer-events:none; font-family:Georgia, serif;';
+                cap.style.cssText = 'position:absolute; ' + pos + ' font-size:' + cfs + 'px; line-height:1.2; color:#555; white-space:normal; overflow-wrap:break-word; pointer-events:none; font-family:Georgia, serif; overflow:visible;';
                 box.appendChild(cap);
+            }
+            if (sel) {   // center handle pans the image inside its crop box
+                const ph = document.createElement('div');
+                ph.title = 'Drag to pan image inside the frame';
+                ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:26px; height:26px; border-radius:50%; background:rgba(106,106,255,0.85); border:2px solid #fff; cursor:move; z-index:21; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px;';
+                ph.textContent = '\u2725';
+                ph.onmousedown = (e) => _mbImgPanDown(e, i);
+                box.appendChild(ph);
             }
         }
         if (sel) {
@@ -7487,9 +7529,11 @@ function _mbUpdateToolbar() {
     } else if (ty === 'image') {
         const cv = document.getElementById('mbCapSizeVal'); if (cv) cv.textContent = Math.round((el.capSize || 0.02) * 1000);
         const ss = document.getElementById('mbCapSide'); if (ss) ss.value = el.capSide || 'bottom';
+        const zs = document.getElementById('mbZoom'); if (zs) zs.value = el.zoom || 1;
     }
     ['mbFront', 'mbBack', 'mbDelete'].forEach(id => { const b = document.getElementById(id); if (b) b.disabled = !el; });
 }
+function _mbSetZoom(v) { const el = _mbSelEl(); if (el) { el.zoom = Math.max(1, Math.min(4, parseFloat(v) || 1)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbNudgeCapSize(d) { const el = _mbSelEl(); if (el) { el.capSize = Math.max(0.01, Math.min(0.08, (el.capSize || 0.02) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetCapSide(v) { const el = _mbSelEl(); if (el) { el.capSide = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbApplyToAll(kind) {
@@ -7558,7 +7602,17 @@ function _mbResizeDown(e, i) {
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
-    _mbDrag = { mode: 'resize', i, startX: e.clientX, startY: e.clientY, r, ow: t.w, os: t.size };
+    _mbDrag = { mode: 'resize', i, startX: e.clientX, startY: e.clientY, r, ow: t.w, oh: t.h, os: t.size };
+    document.addEventListener('mousemove', _mbMove);
+    document.addEventListener('mouseup', _mbUp);
+}
+function _mbImgPanDown(e, i) {
+    e.preventDefault(); e.stopPropagation();
+    const canvas = document.getElementById('moodboardCanvas');
+    const r = canvas ? canvas.getBoundingClientRect() : null;
+    if (!r) return;
+    const t = _mbEls()[i];
+    _mbDrag = { mode: 'imgPan', i, startX: e.clientX, startY: e.clientY, r, opanX: t.panX || 0, opanY: t.panY || 0 };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
 }
@@ -7607,7 +7661,16 @@ function _mbMove(e) {
         }
         t.pts[_mbDrag.k].x = nx; t.pts[_mbDrag.k].y = ny;
     } else if (_mbDrag.mode === 'resize') {
-        t.w = Math.max(0.06, Math.min(1.0, (_mbDrag.ow || 0.28) + dx));   // shapes box / image width
+        t.w = Math.max(0.06, Math.min(1.2, (_mbDrag.ow || 0.28) + dx));   // box / image width
+        if (ty === 'image') t.h = Math.max(0.04, Math.min(1.2, (_mbDrag.oh || 0.2) + dy));   // box height (crop frame)
+    } else if (_mbDrag.mode === 'imgPan') {
+        const boxW = t.w * r.width, boxH = (t.h || 0.2) * r.height;
+        const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, 0, 0);
+        const dpx = e.clientX - _mbDrag.startX, dpy = e.clientY - _mbDrag.startY;
+        const px = cv.slackX > 1 ? _mbDrag.opanX + dpx / (cv.slackX / 2) : 0;
+        const py = cv.slackY > 1 ? _mbDrag.opanY + dpy / (cv.slackY / 2) : 0;
+        t.panX = Math.max(-1, Math.min(1, px));
+        t.panY = Math.max(-1, Math.min(1, py));
     } else if (_mbDrag.mode === 'arrowA' || _mbDrag.mode === 'arrowB') {
         const movingA = (_mbDrag.mode === 'arrowA');
         const fx = movingA ? _mbDrag.ox2 : _mbDrag.ox1;
