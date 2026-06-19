@@ -267,8 +267,8 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -294,6 +294,7 @@ function _mbMigratePages() {
         if (!Array.isArray(p.elements)) p.elements = [];
     });
     if (_mbPageIndex < 0 || _mbPageIndex >= ec.layoutPages.length) _mbPageIndex = 0;
+    if (!Array.isArray(ec.templates)) ec.templates = [];
 }
 function _mbPage() { _mbMigratePages(); return editorialContent.layoutPages[_mbPageIndex]; }
 function _mbEls() { return _mbPage().elements; }
@@ -346,11 +347,15 @@ function _mbThumbInner(page, wpx, hpx) {
     let html = '', svg = '';
     els.forEach(t => {
         const ty = _elType(t);
-        if (ty === 'image' && t.img) {
+        if (ty === 'image') {
             const boxW = (t.w || 0.28) * wpx, boxH = (typeof t.h === 'number' ? t.h : (t.w || 0.28) * (936 / 540) / (t.aspect || 1.33)) * hpx;
-            const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
-            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + boxW + 'px;height:' + boxH + 'px;overflow:hidden;">'
-                + '<img src="' + t.img + '" style="position:absolute;left:' + cv.offX + 'px;top:' + cv.offY + 'px;width:' + cv.dW + 'px;height:' + cv.dH + 'px;max-width:none;"></div>';
+            const base = 'position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + boxW + 'px;height:' + boxH + 'px;overflow:hidden;';
+            if (t.img) {
+                const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
+                html += '<div style="' + base + '"><img src="' + t.img + '" style="position:absolute;left:' + cv.offX + 'px;top:' + cv.offY + 'px;width:' + cv.dW + 'px;height:' + cv.dH + 'px;max-width:none;"></div>';
+            } else {
+                html += '<div style="' + base + 'background:#e6e6e6;border:1px solid #cfcfcf;"></div>';
+            }
         } else if (ty === 'text') {
             html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + ((t.w || 0.3) * wpx) + 'px;font-size:' + Math.max(2, (t.size || 0.045) * hpx) + 'px;line-height:1.1;color:' + (t.color || '#222') + ';overflow:hidden;font-family:Georgia,serif;">' + _mbEscapeHtml(t.text || '') + '</div>';
         } else if (ty === 'arrow') {
@@ -411,6 +416,145 @@ function _mbRenderPageStrip() {
         mv.innerHTML = opt;
     }
 }
+
+// ── Layout templates ───────────────────────────────────────────────────────
+// Built-in starter layouts (4 per page type) + user-saved templates (stored in
+// editorialContent.templates, so they persist and can be exported/shared).
+// Image entries are empty placeholders the user fills by click or drag-drop.
+function _tImg(x, y, w, h, z) { return { type: 'image', img: '', aspect: 1.33, x: x, y: y, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z || 1 }; }
+function _tTxt(text, x, y, w, size, z, font) { return { type: 'text', text: text, x: x, y: y, w: w, size: size || 0.05, color: '#222222', font: font || 'display', z: z || 5 }; }
+const LAYOUT_TEMPLATES = {
+    moodboard: [
+        { name: 'Grid 2×3', els: () => [_tImg(.06, .15, .28, .33), _tImg(.36, .15, .28, .33), _tImg(.66, .15, .28, .33), _tImg(.06, .52, .28, .33), _tImg(.36, .52, .28, .33), _tImg(.66, .52, .28, .33)] },
+        { name: 'Hero + three', els: () => [_tImg(.06, .15, .46, .7), _tImg(.55, .15, .39, .21), _tImg(.55, .39, .39, .21), _tImg(.55, .63, .39, .21)] },
+        { name: 'Salon cluster', els: () => [_tImg(.08, .16, .3, .36), _tImg(.4, .14, .22, .26), _tImg(.64, .18, .26, .3), _tImg(.12, .55, .24, .28), _tImg(.38, .46, .3, .36), _tImg(.7, .52, .22, .3)] },
+        { name: 'Feature + note', els: () => [_tImg(.06, .16, .52, .66), _tTxt('Add a short note about this grouping.', .62, .2, .32, .04, 5, 'serif')] }
+    ],
+    breaker: [
+        { name: 'Full bleed', els: () => [_tImg(0, 0, 1, 1)] },
+        { name: 'Image + quote', els: () => [_tImg(0, 0, 1, 1), _tTxt('A short, evocative line.', .12, .42, .76, .09, 5, 'display')] },
+        { name: 'Split', els: () => [_tImg(0, 0, .5, 1), _tTxt('Section title', .56, .42, .4, .08, 5, 'display')] },
+        { name: 'Title band', els: () => [_tImg(0, 0, 1, .72), _tTxt('SECTION', .06, .78, .88, .1, 5, 'display')] }
+    ],
+    keyword: [
+        { name: 'Three columns', els: () => [_tTxt('Word one', .06, .3, .28, .07, 5), _tTxt('Word two', .37, .3, .28, .07, 5), _tTxt('Word three', .68, .3, .28, .07, 5)] },
+        { name: 'Stacked', els: () => [_tTxt('First', .1, .2, .8, .12, 5), _tTxt('Second', .1, .42, .8, .12, 4), _tTxt('Third', .1, .64, .8, .12, 3)] },
+        { name: 'Two-up', els: () => [_tTxt('Left idea', .08, .32, .4, .09, 5), _tTxt('Right idea', .54, .32, .4, .09, 5)] },
+        { name: 'Statement', els: () => [_tTxt('One bold statement.', .1, .38, .8, .11, 5, 'display')] }
+    ],
+    inspo: [
+        { name: 'Grid 2×2', els: () => [_tImg(.08, .16, .4, .32), _tImg(.52, .16, .4, .32), _tImg(.08, .52, .4, .32), _tImg(.52, .52, .4, .32)] },
+        { name: 'Strip', els: () => [_tImg(.05, .34, .21, .32), _tImg(.28, .34, .21, .32), _tImg(.51, .34, .21, .32), _tImg(.74, .34, .21, .32)] },
+        { name: 'Image + notes', els: () => [_tImg(.06, .16, .5, .66), _tTxt('Note one', .6, .2, .34, .045, 5, 'serif'), _tTxt('Note two', .6, .38, .34, .045, 5, 'serif'), _tTxt('Note three', .6, .56, .34, .045, 5, 'serif')] },
+        { name: 'Feature', els: () => [_tImg(.18, .16, .64, .62)] }
+    ]
+};
+let _tplType = 'moodboard';
+function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; ' + (active ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);'); }
+function openTemplatesModal() {
+    const m = document.getElementById('templatesModal'); if (!m) return;
+    _mbMigratePages();
+    const ct = _mbPage().type; _tplType = LAYOUT_TEMPLATES[ct] ? ct : 'moodboard';
+    _tplRenderCards(_tplType); m.style.display = 'flex';
+}
+function closeTemplatesModal() { const m = document.getElementById('templatesModal'); if (m) m.style.display = 'none'; }
+function _tplSetTab(type) { _tplType = type; _tplRenderCards(type); }
+function _tplApply(els, type, asNew) {
+    const copy = JSON.parse(JSON.stringify(els || []));
+    if (asNew) addLayoutPage(type);
+    const pg = _mbPage();
+    const wasDefault = (!pg.title || pg.title === _mbDefaultTitle(pg.type));
+    pg.elements = copy; pg.type = type;
+    if (wasDefault) pg.title = _mbDefaultTitle(type);
+    _mbSelected = -1;
+    if (typeof pushHistory === 'function') pushHistory();
+    closeTemplatesModal();
+    renderMoodboardCanvas(); _mbAutosave();
+}
+function saveCurrentAsTemplate() {
+    const pg = _mbPage();
+    const name = (window.prompt('Name this template:', pg.title || (pg.type + ' template')) || '').trim();
+    if (!name) return;
+    const els = JSON.parse(JSON.stringify(pg.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; });   // strip image data — templates are structural
+    editorialContent.templates = editorialContent.templates || [];
+    editorialContent.templates.push({ name: name, type: pg.type || 'moodboard', elements: els });
+    _tplType = pg.type || 'moodboard';
+    _tplRenderCards(_tplType); _mbAutosave();
+}
+function deleteTemplate(idx) {
+    if (!Array.isArray(editorialContent.templates)) return;
+    editorialContent.templates.splice(idx, 1);
+    _tplRenderCards(_tplType); _mbAutosave();
+}
+function exportTemplates() {
+    const data = JSON.stringify(editorialContent.templates || [], null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'frame-layout-templates.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function importTemplates(ev) {
+    const f = ev.target.files && ev.target.files[0]; if (!f) { return; }
+    const r = new FileReader();
+    r.onload = () => {
+        try {
+            const arr = JSON.parse(r.result);
+            if (Array.isArray(arr)) {
+                editorialContent.templates = (editorialContent.templates || []).concat(arr.filter(t => t && Array.isArray(t.elements)));
+                _tplRenderCards(_tplType); _mbAutosave();
+            } else { if (typeof showInfoModal === 'function') showInfoModal('Import failed', 'That file is not a templates list.'); }
+        } catch (e) { if (typeof showInfoModal === 'function') showInfoModal('Import failed', 'Could not read that templates file.'); }
+    };
+    r.readAsText(f); ev.target.value = '';
+}
+function _mbFillImage(i) {
+    const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
+    input.onchange = (e) => {
+        const f = e.target.files && e.target.files[0]; if (!f) return;
+        _downscaleImageFile(f, 1000, 0.82, (url, name, w, h) => {
+            const el = _mbEls()[i]; if (!el || !url) return;
+            el.img = url; el.aspect = (w && h) ? (w / h) : 1.33; el.panX = 0; el.panY = 0; el.zoom = 1;
+            if (typeof pushHistory === 'function') pushHistory();
+            renderMoodboardCanvas(); _mbAutosave();
+        });
+    };
+    input.click();
+}
+function _mbDropImage(e, i) {
+    e.preventDefault(); e.stopPropagation();
+    const f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!f || !/^image\//.test(f.type)) return;
+    _downscaleImageFile(f, 1000, 0.82, (url, name, w, h) => {
+        const el = _mbEls()[i]; if (!el || !url) return;
+        el.img = url; el.aspect = (w && h) ? (w / h) : 1.33; el.panX = 0; el.panY = 0; el.zoom = 1;
+        if (typeof pushHistory === 'function') pushHistory();
+        renderMoodboardCanvas(); _mbAutosave();
+    });
+}
+function _tplRenderCards(type) {
+    const wrap = document.getElementById('tplCards'); if (!wrap) return;
+    _mbMigratePages();
+    ['moodboard', 'breaker', 'keyword', 'inspo'].forEach(tp => { const b = document.getElementById('tplTab_' + tp); if (b) b.style.cssText = _tplTabCss(tp === type); });
+    wrap.innerHTML = '';
+    const W = 150, H = Math.round(150 * 540 / 936);
+    const cards = (LAYOUT_TEMPLATES[type] || []).map(b => ({ name: b.name, els: b.els(), user: false }));
+    (editorialContent.templates || []).forEach((t, idx) => { if ((t.type || 'moodboard') === type) cards.push({ name: t.name || 'Untitled', els: t.elements || [], user: true, idx: idx }); });
+    cards.forEach(card => {
+        const c = document.createElement('div');
+        c.style.cssText = 'width:' + W + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:var(--bg-input);';
+        const thumb = document.createElement('div');
+        thumb.style.cssText = 'position:relative; width:' + W + 'px; height:' + H + 'px; background:#fff; overflow:hidden; border-bottom:1px solid var(--border-color);';
+        thumb.innerHTML = _mbThumbInner({ elements: card.els, title: '' }, W, H);
+        const name = document.createElement('div'); name.textContent = card.name; name.style.cssText = 'font-size:0.72rem; color:var(--text-main); padding:5px 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+        const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:4px; padding:0 7px 7px;';
+        const bApply = document.createElement('button'); bApply.textContent = 'Apply'; bApply.className = 'action-btn'; bApply.style.cssText = 'flex:1; height:26px; font-size:0.68rem; padding:0;'; bApply.onclick = () => _tplApply(card.els, type, false);
+        const bNew = document.createElement('button'); bNew.textContent = '+ Page'; bNew.className = 'action-btn btn-secondary'; bNew.style.cssText = 'flex:1; height:26px; font-size:0.68rem; padding:0;'; bNew.onclick = () => _tplApply(card.els, type, true);
+        row.appendChild(bApply); row.appendChild(bNew);
+        if (card.user) { const bDel = document.createElement('button'); bDel.textContent = '✕'; bDel.className = 'action-btn btn-secondary'; bDel.title = 'Delete template'; bDel.style.cssText = 'width:26px; height:26px; font-size:0.68rem; padding:0;'; bDel.onclick = () => deleteTemplate(card.idx); row.appendChild(bDel); }
+        c.appendChild(thumb); c.appendChild(name); c.appendChild(row); wrap.appendChild(c);
+    });
+}
+
 
 // Art categories — drive the numbered-pin colors on the floorplan and the
 // page legend, matching the studio's Primary/Secondary/Tertiary convention.
@@ -7488,11 +7632,24 @@ function renderMoodboardCanvas() {
         } else {
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:0 1px 6px rgba(0,0,0,0.35);' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
             const boxW = t.w * cr.width, boxH = (t.h || 0.2) * cr.height;
-            const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
-            const img = document.createElement('img');
-            img.src = t.img; img.draggable = false;
-            img.style.cssText = 'position:absolute; left:' + cv.offX + 'px; top:' + cv.offY + 'px; width:' + cv.dW + 'px; height:' + cv.dH + 'px; max-width:none; display:block; pointer-events:none; user-select:none;';
-            box.appendChild(img);
+            box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed #6a6aff'; };
+            box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : ''; };
+            box.ondrop = (e) => _mbDropImage(e, i);
+            if (t.img) {
+                const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
+                const img = document.createElement('img');
+                img.src = t.img; img.draggable = false;
+                img.style.cssText = 'position:absolute; left:' + cv.offX + 'px; top:' + cv.offY + 'px; width:' + cv.dW + 'px; height:' + cv.dH + 'px; max-width:none; display:block; pointer-events:none; user-select:none;';
+                box.appendChild(img);
+            } else {
+                box.style.background = '#efefef';
+                const hint = document.createElement('div');
+                hint.style.cssText = 'position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:2px; color:#999; font-size:0.72rem; border:1px dashed #bbb; cursor:pointer; text-align:center; padding:4px;';
+                hint.innerHTML = '<span style="font-size:1.2rem; line-height:1;">+</span><span>Add image</span>';
+                hint.title = 'Click to choose, or drag an image here';
+                hint.onclick = (e) => { e.stopPropagation(); _mbFillImage(i); };
+                box.appendChild(hint);
+            }
             if (t.caption) {
                 const cap = document.createElement('div');
                 cap.textContent = t.caption;
@@ -7505,7 +7662,7 @@ function renderMoodboardCanvas() {
                 cap.style.cssText = 'position:absolute; ' + pos + ' font-size:' + cfs + 'px; line-height:1.2; color:#555; white-space:normal; overflow-wrap:break-word; pointer-events:none; font-family:Georgia, serif; overflow:visible;';
                 box.appendChild(cap);
             }
-            if (sel) {   // center handle pans the image inside its crop box
+            if (sel && t.img) {   // center handle pans the image inside its crop box
                 const ph = document.createElement('div');
                 ph.title = 'Drag to pan image inside the frame';
                 ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:26px; height:26px; border-radius:50%; background:rgba(106,106,255,0.85); border:2px solid #fff; cursor:move; z-index:21; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px;';
