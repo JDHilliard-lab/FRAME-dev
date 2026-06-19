@@ -422,7 +422,7 @@ function _mbRenderPageStrip() {
 // editorialContent.templates, so they persist and can be exported/shared).
 // Image entries are empty placeholders the user fills by click or drag-drop.
 function _tImg(x, y, w, h, z) { return { type: 'image', img: '', aspect: 1.33, x: x, y: y, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z || 1 }; }
-function _tTxt(text, x, y, w, size, z, font) { return { type: 'text', text: text, x: x, y: y, w: w, size: size || 0.05, color: '#222222', font: font || 'display', z: z || 5 }; }
+function _tTxt(text, x, y, w, size, z, font, color) { return { type: 'text', text: text, x: x, y: y, w: w, size: size || 0.05, color: color || '#222222', font: font || 'display', z: z || 5 }; }
 const LAYOUT_TEMPLATES = {
     moodboard: [
         { name: 'Grid 2×3', els: () => [_tImg(.06, .15, .28, .33), _tImg(.36, .15, .28, .33), _tImg(.66, .15, .28, .33), _tImg(.06, .52, .28, .33), _tImg(.36, .52, .28, .33), _tImg(.66, .52, .28, .33)] },
@@ -432,7 +432,7 @@ const LAYOUT_TEMPLATES = {
     ],
     breaker: [
         { name: 'Full bleed', els: () => [_tImg(0, 0, 1, 1)] },
-        { name: 'Image + quote', els: () => [_tImg(0, 0, 1, 1), _tTxt('A short, evocative line.', .12, .42, .76, .09, 5, 'display')] },
+        { name: 'Image + quote', els: () => [_tImg(0, 0, 1, 1), _tTxt('A short, evocative line.', .12, .42, .76, .09, 5, 'display', '#ffffff')] },
         { name: 'Split', els: () => [_tImg(0, 0, .5, 1), _tTxt('Section title', .56, .42, .4, .08, 5, 'display')] },
         { name: 'Title band', els: () => [_tImg(0, 0, 1, .72), _tTxt('SECTION', .06, .78, .88, .1, 5, 'display')] }
     ],
@@ -6933,12 +6933,13 @@ function _drawStrategyPage(doc, logos, pageNum, meta, strategy) {
 
 // Moodboard page: freeform layout of image / text / arrow elements, drawn
 // back-to-front by z. Elements carry normalized coords + a loaded _img (images).
-function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle) {
+function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageType) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
+    const isBreaker = (pageType === 'breaker');
     const title = (typeof pageTitle === 'string') ? pageTitle : 'MOODBOARD';
-    if (title) { doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20); doc.text(title, M, M + 14); }
+    if (title && !isBreaker) { doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20); doc.text(title, M, M + 14); }
 
     const order = tiles.map((t, i) => i).sort((a, b) => (tiles[a].z || 0) - (tiles[b].z || 0));
     const _hex = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); if (!m) return [55, 55, 55]; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
@@ -7005,7 +7006,7 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle) {
             doc.setTextColor(20, 20, 20);
         }
     });
-    _drawPdfFooter(doc, logos, pageNum, meta);
+    if (!isBreaker) _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
 // "Good Art. Good People." slogan page (display).
@@ -7713,10 +7714,16 @@ function _mbFontCss(font) {
 // margins print — so elements don't get buried under deck chrome.
 function _mbDrawGuides(canvas) {
     const mk = (css, text) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute; pointer-events:none; ' + css; if (text) d.textContent = text; canvas.appendChild(d); };
+    const pg = (typeof _mbPage === 'function') ? _mbPage() : null;
+    if (pg && pg.type === 'breaker') {
+        // full-bleed treatment: image runs to the edge, no title/footer printed
+        mk('left:0; top:0; right:0; bottom:0; border:1px dashed rgba(106,106,255,0.35);');
+        mk('left:50%; top:6px; transform:translateX(-50%); font:700 9px Arial,sans-serif; letter-spacing:1px; color:rgba(106,106,255,0.5); background:rgba(255,255,255,0.6); padding:1px 6px; border-radius:3px;', 'FULL BLEED · NO FOOTER');
+        return;
+    }
     // page margin frame (≈40pt on a 936×540 page)
     mk('left:4.3%; top:7.4%; right:4.3%; bottom:7.4%; border:1px dashed rgba(0,0,0,0.16);');
     // real page title (faded), where the PDF prints it (top-left)
-    const pg = (typeof _mbPage === 'function') ? _mbPage() : null;
     const title = pg && pg.title ? pg.title : '';
     if (title) mk('left:4.3%; top:3.0%; font:700 17px "Arial Narrow",Arial,sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.22); text-transform:uppercase;', title);
     // footer band + the real footer line built from the current project meta
@@ -8124,7 +8131,7 @@ async function _buildSpecPagePDF(opts) {
                 if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
             }
             newPage();
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title);
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title, page.type);
         }
     };
 
