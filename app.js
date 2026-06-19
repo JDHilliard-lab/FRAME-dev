@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -355,6 +355,8 @@ function _mbMigratePages() {
     if (!ec.coverPage || !Array.isArray(ec.coverPage.elements)) ec.coverPage = { elements: [] };
     if (!ec.narrativePage || !Array.isArray(ec.narrativePage.elements)) ec.narrativePage = { elements: [] };
     if (!ec.sloganPage || !Array.isArray(ec.sloganPage.elements)) ec.sloganPage = { elements: [] };
+    if (!ec.understandingPage || !Array.isArray(ec.understandingPage.elements)) ec.understandingPage = { elements: [] };
+    if (!ec.strategyPage || !Array.isArray(ec.strategyPage.elements)) ec.strategyPage = { elements: [] };
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
@@ -506,6 +508,18 @@ const LAYOUT_TEMPLATES = {
         { name: 'Two column', els: () => [_tTxt('ART NARRATIVE', .06, .12, .6, .06, 6, 'display', '#1a1a1a'), _tTxt('First column of the narrative copy.', .06, .26, .42, .026, 5, 'serif', '#222222'), _tTxt('Second column of the narrative copy.', .52, .26, .42, .026, 5, 'serif', '#222222')] },
         { name: 'Image + copy', els: () => [_tImg(.06, .14, .4, .66, 1), _tTxt('ART NARRATIVE', .52, .14, .42, .055, 6, 'display', '#1a1a1a'), _tTxt('Narrative copy beside the image.', .52, .27, .42, .028, 5, 'serif', '#222222')] },
         { name: 'Lead image', els: () => [_tImg(.06, .12, .88, .4, 1), _tTxt('ART NARRATIVE', .06, .56, .6, .05, 6, 'display', '#1a1a1a'), _tTxt('Narrative copy below the lead image.', .06, .67, .88, .026, 5, 'serif', '#222222')] }
+    ],
+    understanding: [
+        { name: 'Classic', els: () => [_tTxt('PROJECT UNDERSTANDING', .06, .12, .7, .06, 6, 'display', '#1a1a1a'), _tTxt('Goals, audience, site context, and what success looks like.', .06, .26, .54, .03, 5, 'serif', '#222222')] },
+        { name: 'Two column', els: () => [_tTxt('PROJECT UNDERSTANDING', .06, .12, .8, .06, 6, 'display', '#1a1a1a'), _tTxt('First column of the brief.', .06, .26, .42, .026, 5, 'serif', '#222222'), _tTxt('Second column of the brief.', .52, .26, .42, .026, 5, 'serif', '#222222')] },
+        { name: 'Image + copy', els: () => [_tImg(.06, .14, .4, .66, 1), _tTxt('PROJECT UNDERSTANDING', .52, .14, .42, .055, 6, 'display', '#1a1a1a'), _tTxt('The brief beside a reference image.', .52, .27, .42, .028, 5, 'serif', '#222222')] },
+        { name: 'Lead image', els: () => [_tImg(.06, .12, .88, .4, 1), _tTxt('PROJECT UNDERSTANDING', .06, .56, .7, .05, 6, 'display', '#1a1a1a'), _tTxt('The brief below the lead image.', .06, .67, .88, .026, 5, 'serif', '#222222')] }
+    ],
+    strategy: [
+        { name: 'Three tiers', els: () => [_tTxt('ART COLLECTION STRATEGY', .06, .1, .88, .055, 6, 'display', '#1a1a1a'), _tTxt('Primary', .06, .24, .28, .032, 6, 'display', '#1a1a1a'), _tTxt('Primary strategy copy.', .06, .31, .28, .026, 5, 'serif', '#222222'), _tTxt('Secondary', .37, .24, .28, .032, 6, 'display', '#1a1a1a'), _tTxt('Secondary strategy copy.', .37, .31, .28, .026, 5, 'serif', '#222222'), _tTxt('Tertiary', .68, .24, .28, .032, 6, 'display', '#1a1a1a'), _tTxt('Tertiary strategy copy.', .68, .31, .28, .026, 5, 'serif', '#222222')] },
+        { name: 'Stacked', els: () => [_tTxt('ART COLLECTION STRATEGY', .06, .1, .88, .055, 6, 'display', '#1a1a1a'), _tTxt('Primary strategy copy.', .06, .26, .88, .03, 5, 'serif', '#222222'), _tTxt('Secondary strategy copy.', .06, .46, .88, .03, 5, 'serif', '#222222'), _tTxt('Tertiary strategy copy.', .06, .66, .88, .03, 5, 'serif', '#222222')] },
+        { name: 'Image + tiers', els: () => [_tImg(.06, .14, .36, .66, 1), _tTxt('ART COLLECTION STRATEGY', .48, .12, .46, .05, 6, 'display', '#1a1a1a'), _tTxt('Primary strategy copy.', .48, .26, .46, .026, 5, 'serif', '#222222'), _tTxt('Secondary strategy copy.', .48, .44, .46, .026, 5, 'serif', '#222222'), _tTxt('Tertiary strategy copy.', .48, .62, .46, .026, 5, 'serif', '#222222')] },
+        { name: 'Single statement', els: () => [_tTxt('ART COLLECTION STRATEGY', .06, .12, .88, .06, 6, 'display', '#1a1a1a'), _tTxt('One clear strategic direction for the collection.', .06, .3, .8, .045, 5, 'serif', '#222222')] }
     ],
     moodboard: [
         { name: 'Grid 2×3', els: () => [_tImg(.06, .15, .28, .33), _tImg(.36, .15, .28, .33), _tImg(.66, .15, .28, .33), _tImg(.06, .52, .28, .33), _tImg(.36, .52, .28, .33), _tImg(.66, .52, .28, .33)] },
@@ -7309,11 +7323,11 @@ function _deckPageList() {
     layoutAt('afterCover');
     if (inc.timeline) pages.push({ kind: 'card', type: 'timeline', title: 'Process / Timeline' });
     layoutAt('afterTimeline');
-    if (inc.understanding) pages.push({ kind: 'prose', type: 'understanding', title: 'Project Understanding', text: ec.understanding });
+    if (inc.understanding) pages.push({ kind: 'fixed', fixed: 'understanding', type: 'understanding', title: 'Project Understanding', page: ec.understandingPage, text: ec.understanding });
     layoutAt('afterUnderstanding');
     if (inc.narrative) pages.push({ kind: 'fixed', fixed: 'narrative', type: 'narrative', title: 'Art Narrative', page: ec.narrativePage, text: ec.narrative });
     layoutAt('afterNarrative');
-    if (inc.strategy) { const s = ec.strategy || {}; pages.push({ kind: 'prose', type: 'strategy', title: 'Strategy', text: [s.primary, s.secondary, s.tertiary].filter(Boolean).join('\n\n') }); }
+    if (inc.strategy) { const s = ec.strategy || {}; pages.push({ kind: 'fixed', fixed: 'strategy', type: 'strategy', title: 'Art Collection Strategy', page: ec.strategyPage, text: [s.primary, s.secondary, s.tertiary].filter(Boolean).join('\n\n') }); }
     layoutAt('afterStrategy');
     if (inc.frameRec) pages.push({ kind: 'card', type: 'frameRec', title: 'Frame Recommendations' });
     layoutAt('beforeFloorplan');
@@ -8108,6 +8122,27 @@ function openFixedPageEditor(key) {
             page.elements = [_tTxt('GOOD ART.', .08, .34, .84, .14, 5, 'display', '#1a1a1a'), _tTxt('GOOD PEOPLE.', .08, .54, .84, .14, 6, 'display', '#1a1a1a')];
         }
         page.type = 'breaker';   // clean full-page statement, no footer
+    } else if (key === 'understanding') {
+        if (!editorialContent.understandingPage || !Array.isArray(editorialContent.understandingPage.elements)) editorialContent.understandingPage = { elements: [] };
+        page = editorialContent.understandingPage; label = 'Project Understanding';
+        if (!page.elements.length) {
+            const body = (editorialContent.understanding || 'Add the project understanding here — goals, audience, site context, and what success looks like.');
+            page.elements = [_tTxt('PROJECT UNDERSTANDING', .06, .12, .6, .06, 6, 'display', '#1a1a1a'), _tTxt(body, .06, .26, .52, .03, 5, 'serif', '#222222'), _tImg(.62, .14, .32, .62, 1)];
+        }
+        page.type = 'narrative';
+    } else if (key === 'strategy') {
+        if (!editorialContent.strategyPage || !Array.isArray(editorialContent.strategyPage.elements)) editorialContent.strategyPage = { elements: [] };
+        page = editorialContent.strategyPage; label = 'Art Collection Strategy';
+        if (!page.elements.length) {
+            const s = editorialContent.strategy || {};
+            page.elements = [
+                _tTxt('ART COLLECTION STRATEGY', .06, .1, .88, .055, 6, 'display', '#1a1a1a'),
+                _tTxt(s.primary || 'Primary strategy copy.', .06, .26, .28, .026, 5, 'serif', '#222222'),
+                _tTxt(s.secondary || 'Secondary strategy copy.', .37, .26, .28, .026, 5, 'serif', '#222222'),
+                _tTxt(s.tertiary || 'Tertiary strategy copy.', .68, .26, .28, .026, 5, 'serif', '#222222')
+            ];
+        }
+        page.type = 'narrative';
     } else { return; }
     _mbEditTarget = { key: key, label: label, page: page };
     const m = document.getElementById('moodboardModal'); if (!m) return;
@@ -8977,8 +9012,21 @@ async function _buildSpecPagePDF(opts) {
     // — Process & Timeline (real) —
     if (inc.timeline) { newPage(); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
     await emitLayout('afterTimeline');
-    // — Project Understanding (real): heading + body copy —
-    if (inc.understanding) { newPage(); _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); }
+    // — Project Understanding (real): custom freeform page if built, else prose —
+    if (inc.understanding) {
+        newPage();
+        const un = editorialContent.understandingPage;
+        if (un && Array.isArray(un.elements) && un.elements.length) {
+            const src = un.elements;
+            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+            for (let ti = 0; ti < src.length; ti++) {
+                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+            }
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'narrative');
+        } else {
+            _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.');
+        }
+    }
     await emitLayout('afterUnderstanding');
     // — Art Narrative (real): custom freeform page if built, else prose —
     if (inc.narrative) {
@@ -8996,8 +9044,21 @@ async function _buildSpecPagePDF(opts) {
         }
     }
     await emitLayout('afterNarrative');
-    // — Art Collection Strategy (real): three tier columns —
-    if (inc.strategy) { newPage(); _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy); }
+    // — Art Collection Strategy (real): custom freeform page if built, else tiers —
+    if (inc.strategy) {
+        newPage();
+        const st = editorialContent.strategyPage;
+        if (st && Array.isArray(st.elements) && st.elements.length) {
+            const src = st.elements;
+            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+            for (let ti = 0; ti < src.length; ti++) {
+                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+            }
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'narrative');
+        } else {
+            _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy);
+        }
+    }
     // — Layout pages (default anchor): freeform image / text / arrow pages —
     await emitLayout('afterStrategy');
     // — Frame Recommendations (real): summary of frames specified across rows —
