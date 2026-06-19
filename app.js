@@ -536,6 +536,7 @@ let _tplType = 'moodboard';
 function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; ' + (active ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);'); }
 function openTemplatesModal() {
     const m = document.getElementById('templatesModal'); if (!m) return;
+    if (typeof _loadStudioDefaults === 'function') _loadStudioDefaults();
     _mbMigratePages();
     if (_mbEditTarget && LAYOUT_TEMPLATES[_mbEditTarget.key]) { _tplType = _mbEditTarget.key; }
     else { const ct = _mbPage().type; _tplType = LAYOUT_TEMPLATES[ct] ? ct : 'moodboard'; }
@@ -595,6 +596,40 @@ function importTemplates(ev) {
     };
     r.readAsText(f); ev.target.value = '';
 }
+// ── Studio defaults (shared templates + contacts, committed to the repo) ─────
+// Fetched once per session from studio-defaults.json sitting next to index.html.
+// Studio templates show alongside the built-ins (not per-project, not deletable);
+// studio contacts seed the Thank You page when a project has none. Publishing is
+// just committing the JSON that exportStudioDefaults() produces.
+let studioDefaults = { templates: [], contacts: '' };
+let _studioDefaultsLoaded = false;
+async function _loadStudioDefaults() {
+    if (_studioDefaultsLoaded) return;
+    _studioDefaultsLoaded = true;
+    try {
+        const r = await fetch('studio-defaults.json', { cache: 'no-store' });
+        if (!r.ok) return;
+        const d = await r.json();
+        if (d && typeof d === 'object') {
+            studioDefaults.templates = Array.isArray(d.templates) ? d.templates.filter(t => t && Array.isArray(t.elements)) : [];
+            studioDefaults.contacts = (typeof d.contacts === 'string') ? d.contacts : '';
+        }
+        const m = document.getElementById('templatesModal');
+        if (m && m.style.display !== 'none' && typeof _tplRenderCards === 'function') _tplRenderCards(_tplType);
+    } catch (e) { /* no studio defaults published — that's fine */ }
+}
+function exportStudioDefaults() {
+    const tpls = (editorialContent.templates || []).map(t => ({
+        name: t.name, type: t.type || 'moodboard',
+        elements: (t.elements || []).map(e => { const c = Object.assign({}, e); if ((c.type || 'image') === 'image') c.img = ''; return c; })
+    }));
+    const data = JSON.stringify({ templates: tpls, contacts: editorialContent.contacts || '' }, null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'studio-defaults.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    if (typeof showInfoModal === 'function') showInfoModal('Studio defaults exported', 'Commit studio-defaults.json to the repo root (the folder with index.html). After that, anyone opening FRAME gets these templates and default contacts automatically.');
+}
 function _mbFillImage(i) {
     const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
     input.onchange = (e) => {
@@ -627,6 +662,7 @@ function _tplRenderCards(type) {
     const W = 150, H = Math.round(150 * 540 / 936);
     const cards = (LAYOUT_TEMPLATES[type] || []).map(b => ({ name: b.name, els: b.els(), user: false }));
     (editorialContent.templates || []).forEach((t, idx) => { if ((t.type || 'moodboard') === type) cards.push({ name: t.name || 'Untitled', els: t.elements || [], user: true, idx: idx }); });
+    (studioDefaults.templates || []).forEach(t => { if ((t.type || 'moodboard') === type) cards.push({ name: t.name || 'Untitled', els: t.elements || [], user: false, studio: true }); });
     cards.forEach(card => {
         const c = document.createElement('div');
         c.style.cssText = 'width:' + W + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:var(--bg-input);';
@@ -634,6 +670,7 @@ function _tplRenderCards(type) {
         thumb.style.cssText = 'position:relative; width:' + W + 'px; height:' + H + 'px; background:#fff; overflow:hidden; border-bottom:1px solid var(--border-color);';
         thumb.innerHTML = _mbThumbInner({ elements: card.els, title: '' }, W, H);
         const name = document.createElement('div'); name.textContent = card.name; name.style.cssText = 'font-size:0.72rem; color:var(--text-main); padding:5px 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+        if (card.studio) { const bdg = document.createElement('span'); bdg.textContent = ' · studio'; bdg.style.cssText = 'font-size:0.62rem; color:#6a6aff; font-weight:600;'; name.appendChild(bdg); }
         const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:4px; padding:0 7px 7px;';
         const bApply = document.createElement('button'); bApply.textContent = 'Apply'; bApply.className = 'action-btn'; bApply.style.cssText = 'flex:1; height:26px; font-size:0.68rem; padding:0;'; bApply.onclick = () => _tplApply(card.els, type, false);
         const bNew = document.createElement('button'); bNew.textContent = '+ Page'; bNew.className = 'action-btn btn-secondary'; bNew.style.cssText = 'flex:1; height:26px; font-size:0.68rem; padding:0;'; bNew.onclick = () => _tplApply(card.els, type, true);
@@ -1430,6 +1467,7 @@ if (document.readyState === 'loading') {
         if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
         if (typeof _wireArtPan === 'function') _wireArtPan();
         if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
+        if (typeof _loadStudioDefaults === 'function') _loadStudioDefaults();
     });
 } else {
     updateDirtyIndicator();
@@ -1437,6 +1475,7 @@ if (document.readyState === 'loading') {
     if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
         if (typeof _wireArtPan === 'function') _wireArtPan();
     if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
+    if (typeof _loadStudioDefaults === 'function') _loadStudioDefaults();
 }
 // ─────────────────────────────────────────────────────────────────────
 // END SAVE / AUTOSAVE / UNSAVED-CHANGES
@@ -7225,10 +7264,24 @@ async function exportSpecPagePDF(opts) {
     window._specPdfBusy = true;
     try {
         await _buildSpecPagePDF(opts);
+    } catch (e) {
+        console.error('PDF build failed:', e);
+        if (typeof showInfoModal === 'function') showInfoModal('PDF error', 'Something went wrong while building the PDF. Try again, or simplify the project if it persists.');
     } finally {
         window._specPdfBusy = false;
+        if (typeof _pdfHideOverlay === 'function') _pdfHideOverlay();
     }
 }
+
+// ── PDF build progress overlay ────────────────────────────────────────────
+function _pdfShowOverlay() { const o = document.getElementById('pdfBuildOverlay'); if (o) o.style.display = 'flex'; }
+function _pdfHideOverlay() { const o = document.getElementById('pdfBuildOverlay'); if (o) o.style.display = 'none'; }
+function _pdfProgress(frac, label) {
+    const bar = document.getElementById('pdfBuildBar'); const lab = document.getElementById('pdfBuildLabel');
+    if (bar) bar.style.width = (Math.max(0, Math.min(1, frac)) * 100) + '%';
+    if (lab && label) lab.textContent = label;
+}
+function _pdfYield() { return new Promise(r => setTimeout(r, 0)); }
 
 // ── Presentation PDF setup modal ──────────────────────────────────────────
 // The "Spec PDF" button opens this instead of exporting immediately. It
@@ -7768,7 +7821,8 @@ function _contactsRender() {
 }
 function openContactsEditor() {
     const ta = document.getElementById('specPdfContacts');
-    const cur = ta ? ta.value : (editorialContent.contacts || '');
+    let cur = ta ? ta.value : (editorialContent.contacts || '');
+    if (!cur && typeof studioDefaults !== 'undefined' && studioDefaults.contacts) cur = studioDefaults.contacts;
     _contactsDraft = _contactsParse(cur);
     if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '' }];
     _contactsRender();
@@ -8523,9 +8577,25 @@ async function _buildSpecPagePDF(opts) {
     // exportSpecPagePDF({all:true}) still produces cover + spec pages.
     const inc = opts.include || { cover: !!opts.all, spec: true };
 
+    // Rough page estimate so the progress bar advances meaningfully.
+    let _pdfEst = 0;
+    if (inc.cover) _pdfEst++; if (inc.understanding) _pdfEst++; if (inc.narrative) _pdfEst++;
+    if (inc.strategy) _pdfEst++; if (inc.timeline) _pdfEst++; if (inc.frameRec) _pdfEst++;
+    _pdfEst += (editorialContent.layoutPages || []).length;
+    if (inc.spec) _pdfEst += rows.length;
+    if (inc.floorplanKey) { _fpMigrate(); _pdfEst += (floorplanLevels || []).length; }
+    if (inc.slogan) _pdfEst++; if (inc.contacts) _pdfEst++;
+    _pdfEst = Math.max(1, _pdfEst);
+    _pdfShowOverlay(); _pdfProgress(0.04, 'Building presentation…'); await _pdfYield();
+
     let pageNum = 0;               // 1-based footer counter
     let fpKeyPageNum = 0;          // page of the floorplan key (for back-links)
-    const newPage = () => { if (pageNum > 0) doc.addPage(PAGE_FORMAT, 'landscape'); pageNum += 1; return pageNum; };
+    const newPage = () => {
+        if (pageNum > 0) doc.addPage(PAGE_FORMAT, 'landscape');
+        pageNum += 1;
+        _pdfProgress(Math.min(0.97, pageNum / _pdfEst), 'Building page ' + pageNum + ' of ~' + _pdfEst + '…');
+        return pageNum;
+    };
     // Emit the layout pages anchored to a given point in the deck. Default
     // anchor 'afterStrategy' = the classic layout block. NOTE: we never anchor
     // between the Floorplan Key and Spec pages — their page numbers must stay
@@ -8799,11 +8869,12 @@ async function _buildSpecPagePDF(opts) {
         }
     }
     // — Thank You / contacts (real) —
-    if (inc.contacts) { newPage(); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts); }
+    if (inc.contacts) { newPage(); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     const single = !opts.all && rows[0];
     const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
+    _pdfProgress(1, 'Finishing…'); _pdfHideOverlay();
     if (opts.preview) { showSpecPdfPreview(doc, fname); }
     else { doc.save(fname); }
 }
@@ -9308,6 +9379,39 @@ function buildSpecStrings(r) {
             lc === 'white'
         );
         if (!isDefaultBacker) matboard += ` on ${backerName} Backer`;
+    }
+
+    // — Image Size + Overall Dimensions (to match the InDesign AutoFrameSpecs
+    //   output). Image Size = the printed image (FRAME's "Print" size: opening
+    //   + bleed, or canvas + wrap); Overall = the outer framed size (extW×extH).
+    //   Same math as the dashboard's Open/Print calc cells, in the current unit. —
+    {
+        const _isC = (r.product === "Framed Canvas (Floater)");
+        const _isFL = (r.product === "Frameless Canvas (Wrapped)");
+        const _useFM = !_isC && !_isFL && (r.useFloatMount === true);
+        const _sbPM = _useFM ? (parseFloat(r.sbPaperMargin) || 0) : 0;
+        const _sbPB = _useFM ? (parseFloat(r.sbPaperBorder) || 0) : 0;
+        const _inset = _isC ? (parseFloat(r.floaterInset) || 0.75) : 0;
+        const _act = (r.m1A !== false && !_isC && !_isFL && !_useFM);
+        const _mT = _act ? (parseFloat(r.m1T) || 0) : 0;
+        const _mB = _act ? (parseFloat(r.m1B) || 0) : 0;
+        const _mL = _act ? (parseFloat(r.m1L) || 0) : 0;
+        const _mR = _act ? (parseFloat(r.m1R) || 0) : 0;
+        const _m2v = (r.m2A && !_isC && !_isFL && !_useFM) ? (parseFloat(r.m2) || 0) : 0;
+        const _fW2 = parseFloat(r.fW) || 0;
+        const _eW = parseFloat(r.extW) || 0, _eH = parseFloat(r.extH) || 0;
+        let _oW, _oH;
+        if (_isC) { _oW = _eW - _inset * 2; _oH = _eH - _inset * 2; }
+        else if (_isFL) { _oW = _eW; _oH = _eH; }
+        else if (_useFM) { _oW = _eW - (_fW2 * 2) - _sbPM * 2 - _sbPB * 2; _oH = _eH - (_fW2 * 2) - _sbPM * 2 - _sbPB * 2; }
+        else { _oW = _eW - (_fW2 * 2) - _mL - _mR - (_m2v * 2); _oH = _eH - (_fW2 * 2) - _mT - _mB - (_m2v * 2); }
+        let _iW, _iH;
+        if (_isC) { _iW = _oW; _iH = _oH; }
+        else if (_isFL) { const _wrap = parseFloat(r.canvasWrap) || 0; _iW = _oW + _wrap * 2; _iH = _oH + _wrap * 2; }
+        else { const _bl = parseFloat(r.bleed) || 0; _iW = _oW + _bl * 2; _iH = _oH + _bl * 2; }
+        const _dim = (w, h) => `${fmt(Math.max(0, w))}${sufTight}W × ${fmt(Math.max(0, h))}${sufTight}H`;
+        if (_iW > 0 && _iH > 0) lines.push({ label: 'Image Size', value: _dim(_iW, _iH) });
+        if (_eW > 0 && _eH > 0) lines.push({ label: 'Overall Dimensions', value: _dim(_eW, _eH) });
     }
 
     return { application, matboard, lines };
