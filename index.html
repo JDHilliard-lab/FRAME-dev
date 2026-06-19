@@ -1023,8 +1023,8 @@
      the footer) plus a per-section include checklist. Sections not yet built
      emit labeled placeholder pages so the full deck skeleton is visible. -->
 <div id="specPdfModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:flex-start; justify-content:center; backdrop-filter: blur(2px); overflow-y:auto; padding:24px 0;">
-    <div style="background:var(--bg-panel); padding:24px; border-radius:8px; width:520px; max-height:88vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Presentation PDF</h3>
+    <div id="specPdfPanel" style="background:var(--bg-panel); padding:24px; border-radius:8px; width:520px; max-height:88vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
+        <h3 style="margin-top:0; margin-bottom:4px; font-size:1.05rem; color:var(--text-strong);">Project</h3>
         <p id="specPdfSummary" style="font-size:0.7rem; color:var(--text-muted); margin:0 0 16px 0;"><!-- populated by openSpecPdfModal --></p>
 
         <div style="margin-bottom:14px;">
@@ -1077,6 +1077,7 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <button type="button" class="icon-btn" title="Edit contacts" onclick="openContactsEditor()"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
         </div>
 
+        <div id="specPdfProseBlock" style="display:none;">
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Process &amp; timeline <span style="font-weight:normal; text-transform:none;">(one per line: Phase | Timeframe)</span></label>
         <textarea id="specPdfTimeline" rows="3" placeholder="Concept &amp; Narrative | Weeks 1–2&#10;Art Development | Weeks 3–6&#10;Specification | Weeks 7–8&#10;Production &amp; Install | Weeks 9–14" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; font-family:monospace;"></textarea>
 
@@ -1096,14 +1097,14 @@
             <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openMoodboardModal()">Edit layout pages…</button>
             <span id="specPdfMoodboardCount" style="font-size:0.72rem; color:var(--text-muted);">0 pages</span>
         </div>
+        </div>
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Contacts <span style="font-weight:normal; text-transform:none;">(one per line: Name | Role | Email | Phone)</span></label>
         <textarea id="specPdfContacts" rows="3" placeholder="Laurenn Machin | Creative Director | lmachin@farmboyfinearts.com | 604-200-4018" style="width:100%; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box; resize:vertical; font-family:monospace;"></textarea>
         <p style="font-size:0.64rem; color:var(--text-muted); margin:8px 0 0; line-height:1.4;">Narrative &amp; contacts save with the project. Commas also work as field separators.</p>
 
         <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:16px;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="document.getElementById('specPdfModal').style.display='none'">Cancel</button>
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" title="Live three-pane preview and editor" onclick="openDeckStudio()">Deck Studio…</button>
+            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="closeDeckStudio()">Close</button>
             <button class="action-btn" style="height:32px; padding:0 16px; font-size:0.75rem;" onclick="applySpecPdfModal()">Generate PDF</button>
         </div>
     </div>
@@ -1143,12 +1144,16 @@
     <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:96vw; height:92vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <div style="padding:12px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; gap:10px;">
             <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Deck Studio</h3>
-            <span style="font-size:0.7rem; color:var(--text-muted);">live preview — edits save with the project</span>
+            <div style="display:flex; gap:4px; margin-left:8px;">
+                <button id="dsTabBtnProject" onclick="_dsTab('project')" style="height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:#6a6aff; color:#fff;">Project</button>
+                <button id="dsTabBtnPages" onclick="_dsTab('pages')" style="height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Pages</button>
+            </div>
             <span style="flex:1;"></span>
             <button id="dsSaveBtn" class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="_dsSave()">Save</button>
             <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="closeDeckStudio()">Done</button>
         </div>
-        <div style="flex:1; display:flex; min-height:0;">
+        <div id="dsTabProject" style="flex:1; overflow-y:auto; padding:18px; display:flex; justify-content:center; align-items:flex-start;"><!-- project settings panel reparented here --></div>
+        <div id="dsTabPages" style="flex:1; display:none; min-height:0;">
             <div id="dsRail" style="width:200px; flex-shrink:0; border-right:1px solid var(--border-color); overflow-y:auto; padding:12px;"><!-- thumbnails --></div>
             <div id="dsCenter" style="flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:24px; background:var(--bg-input); overflow:auto;"><!-- live page mock --></div>
             <div id="dsTools" style="width:280px; flex-shrink:0; border-left:1px solid var(--border-color); overflow-y:auto; padding:16px;"><!-- per-page tools --></div>
