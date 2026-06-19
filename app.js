@@ -7417,10 +7417,99 @@ function _dsRenderCenter() {
     let availH = c.clientHeight - 48; if (!availH || availH < 120) availH = 460;
     let w = availW, hh = w * 540 / 936;
     if (hh > availH) { hh = availH; w = hh * 936 / 540; }
+    if (desc.kind === 'floorplan') { _dsRenderCenterFloorplan(desc, c, Math.round(w), Math.round(hh)); return; }
     const page = document.createElement('div');
     page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
     page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
+}
+// — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
+let _dsFpDragKey = null, _dsFpDragPin = null;
+function _dsRenderCenterFloorplan(desc, c, w, hh) {
+    const lv = floorplanLevels[desc.level] || {};
+    const page = document.createElement('div');
+    page.style.cssText = 'position:relative; width:' + w + 'px; height:' + hh + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
+    const pad = Math.round(w * 0.06);
+    const title = document.createElement('div');
+    title.style.cssText = 'position:absolute; left:' + pad + 'px; top:' + Math.round(pad * 0.4) + 'px; font-weight:800; color:#111; font-size:' + Math.max(10, Math.round(hh * 0.05)) + 'px;';
+    title.textContent = 'FLOORPLAN \u2014 ' + (lv.name || ('Level ' + (desc.level + 1))).toUpperCase();
+    page.appendChild(title);
+    const planTop = Math.round(hh * 0.14);
+    const area = document.createElement('div');
+    area.style.cssText = 'position:absolute; left:0; right:0; top:' + planTop + 'px; bottom:' + pad + 'px; display:flex; align-items:center; justify-content:center;';
+    if (!lv.imageData) {
+        area.innerHTML = '<div style="color:#bbb; font-size:13px;">No plan image for this level — open the full markup tool to upload one.</div>';
+        page.appendChild(area); c.appendChild(page); return;
+    }
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
+    const img = document.createElement('img');
+    img.id = 'dsFpPlanImg'; img.src = lv.imageData; img.draggable = false;
+    img.style.cssText = 'display:block; max-width:' + (w - pad * 2) + 'px; max-height:' + (hh - planTop - pad) + 'px; user-select:none; -webkit-user-drag:none; cursor:' + (_fpArmedId ? 'crosshair' : 'default') + ';';
+    img.onclick = _dsFpPlace;
+    wrap.appendChild(img);
+    _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g)); });
+    area.appendChild(wrap); page.appendChild(area); c.appendChild(page);
+}
+function _dsMakePin(g) {
+    const pin = document.createElement('div');
+    pin.style.cssText = 'position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:22px; height:22px; padding:0 5px; border-radius:11px; background:' + categoryColor(g.category) + '; color:#fff; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:0.62rem; font-weight:700; cursor:grab; user-select:none;';
+    pin.textContent = g.num;
+    pin.title = g.ids.filter(Boolean).join(', ') + ' — drag to move, double-click to remove';
+    pin.onmousedown = (e) => _dsFpPinDown(e, g.key);
+    pin.ondblclick = (e) => { e.stopPropagation(); _dsFpRemove(g.key); };
+    return pin;
+}
+function _dsFpNorm(e) {
+    const img = document.getElementById('dsFpPlanImg'); if (!img) return null;
+    const r = img.getBoundingClientRect(); if (!r.width || !r.height) return null;
+    return { x: Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)), y: Math.max(0, Math.min(1, (e.clientY - r.top) / r.height)) };
+}
+function _dsFpPlace(e) {
+    if (!_fpArmedId) return;
+    const n = _dsFpNorm(e); if (!n) return;
+    const g = _fpFindGroup(_fpArmedId); if (!g) return;
+    const lvl = (_dsPages[_dsIndex] && _dsPages[_dsIndex].level) || 0;
+    g.rows.forEach(r => { r.planX = n.x; r.planY = n.y; r.level = lvl; });
+    _fpArmedId = null;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
+}
+function _dsFpPinDown(e, key) {
+    e.preventDefault(); e.stopPropagation();
+    _dsFpDragKey = key; _dsFpDragPin = e.currentTarget;
+    document.addEventListener('mousemove', _dsFpDragMove);
+    document.addEventListener('mouseup', _dsFpDragUp);
+}
+function _dsFpDragMove(e) {
+    if (!_dsFpDragKey) return;
+    const n = _dsFpNorm(e); if (!n) return;
+    const g = _fpFindGroup(_dsFpDragKey); if (!g) return;
+    g.rows.forEach(r => { r.planX = n.x; r.planY = n.y; });
+    if (_dsFpDragPin) { _dsFpDragPin.style.left = (n.x * 100) + '%'; _dsFpDragPin.style.top = (n.y * 100) + '%'; }
+}
+function _dsFpDragUp() {
+    document.removeEventListener('mousemove', _dsFpDragMove);
+    document.removeEventListener('mouseup', _dsFpDragUp);
+    if (_dsFpDragKey) { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+    _dsFpDragKey = null; _dsFpDragPin = null;
+    _dsRefresh();
+}
+function _dsFpRemove(key) {
+    const g = _fpFindGroup(key); if (!g) return;
+    g.rows.forEach(r => { r.planX = null; r.planY = null; });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
+}
+function _dsFpArm(key) { _fpArmedId = (_fpArmedId === key) ? null : key; _dsRenderTools(); _dsRenderCenter(); }
+function _dsFpSetCategory(key, cat) {
+    const g = _fpFindGroup(key); if (!g) return;
+    g.rows.forEach(r => { r.category = cat || ''; });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
 }
 function _dsTemplateCategory(desc) {
     if (!desc) return null;
@@ -7445,6 +7534,42 @@ function _dsRenderTools() {
     const head = document.createElement('div');
     head.innerHTML = '<div style="font-size:0.9rem; font-weight:700; color:var(--text-strong);">' + _esc(desc.title || desc.type) + '</div><div style="font-size:0.68rem; color:var(--text-muted); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.03em;">' + _esc(desc.type) + '</div>';
     t.appendChild(head);
+
+    if (desc.kind === 'floorplan') {
+        const hint = document.createElement('p');
+        hint.style.cssText = 'font-size:0.68rem; color:' + (_fpArmedId ? '#6a6aff' : 'var(--text-muted)') + '; margin-bottom:10px; line-height:1.5;';
+        hint.textContent = _fpArmedId ? ('Click the plan to drop ' + _fpArmedId + '.') : 'Click a group, then click the plan to drop its pin. Drag pins to move; double-click to remove.';
+        t.appendChild(hint);
+        const groups = _fpGroups();
+        if (!groups.length) { const e = document.createElement('p'); e.style.cssText = 'font-size:0.7rem; color:var(--text-muted);'; e.textContent = 'No artwork groups yet. Add pieces in the Frame Dashboard.'; t.appendChild(e); }
+        groups.forEach(g => {
+            const placed = (g.planX != null && g.planY != null);
+            const armed = (_fpArmedId === g.key);
+            const onThis = (g.level || 0) === desc.level;
+            const row = document.createElement('div');
+            row.style.cssText = 'display:flex; align-items:center; gap:7px; padding:6px; border-radius:5px; cursor:pointer; margin-bottom:3px; ' + (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid #6a6aff;' : 'background:transparent;');
+            const num = document.createElement('span');
+            num.textContent = g.num;
+            num.style.cssText = 'flex:0 0 auto; min-width:20px; height:20px; padding:0 4px; border-radius:10px; display:inline-flex; align-items:center; justify-content:center; font-size:0.58rem; font-weight:700; color:#fff; background:' + categoryColor(g.category) + ';';
+            const lab = document.createElement('div');
+            lab.style.cssText = 'flex:1; min-width:0; overflow:hidden;';
+            const codes = g.ids.filter(Boolean).join(', ');
+            const status = placed ? (onThis ? 'placed here' : 'on ' + ((floorplanLevels[g.level || 0] || {}).name || ('Level ' + ((g.level || 0) + 1)))) : 'not placed';
+            lab.innerHTML = '<div style="font-size:0.72rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(codes || g.key) + '</div><div style="font-size:0.6rem; color:' + (placed ? 'var(--text-muted)' : '#c08a2e') + ';">' + _esc(status) + '</div>';
+            const sel = document.createElement('select');
+            sel.style.cssText = 'flex:0 0 auto; font-size:0.6rem; padding:2px 3px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+            ART_CATEGORIES.forEach(cc => { const o = document.createElement('option'); o.value = cc.key; o.textContent = cc.label; if ((g.category || '') === cc.key) o.selected = true; sel.appendChild(o); });
+            sel.onclick = (e) => e.stopPropagation();
+            sel.onchange = (e) => _dsFpSetCategory(g.key, e.target.value);
+            row.appendChild(num); row.appendChild(lab); row.appendChild(sel);
+            row.onclick = () => _dsFpArm(g.key);
+            t.appendChild(row);
+        });
+        const b = document.createElement('button'); b.textContent = 'Open full markup tool'; b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:100%; height:32px; margin-top:10px; font-size:0.74rem;';
+        b.onclick = () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); };
+        t.appendChild(b);
+        return;
+    }
 
     const cat = _dsTemplateCategory(desc);
     if (cat) {
