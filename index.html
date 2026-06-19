@@ -1067,7 +1067,7 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_cover" checked style="cursor:pointer;"> Cover <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openFixedPageEditor('cover')">Edit…</button></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_timeline" checked style="cursor:pointer;"> Process &amp; Timeline <span style="color:var(--text-muted); font-size:0.7rem;">(phases below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_understanding" checked style="cursor:pointer;"> Project Understanding <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <button type="button" class="action-btn btn-secondary" style="width:auto; height:22px; padding:0 8px; font-size:0.66rem;" onclick="openFixedPageEditor('narrative')">Edit…</button></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_strategy" checked style="cursor:pointer;"> Art Collection Strategy <span style="color:var(--text-muted); font-size:0.7rem;">(3 tiers below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_moodboard" checked style="cursor:pointer;"> Layout pages <span style="color:var(--text-muted); font-size:0.7rem;">(moodboard / breaker / etc.)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_frameRec" checked style="cursor:pointer;"> Frame Recommendations <span style="color:var(--text-muted); font-size:0.7rem;">(frames used in project)</span></label>
@@ -1289,6 +1289,8 @@
             <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="closeTemplatesModal()">Done</button>
         </div>
         <div style="padding:10px 18px; border-bottom:1px solid var(--border-color); display:flex; gap:6px; flex-wrap:wrap;">
+            <button id="tplTab_cover" onclick="_tplSetTab('cover')">Cover</button>
+            <button id="tplTab_narrative" onclick="_tplSetTab('narrative')">Narrative</button>
             <button id="tplTab_moodboard" onclick="_tplSetTab('moodboard')">Moodboard</button>
             <button id="tplTab_breaker" onclick="_tplSetTab('breaker')">Breaker</button>
             <button id="tplTab_keyword" onclick="_tplSetTab('keyword')">Keyword</button>
