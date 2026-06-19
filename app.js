@@ -7283,6 +7283,178 @@ function _pdfProgress(frac, label) {
 }
 function _pdfYield() { return new Promise(r => setTimeout(r, 0)); }
 
+// ── Deck Studio: live three-pane preview/editor (thumbnails | mock | tools) ──
+// Center is a live HTML mock (instant), not the real PDF — the true PDF is still
+// produced by Generate. This is the shell; per-page-type tool panels and inline
+// floorplan placement get wired into the right pane in following passes.
+let _dsIndex = 0;
+let _dsPages = [];
+function _dsInclude() {
+    const ck = (id, d) => { const e = document.getElementById(id); return e ? !!e.checked : d; };
+    return {
+        cover: ck('specInc_cover', true), timeline: ck('specInc_timeline', false),
+        understanding: ck('specInc_understanding', true), narrative: ck('specInc_narrative', true),
+        strategy: ck('specInc_strategy', true), frameRec: ck('specInc_frameRec', false),
+        floorplanKey: ck('specInc_floorplanKey', true), spec: ck('specInc_spec', true),
+        slogan: ck('specInc_slogan', true), contacts: ck('specInc_contacts', true)
+    };
+}
+function _deckPageList() {
+    _mbMigratePages(); _fpMigrate();
+    const inc = _dsInclude();
+    const ec = editorialContent;
+    const pages = [];
+    const layoutAt = (anchor) => (ec.layoutPages || []).forEach(p => { if ((p.place || 'afterStrategy') === anchor) pages.push({ kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Layout', page: p }); });
+    if (inc.cover) pages.push({ kind: 'fixed', fixed: 'cover', type: 'cover', title: 'Cover', page: ec.coverPage });
+    layoutAt('afterCover');
+    if (inc.timeline) pages.push({ kind: 'card', type: 'timeline', title: 'Process / Timeline' });
+    layoutAt('afterTimeline');
+    if (inc.understanding) pages.push({ kind: 'prose', type: 'understanding', title: 'Project Understanding', text: ec.understanding });
+    layoutAt('afterUnderstanding');
+    if (inc.narrative) pages.push({ kind: 'fixed', fixed: 'narrative', type: 'narrative', title: 'Art Narrative', page: ec.narrativePage, text: ec.narrative });
+    layoutAt('afterNarrative');
+    if (inc.strategy) { const s = ec.strategy || {}; pages.push({ kind: 'prose', type: 'strategy', title: 'Strategy', text: [s.primary, s.secondary, s.tertiary].filter(Boolean).join('\n\n') }); }
+    layoutAt('afterStrategy');
+    if (inc.frameRec) pages.push({ kind: 'card', type: 'frameRec', title: 'Frame Recommendations' });
+    layoutAt('beforeFloorplan');
+    const rows = (dashProjectData || []).filter(r => r && r.artworkUrl);
+    if (inc.floorplanKey) {
+        const emit = [];
+        floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => (r.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li); if (used) emit.push(li); });
+        if (!emit.length) emit.push(0);
+        emit.forEach(li => {
+            pages.push({ kind: 'floorplan', type: 'floorplan', title: (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1)), level: li });
+            if (inc.spec) rows.filter(r => (r.level || 0) === li).forEach(r => pages.push({ kind: 'spec', type: 'spec', title: r.id || 'Spec', row: r }));
+        });
+    } else if (inc.spec) {
+        rows.forEach(r => pages.push({ kind: 'spec', type: 'spec', title: r.id || 'Spec', row: r }));
+    }
+    layoutAt('afterSpec');
+    if (inc.slogan) pages.push({ kind: 'fixed', fixed: 'slogan', type: 'slogan', title: 'Good Art Good People', page: ec.sloganPage });
+    layoutAt('beforeContacts');
+    if (inc.contacts) pages.push({ kind: 'card', type: 'contacts', title: 'Thank You', text: ec.contacts });
+    return pages;
+}
+function _deckMockHTML(desc, w, h) {
+    const pg = (desc.kind === 'layout' || desc.kind === 'fixed') ? desc.page : null;
+    const hasEls = pg && Array.isArray(pg.elements) && pg.elements.length;
+    if (hasEls) return _mbThumbInner(pg, w, h);
+    const pad = Math.round(w * 0.06);
+    const fs = (frac) => Math.max(7, Math.round(h * frac));
+    const wrap = (inner, bg) => '<div style="position:absolute; inset:0; background:' + (bg || '#ffffff') + '; overflow:hidden;">' + inner + '</div>';
+    if (desc.kind === 'fixed' && desc.fixed === 'cover') {
+        const nm = (typeof globalMeta !== 'undefined' && globalMeta && (globalMeta.projName || globalMeta.projectName)) || 'PROJECT NAME';
+        return wrap('<div style="position:absolute; left:' + pad + 'px; bottom:' + pad + 'px; right:' + pad + 'px;"><div style="font-weight:800; color:#111; font-size:' + fs(0.12) + 'px; line-height:1.05;">' + _esc(nm) + '</div><div style="color:#666; font-size:' + fs(0.05) + 'px; margin-top:4px;">Art Program Presentation</div></div>', '#f3f1ec');
+    }
+    if (desc.kind === 'prose' || (desc.kind === 'fixed') || desc.kind === 'card') {
+        const body = (desc.text || '').toString();
+        const bodyHtml = body ? _esc(body).replace(/\n/g, '<br>') : '<span style="color:#bbb;">(empty — add copy in the Presentation PDF dialog)</span>';
+        return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px;"><div style="font-weight:800; color:#111; font-size:' + fs(0.08) + 'px; text-transform:uppercase; letter-spacing:0.02em;">' + _esc(desc.title) + '</div><div style="color:#333; font-size:' + fs(0.04) + 'px; line-height:1.5; margin-top:' + Math.round(h * 0.05) + 'px; max-height:' + Math.round(h * 0.7) + 'px; overflow:hidden;">' + bodyHtml + '</div></div>');
+    }
+    if (desc.kind === 'floorplan') {
+        const lv = floorplanLevels[desc.level] || {};
+        let inner = '<div style="position:absolute; left:' + pad + 'px; top:' + Math.round(pad * 0.5) + 'px; font-weight:800; color:#111; font-size:' + fs(0.06) + 'px;">FLOORPLAN — ' + _esc((lv.name || ('Level ' + (desc.level + 1))).toUpperCase()) + '</div>';
+        const planTop = Math.round(h * 0.16), planH = h - planTop - pad, planW = w - pad * 2, planL = pad;
+        if (lv.imageData) {
+            inner += '<div style="position:absolute; left:' + planL + 'px; top:' + planTop + 'px; width:' + planW + 'px; height:' + planH + 'px; background:#fafafa; border:1px solid #eee;"><img src="' + lv.imageData + '" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;">';
+            _fpGroups().filter(g => (g.level || 0) === desc.level && g.planX != null && g.planY != null).forEach(g => {
+                inner += '<div style="position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:' + fs(0.05) + 'px; height:' + fs(0.05) + 'px; padding:0 3px; border-radius:99px; background:' + categoryColor(g.category) + '; color:#fff; font-size:' + fs(0.03) + 'px; font-weight:700; display:flex; align-items:center; justify-content:center; border:1px solid #fff;">' + _esc(g.num) + '</div>';
+            });
+            inner += '</div>';
+        } else {
+            inner += '<div style="position:absolute; left:' + planL + 'px; top:' + planTop + 'px; width:' + planW + 'px; height:' + planH + 'px; background:#fafafa; border:1px dashed #ccc; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.04) + 'px;">No plan image for this level</div>';
+        }
+        return wrap(inner);
+    }
+    if (desc.kind === 'spec') {
+        const r = desc.row || {};
+        let lines = [];
+        try { const s = buildSpecStrings(r); if (s && s.lines) lines = s.lines.map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
+        const specHtml = lines.slice(0, 14).map(l => _esc(l)).join('<br>');
+        const boxW = Math.round(w * 0.34), boxH = Math.round(h * 0.5);
+        let inner = '<div style="position:absolute; left:' + pad + 'px; top:' + Math.round(pad * 0.5) + 'px; font-weight:800; color:#111; font-size:' + fs(0.07) + 'px;">' + _esc(r.id || 'SPEC') + '</div>';
+        inner += '<div style="position:absolute; left:' + pad + 'px; top:' + Math.round(h * 0.18) + 'px; width:' + boxW + 'px; height:' + boxH + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.035) + 'px;">artwork</div>';
+        inner += '<div style="position:absolute; left:' + (pad + boxW + Math.round(w * 0.04)) + 'px; top:' + Math.round(h * 0.18) + 'px; right:' + pad + 'px; color:#333; font-size:' + fs(0.032) + 'px; line-height:1.7;">' + specHtml + '</div>';
+        return wrap(inner);
+    }
+    return wrap('<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:' + fs(0.05) + 'px;">' + _esc(desc.title) + '</div>');
+}
+function openDeckStudio() {
+    _dsPages = _deckPageList();
+    if (_dsIndex >= _dsPages.length) _dsIndex = 0;
+    const m = document.getElementById('deckStudioModal'); if (!m) return;
+    const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
+    m.style.display = 'flex';
+    _dsRenderRail(); _dsRenderTools();
+    requestAnimationFrame(_dsRenderCenter);
+}
+function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
+function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
+function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
+function _dsRenderRail() {
+    const rail = document.getElementById('dsRail'); if (!rail) return;
+    rail.innerHTML = '';
+    if (!_dsPages.length) { rail.innerHTML = '<p style="color:var(--text-muted); font-size:0.74rem;">No pages selected. Turn sections on in the Presentation PDF dialog.</p>'; return; }
+    const tw = 168, th = Math.round(tw * 540 / 936);
+    _dsPages.forEach((desc, i) => {
+        const cell = document.createElement('div');
+        cell.style.cssText = 'margin-bottom:10px; cursor:pointer;';
+        cell.onclick = () => _dsSelectPage(i);
+        const thumb = document.createElement('div');
+        thumb.style.cssText = 'position:relative; width:' + tw + 'px; height:' + th + 'px; background:#fff; border-radius:4px; overflow:hidden; border:2px solid ' + (i === _dsIndex ? '#6a6aff' : 'var(--border-color)') + ';';
+        thumb.innerHTML = _deckMockHTML(desc, tw, th);
+        const lab = document.createElement('div');
+        lab.style.cssText = 'font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+        lab.textContent = (i + 1) + '. ' + (desc.title || desc.type);
+        cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
+    });
+}
+function _dsRenderCenter() {
+    const c = document.getElementById('dsCenter'); if (!c) return;
+    c.innerHTML = '';
+    const desc = _dsPages[_dsIndex]; if (!desc) return;
+    let availW = c.clientWidth - 48; if (!availW || availW < 200) availW = 760;
+    let availH = c.clientHeight - 48; if (!availH || availH < 120) availH = 460;
+    let w = availW, hh = w * 540 / 936;
+    if (hh > availH) { hh = availH; w = hh * 936 / 540; }
+    const page = document.createElement('div');
+    page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
+    page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh));
+    c.appendChild(page);
+}
+function _dsRenderTools() {
+    const t = document.getElementById('dsTools'); if (!t) return;
+    const desc = _dsPages[_dsIndex];
+    t.innerHTML = '';
+    if (!desc) { t.innerHTML = '<p style="color:var(--text-muted); font-size:0.74rem;">Select a page.</p>'; return; }
+    const h = document.createElement('div');
+    h.innerHTML = '<div style="font-size:0.9rem; font-weight:700; color:var(--text-strong);">' + _esc(desc.title || desc.type) + '</div><div style="font-size:0.68rem; color:var(--text-muted); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.03em;">' + _esc(desc.type) + '</div>';
+    t.appendChild(h);
+    const addBtn = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.className = 'action-btn'; b.style.cssText = 'width:100%; height:34px; margin-bottom:8px; font-size:0.76rem;'; b.onclick = fn; t.appendChild(b); };
+    if (desc.kind === 'layout') {
+        addBtn('Edit this page', () => { const idx = (editorialContent.layoutPages || []).indexOf(desc.page); if (idx >= 0) _mbPageIndex = idx; closeDeckStudio(); openMoodboardModal(); });
+    } else if (desc.kind === 'fixed') {
+        addBtn('Edit this page', () => { closeDeckStudio(); openFixedPageEditor(desc.fixed); });
+    } else if (desc.kind === 'floorplan') {
+        addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
+    } else if (desc.type === 'contacts') {
+        addBtn('Edit contacts', () => { closeDeckStudio(); openContactsEditor(); });
+    } else if (desc.kind === 'prose' || desc.kind === 'card') {
+        addBtn('Edit copy (Presentation PDF dialog)', () => { closeDeckStudio(); openSpecPdfModal(); });
+    }
+    const note = document.createElement('p');
+    note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin-top:10px; line-height:1.5;';
+    note.textContent = 'Per-page tools (template shuffling, inline number placement) land here next. For now, "Edit this page" opens the matching editor; come back and the preview updates.';
+    t.appendChild(note);
+}
+function _dsSave() {
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    const b = document.getElementById('dsSaveBtn'); if (b) { const o = b.textContent; b.textContent = 'Saved \u2713'; setTimeout(() => { b.textContent = o; }, 1200); }
+    _dsRefresh();
+}
+window.addEventListener('resize', () => { const m = document.getElementById('deckStudioModal'); if (m && m.style.display && m.style.display !== 'none') _dsRenderCenter(); });
+
 // ── Presentation PDF setup modal ──────────────────────────────────────────
 // The "Spec PDF" button opens this instead of exporting immediately. It
 // collects the elements FRAME can't auto-derive (project code / version /
