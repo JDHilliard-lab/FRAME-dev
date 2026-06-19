@@ -7422,29 +7422,74 @@ function _dsRenderCenter() {
     page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
 }
+function _dsTemplateCategory(desc) {
+    if (!desc) return null;
+    if (desc.kind === 'fixed') return LAYOUT_TEMPLATES[desc.fixed] ? desc.fixed : null;
+    if (desc.kind === 'layout') return LAYOUT_TEMPLATES[desc.type] ? desc.type : null;
+    return null;
+}
+function _dsApplyTemplate(els, type) {
+    const desc = _dsPages[_dsIndex];
+    if (!desc || !desc.page) return;
+    desc.page.elements = JSON.parse(JSON.stringify(els || []));
+    if (desc.kind === 'layout' && type) desc.page.type = type;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
+}
 function _dsRenderTools() {
     const t = document.getElementById('dsTools'); if (!t) return;
     const desc = _dsPages[_dsIndex];
     t.innerHTML = '';
     if (!desc) { t.innerHTML = '<p style="color:var(--text-muted); font-size:0.74rem;">Select a page.</p>'; return; }
-    const h = document.createElement('div');
-    h.innerHTML = '<div style="font-size:0.9rem; font-weight:700; color:var(--text-strong);">' + _esc(desc.title || desc.type) + '</div><div style="font-size:0.68rem; color:var(--text-muted); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.03em;">' + _esc(desc.type) + '</div>';
-    t.appendChild(h);
-    const addBtn = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.className = 'action-btn'; b.style.cssText = 'width:100%; height:34px; margin-bottom:8px; font-size:0.76rem;'; b.onclick = fn; t.appendChild(b); };
-    if (desc.kind === 'layout') {
-        addBtn('Edit this page', () => { const idx = (editorialContent.layoutPages || []).indexOf(desc.page); if (idx >= 0) _mbPageIndex = idx; closeDeckStudio(); openMoodboardModal(); });
-    } else if (desc.kind === 'fixed') {
-        addBtn('Edit this page', () => { closeDeckStudio(); openFixedPageEditor(desc.fixed); });
-    } else if (desc.kind === 'floorplan') {
-        addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
-    } else if (desc.type === 'contacts') {
-        addBtn('Edit contacts', () => { closeDeckStudio(); openContactsEditor(); });
-    } else if (desc.kind === 'prose' || desc.kind === 'card') {
-        addBtn('Edit copy (Presentation PDF dialog)', () => { closeDeckStudio(); openSpecPdfModal(); });
+    const head = document.createElement('div');
+    head.innerHTML = '<div style="font-size:0.9rem; font-weight:700; color:var(--text-strong);">' + _esc(desc.title || desc.type) + '</div><div style="font-size:0.68rem; color:var(--text-muted); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.03em;">' + _esc(desc.type) + '</div>';
+    t.appendChild(head);
+
+    const cat = _dsTemplateCategory(desc);
+    if (cat) {
+        const lbl = document.createElement('div');
+        lbl.textContent = 'Templates — click to apply'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
+        t.appendChild(lbl);
+        const grid = document.createElement('div');
+        grid.style.cssText = 'display:flex; flex-direction:column; gap:8px; margin-bottom:14px;';
+        const cards = [];
+        (LAYOUT_TEMPLATES[cat] || []).forEach(b => { try { cards.push({ name: b.name, els: b.els() }); } catch (e) {} });
+        (editorialContent.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat) cards.push({ name: tp.name || 'Saved', els: tp.elements || [] }); });
+        if (typeof studioDefaults !== 'undefined') (studioDefaults.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat) cards.push({ name: (tp.name || 'Studio') + ' · studio', els: tp.elements || [] }); });
+        const cw = 244, chh = Math.round(cw * 540 / 936);
+        cards.forEach(card => {
+            const cell = document.createElement('div');
+            cell.style.cssText = 'cursor:pointer; border:1px solid var(--border-color); border-radius:5px; overflow:hidden; background:#fff;';
+            cell.title = 'Apply: ' + card.name;
+            cell.onmouseenter = () => { cell.style.borderColor = '#6a6aff'; };
+            cell.onmouseleave = () => { cell.style.borderColor = 'var(--border-color)'; };
+            cell.onclick = () => _dsApplyTemplate(card.els, cat);
+            const thumb = document.createElement('div');
+            thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
+            thumb.innerHTML = _mbThumbInner({ elements: card.els }, cw, chh);
+            const nm = document.createElement('div');
+            nm.textContent = card.name; nm.style.cssText = 'font-size:0.64rem; color:var(--text-main); padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+            cell.appendChild(thumb); cell.appendChild(nm); grid.appendChild(cell);
+        });
+        if (!cards.length) { const e = document.createElement('p'); e.style.cssText = 'font-size:0.68rem; color:var(--text-muted);'; e.textContent = 'No templates for this page type yet.'; grid.appendChild(e); }
+        t.appendChild(grid);
     }
+
+    const addBtn = (label, fn, secondary) => { const b = document.createElement('button'); b.textContent = label; b.className = secondary ? 'action-btn btn-secondary' : 'action-btn'; b.style.cssText = 'width:100%; height:34px; margin-bottom:8px; font-size:0.76rem;'; b.onclick = fn; t.appendChild(b); };
+    if (desc.kind === 'layout') addBtn('Open in layout editor', () => { const idx = (editorialContent.layoutPages || []).indexOf(desc.page); if (idx >= 0) _mbPageIndex = idx; closeDeckStudio(); openMoodboardModal(); }, !!cat);
+    else if (desc.kind === 'fixed') addBtn('Open in layout editor', () => { closeDeckStudio(); openFixedPageEditor(desc.fixed); }, !!cat);
+    else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
+    else if (desc.type === 'contacts') addBtn('Edit contacts', () => { closeDeckStudio(); openContactsEditor(); });
+    else if (desc.kind === 'prose' || desc.kind === 'card') addBtn('Edit copy (Presentation PDF dialog)', () => { closeDeckStudio(); openSpecPdfModal(); });
+
     const note = document.createElement('p');
-    note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin-top:10px; line-height:1.5;';
-    note.textContent = 'Per-page tools (template shuffling, inline number placement) land here next. For now, "Edit this page" opens the matching editor; come back and the preview updates.';
+    note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin-top:6px; line-height:1.5;';
+    note.textContent = cat
+        ? 'Applying a template replaces this page\u2019s layout (images are filled in the editor). Use the editor for fine adjustments.'
+        : (desc.kind === 'prose'
+            ? 'This section is text-only today. Cover, Art Narrative, Good Art Good People, and layout/art-collection pages offer templates.'
+            : 'Inline floorplan number placement on the preview is coming next.');
     t.appendChild(note);
 }
 function _dsSave() {
