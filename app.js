@@ -267,8 +267,8 @@ let floorplanImageName = '';
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -295,8 +295,13 @@ function _mbMigratePages() {
     });
     if (_mbPageIndex < 0 || _mbPageIndex >= ec.layoutPages.length) _mbPageIndex = 0;
     if (!Array.isArray(ec.templates)) ec.templates = [];
+    if (!ec.coverPage || !Array.isArray(ec.coverPage.elements)) ec.coverPage = { elements: [] };
 }
-function _mbPage() { _mbMigratePages(); return editorialContent.layoutPages[_mbPageIndex]; }
+// When set, the editor targets a fixed page (e.g. the Cover) instead of the
+// layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
+// the only hinge needed to reuse the whole canvas for fixed pages.
+let _mbEditTarget = null;
+function _mbPage() { if (_mbEditTarget) return _mbEditTarget.page; _mbMigratePages(); return editorialContent.layoutPages[_mbPageIndex]; }
 function _mbEls() { return _mbPage().elements; }
 function _mbAutosave() { if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
 function _mbSwitchPage(i) {
@@ -384,6 +389,7 @@ function _mbRenderPageStrip() {
     const strip = document.getElementById('moodboardPages');
     if (!strip) return;
     if (_mbDrag) return;   // don't rebuild thumbnails mid element-drag (perf)
+    if (_mbEditTarget) return;   // fixed-page mode has no layout strip
     _mbMigratePages();
     const pages = editorialContent.layoutPages;
     const W = 104, H = Math.round(104 * 540 / 936);
@@ -461,7 +467,7 @@ function closeTemplatesModal() { const m = document.getElementById('templatesMod
 function _tplSetTab(type) { _tplType = type; _tplRenderCards(type); }
 function _tplApply(els, type, asNew) {
     const copy = JSON.parse(JSON.stringify(els || []));
-    if (asNew) addLayoutPage(type);
+    if (asNew && !_mbEditTarget) addLayoutPage(type);
     const pg = _mbPage();
     const wasDefault = (!pg.title || pg.title === _mbDefaultTitle(pg.type));
     pg.elements = copy; pg.type = type;
@@ -7503,13 +7509,48 @@ function _mbOnResize() { const m = document.getElementById('moodboardModal'); if
 function openMoodboardModal() {
     const m = document.getElementById('moodboardModal');
     if (!m) return;
+    _mbEditTarget = null;
     _mbSelected = -1;
     _normalizeMoodboard();
+    _mbApplyModeUI();
     m.style.display = 'flex';
     window.addEventListener('resize', _mbOnResize);
     document.addEventListener('keydown', _mbKeyDelete);
     _mbBackfillAspects(renderMoodboardCanvas);
     renderMoodboardCanvas();
+}
+// Open the freeform editor on a fixed deck page (currently the Cover). Reuses
+// the entire canvas; the layout-pages rail/controls are hidden.
+function openFixedPageEditor(key) {
+    _mbMigratePages();
+    let page, label;
+    if (key === 'cover') {
+        if (!editorialContent.coverPage || !Array.isArray(editorialContent.coverPage.elements)) editorialContent.coverPage = { elements: [] };
+        page = editorialContent.coverPage; label = 'Cover';
+        if (!page.elements.length) {
+            const el = document.getElementById('g_projName');
+            const nm = ((el && el.value) || 'PROJECT NAME').toUpperCase();
+            page.elements = [_tImg(0, 0, 1, 1, 1), _tTxt(nm, .08, .66, .84, .085, 5, 'display', '#ffffff'), _tTxt('Art Program', .08, .8, .84, .04, 6, 'serif', '#ffffff')];
+        }
+        page.type = 'breaker';   // full-bleed treatment in editor + PDF
+    } else { return; }
+    _mbEditTarget = { key: key, label: label, page: page };
+    const m = document.getElementById('moodboardModal'); if (!m) return;
+    const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
+    _mbSelected = -1;
+    _normalizeMoodboard();
+    _mbApplyModeUI();
+    m.style.display = 'flex';
+    window.addEventListener('resize', _mbOnResize);
+    document.addEventListener('keydown', _mbKeyDelete);
+    _mbBackfillAspects(renderMoodboardCanvas);
+    renderMoodboardCanvas();
+}
+function _mbApplyModeUI() {
+    const fixed = !!_mbEditTarget;
+    const ctl = document.getElementById('mbPageControls'); if (ctl) ctl.style.display = fixed ? 'none' : 'flex';
+    const rail = document.getElementById('moodboardPages'); if (rail) rail.style.display = fixed ? 'none' : 'flex';
+    const lab = document.getElementById('mbModeLabel'); if (lab) lab.textContent = fixed ? ('Editing: ' + (_mbEditTarget.label || 'Page')) : '';
 }
 function _mbKeyDelete(e) {
     if (_mbPlacing) return;
@@ -7523,6 +7564,7 @@ function _mbKeyDelete(e) {
 function closeMoodboardModal() {
     const m = document.getElementById('moodboardModal');
     if (m) m.style.display = 'none';
+    _mbEditTarget = null;
     _mbSelected = -1;
     if (_mbPlacing) { _mbPlacing = false; _mbDraft = null; document.removeEventListener('keydown', _mbPlaceKey); }
     window.removeEventListener('resize', _mbOnResize);
@@ -8136,7 +8178,20 @@ async function _buildSpecPagePDF(opts) {
     };
 
     // — Cover —
-    if (inc.cover) { newPage(); _drawCoverPage(doc, logos); }
+    if (inc.cover) {
+        newPage();
+        const cov = editorialContent.coverPage;
+        if (cov && Array.isArray(cov.elements) && cov.elements.length) {
+            const src = cov.elements;
+            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+            for (let ti = 0; ti < src.length; ti++) {
+                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+            }
+            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker');
+        } else {
+            _drawCoverPage(doc, logos);
+        }
+    }
     await emitLayout('afterCover');
     // — Process & Timeline (real) —
     if (inc.timeline) { newPage(); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
