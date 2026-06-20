@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -359,6 +359,7 @@ function _mbMigratePages() {
     if (!ec.strategyPage || !Array.isArray(ec.strategyPage.elements)) ec.strategyPage = { elements: [] };
     if (typeof ec.specTemplate !== 'string' || !SPEC_TEMPLATES[ec.specTemplate]) ec.specTemplate = 'classic';
     if (typeof ec.approvedStamp !== 'boolean') ec.approvedStamp = false;
+    if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
@@ -7513,6 +7514,7 @@ function _dsTab(which) {
     if (which === 'pages') {
         _dsPages = _deckPageList();
         if (_dsIndex >= _dsPages.length) _dsIndex = 0;
+        _dsSyncToolbar();
         _dsRenderRail(); _dsRenderTools();
         requestAnimationFrame(_dsRenderCenter);
     }
@@ -7538,6 +7540,67 @@ function _dsRenderRail() {
         cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
     });
 }
+let _dsSelKey = null, _dsSelIdx = -1;
+function _deckPageKey(desc) {
+    if (!desc) return null;
+    if (desc.kind === 'layout') return (desc.page && desc.page.id) ? ('layout:' + desc.page.id) : null;
+    if (desc.kind === 'fixed') return 'fixed:' + desc.fixed;
+    if (desc.kind === 'card') return 'card:' + desc.type;
+    if (desc.kind === 'spec') return 'spec:' + desc.title;
+    if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
+    return null;
+}
+function _dsAnnFam(font) { return font === 'display' ? "'Druk','Arial Narrow',Arial,sans-serif" : font === 'serif' ? "'Messina',Georgia,serif" : 'Arial,Helvetica,sans-serif'; }
+function _dsAnnList(key) { if (!editorialContent.annotations) editorialContent.annotations = {}; if (!editorialContent.annotations[key]) editorialContent.annotations[key] = []; return editorialContent.annotations[key]; }
+function _dsCurrentAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return null; const l = (editorialContent.annotations || {})[_dsSelKey]; return (l && l[_dsSelIdx]) ? l[_dsSelIdx] : null; }
+function _dsRenderAnnots(page, desc, w, hh) {
+    const key = _deckPageKey(desc); if (!key) return;
+    const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
+    list.forEach((a, i) => {
+        const el = document.createElement('div');
+        el.textContent = a.text || '';
+        el.spellcheck = false;
+        const sel = (key === _dsSelKey && i === _dsSelIdx);
+        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + Math.max(7, (a.size || 0.03) * hh) + 'px; line-height:1.2; color:' + (a.color || '#222222') + '; font-weight:' + (a.bold ? 700 : 400) + '; font-style:' + (a.italic ? 'italic' : 'normal') + '; text-align:' + (a.align || 'left') + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
+        el.onmousedown = (e) => {
+            if (el.isContentEditable) return;
+            e.preventDefault();
+            _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
+            const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
+            const mv = (ev) => { a.x = Math.max(0, Math.min(0.985, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.985, oy + (ev.clientY - sy) / hh)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
+            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+        };
+        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; el.focus(); };
+        el.onblur = () => { a.text = el.textContent; el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+        page.appendChild(el);
+    });
+}
+function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToolbar(); _dsRenderCenter(); }
+function _dsSyncToolbar() {
+    const a = _dsCurrentAnnot();
+    const f = document.getElementById('dsAnnFont'); if (f) f.value = a ? (a.font || 'sans') : 'sans';
+    const col = document.getElementById('dsAnnColor'); if (col) col.value = a ? (a.color || '#222222') : '#222222';
+    const sz = document.getElementById('dsAnnSizeLbl'); if (sz) sz.textContent = a ? Math.round((a.size || 0.03) * 540) : '—';
+    const al = document.getElementById('dsAnnAlign'); if (al) al.value = a ? (a.align || 'left') : 'left';
+    const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (a && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (a && a.bold) ? '#fff' : 'var(--text-main)'; }
+    const it = document.getElementById('dsAnnItalic'); if (it) { it.style.background = (a && a.italic) ? '#6a6aff' : 'var(--bg-input)'; it.style.color = (a && a.italic) ? '#fff' : 'var(--text-main)'; }
+}
+function _dsAddTextBox() {
+    if (_dsActiveTab !== 'pages') return;
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
+    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support overlay text boxes.'); return; }
+    const list = _dsAnnList(key);
+    list.push({ x: 0.1, y: 0.12, w: 0.34, text: 'New text', font: 'sans', size: 0.03, color: '#222222', bold: false, italic: false, align: 'left' });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1);
+    _dsRenderRail();
+}
+function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsDeleteAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return; const l = (editorialContent.annotations || {})[_dsSelKey]; if (l) l.splice(_dsSelIdx, 1); _dsSelKey = null; _dsSelIdx = -1; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAddStamp(page, w, hh) {
     if (!editorialContent.approvedStamp) return;
     const s = document.createElement('div');
@@ -7549,6 +7612,7 @@ function _dsRenderCenter() {
     const c = document.getElementById('dsCenter'); if (!c) return;
     c.innerHTML = '';
     const desc = _dsPages[_dsIndex]; if (!desc) return;
+    if (_dsSelKey && _dsSelKey !== _deckPageKey(desc)) { _dsSelKey = null; _dsSelIdx = -1; _dsSyncToolbar(); }
     let availW = c.clientWidth - 48; if (!availW || availW < 200) availW = 760;
     let availH = c.clientHeight - 48; if (!availH || availH < 120) availH = 460;
     let w = availW, hh = w * 540 / 936;
@@ -7558,6 +7622,7 @@ function _dsRenderCenter() {
     page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
     page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh));
     _dsAddStamp(page, Math.round(w), Math.round(hh));
+    _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
 }
 // — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
@@ -7576,7 +7641,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     area.style.cssText = 'position:absolute; left:0; right:0; top:' + planTop + 'px; bottom:' + pad + 'px; display:flex; align-items:center; justify-content:center;';
     if (!lv.imageData) {
         area.innerHTML = '<div style="color:#bbb; font-size:13px;">No plan image for this level — open the full markup tool to upload one.</div>';
-        page.appendChild(area); _dsAddStamp(page, w, hh); c.appendChild(page); return;
+        page.appendChild(area); _dsAddStamp(page, w, hh); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page); return;
     }
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
@@ -7586,7 +7651,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     img.onclick = _dsFpPlace;
     wrap.appendChild(img);
     _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g)); });
-    area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh); c.appendChild(page);
+    area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page);
 }
 function _dsMakePin(g) {
     const pin = document.createElement('div');
@@ -9243,6 +9308,32 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     }
 }
 
+// Free-floating overlay text boxes drawn on top of a page in the PDF. Matches
+// the studio's editable overlay layer. `key` selects this page's annotations.
+function _annHexToRgb(hex) {
+    hex = (hex || '#222222').replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+    const n = parseInt(hex, 16);
+    return isNaN(n) ? { r: 34, g: 34, b: 34 } : { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+function _drawAnnotations(doc, key, PW, PH) {
+    const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
+    if (!list.length) return;
+    list.forEach(a => {
+        const text = (a.text || '') + ''; if (!text.trim()) return;
+        const x = (a.x || 0) * PW, y = (a.y || 0) * PH, w = (a.w || 0.3) * PW;
+        const size = Math.max(6, (a.size || 0.03) * PH);
+        const fam = _font(a.font || 'sans');
+        const style = (a.bold && a.italic) ? 'bolditalic' : a.bold ? 'bold' : a.italic ? 'italic' : 'normal';
+        try { doc.setFont(fam, style); } catch (e) { doc.setFont(fam, a.bold ? 'bold' : 'normal'); }
+        doc.setFontSize(size);
+        const c = _annHexToRgb(a.color); doc.setTextColor(c.r, c.g, c.b);
+        const lines = doc.splitTextToSize(text, w);
+        const align = a.align || 'left';
+        let tx = x; if (align === 'center') tx = x + w / 2; else if (align === 'right') tx = x + w;
+        try { doc.text(lines, tx, y + size, { align: align }); } catch (e) { doc.text(lines, x, y + size); }
+    });
+}
 // "APPROVED" stamp, top-right corner. Used to mark a deck as client-approved
 // while other placements are still in revision.
 function _drawApprovedStamp(doc, PW, PH) {
@@ -9303,9 +9394,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
     let pageNum = 0;               // 1-based footer counter
     let fpKeyPageNum = 0;          // page of the floorplan key (for back-links)
-    const newPage = () => {
+    const _pageKeys = {};          // pageNum -> annotation key
+    const newPage = (key) => {
         if (pageNum > 0) doc.addPage(PAGE_FORMAT, 'landscape');
         pageNum += 1;
+        if (key) _pageKeys[pageNum] = key;
         _pdfProgress(Math.min(0.97, pageNum / _pdfEst), 'Building page ' + pageNum + ' of ~' + _pdfEst + '…');
         return pageNum;
     };
@@ -9324,14 +9417,14 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             for (let ti = 0; ti < src.length; ti++) {
                 if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
             }
-            newPage();
+            newPage('layout:' + page.id);
             _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title, page.type);
         }
     };
 
     // — Cover —
     if (inc.cover) {
-        newPage();
+        newPage('fixed:cover');
         const cov = editorialContent.coverPage;
         if (cov && Array.isArray(cov.elements) && cov.elements.length) {
             const src = cov.elements;
@@ -9346,11 +9439,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     }
     await emitLayout('afterCover');
     // — Process & Timeline (real) —
-    if (inc.timeline) { newPage(); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
+    if (inc.timeline) { newPage('card:timeline'); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
     await emitLayout('afterTimeline');
     // — Project Understanding (real): custom freeform page if built, else prose —
     if (inc.understanding) {
-        newPage();
+        newPage('fixed:understanding');
         const un = editorialContent.understandingPage;
         if (un && Array.isArray(un.elements) && un.elements.length) {
             const src = un.elements;
@@ -9366,7 +9459,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     await emitLayout('afterUnderstanding');
     // — Art Narrative (real): custom freeform page if built, else prose —
     if (inc.narrative) {
-        newPage();
+        newPage('fixed:narrative');
         const nv = editorialContent.narrativePage;
         if (nv && Array.isArray(nv.elements) && nv.elements.length) {
             const src = nv.elements;
@@ -9382,7 +9475,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     await emitLayout('afterNarrative');
     // — Art Collection Strategy (real): custom freeform page if built, else tiers —
     if (inc.strategy) {
-        newPage();
+        newPage('fixed:strategy');
         const st = editorialContent.strategyPage;
         if (st && Array.isArray(st.elements) && st.elements.length) {
             const src = st.elements;
@@ -9401,8 +9494,8 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     if (inc.frameRec) {
         const projFrames = await _collectProjectFrames();
         const perPage = 6;   // 3 columns × 2 rows, fits the widescreen page
-        if (!projFrames.length) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, []); }
-        else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage(); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
+        if (!projFrames.length) { newPage('card:frameRec'); _drawFrameRecPage(doc, logos, pageNum, meta, []); }
+        else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage('card:frameRec'); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
     }
     await emitLayout('beforeFloorplan');
     // — Build the emission plan: interleave each level's floorplan key with that
@@ -9451,7 +9544,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
     // — Emit the plan: floorplan keys and spec pages, interleaved per level —
     for (const step of plan) {
-        newPage();
+        newPage(step.type === 'key' ? ('floorplan:' + step.li) : ('spec:' + (step.unit && step.unit.key)));
         if (step.type === 'key') {
             _fpLevelKeyPage[step.li] = pageNum;
             const lv = floorplanLevels[step.li] || {};
@@ -9613,7 +9706,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     await emitLayout('beforeContacts');
     // — Good Art. Good People. (real) —
     if (inc.slogan) {
-        newPage();
+        newPage('fixed:slogan');
         const sg = editorialContent.sloganPage;
         if (sg && Array.isArray(sg.elements) && sg.elements.length) {
             const src = sg.elements;
@@ -9627,9 +9720,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         }
     }
     // — Thank You / contacts (real) —
-    if (inc.contacts) { newPage(); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); }
+    if (inc.contacts) { newPage('card:contacts'); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
+    // — Overlay text boxes per page —
+    for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
     // — APPROVED stamp on every page (client sign-off marker) —
     if (editorialContent.approvedStamp) {
         for (let p = 1; p <= pageNum; p++) { try { doc.setPage(p); _drawApprovedStamp(doc, PW, PH); } catch (e) {} }
