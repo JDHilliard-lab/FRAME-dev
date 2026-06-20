@@ -290,7 +290,7 @@ function _fpNumbers() {
 // Plan callout numbers come from the ART code itself, not a running count.
 // Set-pieces (ART.005-A, -B, -C, -D) share one group → one pin labelled "05".
 function _artGroupKey(code) {
-    const c = (code || '').trim();
+    const c = (code == null ? '' : String(code)).trim();
     const stripped = c.replace(/[-_\s]*[A-Za-z]\d*$/, '');   // drop a trailing piece suffix (-A, -B1…)
     return (/\d/.test(stripped) && stripped) ? stripped : c; // keep pure-letter codes intact
 }
@@ -7523,20 +7523,25 @@ function _dsTab(which) {
     if (bp) bp.style.cssText = 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (which === 'project' ? on : off);
     if (bg) bg.style.cssText = 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (which === 'pages' ? on : off);
     if (which === 'pages') {
-        _dsPages = _deckPageList();
+        _dsBuildError = '';
+        try { _dsPages = _deckPageList() || []; }
+        catch (e) { _dsPages = []; _dsBuildError = (e && e.message) ? e.message : String(e); console.error('Deck page list build failed:', e); }
         if (_dsIndex >= _dsPages.length) _dsIndex = 0;
-        _dsSyncToolbar();
-        _dsRenderRail(); _dsRenderTools();
+        try { _dsSyncToolbar(); } catch (e) { console.error(e); }
+        try { _dsRenderRail(); } catch (e) { console.error(e); }
+        try { _dsRenderTools(); } catch (e) { console.error(e); }
         requestAnimationFrame(_dsRenderCenter);
     }
 }
+let _dsBuildError = '';
 function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _dsRenderRail() {
     const rail = document.getElementById('dsRail'); if (!rail) return;
     rail.innerHTML = '';
-    if (!_dsPages.length) { rail.innerHTML = '<p style="color:var(--text-muted); font-size:0.74rem;">No pages selected. Turn sections on in the Presentation PDF dialog.</p>'; return; }
+    if (_dsBuildError) { rail.innerHTML = '<p style="color:#c0392b; font-size:0.72rem; line-height:1.5;">Couldn\u2019t build the page list:<br><b>' + _esc(_dsBuildError) + '</b><br><br>Tell Claude this message.</p>'; return; }
+    if (!_dsPages.length) { rail.innerHTML = '<p style="color:var(--text-muted); font-size:0.74rem;">No pages selected. Turn sections on in the Project tab.</p>'; return; }
     const tw = 168, th = Math.round(tw * 540 / 936);
     _dsPages.forEach((desc, i) => {
         const cell = document.createElement('div');
@@ -7551,6 +7556,16 @@ function _dsRenderRail() {
         lab.textContent = (i + 1) + '. ' + (desc.title || desc.type);
         cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
     });
+    // Diagnostic: pieces exist but no spec page made it into the list — almost
+    // always the Spec Pages toggle is off (Project tab).
+    const _hasSpec = _dsPages.some(p => p.kind === 'spec');
+    const _hasRows = (dashProjectData || []).some(r => r && (r.id || r.artworkUrl));
+    if (_hasRows && !_hasSpec) {
+        const hint = document.createElement('p');
+        hint.style.cssText = 'color:#c08a2e; font-size:0.68rem; line-height:1.5; margin-top:8px; border-top:1px solid var(--border-color); padding-top:8px;';
+        hint.innerHTML = 'No spec pages showing. On the <b>Project</b> tab, make sure <b>Spec Pages</b> is ticked.';
+        rail.appendChild(hint);
+    }
 }
 let _dsSelKey = null, _dsSelIdx = -1;
 function _deckPageKey(desc) {
