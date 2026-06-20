@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -357,6 +357,7 @@ function _mbMigratePages() {
     if (!ec.sloganPage || !Array.isArray(ec.sloganPage.elements)) ec.sloganPage = { elements: [] };
     if (!ec.understandingPage || !Array.isArray(ec.understandingPage.elements)) ec.understandingPage = { elements: [] };
     if (!ec.strategyPage || !Array.isArray(ec.strategyPage.elements)) ec.strategyPage = { elements: [] };
+    if (typeof ec.specTemplate !== 'string' || !SPEC_TEMPLATES[ec.specTemplate]) ec.specTemplate = 'classic';
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
@@ -547,6 +548,37 @@ const LAYOUT_TEMPLATES = {
     ]
 };
 let _tplType = 'moodboard';
+// Single-spec page arrangements. Coords are fractions of the full page (0..1).
+// 'classic' is the original renderer (art left, spec below, elevation lower-right).
+// Each other template places: artwork (baked frame mockup), code (under art),
+// title (the application), spec (dotted-leader block), elevation (wall thumbnail).
+const SPEC_TEMPLATES = {
+    classic: { label: 'Classic', legacy: true },
+    frameRight: {
+        label: 'Frame right',
+        title: { x: .06, y: .15, size: 19, align: 'left' },
+        spec: { x: .06, y: .26, w: .4 },
+        elevation: { x: .06, y: .62, w: .4, h: .26 },
+        artwork: { x: .52, y: .12, w: .44, h: .56, align: 'center' },
+        code: { align: 'right', size: 16, gap: 16 }
+    },
+    frameLeft: {
+        label: 'Frame left',
+        artwork: { x: .06, y: .12, w: .42, h: .56, align: 'center' },
+        code: { align: 'center', size: 16, gap: 16 },
+        title: { x: .54, y: .15, size: 19, align: 'left' },
+        spec: { x: .54, y: .26, w: .4 },
+        elevation: { x: .54, y: .62, w: .4, h: .26 }
+    },
+    centeredHero: {
+        label: 'Centered hero',
+        artwork: { x: .3, y: .1, w: .4, h: .48, align: 'center' },
+        code: { align: 'center', size: 18, gap: 18 },
+        title: { x: .06, y: .14, size: 16, align: 'left' },
+        spec: { x: .3, y: .66, w: .4 },
+        elevation: { x: .06, y: .64, w: .2, h: .24 }
+    }
+};
 function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; ' + (active ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);'); }
 function openTemplatesModal() {
     const m = document.getElementById('templatesModal'); if (!m) return;
@@ -7384,11 +7416,23 @@ function _deckMockHTML(desc, w, h) {
         const r = desc.row || {};
         let lines = [];
         try { const s = buildSpecStrings(r); if (s && s.lines) lines = s.lines.map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
-        const specHtml = lines.slice(0, 14).map(l => _esc(l)).join('<br>');
-        const boxW = Math.round(w * 0.34), boxH = Math.round(h * 0.5);
-        let inner = '<div style="position:absolute; left:' + pad + 'px; top:' + Math.round(pad * 0.5) + 'px; font-weight:800; color:#111; font-size:' + fs(0.07) + 'px;">' + _esc(r.id || 'SPEC') + '</div>';
-        inner += '<div style="position:absolute; left:' + pad + 'px; top:' + Math.round(h * 0.18) + 'px; width:' + boxW + 'px; height:' + boxH + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.035) + 'px;">artwork</div>';
-        inner += '<div style="position:absolute; left:' + (pad + boxW + Math.round(w * 0.04)) + 'px; top:' + Math.round(h * 0.18) + 'px; right:' + pad + 'px; color:#333; font-size:' + fs(0.032) + 'px; line-height:1.7;">' + specHtml + '</div>';
+        const tplKey = (desc._previewTpl || editorialContent.specTemplate || 'classic');
+        const tpl = SPEC_TEMPLATES[tplKey];
+        const codeFs = fs(0.06);
+        const box = (x, y, bw, bh, label) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; height:' + Math.round(bh * h) + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.03) + 'px;">' + label + '</div>';
+        const txt = (x, y, bw, html, size, weight) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; color:#222; font-size:' + size + 'px; line-height:1.6; font-weight:' + (weight || 400) + ';">' + html + '</div>';
+        let inner = '';
+        if (!tpl || tpl.legacy) {
+            // Classic: code top-left, artwork left, spec right
+            inner += txt(0.06, 0.04, 0.6, _esc(r.id || 'SPEC'), codeFs, 800);
+            inner += box(0.06, 0.18, 0.34, 0.5, 'artwork');
+            inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03));
+        } else {
+            if (tpl.title) inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc((function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })().toUpperCase()), fs(0.045), 800);
+            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork'); if (tpl.code) { const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(r.id || ''), fs(0.045), 800); } }
+            if (tpl.spec) inner += txt(tpl.spec.x, tpl.spec.y - 0.02, tpl.spec.w, lines.slice(0, 12).map(_esc).join('<br>'), fs(0.026));
+            if (tpl.elevation) inner += box(tpl.elevation.x, tpl.elevation.y, tpl.elevation.w, tpl.elevation.h, 'elevation');
+        }
         return wrap(inner);
     }
     return wrap('<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:' + fs(0.05) + 'px;">' + _esc(desc.title) + '</div>');
@@ -7609,6 +7653,29 @@ function _dsRenderTools() {
     }
 
     const cat = _dsTemplateCategory(desc);
+    if (desc.kind === 'spec') {
+        const lbl = document.createElement('div');
+        lbl.textContent = 'Spec layout — click to apply'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
+        t.appendChild(lbl);
+        const sub = document.createElement('p');
+        sub.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 10px; line-height:1.5;';
+        sub.textContent = 'Applies to every spec page in the deck.';
+        t.appendChild(sub);
+        const cur = editorialContent.specTemplate || 'classic';
+        const cw = 244, chh = Math.round(cw * 540 / 936);
+        Object.keys(SPEC_TEMPLATES).forEach(key => {
+            const cell = document.createElement('div');
+            cell.style.cssText = 'cursor:pointer; border:2px solid ' + (key === cur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
+            cell.onclick = () => { editorialContent.specTemplate = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+            const thumb = document.createElement('div');
+            thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
+            thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, _previewTpl: key }, cw, chh);
+            const nm = document.createElement('div');
+            nm.textContent = (SPEC_TEMPLATES[key].label || key) + (key === cur ? '  ✓' : ''); nm.style.cssText = 'font-size:0.64rem; color:' + (key === cur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+            cell.appendChild(thumb); cell.appendChild(nm); t.appendChild(cell);
+        });
+        return;
+    }
     if (cat) {
         const lbl = document.createElement('div');
         lbl.textContent = 'Templates — click to apply'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
@@ -8952,8 +9019,86 @@ function saveCopyEditor() {
 }
 function closeCopyEditor() { const m = document.getElementById('copyEditModal'); if (m) m.style.display = 'none'; }
 
-async function _buildSpecPagePDF(opts) {
-    const { jsPDF } = window.jspdf;
+// Template-driven single-spec page (non-classic arrangements). Reuses the same
+// primitives as the classic renderer: baked frame mockup, dotted-leader spec
+// block, and the wall elevation. Coords come from SPEC_TEMPLATES (page fractions).
+async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) {
+    const PW = ctx.PW, PH = ctx.PH;
+    const tpl = SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight;
+    const px = (f) => f * PW, py = (f) => f * PH;
+    const specs = buildSpecStrings(r);
+
+    // — Title (the application, e.g. "FRAMED ART") —
+    if (tpl.title) {
+        const titleText = (specs.application || r.product || r.id || 'SPECIFICATION').toString().toUpperCase();
+        doc.setFont(_font('display'), 'bold');
+        doc.setFontSize(tpl.title.size || 18);
+        doc.setTextColor(20, 20, 20);
+        doc.text(titleText, px(tpl.title.x), py(tpl.title.y), tpl.title.align ? { align: tpl.title.align } : undefined);
+    }
+
+    // — Artwork (baked frame mockup) + code beneath —
+    if (tpl.artwork) {
+        const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+        let artworkImg = null;
+        if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+        const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+        const out = renderFrameToCanvas(dInches, swatch, { dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+        const cnv = out.canvas;
+        let url;
+        try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); }
+        catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
+        const boxX = px(tpl.artwork.x), boxY = py(tpl.artwork.y), boxW = px(tpl.artwork.w), boxH = py(tpl.artwork.h);
+        const fit = Math.min(boxW / cnv.width, boxH / cnv.height);
+        const aw = cnv.width * fit, ah = cnv.height * fit;
+        const ax = tpl.artwork.align === 'right' ? (boxX + boxW - aw) : (tpl.artwork.align === 'center' ? (boxX + (boxW - aw) / 2) : boxX);
+        try { doc.addImage(url, 'JPEG', ax, boxY, aw, ah); } catch (e) {}
+        if (tpl.code) {
+            doc.setFont(_font('display'), 'bold');
+            doc.setFontSize(tpl.code.size || 16);
+            doc.setTextColor(20, 20, 20);
+            const cAlign = tpl.code.align || 'left';
+            const codeX = cAlign === 'right' ? (ax + aw) : (cAlign === 'center' ? (ax + aw / 2) : ax);
+            doc.text((r.id || '').toString(), codeX, boxY + ah + (tpl.code.gap || 16), cAlign !== 'left' ? { align: cAlign } : undefined);
+        }
+    }
+
+    // — Spec block (dotted leaders) —
+    if (tpl.spec) {
+        const sx = px(tpl.spec.x), sw = px(tpl.spec.w);
+        let sy = py(tpl.spec.y);
+        doc.setFontSize(8.5);
+        specs.lines.forEach(ln => {
+            doc.setFont('helvetica', 'bold'); doc.setTextColor(20, 20, 20); doc.text(ln.label, sx, sy);
+            const lw = doc.getTextWidth(ln.label);
+            doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = sx + sw - vw; doc.text(vs, vx, sy);
+            const ds = sx + lw + 4, de = vx - 4;
+            if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(160, 160, 160); doc.setLineWidth(0.5); doc.line(ds, sy - 2, de, sy - 2); doc.setLineDashPattern([], 0); }
+            sy += 13;
+        });
+    }
+
+    // — Elevation (wall thumbnail) —
+    if (tpl.elevation) {
+        let elev = null;
+        for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } }
+        if (elev) {
+            const er = await renderElevationToCanvas(elev, r.id, { dpi: 28 });
+            if (er && er.canvas) {
+                let url;
+                try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); url = flat.toDataURL('image/jpeg', 0.82); }
+                catch (e) { url = er.canvas.toDataURL('image/jpeg', 0.82); }
+                const boxX = px(tpl.elevation.x), boxY = py(tpl.elevation.y), boxW = px(tpl.elevation.w), boxH = py(tpl.elevation.h);
+                const fit = Math.min(boxW / er.canvas.width, boxH / er.canvas.height);
+                const ew = er.canvas.width * fit, eh = er.canvas.height * fit;
+                try { doc.addImage(url, 'JPEG', boxX, boxY, ew, eh); } catch (e) {}
+                doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120); doc.text((elev.name || 'Elevation') + '', boxX, boxY + eh + 9);
+            }
+        }
+    }
+}
+
+async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const wantSpec = opts.include ? !!opts.include.spec : true;
     // Which rows: current selection, or all rows if opts.all.
     let rows = [];
@@ -9154,6 +9299,10 @@ async function _buildSpecPagePDF(opts) {
             continue;
         }
         const r = step.r;
+        const _specTpl = (editorialContent.specTemplate || 'classic');
+        if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
+            await _drawSpecPageTemplate(doc, logos, pageNum, meta, r, _specTpl, { PW: PW, PH: PH, M: M });
+        } else {
 
         // — Item code (top-left, large bold) —
         doc.setFont(_font('display'), 'bold');
@@ -9265,6 +9414,8 @@ async function _buildSpecPagePDF(opts) {
                 doc.setTextColor(120, 120, 120);
                 doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
             }
+        }
+
         }
 
         // — Back-link to the floorplan key for THIS item's level —
