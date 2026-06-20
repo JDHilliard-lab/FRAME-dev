@@ -556,11 +556,11 @@ const SPEC_TEMPLATES = {
     classic: { label: 'Classic', legacy: true },
     frameRight: {
         label: 'Frame right',
-        title: { x: .06, y: .15, size: 19, align: 'left' },
+        title: { x: .06, y: .15, size: 19, align: 'left', field: 'id' },
         spec: { x: .06, y: .26, w: .4 },
         elevation: { x: .06, y: .62, w: .4, h: .26 },
         artwork: { x: .52, y: .12, w: .44, h: .56, align: 'center' },
-        code: { align: 'right', size: 16, gap: 16 }
+        code: { align: 'right', size: 13, gap: 14, field: 'imageCode' }
     },
     frameLeft: {
         label: 'Frame left',
@@ -6592,7 +6592,7 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
         x.drawImage(fr.canvas, fx, fy, fWin * ppi, fHin * ppi);
         x.restore();
     }
-    return { canvas: c, wIn: totalWin, hIn: totalHin };
+    return { canvas: c, wIn: totalWin, hIn: totalHin, wallLeftFrac: (cw ? wallLeftPx / cw : 0), wallRightFrac: (cw ? (wallLeftPx + wallW_px) / cw : 1) };
 }
 
 // Logo cache — load once per session. Files live in the repo root (upload the
@@ -7428,8 +7428,8 @@ function _deckMockHTML(desc, w, h) {
             inner += box(0.06, 0.18, 0.34, 0.5, 'artwork');
             inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03));
         } else {
-            if (tpl.title) inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc((function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })().toUpperCase()), fs(0.045), 800);
-            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork'); if (tpl.code) { const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(r.id || ''), fs(0.045), 800); } }
+            if (tpl.title) { const tf = tpl.title.field || 'application'; const tt = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })()); inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc(tt.toString().toUpperCase()), fs(0.045), 800); }
+            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(ct.toString()), fs(0.04), 700); } }
             if (tpl.spec) inner += txt(tpl.spec.x, tpl.spec.y - 0.02, tpl.spec.w, lines.slice(0, 12).map(_esc).join('<br>'), fs(0.026));
             if (tpl.elevation) inner += box(tpl.elevation.x, tpl.elevation.y, tpl.elevation.w, tpl.elevation.h, 'elevation');
         }
@@ -9028,9 +9028,10 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     const px = (f) => f * PW, py = (f) => f * PH;
     const specs = buildSpecStrings(r);
 
-    // — Title (the application, e.g. "FRAMED ART") —
+    // — Title —
     if (tpl.title) {
-        const titleText = (specs.application || r.product || r.id || 'SPECIFICATION').toString().toUpperCase();
+        const tf = tpl.title.field || 'application';
+        const titleText = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (specs.application || r.product || r.id || 'SPECIFICATION')).toString().toUpperCase();
         doc.setFont(_font('display'), 'bold');
         doc.setFontSize(tpl.title.size || 18);
         doc.setTextColor(20, 20, 20);
@@ -9054,12 +9055,16 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         const ax = tpl.artwork.align === 'right' ? (boxX + boxW - aw) : (tpl.artwork.align === 'center' ? (boxX + (boxW - aw) / 2) : boxX);
         try { doc.addImage(url, 'JPEG', ax, boxY, aw, ah); } catch (e) {}
         if (tpl.code) {
-            doc.setFont(_font('display'), 'bold');
-            doc.setFontSize(tpl.code.size || 16);
-            doc.setTextColor(20, 20, 20);
-            const cAlign = tpl.code.align || 'left';
-            const codeX = cAlign === 'right' ? (ax + aw) : (cAlign === 'center' ? (ax + aw / 2) : ax);
-            doc.text((r.id || '').toString(), codeX, boxY + ah + (tpl.code.gap || 16), cAlign !== 'left' ? { align: cAlign } : undefined);
+            const cf = tpl.code.field || 'id';
+            const codeText = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')).toString();
+            if (codeText) {
+                doc.setFont(_font('display'), 'bold');
+                doc.setFontSize(tpl.code.size || 16);
+                doc.setTextColor(20, 20, 20);
+                const cAlign = tpl.code.align || 'left';
+                const codeX = cAlign === 'right' ? (ax + aw) : (cAlign === 'center' ? (ax + aw / 2) : ax);
+                doc.text(codeText, codeX, boxY + ah + (tpl.code.gap || 16), cAlign !== 'left' ? { align: cAlign } : undefined);
+            }
         }
     }
 
@@ -9092,7 +9097,8 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                 const fit = Math.min(boxW / er.canvas.width, boxH / er.canvas.height);
                 const ew = er.canvas.width * fit, eh = er.canvas.height * fit;
                 try { doc.addImage(url, 'JPEG', boxX, boxY, ew, eh); } catch (e) {}
-                doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120); doc.text((elev.name || 'Elevation') + '', boxX, boxY + eh + 9);
+                const capX = boxX + (er.wallLeftFrac || 0) * ew;   // align caption to the wall line, not the image edge
+                doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120); doc.text((elev.name || 'Elevation') + '', capX, boxY + eh + 9);
             }
         }
     }
