@@ -7363,7 +7363,7 @@ function _deckPageList() {
     layoutAt('afterStrategy');
     if (inc.frameRec) pages.push({ kind: 'card', type: 'frameRec', title: 'Frame Recommendations' });
     layoutAt('beforeFloorplan');
-    const rows = (dashProjectData || []).filter(r => r && r.artworkUrl);
+    const rows = (dashProjectData || []).filter(r => r && (r.id || r.artworkUrl));
     if (inc.floorplanKey) {
         const emit = [];
         floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => (r.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li); if (used) emit.push(li); });
@@ -9103,8 +9103,8 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // Which rows: current selection, or all rows if opts.all.
     let rows = [];
     if (opts.all) {
-        rows = dashProjectData.filter(r => r && r.artworkUrl);
-        if (wantSpec && !rows.length) { showInfoModal('No artwork', 'No rows have artwork yet. Add images to the pieces you want spec pages for, then try again.'); return; }
+        rows = dashProjectData.filter(r => r && (r.id || r.artworkUrl));
+        if (wantSpec && !rows.length) { showInfoModal('No pieces', 'There are no pieces in the project yet. Add frames in the Frame Dashboard, then try again.'); return; }
     } else {
         rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
         if (wantSpec && !rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
