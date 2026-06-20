@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -358,6 +358,7 @@ function _mbMigratePages() {
     if (!ec.understandingPage || !Array.isArray(ec.understandingPage.elements)) ec.understandingPage = { elements: [] };
     if (!ec.strategyPage || !Array.isArray(ec.strategyPage.elements)) ec.strategyPage = { elements: [] };
     if (typeof ec.specTemplate !== 'string' || !SPEC_TEMPLATES[ec.specTemplate]) ec.specTemplate = 'classic';
+    if (typeof ec.approvedStamp !== 'boolean') ec.approvedStamp = false;
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
@@ -7469,6 +7470,21 @@ function _deckMockHTML(desc, w, h) {
     return wrap('<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:' + fs(0.05) + 'px;">' + _esc(desc.title) + '</div>');
 }
 let _dsActiveTab = 'project';
+function _dsSyncApprovedBtn() {
+    const b = document.getElementById('dsApprovedBtn'); if (!b) return;
+    const on = !!editorialContent.approvedStamp;
+    b.style.background = on ? '#c82626' : 'var(--bg-input)';
+    b.style.color = on ? '#fff' : 'var(--text-main)';
+    b.style.borderColor = on ? '#c82626' : 'var(--border-color)';
+    b.textContent = on ? 'APPROVED ✓' : 'APPROVED';
+}
+function _dsToggleApproved() {
+    editorialContent.approvedStamp = !editorialContent.approvedStamp;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSyncApprovedBtn();
+    if (_dsActiveTab === 'pages') { _dsRenderRail(); _dsRenderCenter(); }
+}
 function openDeckStudio(tab) {
     const m = document.getElementById('deckStudioModal'); if (!m) return;
     // Reparent the Project settings panel into the Project tab (once).
@@ -7482,6 +7498,7 @@ function openDeckStudio(tab) {
     if (typeof _specPdfPrefill === 'function') _specPdfPrefill();
     const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
     m.style.display = 'flex';
+    _dsSyncApprovedBtn();
     _dsTab(tab || 'project');
 }
 function _dsTab(which) {
@@ -7521,6 +7538,13 @@ function _dsRenderRail() {
         cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
     });
 }
+function _dsAddStamp(page, w, hh) {
+    if (!editorialContent.approvedStamp) return;
+    const s = document.createElement('div');
+    s.textContent = 'APPROVED';
+    s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.05) + 'px; right:' + Math.round(w * 0.04) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.028)) + 'px; letter-spacing:0.04em; color:#c82626; border:1.5px solid #c82626; background:#fff; padding:2px 7px; border-radius:3px;';
+    page.appendChild(s);
+}
 function _dsRenderCenter() {
     const c = document.getElementById('dsCenter'); if (!c) return;
     c.innerHTML = '';
@@ -7533,6 +7557,7 @@ function _dsRenderCenter() {
     const page = document.createElement('div');
     page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
     page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh));
+    _dsAddStamp(page, Math.round(w), Math.round(hh));
     c.appendChild(page);
 }
 // — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
@@ -7551,7 +7576,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     area.style.cssText = 'position:absolute; left:0; right:0; top:' + planTop + 'px; bottom:' + pad + 'px; display:flex; align-items:center; justify-content:center;';
     if (!lv.imageData) {
         area.innerHTML = '<div style="color:#bbb; font-size:13px;">No plan image for this level — open the full markup tool to upload one.</div>';
-        page.appendChild(area); c.appendChild(page); return;
+        page.appendChild(area); _dsAddStamp(page, w, hh); c.appendChild(page); return;
     }
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
@@ -7561,7 +7586,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     img.onclick = _dsFpPlace;
     wrap.appendChild(img);
     _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g)); });
-    area.appendChild(wrap); page.appendChild(area); c.appendChild(page);
+    area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh); c.appendChild(page);
 }
 function _dsMakePin(g) {
     const pin = document.createElement('div');
@@ -7705,6 +7730,19 @@ function _dsRenderTools() {
             nm.textContent = (SPEC_TEMPLATES[key].label || key) + (key === cur ? '  ✓' : ''); nm.style.cssText = 'font-size:0.64rem; color:' + (key === cur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
             cell.appendChild(thumb); cell.appendChild(nm); t.appendChild(cell);
         });
+        // — Notes editor (writes the piece's spec Notes line) —
+        const r = desc.row || {};
+        const nLbl = document.createElement('div');
+        nLbl.textContent = 'Notes' + (desc.members && desc.members.length > 1 ? ' (' + (r.id || 'first piece') + ')' : '');
+        nLbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin:14px 0 6px;';
+        t.appendChild(nLbl);
+        const nTa = document.createElement('textarea'); nTa.rows = 4;
+        nTa.placeholder = 'Production note shown on the spec page…';
+        nTa.style.cssText = 'width:100%; box-sizing:border-box; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; resize:vertical;';
+        nTa.value = r.notes || '';
+        nTa.oninput = () => { r.notes = nTa.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
+        nTa.onblur = () => { _dsRenderCenter(); _dsRenderRail(); };
+        t.appendChild(nTa);
         return;
     }
     if (cat) {
@@ -9205,6 +9243,22 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     }
 }
 
+// "APPROVED" stamp, top-right corner. Used to mark a deck as client-approved
+// while other placements are still in revision.
+function _drawApprovedStamp(doc, PW, PH) {
+    const txt = 'APPROVED';
+    doc.setFont(_font('display'), 'bold');
+    doc.setFontSize(13);
+    const tw = doc.getTextWidth(txt);
+    const padX = 9, padY = 6;
+    const bw = tw + padX * 2, bh = 22;
+    const x = PW - 30 - bw, y = 26;
+    doc.setDrawColor(200, 38, 38); doc.setLineWidth(1.6);
+    doc.setFillColor(255, 255, 255);
+    doc.roundedRect(x, y, bw, bh, 3, 3, 'FD');
+    doc.setTextColor(200, 38, 38);
+    doc.text(txt, x + padX, y + bh - padY);
+}
 async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const wantSpec = opts.include ? !!opts.include.spec : true;
     // Which rows: current selection, or all rows if opts.all.
@@ -9576,6 +9630,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     if (inc.contacts) { newPage(); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
+    // — APPROVED stamp on every page (client sign-off marker) —
+    if (editorialContent.approvedStamp) {
+        for (let p = 1; p <= pageNum; p++) { try { doc.setPage(p); _drawApprovedStamp(doc, PW, PH); } catch (e) {} }
+    }
     const single = !opts.all && rows[0];
     const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
     _pdfProgress(1, 'Finishing…'); _pdfHideOverlay();
