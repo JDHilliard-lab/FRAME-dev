@@ -424,7 +424,9 @@ function _mbThumbInner(page, wpx, hpx) {
                 html += '<div style="' + base + 'background:#e6e6e6;border:1px solid #cfcfcf;"></div>';
             }
         } else if (ty === 'text') {
-            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + ((t.w || 0.3) * wpx) + 'px;font-size:' + Math.max(2, (t.size || 0.045) * hpx) + 'px;line-height:1.1;color:' + (t.color || '#222') + ';overflow:hidden;font-family:Georgia,serif;">' + _mbEscapeHtml(t.text || '') + '</div>';
+            const _famMap = { display: "'Druk','Arial Narrow',Arial,sans-serif", serif: "'Messina',Georgia,serif", sans: "Arial,Helvetica,sans-serif" };
+            const _fam = _famMap[t.font] || _famMap.serif;
+            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + ((t.w || 0.3) * wpx) + 'px;font-size:' + Math.max(2, (t.size || 0.045) * hpx) + 'px;line-height:1.1;color:' + (t.color || '#222') + ';overflow:hidden;font-family:' + _fam + ';' + (t.bold ? 'font-weight:700;' : '') + (t.italic ? 'font-style:italic;' : '') + '">' + _mbEscapeHtml(t.text || '') + '</div>';
         } else if (ty === 'arrow') {
             svg += '<line x1="' + ((t.x1 || 0) * wpx) + '" y1="' + ((t.y1 || 0) * hpx) + '" x2="' + ((t.x2 || 0) * wpx) + '" y2="' + ((t.y2 || 0) * hpx) + '" stroke="' + (t.color || '#9aa0a6') + '" stroke-width="' + Math.max(0.5, (t.weight || 1.2) * 0.6) + '"/>';
         } else if (ty === 'elbow' && Array.isArray(t.pts) && t.pts.length > 1) {
@@ -433,7 +435,7 @@ function _mbThumbInner(page, wpx, hpx) {
         }
     });
     if (svg) html += '<svg width="' + wpx + '" height="' + hpx + '" style="position:absolute;left:0;top:0;pointer-events:none;">' + svg + '</svg>';
-    if (page.title) html += '<div style="position:absolute;left:2px;top:1px;font:700 ' + Math.max(3, 0.06 * hpx) + 'px Arial, sans-serif;color:#111;">' + _mbEscapeHtml(page.title) + '</div>';
+    if (page.title) html += '<div style="position:absolute;left:2px;top:1px;font:700 ' + Math.max(3, 0.06 * hpx) + "px 'Druk','Arial Narrow',Arial,sans-serif;color:#111;\">" + _mbEscapeHtml(page.title) + '</div>';
     return html;
 }
 function _mbReorderPages(from, to) {
@@ -557,7 +559,7 @@ const SPEC_TEMPLATES = {
     frameRight: {
         label: 'Frame right',
         title: { x: .06, y: .15, size: 19, align: 'left', field: 'id' },
-        spec: { x: .06, y: .26, w: .4 },
+        spec: { x: .06, y: .2, w: .4 },
         elevation: { x: .06, y: .62, w: .4, h: .26 },
         artwork: { x: .52, y: .12, w: .44, h: .56, align: 'center' },
         code: { align: 'right', size: 13, gap: 14, field: 'imageCode' }
@@ -577,6 +579,10 @@ const SPEC_TEMPLATES = {
         title: { x: .06, y: .14, size: 16, align: 'left' },
         spec: { x: .3, y: .66, w: .4 },
         elevation: { x: .06, y: .64, w: .2, h: .24 }
+    },
+    setRight: {
+        label: 'Set — multi-artwork (A/B/C)',
+        group: true
     }
 };
 function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; ' + (active ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);'); }
@@ -7364,16 +7370,26 @@ function _deckPageList() {
     if (inc.frameRec) pages.push({ kind: 'card', type: 'frameRec', title: 'Frame Recommendations' });
     layoutAt('beforeFloorplan');
     const rows = (dashProjectData || []).filter(r => r && (r.id || r.artworkUrl));
+    const specTplKey = ec.specTemplate || 'classic';
+    const isGroupSpec = !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].group);
+    const unitsFor = (rs) => {
+        if (!isGroupSpec) return rs.map(r => ({ rep: r, members: [r], key: r.id || '' }));
+        const order = [], map = {};
+        rs.forEach(r => { const k = _artGroupKey(r.id || ''); if (!map[k]) { map[k] = { rep: r, members: [], key: k }; order.push(k); } map[k].members.push(r); });
+        return order.map(k => map[k]);
+    };
+    const specUnit = (u) => ({ kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members });
+    const units = unitsFor(rows);
     if (inc.floorplanKey) {
         const emit = [];
         floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => (r.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li); if (used) emit.push(li); });
         if (!emit.length) emit.push(0);
         emit.forEach(li => {
             pages.push({ kind: 'floorplan', type: 'floorplan', title: (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1)), level: li });
-            if (inc.spec) rows.filter(r => (r.level || 0) === li).forEach(r => pages.push({ kind: 'spec', type: 'spec', title: r.id || 'Spec', row: r }));
+            if (inc.spec) units.filter(u => (u.rep.level || 0) === li).forEach(u => pages.push(specUnit(u)));
         });
     } else if (inc.spec) {
-        rows.forEach(r => pages.push({ kind: 'spec', type: 'spec', title: r.id || 'Spec', row: r }));
+        units.forEach(u => pages.push(specUnit(u)));
     }
     layoutAt('afterSpec');
     if (inc.slogan) pages.push({ kind: 'fixed', fixed: 'slogan', type: 'slogan', title: 'Good Art Good People', page: ec.sloganPage });
@@ -7387,15 +7403,16 @@ function _deckMockHTML(desc, w, h) {
     if (hasEls) return _mbThumbInner(pg, w, h);
     const pad = Math.round(w * 0.06);
     const fs = (frac) => Math.max(7, Math.round(h * frac));
-    const wrap = (inner, bg) => '<div style="position:absolute; inset:0; background:' + (bg || '#ffffff') + '; overflow:hidden;">' + inner + '</div>';
+    const wrap = (inner, bg) => '<div style="position:absolute; inset:0; background:' + (bg || '#ffffff') + "; overflow:hidden; font-family:'Messina',Georgia,serif;\">" + inner + '</div>';
+    const DRUK = "'Druk','Arial Narrow',Arial,sans-serif";
     if (desc.kind === 'fixed' && desc.fixed === 'cover') {
         const nm = (typeof globalMeta !== 'undefined' && globalMeta && (globalMeta.projName || globalMeta.projectName)) || 'PROJECT NAME';
-        return wrap('<div style="position:absolute; left:' + pad + 'px; bottom:' + pad + 'px; right:' + pad + 'px;"><div style="font-weight:800; color:#111; font-size:' + fs(0.12) + 'px; line-height:1.05;">' + _esc(nm) + '</div><div style="color:#666; font-size:' + fs(0.05) + 'px; margin-top:4px;">Art Program Presentation</div></div>', '#f3f1ec');
+        return wrap('<div style="position:absolute; left:' + pad + 'px; bottom:' + pad + 'px; right:' + pad + 'px;"><div style="font-family:' + DRUK + '; font-weight:700; color:#111; font-size:' + fs(0.12) + 'px; line-height:1.05;">' + _esc(nm) + '</div><div style="color:#666; font-size:' + fs(0.05) + 'px; margin-top:4px;">Art Program Presentation</div></div>', '#f3f1ec');
     }
     if (desc.kind === 'prose' || (desc.kind === 'fixed') || desc.kind === 'card') {
         const body = (desc.text || '').toString();
         const bodyHtml = body ? _esc(body).replace(/\n/g, '<br>') : '<span style="color:#bbb;">(empty — add a template or copy via this page\u2019s tools)</span>';
-        return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px;"><div style="font-weight:800; color:#111; font-size:' + fs(0.08) + 'px; text-transform:uppercase; letter-spacing:0.02em;">' + _esc(desc.title) + '</div><div style="color:#333; font-size:' + fs(0.04) + 'px; line-height:1.5; margin-top:' + Math.round(h * 0.05) + 'px; max-height:' + Math.round(h * 0.7) + 'px; overflow:hidden;">' + bodyHtml + '</div></div>');
+        return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px;"><div style="font-family:' + DRUK + '; font-weight:700; color:#111; font-size:' + fs(0.08) + 'px; text-transform:uppercase; letter-spacing:0.02em;">' + _esc(desc.title) + '</div><div style="color:#333; font-size:' + fs(0.04) + 'px; line-height:1.5; margin-top:' + Math.round(h * 0.05) + 'px; max-height:' + Math.round(h * 0.7) + 'px; overflow:hidden;">' + bodyHtml + '</div></div>');
     }
     if (desc.kind === 'floorplan') {
         const lv = floorplanLevels[desc.level] || {};
@@ -7420,17 +7437,31 @@ function _deckMockHTML(desc, w, h) {
         const tpl = SPEC_TEMPLATES[tplKey];
         const codeFs = fs(0.06);
         const box = (x, y, bw, bh, label) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; height:' + Math.round(bh * h) + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.03) + 'px;">' + label + '</div>';
-        const txt = (x, y, bw, html, size, weight) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; color:#222; font-size:' + size + 'px; line-height:1.6; font-weight:' + (weight || 400) + ';">' + html + '</div>';
+        const txt = (x, y, bw, html, size, weight, fam) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; color:#222; font-size:' + size + 'px; line-height:1.6; font-weight:' + (weight || 400) + ';' + (fam ? 'font-family:' + fam + ';' : '') + '">' + html + '</div>';
+        const DRUK = "'Druk','Arial Narrow',Arial,sans-serif", SANS = 'Arial,Helvetica,sans-serif';
         let inner = '';
         if (!tpl || tpl.legacy) {
             // Classic: code top-left, artwork left, spec right
-            inner += txt(0.06, 0.04, 0.6, _esc(r.id || 'SPEC'), codeFs, 800);
+            inner += txt(0.06, 0.04, 0.6, _esc(r.id || 'SPEC'), codeFs, 800, DRUK);
             inner += box(0.06, 0.18, 0.34, 0.5, 'artwork');
-            inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03));
+            inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03), 400, SANS);
+        } else if (tpl.group) {
+            const members = (desc.members && desc.members.length) ? desc.members.slice(0, 4) : [r, r];
+            const n = Math.max(1, members.length);
+            const letters = ['A', 'B', 'C', 'D'];
+            inner += txt(0.06, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
+            const topY = 0.16, slotH = 0.8 / n;
+            members.forEach((m, i) => {
+                const sy = topY + i * slotH;
+                inner += txt(0.06, sy, 0.04, _esc(letters[i] || (i + 1) + ''), fs(0.04), 800, DRUK);
+                let ml = []; try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
+                inner += txt(0.11, sy, 0.34, '<b>' + _esc(m.id || '') + '</b><br>' + ml.map(_esc).join('<br>'), fs(0.022), 400, SANS);
+                inner += box(0.54, sy + slotH * 0.06, 0.42, slotH * 0.82, _esc(letters[i] || ''));
+            });
         } else {
-            if (tpl.title) { const tf = tpl.title.field || 'application'; const tt = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })()); inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc(tt.toString().toUpperCase()), fs(0.045), 800); }
-            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(ct.toString()), fs(0.04), 700); } }
-            if (tpl.spec) inner += txt(tpl.spec.x, tpl.spec.y - 0.02, tpl.spec.w, lines.slice(0, 12).map(_esc).join('<br>'), fs(0.026));
+            if (tpl.title) { const tf = tpl.title.field || 'application'; const tt = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })()); inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc(tt.toString().toUpperCase()), fs(0.045), 800, DRUK); }
+            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(ct.toString()), fs(0.04), 700, DRUK); } }
+            if (tpl.spec) inner += txt(tpl.spec.x, tpl.spec.y - 0.02, tpl.spec.w, lines.slice(0, 12).map(_esc).join('<br>'), fs(0.026), 400, SANS);
             if (tpl.elevation) inner += box(tpl.elevation.x, tpl.elevation.y, tpl.elevation.w, tpl.elevation.h, 'elevation');
         }
         return wrap(inner);
@@ -9019,6 +9050,76 @@ function saveCopyEditor() {
 }
 function closeCopyEditor() { const m = document.getElementById('copyEditModal'); if (m) m.style.display = 'none'; }
 
+// Set page: one page for a whole set-piece group. Members are laid out as
+// stacked rows — framed mockup on the right, letter + code + compact spec on the
+// left — each labelled A, B, C…
+async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
+    const PW = ctx.PW, PH = ctx.PH;
+    const members = (unit.members || []).slice(0, 6);
+    const n = Math.max(1, members.length);
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
+    // — Title (group code) —
+    doc.setFont(_font('display'), 'bold');
+    doc.setFontSize(20);
+    doc.setTextColor(20, 20, 20);
+    doc.text((unit.key || unit.rep.id || '').toString().toUpperCase(), PW * 0.06, PH * 0.12);
+
+    const topY = PH * 0.17, botY = PH * 0.9;
+    const slotH = (botY - topY) / n;
+    const lX = PW * 0.06, lW = PW * 0.4;
+    const rX = PW * 0.54, rW = PW * 0.42;
+
+    for (let i = 0; i < members.length; i++) {
+        const r = members[i];
+        const letter = letters[i] || String(i + 1);
+        const sy = topY + i * slotH;
+
+        // letter chip
+        doc.setFont(_font('display'), 'bold'); doc.setFontSize(15); doc.setTextColor(20, 20, 20);
+        doc.text(letter, lX, sy + 12);
+
+        // member code beside the letter
+        doc.setFont('helvetica', 'bold'); doc.setFontSize(9); doc.setTextColor(60, 60, 60);
+        doc.text((r.id || '').toString(), lX + 18, sy + 11);
+
+        // compact spec lines
+        let specs = null; try { specs = buildSpecStrings(r); } catch (e) {}
+        const wanted = ['Application', 'Frame Size', 'Frame Code', 'Matboard', 'Image Size', 'Overall Dimensions'];
+        const lines = specs && specs.lines ? specs.lines.filter(l => wanted.indexOf(l.label) >= 0) : [];
+        let ly = sy + 26;
+        doc.setFontSize(7.5);
+        lines.forEach(ln => {
+            if (ly > sy + slotH - 6) return;
+            doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, lX + 18, ly);
+            const lw = doc.getTextWidth(ln.label);
+            doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = lX + lW - vw; doc.text(vs, vx, ly);
+            const ds = lX + 18 + lw + 4, de = vx - 4;
+            if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(170, 170, 170); doc.setLineWidth(0.4); doc.line(ds, ly - 2, de, ly - 2); doc.setLineDashPattern([], 0); }
+            ly += 11;
+        });
+
+        // framed artwork on the right
+        try {
+            const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+            let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+            const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+            const out = renderFrameToCanvas(dInches, swatch, { dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+            const cnv = out.canvas;
+            let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); } catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
+            const boxH = slotH * 0.84, boxW = rW;
+            const fit = Math.min(boxW / cnv.width, boxH / cnv.height);
+            const aw = cnv.width * fit, ah = cnv.height * fit;
+            const ax = rX + (boxW - aw) / 2, ay = sy + (slotH - ah) / 2;
+            try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
+            // letter label on the artwork (top-left)
+            doc.setFont(_font('display'), 'bold'); doc.setFontSize(13); doc.setTextColor(20, 20, 20);
+            doc.text(letter, ax - 2, ay + 10);
+            // image code under the artwork (bottom-right)
+            const ic = (r.imageCode || r.artworkFile || '') + '';
+            if (ic) { doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(110, 110, 110); doc.text(ic, ax + aw, ay + ah + 9, { align: 'right' }); }
+        } catch (e) {}
+    }
+}
 // Template-driven single-spec page (non-classic arrangements). Reuses the same
 // primitives as the classic renderer: baked frame mockup, dotted-leader spec
 // block, and the wall elevation. Coords come from SPEC_TEMPLATES (page fractions).
@@ -9258,11 +9359,22 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     _fpMigrate();
     const _doKeys = !!inc.floorplanKey;
     const _specRows = inc.spec ? rows.slice() : [];
+    const _specTplKey = (editorialContent.specTemplate || 'classic');
+    const _specIsGroup = !!(SPEC_TEMPLATES[_specTplKey] && SPEC_TEMPLATES[_specTplKey].group);
+    // A "unit" is one spec page. Normally one piece per page; for a set template
+    // (group:true) a whole set-piece group (ART.005-A/-B/-C…) shares one page.
+    const _unitsFromRows = (rs) => {
+        if (!_specIsGroup) return rs.map(r => ({ rep: r, members: [r], key: (r.id || '') }));
+        const order = [], map = {};
+        rs.forEach(r => { const k = _artGroupKey(r.id || ''); if (!map[k]) { map[k] = { rep: r, members: [], key: k }; order.push(k); } map[k].members.push(r); });
+        return order.map(k => map[k]);
+    };
+    const _units = _unitsFromRows(_specRows);
     const plan = [];
     if (_doKeys) {
         const emitLevels = [];
         floorplanLevels.forEach((lv, li) => {
-            const used = (li === 0) || !!lv.imageData || _specRows.some(r => (r.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li);
+            const used = (li === 0) || !!lv.imageData || _units.some(u => (u.rep.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li);
             if (used) emitLevels.push(li);
         });
         if (!emitLevels.length) emitLevels.push(0);
@@ -9270,17 +9382,17 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         emitLevels.forEach(li => {
             covered[li] = true;
             plan.push({ type: 'key', li: li });
-            _specRows.filter(r => (r.level || 0) === li).forEach(r => plan.push({ type: 'spec', r: r, li: li }));
+            _units.filter(u => (u.rep.level || 0) === li).forEach(u => plan.push({ type: 'spec', unit: u, li: li }));
         });
-        _specRows.forEach(r => { const li = r.level || 0; if (!covered[li]) plan.push({ type: 'spec', r: r, li: li }); });
+        _units.forEach(u => { const li = u.rep.level || 0; if (!covered[li]) plan.push({ type: 'spec', unit: u, li: li }); });
     } else {
-        _specRows.forEach(r => plan.push({ type: 'spec', r: r, li: (r.level || 0) }));
+        _units.forEach(u => plan.push({ type: 'spec', unit: u, li: (u.rep.level || 0) }));
     }
-    // Every step (key or spec) consumes one page; record where each spec lands.
+    // Every step (key or spec) consumes one page; map every member id to its page.
     const idToPage = {};
     {
         let _p = pageNum;
-        for (const step of plan) { _p++; if (step.type === 'spec' && step.r && step.r.id) idToPage[step.r.id] = _p; }
+        for (const step of plan) { _p++; if (step.type === 'spec' && step.unit) step.unit.members.forEach(m => { if (m && m.id) idToPage[m.id] = _p; }); }
     }
 
     // — Emit the plan: floorplan keys and spec pages, interleaved per level —
@@ -9304,9 +9416,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             if (!fpKeyPageNum) fpKeyPageNum = pageNum;
             continue;
         }
-        const r = step.r;
-        const _specTpl = (editorialContent.specTemplate || 'classic');
-        if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
+        const r = step.unit.rep;
+        const _specTpl = _specTplKey;
+        if (_specIsGroup) {
+            await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
+        } else if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
             await _drawSpecPageTemplate(doc, logos, pageNum, meta, r, _specTpl, { PW: PW, PH: PH, M: M });
         } else {
 
