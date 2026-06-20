@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -358,6 +358,7 @@ function _mbMigratePages() {
     if (!ec.understandingPage || !Array.isArray(ec.understandingPage.elements)) ec.understandingPage = { elements: [] };
     if (!ec.strategyPage || !Array.isArray(ec.strategyPage.elements)) ec.strategyPage = { elements: [] };
     if (typeof ec.specTemplate !== 'string' || !SPEC_TEMPLATES[ec.specTemplate]) ec.specTemplate = 'classic';
+    if (!ec.specTemplateOverrides || typeof ec.specTemplateOverrides !== 'object') ec.specTemplateOverrides = {};
     if (typeof ec.approvedStamp !== 'boolean') ec.approvedStamp = false;
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
@@ -7353,6 +7354,16 @@ function _dsInclude() {
         slogan: ck('specInc_slogan', true), contacts: ck('specInc_contacts', true)
     };
 }
+// Resolve the spec layout for one page. The GLOBAL template is the structural
+// default; a group template (Set) always wins because it changes page count.
+// Otherwise a per-page override (single layouts only) takes precedence.
+function _specTplResolve(unitKey) {
+    const g = (editorialContent.specTemplate || 'classic');
+    if (SPEC_TEMPLATES[g] && SPEC_TEMPLATES[g].group) return g;
+    const ov = (editorialContent.specTemplateOverrides || {})[unitKey];
+    if (ov && SPEC_TEMPLATES[ov] && !SPEC_TEMPLATES[ov].group) return ov;
+    return g;
+}
 function _deckPageList() {
     _mbMigratePages(); _fpMigrate();
     const inc = _dsInclude();
@@ -7380,7 +7391,7 @@ function _deckPageList() {
         rs.forEach(r => { const k = _artGroupKey(r.id || ''); if (!map[k]) { map[k] = { rep: r, members: [], key: k }; order.push(k); } map[k].members.push(r); });
         return order.map(k => map[k]);
     };
-    const specUnit = (u) => ({ kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members });
+    const specUnit = (u) => { const ok = (isGroupSpec ? u.key : (u.rep.id || '')); return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) }; };
     const units = unitsFor(rows);
     if (inc.floorplanKey) {
         const emit = [];
@@ -7435,7 +7446,7 @@ function _deckMockHTML(desc, w, h) {
         const r = desc.row || {};
         let lines = [];
         try { const s = buildSpecStrings(r); if (s && s.lines) lines = s.lines.map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
-        const tplKey = (desc._previewTpl || editorialContent.specTemplate || 'classic');
+        const tplKey = (desc._previewTpl || desc._specTpl || editorialContent.specTemplate || 'classic');
         const tpl = SPEC_TEMPLATES[tplKey];
         const codeFs = fs(0.06);
         const box = (x, y, bw, bh, label, bake) => '<div ' + (bake || '') + ' style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; height:' + Math.round(bh * h) + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.03) + 'px; overflow:hidden;">' + label + '</div>';
@@ -7823,26 +7834,58 @@ function _dsRenderTools() {
 
     const cat = _dsTemplateCategory(desc);
     if (desc.kind === 'spec') {
-        const lbl = document.createElement('div');
-        lbl.textContent = 'Spec layout — click to apply'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
-        t.appendChild(lbl);
-        const sub = document.createElement('p');
-        sub.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 10px; line-height:1.5;';
-        sub.textContent = 'Applies to every spec page in the deck.';
-        t.appendChild(sub);
-        const cur = editorialContent.specTemplate || 'classic';
+        const globalTpl = editorialContent.specTemplate || 'classic';
+        const isGroupGlobal = !!(SPEC_TEMPLATES[globalTpl] && SPEC_TEMPLATES[globalTpl].group);
+        const overrides = editorialContent.specTemplateOverrides || (editorialContent.specTemplateOverrides = {});
+        const ovKey = desc._ovKey || (desc.row && desc.row.id) || '';
+        const hasOverride = !!overrides[ovKey];
+        const resolved = desc._specTpl || _specTplResolve(ovKey);
         const cw = 244, chh = Math.round(cw * 540 / 936);
-        Object.keys(SPEC_TEMPLATES).forEach(key => {
-            const cell = document.createElement('div');
-            cell.style.cssText = 'cursor:pointer; border:2px solid ' + (key === cur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
-            cell.onclick = () => { editorialContent.specTemplate = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
-            const thumb = document.createElement('div');
-            thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
-            try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
-            const nm = document.createElement('div');
-            nm.textContent = (SPEC_TEMPLATES[key].label || key) + (key === cur ? '  ✓' : ''); nm.style.cssText = 'font-size:0.64rem; color:' + (key === cur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
-            cell.appendChild(thumb); cell.appendChild(nm); t.appendChild(cell);
-        });
+
+        const lbl = document.createElement('div');
+        lbl.textContent = 'Spec layout'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
+        t.appendChild(lbl);
+
+        // Deck mode: one page per piece, or group set pieces (A/B/C) onto one page.
+        const modeRow = document.createElement('div');
+        modeRow.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
+        const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
+        modeRow.appendChild(mkMode('Page per piece', !isGroupGlobal, () => { if (isGroupGlobal) { editorialContent.specTemplate = 'classic'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } }));
+        modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => { if (!isGroupGlobal) { editorialContent.specTemplate = 'setRight'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } }));
+        t.appendChild(modeRow);
+
+        if (isGroupGlobal) {
+            const note = document.createElement('p');
+            note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 10px; line-height:1.5;';
+            note.textContent = 'Set pieces (A/B/C…) are grouped onto one page across the whole deck. Switch to “Page per piece” to give individual pages their own layout.';
+            t.appendChild(note);
+        } else {
+            const sub = document.createElement('p');
+            sub.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 10px; line-height:1.5;';
+            sub.innerHTML = 'Choose a layout for <b>this page</b>' + (hasOverride ? ' — overriding the deck default.' : ' — currently following the deck default.');
+            t.appendChild(sub);
+
+            Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group).forEach(key => {
+                const onCur = (key === resolved);
+                const cell = document.createElement('div');
+                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
+                cell.onclick = () => { if (key === globalTpl) delete overrides[ovKey]; else overrides[ovKey] = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+                const thumb = document.createElement('div');
+                thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
+                try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, members: desc.members, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
+                const nm = document.createElement('div');
+                const tag = onCur ? (hasOverride ? '  ✓ this page' : '  ✓ default') : (key === globalTpl ? '  · default' : '');
+                nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.64rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+                cell.appendChild(thumb); cell.appendChild(nm); t.appendChild(cell);
+            });
+
+            const btnRow = document.createElement('div');
+            btnRow.style.cssText = 'display:flex; gap:6px; margin-top:2px;';
+            const mkBtn = (label, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid var(--border-color); background:transparent; color:var(--text-main);'; b.onclick = on; return b; };
+            btnRow.appendChild(mkBtn('Set as deck default', () => { editorialContent.specTemplate = resolved; delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            if (hasOverride) btnRow.appendChild(mkBtn('Reset to default', () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            t.appendChild(btnRow);
+        }
         // — Notes editor (writes the piece's spec Notes line) —
         const r = desc.row || {};
         const nLbl = document.createElement('div');
@@ -9612,7 +9655,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             continue;
         }
         const r = step.unit.rep;
-        const _specTpl = _specTplKey;
+        const _specTpl = _specTplResolve(step.unit.key || (r.id || ''));
         if (_specIsGroup) {
             await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
         } else if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
