@@ -569,16 +569,16 @@ const SPEC_TEMPLATES = {
     frameLeft: {
         label: 'Frame left',
         artwork: { x: .06, y: .12, w: .42, h: .56, align: 'center' },
-        code: { align: 'center', size: 16, gap: 16 },
-        title: { x: .54, y: .15, size: 19, align: 'left' },
+        code: { align: 'center', size: 13, gap: 14, field: 'imageCode' },
+        title: { x: .54, y: .15, size: 19, align: 'left', field: 'id' },
         spec: { x: .54, y: .26, w: .4 },
         elevation: { x: .54, y: .62, w: .4, h: .26 }
     },
     centeredHero: {
         label: 'Centered hero',
         artwork: { x: .3, y: .1, w: .4, h: .48, align: 'center' },
-        code: { align: 'center', size: 18, gap: 18 },
-        title: { x: .06, y: .14, size: 16, align: 'left' },
+        code: { align: 'center', size: 13, gap: 14, field: 'imageCode' },
+        title: { x: .06, y: .14, size: 16, align: 'left', field: 'id' },
         spec: { x: .3, y: .66, w: .4 },
         elevation: { x: .06, y: .64, w: .2, h: .24 }
     },
@@ -7438,14 +7438,14 @@ function _deckMockHTML(desc, w, h) {
         const tplKey = (desc._previewTpl || editorialContent.specTemplate || 'classic');
         const tpl = SPEC_TEMPLATES[tplKey];
         const codeFs = fs(0.06);
-        const box = (x, y, bw, bh, label) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; height:' + Math.round(bh * h) + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.03) + 'px;">' + label + '</div>';
+        const box = (x, y, bw, bh, label, bake) => '<div ' + (bake || '') + ' style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; height:' + Math.round(bh * h) + 'px; background:#f4f4f4; border:1px solid #e6e6e6; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:' + fs(0.03) + 'px; overflow:hidden;">' + label + '</div>';
         const txt = (x, y, bw, html, size, weight, fam) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; color:#222; font-size:' + size + 'px; line-height:1.6; font-weight:' + (weight || 400) + ';' + (fam ? 'font-family:' + fam + ';' : '') + '">' + html + '</div>';
         const DRUK = "'Druk','Arial Narrow',Arial,sans-serif", SANS = 'Arial,Helvetica,sans-serif';
         let inner = '';
         if (!tpl || tpl.legacy) {
             // Classic: code top-left, artwork left, spec right
             inner += txt(0.06, 0.04, 0.6, _esc(r.id || 'SPEC'), codeFs, 800, DRUK);
-            inner += box(0.06, 0.18, 0.34, 0.5, 'artwork');
+            inner += box(0.06, 0.18, 0.34, 0.5, 'artwork', 'data-bake="artwork"');
             inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03), 400, SANS);
         } else if (tpl.group) {
             const members = (desc.members && desc.members.length) ? desc.members.slice(0, 4) : [r, r];
@@ -7458,13 +7458,13 @@ function _deckMockHTML(desc, w, h) {
                 inner += txt(0.06, sy, 0.04, _esc(letters[i] || (i + 1) + ''), fs(0.04), 800, DRUK);
                 let ml = []; try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
                 inner += txt(0.11, sy, 0.34, '<b>' + _esc(m.id || '') + '</b><br>' + ml.map(_esc).join('<br>'), fs(0.022), 400, SANS);
-                inner += box(0.54, sy + slotH * 0.06, 0.42, slotH * 0.82, _esc(letters[i] || ''));
+                inner += box(0.54, sy + slotH * 0.06, 0.42, slotH * 0.82, _esc(letters[i] || ''), 'data-bake="artwork" data-member-idx="' + i + '"');
             });
         } else {
             if (tpl.title) { const tf = tpl.title.field || 'application'; const tt = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })()); inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc(tt.toString().toUpperCase()), fs(0.045), 800, DRUK); }
-            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(ct.toString()), fs(0.04), 700, DRUK); } }
+            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork', 'data-bake="artwork"'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(ct.toString()), fs(0.04), 700, DRUK); } }
             if (tpl.spec) inner += txt(tpl.spec.x, tpl.spec.y - 0.02, tpl.spec.w, lines.slice(0, 12).map(_esc).join('<br>'), fs(0.026), 400, SANS);
-            if (tpl.elevation) inner += box(tpl.elevation.x, tpl.elevation.y, tpl.elevation.w, tpl.elevation.h, 'elevation');
+            if (tpl.elevation) inner += box(tpl.elevation.x, tpl.elevation.y, tpl.elevation.w, tpl.elevation.h, 'elevation', 'data-bake="elevation"');
         }
         return wrap(inner);
     }
@@ -7533,7 +7533,8 @@ function _dsRenderRail() {
         cell.onclick = () => _dsSelectPage(i);
         const thumb = document.createElement('div');
         thumb.style.cssText = 'position:relative; width:' + tw + 'px; height:' + th + 'px; background:#fff; border-radius:4px; overflow:hidden; border:2px solid ' + (i === _dsIndex ? '#6a6aff' : 'var(--border-color)') + ';';
-        thumb.innerHTML = _deckMockHTML(desc, tw, th);
+        try { thumb.innerHTML = _deckMockHTML(desc, tw, th); }
+        catch (e) { thumb.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:10px;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
         const lab = document.createElement('div');
         lab.style.cssText = 'font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
         lab.textContent = (i + 1) + '. ' + (desc.title || desc.type);
@@ -7601,6 +7602,49 @@ function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; a[p
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsDeleteAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return; const l = (editorialContent.annotations || {})[_dsSelKey]; if (l) l.splice(_dsSelIdx, 1); _dsSelKey = null; _dsSelIdx = -1; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+// Bake the real framed mockup / elevation for the studio center preview, so a
+// spec page shows actual art instead of placeholder boxes. Async + token-guarded
+// so switching pages mid-bake doesn't paint stale images.
+let _dsBakeToken = 0;
+async function _bakeFrameDataUrl(r) {
+    const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+    let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+    const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+    const out = renderFrameToCanvas(dInches, swatch, { dpi: 110, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+    const cnv = out.canvas;
+    try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); return flat.toDataURL('image/jpeg', 0.85); }
+    catch (e) { return cnv.toDataURL('image/jpeg', 0.85); }
+}
+async function _bakeElevationDataUrl(r) {
+    let elev = null; for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } }
+    if (!elev) return null;
+    const er = await renderElevationToCanvas(elev, r.id, { dpi: 30 });
+    if (!er || !er.canvas) return null;
+    try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#fff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); return flat.toDataURL('image/jpeg', 0.82); }
+    catch (e) { return er.canvas.toDataURL('image/jpeg', 0.82); }
+}
+async function _dsBakeSpecImages(page, desc, token) {
+    if (!page || desc.kind !== 'spec') return;
+    const boxes = page.querySelectorAll('[data-bake]');
+    for (const box of boxes) {
+        if (token !== _dsBakeToken) return;
+        const kind = box.getAttribute('data-bake');
+        let row = desc.row;
+        const mi = box.getAttribute('data-member-idx');
+        if (mi != null && desc.members && desc.members[+mi]) row = desc.members[+mi];
+        if (!row) continue;
+        try {
+            const url = (kind === 'elevation') ? await _bakeElevationDataUrl(row) : await _bakeFrameDataUrl(row);
+            if (url && token === _dsBakeToken && box.isConnected) {
+                box.style.background = '#fff';
+                box.style.color = 'transparent';
+                box.innerHTML = '<img src="' + url + '" style="max-width:100%; max-height:100%; width:auto; height:auto; display:block; margin:auto;">';
+            } else if (!url && kind === 'elevation' && box.isConnected) {
+                box.style.display = 'none';   // no elevation for this piece — drop the placeholder
+            }
+        } catch (e) {}
+    }
+}
 function _dsAddStamp(page, w, hh) {
     if (!editorialContent.approvedStamp) return;
     const s = document.createElement('div');
@@ -7611,6 +7655,7 @@ function _dsAddStamp(page, w, hh) {
 function _dsRenderCenter() {
     const c = document.getElementById('dsCenter'); if (!c) return;
     c.innerHTML = '';
+    _dsBakeToken++;
     const desc = _dsPages[_dsIndex]; if (!desc) return;
     if (_dsSelKey && _dsSelKey !== _deckPageKey(desc)) { _dsSelKey = null; _dsSelIdx = -1; _dsSyncToolbar(); }
     let availW = c.clientWidth - 48; if (!availW || availW < 200) availW = 760;
@@ -7620,10 +7665,13 @@ function _dsRenderCenter() {
     if (desc.kind === 'floorplan') { _dsRenderCenterFloorplan(desc, c, Math.round(w), Math.round(hh)); return; }
     const page = document.createElement('div');
     page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
-    page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh));
+    page.innerHTML = '';
+    try { page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); }
+    catch (e) { page.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
     _dsAddStamp(page, Math.round(w), Math.round(hh));
     _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
+    if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); }
 }
 // — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
 let _dsFpDragKey = null, _dsFpDragPin = null;
@@ -7790,7 +7838,7 @@ function _dsRenderTools() {
             cell.onclick = () => { editorialContent.specTemplate = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
             const thumb = document.createElement('div');
             thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
-            thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, _previewTpl: key }, cw, chh);
+            try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
             const nm = document.createElement('div');
             nm.textContent = (SPEC_TEMPLATES[key].label || key) + (key === cur ? '  ✓' : ''); nm.style.cssText = 'font-size:0.64rem; color:' + (key === cur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
             cell.appendChild(thumb); cell.appendChild(nm); t.appendChild(cell);
@@ -9594,14 +9642,9 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const aw = cw * fit, ah = ch * fit;
         const artX = COL_X, artY = cursorY;
 
-        // Filename caption (italic, above-right of the artwork) — like the reference.
-        if (r.artworkFile || r.imageCode) {
-            doc.setFont('helvetica', 'italic');
-            doc.setFontSize(7.5);
-            doc.setTextColor(90, 90, 90);
-            const cap = (r.artworkFile || r.imageCode) + '';
-            doc.text(cap, artX + aw, artY - 4, { align: 'right' });
-        }
+        // Image code under the framed mockup (bottom-right), per studio convention.
+        const _icClassic = (r.imageCode || r.artworkFile || '') + '';
+        // (drawn after the frame image below, once artY/ah are placed)
         // Flatten onto white (JPEG has no alpha → transparent areas would go
         // black). Keeps the PDF light while avoiding black artifacts.
         let frameDataUrl;
@@ -9614,10 +9657,16 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             frameDataUrl = flat.toDataURL('image/jpeg', 0.85);
         } catch (e) { frameDataUrl = canvas.toDataURL('image/jpeg', 0.85); }
         try { doc.addImage(frameDataUrl, 'JPEG', artX, artY, aw, ah); } catch (e) {}
+        if (_icClassic) {
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            doc.setTextColor(90, 90, 90);
+            doc.text(_icClassic, artX + aw, artY + ah + 12, { align: 'right' });
+        }
 
         // — Spec block (dotted-leader rows) beneath the artwork —
         const specs = buildSpecStrings(r);
-        const blockTop = artY + ah + 22;
+        const blockTop = artY + ah + (_icClassic ? 30 : 22);
         const rowH = 13;
         const blockW = Math.max(aw, 300);
         doc.setFontSize(8.5);
