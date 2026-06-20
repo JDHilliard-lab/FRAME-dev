@@ -1156,10 +1156,31 @@
             <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="closeDeckStudio()">Done</button>
         </div>
         <div id="dsTabProject" style="flex:1; overflow-y:auto; padding:18px; display:flex; justify-content:center; align-items:flex-start;"><!-- project settings panel reparented here --></div>
-        <div id="dsTabPages" style="flex:1; display:none; min-height:0;">
-            <div id="dsRail" style="width:200px; flex-shrink:0; border-right:1px solid var(--border-color); overflow-y:auto; padding:12px;"><!-- thumbnails --></div>
-            <div id="dsCenter" style="flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:24px; background:var(--bg-input); overflow:auto;"><!-- live page mock --></div>
-            <div id="dsTools" style="width:280px; flex-shrink:0; border-left:1px solid var(--border-color); overflow-y:auto; padding:16px;"><!-- per-page tools --></div>
+        <div id="dsTabPages" style="flex:1; display:none; min-height:0; flex-direction:column;">
+            <div id="dsToolbar" style="flex-shrink:0; border-bottom:1px solid var(--border-color); padding:7px 12px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; background:var(--bg-panel);">
+                <button onclick="_dsAddTextBox()" class="action-btn" style="width:auto; height:28px; padding:0 12px; font-size:0.72rem;">+ Text box</button>
+                <span style="width:1px; height:20px; background:var(--border-color);"></span>
+                <select id="dsAnnFont" onchange="_dsAnnSet('font', this.value)" title="Font" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
+                    <option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option>
+                </select>
+                <button onclick="_dsAnnBump(-1)" title="Smaller" style="height:28px; width:28px; font-size:0.8rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">A−</button>
+                <span id="dsAnnSizeLbl" style="font-size:0.7rem; color:var(--text-muted); min-width:30px; text-align:center;">—</span>
+                <button onclick="_dsAnnBump(1)" title="Bigger" style="height:28px; width:28px; font-size:0.95rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">A+</button>
+                <input type="color" id="dsAnnColor" onchange="_dsAnnSet('color', this.value)" title="Color" value="#222222" style="height:28px; width:34px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer; padding:1px;">
+                <button id="dsAnnBold" onclick="_dsAnnToggle('bold')" title="Bold" style="height:28px; width:28px; font-weight:800; font-size:0.78rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">B</button>
+                <button id="dsAnnItalic" onclick="_dsAnnToggle('italic')" title="Italic" style="height:28px; width:28px; font-style:italic; font-size:0.78rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">I</button>
+                <select id="dsAnnAlign" onchange="_dsAnnSet('align', this.value)" title="Align" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
+                    <option value="left">Left</option><option value="center">Center</option><option value="right">Right</option>
+                </select>
+                <button id="dsAnnDelete" onclick="_dsDeleteAnnot()" title="Delete selected" style="height:28px; padding:0 10px; font-size:0.72rem; background:var(--bg-input); color:#c0392b; border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">Delete</button>
+                <span style="flex:1;"></span>
+                <span style="font-size:0.66rem; color:var(--text-muted);">double-click a box to edit · drag to move</span>
+            </div>
+            <div style="flex:1; display:flex; min-height:0;">
+                <div id="dsRail" style="width:200px; flex-shrink:0; border-right:1px solid var(--border-color); overflow-y:auto; padding:12px;"><!-- thumbnails --></div>
+                <div id="dsCenter" style="flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:24px; background:var(--bg-input); overflow:auto;"><!-- live page mock --></div>
+                <div id="dsTools" style="width:280px; flex-shrink:0; border-left:1px solid var(--border-color); overflow-y:auto; padding:16px;"><!-- per-page tools --></div>
+            </div>
         </div>
     </div>
 </div>
