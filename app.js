@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -360,6 +360,7 @@ function _mbMigratePages() {
     if (typeof ec.specTemplate !== 'string' || !SPEC_TEMPLATES[ec.specTemplate]) ec.specTemplate = 'classic';
     if (!ec.specTemplateOverrides || typeof ec.specTemplateOverrides !== 'object') ec.specTemplateOverrides = {};
     if (typeof ec.approvedStamp !== 'boolean') ec.approvedStamp = false;
+    if (!ec.approvedPages || typeof ec.approvedPages !== 'object') ec.approvedPages = {};
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -7488,20 +7489,30 @@ function _deckMockHTML(desc, w, h) {
     return wrap('<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:' + fs(0.05) + 'px;">' + _esc(desc.title) + '</div>');
 }
 let _dsActiveTab = 'project';
+function _pageApproved(ovKey) { return !!(ovKey && editorialContent.approvedPages && editorialContent.approvedPages[ovKey]); }
+function _dsCurrentSpecKey() { const d = _dsPages[_dsIndex]; return (d && d.kind === 'spec') ? (d._ovKey || (d.row && d.row.id) || '') : ''; }
 function _dsSyncApprovedBtn() {
     const b = document.getElementById('dsApprovedBtn'); if (!b) return;
-    const on = !!editorialContent.approvedStamp;
+    const onSpec = (_dsActiveTab === 'pages') && !!_dsCurrentSpecKey();
+    const on = onSpec && _pageApproved(_dsCurrentSpecKey());
+    b.disabled = !onSpec;
+    b.style.opacity = onSpec ? '1' : '0.4';
+    b.style.cursor = onSpec ? 'pointer' : 'not-allowed';
+    b.title = onSpec ? 'Mark this spec page approved' : 'Approval applies to spec pages only — select a spec page';
     b.style.background = on ? '#c82626' : 'var(--bg-input)';
     b.style.color = on ? '#fff' : 'var(--text-main)';
     b.style.borderColor = on ? '#c82626' : 'var(--border-color)';
-    b.textContent = on ? 'APPROVED ✓' : 'APPROVED';
+    b.textContent = on ? 'APPROVED \u2713' : 'APPROVED';
 }
 function _dsToggleApproved() {
-    editorialContent.approvedStamp = !editorialContent.approvedStamp;
+    const k = _dsCurrentSpecKey();
+    if (!k) { showInfoModal('Spec pages only', 'The APPROVED stamp applies to individual spec pages. Select a spec page first, then mark it approved.'); return; }
+    const map = editorialContent.approvedPages || (editorialContent.approvedPages = {});
+    if (map[k]) delete map[k]; else map[k] = true;
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSyncApprovedBtn();
-    if (_dsActiveTab === 'pages') { _dsRenderRail(); _dsRenderCenter(); }
+    if (_dsActiveTab === 'pages') { _dsRenderRail(); _dsRenderTools(); _dsRenderCenter(); }
 }
 function openDeckStudio(tab) {
     const m = document.getElementById('deckStudioModal'); if (!m) return;
@@ -7534,6 +7545,7 @@ function _dsTab(which) {
         catch (e) { _dsPages = []; _dsBuildError = (e && e.message) ? e.message : String(e); console.error('Deck page list build failed:', e); }
         if (_dsIndex >= _dsPages.length) _dsIndex = 0;
         try { _dsSyncToolbar(); } catch (e) { console.error(e); }
+        try { _dsSyncApprovedBtn(); } catch (e) {}
         try { _dsRenderRail(); } catch (e) { console.error(e); }
         try { _dsRenderTools(); } catch (e) { console.error(e); }
         requestAnimationFrame(_dsRenderCenter);
@@ -7542,7 +7554,7 @@ function _dsTab(which) {
 let _dsBuildError = '';
 function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
-function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
+function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
 let _dsRailFilter = '';
 function _dsRenderRail() {
     const rail = document.getElementById('dsRail'); if (!rail) return;
@@ -7631,10 +7643,40 @@ function _dsRenderAnnots(page, desc, w, hh) {
     const key = _deckPageKey(desc); if (!key) return;
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     list.forEach((a, i) => {
+        const sel = (key === _dsSelKey && i === _dsSelIdx);
+        if (a.type === 'image') {
+            const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
+            const box = document.createElement('div');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box; background:#fff;';
+            const img = document.createElement('img');
+            img.src = a.dataUrl || ''; img.draggable = false;
+            img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
+            box.appendChild(img);
+            box.onmousedown = (e) => {
+                e.preventDefault();
+                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
+                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            };
+            const handle = document.createElement('div');
+            handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;' + (sel ? '' : ' display:none;');
+            handle.onmousedown = (e) => {
+                e.preventDefault(); e.stopPropagation();
+                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar();
+                const sx = e.clientX, ow = a.w || 0.25;
+                const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.04, Math.min(1, nw)); a.w = nw; const nbw = nw * w; box.style.width = nbw + 'px'; box.style.height = (nbw * (a.aspect || 0.75)) + 'px'; };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            };
+            box.appendChild(handle);
+            page.appendChild(box);
+            return;
+        }
         const el = document.createElement('div');
         el.textContent = a.text || '';
         el.spellcheck = false;
-        const sel = (key === _dsSelKey && i === _dsSelIdx);
         el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + Math.max(7, (a.size || 0.03) * hh) + 'px; line-height:1.2; color:' + (a.color || '#222222') + '; font-weight:' + (a.bold ? 700 : 400) + '; font-style:' + (a.italic ? 'italic' : 'normal') + '; text-align:' + (a.align || 'left') + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
@@ -7659,6 +7701,44 @@ function _dsSyncToolbar() {
     const al = document.getElementById('dsAnnAlign'); if (al) al.value = a ? (a.align || 'left') : 'left';
     const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (a && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (a && a.bold) ? '#fff' : 'var(--text-main)'; }
     const it = document.getElementById('dsAnnItalic'); if (it) { it.style.background = (a && a.italic) ? '#6a6aff' : 'var(--bg-input)'; it.style.color = (a && a.italic) ? '#fff' : 'var(--text-main)'; }
+}
+function _dsAddImageBox() {
+    if (_dsActiveTab !== 'pages') return;
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
+    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support overlay images.'); return; }
+    const fi = document.getElementById('dsAnnImageFile'); if (fi) fi.click();
+}
+function _dsImageFilePicked(input) {
+    const file = input && input.files && input.files[0];
+    if (file) _dsHandleImageFile(file);
+    if (input) input.value = '';
+}
+function _dsHandleImageFile(file) {
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+        const im = new Image();
+        im.onload = () => {
+            // Downscale to keep project JSON small (max 1100px long edge). Keep PNG
+            // for transparency (logos), otherwise JPEG for size.
+            const maxEdge = 1100; let dw = im.naturalWidth || 1, dh = im.naturalHeight || 1;
+            const scale = Math.min(1, maxEdge / Math.max(dw, dh)); dw = Math.max(1, Math.round(dw * scale)); dh = Math.max(1, Math.round(dh * scale));
+            const cnv = document.createElement('canvas'); cnv.width = dw; cnv.height = dh;
+            const cx = cnv.getContext('2d'); cx.drawImage(im, 0, 0, dw, dh);
+            const isPng = /png/i.test(file.type);
+            let durl; try { durl = isPng ? cnv.toDataURL('image/png') : cnv.toDataURL('image/jpeg', 0.82); } catch (e) { durl = reader.result; }
+            const aspect = (im.naturalHeight || 1) / (im.naturalWidth || 1);
+            const list = _dsAnnList(key);
+            list.push({ type: 'image', dataUrl: durl, x: 0.12, y: 0.14, w: 0.28, aspect: aspect });
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsSelectAnnot(key, list.length - 1);
+            _dsRenderRail();
+        };
+        im.onerror = () => showInfoModal('Couldn\u2019t load image', 'That file could not be read as an image.');
+        im.src = reader.result;
+    };
+    reader.readAsDataURL(file);
 }
 function _dsAddTextBox() {
     if (_dsActiveTab !== 'pages') return;
@@ -7718,8 +7798,9 @@ async function _dsBakeSpecImages(page, desc, token) {
         } catch (e) {}
     }
 }
-function _dsAddStamp(page, w, hh) {
-    if (!editorialContent.approvedStamp) return;
+function _dsAddStamp(page, w, hh, desc) {
+    if (!desc || desc.kind !== 'spec') return;
+    if (!_pageApproved(desc._ovKey || (desc.row && desc.row.id) || '')) return;
     const s = document.createElement('div');
     s.textContent = 'APPROVED';
     s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.05) + 'px; right:' + Math.round(w * 0.04) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.028)) + 'px; letter-spacing:0.04em; color:#c82626; border:1.5px solid #c82626; background:#fff; padding:2px 7px; border-radius:3px;';
@@ -7741,7 +7822,7 @@ function _dsRenderCenter() {
     page.innerHTML = '';
     try { page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); }
     catch (e) { page.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
-    _dsAddStamp(page, Math.round(w), Math.round(hh));
+    _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
     _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
     if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); }
@@ -7762,7 +7843,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     area.style.cssText = 'position:absolute; left:0; right:0; top:' + planTop + 'px; bottom:' + pad + 'px; display:flex; align-items:center; justify-content:center;';
     if (!lv.imageData) {
         area.innerHTML = '<div style="color:#bbb; font-size:13px;">No plan image for this level — open the full markup tool to upload one.</div>';
-        page.appendChild(area); _dsAddStamp(page, w, hh); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page); return;
+        page.appendChild(area); _dsAddStamp(page, w, hh, desc); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page); return;
     }
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
@@ -7772,7 +7853,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     img.onclick = _dsFpPlace;
     wrap.appendChild(img);
     _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g)); });
-    area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page);
+    area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh, desc); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page);
 }
 function _dsMakePin(g) {
     const pin = document.createElement('div');
@@ -7904,6 +7985,20 @@ function _dsRenderTools() {
         const resolved = desc._specTpl || _specTplResolve(ovKey);
         const cw = 244, chh = Math.round(cw * 540 / 936);
 
+        // Per-page APPROVED toggle (spec pages only).
+        const apprWrap = document.createElement('div');
+        apprWrap.style.cssText = 'display:flex; align-items:center; gap:8px; margin-bottom:12px; padding:8px; border:1px solid var(--border-color); border-radius:5px;';
+        const isAppr = _pageApproved(ovKey);
+        const apprBtn = document.createElement('button');
+        apprBtn.textContent = isAppr ? 'APPROVED \u2713' : 'Mark approved';
+        apprBtn.style.cssText = 'font-size:0.66rem; font-weight:700; padding:5px 10px; border-radius:4px; cursor:pointer; letter-spacing:0.03em; white-space:nowrap; border:1px solid ' + (isAppr ? '#c82626' : 'var(--border-color)') + '; background:' + (isAppr ? '#c82626' : 'transparent') + '; color:' + (isAppr ? '#fff' : 'var(--text-main)') + ';';
+        apprBtn.onclick = () => { const m = editorialContent.approvedPages || (editorialContent.approvedPages = {}); if (m[ovKey]) delete m[ovKey]; else m[ovKey] = true; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncApprovedBtn(); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); };
+        const apprLab = document.createElement('span');
+        apprLab.textContent = isAppr ? 'Showing the APPROVED stamp on this page.' : 'Stamp just this spec page as approved.';
+        apprLab.style.cssText = 'font-size:0.62rem; color:var(--text-muted); line-height:1.4;';
+        apprWrap.appendChild(apprBtn); apprWrap.appendChild(apprLab);
+        t.appendChild(apprWrap);
+
         const lbl = document.createElement('div');
         lbl.textContent = 'Spec layout'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
         t.appendChild(lbl);
@@ -7944,9 +8039,13 @@ function _dsRenderTools() {
             const btnRow = document.createElement('div');
             btnRow.style.cssText = 'display:flex; gap:6px; margin-top:2px;';
             const mkBtn = (label, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid var(--border-color); background:transparent; color:var(--text-main);'; b.onclick = on; return b; };
-            btnRow.appendChild(mkBtn('Set as deck default', () => { editorialContent.specTemplate = resolved; delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
-            if (hasOverride) btnRow.appendChild(mkBtn('Reset to default', () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            btnRow.appendChild(mkBtn('Apply to all pages', () => { editorialContent.specTemplate = resolved; editorialContent.specTemplateOverrides = {}; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
             t.appendChild(btnRow);
+            const bulkNote = document.createElement('p');
+            bulkNote.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
+            bulkNote.textContent = '“Apply to all pages” makes every spec page use this layout and clears any per-page overrides.';
+            t.appendChild(bulkNote);
         }
         // — Notes editor (writes the piece's spec Notes line) —
         const r = desc.row || {};
@@ -9473,6 +9572,13 @@ function _drawAnnotations(doc, key, PW, PH) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
     list.forEach(a => {
+        if (a.type === 'image') {
+            if (!a.dataUrl) return;
+            const x = (a.x || 0) * PW, y = (a.y || 0) * PH, pw = (a.w || 0.25) * PW, ph = (a.w || 0.25) * PW * (a.aspect || 0.75);
+            const fmt = (('' + a.dataUrl).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
+            try { doc.addImage(a.dataUrl, fmt, x, y, pw, ph); } catch (e) {}
+            return;
+        }
         const text = (a.text || '') + ''; if (!text.trim()) return;
         const x = (a.x || 0) * PW, y = (a.y || 0) * PH, w = (a.w || 0.3) * PW;
         const size = Math.max(6, (a.size || 0.03) * PH);
@@ -9880,9 +9986,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
-    // — APPROVED stamp on every page (client sign-off marker) —
-    if (editorialContent.approvedStamp) {
-        for (let p = 1; p <= pageNum; p++) { try { doc.setPage(p); _drawApprovedStamp(doc, PW, PH); } catch (e) {} }
+    // — APPROVED stamp: only on spec pages the client has individually approved —
+    const _appr = editorialContent.approvedPages || {};
+    for (let p = 1; p <= pageNum; p++) {
+        const k = _pageKeys[p] || '';
+        if (k.indexOf('spec:') === 0 && _appr[k.slice(5)]) { try { doc.setPage(p); _drawApprovedStamp(doc, PW, PH); } catch (e) {} }
     }
     const single = !opts.all && rows[0];
     const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
