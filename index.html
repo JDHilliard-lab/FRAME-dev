@@ -1052,7 +1052,7 @@
             <input type="text" id="specPdfLocation" placeholder="Las Vegas, NV" style="width:100%; font-size:0.85rem; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;">
         </div>
 
-        <div style="margin-bottom:18px;">
+        <div style="margin-bottom:18px; display:none;">
             <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Floorplan image <span style="font-weight:normal; text-transform:none;">(for the Floorplan Key page)</span></label>
             <div style="display:flex; align-items:center; gap:8px;">
                 <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="document.getElementById('specPdfFloorplanFile').click()">Choose image…</button>
@@ -1158,25 +1158,26 @@
         <div id="dsTabProject" style="flex:1; overflow-y:auto; padding:18px; display:flex; justify-content:center; align-items:flex-start;"><!-- project settings panel reparented here --></div>
         <div id="dsTabPages" style="flex:1; display:none; min-height:0; flex-direction:column;">
             <div id="dsToolbar" style="flex-shrink:0; border-bottom:1px solid var(--border-color); padding:7px 12px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; background:var(--bg-panel);">
-                <button onclick="_dsAddTextBox()" class="action-btn" style="width:auto; height:28px; padding:0 12px; font-size:0.72rem;">+ Text box</button>
-                <button onclick="_dsAddImageBox()" class="action-btn" style="width:auto; height:28px; padding:0 12px; font-size:0.72rem;">+ Image</button>
+                <button onclick="_dsAddTextBox()" class="action-btn btn-secondary" title="Add text box" style="width:32px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;"><span style="font:700 15px Georgia,serif;">T</span></button>
+                <button onclick="_dsAddImageBox()" class="action-btn btn-secondary" title="Add image" style="width:32px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></button>
                 <input type="file" id="dsAnnImageFile" accept="image/*" style="display:none" onchange="_dsImageFilePicked(this)">
                 <span style="width:1px; height:20px; background:var(--border-color);"></span>
-                <select id="dsAnnFont" onchange="_dsAnnSet('font', this.value)" title="Font" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
+                <select id="dsAnnFont" onchange="_dsAnnSet('font', this.value)" title="Font" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
                     <option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option>
                 </select>
-                <button onclick="_dsAnnBump(-1)" title="Smaller" style="height:28px; width:28px; font-size:0.8rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">A−</button>
+                <button onclick="_dsAnnBump(-1)" title="Smaller" class="action-btn btn-secondary" style="height:30px; width:30px; padding:0; font-size:0.8rem; display:inline-flex; align-items:center; justify-content:center;">A−</button>
                 <span id="dsAnnSizeLbl" style="font-size:0.7rem; color:var(--text-muted); min-width:30px; text-align:center;">—</span>
-                <button onclick="_dsAnnBump(1)" title="Bigger" style="height:28px; width:28px; font-size:0.95rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">A+</button>
-                <input type="color" id="dsAnnColor" onchange="_dsAnnSet('color', this.value)" title="Color" value="#222222" style="height:28px; width:34px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer; padding:1px;">
-                <button id="dsAnnBold" onclick="_dsAnnToggle('bold')" title="Bold" style="height:28px; width:28px; font-weight:800; font-size:0.78rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">B</button>
-                <button id="dsAnnItalic" onclick="_dsAnnToggle('italic')" title="Italic" style="height:28px; width:28px; font-style:italic; font-size:0.78rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">I</button>
-                <select id="dsAnnAlign" onchange="_dsAnnSet('align', this.value)" title="Align" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
+                <button onclick="_dsAnnBump(1)" title="Bigger" class="action-btn btn-secondary" style="height:30px; width:30px; padding:0; font-size:0.95rem; display:inline-flex; align-items:center; justify-content:center;">A+</button>
+                <input type="color" id="dsAnnColor" onchange="_dsAnnSet('color', this.value)" title="Color" value="#222222" style="height:30px; width:34px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer; padding:1px;">
+                <button id="dsAnnBold" onclick="_dsAnnToggle('bold')" title="Bold" class="action-btn btn-secondary" style="height:30px; width:30px; padding:0; font-weight:800; font-size:0.78rem; display:inline-flex; align-items:center; justify-content:center;">B</button>
+                <button id="dsAnnItalic" onclick="_dsAnnToggle('italic')" title="Italic" class="action-btn btn-secondary" style="height:30px; width:30px; padding:0; font-style:italic; font-size:0.78rem; display:inline-flex; align-items:center; justify-content:center;">I</button>
+                <select id="dsAnnAlign" onchange="_dsAnnSet('align', this.value)" title="Align" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
                     <option value="left">Left</option><option value="center">Center</option><option value="right">Right</option>
                 </select>
-                <button id="dsAnnDelete" onclick="_dsDeleteAnnot()" title="Delete selected" style="height:28px; padding:0 10px; font-size:0.72rem; background:var(--bg-input); color:#c0392b; border:1px solid var(--border-color); border-radius:4px; cursor:pointer;">Delete</button>
+                <button id="dsAnnDelete" onclick="_dsDeleteAnnot()" title="Delete selected" class="action-btn btn-secondary" style="height:30px; padding:0 10px; font-size:0.72rem; color:#c0392b;">Delete</button>
                 <span style="flex:1;"></span>
-                <span style="font-size:0.66rem; color:var(--text-muted);">double-click a box to edit · drag to move</span>
+                <span style="font-size:0.66rem; color:var(--text-muted); margin-right:4px;">double-click to edit · drag to move</span>
+                <button id="dsStyleGear" onclick="_dsOpenStyleMenu(event)" class="action-btn btn-secondary" title="Default styles — paragraph & caption" style="width:32px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
             </div>
             <div style="flex:1; display:flex; min-height:0;">
                 <div id="dsRail" style="width:200px; flex-shrink:0; border-right:1px solid var(--border-color); overflow-y:auto; padding:12px;"><!-- thumbnails --></div>
