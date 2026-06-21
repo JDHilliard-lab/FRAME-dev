@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -365,6 +365,7 @@ function _mbMigratePages() {
     Object.keys(ec.approvedPages).forEach(k => { if (ec.approvedPages[k] && !ec.approvalStatus[k]) ec.approvalStatus[k] = 'approved'; });
     if (!ec.specCodeStyle || typeof ec.specCodeStyle !== 'object') ec.specCodeStyle = { font: 'display', size: 16, color: '#141414' };
     if (!ec.paragraphStyle || typeof ec.paragraphStyle !== 'object') ec.paragraphStyle = { font: 'sans', size: 16, color: '#222222' };
+    if (!ec.titleStyle || typeof ec.titleStyle !== 'object') ec.titleStyle = { font: 'display', size: 22, color: '#141414' };
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -7494,6 +7495,7 @@ function _deckMockHTML(desc, w, h) {
 }
 let _dsActiveTab = 'project';
 function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; return { font: s.font || 'display', size: s.size || 16, color: s.color || '#141414' }; }
+function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || 22, color: s.color || '#141414' }; }
 function _approvalOf(ovKey) { return (ovKey && editorialContent.approvalStatus && editorialContent.approvalStatus[ovKey]) || ''; }
 function _pageApproved(ovKey) { return _approvalOf(ovKey) === 'approved'; }
 function _dsCurrentSpecKey() { const d = _dsPages[_dsIndex]; return (d && d.kind === 'spec') ? (d._ovKey || (d.row && d.row.id) || '') : ''; }
@@ -7706,12 +7708,19 @@ function _dsRenderAnnots(page, desc, w, hh) {
 function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToolbar(); _dsRenderCenter(); }
 function _dsSyncToolbar() {
     const a = _dsCurrentAnnot();
-    const f = document.getElementById('dsAnnFont'); if (f) f.value = a ? (a.font || 'sans') : 'sans';
-    const col = document.getElementById('dsAnnColor'); if (col) col.value = a ? (a.color || '#222222') : '#222222';
-    const sz = document.getElementById('dsAnnSizeLbl'); if (sz) sz.textContent = a ? Math.round((a.size || 0.03) * 540) : '—';
-    const al = document.getElementById('dsAnnAlign'); if (al) al.value = a ? (a.align || 'left') : 'left';
-    const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (a && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (a && a.bold) ? '#fff' : 'var(--text-main)'; }
-    const it = document.getElementById('dsAnnItalic'); if (it) { it.style.background = (a && a.italic) ? '#6a6aff' : 'var(--bg-input)'; it.style.color = (a && a.italic) ? '#fff' : 'var(--text-main)'; }
+    const selected = !!a;
+    const isText = !!(a && a.type !== 'image');
+    const grp = document.getElementById('dsSelGroup');
+    if (grp) { grp.style.opacity = selected ? '1' : '0.4'; grp.style.pointerEvents = selected ? 'auto' : 'none'; }
+    const hint = document.getElementById('dsSelHint');
+    if (hint) hint.textContent = selected ? (isText ? 'Editing text box \u2014 double-click to type' : 'Image selected \u2014 drag to move, corner to resize') : 'Select a box to style it \u00b7 double-click to edit \u00b7 drag to move';
+    const setEnabled = (id, on) => { const e = document.getElementById(id); if (e) { e.style.opacity = on ? '1' : '0.35'; e.style.pointerEvents = on ? 'auto' : 'none'; } };
+    setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText); setEnabled('dsAnnColor', isText);
+    const col = document.getElementById('dsAnnColor'); if (col) col.value = isText ? (a.color || '#222222') : '#222222';
+    const sz = document.getElementById('dsAnnSizeLbl'); if (sz) sz.textContent = isText ? Math.round((a.size || 0.03) * 540) : '\u2014';
+    const alb = document.getElementById('dsAnnAlignBtn'); if (alb) alb.textContent = isText ? ((a.align || 'left')[0].toUpperCase()) : 'L';
+    const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (isText && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (isText && a.bold) ? '#fff' : 'var(--text-main)'; }
+    const it = document.getElementById('dsAnnItalic'); if (it) { it.style.background = (isText && a.italic) ? '#6a6aff' : 'var(--bg-input)'; it.style.color = (isText && a.italic) ? '#fff' : 'var(--text-main)'; }
 }
 function _dsAddImageBox() {
     if (_dsActiveTab !== 'pages') return;
@@ -7766,48 +7775,87 @@ function _dsAddTextBox() {
 function _paragraphStyle() { const s = editorialContent.paragraphStyle || {}; return { font: s.font || 'sans', size: s.size || 16, color: s.color || '#222222' }; }
 // Gear popup: deck-wide default styles for paragraph (new text boxes) and the
 // image-code caption under mockups. Anchored under the gear button.
-function _dsOpenStyleMenu(ev) {
-    if (ev && ev.stopPropagation) ev.stopPropagation();
-    let menu = document.getElementById('dsStyleMenu');
-    if (menu) { menu.remove(); return; }   // toggle off
-    const fonts = [['display', 'Druk'], ['serif', 'Messina'], ['sans', 'Sans']];
-    menu = document.createElement('div');
-    menu.id = 'dsStyleMenu';
-    menu.style.cssText = 'position:fixed; z-index:10010; width:236px; background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.45); padding:12px;';
-    const section = (title, getStyle, apply) => {
-        const st = getStyle();
-        const wrap = document.createElement('div'); wrap.style.cssText = 'margin-bottom:12px;';
-        const h = document.createElement('div'); h.textContent = title; h.style.cssText = 'font-size:0.66rem; font-weight:700; color:var(--text-main); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.3px;'; wrap.appendChild(h);
-        const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px; align-items:center;';
-        const fsel = document.createElement('select');
-        fsel.style.cssText = 'flex:1; min-width:70px; font-size:0.68rem; padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
-        fonts.forEach(o => { const op = document.createElement('option'); op.value = o[0]; op.textContent = o[1]; if (st.font === o[0]) op.selected = true; fsel.appendChild(op); });
-        fsel.onchange = () => apply('font', fsel.value);
-        const sin = document.createElement('input'); sin.type = 'number'; sin.min = '6'; sin.max = '48'; sin.value = st.size;
-        sin.style.cssText = 'width:50px; font-size:0.68rem; padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
-        sin.onchange = () => { let v = parseFloat(sin.value); if (isNaN(v)) v = 16; v = Math.max(6, Math.min(48, v)); apply('size', v); };
-        const cin = document.createElement('input'); cin.type = 'color'; cin.value = st.color || '#222222';
-        cin.style.cssText = 'width:34px; height:30px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
-        cin.oninput = () => apply('color', cin.value);
-        row.appendChild(fsel); row.appendChild(sin); row.appendChild(cin); wrap.appendChild(row);
-        return wrap;
-    };
-    menu.appendChild(section('Paragraph', _paragraphStyle, (k, v) => { editorialContent.paragraphStyle = Object.assign({}, _paragraphStyle(), { [k]: v }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }));
-    menu.appendChild(section('Caption / image code', _specCodeStyle, (k, v) => { editorialContent.specCodeStyle = Object.assign({}, _specCodeStyle(), { [k]: v }); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); _dsRenderCenter(); }));
-    const note = document.createElement('p'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.45;';
-    note.textContent = 'Paragraph styles new text boxes. Caption styles the code under every mockup.';
-    menu.appendChild(note);
+// Shared popup builder for the toolbar's type/settings menus. Anchors under the
+// given button, toggles off if already open, closes on outside click.
+function _dsPopup(id, anchorId, build) {
+    const existing = document.getElementById(id);
+    if (existing) { existing.remove(); return; }
+    ['dsTypeMenu', 'dsSettingsMenu'].forEach(x => { const e = document.getElementById(x); if (e) e.remove(); });
+    const menu = document.createElement('div');
+    menu.id = id;
+    menu.style.cssText = 'position:fixed; z-index:10010; width:248px; background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.45); padding:12px;';
+    build(menu);
     document.body.appendChild(menu);
-    const gear = document.getElementById('dsStyleGear');
-    const r = gear ? gear.getBoundingClientRect() : { right: window.innerWidth - 20, bottom: 80 };
+    const a = document.getElementById(anchorId);
+    const r = a ? a.getBoundingClientRect() : { left: 20, bottom: 80 };
     menu.style.top = (r.bottom + 6) + 'px';
-    let left = r.right - 236; if (left < 8) left = 8;
-    menu.style.left = left + 'px';
+    let left = r.left; if (left + 248 > window.innerWidth - 8) left = window.innerWidth - 256;
+    menu.style.left = Math.max(8, left) + 'px';
     setTimeout(() => {
-        const off = (e) => { if (!menu.contains(e.target) && !(gear && gear.contains(e.target))) { menu.remove(); document.removeEventListener('mousedown', off); } };
+        const off = (e) => { if (!menu.contains(e.target) && !(a && a.contains(e.target))) { menu.remove(); document.removeEventListener('mousedown', off); } };
         document.addEventListener('mousedown', off);
     }, 0);
 }
+function _dsTypeSection(title, getStyle, apply) {
+    const fonts = [['display', 'Druk'], ['serif', 'Messina'], ['sans', 'Sans']];
+    const st = getStyle();
+    const wrap = document.createElement('div'); wrap.style.cssText = 'margin-bottom:12px;';
+    const h = document.createElement('div'); h.textContent = title; h.style.cssText = 'font-size:0.64rem; font-weight:700; color:var(--text-main); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.3px;'; wrap.appendChild(h);
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px; align-items:center;';
+    const fsel = document.createElement('select');
+    fsel.style.cssText = 'flex:1; min-width:70px; font-size:0.68rem; padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    fonts.forEach(o => { const op = document.createElement('option'); op.value = o[0]; op.textContent = o[1]; if (st.font === o[0]) op.selected = true; fsel.appendChild(op); });
+    fsel.onchange = () => apply('font', fsel.value);
+    const sin = document.createElement('input'); sin.type = 'number'; sin.min = '6'; sin.max = '60'; sin.value = st.size;
+    sin.style.cssText = 'width:50px; font-size:0.68rem; padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    sin.onchange = () => { let v = parseFloat(sin.value); if (isNaN(v)) v = 16; v = Math.max(6, Math.min(60, v)); apply('size', v); };
+    const cin = document.createElement('input'); cin.type = 'color'; cin.value = st.color || '#222222';
+    cin.style.cssText = 'width:34px; height:30px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+    cin.oninput = () => apply('color', cin.value);
+    row.appendChild(fsel); row.appendChild(sin); row.appendChild(cin); wrap.appendChild(row);
+    return wrap;
+}
+// Type menu (Aa): every text style in the deck in one place.
+function _dsOpenTypeMenu(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    _dsPopup('dsTypeMenu', 'dsTypeBtn', (menu) => {
+        const save = (extra) => { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (extra) extra(); _dsRenderRail(); _dsRenderCenter(); };
+        menu.appendChild(_dsTypeSection('Titles', _titleStyle, (k, v) => { editorialContent.titleStyle = Object.assign({}, _titleStyle(), { [k]: v }); save(); }));
+        menu.appendChild(_dsTypeSection('Paragraphs (new text)', _paragraphStyle, (k, v) => { editorialContent.paragraphStyle = Object.assign({}, _paragraphStyle(), { [k]: v }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }));
+        menu.appendChild(_dsTypeSection('Captions / image code', _specCodeStyle, (k, v) => { editorialContent.specCodeStyle = Object.assign({}, _specCodeStyle(), { [k]: v }); save(); }));
+        const note = document.createElement('p'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.45;';
+        note.textContent = 'Sets the deck-wide defaults. Paragraph style applies to new text boxes you add.';
+        menu.appendChild(note);
+    });
+}
+// Settings menu (gear): handy page-level actions.
+let _dsShowGuides = false;
+function _dsOpenSettingsMenu(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    _dsPopup('dsSettingsMenu', 'dsStyleGear', (menu) => {
+        const item = (label, sub, onClick) => {
+            const b = document.createElement('button');
+            b.style.cssText = 'display:block; width:100%; text-align:left; background:transparent; border:none; border-radius:5px; padding:8px 8px; cursor:pointer; color:var(--text-main);';
+            b.onmouseenter = () => b.style.background = 'var(--bg-input)'; b.onmouseleave = () => b.style.background = 'transparent';
+            b.innerHTML = '<div style="font-size:0.74rem; font-weight:600;">' + label + '</div>' + (sub ? '<div style="font-size:0.6rem; color:var(--text-muted); margin-top:1px;">' + sub + '</div>' : '');
+            b.onclick = () => { onClick(); };
+            return b;
+        };
+        menu.appendChild(item(_dsShowGuides ? 'Hide alignment guides \u2713' : 'Show alignment guides', 'Page margins + center lines (preview only)', () => { _dsShowGuides = !_dsShowGuides; _dsOpenSettingsMenu(); _dsRenderCenter(); }));
+        const desc = _dsPages[_dsIndex]; const key = desc ? _deckPageKey(desc) : '';
+        const annCount = (key && editorialContent.annotations && editorialContent.annotations[key]) ? editorialContent.annotations[key].length : 0;
+        menu.appendChild(item('Clear text & images on this page' + (annCount ? ' (' + annCount + ')' : ''), 'Removes overlays you added to this page', () => {
+            if (!key || !annCount) { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); return; }
+            if (editorialContent.annotations) editorialContent.annotations[key] = [];
+            _dsSelKey = null; _dsSelIdx = -1;
+            if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            const m = document.getElementById('dsSettingsMenu'); if (m) m.remove();
+            _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail();
+        }));
+        menu.appendChild(item('Fit page to window', 'Re-center and fit the preview', () => { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); _dsRenderCenter(); }));
+    });
+}
+function _dsAnnCycleAlign() { const a = _dsCurrentAnnot(); if (!a || a.type === 'image') return; const order = ['left', 'center', 'right']; const i = order.indexOf(a.align || 'left'); a.align = order[(i + 1) % 3]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
@@ -7855,6 +7903,15 @@ async function _dsBakeSpecImages(page, desc, token) {
         } catch (e) {}
     }
 }
+function _dsAddGuides(page, w, hh) {
+    if (!_dsShowGuides) return;
+    const mx = Math.round(w * 40 / 936), my = Math.round(hh * 40 / 540);
+    const g = document.createElement('div');
+    g.style.cssText = 'position:absolute; left:' + mx + 'px; top:' + my + 'px; right:' + mx + 'px; bottom:' + my + 'px; border:1px dashed rgba(106,106,255,0.5); pointer-events:none;';
+    const vx = document.createElement('div'); vx.style.cssText = 'position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(106,106,255,0.25); pointer-events:none;';
+    const hz = document.createElement('div'); hz.style.cssText = 'position:absolute; top:50%; left:0; right:0; height:1px; background:rgba(106,106,255,0.25); pointer-events:none;';
+    page.appendChild(g); page.appendChild(vx); page.appendChild(hz);
+}
 function _dsAddStamp(page, w, hh, desc) {
     if (!desc || desc.kind !== 'spec') return;
     const st = _approvalOf(desc._ovKey || (desc.row && desc.row.id) || '');
@@ -7883,6 +7940,7 @@ function _dsRenderCenter() {
     try { page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); }
     catch (e) { page.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
     _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
+    _dsAddGuides(page, Math.round(w), Math.round(hh));
     _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
     if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); }
@@ -9558,9 +9616,10 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     if (tpl.title) {
         const tf = tpl.title.field || 'application';
         const titleText = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (specs.application || r.product || r.id || 'SPECIFICATION')).toString().toUpperCase();
-        doc.setFont(_font('display'), 'bold');
-        doc.setFontSize(tpl.title.size || 18);
-        doc.setTextColor(20, 20, 20);
+        const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
+        doc.setFont(_font(ts.font), ts.font === 'serif' ? 'normal' : 'bold');
+        doc.setFontSize(ts.size);
+        doc.setTextColor(trgb.r, trgb.g, trgb.b);
         doc.text(titleText, px(tpl.title.x), py(tpl.title.y), tpl.title.align ? { align: tpl.title.align } : undefined);
     }
 
@@ -9905,10 +9964,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             await _drawSpecPageTemplate(doc, logos, pageNum, meta, r, _specTpl, { PW: PW, PH: PH, M: M });
         } else {
 
-        // — Item code (top-left, large bold) —
-        doc.setFont(_font('display'), 'bold');
-        doc.setFontSize(26);
-        doc.setTextColor(20, 20, 20);
+        // — Item code (top-left, large) — uses the deck title style —
+        const _ts = _titleStyle(); const _trgb = _annHexToRgb(_ts.color);
+        doc.setFont(_font(_ts.font), _ts.font === 'serif' ? 'normal' : 'bold');
+        doc.setFontSize(Math.max(_ts.size, 20));
+        doc.setTextColor(_trgb.r, _trgb.g, _trgb.b);
         doc.text((r.id || '').toString(), M, M + 14);
 
         // — Framed artwork render (reuse the per-frame canvas, artwork baked in) —
