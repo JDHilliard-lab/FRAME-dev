@@ -7687,6 +7687,58 @@ function _dsRenderAnnots(page, desc, w, hh) {
             page.appendChild(box);
             return;
         }
+        if (a.type === 'arrow' || a.type === 'elbow') {
+            const NS = 'http://www.w3.org/2000/svg';
+            const mk = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+            const svg = document.createElementNS(NS, 'svg');
+            svg.setAttribute('width', w); svg.setAttribute('height', hh);
+            svg.style.cssText = 'position:absolute; left:0; top:0; pointer-events:none; overflow:visible;';
+            const poly = mk('polyline', { fill: 'none', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' });
+            const headP = mk('polygon', {});
+            const hit = mk('polyline', { fill: 'none', stroke: 'transparent' });
+            hit.style.cssText = 'pointer-events:stroke; cursor:move;';
+            const hEnds = [mk('circle', { r: 6, fill: '#6a6aff', stroke: '#fff', 'stroke-width': 2 }), mk('circle', { r: 6, fill: '#6a6aff', stroke: '#fff', 'stroke-width': 2 })];
+            const redraw = () => {
+                const X1 = (a.x1 || 0) * w, Y1 = (a.y1 || 0) * hh, X2 = (a.x2 || 0) * w, Y2 = (a.y2 || 0) * hh;
+                const sw = Math.max(1, (a.weight || 2) * (w / 936)), col = a.color || '#c0392b';
+                const pts = (a.type === 'elbow') ? [[X1, Y1], [X2, Y1], [X2, Y2]] : [[X1, Y1], [X2, Y2]];
+                const ptStr = pts.map(p => p.join(',')).join(' ');
+                const end = pts[pts.length - 1], prev = pts[pts.length - 2];
+                const dx = end[0] - prev[0], dy = end[1] - prev[1], len = Math.max(1, Math.hypot(dx, dy));
+                const ux = dx / len, uy = dy / len, hsz = Math.max(6, sw * 3.4);
+                const bx = end[0] - ux * hsz, by = end[1] - uy * hsz, nx = -uy, ny = ux;
+                poly.setAttribute('points', ptStr); poly.setAttribute('stroke', col); poly.setAttribute('stroke-width', sw);
+                headP.setAttribute('points', [end[0] + ',' + end[1], (bx + nx * hsz * 0.55) + ',' + (by + ny * hsz * 0.55), (bx - nx * hsz * 0.55) + ',' + (by - ny * hsz * 0.55)].join(' ')); headP.setAttribute('fill', col);
+                hit.setAttribute('points', ptStr); hit.setAttribute('stroke-width', Math.max(14, sw + 12));
+                hEnds[0].setAttribute('cx', X1); hEnds[0].setAttribute('cy', Y1);
+                hEnds[1].setAttribute('cx', X2); hEnds[1].setAttribute('cy', Y2);
+            };
+            redraw();
+            svg.appendChild(poly); svg.appendChild(headP); svg.appendChild(hit);
+            hit.onmousedown = (e) => {
+                e.preventDefault();
+                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar();
+                const sx = e.clientX, sy = e.clientY, ox1 = a.x1, oy1 = a.y1, ox2 = a.x2, oy2 = a.y2;
+                const mv = (ev) => { const ddx = (ev.clientX - sx) / w, ddy = (ev.clientY - sy) / hh; a.x1 = ox1 + ddx; a.y1 = oy1 + ddy; a.x2 = ox2 + ddx; a.y2 = oy2 + ddy; redraw(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); if (!sel) _dsRenderCenter(); };
+                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            };
+            if (sel) {
+                [['x1', 'y1', 0], ['x2', 'y2', 1]].forEach(ep => {
+                    const c = hEnds[ep[2]];
+                    c.style.cssText = 'pointer-events:all; cursor:crosshair;';
+                    c.onmousedown = (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        const mv = (ev) => { const rect = svg.getBoundingClientRect(); a[ep[0]] = Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)); a[ep[1]] = Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh)); redraw(); };
+                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                    };
+                    svg.appendChild(c);
+                });
+            }
+            page.appendChild(svg);
+            return;
+        }
         const el = document.createElement('div');
         el.textContent = a.text || '';
         el.spellcheck = false;
@@ -7702,6 +7754,20 @@ function _dsRenderAnnots(page, desc, w, hh) {
         };
         el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; el.focus(); };
         el.onblur = () => { a.text = el.textContent; el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+        if (sel) {
+            const th = document.createElement('div');
+            th.contentEditable = 'false';
+            th.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
+            th.onmousedown = (e) => {
+                e.preventDefault(); e.stopPropagation();
+                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar();
+                const sx = e.clientX, ow = (a.w || 0.3), os = (a.size || 0.03);
+                const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); const ratio = nw / ow; a.w = nw; a.size = Math.max(0.012, Math.min(0.22, os * ratio)); el.style.width = (nw * w) + 'px'; el.style.fontSize = Math.max(7, a.size * hh) + 'px'; };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderRail(); };
+                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            };
+            el.appendChild(th);
+        }
         page.appendChild(el);
     });
 }
@@ -7709,14 +7775,19 @@ function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToo
 function _dsSyncToolbar() {
     const a = _dsCurrentAnnot();
     const selected = !!a;
-    const isText = !!(a && a.type !== 'image');
+    const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow');
+    const isArrow = !!(a && (a.type === 'arrow' || a.type === 'elbow'));
     const grp = document.getElementById('dsSelGroup');
     if (grp) { grp.style.opacity = selected ? '1' : '0.4'; grp.style.pointerEvents = selected ? 'auto' : 'none'; }
     const hint = document.getElementById('dsSelHint');
-    if (hint) hint.textContent = selected ? (isText ? 'Editing text box \u2014 double-click to type' : 'Image selected \u2014 drag to move, corner to resize') : 'Select a box to style it \u00b7 double-click to edit \u00b7 drag to move';
+    if (hint) hint.textContent = !selected ? 'Select a box to style it \u00b7 double-click to edit \u00b7 drag to move'
+        : isText ? 'Text box \u2014 double-click to type, drag corner to scale'
+        : isArrow ? 'Arrow \u2014 drag it to move, drag an end to re-aim'
+        : 'Image \u2014 drag to move, corner to resize';
     const setEnabled = (id, on) => { const e = document.getElementById(id); if (e) { e.style.opacity = on ? '1' : '0.35'; e.style.pointerEvents = on ? 'auto' : 'none'; } };
-    setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText); setEnabled('dsAnnColor', isText);
-    const col = document.getElementById('dsAnnColor'); if (col) col.value = isText ? (a.color || '#222222') : '#222222';
+    setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText);
+    setEnabled('dsAnnColor', isText || isArrow);
+    const col = document.getElementById('dsAnnColor'); if (col) col.value = (isText || isArrow) ? (a.color || (isArrow ? '#c0392b' : '#222222')) : '#222222';
     const sz = document.getElementById('dsAnnSizeLbl'); if (sz) sz.textContent = isText ? Math.round((a.size || 0.03) * 540) : '\u2014';
     const alb = document.getElementById('dsAnnAlignBtn'); if (alb) alb.textContent = isText ? ((a.align || 'left')[0].toUpperCase()) : 'L';
     const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (isText && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (isText && a.bold) ? '#fff' : 'var(--text-main)'; }
@@ -7760,6 +7831,17 @@ function _dsHandleImageFile(file) {
     };
     reader.readAsDataURL(file);
 }
+function _dsAddArrow(kind) {
+    if (_dsActiveTab !== 'pages') return;
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
+    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support arrows.'); return; }
+    const list = _dsAnnList(key);
+    list.push({ type: (kind === 'elbow' ? 'elbow' : 'arrow'), x1: 0.32, y1: 0.5, x2: 0.6, y2: 0.4, color: '#c0392b', weight: 2 });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1);
+    _dsRenderRail();
+}
 function _dsAddTextBox() {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
@@ -7783,9 +7865,10 @@ function _dsPopup(id, anchorId, build) {
     ['dsTypeMenu', 'dsSettingsMenu'].forEach(x => { const e = document.getElementById(x); if (e) e.remove(); });
     const menu = document.createElement('div');
     menu.id = id;
-    menu.style.cssText = 'position:fixed; z-index:10010; width:248px; background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.45); padding:12px;';
+    menu.style.cssText = 'position:fixed; z-index:100020; width:248px; background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.45); padding:12px;';
     build(menu);
-    document.body.appendChild(menu);
+    const host = document.getElementById('deckStudioModal') || document.body;
+    host.appendChild(menu);
     const a = document.getElementById(anchorId);
     const r = a ? a.getBoundingClientRect() : { left: 20, bottom: 80 };
     menu.style.top = (r.bottom + 6) + 'px';
@@ -8124,11 +8207,15 @@ function _dsRenderTools() {
         apprRow.appendChild(stBtn('Pending', 'pending', '#c0392b'));
         apprRow.appendChild(stBtn('Approved', 'approved', '#1a7f37'));
         apprWrap.appendChild(apprRow);
-        t.appendChild(apprWrap);
+        // Sticky top: approval + layout controls stay locked while templates scroll.
+        const _toolsBg = getComputedStyle(t).backgroundColor;
+        const head = document.createElement('div');
+        head.style.cssText = 'position:sticky; top:0; z-index:3; background:' + ((_toolsBg && _toolsBg !== 'rgba(0, 0, 0, 0)') ? _toolsBg : 'var(--bg-panel,#1d1d20)') + '; padding-bottom:10px; margin-bottom:8px; border-bottom:1px solid var(--border-color);';
+        head.appendChild(apprWrap);
 
         const lbl = document.createElement('div');
         lbl.textContent = 'Spec layout'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
-        t.appendChild(lbl);
+        head.appendChild(lbl);
 
         // Deck mode: one page per piece, or group set pieces (A/B/C) onto one page.
         const modeRow = document.createElement('div');
@@ -8136,19 +8223,30 @@ function _dsRenderTools() {
         const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
         modeRow.appendChild(mkMode('Page per piece', !isGroupGlobal, () => { if (isGroupGlobal) { editorialContent.specTemplate = 'classic'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } }));
         modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => { if (!isGroupGlobal) { editorialContent.specTemplate = 'setRight'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } }));
-        t.appendChild(modeRow);
+        head.appendChild(modeRow);
 
         if (isGroupGlobal) {
             const note = document.createElement('p');
-            note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 10px; line-height:1.5;';
+            note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0; line-height:1.5;';
             note.textContent = 'Set pieces (A/B/C…) are grouped onto one page across the whole deck. Switch to “Page per piece” to give individual pages their own layout.';
-            t.appendChild(note);
+            head.appendChild(note);
+            t.appendChild(head);
         } else {
+            // Bulk action lives at the top, in the locked section.
+            const btnRow = document.createElement('div');
+            btnRow.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
+            const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; font-weight:600; padding:7px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
+            btnRow.appendChild(mkBtn('Apply to all pages', true, () => { editorialContent.specTemplate = resolved; editorialContent.specTemplateOverrides = {}; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', false, () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            head.appendChild(btnRow);
             const sub = document.createElement('p');
-            sub.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 10px; line-height:1.5;';
-            sub.innerHTML = 'Choose a layout for <b>this page</b>' + (hasOverride ? ' — overriding the deck default.' : ' — currently following the deck default.');
-            t.appendChild(sub);
+            sub.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:0; line-height:1.4;';
+            sub.innerHTML = hasOverride ? 'This page overrides the deck default. Pick a template below to change it.' : 'Pick a template below to change just this page, or apply to all.';
+            head.appendChild(sub);
+            t.appendChild(head);
 
+            // Scrolling section: the template choices.
+            const cardsWrap = document.createElement('div');
             Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group).forEach(key => {
                 const onCur = (key === resolved);
                 const cell = document.createElement('div');
@@ -8160,19 +8258,9 @@ function _dsRenderTools() {
                 const nm = document.createElement('div');
                 const tag = onCur ? (hasOverride ? '  ✓ this page' : '  ✓ default') : (key === globalTpl ? '  · default' : '');
                 nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.64rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
-                cell.appendChild(thumb); cell.appendChild(nm); t.appendChild(cell);
+                cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
             });
-
-            const btnRow = document.createElement('div');
-            btnRow.style.cssText = 'display:flex; gap:6px; margin-top:2px;';
-            const mkBtn = (label, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid var(--border-color); background:transparent; color:var(--text-main);'; b.onclick = on; return b; };
-            btnRow.appendChild(mkBtn('Apply to all pages', () => { editorialContent.specTemplate = resolved; editorialContent.specTemplateOverrides = {}; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
-            if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
-            t.appendChild(btnRow);
-            const bulkNote = document.createElement('p');
-            bulkNote.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
-            bulkNote.textContent = '“Apply to all pages” makes every spec page use this layout and clears any per-page overrides.';
-            t.appendChild(bulkNote);
+            t.appendChild(cardsWrap);
         }
 
         // — Notes editor (writes the piece's spec Notes line) —
@@ -9702,6 +9790,21 @@ function _drawAnnotations(doc, key, PW, PH) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
     list.forEach(a => {
+        if (a.type === 'arrow' || a.type === 'elbow') {
+            const X1 = (a.x1 || 0) * PW, Y1 = (a.y1 || 0) * PH, X2 = (a.x2 || 0) * PW, Y2 = (a.y2 || 0) * PH;
+            const rgb = _annHexToRgb(a.color || '#c0392b');
+            const wt = a.weight || 2;
+            doc.setDrawColor(rgb.r, rgb.g, rgb.b); doc.setLineWidth(wt); doc.setLineCap('round'); doc.setLineJoin('round');
+            let px2 = X1, py2 = Y1;
+            if (a.type === 'elbow') { doc.line(X1, Y1, X2, Y1); doc.line(X2, Y1, X2, Y2); px2 = X2; py2 = Y1; }
+            else { doc.line(X1, Y1, X2, Y2); px2 = X1; py2 = Y1; }
+            const dx = X2 - px2, dy = Y2 - py2, len = Math.max(0.5, Math.hypot(dx, dy));
+            const ux = dx / len, uy = dy / len, hsz = Math.max(6, wt * 3.4);
+            const bx = X2 - ux * hsz, by = Y2 - uy * hsz, nx = -uy, ny = ux;
+            doc.setFillColor(rgb.r, rgb.g, rgb.b);
+            try { doc.triangle(X2, Y2, bx + nx * hsz * 0.55, by + ny * hsz * 0.55, bx - nx * hsz * 0.55, by - ny * hsz * 0.55, 'F'); } catch (e) {}
+            return;
+        }
         if (a.type === 'image') {
             if (!a.dataUrl) return;
             const x = (a.x || 0) * PW, y = (a.y || 0) * PH, pw = (a.w || 0.25) * PW, ph = (a.w || 0.25) * PW * (a.aspect || 0.75);
