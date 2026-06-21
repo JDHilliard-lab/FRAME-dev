@@ -7394,13 +7394,19 @@ function _deckPageList() {
     const specUnit = (u) => { const ok = (isGroupSpec ? u.key : (u.rep.id || '')); return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) }; };
     const units = unitsFor(rows);
     if (inc.floorplanKey) {
+        const lvlOf = (x) => { const n = parseInt(x, 10); return isNaN(n) ? 0 : n; };
         const emit = [];
-        floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => (r.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li); if (used) emit.push(li); });
+        floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => lvlOf(r.level) === li) || (dashProjectData || []).some(it => lvlOf(it.level) === li); if (used) emit.push(li); });
         if (!emit.length) emit.push(0);
+        const covered = {};
         emit.forEach(li => {
+            covered[li] = true;
             pages.push({ kind: 'floorplan', type: 'floorplan', title: (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1)), level: li });
-            if (inc.spec) units.filter(u => (u.rep.level || 0) === li).forEach(u => pages.push(specUnit(u)));
+            if (inc.spec) units.filter(u => lvlOf(u.rep.level) === li).forEach(u => pages.push(specUnit(u)));
         });
+        // Fallback: any piece whose level wasn't emitted still gets a spec page,
+        // so the studio list never silently drops pieces (matches the PDF).
+        if (inc.spec) units.forEach(u => { if (!covered[lvlOf(u.rep.level)]) pages.push(specUnit(u)); });
     } else if (inc.spec) {
         units.forEach(u => pages.push(specUnit(u)));
     }
@@ -7537,14 +7543,36 @@ let _dsBuildError = '';
 function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
+let _dsRailFilter = '';
 function _dsRenderRail() {
     const rail = document.getElementById('dsRail'); if (!rail) return;
     rail.innerHTML = '';
     if (_dsBuildError) { rail.innerHTML = '<p style="color:#c0392b; font-size:0.72rem; line-height:1.5;">Couldn\u2019t build the page list:<br><b>' + _esc(_dsBuildError) + '</b><br><br>Tell Claude this message.</p>'; return; }
     if (!_dsPages.length) { rail.innerHTML = '<p style="color:var(--text-muted); font-size:0.74rem;">No pages selected. Turn sections on in the Project tab.</p>'; return; }
+
+    // Sticky filter bar — jump to any page by item code or section name. Lives
+    // inside the rail but pinned, and persists its value across re-renders via
+    // _dsRailFilter (typing only re-filters, never rebuilds, so focus is kept).
+    const railBg = getComputedStyle(rail).backgroundColor;
+    const bar = document.createElement('div');
+    bar.style.cssText = 'position:sticky; top:0; z-index:5; padding:0 0 8px; margin-bottom:2px; background:' + ((railBg && railBg !== 'rgba(0, 0, 0, 0)') ? railBg : 'var(--bg-input)') + ';';
+    const inp = document.createElement('input');
+    inp.type = 'text'; inp.placeholder = 'Filter pages by code or name\u2026'; inp.value = _dsRailFilter;
+    inp.style.cssText = 'width:100%; box-sizing:border-box; font-size:0.72rem; padding:5px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    inp.oninput = () => { _dsRailFilter = inp.value; _dsApplyRailFilter(); };
+    bar.appendChild(inp);
+    const count = document.createElement('div');
+    count.id = 'dsRailCount';
+    count.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin-top:4px;';
+    bar.appendChild(count);
+    rail.appendChild(bar);
+
     const tw = 168, th = Math.round(tw * 540 / 936);
     _dsPages.forEach((desc, i) => {
+        const matchText = ((i + 1) + ' ' + (desc.title || '') + ' ' + (desc.type || '') + ' ' + ((desc.members || []).map(m => (m && m.id) || '').join(' '))).toLowerCase();
         const cell = document.createElement('div');
+        cell.setAttribute('data-railcell', '1');
+        cell.setAttribute('data-railtext', matchText);
         cell.style.cssText = 'margin-bottom:10px; cursor:pointer;';
         cell.onclick = () => _dsSelectPage(i);
         const thumb = document.createElement('div');
@@ -7556,6 +7584,11 @@ function _dsRenderRail() {
         lab.textContent = (i + 1) + '. ' + (desc.title || desc.type);
         cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
     });
+    const noMatch = document.createElement('p');
+    noMatch.id = 'dsRailNoMatch';
+    noMatch.style.cssText = 'display:none; color:var(--text-muted); font-size:0.7rem; padding:6px 2px;';
+    noMatch.textContent = 'No pages match that filter.';
+    rail.appendChild(noMatch);
     // Diagnostic: pieces exist but no spec page made it into the list — almost
     // always the Spec Pages toggle is off (Project tab).
     const _hasSpec = _dsPages.some(p => p.kind === 'spec');
@@ -7566,6 +7599,20 @@ function _dsRenderRail() {
         hint.innerHTML = 'No spec pages showing. On the <b>Project</b> tab, make sure <b>Spec Pages</b> is ticked.';
         rail.appendChild(hint);
     }
+    _dsApplyRailFilter();
+}
+// Show/hide rail cells against the current filter without rebuilding the rail,
+// so the filter input keeps focus while typing. Updates the count readout.
+function _dsApplyRailFilter() {
+    const rail = document.getElementById('dsRail'); if (!rail) return;
+    const q = (_dsRailFilter || '').trim().toLowerCase();
+    const cells = rail.querySelectorAll('[data-railcell]');
+    let shown = 0;
+    cells.forEach(c => { const ok = !q || (c.getAttribute('data-railtext') || '').indexOf(q) >= 0; c.style.display = ok ? '' : 'none'; if (ok) shown++; });
+    const count = document.getElementById('dsRailCount');
+    if (count) count.textContent = q ? (shown + ' of ' + cells.length + ' pages') : (cells.length + (cells.length === 1 ? ' page' : ' pages'));
+    const nm = document.getElementById('dsRailNoMatch');
+    if (nm) nm.style.display = (q && shown === 0) ? 'block' : 'none';
 }
 let _dsSelKey = null, _dsSelIdx = -1;
 function _deckPageKey(desc) {
@@ -9625,9 +9672,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const _units = _unitsFromRows(_specRows);
     const plan = [];
     if (_doKeys) {
+        const _lvlOf = (x) => { const n = parseInt(x, 10); return isNaN(n) ? 0 : n; };
         const emitLevels = [];
         floorplanLevels.forEach((lv, li) => {
-            const used = (li === 0) || !!lv.imageData || _units.some(u => (u.rep.level || 0) === li) || (dashProjectData || []).some(it => (it.level || 0) === li);
+            const used = (li === 0) || !!lv.imageData || _units.some(u => _lvlOf(u.rep.level) === li) || (dashProjectData || []).some(it => _lvlOf(it.level) === li);
             if (used) emitLevels.push(li);
         });
         if (!emitLevels.length) emitLevels.push(0);
@@ -9635,9 +9683,9 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         emitLevels.forEach(li => {
             covered[li] = true;
             plan.push({ type: 'key', li: li });
-            _units.filter(u => (u.rep.level || 0) === li).forEach(u => plan.push({ type: 'spec', unit: u, li: li }));
+            _units.filter(u => _lvlOf(u.rep.level) === li).forEach(u => plan.push({ type: 'spec', unit: u, li: li }));
         });
-        _units.forEach(u => { const li = u.rep.level || 0; if (!covered[li]) plan.push({ type: 'spec', unit: u, li: li }); });
+        _units.forEach(u => { const li = _lvlOf(u.rep.level); if (!covered[li]) plan.push({ type: 'spec', unit: u, li: li }); });
     } else {
         _units.forEach(u => plan.push({ type: 'spec', unit: u, li: (u.rep.level || 0) }));
     }
