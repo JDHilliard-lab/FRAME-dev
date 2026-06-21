@@ -1159,6 +1159,8 @@
         <div id="dsTabPages" style="flex:1; display:none; min-height:0; flex-direction:column;">
             <div id="dsToolbar" style="flex-shrink:0; border-bottom:1px solid var(--border-color); padding:7px 12px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; background:var(--bg-panel);">
                 <button onclick="_dsAddTextBox()" class="action-btn" style="width:auto; height:28px; padding:0 12px; font-size:0.72rem;">+ Text box</button>
+                <button onclick="_dsAddImageBox()" class="action-btn" style="width:auto; height:28px; padding:0 12px; font-size:0.72rem;">+ Image</button>
+                <input type="file" id="dsAnnImageFile" accept="image/*" style="display:none" onchange="_dsImageFilePicked(this)">
                 <span style="width:1px; height:20px; background:var(--border-color);"></span>
                 <select id="dsAnnFont" onchange="_dsAnnSet('font', this.value)" title="Font" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 6px;">
                     <option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option>
