@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -361,6 +361,9 @@ function _mbMigratePages() {
     if (!ec.specTemplateOverrides || typeof ec.specTemplateOverrides !== 'object') ec.specTemplateOverrides = {};
     if (typeof ec.approvedStamp !== 'boolean') ec.approvedStamp = false;
     if (!ec.approvedPages || typeof ec.approvedPages !== 'object') ec.approvedPages = {};
+    if (!ec.approvalStatus || typeof ec.approvalStatus !== 'object') ec.approvalStatus = {};
+    Object.keys(ec.approvedPages).forEach(k => { if (ec.approvedPages[k] && !ec.approvalStatus[k]) ec.approvalStatus[k] = 'approved'; });
+    if (!ec.specCodeStyle || typeof ec.specCodeStyle !== 'object') ec.specCodeStyle = { font: 'display', size: 16, color: '#141414' };
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -565,7 +568,7 @@ const SPEC_TEMPLATES = {
         title: { x: .06, y: .15, size: 19, align: 'left', field: 'id' },
         spec: { x: .06, y: .2, w: .4 },
         elevation: { x: .06, y: .62, w: .4, h: .26 },
-        artwork: { x: .52, y: .12, w: .44, h: .56, align: 'center' },
+        artwork: { x: .49, y: .1, w: .47, h: .82, align: 'right' },
         code: { align: 'right', size: 13, gap: 14, field: 'imageCode' }
     },
     frameLeft: {
@@ -7480,7 +7483,7 @@ function _deckMockHTML(desc, w, h) {
             });
         } else {
             if (tpl.title) { const tf = tpl.title.field || 'application'; const tt = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })()); inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc(tt.toString().toUpperCase()), fs(0.045), 800, DRUK); }
-            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork', 'data-bake="artwork"'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.2, _esc(ct.toString()), fs(0.04), 700, DRUK); } }
+            if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork', 'data-bake="artwork"'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); const _cs = _specCodeStyle(); const _cfam = _cs.font === 'serif' ? "'Messina',Georgia,serif" : _cs.font === 'sans' ? 'Arial,Helvetica,sans-serif' : DRUK; inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.24, '<span style="color:' + _cs.color + '">' + _esc(ct.toString()) + '</span>', fs(_cs.size / 540), 700, _cfam); } }
             if (tpl.spec) inner += txt(tpl.spec.x, tpl.spec.y - 0.02, tpl.spec.w, lines.slice(0, 12).map(_esc).join('<br>'), fs(0.026), 400, SANS);
             if (tpl.elevation) inner += box(tpl.elevation.x, tpl.elevation.y, tpl.elevation.w, tpl.elevation.h, 'elevation', 'data-bake="elevation"');
         }
@@ -7489,30 +7492,37 @@ function _deckMockHTML(desc, w, h) {
     return wrap('<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:' + fs(0.05) + 'px;">' + _esc(desc.title) + '</div>');
 }
 let _dsActiveTab = 'project';
-function _pageApproved(ovKey) { return !!(ovKey && editorialContent.approvedPages && editorialContent.approvedPages[ovKey]); }
+function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; return { font: s.font || 'display', size: s.size || 16, color: s.color || '#141414' }; }
+function _approvalOf(ovKey) { return (ovKey && editorialContent.approvalStatus && editorialContent.approvalStatus[ovKey]) || ''; }
+function _pageApproved(ovKey) { return _approvalOf(ovKey) === 'approved'; }
 function _dsCurrentSpecKey() { const d = _dsPages[_dsIndex]; return (d && d.kind === 'spec') ? (d._ovKey || (d.row && d.row.id) || '') : ''; }
-function _dsSyncApprovedBtn() {
-    const b = document.getElementById('dsApprovedBtn'); if (!b) return;
-    const onSpec = (_dsActiveTab === 'pages') && !!_dsCurrentSpecKey();
-    const on = onSpec && _pageApproved(_dsCurrentSpecKey());
-    b.disabled = !onSpec;
-    b.style.opacity = onSpec ? '1' : '0.4';
-    b.style.cursor = onSpec ? 'pointer' : 'not-allowed';
-    b.title = onSpec ? 'Mark this spec page approved' : 'Approval applies to spec pages only — select a spec page';
-    b.style.background = on ? '#c82626' : 'var(--bg-input)';
-    b.style.color = on ? '#fff' : 'var(--text-main)';
-    b.style.borderColor = on ? '#c82626' : 'var(--border-color)';
-    b.textContent = on ? 'APPROVED \u2713' : 'APPROVED';
-}
-function _dsToggleApproved() {
-    const k = _dsCurrentSpecKey();
-    if (!k) { showInfoModal('Spec pages only', 'The APPROVED stamp applies to individual spec pages. Select a spec page first, then mark it approved.'); return; }
-    const map = editorialContent.approvedPages || (editorialContent.approvedPages = {});
-    if (map[k]) delete map[k]; else map[k] = true;
+function _dsSetApproval(ovKey, status) {
+    if (!ovKey) return;
+    const m = editorialContent.approvalStatus || (editorialContent.approvalStatus = {});
+    if (status) m[ovKey] = status; else delete m[ovKey];
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSyncApprovedBtn();
     if (_dsActiveTab === 'pages') { _dsRenderRail(); _dsRenderTools(); _dsRenderCenter(); }
+}
+function _dsSyncApprovedBtn() {
+    const b = document.getElementById('dsApprovedBtn'); if (!b) return;
+    const onSpec = (_dsActiveTab === 'pages') && !!_dsCurrentSpecKey();
+    const st = onSpec ? _approvalOf(_dsCurrentSpecKey()) : '';
+    b.disabled = !onSpec;
+    b.style.opacity = onSpec ? '1' : '0.4';
+    b.style.cursor = onSpec ? 'pointer' : 'not-allowed';
+    b.title = onSpec ? 'Click to cycle: none \u2192 pending \u2192 approved' : 'Approval applies to spec pages only \u2014 select a spec page';
+    const map = { '': { bg: 'var(--bg-input)', fg: 'var(--text-main)', bd: 'var(--border-color)', t: 'APPROVAL' }, pending: { bg: '#c0392b', fg: '#fff', bd: '#c0392b', t: 'PENDING \u25CB' }, approved: { bg: '#1a7f37', fg: '#fff', bd: '#1a7f37', t: 'APPROVED \u2713' } };
+    const m = map[st] || map[''];
+    b.style.background = m.bg; b.style.color = m.fg; b.style.borderColor = m.bd; b.textContent = m.t;
+}
+function _dsToggleApproved() {
+    const k = _dsCurrentSpecKey();
+    if (!k) { showInfoModal('Spec pages only', 'Approval status applies to individual spec pages. Select a spec page first.'); return; }
+    const cur = _approvalOf(k);
+    const next = cur === '' ? 'pending' : cur === 'pending' ? 'approved' : '';
+    _dsSetApproval(k, next);
 }
 function openDeckStudio(tab) {
     const m = document.getElementById('deckStudioModal'); if (!m) return;
@@ -7800,10 +7810,13 @@ async function _dsBakeSpecImages(page, desc, token) {
 }
 function _dsAddStamp(page, w, hh, desc) {
     if (!desc || desc.kind !== 'spec') return;
-    if (!_pageApproved(desc._ovKey || (desc.row && desc.row.id) || '')) return;
+    const st = _approvalOf(desc._ovKey || (desc.row && desc.row.id) || '');
+    if (!st) return;
     const s = document.createElement('div');
-    s.textContent = 'APPROVED';
-    s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.05) + 'px; right:' + Math.round(w * 0.04) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.028)) + 'px; letter-spacing:0.04em; color:#c82626; border:1.5px solid #c82626; background:#fff; padding:2px 7px; border-radius:3px;';
+    const approved = st === 'approved';
+    s.textContent = approved ? 'APPROVED' : 'PENDING APPROVAL';
+    const col = approved ? '#1a7f37' : '#c0392b';
+    s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.085) + 'px; right:' + Math.round(w * 0.04) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.026)) + 'px; letter-spacing:0.04em; color:' + col + '; border:1.5px solid ' + col + '; background:#fff; padding:2px 7px; border-radius:3px;';
     page.appendChild(s);
 }
 function _dsRenderCenter() {
@@ -7985,18 +7998,27 @@ function _dsRenderTools() {
         const resolved = desc._specTpl || _specTplResolve(ovKey);
         const cw = 244, chh = Math.round(cw * 540 / 936);
 
-        // Per-page APPROVED toggle (spec pages only).
+        // Per-page approval status (spec pages only): none / pending / approved.
         const apprWrap = document.createElement('div');
-        apprWrap.style.cssText = 'display:flex; align-items:center; gap:8px; margin-bottom:12px; padding:8px; border:1px solid var(--border-color); border-radius:5px;';
-        const isAppr = _pageApproved(ovKey);
-        const apprBtn = document.createElement('button');
-        apprBtn.textContent = isAppr ? 'APPROVED \u2713' : 'Mark approved';
-        apprBtn.style.cssText = 'font-size:0.66rem; font-weight:700; padding:5px 10px; border-radius:4px; cursor:pointer; letter-spacing:0.03em; white-space:nowrap; border:1px solid ' + (isAppr ? '#c82626' : 'var(--border-color)') + '; background:' + (isAppr ? '#c82626' : 'transparent') + '; color:' + (isAppr ? '#fff' : 'var(--text-main)') + ';';
-        apprBtn.onclick = () => { const m = editorialContent.approvedPages || (editorialContent.approvedPages = {}); if (m[ovKey]) delete m[ovKey]; else m[ovKey] = true; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncApprovedBtn(); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); };
-        const apprLab = document.createElement('span');
-        apprLab.textContent = isAppr ? 'Showing the APPROVED stamp on this page.' : 'Stamp just this spec page as approved.';
-        apprLab.style.cssText = 'font-size:0.62rem; color:var(--text-muted); line-height:1.4;';
-        apprWrap.appendChild(apprBtn); apprWrap.appendChild(apprLab);
+        apprWrap.style.cssText = 'margin-bottom:12px; padding:8px; border:1px solid var(--border-color); border-radius:5px;';
+        const apprTitle = document.createElement('div');
+        apprTitle.textContent = 'Approval status'; apprTitle.style.cssText = 'font-size:0.66rem; font-weight:700; color:var(--text-main); margin-bottom:6px;';
+        apprWrap.appendChild(apprTitle);
+        const apprRow = document.createElement('div');
+        apprRow.style.cssText = 'display:flex; gap:6px;';
+        const curSt = _approvalOf(ovKey);
+        const stBtn = (label, val, onColor) => {
+            const active = (curSt === val) || (val === '' && !curSt);
+            const b = document.createElement('button');
+            b.textContent = label;
+            b.style.cssText = 'flex:1; font-size:0.64rem; font-weight:700; padding:6px 4px; border-radius:4px; cursor:pointer; white-space:nowrap; border:1px solid ' + (active ? onColor : 'var(--border-color)') + '; background:' + (active ? onColor : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';';
+            b.onclick = () => _dsSetApproval(ovKey, val);
+            return b;
+        };
+        apprRow.appendChild(stBtn('None', '', '#6a6aff'));
+        apprRow.appendChild(stBtn('Pending', 'pending', '#c0392b'));
+        apprRow.appendChild(stBtn('Approved', 'approved', '#1a7f37'));
+        apprWrap.appendChild(apprRow);
         t.appendChild(apprWrap);
 
         const lbl = document.createElement('div');
@@ -8047,6 +8069,33 @@ function _dsRenderTools() {
             bulkNote.textContent = '“Apply to all pages” makes every spec page use this layout and clears any per-page overrides.';
             t.appendChild(bulkNote);
         }
+
+        // — Image-code style (font / size / colour) — applies to every spec page —
+        const cs = _specCodeStyle();
+        const csWrap = document.createElement('div');
+        csWrap.style.cssText = 'margin:14px 0 4px; padding:8px; border:1px solid var(--border-color); border-radius:5px;';
+        const csTitle = document.createElement('div');
+        csTitle.textContent = 'Image code style'; csTitle.style.cssText = 'font-size:0.66rem; font-weight:700; color:var(--text-main); margin-bottom:6px;';
+        csWrap.appendChild(csTitle);
+        const csRow = document.createElement('div');
+        csRow.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap;';
+        const setCode = (k, v) => { editorialContent.specCodeStyle = Object.assign({}, _specCodeStyle(), { [k]: v }); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); _dsRenderCenter(); };
+        const fontSel = document.createElement('select');
+        fontSel.style.cssText = 'flex:1; min-width:90px; font-size:0.66rem; padding:4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+        [['display', 'Druk (display)'], ['serif', 'Messina (serif)'], ['sans', 'Sans']].forEach(o => { const op = document.createElement('option'); op.value = o[0]; op.textContent = o[1]; if (cs.font === o[0]) op.selected = true; fontSel.appendChild(op); });
+        fontSel.onchange = () => setCode('font', fontSel.value);
+        const sizeIn = document.createElement('input');
+        sizeIn.type = 'number'; sizeIn.min = '6'; sizeIn.max = '40'; sizeIn.value = cs.size;
+        sizeIn.style.cssText = 'width:52px; font-size:0.66rem; padding:4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+        sizeIn.onchange = () => { let v = parseFloat(sizeIn.value); if (isNaN(v)) v = 16; v = Math.max(6, Math.min(40, v)); setCode('size', v); };
+        const colIn = document.createElement('input');
+        colIn.type = 'color'; colIn.value = (cs.color || '#141414');
+        colIn.style.cssText = 'width:34px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+        colIn.oninput = () => setCode('color', colIn.value);
+        csRow.appendChild(fontSel); csRow.appendChild(sizeIn); csRow.appendChild(colIn);
+        csWrap.appendChild(csRow);
+        t.appendChild(csWrap);
+
         // — Notes editor (writes the piece's spec Notes line) —
         const r = desc.row || {};
         const nLbl = document.createElement('div');
@@ -9471,7 +9520,7 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
             doc.text(letter, ax - 2, ay + 10);
             // image code under the artwork (bottom-right)
             const ic = (r.imageCode || r.artworkFile || '') + '';
-            if (ic) { doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(110, 110, 110); doc.text(ic, ax + aw, ay + ah + 9, { align: 'right' }); }
+            if (ic) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(cs.size, 9)); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw, ay + ah + 9, { align: 'right' }); }
         } catch (e) {}
     }
 }
@@ -9514,9 +9563,10 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             const cf = tpl.code.field || 'id';
             const codeText = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')).toString();
             if (codeText) {
-                doc.setFont(_font('display'), 'bold');
-                doc.setFontSize(tpl.code.size || 16);
-                doc.setTextColor(20, 20, 20);
+                const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
+                doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold');
+                doc.setFontSize(cs.size);
+                doc.setTextColor(crgb.r, crgb.g, crgb.b);
                 const cAlign = tpl.code.align || 'left';
                 const codeX = cAlign === 'right' ? (ax + aw) : (cAlign === 'center' ? (ax + aw / 2) : ax);
                 doc.text(codeText, codeX, boxY + ah + (tpl.code.gap || 16), cAlign !== 'left' ? { align: cAlign } : undefined);
@@ -9595,18 +9645,21 @@ function _drawAnnotations(doc, key, PW, PH) {
 }
 // "APPROVED" stamp, top-right corner. Used to mark a deck as client-approved
 // while other placements are still in revision.
-function _drawApprovedStamp(doc, PW, PH) {
-    const txt = 'APPROVED';
+function _drawApprovalStamp(doc, PW, PH, M, status) {
+    const approved = status === 'approved';
+    const txt = approved ? 'APPROVED' : 'PENDING APPROVAL';
+    const rgb = approved ? [26, 127, 55] : [192, 57, 43];
     doc.setFont(_font('display'), 'bold');
-    doc.setFontSize(13);
+    doc.setFontSize(approved ? 13 : 11);
     const tw = doc.getTextWidth(txt);
-    const padX = 9, padY = 6;
-    const bw = tw + padX * 2, bh = 22;
-    const x = PW - 30 - bw, y = 26;
-    doc.setDrawColor(200, 38, 38); doc.setLineWidth(1.6);
+    const padX = 9, padY = 6, bh = 22;
+    const bw = tw + padX * 2;
+    const x = PW - M - bw;          // right-aligned, same edge as the back-link
+    const y = M + 12;               // sits just under the "\u2190 Floorplan" link line
+    doc.setDrawColor(rgb[0], rgb[1], rgb[2]); doc.setLineWidth(1.6);
     doc.setFillColor(255, 255, 255);
     doc.roundedRect(x, y, bw, bh, 3, 3, 'FD');
-    doc.setTextColor(200, 38, 38);
+    doc.setTextColor(rgb[0], rgb[1], rgb[2]);
     doc.text(txt, x + padX, y + bh - padY);
 }
 async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
@@ -9870,9 +9923,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         } catch (e) { frameDataUrl = canvas.toDataURL('image/jpeg', 0.85); }
         try { doc.addImage(frameDataUrl, 'JPEG', artX, artY, aw, ah); } catch (e) {}
         if (_icClassic) {
-            doc.setFont('helvetica', 'normal');
-            doc.setFontSize(8);
-            doc.setTextColor(90, 90, 90);
+            const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
+            doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold');
+            doc.setFontSize(cs.size);
+            doc.setTextColor(crgb.r, crgb.g, crgb.b);
             doc.text(_icClassic, artX + aw, artY + ah + 12, { align: 'right' });
         }
 
@@ -9986,11 +10040,12 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
-    // — APPROVED stamp: only on spec pages the client has individually approved —
-    const _appr = editorialContent.approvedPages || {};
+    // — Approval status: spec pages the client has approved (green) or that are
+    //   pending approval (red), shown under the floorplan back-link —
+    const _stat = editorialContent.approvalStatus || {};
     for (let p = 1; p <= pageNum; p++) {
         const k = _pageKeys[p] || '';
-        if (k.indexOf('spec:') === 0 && _appr[k.slice(5)]) { try { doc.setPage(p); _drawApprovedStamp(doc, PW, PH); } catch (e) {} }
+        if (k.indexOf('spec:') === 0) { const s = _stat[k.slice(5)]; if (s) { try { doc.setPage(p); _drawApprovalStamp(doc, PW, PH, M, s); } catch (e) {} } }
     }
     const single = !opts.all && rows[0];
     const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
