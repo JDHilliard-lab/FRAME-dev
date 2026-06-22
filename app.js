@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -366,6 +366,8 @@ function _mbMigratePages() {
     if (!ec.specCodeStyle || typeof ec.specCodeStyle !== 'object') ec.specCodeStyle = { font: 'display', size: 16, color: '#141414' };
     if (!ec.paragraphStyle || typeof ec.paragraphStyle !== 'object') ec.paragraphStyle = { font: 'sans', size: 16, color: '#222222' };
     if (!ec.titleStyle || typeof ec.titleStyle !== 'object') ec.titleStyle = { font: 'display', size: 22, color: '#141414' };
+    if (typeof ec.wireframe !== 'boolean') ec.wireframe = false;
+    if (!ec.specArtOnly || typeof ec.specArtOnly !== 'object') ec.specArtOnly = {};
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -6307,7 +6309,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     // Optional artwork fill: paint the uploaded image cover-fit into the opening,
     // ON TOP of the opening treatment (which would otherwise overpaint it). Default
     // (no artworkImg) leaves the opening transparent for InDesign compositing.
-    if (opts.artworkImg && aW > 0 && aH > 0) {
+    if (opts.artworkImg && !opts.wireframe && aW > 0 && aH > 0) {
         x.save();
         x.beginPath(); x.rect(aX, aY, aW, aH); x.clip();
         const iw = opts.artworkImg.naturalWidth || opts.artworkImg.width;
@@ -6597,7 +6599,7 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
         const fy = floorPx - (toIn(f.y) + fHin) * ppi;   // y from floor (bottom)
         const isFeatured = (!featuredId || f.id === featuredId);
         let artworkImg = null;
-        if (f.artworkUrl) { try { artworkImg = await _loadImg(f.artworkUrl); } catch (e) {} }
+        if (!opts.wireframe && f.artworkUrl) { try { artworkImg = await _loadImg(f.artworkUrl); } catch (e) {} }
         let swatchImg = null;
         if (f.fType === 'image' && f.swatchDataUrl) { try { swatchImg = await _loadImg(f.swatchDataUrl); } catch (e) {} }
         const dInches = _frameDataInInches(Object.assign({}, f, { extW: fWin, extH: fHin }), 'in');
@@ -7475,6 +7477,8 @@ function _deckMockHTML(desc, w, h) {
         const r = desc.row || {};
         let lines = [];
         try { const s = buildSpecStrings(r); if (s && s.lines) lines = s.lines.map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
+        const _artOnly = _specArtOnly(desc._ovKey || (r.id || ''));
+        if (_artOnly) lines = [];
         const tplKey = (desc._previewTpl || desc._specTpl || editorialContent.specTemplate || 'classic');
         const tpl = SPEC_TEMPLATES[tplKey];
         const codeFs = fs(0.06);
@@ -7507,7 +7511,7 @@ function _deckMockHTML(desc, w, h) {
             members.forEach((m, i) => {
                 const sy = topY + i * slotH;
                 inner += txt(0.06, sy, 0.04, _esc(letters[i] || (i + 1) + ''), fs(0.04), 800, DRUK);
-                let ml = []; try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
+                let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
                 inner += txt(0.11, sy, 0.34, '<b>' + _esc(m.id || '') + '</b><br>' + ml.map(_esc).join('<br>'), fs(0.022), 400, SANS);
                 inner += box(0.54, sy + slotH * 0.06, 0.42, slotH * 0.82, _esc(letters[i] || ''), 'data-bake="artwork" data-member-idx="' + i + '"');
             });
@@ -7524,6 +7528,8 @@ function _deckMockHTML(desc, w, h) {
 let _dsActiveTab = 'project';
 function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; return { font: s.font || 'display', size: s.size || 16, color: s.color || '#141414' }; }
 function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || 22, color: s.color || '#141414' }; }
+function _isWireframe() { return !!editorialContent.wireframe; }
+function _specArtOnly(ovKey) { return !!(ovKey && editorialContent.specArtOnly && editorialContent.specArtOnly[ovKey]); }
 function _approvalOf(ovKey) { return (ovKey && editorialContent.approvalStatus && editorialContent.approvalStatus[ovKey]) || ''; }
 function _pageApproved(ovKey) { return _approvalOf(ovKey) === 'approved'; }
 function _dsCurrentSpecKey() { const d = _dsPages[_dsIndex]; return (d && d.kind === 'spec') ? (d._ovKey || (d.row && d.row.id) || '') : ''; }
@@ -7558,18 +7564,21 @@ function _dsToggleApproved() {
 // Presentation-type presets: flip the include toggles + spec layout for each
 // stage of a deck's life. Presets, not locks — tweak freely afterward.
 const PRES_PRESETS = {
-    concept: { label: 'Concept', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 1, slogan: 1, contacts: 1, timeline: 1, frameRec: 0, floorplanKey: 0, spec: 0 }, tpl: null, note: 'Moodboards, mockups & art narrative — no specs or dimensions.' },
-    artdev: { label: 'Art Development', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'frameRight', note: 'Art placed in elevations & plan views (spec figured alongside).' },
-    spec: { label: 'Spec', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 1, timeline: 0 }, tpl: 'classic', note: 'Catalogue-style spec pages: framed mockups + spec blocks.' },
-    install: { label: 'Install Guide', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 0, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'installGuide', note: 'Dimensioned wall elevations (CL / EQ / AFF) + plan views.' }
+    concept: { label: 'Concept', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 1, slogan: 1, contacts: 1, timeline: 1, frameRec: 0, floorplanKey: 0, spec: 0 }, tpl: null, wf: false, note: 'Beauty pages, story, moodboards & concept art — no specs.' },
+    wireframe: { label: 'Wireframe', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'frameRight', wf: true, note: 'Elevations & plan views with empty frame/canvas placements (no artwork yet). Specs optional per page.' },
+    artdev: { label: 'Art Development', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'frameRight', wf: false, note: 'Artwork populated in mockups, with specs figured alongside.' },
+    final: { label: 'Final Spec', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 1, timeline: 0 }, tpl: 'classic', wf: false, note: 'Approval package: full specs, image codes, final selections.' },
+    install: { label: 'Install Guide', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 0, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'installGuide', wf: false, note: 'Dimensioned wall elevations (CL / EQ / AFF) + plan views.' }
 };
 function _dsApplyPresentationType(type) {
     const p = PRES_PRESETS[type]; if (!p) return;
     Object.keys(p.inc).forEach(k => { const cb = document.getElementById('specInc_' + k); if (cb) cb.checked = !!p.inc[k]; });
     if (p.tpl) editorialContent.specTemplate = p.tpl;
+    editorialContent.wireframe = !!p.wf;
     editorialContent.presentationType = type;
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsClearBuiltAll();
     _dsRenderPresetBar();
     _dsRefresh();
 }
@@ -8029,7 +8038,7 @@ async function _bakeFrameDataUrl(r) {
     const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
     let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
     const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
-    const out = renderFrameToCanvas(dInches, swatch, { dpi: 110, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+    const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 110, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
     const cnv = out.canvas;
     try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); return flat.toDataURL('image/jpeg', 0.85); }
     catch (e) { return cnv.toDataURL('image/jpeg', 0.85); }
@@ -8039,7 +8048,7 @@ async function _bakeElevationDataUrl(rowOrElev) {
     if (rowOrElev && rowOrElev.frames) { elev = rowOrElev; featuredId = null; }
     else { const r = rowOrElev || {}; for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } } featuredId = r.id || null; }
     if (!elev) return null;
-    const er = await renderElevationToCanvas(elev, featuredId, { dpi: 30 });
+    const er = await renderElevationToCanvas(elev, featuredId, { wireframe: _isWireframe(), dpi: 30 });
     if (!er || !er.canvas) return null;
     try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#fff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); return flat.toDataURL('image/jpeg', 0.82); }
     catch (e) { return er.canvas.toDataURL('image/jpeg', 0.82); }
@@ -8190,6 +8199,7 @@ async function _dsBuildPage() {
     _dsSyncBuildBtn();
 }
 function _dsClearBuilt(key) { if (key && _dsBuilt[key]) { delete _dsBuilt[key]; _dsRenderCenter(); _dsSyncBuildBtn(); } }
+function _dsClearBuiltAll() { _dsBuilt = {}; }
 function _dsSyncBuildBtn() {
     const b = document.getElementById('dsBuildBtn'); if (!b) return;
     const desc = _dsPages[_dsIndex]; const isSpec = !!(desc && desc.kind === 'spec');
@@ -8427,8 +8437,15 @@ function _dsRenderTools() {
         head.style.cssText = 'position:sticky; top:0; z-index:3; background:' + ((_toolsBg && _toolsBg !== 'rgba(0, 0, 0, 0)') ? _toolsBg : 'var(--bg-panel,#1d1d20)') + '; padding-bottom:10px; margin-bottom:8px; border-bottom:1px solid var(--border-color);';
         head.appendChild(apprWrap);
 
-        const lbl = document.createElement('div');
-        lbl.textContent = 'Spec layout'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
+        // Per-page spec visibility: full specs vs artwork-only mockup.
+        const visWrap = document.createElement('div');
+        visWrap.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
+        const aoOn = _specArtOnly(ovKey);
+        const mkVis = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.64rem; font-weight:700; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
+        const setAO = (v) => { const m = editorialContent.specArtOnly || (editorialContent.specArtOnly = {}); if (v) m[ovKey] = true; else delete m[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuilt(_deckPageKey(desc)); _dsRefresh(); };
+        visWrap.appendChild(mkVis('Show specs', !aoOn, () => setAO(false)));
+        visWrap.appendChild(mkVis('Artwork only', aoOn, () => setAO(true)));
+        head.appendChild(visWrap);
         head.appendChild(lbl);
 
         // Deck mode: one page per piece, or group set pieces (A/B/C) onto one page.
@@ -9177,7 +9194,7 @@ async function _mbBakeArtworkIntoPage(r, compact) {
         let artworkImg = null;
         if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
         const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
-        const out = renderFrameToCanvas(dInches, swatch, { dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+        const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
         const canvas = out.canvas;
         const flat = document.createElement('canvas'); flat.width = canvas.width; flat.height = canvas.height;
         const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(canvas, 0, 0);
@@ -9870,7 +9887,7 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
         // compact spec lines
         let specs = null; try { specs = buildSpecStrings(r); } catch (e) {}
         const wanted = ['Application', 'Frame Size', 'Frame Code', 'Matboard', 'Image Size', 'Overall Dimensions'];
-        const lines = specs && specs.lines ? specs.lines.filter(l => wanted.indexOf(l.label) >= 0) : [];
+        const lines = (specs && specs.lines && !_specArtOnly(unit.key)) ? specs.lines.filter(l => wanted.indexOf(l.label) >= 0) : [];
         let ly = sy + 26;
         doc.setFontSize(7.5);
         lines.forEach(ln => {
@@ -9888,7 +9905,7 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
             const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
             let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
             const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
-            const out = renderFrameToCanvas(dInches, swatch, { dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+            const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
             const cnv = out.canvas;
             let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); } catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
             const boxH = slotH * 0.84, boxW = rW;
@@ -9931,7 +9948,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     try {
         const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
         let elevLeft = PW * 0.42;
-        const er = elev ? await renderElevationToCanvas(elev, featuredId, { dpi: 46 }) : null;
+        const er = elev ? await renderElevationToCanvas(elev, featuredId, { wireframe: _isWireframe(), dpi: 46 }) : null;
         if (er && er.canvas) {
             const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
             const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
@@ -10016,7 +10033,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         let artworkImg = null;
         if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
         const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
-        const out = renderFrameToCanvas(dInches, swatch, { dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+        const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
         const cnv = out.canvas;
         let url;
         try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); }
@@ -10042,7 +10059,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     }
 
     // — Spec block (dotted leaders) —
-    if (tpl.spec) {
+    if (tpl.spec && !_specArtOnly(r.id)) {
         const sx = px(tpl.spec.x), sw = px(tpl.spec.w);
         let sy = py(tpl.spec.y);
         doc.setFontSize(8.5);
@@ -10061,7 +10078,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         let elev = null;
         for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } }
         if (elev) {
-            const er = await renderElevationToCanvas(elev, r.id, { dpi: 28 });
+            const er = await renderElevationToCanvas(elev, r.id, { wireframe: _isWireframe(), dpi: 28 });
             if (er && er.canvas) {
                 let url;
                 try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); url = flat.toDataURL('image/jpeg', 0.82); }
@@ -10402,7 +10419,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
         let artworkImg = null;
         if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
-        const { canvas } = renderFrameToCanvas(dInches, (r.fType === 'image' ? await _loadImg(r.swatchDataUrl) : null), {
+        const { canvas } = renderFrameToCanvas(dInches, (r.fType === 'image' ? await _loadImg(r.swatchDataUrl) : null), { wireframe: _isWireframe(),
             dpi: 96, pad: 0, artworkImg,
             artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY },
         });
@@ -10442,7 +10459,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const blockW = Math.max(aw, 300);
         doc.setFontSize(8.5);
         let sy = blockTop;
-        specs.lines.forEach(ln => {
+        if (!_specArtOnly(r.id)) specs.lines.forEach(ln => {
             // label (bold, left)
             doc.setFont('helvetica', 'bold');
             doc.setTextColor(20, 20, 20);
@@ -10474,7 +10491,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             if (e.frames && e.frames.some(fr => fr.id === r.id)) { elevForPiece = e; break; }
         }
         if (elevForPiece) {
-            const elevRender = await renderElevationToCanvas(elevForPiece, r.id, { dpi: 28 });
+            const elevRender = await renderElevationToCanvas(elevForPiece, r.id, { wireframe: _isWireframe(), dpi: 28 });
             if (elevRender && elevRender.canvas) {
                 // Flatten onto white for JPEG.
                 let elevUrl;
