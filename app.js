@@ -7543,6 +7543,45 @@ function _dsToggleApproved() {
     const next = cur === '' ? 'pending' : cur === 'pending' ? 'approved' : '';
     _dsSetApproval(k, next);
 }
+// Presentation-type presets: flip the include toggles + spec layout for each
+// stage of a deck's life. Presets, not locks — tweak freely afterward.
+const PRES_PRESETS = {
+    concept: { label: 'Concept', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 1, slogan: 1, contacts: 1, timeline: 1, frameRec: 0, floorplanKey: 0, spec: 0 }, tpl: null, note: 'Moodboards, mockups & art narrative — no specs or dimensions.' },
+    artdev: { label: 'Art Development', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'frameRight', note: 'Art placed in elevations & plan views (spec figured alongside).' },
+    spec: { label: 'Spec', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 1, timeline: 0 }, tpl: 'classic', note: 'Catalogue-style spec pages: framed mockups + spec blocks.' },
+    install: { label: 'Install Guide', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 0, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'installGuide', note: 'Dimensioned wall elevations (CL / EQ / AFF) + plan views.' }
+};
+function _dsApplyPresentationType(type) {
+    const p = PRES_PRESETS[type]; if (!p) return;
+    Object.keys(p.inc).forEach(k => { const cb = document.getElementById('specInc_' + k); if (cb) cb.checked = !!p.inc[k]; });
+    if (p.tpl) editorialContent.specTemplate = p.tpl;
+    editorialContent.presentationType = type;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderPresetBar();
+    _dsRefresh();
+}
+function _dsRenderPresetBar() {
+    const bar = document.getElementById('dsPresetBar'); if (!bar) return;
+    const cur = editorialContent.presentationType || '';
+    bar.innerHTML = '';
+    const lbl = document.createElement('div');
+    lbl.textContent = 'PRESENTATION TYPE'; lbl.style.cssText = 'font-size:0.62rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px;';
+    bar.appendChild(lbl);
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap;';
+    Object.keys(PRES_PRESETS).forEach(k => {
+        const b = document.createElement('button');
+        b.textContent = PRES_PRESETS[k].label;
+        b.style.cssText = _tplTabCss(cur === k);
+        b.onclick = () => _dsApplyPresentationType(k);
+        row.appendChild(b);
+    });
+    bar.appendChild(row);
+    const note = document.createElement('p');
+    note.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
+    note.textContent = cur && PRES_PRESETS[cur] ? PRES_PRESETS[cur].note : 'Pick a type to preset the sections & spec layout. You can still fine-tune everything below.';
+    bar.appendChild(note);
+}
 function openDeckStudio(tab) {
     const m = document.getElementById('deckStudioModal'); if (!m) return;
     // Reparent the Project settings panel into the Project tab (once).
@@ -7553,6 +7592,14 @@ function openDeckStudio(tab) {
         panel.style.boxShadow = 'none'; panel.style.border = 'none'; panel.style.padding = '4px 8px';
         proj.appendChild(panel);
     }
+    // Inject the presentation-type bar at the top of the Project tab (once).
+    if (proj && !document.getElementById('dsPresetBar')) {
+        const bar = document.createElement('div');
+        bar.id = 'dsPresetBar';
+        bar.style.cssText = 'max-width:600px; margin:0 8px 14px; padding:10px 12px; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-input);';
+        proj.insertBefore(bar, proj.firstChild);
+    }
+    _dsRenderPresetBar();
     if (typeof _specPdfPrefill === 'function') _specPdfPrefill();
     const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
     m.style.display = 'flex';
@@ -7952,6 +7999,9 @@ function _dsOpenSettingsMenu(ev) {
             _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail();
         }));
         menu.appendChild(item('Fit page to window', 'Re-center and fit the preview', () => { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); _dsRenderCenter(); }));
+        if (desc && desc.kind === 'spec' && _dsBuilt[key]) {
+            menu.appendChild(item('Revert to live preview', 'Drop the built render for this page', () => { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); _dsClearBuilt(key); }));
+        }
     });
 }
 function _dsAnnCycleAlign() { const a = _dsCurrentAnnot(); if (!a || a.type === 'image') return; const order = ['left', 'center', 'right']; const i = order.indexOf(a.align || 'left'); a.align = order[(i + 1) % 3]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
@@ -8022,6 +8072,117 @@ function _dsAddStamp(page, w, hh, desc) {
     s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.085) + 'px; right:' + Math.round(w * 0.04) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.026)) + 'px; letter-spacing:0.04em; color:' + col + '; border:1.5px solid ' + col + '; background:#fff; padding:2px 7px; border-radius:3px;';
     page.appendChild(s);
 }
+// ── Accurate "Build" preview ──────────────────────────────────────────────
+// A recording shim that implements the slice of the jsPDF API the spec
+// renderers use, capturing an ordered display list. We then preload images and
+// replay onto a canvas — so the preview is drawn by the SAME renderers as the
+// PDF and can't drift from the export.
+function CanvasPdfRec(PW, PH) {
+    this.PW = PW; this.PH = PH; this.ops = []; this.imgs = {};
+    this._fn = 'helvetica'; this._fs = 'normal'; this._sz = 12;
+    this._tc = '#000'; this._fc = '#000'; this._dc = '#000';
+    this._lw = 1; this._dash = []; this._cap = 'butt'; this._join = 'miter';
+    this._mc = document.createElement('canvas').getContext('2d');
+}
+CanvasPdfRec.prototype._fam = function (n) { return /Druk/i.test(n) ? 'Druk' : /Messina/i.test(n) ? 'Messina' : 'Arial,Helvetica,sans-serif'; };
+CanvasPdfRec.prototype._cssFont = function () { const bold = (this._fs.indexOf('bold') >= 0) || /Druk/i.test(this._fn); const ital = this._fs.indexOf('italic') >= 0; return (ital ? 'italic ' : '') + (bold ? '700' : '400') + ' ' + this._sz + 'px ' + this._fam(this._fn); };
+CanvasPdfRec.prototype.setFont = function (n, s) { this._fn = n || 'helvetica'; this._fs = s || 'normal'; };
+CanvasPdfRec.prototype.setFontSize = function (p) { this._sz = p; };
+CanvasPdfRec.prototype.setTextColor = function (r, g, b) { this._tc = 'rgb(' + [r, g, b].join(',') + ')'; };
+CanvasPdfRec.prototype.setFillColor = function (r, g, b) { this._fc = 'rgb(' + [r, g, b].join(',') + ')'; };
+CanvasPdfRec.prototype.setDrawColor = function (r, g, b) { this._dc = 'rgb(' + [r, g, b].join(',') + ')'; };
+CanvasPdfRec.prototype.setLineWidth = function (w) { this._lw = w; };
+CanvasPdfRec.prototype.setLineDashPattern = function (a) { this._dash = a || []; };
+CanvasPdfRec.prototype.setLineCap = function (c) { this._cap = (c === 1 || c === 'round') ? 'round' : (c === 2 || c === 'square') ? 'square' : 'butt'; };
+CanvasPdfRec.prototype.setLineJoin = function (j) { this._join = (j === 1 || j === 'round') ? 'round' : (j === 2 || j === 'bevel') ? 'bevel' : 'miter'; };
+CanvasPdfRec.prototype.addPage = function () {}; CanvasPdfRec.prototype.setPage = function () {};
+CanvasPdfRec.prototype.getTextWidth = function (s) { this._mc.font = this._cssFont(); return this._mc.measureText((s || '') + '').width; };
+CanvasPdfRec.prototype.splitTextToSize = function (s, w) { this._mc.font = this._cssFont(); const words = ((s || '') + '').split(/\s+/); const out = []; let cur = ''; for (const wd of words) { const t = cur ? cur + ' ' + wd : wd; if (this._mc.measureText(t).width > w && cur) { out.push(cur); cur = wd; } else cur = t; } if (cur) out.push(cur); return out.length ? out : ['']; };
+CanvasPdfRec.prototype._snap = function () { return { font: this._cssFont(), tc: this._tc, fc: this._fc, dc: this._dc, lw: this._lw, dash: this._dash.slice(), cap: this._cap, join: this._join, sz: this._sz }; };
+CanvasPdfRec.prototype.text = function (str, x, y, opts) { this.ops.push({ t: 'text', str: str, x: x, y: y, opts: opts || {}, st: this._snap() }); };
+CanvasPdfRec.prototype.line = function (x1, y1, x2, y2) { this.ops.push({ t: 'line', a: [x1, y1, x2, y2], st: this._snap() }); };
+CanvasPdfRec.prototype.rect = function (x, y, w, h, style) { this.ops.push({ t: 'rect', a: [x, y, w, h], style: style, st: this._snap() }); };
+CanvasPdfRec.prototype.roundedRect = function (x, y, w, h, rx, ry, style) { this.ops.push({ t: 'rrect', a: [x, y, w, h, rx, ry], style: style, st: this._snap() }); };
+CanvasPdfRec.prototype.circle = function (x, y, r, style) { this.ops.push({ t: 'circle', a: [x, y, r], style: style, st: this._snap() }); };
+CanvasPdfRec.prototype.triangle = function (x1, y1, x2, y2, x3, y3, style) { this.ops.push({ t: 'tri', a: [x1, y1, x2, y2, x3, y3], style: style, st: this._snap() }); };
+CanvasPdfRec.prototype.addImage = function (src, fmt, x, y, w, h) { this.imgs[src] = true; this.ops.push({ t: 'img', src: src, a: [x, y, w, h] }); };
+CanvasPdfRec.prototype.render = async function (scale, onProgress) {
+    const s = scale || 2, cv = document.createElement('canvas');
+    cv.width = Math.round(this.PW * s); cv.height = Math.round(this.PH * s);
+    const x = cv.getContext('2d'); x.scale(s, s); x.fillStyle = '#fff'; x.fillRect(0, 0, this.PW, this.PH);
+    const srcs = Object.keys(this.imgs), loaded = {};
+    for (let i = 0; i < srcs.length; i++) { try { loaded[srcs[i]] = await _loadImg(srcs[i]); } catch (e) {} if (onProgress) onProgress(45 + Math.round(45 * (i + 1) / Math.max(1, srcs.length))); }
+    const fillStroke = (style, fc, dc) => { const f = /F/.test(style || ''); const st = !style || /S|D/.test(style || ''); if (f) { x.fillStyle = fc; x.fill(); } if (st) { x.strokeStyle = dc; x.stroke(); } };
+    for (const op of this.ops) {
+        const st = op.st || {};
+        x.setLineDash(st.dash || []); x.lineWidth = st.lw || 1; x.lineCap = st.cap || 'butt'; x.lineJoin = st.join || 'miter';
+        if (op.t === 'text') {
+            x.font = st.font; x.fillStyle = st.tc; x.textBaseline = 'alphabetic';
+            x.textAlign = op.opts.align === 'center' ? 'center' : op.opts.align === 'right' ? 'right' : 'left';
+            let lines = Array.isArray(op.str) ? op.str : (op.opts.maxWidth ? this.splitTextToSize(op.str, op.opts.maxWidth) : [op.str]);
+            const lh = (st.sz || 12) * 1.15;
+            lines.forEach((ln, i) => x.fillText((ln || '') + '', op.x, op.y + i * lh));
+        } else if (op.t === 'line') { x.strokeStyle = st.dc; x.beginPath(); x.moveTo(op.a[0], op.a[1]); x.lineTo(op.a[2], op.a[3]); x.stroke(); }
+        else if (op.t === 'rect') { x.beginPath(); x.rect(op.a[0], op.a[1], op.a[2], op.a[3]); fillStroke(op.style, st.fc, st.dc); }
+        else if (op.t === 'rrect') { const [bx, by, bw, bh, rx] = op.a; const rr = Math.min(rx, bw / 2, bh / 2); x.beginPath(); x.moveTo(bx + rr, by); x.arcTo(bx + bw, by, bx + bw, by + bh, rr); x.arcTo(bx + bw, by + bh, bx, by + bh, rr); x.arcTo(bx, by + bh, bx, by, rr); x.arcTo(bx, by, bx + bw, by, rr); x.closePath(); fillStroke(op.style, st.fc, st.dc); }
+        else if (op.t === 'circle') { x.beginPath(); x.arc(op.a[0], op.a[1], op.a[2], 0, Math.PI * 2); fillStroke(op.style, st.fc, st.dc); }
+        else if (op.t === 'tri') { x.beginPath(); x.moveTo(op.a[0], op.a[1]); x.lineTo(op.a[2], op.a[3]); x.lineTo(op.a[4], op.a[5]); x.closePath(); fillStroke(op.style, st.fc, st.dc); }
+        else if (op.t === 'img') { const im = loaded[op.src]; if (im) { try { x.drawImage(im, op.a[0], op.a[1], op.a[2], op.a[3]); } catch (e) {} } }
+    }
+    x.setLineDash([]);
+    if (onProgress) onProgress(100);
+    return cv;
+};
+let _dsBuilt = {};
+async function renderSpecPageCanvas(desc, onProgress) {
+    const PW = 936, PH = 540, M = 40, r = desc.row; if (!r) return null;
+    const tpl = desc._specTpl || _specTplResolve(desc._ovKey || (r.id || ''));
+    const T = SPEC_TEMPLATES[tpl] || {};
+    const rec = new CanvasPdfRec(PW, PH);
+    if (onProgress) onProgress(12);
+    if (desc.members && desc.members.length > 1 && T.group) {
+        await _drawSpecSetPage(rec, {}, 1, {}, { rep: r, members: desc.members, key: desc._ovKey || r.id }, tpl, { PW: PW, PH: PH, M: M });
+    } else if (tpl === 'installGuide') {
+        await _drawInstallGuidePage(rec, {}, 1, {}, r, { PW: PW, PH: PH, M: M });
+    } else if (tpl !== 'classic' && !T.legacy && !T.custom && !T.group) {
+        await _drawSpecPageTemplate(rec, {}, 1, {}, r, tpl, { PW: PW, PH: PH, M: M });
+    } else {
+        return null;   // classic & unsupported → keep the live preview
+    }
+    if (onProgress) onProgress(40);
+    return await rec.render(2, onProgress);
+}
+async function _dsBuildPage() {
+    const desc = _dsPages[_dsIndex];
+    if (!desc || desc.kind !== 'spec') { showInfoModal('Build preview', 'Select a spec page, then Build to render an exact preview of how it will export.'); return; }
+    const key = _deckPageKey(desc);
+    const c = document.getElementById('dsCenter');
+    const ov = document.createElement('div');
+    ov.style.cssText = 'position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(15,15,18,0.55); z-index:50; color:#fff; font-size:0.78rem; gap:10px;';
+    ov.innerHTML = '<div>Building accurate page…</div><div style="width:210px; height:8px; background:rgba(255,255,255,0.18); border-radius:4px; overflow:hidden;"><div id="dsBuildBar" style="height:100%; width:0%; background:#6a6aff;"></div></div><div id="dsBuildPct" style="font-variant-numeric:tabular-nums;">0%</div>';
+    if (c) { c.style.position = 'relative'; c.appendChild(ov); }
+    const setPct = (p) => { const b = document.getElementById('dsBuildBar'); const t = document.getElementById('dsBuildPct'); if (b) b.style.width = Math.max(0, Math.min(100, p)) + '%'; if (t) t.textContent = Math.round(Math.max(0, Math.min(100, p))) + '%'; };
+    setPct(5);
+    let ok = false;
+    try {
+        const cv = await renderSpecPageCanvas(desc, setPct);
+        if (cv) { _dsBuilt[key] = cv.toDataURL('image/jpeg', 0.92); ok = true; }
+    } catch (e) { console.error('build failed', e); }
+    if (ov.parentElement) ov.parentElement.removeChild(ov);
+    if (!ok) showInfoModal('Live preview', 'Accurate build currently covers Frame right/left, Centered hero, Set and Install guide. Classic still uses the live preview, which already bakes in real artwork.');
+    _dsRenderCenter();
+    _dsSyncBuildBtn();
+}
+function _dsClearBuilt(key) { if (key && _dsBuilt[key]) { delete _dsBuilt[key]; _dsRenderCenter(); _dsSyncBuildBtn(); } }
+function _dsSyncBuildBtn() {
+    const b = document.getElementById('dsBuildBtn'); if (!b) return;
+    const desc = _dsPages[_dsIndex]; const isSpec = !!(desc && desc.kind === 'spec');
+    const built = isSpec && _dsBuilt[_deckPageKey(desc)];
+    b.style.opacity = isSpec ? '1' : '0.4'; b.style.pointerEvents = isSpec ? 'auto' : 'none';
+    b.textContent = built ? 'Rebuild' : 'Build';
+    b.style.background = built ? '#1a7f37' : 'var(--bg-input)';
+    b.style.color = built ? '#fff' : 'var(--text-main)';
+}
 function _dsRenderCenter() {
     const c = document.getElementById('dsCenter'); if (!c) return;
     c.innerHTML = '';
@@ -8035,6 +8196,17 @@ function _dsRenderCenter() {
     if (desc.kind === 'floorplan') { _dsRenderCenterFloorplan(desc, c, Math.round(w), Math.round(hh)); return; }
     const page = document.createElement('div');
     page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
+    const _pk = _deckPageKey(desc);
+    const _builtSrc = (desc.kind === 'spec') ? _dsBuilt[_pk] : null;
+    if (_builtSrc) {
+        page.innerHTML = '<img src="' + _builtSrc + '" style="position:absolute; inset:0; width:100%; height:100%;">';
+        _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
+        _dsAddGuides(page, Math.round(w), Math.round(hh));
+        _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
+        c.appendChild(page);
+        _dsSyncBuildBtn();
+        return;
+    }
     page.innerHTML = '';
     try { page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); }
     catch (e) { page.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
@@ -8043,6 +8215,7 @@ function _dsRenderCenter() {
     _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
     if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); }
+    _dsSyncBuildBtn();
 }
 // — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
 let _dsFpDragKey = null, _dsFpDragPin = null;
