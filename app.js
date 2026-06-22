@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -368,6 +368,7 @@ function _mbMigratePages() {
     if (!ec.titleStyle || typeof ec.titleStyle !== 'object') ec.titleStyle = { font: 'display', size: 22, color: '#141414' };
     if (typeof ec.wireframe !== 'boolean') ec.wireframe = false;
     if (!ec.specArtOnly || typeof ec.specArtOnly !== 'object') ec.specArtOnly = {};
+    if (!Array.isArray(ec.manualGroups)) ec.manualGroups = [];
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -7402,13 +7403,12 @@ function _deckPageList() {
     const rows = (dashProjectData || []).filter(r => r && (r.id || r.artworkUrl));
     const specTplKey = ec.specTemplate || 'classic';
     const isGroupSpec = !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].group);
-    const unitsFor = (rs) => {
-        if (!isGroupSpec) return rs.map(r => ({ rep: r, members: [r], key: r.id || '' }));
-        const order = [], map = {};
-        rs.forEach(r => { const k = _artGroupKey(r.id || ''); if (!map[k]) { map[k] = { rep: r, members: [], key: k }; order.push(k); } map[k].members.push(r); });
-        return order.map(k => map[k]);
+    const unitsFor = (rs) => _buildSpecUnits(rs, isGroupSpec);
+    const specUnit = (u) => {
+        if (u._manual) { return { kind: 'spec', type: 'spec', title: u.members.map(m => m.id).join(' + ') || 'Set', row: u.rep, members: u.members, _ovKey: u.key, _specTpl: (u.layout || 'setRow'), _manual: true }; }
+        const ok = (isGroupSpec ? u.key : (u.rep.id || ''));
+        return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) };
     };
-    const specUnit = (u) => { const ok = (isGroupSpec ? u.key : (u.rep.id || '')); return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) }; };
     const isInstall = (specTplKey === 'installGuide');
     const installDescs = () => (elevations || []).map((e, ei) => ({ e: e, ei: ei }))
         .filter(o => o.e && o.e.frames && o.e.frames.some(f => f && f.active !== false))
@@ -7547,6 +7547,18 @@ function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; retu
 function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || 22, color: s.color || '#141414' }; }
 function _isWireframe() { return !!editorialContent.wireframe; }
 function _specArtOnly(ovKey) { return !!(ovKey && editorialContent.specArtOnly && editorialContent.specArtOnly[ovKey]); }
+function _manualGroups() { return (editorialContent.manualGroups || (editorialContent.manualGroups = [])); }
+function _manualGroupOf(id) { if (!id) return null; const gs = _manualGroups(); for (const g of gs) { if (g && g.members && g.members.indexOf(id) >= 0) return g; } return null; }
+function _buildSpecUnits(rs, isGroup) {
+    const order = [], map = {};
+    (rs || []).forEach(r => {
+        const mg = _manualGroupOf(r.id || '');
+        const k = mg ? ('mg:' + mg.id) : (isGroup ? _artGroupKey(r.id || '') : (r.id || ''));
+        if (!map[k]) { map[k] = { rep: r, members: [], key: k, _manual: !!mg, layout: mg ? (mg.layout || 'setRow') : null, _mgOrder: mg ? mg.members : null }; order.push(k); }
+        map[k].members.push(r);
+    });
+    return order.map(k => { const u = map[k]; if (u._mgOrder) { u.members.sort((a, b) => u._mgOrder.indexOf(a.id) - u._mgOrder.indexOf(b.id)); u.rep = u.members[0] || u.rep; } return u; });
+}
 function _approvalOf(ovKey) { return (ovKey && editorialContent.approvalStatus && editorialContent.approvalStatus[ovKey]) || ''; }
 function _pageApproved(ovKey) { return _approvalOf(ovKey) === 'approved'; }
 function _dsCurrentSpecKey() { const d = _dsPages[_dsIndex]; return (d && d.kind === 'spec') ? (d._ovKey || (d.row && d.row.id) || '') : ''; }
@@ -7746,7 +7758,7 @@ function _deckPageKey(desc) {
     if (desc.kind === 'layout') return (desc.page && desc.page.id) ? ('layout:' + desc.page.id) : null;
     if (desc.kind === 'fixed') return 'fixed:' + desc.fixed;
     if (desc.kind === 'card') return 'card:' + desc.type;
-    if (desc.kind === 'spec') return desc._install ? ('spec:elev:' + desc._elevIdx) : ('spec:' + desc.title);
+    if (desc.kind === 'spec') return desc._install ? ('spec:elev:' + desc._elevIdx) : desc._manual ? ('spec:' + desc._ovKey) : ('spec:' + desc.title);
     if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
     return null;
 }
@@ -8216,6 +8228,60 @@ async function _dsBuildPage() {
     _dsSyncBuildBtn();
 }
 function _dsClearBuilt(key) { if (key && _dsBuilt[key]) { delete _dsBuilt[key]; _dsRenderCenter(); _dsSyncBuildBtn(); } }
+function _dsManualSection(desc) {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);';
+    const gs = _manualGroups();
+    const curId = (desc.row && desc.row.id) || '';
+    const group = desc._manual ? gs.find(g => ('mg:' + g.id) === desc._ovKey) : _manualGroupOf(curId);
+    const commit = () => { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+
+    const title = document.createElement('div');
+    title.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:6px;';
+    title.textContent = group ? 'Combined onto one page' : 'Combine onto one page';
+    wrap.appendChild(title);
+
+    if (group) {
+        const chips = document.createElement('div'); chips.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;';
+        group.members.forEach(mid => {
+            const chip = document.createElement('span');
+            chip.style.cssText = 'display:inline-flex; align-items:center; gap:5px; font-size:0.62rem; background:var(--bg-input); border:1px solid var(--border-color); border-radius:11px; padding:2px 4px 2px 8px;';
+            chip.appendChild(document.createTextNode(mid));
+            const x = document.createElement('button'); x.textContent = '×'; x.style.cssText = 'border:none; background:none; cursor:pointer; color:var(--text-muted); font-size:0.85rem; line-height:1; padding:0 2px;';
+            x.onclick = () => { group.members = group.members.filter(m => m !== mid); if (group.members.length < 2) editorialContent.manualGroups = gs.filter(g => g !== group); commit(); };
+            chip.appendChild(x); chips.appendChild(chip);
+        });
+        wrap.appendChild(chips);
+        const lr = document.createElement('div'); lr.style.cssText = 'display:flex; gap:6px; margin-bottom:8px;';
+        const mkL = (label, val) => { const b = document.createElement('button'); const active = (group.layout || 'setRow') === val; b.textContent = label; b.style.cssText = 'flex:1; font-size:0.62rem; padding:5px 3px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = () => { group.layout = val; commit(); }; return b; };
+        lr.appendChild(mkL('Side by side', 'setRow')); lr.appendChild(mkL('Stacked', 'setRight'));
+        wrap.appendChild(lr);
+    }
+
+    const avail = (typeof dashProjectData !== 'undefined' ? dashProjectData : []).map(x => x && x.id).filter(id => id && !_manualGroupOf(id) && id !== curId);
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px;';
+    const sel = document.createElement('select');
+    sel.style.cssText = 'flex:1; font-size:0.64rem; padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    const ph = document.createElement('option'); ph.value = ''; ph.textContent = avail.length ? (group ? 'Add another piece…' : 'Pair with a piece…') : 'No other pieces available'; sel.appendChild(ph);
+    avail.forEach(id => { const o = document.createElement('option'); o.value = id; o.textContent = id; sel.appendChild(o); });
+    const add = document.createElement('button'); add.textContent = 'Add'; add.disabled = !avail.length;
+    add.style.cssText = 'font-size:0.64rem; font-weight:700; padding:5px 14px; border-radius:4px; cursor:pointer; border:1px solid #6a6aff; background:#6a6aff; color:#fff;' + (avail.length ? '' : ' opacity:0.4; cursor:default;');
+    add.onclick = () => { const id = sel.value; if (!id) return; if (group) group.members.push(id); else gs.push({ id: 'mg_' + Date.now().toString(36), members: [curId, id], layout: 'setRow' }); commit(); };
+    row.appendChild(sel); row.appendChild(add); wrap.appendChild(row);
+
+    if (group) {
+        const ung = document.createElement('button'); ung.textContent = 'Ungroup';
+        ung.style.cssText = 'width:100%; margin-top:8px; font-size:0.62rem; padding:6px; border-radius:4px; cursor:pointer; border:1px solid var(--border-color); background:transparent; color:var(--text-muted);';
+        ung.onclick = () => { editorialContent.manualGroups = gs.filter(g => g !== group); commit(); };
+        wrap.appendChild(ung);
+    } else {
+        const hint = document.createElement('p');
+        hint.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
+        hint.textContent = 'Pick another piece to place it on this page as a diptych/triptych — regardless of how they\u2019re coded.';
+        wrap.appendChild(hint);
+    }
+    return wrap;
+}
 function _dsClearBuiltAll() { _dsBuilt = {}; }
 function _dsSyncBuildBtn() {
     const b = document.getElementById('dsBuildBtn'); if (!b) return;
@@ -8480,7 +8546,10 @@ function _dsRenderTools() {
         visWrap.appendChild(mkVis('Artwork only', aoOn, () => setAO(true)));
         head.appendChild(visWrap);
 
-        if (isGroupGlobal) {
+        if (desc._manual) {
+            t.appendChild(head);
+            t.appendChild(_dsManualSection(desc));
+        } else if (isGroupGlobal) {
             const note = document.createElement('p');
             note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 4px; line-height:1.5;';
             note.textContent = 'Set pieces (A / B / C…) are grouped onto one page. Pick how they sit:';
@@ -8530,6 +8599,7 @@ function _dsRenderTools() {
                 cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
             });
             t.appendChild(cardsWrap);
+            t.appendChild(_dsManualSection(desc));
         }
 
         // — Notes editor (writes the piece's spec Notes line) —
@@ -10408,12 +10478,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const _specIsGroup = !!(SPEC_TEMPLATES[_specTplKey] && SPEC_TEMPLATES[_specTplKey].group);
     // A "unit" is one spec page. Normally one piece per page; for a set template
     // (group:true) a whole set-piece group (ART.005-A/-B/-C…) shares one page.
-    const _unitsFromRows = (rs) => {
-        if (!_specIsGroup) return rs.map(r => ({ rep: r, members: [r], key: (r.id || '') }));
-        const order = [], map = {};
-        rs.forEach(r => { const k = _artGroupKey(r.id || ''); if (!map[k]) { map[k] = { rep: r, members: [], key: k }; order.push(k); } map[k].members.push(r); });
-        return order.map(k => map[k]);
-    };
+    const _unitsFromRows = (rs) => _buildSpecUnits(rs, _specIsGroup);
     const _units = _unitsFromRows(_specRows);
     const _isInstall = (_specTplKey === 'installGuide');
     const _installUnits = () => (elevations || []).map((e, ei) => ({ elev: e, idx: ei })).filter(o => o.elev && o.elev.frames && o.elev.frames.some(f => f && f.active !== false));
@@ -10483,8 +10548,8 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             continue;
         }
         const r = step.unit.rep;
-        const _specTpl = _specTplResolve(step.unit.key || (r.id || ''));
-        if (_specIsGroup) {
+        const _specTpl = step.unit._manual ? (step.unit.layout || 'setRow') : _specTplResolve(step.unit.key || (r.id || ''));
+        if (_specIsGroup || step.unit._manual) {
             await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
         } else if (_specTpl === 'installGuide') {
             await _drawInstallGuidePage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M });
