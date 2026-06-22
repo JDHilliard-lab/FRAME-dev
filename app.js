@@ -6595,7 +6595,7 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
         const fWin = toIn(f.w), fHin = toIn(f.h);
         const fx = wallLeftPx + toIn(f.x) * ppi;
         const fy = floorPx - (toIn(f.y) + fHin) * ppi;   // y from floor (bottom)
-        const isFeatured = (f.id === featuredId);
+        const isFeatured = (!featuredId || f.id === featuredId);
         let artworkImg = null;
         if (f.artworkUrl) { try { artworkImg = await _loadImg(f.artworkUrl); } catch (e) {} }
         let swatchImg = null;
@@ -7402,8 +7402,23 @@ function _deckPageList() {
         return order.map(k => map[k]);
     };
     const specUnit = (u) => { const ok = (isGroupSpec ? u.key : (u.rep.id || '')); return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) }; };
+    const isInstall = (specTplKey === 'installGuide');
+    const installDescs = () => (elevations || []).map((e, ei) => ({ e: e, ei: ei }))
+        .filter(o => o.e && o.e.frames && o.e.frames.some(f => f && f.active !== false))
+        .map(o => ({ kind: 'spec', type: 'install', _install: true, elev: o.e, _elevIdx: o.ei, title: (o.e.name || ('Elevation ' + (o.ei + 1))), _ovKey: 'elev:' + o.ei, _specTpl: 'installGuide', row: {} }));
     const units = unitsFor(rows);
-    if (inc.floorplanKey) {
+    if (isInstall) {
+        // Install guide: one page per elevation (the walls from the Elevations
+        // tab), shown in full — no per-piece duplicates.
+        if (inc.floorplanKey) {
+            const lvlOf = (x) => { const n = parseInt(x, 10); return isNaN(n) ? 0 : n; };
+            const emit = [];
+            floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => lvlOf(r.level) === li); if (used) emit.push(li); });
+            if (!emit.length) emit.push(0);
+            emit.forEach(li => pages.push({ kind: 'floorplan', type: 'floorplan', title: (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1)), level: li }));
+        }
+        if (inc.spec) installDescs().forEach(d => pages.push(d));
+    } else if (inc.floorplanKey) {
         const lvlOf = (x) => { const n = parseInt(x, 10); return isNaN(n) ? 0 : n; };
         const emit = [];
         floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || rows.some(r => lvlOf(r.level) === li) || (dashProjectData || []).some(it => lvlOf(it.level) === li); if (used) emit.push(li); });
@@ -7414,8 +7429,6 @@ function _deckPageList() {
             pages.push({ kind: 'floorplan', type: 'floorplan', title: (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1)), level: li });
             if (inc.spec) units.filter(u => lvlOf(u.rep.level) === li).forEach(u => pages.push(specUnit(u)));
         });
-        // Fallback: any piece whose level wasn't emitted still gets a spec page,
-        // so the studio list never silently drops pieces (matches the PDF).
         if (inc.spec) units.forEach(u => { if (!covered[lvlOf(u.rep.level)]) pages.push(specUnit(u)); });
     } else if (inc.spec) {
         units.forEach(u => pages.push(specUnit(u)));
@@ -7476,9 +7489,13 @@ function _deckMockHTML(desc, w, h) {
             inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03), 400, SANS);
         } else if (tpl.custom) {
             // Install guide: real wall elevation on the right, plan bottom-left.
-            inner += txt(0.06, 0.04, 0.5, _esc((r.location || r.category || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
+            const _ig = desc._install ? (desc.elev || {}) : null;
+            const _igAct = _ig && _ig.frames ? _ig.frames.filter(f => f && f.active !== false) : [];
+            const _igTitle = _ig ? (_ig.name || '') : (r.location || r.category || r.id || '');
+            const _igCode = _ig ? (_igAct.length === 1 ? (_igAct[0].id || '') : '') : (r.id || '');
+            inner += txt(0.06, 0.04, 0.5, _esc(('' + _igTitle).toUpperCase()), codeFs, 800, DRUK);
             inner += txt(0.06, 0.135, 0.4, 'ARTWORK DETAILS', fs(0.028), 800, DRUK);
-            inner += txt(0.06, 0.2, 0.3, _esc((r.id || '').toString()), fs(0.032), 700, DRUK);
+            if (_igCode) inner += txt(0.06, 0.2, 0.3, _esc(('' + _igCode)), fs(0.032), 700, DRUK);
             inner += box(0.42, 0.16, 0.54, 0.72, 'elevation', 'data-bake="elevation"');
             inner += box(0.06, 0.58, 0.3, 0.32, 'Floorplan');
         } else if (tpl.group) {
@@ -7703,7 +7720,7 @@ function _deckPageKey(desc) {
     if (desc.kind === 'layout') return (desc.page && desc.page.id) ? ('layout:' + desc.page.id) : null;
     if (desc.kind === 'fixed') return 'fixed:' + desc.fixed;
     if (desc.kind === 'card') return 'card:' + desc.type;
-    if (desc.kind === 'spec') return 'spec:' + desc.title;
+    if (desc.kind === 'spec') return desc._install ? ('spec:elev:' + desc._elevIdx) : ('spec:' + desc.title);
     if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
     return null;
 }
@@ -8017,10 +8034,12 @@ async function _bakeFrameDataUrl(r) {
     try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); return flat.toDataURL('image/jpeg', 0.85); }
     catch (e) { return cnv.toDataURL('image/jpeg', 0.85); }
 }
-async function _bakeElevationDataUrl(r) {
-    let elev = null; for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } }
+async function _bakeElevationDataUrl(rowOrElev) {
+    let elev = null, featuredId = null;
+    if (rowOrElev && rowOrElev.frames) { elev = rowOrElev; featuredId = null; }
+    else { const r = rowOrElev || {}; for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } } featuredId = r.id || null; }
     if (!elev) return null;
-    const er = await renderElevationToCanvas(elev, r.id, { dpi: 30 });
+    const er = await renderElevationToCanvas(elev, featuredId, { dpi: 30 });
     if (!er || !er.canvas) return null;
     try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#fff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); return flat.toDataURL('image/jpeg', 0.82); }
     catch (e) { return er.canvas.toDataURL('image/jpeg', 0.82); }
@@ -8036,7 +8055,7 @@ async function _dsBakeSpecImages(page, desc, token) {
         if (mi != null && desc.members && desc.members[+mi]) row = desc.members[+mi];
         if (!row) continue;
         try {
-            const url = (kind === 'elevation') ? await _bakeElevationDataUrl(row) : await _bakeFrameDataUrl(row);
+            const url = (kind === 'elevation') ? await _bakeElevationDataUrl(desc._install && desc.elev ? desc.elev : row) : await _bakeFrameDataUrl(row);
             if (url && token === _dsBakeToken && box.isConnected) {
                 box.style.background = '#fff';
                 box.style.color = 'transparent';
@@ -8135,7 +8154,9 @@ async function renderSpecPageCanvas(desc, onProgress) {
     const T = SPEC_TEMPLATES[tpl] || {};
     const rec = new CanvasPdfRec(PW, PH);
     if (onProgress) onProgress(12);
-    if (desc.members && desc.members.length > 1 && T.group) {
+    if (desc._install) {
+        await _drawInstallGuidePage(rec, {}, 1, {}, desc.elev, { PW: PW, PH: PH, M: M });
+    } else if (desc.members && desc.members.length > 1 && T.group) {
         await _drawSpecSetPage(rec, {}, 1, {}, { rep: r, members: desc.members, key: desc._ovKey || r.id }, tpl, { PW: PW, PH: PH, M: M });
     } else if (tpl === 'installGuide') {
         await _drawInstallGuidePage(rec, {}, 1, {}, r, { PW: PW, PH: PH, M: M });
@@ -8391,6 +8412,15 @@ function _dsRenderTools() {
         apprRow.appendChild(stBtn('Pending', 'pending', '#c0392b'));
         apprRow.appendChild(stBtn('Approved', 'approved', '#1a7f37'));
         apprWrap.appendChild(apprRow);
+        if (desc._install) {
+            t.appendChild(apprWrap);
+            const inote = document.createElement('div');
+            inote.style.cssText = 'margin-top:10px; padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-input);';
+            inote.innerHTML = '<div style="font-size:0.7rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">Install guide page</div>'
+                + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">One page per elevation, showing the full wall as built in the Elevations tab — with hang height (AFF) and plan view. Edit the wall in the Elevations tab; change presentation type on the Project tab.</div>';
+            t.appendChild(inote);
+            return;
+        }
         // Sticky top: approval + layout controls stay locked while templates scroll.
         const _toolsBg = getComputedStyle(t).backgroundColor;
         const head = document.createElement('div');
@@ -9878,69 +9908,86 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
 // Template-driven single-spec page (non-classic arrangements). Reuses the same
 // primitives as the classic renderer: baked frame mockup, dotted-leader spec
 // block, and the wall elevation. Coords come from SPEC_TEMPLATES (page fractions).
-async function _drawInstallGuidePage(doc, logos, pageNum, meta, r, ctx) {
+async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     const PW = ctx.PW, PH = ctx.PH, M = ctx.M;
-    const elev = (typeof elevations !== 'undefined' ? elevations : []).find(e => e && e.frames && e.frames.some(fr => fr.id === r.id));
-    // Title block (top-left): zone + "ARTWORK DETAILS"
+    const isElev = !!(arg && arg.frames);                 // elevation vs single piece row
+    const elev = isElev ? arg : (typeof elevations !== 'undefined' ? elevations : []).find(e => e && e.frames && e.frames.some(fr => fr.id === arg.id));
+    const featuredId = isElev ? null : (arg && arg.id);   // null → all frames full opacity
+    const activeFrames = elev ? elev.frames.filter(f => f && f.active !== false) : [];
+    const lookupRow = (id) => (typeof dashProjectData !== 'undefined' ? dashProjectData : []).find(rr => rr && rr.id === id) || {};
+    const planRow = isElev ? lookupRow(activeFrames[0] && activeFrames[0].id) : arg;
+
+    // Title block (top-left): wall/zone name, ARTWORK DETAILS, item code.
     const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
     doc.setFont(_font(ts.font), ts.font === 'serif' ? 'normal' : 'bold');
     doc.setFontSize(Math.max(ts.size, 22)); doc.setTextColor(trgb.r, trgb.g, trgb.b);
-    doc.text((r.location || (elev && elev.name) || r.category || (r.id || '')).toString().toUpperCase(), M, M + 16);
+    const zone = (isElev ? (elev && elev.name) : (arg.location || (elev && elev.name) || arg.category || arg.id) || '').toString().toUpperCase();
+    doc.text(zone, M, M + 16);
     doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(25, 25, 25);
     doc.text('ARTWORK DETAILS', M, M + 32);
-    if (r.id) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text((r.id || '').toString(), M, M + 50); }
+    const codeId = isElev ? (activeFrames.length === 1 ? (activeFrames[0].id || '') : '') : (arg.id || '');
+    if (codeId) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text(codeId, M, M + 50); }
 
     try {
         const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
         let elevLeft = PW * 0.42;
-        const er = elev ? await renderElevationToCanvas(elev, r.id, { dpi: 46 }) : null;
+        const er = elev ? await renderElevationToCanvas(elev, featuredId, { dpi: 46 }) : null;
         if (er && er.canvas) {
             const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
             const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
             const aspect = er.wIn / er.hIn;
-            const maxW = PW * 0.54, maxH = PH - M * 2 - 16;
+            const maxW = PW * 0.56, maxH = PH - M * 2 - 16;
             let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
             const ex = PW - M - ew - 28, ey = M + 6 + (maxH - eh) / 2;
             elevLeft = ex;
             doc.addImage(flat.toDataURL('image/jpeg', 0.9), 'JPEG', ex, ey, ew, eh);
 
-            const f = elev.frames.find(fr => fr.id === r.id) || elev.frames[0];
             const wallHin = toIn(elev.wallH) || 96, padIn = 6;
-            const cxFrac = er.wallLeftFrac + (toIn(f.x) + toIn(f.w) / 2) / er.wIn;
-            const fLeftFrac = er.wallLeftFrac + toIn(f.x) / er.wIn;
-            const fRightFrac = er.wallLeftFrac + (toIn(f.x) + toIn(f.w)) / er.wIn;
-            const cyFrac = (padIn + wallHin - (toIn(f.y) + toIn(f.h) / 2)) / er.hIn;
-            const floorFrac = (padIn + wallHin) / er.hIn;
-            const centerAFF = toIn(f.y) + toIn(f.h) / 2;
             const PXf = (fr) => ex + fr * ew, PYf = (fr) => ey + fr * eh;
+            const dimFrame = isElev ? (activeFrames.length === 1 ? activeFrames[0] : null) : (elev.frames.find(fr => fr.id === arg.id) || elev.frames[0]);
+            const hangFrame = dimFrame || activeFrames[0];
             doc.setDrawColor(200, 40, 40); doc.setTextColor(200, 40, 40); doc.setLineWidth(0.7);
-            doc.setLineDashPattern([3, 2], 0);
-            doc.line(PXf(cxFrac), ey - 4, PXf(cxFrac), ey + eh + 4);                       // centerline
-            doc.line(PXf(er.wallLeftFrac), PYf(cyFrac), PXf(fLeftFrac), PYf(cyFrac));       // EQ left
-            doc.line(PXf(fRightFrac), PYf(cyFrac), PXf(er.wallRightFrac), PYf(cyFrac));     // EQ right
-            const affX = PXf(er.wallRightFrac) + 12;
-            doc.line(affX, PYf(cyFrac), affX, PYf(floorFrac));                              // AFF
-            doc.setLineDashPattern([], 0);
-            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9);
-            doc.text('CL', PXf(cxFrac) + 2, ey + 2);
-            doc.text('EQ', PXf((er.wallLeftFrac + fLeftFrac) / 2), PYf(cyFrac) - 3, { align: 'center' });
-            doc.text('EQ', PXf((fRightFrac + er.wallRightFrac) / 2), PYf(cyFrac) - 3, { align: 'center' });
-            doc.setFontSize(9.5);
-            doc.text(Math.round(centerAFF * 2.54) + 'cm/' + Math.round(centerAFF) + '" AFF', affX + 4, (PYf(cyFrac) + PYf(floorFrac)) / 2);
+            if (hangFrame) {
+                const cyFrac = (padIn + wallHin - (toIn(hangFrame.y) + toIn(hangFrame.h) / 2)) / er.hIn;
+                const floorFrac = (padIn + wallHin) / er.hIn;
+                const centerAFF = toIn(hangFrame.y) + toIn(hangFrame.h) / 2;
+                const affX = PXf(er.wallRightFrac) + 12;
+                doc.setLineDashPattern([3, 2], 0);
+                doc.line(affX, PYf(cyFrac), affX, PYf(floorFrac));                                  // AFF
+                if (dimFrame) {                                                                     // single frame: full CL/EQ
+                    const cxFrac = er.wallLeftFrac + (toIn(dimFrame.x) + toIn(dimFrame.w) / 2) / er.wIn;
+                    const fLeftFrac = er.wallLeftFrac + toIn(dimFrame.x) / er.wIn;
+                    const fRightFrac = er.wallLeftFrac + (toIn(dimFrame.x) + toIn(dimFrame.w)) / er.wIn;
+                    doc.line(PXf(cxFrac), ey - 4, PXf(cxFrac), ey + eh + 4);
+                    doc.line(PXf(er.wallLeftFrac), PYf(cyFrac), PXf(fLeftFrac), PYf(cyFrac));
+                    doc.line(PXf(fRightFrac), PYf(cyFrac), PXf(er.wallRightFrac), PYf(cyFrac));
+                    doc.setLineDashPattern([], 0);
+                    doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9);
+                    doc.text('CL', PXf(cxFrac) + 2, ey + 2);
+                    doc.text('EQ', PXf((er.wallLeftFrac + fLeftFrac) / 2), PYf(cyFrac) - 3, { align: 'center' });
+                    doc.text('EQ', PXf((fRightFrac + er.wallRightFrac) / 2), PYf(cyFrac) - 3, { align: 'center' });
+                } else {
+                    doc.setLineDashPattern([], 0);
+                }
+                doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9.5);
+                doc.text(Math.round(centerAFF * 2.54) + 'cm/' + Math.round(centerAFF) + '" AFF', affX + 4, (PYf(cyFrac) + PYf(floorFrac)) / 2);
+            }
         } else {
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
-            doc.text('Place this piece on a wall elevation to generate the dimensioned install view.', PW * 0.42, PH * 0.5, { maxWidth: PW * 0.5 });
+            doc.text(isElev ? 'This elevation has no active artwork.' : 'Place this piece on a wall elevation to generate the dimensioned install view.', PW * 0.42, PH * 0.5, { maxWidth: PW * 0.5 });
         }
 
-        // Plan thumbnail (bottom-left), like the reference.
-        const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(r.level || 0)];
+        // Plan thumbnail (bottom-left), kept clear of the elevation; pins for every piece on the wall.
+        const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(planRow.level || 0)];
         if (lv && lv.imageData) {
             const pim = await _loadImg(lv.imageData);
             const pmaxW = Math.max(80, Math.min(PW * 0.28, elevLeft - M - 18)), pmaxH = PH * 0.30, pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
             let pw = pmaxW, ph = pw / pasp; if (ph > pmaxH) { ph = pmaxH; pw = ph * pasp; }
             const px0 = M, py0 = PH - M - ph;
             doc.addImage(lv.imageData, 'JPEG', px0, py0, pw, ph);
-            if (r.planX != null && r.planY != null) { doc.setFillColor(200, 40, 40); doc.circle(px0 + r.planX * pw, py0 + r.planY * ph, 3, 'F'); }
+            const pins = isElev ? activeFrames.map(f => lookupRow(f.id)) : [arg];
+            doc.setFillColor(200, 40, 40);
+            pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) doc.circle(px0 + rr.planX * pw, py0 + rr.planY * ph, 3, 'F'); });
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(150, 150, 150);
             doc.text('Floorplan', px0, py0 - 4);
         }
@@ -10264,8 +10311,20 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         return order.map(k => map[k]);
     };
     const _units = _unitsFromRows(_specRows);
+    const _isInstall = (_specTplKey === 'installGuide');
+    const _installUnits = () => (elevations || []).map((e, ei) => ({ elev: e, idx: ei })).filter(o => o.elev && o.elev.frames && o.elev.frames.some(f => f && f.active !== false));
     const plan = [];
-    if (_doKeys) {
+    if (_isInstall) {
+        // Install guide: one page per elevation (full wall), no per-piece repeats.
+        if (_doKeys) {
+            const _lvlOf = (x) => { const n = parseInt(x, 10); return isNaN(n) ? 0 : n; };
+            const emitLevels = [];
+            floorplanLevels.forEach((lv, li) => { const used = (li === 0) || !!lv.imageData || (dashProjectData || []).some(it => _lvlOf(it.level) === li); if (used) emitLevels.push(li); });
+            if (!emitLevels.length) emitLevels.push(0);
+            emitLevels.forEach(li => plan.push({ type: 'key', li: li }));
+        }
+        if (inc.spec) _installUnits().forEach(o => plan.push({ type: 'install', elev: o.elev, idx: o.idx }));
+    } else if (_doKeys) {
         const _lvlOf = (x) => { const n = parseInt(x, 10); return isNaN(n) ? 0 : n; };
         const emitLevels = [];
         floorplanLevels.forEach((lv, li) => {
@@ -10287,12 +10346,16 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const idToPage = {};
     {
         let _p = pageNum;
-        for (const step of plan) { _p++; if (step.type === 'spec' && step.unit) step.unit.members.forEach(m => { if (m && m.id) idToPage[m.id] = _p; }); }
+        for (const step of plan) {
+            _p++;
+            if (step.type === 'spec' && step.unit) step.unit.members.forEach(m => { if (m && m.id) idToPage[m.id] = _p; });
+            else if (step.type === 'install' && step.elev && step.elev.frames) step.elev.frames.forEach(f => { if (f && f.id) idToPage[f.id] = _p; });
+        }
     }
 
     // — Emit the plan: floorplan keys and spec pages, interleaved per level —
     for (const step of plan) {
-        newPage(step.type === 'key' ? ('floorplan:' + step.li) : ('spec:' + (step.unit && step.unit.key)));
+        newPage(step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? ('spec:elev:' + step.idx) : ('spec:' + (step.unit && step.unit.key)));
         if (step.type === 'key') {
             _fpLevelKeyPage[step.li] = pageNum;
             const lv = floorplanLevels[step.li] || {};
@@ -10309,6 +10372,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
             _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, lv.name || ('Level ' + (step.li + 1)));
             if (!fpKeyPageNum) fpKeyPageNum = pageNum;
+            continue;
+        }
+        if (step.type === 'install') {
+            await _drawInstallGuidePage(doc, logos, pageNum, meta, step.elev, { PW: PW, PH: PH, M: M });
             continue;
         }
         const r = step.unit.rep;
