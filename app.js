@@ -604,6 +604,10 @@ const SPEC_TEMPLATES = {
         label: 'Side by side (diptych / triptych)',
         group: true,
         row: true
+    },
+    custom: {
+        label: 'Custom (free layout)',
+        freeform: true
     }
 };
 function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; ' + (active ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);'); }
@@ -7491,6 +7495,10 @@ function _deckMockHTML(desc, w, h) {
         const txt = (x, y, bw, html, size, weight, fam) => '<div style="position:absolute; left:' + Math.round(x * w) + 'px; top:' + Math.round(y * h) + 'px; width:' + Math.round(bw * w) + 'px; color:#222; font-size:' + size + 'px; line-height:1.6; font-weight:' + (weight || 400) + ';' + (fam ? 'font-family:' + fam + ';' : '') + '">' + html + '</div>';
         const DRUK = "'Druk','Arial Narrow',Arial,sans-serif", SANS = 'Arial,Helvetica,sans-serif';
         let inner = '';
+        if (tpl && tpl.freeform) {
+            // Custom free layout: blank page; mockups/text/images are annotations.
+            return wrap('');
+        }
         if (!tpl || tpl.legacy) {
             // Classic: code top-left, artwork left, spec right
             inner += txt(0.06, 0.04, 0.6, _esc(r.id || 'SPEC'), codeFs, 800, DRUK);
@@ -7770,6 +7778,50 @@ function _dsRenderAnnots(page, desc, w, hh) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     list.forEach((a, i) => {
         const sel = (key === _dsSelKey && i === _dsSelIdx);
+        if (a.type === 'mockup') {
+            const entry = _mockupGet(a.pieceId);
+            const aspect = (entry && entry.aspect) || a.aspect || 1.2;
+            const bw = (a.w || 0.3) * w, bh = bw * aspect;
+            const box = document.createElement('div');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;';
+            if (entry && entry.url) {
+                const img = document.createElement('img'); img.src = entry.url; img.draggable = false;
+                img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
+                box.appendChild(img);
+            } else {
+                box.style.background = '#f2f2f4';
+                box.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:11px; text-align:center; padding:6px;">' + _esc(a.pieceId || 'piece') + '<br>rendering\u2026</div>';
+                if (a.pieceId) _mockupEnsure(a.pieceId).then(() => _dsRenderCenter());
+            }
+            if (a.showCode) {
+                const prow = _pieceById(a.pieceId) || {};
+                const code = (prow.imageCode || prow.artworkFile || a.pieceId || '') + '';
+                if (code) { const lab = document.createElement('div'); lab.textContent = code; lab.style.cssText = 'position:absolute; left:0; right:0; bottom:-15px; text-align:right; font-size:' + Math.max(7, 0.016 * hh) + 'px; color:#444; pointer-events:none; font-family:' + _dsAnnFam('display') + ';'; box.appendChild(lab); }
+            }
+            box.onmousedown = (e) => {
+                e.preventDefault();
+                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
+                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            };
+            box.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsPickMockupPiece(a); };
+            if (sel) {
+                const handle = document.createElement('div');
+                handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
+                handle.onmousedown = (e) => {
+                    e.preventDefault(); e.stopPropagation();
+                    const sx = e.clientX, ow = a.w || 0.3;
+                    const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); a.w = nw; const nbw = nw * w; box.style.width = nbw + 'px'; box.style.height = (nbw * aspect) + 'px'; };
+                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                    document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                };
+                box.appendChild(handle);
+            }
+            page.appendChild(box);
+            return;
+        }
         if (a.type === 'image') {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
@@ -7888,14 +7940,16 @@ function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToo
 function _dsSyncToolbar() {
     const a = _dsCurrentAnnot();
     const selected = !!a;
-    const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow');
+    const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup');
     const isArrow = !!(a && (a.type === 'arrow' || a.type === 'elbow'));
+    const isMock = !!(a && a.type === 'mockup');
     const grp = document.getElementById('dsSelGroup');
     if (grp) { grp.style.opacity = selected ? '1' : '0.4'; grp.style.pointerEvents = selected ? 'auto' : 'none'; }
     const hint = document.getElementById('dsSelHint');
     if (hint) hint.textContent = !selected ? 'Select a box to style it \u00b7 double-click to edit \u00b7 drag to move'
         : isText ? 'Text box \u2014 double-click to type, drag corner to scale'
         : isArrow ? 'Arrow \u2014 drag it to move, drag an end to re-aim'
+        : isMock ? 'Mockup \u2014 drag to move, corner to resize, double-click to swap artwork'
         : 'Image \u2014 drag to move, corner to resize';
     const setEnabled = (id, on) => { const e = document.getElementById(id); if (e) { e.style.opacity = on ? '1' : '0.35'; e.style.pointerEvents = on ? 'auto' : 'none'; } };
     setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText);
@@ -8063,6 +8117,29 @@ function _dsDeleteAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return; cons
 // spec page shows actual art instead of placeholder boxes. Async + token-guarded
 // so switching pages mid-bake doesn't paint stale images.
 let _dsBakeToken = 0;
+const _mockupCache = {};
+function _pieceById(id) { return (typeof dashProjectData !== 'undefined' ? dashProjectData : []).find(r => r && r.id === id) || null; }
+function _mockupCacheKey(id) { return (id || '') + '|' + (_isWireframe() ? 'wf' : 'art'); }
+function _mockupGet(id) { return _mockupCache[_mockupCacheKey(id)] || null; }
+async function _bakeMockup(row) {
+    if (!row) return null;
+    const dInches = _frameDataInInches(Object.assign({}, row, { extW: row.extW, extH: row.extH }), dashUnit);
+    let artworkImg = null; if (row.artworkUrl) { try { artworkImg = await _loadImg(row.artworkUrl); } catch (e) {} }
+    const swatch = (row.fType === 'image' && row.swatchDataUrl) ? await _loadImg(row.swatchDataUrl) : null;
+    const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 110, pad: 0, artworkImg, artCrop: { zoom: row.artZoom, panX: row.artPanX, panY: row.artPanY } });
+    const cnv = out.canvas; const aspect = cnv.height / Math.max(1, cnv.width);
+    let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); } catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
+    return { url: url, aspect: aspect };
+}
+async function _mockupEnsure(id) {
+    const k = _mockupCacheKey(id);
+    if (_mockupCache[k] && _mockupCache[k].url) return _mockupCache[k];
+    if (_mockupCache[k] && _mockupCache[k]._pending) return _mockupCache[k]._pending;
+    const row = _pieceById(id); if (!row) return null;
+    const p = _bakeMockup(row).then(res => { if (res) _mockupCache[k] = res; return res; }).catch(() => null);
+    _mockupCache[k] = { _pending: p };
+    return p;
+}
 async function _bakeFrameDataUrl(r) {
     const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
     let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
@@ -8190,6 +8267,7 @@ async function renderSpecPageCanvas(desc, onProgress) {
     const PW = 936, PH = 540, M = 40, r = desc.row; if (!r) return null;
     const tpl = desc._specTpl || _specTplResolve(desc._ovKey || (r.id || ''));
     const T = SPEC_TEMPLATES[tpl] || {};
+    if (T.freeform) return null;
     const rec = new CanvasPdfRec(PW, PH);
     if (onProgress) onProgress(12);
     if (desc._install) {
@@ -8209,6 +8287,8 @@ async function renderSpecPageCanvas(desc, onProgress) {
 async function _dsBuildPage() {
     const desc = _dsPages[_dsIndex];
     if (!desc || desc.kind !== 'spec') { showInfoModal('Build preview', 'Select a spec page, then Build to render an exact preview of how it will export.'); return; }
+    const _bt = desc._specTpl || _specTplResolve(desc._ovKey || (desc.row && desc.row.id) || '');
+    if (SPEC_TEMPLATES[_bt] && SPEC_TEMPLATES[_bt].freeform) { showInfoModal('Custom layout', 'Custom pages already show an exact live preview \u2014 what you place is what exports.'); return; }
     const key = _deckPageKey(desc);
     const c = document.getElementById('dsCenter');
     const ov = document.createElement('div');
@@ -8281,6 +8361,59 @@ function _dsManualSection(desc) {
         wrap.appendChild(hint);
     }
     return wrap;
+}
+function _dsAddMockup(pieceId) {
+    const desc = _dsPages[_dsIndex]; if (!desc) return;
+    const key = _deckPageKey(desc); if (!key) return;
+    const m = editorialContent.annotations || (editorialContent.annotations = {});
+    const list = m[key] || (m[key] = []);
+    const nMock = list.filter(a => a.type === 'mockup').length;
+    list.push({ type: 'mockup', pieceId: pieceId, x: Math.min(0.7, 0.1 + nMock * 0.05), y: 0.2, w: 0.3, showCode: true });
+    if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (pieceId) _mockupEnsure(pieceId).then(() => { _dsRenderCenter(); _dsRenderRail(); });
+    _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+}
+function _dsSeedCustom(desc) {
+    const key = _deckPageKey(desc); if (!key) return;
+    const m = editorialContent.annotations || (editorialContent.annotations = {});
+    const list = m[key] || (m[key] = []);
+    if (list.some(a => a.type === 'mockup')) return;
+    const ids = ((desc.members && desc.members.length) ? desc.members.map(x => x && x.id) : [desc.row && desc.row.id]).filter(Boolean);
+    const n = Math.max(1, ids.length);
+    ids.forEach((id, i) => { list.push({ type: 'mockup', pieceId: id, x: 0.06 + i * (0.9 / n), y: 0.2, w: Math.min(0.42, 0.84 / n), showCode: true }); if (id) _mockupEnsure(id); });
+}
+function _dsCustomSection(desc) {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);';
+    const title = document.createElement('div'); title.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:6px;'; title.textContent = 'Custom layout'; wrap.appendChild(title);
+    const hint = document.createElement('p'); hint.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:0 0 8px; line-height:1.5;'; hint.textContent = 'Drag mockups anywhere, resize from the corner, double-click one to swap its artwork. Use the toolbar for text, images and arrows.'; wrap.appendChild(hint);
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px;';
+    const sel = document.createElement('select'); sel.style.cssText = 'flex:1; font-size:0.64rem; padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    const ph = document.createElement('option'); ph.value = ''; ph.textContent = 'Add a mockup\u2026'; sel.appendChild(ph);
+    (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => { if (!r || !r.id) return; const o = document.createElement('option'); o.value = r.id; o.textContent = r.id; sel.appendChild(o); });
+    const add = document.createElement('button'); add.textContent = 'Add'; add.style.cssText = 'font-size:0.64rem; font-weight:700; padding:5px 14px; border-radius:4px; cursor:pointer; border:1px solid #6a6aff; background:#6a6aff; color:#fff;';
+    add.onclick = () => { if (sel.value) _dsAddMockup(sel.value); };
+    row.appendChild(sel); row.appendChild(add); wrap.appendChild(row);
+    return wrap;
+}
+function _dsPickMockupPiece(a) {
+    const old = document.getElementById('dsMockPick'); if (old) old.remove();
+    const ov = document.createElement('div'); ov.id = 'dsMockPick';
+    ov.style.cssText = 'position:fixed; inset:0; z-index:100030; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center;';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:8px; padding:16px; width:280px; max-width:90vw;';
+    card.innerHTML = '<div style="font-size:0.8rem; font-weight:700; color:var(--text-main); margin-bottom:10px;">Choose artwork</div>';
+    const sel = document.createElement('select');
+    sel.style.cssText = 'width:100%; padding:7px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:5px; margin-bottom:12px;';
+    (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => { if (!r || !r.id) return; const o = document.createElement('option'); o.value = r.id; o.textContent = r.id; if (r.id === a.pieceId) o.selected = true; sel.appendChild(o); });
+    card.appendChild(sel);
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
+    const cancel = document.createElement('button'); cancel.textContent = 'Cancel'; cancel.style.cssText = 'font-size:0.7rem; padding:6px 12px; border-radius:5px; cursor:pointer; border:1px solid var(--border-color); background:transparent; color:var(--text-main);'; cancel.onclick = () => ov.remove();
+    const ok = document.createElement('button'); ok.textContent = 'Use'; ok.style.cssText = 'font-size:0.7rem; font-weight:700; padding:6px 14px; border-radius:5px; cursor:pointer; border:1px solid #6a6aff; background:#6a6aff; color:#fff;';
+    ok.onclick = () => { a.pieceId = sel.value; a.aspect = null; if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (a.pieceId) _mockupEnsure(a.pieceId).then(() => _dsRenderCenter()); _dsRenderCenter(); ov.remove(); };
+    row.appendChild(cancel); row.appendChild(ok); card.appendChild(row);
+    ov.appendChild(card); ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
+    (document.getElementById('deckStudioModal') || document.body).appendChild(ov);
 }
 function _dsClearBuiltAll() { _dsBuilt = {}; }
 function _dsSyncBuildBtn() {
@@ -8589,7 +8722,7 @@ function _dsRenderTools() {
                 const onCur = (key === resolved);
                 const cell = document.createElement('div');
                 cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
-                cell.onclick = () => { if (key === globalTpl) delete overrides[ovKey]; else overrides[ovKey] = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+                cell.onclick = () => { if (key === globalTpl) delete overrides[ovKey]; else overrides[ovKey] = key; if (key === 'custom') _dsSeedCustom(desc); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
                 const thumb = document.createElement('div');
                 thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
                 try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, members: desc.members, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
@@ -8599,7 +8732,7 @@ function _dsRenderTools() {
                 cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
             });
             t.appendChild(cardsWrap);
-            t.appendChild(_dsManualSection(desc));
+            t.appendChild(resolved === 'custom' ? _dsCustomSection(desc) : _dsManualSection(desc));
         }
 
         // — Notes editor (writes the piece's spec Notes line) —
@@ -10263,6 +10396,14 @@ function _drawAnnotations(doc, key, PW, PH) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
     list.forEach(a => {
+        if (a.type === 'mockup') {
+            const entry = _mockupGet(a.pieceId); if (!entry || !entry.url) return;
+            const pw = (a.w || 0.3) * PW, ph = pw * (entry.aspect || a.aspect || 1.2);
+            const x = (a.x || 0) * PW, y = (a.y || 0) * PH;
+            try { doc.addImage(entry.url, 'JPEG', x, y, pw, ph); } catch (e) {}
+            if (a.showCode) { const prow = _pieceById(a.pieceId) || {}; const code = (prow.imageCode || prow.artworkFile || a.pieceId || '') + ''; if (code) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(cs.size, 10)); doc.setTextColor(crgb.r, crgb.g, crgb.b); try { doc.text(code, x + pw, y + ph + 11, { align: 'right' }); } catch (e) {} } }
+            return;
+        }
         if (a.type === 'arrow' || a.type === 'elbow') {
             const X1 = (a.x1 || 0) * PW, Y1 = (a.y1 || 0) * PH, X2 = (a.x2 || 0) * PW, Y2 = (a.y2 || 0) * PH;
             const rgb = _annHexToRgb(a.color || '#c0392b');
@@ -10551,6 +10692,9 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const _specTpl = step.unit._manual ? (step.unit.layout || 'setRow') : _specTplResolve(step.unit.key || (r.id || ''));
         if (_specIsGroup || step.unit._manual) {
             await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
+        } else if (SPEC_TEMPLATES[_specTpl] && SPEC_TEMPLATES[_specTpl].freeform) {
+            // Custom free layout: the page is a blank canvas; mockups/text/images/
+            // arrows are all annotations, painted by the annotation post-pass.
         } else if (_specTpl === 'installGuide') {
             await _drawInstallGuidePage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M });
         } else if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
@@ -10713,6 +10857,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
+    for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } } }
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
     // — Approval status: spec pages the client has approved (green) or that are
     //   pending approval (red), shown under the floorplan back-link —
