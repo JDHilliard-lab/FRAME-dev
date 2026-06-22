@@ -596,8 +596,13 @@ const SPEC_TEMPLATES = {
         custom: true
     },
     setRight: {
-        label: 'Set — multi-artwork (A/B/C)',
+        label: 'Stacked (A / B / C)',
         group: true
+    },
+    setRow: {
+        label: 'Side by side (diptych / triptych)',
+        group: true,
+        row: true
     }
 };
 function _tplTabCss(active) { return 'height:28px; padding:0 12px; font-size:0.72rem; border:1px solid var(--border-color); border-radius:4px; cursor:pointer; ' + (active ? 'background:#6a6aff; color:#fff; border-color:#6a6aff;' : 'background:var(--bg-input); color:var(--text-main);'); }
@@ -7507,14 +7512,26 @@ function _deckMockHTML(desc, w, h) {
             const n = Math.max(1, members.length);
             const letters = ['A', 'B', 'C', 'D'];
             inner += txt(0.06, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
-            const topY = 0.16, slotH = 0.8 / n;
-            members.forEach((m, i) => {
-                const sy = topY + i * slotH;
-                inner += txt(0.06, sy, 0.04, _esc(letters[i] || (i + 1) + ''), fs(0.04), 800, DRUK);
-                let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
-                inner += txt(0.11, sy, 0.34, '<b>' + _esc(m.id || '') + '</b><br>' + ml.map(_esc).join('<br>'), fs(0.022), 400, SANS);
-                inner += box(0.54, sy + slotH * 0.06, 0.42, slotH * 0.82, _esc(letters[i] || ''), 'data-bake="artwork" data-member-idx="' + i + '"');
-            });
+            if (tpl.row) {
+                const cols = Math.max(1, Math.min(n, 4));
+                const leftX = 0.06, gap = 0.02, slotW = (0.9 - gap * (cols - 1)) / cols;
+                const topY = 0.16, artH = 0.46;
+                members.slice(0, cols).forEach((m, i) => {
+                    const cx = leftX + i * (slotW + gap);
+                    inner += box(cx, topY, slotW, artH, _esc(letters[i] || ''), 'data-bake="artwork" data-member-idx="' + i + '"');
+                    let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
+                    inner += txt(cx, topY + artH + 0.04, slotW, '<b>' + _esc(m.id || '') + '</b><br>' + ml.map(_esc).join('<br>'), fs(0.02), 400, SANS);
+                });
+            } else {
+                const topY = 0.16, slotH = 0.8 / n;
+                members.forEach((m, i) => {
+                    const sy = topY + i * slotH;
+                    inner += txt(0.06, sy, 0.04, _esc(letters[i] || (i + 1) + ''), fs(0.04), 800, DRUK);
+                    let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {}
+                    inner += txt(0.11, sy, 0.34, '<b>' + _esc(m.id || '') + '</b><br>' + ml.map(_esc).join('<br>'), fs(0.022), 400, SANS);
+                    inner += box(0.54, sy + slotH * 0.06, 0.42, slotH * 0.82, _esc(letters[i] || ''), 'data-bake="artwork" data-member-idx="' + i + '"');
+                });
+            }
         } else {
             if (tpl.title) { const tf = tpl.title.field || 'application'; const tt = (tf === 'id' ? (r.id || '') : tf === 'product' ? (r.product || '') : (function () { try { return (buildSpecStrings(r).application || r.product || ''); } catch (e) { return ''; } })()); inner += txt(tpl.title.x, tpl.title.y - 0.03, 0.5, _esc(tt.toString().toUpperCase()), fs(0.045), 800, DRUK); }
             if (tpl.artwork) { inner += box(tpl.artwork.x, tpl.artwork.y, tpl.artwork.w, tpl.artwork.h, 'artwork', 'data-bake="artwork"'); if (tpl.code) { const cf = tpl.code.field || 'id'; const ct = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')); const cx = tpl.code.align === 'center' ? (tpl.artwork.x + tpl.artwork.w / 2 - 0.1) : (tpl.code.align === 'right' ? (tpl.artwork.x + tpl.artwork.w - 0.2) : tpl.artwork.x); const _cs = _specCodeStyle(); const _cfam = _cs.font === 'serif' ? "'Messina',Georgia,serif" : _cs.font === 'sans' ? 'Arial,Helvetica,sans-serif' : DRUK; inner += txt(cx, tpl.artwork.y + tpl.artwork.h + 0.01, 0.24, '<span style="color:' + _cs.color + '">' + _esc(ct.toString()) + '</span>', fs(_cs.size / 540), 700, _cfam); } }
@@ -8465,10 +8482,26 @@ function _dsRenderTools() {
 
         if (isGroupGlobal) {
             const note = document.createElement('p');
-            note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0; line-height:1.5;';
-            note.textContent = 'Set pieces (A/B/C…) are grouped onto one page. Switch to “Per piece” to give pages their own layout.';
+            note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 4px; line-height:1.5;';
+            note.textContent = 'Set pieces (A / B / C…) are grouped onto one page. Pick how they sit:';
             head.appendChild(note);
             t.appendChild(head);
+
+            const cardsWrap = document.createElement('div');
+            ['setRight', 'setRow'].forEach(key => {
+                const onCur = (key === globalTpl);
+                const cell = document.createElement('div');
+                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
+                cell.onclick = () => { editorialContent.specTemplate = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+                const thumb = document.createElement('div');
+                thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
+                try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, members: desc.members, title: desc.title, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
+                const nm = document.createElement('div');
+                nm.textContent = (SPEC_TEMPLATES[key].label || key) + (onCur ? '  ✓' : '');
+                nm.style.cssText = 'font-size:0.64rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+                cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
+            });
+            t.appendChild(cardsWrap);
         } else {
             const btnRow = document.createElement('div');
             btnRow.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
@@ -9870,6 +9903,55 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
     doc.setFontSize(20);
     doc.setTextColor(20, 20, 20);
     doc.text((unit.key || unit.rep.id || '').toString().toUpperCase(), PW * 0.06, PH * 0.12);
+
+    // — Side-by-side (diptych / triptych / quad): members in columns —
+    if (SPEC_TEMPLATES[tplKey] && SPEC_TEMPLATES[tplKey].row) {
+        const cols = Math.max(1, Math.min(members.length, 4));
+        const leftX = PW * 0.06, rightX = PW * 0.96, totalW = rightX - leftX, gap = 14;
+        const slotW = (totalW - gap * (cols - 1)) / cols;
+        const topY = PH * 0.18, botY = PH * 0.9, artH = (botY - topY) * 0.62;
+        const artOnly = _specArtOnly(unit.key);
+        for (let i = 0; i < members.length && i < cols; i++) {
+            const r = members[i];
+            const letter = letters[i] || String(i + 1);
+            const cx = leftX + i * (slotW + gap);
+            try {
+                const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+                let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+                const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+                const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+                const cnv = out.canvas;
+                let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); } catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
+                const fit = Math.min(slotW / cnv.width, artH / cnv.height);
+                const aw = cnv.width * fit, ah = cnv.height * fit;
+                const ax = cx + (slotW - aw) / 2, ay = topY + (artH - ah);
+                try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
+                doc.setFont(_font('display'), 'bold'); doc.setFontSize(14); doc.setTextColor(20, 20, 20);
+                doc.text(letter, ax - 2, ay + 11);
+                const ic = (r.imageCode || r.artworkFile || '') + '';
+                if (ic) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(cs.size, 8.5)); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw, ay + ah + 9, { align: 'right' }); }
+            } catch (e) {}
+            let by = topY + artH + 22;
+            doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(20, 20, 20);
+            doc.text((r.id || '').toString(), cx, by); by += 14;
+            if (!artOnly) {
+                let specs = null; try { specs = buildSpecStrings(r); } catch (e) {}
+                const wanted = ['Application', 'Frame Size', 'Frame Code', 'Matboard', 'Image Size', 'Overall Dimensions'];
+                const lines = specs && specs.lines ? specs.lines.filter(l => wanted.indexOf(l.label) >= 0) : [];
+                doc.setFontSize(7.5);
+                lines.forEach(ln => {
+                    if (by > botY) return;
+                    doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, cx, by);
+                    const lw = doc.getTextWidth(ln.label);
+                    doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = cx + slotW - vw; doc.text(vs, vx, by);
+                    const ds = cx + lw + 4, de = vx - 4;
+                    if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(170, 170, 170); doc.setLineWidth(0.4); doc.line(ds, by - 2, de, by - 2); doc.setLineDashPattern([], 0); }
+                    by += 11;
+                });
+            }
+        }
+        return;
+    }
 
     const topY = PH * 0.17, botY = PH * 0.9;
     const slotH = (botY - topY) / n;
