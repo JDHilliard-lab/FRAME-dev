@@ -8422,20 +8422,36 @@ function _dsRenderTools() {
         apprRow.appendChild(stBtn('Pending', 'pending', '#c0392b'));
         apprRow.appendChild(stBtn('Approved', 'approved', '#1a7f37'));
         apprWrap.appendChild(apprRow);
-        if (desc._install) {
-            t.appendChild(apprWrap);
-            const inote = document.createElement('div');
-            inote.style.cssText = 'margin-top:10px; padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-input);';
-            inote.innerHTML = '<div style="font-size:0.7rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">Install guide page</div>'
-                + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">One page per elevation, showing the full wall as built in the Elevations tab — with hang height (AFF) and plan view. Edit the wall in the Elevations tab; change presentation type on the Project tab.</div>';
-            t.appendChild(inote);
-            return;
-        }
         // Sticky top: approval + layout controls stay locked while templates scroll.
         const _toolsBg = getComputedStyle(t).backgroundColor;
         const head = document.createElement('div');
         head.style.cssText = 'position:sticky; top:0; z-index:3; background:' + ((_toolsBg && _toolsBg !== 'rgba(0, 0, 0, 0)') ? _toolsBg : 'var(--bg-panel,#1d1d20)') + '; padding-bottom:10px; margin-bottom:8px; border-bottom:1px solid var(--border-color);';
         head.appendChild(apprWrap);
+
+        const lbl = document.createElement('div');
+        lbl.textContent = 'Presentation layout'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
+        head.appendChild(lbl);
+
+        // Deck mode: per piece, grouped sets (A/B/C), or install guide (per elevation).
+        const isInstallGlobal = (globalTpl === 'installGuide');
+        const modeRow = document.createElement('div');
+        modeRow.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
+        const switchMode = (tpl) => { editorialContent.specTemplate = tpl; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+        const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.62rem; padding:6px 3px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = on; return b; };
+        modeRow.appendChild(mkMode('Per piece', !isGroupGlobal && !isInstallGlobal, () => switchMode('classic')));
+        modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => switchMode('setRight')));
+        modeRow.appendChild(mkMode('Install guide', isInstallGlobal, () => switchMode('installGuide')));
+        head.appendChild(modeRow);
+
+        if (isInstallGlobal) {
+            const inote = document.createElement('div');
+            inote.style.cssText = 'padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-input);';
+            inote.innerHTML = '<div style="font-size:0.7rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">Install guide</div>'
+                + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">One page per elevation (the walls from the Elevations tab) with hang height + plan view. Switch to “Per piece” for spec-template pages.</div>';
+            head.appendChild(inote);
+            t.appendChild(head);
+            return;
+        }
 
         // Per-page spec visibility: full specs vs artwork-only mockup.
         const visWrap = document.createElement('div');
@@ -8446,24 +8462,14 @@ function _dsRenderTools() {
         visWrap.appendChild(mkVis('Show specs', !aoOn, () => setAO(false)));
         visWrap.appendChild(mkVis('Artwork only', aoOn, () => setAO(true)));
         head.appendChild(visWrap);
-        head.appendChild(lbl);
-
-        // Deck mode: one page per piece, or group set pieces (A/B/C) onto one page.
-        const modeRow = document.createElement('div');
-        modeRow.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
-        const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
-        modeRow.appendChild(mkMode('Page per piece', !isGroupGlobal, () => { if (isGroupGlobal) { editorialContent.specTemplate = 'classic'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } }));
-        modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => { if (!isGroupGlobal) { editorialContent.specTemplate = 'setRight'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } }));
-        head.appendChild(modeRow);
 
         if (isGroupGlobal) {
             const note = document.createElement('p');
             note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0; line-height:1.5;';
-            note.textContent = 'Set pieces (A/B/C…) are grouped onto one page across the whole deck. Switch to “Page per piece” to give individual pages their own layout.';
+            note.textContent = 'Set pieces (A/B/C…) are grouped onto one page. Switch to “Per piece” to give pages their own layout.';
             head.appendChild(note);
             t.appendChild(head);
         } else {
-            // Bulk action lives at the top, in the locked section.
             const btnRow = document.createElement('div');
             btnRow.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
             const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; font-weight:600; padding:7px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
@@ -8476,9 +8482,8 @@ function _dsRenderTools() {
             head.appendChild(sub);
             t.appendChild(head);
 
-            // Scrolling section: the template choices.
             const cardsWrap = document.createElement('div');
-            Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group).forEach(key => {
+            Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group && k !== 'installGuide').forEach(key => {
                 const onCur = (key === resolved);
                 const cell = document.createElement('div');
                 cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
