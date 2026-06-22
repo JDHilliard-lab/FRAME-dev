@@ -7475,17 +7475,12 @@ function _deckMockHTML(desc, w, h) {
             inner += box(0.06, 0.18, 0.34, 0.5, 'artwork', 'data-bake="artwork"');
             inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03), 400, SANS);
         } else if (tpl.custom) {
-            // Install guide: dimensioned wall on the right, plan bottom-left.
+            // Install guide: real wall elevation on the right, plan bottom-left.
             inner += txt(0.06, 0.04, 0.5, _esc((r.location || r.category || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
             inner += txt(0.06, 0.135, 0.4, 'ARTWORK DETAILS', fs(0.028), 800, DRUK);
-            const wx = 0.5, wy = 0.12, ww = 0.46, wh = 0.78;
-            inner += '<div style="position:absolute; left:' + (wx * w) + 'px; top:' + (wy * h) + 'px; width:' + (ww * w) + 'px; height:' + (wh * h) + 'px; border:1px solid #ccc;"></div>';
-            inner += box(wx + ww * 0.32, wy + wh * 0.26, ww * 0.36, wh * 0.44, 'art', 'data-bake="artwork"');
-            inner += '<div style="position:absolute; left:' + ((wx + ww * 0.5) * w) + 'px; top:' + (wy * h) + 'px; width:0; height:' + (wh * h) + 'px; border-left:1px dashed #c0392b;"></div>';
-            inner += txt(wx + ww * 0.5 - 0.015, wy - 0.025, 0.06, '<span style="color:#c0392b">CL</span>', fs(0.022), 700, SANS);
-            inner += '<div style="position:absolute; left:' + ((wx + ww) * w + 4) + 'px; top:' + ((wy + wh * 0.48) * h) + 'px; width:0; height:' + (wh * 0.42 * h) + 'px; border-left:1px dashed #c0392b;"></div>';
-            inner += txt(wx + ww + 0.012, wy + wh * 0.64, 0.12, '<span style="color:#c0392b">AFF</span>', fs(0.02), 700, SANS);
-            inner += box(0.06, 0.62, 0.26, 0.28, 'Floorplan');
+            inner += txt(0.06, 0.2, 0.3, _esc((r.id || '').toString()), fs(0.032), 700, DRUK);
+            inner += box(0.42, 0.16, 0.54, 0.72, 'elevation', 'data-bake="elevation"');
+            inner += box(0.06, 0.58, 0.3, 0.32, 'Floorplan');
         } else if (tpl.group) {
             const members = (desc.members && desc.members.length) ? desc.members.slice(0, 4) : [r, r];
             const n = Math.max(1, members.length);
@@ -9893,9 +9888,11 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, r, ctx) {
     doc.text((r.location || (elev && elev.name) || r.category || (r.id || '')).toString().toUpperCase(), M, M + 16);
     doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(25, 25, 25);
     doc.text('ARTWORK DETAILS', M, M + 32);
+    if (r.id) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text((r.id || '').toString(), M, M + 50); }
 
     try {
         const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
+        let elevLeft = PW * 0.42;
         const er = elev ? await renderElevationToCanvas(elev, r.id, { dpi: 46 }) : null;
         if (er && er.canvas) {
             const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
@@ -9904,6 +9901,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, r, ctx) {
             const maxW = PW * 0.54, maxH = PH - M * 2 - 16;
             let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
             const ex = PW - M - ew - 28, ey = M + 6 + (maxH - eh) / 2;
+            elevLeft = ex;
             doc.addImage(flat.toDataURL('image/jpeg', 0.9), 'JPEG', ex, ey, ew, eh);
 
             const f = elev.frames.find(fr => fr.id === r.id) || elev.frames[0];
@@ -9938,7 +9936,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, r, ctx) {
         const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(r.level || 0)];
         if (lv && lv.imageData) {
             const pim = await _loadImg(lv.imageData);
-            const pmaxW = PW * 0.26, pmaxH = PH * 0.28, pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
+            const pmaxW = Math.max(80, Math.min(PW * 0.28, elevLeft - M - 18)), pmaxH = PH * 0.30, pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
             let pw = pmaxW, ph = pw / pasp; if (ph > pmaxH) { ph = pmaxH; pw = ph * pasp; }
             const px0 = M, py0 = PH - M - ph;
             doc.addImage(lv.imageData, 'JPEG', px0, py0, pw, ph);
