@@ -589,6 +589,10 @@ const SPEC_TEMPLATES = {
         spec: { x: .3, y: .66, w: .4 },
         elevation: { x: .06, y: .64, w: .2, h: .24 }
     },
+    installGuide: {
+        label: 'Install guide — dimensioned elevation',
+        custom: true
+    },
     setRight: {
         label: 'Set — multi-artwork (A/B/C)',
         group: true
@@ -7470,6 +7474,18 @@ function _deckMockHTML(desc, w, h) {
             inner += txt(0.06, 0.04, 0.6, _esc(r.id || 'SPEC'), codeFs, 800, DRUK);
             inner += box(0.06, 0.18, 0.34, 0.5, 'artwork', 'data-bake="artwork"');
             inner += txt(0.44, 0.18, 0.5, lines.slice(0, 14).map(_esc).join('<br>'), fs(0.03), 400, SANS);
+        } else if (tpl.custom) {
+            // Install guide: dimensioned wall on the right, plan bottom-left.
+            inner += txt(0.06, 0.04, 0.5, _esc((r.location || r.category || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
+            inner += txt(0.06, 0.135, 0.4, 'ARTWORK DETAILS', fs(0.028), 800, DRUK);
+            const wx = 0.5, wy = 0.12, ww = 0.46, wh = 0.78;
+            inner += '<div style="position:absolute; left:' + (wx * w) + 'px; top:' + (wy * h) + 'px; width:' + (ww * w) + 'px; height:' + (wh * h) + 'px; border:1px solid #ccc;"></div>';
+            inner += box(wx + ww * 0.32, wy + wh * 0.26, ww * 0.36, wh * 0.44, 'art', 'data-bake="artwork"');
+            inner += '<div style="position:absolute; left:' + ((wx + ww * 0.5) * w) + 'px; top:' + (wy * h) + 'px; width:0; height:' + (wh * h) + 'px; border-left:1px dashed #c0392b;"></div>';
+            inner += txt(wx + ww * 0.5 - 0.015, wy - 0.025, 0.06, '<span style="color:#c0392b">CL</span>', fs(0.022), 700, SANS);
+            inner += '<div style="position:absolute; left:' + ((wx + ww) * w + 4) + 'px; top:' + ((wy + wh * 0.48) * h) + 'px; width:0; height:' + (wh * 0.42 * h) + 'px; border-left:1px dashed #c0392b;"></div>';
+            inner += txt(wx + ww + 0.012, wy + wh * 0.64, 0.12, '<span style="color:#c0392b">AFF</span>', fs(0.02), 700, SANS);
+            inner += box(0.06, 0.62, 0.26, 0.28, 'Floorplan');
         } else if (tpl.group) {
             const members = (desc.members && desc.members.length) ? desc.members.slice(0, 4) : [r, r];
             const n = Math.max(1, members.length);
@@ -9694,6 +9710,71 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
 // Template-driven single-spec page (non-classic arrangements). Reuses the same
 // primitives as the classic renderer: baked frame mockup, dotted-leader spec
 // block, and the wall elevation. Coords come from SPEC_TEMPLATES (page fractions).
+async function _drawInstallGuidePage(doc, logos, pageNum, meta, r, ctx) {
+    const PW = ctx.PW, PH = ctx.PH, M = ctx.M;
+    const elev = (typeof elevations !== 'undefined' ? elevations : []).find(e => e && e.frames && e.frames.some(fr => fr.id === r.id));
+    // Title block (top-left): zone + "ARTWORK DETAILS"
+    const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
+    doc.setFont(_font(ts.font), ts.font === 'serif' ? 'normal' : 'bold');
+    doc.setFontSize(Math.max(ts.size, 22)); doc.setTextColor(trgb.r, trgb.g, trgb.b);
+    doc.text((r.location || (elev && elev.name) || r.category || (r.id || '')).toString().toUpperCase(), M, M + 16);
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(25, 25, 25);
+    doc.text('ARTWORK DETAILS', M, M + 32);
+
+    try {
+        const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
+        const er = elev ? await renderElevationToCanvas(elev, r.id, { dpi: 46 }) : null;
+        if (er && er.canvas) {
+            const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
+            const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+            const aspect = er.wIn / er.hIn;
+            const maxW = PW * 0.54, maxH = PH - M * 2 - 16;
+            let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
+            const ex = PW - M - ew - 28, ey = M + 6 + (maxH - eh) / 2;
+            doc.addImage(flat.toDataURL('image/jpeg', 0.9), 'JPEG', ex, ey, ew, eh);
+
+            const f = elev.frames.find(fr => fr.id === r.id) || elev.frames[0];
+            const wallHin = toIn(elev.wallH) || 96, padIn = 6;
+            const cxFrac = er.wallLeftFrac + (toIn(f.x) + toIn(f.w) / 2) / er.wIn;
+            const fLeftFrac = er.wallLeftFrac + toIn(f.x) / er.wIn;
+            const fRightFrac = er.wallLeftFrac + (toIn(f.x) + toIn(f.w)) / er.wIn;
+            const cyFrac = (padIn + wallHin - (toIn(f.y) + toIn(f.h) / 2)) / er.hIn;
+            const floorFrac = (padIn + wallHin) / er.hIn;
+            const centerAFF = toIn(f.y) + toIn(f.h) / 2;
+            const PXf = (fr) => ex + fr * ew, PYf = (fr) => ey + fr * eh;
+            doc.setDrawColor(200, 40, 40); doc.setTextColor(200, 40, 40); doc.setLineWidth(0.7);
+            doc.setLineDashPattern([3, 2], 0);
+            doc.line(PXf(cxFrac), ey - 4, PXf(cxFrac), ey + eh + 4);                       // centerline
+            doc.line(PXf(er.wallLeftFrac), PYf(cyFrac), PXf(fLeftFrac), PYf(cyFrac));       // EQ left
+            doc.line(PXf(fRightFrac), PYf(cyFrac), PXf(er.wallRightFrac), PYf(cyFrac));     // EQ right
+            const affX = PXf(er.wallRightFrac) + 12;
+            doc.line(affX, PYf(cyFrac), affX, PYf(floorFrac));                              // AFF
+            doc.setLineDashPattern([], 0);
+            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9);
+            doc.text('CL', PXf(cxFrac) + 2, ey + 2);
+            doc.text('EQ', PXf((er.wallLeftFrac + fLeftFrac) / 2), PYf(cyFrac) - 3, { align: 'center' });
+            doc.text('EQ', PXf((fRightFrac + er.wallRightFrac) / 2), PYf(cyFrac) - 3, { align: 'center' });
+            doc.setFontSize(9.5);
+            doc.text(Math.round(centerAFF * 2.54) + 'cm/' + Math.round(centerAFF) + '" AFF', affX + 4, (PYf(cyFrac) + PYf(floorFrac)) / 2);
+        } else {
+            doc.setFont(_font('serif'), 'italic'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
+            doc.text('Place this piece on a wall elevation to generate the dimensioned install view.', PW * 0.42, PH * 0.5, { maxWidth: PW * 0.5 });
+        }
+
+        // Plan thumbnail (bottom-left), like the reference.
+        const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(r.level || 0)];
+        if (lv && lv.imageData) {
+            const pim = await _loadImg(lv.imageData);
+            const pmaxW = PW * 0.26, pmaxH = PH * 0.28, pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
+            let pw = pmaxW, ph = pw / pasp; if (ph > pmaxH) { ph = pmaxH; pw = ph * pasp; }
+            const px0 = M, py0 = PH - M - ph;
+            doc.addImage(lv.imageData, 'JPEG', px0, py0, pw, ph);
+            if (r.planX != null && r.planY != null) { doc.setFillColor(200, 40, 40); doc.circle(px0 + r.planX * pw, py0 + r.planY * ph, 3, 'F'); }
+            doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(150, 150, 150);
+            doc.text('Floorplan', px0, py0 - 4);
+        }
+    } catch (e) { try { doc.setLineDashPattern([], 0); } catch (_) {} }
+}
 async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) {
     const PW = ctx.PW, PH = ctx.PH;
     const tpl = SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight;
@@ -10063,6 +10144,8 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const _specTpl = _specTplResolve(step.unit.key || (r.id || ''));
         if (_specIsGroup) {
             await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
+        } else if (_specTpl === 'installGuide') {
+            await _drawInstallGuidePage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M });
         } else if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
             await _drawSpecPageTemplate(doc, logos, pageNum, meta, r, _specTpl, { PW: PW, PH: PH, M: M });
         } else {
