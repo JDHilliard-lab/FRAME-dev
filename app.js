@@ -7855,7 +7855,7 @@ function _deckMockHTML(desc, w, h) {
                 if (_so.elevThumb) inner += box(0.80, 0.80, 0.16, 0.14, 'ELEVATION');
                 if (_so.codes === 'legend') inner += txt(0.40, 0.82, 0.4, '<b>IMAGE CODES</b> &nbsp; ' + members.map((m, i) => _esc((letters[i] || '') + ' ' + (m.imageCode || m.id || ''))).join(' &nbsp; '), fs(0.02), 400, SANS);
                 const sTop = 0.16, sBot = 0.93, slotH = (sBot - sTop) / n;
-                members.forEach((m, i) => { const sy = sTop + i * slotH; inner += txt(0.05, sy, 0.035, _esc(letters[i] || ('' + (i + 1))), fs(0.024), 800, DRUK); let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {} inner += txt(0.095, sy, 0.29, '<b>' + _esc(m.id || '') + '</b><br>' + ml.slice(0, 3).map(_esc).join('<br>'), fs(0.019), 400, SANS); });
+                members.forEach((m, i) => { const sy = sTop + i * slotH; let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Matboard', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {} inner += txt(0.05, sy, 0.30, '<b>' + _esc(m.id || '') + '</b><br>' + ml.slice(0, 4).map(_esc).join('<br>'), fs(0.019), 400, SANS); });
             } else if (tpl.row) {
                 const cols = Math.max(1, Math.min(n, 4));
                 const leftX = 0.06, gap = 0.02, slotW = (0.9 - gap * (cols - 1)) / cols;
@@ -9198,7 +9198,7 @@ function _dsRenderTools() {
                 tr.appendChild(cb); tr.appendChild(document.createTextNode('Elevation thumbnail (bottom-right)')); wrap.appendChild(tr);
                 const note = document.createElement('div'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin-top:8px; line-height:1.5;'; note.textContent = 'All spec details (including mat sizes and overall dimensions) are listed on the left; the text shrinks to fit a full salon hang on one page.';
                 wrap.appendChild(note);
-                t.appendChild(wrap);
+                head.appendChild(wrap);
             }
         } else {
             const btnRow = document.createElement('div');
@@ -9232,20 +9232,6 @@ function _dsRenderTools() {
         }
 
         t.appendChild(_dsStatusSection(desc));
-
-        // — Notes editor (writes the piece's spec Notes line) —
-        const r = desc.row || {};
-        const nLbl = document.createElement('div');
-        nLbl.textContent = 'Notes' + (desc.members && desc.members.length > 1 ? ' (' + (r.id || 'first piece') + ')' : '');
-        nLbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin:14px 0 6px;';
-        t.appendChild(nLbl);
-        const nTa = document.createElement('textarea'); nTa.rows = 4;
-        nTa.placeholder = 'Production note shown on the spec page…';
-        nTa.style.cssText = 'width:100%; box-sizing:border-box; font-size:0.74rem; line-height:1.4; padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; resize:vertical;';
-        nTa.value = r.notes || '';
-        nTa.oninput = () => { r.notes = nTa.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
-        nTa.onblur = () => { _dsRenderCenter(); _dsRenderRail(); };
-        t.appendChild(nTa);
         return;
     }
     if (cat) {
@@ -10707,9 +10693,9 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                 try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
                 doc.setFont(_font('display'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
                 doc.text(p.letter, ax, ay - 2);   // top-left, ~2px clear of the frame
-                if (opts.codes === 'frames' && aw > 34) {       // small code in the bottom-right corner
+                if (opts.codes === 'frames' && aw > 30) {       // small code just below the bottom-right, outside the frame
                     const ic = (r.imageCode || r.artworkFile || '') + '';
-                    if (ic) { doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(6); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw - 2, ay + ah - 3, { align: 'right' }); }
+                    if (ic) { doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(6.5); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw, ay + ah + 7, { align: 'right' }); }
                 }
             } catch (e) {}
         }
@@ -10722,12 +10708,24 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                     const er = await renderElevationToCanvas(groupElev, null, { wireframe: _isWireframe(), dpi: 24 });
                     if (er && er.canvas) {
                         const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
-                        const boxW = PW * 0.17, boxH = bandBot - bandY;
+                        const boxW = PW * 0.17, boxH = (bandBot - bandY) - 12;   // leave room for the caption below
                         const fit = Math.min(boxW / flat.width, boxH / flat.height);
                         const tw = flat.width * fit, th = flat.height * fit;
                         const tx = regX + regW - tw, ty = bandY + (boxH - th);
                         doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
-                        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text('Elevation', tx, bandY - 1);
+                        // crisp vector wall outline + baseboard (the rendered lines vanish at thumbnail scale)
+                        try {
+                            const wallHin = ((typeof toIn === 'function' ? toIn(groupElev.wallH) : parseFloat(groupElev.wallH)) || 96);
+                            let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = toIn(b); } catch (e) {}
+                            const totalHin = wallHin + 6;
+                            const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
+                            const wTopF = 6 / totalHin;
+                            const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
+                            doc.setDrawColor(90, 90, 90); doc.setLineWidth(0.5);
+                            doc.rect(wx, wyTop, wW, wH);
+                            if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.4); doc.line(wx, byy, wx + wW, byy); }
+                        } catch (e) {}
+                        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text('Elevation', tx, ty + th + 8);
                         legendRight = tx - 14;
                     }
                 } catch (e) {}
@@ -10735,14 +10733,16 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
             if (opts.codes === 'legend') {
                 doc.setFont(_font('display'), 'bold'); doc.setFontSize(8); doc.setTextColor(20, 20, 20);
                 doc.text('IMAGE CODES', regX, bandY);
-                const colW = 150, colsN = Math.max(1, Math.floor((legendRight - regX) / colW));
+                const rowH = 10, maxRows = Math.max(1, Math.floor((bandBot - (bandY + 12)) / rowH));
+                const colsN = Math.max(1, Math.ceil(placed.length / maxRows));   // one column unless it overflows the band
+                const colW = Math.min(155, (legendRight - regX) / colsN);
                 doc.setFontSize(7.5);
                 placed.forEach((p, i) => {
-                    const col = i % colsN, rowi = Math.floor(i / colsN);
-                    const ex = regX + col * colW, ey = bandY + 12 + rowi * 11;
+                    const col = Math.floor(i / maxRows), rowi = i % maxRows;
+                    const ex = regX + col * colW, ey = bandY + 12 + rowi * rowH;
                     if (ey > bandBot) return;
                     doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.text(p.letter, ex, ey);
-                    doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'normal'); doc.setTextColor(crgb.r, crgb.g, crgb.b);
+                    doc.setFont(_font(cs.font), 'normal'); doc.setTextColor(crgb.r, crgb.g, crgb.b);
                     doc.text((p.r.imageCode || p.r.artworkFile || '') + '', ex + 12, ey);
                 });
             }
@@ -10758,19 +10758,18 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
         let y = sTop + fs;
         members.forEach((r, i) => {
             if (y > sBot) return;
-            doc.setFont(_font('display'), 'bold'); doc.setFontSize(Math.min(fs + 3, 12)); doc.setTextColor(20, 20, 20);
-            doc.text(letters[i] || ('' + (i + 1)), lX, y);
-            doc.setFont('helvetica', 'bold'); doc.setFontSize(fs + 0.5); doc.setTextColor(60, 60, 60);
-            doc.text((r.id || '').toString(), lX + 15, y);
+            // No standalone letter — the item code already ends in its letter.
+            doc.setFont('helvetica', 'bold'); doc.setFontSize(fs + 1.5); doc.setTextColor(30, 30, 30);
+            doc.text((r.id || '').toString(), lX, y);
             y += lineH;
             if (!artOnly) {
                 doc.setFontSize(fs);
                 specBlocks[i].forEach(ln => {
                     if (y > sBot) return;
-                    doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, lX + 15, y);
+                    doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, lX, y);
                     const lw = doc.getTextWidth(ln.label);
-                    doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = lX + 15 + lW - vw; doc.text(vs, vx, y);
-                    const ds = lX + 15 + lw + 4, de = vx - 4;
+                    doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = lX + lW - vw; doc.text(vs, vx, y);
+                    const ds = lX + lw + 4, de = vx - 4;
                     if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(180, 180, 180); doc.setLineWidth(0.35); doc.line(ds, y - 2, de, y - 2); doc.setLineDashPattern([], 0); }
                     y += lineH;
                 });
