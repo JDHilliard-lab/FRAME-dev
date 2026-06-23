@@ -1524,9 +1524,142 @@ function checkAutosaveOnLoad() {
     }
 }
 
+// ─────────────────────────────────────────────────────────────────────────
+// Version history (revision tracking). Full project snapshots are large, so
+// they live in IndexedDB (much larger quota than localStorage). A light
+// metadata record per version powers the list and the comparison view.
+// ─────────────────────────────────────────────────────────────────────────
+const VDB_NAME = 'frameVersions';
+function _vdb() {
+    return new Promise((res, rej) => {
+        if (!window.indexedDB) { rej(new Error('no-idb')); return; }
+        const req = indexedDB.open(VDB_NAME, 1);
+        req.onupgradeneeded = (e) => { const db = e.target.result; if (!db.objectStoreNames.contains('vmeta')) db.createObjectStore('vmeta', { keyPath: 'id' }); if (!db.objectStoreNames.contains('vdata')) db.createObjectStore('vdata', { keyPath: 'id' }); };
+        req.onsuccess = () => res(req.result);
+        req.onerror = () => rej(req.error);
+    });
+}
+async function _vListMeta() { const db = await _vdb(); return new Promise((res, rej) => { const rq = db.transaction('vmeta', 'readonly').objectStore('vmeta').getAll(); rq.onsuccess = () => res(rq.result || []); rq.onerror = () => rej(rq.error); }); }
+async function _vGetData(id) { const db = await _vdb(); return new Promise((res, rej) => { const rq = db.transaction('vdata', 'readonly').objectStore('vdata').get(id); rq.onsuccess = () => res(rq.result ? rq.result.payload : null); rq.onerror = () => rej(rq.error); }); }
+async function _vPut(id, label, meta, payload) { const db = await _vdb(); return new Promise((res, rej) => { const tx = db.transaction(['vmeta', 'vdata'], 'readwrite'); tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); tx.objectStore('vmeta').put({ id: id, label: label, date: Date.now(), meta: meta }); tx.objectStore('vdata').put({ id: id, payload: payload }); }); }
+async function _vDelete(id) { const db = await _vdb(); return new Promise((res, rej) => { const tx = db.transaction(['vmeta', 'vdata'], 'readwrite'); tx.oncomplete = () => res(); tx.onerror = () => rej(tx.error); tx.objectStore('vmeta').delete(id); tx.objectStore('vdata').delete(id); }); }
+
+function _versionSnapshot() {
+    return {
+        projName: (document.getElementById('g_projName') || {}).value || 'Untitled',
+        floorplan: floorplanImageData, floorplanName: floorplanImageName,
+        floorplanLevels: JSON.parse(JSON.stringify(floorplanLevels || [])),
+        editorial: JSON.parse(JSON.stringify(editorialContent)),
+        data: snapshotProjectState(),
+    };
+}
+function _versionRestore(snap) {
+    restoreProjectState(snap.data);
+    floorplanImageData = snap.floorplan || ''; floorplanImageName = snap.floorplanName || '';
+    floorplanLevels = Array.isArray(snap.floorplanLevels) ? snap.floorplanLevels : [];
+    _fpLevel = 0; _fpMigrate();
+    editorialContent = Object.assign(_editorialDefaults(), snap.editorial || {});
+    refreshAllViews();
+    undoStack.length = 0; redoStack.length = 0; _isFirstHistoryPush = true; pushHistory(); markDirty();
+}
+function _versionMeta() {
+    const pieces = (dashProjectData || []).filter(r => r && (r.id || r.imageCode)).map(r => ({ id: (r.id || '') + '', code: (r.imageCode || r.artworkFile || '') + '', status: _pieceStatus(r), w: r.extW, h: r.extH }));
+    let pages = 0; try { pages = (_deckPageList() || []).length; } catch (e) {}
+    return { projName: (document.getElementById('g_projName') || {}).value || 'Untitled', pieces: pieces, pages: pages, statusCounts: _statusCounts(), specTemplate: editorialContent.specTemplate || 'classic' };
+}
+async function _vSaveCurrent(label) {
+    const id = 'v_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await _vPut(id, label || ('Version ' + new Date().toLocaleString()), _versionMeta(), _versionSnapshot());
+}
+function _vDiff(aPieces, bPieces) {
+    const am = {}, bm = {}; (aPieces || []).forEach(p => am[p.id] = p); (bPieces || []).forEach(p => bm[p.id] = p);
+    const added = [], removed = [], statusChanged = [], sizeChanged = [];
+    (bPieces || []).forEach(p => { if (!am[p.id]) added.push(p.id); });
+    (aPieces || []).forEach(p => { const q = bm[p.id]; if (!q) { removed.push(p.id); return; } if (p.status !== q.status) statusChanged.push({ id: p.id, from: p.status, to: q.status }); if (p.w !== q.w || p.h !== q.h) sizeChanged.push(p.id); });
+    return { added: added, removed: removed, statusChanged: statusChanged, sizeChanged: sizeChanged };
+}
+
+function openVersionsModal() {
+    const old = document.getElementById('versionsModal'); if (old) old.remove();
+    const ov = document.createElement('div'); ov.id = 'versionsModal';
+    ov.style.cssText = 'position:fixed; inset:0; z-index:100040; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:10px; width:640px; max-width:94vw; max-height:88vh; display:flex; flex-direction:column; overflow:hidden;';
+    card.innerHTML = '<div style="display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border-color);">'
+        + '<div style="font-size:0.95rem; font-weight:700; color:var(--text-main);">Versions</div>'
+        + '<button id="vClose" style="border:none; background:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer; line-height:1;">\u00d7</button></div>';
+    const body = document.createElement('div'); body.style.cssText = 'padding:16px 18px; overflow:auto;';
+    const saveRow = document.createElement('div'); saveRow.style.cssText = 'display:flex; gap:8px; margin-bottom:14px;';
+    const inp = document.createElement('input'); inp.type = 'text'; inp.placeholder = 'Label this version (e.g. V1 sent to client)\u2026';
+    inp.style.cssText = 'flex:1; font-size:0.78rem; padding:8px 10px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:5px;';
+    const saveBtn = document.createElement('button'); saveBtn.textContent = 'Save current as version'; saveBtn.className = 'action-btn'; saveBtn.style.cssText = 'width:auto; padding:0 14px; font-size:0.76rem;';
+    saveBtn.onclick = async () => { saveBtn.disabled = true; try { await _vSaveCurrent(inp.value.trim()); inp.value = ''; await _versionsRender(); } catch (e) { showInfoModal('Versions', 'Could not save the version. ' + ((e && e.message === 'no-idb') ? 'Your browser blocked local database storage (private mode?). Use Save Project to a file instead.' : 'Storage may be full.')); } saveBtn.disabled = false; };
+    saveRow.appendChild(inp); saveRow.appendChild(saveBtn); body.appendChild(saveRow);
+    const list = document.createElement('div'); list.id = 'vList'; body.appendChild(list);
+    const cmp = document.createElement('div'); cmp.id = 'vCompare'; cmp.style.cssText = 'margin-top:6px;'; body.appendChild(cmp);
+    card.appendChild(body); ov.appendChild(card); document.body.appendChild(ov);
+    ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
+    card.querySelector('#vClose').onclick = () => ov.remove();
+    _versionsRender();
+}
+async function _versionsRender() {
+    const list = document.getElementById('vList'); if (!list) return;
+    list.innerHTML = '<div style="font-size:0.74rem; color:var(--text-muted);">Loading\u2026</div>';
+    let metas = [];
+    try { metas = await _vListMeta(); } catch (e) { list.innerHTML = '<div style="font-size:0.74rem; color:#c08a2e;">Version storage isn\u2019t available in this browser (private mode?). You can still Save Project to a file.</div>'; return; }
+    metas.sort((a, b) => b.date - a.date);
+    if (!metas.length) { list.innerHTML = '<div style="font-size:0.74rem; color:var(--text-muted); padding:8px 0;">No versions yet. Save one above to start tracking revisions.</div>'; return; }
+    list.innerHTML = '';
+    metas.forEach(m => {
+        const meta = m.meta || {};
+        const row = document.createElement('div');
+        row.style.cssText = 'border:1px solid var(--border-color); border-radius:7px; padding:11px 12px; margin-bottom:9px;';
+        const top = document.createElement('div'); top.style.cssText = 'display:flex; align-items:center; justify-content:space-between; gap:10px;';
+        const t = document.createElement('div'); t.style.cssText = 'min-width:0;';
+        t.innerHTML = '<div style="font-size:0.8rem; font-weight:700; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(m.label || 'Version') + '</div>'
+            + '<div style="font-size:0.64rem; color:var(--text-muted); margin-top:2px;">' + new Date(m.date).toLocaleString() + '</div>';
+        top.appendChild(t);
+        const btns = document.createElement('div'); btns.style.cssText = 'display:flex; gap:6px; flex:0 0 auto;';
+        const mk = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'font-size:0.66rem; font-weight:600; padding:6px 10px; border-radius:5px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
+        btns.appendChild(mk('Compare', false, () => _vRenderCompare(m)));
+        btns.appendChild(mk('Restore', true, () => _vRestore(m.id, m.label)));
+        btns.appendChild(mk('\u2715', false, async () => { if (confirm('Delete this version permanently?')) { await _vDelete(m.id); _versionsRender(); const c = document.getElementById('vCompare'); if (c) c.innerHTML = ''; } }));
+        top.appendChild(btns); row.appendChild(top);
+        const sc = meta.statusCounts || {};
+        const stats = document.createElement('div'); stats.style.cssText = 'font-size:0.64rem; color:var(--text-muted); margin-top:7px;';
+        stats.innerHTML = (meta.pages || 0) + ' pages \u00b7 ' + ((meta.pieces || []).length) + ' pieces &nbsp;&nbsp;'
+            + STATUS_ORDER.map(s => '<span style="color:' + _statusColor(s) + ';">\u25cf</span> ' + (sc[s] || 0)).join('&nbsp;&nbsp;');
+        row.appendChild(stats);
+        list.appendChild(row);
+    });
+}
+async function _vRestore(id, label) {
+    if (!confirm('Restore "' + (label || 'this version') + '"?\n\nYour current work will first be saved as a new version, then the project will be replaced.')) return;
+    try { await _vSaveCurrent('Auto-backup before restore \u2014 ' + new Date().toLocaleString()); } catch (e) {}
+    let payload = null; try { payload = await _vGetData(id); } catch (e) {}
+    if (!payload) { showInfoModal('Restore', 'Could not load that version\u2019s data.'); return; }
+    _versionRestore(payload);
+    const ov = document.getElementById('versionsModal'); if (ov) ov.remove();
+    showInfoModal('Restored', 'The project was restored from "' + _esc(label || 'version') + '". Your previous work was saved as an auto-backup version.');
+}
+function _vRenderCompare(m) {
+    const c = document.getElementById('vCompare'); if (!c) return;
+    const cur = _versionMeta();
+    const d = _vDiff((m.meta || {}).pieces || [], cur.pieces);
+    const sl = (s) => _statusLabel(s);
+    const part = (title, items) => items && items.length ? '<div style="margin-top:8px;"><div style="font-size:0.66rem; font-weight:700; color:var(--text-main);">' + title + ' (' + items.length + ')</div><div style="font-size:0.64rem; color:var(--text-muted); margin-top:2px; line-height:1.5;">' + items.map(_esc).join(', ') + '</div></div>' : '';
+    const statusPart = d.statusChanged.length ? '<div style="margin-top:8px;"><div style="font-size:0.66rem; font-weight:700; color:var(--text-main);">Status changes (' + d.statusChanged.length + ')</div>' + d.statusChanged.map(x => '<div style="font-size:0.64rem; color:var(--text-muted); margin-top:2px;">' + _esc(x.id) + ': <span style="color:' + _statusColor(x.from) + ';">' + sl(x.from) + '</span> \u2192 <span style="color:' + _statusColor(x.to) + ';">' + sl(x.to) + '</span></div>').join('') + '</div>' : '';
+    const pagesDelta = (cur.pages || 0) - ((m.meta || {}).pages || 0);
+    const head = '<div style="font-size:0.76rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">Compared with current</div>'
+        + '<div style="font-size:0.64rem; color:var(--text-muted);">"' + _esc(m.label || 'Version') + '" \u2192 current &nbsp;\u00b7&nbsp; pages ' + (pagesDelta === 0 ? 'unchanged' : (pagesDelta > 0 ? '+' + pagesDelta : pagesDelta)) + '</div>';
+    let inner = head + part('Added pieces', d.added) + part('Removed pieces', d.removed) + statusPart + part('Resized pieces', d.sizeChanged);
+    if (!d.added.length && !d.removed.length && !d.statusChanged.length && !d.sizeChanged.length && pagesDelta === 0) inner += '<div style="font-size:0.66rem; color:var(--text-muted); margin-top:8px;">No structural differences from the current project.</div>';
+    c.style.cssText = 'margin-top:6px; padding:12px; border:1px solid var(--border-color); border-radius:7px; background:var(--bg-input);';
+    c.innerHTML = inner;
+}
+
 // Save the project to a JSON file with a sensible name. Thin wrapper over
-// saveMasterProject for use by the Ctrl+S handler. saveMasterProject itself
-// handles markClean and clearAutosave so we don't need to duplicate here.
+// saveMasterProject for use by the Ctrl+S handler.
 function saveProjectWithIndicator() {
     if (typeof saveMasterProject === 'function') saveMasterProject();
 }
