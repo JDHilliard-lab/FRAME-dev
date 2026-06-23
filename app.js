@@ -324,8 +324,8 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -369,6 +369,7 @@ function _mbMigratePages() {
     if (typeof ec.wireframe !== 'boolean') ec.wireframe = false;
     if (!ec.specArtOnly || typeof ec.specArtOnly !== 'object') ec.specArtOnly = {};
     if (!Array.isArray(ec.manualGroups)) ec.manualGroups = [];
+    if (!ec.scaleOpts || typeof ec.scaleOpts !== 'object') ec.scaleOpts = { codes: 'frames', elevThumb: false };
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -7850,6 +7851,9 @@ function _deckMockHTML(desc, w, h) {
                     members.forEach((m, i) => { const d = dims[i]; const bw = d.w * sc, bh = d.h * sc; boxes.push({ letter: letters[i] || ('' + (i + 1)), x: x / w, y: (baseY - bh) / h, bw: bw / w, bh: bh / h, idx: i }); x += bw + gap * sc; });
                 }
                 boxes.forEach(b => { inner += box(b.x, b.y, b.bw, b.bh, '', 'data-bake="artwork" data-member-idx="' + b.idx + '"'); inner += txt(b.x, Math.max(0, b.y - 0.028), 0.06, _esc(b.letter), fs(0.024), 800, DRUK); });
+                const _so = _scaleOpts();
+                if (_so.elevThumb) inner += box(0.80, 0.80, 0.16, 0.14, 'ELEVATION');
+                if (_so.codes === 'legend') inner += txt(0.40, 0.82, 0.4, '<b>IMAGE CODES</b> &nbsp; ' + members.map((m, i) => _esc((letters[i] || '') + ' ' + (m.imageCode || m.id || ''))).join(' &nbsp; '), fs(0.02), 400, SANS);
                 const sTop = 0.16, sBot = 0.93, slotH = (sBot - sTop) / n;
                 members.forEach((m, i) => { const sy = sTop + i * slotH; inner += txt(0.05, sy, 0.035, _esc(letters[i] || ('' + (i + 1))), fs(0.024), 800, DRUK); let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {} inner += txt(0.095, sy, 0.29, '<b>' + _esc(m.id || '') + '</b><br>' + ml.slice(0, 3).map(_esc).join('<br>'), fs(0.019), 400, SANS); });
             } else if (tpl.row) {
@@ -7893,6 +7897,7 @@ function _pieceStatus(r) { const s = r && r.status; return STATUS_DEFS[s] ? s : 
 function _statusColor(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).color; }
 function _statusLabel(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).label; }
 function _statusCounts() { const c = { concept: 0, review: 0, approved: 0, production: 0 }; (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => { if (r && (r.id || r.imageCode)) c[_pieceStatus(r)]++; }); return c; }
+function _scaleOpts() { const o = (editorialContent && editorialContent.scaleOpts) || {}; return { codes: (o.codes === 'legend' || o.codes === 'none' || o.codes === 'frames') ? o.codes : 'frames', elevThumb: !!o.elevThumb }; }
 function _manualGroups() { return (editorialContent.manualGroups || (editorialContent.manualGroups = [])); }
 function _manualGroupOf(id) { if (!id) return null; const gs = _manualGroups(); for (const g of gs) { if (g && g.members && g.members.indexOf(id) >= 0) return g; } return null; }
 function _buildSpecUnits(rs, isGroup) {
@@ -9180,6 +9185,21 @@ function _dsRenderTools() {
                 cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
             });
             t.appendChild(cardsWrap);
+            if (globalTpl === 'setScale') {
+                const so = _scaleOpts();
+                const setSO = (patch) => { editorialContent.scaleOpts = Object.assign({}, _scaleOpts(), patch); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+                const wrap = document.createElement('div'); wrap.style.cssText = 'margin-top:4px; padding-top:10px; border-top:1px dashed var(--border-color);';
+                const lab = document.createElement('div'); lab.textContent = 'Image codes'; lab.style.cssText = 'font-size:0.68rem; font-weight:700; color:var(--text-main); margin-bottom:6px;'; wrap.appendChild(lab);
+                const cr = document.createElement('div'); cr.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
+                [['none', 'None'], ['frames', 'On frames'], ['legend', 'Legend']].forEach(pair => { const active = so.codes === pair[0]; const b = document.createElement('button'); b.textContent = pair[1]; b.style.cssText = 'flex:1; font-size:0.62rem; font-weight:700; padding:6px 3px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = () => setSO({ codes: pair[0] }); cr.appendChild(b); });
+                wrap.appendChild(cr);
+                const tr = document.createElement('label'); tr.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:0.66rem; color:var(--text-main); cursor:pointer;';
+                const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!so.elevThumb; cb.onchange = () => setSO({ elevThumb: cb.checked });
+                tr.appendChild(cb); tr.appendChild(document.createTextNode('Elevation thumbnail (bottom-right)')); wrap.appendChild(tr);
+                const note = document.createElement('div'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin-top:8px; line-height:1.5;'; note.textContent = 'All spec details (including mat sizes and overall dimensions) are listed on the left; the text shrinks to fit a full salon hang on one page.';
+                wrap.appendChild(note);
+                t.appendChild(wrap);
+            }
         } else {
             const btnRow = document.createElement('div');
             btnRow.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
@@ -10643,13 +10663,16 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
     // — To scale (as hung): frames on the right at their elevation positions —
     if (_isScale) {
         const artOnly = _specArtOnly(unit.key);
+        const opts = _scaleOpts();
+        let groupElev = null;
         const geo = members.map(r => {
             for (const e of (typeof elevations !== 'undefined' ? elevations : [])) {
-                if (e && e.frames) { const m = e.frames.find(fr => fr && fr.id === r.id); if (m) return { x: parseFloat(m.x) || 0, y: parseFloat(m.y) || 0, w: parseFloat(m.w) || 0, h: parseFloat(m.h) || 0 }; }
+                if (e && e.frames) { const m = e.frames.find(fr => fr && fr.id === r.id); if (m) { if (!groupElev) groupElev = e; return { x: parseFloat(m.x) || 0, y: parseFloat(m.y) || 0, w: parseFloat(m.w) || 0, h: parseFloat(m.h) || 0 }; } }
             }
             return null;
         });
-        const regX = PW * 0.40, regY = PH * 0.16, regW = PW * 0.56, regH = PH * 0.76;
+        const bottomBand = (opts.elevThumb && groupElev) || opts.codes === 'legend';
+        const regX = PW * 0.40, regY = PH * 0.15, regW = PW * 0.56, regH = bottomBand ? PH * 0.60 : PH * 0.77;
         const placed = [];
         const haveGeo = geo.length && geo.every(g => g && g.w > 0 && g.h > 0);
         if (haveGeo) {
@@ -10668,6 +10691,7 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
             let x = regX + (regW - totalW * sc) / 2; const baseY = regY + regH;
             members.forEach((r, i) => { const d = dims[i]; const bw = d.w * sc, bh = d.h * sc; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: x, by: baseY - bh, bw: bw, bh: bh }); x += bw + gap * sc; });
         }
+        const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
         for (const p of placed) {
             try {
                 const r = p.r;
@@ -10682,34 +10706,76 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                 const ax = p.bx + (p.bw - aw) / 2, ay = p.by + (p.bh - ah) / 2;
                 try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
                 doc.setFont(_font('display'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
-                doc.text(p.letter, ax, ay - 2);   // top-left corner, ~2px clear of the frame
+                doc.text(p.letter, ax, ay - 2);   // top-left, ~2px clear of the frame
+                if (opts.codes === 'frames' && aw > 34) {       // small code in the bottom-right corner
+                    const ic = (r.imageCode || r.artworkFile || '') + '';
+                    if (ic) { doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(6); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw - 2, ay + ah - 3, { align: 'right' }); }
+                }
             } catch (e) {}
         }
-        const lX = PW * 0.05, lW = PW * 0.31, sTop = PH * 0.16, sBot = PH * 0.93;
-        const slotH = (sBot - sTop) / n;
-        const fs = Math.max(6, Math.min(8.5, slotH * 0.16));
-        const lineH = fs * 1.45;
-        const wanted = ['Application', 'Frame Size', 'Frame Code', 'Matboard', 'Image Size', 'Overall Dimensions'];
+        // Bottom band: image-code legend (left) and/or elevation thumbnail (right).
+        if (bottomBand) {
+            const bandY = regY + regH + 12, bandBot = PH * 0.95;
+            let legendRight = regX + regW;
+            if (opts.elevThumb && groupElev) {
+                try {
+                    const er = await renderElevationToCanvas(groupElev, null, { wireframe: _isWireframe(), dpi: 24 });
+                    if (er && er.canvas) {
+                        const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+                        const boxW = PW * 0.17, boxH = bandBot - bandY;
+                        const fit = Math.min(boxW / flat.width, boxH / flat.height);
+                        const tw = flat.width * fit, th = flat.height * fit;
+                        const tx = regX + regW - tw, ty = bandY + (boxH - th);
+                        doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
+                        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text('Elevation', tx, bandY - 1);
+                        legendRight = tx - 14;
+                    }
+                } catch (e) {}
+            }
+            if (opts.codes === 'legend') {
+                doc.setFont(_font('display'), 'bold'); doc.setFontSize(8); doc.setTextColor(20, 20, 20);
+                doc.text('IMAGE CODES', regX, bandY);
+                const colW = 150, colsN = Math.max(1, Math.floor((legendRight - regX) / colW));
+                doc.setFontSize(7.5);
+                placed.forEach((p, i) => {
+                    const col = i % colsN, rowi = Math.floor(i / colsN);
+                    const ex = regX + col * colW, ey = bandY + 12 + rowi * 11;
+                    if (ey > bandBot) return;
+                    doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.text(p.letter, ex, ey);
+                    doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'normal'); doc.setTextColor(crgb.r, crgb.g, crgb.b);
+                    doc.text((p.r.imageCode || p.r.artworkFile || '') + '', ex + 12, ey);
+                });
+            }
+        }
+        // Specs on the LEFT — every line, font shrunk to fit them all on one page.
+        const lX = PW * 0.045, lW = PW * 0.315, sTop = PH * 0.15, sBot = PH * 0.95;
+        const specBlocks = members.map(r => { let s = null; try { s = buildSpecStrings(r); } catch (e) {} return (s && s.lines) ? s.lines : []; });
+        let totalUnits = 0; members.forEach((r, i) => { totalUnits += 1 + (artOnly ? 0 : specBlocks[i].length) + 0.5; });
+        const availH = sBot - sTop;
+        let lineH = availH / Math.max(1, totalUnits);
+        const fs = Math.max(5.2, Math.min(8.5, lineH / 1.38));
+        lineH = Math.max(fs * 1.32, Math.min(lineH, fs * 1.6));
+        let y = sTop + fs;
         members.forEach((r, i) => {
-            const sy = sTop + i * slotH;
-            doc.setFont(_font('display'), 'bold'); doc.setFontSize(Math.min(fs + 4, 13)); doc.setTextColor(20, 20, 20);
-            doc.text(letters[i] || ('' + (i + 1)), lX, sy + fs + 2);
+            if (y > sBot) return;
+            doc.setFont(_font('display'), 'bold'); doc.setFontSize(Math.min(fs + 3, 12)); doc.setTextColor(20, 20, 20);
+            doc.text(letters[i] || ('' + (i + 1)), lX, y);
             doc.setFont('helvetica', 'bold'); doc.setFontSize(fs + 0.5); doc.setTextColor(60, 60, 60);
-            doc.text((r.id || '').toString(), lX + 16, sy + fs + 1);
-            if (artOnly) return;
-            let specs = null; try { specs = buildSpecStrings(r); } catch (e) {}
-            const lines = specs && specs.lines ? specs.lines.filter(l => wanted.indexOf(l.label) >= 0) : [];
-            const maxLines = Math.max(1, Math.floor((slotH - lineH - 4) / lineH));
-            let ly = sy + fs + 2 + lineH;
-            doc.setFontSize(fs);
-            lines.slice(0, maxLines).forEach(ln => {
-                doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, lX + 16, ly);
-                const lw = doc.getTextWidth(ln.label);
-                doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = lX + 16 + lW - vw; doc.text(vs, vx, ly);
-                const ds = lX + 16 + lw + 4, de = vx - 4;
-                if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(175, 175, 175); doc.setLineWidth(0.4); doc.line(ds, ly - 2, de, ly - 2); doc.setLineDashPattern([], 0); }
-                ly += lineH;
-            });
+            doc.text((r.id || '').toString(), lX + 15, y);
+            y += lineH;
+            if (!artOnly) {
+                doc.setFontSize(fs);
+                specBlocks[i].forEach(ln => {
+                    if (y > sBot) return;
+                    doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, lX + 15, y);
+                    const lw = doc.getTextWidth(ln.label);
+                    doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = lX + 15 + lW - vw; doc.text(vs, vx, y);
+                    const ds = lX + 15 + lw + 4, de = vx - 4;
+                    if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(180, 180, 180); doc.setLineWidth(0.35); doc.line(ds, y - 2, de, y - 2); doc.setLineDashPattern([], 0); }
+                    y += lineH;
+                });
+            }
+            y += lineH * 0.5;
         });
         return;
     }
