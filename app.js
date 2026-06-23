@@ -7288,16 +7288,20 @@ function _drawArtIndexPage(doc, logos, pageNum, meta, entries) {
     doc.setFillColor(255, 255, 255); doc.rect(0, 0, PW, PH, 'F');
     doc.setFont(_font('display'), 'bold'); doc.setFontSize(30); doc.setTextColor(20, 20, 20);
     doc.text('ARTWORK INDEX', M, M + 24);
-    const topY = M + 58, colGap = 44, cols = 2, colW = (PW - M * 2 - colGap * (cols - 1)) / cols, rowH = 16.5, maxRows = Math.floor((PH - M - topY) / rowH);
+    const counts = _statusCounts();
+    let sx = M; doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9.5);
+    STATUS_ORDER.forEach(s => { const d = STATUS_DEFS[s]; const rgb = _annHexToRgb(d.color); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.circle(sx + 3, M + 40, 3, 'F'); doc.setTextColor(110, 110, 110); const t = d.label + ' ' + counts[s]; doc.text(t, sx + 10, M + 43); sx += 12 + doc.getTextWidth(t) + 16; });
+    const topY = M + 70, colGap = 44, cols = 2, colW = (PW - M * 2 - colGap * (cols - 1)) / cols, rowH = 16.5, maxRows = Math.floor((PH - M - topY) / rowH);
     doc.setFontSize(9.5);
     (entries || []).forEach((e, i) => {
         const col = Math.floor(i / maxRows); if (col >= cols) return;
         const row = i % maxRows; const x = M + col * (colW + colGap); const y = topY + row * rowH;
+        const rgb = _annHexToRgb(_statusColor(e.status)); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.circle(x + 3, y - 3, 3, 'F');
         let left = (e.id || '') + (e.code ? '   ' + e.code : '');
-        if (left.length > 48) left = left.slice(0, 47) + '\u2026';
+        if (left.length > 44) left = left.slice(0, 43) + '\u2026';
         const ps = (e.page || '\u2014') + '';
         doc.setFont(_font('serif'), 'normal'); doc.setTextColor(40, 40, 40);
-        doc.text(left, x, y);
+        doc.text(left, x + 12, y);
         const pw = doc.getTextWidth(ps); doc.text(ps, x + colW - pw, y);
     });
     if ((entries || []).length > maxRows * cols) { doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(150, 150, 150); doc.text('+ ' + ((entries.length - maxRows * cols)) + ' more pieces', M, PH - M + 4); }
@@ -7536,9 +7540,11 @@ function _deckMockHTML(desc, w, h) {
         if (desc.type === 'toc') {
             rows = _deckTocList(_dsPages).map(e => '<div style="display:flex; justify-content:space-between; gap:8px; font-size:' + fs(0.034) + 'px; color:#333; padding:' + Math.round(h * 0.007) + 'px 0; border-bottom:1px solid #f0f0f0;"><span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc(e.label) + '</span><span style="color:#999;">' + (e.idx + 1) + '</span></div>').join('');
         } else {
-            rows = _artIndexList().map(e => { const pn = _dsPageNumForPiece(e.id); return '<div style="display:flex; justify-content:space-between; gap:8px; font-size:' + fs(0.026) + 'px; color:#333; padding:' + Math.round(h * 0.004) + 'px 0; border-bottom:1px solid #f5f5f5;"><span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc(e.id) + (e.code ? ' \u00b7 ' + _esc(e.code) : '') + '</span><span style="color:#999;">' + (pn || '\u2014') + '</span></div>'; }).join('');
+            rows = _artIndexList().map(e => { const pn = _dsPageNumForPiece(e.id); return '<div style="display:flex; align-items:center; gap:6px; font-size:' + fs(0.026) + 'px; color:#333; padding:' + Math.round(h * 0.004) + 'px 0; border-bottom:1px solid #f5f5f5;"><span style="flex:0 0 auto; width:' + fs(0.022) + 'px; height:' + fs(0.022) + 'px; border-radius:50%; background:' + _statusColor(e.status) + ';"></span><span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc(e.id) + (e.code ? ' \u00b7 ' + _esc(e.code) : '') + '</span><span style="color:#999;">' + (pn || '\u2014') + '</span></div>'; }).join('');
         }
-        return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px; bottom:' + pad + 'px; overflow:hidden;"><div style="font-family:' + DRUK + '; font-weight:700; color:#111; font-size:' + fs(0.07) + 'px; text-transform:uppercase; margin-bottom:' + Math.round(h * 0.03) + 'px;">' + title + '</div>' + rows + '</div>');
+        let summary = '';
+        if (desc.type === 'artindex') { const c = _statusCounts(); summary = '<div style="font-size:' + fs(0.024) + 'px; color:#888; margin-bottom:' + Math.round(h * 0.02) + 'px;">' + STATUS_ORDER.map(s => '<span style="color:' + _statusColor(s) + ';">\u25cf</span> ' + _statusLabel(s) + ' ' + c[s]).join('&nbsp;&nbsp;') + '</div>'; }
+        return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px; bottom:' + pad + 'px; overflow:hidden;"><div style="font-family:' + DRUK + '; font-weight:700; color:#111; font-size:' + fs(0.07) + 'px; text-transform:uppercase; margin-bottom:' + Math.round(h * 0.02) + 'px;">' + title + '</div>' + summary + rows + '</div>');
     }
     if (desc.kind === 'fixed' && desc.fixed === 'cover') {
         const nm = (typeof globalMeta !== 'undefined' && globalMeta && (globalMeta.projName || globalMeta.projectName)) || 'PROJECT NAME';
@@ -7637,6 +7643,12 @@ function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; retu
 function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || 22, color: s.color || '#141414' }; }
 function _isWireframe() { return !!editorialContent.wireframe; }
 function _specArtOnly(ovKey) { return !!(ovKey && editorialContent.specArtOnly && editorialContent.specArtOnly[ovKey]); }
+const STATUS_DEFS = { concept: { label: 'Concept', color: '#8a8f98' }, review: { label: 'In Review', color: '#c08a2e' }, approved: { label: 'Approved', color: '#1a7f37' }, production: { label: 'Production', color: '#3457d5' } };
+const STATUS_ORDER = ['concept', 'review', 'approved', 'production'];
+function _pieceStatus(r) { const s = r && r.status; return STATUS_DEFS[s] ? s : 'concept'; }
+function _statusColor(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).color; }
+function _statusLabel(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).label; }
+function _statusCounts() { const c = { concept: 0, review: 0, approved: 0, production: 0 }; (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => { if (r && (r.id || r.imageCode)) c[_pieceStatus(r)]++; }); return c; }
 function _manualGroups() { return (editorialContent.manualGroups || (editorialContent.manualGroups = [])); }
 function _manualGroupOf(id) { if (!id) return null; const gs = _manualGroups(); for (const g of gs) { if (g && g.members && g.members.indexOf(id) >= 0) return g; } return null; }
 function _buildSpecUnits(rs, isGroup) {
@@ -7789,7 +7801,7 @@ function _deckTocList(descs) {
     return out;
 }
 function _artIndexList() {
-    return (typeof dashProjectData !== 'undefined' ? dashProjectData : []).filter(r => r && (r.id || r.imageCode)).map(r => ({ id: (r.id || '') + '', code: (r.imageCode || r.artworkFile || '') + '', location: (r.location || r.category || '') + '' }));
+    return (typeof dashProjectData !== 'undefined' ? dashProjectData : []).filter(r => r && (r.id || r.imageCode)).map(r => ({ id: (r.id || '') + '', code: (r.imageCode || r.artworkFile || '') + '', location: (r.location || r.category || '') + '', status: _pieceStatus(r) }));
 }
 function _dsPageNumForPiece(id) {
     for (let i = 0; i < _dsPages.length; i++) {
@@ -7905,6 +7917,15 @@ function _dsRenderRail() {
         catch (e) { thumb.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:10px;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
         const lab = document.createElement('div');
         lab.style.cssText = 'display:flex; align-items:center; gap:4px; font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px;';
+        if (desc.kind === 'spec' && !desc._install) {
+            const pcs = ((desc.members && desc.members.length) ? desc.members : [desc.row]).filter(Boolean);
+            const sts = pcs.map(_pieceStatus);
+            const uniform = sts.length && sts.every(s => s === sts[0]);
+            const dot = document.createElement('span');
+            dot.title = uniform ? _statusLabel(sts[0]) : 'Mixed status';
+            dot.style.cssText = 'flex:0 0 auto; width:8px; height:8px; border-radius:50%; background:' + (uniform ? _statusColor(sts[0]) : 'transparent') + '; border:1px solid ' + (uniform ? _statusColor(sts[0]) : 'var(--text-muted)') + ';';
+            lab.appendChild(dot);
+        }
         const txt = document.createElement('span');
         txt.style.cssText = 'flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
         txt.textContent = (i + 1) + '. ' + (desc.title || desc.type);
@@ -8573,6 +8594,26 @@ function _dsSeedCustom(desc) {
     const n = Math.max(1, ids.length);
     ids.forEach((id, i) => { list.push({ type: 'mockup', pieceId: id, x: 0.06 + i * (0.9 / n), y: 0.2, w: Math.min(0.42, 0.84 / n), showCode: true }); if (id) _mockupEnsure(id); });
 }
+function _dsStatusSection(desc) {
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);';
+    const title = document.createElement('div'); title.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:6px;'; title.textContent = 'Artwork status'; wrap.appendChild(title);
+    const pieces = (desc.members && desc.members.length) ? desc.members.filter(Boolean) : (desc.row ? [desc.row] : []);
+    if (!pieces.length) { const n = document.createElement('div'); n.style.cssText = 'font-size:0.62rem; color:var(--text-muted);'; n.textContent = 'No piece on this page.'; wrap.appendChild(n); return wrap; }
+    const same = pieces.every(p => _pieceStatus(p) === _pieceStatus(pieces[0]));
+    const cur = same ? _pieceStatus(pieces[0]) : null;
+    const grid = document.createElement('div'); grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:6px;';
+    STATUS_ORDER.forEach(s => {
+        const d = STATUS_DEFS[s], active = (cur === s);
+        const b = document.createElement('button'); b.textContent = d.label;
+        b.style.cssText = 'font-size:0.64rem; font-weight:700; padding:7px 6px; border-radius:5px; cursor:pointer; border:1px solid ' + d.color + '; background:' + (active ? d.color : 'transparent') + '; color:' + (active ? '#fff' : d.color) + ';';
+        b.onclick = () => { pieces.forEach(p => { if (p) p.status = s; }); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); _dsRenderTools(); };
+        grid.appendChild(b);
+    });
+    wrap.appendChild(grid);
+    if (!same) { const m = document.createElement('div'); m.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin-top:6px;'; m.textContent = 'Pieces on this page have mixed statuses — choose one to set them all.'; wrap.appendChild(m); }
+    return wrap;
+}
 function _dsCustomSection(desc) {
     const wrap = document.createElement('div');
     wrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);';
@@ -8925,6 +8966,8 @@ function _dsRenderTools() {
             t.appendChild(cardsWrap);
             t.appendChild(resolved === 'custom' ? _dsCustomSection(desc) : _dsManualSection(desc));
         }
+
+        t.appendChild(_dsStatusSection(desc));
 
         // — Notes editor (writes the piece's spec Notes line) —
         const r = desc.row || {};
@@ -11085,7 +11128,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     if (_autoPages.length) {
         const keyToPage = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) keyToPage[_pageKeys[p]] = p; }
         const tocEntries = _deckTocList(_deckPageList()).map(e => ({ label: e.label, page: keyToPage[e.key] || null })).filter(e => e.page);
-        const idxEntries = _artIndexList().map(e => ({ id: e.id, code: e.code, location: e.location, page: idToPage[e.id] || null }))
+        const idxEntries = _artIndexList().map(e => ({ id: e.id, code: e.code, location: e.location, status: e.status, page: idToPage[e.id] || null }))
             .sort((a, b) => (a.page || 1e9) - (b.page || 1e9) || (a.id < b.id ? -1 : 1));
         for (const ap of _autoPages) {
             try { doc.setPage(ap.pageNum); if (ap.type === 'toc') _drawTOCPage(doc, logos, ap.pageNum, meta, tocEntries); else _drawArtIndexPage(doc, logos, ap.pageNum, meta, idxEntries); } catch (e) {}
