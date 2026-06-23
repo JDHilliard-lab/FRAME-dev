@@ -625,6 +625,11 @@ const SPEC_TEMPLATES = {
         group: true,
         row: true
     },
+    setScale: {
+        label: 'To scale (as hung)',
+        group: true,
+        scale: true
+    },
     custom: {
         label: 'Custom (free layout)',
         freeform: true
@@ -7821,11 +7826,33 @@ function _deckMockHTML(desc, w, h) {
             inner += box(0.42, 0.16, 0.54, 0.72, 'elevation', 'data-bake="elevation"');
             inner += box(0.06, 0.58, 0.3, 0.32, 'Floorplan');
         } else if (tpl.group) {
-            const members = (desc.members && desc.members.length) ? desc.members.slice(0, 4) : [r, r];
+            const isScaleM = !!tpl.scale;
+            const members = (desc.members && desc.members.length) ? desc.members.slice(0, isScaleM ? 12 : 4) : [r, r];
             const n = Math.max(1, members.length);
-            const letters = ['A', 'B', 'C', 'D'];
-            inner += txt(0.06, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
-            if (tpl.row) {
+            const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+            inner += txt(0.05, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
+            if (isScaleM) {
+                const geo = members.map(m => { let g = null; (typeof elevations !== 'undefined' ? elevations : []).forEach(e => { if (!g && e && e.frames) { const fr = e.frames.find(f => f && f.id === m.id); if (fr) g = { x: parseFloat(fr.x) || 0, y: parseFloat(fr.y) || 0, w: parseFloat(fr.w) || 0, h: parseFloat(fr.h) || 0 }; } }); return g; });
+                const regX = 0.40, regY = 0.16, regW = 0.56, regH = 0.74;
+                const haveGeo = geo.length && geo.every(g => g && g.w > 0 && g.h > 0);
+                const boxes = [];
+                if (haveGeo) {
+                    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+                    geo.forEach(g => { minX = Math.min(minX, g.x); minY = Math.min(minY, g.y); maxX = Math.max(maxX, g.x + g.w); maxY = Math.max(maxY, g.y + g.h); });
+                    const bbW = Math.max(0.01, maxX - minX), bbH = Math.max(0.01, maxY - minY);
+                    const sc = Math.min((regW * w) / bbW, (regH * h) / bbH);
+                    const offX = regX * w + ((regW * w) - bbW * sc) / 2, offY = regY * h + ((regH * h) - bbH * sc) / 2;
+                    members.forEach((m, i) => { const g = geo[i]; boxes.push({ letter: letters[i] || ('' + (i + 1)), x: (offX + (g.x - minX) * sc) / w, y: (offY + (g.y - minY) * sc) / h, bw: (g.w * sc) / w, bh: (g.h * sc) / h, idx: i }); });
+                } else {
+                    const dims = members.map(m => ({ w: Math.max(1, parseFloat(m.extW) || 10), h: Math.max(1, parseFloat(m.extH) || 10) }));
+                    const gap = 0.5; const totalW = dims.reduce((a, d) => a + d.w, 0) + gap * (dims.length - 1); const maxH = dims.reduce((a, d) => Math.max(a, d.h), 0);
+                    const sc = Math.min((regW * w) / totalW, (regH * h) / maxH); let x = regX * w + ((regW * w) - totalW * sc) / 2; const baseY = (regY + regH) * h;
+                    members.forEach((m, i) => { const d = dims[i]; const bw = d.w * sc, bh = d.h * sc; boxes.push({ letter: letters[i] || ('' + (i + 1)), x: x / w, y: (baseY - bh) / h, bw: bw / w, bh: bh / h, idx: i }); x += bw + gap * sc; });
+                }
+                boxes.forEach(b => { inner += box(b.x, b.y, b.bw, b.bh, '', 'data-bake="artwork" data-member-idx="' + b.idx + '"'); inner += txt(b.x, Math.max(0, b.y - 0.028), 0.06, _esc(b.letter), fs(0.024), 800, DRUK); });
+                const sTop = 0.16, sBot = 0.93, slotH = (sBot - sTop) / n;
+                members.forEach((m, i) => { const sy = sTop + i * slotH; inner += txt(0.05, sy, 0.035, _esc(letters[i] || ('' + (i + 1))), fs(0.024), 800, DRUK); let ml = []; if (!_artOnly) try { const s = buildSpecStrings(m); if (s && s.lines) ml = s.lines.filter(l => ['Application', 'Frame Size', 'Frame Code', 'Overall Dimensions'].indexOf(l.label) >= 0).map(l => l.label + '  ' + (l.value || '')); } catch (e) {} inner += txt(0.095, sy, 0.29, '<b>' + _esc(m.id || '') + '</b><br>' + ml.slice(0, 3).map(_esc).join('<br>'), fs(0.019), 400, SANS); });
+            } else if (tpl.row) {
                 const cols = Math.max(1, Math.min(n, 4));
                 const leftX = 0.06, gap = 0.02, slotW = (0.9 - gap * (cols - 1)) / cols;
                 const topY = 0.16, artH = 0.46;
@@ -9139,7 +9166,7 @@ function _dsRenderTools() {
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
-            ['setRight', 'setRow'].forEach(key => {
+            ['setRight', 'setRow', 'setScale'].forEach(key => {
                 const onCur = (key === globalTpl);
                 const cell = document.createElement('div');
                 cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
@@ -10556,7 +10583,8 @@ function closeCopyEditor() { const m = document.getElementById('copyEditModal');
 // left — each labelled A, B, C…
 async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
     const PW = ctx.PW, PH = ctx.PH;
-    const members = (unit.members || []).slice(0, 6);
+    const _isScale = !!(SPEC_TEMPLATES[tplKey] && SPEC_TEMPLATES[tplKey].scale);
+    const members = (unit.members || []).slice(0, _isScale ? 12 : 6);
     const n = Math.max(1, members.length);
     const letters = ['A', 'B', 'C', 'D', 'E', 'F'];
     // — Title (group code) —
@@ -10587,8 +10615,6 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                 const aw = cnv.width * fit, ah = cnv.height * fit;
                 const ax = cx + (slotW - aw) / 2, ay = topY + (artH - ah);
                 try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
-                doc.setFont(_font('display'), 'bold'); doc.setFontSize(14); doc.setTextColor(20, 20, 20);
-                doc.text(letter, ax - 2, ay + 11);
                 const ic = (r.imageCode || r.artworkFile || '') + '';
                 if (ic) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(cs.size, 8.5)); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw, ay + ah + 9, { align: 'right' }); }
             } catch (e) {}
@@ -10611,6 +10637,80 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                 });
             }
         }
+        return;
+    }
+
+    // — To scale (as hung): frames on the right at their elevation positions —
+    if (_isScale) {
+        const artOnly = _specArtOnly(unit.key);
+        const geo = members.map(r => {
+            for (const e of (typeof elevations !== 'undefined' ? elevations : [])) {
+                if (e && e.frames) { const m = e.frames.find(fr => fr && fr.id === r.id); if (m) return { x: parseFloat(m.x) || 0, y: parseFloat(m.y) || 0, w: parseFloat(m.w) || 0, h: parseFloat(m.h) || 0 }; }
+            }
+            return null;
+        });
+        const regX = PW * 0.40, regY = PH * 0.16, regW = PW * 0.56, regH = PH * 0.76;
+        const placed = [];
+        const haveGeo = geo.length && geo.every(g => g && g.w > 0 && g.h > 0);
+        if (haveGeo) {
+            let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+            geo.forEach(g => { minX = Math.min(minX, g.x); minY = Math.min(minY, g.y); maxX = Math.max(maxX, g.x + g.w); maxY = Math.max(maxY, g.y + g.h); });
+            const bbW = Math.max(0.01, maxX - minX), bbH = Math.max(0.01, maxY - minY);
+            const sc = Math.min(regW / bbW, regH / bbH);
+            const offX = regX + (regW - bbW * sc) / 2, offY = regY + (regH - bbH * sc) / 2;
+            members.forEach((r, i) => { const g = geo[i]; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: offX + (g.x - minX) * sc, by: offY + (g.y - minY) * sc, bw: g.w * sc, bh: g.h * sc }); });
+        } else {
+            const dims = members.map(r => ({ w: Math.max(1, parseFloat(r.extW) || 10), h: Math.max(1, parseFloat(r.extH) || 10) }));
+            const gap = 0.5;
+            const totalW = dims.reduce((a, d) => a + d.w, 0) + gap * (dims.length - 1);
+            const maxH = dims.reduce((a, d) => Math.max(a, d.h), 0);
+            const sc = Math.min(regW / totalW, regH / maxH);
+            let x = regX + (regW - totalW * sc) / 2; const baseY = regY + regH;
+            members.forEach((r, i) => { const d = dims[i]; const bw = d.w * sc, bh = d.h * sc; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: x, by: baseY - bh, bw: bw, bh: bh }); x += bw + gap * sc; });
+        }
+        for (const p of placed) {
+            try {
+                const r = p.r;
+                const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
+                let artworkImg = null; if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
+                const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+                const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+                const cnv = out.canvas;
+                let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); } catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
+                const fit = Math.min(p.bw / cnv.width, p.bh / cnv.height);
+                const aw = cnv.width * fit, ah = cnv.height * fit;
+                const ax = p.bx + (p.bw - aw) / 2, ay = p.by + (p.bh - ah) / 2;
+                try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
+                doc.setFont(_font('display'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
+                doc.text(p.letter, ax, ay - 2);   // top-left corner, ~2px clear of the frame
+            } catch (e) {}
+        }
+        const lX = PW * 0.05, lW = PW * 0.31, sTop = PH * 0.16, sBot = PH * 0.93;
+        const slotH = (sBot - sTop) / n;
+        const fs = Math.max(6, Math.min(8.5, slotH * 0.16));
+        const lineH = fs * 1.45;
+        const wanted = ['Application', 'Frame Size', 'Frame Code', 'Matboard', 'Image Size', 'Overall Dimensions'];
+        members.forEach((r, i) => {
+            const sy = sTop + i * slotH;
+            doc.setFont(_font('display'), 'bold'); doc.setFontSize(Math.min(fs + 4, 13)); doc.setTextColor(20, 20, 20);
+            doc.text(letters[i] || ('' + (i + 1)), lX, sy + fs + 2);
+            doc.setFont('helvetica', 'bold'); doc.setFontSize(fs + 0.5); doc.setTextColor(60, 60, 60);
+            doc.text((r.id || '').toString(), lX + 16, sy + fs + 1);
+            if (artOnly) return;
+            let specs = null; try { specs = buildSpecStrings(r); } catch (e) {}
+            const lines = specs && specs.lines ? specs.lines.filter(l => wanted.indexOf(l.label) >= 0) : [];
+            const maxLines = Math.max(1, Math.floor((slotH - lineH - 4) / lineH));
+            let ly = sy + fs + 2 + lineH;
+            doc.setFontSize(fs);
+            lines.slice(0, maxLines).forEach(ln => {
+                doc.setFont('helvetica', 'bold'); doc.setTextColor(40, 40, 40); doc.text(ln.label, lX + 16, ly);
+                const lw = doc.getTextWidth(ln.label);
+                doc.setFont('helvetica', 'normal'); const vs = (ln.value || '') + ''; const vw = doc.getTextWidth(vs); const vx = lX + 16 + lW - vw; doc.text(vs, vx, ly);
+                const ds = lX + 16 + lw + 4, de = vx - 4;
+                if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(175, 175, 175); doc.setLineWidth(0.4); doc.line(ds, ly - 2, de, ly - 2); doc.setLineDashPattern([], 0); }
+                ly += lineH;
+            });
+        });
         return;
     }
 
@@ -10661,10 +10761,8 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
             const aw = cnv.width * fit, ah = cnv.height * fit;
             const ax = rX + (boxW - aw) / 2, ay = sy + (slotH - ah) / 2;
             try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
-            // letter label on the artwork (top-left)
-            doc.setFont(_font('display'), 'bold'); doc.setFontSize(13); doc.setTextColor(20, 20, 20);
-            doc.text(letter, ax - 2, ay + 10);
-            // image code under the artwork (bottom-right)
+            // image code under the artwork (bottom-right) — the letter is already
+            // shown on the left, and at the end of the item code, so no frame letter.
             const ic = (r.imageCode || r.artworkFile || '') + '';
             if (ic) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(cs.size, 9)); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw, ay + ah + 9, { align: 'right' }); }
         } catch (e) {}
