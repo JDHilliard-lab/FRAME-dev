@@ -333,7 +333,7 @@ function _deckStyles() { if (!editorialContent.styles) editorialContent.styles =
 // _mbEls() returns the current page's element array, so the editor functions
 // stay page-agnostic. Legacy single-array projects fold into page 1.
 let _mbPageIndex = 0;
-function _mbDefaultTitle(type) { return type === 'keyword' ? 'KEYWORDS' : type === 'inspo' ? 'INSPIRATION' : type === 'breaker' ? '' : 'MOODBOARD'; }
+function _mbDefaultTitle(type) { return type === 'keyword' ? 'KEYWORDS' : type === 'inspo' ? 'INSPIRATION' : type === 'breaker' ? '' : type === 'divider' ? 'SECTION' : type === 'bio' ? 'ARTIST BIO' : type === 'plan' ? 'PLAN VIEW' : type === 'custom' ? 'PAGE' : 'MOODBOARD'; }
 function _mbMigratePages() {
     const ec = editorialContent;
     if (!Array.isArray(ec.layoutPages) || !ec.layoutPages.length) {
@@ -559,6 +559,26 @@ const LAYOUT_TEMPLATES = {
         { name: 'Strip', els: () => [_tImg(.05, .34, .21, .32), _tImg(.28, .34, .21, .32), _tImg(.51, .34, .21, .32), _tImg(.74, .34, .21, .32)] },
         { name: 'Image + notes', els: () => [_tImg(.06, .16, .5, .66), _tTxt('Note one', .6, .2, .34, .045, 5, 'serif'), _tTxt('Note two', .6, .38, .34, .045, 5, 'serif'), _tTxt('Note three', .6, .56, .34, .045, 5, 'serif')] },
         { name: 'Feature', els: () => [_tImg(.18, .16, .64, .62)] }
+    ],
+    divider: [
+        { name: 'Section title', els: () => [_tTxt('SECTION TITLE', .08, .42, .84, .12, 5, 'display', '#1a1a1a')] },
+        { name: 'Title + subtitle', els: () => [_tTxt('SECTION TITLE', .08, .38, .84, .1, 5, 'display', '#1a1a1a'), _tTxt('A short subtitle for this section.', .08, .54, .84, .035, 6, 'serif', '#666666')] },
+        { name: 'Over image', els: () => [_tImg(0, 0, 1, 1), _tTxt('SECTION TITLE', .08, .42, .84, .12, 5, 'display', '#ffffff')] }
+    ],
+    bio: [
+        { name: 'Portrait + bio', els: () => [_tImg(.06, .14, .34, .66, 1), _tTxt('ARTIST NAME', .46, .14, .48, .06, 5, 'display', '#1a1a1a'), _tTxt('Artist biography — background, practice, and relevance to this collection.', .46, .26, .48, .028, 6, 'serif', '#222222')] },
+        { name: 'Text only', els: () => [_tTxt('ARTIST NAME', .06, .14, .8, .06, 5, 'display', '#1a1a1a'), _tTxt('Artist biography copy.', .06, .26, .62, .03, 6, 'serif', '#222222')] },
+        { name: 'Lead image', els: () => [_tImg(.06, .12, .88, .4, 1.6), _tTxt('ARTIST NAME', .06, .56, .7, .05, 5, 'display', '#1a1a1a'), _tTxt('Artist biography below the lead image.', .06, .67, .88, .026, 6, 'serif', '#222222')] }
+    ],
+    plan: [
+        { name: 'Full plan', els: () => [_tImg(.06, .12, .88, .78, 1.6)] },
+        { name: 'Plan + caption', els: () => [_tImg(.06, .1, .88, .72, 1.8), _tTxt('Floor plan — level / zone', .06, .86, .7, .03, 6, 'serif', '#666666')] },
+        { name: 'Title + plan', els: () => [_tTxt('PLAN VIEW', .06, .08, .7, .055, 5, 'display', '#1a1a1a'), _tImg(.06, .2, .88, .68, 1.7)] }
+    ],
+    custom: [
+        { name: 'Title + image', els: () => [_tTxt('PAGE TITLE', .06, .1, .7, .06, 5, 'display', '#1a1a1a'), _tImg(.06, .22, .6, .6, 1)] },
+        { name: 'Image + copy', els: () => [_tImg(.06, .14, .5, .66, 1), _tTxt('PAGE TITLE', .62, .14, .32, .05, 5, 'display', '#1a1a1a'), _tTxt('Copy goes here.', .62, .27, .32, .028, 6, 'serif', '#222222')] },
+        { name: 'Blank', els: () => [] }
     ]
 };
 let _tplType = 'moodboard';
@@ -7391,7 +7411,7 @@ function _deckPageList() {
     const inc = _dsInclude();
     const ec = editorialContent;
     const pages = [];
-    const layoutAt = (anchor) => (ec.layoutPages || []).forEach(p => { if ((p.place || 'afterStrategy') === anchor) pages.push({ kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Layout', page: p }); });
+    const layoutAt = (anchor) => (ec.layoutPages || []).forEach(p => { if (p.afterKey) return; if ((p.place || 'afterStrategy') === anchor) pages.push({ kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Layout', page: p }); });
     if (inc.cover) pages.push({ kind: 'fixed', fixed: 'cover', type: 'cover', title: 'Cover', page: ec.coverPage });
     layoutAt('afterCover');
     if (inc.timeline) pages.push({ kind: 'card', type: 'timeline', title: 'Process / Timeline' });
@@ -7448,6 +7468,18 @@ function _deckPageList() {
     if (inc.slogan) pages.push({ kind: 'fixed', fixed: 'slogan', type: 'slogan', title: 'Good Art Good People', page: ec.sloganPage });
     layoutAt('beforeContacts');
     if (inc.contacts) pages.push({ kind: 'card', type: 'contacts', title: 'Thank You', text: ec.contacts });
+    // User-inserted pages anchored after a specific page (page management).
+    (ec.layoutPages || []).forEach(p => {
+        if (!p.afterKey) return;
+        const d = { kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Page', page: p };
+        if (p.afterKey === '__start__') { pages.unshift(d); return; }
+        let idx = -1;
+        for (let i = pages.length - 1; i >= 0; i--) { if (_deckPageKey(pages[i]) === p.afterKey) { idx = i; break; } }
+        if (idx < 0) { pages.push(d); return; }
+        let j = idx + 1;
+        while (j < pages.length && pages[j].kind === 'layout' && pages[j].page && pages[j].page.afterKey === p.afterKey) j++;
+        pages.splice(j, 0, d);
+    });
     return pages;
 }
 function _deckMockHTML(desc, w, h) {
@@ -7690,6 +7722,71 @@ function closeDeckStudio() { const m = document.getElementById('deckStudioModal'
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
 let _dsRailFilter = '';
+function _dsCreateInsert(type, afterKey) {
+    _mbMigratePages();
+    const variants = LAYOUT_TEMPLATES[type];
+    const els = (variants && variants[0] && variants[0].els) ? variants[0].els() : [];
+    const pg = { id: 'pg' + Math.random().toString(36).slice(2), type: type, title: _mbDefaultTitle(type), elements: JSON.parse(JSON.stringify(els)), afterKey: afterKey || '__start__' };
+    editorialContent.layoutPages.push(pg);
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
+    const k = 'layout:' + pg.id;
+    const ni = _dsPages.findIndex(d => _deckPageKey(d) === k);
+    if (ni >= 0) _dsSelectPage(ni);
+}
+function _dsOpenInsertMenu(anchorBtn, afterKey) {
+    const old = document.getElementById('dsInsMenu'); if (old) { old.remove(); return; }
+    const menu = document.createElement('div'); menu.id = 'dsInsMenu';
+    menu.style.cssText = 'position:fixed; z-index:100030; background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:6px; padding:4px; box-shadow:0 8px 24px rgba(0,0,0,0.35); min-width:152px;';
+    const r = anchorBtn.getBoundingClientRect();
+    menu.style.left = Math.min(r.left, window.innerWidth - 168) + 'px';
+    menu.style.top = Math.min(r.bottom + 4, window.innerHeight - 230) + 'px';
+    const hdr = document.createElement('div'); hdr.textContent = 'Insert a page'; hdr.style.cssText = 'font-size:0.62rem; color:var(--text-muted); padding:4px 8px 6px;'; menu.appendChild(hdr);
+    [['breaker', 'Breaker'], ['divider', 'Divider'], ['moodboard', 'Moodboard'], ['bio', 'Artist bio'], ['plan', 'Plan view'], ['custom', 'Custom']].forEach(pair => {
+        const b = document.createElement('button'); b.textContent = pair[1];
+        b.style.cssText = 'display:block; width:100%; text-align:left; font-size:0.72rem; padding:6px 10px; border:none; background:none; color:var(--text-main); cursor:pointer; border-radius:4px;';
+        b.onmouseenter = () => b.style.background = 'var(--bg-input)'; b.onmouseleave = () => b.style.background = 'none';
+        b.onclick = () => { menu.remove(); _dsCreateInsert(pair[0], afterKey); };
+        menu.appendChild(b);
+    });
+    document.body.appendChild(menu);
+    setTimeout(() => { const close = (ev) => { if (!menu.contains(ev.target) && ev.target !== anchorBtn) { menu.remove(); document.removeEventListener('mousedown', close); } }; document.addEventListener('mousedown', close); }, 0);
+}
+function _dsInsertStrip(afterKey, tw) {
+    const strip = document.createElement('div');
+    strip.setAttribute('data-insstrip', '1');
+    strip.style.cssText = 'position:relative; height:16px; margin:-4px 0 6px; display:flex; align-items:center; justify-content:center; width:' + tw + 'px;';
+    const line = document.createElement('div'); line.style.cssText = 'position:absolute; left:6px; right:6px; top:50%; height:1px; background:var(--border-color); opacity:0.6;';
+    const btn = document.createElement('button'); btn.textContent = '+'; btn.title = 'Insert a page here';
+    btn.style.cssText = 'position:relative; z-index:1; width:22px; height:16px; line-height:13px; border-radius:8px; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-muted); cursor:pointer; font-size:0.78rem; padding:0;';
+    btn.onclick = (e) => { e.stopPropagation(); _dsOpenInsertMenu(btn, afterKey); };
+    strip.appendChild(line); strip.appendChild(btn);
+    return strip;
+}
+function _dsMoveInserted(pageObj, dir) {
+    const k = 'layout:' + pageObj.id;
+    const j = _dsPages.findIndex(d => _deckPageKey(d) === k);
+    if (j < 0) return;
+    if (dir === 'up') {
+        if (j <= 0) { pageObj.afterKey = '__start__'; }
+        else { const tgt = _dsPages[j - 2]; pageObj.afterKey = (j - 2 < 0) ? '__start__' : (_deckPageKey(tgt) || '__start__'); }
+    } else {
+        if (j >= _dsPages.length - 1) return;
+        const nk = _deckPageKey(_dsPages[j + 1]); if (!nk) return; pageObj.afterKey = nk;
+    }
+    delete pageObj.place;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
+    const ni = _dsPages.findIndex(d => _deckPageKey(d) === k); if (ni >= 0) _dsSelectPage(ni);
+}
+function _dsDeleteInserted(pageObj) {
+    editorialContent.layoutPages = (editorialContent.layoutPages || []).filter(p => p !== pageObj);
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRefresh();
+}
 function _dsRenderRail() {
     const rail = document.getElementById('dsRail'); if (!rail) return;
     rail.innerHTML = '';
@@ -7714,21 +7811,34 @@ function _dsRenderRail() {
     rail.appendChild(bar);
 
     const tw = 168, th = Math.round(tw * 540 / 936);
+    rail.appendChild(_dsInsertStrip('__start__', tw));
     _dsPages.forEach((desc, i) => {
         const matchText = ((i + 1) + ' ' + (desc.title || '') + ' ' + (desc.type || '') + ' ' + ((desc.members || []).map(m => (m && m.id) || '').join(' '))).toLowerCase();
         const cell = document.createElement('div');
         cell.setAttribute('data-railcell', '1');
         cell.setAttribute('data-railtext', matchText);
-        cell.style.cssText = 'margin-bottom:10px; cursor:pointer;';
+        cell.style.cssText = 'margin-bottom:4px; cursor:pointer;';
         cell.onclick = () => _dsSelectPage(i);
         const thumb = document.createElement('div');
         thumb.style.cssText = 'position:relative; width:' + tw + 'px; height:' + th + 'px; background:#fff; border-radius:4px; overflow:hidden; border:2px solid ' + (i === _dsIndex ? '#6a6aff' : 'var(--border-color)') + ';';
         try { thumb.innerHTML = _deckMockHTML(desc, tw, th); }
         catch (e) { thumb.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:10px;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
         const lab = document.createElement('div');
-        lab.style.cssText = 'font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
-        lab.textContent = (i + 1) + '. ' + (desc.title || desc.type);
+        lab.style.cssText = 'display:flex; align-items:center; gap:4px; font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px;';
+        const txt = document.createElement('span');
+        txt.style.cssText = 'flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+        txt.textContent = (i + 1) + '. ' + (desc.title || desc.type);
+        lab.appendChild(txt);
+        const isInserted = (desc.kind === 'layout' && desc.page && desc.page.afterKey);
+        if (isInserted) {
+            const ctlBtn = (sym, title, on) => { const b = document.createElement('button'); b.textContent = sym; b.title = title; b.style.cssText = 'width:18px; height:18px; line-height:1; padding:0; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-muted); border-radius:3px; cursor:pointer; font-size:0.66rem;'; b.onclick = (e) => { e.stopPropagation(); on(); }; return b; };
+            lab.appendChild(ctlBtn('\u25b2', 'Move up', () => _dsMoveInserted(desc.page, 'up')));
+            lab.appendChild(ctlBtn('\u25bc', 'Move down', () => _dsMoveInserted(desc.page, 'down')));
+            lab.appendChild(ctlBtn('\u2715', 'Delete page', () => _dsDeleteInserted(desc.page)));
+        }
         cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
+        const ak = _deckPageKey(desc);
+        if (ak) rail.appendChild(_dsInsertStrip(ak, tw));
     });
     const noMatch = document.createElement('p');
     noMatch.id = 'dsRailNoMatch';
@@ -7755,6 +7865,7 @@ function _dsApplyRailFilter() {
     const cells = rail.querySelectorAll('[data-railcell]');
     let shown = 0;
     cells.forEach(c => { const ok = !q || (c.getAttribute('data-railtext') || '').indexOf(q) >= 0; c.style.display = ok ? '' : 'none'; if (ok) shown++; });
+    rail.querySelectorAll('[data-insstrip]').forEach(s => { s.style.display = q ? 'none' : ''; });
     const count = document.getElementById('dsRailCount');
     if (count) count.textContent = q ? (shown + ' of ' + cells.length + ' pages') : (cells.length + (cells.length === 1 ? ' page' : ' pages'));
     const nm = document.getElementById('dsRailNoMatch');
@@ -10518,7 +10629,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const emitLayout = async (anchor) => {
         if (!inc.moodboard) return;
         _mbMigratePages();
-        const pages = (editorialContent.layoutPages || []).filter(p => (p.place || 'afterStrategy') === anchor);
+        const pages = (editorialContent.layoutPages || []).filter(p => !p.afterKey && (p.place || 'afterStrategy') === anchor);
         for (const page of pages) {
             const src = page.elements || [];
             if (!src.length) continue;
@@ -10530,7 +10641,19 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title, page.type);
         }
     };
+    // Inserted pages anchored after a specific page key (page management).
+    const _layoutAfter = (key) => (editorialContent.layoutPages || []).filter(p => p.afterKey === key);
+    const _afterKeyCount = (key) => { let n = 0; _layoutAfter(key).forEach(p => { n += 1 + _afterKeyCount('layout:' + p.id); }); return n; };
+    const drawLayoutPage = async (page) => {
+        const src = page.elements || [];
+        const tiles = src.map(t => Object.assign({}, t, { _img: null }));
+        for (let ti = 0; ti < src.length; ti++) { if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} } }
+        newPage('layout:' + page.id);
+        _drawMoodboardPage(doc, logos, pageNum, meta, tiles, page.title, page.type);
+    };
+    const emitAfterKey = async (key) => { if (!key) return; for (const p of _layoutAfter(key)) { await drawLayoutPage(p); await emitAfterKey('layout:' + p.id); } };
 
+    await emitAfterKey('__start__');
     // — Cover —
     if (inc.cover) {
         newPage('fixed:cover');
@@ -10546,9 +10669,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             _drawCoverPage(doc, logos);
         }
     }
+    await emitAfterKey('fixed:cover');
     await emitLayout('afterCover');
     // — Process & Timeline (real) —
     if (inc.timeline) { newPage('card:timeline'); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
+    await emitAfterKey('card:timeline');
     await emitLayout('afterTimeline');
     // — Project Understanding (real): custom freeform page if built, else prose —
     if (inc.understanding) {
@@ -10565,6 +10690,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.');
         }
     }
+    await emitAfterKey('fixed:understanding');
     await emitLayout('afterUnderstanding');
     // — Art Narrative (real): custom freeform page if built, else prose —
     if (inc.narrative) {
@@ -10581,6 +10707,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.');
         }
     }
+    await emitAfterKey('fixed:narrative');
     await emitLayout('afterNarrative');
     // — Art Collection Strategy (real): custom freeform page if built, else tiers —
     if (inc.strategy) {
@@ -10598,6 +10725,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         }
     }
     // — Layout pages (default anchor): freeform image / text / arrow pages —
+    await emitAfterKey('fixed:strategy');
     await emitLayout('afterStrategy');
     // — Frame Recommendations (real): summary of frames specified across rows —
     if (inc.frameRec) {
@@ -10606,6 +10734,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         if (!projFrames.length) { newPage('card:frameRec'); _drawFrameRecPage(doc, logos, pageNum, meta, []); }
         else { for (let fi = 0; fi < projFrames.length; fi += perPage) { newPage('card:frameRec'); _drawFrameRecPage(doc, logos, pageNum, meta, projFrames.slice(fi, fi + perPage)); } }
     }
+    await emitAfterKey('card:frameRec');
     await emitLayout('beforeFloorplan');
     // — Build the emission plan: interleave each level's floorplan key with that
     //   level's spec pages (Level 1 plan → Level 1 specs → Level 2 plan → …),
@@ -10658,14 +10787,17 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         let _p = pageNum;
         for (const step of plan) {
             _p++;
+            const _sk = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? ('spec:elev:' + step.idx) : ('spec:' + (step.unit && step.unit.key));
             if (step.type === 'spec' && step.unit) step.unit.members.forEach(m => { if (m && m.id) idToPage[m.id] = _p; });
             else if (step.type === 'install' && step.elev && step.elev.frames) step.elev.frames.forEach(f => { if (f && f.id) idToPage[f.id] = _p; });
+            _p += _afterKeyCount(_sk);
         }
     }
 
     // — Emit the plan: floorplan keys and spec pages, interleaved per level —
     for (const step of plan) {
-        newPage(step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? ('spec:elev:' + step.idx) : ('spec:' + (step.unit && step.unit.key)));
+        const stepKey = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? ('spec:elev:' + step.idx) : ('spec:' + (step.unit && step.unit.key));
+        newPage(stepKey);
         if (step.type === 'key') {
             _fpLevelKeyPage[step.li] = pageNum;
             const lv = floorplanLevels[step.li] || {};
@@ -10682,10 +10814,12 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
             _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, lv.name || ('Level ' + (step.li + 1)));
             if (!fpKeyPageNum) fpKeyPageNum = pageNum;
+            await emitAfterKey(stepKey);
             continue;
         }
         if (step.type === 'install') {
             await _drawInstallGuidePage(doc, logos, pageNum, meta, step.elev, { PW: PW, PH: PH, M: M });
+            await emitAfterKey(stepKey);
             continue;
         }
         const r = step.unit.rep;
@@ -10833,6 +10967,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
         // — Footer (page number + project line) on every spec page —
         _drawPdfFooter(doc, logos, pageNum, meta);
+        await emitAfterKey(stepKey);
     }
     await emitLayout('afterSpec');
 
@@ -10851,12 +10986,17 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         } else {
             _drawSloganPage(doc, logos, pageNum, meta);
         }
+        await emitAfterKey('fixed:slogan');
     }
     // — Thank You / contacts (real) —
-    if (inc.contacts) { newPage('card:contacts'); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); }
+    if (inc.contacts) { newPage('card:contacts'); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); await emitAfterKey('card:contacts'); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
+    {
+        const _emitted = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) _emitted[_pageKeys[p]] = 1; }
+        for (const pg of (editorialContent.layoutPages || [])) { if (pg.afterKey && pg.afterKey !== '__start__' && !_emitted[pg.afterKey]) { await drawLayoutPage(pg); await emitAfterKey('layout:' + pg.id); } }
+    }
     for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } } }
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
     // — Approval status: spec pages the client has approved (green) or that are
@@ -17136,4 +17276,4 @@ async function exportElevSVG(opts) {
 }
 
 // BOOT UP THE ENGINE
-initMasterApp();
+initMasterApp();v
