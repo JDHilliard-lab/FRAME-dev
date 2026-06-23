@@ -5697,6 +5697,90 @@ function applyArtworkToRowIndex(idx, dataUrl, baseName, w, h) {
     pushHistory();
 }
 
+// ── Bulk artwork replacement (relink-by-code) ────────────────────────────
+// Drop in a batch of revised images named to match pieces; auto-match each
+// file to a piece by image code / item code / filename and swap the artwork.
+let _bulkReplacePending = [];
+function _bulkNorm(s) { return (s || '').toString().toLowerCase().replace(/\.[^.]+$/, '').replace(/[^a-z0-9]/g, ''); }
+function _bulkMatchPieces(basename) {
+    const nb = _bulkNorm(basename); if (!nb) return [];
+    const out = [];
+    (dashProjectData || []).forEach((r, i) => { if (!r) return; if ([r.imageCode, r.artworkFile, r.id].some(c => c && _bulkNorm(c) === nb)) out.push(i); });
+    return out;
+}
+function _processArtworkP(file) { return new Promise((res) => { try { processArtworkFile(file, (dataUrl, baseName, w, h) => res({ dataUrl: dataUrl, baseName: baseName, w: w, h: h })); } catch (e) { res(null); } }); }
+function _bulkApplyArtwork(idx, dataUrl, w, h) {
+    const row = dashProjectData[idx]; if (!row) return;
+    row.artworkUrl = dataUrl; if (w) row.artworkW = w; if (h) row.artworkH = h;
+    row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;        // fresh image → centered cover
+    if (typeof pushUpdatesToElevations === 'function') pushUpdatesToElevations(idx);
+}
+function openBulkReplaceModal() {
+    const old = document.getElementById('bulkReplaceModal'); if (old) old.remove();
+    _bulkReplacePending = [];
+    const ov = document.createElement('div'); ov.id = 'bulkReplaceModal';
+    ov.style.cssText = 'position:fixed; inset:0; z-index:100040; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:10px; width:620px; max-width:94vw; max-height:88vh; display:flex; flex-direction:column; overflow:hidden;';
+    card.innerHTML = '<div style="display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border-color);"><div style="font-size:0.95rem; font-weight:700; color:var(--text-main);">Bulk replace artwork</div><button id="brClose" style="border:none; background:none; color:var(--text-muted); font-size:1.2rem; cursor:pointer; line-height:1;">\u00d7</button></div>';
+    const bodyEl = document.createElement('div'); bodyEl.style.cssText = 'padding:16px 18px; overflow:auto;';
+    const intro = document.createElement('p'); intro.style.cssText = 'font-size:0.72rem; color:var(--text-muted); line-height:1.55; margin:0 0 12px;';
+    intro.innerHTML = 'Choose revised image files named to match your pieces \u2014 by <b>image code</b>, <b>item code</b>, or original filename. Each file replaces the matching piece\u2019s artwork; the code and caption stay the same. Matching ignores case, spaces, dashes and the extension, so <i>ART-001.jpg</i> matches <i>ART.001</i>.';
+    bodyEl.appendChild(intro);
+    const pick = document.createElement('input'); pick.type = 'file'; pick.accept = 'image/*'; pick.multiple = true; pick.style.cssText = 'font-size:0.74rem; color:var(--text-main); margin-bottom:12px;';
+    pick.onchange = (e) => _bulkReplacePicked(e.target.files);
+    bodyEl.appendChild(pick);
+    const res = document.createElement('div'); res.id = 'brResults'; bodyEl.appendChild(res);
+    const foot = document.createElement('div'); foot.id = 'brFoot'; foot.style.cssText = 'display:flex; justify-content:flex-end; gap:8px; margin-top:12px;';
+    bodyEl.appendChild(foot);
+    card.appendChild(bodyEl); ov.appendChild(card); document.body.appendChild(ov);
+    ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
+    card.querySelector('#brClose').onclick = () => ov.remove();
+}
+async function _bulkReplacePicked(fileList) {
+    const files = Array.from(fileList || []).filter(f => f && /^image\//.test(f.type));
+    const res = document.getElementById('brResults'), foot = document.getElementById('brFoot');
+    if (!res) return;
+    if (!files.length) { res.innerHTML = '<div style="font-size:0.72rem; color:#c08a2e;">No image files selected.</div>'; return; }
+    res.innerHTML = '<div style="font-size:0.72rem; color:var(--text-muted);">Reading ' + files.length + ' file' + (files.length === 1 ? '' : 's') + '\u2026</div>';
+    _bulkReplacePending = [];
+    for (const f of files) {
+        const r = await _processArtworkP(f); if (!r) continue;
+        _bulkReplacePending.push({ fileName: f.name, baseName: r.baseName, dataUrl: r.dataUrl, w: r.w, h: r.h, matches: _bulkMatchPieces(r.baseName) });
+    }
+    const matched = _bulkReplacePending.filter(p => p.matches.length);
+    let html = '<div style="font-size:0.74rem; color:var(--text-main); font-weight:700; margin-bottom:8px;">' + matched.length + ' of ' + _bulkReplacePending.length + ' files matched a piece</div>';
+    html += '<div style="max-height:320px; overflow:auto; border:1px solid var(--border-color); border-radius:6px;">';
+    _bulkReplacePending.forEach(p => {
+        const ok = p.matches.length > 0;
+        const targets = ok ? p.matches.map(i => (dashProjectData[i].id || dashProjectData[i].imageCode || ('row ' + (i + 1)))).join(', ') : '';
+        html += '<div style="display:flex; align-items:center; gap:10px; padding:7px 10px; border-bottom:1px solid var(--border-color);">'
+            + '<img src="' + p.dataUrl + '" style="width:34px; height:34px; object-fit:cover; border-radius:3px; flex:0 0 auto; background:#fff;">'
+            + '<div style="flex:1; min-width:0;"><div style="font-size:0.7rem; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + _esc(p.fileName) + '</div>'
+            + '<div style="font-size:0.62rem; color:' + (ok ? '#1a7f37' : '#c08a2e') + '; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">' + (ok ? '\u2192 ' + _esc(targets) : 'no matching piece') + '</div></div>'
+            + '<span style="flex:0 0 auto; font-size:0.9rem; color:' + (ok ? '#1a7f37' : '#c08a2e') + ';">' + (ok ? '\u2713' : '\u2014') + '</span></div>';
+    });
+    html += '</div>';
+    res.innerHTML = html;
+    foot.innerHTML = '';
+    const apply = document.createElement('button'); apply.className = 'action-btn'; apply.style.cssText = 'width:auto; padding:0 16px; font-size:0.78rem;'; apply.textContent = 'Replace ' + matched.length + ' image' + (matched.length === 1 ? '' : 's'); apply.disabled = !matched.length; if (!matched.length) apply.style.opacity = '0.5';
+    apply.onclick = _bulkReplaceApply;
+    foot.appendChild(apply);
+}
+function _bulkReplaceApply() {
+    let updated = 0; const seen = {};
+    _bulkReplacePending.forEach(p => { p.matches.forEach(idx => { _bulkApplyArtwork(idx, p.dataUrl, p.w, p.h); seen[idx] = 1; updated++; }); });
+    if (updated) {
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        if (typeof markDirty === 'function') markDirty();
+        if (typeof refreshAllViews === 'function') refreshAllViews();
+        if (typeof dashSelectedRowIndex !== 'undefined' && seen[dashSelectedRowIndex] && typeof updateDashArtworkThumb === 'function') { const r = dashProjectData[dashSelectedRowIndex]; if (r) updateDashArtworkThumb(r.artworkUrl || ''); }
+    }
+    const ov = document.getElementById('bulkReplaceModal'); if (ov) ov.remove();
+    showInfoModal('Bulk replace', updated ? (updated + ' piece' + (updated === 1 ? '' : 's') + ' updated with new artwork.') : 'Nothing was updated.');
+}
+
 // ── Drag-and-drop wiring ─────────────────────────────────────────────────
 // A small helper to make any element a highlightable image drop zone.
 function _wireImageDropZone(el, onFile, opts) {
