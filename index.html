@@ -90,6 +90,7 @@
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
             <button class="action-btn btn-secondary" style="width:auto;" onclick="openVersionsModal()" title="Save and compare project versions">Versions</button>
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkReplaceModal()" title="Replace artwork across many pieces at once">Bulk Images</button>
             <!-- Version pill: rendered into by renderVersionPill() in app.js
                  using APP_VERSION + APP_BUILD constants. Green dot = prod,
                  orange dot = dev. Click opens Help → Version section so
