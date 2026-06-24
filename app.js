@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.1';
+const APP_VERSION = '1.2';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -7845,7 +7845,7 @@ function _deckMockHTML(desc, w, h) {
                     const bbW = Math.max(0.01, maxX - minX), bbH = Math.max(0.01, maxY - minY);
                     const sc = Math.min((regW * w) / bbW, (regH * h) / bbH);
                     const offX = regX * w + ((regW * w) - bbW * sc) / 2, offY = regY * h + ((regH * h) - bbH * sc) / 2;
-                    members.forEach((m, i) => { const g = geo[i]; boxes.push({ letter: letters[i] || ('' + (i + 1)), x: (offX + (g.x - minX) * sc) / w, y: (offY + (g.y - minY) * sc) / h, bw: (g.w * sc) / w, bh: (g.h * sc) / h, idx: i }); });
+                    members.forEach((m, i) => { const g = geo[i]; boxes.push({ letter: letters[i] || ('' + (i + 1)), x: (offX + (g.x - minX) * sc) / w, y: (offY + (maxY - (g.y + g.h)) * sc) / h, bw: (g.w * sc) / w, bh: (g.h * sc) / h, idx: i }); });
                 } else {
                     const dims = members.map(m => ({ w: Math.max(1, parseFloat(m.extW) || 10), h: Math.max(1, parseFloat(m.extH) || 10) }));
                     const gap = 0.5; const totalW = dims.reduce((a, d) => a + d.w, 0) + gap * (dims.length - 1); const maxH = dims.reduce((a, d) => Math.max(a, d.h), 0);
@@ -10677,7 +10677,9 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
             const bbW = Math.max(0.01, maxX - minX), bbH = Math.max(0.01, maxY - minY);
             const sc = Math.min(regW / bbW, regH / bbH);
             const offX = regX + (regW - bbW * sc) / 2, offY = regY + (regH - bbH * sc) / 2;
-            members.forEach((r, i) => { const g = geo[i]; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: offX + (g.x - minX) * sc, by: offY + (g.y - minY) * sc, bw: g.w * sc, bh: g.h * sc }); });
+            // elevation y is measured bottom-up (larger y = higher on the wall),
+            // so flip it into top-down page space or the stack comes out upside down.
+            members.forEach((r, i) => { const g = geo[i]; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: offX + (g.x - minX) * sc, by: offY + (maxY - (g.y + g.h)) * sc, bw: g.w * sc, bh: g.h * sc }); });
         } else {
             const dims = members.map(r => ({ w: Math.max(1, parseFloat(r.extW) || 10), h: Math.max(1, parseFloat(r.extH) || 10) }));
             const gap = 0.5;
@@ -10723,12 +10725,12 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                         const tw = flat.width * fit, th = flat.height * fit;
                         const tx = regX + regW - tw, ty = bandY + (boxH - th);
                         doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
-                        // crisp vector wall outline + baseboard (the rendered lines vanish at thumbnail scale)
+                        // crisp vector wall outline + baseboard (the rendered lines vanish at thumbnail scale).
+                        // Use the render's returned hIn (already in inches, unit-independent) so this can't drift with units.
                         try {
-                            const u2i = (typeof unitFactor === 'function') ? unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in') : 1;
-                            const wallHin = (parseFloat(groupElev.wallH) * u2i) || 96;
-                            let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * u2i; } catch (e) {}
-                            const totalHin = wallHin + 6;   // 6 = padIn (inches) used by the elevation render
+                            const totalHin = (er.hIn && er.hIn > 0) ? er.hIn : 102;   // = wallHin + 6 (padIn)
+                            const wallHin = totalHin - 6;
+                            let bbIn = 4; try { const u2i = (typeof unitFactor === 'function') ? unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in') : 1; const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * u2i; } catch (e) {}
                             const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                             const wTopF = 6 / totalHin;
                             const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
