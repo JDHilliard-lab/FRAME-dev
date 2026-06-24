@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.2';
+const APP_VERSION = '1.3';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -325,6 +325,30 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
 let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+// Normalize an older / hand-edited project on load. The main hazard is a unit
+// mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
+// makes a 108 cm wall load as a 9-foot-tall 274" wall and shrinks the 72" person
+// to a sliver. We infer the true unit from the wall height and relabel — values
+// are left untouched, only the interpretation is corrected.
+function _migrateLoadedProject(data) {
+    if (!data || typeof data !== 'object') return data;
+    try {
+        const els = Array.isArray(data.elevations) ? data.elevations : [];
+        const heights = els.map(e => parseFloat(e && e.wallH)).filter(v => !isNaN(v) && v > 0).sort((a, b) => a - b);
+        const flagsAgree = (data.dashUnit || data.elevUnit || 'in') === (data.elevUnit || data.dashUnit || 'in');
+        if (heights.length && flagsAgree) {
+            const medH = heights[Math.floor(heights.length / 2)];
+            const declared = data.dashUnit || data.elevUnit || 'in';
+            const plausible = (h) => h >= 48 && h <= 240;          // real walls: 4 ft – 20 ft
+            if (!plausible(medH * unitFactor(declared, 'in'))) {
+                const cand = ['in', 'cm', 'mm'].find(u => plausible(medH * unitFactor(u, 'in')));
+                if (cand && cand !== declared) { data.dashUnit = cand; data.elevUnit = cand; data._unitAutoFixed = { from: declared, to: cand }; }
+            }
+        }
+    } catch (e) { /* never let migration block a load */ }
+    return data;
+}
+
 function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
@@ -2881,6 +2905,7 @@ function loadMasterProject(event) {
         try {
             const data = JSON.parse(e.target.result);
             if (data.type && data.type.startsWith('master-studio')) {
+                _migrateLoadedProject(data);   // auto-correct mislabeled units etc.
                 // Unit handling: prefer dashUnit (it's the CSV-canonical one).
                 // If only elevUnit exists (older format edge case) use that.
                 // Force both internal vars equal to the chosen value since
@@ -2948,6 +2973,9 @@ function loadMasterProject(event) {
             }
             if (typeof markClean === 'function') markClean();
             if (typeof clearAutosave === 'function') clearAutosave();
+            if (data._unitAutoFixed && typeof showInfoModal === 'function') {
+                showInfoModal('Units auto-corrected', 'This project was labeled "' + data._unitAutoFixed.from + '" but its measurements looked like "' + data._unitAutoFixed.to + '" (for example, a 108-unit-tall wall). FRAME corrected the unit to ' + data._unitAutoFixed.to + ' so the elevation, person, and hang heights scale correctly. Save the project to keep the fix.');
+            }
         } catch (err) { alert("Invalid project file."); }
     };
     reader.readAsText(file); event.target.value = '';
