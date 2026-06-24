@@ -7833,7 +7833,9 @@ function _deckMockHTML(desc, w, h) {
             const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
             inner += txt(0.05, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
             if (isScaleM) {
-                const geo = members.map(m => { let g = null; (typeof elevations !== 'undefined' ? elevations : []).forEach(e => { if (!g && e && e.frames) { const fr = e.frames.find(f => f && f.id === m.id); if (fr) g = { x: parseFloat(fr.x) || 0, y: parseFloat(fr.y) || 0, w: parseFloat(fr.w) || 0, h: parseFloat(fr.h) || 0 }; } }); return g; });
+                let _ge = null, _bc = 0;
+                (typeof elevations !== 'undefined' ? elevations : []).forEach(e => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(f => f && f.id === m.id)) c++; }); if (c > _bc) { _bc = c; _ge = e; } });
+                const geo = members.map(m => { if (_ge && _ge.frames) { const fr = _ge.frames.find(f => f && f.id === m.id); if (fr) return { x: parseFloat(fr.x) || 0, y: parseFloat(fr.y) || 0, w: parseFloat(fr.w) || 0, h: parseFloat(fr.h) || 0 }; } return null; });
                 const regX = 0.40, regY = 0.16, regW = 0.56, regH = 0.74;
                 const haveGeo = geo.length && geo.every(g => g && g.w > 0 && g.h > 0);
                 const boxes = [];
@@ -10650,11 +10652,19 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
     if (_isScale) {
         const artOnly = _specArtOnly(unit.key);
         const opts = _scaleOpts();
-        let groupElev = null;
+        // Pick the single elevation that holds the most of these members, then
+        // read every frame's position FROM that one wall — otherwise a piece
+        // that also appears on an earlier elevation grabs the wrong coordinates
+        // and shifts out of place (while the thumbnail, which uses one wall,
+        // still looks right).
+        let groupElev = null, _bestCount = 0;
+        (typeof elevations !== 'undefined' ? elevations : []).forEach(e => {
+            if (!e || !e.frames) return;
+            let c = 0; members.forEach(r => { if (e.frames.some(fr => fr && fr.id === r.id)) c++; });
+            if (c > _bestCount) { _bestCount = c; groupElev = e; }
+        });
         const geo = members.map(r => {
-            for (const e of (typeof elevations !== 'undefined' ? elevations : [])) {
-                if (e && e.frames) { const m = e.frames.find(fr => fr && fr.id === r.id); if (m) { if (!groupElev) groupElev = e; return { x: parseFloat(m.x) || 0, y: parseFloat(m.y) || 0, w: parseFloat(m.w) || 0, h: parseFloat(m.h) || 0 }; } }
-            }
+            if (groupElev && groupElev.frames) { const m = groupElev.frames.find(fr => fr && fr.id === r.id); if (m) return { x: parseFloat(m.x) || 0, y: parseFloat(m.y) || 0, w: parseFloat(m.w) || 0, h: parseFloat(m.h) || 0 }; }
             return null;
         });
         const bottomBand = (opts.elevThumb && groupElev) || opts.codes === 'legend';
@@ -10715,9 +10725,10 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                         doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
                         // crisp vector wall outline + baseboard (the rendered lines vanish at thumbnail scale)
                         try {
-                            const wallHin = ((typeof toIn === 'function' ? toIn(groupElev.wallH) : parseFloat(groupElev.wallH)) || 96);
-                            let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = toIn(b); } catch (e) {}
-                            const totalHin = wallHin + 6;
+                            const u2i = (typeof unitFactor === 'function') ? unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in') : 1;
+                            const wallHin = (parseFloat(groupElev.wallH) * u2i) || 96;
+                            let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * u2i; } catch (e) {}
+                            const totalHin = wallHin + 6;   // 6 = padIn (inches) used by the elevation render
                             const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                             const wTopF = 6 / totalHin;
                             const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
