@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.3';
+const APP_VERSION = '1.4';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -6883,7 +6883,10 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
         if (!opts.wireframe && f.artworkUrl) { try { artworkImg = await _loadImg(f.artworkUrl); } catch (e) {} }
         let swatchImg = null;
         if (f.fType === 'image' && f.swatchDataUrl) { try { swatchImg = await _loadImg(f.swatchDataUrl); } catch (e) {} }
-        const dInches = _frameDataInInches(Object.assign({}, f, { extW: fWin, extH: fHin }), 'in');
+        // Convert the WHOLE frame (outer size + mats + moulding + rabbet) from
+        // the elevation unit to inches. Passing 'in' here left the mats in cm/mm,
+        // so they ballooned in cm and blew up the thumbnail in mm.
+        const dInches = _frameDataInInches(Object.assign({}, f, { extW: f.w, extH: f.h }), unit);
         const fr = renderFrameToCanvas(dInches, swatchImg, {
             dpi, pad: 0, artworkImg,
             artCrop: { zoom: f.artZoom, panX: f.artPanX, panY: f.artPanY },
