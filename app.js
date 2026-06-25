@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.9';
+const APP_VERSION = '2.0';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -324,7 +324,7 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, breakerMeasure: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
 // Normalize an older / hand-edited project on load. The main hazard is a unit
 // mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
 // makes a 108 cm wall load as a 9-foot-tall 274" wall and shrinks the 72" person
@@ -349,7 +349,7 @@ function _migrateLoadedProject(data) {
     return data;
 }
 
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, breakerMeasure: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -396,6 +396,7 @@ function _mbMigratePages() {
     if (!ec.scaleOpts || typeof ec.scaleOpts !== 'object') ec.scaleOpts = { codes: 'frames', elevThumb: false };
     if (typeof ec.elevBreakers !== 'boolean') ec.elevBreakers = false;
     if (typeof ec.breakerNoPlan !== 'boolean') ec.breakerNoPlan = false;
+    if (typeof ec.breakerMeasure !== 'boolean') ec.breakerMeasure = false;
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -7749,7 +7750,7 @@ function _deckPageList() {
         let ge = null, gi = -1, best = 0;
         (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
         const code = _breakerCodeFor(u);
-        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan() }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _measure: _breakerMeasure() }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
         members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
@@ -7959,6 +7960,7 @@ function _statusCounts() { const c = { concept: 0, review: 0, approved: 0, produ
 function _scaleOpts() { const o = (editorialContent && editorialContent.scaleOpts) || {}; return { codes: (o.codes === 'legend' || o.codes === 'none' || o.codes === 'frames') ? o.codes : 'frames', elevThumb: !!o.elevThumb }; }
 function _elevBreakers() { return !!(editorialContent && editorialContent.elevBreakers); }
 function _breakerNoPlan() { return !!(editorialContent && editorialContent.breakerNoPlan); }
+function _breakerMeasure() { return !!(editorialContent && editorialContent.breakerMeasure); }
 // Combined group code for an elevation breaker, e.g. base 'ART-2.1' + members
 // A/B/C/D -> 'ART-2.1ABCD'.
 function _breakerCodeFor(u) {
@@ -9306,6 +9308,12 @@ function _dsRenderTools() {
             npCb.onchange = () => { editorialContent.breakerNoPlan = npCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
             npWrap.appendChild(npCb); npWrap.appendChild(document.createTextNode('Elevation only (hide plan view, fill the page)'));
             head.appendChild(npWrap);
+            const msWrap = document.createElement('label');
+            msWrap.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin:6px 0 0 22px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
+            const msCb = document.createElement('input'); msCb.type = 'checkbox'; msCb.checked = _breakerMeasure(); msCb.disabled = !_elevBreakers(); msCb.style.cssText = 'flex:0 0 auto;';
+            msCb.onchange = () => { editorialContent.breakerMeasure = msCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+            msWrap.appendChild(msCb); msWrap.appendChild(document.createTextNode('Show measurements (hang line + wall dims, synced with elevation)'));
+            head.appendChild(msWrap);
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
@@ -10979,10 +10987,37 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
 
             const wallHin = toIn(elev.wallH) || 96, padIn = 6;
             const PXf = (fr) => ex + fr * ew, PYf = (fr) => ey + fr * eh;
+            // Crisp vector wall outline + baseboard + floor (the raster lines are
+            // too thin at this size). totalHin/fracs come from the render.
+            try {
+                const totalHin = (er.hIn && er.hIn > 0) ? er.hIn : (wallHin + padIn);
+                const wTopF = padIn / totalHin;
+                const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
+                const wx = PXf(wlf), wW = (wrf - wlf) * ew, wyTop = PYf(wTopF), wH = (1 - wTopF) * eh;
+                doc.setDrawColor(70, 70, 70); doc.setLineWidth(1.1);
+                doc.rect(wx, wyTop, wW, wH);                                  // wall + floor (bottom edge)
+                let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
+                if (bbIn > 0 && bbIn < wallHin) { const byy = PYf(1 - bbIn / totalHin); doc.setLineWidth(0.9); doc.line(wx, byy, wx + wW, byy); }
+            } catch (e) {}
             const dimFrame = isElev ? (activeFrames.length === 1 ? activeFrames[0] : null) : (elev.frames.find(fr => fr.id === arg.id) || elev.frames[0]);
             const hangFrame = dimFrame || activeFrames[0];
+            const showMeasure = (arg && '_measure' in arg) ? !!arg._measure : true;   // install mode keeps dims; breaker is opt-in
+            if (showMeasure && (typeof dimVisibility === 'undefined' || dimVisibility.wallDims !== false)) {
+                // Overall wall dimensions (synced to the elevation layout's wall-dim toggle).
+                const totalHin = (er.hIn && er.hIn > 0) ? er.hIn : (wallHin + padIn);
+                const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
+                const wallWin = toIn(elev.wallW) || 0;
+                doc.setDrawColor(110, 110, 110); doc.setTextColor(110, 110, 110); doc.setLineWidth(0.5); doc.setLineDashPattern([], 0);
+                const topY = PYf(padIn / totalHin) - 10;
+                doc.line(PXf(wlf), topY, PXf(wrf), topY);
+                doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8);
+                if (wallWin) doc.text(Math.round(wallWin * 2.54) + 'cm / ' + Math.round(wallWin) + '"', (PXf(wlf) + PXf(wrf)) / 2, topY - 2, { align: 'center' });
+                const rX = PXf(wrf) + 8;
+                doc.line(rX, PYf(padIn / totalHin), rX, PYf(1));
+                doc.text(Math.round(wallHin * 2.54) + 'cm / ' + Math.round(wallHin) + '"', rX + 2, (PYf(padIn / totalHin) + PYf(1)) / 2, { angle: 90 });
+            }
             doc.setDrawColor(200, 40, 40); doc.setTextColor(200, 40, 40); doc.setLineWidth(0.7);
-            if (hangFrame) {
+            if (showMeasure && hangFrame) {
                 const cyFrac = (padIn + wallHin - (toIn(hangFrame.y) + toIn(hangFrame.h) / 2)) / er.hIn;
                 const floorFrac = (padIn + wallHin) / er.hIn;
                 const centerAFF = toIn(hangFrame.y) + toIn(hangFrame.h) / 2;
@@ -11379,7 +11414,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             const out = []; const members = u.members || [];
             let ge = null, gi = -1, best = 0;
             (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan() }), idx: gi, _groupKey: u.key, li: li });
+            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan(), _measure: _breakerMeasure() }), idx: gi, _groupKey: u.key, li: li });
             members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: _specTplResolve(m.id || ''), li: li }));
             return out;
         }
