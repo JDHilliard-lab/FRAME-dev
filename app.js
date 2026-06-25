@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.5';
+const APP_VERSION = '1.6';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8778,30 +8778,34 @@ async function renderSpecPageCanvas(desc, onProgress) {
     if (onProgress) onProgress(40);
     return await rec.render(2, onProgress);
 }
-async function _dsBuildPage() {
+async function _dsBuildPage(silent) {
     const desc = _dsPages[_dsIndex];
-    if (!desc || desc.kind !== 'spec') { showInfoModal('Build preview', 'Select a spec page, then Build to render an exact preview of how it will export.'); return; }
+    if (!desc || desc.kind !== 'spec') { if (!silent) showInfoModal('Build preview', 'Select a spec page, then Preview to render an exact preview of how it will export.'); return; }
     const _bt = desc._specTpl || _specTplResolve(desc._ovKey || (desc.row && desc.row.id) || '');
-    if (SPEC_TEMPLATES[_bt] && SPEC_TEMPLATES[_bt].freeform) { showInfoModal('Custom layout', 'Custom pages already show an exact live preview \u2014 what you place is what exports.'); return; }
+    if (SPEC_TEMPLATES[_bt] && SPEC_TEMPLATES[_bt].freeform) { if (!silent) showInfoModal('Custom layout', 'Custom pages already show an exact live preview \u2014 what you place is what exports.'); return; }
     const key = _deckPageKey(desc);
     const c = document.getElementById('dsCenter');
-    const ov = document.createElement('div');
-    ov.style.cssText = 'position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(15,15,18,0.55); z-index:50; color:#fff; font-size:0.78rem; gap:10px;';
-    ov.innerHTML = '<div>Building accurate page…</div><div style="width:210px; height:8px; background:rgba(255,255,255,0.18); border-radius:4px; overflow:hidden;"><div id="dsBuildBar" style="height:100%; width:0%; background:#6a6aff;"></div></div><div id="dsBuildPct" style="font-variant-numeric:tabular-nums;">0%</div>';
-    if (c) { c.style.position = 'relative'; c.appendChild(ov); }
-    const setPct = (p) => { const b = document.getElementById('dsBuildBar'); const t = document.getElementById('dsBuildPct'); if (b) b.style.width = Math.max(0, Math.min(100, p)) + '%'; if (t) t.textContent = Math.round(Math.max(0, Math.min(100, p))) + '%'; };
+    let ov = null;
+    if (!silent) {
+        ov = document.createElement('div');
+        ov.style.cssText = 'position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; background:rgba(15,15,18,0.55); z-index:50; color:#fff; font-size:0.78rem; gap:10px;';
+        ov.innerHTML = '<div>Building accurate page…</div><div style="width:210px; height:8px; background:rgba(255,255,255,0.18); border-radius:4px; overflow:hidden;"><div id="dsBuildBar" style="height:100%; width:0%; background:#6a6aff;"></div></div><div id="dsBuildPct" style="font-variant-numeric:tabular-nums;">0%</div>';
+        if (c) { c.style.position = 'relative'; c.appendChild(ov); }
+    }
+    const setPct = (p) => { if (silent) return; const b = document.getElementById('dsBuildBar'); const t = document.getElementById('dsBuildPct'); if (b) b.style.width = Math.max(0, Math.min(100, p)) + '%'; if (t) t.textContent = Math.round(Math.max(0, Math.min(100, p))) + '%'; };
     setPct(5);
     let ok = false;
     try {
         const cv = await renderSpecPageCanvas(desc, setPct);
         if (cv) { _dsBuilt[key] = cv.toDataURL('image/jpeg', 0.92); ok = true; }
     } catch (e) { console.error('build failed', e); }
-    if (ov.parentElement) ov.parentElement.removeChild(ov);
-    if (!ok) showInfoModal('Live preview', 'Accurate build currently covers Frame right/left, Centered hero, Set and Install guide. Classic still uses the live preview, which already bakes in real artwork.');
+    if (ov && ov.parentElement) ov.parentElement.removeChild(ov);
+    if (!ok && !silent) showInfoModal('Live preview', 'Accurate build currently covers Frame right/left, Centered hero, Set and Install guide. Classic still uses the live preview, which already bakes in real artwork.');
+    _dsPreviewQueued = false;
     _dsRenderCenter();
     _dsSyncBuildBtn();
 }
-function _dsClearBuilt(key) { if (key && _dsBuilt[key]) { delete _dsBuilt[key]; _dsRenderCenter(); _dsSyncBuildBtn(); } }
+function _dsClearBuilt(key, queue) { if (key && _dsBuilt[key]) { const desc = _dsPages[_dsIndex]; const isCur = desc && _deckPageKey(desc) === key; delete _dsBuilt[key]; _dsRenderCenter(); _dsSyncBuildBtn(); if (queue && isCur) _dsQueuePreview(); } }
 function _dsManualSection(desc) {
     const wrap = document.createElement('div');
     wrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);';
@@ -8929,15 +8933,24 @@ function _dsPickMockupPiece(a) {
     ov.appendChild(card); ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
     (document.getElementById('deckStudioModal') || document.body).appendChild(ov);
 }
-function _dsClearBuiltAll() { _dsBuilt = {}; }
+function _dsClearBuiltAll() { const desc = _dsPages[_dsIndex]; const wasBuilt = desc && desc.kind === 'spec' && !!_dsBuilt[_deckPageKey(desc)]; _dsBuilt = {}; if (wasBuilt) _dsQueuePreview(); }
+let _dsPreviewTimer = null, _dsPreviewQueued = false;
+function _dsQueuePreview() {
+    const desc = _dsPages[_dsIndex];
+    if (!desc || desc.kind !== 'spec') return;
+    const bt = desc._specTpl || _specTplResolve(desc._ovKey || (desc.row && desc.row.id) || '');
+    if (SPEC_TEMPLATES[bt] && SPEC_TEMPLATES[bt].freeform) return;   // custom pages are already live
+    _dsPreviewQueued = true; _dsSyncBuildBtn();
+    if (_dsPreviewTimer) clearTimeout(_dsPreviewTimer);
+    _dsPreviewTimer = setTimeout(() => { _dsPreviewTimer = null; _dsBuildPage(true); }, 700);
+}
 function _dsSyncBuildBtn() {
     const b = document.getElementById('dsBuildBtn'); if (!b) return;
     const desc = _dsPages[_dsIndex]; const isSpec = !!(desc && desc.kind === 'spec');
     const built = isSpec && _dsBuilt[_deckPageKey(desc)];
     b.style.opacity = isSpec ? '1' : '0.4'; b.style.pointerEvents = isSpec ? 'auto' : 'none';
-    b.textContent = built ? 'Rebuild' : 'Build';
-    b.style.background = built ? '#1a7f37' : 'var(--bg-input)';
-    b.style.color = built ? '#fff' : 'var(--text-main)';
+    if (_dsPreviewQueued && isSpec) { b.textContent = 'Updating…'; b.style.background = '#c08a2e'; b.style.color = '#fff'; }
+    else { b.textContent = built ? 'Refresh' : 'Preview'; b.style.background = built ? '#1a7f37' : 'var(--bg-input)'; b.style.color = built ? '#fff' : 'var(--text-main)'; }
 }
 function _dsRenderCenter() {
     const c = document.getElementById('dsCenter'); if (!c) return;
@@ -9188,7 +9201,7 @@ function _dsRenderTools() {
         visWrap.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
         const aoOn = _specArtOnly(ovKey);
         const mkVis = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.64rem; font-weight:700; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
-        const setAO = (v) => { const m = editorialContent.specArtOnly || (editorialContent.specArtOnly = {}); if (v) m[ovKey] = true; else delete m[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuilt(_deckPageKey(desc)); _dsRefresh(); };
+        const setAO = (v) => { const m = editorialContent.specArtOnly || (editorialContent.specArtOnly = {}); if (v) m[ovKey] = true; else delete m[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuilt(_deckPageKey(desc), true); _dsRefresh(); };
         visWrap.appendChild(mkVis('Show specs', !aoOn, () => setAO(false)));
         visWrap.appendChild(mkVis('Artwork only', aoOn, () => setAO(true)));
         head.appendChild(visWrap);
@@ -10765,9 +10778,9 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                             const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                             const wTopF = 6 / totalHin;
                             const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
-                            doc.setDrawColor(90, 90, 90); doc.setLineWidth(0.5);
+                            doc.setDrawColor(80, 80, 80); doc.setLineWidth(1.0);
                             doc.rect(wx, wyTop, wW, wH);
-                            if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.4); doc.line(wx, byy, wx + wW, byy); }
+                            if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
                         } catch (e) {}
                         doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text('Elevation', tx, ty + th + 8);
                         legendRight = tx - 14;
