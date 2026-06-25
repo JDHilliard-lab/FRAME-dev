@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.8';
+const APP_VERSION = '1.9';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -324,7 +324,7 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
 // Normalize an older / hand-edited project on load. The main hazard is a unit
 // mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
 // makes a 108 cm wall load as a 9-foot-tall 274" wall and shrinks the 72" person
@@ -349,7 +349,7 @@ function _migrateLoadedProject(data) {
     return data;
 }
 
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -395,6 +395,7 @@ function _mbMigratePages() {
     if (!Array.isArray(ec.manualGroups)) ec.manualGroups = [];
     if (!ec.scaleOpts || typeof ec.scaleOpts !== 'object') ec.scaleOpts = { codes: 'frames', elevThumb: false };
     if (typeof ec.elevBreakers !== 'boolean') ec.elevBreakers = false;
+    if (typeof ec.breakerNoPlan !== 'boolean') ec.breakerNoPlan = false;
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -6810,7 +6811,7 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
     const dpi = opts.dpi || 28;            // px per inch for the WHOLE wall (placed small)
     const unit = (typeof elevUnit !== 'undefined') ? elevUnit : 'in';
     const toIn = (v) => parseFloat(v) * unitFactor(unit, 'in');
-    const ppi = dpi;
+    let ppi = dpi;
     const wallWin = toIn(elev.wallW) || 120;
     const wallHin = toIn(elev.wallH) || 96;
 
@@ -6823,9 +6824,15 @@ async function renderElevationToCanvas(elev, featuredId, opts) {
     const totalWin = leftExtraIn + wallWin + padIn;
     const totalHin = wallHin + padIn;
 
+    // Large walls (e.g. 185"x108") at a high dpi can blow past the canvas pixel
+    // budget. Reduce ppi to fit instead of giving up and rendering nothing.
+    const maxPx = 38e6;
+    if (totalWin > 0 && totalHin > 0 && totalWin * totalHin * ppi * ppi > maxPx) {
+        ppi = Math.max(4, Math.floor(Math.sqrt(maxPx / (totalWin * totalHin))));
+    }
     const cw = Math.round(totalWin * ppi);
     const ch = Math.round(totalHin * ppi);
-    if (cw <= 0 || ch <= 0 || cw * ch > 40e6) return null;
+    if (cw <= 0 || ch <= 0) return null;
     const c = document.createElement('canvas');
     c.width = cw; c.height = ch;
     const x = c.getContext('2d');
@@ -7742,7 +7749,7 @@ function _deckPageList() {
         let ge = null, gi = -1, best = 0;
         (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
         const code = _breakerCodeFor(u);
-        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan() }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
         members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
@@ -7870,8 +7877,12 @@ function _deckMockHTML(desc, w, h) {
             inner += txt(0.06, 0.04, 0.5, _esc(('' + _igTitle).toUpperCase()), codeFs, 800, DRUK);
             inner += txt(0.06, 0.135, 0.4, 'ARTWORK DETAILS', fs(0.028), 800, DRUK);
             if (_igCode) inner += txt(0.06, 0.2, 0.3, _esc(('' + _igCode)), fs(0.032), 700, DRUK);
-            inner += box(0.42, 0.16, 0.54, 0.72, 'elevation', 'data-bake="elevation"');
-            inner += box(0.06, 0.58, 0.3, 0.32, 'Floorplan');
+            if (_ig && _ig._noPlan) {
+                inner += box(0.08, 0.18, 0.84, 0.74, 'elevation', 'data-bake="elevation"');
+            } else {
+                inner += box(0.42, 0.16, 0.54, 0.72, 'elevation', 'data-bake="elevation"');
+                inner += box(0.06, 0.58, 0.3, 0.32, 'Floorplan');
+            }
         } else if (tpl.group) {
             const isScaleM = !!tpl.scale;
             const members = (desc.members && desc.members.length) ? desc.members.slice(0, isScaleM ? 12 : 4) : [r, r];
@@ -7947,6 +7958,7 @@ function _statusLabel(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).label;
 function _statusCounts() { const c = { concept: 0, review: 0, approved: 0, production: 0 }; (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => { if (r && (r.id || r.imageCode)) c[_pieceStatus(r)]++; }); return c; }
 function _scaleOpts() { const o = (editorialContent && editorialContent.scaleOpts) || {}; return { codes: (o.codes === 'legend' || o.codes === 'none' || o.codes === 'frames') ? o.codes : 'frames', elevThumb: !!o.elevThumb }; }
 function _elevBreakers() { return !!(editorialContent && editorialContent.elevBreakers); }
+function _breakerNoPlan() { return !!(editorialContent && editorialContent.breakerNoPlan); }
 // Combined group code for an elevation breaker, e.g. base 'ART-2.1' + members
 // A/B/C/D -> 'ART-2.1ABCD'.
 function _breakerCodeFor(u) {
@@ -9288,6 +9300,12 @@ function _dsRenderTools() {
             const brTxt = document.createElement('div'); brTxt.innerHTML = '<b>Add elevation breaker page</b><br><span style="color:var(--text-muted);">Before each wall group, insert a full-page elevation titled with the group code (e.g. ART-2.1ABCD), then these individual spec pages.</span>';
             brWrap.appendChild(brCb); brWrap.appendChild(brTxt);
             head.appendChild(brWrap);
+            const npWrap = document.createElement('label');
+            npWrap.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin:6px 0 0 22px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
+            const npCb = document.createElement('input'); npCb.type = 'checkbox'; npCb.checked = _breakerNoPlan(); npCb.disabled = !_elevBreakers(); npCb.style.cssText = 'flex:0 0 auto;';
+            npCb.onchange = () => { editorialContent.breakerNoPlan = npCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+            npWrap.appendChild(npCb); npWrap.appendChild(document.createTextNode('Elevation only (hide plan view, fill the page)'));
+            head.appendChild(npWrap);
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
@@ -10952,9 +10970,10 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
             const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
             const aspect = er.wIn / er.hIn;
-            const maxW = PW * 0.56, maxH = PH - M * 2 - 16;
+            const noPlan = !!(arg && arg._noPlan);
+            const maxW = noPlan ? (PW - M * 2) : PW * 0.56, maxH = noPlan ? (PH - M * 2 - 56) : (PH - M * 2 - 16);
             let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
-            const ex = PW - M - ew - 28, ey = M + 6 + (maxH - eh) / 2;
+            const ex = noPlan ? ((PW - ew) / 2) : (PW - M - ew - 28), ey = noPlan ? (M + 56 + (maxH - eh) / 2) : (M + 6 + (maxH - eh) / 2);
             elevLeft = ex;
             doc.addImage(flat.toDataURL('image/jpeg', 0.9), 'JPEG', ex, ey, ew, eh);
 
@@ -10995,7 +11014,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
 
         // Plan thumbnail (bottom-left), kept clear of the elevation; pins for every piece on the wall.
         const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(planRow.level || 0)];
-        if (lv && lv.imageData) {
+        if (lv && lv.imageData && !(arg && arg._noPlan)) {
             const pim = await _loadImg(lv.imageData);
             const pmaxW = Math.max(80, Math.min(PW * 0.28, elevLeft - M - 18)), pmaxH = PH * 0.30, pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
             let pw = pmaxW, ph = pw / pasp; if (ph > pmaxH) { ph = pmaxH; pw = ph * pasp; }
@@ -11360,7 +11379,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             const out = []; const members = u.members || [];
             let ge = null, gi = -1, best = 0;
             (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u) }), idx: gi, _groupKey: u.key, li: li });
+            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan() }), idx: gi, _groupKey: u.key, li: li });
             members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: _specTplResolve(m.id || ''), li: li }));
             return out;
         }
