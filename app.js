@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.0';
+const APP_VERSION = '2.1';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -7750,7 +7750,7 @@ function _deckPageList() {
         let ge = null, gi = -1, best = 0;
         (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
         const code = _breakerCodeFor(u);
-        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _measure: _breakerMeasure() }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _measure: _breakerMeasure(), _idx: gi }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
         members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
@@ -9312,7 +9312,7 @@ function _dsRenderTools() {
             msWrap.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin:6px 0 0 22px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
             const msCb = document.createElement('input'); msCb.type = 'checkbox'; msCb.checked = _breakerMeasure(); msCb.disabled = !_elevBreakers(); msCb.style.cssText = 'flex:0 0 auto;';
             msCb.onchange = () => { editorialContent.breakerMeasure = msCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
-            msWrap.appendChild(msCb); msWrap.appendChild(document.createTextNode('Show measurements (hang line + wall dims, synced with elevation)'));
+            msWrap.appendChild(msCb); msWrap.appendChild(document.createTextNode('Show layout guides (uses the elevation\u2019s exact measurement guides)'));
             head.appendChild(msWrap);
             t.appendChild(head);
 
@@ -10947,6 +10947,32 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
         } catch (e) {}
     }
 }
+// Capture an elevation WITH its layout guides (dimensions, hang line, group
+// boxes, etc.) exactly as the PNG export renders them, by briefly loading that
+// elevation into the live view (hidden behind the deck-studio modal) and
+// screenshotting it. Returns { dataUrl, w, h } or null.
+async function _captureElevWithGuides(elevIdx) {
+    if (elevIdx == null || elevIdx < 0 || typeof elevations === 'undefined' || !elevations[elevIdx]) return null;
+    if (typeof exportElevPNG !== 'function' || typeof switchView !== 'function') return null;
+    const origView = currentView, origIndex = currentElevIndex;
+    let res = null;
+    try {
+        switchView('elevation', elevIdx);
+        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+        res = await exportElevPNG({ returnBlob: true });
+    } catch (e) { res = null; }
+    try { if (origView === 'elevation' && elevations[origIndex] != null) switchView('elevation', origIndex); else switchView('dashboard'); } catch (e) {}
+    if (!res || !res.blob) return null;
+    try {
+        const url = URL.createObjectURL(res.blob);
+        const img = await _loadImg(url); URL.revokeObjectURL(url);
+        const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
+        const cnv = document.createElement('canvas'); cnv.width = w; cnv.height = h;
+        const cx = cnv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, w, h); cx.drawImage(img, 0, 0);
+        return { dataUrl: cnv.toDataURL('image/jpeg', 0.92), w: w, h: h };
+    } catch (e) { return null; }
+}
+
 // Template-driven single-spec page (non-classic arrangements). Reuses the same
 // primitives as the classic renderer: baked frame mockup, dotted-leader spec
 // block, and the wall elevation. Coords come from SPEC_TEMPLATES (page fractions).
@@ -10973,6 +10999,20 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     try {
         const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
         let elevLeft = PW * 0.42;
+        // Breaker with measurements: drop in the elevation exactly as the PNG
+        // export renders it — with every layout guide the user has enabled.
+        if (arg && arg._measure && arg._idx != null) {
+            const cap = await _captureElevWithGuides(arg._idx);
+            if (cap && cap.dataUrl) {
+                const aspect = cap.w / cap.h;
+                const maxW = PW - M * 2, maxH = PH - M * 2 - 56;
+                let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
+                const ex = (PW - ew) / 2, ey = M + 56 + (maxH - eh) / 2;
+                doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
+                return;
+            }
+            // capture failed → fall through to the standard render below
+        }
         const er = elev ? await renderElevationToCanvas(elev, featuredId, { wireframe: _isWireframe(), dpi: 46 }) : null;
         if (er && er.canvas) {
             const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
@@ -11414,7 +11454,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             const out = []; const members = u.members || [];
             let ge = null, gi = -1, best = 0;
             (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan(), _measure: _breakerMeasure() }), idx: gi, _groupKey: u.key, li: li });
+            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan(), _measure: _breakerMeasure(), _idx: gi }), idx: gi, _groupKey: u.key, li: li });
             members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: _specTplResolve(m.id || ''), li: li }));
             return out;
         }
