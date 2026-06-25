@@ -32,7 +32,7 @@
         <div class="nav-tabs" id="nav-tabs-container"></div>
         <button class="nav-add-tab" onclick="addNewElevationTab()">+ Add Wall</button>
         
-        <div style="margin-left: auto; display: flex; gap: 8px; align-items: center;">
+        <div style="margin-left: auto; display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
             <button class="action-btn btn-secondary" style="width:auto;" onclick="toggleTheme()" title="Toggle Light/Dark Theme">
                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
             </button>
@@ -86,6 +86,10 @@
                 <button id="globalBtnCm" onclick="setUnit('cm')">CM</button>
                 <button id="globalBtnMm" onclick="setUnit('mm')">MM</button>
             </div>
+            <button class="action-btn btn-secondary" style="width:auto; padding:0 10px;" title="Set up and generate the presentation / spec PDF" onclick="openSpecPdfModal()">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+                <span style="font-size:0.7rem; margin-left:4px;">Spec PDF</span>
+            </button>
             <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
@@ -134,10 +138,6 @@
                         <div style="display:flex; gap:5px; align-items: center;">
                             <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('csvImport').click()">Import CSV</button>
                             <input type="file" id="csvImport" accept=".csv" style="display:none;" onchange="importDashCSV(event)">
-                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Set up and generate the presentation PDF" onclick="openSpecPdfModal()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
-                                <span style="font-size:0.65rem; margin-left:3px;">Spec PDF</span>
-                            </button>
                             <button class="action-btn btn-secondary" style="width:auto;" onclick="exportDashCSV()">Export Database</button>
                             <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Batch Download All Frames as PNG" onclick="batchDownloadAllFrames()">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v10M7 7l5 5 5-5M4 14v5a1 1 0 001 1h14a1 1 0 001-1v-5M3 14h18"/></svg>
@@ -1874,6 +1874,23 @@
     @font-face { font-family: 'Messina'; src: url('fonts/MessinaSerif-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
     #libraryDropZone.drag-over { border-color: var(--accent); background: rgba(74, 144, 226, 0.08); }
     #libraryDropZone.processing { opacity: 0.5; pointer-events: none; }
+    /* Elevation tab strip: scroll horizontally instead of squishing the tabs
+       when there are a lot of walls, and keep the fixed tab, + Add Wall, and the
+       right-hand button group from being compressed. */
+    .app-top-nav { flex-wrap: nowrap; }
+    #nav-tabs-container {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+    }
+    #nav-tabs-container .nav-tab { flex: 0 0 auto !important; white-space: nowrap; }
+    #nav-tabs-container::-webkit-scrollbar { height: 6px; }
+    #nav-tabs-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    .app-top-nav > .nav-tabs-fixed, .app-top-nav > .nav-add-tab { flex: 0 0 auto; white-space: nowrap; }
 </style>
 
 <script src="app.js"></script>
