@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.6';
+const APP_VERSION = '1.7';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -654,6 +654,11 @@ const SPEC_TEMPLATES = {
         label: 'To scale (as hung)',
         group: true,
         scale: true
+    },
+    setElevSpecs: {
+        label: 'Elevation + individual specs',
+        group: true,
+        elevSpecs: true
     },
     custom: {
         label: 'Custom (free layout)',
@@ -7732,6 +7737,20 @@ function _deckPageList() {
         return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) };
     };
     const isInstall = (specTplKey === 'installGuide');
+    const _isElevSpecs = isGroupSpec && !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].elevSpecs);
+    // "Elevation + individual specs": a group expands into a full-page wall
+    // elevation (annotatable) followed by one Frame-right page per member.
+    const specPagesFor = (u) => {
+        if (_isElevSpecs && !u._manual) {
+            const out = []; const members = u.members || [];
+            let ge = null, gi = -1, best = 0;
+            (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
+            if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: ge, _elevIdx: gi, _groupKey: u.key, title: (ge.name || ('Elevation ' + (gi + 1))) + ' \u2014 ' + u.key, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+            members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: 'frameRight', _elevSpecChild: true }));
+            return out;
+        }
+        return [specUnit(u)];
+    };
     const installDescs = () => (elevations || []).map((e, ei) => ({ e: e, ei: ei }))
         .filter(o => o.e && o.e.frames && o.e.frames.some(f => f && f.active !== false))
         .map(o => ({ kind: 'spec', type: 'install', _install: true, elev: o.e, _elevIdx: o.ei, title: (o.e.name || ('Elevation ' + (o.ei + 1))), _ovKey: 'elev:' + o.ei, _specTpl: 'installGuide', row: {} }));
@@ -7756,11 +7775,11 @@ function _deckPageList() {
         emit.forEach(li => {
             covered[li] = true;
             pages.push({ kind: 'floorplan', type: 'floorplan', title: (floorplanLevels[li] && floorplanLevels[li].name) || ('Level ' + (li + 1)), level: li });
-            if (inc.spec) units.filter(u => lvlOf(u.rep.level) === li).forEach(u => pages.push(specUnit(u)));
+            if (inc.spec) units.filter(u => lvlOf(u.rep.level) === li).forEach(u => specPagesFor(u).forEach(d => pages.push(d)));
         });
-        if (inc.spec) units.forEach(u => { if (!covered[lvlOf(u.rep.level)]) pages.push(specUnit(u)); });
+        if (inc.spec) units.forEach(u => { if (!covered[lvlOf(u.rep.level)]) specPagesFor(u).forEach(d => pages.push(d)); });
     } else if (inc.spec) {
-        units.forEach(u => pages.push(specUnit(u)));
+        units.forEach(u => specPagesFor(u).forEach(d => pages.push(d)));
     }
     layoutAt('afterSpec');
     if (inc.slogan) pages.push({ kind: 'fixed', fixed: 'slogan', type: 'slogan', title: 'Good Art Good People', page: ec.sloganPage });
@@ -7863,7 +7882,12 @@ function _deckMockHTML(desc, w, h) {
             const n = Math.max(1, members.length);
             const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
             inner += txt(0.05, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
-            if (isScaleM) {
+            if (tpl.elevSpecs) {
+                inner += box(0.06, 0.16, 0.88, 0.46, 'WALL ELEVATION');
+                inner += txt(0.06, 0.66, 0.88, 'then one spec page per frame', fs(0.026), 700, DRUK);
+                const n2 = Math.min(members.length || 3, 6);
+                for (let i = 0; i < n2; i++) inner += box(0.06 + i * 0.118, 0.74, 0.10, 0.18, _esc(letters[i] || ''));
+            } else if (isScaleM) {
                 let _ge = null, _bc = 0;
                 (typeof elevations !== 'undefined' ? elevations : []).forEach(e => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(f => f && f.id === m.id)) c++; }); if (c > _bc) { _bc = c; _ge = e; } });
                 const geo = members.map(m => { if (_ge && _ge.frames) { const fr = _ge.frames.find(f => f && f.id === m.id); if (fr) return { x: parseFloat(fr.x) || 0, y: parseFloat(fr.y) || 0, w: parseFloat(fr.w) || 0, h: parseFloat(fr.h) || 0 }; } return null; });
@@ -8260,7 +8284,7 @@ function _deckPageKey(desc) {
     if (desc.kind === 'layout') return (desc.page && desc.page.id) ? ('layout:' + desc.page.id) : null;
     if (desc.kind === 'fixed') return 'fixed:' + desc.fixed;
     if (desc.kind === 'card') return 'card:' + desc.type;
-    if (desc.kind === 'spec') return desc._install ? ('spec:elev:' + desc._elevIdx) : desc._manual ? ('spec:' + desc._ovKey) : ('spec:' + desc.title);
+    if (desc.kind === 'spec') return desc._install ? (desc._groupKey != null ? ('spec:elevgrp:' + desc._groupKey) : ('spec:elev:' + desc._elevIdx)) : desc._manual ? ('spec:' + desc._ovKey) : ('spec:' + desc.title);
     if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
     return null;
 }
@@ -9217,7 +9241,7 @@ function _dsRenderTools() {
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
-            ['setRight', 'setRow', 'setScale'].forEach(key => {
+            ['setRight', 'setRow', 'setScale', 'setElevSpecs'].forEach(key => {
                 const onCur = (key === globalTpl);
                 const cell = document.createElement('div');
                 cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
@@ -11320,7 +11344,20 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const _unitsFromRows = (rs) => _buildSpecUnits(rs, _specIsGroup);
     const _units = _unitsFromRows(_specRows);
     const _isInstall = (_specTplKey === 'installGuide');
+    const _isElevSpecs = _specIsGroup && !!(SPEC_TEMPLATES[_specTplKey] && SPEC_TEMPLATES[_specTplKey].elevSpecs);
     const _installUnits = () => (elevations || []).map((e, ei) => ({ elev: e, idx: ei })).filter(o => o.elev && o.elev.frames && o.elev.frames.some(f => f && f.active !== false));
+    // Elevation + individual specs: a group becomes [wall elevation] + [Frame-right per member].
+    const _stepsFor = (u, li) => {
+        if (_isElevSpecs && !u._manual) {
+            const out = []; const members = u.members || [];
+            let ge = null, gi = -1, best = 0;
+            (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
+            if (ge) out.push({ type: 'install', elev: ge, idx: gi, _groupKey: u.key, li: li });
+            members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: 'frameRight', li: li }));
+            return out;
+        }
+        return [{ type: 'spec', unit: u, li: li }];
+    };
     const plan = [];
     if (_isInstall) {
         // Install guide: one page per elevation (full wall), no per-piece repeats.
@@ -11344,11 +11381,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         emitLevels.forEach(li => {
             covered[li] = true;
             plan.push({ type: 'key', li: li });
-            _units.filter(u => _lvlOf(u.rep.level) === li).forEach(u => plan.push({ type: 'spec', unit: u, li: li }));
+            _units.filter(u => _lvlOf(u.rep.level) === li).forEach(u => _stepsFor(u, li).forEach(s => plan.push(s)));
         });
-        _units.forEach(u => { const li = _lvlOf(u.rep.level); if (!covered[li]) plan.push({ type: 'spec', unit: u, li: li }); });
+        _units.forEach(u => { const li = _lvlOf(u.rep.level); if (!covered[li]) _stepsFor(u, li).forEach(s => plan.push(s)); });
     } else {
-        _units.forEach(u => plan.push({ type: 'spec', unit: u, li: (u.rep.level || 0) }));
+        _units.forEach(u => _stepsFor(u, (u.rep.level || 0)).forEach(s => plan.push(s)));
     }
     // Every step (key or spec) consumes one page; map every member id to its page.
     const idToPage = {};
@@ -11356,7 +11393,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         let _p = pageNum;
         for (const step of plan) {
             _p++;
-            const _sk = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? ('spec:elev:' + step.idx) : ('spec:' + (step.unit && step.unit.key));
+            const _sk = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? (step._groupKey != null ? ('spec:elevgrp:' + step._groupKey) : ('spec:elev:' + step.idx)) : ('spec:' + (step.unit && step.unit.key));
             if (step.type === 'spec' && step.unit) step.unit.members.forEach(m => { if (m && m.id) idToPage[m.id] = _p; });
             else if (step.type === 'install' && step.elev && step.elev.frames) step.elev.frames.forEach(f => { if (f && f.id) idToPage[f.id] = _p; });
             _p += _afterKeyCount(_sk);
@@ -11365,7 +11402,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
     // — Emit the plan: floorplan keys and spec pages, interleaved per level —
     for (const step of plan) {
-        const stepKey = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? ('spec:elev:' + step.idx) : ('spec:' + (step.unit && step.unit.key));
+        const stepKey = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'install' ? (step._groupKey != null ? ('spec:elevgrp:' + step._groupKey) : ('spec:elev:' + step.idx)) : ('spec:' + (step.unit && step.unit.key));
         newPage(stepKey);
         if (step.type === 'key') {
             _fpLevelKeyPage[step.li] = pageNum;
@@ -11392,8 +11429,8 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             continue;
         }
         const r = step.unit.rep;
-        const _specTpl = step.unit._manual ? (step.unit.layout || 'setRow') : _specTplResolve(step.unit.key || (r.id || ''));
-        if (_specIsGroup || step.unit._manual) {
+        const _specTpl = step._forceTpl || (step.unit._manual ? (step.unit.layout || 'setRow') : _specTplResolve(step.unit.key || (r.id || '')));
+        if (!step._forceTpl && (_specIsGroup || step.unit._manual)) {
             await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
         } else if (SPEC_TEMPLATES[_specTpl] && SPEC_TEMPLATES[_specTpl].freeform) {
             // Custom free layout: the page is a blank canvas; mockups/text/images/
