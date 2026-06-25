@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.1';
+const APP_VERSION = '2.2';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -10947,29 +10947,34 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
         } catch (e) {}
     }
 }
-// Capture an elevation WITH its layout guides (dimensions, hang line, group
-// boxes, etc.) exactly as the PNG export renders them, by briefly loading that
-// elevation into the live view (hidden behind the deck-studio modal) and
-// screenshotting it. Returns { dataUrl, w, h } or null.
+// Capture an elevation WITH its layout guides exactly as the SVG export renders
+// them — vector text + dimension lines (crisp at any size) and frames embedded
+// as raster textures. We rasterize the SVG at high resolution and keep it as a
+// lossless PNG, so there's none of the screenshot pixelation / JPEG smearing the
+// PNG-screenshot path produced. Returns { dataUrl, w, h } or null.
 async function _captureElevWithGuides(elevIdx) {
     if (elevIdx == null || elevIdx < 0 || typeof elevations === 'undefined' || !elevations[elevIdx]) return null;
-    if (typeof exportElevPNG !== 'function' || typeof switchView !== 'function') return null;
+    if (typeof exportElevSVG !== 'function' || typeof switchView !== 'function') return null;
     const origView = currentView, origIndex = currentElevIndex;
     let res = null;
     try {
         switchView('elevation', elevIdx);
         await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-        res = await exportElevPNG({ returnBlob: true });
+        res = await exportElevSVG({ returnBlob: true });
     } catch (e) { res = null; }
     try { if (origView === 'elevation' && elevations[origIndex] != null) switchView('elevation', origIndex); else switchView('dashboard'); } catch (e) {}
     if (!res || !res.blob) return null;
     try {
         const url = URL.createObjectURL(res.blob);
-        const img = await _loadImg(url); URL.revokeObjectURL(url);
-        const w = img.naturalWidth || img.width, h = img.naturalHeight || img.height;
-        const cnv = document.createElement('canvas'); cnv.width = w; cnv.height = h;
-        const cx = cnv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, w, h); cx.drawImage(img, 0, 0);
-        return { dataUrl: cnv.toDataURL('image/jpeg', 0.92), w: w, h: h };
+        const img = await _loadImg(url);
+        const natW = img.naturalWidth || img.width || 1200, natH = img.naturalHeight || img.height || 800;
+        const targetW = 2800;                                  // high-res raster of the vector SVG
+        const scale = Math.max(0.5, Math.min(4, targetW / natW));
+        const cw = Math.max(1, Math.round(natW * scale)), ch = Math.max(1, Math.round(natH * scale));
+        const cnv = document.createElement('canvas'); cnv.width = cw; cnv.height = ch;
+        const cx = cnv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cw, ch); cx.drawImage(img, 0, 0, cw, ch);
+        URL.revokeObjectURL(url);
+        return { dataUrl: cnv.toDataURL('image/png'), w: cw, h: ch };   // PNG = lossless, no compression smear
     } catch (e) { return null; }
 }
 
@@ -11008,7 +11013,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 const maxW = PW - M * 2, maxH = PH - M * 2 - 56;
                 let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
                 const ex = (PW - ew) / 2, ey = M + 56 + (maxH - eh) / 2;
-                doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
+                doc.addImage(cap.dataUrl, 'PNG', ex, ey, ew, eh);
                 return;
             }
             // capture failed → fall through to the standard render below
