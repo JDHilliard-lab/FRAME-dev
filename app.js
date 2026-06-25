@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '1.7';
+const APP_VERSION = '1.8';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -324,7 +324,7 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
 // Normalize an older / hand-edited project on load. The main hazard is a unit
 // mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
 // makes a 108 cm wall load as a 9-foot-tall 274" wall and shrinks the 72" person
@@ -349,7 +349,7 @@ function _migrateLoadedProject(data) {
     return data;
 }
 
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -394,6 +394,7 @@ function _mbMigratePages() {
     if (!ec.specArtOnly || typeof ec.specArtOnly !== 'object') ec.specArtOnly = {};
     if (!Array.isArray(ec.manualGroups)) ec.manualGroups = [];
     if (!ec.scaleOpts || typeof ec.scaleOpts !== 'object') ec.scaleOpts = { codes: 'frames', elevThumb: false };
+    if (typeof ec.elevBreakers !== 'boolean') ec.elevBreakers = false;
     if (!ec.annotations || typeof ec.annotations !== 'object') ec.annotations = {};
 }
 // When set, the editor targets a fixed page (e.g. the Cover) instead of the
@@ -654,11 +655,6 @@ const SPEC_TEMPLATES = {
         label: 'To scale (as hung)',
         group: true,
         scale: true
-    },
-    setElevSpecs: {
-        label: 'Elevation + individual specs',
-        group: true,
-        elevSpecs: true
     },
     custom: {
         label: 'Custom (free layout)',
@@ -7730,27 +7726,27 @@ function _deckPageList() {
     const rows = (dashProjectData || []).filter(r => r && (r.id || r.artworkUrl));
     const specTplKey = ec.specTemplate || 'classic';
     const isGroupSpec = !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].group);
-    const unitsFor = (rs) => _buildSpecUnits(rs, isGroupSpec);
+    const unitsFor = (rs) => _buildSpecUnits(rs, isGroupSpec || (_elevBreakers() && specTplKey !== 'installGuide'));
     const specUnit = (u) => {
         if (u._manual) { return { kind: 'spec', type: 'spec', title: u.members.map(m => m.id).join(' + ') || 'Set', row: u.rep, members: u.members, _ovKey: u.key, _specTpl: (u.layout || 'setRow'), _manual: true }; }
         const ok = (isGroupSpec ? u.key : (u.rep.id || ''));
         return { kind: 'spec', type: 'spec', title: (isGroupSpec ? u.key : u.rep.id) || 'Spec', row: u.rep, members: u.members, _ovKey: ok, _specTpl: _specTplResolve(ok) };
     };
     const isInstall = (specTplKey === 'installGuide');
-    const _isElevSpecs = isGroupSpec && !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].elevSpecs);
-    // "Elevation + individual specs": a group expands into a full-page wall
-    // elevation (annotatable) followed by one Frame-right page per member.
-    const specPagesFor = (u) => {
-        if (_isElevSpecs && !u._manual) {
-            const out = []; const members = u.members || [];
-            let ge = null, gi = -1, best = 0;
-            (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-            if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: ge, _elevIdx: gi, _groupKey: u.key, title: (ge.name || ('Elevation ' + (gi + 1))) + ' \u2014 ' + u.key, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
-            members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: 'frameRight', _elevSpecChild: true }));
-            return out;
-        }
-        return [specUnit(u)];
+    const _useBreakers = _elevBreakers() && !isGroupSpec && !isInstall;
+    // When the breaker checkbox is on, group the pieces (by art-group) so each
+    // wall-group gets a full-page elevation breaker, then individual spec pages
+    // in the per-piece template the user has chosen.
+    const _breakerPages = (u) => {
+        const out = []; const members = u.members || [];
+        let ge = null, gi = -1, best = 0;
+        (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
+        const code = _breakerCodeFor(u);
+        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+        members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
+        return out;
     };
+    const specPagesFor = (u) => (_useBreakers && !u._manual) ? _breakerPages(u) : [specUnit(u)];
     const installDescs = () => (elevations || []).map((e, ei) => ({ e: e, ei: ei }))
         .filter(o => o.e && o.e.frames && o.e.frames.some(f => f && f.active !== false))
         .map(o => ({ kind: 'spec', type: 'install', _install: true, elev: o.e, _elevIdx: o.ei, title: (o.e.name || ('Elevation ' + (o.ei + 1))), _ovKey: 'elev:' + o.ei, _specTpl: 'installGuide', row: {} }));
@@ -7882,12 +7878,7 @@ function _deckMockHTML(desc, w, h) {
             const n = Math.max(1, members.length);
             const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
             inner += txt(0.05, 0.02, 0.7, _esc((desc.title || r.id || '').toString().toUpperCase()), codeFs, 800, DRUK);
-            if (tpl.elevSpecs) {
-                inner += box(0.06, 0.16, 0.88, 0.46, 'WALL ELEVATION');
-                inner += txt(0.06, 0.66, 0.88, 'then one spec page per frame', fs(0.026), 700, DRUK);
-                const n2 = Math.min(members.length || 3, 6);
-                for (let i = 0; i < n2; i++) inner += box(0.06 + i * 0.118, 0.74, 0.10, 0.18, _esc(letters[i] || ''));
-            } else if (isScaleM) {
+            if (isScaleM) {
                 let _ge = null, _bc = 0;
                 (typeof elevations !== 'undefined' ? elevations : []).forEach(e => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(f => f && f.id === m.id)) c++; }); if (c > _bc) { _bc = c; _ge = e; } });
                 const geo = members.map(m => { if (_ge && _ge.frames) { const fr = _ge.frames.find(f => f && f.id === m.id); if (fr) return { x: parseFloat(fr.x) || 0, y: parseFloat(fr.y) || 0, w: parseFloat(fr.w) || 0, h: parseFloat(fr.h) || 0 }; } return null; });
@@ -7955,6 +7946,14 @@ function _statusColor(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).color;
 function _statusLabel(s) { return (STATUS_DEFS[s] || STATUS_DEFS.concept).label; }
 function _statusCounts() { const c = { concept: 0, review: 0, approved: 0, production: 0 }; (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => { if (r && (r.id || r.imageCode)) c[_pieceStatus(r)]++; }); return c; }
 function _scaleOpts() { const o = (editorialContent && editorialContent.scaleOpts) || {}; return { codes: (o.codes === 'legend' || o.codes === 'none' || o.codes === 'frames') ? o.codes : 'frames', elevThumb: !!o.elevThumb }; }
+function _elevBreakers() { return !!(editorialContent && editorialContent.elevBreakers); }
+// Combined group code for an elevation breaker, e.g. base 'ART-2.1' + members
+// A/B/C/D -> 'ART-2.1ABCD'.
+function _breakerCodeFor(u) {
+    const base = (u && u.key) || '';
+    const letters = ((u && u.members) || []).map(m => { const id = ((m && m.id) || '') + ''; const s = (base && id.indexOf(base) === 0) ? id.slice(base.length).replace(/^[-_\s]*/, '') : id; return s || ''; }).join('');
+    return letters ? (base + letters) : base;
+}
 function _manualGroups() { return (editorialContent.manualGroups || (editorialContent.manualGroups = [])); }
 function _manualGroupOf(id) { if (!id) return null; const gs = _manualGroups(); for (const g of gs) { if (g && g.members && g.members.indexOf(id) >= 0) return g; } return null; }
 function _buildSpecUnits(rs, isGroup) {
@@ -9241,7 +9240,7 @@ function _dsRenderTools() {
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
-            ['setRight', 'setRow', 'setScale', 'setElevSpecs'].forEach(key => {
+            ['setRight', 'setRow', 'setScale'].forEach(key => {
                 const onCur = (key === globalTpl);
                 const cell = document.createElement('div');
                 cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
@@ -9281,6 +9280,14 @@ function _dsRenderTools() {
             sub.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:0; line-height:1.4;';
             sub.innerHTML = hasOverride ? 'This page overrides the deck default. Pick a template below to change it.' : 'Pick a template below to change just this page, or apply to all.';
             head.appendChild(sub);
+            // — Elevation breaker toggle (deck-wide; applies to every wall group) —
+            const brWrap = document.createElement('label');
+            brWrap.style.cssText = 'display:flex; align-items:flex-start; gap:8px; font-size:0.66rem; color:var(--text-main); cursor:pointer; margin-top:8px; padding-top:8px; border-top:1px dashed var(--border-color);';
+            const brCb = document.createElement('input'); brCb.type = 'checkbox'; brCb.checked = _elevBreakers(); brCb.style.cssText = 'margin-top:2px; flex:0 0 auto;';
+            brCb.onchange = () => { editorialContent.elevBreakers = brCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+            const brTxt = document.createElement('div'); brTxt.innerHTML = '<b>Add elevation breaker page</b><br><span style="color:var(--text-muted);">Before each wall group, insert a full-page elevation titled with the group code (e.g. ART-2.1ABCD), then these individual spec pages.</span>';
+            brWrap.appendChild(brCb); brWrap.appendChild(brTxt);
+            head.appendChild(brWrap);
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
@@ -11339,21 +11346,22 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const _specRows = inc.spec ? rows.slice() : [];
     const _specTplKey = (editorialContent.specTemplate || 'classic');
     const _specIsGroup = !!(SPEC_TEMPLATES[_specTplKey] && SPEC_TEMPLATES[_specTplKey].group);
+    const _isInstall = (_specTplKey === 'installGuide');
+    const _useBreakers = _elevBreakers() && !_specIsGroup && !_isInstall;
     // A "unit" is one spec page. Normally one piece per page; for a set template
     // (group:true) a whole set-piece group (ART.005-A/-B/-C…) shares one page.
-    const _unitsFromRows = (rs) => _buildSpecUnits(rs, _specIsGroup);
+    // With breakers on we also group, so each wall-group gets an elevation page.
+    const _unitsFromRows = (rs) => _buildSpecUnits(rs, _specIsGroup || _useBreakers);
     const _units = _unitsFromRows(_specRows);
-    const _isInstall = (_specTplKey === 'installGuide');
-    const _isElevSpecs = _specIsGroup && !!(SPEC_TEMPLATES[_specTplKey] && SPEC_TEMPLATES[_specTplKey].elevSpecs);
     const _installUnits = () => (elevations || []).map((e, ei) => ({ elev: e, idx: ei })).filter(o => o.elev && o.elev.frames && o.elev.frames.some(f => f && f.active !== false));
-    // Elevation + individual specs: a group becomes [wall elevation] + [Frame-right per member].
+    // Breaker: a group becomes [full-page wall elevation] + [individual specs in the per-piece template].
     const _stepsFor = (u, li) => {
-        if (_isElevSpecs && !u._manual) {
+        if (_useBreakers && !u._manual) {
             const out = []; const members = u.members || [];
             let ge = null, gi = -1, best = 0;
             (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-            if (ge) out.push({ type: 'install', elev: ge, idx: gi, _groupKey: u.key, li: li });
-            members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: 'frameRight', li: li }));
+            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u) }), idx: gi, _groupKey: u.key, li: li });
+            members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: _specTplResolve(m.id || ''), li: li }));
             return out;
         }
         return [{ type: 'spec', unit: u, li: li }];
