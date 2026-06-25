@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.3';
+const APP_VERSION = '2.4';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -10691,6 +10691,7 @@ function closeCopyEditor() { const m = document.getElementById('copyEditModal');
 // stacked rows — framed mockup on the right, letter + code + compact spec on the
 // left — each labelled A, B, C…
 async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
+    try { doc.setLineDashPattern([], 0); } catch (e) {}
     const PW = ctx.PW, PH = ctx.PH;
     const _isScale = !!(SPEC_TEMPLATES[tplKey] && SPEC_TEMPLATES[tplKey].scale);
     const members = (unit.members || []).slice(0, _isScale ? 12 : 6);
@@ -10835,8 +10836,9 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                             const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                             const wTopF = 6 / totalHin;
                             const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
+                            doc.setLineDashPattern([], 0);   // ensure solid (some viewers honor a leaked dash)
                             doc.setDrawColor(80, 80, 80); doc.setLineWidth(1.0);
-                            doc.rect(wx, wyTop, wW, wH);
+                            doc.rect(wx, wyTop, wW, wH, 'S');
                             if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
                         } catch (e) {}
                         doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text('Elevation', tx, ty + th + 8);
@@ -10985,6 +10987,7 @@ async function _captureElevWithGuides(elevIdx) {
 // primitives as the classic renderer: baked frame mockup, dotted-leader spec
 // block, and the wall elevation. Coords come from SPEC_TEMPLATES (page fractions).
 async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
+    try { doc.setLineDashPattern([], 0); } catch (e) {}
     const PW = ctx.PW, PH = ctx.PH, M = ctx.M;
     const isElev = !!(arg && arg.frames);                 // elevation vs single piece row
     const elev = isElev ? arg : (typeof elevations !== 'undefined' ? elevations : []).find(e => e && e.frames && e.frames.some(fr => fr.id === arg.id));
@@ -11042,8 +11045,9 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 const wTopF = padIn / totalHin;
                 const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                 const wx = PXf(wlf), wW = (wrf - wlf) * ew, wyTop = PYf(wTopF), wH = (1 - wTopF) * eh;
+                doc.setLineDashPattern([], 0);   // ensure solid (some viewers honor a leaked dash)
                 doc.setDrawColor(70, 70, 70); doc.setLineWidth(1.1);
-                doc.rect(wx, wyTop, wW, wH);                                  // wall + floor (bottom edge)
+                doc.rect(wx, wyTop, wW, wH, 'S');                             // wall + floor (bottom edge)
                 let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
                 if (bbIn > 0 && bbIn < wallHin) { const byy = PYf(1 - bbIn / totalHin); doc.setLineWidth(0.9); doc.line(wx, byy, wx + wW, byy); }
             } catch (e) {}
