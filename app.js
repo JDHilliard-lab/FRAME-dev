@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.2';
+const APP_VERSION = '2.3';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -10968,13 +10968,16 @@ async function _captureElevWithGuides(elevIdx) {
         const url = URL.createObjectURL(res.blob);
         const img = await _loadImg(url);
         const natW = img.naturalWidth || img.width || 1200, natH = img.naturalHeight || img.height || 800;
-        const targetW = 2800;                                  // high-res raster of the vector SVG
-        const scale = Math.max(0.5, Math.min(4, targetW / natW));
+        const targetW = 2400;                                  // high-res raster of the vector SVG
+        const scale = Math.max(0.5, Math.min(3.5, targetW / natW));
         const cw = Math.max(1, Math.round(natW * scale)), ch = Math.max(1, Math.round(natH * scale));
         const cnv = document.createElement('canvas'); cnv.width = cw; cnv.height = ch;
         const cx = cnv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cw, ch); cx.drawImage(img, 0, 0, cw, ch);
         URL.revokeObjectURL(url);
-        return { dataUrl: cnv.toDataURL('image/png'), w: cw, h: ch };   // PNG = lossless, no compression smear
+        // High-res JPEG: at this resolution compression is invisible, but the file
+        // is ~10x smaller than PNG — several lossless PNGs overflow jsPDF's output
+        // string ("Invalid string length") on a big deck.
+        return { dataUrl: cnv.toDataURL('image/jpeg', 0.9), w: cw, h: ch };
     } catch (e) { return null; }
 }
 
@@ -11013,7 +11016,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 const maxW = PW - M * 2, maxH = PH - M * 2 - 56;
                 let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
                 const ex = (PW - ew) / 2, ey = M + 56 + (maxH - eh) / 2;
-                doc.addImage(cap.dataUrl, 'PNG', ex, ey, ew, eh);
+                doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
                 return;
             }
             // capture failed → fall through to the standard render below
