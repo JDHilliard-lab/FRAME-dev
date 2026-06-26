@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.8';
+const APP_VERSION = '2.9';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8037,9 +8037,9 @@ function _dsRenderPresetBar() {
     const cur = editorialContent.presentationType || '';
     bar.innerHTML = '';
     const lbl = document.createElement('div');
-    lbl.textContent = 'PRESENTATION TYPE'; lbl.style.cssText = 'font-size:0.62rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px;';
+    lbl.textContent = 'PRESENTATION TYPE'; lbl.style.cssText = 'font-size:0.62rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px; text-align:center;';
     bar.appendChild(lbl);
-    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap;';
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap; justify-content:center;';
     Object.keys(PRES_PRESETS).forEach(k => {
         const b = document.createElement('button');
         b.textContent = PRES_PRESETS[k].label;
@@ -8049,7 +8049,7 @@ function _dsRenderPresetBar() {
     });
     bar.appendChild(row);
     const note = document.createElement('p');
-    note.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
+    note.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4; text-align:center;';
     note.textContent = cur && PRES_PRESETS[cur] ? PRES_PRESETS[cur].note : 'Pick a type to preset the sections & spec layout. You can still fine-tune everything below.';
     bar.appendChild(note);
 }
@@ -8373,7 +8373,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         if (a.type === 'image') {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box; background:#fff;';
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box; background:#fff;' + (a.shadow ? ' box-shadow:' + (0.006 * w) + 'px ' + (0.008 * w) + 'px ' + (0.018 * w) + 'px rgba(0,0,0,0.38);' : '');
             const img = document.createElement('img');
             img.src = a.dataUrl || ''; img.draggable = false;
             img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
@@ -8397,6 +8397,35 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             box.appendChild(handle);
+            page.appendChild(box);
+            return;
+        }
+        if (a.type === 'shape') {
+            const bw = (a.w || 0.25) * w, bh = (a.h || 0.18) * hh;
+            const box = document.createElement('div');
+            const radius = a.shape === 'ellipse' ? '50%' : '3px';
+            let bg = a.dataUrl ? ('center/cover no-repeat url(' + a.dataUrl + ')') : (a.fill || '#d8d8de');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + bg + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.006 * w) + 'px ' + (0.008 * w) + 'px ' + (0.018 * w) + 'px rgba(0,0,0,0.38);' : '');
+            box.onmousedown = (e) => {
+                e.preventDefault();
+                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
+                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            };
+            if (sel) {
+                const handle = document.createElement('div');
+                handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
+                handle.onmousedown = (e) => {
+                    e.preventDefault(); e.stopPropagation();
+                    const sx = e.clientX, sy = e.clientY, ow = a.w || 0.25, oh = a.h || 0.18;
+                    const mv = (ev) => { a.w = Math.max(0.03, Math.min(1, ow + (ev.clientX - sx) / w)); a.h = Math.max(0.03, Math.min(1, oh + (ev.clientY - sy) / hh)); box.style.width = (a.w * w) + 'px'; box.style.height = (a.h * hh) + 'px'; };
+                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                    document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                };
+                box.appendChild(handle);
+            }
             page.appendChild(box);
             return;
         }
@@ -8488,9 +8517,11 @@ function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToo
 function _dsSyncToolbar() {
     const a = _dsCurrentAnnot();
     const selected = !!a;
-    const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup');
+    const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup' && a.type !== 'shape');
     const isArrow = !!(a && (a.type === 'arrow' || a.type === 'elbow'));
     const isMock = !!(a && a.type === 'mockup');
+    const isShape = !!(a && a.type === 'shape');
+    const isImage = !!(a && a.type === 'image');
     const grp = document.getElementById('dsSelGroup');
     if (grp) { grp.style.opacity = selected ? '1' : '0.4'; grp.style.pointerEvents = selected ? 'auto' : 'none'; }
     const hint = document.getElementById('dsSelHint');
@@ -8498,11 +8529,15 @@ function _dsSyncToolbar() {
         : isText ? 'Text box \u2014 double-click to type, drag corner to scale'
         : isArrow ? 'Arrow \u2014 drag it to move, drag an end to re-aim'
         : isMock ? 'Mockup \u2014 drag to move, corner to resize, double-click to swap artwork'
+        : isShape ? 'Shape \u2014 colour or image fill, drop shadow, drag to move, corner to resize'
         : 'Image \u2014 drag to move, corner to resize';
     const setEnabled = (id, on) => { const e = document.getElementById(id); if (e) { e.style.opacity = on ? '1' : '0.35'; e.style.pointerEvents = on ? 'auto' : 'none'; } };
     setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText);
-    setEnabled('dsAnnColor', isText || isArrow);
-    const col = document.getElementById('dsAnnColor'); if (col) col.value = (isText || isArrow) ? (a.color || (isArrow ? '#c0392b' : '#222222')) : '#222222';
+    setEnabled('dsAnnColor', isText || isArrow || isShape);
+    setEnabled('dsAnnShadow', isImage || isShape);
+    setEnabled('dsAnnFillImg', isShape);
+    const col = document.getElementById('dsAnnColor'); if (col) col.value = isShape ? (a.fill || '#d8d8de') : ((isText || isArrow) ? (a.color || (isArrow ? '#c0392b' : '#222222')) : '#222222');
+    const shB = document.getElementById('dsAnnShadow'); if (shB) { const on = (isImage || isShape) && a.shadow; shB.style.background = on ? '#6a6aff' : 'var(--bg-input)'; shB.style.color = on ? '#fff' : 'var(--text-main)'; }
     const sz = document.getElementById('dsAnnSizeLbl'); if (sz) sz.textContent = isText ? Math.round((a.size || 0.03) * 540) : '\u2014';
     const alb = document.getElementById('dsAnnAlignBtn'); if (alb) alb.textContent = isText ? ((a.align || 'left')[0].toUpperCase()) : 'L';
     const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (isText && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (isText && a.bold) ? '#fff' : 'var(--text-main)'; }
@@ -8521,6 +8556,7 @@ function _dsImageFilePicked(input) {
 }
 function _dsHandleImageFile(file) {
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
+    const fillShape = _dsFillShapeMode; _dsFillShapeMode = false;
     const reader = new FileReader();
     reader.onload = () => {
         const im = new Image();
@@ -8534,6 +8570,11 @@ function _dsHandleImageFile(file) {
             const isPng = /png/i.test(file.type);
             let durl; try { durl = isPng ? cnv.toDataURL('image/png') : cnv.toDataURL('image/jpeg', 0.82); } catch (e) { durl = reader.result; }
             const aspect = (im.naturalHeight || 1) / (im.naturalWidth || 1);
+            if (fillShape) {
+                const a = _dsCurrentAnnot();
+                if (a && a.type === 'shape') { a.dataUrl = durl; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }
+                return;
+            }
             const list = _dsAnnList(key);
             list.push({ type: 'image', dataUrl: durl, x: 0.12, y: 0.14, w: 0.28, aspect: aspect });
             if (typeof pushHistory === 'function') pushHistory();
@@ -8556,6 +8597,23 @@ function _dsAddArrow(kind) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1);
     _dsRenderRail();
+}
+function _dsAddShape(shape) {
+    if (_dsActiveTab !== 'pages') return;
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
+    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support shapes.'); return; }
+    const list = _dsAnnList(key);
+    list.push({ type: 'shape', shape: (shape === 'ellipse' ? 'ellipse' : 'rect'), x: 0.18, y: 0.18, w: 0.26, h: 0.2, fill: '#d8d8de', dataUrl: null, shadow: false });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1);
+    _dsRenderRail();
+}
+let _dsFillShapeMode = false;
+function _dsFillShapeWithImage() {
+    const a = _dsCurrentAnnot(); if (!a || a.type !== 'shape') return;
+    _dsFillShapeMode = true;
+    const fi = document.getElementById('dsAnnImageFile'); if (fi) fi.click();
 }
 function _dsAddTextBox() {
     if (_dsActiveTab !== 'pages') return;
@@ -8657,7 +8715,7 @@ function _dsOpenSettingsMenu(ev) {
     });
 }
 function _dsAnnCycleAlign() { const a = _dsCurrentAnnot(); if (!a || a.type === 'image') return; const order = ['left', 'center', 'right']; const i = order.indexOf(a.align || 'left'); a.align = order[(i + 1) % 3]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
-function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; if (a.type === 'shape' && prop === 'color') { a.fill = val; a.dataUrl = null; } else { a[prop] = val; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsDeleteAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return; const l = (editorialContent.annotations || {})[_dsSelKey]; if (l) l.splice(_dsSelIdx, 1); _dsSelKey = null; _dsSelIdx = -1; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
@@ -11261,6 +11319,32 @@ function _drawAnnotations(doc, key, PW, PH) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
     list.forEach(a => {
+        const _annShadow = (xx, yy, ww, hh2, ell) => {
+            if (!a.shadow) return;
+            const off = 0.006 * PW;
+            try {
+                if (doc.GState) { try { doc.setGState(new doc.GState({ opacity: 0.3 })); } catch (e) {} }
+                doc.setFillColor(25, 25, 25);
+                if (ell && doc.ellipse) doc.ellipse(xx + ww / 2 + off, yy + hh2 / 2 + off, ww / 2, hh2 / 2, 'F');
+                else if (doc.roundedRect) doc.roundedRect(xx + off, yy + off, ww, hh2, 3, 3, 'F');
+                else if (doc.rect) doc.rect(xx + off, yy + off, ww, hh2, 'F');
+                if (doc.GState) { try { doc.setGState(new doc.GState({ opacity: 1 })); } catch (e) {} }
+            } catch (e) {}
+        };
+        if (a.type === 'shape') {
+            const x = (a.x || 0) * PW, y = (a.y || 0) * PH, pw = (a.w || 0.25) * PW, ph = (a.h || 0.18) * PH;
+            const ell = a.shape === 'ellipse';
+            _annShadow(x, y, pw, ph, ell);
+            if (a.dataUrl) {
+                const fmt = (('' + a.dataUrl).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
+                try { doc.addImage(a.dataUrl, fmt, x, y, pw, ph); } catch (e) {}
+                if (ell && doc.ellipse) { try { doc.setDrawColor(255, 255, 255); doc.setLineWidth(0.3); } catch (e) {} }
+            } else {
+                const c = _annHexToRgb(a.fill || '#d8d8de'); doc.setFillColor(c.r, c.g, c.b);
+                try { if (ell && doc.ellipse) doc.ellipse(x + pw / 2, y + ph / 2, pw / 2, ph / 2, 'F'); else if (doc.roundedRect) doc.roundedRect(x, y, pw, ph, 3, 3, 'F'); else doc.rect(x, y, pw, ph, 'F'); } catch (e) {}
+            }
+            return;
+        }
         if (a.type === 'mockup') {
             const entry = _mockupGet(a.pieceId); if (!entry || !entry.url) return;
             const pw = (a.w || 0.3) * PW, ph = pw * (entry.aspect || a.aspect || 1.2);
@@ -11287,6 +11371,7 @@ function _drawAnnotations(doc, key, PW, PH) {
         if (a.type === 'image') {
             if (!a.dataUrl) return;
             const x = (a.x || 0) * PW, y = (a.y || 0) * PH, pw = (a.w || 0.25) * PW, ph = (a.w || 0.25) * PW * (a.aspect || 0.75);
+            _annShadow(x, y, pw, ph, false);
             const fmt = (('' + a.dataUrl).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
             try { doc.addImage(a.dataUrl, fmt, x, y, pw, ph); } catch (e) {}
             return;
