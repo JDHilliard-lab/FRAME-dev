@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.7';
+const APP_VERSION = '2.8';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8099,6 +8099,7 @@ function _dsTab(which) {
     }
 }
 let _dsBuildError = '';
+let _dsTplSel = null;   // layout template highlighted but not yet applied
 function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _tocLabelFor(desc) {
@@ -8131,7 +8132,23 @@ function _dsPageNumForPiece(id) {
     }
     return null;
 }
-function _dsSelectPage(i) { _dsIndex = i; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
+function _dsDuplicateLayoutPage(desc) {
+    if (!desc || desc.kind !== 'layout' || !desc.page) return;
+    const pages = editorialContent.layoutPages || [];
+    const idx = pages.indexOf(desc.page);
+    if (idx < 0) return;
+    const src = desc.page;
+    const clone = { id: 'pg' + Math.random().toString(36).slice(2), type: src.type, title: src.title, elements: JSON.parse(JSON.stringify(src.elements || [])) };
+    pages.splice(idx + 1, 0, clone);
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsPages = _deckPageList() || []; } catch (e) {}
+    const ni = _dsPages.findIndex(d => d.kind === 'layout' && d.page === clone);
+    if (ni >= 0) _dsIndex = ni;
+    _dsTplSel = null;
+    _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
+}
+function _dsSelectPage(i) { _dsIndex = i; _dsTplSel = null; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
 let _dsRailFilter = '';
 function _dsCreateInsert(type, afterKey) {
     _mbMigratePages();
@@ -9339,31 +9356,40 @@ function _dsRenderTools() {
     }
     if (cat) {
         const lbl = document.createElement('div');
-        lbl.textContent = 'Templates — click to apply'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
+        lbl.textContent = 'Templates — pick one, then Apply'; lbl.style.cssText = 'font-size:0.72rem; font-weight:700; color:var(--text-main); margin-bottom:8px;';
         t.appendChild(lbl);
         const grid = document.createElement('div');
-        grid.style.cssText = 'display:flex; flex-direction:column; gap:8px; margin-bottom:14px;';
+        grid.style.cssText = 'display:flex; flex-direction:column; gap:8px; margin-bottom:10px;';
         const cards = [];
         (LAYOUT_TEMPLATES[cat] || []).forEach(b => { try { cards.push({ name: b.name, els: b.els() }); } catch (e) {} });
         (editorialContent.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat) cards.push({ name: tp.name || 'Saved', els: tp.elements || [] }); });
         if (typeof studioDefaults !== 'undefined') (studioDefaults.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat) cards.push({ name: (tp.name || 'Studio') + ' · studio', els: tp.elements || [] }); });
         const cw = 244, chh = Math.round(cw * 540 / 936);
-        cards.forEach(card => {
+        cards.forEach((card, ci) => {
+            const selected = !!(_dsTplSel && _dsTplSel.cat === cat && _dsTplSel.ci === ci);
             const cell = document.createElement('div');
-            cell.style.cssText = 'cursor:pointer; border:1px solid var(--border-color); border-radius:5px; overflow:hidden; background:#fff;';
-            cell.title = 'Apply: ' + card.name;
-            cell.onmouseenter = () => { cell.style.borderColor = '#6a6aff'; };
-            cell.onmouseleave = () => { cell.style.borderColor = 'var(--border-color)'; };
-            cell.onclick = () => _dsApplyTemplate(card.els, cat);
+            cell.style.cssText = 'cursor:pointer; border:2px solid ' + (selected ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff;';
+            cell.title = 'Select: ' + card.name;
+            cell.onmouseenter = () => { if (!selected) cell.style.borderColor = '#9a9aff'; };
+            cell.onmouseleave = () => { if (!selected) cell.style.borderColor = 'var(--border-color)'; };
+            cell.onclick = () => { _dsTplSel = { cat: cat, ci: ci, els: card.els, name: card.name }; _dsRenderTools(); };
             const thumb = document.createElement('div');
             thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
             thumb.innerHTML = _mbThumbInner({ elements: card.els }, cw, chh);
             const nm = document.createElement('div');
-            nm.textContent = card.name; nm.style.cssText = 'font-size:0.64rem; color:var(--text-main); padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+            nm.textContent = card.name + (selected ? '  \u2713' : ''); nm.style.cssText = 'font-size:0.64rem; color:' + (selected ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
             cell.appendChild(thumb); cell.appendChild(nm); grid.appendChild(cell);
         });
         if (!cards.length) { const e = document.createElement('p'); e.style.cssText = 'font-size:0.68rem; color:var(--text-muted);'; e.textContent = 'No templates for this page type yet.'; grid.appendChild(e); }
         t.appendChild(grid);
+        const applyBtn = document.createElement('button');
+        const armed = !!(_dsTplSel && _dsTplSel.cat === cat);
+        applyBtn.textContent = armed ? ('Apply \u201C' + _dsTplSel.name + '\u201D to this page') : 'Apply selected template';
+        applyBtn.className = armed ? 'action-btn' : 'action-btn btn-secondary';
+        applyBtn.disabled = !armed;
+        applyBtn.style.cssText = 'width:100%; height:34px; margin-bottom:14px; font-size:0.74rem; font-weight:700;' + (armed ? '' : ' opacity:0.5; cursor:default;');
+        applyBtn.onclick = () => { if (!_dsTplSel) return; const els = _dsTplSel.els; _dsTplSel = null; _dsApplyTemplate(els, cat); };
+        t.appendChild(applyBtn);
     }
 
     const addBtn = (label, fn, secondary) => { const b = document.createElement('button'); b.textContent = label; b.className = secondary ? 'action-btn btn-secondary' : 'action-btn'; b.style.cssText = 'width:100%; height:34px; margin-bottom:8px; font-size:0.76rem;'; b.onclick = fn; t.appendChild(b); };
@@ -9374,7 +9400,7 @@ function _dsRenderTools() {
             + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">This ' + (desc.type === 'toc' ? 'contents page lists every section with its page number' : 'index lists every artwork with the page it appears on') + '. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
         t.appendChild(note);
     }
-    else if (desc.kind === 'layout') addBtn('Open in layout editor', () => { const idx = (editorialContent.layoutPages || []).indexOf(desc.page); if (idx >= 0) _mbPageIndex = idx; closeDeckStudio(); openMoodboardModal(); }, !!cat);
+    else if (desc.kind === 'layout') { addBtn('Open in layout editor', () => { const idx = (editorialContent.layoutPages || []).indexOf(desc.page); if (idx >= 0) _mbPageIndex = idx; closeDeckStudio(); openMoodboardModal(); }, !!cat); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
     else if (desc.kind === 'fixed') addBtn('Open in layout editor', () => { closeDeckStudio(); openFixedPageEditor(desc.fixed); }, !!cat);
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
     else if (desc.type === 'contacts') addBtn('Edit contacts', () => { openContactsEditor(); });
