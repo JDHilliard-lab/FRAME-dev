@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.5';
+const APP_VERSION = '2.6';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -10967,19 +10967,28 @@ async function _captureElevWithGuides(elevIdx) {
     try { if (origView === 'elevation' && elevations[origIndex] != null) switchView('elevation', origIndex); else switchView('dashboard'); } catch (e) {}
     if (!res || !res.blob) return null;
     try {
-        const url = URL.createObjectURL(res.blob);
+        // The SVG declares width/height at the content's natural pixel size. If we
+        // just scale it up on the canvas, the browser rasterizes at that small size
+        // and upscales the bitmap -> jagged vector text/character/lines (Acrobat
+        // shows it; browsers hide it by smoothing). Instead, enlarge the SVG's own
+        // width/height (viewBox unchanged) so the vector is RENDERED at high res.
+        let svgText = await res.blob.text();
+        const wM = svgText.match(/<svg[^>]*\swidth="([\d.]+)"/i), hM = svgText.match(/<svg[^>]*\sheight="([\d.]+)"/i);
+        const natW = wM ? parseFloat(wM[1]) : 1200, natH = hM ? parseFloat(hM[1]) : 800;
+        const targetW = 3200;                                  // high-res vector render
+        const scale = Math.max(1, Math.min(4, targetW / natW));
+        const bigW = Math.round(natW * scale), bigH = Math.round(natH * scale);
+        svgText = svgText.replace(/(<svg[^>]*\swidth=")[\d.]+(")/i, '$1' + bigW + '$2').replace(/(<svg[^>]*\sheight=")[\d.]+(")/i, '$1' + bigH + '$2');
+        const bigBlob = new Blob([svgText], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(bigBlob);
         const img = await _loadImg(url);
-        const natW = img.naturalWidth || img.width || 1200, natH = img.naturalHeight || img.height || 800;
-        const targetW = 2400;                                  // high-res raster of the vector SVG
-        const scale = Math.max(0.5, Math.min(3.5, targetW / natW));
-        const cw = Math.max(1, Math.round(natW * scale)), ch = Math.max(1, Math.round(natH * scale));
+        const cw = img.naturalWidth || bigW, ch = img.naturalHeight || bigH;
         const cnv = document.createElement('canvas'); cnv.width = cw; cnv.height = ch;
         const cx = cnv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cw, ch); cx.drawImage(img, 0, 0, cw, ch);
         URL.revokeObjectURL(url);
-        // High-res JPEG: at this resolution compression is invisible, but the file
-        // is ~10x smaller than PNG — several lossless PNGs overflow jsPDF's output
-        // string ("Invalid string length") on a big deck.
-        return { dataUrl: cnv.toDataURL('image/jpeg', 0.9), w: cw, h: ch };
+        // High-res JPEG: invisible compression at this resolution, ~10x smaller
+        // than PNG (lossless PNGs overflow jsPDF's output string on a big deck).
+        return { dataUrl: cnv.toDataURL('image/jpeg', 0.92), w: cw, h: ch };
     } catch (e) { return null; }
 }
 
@@ -11202,10 +11211,10 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                     const wTopF = 6 / totalHin;
                     const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                     const wx = boxX + wlf * ew, wW = (wrf - wlf) * ew, wyTop = boxY + wTopF * eh, wH = (1 - wTopF) * eh;
-                    doc.setLineDashPattern([], 0); doc.setDrawColor(70, 70, 70); doc.setLineWidth(0.8);
+                    doc.setLineDashPattern([], 0); doc.setDrawColor(60, 60, 60); doc.setLineWidth(1.1);
                     doc.rect(wx, wyTop, wW, wH, 'S');
                     let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
-                    if (bbIn > 0 && bbIn < wallHin) { const byy = boxY + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.6); doc.line(wx, byy, wx + wW, byy); }
+                    if (bbIn > 0 && bbIn < wallHin) { const byy = boxY + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
                 } catch (e) {}
                 const capX = boxX + (er.wallLeftFrac || 0) * ew;   // align caption to the wall line, not the image edge
                 doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120); doc.text((elev.name || 'Elevation') + '', capX, boxY + eh + 9);
@@ -11685,10 +11694,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
                     const wTopF = 6 / totalHin;
                     const wlf = (elevRender.wallLeftFrac != null ? elevRender.wallLeftFrac : 0), wrf = (elevRender.wallRightFrac != null ? elevRender.wallRightFrac : 1);
                     const wx = ex0 + wlf * ew, wW = (wrf - wlf) * ew, wyTop = ey0 + wTopF * eh, wH = (1 - wTopF) * eh;
-                    doc.setLineDashPattern([], 0); doc.setDrawColor(70, 70, 70); doc.setLineWidth(0.8);
+                    doc.setLineDashPattern([], 0); doc.setDrawColor(60, 60, 60); doc.setLineWidth(1.1);
                     doc.rect(wx, wyTop, wW, wH, 'S');
                     let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
-                    if (bbIn > 0 && bbIn < wallHin) { const byy = ey0 + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.6); doc.line(wx, byy, wx + wW, byy); }
+                    if (bbIn > 0 && bbIn < wallHin) { const byy = ey0 + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
                 } catch (e) {}
                 // Caption under the elevation: the wall name.
                 doc.setFont('helvetica', 'normal');
