@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.0';
+const APP_VERSION = '3.1';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -403,6 +403,8 @@ function _mbMigratePages() {
 // layout-pages flow. Everything reads through _mbEls()/_mbPage(), so this is
 // the only hinge needed to reuse the whole canvas for fixed pages.
 let _mbEditTarget = null;
+let _mbActiveCanvasId = 'moodboardCanvas';   // 'moodboardCanvas' (modal) or 'dsLayoutCanvas' (deck center)
+function _mbCanvas() { return document.getElementById(_mbActiveCanvasId) || document.getElementById('moodboardCanvas'); }
 function _mbPage() { if (_mbEditTarget) return _mbEditTarget.page; _mbMigratePages(); return editorialContent.layoutPages[_mbPageIndex]; }
 function _mbEls() { return _mbPage().elements; }
 function _mbAutosave() { if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
@@ -8100,7 +8102,7 @@ function _dsTab(which) {
 }
 let _dsBuildError = '';
 let _dsTplSel = null;   // layout template highlighted but not yet applied
-function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; }
+function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; _mbActiveCanvasId = 'moodboardCanvas'; _mbEditTarget = null; }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _tocLabelFor(desc) {
     if (!desc) return null;
@@ -9069,12 +9071,31 @@ function _dsRenderCenter() {
     c.innerHTML = '';
     _dsBakeToken++;
     const desc = _dsPages[_dsIndex]; if (!desc) return;
+    _mbActiveCanvasId = 'moodboardCanvas'; _mbEditTarget = null;   // default; layout pages override below
     if (_dsSelKey && _dsSelKey !== _deckPageKey(desc)) { _dsSelKey = null; _dsSelIdx = -1; _dsSyncToolbar(); }
     let availW = c.clientWidth - 48; if (!availW || availW < 200) availW = 760;
     let availH = c.clientHeight - 48; if (!availH || availH < 120) availH = 460;
     let w = availW, hh = w * 540 / 936;
     if (hh > availH) { hh = availH; w = hh * 936 / 540; }
     if (desc.kind === 'floorplan') { _dsRenderCenterFloorplan(desc, c, Math.round(w), Math.round(hh)); return; }
+    if (desc.kind === 'layout' && desc.page) {
+        // Fully editable layout canvas right here in the center (same engine as the
+        // layout editor): double-click titles/paragraphs to edit, drag to move,
+        // corner to resize, drop images, etc. No more bouncing to a separate window.
+        _mbEditTarget = { page: desc.page, key: (typeof LAYOUT_TEMPLATES !== 'undefined' && LAYOUT_TEMPLATES[desc.page.type]) ? desc.page.type : undefined, label: desc.page.title || desc.page.type };
+        _mbActiveCanvasId = 'dsLayoutCanvas'; _mbSelected = -1;
+        const page = document.createElement('div');
+        page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
+        const cv = document.createElement('div'); cv.id = 'dsLayoutCanvas'; cv.style.cssText = 'position:absolute; inset:0; background:#fff;';
+        page.appendChild(cv);
+        c.appendChild(page);
+        try { renderMoodboardCanvas(); } catch (e) {}
+        _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
+        _dsAddGuides(page, Math.round(w), Math.round(hh));
+        _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
+        _dsSyncBuildBtn();
+        return;
+    }
     const page = document.createElement('div');
     page.style.cssText = 'position:relative; width:' + Math.round(w) + 'px; height:' + Math.round(hh) + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
     const _pk = _deckPageKey(desc);
@@ -9932,6 +9953,7 @@ function _mbOnResize() { const m = document.getElementById('moodboardModal'); if
 function openMoodboardModal() {
     const m = document.getElementById('moodboardModal');
     if (!m) return;
+    _mbActiveCanvasId = 'moodboardCanvas';
     _mbEditTarget = null;
     _mbSelected = -1;
     _normalizeMoodboard();
@@ -9994,6 +10016,7 @@ function openFixedPageEditor(key) {
         page.type = 'narrative';
     } else { return; }
     _mbEditTarget = { key: key, label: label, page: page };
+    _mbActiveCanvasId = 'moodboardCanvas';
     const m = document.getElementById('moodboardModal'); if (!m) return;
     const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
     _mbSelected = -1;
@@ -10223,7 +10246,7 @@ function _cropToCanvas(img, boxWpt, boxHpt, aspect, zoom, panX, panY) {
 }
 
 function renderMoodboardCanvas() {
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     if (!canvas) return;
     _normalizeMoodboard();
     const els = _mbEls() || [];
@@ -10512,7 +10535,7 @@ function _mbTileDown(e, i) {
     }
     _mbLastTextDown = (t0 && _elType(t0) === 'text') ? { i: i, t: now } : null;
     _mbSelected = i;
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
@@ -10523,7 +10546,7 @@ function _mbTileDown(e, i) {
 }
 function _mbResizeDown(e, i) {
     e.preventDefault(); e.stopPropagation();
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
@@ -10533,7 +10556,7 @@ function _mbResizeDown(e, i) {
 }
 function _mbImgPanDown(e, i) {
     e.preventDefault(); e.stopPropagation();
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
@@ -10543,7 +10566,7 @@ function _mbImgPanDown(e, i) {
 }
 function _mbArrowHandleDown(e, i, which) {
     e.preventDefault(); e.stopPropagation();
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
@@ -10553,7 +10576,7 @@ function _mbArrowHandleDown(e, i, which) {
 }
 function _mbElbowAnchorDown(e, i, k) {
     e.preventDefault(); e.stopPropagation();
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
@@ -10671,7 +10694,7 @@ function _mbPlaceKey(e) {
 }
 function _mbPlaceClick(e) {
     if (!_mbPlacing || !_mbDraft) return;
-    const canvas = document.getElementById('moodboardCanvas');
+    const canvas = _mbCanvas();
     const r = canvas.getBoundingClientRect();
     let nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height;
     const pts = _mbDraft.pts;
