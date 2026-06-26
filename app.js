@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.9';
+const APP_VERSION = '3.0';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8373,7 +8373,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         if (a.type === 'image') {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box; background:#fff;' + (a.shadow ? ' box-shadow:' + (0.006 * w) + 'px ' + (0.008 * w) + 'px ' + (0.018 * w) + 'px rgba(0,0,0,0.38);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box; background:#fff;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             const img = document.createElement('img');
             img.src = a.dataUrl || ''; img.draggable = false;
             img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
@@ -8405,7 +8405,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const box = document.createElement('div');
             const radius = a.shape === 'ellipse' ? '50%' : '3px';
             let bg = a.dataUrl ? ('center/cover no-repeat url(' + a.dataUrl + ')') : (a.fill || '#d8d8de');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + bg + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.006 * w) + 'px ' + (0.008 * w) + 'px ' + (0.018 * w) + 'px rgba(0,0,0,0.38);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + bg + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             box.onmousedown = (e) => {
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
@@ -8447,10 +8447,10 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 const ptStr = pts.map(p => p.join(',')).join(' ');
                 const end = pts[pts.length - 1], prev = pts[pts.length - 2];
                 const dx = end[0] - prev[0], dy = end[1] - prev[1], len = Math.max(1, Math.hypot(dx, dy));
-                const ux = dx / len, uy = dy / len, hsz = Math.max(6, sw * 3.4);
+                const ux = dx / len, uy = dy / len, hsz = Math.max(5, sw * 4.6);
                 const bx = end[0] - ux * hsz, by = end[1] - uy * hsz, nx = -uy, ny = ux;
                 poly.setAttribute('points', ptStr); poly.setAttribute('stroke', col); poly.setAttribute('stroke-width', sw);
-                headP.setAttribute('points', [end[0] + ',' + end[1], (bx + nx * hsz * 0.55) + ',' + (by + ny * hsz * 0.55), (bx - nx * hsz * 0.55) + ',' + (by - ny * hsz * 0.55)].join(' ')); headP.setAttribute('fill', col);
+                headP.setAttribute('points', [end[0] + ',' + end[1], (bx + nx * hsz * 0.34) + ',' + (by + ny * hsz * 0.34), (bx - nx * hsz * 0.34) + ',' + (by - ny * hsz * 0.34)].join(' ')); headP.setAttribute('fill', col);
                 hit.setAttribute('points', ptStr); hit.setAttribute('stroke-width', Math.max(14, sw + 12));
                 hEnds[0].setAttribute('cx', X1); hEnds[0].setAttribute('cy', Y1);
                 hEnds[1].setAttribute('cx', X2); hEnds[1].setAttribute('cy', Y2);
@@ -8592,7 +8592,7 @@ function _dsAddArrow(kind) {
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
     if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support arrows.'); return; }
     const list = _dsAnnList(key);
-    list.push({ type: (kind === 'elbow' ? 'elbow' : 'arrow'), x1: 0.32, y1: 0.5, x2: 0.6, y2: 0.4, color: '#c0392b', weight: 2 });
+    list.push({ type: (kind === 'elbow' ? 'elbow' : 'arrow'), x1: 0.32, y1: 0.5, x2: 0.6, y2: 0.4, color: '#c0392b', weight: 1.4 });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1);
@@ -11315,30 +11315,64 @@ function _annHexToRgb(hex) {
     const n = parseInt(hex, 16);
     return isNaN(n) ? { r: 34, g: 34, b: 34 } : { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
+const _shapeMaskCache = {};
+function _shapeMaskKey(srcUrl, wPt, hPt) { return Math.round(wPt) + 'x' + Math.round(hPt) + ':' + (srcUrl ? srcUrl.length + srcUrl.slice(-32) : ''); }
+async function _ensureEllipseMask(srcUrl, wPt, hPt) {
+    const key = _shapeMaskKey(srcUrl, wPt, hPt);
+    if (_shapeMaskCache[key]) return _shapeMaskCache[key];
+    try {
+        const img = await _loadImg(srcUrl);
+        const px = 2.5, W = Math.max(8, Math.round(wPt * px)), H = Math.max(8, Math.round(hPt * px));
+        const cnv = document.createElement('canvas'); cnv.width = W; cnv.height = H;
+        const cx = cnv.getContext('2d');
+        cx.save(); cx.beginPath(); cx.ellipse(W / 2, H / 2, W / 2, H / 2, 0, 0, Math.PI * 2); cx.clip();
+        const iw = img.naturalWidth || 1, ih = img.naturalHeight || 1, s = Math.max(W / iw, H / ih), dw = iw * s, dh = ih * s;
+        cx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh); cx.restore();
+        const out = cnv.toDataURL('image/png'); _shapeMaskCache[key] = out; return out;
+    } catch (e) { return null; }
+}
+// Soft, lightly-blurred drop shadow baked into a transparent PNG (no native PDF
+// blur). Cached by size+shape. Padding leaves room for the blur to spread.
+const _shadowCache = {};
+function _softShadowDataUrl(wPt, hPt, ell) {
+    const blurPt = Math.max(2.2, 0.018 * Math.max(wPt, hPt));
+    const key = Math.round(wPt) + 'x' + Math.round(hPt) + (ell ? 'e' : 'r');
+    if (_shadowCache[key]) return _shadowCache[key];
+    try {
+        const px = 2, pad = Math.ceil(blurPt * px) + 6;
+        const sw = Math.round(wPt * px), sh = Math.round(hPt * px);
+        const W = sw + pad * 2, H = sh + pad * 2;
+        const cnv = document.createElement('canvas'); cnv.width = W; cnv.height = H;
+        const cx = cnv.getContext('2d');
+        try { cx.filter = 'blur(' + (blurPt * px) + 'px)'; } catch (e) {}
+        cx.fillStyle = 'rgba(0,0,0,0.5)';
+        if (ell) { cx.beginPath(); cx.ellipse(W / 2, H / 2, sw / 2, sh / 2, 0, 0, Math.PI * 2); cx.fill(); }
+        else { const r = 3 * px; cx.beginPath(); cx.moveTo(pad + r, pad); cx.arcTo(pad + sw, pad, pad + sw, pad + sh, r); cx.arcTo(pad + sw, pad + sh, pad, pad + sh, r); cx.arcTo(pad, pad + sh, pad, pad, r); cx.arcTo(pad, pad, pad + sw, pad, r); cx.closePath(); cx.fill(); }
+        const out = { url: cnv.toDataURL('image/png'), padPt: pad / px };
+        _shadowCache[key] = out; return out;
+    } catch (e) { return null; }
+}
 function _drawAnnotations(doc, key, PW, PH) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
     list.forEach(a => {
         const _annShadow = (xx, yy, ww, hh2, ell) => {
             if (!a.shadow) return;
-            const off = 0.006 * PW;
-            try {
-                if (doc.GState) { try { doc.setGState(new doc.GState({ opacity: 0.3 })); } catch (e) {} }
-                doc.setFillColor(25, 25, 25);
-                if (ell && doc.ellipse) doc.ellipse(xx + ww / 2 + off, yy + hh2 / 2 + off, ww / 2, hh2 / 2, 'F');
-                else if (doc.roundedRect) doc.roundedRect(xx + off, yy + off, ww, hh2, 3, 3, 'F');
-                else if (doc.rect) doc.rect(xx + off, yy + off, ww, hh2, 'F');
-                if (doc.GState) { try { doc.setGState(new doc.GState({ opacity: 1 })); } catch (e) {} }
-            } catch (e) {}
+            const off = 0.003 * PW;
+            const sh = _softShadowDataUrl(ww, hh2, ell);
+            if (sh && sh.url) { try { doc.addImage(sh.url, 'PNG', xx - sh.padPt + off, yy - sh.padPt + off, ww + sh.padPt * 2, hh2 + sh.padPt * 2); } catch (e) {} }
         };
         if (a.type === 'shape') {
             const x = (a.x || 0) * PW, y = (a.y || 0) * PH, pw = (a.w || 0.25) * PW, ph = (a.h || 0.18) * PH;
             const ell = a.shape === 'ellipse';
             _annShadow(x, y, pw, ph, ell);
             if (a.dataUrl) {
+                if (ell) {
+                    const mu = _shapeMaskCache[_shapeMaskKey(a.dataUrl, pw, ph)];
+                    if (mu) { try { doc.addImage(mu, 'PNG', x, y, pw, ph); } catch (e) {} return; }
+                }
                 const fmt = (('' + a.dataUrl).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
                 try { doc.addImage(a.dataUrl, fmt, x, y, pw, ph); } catch (e) {}
-                if (ell && doc.ellipse) { try { doc.setDrawColor(255, 255, 255); doc.setLineWidth(0.3); } catch (e) {} }
             } else {
                 const c = _annHexToRgb(a.fill || '#d8d8de'); doc.setFillColor(c.r, c.g, c.b);
                 try { if (ell && doc.ellipse) doc.ellipse(x + pw / 2, y + ph / 2, pw / 2, ph / 2, 'F'); else if (doc.roundedRect) doc.roundedRect(x, y, pw, ph, 3, 3, 'F'); else doc.rect(x, y, pw, ph, 'F'); } catch (e) {}
@@ -11362,10 +11396,10 @@ function _drawAnnotations(doc, key, PW, PH) {
             if (a.type === 'elbow') { doc.line(X1, Y1, X2, Y1); doc.line(X2, Y1, X2, Y2); px2 = X2; py2 = Y1; }
             else { doc.line(X1, Y1, X2, Y2); px2 = X1; py2 = Y1; }
             const dx = X2 - px2, dy = Y2 - py2, len = Math.max(0.5, Math.hypot(dx, dy));
-            const ux = dx / len, uy = dy / len, hsz = Math.max(6, wt * 3.4);
+            const ux = dx / len, uy = dy / len, hsz = Math.max(5, wt * 4.6);
             const bx = X2 - ux * hsz, by = Y2 - uy * hsz, nx = -uy, ny = ux;
             doc.setFillColor(rgb.r, rgb.g, rgb.b);
-            try { doc.triangle(X2, Y2, bx + nx * hsz * 0.55, by + ny * hsz * 0.55, bx - nx * hsz * 0.55, by - ny * hsz * 0.55, 'F'); } catch (e) {}
+            try { doc.triangle(X2, Y2, bx + nx * hsz * 0.34, by + ny * hsz * 0.34, bx - nx * hsz * 0.34, by - ny * hsz * 0.34, 'F'); } catch (e) {}
             return;
         }
         if (a.type === 'image') {
@@ -11875,7 +11909,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const _emitted = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) _emitted[_pageKeys[p]] = 1; }
         for (const pg of (editorialContent.layoutPages || [])) { if (pg.afterKey && pg.afterKey !== '__start__' && !_emitted[pg.afterKey]) { await drawLayoutPage(pg); await emitAfterKey('layout:' + pg.id); } }
     }
-    for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } } }
+    for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } if (_a && _a.type === 'shape' && _a.shape === 'ellipse' && _a.dataUrl) { try { await _ensureEllipseMask(_a.dataUrl, (_a.w || 0.25) * PW, (_a.h || 0.18) * PH); } catch (e) {} } } }
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
     // — Approval status: spec pages the client has approved (green) or that are
     //   pending approval (red), shown under the floorplan back-link —
