@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '2.6';
+const APP_VERSION = '2.7';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -11211,10 +11211,10 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                     const wTopF = 6 / totalHin;
                     const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
                     const wx = boxX + wlf * ew, wW = (wrf - wlf) * ew, wyTop = boxY + wTopF * eh, wH = (1 - wTopF) * eh;
-                    doc.setLineDashPattern([], 0); doc.setDrawColor(60, 60, 60); doc.setLineWidth(1.1);
+                    doc.setLineDashPattern([], 0); doc.setDrawColor(70, 70, 70); doc.setLineWidth(0.8);
                     doc.rect(wx, wyTop, wW, wH, 'S');
                     let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
-                    if (bbIn > 0 && bbIn < wallHin) { const byy = boxY + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
+                    if (bbIn > 0 && bbIn < wallHin) { const byy = boxY + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.6); doc.line(wx, byy, wx + wW, byy); }
                 } catch (e) {}
                 const capX = boxX + (er.wallLeftFrac || 0) * ew;   // align caption to the wall line, not the image edge
                 doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120); doc.text((elev.name || 'Elevation') + '', capX, boxY + eh + 9);
@@ -11694,10 +11694,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
                     const wTopF = 6 / totalHin;
                     const wlf = (elevRender.wallLeftFrac != null ? elevRender.wallLeftFrac : 0), wrf = (elevRender.wallRightFrac != null ? elevRender.wallRightFrac : 1);
                     const wx = ex0 + wlf * ew, wW = (wrf - wlf) * ew, wyTop = ey0 + wTopF * eh, wH = (1 - wTopF) * eh;
-                    doc.setLineDashPattern([], 0); doc.setDrawColor(60, 60, 60); doc.setLineWidth(1.1);
+                    doc.setLineDashPattern([], 0); doc.setDrawColor(70, 70, 70); doc.setLineWidth(0.8);
                     doc.rect(wx, wyTop, wW, wH, 'S');
                     let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
-                    if (bbIn > 0 && bbIn < wallHin) { const byy = ey0 + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
+                    if (bbIn > 0 && bbIn < wallHin) { const byy = ey0 + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.6); doc.line(wx, byy, wx + wW, byy); }
                 } catch (e) {}
                 // Caption under the elevation: the wall name.
                 doc.setFont('helvetica', 'normal');
