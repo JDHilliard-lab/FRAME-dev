@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.2';
+const APP_VERSION = '3.3';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8081,13 +8081,17 @@ function openDeckStudio(tab) {
 }
 function _dsTab(which) {
     _dsActiveTab = which;
-    const p = document.getElementById('dsTabProject'), g = document.getElementById('dsTabPages');
+    const p = document.getElementById('dsTabProject'), g = document.getElementById('dsTabPages'), tt = document.getElementById('dsTabTemplates');
     if (p) p.style.display = (which === 'project') ? 'flex' : 'none';
     if (g) g.style.display = (which === 'pages') ? 'flex' : 'none';
-    const bp = document.getElementById('dsTabBtnProject'), bg = document.getElementById('dsTabBtnPages');
+    if (tt) tt.style.display = (which === 'templates') ? 'block' : 'none';
+    const bp = document.getElementById('dsTabBtnProject'), bg = document.getElementById('dsTabBtnPages'), bt = document.getElementById('dsTabBtnTemplates');
     const on = 'background:#6a6aff; color:#fff;', off = 'background:var(--bg-input); color:var(--text-main);';
-    if (bp) bp.style.cssText = 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (which === 'project' ? on : off);
-    if (bg) bg.style.cssText = 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (which === 'pages' ? on : off);
+    const css = (active) => 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (active ? on : off);
+    if (bp) bp.style.cssText = css(which === 'project');
+    if (bg) bg.style.cssText = css(which === 'pages');
+    if (bt) bt.style.cssText = css(which === 'templates');
+    if (which === 'templates') { try { _dsRenderTemplatesTab(); } catch (e) { console.error(e); } return; }
     if (which === 'pages') {
         _dsBuildError = '';
         try { _dsPages = _deckPageList() || []; }
@@ -8164,6 +8168,147 @@ function _dsCreateInsert(type, afterKey) {
     const k = 'layout:' + pg.id;
     const ni = _dsPages.findIndex(d => _deckPageKey(d) === k);
     if (ni >= 0) _dsSelectPage(ni);
+}
+// ── Template Library (Templates tab) ───────────────────────────────────────
+const DECK_TPL_CATS = [
+    { key: 'cover', label: 'Cover' },
+    { key: 'narrative', label: 'Narrative' },
+    { key: 'slogan', label: 'Good Art' },
+    { key: 'moodboard', label: 'Moodboard' },
+    { key: 'breaker', label: 'Breaker' },
+    { key: 'keyword', label: 'Keyword' },
+    { key: 'inspo', label: 'Inspo' }
+];
+function _dsAllCats() {
+    const base = DECK_TPL_CATS.slice();
+    (editorialContent.templateCategories || []).forEach(c => { if (c && c.key && !base.some(b => b.key === c.key)) base.push({ key: c.key, label: c.label || c.key }); });
+    return base;
+}
+function _dsCatLabel(key) { const c = _dsAllCats().find(x => x.key === key); return c ? c.label : (key || 'Moodboard'); }
+function _dsCurrentEditablePage() {
+    const desc = _dsPages[_dsIndex]; if (!desc) return null;
+    if (desc.kind === 'layout' && desc.page) return { page: desc.page, type: desc.page.type || 'moodboard' };
+    if (desc.kind === 'fixed') { try { const r = _fixedPageFor(desc.fixed); if (r && r.page) return { page: r.page, type: r.page.type || desc.fixed }; } catch (e) {} }
+    return null;
+}
+function _dsSaveCurrentAsTemplate() {
+    const ep = _dsCurrentEditablePage();
+    if (!ep) { showInfoModal('Not a layout page', 'Open a moodboard, cover, narrative or other layout page in Pages, then save it as a template.'); return; }
+    const name = (window.prompt('Name this template:', ep.page.title || (_dsCatLabel(ep.type) + ' template')) || '').trim();
+    if (!name) return;
+    const els = JSON.parse(JSON.stringify(ep.page.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; }); // structural — strip embedded image data
+    editorialContent.templates = editorialContent.templates || [];
+    editorialContent.templates.push({ name: name, type: ep.type || 'moodboard', elements: els });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsTab('templates');
+}
+function _dsAddCategory() {
+    const label = (window.prompt('New template category name:', '') || '').trim();
+    if (!label) return;
+    const key = 'cat_' + label.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') + '_' + Math.random().toString(36).slice(2, 6);
+    editorialContent.templateCategories = editorialContent.templateCategories || [];
+    editorialContent.templateCategories.push({ key: key, label: label });
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderTemplatesTab();
+}
+function _dsDeleteCategory(key) {
+    if (!confirm('Delete this category? Templates inside it will move to Moodboard.')) return;
+    (editorialContent.templates || []).forEach(t => { if (t.type === key) t.type = 'moodboard'; });
+    editorialContent.templateCategories = (editorialContent.templateCategories || []).filter(c => c.key !== key);
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderTemplatesTab();
+}
+function _dsTemplateToDeck(idx) {
+    const t = (editorialContent.templates || [])[idx]; if (!t) return;
+    _mbMigratePages();
+    const desc = _dsPages[_dsIndex];
+    const afterKey = desc ? (_deckPageKey(desc) || '__start__') : '__start__';
+    const pg = { id: 'pg' + Math.random().toString(36).slice(2), type: t.type || 'moodboard', title: t.name || _mbDefaultTitle(t.type), elements: JSON.parse(JSON.stringify(t.elements || [])), afterKey: afterKey };
+    editorialContent.layoutPages = editorialContent.layoutPages || [];
+    editorialContent.layoutPages.push(pg);
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsTab('pages');
+    const k = 'layout:' + pg.id; const ni = _dsPages.findIndex(d => _deckPageKey(d) === k); if (ni >= 0) _dsSelectPage(ni);
+}
+function _dsDeleteUserTemplate(idx) {
+    if (!Array.isArray(editorialContent.templates)) return;
+    if (!confirm('Delete this template?')) return;
+    editorialContent.templates.splice(idx, 1);
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderTemplatesTab();
+}
+function _dsRenameUserTemplate(idx) {
+    const t = (editorialContent.templates || [])[idx]; if (!t) return;
+    const nm = (window.prompt('Rename template:', t.name || '') || '').trim(); if (!nm) return;
+    t.name = nm; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTemplatesTab();
+}
+function _dsRecategorize(idx, type) {
+    const t = (editorialContent.templates || [])[idx]; if (!t) return;
+    t.type = type; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTemplatesTab();
+}
+function _dsRenderTemplatesTab() {
+    const host = document.getElementById('dsTabTemplates'); if (!host) return;
+    host.innerHTML = '';
+    const wrap = document.createElement('div'); wrap.style.cssText = 'max-width:1100px; margin:0 auto; width:100%;';
+    const head = document.createElement('div'); head.style.cssText = 'display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:16px;';
+    const title = document.createElement('div'); title.innerHTML = '<div style="font-size:1rem; font-weight:800; color:var(--text-main);">Template Library</div><div style="font-size:0.68rem; color:var(--text-muted);">Save layouts you like, organise them by category, and drop them into any deck.</div>'; title.style.cssText = 'flex:1; min-width:200px;';
+    head.appendChild(title);
+    const mkBtn = (label, fn, primary) => { const b = document.createElement('button'); b.textContent = label; b.className = primary ? 'action-btn' : 'action-btn btn-secondary'; b.style.cssText = 'width:auto; height:32px; padding:0 14px; font-size:0.72rem; font-weight:700;'; b.onclick = fn; return b; };
+    head.appendChild(mkBtn('+ Save current page', _dsSaveCurrentAsTemplate, true));
+    head.appendChild(mkBtn('+ New category', _dsAddCategory));
+    wrap.appendChild(head);
+    const cats = _dsAllCats();
+    const cardW = 200, cardH = Math.round(cardW * 540 / 936);
+    cats.forEach(cat => {
+        const userTpls = [];
+        (editorialContent.templates || []).forEach((t, i) => { if ((t.type || 'moodboard') === cat.key) userTpls.push({ t: t, idx: i }); });
+        const builtins = [];
+        (LAYOUT_TEMPLATES[cat.key] || []).forEach(b => { try { builtins.push({ name: b.name, els: b.els() }); } catch (e) {} });
+        if (typeof studioDefaults !== 'undefined') (studioDefaults.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat.key) builtins.push({ name: (tp.name || 'Studio') + ' \u00b7 studio', els: tp.elements || [] }); });
+        if (!userTpls.length && !builtins.length && !DECK_TPL_CATS.some(d => d.key === cat.key)) {
+            // empty custom category — still show header so it can be used/deleted
+        }
+        const sec = document.createElement('div'); sec.style.cssText = 'margin-bottom:22px;';
+        const ch = document.createElement('div'); ch.style.cssText = 'display:flex; align-items:center; gap:8px; margin-bottom:8px; border-bottom:1px solid var(--border-color); padding-bottom:5px;';
+        const cl = document.createElement('div'); cl.textContent = cat.label; cl.style.cssText = 'font-size:0.8rem; font-weight:800; color:var(--text-main);';
+        ch.appendChild(cl);
+        const cnt = document.createElement('span'); cnt.textContent = userTpls.length + ' saved'; cnt.style.cssText = 'font-size:0.62rem; color:var(--text-muted);'; ch.appendChild(cnt);
+        if (!DECK_TPL_CATS.some(d => d.key === cat.key)) { const del = document.createElement('button'); del.textContent = 'Delete category'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:auto; height:24px; padding:0 8px; font-size:0.6rem; margin-left:auto;'; del.onclick = () => _dsDeleteCategory(cat.key); ch.appendChild(del); }
+        sec.appendChild(ch);
+        const grid = document.createElement('div'); grid.style.cssText = 'display:flex; flex-wrap:wrap; gap:12px;';
+        const addCard = (name, els, controls) => {
+            const cell = document.createElement('div'); cell.style.cssText = 'width:' + cardW + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:#fff;';
+            const th = document.createElement('div'); th.style.cssText = 'position:relative; width:100%; height:' + cardH + 'px; background:#fff;';
+            th.innerHTML = _mbThumbInner({ elements: els }, cardW, cardH); cell.appendChild(th);
+            const nm = document.createElement('div'); nm.textContent = name; nm.style.cssText = 'font-size:0.66rem; color:var(--text-main); padding:5px 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);'; cell.appendChild(nm);
+            if (controls) cell.appendChild(controls);
+            grid.appendChild(cell);
+        };
+        userTpls.forEach(({ t, idx }) => {
+            const ctr = document.createElement('div'); ctr.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px; padding:6px 7px; border-top:1px solid var(--border-color); align-items:center;';
+            const add = document.createElement('button'); add.textContent = 'Add to deck'; add.className = 'action-btn'; add.style.cssText = 'width:auto; height:24px; padding:0 8px; font-size:0.6rem; font-weight:700;'; add.onclick = () => _dsTemplateToDeck(idx); ctr.appendChild(add);
+            const ren = document.createElement('button'); ren.textContent = 'Rename'; ren.className = 'action-btn btn-secondary'; ren.style.cssText = 'width:auto; height:24px; padding:0 7px; font-size:0.58rem;'; ren.onclick = () => _dsRenameUserTemplate(idx); ctr.appendChild(ren);
+            const del = document.createElement('button'); del.textContent = 'Delete'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:auto; height:24px; padding:0 7px; font-size:0.58rem;'; del.onclick = () => _dsDeleteUserTemplate(idx); ctr.appendChild(del);
+            const sel = document.createElement('select'); sel.style.cssText = 'flex:1 0 100%; height:24px; font-size:0.58rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; margin-top:2px;';
+            _dsAllCats().forEach(c => { const o = document.createElement('option'); o.value = c.key; o.textContent = 'Category: ' + c.label; if (c.key === (t.type || 'moodboard')) o.selected = true; sel.appendChild(o); });
+            sel.onchange = () => _dsRecategorize(idx, sel.value); ctr.appendChild(sel);
+            addCard(t.name || 'Untitled', t.elements || [], ctr);
+        });
+        builtins.forEach(b => {
+            const ctr = document.createElement('div'); ctr.style.cssText = 'display:flex; gap:4px; padding:6px 7px; border-top:1px solid var(--border-color);';
+            const add = document.createElement('button'); add.textContent = 'Add to deck'; add.className = 'action-btn btn-secondary'; add.style.cssText = 'width:auto; height:24px; padding:0 8px; font-size:0.6rem;';
+            add.onclick = () => { editorialContent.templates = editorialContent.templates || []; editorialContent.templates.push({ name: b.name, type: cat.key, elements: JSON.parse(JSON.stringify(b.els || [])) }); _dsTemplateToDeck(editorialContent.templates.length - 1); editorialContent.templates.pop(); };
+            ctr.appendChild(add);
+            const tag = document.createElement('span'); tag.textContent = 'starter'; tag.style.cssText = 'font-size:0.56rem; color:var(--text-muted); align-self:center; margin-left:auto;'; ctr.appendChild(tag);
+            addCard(b.name || 'Starter', b.els || [], ctr);
+        });
+        if (!userTpls.length && !builtins.length) { const e = document.createElement('div'); e.style.cssText = 'font-size:0.66rem; color:var(--text-muted); padding:4px 0;'; e.textContent = 'No templates here yet. Open a page in Pages and use “Save current page”, or pick this category when saving.'; sec.appendChild(e); }
+        sec.appendChild(grid);
+        wrap.appendChild(sec);
+    });
+    host.appendChild(wrap);
 }
 function _dsOpenInsertMenu(anchorBtn, afterKey) {
     const old = document.getElementById('dsInsMenu'); if (old) { old.remove(); return; }
@@ -9546,8 +9691,8 @@ function _dsRenderTools() {
             + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">This ' + (desc.type === 'toc' ? 'contents page lists every section with its page number' : 'index lists every artwork with the page it appears on') + '. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
         t.appendChild(note);
     }
-    else if (desc.kind === 'layout') { addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
-    else if (desc.kind === 'fixed') { /* fixed pages are now editable inline in the center */ }
+    else if (desc.kind === 'layout') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
+    else if (desc.kind === 'fixed') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); }
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
     else if (desc.type === 'contacts') addBtn('Edit contacts', () => { openContactsEditor(); });
     else if (desc.type === 'timeline') {
