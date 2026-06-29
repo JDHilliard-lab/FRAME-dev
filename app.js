@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.4';
+const APP_VERSION = '3.5';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8495,7 +8495,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             }
             box.onmousedown = (e) => {
                 e.preventDefault();
-                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
@@ -8527,7 +8527,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.appendChild(img);
             box.onmousedown = (e) => {
                 e.preventDefault();
-                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
@@ -8537,7 +8537,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;' + (sel ? '' : ' display:none;');
             handle.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
-                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar();
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
                 const sx = e.clientX, ow = a.w || 0.25;
                 const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.04, Math.min(1, nw)); a.w = nw; const nbw = nw * w; box.style.width = nbw + 'px'; box.style.height = (nbw * (a.aspect || 0.75)) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
@@ -8563,7 +8563,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.ondrop = (e) => _dsShapeDropImage(e, key, i);
             box.onmousedown = (e) => {
                 e.preventDefault();
-                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
@@ -8622,7 +8622,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             svg.appendChild(poly); svg.appendChild(headP); svg.appendChild(hit);
             hit.onmousedown = (e) => {
                 e.preventDefault();
-                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar();
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
                 const sx = e.clientX, sy = e.clientY, ox1 = a.x1, oy1 = a.y1, ox2 = a.x2, oy2 = a.y2;
                 const mv = (ev) => { const ddx = (ev.clientX - sx) / w, ddy = (ev.clientY - sy) / hh; a.x1 = ox1 + ddx; a.y1 = oy1 + ddy; a.x2 = ox2 + ddx; a.y2 = oy2 + ddy; redraw(); };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); if (!sel) _dsRenderCenter(); };
@@ -8651,13 +8651,13 @@ function _dsRenderAnnots(page, desc, w, hh) {
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
             e.preventDefault();
-            _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
+            _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
             const mv = (ev) => { a.x = Math.max(0, Math.min(0.985, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.985, oy + (ev.clientY - sy) / hh)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
             const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
-        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; el.focus(); };
+        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; el.focus(); };
         el.onblur = () => { a.text = el.textContent; el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
         if (sel) {
             const th = document.createElement('div');
@@ -8665,7 +8665,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             th.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
             th.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
-                _dsSelKey = key; _dsSelIdx = i; _dsSyncToolbar();
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
                 const sx = e.clientX, ow = (a.w || 0.3), os = (a.size || 0.03);
                 const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); const ratio = nw / ow; a.w = nw; a.size = Math.max(0.012, Math.min(0.22, os * ratio)); el.style.width = (nw * w) + 'px'; el.style.fontSize = Math.max(7, a.size * hh) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderRail(); };
@@ -8678,7 +8678,22 @@ function _dsRenderAnnots(page, desc, w, hh) {
 }
 function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToolbar(); _dsRenderCenter(); }
 function _dsSyncToolbar() {
-    const a = _dsCurrentAnnot();
+    const editable = !!(typeof _dsCurrentEditablePage === 'function' && _dsCurrentEditablePage());
+    const art = document.getElementById('dsAddArtwork'); if (art) art.style.display = editable ? 'inline-flex' : 'none';
+    // Moodboard element selection takes precedence over annotations when on a layout/fixed page.
+    const mbEl = (editable && typeof _mbSelEl === 'function' && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) ? _mbSelEl() : null;
+    const mbType = mbEl ? _elType(mbEl) : null;
+    const mbGrp = document.getElementById('dsMbGroup');
+    if (mbGrp) mbGrp.style.display = mbEl ? 'inline-flex' : 'none';
+    if (mbEl) {
+        const isTxt = mbType === 'text';
+        const show = (id, on) => { const e = document.getElementById(id); if (e) e.style.display = on ? (id === 'dsMbSizeWrap' ? 'inline-flex' : 'inline-block') : 'none'; };
+        show('dsMbFont', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt);
+        const f = document.getElementById('dsMbFont'); if (f && isTxt) f.value = mbEl.font || 'serif';
+        const sl = document.getElementById('dsMbSizeLbl'); if (sl) sl.textContent = isTxt ? Math.round((mbEl.size || 0.045) * 1000) : '\u2014';
+        const c = document.getElementById('dsMbColor'); if (c && isTxt) c.value = mbEl.color || '#222222';
+    }
+    const a = mbEl ? null : _dsCurrentAnnot();
     const selected = !!a;
     const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup' && a.type !== 'shape');
     const isArrow = !!(a && (a.type === 'arrow' || a.type === 'elbow'));
@@ -8686,9 +8701,10 @@ function _dsSyncToolbar() {
     const isShape = !!(a && a.type === 'shape');
     const isImage = !!(a && a.type === 'image');
     const grp = document.getElementById('dsSelGroup');
-    if (grp) { grp.style.opacity = selected ? '1' : '0.4'; grp.style.pointerEvents = selected ? 'auto' : 'none'; }
+    if (grp) { grp.style.display = mbEl ? 'none' : 'inline-flex'; grp.style.opacity = selected ? '1' : '0.4'; grp.style.pointerEvents = selected ? 'auto' : 'none'; }
     const hint = document.getElementById('dsSelHint');
-    if (hint) hint.textContent = !selected ? 'Select a box to style it \u00b7 double-click to edit \u00b7 drag to move'
+    if (hint) hint.textContent = mbEl ? (mbType === 'text' ? 'Text \u2014 font, size & colour at left \u00b7 double-click to edit' : 'Element \u2014 drag to move, corner to resize, layer & delete at left')
+        : !selected ? 'Select a box to style it \u00b7 double-click to edit \u00b7 drag to move'
         : isText ? 'Text box \u2014 double-click to type, drag corner to scale'
         : isArrow ? 'Arrow \u2014 drag it to move, drag an end to re-aim'
         : isMock ? 'Mockup \u2014 drag to move, corner to resize, double-click to swap artwork'
@@ -8774,6 +8790,11 @@ function _dsAddShape(shape) {
     _dsRenderRail();
 }
 let _dsFillShapeMode = false;
+function _dsAddTextSmart() { if (_dsCurrentEditablePage()) { try { addMoodboardText(); } catch (e) {} } else { _dsAddTextBox(); } }
+function _dsAddImageSmart() { if (_dsCurrentEditablePage()) { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); } else { _dsAddImageBox(); } }
+function _dsAddArrowSmart(kind) { if (_dsCurrentEditablePage()) { try { if (kind === 'elbow') addMoodboardElbow(); else addMoodboardArrow(); } catch (e) {} } else { _dsAddArrow(kind); } }
+function _dsAddArtworkSmart() { if (_dsCurrentEditablePage() && typeof _mbArtPickerOpen === 'function') _mbArtPickerOpen(); }
+function _dsClearMbSel() { if (typeof _mbSelected !== 'undefined' && _mbSelected >= 0 && _mbActiveCanvasId === 'dsLayoutCanvas') { _mbSelected = -1; try { renderMoodboardCanvas(); } catch (e) {} } }
 function _dsFillShapeWithImage() {
     const a = _dsCurrentAnnot(); if (!a || a.type !== 'shape') return;
     _dsFillShapeMode = true;
@@ -9267,8 +9288,8 @@ function _dsSyncBuildBtn() {
     const desc = _dsPages[_dsIndex]; const isSpec = !!(desc && desc.kind === 'spec');
     const built = isSpec && _dsBuilt[_deckPageKey(desc)];
     b.style.opacity = isSpec ? '1' : '0.4'; b.style.pointerEvents = isSpec ? 'auto' : 'none';
-    if (_dsPreviewQueued && isSpec) { b.textContent = 'Updating…'; b.style.background = '#c08a2e'; b.style.color = '#fff'; }
-    else { b.textContent = built ? 'Refresh' : 'Preview'; b.style.background = built ? '#1a7f37' : 'var(--bg-input)'; b.style.color = built ? '#fff' : 'var(--text-main)'; }
+    if (_dsPreviewQueued && isSpec) { b.style.background = '#c08a2e'; b.style.color = '#fff'; b.title = 'Updating preview…'; }
+    else { b.style.background = built ? '#1a7f37' : 'var(--bg-input)'; b.style.color = built ? '#fff' : 'var(--text-main)'; b.title = built ? 'Refresh the exact export preview' : 'Preview — render an exact preview of how this page exports'; }
 }
 function _dsRenderCenter() {
     const c = document.getElementById('dsCenter'); if (!c) return;
@@ -9739,8 +9760,8 @@ function _dsRenderTools() {
             + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">This ' + (desc.type === 'toc' ? 'contents page lists every section with its page number' : 'index lists every artwork with the page it appears on') + '. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
         t.appendChild(note);
     }
-    else if (desc.kind === 'layout') { _dsLayoutStyleControls(t); addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
-    else if (desc.kind === 'fixed') { _dsLayoutStyleControls(t); addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); }
+    else if (desc.kind === 'layout') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
+    else if (desc.kind === 'fixed') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); }
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
     else if (desc.type === 'contacts') addBtn('Edit contacts', () => { openContactsEditor(); });
     else if (desc.type === 'timeline') {
@@ -10631,7 +10652,7 @@ function renderMoodboardCanvas() {
     _mbDrawGuides(canvas);
     _mbUpdateToolbar();
     _mbRenderPageStrip();
-    if (_mbActiveCanvasId === 'dsLayoutCanvas') { try { _dsUpdateLayoutStyleBar(); } catch (e) {} }
+    if (_mbActiveCanvasId === 'dsLayoutCanvas') { if (typeof _mbSelected !== 'undefined' && _mbSelected >= 0) { _dsSelKey = null; _dsSelIdx = -1; } try { _dsSyncToolbar(); } catch (e) {} }
 }
 
 // Map a font role to a CSS stack for the editor preview (PDF uses the real
