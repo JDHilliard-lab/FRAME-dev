@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.5';
+const APP_VERSION = '3.6';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -8553,7 +8553,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const radius = a.shape === 'ellipse' ? '50%' : '3px';
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; overflow:hidden; border-radius:' + radius + '; background:' + (a.dataUrl ? '#ececec' : (a.fill || '#d8d8de')) + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             if (a.dataUrl) {
-                const cr = _coverRect(bw, bh, a.aspect || 1.33, a.zoom || 1, a.panX || 0, a.panY || 0);
+                const cr = _imgRect(a.fit || 'cover', bw, bh, a.aspect || 1.33, a.zoom || 1, a.panX || 0, a.panY || 0);
                 const img = document.createElement('img'); img.src = a.dataUrl; img.draggable = false;
                 img.style.cssText = 'position:absolute; left:' + cr.offX + 'px; top:' + cr.offY + 'px; width:' + cr.dW + 'px; height:' + cr.dH + 'px; max-width:none; display:block; pointer-events:none; user-select:none;';
                 box.appendChild(img);
@@ -8800,9 +8800,33 @@ function _dsFillShapeWithImage() {
     _dsFillShapeMode = true;
     const fi = document.getElementById('dsAnnImageFile'); if (fi) fi.click();
 }
-function _dsAnnFit() {
+function _dsAnnFit() { _dsOpenFitMenu(); }
+function _dsOpenFitMenu() {
     const a = _dsCurrentAnnot(); if (!a || !a.dataUrl) return;
-    a.zoom = 1; a.panX = 0; a.panY = 0;
+    _dsCloseFitMenu();
+    const btn = document.getElementById('dsAnnFit');
+    const m = document.createElement('div'); m.id = 'dsFitMenu';
+    m.style.cssText = 'position:fixed; z-index:100000; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.4); padding:5px; min-width:220px;';
+    const r = btn ? btn.getBoundingClientRect() : { left: 200, bottom: 80 };
+    m.style.left = Math.round(r.left) + 'px'; m.style.top = Math.round((r.bottom || 80) + 6) + 'px';
+    [['Fill frame proportionally', 'fill'], ['Fit content proportionally', 'contain'], ['Fit content to frame', 'stretch'], ['Fit frame to content', 'frame'], ['Center content', 'center']].forEach(p => {
+        const b = document.createElement('button'); b.textContent = p[0]; b.style.cssText = 'display:block; width:100%; text-align:left; background:transparent; border:none; border-radius:5px; padding:8px 10px; cursor:pointer; color:var(--text-main); font-size:0.74rem;';
+        b.onmouseenter = () => b.style.background = 'var(--bg-input)'; b.onmouseleave = () => b.style.background = 'transparent';
+        b.onclick = () => { _dsShapeFitOp(p[1]); _dsCloseFitMenu(); }; m.appendChild(b);
+    });
+    document.body.appendChild(m);
+    setTimeout(() => document.addEventListener('mousedown', _dsFitMenuOutside), 0);
+}
+function _dsFitMenuOutside(e) { const m = document.getElementById('dsFitMenu'); if (m && !m.contains(e.target)) _dsCloseFitMenu(); }
+function _dsCloseFitMenu() { const m = document.getElementById('dsFitMenu'); if (m) m.remove(); document.removeEventListener('mousedown', _dsFitMenuOutside); }
+function _dsShapeFitOp(op) {
+    const a = _dsCurrentAnnot(); if (!a || !a.dataUrl) return;
+    if (op === 'fill') { a.fit = 'cover'; a.zoom = 1; a.panX = 0; a.panY = 0; }
+    else if (op === 'contain') { a.fit = 'contain'; a.zoom = 1; a.panX = 0; a.panY = 0; }
+    else if (op === 'stretch') { a.fit = 'stretch'; }
+    else if (op === 'center') { a.panX = 0; a.panY = 0; }
+    else if (op === 'frame') { const asp = a.aspect || 1.333; a.h = Math.max(0.03, Math.min(1, (a.w * 936 / asp) / 540)); if (a.fit === 'stretch') a.fit = 'cover'; }
+    if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderCenter(); _dsRenderRail();
 }
@@ -10518,6 +10542,25 @@ function _coverRect(boxW, boxH, aspect, zoom, panX, panY) {
     const offY = -slackY / 2 + (panY || 0) * slackY / 2;
     return { dW: dW, dH: dH, offX: offX, offY: offY, slackX: slackX, slackY: slackY };
 }
+// Resolve an image rect for a given fit mode (InDesign-style).
+//  'cover'   = fill frame proportionally (crops overflow)   [default]
+//  'contain' = fit content proportionally (whole image, gaps)
+//  'stretch' = fit content to frame (distorts to fill)
+function _imgRect(mode, boxW, boxH, aspect, zoom, panX, panY) {
+    aspect = aspect || 1.333;
+    if (mode === 'stretch') return { dW: boxW, dH: boxH, offX: 0, offY: 0, slackX: 0, slackY: 0 };
+    if (mode === 'contain') {
+        let dW0, dH0;
+        if (aspect > boxW / boxH) { dW0 = boxW; dH0 = boxW / aspect; }
+        else { dH0 = boxH; dW0 = boxH * aspect; }
+        const dW = dW0 * (zoom || 1), dH = dH0 * (zoom || 1);
+        const slackX = dW - boxW, slackY = dH - boxH;
+        const offX = -slackX / 2 + (panX || 0) * Math.abs(slackX) / 2;
+        const offY = -slackY / 2 + (panY || 0) * Math.abs(slackY) / 2;
+        return { dW: dW, dH: dH, offX: offX, offY: offY, slackX: slackX, slackY: slackY };
+    }
+    return _coverRect(boxW, boxH, aspect, zoom, panX, panY);
+}
 
 // Render an image cropped/zoomed/panned to a box into an offscreen canvas (for
 // the PDF, which can't clip addImage directly).
@@ -11626,7 +11669,7 @@ function _annHexToRgb(hex) {
     return isNaN(n) ? { r: 34, g: 34, b: 34 } : { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
 }
 const _shapeImgCache = {};
-function _shapeImgKey(a, wPt, hPt) { return (a.shape || 'rect') + '|' + Math.round(wPt) + 'x' + Math.round(hPt) + '|z' + (a.zoom || 1) + '|p' + (a.panX || 0) + ',' + (a.panY || 0) + '|' + (a.dataUrl ? a.dataUrl.length + a.dataUrl.slice(-24) : ''); }
+function _shapeImgKey(a, wPt, hPt) { return (a.shape || 'rect') + '|' + (a.fit || 'cover') + '|' + Math.round(wPt) + 'x' + Math.round(hPt) + '|z' + (a.zoom || 1) + '|p' + (a.panX || 0) + ',' + (a.panY || 0) + '|' + (a.dataUrl ? a.dataUrl.length + a.dataUrl.slice(-24) : ''); }
 async function _ensureShapeImage(a, wPt, hPt) {
     if (!a || !a.dataUrl) return null;
     const key = _shapeImgKey(a, wPt, hPt);
@@ -11639,7 +11682,7 @@ async function _ensureShapeImage(a, wPt, hPt) {
         cx.save();
         if (a.shape === 'ellipse') { cx.beginPath(); cx.ellipse(W / 2, H / 2, W / 2, H / 2, 0, 0, Math.PI * 2); cx.clip(); }
         const aspect = a.aspect || ((img.naturalWidth || 1) / (img.naturalHeight || 1));
-        const cr = _coverRect(W, H, aspect, a.zoom || 1, a.panX || 0, a.panY || 0);
+        const cr = _imgRect(a.fit || 'cover', W, H, aspect, a.zoom || 1, a.panX || 0, a.panY || 0);
         cx.drawImage(img, cr.offX, cr.offY, cr.dW, cr.dH); cx.restore();
         const out = cnv.toDataURL('image/png'); _shapeImgCache[key] = out; return out;
     } catch (e) { return null; }
