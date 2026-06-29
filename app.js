@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.3';
+const APP_VERSION = '3.4';
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -9434,6 +9434,54 @@ function _dsApplyTemplate(els, type) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRefresh();
 }
+function _dsLayoutStyleControls(t) {
+    const wrap = document.createElement('div'); wrap.style.cssText = 'border:1px solid var(--border-color); border-radius:6px; padding:10px; margin-bottom:10px; background:var(--bg-input);';
+    const lbl = document.createElement('div'); lbl.textContent = 'Edit this page'; lbl.style.cssText = 'font-size:0.7rem; font-weight:700; color:var(--text-main); margin-bottom:8px;'; wrap.appendChild(lbl);
+    const addRow = document.createElement('div'); addRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;';
+    const ab = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:0.64rem;'; b.onclick = fn; addRow.appendChild(b); };
+    ab('+ Text', () => { addMoodboardText(); });
+    ab('+ Image', () => { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); });
+    ab('+ Artwork', () => { if (typeof _mbArtPickerOpen === 'function') _mbArtPickerOpen(); });
+    ab('Arrow', () => { addMoodboardArrow(); });
+    ab('Elbow', () => { addMoodboardElbow(); });
+    wrap.appendChild(addRow);
+    const sel = document.createElement('div');
+    const tc = document.createElement('div'); tc.id = 'dsLayTextCtl'; tc.style.cssText = 'display:none; flex-wrap:wrap; gap:6px; align-items:center; margin-bottom:8px;';
+    const font = document.createElement('select'); font.id = 'dsLayFont'; font.style.cssText = 'flex:1 1 100%; height:28px; font-size:0.66rem; background:var(--bg-panel); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    [['display', 'Druk (display)'], ['serif', 'Messina (serif)'], ['sans', 'Helvetica (sans)']].forEach(p => { const o = document.createElement('option'); o.value = p[0]; o.textContent = p[1]; font.appendChild(o); });
+    font.onchange = () => _mbSetFont(font.value); tc.appendChild(font);
+    const sizeWrap = document.createElement('div'); sizeWrap.style.cssText = 'display:flex; align-items:center; gap:4px;';
+    const am = document.createElement('button'); am.textContent = 'A\u2212'; am.className = 'action-btn btn-secondary'; am.style.cssText = 'width:30px; height:28px; padding:0; font-size:0.7rem;'; am.onclick = () => _mbNudgeSize(-0.005);
+    const sv = document.createElement('span'); sv.id = 'dsLaySizeVal'; sv.style.cssText = 'font-size:0.66rem; color:var(--text-muted); min-width:26px; text-align:center;';
+    const ap = document.createElement('button'); ap.textContent = 'A+'; ap.className = 'action-btn btn-secondary'; ap.style.cssText = 'width:30px; height:28px; padding:0; font-size:0.7rem;'; ap.onclick = () => _mbNudgeSize(0.005);
+    sizeWrap.appendChild(am); sizeWrap.appendChild(sv); sizeWrap.appendChild(ap); tc.appendChild(sizeWrap);
+    const col = document.createElement('input'); col.type = 'color'; col.id = 'dsLayColor'; col.style.cssText = 'width:30px; height:28px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-panel); cursor:pointer; padding:1px;'; col.onchange = () => _mbSetTextColor(col.value); tc.appendChild(col);
+    sel.appendChild(tc);
+    const lr = document.createElement('div'); lr.id = 'dsLayActions'; lr.style.cssText = 'display:none; flex-wrap:wrap; gap:5px;';
+    const fr = document.createElement('button'); fr.textContent = 'Front'; fr.className = 'action-btn btn-secondary'; fr.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:0.64rem;'; fr.onclick = () => _mbToFront();
+    const bk = document.createElement('button'); bk.textContent = 'Back'; bk.className = 'action-btn btn-secondary'; bk.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:0.64rem;'; bk.onclick = () => _mbToBack();
+    const dl = document.createElement('button'); dl.textContent = 'Delete'; dl.className = 'action-btn btn-secondary'; dl.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:0.64rem;'; dl.onclick = () => { _mbDelete(); };
+    lr.appendChild(fr); lr.appendChild(bk); lr.appendChild(dl); sel.appendChild(lr);
+    const hint = document.createElement('div'); hint.id = 'dsLayHint'; hint.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin-top:4px;'; hint.textContent = 'Click an element to style it \u00b7 double-click text to edit.';
+    sel.appendChild(hint);
+    wrap.appendChild(sel);
+    t.appendChild(wrap);
+    _dsUpdateLayoutStyleBar();
+}
+function _dsUpdateLayoutStyleBar() {
+    const el = (typeof _mbSelEl === 'function') ? _mbSelEl() : null;
+    const ty = el ? _elType(el) : null;
+    const tc = document.getElementById('dsLayTextCtl'), lr = document.getElementById('dsLayActions'), hint = document.getElementById('dsLayHint');
+    if (!tc && !lr) return;
+    if (lr) lr.style.display = el ? 'flex' : 'none';
+    if (tc) tc.style.display = (ty === 'text') ? 'flex' : 'none';
+    if (hint) hint.style.display = el ? 'none' : 'block';
+    if (ty === 'text') {
+        const f = document.getElementById('dsLayFont'); if (f) f.value = el.font || 'serif';
+        const sv = document.getElementById('dsLaySizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 1000);
+        const c = document.getElementById('dsLayColor'); if (c) c.value = el.color || '#222222';
+    }
+}
 function _dsRenderTools() {
     const t = document.getElementById('dsTools'); if (!t) return;
     const desc = _dsPages[_dsIndex];
@@ -9691,8 +9739,8 @@ function _dsRenderTools() {
             + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">This ' + (desc.type === 'toc' ? 'contents page lists every section with its page number' : 'index lists every artwork with the page it appears on') + '. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
         t.appendChild(note);
     }
-    else if (desc.kind === 'layout') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
-    else if (desc.kind === 'fixed') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); }
+    else if (desc.kind === 'layout') { _dsLayoutStyleControls(t); addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); }
+    else if (desc.kind === 'fixed') { _dsLayoutStyleControls(t); addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); }
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
     else if (desc.type === 'contacts') addBtn('Edit contacts', () => { openContactsEditor(); });
     else if (desc.type === 'timeline') {
@@ -10583,6 +10631,7 @@ function renderMoodboardCanvas() {
     _mbDrawGuides(canvas);
     _mbUpdateToolbar();
     _mbRenderPageStrip();
+    if (_mbActiveCanvasId === 'dsLayoutCanvas') { try { _dsUpdateLayoutStyleBar(); } catch (e) {} }
 }
 
 // Map a font role to a CSS stack for the editor preview (PDF uses the real
