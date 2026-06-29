@@ -6,7 +6,8 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.6';
+const APP_VERSION = '3.7';
+const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
 
 let currentView = 'dashboard';
@@ -7477,8 +7478,17 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
         if (ty === 'text') {
             const fs = Math.max(6, Math.min(60, (t.size || 0.045) * PH));
             const c = _hex(t.color || '#222222');
-            doc.setFont(_fontRole(t.font), 'normal'); doc.setFontSize(fs); doc.setTextColor(c[0], c[1], c[2]);
-            doc.text(doc.splitTextToSize(t.text || '', (t.w || 0.4) * PW), (t.x || 0) * PW, (t.y || 0) * PH, { baseline: 'top' });
+            const style = (t.bold && t.italic) ? 'bolditalic' : t.bold ? 'bold' : t.italic ? 'italic' : 'normal';
+            try { doc.setFont(_fontRole(t.font), style); } catch (e) { try { doc.setFont(_fontRole(t.font), 'normal'); } catch (e2) {} }
+            doc.setFontSize(fs); doc.setTextColor(c[0], c[1], c[2]);
+            const al = _pdfAlign(t.align); const boxX = (t.x || 0) * PW, boxW = (t.w || 0.4) * PW;
+            let tx = boxX; if (al === 'center') tx = boxX + boxW / 2; else if (al === 'right') tx = boxX + boxW;
+            let str = t.text || ''; if (t.caps === 'upper') str = str.toUpperCase();
+            if (t.track) { try { doc.setCharSpace(t.track * fs); } catch (e) {} }
+            const lines = doc.splitTextToSize(str, boxW);
+            try { doc.text(lines, tx, (t.y || 0) * PH, { baseline: 'top', align: al, maxWidth: boxW }); }
+            catch (e) { doc.text(lines, boxX, (t.y || 0) * PH, { baseline: 'top' }); }
+            if (t.track) { try { doc.setCharSpace(0); } catch (e) {} }
             doc.setTextColor(20, 20, 20);
             return;
         }
@@ -8081,17 +8091,20 @@ function openDeckStudio(tab) {
 }
 function _dsTab(which) {
     _dsActiveTab = which;
-    const p = document.getElementById('dsTabProject'), g = document.getElementById('dsTabPages'), tt = document.getElementById('dsTabTemplates');
+    const p = document.getElementById('dsTabProject'), g = document.getElementById('dsTabPages'), tt = document.getElementById('dsTabTemplates'), ss = document.getElementById('dsTabStyles');
     if (p) p.style.display = (which === 'project') ? 'flex' : 'none';
     if (g) g.style.display = (which === 'pages') ? 'flex' : 'none';
     if (tt) tt.style.display = (which === 'templates') ? 'block' : 'none';
-    const bp = document.getElementById('dsTabBtnProject'), bg = document.getElementById('dsTabBtnPages'), bt = document.getElementById('dsTabBtnTemplates');
+    if (ss) ss.style.display = (which === 'styles') ? 'block' : 'none';
+    const bp = document.getElementById('dsTabBtnProject'), bg = document.getElementById('dsTabBtnPages'), bt = document.getElementById('dsTabBtnTemplates'), bs = document.getElementById('dsTabBtnStyles');
     const on = 'background:#6a6aff; color:#fff;', off = 'background:var(--bg-input); color:var(--text-main);';
     const css = (active) => 'height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; ' + (active ? on : off);
     if (bp) bp.style.cssText = css(which === 'project');
     if (bg) bg.style.cssText = css(which === 'pages');
     if (bt) bt.style.cssText = css(which === 'templates');
+    if (bs) bs.style.cssText = css(which === 'styles');
     if (which === 'templates') { try { _dsRenderTemplatesTab(); } catch (e) { console.error(e); } return; }
+    if (which === 'styles') { try { _dsRenderStylesTab(); } catch (e) { console.error(e); } return; }
     if (which === 'pages') {
         _dsBuildError = '';
         try { _dsPages = _deckPageList() || []; }
@@ -8309,6 +8322,115 @@ function _dsRenderTemplatesTab() {
         wrap.appendChild(sec);
     });
     host.appendChild(wrap);
+}
+// ── Text Styles (character/paragraph styles, seeded from the IDML template) ──
+function _dsTextStyles() {
+    if (!Array.isArray(editorialContent.textStyles) || !editorialContent.textStyles.length) {
+        editorialContent.textStyles = JSON.parse(JSON.stringify(IDML_STYLE_SEED));
+    }
+    return editorialContent.textStyles;
+}
+function _dsStyleGroups() {
+    const seen = []; _dsTextStyles().forEach(s => { if (s.group && seen.indexOf(s.group) < 0) seen.push(s.group); });
+    return seen;
+}
+function _dsStyleTarget() {
+    if (_dsCurrentEditablePage() && typeof _mbSelEl === 'function' && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) { const el = _mbSelEl(); if (el && _elType(el) === 'text') return { kind: 'mb', el: el }; }
+    const a = _dsCurrentAnnot(); if (a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup' && a.type !== 'shape') return { kind: 'ann', el: a };
+    return null;
+}
+function _dsApplyStyle(id, silent) {
+    const st = _dsTextStyles().find(s => s.id === id); if (!st) return false;
+    const t = _dsStyleTarget();
+    if (!t) { if (!silent) showInfoModal('Select a text box', 'Click a text element on the page first, then apply a style to it.'); return false; }
+    const el = t.el;
+    el.font = st.font; el.size = st.size; el.bold = !!st.bold; el.italic = !!st.italic;
+    el.color = st.color; el.align = st.align; el.caps = st.caps || 'none'; el.track = st.track || 0;
+    el.styleId = id;
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (t.kind === 'mb') { try { renderMoodboardCanvas(); } catch (e) {} }
+    _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar();
+    return true;
+}
+let _dsShuffleState = null;
+function _dsShuffleGroup(group) {
+    const list = _dsTextStyles().filter(s => s.group === group); if (!list.length) return;
+    const t = _dsStyleTarget(); if (!t) { showInfoModal('Select a text box', 'Click a text element on the page, then shuffle a group to try each look on it.'); return; }
+    if (!_dsShuffleState || _dsShuffleState.group !== group) _dsShuffleState = { group: group, i: 0 };
+    else _dsShuffleState.i = (_dsShuffleState.i + 1) % list.length;
+    const st = list[_dsShuffleState.i];
+    _dsApplyStyle(st.id, true);
+    _dsRenderStylesTab();
+    const lbl = document.getElementById('dsShuffleLbl' + group.replace(/\W/g, '')); if (lbl) lbl.textContent = st.name;
+}
+function _dsSaveSelectionAsStyle() {
+    const t = _dsStyleTarget(); if (!t) { showInfoModal('Select a text box', 'Select a styled text element first, then save its look as a new style.'); return; }
+    const el = t.el; const name = (window.prompt('Name this style:', 'My Style') || '').trim(); if (!name) return;
+    const groups = _dsStyleGroups();
+    const group = (window.prompt('Group (e.g. ' + groups.slice(0, 4).join(', ') + '…):', el.styleId ? (_dsTextStyles().find(s => s.id === el.styleId) || {}).group || 'Body Copy' : 'Body Copy') || 'Body Copy').trim();
+    _dsTextStyles().push({ id: 'sty_' + Math.random().toString(36).slice(2, 9), name: name, group: group, font: el.font || 'serif', size: el.size || 0.03, bold: !!el.bold, italic: !!el.italic, color: el.color || '#222222', align: el.align || 'left', caps: el.caps || 'none', track: el.track || 0 });
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderStylesTab();
+}
+function _dsDeleteStyle(id) { if (!confirm('Delete this style? (Text already using it keeps its look.)')) return; editorialContent.textStyles = _dsTextStyles().filter(s => s.id !== id); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
+function _dsDuplicateStyle(id) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; const c = JSON.parse(JSON.stringify(s)); c.id = 'sty_' + Math.random().toString(36).slice(2, 9); c.name = s.name + ' copy'; _dsTextStyles().push(c); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
+function _dsStyleEdit(id, prop, val) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; if (prop === 'size') val = parseFloat(val) / 1000; else if (prop === 'track') val = parseFloat(val) / 1000; else if (prop === 'bold' || prop === 'italic') val = !!val; s[prop] = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
+function _dsStylePreviewCss(s) {
+    return 'font-family:' + _mbFontCss(s.font) + '; font-size:20px; line-height:1.1; color:' + (s.color === '#ffffff' ? '#fff' : s.color) + ';' + (s.bold ? 'font-weight:700;' : '') + (s.italic ? 'font-style:italic;' : '') + (s.caps === 'upper' ? 'text-transform:uppercase;' : '') + (s.track ? 'letter-spacing:' + s.track + 'em;' : '') + _alignCss(s.align);
+}
+function _dsRenderStylesTab() {
+    const host = document.getElementById('dsTabStyles'); if (!host) return;
+    host.innerHTML = '';
+    const wrap = document.createElement('div'); wrap.style.cssText = 'max-width:1100px; margin:0 auto; width:100%;';
+    const head = document.createElement('div'); head.style.cssText = 'display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px;';
+    const ttl = document.createElement('div'); ttl.style.cssText = 'flex:1; min-width:220px;';
+    ttl.innerHTML = '<div style="font-size:1rem; font-weight:800; color:var(--text-main);">Text Styles</div><div style="font-size:0.68rem; color:var(--text-muted);">Seeded from your InDesign template. Select a text box on a page, then Apply or Shuffle to try looks.</div>';
+    head.appendChild(ttl);
+    const sb = document.createElement('button'); sb.textContent = '+ Save selection as style'; sb.className = 'action-btn'; sb.style.cssText = 'width:auto; height:32px; padding:0 14px; font-size:0.72rem; font-weight:700;'; sb.onclick = _dsSaveSelectionAsStyle; head.appendChild(sb);
+    wrap.appendChild(head);
+    const tgt = _dsStyleTarget();
+    const note = document.createElement('div'); note.style.cssText = 'font-size:0.68rem; margin-bottom:14px; padding:7px 10px; border-radius:6px; ' + (tgt ? 'background:rgba(26,127,55,0.12); color:#1a7f37;' : 'background:var(--bg-input); color:var(--text-muted);');
+    note.textContent = tgt ? 'A text box is selected — Apply/Shuffle will style it live.' : 'No text box selected. Pick one on a page (Pages tab) to apply styles to it.';
+    wrap.appendChild(note);
+    _dsStyleGroups().forEach(group => {
+        const styles = _dsTextStyles().filter(s => s.group === group);
+        const sec = document.createElement('div'); sec.style.cssText = 'margin-bottom:20px;';
+        const ch = document.createElement('div'); ch.style.cssText = 'display:flex; align-items:center; gap:8px; margin-bottom:8px; border-bottom:1px solid var(--border-color); padding-bottom:5px;';
+        const cl = document.createElement('div'); cl.textContent = group; cl.style.cssText = 'font-size:0.8rem; font-weight:800; color:var(--text-main);'; ch.appendChild(cl);
+        const shuf = document.createElement('button'); shuf.textContent = '⇄ Shuffle on selection'; shuf.className = 'action-btn btn-secondary'; shuf.style.cssText = 'width:auto; height:24px; padding:0 9px; font-size:0.6rem; margin-left:auto;'; shuf.onclick = () => _dsShuffleGroup(group); ch.appendChild(shuf);
+        const slbl = document.createElement('span'); slbl.id = 'dsShuffleLbl' + group.replace(/\W/g, ''); slbl.style.cssText = 'font-size:0.6rem; color:var(--text-muted); min-width:60px;'; ch.appendChild(slbl);
+        sec.appendChild(ch);
+        styles.forEach(s => {
+            const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:10px; padding:7px 8px; border:1px solid var(--border-color); border-radius:6px; margin-bottom:6px; background:' + (s.color === '#ffffff' ? '#3a3a40' : '#fff') + ';';
+            const prev = document.createElement('div'); prev.textContent = s.name; prev.style.cssText = 'flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; ' + _dsStylePreviewCss(s); row.appendChild(prev);
+            const meta = document.createElement('div'); meta.textContent = Math.round(s.size * 1080) + 'pt · ' + (s.font === 'display' ? 'Druk' : s.font === 'serif' ? 'Messina' : 'Helvetica') + (s.bold ? ' · B' : '') + (s.italic ? ' · I' : ''); meta.style.cssText = 'font-size:0.6rem; color:' + (s.color === '#ffffff' ? '#bbb' : 'var(--text-muted)') + '; white-space:nowrap;'; row.appendChild(meta);
+            const ap = document.createElement('button'); ap.textContent = 'Apply'; ap.className = 'action-btn'; ap.style.cssText = 'width:auto; height:26px; padding:0 10px; font-size:0.62rem; font-weight:700;'; ap.onclick = () => _dsApplyStyle(s.id); row.appendChild(ap);
+            const ed = document.createElement('button'); ed.textContent = 'Edit'; ed.className = 'action-btn btn-secondary'; ed.style.cssText = 'width:auto; height:26px; padding:0 8px; font-size:0.6rem;'; ed.onclick = () => _dsStyleEditPanel(s.id, row); row.appendChild(ed);
+            const du = document.createElement('button'); du.textContent = '⧉'; du.title = 'Duplicate'; du.className = 'action-btn btn-secondary'; du.style.cssText = 'width:26px; height:26px; padding:0; font-size:0.7rem;'; du.onclick = () => _dsDuplicateStyle(s.id); row.appendChild(du);
+            const dl = document.createElement('button'); dl.textContent = '🗑'; dl.title = 'Delete'; dl.className = 'action-btn btn-secondary'; dl.style.cssText = 'width:26px; height:26px; padding:0; font-size:0.66rem;'; dl.onclick = () => _dsDeleteStyle(s.id); row.appendChild(dl);
+            sec.appendChild(row);
+        });
+        wrap.appendChild(sec);
+    });
+    host.appendChild(wrap);
+}
+function _dsStyleEditPanel(id, afterRow) {
+    const s = _dsTextStyles().find(x => x.id === id); if (!s) return;
+    const ex = document.getElementById('dsStyleEditP'); if (ex) ex.remove();
+    const p = document.createElement('div'); p.id = 'dsStyleEditP'; p.style.cssText = 'display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:9px; border:1px solid #6a6aff; border-radius:6px; margin:-2px 0 8px; background:var(--bg-input);';
+    const mk = (label, node) => { const w = document.createElement('label'); w.style.cssText = 'display:inline-flex; align-items:center; gap:4px; font-size:0.62rem; color:var(--text-muted);'; w.appendChild(document.createTextNode(label)); w.appendChild(node); return w; };
+    const name = document.createElement('input'); name.value = s.name; name.style.cssText = 'height:24px; font-size:0.66rem; width:120px;'; name.onchange = () => _dsStyleEdit(id, 'name', name.value);
+    const fontSel = document.createElement('select'); [['display', 'Druk'], ['serif', 'Messina'], ['sans', 'Helvetica']].forEach(f => { const o = document.createElement('option'); o.value = f[0]; o.textContent = f[1]; if (s.font === f[0]) o.selected = true; fontSel.appendChild(o); }); fontSel.onchange = () => _dsStyleEdit(id, 'font', fontSel.value);
+    const size = document.createElement('input'); size.type = 'number'; size.value = Math.round(s.size * 1080); size.style.cssText = 'width:54px; height:24px; font-size:0.66rem;'; size.onchange = () => _dsStyleEdit(id, 'size', size.value);
+    const track = document.createElement('input'); track.type = 'number'; track.value = Math.round((s.track || 0) * 1000); track.style.cssText = 'width:54px; height:24px; font-size:0.66rem;'; track.onchange = () => _dsStyleEdit(id, 'track', track.value);
+    const color = document.createElement('input'); color.type = 'color'; color.value = s.color || '#222222'; color.style.cssText = 'width:30px; height:24px;'; color.onchange = () => _dsStyleEdit(id, 'color', color.value);
+    const bold = document.createElement('input'); bold.type = 'checkbox'; bold.checked = !!s.bold; bold.onchange = () => _dsStyleEdit(id, 'bold', bold.checked);
+    const ital = document.createElement('input'); ital.type = 'checkbox'; ital.checked = !!s.italic; ital.onchange = () => _dsStyleEdit(id, 'italic', ital.checked);
+    const caps = document.createElement('input'); caps.type = 'checkbox'; caps.checked = s.caps === 'upper'; caps.onchange = () => _dsStyleEdit(id, 'caps', caps.checked ? 'upper' : 'none');
+    const align = document.createElement('select'); [['left', 'Left'], ['center', 'Center'], ['right', 'Right'], ['justify', 'Justify (last L)'], ['justify-center', 'Justify (last C)'], ['justify-all', 'Justify all']].forEach(a => { const o = document.createElement('option'); o.value = a[0]; o.textContent = a[1]; if ((s.align || 'left') === a[0]) o.selected = true; align.appendChild(o); }); align.onchange = () => _dsStyleEdit(id, 'align', align.value);
+    const grp = document.createElement('input'); grp.value = s.group || ''; grp.style.cssText = 'height:24px; font-size:0.66rem; width:120px;'; grp.onchange = () => _dsStyleEdit(id, 'group', grp.value);
+    p.appendChild(mk('Name', name)); p.appendChild(mk('Group', grp)); p.appendChild(mk('Font', fontSel)); p.appendChild(mk('Size(pt)', size)); p.appendChild(mk('Track', track)); p.appendChild(mk('Colour', color)); p.appendChild(mk('Bold', bold)); p.appendChild(mk('Italic', ital)); p.appendChild(mk('Caps', caps)); p.appendChild(mk('Align', align));
+    afterRow.parentNode.insertBefore(p, afterRow.nextSibling);
 }
 function _dsOpenInsertMenu(anchorBtn, afterKey) {
     const old = document.getElementById('dsInsMenu'); if (old) { old.remove(); return; }
@@ -8647,7 +8769,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         const el = document.createElement('div');
         el.textContent = a.text || '';
         el.spellcheck = false;
-        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + Math.max(7, (a.size || 0.03) * hh) + 'px; line-height:1.2; color:' + (a.color || '#222222') + '; font-weight:' + (a.bold ? 700 : 400) + '; font-style:' + (a.italic ? 'italic' : 'normal') + '; text-align:' + (a.align || 'left') + '; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
+        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + Math.max(7, (a.size || 0.03) * hh) + 'px; line-height:1.2; color:' + (a.color || '#222222') + '; ' + _textExtraCss(a) + ' outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
             e.preventDefault();
@@ -8688,7 +8810,7 @@ function _dsSyncToolbar() {
     if (mbEl) {
         const isTxt = mbType === 'text';
         const show = (id, on) => { const e = document.getElementById(id); if (e) e.style.display = on ? (id === 'dsMbSizeWrap' ? 'inline-flex' : 'inline-block') : 'none'; };
-        show('dsMbFont', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt);
+        show('dsMbFont', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbAlign', isTxt);
         const f = document.getElementById('dsMbFont'); if (f && isTxt) f.value = mbEl.font || 'serif';
         const sl = document.getElementById('dsMbSizeLbl'); if (sl) sl.textContent = isTxt ? Math.round((mbEl.size || 0.045) * 1000) : '\u2014';
         const c = document.getElementById('dsMbColor'); if (c && isTxt) c.value = mbEl.color || '#222222';
@@ -8965,7 +9087,31 @@ function _dsOpenSettingsMenu(ev) {
         }
     });
 }
-function _dsAnnCycleAlign() { const a = _dsCurrentAnnot(); if (!a || a.type === 'image') return; const order = ['left', 'center', 'right']; const i = order.indexOf(a.align || 'left'); a.align = order[(i + 1) % 3]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnCycleAlign() { _dsOpenAlignMenu(); }
+function _dsAlignTarget() {
+    if (_dsCurrentEditablePage() && typeof _mbSelEl === 'function' && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) { const el = _mbSelEl(); if (el && _elType(el) === 'text') return { kind: 'mb', el: el }; }
+    const a = _dsCurrentAnnot(); if (a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup' && a.type !== 'shape') return { kind: 'ann', el: a };
+    return null;
+}
+function _dsAlignApply(val) { const t = _dsAlignTarget(); if (!t) return; t.el.align = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (t.kind === 'mb') { try { renderMoodboardCanvas(); } catch (e) {} } _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar(); }
+function _dsOpenAlignMenu() {
+    const t = _dsAlignTarget(); if (!t) return; _dsCloseAlignMenu();
+    const btn = document.getElementById(t.kind === 'mb' ? 'dsMbAlign' : 'dsAnnAlignBtn');
+    const m = document.createElement('div'); m.id = 'dsAlignMenu';
+    m.style.cssText = 'position:fixed; z-index:100000; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.4); padding:5px; min-width:240px;';
+    const r = btn ? btn.getBoundingClientRect() : { left: 200, bottom: 80 };
+    m.style.left = Math.round(r.left) + 'px'; m.style.top = Math.round((r.bottom || 80) + 6) + 'px';
+    [['Align left', 'left'], ['Align center', 'center'], ['Align right', 'right'], ['Justify · last line left', 'justify'], ['Justify · last line center', 'justify-center'], ['Justify all lines', 'justify-all']].forEach(p => {
+        const b = document.createElement('button'); b.textContent = p[0];
+        const onSel = (t.el.align || 'left') === p[1];
+        b.style.cssText = 'display:block; width:100%; text-align:left; background:' + (onSel ? 'var(--bg-input)' : 'transparent') + '; border:none; border-radius:5px; padding:8px 10px; cursor:pointer; color:var(--text-main); font-size:0.74rem;';
+        b.onmouseenter = () => b.style.background = 'var(--bg-input)'; b.onmouseleave = () => b.style.background = (onSel ? 'var(--bg-input)' : 'transparent');
+        b.onclick = () => { _dsAlignApply(p[1]); _dsCloseAlignMenu(); }; m.appendChild(b);
+    });
+    document.body.appendChild(m); setTimeout(() => document.addEventListener('mousedown', _dsAlignMenuOutside), 0);
+}
+function _dsAlignMenuOutside(e) { const m = document.getElementById('dsAlignMenu'); if (m && !m.contains(e.target)) _dsCloseAlignMenu(); }
+function _dsCloseAlignMenu() { const m = document.getElementById('dsAlignMenu'); if (m) m.remove(); document.removeEventListener('mousedown', _dsAlignMenuOutside); }
 function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; if (a.type === 'shape' && prop === 'color') { a.fill = val; a.dataUrl = null; } else { a[prop] = val; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
@@ -10620,7 +10766,7 @@ function renderMoodboardCanvas() {
         const box = document.createElement('div'); box.dataset.idx = i;
         if (ty === 'text') {
             const fs = Math.max(8, (t.size || 0.045) * cr.height);
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:1.15; color:' + (t.color || '#222') + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + _textExtraCss(t) + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
             box.textContent = t.text || 'Text';
             box.title = 'Double-click to edit text';
             box.ondblclick = (e) => { e.stopPropagation(); _mbBeginTextEdit(box, i); };
@@ -10705,6 +10851,28 @@ function _mbFontCss(font) {
     if (font === 'sans') return 'Helvetica, Arial, sans-serif';
     return 'Georgia, "Times New Roman", serif';
 }
+// Justification (incl. last-line variants) → CSS.
+function _alignCss(align) {
+    switch (align) {
+        case 'center': return 'text-align:center;';
+        case 'right': return 'text-align:right;';
+        case 'justify': return 'text-align:justify; text-align-last:left;';
+        case 'justify-center': return 'text-align:justify; text-align-last:center;';
+        case 'justify-all': return 'text-align:justify; text-align-last:justify;';
+        default: return 'text-align:left;';
+    }
+}
+// Weight / italic / caps / tracking shared by every text box.
+function _textExtraCss(t) {
+    let s = _alignCss(t.align || 'left');
+    if (t.bold) s += 'font-weight:700;';
+    if (t.italic) s += 'font-style:italic;';
+    if (t.caps === 'upper') s += 'text-transform:uppercase;';
+    if (t.track) s += 'letter-spacing:' + t.track + 'em;';
+    return s;
+}
+// Map our six alignment modes to what jsPDF understands.
+function _pdfAlign(align) { return (align === 'center' || align === 'justify-center') ? 'center' : align === 'right' ? 'right' : (align === 'justify' || align === 'justify-all') ? 'justify' : 'left'; }
 // Faded, non-interactive guides showing where the title, footer, and page
 // margins print — so elements don't get buried under deck chrome.
 function _mbDrawGuides(canvas) {
@@ -11764,7 +11932,7 @@ function _drawAnnotations(doc, key, PW, PH) {
             try { doc.addImage(a.dataUrl, fmt, x, y, pw, ph); } catch (e) {}
             return;
         }
-        const text = (a.text || '') + ''; if (!text.trim()) return;
+        let text = (a.text || '') + ''; if (!text.trim()) return;
         const x = (a.x || 0) * PW, y = (a.y || 0) * PH, w = (a.w || 0.3) * PW;
         const size = Math.max(6, (a.size || 0.03) * PH);
         const fam = _font(a.font || 'sans');
@@ -11772,10 +11940,13 @@ function _drawAnnotations(doc, key, PW, PH) {
         try { doc.setFont(fam, style); } catch (e) { doc.setFont(fam, a.bold ? 'bold' : 'normal'); }
         doc.setFontSize(size);
         const c = _annHexToRgb(a.color); doc.setTextColor(c.r, c.g, c.b);
+        if (a.caps === 'upper') text = text.toUpperCase();
+        const align = _pdfAlign(a.align);
+        if (a.track) { try { doc.setCharSpace(a.track * size); } catch (e) {} }
         const lines = doc.splitTextToSize(text, w);
-        const align = a.align || 'left';
         let tx = x; if (align === 'center') tx = x + w / 2; else if (align === 'right') tx = x + w;
-        try { doc.text(lines, tx, y + size, { align: align }); } catch (e) { doc.text(lines, x, y + size); }
+        try { doc.text(lines, tx, y + size, { align: align, maxWidth: w }); } catch (e) { doc.text(lines, x, y + size); }
+        if (a.track) { try { doc.setCharSpace(0); } catch (e) {} }
     });
 }
 // "APPROVED" stamp, top-right corner. Used to mark a deck as client-approved
