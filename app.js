@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '4.4';
+const APP_VERSION = '4.5';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -7544,6 +7544,7 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
         const h = (typeof t.h === 'number' ? t.h : (t.w * (936 / 540) / (t.aspect || 1.33))) * PH;
         if (im && (im.naturalWidth || im.width)) {
             try {
+                if (t.shadow) { try { const sh = _softShadowDataUrl(w, h, false); if (sh) doc.addImage(sh.url, 'PNG', x - sh.padPt + 2, y - sh.padPt + 4, w + sh.padPt * 2, h + sh.padPt * 2); } catch (e) {} }
                 const cropped = _cropToCanvas(im, w, h, aspImg, t.zoom || 1, t.panX || 0, t.panY || 0, t.fit || 'cover');
                 doc.addImage(cropped, (t.fit === 'contain' ? 'PNG' : 'JPEG'), x, y, w, h);
             } catch (e) { try { doc.addImage(im, 'JPEG', x, y, w, h); } catch (e2) {} }
@@ -8807,20 +8808,11 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (a.dataUrl) {
                     const ph = document.createElement('div');
                     ph.title = 'Drag to pan the image · scroll to zoom'; ph.textContent = '\u2725';
-                    ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:24px; height:24px; border-radius:50%; background:rgba(106,106,255,0.85); border:2px solid #fff; cursor:move; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px;';
+                    ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:24px; height:24px; border-radius:50%; background:rgba(106,106,255,0.85); border:2px solid #fff; cursor:move; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; z-index:23;';
                     ph.onmousedown = (e) => _dsShapePanDown(e, key, i, bw, bh);
                     box.appendChild(ph);
                 }
-                const handle = document.createElement('div');
-                handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
-                handle.onmousedown = (e) => {
-                    e.preventDefault(); e.stopPropagation();
-                    const sx = e.clientX, sy = e.clientY, ow = a.w || 0.25, oh = a.h || 0.18;
-                    const mv = (ev) => { a.w = Math.max(0.03, Math.min(1, ow + (ev.clientX - sx) / w)); a.h = Math.max(0.03, Math.min(1, oh + (ev.clientY - sy) / hh)); _dsRenderCenter(); };
-                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
-                    document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
-                };
-                box.appendChild(handle);
+                _dsAnnHandles(box, a, w, hh);
             }
             page.appendChild(box);
             return;
@@ -8921,7 +8913,8 @@ function _dsSyncToolbar() {
     if (mbEl) {
         const isTxt = mbType === 'text';
         const show = (id, on) => { const e = document.getElementById(id); if (e) e.style.display = on ? (id === 'dsMbSizeWrap' ? 'inline-flex' : 'inline-block') : 'none'; };
-        show('dsMbFont', isTxt); show('dsMbWeight', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbOutline', isTxt); show('dsMbAlign', isTxt); show('dsMbFit', mbType === 'image');
+        show('dsMbFont', isTxt); show('dsMbWeight', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbOutline', isTxt); show('dsMbAlign', isTxt); show('dsMbFit', mbType === 'image'); show('dsMbShadow', mbType === 'image');
+        const msh = document.getElementById('dsMbShadow'); if (msh) msh.style.background = (mbType === 'image' && mbEl.shadow) ? '#6a6aff' : 'var(--bg-input)';
         const mob = document.getElementById('dsMbOutline'); if (mob) { mob.style.background = (isTxt && mbEl.outline) ? '#6a6aff' : 'var(--bg-input)'; }
         const f = document.getElementById('dsMbFont'); if (f && isTxt) f.value = mbEl.font || 'serif';
         const wsel = document.getElementById('dsMbWeight'); if (wsel && isTxt) wsel.value = String(mbEl.weight || (mbEl.bold ? 700 : 400));
@@ -8947,6 +8940,7 @@ function _dsSyncToolbar() {
         : 'Image \u2014 drag to move, corner to resize';
     const setEnabled = (id, on) => { const e = document.getElementById(id); if (e) { e.style.opacity = on ? '1' : '0.35'; e.style.pointerEvents = on ? 'auto' : 'none'; } };
     setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText); setEnabled('dsAnnWeight', isText); setEnabled('dsAnnOutline', isText);
+    setEnabled('dsAnnFront', selected); setEnabled('dsAnnBack', selected);
     const ao = document.getElementById('dsAnnOutline'); if (ao) ao.style.background = (isText && a.outline) ? '#6a6aff' : 'var(--bg-input)';
     const wA = document.getElementById('dsAnnWeight'); if (wA && isText) wA.value = String(a.weight || (a.bold ? 700 : 400));
     setEnabled('dsAnnColor', isText || isArrow || isShape);
@@ -9235,6 +9229,30 @@ function _dsAlignMenuOutside(e) { const m = document.getElementById('dsAlignMenu
 function _dsCloseAlignMenu() { const m = document.getElementById('dsAlignMenu'); if (m) m.remove(); document.removeEventListener('mousedown', _dsAlignMenuOutside); }
 function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; if (a.type === 'shape' && prop === 'color') { a.fill = val; a.dataUrl = null; } else { a[prop] = val; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnSetWeight(v) { const a = _dsCurrentAnnot(); if (!a) return; a.weight = parseInt(v, 10) || 400; a.bold = a.weight >= 600; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnHandles(box, a, w, hh) {
+    const dirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
+    const pos = { nw: 'left:-6px;top:-6px;cursor:nwse-resize;', n: 'left:calc(50% - 6px);top:-6px;cursor:ns-resize;', ne: 'right:-6px;top:-6px;cursor:nesw-resize;', e: 'right:-6px;top:calc(50% - 6px);cursor:ew-resize;', se: 'right:-6px;bottom:-6px;cursor:nwse-resize;', s: 'left:calc(50% - 6px);bottom:-6px;cursor:ns-resize;', sw: 'left:-6px;bottom:-6px;cursor:nesw-resize;', w: 'left:-6px;top:calc(50% - 6px);cursor:ew-resize;' };
+    dirs.forEach(d => {
+        const h = document.createElement('div');
+        h.style.cssText = 'position:absolute; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; z-index:22; ' + pos[d];
+        h.onmousedown = (e) => {
+            e.preventDefault(); e.stopPropagation();
+            const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0, ow = a.w || 0.25, oh = a.h || 0.18;
+            const mv = (ev) => {
+                const dx = (ev.clientX - sx) / w, dy = (ev.clientY - sy) / hh; let x = ox, y = oy, ww = ow, hgt = oh;
+                if (d.indexOf('e') >= 0) ww = ow + dx; if (d.indexOf('w') >= 0) { ww = ow - dx; x = ox + dx; }
+                if (d.indexOf('s') >= 0) hgt = oh + dy; if (d.indexOf('n') >= 0) { hgt = oh - dy; y = oy + dy; }
+                if (ev.shiftKey && d.length === 2 && ow && oh) { const k = Math.max(ww / ow, hgt / oh); ww = ow * k; hgt = oh * k; if (d.indexOf('w') >= 0) x = ox + (ow - ww); if (d.indexOf('n') >= 0) y = oy + (oh - hgt); }
+                a.w = Math.max(0.03, ww); a.h = Math.max(0.03, hgt); a.x = x; a.y = y; _dsRenderCenter();
+            };
+            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+        };
+        box.appendChild(h);
+    });
+}
+function _dsAnnToFront() { const a = _dsCurrentAnnot(); if (!a) return; const list = (editorialContent.annotations || {})[_dsSelKey]; if (!list) return; const i = _dsSelIdx; if (i < 0 || i >= list.length) return; list.splice(i, 1); list.push(a); _dsSelIdx = list.length - 1; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnToBack() { const a = _dsCurrentAnnot(); if (!a) return; const list = (editorialContent.annotations || {})[_dsSelKey]; if (!list) return; const i = _dsSelIdx; if (i < 0 || i >= list.length) return; list.splice(i, 1); list.unshift(a); _dsSelIdx = 0; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsDeleteAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return; const l = (editorialContent.annotations || {})[_dsSelKey]; if (l) l.splice(_dsSelIdx, 1); _dsSelKey = null; _dsSelIdx = -1; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
@@ -10939,7 +10957,7 @@ function renderMoodboardCanvas() {
             box.title = 'Double-click to edit text';
             box.ondblclick = (e) => { e.stopPropagation(); _mbBeginTextEdit(box, i); };
         } else {
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:0 1px 6px rgba(0,0,0,0.35);' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:' + (t.shadow ? '0 9px 24px rgba(0,0,0,0.42)' : '0 1px 6px rgba(0,0,0,0.18)') + ';' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
             const boxW = t.w * cr.width, boxH = (t.h || 0.2) * cr.height;
             box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed #6a6aff'; };
             box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : ''; };
@@ -10981,10 +10999,7 @@ function renderMoodboardCanvas() {
             }
         }
         if (sel) {
-            const h = document.createElement('div');
-            h.style.cssText = 'position:absolute; right:-7px; bottom:-7px; width:14px; height:14px; background:#6a6aff; border:2px solid #fff; border-radius:3px; cursor:nwse-resize; z-index:20;';
-            h.onmousedown = (e) => _mbResizeDown(e, i);
-            box.appendChild(h);
+            _mbHandles(box, i, ty);
         }
         box.onmousedown = (e) => _mbTileDown(e, i);
         canvas.appendChild(box);
@@ -11148,6 +11163,7 @@ function _mbSelEl() { return (_mbSelected >= 0) ? _mbEls()[_mbSelected] : null; 
 function _mbSetFont(v) { const el = _mbSelEl(); if (el) { el.font = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetWeight(v) { const el = _mbSelEl(); if (el) { el.weight = parseInt(v, 10) || 400; el.bold = el.weight >= 600; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbToggleOutline() { const el = _mbSelEl(); if (el) { el.outline = !el.outline; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); } }
+function _mbToggleShadow() { const el = _mbSelEl(); if (el) { el.shadow = !el.shadow; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); } }
 function _mbNudgeSize(d) { const el = _mbSelEl(); if (el) { const f = d > 0 ? 1.08 : 1 / 1.08; el.size = Math.max(0.012, Math.min(0.42, (el.size || 0.045) * f)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetTextColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetArrowColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
@@ -11220,9 +11236,33 @@ function _mbResizeDown(e, i) {
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
-    _mbDrag = { mode: 'resize', i, startX: e.clientX, startY: e.clientY, r, ow: t.w, oh: t.h, os: t.size };
+    _mbDrag = { mode: 'resize', i, dir: 'se', startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ow: t.w, oh: t.h, os: t.size };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
+}
+function _mbHandleDown(e, i, dir) {
+    e.preventDefault(); e.stopPropagation();
+    const canvas = _mbCanvas(); const r = canvas ? canvas.getBoundingClientRect() : null; if (!r) return;
+    const t = _mbEls()[i];
+    _mbDrag = { mode: 'resize', i, dir: dir, startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ow: t.w, oh: t.h, os: t.size };
+    document.addEventListener('mousemove', _mbMove); document.addEventListener('mouseup', _mbUp);
+}
+// Eight resize handles (corners + edges) around a selected element. Text only
+// gets the left/right width handles; images/shapes get all eight.
+function _mbHandles(box, i, ty) {
+    const dirs = (ty === 'text') ? ['w', 'e'] : ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
+    const pos = {
+        nw: 'left:-6px;top:-6px;cursor:nwse-resize;', n: 'left:calc(50% - 6px);top:-6px;cursor:ns-resize;',
+        ne: 'right:-6px;top:-6px;cursor:nesw-resize;', e: 'right:-6px;top:calc(50% - 6px);cursor:ew-resize;',
+        se: 'right:-6px;bottom:-6px;cursor:nwse-resize;', s: 'left:calc(50% - 6px);bottom:-6px;cursor:ns-resize;',
+        sw: 'left:-6px;bottom:-6px;cursor:nesw-resize;', w: 'left:-6px;top:calc(50% - 6px);cursor:ew-resize;'
+    };
+    dirs.forEach(d => {
+        const h = document.createElement('div');
+        h.style.cssText = 'position:absolute; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; z-index:22; ' + pos[d];
+        h.onmousedown = (e) => _mbHandleDown(e, i, d);
+        box.appendChild(h);
+    });
 }
 function _mbImgPanDown(e, i) {
     e.preventDefault(); e.stopPropagation();
@@ -11279,8 +11319,19 @@ function _mbMove(e) {
         }
         t.pts[_mbDrag.k].x = nx; t.pts[_mbDrag.k].y = ny;
     } else if (_mbDrag.mode === 'resize') {
-        t.w = Math.max(0.06, Math.min(1.2, (_mbDrag.ow || 0.28) + dx));   // box / image width
-        if (ty === 'image') t.h = Math.max(0.04, Math.min(1.2, (_mbDrag.oh || 0.2) + dy));   // box height (crop frame)
+        const dir = _mbDrag.dir || 'se';
+        if (ty === 'text') {
+            if (dir.indexOf('e') >= 0) t.w = Math.max(0.04, (_mbDrag.ow || 0.3) + dx);
+            if (dir.indexOf('w') >= 0) { t.w = Math.max(0.04, (_mbDrag.ow || 0.3) - dx); t.x = _mbDrag.ox + dx; }
+        } else {
+            let x = _mbDrag.ox, y = _mbDrag.oy, w = (_mbDrag.ow || 0.28), h = (_mbDrag.oh || 0.2);
+            if (dir.indexOf('e') >= 0) w = (_mbDrag.ow || 0.28) + dx;
+            if (dir.indexOf('w') >= 0) { w = (_mbDrag.ow || 0.28) - dx; x = _mbDrag.ox + dx; }
+            if (dir.indexOf('s') >= 0) h = (_mbDrag.oh || 0.2) + dy;
+            if (dir.indexOf('n') >= 0) { h = (_mbDrag.oh || 0.2) - dy; y = _mbDrag.oy + dy; }
+            if (e.shiftKey && _mbDrag.ow && _mbDrag.oh && dir.length === 2) { const k = Math.max(w / _mbDrag.ow, h / _mbDrag.oh); w = _mbDrag.ow * k; h = _mbDrag.oh * k; if (dir.indexOf('w') >= 0) x = _mbDrag.ox + (_mbDrag.ow - w); if (dir.indexOf('n') >= 0) y = _mbDrag.oy + (_mbDrag.oh - h); }
+            t.w = Math.max(0.03, w); t.h = Math.max(0.03, h); t.x = x; t.y = y;
+        }
     } else if (_mbDrag.mode === 'imgPan') {
         const boxW = t.w * r.width, boxH = (t.h || 0.2) * r.height;
         const cv = _coverRect(boxW, boxH, t.aspect || 1.33, t.zoom || 1, 0, 0);
