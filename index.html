@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FRAME - Integrated Workspace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Favicon: served from the repo root alongside index.html. PNG works in
          all modern browsers; apple-touch-icon covers iOS home-screen
          bookmarks. Same file used for both since we only have one image. -->
@@ -1161,6 +1164,7 @@
                 <button id="dsBuildBtn" onclick="_dsBuildPage()" class="action-btn btn-secondary" title="Preview — render an exact preview of how this page exports (auto-refreshes after edits)" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
                 <span style="width:1px; height:20px; background:var(--border-color); margin:0 2px;"></span>
                 <span id="dsSelGroup" style="display:inline-flex; align-items:center; gap:6px; opacity:0.4; pointer-events:none;">
+                    <select id="dsAnnWeight" onchange="_dsAnnSetWeight(this.value)" title="Weight" style="height:30px; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">SemiBold</option><option value="700">Bold</option></select>
                     <button id="dsAnnBold" onclick="_dsAnnToggle('bold')" title="Bold" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; font-weight:800; font-size:0.8rem; display:inline-flex; align-items:center; justify-content:center;">B</button>
                     <button id="dsAnnItalic" onclick="_dsAnnToggle('italic')" title="Italic" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; font-style:italic; font-size:0.8rem; display:inline-flex; align-items:center; justify-content:center;">I</button>
                     <button id="dsAnnAlignBtn" onclick="_dsAnnCycleAlign()" title="Align (cycle)" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; font-size:0.7rem; display:inline-flex; align-items:center; justify-content:center;">L</button>
@@ -1175,6 +1179,7 @@
                 </span>
                 <span id="dsMbGroup" style="display:none; align-items:center; gap:6px;">
                     <select id="dsMbFont" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;"><option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option></select>
+                    <select id="dsMbWeight" onchange="_mbSetWeight(this.value)" title="Weight" style="height:30px; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">SemiBold</option><option value="700">Bold</option></select>
                     <span id="dsMbSizeWrap" style="display:inline-flex; align-items:center; gap:2px;">
                         <button onclick="_mbNudgeSize(-0.005)" title="Smaller" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; font-size:0.8rem; display:inline-flex; align-items:center; justify-content:center;">A−</button>
                         <span id="dsMbSizeLbl" style="font-size:0.7rem; color:var(--text-muted); min-width:22px; text-align:center;">—</span>
