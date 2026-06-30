@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '5.0';
+const APP_VERSION = '5.1';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -8656,7 +8656,7 @@ function _dsRenderRail() {
         const cell = document.createElement('div');
         cell.setAttribute('data-railcell', '1');
         cell.setAttribute('data-railtext', matchText);
-        cell.style.cssText = 'position:relative; margin:0 9px 4px 0; cursor:pointer;';
+        cell.style.cssText = 'position:relative; margin-bottom:4px; cursor:pointer;';
         cell.onclick = () => _dsSelectPage(i);
         const thumb = document.createElement('div');
         thumb.style.cssText = 'position:relative; width:' + tw + 'px; height:' + th + 'px; background:#fff; border-radius:4px; overflow:hidden; border:2px solid ' + (i === _dsIndex ? '#6a6aff' : 'var(--border-color)') + ';';
@@ -8667,14 +8667,14 @@ function _dsRenderRail() {
         const _dupable = (desc.kind === 'layout') || (desc.kind === 'fixed' && desc.page && Array.isArray(desc.page.elements) && desc.page.elements.length);
         const _qaBtn = (sym, topCss, title, fn) => {
             const b = document.createElement('button'); b.textContent = sym; b.title = title;
-            b.style.cssText = 'position:absolute; right:-7px; ' + topCss + ' width:16px; height:16px; border-radius:50%; border:1px solid #cfcfd6; background:#fff; color:#9a9aa2; font-size:' + (sym === '+' ? '12px' : '10px') + '; line-height:1; padding:0; cursor:pointer; z-index:7; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 2px rgba(0,0,0,0.18); transition:all .12s;';
-            b.onmouseenter = () => { b.style.background = '#6a6aff'; b.style.color = '#fff'; b.style.borderColor = '#6a6aff'; };
-            b.onmouseleave = () => { b.style.background = '#fff'; b.style.color = '#9a9aa2'; b.style.borderColor = '#cfcfd6'; };
+            b.style.cssText = 'position:absolute; right:2px; ' + topCss + ' width:15px; height:15px; border:none; background:transparent; color:#cfd3da; font-size:' + (sym === '+' ? '16px' : '12px') + '; font-weight:600; line-height:1; padding:0; cursor:pointer; z-index:7; display:flex; align-items:center; justify-content:center; text-shadow:0 1px 2px rgba(0,0,0,0.6); transition:color .12s;';
+            b.onmouseenter = () => { b.style.color = '#6a6aff'; };
+            b.onmouseleave = () => { b.style.color = '#cfd3da'; };
             b.onclick = (e) => { e.stopPropagation(); fn(); };
             return b;
         };
-        if (_removable) cell.appendChild(_qaBtn('\u2715', 'top:-7px;', 'Remove this page', () => _dsRemovePageQuick(desc)));
-        if (_dupable) cell.appendChild(_qaBtn('+', 'top:' + (th - 9) + 'px;', 'Duplicate this page', () => _dsDuplicatePageQuick(desc)));
+        if (_removable) cell.appendChild(_qaBtn('\u2715', 'top:2px;', 'Remove this page', () => _dsRemovePageQuick(desc)));
+        if (_dupable) cell.appendChild(_qaBtn('+', 'top:' + (th - 17) + 'px;', 'Duplicate this page', () => _dsDuplicatePageQuick(desc)));
         const lab = document.createElement('div');
         lab.style.cssText = 'display:flex; align-items:center; gap:4px; font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px;';
         if (desc.kind === 'spec' && !desc._install) {
@@ -8749,7 +8749,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
     const key = _deckPageKey(desc); if (!key) return;
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     list.forEach((a, i) => {
-        const sel = (key === _dsSelKey && i === _dsSelIdx);
+        const sel = (key === _dsSelKey && i === _dsSelIdx) || (_mbSelAnn && _mbSelAnn.indexOf(i) >= 0);
         if (a.type === 'mockup') {
             const entry = _mockupGet(a.pieceId);
             const aspect = (entry && entry.aspect) || a.aspect || 1.2;
@@ -8944,7 +8944,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         page.appendChild(el);
     });
 }
-function _dsSelectAnnot(key, idx) { _dsSelKey = key; _dsSelIdx = idx; _dsSyncToolbar(); _dsRenderCenter(); }
+function _dsSelectAnnot(key, idx) { if (typeof _mbSel !== 'undefined') { _mbSel = []; _mbSelAnn = []; _mbSelected = -1; } _dsSelKey = key; _dsSelIdx = idx; _dsSyncToolbar(); _dsRenderCenter(); }
 function _dsSyncToolbar() {
     const editable = !!(typeof _dsCurrentEditablePage === 'function' && _dsCurrentEditablePage());
     const art = document.getElementById('dsAddArtwork'); if (art) art.style.display = editable ? 'inline-flex' : 'none';
@@ -8952,17 +8952,21 @@ function _dsSyncToolbar() {
     const mbEl = (editable && typeof _mbSelEl === 'function' && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) ? _mbSelEl() : null;
     const mbType = mbEl ? _elType(mbEl) : null;
     const mbGrp = document.getElementById('dsMbGroup');
-    if (mbGrp) mbGrp.style.display = mbEl ? 'inline-flex' : 'none';
+    const _anyMulti = (((_mbSel && _mbSel.length) || 0) + ((_mbSelAnn && _mbSelAnn.length) || 0));
+    if (mbGrp) mbGrp.style.display = (mbEl || _anyMulti >= 1) ? 'inline-flex' : 'none';
     if (mbEl) {
         const isTxt = mbType === 'text';
         const show = (id, on) => { const e = document.getElementById(id); if (e) e.style.display = on ? (id === 'dsMbSizeWrap' ? 'inline-flex' : 'inline-block') : 'none'; };
-        show('dsMbFont', isTxt); show('dsMbWeight', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbOutline', isTxt); show('dsMbAlign', isTxt); show('dsMbFit', mbType === 'image'); show('dsMbShadow', mbType === 'image'); show('dsMbArrange', !!(_mbSel && _mbSel.length >= 1));
+        show('dsMbFont', isTxt); show('dsMbWeight', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbOutline', isTxt); show('dsMbAlign', isTxt); show('dsMbFit', mbType === 'image'); show('dsMbShadow', mbType === 'image'); show('dsMbArrange', _anyMulti >= 1 || !!mbEl);
         const msh = document.getElementById('dsMbShadow'); if (msh) msh.style.background = (mbType === 'image' && mbEl.shadow) ? '#6a6aff' : 'var(--bg-input)';
         const mob = document.getElementById('dsMbOutline'); if (mob) { mob.style.background = (isTxt && mbEl.outline) ? '#6a6aff' : 'var(--bg-input)'; }
         const f = document.getElementById('dsMbFont'); if (f && isTxt) f.value = mbEl.font || 'serif';
         const wsel = document.getElementById('dsMbWeight'); if (wsel && isTxt) wsel.value = String(mbEl.weight || (mbEl.bold ? 700 : 400));
         const sl = document.getElementById('dsMbSizeLbl'); if (sl) sl.textContent = isTxt ? Math.round((mbEl.size || 0.045) * 1000) : '\u2014';
         const c = document.getElementById('dsMbColor'); if (c && isTxt) c.value = mbEl.color || '#222222';
+    } else if (_anyMulti >= 1) {
+        ['dsMbFont', 'dsMbWeight', 'dsMbSizeWrap', 'dsMbColor', 'dsMbOutline', 'dsMbAlign', 'dsMbFit', 'dsMbShadow'].forEach(id => { const e = document.getElementById(id); if (e) e.style.display = 'none'; });
+        const ar = document.getElementById('dsMbArrange'); if (ar) ar.style.display = 'inline-block';
     }
     const a = mbEl ? null : _dsCurrentAnnot();
     const selected = !!a;
@@ -10621,11 +10625,13 @@ function _downscaleImageFile(file, maxDim, quality, cb) {
 // Each tile: { img, caption, aspect, x, y, w, z } — x/y/w normalized to the
 // page, z = stacking order. Editor is a page-aspect canvas (WYSIWYG-ish).
 let _mbSelected = -1;
-let _mbSel = [];            // multi-selection: array of element indices (includes primary)
+let _mbSel = [];            // multi-selection: moodboard element indices
+let _mbSelAnn = [];         // multi-selection: annotation indices on the current page
 let _mbMarquee = null;      // marquee drag state
-function _mbDeselectAll() { _mbSel = []; _mbSelected = -1; }
-function _mbSelectOnly(i) { _mbSel = (i >= 0 ? [i] : []); _mbSelected = i; }
+function _mbDeselectAll() { _mbSel = []; _mbSelAnn = []; _mbSelected = -1; }
+function _mbSelectOnly(i) { _mbSel = (i >= 0 ? [i] : []); _mbSelAnn = []; _mbSelected = i; }
 function _mbToggleInSel(i) { const k = _mbSel.indexOf(i); if (k >= 0) { _mbSel.splice(k, 1); _mbSelected = _mbSel.length ? _mbSel[_mbSel.length - 1] : -1; } else { _mbSel.push(i); _mbSelected = i; } }
+function _mbCurAnnList() { if (_mbActiveCanvasId !== 'dsLayoutCanvas') return null; try { const d = _dsPages[_dsIndex]; const key = d ? _deckPageKey(d) : null; if (!key) return null; const list = (editorialContent.annotations || {})[key]; return list ? { key, list } : { key, list: [] }; } catch (e) { return null; } }
 function _mbElBox(t) {
     const ty = _elType(t);
     if (ty === 'arrow') return { x: Math.min(t.x1, t.x2), y: Math.min(t.y1, t.y2), w: Math.abs(t.x2 - t.x1), h: Math.abs(t.y2 - t.y1) };
@@ -10633,33 +10639,49 @@ function _mbElBox(t) {
     const h = (typeof t.h === 'number') ? t.h : (ty === 'text' ? (t.size || 0.05) * 1.3 : (t.w * (936 / 540) / (t.aspect || 1.33)));
     return { x: t.x || 0, y: t.y || 0, w: t.w || 0.2, h: h || 0.1 };
 }
+function _mbAnnBox(a) {
+    if (a.type === 'arrow') return { x: Math.min(a.x1, a.x2), y: Math.min(a.y1, a.y2), w: Math.abs(a.x2 - a.x1), h: Math.abs(a.y2 - a.y1) };
+    if (a.type === 'elbow') { const xs = (a.pts || []).map(p => p.x), ys = (a.pts || []).map(p => p.y); const mnx = Math.min.apply(null, xs), mny = Math.min.apply(null, ys); return { x: mnx, y: mny, w: Math.max.apply(null, xs) - mnx, h: Math.max.apply(null, ys) - mny }; }
+    if (a.type === 'mockup') return { x: a.x || 0, y: a.y || 0, w: a.w || 0.3, h: (a.w || 0.3) * (a.aspect || 1.2) };
+    if (a.type === 'text') return { x: a.x || 0, y: a.y || 0, w: a.w || 0.3, h: (a.size || 0.03) * 1.3 };
+    return { x: a.x || 0, y: a.y || 0, w: a.w || 0.25, h: a.h || 0.18 };
+}
 function _mbSetBoxPos(el, nx, ny, b) { const ty = _elType(el); const dx = nx - b.x, dy = ny - b.y; if (ty === 'arrow') { el.x1 += dx; el.y1 += dy; el.x2 += dx; el.y2 += dy; } else if (ty === 'elbow') { (el.pts || []).forEach(p => { p.x += dx; p.y += dy; }); } else { el.x = nx; el.y = ny; } }
+function _mbSetAnnPos(a, nx, ny, b) { const dx = nx - b.x, dy = ny - b.y; if (a.type === 'arrow') { a.x1 += dx; a.y1 += dy; a.x2 += dx; a.y2 += dy; } else if (a.type === 'elbow') { (a.pts || []).forEach(p => { p.x += dx; p.y += dy; }); } else { a.x = nx; a.y = ny; } }
+// Unified selection across both layers — moodboard elements and annotations.
+function _mbSelItems() {
+    const items = []; const els = _mbEls() || [];
+    (_mbSel || []).forEach(k => { if (k >= 0 && k < els.length) items.push({ kind: 'mb', ref: els[k], box: _mbElBox(els[k]) }); });
+    const ann = _mbCurAnnList();
+    if (ann) (_mbSelAnn || []).forEach(k => { if (k >= 0 && k < ann.list.length) items.push({ kind: 'ann', ref: ann.list[k], box: _mbAnnBox(ann.list[k]) }); });
+    return items;
+}
+function _mbSetItemPos(it, nx, ny) { if (it.kind === 'mb') _mbSetBoxPos(it.ref, nx, ny, it.box); else _mbSetAnnPos(it.ref, nx, ny, it.box); }
+function _mbCommitAll() { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); try { renderMoodboardCanvas(); } catch (e) {} try { _dsRenderCenter(); } catch (e) {} }
 function _mbAlign(how, rel) {
-    const els = _mbEls() || []; const sel = _mbSel.filter(k => k >= 0 && k < els.length); if (!sel.length) return;
-    const boxes = sel.map(k => ({ k, b: _mbElBox(els[k]) }));
+    const items = _mbSelItems(); if (!items.length) return;
     let minX, minY, maxX, maxY;
     if (rel === 'page') { minX = 0; minY = 0; maxX = 1; maxY = 1; }
-    else { minX = Math.min.apply(null, boxes.map(o => o.b.x)); minY = Math.min.apply(null, boxes.map(o => o.b.y)); maxX = Math.max.apply(null, boxes.map(o => o.b.x + o.b.w)); maxY = Math.max.apply(null, boxes.map(o => o.b.y + o.b.h)); }
-    boxes.forEach(o => { const el = els[o.k], b = o.b; let nx = b.x, ny = b.y; if (how === 'left') nx = minX; else if (how === 'right') nx = maxX - b.w; else if (how === 'hcenter') nx = (minX + maxX) / 2 - b.w / 2; if (how === 'top') ny = minY; else if (how === 'bottom') ny = maxY - b.h; else if (how === 'vcenter') ny = (minY + maxY) / 2 - b.h / 2; _mbSetBoxPos(el, nx, ny, b); });
-    _mbCommit();
+    else { minX = Math.min.apply(null, items.map(o => o.box.x)); minY = Math.min.apply(null, items.map(o => o.box.y)); maxX = Math.max.apply(null, items.map(o => o.box.x + o.box.w)); maxY = Math.max.apply(null, items.map(o => o.box.y + o.box.h)); }
+    items.forEach(it => { const b = it.box; let nx = b.x, ny = b.y; if (how === 'left') nx = minX; else if (how === 'right') nx = maxX - b.w; else if (how === 'hcenter') nx = (minX + maxX) / 2 - b.w / 2; if (how === 'top') ny = minY; else if (how === 'bottom') ny = maxY - b.h; else if (how === 'vcenter') ny = (minY + maxY) / 2 - b.h / 2; _mbSetItemPos(it, nx, ny); });
+    _mbCommitAll();
 }
 function _mbDistribute(axis) {
-    const els = _mbEls() || []; const sel = _mbSel.filter(k => k >= 0 && k < els.length); if (sel.length < 3) return;
-    const boxes = sel.map(k => ({ k, b: _mbElBox(els[k]) }));
+    const items = _mbSelItems(); if (items.length < 3) return;
     if (axis === 'h') {
-        boxes.sort((a, b) => a.b.x - b.b.x);
-        const left = boxes[0].b.x, right = boxes[boxes.length - 1].b.x + boxes[boxes.length - 1].b.w;
-        const totalW = boxes.reduce((s, o) => s + o.b.w, 0);
-        const gap = (right - left - totalW) / (boxes.length - 1);
-        let cur = left; boxes.forEach(o => { _mbSetBoxPos(els[o.k], cur, o.b.y, o.b); cur += o.b.w + gap; });
+        items.sort((a, b) => a.box.x - b.box.x);
+        const left = items[0].box.x, right = items[items.length - 1].box.x + items[items.length - 1].box.w;
+        const totalW = items.reduce((s, o) => s + o.box.w, 0);
+        const gap = (right - left - totalW) / (items.length - 1);
+        let cur = left; items.forEach(o => { _mbSetItemPos(o, cur, o.box.y); cur += o.box.w + gap; });
     } else {
-        boxes.sort((a, b) => a.b.y - b.b.y);
-        const top = boxes[0].b.y, bot = boxes[boxes.length - 1].b.y + boxes[boxes.length - 1].b.h;
-        const totalH = boxes.reduce((s, o) => s + o.b.h, 0);
-        const gap = (bot - top - totalH) / (boxes.length - 1);
-        let cur = top; boxes.forEach(o => { _mbSetBoxPos(els[o.k], o.b.x, cur, o.b); cur += o.b.h + gap; });
+        items.sort((a, b) => a.box.y - b.box.y);
+        const top = items[0].box.y, bot = items[items.length - 1].box.y + items[items.length - 1].box.h;
+        const totalH = items.reduce((s, o) => s + o.box.h, 0);
+        const gap = (bot - top - totalH) / (items.length - 1);
+        let cur = top; items.forEach(o => { _mbSetItemPos(o, o.box.x, cur); cur += o.box.h + gap; });
     }
-    _mbCommit();
+    _mbCommitAll();
 }
 let _mbDrag = null;   // { mode, i, startX, startY, ox, oy, ow, r, el }
 
@@ -11307,7 +11329,7 @@ function _mbAlignMenuOutside(e) { const m = document.getElementById('_mbAlignMen
 function _mbOpenAlignMenu() {
     _mbCloseAlignMenu();
     const btn = document.getElementById('dsMbArrange'); if (!btn) return;
-    const n = (_mbSel || []).length;
+    const n = ((_mbSel || []).length) + ((_mbSelAnn || []).length);
     const menu = document.createElement('div'); menu.id = '_mbAlignMenu';
     menu.style.cssText = 'position:fixed; z-index:100001; background:var(--bg-panel,#2a2a30); border:1px solid var(--border-color,#444); border-radius:8px; padding:10px; box-shadow:0 8px 28px rgba(0,0,0,0.5); width:230px; font-size:0.7rem; color:var(--text-main,#eee);';
     const mkRow = (label) => { const d = document.createElement('div'); d.textContent = label; d.style.cssText = 'font-size:0.6rem; color:var(--text-muted,#999); margin:6px 0 4px;'; return d; };
@@ -11335,7 +11357,7 @@ function _mbOpenAlignMenu() {
         { icon: I('<rect x="3" y="8" width="3" height="8"/><rect x="10.5" y="8" width="3" height="8"/><rect x="18" y="8" width="3" height="8"/>'), title: 'Horizontally', fn: () => _mbDistribute('h') },
         { icon: I('<rect x="8" y="3" width="8" height="3"/><rect x="8" y="10.5" width="8" height="3"/><rect x="8" y="18" width="8" height="3"/>'), title: 'Vertically', fn: () => _mbDistribute('v') }
     ])); }
-    const hint = document.createElement('div'); hint.style.cssText = 'font-size:0.56rem; color:var(--text-muted,#888); margin-top:8px; line-height:1.4;'; hint.textContent = n < 2 ? 'Tip: shift-click or drag a box to select several, then align them to each other.' : (_mbSel.length + ' selected');
+    const hint = document.createElement('div'); hint.style.cssText = 'font-size:0.56rem; color:var(--text-muted,#888); margin-top:8px; line-height:1.4;'; hint.textContent = n < 2 ? 'Tip: shift-click or drag a box to select several (images, text, and shapes), then align them to each other.' : (n + ' selected');
     menu.appendChild(hint);
     document.body.appendChild(menu);
     const rb = btn.getBoundingClientRect(); let left = rb.left, top = rb.bottom + 6;
@@ -11405,8 +11427,11 @@ function _mbTileDown(e, i) {
     const r = canvas ? canvas.getBoundingClientRect() : null;
     if (!r) return;
     const t = _mbEls()[i];
-    const group = (_mbSel.length > 1) ? _mbSel.map(k => { const el = _mbEls()[k]; return { el, ox: el.x, oy: el.y, ox1: el.x1, oy1: el.y1, ox2: el.x2, oy2: el.y2, opts: Array.isArray(el.pts) ? el.pts.map(p => ({ x: p.x, y: p.y })) : null }; }) : null;
-    _mbDrag = { mode: 'move', i, startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ox1: t.x1, oy1: t.y1, ox2: t.x2, oy2: t.y2, opts: Array.isArray(t.pts) ? t.pts.map(p => ({ x: p.x, y: p.y })) : null, group };
+    const _total = _mbSel.length + ((_mbSelAnn && _mbSelAnn.length) || 0);
+    const _annL = _mbCurAnnList();
+    const group = (_total > 1) ? _mbSel.map(k => { const el = _mbEls()[k]; return { el, ox: el.x, oy: el.y, ox1: el.x1, oy1: el.y1, ox2: el.x2, oy2: el.y2, opts: Array.isArray(el.pts) ? el.pts.map(p => ({ x: p.x, y: p.y })) : null }; }) : null;
+    const groupAnn = (_total > 1 && _mbSelAnn && _mbSelAnn.length && _annL) ? _mbSelAnn.map(k => { const a = _annL.list[k]; return { a, ox: a.x, oy: a.y, ox1: a.x1, oy1: a.y1, ox2: a.x2, oy2: a.y2, opts: Array.isArray(a.pts) ? a.pts.map(p => ({ x: p.x, y: p.y })) : null }; }) : null;
+    _mbDrag = { mode: 'move', i, startX: e.clientX, startY: e.clientY, r, ox: t.x, oy: t.y, ox1: t.x1, oy1: t.y1, ox2: t.x2, oy2: t.y2, opts: Array.isArray(t.pts) ? t.pts.map(p => ({ x: p.x, y: p.y })) : null, group, groupAnn };
     document.addEventListener('mousemove', _mbMove);
     document.addEventListener('mouseup', _mbUp);
     renderMoodboardCanvas();
@@ -11495,11 +11520,16 @@ function _mbMarqueeUp(e) {
     const m = _mbMarquee; _mbMarquee = null; if (!m) return; const r = m.r;
     if (!m.moved) { _mbDeselectAll(); renderMoodboardCanvas(); try { _dsSyncToolbar(); } catch (e2) {} return; }
     const fx = (Math.min(e.clientX, m.x0) - r.left) / r.width, fy = (Math.min(e.clientY, m.y0) - r.top) / r.height, fw = Math.abs(e.clientX - m.x0) / r.width, fh = Math.abs(e.clientY - m.y0) / r.height;
-    const els = _mbEls() || []; const hit = [];
-    els.forEach((t, i) => { const b = _mbElBox(t); if (b.x < fx + fw && b.x + b.w > fx && b.y < fy + fh && b.y + b.h > fy) hit.push(i); });
-    if (m.additive) { hit.forEach(i => { if (_mbSel.indexOf(i) < 0) _mbSel.push(i); }); } else { _mbSel = hit; }
+    const hits = (boxOf, n) => { const out = []; for (let i = 0; i < n; i++) { const b = boxOf(i); if (b.x < fx + fw && b.x + b.w > fx && b.y < fy + fh && b.y + b.h > fy) out.push(i); } return out; };
+    const els = _mbEls() || [];
+    const hit = hits(i => _mbElBox(els[i]), els.length);
+    const ann = _mbCurAnnList();
+    const hitA = ann ? hits(i => _mbAnnBox(ann.list[i]), ann.list.length) : [];
+    if (m.additive) { hit.forEach(i => { if (_mbSel.indexOf(i) < 0) _mbSel.push(i); }); hitA.forEach(i => { if (_mbSelAnn.indexOf(i) < 0) _mbSelAnn.push(i); }); }
+    else { _mbSel = hit; _mbSelAnn = hitA; }
     _mbSelected = _mbSel.length ? _mbSel[_mbSel.length - 1] : -1;
-    renderMoodboardCanvas(); try { _dsSyncToolbar(); } catch (e2) {}
+    if (_mbSelAnn.length) { _dsSelKey = null; _dsSelIdx = -1; }
+    renderMoodboardCanvas(); try { _dsRenderCenter(); } catch (e3) {} try { _dsSyncToolbar(); } catch (e2) {}
 }
 function _mbMove(e) {
     if (!_mbDrag) return;
@@ -11509,8 +11539,9 @@ function _mbMove(e) {
     if (_mbDrag.mode === 'move') {
         let mdx = dx, mdy = dy;
         if (e.shiftKey) { if (Math.abs(dx * r.width) >= Math.abs(dy * r.height)) mdy = 0; else mdx = 0; }
-        if (_mbDrag.group && _mbDrag.group.length > 1) {
-            _mbDrag.group.forEach(g => { const el = g.el; const ety = _elType(el); if (ety === 'arrow') { el.x1 = g.ox1 + mdx; el.y1 = g.oy1 + mdy; el.x2 = g.ox2 + mdx; el.y2 = g.oy2 + mdy; } else if (ety === 'elbow' && g.opts) { el.pts.forEach((p, k) => { p.x = g.opts[k].x + mdx; p.y = g.opts[k].y + mdy; }); } else { el.x = g.ox + mdx; el.y = g.oy + mdy; } });
+        if (_mbDrag.group || _mbDrag.groupAnn) {
+            if (_mbDrag.group) _mbDrag.group.forEach(g => { const el = g.el; const ety = _elType(el); if (ety === 'arrow') { el.x1 = g.ox1 + mdx; el.y1 = g.oy1 + mdy; el.x2 = g.ox2 + mdx; el.y2 = g.oy2 + mdy; } else if (ety === 'elbow' && g.opts) { el.pts.forEach((p, k) => { p.x = g.opts[k].x + mdx; p.y = g.opts[k].y + mdy; }); } else { el.x = g.ox + mdx; el.y = g.oy + mdy; } });
+            if (_mbDrag.groupAnn) _mbDrag.groupAnn.forEach(g => { const a = g.a; if (a.type === 'arrow') { a.x1 = g.ox1 + mdx; a.y1 = g.oy1 + mdy; a.x2 = g.ox2 + mdx; a.y2 = g.oy2 + mdy; } else if (a.type === 'elbow' && g.opts) { a.pts.forEach((p, k) => { p.x = g.opts[k].x + mdx; p.y = g.opts[k].y + mdy; }); } else { a.x = g.ox + mdx; a.y = g.oy + mdy; } });
         } else if (ty === 'arrow') {
             t.x1 = _mbDrag.ox1 + mdx; t.y1 = _mbDrag.oy1 + mdy; t.x2 = _mbDrag.ox2 + mdx; t.y2 = _mbDrag.oy2 + mdy;
         } else if (ty === 'elbow' && _mbDrag.opts) {
@@ -11568,10 +11599,12 @@ function _mbMove(e) {
 function _mbUp() {
     document.removeEventListener('mousemove', _mbMove);
     document.removeEventListener('mouseup', _mbUp);
+    const movedAnn = !!(_mbDrag && _mbDrag.groupAnn);
     _mbDrag = null;
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     renderMoodboardCanvas();
+    if (movedAnn) { try { _dsRenderCenter(); } catch (e) {} }
 }
 
 function _mbCommit() {
@@ -12867,7 +12900,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     }
     {
         const _emitted = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) _emitted[_pageKeys[p]] = 1; }
-        for (const pg of (editorialContent.layoutPages || [])) { if (pg.afterKey && pg.afterKey !== '__start__' && !_emitted[pg.afterKey]) { await drawLayoutPage(pg); await emitAfterKey('layout:' + pg.id); } }
+        for (const pg of (editorialContent.layoutPages || [])) { if (!_emitted['layout:' + pg.id]) { await drawLayoutPage(pg); await emitAfterKey('layout:' + pg.id); } }
     }
     for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } if (_a && _a.type === 'shape' && _a.dataUrl) { try { await _ensureShapeImage(_a, (_a.w || 0.25) * PW, (_a.h || 0.18) * PH); } catch (e) {} } } }
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
