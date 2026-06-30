@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '5.1';
+const APP_VERSION = '5.2';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -8948,6 +8948,7 @@ function _dsSelectAnnot(key, idx) { if (typeof _mbSel !== 'undefined') { _mbSel 
 function _dsSyncToolbar() {
     const editable = !!(typeof _dsCurrentEditablePage === 'function' && _dsCurrentEditablePage());
     const art = document.getElementById('dsAddArtwork'); if (art) art.style.display = editable ? 'inline-flex' : 'none';
+    const gb = document.getElementById('dsMbGuides'); if (gb) gb.style.display = editable ? 'inline-flex' : 'none';
     // Moodboard element selection takes precedence over annotations when on a layout/fixed page.
     const mbEl = (editable && typeof _mbSelEl === 'function' && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) ? _mbSelEl() : null;
     const mbType = mbEl ? _elType(mbEl) : null;
@@ -11061,6 +11062,139 @@ function _cropToCanvas(img, boxWpt, boxHpt, aspect, zoom, panX, panY, fit) {
     return c;
 }
 
+// ── Layout guides & snapping ───────────────────────────────────────────────
+// Guide sets are reusable, named collections of column/margin/row guides plus
+// freeform lines — like templates for layout scaffolding. Seeded from the
+// Farmboy InDesign template (1920×1080: 12 cols, 18pt gutter, T54/B108/L45/R45).
+const GUIDE_SEED = [
+    { id: 'g_idml12', name: 'Farmboy \u00b7 12-Column', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 12, gutter: 0.009375, rows: 0, rowGutter: 0, vlines: [], hlines: [] },
+    { id: 'g_idml6', name: 'Farmboy \u00b7 6-Column', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 6, gutter: 0.009375, rows: 0, rowGutter: 0, vlines: [], hlines: [] },
+    { id: 'g_margins', name: 'Margins only', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 1, gutter: 0, rows: 0, rowGutter: 0, vlines: [], hlines: [] },
+    { id: 'g_thirds', name: 'Rule of Thirds', builtin: true, margin: null, cols: 0, gutter: 0, rows: 0, rowGutter: 0, vlines: [0.3333, 0.6667], hlines: [0.3333, 0.6667] },
+    { id: 'g_center', name: 'Center', builtin: true, margin: null, cols: 0, gutter: 0, rows: 0, rowGutter: 0, vlines: [0.5], hlines: [0.5] }
+];
+function _guideSets() { if (!editorialContent.guideSets || !editorialContent.guideSets.length) editorialContent.guideSets = JSON.parse(JSON.stringify(GUIDE_SEED)); return editorialContent.guideSets; }
+function _guideSetById(id) { return _guideSets().find(s => s.id === id) || null; }
+function _guideLines(set) {
+    const vs = [], hs = []; if (!set) return { vs, hs };
+    if (set.margin) { vs.push(set.margin.l, 1 - set.margin.r); hs.push(set.margin.t, 1 - set.margin.b); }
+    const cl = set.margin ? set.margin.l : 0, cr = set.margin ? 1 - set.margin.r : 1, cw = cr - cl;
+    if (set.cols && set.cols > 1) { const g = set.gutter || 0; const colW = (cw - (set.cols - 1) * g) / set.cols; for (let i = 0; i < set.cols; i++) { const L = cl + i * (colW + g); vs.push(L); vs.push(L + colW); } }
+    const ct = set.margin ? set.margin.t : 0, cb = set.margin ? 1 - set.margin.b : 1, ch = cb - ct;
+    if (set.rows && set.rows > 1) { const g = set.rowGutter || 0; const rH = (ch - (set.rows - 1) * g) / set.rows; for (let i = 0; i < set.rows; i++) { const T = ct + i * (rH + g); hs.push(T); hs.push(T + rH); } }
+    (set.vlines || []).forEach(v => vs.push(v)); (set.hlines || []).forEach(h => hs.push(h));
+    const uniq = (a) => a.filter((v, i) => a.indexOf(v) === i);
+    return { vs: uniq(vs), hs: uniq(hs) };
+}
+function _guidePref() { if (!editorialContent.guidePref) editorialContent.guidePref = { setId: 'g_idml12', show: false, snap: true }; return editorialContent.guidePref; }
+function _pageGuideKey() { try { const d = _dsPages[_dsIndex]; return d ? _deckPageKey(d) : null; } catch (e) { return null; } }
+function _pageGuide() {
+    const def = _guidePref(); const key = _pageGuideKey();
+    const ov = (key && editorialContent.pageGuides) ? editorialContent.pageGuides[key] : null;
+    const setId = (ov && ov.setId !== undefined) ? ov.setId : def.setId;
+    return { setId: setId, show: (ov && typeof ov.show === 'boolean') ? ov.show : def.show, snap: (ov && typeof ov.snap === 'boolean') ? ov.snap : def.snap, set: _guideSetById(setId) };
+}
+function _setPageGuide(patch) { const key = _pageGuideKey(); if (!key) return; editorialContent.pageGuides = editorialContent.pageGuides || {}; editorialContent.pageGuides[key] = Object.assign({}, editorialContent.pageGuides[key] || {}, patch); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+function _mbDrawGuides(canvas, cr) {
+    if (_mbActiveCanvasId !== 'dsLayoutCanvas') return;
+    const G = _pageGuide(); if (!G.show || !G.set) return;
+    const ln = _guideLines(G.set);
+    const mk = (css) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute; z-index:1; pointer-events:none; ' + css; canvas.appendChild(d); };
+    ln.vs.forEach(v => mk('left:' + (v * 100) + '%; top:0; bottom:0; width:1px; background:rgba(0,180,200,0.55);'));
+    ln.hs.forEach(h => mk('top:' + (h * 100) + '%; left:0; right:0; height:1px; background:rgba(0,180,200,0.55);'));
+}
+// Snap a box (fractions) against the current page's guide lines + page edges/center.
+function _mbSnapBox(box, r) {
+    const G = _pageGuide(); if (!G.snap || !G.set) return { dx: 0, dy: 0 };
+    const ln = _guideLines(G.set);
+    const vs = ln.vs.concat([0, 0.5, 1]); const hs = ln.hs.concat([0, 0.5, 1]);
+    const thrX = 7 / (r.width || 900), thrY = 7 / (r.height || 520);
+    const anchorsX = [box.x, box.x + box.w / 2, box.x + box.w];
+    const anchorsY = [box.y, box.y + box.h / 2, box.y + box.h];
+    let bestDX = 0, bdX = thrX; anchorsX.forEach(a => vs.forEach(v => { const d = v - a; if (Math.abs(d) < bdX) { bdX = Math.abs(d); bestDX = d; } }));
+    let bestDY = 0, bdY = thrY; anchorsY.forEach(a => hs.forEach(v => { const d = v - a; if (Math.abs(d) < bdY) { bdY = Math.abs(d); bestDY = d; } }));
+    return { dx: bestDX, dy: bestDY };
+}
+function _mbCloseGuidesMenu() { const m = document.getElementById('_mbGuidesMenu'); if (m) m.remove(); document.removeEventListener('mousedown', _mbGuidesOutside, true); }
+function _mbGuidesOutside(e) { const m = document.getElementById('_mbGuidesMenu'); const b = document.getElementById('dsMbGuides'); if (m && !m.contains(e.target) && e.target !== b) _mbCloseGuidesMenu(); }
+function _mbOpenGuidesMenu() {
+    _mbCloseGuidesMenu(); const btn = document.getElementById('dsMbGuides'); if (!btn) return;
+    const G = _pageGuide();
+    const m = document.createElement('div'); m.id = '_mbGuidesMenu';
+    m.style.cssText = 'position:fixed; z-index:100001; background:var(--bg-panel,#2a2a30); color:var(--text-main,#eee); border:1px solid var(--border-color,#444); border-radius:8px; padding:10px; box-shadow:0 8px 28px rgba(0,0,0,0.5); width:240px; font-size:0.72rem;';
+    const row = (label, checked, fn) => { const l = document.createElement('label'); l.style.cssText = 'display:flex; align-items:center; gap:7px; padding:4px 2px; cursor:pointer;'; const c = document.createElement('input'); c.type = 'checkbox'; c.checked = checked; c.onchange = () => { fn(c.checked); }; l.appendChild(c); l.appendChild(document.createTextNode(label)); return l; };
+    m.appendChild(row('Show guides on this page', G.show, (v) => { _setPageGuide({ show: v }); renderMoodboardCanvas(); }));
+    m.appendChild(row('Snap to guides', G.snap, (v) => { _setPageGuide({ snap: v }); }));
+    const lab = document.createElement('div'); lab.textContent = 'Guide set for this page'; lab.style.cssText = 'font-size:0.6rem; color:var(--text-muted,#999); margin:8px 0 4px;'; m.appendChild(lab);
+    const sel = document.createElement('select'); sel.style.cssText = 'width:100%; height:28px; font-size:0.72rem;';
+    _guideSets().forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = s.name; if (s.id === G.setId) o.selected = true; sel.appendChild(o); });
+    sel.onchange = () => { _setPageGuide({ setId: sel.value, show: true }); renderMoodboardCanvas(); };
+    m.appendChild(sel);
+    const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:0.62rem; margin-top:8px;';
+    deckBtn.onclick = () => { const g = _guidePref(); g.setId = G.setId; g.show = G.show; g.snap = G.snap; if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
+    m.appendChild(deckBtn);
+    const mgr = document.createElement('button'); mgr.textContent = 'Manage guide sets\u2026'; mgr.className = 'action-btn'; mgr.style.cssText = 'width:100%; height:28px; font-size:0.66rem; margin-top:6px;';
+    mgr.onclick = () => { _mbCloseGuidesMenu(); _mbOpenGuideManager(); };
+    m.appendChild(mgr);
+    document.body.appendChild(m);
+    const rb = btn.getBoundingClientRect(); let left = rb.left; if (left + 240 > window.innerWidth - 8) left = window.innerWidth - 248; m.style.left = Math.max(8, left) + 'px'; m.style.top = (rb.bottom + 6) + 'px';
+    setTimeout(() => document.addEventListener('mousedown', _mbGuidesOutside, true), 0);
+}
+function _mbOpenGuideManager() {
+    let m = document.getElementById('_mbGuideMgr'); if (m) m.remove();
+    m = document.createElement('div'); m.id = '_mbGuideMgr';
+    m.style.cssText = 'position:fixed; inset:0; z-index:100003; background:rgba(10,10,12,0.82); display:flex; align-items:center; justify-content:center; padding:24px;';
+    const panel = document.createElement('div'); panel.style.cssText = 'background:var(--bg-panel,#26262c); color:var(--text-main,#eee); border-radius:10px; width:min(560px,94vw); max-height:88vh; overflow:auto; padding:18px; box-shadow:0 16px 50px rgba(0,0,0,0.6);';
+    const h = document.createElement('div'); h.textContent = 'Guide sets'; h.style.cssText = 'font-size:1rem; font-weight:700; margin-bottom:4px;'; panel.appendChild(h);
+    const sub = document.createElement('div'); sub.textContent = 'Reusable layout scaffolds. Pick one per page from the Guides menu.'; sub.style.cssText = 'font-size:0.7rem; color:var(--text-muted,#999); margin-bottom:12px;'; panel.appendChild(sub);
+    const numF = (v) => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+    const editor = (set) => {
+        const box = document.createElement('div'); box.style.cssText = 'border:1px solid var(--border-color,#444); border-radius:8px; padding:12px; margin-bottom:10px;';
+        const field = (label, val, w) => { const wrap = document.createElement('label'); wrap.style.cssText = 'display:inline-flex; flex-direction:column; gap:2px; font-size:0.6rem; color:var(--text-muted,#999); margin:0 8px 6px 0;'; const inp = document.createElement('input'); inp.value = val; inp.style.cssText = 'width:' + (w || 54) + 'px; height:24px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 5px;'; wrap.appendChild(document.createTextNode(label)); wrap.appendChild(inp); box.appendChild(wrap); return inp; };
+        const nameI = field('Name', set.name, 200);
+        const hasM = !!set.margin;
+        const mt = field('Top %', hasM ? (set.margin.t * 100).toFixed(1) : '');
+        const mb = field('Bottom %', hasM ? (set.margin.b * 100).toFixed(1) : '');
+        const ml = field('Left %', hasM ? (set.margin.l * 100).toFixed(1) : '');
+        const mr = field('Right %', hasM ? (set.margin.r * 100).toFixed(1) : '');
+        const colsI = field('Columns', set.cols || 0);
+        const gutI = field('Gutter %', ((set.gutter || 0) * 100).toFixed(2));
+        const rowsI = field('Rows', set.rows || 0);
+        const rgI = field('Row gut %', ((set.rowGutter || 0) * 100).toFixed(2));
+        const vI = field('Vertical lines % (comma)', (set.vlines || []).map(v => (v * 100).toFixed(1)).join(', '), 200);
+        const hI = field('Horizontal lines % (comma)', (set.hlines || []).map(v => (v * 100).toFixed(1)).join(', '), 200);
+        const save = document.createElement('button'); save.textContent = 'Save'; save.className = 'action-btn'; save.style.cssText = 'height:28px; padding:0 16px; font-size:0.7rem; margin-top:4px;';
+        save.onclick = () => {
+            set.name = nameI.value || set.name;
+            const anyM = [mt, mb, ml, mr].some(x => x.value.trim() !== '');
+            set.margin = anyM ? { t: numF(mt.value) / 100, b: numF(mb.value) / 100, l: numF(ml.value) / 100, r: numF(mr.value) / 100 } : null;
+            set.cols = Math.max(0, Math.round(numF(colsI.value))); set.gutter = numF(gutI.value) / 100;
+            set.rows = Math.max(0, Math.round(numF(rowsI.value))); set.rowGutter = numF(rgI.value) / 100;
+            const parse = (s) => s.split(',').map(x => numF(x) / 100).filter(x => x > 0 && x < 1);
+            set.vlines = parse(vI.value); set.hlines = parse(hI.value);
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            renderMoodboardCanvas(); _mbOpenGuideManager();
+        };
+        box.appendChild(document.createElement('br')); box.appendChild(save);
+        return box;
+    };
+    _guideSets().forEach(set => {
+        const head = document.createElement('div'); head.style.cssText = 'display:flex; align-items:center; gap:8px; margin:10px 0 4px;';
+        const nm = document.createElement('div'); nm.textContent = set.name; nm.style.cssText = 'flex:1; font-weight:600; font-size:0.78rem;'; head.appendChild(nm);
+        const dup = document.createElement('button'); dup.textContent = 'Duplicate'; dup.className = 'action-btn btn-secondary'; dup.style.cssText = 'height:24px; font-size:0.6rem; padding:0 8px;'; dup.onclick = () => { const c = JSON.parse(JSON.stringify(set)); c.id = 'g_' + Math.random().toString(36).slice(2, 8); c.name = set.name + ' copy'; c.builtin = false; _guideSets().push(c); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _mbOpenGuideManager(); }; head.appendChild(dup);
+        if (!set.builtin) { const del = document.createElement('button'); del.textContent = 'Delete'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'height:24px; font-size:0.6rem; padding:0 8px; color:#c0392b;'; del.onclick = () => { const i = _guideSets().indexOf(set); if (i >= 0) { _guideSets().splice(i, 1); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _mbOpenGuideManager(); } }; head.appendChild(del); }
+        panel.appendChild(head);
+        if (!set.builtin) panel.appendChild(editor(set));
+        else { const note = document.createElement('div'); note.textContent = 'Built-in \u2014 duplicate to customise.'; note.style.cssText = 'font-size:0.62rem; color:var(--text-muted,#888); margin-bottom:6px;'; panel.appendChild(note); }
+    });
+    const add = document.createElement('button'); add.textContent = '+ New guide set'; add.className = 'action-btn'; add.style.cssText = 'height:30px; font-size:0.72rem; padding:0 14px; margin-top:8px;';
+    add.onclick = () => { _guideSets().push({ id: 'g_' + Math.random().toString(36).slice(2, 8), name: 'Custom guides', builtin: false, margin: { t: 0.05, b: 0.05, l: 0.05, r: 0.05 }, cols: 0, gutter: 0, rows: 0, rowGutter: 0, vlines: [], hlines: [] }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _mbOpenGuideManager(); };
+    panel.appendChild(add);
+    const close = document.createElement('button'); close.textContent = 'Done'; close.className = 'action-btn btn-secondary'; close.style.cssText = 'height:30px; font-size:0.72rem; padding:0 18px; margin:8px 0 0 8px;'; close.onclick = () => m.remove();
+    panel.appendChild(close);
+    m.appendChild(panel); m.onclick = (e) => { if (e.target === m) m.remove(); };
+    document.body.appendChild(m);
+}
 function renderMoodboardCanvas() {
     const canvas = _mbCanvas();
     if (!canvas) return;
@@ -11071,6 +11205,7 @@ function renderMoodboardCanvas() {
     if (_mbSelected < 0 && _mbSel.length <= 1) _mbSel = [];
     const cr = canvas.getBoundingClientRect();
     canvas.innerHTML = '';
+    try { _mbDrawGuides(canvas, cr); } catch (e) {}
     if (_mbPlacing) {
         canvas.style.cursor = 'crosshair';
         canvas.onmousedown = null;
@@ -11549,6 +11684,7 @@ function _mbMove(e) {
         } else {
             t.x = Math.max(-0.1, Math.min(1.05, _mbDrag.ox + mdx));
             t.y = Math.max(-0.1, Math.min(1.05, _mbDrag.oy + mdy));
+            if (!_mbDrag.group && !_mbDrag.groupAnn && !e.altKey) { try { const sn = _mbSnapBox(_mbElBox(t), r); t.x += sn.dx; t.y += sn.dy; } catch (er) {} }
         }
     } else if (_mbDrag.mode === 'elbowAnchor') {
         let nx = _mbDrag.opx + dx, ny = _mbDrag.opy + dy;
