@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '3.9';
+const APP_VERSION = '4.0';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.06,"y":0.64,"w":0.74,"text":"PROJECT TITLE","font":"display","size":0.1,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.8,"w":0.6,"text":"Art Program","font":"serif","size":0.03,"color":"#ffffff","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.05,"w":0.6,"text":"Location \u00b7 Project Code","font":"serif","size":0.02,"color":"#ffffff","align":"left","caps":"upper","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -6982,7 +6982,8 @@ async function _registerPdfFonts(doc) {
 // Resolve a role to a registered family, else Helvetica.
 function _font(role) {
     const fam = role === 'display' ? 'Druk' : (role === 'serif' ? 'Messina' : null);
-    return (fam && _pdfFontFams[fam]) ? fam : 'helvetica';
+    if (fam && _pdfFontFams[fam]) return fam;
+    return role === 'serif' ? 'times' : 'helvetica';
 }
 
 // Footer drawn on every page: page number + project line (left), Farmboy
@@ -7479,7 +7480,8 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
         if (ty === 'text') {
             const fs = Math.max(6, Math.min(60, (t.size || 0.045) * PH));
             const c = _hex(t.color || '#222222');
-            const style = (t.bold && t.italic) ? 'bolditalic' : t.bold ? 'bold' : t.italic ? 'italic' : 'normal';
+            const heavy = t.weight ? t.weight >= 600 : t.bold;
+            const style = (heavy && t.italic) ? 'bolditalic' : heavy ? 'bold' : t.italic ? 'italic' : 'normal';
             try { doc.setFont(_fontRole(t.font), style); } catch (e) { try { doc.setFont(_fontRole(t.font), 'normal'); } catch (e2) {} }
             doc.setFontSize(fs); doc.setTextColor(c[0], c[1], c[2]);
             const al = _pdfAlign(t.align); const boxX = (t.x || 0) * PW, boxW = (t.w || 0.4) * PW;
@@ -8378,12 +8380,23 @@ function _dsApplyStyle(id, silent) {
     if (!t) { if (!silent) showInfoModal('Select a text box', 'Click a text element on the page first, then apply a style to it.'); return false; }
     const el = t.el;
     el.font = st.font; el.size = st.size; el.bold = !!st.bold; el.italic = !!st.italic;
+    el.weight = st.weight || (st.bold ? 700 : 400);
     el.color = st.color; el.align = st.align; el.caps = st.caps || 'none'; el.track = st.track || 0;
     el.styleId = id;
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     if (t.kind === 'mb') { try { renderMoodboardCanvas(); } catch (e) {} }
     _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar();
     return true;
+}
+// Editing a style updates every text box that carries that styleId — across all
+// layout pages, fixed pages, and annotations — so styles behave globally.
+function _dsReapplyStyleEverywhere(id) {
+    const st = _dsTextStyles().find(s => s.id === id); if (!st) return;
+    const apply = (el) => { if (el && el.styleId === id) { el.font = st.font; el.size = st.size; el.bold = !!st.bold; el.italic = !!st.italic; el.weight = st.weight || (st.bold ? 700 : 400); el.color = st.color; el.align = st.align; el.caps = st.caps || 'none'; el.track = st.track || 0; } };
+    (editorialContent.layoutPages || []).forEach(p => (p.elements || []).forEach(apply));
+    ['coverPage', 'narrativePage', 'sloganPage', 'understandingPage', 'strategyPage'].forEach(k => { const p = editorialContent[k]; if (p && p.elements) p.elements.forEach(apply); });
+    const ann = editorialContent.annotations || {}; Object.keys(ann).forEach(k => (ann[k] || []).forEach(apply));
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
 let _dsShuffleState = null;
 function _dsShuffleGroup(group) {
@@ -8407,7 +8420,7 @@ function _dsSaveSelectionAsStyle() {
 }
 function _dsDeleteStyle(id) { if (!confirm('Delete this style? (Text already using it keeps its look.)')) return; editorialContent.textStyles = _dsTextStyles().filter(s => s.id !== id); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
 function _dsDuplicateStyle(id) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; const c = JSON.parse(JSON.stringify(s)); c.id = 'sty_' + Math.random().toString(36).slice(2, 9); c.name = s.name + ' copy'; _dsTextStyles().push(c); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
-function _dsStyleEdit(id, prop, val) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; if (prop === 'size') val = parseFloat(val) / 1000; else if (prop === 'track') val = parseFloat(val) / 1000; else if (prop === 'bold' || prop === 'italic') val = !!val; s[prop] = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
+function _dsStyleEdit(id, prop, val) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; if (prop === 'size') val = parseFloat(val) / 1080; else if (prop === 'track') val = parseFloat(val) / 1000; else if (prop === 'bold' || prop === 'italic') val = !!val; s[prop] = val; if (prop === 'bold') s.weight = val ? 700 : 400; _dsReapplyStyleEverywhere(id); try { renderMoodboardCanvas(); } catch (e) {} _dsRenderCenter(); _dsRenderRail(); _dsRenderStylesTab(); }
 function _dsStylePreviewCss(s) {
     return 'font-family:' + _mbFontCss(s.font) + '; font-size:20px; line-height:1.1; color:' + (s.color === '#ffffff' ? '#fff' : s.color) + ';' + (s.bold ? 'font-weight:700;' : '') + (s.italic ? 'font-style:italic;' : '') + (s.caps === 'upper' ? 'text-transform:uppercase;' : '') + (s.track ? 'letter-spacing:' + s.track + 'em;' : '') + _alignCss(s.align);
 }
@@ -8433,16 +8446,21 @@ function _dsRenderStylesTab() {
         const shuf = document.createElement('button'); shuf.textContent = '⇄ Shuffle on selection'; shuf.className = 'action-btn btn-secondary'; shuf.style.cssText = 'width:auto; height:24px; padding:0 9px; font-size:0.6rem; margin-left:auto;'; shuf.onclick = () => _dsShuffleGroup(group); ch.appendChild(shuf);
         const slbl = document.createElement('span'); slbl.id = 'dsShuffleLbl' + group.replace(/\W/g, ''); slbl.style.cssText = 'font-size:0.6rem; color:var(--text-muted); min-width:60px;'; ch.appendChild(slbl);
         sec.appendChild(ch);
+        const grid = document.createElement('div'); grid.style.cssText = 'display:grid; grid-template-columns:repeat(4,1fr); gap:8px;';
         styles.forEach(s => {
-            const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:10px; padding:7px 8px; border:1px solid var(--border-color); border-radius:6px; margin-bottom:6px; background:' + (s.color === '#ffffff' ? '#3a3a40' : '#fff') + ';';
-            const prev = document.createElement('div'); prev.textContent = s.name; prev.style.cssText = 'flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; ' + _dsStylePreviewCss(s); row.appendChild(prev);
-            const meta = document.createElement('div'); meta.textContent = Math.round(s.size * 1080) + 'pt · ' + (s.font === 'display' ? 'Druk' : s.font === 'serif' ? 'Messina' : 'Helvetica') + (s.bold ? ' · B' : '') + (s.italic ? ' · I' : ''); meta.style.cssText = 'font-size:0.6rem; color:' + (s.color === '#ffffff' ? '#bbb' : 'var(--text-muted)') + '; white-space:nowrap;'; row.appendChild(meta);
-            const ap = document.createElement('button'); ap.textContent = 'Apply'; ap.className = 'action-btn'; ap.style.cssText = 'width:auto; height:26px; padding:0 10px; font-size:0.62rem; font-weight:700;'; ap.onclick = () => _dsApplyStyle(s.id); row.appendChild(ap);
-            const ed = document.createElement('button'); ed.textContent = 'Edit'; ed.className = 'action-btn btn-secondary'; ed.style.cssText = 'width:auto; height:26px; padding:0 8px; font-size:0.6rem;'; ed.onclick = () => _dsStyleEditPanel(s.id, row); row.appendChild(ed);
-            const du = document.createElement('button'); du.textContent = '⧉'; du.title = 'Duplicate'; du.className = 'action-btn btn-secondary'; du.style.cssText = 'width:26px; height:26px; padding:0; font-size:0.7rem;'; du.onclick = () => _dsDuplicateStyle(s.id); row.appendChild(du);
-            const dl = document.createElement('button'); dl.textContent = '🗑'; dl.title = 'Delete'; dl.className = 'action-btn btn-secondary'; dl.style.cssText = 'width:26px; height:26px; padding:0; font-size:0.66rem;'; dl.onclick = () => _dsDeleteStyle(s.id); row.appendChild(dl);
-            sec.appendChild(row);
+            const card = document.createElement('div'); card.style.cssText = 'border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:' + (s.color === '#ffffff' ? '#3a3a40' : '#fff') + ';';
+            const prev = document.createElement('div'); prev.textContent = s.name; prev.title = s.name; prev.style.cssText = 'padding:9px 8px 3px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; ' + _dsStylePreviewCss(s);
+            // clamp preview size so big display styles don't blow out the card
+            prev.style.fontSize = Math.max(12, Math.min(22, s.size * 1080 * 0.5)) + 'px'; card.appendChild(prev);
+            const meta = document.createElement('div'); meta.textContent = Math.round(s.size * 1080) + 'pt · ' + (s.font === 'display' ? 'Oswald' : s.font === 'serif' ? 'Times' : 'Helv') + ' ' + (s.weight || (s.bold ? 700 : 400)) + (s.italic ? ' ·I' : '') + (s.caps === 'upper' ? ' ·AA' : ''); meta.style.cssText = 'font-size:0.56rem; color:' + (s.color === '#ffffff' ? '#bbb' : 'var(--text-muted)') + '; padding:0 8px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;'; card.appendChild(meta);
+            const ctr = document.createElement('div'); ctr.style.cssText = 'display:flex; gap:3px; padding:5px 6px; border-top:1px solid var(--border-color); align-items:center;';
+            const ap = document.createElement('button'); ap.textContent = 'Apply'; ap.className = 'action-btn'; ap.style.cssText = 'flex:1; height:24px; padding:0; font-size:0.58rem; font-weight:700;'; ap.onclick = () => _dsApplyStyle(s.id); ctr.appendChild(ap);
+            const ed = document.createElement('button'); ed.textContent = '✎'; ed.title = 'Edit'; ed.className = 'action-btn btn-secondary'; ed.style.cssText = 'width:24px; height:24px; padding:0; font-size:0.66rem;'; ed.onclick = () => _dsStyleEditPanel(s.id, card); ctr.appendChild(ed);
+            const du = document.createElement('button'); du.textContent = '⧉'; du.title = 'Duplicate'; du.className = 'action-btn btn-secondary'; du.style.cssText = 'width:24px; height:24px; padding:0; font-size:0.66rem;'; du.onclick = () => _dsDuplicateStyle(s.id); ctr.appendChild(du);
+            const dl = document.createElement('button'); dl.textContent = '🗑'; dl.title = 'Delete'; dl.className = 'action-btn btn-secondary'; dl.style.cssText = 'width:24px; height:24px; padding:0; font-size:0.62rem;'; dl.onclick = () => _dsDeleteStyle(s.id); ctr.appendChild(dl);
+            card.appendChild(ctr); grid.appendChild(card);
         });
+        sec.appendChild(grid);
         wrap.appendChild(sec);
     });
     host.appendChild(wrap);
@@ -8457,12 +8475,12 @@ function _dsStyleEditPanel(id, afterRow) {
     const size = document.createElement('input'); size.type = 'number'; size.value = Math.round(s.size * 1080); size.style.cssText = 'width:54px; height:24px; font-size:0.66rem;'; size.onchange = () => _dsStyleEdit(id, 'size', size.value);
     const track = document.createElement('input'); track.type = 'number'; track.value = Math.round((s.track || 0) * 1000); track.style.cssText = 'width:54px; height:24px; font-size:0.66rem;'; track.onchange = () => _dsStyleEdit(id, 'track', track.value);
     const color = document.createElement('input'); color.type = 'color'; color.value = s.color || '#222222'; color.style.cssText = 'width:30px; height:24px;'; color.onchange = () => _dsStyleEdit(id, 'color', color.value);
-    const bold = document.createElement('input'); bold.type = 'checkbox'; bold.checked = !!s.bold; bold.onchange = () => _dsStyleEdit(id, 'bold', bold.checked);
+    const weight = document.createElement('select'); [['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'SemiBold'], ['700', 'Bold']].forEach(wv => { const o = document.createElement('option'); o.value = wv[0]; o.textContent = wv[1]; if (String(s.weight || (s.bold ? 700 : 400)) === wv[0]) o.selected = true; weight.appendChild(o); }); weight.style.cssText = 'height:24px; font-size:0.66rem;'; weight.onchange = () => { const w = parseInt(weight.value, 10); const st = _dsTextStyles().find(x => x.id === id); if (st) { st.weight = w; st.bold = w >= 600; _dsReapplyStyleEverywhere(id); try { renderMoodboardCanvas(); } catch (e) {} _dsRenderCenter(); _dsRenderRail(); _dsRenderStylesTab(); } };
     const ital = document.createElement('input'); ital.type = 'checkbox'; ital.checked = !!s.italic; ital.onchange = () => _dsStyleEdit(id, 'italic', ital.checked);
     const caps = document.createElement('input'); caps.type = 'checkbox'; caps.checked = s.caps === 'upper'; caps.onchange = () => _dsStyleEdit(id, 'caps', caps.checked ? 'upper' : 'none');
     const align = document.createElement('select'); [['left', 'Left'], ['center', 'Center'], ['right', 'Right'], ['justify', 'Justify (last L)'], ['justify-center', 'Justify (last C)'], ['justify-all', 'Justify all']].forEach(a => { const o = document.createElement('option'); o.value = a[0]; o.textContent = a[1]; if ((s.align || 'left') === a[0]) o.selected = true; align.appendChild(o); }); align.onchange = () => _dsStyleEdit(id, 'align', align.value);
     const grp = document.createElement('input'); grp.value = s.group || ''; grp.style.cssText = 'height:24px; font-size:0.66rem; width:120px;'; grp.onchange = () => _dsStyleEdit(id, 'group', grp.value);
-    p.appendChild(mk('Name', name)); p.appendChild(mk('Group', grp)); p.appendChild(mk('Font', fontSel)); p.appendChild(mk('Size(pt)', size)); p.appendChild(mk('Track', track)); p.appendChild(mk('Colour', color)); p.appendChild(mk('Bold', bold)); p.appendChild(mk('Italic', ital)); p.appendChild(mk('Caps', caps)); p.appendChild(mk('Align', align));
+    p.appendChild(mk('Name', name)); p.appendChild(mk('Group', grp)); p.appendChild(mk('Font', fontSel)); p.appendChild(mk('Weight', weight)); p.appendChild(mk('Size(pt)', size)); p.appendChild(mk('Track', track)); p.appendChild(mk('Colour', color)); p.appendChild(mk('Italic', ital)); p.appendChild(mk('Caps', caps)); p.appendChild(mk('Align', align));
     afterRow.parentNode.insertBefore(p, afterRow.nextSibling);
 }
 function _dsOpenInsertMenu(anchorBtn, afterKey) {
@@ -8620,7 +8638,7 @@ function _deckPageKey(desc) {
     if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
     return null;
 }
-function _dsAnnFam(font) { return font === 'display' ? "'Druk','Arial Narrow',Arial,sans-serif" : font === 'serif' ? "'Messina',Georgia,serif" : 'Arial,Helvetica,sans-serif'; }
+function _dsAnnFam(font) { return font === 'display' ? "'Oswald','Arial Narrow',Arial,sans-serif" : font === 'serif' ? "'Times New Roman',Times,Georgia,serif" : 'Arial,Helvetica,sans-serif'; }
 function _dsAnnList(key) { if (!editorialContent.annotations) editorialContent.annotations = {}; if (!editorialContent.annotations[key]) editorialContent.annotations[key] = []; return editorialContent.annotations[key]; }
 function _dsCurrentAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return null; const l = (editorialContent.annotations || {})[_dsSelKey]; return (l && l[_dsSelIdx]) ? l[_dsSelIdx] : null; }
 function _dsRenderAnnots(page, desc, w, hh) {
@@ -8843,8 +8861,9 @@ function _dsSyncToolbar() {
     if (mbEl) {
         const isTxt = mbType === 'text';
         const show = (id, on) => { const e = document.getElementById(id); if (e) e.style.display = on ? (id === 'dsMbSizeWrap' ? 'inline-flex' : 'inline-block') : 'none'; };
-        show('dsMbFont', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbAlign', isTxt); show('dsMbFit', mbType === 'image');
+        show('dsMbFont', isTxt); show('dsMbWeight', isTxt); show('dsMbSizeWrap', isTxt); show('dsMbColor', isTxt); show('dsMbAlign', isTxt); show('dsMbFit', mbType === 'image');
         const f = document.getElementById('dsMbFont'); if (f && isTxt) f.value = mbEl.font || 'serif';
+        const wsel = document.getElementById('dsMbWeight'); if (wsel && isTxt) wsel.value = String(mbEl.weight || (mbEl.bold ? 700 : 400));
         const sl = document.getElementById('dsMbSizeLbl'); if (sl) sl.textContent = isTxt ? Math.round((mbEl.size || 0.045) * 1000) : '\u2014';
         const c = document.getElementById('dsMbColor'); if (c && isTxt) c.value = mbEl.color || '#222222';
     }
@@ -8866,7 +8885,8 @@ function _dsSyncToolbar() {
         : isShape ? 'Shape \u2014 colour or image fill, drop shadow, drag to move, corner to resize'
         : 'Image \u2014 drag to move, corner to resize';
     const setEnabled = (id, on) => { const e = document.getElementById(id); if (e) { e.style.opacity = on ? '1' : '0.35'; e.style.pointerEvents = on ? 'auto' : 'none'; } };
-    setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText);
+    setEnabled('dsAnnBold', isText); setEnabled('dsAnnItalic', isText); setEnabled('dsAnnAlignBtn', isText); setEnabled('dsAnnWeight', isText);
+    const wA = document.getElementById('dsAnnWeight'); if (wA && isText) wA.value = String(a.weight || (a.bold ? 700 : 400));
     setEnabled('dsAnnColor', isText || isArrow || isShape);
     setEnabled('dsAnnShadow', isImage || isShape);
     setEnabled('dsAnnFillImg', isShape);
@@ -9152,6 +9172,7 @@ function _dsOpenAlignMenu() {
 function _dsAlignMenuOutside(e) { const m = document.getElementById('dsAlignMenu'); if (m && !m.contains(e.target)) _dsCloseAlignMenu(); }
 function _dsCloseAlignMenu() { const m = document.getElementById('dsAlignMenu'); if (m) m.remove(); document.removeEventListener('mousedown', _dsAlignMenuOutside); }
 function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; if (a.type === 'shape' && prop === 'color') { a.fill = val; a.dataUrl = null; } else { a[prop] = val; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
+function _dsAnnSetWeight(v) { const a = _dsCurrentAnnot(); if (!a) return; a.weight = parseInt(v, 10) || 400; a.bold = a.weight >= 600; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsDeleteAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return; const l = (editorialContent.annotations || {})[_dsSelKey]; if (l) l.splice(_dsSelIdx, 1); _dsSelKey = null; _dsSelIdx = -1; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
@@ -10886,9 +10907,9 @@ function renderMoodboardCanvas() {
 // Map a font role to a CSS stack for the editor preview (PDF uses the real
 // embedded faces). display ≈ Druk (condensed bold sans), serif ≈ Messina.
 function _mbFontCss(font) {
-    if (font === 'display') return '"Arial Narrow", "Helvetica Neue Condensed", Impact, sans-serif';
+    if (font === 'display') return "'Oswald','Arial Narrow','Helvetica Neue Condensed',sans-serif";
     if (font === 'sans') return 'Helvetica, Arial, sans-serif';
-    return 'Georgia, "Times New Roman", serif';
+    return "'Times New Roman', Times, Georgia, serif";
 }
 // Justification (incl. last-line variants) → CSS.
 function _alignCss(align) {
@@ -10904,7 +10925,8 @@ function _alignCss(align) {
 // Weight / italic / caps / tracking shared by every text box.
 function _textExtraCss(t) {
     let s = _alignCss(t.align || 'left');
-    if (t.bold) s += 'font-weight:700;';
+    const wt = t.weight || (t.bold ? 700 : null);
+    if (wt) s += 'font-weight:' + wt + ';';
     if (t.italic) s += 'font-style:italic;';
     if (t.caps === 'upper') s += 'text-transform:uppercase;';
     if (t.track) s += 'letter-spacing:' + t.track + 'em;';
@@ -11015,6 +11037,7 @@ function _mbReapplyStyles() {
 }
 function _mbSelEl() { return (_mbSelected >= 0) ? _mbEls()[_mbSelected] : null; }
 function _mbSetFont(v) { const el = _mbSelEl(); if (el) { el.font = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _mbSetWeight(v) { const el = _mbSelEl(); if (el) { el.weight = parseInt(v, 10) || 400; el.bold = el.weight >= 600; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbNudgeSize(d) { const el = _mbSelEl(); if (el) { el.size = Math.max(0.02, Math.min(0.22, (el.size || 0.045) + d)); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetTextColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
 function _mbSetArrowColor(v) { const el = _mbSelEl(); if (el) { el.color = v; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
@@ -11975,7 +11998,8 @@ function _drawAnnotations(doc, key, PW, PH) {
         const x = (a.x || 0) * PW, y = (a.y || 0) * PH, w = (a.w || 0.3) * PW;
         const size = Math.max(6, (a.size || 0.03) * PH);
         const fam = _font(a.font || 'sans');
-        const style = (a.bold && a.italic) ? 'bolditalic' : a.bold ? 'bold' : a.italic ? 'italic' : 'normal';
+        const heavy = a.weight ? a.weight >= 600 : a.bold;
+        const style = (heavy && a.italic) ? 'bolditalic' : heavy ? 'bold' : a.italic ? 'italic' : 'normal';
         try { doc.setFont(fam, style); } catch (e) { doc.setFont(fam, a.bold ? 'bold' : 'normal'); }
         doc.setFontSize(size);
         const c = _annHexToRgb(a.color); doc.setTextColor(c.r, c.g, c.b);
