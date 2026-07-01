@@ -1850,7 +1850,25 @@
         <div style="border:1px solid var(--border-color); border-radius:6px; padding:12px; margin-bottom:12px;">
             <div style="font-size:0.7rem; font-weight:bold; color:var(--text-strong); margin-bottom:8px; text-transform:uppercase;">Salon Hang</div>
             <p style="font-size:0.62rem; color:var(--text-muted); margin:0 0 8px; line-height:1.4;">Randomly arranges the selected frames into a balanced cluster, evenly spaced by the gap above.</p>
-            <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="salonArrange()" title="Shuffle the selected frames into a salon-style cluster with even gaps. Click again to re-roll.">Salon Arrange (re-roll)</button>
+            <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
+                <span style="font-size:0.62rem; color:var(--text-muted); width:46px;">Layout:</span>
+                <div class="unit-toggle" style="height:24px; flex:1;">
+                    <button id="salonAuto" class="active" type="button" onclick="setSalonShape('auto')">AUTO</button>
+                    <button id="salonLand" type="button" onclick="setSalonShape('landscape')">WIDE</button>
+                    <button id="salonPort" type="button" onclick="setSalonShape('portrait')">TALL</button>
+                </div>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
+                <span style="font-size:0.62rem; color:var(--text-muted); width:46px;">Area:</span>
+                <input id="salonAreaW" type="number" placeholder="auto" step="1" min="0" style="flex:1; min-width:0; padding:4px 6px; font-size:0.72rem;">
+                <span style="font-size:0.6rem; color:var(--text-muted);">×</span>
+                <input id="salonAreaH" type="number" placeholder="auto" step="1" min="0" style="flex:1; min-width:0; padding:4px 6px; font-size:0.72rem;">
+                <span id="salonAreaUnit" style="font-size:0.6rem; color:var(--text-muted);">in</span>
+            </div>
+            <label style="display:flex; align-items:center; gap:6px; font-size:0.64rem; color:var(--text-muted); margin-bottom:10px; cursor:pointer;">
+                <input id="salonCenterHang" type="checkbox" checked> Center on hang height
+            </label>
+            <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="salonArrange()" title="Shuffle the selected frames into a salon-style cluster. Click again to re-roll.">Salon Arrange (re-roll)</button>
         </div>
 
         <!-- CENTER & ALIGN SECTION -->
