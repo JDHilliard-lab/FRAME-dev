@@ -768,21 +768,21 @@
                 </button>
                 <div id="export-wrap">
                     <div id="wall">
-                        <div id="grid-layer" class="grid-layer"></div>
-                        <div id="frame-center-layer" class="frame-center-layer"></div>
-                        <div id="arch-dim-layer" class="arch-dim-layer"></div>
-                        <div id="dim-layer" class="dim-layer"></div>
-                        <div id="floor-ceiling-layer" class="dim-layer"></div>
-                        <div id="guide-layer" class="guide-layer"></div>
-                        <div id="od-layer" class="od-layer"></div>
-                        <div id="group-dim-layer" class="group-dim-layer"></div>
-                        <div id="custom-lines-layer" class="dim-layer" style="z-index:32;"></div>
-                        <div id="label-layer" class="label-layer"></div>
+                        <div id="grid-layer" class="grid-layer" style="z-index:4;"></div>
+                        <div id="frame-center-layer" class="frame-center-layer" style="z-index:30;"></div>
+                        <div id="arch-dim-layer" class="arch-dim-layer" style="z-index:34;"></div>
+                        <div id="dim-layer" class="dim-layer" style="z-index:36;"></div>
+                        <div id="floor-ceiling-layer" class="dim-layer" style="z-index:36;"></div>
+                        <div id="guide-layer" class="guide-layer" style="z-index:4;"></div>
+                        <div id="od-layer" class="od-layer" style="z-index:32;"></div>
+                        <div id="group-dim-layer" class="group-dim-layer" style="z-index:38;"></div>
+                        <div id="custom-lines-layer" class="dim-layer" style="z-index:40;"></div>
+                        <div id="label-layer" class="label-layer" style="z-index:42;"></div>
                         
-                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:20; display:none;">
+                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:8; display:none;">
                             <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
                         </div>
-                        <div id="frame-layer"></div>
+                        <div id="frame-layer" style="position:absolute; inset:0; z-index:12;"></div>
                         <!-- Snap-to-alignment guide lines. Appear during drag
                              when a frame's edge or center aligns with another
                              frame, wall, or hang line. Always rendered on top
@@ -1760,6 +1760,21 @@
                     <input type="checkbox" id="dimSnapEnabledToggle" checked onchange="toggleDimSnapEnabled(this.checked)" style="width:15px; height:15px; cursor:pointer;">
                     Snap dimension lines (increments &amp; align to each other)
                 </label>
+            </div>
+        </div>
+
+        <!-- SCALE FIGURE: silhouette shade -->
+        <div style="margin-bottom: 12px;">
+            <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Scale Figure</div>
+            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
+                <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Make the scale figure more subtle by lightening it from solid black to shades of grey.">Figure Shade</label>
+                <select id="personShade" onchange="setPersonShade(this.value)" style="width:100%; padding:7px 6px; font-size:0.85rem; height:34px; box-sizing:border-box;">
+                    <option value="0">Black</option>
+                    <option value="0.3">Dark grey</option>
+                    <option value="0.5">Medium grey</option>
+                    <option value="0.68">Light grey</option>
+                    <option value="0.82">Faint grey</option>
+                </select>
             </div>
         </div>
 
