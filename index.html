@@ -1823,10 +1823,10 @@
      on the elevation. Three actions: distribute (with axis + gap), center group
      horizontally on the wall, and align each frame's vertical center to the
      hang-height line. -->
-<div id="alignModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:9999; background:rgba(0,0,0,0.45); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); align-items:flex-start; justify-content:flex-start; padding:78px 0 12px 12px; box-sizing:border-box;">
-    <div style="background:var(--bg-panel); padding:18px; border-radius:8px; width:300px; max-height:100%; overflow:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.5);">
+<div id="alignModal" style="display:none; position:fixed; inset:0; z-index:9999; pointer-events:none;">
+    <div id="alignPanel" style="position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:auto; background:var(--bg-panel); padding:18px; border-radius:8px; width:300px; max-height:calc(100vh - 100px); overflow:auto; border:1px solid var(--border-color); box-shadow:0 15px 40px rgba(0,0,0,0.55);">
         <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.05rem; color:var(--text-strong);">Align &amp; Space Frames</h3>
-        <p style="font-size:0.68rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Applies to your <strong>selected</strong> frames. With nothing selected, it falls back to all visible frames. Close this window to get back to the frame tools.</p>
+        <p style="font-size:0.68rem; color:var(--text-muted); margin-bottom:14px; line-height: 1.4;">Applies to your <strong>selected</strong> frames. With nothing selected, it falls back to all visible frames. The elevation stays live so you can watch changes apply; close this window to get back to the frame tools.</p>
 
         <!-- DISTRIBUTE SECTION -->
         <div style="border:1px solid var(--border-color); border-radius:6px; padding:12px; margin-bottom:12px;">
@@ -1860,7 +1860,7 @@
             <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="alignToHangHeight()" title="Align each selected frame's vertical center to the hang height line.">Align to Hang Height</button>
         </div>
 
-        <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="document.getElementById('alignModal').style.display='none'">Close</button>
+        <button class="action-btn btn-secondary" style="width:100%; height:30px; font-size:0.7rem;" onclick="closeAlignmentDialog()">Close</button>
     </div>
 </div>
 
