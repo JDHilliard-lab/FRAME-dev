@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '6.6';
+const APP_VERSION = '6.7';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -7525,7 +7525,7 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
     const _hex = (h) => { const m = /^#?([0-9a-f]{6})$/i.exec(h || ''); if (!m) return [55, 55, 55]; const n = parseInt(m[1], 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; };
     const _fontRole = (f) => f === 'display' ? _font('display') : (f === 'sans' ? 'helvetica' : _font('serif'));
     order.forEach(idx => {
-        const t = tiles[idx]; const ty = t.type || 'image';
+        const t = tiles[idx]; if (t && t.hidden) return; const ty = t.type || 'image';
         if (ty === 'arrow') {
             const Ax = (t.x1 || 0) * PW, Ay = (t.y1 || 0) * PH, Bx = (t.x2 || 0) * PW, By = (t.y2 || 0) * PH;
             const c = _hex(t.color || '#9aa0a6'), wt = Math.max(0.4, t.weight || 1.2);
@@ -8199,7 +8199,7 @@ function _dsTab(which) {
 }
 let _dsBuildError = '';
 let _dsTplSel = null;   // layout template highlighted but not yet applied
-function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; _mbActiveCanvasId = 'moodboardCanvas'; _mbEditTarget = null; }
+function closeDeckStudio() { const m = document.getElementById('deckStudioModal'); if (m) m.style.display = 'none'; _mbActiveCanvasId = 'moodboardCanvas'; _mbEditTarget = null; _dsLayersOpen = false; const lp = document.getElementById('_dsLayersPanel'); if (lp) lp.remove(); const lb = document.getElementById('dsMbLayers'); if (lb) lb.classList.remove('active'); }
 function _dsRefresh() { _dsPages = _deckPageList(); if (_dsIndex >= _dsPages.length) _dsIndex = Math.max(0, _dsPages.length - 1); _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); }
 function _dsRemoveFixed(fixed) {
     editorialContent.hiddenFixed = editorialContent.hiddenFixed || {};
@@ -8397,6 +8397,19 @@ function _dsMasterToDeck(idx) {
     _dsTab('pages');
     const k = 'layout:' + pg.id; const ni = _dsPages.findIndex(d => _deckPageKey(d) === k); if (ni >= 0) _dsSelectPage(ni);
 }
+let _dsTplCollapsed = {};   // per-section collapse state for the template library
+function _dsTplApplyFilter(q) {
+    q = (q || '').toLowerCase().trim();
+    const host = document.getElementById('dsTabTemplates'); if (!host) return;
+    host.querySelectorAll('.tpl-card').forEach(c => { c.style.display = (!q || (c.dataset.tname || '').indexOf(q) >= 0) ? '' : 'none'; });
+    host.querySelectorAll('.tpl-sec').forEach(s => {
+        const grid = s.querySelector('.tpl-grid'); if (!grid) return;
+        if (q) grid.style.display = 'flex';   // searching expands sections
+        else grid.style.display = _dsTplCollapsed[s.dataset.seckey] ? 'none' : 'flex';
+        const any = Array.from(grid.querySelectorAll('.tpl-card')).some(c => c.style.display !== 'none');
+        s.style.display = (q && !any) ? 'none' : '';
+    });
+}
 function _dsRenderTemplatesTab() {
     const host = document.getElementById('dsTabTemplates'); if (!host) return;
     host.innerHTML = '';
@@ -8407,16 +8420,21 @@ function _dsRenderTemplatesTab() {
     const mkBtn = (label, fn, primary) => { const b = document.createElement('button'); b.textContent = label; b.className = primary ? 'action-btn' : 'action-btn btn-secondary'; b.style.cssText = 'width:auto; height:32px; padding:0 14px; font-size:0.72rem; font-weight:700;'; b.onclick = fn; return b; };
     head.appendChild(mkBtn('+ Save current page', _dsSaveCurrentAsTemplate, true));
     head.appendChild(mkBtn('+ New category', _dsAddCategory));
+    const search = document.createElement('input'); search.type = 'search'; search.placeholder = 'Search templates\u2026'; search.id = 'dsTplSearch';
+    search.style.cssText = 'height:32px; width:200px; padding:0 10px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:6px;';
+    search.oninput = () => _dsTplApplyFilter(search.value);
+    head.appendChild(search);
     wrap.appendChild(head);
     // ── From the uploaded InDesign master pages ──
     if (typeof IDML_MASTER_TEMPLATES !== 'undefined' && IDML_MASTER_TEMPLATES.length) {
         const cardW0 = 200, cardH0 = Math.round(cardW0 * 540 / 936);
-        const sec = document.createElement('div'); sec.style.cssText = 'margin-bottom:24px; padding:12px; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-input);';
-        const ch = document.createElement('div'); ch.innerHTML = '<div style="font-size:0.82rem; font-weight:800; color:var(--text-main);">From your InDesign template</div><div style="font-size:0.64rem; color:var(--text-muted); margin-bottom:8px;">Page profiles built from your Farmboy master pages. Add one, then fill the image frames and edit the text.</div>';
+        const sec = document.createElement('div'); sec.className = 'tpl-sec'; sec.dataset.seckey = '_idml'; sec.style.cssText = 'margin-bottom:24px; padding:12px; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-input);';
+        const ch = document.createElement('div'); ch.style.cursor = 'pointer'; ch.title = 'Click to collapse/expand'; ch.innerHTML = '<div style="font-size:0.82rem; font-weight:800; color:var(--text-main);">' + (_dsTplCollapsed['_idml'] ? '\u25B8 ' : '\u25BE ') + 'From your InDesign template</div><div style="font-size:0.64rem; color:var(--text-muted); margin-bottom:8px;">Page profiles built from your Farmboy master pages. Add one, then fill the image frames and edit the text.</div>';
+        ch.onclick = () => { _dsTplCollapsed['_idml'] = !_dsTplCollapsed['_idml']; _dsRenderTemplatesTab(); const s2 = document.getElementById('dsTplSearch'); if (s2 && s2.value) _dsTplApplyFilter(s2.value); };
         sec.appendChild(ch);
-        const grid = document.createElement('div'); grid.style.cssText = 'display:flex; flex-wrap:wrap; gap:12px;';
+        const grid = document.createElement('div'); grid.className = 'tpl-grid'; grid.style.cssText = 'display:' + (_dsTplCollapsed['_idml'] ? 'none' : 'flex') + '; flex-wrap:wrap; gap:12px;';
         IDML_MASTER_TEMPLATES.forEach((t, i) => {
-            const cell = document.createElement('div'); cell.style.cssText = 'width:' + cardW0 + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:#fff;';
+            const cell = document.createElement('div'); cell.className = 'tpl-card'; cell.dataset.tname = (t.name || '').toLowerCase(); cell.style.cssText = 'width:' + cardW0 + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:#fff;';
             const th = document.createElement('div'); th.style.cssText = 'position:relative; width:100%; height:' + cardH0 + 'px; background:#fff;';
             th.innerHTML = _mbThumbInner({ elements: t.elements }, cardW0, cardH0); cell.appendChild(th);
             const nm = document.createElement('div'); nm.textContent = t.name.replace('Farmboy · ', ''); nm.style.cssText = 'font-size:0.66rem; color:var(--text-main); padding:5px 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);'; cell.appendChild(nm);
@@ -8438,16 +8456,16 @@ function _dsRenderTemplatesTab() {
         if (!userTpls.length && !builtins.length && !DECK_TPL_CATS.some(d => d.key === cat.key)) {
             // empty custom category — still show header so it can be used/deleted
         }
-        const sec = document.createElement('div'); sec.style.cssText = 'margin-bottom:22px;';
+        const sec = document.createElement('div'); sec.className = 'tpl-sec'; sec.dataset.seckey = cat.key; sec.style.cssText = 'margin-bottom:22px;';
         const ch = document.createElement('div'); ch.style.cssText = 'display:flex; align-items:center; gap:8px; margin-bottom:8px; border-bottom:1px solid var(--border-color); padding-bottom:5px;';
-        const cl = document.createElement('div'); cl.textContent = cat.label; cl.style.cssText = 'font-size:0.8rem; font-weight:800; color:var(--text-main);';
+        const cl = document.createElement('div'); cl.textContent = (_dsTplCollapsed[cat.key] ? '\u25B8 ' : '\u25BE ') + cat.label; cl.style.cssText = 'font-size:0.8rem; font-weight:800; color:var(--text-main); cursor:pointer;'; cl.title = 'Click to collapse/expand'; cl.onclick = () => { _dsTplCollapsed[cat.key] = !_dsTplCollapsed[cat.key]; _dsRenderTemplatesTab(); const s2 = document.getElementById('dsTplSearch'); if (s2 && s2.value) _dsTplApplyFilter(s2.value); };
         ch.appendChild(cl);
         const cnt = document.createElement('span'); cnt.textContent = userTpls.length + ' saved'; cnt.style.cssText = 'font-size:0.62rem; color:var(--text-muted);'; ch.appendChild(cnt);
         if (!DECK_TPL_CATS.some(d => d.key === cat.key)) { const del = document.createElement('button'); del.textContent = 'Delete category'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:auto; height:24px; padding:0 8px; font-size:0.6rem; margin-left:auto;'; del.onclick = () => _dsDeleteCategory(cat.key); ch.appendChild(del); }
         sec.appendChild(ch);
-        const grid = document.createElement('div'); grid.style.cssText = 'display:flex; flex-wrap:wrap; gap:12px;';
+        const grid = document.createElement('div'); grid.className = 'tpl-grid'; grid.style.cssText = 'display:' + (_dsTplCollapsed[cat.key] ? 'none' : 'flex') + '; flex-wrap:wrap; gap:12px;';
         const addCard = (name, els, controls) => {
-            const cell = document.createElement('div'); cell.style.cssText = 'width:' + cardW + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:#fff;';
+            const cell = document.createElement('div'); cell.className = 'tpl-card'; cell.dataset.tname = (name || '').toLowerCase(); cell.style.cssText = 'width:' + cardW + 'px; border:1px solid var(--border-color); border-radius:6px; overflow:hidden; background:#fff;';
             const th = document.createElement('div'); th.style.cssText = 'position:relative; width:100%; height:' + cardH + 'px; background:#fff;';
             th.innerHTML = _mbThumbInner({ elements: els }, cardW, cardH); cell.appendChild(th);
             const nm = document.createElement('div'); nm.textContent = name; nm.style.cssText = 'font-size:0.66rem; color:var(--text-main); padding:5px 7px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);'; cell.appendChild(nm);
@@ -8782,7 +8800,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
     const key = _deckPageKey(desc); if (!key) return;
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     list.forEach((a, i) => {
-        const sel = (key === _dsSelKey && i === _dsSelIdx) || (_mbSelAnn && _mbSelAnn.indexOf(i) >= 0);
+        if (a && a.hidden) return;
+        const sel = !(a && a.locked) && ((key === _dsSelKey && i === _dsSelIdx) || (_mbSelAnn && _mbSelAnn.indexOf(i) >= 0));
         if (a.type === 'mockup') {
             const entry = _mockupGet(a.pieceId);
             const aspect = (entry && entry.aspect) || a.aspect || 1.2;
@@ -8804,6 +8823,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (code) { const lab = document.createElement('div'); lab.textContent = code; lab.style.cssText = 'position:absolute; left:0; right:0; bottom:-15px; text-align:right; font-size:' + Math.max(7, 0.016 * hh) + 'px; color:#444; pointer-events:none; font-family:' + _dsAnnFam('display') + ';'; box.appendChild(lab); }
             }
             box.onmousedown = (e) => {
+                if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
@@ -8836,6 +8856,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
             box.appendChild(img);
             box.onmousedown = (e) => {
+                if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
@@ -8872,6 +8893,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)'; };
             box.ondrop = (e) => _dsShapeDropImage(e, key, i);
             box.onmousedown = (e) => {
+                if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
@@ -8982,6 +9004,8 @@ function _dsSyncToolbar() {
     const editable = !!(typeof _dsCurrentEditablePage === 'function' && _dsCurrentEditablePage());
     const art = document.getElementById('dsAddArtwork'); if (art) art.style.display = editable ? 'inline-flex' : 'none';
     const gb = document.getElementById('dsMbGuides'); if (gb) gb.style.display = editable ? 'inline-flex' : 'none';
+    const lyb = document.getElementById('dsMbLayers'); if (lyb) lyb.style.display = editable ? 'inline-flex' : 'none';
+    if (_dsLayersOpen) { if (editable) { try { _dsRenderLayersPanel(); } catch (e) {} } else { const lp = document.getElementById('_dsLayersPanel'); if (lp) lp.remove(); } }
     // Moodboard element selection takes precedence over annotations when on a layout/fixed page.
     const mbEl = (editable && typeof _mbSelEl === 'function' && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) ? _mbSelEl() : null;
     const mbType = mbEl ? _elType(mbEl) : null;
@@ -11228,6 +11252,80 @@ function _mbOpenGuideManager() {
     m.appendChild(panel); m.onclick = (e) => { if (e.target === m) m.remove(); };
     document.body.appendChild(m);
 }
+// ── Layers panel (InDesign-style object list: hide / lock / select / reorder) ──
+let _dsLayersOpen = false;
+function _dsToggleLayersPanel() {
+    _dsLayersOpen = !_dsLayersOpen;
+    const b = document.getElementById('dsMbLayers'); if (b) b.classList.toggle('active', _dsLayersOpen);
+    if (_dsLayersOpen) _dsRenderLayersPanel(); else { const p = document.getElementById('_dsLayersPanel'); if (p) p.remove(); }
+}
+function _dsLayerLabel(t) {
+    const ty = _elType(t);
+    if (ty === 'text') { const s = (t.text || '').replace(/\s+/g, ' ').trim(); return s ? (s.length > 20 ? s.slice(0, 20) + '\u2026' : s) : 'Text'; }
+    if (ty === 'arrow') return 'Arrow';
+    if (ty === 'image') return 'Image';
+    return ty.charAt(0).toUpperCase() + ty.slice(1);
+}
+function _dsAnnLabel(a) {
+    if (a.type === 'mockup') return 'Artwork ' + (a.pieceId || '');
+    if (a.type === 'shape') return (a.shape || 'shape').charAt(0).toUpperCase() + (a.shape || 'shape').slice(1);
+    return a.type || 'Item';
+}
+function _dsRenderLayersPanel() {
+    let p = document.getElementById('_dsLayersPanel'); if (p) p.remove();
+    if (!_dsLayersOpen) return;
+    p = document.createElement('div'); p.id = '_dsLayersPanel';
+    p.style.cssText = 'position:fixed; right:18px; top:110px; width:250px; max-height:70vh; overflow:auto; z-index:100001; background:var(--bg-panel,#26262c); color:var(--text-main,#eee); border:1px solid var(--border-color,#444); border-radius:8px; box-shadow:0 10px 30px rgba(0,0,0,0.5); font-size:0.7rem;';
+    const head = document.createElement('div');
+    head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-bottom:1px solid var(--border-color,#444); position:sticky; top:0; background:inherit;';
+    head.innerHTML = '<span style="font-weight:700;">Layers</span>';
+    const x = document.createElement('button'); x.textContent = '\u2715'; x.style.cssText = 'background:none; border:none; color:var(--text-muted,#999); cursor:pointer; font-size:0.75rem;'; x.onclick = _dsToggleLayersPanel;
+    head.appendChild(x); p.appendChild(head);
+    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); try { _dsRenderCenter(); } catch (e) { renderMoodboardCanvas(); } _dsRenderLayersPanel(); };
+    const mkBtn = (txt, title, on, fn) => { const b = document.createElement('button'); b.textContent = txt; b.title = title; b.style.cssText = 'background:none; border:none; cursor:pointer; padding:1px 3px; font-size:0.72rem; color:' + (on ? 'var(--text-main,#eee)' : 'rgba(150,150,160,0.5)') + ';'; b.onclick = (e) => { e.stopPropagation(); fn(); }; return b; };
+    const row = (label, item, selected, onSelect, onUp, onDown) => {
+        const r = document.createElement('div');
+        r.style.cssText = 'display:flex; align-items:center; gap:4px; padding:4px 8px; border-bottom:1px solid rgba(120,120,130,0.12); cursor:pointer;' + (selected ? ' background:rgba(106,106,255,0.18);' : '') + (item.hidden ? ' opacity:0.55;' : '');
+        r.appendChild(mkBtn(item.hidden ? '\u2298' : '\u25C9', item.hidden ? 'Show' : 'Hide', !item.hidden, () => { item.hidden = !item.hidden; if (item.hidden) _mbDeselectAll(); refresh(); }));
+        r.appendChild(mkBtn(item.locked ? '\uD83D\uDD12' : '\uD83D\uDD13', item.locked ? 'Unlock' : 'Lock', !!item.locked, () => { item.locked = !item.locked; if (item.locked) _mbDeselectAll(); refresh(); }));
+        const lab = document.createElement('div'); lab.textContent = label; lab.style.cssText = 'flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;' + (item.locked ? ' color:var(--text-muted,#999);' : '');
+        r.appendChild(lab);
+        r.appendChild(mkBtn('\u25B4', 'Bring forward', true, onUp));
+        r.appendChild(mkBtn('\u25BE', 'Send backward', true, onDown));
+        r.onclick = () => { if (item.hidden || item.locked) return; onSelect(); _dsRenderLayersPanel(); };
+        return r;
+    };
+    const grpHead = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'padding:6px 10px 3px; font-size:0.56rem; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-muted,#999);'; return d; };
+    // Annotations (render above elements) — topmost first
+    const ann = _mbCurAnnList();
+    if (ann && ann.list.length) {
+        p.appendChild(grpHead('Annotations (front)'));
+        for (let i = ann.list.length - 1; i >= 0; i--) {
+            const a = ann.list[i]; const idx = i;
+            const selected = (_dsSelKey === ann.key && _dsSelIdx === idx) || (_mbSelAnn && _mbSelAnn.indexOf(idx) >= 0);
+            p.appendChild(row(_dsAnnLabel(a), a, selected,
+                () => _dsSelectAnnot(ann.key, idx),
+                () => { if (idx < ann.list.length - 1) { const t2 = ann.list[idx]; ann.list[idx] = ann.list[idx + 1]; ann.list[idx + 1] = t2; _dsSelKey = null; _dsSelIdx = -1; _mbSelAnn = []; refresh(); } },
+                () => { if (idx > 0) { const t2 = ann.list[idx]; ann.list[idx] = ann.list[idx - 1]; ann.list[idx - 1] = t2; _dsSelKey = null; _dsSelIdx = -1; _mbSelAnn = []; refresh(); } }));
+        }
+    }
+    // Elements — topmost first by z
+    const els = _mbEls() || [];
+    if (els.length) {
+        p.appendChild(grpHead('Elements'));
+        const sorted = els.map((t, i) => i).sort((a, b) => (els[b].z || 0) - (els[a].z || 0));
+        sorted.forEach((i, pos) => {
+            const t = els[i];
+            const selected = (i === _mbSelected) || (_mbSel && _mbSel.indexOf(i) >= 0);
+            p.appendChild(row(_dsLayerLabel(t), t, selected,
+                () => { _mbSelectOnly(i); renderMoodboardCanvas(); try { _dsSyncToolbar(); } catch (e) {} },
+                () => { if (pos > 0) { const j = sorted[pos - 1]; const z2 = els[j].z; els[j].z = t.z; t.z = z2; refresh(); } },
+                () => { if (pos < sorted.length - 1) { const j = sorted[pos + 1]; const z2 = els[j].z; els[j].z = t.z; t.z = z2; refresh(); } }));
+        });
+    }
+    if ((!ann || !ann.list.length) && !els.length) { const d = document.createElement('div'); d.textContent = 'Nothing on this page yet.'; d.style.cssText = 'padding:12px 10px; color:var(--text-muted,#999);'; p.appendChild(d); }
+    document.body.appendChild(p);
+}
 function renderMoodboardCanvas() {
     const canvas = _mbCanvas();
     if (!canvas) return;
@@ -11251,7 +11349,8 @@ function renderMoodboardCanvas() {
     }
     const order = els.map((t, i) => i).sort((a, b) => (els[a].z || 0) - (els[b].z || 0));
     order.forEach(i => {
-        const t = els[i]; const sel = (i === _mbSelected) || _mbSel.indexOf(i) >= 0; const single = sel && _mbSel.length <= 1; const ty = _elType(t);
+        const t = els[i]; if (t && t.hidden) return;
+        const sel = (i === _mbSelected) || _mbSel.indexOf(i) >= 0; const single = sel && _mbSel.length <= 1; const ty = _elType(t);
         if (ty === 'arrow') {
             const Ax = t.x1 * cr.width, Ay = t.y1 * cr.height, Bx = t.x2 * cr.width, By = t.y2 * cr.height;
             const wt = Math.max(0.5, t.weight || 1.2), col = t.color || '#9aa0a6';
@@ -11578,6 +11677,7 @@ function _mbApplyParaStyle(name) {
 
 let _mbLastTextDown = null;
 function _mbTileDown(e, i) {
+    { const _t = (_mbEls() || [])[i]; if (_t && _t.locked) { e.preventDefault(); e.stopPropagation(); return; } }
     if (_mbTextEditing) return;   // let clicks place the cursor while editing text
     e.preventDefault();
     const t0 = _mbEls()[i];
@@ -11615,6 +11715,7 @@ function _mbResizeDown(e, i) {
     document.addEventListener('mouseup', _mbUp);
 }
 function _mbHandleDown(e, i, dir) {
+    { const _t = (_mbEls() || [])[i]; if (_t && _t.locked) { e.preventDefault(); e.stopPropagation(); return; } }
     e.preventDefault(); e.stopPropagation();
     const canvas = _mbCanvas(); const r = canvas ? canvas.getBoundingClientRect() : null; if (!r) return;
     const t = _mbEls()[i];
@@ -11639,6 +11740,7 @@ function _mbHandles(box, i, ty) {
     });
 }
 function _mbImgPanDown(e, i) {
+    { const _t = (_mbEls() || [])[i]; if (_t && _t.locked) { e.preventDefault(); e.stopPropagation(); return; } }
     e.preventDefault(); e.stopPropagation();
     const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
@@ -11659,6 +11761,7 @@ function _mbArrowHandleDown(e, i, which) {
     document.addEventListener('mouseup', _mbUp);
 }
 function _mbElbowAnchorDown(e, i, k) {
+    { const _t = (_mbEls() || [])[i]; if (_t && _t.locked) { e.preventDefault(); e.stopPropagation(); return; } }
     e.preventDefault(); e.stopPropagation();
     const canvas = _mbCanvas();
     const r = canvas ? canvas.getBoundingClientRect() : null;
@@ -11690,9 +11793,9 @@ function _mbMarqueeUp(e) {
     const fx = (Math.min(e.clientX, m.x0) - r.left) / r.width, fy = (Math.min(e.clientY, m.y0) - r.top) / r.height, fw = Math.abs(e.clientX - m.x0) / r.width, fh = Math.abs(e.clientY - m.y0) / r.height;
     const hits = (boxOf, n) => { const out = []; for (let i = 0; i < n; i++) { const b = boxOf(i); if (b.x < fx + fw && b.x + b.w > fx && b.y < fy + fh && b.y + b.h > fy) out.push(i); } return out; };
     const els = _mbEls() || [];
-    const hit = hits(i => _mbElBox(els[i]), els.length);
+    const hit = hits(i => _mbElBox(els[i]), els.length).filter(i => !(els[i] && (els[i].hidden || els[i].locked)));
     const ann = _mbCurAnnList();
-    const hitA = ann ? hits(i => _mbAnnBox(ann.list[i]), ann.list.length) : [];
+    const hitA = (ann ? hits(i => _mbAnnBox(ann.list[i]), ann.list.length) : []).filter(i => !(ann && ann.list[i] && (ann.list[i].hidden || ann.list[i].locked)));
     if (m.additive) { hit.forEach(i => { if (_mbSel.indexOf(i) < 0) _mbSel.push(i); }); hitA.forEach(i => { if (_mbSelAnn.indexOf(i) < 0) _mbSelAnn.push(i); }); }
     else { _mbSel = hit; _mbSelAnn = hitA; }
     _mbSelected = _mbSel.length ? _mbSel[_mbSel.length - 1] : -1;
@@ -12513,6 +12616,7 @@ function _drawAnnotations(doc, key, PW, PH) {
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     if (!list.length) return;
     list.forEach(a => {
+        if (a && a.hidden) return;
         const _annShadow = (xx, yy, ww, hh2, ell) => {
             if (!a.shadow) return;
             const off = 0.003 * PW;
