@@ -768,21 +768,21 @@
                 </button>
                 <div id="export-wrap">
                     <div id="wall">
-                        <div id="grid-layer" class="grid-layer" style="z-index:4;"></div>
+                        <div id="grid-layer" class="grid-layer" style="z-index:2;"></div>
                         <div id="frame-center-layer" class="frame-center-layer" style="z-index:30;"></div>
                         <div id="arch-dim-layer" class="arch-dim-layer" style="z-index:34;"></div>
                         <div id="dim-layer" class="dim-layer" style="z-index:36;"></div>
                         <div id="floor-ceiling-layer" class="dim-layer" style="z-index:36;"></div>
-                        <div id="guide-layer" class="guide-layer" style="z-index:4;"></div>
+                        <div id="guide-layer" class="guide-layer" style="z-index:2;"></div>
                         <div id="od-layer" class="od-layer" style="z-index:32;"></div>
                         <div id="group-dim-layer" class="group-dim-layer" style="z-index:38;"></div>
                         <div id="custom-lines-layer" class="dim-layer" style="z-index:40;"></div>
                         <div id="label-layer" class="label-layer" style="z-index:42;"></div>
                         
-                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:8; display:none;">
+                        <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:10; display:none;">
                             <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
                         </div>
-                        <div id="frame-layer" style="position:absolute; inset:0; z-index:12;"></div>
+                        <div id="frame-layer" style="position:absolute; inset:0; z-index:6;"></div>
                         <!-- Snap-to-alignment guide lines. Appear during drag
                              when a frame's edge or center aligns with another
                              frame, wall, or hang line. Always rendered on top
@@ -1599,8 +1599,10 @@
      config and a keyboard shortcuts reference. Hang/Font inputs share IDs
      with their previous sidebar locations so existing handlers work. -->
 <div id="precisionModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:440px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 90vh; overflow-y: auto;">
+    <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:min(860px,94vw); border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 92vh; overflow-y: auto;">
         <h3 style="margin-top:0; margin-bottom: 14px; font-size:1.1rem; color:var(--text-strong);">Settings</h3>
+
+        <div class="settings-cols">
 
         <!-- UNIT + HEIGHTS row: unit choice, hang height, and baseboard height
              share one row to keep the panel compact. setElevUnit() converts
@@ -1801,6 +1803,8 @@
             </div>
         </div>
 
+        </div><!-- /settings-cols -->
+
         <button class="action-btn" style="width:100%; height:32px; font-size:0.75rem;" onclick="closeAnnotationStyleModal()">Done</button>
     </div>
 </div>
@@ -1934,6 +1938,8 @@
 <!-- Drop-zone visual states. .drag-over fires while a drag is hovering over the
      zone; .processing while files are being read. -->
 <style>
+.settings-cols { column-count: 2; column-gap: 22px; }
+.settings-cols > div { break-inside: avoid; -webkit-column-break-inside: avoid; }
     @font-face { font-family: 'Druk'; src: url('fonts/Druk-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
     @font-face { font-family: 'Messina'; src: url('fonts/MessinaSerif-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
     @font-face { font-family: 'Messina'; src: url('fonts/MessinaSerif-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
