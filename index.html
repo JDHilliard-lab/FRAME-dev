@@ -1148,6 +1148,19 @@
             <span style="flex:1;"></span>
             <button id="dsApprovedBtn" onclick="_dsToggleApproved()" title="Stamp every page APPROVED (client sign-off)" style="width:auto; height:32px; padding:0 14px; font-size:0.72rem; font-weight:700; letter-spacing:0.04em; border-radius:5px; cursor:pointer; border:1.5px solid var(--border-color); background:var(--bg-input); color:var(--text-main);">APPROVED</button>
             <button id="dsSaveBtn" class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="_dsSave()">Save</button>
+            <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-right:auto; font-size:0.66rem; color:var(--text-muted);">
+                <span style="text-transform:uppercase; letter-spacing:0.6px; font-size:0.56rem;">Pages</span>
+                <label style="display:flex; align-items:center; gap:4px; cursor:pointer;"><input type="radio" name="specScope" value="all" checked> All</label>
+                <label style="display:flex; align-items:center; gap:4px; cursor:pointer;" title="Exports only the page currently open in the Deck Studio"><input type="radio" name="specScope" value="current"> Current page</label>
+                <label style="display:flex; align-items:center; gap:4px; cursor:pointer;" title="Page numbers from the full deck, e.g. 1-3, 8, 12-14. Footer numbering is preserved so proofs reference the master deck."><input type="radio" name="specScope" value="range"> Range</label>
+                <input id="specScopeRange" type="text" placeholder="e.g. 1-3, 8" oninput="var r=document.querySelector('input[name=specScope][value=range]'); if(r) r.checked=true;" style="width:90px; height:26px; padding:0 7px; font-size:0.66rem;">
+                <span style="text-transform:uppercase; letter-spacing:0.6px; font-size:0.56rem; margin-left:6px;">Quality</span>
+                <select id="specQuality" title="Draft = small fast proofs · Standard = everyday decks · Print = maximum image fidelity (largest file)" style="height:26px; font-size:0.66rem;">
+                    <option value="draft">Draft</option>
+                    <option value="standard" selected>Standard</option>
+                    <option value="print">Print</option>
+                </select>
+            </div>
             <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 12px; font-size:0.72rem;" title="Scan the deck for missing artwork, pins, plan images, and empty frames before generating" onclick="_dsShowPreflight()">Preflight</button>
             <button class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="applySpecPdfModal()">Generate PDF</button>
             <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 16px; font-size:0.75rem;" onclick="closeDeckStudio()">Done</button>
