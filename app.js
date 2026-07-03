@@ -1,7 +1,7 @@
 // =========================================================================
 // GLOBAL APP STATE & ICONS
 // =========================================================================
-
+ 
 // Version indicator. Shown in the header bar (small label + colored dot). 
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
