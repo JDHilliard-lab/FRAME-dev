@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '9.6';
+const APP_VERSION = '9.7';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -336,6 +336,7 @@ function _fpGroups() {
         if (r.planZoom != null && g.planZoom == null) g.planZoom = r.planZoom;
         if (!g.category && r.category) g.category = r.category;
         if (r.wallLine && !g.wallLine) { g.wallLine = r.wallLine; g.wallPanels = r.wallPanels || 1; }
+        if (Array.isArray(r.wallLines) && r.wallLines.length && !g.wallLines) { g.wallLines = r.wallLines; g.wallPanels = 'custom'; }
         if (!g.location && r.location) g.location = r.location;
     });
     return order.map(k => map[k]);
@@ -882,6 +883,10 @@ function _wallSegs(line, panels) {
         t += segF + gapF;
     }
     return segs;
+}
+function _wallAllSegs(o) {
+    if (o && Array.isArray(o.wallLines) && o.wallLines.length) return o.wallLines.map(l => [l.x1, l.y1, l.x2, l.y2]);
+    return (o && o.wallLine) ? _wallSegs(o.wallLine, o.wallPanels) : [];
 }
 function _fpGroupsOnLevel(level) {
     return (typeof _fpGroups === 'function' ? _fpGroups() : []).filter(g => g.wallLine && (g.level || 0) === (level || 0));
@@ -7330,10 +7335,11 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, leve
     // — Wall lines on the plan (artwork on walls; 2/3 segments for dip/triptychs) —
     if (planRect) {
         entries.forEach((en) => {
-            if (!en.wallLine) return;
+            const allSegs = _wallAllSegs(en);
+            if (!allSegs.length) return;
             const [cr, cg, cb] = hx(categoryColor(en.category));
             doc.setDrawColor(cr, cg, cb); doc.setLineWidth(2.6); doc.setLineCap && doc.setLineCap('butt');
-            _wallSegs(en.wallLine, en.wallPanels).forEach(sg => {
+            allSegs.forEach(sg => {
                 doc.line(planRect.dx + sg[0] * planRect.dw, planRect.dy + sg[1] * planRect.dh,
                          planRect.dx + sg[2] * planRect.dw, planRect.dy + sg[3] * planRect.dh);
             });
@@ -8310,8 +8316,8 @@ function _deckMockHTML(desc, w, h) {
         if (lv.imageData) {
             inner += '<div style="position:absolute; left:' + planL + 'px; top:' + planTop + 'px; width:' + planW + 'px; height:' + planH + 'px; background:#fafafa; border:1px solid #eee;"><img src="' + lv.imageData + '" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;">';
             _fpGroups().filter(g => (g.level || 0) === desc.level && g.planX != null && g.planY != null).forEach(g => {
-                                if (g.wallLine) {
-                    _wallSegs(g.wallLine, g.wallPanels).forEach(sg => {
+                                if (g.wallLine || (g.wallLines && g.wallLines.length)) {
+                    _wallAllSegs(g).forEach(sg => {
                         const lx1 = sg[0] * 100, ly1 = sg[1] * 100, lx2 = sg[2] * 100, ly2 = sg[3] * 100;
                         const llen = Math.hypot(lx2 - lx1, ly2 - ly1);
                         const lang = Math.atan2(ly2 - ly1, lx2 - lx1) * 180 / Math.PI;
@@ -10596,8 +10602,8 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     svg.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; pointer-events:none;';
     svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('preserveAspectRatio', 'none');
     _fpGroups().forEach(g => {
-        if ((g.level || 0) !== desc.level || !g.wallLine) return;
-        _wallSegs(g.wallLine, g.wallPanels).forEach(sg => {
+        if ((g.level || 0) !== desc.level) return;
+        _wallAllSegs(g).forEach(sg => {
             const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             ln.setAttribute('x1', sg[0] * 100); ln.setAttribute('y1', sg[1] * 100);
             ln.setAttribute('x2', sg[2] * 100); ln.setAttribute('y2', sg[3] * 100);
@@ -10610,7 +10616,13 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     wrap.appendChild(svg);
     if (_fpLineArmId) {
         img.style.cursor = 'crosshair';
-        img.onmousedown = _dsFpLineDown;
+        const gArm = _fpFindGroup(_fpLineArmId);
+        if (gArm && gArm.wallPanels === 'custom') {
+            img.onclick = _dsFpLineClickPoint;      // click start, click end, repeat
+            img.onmousemove = _dsFpLineHover;
+        } else {
+            img.onmousedown = _dsFpLineDown;        // drag gesture
+        }
     }
     _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g)); });
     area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh, desc); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page);
@@ -10639,6 +10651,28 @@ function _dsFpLineMove(e) {
     }
     pv.setAttribute('x1', _fpLineStart.x * 100); pv.setAttribute('y1', _fpLineStart.y * 100);
     pv.setAttribute('x2', n.x * 100); pv.setAttribute('y2', n.y * 100);
+}
+function _dsFpLineClickPoint(e) {
+    if (!_fpLineArmId) return;
+    const n = _dsFpNorm(e); if (!n) return;
+    if (!_fpLineStart) { _fpLineStart = n; _dsFpLineHover(e); return; }   // first click: anchor
+    const g = _fpFindGroup(_fpLineArmId); if (!g) { _fpLineStart = null; return; }
+    const seg = { x1: _fpLineStart.x, y1: _fpLineStart.y, x2: n.x, y2: n.y };
+    _fpLineStart = null;
+    if (Math.hypot(seg.x2 - seg.x1, seg.y2 - seg.y1) < 0.004) return;
+    g.rows.forEach(r => {
+        r.wallPanels = 'custom';
+        r.wallLines = (Array.isArray(r.wallLines) ? r.wallLines : (r.wallLine ? [r.wallLine] : []));
+        delete r.wallLine;
+        r.wallLines.push(seg);
+    });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderCenter(); _dsRenderRail();   // stay armed for the next line
+}
+function _dsFpLineHover(e) {
+    if (!_fpLineArmId || !_fpLineStart) return;
+    _dsFpLineMove(e);   // reuse the dashed preview
 }
 function _dsFpLineUp(e) {
     document.removeEventListener('mousemove', _dsFpLineMove);
@@ -10852,35 +10886,48 @@ function _dsRenderTools() {
             _artCats().forEach(cc => { const o = document.createElement('option'); o.value = cc.key; o.textContent = cc.label; if ((g.category || '') === cc.key) o.selected = true; sel.appendChild(o); });
             sel.onclick = (e) => e.stopPropagation();
             sel.onchange = (e) => _dsFpSetCategory(g.key, e.target.value);
-            lab.style.minWidth = '0';
-            row.appendChild(num); row.appendChild(lab); row.appendChild(sel);
+            lab.style.minWidth = '0'; lab.style.flex = '1 1 0';
+            sel.style.width = '64px'; sel.style.flex = '0 0 auto'; sel.style.fontSize = '0.56rem';
+            row.style.overflow = 'hidden';
+            const hasLine = !!(g.wallLine || (g.wallLines && g.wallLines.length));
+            // Line icon button (armed = red outline)
+            const lnB = document.createElement('button');
+            lnB.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="4" y1="20" x2="20" y2="4"/></svg>';
+            lnB.title = hasLine ? 'Redraw wall line' : 'Draw wall line \u2014 click, then ' + ((g.wallPanels === 'custom') ? 'click start/end points on the plan (keep clicking to add more lines)' : 'drag along the wall on the plan');
+            lnB.className = 'action-btn btn-secondary';
+            lnB.style.cssText = 'width:24px; height:22px; padding:0; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;' + (_fpLineArmId === g.key ? ' outline:2px solid #e02b2b; color:#e02b2b;' : (hasLine ? ' color:' + categoryColor(g.category) + ';' : ''));
+            lnB.onclick = (e) => { e.stopPropagation(); _fpLineArmId = (_fpLineArmId === g.key ? null : g.key); _fpArmedId = null; _fpLineStart = null; _dsRenderCenter(); _dsRenderTools(); };
+            // Panels / mode select
+            const pSel = document.createElement('select');
+            pSel.title = 'Line type \u2014 Single, Diptych, Triptych, or Custom (click-to-click, multiple lines)';
+            pSel.style.cssText = 'flex:0 0 auto; width:58px; font-size:0.56rem; padding:1px 1px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+            const curMode = (g.wallPanels === 'custom') ? 'custom' : String(g.wallPanels || 1);
+            [['1', 'Single'], ['2', 'Diptych'], ['3', 'Triptych'], ['custom', 'Custom']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (curMode === v) o.selected = true; pSel.appendChild(o); });
+            pSel.onclick = (e) => e.stopPropagation();
+            pSel.onchange = (e) => {
+                e.stopPropagation();
+                const v = pSel.value;
+                g.rows.forEach(r2 => {
+                    if (v === 'custom') {
+                        r2.wallPanels = 'custom';
+                        if (r2.wallLine && !(r2.wallLines && r2.wallLines.length)) r2.wallLines = [r2.wallLine];
+                        delete r2.wallLine;
+                    } else {
+                        const wasCustom = Array.isArray(r2.wallLines) && r2.wallLines.length;
+                        if (wasCustom) { r2.wallLine = r2.wallLines[0]; delete r2.wallLines; }
+                        r2.wallPanels = parseInt(v, 10) || 1;
+                    }
+                });
+                if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+            };
+            // Remove
+            const lnX = document.createElement('button'); lnX.textContent = '\u2715'; lnX.title = 'Remove wall line(s)';
+            lnX.className = 'action-btn btn-secondary'; lnX.style.cssText = 'width:18px; height:22px; padding:0; font-size:0.52rem; flex:0 0 auto;' + (hasLine ? '' : ' visibility:hidden;');
+            lnX.onclick = (e) => { e.stopPropagation(); g.rows.forEach(r2 => { delete r2.wallLine; delete r2.wallLines; delete r2.wallPanels; }); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+            row.appendChild(num); row.appendChild(lab); row.appendChild(sel); row.appendChild(lnB); row.appendChild(pSel); row.appendChild(lnX);
             row.onclick = () => _dsFpArm(g.key);
             t.appendChild(row);
-            // Wall line controls on their own row so they never get clipped by
-            // long code/location labels above.
-            const lineRow = document.createElement('div');
-            lineRow.style.cssText = 'display:flex; align-items:center; gap:6px; margin:-2px 0 6px 27px;';
-            const lnB = document.createElement('button');
-            lnB.textContent = g.wallLine ? (_fpLineArmId === g.key ? 'Drag on plan\u2026' : 'Redraw wall line') : (_fpLineArmId === g.key ? 'Drag on plan\u2026' : 'Wall line');
-            lnB.title = 'Draw the artwork\u2019s wall line: click, then drag along the wall on the plan';
-            lnB.className = 'action-btn btn-secondary';
-            lnB.style.cssText = 'height:22px; padding:0 8px; font-size:0.58rem; flex:0 0 auto;' + (_fpLineArmId === g.key ? ' outline:2px solid #e02b2b;' : '');
-            lnB.onclick = (e) => { e.stopPropagation(); _fpLineArmId = (_fpLineArmId === g.key ? null : g.key); _fpArmedId = null; _dsRenderCenter(); _dsRenderTools(); };
-            lineRow.appendChild(lnB);
-            if (g.wallLine) {
-                const pSel = document.createElement('select');
-                pSel.title = 'Panels on this wall';
-                pSel.style.cssText = 'flex:0 0 auto; font-size:0.58rem; padding:1px 2px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
-                [[1, 'Single'], [2, 'Diptych'], [3, 'Triptych']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if ((g.wallPanels || 1) === v) o.selected = true; pSel.appendChild(o); });
-                pSel.onclick = (e) => e.stopPropagation();
-                pSel.onchange = (e) => { e.stopPropagation(); g.rows.forEach(r2 => { r2.wallPanels = parseInt(pSel.value, 10) || 1; }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
-                lineRow.appendChild(pSel);
-                const lnX = document.createElement('button'); lnX.textContent = '\u2715'; lnX.title = 'Remove wall line';
-                lnX.className = 'action-btn btn-secondary'; lnX.style.cssText = 'width:20px; height:22px; padding:0; font-size:0.56rem; flex:0 0 auto;';
-                lnX.onclick = (e) => { e.stopPropagation(); g.rows.forEach(r2 => { delete r2.wallLine; delete r2.wallPanels; }); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
-                lineRow.appendChild(lnX);
-            }
-            t.appendChild(lineRow);
         });
         // ── Category manager: rename tiers, recolor, add new ones ──
         const catHdr = document.createElement('div'); catHdr.textContent = 'Categories'; catHdr.style.cssText = 'font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:12px 0 6px;';
@@ -13603,10 +13650,11 @@ async function _planCropCanvasForRow(r, opts) {
         x.drawImage(img, cx0, cy0, cw, chh, 0, 0, oc.width, oc.height);
         // Wall lines inside the crop (same transform as the pins below).
         groups.forEach(gr => {
-            if (!gr.wallLine || (gr.level || 0) !== (g.level || 0)) return;
+            const allSegs = _wallAllSegs(gr);
+            if (!allSegs.length || (gr.level || 0) !== (g.level || 0)) return;
             x.strokeStyle = (typeof categoryColor === 'function') ? categoryColor(gr.category) : '#c0392b';
             x.lineWidth = Math.max(3, oc.width * 0.012); x.lineCap = 'butt';
-            _wallSegs(gr.wallLine, gr.wallPanels).forEach(sg => {
+            allSegs.forEach(sg => {
                 x.beginPath();
                 x.moveTo((sg[0] * iw - cx0) * scale, (sg[1] * ih - cy0) * scale);
                 x.lineTo((sg[2] * iw - cx0) * scale, (sg[3] * ih - cy0) * scale);
@@ -14200,7 +14248,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
                 const codesLabel = (g.ids.length > 1)
                     ? (g.key + ' (' + g.ids.map(id => { const s = id.indexOf(g.key) === 0 ? id.slice(g.key.length).replace(/^[-_\s]*/, '') : id; return s || id; }).join('/') + ')')
                     : (g.ids[0] || g.key);
-                return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage, wallLine: g.wallLine || null, wallPanels: g.wallPanels || 1 };
+                return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage, wallLine: g.wallLine || null, wallLines: g.wallLines || null, wallPanels: g.wallPanels || 1 };
             });
             let planImg = null;
             if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
