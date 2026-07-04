@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '8.9';
+const APP_VERSION = '9.0';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -7488,6 +7488,21 @@ function _timelineNotes(i) {
         return { date: p[0] || '', text: p.slice(1).join(' | ') };
     });
 }
+// Per-area text config: family (display=Druk, serif=Messina, sans=Helvetica),
+// weight, size. Defaults mirror the reference layout.
+function _tlF(area) {
+    const d = { title: { f: 'display', w: 'bold', s: 26 }, pill: { f: 'display', w: 'bold', s: 0 }, appr: { f: 'serif', w: 'normal', s: 7 }, notes: { f: 'sans', w: 'normal', s: 8 } }[area];
+    const o = (editorialContent.timelineFonts || {})[area] || {};
+    const s = (o.s > 0 ? o.s : (d.s || _timelinePillFs()));
+    return { f: o.f || d.f, w: o.w || d.w, s: s };
+}
+function _tlSetFont(doc, area, forceW) {
+    const c = _tlF(area);
+    doc.setFont(c.f === 'sans' ? 'helvetica' : _font(c.f), forceW || c.w);
+    doc.setFontSize(c.s);
+    return c;
+}
+function _tlStemPos(i) { return ((editorialContent.timelineStemPos || {})[i]) === 'pill' ? 'pill' : 'gap'; }
 function _timelinePillFs() { const v = parseFloat(editorialContent.timelinePillFs); return (v >= 7 && v <= 18) ? v : 11.5; }
 function _timelineStages(raw) {
     return (raw == null ? (editorialContent.timeline || '') : raw)
@@ -7509,8 +7524,8 @@ function _drawTimelinePagePills(doc, logos, pageNum, meta, raw) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text('PROCESS & TIMELINE', M, M + 24);
+    const _tc = _tlSetFont(doc, 'title'); doc.setTextColor(20, 20, 20);
+    doc.text('PROCESS & TIMELINE', M, M + _tc.s * 0.92);
 
     let stages = _timelineStages(raw);
     if (!stages.length) stages = _timelineStages(DEFAULT_TIMELINE);   // pre-built out of the box
@@ -7533,16 +7548,16 @@ function _drawTimelinePagePills(doc, logos, pageNum, meta, raw) {
     const pillH = 62;
     // Baseline + tiny start dot.
     doc.setDrawColor(30, 30, 30); doc.setLineWidth(1.2); doc.line(lineX0, midY, lineX1, midY);
-    doc.setFillColor(20, 20, 20); doc.circle(lineX0 + 1.5, midY, 2.2, 'F');
+    doc.setFillColor(20, 20, 20); doc.circle(lineX0 + 1.5, midY, 2.2, 'F'); doc.circle(lineX1 - 1.5, midY, 2.2, 'F');
     let cx = startX;
     stages.forEach((s, i) => {
         const w = widths[i]; const x = cx; const y = midY - pillH / 2;
         const col = _hexToRgb(_timelineColor(i));
         doc.setFillColor(col.r, col.g, col.b);
         doc.roundedRect(x, y, w, pillH, pillH / 2, pillH / 2, 'F');
-        doc.setFont(_font('display'), 'bold'); doc.setFontSize(_timelinePillFs()); doc.setTextColor(255, 255, 255);
+        const _pc = _tlSetFont(doc, 'pill'); doc.setTextColor(255, 255, 255);
         const lines = doc.splitTextToSize(s.label.toUpperCase(), w - 20);
-        const lh = _timelinePillFs() * 1.13; const startY = midY - ((lines.length - 1) * lh) / 2 + _timelinePillFs() * 0.35;
+        const lh = _pc.s * 1.13; const startY = midY - ((lines.length - 1) * lh) / 2 + _pc.s * 0.35;
         lines.forEach((ln, li) => doc.text(ln, x + w / 2, startY + li * lh, { align: 'center' }));
         doc.setTextColor(20, 20, 20);
         // Approvals: the FIRST milestone is a circle whose stem lands ON the
@@ -7551,16 +7566,17 @@ function _drawTimelinePagePills(doc, logos, pageNum, meta, raw) {
         // the pill (reference: Final Quote & PO / Final budget reconciliation).
         const ms = s.milestones || [];
         if (ms.length) {
-            const gx = (i < n - 1) ? (x + w + gap / 2) : Math.min(x + w + trail / 2, lineX1 - 30);
+            const fromPill = _tlStemPos(i) === 'pill';
+            const gx = fromPill ? (x + w / 2) : ((i < n - 1) ? (x + w + gap / 2) : Math.min(x + w + trail / 2, lineX1 - 30));
             const circY = midY - pillH / 2 - 78;
             const rC = 30;
             doc.setDrawColor(30, 30, 30); doc.setLineWidth(0.8);
-            doc.line(gx, circY + rC, gx, midY);
+            doc.line(gx, circY + rC, gx, fromPill ? y : midY);
             doc.setFillColor(255, 255, 255); doc.setLineWidth(1);
             doc.circle(gx, circY, rC, 'FD');
-            doc.setFont(_font('serif'), 'normal'); doc.setFontSize(7); doc.setTextColor(30, 30, 30);
+            const _ac = _tlSetFont(doc, 'appr'); doc.setTextColor(30, 30, 30);
             const mlines = doc.splitTextToSize(ms[0], rC * 1.7);
-            const mlh = 8; const mStartY = circY - ((mlines.length - 1) * mlh) / 2;
+            const mlh = _ac.s * 1.15; const mStartY = circY - ((mlines.length - 1) * mlh) / 2;
             mlines.forEach((ln, li) => doc.text(ln, gx, mStartY + li * mlh, { align: 'center', baseline: 'middle' }));
             doc.setTextColor(20, 20, 20);
             // Dashed floaters
@@ -7575,9 +7591,9 @@ function _drawTimelinePagePills(doc, logos, pageNum, meta, raw) {
                     doc.setLineDashPattern([2, 2], 0);
                     try { doc.rect(bx2, byTop, bw2, bh2, 'S'); } catch (e) {}
                     doc.setLineDashPattern([], 0);
-                    doc.setFont(_font('serif'), 'normal'); doc.setFontSize(7); doc.setTextColor(30, 30, 30);
+                    const _bc = _tlSetFont(doc, 'appr'); doc.setTextColor(30, 30, 30);
                     const bl = doc.splitTextToSize(ex, bw2 - 10);
-                    const blh = 8; const bStartY = byTop + bh2 / 2 - ((bl.length - 1) * blh) / 2;
+                    const blh = _bc.s * 1.15; const bStartY = byTop + bh2 / 2 - ((bl.length - 1) * blh) / 2;
                     bl.forEach((ln, li) => doc.text(ln, bx2 + bw2 / 2, bStartY + li * blh, { align: 'center', baseline: 'middle' }));
                     doc.setTextColor(20, 20, 20);
                     by2 = byTop - bgap;
@@ -7592,16 +7608,18 @@ function _drawTimelinePagePills(doc, logos, pageNum, meta, raw) {
             let ny = midY + pillH / 2 + 24;
             const nyStart = midY + pillH / 2 + 14;
             const maxY = PH - 54;
+            const _nc = _tlF('notes');
+            const nFam = _nc.f === 'sans' ? 'helvetica' : _font(_nc.f);
             notes.forEach(nt => {
                 if (ny > maxY) return;
-                doc.setFont('helvetica', 'bold'); doc.setFontSize(8); doc.setTextColor(30, 30, 30);
-                if (nt.date) { doc.text(doc.splitTextToSize(nt.date, w - 14)[0] || '', nx, ny); ny += 10; }
+                doc.setFont(nFam, 'bold'); doc.setFontSize(_nc.s); doc.setTextColor(30, 30, 30);
+                if (nt.date) { doc.text(doc.splitTextToSize(nt.date, w - 14)[0] || '', nx, ny); ny += _nc.s * 1.25; }
                 if (nt.text) {
-                    doc.setFont('helvetica', 'normal'); doc.setTextColor(60, 60, 60);
+                    doc.setFont(nFam, _nc.w); doc.setTextColor(60, 60, 60);
                     const tl = doc.splitTextToSize(nt.text, w - 14);
-                    tl.forEach(l2 => { if (ny > maxY) return; doc.text(l2, nx, ny); ny += 9.5; });
+                    tl.forEach(l2 => { if (ny > maxY) return; doc.text(l2, nx, ny); ny += _nc.s * 1.19; });
                 }
-                ny += 7;
+                ny += _nc.s * 0.85;
             });
             doc.setDrawColor(120, 120, 120); doc.setLineWidth(0.5);
             doc.line(ruleX, nyStart, ruleX, Math.min(ny - 12, maxY));
@@ -8132,6 +8150,7 @@ function _deckMockHTML(desc, w, h) {
         html += '<div style="position:absolute; left:4%; top:6%; font-family:' + _mbFontCss('display') + '; font-weight:700; font-size:' + Math.max(5, h * 0.07) + 'px; color:#111; text-transform:uppercase;">Process &amp; Timeline</div>';
         html += '<div style="position:absolute; left:3%; right:3%; top:' + Math.round(midY) + 'px; height:1px; background:#222;"></div>';
         html += '<div style="position:absolute; left:3%; top:' + Math.round(midY - 1.5) + 'px; width:4px; height:4px; border-radius:50%; background:#111;"></div>';
+        html += '<div style="position:absolute; right:3%; top:' + Math.round(midY - 1.5) + 'px; width:4px; height:4px; border-radius:50%; background:#111;"></div>';
         let x2 = w * 0.04;
         stages.forEach((s, i) => {
             const pw2 = raw[i] * sc2;
@@ -10960,6 +10979,43 @@ function _dsRenderTools() {
             fsIn.oninput = () => { editorialContent.timelinePillFs = parseFloat(fsIn.value); fsVal.textContent = fsIn.value + 'pt'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
             fsRow.appendChild(fsLab); fsRow.appendChild(fsIn); fsRow.appendChild(fsVal);
             t.appendChild(fsRow);
+
+            // Per-area text: family / weight / size
+            const tl2 = document.createElement('div'); tl2.textContent = 'Text'; tl2.style.cssText = 'font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin-bottom:5px;';
+            t.appendChild(tl2);
+            editorialContent.timelineFonts = editorialContent.timelineFonts || {};
+            const fontRow = (label, area, withSize) => {
+                const cfg = _tlF(area);
+                const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:4px;';
+                const lb = document.createElement('div'); lb.textContent = label; lb.style.cssText = 'flex:0 0 62px; font-size:0.62rem; color:var(--text-main);';
+                const famS = document.createElement('select'); famS.style.cssText = 'flex:1; height:24px; font-size:0.6rem;';
+                [['display', 'Druk'], ['serif', 'Messina'], ['sans', 'Helvetica']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (cfg.f === v) o.selected = true; famS.appendChild(o); });
+                const wS = document.createElement('select'); wS.style.cssText = 'flex:0 0 66px; height:24px; font-size:0.6rem;';
+                [['normal', 'Regular'], ['bold', 'Bold']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (cfg.w === v) o.selected = true; wS.appendChild(o); });
+                const upd = () => {
+                    editorialContent.timelineFonts[area] = editorialContent.timelineFonts[area] || {};
+                    editorialContent.timelineFonts[area].f = famS.value;
+                    editorialContent.timelineFonts[area].w = wS.value;
+                    if (withSize && szI) editorialContent.timelineFonts[area].s = parseFloat(szI.value) || 0;
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail();
+                };
+                famS.onchange = upd; wS.onchange = upd;
+                row.appendChild(lb); row.appendChild(famS); row.appendChild(wS);
+                let szI = null;
+                if (withSize) {
+                    szI = document.createElement('input'); szI.type = 'number'; szI.min = '5'; szI.max = '40'; szI.step = '0.5'; szI.value = cfg.s;
+                    szI.style.cssText = 'flex:0 0 48px; height:24px; font-size:0.6rem; padding:0 4px;';
+                    szI.oninput = upd;
+                    row.appendChild(szI);
+                }
+                t.appendChild(row);
+            };
+            fontRow('Title', 'title', true);
+            fontRow('Pills', 'pill', false);
+            fontRow('Approvals', 'appr', true);
+            fontRow('Dates', 'notes', true);
+            const fNote = document.createElement('div'); fNote.textContent = 'Druk only ships in Bold; Regular falls back to the same weight.'; fNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:2px 0 10px;';
+            t.appendChild(fNote);
             const qRow = document.createElement('div'); qRow.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
             const mk = (txt, fn, title) => { const b = document.createElement('button'); b.textContent = txt; b.title = title || ''; b.className = 'action-btn btn-secondary'; b.style.cssText = 'flex:1; height:26px; font-size:0.6rem;'; b.onclick = fn; return b; };
             qRow.appendChild(mk('All black', () => { editorialContent.timelineColors = {}; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); }, 'Farmboy default \u2014 black pills'));
@@ -10981,6 +11037,15 @@ function _dsRenderTools() {
                     const rst = document.createElement('button'); rst.textContent = '\u21ba'; rst.title = 'Back to black'; rst.className = 'action-btn btn-secondary'; rst.style.cssText = 'width:26px; height:26px; padding:0; font-size:0.7rem;';
                     rst.onclick = () => { delete editorialContent.timelineColors[i]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); };
                     row.appendChild(sw); row.appendChild(nm); row.appendChild(rst); blk.appendChild(row);
+                    if ((s.milestones || []).length) {
+                        editorialContent.timelineStemPos = editorialContent.timelineStemPos || {};
+                        const stR = document.createElement('div'); stR.style.cssText = 'display:flex; align-items:center; gap:6px; margin-bottom:4px;';
+                        const stL = document.createElement('div'); stL.textContent = 'Approval stem'; stL.style.cssText = 'flex:0 0 auto; font-size:0.6rem; color:var(--text-muted);';
+                        const stS = document.createElement('select'); stS.style.cssText = 'flex:1; height:22px; font-size:0.6rem;';
+                        [['gap', 'On the line, after the pill'], ['pill', 'Straight up from the pill']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (_tlStemPos(i) === v) o.selected = true; stS.appendChild(o); });
+                        stS.onchange = () => { editorialContent.timelineStemPos[i] = stS.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
+                        stR.appendChild(stL); stR.appendChild(stS); blk.appendChild(stR);
+                    }
                     const na = document.createElement('textarea'); na.rows = 2;
                     na.placeholder = 'Dates below the stage, one per line:\nQ3 2023 | Installation';
                     na.style.cssText = 'width:100%; box-sizing:border-box; font-size:0.64rem; line-height:1.35; padding:5px 7px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; resize:vertical; font-family:monospace;';
