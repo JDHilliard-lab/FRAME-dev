@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '10.2';
+const APP_VERSION = '10.3';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -1039,102 +1039,98 @@ async function _drawPlanDetailPage(doc, logos, pageNum, meta, pd) {
     }
     try { doc.addImage(oc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', planArea.x, planArea.y, planArea.w, planArea.h); } catch (e) {}
     doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(planArea.x, planArea.y, planArea.w, planArea.h, 'S'); } catch (e) {}
-    // Mockups: alternate left/right columns, framed; leader line pin -> mockup.
+    // Mockups: each piece lands in the column NEAREST its pin, stacked in pin
+    // order; drag overrides (pd.pos) place it anywhere. Leaders are elbow-routed
+    // through stacked lanes so parallel lines never overlap.
     const colL = { x: M, w: PW * 0.195 }, colR = { x: PW * 0.775, w: PW * 0.195 };
-    const colTop = PH * 0.17, colBot = PH * 0.9;
-    const nL = Math.ceil(feat.length / 2), nR = feat.length - nL;
-    const slotGap = 14;
-    const slot = (col, count) => (colBot - colTop - slotGap * Math.max(0, count - 1)) / Math.max(1, count);
-    const slHL = slot(colL, nL), slHR = slot(colR, nR);
-    for (let i = 0; i < feat.length; i++) {
-        const g = feat[i];
-        const left = i < nL;
-        const col = left ? colL : colR;
-        const idx = left ? i : i - nL;
-        const slH = left ? slHL : slHR;
-        const sy = colTop + idx * (slH + slotGap);
-        // Bake the REAL framed mockup for every member (whole salon hang),
-        // then grid the set inside the slot, scaled to fit.
-        const baked = [];
-        for (const r2 of g.rows) {
-            let m = null;
-            try { m = await _mockupEnsure(r2.id); } catch (e) {}
-            if (m && m.url) baked.push(m);
-            else if (r2.artworkUrl) baked.push({ url: r2.artworkUrl, aspect: 1 });
-        }
-        const nB = Math.max(1, baked.length);
-        const scaleF = (pd.mockScale > 0 ? pd.mockScale : 1);
-        let ax = col.x, ay = sy, aw = col.w, ah = slH;   // cluster bounds for the leader
-        // If the group's members are hung in an elevation, reproduce that exact
-        // wall arrangement (relative positions AND sizes) inside the slot.
-        const memIds = g.rows.map(r2 => r2.id).filter(Boolean);
-        let hung = null;
-        try {
-            let best = null;
-            (elevations || []).forEach(ev => {
-                const fr = (ev.frames || []).filter(f => f && memIds.indexOf(f.id) >= 0);
-                if (fr.length >= 2 && (!best || fr.length > best.fr.length)) best = { ev: ev, fr: fr };
-            });
-            if (best) hung = best.fr;
-        } catch (e) {}
-        if (!baked.length) {
-            doc.setFillColor(244, 244, 244); try { doc.rect(col.x, sy, col.w, slH, 'F'); } catch (e) {}
-        } else if (hung && hung.length >= 2) {
-            // Bounding box of the hang in wall units -> fit into the slot.
-            let hx0 = Infinity, hy0 = Infinity, hx1 = -Infinity, hy1 = -Infinity;
-            hung.forEach(f => { hx0 = Math.min(hx0, f.x); hy0 = Math.min(hy0, f.y); hx1 = Math.max(hx1, f.x + f.w); hy1 = Math.max(hy1, f.y + f.h); });
-            const bwW = Math.max(0.01, hx1 - hx0), bhW = Math.max(0.01, hy1 - hy0);
-            const fit = Math.min(col.w / bwW, slH / bhW) * scaleF;
-            const clW = bwW * fit, clH = bhW * fit;
-            const ox = col.x + (col.w - clW) / 2, oy = sy + (slH - clH) / 2;
-            ax = ox; ay = oy; aw = clW; ah = clH;
-            const byId = {}; g.rows.forEach((r2, ri) => { if (baked[ri]) byId[r2.id] = baked[ri]; });
-            hung.forEach(f => {
-                const m = byId[f.id]; if (!m) return;
-                const fx = ox + (f.x - hx0) * fit, fy = oy + (f.y - hy0) * fit;
-                const fw = f.w * fit, fh = f.h * fit;
-                try { doc.addImage(m.url, 'JPEG', fx, fy, fw, fh); } catch (e) {}
-            });
-            // Members not in the elevation still show, tucked under the cluster.
-            const missing = g.rows.filter((r2, ri) => baked[ri] && !hung.some(f => f.id === r2.id));
-            if (missing.length) {
-                let mx0 = ox; const mh2 = Math.max(10, slH * 0.16);
-                missing.forEach((r2, mi) => {
-                    const m = byId[r2.id]; if (!m) return;
-                    const arM = 1 / Math.max(0.05, m.aspect);
-                    const mwM = Math.min(mh2 * arM, col.w / missing.length - 3);
-                    try { doc.addImage(m.url, 'JPEG', mx0, oy + clH + 4, mwM, mh2); } catch (e) {}
-                    mx0 += mwM + 4;
+    const colTop = PH * 0.17, colBot = PH * 0.9, slotGap = 14;
+    const pxOf = (g) => planArea.x + ((g.planX * iw - cx0) / cw) * planArea.w;
+    const pyOf = (g) => planArea.y + ((g.planY * ih - cy0) / chh) * planArea.h;
+    const planCx = planArea.x + planArea.w / 2;
+    const bySide = { L: [], R: [] };
+    feat.slice().sort((a, b) => pyOf(a) - pyOf(b)).forEach(g => (pxOf(g) < planCx ? bySide.L : bySide.R).push(g));
+    while (bySide.L.length - bySide.R.length > 2) bySide.R.unshift(bySide.L.pop());
+    while (bySide.R.length - bySide.L.length > 2) bySide.L.push(bySide.R.shift());
+    pd._layout = [];
+    const scaleF = (pd.mockScale > 0 ? pd.mockScale : 1);
+    for (const side of ['L', 'R']) {
+        const arr = bySide[side]; if (!arr.length) continue;
+        const col = side === 'L' ? colL : colR;
+        const slH = (colBot - colTop - slotGap * Math.max(0, arr.length - 1)) / Math.max(1, arr.length);
+        for (let i = 0; i < arr.length; i++) {
+            const g = arr[i];
+            const ov = pd.pos && pd.pos[g.key];
+            const sx0 = ov ? (ov.x * PW - col.w / 2) : col.x;
+            const sy0 = ov ? (ov.y * PH - slH / 2) : (colTop + i * (slH + slotGap));
+            // Bake every member (whole hang) with real frames.
+            const baked = [];
+            for (const r2 of g.rows) {
+                let m = null; try { m = await _mockupEnsure(r2.id); } catch (e) {}
+                if (m && m.url) baked.push(m); else if (r2.artworkUrl) baked.push({ url: r2.artworkUrl, aspect: 1 });
+            }
+            let ax = sx0, ay = sy0, aw = col.w, ah = slH;
+            const memIds = g.rows.map(r2 => r2.id).filter(Boolean);
+            let hung = null;
+            try {
+                let best = null;
+                (elevations || []).forEach(ev => { const fr = (ev.frames || []).filter(f => f && memIds.indexOf(f.id) >= 0); if (fr.length >= 2 && (!best || fr.length > best.fr.length)) best = { ev: ev, fr: fr }; });
+                if (best) hung = best.fr;
+            } catch (e) {}
+            if (!baked.length) {
+                doc.setFillColor(244, 244, 244); try { doc.rect(sx0, sy0, col.w, slH, 'F'); } catch (e) {}
+            } else if (hung && hung.length >= 2) {
+                let hx0 = Infinity, hy0 = Infinity, hx1 = -Infinity, hy1 = -Infinity;
+                hung.forEach(f => { hx0 = Math.min(hx0, f.x); hy0 = Math.min(hy0, f.y); hx1 = Math.max(hx1, f.x + f.w); hy1 = Math.max(hy1, f.y + f.h); });
+                const bwW = Math.max(0.01, hx1 - hx0), bhW = Math.max(0.01, hy1 - hy0);
+                const fit = Math.min(col.w / bwW, slH / bhW) * scaleF;
+                const clW = bwW * fit, clH = bhW * fit;
+                const ox = sx0 + (col.w - clW) / 2, oy = sy0 + (slH - clH) / 2;
+                ax = ox; ay = oy; aw = clW; ah = clH;
+                const byId = {}; g.rows.forEach((r2, ri) => { if (baked[ri]) byId[r2.id] = baked[ri]; });
+                hung.forEach(f => { const m = byId[f.id]; if (!m) return; try { doc.addImage(m.url, 'JPEG', ox + (f.x - hx0) * fit, oy + (f.y - hy0) * fit, f.w * fit, f.h * fit); } catch (e) {} });
+                const missing = g.rows.filter((r2, ri) => baked[ri] && !hung.some(f => f.id === r2.id));
+                if (missing.length) {
+                    let mx0 = ox; const mh2 = Math.max(10, slH * 0.16);
+                    missing.forEach((r2) => { const m = byId[r2.id]; if (!m) return; const arM = 1 / Math.max(0.05, m.aspect); const mwM = Math.min(mh2 * arM, col.w / missing.length - 3); try { doc.addImage(m.url, 'JPEG', mx0, oy + clH + 4, mwM, mh2); } catch (e) {} mx0 += mwM + 4; });
+                }
+            } else {
+                const nB = baked.length;
+                const gridRows = nB <= 3 ? 1 : (nB <= 6 ? 2 : 3);
+                const perRow = Math.ceil(nB / gridRows);
+                const cg = 4;
+                const cellW = (col.w - cg * (perRow - 1)) / perRow;
+                const cellH = (slH - cg * (gridRows - 1)) / gridRows;
+                baked.forEach((m, bi) => {
+                    const rI = Math.floor(bi / perRow), cI = bi % perRow;
+                    const inRow = Math.min(perRow, nB - rI * perRow);
+                    const rowW = inRow * cellW + cg * (inRow - 1);
+                    const ox = sx0 + (col.w - rowW) / 2 + cI * (cellW + cg);
+                    const oy = sy0 + rI * (cellH + cg);
+                    let mw = cellW * scaleF, mh = cellH * scaleF;
+                    const ar = 1 / Math.max(0.05, m.aspect);
+                    if (mw / mh > ar) mw = mh * ar; else mh = mw / ar;
+                    try { doc.addImage(m.url, 'JPEG', ox + (cellW - mw) / 2, oy + (cellH - mh) / 2, mw, mh); } catch (e) {}
                 });
             }
-        } else {
-            const gridRows = nB <= 3 ? 1 : (nB <= 6 ? 2 : 3);
-            const perRow = Math.ceil(nB / gridRows);
-            const cg = 4;
-            const cellW = (col.w - cg * (perRow - 1)) / perRow;
-            const cellH = (slH - cg * (gridRows - 1)) / gridRows;
-            baked.forEach((m, bi) => {
-                const rI = Math.floor(bi / perRow), cI = bi % perRow;
-                const inRow = Math.min(perRow, nB - rI * perRow);
-                const rowW = inRow * cellW + cg * (inRow - 1);
-                const ox = col.x + (col.w - rowW) / 2 + cI * (cellW + cg);
-                const oy = sy + rI * (cellH + cg);
-                let mw = cellW * scaleF, mh = cellH * scaleF;
-                const ar = 1 / Math.max(0.05, m.aspect);
-                if (mw / mh > ar) mw = mh * ar; else mh = mw / ar;
-                const mx0 = ox + (cellW - mw) / 2, my0 = oy + (cellH - mh) / 2;
-                try { doc.addImage(m.url, 'JPEG', mx0, my0, mw, mh); } catch (e) {}
-            });
+            pd._layout.push({ key: g.key, x: ax, y: ay, w: aw, h: ah });
+            // Elbow leader: mockup edge -> lane -> pin row -> pin. Lanes stack
+            // outward per index so parallel verticals never sit on each other.
+            const pinPx = pxOf(g), pinPy = pyOf(g);
+            const clusterCx = ax + aw / 2;
+            const toRightOfMock = pinPx >= clusterCx;
+            const tx = toRightOfMock ? (ax + aw + 2) : (ax - 2);
+            const ty = ay + ah / 2;
+            const laneBase = side === 'L' ? (planArea.x - 8) : (planArea.x + planArea.w + 8);
+            const laneX = laneBase + (side === 'L' ? -1 : 1) * i * 5;
+            doc.setDrawColor(192, 57, 43); doc.setLineWidth(0.8);
+            doc.line(tx, ty, laneX, ty);
+            doc.line(laneX, ty, laneX, pinPy);
+            doc.line(laneX, pinPy, pinPx, pinPy);
         }
-        // Leader: pin (page coords) -> nearest mockup edge midpoint
-        const pinPx = planArea.x + ((g.planX * iw - cx0) / cw) * planArea.w;
-        const pinPy = planArea.y + ((g.planY * ih - cy0) / chh) * planArea.h;
-        const tx = left ? (ax + aw + 2) : (ax - 2);
-        const ty = ay + ah / 2;
-        doc.setDrawColor(192, 57, 43); doc.setLineWidth(0.8);
-        doc.line(pinPx, pinPy, tx, ty);
     }
     _drawPdfFooter(doc, logos, pageNum, meta);
+}
+function _wallAllSegs(o) {    _drawPdfFooter(doc, logos, pageNum, meta);
 }
 function _wallAllSegs(o) {
     if (o && Array.isArray(o.wallLines) && o.wallLines.length) return o.wallLines.map(l => [l.x1, l.y1, l.x2, l.y2]);
@@ -10824,6 +10820,43 @@ function _dsRenderCenter() {
             if (tok !== _dsTlRenderTok || !cv2) return;   // null = no renderer, mock stays
             cv2.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
             base.innerHTML = ''; base.appendChild(cv2);
+            // Plan Detail: draggable artwork — move a mockup and the elbow
+            // leaders re-route live (throttled re-renders while dragging).
+            if (desc.kind === 'planDetail' && desc.pd && Array.isArray(desc.pd._layout)) {
+                const PWp = 936, PHp = 540;
+                desc.pd._layout.forEach(L => {
+                    const hnd = document.createElement('div');
+                    hnd.title = 'Drag to reposition this artwork; the connector follows';
+                    hnd.style.cssText = 'position:absolute; left:' + (L.x / PWp * 100) + '%; top:' + (L.y / PHp * 100) + '%; width:' + (L.w / PWp * 100) + '%; height:' + (L.h / PHp * 100) + '%; cursor:grab; border:1px dashed transparent; border-radius:3px;';
+                    hnd.onmouseenter = () => { hnd.style.borderColor = 'rgba(224,43,43,0.7)'; };
+                    hnd.onmouseleave = () => { hnd.style.borderColor = 'transparent'; };
+                    hnd.onmousedown = (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        const rect = base.getBoundingClientRect();
+                        const startCx = (L.x + L.w / 2) / PWp, startCy = (L.y + L.h / 2) / PHp;
+                        const sx = e.clientX, sy2 = e.clientY;
+                        let raf = 0, lastCommit = 0;
+                        const mv = (ev) => {
+                            const nx = startCx + (ev.clientX - sx) / rect.width;
+                            const ny = startCy + (ev.clientY - sy2) / rect.height;
+                            desc.pd.pos = desc.pd.pos || {};
+                            desc.pd.pos[L.key] = { x: Math.max(0.02, Math.min(0.98, nx)), y: Math.max(0.06, Math.min(0.96, ny)) };
+                            hnd.style.left = ((desc.pd.pos[L.key].x - (L.w / PWp) / 2) * 100) + '%';
+                            hnd.style.top = ((desc.pd.pos[L.key].y - (L.h / PHp) / 2) * 100) + '%';
+                            const now = Date.now();
+                            if (now - lastCommit > 140) { lastCommit = now; _dsRenderCenter(); }
+                        };
+                        const up = () => {
+                            document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
+                            if (typeof pushHistory === 'function') pushHistory();
+                            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                            _dsRenderCenter(); _dsRenderRail();
+                        };
+                        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                    };
+                    base.appendChild(hnd);
+                });
+            }
         }).catch(() => {});
     }
     else {
