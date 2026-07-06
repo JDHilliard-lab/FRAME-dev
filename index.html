@@ -1938,7 +1938,25 @@
 <div id="librarySyncModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
     <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:420px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Load Frame Library</h3>
-        <p style="font-size:0.75rem; color:var(--text-main); margin-bottom: 6px; line-height: 1.4;">Drop your Frame Library folder below, or browse to locate it.</p>
+        <p style="font-size:0.75rem; color:var(--text-main); margin-bottom: 6px; line-height: 1.4;">Drop your Frame Library folder below, or browse to locate it. Frames you load here live in <strong>your browser only</strong> and override the shared repo &mdash; a handy stopgap until the frames are committed to the repo for everyone.</p>
+        <details style="margin-bottom: 12px;">
+            <summary style="font-size:0.72rem; color:var(--accent); cursor:pointer;">How to structure your folder</summary>
+            <div style="font-size:0.7rem; color:var(--text-main); line-height:1.5; margin-top:8px; padding:10px 12px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:6px;">
+                Organize by <strong>vendor</strong> then <strong>collection</strong>, and optionally split <code>corners</code> and <code>profiles</code> into subfolders:
+                <pre style="font-size:0.66rem; margin:8px 0; white-space:pre; overflow-x:auto; color:var(--text-muted);">FrameLibrary/
+  Michelangelo/
+    Avant-Garde/
+      corners/
+        MICH-41-12_1.25_d1.125_r0.75.jpg
+      profiles/
+        MICH-41-12.gif</pre>
+                <strong>Corner swatch</strong> filename carries the size:<br>
+                <code>CODE_FACE_dDEPTH_rRABBET.ext</code><br>
+                e.g. <code>MICH-41-12_1.25_d1.125_r0.75.jpg</code> &rarr; code MICH-41-12, 1.25&quot; wide, 1.125&quot; deep, 0.75&quot; rabbet. Depth and rabbet are optional.<br><br>
+                <strong>Profile drawing</strong> is just the plain code: <code>MICH-41-12.gif</code> (.png/.jpg/.gif all fine). Files inside a <code>profiles</code> folder are always treated as profiles; inside <code>corners</code> always as swatches.<br><br>
+                Vendor &amp; collection come from the folder names. Codes match loosely (dashes, underscores, and spaces are ignored), so <code>MICH-41-12</code> and <code>MICH_41_12</code> are the same frame.
+            </div>
+        </details>
         <p style="font-size:0.7rem; color:var(--text-muted); margin-bottom: 16px; line-height: 1.4; font-style: italic;">Your browser will ask permission to access the folder &mdash; this is normal, click "Upload" or "Allow" when it appears.</p>
         <div id="libraryDropZone" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 24px; text-align: center; margin-bottom: 16px; background: var(--bg-main); transition: all 0.15s; cursor: pointer;" onclick="document.getElementById('libFolderInput').click()">
             <svg viewBox="0 0 24 24" style="width: 32px; height: 32px; margin: 0 auto 8px; display: block; opacity: 0.5;" fill="none" stroke="currentColor" stroke-width="1.5">
