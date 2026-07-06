@@ -14529,7 +14529,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         // Pin the strip's IMAGE bottom hard against the plan/elevation top, with
         // only a hair of breathing room, and put labels just under that.
         const planTop = py((tpl.plan && tpl.plan.y) != null ? tpl.plan.y : .62);
-        const labelBaseline = planTop + 40;   // labels sit right above the thumbnails
+        const labelBaseline = planTop + 50;   // labels sit right above the thumbnails
         const imgBottom = labelBaseline - labelH;
         // Each thumb gets its natural aspect; widths are capped so the pair stays
         // compact. The profile can be wider (cross-section), the corner is a strip.
