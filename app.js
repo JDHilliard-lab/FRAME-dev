@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '12.5';
+const APP_VERSION = '12.7';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -7491,6 +7491,39 @@ function _whiteLogo(dataUrl) {
         const out = cnv.toDataURL('image/png'); _whiteLogoCache[dataUrl] = out; return out;
     } catch (e) { return dataUrl; }
 }
+// ── Page theme system (light / dark / custom colour / background image) ──────
+// editorialContent.pageThemes[pageKey] = { mode:'light'|'dark', bg:'#hex'|null, image:dataUrl|null }
+// Light = dark ink on white. Dark = white ink on black/colour/image.
+function _pageThemes() { editorialContent.pageThemes = editorialContent.pageThemes || {}; return editorialContent.pageThemes; }
+async function _pageThemeBake(key) {
+    const t = (_pageThemes()[key]) || {};
+    if (t.image) { try { t._bakedImg = await _loadImg(t.image); } catch (e) { t._bakedImg = null; } }
+    return t;
+}
+function _pageTheme(key) {
+    const t = (_pageThemes()[key]) || {};
+    return { mode: t.mode === 'dark' ? 'dark' : 'light', bg: t.bg || null, image: t.image || null };
+}
+// Paint the page background per theme and return an ink object the drawers use
+// for text/line colours so everything stays legible on either theme.
+function _applyPageTheme(doc, key, PW, PH, bakedImg) {
+    const th = _pageTheme(key);
+    const dark = th.mode === 'dark';
+    if (dark) {
+        // Solid colour (bg) or black, then optional image on top.
+        const bg = th.bg || '#000000'; const rgb = _annHexToRgb(bg);
+        doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F');
+        if (bakedImg) { try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e) { try { doc.addImage(bakedImg, 'PNG', 0, 0, PW, PH); } catch (e2) {} } }
+    } else if (th.bg && th.bg.toLowerCase() !== '#ffffff') {
+        const rgb = _annHexToRgb(th.bg); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F');
+        if (bakedImg) { try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e) {} }
+    } else if (bakedImg) {
+        try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e) {}
+    }
+    // Ink palette: strong/mid/soft text + line colour, and the footer text mode.
+    if (dark) return { strong: [255, 255, 255], mid: [220, 220, 220], soft: [180, 180, 180], line: [120, 120, 120], footer: 'light', dark: true };
+    return { strong: [20, 20, 20], mid: [90, 90, 90], soft: [120, 120, 120], line: [200, 200, 200], footer: 'dark', dark: false };
+}
 function _drawPdfFooter(doc, logos, pageNum, meta) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
@@ -8601,12 +8634,15 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.setFontSize(26);
+    const key = 'card:contacts';
+    const stored = _pageThemes()[key] || {};
+    const ink = _applyPageTheme(doc, key, PW, PH, stored._bakedImg || null);
+    _curFooter = { text: ink.footer };
+
+    doc.setFont(_font('display'), 'bold'); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]); doc.setFontSize(26);
     doc.text('THANK YOU FOR', M, M + 18);
     doc.text('YOUR CONSIDERATION.', M, M + 18 + 28);
 
-    // contactsRaw may be a resolved array (repo+local, ordered) or a legacy
-    // newline string. Either way we render only the visible ones.
     let contacts;
     if (Array.isArray(contactsRaw)) {
         contacts = contactsRaw.filter(c => !c._hidden && (c.name || c.role || c.email || c.phone));
@@ -8616,34 +8652,71 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
             return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' };
         });
     }
-    const gridTop = M + 96;
-    const cols = Math.min(4, Math.max(1, contacts.length));
-    const colW = (PW - 2 * M) / Math.max(cols, 1);
-    contacts.forEach((c, i) => {
-        const cc = i % cols, rr = Math.floor(i / cols);
-        const x = M + cc * colW;
-        let y = gridTop + rr * 66;
-        doc.setFont(_font('serif'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
-        doc.text(c.name, x, y); y += 13;
-        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8); doc.setTextColor(90, 90, 90);
+
+    // A single contact card drawn at (x,y) within width w.
+    const drawContact = (c, x, y, w) => {
+        doc.setFont(_font('display'), 'bold'); doc.setFontSize(12); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
+        doc.text((c.name || '').toUpperCase(), x, y); y += 14;
+        doc.setFont(_font('serif'), 'bold'); doc.setFontSize(8); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
         if (c.role) { doc.text(c.role, x, y); y += 11; }
-        if (c.email) { doc.text(c.email, x, y); y += 11; }
-        if (c.phone) { doc.text(c.phone, x, y); y += 11; }
-        doc.setTextColor(20, 20, 20);
-    });
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(7.5); doc.setTextColor(ink.mid[0], ink.mid[1], ink.mid[2]);
+        if (c.email) { doc.text(c.email, x, y); y += 10; }
+        if (c.phone) { doc.text(c.phone, x, y); y += 10; }
+        doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
+    };
 
-    let ay = PH - 122;
-    doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8); doc.setTextColor(60, 60, 60);
-    STUDIO_ADDRESS.forEach(line => { doc.text(line, M, ay); ay += 11; });
-    ay += 6;
-    doc.setFontSize(6.5); doc.setTextColor(120, 120, 120);
-    const year = new Date().getFullYear();
-    const cLines = doc.splitTextToSize('\u00A9' + year + ' Farmboy Fine Arts Inc. ' + STUDIO_COPYRIGHT, PW * 0.5);
-    doc.text(cLines, M, ay, { baseline: 'top' });
-    doc.setTextColor(20, 20, 20);
+    const layout = (editorialContent.contactLayout || 'grouped');
+    const gridTop = M + 96;
+    const rowH = 78;
 
+    if (layout === 'grouped') {
+        // Screenshot style: contacts packed into 2 columns on the LEFT half,
+        // studio block on the far RIGHT, a divider between.
+        const leftBlockW = PW * 0.56;
+        const gcols = 2;
+        const colW = leftBlockW / gcols;
+        contacts.forEach((c, i) => {
+            const cc = i % gcols, rr = Math.floor(i / gcols);
+            drawContact(c, M + cc * colW, gridTop + rr * rowH, colW - 12);
+        });
+        // Divider + studio block on the right.
+        const rx = PW * 0.76;
+        doc.setDrawColor(ink.line[0], ink.line[1], ink.line[2]); doc.setLineWidth(0.6);
+        doc.line(PW * 0.71, gridTop - 6, PW * 0.71, PH - 90);
+        _drawStudioBlock(doc, rx, gridTop, PW - M - rx, ink);
+    } else {
+        // Even grid of N columns across the full width.
+        const cols = Math.min(4, Math.max(1, parseInt(layout, 10) || 1));
+        const colW = (PW - 2 * M) / cols;
+        contacts.forEach((c, i) => {
+            const cc = i % cols, rr = Math.floor(i / cols);
+            drawContact(c, M + cc * colW, gridTop + rr * rowH, colW - 12);
+        });
+        // Studio block bottom-left below the grid.
+        _drawStudioBlock(doc, M, PH - 118, PW * 0.5, ink);
+    }
+
+    doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
     _drawPdfFooter(doc, logos, pageNum, meta);
+    _curFooter = { text: 'dark' };
 }
+// Studio address + copyright block, theme-aware.
+function _drawStudioBlock(doc, x, y, w, ink) {
+    ink = ink || { strong: [20, 20, 20], mid: [60, 60, 60], soft: [120, 120, 120] };
+    doc.setFont(_font('display'), 'bold'); doc.setFontSize(12); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
+    doc.text('FARMBOY FINE ARTS\u00AE', x, y); y += 16;
+    doc.setFont(_font('serif'), 'normal'); doc.setFontSize(8); doc.setTextColor(ink.mid[0], ink.mid[1], ink.mid[2]);
+    STUDIO_ADDRESS.forEach(line => { doc.text(line, x, y); y += 11; });
+    y += 6;
+    doc.setFont(_font('serif'), 'normal'); doc.setFontSize(7.5); doc.setTextColor(ink.mid[0], ink.mid[1], ink.mid[2]);
+    doc.text('farmboyfinearts.com', x, y); y += 16;
+    doc.setFontSize(6.5); doc.setTextColor(ink.soft[0], ink.soft[1], ink.soft[2]);
+    const year = new Date().getFullYear();
+    const cLines = doc.splitTextToSize('\u00A9' + year + ' Farmboy Fine Arts Inc. ' + STUDIO_COPYRIGHT, Math.max(w, PW_SAFE_MIN(w)));
+    doc.text(cLines, x, y, { baseline: 'top' });
+    doc.setTextColor(20, 20, 20);
+}
+function PW_SAFE_MIN(w) { return w && w > 60 ? w : 220; }
 
 // Cover / title page using the project metadata fields (g_projName etc.).
 function _drawCoverPage(doc, logos) {
@@ -8657,9 +8730,12 @@ function _drawCoverPage(doc, logos) {
     const date = g('g_date');
     const issued = g('g_issued');
 
+    const stored = _pageThemes()['fixed:cover'] || {};
+    const ink = _applyPageTheme(doc, 'fixed:cover', PW, PH, stored._bakedImg || null);
+
     // Big project title, vertically centered-ish in the upper third.
     doc.setFont(_font('display'), 'bold');
-    doc.setTextColor(20, 20, 20);
+    doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
     doc.setFontSize(34);
     const titleY = PH * 0.40;
     const titleLines = doc.splitTextToSize(projName, PW - M * 2);
@@ -8669,13 +8745,13 @@ function _drawCoverPage(doc, logos) {
     let sy = titleY + 24 + (titleLines.length - 1) * 30;
     doc.setFont(_font('serif'), 'normal');
     doc.setFontSize(13);
-    doc.setTextColor(90, 90, 90);
+    doc.setTextColor(ink.mid[0], ink.mid[1], ink.mid[2]);
     if (client) { doc.text(client, M, sy); sy += 18; }
     if (desc) { doc.text(doc.splitTextToSize(desc, PW - M * 2), M, sy); sy += 16; }
 
     // Meta block lower-left: date / issued by.
     doc.setFontSize(9);
-    doc.setTextColor(130, 130, 130);
+    doc.setTextColor(ink.soft[0], ink.soft[1], ink.soft[2]);
     let my = PH - 90;
     if (date) { doc.text('Date: ' + date, M, my); my += 13; }
     if (issued) { doc.text('Issued by: ' + issued, M, my); my += 13; }
@@ -8688,8 +8764,9 @@ function _drawCoverPage(doc, logos) {
         try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 84, w, h); } catch (e) {}
     }
     // Thin rule under the title.
-    doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.75);
+    doc.setDrawColor(ink.line[0], ink.line[1], ink.line[2]); doc.setLineWidth(0.75);
     doc.line(M, titleY + 10, PW - M, titleY + 10);
+    doc.setTextColor(20, 20, 20);
 }
 
 async function exportSpecPagePDF(opts) {
@@ -10955,8 +11032,8 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
         } else if (desc.kind === 'fixed' && desc.page) {
             const els = desc.page.elements || [];
             if (els.length) { const tiles = await loadTiles(els); const ty = desc.fixed === 'cover' ? 'breaker' : (desc.fixed === 'slogan' ? 'slogan' : 'narrative'); _drawMoodboardPage(rec, logos, 1, meta, tiles, '', ty); }
-            else if (desc.fixed === 'cover') _drawCoverPage(rec, logos);
-            else if (desc.fixed === 'slogan') _drawSloganPage(rec, logos, 1, meta);
+            else if (desc.fixed === 'cover') { try { await _pageThemeBake('fixed:cover'); } catch (e) {} _drawCoverPage(rec, logos); }
+            else if (desc.fixed === 'slogan') { try { await _pageThemeBake('fixed:slogan'); } catch (e) {} _drawSloganPage(rec, logos, 1, meta); }
             else return null;
         } else if (desc.kind === 'floorplan') {
             const lv = floorplanLevels[desc.level] || {};
@@ -10969,7 +11046,7 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
         } else if (desc.kind === 'card') {
             if (desc.type === 'timeline') _drawTimelinePage(rec, logos, 1, meta, editorialContent.timeline);
             else if (desc.type === 'frameRec') { const frames = (typeof _collectProjectFramesCached === 'function') ? await _collectProjectFramesCached() : []; const pgs = _frameRecPlanPages(frames || [], _frameRecCfg()); _drawFrameRecPage(rec, logos, 1, meta, pgs[Math.min(desc.frPage || 0, pgs.length - 1)]); }
-            else if (desc.type === 'contacts') { let rc; try { rc = await _contactsResolved(); } catch (e) { rc = editorialContent.contacts || ''; } _drawThankYouPage(rec, logos, 1, meta, rc); }
+            else if (desc.type === 'contacts') { let rc; try { rc = await _contactsResolved(); } catch (e) { rc = editorialContent.contacts || ''; } try { await _pageThemeBake('card:contacts'); } catch (e) {} _drawThankYouPage(rec, logos, 1, meta, rc); }
             else return null;
         } else return null;
     } catch (e) { console.error('preview build failed', e); return null; }
@@ -10983,6 +11060,44 @@ function _dsThumbCacheKey(desc) {
 // Thumbnails render through the real PDF engine, but SERIALLY via a small queue
 // so deleting/adding a page never fires dozens of (network-bound) renders at
 // once and freezes the studio.
+// Builds a Light/Dark + colour + background-image control block into `t` for a
+// given page key. Writes to editorialContent.pageThemes[key].
+function _dsThemeControlInto(t, key) {
+    const themes = _pageThemes();
+    const th = themes[key] || (themes[key] = { mode: 'light', bg: null, image: null });
+    const sect = (label) => { const d = document.createElement('div'); d.textContent = label; d.style.cssText = 'font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:12px 0 5px;'; t.appendChild(d); };
+    const refresh = () => { _dsThumbCache = {}; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
+    sect('Page theme');
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:5px;';
+    [['light', 'Light'], ['dark', 'Dark']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.textContent = l; b.className = 'action-btn btn-secondary';
+        b.style.cssText = 'flex:1; height:28px; font-size:0.64rem;' + (th.mode === v ? ' outline:2px solid var(--accent); color:var(--text-strong);' : '');
+        b.onclick = () => { th.mode = v; refresh(); };
+        row.appendChild(b);
+    });
+    t.appendChild(row);
+    // Background colour (used mainly by dark, but works for light too).
+    const cRow = document.createElement('label'); cRow.style.cssText = 'display:flex; align-items:center; gap:8px; margin-top:8px; font-size:0.64rem; color:var(--text-main);';
+    const sw = document.createElement('input'); sw.type = 'color'; sw.value = th.bg || (th.mode === 'dark' ? '#000000' : '#ffffff'); sw.style.cssText = 'width:34px; height:26px; padding:0; border:1px solid var(--border-color); border-radius:4px; background:none;';
+    sw.oninput = () => { th.bg = sw.value; refresh(); };
+    cRow.appendChild(sw); cRow.appendChild(document.createTextNode('Background colour'));
+    const clr = document.createElement('button'); clr.textContent = 'clear'; clr.className = 'action-btn btn-secondary'; clr.style.cssText = 'height:24px; font-size:0.58rem; margin-left:auto;';
+    clr.onclick = () => { th.bg = null; refresh(); };
+    cRow.appendChild(clr);
+    t.appendChild(cRow);
+    // Background image upload.
+    const imgRow = document.createElement('div'); imgRow.style.cssText = 'display:flex; gap:6px; margin-top:8px; align-items:center;';
+    const up = document.createElement('button'); up.textContent = th.image ? 'Replace image' : 'Background image\u2026'; up.className = 'action-btn btn-secondary'; up.style.cssText = 'flex:1; height:28px; font-size:0.62rem;';
+    const file = document.createElement('input'); file.type = 'file'; file.accept = 'image/*'; file.style.display = 'none';
+    up.onclick = () => file.click();
+    file.onchange = () => { const f = file.files && file.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { th.image = rd.result; refresh(); }; rd.readAsDataURL(f); };
+    imgRow.appendChild(up); imgRow.appendChild(file);
+    if (th.image) { const rm = document.createElement('button'); rm.textContent = '\u2715'; rm.title = 'Remove image'; rm.className = 'action-btn btn-secondary'; rm.style.cssText = 'width:28px; height:28px; font-size:0.7rem;'; rm.onclick = () => { th.image = null; refresh(); }; imgRow.appendChild(rm); }
+    t.appendChild(imgRow);
+    const note = document.createElement('p'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
+    note.textContent = 'Dark theme uses white text on your colour or image. A background image sits behind everything and fills the page.';
+    t.appendChild(note);
+}
 let _thumbQueue = [], _thumbBusy = false, _thumbRunToken = 0;
 function _dsThumbRender(desc, thumb, tw, th) {
     const editable = (desc.kind === 'layout' && desc.page && (desc.page.elements || []).length)
@@ -12034,9 +12149,24 @@ function _dsRenderTools() {
         t.appendChild(note);
     }
     else if (desc.kind === 'layout') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); addBtn('Delete this page', () => { if (confirm('Remove \u201C' + ((desc.page && desc.page.title) || 'this page') + '\u201D from the deck?')) _dsDeleteLayoutPage(desc); }, true); }
-    else if (desc.kind === 'fixed') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); if (_FIXED_LABELS[desc.fixed]) addBtn('Remove this page from deck', () => { if (confirm('Remove the built-in ' + _FIXED_LABELS[desc.fixed] + ' page from this deck? You can restore it from the Pages tools.')) _dsRemoveFixed(desc.fixed); }, true); }
+    else if (desc.kind === 'fixed') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); if (_FIXED_LABELS[desc.fixed]) addBtn('Remove this page from deck', () => { if (confirm('Remove the built-in ' + _FIXED_LABELS[desc.fixed] + ' page from this deck? You can restore it from the Pages tools.')) _dsRemoveFixed(desc.fixed); }, true); if (desc.fixed === 'cover' || desc.fixed === 'slogan') _dsThemeControlInto(t, 'fixed:' + desc.fixed); }
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; closeDeckStudio(); openFloorplanMarkup(); });
-    else if (desc.type === 'contacts') addBtn('Edit contacts', () => { openContactsEditor(); });
+    else if (desc.type === 'contacts') {
+        addBtn('Edit contacts', () => { openContactsEditor(); });
+        // Contact layout picker
+        const sect = (label) => { const d = document.createElement('div'); d.textContent = label; d.style.cssText = 'font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:12px 0 5px;'; t.appendChild(d); };
+        sect('Contact layout');
+        const cur = editorialContent.contactLayout || 'grouped';
+        const lrow = document.createElement('div'); lrow.style.cssText = 'display:flex; flex-wrap:wrap; gap:5px;';
+        [['grouped', 'Grouped'], ['1', '1 col'], ['2', '2 cols'], ['3', '3 cols'], ['4', '4 cols']].forEach(([v, l]) => {
+            const b = document.createElement('button'); b.textContent = l; b.className = 'action-btn btn-secondary';
+            b.style.cssText = 'flex:1 1 auto; min-width:48px; height:28px; font-size:0.62rem;' + (cur === v ? ' outline:2px solid var(--accent); color:var(--text-strong);' : '');
+            b.onclick = () => { editorialContent.contactLayout = v; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsThumbCache = {}; _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
+            lrow.appendChild(b);
+        });
+        t.appendChild(lrow);
+        _dsThemeControlInto(t, 'card:contacts');
+    }
     else if (desc.kind === 'planDetail') {
         _pdEditorInto(t, desc.pd);
     }
@@ -12861,6 +12991,7 @@ function _mbApplyModeUI() {
 // writes editorialContent.contacts (the "Name | Role | Email | Phone" string),
 // so the deck renderer and persistence are unchanged. ──────────────────────
 let _contactsDraft = [];
+let _contactsDragFrom = null;
 let _repoContactsCache = null;
 // Load the shared company contacts committed to the repo (contacts/contacts.json).
 // Falls back silently if the file is missing. Cached for the session.
@@ -12876,7 +13007,15 @@ async function _loadRepoContacts() {
         try {
             const r = await fetch(u, { cache: 'no-store' });
             if (!r.ok) continue;
-            const j = await r.json();
+            const raw = await r.text();
+            let j = null;
+            try { j = JSON.parse(raw); }
+            catch (e1) {
+                // Be forgiving of a common hand-edit slip: missing commas between
+                // } and { entries. Repair and retry once before giving up.
+                try { j = JSON.parse(raw.replace(/\}\s*\{/g, '},{')); } catch (e2) { j = null; }
+            }
+            if (!j) continue;
             const arr = Array.isArray(j) ? j : (Array.isArray(j.contacts) ? j.contacts : null);
             if (arr) { _repoContactsCache = arr.map(c => ({ name: c.name || '', role: c.role || '', email: c.email || '', phone: c.phone || '', _repo: true })); return _repoContactsCache; }
         } catch (e) {}
@@ -12940,9 +13079,17 @@ function _contactsRender() {
     wrap.innerHTML = '';
     _contactsDraft.forEach((c, i) => {
         const row = document.createElement('div');
-        row.style.cssText = 'display:flex; gap:6px; align-items:center; margin-bottom:6px;' + (c._hidden ? ' opacity:0.45;' : '');
-        // Reorder arrows
-        const ord = document.createElement('div'); ord.style.cssText = 'display:flex; flex-direction:column; flex:0 0 auto;';
+        row.draggable = true;
+        row.dataset.idx = i;
+        row.style.cssText = 'display:flex; gap:6px; align-items:center; margin-bottom:6px; cursor:grab;' + (c._hidden ? ' opacity:0.45;' : '');
+        row.ondragstart = (e) => { _contactsDragFrom = i; e.dataTransfer.effectAllowed = 'move'; row.style.opacity = '0.4'; };
+        row.ondragend = () => { row.style.opacity = c._hidden ? '0.45' : '1'; };
+        row.ondragover = (e) => { e.preventDefault(); row.style.borderTop = '2px solid var(--accent)'; };
+        row.ondragleave = () => { row.style.borderTop = ''; };
+        row.ondrop = (e) => { e.preventDefault(); row.style.borderTop = ''; const from = _contactsDragFrom; const to = i; if (from == null || from === to) return; const moved = _contactsDraft.splice(from, 1)[0]; _contactsDraft.splice(to, 0, moved); _contactsDragFrom = null; _contactsPersistOrderHide(); _contactsRender(); };
+        // Drag handle + reorder arrows
+        const ord = document.createElement('div'); ord.style.cssText = 'display:flex; flex-direction:column; align-items:center; flex:0 0 auto;';
+        const grip = document.createElement('div'); grip.textContent = '\u2630'; grip.title = 'Drag to reorder'; grip.style.cssText = 'font-size:0.7rem; color:var(--text-muted); line-height:1; margin-bottom:2px; cursor:grab;'; ord.appendChild(grip);
         const up = document.createElement('button'); up.textContent = '\u25b4'; up.title = 'Move up'; up.className = 'action-btn btn-secondary'; up.style.cssText = 'width:22px; height:15px; padding:0; font-size:0.6rem; line-height:1;';
         up.onclick = () => { if (i > 0) { const t = _contactsDraft[i - 1]; _contactsDraft[i - 1] = _contactsDraft[i]; _contactsDraft[i] = t; _contactsPersistOrderHide(); _contactsRender(); } };
         const dn = document.createElement('button'); dn.textContent = '\u25be'; dn.title = 'Move down'; dn.className = 'action-btn btn-secondary'; dn.style.cssText = 'width:22px; height:15px; padding:0; font-size:0.6rem; line-height:1;';
@@ -15213,6 +15360,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             }
             _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker');
         } else {
+            try { await _pageThemeBake('fixed:cover'); } catch (e) {}
             _drawCoverPage(doc, logos);
         }
     }
@@ -15463,7 +15611,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         await emitAfterKey('fixed:slogan');
     }
     // — Thank You / contacts (real) —
-    if (inc.contacts && !_fixedHidden('contacts')) { newPage('card:contacts'); let _resolvedContacts; try { _resolvedContacts = await _contactsResolved(); } catch (e) { _resolvedContacts = editorialContent.contacts || ''; } _drawThankYouPage(doc, logos, pageNum, meta, _resolvedContacts); await emitAfterKey('card:contacts'); }
+    if (inc.contacts && !_fixedHidden('contacts')) { newPage('card:contacts'); try { await _pageThemeBake('card:contacts'); } catch (e) {} let _resolvedContacts; try { _resolvedContacts = await _contactsResolved(); } catch (e) { _resolvedContacts = editorialContent.contacts || ''; } _drawThankYouPage(doc, logos, pageNum, meta, _resolvedContacts); await emitAfterKey('card:contacts'); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
