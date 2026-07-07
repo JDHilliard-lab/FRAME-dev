@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '13.6';
+const APP_VERSION = '13.7';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -7440,17 +7440,23 @@ function _font(role) {
 // wordmark (right). Logos optional. `pageNum` is 1-based. `meta` (optional)
 // holds { code, version, location } from the Presentation PDF modal; when
 // present, the rich studio footer line is drawn, otherwise just the number.
-let _curFooter = { text: 'dark', hideCopyright: false, hideLogo: false };
+let _curFooter = { text: 'dark', leftTheme: 'dark', hideCopyright: false, hideLogo: false, hideClientLogo: false };
 // Deck default + per-page overrides, keyed by deck page key.
 function _resolveFooter(desc) {
     const def = (editorialContent && editorialContent.footer) || {};
-    const base = { text: def.text || 'dark', hideCopyright: !!def.hideCopyright, hideLogo: !!def.hideLogo };
+    // 'text' = RIGHT zone (Farmboy logo + copyright). 'leftTheme' = LEFT zone
+    // (project code + location, + client logo). Independent so a full-bleed
+    // dark page can go white on the right while staying dark/black text on the
+    // left, or any other combination.
+    const base = { text: def.text || 'dark', leftTheme: def.leftTheme || 'dark', hideCopyright: !!def.hideCopyright, hideLogo: !!def.hideLogo, hideClientLogo: !!def.hideClientLogo };
     const key = (typeof desc === 'string') ? desc : (desc ? _deckPageKey(desc) : null);
     const ov = (key && editorialContent.pageFooters) ? editorialContent.pageFooters[key] : null;
     if (ov) {
         if (ov.text && ov.text !== 'auto') base.text = ov.text;
+        if (ov.leftTheme && ov.leftTheme !== 'auto') base.leftTheme = ov.leftTheme;
         if (typeof ov.hideCopyright === 'boolean') base.hideCopyright = ov.hideCopyright;
         if (typeof ov.hideLogo === 'boolean') base.hideLogo = ov.hideLogo;
+        if (typeof ov.hideClientLogo === 'boolean') base.hideClientLogo = ov.hideClientLogo;
     }
     return base;
 }
@@ -7522,37 +7528,63 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    const F = _curFooter || { text: 'dark' };
-    const light = F.text === 'light';
-    const tc = light ? 255 : 120;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(tc, tc, tc);
-    doc.text(String(pageNum), M, PH - 20);
+    const F = _curFooter || { text: 'dark', leftTheme: 'dark' };
+    const rightLight = F.text === 'light';       // logo + copyright colour
+    const leftLight = F.leftTheme === 'light';    // code/name/location colour
+    const rtc = rightLight ? 255 : 120, ltc = leftLight ? 255 : 120;
+    const baseY = PH - 20;
+
+    // — LEFT zone: page number, then project name – location | code.version,
+    //   then an optional client logo right after the text. Responsive: each
+    //   piece only takes space if it's actually present. —
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(ltc, ltc, ltc);
+    doc.text(String(pageNum), M, baseY);
+    let leftEndX = M + 10;
     if (meta) {
         const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
         const name = (g('g_projName') || 'Art Program').toUpperCase();
         const loc = (meta.location || '').trim().toUpperCase();
         const code = (meta.code || '').trim();
         const ver = (meta.version || '').trim();
-        const year = new Date().getFullYear();
         let line = name;
         if (loc) line += ' \u2013 ' + loc;
         if (code) line += '   |   ' + code + (ver ? '.' + ver : '');
-        if (!F.hideCopyright) line += '    Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
-        doc.setFont(_font('serif'), 'normal');
-        doc.setFontSize(5.8);
-        doc.setTextColor(tc, tc, tc);
-        doc.text(line, M + 14, PH - 20);
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(5.8); doc.setTextColor(ltc, ltc, ltc);
+        doc.text(line, M + 14, baseY);
+        leftEndX = M + 14 + doc.getTextWidth(line);
     }
+    // Client logo — sits right after the left text block, only if present and
+    // not hidden on this page. Stored pre-loaded (dataUrl + aspect) at upload
+    // time, so no async image load is needed here.
+    const cl = (editorialContent && editorialContent.footerClientLogo) || null;
+    if (cl && cl.dataUrl && !F.hideClientLogo) {
+        const h = 11, w = h * (cl.aspect || 3);
+        const cx = leftEndX + 10;
+        try { doc.addImage(cl.dataUrl, (cl.dataUrl.indexOf('image/png') >= 0 ? 'PNG' : 'JPEG'), cx, PH - 27, w, h); } catch (e) {}
+    }
+
+    // — RIGHT zone: copyright text sits immediately to the LEFT of the Farmboy
+    //   logo (beside it), both right-aligned as a unit at the page margin.
+    //   Either piece can be hidden independently and the other still lands
+    //   correctly at the right edge. —
     const rx = PW - M;
-    if (logos && logos.farmboy && !F.hideLogo) {
+    let logoW = 0;
+    const showLogo = logos && logos.farmboy && !F.hideLogo;
+    if (showLogo) {
         const ar = logos.farmboyAR || 8;
-        const h = 11, w = h * ar;
-        const src = light ? _whiteLogo(logos.farmboy) : logos.farmboy;
-        const fmt = (light || ('' + src).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
-        try { doc.addImage(src, fmt, rx - w, PH - 27, w, h); } catch (e) { try { doc.addImage(logos.farmboy, 'JPEG', rx - w, PH - 27, w, h); } catch (e2) {} }
+        const h = 11; logoW = h * ar;
+        const src = rightLight ? _whiteLogo(logos.farmboy) : logos.farmboy;
+        const fmt = (rightLight || ('' + src).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
+        try { doc.addImage(src, fmt, rx - logoW, PH - 27, logoW, h); } catch (e) { try { doc.addImage(logos.farmboy, 'JPEG', rx - logoW, PH - 27, logoW, h); } catch (e2) {} }
     }
+    if (!F.hideCopyright) {
+        const year = new Date().getFullYear();
+        const cpy = 'Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
+        doc.setFont(_font('serif'), 'normal'); doc.setFontSize(5.8); doc.setTextColor(rtc, rtc, rtc);
+        const cpyGap = showLogo ? (logoW + 10) : 0;
+        doc.text(cpy, rx - cpyGap, baseY, { align: 'right' });
+    }
+    doc.setTextColor(20, 20, 20);
 }
 
 // Placeholder page for deck sections not yet built (floorplan key, frame
@@ -8571,11 +8603,18 @@ function _drawSloganPage(doc, logos, pageNum, meta) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
-    doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.setFontSize(54);
+    const key = 'fixed:slogan';
+    const stored = _pageThemes()[key] || {};
+    const ink = _applyPageTheme(doc, key, PW, PH, stored._bakedImg || null);
+    doc.setFont(_font('display'), 'bold'); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]); doc.setFontSize(54);
     const cy = PH * 0.42;
     doc.text('GOOD ART.', M, cy);
     doc.text('GOOD PEOPLE.', M, cy + 52);
+    // The page's own theme drives the footer by default too, so a dark/full-
+    // bleed slogan page doesn't end up with unreadable black footer text.
+    _curFooter = Object.assign({}, _resolveFooter(key), { text: ink.footer, leftTheme: ink.footer });
     _drawPdfFooter(doc, logos, pageNum, meta);
+    _curFooter = { text: 'dark', leftTheme: 'dark' };
 }
 
 // Thank You / contacts page. contactsRaw: one per line, fields separated by
@@ -8631,7 +8670,7 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
     const key = 'card:contacts';
     const stored = _pageThemes()[key] || {};
     const ink = _applyPageTheme(doc, key, PW, PH, stored._bakedImg || null);
-    _curFooter = { text: ink.footer };
+    _curFooter = Object.assign({}, _resolveFooter(key), { text: ink.footer, leftTheme: ink.footer });
 
     doc.setFont(_font('display'), 'bold'); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]); doc.setFontSize(26);
     doc.text('THANK YOU FOR', M, M + 18);
@@ -8697,7 +8736,7 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
 
     doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]);
     _drawPdfFooter(doc, logos, pageNum, meta);
-    _curFooter = { text: 'dark' };
+    _curFooter = { text: 'dark', leftTheme: 'dark' };
 }
 // Studio address + copyright block, theme-aware.
 function _drawStudioBlock(doc, x, y, w, ink) {
@@ -9225,6 +9264,25 @@ function _dsRenderPresetBar() {
     const bar = document.getElementById('dsPresetBar'); if (!bar) return;
     const cur = editorialContent.presentationType || '';
     bar.innerHTML = '';
+    // Project name — reads/writes the SAME field as the Frame Dashboard
+    // (#g_projName). Fill it in here if you forgot it there, or it'll already
+    // be here if you filled it in there \u2014 one shared value either way.
+    const nameWrap = document.createElement('div'); nameWrap.style.cssText = 'margin-bottom:14px;';
+    const nameLbl = document.createElement('div'); nameLbl.textContent = 'PROJECT NAME'; nameLbl.style.cssText = 'font-size:0.62rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px;';
+    nameWrap.appendChild(nameLbl);
+    const nameInp = document.createElement('input'); nameInp.type = 'text'; nameInp.placeholder = 'Untitled project';
+    nameInp.style.cssText = 'width:100%; box-sizing:border-box; height:30px; font-size:0.76rem; padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    const dashField = document.getElementById('g_projName');
+    nameInp.value = dashField ? dashField.value : '';
+    nameInp.oninput = () => {
+        const f = document.getElementById('g_projName');
+        if (f) { f.value = nameInp.value; }
+        if (typeof markDirty === 'function') markDirty();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        _dsThumbCache = {}; _dsRenderCenter(); _dsRenderRail();
+    };
+    nameWrap.appendChild(nameInp);
+    bar.appendChild(nameWrap);
     const lbl = document.createElement('div');
     lbl.textContent = 'PRESENTATION TYPE'; lbl.style.cssText = 'font-size:0.62rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px;';
     bar.appendChild(lbl);
@@ -9352,6 +9410,7 @@ function _dsTab(which) {
     if (bs) bs.style.cssText = css(which === 'styles');
     if (which === 'templates') { try { _dsRenderTemplatesTab(); } catch (e) { console.error(e); } return; }
     if (which === 'styles') { try { _dsRenderStylesTab(); } catch (e) { console.error(e); } return; }
+    if (which === 'project') { try { _dsRenderPresetBar(); } catch (e) {} }
     if (which === 'pages') {
         _dsBuildError = '';
         try { _dsPages = _deckPageList() || []; }
@@ -11026,7 +11085,10 @@ CanvasPdfRec.prototype.render = async function (scale, onProgress) {
 let _dsBuilt = {};
 async function renderSpecPageCanvas(desc, onProgress, scale) {
     const PW = 936, PH = 540, M = 40, r = desc.row; if (!r) return null;
-    const tpl = desc._specTpl || _specTplResolve(desc._ovKey || (r.id || ''));
+    // Ignore any baked-in _specTpl for ordinary (non-manual, non-install) spec
+    // pages and always re-resolve live \u2014 mirrors _dsThumbCacheKey so a render
+    // can never disagree with its own cache key about which template applies.
+    const tpl = (!desc._manual && !desc._install) ? _specTplResolve(desc._ovKey || (r.id || '')) : (desc._specTpl || _specTplResolve(desc._ovKey || (r.id || '')));
     const T = SPEC_TEMPLATES[tpl] || {};
     if (T.freeform) return null;
     const rec = new CanvasPdfRec(PW, PH);
@@ -11310,7 +11372,14 @@ function _thumbPump() {
     const finish = () => { _thumbBusy = false; _dsUpdateThumbProgress(); _thumbPump(); };
     if (job.token !== _thumbRunToken) { finish(); return; }
     if (_dsThumbCache[job.ck]) { _dsPaintThumb(job.ck, _dsThumbCache[job.ck]); finish(); return; }
-    renderDeckPageCanvas(job.desc, null, { scale: _previewScale('thumb') }).then(cv => {
+    // Re-find the CURRENT desc for this key before rendering. A job can sit in
+    // the queue across an edit (e.g. a template change), and the desc object it
+    // was queued with may still carry a stale baked-in template. Always render
+    // whatever _dsPages considers current for this key, so a page never gets
+    // stuck showing an older selection.
+    let liveDesc = job.desc;
+    try { liveDesc = _dsPages.find(d => _dsThumbCacheKey(d) === job.ck) || job.desc; } catch (e) {}
+    renderDeckPageCanvas(liveDesc, null, { scale: _previewScale('thumb') }).then(cv => {
         if (cv && job.token === _thumbRunToken) {
             try { const url = cv.toDataURL('image/jpeg', 0.72); _dsThumbCache[job.ck] = url; _dsPaintThumb(job.ck, url); } catch (e) {}
         }
@@ -11989,20 +12058,28 @@ function _dsPageChromeControls(t, desc) {
         inp.onchange = () => { desc.page.title = inp.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
         wrap.appendChild(inp);
     }
-    // Footer / rights for this page
+    // Footer / rights for this page — two INDEPENDENT colour zones (left:
+    // code + location + client logo; right: copyright + Farmboy logo), plus
+    // an optional client logo and hide toggles. Everything is responsive: a
+    // hidden or absent piece just doesn't take up space, the rest re-flows.
     editorialContent.pageFooters = editorialContent.pageFooters || {};
     const cur = editorialContent.pageFooters[key] || {};
     const set = (k, v) => { editorialContent.pageFooters[key] = Object.assign({}, editorialContent.pageFooters[key] || {}, { [k]: v }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); };
     const ftl = document.createElement('div'); ftl.textContent = 'Footer (this page)'; ftl.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin-bottom:5px;'; wrap.appendChild(ftl);
-    const seg = document.createElement('div'); seg.style.cssText = 'display:flex; gap:4px; margin-bottom:8px;';
-    [['auto', 'Auto'], ['dark', 'Dark text'], ['light', 'Light text']].forEach(o => {
-        const on = (cur.text || 'auto') === o[0];
-        const b = document.createElement('button'); b.textContent = o[1]; b.className = 'action-btn btn-secondary';
-        b.style.cssText = 'flex:1; height:26px; padding:0; font-size:0.58rem; ' + (on ? 'background:#6a6aff; color:#fff;' : '');
-        b.title = o[0] === 'light' ? 'White footer + logo (use on dark / full-bleed image pages)' : o[0] === 'dark' ? 'Dark footer + logo (use on light pages)' : 'Follow the deck default';
-        b.onclick = () => set('text', o[0]); seg.appendChild(b);
-    });
-    wrap.appendChild(seg);
+    const segRow = (label, curVal, key2, hint) => {
+        const lbl = document.createElement('div'); lbl.textContent = label; lbl.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 3px;'; wrap.appendChild(lbl);
+        const seg = document.createElement('div'); seg.style.cssText = 'display:flex; gap:4px; margin-bottom:4px;';
+        [['auto', 'Auto'], ['dark', 'Dark text'], ['light', 'Light text']].forEach(o => {
+            const on = (curVal || 'auto') === o[0];
+            const b = document.createElement('button'); b.textContent = o[1]; b.className = 'action-btn btn-secondary';
+            b.style.cssText = 'flex:1; height:24px; padding:0; font-size:0.56rem; ' + (on ? 'background:#6a6aff; color:#fff;' : '');
+            b.title = hint(o[0]);
+            b.onclick = () => set(key2, o[0]); seg.appendChild(b);
+        });
+        wrap.appendChild(seg);
+    };
+    segRow('Logo & copyright (right side)', cur.text, 'text', v => v === 'light' ? 'White logo + copyright (use on dark / full-bleed pages)' : v === 'dark' ? 'Dark logo + copyright (use on light pages)' : 'Follow the deck default');
+    segRow('Code & location (left side)', cur.leftTheme, 'leftTheme', v => v === 'light' ? 'White code/location text' : v === 'dark' ? 'Dark code/location text' : 'Follow the deck default');
     const chk = (label, k) => {
         const row = document.createElement('label'); row.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:0.66rem; color:var(--text-main); margin-bottom:5px; cursor:pointer;';
         const c = document.createElement('input'); c.type = 'checkbox'; c.checked = !!cur[k]; c.onchange = () => set(k, c.checked);
@@ -12010,8 +12087,39 @@ function _dsPageChromeControls(t, desc) {
     };
     chk('Hide copyright line', 'hideCopyright');
     chk('Hide Farmboy logo', 'hideLogo');
-    const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply footer to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:0.58rem; margin-top:4px;';
-    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
+    // Client logo — deck-wide, prints beside the project code/location on the
+    // left. Aspect ratio is captured once at upload so the PDF drawer never
+    // needs to load the image async.
+    const clWrap = document.createElement('div'); clWrap.style.cssText = 'margin-top:8px; padding-top:8px; border-top:1px dashed var(--border-color);';
+    const clLbl = document.createElement('div'); clLbl.textContent = 'Client logo (left side, deck-wide)'; clLbl.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin-bottom:5px;'; clWrap.appendChild(clLbl);
+    const hasClientLogo = !!(editorialContent.footerClientLogo && editorialContent.footerClientLogo.dataUrl);
+    const clBtnRow = document.createElement('div'); clBtnRow.style.cssText = 'display:flex; gap:6px;';
+    const clUp = document.createElement('button'); clUp.textContent = hasClientLogo ? 'Replace logo' : 'Upload client logo\u2026'; clUp.className = 'action-btn btn-secondary'; clUp.style.cssText = 'flex:1; height:26px; font-size:0.58rem;';
+    const clFile = document.createElement('input'); clFile.type = 'file'; clFile.accept = 'image/*'; clFile.style.display = 'none';
+    clUp.onclick = () => clFile.click();
+    clFile.onchange = () => {
+        const f = clFile.files && clFile.files[0]; if (!f) return;
+        const rd = new FileReader();
+        rd.onload = () => {
+            const dataUrl = rd.result;
+            const img = new Image();
+            img.onload = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); };
+            img.onerror = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); };
+            img.src = dataUrl;
+        };
+        rd.readAsDataURL(f);
+    };
+    clBtnRow.appendChild(clUp); clBtnRow.appendChild(clFile);
+    if (hasClientLogo) { const rm = document.createElement('button'); rm.textContent = '\u2715'; rm.title = 'Remove client logo'; rm.className = 'action-btn btn-secondary'; rm.style.cssText = 'width:26px; height:26px; font-size:0.66rem;'; rm.onclick = () => { editorialContent.footerClientLogo = null; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); }; clBtnRow.appendChild(rm); }
+    clWrap.appendChild(clBtnRow);
+    wrap.appendChild(clWrap);
+    if (hasClientLogo) {
+        const row = document.createElement('label'); row.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:0.66rem; color:var(--text-main); margin:5px 0 0; cursor:pointer;';
+        const c = document.createElement('input'); c.type = 'checkbox'; c.checked = !!cur.hideClientLogo; c.onchange = () => set('hideClientLogo', c.checked);
+        row.appendChild(c); row.appendChild(document.createTextNode('Hide client logo on this page')); wrap.appendChild(row);
+    }
+    const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply footer to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:0.58rem; margin-top:8px;';
+    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
     wrap.appendChild(deckBtn);
     t.appendChild(wrap);
 }
@@ -15948,6 +16056,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             }
             _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker');
         } else {
+            try { await _pageThemeBake('fixed:slogan'); } catch (e) {}
             _drawSloganPage(doc, logos, pageNum, meta);
         }
         await emitAfterKey('fixed:slogan');
