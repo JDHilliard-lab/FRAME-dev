@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '13.3';
+const APP_VERSION = '13.4';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -11120,13 +11120,80 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
 }
 let _dsThumbCache = {};
 function _dsThumbCacheKey(desc) {
-    try { return _deckPageKey(desc) + '|' + _previewQuality(); } catch (e) { return (desc && (desc.type || desc.kind || '')) + '|' + _previewQuality(); }
+    try {
+        let k = _deckPageKey(desc) + '|' + _previewQuality();
+        if (desc && desc.kind === 'spec' && desc.row && !desc._manual && !desc._install) {
+            // Always RE-resolve (never trust desc._specTpl, which is baked in at
+            // list-build time) so the cache key changes the instant a template
+            // is applied, even before the page list itself gets rebuilt.
+            const tpl = _specTplResolve(desc._ovKey || desc.row.id || '');
+            k += '|' + tpl;
+        } else if (desc && desc._specTpl) {
+            k += '|' + desc._specTpl;
+        }
+        return k;
+    } catch (e) { return (desc && (desc.type || desc.kind || '')) + '|' + _previewQuality(); }
 }
 // Thumbnails render through the real PDF engine, but SERIALLY via a small queue
 // so deleting/adding a page never fires dozens of (network-bound) renders at
 // once and freezes the studio.
 // Builds a Light/Dark + colour + background-image control block into `t` for a
 // given page key. Writes to editorialContent.pageThemes[key].
+// Clean, alignment-accurate PLACEHOLDER mockup for the template picker: grey
+// boxes wherever a real image would go (artwork/frame mockup, corner, profile,
+// floorplan, elevation) and lorem ipsum for text blocks. Positions come from
+// the SAME fractions the real renderer uses, so what you see here is exactly
+// how the template blocks out \u2014 no real project data, no confusing partial
+// renders for someone seeing the tool for the first time.
+const _LOREM_TITLE = 'ART.00 | LOCATION';
+const _LOREM_LINES = ['Application', 'Frame Size', 'Frame Code', 'Mat', 'Mount', 'Hardware', 'Glass'];
+function _dsSwatchBox(xPct, yPct, wPct, hPct, cw, chh, label) {
+    const x = xPct * cw, y = yPct * chh, w = wPct * cw, h = hPct * chh;
+    return '<div style="position:absolute; left:' + x + 'px; top:' + y + 'px; width:' + w + 'px; height:' + h + 'px; background:repeating-linear-gradient(45deg,#e4e4e4,#e4e4e4 6px,#ececec 6px,#ececec 12px); border:1px solid #d6d6d6; border-radius:3px; display:flex; align-items:center; justify-content:center;">' +
+        (label ? '<span style="font-size:' + Math.max(6, Math.round(chh * 0.045)) + 'px; color:#aaa; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.4px;">' + label + '</span>' : '') + '</div>';
+}
+function _dsSwatchLoremLines(xPct, yPct, wPct, cw, chh, n) {
+    const x = xPct * cw, y = yPct * chh, w = wPct * cw;
+    const lh = Math.max(7, Math.round(chh * 0.05));
+    let html = '';
+    for (let i = 0; i < n; i++) {
+        const lw = w * (i === 0 ? 0.55 : (0.3 + (i % 3) * 0.12));
+        html += '<div style="position:absolute; left:' + x + 'px; top:' + (y + i * lh) + 'px; width:' + lw + 'px; height:' + Math.round(lh * 0.42) + 'px; background:#e2e2e2; border-radius:2px;"></div>';
+        html += '<div style="position:absolute; left:' + (x + w * 0.55) + 'px; top:' + (y + i * lh) + 'px; width:' + (w * 0.4) + 'px; height:' + Math.round(lh * 0.42) + 'px; background:#ececec; border-radius:2px;"></div>';
+    }
+    return html;
+}
+function _dsTemplateSwatchHTML(key, cw, chh) {
+    const T = SPEC_TEMPLATES[key] || {};
+    let html = '<div style="position:absolute; inset:0; background:#fff;">';
+    if (key === 'classic' || (T.legacy && !T.group && !T.custom)) {
+        // Matches _drawClassicSpecPage's real layout: title+spec at left, big
+        // artwork top-right, plan + elevation thumbnails bottom-left.
+        html += '<div style="position:absolute; left:' + (0.045 * cw) + 'px; top:' + (0.06 * chh) + 'px; width:' + (0.4 * cw) + 'px; height:' + (0.07 * chh) + 'px; background:#d8d8d8; border-radius:2px;"></div>';
+        html += _dsSwatchLoremLines(0.045, 0.18, 0.4, cw, chh, 6);
+        html += _dsSwatchBox(0.46, 0.05, 0.50, 0.60, cw, chh, 'Artwork');
+        html += _dsSwatchBox(0.045, 0.62, 0.17, 0.30, cw, chh, 'Floorplan');
+        html += _dsSwatchBox(0.235, 0.62, 0.20, 0.30, cw, chh, 'Elevation');
+    } else if (T.group || T.custom || T.freeform || key === 'installGuide' || !(T.title || T.spec || T.artwork)) {
+        // Generic fallback for template kinds without simple fixed blocks.
+        html += '<div style="position:absolute; left:' + (0.06 * cw) + 'px; top:' + (0.08 * chh) + 'px; width:' + (0.5 * cw) + 'px; height:' + (0.07 * chh) + 'px; background:#d8d8d8; border-radius:2px;"></div>';
+        html += _dsSwatchBox(0.06, 0.22, 0.88, 0.68, cw, chh, T.label || 'Layout');
+    } else {
+        if (T.title) html += '<div style="position:absolute; left:' + (T.title.x * cw) + 'px; top:' + (T.title.y * chh - chh * 0.05) + 'px; width:' + (0.45 * cw) + 'px; height:' + (0.06 * chh) + 'px; background:#d8d8d8; border-radius:2px;"></div>';
+        if (T.spec) html += _dsSwatchLoremLines(T.spec.x, T.spec.y, T.spec.w, cw, chh, 6);
+        if (T.frameDetail) {
+            // Mirrors the anchor-above-plan geometry: two small boxes, corner + profile.
+            const planY = (T.plan ? T.plan.y : 0.62) - 0.16;
+            html += _dsSwatchBox(T.plan ? T.plan.x : 0.045, planY, 0.13, 0.13, cw, chh, 'Corner');
+            html += _dsSwatchBox((T.plan ? T.plan.x : 0.045) + 0.145, planY, 0.13, 0.13, cw, chh, 'Profile');
+        }
+        if (T.plan) html += _dsSwatchBox(T.plan.x, T.plan.y, T.plan.w, T.plan.h, cw, chh, 'Floorplan');
+        if (T.elevation) html += _dsSwatchBox(T.elevation.x, T.elevation.y, T.elevation.w, T.elevation.h, cw, chh, 'Elevation');
+        if (T.artwork) html += _dsSwatchBox(T.artwork.x, T.artwork.y, T.artwork.w, T.artwork.h, cw, chh, 'Artwork');
+    }
+    html += '</div>';
+    return html;
+}
 function _dsThemeControlInto(t, key, desc) {
     const themes = _pageThemes();
     const th = themes[key] || (themes[key] = { mode: 'light', bg: null, image: null });
@@ -11621,6 +11688,19 @@ function _dsRenderCenter() {
                 const tok = (++_dsTlRenderTok);
                 const specBase = document.createElement('div');
                 specBase.style.cssText = 'position:absolute; inset:0;';
+                // If a rail thumbnail is already cached for this exact page+template,
+                // show it stretched to fill the center IMMEDIATELY (like a responsive
+                // low-res placeholder), so the center never sits blank/updating slowly
+                // behind the rail \u2014 the sharp render swaps in the moment it's ready.
+                try {
+                    const _ck = _dsThumbCacheKey(desc);
+                    if (_dsThumbCache[_ck]) {
+                        const ph = document.createElement('img');
+                        ph.src = _dsThumbCache[_ck];
+                        ph.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:fill;';
+                        specBase.appendChild(ph);
+                    }
+                } catch (e) {}
                 page.appendChild(specBase);
                 renderDeckPageCanvas(desc).then(cv2 => {
                     if (!cv2) return;
@@ -12079,7 +12159,7 @@ function _dsRenderTools() {
         const ovKey = desc._ovKey || (desc.row && desc.row.id) || '';
         const hasOverride = !!overrides[ovKey];
         const resolved = desc._specTpl || _specTplResolve(ovKey);
-        const cw = 244, chh = Math.round(cw * 540 / 936);
+        const cw = 150, chh = Math.round(cw * 540 / 936);
 
         // Per-page approval status (spec pages only): none / pending / approved.
         const apprWrap = document.createElement('div');
@@ -12184,15 +12264,56 @@ function _dsRenderTools() {
                 head.appendChild(wrap);
             }
         } else {
+            // Apply-scope buttons. All of these APPLY THE CURRENTLY RESOLVED
+            // template (the one highlighted below) to a chosen scope, then force
+            // an immediate rebuild of that scope's thumbnails + the center
+            // preview — no more "nothing happened" after clicking Apply.
+            const applyScoped = (setKeys) => {
+                setKeys.forEach(k => { if (resolved === globalTpl) delete overrides[k]; else overrides[k] = resolved; });
+                if (typeof pushHistory === 'function') pushHistory();
+                if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
+            };
             const btnRow = document.createElement('div');
-            btnRow.style.cssText = 'display:flex; gap:6px; margin-bottom:6px;';
-            const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.66rem; font-weight:600; padding:7px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
-            btnRow.appendChild(mkBtn('Apply to all pages', true, () => { editorialContent.specTemplate = resolved; editorialContent.specTemplateOverrides = {}; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
-            if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', false, () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); }));
+            btnRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px;';
+            const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1 1 auto; min-width:120px; font-size:0.66rem; font-weight:600; padding:7px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
+            btnRow.appendChild(mkBtn('Apply to current page', true, () => applyScoped([ovKey])));
+            btnRow.appendChild(mkBtn('Apply to all pages', false, () => {
+                editorialContent.specTemplate = resolved; editorialContent.specTemplateOverrides = {};
+                if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                _dsThumbCache = {}; _dsRefresh(); _dsBuildAllThumbs(); _dsRenderCenter();
+            }));
+            // Apply to this elevation/salon-hang group only — every item code
+            // that shares this piece's wall group, not the whole deck.
+            const grp = (typeof _fpGroups === 'function') ? _fpGroups().find(g => (g.ids || []).indexOf(ovKey) >= 0) : null;
+            if (grp && grp.ids && grp.ids.length > 1) {
+                btnRow.appendChild(mkBtn('Apply to this elevation (' + grp.ids.length + ' items)', false, () => applyScoped(grp.ids)));
+            }
+            if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', false, () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter(); }));
             head.appendChild(btnRow);
+            // Apply to a page range (by position in this page list, e.g. "5-12").
+            const rangeRow = document.createElement('div'); rangeRow.style.cssText = 'display:flex; gap:6px; margin-bottom:8px;';
+            const rangeInp = document.createElement('input'); rangeInp.type = 'text'; rangeInp.placeholder = 'e.g. 5-12, 20';
+            rangeInp.style.cssText = 'flex:1; min-width:0; height:28px; font-size:0.66rem; padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+            const rangeBtn = document.createElement('button'); rangeBtn.textContent = 'Apply to range'; rangeBtn.className = 'action-btn btn-secondary'; rangeBtn.style.cssText = 'height:28px; font-size:0.64rem; padding:0 10px;';
+            rangeBtn.onclick = () => {
+                const set = new Set();
+                ('' + rangeInp.value).split(',').forEach(part => {
+                    const m = part.trim().match(/^([0-9]+)(?:\s*-\s*([0-9]+))?$/);
+                    if (!m) return;
+                    const a = parseInt(m[1], 10), b = m[2] ? parseInt(m[2], 10) : a;
+                    for (let p = Math.min(a, b); p <= Math.max(a, b); p++) set.add(p);
+                });
+                if (!set.size) return;
+                const keys = [];
+                _dsPages.forEach((d, i) => { if (set.has(i + 1) && d.kind === 'spec') { const k = d._ovKey || (d.row && d.row.id) || ''; if (k) keys.push(k); } });
+                if (keys.length) applyScoped(keys);
+            };
+            rangeRow.appendChild(rangeInp); rangeRow.appendChild(rangeBtn);
+            head.appendChild(rangeRow);
             const sub = document.createElement('p');
             sub.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:0; line-height:1.4;';
-            sub.innerHTML = hasOverride ? 'This page overrides the deck default. Pick a template below to change it.' : 'Pick a template below to change just this page, or apply to all.';
+            sub.innerHTML = hasOverride ? 'This page overrides the deck default. Pick a template below, then choose a scope above.' : 'Pick a template below, then choose a scope above \u2014 this page, an elevation, a page range, or the whole deck.';
             head.appendChild(sub);
             // — Elevation breaker toggle (deck-wide; applies to every wall group) —
             const brWrap = document.createElement('label');
@@ -12217,17 +12338,21 @@ function _dsRenderTools() {
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
+            cardsWrap.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px;';
             Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group && k !== 'installGuide').forEach(key => {
                 const onCur = (key === resolved);
                 const cell = document.createElement('div');
-                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
+                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff;';
                 cell.onclick = () => { if (key === globalTpl) delete overrides[ovKey]; else overrides[ovKey] = key; if (key === 'custom') _dsSeedCustom(desc); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); _dsPriorityRerender(desc); };
                 const thumb = document.createElement('div');
                 thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
-                try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, members: desc.members, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
+                // Clean grey-box + lorem placeholder — shows how the template blocks
+                // out (image slots vs text) without real project data, so it reads
+                // clearly to anyone even on their first time in the tool.
+                try { thumb.innerHTML = _dsTemplateSwatchHTML(key, cw, chh); } catch (e) { thumb.innerHTML = ''; }
                 const nm = document.createElement('div');
-                const tag = onCur ? (hasOverride ? '  ✓ this page' : '  ✓ default') : (key === globalTpl ? '  · default' : '');
-                nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.64rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+                const tag = onCur ? (hasOverride ? ' \u2713' : ' \u2713') : (key === globalTpl ? ' \u00b7' : '');
+                nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.6rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
                 cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
             });
             t.appendChild(resolved === 'custom' ? _dsCustomSection(desc) : _dsManualSection(desc));
