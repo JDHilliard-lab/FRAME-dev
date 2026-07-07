@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '12.4';
+const APP_VERSION = '12.5';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -8605,10 +8605,17 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
     doc.text('THANK YOU FOR', M, M + 18);
     doc.text('YOUR CONSIDERATION.', M, M + 18 + 28);
 
-    const contacts = (contactsRaw || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => {
-        const p = l.split(/\s*[|,]\s*/);
-        return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' };
-    });
+    // contactsRaw may be a resolved array (repo+local, ordered) or a legacy
+    // newline string. Either way we render only the visible ones.
+    let contacts;
+    if (Array.isArray(contactsRaw)) {
+        contacts = contactsRaw.filter(c => !c._hidden && (c.name || c.role || c.email || c.phone));
+    } else {
+        contacts = (contactsRaw || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => {
+            const p = l.split(/\s*[|,]\s*/);
+            return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' };
+        });
+    }
     const gridTop = M + 96;
     const cols = Math.min(4, Math.max(1, contacts.length));
     const colW = (PW - 2 * M) / Math.max(cols, 1);
@@ -10925,9 +10932,10 @@ function _previewScale(kind) {
     if (kind === 'thumb') return q === 'high' ? 2 : q === 'low' ? 1 : 1.5;
     return q === 'high' ? 2.5 : q === 'low' ? 1.25 : 2;
 }
+function _withTimeout(p, ms) { return Promise.race([Promise.resolve(p).catch(() => {}), new Promise(res => setTimeout(res, ms))]); }
 async function renderDeckPageCanvas(desc, onProgress, opts) {
-    try { await _loadEditorBrandFonts(); } catch (e) {}
-    try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
+    try { await _withTimeout(_loadEditorBrandFonts(), 2500); } catch (e) {}
+    try { if (document.fonts && document.fonts.ready) await _withTimeout(document.fonts.ready, 2500); } catch (e) {}
     if (!desc) return null;
     const _scale = (opts && opts.scale) || _previewScale('center');
     if (desc.kind === 'spec') return await renderSpecPageCanvas(desc, onProgress, _scale);
@@ -10961,6 +10969,7 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
         } else if (desc.kind === 'card') {
             if (desc.type === 'timeline') _drawTimelinePage(rec, logos, 1, meta, editorialContent.timeline);
             else if (desc.type === 'frameRec') { const frames = (typeof _collectProjectFramesCached === 'function') ? await _collectProjectFramesCached() : []; const pgs = _frameRecPlanPages(frames || [], _frameRecCfg()); _drawFrameRecPage(rec, logos, 1, meta, pgs[Math.min(desc.frPage || 0, pgs.length - 1)]); }
+            else if (desc.type === 'contacts') { let rc; try { rc = await _contactsResolved(); } catch (e) { rc = editorialContent.contacts || ''; } _drawThankYouPage(rec, logos, 1, meta, rc); }
             else return null;
         } else return null;
     } catch (e) { console.error('preview build failed', e); return null; }
@@ -11054,10 +11063,9 @@ async function _dsBuildPage(silent) {
     } catch (e) { console.error('build failed', e); }
     if (ov && ov.parentElement) ov.parentElement.removeChild(ov);
     if (ok) {
-        if (desc.kind === 'spec') { _dsBuilt[_deckPageKey(desc)] = url; }
-        else if (!silent) { _dsShowPreviewModal(url, desc.title || desc.type); }
-    } else if (!silent) {
-        showInfoModal('Live preview', 'This page already shows a live preview in the editor, or its exact build isn\u2019t available for this page type yet.');
+        // Show the exact render inline in the center — no pop-up window.
+        _dsBuilt[_deckPageKey(desc)] = url;
+        if (!silent) { try { _dsRenderCenter(); } catch (e) {} }
     }
     _dsPreviewQueued = false;
     _dsRenderCenter();
@@ -12853,16 +12861,77 @@ function _mbApplyModeUI() {
 // writes editorialContent.contacts (the "Name | Role | Email | Phone" string),
 // so the deck renderer and persistence are unchanged. ──────────────────────
 let _contactsDraft = [];
+let _repoContactsCache = null;
+// Load the shared company contacts committed to the repo (contacts/contacts.json).
+// Falls back silently if the file is missing. Cached for the session.
+async function _loadRepoContacts() {
+    if (_repoContactsCache) return _repoContactsCache;
+    let repo = _FRAME_REPO_DEFAULT, branch = _FRAME_BRANCH_DEFAULT;
+    try { const rc = await fetch('frames/frames.json', { cache: 'no-store' }); if (rc.ok) { const j = await rc.json(); if (j.repo) repo = j.repo; if (j.branch) branch = j.branch; } } catch (e) {}
+    const tryUrls = [
+        'contacts/contacts.json',   // local copy in the deployed app
+        'https://raw.githubusercontent.com/' + repo + '/' + branch + '/contacts/contacts.json'
+    ];
+    for (const u of tryUrls) {
+        try {
+            const r = await fetch(u, { cache: 'no-store' });
+            if (!r.ok) continue;
+            const j = await r.json();
+            const arr = Array.isArray(j) ? j : (Array.isArray(j.contacts) ? j.contacts : null);
+            if (arr) { _repoContactsCache = arr.map(c => ({ name: c.name || '', role: c.role || '', email: c.email || '', phone: c.phone || '', _repo: true })); return _repoContactsCache; }
+        } catch (e) {}
+    }
+    _repoContactsCache = [];
+    return _repoContactsCache;
+}
 function _contactsParse(str) {
     return (str || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const p = l.split(/\s*[|,]\s*/); return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' }; });
+}
+// A stable identity for a contact (name+email) so hide/order survive edits.
+function _contactKey(c) { return ((c.name || '') + '~' + (c.email || '')).toLowerCase().trim(); }
+// The merged working list: repo contacts first, then project-added ones, with
+// per-project hide flags and custom order applied. Used by BOTH the editor and
+// the Thank You page so preview and PDF always match.
+async function _contactsResolved() {
+    const repo = await _loadRepoContacts();
+    const local = _contactsParse(editorialContent.contacts || '').map(c => Object.assign({}, c, { _repo: false }));
+    // De-dupe: a project-added contact with the same key overrides the repo one.
+    const byKey = {}; const merged = [];
+    repo.forEach(c => { const k = _contactKey(c); byKey[k] = c; merged.push(c); });
+    local.forEach(c => { const k = _contactKey(c); if (byKey[k]) { Object.assign(byKey[k], c, { _repo: byKey[k]._repo }); } else { byKey[k] = c; merged.push(c); } });
+    const hidden = new Set(editorialContent.contactsHidden || []);
+    merged.forEach(c => { c._hidden = hidden.has(_contactKey(c)); });
+    // Apply custom order: keys listed in contactsOrder come first, in that order.
+    const order = editorialContent.contactsOrder || [];
+    if (order.length) {
+        merged.sort((a, b) => {
+            const ia = order.indexOf(_contactKey(a)), ib = order.indexOf(_contactKey(b));
+            if (ia < 0 && ib < 0) return 0; if (ia < 0) return 1; if (ib < 0) return -1; return ia - ib;
+        });
+    }
+    return merged;
 }
 function _contactsSerialize(arr) {
     return (arr || []).filter(c => (c.name || c.role || c.email || c.phone)).map(c => [c.name || '', c.role || '', c.email || '', c.phone || ''].join(' | ')).join('\n');
 }
 function _contactsCommit() {
-    const str = _contactsSerialize(_contactsDraft);
-    editorialContent.contacts = str;
-    const ta = document.getElementById('specPdfContacts'); if (ta) ta.value = str;
+    // Persist project-added contacts (legacy string) + order + hidden flags.
+    editorialContent.contacts = _contactsSerialize(_contactsDraft.filter(c => !c._repo));
+    editorialContent.contactsOrder = _contactsDraft.map(c => _contactKey(c));
+    editorialContent.contactsHidden = _contactsDraft.filter(c => c._hidden).map(c => _contactKey(c));
+    const ta = document.getElementById('specPdfContacts'); if (ta) ta.value = editorialContent.contacts;
+    if (typeof markDirty === 'function') markDirty();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+// _contactsDraft is the merged, ordered working list (repo + project contacts).
+// Repo contacts show a small badge and can't be edited or deleted here (edit
+// them in the repo sheet), but they CAN be hidden or reordered per project.
+function _contactsPersistOrderHide() {
+    editorialContent.contactsOrder = _contactsDraft.map(c => _contactKey(c));
+    editorialContent.contactsHidden = _contactsDraft.filter(c => c._hidden).map(c => _contactKey(c));
+    // Project-added (non-repo) contacts persist as the legacy string.
+    editorialContent.contacts = _contactsSerialize(_contactsDraft.filter(c => !c._repo));
+    const ta = document.getElementById('specPdfContacts'); if (ta) ta.value = editorialContent.contacts;
     if (typeof markDirty === 'function') markDirty();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
@@ -12871,29 +12940,40 @@ function _contactsRender() {
     wrap.innerHTML = '';
     _contactsDraft.forEach((c, i) => {
         const row = document.createElement('div');
-        row.style.cssText = 'display:flex; gap:6px; align-items:center; margin-bottom:6px;';
-        const mk = (ph, field, w) => { const inp = document.createElement('input'); inp.type = 'text'; inp.value = c[field] || ''; inp.placeholder = ph; inp.oninput = () => { _contactsDraft[i][field] = inp.value; _contactsCommit(); }; inp.style.cssText = 'flex:' + w + '; min-width:0; height:30px; font-size:0.74rem; padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;'; return inp; };
+        row.style.cssText = 'display:flex; gap:6px; align-items:center; margin-bottom:6px;' + (c._hidden ? ' opacity:0.45;' : '');
+        // Reorder arrows
+        const ord = document.createElement('div'); ord.style.cssText = 'display:flex; flex-direction:column; flex:0 0 auto;';
+        const up = document.createElement('button'); up.textContent = '\u25b4'; up.title = 'Move up'; up.className = 'action-btn btn-secondary'; up.style.cssText = 'width:22px; height:15px; padding:0; font-size:0.6rem; line-height:1;';
+        up.onclick = () => { if (i > 0) { const t = _contactsDraft[i - 1]; _contactsDraft[i - 1] = _contactsDraft[i]; _contactsDraft[i] = t; _contactsPersistOrderHide(); _contactsRender(); } };
+        const dn = document.createElement('button'); dn.textContent = '\u25be'; dn.title = 'Move down'; dn.className = 'action-btn btn-secondary'; dn.style.cssText = 'width:22px; height:15px; padding:0; font-size:0.6rem; line-height:1;';
+        dn.onclick = () => { if (i < _contactsDraft.length - 1) { const t = _contactsDraft[i + 1]; _contactsDraft[i + 1] = _contactsDraft[i]; _contactsDraft[i] = t; _contactsPersistOrderHide(); _contactsRender(); } };
+        ord.appendChild(up); ord.appendChild(dn); row.appendChild(ord);
+        const mk = (ph, field, w) => { const inp = document.createElement('input'); inp.type = 'text'; inp.value = c[field] || ''; inp.placeholder = ph; inp.disabled = !!c._repo; inp.oninput = () => { _contactsDraft[i][field] = inp.value; _contactsCommit(); }; inp.style.cssText = 'flex:' + w + '; min-width:0; height:30px; font-size:0.74rem; padding:0 8px; background:' + (c._repo ? 'var(--bg-main)' : 'var(--bg-input)') + '; color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;'; return inp; };
         row.appendChild(mk('Name', 'name', '2'));
         row.appendChild(mk('Role', 'role', '2'));
         row.appendChild(mk('Email', 'email', '3'));
         row.appendChild(mk('Phone', 'phone', '2'));
-        const del = document.createElement('button'); del.textContent = '✕'; del.title = 'Remove contact'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:30px; height:30px; padding:0; font-size:0.75rem; flex:0 0 auto;'; del.onclick = () => removeContact(i);
+        if (c._repo) { const badge = document.createElement('span'); badge.textContent = 'repo'; badge.title = 'From the shared company sheet \u2014 edit it in the repo'; badge.style.cssText = 'flex:0 0 auto; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); border:1px solid var(--border-color); border-radius:3px; padding:2px 4px;'; row.appendChild(badge); }
+        // Hide toggle
+        const hide = document.createElement('button'); hide.textContent = c._hidden ? '\u2298' : '\u25c9'; hide.title = c._hidden ? 'Show on Thank You page' : 'Hide from Thank You page'; hide.className = 'action-btn btn-secondary'; hide.style.cssText = 'width:30px; height:30px; padding:0; font-size:0.8rem; flex:0 0 auto;';
+        hide.onclick = () => { _contactsDraft[i]._hidden = !_contactsDraft[i]._hidden; _contactsPersistOrderHide(); _contactsRender(); };
+        row.appendChild(hide);
+        // Delete (project contacts only; repo ones are hidden instead)
+        const del = document.createElement('button'); del.textContent = '\u2715'; del.title = c._repo ? 'Repo contacts can\u2019t be deleted here \u2014 hide it, or edit the repo sheet' : 'Remove contact'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:30px; height:30px; padding:0; font-size:0.75rem; flex:0 0 auto;' + (c._repo ? ' opacity:0.4; cursor:not-allowed;' : ''); del.disabled = !!c._repo; if (!c._repo) del.onclick = () => removeContact(i);
         row.appendChild(del);
         wrap.appendChild(row);
     });
 }
-function openContactsEditor() {
-    const ta = document.getElementById('specPdfContacts');
-    let cur = ta ? ta.value : (editorialContent.contacts || '');
-    if (!cur && typeof studioDefaults !== 'undefined' && studioDefaults.contacts) cur = studioDefaults.contacts;
-    _contactsDraft = _contactsParse(cur);
-    if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '' }];
-    _contactsRender();
+async function openContactsEditor() {
     const m = document.getElementById('contactsModal'); if (m) m.style.display = 'flex';
+    const wrap = document.getElementById('contactsRows'); if (wrap) wrap.innerHTML = '<p style="color:var(--text-muted); font-size:0.72rem;">Loading company contacts\u2026</p>';
+    try { _contactsDraft = await _contactsResolved(); } catch (e) { _contactsDraft = _contactsParse(editorialContent.contacts || ''); }
+    if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }];
+    _contactsRender();
 }
 function closeContactsEditor() { const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none'; }
-function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '' }); _contactsRender(); _contactsCommit(); }
-function removeContact(i) { _contactsDraft.splice(i, 1); if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '' }]; _contactsRender(); _contactsCommit(); }
+function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }); _contactsRender(); _contactsCommit(); }
+function removeContact(i) { if (_contactsDraft[i] && _contactsDraft[i]._repo) return; _contactsDraft.splice(i, 1); _contactsRender(); _contactsCommit(); }
 
 // ── Add project artwork to a layout page (spec-showcase) ────────────────────
 // Bakes a framed-artwork mockup (reusing renderFrameToCanvas, artwork baked in)
@@ -15383,7 +15463,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         await emitAfterKey('fixed:slogan');
     }
     // — Thank You / contacts (real) —
-    if (inc.contacts && !_fixedHidden('contacts')) { newPage('card:contacts'); _drawThankYouPage(doc, logos, pageNum, meta, editorialContent.contacts || (typeof studioDefaults !== 'undefined' ? studioDefaults.contacts : '')); await emitAfterKey('card:contacts'); }
+    if (inc.contacts && !_fixedHidden('contacts')) { newPage('card:contacts'); let _resolvedContacts; try { _resolvedContacts = await _contactsResolved(); } catch (e) { _resolvedContacts = editorialContent.contacts || ''; } _drawThankYouPage(doc, logos, pageNum, meta, _resolvedContacts); await emitAfterKey('card:contacts'); }
 
     if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
