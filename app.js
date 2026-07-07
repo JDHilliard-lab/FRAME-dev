@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '12.7';
+const APP_VERSION = '12.8';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -7508,17 +7508,26 @@ function _pageTheme(key) {
 // for text/line colours so everything stays legible on either theme.
 function _applyPageTheme(doc, key, PW, PH, bakedImg) {
     const th = _pageTheme(key);
+    const stored = _pageThemes()[key] || {};
     const dark = th.mode === 'dark';
+    // Draw the background image with zoom/pan crop (cover-fit the full page).
+    const drawBgImage = () => {
+        if (!bakedImg) return;
+        try {
+            const iw = bakedImg.naturalWidth || bakedImg.width, ih = bakedImg.naturalHeight || bakedImg.height;
+            const cnv = _cropToCanvas(bakedImg, PW, PH, PW / PH, stored.imageZoom || 1, stored.imagePanX || 0, stored.imagePanY || 0, 'cover');
+            doc.addImage(cnv.toDataURL('image/jpeg', 0.9), 'JPEG', 0, 0, PW, PH);
+        } catch (e) { try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e2) {} }
+    };
     if (dark) {
-        // Solid colour (bg) or black, then optional image on top.
         const bg = th.bg || '#000000'; const rgb = _annHexToRgb(bg);
         doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F');
-        if (bakedImg) { try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e) { try { doc.addImage(bakedImg, 'PNG', 0, 0, PW, PH); } catch (e2) {} } }
+        drawBgImage();
     } else if (th.bg && th.bg.toLowerCase() !== '#ffffff') {
         const rgb = _annHexToRgb(th.bg); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F');
-        if (bakedImg) { try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e) {} }
-    } else if (bakedImg) {
-        try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e) {}
+        drawBgImage();
+    } else {
+        drawBgImage();
     }
     // Ink palette: strong/mid/soft text + line colour, and the footer text mode.
     if (dark) return { strong: [255, 255, 255], mid: [220, 220, 220], soft: [180, 180, 180], line: [120, 120, 120], footer: 'light', dark: true };
@@ -8669,15 +8678,19 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
     const gridTop = M + 96;
     const rowH = 78;
 
+    // Spacing sliders (grouped layout): -1..+1 nudge horizontal/vertical.
+    const gapH = (typeof editorialContent.contactGapH === 'number') ? editorialContent.contactGapH : 0;
+    const gapV = (typeof editorialContent.contactGapV === 'number') ? editorialContent.contactGapV : 0;
     if (layout === 'grouped') {
         // Screenshot style: contacts packed into 2 columns on the LEFT half,
         // studio block on the far RIGHT, a divider between.
-        const leftBlockW = PW * 0.56;
         const gcols = 2;
-        const colW = leftBlockW / gcols;
+        const baseColW = (PW * 0.56) / gcols;
+        const colW = baseColW * (1 + gapH * 0.4);          // horizontal spacing
+        const rH = rowH * (1 + gapV * 0.5);                // vertical spacing
         contacts.forEach((c, i) => {
             const cc = i % gcols, rr = Math.floor(i / gcols);
-            drawContact(c, M + cc * colW, gridTop + rr * rowH, colW - 12);
+            drawContact(c, M + cc * colW, gridTop + rr * rH, colW - 12);
         });
         // Divider + studio block on the right.
         const rx = PW * 0.76;
@@ -8688,9 +8701,10 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
         // Even grid of N columns across the full width.
         const cols = Math.min(4, Math.max(1, parseInt(layout, 10) || 1));
         const colW = (PW - 2 * M) / cols;
+        const rH = rowH * (1 + gapV * 0.5);
         contacts.forEach((c, i) => {
             const cc = i % cols, rr = Math.floor(i / cols);
-            drawContact(c, M + cc * colW, gridTop + rr * rowH, colW - 12);
+            drawContact(c, M + cc * colW, gridTop + rr * rH, colW - 12);
         });
         // Studio block bottom-left below the grid.
         _drawStudioBlock(doc, M, PH - 118, PW * 0.5, ink);
@@ -10983,17 +10997,21 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     const T = SPEC_TEMPLATES[tpl] || {};
     if (T.freeform) return null;
     const rec = new CanvasPdfRec(PW, PH);
+    // Real logos + a meta line so the footer (page #, project line, logo) shows
+    // in preview exactly like the export.
+    let logos = {}; try { logos = await _getPdfLogos(); } catch (e) {}
+    const meta = { location: r.location || '', code: r.id || '', version: '' };
     if (onProgress) onProgress(12);
     if (desc._install) {
-        await _drawInstallGuidePage(rec, {}, 1, {}, desc.elev, { PW: PW, PH: PH, M: M });
+        await _drawInstallGuidePage(rec, logos, 1, meta, desc.elev, { PW: PW, PH: PH, M: M });
     } else if (desc.members && desc.members.length > 1 && T.group) {
-        await _drawSpecSetPage(rec, {}, 1, {}, { rep: r, members: desc.members, key: desc._ovKey || r.id }, tpl, { PW: PW, PH: PH, M: M });
+        await _drawSpecSetPage(rec, logos, 1, meta, { rep: r, members: desc.members, key: desc._ovKey || r.id }, tpl, { PW: PW, PH: PH, M: M });
     } else if (tpl === 'installGuide') {
-        await _drawInstallGuidePage(rec, {}, 1, {}, r, { PW: PW, PH: PH, M: M });
+        await _drawInstallGuidePage(rec, logos, 1, meta, r, { PW: PW, PH: PH, M: M });
     } else if (tpl !== 'classic' && !T.legacy && !T.custom && !T.group) {
-        await _drawSpecPageTemplate(rec, {}, 1, {}, r, tpl, { PW: PW, PH: PH, M: M });
+        await _drawSpecPageTemplate(rec, logos, 1, meta, r, tpl, { PW: PW, PH: PH, M: M });
     } else if (tpl === 'classic' || (T.legacy && !T.group && !T.custom)) {
-        await _drawClassicSpecPage(rec, {}, 1, {}, r, { PW: PW, PH: PH, M: M, backPage: 0 });
+        await _drawClassicSpecPage(rec, logos, 1, meta, r, { PW: PW, PH: PH, M: M, backPage: 0 });
     } else {
         return null;   // unsupported → keep the live preview
     }
@@ -11092,10 +11110,25 @@ function _dsThemeControlInto(t, key) {
     up.onclick = () => file.click();
     file.onchange = () => { const f = file.files && file.files[0]; if (!f) return; const rd = new FileReader(); rd.onload = () => { th.image = rd.result; refresh(); }; rd.readAsDataURL(f); };
     imgRow.appendChild(up); imgRow.appendChild(file);
-    if (th.image) { const rm = document.createElement('button'); rm.textContent = '\u2715'; rm.title = 'Remove image'; rm.className = 'action-btn btn-secondary'; rm.style.cssText = 'width:28px; height:28px; font-size:0.7rem;'; rm.onclick = () => { th.image = null; refresh(); }; imgRow.appendChild(rm); }
     t.appendChild(imgRow);
+    if (th.image) {
+        // Clear + zoom/pan crop controls for the background image.
+        const clr2 = document.createElement('button'); clr2.textContent = 'Clear background image'; clr2.className = 'action-btn btn-secondary'; clr2.style.cssText = 'width:100%; height:26px; font-size:0.62rem; margin-top:6px;';
+        clr2.onclick = () => { th.image = null; th._bakedImg = null; th.imageZoom = 1; th.imagePanX = 0; th.imagePanY = 0; refresh(); };
+        t.appendChild(clr2);
+        const crange = (label, prop, min, max, step, def) => {
+            const l = document.createElement('div'); l.textContent = label; l.style.cssText = 'font-size:0.6rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 2px;'; t.appendChild(l);
+            const inp = document.createElement('input'); inp.type = 'range'; inp.min = min; inp.max = max; inp.step = step;
+            inp.value = (typeof th[prop] === 'number') ? th[prop] : def; inp.style.cssText = 'width:100%;';
+            inp.oninput = () => { th[prop] = parseFloat(inp.value); _dsThumbCache = {}; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
+            t.appendChild(inp);
+        };
+        crange('Zoom', 'imageZoom', 1, 3, 0.05, 1);
+        crange('Pan horizontal', 'imagePanX', -1, 1, 0.05, 0);
+        crange('Pan vertical', 'imagePanY', -1, 1, 0.05, 0);
+    }
     const note = document.createElement('p'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
-    note.textContent = 'Dark theme uses white text on your colour or image. A background image sits behind everything and fills the page.';
+    note.textContent = 'Dark theme uses white text on your colour or image. A background image fills the page \u2014 use Zoom and Pan to crop it.';
     t.appendChild(note);
 }
 let _thumbQueue = [], _thumbBusy = false, _thumbRunToken = 0;
@@ -12165,6 +12198,17 @@ function _dsRenderTools() {
             lrow.appendChild(b);
         });
         t.appendChild(lrow);
+        // Spacing sliders — nudge contacts closer/further horizontally + vertically.
+        const slider = (label, prop, min, max, step) => {
+            const s2 = document.createElement('div'); s2.textContent = label; s2.style.cssText = 'font-size:0.62rem; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:10px 0 3px;'; t.appendChild(s2);
+            const inp = document.createElement('input'); inp.type = 'range'; inp.min = min; inp.max = max; inp.step = step;
+            inp.value = (typeof editorialContent[prop] === 'number') ? editorialContent[prop] : 0;
+            inp.style.cssText = 'width:100%;';
+            inp.oninput = () => { editorialContent[prop] = parseFloat(inp.value); _dsThumbCache = {}; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
+            t.appendChild(inp);
+        };
+        slider('Horizontal spacing', 'contactGapH', -0.8, 1.5, 0.05);
+        slider('Vertical spacing', 'contactGapV', -0.6, 1.5, 0.05);
         _dsThemeControlInto(t, 'card:contacts');
     }
     else if (desc.kind === 'planDetail') {
@@ -12992,6 +13036,7 @@ function _mbApplyModeUI() {
 // so the deck renderer and persistence are unchanged. ──────────────────────
 let _contactsDraft = [];
 let _contactsDragFrom = null;
+let _contactsSelected = -1;
 let _repoContactsCache = null;
 // Load the shared company contacts committed to the repo (contacts/contacts.json).
 // Falls back silently if the file is missing. Cached for the session.
@@ -13087,14 +13132,12 @@ function _contactsRender() {
         row.ondragover = (e) => { e.preventDefault(); row.style.borderTop = '2px solid var(--accent)'; };
         row.ondragleave = () => { row.style.borderTop = ''; };
         row.ondrop = (e) => { e.preventDefault(); row.style.borderTop = ''; const from = _contactsDragFrom; const to = i; if (from == null || from === to) return; const moved = _contactsDraft.splice(from, 1)[0]; _contactsDraft.splice(to, 0, moved); _contactsDragFrom = null; _contactsPersistOrderHide(); _contactsRender(); };
-        // Drag handle + reorder arrows
-        const ord = document.createElement('div'); ord.style.cssText = 'display:flex; flex-direction:column; align-items:center; flex:0 0 auto;';
-        const grip = document.createElement('div'); grip.textContent = '\u2630'; grip.title = 'Drag to reorder'; grip.style.cssText = 'font-size:0.7rem; color:var(--text-muted); line-height:1; margin-bottom:2px; cursor:grab;'; ord.appendChild(grip);
-        const up = document.createElement('button'); up.textContent = '\u25b4'; up.title = 'Move up'; up.className = 'action-btn btn-secondary'; up.style.cssText = 'width:22px; height:15px; padding:0; font-size:0.6rem; line-height:1;';
-        up.onclick = () => { if (i > 0) { const t = _contactsDraft[i - 1]; _contactsDraft[i - 1] = _contactsDraft[i]; _contactsDraft[i] = t; _contactsPersistOrderHide(); _contactsRender(); } };
-        const dn = document.createElement('button'); dn.textContent = '\u25be'; dn.title = 'Move down'; dn.className = 'action-btn btn-secondary'; dn.style.cssText = 'width:22px; height:15px; padding:0; font-size:0.6rem; line-height:1;';
-        dn.onclick = () => { if (i < _contactsDraft.length - 1) { const t = _contactsDraft[i + 1]; _contactsDraft[i + 1] = _contactsDraft[i]; _contactsDraft[i] = t; _contactsPersistOrderHide(); _contactsRender(); } };
-        ord.appendChild(up); ord.appendChild(dn); row.appendChild(ord);
+        // Single drag handle (grip). Click a row to select it, then use the
+        // Up/Down arrow keys to nudge it — mirrors the CSV grip behaviour.
+        if (i === _contactsSelected) row.style.outline = '2px solid var(--accent)';
+        row.onclick = (e) => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return; _contactsSelected = i; _contactsRender(); const w2 = document.getElementById('contactsRows'); if (w2 && w2.children[i]) w2.children[i].focus && w2.children[i].focus(); };
+        const grip = document.createElement('div'); grip.innerHTML = '&#x2807;&#x2807;'; grip.title = 'Drag to reorder (or select the row and use the up/down arrow keys)'; grip.style.cssText = 'flex:0 0 auto; font-size:0.9rem; letter-spacing:-2px; color:var(--text-muted); cursor:grab; padding:0 2px; user-select:none;';
+        row.appendChild(grip);
         const mk = (ph, field, w) => { const inp = document.createElement('input'); inp.type = 'text'; inp.value = c[field] || ''; inp.placeholder = ph; inp.disabled = !!c._repo; inp.oninput = () => { _contactsDraft[i][field] = inp.value; _contactsCommit(); }; inp.style.cssText = 'flex:' + w + '; min-width:0; height:30px; font-size:0.74rem; padding:0 8px; background:' + (c._repo ? 'var(--bg-main)' : 'var(--bg-input)') + '; color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;'; return inp; };
         row.appendChild(mk('Name', 'name', '2'));
         row.appendChild(mk('Role', 'role', '2'));
@@ -13111,14 +13154,29 @@ function _contactsRender() {
         wrap.appendChild(row);
     });
 }
+function _contactsKeydown(e) {
+    if (_contactsSelected < 0) return;
+    if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;   // don't hijack typing
+    e.preventDefault();
+    const i = _contactsSelected;
+    const to = e.key === 'ArrowUp' ? i - 1 : i + 1;
+    if (to < 0 || to >= _contactsDraft.length) return;
+    const moved = _contactsDraft.splice(i, 1)[0];
+    _contactsDraft.splice(to, 0, moved);
+    _contactsSelected = to;
+    _contactsPersistOrderHide(); _contactsRender();
+}
 async function openContactsEditor() {
     const m = document.getElementById('contactsModal'); if (m) m.style.display = 'flex';
+    document.removeEventListener('keydown', _contactsKeydown); document.addEventListener('keydown', _contactsKeydown);
     const wrap = document.getElementById('contactsRows'); if (wrap) wrap.innerHTML = '<p style="color:var(--text-muted); font-size:0.72rem;">Loading company contacts\u2026</p>';
     try { _contactsDraft = await _contactsResolved(); } catch (e) { _contactsDraft = _contactsParse(editorialContent.contacts || ''); }
     if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }];
     _contactsRender();
 }
-function closeContactsEditor() { const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none'; }
+function closeContactsEditor() { document.removeEventListener('keydown', _contactsKeydown); _contactsSelected = -1; const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none'; }
 function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }); _contactsRender(); _contactsCommit(); }
 function removeContact(i) { if (_contactsDraft[i] && _contactsDraft[i]._repo) return; _contactsDraft.splice(i, 1); _contactsRender(); _contactsCommit(); }
 
@@ -15104,6 +15162,8 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120);
         doc.text('Frame', leftX, labelBaseline); doc.setTextColor(20, 20, 20);
     }
+    // Footer (page number + project line + logo) on template spec pages too.
+    _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
 // Free-floating overlay text boxes drawn on top of a page in the PDF. Matches
