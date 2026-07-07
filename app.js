@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '13.4';
+const APP_VERSION = '13.5';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -346,7 +346,7 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // Editorial copy for the narrative + thank-you pages. Persisted with the
 // project (save/load + autosave), edited in the Presentation PDF dialog.
 // contacts: one per line, "Name | Role | Email | Phone" (commas also accepted).
-let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, breakerMeasure: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
+let editorialContent = { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameRight', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, breakerMeasure: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } };
 // Normalize an older / hand-edited project on load. The main hazard is a unit
 // mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
 // makes a 108 cm wall load as a 9-foot-tall 274" wall and shrinks the 72" person
@@ -371,7 +371,7 @@ function _migrateLoadedProject(data) {
     return data;
 }
 
-function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'classic', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, breakerMeasure: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
+function _editorialDefaults() { return { narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameRight', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, elevBreakers: false, breakerNoPlan: false, breakerMeasure: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }; }
 function _deckStyles() { if (!editorialContent.styles) editorialContent.styles = { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' }; return editorialContent.styles; }
 
 // ── Layout pages ──────────────────────────────────────────────────────────
@@ -642,7 +642,6 @@ let _tplType = 'moodboard';
 // Each other template places: artwork (baked frame mockup), code (under art),
 // title (the application), spec (dotted-leader block), elevation (wall thumbnail).
 const SPEC_TEMPLATES = {
-    classic: { label: 'Classic', legacy: true },
     frameRight: {
         label: 'Frame right',
         title: { x: .06, y: .15, size: 19, align: 'left', field: 'id' },
@@ -650,22 +649,6 @@ const SPEC_TEMPLATES = {
         elevation: { x: .06, y: .62, w: .4, h: .26 },
         artwork: { x: .49, y: .16, w: .47, h: .76, align: 'right' },
         code: { align: 'right', size: 13, gap: 14, field: 'imageCode' }
-    },
-    frameLeft: {
-        label: 'Frame left',
-        artwork: { x: .06, y: .12, w: .42, h: .56, align: 'center' },
-        code: { align: 'center', size: 13, gap: 14, field: 'imageCode' },
-        title: { x: .54, y: .15, size: 19, align: 'left', field: 'id' },
-        spec: { x: .54, y: .26, w: .4 },
-        elevation: { x: .54, y: .62, w: .4, h: .26 }
-    },
-    centeredHero: {
-        label: 'Centered hero',
-        artwork: { x: .3, y: .1, w: .4, h: .48, align: 'center' },
-        code: { align: 'center', size: 13, gap: 14, field: 'imageCode' },
-        title: { x: .06, y: .14, size: 16, align: 'left', field: 'id' },
-        spec: { x: .3, y: .66, w: .4 },
-        elevation: { x: .06, y: .64, w: .2, h: .24 }
     },
     installGuide: {
         label: 'Install guide — dimensioned elevation',
@@ -9381,6 +9364,7 @@ function _dsTab(which) {
 }
 let _dsBuildError = '';
 let _dsTplSel = null;   // layout template highlighted but not yet applied
+let _dsSpecTplSel = null;   // { ovKey, key } — spec template ARMED but not yet applied
 document.addEventListener('keydown', function (e) {
     const dsm = document.getElementById('deckStudioModal');
     if (!dsm || dsm.style.display === 'none' || dsm.style.display === '') return;
@@ -9577,7 +9561,7 @@ function _dsShowPreflight() {
     m.appendChild(panel); m.onclick = (e) => { if (e.target === m) m.remove(); };
     document.body.appendChild(m);
 }
-function _dsSelectPage(i) { if (typeof _mbDeselectAll === 'function') _mbDeselectAll(); _dsIndex = i; _dsTplSel = null; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
+function _dsSelectPage(i) { if (typeof _mbDeselectAll === 'function') _mbDeselectAll(); _dsIndex = i; _dsTplSel = null; _dsSpecTplSel = null; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
 function _dsDeleteLayoutPage(desc) {
     if (!desc || desc.kind !== 'layout' || !desc.page) return;
     const pages = editorialContent.layoutPages || [];
@@ -11145,12 +11129,25 @@ function _dsThumbCacheKey(desc) {
 // the SAME fractions the real renderer uses, so what you see here is exactly
 // how the template blocks out \u2014 no real project data, no confusing partial
 // renders for someone seeing the tool for the first time.
-const _LOREM_TITLE = 'ART.00 | LOCATION';
-const _LOREM_LINES = ['Application', 'Frame Size', 'Frame Code', 'Mat', 'Mount', 'Hardware', 'Glass'];
-function _dsSwatchBox(xPct, yPct, wPct, hPct, cw, chh, label) {
+// A plain grey square where an image goes \u2014 no label inside it (matches
+// how a real designer would want to scan a template: image slot, then its
+// caption + a code placeholder sitting below it, same as the real pages do).
+function _dsSwatchBox(xPct, yPct, wPct, hPct, cw, chh) {
     const x = xPct * cw, y = yPct * chh, w = wPct * cw, h = hPct * chh;
-    return '<div style="position:absolute; left:' + x + 'px; top:' + y + 'px; width:' + w + 'px; height:' + h + 'px; background:repeating-linear-gradient(45deg,#e4e4e4,#e4e4e4 6px,#ececec 6px,#ececec 12px); border:1px solid #d6d6d6; border-radius:3px; display:flex; align-items:center; justify-content:center;">' +
-        (label ? '<span style="font-size:' + Math.max(6, Math.round(chh * 0.045)) + 'px; color:#aaa; font-family:Arial,Helvetica,sans-serif; text-transform:uppercase; letter-spacing:0.4px;">' + label + '</span>' : '') + '</div>';
+    return '<div style="position:absolute; left:' + x + 'px; top:' + y + 'px; width:' + w + 'px; height:' + h + 'px; background:#e4e4e4; border:1px solid #d6d6d6; border-radius:2px;"></div>';
+}
+// Caption sitting just under a box: the block's name (e.g. "Floorplan") plus a
+// thin grey bar standing in for an image code / item id that would print there.
+function _dsSwatchCaption(xPct, yBelowPct, wPct, cw, chh, label) {
+    const x = xPct * cw, y = yBelowPct * chh, w = Math.max(30, wPct * cw);
+    const fs = Math.max(6, Math.round(chh * 0.052));
+    return '<div style="position:absolute; left:' + x + 'px; top:' + y + 'px; width:' + w + 'px; font-size:' + fs + 'px; color:#9a9a9a; font-family:Arial,Helvetica,sans-serif; white-space:nowrap; overflow:hidden;">' + label + '</div>' +
+        '<div style="position:absolute; left:' + x + 'px; top:' + (y + fs + 2) + 'px; width:' + Math.round(w * 0.45) + 'px; height:' + Math.max(3, Math.round(fs * 0.4)) + 'px; background:#dcdcdc; border-radius:1px;"></div>';
+}
+// Draw a box + its caption together, using the box's own bottom edge so the
+// label always sits directly under it regardless of the box height.
+function _dsSwatchImageSlot(xPct, yPct, wPct, hPct, cw, chh, label) {
+    return _dsSwatchBox(xPct, yPct, wPct, hPct, cw, chh) + _dsSwatchCaption(xPct, yPct + hPct + 0.012, wPct, cw, chh, label);
 }
 function _dsSwatchLoremLines(xPct, yPct, wPct, cw, chh, n) {
     const x = xPct * cw, y = yPct * chh, w = wPct * cw;
@@ -11166,30 +11163,28 @@ function _dsSwatchLoremLines(xPct, yPct, wPct, cw, chh, n) {
 function _dsTemplateSwatchHTML(key, cw, chh) {
     const T = SPEC_TEMPLATES[key] || {};
     let html = '<div style="position:absolute; inset:0; background:#fff;">';
-    if (key === 'classic' || (T.legacy && !T.group && !T.custom)) {
-        // Matches _drawClassicSpecPage's real layout: title+spec at left, big
-        // artwork top-right, plan + elevation thumbnails bottom-left.
-        html += '<div style="position:absolute; left:' + (0.045 * cw) + 'px; top:' + (0.06 * chh) + 'px; width:' + (0.4 * cw) + 'px; height:' + (0.07 * chh) + 'px; background:#d8d8d8; border-radius:2px;"></div>';
-        html += _dsSwatchLoremLines(0.045, 0.18, 0.4, cw, chh, 6);
-        html += _dsSwatchBox(0.46, 0.05, 0.50, 0.60, cw, chh, 'Artwork');
-        html += _dsSwatchBox(0.045, 0.62, 0.17, 0.30, cw, chh, 'Floorplan');
-        html += _dsSwatchBox(0.235, 0.62, 0.20, 0.30, cw, chh, 'Elevation');
-    } else if (T.group || T.custom || T.freeform || key === 'installGuide' || !(T.title || T.spec || T.artwork)) {
-        // Generic fallback for template kinds without simple fixed blocks.
+    if (T.group || T.custom || T.freeform || key === 'installGuide' || !(T.title || T.spec || T.artwork)) {
+        // Generic fallback for template kinds without simple fixed blocks
+        // (set layouts, install guide, custom/freeform).
         html += '<div style="position:absolute; left:' + (0.06 * cw) + 'px; top:' + (0.08 * chh) + 'px; width:' + (0.5 * cw) + 'px; height:' + (0.07 * chh) + 'px; background:#d8d8d8; border-radius:2px;"></div>';
-        html += _dsSwatchBox(0.06, 0.22, 0.88, 0.68, cw, chh, T.label || 'Layout');
+        html += _dsSwatchImageSlot(0.06, 0.22, 0.88, 0.6, cw, chh, T.label || 'Layout');
     } else {
+        // Title placeholder (grey bar, no caption \u2014 it's text, not an image).
         if (T.title) html += '<div style="position:absolute; left:' + (T.title.x * cw) + 'px; top:' + (T.title.y * chh - chh * 0.05) + 'px; width:' + (0.45 * cw) + 'px; height:' + (0.06 * chh) + 'px; background:#d8d8d8; border-radius:2px;"></div>';
         if (T.spec) html += _dsSwatchLoremLines(T.spec.x, T.spec.y, T.spec.w, cw, chh, 6);
+        // Every image slot gets a plain grey box, with its name + a code
+        // placeholder captioned directly below it \u2014 same idea as the real
+        // "Floorplan" / "Elevation 1" / "Frame" captions on the actual pages.
         if (T.frameDetail) {
-            // Mirrors the anchor-above-plan geometry: two small boxes, corner + profile.
             const planY = (T.plan ? T.plan.y : 0.62) - 0.16;
-            html += _dsSwatchBox(T.plan ? T.plan.x : 0.045, planY, 0.13, 0.13, cw, chh, 'Corner');
-            html += _dsSwatchBox((T.plan ? T.plan.x : 0.045) + 0.145, planY, 0.13, 0.13, cw, chh, 'Profile');
+            const cornerX = T.plan ? T.plan.x : 0.045;
+            html += _dsSwatchBox(cornerX, planY, 0.13, 0.10, cw, chh);
+            html += _dsSwatchBox(cornerX + 0.145, planY, 0.13, 0.10, cw, chh);
+            html += _dsSwatchCaption(cornerX, planY + 0.10 + 0.012, 0.27, cw, chh, 'Frame');
         }
-        if (T.plan) html += _dsSwatchBox(T.plan.x, T.plan.y, T.plan.w, T.plan.h, cw, chh, 'Floorplan');
-        if (T.elevation) html += _dsSwatchBox(T.elevation.x, T.elevation.y, T.elevation.w, T.elevation.h, cw, chh, 'Elevation');
-        if (T.artwork) html += _dsSwatchBox(T.artwork.x, T.artwork.y, T.artwork.w, T.artwork.h, cw, chh, 'Artwork');
+        if (T.plan) html += _dsSwatchImageSlot(T.plan.x, T.plan.y, T.plan.w, T.plan.h, cw, chh, 'Floorplan');
+        if (T.elevation) html += _dsSwatchImageSlot(T.elevation.x, T.elevation.y, T.elevation.w, T.elevation.h, cw, chh, 'Elevation 1');
+        if (T.artwork) html += _dsSwatchImageSlot(T.artwork.x, T.artwork.y, T.artwork.w, T.artwork.h, cw, chh, 'ART.00');
     }
     html += '</div>';
     return html;
@@ -12268,18 +12263,24 @@ function _dsRenderTools() {
             // template (the one highlighted below) to a chosen scope, then force
             // an immediate rebuild of that scope's thumbnails + the center
             // preview — no more "nothing happened" after clicking Apply.
+            const armedKey = (_dsSpecTplSel && _dsSpecTplSel.ovKey === ovKey) ? _dsSpecTplSel.key : null;
+            const chosenKey = armedKey || resolved;
             const applyScoped = (setKeys) => {
-                setKeys.forEach(k => { if (resolved === globalTpl) delete overrides[k]; else overrides[k] = resolved; });
+                setKeys.forEach(k => { if (chosenKey === globalTpl) delete overrides[k]; else overrides[k] = chosenKey; });
+                if (chosenKey === 'custom') _dsSeedCustom(desc);
+                _dsSpecTplSel = null;
                 if (typeof pushHistory === 'function') pushHistory();
                 if (typeof scheduleAutosave === 'function') scheduleAutosave();
                 _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
             };
             const btnRow = document.createElement('div');
-            btnRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:6px; margin-bottom:6px;';
-            const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1 1 auto; min-width:120px; font-size:0.66rem; font-weight:600; padding:7px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
-            btnRow.appendChild(mkBtn('Apply to current page', true, () => applyScoped([ovKey])));
+            btnRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px; margin-bottom:4px;';
+            const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1 1 auto; min-width:96px; font-size:0.58rem; font-weight:600; padding:4px 3px; border-radius:4px; cursor:pointer; border:1px solid ' + (primary ? '#6a6aff' : 'var(--border-color)') + '; background:' + (primary ? '#6a6aff' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
+            const curLabel = armedKey ? ('Apply \u201c' + (SPEC_TEMPLATES[armedKey].label || armedKey) + '\u201d to this page') : 'Apply to current page';
+            btnRow.appendChild(mkBtn(curLabel, true, () => applyScoped([ovKey])));
             btnRow.appendChild(mkBtn('Apply to all pages', false, () => {
-                editorialContent.specTemplate = resolved; editorialContent.specTemplateOverrides = {};
+                editorialContent.specTemplate = chosenKey; editorialContent.specTemplateOverrides = {};
+                _dsSpecTplSel = null;
                 if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
                 _dsThumbCache = {}; _dsRefresh(); _dsBuildAllThumbs(); _dsRenderCenter();
             }));
@@ -12292,10 +12293,10 @@ function _dsRenderTools() {
             if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', false, () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter(); }));
             head.appendChild(btnRow);
             // Apply to a page range (by position in this page list, e.g. "5-12").
-            const rangeRow = document.createElement('div'); rangeRow.style.cssText = 'display:flex; gap:6px; margin-bottom:8px;';
+            const rangeRow = document.createElement('div'); rangeRow.style.cssText = 'display:flex; gap:4px; margin-bottom:5px;';
             const rangeInp = document.createElement('input'); rangeInp.type = 'text'; rangeInp.placeholder = 'e.g. 5-12, 20';
-            rangeInp.style.cssText = 'flex:1; min-width:0; height:28px; font-size:0.66rem; padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
-            const rangeBtn = document.createElement('button'); rangeBtn.textContent = 'Apply to range'; rangeBtn.className = 'action-btn btn-secondary'; rangeBtn.style.cssText = 'height:28px; font-size:0.64rem; padding:0 10px;';
+            rangeInp.style.cssText = 'flex:1; min-width:0; height:22px; font-size:0.6rem; padding:0 6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+            const rangeBtn = document.createElement('button'); rangeBtn.textContent = 'Apply to range'; rangeBtn.className = 'action-btn btn-secondary'; rangeBtn.style.cssText = 'height:22px; font-size:0.58rem; padding:0 8px;';
             rangeBtn.onclick = () => {
                 const set = new Set();
                 ('' + rangeInp.value).split(',').forEach(part => {
@@ -12312,25 +12313,25 @@ function _dsRenderTools() {
             rangeRow.appendChild(rangeInp); rangeRow.appendChild(rangeBtn);
             head.appendChild(rangeRow);
             const sub = document.createElement('p');
-            sub.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:0; line-height:1.4;';
-            sub.innerHTML = hasOverride ? 'This page overrides the deck default. Pick a template below, then choose a scope above.' : 'Pick a template below, then choose a scope above \u2014 this page, an elevation, a page range, or the whole deck.';
+            sub.style.cssText = 'font-size:0.58rem; color:var(--text-muted); margin:0 0 4px; line-height:1.3;';
+            sub.innerHTML = hasOverride ? 'Overrides the deck default.' : 'Pick a template, then choose a scope above.';
             head.appendChild(sub);
             // — Elevation breaker toggle (deck-wide; applies to every wall group) —
             const brWrap = document.createElement('label');
-            brWrap.style.cssText = 'display:flex; align-items:flex-start; gap:8px; font-size:0.66rem; color:var(--text-main); cursor:pointer; margin-top:8px; padding-top:8px; border-top:1px dashed var(--border-color);';
+            brWrap.style.cssText = 'display:flex; align-items:flex-start; gap:6px; font-size:0.6rem; color:var(--text-main); cursor:pointer; margin-top:5px; padding-top:5px; border-top:1px dashed var(--border-color);';
             const brCb = document.createElement('input'); brCb.type = 'checkbox'; brCb.checked = _elevBreakers(); brCb.style.cssText = 'margin-top:2px; flex:0 0 auto;';
             brCb.onchange = () => { editorialContent.elevBreakers = brCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
             const brTxt = document.createElement('div'); brTxt.innerHTML = '<b>Add elevation breaker page</b><br><span style="color:var(--text-muted);">Before each wall group, insert a full-page elevation titled with the group code (e.g. ART-2.1ABCD), then these individual spec pages.</span>';
             brWrap.appendChild(brCb); brWrap.appendChild(brTxt);
             head.appendChild(brWrap);
             const npWrap = document.createElement('label');
-            npWrap.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin:6px 0 0 22px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
+            npWrap.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:0.58rem; color:var(--text-main); cursor:pointer; margin:3px 0 0 18px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
             const npCb = document.createElement('input'); npCb.type = 'checkbox'; npCb.checked = _breakerNoPlan(); npCb.disabled = !_elevBreakers(); npCb.style.cssText = 'flex:0 0 auto;';
             npCb.onchange = () => { editorialContent.breakerNoPlan = npCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
             npWrap.appendChild(npCb); npWrap.appendChild(document.createTextNode('Elevation only (hide plan view, fill the page)'));
             head.appendChild(npWrap);
             const msWrap = document.createElement('label');
-            msWrap.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin:6px 0 0 22px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
+            msWrap.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:0.58rem; color:var(--text-main); cursor:pointer; margin:3px 0 0 18px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
             const msCb = document.createElement('input'); msCb.type = 'checkbox'; msCb.checked = _breakerMeasure(); msCb.disabled = !_elevBreakers(); msCb.style.cssText = 'flex:0 0 auto;';
             msCb.onchange = () => { editorialContent.breakerMeasure = msCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
             msWrap.appendChild(msCb); msWrap.appendChild(document.createTextNode('Show layout guides (uses the elevation\u2019s exact measurement guides)'));
@@ -12340,10 +12341,14 @@ function _dsRenderTools() {
             const cardsWrap = document.createElement('div');
             cardsWrap.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px;';
             Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group && k !== 'installGuide').forEach(key => {
-                const onCur = (key === resolved);
+                const onCur = (key === resolved);         // currently applied to this page
+                const onArmed = (key === armedKey);          // picked but NOT yet applied
                 const cell = document.createElement('div');
-                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff;';
-                cell.onclick = () => { if (key === globalTpl) delete overrides[ovKey]; else overrides[ovKey] = key; if (key === 'custom') _dsSeedCustom(desc); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); _dsPriorityRerender(desc); };
+                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onArmed ? '#ff9f43' : onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff;';
+                // Clicking a swatch only ARMS it (highlights, doesn't touch the
+                // page or thumbnails yet). Nothing updates until an Apply button
+                // above is clicked, so you can browse templates freely.
+                cell.onclick = () => { _dsSpecTplSel = { ovKey: ovKey, key: key }; _dsRenderTools(); };
                 const thumb = document.createElement('div');
                 thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
                 // Clean grey-box + lorem placeholder — shows how the template blocks
@@ -12351,17 +12356,15 @@ function _dsRenderTools() {
                 // clearly to anyone even on their first time in the tool.
                 try { thumb.innerHTML = _dsTemplateSwatchHTML(key, cw, chh); } catch (e) { thumb.innerHTML = ''; }
                 const nm = document.createElement('div');
-                const tag = onCur ? (hasOverride ? ' \u2713' : ' \u2713') : (key === globalTpl ? ' \u00b7' : '');
-                nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.6rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
+                const tag = onArmed ? ' \u25cf selected' : onCur ? (hasOverride ? ' \u2713 applied' : ' \u2713 default') : (key === globalTpl ? ' \u00b7 default' : '');
+                nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.6rem; color:' + (onArmed ? '#ff9f43' : onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
                 cell.appendChild(thumb); cell.appendChild(nm); cardsWrap.appendChild(cell);
             });
-            t.appendChild(resolved === 'custom' ? _dsCustomSection(desc) : _dsManualSection(desc));
-            t.appendChild(_dsStatusSection(desc));
             const specLbl = document.createElement('div');
             specLbl.textContent = 'Spec template \u2014 click to switch'; specLbl.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:10px 0 6px;';
             t.appendChild(specLbl);
             const specScroll = document.createElement('div');
-            specScroll.style.cssText = 'max-height:46vh; overflow-y:auto; border:1px solid var(--border-color); border-radius:6px; padding:6px;';
+            specScroll.style.cssText = 'max-height:62vh; overflow-y:auto; border:1px solid var(--border-color); border-radius:6px; padding:6px;';
             specScroll.appendChild(cardsWrap);
             t.appendChild(specScroll);
             return;
@@ -12377,7 +12380,7 @@ function _dsRenderTools() {
         applyBtn.textContent = armed ? ('Apply \u201C' + _dsTplSel.name + '\u201D to this page') : 'Apply selected template';
         applyBtn.className = armed ? 'action-btn' : 'action-btn btn-secondary';
         applyBtn.disabled = !armed;
-        applyBtn.style.cssText = 'width:100%; height:34px; margin-bottom:8px; font-size:0.74rem; font-weight:700;' + (armed ? '' : ' opacity:0.5; cursor:default;');
+        applyBtn.style.cssText = 'width:100%; height:26px; margin-bottom:5px; font-size:0.64rem; font-weight:700;' + (armed ? '' : ' opacity:0.5; cursor:default;');
         applyBtn.onclick = () => { if (!_dsTplSel) return; const els = _dsTplSel.els; _dsTplSel = null; _dsApplyTemplate(els, cat); };
         t.appendChild(applyBtn);
 
@@ -12418,7 +12421,7 @@ function _dsRenderTools() {
         });
         if (!cards.length) { const e = document.createElement('p'); e.style.cssText = 'font-size:0.68rem; color:var(--text-muted);'; e.textContent = 'No templates for this page type yet.'; grid.appendChild(e); }
         const gridScroll = document.createElement('div');
-        gridScroll.style.cssText = 'max-height:46vh; overflow-y:auto; border:1px solid var(--border-color); border-radius:6px; padding:6px;';
+        gridScroll.style.cssText = 'max-height:60vh; overflow-y:auto; border:1px solid var(--border-color); border-radius:6px; padding:6px;';
         gridScroll.appendChild(grid);
         _deferredTplGrid = document.createElement('div');
         _deferredTplGrid.appendChild(lbl); _deferredTplGrid.appendChild(gridScroll);
