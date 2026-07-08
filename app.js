@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '14.3';
+const APP_VERSION = '14.4';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10502,11 +10502,17 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const startDot = mk('circle', { r: 0 });
             const hit = mk('polyline', { fill: 'none', stroke: 'transparent' });
             hit.style.cssText = 'pointer-events:stroke; cursor:move;';
-            const hEnds = [mk('circle', { r: 6, fill: '#6a6aff', stroke: '#fff', 'stroke-width': 2 }), mk('circle', { r: 6, fill: '#6a6aff', stroke: '#fff', 'stroke-width': 2 })];
+            // Hollow rings for the endpoint handles so the actual line end is
+            // visible through the middle, not hidden under a solid dot.
+            const hEnds = [mk('circle', { r: 6, fill: 'none', stroke: '#6a6aff', 'stroke-width': 2.5 }), mk('circle', { r: 6, fill: 'none', stroke: '#6a6aff', 'stroke-width': 2.5 })];
+            // Middle-segment handle (elbow/curve only) — drag to slide the bend.
+            const bendHandle = mk('rect', { width: 9, height: 9, fill: '#fff', stroke: '#6a6aff', 'stroke-width': 2 });
+            let lastPts = null;
             const redraw = () => {
                 const X1 = (a.x1 || 0) * w, Y1 = (a.y1 || 0) * hh, X2 = (a.x2 || 0) * w, Y2 = (a.y2 || 0) * hh;
                 const sw = Math.max(1, (a.weight || 2) * (w / 936)), col = a.color || '#c0392b';
-                const pts = (a.type === 'elbow') ? [[X1, Y1], [X2, Y1], [X2, Y2]] : [[X1, Y1], [X2, Y2]];
+                const pts = _arrowPathPoints(a, X1, Y1, X2, Y2);
+                lastPts = pts;
                 const ptStr = pts.map(p => p.join(',')).join(' ');
                 const end = pts[pts.length - 1], prev = pts[pts.length - 2];
                 const dx = end[0] - prev[0], dy = end[1] - prev[1], len = Math.max(1, Math.hypot(dx, dy));
@@ -10521,6 +10527,12 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 hit.setAttribute('points', ptStr); hit.setAttribute('stroke-width', Math.max(14, sw + 12));
                 hEnds[0].setAttribute('cx', X1); hEnds[0].setAttribute('cy', Y1);
                 hEnds[1].setAttribute('cx', X2); hEnds[1].setAttribute('cy', Y2);
+                if ((a.type === 'elbow' || a.type === 'curve') && pts.length >= 3) {
+                    const mi = Math.floor(pts.length / 2);
+                    const mp = pts[mi];
+                    bendHandle.setAttribute('x', mp[0] - 4.5); bendHandle.setAttribute('y', mp[1] - 4.5);
+                    bendHandle.style.display = '';
+                } else { bendHandle.style.display = 'none'; }
             };
             redraw();
             svg.appendChild(poly); svg.appendChild(startDot); svg.appendChild(headP); svg.appendChild(hit);
@@ -10544,6 +10556,34 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     };
                     svg.appendChild(c);
                 });
+                if (a.type === 'elbow' || a.type === 'curve') {
+                    bendHandle.style.cssText = 'pointer-events:all; cursor:' + (a.type === 'elbow' ? 'ew-resize' : 'move') + ';';
+                    bendHandle.onmousedown = (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        const rect = svg.getBoundingClientRect();
+                        const X1 = (a.x1 || 0) * w, X2 = (a.x2 || 0) * w, Y1 = (a.y1 || 0) * hh, Y2 = (a.y2 || 0) * hh;
+                        const mv = (ev) => {
+                            if (a.type === 'elbow') {
+                                // Segment is vertical; slide it left/right along X.
+                                const mx = ev.clientX - rect.left;
+                                const t = (X2 - X1) !== 0 ? (mx - X1) / (X2 - X1) : 0.5;
+                                a.bend = Math.max(0, Math.min(1, t));
+                            } else {
+                                // Curve: drag perpendicular to the line bows it either way.
+                                const mx = ev.clientX - rect.left, my = ev.clientY - rect.top;
+                                const dx = X2 - X1, dy = Y2 - Y1, len = Math.max(1, Math.hypot(dx, dy));
+                                const nx = -dy / len, ny = dx / len;
+                                const relx = mx - (X1 + X2) / 2, rely = my - (Y1 + Y2) / 2;
+                                const off = relx * nx + rely * ny;
+                                a.bend = Math.max(0, Math.min(1, 0.5 + off / (len * 0.6)));
+                            }
+                            redraw();
+                        };
+                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                    };
+                    svg.appendChild(bendHandle);
+                }
             }
             page.appendChild(svg);
             return;
@@ -10581,6 +10621,53 @@ function _dsRenderAnnots(page, desc, w, hh) {
         }
         page.appendChild(el);
     });
+    // Click-drag-to-draw overlay for a newly armed shape (arrow/elbow/curve).
+    // Sits above everything so it captures the drag without disturbing normal
+    // annotation selection/dragging; disarms itself the moment a shape lands.
+    if (_dsArmedShape) {
+        const ov = document.createElement('div');
+        ov.style.cssText = 'position:absolute; inset:0; cursor:crosshair; z-index:500;';
+        const NS = 'http://www.w3.org/2000/svg';
+        const mk = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+        ov.onmousedown = (e) => {
+            e.preventDefault();
+            const rect = ov.getBoundingClientRect();
+            const sx = e.clientX - rect.left, sy = e.clientY - rect.top;
+            const svg = document.createElementNS(NS, 'svg');
+            svg.setAttribute('width', w); svg.setAttribute('height', hh);
+            svg.style.cssText = 'position:absolute; left:0; top:0; pointer-events:none; overflow:visible;';
+            const shapeKind = _dsArmedShape;
+            const preview = mk('polyline', { fill: 'none', stroke: (_dsArrowDefaults().color), 'stroke-width': (_dsArrowDefaults().weight || 1.4) * (w / 936), 'stroke-dasharray': '5,4', 'stroke-linecap': 'round' });
+            svg.appendChild(preview); ov.appendChild(svg);
+            const draftAnn = () => Object.assign({ x1: sx / w, y1: sy / hh, x2: sx / w, y2: sy / hh }, _dsShapeDefaultsFor(shapeKind));
+            const mv = (ev) => {
+                const ex = ev.clientX - rect.left, ey = ev.clientY - rect.top;
+                const a = draftAnn(); a.x2 = ex / w; a.y2 = ey / hh;
+                const pts = _arrowPathPoints(a, sx, sy, ex, ey);
+                preview.setAttribute('points', pts.map(p => p.join(',')).join(' '));
+            };
+            const up = (ev) => {
+                document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
+                const ex = ev.clientX - rect.left, ey = ev.clientY - rect.top;
+                // A genuine click with no drag still creates a small default-sized
+                // shape, rather than a zero-length one that's impossible to see.
+                const moved = Math.hypot(ex - sx, ey - sy) > 6;
+                const a = _dsShapeDefaultsFor(shapeKind);
+                a.x1 = sx / w; a.y1 = sy / hh;
+                a.x2 = moved ? (ex / w) : Math.min(0.98, sx / w + 0.2);
+                a.y2 = moved ? (ey / hh) : Math.max(0.02, sy / hh - 0.12);
+                const arr = _dsAnnList(key);
+                arr.push(a);
+                _dsArmedShape = null;
+                if (typeof pushHistory === 'function') pushHistory();
+                if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                _dsSelectAnnot(key, arr.length - 1);
+                _dsRenderRail();
+            };
+            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+        };
+        page.appendChild(ov);
+    }
 }
 function _dsAddArtDetail() {
     const desc = _dsPages[_dsIndex];
@@ -10730,17 +10817,74 @@ function _dsSetArrowDefault(prop, val) {
     editorialContent.annotationDefaults = editorialContent.annotationDefaults || {};
     editorialContent.annotationDefaults.arrow = Object.assign({}, _dsArrowDefaults(), { [prop]: val });
 }
-function _dsAddArrow(kind) {
-    if (_dsActiveTab !== 'pages') return;
-    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
-    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support arrows.'); return; }
-    const list = _dsAnnList(key);
+let _dsArmedShape = null;   // 'arrow' | 'elbow' | 'elbowRev' | 'curve' — click-drag to draw
+function _dsShapeDefaultsFor(virtualKind) {
     const d = _dsArrowDefaults();
-    list.push({ type: (kind === 'elbow' ? 'elbow' : 'arrow'), x1: 0.32, y1: 0.5, x2: 0.6, y2: 0.4, color: d.color, weight: d.weight, tip: d.tip, startCap: d.startCap });
-    if (typeof pushHistory === 'function') pushHistory();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    _dsSelectAnnot(key, list.length - 1);
-    _dsRenderRail();
+    if (virtualKind === 'elbow') return Object.assign({}, d, { type: 'elbow', bend: 1 });
+    if (virtualKind === 'elbowRev') return Object.assign({}, d, { type: 'elbow', bend: 0 });
+    if (virtualKind === 'curve') return Object.assign({}, d, { type: 'curve', bend: 0.5 });
+    return Object.assign({}, d, { type: 'arrow' });
+}
+// Arm a shape for click-drag drawing on the page. Click again / Escape cancels.
+let _dsLastShapeKind = 'arrow';
+// Main button quick-click: arm whichever shape was used last time.
+function _dsArrowMainClick() { _dsAddArrowSmart(_dsLastShapeKind); }
+// Caret opens a small popup to actually pick among all 4 shapes.
+function _dsOpenArrowShapeMenu(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    _dsPopup('dsArrowShapeMenu', 'dsArrowMenuBtn', (menu) => {
+        const lbl = document.createElement('div'); lbl.textContent = 'ARROW SHAPE'; lbl.style.cssText = 'font-size:0.6rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:8px;';
+        menu.appendChild(lbl);
+        const grid = document.createElement('div'); grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:6px;';
+        const shapes = [
+            ['arrow', 'Straight', '<line x1="4" y1="20" x2="20" y2="4"/><polyline points="10 4 20 4 20 14"/>'],
+            ['elbow', 'Elbow', '<polyline points="4 5 4 19 16 19"/><polyline points="12 15 17 20"/>'],
+            ['elbowRev', 'Elbow (rev.)', '<polyline points="4 8 12 8 12 20 20 20"/><polyline points="16 16 20 20 16 24" transform="translate(0,-4)"/>'],
+            ['curve', 'Curve', '<path d="M4 19 Q 12 3 20 8"/><polyline points="15 6 20 8 19 13"/>']
+        ];
+        shapes.forEach(([kind, label, svgInner]) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
+            b.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 4px; font-size:0.6rem; border-radius:6px; cursor:pointer; border:1px solid ' + (_dsLastShapeKind === kind ? '#6a6aff' : 'var(--border-color)') + ';';
+            b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + svgInner + '</svg><span>' + label + '</span>';
+            b.onclick = () => { _dsLastShapeKind = kind; const m = document.getElementById('dsArrowShapeMenu'); if (m) m.remove(); _dsAddArrowSmart(kind); };
+            grid.appendChild(b);
+        });
+        menu.appendChild(grid);
+    });
+}
+function _dsArmShapeDraw(virtualKind) {
+    if (_dsActiveTab !== 'pages') return;
+    _dsArmedShape = (_dsArmedShape === virtualKind) ? null : virtualKind;
+    _dsRenderCenter();
+}
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && _dsArmedShape) { _dsArmedShape = null; _dsRenderCenter(); } });
+function _arrowPathPoints(a, X1, Y1, X2, Y2) {
+    // 'elbow': a.bend (0..1) is where the corner sits along X. Defaults to 1,
+    // which collapses to the CLASSIC 2-segment L-shape used before this
+    // change, so every already-saved elbow renders identically, unchanged.
+    // Dragging the middle segment slides bend from 0 (vertical-first L) to 1
+    // (horizontal-first L); every corner is always exactly 90 degrees.
+    if (a.type === 'elbow') {
+        const t = (typeof a.bend === 'number') ? a.bend : 1;
+        const cx = X1 + (X2 - X1) * t;
+        return [[X1, Y1], [cx, Y1], [cx, Y2], [X2, Y2]];
+    }
+    // 'curve': a smooth quadratic curve, approximated as a short polyline so
+    // both the preview shim and real jsPDF render it identically.
+    if (a.type === 'curve') {
+        const t = (typeof a.bend === 'number') ? a.bend : 0.5;
+        const midx = (X1 + X2) / 2, midy = (Y1 + Y2) / 2;
+        const dx = X2 - X1, dy = Y2 - Y1, len = Math.max(1, Math.hypot(dx, dy));
+        const nx = -dy / len, ny = dx / len, off = (t - 0.5) * len * 0.6;
+        const cxp = midx + nx * off, cyp = midy + ny * off;
+        const N = 16, pts = [];
+        for (let i = 0; i <= N; i++) {
+            const u = i / N;
+            pts.push([(1 - u) * (1 - u) * X1 + 2 * (1 - u) * u * cxp + u * u * X2, (1 - u) * (1 - u) * Y1 + 2 * (1 - u) * u * cyp + u * u * Y2]);
+        }
+        return pts;
+    }
+    return [[X1, Y1], [X2, Y2]];
 }
 function _dsAddShape(shape) {
     if (_dsActiveTab !== 'pages') return;
@@ -10756,7 +10900,7 @@ function _dsAddShape(shape) {
 let _dsFillShapeMode = false;
 function _dsAddTextSmart() { if (_dsCurrentEditablePage()) { try { addMoodboardText(); } catch (e) {} } else { _dsAddTextBox(); } }
 function _dsAddImageSmart() { if (_dsCurrentEditablePage()) { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); } else { _dsAddImageBox(); } }
-function _dsAddArrowSmart(kind) { if (_dsCurrentEditablePage()) { try { if (kind === 'elbow') addMoodboardElbow(); else addMoodboardArrow(); } catch (e) {} } else { _dsAddArrow(kind); } }
+function _dsAddArrowSmart(kind) { if (_dsCurrentEditablePage()) { try { if (kind === 'elbow' || kind === 'elbowRev') addMoodboardElbow(); else addMoodboardArrow(); } catch (e) {} } else { _dsArmShapeDraw(kind); } }
 function _dsAddArtworkSmart() { if (_dsCurrentEditablePage() && typeof _mbArtPickerOpen === 'function') _mbArtPickerOpen(); }
 function _dsClearMbSel() { if (typeof _mbSelected !== 'undefined' && (_mbSelected >= 0 || (_mbSel && _mbSel.length)) && _mbActiveCanvasId === 'dsLayoutCanvas') { _mbDeselectAll(); try { renderMoodboardCanvas(); } catch (e) {} } }
 function _dsFillShapeWithImage() {
@@ -15789,21 +15933,24 @@ function _drawAnnotations(doc, key, PW, PH) {
             if (a.showCode) { const prow = _pieceById(a.pieceId) || {}; const code = (prow.imageCode || prow.artworkFile || a.pieceId || '') + ''; if (code) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), cs.font === 'serif' ? 'normal' : 'bold'); doc.setFontSize(Math.min(cs.size, 10)); doc.setTextColor(crgb.r, crgb.g, crgb.b); try { doc.text(code, x + pw, y + ph + 11, { align: 'right' }); } catch (e) {} } }
             return;
         }
-        if (a.type === 'arrow' || a.type === 'elbow') {
+        if (a.type === 'arrow' || a.type === 'elbow' || a.type === 'curve') {
             const X1 = (a.x1 || 0) * PW, Y1 = (a.y1 || 0) * PH, X2 = (a.x2 || 0) * PW, Y2 = (a.y2 || 0) * PH;
             const rgb = _annHexToRgb(a.color || '#c0392b');
             const wt = a.weight || 2;
             doc.setDrawColor(rgb.r, rgb.g, rgb.b); doc.setLineWidth(wt); doc.setLineCap('round'); doc.setLineJoin('round');
-            let px2 = X1, py2 = Y1;
-            if (a.type === 'elbow') { doc.line(X1, Y1, X2, Y1); doc.line(X2, Y1, X2, Y2); px2 = X2; py2 = Y1; }
-            else { doc.line(X1, Y1, X2, Y2); px2 = X1; py2 = Y1; }
+            // Same shared geometry the live editor uses, so the PDF always
+            // matches exactly what was previewed — straight, elbow (with its
+            // adjustable bend), or curve (drawn as short line segments).
+            const pts = _arrowPathPoints(a, X1, Y1, X2, Y2);
+            for (let i = 1; i < pts.length; i++) doc.line(pts[i - 1][0], pts[i - 1][1], pts[i][0], pts[i][1]);
+            const end = pts[pts.length - 1], prev = pts[pts.length - 2];
             doc.setFillColor(rgb.r, rgb.g, rgb.b);
             if (a.startCap === 'circle') { try { doc.circle(X1, Y1, Math.max(1.2, wt * 0.9), 'F'); } catch (e) {} }
             if (a.tip !== 'none') {
-                const dx = X2 - px2, dy = Y2 - py2, len = Math.max(0.5, Math.hypot(dx, dy));
+                const dx = end[0] - prev[0], dy = end[1] - prev[1], len = Math.max(0.5, Math.hypot(dx, dy));
                 const ux = dx / len, uy = dy / len, hsz = Math.max(5, wt * 4.6);
-                const bx = X2 - ux * hsz, by = Y2 - uy * hsz, nx = -uy, ny = ux;
-                try { doc.triangle(X2, Y2, bx + nx * hsz * 0.34, by + ny * hsz * 0.34, bx - nx * hsz * 0.34, by - ny * hsz * 0.34, 'F'); } catch (e) {}
+                const bx = end[0] - ux * hsz, by = end[1] - uy * hsz, nx = -uy, ny = ux;
+                try { doc.triangle(end[0], end[1], bx + nx * hsz * 0.34, by + ny * hsz * 0.34, bx - nx * hsz * 0.34, by - ny * hsz * 0.34, 'F'); } catch (e) {}
             }
             return;
         }
