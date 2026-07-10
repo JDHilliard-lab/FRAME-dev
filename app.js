@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '14.4';
+const APP_VERSION = '14.5';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10349,18 +10349,42 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + s + 'px; height:' + s + 'px; cursor:move; box-sizing:border-box;';
             const disc = document.createElement('div');
             disc.style.cssText = 'position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#f2f2f4; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + ';';
-            const url = _artDetailCache[a.pieceId];
+            const url = _artDetailCache[_artDetailKey(a.pieceId, a)];
             if (url) { const img = document.createElement('img'); img.src = url; img.draggable = false; img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;'; disc.appendChild(img); }
-            else { disc.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:10px; text-align:center; padding:6px;">detail\u2026</div>'; if (a.pieceId) _artDetailEnsure(a.pieceId).then(u => { if (u) _dsRenderCenter(); }); }
+            else { disc.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:10px; text-align:center; padding:6px;">detail\u2026</div>'; if (a.pieceId) _artDetailEnsure(a.pieceId, a).then(u => { if (u) _dsRenderCenter(); }); }
             box.appendChild(disc);
             const cap = document.createElement('div'); cap.textContent = 'Artwork Detail'; cap.style.cssText = 'position:absolute; left:-30%; right:-30%; top:100%; margin-top:4px; text-align:center; font-size:10px; font-style:italic; color:#8a8a8a; pointer-events:none; font-family:"Messina",Georgia,serif;'; box.appendChild(cap);
             box.onmousedown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
+                const wasSel = (_dsSelKey === key && _dsSelIdx === i);
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); disc.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
-                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                const opx = a.panX || 0, opy = a.panY || 0;
+                const panning = e.shiftKey && ((a.zoom || 1) > 1);
+                let movedAny = false;
+                const mv = (ev) => {
+                    movedAny = true;
+                    if (panning) {
+                        // Shift-drag pans the crop inside the circle when zoomed in.
+                        a.panX = Math.max(-1, Math.min(1, opx - (ev.clientX - sx) / (s * 1.2)));
+                        a.panY = Math.max(-1, Math.min(1, opy - (ev.clientY - sy) / (s * 1.2)));
+                    } else {
+                        a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh));
+                        box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
+                    }
+                };
+                const up = () => {
+                    document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                    // Always re-render the center on mouseup: a plain click-select
+                    // gets its resize + zoom controls (this was the "can't edit it
+                    // after coming back" bug — selection never re-rendered, so the
+                    // handles only ever appeared right after adding); a pan gets
+                    // its re-cropped image; a move gets a clean repaint.
+                    if (panning && movedAny) { _artDetailEnsure(a.pieceId, a).then(() => { _dsRenderCenter(); _dsRenderRail(); }); }
+                    else { _dsRenderCenter(); if (movedAny || !wasSel) _dsRenderRail(); }
+                };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             if (sel) {
@@ -10370,10 +10394,38 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.14;
                     const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(0.8, nw)); a.w = nw; const ns = nw * w; box.style.width = ns + 'px'; box.style.height = ns + 'px'; };
-                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
                     document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                 };
                 box.appendChild(handle);
+                // Zoom controls — small − / + pair above the disc. Re-crops from
+                // the full-res artwork at the new zoom (not a blurry CSS scale).
+                const zWrap = document.createElement('div');
+                zWrap.style.cssText = 'position:absolute; left:50%; bottom:100%; transform:translateX(-50%); margin-bottom:5px; display:flex; gap:3px; z-index:3;';
+                const zBtn = (label, delta) => {
+                    const b = document.createElement('button'); b.textContent = label;
+                    b.title = (delta > 0 ? 'Zoom in' : 'Zoom out') + ' \u2014 Shift-drag the circle to pan when zoomed';
+                    b.style.cssText = 'width:20px; height:20px; padding:0; font-size:12px; line-height:1; border-radius:50%; border:1px solid #6a6aff; background:#fff; color:#6a6aff; cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
+                    b.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
+                    b.onclick = (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        const nz = Math.max(1, Math.min(4, (a.zoom || 1) + delta));
+                        if (nz === (a.zoom || 1)) return;
+                        a.zoom = nz;
+                        if (nz === 1) { a.panX = 0; a.panY = 0; }
+                        if (typeof pushHistory === 'function') pushHistory();
+                        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                        _artDetailEnsure(a.pieceId, a).then(() => { _dsRenderCenter(); _dsRenderRail(); });
+                    };
+                    return b;
+                };
+                zWrap.appendChild(zBtn('\u2212', -0.5));
+                const zLbl = document.createElement('span');
+                zLbl.textContent = ((a.zoom || 1)).toFixed(1) + '\u00d7';
+                zLbl.style.cssText = 'font-size:10px; color:#fff; background:#6a6aff; border-radius:9px; padding:2px 7px; align-self:center;';
+                zWrap.appendChild(zLbl);
+                zWrap.appendChild(zBtn('+', 0.5));
+                box.appendChild(zWrap);
             }
             page.appendChild(box);
             return;
@@ -15491,14 +15543,21 @@ async function _planCropCanvasForRow(r, opts) {
     } catch (e) { return null; }
 }
 // Circular zoomed crop of the artwork image ("Artwork Detail" in the reference).
-async function _artDetailCanvasForRow(r) {
+async function _artDetailCanvasForRow(r, a) {
     try {
         if (!r || !r.artworkUrl) return null;
         const img = await _loadImg(r.artworkUrl);
         const iw = img.naturalWidth || img.width, ih = img.naturalHeight || img.height;
         if (!iw || !ih) return null;
-        const s = Math.min(iw, ih) / 2.4;
-        const cx0 = (iw - s) / 2, cy0 = (ih - s) / 2;
+        // zoom (1..4) shrinks the source window; pan (-1..1 each axis) slides
+        // it. zoom=1 + pan=0 is byte-identical to the original fixed crop, so
+        // every already-saved detail renders unchanged.
+        const zoom = Math.max(1, Math.min(4, (a && a.zoom) || 1));
+        const panX = Math.max(-1, Math.min(1, (a && a.panX) || 0));
+        const panY = Math.max(-1, Math.min(1, (a && a.panY) || 0));
+        const s = (Math.min(iw, ih) / 2.4) / zoom;
+        const cx0 = Math.max(0, Math.min(iw - s, (iw - s) / 2 + panX * (iw - s) / 2));
+        const cy0 = Math.max(0, Math.min(ih - s, (ih - s) / 2 + panY * (ih - s) / 2));
         const os = 520; const oc = document.createElement('canvas'); oc.width = os; oc.height = os;
         const x = oc.getContext('2d');
         x.beginPath(); x.arc(os / 2, os / 2, os / 2 - 1, 0, Math.PI * 2); x.clip();
@@ -15507,14 +15566,21 @@ async function _artDetailCanvasForRow(r) {
     } catch (e) { return null; }
 }
 let _artDetailCache = {};
-async function _artDetailEnsure(pieceId) {
-    if (_artDetailCache[pieceId]) return _artDetailCache[pieceId];
+// Cache key includes zoom + pan, so two details of the SAME piece can hold
+// different crops, and changing zoom invalidates naturally via a new key.
+function _artDetailKey(pieceId, a) {
+    const z = (a && a.zoom) || 1, px = (a && a.panX) || 0, py = (a && a.panY) || 0;
+    return pieceId + '|' + z.toFixed(2) + '|' + px.toFixed(2) + '|' + py.toFixed(2);
+}
+async function _artDetailEnsure(pieceId, a) {
+    const ck = _artDetailKey(pieceId, a);
+    if (_artDetailCache[ck]) return _artDetailCache[ck];
     const r = (typeof _fpFindRow === 'function') ? _fpFindRow(pieceId) : null;
     if (!r) return null;
-    const c = await _artDetailCanvasForRow(r);
+    const c = await _artDetailCanvasForRow(r, a);
     if (!c) return null;
-    try { _artDetailCache[pieceId] = c.toDataURL('image/png'); } catch (e) { return null; }
-    return _artDetailCache[pieceId];
+    try { _artDetailCache[ck] = c.toDataURL('image/png'); } catch (e) { return null; }
+    return _artDetailCache[ck];
 }
 async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
     const PW = ctx.PW, PH = ctx.PH, M = ctx.M;
@@ -15896,7 +15962,7 @@ function _drawAnnotations(doc, key, PW, PH) {
     list.forEach(a => {
         if (a && a.hidden) return;
         if (a.type === 'artdetail') {
-            const url = _artDetailCache[a.pieceId];
+            const url = _artDetailCache[_artDetailKey(a.pieceId, a)];
             const s = (a.w || 0.14) * PW;
             if (url) { try { doc.addImage(url, 'PNG', (a.x || 0) * PW, (a.y || 0) * PH, s, s); } catch (e) {} }
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(130, 130, 130);
@@ -16380,9 +16446,9 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     }
     for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; if (!_inScope(p, _k)) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } if (_a && _a.type === 'shape' && _a.dataUrl) { try { await _ensureShapeImage(_a, (_a.w || 0.25) * PW, (_a.h || 0.18) * PH); } catch (e) {} } } }
     try {
-        const _annAll = editorialContent.annotations || {}; const _dets = [];
-        Object.keys(_annAll).forEach(k => (_annAll[k] || []).forEach(a => { if (a && a.type === 'artdetail' && a.pieceId && !a.hidden && _dets.indexOf(a.pieceId) < 0) _dets.push(a.pieceId); }));
-        for (const _pid of _dets) { try { await _artDetailEnsure(_pid); } catch (e) {} }
+        const _annAll = editorialContent.annotations || {}; const _dets = []; const _seen = {};
+        Object.keys(_annAll).forEach(k => (_annAll[k] || []).forEach(a => { if (a && a.type === 'artdetail' && a.pieceId && !a.hidden) { const ck = _artDetailKey(a.pieceId, a); if (!_seen[ck]) { _seen[ck] = 1; _dets.push(a); } } }));
+        for (const _da of _dets) { try { await _artDetailEnsure(_da.pieceId, _da); } catch (e) {} }
     } catch (e) {}
     for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p] && _inScope(p, _pageKeys[p])) { try { doc.setPage(p); _drawAnnotations(doc, _pageKeys[p], PW, PH); } catch (e) {} } }
     // — Approval status: spec pages the client has approved (green) or that are
