@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '14.9';
+const APP_VERSION = '15.0';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -9004,7 +9004,7 @@ function _deckPageList() {
         let ge = null, gi = -1, best = 0;
         (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
         const code = _breakerCodeFor(u);
-        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _measure: _breakerMeasure(), _idx: gi }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+        if (ge) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _measure: _breakerMeasure(), _idx: gi, _ovKey: 'elevgrp:' + u.key }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
         members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
@@ -10311,9 +10311,16 @@ function _dsRenderRail() {
         thumb.style.cssText = 'position:relative; width:' + tw + 'px; height:' + th + 'px; background:#fff; border-radius:4px; overflow:hidden; border:2px solid ' + (i === _dsIndex ? '#6a6aff' : 'var(--border-color)') + ';';
         const _tck = _dsThumbCacheKey(desc);
         thumb.dataset.thumbKey = _tck;
+        const _pid = _deckPageKey(desc) || (desc.kind + ':' + i);
+        thumb.dataset.pageId = _pid;
         if (_dsThumbCache[_tck]) {
             // Already rendered — paint the real preview immediately, no mock flash.
             thumb.innerHTML = '<img src="' + _dsThumbCache[_tck] + '" style="position:absolute; inset:0; width:100%; height:100%;">' + _dsThumbBadgeHTML();
+            _dsThumbLast[_pid] = _dsThumbCache[_tck];
+        } else if (_dsThumbLast[_pid]) {
+            // Stale render exists for this page — keep showing it (no white
+            // flash while the fresh one builds; it swaps in when ready).
+            thumb.innerHTML = '<img src="' + _dsThumbLast[_pid] + '" style="position:absolute; inset:0; width:100%; height:100%;">' + _dsThumbBadgeHTML();
         } else {
             try { thumb.innerHTML = _deckMockHTML(desc, tw, th); }
             catch (e) { thumb.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:10px;">' + _esc(desc.title || desc.type || 'Page') + '</div>'; }
@@ -11621,7 +11628,7 @@ function _dsAddStamp(page, w, hh, desc) {
     const approved = st === 'approved';
     s.textContent = approved ? 'APPROVED' : 'PENDING APPROVAL';
     const col = approved ? '#1a7f37' : '#c0392b';
-    s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.085) + 'px; right:' + Math.round(w * 0.04) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.026)) + 'px; letter-spacing:0.04em; color:' + col + '; border:1.5px solid ' + col + '; background:#fff; padding:2px 7px; border-radius:3px;';
+    s.style.cssText = 'position:absolute; top:' + Math.round(hh * 0.012) + 'px; right:' + Math.round(w * 0.043) + "px; font-family:'Druk','Arial Narrow',Arial,sans-serif; font-weight:700; font-size:" + Math.max(7, Math.round(hh * 0.024)) + 'px; letter-spacing:0.04em; color:' + col + '; border:1.5px solid ' + col + '; background:#fff; padding:2px 7px; border-radius:3px; z-index:6;';
     page.appendChild(s);
 }
 // ── Accurate "Build" preview ──────────────────────────────────────────────
@@ -11855,6 +11862,42 @@ function _dsSwatchPerson(xPct, cw, chh, hPct) {
     const h = (hPct || 0.42) * chh, x = xPct * cw - h * 0.11;
     return '<img src="Character_Lady_walk.svg" style="position:absolute; left:' + x + 'px; bottom:' + (chh * 0.14) + 'px; height:' + h + 'px; filter:brightness(0); opacity:0.85;" onerror="this.style.display=\'none\'">';
 }
+const _dsTplSwatchCache = {};   // tplKey|rowId -> dataURL, locked for the session
+let _dsTplSwatchQueue = [];
+let _dsTplSwatchBusy = false;
+function _dsTplSwatchKey(tplKey, desc) { return tplKey + '|' + ((desc && desc._ovKey) || (desc && desc.row && desc.row.id) || '') + '|' + ((desc && desc.members && desc.members.length) || 1); }
+function _dsQueueTplSwatch(tplKey, desc, el) {
+    const ck = _dsTplSwatchKey(tplKey, desc);
+    if (_dsTplSwatchCache[ck]) { _dsPaintTplSwatch(el, _dsTplSwatchCache[ck]); return; }
+    _dsTplSwatchQueue.push({ ck, tplKey, desc, el });
+    _dsTplSwatchPump();
+}
+function _dsPaintTplSwatch(el, url) {
+    if (!el || !el.isConnected) return;
+    el.innerHTML = '<img src="' + url + '" style="position:absolute; inset:0; width:100%; height:100%;">';
+}
+async function _dsTplSwatchPump() {
+    if (_dsTplSwatchBusy) return;
+    const job = _dsTplSwatchQueue.shift();
+    if (!job) return;
+    _dsTplSwatchBusy = true;
+    try {
+        if (_dsTplSwatchCache[job.ck]) { _dsPaintTplSwatch(job.el, _dsTplSwatchCache[job.ck]); }
+        else {
+            // Render with the SAME engine as the page previews, pinned to this
+            // template via the manual _specTpl path, at swatch scale.
+            const d = { kind: 'spec', row: job.desc.row, members: job.desc.members, title: job.desc.title, _ovKey: job.desc._ovKey, _manual: true, _specTpl: job.tplKey };
+            const cv = await renderSpecPageCanvas(d, null, 0.32);
+            if (cv) {
+                const url = cv.toDataURL('image/jpeg', 0.72);
+                _dsTplSwatchCache[job.ck] = url;               // locked — never refreshed
+                _dsPaintTplSwatch(job.el, url);
+            }
+        }
+    } catch (e) {}
+    _dsTplSwatchBusy = false;
+    if (_dsTplSwatchQueue.length) setTimeout(_dsTplSwatchPump, 30);
+}
 function _dsTemplateSwatchHTML(key, cw, chh) {
     const T = SPEC_TEMPLATES[key] || {};
     const M = cw * 0.045;
@@ -11985,10 +12028,14 @@ function _dsThumbRender(desc, thumb) { _dsThumbObserve(thumb, desc); }
 function _dsThumbBadgeHTML() {
     return '<span class="_dsThumbBadge" title="Real preview \u2014 matches the export" style="position:absolute; top:3px; right:3px; width:13px; height:13px; border-radius:50%; background:#2ecc71; color:#fff; font-size:8px; line-height:13px; text-align:center; font-weight:700; box-shadow:0 1px 3px rgba(0,0,0,0.35); pointer-events:none;">\u2713</span>';
 }
+const _dsThumbLast = {};   // pageId -> last rendered dataURL (anti-flash)
 function _dsPaintThumb(ck, url) {
     const rail = document.getElementById('dsRail'); if (!rail) return;
     const el = rail.querySelector('[data-thumb-key="' + (window.CSS && CSS.escape ? CSS.escape(ck) : ck) + '"]');
-    if (el) el.innerHTML = '<img src="' + url + '" style="position:absolute; inset:0; width:100%; height:100%;">' + _dsThumbBadgeHTML();
+    if (el) {
+        el.innerHTML = '<img src="' + url + '" style="position:absolute; inset:0; width:100%; height:100%;">' + _dsThumbBadgeHTML();
+        if (el.dataset.pageId) _dsThumbLast[el.dataset.pageId] = url;   // anti-flash memory
+    }
 }
 function _thumbPump() {
     if (_thumbBusy) return;
@@ -12258,7 +12305,7 @@ function _dsQueuePreview() {
     _dsPreviewTimer = setTimeout(() => { _dsPreviewTimer = null; _dsBuildPage(true); }, 700);
 }
 const _dsEyeSVG = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>';
-const _dsRefreshSVG = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 22v-6h6"/><path d="M21 8a9 9 0 0 0-15-6.7L3 4"/><path d="M3 16a9 9 0 0 0 15 6.7L21 20"/></svg>';
+const _dsRefreshSVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"/></svg>';
 function _dsSyncBuildBtn() {
     const b = document.getElementById('dsBuildBtn'); if (!b) return;
     const desc = _dsPages[_dsIndex]; const isSpec = !!(desc && desc.kind === 'spec');
@@ -13080,6 +13127,10 @@ function _dsRenderTools() {
         if (desc._manual) {
             t.appendChild(head);
             t.appendChild(_dsManualSection(desc));
+            if (desc._install) {
+                const igBody = _dsSection(t, 'Install guide', 'installguide', true);
+                _dsInstallGuideControls(igBody, desc);
+            }
         } else if (isGroupGlobal) {
             const note = document.createElement('p');
             note.style.cssText = 'font-size:0.66rem; color:var(--text-muted); margin:0 0 4px; line-height:1.5;';
@@ -13088,14 +13139,16 @@ function _dsRenderTools() {
             t.appendChild(head);
 
             const cardsWrap = document.createElement('div');
+            cardsWrap.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px;';
             ['setRight', 'setRow', 'setScale'].forEach(key => {
                 const onCur = (key === globalTpl);
                 const cell = document.createElement('div');
-                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff; margin-bottom:8px;';
+                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? '#6a6aff' : 'var(--border-color)') + '; border-radius:5px; overflow:hidden; background:#fff;';
                 cell.onclick = () => { editorialContent.specTemplate = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
                 const thumb = document.createElement('div');
                 thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
                 try { thumb.innerHTML = _deckMockHTML({ kind: 'spec', row: desc.row, members: desc.members, title: desc.title, _previewTpl: key }, cw, chh); } catch (e) { thumb.innerHTML = ''; }
+                _dsQueueTplSwatch(key, desc, thumb);
                 const nm = document.createElement('div');
                 nm.textContent = (SPEC_TEMPLATES[key].label || key) + (onCur ? '  ✓' : '');
                 nm.style.cssText = 'font-size:0.64rem; color:' + (onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:4px 6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
@@ -13210,10 +13263,10 @@ function _dsRenderTools() {
                 cell.onclick = () => { _dsSpecTplSel = { ovKey: ovKey, key: key }; _dsRenderTools(); };
                 const thumb = document.createElement('div');
                 thumb.style.cssText = 'position:relative; width:100%; height:' + chh + 'px; background:#fff;';
-                // Clean grey-box + lorem placeholder — shows how the template blocks
-                // out (image slots vs text) without real project data, so it reads
-                // clearly to anyone even on their first time in the tool.
+                // Placeholder paints instantly; the real render (same engine as
+                // page previews) swaps in once and is then locked for the session.
                 try { thumb.innerHTML = _dsTemplateSwatchHTML(key, cw, chh); } catch (e) { thumb.innerHTML = ''; }
+                _dsQueueTplSwatch(key, desc, thumb);
                 const nm = document.createElement('div');
                 const tag = onArmed ? ' \u25cf selected' : onCur ? (hasOverride ? ' \u2713 applied' : ' \u2713 default') : (key === globalTpl ? ' \u00b7 default' : '');
                 nm.textContent = (SPEC_TEMPLATES[key].label || key) + tag; nm.style.cssText = 'font-size:0.6rem; color:' + (onArmed ? '#ff9f43' : onCur ? '#6a6aff' : 'var(--text-main)') + '; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
@@ -13228,8 +13281,6 @@ function _dsRenderTools() {
             specLbl.textContent = 'Click to switch'; specLbl.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin:2px 0 6px;';
             tplBody.appendChild(specLbl);
             tplBody.appendChild(cardsWrap);
-            const statusBody = _dsSection(t, 'Artwork status', 'status', false);
-            statusBody.appendChild(_dsStatusSection(desc));
             return;
         }
 
@@ -13237,8 +13288,6 @@ function _dsRenderTools() {
         stylesBody2.appendChild(_dsDockedStylesSection());
         const themeBody2 = _dsSection(t, 'Page theme', 'theme', false);
         try { _dsThemeControlInto(themeBody2, _deckPageKey(desc), desc); } catch (e) {}
-        const statusBody2 = _dsSection(t, 'Artwork status', 'status', false);
-        statusBody2.appendChild(_dsStatusSection(desc));
         return;
     }
     // Docked text-styles list — always visible while editing so you can
@@ -15745,16 +15794,117 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
 // as raster textures. We rasterize the SVG at high resolution and keep it as a
 // lossless PNG, so there's none of the screenshot pixelation / JPEG smearing the
 // PNG-screenshot path produced. Returns { dataUrl, w, h } or null.
-async function _captureElevWithGuides(elevIdx) {
+// Install-guide settings: which layout variant and which measurements show.
+// Global defaults with per-page overrides (keyed by the page's _ovKey).
+// Install-guide right-panel controls: layout variant, measurement toggles,
+// and whether the change applies to this page only or every install page.
+function _dsInstallGuideControls(body, desc) {
+    const ovKey = desc._ovKey || ('ig:' + (desc.title || ''));
+    let scope = 'all';   // default: settings are deck-wide
+    const cfg = () => _igCfg(ovKey);
+    const commit = (patch) => {
+        _igSet(patch, scope === 'page' ? ovKey : null);
+        try { if (typeof _dsBuilt !== 'undefined') delete _dsBuilt[_deckPageKey(desc)]; } catch (e) {}
+        _dsRenderTools(); _dsRenderCenter(); _dsPriorityRerender(desc);
+    };
+    const secLbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:0.6rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; body.appendChild(d); };
+    // Apply-to scope.
+    secLbl('Apply changes to');
+    const scRow = document.createElement('div'); scRow.style.cssText = 'display:flex; gap:5px; margin-bottom:4px;';
+    [['all', 'All install pages'], ['page', 'This page only']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.textContent = l;
+        const on = scope === v;
+        b.style.cssText = 'flex:1; height:22px; font-size:0.58rem; border-radius:4px; cursor:pointer; border:1px solid ' + (on ? '#6a6aff' : 'var(--border-color)') + '; background:' + (on ? '#6a6aff' : 'var(--bg-input)') + '; color:' + (on ? '#fff' : 'var(--text-main)') + ';';
+        b.onclick = () => { scope = v; Array.from(scRow.children).forEach((c, ci) => { const onC = (ci === (v === 'all' ? 0 : 1)); c.style.borderColor = onC ? '#6a6aff' : 'var(--border-color)'; c.style.background = onC ? '#6a6aff' : 'var(--bg-input)'; c.style.color = onC ? '#fff' : 'var(--text-main)'; }); };
+        scRow.appendChild(b);
+    });
+    body.appendChild(scRow);
+    // Layout variant.
+    secLbl('Layout');
+    const vRow = document.createElement('div'); vRow.style.cssText = 'display:flex; gap:5px;';
+    [['elevPlan', 'Elev + plan'], ['elevOnly', 'Elev only'], ['elevFrames', 'Elev + frames']].forEach(([v, l]) => {
+        const on = cfg().variant === v;
+        const b = document.createElement('button'); b.textContent = l;
+        b.style.cssText = 'flex:1; min-width:0; height:24px; font-size:0.56rem; border-radius:4px; cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:1px solid ' + (on ? '#6a6aff' : 'var(--border-color)') + '; background:' + (on ? '#6a6aff' : 'var(--bg-input)') + '; color:' + (on ? '#fff' : 'var(--text-main)') + ';';
+        b.onclick = () => commit({ variant: v });
+        vRow.appendChild(b);
+    });
+    body.appendChild(vRow);
+    // Measurement toggles.
+    secLbl('Measurements on the elevation');
+    [['spacing', 'Spacing dimensions'], ['wallDims', 'Wall dimensions'], ['hangHeight', 'Hang-height guides'], ['imageCodes', 'Image codes on frames']].forEach(([k, l]) => {
+        const row = document.createElement('label'); row.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin-bottom:4px;';
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cfg().measure[k];
+        cb.onchange = () => commit({ measure: { [k]: cb.checked } });
+        row.appendChild(cb); row.appendChild(document.createTextNode(l));
+        body.appendChild(row);
+    });
+    const note = document.createElement('p'); note.style.cssText = 'font-size:0.58rem; color:var(--text-muted); margin:6px 0 0; line-height:1.45;';
+    note.textContent = 'Spacing shows the dimensions set up in the elevation editor (use \u201cAll walls\u201d there to apply auto-spacing everywhere at once).';
+    body.appendChild(note);
+}
+function _igCfg(ovKey) {
+    editorialContent.installGuide = editorialContent.installGuide || {};
+    const g = editorialContent.installGuide;
+    const base = { variant: g.variant || 'elevPlan', measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {}) };
+    const ov = (g.perPage || {})[ovKey];
+    if (!ov) return base;
+    return { variant: ov.variant || base.variant, measure: Object.assign({}, base.measure, ov.measure || {}) };
+}
+function _igSet(patch, ovKey) {
+    editorialContent.installGuide = editorialContent.installGuide || {};
+    const g = editorialContent.installGuide;
+    if (ovKey) {
+        g.perPage = g.perPage || {};
+        const cur = g.perPage[ovKey] || {};
+        if (patch.variant) cur.variant = patch.variant;
+        if (patch.measure) cur.measure = Object.assign({}, cur.measure || {}, patch.measure);
+        g.perPage[ovKey] = cur;
+    } else {
+        if (patch.variant) g.variant = patch.variant;
+        if (patch.measure) g.measure = Object.assign({}, g.measure || {}, patch.measure);
+    }
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+async function _captureElevWithGuides(elevIdx, mopts) {
     if (elevIdx == null || elevIdx < 0 || typeof elevations === 'undefined' || !elevations[elevIdx]) return null;
     if (typeof exportElevSVG !== 'function' || typeof switchView !== 'function') return null;
     const origView = currentView, origIndex = currentElevIndex;
     let res = null;
+    // Optionally force measurement layers for the shot (install-guide toggles),
+    // remembering what to restore.
+    const forced = [];
+    const forceLayer = (id, on) => { const l = document.getElementById(id); if (!l) return; forced.push([l, l.style.display]); l.style.display = on ? 'block' : 'none'; };
+    let wallDimsPrev = null;
     try {
         switchView('elevation', elevIdx);
         await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+        if (mopts) {
+            if (mopts.spacing !== undefined) forceLayer('dim-layer', !!mopts.spacing);
+            if (mopts.hangHeight !== undefined) forceLayer('guide-layer', !!mopts.hangHeight);
+            let needRedraw = false;
+            if (mopts.wallDims !== undefined && typeof dimVisibility !== 'undefined') {
+                wallDimsPrev = dimVisibility.wallDims;
+                dimVisibility.wallDims = !!mopts.wallDims;
+                forceLayer('arch-dim-layer', !!mopts.wallDims);
+                needRedraw = true;
+            }
+            if (mopts.imageCodes !== undefined && typeof dimVisibility !== 'undefined') {
+                if (mopts._imageCodesPrev === undefined) mopts._imageCodesPrev = dimVisibility.imageCode;
+                dimVisibility.imageCode = !!mopts.imageCodes;
+                needRedraw = true;
+            }
+            if (needRedraw) { try { drawElevAll(); } catch (e) {} await new Promise(r => requestAnimationFrame(r)); }
+        }
         res = await exportElevSVG({ returnBlob: true });
     } catch (e) { res = null; }
+    // Restore everything we touched.
+    forced.forEach(([l, d]) => { l.style.display = d; });
+    let restoreRedraw = false;
+    if (wallDimsPrev !== null && typeof dimVisibility !== 'undefined') { dimVisibility.wallDims = wallDimsPrev; restoreRedraw = true; }
+    if (mopts && mopts._imageCodesPrev !== undefined && typeof dimVisibility !== 'undefined') { dimVisibility.imageCode = mopts._imageCodesPrev; restoreRedraw = true; }
+    if (restoreRedraw) { try { drawElevAll(); } catch (e) {} }
     try { if (origView === 'elevation' && elevations[origIndex] != null) switchView('elevation', origIndex); else switchView('dashboard'); } catch (e) {}
     if (!res || !res.blob) return null;
     try {
@@ -15810,20 +15960,88 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     try {
         const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
         let elevLeft = PW * 0.42;
-        // Breaker with measurements: drop in the elevation exactly as the PNG
-        // export renders it — with every layout guide the user has enabled.
-        if (arg && arg._measure && arg._idx != null) {
-            const cap = await _captureElevWithGuides(arg._idx);
+        // ── Breaker-style install layouts ────────────────────────────────
+        // The elevation drops in EXACTLY as the elevation editor exports it
+        // (same SVG pipeline as the breaker page), with the measurement layers
+        // this page asks for. Three variants; per-page overrides win.
+        const igKey = (arg && arg._ovKey) || ('ig:' + ((isElev ? (elev && elev.name) : (arg && arg.id)) || ''));
+        const igElevIdx = (arg && arg._idx != null) ? arg._idx
+            : (elev && typeof elevations !== 'undefined' ? elevations.indexOf(elev) : -1);
+        const cfg = _igCfg(igKey);
+        if (igElevIdx != null && igElevIdx >= 0) {
+            const cap = await _captureElevWithGuides(igElevIdx, cfg.measure);
             if (cap && cap.dataUrl) {
+                const yTop = M + 58, yBot = PH - 34, capH = 13;
+                const zoneName = (isElev ? (elev && elev.name) : (arg.location || (elev && elev.name) || '')) || '';
+                const capText = (label, name) => (label + (name ? ' \u2014 ' + name : '')).toUpperCase();
+                const drawCaption = (txt, x, y) => { doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120); doc.text(txt, x, y); };
+                const fitIn = (asp, maxW2, maxH2) => { let w2 = maxW2, h2 = w2 / asp; if (h2 > maxH2) { h2 = maxH2; w2 = h2 * asp; } return [w2, h2]; };
                 const aspect = cap.w / cap.h;
-                const maxW = PW - M * 2, maxH = PH - M * 2 - 56;
-                let ew = maxW, eh = ew / aspect; if (eh > maxH) { eh = maxH; ew = eh * aspect; }
-                const ex = (PW - ew) / 2, ey = M + 56 + (maxH - eh) / 2;
-                doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
+                const planLv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(planRow.level || 0)];
+                const havePlan = !!(planLv && planLv.imageData);
+                const drawPlanAt = async (px0, planBottom, pmaxW, pmaxH) => {
+                    if (!havePlan) return null;
+                    const pim = await _loadImg(planLv.imageData);
+                    const pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
+                    const [pw2, ph2] = fitIn(pasp, pmaxW, pmaxH);
+                    const py0 = planBottom - ph2;
+                    doc.addImage(planLv.imageData, 'JPEG', px0, py0, pw2, ph2);
+                    const pins = isElev ? activeFrames.map(f => lookupRow(f.id)) : [arg];
+                    doc.setFillColor(200, 40, 40);
+                    pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) doc.circle(px0 + rr.planX * pw2, py0 + rr.planY * ph2, 3, 'F'); });
+                    return { x: px0, y: py0, w: pw2, h: ph2 };
+                };
+                if (cfg.variant === 'elevOnly' || !havePlan && cfg.variant === 'elevPlan') {
+                    // Elevation fills the page, bottom-anchored, caption bottom-left.
+                    const [ew, eh] = fitIn(aspect, PW - M * 2, yBot - capH - yTop);
+                    const ex = (PW - ew) / 2, ey = yBot - capH - eh;
+                    doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
+                    drawCaption(capText('Elevation', zoneName), ex, yBot - 2);
+                } else if (cfg.variant === 'elevFrames') {
+                    // Elevation large in the middle; plan bottom-left; frame
+                    // corner+profile legend along the bottom.
+                    const stripH = 74;
+                    const [ew, eh] = fitIn(aspect, PW - M * 2, (yBot - capH - stripH - 10) - yTop);
+                    const ex = (PW - ew) / 2, ey = (yBot - capH - stripH - 10) - eh;
+                    doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
+                    drawCaption(capText('Elevation', zoneName), ex, ey + eh + 10);
+                    const bandTop = yBot - stripH;
+                    let stripX = M;
+                    const pr = await drawPlanAt(M, yBot - capH, PW * 0.20, stripH - capH);
+                    if (pr) { drawCaption('PLAN VIEW', pr.x, yBot - 2); stripX = pr.x + pr.w + 22; }
+                    // Frames used on this wall — corner + profile + code, like a legend.
+                    try {
+                        const codesOnWall = {};
+                        (activeFrames || []).forEach(f => { const rr = lookupRow(f.id); const c = (rr.fCode || '').trim().toUpperCase(); if (c) codesOnWall[c.replace(/[-_\s]/g, '')] = 1; });
+                        const allFrames = await _collectProjectFrames();
+                        const used = allFrames.filter(f => codesOnWall[(f.code || '').replace(/[-_\s]/g, '').toUpperCase()]);
+                        const cellW = 96, imgH = stripH - capH - 16;
+                        used.slice(0, Math.floor((PW - M - stripX) / cellW)).forEach((f, fi) => {
+                            const cx = stripX + fi * cellW;
+                            let dx = cx;
+                            if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, 40, imgH); try { doc.addImage(f.img, 'JPEG', dx, bandTop + (imgH - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, bandTop + (imgH - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += 44; }
+                            else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, bandTop + 4, 30, imgH - 8, 'F'); dx += 34; }
+                            if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, 34, imgH); try { doc.addImage(f.profileImg, 'PNG', dx, bandTop + (imgH - ih3) / 2, iw3, ih3); } catch (e) {} }
+                            doc.setFont(_font('sans'), 'bold'); doc.setFontSize(7); doc.setTextColor(60, 60, 60);
+                            doc.text((f.code || '').slice(0, 20), cx, bandTop + imgH + 11);
+                        });
+                    } catch (e) {}
+                } else {
+                    // 'elevPlan' (default): elevation LEFT, plan RIGHT — bottoms
+                    // aligned, captions under each at their bottom-left corners.
+                    const gutter = 26;
+                    const elevMaxW = (PW - M * 2) * 0.62, planMaxW = (PW - M * 2) * 0.30;
+                    const [ew, eh] = fitIn(aspect, elevMaxW, yBot - capH - yTop);
+                    const ex = M, ey = yBot - capH - eh;
+                    doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
+                    drawCaption(capText('Elevation', zoneName), ex, yBot - 2);
+                    const pr = await drawPlanAt(Math.max(ex + ew + gutter, PW - M - planMaxW), yBot - capH, planMaxW, (yBot - capH - yTop) * 0.62);
+                    if (pr) drawCaption('PLAN VIEW', pr.x, yBot - 2);
+                }
                 _drawPdfFooter(doc, logos, pageNum, meta);
                 return;
             }
-            // capture failed → fall through to the standard render below
+            // capture failed → fall through to the legacy vector render below
         }
         const er = elev ? await renderElevationToCanvas(elev, featuredId, { wireframe: _isWireframe(), dpi: 46 }) : null;
         if (er && er.canvas) {
@@ -16530,7 +16748,8 @@ function _drawApprovalStamp(doc, PW, PH, M, status) {
     const padX = 9, padY = 6, bh = 22;
     const bw = tw + padX * 2;
     const x = PW - M - bw;          // right-aligned, same edge as the back-link
-    const y = M + 12;               // sits just under the "\u2190 Floorplan" link line
+    const y = 6;                    // in the top margin band, above ALL page
+                                    // content — framed mockups can't reach here
     doc.setDrawColor(rgb[0], rgb[1], rgb[2]); doc.setLineWidth(1.6);
     doc.setFillColor(255, 255, 255);
     doc.roundedRect(x, y, bw, bh, 3, 3, 'FD');
@@ -21691,6 +21910,63 @@ function _syncMagnetBtn() {
 // auto-dimension the gap between every pair of ADJACENT frames — each frame to
 // its nearest right neighbour (same row) and nearest neighbour above (same
 // column). Manual per-pair toggles in the frame panels still work.
+// The auto-spacing (magnet) pairing, factored so it can run on ANY frame set
+// — the live editor's, or every elevation's in one pass.
+// Master layout-guide controls (buttons live in the elevation left panel):
+// flip every guide layer at once, and push auto-spacing to ALL elevations so
+// the PDF shows spacing without visiting each wall one by one.
+const _ELEV_GUIDE_LAYERS = [
+    ['label-layer', 'labelToggle'], ['od-layer', 'odToggle'], ['dim-layer', 'dimToggle'],
+    ['guide-layer', 'guideToggle'], ['frame-center-layer', 'frameCenterToggle'],
+    ['custom-lines-layer', 'customLinesToggle']
+];
+function _elevGuidesAllSet(on) {
+    _ELEV_GUIDE_LAYERS.forEach(([lid, bid]) => {
+        const layer = document.getElementById(lid); const btn = document.getElementById(bid);
+        if (layer) layer.style.display = on ? 'block' : 'none';
+        if (btn) btn.classList.toggle('active', on);
+    });
+}
+function toggleAllElevGuides() {
+    // If ANY guide layer is currently visible → turn everything off; else all on.
+    const anyOn = _ELEV_GUIDE_LAYERS.some(([lid]) => { const l = document.getElementById(lid); return l && l.style.display === 'block'; });
+    _elevGuidesAllSet(!anyOn);
+    const b = document.getElementById('allGuidesToggle'); if (b) b.classList.toggle('active', !anyOn);
+}
+function applySpacingToAllElevations() {
+    if (typeof elevations === 'undefined' || !elevations.length) return;
+    // Current elevation's live frames first (so what you see updates too).
+    try { if (typeof elevFrames !== 'undefined' && currentView === 'elevation') _autoSpacePairs(elevFrames); } catch (e) {}
+    elevations.forEach((e, i) => { try { if (e && e.frames && !(currentView === 'elevation' && i === currentElevIndex)) _autoSpacePairs(e.frames); } catch (x) {} });
+    // Spacing layer visible so the result actually shows.
+    const dl = document.getElementById('dim-layer');
+    if (dl && dl.style.display !== 'block') { dl.style.display = 'block'; const tb = document.getElementById('dimToggle'); if (tb) tb.classList.add('active'); }
+    try { renderElevation(); } catch (e) {}
+    try { if (typeof scheduleAutosave === 'function') scheduleAutosave(); } catch (e) {}
+    try { showInfoModal('Spacing applied', 'Auto-spacing dimensions were applied to every elevation. They will appear in exports and install guides wherever the spacing layer is on.'); } catch (e) {}
+}
+function _autoSpacePairs(frames) {
+    const active = (frames || []).filter(f => f && f.active !== false);
+    active.forEach(f => { if (!Array.isArray(f.dimTo)) f.dimTo = []; });
+    active.forEach(f => {
+        let best = null, bestGap = Infinity;
+        active.forEach(g => {
+            if (g === f) return;
+            const vOverlap = Math.min(f.y + f.h, g.y + g.h) - Math.max(f.y, g.y);
+            if (vOverlap <= 0) return;
+            if (g.x >= f.x + f.w) { const gap = g.x - (f.x + f.w); if (gap < bestGap) { bestGap = gap; best = g; } }
+        });
+        if (best && !f.dimTo.includes(best.letter) && !(best.dimTo || []).includes(f.letter)) f.dimTo.push(best.letter);
+        let bestV = null, bestGapV = Infinity;
+        active.forEach(g => {
+            if (g === f) return;
+            const hOverlap = Math.min(f.x + f.w, g.x + g.w) - Math.max(f.x, g.x);
+            if (hOverlap <= 0) return;
+            if (g.y + g.h <= f.y) { const gap = f.y - (g.y + g.h); if (gap < bestGapV) { bestGapV = gap; bestV = g; } }
+        });
+        if (bestV && !f.dimTo.includes(bestV.letter) && !(bestV.dimTo || []).includes(f.letter)) f.dimTo.push(bestV.letter);
+    });
+}
 function toggleAllSpacing() {
     const active = elevFrames.filter(f => f.active);
     const anyDims = active.some(f => Array.isArray(f.dimTo) && f.dimTo.length);
