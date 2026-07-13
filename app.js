@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.0';
+const APP_VERSION = '15.1';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10513,27 +10513,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 // Unified image controls — same pill + pan handle as shapes
                 // and image boxes. Zoom re-crops from the full-res artwork.
                 _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _artDetailEnsure(a.pieceId, a).then(() => { _dsRenderCenter(); _dsRenderRail(); }); }, min: 1, max: 4, step: 0.5 });
-                if ((a.zoom || 1) > 1) {
-                    _dsImgPanHandle(box, (e) => {
-                        e.preventDefault(); e.stopPropagation();
-                        const sx = e.clientX, sy = e.clientY, opx = a.panX || 0, opy = a.panY || 0;
-                        const innerImg = disc.querySelector('img');
-                        const mv = (ev) => {
-                            const dx = ev.clientX - sx, dy = ev.clientY - sy;
-                            // LIVE preview: slide the current crop inside the disc
-                            // while dragging; the true re-crop lands on release.
-                            if (innerImg) innerImg.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(1.25)';
-                            a.panX = Math.max(-1, Math.min(1, opx - dx / (s * 1.2)));
-                            a.panY = Math.max(-1, Math.min(1, opy - dy / (s * 1.2)));
-                        };
-                        const up = () => {
-                            document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
-                            if (typeof scheduleAutosave === 'function') scheduleAutosave();
-                            _artDetailEnsure(a.pieceId, a).then(() => { _dsRenderCenter(); _dsRenderRail(); });
-                        };
-                        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
-                    });
-                }
+                // (centre pan disc removed — Shift-drag the disc to pan; plain drag moves it)
             }
             page.appendChild(box);
             return;
@@ -10600,15 +10580,25 @@ function _dsRenderAnnots(page, desc, w, hh) {
             }
             box.appendChild(img);
             box.onwheel = (e) => { e.preventDefault(); a.zoom = Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? 0.12 : -0.12))); if (a.zoom === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
-            box.onmousedown = (e) => {
+            const moveDownI = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
-                e.preventDefault();
+                e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
-                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
+                const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
+                const mv = (ev) => {
+                    a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh));
+                    box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
+                    if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }
+                };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
+            const panModeI = (a.zoom || 1) > 1;
+            box.onmousedown = panModeI
+                ? (e) => { _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); _dsShapePanDown(e, key, i, bw, bh); }
+                : moveDownI;
+            box.style.cursor = panModeI ? 'grab' : 'move';
             const handle = document.createElement('div');
             handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;' + (sel ? '' : ' display:none;');
             handle.onmousedown = (e) => {
@@ -10621,8 +10611,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
             };
             box.appendChild(handle);
             if (sel) {
-                if ((a.zoom || 1) > 1) _dsImgPanHandle(box, (e) => _dsShapePanDown(e, key, i, bw, bh));
                 _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: 0.5 });
+                if (panModeI) _dsMoveGrip(box, moveDownI);
+                _dsGearButton(box, key, i);
             }
             _dsAnnCaptionInto(page, box, a, key, i, w, hh);
             page.appendChild(box);
@@ -10642,15 +10633,27 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed #6a6aff'; };
             box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)'; };
             box.ondrop = (e) => _dsShapeDropImage(e, key, i);
-            box.onmousedown = (e) => {
+            const moveDown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
-                e.preventDefault();
+                e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
-                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
+                const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
+                const mv = (ev) => {
+                    a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh));
+                    box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
+                    if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }   // caption moves WITH the box
+                };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
+            // Zoomed image: dragging INSIDE the box pans the image (live).
+            // Moving the shape then happens from the grip handle (top-left).
+            const panMode = !!(a.dataUrl && (a.zoom || 1) > 1);
+            box.onmousedown = panMode
+                ? (e) => { _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); _dsShapePanDown(e, key, i, bw, bh); }
+                : moveDown;
+            box.style.cursor = panMode ? 'grab' : 'move';
             if (a.dataUrl) box.onwheel = (e) => { e.preventDefault(); a.zoom = Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? 0.12 : -0.12))); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
             // Empty shape: a subtle centred "+ Add image" affordance — click to
             // pick a file (same as drag-dropping one on).
@@ -10664,9 +10667,10 @@ function _dsRenderAnnots(page, desc, w, hh) {
             }
             if (sel) {
                 if (a.dataUrl) {
-                    if ((a.zoom || 1) > 1) _dsImgPanHandle(box, (e) => _dsShapePanDown(e, key, i, bw, bh));
                     _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: 0.5 });
+                    if (panMode) _dsMoveGrip(box, moveDown);   // grip = move while drag pans
                 }
+                _dsGearButton(box, key, i);
                 _dsAnnHandles(box, a, w, hh);
             }
             _dsAnnCaptionInto(page, box, a, key, i, w, hh);
@@ -10853,12 +10857,13 @@ function _dsRenderAnnots(page, desc, w, hh) {
 }
 function _dsAddArtDetail() {
     const desc = _dsPages[_dsIndex];
-    if (!desc || desc.kind !== 'spec' || !desc.row || !desc.row.id) return;
+    const pid = (desc && desc.kind === 'spec' && ((desc.row && desc.row.id) || (desc.members && desc.members[0] && desc.members[0].id))) || null;
+    if (!pid) return;
     const key = _deckPageKey(desc); if (!key) return;
     const list = _dsAnnList(key);
-    list.push({ type: 'artdetail', pieceId: desc.row.id, x: 0.30, y: 0.14, w: 0.14 });
+    list.push({ type: 'artdetail', pieceId: pid, x: 0.30, y: 0.14, w: 0.14 });
     _dsSelKey = key; _dsSelIdx = list.length - 1;
-    _artDetailEnsure(desc.row.id).then(() => { try { _dsRenderCenter(); } catch (e) {} });
+    _artDetailEnsure(pid).then(() => { try { _dsRenderCenter(); } catch (e) {} });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderCenter(); _dsSyncToolbar();
@@ -10920,7 +10925,7 @@ function _dsSyncToolbar() {
     const gb = document.getElementById('dsMbGuides'); if (gb) gb.style.display = editable ? 'inline-flex' : 'none';
     const lyb = document.getElementById('dsMbLayers'); if (lyb) lyb.style.display = editable ? 'inline-flex' : 'none';
     const _sd = _dsPages && _dsPages[_dsIndex];
-    const _isSpecRow = !!(_sd && _sd.kind === 'spec' && !_sd._install && _sd.row && _sd.row.id);
+    const _isSpecRow = !!(_sd && _sd.kind === 'spec' && !_sd._install && ((_sd.row && _sd.row.id) || (_sd.members && _sd.members.length)));
     const detB = document.getElementById('dsAddDetail'); if (detB) detB.style.display = _isSpecRow ? 'inline-flex' : 'none';
     const styB = document.getElementById('dsMbStyles'); if (styB) styB.style.display = editable ? 'inline-flex' : 'none';
     if (_dsStylePalOpen) { try { _dsRenderStylePalette(); } catch (e) {} }
@@ -11138,18 +11143,113 @@ function _arrowPathPoints(a, X1, Y1, X2, Y2) {
     }
     return [[X1, Y1], [X2, Y2]];
 }
-function _dsAddShape(shape) {
+let _dsLastPlaceholderKind = 'rect';
+function _dsAddShape(shape, locked) {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
     if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support shapes.'); return; }
     const list = _dsAnnList(key);
-    list.push({ type: 'shape', shape: (shape === 'ellipse' ? 'ellipse' : 'rect'), x: 0.18, y: 0.18, w: 0.26, h: 0.2, fill: '#d8d8de', dataUrl: null, aspect: 1.33, zoom: 1, panX: 0, panY: 0, shadow: false });
+    const w = 0.24;
+    const a = { type: 'shape', shape: (shape === 'ellipse' ? 'ellipse' : 'rect'), x: 0.18, y: 0.18, w: w, h: locked ? _dsShapeSquareH(w) : 0.2, fill: '#d8d8de', dataUrl: null, aspect: 1.33, zoom: 1, panX: 0, panY: 0, shadow: false };
+    if (locked) a.lockAspect = true;
+    list.push(a);
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1);
     _dsRenderRail();
 }
+function _dsPlaceholderMainClick() {
+    const [shape, locked] = _dsLastPlaceholderKind === 'ellipse' ? ['ellipse', false]
+        : _dsLastPlaceholderKind === 'circle' ? ['ellipse', true]
+        : _dsLastPlaceholderKind === 'square' ? ['rect', true] : ['rect', false];
+    _dsAddShape(shape, locked);
+}
+function _dsOpenPlaceholderMenu(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    _dsPopup('dsPlaceholderMenu', 'dsShapeMenuBtn', (menu) => {
+        const lbl = document.createElement('div'); lbl.textContent = 'IMAGE PLACEHOLDER / SHAPE'; lbl.style.cssText = 'font-size:0.6rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:8px;';
+        menu.appendChild(lbl);
+        const grid = document.createElement('div'); grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:6px;';
+        const kinds = [
+            ['rect', 'Rectangle', '<rect x="3" y="6" width="18" height="12" rx="1"/>'],
+            ['ellipse', 'Ellipse / oval', '<ellipse cx="12" cy="12" rx="9" ry="6.5"/>'],
+            ['square', 'Perfect square', '<rect x="5" y="5" width="14" height="14" rx="1"/>'],
+            ['circle', 'Perfect circle', '<circle cx="12" cy="12" r="8"/>']
+        ];
+        kinds.forEach(([kind, label, svgInner]) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
+            b.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 4px; font-size:0.6rem; border-radius:6px; cursor:pointer; border:1px solid ' + (_dsLastPlaceholderKind === kind ? '#6a6aff' : 'var(--border-color)') + ';';
+            b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' + svgInner + '</svg><span>' + label + '</span>';
+            b.onclick = () => { _dsLastPlaceholderKind = kind; const m = document.getElementById('dsPlaceholderMenu'); if (m) m.remove(); _dsPlaceholderMainClick(); };
+            grid.appendChild(b);
+        });
+        menu.appendChild(grid);
+        const note = document.createElement('p');
+        note.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:8px 0 0; line-height:1.5;';
+        note.textContent = 'Drop or click \u201c+ Add image\u201d to fill with an image. Scroll on the image to zoom; when zoomed, click-drag inside to pan, and use the grip handle (top-left) to move the shape. Perfect square/circle stay locked while resizing (1:1 button toggles it).';
+        menu.appendChild(note);
+    });
+}
 let _dsFillShapeMode = false;
+const _DS_NOTE_PRESETS = [
+    ['Colour disclaimer', 'Note:\nColors may appear differently on your monitor compared to the final product due to variations in screen settings, printing methods, and substrates.'],
+    ['Dimensions note', 'Note:\nAll dimensions are approximate and subject to final site verification.'],
+    ['Artwork placement', 'Note:\nArtwork placement shown is for reference only. Final positioning to be confirmed on site during installation.'],
+];
+const _DS_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
+function _dsOpenTextMenu(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    _dsPopup('dsTextMenu', 'dsTextMenuBtn', (menu) => {
+        const lbl = document.createElement('div'); lbl.textContent = 'ADD TEXT'; lbl.style.cssText = 'font-size:0.6rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:8px;';
+        menu.appendChild(lbl);
+        const mk = (label, hint, on) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
+            b.style.cssText = 'display:block; width:100%; text-align:left; padding:7px 9px; font-size:0.62rem; border-radius:6px; cursor:pointer; margin-bottom:5px;';
+            b.innerHTML = '<div style="font-weight:700;">' + label + '</div>' + (hint ? '<div style="font-size:0.54rem; color:var(--text-muted); margin-top:2px;">' + hint + '</div>' : '');
+            b.onclick = () => { const m = document.getElementById('dsTextMenu'); if (m) m.remove(); on(); };
+            menu.appendChild(b);
+        };
+        mk('Text box', 'A plain text box \u2014 style it with your text styles', () => _dsAddTextSmart());
+        mk('Paragraph (lorem ipsum)', 'Pre-filled placeholder copy \u2014 size the box and try alignment, fonts, leading', () => _dsAddParagraph());
+        const plbl = document.createElement('div'); plbl.textContent = 'NOTE PRESETS'; plbl.style.cssText = 'font-size:0.56rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 5px;';
+        menu.appendChild(plbl);
+        _DS_NOTE_PRESETS.forEach(([name, text]) => {
+            mk(name, text.split('\n')[1].slice(0, 58) + '\u2026', () => _dsAddPresetNote(text));
+        });
+    });
+}
+function _dsAddParagraph() {
+    if (_dsCurrentEditablePage()) {
+        try {
+            addMoodboardText();
+            const els = _mbEls(); const el = els[els.length - 1];
+            if (el && el.type === 'text') { el.text = _DS_LOREM; el.w = 0.34; el.size = 0.026; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+        } catch (e) {}
+        return;
+    }
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
+    const list = _dsAnnList(key);
+    list.push({ type: 'text', text: _DS_LOREM, x: 0.16, y: 0.2, w: 0.34, size: 0.024, color: '#222222', font: 'serif', align: 'left' });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
+}
+function _dsAddPresetNote(text) {
+    if (_dsCurrentEditablePage()) {
+        try {
+            addMoodboardText();
+            const els = _mbEls(); const el = els[els.length - 1];
+            if (el && el.type === 'text') { el.text = text; el.w = 0.3; el.size = 0.02; el.italic = true; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+        } catch (e) {}
+        return;
+    }
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
+    const list = _dsAnnList(key);
+    list.push({ type: 'note', text: text, x: 0.62, y: 0.72, w: 0.3, size: 0.019, color: '#555555', font: 'serif', italic: true, align: 'left' });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
+}
 function _dsAddTextSmart() { if (_dsCurrentEditablePage()) { try { addMoodboardText(); } catch (e) {} } else { _dsAddTextBox(); } }
 function _dsAddImageSmart() { if (_dsCurrentEditablePage()) { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); } else { _dsAddImageBox(); } }
 function _dsAddArrowSmart(kind) { if (_dsCurrentEditablePage()) { try { if (kind === 'elbow' || kind === 'elbowRev') addMoodboardElbow(); else addMoodboardArrow(); } catch (e) {} } else { _dsArmShapeDraw(kind); } }
@@ -11223,14 +11323,139 @@ function _dsReadImageToShape(file, a) {
 // Caption under an image box / shape — same Messina-italic look as the
 // Artwork Detail label. Double-click to edit in place; alignment cycles from
 // the toolbar. Lives OUTSIDE the box (below it) so it never crops.
+// Move grip — small dotted handle at the box's top-left. When a zoomed image
+// owns the drag (panning), this is how you MOVE the shape itself.
+function _dsMoveGrip(box, onDown) {
+    const g = document.createElement('div');
+    g.title = 'Drag to move the shape (dragging the image pans it)';
+    g.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="#6a6aff"><circle cx="7" cy="5" r="2.4"/><circle cx="17" cy="5" r="2.4"/><circle cx="7" cy="12" r="2.4"/><circle cx="17" cy="12" r="2.4"/><circle cx="7" cy="19" r="2.4"/><circle cx="17" cy="19" r="2.4"/></svg>';
+    g.style.cssText = 'position:absolute; left:-8px; top:-8px; width:18px; height:18px; border-radius:4px; background:#fff; border:1.5px solid #6a6aff; cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
+    g.onmousedown = onDown;
+    box.appendChild(g);
+}
+// Gear button — top-right of a selected shape/image; opens the settings popup.
+function _dsGearButton(box, key, i) {
+    const g = document.createElement('button');
+    g.title = 'Image placeholder settings (image, fill, stroke, caption)';
+    g.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+    g.style.cssText = 'position:absolute; right:-8px; top:-8px; width:18px; height:18px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
+    g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
+    g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenGearPopup(key, i, e.clientX, e.clientY); };
+    box.appendChild(g);
+}
+// The gear popup — every image-placeholder setting in one movable panel.
+function _dsOpenGearPopup(key, i, cx, cy) {
+    const old = document.getElementById('dsGearPopup'); if (old) old.remove();
+    const a = (_dsAnnList(key) || [])[i]; if (!a) return;
+    const isImg = a.type === 'image';
+    const pop = document.createElement('div'); pop.id = 'dsGearPopup';
+    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 250, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 380, Math.max(8, cy - 10)) + 'px; width:236px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:1000; padding:10px; font-size:0.66rem; color:var(--text-main);';
+    pop.onmousedown = (e) => e.stopPropagation();
+    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenGearPopup(key, i, parseFloat(pop.style.left) - 10 + 10, parseFloat(pop.style.top) + 10); };
+    // Drag-to-move header.
+    const head = document.createElement('div');
+    head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
+    head.innerHTML = '<span style="font-weight:700; font-size:0.62rem; letter-spacing:0.4px; text-transform:uppercase;">' + (isImg ? 'Image box' : (a.shape === 'ellipse' ? 'Ellipse' : 'Rectangle')) + ' settings</span>';
+    const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
+    closeB.onclick = () => pop.remove();
+    head.appendChild(closeB);
+    head.onmousedown = (e) => {
+        if (e.target === closeB) return;
+        e.preventDefault();
+        const sx = e.clientX - parseFloat(pop.style.left), sy = e.clientY - parseFloat(pop.style.top);
+        const mv = (ev) => { pop.style.left = (ev.clientX - sx) + 'px'; pop.style.top = (ev.clientY - sy) + 'px'; };
+        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); };
+        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+    };
+    pop.appendChild(head);
+    const lbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:0.56rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; pop.appendChild(d); };
+    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:5px; align-items:center;'; pop.appendChild(d); return d; };
+    // Image.
+    lbl('Image');
+    const ir = row();
+    const addB = document.createElement('button'); addB.className = 'action-btn btn-secondary'; addB.textContent = a.dataUrl ? 'Replace\u2026' : 'Add image\u2026'; addB.style.cssText = 'flex:1; height:22px; font-size:0.58rem;';
+    addB.onclick = () => { _dsSelectAnnot(key, i); _dsFillShapeWithImage(); pop.remove(); };
+    ir.appendChild(addB);
+    if (a.dataUrl) {
+        const remB = document.createElement('button'); remB.className = 'action-btn btn-secondary'; remB.textContent = 'Remove'; remB.style.cssText = 'flex:1; height:22px; font-size:0.58rem;';
+        remB.onclick = () => { _dsSelectAnnot(key, i); _dsClearAnnImage(); pop.remove(); };
+        ir.appendChild(remB);
+        const zr = document.createElement('button'); zr.className = 'action-btn btn-secondary'; zr.textContent = 'Reset zoom'; zr.style.cssText = 'flex:1; height:22px; font-size:0.58rem;';
+        zr.onclick = () => { a.zoom = 1; a.panX = 0; a.panY = 0; refresh(); };
+        ir.appendChild(zr);
+    }
+    if (!isImg) {
+        // Fill + stroke, side by side so they read as one system.
+        lbl('Fill \u00b7 Stroke');
+        const fr = row();
+        const fillIn = document.createElement('input'); fillIn.type = 'color'; fillIn.value = (a.fill && a.fill !== 'none') ? a.fill : '#d8d8de';
+        fillIn.title = 'Fill colour'; fillIn.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+        fillIn.onchange = () => { a.fill = fillIn.value; refresh(); };
+        fr.appendChild(fillIn);
+        const tB = document.createElement('button'); tB.className = 'action-btn btn-secondary'; tB.textContent = a.fill === 'none' ? 'Fill: transparent' : 'Make transparent';
+        tB.title = 'Transparent fill \u2014 e.g. a red outline circling something on an image';
+        tB.style.cssText = 'flex:1; height:22px; font-size:0.56rem;' + (a.fill === 'none' ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        tB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeToggleFill(); pop.remove(); };
+        fr.appendChild(tB);
+        const sr = row(); sr.style.marginTop = '5px';
+        ['#b0b0b0', '#4a4a4a', '#c0392b'].forEach(hex => {
+            const s = document.createElement('button'); s.title = 'Stroke ' + hex + ' (click again to remove)';
+            s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; border:3px solid ' + hex + '; background:' + (a.stroke === hex ? hex : 'transparent') + '; cursor:pointer;';
+            s.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeSwatch(hex); refresh(); };
+            sr.appendChild(s);
+        });
+        const strokeIn = document.createElement('input'); strokeIn.type = 'color'; strokeIn.value = a.stroke || '#c0392b';
+        strokeIn.title = 'Custom stroke colour'; strokeIn.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+        strokeIn.onchange = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeColor(strokeIn.value); refresh(); };
+        sr.appendChild(strokeIn);
+        const wDn = document.createElement('button'); wDn.className = 'action-btn btn-secondary'; wDn.textContent = '\u2212'; wDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        wDn.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeBump(-1); refresh(); };
+        const wLbl = document.createElement('span'); wLbl.textContent = a.stroke ? (a.strokeW || 1.5).toFixed(1) : '\u2014'; wLbl.style.cssText = 'min-width:20px; text-align:center; color:var(--text-muted);';
+        const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        wUp.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeBump(1); refresh(); };
+        sr.appendChild(wDn); sr.appendChild(wLbl); sr.appendChild(wUp);
+    }
+    // Caption.
+    lbl('Caption');
+    const cr1 = row();
+    const capB = document.createElement('button'); capB.className = 'action-btn btn-secondary'; capB.textContent = a.showCaption ? 'Caption: on' : 'Caption: off';
+    capB.style.cssText = 'flex:1; height:22px; font-size:0.58rem;' + (a.showCaption ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+    capB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsToggleAnnCaption(); refresh(); };
+    cr1.appendChild(capB);
+    if (a.showCaption) {
+        [['left', 'L'], ['center', 'C'], ['right', 'R']].forEach(([v, l]) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+            const on = (a.capAlign || 'center') === v;
+            b.style.cssText = 'width:24px; height:22px; min-width:24px; padding:0; font-size:0.58rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+            b.onclick = () => { a.capAlign = v; refresh(); };
+            cr1.appendChild(b);
+        });
+        const cr2 = row(); cr2.style.marginTop = '5px';
+        [['serif', 'Messina (serif)'], ['sans', 'Druk (sans)']].forEach(([v, l]) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+            const on = (a.capFont || 'serif') === v;
+            b.style.cssText = 'flex:1; height:22px; font-size:0.56rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+            b.onclick = () => { a.capFont = v; refresh(); };
+            cr2.appendChild(b);
+        });
+    }
+    // How-to.
+    const help = document.createElement('p');
+    help.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
+    help.textContent = 'Scroll on the image to zoom. When zoomed, drag inside to pan; move the shape with the grip at its top-left. Double-click the caption to edit its text. 1:1 in the toolbar locks a perfect square / circle.';
+    pop.appendChild(help);
+    document.body.appendChild(pop);
+}
 function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     if (!a.showCaption) return;
     const bw = (a.w || 0.25) * w;
     const bh = (a.type === 'image') ? bw * (a.aspect || 0.75) : (a.h || 0.18) * hh;
     const cap = document.createElement('div');
+    cap.dataset.capFor = key + '|' + i;
     const align = a.capAlign || 'center';
+    const fam = (a.capFont === 'sans') ? '"Druk","Arial Narrow",Arial,sans-serif' : '"Messina",Georgia,serif';
     cap.textContent = a.caption || 'Caption';
-    cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + Math.max(8, 0.0165 * hh) + 'px; font-style:italic; color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:"Messina",Georgia,serif; cursor:text; z-index:20; white-space:pre-wrap;';
+    cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + Math.max(8, 0.0165 * hh) + 'px; font-style:italic; color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:' + fam + '; cursor:text; z-index:20; white-space:pre-wrap;';
     cap.title = 'Double-click to edit the caption';
     cap.ondblclick = (e) => {
         e.preventDefault(); e.stopPropagation();
@@ -11537,6 +11762,32 @@ function _dsAnnotKeydown(e) {
     const meta = e.ctrlKey || e.metaKey;
     if (meta && (e.key === 'c' || e.key === 'C')) { if (_dsCopySelection()) e.preventDefault(); return; }
     if (meta && (e.key === 'v' || e.key === 'V')) { if (_dsPasteClipboard()) e.preventDefault(); return; }
+    // Arrow keys nudge the selection (Shift = bigger steps).
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        const step = e.shiftKey ? 0.02 : 0.004;
+        const dx = e.key === 'ArrowLeft' ? -step : e.key === 'ArrowRight' ? step : 0;
+        const dy = e.key === 'ArrowUp' ? -step : e.key === 'ArrowDown' ? step : 0;
+        const nudge = (o) => {
+            if (typeof o.x === 'number') { o.x = Math.max(0, Math.min(0.99, o.x + dx)); o.y = Math.max(0, Math.min(0.99, (o.y || 0) + dy)); }
+            if (typeof o.x1 === 'number') { o.x1 += dx; o.y1 += dy; o.x2 += dx; o.y2 += dy; }
+        };
+        let did = false;
+        const aSel = _dsCurrentAnnot();
+        if (aSel) { nudge(aSel); did = true; }
+        else if (_mbActiveCanvasId === 'dsLayoutCanvas' && typeof _mbSelected !== 'undefined') {
+            const els = _mbEls() || [];
+            const idxs = (_mbSel && _mbSel.length) ? _mbSel : (_mbSelected >= 0 ? [_mbSelected] : []);
+            idxs.forEach(ix => { if (els[ix]) { nudge(els[ix]); did = true; } });
+            if (did) { try { renderMoodboardCanvas(); } catch (x) {} }
+        }
+        if (did) {
+            e.preventDefault();
+            if (aSel) _dsRenderCenter();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRenderRail();
+        }
+        return;
+    }
     if (e.key !== 'Delete' && e.key !== 'Backspace') return;
     if (_dsSelKey == null || _dsSelIdx < 0) return;
     e.preventDefault();
@@ -12041,9 +12292,10 @@ function _thumbPump() {
     if (_thumbBusy) return;
     const job = _thumbQueue.shift();
     if (!job) { _dsUpdateThumbProgress(); return; }
+    _igNoCapture = true;   // thumbs reuse cached elevation captures only
     _thumbBusy = true;
     _dsUpdateThumbProgress();
-    const finish = () => { _thumbBusy = false; _dsUpdateThumbProgress(); _thumbPump(); };
+    const finish = () => { _thumbBusy = false; _igNoCapture = false; _dsUpdateThumbProgress(); _thumbPump(); };
     if (job.token !== _thumbRunToken) { finish(); return; }
     if (_dsThumbCache[job.ck]) { _dsPaintThumb(job.ck, _dsThumbCache[job.ck]); finish(); return; }
     // Re-find the CURRENT desc for this key before rendering. A job can sit in
@@ -13108,21 +13360,20 @@ function _dsRenderTools() {
             const inote = document.createElement('div');
             inote.style.cssText = 'padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-input);';
             inote.innerHTML = '<div style="font-size:0.7rem; font-weight:700; color:var(--text-main); margin-bottom:4px;">Install guide</div>'
-                + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">One page per elevation (the walls from the Elevations tab) with hang height + plan view. Switch to “Per piece” for spec-template pages.</div>';
+                + '<div style="font-size:0.64rem; color:var(--text-muted); line-height:1.5;">One page per elevation (the walls from the Elevations tab). Pick a layout template and measurements below.</div>';
             head.appendChild(inote);
             t.appendChild(head);
+            const igBodyM = _dsSection(t, 'Install guide template', 'installguide', true);
+            _dsInstallGuideControls(igBodyM, desc);
+            const sBM = _dsSection(t, 'Text styles', 'styles', false);
+            sBM.appendChild(_dsDockedStylesSection());
+            const thBM = _dsSection(t, 'Page theme', 'theme', false);
+            try { _dsThemeControlInto(thBM, _deckPageKey(desc), desc); } catch (e) {}
             return;
         }
 
-        // Per-page spec visibility: full specs vs artwork-only mockup.
-        const visWrap = document.createElement('div');
-        visWrap.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
-        const aoOn = _specArtOnly(ovKey);
-        const mkVis = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.64rem; font-weight:700; padding:6px 4px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
-        const setAO = (v) => { const m = editorialContent.specArtOnly || (editorialContent.specArtOnly = {}); if (v) m[ovKey] = true; else delete m[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuilt(_deckPageKey(desc), true); _dsRefresh(); };
-        visWrap.appendChild(mkVis('Show specs', !aoOn, () => setAO(false)));
-        visWrap.appendChild(mkVis('Artwork only', aoOn, () => setAO(true)));
-        head.appendChild(visWrap);
+        // ('Show specs' / 'Artwork only' buttons removed — specs are automated
+        // and always shown; legacy artwork-only flags in old files still render.)
 
         if (desc._manual) {
             t.appendChild(head);
@@ -13204,26 +13455,54 @@ function _dsRenderTools() {
             }
             if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', false, () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter(); }));
             head.appendChild(btnRow);
-            // Apply to a page range (by position in this page list, e.g. "5-12").
-            const rangeRow = document.createElement('div'); rangeRow.style.cssText = 'display:flex; gap:4px; margin-bottom:5px;';
-            const rangeInp = document.createElement('input'); rangeInp.type = 'text'; rangeInp.placeholder = 'e.g. 5-12, 20';
-            rangeInp.style.cssText = 'flex:1; min-width:0; height:22px; font-size:0.6rem; padding:0 6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
-            const rangeBtn = document.createElement('button'); rangeBtn.textContent = 'Apply to range'; rangeBtn.className = 'action-btn btn-secondary'; rangeBtn.style.cssText = 'height:22px; font-size:0.58rem; padding:0 8px;';
-            rangeBtn.onclick = () => {
-                const set = new Set();
-                ('' + rangeInp.value).split(',').forEach(part => {
-                    const m = part.trim().match(/^([0-9]+)(?:\s*-\s*([0-9]+))?$/);
-                    if (!m) return;
-                    const a = parseInt(m[1], 10), b = m[2] ? parseInt(m[2], 10) : a;
-                    for (let p = Math.min(a, b); p <= Math.max(a, b); p++) set.add(p);
-                });
-                if (!set.size) return;
-                const keys = [];
-                _dsPages.forEach((d, i) => { if (set.has(i + 1) && d.kind === 'spec') { const k = d._ovKey || (d.row && d.row.id) || ''; if (k) keys.push(k); } });
-                if (keys.length) applyScoped(keys);
+            // Bulk apply: pick item codes from a checklist, then apply the
+            // chosen template to all of them at once.
+            const bulkBtn = document.createElement('button'); bulkBtn.textContent = 'Apply to selected items\u2026'; bulkBtn.className = 'action-btn btn-secondary';
+            bulkBtn.style.cssText = 'width:100%; height:22px; font-size:0.58rem; margin-bottom:5px;';
+            head.appendChild(bulkBtn);
+            const bulkWrap = document.createElement('div');
+            bulkWrap.style.cssText = 'display:none; border:1px solid var(--border-color); border-radius:5px; padding:6px; margin-bottom:6px;';
+            const bulkTop = document.createElement('div'); bulkTop.style.cssText = 'display:flex; gap:4px; margin-bottom:5px;';
+            const selAll = document.createElement('button'); selAll.textContent = 'All'; selAll.className = 'action-btn btn-secondary'; selAll.style.cssText = 'flex:1; height:18px; font-size:0.54rem;';
+            const selNone = document.createElement('button'); selNone.textContent = 'None'; selNone.className = 'action-btn btn-secondary'; selNone.style.cssText = 'flex:1; height:18px; font-size:0.54rem;';
+            bulkTop.appendChild(selAll); bulkTop.appendChild(selNone); bulkWrap.appendChild(bulkTop);
+            const bulkList = document.createElement('div');
+            bulkList.style.cssText = 'max-height:30vh; overflow-y:auto; margin-bottom:6px;';
+            const bulkChecks = [];
+            _dsPages.forEach(d => {
+                if (d.kind !== 'spec' || d._install) return;
+                const k = d._ovKey || (d.row && d.row.id) || '';
+                if (!k) return;
+                const row = document.createElement('label');
+                row.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:0.6rem; color:var(--text-main); cursor:pointer; margin-bottom:2px;';
+                const cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = k;
+                bulkChecks.push(cb);
+                row.appendChild(cb);
+                const loc = (d.row && d.row.location) ? (' \u2014 ' + d.row.location) : '';
+                row.appendChild(document.createTextNode(k + loc));
+                bulkList.appendChild(row);
+            });
+            bulkWrap.appendChild(bulkList);
+            selAll.onclick = () => bulkChecks.forEach(c => { c.checked = true; });
+            selNone.onclick = () => bulkChecks.forEach(c => { c.checked = false; });
+            const bulkApply = document.createElement('button'); bulkApply.className = 'action-btn btn-primary';
+            bulkApply.textContent = 'Apply template to selected'; bulkApply.style.cssText = 'width:100%; height:22px; font-size:0.58rem;';
+            bulkApply.onclick = () => {
+                const keys = bulkChecks.filter(c => c.checked).map(c => c.value);
+                if (!keys.length) { showInfoModal('Nothing selected', 'Tick at least one item code first.'); return; }
+                // Read the armed template NOW (the panel may have rendered
+                // before the user picked one from the template grid).
+                const ck = _dsSpecTplSel || chosenKey;
+                keys.forEach(k => { if (ck === globalTpl) delete overrides[k]; else overrides[k] = ck; });
+                if (ck === 'custom') _dsSeedCustom(desc);
+                _dsSpecTplSel = null;
+                if (typeof pushHistory === 'function') pushHistory();
+                if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
             };
-            rangeRow.appendChild(rangeInp); rangeRow.appendChild(rangeBtn);
-            head.appendChild(rangeRow);
+            bulkWrap.appendChild(bulkApply);
+            head.appendChild(bulkWrap);
+            bulkBtn.onclick = () => { bulkWrap.style.display = bulkWrap.style.display === 'none' ? 'block' : 'none'; };
             const sub = document.createElement('p');
             sub.style.cssText = 'font-size:0.58rem; color:var(--text-muted); margin:0 0 4px; line-height:1.3;';
             sub.innerHTML = hasOverride ? 'Overrides the deck default.' : 'Pick a template, then choose a scope above.';
@@ -15846,7 +16125,11 @@ function _dsInstallGuideControls(body, desc) {
 function _igCfg(ovKey) {
     editorialContent.installGuide = editorialContent.installGuide || {};
     const g = editorialContent.installGuide;
-    const base = { variant: g.variant || 'elevPlan', measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {}) };
+    // Elevation breaker pages (inside Per-piece / Group A/B/C decks) stay
+    // elevation-only — the global template choice applies to Install-guide
+    // mode pages; a per-page override can still change a single breaker.
+    const isBreaker = ('' + ovKey).indexOf('elevgrp:') === 0;
+    const base = { variant: isBreaker ? 'elevOnly' : (g.variant || 'elevPlan'), measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {}) };
     const ov = (g.perPage || {})[ovKey];
     if (!ov) return base;
     return { variant: ov.variant || base.variant, measure: Object.assign({}, base.measure, ov.measure || {}) };
@@ -15867,9 +16150,20 @@ function _igSet(patch, ovKey) {
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
+const _igCapCache = {};    // elevIdx|measure|contentStamp -> {dataUrl,w,h}
+let _igNoCapture = false;  // true while thumbnails render (no view switching)
+function _igElevStamp(idx) {
+    try {
+        const e = elevations[idx]; if (!e) return 'x';
+        const fr = (e.frames || []).map(f => [f.letter, Math.round(f.x * 10), Math.round(f.y * 10), Math.round(f.w * 10), Math.round(f.h * 10), (f.dimTo || []).join('')].join(','));
+        return e.wallW + 'x' + e.wallH + '|' + fr.join(';');
+    } catch (e) { return 'x'; }
+}
 async function _captureElevWithGuides(elevIdx, mopts) {
     if (elevIdx == null || elevIdx < 0 || typeof elevations === 'undefined' || !elevations[elevIdx]) return null;
     if (typeof exportElevSVG !== 'function' || typeof switchView !== 'function') return null;
+    // Never steal the view while the measure (line) tool is mid-use.
+    try { if (typeof lineToolActive !== 'undefined' && lineToolActive) return null; } catch (e) {}
     const origView = currentView, origIndex = currentElevIndex;
     let res = null;
     // Optionally force measurement layers for the shot (install-guide toggles),
@@ -15969,7 +16263,12 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             : (elev && typeof elevations !== 'undefined' ? elevations.indexOf(elev) : -1);
         const cfg = _igCfg(igKey);
         if (igElevIdx != null && igElevIdx >= 0) {
-            const cap = await _captureElevWithGuides(igElevIdx, cfg.measure);
+            const capKey = igElevIdx + '|' + JSON.stringify(cfg.measure) + '|' + _igElevStamp(igElevIdx);
+            let cap = _igCapCache[capKey] || null;
+            if (!cap && !_igNoCapture) {
+                cap = await _captureElevWithGuides(igElevIdx, Object.assign({}, cfg.measure));
+                if (cap && cap.dataUrl) _igCapCache[capKey] = cap;
+            }
             if (cap && cap.dataUrl) {
                 const yTop = M + 58, yBot = PH - 34, capH = 13;
                 const zoneName = (isElev ? (elev && elev.name) : (arg.location || (elev && elev.name) || '')) || '';
@@ -16615,7 +16914,7 @@ function _softShadowDataUrl(wPt, hPt, ell) {
 function _drawAnnCaption(doc, a, x, y, pw, ph) {
     if (!a.showCaption || !(a.caption || '').trim()) return;
     try {
-        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(9); doc.setTextColor(138, 138, 138);
+        doc.setFont(_font(a.capFont === 'sans' ? 'sans' : 'serif'), 'italic'); doc.setFontSize(9); doc.setTextColor(138, 138, 138);
         const align = a.capAlign || 'center';
         let tx = x; if (align === 'center') tx = x + pw / 2; else if (align === 'right') tx = x + pw;
         const lines = doc.splitTextToSize((a.caption || '').trim(), pw);
@@ -21917,21 +22216,60 @@ function _syncMagnetBtn() {
 // the PDF shows spacing without visiting each wall one by one.
 const _ELEV_GUIDE_LAYERS = [
     ['label-layer', 'labelToggle'], ['od-layer', 'odToggle'], ['dim-layer', 'dimToggle'],
-    ['guide-layer', 'guideToggle'], ['frame-center-layer', 'frameCenterToggle'],
-    ['custom-lines-layer', 'customLinesToggle']
+    ['person-wrap', 'personToggle'], ['guide-layer', 'guideToggle'], ['grid-layer', 'gridToggle'],
+    ['frame-center-layer', 'frameCenterToggle'], ['custom-lines-layer', 'customLinesToggle']
 ];
 function _elevGuidesAllSet(on) {
+    // Simple show/hide layers.
     _ELEV_GUIDE_LAYERS.forEach(([lid, bid]) => {
         const layer = document.getElementById(lid); const btn = document.getElementById(bid);
         if (layer) layer.style.display = on ? 'block' : 'none';
         if (btn) btn.classList.toggle('active', on);
     });
+    // dimVisibility-backed guides — set the state directly (their individual
+    // toggles early-return when no group dim / edge gap exists yet, which
+    // would leave them out of the master flip), then sync buttons + redraw.
+    try {
+        if (!!dimVisibility.wallDims !== on && typeof toggleWallDims === 'function') toggleWallDims(document.getElementById('wallDimToggle'));
+        ['groupBox', 'edgeGap', 'imageCode'].forEach(f => { dimVisibility[f] = on; });
+        if (typeof saveDimVisibility === 'function') saveDimVisibility();
+        [['groupBoxToggle', 'groupBox'], ['edgeGapToggle', 'edgeGap'], ['imageCodeToggle', 'imageCode']].forEach(([bid, f]) => {
+            const b = document.getElementById(bid); if (b) b.classList.toggle('active', !!dimVisibility[f]);
+        });
+    } catch (e) {}
+    try { drawElevAll(); } catch (e) {}
+}
+function _elevAnyGuideOn() {
+    if (_ELEV_GUIDE_LAYERS.some(([lid]) => { const l = document.getElementById(lid); return l && l.style.display === 'block'; })) return true;
+    try { if (dimVisibility.wallDims || dimVisibility.groupBox || dimVisibility.edgeGap || dimVisibility.imageCode) return true; } catch (e) {}
+    return false;
 }
 function toggleAllElevGuides() {
-    // If ANY guide layer is currently visible → turn everything off; else all on.
-    const anyOn = _ELEV_GUIDE_LAYERS.some(([lid]) => { const l = document.getElementById(lid); return l && l.style.display === 'block'; });
+    // If ANYTHING is currently visible → turn everything off; else all on.
+    const anyOn = _elevAnyGuideOn();
     _elevGuidesAllSet(!anyOn);
     const b = document.getElementById('allGuidesToggle'); if (b) b.classList.toggle('active', !anyOn);
+}
+function _spacingScopePopup() {
+    const old = document.getElementById('spacingScopePopup'); if (old) old.remove();
+    const wrap = document.createElement('div'); wrap.id = 'spacingScopePopup';
+    wrap.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:2000; display:flex; align-items:center; justify-content:center;';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:10px; padding:18px; width:300px; box-shadow:0 14px 44px rgba(0,0,0,0.55);';
+    card.innerHTML = '<div style="font-size:0.8rem; font-weight:700; color:var(--text-main); margin-bottom:6px;">Auto-spacing</div>'
+        + '<div style="font-size:0.66rem; color:var(--text-muted); line-height:1.5; margin-bottom:12px;">Dimension the gaps between adjacent frames. Apply to this wall only, or push it to every elevation at once (you can still tweak each one after).</div>';
+    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:8px;';
+    const mk = (label, primary, on) => { const b = document.createElement('button'); b.className = 'action-btn ' + (primary ? 'btn-primary' : 'btn-secondary'); b.textContent = label; b.style.cssText = 'flex:1; height:30px; font-size:0.66rem;'; b.onclick = () => { wrap.remove(); on(); }; return b; };
+    row.appendChild(mk('This elevation', false, () => toggleAllSpacing('one')));
+    row.appendChild(mk('All elevations', true, () => toggleAllSpacing('all')));
+    card.appendChild(row);
+    const cancel = document.createElement('button'); cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel';
+    cancel.style.cssText = 'width:100%; height:24px; font-size:0.6rem; margin-top:8px;';
+    cancel.onclick = () => wrap.remove();
+    card.appendChild(cancel);
+    wrap.onclick = (e) => { if (e.target === wrap) wrap.remove(); };
+    wrap.appendChild(card);
+    document.body.appendChild(wrap);
 }
 function applySpacingToAllElevations() {
     if (typeof elevations === 'undefined' || !elevations.length) return;
@@ -21943,7 +22281,6 @@ function applySpacingToAllElevations() {
     if (dl && dl.style.display !== 'block') { dl.style.display = 'block'; const tb = document.getElementById('dimToggle'); if (tb) tb.classList.add('active'); }
     try { renderElevation(); } catch (e) {}
     try { if (typeof scheduleAutosave === 'function') scheduleAutosave(); } catch (e) {}
-    try { showInfoModal('Spacing applied', 'Auto-spacing dimensions were applied to every elevation. They will appear in exports and install guides wherever the spacing layer is on.'); } catch (e) {}
 }
 function _autoSpacePairs(frames) {
     const active = (frames || []).filter(f => f && f.active !== false);
@@ -21967,9 +22304,12 @@ function _autoSpacePairs(frames) {
         if (bestV && !f.dimTo.includes(bestV.letter) && !(bestV.dimTo || []).includes(f.letter)) f.dimTo.push(bestV.letter);
     });
 }
-function toggleAllSpacing() {
+function toggleAllSpacing(scopeChosen) {
     const active = elevFrames.filter(f => f.active);
     const anyDims = active.some(f => Array.isArray(f.dimTo) && f.dimTo.length);
+    // Creating spacing (not clearing): ask which walls it should apply to.
+    if (!anyDims && !scopeChosen) { _spacingScopePopup(); return; }
+    if (scopeChosen === 'all') { applySpacingToAllElevations(); return; }
     if (anyDims) {
         elevFrames.forEach(f => { f.dimTo = []; });
     } else {
