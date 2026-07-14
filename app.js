@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.1';
+const APP_VERSION = '15.2';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10566,7 +10566,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
         if (a.type === 'image') {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box; background:#fff; overflow:hidden;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            const clipI = document.createElement('div');
+            clipI.style.cssText = 'position:absolute; inset:0; overflow:hidden; background:#fff; pointer-events:none;';
             const img = document.createElement('img');
             img.src = a.dataUrl || ''; img.draggable = false;
             if ((a.zoom || 1) > 1) {
@@ -10578,11 +10580,13 @@ function _dsRenderAnnots(page, desc, w, hh) {
             } else {
                 img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
             }
-            box.appendChild(img);
+            clipI.appendChild(img);
+            box.appendChild(clipI);
             box.onwheel = (e) => { e.preventDefault(); a.zoom = Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? 0.12 : -0.12))); if (a.zoom === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
             const moveDownI = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault(); e.stopPropagation();
+                const wasSel = sel;
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
@@ -10591,12 +10595,12 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }
                 };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             const panModeI = (a.zoom || 1) > 1;
             box.onmousedown = panModeI
-                ? (e) => { _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); _dsShapePanDown(e, key, i, bw, bh); }
+                ? (e) => { const wasSel = sel; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
                 : moveDownI;
             box.style.cursor = panModeI ? 'grab' : 'move';
             const handle = document.createElement('div');
@@ -10612,7 +10616,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.appendChild(handle);
             if (sel) {
                 _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: 0.5 });
-                if (panModeI) _dsMoveGrip(box, moveDownI);
+                _dsMoveGrip(box, moveDownI);
                 _dsGearButton(box, key, i);
             }
             _dsAnnCaptionInto(page, box, a, key, i, w, hh);
@@ -10623,12 +10627,17 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const bw = (a.w || 0.25) * w, bh = (a.h || 0.18) * hh;
             const box = document.createElement('div');
             const radius = a.shape === 'ellipse' ? '50%' : '3px';
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; overflow:hidden; border-radius:' + radius + '; background:' + (a.dataUrl ? '#ececec' : (a.fill === 'none' ? 'transparent' : (a.fill || '#d8d8de'))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            // overflow stays VISIBLE on the box so the grip/gear handles just
+            // outside its corners aren't clipped; an inner wrapper clips the image.
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + (a.dataUrl ? 'transparent' : (a.fill === 'none' ? 'transparent' : (a.fill || '#d8d8de'))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             if (a.dataUrl) {
+                const clip = document.createElement('div');
+                clip.style.cssText = 'position:absolute; inset:0; overflow:hidden; border-radius:' + radius + '; background:#ececec; pointer-events:none;';
                 const cr = _imgRect(a.fit || 'cover', bw, bh, a.aspect || 1.33, a.zoom || 1, a.panX || 0, a.panY || 0);
                 const img = document.createElement('img'); img.src = a.dataUrl; img.draggable = false;
                 img.style.cssText = 'position:absolute; left:' + cr.offX + 'px; top:' + cr.offY + 'px; width:' + cr.dW + 'px; height:' + cr.dH + 'px; max-width:none; display:block; pointer-events:none; user-select:none;';
-                box.appendChild(img);
+                clip.appendChild(img);
+                box.appendChild(clip);
             }
             box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed #6a6aff'; };
             box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)'; };
@@ -10636,6 +10645,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const moveDown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault(); e.stopPropagation();
+                const wasSel = sel;
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
@@ -10644,14 +10654,14 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }   // caption moves WITH the box
                 };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             // Zoomed image: dragging INSIDE the box pans the image (live).
             // Moving the shape then happens from the grip handle (top-left).
             const panMode = !!(a.dataUrl && (a.zoom || 1) > 1);
             box.onmousedown = panMode
-                ? (e) => { _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); _dsShapePanDown(e, key, i, bw, bh); }
+                ? (e) => { const wasSel = sel; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
                 : moveDown;
             box.style.cursor = panMode ? 'grab' : 'move';
             if (a.dataUrl) box.onwheel = (e) => { e.preventDefault(); a.zoom = Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? 0.12 : -0.12))); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
@@ -10668,7 +10678,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             if (sel) {
                 if (a.dataUrl) {
                     _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: 0.5 });
-                    if (panMode) _dsMoveGrip(box, moveDown);   // grip = move while drag pans
+                    if (a.dataUrl) _dsMoveGrip(box, moveDown);   // grip = always-there move handle once an image is in
                 }
                 _dsGearButton(box, key, i);
                 _dsAnnHandles(box, a, w, hh);
@@ -10783,23 +10793,27 @@ function _dsRenderAnnots(page, desc, w, hh) {
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
             e.preventDefault();
+            const wasSel = sel;
             _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
             const mv = (ev) => { a.x = Math.max(0, Math.min(0.985, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.985, oy + (ev.clientY - sy) / hh)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
-            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
         el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; el.focus(); };
         el.onblur = () => { a.text = el.textContent; el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
         if (sel) {
+            _dsTextGearButton(el, key, i);
             const th = document.createElement('div');
             th.contentEditable = 'false';
             th.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
             th.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
-                const sx = e.clientX, ow = (a.w || 0.3), os = (a.size || 0.03);
-                const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); const ratio = nw / ow; a.w = nw; a.size = Math.max(0.012, Math.min(0.22, os * ratio)); el.style.width = (nw * w) + 'px'; el.style.fontSize = Math.max(7, a.size * hh) + 'px'; };
+                const sx = e.clientX, ow = (a.w || 0.3);
+                // Width-only reflow: the text re-wraps to the new box width and
+                // the font size stays exactly where you set it.
+                const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); a.w = nw; el.style.width = (nw * w) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
@@ -11010,7 +11024,8 @@ function _dsSyncToolbar() {
     }
     const shB = document.getElementById('dsAnnShadow'); if (shB) { const on = (isImage || isShape) && a.shadow; shB.style.background = on ? '#6a6aff' : 'var(--bg-input)'; shB.style.color = on ? '#fff' : 'var(--text-main)'; }
     const sz = document.getElementById('dsAnnSizeLbl'); if (sz) sz.textContent = isText ? Math.round((a.size || 0.03) * 540) : '\u2014';
-    const alb = document.getElementById('dsAnnAlignBtn'); if (alb) alb.textContent = isText ? ((a.align || 'left')[0].toUpperCase()) : 'L';
+    const alb = document.getElementById('dsAnnAlignBtn');
+    if (alb) alb.innerHTML = _dsAlignIconSVG(isText ? (a.align || 'left') : 'left');
     const b = document.getElementById('dsAnnBold'); if (b) { b.style.background = (isText && a.bold) ? '#6a6aff' : 'var(--bg-input)'; b.style.color = (isText && a.bold) ? '#fff' : 'var(--text-main)'; }
     const it = document.getElementById('dsAnnItalic'); if (it) { it.style.background = (isText && a.italic) ? '#6a6aff' : 'var(--bg-input)'; it.style.color = (isText && a.italic) ? '#fff' : 'var(--text-main)'; }
     // Keep the docked styles list (right panel) in step with whatever text box
@@ -11197,26 +11212,82 @@ const _DS_NOTE_PRESETS = [
     ['Artwork placement', 'Note:\nArtwork placement shown is for reference only. Final positioning to be confirmed on site during installation.'],
 ];
 const _DS_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
+function _dsUserTextPresets() { return editorialContent.textPresets || (editorialContent.textPresets = []); }
+function _dsSaveSelectedTextPreset() {
+    let payload = null;
+    const a = _dsCurrentAnnot();
+    if (a && (a.type === 'text' || a.type === 'note')) payload = { text: a.text || '', size: a.size, italic: !!a.italic, bold: !!a.bold, color: a.color, font: a.font, align: a.align };
+    else if (typeof _mbSelEl === 'function') { const el = _mbSelEl(); if (el && el.type === 'text') payload = { text: el.text || '', size: el.size, italic: !!el.italic, bold: !!el.bold, color: el.color, font: el.font, align: el.align }; }
+    if (!payload || !payload.text.trim()) { showInfoModal('Nothing to save', 'Select a text box on the page first, then save it to the library.'); return; }
+    const name = (window.prompt('Name this text preset:', payload.text.split('\n')[0].slice(0, 30)) || '').trim();
+    if (!name) return;
+    _dsUserTextPresets().push(Object.assign({ name: name }, payload));
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    showInfoModal('Saved', '\u201c' + name + '\u201d is now in your text library (T menu). It saves with the project.');
+}
 function _dsOpenTextMenu(ev) {
     if (ev && ev.stopPropagation) ev.stopPropagation();
     _dsPopup('dsTextMenu', 'dsTextMenuBtn', (menu) => {
-        const lbl = document.createElement('div'); lbl.textContent = 'ADD TEXT'; lbl.style.cssText = 'font-size:0.6rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:8px;';
-        menu.appendChild(lbl);
-        const mk = (label, hint, on) => {
+        menu.style.width = '240px';
+        const lbl = (t) => { const d = document.createElement('div'); d.textContent = t; d.style.cssText = 'font-size:0.56rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 5px;'; menu.appendChild(d); };
+        const mk = (label, hint, on, onDelete) => {
+            const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex; gap:4px; align-items:stretch; margin-bottom:5px;';
             const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
-            b.style.cssText = 'display:block; width:100%; text-align:left; padding:7px 9px; font-size:0.62rem; border-radius:6px; cursor:pointer; margin-bottom:5px;';
-            b.innerHTML = '<div style="font-weight:700;">' + label + '</div>' + (hint ? '<div style="font-size:0.54rem; color:var(--text-muted); margin-top:2px;">' + hint + '</div>' : '');
+            b.style.cssText = 'flex:1; display:block; height:auto; min-height:0; text-align:left; padding:6px 9px; font-size:0.62rem; line-height:1.35; border-radius:6px; cursor:pointer; white-space:normal;';
+            b.innerHTML = '<div style="font-weight:700; line-height:1.3;">' + label + '</div>' + (hint ? '<div style="font-size:0.54rem; color:var(--text-muted); line-height:1.35; margin-top:2px;">' + hint + '</div>' : '');
             b.onclick = () => { const m = document.getElementById('dsTextMenu'); if (m) m.remove(); on(); };
-            menu.appendChild(b);
+            wrap.appendChild(b);
+            if (onDelete) {
+                const del = document.createElement('button'); del.className = 'action-btn btn-secondary'; del.textContent = '\u00d7';
+                del.title = 'Remove from library';
+                del.style.cssText = 'width:20px; min-width:20px; height:auto; padding:0; font-size:12px; color:var(--text-muted);';
+                del.onclick = (e2) => { e2.stopPropagation(); onDelete(); };
+                wrap.appendChild(del);
+            }
+            menu.appendChild(wrap);
         };
+        const esc = (s) => ('' + s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        lbl('ADD TEXT');
         mk('Text box', 'A plain text box \u2014 style it with your text styles', () => _dsAddTextSmart());
-        mk('Paragraph (lorem ipsum)', 'Pre-filled placeholder copy \u2014 size the box and try alignment, fonts, leading', () => _dsAddParagraph());
-        const plbl = document.createElement('div'); plbl.textContent = 'NOTE PRESETS'; plbl.style.cssText = 'font-size:0.56rem; font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 5px;';
-        menu.appendChild(plbl);
+        mk('Paragraph (lorem ipsum)', 'Placeholder copy \u2014 size the box, try alignment and leading', () => _dsAddParagraph());
+        lbl('NOTE PRESETS');
         _DS_NOTE_PRESETS.forEach(([name, text]) => {
-            mk(name, text.split('\n')[1].slice(0, 58) + '\u2026', () => _dsAddPresetNote(text));
+            mk(esc(name), esc(text.split('\n')[1] || '').slice(0, 52) + '\u2026', () => _dsAddPresetNote(text));
         });
+        const user = _dsUserTextPresets();
+        if (user.length) {
+            lbl('YOUR LIBRARY');
+            user.forEach((p, pi) => {
+                mk(esc(p.name), esc((p.text || '').split('\n')[0]).slice(0, 52), () => _dsAddLibraryText(p), () => {
+                    user.splice(pi, 1);
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                    const m = document.getElementById('dsTextMenu'); if (m) m.remove(); _dsOpenTextMenu();
+                });
+            });
+        }
+        const save = document.createElement('button'); save.className = 'action-btn btn-secondary';
+        save.textContent = '+ Save selected text box to library';
+        save.style.cssText = 'width:100%; height:auto; min-height:0; padding:6px; font-size:0.58rem; margin-top:6px; border-style:dashed;';
+        save.onclick = () => { const m = document.getElementById('dsTextMenu'); if (m) m.remove(); _dsSaveSelectedTextPreset(); };
+        menu.appendChild(save);
     });
+}
+function _dsAddLibraryText(p) {
+    if (_dsCurrentEditablePage()) {
+        try {
+            addMoodboardText();
+            const els = _mbEls(); const el = els[els.length - 1];
+            if (el && el.type === 'text') { el.text = p.text; if (p.size) el.size = p.size; if (p.italic) el.italic = true; if (p.bold) el.bold = true; if (p.color) el.color = p.color; if (p.font) el.font = p.font; if (p.align) el.align = p.align; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+        } catch (e) {}
+        return;
+    }
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
+    const list = _dsAnnList(key);
+    list.push({ type: 'note', text: p.text, x: 0.2, y: 0.2, w: 0.3, size: p.size || 0.019, color: p.color || '#555555', font: p.font || 'serif', italic: !!p.italic, bold: !!p.bold, align: p.align || 'left' });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
 }
 function _dsAddParagraph() {
     if (_dsCurrentEditablePage()) {
@@ -11329,7 +11400,7 @@ function _dsMoveGrip(box, onDown) {
     const g = document.createElement('div');
     g.title = 'Drag to move the shape (dragging the image pans it)';
     g.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="#6a6aff"><circle cx="7" cy="5" r="2.4"/><circle cx="17" cy="5" r="2.4"/><circle cx="7" cy="12" r="2.4"/><circle cx="17" cy="12" r="2.4"/><circle cx="7" cy="19" r="2.4"/><circle cx="17" cy="19" r="2.4"/></svg>';
-    g.style.cssText = 'position:absolute; left:-8px; top:-8px; width:18px; height:18px; border-radius:4px; background:#fff; border:1.5px solid #6a6aff; cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
+    g.style.cssText = 'position:absolute; left:-11px; top:-11px; width:20px; height:20px; border-radius:5px; background:#fff; border:1.5px solid #6a6aff; cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
     g.onmousedown = onDown;
     box.appendChild(g);
 }
@@ -11338,7 +11409,7 @@ function _dsGearButton(box, key, i) {
     const g = document.createElement('button');
     g.title = 'Image placeholder settings (image, fill, stroke, caption)';
     g.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
-    g.style.cssText = 'position:absolute; right:-8px; top:-8px; width:18px; height:18px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
+    g.style.cssText = 'position:absolute; right:-26px; top:-2px; width:20px; height:20px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
     g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
     g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenGearPopup(key, i, e.clientX, e.clientY); };
     box.appendChild(g);
@@ -11660,6 +11731,106 @@ function _dsAlignTarget() {
     const a = _dsCurrentAnnot(); if (a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup' && a.type !== 'shape') return { kind: 'ann', el: a };
     return null;
 }
+function _dsTextGearButton(el, key, i) {
+    const g = document.createElement('button');
+    g.contentEditable = 'false';
+    g.title = 'Text settings (size, leading, style, colour, alignment)';
+    g.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+    g.style.cssText = 'position:absolute; right:-24px; top:-2px; width:18px; height:18px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
+    g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenTextGearPopup(key, i, e.clientX, e.clientY); };
+    el.appendChild(g);
+}
+function _dsOpenTextGearPopup(key, i, cx, cy) {
+    const old = document.getElementById('dsTextGearPopup'); if (old) old.remove();
+    const a = (_dsAnnList(key) || [])[i]; if (!a) return;
+    const pop = document.createElement('div'); pop.id = 'dsTextGearPopup';
+    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 240, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 300, Math.max(8, cy - 10)) + 'px; width:224px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:1000; padding:10px; font-size:0.66rem; color:var(--text-main);';
+    pop.onmousedown = (e) => e.stopPropagation();
+    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenTextGearPopup(key, i, parseFloat(pop.style.left) - 10 + 10, parseFloat(pop.style.top) + 10); };
+    const head = document.createElement('div');
+    head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
+    head.innerHTML = '<span style="font-weight:700; font-size:0.62rem; letter-spacing:0.4px; text-transform:uppercase;">Text settings</span>';
+    const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
+    closeB.onclick = () => pop.remove();
+    head.appendChild(closeB);
+    head.onmousedown = (e) => {
+        if (e.target === closeB) return;
+        e.preventDefault();
+        const sx = e.clientX - parseFloat(pop.style.left), sy = e.clientY - parseFloat(pop.style.top);
+        const mv = (ev) => { pop.style.left = (ev.clientX - sx) + 'px'; pop.style.top = (ev.clientY - sy) + 'px'; };
+        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); };
+        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+    };
+    pop.appendChild(head);
+    const lbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:0.56rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; pop.appendChild(d); };
+    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:5px; align-items:center;'; pop.appendChild(d); return d; };
+    const stepper = (r, get, set, min, max) => {
+        const dn = document.createElement('button'); dn.className = 'action-btn btn-secondary'; dn.textContent = '\u2212'; dn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        const v = document.createElement('span'); v.textContent = get(); v.style.cssText = 'min-width:26px; text-align:center;';
+        const up2 = document.createElement('button'); up2.className = 'action-btn btn-secondary'; up2.textContent = '+'; up2.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        dn.onclick = () => { set(Math.max(min, get() - 1)); refresh(); };
+        up2.onclick = () => { set(Math.min(max, get() + 1)); refresh(); };
+        r.appendChild(dn); r.appendChild(v); r.appendChild(up2);
+    };
+    lbl('Size (pt) \u00b7 Leading');
+    const sr = row();
+    stepper(sr, () => Math.round((a.size || 0.03) * 540), (v) => { a.size = v / 540; }, 6, 120);
+    const sp = document.createElement('span'); sp.textContent = ' '; sp.style.cssText = 'width:8px;'; sr.appendChild(sp);
+    stepper(sr, () => (typeof a.leading === 'number' && a.leading > 0) ? a.leading : Math.round((a.size || 0.03) * 540 * 1.15), (v) => { a.leading = v; }, 4, 120);
+    lbl('Style');
+    const str = row();
+    [['bold', 'B', 'font-weight:800;'], ['italic', 'I', 'font-style:italic;']].forEach(([f, l, css]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; ' + css + (a[f] ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a[f] = !a[f]; refresh(); };
+        str.appendChild(b);
+    });
+    [['left'], ['center'], ['right']].forEach(([v]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
+        b.innerHTML = _dsAlignIconSVG(v);
+        const on = (a.align || 'left') === v;
+        b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; display:inline-flex; align-items:center; justify-content:center;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a.align = v; refresh(); };
+        str.appendChild(b);
+    });
+    lbl('Colour');
+    const cr = row();
+    ['#1a1a1a', '#4a4a4a', '#9a9a9a', '#c0392b', '#ffffff'].forEach(hex => {
+        const s = document.createElement('button'); s.title = hex;
+        const on = (a.color || '#222222').toLowerCase() === hex;
+        s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; background:' + hex + '; border:2px solid ' + (on ? '#6a6aff' : 'var(--border-color)') + '; cursor:pointer;';
+        s.onclick = () => { a.color = hex; refresh(); };
+        cr.appendChild(s);
+    });
+    const ci = document.createElement('input'); ci.type = 'color'; ci.value = a.color || '#222222';
+    ci.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+    ci.onchange = () => { a.color = ci.value; refresh(); };
+    cr.appendChild(ci);
+    lbl('Font');
+    const fr = row();
+    [['serif', 'Messina'], ['sans', 'Druk']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        const on = (a.font || 'serif') === v;
+        b.style.cssText = 'flex:1; height:22px; font-size:0.58rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a.font = v; refresh(); };
+        fr.appendChild(b);
+    });
+    const help = document.createElement('p');
+    help.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
+    help.textContent = 'Double-click the box to edit the text. Drag the corner handle to resize the box \u2014 the text re-wraps, the font size stays. Save it to the T menu library to reuse on other pages and projects.';
+    pop.appendChild(help);
+    document.body.appendChild(pop);
+}
+function _dsAlignIconSVG(align) {
+    const L = (x1, x2, y) => '<line x1="' + x1 + '" y1="' + y + '" x2="' + x2 + '" y2="' + y + '"/>';
+    let rows;
+    if (align === 'center' || align === 'justify-center') rows = L(4, 20, 6) + L(7, 17, 11) + L(4, 20, 16) + L(7, 17, 21);
+    else if (align === 'right') rows = L(4, 20, 6) + L(9, 20, 11) + L(4, 20, 16) + L(9, 20, 21);
+    else if (align && align.indexOf('justify') === 0) rows = L(4, 20, 6) + L(4, 20, 11) + L(4, 20, 16) + L(4, 20, 21);
+    else rows = L(4, 20, 6) + L(4, 15, 11) + L(4, 20, 16) + L(4, 15, 21);
+    return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">' + rows + '</svg>';
+}
 function _dsAlignApply(val) { const t = _dsAlignTarget(); if (!t) return; t.el.align = val; if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (t.kind === 'mb') { try { renderMoodboardCanvas(); } catch (e) {} } else { _dsRenderCenter(); } _dsRenderRail(); _dsSyncToolbar(); }
 function _dsOpenAlignMenu() {
     const t = _dsAlignTarget(); if (!t) return; _dsCloseAlignMenu();
@@ -11669,9 +11840,10 @@ function _dsOpenAlignMenu() {
     const r = btn ? btn.getBoundingClientRect() : { left: 200, bottom: 80 };
     m.style.left = Math.round(r.left) + 'px'; m.style.top = Math.round((r.bottom || 80) + 6) + 'px';
     [['Align left', 'left'], ['Align center', 'center'], ['Align right', 'right'], ['Justify · last line left', 'justify'], ['Justify · last line center', 'justify-center'], ['Justify all lines', 'justify-all']].forEach(p => {
-        const b = document.createElement('button'); b.textContent = p[0];
+        const b = document.createElement('button');
+        b.innerHTML = '<span style="display:inline-flex; vertical-align:middle; margin-right:8px;">' + _dsAlignIconSVG(p[1]) + '</span>' + p[0];
         const onSel = (t.el.align || 'left') === p[1];
-        b.style.cssText = 'display:block; width:100%; text-align:left; background:' + (onSel ? 'var(--bg-input)' : 'transparent') + '; border:none; border-radius:5px; padding:8px 10px; cursor:pointer; color:var(--text-main); font-size:0.74rem;';
+        b.style.cssText = 'display:flex; align-items:center; width:100%; text-align:left; background:' + (onSel ? 'var(--bg-input)' : 'transparent') + '; border:none; border-radius:5px; padding:8px 10px; cursor:pointer; color:var(--text-main); font-size:0.74rem;';
         b.onmouseenter = () => b.style.background = 'var(--bg-input)'; b.onmouseleave = () => b.style.background = (onSel ? 'var(--bg-input)' : 'transparent');
         b.onclick = () => { _dsAlignApply(p[1]); _dsCloseAlignMenu(); }; m.appendChild(b);
     });
@@ -13379,8 +13551,8 @@ function _dsRenderTools() {
             t.appendChild(head);
             t.appendChild(_dsManualSection(desc));
             if (desc._install) {
-                const igBody = _dsSection(t, 'Install guide', 'installguide', true);
-                _dsInstallGuideControls(igBody, desc);
+                const igBody = _dsSection(t, 'Elevation measurements', 'installguide', true);
+                _dsInstallGuideControls(igBody, desc, { variants: false });
             }
         } else if (isGroupGlobal) {
             const note = document.createElement('p');
@@ -15918,7 +16090,7 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
                             doc.rect(wx, wyTop, wW, wH, 'S');
                             if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
                         } catch (e) {}
-                        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(150, 150, 150); doc.text('Elevation', tx, ty + th + 8);
+                        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(138, 138, 138); doc.text('Elevation', tx, ty + th + 8);
                         legendRight = tx - 14;
                     }
                 } catch (e) {}
@@ -16077,8 +16249,9 @@ async function _drawSpecSetPage(doc, logos, pageNum, meta, unit, tplKey, ctx) {
 // Global defaults with per-page overrides (keyed by the page's _ovKey).
 // Install-guide right-panel controls: layout variant, measurement toggles,
 // and whether the change applies to this page only or every install page.
-function _dsInstallGuideControls(body, desc) {
-    const ovKey = desc._ovKey || ('ig:' + (desc.title || ''));
+function _dsInstallGuideControls(body, desc, opts) {
+    opts = opts || {};
+    const ovKey = desc._ovKey || ('ig:' + ((desc.elev && desc.elev.name) || desc.title || ''));
     let scope = 'all';   // default: settings are deck-wide
     const cfg = () => _igCfg(ovKey);
     const commit = (patch) => {
@@ -16087,6 +16260,18 @@ function _dsInstallGuideControls(body, desc) {
         _dsRenderTools(); _dsRenderCenter(); _dsPriorityRerender(desc);
     };
     const secLbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:0.6rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; body.appendChild(d); };
+    const segRow = (pairs, cur, onPick) => {
+        const r = document.createElement('div'); r.style.cssText = 'display:flex; gap:5px;';
+        pairs.forEach(([v, l]) => {
+            const on = cur === v;
+            const b = document.createElement('button'); b.textContent = l;
+            b.style.cssText = 'flex:1; min-width:0; height:22px; font-size:0.56rem; border-radius:4px; cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:1px solid ' + (on ? '#6a6aff' : 'var(--border-color)') + '; background:' + (on ? '#6a6aff' : 'var(--bg-input)') + '; color:' + (on ? '#fff' : 'var(--text-main)') + ';';
+            b.onclick = () => onPick(v);
+            r.appendChild(b);
+        });
+        body.appendChild(r);
+        return r;
+    };
     // Apply-to scope.
     secLbl('Apply changes to');
     const scRow = document.createElement('div'); scRow.style.cssText = 'display:flex; gap:5px; margin-bottom:4px;';
@@ -16098,17 +16283,29 @@ function _dsInstallGuideControls(body, desc) {
         scRow.appendChild(b);
     });
     body.appendChild(scRow);
-    // Layout variant.
-    secLbl('Layout');
-    const vRow = document.createElement('div'); vRow.style.cssText = 'display:flex; gap:5px;';
-    [['elevPlan', 'Elev + plan'], ['elevOnly', 'Elev only'], ['elevFrames', 'Elev + frames']].forEach(([v, l]) => {
-        const on = cfg().variant === v;
-        const b = document.createElement('button'); b.textContent = l;
-        b.style.cssText = 'flex:1; min-width:0; height:24px; font-size:0.56rem; border-radius:4px; cursor:pointer; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; border:1px solid ' + (on ? '#6a6aff' : 'var(--border-color)') + '; background:' + (on ? '#6a6aff' : 'var(--bg-input)') + '; color:' + (on ? '#fff' : 'var(--text-main)') + ';';
-        b.onclick = () => commit({ variant: v });
-        vRow.appendChild(b);
-    });
-    body.appendChild(vRow);
+    // Layout variant (Install-guide mode only — breakers stay elevation-only).
+    if (opts.variants !== false) {
+        secLbl('Layout');
+        segRow([['elevPlan', 'Elev + plan'], ['elevOnly', 'Elev only'], ['elevFrames', 'Elev + frames']], cfg().variant, (v) => commit({ variant: v }));
+        if (cfg().variant !== 'elevOnly') {
+            secLbl('Plan view');
+            segRow([['full', 'Overall floor plan'], ['zoom', 'Zoomed to this wall']], cfg().plan, (v) => commit({ plan: v }));
+        }
+        if (cfg().variant === 'elevFrames') {
+            secLbl('Frame legend columns');
+            segRow([[1, 'Single column'], [2, 'Two columns']], cfg().legendCols, (v) => commit({ legendCols: v }));
+        }
+    }
+    // Letter legend (sizes + image codes) below the title.
+    secLbl('Legend');
+    const legRow = document.createElement('label'); legRow.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin-bottom:2px;';
+    const legCb = document.createElement('input'); legCb.type = 'checkbox'; legCb.checked = !!cfg().legend;
+    legCb.onchange = () => commit({ legend: legCb.checked });
+    legRow.appendChild(legCb); legRow.appendChild(document.createTextNode('Letter legend (A, B, C\u2026 with overall size + image code)'));
+    body.appendChild(legRow);
+    const legNote = document.createElement('p'); legNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:2px 0 0 21px; line-height:1.4;';
+    legNote.textContent = 'Sits under the title \u2014 keeps image codes off the elevation so the measurements stay clean.';
+    body.appendChild(legNote);
     // Measurement toggles.
     secLbl('Measurements on the elevation');
     [['spacing', 'Spacing dimensions'], ['wallDims', 'Wall dimensions'], ['hangHeight', 'Hang-height guides'], ['imageCodes', 'Image codes on frames']].forEach(([k, l]) => {
@@ -16119,9 +16316,10 @@ function _dsInstallGuideControls(body, desc) {
         body.appendChild(row);
     });
     const note = document.createElement('p'); note.style.cssText = 'font-size:0.58rem; color:var(--text-muted); margin:6px 0 0; line-height:1.45;';
-    note.textContent = 'Spacing shows the dimensions set up in the elevation editor (use \u201cAll walls\u201d there to apply auto-spacing everywhere at once).';
+    note.textContent = 'These switches only force layers on or off for this page\u2019s snapshot. WHAT they show \u2014 which pairs are dimensioned, where guides sit, label positions \u2014 is set up in the Elevations tab working area. Jump back there to change the measurements themselves.';
     body.appendChild(note);
 }
+
 function _igCfg(ovKey) {
     editorialContent.installGuide = editorialContent.installGuide || {};
     const g = editorialContent.installGuide;
@@ -16129,22 +16327,35 @@ function _igCfg(ovKey) {
     // elevation-only — the global template choice applies to Install-guide
     // mode pages; a per-page override can still change a single breaker.
     const isBreaker = ('' + ovKey).indexOf('elevgrp:') === 0;
-    const base = { variant: isBreaker ? 'elevOnly' : (g.variant || 'elevPlan'), measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {}) };
+    const base = {
+        variant: isBreaker ? 'elevOnly' : (g.variant || 'elevPlan'),
+        plan: g.plan || 'full',                 // 'full' | 'zoom' (cropped around the pins)
+        legendCols: g.legendCols === 2 ? 2 : 1, // frame corner+profile legend columns
+        legend: !!g.legend,                     // letter/size/image-code text legend under the title
+        measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {})
+    };
     const ov = (g.perPage || {})[ovKey];
     if (!ov) return base;
-    return { variant: ov.variant || base.variant, measure: Object.assign({}, base.measure, ov.measure || {}) };
+    return {
+        variant: ov.variant || base.variant,
+        plan: ov.plan || base.plan,
+        legendCols: ov.legendCols === 2 ? 2 : (ov.legendCols === 1 ? 1 : base.legendCols),
+        legend: (ov.legend !== undefined) ? !!ov.legend : base.legend,
+        measure: Object.assign({}, base.measure, ov.measure || {})
+    };
 }
 function _igSet(patch, ovKey) {
     editorialContent.installGuide = editorialContent.installGuide || {};
     const g = editorialContent.installGuide;
+    const simple = ['variant', 'plan', 'legendCols', 'legend'];
     if (ovKey) {
         g.perPage = g.perPage || {};
         const cur = g.perPage[ovKey] || {};
-        if (patch.variant) cur.variant = patch.variant;
+        simple.forEach(f => { if (patch[f] !== undefined) cur[f] = patch[f]; });
         if (patch.measure) cur.measure = Object.assign({}, cur.measure || {}, patch.measure);
         g.perPage[ovKey] = cur;
     } else {
-        if (patch.variant) g.variant = patch.variant;
+        simple.forEach(f => { if (patch[f] !== undefined) g[f] = patch[f]; });
         if (patch.measure) g.measure = Object.assign({}, g.measure || {}, patch.measure);
     }
     if (typeof pushHistory === 'function') pushHistory();
@@ -16221,9 +16432,36 @@ async function _captureElevWithGuides(elevIdx, mopts) {
         const cnv = document.createElement('canvas'); cnv.width = cw; cnv.height = ch;
         const cx = cnv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cw, ch); cx.drawImage(img, 0, 0, cw, ch);
         URL.revokeObjectURL(url);
+        // Crop away the export's whitespace padding: scan for the content
+        // bounding box so the caption can sit at the drawing's TRUE left edge
+        // and the elevation fills its slot on the page.
+        let out = cnv;
+        try {
+            const data = cx.getImageData(0, 0, cw, ch).data;
+            let minX = cw, minY = ch, maxX = 0, maxY = 0;
+            const stride = 3;
+            for (let y = 0; y < ch; y += stride) {
+                for (let x = 0; x < cw; x += stride) {
+                    const p = (y * cw + x) * 4;
+                    if (data[p] < 246 || data[p + 1] < 246 || data[p + 2] < 246) {
+                        if (x < minX) minX = x; if (x > maxX) maxX = x;
+                        if (y < minY) minY = y; if (y > maxY) maxY = y;
+                    }
+                }
+            }
+            if (maxX > minX + 40 && maxY > minY + 40) {
+                const pad = Math.round(cw * 0.006);
+                minX = Math.max(0, minX - pad); minY = Math.max(0, minY - pad);
+                maxX = Math.min(cw - 1, maxX + pad); maxY = Math.min(ch - 1, maxY + pad);
+                const c2 = document.createElement('canvas');
+                c2.width = maxX - minX + 1; c2.height = maxY - minY + 1;
+                c2.getContext('2d').drawImage(cnv, minX, minY, c2.width, c2.height, 0, 0, c2.width, c2.height);
+                out = c2;
+            }
+        } catch (e) {}
         // High-res JPEG: invisible compression at this resolution, ~10x smaller
         // than PNG (lossless PNGs overflow jsPDF's output string on a big deck).
-        return { dataUrl: cnv.toDataURL('image/jpeg', 0.92), w: cw, h: ch };
+        return { dataUrl: out.toDataURL('image/jpeg', 0.92), w: out.width, h: out.height };
     } catch (e) { return null; }
 }
 
@@ -16270,72 +16508,116 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 if (cap && cap.dataUrl) _igCapCache[capKey] = cap;
             }
             if (cap && cap.dataUrl) {
-                const yTop = M + 58, yBot = PH - 34, capH = 13;
+                let yTop = M + 58; const yBot = PH - 34, capH = 13;
                 const zoneName = (isElev ? (elev && elev.name) : (arg.location || (elev && elev.name) || '')) || '';
                 const capText = (label, name) => (label + (name ? ' \u2014 ' + name : '')).toUpperCase();
                 const drawCaption = (txt, x, y) => { doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120); doc.text(txt, x, y); };
                 const fitIn = (asp, maxW2, maxH2) => { let w2 = maxW2, h2 = w2 / asp; if (h2 > maxH2) { h2 = maxH2; w2 = h2 * asp; } return [w2, h2]; };
                 const aspect = cap.w / cap.h;
+                // Optional letter legend under the title: A — 24.0 × 30.0 in — IMAGECODE.
+                if (cfg.legend && activeFrames.length) {
+                    const parts = activeFrames.slice().sort((fa, fb) => ('' + (fa.letter || '')).localeCompare('' + (fb.letter || ''))).map(f => {
+                        const rr = lookupRow(f.id);
+                        const dims = (rr.extW && rr.extH) ? (rr.extW + ' \u00d7 ' + rr.extH + ' ' + (typeof elevUnit !== 'undefined' ? elevUnit : 'in')) : '';
+                        const code = (rr.imageCode || '').trim();
+                        return [(f.letter || '?'), dims, code].filter(Boolean).join(' \u2014 ');
+                    });
+                    doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120);
+                    const lineH = 11, maxLW = PW - M * 2;
+                    let line = '', lines = [];
+                    parts.forEach(p => {
+                        const cand = line ? (line + '     ' + p) : p;
+                        if (doc.getTextWidth(cand) > maxLW && line) { lines.push(line); line = p; } else line = cand;
+                    });
+                    if (line) lines.push(line);
+                    lines.slice(0, 3).forEach((ln, li) => doc.text(ln, M, yTop - 6 + li * lineH));
+                    yTop += Math.min(lines.length, 3) * lineH + 2;
+                }
                 const planLv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(planRow.level || 0)];
                 const havePlan = !!(planLv && planLv.imageData);
+                const pins = isElev ? activeFrames.map(f => lookupRow(f.id)) : [arg];
+                // Plan renderer: 'full' draws the whole floor plan; 'zoom' crops
+                // around the red pins (like the spec pages' zoomed plan).
                 const drawPlanAt = async (px0, planBottom, pmaxW, pmaxH) => {
                     if (!havePlan) return null;
                     const pim = await _loadImg(planLv.imageData);
-                    const pasp = (pim.naturalWidth || 1) / (pim.naturalHeight || 1);
+                    const natW2 = pim.naturalWidth || 1, natH2 = pim.naturalHeight || 1;
+                    let srcData = planLv.imageData, pasp = natW2 / natH2;
+                    let mapPin = (rr) => [rr.planX, rr.planY];
+                    if (cfg.plan === 'zoom') {
+                        const xs = pins.filter(rr => rr && rr.planX != null).map(rr => rr.planX);
+                        const ys = pins.filter(rr => rr && rr.planY != null).map(rr => rr.planY);
+                        if (xs.length) {
+                            const padF = 0.16;
+                            let x0 = Math.max(0, Math.min.apply(null, xs) - padF), x1 = Math.min(1, Math.max.apply(null, xs) + padF);
+                            let y0 = Math.max(0, Math.min.apply(null, ys) - padF), y1 = Math.min(1, Math.max.apply(null, ys) + padF);
+                            if (x1 - x0 < 0.2) { const c = (x0 + x1) / 2; x0 = Math.max(0, c - 0.1); x1 = Math.min(1, c + 0.1); }
+                            if (y1 - y0 < 0.2) { const c = (y0 + y1) / 2; y0 = Math.max(0, c - 0.1); y1 = Math.min(1, c + 0.1); }
+                            try {
+                                const cc = document.createElement('canvas');
+                                cc.width = Math.max(2, Math.round((x1 - x0) * natW2)); cc.height = Math.max(2, Math.round((y1 - y0) * natH2));
+                                cc.getContext('2d').drawImage(pim, x0 * natW2, y0 * natH2, cc.width, cc.height, 0, 0, cc.width, cc.height);
+                                srcData = cc.toDataURL('image/jpeg', 0.9);
+                                pasp = cc.width / cc.height;
+                                mapPin = (rr) => [(rr.planX - x0) / (x1 - x0), (rr.planY - y0) / (y1 - y0)];
+                            } catch (e) {}
+                        }
+                    }
                     const [pw2, ph2] = fitIn(pasp, pmaxW, pmaxH);
                     const py0 = planBottom - ph2;
-                    doc.addImage(planLv.imageData, 'JPEG', px0, py0, pw2, ph2);
-                    const pins = isElev ? activeFrames.map(f => lookupRow(f.id)) : [arg];
+                    doc.addImage(srcData, 'JPEG', px0, py0, pw2, ph2);
                     doc.setFillColor(200, 40, 40);
-                    pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) doc.circle(px0 + rr.planX * pw2, py0 + rr.planY * ph2, 3, 'F'); });
+                    pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) { const mp = mapPin(rr); if (mp[0] >= 0 && mp[0] <= 1 && mp[1] >= 0 && mp[1] <= 1) doc.circle(px0 + mp[0] * pw2, py0 + mp[1] * ph2, 3, 'F'); } });
                     return { x: px0, y: py0, w: pw2, h: ph2 };
                 };
-                if (cfg.variant === 'elevOnly' || !havePlan && cfg.variant === 'elevPlan') {
-                    // Elevation fills the page, bottom-anchored, caption bottom-left.
+                if (cfg.variant === 'elevOnly' || (!havePlan && cfg.variant === 'elevPlan')) {
+                    // Elevation fills the page as large as it can, bottom-anchored.
                     const [ew, eh] = fitIn(aspect, PW - M * 2, yBot - capH - yTop);
                     const ex = (PW - ew) / 2, ey = yBot - capH - eh;
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
                     drawCaption(capText('Elevation', zoneName), ex, yBot - 2);
-                } else if (cfg.variant === 'elevFrames') {
-                    // Elevation large in the middle; plan bottom-left; frame
-                    // corner+profile legend along the bottom.
-                    const stripH = 74;
-                    const [ew, eh] = fitIn(aspect, PW - M * 2, (yBot - capH - stripH - 10) - yTop);
-                    const ex = (PW - ew) / 2, ey = (yBot - capH - stripH - 10) - eh;
-                    doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
-                    drawCaption(capText('Elevation', zoneName), ex, ey + eh + 10);
-                    const bandTop = yBot - stripH;
-                    let stripX = M;
-                    const pr = await drawPlanAt(M, yBot - capH, PW * 0.20, stripH - capH);
-                    if (pr) { drawCaption('PLAN VIEW', pr.x, yBot - 2); stripX = pr.x + pr.w + 22; }
-                    // Frames used on this wall — corner + profile + code, like a legend.
-                    try {
-                        const codesOnWall = {};
-                        (activeFrames || []).forEach(f => { const rr = lookupRow(f.id); const c = (rr.fCode || '').trim().toUpperCase(); if (c) codesOnWall[c.replace(/[-_\s]/g, '')] = 1; });
-                        const allFrames = await _collectProjectFrames();
-                        const used = allFrames.filter(f => codesOnWall[(f.code || '').replace(/[-_\s]/g, '').toUpperCase()]);
-                        const cellW = 96, imgH = stripH - capH - 16;
-                        used.slice(0, Math.floor((PW - M - stripX) / cellW)).forEach((f, fi) => {
-                            const cx = stripX + fi * cellW;
-                            let dx = cx;
-                            if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, 40, imgH); try { doc.addImage(f.img, 'JPEG', dx, bandTop + (imgH - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, bandTop + (imgH - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += 44; }
-                            else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, bandTop + 4, 30, imgH - 8, 'F'); dx += 34; }
-                            if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, 34, imgH); try { doc.addImage(f.profileImg, 'PNG', dx, bandTop + (imgH - ih3) / 2, iw3, ih3); } catch (e) {} }
-                            doc.setFont(_font('sans'), 'bold'); doc.setFontSize(7); doc.setTextColor(60, 60, 60);
-                            doc.text((f.code || '').slice(0, 20), cx, bandTop + imgH + 11);
-                        });
-                    } catch (e) {}
                 } else {
-                    // 'elevPlan' (default): elevation LEFT, plan RIGHT — bottoms
-                    // aligned, captions under each at their bottom-left corners.
-                    const gutter = 26;
-                    const elevMaxW = (PW - M * 2) * 0.62, planMaxW = (PW - M * 2) * 0.30;
-                    const [ew, eh] = fitIn(aspect, elevMaxW, yBot - capH - yTop);
-                    const ex = M, ey = yBot - capH - eh;
+                    // 'elevPlan' and 'elevFrames': LEFT column (frames legend above
+                    // the plan), elevation takes the rest of the page on the RIGHT.
+                    const gutter = 24;
+                    const leftW = (PW - M * 2) * 0.26;
+                    const colH = yBot - capH - yTop;
+                    let legendBottom = yTop;   // frames legend grows downward from yTop
+                    if (cfg.variant === 'elevFrames') {
+                        try {
+                            const codesOnWall = {};
+                            (activeFrames || []).forEach(f => { const rr = lookupRow(f.id); const c = (rr.fCode || '').trim().toUpperCase(); if (c) codesOnWall[c.replace(/[-_\s]/g, '')] = 1; });
+                            const allFrames = await _collectProjectFrames();
+                            const used = allFrames.filter(f => codesOnWall[(f.code || '').replace(/[-_\s]/g, '').toUpperCase()]);
+                            const cols = cfg.legendCols === 2 ? 2 : 1;
+                            const cellW = cols === 2 ? (leftW - 10) / 2 : leftW;
+                            const imgH2 = 34, cellH = imgH2 + 16;
+                            for (let fi = 0; fi < used.length; fi++) {
+                                const f = used[fi];
+                                const col = fi % cols, rowI = Math.floor(fi / cols);
+                                const cx0 = M + col * (cellW + (cols === 2 ? 10 : 0));
+                                const cy0 = yTop + rowI * cellH;
+                                if (cy0 + cellH > yTop + colH * 0.55) break;   // keep room for the plan
+                                let dx = cx0;
+                                // corner + profile side by side, kept together as a pair
+                                if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, cellW * 0.46, imgH2); try { doc.addImage(f.img, 'JPEG', dx, cy0 + (imgH2 - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, cy0 + (imgH2 - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += cellW * 0.46 + 5; }
+                                else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, cy0 + 3, cellW * 0.4, imgH2 - 6, 'F'); dx += cellW * 0.46 + 5; }
+                                if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, cellW * 0.4, imgH2); try { doc.addImage(f.profileImg, 'PNG', dx, cy0 + (imgH2 - ih3) / 2, iw3, ih3); } catch (e) {} }
+                                doc.setFont(_font('sans'), 'bold'); doc.setFontSize(6.5); doc.setTextColor(60, 60, 60);
+                                doc.text((f.code || '').slice(0, 24), cx0, cy0 + imgH2 + 9);
+                                legendBottom = Math.max(legendBottom, cy0 + cellH);
+                            }
+                        } catch (e) {}
+                    }
+                    // Plan sits in the left column below the legend, bottom-anchored.
+                    const pr = await drawPlanAt(M, yBot - capH, leftW, (yBot - capH) - legendBottom - (legendBottom > yTop ? 12 : 0));
+                    if (pr) drawCaption('PLAN VIEW', pr.x, yBot - 2);
+                    // Elevation: everything right of the left column, as large as it fits.
+                    const ex0 = M + leftW + gutter;
+                    const [ew, eh] = fitIn(aspect, PW - M - ex0, colH);
+                    const ex = ex0 + ((PW - M - ex0) - ew) / 2, ey = yBot - capH - eh;
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
                     drawCaption(capText('Elevation', zoneName), ex, yBot - 2);
-                    const pr = await drawPlanAt(Math.max(ex + ew + gutter, PW - M - planMaxW), yBot - capH, planMaxW, (yBot - capH - yTop) * 0.62);
-                    if (pr) drawCaption('PLAN VIEW', pr.x, yBot - 2);
                 }
                 _drawPdfFooter(doc, logos, pageNum, meta);
                 return;
@@ -16428,7 +16710,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             const pins = isElev ? activeFrames.map(f => lookupRow(f.id)) : [arg];
             doc.setFillColor(200, 40, 40);
             pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) doc.circle(px0 + rr.planX * pw, py0 + rr.planY * ph, 3, 'F'); });
-            doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(150, 150, 150);
+            doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(138, 138, 138);
             doc.text('Floorplan', px0, py0 - 4);
         }
     } catch (e) { try { doc.setLineDashPattern([], 0); } catch (_) {} }
@@ -16807,7 +17089,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             const fit2 = Math.min(bw / pc.width, bh / pc.height); const dw = pc.width * fit2, dh = pc.height * fit2;
             try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, dy0, dw, dh); } catch (e) {}
             doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(bx, dy0, dw, dh, 'S'); } catch (e) {}
-            doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120);
+            doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7.5); doc.setTextColor(138, 138, 138);
             doc.text('Floorplan', bx, dy0 + dh + 9); doc.setTextColor(20, 20, 20);
         }
     }
@@ -16856,7 +17138,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         // Single caption "Frame" under the corner thumbnail only (matches the
         // "Floorplan"/"Elevation" caption style below). labelBaseline sits just
         // below the images so it never overlaps them.
-        doc.setFont('helvetica', 'normal'); doc.setFontSize(7.5); doc.setTextColor(120, 120, 120);
+        doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7.5); doc.setTextColor(138, 138, 138);
         doc.text('Frame', leftX, labelBaseline); doc.setTextColor(20, 20, 20);
     }
     // Footer (page number + project line + logo) on template spec pages too.
@@ -21656,11 +21938,16 @@ function toggleLineTool(on) {
     lineToolFirstAnchor = null;
     // Turning the draw tool on must make custom lines visible — otherwise new
     // lines are created but hidden, which looks like the tool isn't working.
-    if (lineToolActive && typeof dimVisibility !== 'undefined' && !dimVisibility.customLines) {
+    if (lineToolActive && typeof dimVisibility !== 'undefined') {
         dimVisibility.customLines = true;
         if (typeof saveDimVisibility === 'function') saveDimVisibility();
         const clBtn = document.getElementById('customLinesToggle');
         if (clBtn) clBtn.classList.add('active');
+        // The all-guides master hides layers with an inline display:none —
+        // clear it, or new lines land in an invisible layer and the tool
+        // looks completely dead.
+        const clLayer = document.getElementById('custom-lines-layer');
+        if (clLayer) clLayer.style.display = 'block';
     }
     const btn = document.getElementById('lineToolBtn');
     if (btn) btn.classList.toggle('active', lineToolActive);
@@ -22231,9 +22518,9 @@ function _elevGuidesAllSet(on) {
     // would leave them out of the master flip), then sync buttons + redraw.
     try {
         if (!!dimVisibility.wallDims !== on && typeof toggleWallDims === 'function') toggleWallDims(document.getElementById('wallDimToggle'));
-        ['groupBox', 'edgeGap', 'imageCode'].forEach(f => { dimVisibility[f] = on; });
+        ['groupBox', 'edgeGap', 'imageCode', 'customLines'].forEach(f => { dimVisibility[f] = on; });
         if (typeof saveDimVisibility === 'function') saveDimVisibility();
-        [['groupBoxToggle', 'groupBox'], ['edgeGapToggle', 'edgeGap'], ['imageCodeToggle', 'imageCode']].forEach(([bid, f]) => {
+        [['groupBoxToggle', 'groupBox'], ['edgeGapToggle', 'edgeGap'], ['imageCodeToggle', 'imageCode'], ['customLinesToggle', 'customLines']].forEach(([bid, f]) => {
             const b = document.getElementById(bid); if (b) b.classList.toggle('active', !!dimVisibility[f]);
         });
     } catch (e) {}
