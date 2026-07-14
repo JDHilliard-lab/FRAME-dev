@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.2';
+const APP_VERSION = '15.3';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -11399,7 +11399,7 @@ function _dsReadImageToShape(file, a) {
 function _dsMoveGrip(box, onDown) {
     const g = document.createElement('div');
     g.title = 'Drag to move the shape (dragging the image pans it)';
-    g.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="#6a6aff"><circle cx="7" cy="5" r="2.4"/><circle cx="17" cy="5" r="2.4"/><circle cx="7" cy="12" r="2.4"/><circle cx="17" cy="12" r="2.4"/><circle cx="7" cy="19" r="2.4"/><circle cx="17" cy="19" r="2.4"/></svg>';
+    g.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>';
     g.style.cssText = 'position:absolute; left:-11px; top:-11px; width:20px; height:20px; border-radius:5px; background:#fff; border:1.5px solid #6a6aff; cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
     g.onmousedown = onDown;
     box.appendChild(g);
@@ -11408,8 +11408,8 @@ function _dsMoveGrip(box, onDown) {
 function _dsGearButton(box, key, i) {
     const g = document.createElement('button');
     g.title = 'Image placeholder settings (image, fill, stroke, caption)';
-    g.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
-    g.style.cssText = 'position:absolute; right:-26px; top:-2px; width:20px; height:20px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    g.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="#6a6aff" stroke="#6a6aff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,0.45));"><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/><circle cx="12" cy="12" r="3" fill="#fff" stroke="none"/></svg>';
+    g.style.cssText = 'position:absolute; right:-25px; top:-2px; width:20px; height:20px; padding:0; border-radius:50%; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25;';
     g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
     g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenGearPopup(key, i, e.clientX, e.clientY); };
     box.appendChild(g);
@@ -11420,9 +11420,11 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     const a = (_dsAnnList(key) || [])[i]; if (!a) return;
     const isImg = a.type === 'image';
     const pop = document.createElement('div'); pop.id = 'dsGearPopup';
-    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 250, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 380, Math.max(8, cy - 10)) + 'px; width:236px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:1000; padding:10px; font-size:0.66rem; color:var(--text-main);';
+    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 250, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 380, Math.max(8, cy - 10)) + 'px; width:236px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:100000; padding:10px; font-size:0.66rem; color:var(--text-main);';
     pop.onmousedown = (e) => e.stopPropagation();
-    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenGearPopup(key, i, parseFloat(pop.style.left) - 10 + 10, parseFloat(pop.style.top) + 10); };
+    // Reopen at the SAME spot (cx+10 / cy-10 are undone here so the panel
+    // doesn't creep across the screen on every settings change).
+    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenGearPopup(key, i, parseFloat(pop.style.left) - 10, parseFloat(pop.style.top) + 10); };
     // Drag-to-move header.
     const head = document.createElement('div');
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
@@ -11454,7 +11456,25 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         const zr = document.createElement('button'); zr.className = 'action-btn btn-secondary'; zr.textContent = 'Reset zoom'; zr.style.cssText = 'flex:1; height:22px; font-size:0.58rem;';
         zr.onclick = () => { a.zoom = 1; a.panX = 0; a.panY = 0; refresh(); };
         ir.appendChild(zr);
+        if (!isImg) {
+            lbl('Image fit');
+            const fitR = row();
+            [['cover', 'Fill (crop)'], ['contain', 'Fit (whole image)']].forEach(([v, l]) => {
+                const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+                const on = (a.fit || 'cover') === v;
+                b.style.cssText = 'flex:1; height:22px; font-size:0.56rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+                b.onclick = () => { a.fit = v; refresh(); };
+                fitR.appendChild(b);
+            });
+        }
     }
+    // Drop shadow — same soft shadow the artwork mockups use.
+    lbl('Effects');
+    const efR = row();
+    const shB = document.createElement('button'); shB.className = 'action-btn btn-secondary'; shB.textContent = a.shadow ? 'Drop shadow: on' : 'Drop shadow: off';
+    shB.style.cssText = 'flex:1; height:22px; font-size:0.58rem;' + (a.shadow ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+    shB.onclick = () => { a.shadow = !a.shadow; refresh(); };
+    efR.appendChild(shB);
     if (!isImg) {
         // Fill + stroke, side by side so they read as one system.
         lbl('Fill \u00b7 Stroke');
@@ -11494,10 +11514,10 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     capB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsToggleAnnCaption(); refresh(); };
     cr1.appendChild(capB);
     if (a.showCaption) {
-        [['left', 'L'], ['center', 'C'], ['right', 'R']].forEach(([v, l]) => {
-            const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        [['left'], ['center'], ['right']].forEach(([v]) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.innerHTML = _dsAlignIconSVG(v);
             const on = (a.capAlign || 'center') === v;
-            b.style.cssText = 'width:24px; height:22px; min-width:24px; padding:0; font-size:0.58rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+            b.style.cssText = 'width:24px; height:22px; min-width:24px; padding:0; display:inline-flex; align-items:center; justify-content:center;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
             b.onclick = () => { a.capAlign = v; refresh(); };
             cr1.appendChild(b);
         });
@@ -11735,8 +11755,8 @@ function _dsTextGearButton(el, key, i) {
     const g = document.createElement('button');
     g.contentEditable = 'false';
     g.title = 'Text settings (size, leading, style, colour, alignment)';
-    g.innerHTML = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
-    g.style.cssText = 'position:absolute; right:-24px; top:-2px; width:18px; height:18px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    g.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="#6a6aff" stroke="#6a6aff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,0.45));"><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/><circle cx="12" cy="12" r="3" fill="#fff" stroke="none"/></svg>';
+    g.style.cssText = 'position:absolute; right:-23px; top:-2px; width:18px; height:18px; padding:0; border-radius:50%; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25;';
     g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
     g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenTextGearPopup(key, i, e.clientX, e.clientY); };
     el.appendChild(g);
@@ -11745,9 +11765,9 @@ function _dsOpenTextGearPopup(key, i, cx, cy) {
     const old = document.getElementById('dsTextGearPopup'); if (old) old.remove();
     const a = (_dsAnnList(key) || [])[i]; if (!a) return;
     const pop = document.createElement('div'); pop.id = 'dsTextGearPopup';
-    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 240, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 300, Math.max(8, cy - 10)) + 'px; width:224px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:1000; padding:10px; font-size:0.66rem; color:var(--text-main);';
+    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 240, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 300, Math.max(8, cy - 10)) + 'px; width:224px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:100000; padding:10px; font-size:0.66rem; color:var(--text-main);';
     pop.onmousedown = (e) => e.stopPropagation();
-    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenTextGearPopup(key, i, parseFloat(pop.style.left) - 10 + 10, parseFloat(pop.style.top) + 10); };
+    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenTextGearPopup(key, i, parseFloat(pop.style.left) - 10, parseFloat(pop.style.top) + 10); };
     const head = document.createElement('div');
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
     head.innerHTML = '<span style="font-weight:700; font-size:0.62rem; letter-spacing:0.4px; text-transform:uppercase;">Text settings</span>';
@@ -11780,7 +11800,7 @@ function _dsOpenTextGearPopup(key, i, cx, cy) {
     stepper(sr, () => (typeof a.leading === 'number' && a.leading > 0) ? a.leading : Math.round((a.size || 0.03) * 540 * 1.15), (v) => { a.leading = v; }, 4, 120);
     lbl('Style');
     const str = row();
-    [['bold', 'B', 'font-weight:800;'], ['italic', 'I', 'font-style:italic;']].forEach(([f, l, css]) => {
+    [['bold', 'B', 'font-weight:800;'], ['italic', 'I', 'font-style:italic;'], ['outline', 'O', 'font-weight:800; -webkit-text-stroke:1px currentColor;']].forEach(([f, l, css]) => {
         const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
         b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; ' + css + (a[f] ? ' border-color:#6a6aff; color:#6a6aff;' : '');
         b.onclick = () => { a[f] = !a[f]; refresh(); };
@@ -11807,7 +11827,7 @@ function _dsOpenTextGearPopup(key, i, cx, cy) {
     ci.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
     ci.onchange = () => { a.color = ci.value; refresh(); };
     cr.appendChild(ci);
-    lbl('Font');
+    lbl('Font \u00b7 Weight');
     const fr = row();
     [['serif', 'Messina'], ['sans', 'Druk']].forEach(([v, l]) => {
         const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
@@ -11816,6 +11836,18 @@ function _dsOpenTextGearPopup(key, i, cx, cy) {
         b.onclick = () => { a.font = v; refresh(); };
         fr.appendChild(b);
     });
+    const wSel = document.createElement('select');
+    wSel.style.cssText = 'width:82px; height:22px; font-size:0.58rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;';
+    [['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'SemiBold'], ['700', 'Bold']].forEach(([v, l]) => {
+        const o = document.createElement('option'); o.value = v; o.textContent = l;
+        if ('' + (a.weight || (a.bold ? '700' : '400')) === v) o.selected = true;
+        wSel.appendChild(o);
+    });
+    wSel.onchange = () => { a.weight = wSel.value; a.bold = (parseInt(wSel.value, 10) >= 600); refresh(); };
+    fr.appendChild(wSel);
+    // Your text styles — the same docked styles panel, right in the popup.
+    lbl('Text styles');
+    try { pop.appendChild(_dsDockedStylesSection()); } catch (e) {}
     const help = document.createElement('p');
     help.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
     help.textContent = 'Double-click the box to edit the text. Drag the corner handle to resize the box \u2014 the text re-wraps, the font size stays. Save it to the T menu library to reuse on other pages and projects.';
@@ -16296,7 +16328,22 @@ function _dsInstallGuideControls(body, desc, opts) {
             segRow([[1, 'Single column'], [2, 'Two columns']], cfg().legendCols, (v) => commit({ legendCols: v }));
         }
     }
-    // Letter legend (sizes + image codes) below the title.
+    // Sliders — frame thumbnail size (elevFrames) and legend spec width.
+    const slider = (labelTxt, min, max, step, val, fmt, onPick) => {
+        secLbl(labelTxt);
+        const r = document.createElement('div'); r.style.cssText = 'display:flex; gap:7px; align-items:center;';
+        const s = document.createElement('input'); s.type = 'range'; s.min = min; s.max = max; s.step = step; s.value = val;
+        s.style.cssText = 'flex:1;';
+        const v = document.createElement('span'); v.textContent = fmt(val); v.style.cssText = 'min-width:34px; text-align:right; font-size:0.6rem; color:var(--text-muted);';
+        s.oninput = () => { v.textContent = fmt(parseFloat(s.value)); };
+        s.onchange = () => onPick(parseFloat(s.value));
+        r.appendChild(s); r.appendChild(v);
+        body.appendChild(r);
+    };
+    if (opts.variants !== false && cfg().variant === 'elevFrames') {
+        slider('Frame thumbnail size', 0.6, 1.8, 0.1, cfg().legendScale, (v) => Math.round(v * 100) + '%', (v) => commit({ legendScale: v }));
+    }
+    // Letter legend (spec-style blocks) below the title.
     secLbl('Legend');
     const legRow = document.createElement('label'); legRow.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin-bottom:2px;';
     const legCb = document.createElement('input'); legCb.type = 'checkbox'; legCb.checked = !!cfg().legend;
@@ -16304,20 +16351,31 @@ function _dsInstallGuideControls(body, desc, opts) {
     legRow.appendChild(legCb); legRow.appendChild(document.createTextNode('Letter legend (A, B, C\u2026 with overall size + image code)'));
     body.appendChild(legRow);
     const legNote = document.createElement('p'); legNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:2px 0 0 21px; line-height:1.4;';
-    legNote.textContent = 'Sits under the title \u2014 keeps image codes off the elevation so the measurements stay clean.';
+    legNote.textContent = 'Spec-style dotted rows under the title \u2014 keeps image codes off the elevation so the measurements stay clean.';
     body.appendChild(legNote);
-    // Measurement toggles.
-    secLbl('Measurements on the elevation');
-    [['spacing', 'Spacing dimensions'], ['wallDims', 'Wall dimensions'], ['hangHeight', 'Hang-height guides'], ['imageCodes', 'Image codes on frames']].forEach(([k, l]) => {
-        const row = document.createElement('label'); row.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:0.64rem; color:var(--text-main); cursor:pointer; margin-bottom:4px;';
-        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cfg().measure[k];
-        cb.onchange = () => commit({ measure: { [k]: cb.checked } });
-        row.appendChild(cb); row.appendChild(document.createTextNode(l));
-        body.appendChild(row);
-    });
-    const note = document.createElement('p'); note.style.cssText = 'font-size:0.58rem; color:var(--text-muted); margin:6px 0 0; line-height:1.45;';
-    note.textContent = 'These switches only force layers on or off for this page\u2019s snapshot. WHAT they show \u2014 which pairs are dimensioned, where guides sit, label positions \u2014 is set up in the Elevations tab working area. Jump back there to change the measurements themselves.';
+    if (cfg().legend) {
+        slider('Legend spec width', 110, 300, 5, cfg().legendW, (v) => Math.round(v) + 'pt', (v) => commit({ legendW: v }));
+        const wNote = document.createElement('p'); wNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:2px 0 0; line-height:1.4;';
+        wNote.textContent = 'Narrower blocks fit more letters per row and leave more room for notes.';
+        body.appendChild(wNote);
+    }
+    // Measurements live in the Elevations tab — point there instead of duplicating switches.
+    secLbl('Measurements');
+    const note = document.createElement('p'); note.style.cssText = 'font-size:0.58rem; color:var(--text-muted); margin:0 0 6px; line-height:1.45;';
+    note.textContent = 'The snapshot shows exactly what the elevation shows. If measurements are missing, turn them on in the Elevations tab working area (spacing pairs, wall dims, hang guides, image codes), then come back \u2014 the page refreshes on its own.';
     body.appendChild(note);
+    const goB = document.createElement('button'); goB.className = 'action-btn btn-secondary';
+    goB.textContent = 'Go to elevations \u2192';
+    goB.style.cssText = 'width:100%; height:24px; font-size:0.6rem;';
+    goB.onclick = () => {
+        try { closeDeckStudio(); } catch (e) {}
+        try {
+            const idx = (desc.elev && typeof desc._idx === 'number') ? desc._idx
+                : (typeof elevations !== 'undefined' ? elevations : []).findIndex(e2 => e2 && desc.elev && e2.name === desc.elev.name);
+            switchView('elevation', idx >= 0 ? idx : 0);
+        } catch (e) { try { switchView('elevation', 0); } catch (e2) {} }
+    };
+    body.appendChild(goB);
 }
 
 function _igCfg(ovKey) {
@@ -16331,7 +16389,9 @@ function _igCfg(ovKey) {
         variant: isBreaker ? 'elevOnly' : (g.variant || 'elevPlan'),
         plan: g.plan || 'full',                 // 'full' | 'zoom' (cropped around the pins)
         legendCols: g.legendCols === 2 ? 2 : 1, // frame corner+profile legend columns
-        legend: !!g.legend,                     // letter/size/image-code text legend under the title
+        legend: !!g.legend,                     // letter/size/image-code spec legend under the title
+        legendScale: (typeof g.legendScale === 'number') ? g.legendScale : 1,   // frame thumbnail size
+        legendW: (typeof g.legendW === 'number') ? g.legendW : 170,             // letter-legend spec block width (pt)
         measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {})
     };
     const ov = (g.perPage || {})[ovKey];
@@ -16341,13 +16401,15 @@ function _igCfg(ovKey) {
         plan: ov.plan || base.plan,
         legendCols: ov.legendCols === 2 ? 2 : (ov.legendCols === 1 ? 1 : base.legendCols),
         legend: (ov.legend !== undefined) ? !!ov.legend : base.legend,
+        legendScale: (typeof ov.legendScale === 'number') ? ov.legendScale : base.legendScale,
+        legendW: (typeof ov.legendW === 'number') ? ov.legendW : base.legendW,
         measure: Object.assign({}, base.measure, ov.measure || {})
     };
 }
 function _igSet(patch, ovKey) {
     editorialContent.installGuide = editorialContent.installGuide || {};
     const g = editorialContent.installGuide;
-    const simple = ['variant', 'plan', 'legendCols', 'legend'];
+    const simple = ['variant', 'plan', 'legendCols', 'legend', 'legendScale', 'legendW'];
     if (ovKey) {
         g.perPage = g.perPage || {};
         const cur = g.perPage[ovKey] || {};
@@ -16501,10 +16563,18 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             : (elev && typeof elevations !== 'undefined' ? elevations.indexOf(elev) : -1);
         const cfg = _igCfg(igKey);
         if (igElevIdx != null && igElevIdx >= 0) {
-            const capKey = igElevIdx + '|' + JSON.stringify(cfg.measure) + '|' + _igElevStamp(igElevIdx);
+            // The snapshot shows EXACTLY what the Elevations tab shows — no
+            // forcing. The cache key carries the live guide state so toggling
+            // guides over there refreshes install pages here.
+            let guideStamp = '';
+            try {
+                guideStamp = JSON.stringify(typeof dimVisibility !== 'undefined' ? dimVisibility : {});
+                ['dim-layer', 'guide-layer', 'arch-dim-layer'].forEach(id => { const l = document.getElementById(id); guideStamp += '|' + (l ? l.style.display : ''); });
+            } catch (e) {}
+            const capKey = igElevIdx + '|' + guideStamp + '|' + _igElevStamp(igElevIdx);
             let cap = _igCapCache[capKey] || null;
             if (!cap && !_igNoCapture) {
-                cap = await _captureElevWithGuides(igElevIdx, Object.assign({}, cfg.measure));
+                cap = await _captureElevWithGuides(igElevIdx);
                 if (cap && cap.dataUrl) _igCapCache[capKey] = cap;
             }
             if (cap && cap.dataUrl) {
@@ -16514,24 +16584,44 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 const drawCaption = (txt, x, y) => { doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120); doc.text(txt, x, y); };
                 const fitIn = (asp, maxW2, maxH2) => { let w2 = maxW2, h2 = w2 / asp; if (h2 > maxH2) { h2 = maxH2; w2 = h2 * asp; } return [w2, h2]; };
                 const aspect = cap.w / cap.h;
-                // Optional letter legend under the title: A — 24.0 × 30.0 in — IMAGECODE.
+                // Optional letter legend under the title — spec-style mini
+                // blocks with dotted leaders, one per letter:
+                //   A
+                //   Overall dimensions ....... 24 x 24 in
+                //   Image code ............... FJH.2503366
                 if (cfg.legend && activeFrames.length) {
-                    const parts = activeFrames.slice().sort((fa, fb) => ('' + (fa.letter || '')).localeCompare('' + (fb.letter || ''))).map(f => {
+                    const blockW = Math.max(110, Math.min(300, cfg.legendW || 170));
+                    const rowH2 = 10, blockGap = 18, blockH = 3 * rowH2 + 4;
+                    const perRow = Math.max(1, Math.floor((PW - M * 2 + blockGap) / (blockW + blockGap)));
+                    const sorted = activeFrames.slice().sort((fa, fb) => ('' + (fa.letter || '')).localeCompare('' + (fb.letter || '')));
+                    const leader = (label, value, lx, ly) => {
+                        doc.setFont(_font('spec'), 'bold'); doc.setFontSize(7); doc.setTextColor(20, 20, 20);
+                        doc.text(label, lx, ly);
+                        const labelW2 = doc.getTextWidth(label);
+                        doc.setFont(_font('spec'), 'normal');
+                        const vs = (value || '') + '';
+                        const vw = doc.getTextWidth(vs);
+                        doc.text(vs, lx + blockW - vw, ly);
+                        const d0 = lx + labelW2 + 3, d1 = lx + blockW - vw - 3;
+                        if (d1 > d0) {
+                            doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(160, 160, 160); doc.setLineWidth(0.5);
+                            doc.line(d0, ly - 1.8, d1, ly - 1.8);
+                            doc.setLineDashPattern([], 0);
+                        }
+                    };
+                    let rowsUsed = 0;
+                    sorted.slice(0, perRow * 2).forEach((f, fi) => {
                         const rr = lookupRow(f.id);
-                        const dims = (rr.extW && rr.extH) ? (rr.extW + ' \u00d7 ' + rr.extH + ' ' + (typeof elevUnit !== 'undefined' ? elevUnit : 'in')) : '';
-                        const code = (rr.imageCode || '').trim();
-                        return [(f.letter || '?'), dims, code].filter(Boolean).join(' \u2014 ');
+                        const col = fi % perRow, rw = Math.floor(fi / perRow);
+                        rowsUsed = Math.max(rowsUsed, rw + 1);
+                        const bx = M + col * (blockW + blockGap), by = yTop - 6 + rw * (blockH + 8);
+                        doc.setFont(_font('spec'), 'bold'); doc.setFontSize(8.5); doc.setTextColor(20, 20, 20);
+                        doc.text((f.letter || '?') + '', bx, by);
+                        const dims = (rr.extW && rr.extH) ? (rr.extW + ' \u00d7 ' + rr.extH + ' ' + (typeof elevUnit !== 'undefined' ? elevUnit : 'in')) : '\u2014';
+                        leader('Overall dimensions', dims, bx, by + rowH2);
+                        leader('Image code', (rr.imageCode || '').trim() || '\u2014', bx, by + rowH2 * 2);
                     });
-                    doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8.5); doc.setTextColor(120, 120, 120);
-                    const lineH = 11, maxLW = PW - M * 2;
-                    let line = '', lines = [];
-                    parts.forEach(p => {
-                        const cand = line ? (line + '     ' + p) : p;
-                        if (doc.getTextWidth(cand) > maxLW && line) { lines.push(line); line = p; } else line = cand;
-                    });
-                    if (line) lines.push(line);
-                    lines.slice(0, 3).forEach((ln, li) => doc.text(ln, M, yTop - 6 + li * lineH));
-                    yTop += Math.min(lines.length, 3) * lineH + 2;
+                    yTop += rowsUsed * (blockH + 8) + 2;
                 }
                 const planLv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[(planRow.level || 0)];
                 const havePlan = !!(planLv && planLv.imageData);
@@ -16582,7 +16672,11 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const gutter = 24;
                     const leftW = (PW - M * 2) * 0.26;
                     const colH = yBot - capH - yTop;
-                    let legendBottom = yTop;   // frames legend grows downward from yTop
+                    // Plan first: bottom of the left column, capped so the frame
+                    // legend has room to sit directly above it.
+                    const planMaxH = cfg.variant === 'elevFrames' ? colH * 0.44 : colH;
+                    const pr = await drawPlanAt(M, yBot - capH, leftW, planMaxH);
+                    if (pr) drawCaption('PLAN VIEW', pr.x, yBot - 2);
                     if (cfg.variant === 'elevFrames') {
                         try {
                             const codesOnWall = {};
@@ -16590,28 +16684,29 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                             const allFrames = await _collectProjectFrames();
                             const used = allFrames.filter(f => codesOnWall[(f.code || '').replace(/[-_\s]/g, '').toUpperCase()]);
                             const cols = cfg.legendCols === 2 ? 2 : 1;
-                            const cellW = cols === 2 ? (leftW - 10) / 2 : leftW;
-                            const imgH2 = 34, cellH = imgH2 + 16;
-                            for (let fi = 0; fi < used.length; fi++) {
-                                const f = used[fi];
+                            const cellW = cols === 2 ? (leftW - 8) / 2 : leftW;
+                            const sc = Math.max(0.6, Math.min(1.8, cfg.legendScale || 1));
+                            const imgH2 = Math.round(34 * sc), cellH = imgH2 + 15;
+                            // Thumbnails stack UPWARD from just above the plan.
+                            const stackBottom = (pr ? pr.y : yBot - capH) - 12;
+                            const rowsFit = Math.max(1, Math.floor((stackBottom - yTop) / cellH));
+                            const shown = used.slice(0, rowsFit * cols);
+                            const rowsUsed2 = Math.ceil(shown.length / cols);
+                            const stackTop = stackBottom - rowsUsed2 * cellH;
+                            shown.forEach((f, fi) => {
                                 const col = fi % cols, rowI = Math.floor(fi / cols);
-                                const cx0 = M + col * (cellW + (cols === 2 ? 10 : 0));
-                                const cy0 = yTop + rowI * cellH;
-                                if (cy0 + cellH > yTop + colH * 0.55) break;   // keep room for the plan
+                                const cx0 = M + col * (cellW + (cols === 2 ? 8 : 0));
+                                const cy0 = stackTop + rowI * cellH;
                                 let dx = cx0;
-                                // corner + profile side by side, kept together as a pair
-                                if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, cellW * 0.46, imgH2); try { doc.addImage(f.img, 'JPEG', dx, cy0 + (imgH2 - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, cy0 + (imgH2 - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += cellW * 0.46 + 5; }
-                                else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, cy0 + 3, cellW * 0.4, imgH2 - 6, 'F'); dx += cellW * 0.46 + 5; }
-                                if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, cellW * 0.4, imgH2); try { doc.addImage(f.profileImg, 'PNG', dx, cy0 + (imgH2 - ih3) / 2, iw3, ih3); } catch (e) {} }
+                                // corner + profile side by side, pushed together as one pair
+                                if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, cellW * 0.48, imgH2); try { doc.addImage(f.img, 'JPEG', dx, cy0 + (imgH2 - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, cy0 + (imgH2 - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += iw2 + 3; }
+                                else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, cy0 + 3, cellW * 0.42, imgH2 - 6, 'F'); dx += cellW * 0.42 + 3; }
+                                if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, Math.max(10, cx0 + cellW - dx), imgH2); try { doc.addImage(f.profileImg, 'PNG', dx, cy0 + (imgH2 - ih3) / 2, iw3, ih3); } catch (e) {} }
                                 doc.setFont(_font('sans'), 'bold'); doc.setFontSize(6.5); doc.setTextColor(60, 60, 60);
                                 doc.text((f.code || '').slice(0, 24), cx0, cy0 + imgH2 + 9);
-                                legendBottom = Math.max(legendBottom, cy0 + cellH);
-                            }
+                            });
                         } catch (e) {}
                     }
-                    // Plan sits in the left column below the legend, bottom-anchored.
-                    const pr = await drawPlanAt(M, yBot - capH, leftW, (yBot - capH) - legendBottom - (legendBottom > yTop ? 12 : 0));
-                    if (pr) drawCaption('PLAN VIEW', pr.x, yBot - 2);
                     // Elevation: everything right of the left column, as large as it fits.
                     const ex0 = M + leftW + gutter;
                     const [ew, eh] = fitIn(aspect, PW - M - ex0, colH);
