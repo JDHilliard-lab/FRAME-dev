@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.8';
+const APP_VERSION = '15.9';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -9281,6 +9281,22 @@ inner += '<div style="position:absolute; left:' + (g.planX * 100) + '%; top:' + 
 let _dsActiveTab = 'project';
 function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; return { font: s.font || 'display', size: s.size || 16, color: s.color || '#141414' }; }
 function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || 22, color: s.color || '#141414' }; }
+// Draws a title but never lets it run past the safety margin: shrinks the
+// font size down (never wraps — a wrapped one-line header looks broken)
+// until it fits, or hits a sane floor. A long project ID, a long
+// "id | location" combo, or a bumped-up custom title size were all able to
+// run the title straight off the right edge with no constraint at all —
+// this is the fix for that.
+function _dsFitTitle(doc, text, x, y, maxW, startSize, opts) {
+    let size = startSize;
+    const minSize = 10;
+    doc.setFontSize(size);
+    while (size > minSize && doc.getTextWidth(text) > maxW) {
+        size -= 1;
+        doc.setFontSize(size);
+    }
+    doc.text(text, x, y, opts);
+}
 function _isWireframe() { return !!editorialContent.wireframe; }
 function _specArtOnly(ovKey) { return !!(ovKey && editorialContent.specArtOnly && editorialContent.specArtOnly[ovKey]); }
 const STATUS_DEFS = { concept: { label: 'Concept', color: '#8a8f98' }, review: { label: 'In Review', color: '#c08a2e' }, approved: { label: 'Approved', color: '#1a7f37' }, production: { label: 'Production', color: '#3457d5' } };
@@ -10903,8 +10919,21 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
                 const sx = e.clientX, sy = e.clientY, ox1 = a.x1, oy1 = a.y1, ox2 = a.x2, oy2 = a.y2;
-                const mv = (ev) => { const ddx = (ev.clientX - sx) / w, ddy = (ev.clientY - sy) / hh; a.x1 = ox1 + ddx; a.y1 = oy1 + ddy; a.x2 = ox2 + ddx; a.y2 = oy2 + ddy; redraw(); };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); if (!sel) _dsRenderCenter(); };
+                // Maze paths (a.waypoints defined): grabbing the line between
+                // handles must move the WHOLE shape as one rigid piece —
+                // start, every waypoint, and end all shift by the same delta.
+                // Moving only start/end (the old behaviour) left every corner
+                // in between fixed, stretching the end segments into
+                // diagonals — exactly the reported bug.
+                const isMazeHit = (a.type === 'elbow' && a.waypoints !== undefined);
+                const owp = isMazeHit ? a.waypoints.map(p => [p[0], p[1]]) : null;
+                const mv = (ev) => {
+                    const ddx = (ev.clientX - sx) / w, ddy = (ev.clientY - sy) / hh;
+                    a.x1 = ox1 + ddx; a.y1 = oy1 + ddy; a.x2 = ox2 + ddx; a.y2 = oy2 + ddy;
+                    if (isMazeHit) a.waypoints = owp.map(p => [p[0] + ddx, p[1] + ddy]);
+                    redraw();
+                };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); if (!sel) _dsRenderCenter(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             const isMaze = (a.type === 'elbow' && a.waypoints !== undefined);
@@ -11285,7 +11314,6 @@ function _dsAnnToggleStartCap() { const a = _dsCurrentAnnot(); if (!a || (a.type
 function _dsSelectAnnot(key, idx) { if (typeof _mbSel !== 'undefined') { _mbSel = []; _mbSelAnn = []; _mbSelected = -1; } _dsSelKey = key; _dsSelIdx = idx; _dsSyncToolbar(); _dsRenderCenter(); }
 function _dsSyncToolbar() {
     const editable = !!(typeof _dsCurrentEditablePage === 'function' && _dsCurrentEditablePage());
-    const art = document.getElementById('dsAddArtwork'); if (art) art.style.display = editable ? 'inline-flex' : 'none';
     const gb = document.getElementById('dsMbGuides'); if (gb) gb.style.display = editable ? 'inline-flex' : 'none';
     const lyb = document.getElementById('dsMbLayers'); if (lyb) lyb.style.display = editable ? 'inline-flex' : 'none';
     const _sd = _dsPages && _dsPages[_dsIndex];
@@ -11693,7 +11721,6 @@ function _dsAddPresetNote(text) {
 function _dsAddTextSmart() { if (_dsCurrentEditablePage()) { try { addMoodboardText(); } catch (e) {} } else { _dsAddTextBox(); } }
 function _dsAddImageSmart() { if (_dsCurrentEditablePage()) { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); } else { _dsAddImageBox(); } }
 function _dsAddArrowSmart(kind) { if (_dsCurrentEditablePage()) { try { if (kind === 'elbow' || kind === 'elbowRev') addMoodboardElbow(); else addMoodboardArrow(); } catch (e) {} } else { _dsArmShapeDraw(kind); } }
-function _dsAddArtworkSmart() { if (_dsCurrentEditablePage() && typeof _mbArtPickerOpen === 'function') _mbArtPickerOpen(); }
 function _dsClearMbSel() { if (typeof _mbSelected !== 'undefined' && (_mbSelected >= 0 || (_mbSel && _mbSel.length)) && _mbActiveCanvasId === 'dsLayoutCanvas') { _mbDeselectAll(); try { renderMoodboardCanvas(); } catch (e) {} } }
 function _dsFillShapeWithImage() {
     const a = _dsCurrentAnnot(); if (!a || a.type !== 'shape') return;
@@ -13567,7 +13594,6 @@ function _dsLayoutStyleControls(t) {
     const ab = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:0.64rem;'; b.onclick = fn; addRow.appendChild(b); };
     ab('+ Text', () => { addMoodboardText(); });
     ab('+ Image', () => { const fi = document.getElementById('moodboardFile'); if (fi) fi.click(); });
-    ab('+ Artwork', () => { if (typeof _mbArtPickerOpen === 'function') _mbArtPickerOpen(); });
     ab('Arrow', () => { addMoodboardArrow(); });
     ab('Elbow', () => { addMoodboardElbow(); });
     wrap.appendChild(addRow);
@@ -15325,98 +15351,6 @@ function closeContactsEditor() { document.removeEventListener('keydown', _contac
 function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }); _contactsRender(); _contactsCommit(); }
 function removeContact(i) { if (_contactsDraft[i] && _contactsDraft[i]._repo) return; _contactsDraft.splice(i, 1); _contactsRender(); _contactsCommit(); }
 
-// ── Add project artwork to a layout page (spec-showcase) ────────────────────
-// Bakes a framed-artwork mockup (reusing renderFrameToCanvas, artwork baked in)
-// into an image element, plus a spec text block (buildSpecStrings), so framed
-// pieces can be arranged salon-style with all the normal canvas tools.
-function _mbArtPickerOpen() {
-    const list = document.getElementById('artPickerList'); if (!list) return;
-    const rows = (typeof dashProjectData !== 'undefined' && dashProjectData) ? dashProjectData : [];
-    list.innerHTML = '';
-    if (!rows.length) { list.innerHTML = '<p style="color:var(--text-muted); font-size:0.8rem; margin:6px 2px;">No artworks in the project yet. Add frames in the Frame Dashboard first.</p>'; }
-    rows.forEach((r, i) => {
-        const row = document.createElement('div');
-        row.style.cssText = 'display:flex; align-items:center; justify-content:space-between; gap:8px; padding:6px 4px; border-bottom:1px solid var(--border-color);';
-        const label = document.createElement('div');
-        label.style.cssText = 'font-size:0.76rem; color:var(--text-main); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
-        label.textContent = (r.id || ('Item ' + (i + 1))) + (r.product ? ' · ' + r.product : '') + (r.fCode ? ' · ' + r.fCode : '');
-        const b = document.createElement('button');
-        b.textContent = 'Add'; b.className = 'action-btn'; b.style.cssText = 'width:auto; height:26px; padding:0 12px; font-size:0.7rem; flex:0 0 auto;';
-        b.onclick = () => _mbAddArtwork(i);
-        row.appendChild(label); row.appendChild(b); list.appendChild(row);
-    });
-    const m = document.getElementById('artPickerModal'); if (m) m.style.display = 'flex';
-}
-function _mbCloseArtPicker() { const m = document.getElementById('artPickerModal'); if (m) m.style.display = 'none'; }
-function _artSpecText(r, compact) {
-    let title = (r.id || '') + '';
-    let lines = [];
-    try {
-        const specs = buildSpecStrings(r);
-        const arr = (specs && specs.lines) ? specs.lines.slice() : [];
-        if (compact) {
-            const keep = {};
-            arr.forEach(l => { if (l.label === 'Application') keep.type = l.value; if (l.label === 'Matboard') keep.mat = l.value; });
-            const u = (typeof dashUnit !== 'undefined') ? dashUnit : 'in';
-            const fmtN = (v) => { const n = parseFloat(v); return isNaN(n) ? null : parseFloat(n.toFixed(3)).toString(); };
-            const ow = fmtN(r.extW), oh = fmtN(r.extH);
-            const ul = u === 'in' ? '"' : (' ' + u);
-            const out = [];
-            if (keep.type) out.push('Art Type  ' + keep.type);
-            if (keep.mat) out.push('Matboard  ' + keep.mat);
-            if (ow && oh) out.push('Overall  ' + ow + ul + ' W × ' + oh + ul + ' H');
-            lines = out;
-        } else {
-            lines = arr.map(l => l.label + '  ' + (l.value || ''));
-        }
-    } catch (e) {}
-    return title + (lines.length ? '\n' + lines.join('\n') : '');
-}
-async function _mbBakeArtworkIntoPage(r, compact) {
-    if (!r) return false;
-    let dataUrl = null, aspect = 1.33;
-    try {
-        const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
-        let artworkImg = null;
-        if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
-        const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
-        const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
-        const canvas = out.canvas;
-        const flat = document.createElement('canvas'); flat.width = canvas.width; flat.height = canvas.height;
-        const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(canvas, 0, 0);
-        dataUrl = flat.toDataURL('image/jpeg', 0.85);
-        aspect = canvas.width / canvas.height || 1.33;
-    } catch (e) { return false; }
-    const els = _mbEls();
-    const n = els.length;
-    const ox = 0.07 + (n % 3) * 0.30;
-    const oy = 0.14 + (Math.floor(n / 3) % 2) * 0.06;
-    const w = 0.26;
-    const h = w * (936 / 540) / (aspect || 1.33);
-    const z = els.reduce((m, e) => Math.max(m, e.z || 0), 0) + 1;
-    els.push({ type: 'image', img: dataUrl, caption: '', aspect: aspect, x: ox, y: oy, w: w, h: h, zoom: 1, panX: 0, panY: 0, capSize: 0.02, capSide: 'bottom', z: z });
-    els.push({ type: 'text', text: _artSpecText(r, compact), x: ox, y: Math.min(0.9, oy + h + 0.015), w: w, size: 0.017, color: '#333333', font: 'sans', z: z + 1 });
-    return true;
-}
-function _artCompactOn() { const c = document.getElementById('artCompactSpec'); return !!(c && c.checked); }
-async function _mbAddArtwork(i) {
-    const r = (dashProjectData || [])[i];
-    const ok = await _mbBakeArtworkIntoPage(r, _artCompactOn());
-    if (!ok) { if (typeof showInfoModal === 'function') showInfoModal('Could not render', 'That artwork could not be rendered into a mockup.'); return; }
-    if (typeof pushHistory === 'function') pushHistory();
-    renderMoodboardCanvas();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    _mbCloseArtPicker();
-}
-async function _mbAddAllArtwork() {
-    const rows = (dashProjectData || []);
-    if (!rows.length) return;
-    const compact = _artCompactOn();
-    let any = false;
-    for (const r of rows) { const ok = await _mbBakeArtworkIntoPage(r, compact); if (ok) any = true; }
-    if (any) { if (typeof pushHistory === 'function') pushHistory(); renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
-    _mbCloseArtPicker();
-}
 function _mbKeyDelete(e) {
     if (_mbPlacing) return;
     if (e.key !== 'Delete' && e.key !== 'Backspace') return;
@@ -17438,9 +17372,10 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
         // — Item code (top-left, large) — uses the deck title style —
         const _ts = _titleStyle(); const _trgb = _annHexToRgb(_ts.color);
         doc.setFont(_font(_ts.font), _ts.font === 'serif' ? 'normal' : 'bold');
-        doc.setFontSize(Math.max(_ts.size, 20));
         doc.setTextColor(_trgb.r, _trgb.g, _trgb.b);
-        doc.text((r.id || '').toString(), M, M + 14);
+        // Shrinks to fit rather than running off the right edge — a long
+        // item ID (or a bumped-up custom title size) had no width limit at all.
+        _dsFitTitle(doc, (r.id || '').toString(), M, M + 14, PW - M * 2, Math.max(_ts.size, 20));
 
         // — Framed artwork render (reuse the per-frame canvas, artwork baked in) —
         // (No separate frame swatch chip — the framed mockup below already shows
@@ -17592,9 +17527,12 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         const titleText = (tf === 'id' ? (r.id || '') : tf === 'idLocation' ? ((r.id || '') + (r.location ? ' | ' + r.location : '')) : tf === 'product' ? (r.product || '') : (specs.application || r.product || r.id || 'SPECIFICATION')).toString().toUpperCase();
         const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
         doc.setFont(_font(ts.font), ts.font === 'serif' ? 'normal' : 'bold');
-        doc.setFontSize(ts.size);
         doc.setTextColor(trgb.r, trgb.g, trgb.b);
-        doc.text(titleText, px(tpl.title.x), py(tpl.title.y), tpl.title.align ? { align: tpl.title.align } : undefined);
+        // A long ID, a long "id | location" combo, or a bumped-up custom
+        // title size had no width limit and could run off the right edge —
+        // shrink to fit the safe area instead.
+        const M2 = ctx.M || 40;
+        _dsFitTitle(doc, titleText, px(tpl.title.x), py(tpl.title.y), (PW - M2) - px(tpl.title.x), ts.size, tpl.title.align ? { align: tpl.title.align } : undefined);
     }
 
     // — Artwork (baked frame mockup) + code beneath —
