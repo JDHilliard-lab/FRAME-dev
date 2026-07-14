@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.6';
+const APP_VERSION = '15.7';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10704,6 +10704,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             // Middle-segment handle (elbow/curve only) — drag to slide the bend.
             const bendHandle = mk('rect', { width: 9, height: 9, fill: '#fff', stroke: '#6a6aff', 'stroke-width': 2 });
             let lastPts = null;
+            let _wpUISync = null;   // set once the waypoint-editing UI exists (elbow with a.waypoints)
             const redraw = () => {
                 const X1 = (a.x1 || 0) * w, Y1 = (a.y1 || 0) * hh, X2 = (a.x2 || 0) * w, Y2 = (a.y2 || 0) * hh;
                 const sw = Math.max(1, (a.weight || 2) * (w / 936)), col = a.color || '#c0392b';
@@ -10723,15 +10724,16 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 hit.setAttribute('points', ptStr); hit.setAttribute('stroke-width', Math.max(14, sw + 12));
                 hEnds[0].setAttribute('cx', X1); hEnds[0].setAttribute('cy', Y1);
                 hEnds[1].setAttribute('cx', X2); hEnds[1].setAttribute('cy', Y2);
-                if ((a.type === 'elbow' || a.type === 'curve') && pts.length >= 3) {
+                if ((a.type === 'elbow' || a.type === 'curve') && pts.length >= 3 && a.waypoints === undefined) {
                     const mi = Math.floor(pts.length / 2);
                     const mp = pts[mi];
                     bendHandle.setAttribute('x', mp[0] - 4.5); bendHandle.setAttribute('y', mp[1] - 4.5);
                     bendHandle.style.display = '';
                 } else { bendHandle.style.display = 'none'; }
+                if (_wpUISync) _wpUISync();
             };
             redraw();
-            svg.appendChild(poly); svg.appendChild(startDot); svg.appendChild(headP); svg.appendChild(hit);
+            svg.appendChild(poly); svg.appendChild(startDot); svg.appendChild(headP); svg.appendChild(hit); svg.appendChild(bendHandle);
             hit.onmousedown = (e) => {
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
@@ -10752,7 +10754,94 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     };
                     svg.appendChild(c);
                 });
-                if (a.type === 'elbow' || a.type === 'curve') {
+                // Multi-point "maze" paths (a.waypoints): every point gets its
+                // own draggable dot, and a small square sits at each segment's
+                // midpoint — drag one to pull a brand-new corner out of that
+                // segment. The old single bend handle doesn't apply here (it
+                // silently did nothing, which was the reported bug) so it's
+                // skipped entirely in favour of this.
+                if (a.type === 'elbow' && a.waypoints !== undefined) {
+                    bendHandle.style.display = 'none';
+                    const wpDots = [], segHandles = [];
+                    const clearExtra = () => { wpDots.forEach(d => d.remove()); segHandles.forEach(s => s.remove()); wpDots.length = 0; segHandles.length = 0; };
+                    const mkWpDot = (k) => {
+                        const d = mk('circle', { r: 5.5, fill: '#fff', stroke: '#6a6aff', 'stroke-width': 2 });
+                        d.style.cssText = 'pointer-events:all; cursor:move;';
+                        d.onmousedown = (e) => {
+                            e.preventDefault(); e.stopPropagation();
+                            const rect = svg.getBoundingClientRect();
+                            const mv = (ev) => {
+                                a.waypoints[k] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))];
+                                redraw();
+                            };
+                            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                        };
+                        svg.appendChild(d);
+                        return d;
+                    };
+                    const mkSegHandle = (segIdx) => {
+                        const s = mk('rect', { width: 8, height: 8, fill: '#6a6aff', stroke: '#fff', 'stroke-width': 1.5 });
+                        s.style.cssText = 'pointer-events:all; cursor:crosshair;';
+                        s.title = 'Drag to add a corner here';
+                        s.onmousedown = (e) => {
+                            e.preventDefault(); e.stopPropagation();
+                            const rect = svg.getBoundingClientRect();
+                            const fx = Math.max(0, Math.min(1, (e.clientX - rect.left) / w)), fy = Math.max(0, Math.min(1, (e.clientY - rect.top) / hh));
+                            a.waypoints.splice(segIdx, 0, [fx, fy]);
+                            redraw();
+                            const newIdx = segIdx;
+                            const mv = (ev) => {
+                                a.waypoints[newIdx] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))];
+                                redraw();
+                            };
+                            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                        };
+                        svg.appendChild(s);
+                        return s;
+                    };
+                    const syncWaypointUI = () => {
+                        const pts2 = lastPts || [];
+                        const n = a.waypoints.length;
+                        while (wpDots.length < n) wpDots.push(mkWpDot(wpDots.length));
+                        while (wpDots.length > n) wpDots.pop().remove();
+                        const segCount = Math.max(0, pts2.length - 1);
+                        while (segHandles.length < segCount) segHandles.push(mkSegHandle(segHandles.length));
+                        while (segHandles.length > segCount) segHandles.pop().remove();
+                        // Re-bind each handle's insertion index (splice position shifts
+                        // as points are added/removed) and reposition everything.
+                        wpDots.forEach((d, k) => {
+                            d.onmousedown = null;
+                            d.style.cssText = 'pointer-events:all; cursor:move;';
+                            d.onmousedown = (e) => {
+                                e.preventDefault(); e.stopPropagation();
+                                const rect = svg.getBoundingClientRect();
+                                const mv = (ev) => { a.waypoints[k] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))]; redraw(); };
+                                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                            };
+                            const p = pts2[k + 1]; if (p) { d.setAttribute('cx', p[0]); d.setAttribute('cy', p[1]); }
+                        });
+                        segHandles.forEach((s, si) => {
+                            s.onmousedown = null;
+                            s.onmousedown = (e) => {
+                                e.preventDefault(); e.stopPropagation();
+                                const rect = svg.getBoundingClientRect();
+                                const fx = Math.max(0, Math.min(1, (e.clientX - rect.left) / w)), fy = Math.max(0, Math.min(1, (e.clientY - rect.top) / hh));
+                                a.waypoints.splice(si, 0, [fx, fy]);
+                                redraw();
+                                const mv = (ev) => { a.waypoints[si] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))]; redraw(); };
+                                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                                document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+                            };
+                            const p0 = pts2[si], p1 = pts2[si + 1];
+                            if (p0 && p1) { s.setAttribute('x', (p0[0] + p1[0]) / 2 - 4); s.setAttribute('y', (p0[1] + p1[1]) / 2 - 4); }
+                        });
+                    };
+                    _wpUISync = syncWaypointUI;
+                    syncWaypointUI();
+                } else if (a.type === 'elbow' || a.type === 'curve') {
                     bendHandle.style.cssText = 'pointer-events:all; cursor:' + (a.type === 'elbow' ? 'ew-resize' : 'move') + ';';
                     bendHandle.onmousedown = (e) => {
                         e.preventDefault(); e.stopPropagation();
@@ -11204,7 +11293,10 @@ function _arrowPathPoints(a, X1, Y1, X2, Y2, scaleX, scaleY) {
     // corner at a time (the "maze" tool) rather than a single computed bend.
     // Waypoints are stored as page fractions, same as x1/y1/x2/y2, so they
     // need the caller's own w/hh (or PW/PH) scale to land in pixel space.
-    if (a.type === 'elbow' && a.waypoints && a.waypoints.length && scaleX && scaleY) {
+    if (a.type === 'elbow' && a.waypoints !== undefined && scaleX && scaleY) {
+        // Defined waypoints (even an EMPTY array — a straight 2-click maze
+        // path with no corners yet) means this came from the multi-point
+        // tool: draw the real path, never the classic single-bend geometry.
         const pts = [[X1, Y1]];
         a.waypoints.forEach(p => pts.push([p[0] * scaleX, p[1] * scaleY]));
         pts.push([X2, Y2]);
@@ -12335,7 +12427,7 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
     if (desc.kind === 'spec') return await renderSpecPageCanvas(desc, onProgress, _scale);
     const PW = 936, PH = 540;
     const rec = new CanvasPdfRec(PW, PH);
-    const logos = {};
+    let logos = {}; try { logos = await _getPdfLogos(); } catch (e) {}
     const mm = (typeof window !== 'undefined' && window._specPdfMeta) ? window._specPdfMeta : {};
     const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
     const meta = { code: g('specPdfCode') || mm.code || '', version: g('specPdfVersion') || mm.version || '', location: g('specPdfLocation') || mm.location || '' };
@@ -14214,6 +14306,28 @@ function _dsSave() {
     _dsRefresh();
 }
 window.addEventListener('resize', () => { const m = document.getElementById('deckStudioModal'); if (m && m.style.display && m.style.display !== 'none' && _dsActiveTab === 'pages') _dsRenderCenter(); });
+
+// Footer preview must reflect the SAME fields the exported PDF footer reads
+// (project name, spec code/version/location) the moment they change, on
+// whichever page is open — not just after navigating away and back. Client
+// logo add/remove already triggers this elsewhere; this covers the text
+// fields the same way.
+['g_projName', 'g_date', 'specPdfCode', 'specPdfVersion', 'specPdfLocation'].forEach(id => {
+    const attach = () => {
+        const el = document.getElementById(id);
+        if (!el || el._dsFooterWired) return;
+        el._dsFooterWired = true;
+        el.addEventListener('input', () => {
+            _dsThumbCache = {};
+            const m = document.getElementById('deckStudioModal');
+            if (m && m.style.display && m.style.display !== 'none' && _dsActiveTab === 'pages') { _dsRenderCenter(); try { _dsRenderRail(); } catch (e) {} }
+        });
+    };
+    attach();
+    // The field may not exist yet at load time (export-setup modal is built
+    // lazily) — retry once shortly after startup.
+    setTimeout(attach, 800);
+});
 
 // ── Presentation PDF setup modal ──────────────────────────────────────────
 // The "Spec PDF" button opens this instead of exporting immediately. It
@@ -16462,14 +16576,16 @@ function _dsInstallGuideControls(body, desc, opts) {
     if (opts.variants !== false && cfg().variant === 'elevFrames') {
         slider('Frame thumbnail size', 0.6, 1.8, 0.1, cfg().legendScale, (v) => Math.round(v * 100) + '%', (v) => commit({ legendScale: v }));
     }
-    if (opts.variants !== false && cfg().variant !== 'elevOnly') {
-        slider('Spacing between frames / legend / plan', 2, 24, 1, cfg().sectionGap, (v) => Math.round(v) + 'pt', (v) => commit({ sectionGap: v }));
-        if (cfg().plan === 'zoom') {
-            slider('Zoomed plan size', 0.4, 1, 0.05, cfg().planScale, (v) => Math.round(v * 100) + '%', (v) => commit({ planScale: v }));
-            const psNote = document.createElement('p'); psNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:2px 0 0; line-height:1.4;';
-            psNote.textContent = 'Scales down anchored to the plan\u2019s bottom-left corner \u2014 frees up room above it.';
-            body.appendChild(psNote);
-        }
+    if (opts.variants !== false && cfg().variant !== 'elevOnly' && cfg().plan === 'zoom') {
+        slider('Zoomed plan size', 0.4, 1, 0.05, cfg().planScale, (v) => Math.round(v * 100) + '%', (v) => commit({ planScale: v }));
+        const psNote = document.createElement('p'); psNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:2px 0 0; line-height:1.4;';
+        psNote.textContent = 'Scales down anchored to the plan\u2019s bottom-left corner \u2014 frees up room above it.';
+        body.appendChild(psNote);
+    }
+    if (opts.variants !== false && cfg().variant === 'elevFrames') {
+        const fitNote = document.createElement('p'); fitNote.style.cssText = 'font-size:0.56rem; color:var(--text-muted); margin:4px 0 0; line-height:1.4;';
+        fitNote.textContent = 'Frame thumbnails sit directly above the plan, below the legend. If there isn\u2019t room for them without squeezing the plan too small, they drop automatically \u2014 nothing to configure.';
+        body.appendChild(fitNote);
     }
     // Letter legend (spec-style blocks) below the title.
     secLbl('Legend');
@@ -16520,7 +16636,6 @@ function _igCfg(ovKey) {
         legend: !!g.legend,                     // letter/size/image-code spec legend under the title
         legendScale: (typeof g.legendScale === 'number') ? g.legendScale : 1,   // frame thumbnail size
         legendW: (typeof g.legendW === 'number') ? g.legendW : 170,             // letter-legend spec block width (pt)
-        sectionGap: (typeof g.sectionGap === 'number') ? g.sectionGap : 6,      // spacing between frames/legend/plan sections
         planScale: (typeof g.planScale === 'number') ? g.planScale : 1,        // zoomed-plan display size, anchored bottom-left
         measure: Object.assign({ spacing: false, wallDims: true, hangHeight: false }, g.measure || {})
     };
@@ -16533,7 +16648,6 @@ function _igCfg(ovKey) {
         legend: (ov.legend !== undefined) ? !!ov.legend : base.legend,
         legendScale: (typeof ov.legendScale === 'number') ? ov.legendScale : base.legendScale,
         legendW: (typeof ov.legendW === 'number') ? ov.legendW : base.legendW,
-        sectionGap: (typeof ov.sectionGap === 'number') ? ov.sectionGap : base.sectionGap,
         planScale: (typeof ov.planScale === 'number') ? ov.planScale : base.planScale,
         measure: Object.assign({}, base.measure, ov.measure || {})
     };
@@ -16541,7 +16655,7 @@ function _igCfg(ovKey) {
 function _igSet(patch, ovKey) {
     editorialContent.installGuide = editorialContent.installGuide || {};
     const g = editorialContent.installGuide;
-    const simple = ['variant', 'plan', 'legendCols', 'legend', 'legendScale', 'legendW', 'sectionGap', 'planScale'];
+    const simple = ['variant', 'plan', 'legendCols', 'legend', 'legendScale', 'legendW', 'planScale'];
     if (ovKey) {
         g.perPage = g.perPage || {};
         const cur = g.perPage[ovKey] || {};
@@ -16796,7 +16910,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 // dimensions .... 24x24 in" then "Image code .... FJH.2503366"),
                 // starting at topY, and returns the Y just past the last block.
                 // Never truncates — every frame's letter must always appear.
-                const sectionGap = Math.max(2, Math.min(24, cfg.sectionGap || 6));
+                const sectionGap = 6;   // fixed, tight — not user-adjustable (see note below)
                 const drawLegendBlocks = (lx, topY, blockW) => {
                     const rowH2 = 10, blockH = 2 * rowH2 + 5;
                     const leader = (label, value, ly) => {
@@ -16824,8 +16938,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     });
                     return topY + sorted.length * (blockH + sectionGap);
                 };
-                // Light grey stroke around every image container (elevation and
-                // plan alike) — helps separate stacked specs/thumbnails visually.
+                // Light grey stroke — plan view only. Elevations never get one.
                 const strokeImg = (ix, iy, iw2, ih2) => { doc.setDrawColor(210, 210, 210); doc.setLineWidth(0.75); doc.rect(ix, iy, iw2, ih2, 'S'); };
                 if (cfg.variant === 'elevOnly' || !havePlan) {
                     // Elevation fills the remaining width as large as it can,
@@ -16837,18 +16950,21 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const [ew, eh] = fitIn(aspect, PW - M - ex0, yBot - capH - yTop);
                     const ex = ex0 + ((PW - M - ex0) - ew) / 2, ey = yBot - capH - eh;
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
-                    strokeImg(ex, ey, ew, eh);
                     drawCaption(capText('Elevation', zoneName), ex, yBot - 2);
                 } else {
-                    // 'elevPlan' and 'elevFrames': everything extra (frame
-                    // thumbnails, the letter legend) stacks ABOVE the plan in
-                    // the same left column, so the elevation is only ever
-                    // pushed over by that ONE column — never squeezed further
-                    // by a separate legend column.
+                    // 'elevPlan' and 'elevFrames': everything extra (the letter
+                    // legend, frame thumbnails) stacks ABOVE the plan in the
+                    // same left column — legend first, frames directly above
+                    // the plan — so the elevation is only ever pushed over by
+                    // that ONE column, never squeezed further.
                     const gutter = 24;
                     const leftW = (PW - M * 2) * 0.26;
                     const colH = yBot - capH - yTop;
                     let colTop = yTop;
+                    if (legendOn) {
+                        const blockW = Math.min(leftW, legendBlockWDefault);
+                        colTop = drawLegendBlocks(M, colTop, blockW) + sectionGap;
+                    }
                     if (cfg.variant === 'elevFrames') {
                         try {
                             const codesOnWall = {};
@@ -16856,30 +16972,33 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                             const allFrames = await _collectProjectFrames();
                             const used = allFrames.filter(f => codesOnWall[(f.code || '').replace(/[-_\s]/g, '').toUpperCase()]);
                             if (used.length) {
-                                // One row. If there's more than one frame, shrink
-                                // cells evenly to fit rather than wrapping.
                                 const sc = Math.max(0.6, Math.min(1.8, cfg.legendScale || 1));
                                 const imgH2 = Math.max(18, Math.round(34 * sc));
-                                const cellGap = 6;
-                                const cellW = Math.max(30, (leftW - cellGap * (used.length - 1)) / used.length);
-                                const rowY = colTop;
-                                used.forEach((f, fi) => {
-                                    const cx0 = M + fi * (cellW + cellGap);
-                                    let dx = cx0;
-                                    // corner + profile pushed together as one tight pair
-                                    if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, cellW * 0.5, imgH2); try { doc.addImage(f.img, 'JPEG', dx, rowY + (imgH2 - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, rowY + (imgH2 - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += iw2 + 3; }
-                                    else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, rowY + 3, cellW * 0.44, imgH2 - 6, 'F'); dx += cellW * 0.44 + 3; }
-                                    if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, Math.max(10, cx0 + cellW - dx), imgH2); try { doc.addImage(f.profileImg, 'PNG', dx, rowY + (imgH2 - ih3) / 2, iw3, ih3); } catch (e) {} }
-                                    doc.setFont(_font('sans'), 'bold'); doc.setFontSize(6.5); doc.setTextColor(60, 60, 60);
-                                    doc.text((f.code || '').slice(0, 18), cx0, rowY + imgH2 + 9);
-                                });
-                                colTop += imgH2 + 9 + sectionGap;
+                                const rowNeededH = imgH2 + 9 + sectionGap;
+                                // Dynamic design decision, not a manual slider: if
+                                // the thumbnails don't fit above a sane minimum
+                                // plan height, drop them rather than let the
+                                // layout break (specs and thumbnails vanishing
+                                // was the reported bug with the old spacing slider).
+                                const minPlanH = 90;
+                                if (colTop + rowNeededH + minPlanH <= yBot - capH) {
+                                    const cellGap = 6;
+                                    const cellW = Math.max(30, (leftW - cellGap * (used.length - 1)) / used.length);
+                                    const rowY = colTop;
+                                    used.forEach((f, fi) => {
+                                        const cx0 = M + fi * (cellW + cellGap);
+                                        let dx = cx0;
+                                        // corner + profile pushed together as one tight pair
+                                        if (f.img) { const asp2 = (f.img.naturalWidth || 1) / (f.img.naturalHeight || 1); const [iw2, ih2] = fitIn(asp2, cellW * 0.5, imgH2); try { doc.addImage(f.img, 'JPEG', dx, rowY + (imgH2 - ih2) / 2, iw2, ih2); } catch (e) { try { doc.addImage(f.img, 'PNG', dx, rowY + (imgH2 - ih2) / 2, iw2, ih2); } catch (e2) {} } dx += iw2 + 3; }
+                                        else if (f.color) { doc.setFillColor.apply(doc, Object.values(_annHexToRgb(f.color))); doc.rect(dx, rowY + 3, cellW * 0.44, imgH2 - 6, 'F'); dx += cellW * 0.44 + 3; }
+                                        if (f.profileImg) { const asp3 = (f.profileImg.naturalWidth || 1) / (f.profileImg.naturalHeight || 1); const [iw3, ih3] = fitIn(asp3, Math.max(10, cx0 + cellW - dx), imgH2); try { doc.addImage(f.profileImg, 'PNG', dx, rowY + (imgH2 - ih3) / 2, iw3, ih3); } catch (e) {} }
+                                        doc.setFont(_font('sans'), 'bold'); doc.setFontSize(6.5); doc.setTextColor(60, 60, 60);
+                                        doc.text((f.code || '').slice(0, 18), cx0, rowY + imgH2 + 9);
+                                    });
+                                    colTop += rowNeededH;
+                                }
                             }
                         } catch (e) {}
-                    }
-                    if (legendOn) {
-                        const blockW = Math.min(leftW, legendBlockWDefault);
-                        colTop = drawLegendBlocks(M, colTop, blockW) + sectionGap;
                     }
                     const planScale = Math.max(0.4, Math.min(1, cfg.planScale || 1));
                     const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, ((yBot - capH) - colTop) * planScale);
@@ -16889,7 +17008,6 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const [ew, eh] = fitIn(aspect, PW - M - ex0, colH);
                     const ex = ex0 + ((PW - M - ex0) - ew) / 2, ey = yBot - capH - eh;
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
-                    strokeImg(ex, ey, ew, eh);
                     drawCaption(capText('Elevation', zoneName), ex, yBot - 2);
                 }
                 _drawPdfFooter(doc, logos, pageNum, meta);
@@ -23609,8 +23727,14 @@ function _loadImg(dataUrl) {
     return new Promise((resolve) => {
         if (!dataUrl) { resolve(null); return; }
         const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = () => resolve(null);
+        let settled = false;
+        const done = (v) => { if (settled) return; settled = true; clearTimeout(timer); resolve(v); };
+        img.onload = () => done(img);
+        img.onerror = () => done(null);
+        // Defensive timeout: a broken/missing/slow asset path must never hang
+        // whatever awaited this (footer logo lookups, preview renders, etc.)
+        // forever — resolve to null and move on instead.
+        const timer = setTimeout(() => done(null), 4000);
         img.src = dataUrl;
     });
 }
