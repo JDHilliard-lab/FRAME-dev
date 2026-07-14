@@ -1189,7 +1189,6 @@
             <div id="dsToolbar" style="flex-shrink:0; border-bottom:1px solid var(--border-color); padding:7px 12px; display:flex; align-items:center; gap:5px; flex-wrap:wrap; row-gap:6px; background:var(--bg-panel);">
                 <button onclick="_dsAddTextSmart()" class="action-btn btn-secondary" title="Add text — click for a plain text box, use the caret for note presets and a lorem-ipsum paragraph" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><span style="font:700 15px Georgia,serif;">T</span></button><button id="dsTextMenuBtn" onclick="_dsOpenTextMenu(event)" title="Text options — note presets, lorem-ipsum paragraph" class="action-btn btn-secondary" style="width:16px; height:30px; min-width:16px; padding:0; margin-left:-3px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="4,6 20,6 12,16"/></svg></button>
                 
-                <button id="dsAddArtwork" onclick="_dsAddArtworkSmart()" class="action-btn btn-secondary" title="Add project artwork (framed mockup + spec)" style="width:auto; height:30px; min-width:30px; padding:0 9px; box-sizing:border-box; display:none; align-items:center; justify-content:center; font-size:0.66rem; font-weight:700;">Art</button>
                 
                 <button id="dsArrowMainBtn" onclick="_dsArrowMainClick()" title="Add arrow — click to draw, click again to pick a different shape" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="4"/><polyline points="10 4 20 4 20 14"/></svg></button>
                 <button id="dsArrowMenuBtn" onclick="_dsOpenArrowShapeMenu(event)" title="Choose arrow shape (straight, elbow, curve)" class="action-btn btn-secondary" style="width:16px; height:30px; min-width:16px; padding:0; margin-left:-3px; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="4,6 20,6 12,16"/></svg></button>
@@ -1317,7 +1316,6 @@
                 <button class="action-btn btn-secondary" title="Add elbow arrow" style="width:34px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="addMoodboardElbow()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 4 5 15 17 15"/><polyline points="13 11 17 15 13 19"/></svg></button>
                 <button class="action-btn btn-secondary" title="Default styles" style="width:34px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="openDeckStyles()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
                 <span id="mbModeLabel" style="font-size:0.78rem; color:var(--text-muted); margin-left:8px;"></span>
-                <button class="action-btn btn-secondary" title="Add project artwork (framed mockup + spec)" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="_mbArtPickerOpen()">Artwork</button>
                 <button class="action-btn btn-secondary" title="Layout templates" style="width:auto; height:30px; padding:0 12px; font-size:0.75rem;" onclick="openTemplatesModal()">Templates</button>
                 <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="closeMoodboardModal()">Done</button>
                 <input type="file" id="moodboardFile" accept="image/*" multiple style="display:none;" onchange="addMoodboardImages(event)">
@@ -1432,24 +1430,6 @@
 </div>
 
 <!-- Artwork picker: drop a project frame (mockup + spec) onto a layout page -->
-<div id="artPickerModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:10002; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
-    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:92vw; max-width:560px; max-height:82vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
-        <div style="padding:14px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
-            <div>
-                <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Add artwork</h3>
-                <p style="margin:2px 0 0; font-size:0.7rem; color:var(--text-muted);">Drops a framed mockup + its spec onto this page. Arrange them salon-style.</p>
-            </div>
-            <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:0.75rem;" onclick="_mbCloseArtPicker()">Done</button>
-        </div>
-        <div style="padding:8px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-size:0.74rem; color:var(--text-main);"><input type="checkbox" id="artCompactSpec" style="cursor:pointer;"> Compact spec <span style="color:var(--text-muted); font-size:0.68rem;">(Art Type · Matboard · Overall)</span></label>
-            <span style="flex:1;"></span>
-            <button class="action-btn btn-secondary" style="width:auto; height:28px; padding:0 12px; font-size:0.72rem;" onclick="_mbAddAllArtwork()">Add all to this page</button>
-        </div>
-        <div id="artPickerList" style="flex:1; overflow-y:auto; padding:10px 18px;"><!-- artwork rows --></div>
-    </div>
-</div>
-
 <!-- Contacts editor: structured add/remove for the Thank You page -->
 <div id="contactsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:10001; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
     <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; width:92vw; max-width:680px; max-height:84vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
