@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.7';
+const APP_VERSION = '15.8';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -651,7 +651,7 @@ const SPEC_TEMPLATES = {
         title: { x: .06, y: .15, size: 19, align: 'left', field: 'id' },
         spec: { x: .06, y: .2, w: .4 },
         elevation: { x: .06, y: .62, w: .4, h: .26 },
-        artwork: { x: .49, y: .16, w: .47, h: .76, align: 'right' },
+        artwork: { x: .49, y: .16, w: .46, h: .76, align: 'right' },
         code: { align: 'right', size: 13, gap: 14, field: 'imageCode' }
     },
     installGuide: {
@@ -678,7 +678,7 @@ const SPEC_TEMPLATES = {
         spec: { x: .025, y: .21, w: .31 },
         plan: { x: .025, y: .60, w: .16, h: .28, zoom: 3, matchElev: true, square: true },
         elevation: { x: .20, y: .60, w: .155, h: .28, alignBottom: true },
-        artwork: { x: .42, y: .12, w: .56, h: .76, align: 'right' },
+        artwork: { x: .42, y: .12, w: .53, h: .76, align: 'right' },
         code: { align: 'right', size: 11, gap: 14, field: 'imageCode' }
     },
     frameSpecDetail: {
@@ -692,7 +692,7 @@ const SPEC_TEMPLATES = {
         frameDetail: { anchorAbovePlan: true, h: .16, gap: .022 },
         plan: { x: .025, y: .62, w: .16, h: .26, zoom: 3, matchElev: true, square: true },
         elevation: { x: .20, y: .62, w: .155, h: .26, alignBottom: true },
-        artwork: { x: .42, y: .12, w: .56, h: .76, align: 'right' },
+        artwork: { x: .42, y: .12, w: .53, h: .76, align: 'right' },
         code: { align: 'right', size: 11, gap: 14, field: 'imageCode' }
     },
     custom: {
@@ -9603,6 +9603,71 @@ function _dsDuplicateLayoutPage(desc) {
     _dsTplSel = null;
     _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
 }
+// ── Preflight spelling scan ─────────────────────────────────────────────────
+// A compact common-word dictionary (not exhaustive) plus light stemming, so
+// ordinary prose gets checked without a heavy external dependency. Anything
+// not recognised is flagged for review, never auto-corrected \u2014 there is no
+// browser API that lets a page read or apply the browser's/Grammarly's own
+// spellcheck suggestions, so FRAME can't hook into that directly. This scan
+// is a separate, deck-wide pass instead: run it, jump straight to every page
+// with a possible typo, and fix it there.
+const _DS_SPELL_DICT = new Set(['a', 'about', 'above', 'across', 'after', 'again', 'against', 'all', 'almost', 'alone', 'along', 'already', 'also', 'although', 'always', 'am', 'among', 'an', 'and', 'another', 'any', 'anyone', 'anything', 'appear', 'appears', 'approach', 'approx', 'approximate', 'are', 'area', 'around', 'arrange', 'arrangement', 'art', 'artist', 'artistic', 'artwork', 'as', 'ask', 'at', 'attach', 'available', 'avoid', 'away', 'back', 'background', 'be', 'because', 'become', 'been', 'before', 'begin', 'behind', 'being', 'below', 'beneath', 'beside', 'best', 'better', 'between', 'beyond', 'big', 'black', 'blank', 'blue', 'board', 'body', 'both', 'bottom', 'box', 'breaker', 'bring', 'brought', 'build', 'building', 'built', 'but', 'by', 'call', 'called', 'came', 'can', 'cannot', 'canvas', 'capture', 'care', 'case', 'catalog', 'center', 'centered', 'certain', 'change', 'changed', 'choose', 'chosen', 'city', 'classic', 'clean', 'clear', 'client', 'close', 'closer', 'code', 'collection', 'color', 'colors', 'coloured', 'column', 'come', 'comes', 'coming', 'complete', 'completed', 'complex', 'composed', 'comprises', 'concept', 'condition', 'connect', 'consider', 'considered', 'consistent', 'consists', 'contact', 'contain', 'contains', 'contemporary', 'content', 'continue', 'contrast', 'control', 'convert', 'copy', 'corner', 'correct', 'could', 'count', 'country', 'cover', 'crate', 'create', 'created', 'creation', 'crisp', 'crop', 'cropped', 'curated', 'curator', 'current', 'custom', 'cut', 'damage', 'dark', 'dashboard', 'date', 'day', 'days', 'deck', 'decor', 'deep', 'define', 'delivered', 'depth', 'described', 'description', 'design', 'designed', 'designer', 'detail', 'details', 'determine', 'developed', 'dialogue', 'different', 'dimension', 'dimensions', 'direction', 'directly', 'display', 'displayed', 'distance', 'document', 'does', 'done', 'door', 'down', 'drag', 'draw', 'drawing', 'drop', 'due', 'during', 'each', 'early', 'edge', 'edit', 'edited', 'editorial', 'effect', 'either', 'elevation', 'else', 'empty', 'end', 'ensure', 'enter', 'entire', 'environment', 'equal', 'equally', 'especially', 'even', 'evening', 'event', 'ever', 'every', 'everything', 'exact', 'example', 'except', 'exhibit', 'exhibition', 'existing', 'exit', 'export', 'expose', 'extend', 'extra', 'facade', 'face', 'facing', 'fact', 'fair', 'fall', 'family', 'far', 'feature', 'featured', 'few', 'field', 'figure', 'file', 'fill', 'final', 'find', 'fine', 'first', 'fit', 'fits', 'fitting', 'fixed', 'floor', 'floorplan', 'flow', 'focal', 'focus', 'following', 'font', 'foot', 'for', 'form', 'format', 'forward', 'found', 'four', 'frame', 'framed', 'frames', 'framing', 'free', 'french', 'from', 'front', 'full', 'function', 'further', 'gallery', 'gap', 'gave', 'general', 'get', 'given', 'giving', 'glass', 'go', 'goes', 'going', 'gold', 'good', 'grade', 'gray', 'great', 'grid', 'group', 'grouping', 'guide', 'guides', 'had', 'half', 'hall', 'hallway', 'hand', 'handling', 'hang', 'hanging', 'hard', 'has', 'have', 'having', 'height', 'held', 'help', 'here', 'high', 'higher', 'highlight', 'hold', 'home', 'hour', 'house', 'how', 'however', 'hung', 'idea', 'identify', 'if', 'image', 'images', 'important', 'improve', 'in', 'inch', 'inches', 'include', 'included', 'includes', 'including', 'indicate', 'inline', 'inside', 'inspiration', 'install', 'installation', 'installed', 'installing', 'instead', 'into', 'is', 'issue', 'item', 'its', 'itself', 'just', 'keep', 'key', 'kind', 'know', 'known', 'label', 'labeled', 'large', 'larger', 'last', 'later', 'layer', 'layers', 'layout', 'lead', 'least', 'leave', 'left', 'len', 'length', 'less', 'let', 'letter', 'level', 'light', 'lighter', 'like', 'line', 'lines', 'list', 'listed', 'live', 'load', 'located', 'location', 'logo', 'long', 'longer', 'look', 'looking', 'lower', 'made', 'main', 'mainly', 'major', 'make', 'making', 'manual', 'many', 'margin', 'mark', 'match', 'matches', 'material', 'matt', 'matte', 'maximum', 'may', 'maybe', 'me', 'mean', 'measure', 'measurement', 'measurements', 'measures', 'medium', 'method', 'middle', 'might', 'minimum', 'minute', 'mismatch', 'missing', 'mixed', 'mockup', 'model', 'moderate', 'modern', 'month', 'more', 'most', 'mount', 'mounted', 'mounting', 'move', 'moved', 'moving', 'much', 'multiple', 'museum', 'must', 'my', 'name', 'narrative', 'near', 'nearby', 'need', 'needed', 'needs', 'never', 'new', 'next', 'nice', 'no', 'non', 'none', 'normal', 'not', 'note', 'notes', 'now', 'number', 'numbers', 'object', 'of', 'off', 'offer', 'office', 'often', 'okay', 'old', 'on', 'once', 'one', 'only', 'onto', 'open', 'opening', 'opens', 'option', 'options', 'or', 'order', 'orientation', 'original', 'other', 'others', 'our', 'out', 'outer', 'outside', 'over', 'overall', 'own', 'page', 'pages', 'paint', 'painted', 'painting', 'palette', 'panel', 'panels', 'paper', 'part', 'particular', 'parts', 'pass', 'past', 'pattern', 'people', 'per', 'perfect', 'perform', 'perhaps', 'person', 'photo', 'photograph', 'photography', 'piece', 'pieces', 'pin', 'pinned', 'place', 'placed', 'placement', 'places', 'placing', 'plan', 'planned', 'plans', 'plate', 'please', 'plus', 'point', 'pointed', 'points', 'portrait', 'position', 'positioned', 'positions', 'possible', 'practice', 'precise', 'precisely', 'prefer', 'preferred', 'prepare', 'presence', 'present', 'presentation', 'presented', 'preview', 'previous', 'primary', 'print', 'printed', 'prior', 'process', 'produce', 'product', 'production', 'profile', 'program', 'project', 'projects', 'proper', 'properly', 'proportion', 'proportions', 'provide', 'provided', 'provides', 'put', 'quality', 'quantity', 'quarter', 'question', 'quick', 'quickly', 'quite', 'quote', 'rail', 'range', 'rare', 'rate', 'rather', 'ratio', 'ready', 'real', 'really', 'reason', 'receive', 'receiving', 'recent', 'recently', 'recommend', 'recommended', 'reduce', 'reduces', 'reference', 'refine', 'reflect', 'regard', 'regarding', 'relate', 'related', 'relative', 'relatively', 'remain', 'remaining', 'remains', 'remember', 'remove', 'removed', 'render', 'rendered', 'rendering', 'repeat', 'repeated', 'replace', 'replaced', 'replacement', 'report', 'represent', 'represents', 'request', 'require', 'required', 'requires', 'resize', 'resolution', 'respect', 'rest', 'result', 'resulting', 'results', 'return', 'review', 'reviewed', 'right', 'room', 'row', 'said', 'same', 'sample', 'save', 'saved', 'saving', 'say', 'scale', 'scan', 'scene', 'schedule', 'scheme', 'screen', 'second', 'section', 'see', 'seen', 'select', 'selected', 'selection', 'self', 'sell', 'send', 'sense', 'sent', 'separate', 'series', 'set', 'sets', 'several', 'shall', 'shape', 'shapes', 'share', 'sheet', 'shelf', 'shift', 'ship', 'short', 'should', 'show', 'showing', 'shown', 'shows', 'side', 'sign', 'significant', 'significantly', 'similar', 'simple', 'simply', 'since', 'single', 'site', 'situation', 'size', 'sized', 'sizes', 'small', 'smaller', 'so', 'some', 'someone', 'something', 'soon', 'sort', 'sorted', 'source', 'space', 'spacing', 'spec', 'specific', 'specification', 'specifications', 'specified', 'specify', 'spot', 'spread', 'square', 'staff', 'stand', 'standard', 'stands', 'start', 'started', 'state', 'statement', 'static', 'status', 'stay', 'step', 'steps', 'still', 'stock', 'stone', 'straight', 'strategy', 'street', 'strength', 'strong', 'studio', 'study', 'style', 'styled', 'subject', 'submit', 'subsequent', 'such', 'suggest', 'suggested', 'suit', 'suitable', 'summary', 'support', 'supported', 'sure', 'surface', 'swap', 'swatch', 'system', 'take', 'taken', 'takes', 'taking', 'talk', 'target', 'team', 'template', 'templates', 'term', 'terms', 'text', 'than', 'that', 'the', 'their', 'them', 'then', 'there', 'therefore', 'these', 'they', 'thin', 'thing', 'things', 'think', 'third', 'this', 'those', 'though', 'thought', 'three', 'through', 'throughout', 'thumbnail', 'thus', 'time', 'times', 'title', 'titled', 'to', 'today', 'together', 'too', 'took', 'top', 'total', 'touch', 'toward', 'towards', 'track', 'transfer', 'treat', 'treatment', 'true', 'try', 'turn', 'turned', 'two', 'type', 'types', 'typical', 'under', 'underneath', 'understand', 'understanding', 'unique', 'unit', 'units', 'until', 'up', 'update', 'updated', 'upload', 'uploaded', 'upon', 'upper', 'us', 'use', 'used', 'useful', 'user', 'uses', 'using', 'usual', 'usually', 'value', 'values', 'variable', 'variant', 'variants', 'variation', 'various', 'version', 'versions', 'vertical', 'very', 'via', 'view', 'viewed', 'viewer', 'viewing', 'visible', 'vision', 'visit', 'visual', 'wait', 'wall', 'walls', 'want', 'warm', 'was', 'watch', 'way', 'ways', 'we', 'well', 'went', 'were', 'what', 'whatever', 'when', 'where', 'whether', 'which', 'while', 'white', 'who', 'whole', 'whose', 'why', 'width', 'will', 'window', 'wire', 'wish', 'with', 'within', 'without', 'wood', 'word', 'work', 'worked', 'working', 'works', 'would', 'wrap', 'year', 'years', 'yellow', 'yes', 'yet', 'you', 'your']);
+function _dsSpellIgnoreList() { if (!Array.isArray(editorialContent.spellIgnore)) editorialContent.spellIgnore = []; return editorialContent.spellIgnore; }
+function _dsSpellIgnoreWord(w) { const l = _dsSpellIgnoreList(); const lw = (w || '').toLowerCase(); if (lw && l.indexOf(lw) < 0) { l.push(lw); if (typeof scheduleAutosave === 'function') scheduleAutosave(); } }
+function _dsSpellStems(lw) {
+    const out = [lw];
+    if (lw.length > 4 && lw.slice(-3) === 'ies') out.push(lw.slice(0, -3) + 'y');
+    if (lw.length > 3 && lw.slice(-2) === 'es') out.push(lw.slice(0, -2));
+    if (lw.length > 3 && lw.slice(-1) === 's' && lw.slice(-2) !== 'ss') out.push(lw.slice(0, -1));
+    if (lw.length > 4 && lw.slice(-2) === 'ed') { out.push(lw.slice(0, -2)); out.push(lw.slice(0, -1)); }
+    if (lw.length > 5 && lw.slice(-3) === 'ing') { out.push(lw.slice(0, -3)); out.push(lw.slice(0, -3) + 'e'); }
+    if (lw.length > 4 && lw.slice(-2) === 'ly') out.push(lw.slice(0, -2));
+    return out;
+}
+function _dsSpellCheckWord(raw) {
+    // Skip anything that isn't a plain lowercase-starting attempted English
+    // word: numbers, codes-with-digits, ALL CAPS acronyms, proper nouns
+    // (capitalised), and very short tokens are all left alone on purpose \u2014
+    // those are exactly the false positives a design tool full of codes,
+    // brand names, and place names would otherwise drown in.
+    if (raw.length < 3) return true;
+    if (raw !== raw.toLowerCase()) return true;   // has a capital anywhere -> skip
+    const ignore = _dsSpellIgnoreList();
+    if (ignore.indexOf(raw) >= 0) return true;
+    const stems = _dsSpellStems(raw);
+    return stems.some(s => _DS_SPELL_DICT.has(s));
+}
+function _dsSpellScanText(text) {
+    const found = [];
+    (text || '').split(/[^A-Za-z']+/).forEach(tok => {
+        const w = tok.replace(/^'+|'+$/g, '');
+        if (!w) return;
+        if (!_dsSpellCheckWord(w)) found.push(w);
+    });
+    return found;
+}
+function _dsRunSpellCheck() {
+    const issues = [];
+    const pages = (typeof _deckPageList === 'function') ? _deckPageList() : [];
+    pages.forEach((d, i) => {
+        const words = new Set();
+        let els = null;
+        if (d.kind === 'layout' && d.page) els = d.page.elements || [];
+        else if (d.kind === 'fixed') { try { const rr = _fixedPageFor(d.fixed); if (rr && rr.page) els = rr.page.elements || []; } catch (e) {} }
+        (els || []).forEach(e => { if (e && !e.hidden && (e.type === 'text') && e.text) _dsSpellScanText(e.text).forEach(w => words.add(w)); });
+        const key = _deckPageKey(d);
+        const ann = key ? (editorialContent.annotations || {})[key] : null;
+        (ann || []).forEach(a => { if (a && !a.hidden && (a.type === 'text' || a.type === 'note') && a.text) _dsSpellScanText(a.text).forEach(w => words.add(w)); });
+        if (words.size) {
+            const label = _dsPageLabel(d);
+            const list = Array.from(words).slice(0, 6);
+            const extra = words.size > list.length ? (' (+' + (words.size - list.length) + ' more)') : '';
+            issues.push({ sev: 'spell', text: label + ' \u2014 possible misspelling' + (words.size > 1 ? 's' : '') + ': ' + list.join(', ') + extra, idx: i, words: Array.from(words) });
+        }
+    });
+    return issues;
+}
+
 // ── Preflight: scan the deck for export problems before generating the PDF ──
 function _dsPageLabel(d) {
     if (!d) return 'Page';
@@ -9653,6 +9718,8 @@ function _dsRunPreflight() {
         const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[d.level];
         if (lv && !lv.imageData) issues.push({ sev: 'err', text: _dsPageLabel(d) + ' \u2014 no plan image uploaded', idx: i });
     });
+    // Spelling \u2014 a separate pass, see _dsRunSpellCheck for what it does and doesn't do.
+    try { issues.push.apply(issues, _dsRunSpellCheck()); } catch (e) {}
     return issues;
 }
 function _dsPreflightGo(i) {
@@ -9664,7 +9731,7 @@ function _dsPreflightGo(i) {
 function _dsShowPreflight() {
     let m = document.getElementById('_dsPreflightModal'); if (m) m.remove();
     const issues = _dsRunPreflight();
-    const errs = issues.filter(x => x.sev === 'err'), warns = issues.filter(x => x.sev === 'warn');
+    const errs = issues.filter(x => x.sev === 'err'), warns = issues.filter(x => x.sev === 'warn'), spells = issues.filter(x => x.sev === 'spell');
     m = document.createElement('div'); m.id = '_dsPreflightModal';
     m.style.cssText = 'position:fixed; inset:0; z-index:100004; background:rgba(10,10,12,0.8); display:flex; align-items:center; justify-content:center; padding:24px;';
     const panel = document.createElement('div');
@@ -9672,15 +9739,15 @@ function _dsShowPreflight() {
     const h = document.createElement('div'); h.style.cssText = 'font-size:1rem; font-weight:700; margin-bottom:4px;'; h.textContent = 'Preflight';
     panel.appendChild(h);
     const sub = document.createElement('div'); sub.style.cssText = 'font-size:0.7rem; color:var(--text-muted,#999); margin-bottom:12px;';
-    sub.textContent = issues.length ? (errs.length + ' error' + (errs.length === 1 ? '' : 's') + ' \u00b7 ' + warns.length + ' warning' + (warns.length === 1 ? '' : 's')) : '';
+    sub.textContent = issues.length ? (errs.length + ' error' + (errs.length === 1 ? '' : 's') + ' \u00b7 ' + warns.length + ' warning' + (warns.length === 1 ? '' : 's') + ' \u00b7 ' + spells.length + ' page' + (spells.length === 1 ? '' : 's') + ' with possible spelling issues') : '';
     panel.appendChild(sub);
     if (!issues.length) {
         const ok = document.createElement('div');
         ok.style.cssText = 'display:flex; align-items:center; gap:10px; padding:16px 12px; border:1px solid rgba(60,160,90,0.5); background:rgba(60,160,90,0.12); border-radius:8px; font-size:0.8rem;';
-        ok.innerHTML = '<span style="font-size:1.1rem;">\u2713</span> All clear \u2014 no missing artwork, pins, plan images, or empty frames. Ready to export.';
+        ok.innerHTML = '<span style="font-size:1.1rem;">\u2713</span> All clear \u2014 no missing artwork, pins, plan images, empty frames, or possible spelling issues. Ready to export.';
         panel.appendChild(ok);
     } else {
-        const section = (title, list, color) => {
+        const section = (title, list, color, spellMode) => {
             if (!list.length) return;
             const t = document.createElement('div'); t.textContent = title; t.style.cssText = 'font-size:0.6rem; letter-spacing:0.8px; text-transform:uppercase; color:var(--text-muted,#999); margin:10px 0 4px;';
             panel.appendChild(t);
@@ -9691,6 +9758,13 @@ function _dsShowPreflight() {
                 row.appendChild(dot);
                 const tx = document.createElement('div'); tx.textContent = it.text; tx.style.cssText = 'flex:1;';
                 row.appendChild(tx);
+                if (spellMode && it.words && it.words.length) {
+                    const ig = document.createElement('button'); ig.textContent = 'Not a typo'; ig.className = 'action-btn btn-secondary';
+                    ig.title = 'Add these word(s) to the project dictionary so they stop flagging';
+                    ig.style.cssText = 'height:22px; padding:0 8px; font-size:0.56rem;';
+                    ig.onclick = () => { it.words.forEach(w => _dsSpellIgnoreWord(w)); _dsShowPreflight(); };
+                    row.appendChild(ig);
+                }
                 if (it.idx != null && it.idx >= 0) {
                     const go = document.createElement('button'); go.textContent = 'Go'; go.className = 'action-btn btn-secondary';
                     go.style.cssText = 'height:22px; padding:0 10px; font-size:0.58rem;';
@@ -9702,6 +9776,12 @@ function _dsShowPreflight() {
         };
         section('Errors \u2014 will export wrong or blank', errs, '#e05252');
         section('Warnings \u2014 double-check these', warns, '#d9a13b');
+        section('Spelling \u2014 worth a second look', spells, '#6a6aff', true);
+        if (spells.length) {
+            const note = document.createElement('p'); note.style.cssText = 'font-size:0.6rem; color:var(--text-muted,#999); margin:8px 0 0; line-height:1.5;';
+            note.textContent = 'This checks against a compact common-word list, not a full dictionary, so it will miss some real typos and flag some real words (brand names, codes, less common terms). \u201cNot a typo\u201d remembers a word for this project so it stops flagging.';
+            panel.appendChild(note);
+        }
     }
     const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; margin-top:14px;';
     const rerun = document.createElement('button'); rerun.textContent = 'Re-run'; rerun.className = 'action-btn btn-secondary'; rerun.style.cssText = 'height:30px; padding:0 14px; font-size:0.7rem;'; rerun.onclick = _dsShowPreflight;
@@ -10449,7 +10529,88 @@ function _dsDisplayInk(hex, pageKey) {
     } catch (e) {}
     return hex;
 }
+// ── Multi-select for deck annotations (spec pages) ─────────────────────────
+// Reuses _mbSelAnn (already used for highlighting) and the generic
+// _mbAnnBox/_mbSetAnnPos helpers built for the layout-page marquee system,
+// but works standalone here since spec pages don't go through _mbCanvas().
+function _dsAnnShiftToggle(e, i) {
+    if (!e.shiftKey) return false;
+    e.preventDefault(); e.stopPropagation();
+    const idx = _mbSelAnn.indexOf(i);
+    if (idx >= 0) _mbSelAnn.splice(idx, 1); else _mbSelAnn.push(i);
+    if (_mbSelAnn.length) { _dsSelKey = null; _dsSelIdx = -1; }
+    _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail();
+    return true;
+}
+// Starts a group drag when the clicked item is part of a multi-selection.
+// Returns true if it handled the mousedown (caller should not also start its
+// own single-item drag).
+function _dsAnnGroupDragStart(e, key, i, list) {
+    if (!(_mbSelAnn.length > 1 && _mbSelAnn.indexOf(i) >= 0)) return false;
+    e.preventDefault(); e.stopPropagation();
+    const startX = e.clientX, startY = e.clientY;
+    const w0 = _dsLastAnnW || 900, h0 = _dsLastAnnH || 500;
+    const origins = _mbSelAnn.map(k => ({ k, box: _mbAnnBox(list[k]) }));
+    let pending = false;
+    const mv = (ev) => {
+        const dxFrac = (ev.clientX - startX) / w0, dyFrac = (ev.clientY - startY) / h0;
+        origins.forEach(o => { _mbSetAnnPos(list[o.k], o.box.x + dxFrac, o.box.y + dyFrac, o.box); });
+        if (!pending) { pending = true; requestAnimationFrame(() => { pending = false; _dsRenderCenter(); }); }
+    };
+    const up = () => {
+        document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        _dsRenderCenter(); _dsRenderRail();
+    };
+    document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+    return true;
+}
+let _dsLastAnnW = 900, _dsLastAnnH = 500;
+// Marquee (rubber-band) selection: click-drag on empty page background to
+// select every annotation whose box intersects the rectangle.
+function _dsAnnMarqueeAttach(page, key, list, w, hh) {
+    page.addEventListener('mousedown', (e) => {
+        if (e.target !== page) return;
+        const rect = page.getBoundingClientRect();
+        const x0 = e.clientX, y0 = e.clientY;
+        const additive = e.shiftKey;
+        const box = document.createElement('div');
+        box.style.cssText = 'position:absolute; border:1px solid #6a6aff; background:rgba(106,106,255,0.12); z-index:600; pointer-events:none; left:' + (x0 - rect.left) + 'px; top:' + (y0 - rect.top) + 'px; width:0; height:0;';
+        page.appendChild(box);
+        let moved = false;
+        const mv = (ev) => {
+            moved = true;
+            const cx = ev.clientX - rect.left, cy = ev.clientY - rect.top;
+            const sx = x0 - rect.left, sy = y0 - rect.top;
+            const left = Math.min(sx, cx), top = Math.min(sy, cy);
+            box.style.left = left + 'px'; box.style.top = top + 'px';
+            box.style.width = Math.abs(cx - sx) + 'px'; box.style.height = Math.abs(cy - sy) + 'px';
+        };
+        const up = (ev) => {
+            document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
+            box.remove();
+            if (!moved) { if (!additive) { _mbSelAnn = []; _dsSyncToolbar(); _dsRenderCenter(); } return; }
+            const cx = ev.clientX - rect.left, cy = ev.clientY - rect.top;
+            const sx = x0 - rect.left, sy = y0 - rect.top;
+            const mLeft = Math.min(sx, cx) / w, mTop = Math.min(sy, cy) / hh;
+            const mRight = Math.max(sx, cx) / w, mBottom = Math.max(sy, cy) / hh;
+            const hit = [];
+            list.forEach((a, i) => {
+                if (a && a.hidden) return;
+                const b = _mbAnnBox(a);
+                if (b.x < mRight && b.x + b.w > mLeft && b.y < mBottom && b.y + b.h > mTop) hit.push(i);
+            });
+            _mbSelAnn = additive ? Array.from(new Set(_mbSelAnn.concat(hit))) : hit;
+            if (_mbSelAnn.length) { _dsSelKey = null; _dsSelIdx = -1; }
+            _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail();
+        };
+        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+    });
+}
 function _dsRenderAnnots(page, desc, w, hh) {
+    _dsLastAnnW = w; _dsLastAnnH = hh;
+
     const key = _deckPageKey(desc); if (!key) return;
     const list = (editorialContent.annotations && editorialContent.annotations[key]) || [];
     list.forEach((a, i) => {
@@ -10585,9 +10746,11 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.onwheel = (e) => { e.preventDefault(); a.zoom = Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? 0.12 : -0.12))); if (a.zoom === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
             const moveDownI = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
+                if (_dsAnnShiftToggle(e, i)) return;
+                if (_dsAnnGroupDragStart(e, key, i, list)) return;
                 e.preventDefault(); e.stopPropagation();
                 const wasSel = sel;
-                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
                 const mv = (ev) => {
@@ -10595,7 +10758,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }
                 };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             const panModeI = (a.zoom || 1) > 1;
@@ -10644,9 +10807,11 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.ondrop = (e) => _dsShapeDropImage(e, key, i);
             const moveDown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
+                if (_dsAnnShiftToggle(e, i)) return;
+                if (_dsAnnGroupDragStart(e, key, i, list)) return;
                 e.preventDefault(); e.stopPropagation();
                 const wasSel = sel;
-                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
                 const mv = (ev) => {
@@ -10654,7 +10819,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }   // caption moves WITH the box
                 };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             // Zoomed image: dragging INSIDE the box pans the image (live).
@@ -10742,101 +10907,119 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); if (!sel) _dsRenderCenter(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
+            const isMaze = (a.type === 'elbow' && a.waypoints !== undefined);
+            // Point-array helpers shared by endpoint + waypoint dragging, so a
+            // maze path's corners are ALWAYS orthogonal to their neighbours —
+            // moving one point pulls its immediate neighbour's shared axis
+            // along with it instead of ever allowing a diagonal segment.
+            const _ptCount = () => 2 + (a.waypoints ? a.waypoints.length : 0);
+            const _getPt = (k) => (k === 0) ? [a.x1 || 0, a.y1 || 0] : (k === _ptCount() - 1) ? [a.x2 || 0, a.y2 || 0] : a.waypoints[k - 1];
+            const _setPt = (k, x, y) => { if (k === 0) { a.x1 = x; a.y1 = y; } else if (k === _ptCount() - 1) { a.x2 = x; a.y2 = y; } else { a.waypoints[k - 1] = [x, y]; } };
+            const _EPS = 0.003;
+            const _dragPointOrtho = (k, nx, ny) => {
+                const old = _getPt(k);
+                if (k > 0) {
+                    const prev = _getPt(k - 1);
+                    if (Math.abs(prev[1] - old[1]) < _EPS) _setPt(k - 1, prev[0], ny);
+                    else if (Math.abs(prev[0] - old[0]) < _EPS) _setPt(k - 1, nx, prev[1]);
+                }
+                if (k < _ptCount() - 1) {
+                    const next = _getPt(k + 1);
+                    if (Math.abs(next[1] - old[1]) < _EPS) _setPt(k + 1, next[0], ny);
+                    else if (Math.abs(next[0] - old[0]) < _EPS) _setPt(k + 1, nx, next[1]);
+                }
+                _setPt(k, nx, ny);
+            };
             if (sel) {
                 [['x1', 'y1', 0], ['x2', 'y2', 1]].forEach(ep => {
                     const c = hEnds[ep[2]];
                     c.style.cssText = 'pointer-events:all; cursor:crosshair;';
                     c.onmousedown = (e) => {
                         e.preventDefault(); e.stopPropagation();
-                        const mv = (ev) => { const rect = svg.getBoundingClientRect(); a[ep[0]] = Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)); a[ep[1]] = Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh)); redraw(); };
-                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                        const kIdx = ep[2] === 0 ? 0 : _ptCount() - 1;
+                        const mv = (ev) => {
+                            const rect = svg.getBoundingClientRect();
+                            const nx = Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), ny = Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh));
+                            if (isMaze) _dragPointOrtho(kIdx, nx, ny); else { a[ep[0]] = nx; a[ep[1]] = ny; }
+                            redraw();
+                        };
+                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                         document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                     };
                     svg.appendChild(c);
                 });
-                // Multi-point "maze" paths (a.waypoints): every point gets its
-                // own draggable dot, and a small square sits at each segment's
-                // midpoint — drag one to pull a brand-new corner out of that
-                // segment. The old single bend handle doesn't apply here (it
-                // silently did nothing, which was the reported bug) so it's
-                // skipped entirely in favour of this.
-                if (a.type === 'elbow' && a.waypoints !== undefined) {
+                // Multi-point paths (a.waypoints): only the points you actually
+                // clicked while drawing are anchors — every dot moves freely
+                // but always keeps its neighbouring segments at 90 degrees
+                // (see _dragPointOrtho above). Dragging a SEGMENT never adds a
+                // point; it slides that whole straight run sideways \u2014
+                // horizontal segments only move vertically and vice versa \u2014
+                // exactly like sliding a duct run, never a diagonal.
+                if (isMaze) {
                     bendHandle.style.display = 'none';
                     const wpDots = [], segHandles = [];
-                    const clearExtra = () => { wpDots.forEach(d => d.remove()); segHandles.forEach(s => s.remove()); wpDots.length = 0; segHandles.length = 0; };
-                    const mkWpDot = (k) => {
+                    const mkWpDot = () => {
                         const d = mk('circle', { r: 5.5, fill: '#fff', stroke: '#6a6aff', 'stroke-width': 2 });
                         d.style.cssText = 'pointer-events:all; cursor:move;';
-                        d.onmousedown = (e) => {
-                            e.preventDefault(); e.stopPropagation();
-                            const rect = svg.getBoundingClientRect();
-                            const mv = (ev) => {
-                                a.waypoints[k] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))];
-                                redraw();
-                            };
-                            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
-                            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
-                        };
                         svg.appendChild(d);
                         return d;
                     };
-                    const mkSegHandle = (segIdx) => {
+                    const mkSegHandle = () => {
                         const s = mk('rect', { width: 8, height: 8, fill: '#6a6aff', stroke: '#fff', 'stroke-width': 1.5 });
-                        s.style.cssText = 'pointer-events:all; cursor:crosshair;';
-                        s.title = 'Drag to add a corner here';
-                        s.onmousedown = (e) => {
-                            e.preventDefault(); e.stopPropagation();
-                            const rect = svg.getBoundingClientRect();
-                            const fx = Math.max(0, Math.min(1, (e.clientX - rect.left) / w)), fy = Math.max(0, Math.min(1, (e.clientY - rect.top) / hh));
-                            a.waypoints.splice(segIdx, 0, [fx, fy]);
-                            redraw();
-                            const newIdx = segIdx;
-                            const mv = (ev) => {
-                                a.waypoints[newIdx] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))];
-                                redraw();
-                            };
-                            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
-                            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
-                        };
+                        s.style.cssText = 'pointer-events:all;';
+                        s.title = 'Drag to slide this segment';
                         svg.appendChild(s);
                         return s;
                     };
                     const syncWaypointUI = () => {
                         const pts2 = lastPts || [];
                         const n = a.waypoints.length;
-                        while (wpDots.length < n) wpDots.push(mkWpDot(wpDots.length));
+                        while (wpDots.length < n) wpDots.push(mkWpDot());
                         while (wpDots.length > n) wpDots.pop().remove();
                         const segCount = Math.max(0, pts2.length - 1);
-                        while (segHandles.length < segCount) segHandles.push(mkSegHandle(segHandles.length));
+                        while (segHandles.length < segCount) segHandles.push(mkSegHandle());
                         while (segHandles.length > segCount) segHandles.pop().remove();
-                        // Re-bind each handle's insertion index (splice position shifts
-                        // as points are added/removed) and reposition everything.
-                        wpDots.forEach((d, k) => {
-                            d.onmousedown = null;
-                            d.style.cssText = 'pointer-events:all; cursor:move;';
+                        wpDots.forEach((d, wi) => {
+                            const k = wi + 1;   // point index (0 = start, last = end)
                             d.onmousedown = (e) => {
                                 e.preventDefault(); e.stopPropagation();
                                 const rect = svg.getBoundingClientRect();
-                                const mv = (ev) => { a.waypoints[k] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))]; redraw(); };
-                                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                                const mv = (ev) => {
+                                    const nx = Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), ny = Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh));
+                                    _dragPointOrtho(k, nx, ny);
+                                    redraw();
+                                };
+                                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                             };
-                            const p = pts2[k + 1]; if (p) { d.setAttribute('cx', p[0]); d.setAttribute('cy', p[1]); }
+                            const p = pts2[k]; if (p) { d.setAttribute('cx', p[0]); d.setAttribute('cy', p[1]); }
                         });
                         segHandles.forEach((s, si) => {
-                            s.onmousedown = null;
+                            const p0 = pts2[si], p1 = pts2[si + 1];
+                            if (!p0 || !p1) return;
+                            const horiz = Math.abs(p0[1] - p1[1]) < 0.5;   // pixel-space, so a looser epsilon
+                            s.style.cursor = horiz ? 'ns-resize' : 'ew-resize';
                             s.onmousedown = (e) => {
                                 e.preventDefault(); e.stopPropagation();
                                 const rect = svg.getBoundingClientRect();
-                                const fx = Math.max(0, Math.min(1, (e.clientX - rect.left) / w)), fy = Math.max(0, Math.min(1, (e.clientY - rect.top) / hh));
-                                a.waypoints.splice(si, 0, [fx, fy]);
-                                redraw();
-                                const mv = (ev) => { a.waypoints[si] = [Math.max(0, Math.min(1, (ev.clientX - rect.left) / w)), Math.max(0, Math.min(1, (ev.clientY - rect.top) / hh))]; redraw(); };
-                                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                                const startX = e.clientX, startY = e.clientY;
+                                const op0 = _getPt(si), op1 = _getPt(si + 1);
+                                const mv = (ev) => {
+                                    if (horiz) {
+                                        const dy = (ev.clientY - startY) / hh;
+                                        _setPt(si, op0[0], Math.max(0, Math.min(1, op0[1] + dy)));
+                                        _setPt(si + 1, op1[0], Math.max(0, Math.min(1, op1[1] + dy)));
+                                    } else {
+                                        const dx = (ev.clientX - startX) / w;
+                                        _setPt(si, Math.max(0, Math.min(1, op0[0] + dx)), op0[1]);
+                                        _setPt(si + 1, Math.max(0, Math.min(1, op1[0] + dx)), op1[1]);
+                                    }
+                                    redraw();
+                                };
+                                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                             };
-                            const p0 = pts2[si], p1 = pts2[si + 1];
-                            if (p0 && p1) { s.setAttribute('x', (p0[0] + p1[0]) / 2 - 4); s.setAttribute('y', (p0[1] + p1[1]) / 2 - 4); }
+                            s.setAttribute('x', (p0[0] + p1[0]) / 2 - 4); s.setAttribute('y', (p0[1] + p1[1]) / 2 - 4);
                         });
                     };
                     _wpUISync = syncWaypointUI;
@@ -10864,7 +11047,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                             }
                             redraw();
                         };
-                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                         document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                     };
                     svg.appendChild(bendHandle);
@@ -10881,16 +11064,24 @@ function _dsRenderAnnots(page, desc, w, hh) {
         el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + _fpx + 'px; line-height:' + _lh + '; color:' + _dsDisplayInk(a.color || '#222222', key) + '; ' + _textExtraCss(a) + ' outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
+            if (_dsAnnShiftToggle(e, i)) return;
+            if (_dsAnnGroupDragStart(e, key, i, list)) return;
             e.preventDefault();
             const wasSel = sel;
-            _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
+            _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
             const mv = (ev) => { a.x = Math.max(0, Math.min(0.985, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.985, oy + (ev.clientY - sy) / hh)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
-            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
+            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
         el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; el.focus(); };
-        el.onblur = () => { a.text = el.textContent; el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+        // Sync continuously, not just on blur — a native browser or Grammarly
+        // spellcheck correction edits the DOM directly, and only capturing on
+        // blur left a window where an intervening re-render (or just closing
+        // the box some other way) could discard a correction that was never
+        // pulled back into the stored text.
+        el.oninput = () => { a.text = el.textContent; };
+        el.onblur = () => { a.text = el.textContent; el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
         if (sel) {
             _dsTextGearButton(el, { kind: 'ann', key, i });
             const th = document.createElement('div');
@@ -10903,13 +11094,16 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 // Width-only reflow: the text re-wraps to the new box width and
                 // the font size stays exactly where you set it.
                 const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); a.w = nw; el.style.width = (nw * w) + 'px'; };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             el.appendChild(th);
         }
         page.appendChild(el);
     });
+    // Marquee (drag-select) + click-away-to-deselect on empty background —
+    // lets you rubber-band multiple images/text/shapes and move them as one.
+    if (!_dsArmedShape) _dsAnnMarqueeAttach(page, key, list, w, hh);
     // Click-drag-to-draw overlay for a newly armed shape (arrow/elbow/curve).
     // Sits above everything so it captures the drag without disturbing normal
     // annotation selection/dragging; disarms itself the moment a shape lands.
@@ -11121,7 +11315,11 @@ function _dsSyncToolbar() {
     }
     // Arrange (align/distribute) is always VISIBLE on editable pages so it can
     // be found; it dims until something is selected to act on.
-    { const _arB = document.getElementById('dsMbArrange'); if (_arB) { _arB.style.display = editable ? 'inline-flex' : 'none'; _arB.style.opacity = (_anyMulti >= 1 || !!mbEl) ? '1' : '0.45'; _arB.style.pointerEvents = (_anyMulti >= 1 || !!mbEl) ? 'auto' : 'none'; } }
+    // Also show Arrange on spec pages once there's a deck-annotation
+    // selection to act on \u2014 marquee/shift-click multi-select needs an
+    // align/distribute tool just as much as layout-page elements do.
+    const specSelActive = (_dsPages[_dsIndex] && _dsPages[_dsIndex].kind === 'spec') && (_anyMulti >= 1 || (_dsSelKey != null && _dsSelIdx >= 0));
+    { const _arB = document.getElementById('dsMbArrange'); if (_arB) { _arB.style.display = (editable || specSelActive) ? 'inline-flex' : 'none'; _arB.style.opacity = (_anyMulti >= 1 || !!mbEl) ? '1' : '0.45'; _arB.style.pointerEvents = (_anyMulti >= 1 || !!mbEl) ? 'auto' : 'none'; } }
     const a = mbEl ? null : _dsCurrentAnnot();
     const selected = !!a;
     const isText = !!(a && a.type !== 'image' && a.type !== 'arrow' && a.type !== 'elbow' && a.type !== 'mockup' && a.type !== 'shape');
@@ -12185,9 +12383,16 @@ function _dsAnnotKeydown(e) {
             if (typeof o.x === 'number') { o.x = Math.max(0, Math.min(0.99, o.x + dx)); o.y = Math.max(0, Math.min(0.99, (o.y || 0) + dy)); }
             if (typeof o.x1 === 'number') { o.x1 += dx; o.y1 += dy; o.x2 += dx; o.y2 += dy; }
         };
-        let did = false;
+        let did = false, isAnnGroup = false;
         const aSel = _dsCurrentAnnot();
-        if (aSel) { nudge(aSel); did = true; }
+        if (_mbSelAnn && _mbSelAnn.length) {
+            // Multi-selected deck annotations (spec-page marquee/shift-click).
+            const list = (typeof _dsSelKey !== 'undefined' && _dsAnnList) ? null : null;
+            const curKey = (_dsPages && _dsPages[_dsIndex]) ? _deckPageKey(_dsPages[_dsIndex]) : null;
+            const arr = curKey ? _dsAnnList(curKey) : [];
+            _mbSelAnn.forEach(ix => { if (arr[ix]) { nudge(arr[ix]); did = true; } });
+            isAnnGroup = did;
+        } else if (aSel) { nudge(aSel); did = true; }
         else if (_mbActiveCanvasId === 'dsLayoutCanvas' && typeof _mbSelected !== 'undefined') {
             const els = _mbEls() || [];
             const idxs = (_mbSel && _mbSel.length) ? _mbSel : (_mbSelected >= 0 ? [_mbSelected] : []);
@@ -12196,7 +12401,8 @@ function _dsAnnotKeydown(e) {
         }
         if (did) {
             e.preventDefault();
-            if (aSel) _dsRenderCenter();
+            if (aSel || isAnnGroup) _dsRenderCenter();
+            if (typeof pushHistory === 'function') pushHistory();
             if (typeof scheduleAutosave === 'function') scheduleAutosave();
             _dsRenderRail();
         }
@@ -14760,7 +14966,16 @@ let _mbMarquee = null;      // marquee drag state
 function _mbDeselectAll() { _mbSel = []; _mbSelAnn = []; _mbSelected = -1; }
 function _mbSelectOnly(i) { _mbSel = (i >= 0 ? [i] : []); _mbSelAnn = []; _mbSelected = i; }
 function _mbToggleInSel(i) { const k = _mbSel.indexOf(i); if (k >= 0) { _mbSel.splice(k, 1); _mbSelected = _mbSel.length ? _mbSel[_mbSel.length - 1] : -1; } else { _mbSel.push(i); _mbSelected = i; } }
-function _mbCurAnnList() { if (_mbActiveCanvasId !== 'dsLayoutCanvas') return null; try { const d = _dsPages[_dsIndex]; const key = d ? _deckPageKey(d) : null; if (!key) return null; const list = (editorialContent.annotations || {})[key]; return list ? { key, list } : { key, list: [] }; } catch (e) { return null; } }
+function _mbCurAnnList() {
+    // Layout pages: annotations layer on top of the mb canvas (dsLayoutCanvas).
+    // Spec pages: annotations ARE the page content, rendered via _dsRenderAnnots
+    // directly — no mb canvas involved, but the SAME multi-select array
+    // (_mbSelAnn) and align/distribute tools apply once a page is open there.
+    const d = _dsPages[_dsIndex];
+    const onSpec = d && d.kind === 'spec';
+    if (_mbActiveCanvasId !== 'dsLayoutCanvas' && !onSpec) return null;
+    try { const key = d ? _deckPageKey(d) : null; if (!key) return null; const list = (editorialContent.annotations || {})[key]; return list ? { key, list } : { key, list: [] }; } catch (e) { return null; }
+}
 function _mbElBox(t) {
     const ty = _elType(t);
     if (ty === 'arrow') return { x: Math.min(t.x1, t.x2), y: Math.min(t.y1, t.y2), w: Math.abs(t.x2 - t.x1), h: Math.abs(t.y2 - t.y1) };
@@ -14779,7 +14994,7 @@ function _mbSetBoxPos(el, nx, ny, b) { const ty = _elType(el); const dx = nx - b
 function _mbSetAnnPos(a, nx, ny, b) { const dx = nx - b.x, dy = ny - b.y; if (a.type === 'arrow') { a.x1 += dx; a.y1 += dy; a.x2 += dx; a.y2 += dy; } else if (a.type === 'elbow') { (a.pts || []).forEach(p => { p.x += dx; p.y += dy; }); } else { a.x = nx; a.y = ny; } }
 // Unified selection across both layers — moodboard elements and annotations.
 function _mbSelItems() {
-    const items = []; const els = _mbEls() || [];
+    const items = []; let els = []; try { els = _mbEls() || []; } catch (e) {}
     (_mbSel || []).forEach(k => { if (k >= 0 && k < els.length) items.push({ kind: 'mb', ref: els[k], box: _mbElBox(els[k]) }); });
     const ann = _mbCurAnnList();
     if (ann) (_mbSelAnn || []).forEach(k => { if (k >= 0 && k < ann.list.length) items.push({ kind: 'ann', ref: ann.list[k], box: _mbAnnBox(ann.list[k]) }); });
@@ -15327,8 +15542,15 @@ function _pageGuide() {
 }
 function _setPageGuide(patch) { const key = _pageGuideKey(); if (!key) return; editorialContent.pageGuides = editorialContent.pageGuides || {}; editorialContent.pageGuides[key] = Object.assign({}, editorialContent.pageGuides[key] || {}, patch); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
 function _mbDrawGuideSet(canvas, cr) {
-    if (!(canvas && canvas.id === 'dsLayoutCanvas')) return;
-    const G = _pageGuide(); if (!G.show || !G.set) return;
+    // Check the driving STATE (_mbActiveCanvasId), not the DOM element's own
+    // id attribute — the two can momentarily disagree during a render if the
+    // canvas was just recreated, which was silently swallowing guides on an
+    // otherwise-correct layout-page render (the reported "guides just
+    // disappear" bug).
+    if (!canvas || _mbActiveCanvasId !== 'dsLayoutCanvas') return;
+    const G = _pageGuide();
+    if (!G.show) return;
+    if (!G.set) { console.warn('Guide set "' + G.setId + '" no longer exists \u2014 guides hidden until a valid set is chosen.'); return; }
     const ln = _guideLines(G.set);
     const mk = (css) => { const d = document.createElement('div'); d.className = '_mbGuideLine'; d.style.cssText = 'position:absolute; z-index:2; pointer-events:none; ' + css; canvas.appendChild(d); };
     ln.vs.forEach(v => mk('left:' + (v * 100) + '%; top:0; bottom:0; width:1px; background:rgba(0,176,204,0.75); box-shadow:0 0 0 0.5px rgba(0,176,204,0.25);'));
