@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.15';
+const APP_VERSION = '15.16';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10728,6 +10728,18 @@ function _dsAnnMarqueeAttach(page, key, list, w, hh) {
         document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
     });
 }
+// Snap a dragged annotation box against the deck's snapping mode ('guides'
+// or 'grid'), same engine as layout-element snapping (_mbSnapBox). Alt-drag
+// bypasses. bwF/bhF are the box's size as page fractions, captured at drag
+// start so text boxes, image placeholders, mockups, details, and shapes all
+// snap by their edges AND centers, exactly like layout elements.
+function _dsAnnSnap(nx, ny, bwF, bhF, w, hh, ev) {
+    if (ev && ev.altKey) return { x: nx, y: ny };
+    try {
+        const sn = _mbSnapBox({ x: nx, y: ny, w: bwF || 0, h: bhF || 0 }, { width: w, height: hh });
+        return { x: nx + sn.dx, y: ny + sn.dy };
+    } catch (e) { return { x: nx, y: ny }; }
+}
 function _dsRenderAnnots(page, desc, w, hh) {
     _dsLastAnnW = w; _dsLastAnnH = hh;
 
@@ -10763,7 +10775,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
                         a.panX = Math.max(-1, Math.min(1, opx - (ev.clientX - sx) / (s * 1.2)));
                         a.panY = Math.max(-1, Math.min(1, opy - (ev.clientY - sy) / (s * 1.2)));
                     } else {
-                        a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh));
+                        const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, s / w, s / hh, w, hh, ev);
+                        a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y));
                         box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     }
                 };
@@ -10824,7 +10837,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 e.preventDefault();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
-                const mv = (ev) => { a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
+                const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
+                const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
                 const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
@@ -10873,8 +10887,10 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
+                const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
                 const mv = (ev) => {
-                    a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh));
+                    const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev);
+                    a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y));
                     box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }
                 };
@@ -10934,8 +10950,10 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
+                const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
                 const mv = (ev) => {
-                    a.x = Math.max(0, Math.min(0.99, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.99, oy + (ev.clientY - sy) / hh));
+                    const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev);
+                    a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y));
                     box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px';
                     if (cap) { cap.style.left = (a.x * w) + 'px'; cap.style.top = (a.y * hh + bh + 4) + 'px'; }   // caption moves WITH the box
                 };
@@ -11203,7 +11221,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const wasSel = sel;
             _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
-            const mv = (ev) => { a.x = Math.max(0, Math.min(0.985, ox + (ev.clientX - sx) / w)); a.y = Math.max(0, Math.min(0.985, oy + (ev.clientY - sy) / hh)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
+            const _bwF = (el.offsetWidth || 0) / w, _bhF = (el.offsetHeight || 0) / hh;
+            const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.985, _sp.x)); a.y = Math.max(0, Math.min(0.985, _sp.y)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
             const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
@@ -15788,27 +15807,50 @@ function _guideLines(set) {
     const uniq = (a) => a.filter((v, i) => a.indexOf(v) === i);
     return { vs: uniq(vs), hs: uniq(hs) };
 }
-function _guidePref() { if (!editorialContent.guidePref) editorialContent.guidePref = { setId: 'g_idml12', show: false, snap: true }; return editorialContent.guidePref; }
+function _guidePref() {
+    if (!editorialContent.guidePref) editorialContent.guidePref = { setId: 'g_idml12', show: false, snap: true };
+    // One-time migration from the per-page era. Guides became deck-wide, but
+    // projects saved earlier carry per-page overrides — and since the Guides
+    // button only existed on layout pages back then, things like the grid
+    // could be ON for Project Understanding/Narrative/Title yet OFF at the
+    // deck level, so the grid showed on exactly those three pages and nowhere
+    // else. Promote visibility-style values up to the deck once, then retire
+    // per-page overrides for good (no UI can set them anymore).
+    try {
+        const pg = editorialContent.pageGuides;
+        if (pg && Object.keys(pg).length) {
+            const g = editorialContent.guidePref;
+            const ovs = Object.keys(pg).map(k => pg[k]).filter(Boolean);
+            if (!g.show && ovs.some(o => o.show === true)) g.show = true;
+            if (!g.grid && ovs.some(o => o.grid === true)) {
+                g.grid = true;
+                if (g.gridSize == null) { const ws = ovs.find(o => o.grid === true && o.gridSize); if (ws) g.gridSize = ws.gridSize; }
+            }
+            if (g.snapMode !== 'off' && g.snapMode !== 'guides' && g.snapMode !== 'grid') {
+                const sm = ovs.find(o => o.snapMode === 'off' || o.snapMode === 'guides' || o.snapMode === 'grid');
+                if (sm) g.snapMode = sm.snapMode;
+            }
+            delete editorialContent.pageGuides;
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        }
+    } catch (e) {}
+    return editorialContent.guidePref;
+}
 function _pageGuideKey() { try { const d = _dsPages[_dsIndex]; return d ? _deckPageKey(d) : null; } catch (e) { return null; } }
 function _pageGuide() {
-    const def = _guidePref(); const key = _pageGuideKey();
-    const ov = (key && editorialContent.pageGuides) ? editorialContent.pageGuides[key] : null;
-    const setId = (ov && ov.setId !== undefined) ? ov.setId : def.setId;
-    const pick = (k, fb) => (ov && ov[k] !== undefined) ? ov[k] : (def[k] !== undefined ? def[k] : fb);
-    // snapMode: 'off' | 'guides' | 'grid' — like the elevation tab. Older
-    // files only carried the boolean `snap` (guides on/off); map it.
-    let snapMode = pick('snapMode', undefined);
-    if (snapMode !== 'off' && snapMode !== 'guides' && snapMode !== 'grid') {
-        const legacy = pick('snap', true);
-        snapMode = legacy ? 'guides' : 'off';
-    }
-    const gridSize = (() => { const v = parseFloat(pick('gridSize', 20)); return (!isNaN(v) && v >= 4) ? v : 20; })();   // in page points (936×540)
+    // Deck-wide resolution only — the whole presentation shares one guide
+    // configuration (per-page overrides were retired; see _guidePref).
+    const def = _guidePref();
+    const setId = def.setId;
+    let snapMode = def.snapMode;
+    if (snapMode !== 'off' && snapMode !== 'guides' && snapMode !== 'grid') snapMode = (def.snap === false) ? 'off' : 'guides';
+    const gridSize = (() => { const v = parseFloat(def.gridSize); return (!isNaN(v) && v >= 4) ? v : 20; })();   // in page points (936×540)
     return {
         setId: setId,
-        show: (typeof pick('show', false) === 'boolean') ? pick('show', false) : false,
+        show: (typeof def.show === 'boolean') ? def.show : false,
         snap: snapMode === 'guides',            // legacy readers
         snapMode: snapMode,
-        grid: !!pick('grid', false),            // show the background grid
+        grid: !!def.grid,                       // show the background grid
         gridSize: gridSize,
         set: _guideSetById(setId)
     };
@@ -15819,15 +15861,8 @@ function _pageGuide() {
 // per-page behavior, so stale saved values can't keep individual pages out
 // of sync with the deck setting.
 function _setDeckGuide(patch) {
-    const g = _guidePref();
+    const g = _guidePref();   // also runs the per-page-era migration
     Object.keys(patch).forEach(k => { g[k] = patch[k]; });
-    try {
-        const pg = editorialContent.pageGuides || {};
-        Object.keys(pg).forEach(key => {
-            Object.keys(patch).forEach(k => { if (pg[key]) delete pg[key][k]; });
-            if (pg[key] && !Object.keys(pg[key]).length) delete pg[key];
-        });
-    } catch (e) {}
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
 // ── InDesign-style guide painter, shared by the editable layout canvas and
@@ -18028,11 +18063,7 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
 // Thirds, Center) leaves the template at its original design coordinates.
 function _layoutSafeFrame() {
     try {
-        const key = (typeof _curPageKey !== 'undefined' && _curPageKey) ? _curPageKey : null;
-        const def = _guidePref();
-        const ov = (key && editorialContent.pageGuides) ? editorialContent.pageGuides[key] : null;
-        const setId = (ov && ov.setId !== undefined) ? ov.setId : def.setId;
-        const set = _guideSetById(setId);
+        const set = _guideSetById(_guidePref().setId);
         if (!set || !set.margin) return null;
         const m = set.margin;
         if (!(m.l + m.r < 0.9 && m.t + m.b < 0.9)) return null;   // nonsense margins — ignore
