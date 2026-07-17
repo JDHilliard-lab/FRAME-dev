@@ -18406,7 +18406,14 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             const out = []; const members = u.members || [];
             let ge = null, gi = -1, best = 0;
             (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan(), _measure: _breakerMeasure(), _idx: gi }), idx: gi, _groupKey: u.key, li: li });
+            // _ovKey must ride along exactly like the studio preview's breaker
+            // desc builds it (see _deckPageList): _drawInstallGuidePage keys
+            // EVERYTHING breaker-specific off 'elevgrp:' — the elevation-only
+            // config in _igCfg, the clean no-guides capture options, the cache
+            // key, and per-page overrides. Without it the export resolved this
+            // page as a regular install-guide page and rendered the full spec
+            // chrome, while the preview (which had the key) stayed clean.
+            if (ge) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan(), _measure: _breakerMeasure(), _idx: gi, _ovKey: 'elevgrp:' + u.key }), idx: gi, _groupKey: u.key, li: li });
             members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: _specTplResolve(m.id || ''), li: li }));
             return out;
         }
