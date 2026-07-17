@@ -12226,7 +12226,7 @@ function _dsOpenSettingsMenu(ev) {
             b.onclick = () => { onClick(); };
             return b;
         };
-        menu.appendChild(item(_dsShowGuides ? 'Hide alignment guides \u2713' : 'Show alignment guides', 'Page margins + center lines (preview only)', () => { _dsShowGuides = !_dsShowGuides; _dsOpenSettingsMenu(); _dsRenderCenter(); }));
+        menu.appendChild(item(_dsShowGuides ? 'Hide alignment guides \u2713' : 'Show alignment guides', 'This page\u2019s guide set: safety frame, columns, ruler guides (preview only)', () => { _dsShowGuides = !_dsShowGuides; _dsOpenSettingsMenu(); _dsRenderCenter(); }));
         const desc = _dsPages[_dsIndex]; const key = desc ? _deckPageKey(desc) : '';
         const annCount = (key && editorialContent.annotations && editorialContent.annotations[key]) ? editorialContent.annotations[key].length : 0;
         menu.appendChild(item('Clear text & images on this page' + (annCount ? ' (' + annCount + ')' : ''), 'Removes overlays you added to this page', () => {
@@ -12615,6 +12615,20 @@ async function _dsBakeSpecImages(page, desc, token) {
 }
 function _dsAddGuides(page, w, hh) {
     if (!_dsShowGuides) return;
+    // The editable layout canvas paints the guide set itself (with snapping);
+    // painting here too would double every line.
+    if (page.querySelector && page.querySelector('#dsLayoutCanvas')) return;
+    try {
+        const G = _pageGuide();
+        if (G.set || G.grid) {
+            // Same InDesign-style painter as the layout editor — purple safety
+            // frame + columns, cyan ruler guides, optional grid — with `show`
+            // forced on since the settings-menu toggle is the gate here.
+            _paintGuideSet(page, Object.assign({}, G, { show: true }));
+            return;
+        }
+    } catch (e) {}
+    // Fallback (no guide set resolvable): the old margin frame + center lines.
     const mx = Math.round(w * 40 / 936), my = Math.round(hh * 40 / 540);
     const g = document.createElement('div');
     g.style.cssText = 'position:absolute; left:' + mx + 'px; top:' + my + 'px; right:' + mx + 'px; bottom:' + my + 'px; border:1px dashed rgba(106,106,255,0.5); pointer-events:none;';
@@ -15734,13 +15748,28 @@ function _cropToCanvas(img, boxWpt, boxHpt, aspect, zoom, panX, panY, fit) {
 // freeform lines — like templates for layout scaffolding. Seeded from the
 // Farmboy InDesign template (1920×1080: 12 cols, 18pt gutter, T54/B108/L45/R45).
 const GUIDE_SEED = [
-    { id: 'g_idml12', name: 'Farmboy \u00b7 12-Column', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 12, gutter: 0.009375, rows: 0, rowGutter: 0, vlines: [], hlines: [] },
-    { id: 'g_idml6', name: 'Farmboy \u00b7 6-Column', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 6, gutter: 0.009375, rows: 0, rowGutter: 0, vlines: [], hlines: [] },
+    { id: 'g_idml12', name: 'Farmboy \u00b7 12-Column', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 12, gutter: 0.009375, rows: 0, rowGutter: 0, vlines: [], hlines: [0.145, 0.205] },
+    { id: 'g_idml6', name: 'Farmboy \u00b7 6-Column', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 6, gutter: 0.009375, rows: 0, rowGutter: 0, vlines: [], hlines: [0.145, 0.205] },
     { id: 'g_margins', name: 'Margins only', builtin: true, margin: { t: 0.05, b: 0.10, l: 0.0234, r: 0.0234 }, cols: 1, gutter: 0, rows: 0, rowGutter: 0, vlines: [], hlines: [] },
     { id: 'g_thirds', name: 'Rule of Thirds', builtin: true, margin: null, cols: 0, gutter: 0, rows: 0, rowGutter: 0, vlines: [0.3333, 0.6667], hlines: [0.3333, 0.6667] },
     { id: 'g_center', name: 'Center', builtin: true, margin: null, cols: 0, gutter: 0, rows: 0, rowGutter: 0, vlines: [0.5], hlines: [0.5] }
 ];
-function _guideSets() { if (!editorialContent.guideSets || !editorialContent.guideSets.length) editorialContent.guideSets = JSON.parse(JSON.stringify(GUIDE_SEED)); return editorialContent.guideSets; }
+function _guideSets() {
+    if (!editorialContent.guideSets || !editorialContent.guideSets.length) editorialContent.guideSets = JSON.parse(JSON.stringify(GUIDE_SEED));
+    // Builtins are locked in the manager (duplicate to customise), so they can
+    // safely be refreshed from the seed — projects saved before a seed update
+    // (e.g. the title-alignment hlines on the Farmboy sets) pick it up here.
+    // User-made sets are never touched.
+    try {
+        const list = editorialContent.guideSets;
+        GUIDE_SEED.forEach(seed => {
+            const i = list.findIndex(s => s && s.id === seed.id && s.builtin);
+            if (i >= 0) list[i] = JSON.parse(JSON.stringify(seed));
+            else if (!list.some(s => s && s.id === seed.id)) list.push(JSON.parse(JSON.stringify(seed)));
+        });
+    } catch (e) {}
+    return editorialContent.guideSets;
+}
 function _guideSetById(id) { return _guideSets().find(s => s.id === id) || null; }
 function _guideLines(set) {
     const vs = [], hs = []; if (!set) return { vs, hs };
@@ -15759,9 +15788,76 @@ function _pageGuide() {
     const def = _guidePref(); const key = _pageGuideKey();
     const ov = (key && editorialContent.pageGuides) ? editorialContent.pageGuides[key] : null;
     const setId = (ov && ov.setId !== undefined) ? ov.setId : def.setId;
-    return { setId: setId, show: (ov && typeof ov.show === 'boolean') ? ov.show : def.show, snap: (ov && typeof ov.snap === 'boolean') ? ov.snap : def.snap, set: _guideSetById(setId) };
+    const pick = (k, fb) => (ov && ov[k] !== undefined) ? ov[k] : (def[k] !== undefined ? def[k] : fb);
+    // snapMode: 'off' | 'guides' | 'grid' — like the elevation tab. Older
+    // files only carried the boolean `snap` (guides on/off); map it.
+    let snapMode = pick('snapMode', undefined);
+    if (snapMode !== 'off' && snapMode !== 'guides' && snapMode !== 'grid') {
+        const legacy = pick('snap', true);
+        snapMode = legacy ? 'guides' : 'off';
+    }
+    const gridSize = (() => { const v = parseFloat(pick('gridSize', 20)); return (!isNaN(v) && v >= 4) ? v : 20; })();   // in page points (936×540)
+    return {
+        setId: setId,
+        show: (typeof pick('show', false) === 'boolean') ? pick('show', false) : false,
+        snap: snapMode === 'guides',            // legacy readers
+        snapMode: snapMode,
+        grid: !!pick('grid', false),            // show the background grid
+        gridSize: gridSize,
+        set: _guideSetById(setId)
+    };
 }
 function _setPageGuide(patch) { const key = _pageGuideKey(); if (!key) return; editorialContent.pageGuides = editorialContent.pageGuides || {}; editorialContent.pageGuides[key] = Object.assign({}, editorialContent.pageGuides[key] || {}, patch); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+// ── InDesign-style guide painter, shared by the editable layout canvas and
+//    the center-preview overlay ────────────────────────────────────────────
+// Colour language matches the InDesign template: the safety/margin area is a
+// single PURPLE box; column (and row) guides are lighter purple and run only
+// within the safety frame, exactly like InDesign column guides; freeform
+// ruler guides (the title-alignment lines) are CYAN and run edge to edge.
+// The optional background grid is faint gray, sized in page points (936×540)
+// so cells are print-true squares — same idea as the elevation tab's grid.
+function _paintGuideSet(container, G) {
+    if (!container || !G) return;
+    const mk = (css) => { const d = document.createElement('div'); d.className = '_mbGuideLine'; d.style.cssText = 'position:absolute; pointer-events:none; ' + css; container.appendChild(d); return d; };
+    if (G.grid) {
+        const gw = (G.gridSize / 936 * 100), gh = (G.gridSize / 540 * 100);
+        mk('inset:0; z-index:1; background-image:linear-gradient(to right, rgba(0,0,0,0.07) 1px, transparent 1px), linear-gradient(to bottom, rgba(0,0,0,0.07) 1px, transparent 1px); background-size:' + gw + '% ' + gh + '%;');
+    }
+    if (!G.show || !G.set) return;
+    const set = G.set;
+    const PURPLE = 'rgba(171,54,255,0.9)', PURPLE_SOFT = 'rgba(171,54,255,0.5)', CYAN = 'rgba(0,190,235,0.9)';
+    const mT = set.margin ? set.margin.t : 0, mB = set.margin ? set.margin.b : 0, mL = set.margin ? set.margin.l : 0, mR = set.margin ? set.margin.r : 0;
+    // Safety frame — one purple box (not four full-bleed lines).
+    if (set.margin) mk('left:' + (mL * 100) + '%; top:' + (mT * 100) + '%; right:' + (mR * 100) + '%; bottom:' + (mB * 100) + '%; border:1px solid ' + PURPLE + '; z-index:2;');
+    // Column guides: pairs of lighter purple lines at every gutter edge,
+    // clipped to the safety frame's vertical band.
+    const cl = mL, cr = 1 - mR, cw = cr - cl;
+    if (set.cols && set.cols > 1) {
+        const g = set.gutter || 0; const colW = (cw - (set.cols - 1) * g) / set.cols;
+        for (let i = 0; i < set.cols; i++) {
+            const L = cl + i * (colW + g);
+            [L, L + colW].forEach(x => {
+                if (Math.abs(x - cl) < 1e-6 || Math.abs(x - cr) < 1e-6) return;   // frame already draws the outer edges
+                mk('left:' + (x * 100) + '%; top:' + (mT * 100) + '%; bottom:' + (mB * 100) + '%; width:1px; background:' + PURPLE_SOFT + '; z-index:2;');
+            });
+        }
+    }
+    // Row guides, clipped to the safety frame's horizontal band.
+    const ct = mT, cb = 1 - mB, chh = cb - ct;
+    if (set.rows && set.rows > 1) {
+        const g = set.rowGutter || 0; const rH = (chh - (set.rows - 1) * g) / set.rows;
+        for (let i = 0; i < set.rows; i++) {
+            const T = ct + i * (rH + g);
+            [T, T + rH].forEach(y => {
+                if (Math.abs(y - ct) < 1e-6 || Math.abs(y - cb) < 1e-6) return;
+                mk('top:' + (y * 100) + '%; left:' + (mL * 100) + '%; right:' + (mR * 100) + '%; height:1px; background:' + PURPLE_SOFT + '; z-index:2;');
+            });
+        }
+    }
+    // Freeform ruler guides — cyan, full bleed (title/text alignment lines).
+    (set.vlines || []).forEach(v => mk('left:' + (v * 100) + '%; top:0; bottom:0; width:1px; background:' + CYAN + '; z-index:2;'));
+    (set.hlines || []).forEach(h => mk('top:' + (h * 100) + '%; left:0; right:0; height:1px; background:' + CYAN + '; z-index:2;'));
+}
 function _mbDrawGuideSet(canvas, cr) {
     // Check the driving STATE (_mbActiveCanvasId), not the DOM element's own
     // id attribute — the two can momentarily disagree during a render if the
@@ -15770,21 +15866,32 @@ function _mbDrawGuideSet(canvas, cr) {
     // disappear" bug).
     if (!canvas || _mbActiveCanvasId !== 'dsLayoutCanvas') return;
     const G = _pageGuide();
-    if (!G.show) return;
-    if (!G.set) { console.warn('Guide set "' + G.setId + '" no longer exists \u2014 guides hidden until a valid set is chosen.'); return; }
-    const ln = _guideLines(G.set);
-    const mk = (css) => { const d = document.createElement('div'); d.className = '_mbGuideLine'; d.style.cssText = 'position:absolute; z-index:2; pointer-events:none; ' + css; canvas.appendChild(d); };
-    ln.vs.forEach(v => mk('left:' + (v * 100) + '%; top:0; bottom:0; width:1px; background:rgba(0,176,204,0.75); box-shadow:0 0 0 0.5px rgba(0,176,204,0.25);'));
-    ln.hs.forEach(h => mk('top:' + (h * 100) + '%; left:0; right:0; height:1px; background:rgba(0,176,204,0.75); box-shadow:0 0 0 0.5px rgba(0,176,204,0.25);'));
+    if (G.show && !G.set) { console.warn('Guide set "' + G.setId + '" no longer exists \u2014 guides hidden until a valid set is chosen.'); }
+    _paintGuideSet(canvas, G);
 }
-// Snap a box (fractions) against the current page's guide lines + page edges/center.
+// Snap a box (fractions) against the current page's snapping mode:
+// 'guides' → guide lines + page edges/center (as before);
+// 'grid'   → the background grid's cells (pt-true squares in 936×540 space);
+// 'off'    → no snapping. Alt-drag always bypasses (handled by the caller).
 function _mbSnapBox(box, r) {
-    const G = _pageGuide(); if (!G.snap || !G.set) return { dx: 0, dy: 0 };
-    const ln = _guideLines(G.set);
-    const vs = ln.vs.concat([0, 0.5, 1]); const hs = ln.hs.concat([0, 0.5, 1]);
+    const G = _pageGuide();
+    const mode = G.snapMode || (G.snap ? 'guides' : 'off');
+    if (mode === 'off') return { dx: 0, dy: 0 };
     const thrX = 7 / (r.width || 900), thrY = 7 / (r.height || 520);
     const anchorsX = [box.x, box.x + box.w / 2, box.x + box.w];
     const anchorsY = [box.y, box.y + box.h / 2, box.y + box.h];
+    let vs, hs;
+    if (mode === 'grid') {
+        const gx = G.gridSize / 936, gy = G.gridSize / 540;
+        // Snap each anchor to its nearest grid multiple directly (no need to
+        // enumerate every line).
+        let bestDX = 0, bdX = thrX; anchorsX.forEach(a => { const v = Math.round(a / gx) * gx; const d = v - a; if (Math.abs(d) < bdX) { bdX = Math.abs(d); bestDX = d; } });
+        let bestDY = 0, bdY = thrY; anchorsY.forEach(a => { const v = Math.round(a / gy) * gy; const d = v - a; if (Math.abs(d) < bdY) { bdY = Math.abs(d); bestDY = d; } });
+        return { dx: bestDX, dy: bestDY };
+    }
+    if (!G.set) return { dx: 0, dy: 0 };
+    const ln = _guideLines(G.set);
+    vs = ln.vs.concat([0, 0.5, 1]); hs = ln.hs.concat([0, 0.5, 1]);
     let bestDX = 0, bdX = thrX; anchorsX.forEach(a => vs.forEach(v => { const d = v - a; if (Math.abs(d) < bdX) { bdX = Math.abs(d); bestDX = d; } }));
     let bestDY = 0, bdY = thrY; anchorsY.forEach(a => hs.forEach(v => { const d = v - a; if (Math.abs(d) < bdY) { bdY = Math.abs(d); bestDY = d; } }));
     return { dx: bestDX, dy: bestDY };
@@ -15798,14 +15905,40 @@ function _mbOpenGuidesMenu() {
     m.style.cssText = 'position:fixed; z-index:100001; background:var(--bg-panel,#2a2a30); color:var(--text-main,#eee); border:1px solid var(--border-color,#444); border-radius:8px; padding:10px; box-shadow:0 8px 28px rgba(0,0,0,0.5); width:240px; font-size:0.72rem;';
     const row = (label, checked, fn) => { const l = document.createElement('label'); l.style.cssText = 'display:flex; align-items:center; gap:7px; padding:4px 2px; cursor:pointer;'; const c = document.createElement('input'); c.type = 'checkbox'; c.checked = checked; c.onchange = () => { fn(c.checked); }; l.appendChild(c); l.appendChild(document.createTextNode(label)); return l; };
     m.appendChild(row('Show guides on this page', G.show, (v) => { _setPageGuide({ show: v }); try { _dsRenderCenter(); } catch (e) { renderMoodboardCanvas(); } }));
-    m.appendChild(row('Snap to guides', G.snap, (v) => { _setPageGuide({ snap: v }); }));
+    // Snapping — Off / Guides / Grid, like the elevation tab's snap options.
+    const snLab = document.createElement('div'); snLab.textContent = 'Snapping'; snLab.style.cssText = 'font-size:0.6rem; color:var(--text-muted,#999); margin:8px 0 4px;'; m.appendChild(snLab);
+    const snRow = document.createElement('div'); snRow.style.cssText = 'display:flex; gap:4px;';
+    [['off', 'Off'], ['guides', 'Guides'], ['grid', 'Grid']].forEach(o => {
+        const on = (G.snapMode || 'guides') === o[0];
+        const b = document.createElement('button'); b.textContent = o[1]; b.className = 'action-btn btn-secondary';
+        b.style.cssText = 'flex:1; height:24px; padding:0; font-size:0.6rem;' + (on ? ' background:#6a6aff; color:#fff;' : '');
+        b.onclick = () => { _setPageGuide({ snapMode: o[0], snap: o[0] === 'guides' }); _mbOpenGuidesMenu(); };
+        snRow.appendChild(b);
+    });
+    m.appendChild(snRow);
+    // Background grid — visible page grid in print points, like the
+    // elevation tab's grid layer, with a settable cell size.
+    const grRow = document.createElement('div'); grRow.style.cssText = 'display:flex; align-items:center; gap:7px; margin-top:8px;';
+    const grChk = document.createElement('input'); grChk.type = 'checkbox'; grChk.checked = !!G.grid;
+    grChk.onchange = () => { _setPageGuide({ grid: grChk.checked }); try { _dsRenderCenter(); } catch (e) { renderMoodboardCanvas(); } };
+    const grLbl = document.createElement('label'); grLbl.style.cssText = 'display:flex; align-items:center; gap:7px; cursor:pointer; flex:1;';
+    grLbl.appendChild(grChk); grLbl.appendChild(document.createTextNode('Show grid'));
+    grRow.appendChild(grLbl);
+    const grSize = document.createElement('input'); grSize.type = 'number'; grSize.min = '4'; grSize.step = '1'; grSize.value = G.gridSize;
+    grSize.title = 'Grid cell size in page points (page is 936\u00d7540)';
+    grSize.style.cssText = 'width:54px; height:24px; font-size:0.68rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 5px;';
+    grSize.onchange = () => { const v = parseFloat(grSize.value); if (!isNaN(v) && v >= 4) { _setPageGuide({ gridSize: v }); try { _dsRenderCenter(); } catch (e) { renderMoodboardCanvas(); } } };
+    grRow.appendChild(grSize);
+    const grUnit = document.createElement('span'); grUnit.textContent = 'pt'; grUnit.style.cssText = 'font-size:0.62rem; color:var(--text-muted,#999);';
+    grRow.appendChild(grUnit);
+    m.appendChild(grRow);
     const lab = document.createElement('div'); lab.textContent = 'Guide set for this page'; lab.style.cssText = 'font-size:0.6rem; color:var(--text-muted,#999); margin:8px 0 4px;'; m.appendChild(lab);
     const sel = document.createElement('select'); sel.style.cssText = 'width:100%; height:28px; font-size:0.72rem;';
     _guideSets().forEach(s => { const o = document.createElement('option'); o.value = s.id; o.textContent = s.name; if (s.id === G.setId) o.selected = true; sel.appendChild(o); });
     sel.onchange = () => { _setPageGuide({ setId: sel.value, show: true }); _mbCloseGuidesMenu(); try { _dsRenderCenter(); } catch (e) { renderMoodboardCanvas(); } };
     m.appendChild(sel);
     const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:0.62rem; margin-top:8px;';
-    deckBtn.onclick = () => { const g = _guidePref(); g.setId = G.setId; g.show = G.show; g.snap = G.snap; if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
+    deckBtn.onclick = () => { const g = _guidePref(); g.setId = G.setId; g.show = G.show; g.snap = G.snap; g.snapMode = G.snapMode; g.grid = G.grid; g.gridSize = G.gridSize; if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
     m.appendChild(deckBtn);
     const mgr = document.createElement('button'); mgr.textContent = 'Manage guide sets\u2026'; mgr.className = 'action-btn'; mgr.style.cssText = 'width:100%; height:28px; font-size:0.66rem; margin-top:6px;';
     mgr.onclick = () => { _mbCloseGuidesMenu(); _mbOpenGuideManager(); };
