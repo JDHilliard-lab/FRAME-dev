@@ -13919,7 +13919,7 @@ function _dsPageChromeControls(t, desc) {
     // hidden or absent piece just doesn't take up space, the rest re-flows.
     editorialContent.pageFooters = editorialContent.pageFooters || {};
     const cur = editorialContent.pageFooters[key] || {};
-    const set = (k, v) => { editorialContent.pageFooters[key] = Object.assign({}, editorialContent.pageFooters[key] || {}, { [k]: v }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); };
+    const set = (k, v) => { editorialContent.pageFooters[key] = Object.assign({}, editorialContent.pageFooters[key] || {}, { [k]: v }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); if (typeof _dsRenderCenter === 'function') _dsRenderCenter(); };
     const ftl = document.createElement('div'); ftl.textContent = 'Footer (this page)'; ftl.style.cssText = 'font-size:0.62rem; color:var(--text-muted); margin-bottom:5px;'; wrap.appendChild(ftl);
     const segRow = (label, curVal, key2, hint) => {
         const lbl = document.createElement('div'); lbl.textContent = label; lbl.style.cssText = 'font-size:0.6rem; color:var(--text-muted); margin:6px 0 3px;'; wrap.appendChild(lbl);
@@ -13960,7 +13960,7 @@ function _dsPageChromeControls(t, desc) {
             const dataUrl = rd.result;
             const img = new Image();
             img.onload = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); };
-            img.onerror = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); };
+            img.onerror = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); if (typeof _dsRenderCenter === 'function') _dsRenderCenter(); };
             img.src = dataUrl;
         };
         rd.readAsDataURL(f);
@@ -13975,7 +13975,7 @@ function _dsPageChromeControls(t, desc) {
         row.appendChild(c); row.appendChild(document.createTextNode('Hide client logo on this page')); wrap.appendChild(row);
     }
     const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply footer to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:0.58rem; margin-top:8px;';
-    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo, hideFooter: f.hideFooter }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
+    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo, hideFooter: f.hideFooter }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (typeof _dsRenderCenter === 'function') _dsRenderCenter(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
     wrap.appendChild(deckBtn);
     t.appendChild(wrap);
 }
