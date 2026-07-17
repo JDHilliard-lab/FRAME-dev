@@ -7346,6 +7346,22 @@ async function _loadRepoLogoVariant(fileName) {
             const scale = 4;   // supersample so a vector mark still looks crisp at PDF resolution
             const cnv = document.createElement('canvas'); cnv.width = w * scale; cnv.height = h * scale;
             const cx = cnv.getContext('2d'); cx.drawImage(img, 0, 0, w * scale, h * scale);
+            // Force every visible pixel to pure white, keeping only the alpha
+            // the rasterizer computed. The white-logo SVG has no color besides
+            // white to begin with, so this is a no-op for a clean render — but
+            // it's a hard guarantee against the anti-aliased edge pixels ever
+            // drifting toward gray/black. Left un-cleaned, those edge pixels
+            // (semi-transparent, RGB pulled toward the transparent canvas's
+            // implicit black) survive into the exported PNG and can render as
+            // a faint dark halo/"logo behind the logo" once composited over a
+            // busy full-bleed photo in the PDF — this is what fixes that.
+            if (/white-logo/i.test(fileName)) {
+                try {
+                    const id = cx.getImageData(0, 0, cnv.width, cnv.height); const d = id.data;
+                    for (let i = 0; i < d.length; i += 4) { if (d[i + 3] > 0) { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; } }
+                    cx.putImageData(id, 0, 0);
+                } catch (e) {}
+            }
             return { dataUrl: cnv.toDataURL('image/png'), aspect: w / h };
         } catch (e) {}
     }
@@ -13547,13 +13563,21 @@ function _dsRenderCenter() {
                     }
                 } catch (e) {}
                 page.appendChild(specBase);
+                // Ambient/background render, not something the person asked
+                // to Build — never allowed to trigger a live elevation capture
+                // (that briefly switches the app to the Elevations tab to
+                // screenshot it, which is the "glitched elevation" flash).
+                // _drawInstallGuidePage sees this flag and shows a calm
+                // placeholder instead when no cached capture exists yet.
+                const _prevNoCap = _igNoCapture; _igNoCapture = true;
                 renderDeckPageCanvas(desc).then(cv2 => {
+                    _igNoCapture = _prevNoCap;
                     if (!cv2) return;
                     try { _dsBuilt[_deckPageKey(desc)] = cv2.toDataURL('image/jpeg', 0.92); _dsBuiltGen[_deckPageKey(desc)] = _dsEditGen; } catch (e) {}
                     if (tok !== _dsTlRenderTok || !specBase.isConnected) return;
                     cv2.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
                     specBase.innerHTML = ''; specBase.appendChild(cv2);
-                }).catch(() => {});
+                }).catch(() => { _igNoCapture = _prevNoCap; });
             }
         } else {
             // Any other kind that stays on the HTML mock (e.g. prose pages)
@@ -16049,15 +16073,22 @@ function _textExtraCss(t) {
 }
 // Map our six alignment modes to what jsPDF understands.
 function _pdfAlign(align) { return (align === 'center' || align === 'justify-center') ? 'center' : align === 'right' ? 'right' : (align === 'justify' || align === 'justify-all') ? 'justify' : 'left'; }
-// Faded, non-interactive guides showing where the title, footer, and page
-// margins print — so elements don't get buried under deck chrome.
+// Faded, non-interactive guides showing where the title and page margins
+// print, plus a thin line marking the footer band — so elements don't get
+// buried under deck chrome. The footer's actual CONTENT (page #, project
+// line, copyright, logo) is never faked here — _dsAddFooter (or the page's
+// own exact render) draws the real thing on top of this canvas already, so
+// duplicating it as static placeholder text just left a stale, mismatched
+// ghost of it sitting underneath (wrong tone, out of sync with real toggles
+// like hide-copyright/hide-logo/per-page overrides).
 function _mbDrawGuides(canvas) {
     const mk = (css, text) => { const d = document.createElement('div'); d.style.cssText = 'position:absolute; pointer-events:none; ' + css; if (text) d.textContent = text; canvas.appendChild(d); };
     const pg = (typeof _mbPage === 'function') ? _mbPage() : null;
     if (pg && pg.type === 'breaker') {
-        // full-bleed treatment: image runs to the edge, no title/footer printed
+        // Full-bleed treatment: image runs to the edge, no title printed. The
+        // footer still prints (auto-flipped to light ink) via _dsAddFooter.
         mk('left:0; top:0; right:0; bottom:0; border:1px dashed rgba(106,106,255,0.35);');
-        mk('left:50%; top:6px; transform:translateX(-50%); font:700 9px Arial,sans-serif; letter-spacing:1px; color:rgba(106,106,255,0.5); background:rgba(255,255,255,0.6); padding:1px 6px; border-radius:3px;', 'FULL BLEED · NO FOOTER');
+        mk('left:50%; top:6px; transform:translateX(-50%); font:700 9px Arial,sans-serif; letter-spacing:1px; color:rgba(106,106,255,0.5); background:rgba(255,255,255,0.6); padding:1px 6px; border-radius:3px;', 'FULL BLEED');
         return;
     }
     // page margin frame (≈40pt on a 936×540 page)
@@ -16065,18 +16096,9 @@ function _mbDrawGuides(canvas) {
     // real page title (faded), where the PDF prints it (top-left)
     const title = pg && pg.title ? pg.title : '';
     if (title) mk('left:4.3%; top:3.0%; font:700 17px "Arial Narrow",Arial,sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.22); text-transform:uppercase;', title);
-    // footer band + the real footer line built from the current project meta
+    // Footer band boundary only — a thin top rule marking where the real
+    // footer (drawn separately, on top) sits, so notes/images don't overlap it.
     mk('left:4.3%; right:4.3%; bottom:2.6%; border-top:1px solid rgba(0,0,0,0.12);');
-    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
-    const name = (g('g_projName') || 'PROJECT NAME').toUpperCase();
-    const loc = g('specPdfLocation').toUpperCase();
-    const code = g('specPdfCode'), ver = g('specPdfVersion');
-    let line = name;
-    if (loc) line += ' \u2013 ' + loc;
-    if (code) line += '   |   ' + code + (ver ? '.' + ver : '');
-    line += '    Copyright \u00A9 ' + new Date().getFullYear() + ' Farmboy Fine Arts Inc.';
-    mk('left:6.0%; right:14%; bottom:1.1%; font:9px "Messina",Georgia,serif; color:rgba(0,0,0,0.24); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;', line);
-    mk('right:4.3%; bottom:1.3%; font:700 8px Arial,sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.20);', 'FARMBOY');
 }
 
 function _mbUpdateToolbar() {
@@ -17256,6 +17278,29 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             if (!cap && !_igNoCapture) {
                 cap = await _captureElevWithGuides(igElevIdx, isBreakerCap ? { spacing: false, hangHeight: false, wallDims: false } : undefined);
                 if (cap && cap.dataUrl) _igCapCache[capKey] = cap;
+            }
+            if (!cap && _igNoCapture) {
+                // Ambient background preview (page just sitting in the studio,
+                // nothing the person explicitly asked to build/export) — never
+                // trigger a live capture here. A live capture briefly switches
+                // the whole app over to the Elevations tab to screenshot it,
+                // and that switch is what was bleeding through as a "glitched"
+                // raw elevation drawing on the page. Only the explicit Build
+                // button and full export are allowed to do that switch (both
+                // already cover the screen with a progress overlay while it
+                // happens). Here, just say so — calmly, and it clears itself
+                // the moment Build runs and caches the real capture.
+                const yTop2 = M + 58, yBot2 = PH - 34;
+                const bx = elevLeft, by = yTop2, bw = PW - M - elevLeft, bh = yBot2 - by;
+                doc.setDrawColor(210, 210, 210); doc.setLineWidth(0.75);
+                try { doc.setLineDashPattern([3, 2], 0); } catch (e) {}
+                try { doc.rect(bx, by, bw, bh, 'S'); } catch (e) {}
+                try { doc.setLineDashPattern([], 0); } catch (e) {}
+                doc.setFont(_font('serif'), 'italic'); doc.setFontSize(9.5); doc.setTextColor(180, 180, 180);
+                doc.text('Hit Build to update this elevation drawing', bx + bw / 2, by + bh / 2, { align: 'center' });
+                doc.setTextColor(20, 20, 20);
+                _drawPdfFooter(doc, logos, pageNum, meta);
+                return;
             }
             if (cap && cap.dataUrl) {
                 let yTop = M + 58; const yBot = PH - 34, capH = 13;
