@@ -816,7 +816,7 @@
 <!-- Generic info / confirm modal. Replaces window.alert() and window.confirm() calls
      with the studio's themed modal styling so popups feel consistent. Reused via
      showInfoModal() / showConfirmModal() helpers in app.js. -->
-<div id="infoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
+<div id="infoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:100010; align-items:center; justify-content:center; backdrop-filter: blur(2px);">
     <div style="background:var(--bg-panel); padding:20px; border-radius:8px; width:340px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 id="infoModalTitle" style="margin-top:0; margin-bottom: 8px; font-size:1.1rem; color:var(--text-strong);">Notice</h3>
         <p id="infoModalBody" style="font-size:0.75rem; color:var(--text-main); margin-bottom:20px; line-height: 1.4;">…</p>
