@@ -7495,7 +7495,11 @@ function _font(role) {
 // wordmark (right). Logos optional. `pageNum` is 1-based. `meta` (optional)
 // holds { code, version, location } from the Presentation PDF modal; when
 // present, the rich studio footer line is drawn, otherwise just the number.
-let _curFooter = { text: 'dark', leftTheme: 'dark', hideCopyright: false, hideLogo: false, hideClientLogo: false };
+let _curFooter = { text: 'dark', leftTheme: 'dark', hideCopyright: false, hideLogo: false, hideClientLogo: false, hideFooter: false };
+// The deck page key of the page currently being drawn (preview or export).
+// Lets drawers that only receive tiles (e.g. breaker pages) consult per-page
+// footer overrides without threading the key through every signature.
+let _curPageKey = null;
 // Deck default + per-page overrides, keyed by deck page key.
 function _resolveFooter(desc) {
     const def = (editorialContent && editorialContent.footer) || {};
@@ -7503,7 +7507,7 @@ function _resolveFooter(desc) {
     // (project code + location, + client logo). Independent so a full-bleed
     // dark page can go white on the right while staying dark/black text on the
     // left, or any other combination.
-    const base = { text: def.text || 'dark', leftTheme: def.leftTheme || 'dark', hideCopyright: !!def.hideCopyright, hideLogo: !!def.hideLogo, hideClientLogo: !!def.hideClientLogo };
+    const base = { text: def.text || 'dark', leftTheme: def.leftTheme || 'dark', hideCopyright: !!def.hideCopyright, hideLogo: !!def.hideLogo, hideClientLogo: !!def.hideClientLogo, hideFooter: !!def.hideFooter };
     const key = (typeof desc === 'string') ? desc : (desc ? _deckPageKey(desc) : null);
     const ov = (key && editorialContent.pageFooters) ? editorialContent.pageFooters[key] : null;
     if (ov) {
@@ -7512,6 +7516,7 @@ function _resolveFooter(desc) {
         if (typeof ov.hideCopyright === 'boolean') base.hideCopyright = ov.hideCopyright;
         if (typeof ov.hideLogo === 'boolean') base.hideLogo = ov.hideLogo;
         if (typeof ov.hideClientLogo === 'boolean') base.hideClientLogo = ov.hideClientLogo;
+        if (typeof ov.hideFooter === 'boolean') base.hideFooter = ov.hideFooter;
     }
     return base;
 }
@@ -7629,6 +7634,7 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
     const PH = doc.internal.pageSize.getHeight();
     const M = 40;
     const F = _curFooter || { text: 'dark', leftTheme: 'dark' };
+    if (F.hideFooter) return;   // per-page/deck "no footer" opt-out
     const rightLight = F.text === 'light';       // logo + copyright colour
     const leftLight = F.leftTheme === 'light';    // code/name/location colour
     const rtc = rightLight ? 255 : 120, ltc = leftLight ? 255 : 120;
@@ -7725,6 +7731,36 @@ function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
+// Single source of truth for the Floorplan Key page's entry list. Both the
+// live preview (renderDeckPageCanvas) and the PDF export build their entries
+// here, so the callout list, codes labels, pins, and wall lines can never
+// disagree between what you see in the studio and what exports. `idToPage` is
+// optional (export passes it for clickable spec-page links; preview passes null).
+function _fpKeyEntries(li, idToPage) {
+    const levelGroups = _fpGroups().filter(g => (g.level || 0) === li);
+    return levelGroups.map(g => {
+        let linkPage = null;
+        if (idToPage) { for (const id of g.ids) { if (idToPage[id]) { linkPage = idToPage[id]; break; } } }
+        const codesLabel = (g.ids.length > 1)
+            ? (g.key + ' (' + g.ids.map(id => { const s = id.indexOf(g.key) === 0 ? id.slice(g.key.length).replace(/^[-_\s]*/, '') : id; return s || id; }).join('/') + ')')
+            : (g.ids[0] || g.key);
+        return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage, wallLine: g.wallLine || null, wallLines: g.wallLines || null, wallPanels: g.wallPanels || 1 };
+    });
+}
+// The exact rectangle _drawFloorplanKeyPage reserves for the plan image, plus
+// the contain-fitted image rect within it — shared so the studio's interactive
+// overlay sits pixel-for-pixel where the plan lands in the PDF.
+function _fpPlanRect(PW, PH, M) {
+    const planX = PW * 0.42, planY = M + 30;
+    return { x: planX, y: planY, w: PW - M - planX, h: PH - planY - 60 };
+}
+function _fpPlanFit(PW, PH, M, iw, ih) {
+    const R = _fpPlanRect(PW, PH, M);
+    if (!iw || !ih) return null;
+    const fit = Math.min(R.w / iw, R.h / ih);
+    const dw = iw * fit, dh = ih * fit;
+    return { dx: R.x + (R.w - dw) / 2, dy: R.y + (R.h - dh) / 2, dw: dw, dh: dh };
+}
 // Floorplan KEY page — the clickable hub. Real data-driven version: title +
 // numbered callout list (id + location from each row) + the floorplan image
 // (uploaded via the Presentation PDF modal; placeholder if none). Each list
@@ -7749,18 +7785,17 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, leve
     doc.text((levelName ? ('PROPOSED FLOOR PLAN \u2014 ' + levelName.toUpperCase()) : 'PROPOSED FLOOR PLAN'), M, M + 30);
     doc.setTextColor(20, 20, 20);
 
-    // — Floorplan image (right) — drawn first so pins can sit on its rect —
-    const planX = PW * 0.42;
-    const planY = M + 30;
-    const planW = PW - M - planX;
-    const planH = PH - planY - 60;
+    // — Floorplan image (right) — drawn first so pins can sit on its rect.
+    //   Geometry comes from _fpPlanRect/_fpPlanFit, shared with the studio's
+    //   interactive overlay so preview and export can never drift. —
+    const _pr = _fpPlanRect(PW, PH, M);
+    const planX = _pr.x, planY = _pr.y, planW = _pr.w, planH = _pr.h;
     let planRect = null;
     if (planImg && (planImg.naturalWidth || planImg.width)) {
         const iw = planImg.naturalWidth || planImg.width;
         const ih = planImg.naturalHeight || planImg.height;
-        const fit = Math.min(planW / iw, planH / ih);
-        const dw = iw * fit, dh = ih * fit;
-        const dx = planX + (planW - dw) / 2, dy = planY + (planH - dh) / 2;
+        const f = _fpPlanFit(PW, PH, M, iw, ih);
+        const dx = f.dx, dy = f.dy, dw = f.dw, dh = f.dh;
         try { doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
             try { doc.addImage(planImg, 'PNG', dx, dy, dw, dh); } catch (e2) {}
         }
@@ -8704,7 +8739,22 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
             doc.setTextColor(20, 20, 20);
         }
     });
-    if (!isBreaker) _drawPdfFooter(doc, logos, pageNum, meta);
+    // Footer on EVERY page — breakers included. The footer is project
+    // information (page number, name, code.version, rights) and belongs on
+    // each page; a full-bleed image tile auto-flips the footer ink to light
+    // so it stays readable, unless this page carries an explicit override.
+    // Pages can still opt out entirely via the per-page "hide footer" toggle.
+    try {
+        const fullBleed = (tiles || []).some(t => t && (t.type || 'image') === 'image' && (t.img || t._img) && (t.w || 0) >= 0.9 && (t.h || 0) >= 0.9 && (t.x || 0) <= 0.05 && (t.y || 0) <= 0.05);
+        if (fullBleed) {
+            const ov = ((typeof editorialContent !== 'undefined' && editorialContent.pageFooters) || {})[_curPageKey] || {};
+            const F = Object.assign({}, _curFooter || { text: 'dark', leftTheme: 'dark' });
+            if (!ov.text || ov.text === 'auto') F.text = 'light';
+            if (!ov.leftTheme || ov.leftTheme === 'auto') F.leftTheme = 'light';
+            _curFooter = F;
+        }
+    } catch (e) {}
+    _drawPdfFooter(doc, logos, pageNum, meta);
 }
 
 // "Good Art. Good People." slogan page (display).
@@ -8866,7 +8916,7 @@ function _drawStudioBlock(doc, x, y, w, ink) {
 function PW_SAFE_MIN(w) { return w && w > 60 ? w : 220; }
 
 // Cover / title page using the project metadata fields (g_projName etc.).
-function _drawCoverPage(doc, logos) {
+function _drawCoverPage(doc, logos, pageNum, meta) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const M = 56;
@@ -8914,6 +8964,20 @@ function _drawCoverPage(doc, logos) {
     doc.setDrawColor(ink.line[0], ink.line[1], ink.line[2]); doc.setLineWidth(0.75);
     doc.line(M, titleY + 10, PW - M, titleY + 10);
     doc.setTextColor(20, 20, 20);
+    // Footer on the cover too — project info belongs on every page. The cover
+    // already carries the big wordmark bottom-right, so the footer's Farmboy
+    // logo defaults to hidden here (an explicit per-page override still wins),
+    // and the ink follows the cover theme like every other page.
+    try {
+        const ov = ((typeof editorialContent !== 'undefined' && editorialContent.pageFooters) || {})['fixed:cover'] || {};
+        const F = _resolveFooter('fixed:cover');
+        if (typeof ov.hideLogo !== 'boolean') F.hideLogo = true;
+        if (!ov.text || ov.text === 'auto') F.text = ink.footer;
+        if (!ov.leftTheme || ov.leftTheme === 'auto') F.leftTheme = ink.footer;
+        _curFooter = F;
+        _drawPdfFooter(doc, logos, pageNum || 1, meta || null);
+        _curFooter = { text: 'dark', leftTheme: 'dark' };
+    } catch (e) {}
 }
 
 async function exportSpecPagePDF(opts) {
@@ -9144,7 +9208,13 @@ function _deckMockHTML(desc, w, h) {
     if (desc.kind === 'floorplan') {
         const lv = floorplanLevels[desc.level] || {};
         let inner = '<div style="position:absolute; left:' + pad + 'px; top:' + Math.round(pad * 0.5) + 'px; font-weight:800; color:#111; font-size:' + fs(0.06) + 'px;">FLOORPLAN — ' + _esc((lv.name || ('Level ' + (desc.level + 1))).toUpperCase()) + '</div>';
-        const planTop = Math.round(h * 0.16), planH = h - planTop - pad, planW = w - pad * 2, planL = pad;
+        // Same layout blocking as the real page (_fpPlanRect fractions): the
+        // numbered callout list on the left ~38%, plan on the right.
+        _fpGroups().filter(g => (g.level || 0) === desc.level).slice(0, 14).forEach((g, gi) => {
+            const ly = Math.round(h * 0.18) + gi * Math.round(h * 0.05);
+            inner += '<div style="position:absolute; left:' + pad + 'px; top:' + ly + 'px; width:' + Math.round(w * 0.34) + 'px; height:' + Math.round(h * 0.04) + 'px; display:flex; align-items:center; gap:4px; overflow:hidden;"><div style="flex:0 0 auto; width:' + Math.round(h * 0.032) + 'px; height:' + Math.round(h * 0.032) + 'px; border-radius:50%; background:' + categoryColor(g.category) + ';"></div><div style="font-size:' + fs(0.026) + 'px; color:#333; white-space:nowrap; overflow:hidden;">' + _esc((g.ids && g.ids[0]) || g.key || '') + (g.location ? '  |  ' + _esc(g.location) : '') + '</div></div>';
+        });
+        const planL = Math.round(w * 0.42), planTop = Math.round(h * 0.1296), planW = Math.round(w * 0.5373), planH = Math.round(h * 0.7593);
         if (lv.imageData) {
             inner += '<div style="position:absolute; left:' + planL + 'px; top:' + planTop + 'px; width:' + planW + 'px; height:' + planH + 'px; background:#fafafa; border:1px solid #eee;"><img src="' + lv.imageData + '" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain;">';
             _fpGroups().filter(g => (g.level || 0) === desc.level && g.planX != null && g.planY != null).forEach(g => {
@@ -12523,6 +12593,93 @@ function _dsAddGuides(page, w, hh) {
     const hz = document.createElement('div'); hz.style.cssText = 'position:absolute; top:50%; left:0; right:0; height:1px; background:rgba(106,106,255,0.25); pointer-events:none;';
     page.appendChild(g); page.appendChild(vx); page.appendChild(hz);
 }
+// Live footer overlay for DOM-rendered center pages (editable layout/fixed
+// pages, freeform custom pages, and any page whose exact canvas render isn't
+// available). Canvas-rendered pages already carry the footer from the real
+// drawer; this mirrors _drawPdfFooter's geometry (page units 936x540) so the
+// editor shows the footer exactly where it prints. Non-interactive — it never
+// blocks element editing or annotations.
+function _dsAddFooter(page, w, hh, desc) {
+    try {
+        if (page.querySelector && page.querySelector('[data-ds-footer]')) return;   // never double up
+        const key = _deckPageKey(desc);
+        const F = _resolveFooter(key);
+        // Theme steers footer ink when this page has no explicit override,
+        // mirroring _pageThemeAutoApply.
+        try {
+            const th = _pageTheme(key);
+            if (th.mode === 'dark') {
+                const ov = (editorialContent.pageFooters || {})[key] || {};
+                if (!ov.text || ov.text === 'auto') F.text = 'light';
+                if (!ov.leftTheme || ov.leftTheme === 'auto') F.leftTheme = 'light';
+            }
+        } catch (e) {}
+        if (F.hideFooter) return;
+        const S = hh / 540;
+        const M = 40 * S;
+        const lt = F.leftTheme === 'light' ? '#ffffff' : 'rgb(120,120,120)';
+        const rt = F.text === 'light' ? '#ffffff' : 'rgb(120,120,120)';
+        const SERIF = '"Messina","Times New Roman",Georgia,serif';
+        const wrapEl = document.createElement('div');
+        wrapEl.setAttribute('data-ds-footer', '1');
+        wrapEl.style.cssText = 'position:absolute; inset:0; pointer-events:none; z-index:5;';
+        // PDF geometry: text baseline at PH-20, logos span PH-27..PH-16. Rows
+        // anchor a hair above the glyph bottom (~PH-17.5) with logos nudged
+        // down so both zones land where the drawer puts them.
+        const rowBottom = 17.5 * S;
+        // — LEFT zone: page number · project name – location | code.version · client logo —
+        const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
+        const mm = (typeof window !== 'undefined' && window._specPdfMeta) ? window._specPdfMeta : {};
+        const name = (g('g_projName') || 'Art Program').toUpperCase();
+        const loc = (g('specPdfLocation') || mm.location || '').trim().toUpperCase();
+        const code = (g('specPdfCode') || mm.code || '').trim();
+        const ver = (g('specPdfVersion') || mm.version || '').trim();
+        let line = name;
+        if (loc) line += ' \u2013 ' + loc;
+        if (code) line += '   |   ' + code + (ver ? '.' + ver : '');
+        const left = document.createElement('div');
+        left.style.cssText = 'position:absolute; left:' + M + 'px; bottom:' + rowBottom + 'px; display:flex; align-items:flex-end; gap:' + (10 * S) + 'px; line-height:1; white-space:nowrap;';
+        const pn = document.createElement('span');
+        pn.style.cssText = 'font-family:Arial,Helvetica,sans-serif; font-size:' + (8 * S) + 'px; color:' + lt + '; min-width:' + (4 * S) + 'px;';
+        pn.textContent = String((typeof _dsIndex !== 'undefined' ? _dsIndex : 0) + 1);
+        left.appendChild(pn);
+        const pl = document.createElement('span');
+        pl.style.cssText = 'font-family:' + SERIF + '; font-size:' + (5.8 * S) + 'px; color:' + lt + ';';
+        pl.textContent = line;
+        left.appendChild(pl);
+        const cl = (editorialContent && editorialContent.footerClientLogo) || null;
+        if (cl && cl.dataUrl && !F.hideClientLogo) {
+            const ci = document.createElement('img');
+            ci.src = cl.dataUrl;
+            ci.style.cssText = 'height:' + (11 * S) + 'px; width:auto; display:block; margin-bottom:' + (-2 * S) + 'px;';
+            left.appendChild(ci);
+        }
+        wrapEl.appendChild(left);
+        // — RIGHT zone: copyright + Farmboy logo, right-aligned as a unit —
+        const right = document.createElement('div');
+        right.style.cssText = 'position:absolute; right:' + M + 'px; bottom:' + rowBottom + 'px; display:flex; align-items:flex-end; gap:' + (10 * S) + 'px; line-height:1; white-space:nowrap;';
+        if (!F.hideCopyright) {
+            const year = new Date().getFullYear();
+            const cp = document.createElement('span');
+            cp.style.cssText = 'font-family:' + SERIF + '; font-size:' + (5.8 * S) + 'px; color:' + rt + ';';
+            cp.textContent = 'Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
+            right.appendChild(cp);
+        }
+        if (!F.hideLogo) {
+            const li = document.createElement('img');
+            li.style.cssText = 'height:' + (11 * S) + 'px; width:auto; display:block; margin-bottom:' + (-2 * S) + 'px;';
+            right.appendChild(li);
+            _getPdfLogos().then(logos => {
+                if (!logos || !li.isConnected) return;
+                let src = (F.text === 'light') ? (logos.farmboyWhite || _whiteLogo(typeof logos.farmboy === 'string' ? logos.farmboy : (logos.farmboy && logos.farmboy.src))) : logos.farmboy;
+                if (src && typeof src === 'object' && src.src) src = src.src;
+                if (typeof src === 'string' && src) li.src = src; else li.style.display = 'none';
+            }).catch(() => { li.style.display = 'none'; });
+        }
+        wrapEl.appendChild(right);
+        page.appendChild(wrapEl);
+    } catch (e) {}
+}
 function _dsAddStamp(page, w, hh, desc) {
     if (!desc || desc.kind !== 'spec') return;
     const st = _approvalOf(desc._ovKey || (desc.row && desc.row.id) || '');
@@ -12629,7 +12786,7 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     let logos = {}; try { logos = await _getPdfLogos(); } catch (e) {}
     const meta = { location: r.location || '', code: r.id || '', version: '' };
     // Per-page theme for spec pages too: background + ink flip + footer mode.
-    try { const _tk = _deckPageKey(desc); _curFooter = _resolveFooter(_tk); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
+    try { const _tk = _deckPageKey(desc); _curPageKey = _tk; _curFooter = _resolveFooter(_tk); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
     if (onProgress) onProgress(12);
     if (desc._install) {
         await _drawInstallGuidePage(rec, logos, 1, meta, desc.elev, { PW: PW, PH: PH, M: M });
@@ -12669,7 +12826,7 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
     const mm = (typeof window !== 'undefined' && window._specPdfMeta) ? window._specPdfMeta : {};
     const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
     const meta = { code: g('specPdfCode') || mm.code || '', version: g('specPdfVersion') || mm.version || '', location: g('specPdfLocation') || mm.location || '' };
-    try { _curFooter = _resolveFooter(_deckPageKey(desc)); } catch (e) { _curFooter = { text: 'dark' }; }
+    try { _curPageKey = _deckPageKey(desc); _curFooter = _resolveFooter(_curPageKey); } catch (e) { _curFooter = { text: 'dark' }; }
     // Per-page theme (any page kind): bake the bg image if there is one, paint
     // the background, flip dark inks, steer the footer.
     try { const _tk = _deckPageKey(desc); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
@@ -12682,14 +12839,19 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
         } else if (desc.kind === 'fixed' && desc.page) {
             const els = desc.page.elements || [];
             if (els.length) { const tiles = await loadTiles(els); const ty = desc.fixed === 'cover' ? 'breaker' : (desc.fixed === 'slogan' ? 'slogan' : 'narrative'); _drawMoodboardPage(rec, logos, 1, meta, tiles, '', ty); }
-            else if (desc.fixed === 'cover') { try { await _pageThemeBake('fixed:cover'); } catch (e) {} _drawCoverPage(rec, logos); }
+            else if (desc.fixed === 'cover') { try { await _pageThemeBake('fixed:cover'); } catch (e) {} _drawCoverPage(rec, logos, 1, meta); }
             else if (desc.fixed === 'slogan') { try { await _pageThemeBake('fixed:slogan'); } catch (e) {} _drawSloganPage(rec, logos, 1, meta); }
             else return null;
         } else if (desc.kind === 'floorplan') {
             const lv = floorplanLevels[desc.level] || {};
             let planImg = null; if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
-            const levelGroups = _fpGroups().filter(g => (g.level || 0) === desc.level && g.planX != null);
-            const entries = levelGroups.map(g => ({ num: g.num, codes: g.ids.filter(Boolean).join(', '), location: g.location, category: g.category, planX: g.planX, planY: g.planY, wallLine: g.wallLine || null, wallLines: g.wallLines || null, wallPanels: g.wallPanels || 1 }));
+            // Same entry builder as the export — full level list (not just
+            // pinned groups) with identical code labels.
+            let entries = _fpKeyEntries(desc.level, null);
+            // The studio center draws pins + wall lines as its own interactive
+            // layer over this render, so it asks for the page WITHOUT them to
+            // avoid doubled marks; thumbnails and Build previews keep them.
+            if (opts && opts.fpNoPins) entries = entries.map(en => Object.assign({}, en, { planX: null, planY: null, wallLine: null, wallLines: null }));
             _drawFloorplanKeyPage(rec, logos, 1, meta, entries, planImg, lv.name || ('Level ' + (desc.level + 1)));
         } else if (desc.kind === 'planDetail') {
             await _drawPlanDetailPage(rec, logos, 1, meta, desc.pd);
@@ -13269,6 +13431,7 @@ function _dsRenderCenter() {
         });
         _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
         _dsAddGuides(page, Math.round(w), Math.round(hh));
+        _dsAddFooter(page, Math.round(w), Math.round(hh), desc);
         _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
         _dsSyncBuildBtn();
         return;
@@ -13308,7 +13471,8 @@ function _dsRenderCenter() {
         page.appendChild(base);
         const tok = (++_dsTlRenderTok);
         renderDeckPageCanvas(desc).then(cv2 => {
-            if (tok !== _dsTlRenderTok || !cv2) return;   // null = no renderer, mock stays
+            if (tok !== _dsTlRenderTok) return;
+            if (!cv2) { if (base.isConnected) _dsAddFooter(page, Math.round(w), Math.round(hh), desc); return; }   // no renderer — mock stays, footer still shows
             cv2.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
             base.innerHTML = ''; base.appendChild(cv2);
             // Plan Detail: draggable artwork — move a mockup and the elbow
@@ -13359,6 +13523,9 @@ function _dsRenderCenter() {
         if (desc.kind === 'spec') {
             const _bt = desc._specTpl || _specTplResolve(desc._ovKey || (desc.row && desc.row.id) || '');
             const _T = SPEC_TEMPLATES[_bt] || {};
+            // Freeform custom pages stay a live DOM canvas — footer overlays
+            // so what you see matches the export (footer now prints there too).
+            if (_T.freeform) _dsAddFooter(page, Math.round(w), Math.round(hh), desc);
             // Every non-freeform spec page (including classic) gets the exact
             // render swapped over the mock, and caches it to _dsBuilt so it shows
             // instantly on return and matches the export.
@@ -13388,6 +13555,10 @@ function _dsRenderCenter() {
                     specBase.innerHTML = ''; specBase.appendChild(cv2);
                 }).catch(() => {});
             }
+        } else {
+            // Any other kind that stays on the HTML mock (e.g. prose pages)
+            // still shows the live footer — it prints on every exported page.
+            _dsAddFooter(page, Math.round(w), Math.round(hh), desc);
         }
     }
     _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
@@ -13399,60 +13570,108 @@ function _dsRenderCenter() {
 }
 // — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
 let _dsFpDragKey = null, _dsFpDragPin = null;
+// WYSIWYG floorplan center: the page underneath is rendered by the SAME engine
+// as the PDF export (title, callout list, legend, theme, footer — everything),
+// while pins and wall lines live on an interactive layer positioned EXACTLY on
+// the plan rect the PDF uses (_fpPlanRect/_fpPlanFit are shared with the
+// drawer). What you see in the studio is what exports — and it stays fully
+// interactive: place/drag/remove pins, draw wall lines, drop notes and arrows.
+let _dsFpBaseTok = 0;
+const _dsFpBaseLast = {};   // level -> last exact base render (stale-while-revalidate)
 function _dsRenderCenterFloorplan(desc, c, w, hh) {
     const lv = floorplanLevels[desc.level] || {};
+    const S = w / 936;   // page-unit -> px scale (page is 936x540 units, like the PDF)
     const page = document.createElement('div');
     page.style.cssText = 'position:relative; width:' + w + 'px; height:' + hh + 'px; background:#fff; box-shadow:0 8px 30px rgba(0,0,0,0.35); border-radius:2px; overflow:hidden;';
-    const pad = Math.round(w * 0.06);
-    const title = document.createElement('div');
-    title.style.cssText = 'position:absolute; left:' + pad + 'px; top:' + Math.round(pad * 0.4) + 'px; font-weight:800; color:#111; font-size:' + Math.max(10, Math.round(hh * 0.05)) + 'px;';
-    title.textContent = 'FLOORPLAN \u2014 ' + (lv.name || ('Level ' + (desc.level + 1))).toUpperCase();
-    page.appendChild(title);
-    const planTop = Math.round(hh * 0.14);
-    const area = document.createElement('div');
-    area.style.cssText = 'position:absolute; left:0; right:0; top:' + planTop + 'px; bottom:' + pad + 'px; display:flex; align-items:center; justify-content:center;';
-    if (!lv.imageData) {
-        area.innerHTML = '<div style="color:#bbb; font-size:13px;">No plan image for this level — open the full markup tool to upload one.</div>';
-        page.appendChild(area); _dsAddStamp(page, w, hh, desc); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page); return;
+
+    // — Exact page underneath (rendered without pins/lines; the overlay owns those) —
+    const base = document.createElement('div');
+    base.style.cssText = 'position:absolute; inset:0; background:#fff;';
+    if (_dsFpBaseLast[desc.level]) {
+        const ph = document.createElement('img');
+        ph.src = _dsFpBaseLast[desc.level];
+        ph.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:fill;';
+        base.appendChild(ph);
     }
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'position:relative; display:inline-block; line-height:0;';
-    const img = document.createElement('img');
-    img.id = 'dsFpPlanImg'; img.src = lv.imageData; img.draggable = false;
-    img.style.cssText = 'display:block; max-width:' + (w - pad * 2) + 'px; max-height:' + (hh - planTop - pad) + 'px; user-select:none; -webkit-user-drag:none; cursor:' + (_fpArmedId ? 'crosshair' : 'default') + ';';
-    img.onclick = _dsFpPlace;
-    wrap.appendChild(img);
-    // Wall-line overlay (SVG): shows every group's line; also hosts the live
-    // preview while drawing a new one.
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('id', 'dsFpLineSvg');
-    svg.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; pointer-events:none;';
-    svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('preserveAspectRatio', 'none');
-    _fpGroups().forEach(g => {
-        if ((g.level || 0) !== desc.level) return;
-        _wallAllSegs(g).forEach(sg => {
-            const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            ln.setAttribute('x1', sg[0] * 100); ln.setAttribute('y1', sg[1] * 100);
-            ln.setAttribute('x2', sg[2] * 100); ln.setAttribute('y2', sg[3] * 100);
-            ln.setAttribute('stroke', categoryColor(g.category));
-            ln.setAttribute('stroke-width', '1.1'); ln.setAttribute('vector-effect', 'non-scaling-stroke');
-            ln.style.strokeWidth = '3.5px';
-            svg.appendChild(ln);
-        });
+    page.appendChild(base);
+    const tok = (++_dsFpBaseTok);
+    renderDeckPageCanvas(desc, null, { fpNoPins: true }).then(cv => {
+        if (!cv) return;
+        try { _dsFpBaseLast[desc.level] = cv.toDataURL('image/jpeg', 0.92); } catch (e) {}
+        if (tok !== _dsFpBaseTok || !base.isConnected) return;
+        cv.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
+        base.innerHTML = ''; base.appendChild(cv);
+    }).catch(() => {});
+
+    // Clicking empty page space deselects any selected annotation.
+    page.addEventListener('mousedown', (ev) => {
+        let n = ev.target, interactive = false;
+        while (n && n !== page) { if (n.onmousedown || n.onclick) { interactive = true; break; } n = n.parentElement; }
+        if (!interactive && (_dsSelKey != null && _dsSelIdx >= 0)) { _dsSelKey = null; _dsSelIdx = -1; _dsSyncToolbar(); _dsRenderCenter(); }
     });
-    wrap.appendChild(svg);
-    if (_fpLineArmId) {
-        img.style.cursor = 'crosshair';
-        const gArm = _fpFindGroup(_fpLineArmId);
-        if (gArm && gArm.wallPanels === 'custom') {
-            img.onclick = _dsFpLineClickPoint;      // click start, click end, repeat
-            img.onmousemove = _dsFpLineHover;
-        } else {
-            img.onmousedown = _dsFpLineDown;        // drag gesture
-        }
+
+    const finish = () => { _dsAddStamp(page, w, hh, desc); _dsAddGuides(page, w, hh); _dsRenderAnnots(page, desc, w, hh); };
+    if (!lv.imageData) {
+        // The exact render already shows the dashed "upload a plan" slot where
+        // the image will land; just add a small hint for where to do that.
+        const hint = document.createElement('div');
+        const R0 = _fpPlanRect(936, 540, 40);
+        hint.style.cssText = 'position:absolute; left:' + Math.round(R0.x * S) + 'px; top:' + Math.round((R0.y + R0.h * 0.5 + 16) * S) + 'px; width:' + Math.round(R0.w * S) + 'px; text-align:center; color:#bbb; font-size:11px; pointer-events:none;';
+        hint.textContent = 'Use "Place numbers / mark up" in the right panel to upload a plan for this level.';
+        page.appendChild(hint);
+        finish(); c.appendChild(page); return;
     }
-    _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g)); });
-    area.appendChild(wrap); page.appendChild(area); _dsAddStamp(page, w, hh, desc); _dsRenderAnnots(page, desc, w, hh); c.appendChild(page);
+
+    // — Interactive plan overlay, positioned on the exact fitted image rect —
+    _loadImg(lv.imageData).then(pim => {
+        if (tok !== _dsFpBaseTok || !page.isConnected || !pim) return;
+        const iw = pim.naturalWidth || pim.width, ih = pim.naturalHeight || pim.height;
+        const f = _fpPlanFit(936, 540, 40, iw, ih);
+        if (!f) return;
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'position:absolute; left:' + (f.dx * S) + 'px; top:' + (f.dy * S) + 'px; width:' + (f.dw * S) + 'px; height:' + (f.dh * S) + 'px; line-height:0;';
+        // Transparent hit surface — same element id the shared handlers
+        // (_dsFpNorm/_dsFpPlace/drag/line tools) already key off, so every
+        // interaction keeps working, now at the true PDF position.
+        const img = document.createElement('img');
+        img.id = 'dsFpPlanImg'; img.src = lv.imageData; img.draggable = false;
+        img.style.cssText = 'display:block; width:100%; height:100%; opacity:0; user-select:none; -webkit-user-drag:none; cursor:' + ((_fpArmedId || _fpLineArmId) ? 'crosshair' : 'default') + ';';
+        img.onclick = _dsFpPlace;
+        wrap.appendChild(img);
+        // Wall-line overlay (SVG): every group's line at PDF stroke weight,
+        // plus the live dashed preview while drawing a new one.
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('id', 'dsFpLineSvg');
+        svg.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; pointer-events:none;';
+        svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('preserveAspectRatio', 'none');
+        const lnW = Math.max(1.5, 2.6 * S);   // 2.6 page units, like the PDF drawer
+        _fpGroups().forEach(g => {
+            if ((g.level || 0) !== desc.level) return;
+            _wallAllSegs(g).forEach(sg => {
+                const ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                ln.setAttribute('x1', sg[0] * 100); ln.setAttribute('y1', sg[1] * 100);
+                ln.setAttribute('x2', sg[2] * 100); ln.setAttribute('y2', sg[3] * 100);
+                ln.setAttribute('stroke', categoryColor(g.category));
+                ln.setAttribute('stroke-width', '1.1'); ln.setAttribute('vector-effect', 'non-scaling-stroke');
+                ln.style.strokeWidth = lnW + 'px';
+                svg.appendChild(ln);
+            });
+        });
+        wrap.appendChild(svg);
+        if (_fpLineArmId) {
+            img.style.cursor = 'crosshair';
+            const gArm = _fpFindGroup(_fpLineArmId);
+            if (gArm && gArm.wallPanels === 'custom') {
+                img.onclick = _dsFpLineClickPoint;      // click start, click end, repeat
+                img.onmousemove = _dsFpLineHover;
+            } else {
+                img.onmousedown = _dsFpLineDown;        // drag gesture
+            }
+        }
+        _fpGroups().forEach(g => { if ((g.level || 0) !== desc.level) return; if (g.planX == null || g.planY == null) return; wrap.appendChild(_dsMakePin(g, S)); });
+        page.appendChild(wrap);
+    }).catch(() => {});
+    finish(); c.appendChild(page);
 }
 // ── Wall-line drawing (drag along the wall) ──
 let _fpLineArmId = null;
@@ -13517,9 +13736,15 @@ function _dsFpLineUp(e) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRefresh();
 }
-function _dsMakePin(g) {
+function _dsMakePin(g, S) {
+    // S = page-unit scale from the WYSIWYG center. Pins mirror the PDF drawer:
+    // radius 8 page units, white ring, bold 7.5-unit number — sized down to a
+    // usability floor so they stay clickable on small windows.
+    const d = Math.max(14, Math.round(16 * (S || 1)));
+    const fs = Math.max(8, Math.round(7.5 * (S || 1)));
+    const bw = Math.max(1, Math.round(1 * (S || 1)));
     const pin = document.createElement('div');
-    pin.style.cssText = 'position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:22px; height:22px; padding:0 5px; border-radius:11px; background:' + categoryColor(g.category) + '; color:#fff; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:0.62rem; font-weight:700; cursor:grab; user-select:none;';
+    pin.style.cssText = 'position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:' + d + 'px; height:' + d + 'px; padding:0 2px; border-radius:' + Math.ceil(d / 2 + 2) + 'px; box-sizing:border-box; background:' + categoryColor(g.category) + '; color:#fff; border:' + bw + 'px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:' + fs + 'px; font-weight:700; cursor:grab; user-select:none;';
     pin.textContent = g.num;
     pin.title = g.ids.filter(Boolean).join(', ') + ' — drag to move, double-click to remove';
     pin.onmousedown = (e) => _dsFpPinDown(e, g.key);
@@ -13680,6 +13905,7 @@ function _dsPageChromeControls(t, desc) {
     };
     chk('Hide copyright line', 'hideCopyright');
     chk('Hide Farmboy logo', 'hideLogo');
+    chk('Hide entire footer on this page', 'hideFooter');
     // Client logo — deck-wide, prints beside the project code/location on the
     // left. Aspect ratio is captured once at upload so the PDF drawer never
     // needs to load the image async.
@@ -13712,7 +13938,7 @@ function _dsPageChromeControls(t, desc) {
         row.appendChild(c); row.appendChild(document.createTextNode('Hide client logo on this page')); wrap.appendChild(row);
     }
     const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply footer to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:0.58rem; margin-top:8px;';
-    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
+    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo, hideFooter: f.hideFooter }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
     wrap.appendChild(deckBtn);
     t.appendChild(wrap);
 }
@@ -17973,6 +18199,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         if (pageNum > 0) doc.addPage(PAGE_FORMAT, 'landscape');
         pageNum += 1;
         if (key) _pageKeys[pageNum] = key;
+        _curPageKey = key || null;
         try { _curFooter = _resolveFooter(key || null); } catch (e) { _curFooter = { text: 'dark' }; }
         // Per-page theme (background colour/image, dark-ink flip, footer mode)
         // — bg images were pre-baked before the page loop started.
@@ -18028,7 +18255,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker');
         } else {
             try { await _pageThemeBake('fixed:cover'); } catch (e) {}
-            _drawCoverPage(doc, logos);
+            _drawCoverPage(doc, logos, pageNum, meta);
         }
     }
     await emitAfterKey('fixed:cover');
@@ -18213,15 +18440,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             _fpLevelKeyPage[step.li] = pageNum;
             if (!_scoped) { await emitAfterKey(stepKey); continue; }
             const lv = floorplanLevels[step.li] || {};
-            const levelGroups = _fpGroups().filter(g => (g.level || 0) === step.li);
-            const entries = levelGroups.map(g => {
-                let linkPage = null;
-                for (const id of g.ids) { if (idToPage[id]) { linkPage = idToPage[id]; break; } }
-                const codesLabel = (g.ids.length > 1)
-                    ? (g.key + ' (' + g.ids.map(id => { const s = id.indexOf(g.key) === 0 ? id.slice(g.key.length).replace(/^[-_\s]*/, '') : id; return s || id; }).join('/') + ')')
-                    : (g.ids[0] || g.key);
-                return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage, wallLine: g.wallLine || null, wallLines: g.wallLines || null, wallPanels: g.wallPanels || 1 };
-            });
+            const entries = _fpKeyEntries(step.li, idToPage);
             let planImg = null;
             if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
             _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, lv.name || ('Level ' + (step.li + 1)));
@@ -18247,6 +18466,8 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         } else if (SPEC_TEMPLATES[_specTpl] && SPEC_TEMPLATES[_specTpl].freeform) {
             // Custom free layout: the page is a blank canvas; mockups/text/images/
             // arrows are all annotations, painted by the annotation post-pass.
+            // The footer still prints — project info belongs on every page.
+            _drawPdfFooter(doc, logos, pageNum, meta);
         } else if (_specTpl === 'installGuide') {
             await _drawInstallGuidePage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M });
         } else if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
