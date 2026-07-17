@@ -7346,19 +7346,26 @@ async function _loadRepoLogoVariant(fileName) {
             const scale = 4;   // supersample so a vector mark still looks crisp at PDF resolution
             const cnv = document.createElement('canvas'); cnv.width = w * scale; cnv.height = h * scale;
             const cx = cnv.getContext('2d'); cx.drawImage(img, 0, 0, w * scale, h * scale);
-            // Force every visible pixel to pure white, keeping only the alpha
-            // the rasterizer computed. The white-logo SVG has no color besides
-            // white to begin with, so this is a no-op for a clean render — but
-            // it's a hard guarantee against the anti-aliased edge pixels ever
-            // drifting toward gray/black. Left un-cleaned, those edge pixels
-            // (semi-transparent, RGB pulled toward the transparent canvas's
-            // implicit black) survive into the exported PNG and can render as
-            // a faint dark halo/"logo behind the logo" once composited over a
-            // busy full-bleed photo in the PDF — this is what fixes that.
+            // Force EVERY pixel — including fully transparent ones — to pure
+            // white RGB, keeping only the alpha the rasterizer computed. The
+            // earlier version of this fix only touched pixels with alpha > 0,
+            // which left the "background" (fully transparent) pixels at
+            // whatever RGB an empty canvas defaults to: (0,0,0), i.e.
+            // transparent BLACK. That's invisible on its own, but the moment
+            // this PNG gets resampled — by jsPDF embedding it, or by a PDF
+            // viewer/browser rendering it at a different zoom — most
+            // resamplers blend neighboring pixels' RGB values without
+            // weighting by alpha first (non-premultiplied blending). Blending
+            // opaque white against transparent BLACK produces visible gray/
+            // black jagged fringing right at the letterforms' edges — exactly
+            // the "jagged black stroke around the white" artifact. Making the
+            // transparent background white too means any such blend mixes
+            // white with white, so the edges stay clean at every zoom level
+            // and in every viewer (browser preview, Acrobat, embedded PDF).
             if (/white-logo/i.test(fileName)) {
                 try {
                     const id = cx.getImageData(0, 0, cnv.width, cnv.height); const d = id.data;
-                    for (let i = 0; i < d.length; i += 4) { if (d[i + 3] > 0) { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; } }
+                    for (let i = 0; i < d.length; i += 4) { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; }
                     cx.putImageData(id, 0, 0);
                 } catch (e) {}
             }
@@ -7550,9 +7557,15 @@ function _whiteLogo(dataUrl) {
         const id = cx.getImageData(0, 0, w, h); const d = id.data;
         for (let i = 0; i < d.length; i += 4) {
             const lum = (d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114);
-            // treat dark ink as the mark; make it white, keep its alpha; drop light bg
+            // treat dark ink as the mark; make it white, keep its alpha; drop light bg.
+            // RGB is forced to pure white in BOTH branches (not just the ink
+            // one) — including the fully-transparent background pixels —
+            // for the same reason as the primary white-logo loader above:
+            // a non-white RGB sitting behind alpha=0 survives into the PNG
+            // and can resurface as jagged dark fringing wherever a PDF
+            // viewer resamples the image without alpha-weighting first.
             if (d[i + 3] > 10 && lum < 160) { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; }
-            else { d[i + 3] = 0; }
+            else { d[i] = 255; d[i + 1] = 255; d[i + 2] = 255; d[i + 3] = 0; }
         }
         cx.putImageData(id, 0, 0);
         const out = cnv.toDataURL('image/png'); _whiteLogoCache[dataUrl] = out; return out;
