@@ -12614,20 +12614,22 @@ async function _dsBakeSpecImages(page, desc, token) {
     }
 }
 function _dsAddGuides(page, w, hh) {
-    if (!_dsShowGuides) return;
+    // Two switches can light this up: the settings-menu "Show alignment
+    // guides" toggle, and the Guides menu's per-page/deck "Show guides" —
+    // the latter is what "Apply to whole deck" sets, and it now covers EVERY
+    // page kind (spec, floorplan, cards, prose…), not just layout pages.
+    let G = null; try { G = _pageGuide(); } catch (e) {}
+    if (!_dsShowGuides && !(G && G.show) && !(G && G.grid)) return;
     // The editable layout canvas paints the guide set itself (with snapping);
     // painting here too would double every line.
     if (page.querySelector && page.querySelector('#dsLayoutCanvas')) return;
-    try {
-        const G = _pageGuide();
-        if (G.set || G.grid) {
-            // Same InDesign-style painter as the layout editor — purple safety
-            // frame + columns, cyan ruler guides, optional grid — with `show`
-            // forced on since the settings-menu toggle is the gate here.
-            _paintGuideSet(page, Object.assign({}, G, { show: true }));
-            return;
-        }
-    } catch (e) {}
+    if (G && (G.set || G.grid)) {
+        // Same InDesign-style painter as the layout editor — purple safety
+        // frame + columns, cyan ruler guides, optional grid. `show` follows
+        // either switch being on.
+        _paintGuideSet(page, Object.assign({}, G, { show: _dsShowGuides || G.show }));
+        return;
+    }
     // Fallback (no guide set resolvable): the old margin frame + center lines.
     const mx = Math.round(w * 40 / 936), my = Math.round(hh * 40 / 540);
     const g = document.createElement('div');
@@ -16256,14 +16258,25 @@ function _mbDrawGuides(canvas) {
         mk('left:50%; top:6px; transform:translateX(-50%); font:700 9px Arial,sans-serif; letter-spacing:1px; color:rgba(106,106,255,0.5); background:rgba(255,255,255,0.6); padding:1px 6px; border-radius:3px;', 'FULL BLEED');
         return;
     }
-    // page margin frame (≈40pt on a 936×540 page)
-    mk('left:4.3%; top:7.4%; right:4.3%; bottom:7.4%; border:1px dashed rgba(0,0,0,0.16);');
+    // Safety-area frame. There is exactly ONE safety area and it belongs to
+    // the page's guide set — when the guide set is visible, its purple frame
+    // IS the safety area and no second (offset) dashed box is drawn; that
+    // duplicate at the old hardcoded 40pt margins was the "not perfectly
+    // aligned" second frame. When guides are hidden, a subtle dashed hint is
+    // drawn at the SAME guide-set margins so the two can never disagree;
+    // only when no set with margins exists does it fall back to 40pt.
+    let G = null; try { G = _pageGuide(); } catch (e) {}
+    const setM = (G && G.set && G.set.margin) ? G.set.margin : null;
+    if (!(G && G.show && setM)) {
+        if (setM) mk('left:' + (setM.l * 100) + '%; top:' + (setM.t * 100) + '%; right:' + (setM.r * 100) + '%; bottom:' + (setM.b * 100) + '%; border:1px dashed rgba(0,0,0,0.16);');
+        else mk('left:4.3%; top:7.4%; right:4.3%; bottom:7.4%; border:1px dashed rgba(0,0,0,0.16);');
+    }
     // real page title (faded), where the PDF prints it (top-left)
     const title = pg && pg.title ? pg.title : '';
     if (title) mk('left:4.3%; top:3.0%; font:700 17px "Arial Narrow",Arial,sans-serif; letter-spacing:0.5px; color:rgba(0,0,0,0.22); text-transform:uppercase;', title);
-    // Footer band boundary only — a thin top rule marking where the real
-    // footer (drawn separately, on top) sits, so notes/images don't overlap it.
-    mk('left:4.3%; right:4.3%; bottom:2.6%; border-top:1px solid rgba(0,0,0,0.12);');
+    // (The old "footer band" rule that sat above the real footer is gone —
+    // it read as a stray artifact line on every page. The live footer overlay
+    // itself already shows exactly where the footer prints.)
 }
 
 function _mbUpdateToolbar() {
