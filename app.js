@@ -14273,7 +14273,26 @@ function _dsRenderTools() {
         const isInstallGlobal = (globalTpl === 'installGuide');
         const modeRow = document.createElement('div');
         modeRow.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
-        const switchMode = (tpl) => { editorialContent.specTemplate = tpl; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+        // Switching deck modes must never throw away template choices. Each
+        // mode button used to hardcode its default template ('classic' for
+        // Per piece, 'setRight' for Group A/B/C) — so hopping to Install
+        // guide and back stomped whatever deck-wide template was in use,
+        // visually "resetting" every page that didn't carry its own per-page
+        // override. Now the template in use is remembered per mode on the
+        // way out and restored on the way back in; the hardcoded key is only
+        // a first-time default. (Per-page overrides were never touched by
+        // mode switching and continue to survive as before.)
+        const _tplModeOf = (k) => (k === 'installGuide') ? 'install' : ((SPEC_TEMPLATES[k] && SPEC_TEMPLATES[k].group) ? 'group' : 'perPiece');
+        const _tplKnown = (k) => !!SPEC_TEMPLATES[k] || k === 'classic';   // 'classic' is the legacy per-piece layout, valid but not in the map
+        const switchMode = (tpl) => {
+            const mem = editorialContent.specTplMemory = editorialContent.specTplMemory || {};
+            const curTpl = editorialContent.specTemplate || 'classic';
+            if (_tplKnown(curTpl)) mem[_tplModeOf(curTpl)] = curTpl;
+            const targetMode = _tplModeOf(tpl);
+            const restored = mem[targetMode];
+            editorialContent.specTemplate = (restored && _tplKnown(restored) && _tplModeOf(restored) === targetMode) ? restored : tpl;
+            if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh();
+        };
         const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:0.62rem; padding:6px 3px; border-radius:4px; cursor:pointer; border:1px solid ' + (active ? '#6a6aff' : 'var(--border-color)') + '; background:' + (active ? '#6a6aff' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = on; return b; };
         modeRow.appendChild(mkMode('Per piece', !isGroupGlobal && !isInstallGlobal, () => switchMode('classic')));
         modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => switchMode('setRight')));
