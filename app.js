@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.18';
+const APP_VERSION = '15.19';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -8760,7 +8760,7 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
             doc.setFontSize(fs); doc.setTextColor(c[0], c[1], c[2]);
             const al = _pdfAlign(t.align); const boxX = (t.x || 0) * PW, boxW = (t.w || 0.4) * PW;
             let tx = boxX; if (al === 'center') tx = boxX + boxW / 2; else if (al === 'right') tx = boxX + boxW;
-            let str = t.text || ''; if (t.caps === 'upper') str = str.toUpperCase();
+            let str = _listPrefixText(t.text || '', t.listStyle); if (t.caps === 'upper') str = str.toUpperCase();
             if (t.track) { try { doc.setCharSpace(t.track * fs); } catch (e) {} }
             const lines = doc.splitTextToSize(str, boxW);
             const topts = { baseline: 'top', align: al, maxWidth: boxW };
@@ -11276,7 +11276,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
             return;
         }
         const el = document.createElement('div');
-        el.textContent = a.text || '';
+        el.textContent = _listPrefixText(a.text || '', a.listStyle);
+        el.dataset.dsTgt = 'ann:' + key + ':' + i;
         el.spellcheck = false;
         const _fpx = Math.max(7, (a.size || 0.03) * hh);
         const _lh = a.leading ? ((a.leading / 540) * hh) / _fpx : 1.15;
@@ -12393,6 +12394,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     const old = document.getElementById('dsTextGearPopup'); if (old) old.remove();
     const a = _dsTextGearGetEl(target); if (!a) return;
     const pop = document.createElement('div'); pop.id = 'dsTextGearPopup';
+    try { pop.dataset.tgt = (target && target.kind === 'mb') ? ('mb:' + target.i) : (target ? ('ann:' + target.key + ':' + target.idx) : ''); } catch (e) {}
     const popW = 520, popMaxH = Math.round(window.innerHeight * 0.86);
     pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - popW - 8, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - popMaxH - 8, Math.max(8, cy - 10)) + 'px; width:' + popW + 'px; max-height:' + popMaxH + 'px; overflow-y:auto; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:100000; padding:10px; font-size:0.66rem; color:var(--text-main);';
     pop.onmousedown = (e) => e.stopPropagation();
@@ -12464,6 +12466,15 @@ function _dsOpenTextGearPopup(target, cx, cy) {
         b.onclick = () => { a.align = v; refresh(); };
         str.appendChild(b);
     });
+    lbl('List');
+    const lr = row();
+    [['none', 'None'], ['bullet', '\u2022 Bullets'], ['number', '1. Numbers']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        const on = (a.listStyle || 'none') === v;
+        b.style.cssText = 'height:22px; padding:0 8px; font-size:0.6rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a.listStyle = v; refresh(); };
+        lr.appendChild(b);
+    });
     lbl('Colour');
     const cr = row();
     ['#1a1a1a', '#4a4a4a', '#9a9a9a', '#c0392b', '#ffffff'].forEach(hex => {
@@ -12505,11 +12516,37 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     help.textContent = 'Double-click the box to edit the text. Drag the corner handle to resize the box \u2014 the text re-wraps, the font size stays. Save it to the T menu library to reuse on other pages and projects.';
     pop.appendChild(help);
     document.body.appendChild(pop);
+    // Apply these text settings to EVERY selected text box/annotation on the
+    // page (multi-select first, then open the gear on any one of them).
+    (() => {
+        const selCount = ((_mbSel && _mbSel.length) || 0) + ((_mbSelAnn && _mbSelAnn.length) || 0);
+        if (selCount < 2) return;
+        const btn = document.createElement('button'); btn.className = 'action-btn'; btn.textContent = 'Apply to selected (' + selCount + ')';
+        btn.style.cssText = 'width:100%; height:26px; font-size:0.64rem; margin-top:10px;';
+        btn.onclick = () => {
+            const props = ['font', 'size', 'leading', 'weight', 'bold', 'italic', 'outline', 'caps', 'color', 'align', 'track', 'listStyle'];
+            const put = (o) => { if (!o) return; const ty = o.type || 'text'; if (ty !== 'text' && ty !== 'note') return; props.forEach(k => { if (a[k] !== undefined) o[k] = a[k]; }); };
+            try { const els = _mbEls() || []; (_mbSel || []).forEach(ix => put(els[ix])); } catch (e) {}
+            try { const annL = _mbCurAnnList(); if (annL) (_mbSelAnn || []).forEach(ix => put(annL.list[ix])); } catch (e) {}
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            try { renderMoodboardCanvas(); } catch (e) {}
+            try { _dsRenderCenter(); } catch (e) {}
+        };
+        pop.appendChild(btn);
+    })();
     setTimeout(() => document.addEventListener('mousedown', _dsTextGearPopupOutside), 0);
 }
 function _dsTextGearPopupOutside(e) {
     const pop = document.getElementById('dsTextGearPopup');
-    if (pop && !pop.contains(e.target) && !e.target.closest('[title*="settings"]')) _dsCloseTextGearPopup();
+    if (!pop) return;
+    if (pop.contains(e.target)) return;                                        // inside the popup
+    if (e.target.closest && e.target.closest('[title*="settings"]')) return;   // the gear itself
+    // Clicking the text box the popup is editing keeps it open — it closes
+    // only on a true outside click or the ✕ button.
+    const tgt = pop.dataset.tgt;
+    if (tgt && e.target.closest && e.target.closest('[data-ds-tgt="' + tgt.replace(/"/g, '') + '"]')) return;
+    _dsCloseTextGearPopup();
 }
 function _dsCloseTextGearPopup() {
     const pop = document.getElementById('dsTextGearPopup');
@@ -12575,11 +12612,27 @@ function _dsAnnToBack() { const a = _dsCurrentAnnot(); if (!a) return; const lis
 function _dsAnnBump(d) { const a = _dsCurrentAnnot(); if (!a) return; a.size = Math.max(0.012, Math.min(0.2, (a.size || 0.03) + d * 0.004)); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToggle(prop) { const a = _dsCurrentAnnot(); if (!a) return; a[prop] = !a[prop]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 let _dsClipboard = null;   // { kind: 'ann'|'mb', items: [...] } — deep copies
+// Bullets / numbered lists for text boxes and annotations. Applied at render
+// time to each hard line ('\n'); the stored text stays clean.
+function _listPrefixText(str, style) {
+    if (!style || style === 'none' || !str) return str;
+    const lines = ('' + str).split('\n');
+    let n = 0;
+    return lines.map(l => { if (!l.trim()) return l; n++; return (style === 'number' ? (n + '. ') : '\u2022 ') + l; }).join('\n');
+}
 function _dsCopySelection() {
-    // Annotation selected (any page kind)?
-    const a = _dsCurrentAnnot();
     const _srcKey = (_dsPages && _dsPages[_dsIndex]) ? _deckPageKey(_dsPages[_dsIndex]) : null;
-    if (a) { _dsClipboard = { kind: 'ann', items: [JSON.parse(JSON.stringify(a))], srcKey: _srcKey }; return true; }
+    // Multi-selected annotations on the current page copy as a group.
+    if (_mbSelAnn && _mbSelAnn.length > 1) {
+        const annL = _mbCurAnnList();
+        if (annL) { const items = _mbSelAnn.map(k => annL.list[k]).filter(Boolean).map(o => JSON.parse(JSON.stringify(o))); if (items.length) { _dsClipboard = { kind: 'ann', items: items, srcKey: _srcKey }; return true; } }
+    }
+    // Single annotation — but ONLY if it lives on the CURRENT page. A stale
+    // _dsSelKey from a page visited earlier used to hijack Ctrl+C and copy
+    // one old object instead of the live multi-selection ("only pasted one
+    // of the images").
+    const a = _dsCurrentAnnot();
+    if (a && _dsSelKey === _srcKey) { _dsClipboard = { kind: 'ann', items: [JSON.parse(JSON.stringify(a))], srcKey: _srcKey }; return true; }
     // Moodboard element(s) selected on an editable page?
     if (typeof _mbSelected !== 'undefined' && _mbActiveCanvasId === 'dsLayoutCanvas') {
         const els = _mbEls() || [];
@@ -14092,7 +14145,10 @@ function _dsUpdateLayoutStyleBar() {
     if (hint) hint.style.display = el ? 'none' : 'block';
     if (ty === 'text') {
         const f = document.getElementById('dsLayFont'); if (f) f.value = el.font || 'serif';
-        const sv = document.getElementById('dsLaySizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 1000);
+        // TRUE PDF points (size × 540, same conversion the popup and the PDF
+        // drawer use) — this readout used an arbitrary ×1000 scale before, so
+        // the toolbar said 19 while the popup said 10 for the same box.
+        const sv = document.getElementById('dsLaySizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 540) + 'pt';
         const c = document.getElementById('dsLayColor'); if (c) c.value = el.color || '#222222';
     }
 }
@@ -15472,7 +15528,7 @@ let _mbSel = [];            // multi-selection: moodboard element indices
 let _mbSelAnn = [];         // multi-selection: annotation indices on the current page
 let _mbMarquee = null;      // marquee drag state
 function _mbDeselectAll() { _mbSel = []; _mbSelAnn = []; _mbSelected = -1; }
-function _mbSelectOnly(i) { _mbSel = (i >= 0 ? [i] : []); _mbSelAnn = []; _mbSelected = i; }
+function _mbSelectOnly(i) { _mbSel = (i >= 0 ? [i] : []); _mbSelAnn = []; _mbSelected = i; if (i >= 0) { _dsSelKey = null; _dsSelIdx = -1; } }
 function _mbToggleInSel(i) { const k = _mbSel.indexOf(i); if (k >= 0) { _mbSel.splice(k, 1); _mbSelected = _mbSel.length ? _mbSel[_mbSel.length - 1] : -1; } else { _mbSel.push(i); _mbSelected = i; } }
 function _mbCurAnnList() {
     // Layout pages: annotations layer on top of the mb canvas (dsLayoutCanvas).
@@ -16310,6 +16366,24 @@ function renderMoodboardCanvas() {
         canvas.onclick = null; canvas.ondblclick = null;
         canvas.onmousedown = (e) => { if (e.target === canvas) _mbMarqueeStart(e); };
     }
+    // Multi-select clarity: one dashed group box around EVERYTHING selected
+    // (elements + annotations) with a count chip, so a marquee selection
+    // reads unambiguously as "these move together".
+    (() => {
+        const selCount = ((_mbSel && _mbSel.length) || 0) + ((_mbSelAnn && _mbSelAnn.length) || 0);
+        if (selCount < 2) return;
+        let L = Infinity, T = Infinity, R = -Infinity, B = -Infinity;
+        try { (_mbSel || []).forEach(ix => { const b2 = _mbElBox(els[ix]); if (!b2) return; L = Math.min(L, b2.x); T = Math.min(T, b2.y); R = Math.max(R, b2.x + b2.w); B = Math.max(B, b2.y + b2.h); }); } catch (e) {}
+        try { const annL = _mbCurAnnList(); if (annL) (_mbSelAnn || []).forEach(ix => { const b2 = _mbAnnBox(annL.list[ix]); if (!b2) return; L = Math.min(L, b2.x); T = Math.min(T, b2.y); R = Math.max(R, b2.x + b2.w); B = Math.max(B, b2.y + b2.h); }); } catch (e) {}
+        if (!isFinite(L) || !isFinite(R)) return;
+        const g = document.createElement('div');
+        g.style.cssText = 'position:absolute; left:' + (L * 100) + '%; top:' + (T * 100) + '%; width:' + ((R - L) * 100) + '%; height:' + ((B - T) * 100) + '%; border:1.5px dashed #6a6aff; border-radius:3px; pointer-events:none; z-index:29;';
+        const chip = document.createElement('div');
+        chip.textContent = selCount + ' selected \u2014 drag any one to move all';
+        chip.style.cssText = 'position:absolute; top:-20px; left:0; background:#6a6aff; color:#fff; font:600 10px Arial,sans-serif; padding:2px 7px; border-radius:9px; white-space:nowrap;';
+        g.appendChild(chip);
+        canvas.appendChild(g);
+    })();
     const order = els.map((t, i) => i).sort((a, b) => (els[a].z || 0) - (els[b].z || 0));
     order.forEach(i => {
         const t = els[i]; if (t && t.hidden) return;
@@ -16343,8 +16417,9 @@ function renderMoodboardCanvas() {
             const _mlh = (typeof t.leading === 'number' && t.leading > 0) ? ((t.leading / 540) * cr.height) / fs : 1.15;
             const _mink = (_mbActiveCanvasId === 'dsLayoutCanvas' && _dsPages[_dsIndex]) ? _dsDisplayInk(t.color || '#222', _deckPageKey(_dsPages[_dsIndex])) : (t.color || '#222');
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:' + _mlh + '; color:' + _mink + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + _textExtraCss(t) + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
-            box.textContent = t.text || 'Text';
+            box.textContent = _listPrefixText(t.text || 'Text', t.listStyle);
             box.title = 'Double-click to edit text';
+            box.dataset.dsTgt = 'mb:' + i;
             box.ondblclick = (e) => { e.stopPropagation(); _mbBeginTextEdit(box, i); };
         } else {
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:' + (t.shadow ? '0 9px 24px rgba(0,0,0,0.42)' : '0 1px 6px rgba(0,0,0,0.18)') + ';' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
@@ -16504,7 +16579,7 @@ function _mbUpdateToolbar() {
     const ictl = document.getElementById('mbImgCtl'); if (ictl) ictl.style.display = (ty === 'image') ? 'flex' : 'none';
     if (ty === 'text') {
         const f = document.getElementById('mbFont'); if (f) f.value = el.font || 'serif';
-        const sv = document.getElementById('mbSizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 1000);
+        const sv = document.getElementById('mbSizeVal'); if (sv) sv.textContent = Math.round((el.size || 0.045) * 540) + 'pt';
         const c = document.getElementById('mbTextColor'); if (c) c.value = el.color || '#222222';
     } else if (ty === 'arrow' || ty === 'elbow') {
         const c = document.getElementById('mbArrowColor'); if (c) c.value = el.color || '#9aa0a6';
@@ -18592,6 +18667,7 @@ function _drawAnnotations(doc, key, PW, PH) {
         try { doc.setFont(fam, style); } catch (e) { doc.setFont(fam, a.bold ? 'bold' : 'normal'); }
         doc.setFontSize(size);
         const c = _annHexToRgb(a.color); doc.setTextColor(c.r, c.g, c.b);
+        text = _listPrefixText(text, a.listStyle);
         if (a.caps === 'upper') text = text.toUpperCase();
         const align = _pdfAlign(a.align);
         if (a.track) { try { doc.setCharSpace(a.track * size); } catch (e) {} }
