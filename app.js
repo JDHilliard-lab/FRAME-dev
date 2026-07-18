@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.20';
+const APP_VERSION = '15.21';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -8754,6 +8754,7 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
             return;
         }
         if (ty === 'text') {
+            if (Array.isArray(t.runs) && t.runs.length) { _drawRichTextPdf(doc, t, (t.x || 0) * PW, (t.y || 0) * PH, (t.w || 0.4) * PW, PH); return; }
             const fs = Math.max(6, (t.size || 0.045) * PH);
             const c = _hex(t.color || '#222222');
             const heavy = t.weight ? t.weight >= 600 : t.bold;
@@ -11280,7 +11281,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
             return;
         }
         const el = document.createElement('div');
-        el.textContent = _listPrefixText(a.text || '', a.listStyle);
+        if (Array.isArray(a.runs) && a.runs.length) _richSpansInto(el, a, false);
+        else el.textContent = _listPrefixText(a.text || '', a.listStyle);
         el.dataset.dsTgt = 'ann:' + key + ':' + i;
         el.spellcheck = false;
         const _fpx = Math.max(7, (a.size || 0.03) * hh);
@@ -11299,14 +11301,14 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
-        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; if (a.listStyle && a.listStyle !== 'none') el.textContent = a.text || ''; el.focus(); };
+        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; if (Array.isArray(a.runs) && a.runs.length) _richSpansInto(el, a, true); else if (a.listStyle && a.listStyle !== 'none') el.textContent = a.text || ''; el.focus(); };
         // Sync continuously, not just on blur — a native browser or Grammarly
         // spellcheck correction edits the DOM directly, and only capturing on
         // blur left a window where an intervening re-render (or just closing
         // the box some other way) could discard a correction that was never
         // pulled back into the stored text.
-        el.oninput = () => { a.text = _listStripText(el.textContent, a.listStyle); };
-        el.onblur = () => { a.text = _listStripText(el.textContent, a.listStyle); el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+        el.oninput = () => { if (el.querySelector('[data-rs]')) { a.runs = _runsFromEditedDom(el); a.text = _runsPlainText(a.runs); } else a.text = _listStripText(el.textContent, a.listStyle); };
+        el.onblur = () => { if (el.querySelector('[data-rs]')) { a.runs = _runsFromEditedDom(el); a.text = _runsPlainText(a.runs); } else a.text = _listStripText(el.textContent, a.listStyle); el.contentEditable = 'false'; el.style.cursor = 'move'; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
         if (sel) {
             _dsTextGearButton(el, { kind: 'ann', key, i });
             const th = document.createElement('div');
@@ -12441,7 +12443,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     };
     lbl('Size (pt) \u00b7 Leading');
     const sr = row();
-    stepper(sr, () => Math.round((a.size || 0.03) * 540), (v) => { a.size = v / 540; }, 6, 120);
+    stepper(sr, () => Math.round((a.size || 0.03) * 540), (v) => { _popupApplyTextStyle(a, { size: v / 540 }, pop.dataset.tgt); }, 6, 120);
     const sp = document.createElement('span'); sp.textContent = ' '; sp.style.cssText = 'width:8px;'; sr.appendChild(sp);
     stepper(sr, () => (typeof a.leading === 'number' && a.leading > 0) ? a.leading : Math.round((a.size || 0.03) * 540 * 1.15), (v) => { a.leading = v; }, 4, 120);
     lbl('Style');
@@ -12449,7 +12451,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     [['bold', 'B', 'font-weight:800;'], ['italic', 'I', 'font-style:italic;'], ['outline', 'O', 'font-weight:800; -webkit-text-stroke:1px currentColor;']].forEach(([f, l, css]) => {
         const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
         b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; ' + css + (a[f] ? ' border-color:#6a6aff; color:#6a6aff;' : '');
-        b.onclick = () => { a[f] = !a[f]; refresh(); };
+        b.onclick = () => { if (f === 'outline') { a[f] = !a[f]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); } else { const pt = {}; pt[f] = !a[f]; _popupApplyTextStyle(a, pt, pop.dataset.tgt); } refresh(); };
         str.appendChild(b);
     });
     // ALL CAPS — stored as caps:'upper' (same field the styles system and both
@@ -12490,7 +12492,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     });
     const ci = document.createElement('input'); ci.type = 'color'; ci.value = a.color || '#222222';
     ci.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
-    ci.onchange = () => { a.color = ci.value; refresh(); };
+    ci.onchange = () => { _popupApplyTextStyle(a, { color: ci.value }, pop.dataset.tgt); refresh(); };
     cr.appendChild(ci);
     lbl('Font \u00b7 Weight');
     const fr = row();
@@ -12498,7 +12500,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
         const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
         const on = (a.font || 'serif') === v;
         b.style.cssText = 'flex:1; height:22px; font-size:0.58rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
-        b.onclick = () => { a.font = v; refresh(); };
+        b.onclick = () => { _popupApplyTextStyle(a, { font: v }, pop.dataset.tgt); refresh(); };
         fr.appendChild(b);
     });
     const wSel = document.createElement('select');
@@ -12508,7 +12510,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
         if ('' + (a.weight || (a.bold ? '700' : '400')) === v) o.selected = true;
         wSel.appendChild(o);
     });
-    wSel.onchange = () => { a.weight = wSel.value; a.bold = (parseInt(wSel.value, 10) >= 600); refresh(); };
+    wSel.onchange = () => { const wv = parseInt(wSel.value, 10); _popupApplyTextStyle(a, { weight: wv, bold: wv >= 600 }, pop.dataset.tgt); refresh(); };
     fr.appendChild(wSel);
     // Your text styles — every style visible at once, 3 columns by category.
     lbl('Text styles');
@@ -12630,6 +12632,228 @@ function _listPrefixText(str, style) {
     const lines = ('' + str).split('\n');
     let n = 0;
     return lines.map(l => { if (!l.trim()) return l; n++; return (style === 'number' ? (n + '. ') : '\u2022 ') + l; }).join('\n');
+}
+// ════════════════════════════════════════════════════════════════════════
+// RICH TEXT RUNS — mixed fonts/weights/sizes/colors inside ONE text box.
+// A box's `runs` array ([{text, font?, weight?, bold?, italic?, size?,
+// color?}, …]) overrides styling per range; `text` always stays the plain
+// concatenation for back-compat, search, and spellcheck. Layout is measured
+// with the browser's REAL fonts (canvas measureText) and the PDF draws each
+// token at the measured position with the embedded TTFs — so preview and PDF
+// break lines identically by construction.
+// ════════════════════════════════════════════════════════════════════════
+function _runsFromPlain(text) { return [{ text: (text || '') + '' }]; }
+function _runsPlainText(runs) { return (runs || []).map(r => r.text || '').join(''); }
+function _runStyleKey(r) { return [r.font || '', r.weight || '', r.bold ? 1 : 0, r.italic ? 1 : 0, r.size || '', r.color || ''].join('|'); }
+function _runsNormalize(runs) {
+    const out = [];
+    (runs || []).forEach(r => {
+        if (!r || !r.text) return;
+        const prev = out[out.length - 1];
+        if (prev && _runStyleKey(prev) === _runStyleKey(r)) prev.text += r.text;
+        else out.push(Object.assign({}, r));
+    });
+    return out.length ? out : [{ text: '' }];
+}
+// Split runs at [start,end) character offsets and apply the style patch to
+// everything inside the range. Patch values of undefined delete the key
+// (fall back to the box's base style).
+function _runsApplyStyle(runs, start, end, patch) {
+    const src = (runs && runs.length) ? runs : [{ text: '' }];
+    const out = []; let pos = 0;
+    src.forEach(r => {
+        const t = r.text || ''; const a = pos, b = pos + t.length; pos = b;
+        const cutA = Math.max(a, Math.min(b, start)), cutB = Math.max(a, Math.min(b, end));
+        if (cutA > a) out.push(Object.assign({}, r, { text: t.slice(0, cutA - a) }));
+        if (cutB > cutA) {
+            const mid = Object.assign({}, r, { text: t.slice(cutA - a, cutB - a) });
+            Object.keys(patch).forEach(k => { if (patch[k] === undefined) delete mid[k]; else mid[k] = patch[k]; });
+            out.push(mid);
+        }
+        if (b > cutB) out.push(Object.assign({}, r, { text: t.slice(cutB - a) }));
+    });
+    return _runsNormalize(out);
+}
+let _richCtx = null;
+function _richMeasureCtx() { if (!_richCtx) { const c = document.createElement('canvas'); _richCtx = c.getContext('2d'); } return _richCtx; }
+function _richFamCss(role) { return role === 'display' ? "'Druk','Oswald','Arial Narrow',Arial,sans-serif" : role === 'serif' ? "'Messina','Times New Roman',Times,Georgia,serif" : 'Arial,Helvetica,sans-serif'; }
+function _richRunFontCss(t, r, PH) {
+    const fs = Math.max(6, (r.size || t.size || 0.03) * PH);
+    const heavy = (r.weight !== undefined ? r.weight >= 600 : r.bold !== undefined ? r.bold : (t.weight ? t.weight >= 600 : t.bold));
+    const ital = (r.italic !== undefined ? r.italic : t.italic);
+    return { css: (ital ? 'italic ' : '') + (heavy ? '700 ' : '400 ') + fs + 'px ' + _richFamCss(r.font || t.font), fs: fs, heavy: heavy, ital: ital };
+}
+// Measure + wrap into lines of positioned tokens. Page space: PH px == pt.
+function _layoutRichLines(t, boxWpx, PH) {
+    const ctx = _richMeasureCtx();
+    const runs = (Array.isArray(t.runs) && t.runs.length) ? t.runs : _runsFromPlain(t.text);
+    const caps = t.caps === 'upper';
+    // Explode runs into hard lines, then whitespace-preserving tokens.
+    const hardLines = [[]]; // array of token descriptors {text, r}
+    runs.forEach(r => {
+        const parts = ('' + (r.text || '')).split('\n');
+        parts.forEach((part, pi) => {
+            if (pi > 0) hardLines.push([]);
+            part.split(/(\s+)/).forEach(tok => { if (tok) hardLines[hardLines.length - 1].push({ text: tok, r: r }); });
+        });
+    });
+    const lines = [];
+    let lineNo = 0;
+    hardLines.forEach(toks => {
+        lineNo++;
+        // List prefix as a base-styled token at the start of each hard line.
+        if (t.listStyle && t.listStyle === 'bullet' && toks.length) toks.unshift({ text: '\u2022 ', r: {} });
+        else if (t.listStyle === 'number' && toks.length) toks.unshift({ text: lineNo + '. ', r: {} });
+        let cur = { tokens: [], w: 0, fs: 0 };
+        const flush = () => { if (cur.tokens.length || lines.length === 0 || true) lines.push(cur); cur = { tokens: [], w: 0, fs: 0 }; };
+        toks.forEach(tok => {
+            const st = _richRunFontCss(t, tok.r, PH);
+            ctx.font = st.css;
+            const txt = caps ? tok.text.toUpperCase() : tok.text;
+            let w = ctx.measureText(txt).width;
+            if (t.track) w += t.track * st.fs * txt.length;
+            if (cur.w + w > boxWpx && cur.tokens.length && txt.trim()) {
+                lines.push(cur); cur = { tokens: [], w: 0, fs: 0 };
+                if (!txt.trim()) return;   // don't start a line with pure space
+            }
+            cur.tokens.push({ text: txt, r: tok.r, x: cur.w, w: w, fs: st.fs, heavy: st.heavy, ital: st.ital });
+            cur.w += w; cur.fs = Math.max(cur.fs, st.fs);
+        });
+        lines.push(cur);
+    });
+    return lines;
+}
+// Draw rich text into the PDF at (x, y) inside width w (all pt).
+function _drawRichTextPdf(doc, t, x, y, w, PH) {
+    const lines = _layoutRichLines(t, w, PH);
+    const baseFs = Math.max(6, (t.size || 0.03) * PH);
+    const leadPt = (typeof t.leading === 'number' && t.leading > 0) ? (t.leading * (PH / 540)) : 0;
+    let cy = y;
+    lines.forEach(line => {
+        const lh = leadPt || Math.max(baseFs, line.fs || baseFs) * 1.15;
+        let ax = 0;
+        if (t.align === 'center') ax = Math.max(0, (w - line.w) / 2);
+        else if (t.align === 'right') ax = Math.max(0, w - line.w);
+        line.tokens.forEach(tok => {
+            if (!tok.text.trim()) return;   // spaces already advanced positions
+            const fam = _font(tok.r.font || t.font);
+            const style = (tok.heavy && tok.ital) ? 'bolditalic' : tok.heavy ? 'bold' : tok.ital ? 'italic' : 'normal';
+            try { doc.setFont(fam, style); } catch (e) { try { doc.setFont(fam, 'normal'); } catch (e2) {} }
+            doc.setFontSize(tok.fs);
+            const c = _annHexToRgb(tok.r.color || t.color || '#222222');
+            doc.setTextColor(c.r, c.g, c.b);
+            if (t.track) { try { doc.setCharSpace(t.track * tok.fs); } catch (e) {} }
+            try { doc.text(tok.text, x + ax + tok.x, cy, { baseline: 'top' }); } catch (e) {}
+            if (t.track) { try { doc.setCharSpace(0); } catch (e) {} }
+        });
+        cy += lh;
+    });
+}
+// Build styled spans inside a DOM node from runs. raw=true (edit mode) skips
+// list prefixes so markers never enter the editable text.
+function _richSpansInto(el, t, raw) {
+    el.textContent = '';
+    const runs = (Array.isArray(t.runs) && t.runs.length) ? t.runs : _runsFromPlain(t.text);
+    const mkSpan = (r, txt) => {
+        const sp = document.createElement('span');
+        sp.setAttribute('data-rs', JSON.stringify({ font: r.font, weight: r.weight, bold: r.bold, italic: r.italic, size: r.size, color: r.color }));
+        let css = '';
+        if (r.font) css += 'font-family:' + _richFamCss(r.font) + ';';
+        if (r.weight !== undefined) css += 'font-weight:' + r.weight + ';'; else if (r.bold !== undefined) css += 'font-weight:' + (r.bold ? 700 : 400) + ';';
+        if (r.italic !== undefined) css += 'font-style:' + (r.italic ? 'italic' : 'normal') + ';';
+        if (r.size) css += 'font-size:' + Math.max(6, r.size * ((el.closest && el.closest('#dsLayoutCanvas')) ? el.parentElement.getBoundingClientRect().height || 540 : 540)) + 'px;';
+        if (r.color) css += 'color:' + r.color + ';';
+        if (css) sp.style.cssText = css;
+        sp.textContent = txt;
+        return sp;
+    };
+    let lineNo = 0, atLineStart = true;
+    runs.forEach(r => {
+        const parts = ('' + (r.text || '')).split('\n');
+        parts.forEach((part, pi) => {
+            if (pi > 0) { el.appendChild(document.createTextNode('\n')); atLineStart = true; }
+            if (atLineStart && part.length) {
+                lineNo++;
+                if (!raw && t.listStyle === 'bullet') el.appendChild(document.createTextNode('\u2022 '));
+                else if (!raw && t.listStyle === 'number') el.appendChild(document.createTextNode(lineNo + '. '));
+                atLineStart = false;
+            }
+            if (part.length) el.appendChild(mkSpan(r, part));
+        });
+    });
+}
+// Rebuild runs from an edited contenteditable: walk text nodes, inherit style
+// from the closest [data-rs] ancestor, merge adjacent equals.
+function _runsFromEditedDom(box) {
+    const out = [];
+    const walk = (n) => {
+        if (n.nodeType === 3) {
+            let st = {};
+            let p = n.parentElement;
+            while (p && p !== box) { if (p.hasAttribute && p.hasAttribute('data-rs')) { try { st = JSON.parse(p.getAttribute('data-rs')) || {}; } catch (e) {} break; } p = p.parentElement; }
+            const r = { text: n.nodeValue };
+            ['font', 'weight', 'bold', 'italic', 'size', 'color'].forEach(k => { if (st[k] !== undefined && st[k] !== null) r[k] = st[k]; });
+            out.push(r);
+            return;
+        }
+        if (n.nodeName === 'BR') { out.push({ text: '\n' }); return; }
+        if (n.nodeType === 1) {
+            const isBlock = /^(DIV|P)$/i.test(n.nodeName);
+            if (isBlock && out.length) out.push({ text: '\n' });
+            Array.from(n.childNodes).forEach(walk);
+        }
+    };
+    Array.from(box.childNodes).forEach(walk);
+    return _runsNormalize(out);
+}
+// Character offsets of the current selection within a contenteditable box.
+function _ceSelOffsets(box) {
+    const sel = window.getSelection && window.getSelection();
+    if (!sel || !sel.rangeCount) return null;
+    const rg = sel.getRangeAt(0);
+    if (!box.contains(rg.startContainer) || !box.contains(rg.endContainer)) return null;
+    const offAt = (node, off) => {
+        let total = 0, done = false;
+        const walk = (n) => {
+            if (done) return;
+            if (n === node) { total += (n.nodeType === 3 ? off : 0); done = true; return; }
+            if (n.nodeType === 3) { total += n.nodeValue.length; return; }
+            Array.from(n.childNodes).forEach(walk);
+        };
+        walk(box);
+        return total;
+    };
+    const a = offAt(rg.startContainer, rg.startOffset), b = offAt(rg.endContainer, rg.endOffset);
+    return { start: Math.min(a, b), end: Math.max(a, b) };
+}
+function _ceSetSelOffsets(box, start, end) {
+    try {
+        const pos = (target) => { let acc = 0, res = null; const walk = (n) => { if (res) return; if (n.nodeType === 3) { if (acc + n.nodeValue.length >= target) { res = { node: n, off: target - acc }; } acc += n.nodeValue.length; return; } Array.from(n.childNodes).forEach(walk); }; walk(box); return res || { node: box, off: 0 }; };
+        const A = pos(start), B = pos(end);
+        const rg = document.createRange(); rg.setStart(A.node, A.off); rg.setEnd(B.node, B.off);
+        const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+    } catch (e) {}
+}
+// Popup setters route here: a live text selection inside the box being edited
+// styles JUST that range; otherwise the whole box (base style, and the key is
+// cleared from any runs so the base takes effect uniformly).
+function _popupApplyTextStyle(a, patch, tgtSel) {
+    const box = tgtSel ? document.querySelector('[data-ds-tgt="' + tgtSel + '"]') : null;
+    if (box && (box.isContentEditable || box.contentEditable === 'true' || box.getAttribute('contenteditable') === 'true')) {
+        const off = _ceSelOffsets(box);
+        if (off && off.end > off.start) {
+            a.runs = _runsApplyStyle((a.runs && a.runs.length) ? a.runs : _runsFromPlain(a.text), off.start, off.end, patch);
+            a.text = _runsPlainText(a.runs);
+            _richSpansInto(box, a, true);
+            _ceSetSelOffsets(box, off.start, off.end);
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            return true;
+        }
+    }
+    Object.keys(patch).forEach(k => { if (patch[k] === undefined) delete a[k]; else a[k] = patch[k]; });
+    if (Array.isArray(a.runs) && a.runs.length) { a.runs.forEach(r => Object.keys(patch).forEach(k => delete r[k])); a.runs = _runsNormalize(a.runs); }
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    return false;
 }
 function _dsCopySelection() {
     const _srcKey = (_dsPages && _dsPages[_dsIndex]) ? _deckPageKey(_dsPages[_dsIndex]) : null;
@@ -16480,7 +16704,8 @@ function renderMoodboardCanvas() {
             const _mlh = (typeof t.leading === 'number' && t.leading > 0) ? ((t.leading / 540) * cr.height) / fs : 1.15;
             const _mink = (_mbActiveCanvasId === 'dsLayoutCanvas' && _dsPages[_dsIndex]) ? _dsDisplayInk(t.color || '#222', _deckPageKey(_dsPages[_dsIndex])) : (t.color || '#222');
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:' + _mlh + '; color:' + _mink + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + _textExtraCss(t) + (sel ? ' outline:1px dashed #6a6aff; outline-offset:2px;' : '');
-            box.textContent = _listPrefixText(t.text || 'Text', t.listStyle);
+            if (Array.isArray(t.runs) && t.runs.length) _richSpansInto(box, t, false);
+            else box.textContent = _listPrefixText(t.text || 'Text', t.listStyle);
             box.title = 'Double-click to edit text';
             box.dataset.dsTgt = 'mb:' + i;
             box.ondblclick = (e) => { e.stopPropagation(); _mbBeginTextEdit(box, i); };
@@ -16758,14 +16983,14 @@ function _mbBeginTextEdit(box, i) {
     box.style.cursor = 'text';
     // Edit the RAW text — the rendered view shows list prefixes ('\u2022 ', '1. ')
     // that must never be typed back into storage.
-    { const t0 = _mbEls()[i]; if (t0 && t0.listStyle && t0.listStyle !== 'none') box.textContent = t0.text || ''; }
+    { const t0 = _mbEls()[i]; if (t0 && Array.isArray(t0.runs) && t0.runs.length) _richSpansInto(box, t0, true); else if (t0 && t0.listStyle && t0.listStyle !== 'none') box.textContent = t0.text || ''; }
     box.focus();
     try { const r = document.createRange(); r.selectNodeContents(box); r.collapse(false); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {}
-    box.oninput = () => { const t = _mbEls()[i]; if (t) t.text = _listStripText(box.innerText, t.listStyle); };
+    box.oninput = () => { const t = _mbEls()[i]; if (!t) return; if (box.querySelector('[data-rs]')) { t.runs = _runsFromEditedDom(box); t.text = _runsPlainText(t.runs); } else t.text = _listStripText(box.innerText, t.listStyle); };
     box.onblur = () => {
         _mbTextEditing = false;
         box.contentEditable = 'false';
-        const t = _mbEls()[i]; if (t) t.text = _listStripText(box.innerText.replace(/\n$/, ''), t.listStyle);
+        const t = _mbEls()[i]; if (t) { if (box.querySelector('[data-rs]')) { t.runs = _runsFromEditedDom(box); if (t.runs.length && /\n$/.test(t.runs[t.runs.length-1].text || '')) t.runs[t.runs.length-1].text = t.runs[t.runs.length-1].text.replace(/\n$/, ''); t.text = _runsPlainText(t.runs); } else t.text = _listStripText(box.innerText.replace(/\n$/, ''), t.listStyle); }
         if (typeof pushHistory === 'function') pushHistory();
         renderMoodboardCanvas();
         if (typeof scheduleAutosave === 'function') scheduleAutosave();
@@ -18727,6 +18952,7 @@ function _drawAnnotations(doc, key, PW, PH) {
             _drawAnnCaption(doc, a, x, y, pw, ph);
             return;
         }
+        if (Array.isArray(a.runs) && a.runs.length && _runsPlainText(a.runs).trim()) { _drawRichTextPdf(doc, a, (a.x || 0) * PW, (a.y || 0) * PH, (a.w || 0.3) * PW, PH); return; }
         let text = (a.text || '') + ''; if (!text.trim()) return;
         const x = (a.x || 0) * PW, y = (a.y || 0) * PH, w = (a.w || 0.3) * PW;
         const size = Math.max(6, (a.size || 0.03) * PH);
