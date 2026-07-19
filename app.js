@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.29';
+const APP_VERSION = '15.30';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -8773,31 +8773,16 @@ function _drawMoodboardPage(doc, logos, pageNum, meta, tiles, pageTitle, pageTyp
             return;
         }
         if (ty === 'text') {
-            if (Array.isArray(t.runs) && t.runs.length) { _drawRichTextPdf(doc, t, (t.x || 0) * PW, (t.y || 0) * PH, (t.w || 0.4) * PW, PH); return; }
-            const fs = Math.max(6, (t.size || 0.045) * PH);
-            const c = _hex(t.color || '#222222');
-            const heavy = t.weight ? t.weight >= 600 : t.bold;
-            const style = (heavy && t.italic) ? 'bolditalic' : heavy ? 'bold' : t.italic ? 'italic' : 'normal';
-            try { doc.setFont(_fontRole(t.font), style); } catch (e) { try { doc.setFont(_fontRole(t.font), 'normal'); } catch (e2) {} }
-            doc.setFontSize(fs); doc.setTextColor(c[0], c[1], c[2]);
-            const al = _pdfAlign(t.align); const boxX = (t.x || 0) * PW, boxW = (t.w || 0.4) * PW;
-            let tx = boxX; if (al === 'center') tx = boxX + boxW / 2; else if (al === 'right') tx = boxX + boxW;
-            // jsPDF drops everything after a TAB character (the browser shows
-            // tabs fine, so text with tabs previewed but vanished from the PDF).
-            let str = _listPrefixText(t.text || '', t.listStyle).replace(/\t/g, '    '); if (t.caps === 'upper') str = str.toUpperCase();
-            if (t.track) { try { doc.setCharSpace(t.track * fs); } catch (e) {} }
-            const lines = doc.splitTextToSize(str, boxW);
-            const topts = { baseline: 'top', align: al, maxWidth: boxW };
-            if (t.outline) { try { doc.setDrawColor(c[0], c[1], c[2]); doc.setLineWidth(Math.max(0.3, fs * 0.022)); topts.renderingMode = 'stroke'; } catch (e) {} }
-            // Custom leading (pt at the 540pt page scale): set the line-height
-            // factor for just this box, then restore the app default.
-            const _hasLead = typeof t.leading === 'number' && t.leading > 0;
-            if (_hasLead) { try { doc.setLineHeightFactor((t.leading * (PH / 540)) / fs); } catch (e) {} }
-            try { doc.text(lines, tx, (t.y || 0) * PH, topts); }
-            catch (e) { doc.text(lines, boxX, (t.y || 0) * PH, { baseline: 'top' }); }
-            if (_hasLead) { try { doc.setLineHeightFactor(1.15); } catch (e) {} }
-            if (t.track) { try { doc.setCharSpace(0); } catch (e) {} }
-            doc.setTextColor(20, 20, 20);
+            // ALWAYS through the rich-text engine, rich runs or plain. It
+            // measures wrapping with the browser's own canvas font metrics —
+            // the exact same measurement the DOM preview uses — so a header
+            // can never wrap to a different number of lines in the PDF than
+            // it visibly does in Deck Studio. The old path measured wraps
+            // with jsPDF's own (different) font metrics for the embedded
+            // TTF, which could disagree with the browser by a line, and
+            // since a subheading below sits at a fixed Y, one extra wrapped
+            // line in the PDF would print straight through it.
+            _drawRichTextPdf(doc, t, (t.x || 0) * PW, (t.y || 0) * PH, (t.w || 0.4) * PW, PH);
             return;
         }
         const im = t._img;
@@ -13011,12 +12996,27 @@ function _drawRichTextPdf(doc, t, x, y, w, PH) {
     const lines = _layoutRichLines(t, w, PH);
     const baseFs = Math.max(6, (t.size || 0.03) * PH);
     const leadPt = (typeof t.leading === 'number' && t.leading > 0) ? (t.leading * (PH / 540)) : 0;
+    const justify = (t.align === 'justify' || t.align === 'justify-all' || t.align === 'justify-center');
     let cy = y;
-    lines.forEach(line => {
+    lines.forEach((line, li) => {
         const lh = leadPt || Math.max(baseFs, line.fs || baseFs) * 1.15;
         let ax = 0;
         if (t.align === 'center') ax = Math.max(0, (w - line.w) / 2);
         else if (t.align === 'right') ax = Math.max(0, w - line.w);
+        // Justify: stretch the inter-word gaps so the line's tokens span the
+        // full box width — matching jsPDF's native 'justify' mode, which the
+        // legacy plain-text path used for body-copy paragraphs. The LAST
+        // line of the block is left as-is (standard typographic convention;
+        // also avoids ugly single-word stretching on a short final line).
+        if (justify && li < lines.length - 1 && line.tokens.length > 1) {
+            const slack = w - line.w;
+            const gaps = line.tokens.filter(tk => !tk.text.trim());
+            if (slack > 0.5 && gaps.length) {
+                const add = slack / gaps.length;
+                let shift = 0;
+                line.tokens.forEach(tk => { tk.x += shift; if (!tk.text.trim()) shift += add; });
+            }
+        }
         line.tokens.forEach(tok => {
             if (!tok.text.trim()) return;   // spaces already advanced positions
             const fam = _font(tok.r.font || t.font);
@@ -13025,8 +13025,13 @@ function _drawRichTextPdf(doc, t, x, y, w, PH) {
             doc.setFontSize(tok.fs);
             const c = _annHexToRgb(tok.r.color || t.color || '#222222');
             doc.setTextColor(c.r, c.g, c.b);
+            const topts = { baseline: 'top' };
+            // Outline (stroke-only) text — e.g. the cover page's white
+            // outlined SUBHEADING — same jsPDF renderingMode the legacy
+            // plain-text path used, now per-token so it works for mixed runs.
+            if (t.outline) { try { doc.setDrawColor(c.r, c.g, c.b); doc.setLineWidth(Math.max(0.3, tok.fs * 0.022)); topts.renderingMode = 'stroke'; } catch (e) {} }
             if (t.track) { try { doc.setCharSpace(t.track * tok.fs); } catch (e) {} }
-            try { doc.text(tok.text, x + ax + tok.x, cy, { baseline: 'top' }); } catch (e) {}
+            try { doc.text(tok.text, x + ax + tok.x, cy, topts); } catch (e) {}
             if (t.track) { try { doc.setCharSpace(0); } catch (e) {} }
         });
         cy += lh;
@@ -19343,32 +19348,13 @@ function _drawOneAnnotation(doc, a, PW, PH) {
             _drawAnnCaption(doc, a, x, y, pw, ph);
             return;
         }
-        if (Array.isArray(a.runs) && a.runs.length && _runsPlainText(a.runs).trim()) { _drawRichTextPdf(doc, a, (a.x || 0) * PW, (a.y || 0) * PH, (a.w || 0.3) * PW, PH); return; }
-        let text = (a.text || '') + ''; if (!text.trim()) return;
-        const x = (a.x || 0) * PW, y = (a.y || 0) * PH, w = (a.w || 0.3) * PW;
-        const size = Math.max(6, (a.size || 0.03) * PH);
-        const fam = _font(a.font || 'sans');
-        const heavy = a.weight ? a.weight >= 600 : a.bold;
-        const style = (heavy && a.italic) ? 'bolditalic' : heavy ? 'bold' : a.italic ? 'italic' : 'normal';
-        try { doc.setFont(fam, style); } catch (e) { doc.setFont(fam, a.bold ? 'bold' : 'normal'); }
-        doc.setFontSize(size);
-        const c = _annHexToRgb(a.color); doc.setTextColor(c.r, c.g, c.b);
-        text = _listPrefixText(text, a.listStyle).replace(/\t/g, '    ');   // tabs kill jsPDF text runs
-        if (a.caps === 'upper') text = text.toUpperCase();
-        const align = _pdfAlign(a.align);
-        if (a.track) { try { doc.setCharSpace(a.track * size); } catch (e) {} }
-        const lines = doc.splitTextToSize(text, w);
-        let tx = x; if (align === 'center') tx = x + w / 2; else if (align === 'right') tx = x + w;
-        const aopts = { align: align, maxWidth: w };
-        if (a.outline) { try { doc.setDrawColor(c.r, c.g, c.b); doc.setLineWidth(Math.max(0.3, size * 0.022)); aopts.renderingMode = 'stroke'; } catch (e) {} }
-        // Custom leading (e.g. note boxes: 14pt text / 18pt leading) — set the
-        // line-height factor just for this box's draw, then restore the app's
-        // standard default (1.15) so nothing else on the page is affected.
-        const _hadLeading = !!a.leading;
-        if (_hadLeading) { try { doc.setLineHeightFactor(a.leading / size); } catch (e) {} }
-        try { doc.text(lines, tx, y + size, aopts); } catch (e) { doc.text(lines, x, y + size); }
-        if (_hadLeading) { try { doc.setLineHeightFactor(1.15); } catch (e) {} }
-        if (a.track) { try { doc.setCharSpace(0); } catch (e) {} }
+        // ALWAYS through the rich-text engine — see the matching layout-
+        // element fix above for why: jsPDF's own font-metric wrapping could
+        // disagree with the browser's by a line, and since a subheading
+        // below an annotation sits at a fixed Y, an extra wrapped line in
+        // the PDF would print straight through it.
+        if (!((a.text || '') + '').trim() && !(Array.isArray(a.runs) && a.runs.length && _runsPlainText(a.runs).trim())) return;
+        _drawRichTextPdf(doc, a, (a.x || 0) * PW, (a.y || 0) * PH, (a.w || 0.3) * PW, PH);
     })(a);
 }
 // "APPROVED" stamp, top-right corner. Used to mark a deck as client-approved
