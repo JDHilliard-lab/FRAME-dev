@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.24';
+const APP_VERSION = '15.27';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -9801,6 +9801,15 @@ function _dsDuplicateLayoutPage(desc) {
     if (src.place) clone.place = src.place;
     clone.afterKey = 'layout:' + src.id;
     pages.splice(idx + 1, 0, clone);
+    // Most of a template page's actual content — text boxes, image
+    // placeholders, arrows/lines — lives in the ANNOTATION system, not in
+    // `elements`. The clone above only copied `elements`, so the duplicate
+    // showed up looking essentially blank (a "new page" in spirit, not a
+    // real duplicate). Clone the source's annotation list under the new key.
+    try {
+        const srcAnn = (editorialContent.annotations && editorialContent.annotations['layout:' + src.id]) || [];
+        if (srcAnn.length) { editorialContent.annotations = editorialContent.annotations || {}; editorialContent.annotations['layout:' + clone.id] = JSON.parse(JSON.stringify(srcAnn)); }
+    } catch (e) {}
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     try { _dsPages = _deckPageList() || []; } catch (e) {}
@@ -10001,7 +10010,9 @@ function _dsDeleteLayoutPage(desc) {
     if (!desc || desc.kind !== 'layout' || !desc.page) return;
     const pages = editorialContent.layoutPages || [];
     const idx = pages.indexOf(desc.page); if (idx < 0) return;
+    const delId = desc.page.id;
     pages.splice(idx, 1);
+    try { if (editorialContent.annotations) delete editorialContent.annotations['layout:' + delId]; } catch (e) {}
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     if (_dsIndex > 0) _dsIndex -= 1;
@@ -10625,7 +10636,7 @@ function _dsRenderRail() {
             b.onclick = (e) => { e.stopPropagation(); fn(); };
             return b;
         };
-        if (_removable) cell.appendChild(_qaBtn('\u2715', 'top:2px;', 'Remove this page', () => _dsRemovePageQuick(desc)));
+        if (_removable) cell.appendChild(_qaBtn('\u2212', 'top:2px;', 'Remove this page', () => _dsRemovePageQuick(desc)));
         if (_dupable) cell.appendChild(_qaBtn('+', 'top:' + (th - 17) + 'px;', 'Duplicate this page', () => _dsDuplicatePageQuick(desc)));
         const lab = document.createElement('div');
         lab.style.cssText = 'display:flex; align-items:center; gap:4px; font-size:0.64rem; color:' + (i === _dsIndex ? '#6a6aff' : 'var(--text-muted)') + '; margin-top:3px;';
@@ -10656,7 +10667,11 @@ function _dsRenderRail() {
                 lab.appendChild(ctlBtn('\u25b2', 'Move up', () => _dsMoveInserted(desc.page, 'up')));
                 lab.appendChild(ctlBtn('\u25bc', 'Move down', () => _dsMoveInserted(desc.page, 'down')));
             }
-            lab.appendChild(ctlBtn('\u2715', 'Delete page', () => { if (confirm('Remove \u201C' + (desc.page.title || 'this page') + '\u201D from the deck?')) _dsDeleteInserted(desc.page); }));
+            // Deleting a layout page has exactly ONE control now — the small
+            // \u2212 at the thumbnail's top-right corner. This row used to carry
+            // a second, separate \u2715 that did the same thing via a different
+            // function (_dsDeleteInserted vs. _dsRemovePageQuick) \u2014 two
+            // controls for one action, and confusing besides.
         }
         cell.appendChild(thumb); cell.appendChild(lab); rail.appendChild(cell);
         const ak = _deckPageKey(desc);
@@ -11094,9 +11109,26 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const bendHandle = mk('rect', { width: 9, height: 9, fill: '#fff', stroke: '#6a6aff', 'stroke-width': 2 });
             let lastPts = null;
             let _wpUISync = null;   // set once the waypoint-editing UI exists (elbow with a.waypoints)
+            // Settings-gear button, midpoint-anchored, shown only while selected.
+            // Declared here (before redraw) so redraw can reposition it inline —
+            // the same pattern already used for the endpoint/bend handles.
+            let gwrap = null, gbtn = null;
+            if (sel) {
+                gwrap = document.createElement('div');
+                gwrap.style.cssText = 'position:absolute; left:0; top:0; width:0; height:0; pointer-events:none; z-index:' + (101 + ((a.z !== undefined) ? a.z : 5000)) + ';';
+                gbtn = document.createElement('button');
+                gbtn.title = 'Line settings (colour, weight, head, caps)';
+                gbtn.style.cssText = 'position:absolute; width:20px; height:20px; padding:0; border-radius:50%; background:#fff; border:1.5px solid #6a6aff; cursor:pointer; display:flex; align-items:center; justify-content:center; pointer-events:auto; box-shadow:0 1px 3px rgba(0,0,0,0.35); transform:translate(-50%,-50%);';
+                gbtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6a6aff" stroke-width="2.4" stroke-linecap="round"><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';
+                gbtn.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
+                gbtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenArrowGearPopup(key, i, e.clientX, e.clientY); };
+                gwrap.appendChild(gbtn);
+            }
             const redraw = () => {
                 const X1 = (a.x1 || 0) * w, Y1 = (a.y1 || 0) * hh, X2 = (a.x2 || 0) * w, Y2 = (a.y2 || 0) * hh;
                 const sw = Math.max(1, (a.weight || 2) * (w / 936)), col = a.color || '#c0392b';
+                const cap = (a.lineCap === 'butt') ? 'butt' : 'round';
+                poly.setAttribute('stroke-linecap', cap); poly.setAttribute('stroke-linejoin', cap === 'butt' ? 'miter' : 'round');
                 const pts = _arrowPathPoints(a, X1, Y1, X2, Y2, w, hh);
                 lastPts = pts;
                 const ptStr = pts.map(p => p.join(',')).join(' ');
@@ -11113,6 +11145,11 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 hit.setAttribute('points', ptStr); hit.setAttribute('stroke-width', Math.max(14, sw + 12));
                 hEnds[0].setAttribute('cx', X1); hEnds[0].setAttribute('cy', Y1);
                 hEnds[1].setAttribute('cx', X2); hEnds[1].setAttribute('cy', Y2);
+                if (gbtn) {
+                    const midI = Math.floor((pts.length - 1) / 2), nxtI = Math.min(pts.length - 1, midI + 1);
+                    const mx = (pts[midI][0] + pts[nxtI][0]) / 2, my = (pts[midI][1] + pts[nxtI][1]) / 2;
+                    gbtn.style.left = mx + 'px'; gbtn.style.top = (my - 16) + 'px';
+                }
                 if ((a.type === 'elbow' || a.type === 'curve') && pts.length >= 3 && a.waypoints === undefined) {
                     const mi = Math.floor(pts.length / 2);
                     const mp = pts[mi];
@@ -11291,6 +11328,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 }
             }
             { const __n = svg; __n.style.zIndex = String(100 + ((a.z !== undefined) ? a.z : 5000)); page.appendChild(__n); }
+            if (sel && gbtn) page.appendChild(gwrap);
             return;
         }
         const el = document.createElement('div');
@@ -11665,7 +11703,7 @@ function _dsHandleImageFile(file) {
                 return;
             }
             const list = _dsAnnList(key);
-            list.push({ type: 'image', dataUrl: durl, x: 0.12, y: 0.14, w: 0.28, aspect: aspect });
+            list.push({ type: 'image', dataUrl: durl, x: 0.12, y: 0.14, w: 0.28, aspect: aspect, fileName: file.name || '' });
             if (typeof pushHistory === 'function') pushHistory();
             if (typeof scheduleAutosave === 'function') scheduleAutosave();
             _dsSelectAnnot(key, list.length - 1);
@@ -12037,7 +12075,7 @@ function _dsReadImageToShape(file, a) {
             const maxEdge = 1400; let dw = im.naturalWidth || 1, dh = im.naturalHeight || 1; const sc = Math.min(1, maxEdge / Math.max(dw, dh)); dw = Math.max(1, Math.round(dw * sc)); dh = Math.max(1, Math.round(dh * sc));
             const cnv = document.createElement('canvas'); cnv.width = dw; cnv.height = dh; cnv.getContext('2d').drawImage(im, 0, 0, dw, dh);
             let durl; try { durl = /png/i.test(file.type) ? cnv.toDataURL('image/png') : cnv.toDataURL('image/jpeg', 0.85); } catch (e) { durl = reader.result; }
-            a.dataUrl = durl; a.aspect = (im.naturalWidth || 1) / (im.naturalHeight || 1); a.zoom = 1; a.panX = 0; a.panY = 0;
+            a.dataUrl = durl; a.aspect = (im.naturalWidth || 1) / (im.naturalHeight || 1); a.zoom = 1; a.panX = 0; a.panY = 0; a.fileName = file.name || '';
             if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
             _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar();
         };
@@ -12079,6 +12117,121 @@ function _dsCloseGearPopup() {
     const pop = document.getElementById('dsGearPopup');
     if (pop) pop.remove();
     document.removeEventListener('mousedown', _dsGearPopupOutside);
+}
+// ── Arrow / Line settings popup ─────────────────────────────────────────
+// Arrows never had a working settings surface: the toolbar buttons referenced
+// (colour swatch, weight stepper, head/cap toggles) point at DOM ids that
+// don't exist in the current markup, so every one of those controls has been
+// silently dead. This popup follows the same movable-panel pattern already
+// proven for images/shapes and text, opened from the gear button anchored at
+// the line's midpoint.
+function _dsOpenArrowGearPopup(key, i, cx, cy) {
+    const old = document.getElementById('dsArrowGearPopup'); if (old) old.remove();
+    document.removeEventListener('mousedown', _dsArrowGearPopupOutside);
+    const a = (_dsAnnList(key) || [])[i]; if (!a) return;
+    const pop = document.createElement('div'); pop.id = 'dsArrowGearPopup';
+    pop.style.cssText = 'position:fixed; left:' + Math.min(window.innerWidth - 232, Math.max(8, cx + 10)) + 'px; top:' + Math.min(window.innerHeight - 320, Math.max(8, cy - 10)) + 'px; width:212px; background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; box-shadow:0 10px 34px rgba(0,0,0,0.5); z-index:100000; padding:10px; font-size:0.66rem; color:var(--text-main);';
+    pop.onmousedown = (e) => e.stopPropagation();
+    const refresh = () => {
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        _dsSyncToolbar();
+        try { renderMoodboardCanvas(); } catch (e) {}
+        _dsRenderCenter();
+        _dsRenderRail();
+        _dsOpenArrowGearPopup(key, i, parseFloat(pop.style.left) - 10, parseFloat(pop.style.top) + 10);
+    };
+    const head = document.createElement('div');
+    head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
+    const label = (a.type === 'elbow') ? ((a.tip === 'none') ? 'Multi-point line' : 'Multi-point arrow') : ((a.tip === 'none') ? 'Line' : 'Arrow');
+    head.innerHTML = '<span style="font-weight:700; font-size:0.62rem; letter-spacing:0.4px; text-transform:uppercase;">' + label + ' settings</span>';
+    const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
+    closeB.onclick = () => _dsCloseArrowGearPopup();
+    head.appendChild(closeB);
+    head.onmousedown = (e) => {
+        if (e.target === closeB) return;
+        e.preventDefault();
+        const sx = e.clientX - parseFloat(pop.style.left), sy = e.clientY - parseFloat(pop.style.top);
+        const mv = (ev) => { pop.style.left = (ev.clientX - sx) + 'px'; pop.style.top = (ev.clientY - sy) + 'px'; };
+        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); };
+        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+    };
+    pop.appendChild(head);
+    setTimeout(() => document.addEventListener('mousedown', _dsArrowGearPopupOutside), 0);
+    const lbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:0.56rem; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; pop.appendChild(d); };
+    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:5px; align-items:center; flex-wrap:wrap;'; pop.appendChild(d); return d; };
+
+    // Colour — swatches (white and black included, per request) + a custom picker.
+    lbl('Colour');
+    const cr = row();
+    ['#000000', '#ffffff', '#9aa0a6', '#4a4a4a', '#c0392b'].forEach(hex => {
+        const s = document.createElement('button'); s.title = hex;
+        const on = (a.color || '#9aa0a6').toLowerCase() === hex;
+        s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; background:' + hex + '; border:2px solid ' + (on ? '#6a6aff' : (hex === '#ffffff' ? '#999' : 'transparent')) + '; cursor:pointer;';
+        s.onclick = () => { a.color = hex; refresh(); };
+        cr.appendChild(s);
+    });
+    const colIn = document.createElement('input'); colIn.type = 'color'; colIn.value = a.color || '#9aa0a6';
+    colIn.title = 'Custom colour'; colIn.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:4px; background:var(--bg-input); cursor:pointer;';
+    colIn.onchange = () => { a.color = colIn.value; refresh(); };
+    cr.appendChild(colIn);
+
+    // Weight — same +/- and typeable pattern as the text popup's size stepper.
+    lbl('Weight (pt)');
+    const wr = row();
+    const wDn = document.createElement('button'); wDn.className = 'action-btn btn-secondary'; wDn.textContent = '\u2212'; wDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+    const wVal = document.createElement('input'); wVal.type = 'number'; wVal.min = '0.5'; wVal.max = '20'; wVal.step = '0.5'; wVal.value = a.weight || 1.2;
+    wVal.style.cssText = 'width:44px; height:22px; text-align:center; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 2px;';
+    const commitW = () => { const n = parseFloat(wVal.value); if (!isNaN(n)) { a.weight = Math.max(0.5, Math.min(20, n)); refresh(); } else { wVal.value = a.weight || 1.2; } };
+    wVal.onchange = commitW; wVal.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); commitW(); } };
+    const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+    wDn.onclick = () => { a.weight = Math.max(0.5, (a.weight || 1.2) - 0.5); refresh(); };
+    wUp.onclick = () => { a.weight = Math.min(20, (a.weight || 1.2) + 0.5); refresh(); };
+    wr.appendChild(wDn); wr.appendChild(wVal); wr.appendChild(wUp);
+
+    // Head — arrowhead vs plain line (the "Line" tool's own no-head option,
+    // now also editable after the fact on any existing arrow).
+    lbl('End head');
+    const hr = row();
+    [['arrow', 'Arrowhead'], ['none', 'None (line)']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        const on = (a.tip || 'arrow') === v;
+        b.style.cssText = 'flex:1; height:24px; padding:0 6px; font-size:0.6rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a.tip = v; refresh(); };
+        hr.appendChild(b);
+    });
+
+    // Start cap — plain end vs a dot, independent of the head.
+    lbl('Start cap');
+    const sr = row();
+    [['none', 'None'], ['circle', 'Dot']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        const on = (a.startCap || 'none') === v;
+        b.style.cssText = 'flex:1; height:24px; padding:0 6px; font-size:0.6rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a.startCap = v; refresh(); };
+        sr.appendChild(b);
+    });
+
+    // Line ends — round or sharp (butt) caps/joins along the shaft itself.
+    lbl('Line ends');
+    const er = row();
+    [['round', 'Round'], ['butt', 'Sharp']].forEach(([v, l]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        const on = (a.lineCap || 'round') === v;
+        b.style.cssText = 'flex:1; height:24px; padding:0 6px; font-size:0.6rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '');
+        b.onclick = () => { a.lineCap = v; refresh(); };
+        er.appendChild(b);
+    });
+
+    document.body.appendChild(pop);
+}
+function _dsArrowGearPopupOutside(e) {
+    const pop = document.getElementById('dsArrowGearPopup');
+    if (pop && !pop.contains(e.target) && !e.target.closest('[title*="Line settings"]')) _dsCloseArrowGearPopup();
+}
+function _dsCloseArrowGearPopup() {
+    const pop = document.getElementById('dsArrowGearPopup');
+    if (pop) pop.remove();
+    document.removeEventListener('mousedown', _dsArrowGearPopupOutside);
 }
 // The gear popup — every image-placeholder setting in one movable panel.
 function _dsOpenGearPopup(key, i, cx, cy) {
@@ -12157,7 +12310,7 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         tB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeToggleFill(); pop.remove(); };
         fr.appendChild(tB);
         const sr = row(); sr.style.marginTop = '5px';
-        ['#b0b0b0', '#4a4a4a', '#c0392b'].forEach(hex => {
+        ['#000000', '#ffffff', '#b0b0b0', '#4a4a4a', '#c0392b'].forEach(hex => {
             const s = document.createElement('button'); s.title = 'Stroke ' + hex + ' (click again to remove)';
             s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; border:3px solid ' + hex + '; background:' + (a.stroke === hex ? hex : 'transparent') + '; cursor:pointer;';
             s.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeSwatch(hex); refresh(); };
@@ -12181,6 +12334,22 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     capB.style.cssText = 'flex:1; height:22px; font-size:0.58rem;' + (a.showCaption ? ' border-color:#6a6aff; color:#6a6aff;' : '');
     capB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsToggleAnnCaption(); refresh(); };
     cr1.appendChild(capB);
+    if (a.showCaption && isImg) {
+        // Caption source — free-typed text, or the uploaded file's own name
+        // (extension stripped), matching the image-code convention already
+        // used under frame mockups on spec pages.
+        lbl('Caption source');
+        const csr = row();
+        [['text', 'Custom text'], ['filename', 'File name']].forEach(([v, l]) => {
+            const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+            const on = (a.capSource || 'text') === v;
+            const disabled = (v === 'filename' && !a.fileName);
+            b.style.cssText = 'flex:1; height:22px; font-size:0.56rem;' + (on ? ' border-color:#6a6aff; color:#6a6aff;' : '') + (disabled ? ' opacity:0.4; cursor:not-allowed;' : '');
+            b.disabled = disabled; if (disabled) b.title = 'No file name on record for this image \u2014 re-upload it to use this option';
+            b.onclick = () => { a.capSource = v; refresh(); };
+            csr.appendChild(b);
+        });
+    }
     if (a.showCaption) {
         [['left'], ['center'], ['right']].forEach(([v]) => {
             const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.innerHTML = _dsAlignIconSVG(v);
@@ -12205,6 +12374,18 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     pop.appendChild(help);
     document.body.appendChild(pop);
 }
+// Resolves what a caption actually SAYS: free-typed text by default, or the
+// uploaded file's name (extension stripped) when capSource is 'filename' —
+// the same idea as the image code printed under a frame mockup on spec
+// pages. Falls back to the typed caption if no file name was captured (e.g.
+// an older project from before this field existed).
+function _dsResolveCaptionText(a) {
+    if (a.capSource === 'filename') {
+        const fn = (a.fileName || '') + '';
+        if (fn) return fn.replace(/\.[^.]+$/, '');
+    }
+    return a.caption || 'Caption';
+}
 function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     if (!a.showCaption) return;
     const bw = (a.w || 0.25) * w;
@@ -12213,9 +12394,11 @@ function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     cap.dataset.capFor = key + '|' + i;
     const align = a.capAlign || 'center';
     const fam = (a.capFont === 'sans') ? '"Druk","Arial Narrow",Arial,sans-serif' : '"Messina",Georgia,serif';
-    cap.textContent = a.caption || 'Caption';
-    cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + Math.max(8, 0.0165 * hh) + 'px; font-style:italic; color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:' + fam + '; cursor:text; z-index:20; white-space:pre-wrap;';
-    cap.title = 'Double-click to edit the caption';
+    const byFile = a.capSource === 'filename';
+    cap.textContent = _dsResolveCaptionText(a);
+    cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + Math.max(8, 0.0165 * hh) + 'px; font-style:italic; color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:' + fam + '; cursor:' + (byFile ? 'default' : 'text') + '; z-index:20; white-space:pre-wrap;';
+    cap.title = byFile ? 'Caption follows the image\u2019s file name \u2014 change it in the gear popup\u2019s Caption section' : 'Double-click to edit the caption';
+    if (byFile) { page.appendChild(cap); return; }
     cap.ondblclick = (e) => {
         e.preventDefault(); e.stopPropagation();
         cap.contentEditable = 'true'; cap.style.outline = '1px dashed #6a6aff'; cap.focus();
@@ -18922,9 +19105,9 @@ function _annHexToRgb(hex) {
 }
 const _shapeImgCache = {};
 function _shapeImgKey(a, wPt, hPt) { return (a.shape || 'rect') + '|' + (a.fit || 'cover') + '|' + Math.round(wPt) + 'x' + Math.round(hPt) + '|z' + (a.zoom || 1) + '|p' + (a.panX || 0) + ',' + (a.panY || 0) + '|' + (a.dataUrl ? a.dataUrl.length + a.dataUrl.slice(-24) : ''); }
-async function _ensureShapeImage(a, wPt, hPt) {
+async function _ensureShapeImage(a, wPt, hPt, fitOverride) {
     if (!a || !a.dataUrl) return null;
-    const key = _shapeImgKey(a, wPt, hPt);
+    const key = _shapeImgKey(a, wPt, hPt) + (fitOverride ? '|fo' + fitOverride : '');
     if (_shapeImgCache[key]) return _shapeImgCache[key];
     try {
         const img = await _loadImg(a.dataUrl);
@@ -18933,8 +19116,20 @@ async function _ensureShapeImage(a, wPt, hPt) {
         const cx = cnv.getContext('2d');
         cx.save();
         if (a.shape === 'ellipse') { cx.beginPath(); cx.ellipse(W / 2, H / 2, W / 2, H / 2, 0, 0, Math.PI * 2); cx.clip(); }
-        const aspect = a.aspect || ((img.naturalWidth || 1) / (img.naturalHeight || 1));
-        const cr = _imgRect(a.fit || 'cover', W, H, aspect, a.zoom || 1, a.panX || 0, a.panY || 0);
+        // Trust the REAL decoded image dimensions over the stored a.aspect —
+        // a.aspect can go stale (project re-imports, migrations, an image
+        // swapped without recomputing it) with zero visible symptom in the
+        // browser preview, because the DOM's object-fit:contain reads the
+        // browser's own knowledge of the file's real aspect and just
+        // letterboxes around any box-shape mismatch. jsPDF's addImage has no
+        // such tolerance: it stretches to whatever w×h it's given, so any
+        // drift here was invisible in Deck Studio and a visible squeeze/
+        // stretch in the exported PDF. Real pixels win; a.aspect is only the
+        // fallback for sources with no decodable intrinsic size.
+        const real = (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : null;
+        const aspect = real || a.aspect || 1.333;
+        if (real && Math.abs(real - (a.aspect || 0)) > 0.004) a.aspect = real;   // self-heal for next render
+        const cr = _imgRect(fitOverride || a.fit || 'cover', W, H, aspect, a.zoom || 1, a.panX || 0, a.panY || 0);
         cx.drawImage(img, cr.offX, cr.offY, cr.dW, cr.dH); cx.restore();
         const out = cnv.toDataURL('image/png'); _shapeImgCache[key] = out; return out;
     } catch (e) { return null; }
@@ -18961,12 +19156,13 @@ function _softShadowDataUrl(wPt, hPt, ell) {
     } catch (e) { return null; }
 }
 function _drawAnnCaption(doc, a, x, y, pw, ph) {
-    if (!a.showCaption || !(a.caption || '').trim()) return;
+    const capText = _dsResolveCaptionText(a);
+    if (!a.showCaption || !capText.trim()) return;
     try {
         doc.setFont(_font(a.capFont === 'sans' ? 'sans' : 'serif'), 'italic'); doc.setFontSize(9); doc.setTextColor(138, 138, 138);
         const align = a.capAlign || 'center';
         let tx = x; if (align === 'center') tx = x + pw / 2; else if (align === 'right') tx = x + pw;
-        const lines = doc.splitTextToSize((a.caption || '').trim(), pw);
+        const lines = doc.splitTextToSize(capText.trim(), pw);
         doc.text(lines, tx, y + ph + 12, { align: align, maxWidth: pw });
     } catch (e) {}
 }
@@ -19032,7 +19228,8 @@ function _drawOneAnnotation(doc, a, PW, PH) {
             const X1 = (a.x1 || 0) * PW, Y1 = (a.y1 || 0) * PH, X2 = (a.x2 || 0) * PW, Y2 = (a.y2 || 0) * PH;
             const rgb = _annHexToRgb(a.color || '#c0392b');
             const wt = a.weight || 2;
-            doc.setDrawColor(rgb.r, rgb.g, rgb.b); doc.setLineWidth(wt); doc.setLineCap('round'); doc.setLineJoin('round');
+            const _cap = (a.lineCap === 'butt') ? 'butt' : 'round';
+            doc.setDrawColor(rgb.r, rgb.g, rgb.b); doc.setLineWidth(wt); doc.setLineCap(_cap); doc.setLineJoin(_cap === 'butt' ? 'miter' : 'round');
             // Same shared geometry the live editor uses, so the PDF always
             // matches exactly what was previewed — straight, elbow (with its
             // adjustable bend), or curve (drawn as short line segments).
@@ -19053,13 +19250,23 @@ function _drawOneAnnotation(doc, a, PW, PH) {
             if (!a.dataUrl) return;
             const x = (a.x || 0) * PW, y = (a.y || 0) * PH, pw = (a.w || 0.25) * PW, ph = (a.w || 0.25) * PW * (a.aspect || 0.75);
             _annShadow(x, y, pw, ph, false);
-            if ((a.zoom || 1) > 1) {
-                // Zoomed/panned: use the pre-baked crop (same pipeline as shapes).
-                const mu = _shapeImgCache[_shapeImgKey(a, pw, ph)];
-                if (mu) { try { doc.addImage(mu, 'PNG', x, y, pw, ph); } catch (e) {} _drawAnnCaption(doc, a, x, y, pw, ph); return; }
-            }
+            // Always draw through the baked cache — 'contain' at zoom<=1
+            // (matches the DOM's object-fit:contain: never stretches, always
+            // letterboxes to the image's TRUE aspect), 'cover' once zoomed
+            // (matches the DOM's pan/zoom crop). The naive full-box stretch
+            // this replaced had no protection at all if a.aspect ever drifted
+            // from the real file — invisible in preview, visible in the PDF.
+            const fitMode = (a.zoom || 1) > 1 ? 'cover' : 'contain';
+            const key2 = _shapeImgKey(Object.assign({}, a, { shape: 'rect' }), pw, ph) + '|fo' + fitMode;
+            const mu = _shapeImgCache[key2];
+            if (mu) { try { doc.addImage(mu, 'PNG', x, y, pw, ph); } catch (e) {} _drawAnnCaption(doc, a, x, y, pw, ph); return; }
+            // Cache not primed (shouldn't happen — the export pre-pass bakes
+            // every image annotation before this draws) — fall back to a
+            // manual contain rect using a.aspect rather than a blind stretch,
+            // so even an unprimed placeholder letterboxes instead of squeezing.
+            const cr2 = _imgRect(fitMode, pw, ph, a.aspect || 0.75, a.zoom || 1, a.panX || 0, a.panY || 0);
             const fmt = (('' + a.dataUrl).indexOf('image/png') >= 0) ? 'PNG' : 'JPEG';
-            try { doc.addImage(a.dataUrl, fmt, x, y, pw, ph); } catch (e) {}
+            try { doc.addImage(a.dataUrl, fmt, x + cr2.offX, y + cr2.offY, cr2.dW, cr2.dH); } catch (e) {}
             _drawAnnCaption(doc, a, x, y, pw, ph);
             return;
         }
@@ -19491,7 +19698,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         const _emitted = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) _emitted[_pageKeys[p]] = 1; }
         for (const pg of (editorialContent.layoutPages || [])) { if (!_emitted['layout:' + pg.id]) { await drawLayoutPage(pg); await emitAfterKey('layout:' + pg.id); } }
     }
-    for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; if (!_inScope(p, _k)) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } if (_a && _a.type === 'shape' && _a.dataUrl) { try { await _ensureShapeImage(_a, (_a.w || 0.25) * PW, (_a.h || 0.18) * PH); } catch (e) {} } if (_a && _a.type === 'image' && _a.dataUrl && (_a.zoom || 1) > 1) { try { await _ensureShapeImage(_a, (_a.w || 0.25) * PW, (_a.w || 0.25) * PW * (_a.aspect || 0.75)); } catch (e) {} } } }
+    for (let p = 1; p <= pageNum; p++) { const _k = _pageKeys[p]; if (!_k) continue; if (!_inScope(p, _k)) continue; const _al = (editorialContent.annotations && editorialContent.annotations[_k]) || []; for (const _a of _al) { if (_a && _a.type === 'mockup' && _a.pieceId) { try { await _mockupEnsure(_a.pieceId); } catch (e) {} } if (_a && _a.type === 'shape' && _a.dataUrl) { try { await _ensureShapeImage(_a, (_a.w || 0.25) * PW, (_a.h || 0.18) * PH); } catch (e) {} } if (_a && _a.type === 'image' && _a.dataUrl) { const _fm = (_a.zoom || 1) > 1 ? 'cover' : 'contain'; try { await _ensureShapeImage(Object.assign({}, _a, { shape: 'rect' }), (_a.w || 0.25) * PW, (_a.w || 0.25) * PW * (_a.aspect || 0.75), _fm); } catch (e) {} }  } }
     try {
         const _annAll = editorialContent.annotations || {}; const _dets = []; const _seen = {};
         Object.keys(_annAll).forEach(k => (_annAll[k] || []).forEach(a => { if (a && a.type === 'artdetail' && a.pieceId && !a.hidden) { const ck = _artDetailKey(a.pieceId, a); if (!_seen[ck]) { _seen[ck] = 1; _dets.push(a); } } }));
