@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. Set APP_BUILD to 'dev' in the dev
 // repo fork — the version pill turns orange to make it visually obvious
 // you're on the development build, not the production one users see.
-const APP_VERSION = '15.31';
+const APP_VERSION = '15.32';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 const IDML_MASTER_TEMPLATES = [{"name":"Farmboy \u00b7 Cover Page","type":"cover","elements":[{"type":"image","x":0,"y":0,"w":1,"h":1,"img":"","aspect":1.78,"fit":"cover"},{"type":"text","x":0.095,"y":0.25,"w":0.5,"text":"CLIENT NAME","font":"display","size":0.026,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0.02},{"type":"text","x":0.093,"y":0.295,"w":0.66,"text":"COVER PAGE HEADING","font":"display","size":0.085,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.093,"y":0.43,"w":0.6,"text":"SUBHEADING","font":"display","size":0.072,"color":"#ffffff","align":"left","caps":"upper","bold":true,"italic":false,"track":0,"outline":true}]},{"name":"Farmboy \u00b7 GOOD ART. GOOD PEOPLE.","type":"slogan","elements":[{"type":"text","x":0.1,"y":0.34,"w":0.8,"text":"GOOD ART.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0},{"type":"text","x":0.1,"y":0.5,"w":0.8,"text":"GOOD PEOPLE.","font":"display","size":0.13,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Tagline","type":"divider","elements":[{"type":"text","x":0.08,"y":0.42,"w":0.84,"text":"TAGLINE","font":"display","size":0.15,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Standard)","type":"divider","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.53,"w":0.7,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Divider (Center)","type":"divider","elements":[{"type":"text","x":0.08,"y":0.4,"w":0.84,"text":"SECTION HEADING","font":"display","size":0.085,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.08,"y":0.53,"w":0.84,"text":"Subheading","font":"serif","size":0.028,"color":"#555555","align":"center","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative (Statement)","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.6,"text":"ART NARRATIVE","font":"display","size":0.058,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.56,"text":"Add the narrative copy here \u2014 the story behind the collection, its themes, and how the work connects to the space.","font":"serif","size":0.028,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Narrative \u2014 Image","type":"narrative","elements":[{"type":"text","x":0.06,"y":0.12,"w":0.42,"text":"PROJECT UNDERSTANDING","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.26,"w":0.4,"text":"Add the supporting copy here. Keep it to a tight paragraph that sits beside the image.","font":"serif","size":0.026,"color":"#222222","align":"justify","caps":"none","bold":false,"italic":false,"track":0},{"type":"image","x":0.55,"y":0.12,"w":0.39,"h":0.76,"img":"","aspect":0.8,"fit":"cover"}]},{"name":"Farmboy \u00b7 Narrative (Keywords)","type":"keyword","elements":[{"type":"text","x":0.06,"y":0.4,"w":0.88,"text":"KEYWORD","font":"display","size":0.13,"color":"#1a1a1a","align":"center","caps":"upper","bold":true,"italic":false,"track":0.01}]},{"name":"Farmboy \u00b7 Moodboard (Standard)","type":"moodboard","elements":[{"type":"text","x":0.06,"y":0.06,"w":0.6,"text":"MOODBOARD","font":"display","size":0.05,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"image","x":0.06,"y":0.18,"w":0.44,"h":0.66,"img":"","aspect":0.75,"fit":"cover"},{"type":"image","x":0.52,"y":0.18,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"},{"type":"image","x":0.52,"y":0.53,"w":0.42,"h":0.31,"img":"","aspect":1.4,"fit":"cover"}]},{"name":"Farmboy \u00b7 Moodboard (Captions)","type":"moodboard","elements":[{"type":"image","x":0.06,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.06,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.37,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.37,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0},{"type":"image","x":0.68,"y":0.14,"w":0.27,"h":0.5,"img":"","aspect":0.9,"fit":"cover"},{"type":"text","x":0.68,"y":0.66,"w":0.27,"text":"Caption text","font":"serif","size":0.022,"color":"#666666","align":"left","caps":"none","bold":false,"italic":true,"track":0}]},{"name":"Farmboy \u00b7 Contents (Half)","type":"toc","elements":[{"type":"text","x":0.06,"y":0.1,"w":0.6,"text":"CONTENTS","font":"display","size":0.07,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.3,"w":0.6,"text":"01   Introduction","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.4,"w":0.6,"text":"02   The Collection","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.5,"w":0.6,"text":"03   Installation","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.6,"w":0.6,"text":"04   Specifications","font":"serif","size":0.03,"color":"#222222","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name":"Farmboy \u00b7 Thank You","type":"bio","elements":[{"type":"text","x":0.06,"y":0.34,"w":0.88,"text":"THANK YOU","font":"display","size":0.12,"color":"#1a1a1a","align":"left","caps":"upper","bold":true,"italic":false,"track":0.01},{"type":"text","x":0.06,"y":0.52,"w":0.7,"text":"Name \u00b7 Role","font":"serif","size":0.032,"color":"#333333","align":"left","caps":"none","bold":false,"italic":false,"track":0},{"type":"text","x":0.06,"y":0.59,"w":0.7,"text":"email@farmboy.com \u00b7 000 000 0000","font":"serif","size":0.024,"color":"#666666","align":"left","caps":"none","bold":false,"italic":false,"track":0}]},{"name": "Farmboy \u00b7 Artwork Spec (Detail)", "type": "moodboard", "elements": [{"type": "text", "font": "display", "size": 0.048, "color": "#1a1a1a", "align": "left", "caps": "upper", "bold": true, "italic": false, "track": 0.005, "x": 0.022, "y": 0.088, "w": 0.5, "text": "ART-01 | PAGE TITLE"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "left", "caps": "none", "bold": true, "italic": false, "track": 0, "x": 0.022, "y": 0.175, "w": 0.09, "text": "Artist\nTitle\nApplication\nArt Type\nFrame Size\nFrame Code\nMount\nHardware\nGlass\nArt Dimensions\nOverall Dimensions"}, {"type": "text", "font": "serif", "size": 0.019, "color": "#1a1a1a", "align": "right", "caps": "none", "bold": false, "italic": false, "track": 0, "x": 0.098, "y": 0.175, "w": 0.124, "text": "Artist Name\nArtwork Title, Year\nMedium\nFine Art Original\n0.375\"W \u00d7 2.125\"H\nFRAME 00000\nFloat Mount, 0.25\" Reveal\n3-Point Security\nN/A\n60\"W \u00d7 72\"H \u00d7 1.75\"D\n61.25\"W \u00d7 73.25\"H \u00d7 2.125\"D"}, {"type": "text", "font": "serif", "size": 0.017, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.232, "y": 0.178, "w": 0.108, "text": "Note:\nAvailability of the showcased Fine Art Original will be confirmed upon purchase, and if unavailable, alternative options may need to be considered."}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.462, "w": 0.108, "h": 0.163, "aspect": 1.18}, {"type": "image", "img": "", "fit": "contain", "x": 0.153, "y": 0.462, "w": 0.096, "h": 0.163, "aspect": 1.07}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.628, "w": 0.2, "text": "Framing Reference"}, {"type": "image", "img": "", "fit": "cover", "x": 0.022, "y": 0.658, "w": 0.151, "h": 0.241, "aspect": 1.12}, {"type": "image", "img": "", "fit": "cover", "x": 0.183, "y": 0.658, "w": 0.18, "h": 0.241, "aspect": 1.33}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.022, "y": 0.902, "w": 0.14, "text": "Floorplan"}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "left", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.183, "y": 0.902, "w": 0.14, "text": "Elevation"}, {"type": "image", "img": "", "fit": "cover", "x": 0.506, "y": 0.187, "w": 0.117, "h": 0.203, "aspect": 1.0}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "center", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.476, "y": 0.402, "w": 0.177, "text": "Artwork Detail"}, {"type": "image", "img": "", "fit": "cover", "x": 0.656, "y": 0.18, "w": 0.334, "h": 0.716, "aspect": 0.833}, {"type": "text", "font": "serif", "size": 0.015, "color": "#8a8a8a", "align": "right", "caps": "none", "bold": false, "italic": true, "track": 0, "x": 0.65, "y": 0.905, "w": 0.34, "text": "FAO.Artist Name.Artwork Title, Year.png"}]}];
 const APP_BUILD = 'dev';  // 'prod' (green dot) or 'dev' (orange dot)
@@ -10846,7 +10846,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const box = document.createElement('div');
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + s + 'px; height:' + s + 'px; cursor:move; box-sizing:border-box;';
             const disc = document.createElement('div');
-            disc.style.cssText = 'position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#f2f2f4; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + ';';
+            disc.style.cssText = 'position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#f2f2f4; outline:' + (sel ? '1.5px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + ';';
             const url = _artDetailCache[_artDetailKey(a.pieceId, a)];
             if (url) { const img = document.createElement('img'); img.src = url; img.draggable = false; img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;'; disc.appendChild(img); }
             else { disc.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:10px; text-align:center; padding:6px;">detail\u2026</div>'; if (a.pieceId) _artDetailEnsure(a.pieceId, a).then(u => { if (u) _dsRenderCenter(); }); }
@@ -10856,7 +10856,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
                 const wasSel = (_dsSelKey === key && _dsSelIdx === i);
-                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); disc.style.outline = '2px solid #6a6aff';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); disc.style.outline = '1.5px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const opx = a.panX || 0, opy = a.panY || 0;
                 const panning = e.shiftKey && ((a.zoom || 1) > 1);
@@ -10888,7 +10888,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             };
             if (sel) {
                 const handle = document.createElement('div');
-                handle.style.cssText = 'position:absolute; right:4%; bottom:4%; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize; z-index:2;';
+                handle.style.cssText = 'position:absolute; right:4%; bottom:4%; width:8px; height:8px; background:#6a6aff; border:1.5px solid #fff; border-radius:1px; cursor:nwse-resize; z-index:2;';
                 handle.onmousedown = (e) => {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.14;
@@ -10910,7 +10910,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const aspect = (entry && entry.aspect) || a.aspect || 1.2;
             const bw = (a.w || 0.3) * w, bh = bw * aspect;
             const box = document.createElement('div');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;';
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;';
             if (entry && entry.url) {
                 const img = document.createElement('img'); img.src = entry.url; img.draggable = false;
                 img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
@@ -10928,7 +10928,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.onmousedown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
-                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
                 const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
@@ -10938,7 +10938,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsPickMockupPiece(a); };
             if (sel) {
                 const handle = document.createElement('div');
-                handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
+                handle.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:#6a6aff; border:1.5px solid #fff; border-radius:1px; cursor:nwse-resize;';
                 handle.onmousedown = (e) => {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.3;
@@ -10954,7 +10954,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         if (a.type === 'image') {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             const clipI = document.createElement('div');
             clipI.style.cssText = 'position:absolute; inset:0; overflow:hidden; background:#fff; pointer-events:none;';
             const img = document.createElement('img');
@@ -10977,7 +10977,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (_dsAnnGroupDragStart(e, key, i, list)) return;
                 e.preventDefault(); e.stopPropagation();
                 const wasSel = sel;
-                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
@@ -10996,7 +10996,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 : moveDownI;
             box.style.cursor = panModeI ? 'grab' : 'move';
             const handle = document.createElement('div');
-            handle.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;' + (sel ? '' : ' display:none;');
+            handle.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:#6a6aff; border:1.5px solid #fff; border-radius:1px; cursor:nwse-resize;' + (sel ? '' : ' display:none;');
             handle.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
@@ -11018,10 +11018,10 @@ function _dsRenderAnnots(page, desc, w, hh) {
         if (a.type === 'shape') {
             const bw = (a.w || 0.25) * w, bh = (a.h || 0.18) * hh;
             const box = document.createElement('div');
-            const radius = a.shape === 'ellipse' ? '50%' : '3px';
+            const radius = a.shape === 'ellipse' ? '50%' : (Math.max(0, (a.radius !== undefined ? a.radius : 3)) * (w / 936)) + 'px';
             // overflow stays VISIBLE on the box so the grip/gear handles just
             // outside its corners aren't clipped; an inner wrapper clips the image.
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + (a.dataUrl ? 'transparent' : (a.fill === 'none' ? 'transparent' : (a.fill || '#d8d8de'))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + (a.dataUrl ? 'transparent' : (a.fill === 'none' ? 'transparent' : (a.fill || '#d8d8de'))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '1.5px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             if (a.dataUrl) {
                 const clip = document.createElement('div');
                 clip.style.cssText = 'position:absolute; inset:0; overflow:hidden; border-radius:' + radius + '; background:#ececec; pointer-events:none;';
@@ -11032,7 +11032,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 box.appendChild(clip);
             }
             box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed #6a6aff'; };
-            box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)'; };
+            box.ondragleave = () => { box.style.outline = sel ? '1.5px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)'; };
             box.ondrop = (e) => _dsShapeDropImage(e, key, i);
             const moveDown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
@@ -11040,7 +11040,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (_dsAnnGroupDragStart(e, key, i, list)) return;
                 e.preventDefault(); e.stopPropagation();
                 const wasSel = sel;
-                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '2px solid #6a6aff';
+                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid #6a6aff';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
@@ -11352,21 +11352,21 @@ function _dsRenderAnnots(page, desc, w, hh) {
         el.spellcheck = false;
         const _fpx = Math.max(7, (a.size || 0.03) * hh);
         const _lh = a.leading ? ((a.leading / 540) * hh) / _fpx : 1.15;
-        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + _fpx + 'px; line-height:' + _lh + '; color:' + _dsDisplayInk(a.color || '#222222', key) + '; ' + _textExtraCss(a) + ' outline:' + (sel ? '2px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
+        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + _fpx + 'px; line-height:' + _lh + '; color:' + _dsDisplayInk(a.color || '#222222', key) + '; ' + _textExtraCss(a) + ' outline:' + (sel ? '1.5px solid #6a6aff' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
             if (_dsAnnShiftToggle(e, i)) return;
             if (_dsAnnGroupDragStart(e, key, i, list)) return;
             e.preventDefault();
             const wasSel = sel;
-            _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '2px solid #6a6aff';
+            _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '1.5px solid #6a6aff';
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
             const _bwF = (el.offsetWidth || 0) / w, _bhF = (el.offsetHeight || 0) / hh;
             const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.985, _sp.x)); a.y = Math.max(0, Math.min(0.985, _sp.y)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
             const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
-        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '2px solid #6a6aff'; if (Array.isArray(a.runs) && a.runs.length) _richSpansInto(el, a, true); else if (a.listStyle && a.listStyle !== 'none') el.textContent = a.text || ''; el.focus(); };
+        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '1.5px solid #6a6aff'; if (Array.isArray(a.runs) && a.runs.length) _richSpansInto(el, a, true); else if (a.listStyle && a.listStyle !== 'none') el.textContent = a.text || ''; el.focus(); };
         // Sync continuously, not just on blur — a native browser or Grammarly
         // spellcheck correction edits the DOM directly, and only capturing on
         // blur left a window where an intervening re-render (or just closing
@@ -11378,7 +11378,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             _dsTextGearButton(el, { kind: 'ann', key, i });
             const th = document.createElement('div');
             th.contentEditable = 'false';
-            th.style.cssText = 'position:absolute; right:-6px; bottom:-6px; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; cursor:nwse-resize;';
+            th.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:#6a6aff; border:1.5px solid #fff; border-radius:1px; cursor:nwse-resize;';
             th.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
@@ -12340,6 +12340,26 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
         wUp.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeBump(1); refresh(); };
         sr.appendChild(wDn); sr.appendChild(wLbl); sr.appendChild(wUp);
+        if (a.shape !== 'ellipse') {
+            lbl('Corner radius');
+            const rr = row();
+            const rDn = document.createElement('button'); rDn.className = 'action-btn btn-secondary'; rDn.textContent = '\u2212'; rDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+            const rVal = document.createElement('input'); rVal.type = 'number'; rVal.min = '0'; rVal.max = '200'; rVal.step = '1'; rVal.value = (a.radius !== undefined ? a.radius : 3);
+            rVal.style.cssText = 'width:44px; height:22px; text-align:center; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; padding:0 2px;';
+            const commitR = () => { const n = parseFloat(rVal.value); if (!isNaN(n)) { a.radius = Math.max(0, n); refresh(); } else { rVal.value = (a.radius !== undefined ? a.radius : 3); } };
+            rVal.onchange = commitR; rVal.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); commitR(); } };
+            const rUp = document.createElement('button'); rUp.className = 'action-btn btn-secondary'; rUp.textContent = '+'; rUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+            rDn.onclick = () => { a.radius = Math.max(0, (a.radius !== undefined ? a.radius : 3) - 2); refresh(); };
+            rUp.onclick = () => { a.radius = Math.max(0, (a.radius !== undefined ? a.radius : 3) + 2); refresh(); };
+            rr.appendChild(rDn); rr.appendChild(rVal); rr.appendChild(rUp);
+            const rUnit = document.createElement('span'); rUnit.textContent = 'pt'; rUnit.style.cssText = 'font-size:0.6rem; color:var(--text-muted); align-self:center;';
+            rr.appendChild(rUnit);
+            const pillB = document.createElement('button'); pillB.className = 'action-btn btn-secondary'; pillB.textContent = 'Pill';
+            pillB.title = 'Fully rounded ends';
+            pillB.style.cssText = 'height:22px; font-size:0.56rem; margin-left:4px;';
+            pillB.onclick = () => { a.radius = 999; refresh(); };
+            rr.appendChild(pillB);
+        }
     }
     // Caption.
     lbl('Caption');
@@ -12348,13 +12368,16 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     capB.style.cssText = 'flex:1; height:22px; font-size:0.58rem;' + (a.showCaption ? ' border-color:#6a6aff; color:#6a6aff;' : '');
     capB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsToggleAnnCaption(); refresh(); };
     cr1.appendChild(capB);
-    if (a.showCaption && isImg) {
-        // Caption source — free-typed text, or the uploaded file's own name
-        // (extension stripped), matching the image-code convention already
-        // used under frame mockups on spec pages.
+    if (a.showCaption) {
+        // Caption source — free-typed text, or a "Code" button that fills it
+        // from the uploaded file's own name (extension stripped), matching
+        // the image-code convention already used under frame mockups on
+        // spec pages. Available on shapes with an image fill too, not just
+        // the plain image-placeholder type — disabled until a file with a
+        // known name has actually been uploaded into this box.
         lbl('Caption source');
         const csr = row();
-        [['text', 'Custom text'], ['filename', 'File name']].forEach(([v, l]) => {
+        [['text', 'Custom text'], ['filename', 'Code']].forEach(([v, l]) => {
             const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
             const on = (a.capSource || 'text') === v;
             const disabled = (v === 'filename' && !a.fileName);
@@ -12861,10 +12884,10 @@ function _dsAnnSetWeight(v) { const a = _dsCurrentAnnot(); if (!a) return; a.wei
 function _dsAnnHandles(box, a, w, hh) {
     const _lockH = () => { if (a.lockAspect && a.type === 'shape') a.h = _dsShapeSquareH(a.w || 0.25); };
     const dirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
-    const pos = { nw: 'left:-6px;top:-6px;cursor:nwse-resize;', n: 'left:calc(50% - 6px);top:-6px;cursor:ns-resize;', ne: 'right:-6px;top:-6px;cursor:nesw-resize;', e: 'right:-6px;top:calc(50% - 6px);cursor:ew-resize;', se: 'right:-6px;bottom:-6px;cursor:nwse-resize;', s: 'left:calc(50% - 6px);bottom:-6px;cursor:ns-resize;', sw: 'left:-6px;bottom:-6px;cursor:nesw-resize;', w: 'left:-6px;top:calc(50% - 6px);cursor:ew-resize;' };
+    const pos = { nw: 'left:-4px;top:-4px;cursor:nwse-resize;', n: 'left:calc(50% - 4px);top:-4px;cursor:ns-resize;', ne: 'right:-4px;top:-4px;cursor:nesw-resize;', e: 'right:-4px;top:calc(50% - 4px);cursor:ew-resize;', se: 'right:-4px;bottom:-4px;cursor:nwse-resize;', s: 'left:calc(50% - 4px);bottom:-4px;cursor:ns-resize;', sw: 'left:-4px;bottom:-4px;cursor:nesw-resize;', w: 'left:-4px;top:calc(50% - 4px);cursor:ew-resize;' };
     dirs.forEach(d => {
         const h = document.createElement('div');
-        h.style.cssText = 'position:absolute; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; z-index:22; ' + pos[d];
+        h.style.cssText = 'position:absolute; width:8px; height:8px; background:#6a6aff; border:1.5px solid #fff; border-radius:1px; z-index:22; ' + pos[d];
         h.onmousedown = (e) => {
             e.preventDefault(); e.stopPropagation();
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0, ow = a.w || 0.25, oh = a.h || 0.18;
@@ -12880,6 +12903,39 @@ function _dsAnnHandles(box, a, w, hh) {
         };
         box.appendChild(h);
     });
+    // Yellow corner-radius handle (InDesign convention) — sits inset from the
+    // top-right corner along the diagonal by the CURRENT radius; drag it
+    // toward the corner to sharpen, away from it to round more. Ellipses are
+    // already fully round, so this only applies to rectangles.
+    if (a.type === 'shape' && a.shape !== 'ellipse') {
+        const bw = (a.w || 0.25) * w, bh = (a.h || 0.18) * hh;
+        const rHandle = document.createElement('div');
+        const posInset = () => {
+            const radPt = Math.max(0, (a.radius !== undefined ? a.radius : 3));
+            const radPx = Math.min(radPt * (w / 936), bw / 2, bh / 2);
+            rHandle.style.right = (radPx - 4) + 'px';
+            rHandle.style.top = (radPx - 4) + 'px';
+        };
+        rHandle.style.cssText = 'position:absolute; width:8px; height:8px; background:#f5c518; border:1.5px solid #fff; border-radius:50%; z-index:23; cursor:pointer; box-shadow:0 0 0 1px rgba(0,0,0,0.25);';
+        rHandle.title = 'Drag to adjust corner radius';
+        posInset();
+        rHandle.onmousedown = (e) => {
+            e.preventDefault(); e.stopPropagation();
+            const sx = e.clientX, sy = e.clientY;
+            const startRad = Math.max(0, (a.radius !== undefined ? a.radius : 3));
+            const mv = (ev) => {
+                const dxPx = sx - ev.clientX, dyPx = ev.clientY - sy;
+                const dPx = Math.abs(dxPx) > Math.abs(dyPx) ? dxPx : dyPx;
+                const dPt = dPx * (936 / w);
+                a.radius = Math.max(0, Math.min(999, startRad + dPt));
+                posInset();
+                _dsRenderCenter();
+            };
+            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+        };
+        box.appendChild(rHandle);
+    }
 }
 function _dsAnnToFront() { const a = _dsCurrentAnnot(); if (!a) return; const list = (editorialContent.annotations || {})[_dsSelKey]; if (!list) return; const i = _dsSelIdx; if (i < 0 || i >= list.length) return; list.splice(i, 1); list.push(a); _dsSelIdx = list.length - 1; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnToBack() { const a = _dsCurrentAnnot(); if (!a) return; const list = (editorialContent.annotations || {})[_dsSelKey]; if (!list) return; const i = _dsSelIdx; if (i < 0 || i >= list.length) return; list.splice(i, 1); list.unshift(a); _dsSelIdx = 0; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }
@@ -16764,23 +16820,30 @@ function _mbSnapBox(box, r) {
     const mode = G.snapMode || (G.snap ? 'guides' : 'off');
     if (mode === 'off') return { dx: 0, dy: 0 };
     const thrX = 7 / (r.width || 900), thrY = 7 / (r.height || 520);
+    // Anchors in priority order: the edge the user is dragging toward should
+    // win outright over an incidental near-miss on a DIFFERENT anchor. A
+    // dense guide set (e.g. 12 columns = 24 vertical lines) means the centre
+    // or far edge frequently sits a couple of px from some unrelated internal
+    // line — if every anchor competed globally for the single smallest delta,
+    // that irrelevant near-miss could win over the left edge's genuine,
+    // intended alignment to the margin, leaving the box a few px short of
+    // flush and looking like nothing had snapped at all.
     const anchorsX = [box.x, box.x + box.w / 2, box.x + box.w];
     const anchorsY = [box.y, box.y + box.h / 2, box.y + box.h];
-    let vs, hs;
+    const nearestDelta = (anchor, lines, thr) => { let best = null, bd = thr; lines.forEach(v => { const d = v - anchor; if (Math.abs(d) < bd) { bd = Math.abs(d); best = d; } }); return best; };
+    const firstHit = (anchors, lines, thr) => { for (const a of anchors) { const d = nearestDelta(a, lines, thr); if (d !== null) return d; } return 0; };
     if (mode === 'grid') {
         const gx = G.gridSize / 936, gy = G.gridSize / 540;
-        // Snap each anchor to its nearest grid multiple directly (no need to
-        // enumerate every line).
-        let bestDX = 0, bdX = thrX; anchorsX.forEach(a => { const v = Math.round(a / gx) * gx; const d = v - a; if (Math.abs(d) < bdX) { bdX = Math.abs(d); bestDX = d; } });
-        let bestDY = 0, bdY = thrY; anchorsY.forEach(a => { const v = Math.round(a / gy) * gy; const d = v - a; if (Math.abs(d) < bdY) { bdY = Math.abs(d); bestDY = d; } });
+        // Grid snapping targets a single nearest multiple per anchor — same
+        // priority order applies (left/top wins if it has any candidate).
+        let bestDX = 0; for (const a of anchorsX) { const v = Math.round(a / gx) * gx, d = v - a; if (Math.abs(d) < thrX) { bestDX = d; break; } }
+        let bestDY = 0; for (const a of anchorsY) { const v = Math.round(a / gy) * gy, d = v - a; if (Math.abs(d) < thrY) { bestDY = d; break; } }
         return { dx: bestDX, dy: bestDY };
     }
     if (!G.set) return { dx: 0, dy: 0 };
     const ln = _guideLines(G.set);
-    vs = ln.vs.concat([0, 0.5, 1]); hs = ln.hs.concat([0, 0.5, 1]);
-    let bestDX = 0, bdX = thrX; anchorsX.forEach(a => vs.forEach(v => { const d = v - a; if (Math.abs(d) < bdX) { bdX = Math.abs(d); bestDX = d; } }));
-    let bestDY = 0, bdY = thrY; anchorsY.forEach(a => hs.forEach(v => { const d = v - a; if (Math.abs(d) < bdY) { bdY = Math.abs(d); bestDY = d; } }));
-    return { dx: bestDX, dy: bestDY };
+    const vs = ln.vs.concat([0, 0.5, 1]), hs = ln.hs.concat([0, 0.5, 1]);
+    return { dx: firstHit(anchorsX, vs, thrX), dy: firstHit(anchorsY, hs, thrY) };
 }
 function _mbCloseGuidesMenu() { const m = document.getElementById('_mbGuidesMenu'); if (m) m.remove(); document.removeEventListener('mousedown', _mbGuidesOutside, true); }
 function _mbGuidesOutside(e) { const m = document.getElementById('_mbGuidesMenu'); const b = document.getElementById('dsMbGuides'); if (m && !m.contains(e.target) && e.target !== b) _mbCloseGuidesMenu(); }
@@ -17077,7 +17140,7 @@ function renderMoodboardCanvas() {
             box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:' + (t.shadow ? '0 9px 24px rgba(0,0,0,0.42)' : '0 1px 6px rgba(0,0,0,0.18)') + ';' + (sel ? ' outline:2px solid #6a6aff; outline-offset:1px;' : '');
             const boxW = t.w * cr.width, boxH = (t.h || 0.2) * cr.height;
             box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed #6a6aff'; };
-            box.ondragleave = () => { box.style.outline = sel ? '2px solid #6a6aff' : ''; };
+            box.ondragleave = () => { box.style.outline = sel ? '1.5px solid #6a6aff' : ''; };
             box.ondrop = (e) => _mbDropImage(e, i);
             if (t.img) {
                 const cv = _imgRect(t.fit || 'cover', boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
@@ -17434,14 +17497,14 @@ function _mbHandleDown(e, i, dir) {
 function _mbHandles(box, i, ty) {
     const dirs = (ty === 'text') ? ['w', 'e'] : ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
     const pos = {
-        nw: 'left:-6px;top:-6px;cursor:nwse-resize;', n: 'left:calc(50% - 6px);top:-6px;cursor:ns-resize;',
-        ne: 'right:-6px;top:-6px;cursor:nesw-resize;', e: 'right:-6px;top:calc(50% - 6px);cursor:ew-resize;',
-        se: 'right:-6px;bottom:-6px;cursor:nwse-resize;', s: 'left:calc(50% - 6px);bottom:-6px;cursor:ns-resize;',
-        sw: 'left:-6px;bottom:-6px;cursor:nesw-resize;', w: 'left:-6px;top:calc(50% - 6px);cursor:ew-resize;'
+        nw: 'left:-4px;top:-4px;cursor:nwse-resize;', n: 'left:calc(50% - 4px);top:-4px;cursor:ns-resize;',
+        ne: 'right:-4px;top:-4px;cursor:nesw-resize;', e: 'right:-4px;top:calc(50% - 4px);cursor:ew-resize;',
+        se: 'right:-4px;bottom:-4px;cursor:nwse-resize;', s: 'left:calc(50% - 4px);bottom:-4px;cursor:ns-resize;',
+        sw: 'left:-4px;bottom:-4px;cursor:nesw-resize;', w: 'left:-4px;top:calc(50% - 4px);cursor:ew-resize;'
     };
     dirs.forEach(d => {
         const h = document.createElement('div');
-        h.style.cssText = 'position:absolute; width:12px; height:12px; background:#6a6aff; border:2px solid #fff; border-radius:2px; z-index:22; ' + pos[d];
+        h.style.cssText = 'position:absolute; width:8px; height:8px; background:#6a6aff; border:1.5px solid #fff; border-radius:1px; z-index:22; ' + pos[d];
         h.onmousedown = (e) => _mbHandleDown(e, i, d);
         box.appendChild(h);
     });
@@ -19194,6 +19257,22 @@ async function _ensureShapeImage(a, wPt, hPt, fitOverride) {
         const cx = cnv.getContext('2d');
         cx.save();
         if (a.shape === 'ellipse') { cx.beginPath(); cx.ellipse(W / 2, H / 2, W / 2, H / 2, 0, 0, Math.PI * 2); cx.clip(); }
+        else {
+            // Corner radius, baked into the clip so an image-filled rectangle
+            // gets the SAME rounding in the PDF as it shows in Deck Studio —
+            // a manual arc-based path (not canvas roundRect, which isn't
+            // available everywhere) at this canvas's own supersampled scale.
+            const rawRadPx = Math.max(0, (a.radius !== undefined ? a.radius : 3)) * px;
+            const rr = Math.min(rawRadPx, W / 2, H / 2);
+            if (rr > 0.5) {
+                cx.beginPath();
+                cx.moveTo(rr, 0); cx.lineTo(W - rr, 0); cx.arcTo(W, 0, W, rr, rr);
+                cx.lineTo(W, H - rr); cx.arcTo(W, H, W - rr, H, rr);
+                cx.lineTo(rr, H); cx.arcTo(0, H, 0, H - rr, rr);
+                cx.lineTo(0, rr); cx.arcTo(0, 0, rr, 0, rr);
+                cx.closePath(); cx.clip();
+            }
+        }
         // Trust the REAL decoded image dimensions over the stored a.aspect —
         // a.aspect can go stale (project re-imports, migrations, an image
         // swapped without recomputing it) with zero visible symptom in the
@@ -19286,8 +19365,9 @@ function _drawOneAnnotation(doc, a, PW, PH) {
                 if (!noFill) { const c = _annHexToRgb(a.fill || '#d8d8de'); doc.setFillColor(c.r, c.g, c.b); }
                 if (hasStroke) { const sc = _annHexToRgb(a.stroke); doc.setDrawColor(sc.r, sc.g, sc.b); doc.setLineWidth(a.strokeW || 1.5); }
                 const styleLetter = noFill ? (hasStroke ? 'D' : null) : (hasStroke ? 'FD' : 'F');
+                const rad = ell ? 0 : Math.min(Math.max(0, (a.radius !== undefined ? a.radius : 3)), pw / 2, ph / 2);
                 if (styleLetter) {
-                    try { if (ell && doc.ellipse) doc.ellipse(x + pw / 2, y + ph / 2, pw / 2, ph / 2, styleLetter); else if (doc.roundedRect) doc.roundedRect(x, y, pw, ph, 3, 3, styleLetter); else doc.rect(x, y, pw, ph, styleLetter); } catch (e) {}
+                    try { if (ell && doc.ellipse) doc.ellipse(x + pw / 2, y + ph / 2, pw / 2, ph / 2, styleLetter); else if (doc.roundedRect) doc.roundedRect(x, y, pw, ph, rad, rad, styleLetter); else doc.rect(x, y, pw, ph, styleLetter); } catch (e) {}
                 }
             }
             _drawAnnCaption(doc, a, x, y, pw, ph);
