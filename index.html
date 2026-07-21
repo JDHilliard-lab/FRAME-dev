@@ -1267,13 +1267,13 @@
             <div style="flex:1; display:flex; min-height:0;">
                 <div id="dsRail" style="width:200px; flex-shrink:0; border-right:1px solid var(--border-color); overflow-y:auto; padding:12px;"><!-- thumbnails --></div>
                 <div id="dsCenter" style="flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:24px; background:var(--bg-input); overflow:auto;"><!-- live page mock --></div>
-                <div id="dsTools" style="width:280px; flex-shrink:0; border-left:1px solid var(--border-color); overflow-y:auto; display:flex; flex-direction:column;">
+                <div id="dsTools" style="width:280px; flex-shrink:0; min-height:0; border-left:1px solid var(--border-color); display:flex; flex-direction:column;">
                     <div style="flex-shrink:0; display:flex; gap:4px; padding:10px 10px 0;">
                         <button id="dsToolsBtnPage" onclick="_dsToolsTab('page')" style="flex:1; height:28px; font-size:0.72rem; font-weight:700; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:#6a6aff; color:#fff;">Page</button>
                         <button id="dsToolsBtnTemplates" onclick="_dsToolsTab('templates')" style="flex:1; height:28px; font-size:0.72rem; font-weight:700; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Templates</button>
                     </div>
                     <div id="dsToolsPageBody" style="flex:1; overflow-y:auto; padding:16px;"><!-- per-page tools --></div>
-                    <div id="dsToolsTemplatesBody" style="flex:1; overflow-y:auto; padding:12px; display:none;"><!-- compact template browser --></div>
+                    <div id="dsToolsTemplatesBody" style="flex:1; min-height:0; display:none; flex-direction:column;"><!-- compact template browser --></div>
                 </div>
             </div>
         </div>
