@@ -1,0 +1,27 @@
+{
+  "name": "frame-dev",
+  "version": "1.0.0",
+  "description": "tool for building out custom frame  mock ups for design presentations",
+  "main": "app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JDHilliard-lab/FRAME-dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JDHilliard-lab/FRAME-dev/issues"
+  },
+  "homepage": "https://github.com/JDHilliard-lab/FRAME-dev#readme",
+  "dependencies": {
+    "jsdom": "^30.0.0"
+  }
+}
