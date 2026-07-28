@@ -12,24 +12,38 @@ const fs = require('fs');
     const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     editorialContent = editorialContent || {};
 
-    __check('EXACT BUG: a "layout" page with mb-elements (e.g. Cover-style title text) now IS considered drawable', () => {
+    // Superseded by the rail-thumbnail overlap fix: element-bearing layout/fixed
+    // pages no longer go through the canvas-cache pipeline AT ALL (that's the
+    // renderer that mis-lays-out multi-line display type and overlaps lines) \\u2014
+    // they render synchronously via _dsElementPageThumbHTML (real CSS text
+    // layout, same mechanism as the live-page mirror) directly in _dsRenderRail.
+    // _dsThumbDrawable now deliberately EXCLUDES them so they never re-enter that
+    // queue and get overwritten with a garbled canvas render. The two checks
+    // below are inverted from the original "EXACT BUG" assertions on purpose.
+    __check('FOLLOW-UP FIX: a "layout" page with mb-elements is now excluded from the canvas-cache pipeline (rendered directly instead)', () => {
       const desc = { kind: 'layout', page: { elements: [{ type: 'text', text: 'COVER PAGE HEADING' }] } };
-      if (!_dsThumbDrawable(desc)) throw new Error('layout page with elements was excluded from ever getting a real thumbnail \\u2014 the exact reported gap');
+      if (_dsThumbDrawable(desc)) throw new Error('layout page with elements re-entered the canvas queue \\u2014 it will get overwritten with a garbled multi-line render');
     });
 
-    __check('EXACT BUG: a "fixed" page with mb-elements (the real Cover/Slogan case) now IS considered drawable', () => {
+    __check('FOLLOW-UP FIX: a "fixed" page with mb-elements (the real Cover/Slogan case) is now excluded from the canvas-cache pipeline', () => {
       const desc = { kind: 'fixed', fixed: 'cover', page: { elements: [{ type: 'text', text: 'CLIENT NAME' }] } };
-      if (!_dsThumbDrawable(desc)) throw new Error('fixed page with elements was excluded \\u2014 this is literally the Cover page scenario reported');
+      if (_dsThumbDrawable(desc)) throw new Error('fixed page with elements re-entered the canvas queue \\u2014 this is literally the Cover page scenario');
     });
 
-    __check('CASCADE FIX: _dsPriorityRerender (the debounced high-fidelity refresh from a previous fix) now actually proceeds for these pages instead of silently no-op-ing', () => {
+    __check('FOLLOW-UP FIX: _dsElementPageThumbHTML actually renders real content for an mb-element page (the real thumbnail these pages get instead of a canvas render)', () => {
+      const desc = { kind: 'layout', page: { elements: [{ type: 'text', text: 'COVER PAGE HEADING' }] } };
+      const html = _dsElementPageThumbHTML(desc, 168, 97);
+      if (!html || html.indexOf('COVER PAGE HEADING') === -1) throw new Error('_dsElementPageThumbHTML did not render the page\\'s own text \\u2014 these pages would go back to showing nothing real');
+    });
+
+    __check('FOLLOW-UP FIX: _dsPriorityRerender now correctly no-ops for an mb-element page (it is never cache-backed, so there is nothing to evict/queue)', () => {
       editorialContent.layoutPages = [{ id: 'pgCascade', type: 'custom', title: 'Cascade', elements: [{ type: 'text', text: 'x' }] }];
       const desc = { kind: 'layout', page: editorialContent.layoutPages[0] };
       let queued = false;
       const origPump = _thumbPump;
       _thumbPump = () => { queued = true; };
       _dsPriorityRerender(desc);
-      if (!queued) throw new Error('_dsPriorityRerender still silently no-ops for an mb-element page \\u2014 the cascading half of this bug');
+      if (queued) throw new Error('_dsPriorityRerender queued an mb-element page into the canvas pipeline \\u2014 it should be rendered directly by _dsRenderRail instead');
       _thumbPump = origPump;
     });
 
