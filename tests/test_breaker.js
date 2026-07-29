@@ -48,9 +48,15 @@ const fs = require('fs');
       }
     });
 
-    // ── 3. Behavioral: _drawInstallGuidePage takes a CLEAN capture (guides
-    //       suppressed) for elevgrp pages, and a full-guides capture without ──
-    __checkAsync('_drawInstallGuidePage: elevgrp arg -> clean capture; plain arg -> full-guides capture', async () => {
+    // ── 3. Behavioral: BEHAVIOUR CHANGED (v15.86). A breaker used to take a
+    //       deliberately CLEAN capture — spacing/hangHeight/wallDims forced
+    //       off — behind a "Show layout guides" opt-in. That made guides
+    //       plainly visible in the Elevations tab silently vanish from the
+    //       breaker page. The Elevations tab is now the sole source of truth:
+    //       breaker and install-guide pages capture the elevation IDENTICALLY,
+    //       with no guide overrides on either path. This check is inverted
+    //       from its original form to assert that. ──
+    __checkAsync('_drawInstallGuidePage: elevgrp and plain args both capture the elevation as-is, with no guide overrides', async () => {
       elevations = [{ name: 'WALL A', wallW: 240, wallH: 96, frames: [{ id: 'ART.001', letter: 'A', x: 0.4, y: 0.4, w: 0.1, h: 0.1, active: true, dimTo: [] }] }];
       dashProjectData = [{ id: 'ART.001', location: 'Wall A' }];
       floorplanLevels = [{ name: 'Level 1', imageData: '' }];
@@ -60,28 +66,35 @@ const fs = require('fs');
       _igNoCapture = false;
       for (const k in _igCapCache) delete _igCapCache[k];
       const captureCalls = [];
-      _captureElevWithGuides = async (idx, mopts) => { captureCalls.push({ idx, mopts }); return { dataUrl: 'data:image/png;base64,AAAA', w: 800, h: 400 }; };
+      // Capture EVERY argument, so an override sneaking back in as a 2nd
+      // (or later) parameter still fails this check.
+      _captureElevWithGuides = async (...args) => { captureCalls.push(args); return { dataUrl: 'data:image/png;base64,AAAA', w: 800, h: 400 }; };
 
       // Breaker-style call: elev carries the elevgrp ovKey (as both the
-      // preview desc and — after the fix — the export step build it).
-      const brElev = Object.assign({}, elevations[0], { name: 'ART.001', _noPlan: false, _measure: false, _idx: 0, _ovKey: 'elevgrp:g1' });
+      // preview desc and the export step build it).
+      const brElev = Object.assign({}, elevations[0], { name: 'ART.001', _noPlan: false, _idx: 0, _ovKey: 'elevgrp:g1' });
       _curFooter = _resolveFooter('spec:elevgrp:g1');
       let rec = new CanvasPdfRec(936, 540);
       await _drawInstallGuidePage(rec, {}, 1, { location: '', code: '', version: '' }, brElev, { PW: 936, PH: 540, M: 40 });
       if (!captureCalls.length) throw new Error('breaker render never captured');
       const brCall = captureCalls[captureCalls.length - 1];
-      if (!brCall.mopts || brCall.mopts.spacing !== false || brCall.mopts.hangHeight !== false || brCall.mopts.wallDims !== false) {
-        throw new Error('breaker capture was NOT clean (guides not suppressed): ' + JSON.stringify(brCall.mopts));
-      }
+      if (brCall.length !== 1) throw new Error('the exact reported bug: breaker capture passed guide overrides, so it can disagree with the Elevations tab: ' + JSON.stringify(brCall.slice(1)));
+      if (brCall[0] !== 0) throw new Error('breaker captured the wrong elevation index: ' + brCall[0]);
 
-      // Plain install-guide call: same elevation, no elevgrp key.
-      for (const k in _igCapCache) delete _igCapCache[k];
+      // Plain install-guide call: same elevation, no elevgrp key. Must be
+      // byte-for-byte the same capture request as the breaker's.
       const igElev = Object.assign({}, elevations[0], { _idx: 0 });
       _curFooter = _resolveFooter('spec:elev:0');
       rec = new CanvasPdfRec(936, 540);
       await _drawInstallGuidePage(rec, {}, 1, { location: '', code: '', version: '' }, igElev, { PW: 936, PH: 540, M: 40 });
       const igCall = captureCalls[captureCalls.length - 1];
-      if (igCall.mopts !== undefined) throw new Error('install-guide capture unexpectedly suppressed guides: ' + JSON.stringify(igCall.mopts));
+      if (igCall.length !== 1) throw new Error('install-guide capture passed guide overrides: ' + JSON.stringify(igCall.slice(1)));
+      if (JSON.stringify(brCall) !== JSON.stringify(igCall)) throw new Error('breaker and install-guide captures differ, so the two page types can disagree: ' + JSON.stringify(brCall) + ' vs ' + JSON.stringify(igCall));
+
+      // ...and because the request is identical, the same elevation state must
+      // reuse ONE cache entry rather than keeping clean-vs-guides variants.
+      const keys = Object.keys(_igCapCache);
+      if (keys.length !== 1) throw new Error('expected a single shared capture cache entry for one elevation state, got ' + keys.length + ': ' + JSON.stringify(keys));
     });
   `;
 

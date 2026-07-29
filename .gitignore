@@ -1,1 +1,3 @@
 node_modules/
+# Screen recordings dropped in for bug reports. Large binaries, local only.
+.claude/references/
