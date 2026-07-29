@@ -42,12 +42,26 @@ const fs = require('fs');
       editorialContent.guidePref = { setId: 'g_idml12', show: false };
     });
 
-    __check('_tplDesignFrame computes the template envelope', () => {
-      const D = _tplDesignFrame(SPEC_TEMPLATES.frameSpecDetail);
+    // BEHAVIOUR CHANGED: the envelope used to cover only title/spec/artwork/plan/
+    // elevation, so B was the plan's bottom (0.91). But the image code prints
+    // BELOW the artwork and the frameDetail strip sits ABOVE the plan, and
+    // neither was in the envelope — so the affine remap stretched the layout such
+    // that those two landed outside the safety guides by construction. Both are
+    // now included, which pushes B below the artwork to make room for the code.
+    __check('_tplDesignFrame covers every block that actually gets drawn, including the image code', () => {
+      const tpl = SPEC_TEMPLATES.frameSpecDetail;
+      const D = _tplDesignFrame(tpl);
       if (!D) throw new Error('no design frame');
       if (Math.abs(D.L - 0.045) > 1e-9) throw new Error('L wrong: ' + D.L);
       if (Math.abs(D.R - 0.95) > 1e-9) throw new Error('R wrong: ' + D.R);
-      if (Math.abs(D.B - 0.91) > 1e-9) throw new Error('B wrong: ' + D.B);
+      // B must clear the artwork bottom plus the code's gap + size, not stop at
+      // the plan box. Expressed from the template so it tracks any retuning.
+      const artBottom = tpl.artwork.y + tpl.artwork.h;
+      const codeReach = artBottom + ((tpl.code.gap + tpl.code.size) / 540);
+      if (Math.abs(D.B - codeReach) > 1e-9) throw new Error('B is ' + D.B + ', expected ' + codeReach + ' (artwork bottom + the image code line beneath it)');
+      if (!(D.B > 0.91)) throw new Error('B (' + D.B + ') no longer reaches past the plan box, so the code line falls outside the guides again');
+      // frameDetail sits above the plan; it must not drag T above the title.
+      if (Math.abs(D.T - tpl.title.y) > 1e-9) throw new Error('T is ' + D.T + ', expected the title baseline ' + tpl.title.y);
     });
 
     __checkAsync('drawer: title + spec left edge lands ON the safety left line; spec/artwork right edges ON the right line; boxes bottom ON the bottom line', async () => {

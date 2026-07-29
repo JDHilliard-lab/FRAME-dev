@@ -22,11 +22,23 @@ const fs = require('fs');
     editorialContent = editorialContent || {};
     scheduleAutosave = () => {};
 
-    __check('infoModal markup z-index sits above the deck studio', () => {
+    // Was: "infoModal z-index sits above the deck studio", comparing against
+    // #deckStudioModal's inline z-index:10000. Deck Studio is a plain view in
+    // .app-content now with NO z-index at all, so that comparison would read
+    // parseInt(undefined) -> NaN. Same intent, expressed against what actually
+    // stacks: the deck view must not create a stacking context (or its
+    // position:fixed satellites would be trapped and clipped), and the info
+    // modal must sit above the highest of those satellites.
+    __check('infoModal markup z-index sits above everything the deck view can put on screen', () => {
       const im = document.getElementById('infoModal');
-      const ds = document.getElementById('deckStudioModal');
-      const zi = parseInt(im.style.zIndex, 10), zd = parseInt(ds.style.zIndex, 10);
-      if (!(zi > zd)) throw new Error('infoModal z ' + zi + ' not above studio z ' + zd);
+      const dv = document.getElementById('view-deck');
+      if (!dv) throw new Error('#view-deck missing — Deck Studio is not a view');
+      if (dv.style.zIndex) throw new Error('#view-deck has z-index ' + dv.style.zIndex + ' — it must not create a stacking context for its position:fixed children');
+      const gen = document.getElementById('dsGenerateModal');
+      const zg = parseInt(gen.style.zIndex, 10);
+      if (!(zg > 0)) throw new Error('dsGenerateModal has no z-index: ' + gen.style.zIndex);
+      const zi = parseInt(im.style.zIndex, 10);
+      if (!(zi > zg)) throw new Error('infoModal z ' + zi + ' not above the deck generate modal z ' + zg);
       if (zi < 100010) throw new Error('infoModal z ' + zi + ' below floating panels (100001+)');
     });
 

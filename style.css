@@ -80,35 +80,16 @@ input[type="number"] { -moz-appearance: textfield; }
 body:not(.light-theme) .logo-light { display: none !important; }
 body:not(.light-theme) .logo-dark { display: block !important; }
 
+/* The top nav holds exactly three fixed view tabs (Frame Dashboard, Elevation,
+ * Deck). The old .nav-tabs scrolling strip is gone: individual walls moved to
+ * the vertical .elev-wall-rail inside the elevation view, so nothing up here
+ * overflows or needs a horizontal scrollbar any more. Drag-reorder styles moved
+ * with them (.wall-tab), since these three tabs aren't draggable. */
 .nav-tabs-fixed { display: flex; height: 100%; align-items: center; flex-shrink: 0; }
-.nav-tabs { display: flex; height: 100%; align-items: center; overflow-x: auto; overflow-y: hidden; -ms-overflow-style: auto; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
-.nav-tabs::-webkit-scrollbar { height: 5px; }
-.nav-tabs::-webkit-scrollbar-track { background: transparent; }
-.nav-tabs::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
-.nav-tabs::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 .nav-tab { display: flex; align-items: center; gap: 8px; background: transparent; border: none; color: var(--text-muted); font-size: 0.75rem; font-weight: bold; height: 100%; padding: 0 15px; cursor: pointer; transition: 0.2s; white-space: nowrap; border-bottom: 3px solid transparent; position: relative; }
 .nav-tab:hover { background: var(--bg-subpanel); color: var(--text-strong); }
 .nav-tab.active { background: var(--bg-main); color: var(--accent); border-bottom: 3px solid var(--accent); }
-
-/* Drag-to-reorder visual states for elevation tabs.
- * .dragging fades the tab being moved so the user sees what they grabbed.
- * .drop-before / .drop-after show a 3px colored bar on the appropriate edge
- *   of the target tab indicating where the dragged tab will land on release.
- * Uses the accent color to feel consistent with active-tab styling. */
-.nav-tab.dragging { opacity: 0.4; }
-.nav-tab.drop-before::before,
-.nav-tab.drop-after::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent);
-    pointer-events: none;
-}
-.nav-tab.drop-before::before { left: -1px; }
-.nav-tab.drop-after::after { right: -1px; }
 
 /* ──────────────────────────────────────────────────────────────────────
  * DASHBOARD ROW DRAG-TO-REORDER
@@ -422,6 +403,42 @@ select.no-arrow::-ms-expand { display: none; }
 /* ========================================= */
 .elev-sidebar { width: 440px; background: var(--bg-panel); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 100; flex-shrink: 0; }
 .elev-sidebar-header { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
+
+/* WALL RAIL — the vertical list of walls down the right of the drawing, with
+ * + Add Wall pinned at the bottom. These used to be horizontal tabs in the top
+ * nav; a column scrolls to any number of walls instead of running out of width.
+ * Rows truncate and carry the full name in a title attribute, so the rail stays
+ * narrow and gives the drawing back as much room as possible. */
+.elev-wall-rail { width: 120px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--border-color); background: var(--bg-panel); }
+#nav-tabs-container { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 6px 0; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
+#nav-tabs-container::-webkit-scrollbar { width: 6px; }
+#nav-tabs-container::-webkit-scrollbar-track { background: transparent; }
+#nav-tabs-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+#nav-tabs-container::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+/* Active marker is a LEFT border. A bottom border (what .nav-tab uses) reads as
+ * a row separator once the tabs are stacked vertically. */
+.wall-tab { display: flex; align-items: center; gap: 6px; flex: 0 0 auto; height: 30px; padding: 0 8px 0 9px; font-size: 0.72rem; font-weight: bold; color: var(--text-muted); cursor: pointer; position: relative; border-left: 3px solid transparent; transition: 0.15s; }
+.wall-tab:hover { background: var(--bg-subpanel); color: var(--text-strong); }
+.wall-tab.active { background: var(--bg-main); color: var(--accent); border-left: 3px solid var(--accent); }
+.wall-tab-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Drag-to-reorder: .dragging fades the row you grabbed; .drop-before /
+ * .drop-after put an accent bar on the row's top or bottom edge to show where
+ * it will land. Rotated from the old horizontal version (left/right + width). */
+.wall-tab.dragging { opacity: 0.4; }
+.wall-tab.drop-before::before,
+.wall-tab.drop-after::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent);
+    pointer-events: none;
+}
+.wall-tab.drop-before::before { top: -1px; }
+.wall-tab.drop-after::after { bottom: -1px; }
+/* .nav-add-tab defaults to margin-left:10px for the old horizontal strip. */
+.elev-wall-rail .nav-add-tab { flex: 0 0 auto; margin: 8px; width: auto; }
 
 /* Input with an inline icon. The icon (and optional prefix label like "W:")
  * sits on the left inside the input's visual bounds; the input takes the

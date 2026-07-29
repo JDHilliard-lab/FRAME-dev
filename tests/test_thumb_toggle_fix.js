@@ -35,7 +35,7 @@ const fs = require('fs');
       editorialContent.layoutPages = [{ id: 'pgToggle', type: 'custom', title: 'Toggle', elements: [] }];
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       _mbActiveCanvasId = 'dsLayoutCanvas';
-      document.getElementById('deckStudioModal').style.display = 'flex';
+      document.getElementById('view-deck').classList.add('active');
       document.getElementById('dsRail').innerHTML = '';
       setupSource();
       const cell = setupCell(_dsPages[0]);
