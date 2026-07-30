@@ -160,6 +160,19 @@ const fs = require('fs');
       _curPageKey = null;
     });
 
+    __checkAsync('the shared-spec Group A/B/C page stays inside the guides too', async () => {
+      useDefaultGuides();
+      elevations = []; dashProjectData = [];
+      const members = [ROW(), Object.assign(ROW(), { id: 'ART.002', extW: 40, extH: 30 }), Object.assign(ROW(), { id: 'ART.003' })];
+      const unit = { key: 'ART-2.1ABC', rep: members[0], members: members };
+      _curPageKey = 'specset:ART-2.1ABC';
+      const rec = new CanvasPdfRec(PW, PH);
+      _curFooter = _resolveFooter('specset:ART-2.1ABC');
+      await _drawSpecSetPage(rec, {}, 1, { location: '', code: '', version: '' }, unit, 'setLegend', CTX);
+      assertInside(rec, 'shared-spec Group A/B/C page');
+      _curPageKey = null;
+    });
+
     __checkAsync('a Group A/B/C page title clears the top guide', async () => {
       useDefaultGuides();
       elevations = []; dashProjectData = [];
@@ -221,9 +234,12 @@ const fs = require('fs');
     // ── Guard against the pattern coming back ──
     __check('the spec-family renderers no longer hardcode their own page margins', () => {
       const S = window.__appSrc;
-      const fns = ['_drawSpecPageTemplate', '_drawSpecSetPage', '_drawInstallGuidePage', '_drawClassicSpecPage'];
+      // _drawSpecSetPage is now a thin wrapper that guarantees the footer (see
+      // test_group_footer_breaker.js); the layout code it used to hold moved to
+      // _drawSpecSetPageBody, so that's the function to slice here.
+      const fns = ['_drawSpecPageTemplate', '_drawSpecSetPageBody', '_drawInstallGuidePage', '_drawClassicSpecPage'];
       fns.forEach(fn => {
-        const i = S.indexOf((fn === '_drawSpecPageTemplate' || fn === '_drawSpecSetPage' || fn === '_drawInstallGuidePage' || fn === '_drawClassicSpecPage') ? 'async function ' + fn : 'function ' + fn);
+        const i = S.indexOf('async function ' + fn);
         if (i < 0) throw new Error(fn + ' not found');
         // Bound the slice at the next top-level async function.
         const next = S.indexOf('\\nasync function ', i + 10);

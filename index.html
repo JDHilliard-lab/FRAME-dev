@@ -913,7 +913,7 @@
                         <button id="dsAnnDelete" onclick="_dsDeleteAnnot()" title="Delete selected" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; color:#c0392b; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                     </span>
                     <span id="dsMbGroup" style="display:none; align-items:center; gap:6px;">
-                        <select id="dsMbFont" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;"><option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option></select>
+                        <select id="dsMbFont" data-font-select data-font-default="serif" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;"><!-- filled from FRAME_FONT_LIBRARY --></select>
                         <select id="dsMbWeight" onchange="_mbSetWeight(this.value)" title="Weight" style="height:30px; font-size:0.66rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;"><option value="300">Light</option><option value="400">Regular</option><option value="500">Medium</option><option value="600">SemiBold</option><option value="700">Bold</option></select>
                         <span id="dsMbSizeWrap" style="display:inline-flex; align-items:center; gap:2px;">
                             <button onclick="_mbNudgeSize(-0.005)" title="Smaller" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; font-size:0.8rem; display:inline-flex; align-items:center; justify-content:center;">A−</button>
@@ -1407,10 +1407,8 @@
                     <option value="caption">Caption</option>
                     <option value="quote">Quote</option>
                 </select>
-                <select id="mbFont" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
-                    <option value="display">Druk (display)</option>
-                    <option value="serif">Messina (serif)</option>
-                    <option value="sans">Helvetica (sans)</option>
+                <select id="mbFont" data-font-select data-font-default="serif" onchange="_mbSetFont(this.value)" title="Font" style="height:30px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                    <!-- filled from FRAME_FONT_LIBRARY -->
                 </select>
                 <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
                     <button onclick="_mbNudgeSize(-0.005)" title="Smaller" style="width:26px; height:30px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
@@ -1530,8 +1528,8 @@
             <div>
                 <div style="font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:6px;">Text</div>
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                    <select id="dsTextFont" onchange="_dsSet('textFont', this.value)" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
-                        <option value="display">Druk</option><option value="serif">Messina</option><option value="sans">Helvetica</option>
+                    <select id="dsTextFont" data-font-select data-font-default="serif" onchange="_dsSet('textFont', this.value)" style="height:28px; font-size:0.72rem; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px;">
+                        <!-- filled from FRAME_FONT_LIBRARY -->
                     </select>
                     <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
                         <button onclick="_dsNudge('textSize', -0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
@@ -1709,6 +1707,13 @@
                     <input type="color" id="annotColor" value="#e00000" style="width:40px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; cursor:pointer;" oninput="applyAnnotationStyleFromModal()">
                     <span id="annotColorHex" style="font-size:0.65rem; color:var(--text-muted); font-family:monospace;">#e00000</span>
                 </div>
+                <!-- Shared swatch families (same rows as the Deck Studio gear
+                     popups) so a dimension colour can be matched exactly to a
+                     deck text colour. Filled by _frameSwatchesInto(). -->
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px; flex:0 0 80px;">Swatches</span>
+                    <div id="annotColorSwatches" style="flex:1;"></div>
+                </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Weight</span>
                     <input type="range" id="annotWeight" min="1" max="6" step="1" value="2" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
@@ -1728,13 +1733,8 @@
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Font</span>
-                    <select id="annotFontFamily" onchange="applyAnnotationStyleFromModal()" style="flex:1; padding:5px; font-size:0.75rem;">
-                        <option value="Arial, Helvetica, sans-serif">Arial (universal)</option>
-                        <option value="Helvetica, Arial, sans-serif">Helvetica</option>
-                        <option value="'Segoe UI', Tahoma, sans-serif">Segoe UI</option>
-                        <option value="Verdana, Geneva, sans-serif">Verdana</option>
-                        <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
-                        <option value="'Courier New', monospace">Courier New</option>
+                    <select id="annotFontFamily" data-font-select data-font-default="serif" onchange="applyAnnotationStyleFromModal()" style="flex:1; padding:5px; font-size:0.75rem;">
+                        <!-- filled from FRAME_FONT_LIBRARY -->
                     </select>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
@@ -1752,6 +1752,7 @@
                         <button id="svgModeColor" type="button" onclick="setSvgFrameMode('autocolor')" title="Build frame as vector shapes — rail, mats, paper (small files, all vector)">VECTOR</button>
                     </div>
                 </div>
+                <p style="font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.4;">Font list is the same one Deck Studio uses. <b>Brand</b> fonts (Druk, Sans, Messina) embed into the PDF; <b>Universal</b> fonts are installed on every Mac and PC, so SVG exports open in Illustrator with no missing-font warnings. Dimensions default to Messina — size and colour are yours to set.</p>
                 <p style="font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.4;">SVG export: <b>Texture</b> embeds frame photos (crisp, larger). <b>Vector</b> rebuilds each frame as vector shapes \u2014 rail, mats, reveal, paper \u2014 colored to match (tiny files, fully editable in Illustrator).</p>
             </div>
         </div>
@@ -1765,23 +1766,22 @@
             <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color); display:flex; flex-direction:column; gap:12px;">
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Color</span>
-                    <input type="color" id="imgCodeColor" value="#222222" style="width:40px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; cursor:pointer;" oninput="applyImageCodeStyleFromModal()">
-                    <span id="imgCodeColorHex" style="font-size:0.65rem; color:var(--text-muted); font-family:monospace;">#222222</span>
+                    <input type="color" id="imgCodeColor" value="#9c9c9c" style="width:40px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:4px; cursor:pointer;" oninput="applyImageCodeStyleFromModal()">
+                    <span id="imgCodeColorHex" style="font-size:0.65rem; color:var(--text-muted); font-family:monospace;">#9c9c9c</span>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px; flex:0 0 80px;">Swatches</span>
+                    <div id="imgCodeColorSwatches" style="flex:1;"></div>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Size</span>
-                    <input type="range" id="imgCodeFontSize" min="6" max="20" step="1" value="10" style="flex:1;" oninput="applyImageCodeStyleFromModal()">
-                    <span id="imgCodeFontSizeVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">10px</span>
+                    <input type="range" id="imgCodeFontSize" min="6" max="20" step="1" value="9" style="flex:1;" oninput="applyImageCodeStyleFromModal()">
+                    <span id="imgCodeFontSizeVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">9px</span>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Font</span>
-                    <select id="imgCodeFontFamily" onchange="applyImageCodeStyleFromModal()" style="flex:1; padding:5px; font-size:0.75rem;">
-                        <option value="Arial, Helvetica, sans-serif">Arial (universal)</option>
-                        <option value="Helvetica, Arial, sans-serif">Helvetica</option>
-                        <option value="'Segoe UI', Tahoma, sans-serif">Segoe UI</option>
-                        <option value="Verdana, Geneva, sans-serif">Verdana</option>
-                        <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
-                        <option value="'Courier New', monospace">Courier New</option>
+                    <select id="imgCodeFontFamily" data-font-select data-font-default="serif" onchange="applyImageCodeStyleFromModal()" style="flex:1; padding:5px; font-size:0.75rem;">
+                        <!-- filled from FRAME_FONT_LIBRARY -->
                     </select>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
@@ -1792,7 +1792,7 @@
                         <button id="imgCodeWeightBold" type="button" onclick="setImageCodeWeight(700)">BOLD</button>
                     </div>
                 </div>
-                <p style="font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.4;">Controls the image-code caption beneath each frame (toggle it on via the Image Code button in Layout Guides). Tip: light grey keeps codes subtle in presentations.</p>
+                <p style="font-size:0.6rem; color:var(--text-muted); margin:0; line-height:1.4;">Controls the image-code caption beneath each frame (toggle it on via the Image Code button in Layout Guides). Studio default is Messina 9pt in #9c9c9c, which keeps codes subtle in presentations.</p>
             </div>
         </div>
 

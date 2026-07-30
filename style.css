@@ -35,7 +35,10 @@
      * sans-serif, medium weight, dashed. */
     --dim-color: #e00000;
     --dim-font-size: 13px;
-    --dim-font-family: Arial, Helvetica, sans-serif;
+    /* Boot value only — applyAnnotationStyleToCSSVars() overwrites this from
+       annotationStyle.font (a FRAME_FONT_LIBRARY token). Messina here so the
+       first paint matches the studio default instead of flashing Arial. */
+    --dim-font-family: 'Messina','Times New Roman',Times,Georgia,serif;
     --dim-font-weight: 600;
     --dim-weight: 2px;
     --dim-line-style: dashed;
