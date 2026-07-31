@@ -84,7 +84,9 @@ const fs = require('fs');
     __check('a fresh run clears a previous cancel, so cancelling once does not poison the next build', () => {
       const S = window.__appSrc;
       const i = S.indexOf('async function exportSpecPagePDF');
-      const body = S.slice(i, i + 1800);
+      // Anchored on what FOLLOWS the function, not a byte count — a fixed window
+      // kept going stale as the function gained comments.
+      const body = S.slice(i, S.indexOf('PDF build progress overlay', i));
       if (body.indexOf('_pdfCancelled = false') < 0) throw new Error('exportSpecPagePDF never resets the cancel flag — a second build would abort instantly');
       // And the flag must be cleared on the way out too, not just on entry.
       const fin = body.lastIndexOf('_pdfCancelled = false');

@@ -141,16 +141,35 @@ const fs = require('fs');
 
     __check('the elevation exports and the deck-wide PDF run all go through the ref-counted helpers', () => {
       const S = window.__appSrc;
-      // No export may add/remove the class directly any more; only toggleTheme
-      // (the user-facing switch) and the helpers themselves may touch it.
+      // No export may add/remove the class directly; only toggleTheme (the
+      // user-facing switch) and the ref-counted helpers themselves may touch it.
+      // There are TWO helper pairs now: _pushLightTheme puts it on <body> for a
+      // whole PDF run, and _pushElevLightTheme scopes it to #view-elevation for an
+      // elevation capture — the class only defines custom properties, so scoping it
+      // keeps the panels and buttons from flashing on every preview build.
       const adds = (S.match(/classList\\.add\\('light-theme'\\)/g) || []).length;
-      if (adds !== 1) throw new Error('expected exactly one direct light-theme add (inside _pushLightTheme); found ' + adds);
+      if (adds !== 2) throw new Error('expected exactly two direct light-theme adds (one per ref-counted helper); found ' + adds);
       const removes = (S.match(/classList\\.remove\\('light-theme'\\)/g) || []).length;
-      if (removes !== 1) throw new Error('expected exactly one direct light-theme remove (inside _popLightTheme); found ' + removes);
+      if (removes !== 2) throw new Error('expected exactly two direct light-theme removes (one per ref-counted helper); found ' + removes);
+      // Each add must live inside its own helper, not in an export.
+      ['function _pushLightTheme', 'function _pushElevLightTheme'].forEach(fn => {
+        const j = S.indexOf(fn);
+        if (j < 0) throw new Error(fn + ' not found');
+        if (S.slice(j, j + 700).indexOf("classList.add('light-theme')") < 0) throw new Error(fn + ' does not add the class');
+      });
+      // The elevation exports use the SCOPED pair, or the whole app flashes per capture.
+      ['async function exportElevPNG', 'async function exportElevSVG'].forEach(fn => {
+        const j = S.indexOf(fn);
+        const end = S.indexOf('\\nasync function ', j + 10);
+        const body2 = S.slice(j, end > 0 ? end : j + 60000);
+        if (body2.indexOf('_pushElevLightTheme()') < 0) throw new Error(fn + ' still flips the whole app theme instead of scoping it to the elevation view');
+        if (body2.indexOf('_popElevLightTheme()') < 0) throw new Error(fn + ' never releases the scoped theme');
+      });
       // And the whole PDF build must be wrapped, so the flip happens once.
       const i = S.indexOf('async function exportSpecPagePDF');
       if (i < 0) throw new Error('exportSpecPagePDF not found');
-      const body = S.slice(i, i + 1400);
+      // Anchored on what FOLLOWS the function (see test_pdf_cancel.js).
+      const body = S.slice(i, S.indexOf('PDF build progress overlay', i));
       if (body.indexOf('_pushLightTheme()') < 0) throw new Error('exportSpecPagePDF does not hold the theme for the whole build');
       if (body.indexOf('_popLightTheme()') < 0) throw new Error('exportSpecPagePDF never releases the theme');
     });

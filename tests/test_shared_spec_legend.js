@@ -171,7 +171,10 @@ const fs = require('fs');
       rows.forEach(r => { if (bases.indexOf(r.base) < 0) bases.push(r.base); });
       const pos = (b) => bases.indexOf(b);
       if (pos('Application') !== 0) throw new Error('Application should lead: ' + bases.join(' > '));
-      const order = ['Application', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Frame Size', 'Frame Code', 'Mat 1', 'Image Size', 'Overall Dimensions'];
+      // Frame CODE before Frame SIZE — the code is what you order by. Swapped
+      // deliberately; buildSpecStrings' emission order was swapped with it so
+      // the per-piece pages match.
+      const order = ['Application', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Frame Code', 'Frame Size', 'Mat 1', 'Image Size', 'Overall Dimensions'];
       for (let i = 1; i < order.length; i++) {
         if (pos(order[i]) < 0) continue;
         if (pos(order[i]) < pos(order[i - 1])) throw new Error(order[i] + ' came before ' + order[i - 1] + ': ' + bases.join(' > '));
@@ -196,8 +199,14 @@ const fs = require('fs');
       if (wb < 0) throw new Error('White Border vanished: ' + bases.join(' > '));
       const od = bases.indexOf('Overall Dimensions');
       if (wb > od) throw new Error('THE BUG: White Border printed after Overall Dimensions -> ' + bases.join(' > '));
-      // it belongs with the mat/paper block, so ahead of every size row
-      if (bases.indexOf('Paper Size') >= 0 && wb > bases.indexOf('Paper Size')) throw new Error('White Border should sit above the sizes: ' + bases.join(' > '));
+      // it belongs with the mat/paper block, so ahead of every size row.
+      // (This used Paper Size as the proxy for "the sizes" until Paper Size
+      // moved INTO the mat/paper block — it describes the paper, not the piece.
+      // Image Size is the first real size row now.)
+      const isz = bases.indexOf('Image Size');
+      if (isz >= 0 && wb > isz) throw new Error('White Border should sit above the sizes: ' + bases.join(' > '));
+      const ps = bases.indexOf('Paper Size');
+      if (ps >= 0 && ps > isz) throw new Error('Paper Size drifted back down into the sizes: ' + bases.join(' > '));
       // and it is B's alone, so it carries the letter
       const row = rows.find(r => r.base === 'White Border');
       if (row.label !== 'White Border B') throw new Error('wanted "White Border B", got "' + row.label + '"');

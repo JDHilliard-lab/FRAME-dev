@@ -71,7 +71,11 @@ const fs = require('fs');
       const S = window.__appSrc;
       const i = S.indexOf('function drawElevGuides');
       if (i < 0) throw new Error('drawElevGuides not found');
-      const body = S.slice(i, i + 1400);
+      // Slice to the NEXT function, not a fixed byte count. A 1400-char window
+      // used to reach both guides, then a comment above the hang block pushed
+      // 'hang-guide' past it and this failed on an unchanged renderer.
+      const _end = S.indexOf('\\nfunction ', i + 10);
+      const body = S.slice(i, _end > 0 ? _end : i + 6000);
       if (body.indexOf('center-guide') < 0) throw new Error('wall-center guide missing from drawElevGuides');
       if (body.indexOf('hang-guide') < 0) throw new Error('hang-height guide missing from drawElevGuides');
       // The hang block is gated on geometry only (it must fit on the wall) —

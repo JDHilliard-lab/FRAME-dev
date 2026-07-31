@@ -404,15 +404,32 @@ select.no-arrow::-ms-expand { display: none; }
 /* ========================================= */
 /* ELEVATION SPECIFIC CSS                    */
 /* ========================================= */
-.elev-sidebar { width: 440px; background: var(--bg-panel); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 100; flex-shrink: 0; }
+/* 425px, down from 440. The 15px went to the wall rail (see .elev-wall-rail) —
+ * taken from here rather than from #export-wrap, whose padding is already at its
+ * floor. The frame list is what limits this: --elev-col-template's columns plus
+ * their gaps come to 348px, .elev-frame-list adds 40px of horizontal padding,
+ * and the letter column needs ~28px, so ~420px is the hard minimum. */
+.elev-sidebar { width: 425px; background: var(--bg-panel); border-right: 1px solid var(--border-color); display: flex; flex-direction: column; z-index: 100; flex-shrink: 0; }
 .elev-sidebar-header { padding: 12px 20px; border-bottom: 1px solid var(--border-color); }
 
 /* WALL RAIL — the vertical list of walls down the right of the drawing, with
  * + Add Wall pinned at the bottom. These used to be horizontal tabs in the top
  * nav; a column scrolls to any number of walls instead of running out of width.
  * Rows truncate and carry the full name in a title attribute, so the rail stays
- * narrow and gives the drawing back as much room as possible. */
-.elev-wall-rail { width: 120px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--border-color); background: var(--bg-panel); }
+ * narrow and gives the drawing back as much room as possible.
+ *
+ * 165px, up from the 120px it shipped at. The fit-to-window scale is workspace
+ * width minus #export-wrap's padding, so every px the rail takes is a px off
+ * the drawing unless something gives it back. Three widths share ONE budget:
+ *
+ *     .elev-sidebar 425 + .elev-wall-rail 165 + #export-wrap padding-x 130
+ *     = 720 = the original 440 + 120 + 160
+ *
+ * Change any one alone and the fitted elevation resizes. The first 30px came
+ * out of the padding (80px a side -> 65); the padding is at its floor now
+ * because the outer wall dimensions sit 6in outside the wall (~74px at a
+ * typical fit scale), so the next 15px came out of the sidebar instead. */
+.elev-wall-rail { width: 165px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--border-color); background: var(--bg-panel); }
 #nav-tabs-container { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 6px 0; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
 #nav-tabs-container::-webkit-scrollbar { width: 6px; }
 #nav-tabs-container::-webkit-scrollbar-track { background: transparent; }
@@ -806,7 +823,17 @@ select.no-arrow::-ms-expand { display: none; }
     color: #f0883e;
 }
 .workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
-#export-wrap { padding: 80px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
+/* Breathing room around the wall for the dimension callouts that hang outside
+ * it. Horizontal is 65px, not 80: the wall rail took 30px and this gives it
+ * back so the fitted drawing keeps its size (see .elev-wall-rail). drawElevAll
+ * MEASURES this padding rather than hardcoding it, so the two can't drift.
+ *
+ * Treat 65px as the floor. The outer wall dimensions are drawn 6in outside the
+ * wall, which is ~74px at a typical fit scale, and at fit the padded content is
+ * only ~9px narrower than the workspace either side — so they already sit right
+ * on the visible edge. Trim further and the wall-height dimension gets clipped
+ * off the left. Any more width the rail needs comes from .elev-sidebar. */
+#export-wrap { padding: 80px 65px; min-width: max-content; min-height: max-content; margin: auto; display: flex; justify-content: center; align-items: center; background: transparent; }
 
 /* Light grey wall default for crisp dimensional text contrast */
 #wall { background: #f0f2f5; border-bottom: 1px solid var(--wall-line, #333); border-left: 1px solid var(--wall-line, #333); border-right: 1px solid var(--wall-line, #333); border-top: 1px solid var(--wall-line, #333); position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
@@ -893,37 +920,67 @@ body.dragging-frame .frame-vis:hover {
 .arch-dim { position: absolute; display: flex; align-items: center; justify-content: center; z-index: 40; }
 .arch-dim-h { height: 1px; flex-direction: row; }
 .arch-dim-v { width: 1px; flex-direction: column; }
-.dim-line-segment { flex: 1; height: var(--dim-weight); background: var(--arch-line); }
-.dim-line-segment-v { flex: 1; width: var(--dim-weight); background: var(--arch-line); }
+/* Dimension line strokes. --dim-line-w, not --dim-weight: under the
+ * architectural tick style the lines go light and the ticks stay heavy (set in
+ * applyAnnotationStyleToCSSVars). Under the plain style the two are equal, so
+ * this reads exactly as --dim-weight did. */
+.dim-line-segment { flex: 1; height: var(--dim-line-w, var(--dim-weight)); background: var(--arch-line); }
+.dim-line-segment-v { flex: 1; width: var(--dim-line-w, var(--dim-weight)); background: var(--arch-line); }
+
+/* ARCHITECTURAL TICK — the oblique stroke where a dimension line meets its
+ * extension line. A vertical border rotated 45deg draws bottom-left to
+ * top-right ( / ); translate(-50%,-50%) centres it ON the intersection so it
+ * straddles both lines rather than hanging off one side. Heavier than the lines
+ * it crosses, per the line-weight hierarchy. Never an arrowhead. */
+.dim-tick {
+    position: absolute;
+    width: 0;
+    height: var(--dim-tick-len, 9px);
+    border-left: var(--dim-tick-w, 1.5px) solid var(--dim-color);
+    transform: translate(-50%, -50%) rotate(45deg);
+    transform-origin: center;
+    pointer-events: none;
+}
+/* On a horizontal dimension the ends are left/right (set inline) and the line
+ * runs through the element's vertical middle; on a vertical dimension it's the
+ * other way round. */
+.dim-tick-h { top: 50%; }
+.dim-tick-v { left: 50%; }
 
 .arch-label-new { display: inline-flex; align-items: center; justify-content: center; line-height: 1; font-size: var(--dim-font-size); font-family: var(--dim-font-family); font-weight: var(--dim-font-weight); color: var(--dim-color); padding: 2px 6px; white-space: nowrap; background: #ffffff; border-radius: 3px; box-sizing: border-box; }
-
-.hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
-.hang-label { 
-    position: absolute; 
-    right: 100%;            /* sit OUTSIDE the wall, left of its left edge */
+/* ROTATED vertical dimension text — 90 degrees counter-clockwise, reading
+ * bottom-to-top, running parallel to its line. This is the architectural standard
+ * for a vertical dimension, and it's also the only treatment that CANNOT crash into
+ * the wall: horizontal text in the narrow gutter left of the wall grew wider with
+ * every extra character ('108"(274.3cm)') until its chip reached across the wall
+ * line, and nudging it sideways only postpones that. Rotated, its horizontal
+ * footprint is the text HEIGHT — about 14px whatever the number says.
+ *
+ * Absolute, so the line runs through unbroken behind it (the two segments split the
+ * span evenly with the label out of flow). Only applied where there are no drag
+ * arrows on the label: the arrows are children of it and would rotate too, turning
+ * up/down into left/right. The outer wall dims have no arrows, which is why they get
+ * this and the spacing dims don't yet. */
+.arch-dim-v .arch-label-rot {
+    position: absolute;
     top: 50%;
-    /* Vertical orientation, reading bottom-to-top (conventional for a
-       left-side label), centered on the dashed hang line. */
-    writing-mode: vertical-rl;
-    transform: translateY(-50%) rotate(180deg);
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
     transform-origin: center;
-    margin-right: 6px;      /* gap from the wall edge */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-    color: var(--dim-color); 
-    font-family: var(--dim-font-family);
-    font-size: var(--dim-font-size); 
-    font-weight: var(--dim-font-weight); 
-    background: rgba(255,255,255,0.85); 
-    padding: 6px 2px; 
-    border-radius: 3px; 
-    white-space: nowrap;
 }
+
+/* The dashed hang line. No label rides on it — see drawElevGuides: the word
+ * HANG HEIGHT used to sit outside the wall on the left, where the wall-height
+ * dimension lives, and collided with it in mm/cm. The '60" AFF' callout carries
+ * the meaning now. (There was a .hang-label rule here, plus a writing-mode
+ * vertical-rl trick and an html2canvas workaround for it; all three are gone.) */
+.hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
 .center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
-.center-label { position: absolute; bottom: 100%; left: 0; transform: translate(-50%, -6px); display: inline-flex; align-items: center; line-height: 1; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: var(--dim-font-weight); background: rgba(255,255,255,0.8); padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+/* 'CL' sits just INSIDE the wall's top edge and BESIDE the dashed centre line.
+ * Not centred on the line and not above the wall: that is where the wall-width
+ * dimension number sits, and the two collided on long walls and in mm. margin-left
+ * (not a translate) keeps it clear of the line whatever the label's width. */
+.center-label { position: absolute; top: 5px; left: 0; margin-left: 6px; display: inline-flex; align-items: center; line-height: 1; color: var(--dim-color); font-family: var(--dim-font-family); font-size: var(--dim-font-size); font-weight: var(--dim-font-weight); background: rgba(255,255,255,0.8); padding: 2px 5px; border-radius: 3px; white-space: nowrap; }
 .crosshair-h { position: absolute; height: 1px; border-top: 1px dashed #aaa; }
 .crosshair-v { position: absolute; width: 1px; border-left: 1px dashed #aaa; }
 

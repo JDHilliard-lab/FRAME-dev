@@ -1692,6 +1692,24 @@
                     <input type="number" id="baseboardHeight" value="4" oninput="updateBaseboard()" onchange="pushHistory()" style="padding: 7px 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box; height:34px;">
                 </div>
             </div>
+            <!-- Elevation dual units. Independent of the spec-page setting: an
+                 elevation is dimensioned in a dozen places at once, so it's far
+                 tighter on space than a spec list and you may well want brackets
+                 on one and not the other. Inches always lead; the picker chooses
+                 the companion. The project unit above is untouched. -->
+            <div style="display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-color);">
+                <label style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; cursor:pointer;">
+                    <input type="checkbox" id="elevDualUnitCb" onchange="toggleElevDualUnit(this.checked)">
+                    Dual Units
+                </label>
+                <div class="unit-toggle" id="elevDualUnitPick" style="height:26px; margin-left:auto; width:96px;">
+                    <button id="elevDualMm" type="button" onclick="setElevDualUnit('mm')">MM</button>
+                    <button id="elevDualCm" type="button" onclick="setElevDualUnit('cm')">CM</button>
+                </div>
+            </div>
+            <div style="font-size:0.58rem; color:var(--text-muted); margin-top:4px; line-height:1.4;">
+                Elevation dimensions print in inches with the metric equivalent in brackets: 4"(102mm). Leaves the project unit above alone.
+            </div>
         </div>
 
         <!-- LABEL & DIMENSION STYLE: controls the look of every dimension and
@@ -1724,6 +1742,20 @@
                     <div class="unit-toggle" style="height:26px; flex:1;">
                         <button id="annotDashOn" type="button" class="active" onclick="setAnnotDash(true)">DASHED</button>
                         <button id="annotDashOff" type="button" onclick="setAnnotDash(false)">SOLID</button>
+                    </div>
+                </div>
+                <!-- Dimension line ends. PLAIN is what FRAME has always drawn.
+                     TICKS applies the architectural standard: a 45-degree oblique
+                     stroke centred on every dimension/extension intersection,
+                     lines dropped to a lighter weight so the tick reads, and the
+                     extension lines overhanging the intersection to form the
+                     crosshair under it. Deliberately no arrowhead option — that
+                     is not architectural dimensioning practice. -->
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Ends</span>
+                    <div class="unit-toggle" style="height:26px; flex:1;">
+                        <button id="annotEndsNone" type="button" class="active" onclick="setAnnotDimEnds('none')" title="Plain butt ends">PLAIN</button>
+                        <button id="annotEndsTick" type="button" onclick="setAnnotDimEnds('tick')" title="Architectural 45&deg; ticks: lighter lines, heavier tick centred on each intersection, extension lines overhanging to form a crosshair">TICKS</button>
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px;">
