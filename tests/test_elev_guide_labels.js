@@ -76,16 +76,18 @@ const path = require('path');
     });
 
     __check('the AFF callout tracks the hang height rather than hardcoding either value', () => {
-      // The studio hangs at 60 as well as 57, so the number comes from the
-      // Settings input that getHangHeight reads — not from a literal.
+      // The studio hangs at 60 as well as 57, so the number comes from the hang
+      // height getHangHeight reads — not from a literal. That value is now held in
+      // INCHES (elevHangIn) with the Settings input as its display, so this drives
+      // the stored value; the input-to-model wiring is pinned separately in
+      // test_elev_hang_baseboard_units.js.
       __seed('in', 185, 108);
-      const el = document.getElementById('hangHeight');
-      if (!el) throw new Error('#hangHeight input not found');
-      const save = el.value;
-      el.value = '60';
+      if (!document.getElementById('hangHeight')) throw new Error('#hangHeight input not found');
+      const save = elevHangIn;
+      elevHangIn = 60;
       drawElevAll();
       const t = (document.querySelector('.hang-dim-num').textContent || '').trim();
-      el.value = save;
+      elevHangIn = save;
       drawElevAll();
       if (t !== '60\\" AFF') throw new Error('a 60in hang height gave "' + t + '"');
     });

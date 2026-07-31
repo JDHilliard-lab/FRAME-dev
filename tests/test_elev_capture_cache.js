@@ -41,8 +41,11 @@ const path = require('path');
         { letter: 'B', id: 'P2', x: 80, y: 40, w: 30, h: 24, active: true }
       ] }];
       currentElevIndex = 0; elevFrames = elevations[0].frames;
-      document.getElementById('hangHeight').value = '57';
-      document.getElementById('baseboardHeight').value = '4';
+      // Hang height and baseboard are stored in INCHES, unit-independent, with the
+      // Settings inputs as their display — so the signature hashes these, not the
+      // boxes (whose text changes on a unit switch without the drawing moving).
+      elevHangIn = 57;
+      elevBaseboardIn = 4;
       pushHistory();          // establish a baseline signature
     };
     // Did the capture generation move across this change?
@@ -93,8 +96,8 @@ const path = require('path');
         'custom measure line':   () => { elevations[0].customLines = [{ id: 'cl1', type: 'h', a: {}, b: {} }]; },
         'character moved':       () => { elevations[0].personPos.x = -20; },
         'wall resized':          () => { elevations[0].wallH = 120; },
-        'hang height':           () => { document.getElementById('hangHeight').value = '60'; },
-        'baseboard':             () => { document.getElementById('baseboardHeight').value = '6'; },
+        'hang height':           () => { elevHangIn = 60; },
+        'baseboard':             () => { elevBaseboardIn = 6; },
         'unit':                  () => { elevUnit = 'cm'; },
         'interior suffix':       () => { showUnitSuffix = !showUnitSuffix; },
         'elevation dual units':  () => { elevDualUnit = 'mm'; }

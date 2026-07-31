@@ -71,13 +71,13 @@ const path = require('path');
     __check('the AFF note carries the live hang height, not a hardcoded one', () => {
       __reset();
       editorialContent.installNotes.keys.aff = true;
-      const el = document.getElementById('hangHeight');
-      const save = el.value;
-      el.value = '60';
+      // Stored in INCHES (elevHangIn); the Settings input is its display.
+      const save = elevHangIn;
+      elevHangIn = 60;
       const a = _installNoteLines()[0];
-      el.value = '57';
+      elevHangIn = 57;
       const b = _installNoteLines()[0];
-      el.value = save;
+      elevHangIn = save;
       if (a.indexOf('60\\"') < 0) throw new Error('a 60in hang height gave: ' + a);
       if (b.indexOf('57\\"') < 0) throw new Error('a 57in hang height gave: ' + b);
       if (/AFF AFF/.test(a)) throw new Error('AFF doubled up: ' + a);

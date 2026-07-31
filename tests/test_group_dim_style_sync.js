@@ -104,10 +104,11 @@ const path = require('path');
       setAnnotDimEnds('none'); __setColor('#000000'); __seed();
       // Through the real control: applyAnnotationStyleFromModal reads the inputs,
       // so setting annotationStyle directly would just be overwritten.
-      const wIn = document.getElementById('annotWeight');
-      wIn.value = '5'; applyAnnotationStyleFromModal();
-      if (!/5px/.test(__box().style.border)) throw new Error('weight did not reach the box: ' + __box().style.border);
-      wIn.value = '2'; applyAnnotationStyleFromModal();
+      // The px slider became a points ladder in 16.25; setAnnotLineWeightPt is its
+      // real handler and it calls applyAnnotationStyleFromModal itself.
+      setAnnotLineWeightPt(3);   // 3pt = 6px on screen (ELEV_PT_TO_PX)
+      if (!/6px/.test(__box().style.border)) throw new Error('weight did not reach the box: ' + __box().style.border);
+      setAnnotLineWeightPt(1);
       if (!/2px/.test(__box().style.border)) throw new Error('did not go back: ' + __box().style.border);
       const fIn = document.getElementById('annotFontSize');
       fIn.value = '19'; applyAnnotationStyleFromModal();
@@ -174,13 +175,15 @@ const path = require('path');
       const j = S.indexOf('function renderGroupDims');
       const gBody = S.slice(j, S.indexOf('\\nfunction ', j + 10));
       if (gBody.indexOf('_dimLineWeight()') < 0) throw new Error('renderGroupDims no longer uses the shared helper');
-      // And the numbers agree with what the CSS vars publish.
-      annotationStyle.weight = 4;
+      // And the numbers agree with what the CSS vars publish — including with the
+      // two weights set APART, which is the case a second computation would break.
+      setAnnotWeightLinked(false);
+      setAnnotLineWeightPt(0.5); setAnnotTickWeightPt(2);
       setAnnotDimEnds('tick');
       const varLine = parseFloat(document.documentElement.style.getPropertyValue('--dim-line-w'));
       const varTick = parseFloat(document.documentElement.style.getPropertyValue('--dim-tick-w'));
       if (varLine !== _dimLineWeight() || varTick !== _dimTickWeight()) throw new Error('CSS vars ' + varLine + '/' + varTick + ' disagree with the helpers ' + _dimLineWeight() + '/' + _dimTickWeight());
-      annotationStyle.weight = 2; setAnnotDimEnds('none');
+      setAnnotWeightLinked(true); setAnnotLineWeightPt(1); setAnnotDimEnds('none');
     });
 
     __check('the group box extension lines overhang under the tick style, and not otherwise', () => {

@@ -35,6 +35,21 @@ never delete a check to make the suite pass.
   ambiguous.
 - `FRAME_SWATCH_FAMILIES` / `_frameSwatchesInto()` is the shared colour
   quick-pick, used by the Deck Studio popups and the Elevations Settings modal.
+  `opts.families` swaps the palette without forking the renderer —
+  `FRAME_GREY_RAMP` (black→light grey, no hues, **no pure white**: a white figure
+  is invisible) drives the Scale Figure shade strip that replaced its dropdown.
+  A shade IS a grey, because the figure is painted by `brightness(0) invert(n)`;
+  `_shadeToHex`/`_hexToShade` convert, so there's no second table of values, and
+  `_personShadeNearestHex()` rings the closest dot so a project carrying an old
+  dropdown value (0.3/0.68/0.82) doesn't look like nothing is selected.
+  `_personShadeFilter()` is the one filter expression, used by the wall figure AND
+  the Settings preview, so the panel can't show something the drawing won't.
+- **All sliders are one global `input[type=range]` rule** in style.css — a thin 2px
+  track with an 11px dot, no opt-in class, because a class gets forgotten on the
+  next slider and then two looks coexist. WebKit and Gecko expose different
+  track/thumb pseudo-elements and **neither inherits the other's**, so every rule
+  is written twice or one engine silently keeps the chunky native control. The
+  WebKit thumb needs `margin-top: (track - thumb) / 2` or it hangs below the line.
 - `annotationStyle.font` and `imageCodeStyle.fontToken` hold library tokens;
   `annotationStyle.fontFamily` and `imageCodeStyle.font` are **derived** CSS
   stacks that `_normalizeAnnotationStyle()` / `_normalizeImageCodeStyle()` keep
@@ -117,11 +132,32 @@ never delete a check to make the suite pass.
   `elevFmt` + `unitSuffix()`, deliberately not `elevFmtU` — AFF keeps its unit mark
   even when the interior-suffix toggle is off. `.hang-label` was the only
   `writing-mode` user in the app, so its html2canvas `onclone` fixup went too.
+- **Line weights are POINTS, and absolute.** `ELEV_WEIGHT_PT` is the drafting pen
+  set (0.25/0.5/0.75/1/2/3) and the only definition — both Settings ladders are
+  built from it by `_seedAnnotWeightControls()`, never written out in the HTML.
+  `annotationStyle.lineWeightPt` / `.tickWeightPt` / `.weightLinked` replaced the
+  single px slider; `weight` survives only as a px mirror that
+  `_normalizeAnnotationStyle()` migrates from and writes back to (nothing draws
+  from it). **Linked means literally equal** — the old code *derived* a 2:1
+  light-line/heavy-tick split from one weight, and keeping that made "all the same
+  weight" unreachable, which was the request. A stored tick-style deck migrates
+  *unlinked* onto the two weights that split gave it, so it looks unchanged.
+  Picking a tick weight while linked unlinks, because the alternative is a click
+  that silently does nothing.
+  `ELEV_PT_TO_PX = 2` is the one place points and pixels meet: `_dimLineWeight()`
+  multiplies by it for the screen, `_drawElevAnnOps` **divides** by it to recover
+  the nominal point value and does **not** scale stroke widths by the placement
+  scale `k`. That's the fix, not an oversight: `k` derives from the capture
+  artboard, which is the *fit-to-window pixel size*, so printed weights used to
+  depend on how wide the browser window was. Geometry still scales by `k` (the
+  target circle's radius included) — only widths and the dash runs derived from
+  them come out of it. `CanvasPdfRec` renders at page-point scale, so the Deck
+  Studio preview needs nothing extra; the raster fallback (zero ops parsed) can't
+  do this and keeps the old scaled look.
 - `annotationStyle.dimEnds` (`'none'|'tick'`) is the dimension-end style, set in the
   Elevations gear (Line Ends). `'tick'` = architectural 45° obliques: `_dimTicksHTML()`
-  appends two per line, `--dim-line-w`/`--dim-tick-w` split the user's single weight
-  into the light-line/heavy-tick hierarchy, and `_dimExtOverhang()` runs extension
-  lines past the intersection. `DIM_TICK_LEN`/`DIM_EXT_OVERHANG` are print constants
+  appends two per line, `--dim-line-w`/`--dim-tick-w` carry the two weights, and
+  `_dimExtOverhang()` runs extension lines past the intersection. `DIM_TICK_LEN`/`DIM_EXT_OVERHANG` are print constants
   in px — they must NOT scale with `elevScale`. **Arrowheads are never an option**;
   `.dim-arrow` elements are drag controls and carry `data-export-skip`.
   A tick is a rotated border, so `emitEl`'s axis-aligned border cases can't see it —
@@ -262,6 +298,21 @@ never delete a check to make the suite pass.
 - **The Elevations tab is the source of truth** for which measurements appear on
   elevation pages. Layout-guide *styling* is global; the figure's *position* is
   per-elevation. Breaker captures honour `_breakerMeasure()` ("Show layout guides").
+- **Hang height and baseboard are stored in INCHES** (`elevHangIn` /
+  `elevBaseboardIn`, standards `ELEV_STD_HANG_IN` 57 and `ELEV_STD_BASEBOARD_IN` 4)
+  and the inputs are their *display*, reseeded by `seedHangBaseboardInputs()` on
+  boot, on every unit change, on project load and on undo. They used to live only
+  in the DOM in whatever unit was current, which broke twice: `loadMasterProject`
+  set `elevUnit` from the file and never touched the boxes, so an inches project
+  opened in cm read 144.78 as *inches*; and `setUnit`'s multiply-the-input pass
+  rounded to 2dp, so 57 drifted on every toggle. They're now saved
+  (`hangHeightIn`/`baseboardIn` in the project JSON, and in
+  `snapshotProjectState` so undo/autosave/version history carry them) — before,
+  they weren't persisted at all and a new project inherited the last one's numbers.
+  Display rounds to **2dp, not `unitInfo().decimals`**, or the cm standard prints
+  144.8 instead of 144.78. A custom height stays custom; the ⌖ buttons snap back.
+  `_elevCaptureSignature` hashes the inches, not the input text, or a unit switch
+  alone recaptured every elevation.
 - `importDashCSV` strips unit suffixes during column lookup, so CSV headers must
   include the suffix, e.g. `Overall Width (cm)`.
 

@@ -177,6 +177,43 @@ textarea { width: 100%; padding: 6px; border: 1px solid var(--border-color); bor
    outline. The outline makes the selected state unmistakable on glance — without
    it, the contrast against the toggle's own backplate was too subtle. */
 .unit-toggle button.active { background: var(--btn-secondary); color: var(--text-strong); box-shadow: 0 0 0 1px var(--accent) inset; }
+/* Line-weight ladder — a .unit-toggle carrying SIX segments instead of two or
+   three, so the labels have to give up their padding and bold to fit the same
+   width. Tabular figures keep '.25' and '1' the same width, which is what stops
+   the strip looking uneven. */
+.unit-toggle.wt-ladder button { padding: 0 2px; font-weight: 600; font-size: 0.6rem; font-variant-numeric: tabular-nums; }
+
+/* ========================================= */
+/* RANGE SLIDERS                             */
+/* ========================================= */
+/* One look everywhere: the Deck Studio gear popups, the Elevations Settings
+   panel, the elevation zoom bar, the frame-mockup zoom. Native range controls
+   render as a chunky 6-8px track with a large thumb, which ate vertical space in
+   the settings panels where several sit stacked. This is a 2px rule with a small
+   grab dot.
+   Both vendor prefixes are required: WebKit and Gecko expose different
+   pseudo-elements and NEITHER inherits the other's, so a rule written once
+   silently applies to one engine only. -webkit-appearance:none on the input is
+   what lets the track rule take effect at all. */
+input[type=range] {
+    -webkit-appearance: none; appearance: none;
+    background: transparent; height: 16px; margin: 0; padding: 0; cursor: pointer;
+}
+input[type=range]:focus { outline: none; }
+input[type=range]::-webkit-slider-runnable-track { height: 2px; border-radius: 1px; background: var(--border-color); }
+/* margin-top centres the dot on the 2px track: (2 - 11) / 2. */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 11px; height: 11px; margin-top: -4.5px;
+    border: none; border-radius: 50%; background: var(--text-muted); transition: background 0.15s;
+}
+input[type=range]:hover::-webkit-slider-thumb, input[type=range]:active::-webkit-slider-thumb { background: var(--accent); }
+input[type=range]::-moz-range-track { height: 2px; border-radius: 1px; background: var(--border-color); }
+input[type=range]::-moz-range-thumb {
+    width: 11px; height: 11px;
+    border: none; border-radius: 50%; background: var(--text-muted); transition: background 0.15s;
+}
+input[type=range]:hover::-moz-range-thumb, input[type=range]:active::-moz-range-thumb { background: var(--accent); }
 
 .svg-icon { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 

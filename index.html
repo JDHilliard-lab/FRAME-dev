@@ -1683,13 +1683,25 @@
                         <button id="elevBtnMm" onclick="setElevUnit('mm')">MM</button>
                     </div>
                 </div>
+                <!-- Hang height and baseboard are stored in INCHES and shown in the
+                     active unit, so the studio standards stay exact whichever unit
+                     you work in: 57" / 144.78cm / 1447.8mm and 4" / 10.16cm /
+                     101.6mm. They used to be plain DOM values that a unit switch
+                     multiplied and a project load left alone, so opening an inches
+                     project while set to cm read 144.78 as inches. -->
                 <div style="flex:1;">
-                    <label style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; display:block; margin-bottom:6px;" title="Center of art height. Gallery/museum standard is 57&quot;">Hang Height</label>
-                    <input type="number" id="hangHeight" value="57" oninput="drawElevAll()" onchange="pushHistory()" style="padding: 7px 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box; height:34px;">
+                    <label style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; display:block; margin-bottom:6px;" title="Center of art height. Gallery/museum standard is 57&quot; (144.78cm / 1447.8mm) — press the ⌖ button to snap back to it.">Hang Height <span id="hangHeightUnitLabel" style="text-transform:none; font-weight:400;">(in)</span></label>
+                    <div style="display:flex; gap:4px;">
+                        <input type="number" id="hangHeight" value="57" oninput="updateHangHeight()" onchange="pushHistory()" style="padding: 7px 6px; font-size: 0.85rem; flex:1; min-width:0; text-align: center; box-sizing:border-box; height:34px;">
+                        <button type="button" class="icon-btn" onclick="resetHangHeightToStandard()" title="Back to the 57&quot; studio standard" style="height:34px; width:26px; flex:0 0 26px;">⌖</button>
+                    </div>
                 </div>
                 <div style="flex:1;">
-                    <label style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; display:block; margin-bottom:6px;" title="Baseboard height from the floor. 0 = no baseboard.">Baseboard</label>
-                    <input type="number" id="baseboardHeight" value="4" oninput="updateBaseboard()" onchange="pushHistory()" style="padding: 7px 6px; font-size: 0.85rem; width:100%; text-align: center; box-sizing:border-box; height:34px;">
+                    <label style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; display:block; margin-bottom:6px;" title="Baseboard height from the floor. 0 = no baseboard. Standard is 4&quot; (10.16cm / 101.6mm).">Baseboard <span id="baseboardUnitLabel" style="text-transform:none; font-weight:400;">(in)</span></label>
+                    <div style="display:flex; gap:4px;">
+                        <input type="number" id="baseboardHeight" value="4" oninput="updateBaseboard()" onchange="pushHistory()" style="padding: 7px 6px; font-size: 0.85rem; flex:1; min-width:0; text-align: center; box-sizing:border-box; height:34px;">
+                        <button type="button" class="icon-btn" onclick="resetBaseboardToStandard()" title="Back to the 4&quot; standard" style="height:34px; width:26px; flex:0 0 26px;">⌖</button>
+                    </div>
                 </div>
             </div>
             <!-- Elevation dual units. Independent of the spec-page setting: an
@@ -1732,11 +1744,24 @@
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px; flex:0 0 80px;">Swatches</span>
                     <div id="annotColorSwatches" style="flex:1;"></div>
                 </div>
+                <!-- LINE WEIGHTS. Two independent pickers off the same drafting pen
+                     set (ELEV_WEIGHT_PT), plus a link so "all the same weight" is
+                     one click. Points, not pixels: these are absolute print weights
+                     and a 0.25pt line exports as 0.25pt whatever size the drawing
+                     lands at, the same as a stroke weight in InDesign. Built by
+                     _seedAnnotWeightControls() so the ladder has one source. -->
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Weight</span>
-                    <input type="range" id="annotWeight" min="1" max="6" step="1" value="2" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
-                    <span id="annotWeightVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">2px</span>
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;" title="Dimension lines, extension lines, leaders and the group-dimension box.">Lines (pt)</span>
+                    <div class="unit-toggle wt-ladder" id="annotLineWeight" style="height:26px; flex:1;"></div>
                 </div>
+                <div style="display:flex; align-items:center; gap:10px;" id="annotTickWeightRow">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;" title="The 45-degree architectural ticks. Only drawn when Line Ends is set to TICKS below.">Ticks (pt)</span>
+                    <div class="unit-toggle wt-ladder" id="annotTickWeight" style="height:26px; flex:1;"></div>
+                </div>
+                <label style="display:flex; align-items:center; gap:8px; font-size:0.65rem; color:var(--text-main); cursor:pointer; margin-left:90px;" title="Ticks take the line weight. Untick to set them apart — the architectural convention is lighter lines against a heavier tick, e.g. 0.5pt lines with 1pt ticks.">
+                    <input type="checkbox" id="annotWeightLink" checked onchange="setAnnotWeightLinked(this.checked)" style="width:14px; height:14px; cursor:pointer;">
+                    Same weight for lines and ticks
+                </label>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Style</span>
                     <div class="unit-toggle" style="height:26px; flex:1;">
@@ -1746,11 +1771,12 @@
                 </div>
                 <!-- Dimension line ends. PLAIN is what FRAME has always drawn.
                      TICKS applies the architectural standard: a 45-degree oblique
-                     stroke centred on every dimension/extension intersection,
-                     lines dropped to a lighter weight so the tick reads, and the
-                     extension lines overhanging the intersection to form the
-                     crosshair under it. Deliberately no arrowhead option — that
-                     is not architectural dimensioning practice. -->
+                     stroke centred on every dimension/extension intersection, with
+                     the extension lines overhanging it to form the crosshair
+                     underneath. The lighter-lines half of that standard is now the
+                     Ticks weight above rather than a split derived here.
+                     Deliberately no arrowhead option — that is not architectural
+                     dimensioning practice. -->
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Line Ends</span>
                     <div class="unit-toggle" style="height:26px; flex:1;">
@@ -1864,18 +1890,24 @@
             </div>
         </div>
 
-        <!-- SCALE FIGURE: silhouette shade -->
+        <!-- SCALE FIGURE. The shade dropdown became a swatch strip so it reads the
+             same as the Label & Dimension and Image Code colour pickers a few
+             sections up — same dots, same size, same selected ring, via
+             _frameSwatchesInto. Black through grey only, no hues: the figure is a
+             silhouette on a technical drawing, and a coloured one would read as an
+             annotation. The live preview beside it is the real character art under
+             the same CSS filter the wall uses, so the choice is visible without
+             closing the panel. -->
         <div style="margin-bottom: 12px;">
             <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Scale Figure</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
-                <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:4px;" title="Make the scale figure more subtle by lightening it from solid black to shades of grey.">Figure Shade</label>
-                <select id="personShade" onchange="setPersonShade(this.value)" style="width:100%; padding:7px 6px; font-size:0.85rem; height:34px; box-sizing:border-box;">
-                    <option value="0">Black</option>
-                    <option value="0.3">Dark grey</option>
-                    <option value="0.5">Medium grey</option>
-                    <option value="0.68">Light grey</option>
-                    <option value="0.82">Faint grey</option>
-                </select>
+            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color); display:flex; align-items:flex-start; gap:12px;">
+                <div style="flex:0 0 44px; height:72px; display:flex; align-items:flex-end; justify-content:center; background:var(--bg-main); border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                    <img src="Character_Lady_walk.svg" id="personShadePreview" alt="Scale figure preview" style="height:64px; width:auto; display:block;" onerror="this.style.display='none'">
+                </div>
+                <div style="flex:1; min-width:0;">
+                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:6px;" title="Make the scale figure more subtle by lightening it from solid black to shades of grey.">Figure Shade</label>
+                    <div id="personShadeSwatches"></div>
+                </div>
             </div>
         </div>
 

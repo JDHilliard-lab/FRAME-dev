@@ -137,26 +137,50 @@ const path = require('path');
       setAnnotDimEnds('none');
     });
 
-    __check('EXACT SPEC: line-weight hierarchy — lines light, tick heavier', () => {
-      annotationStyle.weight = 2;
-      setAnnotDimEnds('none');
-      const plainLine = parseFloat(__cssVar('--dim-line-w'));
-      const plainTick = parseFloat(__cssVar('--dim-tick-w'));
-      if (plainLine !== 2 || plainTick !== 2) throw new Error('the plain style should leave both at the user weight, got ' + plainLine + '/' + plainTick);
+    // CHANGED IN 16.25. The light-line/heavy-tick split used to be DERIVED (lines at
+    // half the stored weight, ticks at full) because there was a single px weight
+    // slider. Lines and ticks are now picked separately off a points ladder, so
+    // LINKED has to mean literally the same weight — otherwise "I want them all the
+    // same" is unreachable, which is the case the request named. The hierarchy is
+    // still fully expressible, and is one unlink away; what this now pins is that
+    // the two weights are independent and that linked means equal.
+    __check('EXACT SPEC: line-weight hierarchy is reachable — lines light, tick heavier', () => {
+      setAnnotWeightLinked(false);
+      setAnnotLineWeightPt(0.5);
+      setAnnotTickWeightPt(1);
       setAnnotDimEnds('tick');
       const line = parseFloat(__cssVar('--dim-line-w'));
       const tick = parseFloat(__cssVar('--dim-tick-w'));
       if (!(tick > line)) throw new Error('the tick must be heavier than the lines it crosses: line ' + line + ', tick ' + tick);
       if (!(tick / line >= 1.5)) throw new Error('the hierarchy is too subtle to read: line ' + line + ', tick ' + tick);
+      // …and switching to the plain style must not silently rewrite either weight.
       setAnnotDimEnds('none');
+      if (parseFloat(__cssVar('--dim-line-w')) !== line) throw new Error('the line weight moved when the ends changed');
+      setAnnotWeightLinked(true); setAnnotLineWeightPt(1);
     });
 
-    __check('a hairline weight setting still renders — the light line has a floor', () => {
-      annotationStyle.weight = 1;
+    __check('EXACT REQUEST: linked means the SAME weight, not a derived split', () => {
+      setAnnotLineWeightPt(1); setAnnotWeightLinked(true);
+      [0.25, 0.5, 0.75, 1, 2, 3].forEach(pt => {
+        setAnnotLineWeightPt(pt);
+        ['none', 'tick'].forEach(ends => {
+          setAnnotDimEnds(ends);
+          const line = parseFloat(__cssVar('--dim-line-w'));
+          const tick = parseFloat(__cssVar('--dim-tick-w'));
+          if (line !== tick) throw new Error(pt + 'pt linked under ' + ends + ' gave line ' + line + ' vs tick ' + tick);
+        });
+      });
+      setAnnotDimEnds('none'); setAnnotLineWeightPt(1);
+    });
+
+    __check('a hairline weight still renders on screen rather than vanishing', () => {
+      setAnnotWeightLinked(true);
+      setAnnotLineWeightPt(0.25);
       setAnnotDimEnds('tick');
       const line = parseFloat(__cssVar('--dim-line-w'));
-      if (!(line >= 0.75)) throw new Error('weight 1 gave a ' + line + 'px line, which disappears on screen');
-      annotationStyle.weight = 2; setAnnotDimEnds('none');
+      if (!(line > 0)) throw new Error('0.25pt gave a ' + line + 'px line');
+      if (!(line >= 0.5)) throw new Error('0.25pt gave a ' + line + 'px line, too fine for a browser to paint');
+      setAnnotLineWeightPt(1); setAnnotDimEnds('none');
     });
 
     __check('the dimension strokes read the light weight, not the raw weight', () => {

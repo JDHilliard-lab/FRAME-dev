@@ -406,12 +406,12 @@ const path = require('path');
       const layer = document.getElementById('guide-layer');
       const t = layer.querySelector('[data-svg-passthrough]');
       if (!t) throw new Error('the guide target is not in the guide layer, so it could be left floating with no lines under it');
-      // And it follows the hang height, since it marks that crossing.
-      const el = document.getElementById('hangHeight');
-      const save = el.value; el.value = '60'; drawElevAll();
+      // And it follows the hang height, since it marks that crossing. The hang
+      // height is stored in INCHES now, with the Settings input as its display.
+      const save = elevHangIn; elevHangIn = 60; drawElevAll();
       const moved = document.querySelector('#guide-layer [data-svg-passthrough]');
       const expect = 60 * unitFactor('in', elevUnit) * elevScale;
-      el.value = save; drawElevAll();
+      elevHangIn = save; drawElevAll();
       if (Math.abs(parseFloat(moved.style.bottom) - expect) > 0.5) throw new Error('the target did not follow the hang height to 60in');
     });
 
