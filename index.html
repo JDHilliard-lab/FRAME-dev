@@ -20,7 +20,14 @@
     <!-- jsPDF: vendored locally (lib-jspdf.min.js) so the presentation-PDF
          export works with no build step / CDN, matching the GitHub-web workflow. -->
     <script src="lib-jspdf.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <!-- Version query = cache busting, and it must match APP_VERSION (a test pins
+         that, so a forgotten bump fails the suite rather than shipping silently).
+         Without it the browser happily keeps a cached style.css while loading a
+         fresh app.js — the version pill reads new, half the app behaves new, and
+         anything driven by a new CSS rule is simply absent. That is exactly how the
+         gradient-painted dashes went missing on screen while still exporting fine
+         from the JS side. -->
+    <link rel="stylesheet" href="style.css?v=16.39">
 </head>
 <body>
 
@@ -779,7 +786,14 @@
                         <div id="group-dim-layer" class="group-dim-layer" style="z-index:38;"></div>
                         <div id="custom-lines-layer" class="dim-layer" style="z-index:40;"></div>
                         <div id="label-layer" class="label-layer" style="z-index:42;"></div>
-                        
+                        <!-- Scale-figure height dimension. Its own layer, ABOVE the
+                             other dimension layers: inside #person-wrap it would be
+                             trapped in that element's stacking context (position +
+                             z-index) and another dim would cross it on screen while
+                             the PDF drew it on top, since the SVG's text group is
+                             always emitted last. -->
+                        <div id="figure-dim-layer" class="dim-layer" style="z-index:43; pointer-events:none;"></div>
+
                         <div id="person-wrap" class="draggable" style="position:absolute; bottom:0; left:-60px; z-index:10; display:none; opacity:1;">
                             <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block; opacity:1;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
                         </div>
@@ -1229,17 +1243,17 @@
 
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:8px;">Include pages</label>
         <div style="display:flex; flex-direction:column; gap:7px; margin-bottom:14px; font-size:0.8rem; color:var(--text-main);">
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_cover" checked style="cursor:pointer;"> Cover <button type="button" class="icon-btn" title="Edit cover" onclick="openFixedPageEditor('cover')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_cover" checked style="cursor:pointer;"> Cover</label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_timeline" checked style="cursor:pointer;"> Process &amp; Timeline <span style="color:var(--text-muted); font-size:0.7rem;">(phases below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_understanding" checked style="cursor:pointer;"> Project Understanding <span style="color:var(--text-muted); font-size:0.7rem;">(copy below)</span></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative <button type="button" class="icon-btn" title="Edit narrative" onclick="openFixedPageEditor('narrative')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_narrative" checked style="cursor:pointer;"> Art Narrative</label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_strategy" checked style="cursor:pointer;"> Art Collection Strategy <span style="color:var(--text-muted); font-size:0.7rem;">(3 tiers below)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_moodboard" checked style="cursor:pointer;"> Layout pages <span style="color:var(--text-muted); font-size:0.7rem;">(moodboard / breaker / etc.)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_frameRec" checked style="cursor:pointer;"> Frame Recommendations <span style="color:var(--text-muted); font-size:0.7rem;">(frames used in project)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_floorplanKey" checked style="cursor:pointer;"> Floorplan Key <span style="color:var(--text-muted); font-size:0.7rem;">(plan + pins)</span></label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_spec" checked style="cursor:pointer;"> Spec Pages <span style="color:var(--text-muted); font-size:0.7rem;">(one per artworked piece)</span></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_slogan" checked style="cursor:pointer;"> Good Art. Good People. <button type="button" class="icon-btn" title="Edit Good Art Good People" onclick="openFixedPageEditor('slogan')"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
-            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts <button type="button" class="icon-btn" title="Edit contacts" onclick="openContactsEditor()"><svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button></label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_slogan" checked style="cursor:pointer;"> Good Art. Good People.</label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts</label>
         </div>
 
         <div id="specPdfProseBlock" style="display:none;">
@@ -1311,6 +1325,28 @@
         </div>
         <div style="font-size:0.65rem; color:var(--text-muted); margin-top:12px;">Larger projects take longer — this window will close when it's ready.</div>
         <button id="pdfBuildCancelBtn" class="action-btn btn-secondary" style="width:auto; height:28px; padding:0 18px; font-size:0.7rem; margin-top:14px;" onclick="_pdfRequestCancel()">Cancel</button>
+    </div>
+</div>
+
+<!-- Elevation prime progress. An elevation can only be captured IN the Elevations
+     tab, so the app has to go there and back. Doing that per page read as the UI
+     strobing between Deck Studio and a light-themed elevation for no stated reason.
+     This covers the whole screen while _elevPrimeCaptures walks the walls in one
+     batch, so the switching is hidden and named. z-index sits above the PDF overlay
+     AND the deck preview modal (100002) — a scrim with a hole in it is worse than no
+     scrim, since the hole is exactly where the flashing shows. -->
+<div id="elevPrimeOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); z-index:100004; align-items:center; justify-content:center; backdrop-filter: blur(4px);">
+    <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:10px; padding:26px 30px; width:88vw; max-width:400px; box-shadow:0 18px 40px rgba(0,0,0,0.5); text-align:center;">
+        <div style="font-size:1rem; font-weight:700; color:var(--text-strong); margin-bottom:4px;">Rendering your elevations</div>
+        <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:12px;">Each wall is drawn once, then reused on every page that shows it. This can take a minute on a big project.</div>
+        <div id="elevPrimeLabel" style="font-size:0.75rem; color:var(--text-strong); margin-bottom:8px;">Preparing…</div>
+        <div style="height:8px; border-radius:5px; background:var(--bg-input); overflow:hidden;">
+            <div id="elevPrimeBar" style="height:100%; width:0%; background:#6a6aff; border-radius:5px; transition:width 0.18s ease;"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.65rem; color:var(--text-muted);">
+            <span id="elevPrimeCount"></span><span id="elevPrimePct" style="font-variant-numeric:tabular-nums;">0%</span>
+        </div>
+        <button id="elevPrimeCancelBtn" class="action-btn btn-secondary" style="width:auto; height:28px; padding:0 18px; font-size:0.7rem; margin-top:14px;" onclick="_elevPrimeCancel()">Cancel</button>
     </div>
 </div>
 
@@ -1769,6 +1805,14 @@
                         <button id="annotDashOff" type="button" onclick="setAnnotDash(false)">SOLID</button>
                     </div>
                 </div>
+                <!-- Dash spacing. In POINTS and absolute, like the weights above:
+                     the dash used to be a multiple of the stroke width, so a light
+                     pen gave a rhythm too fine to read as dashed at all. Built by
+                     _seedAnnotWeightControls() from ELEV_DASH_PT. -->
+                <div style="display:flex; align-items:center; gap:10px;" id="annotDashSpacingRow">
+                    <span style="font-size:0.65rem; color:var(--text-muted); width:80px;" title="Length of each dash, in points. The gap follows at two thirds of it, so the whole rhythm scales together. Absolute, so changing a line weight never changes the dash.">Dash (pt)</span>
+                    <div class="unit-toggle wt-ladder" id="annotDashSpacing" style="height:26px; flex:1;"></div>
+                </div>
                 <!-- Dimension line ends. PLAIN is what FRAME has always drawn.
                      TICKS applies the architectural standard: a 45-degree oblique
                      stroke centred on every dimension/extension intersection, with
@@ -1801,6 +1845,41 @@
                         <button id="annotWeightReg" type="button" onclick="setAnnotFontWeight(400)">REGULAR</button>
                         <button id="annotWeightSemi" type="button" class="active" onclick="setAnnotFontWeight(600)">SEMIBOLD</button>
                         <button id="annotWeightBold" type="button" onclick="setAnnotFontWeight(700)">BOLD</button>
+                    </div>
+                </div>
+                <!-- WIREFRAME LETTER LABELS. Here rather than with Grid & Snap because
+                     it IS label styling: the letter follows the same font library and
+                     sits with the label size, font and weight it should look like a
+                     sibling of. The ON/OFF is project data (editorialContent.wireframe,
+                     shared with the Wireframe deck preset); the three style controls
+                     are drawing style like everything else in this panel. -->
+                <div style="border-top:1px solid var(--border-color); padding-top:12px;">
+                    <label style="display:flex; align-items:center; gap:8px; font-size:0.7rem; color:var(--text-main); cursor:pointer;" title="Present placement without committing to images: every image opening becomes a flat grey block with the frame's letter in the middle, in the editor and in every export. Pieces that already have artwork show as placeholders too while this is on.">
+                        <input type="checkbox" id="elevWireframeToggle" onchange="setElevWireframe(this.checked)" style="width:15px; height:15px; cursor:pointer;">
+                        Wireframe letter labels &amp; grey fill
+                    </label>
+                    <!-- Dimmed, not hidden, when the mode is off — the panel would
+                         jump height on every toggle. Same rule as the tick-weight row. -->
+                    <div id="elevWfStyleRows" style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:0.65rem; color:var(--text-muted); width:80px;" title="Letter height in px. Capped per frame so it can never spill outside a small opening.">Letter Size</span>
+                            <input type="range" id="annotWfSize" min="9" max="48" step="1" value="18" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
+                            <span id="annotWfSizeVal" style="font-size:0.65rem; color:var(--text-muted); width:30px; text-align:right;">18px</span>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Letter Font</span>
+                            <select id="annotWfFont" data-font-select data-font-default="serif" onchange="applyAnnotationStyleFromModal()" style="flex:1; padding:5px; font-size:0.75rem;">
+                                <!-- filled from FRAME_FONT_LIBRARY -->
+                            </select>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:0.65rem; color:var(--text-muted); width:80px;">Letter Style</span>
+                            <div class="unit-toggle" style="height:26px; flex:1;">
+                                <button id="annotWfReg" type="button" onclick="setAnnotWfStyle('regular')">REGULAR</button>
+                                <button id="annotWfBold" type="button" class="active" onclick="setAnnotWfStyle('bold')">BOLD</button>
+                                <button id="annotWfItal" type="button" onclick="setAnnotWfStyle('italic')">ITALIC</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style="display:flex; align-items:center; gap:10px; border-top:1px solid var(--border-color); padding-top:12px;">
@@ -1900,13 +1979,34 @@
              closing the panel. -->
         <div style="margin-bottom: 12px;">
             <div style="font-size:0.6rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Scale Figure</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color); display:flex; align-items:flex-start; gap:12px;">
-                <div style="flex:0 0 44px; height:72px; display:flex; align-items:flex-end; justify-content:center; background:var(--bg-main); border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
-                    <img src="Character_Lady_walk.svg" id="personShadePreview" alt="Scale figure preview" style="height:64px; width:auto; display:block;" onerror="this.style.display='none'">
+            <div style="background:var(--bg-subpanel); padding:12px; border-radius:6px; border:1px solid var(--border-color);">
+                <div style="display:flex; align-items:flex-start; gap:12px;">
+                    <div style="flex:0 0 44px; height:72px; display:flex; align-items:flex-end; justify-content:center; background:var(--bg-main); border:1px solid var(--border-color); border-radius:4px; overflow:hidden;">
+                        <img src="Character_Lady_walk.svg" id="personShadePreview" alt="Scale figure preview" style="height:64px; width:auto; display:block;" onerror="this.style.display='none'">
+                    </div>
+                    <div style="flex:1; min-width:0;">
+                        <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:6px;" title="Make the scale figure more subtle by lightening it from solid black to shades of grey.">Figure Shade</label>
+                        <div id="personShadeSwatches"></div>
+                    </div>
                 </div>
-                <div style="flex:1; min-width:0;">
-                    <label style="font-size:0.65rem; color:var(--text-muted); display:block; margin-bottom:6px;" title="Make the scale figure more subtle by lightening it from solid black to shades of grey.">Figure Shade</label>
-                    <div id="personShadeSwatches"></div>
+                <!-- Height dimension on the figure. A real dimension built from the
+                     same parts as every other one on the drawing — same line, same
+                     colour/weight/dash, same Line Ends, same chevron drag controls,
+                     with a dashed leader from the crown across to the line. -->
+                <div style="border-top:1px solid var(--border-color); margin-top:12px; padding-top:10px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <label style="display:flex; align-items:center; gap:8px; font-size:0.7rem; color:var(--text-main); cursor:pointer; flex:1;" title="Dimension the figure floor-to-crown, e.g. 72&quot;. Uses the same style as every other dimension and follows the Dual Units setting above.">
+                            <input type="checkbox" id="figureDimToggle" onchange="toggleFigureDim(this.checked)" style="width:15px; height:15px; cursor:pointer;">
+                            Show height dimension on the figure
+                        </label>
+                        <button type="button" class="icon-btn" onclick="resetFigureDimPos()" title="Put the line back down the figure's centre" style="height:26px; width:26px;">⌖</button>
+                    </div>
+                    <div style="font-size:0.58rem; color:var(--text-muted); margin-top:6px; line-height:1.4;">
+                        Floor to the top of the head, reading <b>72&quot;</b> with the metric equivalent in brackets when Dual Units is on. The number sits vertically along the line. Use the arrows to slide the line left or right of the figure — a dashed leader connects it back to the crown — or to slide the number along it.
+                    </div>
+                    <div id="figureDimHint" style="display:none; font-size:0.58rem; color:var(--text-muted); margin-top:6px; line-height:1.4;">
+                        The figure itself is hidden — turn <b>Person</b> on in Layout Guides to see the dimension.
+                    </div>
                 </div>
             </div>
         </div>

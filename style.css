@@ -42,6 +42,15 @@
     --dim-font-weight: 600;
     --dim-weight: 2px;
     --dim-line-style: dashed;
+    /* Dash rhythm. applyAnnotationStyleToCSSVars overwrites all three from the
+     * setting; these are the values it would compute for the 3pt default.
+     * They exist because an UNRESOLVED var() inside a gradient invalidates the
+     * whole background-image — the stroke then has no dash AND no fallback
+     * appearance, it is simply invisible. Every var() below is written with an
+     * inline fallback for the same reason. */
+    --dim-dash-len: 6px;
+    --dim-dash-gap: 4px;
+    --dim-dash-period: 10px;
 
     /* Legacy alias — arch dims used --arch-line for their black color.
      * Repointed to the unified --dim-color so they follow the panel. */
@@ -148,6 +157,31 @@ body:not(.light-theme) .logo-dark { display: block !important; }
 .app-content { flex: 1; display: flex; overflow: hidden; background: var(--bg-main); }
 .view-container { display: none; width: 100%; height: 100%; }
 .view-container.active { display: flex; }
+
+/* OFF-SCREEN RENDER PORTAL for elevation captures.
+ *
+ * An elevation can only be measured where it is laid out: every renderer in there
+ * reads getBoundingClientRect, and a display:none view measures 0. So capturing one
+ * used to mean switching the whole app to the Elevations tab and back, per page —
+ * the strobe, plus a full Deck Studio teardown and rebuild on each return trip.
+ *
+ * This lays the view out for real while leaving the visible view alone: rendered
+ * (so it measures correctly) but parked far off screen. position:fixed is the load-
+ * bearing part — it takes the view OUT OF FLOW, so the deck beside it keeps the full
+ * width and does not reflow while we work. Deliberately NOT visibility:hidden or
+ * opacity:0, which would either suppress layout boxes or leak into the SVG export.
+ *
+ * Ordered after .active so that if both ever land on one element, portal wins.
+ * _elevPortalOpen sets width/height inline from .app-content's real box, so the
+ * fit-to-window scale is identical to the on-screen one and the drawing cannot come
+ * out at a different size than the Elevations tab shows. */
+.view-container.elev-portal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: -25000px;
+    pointer-events: none;
+}
 
 label { display: block; font-size: 0.55rem; font-weight: bold; color: var(--text-muted); margin-bottom: 2px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 input[type="text"], input[type="number"], input[type="date"], select { width: 100%; padding: 4px 6px; border: 1px solid var(--border-color); border-radius: 4px; box-sizing: border-box; font-size: 0.75rem; height: 26px; background: var(--bg-input); color: var(--text-strong); transition: 0.2s;}
@@ -1011,8 +1045,59 @@ body.dragging-frame .frame-vis:hover {
  * dimension lives, and collided with it in mm/cm. The '60" AFF' callout carries
  * the meaning now. (There was a .hang-label rule here, plus a writing-mode
  * vertical-rl trick and an html2canvas workaround for it; all three are gone.) */
-.hang-guide { position: absolute; width: 100%; border-top: var(--dim-weight) dashed var(--dim-color); }
-.center-guide { position: absolute; height: 100%; border-left: var(--dim-weight) dashed var(--dim-color); display: flex; justify-content: center; }
+/* DASHED ANNOTATION STROKES.
+ *
+ * Painted with a repeating gradient, not `border-style: dashed`. A CSS dashed
+ * border draws at the BROWSER's dash rhythm, roughly proportional to the border
+ * width, and there is no property that asks for a different one — so a light pen
+ * gave a dash so fine it read as a solid line, and no setting could change it.
+ * That was the reported bug, visible in Illustrator and the PDF alike.
+ *
+ * currentColor rather than var(--dim-color) directly, so the group dims (which are
+ * inline-styled in their own colour) get the right dash by setting `color` — and so
+ * the SVG exporter can read one computed property to find it.
+ *
+ * The exporter has no border and no background COLOUR to find on these, so every
+ * one of them must also carry data-svg-dash. See _mkDashLine / _elevPenWeight. */
+.dim-dash-h, .dim-dash-v { color: var(--dim-color); background-color: transparent; }
+/* max(1px, …) is a SCREEN-ONLY floor, and it is what makes these visible at all.
+ *
+ * A background box is painted where it lands: at a fractional offset — which every
+ * one of these has, since positions are inches x elevScale — a 1px box straddles
+ * two device pixels and is anti-aliased to roughly half strength in each. A BORDER
+ * is not: the browser snaps it to a whole device pixel, which is why these looked
+ * crisp before they became gradients and why some of a pair then appeared to be
+ * missing entirely while the others survived. Below 1px it is worse still.
+ *
+ * The exports are unaffected: they write the true point weight from the setting
+ * (_svgStrokePx), never this. So a light pen still PRINTS light, it just stops
+ * dissolving on screen. */
+.dim-dash-h {
+    height: max(1px, var(--dim-line-w, var(--dim-weight, 2px)));
+    background-image: repeating-linear-gradient(to right, currentColor 0 var(--dim-dash-len, 6px), transparent var(--dim-dash-len, 6px) var(--dim-dash-period, 10px));
+}
+.dim-dash-v {
+    width: max(1px, var(--dim-line-w, var(--dim-weight, 2px)));
+    background-image: repeating-linear-gradient(to bottom, currentColor 0 var(--dim-dash-len, 6px), transparent var(--dim-dash-len, 6px) var(--dim-dash-period, 10px));
+}
+/* The group-dim bounding rectangle: the same rhythm on all four edges. Four
+ * one-edge gradients rather than a border, for the reason above. background-size
+ * pins each to the pen weight so the stroke sits INSIDE the box, where a
+ * border-box border used to. */
+.dim-dash-box {
+    color: var(--dim-color);
+    background-color: transparent;
+    background-image:
+        repeating-linear-gradient(to right, currentColor 0 var(--dim-dash-len, 6px), transparent var(--dim-dash-len, 6px) var(--dim-dash-period, 10px)),
+        repeating-linear-gradient(to right, currentColor 0 var(--dim-dash-len, 6px), transparent var(--dim-dash-len, 6px) var(--dim-dash-period, 10px)),
+        repeating-linear-gradient(to bottom, currentColor 0 var(--dim-dash-len, 6px), transparent var(--dim-dash-len, 6px) var(--dim-dash-period, 10px)),
+        repeating-linear-gradient(to bottom, currentColor 0 var(--dim-dash-len, 6px), transparent var(--dim-dash-len, 6px) var(--dim-dash-period, 10px));
+    background-position: left top, left bottom, left top, right top;
+    background-size: 100% max(1px, var(--dim-line-w, 2px)), 100% max(1px, var(--dim-line-w, 2px)), max(1px, var(--dim-line-w, 2px)) 100%, max(1px, var(--dim-line-w, 2px)) 100%;
+    background-repeat: no-repeat;
+}
+.hang-guide { position: absolute; width: 100%; }
+.center-guide { position: absolute; height: 100%; display: flex; justify-content: center; }
 /* 'CL' sits just INSIDE the wall's top edge and BESIDE the dashed centre line.
  * Not centred on the line and not above the wall: that is where the wall-width
  * dimension number sits, and the two collided on long walls and in mm. margin-left

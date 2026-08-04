@@ -191,10 +191,14 @@ const path = require('path');
       drawElevAll();
       const px = 3 * ELEV_PT_TO_PX;
       if (__cssVar('--dim-line-w') !== px) throw new Error('the CSS var is ' + __cssVar('--dim-line-w') + ', expected ' + px);
-      // The group box is inline-styled, so it is the one that can drift.
-      const box = Array.from(document.querySelectorAll('#group-dim-layer div')).find(d => /dashed/.test(d.style.border || ''));
+      // The group box is inline-styled, so it is the one that can drift. 16.31 moved
+      // its four dashed edges from a CSS border to gradients sized by --dim-line-w,
+      // so the weight now reaches it through the same var as everything else —
+      // which is stronger than the old inline copy, and is what this asserts.
+      const box = document.querySelector('#group-dim-layer .dim-dash-box');
       if (!box) throw new Error('no group-dim bounding box drawn');
-      if (box.style.border.indexOf(px + 'px') < 0) throw new Error('the group box is at ' + box.style.border);
+      if (box.style.border) throw new Error('the box grew an inline border again, which is a second weight source: ' + box.style.border);
+      if (box.getAttribute('data-svg-dash') !== 'box') throw new Error('the box lost its export marker, so it would vanish from the SVG and the PDF');
       const tick = document.querySelector('#group-dim-layer [data-svg-tick]');
       if (!tick) throw new Error('no group tick');
       if (tick.style.borderLeftWidth !== px + 'px') throw new Error('the group tick is at ' + tick.style.borderLeftWidth);

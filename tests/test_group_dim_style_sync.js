@@ -65,11 +65,18 @@ const path = require('path');
       if (!__box()) throw new Error('nothing rendered into #group-dim-layer');
     });
 
+    // 16.31: the box's four dashed edges are a repeating gradient painted in
+    // currentColor, not a CSS dashed border, so the rhythm can follow the Dash
+    // spacing setting (a border's rhythm is the browser's and cannot be asked for).
+    // Its colour therefore lives in the color property and its weight comes from
+    // --dim-line-w like every other stroke. Same properties, read where they now are.
+    const __boxInk = () => __box().style.color;
+
     __check('the box follows a colour change, like every other dimension', () => {
       setAnnotDimEnds('none'); __setColor('#e00000'); __seed();
-      if (!/224, 0, 0/.test(__box().style.border)) throw new Error('box did not start red: ' + __box().style.border);
+      if (!/224, 0, 0/.test(__boxInk())) throw new Error('box did not start red: ' + __boxInk());
       __setColor('#000000');
-      if (!/0, 0, 0/.test(__box().style.border)) throw new Error('box did not follow the colour change: ' + __box().style.border);
+      if (!/0, 0, 0/.test(__boxInk())) throw new Error('box did not follow the colour change: ' + __boxInk());
     });
 
     __check('EXACT BUG: a stale per-box style from an older save cannot hold the old colour', () => {
@@ -82,10 +89,12 @@ const path = require('path');
       restored[0].groupDims[0].style = { color: '#e00000', weight: 6, dash: false, fontSize: 22 };
       elevations = restored; elevFrames = elevations[0].frames;
       drawElevAll();
-      const b = __box().style.border;
+      const b = __boxInk();
       if (/224, 0, 0/.test(b)) throw new Error('THE BUG: the box is red again while annotationStyle is black -> ' + b);
       if (!/0, 0, 0/.test(b)) throw new Error('expected black, got ' + b);
-      if (/6px/.test(b)) throw new Error('the stale snapshot weight was used too: ' + b);
+      // The stale snapshot's weight can't reach it either: the stroke is sized from
+      // --dim-line-w, which only applyAnnotationStyleToCSSVars writes.
+      if (/\\d/.test(__box().style.borderWidth || '')) throw new Error('the box grew an inline border width again: ' + __box().style.borderWidth);
     });
 
     __check('no group-dim style snapshot is written any more, and none is read', () => {
@@ -106,10 +115,15 @@ const path = require('path');
       // so setting annotationStyle directly would just be overwritten.
       // The px slider became a points ladder in 16.25; setAnnotLineWeightPt is its
       // real handler and it calls applyAnnotationStyleFromModal itself.
+      const __lineVar = () => document.documentElement.style.getPropertyValue('--dim-line-w');
       setAnnotLineWeightPt(3);   // 3pt = 6px on screen (ELEV_PT_TO_PX)
-      if (!/6px/.test(__box().style.border)) throw new Error('weight did not reach the box: ' + __box().style.border);
+      // The box is sized from --dim-line-w now, the same var the CSS-driven dims
+      // use, so "the weight reaches the box" is the var moving plus the box being
+      // one of the strokes that reads it.
+      if (__lineVar() !== '6px') throw new Error('weight did not reach the shared var: ' + __lineVar());
+      if (!__box().classList.contains('dim-dash-box')) throw new Error('the box is not painted from the shared var: ' + __box().className);
       setAnnotLineWeightPt(1);
-      if (!/2px/.test(__box().style.border)) throw new Error('did not go back: ' + __box().style.border);
+      if (__lineVar() !== '2px') throw new Error('did not go back: ' + __lineVar());
       const fIn = document.getElementById('annotFontSize');
       fIn.value = '19'; applyAnnotationStyleFromModal();
       const lbl = Array.from(document.querySelectorAll('#group-dim-layer div')).find(d => /\\d/.test(d.textContent || ''));
@@ -125,9 +139,9 @@ const path = require('path');
       // had merely broken.
       setAnnotDimEnds('none'); __seed();
       setAnnotDash(false);
-      if (!/dashed/.test(__box().style.border)) throw new Error('the group bounding box should stay dashed: ' + __box().style.border);
+      if (!__box().classList.contains('dim-dash-box')) throw new Error('the group bounding box should stay dashed: ' + __box().className);
       setAnnotDash(true);
-      if (!/dashed/.test(__box().style.border)) throw new Error('still expected dashed: ' + __box().style.border);
+      if (!__box().classList.contains('dim-dash-box')) throw new Error('still expected dashed: ' + __box().className);
       const i = S.indexOf('function renderGroupDims');
       const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));
       if (/const dashCss/.test(body)) throw new Error('the unused dashCss is back, which implies a setting that is not honoured');
@@ -192,8 +206,11 @@ const path = require('path');
       if (body.indexOf('_dimExtOverhang()') < 0) throw new Error('the group box never asks for the overhang');
       // Rendered: the width line's extensions must start above the dim line.
       setAnnotDimEnds('tick'); __seed();
-      const dashed = Array.from(document.querySelectorAll('#group-dim-layer div')).filter(d => /dashed/.test(d.style.border || d.style.borderLeft || d.style.borderTop || ''));
+      // Gradient dashes since 16.31, so the marker/class is what identifies one.
+      // The bounding box is excluded — it is dashed too but it isn't an extension.
+      const dashed = Array.from(document.querySelectorAll('#group-dim-layer [data-svg-dash="1"]'));
       if (!dashed.length) throw new Error('no dashed extension lines found');
+      if (!dashed.every(d => d.classList.contains('dim-dash-h') || d.classList.contains('dim-dash-v'))) throw new Error('an extension line is marked for export but not actually painted as a dash');
       setAnnotDimEnds('none');
     });
   `;

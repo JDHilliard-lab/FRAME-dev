@@ -53,10 +53,18 @@ const path = require('path');
 
     // ── 1. The lag ──
     __check('EXACT BUG: the capture key no longer moves on an unrelated edit', () => {
-      const i = S.indexOf('const capKey =');
-      const line = S.slice(i, S.indexOf(';', i));
-      if (/_dsEditGen/.test(line)) throw new Error('THE BUG: the capture key still keys off the global edit counter, so any edit anywhere forces a recapture');
-      if (!/_elevCapGen/.test(line)) throw new Error('the capture key does not use the elevation generation: ' + line);
+      // 16.27 moved this out of _drawInstallGuidePage into _igCapKey so the prime
+      // pass can fill the cache under the keys the renderer will ask for. Same
+      // string, one definition — so the check follows it there rather than reading
+      // the (now one-line) call site.
+      const i = S.indexOf('function _igCapKey(');
+      if (i < 0) throw new Error('_igCapKey is gone — the key has no single definition again');
+      const body = S.slice(i, S.indexOf('}', i));
+      if (/_dsEditGen/.test(body)) throw new Error('THE BUG: the capture key still keys off the global edit counter, so any edit anywhere forces a recapture');
+      if (!/_elevCapGen/.test(body)) throw new Error('the capture key does not use the elevation generation: ' + body);
+      // And the renderer must actually use it, or there are two keys again.
+      const call = S.indexOf('const capKey = _igCapKey(');
+      if (call < 0) throw new Error('_drawInstallGuidePage builds its own key instead of calling _igCapKey');
     });
 
     __check('EXACT BUG: ticking an installation note does not invalidate the captures', () => {
@@ -158,7 +166,12 @@ const path = require('path');
       if (typeof _igBeginRender !== 'function' || typeof _igRenderWasComplete !== 'function') throw new Error('the begin/read helpers are missing');
       // The placeholder branch must set the flag. Its condition widened from
       // "not cap AND suppressed" to just "not cap" — see the next check for why.
-      const i = S.indexOf('            if (!cap) {');
+      // Anchored INSIDE _drawInstallGuidePage (like the next check already is): the
+      // bare indented string matched the retry in _elevPrimeCaptures once that
+      // existed, and searched from the top of the file it hit that first.
+      const fn = S.indexOf('async function _drawInstallGuidePage');
+      if (fn < 0) throw new Error('_drawInstallGuidePage is gone');
+      const i = S.indexOf('            if (!cap) {', fn);
       if (i < 0) throw new Error('the placeholder branch is gone');
       const branch = S.slice(i, i + 2600);
       if (branch.indexOf('_igCaptureDeferred = true') < 0) throw new Error('THE BUG: the placeholder branch does not flag the page as incomplete');
@@ -257,7 +270,11 @@ const path = require('path');
       const body = S.slice(i, S.indexOf('PDF build progress overlay', i));
       if (body.indexOf('_igNoCapture = false') < 0) throw new Error('THE BUG: the export does not force captures on, so a busy rail silently blanks every breaker page');
       if (body.indexOf('const _prevNoCap = _igNoCapture;') < 0) throw new Error('the previous value is not saved');
-      if (body.indexOf('_igNoCapture = _prevNoCap;') < 0) throw new Error('the flag is never restored, so the app is left able to steal the view');
+      // Restored, but ANDed with the live _thumbBusy since 16.32. The snapshot is
+      // read while a thumbnail job may still be in flight, and that job's finish()
+      // clears the flag on its way out — putting a stale TRUE back strands it and
+      // nothing may ever capture again. Restoring the snapshot ALONE is the bug now.
+      if (body.indexOf('_igNoCapture = _prevNoCap && _thumbBusy;') < 0) throw new Error('the flag is not restored from the live state, so a stale snapshot can strand it forced OFF');
     });
 
     __check('the background thumbnail queue is stopped first, so nothing competes for the view', () => {
@@ -278,7 +295,7 @@ const path = require('path');
       const i = S.indexOf('async function exportSpecPagePDF');
       const body = S.slice(i, S.indexOf('PDF build progress overlay', i));
       const fin = body.lastIndexOf('finally');
-      const restore = body.lastIndexOf('_igNoCapture = _prevNoCap;');
+      const restore = body.lastIndexOf('_igNoCapture = _prevNoCap');
       if (fin < 0) throw new Error('no finally block');
       if (!(restore > fin)) throw new Error('the flag is restored outside the finally — a cancelled export would leave captures forced on');
     });

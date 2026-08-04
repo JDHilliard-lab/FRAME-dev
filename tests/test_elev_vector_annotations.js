@@ -192,9 +192,18 @@ const path = require('path');
       // coordinate spaces and the ops drift off the picture.
       const shared = body.split('picSvg: head').length - 1 + (body.split('annSvg: head').length - 1);
       if (shared !== 2) throw new Error('the two sub-SVGs do not share one artboard header (' + shared + ' of 2 use it)');
+      // 16.29 moved the header into _elevSvgHead so the download and the PDF path
+      // can't drift, and so it can declare a real-world size in points. The viewBox
+      // requirement follows it there.
+      if (body.indexOf('_elevSvgHead(svgW, svgH)') < 0) throw new Error('the shared header is not built by _elevSvgHead');
+      const h = S.indexOf('function _elevSvgHead');
+      const hb = S.slice(h, S.indexOf('\\n}', h));
       // (Written without the template marker so this file's own template literal
       // doesn't try to interpolate it.)
-      if (body.indexOf('viewBox="0 0 ' + '$' + '{svgW') < 0) throw new Error('the shared header has no viewBox, so the halves would not scale together');
+      if (hb.indexOf('viewBox="0 0 ' + '$' + '{svgW') < 0) throw new Error('the shared header has no viewBox, so the halves would not scale together');
+      // The viewBox stays in USER UNITS while width/height state points. Put a unit
+      // on the viewBox and every coordinate in both halves silently rescales.
+      if (/viewBox="0 0 [^"]*ELEV_PT_TO_PX/.test(hb)) throw new Error('the viewBox was converted to points; the geometry would no longer match the ops');
     });
 
     __check('both elevation layouts replay the ops over their image', () => {

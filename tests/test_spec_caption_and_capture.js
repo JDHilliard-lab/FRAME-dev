@@ -189,7 +189,12 @@ const path = require('path');
       if (body.indexOf('const specTop = py(tpl.spec.y)') < 0) throw new Error('THE BUG: nothing clamps the artwork to the spec text top');
       if (!/boxH -= \\(specTop - boxY\\)/.test(body)) throw new Error('the box should LOSE the height it gives up, or the artwork spills past its bottom');
       // The clamp must not apply on an artwork-only page, which has no spec text.
-      if (body.indexOf('tpl.spec && !_specArtOnly(r.id)') < 0) throw new Error('the clamp should be skipped when there is no spec block to clamp to');
+      // 16.38: the inline _specArtOnly(r.id) became a resolved local, so the
+      // template-card renders can override it (a demo card must always show its
+      // spec block, whatever flag a real piece with the same item code carries).
+      // Same gate, read once — so check the local AND that it comes from the flag.
+      if (body.indexOf('tpl.spec && !_artOnly') < 0) throw new Error('the clamp should be skipped when there is no spec block to clamp to');
+      if (body.indexOf('_artOnly = SWATCH ? false : _specArtOnly(r.id)') < 0) throw new Error('_artOnly no longer derives from the page\\'s artwork-only flag');
     });
 
     __check('the templates this actually affects are the ones that put artwork above the spec', () => {
