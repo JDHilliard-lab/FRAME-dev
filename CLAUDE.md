@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-104 files, 1081 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+105 files, 1095 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -210,6 +210,27 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   identical, and it's still what shows if a render fails. The as-hung branch is driven
   by `SPEC_TPL_DEMO_SALON` so it can't drift from the render, and it corrects by the
   card's 936:540 aspect — a uniform scale in fraction space squashes a square frame.
+  `_dsPrewarmTplSwatches()` fills the whole set in the background so the picker opens
+  finished instead of rendering seven cards while you watch. It is triggered from
+  **`switchView`'s deck branch, NOT the boot tail** — seven real page renders from boot
+  means every load pays for a panel that may never open, and so does every one of the
+  100+ test harnesses (measured ~4.5s per file, roughly tripling the suite). It yields
+  while `_thumbBusy` / `_elevPrimeActive`, with a bounded retry so a busy deck doesn't
+  tick all session. `_dsRepwarmTplSwatches()` rebuilds after a unit or dual-unit change,
+  which re-keys every entry.
+  **Not persisted to localStorage**, deliberately: `performAutosave` puts the entire
+  project — every artwork data URL — in there under one key and fails *silently* on
+  quota, so cosmetic card images must not share that budget. Re-evaluate only if
+  autosave moves to IndexedDB (a test pins that it hasn't).
+  `_dsTplSwatchFonts()` is ONE memoized font wait for the session. The type is baked
+  into a cache locked for the session, so a card rendered before the brand faces land
+  keeps its Arial fallbacks all session — and prewarming made that the normal case.
+  Memoized because seven cards each doing two waits is fourteen pending timers.
+- **`_withTimeout` clears its fallback timer.** It used to leave the `setTimeout`
+  pending, so every call sat on the event loop for its full timeout even when the
+  promise resolved immediately. Invisible for one page render; with the template-card
+  prewarm it held the loop ~7s past boot and node wouldn't exit for ten seconds. The
+  race result is unchanged — only the dangling timer goes.
   The card box is `aspect-ratio: 936/540`, the same declaration the rail's page
   thumbnails use. Its height was a px figure derived from a **nominal** 150px card,
   so a narrower grid column left it 87 tall and squeezed the page into a square —
