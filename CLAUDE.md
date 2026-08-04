@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-103 files, 1073 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+104 files, 1081 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -198,6 +198,18 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   the swatch sentinel.
   `_dsTplSwatchKey` is keyed on **template + unit only** — the row id used to be in
   it, so every page you clicked re-rendered all four cards.
+  **`_dsPaintTplSwatch` must NOT gate on `isConnected`.** The cards queue their thumb
+  div while it is still detached (the grid is appended several lines later), so a
+  cache HIT — which paints synchronously — was dropped every time and the card kept
+  its instant diagram. A cache MISS goes down the async pump and works, so it read as
+  "the demos show when I first open the tool and vanish once I toggle Per piece /
+  Group A/B/C": cold cache vs warm. Keying on template + unit turned a latent bug
+  into a constant one. Writing innerHTML on a detached node is cheap and correct.
+  `_dsTemplateSwatchHTML` gives each group arrangement its **own** blocking; one
+  generic diagram for all four (differing only in a caption) is what made them look
+  identical, and it's still what shows if a render fails. The as-hung branch is driven
+  by `SPEC_TPL_DEMO_SALON` so it can't drift from the render, and it corrects by the
+  card's 936:540 aspect — a uniform scale in fraction space squashes a square frame.
   The card box is `aspect-ratio: 936/540`, the same declaration the rail's page
   thumbnails use. Its height was a px figure derived from a **nominal** 150px card,
   so a narrower grid column left it 87 tall and squeezed the page into a square —
