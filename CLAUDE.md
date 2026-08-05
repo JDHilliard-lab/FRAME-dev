@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-109 files, 1202 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+110 files, 1211 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -230,6 +230,26 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   Print Output, Print Panels (in)` CSV columns are **appended at the very end** because
   the InDesign script addresses columns by name. `_flatGraphicElevFor()` is the ONE
   definition of "which wall is this graphic on", shared by the schedule and the capture.
+- **THERE ARE TWO PAGE-LIST BUILDERS AND THEY DRIFT.** `_deckPageList` drives Deck
+  Studio; the PDF export's `_stepsFor` mirrors it **by hand**, and its own comment used
+  to say "Mirrors `_deckPageList`". That comment is not a mechanism. Any rule about
+  *which pages exist* has to be a **shared function called by both**, or the PDF grows
+  pages the preview never showed — which is the worst kind of bug here, because the
+  preview is how the deck gets checked.
+  Two clauses had already drifted this way, both found from one report ("the EGD is
+  getting a breaker page in the PDF even though it is not showing in Deck Studio"):
+  `_breakerSkipUnit(members)` (a wall that is *entirely* flat graphics skips its
+  breaker — its own sheet already carries the full dimensioned elevation, so a breaker
+  is the same drawing twice) and `_partitionFlatMembers(members)` (in Group A/B/C a
+  flat graphic comes **out** of its group onto its own sheet). The export had neither,
+  so it printed a phantom breaker *and* drew a grouped wallcovering as a set member.
+  `_partitionFlatMembers` returns only the **partition**, not a page shape, because the
+  two builders emit genuinely different things (a page descriptor vs a render step) —
+  forcing one shape on both is what makes the next caller write its own copy again.
+  In the export, a split-out flat page **must carry `_forceTpl: 'egdDetail'`**: the
+  dispatch tests `!step._forceTpl && (_specIsGroup || _manual)` *first*, so without it
+  the page falls straight back into the set renderer the split exists to avoid.
+  Per-piece mode needs no split — it already resolves each row's own template.
 - **EGD wall mode** (`elev.egdWall`, `_isEgdWall`, `toggleEgdWall`) is **per elevation**,
   unlike every other button in that guides row — easy to add to the wrong list.
   Anything flat on such a wall is filled to it and pinned inside it above the baseboard

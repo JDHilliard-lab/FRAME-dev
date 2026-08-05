@@ -167,7 +167,13 @@ const fs = require('fs');
       const gate = s.match(/const _useBreakers = _elevBreakers\\(\\)[^;]*;/g) || [];
       if (gate.length !== 2) throw new Error('expected 2 _useBreakers gates (studio + export), found ' + gate.length);
       gate.forEach(g => { if (/_specIsGroup|isGroupSpec/.test(g)) throw new Error('a _useBreakers gate still excludes group mode: ' + g); });
-      if (!/if \\(_specIsGroup\\) out\\.push\\(\\{ type: 'spec', unit: u, li: li \\}\\);/.test(s)) throw new Error('the export breaker step does not emit the single grouped spec page');
+      // ONE grouped spec page after the breaker, not a page per member. 16.53 routed
+      // this through _specStepsFor so a flat graphic can be split onto its own sheet
+      // (the export used to draw a wallcovering as a set member), but the grouped
+      // case must still collapse to the single unit — which is what _specStepsFor
+      // returns when nothing in the group is flat.
+      if (!/if \\(_specIsGroup\\) out\\.push\\.apply\\(out, _specStepsFor\\(u, li\\)\\);/.test(s)) throw new Error('the export breaker step does not emit the single grouped spec page');
+      if (!/return \\[\\{ type: 'spec', unit: u, li: li \\}\\];/.test(s)) throw new Error('_specStepsFor no longer falls back to the single grouped unit');
     });
 
     // ── 3. "Make sure ALL pages end up getting a footer" ──

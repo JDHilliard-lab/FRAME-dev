@@ -578,8 +578,13 @@ const path = require('path');
       // Framed leftovers must keep their group page, or a mixed set loses pieces.
       if (body.indexOf('if (rest.length) out.push(specUnit(') < 0) throw new Error('framed members left in the group are dropped');
       // And it must return null when there is nothing flat, so the common path is
-      // untouched rather than rebuilt through a second code path.
-      if (body.indexOf('if (!flats.length) return null;') < 0) throw new Error('it does not short-circuit for an all-framed group');
+      // untouched rather than rebuilt through a second code path. 16.53 moved the
+      // filtering itself into the shared _partitionFlatMembers (the PDF export needed
+      // the same decision), so the short-circuit is now pinned on BEHAVIOUR rather
+      // than on the shape of a line that no longer lives here.
+      if (body.indexOf('if (!part) return null;') < 0) throw new Error('it does not short-circuit for an all-framed group');
+      if (_partitionFlatMembers([{ id: 'A', product: 'Framed Art' }])) throw new Error('an all-framed group must not split');
+      if (!_partitionFlatMembers([{ id: 'E', product: 'Wallcovering (EGD)' }])) throw new Error('a flat member must split');
       // Wired into BOTH page paths — with breakers and without.
       const bp = S.indexOf('const _breakerPages = (u) =>');
       if (S.slice(bp, bp + 2600).indexOf('_splitFlatUnits(u)') < 0) throw new Error('the breaker path does not split');
@@ -688,8 +693,15 @@ const path = require('path');
       // The page builder must consult it, and only for walls that are ENTIRELY flat.
       const i = S.indexOf('const _breakerPages = (u) =>');
       const body = S.slice(i, i + 2200);
-      if (body.indexOf('_breakerSkipFlat()') < 0) throw new Error('the breaker builder ignores the setting');
-      if (body.indexOf('every(m => m && _isFlatGraphic(m.product))') < 0) {
+      // 16.53 moved this clause into the shared _breakerSkipUnit, because the PDF
+      // export's hand-mirrored page-list builder never had it and printed a breaker
+      // the studio didn't show. So the "every member" rule is now pinned as
+      // behaviour, where it holds for both builders, rather than as a source string
+      // in one of them.
+      if (body.indexOf('_breakerSkipUnit(') < 0) throw new Error('the breaker builder ignores the setting');
+      const _fl = { id: 'E', product: 'Wallcovering (EGD)' }, _fa = { id: 'A', product: 'Framed Art' };
+      if (!_breakerSkipUnit([_fl, _fl])) throw new Error('an all-flat wall should skip its breaker');
+      if (_breakerSkipUnit([_fl, _fa])) {
         throw new Error('it must be EVERY member, or a wall with one wallcovering among framed pieces loses its breaker');
       }
       // And the spec page after the breaker is still emitted either way.
