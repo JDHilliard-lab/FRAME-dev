@@ -547,11 +547,65 @@ const path = require('path');
       editorialContent.specTemplateOverrides = { 'EGD-6': 'frameSpecDetail' };
       if (_specTplResolve('EGD-6') !== 'egdDetail') throw new Error('an override overrode the only valid layout');
       editorialContent.specTemplateOverrides = {};
-      // A group template still wins, because it changes the page count.
+      // 16.49: this used to assert the GROUP template won, on the reasoning that it
+      // changes the page count. That reasoning was about count and ignored the
+      // consequence — in Group A/B/C mode a wallcovering went through
+      // _drawSpecSetPageBody and drew as a set member: a letter, a frame mockup of a
+      // 240" wall, and unstyled spec text with no leaders. A correct page count with a
+      // broken page on it is not the better trade, so the layout wins and
+      // _splitFlatUnits keeps the count right instead.
       editorialContent.specTemplate = 'setRight';
-      if (_specTplResolve('EGD-6') !== 'setRight') throw new Error('the group template stopped winning');
+      if (_specTplResolve('EGD-6') !== 'egdDetail') throw new Error('THE BUG: a group template hijacked a wallcovering, got ' + _specTplResolve('EGD-6'));
+      // Framed pieces are untouched — they still get the group layout.
+      if (_specTplResolve('ART.001') !== 'setRight') throw new Error('the group template stopped applying to framed art');
       editorialContent.specTemplate = 'frameRight';
       dashProjectData = saved;
+    });
+
+    __check('EXACT BUG: in Group A/B/C a wallcovering is split onto its own sheet', () => {
+      // The grouping happens by art-group before anything knows about products, so a
+      // wallcovering could be swept into a set with framed pieces.
+      const i = S.indexOf('const _splitFlatUnits = (u) =>');
+      if (i < 0) throw new Error('nothing splits flat graphics out of group units');
+      const body = S.slice(i, i + 1600);
+      if (body.indexOf("_specTpl: 'egdDetail'") < 0) throw new Error('the split sheets do not use the flat layout');
+      // Framed leftovers must keep their group page, or a mixed set loses pieces.
+      if (body.indexOf('if (rest.length) out.push(specUnit(') < 0) throw new Error('framed members left in the group are dropped');
+      // And it must return null when there is nothing flat, so the common path is
+      // untouched rather than rebuilt through a second code path.
+      if (body.indexOf('if (!flats.length) return null;') < 0) throw new Error('it does not short-circuit for an all-framed group');
+      // Wired into BOTH page paths — with breakers and without.
+      const bp = S.indexOf('const _breakerPages = (u) =>');
+      if (S.slice(bp, bp + 2600).indexOf('_splitFlatUnits(u)') < 0) throw new Error('the breaker path does not split');
+      const sp = S.indexOf('const specPagesFor = (u) =>');
+      if (S.slice(sp, sp + 900).indexOf('_splitFlatUnits(u)') < 0) throw new Error('the non-breaker path does not split');
+    });
+
+    __check('and the split produces one flat sheet per graphic, end to end', () => {
+      dashUnit = 'in';
+      const saved = dashProjectData, savedEl = elevations;
+      // One group: two framed pieces and a wallcovering, the mixed case.
+      dashProjectData = [
+        base({ id: 'ART.500-A' }), base({ id: 'ART.500-B' }),
+        egd({ id: 'ART.500-C' })
+      ];
+      elevations = [{ name: 'W', wallW: 240, wallH: 108, frames: [], personPos: { x: -60 } }];
+      editorialContent.specTemplate = 'setRight';
+      editorialContent.elevBreakers = false;
+      editorialContent.manualGroups = [];
+      const pages = _deckPageList().filter(p => p && p.kind === 'spec' && !p._install);
+      const flat = pages.filter(p => p._specTpl === 'egdDetail');
+      if (flat.length !== 1) throw new Error('expected exactly one flat sheet, got ' + flat.length);
+      if (flat[0].row.id !== 'ART.500-C') throw new Error('the flat sheet is for the wrong piece: ' + flat[0].row.id);
+      if (flat[0].members.length !== 1) throw new Error('the flat sheet carries other members');
+      // The framed pair still gets a group page, and the wallcovering is not on it.
+      const grp = pages.filter(p => p._specTpl === 'setRight');
+      if (!grp.length) throw new Error('the framed members lost their group page');
+      grp.forEach(p => {
+        if ((p.members || []).some(m => _isFlatGraphic(m.product))) throw new Error('a wallcovering is still a member of the group page');
+      });
+      editorialContent.specTemplate = 'frameRight';
+      dashProjectData = saved; elevations = savedEl;
     });
 
     __check('and it is not offered in the picker, since it cannot be chosen or unchosen', () => {
@@ -818,6 +872,50 @@ const path = require('path');
       if (body.indexOf('const elevTop = titleY + 26;') < 0) throw new Error('the top edge is not tied to the title baseline');
       // And the caption still has room on the page.
       if (body.indexOf('const elevBottom = SR.B - _elevCapH;') < 0) throw new Error('no room reserved for the caption, so it would print below the bottom guide');
+    });
+
+    __check('EXACT BUG: an EGD wall draws wall dims only, not the hanging set-out', () => {
+      // Reported: "when I put on the guide layout for framed artwork I can see it in
+      // the wallcovering elevation which I do not need... I really only need wall dims
+      // for wallcovering. But when I toggle guide for center and hanging height it
+      // applies to all."
+      //
+      // The CL, hang line, AFF callout and wall-centre target are the SET-OUT for
+      // hanging a picture. On a wallcovering — fitted to the wall itself, with nothing
+      // hung on it — they print over the graphic. Unticking the deck-wide toggles is
+      // not the fix: those are shared, so it would strip them from every framed-art
+      // wall in the same deck.
+      const i = S.indexOf('function drawElevGuides');
+      const body = S.slice(i, i + 6000);
+      const guard = body.indexOf('if (_isEgdWall(elevations[currentElevIndex])) {');
+      if (guard < 0) throw new Error('THE BUG: drawElevGuides does not special-case an EGD wall');
+      // It must return BEFORE any of the set-out guides are built.
+      ['center-guide', 'hang-guide', '_elevCenterTarget(', 'floor-hang-dim'].forEach(frag => {
+        const at = body.indexOf(frag);
+        if (at < 0) throw new Error('the set-out guide ' + frag + ' vanished entirely');
+        if (at < guard) throw new Error(frag + ' is built before the EGD guard, so it still draws on a wallcovering');
+      });
+      // Wall dims survive — the whole point of the sheet — via ONE shared definition,
+      // so the EGD path can't drift from the framed one on offset, label or rotation.
+      if (body.slice(guard, guard + 400).indexOf('_drawElevWallDims(') < 0) throw new Error('an EGD wall lost its wall dimensions');
+      const d = S.indexOf('function _drawElevWallDims');
+      if (d < 0) throw new Error('the wall dims were duplicated rather than shared');
+      if ((S.match(/_drawElevWallDims\\(/g) || []).length < 3) throw new Error('only one path calls the shared wall dims');
+    });
+
+    __check('and per-frame spacing / edge-gap dims still work on an EGD wall', () => {
+      // Framed art can legitimately sit over a wallcovering (that is what the layering
+      // is for), and those dims only exist where the user asked for them frame by
+      // frame — so they are not part of the automatic set-out being suppressed.
+      const i = S.indexOf('function drawElevAll');
+      const body = S.slice(i, i + 40000);
+      ['drawElevTargetedSpacing()', 'drawFloorCeilingDims()'].forEach(call => {
+        const at = body.indexOf(call);
+        if (at < 0) throw new Error(call + ' is gone');
+        // Must not have been wrapped in an EGD guard.
+        const before = body.slice(Math.max(0, at - 220), at);
+        if (/_isEgdWall\\s*\\([^)]*\\)\\s*\\)\\s*\\{[^}]*$/.test(before)) throw new Error(call + ' was suppressed on EGD walls');
+      });
     });
 
     __check('the help copy tells the truth about the option count', () => {

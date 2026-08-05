@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-106 files, 1145 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+107 files, 1160 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -133,6 +133,83 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   caller), so copying it verbatim gives an invisible graphic on the wall and no
   wireframe block; and the flat branch must sit **before** it, or the frame geometry
   below runs first.
+  Their bleed is `FLAT_GRAPHIC_BLEED_IN` = **2"**, seeded on product change but never
+  over a value the user typed. `FLAT_GRAPHIC_APPLICATION` is both the Application row's
+  text and the substrate seeded into the form — on a flat sheet Application **is** the
+  material ("Vinyl Wallcovering"), which is why there's no separate Material row.
+- **The flat-graphic sheet is `egdDetail`, and it is RESOLVED, not chosen.**
+  `_specTplResolve` returns it for any flat-graphic row **ahead of everything, including
+  the group template**. It was first placed *behind* the group check, on the reasoning
+  that a group template changes page count and must win — that reasoning was about count
+  and ignored the consequence: in Group A/B/C mode a wallcovering went through
+  `_drawSpecSetPageBody` and drew as a set member, with a letter, a frame mockup of a
+  240" wall and unstyled spec text. A correct page count with a broken page on it is not
+  the better trade. `_splitFlatUnits` in `_deckPageList` keeps the count right instead:
+  it pulls flat graphics out of group units onto their own sheets and leaves any framed
+  members their group page (same key, so per-page settings and approval stay attached).
+  It returns null when nothing is flat, so the common path is untouched. A **manual**
+  group is deliberately left alone — that grouping is the user's explicit instruction. It's excluded
+  from the picker grid by `!SPEC_TEMPLATES[k].flat` for the same reason. `flat: true` is
+  the marker; it also carries `custom: true` (no coordinate map), so its branch must sit
+  **before** the generic template branch in both dispatchers or it renders as a
+  frameRight fallback with a frame mockup on it.
+  The sheet is Application + Art Type + Overall Dimensions only. **Image Size and Mount
+  are computed but not printed** — the 2" bleed is production data, and putting 169.375"
+  on a client sheet invites ordering that much wall. Both still reach the CSV.
+  Layout: title + spec top-left, floorplan bottom-left, elevation anchored
+  **bottom-right** and scaled up. Its left edge is `M + colW + gutter`, derived from the
+  same `colW` the spec rows use, so widening that column moves the drawing instead of
+  sliding it under the text; its top clears the title band so a long heading can't
+  overlap it.
+  **`_captureElevWithGuides` SPLITS its output** and this sheet shipped without
+  dimensions because of it: `cap.dataUrl` is picSvg (frames, artwork, figure) while
+  `cap.vec` is annSvg — wall dims, character dim, AFF callout, **baseboard** — which has
+  to be replayed with `_drawElevAnnOps(doc, cap.vec, <same rect as the image>)`. Draw
+  only the image and you get a measured wall with no measurements, and `_drawElevAnnOps`
+  is wrapped in try/catch so a wrong rect fails **silently**.
+  `_igElevCapture(elevIdx)` is the ONE cache/retry/suppressor path, shared by this sheet
+  and `_drawInstallGuidePage`. Don't call `_captureElevWithGuides` from a page renderer.
+- **EGD wall mode** (`elev.egdWall`, `_isEgdWall`, `toggleEgdWall`) is **per elevation**,
+  unlike every other button in that guides row — easy to add to the wrong list.
+  Anything flat on such a wall is filled to it and pinned inside it above the baseboard
+  by `_clampFlatToWall`, called on drag **and** on redraw, and **after** the snap,
+  because the wall edges are themselves snap targets. A mode rather than unconditional:
+  WF-3 is `TBD × 14"H` and WF-4/WF-5 are privacy bands, none of which fill a wall.
+  **Flat graphics render behind framed art unconditionally** — `drawElevAll` sorts them
+  to the front of `_drawOrder` while preserving original indices, because
+  `makeElevDraggable` and every dim lookup address frames by their index in
+  `elevFrames`. That's why no "wallcovering + artwork" mode is needed.
+- **`_elevArtImgCache` keeps decoded artwork nodes alive across redraws.** `drawElevAll`
+  wipes `#frame-layer` and runs on EVERY mousemove of a drag, so rebuilding
+  `<img src="data:…">` each pass re-decoded every artwork ~60×/sec. A 24" print hid it;
+  a full-wall wallcovering did not — that was the reported stutter. Keyed on **letter +
+  source length + last 32 chars**: letter alone shows the previous image after a swap,
+  source alone lets two frames sharing an image steal the node from each other (a second
+  `appendChild` *moves* it), and the whole data URL in the key is megabytes of string
+  work per frame per redraw. Swept per pass, with a guard so a redraw that drew nothing
+  isn't read as "all stale".
+- **`_spacingLabel(v)` is the one label source for spacing + edge-gap dims**, so
+  `dimVisibility.spacingEQ` (print `EQ` instead of the number, the drafting convention
+  for equally spaced) can't reach some of the six call sites and not others. An explicit
+  toggle, never an automatic "are these equal?" test — EQ is a statement of intent.
+- **The drafting standard travels in the project file.** `annotationStyle` and
+  `elevDualUnit` are localStorage (per-machine drafting prefs) AND optional top-level
+  project keys. Absent means the file predates the idea, so local settings stand —
+  loading an old project must not wipe them. Present means **merge** onto the live
+  `annotationStyle` (every renderer holds a reference, and a file missing a newer field
+  would otherwise leave it undefined), then `_normalizeAnnotationStyle()` +
+  `applyAnnotationStyleToCSSVars()` + `saveAnnotationStyle()`. Never trust
+  `fontFamily` from the file — it's derived.
+- **"New elevation for this graphic"** is an option in the *Push to Wall* selector, NOT
+  a side effect of the product dropdown. `loadDashDataIntoControls` calls
+  `handleDashProductChange` on every row **selection**, so auto-creating there would
+  spawn one wall per flat row every time you clicked through a loaded project, orphan a
+  wall whenever you switched product and back, and drift `qty` (which
+  `recalculateDashboardQuantities` derives from frame counts). The new wall is sized
+  graphic-width × (graphic-height **+ baseboard**), since the graphic sits above the
+  baseboard and a wall exactly its height would make fit-to-wall shrink the piece.
+  A `<select>` silently ignores a value with no matching option, so the index comes from
+  a local, not from re-reading the DOM.
 - **`_rowOpeningAndPrint(row)` is the single definition of opening + print-file size.**
   It was copy-pasted into FIVE places — `updateTableRowCalcs`,
   `updateDashVisualsFromDOM`, `renderDashTable`, `buildDashCSVString` and

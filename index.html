@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=16.47">
+    <link rel="stylesheet" href="style.css?v=16.50">
 </head>
 <body>
 
@@ -677,7 +677,7 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M5 3 v7 a7 7 0 0 0 14 0 V3" fill="none"/><path d="M9 3 v7 a3 3 0 0 0 6 0 V3" fill="none"/><line x1="5" y1="6" x2="9" y2="6"/><line x1="15" y1="6" x2="19" y2="6"/></svg>
                             </button>
                         </div>
-                        <div class="layout-guides-grid" style="grid-template-columns: repeat(4, 1fr);">
+                        <div class="layout-guides-grid" style="grid-template-columns: repeat(5, 1fr);">
                             <button class="layout-guide-btn toggle-status" id="unitSuffixToggle" title="Unit Suffix — show/hide the unit (in/cm/mm) after interior dimension numbers. Outer wall dims always show it." onclick="toggleUnitSuffix(this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><text x="12" y="16" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor" stroke="none">”</text><path d="M4 19h16" stroke-width="1.5"/></svg>
                             </button>
@@ -689,6 +689,14 @@
                             </button>
                             <button class="layout-guide-btn toggle-status" id="imageCodeToggle" title="Image Code — show/hide the artwork's image code beneath each frame (bottom-right). Exports to PNG/SVG; handy for matching print files by code." onclick="toggleImageCodeVisibility(this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="11" rx="1" fill="none"/><path d="M8 19h8" stroke-width="1.5"/><path d="M10 19l-0.5 2M14 19l0.5 2" stroke-width="1.2"/></svg>
+                            </button>
+                            <!-- EQ: the drafting convention for "equally spaced". Replaces the
+                                 measurement on spacing AND edge-gap dims. An explicit choice,
+                                 not an automatic equal-gap test — EQ is a statement of intent.
+                                 Just the letters: it IS the mark that gets printed, so an
+                                 abstract glyph would be less legible than the thing itself. -->
+                            <button class="layout-guide-btn toggle-status" id="spacingEQToggle" title="EQ — print EQ instead of the measurement on spacing and edge-gap dimensions (the drafting convention for equally spaced). Applies to every spacing dim on the wall." onclick="toggleSpacingEQ(this)">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><text x="12" y="16.5" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="0.5" fill="currentColor" stroke="none">EQ</text></svg>
                             </button>
                         </div>
                         <button class="action-btn btn-secondary" id="allGuidesToggle" onclick="toggleAllElevGuides()" title="All guides on/off — flips every layout guide at once: labels, frame dims, spacing, person, hang guides, grid, centers, wall dims, group boxes, edge gaps, custom lines, image codes" style="width:100%; height:26px; margin-top:6px; font-size:0.6rem; letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:6px;">
