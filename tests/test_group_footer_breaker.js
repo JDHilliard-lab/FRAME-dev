@@ -204,13 +204,21 @@ const fs = require('fs');
     __check('the breaker checkbox renders in BOTH Per-piece and Group A/B/C tools', () => {
       resetProject();
       const mk = () => { const d = document.createElement('div'); _dsBreakerToggleInto(d, false); return d; };
+      // 16.45: a THIRD checkbox joined the block — skip breakers for wallcovering /
+      // window film, whose own sheet already carries the dimensioned elevation, while
+      // framed-art walls keep theirs. Asserting WHICH three rather than a bare count,
+      // so a future addition fails with a useful message instead of an off-by-one.
+      const labelsOf = (el) => el.textContent;
       const perPiece = mk();
-      if (perPiece.querySelectorAll('input[type=checkbox]').length !== 2) throw new Error('per-piece block should have the breaker + elevation-only checkboxes');
+      if (perPiece.querySelectorAll('input[type=checkbox]').length !== 3) throw new Error('per-piece block should have breaker + elevation-only + skip-flat checkboxes');
       if (perPiece.textContent.indexOf('Add elevation breaker page') < 0) throw new Error('breaker label missing');
+      if (perPiece.textContent.indexOf('Elevation only') < 0) throw new Error('elevation-only label missing');
+      if (perPiece.textContent.indexOf('wallcovering / window film') < 0) throw new Error('skip-flat label missing');
       if (perPiece.textContent.indexOf('these individual spec pages') < 0) throw new Error('per-piece wording missing');
       const grp = document.createElement('div');
       _dsBreakerToggleInto(grp, true);
-      if (grp.querySelectorAll('input[type=checkbox]').length !== 2) throw new Error('group block should have the same two checkboxes');
+      if (grp.querySelectorAll('input[type=checkbox]').length !== 3) throw new Error('group block should have the same three checkboxes');
+      if (labelsOf(grp).indexOf('wallcovering / window film') < 0) throw new Error('the group panel is missing the skip-flat option');
       if (grp.textContent.indexOf('A/B/C spec page') < 0) throw new Error('group wording missing: ' + grp.textContent.slice(0, 200));
       // and the group branch of the tools panel must actually call it
       if (!/_dsBreakerToggleInto\\(head, true\\)/.test(window.__appSrc)) throw new Error('the Group A/B/C tools branch never calls _dsBreakerToggleInto');

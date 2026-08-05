@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=16.41">
+    <link rel="stylesheet" href="style.css?v=16.47">
 </head>
 <body>
 
@@ -237,6 +237,10 @@
                                     <option value="Framed Canvas (Floater)">Framed Canvas (Floater)</option>
                                     <option value="Frameless Canvas (Wrapped)">Frameless Canvas (Wrapped)</option>
                                     <option value="Sourced Object">Sourced Object</option>
+                                    <!-- Flat graphics: the overall size IS the graphic. Keep in
+                                         sync with FRAME_PRODUCTS / FLAT_GRAPHIC_PRODUCTS in app.js. -->
+                                    <option value="Wallcovering (EGD)">Wallcovering (EGD)</option>
+                                    <option value="Window Film (WF)">Window Film (WF)</option>
                                 </select>
                             </div>
                             <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
@@ -374,6 +378,16 @@
                             <div><label>Cnv. Depth</label><input type="number" step="0.125" id="canvasDepth" oninput="handleCanvasDepthChange()"></div>
                             <div><label>Cnv. Wrap</label><input type="number" step="0.125" id="canvasWrap" oninput="syncDashAndCalculate()"></div>
                             <div><label title="Distance from frame inner edge to canvas image: covers canvas face + shadow gap">Inset</label><input type="number" step="0.125" id="floaterInset" oninput="syncDashAndCalculate()" title="Inset from frame inner edge to canvas image opening (covers visible canvas face + shadow gap, typically 0.75&quot;)"></div>
+                        </div>
+                        <!-- Flat graphics (wallcovering / window film): the substrate is the
+                             only construction detail there is, so it gets one free-text field.
+                             Free text because the wording is the vendor's and changes per
+                             project ("Dreamscape Wallcovering - Criss Cross", "Vinyl on
+                             Window Film"). Shown only for FLAT_GRAPHIC_PRODUCTS — see
+                             handleDashProductChange. -->
+                        <div class="grid-row-2" id="egdSettings" style="display:none;">
+                            <div style="grid-column:1 / -1;"><label title="The substrate this graphic is printed on. Prints as the Application row on the spec page.">Application / Substrate</label><input type="text" id="m_material" oninput="syncDashAndCalculate()" placeholder="e.g. Vinyl Wallcovering"></div>
+                            <div style="grid-column:1 / -1;"><label title="Prints as the Art Type row. Leave blank to omit the row (window-film sheets have none).">Art Type</label><input type="text" id="m_artTypeEgd" oninput="syncDashAndCalculate()" placeholder="e.g. Environmental Graphic Design"></div>
                         </div>
                         <!-- bleedSettings (Open W / Open H / Bleed / Print File) was here.
                              Moved to live directly under the OD row at the top of the form
@@ -726,6 +740,23 @@
                             </button>
                             <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
+                            </button>
+                            <!-- Fit to wall: sizes a wallcovering / window film to the wall
+                                 inside its dimension lines (full width, baseboard to
+                                 ceiling). Placement already does this automatically; this
+                                 re-runs it after the wall or baseboard changes. Selected
+                                 flat graphics only, or all of them when nothing is picked. -->
+                            <button class="action-btn btn-secondary" id="fitFlatBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="fitFlatGraphicsToWallAction()" title="Fit to wall — size the wallcovering / window film to the wall inside the dimension lines (set baseboard to 0 to run floor to ceiling)">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="4" width="18" height="14"/><path d="M3 18h18M7 8h10M7 12h10"/></svg>
+                            </button>
+                            <!-- EGD WALL: makes this wall a wallcovering surface. Anything
+                                 flat dropped on it fills the wall inside the dim lines and
+                                 is pinned there — it can't be dragged out or into the
+                                 baseboard. Framed art can still go on top; a wallcovering
+                                 always renders behind it. Toggle, so the button reflects
+                                 state (see _syncEgdWallBtn). -->
+                            <button class="action-btn btn-secondary" id="egdWallBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="toggleEgdWall()" title="EGD wall — treat this wall as a wallcovering surface: a wallcovering or window film fills it and stays inside the wall, above the baseboard. Framed art can still be placed over it.">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="3" width="18" height="15"/><path d="M3 18h18"/><path d="M3 7h18M3 11h18M7 3v15M13 3v15"/></svg>
                             </button>
                             <!-- Group dimension: draws a dashed bounding box with width +
                                  height measurement callouts around the selected frames.

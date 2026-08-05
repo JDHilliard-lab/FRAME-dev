@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-105 files, 1095 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+106 files, 1145 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -110,6 +110,40 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `_specCodeStyle()`.
 - `computeArtDrawRect` is the **single source of truth** for artwork crop/fit across
   all five render paths (dashboard preview, elevation DOM, canvas/PNG, SVG, PDF).
+- **The product-type model.** `FRAME_PRODUCTS` (app.js) and the `<select id="m_product">`
+  options in index.html are two hand-synced lists — update both. The enum is branched on
+  at ~20 sites whose local names already disagree (`isC`/`isCanvas`/`isFloater`,
+  `isFL`/`isFrameless`/`iFL`), so a new product added to some of them looks right in one
+  place and wrong in another.
+  **`"Sourced Object"` is not a precedent** — it's in the enum and in `buildPngFilename`
+  but has **no branch anywhere**, so it silently renders and specs as Framed Art. The
+  help text claimed otherwise for a long time; it now says what's true.
+  **Flat graphics** (`FLAT_GRAPHIC_PRODUCTS` + `_isFlatGraphic()`) are wallcovering (EGD)
+  and window film (WF): the overall size **is** the graphic — no moulding, mat, glass,
+  rabbet or stretcher bar, and **no drop shadow**, because they sit flush rather than
+  hanging off the wall. One predicate rather than a flag per product, so the next flat
+  product (ART-1 Backlit Image is the obvious one) is an array entry, not twenty edits.
+  Their only extra field is `material` (free text — the wording is the vendor's).
+  Placement needed **no new code**: a placed item is an `elev.frames` entry with
+  `w/h/x/y` and `makeElevDraggable` is product-agnostic. If you find yourself adding a
+  product branch to the drag handler, something is wrong.
+  Two traps when adding a no-frame product:
+  the `isFrameless` branch of `renderFrameToCanvas` **ignores `opts.artworkImg` and
+  `opts.wireframe`** (it punches a transparent hole and leaves compositing to the
+  caller), so copying it verbatim gives an invisible graphic on the wall and no
+  wireframe block; and the flat branch must sit **before** it, or the frame geometry
+  below runs first.
+- **`_rowOpeningAndPrint(row)` is the single definition of opening + print-file size.**
+  It was copy-pasted into FIVE places — `updateTableRowCalcs`,
+  `updateDashVisualsFromDOM`, `renderDashTable`, `buildDashCSVString` and
+  `buildSpecStrings`' sizes block — four of which are displays of the fifth. They had
+  already drifted: two added bleed to a raw negative opening while two clamped first, so
+  an over-matted piece printed two different file sizes. Clamping first won. Takes a
+  plain object so the DOM-driven caller can pass assembled form values; converts nothing.
+  A new product needs one clause here, not five.
+  A new spec **label** needs registering in `SPEC_ROW_GROUPS` *and* in the **five**
+  hardcoded allowlists (2 group-page PDF renderers + 3 `_deckMockHTML` previews) or that
+  layout silently drops the row.
 - `_coverRect()` / `_cropToCanvas()` are the shared crop math for page background
   images. The DOM preview and the PDF must agree exactly — they diverged once because
   the DOM used aspect-blind CSS while the PDF used real cover-fit math.

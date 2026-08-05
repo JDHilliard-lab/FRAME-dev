@@ -197,9 +197,21 @@ const path = require('path');
     });
 
     __check('a page render will not start its own capture while a batch owns the view', () => {
-      const i = S.indexOf('async function _drawInstallGuidePage');
-      const body = S.slice(i, i + 40000);
+      // 16.44: the guard moved out of _drawInstallGuidePage into the shared
+      // _igElevCapture, so the flat-graphic sheet gets it too rather than needing its
+      // own copy. Both suppressors still have to be there, and both page renderers
+      // still have to go through it — a direct _captureElevWithGuides call from a page
+      // would sidestep the guard entirely.
+      const i = S.indexOf('async function _igElevCapture');
+      if (i < 0) throw new Error('_igElevCapture is gone — the suppressors have no home');
+      const body = S.slice(i, S.indexOf('\\n}', i));
       if (body.indexOf('!_igNoCapture && !_elevPrimeActive') < 0) throw new Error('a page render can still capture mid-batch and fight the batch for the view');
+      ['async function _drawInstallGuidePage', 'async function _drawFlatGraphicSpecPage'].forEach(sig => {
+        const j = S.indexOf(sig);
+        if (j < 0) throw new Error('cannot find ' + sig);
+        const rb = S.slice(j, j + 40000);
+        if (rb.indexOf('_igElevCapture(') < 0) throw new Error(sig + ' bypasses the shared capture guard');
+      });
     });
 
     __checkAsync('Preview captures its own elevation up front, so nothing is left to capture mid-render', async () => {

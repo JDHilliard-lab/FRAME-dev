@@ -202,14 +202,28 @@ const path = require('path');
       // tool mid-use, a settle that did not land). One page in an otherwise-good
       // export silently losing its drawing is the worst outcome, so a second attempt
       // is worth its cost.
-      const i = S.indexOf('async function _drawInstallGuidePage');
-      const body = S.slice(i, i + 40000);
-      const first = body.indexOf('cap = await _captureElevWithGuides(igElevIdx);');
+      // 16.44: the cache-lookup + retry + suppressor block was EXTRACTED from
+      // _drawInstallGuidePage into _igElevCapture so the flat-graphic sheet
+      // (_drawFlatGraphicSpecPage) shares it instead of carrying a second copy that
+      // could drift. Same code, one home — so the retry is checked there now, plus
+      // that the install-guide page still routes through it.
+      const i = S.indexOf('async function _igElevCapture');
+      if (i < 0) throw new Error('_igElevCapture is gone — the retry has no home');
+      const body = S.slice(i, S.indexOf('\\n}', i));
+      const first = body.indexOf('cap = await _captureElevWithGuides(elevIdx);');
       if (first < 0) throw new Error('the capture call is gone');
-      const second = body.indexOf('cap = await _captureElevWithGuides(igElevIdx);', first + 10);
+      const second = body.indexOf('cap = await _captureElevWithGuides(elevIdx);', first + 10);
       if (second < 0) throw new Error('no retry — a transient failure loses the drawing for that page');
       const between = body.slice(first, second);
       if (between.indexOf('if (!cap)') < 0) throw new Error('the retry is not conditional on the first attempt failing');
+      // Nobody may bypass it by calling _captureElevWithGuides directly from a page
+      // renderer — that is how the second copy would come back.
+      ['async function _drawInstallGuidePage', 'async function _drawFlatGraphicSpecPage'].forEach(sig => {
+        const j = S.indexOf(sig);
+        if (j < 0) throw new Error('cannot find ' + sig);
+        const rb = S.slice(j, j + 40000);
+        if (rb.indexOf('_igElevCapture(') < 0) throw new Error(sig + ' does not use the shared capture helper');
+      });
     });
 
     __check('EXACT BUG: both cache writes are gated on the render being complete', () => {
