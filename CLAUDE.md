@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-107 files, 1160 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+109 files, 1202 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -169,6 +169,67 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   is wrapped in try/catch so a wrong rect fails **silently**.
   `_igElevCapture(elevIdx)` is the ONE cache/retry/suppressor path, shared by this sheet
   and `_drawInstallGuidePage`. Don't call `_captureElevWithGuides` from a page renderer.
+- **Window panels (glazing) are `elev.glazing`, an ARRAY of runs**, each
+  `{x, y, h, panels:[…]}` in `elevUnit`, `x`/`y` bottom-left like a frame. Window film
+  goes onto glass divided by mullions, and a graphic is fitted so no element lands on a
+  seam. Widths are an **array**, never `{count, equal}`: unequal is the general case and
+  equal is only a shortcut, so a count-based model has to be rebuilt the moment one
+  panel differs. An array of *runs* because one wall can carry a full-height WF-1 on one
+  window and a WF-4 privacy band on another.
+  **A run's total width is DERIVED (`_glazingRunWidth`) and never stored**, so the two
+  can't drift. The Width field is therefore an *operation*: `_gzSetTotal` rescales the
+  panels proportionally, which keeps an equal division equal and a 2:1 division 2:1, and
+  the panel count rescales for the same reason — count answers "how is this glass
+  divided", not "how much glass is there". Editing ONE panel width is the deliberate
+  exception that does move the total: a measured panel width is a fact. `_gzSetTotal`
+  absorbs the rounding **residual on the last panel** — 610/3 is 203.3333, which re-sums
+  to 609.9999, a hairline gap at the wall edge and three dims reading a repeating
+  decimal. `equalizeGlazingPanels` **delegates** to that same branch rather than
+  dividing locally, or Equal is where the residual comes back.
+  `_glazingSeams` returns the **internal** mullions only — the outer edges duplicate the
+  wall/frame snap targets, and two identical candidates make the nearest-target search
+  pick arbitrarily. `_scaleElevGlazing` converts `x`/`y`/`h` **and the panels array** on
+  project load and unit toggle: the array is exactly what the hand-maintained allowlists
+  skip, and a run left in inches on a cm project draws mullions in the wrong *places*,
+  which silently moves where a graphic gets cut.
+  `#glazing-layer` sits **above** `#frame-layer` (z 7 vs 6) and is in `annotationLayers`.
+  Above, deliberately: seeing where a seam falls across the artwork is the whole point,
+  and the export writes annotation layers over the rasterised art, so putting mullions
+  underneath on screen would show one thing in the editor and another in the PDF.
+  `renderGlazingRuns` must run **after** `drawElevTargetedSpacing()`, which clears
+  `#dim-layer` — it silently wiped every panel dim while leaving the mullions visible.
+  `renderGlazingControls()` (the sidebar editor, `<details id="sec-glazing">`) is called
+  from the **top** of `initElevControls`, ahead of its no-frames early return: glass is
+  independent of frames and a window-film-only wall has none, so a call after that return
+  leaves the panel unreachable on exactly the wall that needs it. `<details>` and not
+  `toggleDashSection`, which rewrites the label span with a chevron.
+- **`printOutput` (`'full'|'panels'`) is per ROW and WINDOW FILM only.** Split mode means
+  one Illustrator artboard per glazing panel; the lap is **not a new rule**, an artboard
+  is panel + bleed on every edge exactly as `_rowOpeningAndPrint` does for a whole
+  graphic, so neighbours overlap by 2x bleed and a 2" bleed means the same thing
+  everywhere (a test pins that a one-panel split equals the full-file numbers byte for
+  byte). WF-only is enforced in the **data** as well as the UI — hiding
+  `#printOutputRow` isn't enough, a bulk edit or an imported row could otherwise leave a
+  wallcovering in a mode whose schedule has nothing to read. Wallcovering hangs in drops,
+  a different subdivision this doesn't model. New field, so it needs
+  `dashDefaultData`, the `dashHtIn` field map **and** `syncDashAndCalculate` or a
+  keystroke wipes it; it is deliberately **not** carried onto elevation frames, because
+  that's two duplicated constructors plus `pushUpdatesToElevations`, so
+  `_glazingScheduleForFrame` takes the mode as an argument instead.
+  `_glazingPanelPrints(run, bleed, h, range)` **clips to the graphic's span**: a graphic
+  over panels 2-3 of a four-panel run is two files, not four, and the other two would
+  print blank. The lap is a property of a **shared edge**, so it's set from position in
+  the *emitted* list, not the panel's index in the run — otherwise a clipped graphic's
+  first file carries a lap on its outside and the installer is told to trim art that was
+  never printed. `_glazingRunForFrame` picks by **greatest overlap**, so a hairline past
+  a mullion can't re-home the graphic to the other window.
+  `_drawGlazingSchedule` prints it on the flat-graphic sheet in the **same unit
+  convention as the spec rows above it** (inches first under dual units) — two
+  conventions on one sheet is worse than no table. It returns the new `y` so the
+  floorplan gives up the height rather than being drawn over, and the sheet's `Material,
+  Print Output, Print Panels (in)` CSV columns are **appended at the very end** because
+  the InDesign script addresses columns by name. `_flatGraphicElevFor()` is the ONE
+  definition of "which wall is this graphic on", shared by the schedule and the capture.
 - **EGD wall mode** (`elev.egdWall`, `_isEgdWall`, `toggleEgdWall`) is **per elevation**,
   unlike every other button in that guides row — easy to add to the wrong list.
   Anything flat on such a wall is filled to it and pinned inside it above the baseboard

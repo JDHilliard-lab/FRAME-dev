@@ -511,17 +511,23 @@ const path = require('path');
       if (!head) throw new Error('could not find the column header row');
       if (head.indexOf('Material') < 0) throw new Error('no Material column in the CSV header');
       // Trailing column, so the InDesign script (which reads by name) is unaffected
-      // — inserting one mid-header shifts every position after it.
-      if (!/Material\\s*$/.test(head.trim())) throw new Error('Material was not appended at the end: ' + head.slice(-80));
+      // — inserting one mid-header shifts every position after it. This used to
+      // assert Material was LITERALLY last, which 16.52 broke by appending Print
+      // Output / Print Panels after it. The requirement was never "last", it was
+      // "after every pre-existing column", so it's now pinned as: Material comes
+      // after the RAW block, and nothing was inserted ahead of that block.
+      const rawEnd = head.indexOf('RAW Stretcher Depth');
+      if (rawEnd < 0) throw new Error('the RAW column block is missing');
+      if (head.indexOf('Material') < rawEnd) throw new Error('Material was moved ahead of the RAW block: ' + head.slice(-80));
       const row = lines.find(l => l.indexOf('EGD-6') >= 0);
       if (!row) throw new Error('the EGD row never reached the CSV');
       if (row.indexOf('Dreamscape Wallcovering - Criss Cross') < 0) throw new Error('the material value never reached the row');
-      // Material is the LAST column, so the row must end with it. Checked this way
-      // rather than by counting commas: row cells are quoted and several values
-      // legitimately contain commas ('3" AA, B 97 White'), so a naive split
-      // over-counts and proves nothing either way.
-      if (!/,"Dreamscape Wallcovering - Criss Cross"\\s*$/.test(row)) {
-        throw new Error('Material is not the final cell of the row: ' + row.slice(-90));
+      // The material lands in the trailing block, followed now by the two 16.52
+      // print-output columns. Matched as a substring rather than by counting commas:
+      // row cells are quoted and several values legitimately contain commas
+      // ('3" AA, B 97 White'), so a naive split over-counts and proves nothing.
+      if (row.indexOf('"Dreamscape Wallcovering - Criss Cross","full"') < 0) {
+        throw new Error('Material is not followed by the print-output columns: ' + row.slice(-90));
       }
       // A framed row leaves it blank rather than shifting the column.
       dashProjectData = [base({ id: 'ART.900' })];
