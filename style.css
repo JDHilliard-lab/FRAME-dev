@@ -729,23 +729,29 @@ select.no-arrow::-ms-expand { display: none; }
 .gz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 5px; }
 .gz-f, .gz-panel { display: flex; flex-direction: column; gap: 1px; }
 .gz-f > span, .gz-panel > span { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.03em; text-transform: uppercase; }
-.gz-in {
-    width: 100%; background: var(--bg-panel);
+/* #glazingControls-prefixed, and that prefix is load-bearing, not tidiness: the global
+ * `input[type="number"]` rule near the top of this file sets width:100% and height:26px
+ * at specificity (0,1,1), which outranks a bare .gz-in-n (0,1,0). That is what made the
+ * panel-count field span the whole panel and push "N seams" out through the side. */
+#glazingControls .gz-in {
+    width: 100%; height: auto; background: var(--bg-panel);
     border: 1px solid var(--border-color); color: var(--text-strong);
     border-radius: 3px; padding: 2px 4px; font-size: 0.62rem;
 }
-/* The spinners eat ~16px of a 48px field, which is most of the room the number needs. */
-.gz-in::-webkit-outer-spin-button, .gz-in::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-.gz-in { -moz-appearance: textfield; appearance: textfield; }
-.gz-count { display: flex; align-items: center; gap: 5px; margin-top: 6px; }
+/* The spinners eat ~16px, which is most of the room a 40px field has for its number. */
+#glazingControls .gz-in::-webkit-outer-spin-button,
+#glazingControls .gz-in::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#glazingControls .gz-in { -moz-appearance: textfield; appearance: textfield; }
+.gz-sub { font-size: 0.5rem; color: var(--text-muted); margin-top: 3px; opacity: 0.85; }
+.gz-count { display: flex; align-items: center; gap: 5px; margin-top: 6px; flex-wrap: nowrap; }
 .gz-count > span:first-child { font-size: 0.5rem; color: var(--text-muted); letter-spacing: 0.03em; text-transform: uppercase; flex: none; }
-.gz-in-n { width: 40px; flex: none; }
-.gz-note { font-size: 0.53rem; color: var(--text-muted); flex: 1; }
+#glazingControls .gz-in-n { width: 40px; flex: none; }
+.gz-note { font-size: 0.53rem; color: var(--text-muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* A grid, not flex-wrap: fixed tracks keep 7 panels in tidy columns instead of a
  * ragged last row, and the track width is what stops a long value widening the box. */
 .gz-panels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 5px; }
 .gz-panels .gz-panel > span { text-align: center; }
-.gz-panels .gz-in { padding: 2px 2px; font-size: 0.58rem; text-align: center; }
+#glazingControls .gz-panels .gz-in { padding: 2px 2px; font-size: 0.58rem; text-align: center; }
 .gz-add {
     width: 100%; background: transparent; border: 1px dashed var(--border-color);
     color: var(--text-muted); border-radius: 4px; padding: 4px; font-size: 0.6rem; cursor: pointer;

@@ -468,6 +468,90 @@ const path = require('path');
       if (d.v !== 1) throw new Error('expected 1 glass height dim, got ' + d.v);
     });
 
+    __check('EXACT BUG: a tight dim chain STAGGERS instead of overlapping itself', () => {
+      // Six 31" panels each print 31"(783mm) — about 78px — in a slot nearer 60px, so
+      // the chain smeared into itself. Alternating rows is exact: neighbours are never
+      // on the same row, so they cannot touch however long the label gets.
+      __clearDims();
+      seed([{ x: 48, y: 0, h: 82, panels: [31, 31, 31, 31, 31, 31] }]);
+      // Pinned: whether a chain is crowded depends on the ZOOM, so a test that leaves
+      // elevScale to whatever ran before it is testing nothing in particular. At 2px/in
+      // a 31" panel is 62px and its dual-unit label about 78px — crowded.
+      elevScale = 2;
+      // Dual units ON: that is the reported case. "31"" alone fits fine; it is
+      // "31"(783mm)" that does not, which is why the stagger keys on the LABEL and
+      // not on the panel count.
+      elevDualUnit = 'mm';
+      renderGlazingRuns(400, 108);
+      const L = document.getElementById('glazing-dim-layer');
+      const rows = Array.from(L.querySelectorAll('.arch-dim-h')).map(d => Math.round(parseFloat(d.style.bottom)));
+      const panelRows = rows.slice(0, 6);
+      // Two distinct rows, alternating.
+      if (new Set(panelRows).size !== 2) throw new Error('the chain did not stagger: ' + panelRows.join(','));
+      if (panelRows[0] === panelRows[1]) throw new Error('neighbours share a row');
+      if (panelRows[0] !== panelRows[2]) throw new Error('the stagger should alternate, not climb');
+      // And the overall still clears BOTH rows.
+      const ov = rows[6];
+      if (!(ov > Math.max.apply(null, panelRows))) throw new Error('the overall dim sits inside the staggered chain');
+      elevDualUnit = '';   // don't leak the setting into the checks below
+    });
+
+    __check('a roomy chain does NOT stagger — the fix is for crowding only', () => {
+      __clearDims();
+      seed([{ x: 0, y: 0, h: 82, panels: [120, 120] }]);
+      elevScale = 2;   // 120" is 240px, far wider than any label
+      renderGlazingRuns(400, 108);
+      const L = document.getElementById('glazing-dim-layer');
+      const rows = Array.from(L.querySelectorAll('.arch-dim-h')).slice(0, 2).map(d => Math.round(parseFloat(d.style.bottom)));
+      if (rows[0] !== rows[1]) throw new Error('wide panels were staggered for no reason: ' + rows.join(','));
+    });
+
+    __check('EXACT ASK: the glass HEIGHT dim is rotated so it clears the mullions', () => {
+      __clearDims();
+      seed([{ x: 20, y: 0, h: 82, panels: [60, 60] }]);
+      renderGlazingRuns(400, 108);
+      const v = document.getElementById('glazing-dim-layer').querySelector('.arch-dim-v');
+      if (!v) throw new Error('no glass height dim');
+      if (!v.querySelector('.arch-label-rot')) throw new Error('the height label is still upright, so it lands across the glass');
+      // createElevArchSpacing has to actually support the flag, not just be handed it.
+      const i = S.indexOf('function createElevArchSpacing');
+      const body = S.slice(i, i + 9000);
+      if (body.indexOf('bandOpt.rotateLabel') < 0) throw new Error('createElevArchSpacing ignores rotateLabel');
+      if (body.indexOf('rotateLabel: !!bandOpt.rotateLabel') < 0) throw new Error('the flag never reaches buildDimControls, so the chevrons rotate with it');
+    });
+
+    __check('an upright vertical dim is unchanged — rotation is opt-in', () => {
+      // Every other caller passes no flag and must keep the label it has.
+      __clearDims();
+      const L = document.getElementById('glazing-dim-layer');
+      createElevArchSpacing(10, 0, 10, 50, 'v', L, '50', 'plain-v', 0, {});
+      const d = L.querySelector('.arch-dim-v');
+      if (d.querySelector('.arch-label-rot')) throw new Error('a dim with no flag came out rotated');
+    });
+
+    __check('the sill field says how a door is handled', () => {
+      // Decided with the user: no per-panel height. The graphic is built to the tallest
+      // opening anyway, so sill 0 describes a door bay and a panel stays a plain number.
+      seed([{ x: 0, y: 30, h: 60, panels: [40, 40] }]);
+      renderGlazingControls();
+      const t = document.getElementById('glazingControls').textContent;
+      if (t.indexOf('door') < 0) throw new Error('nothing tells you what to do when a door is in the run');
+    });
+
+    __check('EXACT BUG: the panel-count field cannot outgrow its container', () => {
+      // The global input[type="number"] rule sets width:100% and height:26px at
+      // specificity (0,1,1), which outranks a bare .gz-in-n (0,1,0) — that is what
+      // pushed the field across the panel and shoved "N seams" out through the side.
+      const css = window.__cssSrc || '';
+      if (css.indexOf('#glazingControls .gz-in-n') < 0) throw new Error('.gz-in-n is not specific enough to beat the global number-input rule');
+      if (css.indexOf('#glazingControls .gz-in {') < 0) throw new Error('.gz-in is not specific enough either');
+      const i = css.indexOf('#glazingControls .gz-in {');
+      if (css.slice(i, i + 200).indexOf('height: auto') < 0) throw new Error('the global height:26px still applies');
+      // And the seam note must clip rather than push the row wider.
+      const n = css.indexOf('.gz-note {');
+      if (css.slice(n, n + 200).indexOf('overflow: hidden') < 0) throw new Error('the seam note can still overflow the panel');
+    });
+
     __check('a SINGLE-panel run does not print its width twice', () => {
       __clearDims();
       seed([{ x: 0, y: 20, h: 80, panels: [120] }]);
