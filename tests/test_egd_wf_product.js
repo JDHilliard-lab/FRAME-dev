@@ -893,6 +893,13 @@ const path = require('path');
       // set wrong, and a deck cannot end up half in each layout for no reason.
       if (body.indexOf('const _wide = _capAsp >=') < 0) throw new Error('wide mode is not chosen from the wall aspect');
       if (body.indexOf('_wideH >= 110') < 0) throw new Error('nothing stops wide mode leaving the elevation no height');
+      // Wide mode is a BAND, not a floor. Past ~6:1 the extra width stops buying
+      // legibility (1000x108 is 9.3:1 — 0.86pt/in, a 29" panel is 25pt against a
+      // ~40pt label), so it would just make a different unreadable drawing.
+      if (body.indexOf('const _tooWide = _capAsp > 6;') < 0) throw new Error('wide mode has no upper bound');
+      if (body.indexOf('!_tooWide') < 0) throw new Error('the upper bound is computed but not applied');
+      // And the page SAYS so, rather than quietly printing 6pt dimensions.
+      if (body.indexOf('issue this elevation in sections') < 0) throw new Error('an over-wide wall prints no note');
       if (/elevLeft = SR\\.L \\+ \\(SR\\.R - SR\\.L\\) \\* 0\\.36/.test(body)) throw new Error('the left edge is still a hardcoded fraction unrelated to the spec block');
       // Top clears the title band, so a long heading can never overlap the drawing.
       if (body.indexOf('(titleY + 26)') < 0) throw new Error('the top edge is not tied to the title baseline');
