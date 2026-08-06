@@ -23,6 +23,7 @@ const path = require('path');
   const root = path.join(__dirname, '..');
   const src = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
   const htmlSrc = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const cssSrc = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
   const dom = new JSDOM(htmlSrc, { url: 'https://example.com/', pretendToBeVisual: true, runScripts: 'outside-only' });
   const { window } = dom;
   window.HTMLCanvasElement.prototype.getContext = () => ({});
@@ -304,6 +305,133 @@ const path = require('path');
       if (_glazingRunForFrame(el, { x: 500, y: 0, w: 10, h: 10 })) throw new Error('a graphic clear of every run should match none');
     });
 
+    // ── Calling out each panel ──────────────────────────────────────────────
+    __check('panels are LETTERED, using the same sequence frames use', () => {
+      if (_glazingPanelLabel(0) !== 'A' || _glazingPanelLabel(3) !== 'D') throw new Error('panels are not A..D');
+      // 27 panels is absurd, but running off the end of the alphabet silently is worse
+      // than a long label — getElevLetter already solved this for frames.
+      if (_glazingPanelLabel(26) !== 'AA') throw new Error('the 27th panel should be AA, got ' + _glazingPanelLabel(26));
+    });
+
+    __check('the SAME letter appears in the pane, the editor and the schedule', () => {
+      // Three places naming one panel. If they can disagree, the schedule points at
+      // nothing and a graphic goes on the wrong lite.
+      const el = seed([{ x: 0, y: 20, h: 80, panels: [40, 40, 40] }]);
+      const fr = { id: 'WF-1', x: 0, y: 20, w: 120, h: 80, active: true };
+      el.frames.push(fr);
+      renderGlazingRuns(240, 108);
+      const tags = Array.from(document.querySelectorAll('#glazing-layer .glazing-tag')).map(t => t.textContent);
+      if (tags.join(',') !== 'A,B,C') throw new Error('pane tags read ' + tags.join(','));
+      renderGlazingControls();
+      const eds = Array.from(document.querySelectorAll('#glazingControls .gz-panels .gz-panel > span')).map(s => s.textContent);
+      if (eds.join(',') !== 'A,B,C') throw new Error('editor labels read ' + eds.join(','));
+      const rows = _glazingScheduleForFrame(el, fr, 2, 'panels');
+      if (rows.map(p => p.label).join(',') !== 'A,B,C') throw new Error('schedule labels read ' + rows.map(p => p.label).join(','));
+    });
+
+    __check('a clipped schedule keeps the WALL letter, not a renumbered one', () => {
+      // The installer is told which pane each file goes on. Renumbering from 1 would
+      // point the second file at the first pane.
+      const el = seed([{ x: 0, y: 20, h: 80, panels: [40, 40, 40, 40] }]);
+      const fr = { id: 'WF-2', x: 40, y: 20, w: 80, h: 80, active: true };
+      el.frames.push(fr);
+      const rows = _glazingScheduleForFrame(el, fr, 2, 'panels');
+      if (rows.map(p => p.label).join(',') !== 'B,C') throw new Error('clipped labels read ' + rows.map(p => p.label).join(','));
+    });
+
+    __check('a panel tag is NOT styled like a frame letter — they can share a wall', () => {
+      // "Panel B" and "piece B" are different things. The tag is a small chip in the
+      // dimension ink; a frame letter is a large grey glyph on the artwork.
+      seed([{ x: 0, y: 20, h: 80, panels: [40, 40] }]);
+      renderGlazingRuns(240, 108);
+      const t = document.querySelector('#glazing-layer .glazing-tag');
+      if (!t) throw new Error('no panel tag drawn');
+      if (t.className.indexOf('glazing-tag') < 0) throw new Error('the tag has no class of its own to style');
+      // Opaque, because it sits over artwork.
+      const css = window.__cssSrc || '';
+      const i = css.indexOf('.glazing-tag');
+      if (i < 0) throw new Error('.glazing-tag is unstyled, so it inherits whatever is nearby');
+      if (css.slice(i, i + 320).indexOf('background: #fff') < 0) throw new Error('the tag chip is not opaque');
+    });
+
+    __check('the CSV qualifies each panel by item code, because these become filenames', () => {
+      // A bare "B" collides with the frame letters.
+      const i = S.indexOf('_glazingScheduleForFrame(el, fr, bl, r.printOutput)');
+      if (i < 0) throw new Error('the CSV no longer builds a panel list');
+      if (S.slice(i, i + 320).indexOf("(r.id || '') + '.' + p.label") < 0) {
+        throw new Error('the CSV emits a bare panel label instead of ITEMCODE.LETTER');
+      }
+    });
+
+    // ── Seeing the window dimensions ────────────────────────────────────────
+    // createElevArchSpacing uses its dimId for control/offset state, NOT as the
+    // element id, so these count the drawn lines rather than looking ids up.
+    const __dims = () => {
+      const L = document.getElementById('dim-layer');
+      return { h: L.querySelectorAll('.arch-dim-h').length, v: L.querySelectorAll('.arch-dim-v').length };
+    };
+    const __clearDims = () => { const L = document.getElementById('dim-layer'); if (L) L.innerHTML = ''; };
+
+    __check('a multi-panel run dimensions its OVERALL glass, not just each panel', () => {
+      // A chain of panel widths with no overall above it makes the reader add three
+      // numbers to learn how big the window is.
+      __clearDims();
+      seed([{ x: 12, y: 20, h: 80, panels: [40, 40, 40] }]);
+      renderGlazingRuns(240, 108);
+      const d = __dims();
+      if (d.h !== 4) throw new Error('expected 3 panel dims + 1 overall, got ' + d.h);
+      if (d.v !== 1) throw new Error('expected 1 glass height dim, got ' + d.v);
+    });
+
+    __check('a SINGLE-panel run does not print its width twice', () => {
+      __clearDims();
+      seed([{ x: 0, y: 20, h: 80, panels: [120] }]);
+      renderGlazingRuns(240, 108);
+      const d = __dims();
+      if (d.h !== 1) throw new Error('the panel dim already IS the overall on a single lite, got ' + d.h + ' width dims');
+      if (d.v !== 1) throw new Error('a single lite still needs its height');
+    });
+
+    __check('the overall dim never prints EQ — EQ is about a repeated gap', () => {
+      const i = S.indexOf("elevFmtU(runW), 'glazing-ov-'");
+      if (i < 0) throw new Error('the overall width dim does not use elevFmtU');
+      // _spacingLabel would return 'EQ' with the toggle on, which says nothing about
+      // how big the window is.
+      const j = S.indexOf('glazing-ov-');
+      if (S.slice(j - 200, j).indexOf('_spacingLabel(runW)') >= 0) throw new Error('the overall went through _spacingLabel');
+    });
+
+    // ── Discoverability: Split must say where panels come from ─────────────
+    __check('picking Split with no window panels SAYS SO instead of failing quiet', () => {
+      // _glazingScheduleForFrame returning [] is right for a renderer and wrong for
+      // the control that turns it on.
+      const el = seed([]);
+      const row = { id: 'WF-9', product: 'Window Film (WF)', printOutput: 'panels' };
+      el.frames.push({ id: 'WF-9', x: 0, y: 20, w: 100, h: 60, active: true });
+      _updatePrintOutputHint(row);
+      const h = document.getElementById('printOutputHint');
+      if (!h) throw new Error('#printOutputHint is missing from index.html');
+      if (h.textContent.indexOf('No window panels') < 0) throw new Error('no warning: "' + h.textContent + '"');
+      if (h.className.indexOf('po-hint-warn') < 0) throw new Error('the empty case is not flagged');
+      if (h.textContent.indexOf('Elevations') < 0) throw new Error('it does not say where to define them');
+    });
+
+    __check('with panels defined the hint counts the files and names the panels', () => {
+      const el = seed([{ x: 0, y: 20, h: 80, panels: [40, 40, 40] }]);
+      const row = { id: 'WF-9', product: 'Window Film (WF)', printOutput: 'panels' };
+      el.frames.push({ id: 'WF-9', x: 0, y: 20, w: 120, h: 80, active: true });
+      _updatePrintOutputHint(row);
+      const h = document.getElementById('printOutputHint');
+      if (h.textContent.indexOf('3 print files') < 0) throw new Error('wrong count: "' + h.textContent + '"');
+      if (h.textContent.indexOf('A, B, C') < 0) throw new Error('the panels are not named: "' + h.textContent + '"');
+      if (h.className.indexOf('po-hint-warn') >= 0) throw new Error('a working setup should not be flagged');
+      // Silent for full output and for wallcovering — the control is not even shown.
+      _updatePrintOutputHint({ id: 'WF-9', product: 'Window Film (WF)', printOutput: 'full' });
+      if (document.getElementById('printOutputHint').textContent !== '') throw new Error('the hint should be blank for full output');
+      _updatePrintOutputHint({ id: 'E', product: 'Wallcovering (EGD)', printOutput: 'panels' });
+      if (document.getElementById('printOutputHint').textContent !== '') throw new Error('the hint should be blank for wallcovering');
+    });
+
     // ── Wiring: the field has to survive a keystroke and reach the exports ──
     __check('printOutput is in the sync field map, or a keystroke wipes it', () => {
       if (!/printOutput:\\s*\\['m_printOutput'\\]/.test(S)) throw new Error('printOutput is missing from the bulk-edit/field map');
@@ -370,7 +498,8 @@ const path = require('path');
 
   try {
     window.eval('window.__appSrc = ' + JSON.stringify(src) + ';\n'
-      + 'window.__indexHtml = ' + JSON.stringify(htmlSrc) + ';\n' + src + '\n' + testBlock);
+      + 'window.__indexHtml = ' + JSON.stringify(htmlSrc) + ';\n'
+      + 'window.__cssSrc = ' + JSON.stringify(cssSrc) + ';\n' + src + '\n' + testBlock);
   } catch (e) {
     console.error('LOAD/RUN FAILED:', e.message);
     process.exit(1);

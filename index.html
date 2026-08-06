@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=16.53">
+    <link rel="stylesheet" href="style.css?v=16.54">
 </head>
 <body>
 
@@ -392,10 +392,14 @@
                                  panel. In Split mode the spec sheet carries a panel schedule
                                  reading off this graphic's wall glazing run. -->
                             <div style="grid-column:1 / -1;" id="printOutputRow"><label title="One file for the whole graphic, or one print file per window panel with bleed on every edge so neighbouring panels overlap.">Print Output</label>
-                                <select id="m_printOutput" onchange="syncDashAndCalculate()">
+                                <select id="m_printOutput" onchange="syncDashAndCalculate(); _updatePrintOutputHint(dashProjectData[dashSelectedRowIndex])">
                                     <option value="full">Full graphic — one file</option>
                                     <option value="panels">Split per window panel</option>
                                 </select>
+                                <!-- Panels are a property of the WINDOW, not the graphic, so they
+                                     are defined on the elevation. Without this line, picking Split
+                                     silently produces no schedule and nothing says why. -->
+                                <div id="printOutputHint" class="po-hint"></div>
                             </div>
                         </div>
                         <!-- bleedSettings (Open W / Open H / Bleed / Print File) was here.

@@ -689,6 +689,21 @@ select.no-arrow::-ms-expand { display: none; }
     text-align: center;
     line-height: 1.3;
 }
+/* Live status under the Print Output control. Warn colour when Split is picked but
+ * the wall has no window panels — that combination silently produces no schedule. */
+.po-hint { font-size: 0.6rem; line-height: 1.45; margin-top: 4px; color: var(--text-muted); }
+.po-hint-warn { color: #c98a2e; }
+
+/* Panel letter tag drawn in each glass pane. An opaque chip, because it sits over
+ * artwork; small and in the dimension ink so it reads as a drawing annotation rather
+ * than as a frame letter (which is a large grey glyph on the piece itself). */
+.glazing-tag {
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 2px 4px; background: #fff;
+    border: var(--dim-line-w, 1px) solid var(--dim-color, #444);
+    letter-spacing: 0.04em;
+}
+
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────
  * Sits in the Elevations sidebar, which is narrow, so the four run fields are a
  * 2-up grid and the per-panel widths wrap. Panel inputs deliberately share .gz-in

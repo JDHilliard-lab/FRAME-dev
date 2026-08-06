@@ -133,7 +133,12 @@ const path = require('path');
       if (!(left > 0)) throw new Error('the run ignores its x offset');
       // Every stroke must be weightable by the exporter from the pen setting rather
       // than a re-measured computed style (a sub-pixel width does not survive that).
+      // TEXT is exempt and must stay exempt: 16.54 added the panel letter tags to this
+      // layer, and emitEl routes an element with direct text down its text path, where
+      // a pen weight means nothing. Written as "every stroke", not "every child", so
+      // the rule keeps its teeth for the next line added here.
       Array.from(layer.children).forEach(el => {
+        if ((el.textContent || '').trim()) return;   // a label, not a stroke
         if (!el.getAttribute('data-svg-pen')) throw new Error('a glazing stroke carries no data-svg-pen, so the SVG re-measures it');
       });
     });
