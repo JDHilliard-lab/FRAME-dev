@@ -734,24 +734,92 @@ const path = require('path');
     });
 
     __check('the sheet draws the schedule and gives up the height it takes', () => {
+      // 16.59 moved the schedule call into _drawFlatPanelSchedule so the sheet can
+      // carry SEVERAL graphics — inline, it could only ever describe the first one.
+      // The two requirements are unchanged: it is drawn before the floorplan claims
+      // the space, and it advances the layout cursor rather than being drawn over.
       const i = S.indexOf('function _drawFlatGraphicSpecPage');
-      const body = S.slice(i, i + 4000);
-      const sched = body.indexOf('_drawGlazingSchedule');
+      const body = S.slice(i, i + 7000);
+      const sched = body.indexOf('_drawFlatPanelSchedule(');
       const plan = body.indexOf('const planSide');
       if (sched < 0) throw new Error('the flat-graphic sheet never draws a panel schedule');
       if (plan < 0 || sched > plan) throw new Error('the schedule must be drawn before the floorplan claims the space');
-      // sy is the running cursor; reassigning it is what makes the floorplan shrink
-      // instead of being drawn over.
-      if (body.indexOf('sy = _drawGlazingSchedule') < 0) throw new Error('the schedule does not advance the layout cursor');
+      const h = S.indexOf('function _drawFlatPanelSchedule');
+      if (h < 0) throw new Error('the schedule helper is missing');
+      if (S.slice(h, h + 900).indexOf('setY(_drawGlazingSchedule(') < 0) throw new Error('the schedule does not advance the layout cursor');
     });
 
     __check('the sheet and the schedule share ONE definition of "which wall"', () => {
       // Two copies of "the wall this graphic is on" is exactly the predicate that
-      // drifts — the capture would draw one wall and the schedule read another.
+      // drifts — the capture would draw one wall and the schedule read another. The
+      // two callers are now the sheet (for its elevation) and the schedule helper.
       if (S.indexOf('function _flatGraphicElevFor') < 0) throw new Error('no shared lookup');
+      const uses = (S.match(/_flatGraphicElevFor\\(/g) || []).length;
+      if (uses < 4) throw new Error('expected the definition plus the sheet, the schedule helper, the CSV and the merge — found ' + uses);
       const body = S.slice(S.indexOf('function _drawFlatGraphicSpecPage'), S.indexOf('function _drawFlatGraphicSpecPage') + 8000);
-      if ((body.match(/_flatGraphicElevFor\\(/g) || []).length < 2) throw new Error('the sheet does not use the shared lookup in both places');
       if (body.indexOf('e.frames.some(fr =>') >= 0) throw new Error('an inline copy of the wall lookup is back');
+    });
+
+    __check('EXACT BUG: two graphics on ONE wall share ONE sheet', () => {
+      // Two window films on one elevation produced two pages carrying the same
+      // drawing twice. The elevation is the subject of this sheet, so repeating it
+      // per item code is a duplicate, not a spec.
+      const el = seed([]);
+      el.frames.push({ id: 'EGD.001-A', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
+      el.frames.push({ id: 'EGD.001-B', x: 120, y: 4, w: 202, h: 82, active: true, product: 'Window Film (WF)' });
+      const a = { id: 'EGD.001-A', product: 'Window Film (WF)' };
+      const b = { id: 'EGD.001-B', product: 'Window Film (WF)' };
+      dashProjectData = [a, b];
+      const pages = [
+        { kind: 'spec', _specTpl: 'egdDetail', row: a, title: 'EGD.001-A' },
+        { kind: 'spec', _specTpl: 'egdDetail', row: b, title: 'EGD.001-B' }
+      ];
+      const merged = _mergeFlatPages(pages);
+      if (merged.length !== 1) throw new Error('expected 1 sheet, got ' + merged.length);
+      if (!merged[0].members || merged[0].members.length !== 2) throw new Error('the surviving sheet does not carry both graphics');
+      // The FIRST page survives, so a per-page setting or approval already attached
+      // to it stays attached.
+      if (merged[0].row !== a) throw new Error('the merge kept the wrong page');
+      if (merged[0].title.indexOf('EGD.001-A') < 0 || merged[0].title.indexOf('EGD.001-B') < 0) {
+        throw new Error('the shared page is not findable by both codes: ' + merged[0].title);
+      }
+    });
+
+    __check('graphics on DIFFERENT walls keep their own sheets', () => {
+      const el = seed([]);
+      elevations.push({ name: 'W2', wallW: 200, wallH: 108, frames: [], personPos: { x: 0 } });
+      el.frames.push({ id: 'A1', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
+      elevations[1].frames.push({ id: 'B1', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
+      const a = { id: 'A1', product: 'Window Film (WF)' }, b = { id: 'B1', product: 'Window Film (WF)' };
+      dashProjectData = [a, b];
+      const merged = _mergeFlatPages([
+        { kind: 'spec', _specTpl: 'egdDetail', row: a }, { kind: 'spec', _specTpl: 'egdDetail', row: b }
+      ]);
+      if (merged.length !== 2) throw new Error('separate walls were merged into one sheet');
+    });
+
+    __check('the merge leaves non-flat pages, and unplaced graphics, alone', () => {
+      const el = seed([]);
+      el.frames.push({ id: 'A1', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
+      const a = { id: 'A1', product: 'Window Film (WF)' };
+      const orphan = { id: 'A9', product: 'Window Film (WF)' };   // on no wall
+      dashProjectData = [a, orphan];
+      const merged = _mergeFlatPages([
+        { kind: 'cover' },
+        { kind: 'spec', _specTpl: 'frameRight', row: { id: 'ART.001' } },
+        { kind: 'spec', _specTpl: 'egdDetail', row: a },
+        { kind: 'spec', _specTpl: 'egdDetail', row: orphan }
+      ]);
+      if (merged.length !== 4) throw new Error('the merge touched pages it should not have: ' + merged.length);
+    });
+
+    __check('the merge runs on the REAL page list, not just when called directly', () => {
+      // In Per-piece mode each row is already its own unit, so there is nothing left
+      // to group by inside the unit builder — the duplication only becomes visible
+      // once the pages exist. That is why this is a post-pass, and it has to be wired.
+      const i = S.indexOf('function _deckPageList');
+      const body = S.slice(i, i + 22000);
+      if (body.indexOf('_mergeFlatPages(') < 0) throw new Error('_deckPageList never merges flat pages');
     });
 
     __check('the schedule prints in the same unit convention as the spec rows above it', () => {
