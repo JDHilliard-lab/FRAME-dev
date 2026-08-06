@@ -785,6 +785,68 @@ const path = require('path');
       }
     });
 
+    __check('EXACT BUG: the PDF merges flat sheets too, not just Deck Studio', () => {
+      // Deck Studio showed one combined sheet while the PDF still printed two. There
+      // are TWO page-list builders and the merge had only been wired into the studio
+      // one — the exact failure the "TWO PAGE-LIST BUILDERS" note warns about.
+      const el = seed([]);
+      el.frames.push({ id: 'W-A', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
+      el.frames.push({ id: 'W-B', x: 120, y: 4, w: 80, h: 82, active: true, product: 'Window Film (WF)' });
+      const a = { id: 'W-A', product: 'Window Film (WF)' }, b = { id: 'W-B', product: 'Window Film (WF)' };
+      dashProjectData = [a, b];
+      const steps = [
+        { type: 'spec', unit: { rep: a, members: [a], key: 'W-A' }, li: 0 },
+        { type: 'spec', unit: { rep: b, members: [b], key: 'W-B' }, li: 0 }
+      ];
+      const merged = _mergeFlatSteps(steps);
+      if (merged.length !== 1) throw new Error('the export still emits ' + merged.length + ' sheets');
+      if (!merged[0].unit.members || merged[0].unit.members.length !== 2) throw new Error('the surviving step does not carry both graphics');
+      // Without _forceTpl the surviving step falls back to the group/per-piece dispatch
+      // and a merged sheet renders as something other than the flat layout.
+      if (merged[0]._forceTpl !== 'egdDetail') throw new Error('the merged step does not force the flat layout');
+      // Non-flat and unplaced steps are left alone.
+      const keep = _mergeFlatSteps([
+        { type: 'spec', unit: { rep: { id: 'ART.1', product: 'Framed Art' } } },
+        { type: 'key', li: 0 },
+        { type: 'spec', unit: { rep: { id: 'ORPH', product: 'Window Film (WF)' } } }
+      ]);
+      if (keep.length !== 3) throw new Error('the export merge touched steps it should not have');
+    });
+
+    __check('BOTH page-list builders wire the merge in', () => {
+      // Source-level, because the two builders are structurally separate and a fix to
+      // one has already silently missed the other twice now.
+      const dpl = S.indexOf('function _deckPageList');
+      if (S.slice(dpl, dpl + 22000).indexOf('_mergeFlatPages(') < 0) throw new Error('the studio builder does not merge');
+      const sf = S.indexOf('const _stepsFor = (u, li) =>');
+      if (S.slice(sf, sf + 12000).indexOf('_mergeFlatSteps(') < 0) throw new Error('the export builder does not merge');
+      // And the export must merge BEFORE it counts pages, or page numbers and the
+      // id-to-page map are built from a list that no longer exists.
+      const mg = S.indexOf('_mergeFlatSteps(plan)');
+      const cnt = S.indexOf('const idToPage = {};');
+      if (mg < 0 || cnt < 0 || mg > cnt) throw new Error('the export merges after it has already numbered the pages');
+    });
+
+    __check('EXACT BUG: ghost panel dims do not survive onto the next elevation', () => {
+      // Reported as "I made a new elevation for framed artwork but I'm getting ghost
+      // measurements from my previous WF elevation". The dim layer was cleared AFTER
+      // the no-runs early return, and nothing else clears it — #dim-layer gets wiped by
+      // drawElevTargetedSpacing, which is the free ride this layer gave up when it
+      // moved out of there.
+      __clearDims();
+      seed([{ x: 20, y: 4, h: 82, panels: [60, 60] }]);
+      elevScale = 2;
+      renderGlazingRuns(240, 108);
+      if (!__dims().h) throw new Error('nothing was drawn for the wall that HAS glazing');
+      // Now a fresh wall with no glazing at all, as clicking "Add Wall" produces.
+      elevations.push({ name: 'Elevation 2', wallW: 185, wallH: 108, frames: [], personPos: { x: 0 } });
+      currentElevIndex = 1; elevFrames = elevations[1].frames;
+      renderGlazingRuns(185, 108);
+      const d = __dims();
+      if (d.h || d.v) throw new Error('the previous wall\\'s panel dims are still on screen (' + d.h + 'h, ' + d.v + 'v)');
+      if (document.querySelectorAll('#glazing-layer .glazing-tag').length) throw new Error('the previous wall\\'s panel tags are still on screen');
+    });
+
     __check('graphics on DIFFERENT walls keep their own sheets', () => {
       const el = seed([]);
       elevations.push({ name: 'W2', wallW: 200, wallH: 108, frames: [], personPos: { x: 0 } });
@@ -820,6 +882,23 @@ const path = require('path');
       const i = S.indexOf('function _deckPageList');
       const body = S.slice(i, i + 22000);
       if (body.indexOf('_mergeFlatPages(') < 0) throw new Error('_deckPageList never merges flat pages');
+    });
+
+    __check('EXACT BUG: the schedule states the print HEIGHT once, not on every row', () => {
+      // Under dual units each cell reads 28.86"(732.9mm), and printing W x H on every
+      // row pushed the two columns straight through each other — unreadable in the PDF.
+      // Every artboard in a run is the same height, so it belongs in one place. The
+      // table cannot just be widened: its right edge is the spec column, and past that
+      // is the elevation.
+      const i = S.indexOf('function _drawGlazingSchedule');
+      const body = S.slice(i, i + 3000);
+      if (body.indexOf("fmt(row.printW) + ' x ' + fmt(row.printH)") >= 0) {
+        throw new Error('the per-row cell still carries both dimensions');
+      }
+      if (body.indexOf('ALL PRINT FILES') < 0) throw new Error('the shared artboard height is not stated anywhere');
+      if (body.indexOf("'PRINT W'") < 0) throw new Error('the column header still promises a full size');
+      // The height is still available per row for anything that needs it (the CSV does).
+      if (S.indexOf("dashFmt(p.printH * toIn)") < 0) throw new Error('the CSV lost the artboard height');
     });
 
     __check('the schedule prints in the same unit convention as the spec rows above it', () => {

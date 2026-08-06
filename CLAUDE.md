@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-111 files, 1250 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+111 files, 1254 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -267,6 +267,11 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   *which pages exist* has to be a **shared function called by both**, or the PDF grows
   pages the preview never showed — which is the worst kind of bug here, because the
   preview is how the deck gets checked.
+  THREE clauses have now drifted this way (`_mergeFlatSteps` was the third, missed
+  one commit AFTER this note was written — the studio merged flat sheets and the PDF
+  still printed two). Any rule about which pages exist needs wiring into BOTH, and a
+  source-level test asserting both call sites, because behaviour tests on one builder
+  pass happily while the other is wrong.
   Two clauses had already drifted this way, both found from one report ("the EGD is
   getting a breaker page in the PDF even though it is not showing in Deck Studio"):
   `_breakerSkipUnit(members)` (a wall that is *entirely* flat graphics skips its
