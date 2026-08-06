@@ -562,12 +562,112 @@ const path = require('path');
     });
 
     __check('the overall dim never prints EQ — EQ is about a repeated gap', () => {
-      const i = S.indexOf("elevFmtU(runW), 'glazing-ov-'");
-      if (i < 0) throw new Error('the overall width dim does not use elevFmtU');
-      // _spacingLabel would return 'EQ' with the toggle on, which says nothing about
-      // how big the window is.
-      const j = S.indexOf('glazing-ov-');
-      if (S.slice(j - 200, j).indexOf('_spacingLabel(runW)') >= 0) throw new Error('the overall went through _spacingLabel');
+      // Pinned on BEHAVIOUR rather than a source string: 16.57 gave the overall dim an
+      // id variable and a drag offset, which moved the literal this used to match.
+      // With EQ on, the panel dims read EQ and the overall must still read its size.
+      __clearDims();
+      seed([{ x: 0, y: 20, h: 80, panels: [60, 60] }]);
+      const _eq = dimVisibility.spacingEQ;
+      dimVisibility.spacingEQ = true;
+      renderGlazingRuns(240, 108);
+      const L2 = document.getElementById('glazing-dim-layer');
+      const texts = Array.from(L2.querySelectorAll('.arch-dim-h')).map(d => (d.textContent || '').trim());
+      if (texts.slice(0, 2).some(t => t.indexOf('EQ') < 0)) throw new Error('the panel dims should honour EQ: ' + texts.join(' | '));
+      const ov = texts[2] || '';
+      if (ov.indexOf('EQ') >= 0) throw new Error('the OVERALL printed EQ, which says nothing about how big the window is');
+      if (ov.indexOf('120') < 0) throw new Error('the overall should read its own size, got "' + ov + '"');
+      dimVisibility.spacingEQ = _eq;
+    });
+
+    // ── Dragging the lines, leaders, and undoing a delete ──────────────────
+    __check('EXACT BUG: a dragged dim LINE stays where it was dragged', () => {
+      // buildDimControls STORES the offset under the dim's id, but a renderer that
+      // hardcodes 0 never reads it back — so the line snapped home on the next redraw
+      // while the label (stored separately and applied inside the dim) stayed put.
+      // That is exactly "I can slide the text but not move the line".
+      __clearDims();
+      seed([{ x: 20, y: 20, h: 80, panels: [60, 60] }]);
+      elevScale = 2;
+      renderGlazingRuns(240, 108);
+      const before = parseFloat(document.getElementById('glazing-dim-layer').querySelector('.arch-dim-h').style.bottom);
+      setDimOffset('glazing-0-0', 12);          // as a drag would
+      __clearDims();
+      renderGlazingRuns(240, 108);
+      const after = parseFloat(document.getElementById('glazing-dim-layer').querySelector('.arch-dim-h').style.bottom);
+      if (Math.abs(after - before) < 1) throw new Error('the dragged line snapped back (' + before + ' -> ' + after + ')');
+      if (Math.abs((after - before) - 12 * elevScale) > 1) throw new Error('the line moved, but not by the dragged amount');
+      setDimOffset('glazing-0-0', 0);
+    });
+
+    __check('the overall and the height dim are draggable too, each on its own axis', () => {
+      __clearDims();
+      seed([{ x: 40, y: 20, h: 80, panels: [60, 60] }]);
+      elevScale = 2;
+      renderGlazingRuns(240, 108);
+      const L = document.getElementById('glazing-dim-layer');
+      const ovBefore = parseFloat(L.querySelectorAll('.arch-dim-h')[2].style.bottom);
+      const vBefore = parseFloat(L.querySelector('.arch-dim-v').style.left);
+      setDimOffset('glazing-ov-0', 10);
+      setDimOffset('glazing-ovh-0', -8);        // a vertical dim moves in X
+      __clearDims();
+      renderGlazingRuns(240, 108);
+      const L2 = document.getElementById('glazing-dim-layer');
+      if (Math.abs(parseFloat(L2.querySelectorAll('.arch-dim-h')[2].style.bottom) - ovBefore) < 1) throw new Error('the overall dim is not draggable');
+      if (Math.abs(parseFloat(L2.querySelector('.arch-dim-v').style.left) - vBefore) < 1) throw new Error('the height dim is not draggable');
+      setDimOffset('glazing-ov-0', 0); setDimOffset('glazing-ovh-0', 0);
+    });
+
+    __check('EXACT ASK: panel dims draw dashed LEADERS back to the glass', () => {
+      // A dimension floating above the drawing with nothing joining it to the glass
+      // does not say WHICH edges it spans. Frame spacing dims get theirs from
+      // band1/band2; these were passing an empty options object.
+      __clearDims();
+      seed([{ x: 20, y: 20, h: 80, panels: [60, 60] }]);
+      elevScale = 2;
+      renderGlazingRuns(240, 108);
+      const L = document.getElementById('glazing-dim-layer');
+      if (!L.querySelector('.dim-leader')) throw new Error('no leader lines — the dims float free of the glass');
+      // The band is the GLASS extent, not the dim's own line, or the leader has
+      // nothing to reach down to.
+      const i = S.indexOf('const gband = {');
+      if (i < 0) throw new Error('no glass band is computed');
+      if (S.slice(i, i + 90).indexOf('lo: y0, hi: y0 + h') < 0) throw new Error('the band is not the glass extent');
+      // The vertical dim's band is a HORIZONTAL extent — a copy of gband would send
+      // its leaders off at 90 degrees to where the glass is.
+      const j = S.indexOf('const vband = {');
+      if (j < 0 || S.slice(j, j + 90).indexOf('lo: x0, hi: x0 + runW') < 0) throw new Error('the height dim reuses the vertical band');
+    });
+
+    __check('EXACT ASK: a deleted panel dim can be brought back', () => {
+      __clearDims();
+      const el = seed([{ x: 20, y: 20, h: 80, panels: [60, 60] }]);
+      renderGlazingControls();
+      if (document.querySelector('#glazingControls .gz-restore')) throw new Error('the restore button shows when nothing is hidden');
+      hideDim('glazing-0-0');
+      if (_glazingHiddenCount() !== 1) throw new Error('the dim was not recorded as hidden');
+      renderGlazingControls();
+      const btn = document.querySelector('#glazingControls .gz-restore');
+      if (!btn) throw new Error('no way to bring a deleted panel dim back');
+      if (btn.textContent.indexOf('1 deleted panel dimension') < 0) throw new Error('the button does not say what it restores: ' + btn.textContent);
+      restoreGlazingDims();
+      if (_glazingHiddenCount() !== 0) throw new Error('restore did not unhide the dim');
+    });
+
+    __check('restoring panel dims leaves OTHER hidden dims and every drag alone', () => {
+      // resetDimOffsets would have done this job, but it is named for something else
+      // and throws away every nudge you have made.
+      __clearDims();
+      seed([{ x: 20, y: 20, h: 80, panels: [60, 60] }]);
+      hideDim('glazing-0-0');
+      // Set directly: hideDim ROUTES a frame-spacing id to a per-frame flag rather
+      // than the generic map, so calling it here would not have put anything in the
+      // map for restoreGlazingDims to spare — the check would pass for the wrong reason.
+      getElevHiddenDims()['spacing-h-A-B'] = true;
+      setDimOffset('glazing-0-1', 9);
+      restoreGlazingDims();
+      if (getElevHiddenDims()['spacing-h-A-B'] !== true) throw new Error('it unhid a frame dim as well');
+      if (Math.abs(getDimOffset('glazing-0-1') - 9) > 0.001) throw new Error('it threw away a drag offset');
+      getElevHiddenDims()['spacing-h-A-B'] = false; setDimOffset('glazing-0-1', 0);
     });
 
     // ── Discoverability: Split must say where panels come from ─────────────
