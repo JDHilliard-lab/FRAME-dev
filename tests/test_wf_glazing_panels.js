@@ -146,7 +146,7 @@ const path = require('path');
     __check('a width dimension per panel, in the dim layer', () => {
       seed([{ x: 0, y: 0, h: 108, panels: [60, 60, 60, 60] }]);
       drawElevAll();
-      const dims = document.querySelectorAll('#dim-layer .arch-dim');
+      const dims = document.querySelectorAll('#glazing-dim-layer .arch-dim');
       if (dims.length < 4) throw new Error('expected a dimension per panel, found ' + dims.length);
       // They go through the shared label helper, so EQ mode reaches them like every
       // other spacing dim rather than being a fifth place that formats its own number.

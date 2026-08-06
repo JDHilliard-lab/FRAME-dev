@@ -165,6 +165,47 @@ const path = require('path');
       if (el.glazing[0].x !== 100) throw new Error('removed the wrong run');
     });
 
+    __check('typing is LIVE — the wall follows each keystroke without losing the caret', () => {
+      // onchange only fires on blur/Enter, so a width could not be watched as it was
+      // typed. The live path must redraw the WALL and NOT rebuild the sidebar: an
+      // innerHTML rebuild destroys the input you are typing into.
+      seed([{ x: 0, y: 30, h: 60, panels: [40, 40] }]);
+      const d0 = __drew, c0 = __ctl;
+      setGlazingPanelWidthLive(0, 0, 55);
+      setGlazingRunFieldLive(0, 'h', 70);
+      if (__drew - d0 !== 2) throw new Error('the live path did not redraw the wall');
+      if (__ctl !== c0) throw new Error('the live path rebuilt the sidebar, which kills focus mid-type');
+      if (elevations[0].glazing[0].panels[0] !== 55) throw new Error('the live edit did not reach the model');
+      if (elevations[0].glazing[0].h !== 70) throw new Error('the live height edit did not reach the model');
+      // And both handlers are actually wired to the inputs.
+      renderGlazingControls();
+      const box = document.getElementById('glazingControls').innerHTML;
+      if (box.indexOf('oninput="setGlazingPanelWidthLive(0, 0,') < 0) throw new Error('panel inputs have no live handler');
+      if (box.indexOf('onchange="setGlazingPanelWidth(0, 0,') < 0) throw new Error('panel inputs lost their commit handler');
+      if (box.indexOf('oninput="setGlazingRunFieldLive(0,') < 0) throw new Error('run fields have no live handler');
+    });
+
+    __check('a live keystroke does NOT file an undo step — one per edit, not per character', () => {
+      let hist = 0; const _ph = pushHistory; pushHistory = () => { hist++; };
+      seed([{ x: 0, y: 30, h: 60, panels: [40, 40] }]);
+      setGlazingPanelWidthLive(0, 0, 41);
+      setGlazingPanelWidthLive(0, 0, 42);
+      setGlazingPanelWidthLive(0, 0, 43);
+      if (hist !== 0) throw new Error('typing filed ' + hist + ' undo steps');
+      setGlazingPanelWidth(0, 0, 43);
+      if (hist !== 1) throw new Error('committing should file exactly one, got ' + hist);
+      pushHistory = _ph;
+    });
+
+    __check('the letter tags sit ABOVE the glass, not on the artwork', () => {
+      const el = seed([{ x: 0, y: 20, h: 80, panels: [40, 40] }]);
+      renderGlazingRuns(240, 108);
+      const tag = document.querySelector('#glazing-layer .glazing-tag');
+      const b = parseFloat(tag.style.bottom);
+      // Head of the glass is (20 + 80) * elevScale; the tag must clear it.
+      if (!(b >= 100 * elevScale)) throw new Error('the tag is inside the pane, over the graphic (bottom ' + b + ')');
+    });
+
     __check('every edit REDRAWS the wall — a seam that moves must move on screen', () => {
       seed([{ x: 0, y: 30, h: 60, panels: [40, 40] }]);
       const before = __drew;
@@ -306,6 +347,30 @@ const path = require('path');
     });
 
     // ── Calling out each panel ──────────────────────────────────────────────
+    __check('EXACT BUG: two runs on one wall do not both start at A', () => {
+      // A wall with two windows was showing A,B,C on each of them, so "panel B" named
+      // two different sheets of glass and a print file had no unambiguous home.
+      const el = seed([{ x: 243, y: 4, h: 82, panels: [33, 33, 33] },
+                       { x: 20, y: 4, h: 82, panels: [50, 50] }]);
+      const m = _glazingWallLabels(el);
+      // Ordered by the run's X, not by the order the runs were added — the letters read
+      // left to right the way the wall does. Run index 1 is the LEFT-hand window here.
+      if (m['1:0'] !== 'A' || m['1:1'] !== 'B') throw new Error('the left window should be A,B — got ' + m['1:0'] + ',' + m['1:1']);
+      if (m['0:0'] !== 'C' || m['0:2'] !== 'E') throw new Error('the right window should continue C,D,E — got ' + m['0:0'] + '..' + m['0:2']);
+      // No duplicates anywhere on the wall.
+      const all = Object.keys(m).map(k => m[k]);
+      if (new Set(all).size !== all.length) throw new Error('a letter is used twice: ' + all.join(','));
+    });
+
+    __check('the schedule uses the WALL letter, so a second window is unambiguous', () => {
+      const el = seed([{ x: 0, y: 4, h: 82, panels: [50, 50] },
+                       { x: 200, y: 4, h: 82, panels: [40, 40] }]);
+      const fr = { id: 'WF-2', x: 200, y: 4, w: 80, h: 82, active: true };
+      el.frames.push(fr);
+      const rows = _glazingScheduleForFrame(el, fr, 2, 'panels');
+      if (rows.map(p => p.label).join(',') !== 'C,D') throw new Error('second window scheduled as ' + rows.map(p => p.label).join(','));
+    });
+
     __check('panels are LETTERED, using the same sequence frames use', () => {
       if (_glazingPanelLabel(0) !== 'A' || _glazingPanelLabel(3) !== 'D') throw new Error('panels are not A..D');
       // 27 panels is absurd, but running off the end of the alphabet silently is worse
@@ -367,10 +432,30 @@ const path = require('path');
     // createElevArchSpacing uses its dimId for control/offset state, NOT as the
     // element id, so these count the drawn lines rather than looking ids up.
     const __dims = () => {
-      const L = document.getElementById('dim-layer');
+      const L = document.getElementById('glazing-dim-layer');
       return { h: L.querySelectorAll('.arch-dim-h').length, v: L.querySelectorAll('.arch-dim-v').length };
     };
-    const __clearDims = () => { const L = document.getElementById('dim-layer'); if (L) L.innerHTML = ''; };
+    const __clearDims = () => { const L = document.getElementById('glazing-dim-layer'); if (L) L.innerHTML = ''; };
+
+    __check('EXACT BUG: panel dims are NOT in the frame-spacing layer', () => {
+      // They were, and #dim-layer's display is owned by the frame-spacing guide button
+      // (#dimToggle) — so every window-panel dimension was invisible unless you happened
+      // to have frame spacing switched on. They were in the DOM the whole time, which is
+      // why this only showed up from a screenshot. A window panel dim is not a frame
+      // spacing dim and must not be hostage to that button.
+      __clearDims();
+      const dl = document.getElementById('dim-layer');
+      if (dl) dl.innerHTML = '';
+      seed([{ x: 12, y: 20, h: 80, panels: [40, 40, 40] }]);
+      renderGlazingRuns(240, 108);
+      if (dl && dl.querySelectorAll('.arch-dim').length) throw new Error('panel dims are back in #dim-layer');
+      if (!document.getElementById('glazing-dim-layer')) throw new Error('#glazing-dim-layer is missing from index.html');
+      if (!__dims().h) throw new Error('nothing was drawn into the glazing dim layer');
+      // And it has to be exported, or the dims are on screen and absent from the PDF.
+      const i = S.indexOf('const annotationLayers = [');
+      if (S.slice(i, S.indexOf('];', i)).indexOf("'glazing-dim-layer'") < 0) throw new Error('the layer is not in annotationLayers');
+      if (S.indexOf("'group-dim-layer','figure-dim-layer','glazing-dim-layer'") < 0) throw new Error('the layer is not in the artboard bounds list, so it can be cropped');
+    });
 
     __check('a multi-panel run dimensions its OVERALL glass, not just each panel', () => {
       // A chain of panel widths with no overall above it makes the reader add three

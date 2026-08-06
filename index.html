@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=16.54">
+    <link rel="stylesheet" href="style.css?v=16.55">
 </head>
 <body>
 
@@ -867,6 +867,13 @@
                              putting these under the film on screen would show one thing
                              in the editor and another in the PDF. -->
                         <div id="glazing-layer" style="position:absolute; inset:0; pointer-events:none; z-index:7;"></div>
+                        <!-- Window-panel dimensions get their OWN layer. They used to go into
+                             #dim-layer, whose display is toggled by the frame-spacing guide
+                             button (#dimToggle) - so every panel dim was invisible unless you
+                             happened to have frame spacing switched on. A window panel dim is
+                             not a frame spacing dim and must not be hostage to that button.
+                             Needs pointer events: these are draggable. -->
+                        <div id="glazing-dim-layer" class="dim-layer" style="z-index:37;"></div>
                         <div id="frame-layer" style="position:absolute; inset:0; z-index:6;"></div>
                         <!-- Snap-to-alignment guide lines. Appear during drag
                              when a frame's edge or center aligns with another
