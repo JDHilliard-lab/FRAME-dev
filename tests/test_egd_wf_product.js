@@ -884,10 +884,21 @@ const path = require('path');
       if (/dy = elevTop \\+ \\(boxH - dh\\) \\/ 2/.test(body)) throw new Error('it is still vertically centred');
       // Its left edge is tied to the spec column, so widening the column cannot push
       // the drawing under the text.
-      if (body.indexOf('const elevLeft = M + colW + _elevGutter;') < 0) throw new Error('the left edge is not derived from the spec column width');
+      // 16.61 added WIDE mode, where the drawing takes the full page width under the
+      // spec band instead. The requirement is unchanged for the side-by-side branch,
+      // which is now the ternary's else.
+      if (body.indexOf('(M + colW + _elevGutter)') < 0) throw new Error('the left edge is not derived from the spec column width');
+      if (body.indexOf('const elevLeft = _wide ? M :') < 0) throw new Error('wide mode does not give the elevation the full page width');
+      // Wide mode is MEASURED, not a control: a page that reshapes itself cannot be
+      // set wrong, and a deck cannot end up half in each layout for no reason.
+      if (body.indexOf('const _wide = _capAsp >=') < 0) throw new Error('wide mode is not chosen from the wall aspect');
+      if (body.indexOf('_wideH >= 110') < 0) throw new Error('nothing stops wide mode leaving the elevation no height');
       if (/elevLeft = SR\\.L \\+ \\(SR\\.R - SR\\.L\\) \\* 0\\.36/.test(body)) throw new Error('the left edge is still a hardcoded fraction unrelated to the spec block');
       // Top clears the title band, so a long heading can never overlap the drawing.
-      if (body.indexOf('const elevTop = titleY + 26;') < 0) throw new Error('the top edge is not tied to the title baseline');
+      if (body.indexOf('(titleY + 26)') < 0) throw new Error('the top edge is not tied to the title baseline');
+      // In wide mode the drawing starts under the spec band, which is itself measured
+      // from the title — so a long heading still cannot overlap it.
+      if (body.indexOf('const _bandBot = Math.max(sy, titleY + 40)') < 0) throw new Error('the wide band is not measured from the spec block and the title');
       // And the caption still has room on the page.
       if (body.indexOf('const elevBottom = SR.B - _elevCapH;') < 0) throw new Error('no room reserved for the caption, so it would print below the bottom guide');
     });
