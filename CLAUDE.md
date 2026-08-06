@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-110 files, 1238 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+111 files, 1246 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -133,6 +133,18 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   caller), so copying it verbatim gives an invisible graphic on the wall and no
   wireframe block; and the flat branch must sit **before** it, or the frame geometry
   below runs first.
+  **Placement does NOT auto-fill a flat graphic** — `_shouldAutoFitFlat` gates both
+  placement paths (Push to Wall and Add & Arrange bulk import, which each had their
+  own copy). It fills only when the wall is in **EGD wall mode** AND the product is
+  **Wallcovering**. Unconditional filling was destructive, not just surprising:
+  `fitFlatGraphicToWall` rewrites `row.extW`/`row.extH` as well as the frame, so a
+  size typed in the dashboard was replaced by the wall size with nothing left to
+  restore it from — reported as "my WF resets out of nowhere to 400x104" (the wall,
+  less its baseboard). Window film is sized to the GLASS, never the wall (WF-3 is
+  `TBD x 14"H`, WF-4/WF-5 are privacy bands), so it is never auto-filled even in EGD
+  wall mode. The **Fit to wall button is deliberately ungated**: asked for
+  explicitly, it still fills. A flat graphic that is not filled must advance `startX`
+  in the bulk importer like any other item, or two of them stack at x=0.
   Their bleed is `FLAT_GRAPHIC_BLEED_IN` = **2"**, seeded on product change but never
   over a value the user typed. `FLAT_GRAPHIC_APPLICATION` is both the Application row's
   text and the substrate seeded into the form — on a flat sheet Application **is** the
