@@ -198,6 +198,25 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   underneath on screen would show one thing in the editor and another in the PDF.
   `renderGlazingRuns` must run **after** `drawElevTargetedSpacing()`, which clears
   `#dim-layer` — it silently wiped every panel dim while leaving the mullions visible.
+  Panels are **lettered** (`_glazingPanelLabel` = `getElevLetter`, so a 27th is AA) and
+  the same letter appears in three places: a chip tag in the pane, the editor field, and
+  the print-schedule row. Frame letters collide by design — a wall can carry a piece B
+  and a panel B — so this is handled by **qualifying, not renaming**: the pane tag is a
+  small chip in the dimension ink (a frame letter is a large grey glyph on the artwork),
+  and anywhere the string could be mistaken for a piece — the CSV, a print filename — it
+  carries its item code, `WF-1.B`. A **clipped** schedule keeps the WALL letter;
+  renumbering from 1 would point the second file at the first pane.
+  A multi-panel run also dimensions its **overall** glass W and H, through `elevFmtU` and
+  never `_spacingLabel`: an overall must not print EQ, which is a claim about a repeated
+  gap, not about the size of an opening. Skipped on a single lite, where the panel dim
+  already IS the overall.
+  `_updatePrintOutputHint` is the live line under the Print Output control. Panels belong
+  to the WINDOW, so they're defined on the elevation, and Split on a wall with no run
+  otherwise yields an empty schedule with nothing to say why — `_glazingScheduleForFrame`
+  failing quiet is right for a renderer and wrong for the control that turns it on.
+  The panel tags are the reason `test_wf_glazing_panels`' `data-svg-pen` rule reads
+  "every **stroke** in `#glazing-layer`" rather than every child: `emitEl` routes an
+  element with direct text down its text path, where a pen weight means nothing.
   `renderGlazingControls()` (the sidebar editor, `<details id="sec-glazing">`) is called
   from the **top** of `initElevControls`, ahead of its no-frames early return: glass is
   independent of frames and a window-film-only wall has none, so a call after that return
