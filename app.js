@@ -24289,39 +24289,29 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
         const res = await _igElevCapture(elevIdx);
         if (res.cap && res.cap.dataUrl) {
             const cw = res.cap.w || 1, ch = res.cap.h || 1;
+            // Fit the WHOLE artboard. Two attempts at aligning the DRAWING rather than
+            // the artboard have now been reverted, and the second one is why this comment
+            // is long: the capture margin is NOT the symmetric ELEV_EXPORT_WRAP_PADDING it
+            // looks like. That value is the top and left padding only — the export then
+            // trims the right and bottom FLUSH to the rightmost/bottommost content
+            // (TIGHT_PAD, plus SAFETY when the character overflows). Cropping 80px off all
+            // four sides therefore cut real drawing off the right and bottom and rescaled
+            // what was left, pushing the image past the safety frame and under its caption.
+            //
+            // 16.70 (shift the image down) failed differently: the margin is opaque white,
+            // so it moved on top of the caption — invisible on a white page, a white slab
+            // on a dark one.
+            //
+            // The alignment fix needs the capture to REPORT the padding it actually
+            // applied, per edge, instead of anything here inferring it. Until it does,
+            // this fits the full artboard, which is always inside the box and correct on
+            // every theme — just with the drawing sitting a little high on a short wall.
             const fit = Math.min(boxW / cw, boxH / ch);
             const dw = cw * fit, dh = ch * fit;
             // Bottom-right anchored, not centred: it reads against both page edges the
             // way the reference sheets do, and any slack from the aspect ratio ends up
             // as one gap at the top rather than two smaller ones.
-            const dx = SR.R - dw, dy0 = elevBottom - dh;
-            // ALIGN THE DRAWING, NOT THE ARTBOARD. The capture carries
-            // ELEV_EXPORT_WRAP_PADDING of dead margin on every edge: the artboard is
-            // content PLUS padding, and the vector path deliberately skips the pixel
-            // crop so the raster and the replayed dimension ops stay registered.
-            // That margin is a FIXED number of artboard units against a variable
-            // drawing, so it eats a far bigger share of a short wall than a long one —
-            // a 240" wall sat ~37pt above its caption while a 400" wall sat ~17pt above,
-            // from identical code. Bottom-anchoring the IMAGE therefore does not
-            // bottom-anchor the drawing.
-            // Shifting down by that margin puts the drawing's own bottom on the same
-            // line the floorplan sits on. The overhang below is the capture's white
-            // margin and the footer is drawn after it, so it does not show.
-            // NOT fixable by trimming ELEV_EXPORT_WRAP_PADDING: that value is pinned
-            // because it sets the scale of every elevation export ever shipped.
-            // REVERTED in 16.71, and the reason is the point: shifting the image down
-            // moves its MARGIN down with it. The capture is an opaque white JPEG, so
-            // the overhang landed on top of the caption — invisible on a white page,
-            // but on a dark page theme it is a white slab across the bottom of the
-            // drawing, and on a wide wall the dimension lines ran into the caption.
-            // "Invisible on the common case" is not the same as correct.
-            // The margin has to come OFF the raster, not be pushed off the page: crop
-            // the padding out and give _drawElevAnnOps the rect the FULL artboard
-            // would have occupied, so the replayed dimensions stay registered against
-            // a smaller image. That is a real change to the capture contract and it
-            // gets its own pass.
-            const _shift = 0;
-            const dy = dy0 + _shift;
+            const dx = SR.R - dw, dy = elevBottom - dh;
             try { doc.addImage(res.cap.dataUrl, 'JPEG', dx, dy, dw, dh); drew = true; } catch (e) {}
             // THE DIMENSIONS LIVE HERE, NOT IN THE RASTER. _captureElevWithGuides
             // splits its output: `dataUrl` is picSvg (frames, artwork, the scale

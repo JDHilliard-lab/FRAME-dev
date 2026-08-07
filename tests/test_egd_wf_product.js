@@ -904,14 +904,21 @@ const path = require('path');
       // replayed dim ops stay registered), and that fixed margin eats a bigger share
       // of a short wall than a long one — so bottom-anchoring the IMAGE left a 240"
       // wall floating ~37pt above its caption while a 400" wall sat ~17pt above.
-      if (body.indexOf('const dx = SR.R - dw, dy0 = elevBottom - dh;') < 0) throw new Error('the elevation is not anchored to the bottom-right of the safety frame');
-      // 16.71 REVERTED the 16.70 shift. Moving the image down moves its MARGIN down
-      // too, and the capture is an opaque white JPEG — the overhang landed on the
-      // caption. Invisible on a white page, a white slab on a dark page theme, and on
-      // a wide wall the dimension lines ran into the caption. The margin has to come
-      // OFF the raster rather than be pushed off the page.
-      if (body.indexOf('const _shift = 0;') < 0) throw new Error('the margin shift is back; it puts the capture\\'s white margin over the caption');
-      if (body.indexOf('const dy = dy0 + _shift;') < 0) throw new Error('the placement no longer routes through the shift');
+      if (body.indexOf('const dx = SR.R - dw, dy = elevBottom - dh;') < 0) throw new Error('the elevation is not anchored to the bottom-right of the safety frame');
+      // The WHOLE artboard is fitted. Two attempts at aligning the DRAWING instead have
+      // been reverted, and both failure modes are worth keeping named here:
+      //   16.70 shifted the placed image down. The margin is an opaque white JPEG, so
+      //         it moved onto the caption — invisible on a white page, a white slab on
+      //         a dark page theme.
+      //   16.72 cropped ELEV_EXPORT_WRAP_PADDING off all four sides. That value is the
+      //         TOP AND LEFT padding only; the export trims right and bottom flush to
+      //         the outermost content. Cropping symmetrically cut real drawing off two
+      //         edges and rescaled the rest past the safety frame.
+      // The fix needs the capture to REPORT its per-edge padding rather than anything
+      // here inferring it.
+      if (body.indexOf('_cropCaptureMargin') >= 0) throw new Error('the symmetric crop is back; the capture margin is not symmetric');
+      if (body.indexOf('_shift') >= 0) throw new Error('the margin shift is back; it puts the capture\\'s white margin over the caption');
+      if (body.indexOf('const fit = Math.min(boxW / cw, boxH / ch);') < 0) throw new Error('the placement no longer fits the full artboard');
       // The raster and the vector ops MUST share one rect or the dimensions slide off
       // the drawing — and _drawElevAnnOps swallows its exceptions, so it fails silently.
       const img = body.indexOf("doc.addImage(res.cap.dataUrl, 'JPEG', dx, dy, dw, dh)");
