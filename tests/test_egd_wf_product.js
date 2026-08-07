@@ -913,7 +913,15 @@ const path = require('path');
       // takes the page bottom at full width and clears only the floorplan thumbnail.
       if (body.indexOf('(_colX(_specCols - 1) + colW + _elevGutter)') < 0) throw new Error('the left edge is not derived from the spec column width');
       if (body.indexOf('const elevLeft = _rows ? (M + planSide + _elevGutter)') < 0) throw new Error('row mode does not give the drawing the page bottom');
-      if (body.indexOf('const _rows = _specCols > 1;') < 0) throw new Error('row mode is not tied to the spec going side by side');
+      // 16.68: MEASURED, not counted. "More than one graphic" was a proxy for the thing
+      // that matters — whether the spec band leaves the page bottom free. A single
+      // wallcovering has the SHORTEST band of any of these sheets (four rows, no panel
+      // schedule) and was the one page still getting the squeezed drawing.
+      if (body.indexOf('const _rows = ((SR.B - _elevCapH) - _bandBot2) >= 150;') < 0) throw new Error('row mode is not measured from the spec band');
+      if (body.indexOf('const _rows = _specCols > 1;') >= 0) throw new Error('row mode is counting graphics again');
+      // The floorplan is a thumbnail in BOTH layouts. Uncapped, a short spec block
+      // handed it the entire column — far more page than a location key needs.
+      if (body.indexOf('Math.min(colW, _thumb,') < 0) throw new Error('the side-by-side floorplan is uncapped again');
       // ONE layout, locked in. 16.61's wide mode freed a full-width strip by moving the
       // floorplan out of its corner; the corner is where it belongs, so wide mode went
       // and the drawing is maximised WITHIN the right-hand column instead.
