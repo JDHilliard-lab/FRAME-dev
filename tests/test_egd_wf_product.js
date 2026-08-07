@@ -944,7 +944,12 @@ const path = require('path');
       if (body.indexOf('Math.max.apply(null, _colBot.concat([titleY + 40])) + 14') < 0) throw new Error('the row-mode top does not clear the spec band');
       // The floorplan is ALWAYS bottom-left. 16.61 moved it into the top band to free a
       // full-width strip, which read as the plan floating mid-sheet.
-      if (body.indexOf('const py0 = SR.B - planSide - 11;') < 0) throw new Error('the floorplan is not pinned to the bottom-left corner');
+      // 16.69: bottom-aligned from its DRAWN height, not its slot. A plan crop wider
+      // than it is tall letterboxes, and pinning the slot top left its bottom edge
+      // floating above the guide while the elevation's sat on it — the two captions
+      // lined up but the two drawings did not.
+      if (body.indexOf('const py0 = SR.B - _elevCapH - dh;') < 0) throw new Error('the floorplan is not pinned to the bottom-left corner');
+      if (body.indexOf('const py0 = SR.B - planSide - 11;') >= 0) throw new Error('the floorplan is slot-aligned again, so it floats above the elevation baseline');
       if (body.indexOf('const px0 = M;') < 0) throw new Error('the floorplan left edge moved off the margin');
       // Two graphics each with a panel schedule made ONE column tall enough to leave
       // the floorplan under 40pt, at which point it was dropped — the plan vanished

@@ -967,6 +967,33 @@ const path = require('path');
       if (body.indexOf('covered.map(p => p.label)') < 0) throw new Error('the note does not name the panels');
     });
 
+    __check('EXACT BUG: a live capture WAITS for the prime batch instead of giving up', () => {
+      // Reported as the EGD elevation appearing in the PDF sometimes and not others,
+      // with the character toggle seemingly involved. Toggling it changes
+      // _elevCaptureSignature, which mints a new _igCapKey and starts the 1.5s
+      // post-edit prime sweep — so Generate PDF inside that window found every page
+      // needing a LIVE capture suppressed, while cached pages came out fine. That is
+      // the whole intermittency.
+      const i = S.indexOf('async function _igElevCapture');
+      if (i < 0) throw new Error('_igElevCapture is gone');
+      const body = S.slice(i, i + 2200);
+      // It must WAIT on the prime, not just test it. "Don't fight for the #wall
+      // element" and "give up" are different answers.
+      if (body.indexOf('&& _elevPrimeActive) {') < 0) throw new Error('nothing waits for the prime batch');
+      if (body.indexOf('_elevPrimeActive; i++') < 0) throw new Error('the wait is not a loop on the flag');
+      // Bounded, so a stuck flag degrades to the old behaviour rather than hanging a
+      // build with no way out.
+      if (body.indexOf('i < 60') < 0) throw new Error('the wait is unbounded');
+      // A cancel still gets out.
+      if (body.slice(body.indexOf('&& _elevPrimeActive) {')).indexOf('_pdfCheckCancel') < 0) {
+        throw new Error('Cancel cannot interrupt the wait');
+      }
+      // And the batch may have filled this very key on its way past.
+      if (body.indexOf('cap = _igCapCache[capKey] || cap;') < 0) throw new Error('it does not re-read the cache after waiting');
+      // The suppressor itself stays: a THUMBNAIL render must still not steal the view.
+      if (body.indexOf('!_igNoCapture && !_elevPrimeActive') < 0) throw new Error('the original guard was removed rather than preceded');
+    });
+
     __check('the schedule prints in the same unit convention as the spec rows above it', () => {
       // Two unit conventions on one sheet is a worse defect than no table at all.
       const i = S.indexOf('function _drawGlazingSchedule');
