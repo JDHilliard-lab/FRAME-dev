@@ -33980,11 +33980,43 @@ async function exportElevSVG(opts) {
         if (personWrapB && getComputedStyle(personWrapB).display !== 'none') {
             boundsEls.push(document.getElementById('person'));
         }
+        // Clamp each rect to its nearest CLIPPING ancestor before it can expand the
+        // artboard. getBoundingClientRect reports an element's own box even when an
+        // ancestor with overflow:hidden is cropping it, so an artwork image LARGER than
+        // its opening contributed its full size here while only the cropped part was
+        // ever visible. The artboard grew, the whole artboard was then fitted into the
+        // page box, and the drawing came out smaller and floating — reported as the
+        // elevation "jumping up", and it disappeared if the image was pre-cropped to the
+        // glass size in Photoshop, which should never have been necessary.
+        // That is also why it tracked the wireframe toggle (a grey block replaces the
+        // image), the character, and deleting a mockup: every one of them changes what
+        // is inside #frame-layer, and any oversized child moved the artboard.
+        // Only REAL clipping counts. The outer wall dims sit 6in outside the wall with
+        // no clipping ancestor, so they must still be free to extend the bounds.
+        const _clipToAncestors = (el) => {
+            let r = el.getBoundingClientRect();
+            let p = el.parentElement;
+            const stop = wall.parentElement;
+            while (p && p !== stop) {
+                let ov = '';
+                try { ov = getComputedStyle(p).overflow; } catch (e) {}
+                if (ov && ov !== 'visible') {
+                    const pr = p.getBoundingClientRect();
+                    const l = Math.max(r.left, pr.left), t = Math.max(r.top, pr.top);
+                    const rr = Math.min(r.right, pr.right), b = Math.min(r.bottom, pr.bottom);
+                    if (rr <= l || b <= t) return null;      // clipped away entirely
+                    r = { left: l, top: t, right: rr, bottom: b, width: rr - l, height: b - t };
+                }
+                p = p.parentElement;
+            }
+            return r;
+        };
         boundsEls.forEach(container => {
             const kids = container.id ? container.querySelectorAll('*') : [container];
             const list = container.tagName === 'IMG' ? [container] : kids;
             list.forEach(el => {
-                const r = el.getBoundingClientRect();
+                const r = _clipToAncestors(el);
+                if (!r) return;
                 if (r.width === 0 && r.height === 0) return;
                 if (r.left < minL) minL = r.left;
                 if (r.top < minT) minT = r.top;
