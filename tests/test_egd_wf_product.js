@@ -667,18 +667,13 @@ const path = require('path');
       const i = S.indexOf('async function _drawFlatGraphicSpecPage');
       const body = S.slice(i, S.indexOf('\\nasync function ', i + 10));
       if (body.indexOf('_drawElevAnnOps(') < 0) throw new Error('THE BUG: the sheet never replays cap.vec, so it has no dimensions and no baseboard');
-      // The ops must be placed on the rect the ARTBOARD occupies, which since 16.72 is
-      // not the image rect: the raster is cropped to its content and the ops, authored
-      // in artboard space, are mapped onto the untrimmed rect at the same scale. What
-      // still has to hold is that BOTH derive from one fitC — compute them
-      // separately and the dims slide off the drawing, silently.
-      const img = body.indexOf("doc.addImage(_crop ? _crop.url : res.cap.dataUrl, 'JPEG', dx, dy, dw, dh)");
-      const ann = body.indexOf('_drawElevAnnOps(doc, res.cap.vec, _oX, _oY, _oW, _oH)');
+      // The ops must be placed on the SAME rect as the image or the dims float away
+      // from the drawing they measure.
+      const img = body.indexOf("doc.addImage(res.cap.dataUrl, 'JPEG', dx, dy, dw, dh)");
+      const ann = body.indexOf('_drawElevAnnOps(doc, res.cap.vec, dx, dy, dw, dh)');
       if (img < 0) throw new Error('the capture image placement changed shape');
-      if (ann < 0) throw new Error('the annotations are not placed on the artboard rect');
+      if (ann < 0) throw new Error('the annotations are not placed on the image rect');
       if (ann < img) throw new Error('the annotations are drawn under the raster, so the picture covers them');
-      if (body.indexOf('const fitC = Math.min(boxW / _cW, boxH / _cH);') < 0) throw new Error('the image and the ops no longer share one scale');
-      if (body.indexOf('_oW = _crop ? cw * fitC : dw') < 0) throw new Error('the ops rect is not the full artboard at the image scale');
       // Same contract the install-guide page has had all along.
       const j = S.indexOf('async function _drawInstallGuidePage');
       if (S.slice(j, j + 40000).indexOf('_drawElevAnnOps(doc, cap.vec') < 0) throw new Error('the install-guide reference call is gone');
@@ -909,26 +904,19 @@ const path = require('path');
       // replayed dim ops stay registered), and that fixed margin eats a bigger share
       // of a short wall than a long one — so bottom-anchoring the IMAGE left a 240"
       // wall floating ~37pt above its caption while a 400" wall sat ~17pt above.
-      if (body.indexOf('const dx = SR.R - dw, dy = elevBottom - dh;') < 0) throw new Error('the elevation is not anchored to the bottom-right of the safety frame');
-      // 16.72: the margin comes OFF the raster. The artboard is content +
-      // ELEV_EXPORT_WRAP_PADDING, a fixed amount against a variable drawing, so
-      // bottom-anchoring the IMAGE left a 240" wall ~37pt above its caption and a 400"
-      // wall ~17pt above. 16.70 shifted the image down instead and was reverted: the
-      // margin is opaque white, so it landed on the caption — a white slab on a dark
-      // page theme, with dimension lines running into the caption on a wide wall.
-      if (body.indexOf('_cropCaptureMargin(res.cap.dataUrl, cw, ch, _padU)') < 0) throw new Error('the capture margin is not cropped, so the drawing floats above its caption');
-      if (body.indexOf('const _shift') >= 0) throw new Error('the reverted shift is back alongside the crop');
-      // ONE scale for both halves. This is the line that keeps the replayed dimension
-      // text on the drawing; compute them separately and the dims slide off, silently,
-      // because _drawElevAnnOps swallows its exceptions.
-      if (body.indexOf('const _oPad = _crop ? _padU * fitC : 0;') < 0) throw new Error('the ops rect is not derived from the same fit as the image');
-      if (body.indexOf('_drawElevAnnOps(doc, res.cap.vec, _oX, _oY, _oW, _oH)') < 0) throw new Error('the ops are not mapped onto the untrimmed artboard rect');
-      // A failed crop must fall back to the whole artboard: a slightly high drawing
-      // beats no drawing.
-      if (body.indexOf('_crop ? _crop.url : res.cap.dataUrl') < 0) throw new Error('a failed crop no longer falls back to the full capture');
-      if (body.indexOf('const _cW = _crop ? _crop.w : cw') < 0) throw new Error('the fallback does not restore the artboard dimensions');
-      // Covered in full by the vector-dims check above: since 16.72 the two rects
-      // differ by exactly the cropped margin and are held together by one fitC.
+      if (body.indexOf('const dx = SR.R - dw, dy0 = elevBottom - dh;') < 0) throw new Error('the elevation is not anchored to the bottom-right of the safety frame');
+      // 16.71 REVERTED the 16.70 shift. Moving the image down moves its MARGIN down
+      // too, and the capture is an opaque white JPEG — the overhang landed on the
+      // caption. Invisible on a white page, a white slab on a dark page theme, and on
+      // a wide wall the dimension lines ran into the caption. The margin has to come
+      // OFF the raster rather than be pushed off the page.
+      if (body.indexOf('const _shift = 0;') < 0) throw new Error('the margin shift is back; it puts the capture\\'s white margin over the caption');
+      if (body.indexOf('const dy = dy0 + _shift;') < 0) throw new Error('the placement no longer routes through the shift');
+      // The raster and the vector ops MUST share one rect or the dimensions slide off
+      // the drawing — and _drawElevAnnOps swallows its exceptions, so it fails silently.
+      const img = body.indexOf("doc.addImage(res.cap.dataUrl, 'JPEG', dx, dy, dw, dh)");
+      const ops = body.indexOf('_drawElevAnnOps(doc, res.cap.vec, dx, dy, dw, dh)');
+      if (img < 0 || ops < 0) throw new Error('the raster and the annotation ops no longer share the same placed rect');
       if (/dy = elevTop \\+ \\(boxH - dh\\) \\/ 2/.test(body)) throw new Error('it is still vertically centred');
       // Its left edge is tied to the spec column, so widening the column cannot push
       // the drawing under the text.
