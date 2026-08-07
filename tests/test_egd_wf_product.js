@@ -876,6 +876,24 @@ const path = require('path');
     });
 
     // ── The sheet's elevation is bottom-right anchored and as large as it fits ──
+    __check('EXACT ASK: a flat page does not offer the framed spec templates', () => {
+      // _specTplResolve returns egdDetail for a wallcovering or window film ahead of
+      // everything, so every card in that grid is a layout the page cannot take —
+      // clicking one looks like it did nothing. A one-card grid would be the same
+      // non-choice with more furniture, so the section states what the sheet does.
+      const i = S.indexOf("_dsSection(t, 'Spec template', 'spectpl', true)");
+      if (i < 0) throw new Error('the spec template section is gone');
+      const body = S.slice(i, i + 1600);
+      if (body.indexOf('_isFlatGraphic(desc.row.product)') < 0) throw new Error('the picker does not check for a flat row');
+      // The bail must come BEFORE the cards are appended, or they show anyway.
+      const gate = body.indexOf('if (_flatPage)');
+      const cards = body.indexOf('tplBody.appendChild(cardsWrap)');
+      if (gate < 0 || cards < 0 || gate > cards) throw new Error('the framed cards are still appended for a flat page');
+      // And the grid itself still excludes flat templates for FRAMED pages, so the
+      // two halves of this can't both be dropped and leave a mixed picker.
+      if (S.indexOf('!SPEC_TEMPLATES[k].flat') < 0) throw new Error('the framed grid no longer excludes flat templates');
+    });
+
     __check('EXACT ASK: the sheet elevation anchors bottom-right and scales up', () => {
       const i = S.indexOf('async function _drawFlatGraphicSpecPage');
       const body = S.slice(i, S.indexOf('\\nasync function ', i + 10));
