@@ -898,7 +898,20 @@ const path = require('path');
       const i = S.indexOf('async function _drawFlatGraphicSpecPage');
       const body = S.slice(i, S.indexOf('\\nasync function ', i + 10));
       // Bottom-right, not centred.
-      if (body.indexOf('const dx = SR.R - dw, dy = elevBottom - dh;') < 0) throw new Error('the elevation is not anchored to the bottom-right of the safety frame');
+      // 16.70: the anchor is unchanged, but it is applied to the DRAWING rather than
+      // the artboard. The capture carries ELEV_EXPORT_WRAP_PADDING of dead margin on
+      // every edge (the vector path skips the pixel crop so the raster and the
+      // replayed dim ops stay registered), and that fixed margin eats a bigger share
+      // of a short wall than a long one — so bottom-anchoring the IMAGE left a 240"
+      // wall floating ~37pt above its caption while a 400" wall sat ~17pt above.
+      if (body.indexOf('const dx = SR.R - dw, dy0 = elevBottom - dh;') < 0) throw new Error('the elevation is not anchored to the bottom-right of the safety frame');
+      if (body.indexOf('dh * (_padU / ch)') < 0) throw new Error('the capture margin is not compensated, so the drawing floats above its caption');
+      if (body.indexOf('const dy = dy0 + _shift;') < 0) throw new Error('the shift is computed but not applied');
+      // The raster and the vector ops MUST share one rect or the dimensions slide off
+      // the drawing — and _drawElevAnnOps swallows its exceptions, so it fails silently.
+      const img = body.indexOf("doc.addImage(res.cap.dataUrl, 'JPEG', dx, dy, dw, dh)");
+      const ops = body.indexOf('_drawElevAnnOps(doc, res.cap.vec, dx, dy, dw, dh)');
+      if (img < 0 || ops < 0) throw new Error('the raster and the annotation ops no longer share the same placed rect');
       if (/dy = elevTop \\+ \\(boxH - dh\\) \\/ 2/.test(body)) throw new Error('it is still vertically centred');
       // Its left edge is tied to the spec column, so widening the column cannot push
       // the drawing under the text.
