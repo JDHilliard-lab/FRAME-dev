@@ -148,11 +148,24 @@ const path = require('path');
       drawElevAll();
       const dims = document.querySelectorAll('#glazing-dim-layer .arch-dim');
       if (dims.length < 4) throw new Error('expected a dimension per panel, found ' + dims.length);
-      // They go through the shared label helper, so EQ mode reaches them like every
-      // other spacing dim rather than being a fifth place that formats its own number.
-      const i = S.indexOf('function renderGlazingRuns');
-      const body = S.slice(i, S.indexOf('\\n}', i));
-      if (body.indexOf('_spacingLabel(pw)') < 0) throw new Error('panel dims format their own label, so EQ mode would skip them');
+      // EQ mode still reaches them. 16.65 swapped _spacingLabel for
+      // _glazingSpacingLabel, which is the same rule plus EXACT precision: a panel
+      // width is a fabrication number, and elevFmt's whole-inch rounding printed 29"
+      // on the drawing beside 28.86" in the print schedule for the same pane.
+      // Pinned on BEHAVIOUR, since the point was never which function is called.
+      const _eq = dimVisibility.spacingEQ;
+      dimVisibility.spacingEQ = true;
+      drawElevAll();
+      const eqTexts = Array.from(document.querySelectorAll('#glazing-dim-layer .arch-dim-h'))
+        .map(d => (d.textContent || '').trim());
+      dimVisibility.spacingEQ = _eq;
+      if (!eqTexts.length || eqTexts.slice(0, 4).some(t => t.indexOf('EQ') < 0)) {
+        throw new Error('panel dims format their own label, so EQ mode skipped them: ' + eqTexts.join(' | '));
+      }
+      // And with EQ off the number must NOT be rounded to a whole inch.
+      drawElevAll();
+      if (_elevFmtExact(28.857) !== '28.857') throw new Error('the exact formatter is rounding');
+      if (_elevFmtExact(29) !== '29') throw new Error('a whole panel should still read 29, not 29.000');
     });
 
     __check('nothing is drawn when there is no glazing, and it survives junk', () => {

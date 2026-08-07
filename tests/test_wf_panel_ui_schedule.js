@@ -130,6 +130,54 @@ const path = require('path');
       for (let i = 1; i < s.length; i++) if (!(s[i] > s[i - 1])) throw new Error('seams are not increasing: ' + s.join(','));
     });
 
+    __check('EXACT BUG: the drawing and the print schedule agree on a panel width', () => {
+      // Reported: the elevation read 29" for a panel the schedule called 28.86" — two
+      // roundings of 202/7 = 28.857142, disagreeing by 0.14" about a pane of glass.
+      // elevFmt rounds inches to whole for legibility, which is right for a hang height
+      // and wrong for something being cut.
+      const el = seed([{ x: 0, y: 4, h: 82, panels: [] }]);
+      el.glazing[0].panels = [0, 0, 0, 0, 0, 0, 0];
+      setGlazingRunField(0, 'w', 202);
+      const w = el.glazing[0].panels[0];
+      // What the drawing prints, stripped of unit marks, vs what the schedule prints.
+      const drawn = parseFloat(_elevFmtExact(w));
+      const sched = _glazingPanelPrints(el.glazing[0], 0, 82)[0].finishedW;
+      if (Math.abs(drawn - sched) > 0.001) throw new Error('drawing says ' + drawn + ', schedule says ' + sched);
+    });
+
+    __check('EXACT ASK: Equal snaps to 1/16" — a width someone can cut to', () => {
+      // An exact division of 202 over 7 is 28.857142, which is not a width anyone can
+      // cut glass to. The drift correction made the SUM right while every panel stayed
+      // an awkward number.
+      const el = seed([{ x: 0, y: 4, h: 82, panels: [0, 0, 0, 0, 0, 0, 0] }]);
+      setGlazingRunField(0, 'w', 202);
+      const p = el.glazing[0].panels;
+      // Every panel but the last lands on a sixteenth.
+      p.slice(0, -1).forEach((v, i) => {
+        if (Math.abs(v * 16 - Math.round(v * 16)) > 1e-6) throw new Error('panel ' + i + ' is ' + v + ', not a sixteenth');
+      });
+      // The remainder still lands on the last panel, so the run totals EXACTLY.
+      if (_glazingRunWidth(el.glazing[0]) !== 202) throw new Error('the run no longer totals its target: ' + _glazingRunWidth(el.glazing[0]));
+      if (p[0] !== 28.875) throw new Error('expected 28.875 per panel, got ' + p[0]);
+    });
+
+    __check('a TYPED width is left exactly as measured — only Equal snaps', () => {
+      // A width you type is a measurement, not a division. Snapping it would silently
+      // move a pane the installer had already measured.
+      const el = seed([{ x: 0, y: 4, h: 82, panels: [40, 40] }]);
+      setGlazingPanelWidth(0, 0, 33.3333);
+      if (el.glazing[0].panels[0] !== 33.3333) throw new Error('a typed width was snapped to ' + el.glazing[0].panels[0]);
+    });
+
+    __check('the snap is a physical increment, so a cm project gets the same glass', () => {
+      // Authored in inches and converted, like every other standard here — snapping to
+      // a whole centimetre instead would be a different pane.
+      elevUnit = 'cm';
+      const step = GLAZING_SNAP_IN * unitFactor('in', 'cm');
+      if (Math.abs(step - 0.15875) > 1e-6) throw new Error('the cm step is ' + step + ', not 1/16 inch');
+      elevUnit = 'in';
+    });
+
     __check('Equal fills the array — it is a shortcut, not a stored mode', () => {
       const el = seed([{ x: 0, y: 30, h: 60, panels: [30, 60, 30] }]);
       equalizeGlazingPanels(0);
