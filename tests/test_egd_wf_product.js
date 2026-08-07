@@ -887,25 +887,29 @@ const path = require('path');
       // 16.61 added WIDE mode, where the drawing takes the full page width under the
       // spec band instead. The requirement is unchanged for the side-by-side branch,
       // which is now the ternary's else.
-      if (body.indexOf('(M + colW + _elevGutter)') < 0) throw new Error('the left edge is not derived from the spec column width');
-      if (body.indexOf('const elevLeft = _wide ? M :') < 0) throw new Error('wide mode does not give the elevation the full page width');
-      // Wide mode is MEASURED, not a control: a page that reshapes itself cannot be
-      // set wrong, and a deck cannot end up half in each layout for no reason.
-      if (body.indexOf('const _wide = _capAsp >=') < 0) throw new Error('wide mode is not chosen from the wall aspect');
-      if (body.indexOf('_wideH >= 110') < 0) throw new Error('nothing stops wide mode leaving the elevation no height');
-      // Wide mode is a BAND, not a floor. Past ~6:1 the extra width stops buying
-      // legibility (1000x108 is 9.3:1 — 0.86pt/in, a 29" panel is 25pt against a
-      // ~40pt label), so it would just make a different unreadable drawing.
-      if (body.indexOf('const _tooWide = _capAsp > 6;') < 0) throw new Error('wide mode has no upper bound');
-      if (body.indexOf('!_tooWide') < 0) throw new Error('the upper bound is computed but not applied');
-      // And the page SAYS so, rather than quietly printing 6pt dimensions.
+      if (body.indexOf('const elevLeft = M + colW + _elevGutter;') < 0) throw new Error('the left edge is not derived from the spec column width');
+      // ONE layout, locked in. 16.61's wide mode freed a full-width strip by moving the
+      // floorplan out of its corner; the corner is where it belongs, so wide mode went
+      // and the drawing is maximised WITHIN the right-hand column instead.
+      // indexOf, not a regex: inside this template literal the backslash is eaten
+      // before the RegExp sees it, so /_wide \?/ became /_wide ?/ — "_wide" with an
+      // OPTIONAL space — which matched _wideH and failed against correct code.
+      if (body.indexOf('_wide ?') >= 0) throw new Error('a second layout branch is back');
+      // The drawing is width-constrained on every real wall, so the gutter is the only
+      // lever on its scale — a wide one silently costs scale for nothing.
+      if (body.indexOf('const _elevGutter = 12;') < 0) throw new Error('the gutter is not at its tightened value');
+      // Past ~6:1 no single view reads (1000x108 is 9.3:1 — 0.86pt/in, a 29" panel is
+      // 25pt against a ~40pt label), so the page SAYS so rather than quietly printing
+      // 6pt dimensions.
+      if (body.indexOf('const _tooWide = _capAsp > 6;') < 0) throw new Error('nothing detects an unreadably wide wall');
       if (body.indexOf('issue this elevation in sections') < 0) throw new Error('an over-wide wall prints no note');
       if (/elevLeft = SR\\.L \\+ \\(SR\\.R - SR\\.L\\) \\* 0\\.36/.test(body)) throw new Error('the left edge is still a hardcoded fraction unrelated to the spec block');
       // Top clears the title band, so a long heading can never overlap the drawing.
-      if (body.indexOf('(titleY + 26)') < 0) throw new Error('the top edge is not tied to the title baseline');
-      // In wide mode the drawing starts under the spec band, which is itself measured
-      // from the title — so a long heading still cannot overlap it.
-      if (body.indexOf('const _bandBot = Math.max(sy, titleY + 40)') < 0) throw new Error('the wide band is not measured from the spec block and the title');
+      if (body.indexOf('const elevTop = titleY + 26;') < 0) throw new Error('the top edge is not tied to the title baseline');
+      // The floorplan is ALWAYS bottom-left. 16.61 moved it into the top band to free a
+      // full-width strip, which read as the plan floating mid-sheet.
+      if (body.indexOf('const py0 = SR.B - planSide - 11;') < 0) throw new Error('the floorplan is not pinned to the bottom-left corner');
+      if (body.indexOf('const px0 = M;') < 0) throw new Error('the floorplan left edge moved off the margin');
       // And the caption still has room on the page.
       if (body.indexOf('const elevBottom = SR.B - _elevCapH;') < 0) throw new Error('no room reserved for the caption, so it would print below the bottom guide');
     });

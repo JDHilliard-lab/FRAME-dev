@@ -901,6 +901,24 @@ const path = require('path');
       if (S.indexOf("dashFmt(p.printH * toIn)") < 0) throw new Error('the CSV lost the artboard height');
     });
 
+    __check('EXACT BUG: a graphic with NO schedule says why, instead of looking broken', () => {
+      // Reported twice as "I'm still missing the H, I, J panel dims". A graphic sitting
+      // on lettered window panels with no print-file table beside it reads as a missing
+      // table; the honest answer is usually that the row is still set to one file.
+      const i = S.indexOf('function _drawFlatPanelSchedule');
+      if (i < 0) throw new Error('the schedule helper is gone');
+      const body = S.slice(i, i + 1800);
+      if (body.indexOf("_glazingScheduleForFrame(el, fr, bl, 'panels')") < 0) {
+        throw new Error('nothing checks whether the wall HAS panels under this graphic');
+      }
+      if (body.indexOf('Set Print Output to Split per window panel') < 0) throw new Error('no explanation is printed');
+      // It must never nag about a wall with no glazing at all.
+      if (body.indexOf('if (!covered.length) return;') < 0) throw new Error('the note would appear on a wall with no window panels');
+      // And it names the panels that WOULD be scheduled, so the letters on the drawing
+      // and the letters in the message are the same set.
+      if (body.indexOf('covered.map(p => p.label)') < 0) throw new Error('the note does not name the panels');
+    });
+
     __check('the schedule prints in the same unit convention as the spec rows above it', () => {
       // Two unit conventions on one sheet is a worse defect than no table at all.
       const i = S.indexOf('function _drawGlazingSchedule');
