@@ -739,7 +739,7 @@ const path = require('path');
       // The two requirements are unchanged: it is drawn before the floorplan claims
       // the space, and it advances the layout cursor rather than being drawn over.
       const i = S.indexOf('function _drawFlatGraphicSpecPage');
-      const body = S.slice(i, i + 7000);
+      const body = S.slice(i, i + 9000);
       const sched = body.indexOf('_drawFlatPanelSchedule(');
       const plan = body.indexOf('const planSide');
       if (sched < 0) throw new Error('the flat-graphic sheet never draws a panel schedule');

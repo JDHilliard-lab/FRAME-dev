@@ -887,7 +887,10 @@ const path = require('path');
       // 16.61 added WIDE mode, where the drawing takes the full page width under the
       // spec band instead. The requirement is unchanged for the side-by-side branch,
       // which is now the ternary's else.
-      if (body.indexOf('const elevLeft = M + colW + _elevGutter;') < 0) throw new Error('the left edge is not derived from the spec column width');
+      // 16.64: with two spec columns the left edge has to clear the LAST one, so it is
+      // derived from _colX rather than a single colW. Same requirement either way -
+      // widening the spec area moves the drawing instead of sliding under it.
+      if (body.indexOf('const elevLeft = _colX(_specCols - 1) + colW + _elevGutter;') < 0) throw new Error('the left edge is not derived from the spec column width');
       // ONE layout, locked in. 16.61's wide mode freed a full-width strip by moving the
       // floorplan out of its corner; the corner is where it belongs, so wide mode went
       // and the drawing is maximised WITHIN the right-hand column instead.
@@ -910,6 +913,18 @@ const path = require('path');
       // full-width strip, which read as the plan floating mid-sheet.
       if (body.indexOf('const py0 = SR.B - planSide - 11;') < 0) throw new Error('the floorplan is not pinned to the bottom-left corner');
       if (body.indexOf('const px0 = M;') < 0) throw new Error('the floorplan left edge moved off the margin');
+      // Two graphics each with a panel schedule made ONE column tall enough to leave
+      // the floorplan under 40pt, at which point it was dropped — the plan vanished
+      // exactly when the sheet carried the most information. Side-by-side halves it.
+      if (body.indexOf('const _specCols = Math.min(_members.length, 2);') < 0) throw new Error('spec blocks are stacked again');
+      // Blocks in a row share a top, or the two headings do not line up and the
+      // second column reads as an afterthought rather than a column.
+      if (body.indexOf('sy = _rowTop;') < 0) throw new Error('blocks in a row do not share a baseline');
+      // The plan measures against ITS OWN column, not the tallest one — a tall second
+      // column must not shrink a plan that has room beneath the first.
+      if (body.indexOf('(SR.B - (_colBot[0] || sy)) - 26') < 0) throw new Error('the plan is still measured against the tallest column');
+      // And each schedule draws in its own block's column.
+      if (body.indexOf('_drawFlatPanelSchedule(doc, m, _cx,') < 0) throw new Error('the schedule is pinned to the first column');
       // And the caption still has room on the page.
       if (body.indexOf('const elevBottom = SR.B - _elevCapH;') < 0) throw new Error('no room reserved for the caption, so it would print below the bottom guide');
     });
