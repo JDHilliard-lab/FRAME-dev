@@ -563,7 +563,7 @@ const path = require('path');
       if (!v.querySelector('.arch-label-rot')) throw new Error('the height label is still upright, so it lands across the glass');
       // createElevArchSpacing has to actually support the flag, not just be handed it.
       const i = S.indexOf('function createElevArchSpacing');
-      const body = S.slice(i, i + 9000);
+      const body = S.slice(i, i + 11000);
       if (body.indexOf('bandOpt.rotateLabel') < 0) throw new Error('createElevArchSpacing ignores rotateLabel');
       if (body.indexOf('rotateLabel: !!bandOpt.rotateLabel') < 0) throw new Error('the flag never reaches buildDimControls, so the chevrons rotate with it');
     });
@@ -787,7 +787,7 @@ const path = require('path');
       // The two requirements are unchanged: it is drawn before the floorplan claims
       // the space, and it advances the layout cursor rather than being drawn over.
       const i = S.indexOf('function _drawFlatGraphicSpecPage');
-      const body = S.slice(i, i + 9000);
+      const body = S.slice(i, i + 12000);
       const sched = body.indexOf('_drawFlatPanelSchedule(');
       const plan = body.indexOf('const planSide');
       if (sched < 0) throw new Error('the flat-graphic sheet never draws a panel schedule');

@@ -890,7 +890,12 @@ const path = require('path');
       // 16.64: with two spec columns the left edge has to clear the LAST one, so it is
       // derived from _colX rather than a single colW. Same requirement either way -
       // widening the spec area moves the drawing instead of sliding under it.
-      if (body.indexOf('const elevLeft = _colX(_specCols - 1) + colW + _elevGutter;') < 0) throw new Error('the left edge is not derived from the spec column width');
+      // 16.66: TWO layouts. One spec column -> the drawing sits beside it and its left
+      // edge is derived from colW. Two columns -> the spec band is short, so the drawing
+      // takes the page bottom at full width and clears only the floorplan thumbnail.
+      if (body.indexOf('(_colX(_specCols - 1) + colW + _elevGutter)') < 0) throw new Error('the left edge is not derived from the spec column width');
+      if (body.indexOf('const elevLeft = _rows ? (M + planSide + _elevGutter)') < 0) throw new Error('row mode does not give the drawing the page bottom');
+      if (body.indexOf('const _rows = _specCols > 1;') < 0) throw new Error('row mode is not tied to the spec going side by side');
       // ONE layout, locked in. 16.61's wide mode freed a full-width strip by moving the
       // floorplan out of its corner; the corner is where it belongs, so wide mode went
       // and the drawing is maximised WITHIN the right-hand column instead.
@@ -908,7 +913,9 @@ const path = require('path');
       if (body.indexOf('issue this elevation in sections') < 0) throw new Error('an over-wide wall prints no note');
       if (/elevLeft = SR\\.L \\+ \\(SR\\.R - SR\\.L\\) \\* 0\\.36/.test(body)) throw new Error('the left edge is still a hardcoded fraction unrelated to the spec block');
       // Top clears the title band, so a long heading can never overlap the drawing.
-      if (body.indexOf('const elevTop = titleY + 26;') < 0) throw new Error('the top edge is not tied to the title baseline');
+      if (body.indexOf('(titleY + 26)') < 0) throw new Error('the top edge is not tied to the title baseline');
+      // In row mode it starts under the TALLEST spec column, so no block can overlap it.
+      if (body.indexOf('Math.max.apply(null, _colBot.concat([titleY + 40])) + 14') < 0) throw new Error('the row-mode top does not clear the spec band');
       // The floorplan is ALWAYS bottom-left. 16.61 moved it into the top band to free a
       // full-width strip, which read as the plan floating mid-sheet.
       if (body.indexOf('const py0 = SR.B - planSide - 11;') < 0) throw new Error('the floorplan is not pinned to the bottom-left corner');
