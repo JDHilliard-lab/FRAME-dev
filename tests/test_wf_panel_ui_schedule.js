@@ -861,6 +861,34 @@ const path = require('path');
       if (keep.length !== 3) throw new Error('the export merge touched steps it should not have');
     });
 
+    __check('EXACT BUG: the PDF keys a merged sheet the same way the studio does', () => {
+      // Reported: dividers held their place in Deck Studio but some were kicked to the
+      // bottom of the generated PDF. The studio keys a spec page 'spec:' + its TITLE;
+      // the export keys it 'spec:' + unit.key. Identical for every ordinary page, which
+      // is why it went unnoticed — but a merged flat sheet's title is the joined codes
+      // while unit.key stays the first one, so the export never emitted the key the
+      // divider was pinned to and the end-of-run sweep appended it at the end.
+      const el = seed([]);
+      el.frames.push({ id: 'W-A', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
+      el.frames.push({ id: 'W-B', x: 120, y: 4, w: 80, h: 82, active: true, product: 'Window Film (WF)' });
+      const a = { id: 'W-A', product: 'Window Film (WF)' }, b = { id: 'W-B', product: 'Window Film (WF)' };
+      dashProjectData = [a, b];
+      const merged = _mergeFlatSteps([
+        { type: 'spec', unit: { rep: a, members: [a], key: 'W-A' }, li: 0 },
+        { type: 'spec', unit: { rep: b, members: [b], key: 'W-B' }, li: 0 }
+      ]);
+      if (merged.length !== 1) throw new Error('expected one merged step');
+      // The key the export will emit must equal the studio's 'spec:' + merged title.
+      if (merged[0]._pageKey !== 'spec:W-A + W-B') throw new Error('export page key is ' + merged[0]._pageKey);
+      // unit.key is deliberately NOT rewritten — it also resolves per-page overrides
+      // and approval state.
+      if (merged[0].unit.key !== 'W-A') throw new Error('unit.key was rewritten, which moves per-page overrides');
+      // And the walk must actually prefer it.
+      if (S.indexOf('const stepKey = step._pageKey ? step._pageKey :') < 0) {
+        throw new Error('the export walk ignores _pageKey, so the pinned divider is still unanchored');
+      }
+    });
+
     __check('BOTH page-list builders wire the merge in', () => {
       // Source-level, because the two builders are structurally separate and a fix to
       // one has already silently missed the other twice now.

@@ -12410,6 +12410,16 @@ function _mergeFlatSteps(steps) {
         // and a merged sheet renders as something other than the flat layout.
         x.step.unit = Object.assign({}, x.step.unit, { members: x.rows });
         x.step._forceTpl = 'egdDetail';
+        // The PAGE KEY a pinned divider anchors to. The studio keys a spec page by its
+        // TITLE ('spec:' + title) while the export keys it by unit.key — the same string
+        // for every ordinary page, which is why this went unnoticed, but NOT for a
+        // merged sheet: _mergeFlatPages rewrites the studio title to the joined codes
+        // while unit.key stays the first one. So the export never emitted the key the
+        // divider was pinned to, and the end-of-run sweep for un-emitted layout pages
+        // put it at the BOTTOM of the PDF while Deck Studio showed it in place.
+        // Carried as its own field rather than by rewriting unit.key, because that key
+        // also resolves per-page overrides and approval state.
+        x.step._pageKey = 'spec:' + x.rows.map(m => (m && m.id) || '').filter(Boolean).join(' + ');
     });
     return drop.size ? steps.filter(s => !drop.has(s)) : steps;
 }
@@ -26029,7 +26039,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
     // — Emit the plan: floorplan keys and spec pages, interleaved per level —
     for (const step of plan) {
-        const stepKey = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'detail' ? ('plandetail:' + (step.pd.id || step.pi)) : step.type === 'install' ? (step._groupKey != null ? ('spec:elevgrp:' + step._groupKey) : ('spec:elev:' + step.idx)) : ('spec:' + (step.unit && step.unit.key));
+        // _pageKey wins when a step carries one: a merged flat sheet's studio title is the
+        // joined codes while its unit.key is only the first, and a pinned divider anchors
+        // to the title. See _mergeFlatSteps.
+        const stepKey = step._pageKey ? step._pageKey : step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'detail' ? ('plandetail:' + (step.pd.id || step.pi)) : step.type === 'install' ? (step._groupKey != null ? ('spec:elevgrp:' + step._groupKey) : ('spec:elev:' + step.idx)) : ('spec:' + (step.unit && step.unit.key));
         newPage(stepKey);
         const _scoped = _inScope(pageNum, stepKey);
         if (step.type === 'key') {
