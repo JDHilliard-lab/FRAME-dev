@@ -11772,6 +11772,24 @@ function _deckPageList() {
     layoutAt('beforeContacts');
     if (inc.contacts) pages.push({ kind: 'card', type: 'contacts', title: 'Thank You', text: ec.contacts });
     // User-inserted pages anchored after a specific page (page management).
+    // MERGE AND HIDE FIRST, THEN PIN. A spec page's key is 'spec:' + its TITLE (see
+    // _deckPageKey), and _mergeFlatPages REWRITES that title on the surviving page to
+    // the joined codes ("WF.001-A + WF.001-B"). Pinning after the merge meant the key
+    // the user pinned to — read off the list they can see — did not exist yet when the
+    // insertion searched for it, so `idx < 0` sent the page to the very BOTTOM of the
+    // deck, past the Thank You page. That is the reported symptom exactly: a divider
+    // could be dropped BEFORE a run of EGD/WF/ART (those anchors are floorplans, cards
+    // or unmerged pages, whose titles never change) but never between two graphics
+    // sharing a wall.
+    // So the list searched here is now the same list the rail displays. The deeper
+    // fault is keying a page on a mutable display string; reordering fixes the bug
+    // without invalidating every afterKey already stored in a project file.
+    {
+        const hid0 = editorialContent.hiddenFixed || {};
+        const merged = _mergeFlatPages(pages.filter(p => !(p.kind === 'fixed' && hid0[p.fixed])));
+        pages.length = 0;
+        merged.forEach(p => pages.push(p));
+    }
     (ec.layoutPages || []).forEach(p => {
         if (!p.afterKey) return;
         const d = { kind: 'layout', type: p.type || 'moodboard', title: p.title || _mbDefaultTitle(p.type || 'moodboard') || 'Page', page: p };
@@ -11783,8 +11801,8 @@ function _deckPageList() {
         while (j < pages.length && pages[j].kind === 'layout' && pages[j].page && pages[j].page.afterKey === p.afterKey) j++;
         pages.splice(j, 0, d);
     });
-    const hid = editorialContent.hiddenFixed || {};
-    return _mergeFlatPages(pages.filter(p => !(p.kind === 'fixed' && hid[p.fixed])));
+    // Already merged and hidden-filtered above, before the pins were placed.
+    return pages;
 }
 function _deckMockHTML(desc, w, h) {
     const pg = (desc.kind === 'layout' || desc.kind === 'fixed') ? desc.page : null;

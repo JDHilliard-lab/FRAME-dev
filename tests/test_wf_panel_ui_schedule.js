@@ -923,6 +923,26 @@ const path = require('path');
       if (merged.length !== 4) throw new Error('the merge touched pages it should not have: ' + merged.length);
     });
 
+    __check('EXACT BUG: a divider pinned next to a merged sheet is not sent to the bottom', () => {
+      // A spec page's key is 'spec:' + its TITLE, and _mergeFlatPages REWRITES that
+      // title on the surviving page to the joined codes. With the merge running AFTER
+      // the pin insertion, the key the user pinned to — read off the list they can see —
+      // did not exist when the insertion searched for it, and idx < 0 pushed the page
+      // to the very bottom of the deck, past Thank You. Reported as: a divider can go
+      // BEFORE a run of EGD/WF/ART but never between two graphics sharing a wall.
+      const i = S.indexOf('function _deckPageList');
+      const body = S.slice(i, i + 22000);
+      const mg = body.indexOf('_mergeFlatPages(');
+      const pin = body.indexOf("if (p.afterKey === '__start__')");
+      if (mg < 0 || pin < 0) throw new Error('could not find the merge and the pin pass');
+      if (mg > pin) throw new Error('the merge still runs after the pins, so an anchor on a merged sheet is unfindable');
+      // The pin pass must see the merged titles, so the hidden-fixed filter has to move
+      // with it — otherwise a pin could anchor to a page that is filtered out later.
+      if (body.indexOf('hid0[p.fixed]') < 0) throw new Error('the hidden-fixed filter did not move ahead of the pins');
+      // And nothing may re-merge on the way out, which would rename titles again.
+      if (body.indexOf('return _mergeFlatPages(') >= 0) throw new Error('the list is merged a second time after pinning');
+    });
+
     __check('the merge runs on the REAL page list, not just when called directly', () => {
       // In Per-piece mode each row is already its own unit, so there is nothing left
       // to group by inside the unit builder — the duplication only becomes visible
