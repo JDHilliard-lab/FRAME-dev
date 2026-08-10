@@ -945,6 +945,21 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   renderer, plus a look at how the rotated chip crowds a short spacing gap
   (`_autoLiftDimLabel` deliberately no-ops on a rotated label, so a number too tall
   for its gap has no escape hatch yet).
+- **Rich text wraps ~1% differently in Deck Studio and the PDF**, because the two
+  compute the font size from DIFFERENT BASES. Size is stored as a FRACTION of page
+  height; the PDF does `(r.size || t.size) * PH` (the nominal 540pt page) while the
+  editor does `(t.size || 0.045) * cr.height` (the MEASURED height of the rendered page
+  element in CSS px). A border, a content-box difference or sub-pixel layout rounding
+  puts those ~1% apart, so the pt value in the Text Settings box is not quite the pt
+  value the PDF sets.
+  Invisible on body copy (0.16pt at 16pt type) and invisible on display type UNLESS a
+  line sits on a wrap boundary — then one point flips the break and a whole word
+  cascades. Reproduced at Druk Bold 91pt: the PDF matched the editor at **92pt**, and
+  the user's workaround was to widen the box so the line was no longer borderline.
+  Fix = derive the editor size from the same nominal PH scaled by the preview zoom, so
+  the displayed pt IS the PDF pt by construction. Do it deliberately: it changes the
+  rendered size of every text box in every saved project by that same ~1%, which can
+  reflow anything else sitting near a boundary.
 - **Thumbnail canvas renderer mis-lays-out large display type.** It positions text
   using built-in font width tables that lack Druk, so words overlap. The real PDF is
   fine (it embeds the font). Candidate fix: route element pages to the lightweight
