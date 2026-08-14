@@ -1131,9 +1131,12 @@ const fs = require('fs');
       // one machine, or that has not been run, is the failure worth preventing.
       const fs2 = window.__promoteSrc;
       if (!fs2) throw new Error('tools/promote.js was not handed to the test');
-      if (fs2.indexOf('git status --porcelain') < 0) throw new Error('it does not check for uncommitted changes');
+      // Argument ARRAYS, not command strings: execSync goes through cmd.exe on Windows,
+      // where ^ is the escape character and HEAD^{tree} arrives as HEAD{tree}.
+      if (fs2.indexOf("'status', '--porcelain'") < 0) throw new Error('it does not check for uncommitted changes');
+      if (fs2.indexOf('execFileSync') < 0) throw new Error('it shells out, so Windows eats the revision syntax');
       if (fs2.indexOf('ALL GREEN') < 0) throw new Error('it does not gate on the suite');
-      if (fs2.indexOf("rev-parse origin/main") < 0) throw new Error('it does not check dev was pushed first');
+      if (fs2.indexOf("'rev-parse', 'origin/main'") < 0) throw new Error('it does not check dev was pushed first');
       // Version and cache-buster agree - the failure this project already has a test for,
       // checked once more at the last moment before it reaches users.
       if (fs2.indexOf("'style.css?v=' + version") < 0) throw new Error('it does not re-check the stylesheet cache-buster');
