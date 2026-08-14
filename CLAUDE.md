@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1390 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1394 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -283,6 +283,20 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   with the "set Print Output to split" hint. It writes every window-film member, and shows
   **indeterminate** when they disagree rather than rounding to on or off: rounding is what
   lets a graphic sit unsplit behind a ticked box.
+- **A GLAZING RUN IS DRAGGED BY A GRIP, NEVER BY THE GLASS.** `#glazing-layer` is z 9,
+  above the frames and the context blocks, so making the run rectangle interactive would
+  lay an invisible sheet over every graphic on that glass — and window film graphics live
+  exactly there. Only `.gz-grip` opts into pointer events; the run outline keeps
+  `pointer-events:none`.
+  The grip is authoring furniture, so it carries **both** `data-export-skip` and
+  `data-html2canvas-ignore`: this layer IS an annotation layer (so the SVG and PDF emit
+  what is left in it) and the PNG path rasterises the live DOM and reads neither list.
+  Shown only on the **Glass tab**, which is why `switchElevTab` has to redraw — otherwise
+  the grips appear only after some unrelated edit triggers one.
+  Snapping goes through the shared engine with a new `skip.glazingIdx`: a dragged run must
+  not offer its own seams and edges, which travel with it and would pin it in place. One
+  undo entry on mouseup, and only when something moved. Not clamped to the wall, the same
+  call `addGlazingRun` makes.
 - **`buildWfWall` IS THE STANDARD WF ELEVATION** (`WF_WALL_PRESET`: 185x108 wall, one
   100x82 run at x=45 on a 4in sill, three equal panels) and it opens the Glass tab, so the
   next move is visible rather than something a designer has to be told. It only sizes the

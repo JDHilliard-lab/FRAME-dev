@@ -1013,6 +1013,87 @@ const fs = require('fs');
       if (A.slice(b2, b2 + 1400).indexOf("_elevShowTabFor('glass')") < 0) throw new Error('WF WALL does not open the Glass tab');
     });
 
+    // ── Dragging a glazing run (16.96) ──────────────────────────────────────
+    __check('EXACT ASK: a run can be dragged, and only a GRIP takes the pointer', () => {
+      // "would be nice if I could move the Runs by hand instead of entering units From
+      // left." The glass itself must NOT be the drag target: #glazing-layer is z 9, above
+      // the frames and the context blocks, so an interactive run rectangle would put an
+      // invisible sheet over every graphic on that glass - and window film graphics live
+      // exactly there.
+      const A = window.__appSrc;
+      const r = A.indexOf('function renderGlazingRuns');
+      const body = A.slice(r, r + 3600);
+      if (body.indexOf("g.className = 'glazing-run'") < 0) throw new Error('the run outline is gone');
+      const gi = body.indexOf("g.className = 'glazing-run'");
+      const outline = body.slice(gi, gi + 700);
+      if (outline.indexOf('pointer-events:none') < 0) throw new Error('the glass itself takes the pointer, covering the art on it');
+      if (body.indexOf("grip.className = 'gz-grip'") < 0) throw new Error('there is no drag grip');
+      if (body.indexOf('_makeGlazingDraggable(grip, ri)') < 0) throw new Error('the grip is not wired to the drag');
+      // The grip is authoring furniture, so it must leave BOTH export paths: the layer is
+      // an annotation layer (SVG + PDF) and the PNG path rasterises the live DOM.
+      const gpi = body.indexOf("grip.className = 'gz-grip'");
+      const grip = body.slice(gpi, gpi + 900);
+      if (grip.indexOf("data-export-skip") < 0) throw new Error('the grip would print in the SVG and PDF');
+      if (grip.indexOf("data-html2canvas-ignore") < 0) throw new Error('the grip would appear in the PNG');
+      if (grip.indexOf('pointer-events:auto') < 0) throw new Error('the grip cannot be grabbed');
+    });
+
+    __check('a dragged run does not snap to its OWN seams', () => {
+      // Its seams and edges travel with it, so every candidate would sit exactly under the
+      // cursor and the run would pin itself in place. Same reason a dragged frame skips
+      // its own index.
+      const save = elevations, saveI = currentElevIndex;
+      elevUnit = 'in';
+      elevations = [{ name: 'E1', wallW: 400, wallH: 108, frames: [] }];
+      currentElevIndex = 0;
+      elevFrames = [];
+      const wwEl = document.getElementById('wallW'); if (wwEl) wwEl.value = '400';
+      const whEl = document.getElementById('wallH'); if (whEl) whEl.value = '108';
+      buildWfWall();
+      addGlazingRun();
+      const runs = _elevGlazing(elevations[0]);
+      const t0 = _elevSnapTargets({});
+      const t1 = _elevSnapTargets({ glazingIdx: 0 });
+      if (!(t1.xTargets.length < t0.xTargets.length)) throw new Error('skipping a run removed no targets');
+      // Run 0's own left edge is gone from the pool when run 0 is the one being dragged.
+      const x0 = parseFloat(runs[0].x) || 0;
+      const stillThere = t1.xTargets.some(t => t.kind === 'glazing-left' && Math.abs(t.value - x0) < 1e-6);
+      if (stillThere) throw new Error('the dragged run still offers its own left edge');
+      // The OTHER run's targets survive, which is the point of dragging one against it.
+      const other = t1.xTargets.some(t => t.kind === 'glazing-left' || t.kind === 'glazing-seam');
+      if (!other) throw new Error('the other run stopped being a snap target');
+      elevations = save; currentElevIndex = saveI; elevFrames = [];
+    });
+
+    __check('the drag files ONE undo entry, and only when something moved', () => {
+      // Not one per mousemove, which would bury the deck's history in a single drag; and a
+      // click on the grip is not an edit.
+      const A = window.__appSrc;
+      const i = A.indexOf('function _makeGlazingDraggable');
+      const body = A.slice(i, A.indexOf('function renderGlazingRuns'));
+      if (body.indexOf('document.onmouseup') < 0) throw new Error('nothing commits the drag');
+      const up = body.slice(body.indexOf('document.onmouseup'));
+      if (up.indexOf('if (moved)') < 0) throw new Error('a click on the grip files an undo entry');
+      if (up.indexOf('pushHistory') < 0) throw new Error('the drag is not undoable');
+      const move = body.slice(body.indexOf('document.onmousemove'), body.indexOf('document.onmouseup'));
+      if (move.indexOf('pushHistory') >= 0) throw new Error('history is pushed on every mousemove');
+      // The sidebar fields have to follow the drag, or From left reads the old number.
+      if (up.indexOf('initElevControls()') < 0) throw new Error('the run fields do not follow the drag');
+      // And it yields to the wall modes that own the pointer.
+      ['contextToolActive', '_ulCalibrateActive', 'lineToolActive'].forEach(m => {
+        if (body.indexOf(m) < 0) throw new Error('the drag does not yield to ' + m);
+      });
+    });
+
+    __check('switching to the Glass tab redraws, so the grips actually appear', () => {
+      // The grips are rendered only on the Glass tab. Without a redraw on the tab change
+      // they show up only after some unrelated edit happens to trigger one.
+      const A = window.__appSrc;
+      const i = A.indexOf('function switchElevTab');
+      const body = A.slice(i, i + 1100);
+      if (body.indexOf('drawElevAll()') < 0) throw new Error('changing tab does not redraw the wall');
+    });
+
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {
       editorialContent.pageFooters['floorplan:0'] = { hideFooter: true };
       _curFooter = _resolveFooter('floorplan:0');
