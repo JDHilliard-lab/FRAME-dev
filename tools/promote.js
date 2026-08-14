@@ -61,7 +61,9 @@ if (!version) die('could not read APP_VERSION from app.js.');
 const html = require('fs').readFileSync('index.html', 'utf8');
 if (html.indexOf('style.css?v=' + version) < 0) die('index.html does not link style.css?v=' + version + '.');
 
-sh('git remote get-url ' + REMOTE + ' 2>/dev/null || git remote add ' + REMOTE + ' ' + URL, { shell: true });
+// Remote check in JS, not a shell `||` fallback: that is bash syntax and this runs on
+// Windows, where it fails on the redirect before it ever reaches the fallback.
+if (sh('git remote').split(/\s+/).indexOf(REMOTE) < 0) sh('git remote add ' + REMOTE + ' ' + URL);
 sh('git fetch ' + REMOTE + ' main');
 const stableHead = sh('git rev-parse ' + REMOTE + '/main');
 const tree = sh('git rev-parse HEAD^{tree}');
