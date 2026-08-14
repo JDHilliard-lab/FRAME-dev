@@ -752,17 +752,17 @@ const fs = require('fs');
       // sheet that the panels are producing no schedule and fixes it right there.
       const i = A.indexOf('function _dsPrintOutputInto');
       if (i < 0) throw new Error('Deck Studio has no Print Output control');
-      const body = A.slice(i, i + 2200);
-      if (body.indexOf("row.product !== 'Window Film (WF)'") < 0) throw new Error('the control is offered on wallcovering too');
+      const body = A.slice(i, A.indexOf('function _dsDualUnitInto'));
+      if (body.indexOf("m.product === 'Window Film (WF)'") < 0) throw new Error('the control is offered on wallcovering too');
       if (body.indexOf('setRowPrintOutput(') < 0) throw new Error('the control writes the field directly instead of through the setter');
       // Changing it adds or removes the whole schedule table, so the page has to rebuild.
       if (body.indexOf('_dsRefresh()') < 0) throw new Error('the page is not rebuilt when the mode changes');
       if (body.indexOf("cb.type = 'checkbox'") < 0) throw new Error('it is not a checkbox, so it does not read like the settings around it');
       // ABOVE Dual units, and in BOTH spec modes: a flat graphic is split onto its own
       // egdDetail sheet whatever the mode, so the page exists in each of them.
-      const calls = (A.match(/_dsPrintOutputInto\\(head, desc\\.row\\)/g) || []).length;
+      const calls = (A.match(/_dsPrintOutputInto\\(head, desc\\)/g) || []).length;
       if (calls < 2) throw new Error('the control is missing from one of the spec modes (' + calls + ' of 2)');
-      A.split('_dsPrintOutputInto(head, desc.row)').slice(1).forEach((after, n) => {
+      A.split('_dsPrintOutputInto(head, desc)').slice(1).forEach((after, n) => {
         const d = after.indexOf('_dsDualUnitInto(head)');
         if (d < 0 || d > 400) throw new Error('call site ' + (n + 1) + ' is not immediately above Dual units');
       });
@@ -794,10 +794,34 @@ const fs = require('fs');
       const dash = A.slice(A.indexOf('function _updatePrintOutputHint'), A.indexOf('function setRowPrintOutput'));
       if (dash.indexOf('_printOutputHintText(') < 0) throw new Error('the dashboard hint no longer uses the shared wording');
       const ds = A.indexOf('function _dsPrintOutputInto');
-      if (A.slice(ds, ds + 2200).indexOf('_printOutputHintText(') < 0) throw new Error('the Deck Studio hint has its own wording');
+      if (A.slice(ds, A.indexOf('function _dsDualUnitInto')).indexOf('_printOutputHintText(') < 0) throw new Error('the Deck Studio hint has its own wording');
       // And it says nothing at all when there is nothing to say.
       if (_printOutputHintText({ product: 'Wallcovering (EGD)', printOutput: 'panels' })) throw new Error('a wallcovering got a panel hint');
       if (_printOutputHintText({ product: 'Window Film (WF)', printOutput: 'full' })) throw new Error('a full-file graphic got a panel hint');
+    });
+
+    __check('EXACT BUG: Split acts on BOTH graphics when two share a sheet', () => {
+      // "when two separate window placements are on the same page only one is changing
+      // when I check off Split per window panel." Two graphics sharing a wall share a
+      // sheet (_mergeFlatPages), and desc.row is only the FIRST of them - so the control
+      // changed one while the page in front of you showed two, one with a schedule table
+      // and one with the "set Print Output to split" hint.
+      const A = window.__appSrc;
+      const i = A.indexOf('function _dsPrintOutputInto');
+      const body = A.slice(i, A.indexOf('function _dsDualUnitInto'));
+      // It takes the PAGE and reads its members, not a single row.
+      if (body.indexOf('desc.members') < 0) throw new Error('the control still binds to one row');
+      if (/function _dsPrintOutputInto\\(parent, row\\)/.test(A)) throw new Error('the control still takes a row');
+      // Every member moves together: they share a wall and a glazing run, so splitting
+      // one and not the other is a sheet that contradicts itself.
+      if (body.indexOf('rows.forEach(r => setRowPrintOutput(r,') < 0) throw new Error('the toggle does not write every member');
+      // MIXED is shown as mixed rather than rounded to on or off - rounding is what lets
+      // a graphic sit unsplit behind a ticked box.
+      if (body.indexOf('cb.indeterminate') < 0) throw new Error('a half-split sheet reads as fully one or the other');
+      // And the hint names which graphic it is talking about when there is more than one.
+      if (body.indexOf("(r.id || '')") < 0) throw new Error('the per-graphic hint does not say which graphic');
+      // Both call sites hand over the descriptor.
+      if ((A.match(/_dsPrintOutputInto\\(head, desc\\)/g) || []).length < 2) throw new Error('a call site still passes a row');
     });
 
     // ── Wall mode indicator (16.90) ─────────────────────────────────────────
@@ -825,7 +849,9 @@ const fs = require('fs');
       // the same source-window trap three other checks in this suite have now hit.
       const sy = A.indexOf("const egdBtn = document.getElementById('egdWallBtn')");
       if (sy < 0) throw new Error('nothing syncs the wall-mode buttons');
-      const sb = A.slice(sy - 400, sy + 500);
+      // To the END of the function, not a guessed distance - this block has grown twice
+      // and both times a fixed window read as the code having been removed.
+      const sb = A.slice(sy - 900, A.indexOf('function toggleGroupBoxVisibility'));
       if (sb.indexOf("classList.toggle('active', on)") < 0) throw new Error('the EGD button does not light for EGD');
       if (sb.indexOf("classList.toggle('active', !on)") < 0) throw new Error('the ART button does not light for ART');
       if (sb.indexOf('_isEgdWall(elevations[currentElevIndex])') < 0) throw new Error('the state is not read from this elevation');
@@ -887,9 +913,104 @@ const fs = require('fs');
       const A = window.__appSrc;
       const i = A.indexOf("getElementById('wallModeHint')");
       if (i < 0) throw new Error('nothing writes the hint');
-      const body = A.slice(i, i + 900);
+      const body = A.slice(i - 900, A.indexOf('function toggleGroupBoxVisibility'));
       if (body.indexOf('glazing') < 0) throw new Error('the hint does not look at whether the wall has glass');
+      if (body.indexOf('hasGlass') < 0) throw new Error('the hint does not branch on the wall having glass');
       if (body.indexOf('does not need EGD mode') < 0) throw new Error('the hint never says a glazed wall is fine on ART');
+    });
+
+    __check('WF WALL builds the standard elevation and opens the Glass tab', () => {
+      const save = elevations, saveI = currentElevIndex;
+      elevations = [{ name: 'E1', wallW: 0, wallH: 0, frames: [] }];
+      currentElevIndex = 0;
+      elevUnit = 'in';
+      buildWfWall();
+      const e = elevations[0];
+      const P = WF_WALL_PRESET;
+      if (Math.abs(e.wallW - P.wallW) > 0.01 || Math.abs(e.wallH - P.wallH) > 0.01) {
+        throw new Error('the wall was not sized: ' + e.wallW + 'x' + e.wallH);
+      }
+      const runs = _elevGlazing(e);
+      if (runs.length !== 1) throw new Error('expected one run, got ' + runs.length);
+      const r = runs[0];
+      if (Math.abs(r.x - P.runX) > 0.01) throw new Error('run x: ' + r.x);
+      if (Math.abs(r.y - P.sill) > 0.01) throw new Error('sill: ' + r.y);
+      if (Math.abs(r.h - P.runH) > 0.01) throw new Error('run height: ' + r.h);
+      if (r.panels.length !== P.panels) throw new Error('panel count: ' + r.panels.length);
+      if (Math.abs(_glazingRunWidth(r) - P.runW) > 0.01) throw new Error('run width: ' + _glazingRunWidth(r));
+      // Three EQUAL panels, with the rounding RESIDUAL on the last one. Widths snap to a
+      // sixteenth, so 100/3 cannot divide exactly - the equal panels match each other and
+      // the last one absorbs the remainder, which is what makes the run re-sum to the
+      // total instead of leaving a hairline gap at the edge.
+      const w0 = r.panels[0];
+      r.panels.slice(0, -1).forEach((p, i) => {
+        if (Math.abs(p - w0) > 1e-6) throw new Error('panel ' + i + ' is not equal: ' + p);
+      });
+      const lastW = r.panels[r.panels.length - 1];
+      if (Math.abs(lastW - w0) > 0.0626) throw new Error('the residual is bigger than a sixteenth: ' + lastW);
+      const sum = r.panels.reduce((a2, b2) => a2 + b2, 0);
+      if (Math.abs(sum - P.runW) > 1e-6) throw new Error('the panels do not re-sum to the run: ' + sum);
+      elevations = save; currentElevIndex = saveI;
+    });
+
+    __check('WF WALL does not overwrite a wall someone has already built', () => {
+      // A wall that is already dimensioned or has art on it carries a real instruction.
+      // Overwriting it is the same mistake auto-fitting a flat graphic to the wall was.
+      const save = elevations, saveI = currentElevIndex;
+      elevUnit = 'in';
+      elevations = [{ name: 'E1', wallW: 240, wallH: 96, frames: [{ id: 'A', active: true }] }];
+      currentElevIndex = 0;
+      buildWfWall();
+      const e = elevations[0];
+      if (e.wallW !== 240 || e.wallH !== 96) throw new Error('a sized wall was overwritten: ' + e.wallW + 'x' + e.wallH);
+      // ...but it still gets glass, because asking for a WF wall on a wall you already
+      // sized should give you glass at the standard sill, not refuse.
+      if (_elevGlazing(e).length !== 1) throw new Error('no run was added to an existing wall');
+      elevations = save; currentElevIndex = saveI;
+    });
+
+    __check('a second run continues the first instead of starting over', () => {
+      // "when adding more runs to the default elevation can the default build glass to the
+      // right of the first three glass and at the same height to 82 and maybe just one
+      // panel 33W". That is how glazing runs along a wall, and it is what you would
+      // otherwise re-type every time.
+      const save = elevations, saveI = currentElevIndex;
+      elevUnit = 'in';
+      elevations = [{ name: 'E1', wallW: 0, wallH: 0, frames: [] }];
+      currentElevIndex = 0;
+      buildWfWall();
+      addGlazingRun();
+      const runs = _elevGlazing(elevations[0]);
+      if (runs.length !== 2) throw new Error('expected two runs, got ' + runs.length);
+      const a = runs[0], b = runs[1];
+      // To the RIGHT of the first, at the same sill and the same head height.
+      if (!(b.x > a.x + _glazingRunWidth(a) - 0.01)) throw new Error('the second run is not to the right: ' + b.x);
+      if (Math.abs(b.y - a.y) > 0.01) throw new Error('the sill did not carry over: ' + b.y);
+      if (Math.abs(b.h - a.h) > 0.01) throw new Error('the head height did not carry over: ' + b.h);
+      if (b.panels.length !== WF_NEXT_RUN.panels) throw new Error('panel count: ' + b.panels.length);
+      if (Math.abs(_glazingRunWidth(b) - WF_NEXT_RUN.w) > 0.01) throw new Error('width: ' + _glazingRunWidth(b));
+      // NOT clamped to the wall: a run past the corner is the prompt to widen the wall,
+      // and shrinking it silently would hide that.
+      if (b.x + _glazingRunWidth(b) < elevations[0].wallW) {
+        // fine either way here; the point is only that nothing threw and nothing shrank
+        if (Math.abs(_glazingRunWidth(b) - WF_NEXT_RUN.w) > 0.01) throw new Error('the run was clamped');
+      }
+      elevations = save; currentElevIndex = saveI;
+    });
+
+    __check('WF WALL is DERIVED from the glass, not a third stored mode', () => {
+      // A wall with a glazing run on it IS a window-film wall. A separate flag would be
+      // one more thing to keep in step with the runs, and it would go stale the moment
+      // someone deleted the last run.
+      const A = window.__appSrc;
+      const i = A.indexOf("const wfBtn = document.getElementById('wfWallBtn')");
+      if (i < 0) throw new Error('the WF button never syncs');
+      const body = A.slice(i - 400, i + 300);
+      if (body.indexOf('hasGlass') < 0) throw new Error('the WF button is not lit from the glazing');
+      if (/elev\.wfWall|wallMode\s*=/.test(A)) throw new Error('a third wall-mode flag was stored');
+      // And it opens the Glass tab, so the next move is visible rather than explained.
+      const b2 = A.indexOf('function buildWfWall');
+      if (A.slice(b2, b2 + 1400).indexOf("_elevShowTabFor('glass')") < 0) throw new Error('WF WALL does not open the Glass tab');
     });
 
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {

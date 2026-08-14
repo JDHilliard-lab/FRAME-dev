@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1385 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1390 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -277,6 +277,29 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   two different sentences is how a user ends up believing they are two settings. Toggling
   must `_dsClearBuiltAll()` + `_dsRefresh()`: the sheet gains or loses a whole table, so
   the page and its thumbnail rebuild rather than being relabelled.
+- **`_dsPrintOutputInto` TAKES THE PAGE, NOT A ROW.** Two graphics sharing a wall share a
+  sheet (`_mergeFlatPages`) and `desc.row` is only the FIRST of them, so a control bound
+  to it changed one graphic while the page showed two — one with a schedule table and one
+  with the "set Print Output to split" hint. It writes every window-film member, and shows
+  **indeterminate** when they disagree rather than rounding to on or off: rounding is what
+  lets a graphic sit unsplit behind a ticked box.
+- **`buildWfWall` IS THE STANDARD WF ELEVATION** (`WF_WALL_PRESET`: 185x108 wall, one
+  100x82 run at x=45 on a 4in sill, three equal panels) and it opens the Glass tab, so the
+  next move is visible rather than something a designer has to be told. It only sizes the
+  WALL when the elevation is blank (`_wfWallIsBlank`): a wall already dimensioned or with
+  art on it carries a real instruction, and overwriting it is the mistake auto-fitting a
+  flat graphic to the wall was. It still adds glass to a wall you already sized.
+  **WF WALL is DERIVED, never stored**: a wall with a glazing run IS a window-film wall, so
+  the button lights from `elev.glazing` and there is no third flag to go stale when the
+  last run is deleted. It is not exclusive with ART/EGD — a glazed wall is normally an ART
+  wall, which is what `#wallModeHint` explains.
+  **A second run CONTINUES the first** (`WF_NEXT_RUN`): same sill, same head height, to the
+  right of the last run, one panel wide. Deliberately not clamped to the wall — a run past
+  the corner is the prompt to widen the wall, and shrinking it silently would hide that.
+  Panel widths snap to a sixteenth, so "equal" means the non-last panels match and the LAST
+  absorbs the residual; that is what makes a run re-sum to its total instead of leaving a
+  hairline gap at the edge, and a test asserting all panels equal is asserting the wrong
+  thing.
 - **`_egdWallGoverns` IS THE ONE ANSWER TO "WHAT DOES EGD WALL MODE TOUCH": WALLCOVERING.**
   `_shouldAutoFitFlat` already said window film is sized to the GLASS and never to the
   wall — and then `toggleEgdWall` and `_clampFlatToWall` both tested "is it flat", which
