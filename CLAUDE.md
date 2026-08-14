@@ -7,9 +7,22 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 - **Vanilla JS only.** One large `app.js` (~27k lines) + `index.html`. No frameworks,
   no build step, no bundler, no JSX, no Tailwind. Everything shares one global scope.
 - Vendored libs: `lib-jspdf.min.js` (UMD), `lib-jszip.min.js`.
-- Dev site: `jdhilliard-lab.github.io/FRAME-dev`. `APP_VERSION` + `APP_BUILD='dev'`
-  drive the version pill in the header — bump `APP_VERSION` on every change so it's
-  obvious in the browser which build is loaded.
+- **TWO SITES, ONE TREE.** Dev is `jdhilliard-lab.github.io/FRAME-dev` (repo `FRAME-dev`,
+  remote `origin`); stable is `jdhilliard-lab.github.io/FRAME` (repo `FRAME`, remote
+  `stable`). They run **byte-identical files**: `APP_BUILD` is *derived from the URL*,
+  never hand-edited, so a release is a push with nothing to remember to flip. A line that
+  must differ between the two repos forever is the line that eventually gets promoted by
+  mistake, putting a green "production" dot on the dev build. An unrecognised location
+  (`file://`, localhost, a test harness) reads as **dev**, because the safe error is
+  calling a build unreleased rather than calling a working copy live.
+  Promote with `node tools/promote.js` (dry run) then `--push`. It gates on a clean
+  working tree, dev already pushed to origin, ALL GREEN, and `style.css?v=` matching
+  `APP_VERSION`; then it writes ONE snapshot commit (`git commit-tree`) of the dev tree
+  onto the stable history. Deliberately **not a merge** — the histories diverged long ago
+  and nobody wants fifteen dev commits in a release log — and **not a force-push**, because
+  the one thing a stable site owes you is the ability to revert.
+  `APP_VERSION` drives the version pill; bump it on every change so it's obvious in the
+  browser which build is loaded.
 - **`index.html` links `style.css?v=<APP_VERSION>` and the two must match** (pinned
   by `test_dash_visible_and_tick_clearance.js`, so a forgotten bump fails the suite).
   Unversioned, a browser serves a cached stylesheet next to a fresh `app.js`: the
