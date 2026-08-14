@@ -987,7 +987,10 @@ const path = require('path');
       // table cannot just be widened: its right edge is the spec column, and past that
       // is the elevation.
       const i = S.indexOf('function _drawGlazingSchedule');
-      const body = S.slice(i, i + 3000);
+      // Widened from 3000 in 16.89: the two-column split for a long schedule made the
+      // function longer and pushed the footer out of the window, which read as the footer
+      // having been deleted. The window has to hold the whole function, not a guess at it.
+      const body = S.slice(i, i + 4400);
       if (body.indexOf("fmt(row.printW) + ' x ' + fmt(row.printH)") >= 0) {
         throw new Error('the per-row cell still carries both dimensions');
       }

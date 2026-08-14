@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=16.71">
+    <link rel="stylesheet" href="style.css?v=16.93">
 </head>
 <body>
 
@@ -720,6 +720,26 @@
                             <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
                             RESET DIMENSION POSITIONS
                         </button>
+                        <!-- WALL MODE. Two buttons, not one toggle: a toggle can only show
+                             the state it is in and leaves the other one unnamed, so a
+                             designer has to already know the mode exists to go looking for
+                             it. Side by side, the wall's mode is the highlighted one and
+                             the alternative is right there with a name on it.
+                             Out of the Add & Arrange toolbar, where a labelled button was
+                             wide enough to push the item-code picker off the row. That row
+                             is icons and one long select; this is neither.
+                             ART is the default for every elevation (`elev.egdWall` absent),
+                             which is why nothing has to be written to a project for it. -->
+                        <div style="display:flex; gap:6px; margin-top:6px;">
+                            <button class="action-btn btn-secondary wall-mode-btn" id="artWallBtn" onclick="setElevWallMode('art')" title="Art wall — framed art hangs on this wall. The default for every elevation." style="flex:1; height:26px; font-size:0.6rem; letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="6" y="5" width="12" height="14"/><rect x="9" y="8" width="6" height="8"/></svg>
+                                ART WALL
+                            </button>
+                            <button class="action-btn btn-secondary wall-mode-btn" id="egdWallBtn" onclick="setElevWallMode('egd')" title="EGD wall — this wall is a graphic surface: a wallcovering or window film fills it and stays inside the wall, above the baseboard. Framed art can still be placed over it." style="flex:1; height:26px; font-size:0.6rem; letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="3" width="18" height="15"/><path d="M3 18h18"/><path d="M3 7h18M3 11h18M7 3v15M13 3v15"/></svg>
+                                EGD WALL
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -731,6 +751,21 @@
                      sections the user has collapsed. Uses a static label
                      (no chevron, not clickable) to signal it can't be
                      hidden. -->
+                <!-- SIDEBAR TABS. Art / Context / Glass. Every section used to be
+                     stacked in one column, so the wall-context and window-panel panels
+                     ate the room that Add & Arrange and the frame list need — and those
+                     are the high-traffic ones. Tabs give each group the full height
+                     instead of a slice of it.
+                     The panes are display:none, not detached: initElevControls renders
+                     into all four containers on every state change regardless of which
+                     tab is showing, and every button here is still findable by id (the
+                     EGD/tool buttons are synced by id from several places). -->
+                <div class="elev-tabs" role="tablist">
+                    <button class="elev-tab elev-tab-on" data-elevtab="art" onclick="switchElevTab('art')">Art</button>
+                    <button class="elev-tab" data-elevtab="context" onclick="switchElevTab('context')">Context</button>
+                    <button class="elev-tab" data-elevtab="glass" onclick="switchElevTab('glass')">Glass</button>
+                </div>
+                <div class="elev-tabpane" data-elevtabpane="art">
                 <div class="elev-add-arrange-fixed">
                     <div class="section-title section-title-static">Add &amp; Arrange</div>
                     <div class="elev-section-emphasis-inner">
@@ -741,7 +776,7 @@
                                     <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
                                     <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
                                 </button>
-                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; width: 100%; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
+                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; max-width: 380px; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: 4px; padding: 4px; box-sizing: border-box; margin-top: 2px;">
                                     <div id="bulkImportCheckboxes"></div>
                                 </div>
                             </div>
@@ -770,34 +805,52 @@
                             <button class="action-btn btn-secondary" id="fitFlatBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="fitFlatGraphicsToWallAction()" title="Fit to wall — size the wallcovering / window film to the wall inside the dimension lines (set baseboard to 0 to run floor to ceiling)">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="4" width="18" height="14"/><path d="M3 18h18M7 8h10M7 12h10"/></svg>
                             </button>
-                            <!-- EGD WALL: makes this wall a wallcovering surface. Anything
-                                 flat dropped on it fills the wall inside the dim lines and
-                                 is pinned there — it can't be dragged out or into the
-                                 baseboard. Framed art can still go on top; a wallcovering
-                                 always renders behind it. Toggle, so the button reflects
-                                 state (see _syncEgdWallBtn). -->
-                            <button class="action-btn btn-secondary" id="egdWallBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="toggleEgdWall()" title="EGD wall — treat this wall as a wallcovering surface: a wallcovering or window film fills it and stays inside the wall, above the baseboard. Framed art can still be placed over it.">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="3" width="18" height="15"/><path d="M3 18h18"/><path d="M3 7h18M3 11h18M7 3v15M13 3v15"/></svg>
-                            </button>
                             <!-- Group dimension: draws a dashed bounding box with width +
                                  height measurement callouts around the selected frames.
                                  Mirrors the client's install-drawing convention. -->
                             <button class="action-btn btn-secondary" id="groupDimBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="createGroupDimFromSelection()" title="Add group dimension box around selected frames">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="6" width="18" height="12" fill="none" stroke-dasharray="3 2"/><path d="M3 3h0M21 3h0" /><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="1.5" x2="3" y2="4.5"/><line x1="21" y1="1.5" x2="21" y2="4.5"/></svg>
                             </button>
+                            
                         </div>
                     </div>
                 </div>
-                <!-- WINDOW PANELS (glazing). Window film goes onto glass made of panels
-                     with mullions between them, and a graphic is fitted so its elements
-                     don't land on a seam. Collapsed by default — most walls have none. -->
-                <details id="sec-glazing" class="elev-add-arrange-fixed" style="margin-top:6px;">
+                <!-- CONTEXT TAB. The client's elevation and the blocks traced off it are
+                     one workflow, so they share a pane: drop the drawing in, calibrate
+                     it, then trace onto it. Open by default here, unlike the collapsed
+                     <details> they used to be — on this tab they ARE the content. -->
+                </div>
+                <div class="elev-tabpane" data-elevtabpane="context" style="display:none;">
+                <details id="sec-underlay" class="elev-add-arrange-fixed" open>
+                    <summary class="section-title" style="cursor:pointer; list-style-position:inside; user-select:none;">Client Elevation</summary>
+                    <div class="elev-section-emphasis-inner">
+                        <div id="underlayControls"></div>
+                    </div>
+                </details>
+                <details id="sec-context" class="elev-add-arrange-fixed" style="margin-top:6px;" open>
+                    <summary class="section-title" style="cursor:pointer; list-style-position:inside; user-select:none;">Context Blocks</summary>
+                    <div class="elev-section-emphasis-inner">
+                        <div id="contextControls"></div>
+                    </div>
+                </details>
+                </div>
+                <!-- GLASS TAB. Window panels: the mullions a window-film graphic is
+                     fitted around. Its own tab because it applies to a minority of walls
+                     and was costing every other wall the height. -->
+                <div class="elev-tabpane" data-elevtabpane="glass" style="display:none;">
+                <details id="sec-glazing" class="elev-add-arrange-fixed" open>
                     <summary class="section-title" style="cursor:pointer; list-style-position:inside; user-select:none;">Window Panels</summary>
                     <div class="elev-section-emphasis-inner">
                         <div id="glazingControls"></div>
                     </div>
                 </details>
-                <div class="elev-frame-list">
+                </div>
+                <!-- Hidden, because the visible control is a styled button in the panel
+                     above. One input reused for every import: a fresh <input type="file">
+                     per render would drop the pending pick on any redraw. Outside every
+                     pane, so a tab switch can't detach a pending file pick. -->
+                <input type="file" id="underlayFileInput" accept="image/*" style="display:none;" onchange="importElevUnderlay(this.files && this.files[0]); this.value='';">
+                <div class="elev-frame-list" data-elevtabpane="art">
                     <div class="elev-col-header">
                         <div class="elev-col-left">
                             <!-- "Frames" label removed for v2; column headers below
@@ -837,7 +890,37 @@
                 </button>
                 <div id="export-wrap">
                     <div id="wall">
+                        <!-- CLIENT ELEVATION UNDERLAY. The architect's drawing, dropped in
+                             and faded back so it can be traced. z-index 1 puts it under
+                             everything including the grid, which is the only place a
+                             tracing guide belongs.
+                             It is AUTHORING-ONLY and never exported: it is not in
+                             exportElevSVG's annotationLayers, not in the artboard-bounds
+                             list, and exportElevPNG hides it outright (html2canvas
+                             rasterises this DOM, so nothing else would keep it out of the
+                             PNG or the PDF elevations built from it). Deliberately NOT
+                             clipped to the wall — aligning a drawing means seeing the part
+                             that currently hangs outside it. -->
+                        <div id="underlay-layer" style="position:absolute; inset:0; pointer-events:none; z-index:1;"></div>
                         <div id="grid-layer" class="grid-layer" style="z-index:2;"></div>
+                        <!-- CONTEXT BLOCKS: doors, windows, millwork, TVs, beds — the things
+                             in the room that are not art but decide where art can go. Traced
+                             off the underlay above.
+                             z-index 8 puts them OVER the wall surface and everything on it:
+                             the baseboard (2), the grid (2), #frame-layer (6) and the window
+                             mullions (7). They are objects standing in front of the wall, so
+                             they hide what is behind them — that is the whole reason the fill
+                             is opaque white, and it is what shows you which part of a
+                             wallcovering graphic a headboard is going to cover.
+                             This used to be 3, under the art, back when the fill was
+                             transparent and a block could not hide anything anyway.
+                             The trade: where a block overlaps a frame it now takes the click
+                             too. That is the cost of one honest z-order, and it is the right
+                             way round — you move the furniture to get at the art behind it.
+                             They are still exported through the SVG's BACK layer (after the
+                             frames now, not before) and never through annotationLayers, which
+                             is replayed as vector ops that cannot carry nested line art. -->
+                        <div id="context-layer" style="position:absolute; inset:0; z-index:8;"></div>
                         <div id="frame-center-layer" class="frame-center-layer" style="z-index:30;"></div>
                         <div id="arch-dim-layer" class="arch-dim-layer" style="z-index:34;"></div>
                         <div id="dim-layer" class="dim-layer" style="z-index:36;"></div>
@@ -859,14 +942,21 @@
                             <img src="Character_Lady_walk.svg" id="person" class="person" style="display:block; opacity:1;" alt="Person" onerror="this.src='https://cdn-icons-png.flaticon.com/512/10/10522.png'">
                         </div>
                         <!-- Glazing panel runs (window film): the glass outline and its
-                             mullions. z-index 7 puts it ABOVE #frame-layer (6) on purpose.
+                             mullions. z-index 9 puts it ABOVE #frame-layer (6) and above
+                             #context-layer (8) on purpose.
                              A seam has to be readable ACROSS the graphic — seeing where
                              mullions fall relative to the artwork is the entire reason
                              panels are drawn. It also has to match the export: the SVG
                              writes annotation layers over the rasterised artwork, so
                              putting these under the film on screen would show one thing
-                             in the editor and another in the PDF. -->
-                        <div id="glazing-layer" style="position:absolute; inset:0; pointer-events:none; z-index:7;"></div>
+                             in the editor and another in the PDF.
+                             Above the context blocks for exactly that reason and not by
+                             preference: #glazing-layer IS an annotation layer, so the
+                             export draws mullions over everything rasterised whatever the
+                             screen does. It was 7 — under the blocks — which put a window
+                             traced as context over its own mullions on screen while the
+                             PDF still drew them on top. -->
+                        <div id="glazing-layer" style="position:absolute; inset:0; pointer-events:none; z-index:9;"></div>
                         <!-- Window-panel dimensions get their OWN layer. They used to go into
                              #dim-layer, whose display is toggled by the frame-spacing guide
                              button (#dimToggle) - so every panel dim was invisible unless you
@@ -1332,6 +1422,22 @@
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_slogan" checked style="cursor:pointer;"> Good Art. Good People.</label>
             <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="checkbox" id="specInc_contacts" checked style="cursor:pointer;"> Thank You / Contacts</label>
         </div>
+
+        <!-- PAGE ORDER for the floorplan / spec block. Deck-wide, and read by the ONE
+             shared _deckPlanSlots that both the Deck Studio page list and the PDF
+             export's plan builder call, so the preview and the export cannot disagree
+             about the order. Default is by-level, which is the original behaviour, so
+             opening an existing project never silently reorders its deck. -->
+        <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:10px 0 4px;">Floorplan order</label>
+        <!-- HEIGHT is set explicitly: the global select rule in style.css pins every
+             select to 26px, and 6px of inline padding inside that box clipped the
+             descenders off the option text. Setting padding without height is the trap. -->
+        <select id="specPlanOrder" onchange="setDeckPlanOrder(this.value)" style="width:100%; height:32px; font-size:0.74rem; padding:5px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:4px; box-sizing:border-box;">
+            <option value="byLevel">By level &mdash; plan, then that level's specs and elevations</option>
+            <option value="plansFirst">All plans first &mdash; every floorplan, then all specs and elevations</option>
+            <option value="manual">Manual &mdash; plans in an order you set, then all specs</option>
+        </select>
+        <div style="font-size:0.66rem; color:var(--text-muted); margin-top:4px; line-height:1.45;">Also on the Floorplan page, under Plan &mdash; the two are the same setting.</div>
 
         <div id="specPdfProseBlock" style="display:none;">
         <label style="display:block; font-size:0.65rem; font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin:6px 0 4px;">Process &amp; timeline <span style="font-weight:normal; text-transform:none;">(one per line: Phase | Timeframe)</span></label>

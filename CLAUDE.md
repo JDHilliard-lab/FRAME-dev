@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-113 files, 1287 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1383 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -261,6 +261,186 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   Print Output, Print Panels (in)` CSV columns are **appended at the very end** because
   the InDesign script addresses columns by name. `_flatGraphicElevFor()` is the ONE
   definition of "which wall is this graphic on", shared by the schedule and the capture.
+- **`printOutput` IS SETTABLE FROM TWO PANELS** — the dashboard and the Deck Studio spec
+  page — because it decides what THAT page prints (one file, or one per panel with the
+  schedule table). In Deck Studio it is `_dsPrintOutputInto`: an inline CHECKBOX in the
+  panel’s main flow, directly above Dual units, in both Per-piece and Group A/B/C (a flat
+  graphic is split onto its own egdDetail sheet whatever the mode).
+  It started as a picker in a collapsed section at the bottom and that was wrong for the
+  reason it exists: the setting is noticed when you look at the SHEET and see the panels
+  producing no schedule, so it has to be where the eye already is, not a fold away and not
+  on another tab. This is the one most designers forget.
+  Both write through `setRowPrintOutput`, which enforces **window-film-only in the DATA**,
+  not just by hiding a control: a bulk edit or an imported row could otherwise leave a
+  wallcovering in a mode whose schedule has nothing to read. Both read
+  `_printOutputHintText` — ONE wording, because two panels describing the same setting in
+  two different sentences is how a user ends up believing they are two settings. Toggling
+  must `_dsClearBuiltAll()` + `_dsRefresh()`: the sheet gains or loses a whole table, so
+  the page and its thumbnail rebuild rather than being relabelled.
+- **THE WALL MODE IS TWO NAMED BUTTONS** (`artWallBtn` / `egdWallBtn`, both calling
+  `setElevWallMode`), sitting under RESET DIMENSION POSITIONS. Exactly one is lit, from
+  `_isEgdWall(elevations[currentElevIndex])` — EGD mode is per elevation while every other
+  button in that panel is deck-wide, which is the trap here.
+  **Its `.active` NEEDS ITS OWN CSS RULE** (`.wall-mode-btn.active`): `.action-btn` has no
+  `.active` style anywhere in style.css, so the old toggle set the class and painted
+  NOTHING. The state was tracked correctly the whole time and simply never shown — which
+  is most of why the mode looked invisible. Setting a class is not the same as having a
+  style, and a test now reads the stylesheet for the rule.
+  ART carries the accent as much as EGD does: the default has to look chosen, or a
+  designer reads "neither is on" and never learns the switch exists.
+  It was a 28px icon whose only signal was an `.active` class, so a wall’s mode was
+  invisible until you hovered it and the feature had to be explained to every designer.
+  16.90 tried ONE labelled toggle and that failed twice over: a toggle can only show the
+  state it is in, leaving the other mode unnamed, and a labelled control was wide enough
+  to push the item-code picker off the Add & Arrange row — that row is icons plus one long
+  select and takes neither. **ART is the default**: `egdWall` absent IS an art wall, so
+  nothing is written to a project for the normal case and old files open unchanged.
+  The Add & Arrange toolbar also lost the context-block button; the Context TAB owns that
+  tool now. Both `getElementById('contextToolBtn')` reads were already null-guarded.
+  **The import list sizes to its CONTENT** (`#bulkDropdownList` `width:max-content`), not to
+  the narrow trigger it hangs under: the item code is the only thing identifying a frame in
+  that list, and a truncated one is a guess rather than a choice. The product label is what
+  gives way on a long code, being context rather than identity.
+- **A LONG PANEL SCHEDULE SPLITS INTO TWO COLUMNS** (`FLAT_SCHED_SPLIT_AT` = 9), and the
+  reason is the ELEVATION, not the table. On the flat-graphic sheet the spec band sets
+  where the drawing starts, so a 12-panel schedule owned the whole band and squeezed the
+  elevation to a strip with unreadable dimensions. The two-graphic sheet beside it read
+  fine for exactly this reason: its specs were already in two columns, so its band was
+  half as tall. Split rather than shrink, because a dual-unit cell reads
+  `16.69\"(423.9mm)` and halving the column width would wrap every number.
+  The continuation column keeps the rule and the headers (so the two align as one table)
+  and drops the title and the `ALL PRINT FILES` footer. It borrows the second spec column
+  ONLY on a single-graphic sheet — on a shared sheet that column is the other graphic’s,
+  and taking it would draw one table through the other’s specs.
+- **A ROW CAN BE PINNED ON SEVERAL PLANS** (`r.planPins = [{lv,x,y}]`). A hotel deck
+  carries an overall floor plan plus a plan per guestroom type and the same piece hangs in
+  all of them; with one pin per row, placing the code on Guestroom B silently took it off
+  Guestroom A, because there was one slot to hold a position.
+  **QUANTITY IS NOT AFFECTED, and that decision is what keeps this small.** Qty comes from
+  elevation placements (`recalculateDashboardQuantities` counts frames), so a pin says
+  *where* a piece appears and never how many are bought. A piece that really repeats is
+  placed on more elevations; one shown on three guestroom types but bought once carries a
+  note on its spec page. A test pins that qty never reads `planPins`.
+  **`r.planX`/`r.planY`/`r.level` survive as the PRIMARY** — a derived mirror of
+  `planPins[0]`, kept by `_fpSyncPrimary`. That's what lets the ~40 sites reading a single
+  placement (the spec page's plan crop, the validator, the CSV, the level a spec page is
+  grouped under) stay exactly as they were. Adding a pin on a second plan must **not** move
+  the primary, or the piece's spec page jumps to another level's block just because it was
+  also shown in a guestroom.
+  **`_fpGroups(level)` takes an OPTIONAL level**, and that one argument is what made this
+  a small change: pass one and the group resolves to THAT plan's pin (and sets `g.level`
+  from it, so the callers that then filter `g.level === desc.level` keep working); pass
+  nothing and it resolves to the primary, which is what every existing caller expected.
+  `_fpPins` is **read-only** — seeding an array on read would write a field into every row,
+  every autosave and every undo snapshot just for asking, the same trap `_elevUnderlay` has.
+  **There are TWO placement UIs** — the Deck Studio centre and the full markup tool — over
+  the same data, and both must go through `_fpSetPin`/`_fpClearPin`. One of them still
+  writing a single `planX` would quietly undo multi-plan pinning depending on which tool
+  you happened to use. A test pins all six handlers.
+  **THE WALL LINE IS PER PLAN TOO** (`r.planWalls`, same shape, same derived primary in
+  `r.wallLine`/`r.wallLines`/`r.wallPanels`). Making the pin multi-plan and leaving the
+  line single shipped as a HALF FIX and was reported immediately: drawing the line on
+  Level 2 wiped the Level 1 line, so the piece showed a callout pointing at a wall marking
+  that had vanished. A line marks where on a wall a piece hangs, which is a fact about a
+  particular plan. `_fpGroups(level)` resolves BOTH halves — resolve one and not the other
+  and a plan draws a pin with no wall, or a wall with no pin. The Single/Diptych/Custom
+  MODE is per plan as well, including the branch that picks click-to-click vs drag.
+  **Deleting a level must RENUMBER the pins above it.** Pins are keyed by level index and
+  splicing shifts every index above the removed one, so without the renumber a guestroom
+  pin silently re-homes onto whatever plan slid into its slot — a wrong drawing that looks
+  completely normal.
+- **`_deckPlanSlots` IS THE FLOORPLAN/SPEC PAGE ORDER, and it's the first rule that both
+  page-list builders actually share** rather than mirror. It returns neutral **slots**
+  (`{t:'key',li}` / `{t:'detail',li,pd}` / `{t:'unit',li,u}`), not pages, for the same
+  reason `_partitionFlatMembers` returns only the partition: `_deckPageList` emits page
+  descriptors and the export emits render steps, and forcing one shape on both is what
+  makes the next caller write its own copy. Each builder maps slots to its own output and
+  nothing else.
+  `editorialContent.planOrder` picks the mode: **`byLevel`** (plan, then that level's
+  specs and elevations, then the next level) is the original behaviour and the default, so
+  opening an existing project never silently reorders its deck; **`plansFirst`** emits
+  every floorplan first, then all the spec and elevation pages. A test pins that the two
+  modes contain **exactly the same pages** — a reorder that adds or drops one is a bug,
+  not a mode. An unrecognised value falls back rather than being stored, so a newer file
+  opened in an older build can't leave the deck in a mode nothing implements.
+  **`manual`** is the third: plans in a hand-set sequence (`editorialContent.planSeq`),
+  then all the specs, for a deck carrying an overall floor plan plus several guestroom
+  layouts on the SAME level, where the useful grouping is "all the guestrooms together"
+  and no rule derived from the level number can express it. It behaves like `plansFirst`
+  and not like `byLevel` deliberately: once the plans are in a hand-set sequence they're
+  no longer in level order, so interleaving each level's specs behind its plan would
+  scatter the specs into that same sequence. The **specs follow the plan sequence** too,
+  so both blocks read in the same order.
+  `planSeq` is stored sparsely and **reconciled against the levels that actually exist on
+  every read** (`_deckPlanSeq`): a level added after the order was set appends rather than
+  disappearing, and a deleted one drops out instead of leaving a hole that emits a blank
+  page. `moveDeckPlan` seeds from the *resolved* order, so the first nudge on a project
+  that has never been hand-ordered starts from what's on screen.
+  The control appears **twice** — Project tab and the floorplan panel's Plan tab — and is
+  ONE setting, not a copy: both read `_deckPlanOrder()` and write through
+  `setDeckPlanOrder`, so changing either re-renders the other. A test pins that the
+  floorplan control never assigns `editorialContent.planOrder` directly.
+  Both selects set an explicit **height**: the global `select` rule in style.css pins
+  every select to 26px, so inline padding without an inline height clips the descenders
+  off the option text (which is what "the letters are cut off at the bottom" was).
+  A plan detail **pinned before a unit follows that unit** in both modes: the pin is an
+  explicit instruction about adjacency and the mode is a default about grouping. Unanchored
+  details travel with the plan they zoom into.
+  **`_deckEmitLevels` is the other half**, and it was already drifting in FOUR places: the
+  studio tested the filtered `rows`, the export tested its `units`, and the two
+  install-guide branches tested different things again — so a level could appear in the
+  preview and not in the PDF. One function now, called by all four.
+- **A WALL LINE IS DRAWN BY FIVE RENDERERS AND NONE OF THEM SHARES A PATH.** The Deck
+  Studio centre (SVG `<line>`), the rail thumbnail (`_deckMockHTML`, an HTML div), the
+  floorplan key page (`doc.line`, real jsPDF for the export and `CanvasPdfRec` for the
+  preview), the plan detail page, and the spec page's plan thumbnail (the last two
+  composite onto a `<canvas>` before placing it as an image). `FP_WALL_LINE_ALPHA` is the
+  ONE value all five read; a call site with its own number is how the preview starts lying
+  about the PDF.
+  It's **alpha, not a multiply blend**, and that's forced: jsPDF's `GState` in the
+  vendored build whitelists exactly `opacity` and `stroke-opacity` and **silently drops
+  every other key**, so multiply could only ever be screen-deep. A Deck Studio that shows
+  something the PDF won't print is worse than a slightly weaker line in both. Over the
+  white of a plan the two look nearly identical anyway; they differ only where the line
+  crosses dark linework, which is exactly where seeing through it is the point (door
+  swings). `_fpDocLineAlpha` is guarded so a doc with no `GState` degrades to a solid line
+  instead of throwing out of a page render, and the key page must set it **back to 1** or
+  the pins and legend inherit it.
+  **`CanvasPdfRec` needed `setGState` for this** — the shim is the preview's renderer, so
+  without it the preview drew solid over translucent. Fill and stroke alpha are tracked
+  separately, as in a real GState, and `render()` has to **read** `st.sa`: recording a
+  value and never applying it is the same bug the rotated-label `angle` had.
+- **The floorplan panel is three tabs** (`_fpPanelTab`: Items / Categories / Plan). A real
+  project runs to ~60 item codes, and every one was a row of five controls in one column
+  with the category manager stacked underneath, so a setup task touched once a project was
+  permanently eating height from the list worked in constantly. Items carries a filter and
+  an **Unplaced** toggle (the question actually asked on a long plan is "what have I not
+  placed yet", previously answered by scanning for an amber ring) and groups rows under
+  collapsible category headers. The row now shows the **code**, which used to live only in
+  a `title` attribute, and the category picker is reduced to a colour chip because it was
+  the widest control while being the one changed least. All of it is **module state, never
+  project data** — it's where you're looking, the same reasoning as `_ctxPaletteCat`.
+  `_fpFillItemList` rebuilds the list ALONE: re-rendering the panel on each keystroke
+  destroys the input being typed in, the same live/full split the glazing and context
+  editors use.
+- **Shift locks a wall line to an axis** (`_fpAxisLock`), in drag mode and click-to-click
+  alike. It must be applied in the **preview and the commit**: constrain one and the line
+  you were shown is not the line you get. The dominant axis is decided in **pixels**, not
+  in the normalised 0..1 the segments are stored in — a plan is rarely square, so a run
+  longer in normalised x can be shorter on the page.
+- **The loupe** (`_fpLoupeShow`) magnifies under the cursor while a pin or line is being
+  placed. Deliberately a loupe and not a zoom of the plan: the centre preview IS the page,
+  and zooming it would stop it matching what prints. `position: fixed` on `<body>` so the
+  preview's overflow can't clip it at the page edges, which is exactly where a wall line
+  usually starts. It must be hidden on every disarm path and must keep tracking **through**
+  a drag, not only before one starts.
+- **A floorplan page has no Templates tab** (`_dsPageTakesTemplates`). Its layout is drawn
+  by the floorplan renderer rather than placed from a coordinate map, so the card grid is a
+  control that produces no result; Layers stays, for notes over the plan. Hidden, not
+  disabled. Two traps: `_dsToolsTab` rewrites the button's whole `cssText`, so the hide has
+  to be re-applied **after** it (`_dsSyncToolsTabBar`) or every tab click brings the button
+  back; and sitting ON Templates when a plan is selected has to fall back to Page, or the
+  panel goes blank with no way back that reads as deliberate.
 - **THERE ARE TWO PAGE-LIST BUILDERS AND THEY DRIFT.** `_deckPageList` drives Deck
   Studio; the PDF export's `_stepsFor` mirrors it **by hand**, and its own comment used
   to say "Mirrors `_deckPageList`". That comment is not a mechanism. Any rule about
@@ -296,6 +476,298 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   to the front of `_drawOrder` while preserving original indices, because
   `makeElevDraggable` and every dim lookup address frames by their index in
   `elevFrames`. That's why no "wallcovering + artwork" mode is needed.
+- **WALL CONTEXT is two features and ONE contract: the underlay never exports, the
+  blocks always do.** `elev.underlay = {src, x, y, w, h, opacity}` is the client's or
+  architect's elevation, faded back behind the wall as a **tracing guide**;
+  `elev.contextBlocks = [{x, y, w, h, label}]` are the things traced off it that are not
+  art but decide where art can go (doors, windows, millwork, a TV). Both in `elevUnit`,
+  `x`/`y` bottom-left like a frame and like a glazing run, so `_ctxPxTop` is the only flip.
+  That export split has to hold in **three** places, because there are three renderers and
+  none shares a list with the others: `exportElevSVG`'s `annotationLayers`, the
+  artboard-bounds list, and `exportElevPNG` (which rasterises the **live DOM** through
+  html2canvas and therefore reads neither list, so it hides `#underlay-layer` outright and
+  restores it in the same `finally` as the rail). Get one wrong and the tracing guide
+  ships to the client.
+  **A CONTEXT BLOCK OCCLUDES. `CONTEXT_FILL` is opaque white and `#context-layer` is z 8,
+  over `#frame-layer` (6).** A block is an object in the ROOM, so it hides the wall
+  surface behind it: the baseboard runs behind a bed, and a wallcovering graphic is masked
+  by the headboard that will really stand in front of it. That masking is the feature, not
+  a side effect — it's how you see, while designing a 200" graphic, which part of it a bed
+  or a lamp is going to cover. It was `transparent` at z 3 (under the art) until 16.82, and
+  the reasoning that chose transparent was about **tone** (a stack of grey boxes competing
+  with the art), which white doesn't bring back; what transparent could not do is occlude,
+  and no hairline outline over a graphic tells you what the object covers.
+  The trade is real and was taken deliberately: where a block overlaps a frame it now takes
+  the **click** too. That's one honest z-order — you move the furniture to get at the art.
+  **`#glazing-layer` had to move to 9** in the same change. It's an *annotation* layer, so
+  the export draws mullions over everything rasterised whatever the screen does; left at 7
+  a window traced as context covered its own mullions on screen while the PDF still drew
+  them on top.
+  **The baseboard is the trap this created.** It's emitted into `midLayer` — the VECTOR
+  half, written over the rasterised back layer — so a full-width line prints straight
+  across every bed while the editor shows it hidden. It's drawn as the **gaps** instead:
+  spans of blocks crossing the baseboard y are subtracted, overlapping blocks merge into
+  one gap (or a sliver prints between two beds pushed together), and it stays real vector
+  line work rather than being rasterised to dodge the problem. Only the baseboard needs
+  this — the one wall-outline edge a block could cover is the floor, which is the edge
+  furniture stands *on*.
+  **Context blocks are still NOT in `annotationLayers`**, but the reason is now mechanical
+  rather than a z-order one: that list is replayed into the PDF as parsed vector ops
+  (`_elevAnnOps`), which understand rect/line/text and would silently drop the nested
+  `<svg>` of line art every library block carries. They're emitted into the SVG's **back
+  layer** instead, collected in `ctxLayer` and concatenated on **after** the frames loop
+  (`backLayer.push(...ctxLayer)`), read off the DOM through `rectToSvg` so the export
+  can't drift from the editor arithmetically. That flush must stay **ahead of both
+  consumers** — the downloaded SVG and the `returnBlob` split — or one of them loses every
+  block. `#context-layer` **is** in the bounds list
+  (a millwork run continues past the corner and must not be cropped); `#underlay-layer`
+  is in neither, or an unaligned oversized drawing silently resizes every exported
+  elevation on the wall.
+  `_scaleElevContext` is called from the **same two sites** as `_scaleElevGlazing`
+  (project load with a divergent unit, and the unit toggle) — these fields are not in the
+  frames' hand-maintained allowlists, and a mis-placed door is worse than a wrong number
+  because art gets hung against it. It scales the underlay too (a guide that doesn't move
+  with the wall slides out from under everything traced off it) but never `src` or
+  `opacity`, which aren't dimensions.
+  The fade is clamped to **0.05–0.95**: a 0 underlay is indistinguishable from no
+  underlay ("nothing happened") and a 1 one from real drawing content. `_elevUnderlay()`
+  is **read-only** and returns null rather than seeding, or asking whether a wall has one
+  writes an empty object into the project and into every autosave and undo snapshot.
+  Aspect is deliberately **not** locked — a client elevation is usually a scan or a phone
+  photo of a printout, and squaring it against the real wall is the job.
+  **The underlay is CONTAINED at its true aspect on import, never stretched to the wall.**
+  `natW`/`natH` (the image's natural pixels) are stored so the aspect is a property of the
+  IMAGE, not of whatever the box currently is — stretching w and h independently leaves
+  nothing to get back to, which is what "when I drop it in it stretches" was. `lockAspect`
+  defaults **on** (a lock you have to find is off when it matters) and `_underlayResize`
+  moves the partner dimension, so the number you type is the number you get. No natural
+  size (a decode failure, an older file) means `_underlayAspect` returns **null** and
+  sizing degrades to free stretch rather than inventing an aspect from the current box and
+  locking the distortion in. `fitUnderlayToWall` is the one deliberate stretch, labelled
+  as such.
+  **Calibrate replaces a Photoshop round trip** (crop to the 4" baseboard → Reveal All →
+  marquee a known size): click the two ends of anything whose real size you know, type it,
+  and the image scales. It scales **about the first click** so the feature just pointed at
+  doesn't slide away, and **both axes by one factor** — a calibration is a scale, never a
+  stretch. Applying it hands over to Place, because scale is settled and sliding it onto
+  the wall is what happens next. Calibrating owns the pointer **outright**: both
+  `makeElevDraggable` and `_makeContextDraggable` yield to it, because the thing being
+  pointed at is the image *underneath* the art.
+  **The draw tool ARMS A PRESET and hands back to select mode after one block.** It used
+  to stay on — but `_makeContextDraggable` yields to it, so a block you had just drawn
+  couldn't be nudged without finding Escape first ("I have to type in the dimensions from
+  floor and from left, but that is going to be annoying"). Draw is the rough placement and
+  drag is the adjustment; they have to be consecutive. Re-clicking the armed chip disarms,
+  so the palette is the way out as well as the way in. `CONTEXT_PRESETS` (six) seed
+  shape + size + label; `CONTEXT_SHAPES` (four) are what actually draw — a TV and a door
+  are both rectangles, so a render branch per preset would be five copies of one box.
+  Sizes are authored in inches and converted. `<ellipse>` needs its own export branch:
+  `emitEl`'s border cases only ever emit `<rect>`, so a CSS `border-radius` prints square
+  (the same trap `_elevCenterTarget` needs `data-svg-passthrough` for).
+  **Blocks carry a stable `id` because they are anchorable.** `resolveAnchor`'s
+  `ref: 'context'` keys on it, never on the array index — deleting an earlier block shifts
+  every index after it, and an index-keyed anchor silently re-points at a *different*
+  object on a drawing an installer works from. `_elevContextBlocks` backfills ids on read
+  (two load paths, one funnel). Blocks are also targets in `computeSnapForDrag` and
+  `customLineSnapTargets`: art is hung in relation to the door and the millwork at least
+  as often as to other art.
+  **A full-wall `inset:0` layer MUST set `pointer-events: none`.** `#frame-layer` was the
+  one exception in the file and it silently swallowed every click meant for anything
+  beneath it — which is what made context blocks unselectable and undraggable. The
+  frames opt back in via `.frame-vis`; `wireElevArtworkDrop` listens on the layer but
+  only acts on `e.target.closest('.frame-vis')`, and events still **bubble** from the
+  frames, so a click-through layer doesn't break the drop target. `#context-layer` had
+  the same flaw over the underlay. Check this first for any "I can't click the thing I
+  just made" report.
+  **`CONTEXT_LIBRARY`** is seven categories of standard North American hospitality sizes.
+  `CONTEXT_PRESETS` is the flattened form — every lookup is by key, and walking the
+  categories at each call site is how two of them end up disagreeing about what
+  `'door-guest'` means. Three things in it are load-bearing and easy to get wrong:
+  **(1) `affMode`.** `aff: 60` means the CENTRE for a TV and a sconce and the UNDERSIDE
+  for a door. `_ctxPresetBox` is the ONE place that resolves it (`center` → bottom =
+  aff − h/2); getting it wrong hangs every TV a foot too high. It's also the one place
+  that converts inches → `elevUnit`, so a cm project gets a real 213cm door.
+  **(2) A bed's `h` is its MATTRESS height (24"), not its length.** Seen on a headboard
+  wall you get its width by 24"; the 80" length runs into the room and is plan data, kept
+  in `lengthIn` and never drawn. Storing it as `h` draws a bed taller than the door.
+  **(3) A catalogue item is NOT shrunk to fit the wall.** A 120" wainscot on a 96" wall
+  runs past the corner — that's why `#context-layer` is in the artboard-bounds list.
+  A **click** places the library size, a **drag** overrides it (`_ctxPlaceAt` vs the drag
+  branch of `_ctxDrawUp`); `freeform: true` on Box/Circle makes a click place nothing, so
+  the tool stays forgiving exactly where a stray click is likely. `_ctxNewBlock` is the
+  one constructor all three creation routes go through.
+  **A drag sets the SIZE; `b.lockAspect` owns the PROPORTION.** The art is drawn with
+  `preserveAspectRatio="none"` to fill the box, so a box at the wrong proportion silently
+  distorts every stroke in it — a bed scaled up by width alone is a bed with 3x-wide
+  hinges, pulls and mattress tape, which is what "scale them up… stretching or squishing"
+  was. `_ctxAspect(b)` reads the proportion from the **drawing** (view- and variant-aware,
+  since a turned bed and a taller headboard are different drawings), falling back to the
+  library's authored size for an item with no art and to the block's own box for a
+  freeform shape. `_ctxResize(b, driver, value)` moves only the dimension you didn't type,
+  the same contract `_underlayResize` has. Default **on**, and stored explicitly by
+  `_ctxNewBlock` as `!p.freeform` — a lock you have to find is off when it matters, but a
+  hand-traced Box *is* whatever rectangle was dragged and holding a proportion there
+  fights the tool you reached for. Drag-create **contains** the item's aspect inside the
+  dragged rectangle, so it's never bigger than what was asked for; `resetContextAspect`
+  (Un-stretch) keeps the **width**, because width is the dimension set from the wall.
+  Turning the lock on deliberately does **not** retro-correct the box: resizing something
+  on the wall as a side effect of ticking a checkbox is the kind of change that gets
+  noticed a page later, in a PDF.
+  **Line art is `p.svg`, and the project stores the KEY (`b.preset`), never the markup.**
+  The art then improves for existing projects and a save doesn't carry a copy of every
+  drawing into every autosave and undo snapshot. `_ctxArtSvg` applies the whole drawing
+  convention ONCE on a wrapping `<g>` — `fill="none"`, `stroke`, and
+  `preserveAspectRatio="none"`, so one asset serves a 5" sconce and a 120" credenza.
+  **`vector-effect` IS NOT AN INHERITED PROPERTY.** It was set on the wrapping `<g>` and
+  applied to the `<g>` and to none of the shapes inside it, so every stroke scaled with
+  the viewBox — at a fitted zoom on a 185" wall (~6.4 px/inch) an authored 1.5 rendered
+  near 10px of solid black. That was the whole of "very thick black lines"; the geometry
+  was never the problem. The fix is `_ctxArtSvg(p, ink, pxScale)`: weights are authored in
+  SCREEN PIXELS and **divided by the draw scale** (block width ÷ the item's real width),
+  which also converts `stroke-dasharray` — an unscaled dash run turns a hidden line solid.
+  Both renderers must pass a scale or one of them is back to the bug. Dividing also beats
+  the attribute for portability: Illustrator's non-scaling-stroke support is unreliable,
+  and a real user-unit width lands correctly everywhere.
+  **The assets are CAD, and the LINE WEIGHT HIERARCHY is what makes them read that way.**
+  One uniform stroke looks hand-drawn however accurate the geometry underneath is — that
+  was the whole of "they look kind of like kid drawings". Four weights, authored as
+  nested `<g stroke-width>` (which overrides the wrapper while still inheriting
+  fill/stroke/vector-effect, so no new machinery): `_O` object line (outer profile),
+  `_D` detail (leaf, drawer face, cushion), `_F` fine (reveals, hinges, seams, tape
+  edges), `_H` hidden (dashed — the basin under the vanity counter). Weights live in ONE
+  table (`CTX_LW_*`), never sprinkled per node. Joins are **mitre** and caps **butt**:
+  rounded joins on a heavy outline was the other half of the sketch look. Detail is real
+  construction — doors carry a 2" jamb, three butt hinges at their true AFF heights, a
+  lever at 36" (34" ADA) on a 2.75" backset and a floor undercut; casework carries a top
+  slab with an edge reveal, faces on consistent reveals, pulls and a toe kick. A test
+  pins the hierarchy, the hinge count, the lever heights and the toe kick, because
+  "simplify the drawing" is exactly the change that would quietly undo this.
+  **`p.variants` are STYLES, not sizes**, and the distinction is the whole design: a
+  queen stays 60" wide whichever headboard it has, so `setContextVariant` leaves the
+  width alone and moves only the HEIGHT, derived from the drawing's aspect — which is the
+  number that matters when art goes above the bed. Slot zero is the item's own drawing,
+  so cycling always passes back through the hand-drawn original. Variants are **front
+  only**: `BED_STYLE_VARIANTS` came from a frontal-elevation sheet, so a turned block
+  falls back to `p.side` rather than stretching a front drawing into a side-shaped box.
+  Those five were traced from a cad-blocks.net SVG — 109k exploded segments, no grouping,
+  no text, ONE stroke class — found by clustering path bounding boxes, simplified ~5x, and
+  normalised to 100 units wide. The source has no line weights at all, so the hierarchy is
+  **inferred from run length** (longest 10% → object, next 35% → detail, rest → fine);
+  a guess, but it stops traced art reading flatter than the hand-drawn assets beside it.
+  If more are imported, the pipeline (`tools/trace-cad-svg.js`) is: parse → flatten →
+  **stitch** → cluster → simplify → despike → bucket by length, and check the licence
+  before shipping someone else's geometry.
+  **Everything good depends on the stitch, and it has two rules that each shipped wrong
+  once.** (1) Join within a **tolerance**, not on an exact quantised key — a grid key
+  alone splits any two endpoints straddling a cell boundary however close they are, so a
+  headboard outline broke at arbitrary points and each piece was then weighted separately.
+  Endpoints are bucketed into cells for *lookup* and matched by real distance across the
+  3x3 neighbourhood. (2) Continue **by direction** through a junction rather than stopping
+  at one, but let direction only **choose between** candidates — never veto a lone one. An
+  exploded CAD block is nothing but junctions, so "exactly one candidate or stop" severed
+  every chain; and a turn *limit* severs every square corner instead, which took plinths,
+  drawer faces and mattress edges apart into four separately-weighted pieces. The only
+  turn refused outright is a **reversal** (`MAX_REVERSE`), which is never drawing.
+  A hairpin is the artifact those two produce together and **Douglas-Peucker cannot touch
+  one** — a spike deviates from the chord by a lot, which is exactly what RDP keeps — so
+  `despike` drops the apex where the turn all but reverses over a *short* spur. Long
+  reversals are left: the V between two pillows is a real one.
+  `MIN_RUN` (0.9 on a 100-wide drawing) drops trace dust; at hairline weight a field of
+  stubs reads as fuzz around the drawing rather than as detail. Fixing the stitch is what
+  makes that floor safe — real detail now runs into the outline it belongs to instead of
+  being stranded and culled. Measured: polyline counts fell by up to 60% while total ink
+  went **up** 100-120%, which is the signature of the fix (fewer, longer, connected runs
+  carrying more real geometry) and worth re-checking against if the tracer is touched.
+  **`p.side = {w, h, svg}` is the front/side toggle, and it carries DIMENSIONS as well as
+  artwork.** A bed from the headboard wall is 60" wide; along the wall it is 80" long and
+  36" tall, because the headboard and pillow rise above the mattress. A toggle that only
+  swapped the drawing would leave the block lying about the dimension beside it, so
+  `setContextView` resizes too — holding the left edge and the floor, since you turn a
+  piece in place. It is optional: an item with no side (a grab bar, a sconce) refuses the
+  turn in the data and the picker is `disabled` rather than hidden, because a control that
+  vanishes reads as a bug. `_ctxArtFor(key, view)` is the ONE resolver, used by the screen
+  and the export via `data-ctx-art` + `data-ctx-art-view` — resolve it twice and a turned
+  block prints its front drawing stretched into a side-shaped box.
+  **Context is LINE WORK on an opaque body, and no library item ships with a surface
+  hatch.** White is not a tint: the faint grey that used to sit behind every block read as
+  a stack of grey boxes, and the default wood/glass hatches turned a table into a hatched
+  slab and a mirror into a scribble — all of it competing with the artwork the drawing
+  exists to sell. A CSS background still hit-tests (unlike an SVG `fill="none"`), so
+  blocks stay draggable and marquee-selectable. The `tv` shape is the one thing carrying
+  tone, and it's written as the **opaque** result of that tone over white
+  (`#dedede`, not an `rgba()`) — a translucent panel would let a wallcovering show through
+  a television. The hatch is per-block opt-in, sparse and pale;
+  `CONTEXT_DRAW_FILL` keeps a wash for the rubber band alone, which is transient
+  authoring feedback rather than drawing. The viewBox is the item's own `w h` in inches, so nothing is
+  pre-distorted. In the export `currentColor` is substituted for `_ctxInkHex()`: once the
+  markup leaves the page there's no CSS `color` to inherit and every stroke falls back to
+  black. The art is emitted AFTER the fill ops, matching the screen stack, and the block
+  drops its own border (`ctx-has-art`) because the drawing carries its outline.
+  **Delete acts on the SELECTION**, gated on `_ctxSelectedCount()` so the clause doesn't
+  match when nothing is selected and Delete keeps its meaning for custom lines — that
+  branch must stay *after* this one. Ctrl-click extends (captured at mousedown, not read
+  at mouseup), the marquee picks blocks up by `dataset.ctxId`, Ctrl+A is scoped to the
+  Context tab, and clicking a frame or empty wall calls `_ctxClearSelection()` — a block
+  left selected after you look away is a block Delete would silently take. A third axis, `fill` (`plain|wood|glass`), because on an elevation the
+  thing that says "joinery" vs "glass" is the SURFACE, not the outline — both are
+  rectangles. `_ctxFillOps` is ONE generator for the screen and the SVG, returning plain
+  segments: deliberately not a CSS gradient (can't be replayed into the export — the trap
+  the dimension dashes had to be dug out of) and not an SVG `<pattern>` (arrives in
+  Illustrator as an uneditable fill instead of line work). Spacing is in **screen px and
+  doesn't scale**, like `DIM_TICK_LEN` — a grain at "every 3 inches" is a solid black
+  block on a 240" wall. Bounded at 120 strokes, because this layer is rebuilt on every
+  mousemove of a drag. Each block's clip path needs a **unique id** or the second block
+  is cut to the first one's rectangle.
+  **`ELEV_FINE_FACTOR` is Shift-as-fine-mode**, read **live off each event** rather than
+  captured at mousedown so it can be grabbed and released mid-gesture. The corner scale
+  runs off a **virtual pointer** (`vx`/`vy` advancing by the damped delta) or damping
+  would do nothing, since size is computed from the cursor's absolute position. Wheel
+  scaling is about the image centre, one factor on both axes — a wheel is a zoom, never a
+  stretch — and wheel/arrow bursts share `_ulScheduleHistory`, a debounce that turns a
+  run of nudges into one undo entry the way a drag's mouseup does. The wheel listener
+  must be `{passive: false}` or it can't `preventDefault` and the workspace scrolls under
+  the gesture.
+  **A material hatch is clipped to `p.hatch`, a region declared PER VIEW.** It used to
+  fill the block's whole rectangle, so asking for wood on a bed ran grain across the
+  mattress, sheets and pillows. A bed's region is its plinth (plus the headboard in side
+  view); a door's is the leaf, not the jamb; a window's is the glass inside the sash.
+  **An art block with no region declared gets NO hatch** — guessing would put grain back
+  on the bedding. A plain primitive still fills its box, the one case where the rectangle
+  IS the material. `_ctxFillSvg` builds it as one clipped `<svg>` and the EXPORT reuses
+  the rendered markup verbatim (rewriting ids), so there is one implementation of the
+  clipping rather than two that drift.
+  **`_elevSnapTargets` / `_elevSnapPick` are the shared snap engine.** `computeSnapForDrag`
+  is now a thin wrapper and `_ctxComputeSnap` is the other: a block that lines up with a
+  frame on screen but not in the model is worse than no snapping, so both pull from ONE
+  pool (wall edges/centre, hang line, frames, glazing seams, other blocks). `skip`
+  excludes the dragged thing from its own targets or it pins itself in place. Blocks also
+  group-drag and arrow-nudge like frames — snapping is deliberately SKIPPED for a group,
+  since per-block snapping pulls each one to its own target and takes the arrangement
+  apart. Nudges debounce into one undo entry (`_ctxScheduleHistory`).
+  **The sidebar is tabbed** (`switchElevTab`, Art / Context / Glass) because wall context
+  and window panels were eating the height Add & Arrange and the frame list need. Panes
+  are hidden with `display`, **never detached**: `initElevControls` renders into all four
+  containers on every state change whichever tab is up, and several sync paths find
+  buttons by id. Restore with `''`, **never `'block'`** — `.elev-frame-list` is a flex
+  child whose display comes from the stylesheet.
+  **THE PANE IS THE SCROLL REGION, and it needs `min-height: 0`.** `.elev-sidebar` is a
+  flex column whose only scrolling child was `.elev-frame-list`; wrapping the sections in
+  panes broke that chain, so the Context pane grew to its content and ran off the bottom
+  with nothing to scroll. `overflow-y: auto` alone does NOT fix it — a flex child will not
+  shrink below its content without `min-height: 0`. The Art pane stays `flex: none`
+  because it holds the fixed toolbar and would otherwise squash the frame list. Keep ONE
+  scroll region per panel: `.ctx-list` had its own 40vh cap, which put a scroll inside a
+  scroll and still overflowed past the cap. Anything that fills a panel
+  programmatically must call `_elevShowTabFor` first, or it fills a list nobody can see
+  and reads as the tool having done nothing.
+  The tool's check must sit **before** the `.draggable` passthrough test in
+  `wall.onmousedown`, or dragging a new block over an existing one moves the old one.
+  `_elevSnapStep()` is now the ONE reading of the `dragSnap` field, shared with
+  `makeElevDraggable`: a block traced against a frame has to land on the same lattice.
+  Blocks are free to overhang the wall (no `_clampFlatToWall` equivalent) and a label is
+  **dropped**, not shrunk, when the block is too small to hold it. Both sidebar panels are
+  built at the **top** of `initElevControls`, ahead of its no-frames early return, for the
+  same reason `renderGlazingControls` is: a bare wall being traced has no frames on it yet.
 - **`_elevArtImgCache` keeps decoded artwork nodes alive across redraws.** `drawElevAll`
   wipes `#frame-layer` and runs on EVERY mousemove of a drag, so rebuilding
   `<img src="data:…">` each pass re-decoded every artwork ~60×/sec. A 24" print hid it;

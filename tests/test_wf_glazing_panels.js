@@ -193,15 +193,21 @@ const path = require('path');
       if (Math.abs(r.snappedX - 60) > 0.001) throw new Error('the graphic did not snap to the seam, x=' + r.snappedX);
       if (!r.guides.length) throw new Error('no snap guide was reported for the seam');
       // And the source must be the glazing, not a coincidental wall/frame target.
-      const i = S.indexOf('function computeSnapForDrag');
-      const body = S.slice(i, i + 4000);
+      // The targets live in _elevSnapTargets, which computeSnapForDrag and the
+      // context-block drag now SHARE — a block that lines up with a frame on screen but
+      // not in the model is worse than no snapping, so both pull from one pool.
+      const i = S.indexOf('function _elevSnapTargets');
+      const body = S.slice(i, i + 5200);
       if (body.indexOf('_glazingSeams(run)') < 0) throw new Error('seams are not in the snap target pool');
       if (body.indexOf("kind: 'glazing-seam'") < 0) throw new Error('seam targets are unlabelled, so a guide cannot say what it snapped to');
     });
 
     __check('the run edges, head and sill are snap targets too', () => {
-      const i = S.indexOf('function computeSnapForDrag');
-      const body = S.slice(i, i + 4600);
+      // The targets live in _elevSnapTargets, which computeSnapForDrag and the
+      // context-block drag now SHARE — a block that lines up with a frame on screen but
+      // not in the model is worse than no snapping, so both pull from one pool.
+      const i = S.indexOf('function _elevSnapTargets');
+      const body = S.slice(i, i + 5200);
       ["kind: 'glazing-left'", "kind: 'glazing-right'"].forEach(k => {
         if (body.indexOf(k) < 0) throw new Error('missing X target ' + k + ' — a film flush to the glass edge has nothing to snap to');
       });

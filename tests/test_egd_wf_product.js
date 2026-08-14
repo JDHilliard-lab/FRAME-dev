@@ -823,7 +823,13 @@ const path = require('path');
       const sy = S.indexOf('function syncLayoutGuideButtonStates');
       const sb = S.slice(sy, S.indexOf('\\nfunction ', sy + 10));
       if (sb.indexOf('egdWallBtn') < 0) throw new Error('the button never syncs, so it shows the wrong state after a wall switch');
-      if (window.__indexHtml.indexOf('toggleEgdWall()') < 0) throw new Error('the button is not wired in index.html');
+      // CHANGED (16.91): one labelled toggle became TWO buttons, so the wall's mode is the
+      // highlighted one and the alternative is named beside it — a toggle could only ever
+      // show the state it was in, which is why the mode had to be explained to designers.
+      // Both go through setElevWallMode; toggleEgdWall is still the one that does the work.
+      if (window.__indexHtml.indexOf("setElevWallMode('egd')") < 0) throw new Error('the EGD button is not wired in index.html');
+      if (window.__indexHtml.indexOf("setElevWallMode('art')") < 0) throw new Error('the ART button is not wired in index.html');
+      if (sb.indexOf('artWallBtn') < 0) throw new Error('the ART button never syncs, so both can look unselected');
     });
 
     // ── Drag performance ────────────────────────────────────────────────────
@@ -883,7 +889,10 @@ const path = require('path');
       // non-choice with more furniture, so the section states what the sheet does.
       const i = S.indexOf("_dsSection(t, 'Spec template', 'spectpl', true)");
       if (i < 0) throw new Error('the spec template section is gone');
-      const body = S.slice(i, i + 1600);
+      // Widened from 1600 in 16.90: the flat branch gained the Print Output control, which
+      // pushed the card append outside the window and read as the gate having moved. The
+      // window has to cover both landmarks it compares, not a guess at the distance.
+      const body = S.slice(i, i + 4000);
       if (body.indexOf('_isFlatGraphic(desc.row.product)') < 0) throw new Error('the picker does not check for a flat row');
       // The bail must come BEFORE the cards are appended, or they show anyway.
       const gate = body.indexOf('if (_flatPage)');

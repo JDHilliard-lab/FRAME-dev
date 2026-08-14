@@ -662,6 +662,23 @@ select.no-arrow::-ms-expand { display: none; }
     border-color: var(--accent);
 }
 
+/* WALL MODE — Art / EGD. A SELECTED-ONE-OF-TWO control, so the selected button is
+ * filled and the other is left plain: the pair only reads as a choice if one of them
+ * is visibly chosen.
+ * This needed its own rule because `.action-btn` has NO `.active` style anywhere in
+ * this file. The old single EGD toggle set the class and painted nothing, which is
+ * most of why the mode was invisible — the state was being tracked correctly the
+ * whole time and never shown. Setting a class is not the same as having a style.
+ * ART carries the accent as much as EGD does: the default has to look chosen, or a
+ * designer reads "neither is on" and never learns the switch is there. */
+.wall-mode-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+.wall-mode-btn.active .svg-icon { stroke: #fff; }
+.wall-mode-btn.active:hover { background: var(--accent); filter: brightness(1.08); }
+
 /* Emphasis container for Add & Arrange contents. Subtle background tint
  * inside the collapsible-section, since the section itself uses the
  * dashboard's section-title pattern (no built-in emphasis). */
@@ -703,6 +720,171 @@ select.no-arrow::-ms-expand { display: none; }
     border: var(--dim-line-w, 1px) solid var(--dim-color, #444);
     letter-spacing: 0.04em;
 }
+
+/* ── Wall context: the client elevation, and the blocks traced off it ───────
+ * The underlay is a TRACING GUIDE and never exports (see the three export sites
+ * noted on the model in app.js). pointer-events:none throughout, so it can never
+ * intercept a drag meant for the drawing sitting on top of it. */
+.elev-underlay-img { display: block; pointer-events: none; }
+
+/* A context block is LINE WORK on an OPAQUE WHITE body, with a hairline edge — never a
+ * colour and never a tint. White rather than transparent because a block is an object in
+ * the room and has to hide what is behind it: the baseboard passes behind a bed, and a
+ * wallcovering graphic is masked by the headboard that will really stand in front of it.
+ * White rather than a shade for the original reason the tint was dropped — anything with
+ * tone competes with the art the drawing exists to sell.
+ * Still no drop shadow: the block is a footprint on the drawing, not a card floating over
+ * it. The fill and edge are written inline from CONTEXT_FILL / CONTEXT_EDGE so the SVG
+ * exporter reads back exactly what was drawn; only type and the selected state live
+ * here. */
+.ctx-block { box-sizing: border-box; }
+.ctx-block:hover { border-color: rgba(60, 60, 60, 0.9); }
+/* Selection is the link between a block on the wall and its row in the sidebar, on a
+ * wall carrying eight of them. The same blue the marquee uses. */
+.ctx-selected { outline: 1px solid #6a6aff; outline-offset: -2px; }
+/* The annotation font, because a context label IS a drawing annotation — the same
+ * reasoning that put the glazing tag in the dimension ink. Shouted in DISPLAY only:
+ * the stored label keeps whatever case was typed, and the SVG export reads this
+ * computed transform back rather than assuming it. */
+.ctx-label {
+    font-family: var(--dim-font-family, Arial, Helvetica, sans-serif);
+    font-size: 10px; font-weight: 600; line-height: 1.15;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    white-space: nowrap; text-overflow: ellipsis;
+}
+
+/* The two sidebar panels reuse the .gz-* classes wholesale — same kind of control in
+ * the same narrow sidebar, and a second set of styles is how two panels that should
+ * look identical stop doing so. Only what differs is written here. */
+#contextControls, #contextControls *,
+#underlayControls, #underlayControls * { box-sizing: border-box; min-width: 0; }
+#contextControls .gz-in, #underlayControls .gz-in {
+    width: 100%; height: auto; background: var(--bg-panel);
+    border: 1px solid var(--border-color); color: var(--text-strong);
+    border-radius: 3px; padding: 2px 4px; font-size: 0.62rem;
+}
+#contextControls .gz-in::-webkit-outer-spin-button,
+#contextControls .gz-in::-webkit-inner-spin-button,
+#underlayControls .gz-in::-webkit-outer-spin-button,
+#underlayControls .gz-in::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#contextControls input[type="number"].gz-in,
+#underlayControls input[type="number"].gz-in { -moz-appearance: textfield; appearance: textfield; }
+/* The block's NAME is its heading, so it takes the run-title slot rather than sitting
+ * in the field grid: "which block is this" is the first question the row answers. */
+#contextControls .ctx-name { flex: 1; font-size: 0.62rem; font-weight: 600; }
+.ctx-run-sel { border-color: #6a6aff; }
+/* The fade slider takes the whole row — the global input[type=range] rule styles the
+ * track and thumb, so there is nothing to add but the width. */
+#underlayControls input[type="range"] { width: 100%; margin: 2px 0 0; }
+/* An ARMED mode reads as pressed. Place and Calibrate are modes that change what a
+ * click on the wall does, so a button that looks identical on and off is how you end
+ * up drawing a block when you meant to measure one. */
+.gz-btn-on { background: var(--accent, #3b82f6); border-color: var(--accent, #3b82f6); color: #fff; }
+.gz-btn-on:hover { color: #fff; }
+.gz-btn[disabled] { opacity: 0.4; cursor: default; }
+.gz-btn[disabled]:hover { color: var(--text-muted); border-color: var(--border-color); }
+
+/* The shape palette. A grid rather than flex-wrap: fixed tracks keep six chips in tidy
+ * rows in a sidebar this narrow, instead of a ragged last row. */
+.ctx-palette { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 6px; }
+.ctx-chip {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 5px 2px; background: var(--bg-panel); border: 1px solid var(--border-color);
+    border-radius: 4px; color: var(--text-muted); font-size: 0.5rem; cursor: pointer;
+    letter-spacing: 0.03em; text-transform: uppercase; line-height: 1;
+}
+.ctx-chip:hover { color: var(--text-strong); border-color: var(--text-muted); }
+.ctx-chip-on { border-color: var(--accent, #3b82f6); color: var(--accent, #3b82f6); }
+/* The icon IS the shape, drawn the same way the block draws — a legend that can't
+ * disagree with the thing it stands for. */
+.ctx-chip-ico { width: 18px; height: 13px; border: 1px solid currentColor; box-sizing: border-box; }
+.ctx-ico-ellipse { border-radius: 50%; width: 14px; height: 14px; }
+.ctx-ico-shelf { height: 5px; border-top-width: 2px; }
+.ctx-ico-tv { background: currentColor; opacity: 0.45; }
+/* The per-block shape picker sits in the run head beside the name, so it stays narrow
+ * and the name keeps the space. */
+#contextControls .ctx-shape-pick { width: auto; flex: none; font-size: 0.55rem; padding: 2px 3px; }
+
+/* Client-elevation placement chrome. Authoring-only and on a layer that never
+ * exports, so these are pure editor affordances. */
+._ulPlaceBox, ._ulHandle { box-sizing: border-box; }
+
+/* Library categories. A scrolling strip, because five names do not fit across a 425px
+ * sidebar and wrapping them costs a whole row of height on every render. */
+.ctx-cats { display: flex; gap: 3px; overflow-x: auto; margin-bottom: 5px; padding-bottom: 2px; }
+.ctx-cats::-webkit-scrollbar { height: 4px; }
+.ctx-cats::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 2px; }
+.ctx-cat {
+    flex: none; background: transparent; border: 1px solid transparent; color: var(--text-muted);
+    border-radius: 3px; padding: 2px 6px; font-size: 0.55rem; cursor: pointer;
+    letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
+}
+.ctx-cat:hover { color: var(--text-strong); }
+.ctx-cat-on { color: var(--accent, #3b82f6); border-color: var(--accent, #3b82f6); }
+/* The palette scrolls too — Millwork and Furniture run to nine items each. Capped in
+ * vh so a tall screen shows the whole group without one. */
+.ctx-palette { max-height: 26vh; overflow-y: auto; }
+/* The block list does NOT scroll on its own — the PANE around it does (see
+ * .elev-tabpane). It used to be capped at 40vh with its own scrollbar, which put a
+ * scroll region inside a scroll region: you had to find the inner one, and past its cap
+ * the outer content still ran off the sidebar. One scroll region per panel. */
+.ctx-list { overflow-x: hidden; }
+.ctx-palette::-webkit-scrollbar { width: 6px; }
+.ctx-palette::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+/* Shape + surface sit on their own row under the name: three controls in the run head
+ * left the name field too narrow to read a label in. */
+.ctx-props { display: flex; gap: 4px; margin-bottom: 4px; }
+#contextControls .ctx-props .ctx-shape-pick { flex: 1; width: auto; }
+/* The style shuffle: prev / name / next. The arrows are fixed so the name takes the
+ * space — "which headboard is this" is the question the row answers. */
+.ctx-styles { align-items: stretch; }
+#contextControls .ctx-styles .gz-btn { flex: none; padding: 1px 7px; }
+#contextControls .ctx-style-pick { flex: 1; width: auto; font-size: 0.55rem; padding: 2px 3px; }
+/* Front-elevation line art filling a block. The <svg> stretches to the box; the strokes
+ * are held at a constant PIXEL weight by _ctxArtSvg dividing them by the draw scale, NOT
+ * by vector-effect — that attribute is not inherited, so setting it on the wrapping <g>
+ * did nothing and every stroke scaled with the viewBox (a 0.9 came out near 6px of solid
+ * black at a fitted zoom). overflow:visible so a stroke sitting exactly on the viewBox
+ * edge is not shaved in half. */
+.ctx-art { overflow: visible; }
+.ctx-art svg { display: block; width: 100%; height: 100%; overflow: visible; }
+/* The chip icon carries the SURFACE as well as the shape, so the palette shows what
+ * it will draw. Same three cues the block itself uses. */
+.ctx-ico-fill-wood { background-image: repeating-linear-gradient(to bottom, currentColor 0 1px, transparent 1px 4px); opacity: 0.75; }
+.ctx-ico-fill-glass { background-image: repeating-linear-gradient(135deg, currentColor 0 1px, transparent 1px 5px); opacity: 0.75; }
+
+/* ── Elevation sidebar tabs ────────────────────────────────────────────────
+ * Art / Context / Glass. Everything used to be stacked in one column, so wall context
+ * and window panels ate the room Add & Arrange and the frame list need — and those are
+ * the high-traffic ones. Panes are hidden with display, never detached, so
+ * initElevControls can keep rendering into all of them and every button stays
+ * findable by id. */
+/* THE PANE IS THE SCROLL REGION. .elev-sidebar is a flex COLUMN and .elev-frame-list
+ * used to be its only `flex: 1; overflow-y: auto` child — the one thing that scrolled.
+ * Wrapping the sections in panes broke that chain: the Context pane had no flex sizing,
+ * so it grew to its content and ran off the bottom of the sidebar with nothing to
+ * scroll. Reported as "the list can get bigger and bigger but it does not seem to be
+ * contained in the proper window".
+ * `min-height: 0` is the load-bearing half — a flex child will not shrink below its
+ * content without it, so `overflow-y: auto` alone would still have overflowed.
+ * The ART pane is `flex: none` on purpose: it holds the fixed Add & Arrange toolbar, and
+ * giving it flex:1 would squash the frame list that is meant to take the height. */
+.elev-tabpane { min-height: 0; }
+.elev-tabpane[data-elevtabpane="art"] { flex: none; }
+.elev-tabpane[data-elevtabpane="context"],
+.elev-tabpane[data-elevtabpane="glass"] {
+    flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 12px;
+}
+.elev-tabpane::-webkit-scrollbar { width: 8px; }
+.elev-tabpane::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+.elev-tabs { display: flex; gap: 2px; margin-bottom: 6px; border-bottom: 1px solid var(--border-color); flex: none; }
+.elev-tab {
+    flex: 1; background: transparent; border: none; border-bottom: 2px solid transparent;
+    color: var(--text-muted); padding: 5px 4px; font-size: 0.62rem; cursor: pointer;
+    letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
+}
+.elev-tab:hover { color: var(--text-strong); }
+.elev-tab-on { color: var(--accent, #3b82f6); border-bottom-color: var(--accent, #3b82f6); }
 
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────
  * Sits in the Elevations sidebar, which is narrow, so the four run fields are a
@@ -1044,7 +1226,21 @@ body.dragging-frame .frame-vis:hover {
 /* All grid layers hidden by default */
 #label-layer, #od-layer, #dim-layer, #guide-layer, #grid-layer, #frame-center-layer { display: none; }
 .dim-layer, .grid-layer, .arch-dim-layer, .od-layer, .frame-center-layer, .label-layer { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
-#frame-layer { position: absolute; inset: 0; z-index: 18; }
+/* CLICK-THROUGH, like every other full-wall layer above. This is an `inset: 0` div
+ * covering the entire wall, so with the default `pointer-events: auto` it swallowed
+ * every click meant for anything BENEATH it — which is what made context blocks
+ * impossible to select or drag ("I still can not select the blocks and move them
+ * around like I can with the frame mockups"). The frames themselves opt back in.
+ * Nothing else here needs events: the image-code captions and the EGD prompt are
+ * already pointer-events:none, and wireElevArtworkDrop listens on this layer but only
+ * ever acts on an e.target.closest('.frame-vis') — events still BUBBLE up from the
+ * frames, so a click-through layer does not break the drop target. */
+#frame-layer { position: absolute; inset: 0; z-index: 18; pointer-events: none; }
+.frame-vis { pointer-events: auto; }
+/* Same trap, one layer down: #context-layer is also inset:0 and sat over the
+ * client-elevation underlay. The blocks opt in; the layer does not. */
+#context-layer { pointer-events: none; }
+.ctx-block { pointer-events: auto; }
 /* Guide layer (wall-center + hang-height lines + floor-to-hang dim) sits
  * ABOVE frames (z-index 10) so these reference lines read over the artwork.
  * The dimension layers above sit even higher so dim callouts win over the
