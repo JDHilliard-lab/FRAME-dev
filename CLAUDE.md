@@ -22,7 +22,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1383 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1385 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -277,6 +277,18 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   two different sentences is how a user ends up believing they are two settings. Toggling
   must `_dsClearBuiltAll()` + `_dsRefresh()`: the sheet gains or loses a whole table, so
   the page and its thumbnail rebuild rather than being relabelled.
+- **`_egdWallGoverns` IS THE ONE ANSWER TO "WHAT DOES EGD WALL MODE TOUCH": WALLCOVERING.**
+  `_shouldAutoFitFlat` already said window film is sized to the GLASS and never to the
+  wall — and then `toggleEgdWall` and `_clampFlatToWall` both tested "is it flat", which
+  swept film straight back in. Switching a glazed wall to EGD therefore tore every film
+  graphic off its panes and they had to be re-imported and re-aligned. All three go
+  through the predicate now.
+  **A wall with glazing is NOT an EGD wall by virtue of having windows.** Film is fitted to
+  panes and aligned across mullions, so anything reaching for the wall’s edges is measuring
+  the wrong thing — including the clamp, since a privacy band can sit lower than the
+  baseboard line. A glazed wall left on ART is correct, and `#wallModeHint` says so on
+  screen (keyed to `elev.glazing`), because the only other way to learn it is to switch
+  mode and watch the film move.
 - **THE WALL MODE IS TWO NAMED BUTTONS** (`artWallBtn` / `egdWallBtn`, both calling
   `setElevWallMode`), sitting under RESET DIMENSION POSITIONS. Exactly one is lit, from
   `_isEgdWall(elevations[currentElevIndex])` — EGD mode is per elevation while every other

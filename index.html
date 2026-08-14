@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=16.93">
+    <link rel="stylesheet" href="style.css?v=16.94">
 </head>
 <body>
 
@@ -740,6 +740,13 @@
                                 EGD WALL
                             </button>
                         </div>
+                        <!-- What the mode actually governs, written by _syncEgdWallBtn. The
+                             two buttons on their own imply you must pick EGD for any EGD or
+                             WF work, which is wrong and expensive: window film is sized to
+                             the GLASS and is unaffected by the mode, so a glazed wall left
+                             on ART is correct. Without this line the only way to learn that
+                             is to switch mode and watch the film move. -->
+                        <div id="wallModeHint" style="font-size:0.58rem; color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
                     </div>
 
                 </div>

@@ -843,6 +843,55 @@ const fs = require('fs');
       if (rule.indexOf('background') < 0) throw new Error('the selected mode is not filled, so it does not read as chosen');
     });
 
+    __check('EXACT BUG: switching a glazed wall to EGD does not tear film off its panes', () => {
+      // "When I selected EGD wall the artwork jumps out of the glass area and I have to
+      // re import the glass patterns again and re align them to the glass panels."
+      //
+      // _shouldAutoFitFlat already said window film is sized to the GLASS and never to the
+      // wall - but the toggle that turns the mode ON tested "is it flat" instead, and the
+      // clamp that pins graphics inside the wall did the same. The one rule, ignored by
+      // the two functions that had to honour it.
+      if (_egdWallGoverns({ product: 'Window Film (WF)' })) throw new Error('EGD mode claims to govern window film');
+      if (!_egdWallGoverns({ product: 'Wallcovering (EGD)' })) throw new Error('EGD mode does not govern wallcovering');
+      if (_egdWallGoverns(null)) throw new Error('a missing frame blew up or reported true');
+      const egdWall = { wallW: 400, wallH: 108, egdWall: true, frames: [] };
+      if (_shouldAutoFitFlat(egdWall, { product: 'Window Film (WF)' })) throw new Error('film would be auto-filled to the wall');
+      if (!_shouldAutoFitFlat(egdWall, { product: 'Wallcovering (EGD)' })) throw new Error('wallcovering stopped auto-filling');
+      // THE CLAMP is the other half: pinning a privacy band above the baseboard moves it
+      // off the glass just as surely as filling it to the wall does.
+      const film = { product: 'Window Film (WF)', x: 12, y: 2, w: 80, h: 20 };
+      const before = JSON.stringify(film);
+      if (_clampFlatToWall(egdWall, film)) throw new Error('the clamp still moves window film');
+      if (JSON.stringify(film) !== before) throw new Error('the clamp mutated the film anyway: ' + JSON.stringify(film));
+      // Wallcovering is still pinned inside the wall - that is the mode working.
+      const paper = { product: 'Wallcovering (EGD)', x: -50, y: -10, w: 500, h: 200 };
+      if (!_clampFlatToWall(egdWall, paper)) throw new Error('wallcovering stopped being clamped');
+      if (paper.x < 0 || paper.y < 0) throw new Error('wallcovering was not pinned inside the wall');
+      // ALL THREE go through the one predicate, or the next caller answers it again.
+      const A = window.__appSrc;
+      const t = A.indexOf('function toggleEgdWall');
+      if (A.slice(t, t + 900).indexOf('_shouldAutoFitFlat(elev, f)') < 0) {
+        throw new Error('the mode toggle still fits every flat graphic');
+      }
+      const c = A.indexOf('function _clampFlatToWall');
+      if (A.slice(c, c + 700).indexOf('_egdWallGoverns(frame)') < 0) {
+        throw new Error('the clamp still tests for any flat graphic');
+      }
+    });
+
+    __check('the wall-mode hint says a glazed wall does NOT need EGD mode', () => {
+      // Two buttons on their own imply you must pick EGD for any EGD or WF work. That is
+      // wrong and costly to learn by experiment, which is exactly how it was found.
+      const H = window.__indexHtml;
+      if (H.indexOf('id="wallModeHint"') < 0) throw new Error('there is no hint under the buttons');
+      const A = window.__appSrc;
+      const i = A.indexOf("getElementById('wallModeHint')");
+      if (i < 0) throw new Error('nothing writes the hint');
+      const body = A.slice(i, i + 900);
+      if (body.indexOf('glazing') < 0) throw new Error('the hint does not look at whether the wall has glass');
+      if (body.indexOf('does not need EGD mode') < 0) throw new Error('the hint never says a glazed wall is fine on ART');
+    });
+
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {
       editorialContent.pageFooters['floorplan:0'] = { hideFooter: true };
       _curFooter = _resolveFooter('floorplan:0');
