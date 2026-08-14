@@ -168,8 +168,9 @@ const path = require('path');
     // 16.43: the sheet was narrowed on request to exactly what the catalog carries —
     // Application, Art Type, Overall Dimensions. Application now IS the substrate
     // ("Application: Vinyl Wallcovering"), so the separate Material row is gone, and
-    // Mount and Image Size were dropped from the PAGE (both stay in the CSV: the 2"
-    // bleed is production data, and printing 169.375" invites ordering that much wall).
+    // Mount and Art Dimensions were dropped from the PAGE. Both numbers stay in the CSV
+    // (its Art Size and Image Size columns): the 2" bleed is production data, and printing
+    // 169.375" on a client sheet invites ordering that much wall.
     __check('the spec block is Application + Art Type + Overall Dimensions, and nothing else', () => {
       dashUnit = 'in'; editorialContent.specDualUnit = '';
       const s = buildSpecStrings(egd({
@@ -182,7 +183,7 @@ const path = require('path');
       }
       // Every framed row, plus the three deliberately dropped ones.
       ['Frame Code', 'Frame Size', 'Mat 1', 'Mat 2', 'Matboard', 'Glass', 'Hardware',
-       'Backing Board', 'Stretcher Bar', 'Float Reveal', 'Material', 'Mount', 'Image Size'].forEach(l => {
+       'Backing Board', 'Stretcher Bar', 'Float Reveal', 'Material', 'Mount', 'Art Dimensions'].forEach(l => {
         if (labels.indexOf(l) >= 0) throw new Error('a flat graphic emitted ' + l);
       });
     });
@@ -195,10 +196,10 @@ const path = require('path');
       if (labels.join('|') !== 'Application|Overall Dimensions') throw new Error('WF sheet reads: ' + labels.join(' | '));
     });
 
-    __check('Image Size is off the page but still computed for the CSV', () => {
+    __check('Art Dimensions is off the flat sheet but still computed for the CSV', () => {
       const r = egd({ bleed: 2 });
       const s = buildSpecStrings(r);
-      if (s.lines.some(l => l.label === 'Image Size')) throw new Error('Image Size printed on the sheet');
+      if (s.lines.some(l => l.label === 'Art Dimensions')) throw new Error('Art Dimensions printed on the sheet');
       // The number itself must still exist, with the 2" bleed on every edge.
       const sz = _rowOpeningAndPrint(r);
       if (sz.printW !== 196 || sz.printH !== 124) throw new Error('print size with 2" bleed should be 196x124, got ' + sz.printW + 'x' + sz.printH);
@@ -235,9 +236,9 @@ const path = require('path');
       // Group A/B/C pages and their DOM previews filter by a hardcoded allowlist.
       // Two PDF renderers + three DOM mocks = five; miss one and that layout
       // silently drops the row.
-      const n = (S.match(/'Matboard', 'Art Type', 'Image Size'/g) || []).length;
+      const n = (S.match(/'Matboard', 'Art Type', 'Art Dimensions'/g) || []).length;
       if (n !== 5) throw new Error('expected 5 allowlists carrying Art Type, found ' + n);
-      if (/'Matboard', 'Image Size'/.test(S)) throw new Error('an allowlist still omits Art Type');
+      if (/'Matboard', 'Art Dimensions'/.test(S)) throw new Error('an allowlist still omits Art Type');
       // The retired Material row must be gone from the registries too.
       if (SPEC_ROW_GROUPS.some(g => g.indexOf('Material') >= 0)) throw new Error('the retired Material label is still registered');
     });
@@ -383,7 +384,7 @@ const path = require('path');
     __check('a framed piece is completely unaffected by any of this', () => {
       const s = buildSpecStrings(base({}));
       const labels = s.lines.map(l => l.label);
-      ['Application', 'Frame Code', 'Frame Size', 'Mat 1', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Image Size', 'Overall Dimensions'].forEach(l => {
+      ['Application', 'Frame Code', 'Frame Size', 'Mat 1', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Art Dimensions', 'Overall Dimensions'].forEach(l => {
         if (labels.indexOf(l) < 0) throw new Error('framed art lost its ' + l + ' row');
       });
       if (labels.indexOf('Material') >= 0) throw new Error('Material leaked onto a framed piece');

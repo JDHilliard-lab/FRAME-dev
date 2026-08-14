@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1396 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1399 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -871,7 +871,15 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   A new product needs one clause here, not five.
   A new spec **label** needs registering in `SPEC_ROW_GROUPS` *and* in the **five**
   hardcoded allowlists (2 group-page PDF renderers + 3 `_deckMockHTML` previews) or that
-  layout silently drops the row.
+  layout silently drops the row. RENAMING one is the same job: a half-landed rename shows
+  the row on some layouts and not others.
+- **`Art Dimensions` on the spec page is the image OPENING, not the print file.** It was
+  the print size (opening + bleed) under the label `Image Size`, which is a production
+  number on a client page and invited ordering art at that size. The CSV had drawn this
+  distinction all along and keeps its own names: **`Art Size W/H` = opening,
+  `Image Size W/H` = print file**. Those columns are addressed BY NAME by the InDesign
+  script, so they were deliberately NOT renamed with the row — the page label and the CSV
+  header are allowed to differ here, and that is the one place in this file where they do.
 - `_coverRect()` / `_cropToCanvas()` are the shared crop math for page background
   images. The DOM preview and the PDF must agree exactly — they diverged once because
   the DOM used aspect-blind CSS while the PDF used real cover-fit math.

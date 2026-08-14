@@ -174,13 +174,13 @@ const fs = require('fs');
       // Frame CODE before Frame SIZE — the code is what you order by. Swapped
       // deliberately; buildSpecStrings' emission order was swapped with it so
       // the per-piece pages match.
-      const order = ['Application', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Frame Code', 'Frame Size', 'Mat 1', 'Image Size', 'Overall Dimensions'];
+      const order = ['Application', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Frame Code', 'Frame Size', 'Mat 1', 'Art Dimensions', 'Overall Dimensions'];
       for (let i = 1; i < order.length; i++) {
         if (pos(order[i]) < 0) continue;
         if (pos(order[i]) < pos(order[i - 1])) throw new Error(order[i] + ' came before ' + order[i - 1] + ': ' + bases.join(' > '));
       }
       if (bases[bases.length - 1] !== 'Overall Dimensions') throw new Error('Overall Dimensions must be last, got ' + bases[bases.length - 1]);
-      if (bases[bases.length - 2] !== 'Image Size') throw new Error('Image Size must be second to last, got ' + bases[bases.length - 2]);
+      if (bases[bases.length - 2] !== 'Art Dimensions') throw new Error('Art Dimensions must be second to last, got ' + bases[bases.length - 2]);
       // the build block sits directly under Application, ahead of the frame
       if (pos('Mount') > pos('Frame Size')) throw new Error('the rarely-changing build spec should sit above the frame: ' + bases.join(' > '));
     });
@@ -202,8 +202,8 @@ const fs = require('fs');
       // it belongs with the mat/paper block, so ahead of every size row.
       // (This used Paper Size as the proxy for "the sizes" until Paper Size
       // moved INTO the mat/paper block — it describes the paper, not the piece.
-      // Image Size is the first real size row now.)
-      const isz = bases.indexOf('Image Size');
+      // Art Dimensions is the first real size row now.)
+      const isz = bases.indexOf('Art Dimensions');
       if (isz >= 0 && wb > isz) throw new Error('White Border should sit above the sizes: ' + bases.join(' > '));
       const ps = bases.indexOf('Paper Size');
       if (ps >= 0 && ps > isz) throw new Error('Paper Size drifted back down into the sizes: ' + bases.join(' > '));
@@ -229,8 +229,8 @@ const fs = require('fs');
       const od = rowFor(rows, 'Overall Dimensions');
       if (od.length !== 1) throw new Error('expected one row, got ' + od.length);
       if (od[0].value.indexOf('3 @ ') !== 0) throw new Error('wanted a "3 @ " prefix, got "' + od[0].value + '"');
-      const img = rowFor(rows, 'Image Size');
-      if (img.length === 1 && img[0].value.indexOf('3 @ ') !== 0) throw new Error('Image Size missed the count: "' + img[0].value + '"');
+      const img = rowFor(rows, 'Art Dimensions');
+      if (img.length === 1 && img[0].value.indexOf('3 @ ') !== 0) throw new Error('Art Dimensions missed the count: "' + img[0].value + '"');
       // rows that carry letters already say how many, so they must NOT be counted
       const mixed = _specSetRows(SET, L6);
       rowFor(mixed, 'Overall Dimensions').forEach(r => {
@@ -478,7 +478,7 @@ const fs = require('fs');
       lists.forEach(l => {
         if (l.indexOf("'Mat 1'") < 0) throw new Error("a group spec filter still omits 'Mat 1', so standard framed art shows no mat: " + l);
         if (l.indexOf("'Matboard'") < 0) throw new Error('float-mount rows lost their Matboard line: ' + l);
-        if (l.indexOf("'Image Size'") < 0) throw new Error('preview/PDF drift on Image Size is back: ' + l);
+        if (l.indexOf("'Art Dimensions'") < 0) throw new Error('preview/PDF drift on Art Dimensions is back: ' + l);
       });
     });
 

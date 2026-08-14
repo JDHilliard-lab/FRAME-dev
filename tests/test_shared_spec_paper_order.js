@@ -9,11 +9,11 @@
 //     Mat 1 A/C–E   3"(7.62cm) AA, B 97 White
 //     ...
 //     Paper Size B  27.5"(69.85cm)W × 13.5"(34.29cm)H   <- stranded down here,
-//     Image Size A  29"(73.66cm)W × 21"(53.34cm)H          reading as a size
+//     Art Dimensions A  29"(73.66cm)W × 21"(53.34cm)H          reading as a size
 //
 // Paper Size moved into the mat/paper category, after Matboard, and the mats
 // moved ahead of the float-mount trio. B's three rows are now contiguous and the
-// sizes group holds only Image Size and Overall Dimensions.
+// sizes group holds only Art Dimensions and Overall Dimensions.
 const { JSDOM } = require('jsdom');
 const fs = require('fs');
 const path = require('path');
@@ -55,12 +55,12 @@ const path = require('path');
     const __bases = (rows) => { const out = []; rows.forEach(r => { if (out.indexOf(r.base) < 0) out.push(r.base); }); return out; };
     const __rows = () => _specSetRows(SET, _setLetters(SET.length));
 
-    __check('EXACT BUG: Paper Size no longer sits among the Image Sizes', () => {
+    __check('EXACT BUG: Paper Size no longer sits among the Art Dimensionss', () => {
       const bases = __bases(__rows());
       const ps = bases.indexOf('Paper Size');
-      const isz = bases.indexOf('Image Size');
+      const isz = bases.indexOf('Art Dimensions');
       if (ps < 0) throw new Error('Paper Size vanished: ' + bases.join(' > '));
-      if (isz < 0) throw new Error('Image Size vanished: ' + bases.join(' > '));
+      if (isz < 0) throw new Error('Art Dimensions vanished: ' + bases.join(' > '));
       if (!(ps < isz)) throw new Error('THE BUG: Paper Size still lands with the sizes -> ' + bases.join(' > '));
     });
 
@@ -82,18 +82,18 @@ const path = require('path');
 
     __check('the sizes group holds ONLY the two size labels, and ends the block', () => {
       const bases = __bases(__rows());
-      const tail = bases.slice(bases.indexOf('Image Size'));
-      if (tail.join(' > ') !== 'Image Size > Overall Dimensions') throw new Error('the block no longer ends on just the sizes: ' + tail.join(' > '));
-      if (SPEC_ROW_GROUPS[SPEC_ROW_GROUPS.length - 1].join(',') !== 'Image Size,Overall Dimensions') throw new Error('the last SPEC_ROW_GROUPS entry is ' + SPEC_ROW_GROUPS[SPEC_ROW_GROUPS.length - 1].join(','));
+      const tail = bases.slice(bases.indexOf('Art Dimensions'));
+      if (tail.join(' > ') !== 'Art Dimensions > Overall Dimensions') throw new Error('the block no longer ends on just the sizes: ' + tail.join(' > '));
+      if (SPEC_ROW_GROUPS[SPEC_ROW_GROUPS.length - 1].join(',') !== 'Art Dimensions,Overall Dimensions') throw new Error('the last SPEC_ROW_GROUPS entry is ' + SPEC_ROW_GROUPS[SPEC_ROW_GROUPS.length - 1].join(','));
     });
 
-    __check('Paper Size and Image Size are in different categories, so a half-line gap separates them', () => {
+    __check('Paper Size and Art Dimensions are in different categories, so a half-line gap separates them', () => {
       // The renderer spaces the block by row.group; same group = no gap.
       const rows = __rows();
       const ps = rows.find(r => r.base === 'Paper Size');
-      const isz = rows.find(r => r.base === 'Image Size');
+      const isz = rows.find(r => r.base === 'Art Dimensions');
       const mb = rows.find(r => r.base === 'Matboard');
-      if (ps.group === isz.group) throw new Error('Paper Size shares a category with Image Size, so they would print with no gap between them');
+      if (ps.group === isz.group) throw new Error('Paper Size shares a category with Art Dimensions, so they would print with no gap between them');
       if (ps.group !== mb.group) throw new Error('Paper Size is not in the same category as Matboard, so a gap would split B\\'s rows');
     });
 
@@ -102,7 +102,7 @@ const path = require('path');
       // group, which is how Paper Size would go missing after a rename.
       ['Application', 'Mount', 'Hardware', 'Glass', 'Backing Board', 'Frame Size', 'Frame Code',
        'Mat 1', 'Mat 2', 'Matboard', 'Paper Size', 'Paper Type', 'White Border', 'Float Reveal',
-       'Stretcher Bar', 'Notes', 'Image Size', 'Overall Dimensions'].forEach(l => {
+       'Stretcher Bar', 'Notes', 'Art Dimensions', 'Overall Dimensions'].forEach(l => {
         if (_specRowSlot(l).group === _SPEC_ROW_UNKNOWN_GROUP) throw new Error(l + ' is not listed in SPEC_ROW_GROUPS');
       });
       // Paper Size is still a per-piece quantity, so an all-covering row keeps
@@ -114,8 +114,8 @@ const path = require('path');
       const fm = (id, o) => mk(id, Object.assign({ extW: 20, extH: 16, useFloatMount: true, sbBackerColorName: 'B 97 White', paperType: 'Fine Art Paper', sbPaperMargin: 1.5, sbPaperBorder: 1 }, o || {}));
       const set3 = [fm('A'), fm('B', { extW: 24 }), fm('C')];
       const bases = __bases(_specSetRows(set3, _setLetters(3)));
-      const seq = bases.filter(b => ['Matboard', 'Paper Size', 'Paper Type', 'White Border', 'Image Size', 'Overall Dimensions'].indexOf(b) >= 0);
-      if (seq.join(' > ') !== 'Matboard > Paper Size > Paper Type > White Border > Image Size > Overall Dimensions') throw new Error('got ' + seq.join(' > '));
+      const seq = bases.filter(b => ['Matboard', 'Paper Size', 'Paper Type', 'White Border', 'Art Dimensions', 'Overall Dimensions'].indexOf(b) >= 0);
+      if (seq.join(' > ') !== 'Matboard > Paper Size > Paper Type > White Border > Art Dimensions > Overall Dimensions') throw new Error('got ' + seq.join(' > '));
     });
   `;
 

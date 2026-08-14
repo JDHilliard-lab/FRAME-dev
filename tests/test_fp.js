@@ -1148,6 +1148,62 @@ const fs = require('fs');
       if (fs2.indexOf("--push") < 0) throw new Error('there is no explicit publish flag');
     });
 
+    // ── Art Dimensions (16.98) ──────────────────────────────────────────────
+    __check('EXACT ASK: the size row above Overall is the OPENING, not the print file', () => {
+      // "I need the spec page to show the image opening size not the print size and call
+      // it Art dimensions instead of image size, its the spec just above Overall
+      // dimensions." The opening is the art someone actually sees; the print size is the
+      // opening plus bleed, a production number for whoever runs the printer - and a
+      // bleed-inflated figure on a client sheet invites ordering art at that size.
+      dashUnit = 'in'; editorialContent.specDualUnit = '';
+      const r = { id: 'ART.001', product: 'Framed Art', extW: 30, extH: 40, fW: 2,
+                  m1A: true, m1T: 3, m1B: 3, m1L: 3, m1R: 3, bleed: 2 };
+      const sz = _rowOpeningAndPrint(r);
+      // The opening and the print file are genuinely different here, so the row cannot
+      // pass by accident.
+      if (Math.abs(sz.printW - sz.openW) < 0.01) throw new Error('this fixture cannot tell the two apart');
+      const s = buildSpecStrings(r);
+      const row = s.lines.find(l => l.label === 'Art Dimensions');
+      if (!row) throw new Error('no Art Dimensions row: ' + s.lines.map(l => l.label).join(', '));
+      if (s.lines.some(l => l.label === 'Image Size')) throw new Error('the old Image Size row is still emitted');
+      if (row.value.indexOf(String(sz.openW)) < 0) throw new Error('the row does not show the opening (' + sz.openW + '): ' + row.value);
+      if (row.value.indexOf(String(sz.printW)) >= 0) throw new Error('the row is still showing the print size: ' + row.value);
+      // And it sits directly above Overall Dimensions, which is where it was asked for.
+      const labels = s.lines.map(l => l.label);
+      if (labels.indexOf('Art Dimensions') !== labels.indexOf('Overall Dimensions') - 1) {
+        throw new Error('Art Dimensions is not directly above Overall Dimensions: ' + labels.join(' > '));
+      }
+    });
+
+    __check('the CSV column names are NOT renamed with the row', () => {
+      // The InDesign script addresses CSV columns BY NAME, so renaming one silently
+      // breaks it downstream where nothing here would notice. The CSV already drew this
+      // distinction before the page did: Art Size = opening, Image Size = print file.
+      const A = window.__appSrc;
+      if (A.indexOf('Art Size W' + String.fromCharCode(36) + '{u},Art Size H' + String.fromCharCode(36) + '{u},') < 0) throw new Error('the CSV lost its Art Size columns');
+      if (A.indexOf('Image Size W' + String.fromCharCode(36) + '{u},Image Size H' + String.fromCharCode(36) + '{u},') < 0) throw new Error('the CSV Image Size columns were renamed');
+      // Both numbers still reach the CSV, including on a flat graphic where neither is
+      // printed on the sheet.
+      const i = A.indexOf('const artW = _sz.openW, artH = _sz.openH;');
+      if (i < 0) throw new Error('the CSV stopped writing the opening');
+      if (A.indexOf('const imgW = _sz.printW, imgH = _sz.printH;') < 0) throw new Error('the CSV stopped writing the print size');
+    });
+
+    __check('the renamed label is registered in every list that has to carry it', () => {
+      // A spec label has to be in SPEC_ROW_GROUPS and in the five hardcoded allowlists
+      // (two group-page PDF renderers, three _deckMockHTML previews) or that layout
+      // silently drops the row - which is how a rename half-lands.
+      const A = window.__appSrc;
+      if (A.indexOf("'Image Size'") >= 0) throw new Error('a quoted Image Size label survived the rename');
+      const lists = (A.match(/'Matboard', 'Art Type', 'Art Dimensions'/g) || []).length;
+      if (lists !== 5) throw new Error('expected 5 allowlists carrying the label, found ' + lists);
+      // Still last in the row order, and still grouped with Overall Dimensions alone.
+      const last = SPEC_ROW_GROUPS[SPEC_ROW_GROUPS.length - 1];
+      if (last.join(',') !== 'Art Dimensions,Overall Dimensions') throw new Error('the sizes group is ' + last.join(','));
+      // And it is still a per-piece quantity row, so a set page prints the count.
+      if (SPEC_QTY_LABELS.indexOf('Art Dimensions') < 0) throw new Error('the row lost its quantity handling');
+    });
+
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {
       editorialContent.pageFooters['floorplan:0'] = { hideFooter: true };
       _curFooter = _resolveFooter('floorplan:0');
