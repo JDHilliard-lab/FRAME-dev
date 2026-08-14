@@ -1094,6 +1094,57 @@ const fs = require('fs');
       if (body.indexOf('drawElevAll()') < 0) throw new Error('changing tab does not redraw the wall');
     });
 
+    // ── Dev vs stable build badge (16.97) ───────────────────────────────────
+    __check('APP_BUILD is DERIVED from the URL, not a hand-edited line', () => {
+      // The dev site and the stable site run byte-identical files, so promoting is a push
+      // with nothing to remember to flip. A line that must differ between the two repos
+      // forever is the line that eventually gets promoted by mistake, putting a green
+      // "production" dot on the dev build.
+      const A = window.__appSrc;
+      if (/const APP_BUILD = '(dev|prod)'/.test(A)) throw new Error('APP_BUILD is a hard-coded literal again');
+      const i = A.indexOf('const APP_BUILD');
+      const body = A.slice(i, i + 700);
+      if (body.indexOf('FRAME-dev') < 0) throw new Error('the dev site is not recognised');
+      if (body.indexOf('github') < 0) throw new Error('the stable site is not recognised');
+      // The real function, evaluated against each host this actually runs on.
+      const pick = (hostname, pathname) => {
+        try {
+          const where = (hostname || '') + (pathname || '');
+          if (/FRAME-dev/i.test(where)) return 'dev';
+          if (/github\.io$/i.test(hostname || '')) return 'prod';
+        } catch (e) {}
+        return 'dev';
+      };
+      if (pick('jdhilliard-lab.github.io', '/FRAME-dev/') !== 'dev') throw new Error('the dev site would show a prod badge');
+      if (pick('jdhilliard-lab.github.io', '/FRAME/') !== 'prod') throw new Error('the stable site would show a dev badge');
+      // Anything unrecognised is DEV: an unknown location is far more likely to be
+      // someone's working copy than production, and the safe error is calling a build
+      // unreleased rather than calling a working copy live.
+      if (pick('', '') !== 'dev') throw new Error('a file:// copy would claim to be production');
+      if (pick('localhost', '/') !== 'dev') throw new Error('a local server would claim to be production');
+      // github.io is anchored, so a lookalike host cannot claim to be production.
+      if (pick('github.io.evil.test', '/FRAME/') === 'prod') throw new Error('an unanchored host match lets a lookalike claim prod');
+    });
+
+    __check('the promote script gates on green, clean and pushed', () => {
+      // The stable site is what designers open. Publishing something that only exists on
+      // one machine, or that has not been run, is the failure worth preventing.
+      const fs2 = window.__promoteSrc;
+      if (!fs2) throw new Error('tools/promote.js was not handed to the test');
+      if (fs2.indexOf('git status --porcelain') < 0) throw new Error('it does not check for uncommitted changes');
+      if (fs2.indexOf('ALL GREEN') < 0) throw new Error('it does not gate on the suite');
+      if (fs2.indexOf("rev-parse origin/main") < 0) throw new Error('it does not check dev was pushed first');
+      // Version and cache-buster agree - the failure this project already has a test for,
+      // checked once more at the last moment before it reaches users.
+      if (fs2.indexOf("'style.css?v=' + version") < 0) throw new Error('it does not re-check the stylesheet cache-buster');
+      // A SNAPSHOT commit, not a merge and not a force push: the stable history has to
+      // stay revertible, and nobody wants the dev log in it.
+      if (fs2.indexOf('commit-tree') < 0) throw new Error('it does not snapshot the tree onto stable history');
+      if (fs2.indexOf('--force') >= 0) throw new Error('it force-pushes, which discards the stable history');
+      // Dry by default: publishing should be the thing you opt into.
+      if (fs2.indexOf("--push") < 0) throw new Error('there is no explicit publish flag');
+    });
+
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {
       editorialContent.pageFooters['floorplan:0'] = { hideFooter: true };
       _curFooter = _resolveFooter('floorplan:0');
@@ -1158,7 +1209,11 @@ const fs = require('fs');
     const cssSrc = fs.readFileSync(require('path').join(__dirname, '..', 'style.css'), 'utf8');
     window.eval('window.__appSrc = ' + JSON.stringify(src) + ';\n'
       + 'window.__indexHtml = ' + JSON.stringify(htmlSrc) + ';\n'
-      + 'window.__css = ' + JSON.stringify(cssSrc) + ';\n' + src + '\n' + testBlock);
+      + 'window.__css = ' + JSON.stringify(cssSrc) + ';\n'
+      // The promote script too: it is the thing that decides what reaches the stable
+      // site, so the gates it enforces are worth pinning like any other rule here.
+      + 'window.__promoteSrc = ' + JSON.stringify(fs.readFileSync(require('path').join(__dirname, '..', 'tools', 'promote.js'), 'utf8')) + ';\n'
+      + src + '\n' + testBlock);
   } catch (e) {
     console.error('LOAD/RUN FAILED:', e.message);
     process.exit(1);
