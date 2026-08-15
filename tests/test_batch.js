@@ -42,10 +42,29 @@ const fs = require('fs');
       const p3 = { id: 'pg3', type: 'moodboard', title: 'Three', elements: [] };
       const d1 = { kind: 'layout', page: p1 }, d2 = { kind: 'layout', page: p2 }, d3 = { kind: 'layout', page: p3 };
       window._deckPageList = () => [d1, d2, d3];
+      // CHANGED (16.99): _dsMoveLayoutPage delegates to _dsMovePageTo, which works off
+      // _dsPages - the list the rail is actually showing - rather than recomputing its
+      // own. It was a second implementation of the same move with its own afterKey
+      // arithmetic, so the page-actions menu and the rail could disagree about where
+      // "one slot later" is.
+      _dsPages = [d1, d2, d3];
+      editorialContent.layoutPages = [p1, p2, p3];
       _dsMoveLayoutPage(d2, -1);
       if (p2.afterKey !== '__start__') throw new Error('move earlier to start failed: ' + p2.afterKey);
+      _dsPages = [d2, d1, d3];
       _dsMoveLayoutPage(d2, 1);
-      if (p2.afterKey !== 'layout:pg3') throw new Error('move later failed: ' + p2.afterKey);
+      if (p2.afterKey !== 'layout:pg1') throw new Error('move later failed: ' + p2.afterKey);
+    });
+
+    __check('one mover: the menu and the rail cannot disagree about a move', () => {
+      // Three functions used to move a page - _dsMoveLayoutPage, _dsMoveInserted and the
+      // rail arrows - each with its own afterKey arithmetic. Now there is one, and the
+      // others delegate or are gone.
+      const S2 = window.__appSrc || '';
+      if (S2.indexOf('function _dsMoveInserted') >= 0) throw new Error('the dead second mover is back');
+      const i = S2.indexOf('function _dsMoveLayoutPage');
+      if (i < 0) throw new Error('_dsMoveLayoutPage vanished');
+      if (S2.slice(i, i + 500).indexOf('_dsMovePageTo(') < 0) throw new Error('_dsMoveLayoutPage no longer delegates');
     });
 
     __check('paste keeps exact position on a different page, nudges on the same page', () => {

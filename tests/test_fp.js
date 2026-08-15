@@ -1204,6 +1204,102 @@ const fs = require('fs');
       if (SPEC_QTY_LABELS.indexOf('Art Dimensions') < 0) throw new Error('the row lost its quantity handling');
     });
 
+    // ── Rail reordering (16.99) ─────────────────────────────────────────────
+    __check('only inserted layout pages move; everything else says why it cannot', () => {
+      // Fixed pages and cards sit at hardcoded points in _deckPageList; floorplans, plan
+      // details and spec pages come out of _deckPlanSlots in an order the data decides,
+      // and that generator is mirrored by the PDF exporter. A per-page override would
+      // fight it - the pairing that has drifted more than any other here.
+      if (!_dsPageMovable({ kind: 'layout', page: { id: 'p1' } })) throw new Error('an inserted page cannot be moved');
+      ['fixed', 'card', 'floorplan', 'planDetail', 'spec'].forEach(k => {
+        if (_dsPageMovable({ kind: k, page: { id: 'x' } })) throw new Error(k + ' pages became draggable');
+      });
+      // Every locked kind explains ITSELF and points at the control that decides it.
+      // "You cannot move this" without saying where the order lives is the state this
+      // replaced, where two thirds of a deck ignored the buttons beside it.
+      [['fixed', 'Include pages'], ['card', 'Include pages'],
+       ['floorplan', 'Floorplan order'], ['planDetail', 'Floorplan order'],
+       ['spec', 'Floorplan order']].forEach(pair => {
+        const note = _dsPageLockNote({ kind: pair[0] });
+        if (!note) throw new Error(pair[0] + ' pages give no reason');
+        if (note.indexOf(pair[1]) < 0) throw new Error(pair[0] + ' does not point at ' + pair[1] + ': ' + note);
+      });
+      if (_dsPageLockNote({ kind: 'layout', page: { id: 'p1' } })) throw new Error('a movable page claims to be locked');
+    });
+
+    __check('a move is computed from the RESULT, so drag and the number field agree', () => {
+      // Both go through _dsMovePageTo. Reading the anchor off the intended result rather
+      // than off an offset is what keeps "put this at 3" meaning the same thing whether
+      // the page is currently above or below 3.
+      const A = window.__appSrc;
+      const i = A.indexOf('function _dsMovePageTo');
+      const body = A.slice(i, A.indexOf('function _dsResetLayoutOrder'));
+      if (body.indexOf('list.splice(from, 1)') < 0 || body.indexOf('list.splice(to, 0, moved)') < 0) {
+        throw new Error('the move is not computed from the resulting order');
+      }
+      if (body.indexOf('delete desc.page.place') < 0) throw new Error('the template anchor survives a hand move and will fight it');
+      if (body.indexOf('_dsSyncLayoutPageOrder(list)') < 0) throw new Error('layoutPages is not reordered, so an anchor can fail to resolve');
+      // The rail's number field and the drop handlers must all call it.
+      if (A.indexOf('_dsMovePageTo(desc, v - 1)') < 0) throw new Error('the number field does not use the shared move');
+      if ((A.split('_dsMovePageTo(src, idx)').length - 1) < 2) throw new Error('a drop path does not use the shared move');
+    });
+
+    __check('layoutPages is re-sorted so an anchor always resolves', () => {
+      // The resolver walks layoutPages ONCE and places each page after the key it names.
+      // A page anchored to another layout page sitting later in the array cannot find its
+      // anchor and falls to the end of the deck - which is what dragging one inserted page
+      // directly after another would otherwise do.
+      const save = editorialContent.layoutPages;
+      const a = { id: 'pa' }, b = { id: 'pb' }, c = { id: 'pc' };
+      editorialContent.layoutPages = [c, a, b];
+      _dsSyncLayoutPageOrder([
+        { kind: 'layout', page: a }, { kind: 'fixed', fixed: 'cover' },
+        { kind: 'layout', page: b }, { kind: 'layout', page: c }
+      ]);
+      const ids = editorialContent.layoutPages.map(p => p.id).join(',');
+      if (ids !== 'pa,pb,pc') throw new Error('layoutPages did not follow the deck order: ' + ids);
+      editorialContent.layoutPages = save;
+    });
+
+    __check('the rail reorders with the SAME gesture and indicator as the elevation rail', () => {
+      // Two rails in one app that reorder by different gestures, with different drop
+      // indicators, is two things to learn instead of one.
+      const A = window.__appSrc, C = window.__css;
+      const i = A.indexOf('function _dsWireRailDrag');
+      const body = A.slice(i, A.indexOf('function _dsPageMovable'));
+      ['dragstart', 'dragover', 'drop', 'dragend'].forEach(ev => {
+        if (body.indexOf(ev) < 0) throw new Error('the rail does not handle ' + ev);
+      });
+      if (body.indexOf('drop-before') < 0 || body.indexOf('drop-after') < 0) throw new Error('the rail uses a different drop indicator');
+      if (C.indexOf('[data-railcell].drop-before::before') < 0) throw new Error('the deck rail has no drop bar style');
+      if (C.indexOf('[data-railcell].dragging') < 0) throw new Error('the dragged cell is not faded');
+      // A LOCKED page is not draggable but IS still a drop target: an inserted page has to
+      // be placeable between two spec pages, which is most of what it is for.
+      // Bounded at the branch-s own return: the movable path below it also sets
+      // draggable, so an unbounded slice reads that and reports the wrong thing.
+      const lb0 = body.indexOf('if (!_dsPageMovable(desc))');
+      const lockBranch = body.slice(lb0, body.indexOf('cell.setAttribute', lb0));
+      if (lockBranch.indexOf('drop') < 0) throw new Error('you cannot drop a page onto a generated page');
+      if (lockBranch.indexOf("setAttribute('draggable'") >= 0) throw new Error('a locked page was made draggable');
+      // And the readout, because the rail scrolls and a long drag leaves the page you
+      // grabbed off-screen.
+      if (A.indexOf('function _dsDragPill') < 0) throw new Error('there is no drag readout');
+      if (body.indexOf('_dsDragPill(') < 0) throw new Error('the readout never updates during a drag');
+    });
+
+    __check('the up/down arrows are gone and reset only appears when it can do something', () => {
+      const A = window.__appSrc;
+      if (A.indexOf('_dsMoveInserted') >= 0) throw new Error('the dead second mover is back');
+      if (A.indexOf('function _dsResetLayoutOrder') < 0) throw new Error('there is no way back to the default order');
+      const r = A.indexOf('Reset page order');
+      if (r < 0) throw new Error('the reset control is not in the rail');
+      if (A.slice(r - 800, r + 300).indexOf('handPlaced') < 0) throw new Error('reset shows even when nothing was moved');
+      // Reset touches ONLY hand-placed pages - a fixed or generated page was never moved,
+      // so there is nothing to put back.
+      const rb = A.indexOf('function _dsResetLayoutOrder');
+      if (A.slice(rb, rb + 900).indexOf('p.afterKey') < 0) throw new Error('reset does not key on hand-placed pages');
+    });
+
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {
       editorialContent.pageFooters['floorplan:0'] = { hideFooter: true };
       _curFooter = _resolveFooter('floorplan:0');

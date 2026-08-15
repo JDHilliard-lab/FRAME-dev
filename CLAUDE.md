@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1399 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1405 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -503,6 +503,27 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   to be re-applied **after** it (`_dsSyncToolsTabBar`) or every tab click brings the button
   back; and sitting ON Templates when a plan is selected has to fall back to Page, or the
   panel goes blank with no way back that reads as deliberate.
+- **ONLY INSERTED LAYOUT PAGES CAN BE MOVED** (`_dsPageMovable`). Fixed pages and cards sit
+  at hardcoded points in `_deckPageList`; floorplans, plan details, spec pages and breakers
+  come out of `_deckPlanSlots` in an order the DATA decides. A per-page override on any of
+  those would fight the generator, and the generator is mirrored by the PDF exporter —
+  the pairing that has drifted more than anything else in this file. Manual floorplan
+  order already covers the real need.
+  The distinction used to be invisible: every thumbnail looked equally grabbable, so two
+  thirds of a deck silently ignored the controls beside it. `_dsPageLockNote` now says why
+  a page can't move AND where its order is decided.
+  **`_dsMovePageTo` is the ONE move** — the rail drag, the "move to page N" field and the
+  page-actions menu all call it. It reads the anchor off the RESULTING order rather than
+  off an offset, so "put this at 3" means the same thing whether the page is above or
+  below 3; it drops `place` (the template's own anchor, which would otherwise fight the
+  hand-set `afterKey` on the next rebuild); and it re-sorts `layoutPages` via
+  `_dsSyncLayoutPageOrder`, because the resolver walks that array ONCE and a page anchored
+  to another layout page sitting later in it can't find its anchor and falls to the end of
+  the deck. There were three movers before this; the other two are gone or delegate.
+  The rail reorders with the **same gesture and the same `.drop-before`/`.drop-after`
+  indicator as the elevation rail** — two rails in one app that reorder differently is two
+  things to learn. A locked page is not draggable but IS still a drop target, since placing
+  an inserted page between two spec pages is most of what inserted pages are for.
 - **THERE ARE TWO PAGE-LIST BUILDERS AND THEY DRIFT.** `_deckPageList` drives Deck
   Studio; the PDF export's `_stepsFor` mirrors it **by hand**, and its own comment used
   to say "Mirrors `_deckPageList`". That comment is not a mechanism. Any rule about

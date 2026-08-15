@@ -528,6 +528,27 @@ select.no-arrow::-ms-expand { display: none; }
 }
 .wall-tab.drop-before::before { top: -1px; }
 .wall-tab.drop-after::after { bottom: -1px; }
+/* THE DECK RAIL REORDERS THE SAME WAY, and shares these rules rather than growing a
+ * second look. Two rails in one app that reorder by different gestures, with different
+ * drop indicators, is two things to learn instead of one.
+ * The bar is offset outward here because the deck rail puts a 16px insert strip (the "+"
+ * between pages) below every cell — a bar flush to the cell edge would read as belonging
+ * to the strip rather than to the gap the page is going into. */
+[data-railcell].dragging { opacity: 0.4; }
+[data-railcell].drop-before::before,
+[data-railcell].drop-after::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    pointer-events: none;
+    z-index: 8;
+}
+[data-railcell].drop-before::before { top: -4px; }
+[data-railcell].drop-after::after { bottom: -10px; }
 /* .nav-add-tab defaults to margin-left:10px for the old horizontal strip. */
 .elev-wall-rail .nav-add-tab { flex: 0 0 auto; margin: 8px; width: auto; }
 
