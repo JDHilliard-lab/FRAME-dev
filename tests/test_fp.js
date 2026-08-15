@@ -1300,6 +1300,68 @@ const fs = require('fs');
       if (A.slice(rb, rb + 900).indexOf('p.afterKey') < 0) throw new Error('reset does not key on hand-placed pages');
     });
 
+    __check('the position control sits with remove and duplicate, on the thumbnail', () => {
+      // Those three are one family - remove, reposition, duplicate. Splitting them between
+      // the thumbnail edge and the caption row put the odd one out where the page TITLE
+      // needs the width.
+      const A = window.__appSrc;
+      const i = A.indexOf("num.className = 'ds-pagenum'");
+      if (i < 0) throw new Error('the position box is gone');
+      const body = A.slice(i - 900, i + 2000);
+      if (body.indexOf('cell.appendChild(num)') < 0) throw new Error('the position box is not on the thumbnail cell');
+      if (body.indexOf('lab.appendChild(num)') >= 0) throw new Error('the position box is still in the caption row');
+      if (body.indexOf('position:absolute') < 0 || body.indexOf('right:2px') < 0) {
+        throw new Error('it is not on the same edge as remove and duplicate');
+      }
+      // Same slot for the lock marker, so a locked page reads as the same column.
+      const L = A.indexOf('lock.title = _dsPageLockNote(desc)');
+      if (L < 0) throw new Error('the lock marker is gone');
+      if (A.slice(L, L + 500).indexOf('cell.appendChild(lock)') < 0) throw new Error('the lock marker is not in the same slot');
+      // Spinners off: they would double the width of a control that is typed into.
+      const C = window.__css;
+      if (C.indexOf('.ds-pagenum::-webkit-inner-spin-button') < 0) throw new Error('the number spinners are back');
+    });
+
+    __check('the insert gap is quiet until you reach for it, and still a drop gap', () => {
+      // A permanent 16px lane between every pair of cells was about a fifth of the rail's
+      // scroll on a 21-page deck, spent on a control used a handful of times.
+      const C = window.__css;
+      const i = C.indexOf('.ds-insstrip {');
+      if (i < 0) throw new Error('the insert strip has no style');
+      const rule = C.slice(i, i + 260);
+      const h = /height:\\s*(\\d+)px/.exec(rule);
+      if (!h) throw new Error('the strip has no height');
+      const px = parseInt(h[1], 10);
+      if (px > 8) throw new Error('the strip is still eating the rail: ' + px + 'px');
+      // NOT zero: the reorder bar draws into this gap, and at zero height the drop
+      // indicator would land on top of the thumbnail instead of between two pages.
+      if (px < 4) throw new Error('the gap is too small to hold the drop indicator: ' + px + 'px');
+      // Hidden until hover...
+      if (C.indexOf('.ds-insstrip:hover > button') < 0) throw new Error('the + never appears on hover');
+      // ...but reachable by keyboard, or it is a control only a mouse can find.
+      if (C.indexOf('.ds-insstrip > button:focus-visible') < 0) throw new Error('the + is unreachable by keyboard');
+    });
+
+    __check('the rail header is a section, not something the pages show through', () => {
+      // It was near-transparent and only as wide as the rail's CONTENT box, so thumbnails
+      // scrolled past in the 12px gutters either side and showed through beside it.
+      const A = window.__appSrc, H = window.__indexHtml;
+      // From _dsRenderRail: _dsRenderTemplateRail builds its own header and sits earlier
+      // in the file, so a bare indexOf reads that one instead.
+      const railFn = A.indexOf('function _dsRenderRail()');
+      const i = A.indexOf("bar.style.cssText = 'position:sticky", railFn);
+      if (i < 0) throw new Error('the rail header is gone');
+      const css = A.slice(i, i + 700);
+      if (css.indexOf('railBg') >= 0) throw new Error('the header still inherits a possibly-transparent background');
+      if (css.indexOf('var(--bg-panel)') < 0) throw new Error('the header has no opaque fill');
+      if (css.indexOf('border-bottom') < 0) throw new Error('nothing separates the header from the deck');
+      // Negative margins pull it out over the rail's own padding so it spans edge to edge.
+      if (css.indexOf('margin:-12px -12px') < 0) throw new Error('the header does not span the rail width');
+      // And the rail itself needs a real background, or the sticky header sits on nothing.
+      const r = H.indexOf('id="dsRail"');
+      if (H.slice(r, r + 260).indexOf('background:') < 0) throw new Error('the rail has no background of its own');
+    });
+
     __check('_drawFloorplanKeyPage footer honors hideFooter', () => {
       editorialContent.pageFooters['floorplan:0'] = { hideFooter: true };
       _curFooter = _resolveFooter('floorplan:0');

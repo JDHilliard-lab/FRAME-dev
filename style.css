@@ -548,7 +548,59 @@ select.no-arrow::-ms-expand { display: none; }
     z-index: 8;
 }
 [data-railcell].drop-before::before { top: -4px; }
-[data-railcell].drop-after::after { bottom: -10px; }
+[data-railcell].drop-after::after { bottom: -6px; }
+
+/* THE INSERT GAP between two pages. 6px of quiet, which becomes a line and a "+" under
+ * the cursor. It was a permanent 16px lane with a button parked in it — on a 21-page deck
+ * that is about a fifth of the rail's scroll spent on a control used a handful of times.
+ * It stays a real 6px rather than 0 because it is also the DROP GAP the reorder bar draws
+ * into; at zero height the indicator would land on top of the thumbnail. */
+.ds-insstrip {
+    position: relative;
+    height: 6px;
+    margin: 0 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ds-insstrip::before {
+    content: '';
+    position: absolute;
+    left: 8px; right: 8px; top: 50%;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .12s;
+}
+.ds-insstrip > button {
+    position: relative;
+    z-index: 1;
+    width: 16px; height: 16px;
+    padding: 0;
+    line-height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    background: var(--bg-panel);
+    color: var(--accent);
+    font-size: 0.72rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity .12s, transform .12s;
+}
+.ds-insstrip:hover::before { opacity: 0.7; }
+.ds-insstrip:hover > button { opacity: 1; transform: scale(1); }
+/* Keyboard reach: the button is invisible until hover, so focus has to reveal it too or
+ * it is a control only a mouse can find. */
+.ds-insstrip > button:focus-visible { opacity: 1; transform: scale(1); outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* The page-position box, on the thumbnail's right edge between remove and duplicate.
+ * Spinners are suppressed: they would double the width of a control that is typed into,
+ * and a deck is not stepped through one page at a time. */
+.ds-pagenum::-webkit-outer-spin-button,
+.ds-pagenum::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.ds-pagenum { -moz-appearance: textfield; appearance: textfield; }
+.ds-pagenum:hover, .ds-pagenum:focus { background: var(--accent); outline: none; }
 /* .nav-add-tab defaults to margin-left:10px for the old horizontal strip. */
 .elev-wall-rail .nav-add-tab { flex: 0 0 auto; margin: 8px; width: auto; }
 
