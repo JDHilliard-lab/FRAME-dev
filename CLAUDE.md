@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1413 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1416 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1465,6 +1465,22 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   only the opening-size text needs `innerText`, for its embedded newlines.
   It's in `_elevCaptureSignature`, and `setElevWireframe` also drops the frame-mockup
   and deck caches, whose keys carry no wireframe term.
+- **`silent` MUST REACH THE PRIME.** `_dsBuildPage(silent)` honoured the flag for its own
+  overlay but called `_elevPrimeCaptures([idx])` with no options, so the render modal
+  appeared on an AUTOMATIC refresh whenever the elevation cache had been dropped. The
+  comment there claimed a cache hit "shows nothing", which was true only while the cache
+  stayed warm — a deck-wide guide change drops it every time, so every toggle popped a
+  modal. The Preview button still explains its trip; an auto-refresh primes silently.
+- **THE JUMP BETWEEN A BREAKER PAGE AND ITS WALL REMEMBERS WHERE IT CAME FROM**
+  (`_dsJumpToElevation` / `_elevReturnToDeck`, `#elevReturnBar`). Editing the wall still
+  happens in the Elevations tab, because that is where the drawing is; what was missing
+  was the way BACK, which meant finding the page again among twenty.
+  The return point is the page KEY, never `_dsIndex`: the deck rebuilds constantly and an
+  index brings you back to whatever has since taken that slot. `_elevReturnToDeck` calls
+  `_dsRefresh()` BEFORE `_dsRestoreSel`, because the deck may have been rebuilt while the
+  wall was being edited — a guide toggle does exactly that.
+  Arriving at the deck by ANY route clears it, so a later visit to Elevations does not
+  offer to return somewhere you already went, and the bar is absent rather than parked.
 - **LAYOUT GUIDES ARE REACHABLE FROM DECK STUDIO** (`_dsElevGuidesInto`, on the
   install/breaker panel). Turning the scale character on used to mean leaving Deck Studio
   for the Elevations tab, finding the button, coming back and rebuilding the page. The

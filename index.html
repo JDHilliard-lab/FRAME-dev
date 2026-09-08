@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=17.02">
+    <link rel="stylesheet" href="style.css?v=17.03">
 </head>
 <body>
 
@@ -588,6 +588,11 @@
         <div id="view-elevation" class="view-container">
             <div class="elev-sidebar">
                 <div class="elev-sidebar-header">
+                    <!-- RETURN BAR. Filled by _elevSyncReturnBtn only when you arrived here from a
+                         deck page, so it is absent the rest of the time rather than parked
+                         doing nothing. Editing the wall still happens here - this is the way
+                         BACK, which is the half that was missing. -->
+                    <div id="elevReturnBar" style="display:none;"></div>
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <input type="text" id="elev-title-input" value="Elevation Editor" style="margin: 0; font-size: 1.1rem; color: var(--text-strong); font-weight: bold; border: none; background: transparent; padding: 0; outline: none; border-bottom: 1px dashed var(--border-color); flex: 1;" onchange="updateElevationNameFromInput(this.value)">
                         <!-- Duplicate-wall button. Clones the current elevation into a

@@ -1413,6 +1413,72 @@ const fs = require('fs');
       if (body.indexOf('elevPersonPos.placed') < 0) throw new Error('the first-show position nudge was lost');
     });
 
+    // ── The render modal, and the round trip (17.03) ────────────────────────
+    __check('EXACT BUG: an automatic refresh must not pop the render modal', () => {
+      // "anytime I turn on the layout guides in deck studio I get a rendering window
+      // prompt". _dsBuildPage takes a silent flag and honoured it for its own overlay,
+      // but never passed it on to _elevPrimeCaptures - so the prime modal appeared
+      // whenever the elevation cache had been dropped. The comment there said a cache hit
+      // "shows nothing", which was true only because the cache was usually warm; a
+      // deck-wide guide change drops it every time, so every toggle popped the modal.
+      const A = window.__appSrc;
+      const i = A.indexOf('async function _dsBuildPage');
+      const body = A.slice(i, i + 3000);
+      if (body.indexOf('_elevPrimeCaptures([_pei])') >= 0) throw new Error('silent is still not passed to the prime');
+      if (body.indexOf('_elevPrimeCaptures([_pei], { silent: !!silent })') < 0) {
+        throw new Error('the prime does not follow the build-s own silence');
+      }
+      // The prime itself has always honoured the flag - it was only never given it.
+      const p = A.indexOf('async function _elevPrimeCaptures');
+      if (A.slice(p, p + 2000).indexOf('if (!opts.silent) _elevPrimeShow') < 0) {
+        throw new Error('the prime no longer honours silent');
+      }
+      // The auto-refresh path is the silent one; the Preview button is not, and should
+      // still explain its trip.
+      if (A.indexOf('_dsBuildPage(true)') < 0) throw new Error('the auto preview is no longer silent');
+    });
+
+    __check('EXACT ASK: the jump to a wall remembers the page it came from', () => {
+      // "can I have a link to the elevation in deck studio and visa versa from [there]
+      // back to where it is in deck studio?"
+      const A = window.__appSrc;
+      if (A.indexOf('function _dsJumpToElevation') < 0) throw new Error('there is no way through to the wall');
+      if (A.indexOf('function _elevReturnToDeck') < 0) throw new Error('there is no way back');
+      const j = A.slice(A.indexOf('function _dsJumpToElevation'), A.indexOf('function _elevReturnToDeck'));
+      // The KEY, never _dsIndex: the deck rebuilds constantly, and an index would bring
+      // you back to whatever had since taken that slot. Same rule the page drag learned.
+      if (j.indexOf('_deckPageKey(desc)') < 0) throw new Error('the return point is not stored as a key');
+      if (/_elevReturnTo\s*=\s*\{[^}]*_dsIndex/.test(j)) throw new Error('the return point is stored as an index');
+      if (j.indexOf("switchView('elevation', idx)") < 0) throw new Error('the jump does not open the wall');
+      const r = A.slice(A.indexOf('function _elevReturnToDeck'), A.indexOf('function _elevSyncReturnBtn'));
+      // Refresh BEFORE looking the key up: the deck may have been rebuilt while the wall
+      // was being edited, which is exactly what a guide toggle does.
+      if (r.indexOf('_dsRefresh()') < 0) throw new Error('the return does not rebuild the deck first');
+      if (r.indexOf('_dsRestoreSel(back.key') < 0) throw new Error('the return does not restore by key');
+      if (r.indexOf('_dsRefresh()') > r.indexOf('_dsRestoreSel(back.key')) {
+        throw new Error('it restores the selection before rebuilding, so the key may not be in the list yet');
+      }
+    });
+
+    __check('the back button is absent unless there is somewhere to go back to', () => {
+      // A permanently-parked "back" that does nothing most of the time is furniture.
+      const H = window.__indexHtml, A = window.__appSrc;
+      if (H.indexOf('id="elevReturnBar"') < 0) throw new Error('there is no return bar in the elevation sidebar');
+      if (H.indexOf('id="elevReturnBar" style="display:none;"') < 0) throw new Error('the return bar starts visible');
+      // Bounded FORWARD. _dsPageMovable sits earlier in the file, so using it as the end
+      // gave an empty slice that passed nothing and failed everything.
+      const sb = A.indexOf('function _elevSyncReturnBtn');
+      const b = A.slice(sb, A.indexOf('function _dsJumpToElevation', sb) + 1 || sb + 1600);
+      if (b.indexOf("if (!_elevReturnTo) { bar.style.display = 'none'") < 0) {
+        throw new Error('the bar does not hide itself when there is no return point');
+      }
+      // Reaching the deck by ANY route ends the trip, so a later visit to Elevations does
+      // not offer to return somewhere you already went.
+      const sv = A.slice(A.indexOf('function switchView'), A.indexOf('function _elevLoadWall'));
+      if (sv.indexOf('_elevReturnTo = null') < 0) throw new Error('arriving at the deck does not end the trip');
+      if (sv.indexOf('_elevSyncReturnBtn()') < 0) throw new Error('entering the elevation view never syncs the bar');
+    });
+
     __check('the position control sits with remove and duplicate, on the thumbnail', () => {
       // Those three are one family - remove, reposition, duplicate. Splitting them between
       // the thumbnail edge and the caption row put the odd one out where the page TITLE
