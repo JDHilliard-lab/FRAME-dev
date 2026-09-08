@@ -1479,6 +1479,43 @@ const fs = require('fs');
       if (sv.indexOf('_elevSyncReturnBtn()') < 0) throw new Error('entering the elevation view never syncs the bar');
     });
 
+    // ── Gear popups (17.04) ─────────────────────────────────────────────────
+    __check('EXACT BUG: no gear popup row can spill out of its own panel', () => {
+      // Reported on the ellipse popup: the stroke swatches, the divider and the -/+
+      // buttons ran off the right edge of the dark panel. The row is 14 swatches plus a
+      // colour input plus three controls, about 280px of content in a 216px box, with no
+      // flex-wrap on it.
+      // EVERY popup builder, not just the one it was seen on: the arrow popup had already
+      // been fixed and the shape and text ones had not, which is exactly how it survived.
+      const A = window.__appSrc;
+      const helpers = A.split("const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex");
+      if (helpers.length - 1 < 3) throw new Error('expected three popup row helpers, found ' + (helpers.length - 1));
+      helpers.slice(1).forEach((seg, n) => {
+        const decl = seg.slice(0, 160);
+        if (decl.indexOf('flex-wrap:wrap') < 0) throw new Error('popup row helper ' + (n + 1) + ' does not wrap: ' + decl.slice(0, 90));
+      });
+    });
+
+    __check('a gear popup is clamped to the viewport and scrolls, never runs off', () => {
+      // The arrow and shape popups placed themselves against a HARDCODED height guess
+      // (320 / 380) and set no max-height, so anything taller than the guess ran off the
+      // bottom with no way to reach what was under the fold. Wrapping the swatch rows made
+      // them taller, which is what turned that latent problem into a visible one.
+      const A = window.__appSrc;
+      // No popup may position against a magic height again.
+      ['window.innerHeight - 320', 'window.innerHeight - 380'].forEach(magic => {
+        if (A.indexOf(magic) >= 0) throw new Error('a popup still positions against ' + magic);
+      });
+      // All three size and place against the SAME number, so the clamp cannot disagree
+      // with the box it is clamping.
+      const n = A.split('popMaxH = Math.round(window.innerHeight * 0.86)').length - 1;
+      if (n !== 3) throw new Error('expected three popups clamped to the viewport, found ' + n);
+      const scroll = A.split("max-height:' + popMaxH + 'px; overflow-y:auto;").length - 1;
+      if (scroll !== 3) throw new Error('expected three popups to scroll, found ' + scroll);
+      const placed = A.split('Math.min(window.innerHeight - popMaxH - 8, Math.max(8, cy - 10))').length - 1;
+      if (placed !== 3) throw new Error('expected three popups placed against their own max height, found ' + placed);
+    });
+
     __check('the position control sits with remove and duplicate, on the thumbnail', () => {
       // Those three are one family - remove, reposition, duplicate. Splitting them between
       // the thumbnail edge and the caption row put the odd one out where the page TITLE

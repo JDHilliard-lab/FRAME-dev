@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1416 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1418 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1465,6 +1465,18 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   only the opening-size text needs `innerText`, for its embedded newlines.
   It's in `_elevCaptureSignature`, and `setElevWireframe` also drops the frame-mockup
   and deck caches, whose keys carry no wireframe term.
+- **THERE ARE THREE GEAR POPUPS AND THEY EACH HAVE THEIR OWN `row()`** — arrow, shape and
+  text (`_dsOpenArrowGearPopup` / `_dsOpenGearPopup` / `_dsOpenTextGearPopup`). Fix one
+  and you have fixed a third of the problem, which is exactly what happened: the arrow
+  popup had `flex-wrap` and the other two did not, so the stroke swatch row (14 swatches,
+  a colour input and three controls — about 280px of content in a 216px box) ran off the
+  right edge of its own panel. A test now walks EVERY row helper.
+  They must also be **clamped and scrollable**: two of them placed themselves against a
+  hardcoded height guess (320 / 380) and set no `max-height`, so a popup taller than the
+  guess ran off the bottom with no way to reach what was under the fold. All three now
+  size and place against the SAME `popMaxH`, so the clamp cannot disagree with the box it
+  is clamping. Wrapping the rows made them taller, which is what turned that latent
+  problem into a visible one.
 - **`silent` MUST REACH THE PRIME.** `_dsBuildPage(silent)` honoured the flag for its own
   overlay but called `_elevPrimeCaptures([idx])` with no options, so the render modal
   appeared on an AUTOMATIC refresh whenever the elevation cache had been dropped. The
