@@ -1241,7 +1241,9 @@ const fs = require('fs');
       if (body.indexOf('_dsSyncLayoutPageOrder(list)') < 0) throw new Error('layoutPages is not reordered, so an anchor can fail to resolve');
       // The rail's number field and the drop handlers must all call it.
       if (A.indexOf('_dsMovePageTo(desc, v - 1)') < 0) throw new Error('the number field does not use the shared move');
-      if ((A.split('_dsMovePageTo(src, idx)').length - 1) < 2) throw new Error('a drop path does not use the shared move');
+      // ONE drop path now (it was two near-identical copies, one per cell kind), so this
+      // asserts it exists rather than counting copies.
+      if (A.indexOf('_dsMovePageTo(src, idx)') < 0) throw new Error('the drop path does not use the shared move');
     });
 
     __check('layoutPages is re-sorted so an anchor always resolves', () => {
@@ -1277,10 +1279,15 @@ const fs = require('fs');
       // be placeable between two spec pages, which is most of what it is for.
       // Bounded at the branch-s own return: the movable path below it also sets
       // draggable, so an unbounded slice reads that and reports the wrong thing.
-      const lb0 = body.indexOf('if (!_dsPageMovable(desc))');
-      const lockBranch = body.slice(lb0, body.indexOf('cell.setAttribute', lb0));
-      if (lockBranch.indexOf('drop') < 0) throw new Error('you cannot drop a page onto a generated page');
-      if (lockBranch.indexOf("setAttribute('draggable'") >= 0) throw new Error('a locked page was made draggable');
+      // The drop pair is wired for EVERY cell before the movable check, then a locked one
+      // returns before it is made draggable. That ordering is the whole rule: a generated
+      // page accepts a drop and cannot be picked up.
+      const dropAt = body.indexOf("addEventListener('drop'");
+      const gate = body.indexOf('if (!_dsPageMovable(desc)) return;');
+      const drg = body.indexOf("setAttribute('draggable'");
+      if (dropAt < 0 || gate < 0 || drg < 0) throw new Error('the drag wiring lost a step');
+      if (!(dropAt < gate)) throw new Error('a locked page never gets a drop handler');
+      if (!(gate < drg)) throw new Error('a locked page is made draggable');
       // And the readout, because the rail scrolls and a long drag leaves the page you
       // grabbed off-screen.
       if (A.indexOf('function _dsDragPill') < 0) throw new Error('there is no drag readout');
@@ -1298,6 +1305,50 @@ const fs = require('fs');
       // so there is nothing to put back.
       const rb = A.indexOf('function _dsResetLayoutOrder');
       if (A.slice(rb, rb + 900).indexOf('p.afterKey') < 0) throw new Error('reset does not key on hand-placed pages');
+    });
+
+    __check('EXACT BUG: a rail rebuild mid-drag must not move a different page', () => {
+      // The drag captured the page's INDEX at dragstart and resolved _dsPages[idx] at drop.
+      // Anything that rebuilds the rail during the gesture - an autosave sweep, a finishing
+      // thumbnail build, a completing elevation prime - calls _dsRefresh, which replaces
+      // _dsPages wholesale. The drop then moved whatever page had slid into that slot,
+      // silently and plausibly. Same rule context blocks already follow: anchor on a stable
+      // id, never an array index.
+      const saveP = _dsPages, saveK = _dsDragFromKey;
+      const p1 = { id: 'pgA' }, p2 = { id: 'pgB' }, p3 = { id: 'pgC' };
+      const d1 = { kind: 'layout', page: p1 }, d2 = { kind: 'layout', page: p2 }, d3 = { kind: 'layout', page: p3 };
+      _dsPages = [d1, d2, d3];
+      // Grab the middle page.
+      _dsDragFromKey = _deckPageKey(d2);
+      if (_dsDragFromNow() !== 1) throw new Error('the dragged page is not where it started');
+      if (_dsDragSrc() !== d2) throw new Error('the dragged page did not resolve');
+      // Now the rail rebuilds under the gesture and the order is different.
+      _dsPages = [d3, d1, d2];
+      if (_dsDragSrc() !== d2) throw new Error('a rebuild mid-drag re-pointed the drag at another page');
+      if (_dsDragFromNow() !== 2) throw new Error('the index did not follow the page: ' + _dsDragFromNow());
+      // And if the page is gone entirely, the answer is null rather than a wrong page.
+      _dsPages = [d3, d1];
+      if (_dsDragSrc() !== null) throw new Error('a deleted page still resolved to something');
+      _dsPages = saveP; _dsDragFromKey = saveK;
+    });
+
+    __check('the drag carries no index at all, and both cell kinds share one drop path', () => {
+      const A = window.__appSrc;
+      if (A.indexOf('_dsDragFromIdx') >= 0) throw new Error('the stale index global is back');
+      const i = A.indexOf('function _dsWireRailDrag');
+      const body = A.slice(i, A.indexOf('function _dsPageMovable'));
+      // ONE onOver / onDrop pair wired for movable and locked cells alike. There were two
+      // copies, and the stale-index fix would have had to land in both.
+      if ((body.split("addEventListener('drop'").length - 1) !== 1) {
+        throw new Error('there is more than one drop handler to keep in step');
+      }
+      if (body.indexOf('const onDrop =') < 0) throw new Error('the drop handler is not shared');
+      // dragstart stores the key, never the position.
+      const ds = body.slice(body.indexOf("addEventListener('dragstart'"));
+      if (ds.indexOf('_dsDragFromKey = myKey') < 0) throw new Error('dragstart does not capture the key');
+      if (/_dsDragFromKey\\s*=\\s*i\\b/.test(ds)) throw new Error('dragstart is capturing an index');
+      // The self-drop check compares keys too - an index comparison has the same staleness.
+      if (body.indexOf('myKey !== _dsDragFromKey') < 0) throw new Error('the self-drop check still compares indices');
     });
 
     __check('the position control sits with remove and duplicate, on the thumbnail', () => {

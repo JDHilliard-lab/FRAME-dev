@@ -35,10 +35,24 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1408 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1410 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
+
+**EVERY BACKSLASH IN A TEST BLOCK IS DOUBLED.** The checks live inside a template
+literal, so `\s` reaches the parser as a bare `s` and `\(` as `(`. A regex written
+the normal way therefore either matches the wrong thing silently (`/[L\s]+/` becomes
+`/[Ls]+/` and stops splitting on spaces) or throws "Unterminated group" at load. Same for
+`\${`, which the outer literal will otherwise interpolate. Prefer `indexOf` and
+`split().length` over a regex in these files; reach for a regex only when you need one,
+and double every escape when you do. This has cost time six times in one session.
+
+**Anchor a source-level check on the code it is about, not a character distance from
+it.** A window like `S.slice(i, i + 1600)` reads as the code having been deleted the
+moment the function grows past it, and several checks here compare TWO landmarks while
+only guaranteeing they have read far enough for one. Slice between landmarks
+(`S.slice(start, S.indexOf(nextFunction))`) instead.
 
 A test that needs to `await` mid-way must keep its checks in the **same
 `window.eval`** as `app.js`: an indirect eval puts its top-level `const`/`let` in a
@@ -520,6 +534,17 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `_dsSyncLayoutPageOrder`, because the resolver walks that array ONCE and a page anchored
   to another layout page sitting later in it can't find its anchor and falls to the end of
   the deck. There were three movers before this; the other two are gone or delegate.
+  **THE DRAG IS KEYED ON THE PAGE, NEVER ITS INDEX** (`_dsDragFromKey`, resolved fresh by
+  `_dsDragFromNow` / `_dsDragSrc`). It captured an index at dragstart and resolved
+  `_dsPages[idx]` at drop, so anything rebuilding the rail mid-gesture — an autosave
+  sweep, a finishing thumbnail build, a completing elevation prime, all of which call
+  `_dsRefresh` and replace `_dsPages` wholesale — moved whatever page had slid into that
+  slot. Silently, and plausibly enough not to be noticed until a PDF. Same rule context
+  blocks already follow: anchor on a stable id, never an array index.
+  `dragover` and `drop` are ONE shared pair wired for every cell before the movable check,
+  and a locked cell returns before `draggable` is set — that ordering IS the rule (a
+  generated page accepts a drop and cannot be picked up). They were two near-identical
+  copies, which is how the stale-index fix would have landed in only one of them.
   The rail reorders with the **same gesture and the same `.drop-before`/`.drop-after`
   indicator as the elevation rail** — two rails in one app that reorder differently is two
   things to learn. A locked page is not draggable but IS still a drop target, since placing
