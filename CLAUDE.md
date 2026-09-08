@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1418 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1420 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1471,12 +1471,22 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   popup had `flex-wrap` and the other two did not, so the stroke swatch row (14 swatches,
   a colour input and three controls — about 280px of content in a 216px box) ran off the
   right edge of its own panel. A test now walks EVERY row helper.
-  They must also be **clamped and scrollable**: two of them placed themselves against a
+  They must also be **clamped and scrollable**, and the clamp must MEASURE
+  (`_dsClampPopup`, called after append): two of them placed themselves against a
   hardcoded height guess (320 / 380) and set no `max-height`, so a popup taller than the
   guess ran off the bottom with no way to reach what was under the fold. All three now
-  size and place against the SAME `popMaxH`, so the clamp cannot disagree with the box it
-  is clamping. Wrapping the rows made them taller, which is what turned that latent
-  problem into a visible one.
+  set no `max-height`, so a popup taller than the guess ran off the bottom with no way to
+  reach what was under the fold. Wrapping the rows made them taller, which turned that
+  latent problem into a visible one.
+  Clamping at OPEN time against `popMaxH` was the wrong correction and shipped for one
+  version: the popup is empty then, so its real height is unknown, and clamping against
+  the MAXIMUM put the ceiling at ~14% of the window — about 118px on a 900px screen — so a
+  popup dragged lower snapped back to the top on its next refresh, which is **every swatch
+  click**. Open now places roughly and `_dsClampPopup` measures once the popup is in the
+  document; a popup that fits stays exactly where it was dragged, and one that overhangs
+  moves by the overhang and no further.
+  The edge-gap popover is deliberately NOT clamped: it is appended empty and positioned by
+  its own CSS class, so measuring reads zero and clamping would move it.
 - **`silent` MUST REACH THE PRIME.** `_dsBuildPage(silent)` honoured the flag for its own
   overlay but called `_elevPrimeCaptures([idx])` with no options, so the render modal
   appeared on an AUTOMATIC refresh whenever the elevation cache had been dropped. The

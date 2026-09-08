@@ -1512,8 +1512,67 @@ const fs = require('fs');
       if (n !== 3) throw new Error('expected three popups clamped to the viewport, found ' + n);
       const scroll = A.split("max-height:' + popMaxH + 'px; overflow-y:auto;").length - 1;
       if (scroll !== 3) throw new Error('expected three popups to scroll, found ' + scroll);
-      const placed = A.split('Math.min(window.innerHeight - popMaxH - 8, Math.max(8, cy - 10))').length - 1;
-      if (placed !== 3) throw new Error('expected three popups placed against their own max height, found ' + placed);
+      // CHANGED (17.05): placement no longer clamps at OPEN time. The popup is empty
+      // then, so its real height is unknown, and clamping against the MAXIMUM put the
+      // ceiling at ~14% of the window - any popup dragged lower snapped back on the next
+      // refresh, which is every swatch click. Rough placement now, then _dsClampPopup
+      // measures. max-height and overflow-y still do their job.
+      const placed = A.split("+ 'px; top:' + Math.max(8, cy - 10) + 'px;").length - 1;
+      if (placed !== 3) throw new Error('expected three popups placed without a height guess, found ' + placed);
+    });
+
+    __check('EXACT BUG: a dragged popup stays put when you click a swatch', () => {
+      // "if I move the pop up window down, and then click one of the circle swatch colors
+      // it jumps back up to the top". Clicking a swatch refreshes the popup, which
+      // re-opens it at its current position - and the re-open clamped the top against the
+      // popup-s MAXIMUM height rather than its real one. At 86% of the window that put the
+      // ceiling around 118px on a 900px screen, so almost any drag snapped back.
+      const mk = (top, h) => {
+        const d = document.createElement('div');
+        d.style.position = 'fixed';
+        d.style.top = top + 'px';
+        d.style.left = '300px';
+        d.getBoundingClientRect = () => ({ top: top, left: 300, width: 236, height: h });
+        document.body.appendChild(d);
+        return d;
+      };
+      const H = window.innerHeight || 768;
+      // A popup that FITS where it was dragged is left exactly there.
+      const fits = mk(Math.round(H * 0.45), 200);
+      const was = fits.style.top;
+      _dsClampPopup(fits);
+      if (fits.style.top !== was) throw new Error('a popup that fits was moved from ' + was + ' to ' + fits.style.top);
+      // One that genuinely overhangs the bottom is pulled back by the overhang, no further.
+      const over = mk(H - 40, 200);
+      _dsClampPopup(over);
+      const t = parseFloat(over.style.top);
+      if (t !== Math.max(8, H - 200 - 8)) throw new Error('an overhanging popup landed at ' + t);
+      // And one taller than the window pins to the top margin rather than going negative.
+      const tall = mk(400, H + 200);
+      _dsClampPopup(tall);
+      if (parseFloat(tall.style.top) !== 8) throw new Error('an oversized popup did not pin to the margin');
+      [fits, over, tall].forEach(d => d.remove());
+    });
+
+    __check('popups are clamped by MEASUREMENT, never by a guessed height', () => {
+      const A = window.__appSrc;
+      if (A.indexOf('function _dsClampPopup') < 0) throw new Error('there is no shared clamp');
+      const c = A.slice(A.indexOf('function _dsClampPopup'), A.indexOf('function _frameSwatchesInto'));
+      if (c.indexOf('getBoundingClientRect') < 0) throw new Error('the clamp does not measure the popup');
+      // No popup may pre-clamp its top against a height it cannot know yet: at open time
+      // the popup is empty, so its real height is unknown.
+      if (A.indexOf('Math.min(window.innerHeight - popMaxH - 8') >= 0) {
+        throw new Error('a popup still clamps against its maximum height at open time');
+      }
+      // The three GEAR popups clamp after append. The edge-gap popover deliberately does
+      // NOT: it is appended empty and positioned by its own CSS class, so measuring it
+      // would read zero and clamping would move it.
+      const n = A.split('_dsClampPopup(pop);').length - 1;
+      if (n !== 3) throw new Error('expected exactly the three gear popups to clamp, found ' + n);
+      const eg = A.indexOf('function openEdgeGapPopover');
+      if (A.slice(eg, eg + 900).indexOf('_dsClampPopup') >= 0) {
+        throw new Error('the edge-gap popover is being clamped, and it is positioned by CSS');
+      }
     });
 
     __check('the position control sits with remove and duplicate, on the thumbnail', () => {
