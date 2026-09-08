@@ -1351,6 +1351,68 @@ const fs = require('fs');
       if (body.indexOf('myKey !== _dsDragFromKey') < 0) throw new Error('the self-drop check still compares indices');
     });
 
+    // ── Layout guides from Deck Studio (17.02) ──────────────────────────────
+    __check('EXACT ASK: the scale character is switchable without leaving Deck Studio', () => {
+      // "I'm missing the character silhouette to show scale, I have to go back to elevation
+      // tab, turn on the character button and then back to deck studio and refresh." The
+      // state is one line of DOM on a view that is still in the document while Deck Studio
+      // is open, so the round trip was never necessary - there was just no control here.
+      const A = window.__appSrc;
+      if (A.indexOf('function _dsElevGuidesInto') < 0) throw new Error('there is no guide control in Deck Studio');
+      // It is offered on the page that SHOWS the guides - the install/breaker panel.
+      const ig = A.indexOf('function _dsInstallGuideControls');
+      if (A.slice(ig, ig + 1400).indexOf('_dsElevGuidesInto(body, desc)') < 0) {
+        throw new Error('the guide control is not on the install/breaker panel');
+      }
+      // The character is FIRST in the list, because it is the one that sends people back.
+      if (_DS_ELEV_GUIDES[0][0] !== 'person-wrap') throw new Error('the character is not the first guide offered');
+      // Every guide offered is a real layer the Elevations tab also drives, or the two
+      // panels would be controlling different things.
+      const known = _ELEV_GUIDE_LAYERS.map(p => p[0]);
+      _DS_ELEV_GUIDES.forEach(g => {
+        if (known.indexOf(g[0]) < 0) throw new Error(g[0] + ' is not a layer the Elevations tab knows about');
+      });
+    });
+
+    __check('the two panels read and write the SAME state, so they cannot disagree', () => {
+      // A second copy of "is the character on" is how one panel ends up showing off while
+      // the drawing has it on.
+      const person = document.getElementById('person-wrap');
+      if (!person) throw new Error('no person layer to test against');
+      // Reading follows toggleElevLayer exactly: an unset display is OFF, which is what
+      // every one of these layers ships as.
+      person.style.display = '';
+      if (_dsGuideIsOn('person-wrap')) throw new Error('an unset display read as ON, so the control starts out of step');
+      person.style.display = 'none';
+      if (_dsGuideIsOn('person-wrap')) throw new Error('display:none read as ON');
+      person.style.display = 'block';
+      if (!_dsGuideIsOn('person-wrap')) throw new Error('display:block read as OFF');
+      // Toggling from Deck Studio moves the layer AND the Elevations tab's own button.
+      const btn = document.getElementById('personToggle');
+      _dsToggleElevGuide('person-wrap');
+      if (_dsGuideIsOn('person-wrap')) throw new Error('the toggle did not turn it off');
+      if (btn && btn.classList.contains('active')) throw new Error('the Elevations button was left showing ON');
+      _dsToggleElevGuide('person-wrap');
+      if (!_dsGuideIsOn('person-wrap')) throw new Error('the toggle did not turn it back on');
+      if (btn && !btn.classList.contains('active')) throw new Error('the Elevations button was left showing OFF');
+    });
+
+    __check('the Deck Studio toggle must NOT call drawElevAll', () => {
+      // The elevation view is hidden behind Deck Studio, and a display:none view measures
+      // ZERO - which is the entire reason _elevPortalOpen exists. Redrawing from here would
+      // compute a fitted scale against nothing. The next capture redraws through the portal,
+      // so only the stored position has to be set.
+      const A = window.__appSrc;
+      const i = A.indexOf('function _dsToggleElevGuide');
+      const body = A.slice(i, A.indexOf('function _dsElevGuidesInto'));
+      if (body.indexOf('drawElevAll(') >= 0) throw new Error('it redraws a hidden view, which measures zero');
+      // But it MUST drop the caches, or the page keeps showing the capture taken without
+      // the guide on it - which is the "and refresh the page" half of the complaint.
+      if (body.indexOf('_elevGuidesChanged()') < 0) throw new Error('the cached captures are never dropped');
+      // And the character still gets its first-show nudge, or it lands off the wall edge.
+      if (body.indexOf('elevPersonPos.placed') < 0) throw new Error('the first-show position nudge was lost');
+    });
+
     __check('the position control sits with remove and duplicate, on the thumbnail', () => {
       // Those three are one family - remove, reposition, duplicate. Splitting them between
       // the thumbnail edge and the caption row put the odd one out where the page TITLE

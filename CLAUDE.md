@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1410 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1413 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1465,6 +1465,24 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   only the opening-size text needs `innerText`, for its embedded newlines.
   It's in `_elevCaptureSignature`, and `setElevWireframe` also drops the frame-mockup
   and deck caches, whose keys carry no wireframe term.
+- **LAYOUT GUIDES ARE REACHABLE FROM DECK STUDIO** (`_dsElevGuidesInto`, on the
+  install/breaker panel). Turning the scale character on used to mean leaving Deck Studio
+  for the Elevations tab, finding the button, coming back and rebuilding the page. The
+  state is one line of DOM on a view that is still in the document while Deck Studio is
+  open, so the round trip was never necessary — there was simply no control on this side.
+  They are **deck-wide and the label says so**: there is ONE elevation view, so a layer’s
+  display is shared by every wall and therefore by every breaker and install page. A
+  control that looked per-page here would be lying.
+  `_dsGuideIsOn` reads it **exactly the way `toggleElevLayer` does** — an unset display is
+  OFF, which is what all eight ship as — or the two panels start out of step on the first
+  render. The toggle also flips the Elevations tab’s own button, and calls
+  `_elevGuidesChanged()` (dropping every cached capture and page preview), which is the
+  "and refresh the page" half of the complaint.
+  It deliberately does **NOT** call `drawElevAll`, the one thing it cannot borrow from
+  `toggleElevLayer`: the elevation view is hidden behind Deck Studio and a `display:none`
+  view measures ZERO, which is the entire reason `_elevPortalOpen` exists. The character’s
+  first-show nudge sets `elevPersonPos` and nothing else; the next capture redraws through
+  the portal.
 - **The Elevations tab is the source of truth** for which measurements appear on
   elevation pages. Layout-guide *styling* is global; the figure's *position* is
   per-elevation. Breaker captures honour `_breakerMeasure()` ("Show layout guides").
