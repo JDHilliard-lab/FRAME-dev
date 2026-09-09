@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1420 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+114 files, 1424 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -545,6 +545,26 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   and a locked cell returns before `draggable` is set — that ordering IS the rule (a
   generated page accepts a drop and cannot be picked up). They were two near-identical
   copies, which is how the stale-index fix would have landed in only one of them.
+  **THE GAP BETWEEN TWO PAGES IS ONE ELEMENT WITH TWO JOBS** (`.ds-insstrip`): "insert a
+  page here" and, during a drag, "drop it here". The drop bar used to be drawn on the
+  CELLS as `.drop-before`/`.drop-after`, but a gap is reachable from either side — as
+  "after page 8" or "before page 9" — so crossing one flipped between two indicators in
+  slightly different places and read as TWO slots to drop into when there is only ever
+  one. Marking the gap gives one gap, one indicator. The two gaps either side of the
+  dragged page stay dark: dropping there is a no-op, and lighting them promises a move
+  that will not happen.
+  It is **always visible** and **tall enough to hold its own button**. Hover-only saved
+  scroll and then required telling people the control was there — a control you have to be
+  told to hover for is not discoverable, it is a secret. And a 16px button in a 6px strip
+  overflowed 5px into the page above and below, which is what "offset and overlaps the
+  next page" was. The gap owns ALL the spacing between cells (the cell has no margin), so
+  there is one number to change rather than two that drift.
+  The elevation rail still marks its TABS, and correctly: they sit flush with no gap
+  element between them, so there an edge IS the boundary.
+  **`_dsPlaceRelative`** is the third way to move a page — before/after a page NUMBER —
+  for when you are thinking about a neighbour rather than a slot. "Before 7" and "after
+  7" are different places, which the absolute number box cannot express. It resolves to a
+  gap and goes through `_dsMovePageTo`, so it and a drop land identically.
   The rail reorders with the **same gesture and the same `.drop-before`/`.drop-after`
   indicator as the elevation rail** — two rails in one app that reorder differently is two
   things to learn. A locked page is not draggable but IS still a drop target, since placing

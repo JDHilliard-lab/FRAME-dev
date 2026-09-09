@@ -1272,8 +1272,13 @@ const fs = require('fs');
       ['dragstart', 'dragover', 'drop', 'dragend'].forEach(ev => {
         if (body.indexOf(ev) < 0) throw new Error('the rail does not handle ' + ev);
       });
-      if (body.indexOf('drop-before') < 0 || body.indexOf('drop-after') < 0) throw new Error('the rail uses a different drop indicator');
-      if (C.indexOf('[data-railcell].drop-before::before') < 0) throw new Error('the deck rail has no drop bar style');
+      // CHANGED (17.06): the indicator is on the GAP, not on a cell edge. A gap is
+      // reachable as 'after page 8' or 'before page 9', so marking cells meant crossing one
+      // gap flipped between two indicators in slightly different places - it read as two
+      // slots to drop into when there is only ever one.
+      if (body.indexOf('_dsMarkGap(') < 0) throw new Error('the rail does not mark a gap');
+      if (C.indexOf('.ds-insstrip.drop-here::before') < 0) throw new Error('the gap has no drop style');
+      if (C.indexOf('[data-railcell].drop-before') >= 0) throw new Error('the dead cell-edge drop rules are back');
       if (C.indexOf('[data-railcell].dragging') < 0) throw new Error('the dragged cell is not faded');
       // A LOCKED page is not draggable but IS still a drop target: an inserted page has to
       // be placeable between two spec pages, which is most of what it is for.
@@ -1348,7 +1353,10 @@ const fs = require('fs');
       if (ds.indexOf('_dsDragFromKey = myKey') < 0) throw new Error('dragstart does not capture the key');
       if (/_dsDragFromKey\\s*=\\s*i\\b/.test(ds)) throw new Error('dragstart is capturing an index');
       // The self-drop check compares keys too - an index comparison has the same staleness.
-      if (body.indexOf('myKey !== _dsDragFromKey') < 0) throw new Error('the self-drop check still compares indices');
+      // The no-op check moved with the indicator: the two gaps either side of the dragged
+      // page leave it where it is, so they stay dark rather than promising a move.
+      const mg = A.slice(A.indexOf('function _dsMarkGap'), A.indexOf('function _dsGapToIndex'));
+      if (mg.indexOf('gapIdx === self || gapIdx === self + 1') < 0) throw new Error('the no-op gaps still light up');
     });
 
     // ── Layout guides from Deck Studio (17.02) ──────────────────────────────
@@ -1607,14 +1615,106 @@ const fs = require('fs');
       const h = /height:\\s*(\\d+)px/.exec(rule);
       if (!h) throw new Error('the strip has no height');
       const px = parseInt(h[1], 10);
-      if (px > 8) throw new Error('the strip is still eating the rail: ' + px + 'px');
-      // NOT zero: the reorder bar draws into this gap, and at zero height the drop
-      // indicator would land on top of the thumbnail instead of between two pages.
-      if (px < 4) throw new Error('the gap is too small to hold the drop indicator: ' + px + 'px');
-      // Hidden until hover...
-      if (C.indexOf('.ds-insstrip:hover > button') < 0) throw new Error('the + never appears on hover');
+      // CHANGED (17.06): it must be TALL ENOUGH TO HOLD ITS BUTTON. At 6px the 16px button
+      // overflowed 5px into the page above and below, which is what made it look offset and
+      // overlap the next page. And it is no longer hover-only: a control you have to be told
+      // to hover for is not discoverable, it is a secret.
+      // No regex: these checks live in a template literal, so every backslash doubles and
+      // a normal one silently stops matching. See the note at the top of this file.
+      const btnCss = C.slice(C.indexOf('.ds-insstrip > button'), C.indexOf('.ds-insstrip:hover'));
+      const numAfter = (txt, label) => {
+        const at = txt.indexOf(label);
+        if (at < 0) return NaN;
+        return parseInt(txt.slice(at + label.length).trim(), 10);
+      };
+      const bH = numAfter(btnCss, 'height:');
+      if (!bH) throw new Error('the insert button has no height');
+      if (bH > px) throw new Error('the button (' + bH + 'px) overflows its gap (' + px + 'px)');
+      if (px > 18) throw new Error('the gap is eating the rail again: ' + px + 'px');
+      const opAt = btnCss.indexOf('opacity:');
+      const op = (opAt < 0) ? 0 : parseFloat(btnCss.slice(opAt + 8).trim());
+      if (!(op > 0)) throw new Error('the + is invisible until hover again');
       // ...but reachable by keyboard, or it is a control only a mouse can find.
       if (C.indexOf('.ds-insstrip > button:focus-visible') < 0) throw new Error('the + is unreachable by keyboard');
+    });
+
+    // ── The gap, and before/after placement (17.06) ─────────────────────────
+    __check('EXACT BUG: one gap has ONE drop indicator, not two', () => {
+      // "when dragging a page and moving it seems to have two placements you can drop it
+      // into, I just want one." A gap is reachable as "after page 8" or "before page 9",
+      // and the indicator was drawn on the CELLS - so crossing one gap flipped between two
+      // marks in slightly different places and read as two slots.
+      const A = window.__appSrc;
+      // Nothing marks a cell edge any more.
+      if (A.indexOf("classList.add(e.clientY < (r.top + r.height / 2) ? 'drop-before' : 'drop-after')") >= 0) {
+        throw new Error('cells still draw their own drop edges');
+      }
+      const clear = A.slice(A.indexOf('function _dsClearDropMarks'), A.indexOf('function _dsMarkGap'));
+      if (clear.indexOf('.ds-insstrip.drop-here') < 0) throw new Error('the clear does not target gaps');
+      if (clear.indexOf('data-railcell') >= 0) throw new Error('the clear still targets cells');
+      // A cell hover resolves to a gap and marks THAT.
+      const w = A.slice(A.indexOf('function _dsWireRailDrag'), A.indexOf('function _dsPageMovable'));
+      if (w.indexOf('_dsMarkGap(') < 0) throw new Error('hovering a page does not mark a gap');
+      // Exactly one gap is lit at a time, because marking clears first.
+      const mg = A.slice(A.indexOf('function _dsMarkGap'), A.indexOf('function _dsGapToIndex'));
+      if (mg.indexOf('_dsClearDropMarks();') < 0) throw new Error('marking a gap does not clear the previous one');
+      // The two gaps either side of the dragged page are no-ops, so they stay dark rather
+      // than promising a move that will not happen.
+      if (mg.indexOf('gapIdx === self || gapIdx === self + 1') < 0) throw new Error('the no-op gaps still light up');
+    });
+
+    __check('EXACT ASK: the insert + is visible without being told to hover', () => {
+      // "right now you cannot see it and I will have to tell users to hover between pages
+      // to get the add new page." A control you have to be told to hover for is not
+      // discoverable, it is a secret.
+      const C = window.__css;
+      const btn = C.slice(C.indexOf('.ds-insstrip > button'), C.indexOf('.ds-insstrip:hover'));
+      const at = btn.indexOf('opacity:');
+      const op = (at < 0) ? 0 : parseFloat(btn.slice(at + 8).trim());
+      if (!(op > 0)) throw new Error('the + starts invisible');
+      // And it still gets louder under the cursor, so the affordance reads as reachable.
+      if (C.indexOf('.ds-insstrip:hover > button') < 0) throw new Error('the + does not respond to hover');
+    });
+
+    __check('EXACT BUG: the + fits its gap instead of overlapping the pages', () => {
+      // "the add page button seems a little offset and overlaps the next page." A 16px
+      // button in a 6px strip overflows 5px into the page above and below it.
+      const C = window.__css;
+      const num = (txt, label) => { const at = txt.indexOf(label); return at < 0 ? NaN : parseInt(txt.slice(at + label.length).trim(), 10); };
+      const strip = C.slice(C.indexOf('.ds-insstrip {'), C.indexOf('.ds-insstrip::before'));
+      const btn = C.slice(C.indexOf('.ds-insstrip > button'), C.indexOf('.ds-insstrip:hover'));
+      const sh = num(strip, 'height:'), bh = num(btn, 'height:');
+      if (!sh || !bh) throw new Error('gap or button has no height');
+      if (bh > sh) throw new Error('the button (' + bh + 'px) still overflows its gap (' + sh + 'px)');
+      // The gap owns the spacing between cells, so there is one number rather than two
+      // that drift apart.
+      const A = window.__appSrc;
+      if (A.indexOf("cell.style.cssText = 'position:relative; margin-bottom:4px; cursor:pointer;'") >= 0) {
+        throw new Error('the cell still adds its own margin on top of the gap');
+      }
+    });
+
+    __check('EXACT ASK: place a page before or after a given page number', () => {
+      // The number box on the thumbnail is an absolute position. This is the one you reach
+      // for when thinking about a NEIGHBOUR - and "before 7" and "after 7" are different
+      // places, which a single number cannot express.
+      const A = window.__appSrc;
+      if (A.indexOf('function _dsPlaceRelative') < 0) throw new Error('there is no before/after placement');
+      const f = A.slice(A.indexOf('function _dsPlaceRelative('), A.indexOf('function _dsPlaceRelativeInto'));
+      // It goes through the ONE move, so this and a drop land identically.
+      if (f.indexOf('_dsMovePageTo(') < 0) throw new Error('it does not use the shared move');
+      // before N and after N are different gaps.
+      if (f.indexOf("(where === 'before') ? (n - 1) : n") < 0) throw new Error('before and after resolve to the same gap');
+      // Same shift the drop applies, or the two disagree by one.
+      if (f.indexOf('if (from >= 0 && from < gap) gap--') < 0) throw new Error('it does not account for lifting the page out of the list');
+      // Out of range, or relative to itself, does nothing rather than something wrong.
+      if (f.indexOf('n > (_dsPages || []).length') < 0) throw new Error('an out-of-range page number is not rejected');
+      if (f.indexOf('target === desc') < 0) throw new Error('placing a page relative to itself is not rejected');
+      // Offered for movable pages only, ahead of the branches that return early.
+      const rt = A.indexOf('function _dsRenderTools()');
+      if (A.slice(rt, rt + 3600).indexOf('_dsPlaceRelativeInto(t, desc)') < 0) {
+        throw new Error('the control is not in the page panel before the early returns');
+      }
     });
 
     __check('the rail header is a section, not something the pages show through', () => {
