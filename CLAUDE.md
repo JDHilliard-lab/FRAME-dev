@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-116 files, 1441 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+117 files, 1446 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1619,6 +1619,29 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   places, so a `var()` in an SVG PRESENTATION attribute does resolve on screen. The hazard
   is only in markup SERIALIZED into an exported file, which has no `:root` to read — which
   is why the context art substitutes a real colour on the way out.
+
+- **A CLASS SET IS NOT A STYLE APPLIED — `.action-btn.active` now exists.**
+  `.action-btn` is on 154 elements and had NO `.active` rule anywhere, so a button
+  marked active tracked its state perfectly and painted nothing. That is most of why
+  wall mode looked invisible for several versions, and the fix at the time was to give
+  `.wall-mode-btn` its own rule — which closed one button and left the trap armed for
+  the next one.
+  **ORDER IS THE WHOLE RULE.** `.action-btn.active`, `.action-btn:hover`,
+  `.btn-secondary`, `.btn-outline` and `.btn-danger` ALL weigh (0,2,0), so source order
+  is the only thing deciding. The block has to sit after every one of them or a lit
+  button turns grey under the cursor, and a lit `action-btn btn-secondary` — which is
+  exactly what the wall-mode pair is — paints plain grey. `:disabled` is restated last,
+  because a control you cannot press must not look armed.
+  **`test_active_state_visible.js` uses a REAL matcher, not string comparison.** It reads
+  every `.active` selector out of style.css (28 of them) and asks jsdom whether each
+  element actually matches one. String-comparing class names reported the LIBRARY/COLOR
+  pair as unstyled, because the rule that paints it is `.unit-toggle button.active` — a
+  descendant selector naming none of the element's own classes. It also sets `.active`
+  on a real `.action-btn` and asks whether anything would paint it, which is the original
+  bug in its live form.
+  Still outstanding and deliberately not touched here: `.elev-tab` marks its selection
+  with `.elev-tab-on` rather than `.active`, so two tab strips in one app use two
+  conventions. That belongs with the tab-component consolidation, not with this.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

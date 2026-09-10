@@ -289,6 +289,26 @@ textarea { width: 100%; padding: 6px; border: 1px solid var(--border-color); bor
 .btn-danger { background: var(--btn-danger); }
 .btn-danger:hover { background: #b71c1c; }
 
+/* A CLASS SET IS NOT A STYLE APPLIED.
+ * .action-btn is on 154 elements and had no .active rule anywhere, so a button
+ * marked active tracked its state correctly and painted NOTHING. That is most of
+ * why wall mode looked invisible for several versions, and it was fixed by giving
+ * .wall-mode-btn its own rule - which closed that one button and left the trap set
+ * for the next one. This closes it for the class.
+ * ORDER IS THE WHOLE RULE HERE. Every selector below weighs (0,2,0), so source
+ * order alone decides, and this block has to sit after THREE things it would
+ * otherwise lose to: .action-btn:hover (a lit button would turn grey under the
+ * cursor), and .btn-secondary / .btn-outline / .btn-danger (a lit
+ * "action-btn btn-secondary" would paint plain grey - which is exactly the
+ * combination the wall-mode buttons use). Disabled is re-stated last because it
+ * outranks being active: a control you cannot press must not look armed. */
+.action-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.action-btn.active:hover { background: var(--accent); filter: brightness(1.08); }
+.action-btn.active .svg-icon { stroke: #fff; }
+.action-btn.active:disabled, .action-btn.active[disabled] {
+    background: var(--border-color); color: var(--text-main); border-color: transparent;
+}
+
 .unit-toggle { display: flex; background: var(--bg-input); padding: 2px; border-radius: 4px; border: 1px solid var(--border-color); height: 26px; box-sizing: border-box;}
 .unit-toggle button { flex: 1; border: none; padding: 0 8px; border-radius: 3px; cursor: pointer; font-weight: bold; font-size: 0.65rem; color: var(--text-muted); background: transparent; transition: 0.2s; }
 /* Active toggle button: combine the existing background color with a 1px accent
