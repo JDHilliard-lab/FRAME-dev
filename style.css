@@ -27,6 +27,27 @@
     --art-color: rgba(100, 100, 100, 0.4); 
     --guide-color: #555555; 
 
+    /* -- Modal shell --
+     * The scrim and the blur are ONE value each. They were hand-written into 22
+     * separate overlays and had drifted to five darknesses (0.55 to 0.8) and two
+     * blur radii, so opening two modals in sequence visibly flickered the page
+     * behind them. Nothing chose those numbers; they are copy-paste sediment.
+     *
+     * The LAYERS are the opposite: each is a real decision about what may cover
+     * what, so all five values are preserved EXACTLY as they were and merely
+     * given names. Base is a modal over the app; -over is a full-screen tool;
+     * -nested opens on top of another modal; -progress is long-running work that
+     * must not be buried; -alert is the info/confirm box, which has to sit above
+     * every one of them because it is how the app reports that something failed. */
+    --modal-scrim: rgba(0, 0, 0, 0.6);
+    --modal-scrim-strong: rgba(10, 10, 12, 0.8);
+    --modal-blur: 2px;
+    --z-modal: 9999;
+    --z-modal-over: 10000;
+    --z-modal-nested: 10001;
+    --z-modal-progress: 100004;
+    --z-modal-alert: 100010;
+
     /* ── Unified dimension & label style ──
      * Every dimension/label type (frame dims, wall/arch dims, OD tags,
      * group dims, center lines) reads these. The Label & Dimension Style
@@ -81,6 +102,36 @@ body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-m
 
 input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 input[type="number"] { -moz-appearance: textfield; }
+
+/* ========================================= */
+/* MODAL SHELL                               */
+/* ========================================= */
+/* ONE overlay for every modal in the app. Each modal keeps its own inline
+ * display:none/flex, because that is how JS opens and closes them and an inline
+ * value beats this class either way - the class supplies everything else.
+ * A modal that needs a different layer adds ONE modifier; it does not restate
+ * the whole box. #alignModal is deliberately NOT one of these: it has no scrim
+ * and pointer-events:none, so it is a guide layer wearing a modal's shape.
+ * #infoModal and #dsGenerateModal ALSO keep an inline z-index: showInfoModal
+ * rewrites it at show time, and two tests read .style.zIndex off them directly. */
+.frame-modal {
+    position: fixed; inset: 0;
+    background: var(--modal-scrim);
+    z-index: var(--z-modal);
+    align-items: center; justify-content: center;
+    backdrop-filter: blur(var(--modal-blur));
+}
+.frame-modal.fm-over     { z-index: var(--z-modal-over); }
+.frame-modal.fm-nested   { z-index: var(--z-modal-nested); }
+.frame-modal.fm-alert    { z-index: var(--z-modal-alert); }
+.frame-modal.fm-progress {
+    z-index: var(--z-modal-progress);
+    background: var(--modal-scrim-strong);
+    padding: 24px;
+}
+/* Taller than the viewport: pin to the top and scroll the overlay itself, or the
+ * head of a long form is unreachable above the fold. */
+.frame-modal.fm-scroll { align-items: flex-start; overflow-y: auto; padding: 24px 0; }
 
 /* ========================================= */
 /* MASTER LAYOUT & NAVIGATION                */

@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-114 files, 1424 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+115 files, 1433 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1561,6 +1561,32 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   alone recaptured every elevation.
 - `importDashCSV` strips unit suffixes during column lookup, so CSV headers must
   include the suffix, e.g. `Overall Width (cm)`.
+
+- **EVERY MODAL IS ONE CLASS: `.frame-modal`.** There were 22 hand-written overlays in
+  index.html carrying the same eight declarations, and they had DRIFTED: five scrim
+  darknesses (0.55, 0.6, 0.65, 0.7, 0.8) and two blur radii, so opening two modals in
+  sequence visibly flickered the page behind them. Nothing chose those numbers.
+  `--modal-scrim` and `--modal-blur` are one value each now.
+  **The LAYERS are the opposite of drift and were preserved exactly.** Each of the five
+  z-indexes is a real decision about what may cover what, so they were renamed, not
+  flattened: `--z-modal` (over the app), `-over` (a full-screen tool), `-nested` (opens
+  on top of another modal), `-progress` (long-running work that must not be buried),
+  `-alert` (the info/confirm box, which has to outrank all of them because it is how the
+  app reports failure). Modifier classes `.fm-over/.fm-nested/.fm-progress/.fm-alert`.
+  **Three things here look tidy-able and are not.**
+  (1) Each modal keeps its own inline `display:none`, because that is how the JS opens
+  and closes them (`.style.display = 'flex'`); an inline value beats the class either way.
+  (2) `#infoModal` and `#dsGenerateModal` ALSO keep an inline `z-index`. `showInfoModal`
+  rewrites `.style.zIndex` at show time, and `test_img_intake` reads `.style.zIndex` off
+  both — move them into the class alone and that file fails pointing at the wrong thing.
+  (3) `#alignModal` is deliberately NOT a `.frame-modal`: it has no scrim and
+  `pointer-events:none`, so it is a guide layer wearing a modal's shape. Giving it the
+  shell would lay an invisible click-eating sheet over the wall.
+  `test_modal_shell.js` is plain Node with no jsdom — these are questions about the
+  SOURCE, so reading the files directly sidesteps the doubled-backslash template literal.
+  It still got bitten by the same class of bug one layer out: a `new RegExp('…\s…')`
+  built from a string lost its backslash on the way into the file and silently matched
+  nothing. Regex LITERALS survive; strings that become regexes do not. Use `indexOf`.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
