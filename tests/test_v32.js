@@ -79,15 +79,17 @@ const fs = require('fs');
     // ── Sleeker handles ──
     __check('transform handles shrunk to 8px with a thinner border (source guard)', () => {
       const S = window.__appSrc;
-      if (S.indexOf('width:12px; height:12px; background:#6a6aff; border:2px solid #fff') >= 0) throw new Error('old 12px handle style still present somewhere');
-      const count8 = (S.match(/width:8px; height:8px; background:#6a6aff; border:1\\.5px solid #fff/g) || []).length;
+      if (S.indexOf('width:12px; height:12px; background:var(--ui-active); border:2px solid #fff') >= 0) throw new Error('old 12px handle style still present somewhere');
+      // split() not a regex: var(--ui-active) contains parentheses, which a
+      // regex reads as a capture group and then matches nothing at all.
+      const count8 = S.split('width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff').length - 1;
       if (count8 < 6) throw new Error('expected at least 6 sleeker handle instances, found ' + count8);
     });
 
     __check('selection outlines thinned to 1.5px, layers-panel drop indicator untouched (regression)', () => {
       const S = window.__appSrc;
-      if (S.indexOf("r.style.borderTop = '2px solid #6a6aff';") < 0) throw new Error('layers-panel drop indicator was incorrectly thinned');
-      const count = (S.match(/'1\\.5px solid #6a6aff'/g) || []).length;
+      if (S.indexOf("r.style.borderTop = '2px solid var(--ui-active)';") < 0) throw new Error('layers-panel drop indicator was incorrectly thinned');
+      const count = S.split("'1.5px solid var(--ui-active)'").length - 1;
       if (count < 10) throw new Error('expected many thinned selection outlines, found ' + count);
     });
 

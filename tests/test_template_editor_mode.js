@@ -22,7 +22,13 @@ const fs = require('fs');
       const pagesDiv = document.getElementById('dsTabPages');
       if (pagesDiv.style.display !== 'flex') throw new Error('Pages DOM not shown for templateEditor mode');
       const bt = document.getElementById('dsTabBtnTemplates'), bg = document.getElementById('dsTabBtnPages');
-      if (bt.style.backgroundColor === bg.style.backgroundColor) throw new Error('Templates button not distinctly highlighted from Pages button');
+      // Not .style.backgroundColor: the buttons are styled through a cssText
+      // shorthand holding a var(), which jsdom declines to parse, so both would
+      // read '' and compare EQUAL no matter which one is lit. The style attribute
+      // keeps the text, and asserting the token directly says what we mean.
+      const styleOf = (el) => el.getAttribute('style') || '';
+      if (styleOf(bt).indexOf('var(--ui-active)') < 0) throw new Error('Templates button is not lit: ' + styleOf(bt));
+      if (styleOf(bg).indexOf('var(--ui-active)') >= 0) throw new Error('Pages button is lit too, so they are not distinct: ' + styleOf(bg));
       if (!_dsInTemplateLibraryMode) throw new Error('library mode flag not set');
     });
 

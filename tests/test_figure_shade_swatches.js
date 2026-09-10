@@ -48,7 +48,10 @@ const path = require('path');
       const m = /rgba?\\(\\s*([\\d.]+)[\\s,]+([\\d.]+)[\\s,]+([\\d.]+)/.exec(el.style.backgroundColor || '');
       return m ? (+m[1] + +m[2] + +m[3]) / 3 / 255 : null;
     };
-    const __ringed = () => __dots().filter(b => (b.style.borderColor || '') === __rgbOf('#6a6aff'));
+    // The ring is --ui-active, applied through the border SHORTHAND. jsdom cannot
+    // parse a shorthand holding a var(), so .style.borderColor reads '' while the
+    // style ATTRIBUTE keeps the text. Read the attribute.
+    const __ringed = () => __dots().filter(b => __css(b).indexOf('var(--ui-active)') >= 0);
 
     const __seed = () => {
       elevations = [{ name: 'Wall A', wallW: 185, wallH: 108, personPos: { x: -60 }, personShade: 0, frames: [] }];

@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=17.07">
+    <link rel="stylesheet" href="style.css?v=17.08">
 </head>
 <body>
 
@@ -1021,7 +1021,7 @@
             <div style="padding:12px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; gap:10px;">
                 <h3 style="margin:0; font-size:1.05rem; color:var(--text-strong);">Deck Studio</h3>
                 <div style="display:flex; gap:4px; margin-left:8px;">
-                    <button id="dsTabBtnProject" onclick="_dsTab('project')" style="height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:#6a6aff; color:#fff;">Project</button>
+                    <button id="dsTabBtnProject" onclick="_dsTab('project')" style="height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--ui-active); color:#fff;">Project</button>
                     <button id="dsTabBtnPages" onclick="_dsTab('pages')" style="height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Pages</button>
                     <button id="dsTabBtnTemplates" onclick="_dsOpenTemplateEditor()" style="height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Templates</button>
                     <button id="dsTabBtnStyles" onclick="_dsTab('styles')" style="display:none; height:28px; padding:0 14px; font-size:0.74rem; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Styles</button>
@@ -1143,7 +1143,7 @@
                     <div id="dsCenter" style="flex:1; min-width:0; display:flex; align-items:center; justify-content:center; padding:24px; background:var(--bg-input); overflow:auto;"><!-- live page mock --></div>
                     <div id="dsTools" style="width:280px; flex-shrink:0; min-height:0; border-left:1px solid var(--border-color); display:flex; flex-direction:column;">
                         <div id="dsToolsSubTabBar" style="flex-shrink:0; display:flex; gap:4px; padding:10px 10px 0;">
-                            <button id="dsToolsBtnPage" onclick="_dsToolsTab('page')" style="flex:1; height:28px; font-size:0.72rem; font-weight:700; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:#6a6aff; color:#fff;">Page</button>
+                            <button id="dsToolsBtnPage" onclick="_dsToolsTab('page')" style="flex:1; height:28px; font-size:0.72rem; font-weight:700; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--ui-active); color:#fff;">Page</button>
                             <button id="dsToolsBtnTemplates" onclick="_dsToolsTab('templates')" style="flex:1; height:28px; font-size:0.72rem; font-weight:700; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Templates</button>
                             <button id="dsToolsBtnLayers" onclick="_dsToolsTab('layers')" style="flex:1; height:28px; font-size:0.72rem; font-weight:700; border:1px solid var(--border-color); border-radius:5px; cursor:pointer; background:var(--bg-input); color:var(--text-main);">Layers</button>
                         </div>
@@ -1526,7 +1526,7 @@
         <div style="font-size:1rem; font-weight:700; color:var(--text-strong); margin-bottom:4px;">Generating presentation</div>
         <div id="pdfBuildLabel" style="font-size:0.75rem; color:var(--text-muted); margin-bottom:14px;">Preparing…</div>
         <div style="height:8px; border-radius:5px; background:var(--bg-input); overflow:hidden;">
-            <div id="pdfBuildBar" style="height:100%; width:4%; background:#6a6aff; border-radius:5px; transition:width 0.18s ease;"></div>
+            <div id="pdfBuildBar" style="height:100%; width:4%; background:var(--ui-active); border-radius:5px; transition:width 0.18s ease;"></div>
         </div>
         <div style="font-size:0.65rem; color:var(--text-muted); margin-top:12px;">Larger projects take longer — this window will close when it's ready.</div>
         <button id="pdfBuildCancelBtn" class="action-btn btn-secondary" style="width:auto; height:28px; padding:0 18px; font-size:0.7rem; margin-top:14px;" onclick="_pdfRequestCancel()">Cancel</button>
@@ -1546,7 +1546,7 @@
         <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:12px;">Each wall is drawn once, then reused on every page that shows it. This can take a minute on a big project.</div>
         <div id="elevPrimeLabel" style="font-size:0.75rem; color:var(--text-strong); margin-bottom:8px;">Preparing…</div>
         <div style="height:8px; border-radius:5px; background:var(--bg-input); overflow:hidden;">
-            <div id="elevPrimeBar" style="height:100%; width:0%; background:#6a6aff; border-radius:5px; transition:width 0.18s ease;"></div>
+            <div id="elevPrimeBar" style="height:100%; width:0%; background:var(--ui-active); border-radius:5px; transition:width 0.18s ease;"></div>
         </div>
         <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:0.65rem; color:var(--text-muted);">
             <span id="elevPrimeCount"></span><span id="elevPrimePct" style="font-variant-numeric:tabular-nums;">0%</span>

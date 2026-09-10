@@ -84,7 +84,11 @@ const fs = require('fs');
       const cards = Array.from(host.querySelectorAll('.tpl-card'));
       if (cards.length < 2) throw new Error('need at least 2 cards to test selection change');
       cards[1].onclick();
-      if (cards[1].style.borderColor !== '#6a6aff' && cards[1].style.borderColor !== 'rgb(106, 106, 255)') throw new Error('selected card not highlighted: ' + cards[1].style.borderColor);
+      // Set on the borderColor LONGHAND, which jsdom keeps verbatim, so the token
+      // reads back as written. (A var() inside a border SHORTHAND would read ''.)
+      if (cards[1].style.borderColor !== 'var(--ui-active)') throw new Error('selected card not highlighted: ' + cards[1].style.borderColor);
+      // and only that card: a highlight everything shares is not a highlight.
+      if (cards[0].style.borderColor === cards[1].style.borderColor) throw new Error('unselected card carries the same border as the selected one');
     });
 
     __check('selecting a USER template shows Rename/Update/Duplicate/Delete in the preview pane', () => {

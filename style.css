@@ -48,6 +48,39 @@
     --z-modal-progress: 100004;
     --z-modal-alert: 100010;
 
+    /* -- The blues, which were four --
+     * --accent (#3a86ff) is the brand: nav tabs, primary buttons. Unchanged.
+     * --ui-active is "this control is switched ON": active tab pills, toggles,
+     *   progress bars. Was #6a6aff, hand-written in 164 places.
+     * --selected is "this object on the wall is selected". A frame outlined in
+     *   #2196f3 while a context block and a glazing run outlined in #6a6aff, so
+     *   selecting a bed and selecting a picture on the SAME drawing looked like
+     *   two different gestures. One token now; the frame colour won because two
+     *   of its call sites are paired by a comment saying they must match.
+     * The fourth blue was #3b82f6, which existed ONLY as the fallback inside
+     *   var(--accent, ...) and did not equal --accent. A fallback that differs
+     *   from the thing it falls back to is a bug waiting for the token to go
+     *   missing; all 11 now read the real value.
+     *
+     * These four definitions are LITERALS on purpose. A token defined in terms
+     * of itself resolves to nothing and takes the colour out of the UI with no
+     * error anywhere - which is exactly what happened when a blanket replace of
+     * the raw hex ran over the block that had just declared it. */
+    --ui-active: #6a6aff;
+    --selected: #2196f3;
+    --selected-soft: rgba(33, 150, 243, 0.2);
+    --selected-wash: rgba(33, 150, 243, 0.05);
+
+    /* Amber caution. Was #c98a2e in style.css and #c08a2e in app.js - the same
+     * intent, nine points apart in the red channel, which is drift nobody chose
+     * and nobody could see. ONE exception stays a hex literal: STATUS_DEFS in
+     * app.js feeds _annHexToRgb -> doc.setFillColor for the PDF status legend,
+     * and a var() there parses to nothing and silently drops the swatch.
+     * LITERAL, like the four above: define the token AFTER replacing the raw
+     * value, never before, or the replacement rewrites the definition into
+     * --warn: var(--warn) and the colour vanishes with no error. */
+    --warn: #c98a2e;
+
     /* ── Unified dimension & label style ──
      * Every dimension/label type (frame dims, wall/arch dims, OD tags,
      * group dims, center lines) reads these. The Label & Dimension Style
@@ -844,7 +877,7 @@ select.no-arrow::-ms-expand { display: none; }
 /* Live status under the Print Output control. Warn colour when Split is picked but
  * the wall has no window panels — that combination silently produces no schedule. */
 .po-hint { font-size: 0.6rem; line-height: 1.45; margin-top: 4px; color: var(--text-muted); }
-.po-hint-warn { color: #c98a2e; }
+.po-hint-warn { color: var(--warn); }
 
 /* Panel letter tag drawn in each glass pane. An opaque chip, because it sits over
  * artwork; small and in the dimension ink so it reads as a drawing annotation rather
@@ -876,7 +909,7 @@ select.no-arrow::-ms-expand { display: none; }
 .ctx-block:hover { border-color: rgba(60, 60, 60, 0.9); }
 /* Selection is the link between a block on the wall and its row in the sidebar, on a
  * wall carrying eight of them. The same blue the marquee uses. */
-.ctx-selected { outline: 1px solid #6a6aff; outline-offset: -2px; }
+.ctx-selected { outline: 1px solid var(--selected); outline-offset: -2px; }
 /* The annotation font, because a context label IS a drawing annotation — the same
  * reasoning that put the glazing tag in the dimension ink. Shouted in DISPLAY only:
  * the stored label keeps whatever case was typed, and the SVG export reads this
@@ -907,14 +940,14 @@ select.no-arrow::-ms-expand { display: none; }
 /* The block's NAME is its heading, so it takes the run-title slot rather than sitting
  * in the field grid: "which block is this" is the first question the row answers. */
 #contextControls .ctx-name { flex: 1; font-size: 0.62rem; font-weight: 600; }
-.ctx-run-sel { border-color: #6a6aff; }
+.ctx-run-sel { border-color: var(--selected); }
 /* The fade slider takes the whole row — the global input[type=range] rule styles the
  * track and thumb, so there is nothing to add but the width. */
 #underlayControls input[type="range"] { width: 100%; margin: 2px 0 0; }
 /* An ARMED mode reads as pressed. Place and Calibrate are modes that change what a
  * click on the wall does, so a button that looks identical on and off is how you end
  * up drawing a block when you meant to measure one. */
-.gz-btn-on { background: var(--accent, #3b82f6); border-color: var(--accent, #3b82f6); color: #fff; }
+.gz-btn-on { background: var(--accent, #3a86ff); border-color: var(--accent, #3a86ff); color: #fff; }
 .gz-btn-on:hover { color: #fff; }
 .gz-btn[disabled] { opacity: 0.4; cursor: default; }
 .gz-btn[disabled]:hover { color: var(--text-muted); border-color: var(--border-color); }
@@ -929,7 +962,7 @@ select.no-arrow::-ms-expand { display: none; }
     letter-spacing: 0.03em; text-transform: uppercase; line-height: 1;
 }
 .ctx-chip:hover { color: var(--text-strong); border-color: var(--text-muted); }
-.ctx-chip-on { border-color: var(--accent, #3b82f6); color: var(--accent, #3b82f6); }
+.ctx-chip-on { border-color: var(--accent, #3a86ff); color: var(--accent, #3a86ff); }
 /* The icon IS the shape, drawn the same way the block draws — a legend that can't
  * disagree with the thing it stands for. */
 .ctx-chip-ico { width: 18px; height: 13px; border: 1px solid currentColor; box-sizing: border-box; }
@@ -955,7 +988,7 @@ select.no-arrow::-ms-expand { display: none; }
     letter-spacing: 0.03em; text-transform: uppercase; white-space: nowrap;
 }
 .ctx-cat:hover { color: var(--text-strong); }
-.ctx-cat-on { color: var(--accent, #3b82f6); border-color: var(--accent, #3b82f6); }
+.ctx-cat-on { color: var(--accent, #3a86ff); border-color: var(--accent, #3a86ff); }
 /* The palette scrolls too — Millwork and Furniture run to nine items each. Capped in
  * vh so a tall screen shows the whole group without one. */
 .ctx-palette { max-height: 26vh; overflow-y: auto; }
@@ -1019,7 +1052,7 @@ select.no-arrow::-ms-expand { display: none; }
     letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
 }
 .elev-tab:hover { color: var(--text-strong); }
-.elev-tab-on { color: var(--accent, #3b82f6); border-bottom-color: var(--accent, #3b82f6); }
+.elev-tab-on { color: var(--accent, #3a86ff); border-bottom-color: var(--accent, #3a86ff); }
 
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────
  * Sits in the Elevations sidebar, which is narrow, so the four run fields are a
@@ -1076,7 +1109,7 @@ select.no-arrow::-ms-expand { display: none; }
 .gz-add:hover { color: var(--text-strong); border-color: var(--text-muted); }
 /* Only shown when something is actually hidden, so it reads as a state to clear
  * rather than a permanent button. */
-.gz-restore { border-style: solid; color: #c98a2e; border-color: #c98a2e; margin-bottom: 5px; }
+.gz-restore { border-style: solid; color: var(--warn); border-color: var(--warn); margin-bottom: 5px; }
 .gz-restore:hover { color: #e0a049; border-color: #e0a049; }
 
 .elev-frame-list { flex: 1; overflow-y: auto; padding: 10px 20px; }
@@ -1310,7 +1343,7 @@ select.no-arrow::-ms-expand { display: none; }
  * outline uses an offset so it sits clear of any frame face / drop shadow that
  * extends slightly past the box. */
 .frame-vis.selection-highlight {
-    outline: 2px solid #2196f3;
+    outline: 2px solid var(--selected);
     outline-offset: 4px;
     z-index: 50;
 }
@@ -1324,7 +1357,7 @@ select.no-arrow::-ms-expand { display: none; }
  * animated (which would compound the flicker). */
 body.dragging-frame .frame-vis { transition: none; }
 body.dragging-frame .frame-vis:hover {
-    outline: 2px solid #2196f3;
+    outline: 2px solid var(--selected);
     outline-offset: 4px;
     z-index: 50;
 }
@@ -1731,13 +1764,13 @@ input.frame-item-id-inline {
 .pill-toggle.active .pill-toggle-knob { left: 16px; }
 
 /* Selection highlight on the panel side — matches the frame outline color
- * (#2196f3 blue). When a frame is hovered (or group-all is on), the matching
+ * (--selected blue). When a frame is hovered (or group-all is on), the matching
  * ABC panel shows this blue accent so users can quickly find which row of
  * the panel list corresponds to which frame on the wall. */
 .compact-frame-item.selection-highlight {
-    border-color: #2196f3;
-    box-shadow: 0 0 0 1px #2196f3, 0 2px 6px rgba(33, 150, 243, 0.2);
-    background: rgba(33, 150, 243, 0.05);
+    border-color: var(--selected);
+    box-shadow: 0 0 0 1px var(--selected), 0 2px 6px var(--selected-soft);
+    background: var(--selected-wash);
 }
 
 /* Suppress panel transitions during drag (matches frame-side; prevents
@@ -1857,7 +1890,7 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
 .arch-dim:hover .dim-drag-grip { opacity: 0.85; }
 
 /* Custom measured-line tool button active state */
-#lineToolBtn.active { background: var(--accent, #3b82f6); color: #fff; border-color: var(--accent, #3b82f6); }
+#lineToolBtn.active { background: var(--accent, #3a86ff); color: #fff; border-color: var(--accent, #3a86ff); }
 #lineToolBtn.active .svg-icon { stroke: #fff; }
 .custom-line { pointer-events: auto; cursor: move; }
 .custom-line .arch-label-new { pointer-events: auto; }

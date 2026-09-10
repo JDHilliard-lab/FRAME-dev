@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-115 files, 1433 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+116 files, 1441 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1587,6 +1587,38 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   It still got bitten by the same class of bug one layer out: a `new RegExp('…\s…')`
   built from a string lost its backslash on the way into the file and silently matched
   nothing. Regex LITERALS survive; strings that become regexes do not. Use `indexOf`.
+
+- **THE BLUES WERE FOUR AND ARE NOW THREE TOKENS.** `--accent` (#3a86ff) is the brand:
+  nav tabs, primary buttons. `--ui-active` (#6a6aff) is "this control is switched ON":
+  active tab pills, toggles, progress bars, drag handles — hand-written in 164 places.
+  `--selected` (#2196f3) is "this object on the wall is selected".
+  **That third token fixed a real inconsistency, not a spelling.** A frame outlined in
+  #2196f3 while a context block and a glazing run outlined in #6a6aff, so selecting a bed
+  and selecting a picture on the SAME drawing looked like two different gestures. The
+  frame colour won, because two of its call sites are paired by a comment saying they must
+  match. The fourth blue, #3b82f6, existed ONLY as the fallback inside `var(--accent, …)`
+  and did not equal `--accent`; all 11 now read the real value. `--warn` (#c98a2e) is the
+  same story for amber, which had drifted to #c08a2e across app.js.
+  **`STATUS_DEFS` STAYS A HEX LITERAL AND MUST.** It feeds `_annHexToRgb` →
+  `doc.setFillColor` for the PDF status legend, and a `var()` there parses to nothing and
+  silently drops the swatch.
+  **Declare a token AFTER replacing the raw value, never before.** The other way round
+  lets the blanket replace rewrite the declaration into `--x: var(--x)`, which resolves to
+  nothing and takes the colour out of the UI with no error anywhere. That happened twice
+  in one sitting and the suite caught neither, because nothing tested computed CSS.
+  `test_color_tokens.js` does now.
+  **jsdom KEEPS a `var()` set on a LONGHAND and DROPS one set through a SHORTHAND.**
+  `el.style.borderColor = 'var(--ui-active)'` reads back verbatim, while
+  `cssText = 'border:2px solid var(--ui-active)'` leaves `.style.borderColor` as `''`. So a
+  test comparing two elements' `.style.backgroundColor` finds them EQUAL whichever one is
+  lit. Read `getAttribute('style')` instead — four tests had to move to it.
+  **A regex containing `var(--x)` matches NOTHING**, because the parentheses are a capture
+  group. Two checks in `test_v32` passed while asserting nothing until they moved to
+  `split().length - 1`. Same family as the doubled-backslash trap above.
+  Worth knowing rather than a rule: `stroke="var(--dim-color)"` already ships in five
+  places, so a `var()` in an SVG PRESENTATION attribute does resolve on screen. The hazard
+  is only in markup SERIALIZED into an exported file, which has no `:root` to read — which
+  is why the context art substitutes a real colour on the way out.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
