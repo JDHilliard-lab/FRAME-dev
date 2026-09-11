@@ -1458,7 +1458,11 @@ const fs = require('fs');
       if (j.indexOf('_deckPageKey(desc)') < 0) throw new Error('the return point is not stored as a key');
       if (/_elevReturnTo\s*=\s*\{[^}]*_dsIndex/.test(j)) throw new Error('the return point is stored as an index');
       if (j.indexOf("switchView('elevation', idx)") < 0) throw new Error('the jump does not open the wall');
-      const r = A.slice(A.indexOf('function _elevReturnToDeck'), A.indexOf('function _elevSyncReturnBtn'));
+      // The logic lives in _takeReturnTrip now: there are THREE trips (deck->wall,
+      // wall->dashboard, dashboard->wall) and they share one slot and one renderer,
+      // so _elevReturnToDeck is a one-line alias onto it. Same behaviour, read from
+      // where it actually is.
+      const r = A.slice(A.indexOf('function _takeReturnTrip'), A.indexOf('function _elevReturnToDeck'));
       // Refresh BEFORE looking the key up: the deck may have been rebuilt while the wall
       // was being edited, which is exactly what a guide toggle does.
       if (r.indexOf('_dsRefresh()') < 0) throw new Error('the return does not rebuild the deck first');
@@ -1475,16 +1479,22 @@ const fs = require('fs');
       if (H.indexOf('id="elevReturnBar" style="display:none;"') < 0) throw new Error('the return bar starts visible');
       // Bounded FORWARD. _dsPageMovable sits earlier in the file, so using it as the end
       // gave an empty slice that passed nothing and failed everything.
-      const sb = A.indexOf('function _elevSyncReturnBtn');
-      const b = A.slice(sb, A.indexOf('function _dsJumpToElevation', sb) + 1 || sb + 1600);
-      if (b.indexOf("if (!_elevReturnTo) { bar.style.display = 'none'") < 0) {
+      // Both bars are drawn by ONE renderer now, so read that. Bounded between
+      // landmarks rather than by a character count, which reads as deleted the
+      // moment the function grows.
+      const sb = A.indexOf('function _syncReturnBars');
+      const b = A.slice(sb, A.indexOf('function _elevSyncReturnBtn', sb));
+      if (b.indexOf("if (!on) { bar.style.display = 'none'") < 0) {
         throw new Error('the bar does not hide itself when there is no return point');
       }
       // Reaching the deck by ANY route ends the trip, so a later visit to Elevations does
       // not offer to return somewhere you already went.
       const sv = A.slice(A.indexOf('function switchView'), A.indexOf('function _elevLoadWall'));
-      if (sv.indexOf('_elevReturnTo = null') < 0) throw new Error('arriving at the deck does not end the trip');
-      if (sv.indexOf('_elevSyncReturnBtn()') < 0) throw new Error('entering the elevation view never syncs the bar');
+      // Arriving anywhere that is not where the trip LANDED ends it. That used to be a
+      // bare '_elevReturnTo = null' in the deck branch, which was enough when the deck
+      // was the only place a trip could start. With three trips it has to be a rule.
+      if (sv.indexOf('_endTripIfWanderedTo(') < 0) throw new Error('navigating away never ends the trip');
+      if (sv.indexOf('_syncReturnBars()') < 0) throw new Error('entering a view never syncs the bar');
     });
 
     // ── Gear popups (17.04) ─────────────────────────────────────────────────

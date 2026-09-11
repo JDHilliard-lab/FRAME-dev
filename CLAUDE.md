@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-120 files, 1464 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+121 files, 1472 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1726,6 +1726,32 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   the most-repeated normalised string appears FOUR times; the rest are one-off positional
   styles. A generic button factory would consolidate almost nothing. The look that DID
   repeat was the tab strip, and that is now `.frame-tab`.
+
+- **ONE RETURN POINT, THREE TRIPS (`_viewReturn`).** Editing a wall happens in the
+  Elevations tab and editing a spec happens in the Frame Dashboard, and BOTH round trips
+  were missing their second half. The deck one existed as `_elevReturnTo`, but that name
+  was also its limit: it could only mean "came from the deck", so **Edit Master**
+  (elevation to dashboard) was one-way and dashboard to elevation did not exist at all.
+  ONE slot, because you can only be on one trip at a time. Two slots means two back
+  buttons that can disagree about where "back" is.
+  `view` is where the button TAKES you; **`at` is the view the trip LANDED in**, and the
+  bar is painted only there. Without `at`, navigating by hand to a third view showed a
+  back button offering to return you somewhere you had never come from.
+  `_endTripIfWanderedTo(view)` in `switchView` ends a trip the moment you arrive anywhere
+  that is not `at`. That replaced a bare `_elevReturnTo = null` in the deck branch, which
+  was sufficient only while the deck was the one place a trip could start.
+  Anchored on the page KEY or the row ID, never an index - the deck rebuilds constantly
+  and the dashboard re-sorts. `_syncDashWallJump` hangs off `checkGlobalEditingWarning`,
+  which already runs on every row selection and already walks the elevations, so "where
+  else does this piece exist" is answered once.
+  **A BLANKET RENAME ATE TWO THINGS AND THE FILE STILL PARSED.** Renaming `_elevReturnTo`
+  to `_viewReturn` also rewrote `_elevReturnToDeck`, which merely SHARES its prefix; and
+  renaming the call `_elevSyncReturnBtn()` rewrote that alias's own DECLARATION into
+  `function _syncReturnBars() { _syncReturnBars(); }`. Function declarations hoist and
+  the LAST one wins, so the real renderer was shadowed by a stub that recursed until the
+  stack went. `node --check` passed. The existing tests caught it, and
+  `test_return_trips.js` now has a check for one-line functions that call themselves.
+  Rename by whole identifier, or not at all.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=17.12">
+    <link rel="stylesheet" href="style.css?v=17.13">
 </head>
 <body>
 
@@ -214,6 +214,15 @@
                 </div>
 
                 <div class="controls">
+                    <!-- RETURN BAR, twin of the one in the elevation sidebar and filled by
+                         the SAME _syncReturnBars(). Present only when you arrived here from
+                         a wall via Edit Master, so it is absent the rest of the time rather
+                         than parked doing nothing. -->
+                    <div id="dashReturnBar" style="display:none;"></div>
+                    <!-- The other direction: jump to the wall this piece hangs on. Hidden
+                         when the piece is not placed yet, because a button offering to show
+                         you a wall that does not exist is worse than no button. -->
+                    <div id="dashWallJump" style="display:none;"></div>
                     <div id="linkedWarningBanner" style="display: none; gap: 6px; margin-bottom: 10px; background: rgba(255, 193, 7, 0.15); padding: 8px; border-radius: var(--r-6); border: 1px solid #ffc107; align-items: center;">
                         <svg class="svg-icon" style="color: #ffc107;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                         <span style="font-size: var(--fs-65); color: var(--text-strong); flex: 1;">Linked on <span id="linkedCount">X</span> wall(s). Edits update all.</span>

@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.12';
+const APP_VERSION = '17.13';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -4895,6 +4895,13 @@ function addNewElevationTab() {
     pushHistory();
 }
 
+// Arriving anywhere that is NOT where this trip landed ends it. Otherwise a back
+// button survives you navigating away by hand and then offers, several minutes later,
+// to return you somewhere you have long since left. _takeReturnTrip clears the slot
+// BEFORE it switches, so this never fights the trip being taken deliberately.
+function _endTripIfWanderedTo(view) {
+    if (_viewReturn && _viewReturn.at !== view) _viewReturn = null;
+}
 function switchView(viewType, index = 0) {
     if (currentView === 'elevation' && elevations[currentElevIndex]) {
         elevations[currentElevIndex].wallW = parseFloat(document.getElementById('wallW').value) || 185;
@@ -4910,10 +4917,7 @@ function switchView(viewType, index = 0) {
     if (viewType === 'deck') {
         _show(_vDash, false); _show(_vElev, false); _show(_vDeck, true);
         currentView = 'deck';
-        // Reaching the deck by ANY route ends the round trip, so a later visit to the
-        // Elevations tab does not offer to return somewhere you already went.
-        // _elevReturnToDeck clears this itself before switching, so it is not fighting it.
-        _elevReturnTo = null;
+        _endTripIfWanderedTo('deck');
         // .active goes on FIRST, before openDeckStudio renders anything. Its
         // _dsRenderRail builds the thumbnail IntersectionObserver with
         // {root: #dsRail} captured once, and _dsTab queues _dsRenderCenter a
@@ -4941,14 +4945,17 @@ function switchView(viewType, index = 0) {
     if (viewType === 'dashboard') {
         _show(_vDash, true); _show(_vElev, false); _show(_vDeck, false);
         currentView = 'dashboard';
+        _endTripIfWanderedTo('dashboard');
         recalculateDashboardQuantities();
+        try { _syncReturnBars(); } catch (e) {}
     } else if (viewType === 'elevation') {
         _show(_vDash, false); _show(_vElev, true); _show(_vDeck, false);
         currentView = 'elevation';
+        _endTripIfWanderedTo('elevation');
         _elevLoadWall(index);
         // Show the way back if this trip started from a deck page. Absent otherwise, so it
         // is never a parked button that does nothing.
-        try { _elevSyncReturnBtn(); } catch (e) {}
+        try { _syncReturnBars(); } catch (e) {}
     } else {
         return;   // unknown view: change nothing rather than silently landing on elevation
     }
@@ -6712,11 +6719,37 @@ function pushFrameToElevation() {
     alert(`Pushed ${f.id} to ${targetElev.name}!`);
 }
 
-function jumpToDashboard(frameId) {
-    const targetIdx = dashProjectData.findIndex(d => d.id === frameId);
-    if (targetIdx !== -1) { switchView('dashboard'); selectDashRow(targetIdx); }
-}
 
+// The dashboard's half of the round trip: show me this piece on its wall.
+//
+// Offered only when the piece is actually placed. A control that is always there and
+// silently does nothing most of the time teaches people to stop trusting it, which is the
+// same reasoning the return bar follows.
+//
+// Rebuilt rather than toggled because the wall NAME is in the label: a piece can be moved
+// to a different wall between two visits, and a stale name points at the wrong drawing.
+function _syncDashWallJump() {
+    const host = document.getElementById('dashWallJump');
+    if (!host) return;
+    const rows = (typeof dashProjectData !== 'undefined' ? dashProjectData : []);
+    const row = rows[dashSelectedRowIndex];
+    const idx = row ? _rowElevIndex(row.id) : -1;
+    if (idx < 0) { host.style.display = 'none'; host.innerHTML = ''; return; }
+    const el = (typeof elevations !== 'undefined' ? elevations : [])[idx];
+    host.style.display = 'block';
+    host.innerHTML = '';
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'action-btn btn-secondary';
+    b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); font-weight:700; letter-spacing:0.2px;'
+        + ' display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:10px;'
+        + ' border:1px solid var(--accent); color:var(--accent);';
+    b.title = 'Open the wall this piece hangs on. You can come straight back.';
+    b.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>'
+        + '<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Show on ' + _esc((el && el.name) ? el.name : 'the wall') + '</span>';
+    b.onclick = () => _dashJumpToWall();
+    host.appendChild(b);
+}
 function checkGlobalEditingWarning(id) {
     // Always recompute and update the banner based on the currently selected row.
     // (Previously this returned early if the row was 'already warned', which left the
@@ -6733,6 +6766,9 @@ function checkGlobalEditingWarning(id) {
     } else {
         banner.style.display = 'none';
     }
+    // Same trigger as the linked-walls banner: both answer "where else does this
+    // piece exist", so they cannot disagree about the selected row.
+    try { _syncDashWallJump(); } catch (e) {}
     return true;
 }
 
@@ -25402,55 +25438,130 @@ function _dsNoteSizeSliders(body, desc) {
 }
 
 // ── The round trip between a breaker page and its wall ────────────────────
-// Editing the wall itself - moving the character, nudging a dimension - still has to
-// happen in the Elevations tab, because that is where the drawing is. What was missing is
-// the way back: you left Deck Studio, did the thing, and then had to find the page again
-// among twenty. So the jump REMEMBERS where it came from and offers to return.
+// ONE RETURN POINT FOR THE WHOLE APP.
 //
-// Stored as the page KEY, never `_dsIndex`. The deck rebuilds constantly - a spec page
-// added, a mode changed, a floorplan reordered - and an index would bring you back to
-// whatever had since taken that slot. Same rule the page drag learned.
-let _elevReturnTo = null;   // { key, title } or null
+// Editing a wall still happens in the Elevations tab, because that is where the drawing
+// is; editing a spec still happens in the Frame Dashboard. What was missing BOTH times
+// was the way back: you left, did the thing, and then had to find where you had been.
+//
+// This was _viewReturn, which could only mean "came from the deck". The second trip
+// (Edit Master, elevation -> dashboard) needed either a second variable with a second bar
+// renderer - the exact pattern this file has paid for over and over - or this. ONE slot,
+// because you can only be on one trip at a time: a later jump replaces an earlier one
+// rather than arming two back buttons that disagree about where "back" is.
+//
+// view is where the button TAKES you, not where you came from, so reading the state
+// answers the question the button asks.
+//
+// Anchored on a stable KEY or ID, never an index. The deck rebuilds constantly and the
+// dashboard re-sorts, so an index brings you back to whatever has since taken that slot.
+// Same rule the page drag and the context blocks learned.
+let _viewReturn = null;   // { view, key, rowId, elevIdx, title } or null
+
+// Which wall a dashboard row sits on. Returns -1 when the piece is not placed yet, which
+// is a normal state rather than an error: the control is simply not offered.
+function _rowElevIndex(rowId) {
+    if (!rowId || typeof elevations === 'undefined') return -1;
+    for (let i = 0; i < elevations.length; i++) {
+        const fr = (elevations[i] && elevations[i].frames) || [];
+        for (let j = 0; j < fr.length; j++) if (fr[j] && fr[j].id === rowId) return i;
+    }
+    return -1;
+}
+
 function _dsJumpToElevation(desc) {
     const idx = _dsPageElevIdx(desc);
     if (idx < 0) return false;
-    _elevReturnTo = { key: _deckPageKey(desc), title: (desc.title || 'the deck') };
+    _viewReturn = { view: 'deck', at: 'elevation', key: _deckPageKey(desc), title: (desc.title || 'the deck') };
     switchView('elevation', idx);
-    try { _elevSyncReturnBtn(); } catch (e) {}
+    try { _syncReturnBars(); } catch (e) {}
     return true;
 }
-function _elevReturnToDeck() {
-    const back = _elevReturnTo;
-    _elevReturnTo = null;
-    switchView('deck');
-    try { _elevSyncReturnBtn(); } catch (e) {}
+
+// Elevation -> dashboard, the "Edit Master" button on a frame row. This jump already
+// existed and was one-way; the return point is the half that was missing.
+function jumpToDashboard(frameId) {
+    const rows = (typeof dashProjectData !== 'undefined' ? dashProjectData : []);
+    const targetIdx = rows.findIndex(d => d && d.id === frameId);
+    if (targetIdx === -1) return false;
+    const el = (typeof elevations !== 'undefined' ? elevations : [])[currentElevIndex];
+    _viewReturn = { view: 'elevation', at: 'dashboard', elevIdx: currentElevIndex, title: (el && el.name) ? el.name : 'the wall' };
+    switchView('dashboard');
+    selectDashRow(targetIdx);
+    try { _syncReturnBars(); } catch (e) {}
+    return true;
+}
+
+// Dashboard -> elevation, the direction that had nothing at all. Offered only when the
+// selected piece is actually on a wall, so the button never promises a place to go that
+// does not exist.
+function _dashJumpToWall() {
+    const rows = (typeof dashProjectData !== 'undefined' ? dashProjectData : []);
+    const row = rows[dashSelectedRowIndex];
+    if (!row) return false;
+    const idx = _rowElevIndex(row.id);
+    if (idx < 0) return false;
+    _viewReturn = { view: 'dashboard', at: 'elevation', rowId: row.id, title: (row.imageCode || 'the dashboard') };
+    switchView('elevation', idx);
+    try { _syncReturnBars(); } catch (e) {}
+    return true;
+}
+
+// Take the trip back, whichever trip it is. Cleared FIRST, so a failure part way through
+// cannot leave a bar pointing at somewhere we have already left.
+function _takeReturnTrip() {
+    const back = _viewReturn;
+    _viewReturn = null;
     if (!back) return;
-    // _dsRefresh first: the deck may have been rebuilt while the wall was being edited
-    // (a guide toggle drops every preview), so the key has to be looked up in the CURRENT
-    // list. Falling back to the first install page is better than landing on page one.
-    try { _dsRefresh(); } catch (e) {}
-    try { _dsRestoreSel(back.key, 'spec'); } catch (e) {}
+    switchView(back.view, back.view === 'elevation' ? (back.elevIdx || 0) : 0);
+    try { _syncReturnBars(); } catch (e) {}
+    if (back.view === 'deck') {
+        // _dsRefresh first: the deck may have been rebuilt while the wall was being edited
+        // (a guide toggle drops every preview), so the key has to be looked up in the
+        // CURRENT list. Falling back to the first install page beats landing on page one.
+        try { _dsRefresh(); } catch (e) {}
+        try { _dsRestoreSel(back.key, 'spec'); } catch (e) {}
+    } else if (back.view === 'dashboard' && back.rowId) {
+        const rows = (typeof dashProjectData !== 'undefined' ? dashProjectData : []);
+        const i = rows.findIndex(d => d && d.id === back.rowId);
+        if (i >= 0) { try { selectDashRow(i); } catch (e) {} }
+    }
 }
-// Shown only when there is somewhere to go back TO. A permanently-parked "back" button
-// that does nothing most of the time is furniture.
-function _elevSyncReturnBtn() {
-    const bar = document.getElementById('elevReturnBar');
-    if (!bar) return;
-    if (!_elevReturnTo) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
-    bar.style.display = 'block';
-    bar.innerHTML = '';
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'action-btn btn-secondary';
-    b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); font-weight:700; letter-spacing:0.2px;'
-        + ' display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:8px;'
-        + ' border:1px solid var(--accent); color:var(--accent);';
-    b.title = 'Go back to the deck page you came from. Your changes to this wall are already in it.';
-    b.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>'
-        + '<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Back to ' + _esc(_elevReturnTo.title) + '</span>';
-    b.onclick = () => _elevReturnToDeck();
-    bar.appendChild(b);
+// The deck-specific name the rest of the file and the tests already call.
+function _elevReturnToDeck() { _takeReturnTrip(); }
+
+// ONE renderer for both bars. Shown only when there is somewhere to go back TO: a
+// permanently parked "back" button that does nothing most of the time is furniture.
+// BOTH bars are synced on every call, so the one you are not looking at cannot be left
+// armed and waiting to confuse you on a later visit.
+function _syncReturnBars() {
+    const fill = (id, wantView) => {
+        const bar = document.getElementById(id);
+        if (!bar) return;
+        // Both conditions matter. 'at' is the view this trip landed in, so a trip to
+        // the elevation never paints a back button in the dashboard; currentView keeps
+        // the hidden view's bar empty rather than pre-armed.
+        const on = !!(_viewReturn && _viewReturn.at === wantView && currentView === wantView);
+        if (!on) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
+        bar.style.display = 'block';
+        bar.innerHTML = '';
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'action-btn btn-secondary';
+        b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); font-weight:700; letter-spacing:0.2px;'
+            + ' display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:8px;'
+            + ' border:1px solid var(--accent); color:var(--accent);';
+        b.title = 'Go back where you came from. Your changes are already saved.';
+        b.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>'
+            + '<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Back to ' + _esc(_viewReturn.title) + '</span>';
+        b.onclick = () => _takeReturnTrip();
+        bar.appendChild(b);
+    };
+    fill('elevReturnBar', 'elevation');
+    fill('dashReturnBar', 'dashboard');
 }
+// The name the rest of the file and the tests already call.
+function _elevSyncReturnBtn() { _syncReturnBars(); }
 // ── Layout guides, from the page that shows them ──────────────────────────
 // Turning the scale character on meant leaving Deck Studio for the Elevations tab,
 // finding the button, coming back and rebuilding the page. The state is one line of DOM
