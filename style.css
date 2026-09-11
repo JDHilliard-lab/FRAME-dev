@@ -47,6 +47,8 @@
     --z-modal-nested: 10001;
     --z-modal-progress: 100004;
     --z-modal-alert: 100010;
+    /* Above every modal layer: a toast is routinely raised from inside one. */
+    --z-toast: 100020;
 
     /* -- The blues, which were four --
      * --accent (#3a86ff) is the brand: nav tabs, primary buttons. Unchanged.
@@ -1115,6 +1117,44 @@ select.no-arrow::-ms-expand { display: none; }
 }
 .elev-tabpane::-webkit-scrollbar { width: 8px; }
 .elev-tabpane::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: var(--r-4); }
+/* ========================================= */
+/* TOAST - TRANSIENT NOTICE                  */
+/* ========================================= */
+/* There were EIGHTY showInfoModal() calls and no other way to say anything, so
+ * "Nothing selected" took over the screen and demanded a click for information
+ * you already half-knew. A modal is for something you must READ to act on, or a
+ * change you did not ask for; a toast is for an acknowledgement or a nudge.
+ *
+ * ABOVE the alert layer, not below it. A toast is routinely raised from inside a
+ * modal ("Nothing selected" while the templates dialog is open), and one that
+ * renders behind the thing that triggered it is worse than none.
+ *
+ * pointer-events on the HOST are off so a stack of notices never blocks the page
+ * underneath; each toast turns them back on for itself so it stays dismissable. */
+.frame-toast-host {
+    position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%);
+    z-index: var(--z-toast);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    pointer-events: none;
+    max-width: min(520px, 92vw);
+}
+.frame-toast {
+    pointer-events: auto;
+    display: flex; align-items: baseline; gap: 8px;
+    background: var(--bg-panel); color: var(--text-main);
+    border: 1px solid var(--border-color); border-left: 3px solid var(--accent);
+    border-radius: var(--r-6);
+    padding: 9px 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    font-size: var(--fs-65);
+    cursor: pointer;
+    animation: frame-toast-in 0.16s ease-out;
+}
+.frame-toast.leaving { opacity: 0; transform: translateY(6px); transition: opacity 0.18s, transform 0.18s; }
+.frame-toast-title { font-weight: 700; color: var(--text-strong); white-space: nowrap; }
+.frame-toast-body { color: var(--text-muted); }
+@keyframes frame-toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
 /* ========================================= */
 /* TAB STRIP - ONE COMPONENT                 */
 /* ========================================= */

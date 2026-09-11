@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.13';
+const APP_VERSION = '17.14';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -2957,7 +2957,7 @@ let groupDimSeq = 0;
 function createGroupDimFromSelection() {
     const sel = getSelectedFrames();
     if (sel.length < 2) {
-        showInfoModal('Select Frames First',
+        _toast('Select Frames First',
             'Select at least two frames (Shift-click or drag a selection box) before adding a group dimension.');
         return;
     }
@@ -8976,7 +8976,7 @@ function syncDashLibraryFolder(e, getPath) {
         closeLibrarySyncModal();
         if (result.ok) {
             const stats = getCustomLibraryStorageStats();
-            showInfoModal('Library Synced',
+            _toast('Library Synced',
                 `Synced ${c} swatches from your local folder.\n\n` +
                 `Persisted ${stats.count} custom swatches to browser storage (${stats.percentOfLimit}% of limit used).\n\n` +
                 `These will reload automatically next time you open the tool.`);
@@ -14130,7 +14130,7 @@ function _dsSyncApprovedBtn() {
 }
 function _dsToggleApproved() {
     const k = _dsCurrentSpecKey();
-    if (!k) { showInfoModal('Spec pages only', 'Approval status applies to individual spec pages. Select a spec page first.'); return; }
+    if (!k) { _toast('Spec pages only', 'Approval status applies to individual spec pages. Select a spec page first.'); return; }
     const cur = _approvalOf(k);
     const next = cur === '' ? 'pending' : cur === 'pending' ? 'approved' : '';
     _dsSetApproval(k, next);
@@ -14786,7 +14786,7 @@ function _dsDuplicateUserTemplate(idx) {
 function _dsUpdateTemplateFromPage(idx) {
     const t = (editorialContent.templates || [])[idx]; if (!t) return;
     const ep = _dsCurrentEditablePage();
-    if (!ep) { showInfoModal('Not a layout page', 'Open the page you want to copy from in Pages, then press Update from page on the template.'); return; }
+    if (!ep) { _toast('Not a layout page', 'Open the page you want to copy from in Pages, then press Update from page on the template.'); return; }
     if (!window.confirm('Replace the layout of template "' + (t.name || 'Untitled') + '" with the page you have open now?')) return;
     t.elements = JSON.parse(JSON.stringify(ep.page.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; });
     const annKey = 'layout:' + ep.page.id;
@@ -14797,7 +14797,7 @@ function _dsUpdateTemplateFromPage(idx) {
 }
 function _dsSaveCurrentAsTemplate() {
     const ep = _dsCurrentEditablePage();
-    if (!ep) { showInfoModal('Not a layout page', 'Open a moodboard, cover, narrative or other layout page in Pages, then save it as a template.'); return; }
+    if (!ep) { _toast('Not a layout page', 'Open a moodboard, cover, narrative or other layout page in Pages, then save it as a template.'); return; }
     const name = (window.prompt('Name this template:', ep.page.title || (_dsCatLabel(ep.type) + ' template')) || '').trim();
     if (!name) return;
     const els = JSON.parse(JSON.stringify(ep.page.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; }); // structural — strip embedded image data
@@ -15550,7 +15550,7 @@ function _styleInkResolve(color, pageKey) {
 function _dsApplyStyle(id, silent) {
     const st = _dsTextStyles().find(s => s.id === id); if (!st) return false;
     const t = _dsStyleTarget();
-    if (!t) { if (!silent) showInfoModal('Select a text box', 'Click a text element on the page first, then apply a style to it.'); return false; }
+    if (!t) { if (!silent) _toast('Select a text box', 'Click a text element on the page first, then apply a style to it.'); return false; }
     const el = t.el;
     const _pgKey = (_dsPages[_dsIndex]) ? _deckPageKey(_dsPages[_dsIndex]) : null;
     el.font = st.font; el.size = st.size; el.bold = !!st.bold; el.italic = !!st.italic;
@@ -15582,7 +15582,7 @@ function _dsReapplyStyleEverywhere(id) {
 let _dsShuffleState = null;
 function _dsShuffleGroup(group) {
     const list = _dsTextStyles().filter(s => s.group === group); if (!list.length) return;
-    const t = _dsStyleTarget(); if (!t) { showInfoModal('Select a text box', 'Click a text element on the page, then shuffle a group to try each look on it.'); return; }
+    const t = _dsStyleTarget(); if (!t) { _toast('Select a text box', 'Click a text element on the page, then shuffle a group to try each look on it.'); return; }
     if (!_dsShuffleState || _dsShuffleState.group !== group) _dsShuffleState = { group: group, i: 0 };
     else _dsShuffleState.i = (_dsShuffleState.i + 1) % list.length;
     const st = list[_dsShuffleState.i];
@@ -15591,7 +15591,7 @@ function _dsShuffleGroup(group) {
     const lbl = document.getElementById('dsShuffleLbl' + group.replace(/\W/g, '')); if (lbl) lbl.textContent = st.name;
 }
 function _dsSaveSelectionAsStyle() {
-    const t = _dsStyleTarget(); if (!t) { showInfoModal('Select a text box', 'Select a styled text element first, then save its look as a new style.'); return; }
+    const t = _dsStyleTarget(); if (!t) { _toast('Select a text box', 'Select a styled text element first, then save its look as a new style.'); return; }
     const el = t.el; const name = (window.prompt('Name this style:', 'My Style') || '').trim(); if (!name) return;
     const groups = _dsStyleGroups();
     const group = (window.prompt('Group (e.g. ' + groups.slice(0, 4).join(', ') + '…):', el.styleId ? (_dsTextStyles().find(s => s.id === el.styleId) || {}).group || 'Body Copy' : 'Body Copy') || 'Body Copy').trim();
@@ -17289,7 +17289,7 @@ function _dsSyncToolbar() {
 function _dsAddImageBox() {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
-    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support overlay images.'); return; }
+    if (!key) { _toast('Not available here', 'This page type doesn\u2019t support overlay images.'); return; }
     const fi = document.getElementById('dsAnnImageFile'); if (fi) fi.click();
 }
 function _dsImageFilePicked(input) {
@@ -17443,7 +17443,7 @@ let _dsLastPlaceholderKind = 'rect';
 function _dsAddShape(shape, locked) {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
-    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support shapes.'); return; }
+    if (!key) { _toast('Not available here', 'This page type doesn\u2019t support shapes.'); return; }
     const list = _dsAnnList(key);
     const w = 0.24;
     const a = { type: 'shape', shape: (shape === 'ellipse' ? 'ellipse' : 'rect'), x: 0.18, y: 0.18, w: w, h: locked ? _dsShapeSquareH(w) : 0.2, fill: SHAPE_DEFAULT_FILL, dataUrl: null, aspect: 1.33, zoom: 1, panX: 0, panY: 0, shadow: false };
@@ -18164,7 +18164,7 @@ function _dsShapePanDown(e, key, idx, bw, bh) {
 function _dsAddNote() {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
-    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support notes.'); return; }
+    if (!key) { _toast('Not available here', 'This page type doesn\u2019t support notes.'); return; }
     const list = _dsAnnList(key);
     list.push({ type: 'note', text: 'New note', x: 0.1, y: 0.12, w: 0.3, size: 14 / 540, leading: 18, font: 'serif', italic: true, bold: false, color: '#222222', align: 'left' });
     if (typeof pushHistory === 'function') pushHistory();
@@ -18175,7 +18175,7 @@ function _dsAddNote() {
 function _dsAddTextBox() {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
-    if (!key) { showInfoModal('Not available here', 'This page type doesn\u2019t support overlay text boxes.'); return; }
+    if (!key) { _toast('Not available here', 'This page type doesn\u2019t support overlay text boxes.'); return; }
     const ps = editorialContent.paragraphStyle || {};
     const list = _dsAnnList(key);
     list.push({ x: 0.1, y: 0.12, w: 0.34, text: 'New text', font: ps.font || 'sans', size: (ps.size || 16) / 540, color: ps.color || '#222222', bold: false, italic: false, align: 'left' });
@@ -22097,7 +22097,7 @@ function _dsRenderTools() {
             bulkApply.textContent = 'Apply template to selected'; bulkApply.style.cssText = 'width:100%; height:22px; font-size:var(--fs-60);';
             bulkApply.onclick = () => {
                 const keys = bulkChecks.filter(c => c.checked).map(c => c.value);
-                if (!keys.length) { showInfoModal('Nothing selected', 'Tick at least one item code first.'); return; }
+                if (!keys.length) { _toast('Nothing selected', 'Tick at least one item code first.'); return; }
                 // Read the armed template NOW (the panel may have rendered
                 // before the user picked one from the template grid).
                 const ck = _dsSpecTplSel || chosenKey;
@@ -28691,7 +28691,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // — Thank You / contacts (real) —
     if (inc.contacts && !_fixedHidden('contacts')) { newPage('card:contacts'); try { await _pageThemeBake('card:contacts'); } catch (e) {} let _resolvedContacts; try { _resolvedContacts = await _contactsResolved(); } catch (e) { _resolvedContacts = editorialContent.contacts || ''; } _drawThankYouPage(doc, logos, pageNum, meta, _resolvedContacts); await emitAfterKey('card:contacts'); }
 
-    if (pageNum === 0) { showInfoModal('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
+    if (pageNum === 0) { _toast('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
     if (_autoPages.length) {
         const keyToPage = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) keyToPage[_pageKeys[p]] = p; }
@@ -30687,8 +30687,71 @@ function closeDuplicateModal() {
 // Styled drop-in replacement for window.alert(). Single OK button.
 // Reuses #infoModal in index.html. Title + body fill in dynamically.
 //
-// Usage: showInfoModal('Library Synced', 'Synced 9 swatches from your folder.');
-//        showInfoModal('Library Synced', '...', () => { /* runs on OK */ });
+// Usage: _toast('Library Synced', 'Synced 9 swatches from your folder.');
+//        _toast('Library Synced', '...', () => { /* runs on OK */ });
+// A TRANSIENT NOTICE, FOR THINGS THAT ARE NOT A DECISION.
+//
+// There were eighty showInfoModal() calls and no other way for this app to say
+// anything at all, so "Nothing selected" took over the screen and demanded a click to
+// dismiss information you already half-knew. Which to use:
+//
+//   _toast   - an acknowledgement ("Library synced") or a nudge explaining why nothing
+//              happened ("Select a text box first"). Short, self-evident, safe to miss.
+//   modal    - something you must READ to act on ("commit studio-defaults.json to the
+//              repo root"), a change you did not ask for ("Units auto-corrected"), or
+//              anything carrying a decision. Never toast those: a notice you can miss
+//              is the wrong shape for information you cannot afford to.
+//
+// Deliberately no queue and no cap-with-dropping: notices stack and each expires on its
+// own timer, so two things happening at once say so. Clicking dismisses early.
+let _toastHost = null;
+function _toastHostEl() {
+    if (_toastHost && _toastHost.isConnected) return _toastHost;
+    if (typeof document === 'undefined' || !document.body) return null;
+    _toastHost = document.createElement('div');
+    _toastHost.className = 'frame-toast-host';
+    // Announced, but never focus-stealing: a nudge that moved the caret out of the field
+    // you were typing in would cost more than it explains.
+    _toastHost.setAttribute('role', 'status');
+    _toastHost.setAttribute('aria-live', 'polite');
+    document.body.appendChild(_toastHost);
+    return _toastHost;
+}
+const TOAST_MS = 3200;
+function _toast(title, body, opts) {
+    const host = _toastHostEl();
+    // No DOM (a test harness, a headless render) is not an error - the caller is telling
+    // the user something, and there is no user. Fail quiet rather than throwing out of
+    // whatever action raised it.
+    if (!host) return null;
+    const o = opts || {};
+    const el = document.createElement('div');
+    el.className = 'frame-toast';
+    const t = document.createElement('span');
+    t.className = 'frame-toast-title';
+    t.textContent = title || '';
+    el.appendChild(t);
+    if (body) {
+        const bd = document.createElement('span');
+        bd.className = 'frame-toast-body';
+        bd.textContent = body;
+        el.appendChild(bd);
+    }
+    let gone = false;
+    const drop = () => {
+        if (gone) return;
+        gone = true;
+        clearTimeout(timer);
+        el.classList.add('leaving');
+        setTimeout(() => { try { el.remove(); } catch (e) {} }, 200);
+    };
+    const timer = setTimeout(drop, Math.max(1200, o.ms || TOAST_MS));
+    el.onclick = drop;
+    el.title = 'Dismiss';
+    host.appendChild(el);
+    return el;
+}
+
 function showInfoModal(title, body, onOk) {
     document.getElementById('infoModalTitle').innerText = title;
     document.getElementById('infoModalBody').innerText = body;
@@ -31887,7 +31950,7 @@ function salonArrange() {
 function centerGroupOnWall() {
     const movingFrames = _alignTargets();
     if (movingFrames.length === 0) {
-        showInfoModal('No Frames', 'Select the frames to center, or deselect all to use every visible frame.');
+        _toast('No Frames', 'Select the frames to center, or deselect all to use every visible frame.');
         return;
     }
     const wallW = parseFloat(document.getElementById('wallW').value) || 1;
@@ -31922,7 +31985,7 @@ function centerGroupOnWall() {
 function alignToHangHeight() {
     const activeFrames = _alignTargets();
     if (activeFrames.length === 0) {
-        showInfoModal('No Frames', 'Select the frames to align, or deselect all to use every visible frame.');
+        _toast('No Frames', 'Select the frames to align, or deselect all to use every visible frame.');
         return;
     }
     const hangY = getHangHeight();

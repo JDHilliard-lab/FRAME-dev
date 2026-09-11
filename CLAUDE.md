@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-121 files, 1472 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+122 files, 1480 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1752,6 +1752,27 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   stack went. `node --check` passed. The existing tests caught it, and
   `test_return_trips.js` now has a check for one-line functions that call themselves.
   Rename by whole identifier, or not at all.
+
+- **`_toast` IS FOR WHAT IS NOT A DECISION; THE MODAL KEEPS EVERYTHING ELSE.** There were
+  EIGHTY `showInfoModal()` calls and no other way for this app to say anything, so
+  "Nothing selected" took over the screen and demanded a click to dismiss information you
+  already half-knew.
+  The dividing line is whether the notice is **safe to MISS**. A toast gets
+  acknowledgements ("Library synced") and nudges explaining why nothing happened ("Select
+  a text box first"). A modal keeps anything you must READ to act on (*Studio defaults
+  exported* carries instructions), any change you did not ask for (*Units auto-corrected*
+  rewrote the project's units), and every failure. A notice you can miss is the wrong
+  shape for information you cannot afford to miss - a test pins those three by name.
+  18 call sites moved; 63 correctly stayed.
+  **`--z-toast` sits ABOVE `--z-modal-alert`**, which looks wrong and is not: a toast is
+  routinely raised from inside a modal, and one rendering behind the dialog that
+  triggered it is worse than not showing it at all.
+  The host is `pointer-events: none` and each toast turns them back on for itself, so a
+  stack of notices never blocks the page underneath while staying dismissable.
+  Notices **stack rather than queue**: two things happening at once should both say so,
+  and a queue that shows one and drops the other is how a user learns the second thing
+  never happened. `_toast` returns null and does nothing when there is no `document.body`
+  (a test harness, a headless render) rather than throwing out of whatever raised it.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
