@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-119 files, 1458 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+120 files, 1464 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1698,6 +1698,34 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `.frame-tabs.fit > .frame-tab {` contains `.frame-tab {`, so an unanchored search reads
   the wrong rule even when the escapes survive. `indexOf` with a leading newline cannot
   do either.
+
+- **THE DECK PREVIEW IS A PICTURE OF PAPER, NOT A PIECE OF THE UI — DO NOT TOKENISE IT.**
+  A design audit of this file recommended migrating "the ~400 hardcoded colours in
+  app.js" onto theme tokens. That recommendation was WRONG and following it would have
+  broken the thing this project cares most about. Of ~900 raw hex values in app.js:
+  **259 are serialized template/project DATA** (`IDML_MASTER_TEMPLATES`, `_starterDeck()`)
+  describing text and blocks on a printed page; **40 are canvas/PDF calls** where a
+  `var()` parses to nothing; and most of the apparent "chrome" is `_deckMockHTML` and
+  `_mbThumbInner`, which draw a preview of the printed SHEET. `_deckMockHTML` contains
+  zero `var(--)` and that is correct: theming it makes a white page go dark in dark mode
+  and, far worse, makes Deck Studio show a grey the PDF will not print.
+  The genuinely themeable chrome was the blues and the amber, and that is already done.
+  `test_preview_is_paper.js` pins all of it, including the DATA, so the next audit
+  cannot make the same recommendation twice.
+  **`SHAPE_DEFAULT_FILL` is the one definition of the placeholder grey**, which was
+  written out NINE times: the starter deck, the shape creator, the duplicate path, two
+  colour-picker defaults, the DOM preview, the rail thumbnail and the PDF renderer. The
+  last three are the dangerous ones — the preview and the export resolved the fallback
+  independently, so a drift in either shows a grey the client's PDF does not print. It
+  is deliberately a LITERAL: the PDF path hands it straight to `_annHexToRgb`.
+  The 73 `"fill":"#d8d8de"` entries inside the serialized templates are NOT this
+  constant and must stay literal — they describe specific existing blocks on specific
+  pages, so rewriting them would edit saved documents.
+  Also measured while here, and worth knowing before anyone builds a `_btn()` factory:
+  there is **no dominant repeated button shape** in app.js. Of 825 `cssText` assignments
+  the most-repeated normalised string appears FOUR times; the rest are one-off positional
+  styles. A generic button factory would consolidate almost nothing. The look that DID
+  repeat was the tab strip, and that is now `.frame-tab`.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
