@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-117 files, 1446 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+118 files, 1452 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1642,6 +1642,34 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   Still outstanding and deliberately not touched here: `.elev-tab` marks its selection
   with `.elev-tab-on` rather than `.active`, so two tab strips in one app use two
   conventions. That belongs with the tab-component consolidation, not with this.
+
+- **THERE IS A TYPE LADDER AND A CORNER LADDER, AND NOTHING OFF THEM.** There were
+  THIRTY distinct rem font sizes across app.js, style.css and index.html over 894
+  declarations, eight of them inside one 0.12rem band (0.58 0.60 0.62 0.64 0.65 0.66
+  0.68 0.70) — a third of a pixel apart at a 16px root, invisible to the eye and a
+  guarantee that nothing lines up. Eleven border radii from 1px to 11px over 360
+  declarations. Neither was a scale; both were sediment.
+  `--fs-45` … `--fs-120` is a 0.05rem ladder widening above 0.85 (444 declarations
+  moved, none by more than 0.8px); `--r-2` … `--r-10` is even steps (99 moved, none by
+  more than 1px, and 4px now carries 224 of the 359).
+  **Named by VALUE, not by role.** `--fs-65` says what it is and cannot be misapplied the
+  way `--fs-small` can, and the point of a ladder is that 0.62rem is no longer
+  expressible — which a semantic name would not enforce.
+  **TIES GO TO THE DENSER NEIGHBOUR.** 3px sits exactly between 2 and 4, but 4px carried
+  143 of the radii and 2px carried 19; sending it down would have moved 33 corners
+  FURTHER from the house value while claiming to unify them. A first pass used
+  ties-to-lower because it was tidier to state, and produced exactly that. The rule is
+  "join the crowd", and it is written down because it is a judgement, not arithmetic.
+  **50% circles and the single 99px pill are untouched.** Those are SHAPES, not sizes —
+  any rung would square their ends off — and a test pins that the pill survives.
+  Heights were deliberately NOT laddered. `height:` in this file spans dividers (1px),
+  scrollbars (8px), icons, bars and controls, so one ladder over all of them would
+  flatten differences that mean different things; and the control band 20–34px feeds
+  flex rows whose siblings must match, where a 2px move is a layout change rather than a
+  cosmetic one. A separate `--ctl-h-*` set for the control band only is the right shape
+  if it is ever wanted.
+  No rem size reaches the PDF: its text is sized in POINTS through `setFontSize`, so
+  this is chrome only.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
