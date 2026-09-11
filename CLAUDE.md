@@ -35,7 +35,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-118 files, 1452 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+119 files, 1458 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1670,6 +1670,34 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   if it is ever wanted.
   No rem size reaches the PDF: its text is sized in POINTS through `setFontSize`, so
   this is chrome only.
+
+- **THERE IS ONE PANEL TAB STRIP: `.frame-tabs` / `.frame-tab`.** There were FIVE and no
+  two agreed — four pill strips built from hand-written cssText (28/28/26px tall, three
+  different font rungs, `font-weight:700` present or absent) plus the elevation sidebar's
+  uppercase underline. A designer moving between Deck Studio, the floorplan panel and the
+  elevation sidebar met a differently-shaped control doing the same job each time.
+  Pills won because four of the five already were, and because these ARE segmented
+  controls: three equal choices filling a narrow panel.
+  **`.nav-tab` IS DELIBERATELY NOT THIS, and a test pins the difference.** It switches
+  VIEWS rather than panes within one, it is the only strip that persists across the whole
+  app, and its underline is what makes those two levels legible as different things. One
+  tab look for both jobs would be the opposite of cohesive.
+  **STATE IS A CLASS (`.active`), NEVER A WRITTEN STYLE STRING** — and that removed a
+  documented trap rather than working around it. All four pill strips rewrote their
+  buttons' whole `cssText` on every switch, which is exactly why `_dsToolsTab` had to
+  call `_dsSyncToolsTabBar()` AFTERWARDS: the rewrite clobbered a `display:none` that
+  function had set. Toggling a class touches nothing else. The call remains, but now only
+  because the Templates button's availability depends on the selected page.
+  `.elev-tab-on` is gone: one strip expressing selection differently from the other four
+  AND from `.nav-tab` was the same "two names for one idea" problem in miniature.
+  `_tplTabCss` is now `_tplTabClass`, returning class names. Two of its three call sites
+  were never tab bars — the presentation-preset list and the preview-quality segments —
+  but they are the same thing to a user: one of these is chosen.
+  **`test_tab_component.js` CONTAINS NO REGEX, on purpose.** A pattern written into a
+  test file here lost its backslashes in transit three separate times in one sitting, and
+  `.frame-tabs.fit > .frame-tab {` contains `.frame-tab {`, so an unanchored search reads
+  the wrong rule even when the escapes survive. `indexOf` with a leading newline cannot
+  do either.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

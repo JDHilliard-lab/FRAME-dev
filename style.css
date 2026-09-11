@@ -1115,14 +1115,45 @@ select.no-arrow::-ms-expand { display: none; }
 }
 .elev-tabpane::-webkit-scrollbar { width: 8px; }
 .elev-tabpane::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: var(--r-4); }
-.elev-tabs { display: flex; gap: 2px; margin-bottom: 6px; border-bottom: 1px solid var(--border-color); flex: none; }
-.elev-tab {
-    flex: 1; background: transparent; border: none; border-bottom: 2px solid transparent;
-    color: var(--text-muted); padding: 5px 4px; font-size: var(--fs-60); cursor: pointer;
-    letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600;
+/* ========================================= */
+/* TAB STRIP - ONE COMPONENT                 */
+/* ========================================= */
+/* There were FIVE panel-level tab strips and no two agreed. Four were pills built
+ * from hand-written cssText (28px/28px/26px tall, --fs-75/--fs-70/--fs-65,
+ * font-weight 700 or absent) and the fifth - the elevation sidebar's Art/Context/
+ * Glass - was an uppercase underline. Nothing chose any of that.
+ *
+ * Pills won because four of the five already were, and because these strips are
+ * SEGMENTED CONTROLS: three equal choices filling a narrow panel, which is what a
+ * pill row reads as and what an underline row does not.
+ *
+ * .nav-tab at the top of the app is deliberately NOT this. It switches VIEWS
+ * rather than panes within one, it is the only strip that persists across the
+ * whole app, and its underline is what makes those two levels legible as
+ * different things. One tab look for two jobs would be the opposite of clear.
+ *
+ * The state is a CLASS, never a written style string. All four pill strips used
+ * to rewrite their buttons' whole cssText on every switch, which is why
+ * _dsToolsTab needed _dsSyncToolsTabBar() called AFTER it to put back a
+ * display:none the rewrite had just clobbered. Toggling .active touches nothing
+ * else, so that trap is gone rather than documented. */
+.frame-tabs { display: flex; gap: 4px; flex: none; }
+.frame-tabs.fit > .frame-tab { flex: 1; }
+.frame-tab {
+    height: 28px; padding: 0 12px;
+    font-size: var(--fs-70); font-weight: 700;
+    border: 1px solid var(--border-color); border-radius: var(--r-4);
+    background: var(--bg-input); color: var(--text-main);
+    cursor: pointer; white-space: nowrap;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
-.elev-tab:hover { color: var(--text-strong); }
-.elev-tab-on { color: var(--accent, #3a86ff); border-bottom-color: var(--accent, #3a86ff); }
+.frame-tab:hover { background: var(--btn-hover); color: var(--text-strong); }
+.frame-tab.active { background: var(--ui-active); color: #fff; border-color: var(--ui-active); }
+.frame-tab.active:hover { background: var(--ui-active); filter: brightness(1.08); }
+/* The elevation sidebar is 425px wide and holds three of these, so they lose the
+ * side padding and share the width instead of overflowing it. */
+.elev-tabs { margin-bottom: 6px; }
+.elev-tabs > .frame-tab { padding: 0 4px; font-size: var(--fs-65); }
 
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────
  * Sits in the Elevations sidebar, which is narrow, so the four run fields are a

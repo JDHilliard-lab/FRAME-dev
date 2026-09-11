@@ -22,13 +22,13 @@ const fs = require('fs');
       const pagesDiv = document.getElementById('dsTabPages');
       if (pagesDiv.style.display !== 'flex') throw new Error('Pages DOM not shown for templateEditor mode');
       const bt = document.getElementById('dsTabBtnTemplates'), bg = document.getElementById('dsTabBtnPages');
-      // Not .style.backgroundColor: the buttons are styled through a cssText
-      // shorthand holding a var(), which jsdom declines to parse, so both would
-      // read '' and compare EQUAL no matter which one is lit. The style attribute
-      // keeps the text, and asserting the token directly says what we mean.
-      const styleOf = (el) => el.getAttribute('style') || '';
-      if (styleOf(bt).indexOf('var(--ui-active)') < 0) throw new Error('Templates button is not lit: ' + styleOf(bt));
-      if (styleOf(bg).indexOf('var(--ui-active)') >= 0) throw new Error('Pages button is lit too, so they are not distinct: ' + styleOf(bg));
+      // Ask what a USER would see, not how it is spelled. This has now been an
+      // inline backgroundColor, an inline var() the shorthand parser dropped, and
+      // a class; the question 'is the Templates button lit and the Pages one not'
+      // never changed. .frame-tab.active is the one marker every tab strip uses.
+      const lit = (el) => el.classList.contains('active');
+      if (!lit(bt)) throw new Error('Templates button is not lit: class="' + bt.className + '"');
+      if (lit(bg)) throw new Error('Pages button is lit too, so they are not distinct: class="' + bg.className + '"');
       if (!_dsInTemplateLibraryMode) throw new Error('library mode flag not set');
     });
 
