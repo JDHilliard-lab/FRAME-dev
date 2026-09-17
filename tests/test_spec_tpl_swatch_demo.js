@@ -100,7 +100,15 @@ const path = require('path');
 
       window.__resetCalls();
       const doc2 = window.__mkDoc();
+      // The elevation slot is UNTICKED for the real run. A ticked slot with nothing
+      // in it now reserves a grey box on purpose, and the demo piece is on no wall -
+      // so leaving it ticked would put a legitimate placeholder on the page and the
+      // leak check below could no longer tell one from a swatch-mode box. Unticked,
+      // the slot is REMOVED, which is the other half of the contract and keeps that
+      // check reading exactly what it was written to read.
+      editorialContent.specSlots = { frame: true, profile: true, plan: true, elevation: false };
       await _drawSpecPageTemplate(doc2, {}, 1, {}, d.row, 'frameSpecDetail', { PW: 936, PH: 540, M: 40 });
+      editorialContent.specSlots = { frame: true, profile: true, plan: true, elevation: true };
       window.__realRun = { doc: doc2, calls: { elev: window.__calls.elev, plan: window.__calls.plan, frameImgs: window.__calls.frameImgs }, frameOpts: window.__calls.frame.slice() };
 
       window.__resetCalls();
@@ -248,9 +256,18 @@ const path = require('path');
       // Without ctx.swatch the renderer must go back to the real thumbnails; the
       // stubs record that it asked for every one of them.
       if (!r.calls.plan) throw new Error('the real page stopped cropping its floorplan');
+      // And the unticked slot was REMOVED, not reserved: nothing asked for a wall.
+      if (r.calls.elev) throw new Error('an unticked elevation still went looking for a wall');
       if (!r.calls.frameImgs) throw new Error('the real page stopped loading its corner/profile images');
       if (r.frameOpts.some(o => o.wireframe === true)) throw new Error('swatch mode forced wireframe onto a real page');
-      if (__greyBoxes(r.doc).length) throw new Error('placeholder boxes reached a real page');
+      // A RESERVED SLOT IS NOT A LEAK. A ticked slot whose content is missing now
+      // holds its space with the same grey box, on purpose - the page has to stop
+      // moving while a deck is being filled in - and this fixture stubs the plan
+      // crop to null, so the floorplan slot correctly reserves. What must never
+      // happen is swatch mode's FULL set turning up on a real page: there it draws
+      // one for every slot whether or not the content exists.
+      const rb = __greyBoxes(r.doc);
+      if (rb.length !== 1) throw new Error('expected only the one reserved floorplan slot on a real page, got ' + rb.length);
       // ctx.swatch is a PARAMETER, not a module flag — the renderers await inside,
       // so a background thumbnail render interleaving with a card render would
       // otherwise come out full of grey boxes with nothing to say it happened.
@@ -313,19 +330,17 @@ const path = require('path');
       dashUnit = 'in';
     });
 
-    __check('EXACT BUG: a card is a 936:540 box like a page thumbnail, not a square', () => {
-      // The height used to be a px figure derived from a NOMINAL 150px card, so in a
-      // narrower grid column the box stayed ~87 tall and squeezed the page into a
-      // square. Both grids, and the same declaration the rail's page thumbnails use.
-      const n = (S.match(/thumb\\.style\\.cssText = 'position:relative; width:100%; aspect-ratio:936\\/540;/g) || []).length;
-      if (n !== 2) throw new Error('only ' + n + ' of the two template grids uses the page aspect ratio');
-      if (/thumb\\.style\\.cssText = [^\\n]*height:' \\+ chh \\+ 'px/.test(S)) throw new Error('a card still pins its height to a nominal px figure');
-      // The instant diagram must be laid out in PERCENT for the same reason — px
-      // against a nominal width slides off a card that turned out narrower.
-      const i = S.indexOf('function _dsSwatchBox');
-      const box = S.slice(i, S.indexOf('\\nfunction ', i + 10));
-      if (/left:' \\+ x \\+ 'px/.test(box)) throw new Error('the placeholder diagram still positions boxes in px');
-      if (box.indexOf('_pc(') < 0) throw new Error('the placeholder diagram does not use the percent helper');
+    // The 936:540 card box check is GONE, and deliberately: nothing builds a
+    // template card grid any more. Both pickers were replaced by SHOW ON PAGE
+    // ticks, so there is no box left to measure and a check that walked zero
+    // boxes would pass for the wrong reason. The DEMO RENDERER below is still
+    // exercised in full - it is correct and a picker may want it again - but it
+    // has no UI consumer, so if the cards do not come back it and its helpers
+    // should be removed together rather than left as machinery with tests.
+    __check('the demo renderer has no UI consumer left, and that is recorded', () => {
+      const s = window.__appSrc;
+      if (s.indexOf('_dsQueueTplSwatch(key, thumb)') >= 0) throw new Error('a card grid is back: give it its aspect-ratio check again');
+      if (s.indexOf('THE PREWARM IS OFF') < 0) throw new Error('the prewarm is running for cards nobody paints');
     });
 
     __check('the card image is contained, not stretched to the cell', () => {

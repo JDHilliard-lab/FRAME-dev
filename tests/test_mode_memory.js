@@ -70,8 +70,8 @@ const fs = require('fs');
     __check('All three modes remembered across a full tour', () => {
       editorialContent.specTemplate = 'frameSpecDetail';
       editorialContent.specTplMemory = {};
-      clickMode('Group A/B/C');       // first entry: default setRight
-      if (editorialContent.specTemplate !== 'setRight') throw new Error('first group entry not default: ' + editorialContent.specTemplate);
+      clickMode('Group A/B/C');       // first entry: the group default
+      if (editorialContent.specTemplate !== 'setLegend') throw new Error('first group entry not default: ' + editorialContent.specTemplate);
       editorialContent.specTemplate = 'setRow';   // user picks a different group layout via the cards
       clickMode('Install guide');
       clickMode('Per piece');
@@ -92,7 +92,9 @@ const fs = require('fs');
       editorialContent.specTemplate = 'classic';
       editorialContent.specTplMemory = {};
       clickMode('Group A/B/C');
-      if (editorialContent.specTemplate !== 'setRight') throw new Error('group default wrong: ' + editorialContent.specTemplate);
+      // Shared specs: the consolidated left column is what a salon hang wants, and
+      // it is the only group arrangement still offered.
+      if (editorialContent.specTemplate !== 'setLegend') throw new Error('group default wrong: ' + editorialContent.specTemplate);
     });
 
     __check('per-page overrides are never touched by mode switching', () => {

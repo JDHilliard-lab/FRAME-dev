@@ -15,15 +15,17 @@ const fs = require('fs');
     editorialContent = editorialContent || {};
     scheduleAutosave=()=>{}; pushHistory=()=>{}; _dsRenderCenter=()=>{}; renderMoodboardCanvas=()=>{}; _dsSyncToolbar=()=>{}; _dsRenderRail=()=>{}; _dsRenderTools=()=>{}; _dsSyncApprovedBtn=()=>{};
 
-    __check('gear buttons render a plain floating plus, no circle/background/border', () => {
+    __check('the image placeholder gear is a disc with a pen, because it sits on a photo', () => {
       const box = document.createElement('div'); document.body.appendChild(box);
       editorialContent.annotations = { 'layout:pgG': [{ type: 'image', dataUrl:'data:image/png;base64,X' }] };
       _dsGearButton(box, 'layout:pgG', 0);
       const btn = box.querySelector('button');
-      if (btn.textContent !== '+') throw new Error('not a plain plus: ' + btn.innerHTML.slice(0,80));
-      if (btn.style.borderRadius && btn.style.borderRadius !== '0px') throw new Error('still has a border radius: ' + btn.style.borderRadius);
-      if (btn.style.background && btn.style.background !== 'transparent') throw new Error('still has a background: ' + btn.style.background);
-      if (btn.style.borderStyle && btn.style.borderStyle !== 'none') throw new Error('still has a border: ' + btn.style.borderStyle);
+      if (btn.textContent === '+') throw new Error('back to a bare plus, which vanishes on a photograph');
+      if ((btn.innerHTML || '').indexOf('svg') < 0) throw new Error('no icon: ' + btn.innerHTML.slice(0, 60));
+      if (btn.style.borderRadius !== '50%') throw new Error('not a disc: ' + btn.style.borderRadius);
+      if (!btn.style.background || btn.style.background === 'transparent') throw new Error('no ground of its own, so an image still swallows it');
+      // The two checks below are the SAME control over text and over an arrow,
+      // where a floating plus is right and stays. Different surface, different rule.
     });
 
     __check('text gear button renders a plain floating plus', () => {

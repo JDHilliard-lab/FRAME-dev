@@ -174,13 +174,20 @@ const fs = require('fs');
         'layout:pgCR1': [{ type: 'shape', shape: 'rect', fill: '#d8d8de', radius: 5 }],
         'layout:pgCR2': [{ type: 'shape', shape: 'ellipse', fill: '#d8d8de' }]
       };
+      // The section label is a COLUMN now and reads 'Radius' (its full wording moved
+      // to the tooltip), so the control is identified by the stepper it owns rather
+      // than by a label string that is free to be reworded.
+      const hasRadius = () => {
+        const p = document.getElementById('dsGearPopup');
+        if (!p) return false;
+        if ((p.textContent||'').indexOf('Radius') < 0) return false;
+        return !!Array.prototype.slice.call(p.querySelectorAll('button')).find(b => b.dataset.step === 'radius');
+      };
       _dsOpenGearPopup('layout:pgCR1', 0, 10, 10);
-      let pop = document.getElementById('dsGearPopup');
-      if ((pop.textContent||'').indexOf('Corner radius') < 0) throw new Error('radius control missing for rect');
+      if (!hasRadius()) throw new Error('radius control missing for rect');
       _dsCloseGearPopup();
       _dsOpenGearPopup('layout:pgCR2', 0, 10, 10);
-      pop = document.getElementById('dsGearPopup');
-      if ((pop.textContent||'').indexOf('Corner radius') >= 0) throw new Error('radius control should not show for ellipse');
+      if (hasRadius()) throw new Error('radius control should not show for ellipse');
       _dsCloseGearPopup();
     });
 
@@ -188,7 +195,9 @@ const fs = require('fs');
       editorialContent.annotations = { 'layout:pgCR3': [{ type: 'shape', shape: 'rect', fill: '#d8d8de', radius: 10 }] };
       _dsOpenGearPopup('layout:pgCR3', 0, 10, 10);
       let pop = document.getElementById('dsGearPopup');
-      const plus = Array.from(pop.querySelectorAll('button')).find(b => b.textContent === '+' && b.parentElement.textContent.indexOf('pt') >= 0);
+      // By NAME, not by text: stroke weight is also a "− value pt +" row, and the
+      // old textContent search picked whichever stepper came first in the popup.
+      const plus = Array.from(pop.querySelectorAll('[data-step="radius"]')).find(b => b.textContent === '+');
       plus.onclick();
       let a = editorialContent.annotations['layout:pgCR3'][0];
       if (a.radius !== 12) throw new Error('plus button wrong: ' + a.radius);

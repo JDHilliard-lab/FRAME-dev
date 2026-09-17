@@ -79,9 +79,13 @@ const fs = require('fs');
       renderCenterCalls = 0;
       const t = document.createElement('div');
       document.body.appendChild(t);
-      _dsPageChromeControls(t, _dsPages[0]);
+      // UPDATED 17.25: this button moved OFF the per-page footer panel and onto the
+      // Project tab, with the client-logo uploader. Both are deck-wide, and a deck-wide
+      // control in a per-PAGE panel is how the whole deck gets changed by someone who
+      // believes they are changing one page. The behaviour asserted here is unchanged.
+      _dsDeckFooterInto(t);
       const btns = Array.from(t.querySelectorAll('button')).filter(b => b.textContent === 'Apply footer to whole deck');
-      if (!btns.length) throw new Error('Apply-to-deck button not found');
+      if (!btns.length) throw new Error('Apply-to-deck button not found on the Project tab block');
       const before = renderCenterCalls;
       btns[0].click();
       if (renderCenterCalls <= before) throw new Error('center did not re-render after applying footer to whole deck');

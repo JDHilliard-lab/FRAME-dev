@@ -93,7 +93,22 @@ const fs = require('fs');
     __check('fresh image upload stores fileName on the annotation (source guard)', () => {
       const S = window.__appSrc;
       if (S.indexOf("list.push({ type: 'image', dataUrl: durl, x: 0.12, y: 0.14, w: 0.28, aspect: aspect, fileName: file.name || '' });") < 0) throw new Error('fileName not captured on upload');
-      if (S.indexOf("a.dataUrl = durl; a.aspect = (im.naturalWidth || 1) / (im.naturalHeight || 1); a.zoom = 1; a.panX = 0; a.panY = 0; a.fileName = file.name || '';") < 0) throw new Error('fileName not captured on replace');
+      // Filling a SHAPE used to be written out longhand here and again in the gear
+      // popup's Replace... path, and only this copy recorded the name - so Caption
+      // source "Code" was permanently disabled on any image added from the popup.
+      // Both go through _dsSetShapeImage now, which always writes it; this asserts
+      // the behaviour rather than the line it used to be written on.
+      if (S.indexOf('a.fileName = (file && file.name)') < 0) throw new Error('the shared shape-image setter no longer records the file name');
+      // NL, not a backslash-n: these checks live in a template literal, which eats
+      // the escape and breaks the string across two lines.
+      const NL = String.fromCharCode(10);
+      ['_dsHandleImageFile', '_dsReadImageToShape'].forEach(fn => {
+        const at = S.indexOf(NL + 'function ' + fn + '(');
+        if (at < 0) throw new Error('no such function: ' + fn);
+        let end = S.length;
+        [NL + 'function ', NL + 'const ', NL + 'let '].forEach(c => { const k = S.indexOf(c, at + 1); if (k >= 0 && k < end) end = k; });
+        if (S.slice(at, end).indexOf('_dsSetShapeImage(') < 0) throw new Error(fn + ' fills a shape by hand again, so fileName can go missing on that path');
+      });
     });
 
     __check('DOM caption renders resolved (filename) text and disables edit-in-place', () => {

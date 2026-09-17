@@ -55,12 +55,23 @@ const path = require('path');
     });
 
     __check('every include row still has its checkbox, so removing the buttons cost no function', () => {
-      ['cover', 'timeline', 'understanding', 'narrative', 'strategy', 'moodboard',
-       'frameRec', 'floorplanKey', 'spec', 'slogan', 'contacts'].forEach(k => {
-        const cb = document.getElementById('specInc_' + k);
-        if (!cb) throw new Error('specInc_' + k + ' disappeared with the buttons');
-        if (cb.type !== 'checkbox') throw new Error('specInc_' + k + ' is no longer a checkbox');
+      // Derived from the ONE key list rather than written out again: this check
+      // used to carry its own copy, which is the drift DECK_INCLUDE_PAGES exists
+      // to end, and it is what made it fail when a key was intentionally dropped.
+      DECK_INCLUDE_PAGES.forEach(p => {
+        const cb = document.getElementById('specInc_' + p.key);
+        if (!cb) throw new Error('specInc_' + p.key + ' disappeared with the buttons');
+        if (cb.type !== 'checkbox') throw new Error('specInc_' + p.key + ' is no longer a checkbox');
       });
+    });
+
+    __check('the dead Layout pages checkbox stays gone (removed 17.16, read by nothing)', () => {
+      // It was in the markup and in applySpecPdfModal's include object, and NO
+      // code read it — ticking it did nothing at all. Layout pages are inserted
+      // between pages in the Pages tab or dropped in from Templates, so a
+      // deck-wide include switch was never how they were managed.
+      if (document.getElementById('specInc_moodboard')) throw new Error('the Layout pages checkbox is back, and still nothing reads it');
+      if (DECK_INCLUDE_PAGES.some(p => p.key === 'moodboard')) throw new Error('moodboard is back in the key list');
     });
 
     __check('nothing in the markup calls openFixedPageEditor any more', () => {

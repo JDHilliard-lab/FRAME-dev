@@ -74,7 +74,6 @@ const fs = require('fs');
     });
 
     __check('spec page overlay lights up from the Guides-menu deck show flag alone', () => {
-      _dsShowGuides = false;
       editorialContent.guidePref = { setId: 'g_idml12', show: true, snapMode: 'guides' };
       editorialContent.pageGuides = {};
       const page = document.createElement('div'); document.body.appendChild(page);
@@ -83,7 +82,6 @@ const fs = require('fs');
     });
 
     __check('grid-only lights the overlay on any page kind', () => {
-      _dsShowGuides = false;
       editorialContent.guidePref = { setId: 'g_idml12', show: false, grid: true, gridSize: 20, snapMode: 'off' };
       editorialContent.pageGuides = {};
       const page = document.createElement('div'); document.body.appendChild(page);
@@ -96,7 +94,6 @@ const fs = require('fs');
     });
 
     __check('both switches off, no grid: overlay paints nothing', () => {
-      _dsShowGuides = false;
       editorialContent.guidePref = { setId: 'g_idml12', show: false, grid: false, snapMode: 'guides' };
       editorialContent.pageGuides = {};
       const page = document.createElement('div'); document.body.appendChild(page);
@@ -104,18 +101,22 @@ const fs = require('fs');
       if (page.children.length) throw new Error('painted with everything off');
     });
 
-    __check('settings toggle still works on its own (regression)', () => {
-      _dsShowGuides = true;
-      editorialContent.guidePref = { setId: 'g_idml12', show: false, grid: false, snapMode: 'guides' };
+    // REPLACED 17.21. This used to assert that the page-settings gear's own toggle
+    // painted guides on its own, with the deck setting OFF — which is exactly the
+    // two-independent-switches behaviour that was removed. The gear flag was a module
+    // boolean OR-ed into the paint call, so it and the Guides menu's persisted 'Show
+    // guides' disagreed by construction: switching one on left the other reading off.
+    // The assertion is kept, repointed at the one switch that remains.
+    __check('there is exactly ONE guide switch, and it paints', () => {
+      if (typeof _dsShowGuides !== 'undefined') throw new Error('the second guide flag is back');
+      editorialContent.guidePref = { setId: 'g_idml12', show: true, grid: false, snapMode: 'guides' };
       editorialContent.pageGuides = {};
       const page = document.createElement('div'); document.body.appendChild(page);
       _dsAddGuides(page, 936, 540);
-      if (!page.querySelector('._mbGuideLine')) throw new Error('settings toggle no longer paints');
-      _dsShowGuides = false;
+      if (!page.querySelector('._mbGuideLine')) throw new Error('the deck-wide guide toggle no longer paints');
     });
 
     __check('floorplan page key resolves guides too (kind floorplan)', () => {
-      _dsShowGuides = false;
       _dsPages = [{ kind: 'floorplan', level: 0 }];
       _dsIndex = 0;
       floorplanLevels = [{ name: 'Level 1', imageData: '' }];

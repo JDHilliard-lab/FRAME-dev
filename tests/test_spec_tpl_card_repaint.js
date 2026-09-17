@@ -87,44 +87,82 @@ const path = require('path');
     });
 
     // ── The reported sequence ───────────────────────────────────────────────
-    __check('EXACT BUG: toggling Per piece <-> Group A/B/C keeps the demos on the cards', () => {
-      // First open: cold cache, so nothing is painted yet — the async pump has not
-      // run. Warm every card the way a completed render would.
-      __seed('setRight');
-      const first = __thumbs();
-      if (first.length !== 4) throw new Error('expected four Group A/B/C cards, got ' + first.length);
-      ['setRight', 'setRow', 'setScale', 'setLegend'].forEach(k => { _dsTplSwatchCache[_dsTplSwatchKey(k)] = FAKE; });
-      // Now do what the user did: Per piece, then back to Group A/B/C.
-      const per = __modeBtn('Per piece');
-      if (!per) throw new Error('no Per piece button');
+    // Both picker grids are gone: the per-piece one and the group one, each replaced
+    // by SHOW ON PAGE ticks. The toggle is still driven, because a panel that came
+    // back EMPTY would look exactly like the repaint bug this file was written for.
+    __check('EXACT BUG: toggling Per piece <-> Group A/B/C leaves both panels usable', () => {
+      __seed('setLegend');
+      const txtNow = () => (document.getElementById('dsToolsPageBody') || {}).textContent || '';
+      if (txtNow().indexOf('SHOW ON PAGE') < 0) throw new Error('the group panel has no ticks');
+      if (__thumbs().length) throw new Error('template cards are back on the group panel');
+      const per = __modeBtn('Per piece'); if (!per) throw new Error('no Per piece button');
       per.onclick();
-      const back = __modeBtn('Group A/B/C');
-      if (!back) throw new Error('no Group A/B/C button after switching away');
+      if (txtNow().indexOf('SHOW ON PAGE') < 0) throw new Error('the per-piece panel came back empty');
+      const back = __modeBtn('Group A/B/C'); if (!back) throw new Error('no Group A/B/C button');
       back.onclick();
-      const n = __painted(), total = __thumbs().length;
-      if (total !== 4) throw new Error('expected four cards after toggling back, got ' + total);
-      if (n !== 4) throw new Error('THE BUG: only ' + n + ' of 4 cards kept its demo after the toggle');
+      if (txtNow().indexOf('SHOW ON PAGE') < 0) throw new Error('the group panel came back empty');
+      if (__thumbs().length) throw new Error('template cards came back after the toggle');
     });
 
-    __check('the per-piece cards survive the same toggle', () => {
-      __seed('classic');
-      const keys = Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group && k !== 'installGuide');
-      keys.forEach(k => { _dsTplSwatchCache[_dsTplSwatchKey(k)] = FAKE; });
+    // The per-piece side of this toggle no longer HAS cards: the SHOW ON PAGE ticks
+    // are the control there, so the demos that could blank are the group ones alone
+    // (covered by the check above). What this pins now is that the per-piece panel
+    // comes back as TICKS and not as a grid - the toggle is still driven, because a
+    // panel that returned empty on the way back would look identical to the bug.
+    __check('the per-piece panel comes back as ticks, with no cards to switch between', () => {
+      __seed('frameSpecDetail');
       const grp = __modeBtn('Group A/B/C'); if (!grp) throw new Error('no Group A/B/C button');
       grp.onclick();
       const per = __modeBtn('Per piece'); if (!per) throw new Error('no Per piece button');
       per.onclick();
-      const total = __thumbs().length, n = __painted();
-      if (!total) throw new Error('no per-piece cards rendered');
-      if (n !== total) throw new Error('THE BUG: only ' + n + ' of ' + total + ' per-piece cards kept its demo');
+      if (__thumbs().length) throw new Error(__thumbs().length + ' template cards are back on the per-piece panel');
+      if (((document.getElementById('dsToolsPageBody') || {}).textContent || '').indexOf('Click to switch') >= 0) throw new Error('the Click to switch prompt is back');
+      const txt = (document.getElementById('dsToolsPageBody') || {}).textContent || '';
+      if (txt.indexOf('SHOW ON PAGE') < 0) throw new Error('the per-piece panel came back empty: no ticks and no cards');
+      ['FRAME CORNER', 'MOULDING PROFILE', 'FLOORPLAN', 'ELEVATION'].forEach(n => {
+        if (txt.toUpperCase().indexOf(n) < 0) throw new Error('the ' + n + ' tick did not come back');
+      });
     });
 
-    __check('re-rendering the panel on the spot does not blank them either', () => {
-      __seed('setRight');
-      ['setRight', 'setRow', 'setScale', 'setLegend'].forEach(k => { _dsTplSwatchCache[_dsTplSwatchKey(k)] = FAKE; });
+    // There is ONE per-piece layout now, so the old per-piece templates resolve onto
+    // it and every one of them draws the ticks. The page that CANNOT is the freeform
+    // one, and it gets a sentence rather than an empty section - an empty panel reads
+    // as broken, which is exactly what removing the layout buttons risked.
+    __check('every per-piece layout shows the ticks, and a free layout says why it cannot', () => {
+      ['classic', 'frameRight', 'frameSpecDetail'].forEach(k => {
+        __seed(k);
+        const txt = (document.getElementById('dsToolsPageBody') || {}).textContent || '';
+        if (txt.indexOf('SHOW ON PAGE') < 0) throw new Error(k + ' has no ticks, so its panel has no control at all');
+        if (txt.indexOf('OTHER LAYOUTS') >= 0) throw new Error(k + ' still offers other layouts');
+        if (document.querySelectorAll('#dsToolsPageBody button[data-tpl]').length) throw new Error(k + ' still has layout switch buttons');
+      });
+      __seed('custom');
+      const ct = (document.getElementById('dsToolsPageBody') || {}).textContent || '';
+      if (ct.indexOf('SHOW ON PAGE') >= 0) throw new Error('a free layout is offered ticks that would do nothing');
+      if (ct.indexOf('free layout') < 0) throw new Error('a free layout gets an empty section with no explanation');
+    });
+
+    __check('the group panel writes into the GROUP map, not the per-piece one', () => {
+      // They default differently - a group page's wall thumbnail was off - so a panel
+      // wired to the wrong map silently moves the other page kind instead.
+      __seed('setLegend');
+      editorialContent.specSlots = { frame: true, profile: true, plan: true, elevation: true };
+      editorialContent.specGroupSlots = { frame: true, profile: true, plan: true, elevation: true };
+      editorialContent.specSlotOverrides = {}; editorialContent.specGroupSlotOverrides = {};
+      _dsRenderTools();
+      const cb = document.querySelector('#dsToolsPageBody input[type=checkbox][data-slot=plan]');
+      if (!cb) throw new Error('the group panel has no Floorplan tick');
+      cb.checked = false; cb.onchange();
+      if (_specGroupSlots(null).plan !== false) throw new Error('the group tick did not take');
+      if (_specSlots(null).plan !== true) throw new Error('the group panel wrote into the per-piece map');
+    });
+
+    __check('re-rendering the group panel on the spot does not blank it either', () => {
+      __seed('setLegend');
       for (let i = 0; i < 3; i++) {
         _dsRenderTools();
-        if (__painted() !== 4) throw new Error('pass ' + i + ': only ' + __painted() + ' of 4 painted');
+        const txt = (document.getElementById('dsToolsPageBody') || {}).textContent || '';
+        if (txt.indexOf('SHOW ON PAGE') < 0) throw new Error('pass ' + i + ': the group ticks vanished');
       }
     });
 

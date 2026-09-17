@@ -115,8 +115,10 @@ const fs = require('fs');
     });
 
     __check('_dsAddGuides paints the set on preview pages and skips the editable canvas', () => {
-      _dsShowGuides = true;
-      editorialContent.guidePref = { setId: 'g_idml12', show: false, snapMode: 'guides' };
+      // UPDATED 17.21: driven by the deck-wide switch. This used to set
+      // _dsShowGuides, the page-settings gear's own module flag, which was a second
+      // guide toggle OR-ed into the paint call and has been removed.
+      editorialContent.guidePref = { setId: 'g_idml12', show: true, snapMode: 'guides' };
       editorialContent.pageGuides = {};
       const page = document.createElement('div');
       document.body.appendChild(page);
@@ -128,7 +130,6 @@ const fs = require('fs');
       _dsAddGuides(page2, 936, 540);
       if (page2.querySelector('._mbGuideLine')) throw new Error('double-painted over the editable canvas');
       lc.remove();
-      _dsShowGuides = false;
     });
 
     __check('_guideLines still feeds snapping identically (regression)', () => {

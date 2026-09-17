@@ -625,8 +625,12 @@ const path = require('path');
       if (!T) throw new Error('egdDetail is not registered');
       if (!T.flat) throw new Error('egdDetail is not marked flat, so _specTplResolve cannot find it');
       if (!T.help || T.help.length < 40) throw new Error('no help text');
-      const i = S.indexOf("k !== 'installGuide' && !SPEC_TEMPLATES[k].flat");
-      if (i < 0) throw new Error('the per-piece picker grid still offers the flat layout');
+      // There is no per-piece layout PICKER of any kind now: one layout, driven by the
+      // SHOW ON PAGE ticks. So a flat sheet's layout cannot be offered because nothing
+      // is offered - assert that construction rather than reading a list that is gone.
+      const panel = S.indexOf('THE LAYOUT BUTTONS ARE GONE TOO');
+      if (panel < 0) throw new Error('the per-piece layout buttons are back');
+      if (S.indexOf('dataset.tpl') >= 0) throw new Error('something still builds a per-piece layout switch');
     });
 
     __check('both render paths draw the flat sheet, and neither falls through to a framed one', () => {
@@ -885,23 +889,26 @@ const path = require('path');
     // ── The sheet's elevation is bottom-right anchored and as large as it fits ──
     __check('EXACT ASK: a flat page does not offer the framed spec templates', () => {
       // _specTplResolve returns egdDetail for a wallcovering or window film ahead of
-      // everything, so every card in that grid is a layout the page cannot take —
-      // clicking one looks like it did nothing. A one-card grid would be the same
-      // non-choice with more furniture, so the section states what the sheet does.
+      // everything, so every tick and every layout button in that panel is something
+      // the page cannot take - using one looks like it did nothing. The section states
+      // what the sheet does instead.
       const i = S.indexOf("_dsSection(t, 'Spec template', 'spectpl', true)");
       if (i < 0) throw new Error('the spec template section is gone');
-      // Widened from 1600 in 16.90: the flat branch gained the Print Output control, which
-      // pushed the card append outside the window and read as the gate having moved. The
-      // window has to cover both landmarks it compares, not a guess at the distance.
-      const body = S.slice(i, i + 4000);
+      // BETWEEN LANDMARKS, not a character distance. This was S.slice(i, i + 4000) and
+      // it had already been widened once from 1600; removing the picture grid grew the
+      // comments above the branch and pushed the append back outside the window, which
+      // reads as the gate having moved when nothing had.
+      const _end = S.indexOf('// Text styles now live in each text box', i);
+      if (_end < 0) throw new Error('the end landmark for the per-piece branch is gone');
+      const body = S.slice(i, _end);
       if (body.indexOf('_isFlatGraphic(desc.row.product)') < 0) throw new Error('the picker does not check for a flat row');
-      // The bail must come BEFORE the cards are appended, or they show anyway.
+      // The bail must come BEFORE any layout control is appended, or they show anyway.
       const gate = body.indexOf('if (_flatPage)');
-      const cards = body.indexOf('tplBody.appendChild(cardsWrap)');
+      const cards = body.indexOf('_dsSpecSlotsInto(tplBody, desc, ovKey)');
       if (gate < 0 || cards < 0 || gate > cards) throw new Error('the framed cards are still appended for a flat page');
-      // And the grid itself still excludes flat templates for FRAMED pages, so the
-      // two halves of this can't both be dropped and leave a mixed picker.
-      if (S.indexOf('!SPEC_TEMPLATES[k].flat') < 0) throw new Error('the framed grid no longer excludes flat templates');
+      // And a flat page never reaches the ticks either: the bail above returns first,
+      // so the sheet's own note is the only thing in the section.
+      if (body.indexOf('egdDetail') >= 0 && body.indexOf('_specTplSlotAware') < 0) throw new Error('the per-piece branch lost its layout guard');
     });
 
     __check('EXACT ASK: the sheet elevation anchors bottom-right and scales up', () => {
@@ -976,7 +983,11 @@ const path = require('path');
       // Top clears the title band, so a long heading can never overlap the drawing.
       if (body.indexOf('(titleY + 26)') < 0) throw new Error('the top edge is not tied to the title baseline');
       // In row mode it starts under the TALLEST spec column, so no block can overlap it.
-      if (body.indexOf('Math.max.apply(null, _colBot.concat([titleY + 40])) + 14') < 0) throw new Error('the row-mode top does not clear the spec band');
+      if (body.indexOf('Math.max.apply(null, _colBot.concat([B.body +') < 0) throw new Error('the row-mode top does not clear the spec band');
+      if (body.indexOf('B.body + _subtitleClear()') < 0) throw new Error('the spec column does not clear the subheading that prints above it');
+      // B.body is the SECOND title guide (17.40): the spec column starts below the
+      // heading band rather than at a fixed offset from the title baseline.
+      if (body.indexOf('titleY + 40') >= 0) throw new Error('the spec band is measured off the title baseline again, not off the title guides');
       // The floorplan is ALWAYS bottom-left. 16.61 moved it into the top band to free a
       // full-width strip, which read as the plan floating mid-sheet.
       // 16.69: bottom-aligned from its DRAWN height, not its slot. A plan crop wider

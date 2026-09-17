@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.14';
+const APP_VERSION = '17.58';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -276,6 +276,26 @@ function _frameSwatchList() {
 // goes through _frameSwatchesInto and comes out looking like every other swatch
 // strip. No hues, and no pure white: a white figure is an invisible one, and the
 // lightest step here is already faint on a white page.
+// THE INKS THIS PRESENTATION ACTUALLY SETS TYPE IN, white to black. Not an
+// invented ramp: six of these ten ARE the studio defaults (#141414 titles,
+// #6e6e6e subheadings, #9c9c9c captions and image codes, #8a8a8a thumbnail
+// captions, #222222 body, plus white for type on a dark page), so the dot under
+// a designer's current colour is normally already lit. Ordered light to dark,
+// the way you read a tint chart, rather than the neutrals row's black-first.
+//
+// The ramp is greys, and the one hue beside it is RED, on its own row. Red is
+// what a note or a called-out line weight is set in, so it is a real ink in this
+// studio rather than a colour you might fancy — and it is the SAME red the
+// Accents family already offers (#e00000), so a red heading and a red annotation
+// line match exactly instead of being two reds nobody chose.
+//
+// Its own family row, not appended to the ramp: after #000000 an eleventh dot
+// reads as a darker step, and red is a departure from the ramp rather than the
+// end of it. Anything else that is an ink rather than a shade joins that row.
+const FRAME_TEXT_INKS = [
+    { name: 'Ink', colors: ['#ffffff', '#d8d8d8', '#b0b0b0', '#9c9c9c', '#8a8a8a', '#6e6e6e', '#4a4a4a', '#222222', '#141414', '#000000'] },
+    { name: 'Note', colors: ['#e00000'] },
+];
 const FRAME_GREY_RAMP = [
     { name: 'Shade', colors: ['#000000', '#333333', '#666666', '#8c8c8c', '#adadad', '#cccccc'] },
 ];
@@ -297,6 +317,100 @@ const FRAME_GREY_RAMP = [
 // Called AFTER the popup is built and appended, when getBoundingClientRect finally knows
 // the answer. A short popup keeps the position it was dragged to; only one that genuinely
 // runs off an edge is moved, and only by as much as it overhangs.
+// THE QUICK PICKS HANG OFF THE COLOUR DOT, not beside it. A ten-dot strip inline
+// under each style is four extra rows in the Type defaults column, which is the
+// panel that had just been compacted to stop it scrolling. On the dot it costs
+// nothing until asked for, and one implementation then covers every font colour
+// in the app rather than the two or three someone remembers to wire up.
+//
+// The native picker is not replaced, it moves INSIDE: Custom opens it, so the
+// full range is still one click away and the input keeps being a real
+// <input type="color"> that existing handlers and tests address.
+function _dsCloseInkPopover() {
+    const p = document.getElementById('dsInkPopover');
+    if (p && p.parentNode) p.parentNode.removeChild(p);
+    if (_dsInkAway) { document.removeEventListener('mousedown', _dsInkAway, true); _dsInkAway = null; }
+}
+let _dsInkAway = null;
+function _dsOpenInkPopover(anchor, current, onPick) {
+    _dsCloseInkPopover();
+    const pop = document.createElement('div');
+    pop.id = 'dsInkPopover';
+    pop.style.cssText = 'position:fixed; z-index:var(--z-modal-nested); background:var(--bg-panel);'
+        + ' border:1px solid var(--border-color); border-radius:var(--r-6); box-shadow:0 8px 26px rgba(0,0,0,0.45); padding:7px;';
+    pop.onmousedown = (e) => { e.stopPropagation(); };
+    const strip = document.createElement('div');
+    pop.appendChild(strip);
+    _frameSwatchesInto(strip, current, (hex) => { onPick(hex); _dsCloseInkPopover(); }, { families: FRAME_TEXT_INKS, size: 15, nearest: true });
+    const custom = document.createElement('button');
+    custom.textContent = 'Custom…';
+    custom.className = 'action-btn btn-secondary';
+    custom.title = 'Any colour, from the system picker';
+    custom.style.cssText = 'width:100%; height:22px; font-size:var(--fs-60); padding:0 6px; margin-top:2px;';
+    custom.onclick = () => { _dsCloseInkPopover(); try { anchor._inkNative = true; anchor.click(); } catch (e) {} };
+    pop.appendChild(custom);
+    // Left-aligned under the control it belongs to, like the heading popup.
+    let r = { left: 200, bottom: 120 };
+    try { r = anchor.getBoundingClientRect(); } catch (e) {}
+    pop.style.left = Math.round(r.left) + 'px';
+    pop.style.top = Math.round(r.bottom + 5) + 'px';
+    document.body.appendChild(pop);
+    _dsClampPopup(pop);
+    // Anything outside closes it. Captured, so a control underneath still gets
+    // the click that dismissed this.
+    _dsInkAway = (e) => { if (!pop.contains(e.target) && e.target !== anchor) _dsCloseInkPopover(); };
+    setTimeout(() => { if (_dsInkAway) document.addEventListener('mousedown', _dsInkAway, true); }, 0);
+    return pop;
+}
+// Turn an <input type="color"> into a quick-pick. The element stays an input, so
+// its `value` and `oninput` keep working for every existing caller; only the
+// gesture that opens the system picker moves behind Custom.
+function _dsInkQuickPicks(input, onPick) {
+    if (!input) return input;
+    input.dataset.inkQuick = '1';
+    input.onmousedown = (e) => {
+        e.preventDefault();
+        _dsOpenInkPopover(input, input.value, (hex) => {
+            input.value = hex;
+            onPick(hex);
+        });
+    };
+    // THE CLICK HAS TO BE CANCELLED TOO. A colour input opens its system dialog
+    // as the DEFAULT ACTION OF THE CLICK, not of the mousedown, so cancelling
+    // only the mousedown showed the picks while the button was held and then let
+    // the RGB dialog take the screen on release — reported as “a flash of the grey
+    // colour choices and then it opens the RGB picker”.
+    //
+    // Custom… is the one click that IS meant to open it, and it gets through by
+    // raising this flag before calling .click(). A flag rather than unbinding and
+    // rebinding the handler, which would leave the input bare if the dialog were
+    // dismissed without a choice.
+    input.onclick = (e) => {
+        if (input._inkNative) { input._inkNative = false; return; }
+        e.preventDefault();
+        e.stopPropagation();
+    };
+    return input;
+}
+// THE SAME STRIP, LAID INTO A PANEL rather than hung off the dot. On the dot it
+// costs no height until asked for, which is right in the Type defaults column;
+// inside a popup that is already open it is wrong twice over — a second floating
+// thing over the first, and a gesture that fights the input it hangs off.
+//
+// One renderer either way: the dots, their size, the nearest-match ring and the
+// palette are all _frameSwatchesInto with FRAME_TEXT_INKS, so a colour picked
+// from a panel and one picked from a popover cannot come out different.
+function _dsInkStripInto(host, current, onPick, label) {
+    if (!host) return host;
+    const lbl = document.createElement('div');
+    lbl.textContent = label || 'COLOUR';
+    lbl.style.cssText = 'font-size:var(--fs-55); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 3px;';
+    host.appendChild(lbl);
+    const strip = document.createElement('div');
+    host.appendChild(strip);
+    _frameSwatchesInto(strip, current, onPick, { families: FRAME_TEXT_INKS, size: 15, nearest: true });
+    return host;
+}
 function _dsClampPopup(pop) {
     if (!pop) return;
     try {
@@ -316,7 +430,34 @@ function _frameSwatchesInto(host, current, onPick, opts) {
     const size = o.size || 18;
     const cur = ('' + (current || '')).toLowerCase();
     host.innerHTML = '';
-    (o.families || FRAME_SWATCH_FAMILIES).forEach(fam => {
+    const FAMS = o.families || FRAME_SWATCH_FAMILIES;
+    // A project carrying a colour that is close to the strip but not on it
+    // (#1a1a1a beside #141414) would otherwise light NOTHING and read as
+    // “no colour selected”. Same fix _personShadeNearestHex made for the
+    // scale figure, and opt-in so the exact-match strips are unaffected.
+    //
+    // Resolved across EVERY family, never within each one. Per-family it picks a
+    // winner per ROW, so the moment a second family exists — the red note ink
+    // beside the grey ramp — a black heading lights the black dot AND the red one,
+    // and the strip claims two colours are selected at once.
+    let near = null;
+    if (o.nearest && cur) {
+        const all = [];
+        FAMS.forEach(f => f.colors.forEach(h => { const x = ('' + h).toLowerCase(); if (all.indexOf(x) < 0) all.push(x); }));
+        if (all.indexOf(cur) < 0) {
+            const v = (h) => { const m = ('' + h).replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
+            let best = Infinity;
+            try {
+                const c0 = v(cur);
+                all.forEach(hex => {
+                    const c1 = v(hex);
+                    const d = Math.pow(c0[0] - c1[0], 2) + Math.pow(c0[1] - c1[1], 2) + Math.pow(c0[2] - c1[2], 2);
+                    if (d < best) { best = d; near = hex; }
+                });
+            } catch (e) { near = null; }
+        }
+    }
+    FAMS.forEach(fam => {
         const row = document.createElement('div');
         row.style.cssText = 'display:flex; align-items:center; gap:4px; flex-wrap:wrap; margin-bottom:4px;';
         if (o.showNames) {
@@ -327,7 +468,9 @@ function _frameSwatchesInto(host, current, onPick, opts) {
         fam.colors.forEach(hex => {
             const b = document.createElement('button');
             b.type = 'button'; b.title = fam.name + ' ' + hex;
-            const on = cur === hex.toLowerCase();
+            const exact = cur === hex.toLowerCase();
+            const on = exact || (near === hex.toLowerCase());
+            if (on && !exact) b.dataset.nearest = '1';
             b.style.cssText = 'width:' + size + 'px; height:' + size + 'px; min-width:' + size + 'px; padding:0; border-radius:50%; cursor:pointer; background:' + hex +
                 '; border:2px solid ' + (on ? 'var(--ui-active)' : (hex === '#ffffff' ? '#999' : 'var(--border-color)')) + ';';
             b.onclick = () => onPick(hex);
@@ -815,6 +958,36 @@ function _fpFindGroup(key) { return _fpGroups().find(g => g.key === key); }
 // _editorialDefaults() the load/undo paths merge onto — one definition of what
 // a fresh deck contains, instead of a second literal that drifts from it.
 // Safe at this point in the file because function declarations hoist.
+// HEADING AND SUBHEADING TYPE, in one place, matching the InDesign master the
+// layout templates were drawn from: its heading is 0.06 of a 540pt page (32.4pt)
+// and its subheading 0.0408 (22pt), both Druk. The heading is a dial (Type
+// defaults → Titles); the subheading follows it and has no separate control,
+// because two dials for one relationship is how a deck ends up with a 32pt
+// heading over a 10pt subhead on one page and not on the next.
+//
+// ABOVE `let editorialContent = _editorialDefaults()`, and that placement is
+// load-bearing: that line RUNS at module scope, so a const declared further
+// down is read before it is initialised and the file dies on boot with
+// "Cannot access TITLE_SIZE_DEFAULT before initialization". Same trap that made
+// _specCodeStyleDefault a function; a plain number just needs to be declared
+// first.
+const TITLE_SIZE_DEFAULT = 32;
+// The old default, and the value every project saved before 17.41 carries. It is
+// migrated ONCE, so setting 22 back by hand sticks.
+const TITLE_SIZE_LEGACY = 22;
+const PAGE_SUBTITLE_FONT = 'display';
+const PAGE_SUBTITLE_SIZE = 22;
+const PAGE_SUBTITLE_INK = '#6e6e6e';
+// What a page's first row has to clear below the subheading's BASELINE: its
+// descenders (~0.22em) plus a line gap. A FUNCTION, not a constant, because the
+// subheading is settable per deck and per page now — a fixed number computed
+// from the default would let a 40pt subhead print straight through the first row
+// of whatever sits under it.
+function _subtitleClear() {
+    let sz = PAGE_SUBTITLE_SIZE;
+    try { sz = _subtitleStyleFor().size || sz; } catch (e) {}
+    return Math.round(sz * 0.22) + 8;
+}
 let editorialContent = _editorialDefaults();
 // Normalize an older / hand-edited project on load. The main hazard is a unit
 // mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
@@ -840,7 +1013,16 @@ function _migrateLoadedProject(data) {
     return data;
 }
 
-function _editorialDefaults() { return Object.assign({ narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameRight', specTemplateOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: { font: 'display', size: 16, color: '#141414' }, paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: 22, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, specDualUnit: '', elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }, _starterDeck()); }
+// THE caption / image-code default: Messina 9pt grey, the studio standard, and the
+// one definition of it. _editorialDefaults(), the load migration and _specCodeStyle()
+// all read this — they each carried their own copy before and two of the three said
+// Druk 16 near-black, so the seed always won and the real default was unreachable.
+//
+// A FUNCTION, not a shared object, for the reason _starterDeck() is one: Object.assign
+// copies the reference, so a shared literal would let one project's caption edits reach
+// another's.
+function _specCodeStyleDefault() { return { font: 'serif', size: 9, color: '#9c9c9c' }; }
+function _editorialDefaults() { return Object.assign({ narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameSpecDetail', specTemplateOverrides: {}, specSlots: { frame: true, profile: true, plan: true, elevation: true }, specSlotOverrides: {}, specGroupSlots: { frame: true, profile: true, plan: true, elevation: true }, specGroupSlotOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: _specCodeStyleDefault(), paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: TITLE_SIZE_DEFAULT, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, specDualUnit: '', elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }, _starterDeck()); }
 
 // ── Starter deck ──────────────────────────────────────────────────────────
 // What a brand-new project opens with. Lifted verbatim from the studio's own
@@ -981,15 +1163,54 @@ function _mbMigratePages() {
     // an old project that already chose it should keep rendering that way, not
     // get silently migrated. Anything genuinely missing/invalid falls back to
     // the current default template.
-    if (typeof ec.specTemplate !== 'string' || !(SPEC_TEMPLATES[ec.specTemplate] || ec.specTemplate === 'classic')) ec.specTemplate = 'frameRight';
+    if (typeof ec.specTemplate !== 'string' || !(SPEC_TEMPLATES[ec.specTemplate] || ec.specTemplate === 'classic')) ec.specTemplate = 'frameSpecDetail';
     if (!ec.specTemplateOverrides || typeof ec.specTemplateOverrides !== 'object') ec.specTemplateOverrides = {};
+    // SEEDED FROM THE TEMPLATE THE DECK IS ALREADY ON, once, and keyed on the field
+    // being ABSENT rather than on a version counter. A deck laid out on
+    // artSpecDetail chose “no frame thumbnails”; defaulting its ticks to all-on
+    // would put a corner sample and a profile on every page of a project already
+    // sent to a client. A deck that has ticks keeps them, including any a designer
+    // has deliberately turned back on.
+    if (!ec.specSlots || typeof ec.specSlots !== 'object') {
+        ec.specSlots = Object.assign({}, SPEC_SLOT_DEFAULT, _specSlotSeedFor(ec.specTemplate));
+    }
+    if (!ec.specSlotOverrides || typeof ec.specSlotOverrides !== 'object') {
+        // Per-PAGE template overrides carry the same choice and have to be seeded
+        // with it, or a single page pinned to artSpecDetail inside a frameSpecDetail
+        // deck grows the strip it was pinned to avoid.
+        const m = {};
+        const tov = ec.specTemplateOverrides || {};
+        Object.keys(tov).forEach(k => {
+            const seed = _specSlotSeedFor(tov[k]);
+            if (Object.keys(seed).length) m[k] = seed;
+        });
+        ec.specSlotOverrides = m;
+    }
+    SPEC_SLOT_KEYS.forEach(k => { if (typeof ec.specSlots[k] !== 'boolean') ec.specSlots[k] = SPEC_SLOT_DEFAULT[k]; });
+    // The group map is seeded from what a group page ALREADY draws: the wall
+    // thumbnail is `scaleOpts.elevThumb` (off by default), the frame corner and
+    // moulding profile print under the shared specs when there is room, and there has
+    // never been a floorplan on one. Anything else would change every group page in
+    // every deck in flight.
+    if (!ec.specGroupSlots || typeof ec.specGroupSlots !== 'object') {
+        const so = ec.scaleOpts || {};
+        ec.specGroupSlots = { frame: true, profile: true, plan: false, elevation: !!so.elevThumb };
+    }
+    if (!ec.specGroupSlotOverrides || typeof ec.specGroupSlotOverrides !== 'object') ec.specGroupSlotOverrides = {};
+    SPEC_SLOT_KEYS.forEach(k => { if (typeof ec.specGroupSlots[k] !== 'boolean') ec.specGroupSlots[k] = SPEC_SLOT_DEFAULT[k]; });
     if (typeof ec.approvedStamp !== 'boolean') ec.approvedStamp = false;
     if (!ec.approvedPages || typeof ec.approvedPages !== 'object') ec.approvedPages = {};
     if (!ec.approvalStatus || typeof ec.approvalStatus !== 'object') ec.approvalStatus = {};
     Object.keys(ec.approvedPages).forEach(k => { if (ec.approvedPages[k] && !ec.approvalStatus[k]) ec.approvalStatus[k] = 'approved'; });
-    if (!ec.specCodeStyle || typeof ec.specCodeStyle !== 'object') ec.specCodeStyle = { font: 'display', size: 16, color: '#141414' };
+    if (!ec.specCodeStyle || typeof ec.specCodeStyle !== 'object') ec.specCodeStyle = _specCodeStyleDefault();
     if (!ec.paragraphStyle || typeof ec.paragraphStyle !== 'object') ec.paragraphStyle = { font: 'sans', size: 16, color: '#222222' };
-    if (!ec.titleStyle || typeof ec.titleStyle !== 'object') ec.titleStyle = { font: 'display', size: 22, color: '#141414' };
+    if (!ec.titleStyle || typeof ec.titleStyle !== 'object') ec.titleStyle = { font: 'display', size: TITLE_SIZE_DEFAULT, color: '#141414' };
+    if (ec.subtitleStyle && typeof ec.subtitleStyle !== 'object') delete ec.subtitleStyle;
+    if (ec.pageTitleStyle && typeof ec.pageTitleStyle !== 'object') delete ec.pageTitleStyle;
+    if (ec.typeDefaultsV !== 2) {
+        if (ec.titleStyle && ec.titleStyle.size === TITLE_SIZE_LEGACY) ec.titleStyle.size = TITLE_SIZE_DEFAULT;
+        ec.typeDefaultsV = 2;
+    }
     if (typeof ec.wireframe !== 'boolean') ec.wireframe = false;
     if (!ec.specArtOnly || typeof ec.specArtOnly !== 'object') ec.specArtOnly = {};
     if (!Array.isArray(ec.manualGroups)) ec.manualGroups = [];
@@ -1145,7 +1366,7 @@ function _mbThumbInner(page, wpx, hpx, pageKey) {
             // live/mirrored view.
             const _fs = Math.max(2, (t.size || 0.045) * hpx);
             const _lh = (typeof t.leading === 'number' && t.leading > 0) ? ((t.leading / 540) * hpx) / _fs : 1.15;
-            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + ((t.w || 0.3) * wpx) + 'px;font-size:' + _fs + 'px;line-height:' + _lh + ';color:' + _ink + ';overflow:hidden;white-space:pre-wrap;overflow-wrap:break-word;font-family:' + _fam + ';' + _extra + '">' + _mbRunsHtml(t, hpx, pageKey) + '</div>';
+            html += '<div style="position:absolute;left:' + ((t.x || 0) * wpx) + 'px;top:' + ((t.y || 0) * hpx) + 'px;width:' + ((t.w || 0.3) * wpx) + 'px;font-size:' + _fs + 'px;line-height:' + _lh + ';color:' + _ink + ';white-space:pre-wrap;overflow-wrap:break-word;font-family:' + _fam + ';' + _extra + '">' + _mbRunsHtml(t, hpx, pageKey) + '</div>';
         } else if (ty === 'arrow') {
             svg += '<line x1="' + ((t.x1 || 0) * wpx) + '" y1="' + ((t.y1 || 0) * hpx) + '" x2="' + ((t.x2 || 0) * wpx) + '" y2="' + ((t.y2 || 0) * hpx) + '" stroke="' + (t.color || '#9aa0a6') + '" stroke-width="' + Math.max(0.5, (t.weight || 1.2) * 0.6) + '"/>';
         } else if (ty === 'elbow' && Array.isArray(t.pts) && t.pts.length > 1) {
@@ -1204,7 +1425,7 @@ function _dsAnnotationsThumbHTML(list, wpx, hpx, pageKey) {
             const _extra = _mbThumbTextExtraCss(a, _ink, hpx);
             const _afs = Math.max(2, (a.size || 0.03) * hpx);
             const _alh = (typeof a.leading === 'number' && a.leading > 0) ? ((a.leading / 540) * hpx) / _afs : 1.15;
-            html += '<div style="position:absolute;left:' + ((a.x || 0) * wpx) + 'px;top:' + ((a.y || 0) * hpx) + 'px;width:' + ((a.w || 0.3) * wpx) + 'px;font-size:' + _afs + 'px;line-height:' + _alh + ';color:' + _ink + ';overflow:hidden;white-space:pre-wrap;overflow-wrap:break-word;font-family:' + _fam + ';' + _extra + '">' + _mbRunsHtml(a, hpx, pageKey) + '</div>';
+            html += '<div style="position:absolute;left:' + ((a.x || 0) * wpx) + 'px;top:' + ((a.y || 0) * hpx) + 'px;width:' + ((a.w || 0.3) * wpx) + 'px;font-size:' + _afs + 'px;line-height:' + _alh + ';color:' + _ink + ';white-space:pre-wrap;overflow-wrap:break-word;font-family:' + _fam + ';' + _extra + '">' + _mbRunsHtml(a, hpx, pageKey) + '</div>';
         } else if (a.type === 'arrow' || a.type === 'elbow' || a.type === 'curve') {
             const col = a.color || '#c0392b', wt = Math.max(0.5, (a.weight || 2) * 0.6);
             if (a.type === 'elbow' && Array.isArray(a.pts) && a.pts.length > 1) {
@@ -2153,6 +2374,7 @@ function restoreProjectState(snap) {
     if (typeof cloned.baseboardIn === 'number' && cloned.baseboardIn >= 0) elevBaseboardIn = cloned.baseboardIn;
     try { seedHangBaseboardInputs(); } catch (e) {}
     try { seedDeckPlanOrderInput(); } catch (e) {}
+    try { seedDeckIncludeInputs(); } catch (e) {}
     // Re-bind derived globals
     if (elevations[currentElevIndex]) {
         elevFrames = elevations[currentElevIndex].frames;
@@ -3543,6 +3765,7 @@ function initMasterApp() {
     loadDimSnapPref();     // restore dimension-drag snap preference
     seedHangBaseboardInputs(); // hang height + baseboard, derived from stored inches
     seedDeckPlanOrderInput();  // floorplan page order, a display of editorialContent.planOrder
+    _dsIncludeInit();          // include-page checkboxes: one delegated listener, then restore
     _initElevSidebarTab();     // Art / Context / Glass, restored from last session
     _applyPersonShade();   // figure shade: wall figure, Settings preview + swatches
 
@@ -4936,7 +5159,16 @@ function switchView(viewType, index = 0) {
         // that might never be opened. The rail build in front of this covers it (the
         // prewarm yields while _thumbBusy), and the cards paint their per-arrangement
         // diagram instantly either way, so there is nothing to watch.
-        setTimeout(() => { try { _dsPrewarmTplSwatches(); } catch (e) {} }, 250);
+        // THE PREWARM IS OFF: nothing paints template cards any more. Both picker
+        // grids are gone (the per-piece one and the group one, each replaced by SHOW
+        // ON PAGE ticks), so this was rendering seven real pages - measured ~4.5s of
+        // work - on every entry to the deck view to fill a cache no one reads.
+        //
+        // The RENDERER is deliberately still here and still tested: it is correct, and
+        // a picker may want it again. What is gone is paying for it on every visit.
+        // If nothing brings the cards back, _dsPrewarmTplSwatches, _dsQueueTplSwatch,
+        // _dsPaintTplSwatch, _dsTemplateSwatchHTML, _specTplDemo* and SPEC_TPL_DEMO_*
+        // are the block to remove together.
         return;
     }
 
@@ -5099,6 +5331,7 @@ function loadMasterProject(event) {
                 elevBaseboardIn = (isFinite(_bIn) && _bIn >= 0) ? _bIn : ELEV_STD_BASEBOARD_IN;
                 seedHangBaseboardInputs();
                 seedDeckPlanOrderInput();
+                seedDeckIncludeInputs();
                 if (data.globalMeta) {
                     const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; };
                     setVal('g_projName', data.globalMeta.projName); setVal('g_desc', data.globalMeta.desc); setVal('g_date', data.globalMeta.date);
@@ -11240,7 +11473,23 @@ const PDF_FONT_FACES = [
     { file: 'MessinaSerif-BoldItalic.ttf',    family: 'Messina', style: 'bolditalic' },
 ];
 let _pdfFontB64 = null;       // { filename: base64 } — fetched once per session
-let _pdfFontFams = {};        // { family: true } — what registered into the current doc
+// WHICH BRAND FACES HAVE BYTES, for the SESSION — not which ones a particular
+// jsPDF document has registered. Those are different questions, and `_font()` was
+// asking the wrong one.
+//
+// `display` and `sans` share the core name 'helvetica', so the answer is ambiguous
+// the moment it falls back: until some document registered Druk, `_font('display')`
+// returned 'helvetica', and CanvasPdfRec maps that to the SANS stack. Every heading
+// in the Deck Studio preview drew in Sans. Not a race — `_registerPdfFonts` is
+// called from the PDF export and nowhere else, so a session that never generated a
+// PDF never saw Druk in a preview at all. Reported as “it starts with Sans and then
+// switches to Druk... when I select Sans nothing happens”, which is exactly right:
+// Druk and Sans were rendering identically, and Messina worked only because its
+// core name ('times') happens to be unambiguous.
+//
+// Set from the BYTES loading, and never cleared: a document registering its own
+// copy must not blank the answer for a preview rendering beside it.
+let _pdfBrandFams = {};
 
 function _abToB64(buf) {
     let bin = ''; const bytes = new Uint8Array(buf); const chunk = 0x8000;
@@ -11252,13 +11501,17 @@ async function _loadPdfFontData() {
     if (_pdfFontB64) return _pdfFontB64;
     const files = Array.from(new Set(PDF_FONT_FACES.map(f => f.file)));
     const out = {};
-    for (const file of files) {
+    await Promise.all(files.map(async (file) => {
         try {
             const r = await fetch('fonts/' + file, { cache: 'force-cache' });
             if (!r.ok) throw new Error(r.status);
             out[file] = _abToB64(await r.arrayBuffer());
         } catch (e) { /* missing/failed font — fallback to Helvetica applies */ }
-    }
+    }));
+    // A family counts as available only once a real file for it arrived, so a
+    // missing TTF falls back to the core face in the preview AND the export
+    // rather than naming a font neither can draw.
+    PDF_FONT_FACES.forEach(f => { if (out[f.file]) _pdfBrandFams[f.family] = true; });
     _pdfFontB64 = out;
     return out;
 }
@@ -11283,22 +11536,27 @@ async function _loadEditorBrandFontsInner() {
         { file: 'MessinaSerif-RegularItalic.ttf', family: 'Messina', weight: '400', style: 'italic' },
         { file: 'MessinaSerif-BoldItalic.ttf',    family: 'Messina', weight: '700', style: 'italic' }
     ];
-    let added = 0;
-    for (const d of defs) {
+    // One face failing must not take the other five with it, so each settles on
+    // its own and the results are counted afterwards.
+    const loaded = await Promise.all(defs.map(async (d) => {
         try {
             const r = await fetch('fonts/' + d.file, { cache: 'force-cache' });
-            if (!r.ok) continue;
+            if (!r.ok) return false;
             const f = new FontFace(d.family, await r.arrayBuffer(), { weight: d.weight, style: d.style });
-            await f.load(); document.fonts.add(f); added++;
-        } catch (e) {}
-    }
+            await f.load(); document.fonts.add(f); return true;
+        } catch (e) { return false; }
+    }));
+    const added = loaded.filter(Boolean).length;
     if (added) {
         try { renderMoodboardCanvas(); } catch (e) {}
         try { if (typeof _dsRenderCenter === 'function' && document.getElementById('dsLayoutCanvas')) _dsRenderCenter(); } catch (e) {}
+        // The Project tab's page preview is canvas-drawn and caches nothing, so
+        // redrawing it is the whole fix; its own token guard drops the result if
+        // the designer has since clicked another tab.
+        try { if (typeof _dsRenderCoverPreview === 'function' && document.getElementById('dsProjCoverPrev')) _dsRenderCoverPreview(); } catch (e) {}
     }
 }
 async function _registerPdfFonts(doc) {
-    _pdfFontFams = {};
     const data = await _loadPdfFontData();
     PDF_FONT_FACES.forEach(face => {
         const b64 = data[face.file];
@@ -11306,7 +11564,6 @@ async function _registerPdfFonts(doc) {
         try {
             doc.addFileToVFS(face.file, b64);
             doc.addFont(face.file, face.family, face.style);
-            _pdfFontFams[face.family] = true;
         } catch (e) {}
     });
 }
@@ -11315,9 +11572,13 @@ async function _registerPdfFonts(doc) {
 // The spec label/value text (Application, Frame Size, Frame Code, etc.) can
 // use a different font than titles/captions — a deck-wide choice among the
 // fonts already embedded in every export, so it never fails to render.
+// Default MESSINA, matching the caption / image-code style and the rest of the
+// house serif. It was Sans, which meant a deck that never touched the setting
+// printed its spec list in the grotesque while the captions beside it were
+// Messina. A project that HAS set specFont is untouched.
 function _specFont() {
-    const f = (editorialContent && editorialContent.specFont) || 'sans';
-    return _fontEntry(f) ? f : 'sans';
+    const f = (editorialContent && editorialContent.specFont) || 'serif';
+    return _fontEntry(f) ? f : 'serif';
 }
 // Resolve a library token to a jsPDF font name: the embedded brand TTF when it
 // registered into this document, otherwise the token's built-in core face
@@ -11326,7 +11587,7 @@ function _font(role) {
     if (role === 'spec') role = _specFont();
     const e = _fontEntry(role) || _fontEntry(_fontToken(role, 'sans'));
     if (!e) return 'helvetica';
-    if (e.pdfEmbed && _pdfFontFams[e.pdfEmbed]) return e.pdfEmbed;
+    if (e.pdfEmbed && _pdfBrandFams[e.pdfEmbed]) return e.pdfEmbed;
     return e.pdfCore || 'helvetica';
 }
 
@@ -11401,6 +11662,177 @@ function _whiteLogo(dataUrl) {
 // ── Page theme system (light / dark / custom colour / background image) ──────
 // editorialContent.pageThemes[pageKey] = { mode:'light'|'dark', bg:'#hex'|null, image:dataUrl|null }
 // Light = dark ink on white. Dark = white ink on black/colour/image.
+// A page background can be a two-stop GRADIENT and a background image can carry a
+// TINT. Both have to survive into the PDF, and neither can be done natively there:
+// the vendored jsPDF has no gradient, and its GState whitelists only opacity, so a
+// blend mode would be screen-deep. Both are therefore RASTERISED through the same
+// canvas the background image already goes through (_applyPageTheme -> addImage), so
+// the real PDF, the CanvasPdfRec preview and the DOM editor all get them from one
+// path rather than three implementations that drift.
+//
+// THE ANGLE IS DEFINED ONCE, HERE, and both renderers derive from it. CSS's
+// linear-gradient measures 0deg as pointing UP and increases clockwise; canvas wants
+// two end points. Computing them separately is how a preview starts lying about the
+// export, so the CSS string and the canvas points come out of the same function.
+const THEME_GRAD_DEFAULT_ANGLE = 180;   // top to bottom, the one people expect
+function _themeGradAngle(st) {
+    const a = parseFloat(st && st.bgAngle);
+    return isFinite(a) ? (((a % 360) + 360) % 360) : THEME_GRAD_DEFAULT_ANGLE;
+}
+// A gradient is a LIST of stops, each with a position, not a pair. Two colours meeting
+// at the midpoint is one gradient out of many, and where a colour fades is most of what
+// makes a background look deliberate rather than default.
+//
+// `bg`/`bg2` are the shape this shipped as and are migrated ON READ, so a project saved
+// with the two-stop version opens unchanged and gains positions the moment it is edited.
+// `bg` also stays in sync with the first stop, because the flat-fill fallback and the
+// ink logic both read it.
+function _themeStops(st) {
+    if (!st) return null;
+    if (Array.isArray(st.bgStops) && st.bgStops.length >= 2) {
+        const out = [];
+        st.bgStops.forEach(x => {
+            if (!x || !x.c) return;
+            let p = parseFloat(x.p);
+            if (!isFinite(p)) p = 0;
+            out.push({ c: x.c, p: Math.max(0, Math.min(1, p)) });
+        });
+        if (out.length >= 2) return out.sort((a, b) => a.p - b.p);
+    }
+    if (st.bg && st.bg2) return [{ c: st.bg, p: 0 }, { c: st.bg2, p: 1 }];
+    return null;
+}
+function _themeSetStops(st, stops) {
+    if (!st) return;
+    const clean = (stops || []).filter(x => x && x.c)
+        .map(x => ({ c: x.c, p: Math.max(0, Math.min(1, isFinite(parseFloat(x.p)) ? parseFloat(x.p) : 0)) }))
+        .sort((a, b) => a.p - b.p);
+    if (clean.length < 2) { st.bgStops = null; st.bg2 = null; return; }
+    st.bgStops = clean;
+    // Keep the legacy pair pointing at the ends: the flat fallback reads bg, and an
+    // older build opening this file still finds a sensible two-stop gradient.
+    st.bg = clean[0].c;
+    st.bg2 = clean[clean.length - 1].c;
+}
+// Colour at a position along the ramp, for inserting a stop where you clicked without
+// changing what the gradient currently looks like.
+function _themeLerpHex(a, b, t) {
+    const A = _annHexToRgb(a), B = _annHexToRgb(b);
+    const f = (x, y) => { const n = Math.round(x + (y - x) * t); return (n < 16 ? '0' : '') + Math.max(0, Math.min(255, n)).toString(16); };
+    return '#' + f(A.r, B.r) + f(A.g, B.g) + f(A.b, B.b);
+}
+function _themeColorAt(stops, p) {
+    if (!stops || !stops.length) return '#ffffff';
+    if (p <= stops[0].p) return stops[0].c;
+    if (p >= stops[stops.length - 1].p) return stops[stops.length - 1].c;
+    for (let i = 1; i < stops.length; i++) {
+        if (p <= stops[i].p) {
+            const span = stops[i].p - stops[i - 1].p;
+            return _themeLerpHex(stops[i - 1].c, stops[i].c, span > 0 ? (p - stops[i - 1].p) / span : 0);
+        }
+    }
+    return stops[stops.length - 1].c;
+}
+function _themeHasGrad(st) { return !!_themeStops(st); }
+// THE ACTIVE LAYER IS ITS OWN FACT, separate from what each layer holds. Switching from
+// a gradient to an image used to mean throwing the gradient away, so trying the other
+// option cost you the one you had built. Each layer keeps its settings for this page
+// and `bgMode` says which one is showing; only the x clears anything.
+//
+// Derived when unset, so every project saved before this opens looking exactly as it
+// did: whatever the outermost layer with data was, that is what was being shown.
+function _themeBgMode(st) {
+    if (!st) return null;
+    const m = st.bgMode;
+    if (m === 'image' && st.image) return 'image';
+    if (m === 'gradient' && _themeStops(st)) return 'gradient';
+    if (m === 'colour' && st.bg) return 'colour';
+    if (st.image) return 'image';
+    if (_themeStops(st)) return 'gradient';
+    if (st.bg) return 'colour';
+    return null;
+}
+// A gradient that is set up AND showing. The renderers ask this; the panel asks
+// _themeHasGrad, because it still has to offer the layer that is merely waiting.
+function _themeGradOn(st) { return _themeBgMode(st) === 'gradient' && !!_themeStops(st); }
+function _themeImageOn(st) { return _themeBgMode(st) === 'image' && !!(st && st.image); }
+// End points of the CSS gradient line for a w x h box, in canvas coordinates (y down).
+// The length is |w*sin| + |h*cos| so the line still covers the corners at any angle.
+function _themeGradPoints(angleDeg, w, h) {
+    const r = ((((angleDeg % 360) + 360) % 360)) * Math.PI / 180;
+    const dx = Math.sin(r), dy = -Math.cos(r);
+    const L = Math.abs(w * dx) + Math.abs(h * dy);
+    const cx = w / 2, cy = h / 2;
+    return { x0: cx - dx * L / 2, y0: cy - dy * L / 2, x1: cx + dx * L / 2, y1: cy + dy * L / 2 };
+}
+// A lighter or darker shade of a colour, for seeding a gradient's second stop.
+function _themeShade(hex, amt) {
+    const c = _annHexToRgb(hex || '#ffffff');
+    const f = (v) => { const n = Math.max(0, Math.min(255, Math.round(v + amt))); return (n < 16 ? '0' : '') + n.toString(16); };
+    return '#' + f(c.r) + f(c.g) + f(c.b);
+}
+// `angle` overrides the stored one, so the editor's ramp preview can draw the same
+// colours left-to-right whatever direction the page itself uses.
+function _themeGradCss(st, angle) {
+    const stops = _themeStops(st);
+    if (!stops) return null;
+    const a = (angle === undefined || angle === null) ? _themeGradAngle(st) : angle;
+    return 'linear-gradient(' + a + 'deg, ' + stops.map(x => x.c + ' ' + Math.round(x.p * 1000) / 10 + '%').join(', ') + ')';
+}
+// The tint sits on the IMAGE, so it is only meaningful when there is one.
+function _themeTint(st) {
+    if (!st || !st.tint || !_themeImageOn(st)) return null;
+    let a = parseFloat(st.tintA);
+    if (!isFinite(a)) a = 0.35;
+    a = Math.max(0, Math.min(1, a));
+    if (a <= 0) return null;
+    return { hex: st.tint, a: a };
+}
+// A tint is TWO stops, each with its own colour and its own alpha. A flat wash is the
+// same colour and alpha at both ends, which is why there is no separate flat path: one
+// shape, and 'solid colour faded out' is just the second alpha at 0.
+//
+// Alpha per stop rather than one opacity for the pair, because the useful move is a
+// colour that fades to nothing across the picture — a single opacity can only make the
+// whole wash weaker.
+function _themeTintAngle(st) {
+    const a = parseFloat(st && st.tintAngle);
+    return isFinite(a) ? (((a % 360) + 360) % 360) : THEME_GRAD_DEFAULT_ANGLE;
+}
+function _themeTintHasGrad(st) { return !!(st && _themeImageOn(st) && st.tint && st.tint2); }
+function _themeTintStops(st) {
+    const t = _themeTint(st); if (!t) return null;
+    if (!st.tint2) return [{ c: t.hex, a: t.a }, { c: t.hex, a: t.a }];
+    let a2 = parseFloat(st.tintA2);
+    if (!isFinite(a2)) a2 = 0;
+    return [{ c: t.hex, a: t.a }, { c: st.tint2, a: Math.max(0, Math.min(1, a2)) }];
+}
+function _themeRgba(hex, a) {
+    const c = _annHexToRgb(hex || '#000000');
+    return 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + a + ')';
+}
+function _themeTintCss(st) {
+    const stops = _themeTintStops(st); if (!stops) return null;
+    return 'linear-gradient(' + _themeTintAngle(st) + 'deg, '
+        + _themeRgba(stops[0].c, stops[0].a) + ' 0%, ' + _themeRgba(stops[1].c, stops[1].a) + ' 100%)';
+}
+// A page theme, safe to put in a template or a project file. `_bakedImg` is a live
+// Image object the renderer caches on the record; serialising it yields `{}`, which
+// then looks like a baked image that is present and empty.
+function _themeForSave(key) {
+    const t = (_pageThemes()[key]) || null;
+    if (!t) return null;
+    const out = {};
+    Object.keys(t).forEach(k => { if (k !== '_bakedImg') out[k] = t[k]; });
+    return (Object.keys(out).length ? _cloneData(out) : null);
+}
+function _themeApplySaved(key, saved) {
+    if (!key) return;
+    if (!saved) return;
+    const t = _cloneData(saved) || {};
+    delete t._bakedImg;   // must be re-decoded for THIS session, never carried across
+    _pageThemes()[key] = t;
+}
 function _pageThemes() { editorialContent.pageThemes = editorialContent.pageThemes || {}; return editorialContent.pageThemes; }
 async function _pageThemeBake(key) {
     const t = (_pageThemes()[key]) || {};
@@ -11424,19 +11856,52 @@ function _applyPageTheme(doc, key, PW, PH, bakedImg) {
             const iw = bakedImg.naturalWidth || bakedImg.width, ih = bakedImg.naturalHeight || bakedImg.height;
             const imgAspect = (iw && ih) ? (iw / ih) : (PW / PH);   // fallback only if dimensions are somehow unavailable
             const cnv = _cropToCanvas(bakedImg, PW, PH, imgAspect, stored.imageZoom || 1, stored.imagePanX || 0, stored.imagePanY || 0, 'cover');
+            // The tint is composited onto the SAME canvas before it is handed over, so
+            // it reaches the PDF and the preview shim without either of them knowing
+            // there is such a thing as a tint.
+            const _ts = _themeTintStops(stored);
+            if (_ts) {
+                try {
+                    const _cx = cnv.getContext('2d');
+                    _cx.save();
+                    // Alpha rides IN the colour stops rather than on globalAlpha, or a
+                    // gradient that fades to nothing would be scaled by a second opacity
+                    // and never actually reach zero.
+                    const _p = _themeGradPoints(_themeTintAngle(stored), cnv.width, cnv.height);
+                    const _lg = _cx.createLinearGradient(_p.x0, _p.y0, _p.x1, _p.y1);
+                    _lg.addColorStop(0, _themeRgba(_ts[0].c, _ts[0].a));
+                    _lg.addColorStop(1, _themeRgba(_ts[1].c, _ts[1].a));
+                    _cx.fillStyle = _lg;
+                    _cx.fillRect(0, 0, cnv.width, cnv.height);
+                    _cx.restore();
+                } catch (e) {}
+            }
             doc.addImage(cnv.toDataURL('image/jpeg', 0.9), 'JPEG', 0, 0, PW, PH);
         } catch (e) { try { doc.addImage(bakedImg, 'JPEG', 0, 0, PW, PH); } catch (e2) {} }
     };
-    if (dark) {
-        const bg = th.bg || '#000000'; const rgb = _annHexToRgb(bg);
-        doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F');
-        drawBgImage();
-    } else if (th.bg && th.bg.toLowerCase() !== '#ffffff') {
-        const rgb = _annHexToRgb(th.bg); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F');
-        drawBgImage();
-    } else {
-        drawBgImage();
-    }
+    // A gradient is painted to a canvas and placed as an image: doc.rect can only take
+    // one fill colour, and this build of jsPDF has no gradient at all.
+    const fillFlat = (hex) => { const rgb = _annHexToRgb(hex); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.rect(0, 0, PW, PH, 'F'); };
+    const fillBg = (hex) => {
+        if (!_themeGradOn(stored)) { fillFlat(hex); return; }
+        try {
+            const g = document.createElement('canvas');
+            g.width = Math.round(PW); g.height = Math.round(PH);
+            const gx = g.getContext('2d');
+            const p = _themeGradPoints(_themeGradAngle(stored), g.width, g.height);
+            const lg = gx.createLinearGradient(p.x0, p.y0, p.x1, p.y1);
+            _themeStops(stored).forEach(x => lg.addColorStop(x.p, x.c));
+            gx.fillStyle = lg; gx.fillRect(0, 0, g.width, g.height);
+            doc.addImage(g.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, PW, PH);
+        } catch (e) { fillFlat(hex); }
+    };
+    // The base colour is painted under an image too, so a transparent PNG lands on the
+    // page's own ground rather than on nothing.
+    const _mode = _themeBgMode(stored);
+    const _base = th.bg || (dark ? '#000000' : null);
+    if (_mode === 'gradient') fillBg(th.bg || (dark ? '#000000' : '#ffffff'));
+    else if (_base && (dark || _base.toLowerCase() !== '#ffffff')) fillFlat(_base);
+    if (_mode === 'image') drawBgImage();
     // Ink palette: strong/mid/soft text + line colour, and the footer text mode.
     if (dark) return { strong: [255, 255, 255], mid: [220, 220, 220], soft: [180, 180, 180], line: [120, 120, 120], footer: 'light', dark: true };
     return { strong: [20, 20, 20], mid: [90, 90, 90], soft: [120, 120, 120], line: [200, 200, 200], footer: 'dark', dark: false };
@@ -11473,7 +11938,7 @@ function _pageThemeAutoApply(doc, key, PW, PH) {
     _themeRemapRemove(doc);
     if (!key || _THEME_SELF_KEYS[key]) return null;
     const stored = _pageThemes()[key];
-    if (!stored || (!stored.mode && !stored.bg && !stored.image)) return null;
+    if (!stored || (!stored.mode && !stored.bg && !stored.image && !stored.bg2 && !stored.tint && !stored.bgStops && !stored.bgMode)) return null;
     const ink = _applyPageTheme(doc, key, PW, PH, stored._bakedImg || null);
     if (ink.dark) _themeRemapInstall(doc);
     // Footer follows the theme unless this page has an explicit override.
@@ -11485,6 +11950,27 @@ function _pageThemeAutoApply(doc, key, PW, PH) {
         _curFooter = F;
     } catch (e) {}
     return ink;
+}
+// THE FOOTER'S COPYRIGHT LINE, in one place. It was written out as a literal in the
+// PDF drawer AND again in the Deck Studio overlay, so the two could disagree about
+// what a page says it is — on the one piece of every page that makes a legal claim.
+//
+// A client sometimes asks for our mark off the deck entirely and theirs on instead,
+// so the wording is overridable. Empty means the studio default, which is what every
+// existing project has and keeps. '{year}' is substituted, so a custom line can still
+// roll over on its own.
+const FOOTER_COPYRIGHT_DEFAULT = 'Copyright \u00A9 {year} Farmboy Fine Arts Inc. | All rights reserved';
+function _footerCopyrightText(year) {
+    let t = '';
+    try { t = ((editorialContent && editorialContent.footerCopyright) || '') + ''; } catch (e) { t = ''; }
+    t = t.trim() || FOOTER_COPYRIGHT_DEFAULT;
+    return t.split('{year}').join(year);
+}
+// The right-hand logo. A custom one replaces the Farmboy wordmark everywhere it is
+// drawn; absent means the wordmark, so nothing is written into a project that has not
+// asked for a different mark.
+function _footerBrandLogo() {
+    try { const b = editorialContent && editorialContent.footerBrandLogo; return (b && b.dataUrl) ? b : null; } catch (e) { return null; }
 }
 function _drawPdfFooter(doc, logos, pageNum, meta) {
     // Ledger for the export's end-of-build footer sweep (see _pdfFooterSweep).
@@ -11541,13 +12027,19 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
     //   correctly at the right edge. —
     const rx = PW - MR;
     let logoW = 0;
-    const showLogo = logos && logos.farmboy && !F.hideLogo;
+    const _brand = _footerBrandLogo();
+    const showLogo = (_brand ? true : !!(logos && logos.farmboy)) && !F.hideLogo;
     if (showLogo) {
-        const ar = logos.farmboyAR || 8;
+        const ar = _brand ? (_brand.aspect || 8) : (logos.farmboyAR || 8);
         const h = 11; logoW = h * ar;
         // Prefer the real white SVG asset from the repo; fall back to a
         // canvas-recolored version of the dark mark if it isn't available.
-        const src = rightLight ? (logos.farmboyWhite || _whiteLogo(logos.farmboy)) : logos.farmboy;
+        // A supplied logo is used as given on a light page. On a dark one it goes
+        // through the same inverter the wordmark uses, falling back to the original if
+        // that fails rather than dropping the logo off the page.
+        let src;
+        if (_brand) { src = _brand.dataUrl; if (rightLight) { try { src = _whiteLogo(_brand.dataUrl) || _brand.dataUrl; } catch (e) { src = _brand.dataUrl; } } }
+        else src = rightLight ? (logos.farmboyWhite || _whiteLogo(logos.farmboy)) : logos.farmboy;
         let fmt = 'JPEG';
         if (typeof src === 'string') { fmt = src.indexOf('image/jpeg') >= 0 || src.indexOf('image/jpg') >= 0 ? 'JPEG' : 'PNG'; }
         else { fmt = rightLight ? 'PNG' : 'JPEG'; }
@@ -11555,7 +12047,7 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
     }
     if (!F.hideCopyright) {
         const year = new Date().getFullYear();
-        const cpy = 'Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
+        const cpy = _footerCopyrightText(year);
         doc.setFont(_font('serif'), 'normal'); doc.setFontSize(5.8); doc.setTextColor(rtc, rtc, rtc);
         const cpyGap = showLogo ? (logoW + 10) : 0;
         doc.text(cpy, rx - cpyGap, baseY, { align: 'right' });
@@ -11570,24 +12062,16 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
 function _drawPlaceholderPage(doc, logos, pageNum, meta, title, subtitle) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
-    // Dashed "to be built" frame filling the live area.
+    const B = _titleBand(PW, PH);
+    const M = B.x;
+    // Dashed "to be built" frame on the safety frame itself, so the page it
+    // stands in for is the shape the real one will be.
     doc.setDrawColor(200, 200, 200);
     doc.setLineWidth(0.75);
     doc.setLineDashPattern([4, 4], 0);
-    doc.rect(M, M, PW - M * 2, PH - M * 2 - 16, 'S');
+    doc.rect(B.x, B.top, B.w, B.bottom - B.top, 'S');
     doc.setLineDashPattern([], 0);
-    // Title (top-left, matching the studio page-title treatment).
-    doc.setFont(_font('display'), 'bold');
-    doc.setFontSize(22);
-    doc.setTextColor(20, 20, 20);
-    doc.text((title || 'SECTION').toString(), M + 24, M + 44);
-    if (subtitle) {
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(10);
-        doc.setTextColor(110, 110, 110);
-        doc.text(subtitle.toString(), M + 24, M + 64);
-    }
+    _drawPageTitle(doc, PW, PH, (title || 'SECTION').toString(), subtitle ? subtitle.toString() : '');
     // Centered "placeholder" tag.
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(11);
@@ -11616,12 +12100,13 @@ function _fpKeyEntries(li, idToPage) {
 // The exact rectangle _drawFloorplanKeyPage reserves for the plan image, plus
 // the contain-fitted image rect within it — shared so the studio's interactive
 // overlay sits pixel-for-pixel where the plan lands in the PDF.
-function _fpPlanRect(PW, PH, M) {
+function _fpPlanRect(PW, PH) {
+    const M = _titleBand(PW, PH).x;
     const planX = PW * 0.42, planY = M + 30;
     return { x: planX, y: planY, w: PW - M - planX, h: PH - planY - 60 };
 }
-function _fpPlanFit(PW, PH, M, iw, ih) {
-    const R = _fpPlanRect(PW, PH, M);
+function _fpPlanFit(PW, PH, iw, ih) {
+    const R = _fpPlanRect(PW, PH);
     if (!iw || !ih) return null;
     const fit = Math.min(R.w / iw, R.h / ih);
     const dw = iw * fit, dh = ih * fit;
@@ -11637,30 +12122,23 @@ function _fpPlanFit(PW, PH, M, iw, ih) {
 function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, levelName) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
     const hx = (h) => { const m = (h || '#444444').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
 
     // — Title —
-    doc.setFont(_font('display'), 'bold');
-    doc.setFontSize(26);
-    doc.setTextColor(20, 20, 20);
-    doc.text('FLOORPLAN', M, M + 14);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(10);
-    doc.setTextColor(110, 110, 110);
-    doc.text((levelName ? ('PROPOSED FLOOR PLAN \u2014 ' + levelName.toUpperCase()) : 'PROPOSED FLOOR PLAN'), M, M + 30);
-    doc.setTextColor(20, 20, 20);
+    const B = _drawPageTitle(doc, PW, PH, 'FLOORPLAN',
+        levelName ? ('PROPOSED FLOOR PLAN \u2014 ' + levelName.toUpperCase()) : 'PROPOSED FLOOR PLAN');
+    const M = B.x;
 
     // — Floorplan image (right) — drawn first so pins can sit on its rect.
     //   Geometry comes from _fpPlanRect/_fpPlanFit, shared with the studio's
     //   interactive overlay so preview and export can never drift. —
-    const _pr = _fpPlanRect(PW, PH, M);
+    const _pr = _fpPlanRect(PW, PH);
     const planX = _pr.x, planY = _pr.y, planW = _pr.w, planH = _pr.h;
     let planRect = null;
     if (planImg && (planImg.naturalWidth || planImg.width)) {
         const iw = planImg.naturalWidth || planImg.width;
         const ih = planImg.naturalHeight || planImg.height;
-        const f = _fpPlanFit(PW, PH, M, iw, ih);
+        const f = _fpPlanFit(PW, PH, iw, ih);
         const dx = f.dx, dy = f.dy, dw = f.dw, dh = f.dh;
         try { doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
             try { _addPngImage(doc, planImg, dx, dy, dw, dh); } catch (e2) {}
@@ -11679,7 +12157,7 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, leve
 
     // — Callout list (left ~38%) —
     const listX = M;
-    const listTop = M + 56;
+    const listTop = B.body + _subtitleClear();
     const listRight = PW * 0.40;
     const listW = listRight - listX;
     const rowH = 16;
@@ -12091,28 +12569,24 @@ function _frameTypeLabel(product) {
 function _drawFrameRecPage(doc, logos, pageNum, meta, pageArg) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
+    const M = _titleBand(PW, PH).x;
     const hx = (h) => { const m = (h || '#000000').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
     // Accept either a plain array (legacy) or a { header, frames } page object.
     const frames = Array.isArray(pageArg) ? pageArg : (pageArg && pageArg.frames) || [];
     const pageHeader = (!Array.isArray(pageArg) && pageArg && pageArg.header) || '';
 
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text('FRAME RECOMMENDATIONS', M, M + 14);
-    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(110, 110, 110);
-    doc.text('Frames specified across the project', M, M + 30);
-    doc.setTextColor(20, 20, 20);
+    const B = _drawPageTitle(doc, PW, PH, 'FRAME RECOMMENDATIONS', 'Frames specified across the project');
 
     if (!frames.length) {
         doc.setFontSize(9); doc.setTextColor(140, 140, 140);
-        doc.text('No frames specified yet. Set frame codes on your pieces, then regenerate.', M, M + 60);
+        doc.text('No frames specified yet. Set frame codes on your pieces, then regenerate.', M, B.body + _subtitleClear() + 10);
         doc.setTextColor(20, 20, 20);
         _drawPdfFooter(doc, logos, pageNum, meta);
         return;
     }
 
     const cfg = _frameRecCfg();
-    let contentTop = M + 52;
+    let contentTop = B.body + _subtitleClear();
     // Optional group header (vendor or type) at the top of the page.
     if (pageHeader) {
         doc.setFont(_font('display'), 'bold'); doc.setFontSize(13); doc.setTextColor(30, 30, 30);
@@ -12216,7 +12690,8 @@ function _timelineNotes(i) {
 // Per-area text config: family (display=Druk, serif=Messina, sans=Helvetica),
 // weight, size. Defaults mirror the reference layout.
 function _tlF(area) {
-    const d = { title: { f: 'display', w: 'bold', s: 26 }, pill: { f: 'display', w: 'bold', s: 0 }, appr: { f: 'serif', w: 'normal', s: 7 }, notes: { f: 'sans', w: 'normal', s: 8 } }[area];
+    const _ts = _titleStyleFor();
+    const d = { title: { f: _ts.font, w: 'bold', s: _ts.size }, pill: { f: 'display', w: 'bold', s: 0 }, appr: { f: 'serif', w: 'normal', s: 7 }, notes: { f: 'sans', w: 'normal', s: 8 } }[area];
     const o = (editorialContent.timelineFonts || {})[area] || {};
     const s = (o.s > 0 ? o.s : (d.s || _timelinePillFs()));
     return { f: o.f || d.f, w: o.w || d.w, s: s };
@@ -12270,9 +12745,9 @@ function _timelineStyle() { return editorialContent.timelineStyle || 'pills'; }
 function _drawTimelinePagePills(doc, logos, pageNum, meta, raw) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
-    const _tc = _tlSetFont(doc, 'title'); doc.setTextColor(20, 20, 20);
-    doc.text('PROCESS & TIMELINE', M, M + _tc.s * 0.92);
+    const _tc = _tlF('title');
+    const M = _drawPageTitle(doc, PW, PH, 'PROCESS & TIMELINE', null,
+        { font: _tc.f, weight: _tc.w, size: _tc.s }).x;
 
     let stages = _timelineStages(raw);
     if (!stages.length) stages = _timelineStages(DEFAULT_TIMELINE);   // pre-built out of the box
@@ -12420,9 +12895,10 @@ function _drawTimelinePage(doc, logos, pageNum, meta, raw) {
 function _drawTimelinePageDots(doc, logos, pageNum, meta, raw) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text('PROCESS & TIMELINE', M, M + 14);
+    const _tc = _tlF('title');
+    const B = _drawPageTitle(doc, PW, PH, 'PROCESS & TIMELINE', null,
+        { font: _tc.f, weight: _tc.w, size: _tc.s });
+    const M = B.x;
 
     const phases = (raw || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => {
         const p = l.split(/\s*[|,]\s*/);
@@ -12430,7 +12906,7 @@ function _drawTimelinePageDots(doc, logos, pageNum, meta, raw) {
     });
     if (!phases.length) {
         doc.setFont(_font('serif'), 'normal'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
-        doc.text('Add phases in the Presentation PDF dialog (one per line: Phase | Timeframe).', M, M + 50);
+        doc.text('Add phases in the Presentation PDF dialog (one per line: Phase | Timeframe).', M, B.body + 14);
         doc.setTextColor(20, 20, 20);
         _drawPdfFooter(doc, logos, pageNum, meta);
         return;
@@ -12463,19 +12939,18 @@ function _drawTimelinePageDots(doc, logos, pageNum, meta, raw) {
 function _drawProsePage(doc, logos, pageNum, meta, title, body, hint) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text(title, M, M + 14);
+    const B = _drawPageTitle(doc, PW, PH, title);
+    const M = B.x;
     const text = (body || '').trim();
     if (!text) {
         doc.setFont(_font('serif'), 'normal'); doc.setFontSize(10); doc.setTextColor(150, 150, 150);
-        doc.text(hint || 'Add copy in the Presentation PDF dialog.', M, M + 50);
+        doc.text(hint || 'Add copy in the Presentation PDF dialog.', M, B.body + 14);
         doc.setTextColor(20, 20, 20);
     } else {
         doc.setFont(_font('serif'), 'normal'); doc.setFontSize(12); doc.setTextColor(45, 45, 45);
         doc.setLineHeightFactor(1.5);
         const lines = doc.splitTextToSize(text, PW * 0.60);
-        doc.text(lines, M, M + 56, { baseline: 'top' });
+        doc.text(lines, M, B.body + 20, { baseline: 'top' });
         doc.setLineHeightFactor(1.15);
         doc.setTextColor(20, 20, 20);
     }
@@ -12488,16 +12963,15 @@ function _drawProsePage(doc, logos, pageNum, meta, title, body, hint) {
 function _drawStrategyPage(doc, logos, pageNum, meta, strategy) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
+    const M = _titleBand(PW, PH).x;
     const hx = (h) => { const m = (h || '#444444').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
-    doc.text('ART COLLECTION STRATEGY', M, M + 14);
+    const B = _drawPageTitle(doc, PW, PH, 'ART COLLECTION STRATEGY');
 
     const tiers = _artCats().filter(c => c.key);   // drop "None"
     const s = strategy || {};
     const gap = 28;
     const colW = (PW - 2 * M - (tiers.length - 1) * gap) / tiers.length;
-    const top = M + 64;
+    const top = B.body + 10;
     tiers.forEach((cat, i) => {
         const x = M + i * (colW + gap);
         const [r, g, b] = hx(cat.color);
@@ -12660,11 +13134,11 @@ function _drawSloganPage(doc, logos, pageNum, meta) {
 // Thank You / contacts page. contactsRaw: one per line, fields separated by
 // "|" or "," as Name, Role, Email, Phone. Renders a grid + studio block.
 function _drawTOCPage(doc, logos, pageNum, meta, entries) {
-    const PW = 936, PH = 540, M = 54;
+    const PW = 936, PH = 540;
     doc.setFillColor(255, 255, 255); doc.rect(0, 0, PW, PH, 'F');
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(30); doc.setTextColor(20, 20, 20);
-    doc.text('CONTENTS', M, M + 24);
-    let y = M + 66; const rowH = 25, maxY = PH - M - 14;
+    const B = _drawPageTitle(doc, PW, PH, 'CONTENTS');
+    const M = B.x;
+    let y = B.body + 10; const rowH = 25, maxY = B.bottom - 14;
     doc.setFontSize(12.5);
     (entries || []).forEach(e => {
         if (y > maxY) return;
@@ -12680,14 +13154,14 @@ function _drawTOCPage(doc, logos, pageNum, meta, entries) {
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 function _drawArtIndexPage(doc, logos, pageNum, meta, entries) {
-    const PW = 936, PH = 540, M = 54;
+    const PW = 936, PH = 540;
     doc.setFillColor(255, 255, 255); doc.rect(0, 0, PW, PH, 'F');
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(30); doc.setTextColor(20, 20, 20);
-    doc.text('ARTWORK INDEX', M, M + 24);
+    const B = _drawPageTitle(doc, PW, PH, 'ARTWORK INDEX');
+    const M = B.x;
     const counts = _statusCounts();
     let sx = M; doc.setFont(_font('serif'), 'normal'); doc.setFontSize(9.5);
-    STATUS_ORDER.forEach(s => { const d = STATUS_DEFS[s]; const rgb = _annHexToRgb(d.color); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.circle(sx + 3, M + 40, 3, 'F'); doc.setTextColor(110, 110, 110); const t = d.label + ' ' + counts[s]; doc.text(t, sx + 10, M + 43); sx += 12 + doc.getTextWidth(t) + 16; });
-    const topY = M + 70, colGap = 44, cols = 2, colW = (PW - M * 2 - colGap * (cols - 1)) / cols, rowH = 16.5, maxRows = Math.floor((PH - M - topY) / rowH);
+    STATUS_ORDER.forEach(s => { const d = STATUS_DEFS[s]; const rgb = _annHexToRgb(d.color); doc.setFillColor(rgb.r, rgb.g, rgb.b); doc.circle(sx + 3, B.sub - 3, 3, 'F'); doc.setTextColor(110, 110, 110); const t = d.label + ' ' + counts[s]; doc.text(t, sx + 10, B.sub); sx += 12 + doc.getTextWidth(t) + 16; });
+    const topY = B.body + 28, colGap = 44, cols = 2, colW = (PW - M * 2 - colGap * (cols - 1)) / cols, rowH = 16.5, maxRows = Math.floor((B.bottom - topY) / rowH);
     doc.setFontSize(9.5);
     (entries || []).forEach((e, i) => {
         const col = Math.floor(i / maxRows); if (col >= cols) return;
@@ -12700,21 +13174,20 @@ function _drawArtIndexPage(doc, logos, pageNum, meta, entries) {
         doc.text(left, x + 12, y);
         const pw = doc.getTextWidth(ps); doc.text(ps, x + colW - pw, y);
     });
-    if ((entries || []).length > maxRows * cols) { doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(150, 150, 150); doc.text('+ ' + ((entries.length - maxRows * cols)) + ' more pieces', M, PH - M + 4); }
+    if ((entries || []).length > maxRows * cols) { doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(150, 150, 150); doc.text('+ ' + ((entries.length - maxRows * cols)) + ' more pieces', M, B.bottom + 4); }
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
 function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
-    const M = 40;
     const key = 'card:contacts';
     const stored = _pageThemes()[key] || {};
     const ink = _applyPageTheme(doc, key, PW, PH, stored._bakedImg || null);
     _curFooter = Object.assign({}, _resolveFooter(key), { text: ink.footer, leftTheme: ink.footer });
 
-    doc.setFont(_font('display'), 'bold'); doc.setTextColor(ink.strong[0], ink.strong[1], ink.strong[2]); doc.setFontSize(26);
-    doc.text('THANK YOU FOR', M, M + 18);
-    doc.text('YOUR CONSIDERATION.', M, M + 18 + 28);
+    const B = _drawPageTitle(doc, PW, PH, 'THANK YOU FOR', 'YOUR CONSIDERATION.',
+        { subAsTitle: true, color: ink.strong });
+    const M = B.x;
 
     let contacts;
     if (Array.isArray(contactsRaw)) {
@@ -12739,7 +13212,7 @@ function _drawThankYouPage(doc, logos, pageNum, meta, contactsRaw) {
     };
 
     const layout = (editorialContent.contactLayout || 'grouped');
-    const gridTop = M + 96;
+    const gridTop = B.body + 30;
     const rowH = 78;
 
     // Spacing sliders (grouped layout): -1..+1 nudge horizontal/vertical.
@@ -12966,15 +13439,139 @@ function _pdfYield() { _pdfCheckCancel(); return new Promise(r => setTimeout(r, 
 // floorplan placement get wired into the right pane in following passes.
 let _dsIndex = 0;
 let _dsPages = [];
+// ── Include pages: which sections the deck contains ───────────────────────
+// ONE list of the include keys and their fallbacks. There were two hardcoded
+// lists before (_dsInclude read ten keys, applySpecPdfModal read eleven), which
+// is the drift pattern this file keeps paying for: a page added to one and not
+// the other is included in the export and missing from the preview.
+//
+// `def` is the fallback for a MISSING element (a test harness, a render before
+// the panel exists), NOT the markup default — index.html ships every box
+// checked, and a preset or a saved project is what turns any of them off.
+// `label` and `match` drive the Project tab's preview tabs, and they live in THIS
+// list rather than a second one beside it. A section that gains a checkbox and
+// quietly lacks a tab is the same drift that gave _dsInclude and applySpecPdfModal
+// different key sets.
+//
+// `match` runs against the LIVE _deckPageList, which is what makes a tab honest:
+// tick Floorplan Key with no plan loaded and the page is never built, so no tab
+// appears rather than one that previews nothing. A key with no `match` is a
+// section with no single representative page.
+//
+// 'Layout pages' is deliberately NOT here. Its checkbox was read by nothing at all,
+// and layout pages are inserted between pages in the Pages tab or dropped in from
+// Templates, so a deck-wide include switch is not how they are managed. A control
+// that produces no result is removed, not left non-functional.
+const DECK_INCLUDE_PAGES = [
+    { key: 'cover', def: true, label: 'Cover', match: d => d.kind === 'fixed' && d.fixed === 'cover' },
+    { key: 'timeline', def: false, label: 'Timeline', match: d => d.kind === 'card' && d.type === 'timeline' },
+    { key: 'understanding', def: true, label: 'Understanding', match: d => d.kind === 'fixed' && d.fixed === 'understanding' },
+    { key: 'narrative', def: true, label: 'Narrative', match: d => d.kind === 'fixed' && d.fixed === 'narrative' },
+    { key: 'strategy', def: true, label: 'Strategy', match: d => d.kind === 'fixed' && d.fixed === 'strategy' },
+    { key: 'frameRec', def: false, label: 'Frames', match: d => d.kind === 'card' && d.type === 'frameRec' },
+    { key: 'floorplanKey', def: true, label: 'Floorplan', match: d => d.kind === 'floorplan' },
+    // THE SPEC TAB PREVIEWS A STANDARD DEMO PIECE, NOT ONE OF YOUR PAGES, and that is
+    // the same call the spec-template picker cards already make. On this panel you are
+    // choosing TYPE, so the page has to differ by type and nothing else; a real row
+    // varies by everything at once, and a row with no image code, no mat and no artwork
+    // simply does not show the slots you came here to style. _specTplDemoDesc's set
+    // fills every one of them.
+    //
+    // It also means the tab EXISTS on a deck with nothing on the dashboard yet, which is
+    // exactly when type gets set up.
+    { key: 'spec', def: true, label: 'Spec', demo: () => _specTplDemoDesc(editorialContent.specTemplate || 'classic') },
+    { key: 'slogan', def: true, label: 'Good Art', match: d => d.kind === 'fixed' && d.fixed === 'slogan' },
+    { key: 'contacts', def: true, label: 'Thank You', match: d => d.kind === 'card' && d.type === 'contacts' }
+];
 function _dsInclude() {
-    const ck = (id, d) => { const e = document.getElementById(id); return e ? !!e.checked : d; };
-    return {
-        cover: ck('specInc_cover', true), timeline: ck('specInc_timeline', false),
-        understanding: ck('specInc_understanding', true), narrative: ck('specInc_narrative', true),
-        strategy: ck('specInc_strategy', true), frameRec: ck('specInc_frameRec', false),
-        floorplanKey: ck('specInc_floorplanKey', true), spec: ck('specInc_spec', true),
-        slogan: ck('specInc_slogan', true), contacts: ck('specInc_contacts', true)
-    };
+    const out = {};
+    DECK_INCLUDE_PAGES.forEach(p => {
+        const e = document.getElementById('specInc_' + p.key);
+        out[p.key] = e ? !!e.checked : p.def;
+    });
+    return out;
+}
+// The checkbox state IS project data and was never stored anywhere. presentationType
+// was saved while the boxes it ticks were not, so a saved project reopened with
+// 'Final Spec' lit and every box back at its markup default — the preset looked
+// applied and was not. Stored as a MAP rather than replayed from the type key,
+// because a designer is free to fine-tune the boxes after picking a type and that
+// edit has to survive too, and because PRES_PRESETS is free to change between
+// builds while a saved deck must not.
+function _dsIncludeSave() {
+    const m = {};
+    DECK_INCLUDE_PAGES.forEach(p => { const e = document.getElementById('specInc_' + p.key); if (e) m[p.key] = !!e.checked; });
+    editorialContent.includePages = m;
+    return m;
+}
+// A display of editorialContent.includePages, exactly as seedDeckPlanOrderInput is
+// a display of .planOrder — hence the same three call sites (boot, project load,
+// undo restore).
+//
+// An absent map is a file that predates the idea, so the markup defaults stand
+// rather than every page switching off. A key absent from a stored map is a page
+// THIS build added since that file was written, and keeps its default for the same
+// reason: an older file must not be read as 'that page is excluded'.
+function seedDeckIncludeInputs() {
+    const m = editorialContent && editorialContent.includePages;
+    if (m && typeof m === 'object') {
+        DECK_INCLUDE_PAGES.forEach(p => {
+            if (!Object.prototype.hasOwnProperty.call(m, p.key)) return;
+            const e = document.getElementById('specInc_' + p.key);
+            if (e) e.checked = !!m[p.key];
+        });
+    }
+    _dsSyncIncludeSubs();
+}
+// A setting that affects only ONE included page belongs nested under that page's
+// checkbox. Mark the block data-inc-sub="<key>" and this dims and disables it
+// whenever its parent page is switched off: a control describing pages the deck
+// does not contain is worse than no control, because it reads as having done
+// something.
+//
+// It sets `disabled` as well as the opacity. Dimming alone leaves the control
+// tabbable and still changeable from the keyboard, which is how a setting that
+// looks switched off gets edited by accident.
+function _dsSyncIncludeSubs() {
+    let subs;
+    try { subs = document.querySelectorAll('[data-inc-sub]'); } catch (e) { return; }
+    (subs || []).forEach(el => {
+        const cb = document.getElementById('specInc_' + el.getAttribute('data-inc-sub'));
+        const on = cb ? !!cb.checked : true;
+        el.style.opacity = on ? '' : '0.45';
+        el.style.pointerEvents = on ? '' : 'none';
+        el.querySelectorAll('select, input, button, textarea').forEach(c => { c.disabled = !on; });
+    });
+}
+// ONE delegated listener on the list rather than an onchange per checkbox: a
+// per-element handler is the thing forgotten on the next checkbox added, and a
+// forgotten one is a page whose include state silently never persists.
+let _dsIncludeWired = false;
+function _dsIncludeInit() {
+    const host = document.getElementById('specIncList');
+    if (host && !_dsIncludeWired) {
+        host.addEventListener('change', (e) => {
+            const t = e.target;
+            if (t && t.id && t.id.indexOf('specInc_') === 0) _dsIncludeChanged();
+        });
+        _dsIncludeWired = true;
+    }
+    seedDeckIncludeInputs();
+}
+function _dsIncludeChanged() {
+    _dsIncludeSave();
+    _dsSyncIncludeSubs();
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    // No _dsRefresh here: it renders the rail and the centre, which live on the
+    // Pages tab and measure ZERO while the Project tab is the one showing.
+    // _dsTab('pages') rebuilds the page list from scratch on arrival, so the only
+    // thing needing invalidation is the built-page cache.
+    try { _dsClearBuiltAll(); } catch (e) {}
+    // A page switched off loses its preview tab, and switching the ACTIVE one off
+    // moves the selection rather than leaving a tab previewing a page the deck no
+    // longer contains.
+    try { _dsRenderPreviewTabs(); } catch (e) {}
 }
 // Resolve the spec layout for one page. The GLOBAL template is the structural
 // default; a group template (Set) always wins because it changes page count.
@@ -13001,6 +13598,159 @@ function _specTplResolve(unitKey) {
     const ov = (editorialContent.specTemplateOverrides || {})[unitKey];
     if (ov && SPEC_TEMPLATES[ov] && !SPEC_TEMPLATES[ov].group) return ov;
     return g;
+}
+// ── WHICH SLOTS A PER-PIECE DETAIL PAGE SHOWS ────────────────────────────
+// Four things sit below the spec list on a detail page: the frame corner sample,
+// the moulding profile, the floorplan crop and the wall elevation. They used to be
+// chosen as a BUNDLE, by picking one of two template cards — and the bundle is the
+// wrong unit, because a deck part way through is missing them one at a time.
+// Reported as “if I'm at a stage where I might be missing frames, elevations, plan
+// views”. Four ticks, not two layouts.
+//
+// A TICKED SLOT WITH NOTHING IN IT RESERVES ITS SPACE — a grey box carrying its own
+// caption — rather than collapsing. The page you are laying out has to stop moving
+// while you fill it in, or every piece you add reflows the ones already placed.
+// An UNTICKED slot is removed and the rest PACK LEFT: untick the floorplan and the
+// elevation takes the far-left column.
+//
+// Deck-wide with a per-page override, the same two-level shape `specTemplate` /
+// `specTemplateOverrides` already has, and the same default: deck-wide.
+const SPEC_SLOT_KEYS = ['frame', 'profile', 'plan', 'elevation'];
+// WHAT EACH OLD LAYOUT ACTUALLY DREW, so seeding a deck onto the ticks keeps the
+// parts it had. artSpecDetail was plan + elevation with no frame thumbnails;
+// frameRight and the legacy classic drew an elevation and nothing else. Anything not
+// listed keeps the all-on default, which is what frameSpecDetail already was.
+// ONE table, or the deck seed and the per-page seed drift.
+const SPEC_SLOT_SEEDS = {
+    artSpecDetail: { frame: false, profile: false },
+    frameRight: { frame: false, profile: false, plan: false },
+    classic: { frame: false, profile: false, plan: false }
+};
+function _specSlotSeedFor(tplKey) { return Object.assign({}, SPEC_SLOT_SEEDS[tplKey] || {}); }
+// A GROUP PAGE KEEPS ITS OWN TICKS, and that is not tidiness - the two page kinds
+// disagree about the DEFAULTS. A per-piece page has always drawn its elevation; a
+// group page's wall thumbnail was `scaleOpts.elevThumb`, off by default. Sharing one
+// map would have grown an elevation onto every group page of every existing deck the
+// moment this shipped, and a floorplan onto pages that have never had one.
+//
+// Same four names and the same two rules (ticked-but-empty reserves, unticked packs),
+// so there is one idea to learn - just not one stored value.
+function _specGroupSlots(ovKey) {
+    const ec = editorialContent || {};
+    const base = Object.assign({}, SPEC_SLOT_DEFAULT, ec.specGroupSlots || {});
+    const ov = ovKey ? ((ec.specGroupSlotOverrides || {})[ovKey]) : null;
+    return ov ? Object.assign(base, ov) : base;
+}
+function _specGroupSlotOv(ovKey) { return ovKey ? ((editorialContent.specGroupSlotOverrides || {})[ovKey] || null) : null; }
+function _setSpecGroupSlot(ovKey, slot, on, scope) {
+    if (SPEC_SLOT_KEYS.indexOf(slot) < 0) return;
+    if (scope === 'page') {
+        if (!ovKey) return;
+        const m = editorialContent.specGroupSlotOverrides = editorialContent.specGroupSlotOverrides || {};
+        (m[ovKey] = m[ovKey] || {})[slot] = !!on;
+        return;
+    }
+    editorialContent.specGroupSlots = Object.assign({}, _specGroupSlots(null), { [slot]: !!on });
+    const m = editorialContent.specGroupSlotOverrides || {};
+    Object.keys(m).forEach(k => {
+        if (m[k] && Object.prototype.hasOwnProperty.call(m[k], slot)) {
+            delete m[k][slot];
+            if (!Object.keys(m[k]).length) delete m[k];
+        }
+    });
+}
+function _clearSpecGroupSlots(ovKey) {
+    const m = editorialContent.specGroupSlotOverrides;
+    if (!m || !ovKey || !m[ovKey]) return;
+    delete m[ovKey];
+    if (!Object.keys(m).length) delete editorialContent.specGroupSlotOverrides;
+}
+// ONE resolver for both kinds, so a renderer asks “what does this page show” without
+// knowing which map answers.
+function _specSlotsFor(tplKey, ovKey) {
+    return (SPEC_TEMPLATES[tplKey] && SPEC_TEMPLATES[tplKey].group) ? _specGroupSlots(ovKey) : _specSlots(ovKey);
+}
+const SPEC_SLOT_DEFAULT = { frame: true, profile: true, plan: true, elevation: true };
+function _specSlots(ovKey) {
+    const ec = editorialContent || {};
+    const base = Object.assign({}, SPEC_SLOT_DEFAULT, ec.specSlots || {});
+    const ov = ovKey ? ((ec.specSlotOverrides || {})[ovKey]) : null;
+    return ov ? Object.assign(base, ov) : base;
+}
+function _specSlotOv(ovKey) { return ovKey ? ((editorialContent.specSlotOverrides || {})[ovKey] || null) : null; }
+function _setSpecSlot(ovKey, slot, on, scope) {
+    if (SPEC_SLOT_KEYS.indexOf(slot) < 0) return;
+    if (scope === 'page') {
+        if (!ovKey) return;
+        const m = editorialContent.specSlotOverrides = editorialContent.specSlotOverrides || {};
+        (m[ovKey] = m[ovKey] || {})[slot] = !!on;
+        return;
+    }
+    editorialContent.specSlots = Object.assign({}, _specSlots(null), { [slot]: !!on });
+    // DECK-WIDE MEANS DECK-WIDE. A page that had pinned this ONE slot would
+    // otherwise go on ignoring the house setting with nothing on screen to say why,
+    // so “apply to all” would visibly not apply to all. Only THIS slot is cleared
+    // from the exceptions; a page's other pins stand.
+    const m = editorialContent.specSlotOverrides || {};
+    Object.keys(m).forEach(k => {
+        if (m[k] && Object.prototype.hasOwnProperty.call(m[k], slot)) {
+            delete m[k][slot];
+            if (!Object.keys(m[k]).length) delete m[k];
+        }
+    });
+}
+// Prune the empty shells too, or a project that has had every exception removed
+// carries a map of blank objects into every autosave and undo snapshot.
+function _clearSpecSlots(ovKey) {
+    const m = editorialContent.specSlotOverrides;
+    if (!m || !ovKey || !m[ovKey]) return;
+    delete m[ovKey];
+    if (!Object.keys(m).length) delete editorialContent.specSlotOverrides;
+}
+// THE TICKS PICK THE BASE LAYOUT, THEY DO NOT INVENT ONE. With no frame thumbnails
+// the page IS `artSpecDetail`, and with them it IS `frameSpecDetail` — those two
+// templates are already exactly that pair, differing only by the strip and the few
+// points the plan/elevation row moves to make room for it. Deriving the base from
+// the ticks rather than re-deriving geometry means a deck that never touches a tick
+// renders byte for byte as it did.
+// EVERY PER-PIECE LAYOUT IS THIS ONE, so every per-piece page carries the ticks.
+// `frameRight` and the legacy `classic` are in here because the alternative is worse
+// than re-typesetting them: with the layout buttons gone a page on either would open
+// a panel with NO control at all, and `frameRight` is what a new project defaulted to,
+// so that stranding would have been the normal case rather than an edge one.
+// Both drew an elevation and neither drew a floorplan or a frame strip, which is
+// exactly what their ticks are seeded to - so the page keeps the PARTS it had even
+// though the column widths move.
+//
+// `custom` is deliberately NOT here. It is `freeform`: a page somebody placed by hand,
+// and resolving it onto this geometry would throw that work away. It keeps its own
+// renderer and the panel says so rather than showing ticks that would do nothing.
+function _specTplSlotAware(tplKey) {
+    return tplKey === 'artSpecDetail' || tplKey === 'frameSpecDetail'
+        || tplKey === 'frameRight' || tplKey === 'classic';
+}
+function _specTplEffective(tplKey, ovKey) {
+    const raw = SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight;
+    if (!_specTplSlotAware(tplKey)) return raw;
+    const s = _specSlots(ovKey);
+    const base = SPEC_TEMPLATES[(s.frame || s.profile) ? 'frameSpecDetail' : 'artSpecDetail'];
+    const tpl = {};
+    Object.keys(base).forEach(k => {
+        const v = base[k];
+        tpl[k] = (v && typeof v === 'object' && !Array.isArray(v)) ? Object.assign({}, v) : v;
+    });
+    // The left column is the plan's x in both templates; whatever survives starts there.
+    const leftX = base.plan.x;
+    if (!s.plan) {
+        delete tpl.plan;
+        // Pack left. Without this the elevation keeps its own column (.22) and sits in
+        // the middle of the page with a hole where the plan was.
+        if (tpl.elevation) tpl.elevation.x = leftX;
+    }
+    if (!s.elevation) delete tpl.elevation;
+    if (tpl.frameDetail) tpl.frameDetail = Object.assign({}, tpl.frameDetail, { corner: !!s.frame, profile: !!s.profile });
+    tpl._leftX = leftX;
+    return tpl;
 }
 function _fixedHidden(f) { return !!(editorialContent.hiddenFixed && editorialContent.hiddenFixed[f]); }
 function _deckPageList() {
@@ -13259,7 +14009,10 @@ inner += '<div style="position:absolute; left:' + (g.planX * 100) + '%; top:' + 
         const _artOnly = _specArtOnly(desc._ovKey || (r.id || ''));
         if (_artOnly) lines = [];
         const tplKey = (desc._previewTpl || desc._specTpl || editorialContent.specTemplate || 'classic');
-        const tpl = SPEC_TEMPLATES[tplKey];
+        // The same effective template the PDF draws. This mock IS a picture of the
+        // printed sheet, so a tick that reaches one and not the other is a preview
+        // lying about the export.
+        const tpl = _specTplEffective(tplKey, (r && r.id) || '');
         const codeFs = fs(0.06);
         // Artwork boxes show the piece's real image (rail + pickers), instead of
         // a grey placeholder; other boxes (plan, elevation) keep the mock look.
@@ -13383,8 +14136,94 @@ let _dsActiveTab = 'project';
 // Captions and image codes. Studio default is Messina 9pt in #9c9c9c, matching
 // the Elevations tab's Image Code Style so the same code reads identically on
 // an elevation and on a deck page.
-function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}; return { font: s.font || 'serif', size: s.size || 9, color: s.color || '#9c9c9c' }; }
-function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || 22, color: s.color || '#141414' }; }
+function _specCodeStyle() { const s = editorialContent.specCodeStyle || {}, d = _specCodeStyleDefault(); return { font: s.font || d.font, size: s.size || d.size, color: s.color || d.color }; }
+function _titleStyle() { const s = editorialContent.titleStyle || {}; return { font: s.font || 'display', size: s.size || TITLE_SIZE_DEFAULT, color: s.color || '#141414' }; }
+// The DECK subheading. Absent means “follow the constants”, so the tie to the
+// heading stays the default and nothing is written into a project that has not
+// asked for a different subhead.
+function _subtitleStyle() {
+    const s = (editorialContent && editorialContent.subtitleStyle) || {};
+    return { font: s.font || PAGE_SUBTITLE_FONT, size: s.size || PAGE_SUBTITLE_SIZE, color: s.color || PAGE_SUBTITLE_INK };
+}
+// PER-PAGE TYPE OVERRIDES, the same shape as editorialContent.pageFooters:
+// `pageTitleStyle[key] = { title: {font,size,color}, sub: {…} }`, and ONLY the
+// fields actually overridden are stored — so a page that overrides the size
+// still follows the deck when the typeface changes.
+//
+// `_titleStyle()` deliberately keeps meaning the DECK value: it is what the Type
+// defaults panel reads, and folding the current page's override into it would
+// make that panel show one page's exception as if it were the house style.
+// Renderers ask `_titleStyleFor()`, which resolves against the page being drawn.
+function _pageTypeOv(key, which) {
+    try { const m = editorialContent.pageTitleStyle || {}; const e = m[key]; return (e && e[which]) || null; } catch (e) { return null; }
+}
+// No argument means the page currently being drawn. _curPageKey is set by all
+// four render paths before the body runs (the same hook _curFooter uses), so
+// nothing has to be threaded through twenty renderers.
+function _titleStyleFor(key) {
+    const d = _titleStyle();
+    const k = (key === undefined) ? _curPageKey : key;
+    const ov = k ? _pageTypeOv(k, 'title') : null;
+    return ov ? { font: ov.font || d.font, size: ov.size || d.size, color: ov.color || d.color } : d;
+}
+function _subtitleStyleFor(key) {
+    const d = _subtitleStyle();
+    const k = (key === undefined) ? _curPageKey : key;
+    const ov = k ? _pageTypeOv(k, 'sub') : null;
+    return ov ? { font: ov.font || d.font, size: ov.size || d.size, color: ov.color || d.color } : d;
+}
+// Does this page carry an exception? Drives the badge and the reset.
+function _pageTypeHasOv(key) {
+    const t = _pageTypeOv(key, 'title'), u = _pageTypeOv(key, 'sub');
+    return !!((t && Object.keys(t).length) || (u && Object.keys(u).length));
+}
+// ONE writer for both scopes. A per-page write that matches the deck value is
+// still stored: “this page is pinned at 32” is a different statement from “this
+// page follows the deck, which happens to be 32”, and the second must not
+// silently become the first when the deck moves.
+function _setPageTypeStyle(key, which, field, value, scope) {
+    if (scope === 'page') {
+        if (!key) return;
+        const m = editorialContent.pageTitleStyle = editorialContent.pageTitleStyle || {};
+        const e = m[key] = m[key] || {};
+        (e[which] = e[which] || {})[field] = value;
+    } else if (which === 'title') {
+        editorialContent.titleStyle = Object.assign({}, _titleStyle(), { [field]: value });
+    } else {
+        editorialContent.subtitleStyle = Object.assign({}, _subtitleStyle(), { [field]: value });
+    }
+    _pageTypeChanged();
+}
+// Back to following the deck. Prunes the empty shells so a project that has had
+// every exception removed does not carry a map of blank objects into every
+// autosave and undo snapshot.
+function _clearPageTypeStyle(key, which) {
+    try {
+        const m = editorialContent.pageTitleStyle; if (!m || !m[key]) return;
+        if (which) delete m[key][which]; else delete m[key];
+        if (m[key] && !Object.keys(m[key]).length) delete m[key];
+        if (!Object.keys(m).length) delete editorialContent.pageTitleStyle;
+    } catch (e) {}
+    _pageTypeChanged();
+}
+// Type decides how every page is typeset, so every built preview is stale.
+//
+// DEBOUNCED, because the colour input fires oninput continuously while its
+// swatch is dragged and each one would re-typeset the whole deck and push an
+// undo entry. The value lands immediately (the caller has already written it);
+// the rebuild and the history entry ride the trailing edge, the same shape as
+// _ctxScheduleHistory and the wheel-scrub debounce.
+let _pageTypeTimer = null;
+function _pageTypeChanged() {
+    if (_pageTypeTimer) clearTimeout(_pageTypeTimer);
+    _pageTypeTimer = setTimeout(() => {
+        _pageTypeTimer = null;
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        try { _dsClearBuiltAll(); } catch (e) {}
+        try { _dsRefresh(); } catch (e) {}
+    }, 220);
+}
 // Draws a title but never lets it run past the safety margin: shrinks the
 // font size down (never wraps — a wrapped one-line header looks broken)
 // until it fits, or hits a sane floor. A long project ID, a long
@@ -14008,6 +14847,91 @@ function _dsPrintOutputInto(parent, desc) {
     wrap.appendChild(sub);
     parent.appendChild(wrap);
 }
+// THE FOUR TICKS, and the one decision that actually matters beside them: whether
+// this is the house layout or an exception on this page.
+//
+// DECK-WIDE IS THE DEFAULT AND STAYS SELECTED, the same rule the heading type
+// controls follow. A per-page control that defaults to per-page is how twenty spec
+// pages end up with twenty different layouts.
+let _dsSlotScope = 'deck';
+const SPEC_SLOT_LABELS = {
+    frame: ['Frame corner', 'The corner sample photograph, top of the strip'],
+    profile: ['Moulding profile', 'The cross-section drawing beside the corner sample'],
+    plan: ['Floorplan', 'The plan crop showing where this piece hangs'],
+    elevation: ['Elevation', 'The wall thumbnail']
+};
+// ONE panel for both page kinds. `group` picks which map it reads and writes, so
+// the ticks look and behave identically and there is still only one idea to learn.
+function _dsSpecSlotsInto(host, desc, ovKey, group) {
+    const rd = group ? _specGroupSlots : _specSlots;
+    const rdOv = group ? _specGroupSlotOv : _specSlotOv;
+    const wr = group ? _setSpecGroupSlot : _setSpecSlot;
+    const clr = group ? _clearSpecGroupSlots : _clearSpecSlots;
+    if (!host) return null;
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'margin-bottom:10px;';
+    const lab = document.createElement('div');
+    lab.textContent = 'SHOW ON PAGE';
+    lab.title = 'Untick a part and the rest pack to the left. Tick one you have not built yet and it holds its space.';
+    lab.style.cssText = 'font-size:var(--fs-55); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:5px; cursor:help;';
+    wrap.appendChild(lab);
+    const cur = rd(ovKey);
+    const ov = rdOv(ovKey) || {};
+    SPEC_SLOT_KEYS.forEach(k => {
+        const row = document.createElement('label');
+        row.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); cursor:pointer; margin-bottom:3px;';
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cur[k];
+        cb.dataset.slot = k;
+        cb.onchange = () => {
+            wr(ovKey, k, cb.checked, _dsSlotScope);
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            // LIVE. The centre preview is the page being laid out, so it is redrawn
+            // at once; the rail follows on its own pump rather than making the tick
+            // wait for every thumbnail in the deck.
+            _dsThumbCache = {};
+            _dsRenderTools(); _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
+        };
+        row.appendChild(cb);
+        const txt = document.createElement('span');
+        txt.textContent = (SPEC_SLOT_LABELS[k] || [k])[0];
+        row.appendChild(txt);
+        row.title = (SPEC_SLOT_LABELS[k] || [k, ''])[1];
+        // Say which pins are this page's own, so the deck's setting is never
+        // silently overruled by an exception nobody can see.
+        if (Object.prototype.hasOwnProperty.call(ov, k)) {
+            const pin = document.createElement('span');
+            pin.textContent = 'this page';
+            pin.style.cssText = 'font-size:var(--fs-50); color:var(--warn);';
+            row.appendChild(pin);
+        }
+        wrap.appendChild(row);
+    });
+    const sl = document.createElement('div');
+    sl.textContent = 'APPLIES TO';
+    sl.style.cssText = 'font-size:var(--fs-55); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 3px;';
+    wrap.appendChild(sl);
+    _dsSegRowInto(wrap, [
+        ['deck', 'All specs', 'Set the house layout — every per-piece spec page follows it'],
+        ['page', 'Just this page', 'An exception on this page only; every other page keeps the deck layout']
+    ], _dsSlotScope, (v) => { _dsSlotScope = v; _dsRenderTools(); });
+    if (Object.keys(ov).length) {
+        const rst = document.createElement('button');
+        rst.textContent = 'Follow the deck again';
+        rst.className = 'action-btn btn-secondary';
+        rst.style.cssText = 'height:22px; font-size:var(--fs-60); padding:0 8px; margin-top:6px;';
+        rst.onclick = () => {
+            clr(ovKey); _dsSlotScope = 'deck';
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsThumbCache = {};
+            _dsRenderTools(); _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
+        };
+        wrap.appendChild(rst);
+    }
+    host.appendChild(wrap);
+    return wrap;
+}
 function _dsDualUnitInto(parent) {
     const cur = _specDualUnit();
     const set = (v) => {
@@ -14027,6 +14951,8 @@ function _dsDualUnitInto(parent) {
     const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cur;
     cb.onchange = () => set(cb.checked ? (cur || 'mm') : '');
     lab.appendChild(cb); lab.appendChild(document.createTextNode('Dual units'));
+    lab.appendChild(_dsHelpDot('Spec dimensions print in inches with the metric equivalent in brackets: 0.75"(19mm)W. '
+        + 'Applies to every spec page and leaves the project unit (and your elevations) alone.'));
     row.appendChild(lab);
     const pick = document.createElement('div');
     pick.style.cssText = 'display:flex; gap:4px; margin-left:auto;' + (cur ? '' : ' opacity:0.4; pointer-events:none;');
@@ -14039,10 +14965,7 @@ function _dsDualUnitInto(parent) {
     });
     row.appendChild(pick);
     wrap.appendChild(row);
-    const note = document.createElement('div');
-    note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:4px; line-height:1.4;';
-    note.textContent = 'Spec dimensions print in inches with the metric equivalent in brackets: 0.75"(19mm)W. Applies to every spec page and leaves the project unit (and your elevations) alone.';
-    wrap.appendChild(note);
+    // The explanation is on the label's ? — see above.
     parent.appendChild(wrap);
 }
 function _dsBreakerToggleInto(head, groupMode) {
@@ -14050,16 +14973,22 @@ function _dsBreakerToggleInto(head, groupMode) {
     brWrap.style.cssText = 'display:flex; align-items:flex-start; gap:6px; font-size:var(--fs-60); color:var(--text-main); cursor:pointer; margin-top:5px; padding-top:5px; border-top:1px dashed var(--border-color);';
     const brCb = document.createElement('input'); brCb.type = 'checkbox'; brCb.checked = _elevBreakers(); brCb.style.cssText = 'margin-top:2px; flex:0 0 auto;';
     brCb.onchange = () => { editorialContent.elevBreakers = brCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
+    // The sentence explaining what a breaker page IS moves onto a ?: it is the same
+    // sentence every time, and at two wrapped lines per checkbox the three toggles in
+    // this block were costing more height than the controls they describe.
     const brTxt = document.createElement('div');
-    brTxt.innerHTML = '<b>Add elevation breaker page</b><br><span style="color:var(--text-muted);">Before each wall group, insert a full-page elevation titled with the group code (e.g. ART-2.1ABCD), then '
-        + (groupMode ? 'that group’s A/B/C spec page.' : 'these individual spec pages.') + '</span>';
+    brTxt.style.cssText = 'display:flex; align-items:center;';
+    brTxt.innerHTML = '<b>Add elevation breaker page</b>';
+    brTxt.appendChild(_dsHelpDot('Before each wall group, insert a full-page elevation titled with the group code '
+        + '(e.g. ART-2.1ABCD), then ' + (groupMode ? 'that group\u2019s A/B/C spec page.' : 'these individual spec pages.')));
     brWrap.appendChild(brCb); brWrap.appendChild(brTxt);
     head.appendChild(brWrap);
     const npWrap = document.createElement('label');
     npWrap.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:var(--fs-60); color:var(--text-main); cursor:pointer; margin:3px 0 0 18px;' + (_elevBreakers() ? '' : 'opacity:0.45; pointer-events:none;');
     const npCb = document.createElement('input'); npCb.type = 'checkbox'; npCb.checked = _breakerNoPlan(); npCb.disabled = !_elevBreakers(); npCb.style.cssText = 'flex:0 0 auto;';
     npCb.onchange = () => { editorialContent.breakerNoPlan = npCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
-    npWrap.appendChild(npCb); npWrap.appendChild(document.createTextNode('Elevation only (hide plan view, fill the page)'));
+    npWrap.appendChild(npCb); npWrap.appendChild(document.createTextNode('Elevation only'));
+    npWrap.appendChild(_dsHelpDot('Hide the plan view on a breaker page and let the elevation fill it.'));
     head.appendChild(npWrap);
     // Per-product opt-out. A wallcovering / window film sheet already carries the
     // full dimensioned elevation, so a breaker in front of it prints the same
@@ -14071,17 +15000,20 @@ function _dsBreakerToggleInto(head, groupMode) {
     const sfCb = document.createElement('input'); sfCb.type = 'checkbox'; sfCb.checked = _breakerSkipFlat(); sfCb.disabled = !_elevBreakers(); sfCb.style.cssText = 'margin-top:2px; flex:0 0 auto;';
     sfCb.onchange = () => { editorialContent.breakerSkipFlat = sfCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
     const sfTxt = document.createElement('div');
-    sfTxt.innerHTML = 'Skip breakers for wallcovering / window film<br><span style="color:var(--text-muted);">Their own sheet already has the wall dimensions, character and baseboard. Framed-art walls keep theirs.</span>';
+    sfTxt.style.cssText = 'display:flex; align-items:center;';
+    sfTxt.innerHTML = 'Skip breakers for wallcovering / window film';
+    sfTxt.appendChild(_dsHelpDot('Their own sheet already carries the wall dimensions, character and baseboard, so a '
+        + 'breaker in front of it prints the same drawing twice. Framed-art walls keep theirs.'));
     sfWrap.appendChild(sfCb); sfWrap.appendChild(sfTxt);
     head.appendChild(sfWrap);
     // No "Show layout guides" toggle here on purpose: a breaker always mirrors
     // the Elevations tab, so guides are controlled in the one place that draws
     // them. The toggle existed to opt into that, and its off state made the
     // breaker silently disagree with the editor.
-    const msNote = document.createElement('p');
-    msNote.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:3px 0 0 18px; line-height:1.3;';
-    msNote.textContent = 'Layout guides (wall dimensions, hang height, spacing) come straight from the Elevations tab — whatever is on there shows here.';
-    head.appendChild(msNote);
+    // Was a third standing paragraph under the three toggles. It explains where the
+    // guides come from, which is a thing you ask once, so it rides the parent ?.
+    try { brTxt.appendChild(_dsHelpDot('Layout guides (wall dimensions, hang height, spacing) come straight from the '
+        + 'Elevations tab \u2014 whatever is on there shows here.')); } catch (e) {}
 }
 // (There is deliberately no per-breaker guide toggle: a breaker always mirrors
 // whatever guides the Elevations tab has on. See _captureElevWithGuides.)
@@ -14147,6 +15079,11 @@ const PRES_PRESETS = {
 function _dsApplyPresentationType(type) {
     const p = PRES_PRESETS[type]; if (!p) return;
     Object.keys(p.inc).forEach(k => { const cb = document.getElementById('specInc_' + k); if (cb) cb.checked = !!p.inc[k]; });
+    // Write the boxes this preset just ticked into the project. Storing the type
+    // key alone is not enough to rebuild them later — see _dsIncludeSave.
+    _dsIncludeSave();
+    _dsSyncIncludeSubs();
+    try { _dsRenderPreviewTabs(); } catch (e) {}
     if (p.tpl) editorialContent.specTemplate = p.tpl;
     editorialContent.wireframe = !!p.wf;
     editorialContent.presentationType = type;
@@ -14180,20 +15117,21 @@ function _dsRenderPresetBar() {
 
     // Preview quality — controls how sharp the live center + rail previews are.
     const qWrap = document.createElement('div'); qWrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px solid var(--border-color);';
-    const qLbl = document.createElement('div'); qLbl.textContent = 'PREVIEW QUALITY'; qLbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px;';
+    const qLbl = document.createElement('div'); qLbl.textContent = 'PREVIEW QUALITY';
+    qLbl.title = 'Higher = sharper live previews that match the PDF, but slower to draw. The exported PDF is always full quality regardless of this setting.';
+    qLbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px; cursor:help;';
     qWrap.appendChild(qLbl);
     const qRow = document.createElement('div'); qRow.style.cssText = 'display:flex; gap:5px;';
     [['low', 'Low'], ['medium', 'Medium'], ['high', 'High']].forEach(([v, l]) => {
         const b = document.createElement('button'); b.textContent = l;
         b.className = _tplTabClass(_previewQuality() === v);
+        b.title = 'Higher = sharper live previews that match the PDF, but slower to draw. The exported PDF is always full quality regardless of this setting.';
         b.style.cssText = 'flex:1;';
         b.onclick = () => { editorialContent.previewQuality = v; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderPresetBar(); _dsRebuildAllThumbs(); _dsRenderCenter(); };
         qRow.appendChild(b);
     });
     qWrap.appendChild(qRow);
-    const qNote = document.createElement('p'); qNote.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
-    qNote.textContent = 'Higher = sharper live previews that match the PDF, but slower to draw. The exported PDF is always full quality regardless of this setting.';
-    qWrap.appendChild(qNote);
+    // The note is on the heading's tooltip; see qLbl above.
     bar.appendChild(qWrap);
 }
 // ── Deck Studio open-state ────────────────────────────────────────────────
@@ -14223,19 +15161,26 @@ function openDeckStudio(tab) {
         proj.style.alignItems = 'stretch';
         const cols = document.createElement('div'); cols.id = 'dsProjCols';
         cols.style.cssText = 'display:flex; gap:22px; align-items:flex-start; width:100%;';
-        const colA = document.createElement('div'); colA.id = 'dsProjPreset'; colA.style.cssText = 'flex:0 0 200px; min-width:0;';
+        // 240, not 200: this column now holds the type rows (font select + size +
+        // colour), and _dsTypeSection's row needs ~166px before it starts squeezing
+        // the font names down to nothing.
+        const colA = document.createElement('div'); colA.id = 'dsProjPreset'; colA.style.cssText = 'flex:0 0 240px; min-width:0;';
         const colB = document.createElement('div'); colB.id = 'dsProjLeft'; colB.style.cssText = 'flex:0 0 400px; min-width:0;';
         const colC = document.createElement('div'); colC.id = 'dsProjRight'; colC.style.cssText = 'flex:1 1 0; min-width:0; position:sticky; top:0;';
         panel.style.width = '100%'; panel.style.maxWidth = 'none'; panel.style.maxHeight = 'none';
         panel.style.boxShadow = 'none'; panel.style.border = 'none'; panel.style.padding = '0';
         colB.appendChild(panel);
-        const cap = document.createElement('div'); cap.textContent = 'Cover preview'; cap.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.7px; color:var(--text-muted); margin-bottom:8px;';
+        const cap = document.createElement('div'); cap.textContent = 'Page preview'; cap.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.7px; color:var(--text-muted); margin-bottom:8px;';
+        // One tab per INCLUDED section, built by _dsRenderPreviewTabs. .wrap because
+        // ten tabs will not sit on one line in this column, and .frame-tabs is a
+        // single-row segmented control everywhere else.
+        const tabs = document.createElement('div'); tabs.id = 'dsProjPrevTabs'; tabs.className = 'frame-tabs wrap'; tabs.style.cssText = 'margin-bottom:8px;';
         const holder = document.createElement('div'); holder.id = 'dsProjCoverPrev';
         holder.style.cssText = 'width:100%; aspect-ratio:936/540; background:#fff; border:1px solid var(--border-color); border-radius:var(--r-6); overflow:hidden; position:relative;';
-        const sub = document.createElement('div'); sub.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:8px; line-height:1.4;';
-        sub.textContent = 'Live preview of the cover \u2014 confirms the presentation version you\u2019re working in.';
+        const sub = document.createElement('div'); sub.id = 'dsProjPrevCap'; sub.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:8px; line-height:1.4;';
+        sub.textContent = 'Live preview \u2014 the real page, as the deck will build it.';
         const rb = document.createElement('button'); rb.textContent = 'Refresh preview'; rb.className = 'action-btn btn-secondary'; rb.style.cssText = 'width:auto; height:26px; padding:0 12px; font-size:var(--fs-60); margin-top:8px;'; rb.onclick = () => _dsRenderCoverPreview();
-        colC.appendChild(cap); colC.appendChild(holder); colC.appendChild(sub); colC.appendChild(rb);
+        colC.appendChild(cap); colC.appendChild(tabs); colC.appendChild(holder); colC.appendChild(sub); colC.appendChild(rb);
         cols.appendChild(colA); cols.appendChild(colB); cols.appendChild(colC);
         proj.appendChild(cols);
     }
@@ -14245,11 +15190,21 @@ function openDeckStudio(tab) {
         bar.id = 'dsPresetBar';
         bar.style.cssText = 'padding:10px 12px; border:1px solid var(--border-color); border-radius:var(--r-8); background:var(--bg-input);';
         const colA = document.getElementById('dsProjPreset');
-        if (colA) colA.appendChild(bar); else proj.insertBefore(bar, proj.firstChild);
+        // Type sits directly under the presentation type, because both are 'what does
+        // this deck look like' and both are set before any page is built.
+        const tb = document.createElement('div');
+        tb.id = 'dsProjType';
+        tb.style.cssText = 'margin-top:10px; padding:10px 12px; border:1px solid var(--border-color); border-radius:var(--r-8); background:var(--bg-input);';
+        const fb = document.createElement('div');
+        fb.id = 'dsProjFooter';
+        fb.style.cssText = 'margin-top:10px; padding:10px 12px; border:1px solid var(--border-color); border-radius:var(--r-8); background:var(--bg-input);';
+        if (colA) { colA.appendChild(bar); colA.appendChild(tb); colA.appendChild(fb); } else { proj.insertBefore(bar, proj.firstChild); proj.insertBefore(tb, bar.nextSibling); proj.insertBefore(fb, tb.nextSibling); }
     }
     _dsRenderPresetBar();
+    try { _dsTypeDefaultsInto(document.getElementById('dsProjType')); } catch (e) {}
+    try { _dsDeckFooterInto(document.getElementById('dsProjFooter')); } catch (e) {}
     if (typeof _specPdfPrefill === 'function') _specPdfPrefill();
-    setTimeout(() => { try { _dsRenderCoverPreview(); } catch (e) {} }, 60);
+    setTimeout(() => { try { _dsRenderPreviewTabs(true); } catch (e) {} }, 60);
     const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
     _dsSyncApprovedBtn();
     try { _migrateLayoutArrows(); } catch (e) {}
@@ -14276,9 +15231,6 @@ function _dsTearDownFloatingPanels() {
     try { _dsCloseTextGearPopup(); } catch (e) {}
     _dsLayersOpen = false;
     const lb = document.getElementById('dsMbLayers'); if (lb) lb.classList.remove('active');
-    _dsStylePalOpen = false;
-    const sp2 = document.getElementById('_dsStylePalette'); if (sp2) sp2.remove();
-    const sb2 = document.getElementById('dsMbStyles'); if (sb2) sb2.classList.remove('active');
 }
 let _dsAutoBuildTimer = null;
 let _dsSliderDebounce = null;
@@ -14286,30 +15238,122 @@ function _dsOpenGenerate() {
     const m = document.getElementById('dsGenerateModal'); if (!m) { applySpecPdfModal(); return; }
     m.style.display = 'flex';
 }
-async function _dsRenderCoverPreview() {
-    const holder = document.getElementById('dsProjCoverPrev'); if (!holder) return;
-    try {
-        // Mirror the Pages preview: render the cover with the same HTML element
-        // renderer the editor and rail thumbnails use (_mbThumbInner), instead of
-        // the canvas/PDF shim — so this preview matches the Pages tab exactly.
-        const fx = (typeof _fixedPageFor === 'function') ? _fixedPageFor('cover') : null;
-        const page = fx && fx.page;
-        const w = holder.clientWidth || 560, h = Math.round(w * 540 / 936);
-        if (page && (page.elements || []).length) {
-            holder.innerHTML = '<div style="position:absolute; inset:0; background:#fff;">' + _mbThumbInner(page, w, h) + '</div>';
+// ── Project tab preview ───────────────────────────────────────────────────
+// The right column used to show the cover and nothing else. It previews any
+// INCLUDED section now, one tab each, because the include list decides what the
+// deck contains and this is where you are already looking when you decide it.
+//
+// Which tab you are on is MODULE state, never project data: it is where you are
+// looking, the same reasoning as _fpPanelTab and _ctxPaletteCat.
+let _dsPreviewTab = 'cover';
+let _dsPreviewToken = 0;
+// The included sections that actually produced a page, in deck order.
+function _dsPreviewSections() {
+    let pages = [];
+    try { pages = _deckPageList() || []; } catch (e) { return []; }
+    const inc = _dsInclude();
+    const out = [];
+    DECK_INCLUDE_PAGES.forEach(p => {
+        // A section with a `demo` builds its own standard page, so its tab is present
+        // whenever the checkbox is ticked rather than waiting for your deck to contain
+        // one. Everything else still resolves against the LIVE page list, which is what
+        // keeps those tabs honest.
+        if (p.demo) {
+            if (!inc[p.key]) return;
+            let dd = null;
+            try { dd = p.demo(); } catch (e) {}
+            if (dd) out.push({ key: p.key, label: p.label || p.key, desc: dd, demo: true });
             return;
         }
-        // Elementless cover (pure drawn cover): fall back to the canvas render.
-        holder.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:var(--fs-70);">Rendering\u2026</div>';
-        try { await _loadEditorBrandFonts(); } catch (e) {}
-        try { if (document.fonts && document.fonts.ready) await document.fonts.ready; } catch (e) {}
-        const pages = _deckPageList();
-        const cover = pages.find(d => d.kind === 'fixed' && d.fixed === 'cover') || pages[0];
-        if (!cover) { holder.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:var(--fs-70);">No cover page</div>'; return; }
-        const cv = await renderDeckPageCanvas(cover);
-        holder.innerHTML = '';
-        if (cv) { cv.style.cssText = 'width:100%; height:100%; display:block; object-fit:contain;'; holder.appendChild(cv); }
-    } catch (e) { holder.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:var(--fs-70);">Preview unavailable</div>'; }
+        if (!p.match) return;
+        let d = null;
+        for (let i = 0; i < pages.length; i++) {
+            try { if (p.match(pages[i])) { d = pages[i]; break; } } catch (e) {}
+        }
+        if (d) out.push({ key: p.key, label: p.label || p.key, desc: d });
+    });
+    return out;
+}
+// Rebuilds the strip. Renders the page only when the selection actually moved,
+// or when the caller forces it: this runs on every include checkbox tick, and a
+// full page render per keystroke-equivalent is not what a checkbox should cost.
+function _dsRenderPreviewTabs(renderPage) {
+    const bar = document.getElementById('dsProjPrevTabs'); if (!bar) return;
+    const secs = _dsPreviewSections();
+    const before = _dsPreviewTab;
+    if (!secs.some(x => x.key === _dsPreviewTab)) _dsPreviewTab = secs.length ? secs[0].key : '';
+    bar.innerHTML = '';
+    secs.forEach(sec => {
+        const b = document.createElement('button');
+        // .frame-tab is the one panel tab strip in this app; state is the class,
+        // never a rewritten style string.
+        b.className = 'frame-tab' + (sec.key === _dsPreviewTab ? ' active' : '');
+        b.textContent = sec.label;
+        b.onclick = () => _dsSelectPreviewTab(sec.key);
+        bar.appendChild(b);
+    });
+    if (renderPage || _dsPreviewTab !== before) _dsRenderCoverPreview();
+}
+function _dsSelectPreviewTab(key) {
+    if (_dsPreviewTab === key) return;
+    _dsPreviewTab = key;
+    _dsRenderPreviewTabs(true);
+}
+// Renders whichever tab is active. Keeps its old name because openDeckStudio and
+// the Refresh button already call it.
+async function _dsRenderCoverPreview() {
+    const holder = document.getElementById('dsProjCoverPrev'); if (!holder) return;
+    const cap = document.getElementById('dsProjPrevCap');
+    const msg = (t) => '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#aaa; font-size:var(--fs-70);">' + t + '</div>';
+    const secs = _dsPreviewSections();
+    let sec = null;
+    for (let i = 0; i < secs.length; i++) { if (secs[i].key === _dsPreviewTab) { sec = secs[i]; break; } }
+    if (!sec) sec = secs[0] || null;
+    if (!sec) {
+        holder.innerHTML = msg('No pages included');
+        if (cap) cap.textContent = 'Tick a page above to preview it.';
+        return;
+    }
+    if (cap) {
+        cap.textContent = sec.demo
+            ? ('Standard demo ' + sec.label.toLowerCase() + ' page \u2014 a fixed example piece, so every type slot is visible. Your own pages use these settings.')
+            : ('Live preview of ' + sec.label + ' \u2014 the real page, as the deck will build it.');
+    }
+    // Another tab clicked while this one is still rendering must not have its
+    // result painted over the new selection when it finally resolves.
+    const token = ++_dsPreviewToken;
+    const w = holder.clientWidth || 560, h = Math.round(w * 540 / 936);
+    try {
+        // The instant HTML mock first, the same one the rail paints. For a page
+        // built from ELEMENTS this is not a placeholder, it is the answer:
+        // _deckMockHTML routes those to _mbThumbInner, and the canvas shim lacks
+        // Druk's metrics and overlaps large display type. So an element page stops
+        // here rather than being replaced by a worse render of itself.
+        const pg = (sec.desc.kind === 'layout' || sec.desc.kind === 'fixed') ? sec.desc.page : null;
+        const hasEls = !!(pg && Array.isArray(pg.elements) && pg.elements.length);
+        holder.innerHTML = '<div style="position:absolute; inset:0; background:#fff;">' + _deckMockHTML(sec.desc, w, h) + '</div>';
+        // THE FOOTER IS PART OF THE PAGE, so a preview without one is a preview of
+        // something that does not print. Canvas-rendered pages already carry it, drawn
+        // by _drawPdfFooter through the same doc the real PDF uses; the HTML mock has
+        // no footer of its own, so it borrows _dsAddFooter — the SAME overlay the Pages
+        // tab centre uses, rather than a second one that could drift from it.
+        //
+        // Deliberately not behind a toggle: it is baked into the canvas on the other
+        // half of the tabs, so a switch could only ever hide it on some of them, and a
+        // control that works on half the tabs is worse than no control.
+        if (hasEls) { try { _dsAddFooter(holder, w, h, sec.desc); } catch (e) {} return; }
+    } catch (e) { holder.innerHTML = msg('Rendering\u2026'); }
+    await _dsBrandFontsReady();
+    if (token !== _dsPreviewToken) return;
+    try {
+        const cv = await renderDeckPageCanvas(sec.desc);
+        if (token !== _dsPreviewToken) return;
+        if (cv) { holder.innerHTML = ''; cv.style.cssText = 'width:100%; height:100%; display:block; object-fit:contain;'; holder.appendChild(cv); }
+    } catch (e) {
+        // Keep whatever mock is already showing rather than blanking a page that
+        // very nearly rendered.
+        if (token === _dsPreviewToken && !holder.firstChild) holder.innerHTML = msg('Preview unavailable');
+    }
 }
 function _dsOpenTemplateEditor() {
     _dsTab('templateEditor');
@@ -14362,7 +15406,6 @@ function _dsTab(which) {
     }
 }
 let _dsBuildError = '';
-let _dsTplSel = null;   // layout template highlighted but not yet applied
 let _dsSpecTplSel = null;   // { ovKey, key } — spec template ARMED but not yet applied
 document.addEventListener('keydown', function (e) {
     if (!_dsIsOpen()) return;
@@ -14457,6 +15500,93 @@ function _dsPageNumForPiece(id) {
     }
     return null;
 }
+// A row of mutually exclusive choices in the tools panel (Group by, Columns, Image
+// size, Contact layout). ONE builder, because there were two hand-rolled copies and
+// both were broken the same way.
+//
+// THE BUG: they styled `.action-btn` with `flex:1 1 auto`. `.action-btn` is
+// `width:100%`, and a flex basis of `auto` resolves FROM that width — so every button
+// wanted the full panel width and `flex-wrap` duly put each one on its own row. Three
+// choices became three stacked full-width buttons with the label floating in the
+// middle of each, which is the 'lots of empty space' this was reported as, and ten
+// such rows on the Frame Recommendations panel is what made it scroll.
+// (The footer's Auto / Dark / Light rows in the same panel always sat inline because
+// they use `flex:1`, whose basis is 0 rather than auto. That was the tell.)
+//
+// So it is `.frame-tab` in a `.frame-tabs` row now: the one panel segmented control,
+// which carries no width of its own and shows selection with `.active` instead of a
+// hand-rolled `outline:2px solid var(--accent)` — a fourth selected-look that matched
+// nothing else in the app. `wrap` and not `fit`: `fit` sets `flex:1`, and a `.frame-tab`
+// squeezed below its `white-space:nowrap` label spills its text, so the buttons size to
+// their labels and move to a second line only when they genuinely do not fit.
+function _dsSegRowInto(parent, opts, cur, onPick) {
+    if (!parent) return null;
+    const row = document.createElement('div');
+    row.className = 'frame-tabs wrap';
+    row.style.cssText = 'margin-bottom:2px;';
+    opts.forEach(o => {
+        const b = document.createElement('button');
+        b.textContent = o[1];
+        b.className = _tplTabClass(cur === o[0]);
+        if (o[2]) b.title = o[2];
+        b.onclick = () => onPick(o[0]);
+        row.appendChild(b);
+    });
+    parent.appendChild(row);
+    return row;
+}
+// Destructive / corrective actions for the selected page. SELF-HIDING, like
+// _dsPlaceRelativeInto above it: an item appears only when it would actually do
+// something. That is the fix for the old gear menu as much as the move is — 'Clear text
+// & images' sat there permanently and silently closed the menu on any page with no
+// overlays, which is most of them, so the one genuinely useful action in that menu read
+// as the thing that did nothing.
+//
+// Called AHEAD of the kind-specific branches for the same reason _dsPlaceRelativeInto
+// is: several of them return early, and these belong to every page kind.
+function _dsPageActionsInto(parent, desc) {
+    if (!parent || !desc) return;
+    const key = _deckPageKey(desc);
+    if (!key) return;
+    const anns = (editorialContent.annotations && editorialContent.annotations[key]) || [];
+    const built = !!(desc.kind === 'spec' && _dsBuilt[key]);
+    if (!anns.length && !built) return;
+    const wrap = document.createElement('div');
+    wrap.id = '_dsPageActions';
+    wrap.style.cssText = 'margin:0 0 14px; padding-top:10px; border-top:1px solid var(--border-color);';
+    const lbl = document.createElement('div');
+    lbl.textContent = 'THIS PAGE';
+    lbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px;';
+    wrap.appendChild(lbl);
+    if (built) {
+        const b = document.createElement('button');
+        b.textContent = 'Revert to live preview';
+        b.className = 'action-btn btn-secondary';
+        b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-65); margin-bottom:5px;';
+        b.title = 'Drop the built render for this page and go back to the live preview';
+        b.onclick = () => { _dsClearBuilt(key); };
+        wrap.appendChild(b);
+    }
+    if (anns.length) {
+        const b = document.createElement('button');
+        b.textContent = 'Clear text & images (' + anns.length + ')';
+        b.className = 'action-btn btn-danger';
+        b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-65);';
+        b.title = 'Remove the text and image overlays you added to this page';
+        // Confirmed, unlike the menu item it replaces: it throws away work, and a
+        // button in a panel is one click away rather than two through a popup.
+        b.onclick = () => {
+            if (!confirm('Remove ' + anns.length + ' text/image overlay' + (anns.length === 1 ? '' : 's') + ' from this page?')) return;
+            editorialContent.annotations[key] = [];
+            _dsSelKey = null; _dsSelIdx = -1;
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+        };
+        wrap.appendChild(b);
+    }
+    parent.appendChild(wrap);
+}
 // Move a layout page one slot earlier/later in the DECK order by re-anchoring
 // its afterKey to the neighboring page's key ('__start__' to lead the deck).
 // This makes template pages fully movable anywhere in the presentation.
@@ -14498,7 +15628,6 @@ function _dsDuplicateLayoutPage(desc) {
     try { _dsPages = _deckPageList() || []; } catch (e) {}
     const ni = _dsPages.findIndex(d => d.kind === 'layout' && d.page === clone);
     if (ni >= 0) _dsIndex = ni;
-    _dsTplSel = null;
     _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
 }
 // ── Preflight spelling scan ─────────────────────────────────────────────────
@@ -14688,7 +15817,7 @@ function _dsShowPreflight() {
     m.appendChild(panel); m.onclick = (e) => { if (e.target === m) m.remove(); };
     document.body.appendChild(m);
 }
-function _dsSelectPage(i) { if (typeof _dsDeselectAll === 'function') _dsDeselectAll(); else if (typeof _mbDeselectAll === 'function') _mbDeselectAll(); _dsIndex = i; _dsTplSel = null; _dsSpecTplSel = null; _dsCenterPreviewItem = null; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
+function _dsSelectPage(i) { if (typeof _dsDeselectAll === 'function') _dsDeselectAll(); else if (typeof _mbDeselectAll === 'function') _mbDeselectAll(); _dsIndex = i; _dsSpecTplSel = null; _dsCenterPreviewItem = null; _dsRenderRail(); _dsRenderCenter(); _dsRenderTools(); _dsSyncApprovedBtn(); }
 function _dsDeleteLayoutPage(desc) {
     if (!desc || desc.kind !== 'layout' || !desc.page) return;
     const pages = editorialContent.layoutPages || [];
@@ -14804,7 +15933,9 @@ function _dsSaveCurrentAsTemplate() {
     const annKey = 'layout:' + ep.page.id;
     const anns = JSON.parse(JSON.stringify((editorialContent.annotations && editorialContent.annotations[annKey]) || [])).map(a => { if (a.dataUrl) a.dataUrl = null; return a; }); // same — strip embedded image data
     editorialContent.templates = editorialContent.templates || [];
-    editorialContent.templates.push({ name: name, type: ep.type || 'moodboard', elements: els, annotations: anns });
+    // The page's background travels with the template: a gradient or a tinted image is
+    // a design decision, and it is exactly the kind that gets reused.
+    editorialContent.templates.push({ name: name, type: ep.type || 'moodboard', elements: els, annotations: anns, theme: _themeForSave(annKey) });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsTab('templates');
@@ -14840,6 +15971,9 @@ function _dsTemplateToDeck(idx) {
         editorialContent.annotations['layout:' + pg.id] = JSON.parse(JSON.stringify(t.annotations));
     }
     try { _migrateImageElementsForKey(pg.elements, 'layout:' + pg.id); } catch (e) {}
+    // The background travels with the template. Absent means the template predates the
+    // idea, so the new page keeps the default rather than being blanked.
+    try { _themeApplySaved('layout:' + pg.id, t.theme); } catch (e) {}
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsTab('pages');
@@ -15092,6 +16226,24 @@ function _dsRenderTemplateManagementPanel(t) {
     banner.appendChild(row);
     t.appendChild(banner);
 }
+// Save the open page into the template library. It sat on the Page tab, one tab away
+// from every other template control; this is where a designer already is when they are
+// thinking about templates.
+function _dsSaveCurrentPageBtnInto(host) {
+    if (!host) return;
+    const desc = _dsPages[_dsIndex];
+    const b = document.createElement('button');
+    b.className = 'action-btn btn-secondary';
+    b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-65); margin-bottom:8px;';
+    const ok = !!(desc && (desc.kind === 'layout' || desc.kind === 'fixed'));
+    b.textContent = 'Save this page as template';
+    b.disabled = !ok;
+    b.title = ok ? 'Add the open page\u2019s layout to the library below'
+                 : 'Open a layout or a cover / narrative page first \u2014 a spec or floorplan page has no layout to save';
+    if (!ok) b.style.opacity = '0.45';
+    b.onclick = () => _dsSaveCurrentAsTemplate();
+    host.appendChild(b);
+}
 function _dsRenderToolsTemplatesTab() {
     const host = document.getElementById('dsToolsTemplatesBody'); if (!host) return;
     host.innerHTML = '';
@@ -15103,6 +16255,7 @@ function _dsRenderToolsTemplatesTab() {
     const head = document.createElement('div'); head.style.cssText = 'margin-bottom:10px;';
     head.innerHTML = '<div style="font-size:var(--fs-80); font-weight:800; color:var(--text-main);">Templates</div><div style="font-size:var(--fs-60); color:var(--text-muted); margin-top:2px;">Click one to preview it on the page \u2014 apply it right from there.</div>';
     header.appendChild(head);
+    _dsSaveCurrentPageBtnInto(header);
     const btnRow = document.createElement('div'); btnRow.style.cssText = 'display:flex; gap:4px; margin-bottom:8px;';
     const mkBtn = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.className = 'action-btn btn-secondary'; b.style.cssText = 'flex:1; height:26px; padding:0 4px; font-size:var(--fs-60); font-weight:700;'; b.onclick = fn; return b; };
     btnRow.appendChild(mkBtn('+ Save current page', _dsSaveCurrentAsTemplate));
@@ -15317,15 +16470,18 @@ function _dsApplyTemplateToCurrentPage(item) {
         // an element only when it came from the elements side originally —
         // simplest correct approach: re-derive from the source item's own
         // elements/annotations arrays rather than the flattened preview list.
-        let srcElements = [], srcAnnotations = [];
+        let srcElements = [], srcAnnotations = [], srcTheme = null;
         if (item.source === 'master') { const mt = IDML_MASTER_TEMPLATES[item.mi]; srcElements = mt.elements || []; srcAnnotations = mt.annotations || []; }
-        else if (item.source === 'user') { const t = (editorialContent.templates || [])[item.idx]; srcElements = t.elements || []; srcAnnotations = t.annotations || []; }
+        else if (item.source === 'user') { const t = (editorialContent.templates || [])[item.idx]; srcElements = t.elements || []; srcAnnotations = t.annotations || []; srcTheme = t.theme || null; }
         else { srcElements = item.els0 || []; srcAnnotations = []; }
         ep.page.elements = JSON.parse(JSON.stringify(srcElements));
         editorialContent.annotations = editorialContent.annotations || {};
         if (srcAnnotations.length) editorialContent.annotations[key] = JSON.parse(JSON.stringify(srcAnnotations));
         else delete editorialContent.annotations[key];
         try { _migrateImageElementsForKey(ep.page.elements, key); } catch (e) {}
+        // Same as the add-as-new-page path: a template that carries a background brings
+        // it, and one that does not leaves this page's own alone.
+        try { if (srcTheme) _themeApplySaved(key, srcTheme); } catch (e) {}
     }
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
@@ -15455,66 +16611,15 @@ function _dsRenderTemplatesTab() {
 
     renderPreview();
 }
-// ── Floating Quick Styles palette: draggable, stays open over the live page so
-// you can select a text box and shuffle styles with immediate on-canvas feedback.
-let _dsStylePalOpen = false;
-function _dsToggleStylePalette() {
-    _dsStylePalOpen = !_dsStylePalOpen;
-    const b = document.getElementById('dsMbStyles'); if (b) b.classList.toggle('active', _dsStylePalOpen);
-    if (_dsStylePalOpen) _dsRenderStylePalette(); else { const p = document.getElementById('_dsStylePalette'); if (p) p.remove(); }
-}
-function _dsRenderStylePalette() {
-    if (!_dsStylePalOpen) return;
-    let p = document.getElementById('_dsStylePalette');
-    const firstOpen = !p;
-    if (p) p.remove();
-    p = document.createElement('div'); p.id = '_dsStylePalette';
-    p.style.cssText = 'position:fixed; z-index:100002; width:230px; max-height:70vh; display:flex; flex-direction:column; background:var(--bg-panel,#26262c); color:var(--text-main,#eee); border:1px solid var(--border-color,#444); border-radius:var(--r-8); box-shadow:0 10px 30px rgba(0,0,0,0.5); font-size:var(--fs-70);';
-    if (firstOpen || !_dsStylePalPos) { _dsStylePalPos = { left: Math.max(12, window.innerWidth - 270), top: 120 }; }
-    p.style.left = _dsStylePalPos.left + 'px'; p.style.top = _dsStylePalPos.top + 'px';
-    // Header (drag handle)
-    const head = document.createElement('div');
-    head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-bottom:1px solid var(--border-color,#444); cursor:move; user-select:none;';
-    head.innerHTML = '<span style="font-weight:700;">Quick Styles</span>';
-    const x = document.createElement('button'); x.textContent = '\u2715'; x.style.cssText = 'background:none; border:none; color:var(--text-muted,#999); cursor:pointer; font-size:var(--fs-75);'; x.onclick = _dsToggleStylePalette;
-    head.appendChild(x); p.appendChild(head);
-    head.onmousedown = (e) => {
-        if (e.target === x) return;
-        e.preventDefault();
-        const sx = e.clientX, sy = e.clientY, ol = _dsStylePalPos.left, ot = _dsStylePalPos.top;
-        const mv = (ev) => { _dsStylePalPos.left = Math.max(0, Math.min(window.innerWidth - 60, ol + ev.clientX - sx)); _dsStylePalPos.top = Math.max(0, Math.min(window.innerHeight - 40, ot + ev.clientY - sy)); p.style.left = _dsStylePalPos.left + 'px'; p.style.top = _dsStylePalPos.top + 'px'; };
-        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); };
-        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
-    };
-    // Target status
-    const tgt = _dsStyleTarget();
-    const status = document.createElement('div');
-    status.style.cssText = 'padding:6px 10px; font-size:var(--fs-60); color:' + (tgt ? 'var(--ui-active)' : 'var(--text-muted,#999)') + '; border-bottom:1px solid rgba(120,120,130,0.15);';
-    status.textContent = tgt ? 'Applying to selected text' : 'Select a text box on the page';
-    p.appendChild(status);
-    // Scrollable style list grouped
-    const list = document.createElement('div'); list.style.cssText = 'overflow-y:auto; padding:6px;';
-    const curId = tgt && tgt.el && tgt.el.styleId;
-    _dsStyleGroups().forEach(g => {
-        const gl = document.createElement('div'); gl.textContent = g; gl.style.cssText = 'font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted,#999); margin:6px 2px 3px;'; list.appendChild(gl);
-        _dsTextStyles().filter(s => s.group === g).forEach(s => {
-            const b = document.createElement('button');
-            b.textContent = s.name;
-            const on = curId === s.id;
-            b.style.cssText = 'display:block; width:100%; text-align:left; margin-bottom:3px; padding:5px 7px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (on ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (on ? 'rgba(106,106,255,0.18)' : 'transparent') + '; color:var(--text-main); font-family:' + _mbFontCss(s.font || 'serif') + '; font-weight:' + (s.weight || (s.bold ? 700 : 400)) + ';' + (s.italic ? ' font-style:italic;' : '') + (s.caps === 'upper' ? ' text-transform:uppercase;' : '');
-            b.disabled = !tgt;
-            if (!tgt) b.style.opacity = '0.5';
-            b.onclick = () => { if (_dsApplyStyle(s.id)) { try { renderMoodboardCanvas(); } catch (e) {} _dsRenderCenter(); _dsRenderRail(); _dsRenderStylePalette(); } };
-            list.appendChild(b);
-        });
-    });
-    p.appendChild(list);
-    const foot = document.createElement('div'); foot.style.cssText = 'padding:7px 10px; border-top:1px solid var(--border-color,#444);';
-    const openTab = document.createElement('button'); openTab.textContent = 'Edit styles\u2026'; openTab.className = 'action-btn btn-secondary'; openTab.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60);'; openTab.onclick = () => _dsTab('styles');
-    foot.appendChild(openTab); p.appendChild(foot);
-    document.body.appendChild(p);
-}
-let _dsStylePalPos = null;
+// The floating Quick Styles palette lived here and is GONE. It was a second copy of
+// the same list the text gear's docked styles section already shows — same
+// _dsTextStyles() grouping, same _dsApplyStyle, same 'Edit styles…' route — so a
+// designer met the identical control in two places with two different shapes, and one
+// of them was a draggable window parked over the page it was restyling.
+//
+// The docked section wins: it sits ON the text box being styled, carries a colour chip
+// and ink name per style, and refreshes in place as the selection moves. The style
+// EDITOR is unaffected and still reachable from its 'Edit styles…' button.
 // ── Text Styles (character/paragraph styles, seeded from the IDML template) ──
 function _dsTextStyles() {
     if (!Array.isArray(editorialContent.textStyles) || !editorialContent.textStyles.length) {
@@ -15658,7 +16763,8 @@ function _dsStyleEditPanel(id, afterRow) {
     const fontSel = _fillFontSelect(document.createElement('select'), s.font); fontSel.onchange = () => _dsStyleEdit(id, 'font', fontSel.value);
     const size = document.createElement('input'); size.type = 'number'; size.value = Math.round(s.size * 1080); size.style.cssText = 'width:54px; height:24px; font-size:var(--fs-65);'; size.onchange = () => _dsStyleEdit(id, 'size', size.value);
     const track = document.createElement('input'); track.type = 'number'; track.value = Math.round((s.track || 0) * 1000); track.style.cssText = 'width:54px; height:24px; font-size:var(--fs-65);'; track.onchange = () => _dsStyleEdit(id, 'track', track.value);
-    const color = document.createElement('input'); color.type = 'color'; color.value = s.color || '#222222'; color.style.cssText = 'width:30px; height:24px;'; color.onchange = () => _dsStyleEdit(id, 'color', color.value);
+    const color = document.createElement('input'); color.type = 'color'; color.value = s.color || '#222222'; color.style.cssText = 'flex:0 0 auto;'; color.onchange = () => _dsStyleEdit(id, 'color', color.value);
+    _dsInkQuickPicks(color, (hex) => _dsStyleEdit(id, 'color', hex));
     const weight = document.createElement('select'); [['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'SemiBold'], ['700', 'Bold']].forEach(wv => { const o = document.createElement('option'); o.value = wv[0]; o.textContent = wv[1]; if (String(s.weight || (s.bold ? 700 : 400)) === wv[0]) o.selected = true; weight.appendChild(o); }); weight.style.cssText = 'height:24px; font-size:var(--fs-65);'; weight.onchange = () => { const w = parseInt(weight.value, 10); const st = _dsTextStyles().find(x => x.id === id); if (st) { st.weight = w; st.bold = w >= 600; _dsReapplyStyleEverywhere(id); try { renderMoodboardCanvas(); } catch (e) {} _dsRenderCenter(); _dsRenderRail(); _dsRenderStylesTab(); } };
     const ital = document.createElement('input'); ital.type = 'checkbox'; ital.checked = !!s.italic; ital.onchange = () => _dsStyleEdit(id, 'italic', ital.checked);
     const caps = document.createElement('input'); caps.type = 'checkbox'; caps.checked = s.caps === 'upper'; caps.onchange = () => _dsStyleEdit(id, 'caps', caps.checked ? 'upper' : 'none');
@@ -15953,12 +17059,14 @@ function _dsPlaceRelativeInto(parent, desc) {
     if (!_dsPageMovable(desc)) return;
     const wrap = document.createElement('div');
     wrap.style.cssText = 'margin-top:8px; padding-top:9px; border-top:1px dashed var(--border-color);';
-    const lab = document.createElement('div');
-    lab.textContent = 'Place this page';
-    lab.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:5px;';
-    wrap.appendChild(lab);
+    // Label INLINE rather than on its own line above: the whole control is one row now,
+    // which is a row saved on every page that can be moved.
     const row = document.createElement('div');
     row.style.cssText = 'display:flex; gap:5px; align-items:center; flex-wrap:wrap;';
+    const lab = document.createElement('div');
+    lab.textContent = 'Place';
+    lab.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); flex:0 0 auto;';
+    row.appendChild(lab);
     const sel = document.createElement('select');
     // Height set explicitly: the global select rule pins 26px, and padding without a
     // height clips the descenders.
@@ -16278,6 +17386,31 @@ function _deckPageKey(desc) {
 }
 function _dsAnnFam(font) { return _fontCss(font, 'sans'); }
 function _dsAnnList(key) { if (!editorialContent.annotations) editorialContent.annotations = {}; if (!editorialContent.annotations[key]) editorialContent.annotations[key] = []; return editorialContent.annotations[key]; }
+// ONE way in to the settings popup for whatever is selected, from a button that never
+// moves. Which popup it is follows the selection, so a designer learns one control
+// rather than three gears that appear in different places on different objects.
+function _dsOpenSelSettings(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    // Anchor on the button, not the pointer: a popup that opens where you happened to
+    // click lands somewhere different every time.
+    let cx = 300, cy = 120;
+    try { const b = document.getElementById('dsSelSettings'); if (b) { const r = b.getBoundingClientRect(); cx = r.left; cy = r.bottom + 4; } } catch (e) {}
+    // A text box being edited is its own target shape, and it wins: it is the thing
+    // under the cursor when this is pressed.
+    try {
+        if (typeof _dsCurrentEditablePage === 'function' && _dsCurrentEditablePage()
+            && typeof _mbSelected !== 'undefined' && _mbSelected >= 0) {
+            const el = (typeof _mbSelEl === 'function') ? _mbSelEl() : null;
+            if (el && _elType(el) === 'text') { _dsOpenTextGearPopup({ kind: 'mb', i: _mbSelected }, cx, cy); return; }
+        }
+    } catch (e) {}
+    const a = _dsCurrentAnnot();
+    if (!a) { _toast && _toast('Nothing selected', 'Click a text box, shape or arrow on the page first.'); return; }
+    const ty = a.type || 'text';
+    if (ty === 'arrow' || ty === 'elbow') _dsOpenArrowGearPopup(_dsSelKey, _dsSelIdx, cx, cy);
+    else if (ty === 'shape' || ty === 'image') _dsOpenGearPopup(_dsSelKey, _dsSelIdx, cx, cy);
+    else _dsOpenTextGearPopup({ kind: 'ann', key: _dsSelKey, i: _dsSelIdx }, cx, cy);
+}
 function _dsCurrentAnnot() { if (_dsSelKey == null || _dsSelIdx < 0) return null; const l = (editorialContent.annotations || {})[_dsSelKey]; return (l && l[_dsSelIdx]) ? l[_dsSelIdx] : null; }
 // CSS background for a themed page in the LIVE center editor (colour + image
 // with the same zoom/pan approximation), so theme changes are visible while
@@ -16301,10 +17434,17 @@ function _dsPageThemeCss(key) {
     const stored = _pageThemes()[key];
     if (!stored || (!stored.mode && !stored.bg && !stored.image)) return null;
     const th = _pageTheme(key);
+    // Layers are listed TOPMOST FIRST in CSS, and the order has to match the canvas
+    // path above: gradient underneath, then the image, then the tint over it.
+    const layers = [], sizes = [], poss = [];
     let css = '';
-    if (th.mode === 'dark') css += 'background:' + (th.bg || '#000000') + ';';
-    else if (th.bg && th.bg.toLowerCase() !== '#ffffff') css += 'background:' + th.bg + ';';
-    if (th.image) {
+    const _mode = _themeBgMode(stored);
+    const _grad = (_mode === 'gradient') ? _themeGradCss(stored) : null;
+    const _tint = _themeTintCss(stored);
+    if (th.mode === 'dark') css += 'background-color:' + (th.bg || '#000000') + ';';
+    else if (th.bg && th.bg.toLowerCase() !== '#ffffff') css += 'background-color:' + th.bg + ';';
+    if (_tint) { layers.push(_tint); sizes.push('100% 100%'); poss.push('0 0'); }
+    if (th.image && _mode === 'image') {
         const PW = 936, PH = 540;
         const aspect = _themeImgAspect(stored, key) || (PW / PH);   // fallback while real dimensions are still loading
         const r = _coverRect(PW, PH, aspect, stored.imageZoom || 1, stored.imagePanX || 0, stored.imagePanY || 0);
@@ -16314,7 +17454,14 @@ function _dsPageThemeCss(key) {
         // accounts for background-size — so the pan fraction maps directly:
         // 0 = centered, +1/-1 = fully panned to one edge or the other.
         const xPct = 50 - (stored.imagePanX || 0) * 50, yPct = 50 - (stored.imagePanY || 0) * 50;
-        css += 'background-image:url(' + th.image + '); background-size:' + wPct + '% ' + hPct + '%; background-position:' + xPct + '% ' + yPct + '%; background-repeat:no-repeat;';
+        layers.push('url(' + th.image + ')');
+        sizes.push(wPct + '% ' + hPct + '%');
+        poss.push(xPct + '% ' + yPct + '%');
+    }
+    if (_grad) { layers.push(_grad); sizes.push('100% 100%'); poss.push('0 0'); }
+    if (layers.length) {
+        css += 'background-image:' + layers.join(', ') + '; background-size:' + sizes.join(', ')
+            + '; background-position:' + poss.join(', ') + '; background-repeat:no-repeat;';
     }
     return { css: css, dark: th.mode === 'dark' };
 }
@@ -16414,6 +17561,30 @@ function _dsAnnMarqueeAttach(page, key, list, w, hh) {
 // bypasses. bwF/bhF are the box's size as page fractions, captured at drag
 // start so text boxes, image placeholders, mockups, details, and shapes all
 // snap by their edges AND centers, exactly like layout elements.
+// Snap ONE moving edge. A resize drags an edge, not a box, so offering the other
+// two anchors on that axis would let the far edge (which is not moving) capture
+// the snap and drag the whole shape sideways.
+function _dsAnnSnapEdge(v, axis, w, hh, ev) {
+    if (ev && ev.altKey) return v;
+    try {
+        const G = _pageGuide();
+        const mode = G.snapMode || (G.snap ? 'guides' : 'off');
+        if (mode === 'off') return v;
+        const thr = 7 / ((axis === 'x' ? w : hh) || 900);
+        let lines;
+        if (mode === 'grid') {
+            const g = (axis === 'x' ? G.gridSize / 936 : G.gridSize / 540);
+            const near = Math.round(v / g) * g;
+            return (Math.abs(near - v) < thr) ? near : v;
+        }
+        if (!G.set) return v;
+        const ln = _guideLines(G.set);
+        lines = (axis === 'x' ? ln.vs : ln.hs).concat([0, 0.5, 1]);
+        let best = v, bd = thr;
+        lines.forEach(t => { const d = Math.abs(t - v); if (d < bd) { bd = d; best = t; } });
+        return best;
+    } catch (e) { return v; }
+}
 function _dsAnnSnap(nx, ny, bwF, bhF, w, hh, ev) {
     if (ev && ev.altKey) return { x: nx, y: ny };
     try {
@@ -16433,6 +17604,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const s = (a.w || 0.14) * w;
             const box = document.createElement('div');
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + s + 'px; height:' + s + 'px; cursor:move; box-sizing:border-box;';
+            box._page = { w: w, h: hh };
             const disc = document.createElement('div');
             disc.style.cssText = 'position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#f2f2f4; outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + ';';
             const url = _artDetailCache[_artDetailKey(a.pieceId, a)];
@@ -16488,7 +17660,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 box.appendChild(handle);
                 // Unified image controls — same pill + pan handle as shapes
                 // and image boxes. Zoom re-crops from the full-res artwork.
-                _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _artDetailEnsure(a.pieceId, a).then(() => { _dsRenderCenter(); _dsRenderRail(); }); }, min: 1, max: 4, step: 0.5 });
+                _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _artDetailEnsure(a.pieceId, a).then(() => { _dsRenderCenter(); _dsRenderRail(); }); }, min: 1, max: 4, step: DS_ZOOM_STEP });
                 // (centre pan disc removed — Shift-drag the disc to pan; plain drag moves it)
             }
             { const __n = box; __n.style.zIndex = String(100 + ((a.z !== undefined) ? a.z : 5000)); page.appendChild(__n); }
@@ -16500,6 +17672,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const bw = (a.w || 0.3) * w, bh = bw * aspect;
             const box = document.createElement('div');
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;';
+            box._page = { w: w, h: hh };
             if (entry && entry.url) {
                 const img = document.createElement('img'); img.src = entry.url; img.draggable = false;
                 img.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;';
@@ -16546,6 +17719,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         if (a.type === 'image') {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
+            box._page = { w: w, h: hh };
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             const clipI = document.createElement('div');
             clipI.style.cssText = 'position:absolute; inset:0; overflow:hidden; background:#fff; pointer-events:none;';
@@ -16600,8 +17774,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
             };
             box.appendChild(handle);
             if (sel) {
-                _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: 0.5 });
                 _dsMoveGrip(box, moveDownI);
+                _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: DS_ZOOM_STEP });
                 _dsGearButton(box, key, i);
             }
             _dsAnnCaptionInto(page, box, a, key, i, w, hh);
@@ -16614,6 +17788,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const radius = a.shape === 'ellipse' ? '50%' : (Math.max(0, (a.radius !== undefined ? a.radius : 3)) * (w / 936)) + 'px';
             // overflow stays VISIBLE on the box so the grip/gear handles just
             // outside its corners aren't clipped; an inner wrapper clips the image.
+            box._page = { w: w, h: hh };
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + (a.dataUrl ? 'transparent' : (a.fill === 'none' ? 'transparent' : (a.fill || SHAPE_DEFAULT_FILL))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             if (a.dataUrl) {
                 const clip = document.createElement('div');
@@ -16648,26 +17823,29 @@ function _dsRenderAnnots(page, desc, w, hh) {
             };
             // Zoomed image: dragging INSIDE the box pans the image (live).
             // Moving the shape then happens from the grip handle (top-left).
-            const panMode = !!(a.dataUrl && (a.zoom || 1) > 1);
+            const _panCR = a.dataUrl ? _coverRect(bw, bh, a.aspect || 1.33, a.zoom || 1, a.panX || 0, a.panY || 0) : null;
+            // A pixel of slack is rounding, not a crop; 1pt is something to drag.
+            const panMode = !!(a.dataUrl && _panCR && (_panCR.slackX > 1 || _panCR.slackY > 1));
             box.onmousedown = panMode
                 ? (e) => { const wasSel = sel; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
                 : moveDown;
             box.style.cursor = panMode ? 'grab' : 'move';
-            if (a.dataUrl) box.onwheel = (e) => { e.preventDefault(); a.zoom = Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? 0.12 : -0.12))); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
+            if (a.dataUrl) box.onwheel = (e) => { e.preventDefault(); a.zoom = _dsZoomRound(Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? DS_ZOOM_STEP : -DS_ZOOM_STEP) * (e.shiftKey ? 4 : 1)))); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
             // Empty shape: a subtle centred "+ Add image" affordance — click to
             // pick a file (same as drag-dropping one on).
             if (!a.dataUrl && a.fill !== 'none') {
                 const add = document.createElement('button');
                 add.textContent = '+ Add image';
-                add.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); padding:3px 9px; font-size:10px; border-radius:var(--r-10); border:1px dashed rgba(90,90,100,0.55); background:rgba(255,255,255,0.75); color:#5a5a64; cursor:pointer; z-index:21; white-space:nowrap;';
+                add.style.cssText = 'position:absolute; padding:3px 9px; font-size:10px; border-radius:var(--r-10); border:1px dashed rgba(90,90,100,0.55); background:rgba(255,255,255,0.75); color:#5a5a64; cursor:pointer; z-index:21; white-space:nowrap;';
+                { const _ab = _dsBoxWH(box), _aw = 74, _ah = 18; _dsPinChrome(box, add, (_ab.w - _aw) / 2, (_ab.h - _ah) / 2, _aw, _ah); }
                 add.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
                 add.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsSelectAnnot(key, i); _dsFillShapeWithImage(); };
                 box.appendChild(add);
             }
             if (sel) {
                 if (a.dataUrl) {
-                    _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: 0.5 });
                     if (a.dataUrl) _dsMoveGrip(box, moveDown);   // grip = always-there move handle once an image is in
+                    _dsImgZoomPill(box, { get: () => (a.zoom || 1), set: (nz) => { a.zoom = nz; if (nz === 1) { a.panX = 0; a.panY = 0; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); }, min: 1, max: 5, step: DS_ZOOM_STEP });
                 }
                 _dsGearButton(box, key, i);
                 _dsAnnHandles(box, a, w, hh);
@@ -17128,11 +18306,80 @@ function _dsAddArtDetail() {
 // 1:1 aspect lock — makes the shape a perfect square (or a rect/ellipse a
 // perfect circle) in PAGE points, and keeps it that way while resizing.
 // Fractions differ per axis because the page is 936x540: h = w * 936/540.
-function _dsShapeSquareH(wFrac) { return wFrac * (936 / 540); }
+// Height that gives a box the ratio `ratio` (image width / height), in page
+// fractions — w is a fraction of 936 and h of 540, hence the 936/540 term.
+// The deck's stroke weights, in points. A LADDER rather than free numbers for the
+// reason ELEV_WEIGHT_PT is one on the elevation side: a presentation wants the same
+// few weights used throughout, and picking from a short list is what makes that
+// happen. The typed field beside it still accepts anything.
+const DECK_STROKE_PT = [0.5, 1, 1.5, 2, 3, 4];
+// List markers, drawn rather than spelled out. 'None', '\u2022 Bullets' and
+// '1. Numbers' were three buttons with no explicit width, so .action-btn's width:100%
+// gave each one its own row and the list control alone was three rows tall.
+// A gradient chip: a ramp in a box, the way every image editor draws this tool. Its
+// gradient id is made unique per call because several of these can be in the DOM at
+// once and SVG defs are document-global — two chips sharing an id means the second
+// silently takes the first one's fill.
+let _dsGradIconSeq = 0;
+// An angle mark: a baseline, a ray off it, and the arc between them. The word ANGLE was
+// the widest thing in that row and the only one that needed reading.
+function _dsAngleIconSVG() {
+    return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+        + ' stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+        + '<path d="M4 19h16"/><path d="M4 19L17 6"/>'
+        + '<path d="M11 19a7 7 0 0 0-2-4.9" stroke-width="1.3"/></svg>';
+}
+function _dsGradIconSVG() {
+    const id = 'dsgi' + (++_dsGradIconSeq);
+    return '<svg width="14" height="14" viewBox="0 0 24 24">'
+        + '<defs><linearGradient id="' + id + '" x1="0" y1="0" x2="1" y2="1">'
+        + '<stop offset="0" stop-color="currentColor" stop-opacity="1"/>'
+        + '<stop offset="1" stop-color="currentColor" stop-opacity="0.08"/></linearGradient></defs>'
+        + '<rect x="3" y="3" width="18" height="18" rx="2" fill="url(#' + id + ')"'
+        + ' stroke="currentColor" stroke-width="1.5"/></svg>';
+}
+function _dsImageIconSVG() {
+    return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"'
+        + ' stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'
+        + '<rect x="3" y="3" width="18" height="18" rx="2"/>'
+        + '<circle cx="8.5" cy="8.5" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>';
+}
+function _dsListIconSVG(kind) {
+    const L = (y) => '<line x1="7" y1="' + y + '" x2="15" y2="' + y + '"/>';
+    const rows = [4.5, 9, 13.5];
+    let marks = '';
+    if (kind === 'bullet') marks = rows.map(y => '<circle cx="3" cy="' + y + '" r="1.4" fill="currentColor" stroke="none"/>').join('');
+    else if (kind === 'number') marks = rows.map((y, i) => '<text x="1" y="' + (y + 2.4) + '" font-size="5.5" fill="currentColor" stroke="none">' + (i + 1) + '</text>').join('');
+    else marks = rows.map(y => L(y).replace('x1="7"', 'x1="1"')).join('');
+    return '<svg width="16" height="16" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">'
+        + marks + (kind === 'none' ? '' : rows.map(y => L(y)).join('')) + '</svg>';
+}
+function _dsShapeRatioH(wFrac, ratio) { const r = (ratio > 0) ? ratio : 1; return wFrac * (936 / 540) / r; }
+function _dsShapeSquareH(wFrac) { return _dsShapeRatioH(wFrac, 1); }
+// WHICH ratio a locked box holds. `lockAspect` has always meant 'hold a ratio' and
+// always assumed that ratio was 1:1, because square was the only thing offering it.
+// `lockRatio` names the ratio explicitly and is ADDITIVE: absent means 1, so every
+// shape already saved with lockAspect keeps snapping to a square exactly as before,
+// and 'Fit box to image' is the first thing to store anything else.
+function _dsShapeHeldRatio(a) { const r = a && parseFloat(a.lockRatio); return (r > 0) ? r : 1; }
+// Give the box the image's own proportions, so the picture is neither cropped by
+// Fill nor letterboxed by Fit. Width is kept and height moves — the same contract
+// _underlayResize and _ctxResize have, and for the same reason: width is the
+// dimension you set from the layout.
+function _dsShapeFitToImage(a, anyContent) {
+    if (!a) return false;
+    if (!a.dataUrl && !anyContent) return false;
+    const asp = parseFloat(a.aspect);
+    if (!(asp > 0)) return false;
+    // Clamped: a very wide picture would otherwise collapse the box to nothing.
+    a.h = Math.max(0.03, Math.min(1, _dsShapeRatioH(a.w || 0.25, asp)));
+    a.zoom = 1; a.panX = 0; a.panY = 0;   // the box matches now; there is nothing to pan
+    return true;
+}
 function _dsShapeToggleAspectLock() {
     const a = _dsCurrentAnnot(); if (!a || a.type !== 'shape') return;
     a.lockAspect = !a.lockAspect;
-    if (a.lockAspect) a.h = _dsShapeSquareH(a.w || 0.25);
+    if (a.lockAspect) a.h = _dsShapeRatioH(a.w || 0.25, _dsShapeHeldRatio(a));
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail();
@@ -17182,8 +18429,6 @@ function _dsSyncToolbar() {
     const _sd = _dsPages && _dsPages[_dsIndex];
     const _isSpecRow = !!(_sd && _sd.kind === 'spec' && !_sd._install && ((_sd.row && _sd.row.id) || (_sd.members && _sd.members.length)));
     const detB = document.getElementById('dsAddDetail'); if (detB) detB.style.display = _isSpecRow ? 'inline-flex' : 'none';
-    const styB = document.getElementById('dsMbStyles'); if (styB) styB.style.display = editable ? 'inline-flex' : 'none';
-    if (_dsStylePalOpen) { try { _dsRenderStylePalette(); } catch (e) {} }
     if (_dsToolsActiveTab === 'layers') { try { _dsRenderLayersPanel(); } catch (e) {} }
     // Any of the three comprehensive settings popups (text, image/shape,
     // arrow) is the single source of truth once it's open. This toolbar row
@@ -17286,6 +18531,30 @@ function _dsSyncToolbar() {
     // elements and page annotations.
     try { _dsRefreshDockedStyles(); } catch (e) {}
 }
+// PUTTING AN IMAGE INTO A SHAPE IS ONE OPERATION, and it was written twice and
+// had drifted. The Replace… / Add image… button in the gear popup goes through
+// _dsHandleImageFile; dropping a file straight onto the box goes through
+// _dsReadImageToShape. Only the SECOND recorded `fileName`, and that field is the
+// only thing the caption's “Code” source can read — so an image added the way the
+// popup offers could never use it, and the button sat disabled right underneath
+// the button that had just failed to enable it. Reported as “my image placeholder
+// settings is unable to switch over to image code for the caption”.
+//
+// The two paths still decode and downscale separately (1100px vs 1400px long edge,
+// a difference that predates this and is deliberately left alone). What they share
+// is what it MEANS to fill a shape, which is where the drift was.
+function _dsSetShapeImage(a, durl, im, file) {
+    if (!a) return a;
+    a.dataUrl = durl;
+    a.aspect = (im.naturalWidth || 1) / (im.naturalHeight || 1);
+    a.zoom = 1; a.panX = 0; a.panY = 0;
+    // Always written, never merely defaulted: a REPLACEMENT has to take the new
+    // file's name, or the caption goes on quoting a picture that is no longer in
+    // the box. An image with no name clears it and the Code option correctly
+    // disables itself again.
+    a.fileName = (file && file.name) || '';
+    return a;
+}
 function _dsAddImageBox() {
     if (_dsActiveTab !== 'pages') return;
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
@@ -17317,7 +18586,7 @@ function _dsHandleImageFile(file) {
             const aspect = (im.naturalHeight || 1) / (im.naturalWidth || 1);
             if (fillShape) {
                 const a = _dsCurrentAnnot();
-                if (a && a.type === 'shape') { a.dataUrl = durl; a.aspect = (im.naturalWidth || 1) / (im.naturalHeight || 1); a.zoom = 1; a.panX = 0; a.panY = 0; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar(); }
+                if (a && a.type === 'shape') { _dsSetShapeImage(a, durl, im, file); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar(); }
                 return;
             }
             const list = _dsAnnList(key);
@@ -17705,7 +18974,7 @@ function _dsShapeFitOp(op) {
     else if (op === 'contain') { a.fit = 'contain'; a.zoom = 1; a.panX = 0; a.panY = 0; }
     else if (op === 'stretch') { a.fit = 'stretch'; }
     else if (op === 'center') { a.panX = 0; a.panY = 0; }
-    else if (op === 'frame') { const asp = a.aspect || 1.333; a.h = Math.max(0.03, Math.min(1, (a.w * 936 / asp) / 540)); if (a.fit === 'stretch') a.fit = 'cover'; }
+    else if (op === 'frame') { _dsShapeFitToImage(a, true); if (a.fit === 'stretch') a.fit = 'cover'; }
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     if (t.kind === 'mb') { try { renderMoodboardCanvas(); } catch (e) {} }
@@ -17728,7 +18997,7 @@ function _dsReadImageToShape(file, a) {
             const maxEdge = 1400; let dw = im.naturalWidth || 1, dh = im.naturalHeight || 1; const sc = Math.min(1, maxEdge / Math.max(dw, dh)); dw = Math.max(1, Math.round(dw * sc)); dh = Math.max(1, Math.round(dh * sc));
             const cnv = document.createElement('canvas'); cnv.width = dw; cnv.height = dh; cnv.getContext('2d').drawImage(im, 0, 0, dw, dh);
             let durl; try { durl = /png/i.test(file.type) ? cnv.toDataURL('image/png') : cnv.toDataURL('image/jpeg', 0.85); } catch (e) { durl = reader.result; }
-            a.dataUrl = durl; a.aspect = (im.naturalWidth || 1) / (im.naturalHeight || 1); a.zoom = 1; a.panX = 0; a.panY = 0; a.fileName = file.name || '';
+            _dsSetShapeImage(a, durl, im, file);
             if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
             _dsRenderCenter(); _dsRenderRail(); _dsSyncToolbar();
         };
@@ -17744,21 +19013,106 @@ function _dsReadImageToShape(file, a) {
 // the toolbar. Lives OUTSIDE the box (below it) so it never crops.
 // Move grip — small dotted handle at the box's top-left. When a zoomed image
 // owns the drag (panning), this is how you MOVE the shape itself.
+// ── CHROME STAYS ON THE PAGE ──────────────────────────────────────────────
+// The page clips at the trim, because it is a picture of paper. That is right
+// for CONTENT and wrong for the controls hanging off it: a grip at left:-11px
+// or a gear at right:-22px on a full-bleed element is not merely ugly, it is
+// UNREACHABLE — the control exists and cannot be clicked. Reported as “I lose my
+// image placeholder setting + since it falls off the screen”, and the same for
+// the move grip and for the zoom stepper when the image is aligned to the top.
+//
+// CLAMPED, rather than moved into an unclipped layer above the page. Every drag
+// handler here works from POINTER DELTAS (ev.clientX - sx), never from the
+// handle's absolute position, so a handle pulled inside still resizes from
+// wherever it was grabbed — which is what makes this safe. It also reads
+// correctly: a handle sitting on the trim says “this edge is off the page”,
+// which is exactly what a full-bleed element is.
+//
+// `x`/`y` are where the control WANTS to be, in box space (negative is outside
+// the box, which most of them are). `ew`/`eh` are its own size, so the far edge
+// is clamped as well as the near one.
+const DS_CHROME_PAD = 3;
+// One slot per control, measured inward along the top-right diagonal. A DIAGONAL
+// step of d separates two squares of side n only if d >= n, and both are 11px, so
+// anything under 11 leaves them overlapping by a pixel on each axis — which looks
+// exactly like the crowding the ladder exists to remove.
+const DS_CORNER_SLOT = 13;
+// Never past the middle of a small box, or on a 40px shape a control lands on
+// the far side of it.
+function _dsCornerSlot(box, rank) {
+    const b = _dsBoxWH(box);
+    return Math.min(rank * DS_CORNER_SLOT, Math.max(0, Math.min(b.w, b.h) / 2 - 6));
+}
+// Room for the resize handle and the radius handle, each in its own slot.
+function _dsCornerFitsLadder(bw, bh) { return Math.min(bw, bh) >= DS_CORNER_SLOT * 2 + 14; }
+// ── CHROME STAYS ON THE PAGE ──────────────────────────────────────────────
+// The page clips at the trim, because it is a picture of paper. That is right
+// for CONTENT and wrong for the controls hanging off it: a grip at left:-11px
+// or a stepper above the box on a full-bleed element is not merely ugly, it is
+// UNREACHABLE — the control exists and cannot be clicked.
+//
+// CLAMPED rather than moved into an unclipped layer above the page. Every drag
+// handler here works from POINTER DELTAS (ev.clientX - sx), never from the
+// handle's absolute position, so a handle pulled inside still resizes from
+// wherever it was grabbed — which is what makes this safe. It also reads
+// correctly: a handle sitting on the trim says “this edge is off the page”,
+// which is exactly what a full-bleed element is.
+//
+// `x`/`y` are where the control WANTS to be, in box space (negative is outside
+// the box, which most of them are). `ew`/`eh` are its own size, so the far edge
+// is clamped as well as the near one. `pad` is the gap from the trim: zero for
+// the resize handles, which are meant to sit ON it.
+function _dsPinChrome(box, el, x, y, ew, eh, pad) {
+    const P = (pad === undefined) ? DS_CHROME_PAD : pad;
+    const p = box && box._page;
+    if (!p) { el.style.left = x + 'px'; el.style.top = y + 'px'; return el; }
+    const bx = parseFloat(box.style.left) || 0, by = parseFloat(box.style.top) || 0;
+    // Math.max LAST, so an element wider than the page pins to the near edge
+    // rather than to a negative one.
+    const cx = Math.max(P, Math.min(p.w - ew - P, bx + x));
+    const cy = Math.max(P, Math.min(p.h - eh - P, by + y));
+    el.style.left = (cx - bx) + 'px';
+    el.style.top = (cy - by) + 'px';
+    // These four are how the unclamped versions positioned themselves; leaving
+    // any of them set would fight the left/top just written.
+    el.style.right = 'auto'; el.style.bottom = 'auto';
+    el.style.transform = 'none'; el.style.marginBottom = '0';
+    return el;
+}
+// The box's own size, read back off what was actually written to it.
+function _dsBoxWH(box) {
+    return { w: parseFloat(box.style.width) || 0, h: parseFloat(box.style.height) || 0 };
+}
+// 20px plus its 1.5px border either side.
+const DS_GRIP_SIZE = 23;
+// Clear air under the grip: enough that the two never touch, small enough that
+// the stepper still reads as belonging to it.
+const DS_GRIP_GAP = 4;
 function _dsMoveGrip(box, onDown) {
     const g = document.createElement('div');
     g.className = '_dsChrome';
     g.title = 'Drag to move the shape (dragging the image pans it)';
     g.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ui-active)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>';
-    g.style.cssText = 'position:absolute; left:-11px; top:-11px; width:20px; height:20px; border-radius:var(--r-4); background:#fff; border:1.5px solid var(--ui-active); cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    g.style.cssText = 'position:absolute; width:20px; height:20px; border-radius:var(--r-4); background:#fff; border:1.5px solid var(--ui-active); cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    _dsPinChrome(box, g, -11, -11, DS_GRIP_SIZE, DS_GRIP_SIZE);
+    box._gripBox = { l: parseFloat(g.style.left) || 0, t: parseFloat(g.style.top) || 0, s: DS_GRIP_SIZE };
     g.onmousedown = onDown;
     box.appendChild(g);
 }
-// Gear button — top-right of a selected shape/image; opens the settings popup.
+// Settings — bottom-left of a selected shape/image; opens the settings popup.
+const DS_SETTINGS_SIZE = 22;
 function _dsGearButton(box, key, i) {
     const g = document.createElement('button');
+    g.className = '_dsChrome';
     g.title = 'Image placeholder settings (image, fill, stroke, caption)';
-    g.textContent = '+';
-    g.style.cssText = 'position:absolute; right:-22px; top:-4px; width:20px; height:20px; padding:0; border-radius:0; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; color:var(--ui-active); font-size:20px; font-weight:400; line-height:1; text-shadow:0 1px 2px rgba(0,0,0,0.45);';
+    g.innerHTML = svgEdit;
+    g.style.cssText = 'position:absolute; width:' + DS_SETTINGS_SIZE + 'px; height:' + DS_SETTINGS_SIZE + 'px; padding:0;'
+        + ' border-radius:50%; background:#fff; border:1.5px solid var(--ui-active); cursor:pointer;'
+        + ' display:flex; align-items:center; justify-content:center; z-index:25; color:var(--ui-active);'
+        + ' box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    // x clears the sw resize handle, which reaches 7px in from the box's left
+    // edge; y sits the disc just above the bottom edge.
+    { const _b = _dsBoxWH(box); _dsPinChrome(box, g, 9, _b.h - DS_SETTINGS_SIZE - 6, DS_SETTINGS_SIZE + 3, DS_SETTINGS_SIZE + 3, 0); }
     g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
     g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenGearPopup(key, i, e.clientX, e.clientY); };
     box.appendChild(g);
@@ -17804,7 +19158,7 @@ function _dsOpenArrowGearPopup(key, i, cx, cy) {
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
     const label = (a.type === 'elbow') ? ((a.tip === 'none') ? 'Multi-point line' : 'Multi-point arrow') : ((a.tip === 'none') ? 'Line' : 'Arrow');
     head.innerHTML = '<span style="font-weight:700; font-size:var(--fs-60); letter-spacing:0.4px; text-transform:uppercase;">' + label + ' settings</span>';
-    const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
+    const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.title = 'Close'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
     closeB.onclick = () => _dsCloseArrowGearPopup();
     head.appendChild(closeB);
     head.onmousedown = (e) => {
@@ -17822,28 +19176,24 @@ function _dsOpenArrowGearPopup(key, i, cx, cy) {
 
     // Colour — swatches (white and black included, per request) + a custom picker.
     lbl('Colour');
+    // The shared swatch grid, as in the shape and text popups.
+    const aSw = document.createElement('div'); pop.appendChild(aSw);
+    _frameSwatchesInto(aSw, a.color || '#9aa0a6', (hex) => { a.color = hex; refresh(); }, { size: 18 });
     const cr = row();
-    _frameSwatchList().forEach(hex => {
-        const s = document.createElement('button'); s.title = hex;
-        const on = (a.color || '#9aa0a6').toLowerCase() === hex;
-        s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; background:' + hex + '; border:2px solid ' + (on ? 'var(--ui-active)' : (hex === '#ffffff' ? '#999' : 'transparent')) + '; cursor:pointer;';
-        s.onclick = () => { a.color = hex; refresh(); };
-        cr.appendChild(s);
-    });
     const colIn = document.createElement('input'); colIn.type = 'color'; colIn.value = a.color || '#9aa0a6';
-    colIn.title = 'Custom colour'; colIn.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); cursor:pointer;';
+    colIn.title = 'Custom colour'; colIn.style.cssText = 'flex:0 0 auto;';
     colIn.onchange = () => { a.color = colIn.value; refresh(); };
     cr.appendChild(colIn);
 
     // Weight — same +/- and typeable pattern as the text popup's size stepper.
     lbl('Weight (pt)');
     const wr = row();
-    const wDn = document.createElement('button'); wDn.className = 'action-btn btn-secondary'; wDn.textContent = '\u2212'; wDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+    const wDn = document.createElement('button'); wDn.className = 'action-btn btn-secondary'; wDn.textContent = '\u2212'; wDn.dataset.step = 'arrowW'; wDn.title = 'Thinner line'; wDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
     const wVal = document.createElement('input'); wVal.type = 'number'; wVal.min = '0.5'; wVal.max = '20'; wVal.step = '0.5'; wVal.value = a.weight || 1.2;
     wVal.style.cssText = 'width:44px; height:22px; text-align:center; font-size:var(--fs-65); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); padding:0 2px;';
     const commitW = () => { const n = parseFloat(wVal.value); if (!isNaN(n)) { a.weight = Math.max(0.5, Math.min(20, n)); refresh(); } else { wVal.value = a.weight || 1.2; } };
     wVal.onchange = commitW; wVal.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); commitW(); } };
-    const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+    const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.dataset.step = 'arrowW'; wUp.title = 'Thicker line'; wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
     wDn.onclick = () => { a.weight = Math.max(0.5, (a.weight || 1.2) - 0.5); refresh(); };
     wUp.onclick = () => { a.weight = Math.min(20, (a.weight || 1.2) + 0.5); refresh(); };
     wr.appendChild(wDn); wr.appendChild(wVal); wr.appendChild(wUp);
@@ -17852,8 +19202,8 @@ function _dsOpenArrowGearPopup(key, i, cx, cy) {
     // now also editable after the fact on any existing arrow).
     lbl('End head');
     const hr = row();
-    [['arrow', 'Arrowhead'], ['none', 'None (line)']].forEach(([v, l]) => {
-        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+    [['arrow', 'Arrowhead', 'End the line with an arrowhead'], ['none', 'None (line)', 'A plain line with no head']].forEach(([v, l, tip]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l; b.title = tip;
         const on = (a.tip || 'arrow') === v;
         b.style.cssText = 'flex:1; height:24px; padding:0 6px; font-size:var(--fs-60);' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         b.onclick = () => { a.tip = v; refresh(); };
@@ -17863,8 +19213,8 @@ function _dsOpenArrowGearPopup(key, i, cx, cy) {
     // Start cap — plain end vs a dot, independent of the head.
     lbl('Start cap');
     const sr = row();
-    [['none', 'None'], ['circle', 'Dot']].forEach(([v, l]) => {
-        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+    [['none', 'None', 'Nothing at the start of the line'], ['circle', 'Dot', 'A filled dot at the start, for pointing at a spot']].forEach(([v, l, tip]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l; b.title = tip;
         const on = (a.startCap || 'none') === v;
         b.style.cssText = 'flex:1; height:24px; padding:0 6px; font-size:var(--fs-60);' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         b.onclick = () => { a.startCap = v; refresh(); };
@@ -17874,8 +19224,8 @@ function _dsOpenArrowGearPopup(key, i, cx, cy) {
     // Line ends — round or sharp (butt) caps/joins along the shaft itself.
     lbl('Line ends');
     const er = row();
-    [['round', 'Round'], ['butt', 'Sharp']].forEach(([v, l]) => {
-        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+    [['round', 'Round', 'Rounded line ends'], ['butt', 'Sharp', 'Square-cut line ends']].forEach(([v, l, tip]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l; b.title = tip;
         const on = (a.lineCap || 'round') === v;
         b.style.cssText = 'flex:1; height:24px; padding:0 6px; font-size:var(--fs-60);' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         b.onclick = () => { a.lineCap = v; refresh(); };
@@ -17912,7 +19262,13 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     const a = (_dsAnnList(key) || [])[i]; if (!a) return;
     const isImg = a.type === 'image';
     const pop = document.createElement('div'); pop.id = 'dsGearPopup';
-    const popW = 236, popMaxH = Math.round(window.innerHeight * 0.86);
+    // WIDER AND SHORTER. At 236 every section was a header line above its controls,
+    // which ran the popup the full height of the screen and still scrolled — and a
+    // .action-btn is width:100%, so anything that wrapped (Pill) came out as a full
+    // width slab. The extra width pays for a label COLUMN instead, and the box ends
+    // up roughly square. Reported as “make the pop up box more square, keep everything
+    // tight and organized, no unnecessary big buttons like the Pill button”.
+    const popW = 340, popMaxH = Math.round(window.innerHeight * 0.86);
     // Sized and placed against the SAME number, so the clamp cannot disagree with the
     // box: a hardcoded height guess put the popup where a box of that height would fit
     // and then let the real one grow past the bottom of the screen with no scroll.
@@ -17926,6 +19282,7 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
     head.innerHTML = '<span style="font-weight:700; font-size:var(--fs-60); letter-spacing:0.4px; text-transform:uppercase;">' + (isImg ? 'Image box' : (a.shape === 'ellipse' ? 'Ellipse' : 'Rectangle')) + ' settings</span>';
     const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
+    closeB.title = 'Close';
     closeB.onclick = () => _dsCloseGearPopup();
     head.appendChild(closeB);
     head.onmousedown = (e) => {
@@ -17938,46 +19295,143 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     };
     pop.appendChild(head);
     setTimeout(() => document.addEventListener('mousedown', _dsGearPopupOutside), 0);
-    const lbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; pop.appendChild(d); };
-    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:5px; align-items:center; flex-wrap:wrap;'; pop.appendChild(d); return d; };
+    // A LABEL COLUMN, NOT A LABEL ROW. Ten sections each spending a line on their own
+    // name is ~30px of height apiece for a word. Same move _dsTypeSection made for the
+    // type rows, and the same fixed label width, so the sections line up as a table
+    // rather than jittering with the length of the word.
+    const SEC_LBL_W = 74;
+    const sec = (txt, tip, top) => {
+        const wrap = document.createElement('div');
+        // No gap on the WRAPPER, and no wrap on it either: it holds exactly two things,
+        // the label and the control body, and the label must stay beside its controls.
+        // The spacing is the label's own margin, which also keeps 'a flex row with a gap
+        // must wrap' true of every row in this popup that actually holds controls.
+        wrap.style.cssText = 'display:flex; align-items:' + (top ? 'flex-start' : 'center') + '; margin-bottom:5px;';
+        const l = document.createElement('div'); l.textContent = txt; if (tip) l.title = tip;
+        l.style.cssText = 'flex:0 0 ' + SEC_LBL_W + 'px; font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.4px; color:var(--text-muted); line-height:1.3; margin-right:6px;' + (top ? ' padding-top:3px;' : '') + (tip ? ' cursor:help;' : '');
+        wrap.appendChild(l);
+        const body = document.createElement('div');
+        body.style.cssText = 'flex:1 1 auto; min-width:0; display:flex; gap:4px; align-items:center; flex-wrap:wrap;';
+        wrap.appendChild(body);
+        pop.appendChild(wrap);
+        return body;
+    };
+    // A continuation line under a section, indented to the same column so the eye
+    // still reads one block.
+    const subRow = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:4px; align-items:center; flex-wrap:wrap; margin:0 0 5px ' + (SEC_LBL_W + 6) + 'px;'; pop.appendChild(d); return d; };
+    // _frameSwatchesInto lays out its own family rows, so it needs a BLOCK; handed a
+    // flex body it would put the families side by side.
+    const swIn = (txt, tip) => { const b = sec(txt, tip, true); const d = document.createElement('div'); d.style.cssText = 'flex:1 1 100%; min-width:0;'; b.appendChild(d); return d; };
+    const subBlock = () => { const d = document.createElement('div'); d.style.cssText = 'margin:0 0 5px ' + (SEC_LBL_W + 6) + 'px;'; pop.appendChild(d); return d; };
     // Image.
-    lbl('Image');
-    const ir = row();
-    const addB = document.createElement('button'); addB.className = 'action-btn btn-secondary'; addB.textContent = a.dataUrl ? 'Replace\u2026' : 'Add image\u2026'; addB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
+    const ir = sec('Image', 'The picture in this box');
+    const addB = document.createElement('button'); addB.className = 'action-btn btn-secondary'; addB.textContent = a.dataUrl ? 'Replace\u2026' : 'Add image\u2026'; addB.title = a.dataUrl ? 'Swap in a different picture, keeping this box' : 'Choose a picture to fill this box'; addB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
     addB.onclick = () => { _dsSelectAnnot(key, i); _dsFillShapeWithImage(); pop.remove(); };
     ir.appendChild(addB);
     if (a.dataUrl) {
-        const remB = document.createElement('button'); remB.className = 'action-btn btn-secondary'; remB.textContent = 'Remove'; remB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
+        const remB = document.createElement('button'); remB.className = 'action-btn btn-secondary'; remB.textContent = 'Remove'; remB.title = 'Empty the box, leaving the shape in place'; remB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
         remB.onclick = () => { _dsSelectAnnot(key, i); _dsClearAnnImage(); pop.remove(); };
         ir.appendChild(remB);
-        const zr = document.createElement('button'); zr.className = 'action-btn btn-secondary'; zr.textContent = 'Reset zoom'; zr.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
+        const zr = document.createElement('button'); zr.className = 'action-btn btn-secondary'; zr.textContent = 'Reset zoom'; zr.title = 'Back to 1x with no pan'; zr.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
         zr.onclick = () => { a.zoom = 1; a.panX = 0; a.panY = 0; refresh(); };
         ir.appendChild(zr);
+        // Fit the BOX to the picture, rather than the picture to the box. The two
+        // controls below choose how a mismatched image sits inside its frame; this
+        // removes the mismatch, which is usually what was actually wanted.
+        const fitBoxR = subRow();
+        const fbB = document.createElement('button'); fbB.className = 'action-btn btn-secondary';
+        fbB.textContent = 'Fit box to image'; fbB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);';
+        fbB.title = 'Reshape the box to the image\u2019s own proportions \u2014 keeps the width, moves the height';
+        fbB.onclick = () => { if (_dsShapeFitToImage(a)) { a.lockRatio = parseFloat(a.aspect); refresh(); } };
+        fitBoxR.appendChild(fbB);
+        const lkW = document.createElement('label');
+        lkW.style.cssText = 'display:flex; align-items:center; gap:4px; font-size:var(--fs-60); color:var(--text-main); cursor:pointer; flex:0 0 auto;';
+        lkW.title = 'Hold this ratio while the box is resized';
+        const lkC = document.createElement('input'); lkC.type = 'checkbox'; lkC.checked = !!a.lockAspect;
+        lkC.onchange = () => {
+            a.lockAspect = lkC.checked;
+            // Lock what is ON SCREEN. Ticking the box must not also reshape it — that is
+            // the resize-as-a-side-effect-of-a-checkbox the context blocks refuse to do.
+            if (lkC.checked) { const cur = ((a.w || 0.25) * 936) / Math.max(1e-6, (a.h || 0.2) * 540); a.lockRatio = cur; }
+            refresh();
+        };
+        lkW.appendChild(lkC); lkW.appendChild(document.createTextNode('Lock'));
+        fitBoxR.appendChild(lkW);
+        // THE CODE IS SHOWN WHETHER OR NOT THE CAPTION PRINTS IT. It used to be
+        // reachable only by turning the caption ON and switching its source to Code,
+        // which is a decision about the DECK; wanting the code is usually a decision
+        // about somewhere else entirely — pasting it into a Dropbox or Finder search to
+        // find the original file. Most boxes never turn the caption on at all.
+        //
+        // A readonly field rather than plain text, so it can be selected and dragged
+        // out by hand even if the clipboard is refused, and so Copy has something to
+        // select. Same string _dsResolveCaptionText prints, from _dsImageCode, or the
+        // panel and the page would disagree about what the code is.
+        const cdR = sec('Code', 'The image code — the file this box was filled from, without its extension');
+        const code = _dsImageCode(a);
+        if (code) {
+            const ci = document.createElement('input'); ci.type = 'text'; ci.readOnly = true; ci.value = code;
+            ci.title = code;
+            // flex-basis 60px, NOT auto. In a wrapping flex row an item is wrapped on its
+            // HYPOTHETICAL size before it is ever shrunk, and an <input> reports a content
+            // width of ~180px whatever min-width says - which is why the button beside it
+            // kept dropping onto a line of its own.
+            ci.style.cssText = 'flex:1 1 60px; min-width:0; height:22px; font-size:var(--fs-60); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); padding:0 5px;';
+            ci.onclick = () => { try { ci.select(); } catch (e) {} };
+            // The popup lives over the deck, which binds single-letter shortcuts.
+            ci.onkeydown = (ev) => ev.stopPropagation();
+            // THE UNIVERSAL COPY GLYPH, and it is already in this file: svgDup, the two
+            // overlapping rounded rectangles the Dupe column uses. Copy and duplicate are
+            // the same idea, and a second hand-drawn version of the same glyph is how two
+            // of them end up subtly different.
+            //
+            // To the LEFT of the field, and an icon rather than the word: the field is the
+            // thing being read, so the action belongs before it in the reading order, and
+            // an icon leaves the code the whole width of the row.
+            const cp = document.createElement('button'); cp.className = 'action-btn btn-secondary';
+            cp.innerHTML = svgDup;
+            cp.dataset.act = 'copy-code';
+            cp.title = 'Copy the code, to paste into a Dropbox or Finder search';
+            cp.style.cssText = 'flex:0 0 auto; width:24px; min-width:24px; height:22px; padding:0; display:inline-flex; align-items:center; justify-content:center;';
+            cp.onclick = () => _dsCopyText(code, ci);
+            cdR.appendChild(cp);
+            cdR.appendChild(ci);
+        } else {
+            // Images placed before the name was recorded have nothing to show, and
+            // nothing to recover it from. Say so rather than showing an empty field.
+            const nn = document.createElement('div');
+            nn.textContent = 'No file name on record — re-upload the image to capture it.';
+            nn.style.cssText = 'flex:1 1 auto; font-size:var(--fs-55); color:var(--text-muted); line-height:1.35;';
+            cdR.appendChild(nn);
+        }
         if (!isImg) {
-            lbl('Image fit');
-            const fitR = row();
-            [['cover', 'Fill (crop)'], ['contain', 'Fit (whole image)']].forEach(([v, l]) => {
-                const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
-                const on = (a.fit || 'cover') === v;
-                b.style.cssText = 'flex:1; height:22px; font-size:var(--fs-55);' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
-                b.onclick = () => { a.fit = v; refresh(); };
-                fitR.appendChild(b);
-            });
+            const fitR = sec('Image fit', 'How a mismatched picture sits inside the box');
+            // All FIVE modes, so removing the toolbar's fit menu loses nothing. Stretch
+            // and Centre were only ever reachable from that menu.
+            _dsSegRowInto(fitR, [
+                ['cover', 'Fill', 'Fill the box and crop whatever overflows'],
+                ['contain', 'Fit', 'Show the whole picture, letterboxed inside the box'],
+                ['stretch', 'Stretch', 'Distort the picture to the box exactly'],
+                ['center', 'Centre', 'Leave the picture at its own size, centred']
+            ], (a.fit || 'cover'), (v) => { a.fit = v; refresh(); });
         }
     }
     // Drop shadow — same soft shadow the artwork mockups use.
-    lbl('Effects');
-    const efR = row();
-    const shB = document.createElement('button'); shB.className = 'action-btn btn-secondary'; shB.textContent = a.shadow ? 'Drop shadow: on' : 'Drop shadow: off';
+    const efR = sec('Effects', 'Drop shadow');
+    const shB = document.createElement('button'); shB.className = 'action-btn btn-secondary'; shB.textContent = a.shadow ? 'Drop shadow: on' : 'Drop shadow: off'; shB.title = 'Soft shadow, the same one the artwork mockups use';
     shB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);' + (a.shadow ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
     shB.onclick = () => { a.shadow = !a.shadow; refresh(); };
     efR.appendChild(shB);
     if (!isImg) {
-        // Fill + stroke, side by side so they read as one system.
-        lbl('Fill \u00b7 Stroke');
-        const fr = row();
+        // Fill and stroke each get the SHARED swatch grid (_frameSwatchesInto), the same
+        // one the text popup and the Elevations settings use, so a colour is picked the
+        // same way wherever you are. They were two different idioms in one popup: the
+        // text popup drew filled dots with a selection ring while this one drew colour
+        // RINGS filled in when chosen, and neither went through the shared renderer.
+        _frameSwatchesInto(swIn('Fill', 'Shape fill colour'), (a.fill && a.fill !== 'none') ? a.fill : '', (hex) => { a.fill = hex; refresh(); }, { size: 18 });
+        const fr = subRow();
         const fillIn = document.createElement('input'); fillIn.type = 'color'; fillIn.value = (a.fill && a.fill !== 'none') ? a.fill : SHAPE_DEFAULT_FILL;
-        fillIn.title = 'Fill colour'; fillIn.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); cursor:pointer;';
+        fillIn.title = 'Fill colour'; fillIn.style.cssText = 'flex:0 0 auto;';
         fillIn.onchange = () => { a.fill = fillIn.value; refresh(); };
         fr.appendChild(fillIn);
         const tB = document.createElement('button'); tB.className = 'action-btn btn-secondary'; tB.textContent = a.fill === 'none' ? 'Fill: transparent' : 'Make transparent';
@@ -17985,32 +19439,43 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         tB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-55);' + (a.fill === 'none' ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         tB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeToggleFill(); pop.remove(); };
         fr.appendChild(tB);
-        const sr = row(); sr.style.marginTop = '5px';
-        _frameSwatchList().forEach(hex => {
-            const s = document.createElement('button'); s.title = 'Stroke ' + hex + ' (click again to remove)';
-            s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; border:3px solid ' + hex + '; background:' + (a.stroke === hex ? hex : 'transparent') + '; cursor:pointer;';
-            s.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeSwatch(hex); refresh(); };
-            sr.appendChild(s);
-        });
+        _frameSwatchesInto(swIn('Stroke', 'Outline colour'), a.stroke || '', (hex) => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeSwatch(hex); refresh(); }, { size: 18 });
+        const sr = subRow();
         const strokeIn = document.createElement('input'); strokeIn.type = 'color'; strokeIn.value = a.stroke || '#c0392b';
-        strokeIn.title = 'Custom stroke colour'; strokeIn.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); cursor:pointer;';
+        strokeIn.title = 'Custom stroke colour'; strokeIn.style.cssText = 'flex:0 0 auto;';
         strokeIn.onchange = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeColor(strokeIn.value); refresh(); };
         sr.appendChild(strokeIn);
-        const wDn = document.createElement('button'); wDn.className = 'action-btn btn-secondary'; wDn.textContent = '\u2212'; wDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
-        wDn.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeBump(-1); refresh(); };
-        const wLbl = document.createElement('span'); wLbl.textContent = a.stroke ? (a.strokeW || 1.5).toFixed(1) : '\u2014'; wLbl.style.cssText = 'min-width:20px; text-align:center; color:var(--text-muted);';
-        const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
-        wUp.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsShapeStrokeBump(1); refresh(); };
-        sr.appendChild(wDn); sr.appendChild(wLbl); sr.appendChild(wUp);
+        const wr = sec('Weight', 'Stroke weight in points');
+        const curW = (a.strokeW > 0) ? a.strokeW : 1.5;
+        const setW = (v) => { a.strokeW = Math.max(0.25, Math.min(20, Math.round(v * 100) / 100)); if (!a.stroke) a.stroke = '#000000'; refresh(); };
+        const wDn = document.createElement('button'); wDn.className = 'action-btn btn-secondary'; wDn.textContent = '\u2212'; wDn.dataset.step = 'strokeW'; wDn.title = 'Thinner stroke';
+        wDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        wDn.onclick = () => setW(curW - 0.25);
+        // TYPED, not just nudged. The number was a muted span showing an em dash
+        // whenever no stroke colour was set, so the one thing you need in order to use
+        // the same weight on the next page — what the weight actually IS — was the one
+        // thing it would not tell you.
+        const wIn = document.createElement('input'); wIn.type = 'number'; wIn.min = '0.25'; wIn.max = '20'; wIn.step = '0.25'; wIn.value = curW;
+        wIn.title = 'Stroke weight in points \u2014 type it to match another shape exactly';
+        wIn.style.cssText = 'width:48px; height:22px; text-align:center; font-size:var(--fs-65); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); padding:0 2px;';
+        const commitW = () => { const n = parseFloat(wIn.value); if (!isNaN(n)) setW(n); else wIn.value = curW; };
+        wIn.onchange = commitW; wIn.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); commitW(); } };
+        const wUp = document.createElement('button'); wUp.className = 'action-btn btn-secondary'; wUp.textContent = '+'; wUp.dataset.step = 'strokeW'; wUp.title = 'Thicker stroke';
+        wUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        wUp.onclick = () => setW(curW + 0.25);
+        wr.appendChild(wDn); wr.appendChild(wIn); wr.appendChild(wUp);
+        const wUnit = document.createElement('span'); wUnit.textContent = 'pt'; wUnit.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted);';
+        wr.appendChild(wUnit);
+        // The ladder, so the same few weights get reused across the deck.
+        _dsSegRowInto(subBlock(), DECK_STROKE_PT.map(w => [w, String(w), w + 'pt stroke']), curW, (v) => setW(v));
         if (a.shape !== 'ellipse') {
-            lbl('Corner radius');
-            const rr = row();
-            const rDn = document.createElement('button'); rDn.className = 'action-btn btn-secondary'; rDn.textContent = '\u2212'; rDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+            const rr = sec('Radius', 'Corner radius in points');
+            const rDn = document.createElement('button'); rDn.className = 'action-btn btn-secondary'; rDn.textContent = '\u2212'; rDn.dataset.step = 'radius'; rDn.title = 'Squarer corners'; rDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
             const rVal = document.createElement('input'); rVal.type = 'number'; rVal.min = '0'; rVal.max = '200'; rVal.step = '1'; rVal.value = (a.radius !== undefined ? a.radius : 3);
             rVal.style.cssText = 'width:44px; height:22px; text-align:center; font-size:var(--fs-65); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); padding:0 2px;';
             const commitR = () => { const n = parseFloat(rVal.value); if (!isNaN(n)) { a.radius = Math.max(0, n); refresh(); } else { rVal.value = (a.radius !== undefined ? a.radius : 3); } };
             rVal.onchange = commitR; rVal.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); commitR(); } };
-            const rUp = document.createElement('button'); rUp.className = 'action-btn btn-secondary'; rUp.textContent = '+'; rUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+            const rUp = document.createElement('button'); rUp.className = 'action-btn btn-secondary'; rUp.textContent = '+'; rUp.dataset.step = 'radius'; rUp.title = 'Rounder corners'; rUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
             rDn.onclick = () => { a.radius = Math.max(0, (a.radius !== undefined ? a.radius : 3) - 2); refresh(); };
             rUp.onclick = () => { a.radius = Math.max(0, (a.radius !== undefined ? a.radius : 3) + 2); refresh(); };
             rr.appendChild(rDn); rr.appendChild(rVal); rr.appendChild(rUp);
@@ -18018,15 +19483,16 @@ function _dsOpenGearPopup(key, i, cx, cy) {
             rr.appendChild(rUnit);
             const pillB = document.createElement('button'); pillB.className = 'action-btn btn-secondary'; pillB.textContent = 'Pill';
             pillB.title = 'Fully rounded ends';
-            pillB.style.cssText = 'height:22px; font-size:var(--fs-55); margin-left:4px;';
+            // Sized, because .action-btn is width:100%: unsized it wrapped onto its own
+            // line and painted a full-width slab for a one-word option.
+            pillB.style.cssText = 'flex:0 0 auto; width:38px; min-width:38px; height:22px; padding:0; font-size:var(--fs-55);';
             pillB.onclick = () => { a.radius = 999; refresh(); };
             rr.appendChild(pillB);
         }
     }
     // Caption.
-    lbl('Caption');
-    const cr1 = row();
-    const capB = document.createElement('button'); capB.className = 'action-btn btn-secondary'; capB.textContent = a.showCaption ? 'Caption: on' : 'Caption: off';
+    const cr1 = sec('Caption', 'Printed under the box');
+    const capB = document.createElement('button'); capB.className = 'action-btn btn-secondary'; capB.textContent = a.showCaption ? 'Caption: on' : 'Caption: off'; capB.title = 'Print a caption under this box — the image code, or your own text';
     capB.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60);' + (a.showCaption ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
     capB.onclick = () => { _dsSelKey = key; _dsSelIdx = i; _dsToggleAnnCaption(); refresh(); };
     cr1.appendChild(capB);
@@ -18037,8 +19503,7 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         // spec pages. Available on shapes with an image fill too, not just
         // the plain image-placeholder type — disabled until a file with a
         // known name has actually been uploaded into this box.
-        lbl('Caption source');
-        const csr = row();
+        const csr = sec('Source', 'What the caption says — your own text, or the image code');
         [['text', 'Custom text'], ['filename', 'Code']].forEach(([v, l]) => {
             const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
             const on = (a.capSource || 'text') === v;
@@ -18057,7 +19522,7 @@ function _dsOpenGearPopup(key, i, cx, cy) {
             b.onclick = () => { a.capAlign = v; refresh(); };
             cr1.appendChild(b);
         });
-        const cr2 = row(); cr2.style.marginTop = '5px';
+        const cr2 = sec('Font', 'Caption typeface');
         const capF = _fillFontSelect(document.createElement('select'), a.capFont, 'serif');
         capF.title = 'Caption font';
         capF.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
@@ -18067,7 +19532,7 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     // How-to.
     const help = document.createElement('p');
     help.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
-    help.textContent = 'Scroll on the image to zoom. When zoomed, drag inside to pan; move the shape with the grip at its top-left. Double-click the caption to edit its text. 1:1 in the toolbar locks a perfect square / circle.';
+    help.textContent = 'Scroll to zoom, drag inside to pan, move it by the grip at top-left. Double-click the caption to edit it.';
     pop.appendChild(help);
     document.body.appendChild(pop);
     _dsClampPopup(pop);   // measured, now that the popup has a real height
@@ -18079,12 +19544,54 @@ function _dsOpenGearPopup(key, i, cx, cy) {
 // the same idea as the image code printed under a frame mockup on spec
 // pages. Falls back to the typed caption if no file name was captured (e.g.
 // an older project from before this field existed).
+// THE IMAGE CODE IS THE UPLOADED FILE'S NAME WITHOUT ITS EXTENSION, and this is
+// the ONE definition of it. The caption prints it when Caption source is Code, and
+// the gear popup shows it with a Copy button whether the caption is on or not —
+// those are different questions. A designer wants the code to paste into a Dropbox
+// or Finder search, which has nothing to do with whether the deck prints it, and
+// most boxes never turn the caption on at all.
+//
+// Only the LAST extension goes: ART-1.v2.final.jpg is ART-1.v2.final, because the
+// dots in a real code are part of it.
+function _dsImageCode(a) {
+    const fn = ((a && a.fileName) || '') + '';
+    return fn ? fn.replace(/\.[^.]+$/, '') : '';
+}
 function _dsResolveCaptionText(a) {
     if (a.capSource === 'filename') {
-        const fn = (a.fileName || '') + '';
-        if (fn) return fn.replace(/\.[^.]+$/, '');
+        const c = _dsImageCode(a);
+        if (c) return c;
     }
     return a.caption || 'Caption';
+}
+// COPY, WITH A FALLBACK. navigator.clipboard is undefined outside a secure context
+// and this app is opened from file:// about as often as from https, so the async API
+// alone would leave the button dead on exactly the machines a designer uses to dig
+// through a Dropbox folder. The fallback selects the field that is already on screen
+// and asks the document to copy — and if even that is refused, the text is left
+// SELECTED, which is itself the answer.
+function _dsCopyText(text, inputEl) {
+    const done = () => { try { _toast('Code copied', text); } catch (e) {} };
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(done, () => _dsCopyFallback(text, inputEl, done));
+            return;
+        }
+    } catch (e) {}
+    _dsCopyFallback(text, inputEl, done);
+}
+function _dsCopyFallback(text, inputEl, done) {
+    let tmp = null;
+    try {
+        let el = inputEl;
+        if (!el) { tmp = el = document.createElement('textarea'); el.value = text; el.style.cssText = 'position:fixed; left:-9999px; top:0;'; document.body.appendChild(el); }
+        el.focus(); el.select();
+        try { el.setSelectionRange(0, (text || '').length); } catch (e) {}
+        const ok = document.execCommand && document.execCommand('copy');
+        if (tmp) tmp.remove();
+        if (ok) { done(); return; }
+    } catch (e) { if (tmp) { try { tmp.remove(); } catch (e2) {} } }
+    try { _toast('Copy blocked', 'The code is selected — press Ctrl+C to copy it.'); } catch (e) {}
 }
 function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     if (!a.showCaption) return;
@@ -18112,24 +19619,62 @@ function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     };
     page.appendChild(cap);
 }
+// The zoom step, in ONE place. It was 0.5 in the stepper and 0.12 on the wheel,
+// so the same value answered to two different grains depending on how you
+// reached it, and neither let you land on a round number you had in mind.
+const DS_ZOOM_STEP = 0.1;
+// Float addition does not land on tenths (1.1 + 0.1 is 1.2000000000000002) and
+// the readout shows d.d, so without this the stepper walks the value into digits
+// the field cannot show and a typed 1.2 stops matching a stepped 1.2.
+function _dsZoomRound(z) { return Math.round((z || 1) * 100) / 100; }
 function _dsImgZoomPill(box, opts) {
     const zWrap = document.createElement('div');
     zWrap.className = '_dsChrome';
-    zWrap.style.cssText = 'position:absolute; left:50%; bottom:100%; transform:translateX(-50%); margin-bottom:5px; display:flex; gap:3px; z-index:24; align-items:center;';
+    zWrap.style.cssText = 'position:absolute; display:flex; gap:3px; z-index:24; align-items:center;';
     const mk = (label, delta) => {
         const b = document.createElement('button'); b.textContent = label;
         b.title = (delta > 0 ? 'Zoom in' : 'Zoom out') + ' \u2014 you can also scroll on the box';
         b.style.cssText = 'width:20px; height:20px; padding:0; font-size:12px; line-height:1; border-radius:50%; border:1px solid var(--ui-active); background:#fff; color:var(--ui-active); cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
         b.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
-        b.onclick = (e) => { e.preventDefault(); e.stopPropagation(); const cur = opts.get(); const nz = Math.max(opts.min, Math.min(opts.max, cur + delta)); if (nz !== cur) opts.set(nz); };
+        b.onclick = (e) => { e.preventDefault(); e.stopPropagation(); const cur = opts.get(); const nz = _dsZoomRound(Math.max(opts.min, Math.min(opts.max, cur + delta * (e.shiftKey ? 5 : 1)))); if (nz !== cur) opts.set(nz); };
         return b;
     };
     zWrap.appendChild(mk('\u2212', -(opts.step || 0.5)));
-    const zLbl = document.createElement('span');
-    zLbl.textContent = opts.get().toFixed(1) + '\u00d7';
-    zLbl.style.cssText = 'font-size:10px; color:#fff; background:var(--ui-active); border-radius:var(--r-8); padding:2px 7px;';
+    // Typed as well as stepped. Commit on Enter or on leaving the field, never
+    // per keystroke: typing "2" on the way to "2.5" would re-render the page at 2
+    // and take the caret with it.
+    const zLbl = document.createElement('input');
+    zLbl.type = 'text';
+    zLbl.value = opts.get().toFixed(1);
+    zLbl.title = 'Zoom \u2014 type a value, or scroll on the image';
+    zLbl.style.cssText = 'font-size:10px; color:#fff; background:var(--ui-active); border:none; border-radius:var(--r-8); padding:2px 0; width:34px; text-align:center; font-family:inherit;';
+    zLbl.onmousedown = (e) => { e.stopPropagation(); };
+    zLbl.onclick = (e) => { e.stopPropagation(); zLbl.select(); };
+    const commit = () => {
+        const v = parseFloat(zLbl.value);
+        const cur = opts.get();
+        if (isNaN(v)) { zLbl.value = cur.toFixed(1); return; }
+        const nz = _dsZoomRound(Math.max(opts.min, Math.min(opts.max, v)));
+        if (nz !== cur) opts.set(nz); else zLbl.value = nz.toFixed(1);
+    };
+    zLbl.onkeydown = (e) => {
+        e.stopPropagation();
+        if (e.key === 'Enter') { e.preventDefault(); commit(); }
+        else if (e.key === 'Escape') { e.preventDefault(); zLbl.value = opts.get().toFixed(1); zLbl.blur(); }
+    };
+    zLbl.onblur = commit;
     zWrap.appendChild(zLbl);
     zWrap.appendChild(mk('+', (opts.step || 0.5)));
+    // Two 20px buttons, two 3px gaps and a readout that is always d.d×, so the
+    // width is known without measuring — which matters, because this runs before
+    // the pill is in the document and a measurement there reads zero.
+    const _zw = 20 + 3 + 34 + 3 + 20, _zh = 20;
+    // Directly under the grip and left-aligned with it. Falls back to a fixed
+    // inset only where there is no grip at all (the artwork-detail disc), which
+    // is the one caller that shows a stepper without one.
+    const _g = box._gripBox;
+    if (_g) _dsPinChrome(box, zWrap, _g.l, _g.t + _g.s + DS_GRIP_GAP, _zw, _zh);
+    else _dsPinChrome(box, zWrap, 4, 30, _zw, _zh);
     box.appendChild(zWrap);
 }
 // Subtle centre pan handle: four small chevrons (\u2039 \u203a and up/down) on a
@@ -18139,7 +19684,8 @@ function _dsImgPanHandle(box, onDown) {
     ph.className = '_dsChrome';
     ph.title = 'Drag to pan the image \u00b7 scroll to zoom';
     ph.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b6b74" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 5 12 1 16 5" transform="translate(0,2)"/><polyline points="8 19 12 23 16 19" transform="translate(0,-2)"/><polyline points="5 8 1 12 5 16" transform="translate(2,0)"/><polyline points="19 8 23 12 19 16" transform="translate(-2,0)"/></svg>';
-    ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:22px; height:22px; border-radius:50%; background:rgba(255,255,255,0.82); border:1px solid rgba(120,120,130,0.6); cursor:move; display:flex; align-items:center; justify-content:center; z-index:23; box-shadow:0 1px 4px rgba(0,0,0,0.2);';
+    ph.style.cssText = 'position:absolute; width:22px; height:22px; border-radius:50%; background:rgba(255,255,255,0.82); border:1px solid rgba(120,120,130,0.6); cursor:move; display:flex; align-items:center; justify-content:center; z-index:23; box-shadow:0 1px 4px rgba(0,0,0,0.2);';
+    { const _b = _dsBoxWH(box); _dsPinChrome(box, ph, (_b.w - 24) / 2, (_b.h - 24) / 2, 24, 24); }
     ph.onmousedown = onDown;
     box.appendChild(ph);
     return ph;
@@ -18189,10 +19735,17 @@ function _paragraphStyle() { const s = editorialContent.paragraphStyle || {}; re
 // image-code caption under mockups. Anchored under the gear button.
 // Shared popup builder for the toolbar's type/settings menus. Anchors under the
 // given button, toggles off if already open, closes on outside click.
+// Every popup _dsPopup owns. They anchor to neighbouring toolbar buttons, so two
+// open at once overlap; opening one closes the rest.
+const _DS_POPUP_IDS = ['dsArrowShapeMenu', 'dsPlaceholderMenu', 'dsTextMenu'];
 function _dsPopup(id, anchorId, build) {
     const existing = document.getElementById(id);
     if (existing) { existing.remove(); return; }
-    ['dsTypeMenu', 'dsSettingsMenu'].forEach(x => { const e = document.getElementById(x); if (e) e.remove(); });
+    // Close the OTHER popups this builder owns. The list used to name the type and
+    // settings menus, both since removed, and never named the three that actually
+    // exist — so the arrow, shape and text menus could sit open on top of each other
+    // while the line dutifully removed two elements that were no longer there.
+    _DS_POPUP_IDS.forEach(x => { if (x === id) return; const e = document.getElementById(x); if (e) e.remove(); });
     const menu = document.createElement('div');
     menu.id = id;
     menu.style.cssText = 'position:fixed; z-index:100020; width:248px; background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 10px 34px rgba(0,0,0,0.45); padding:12px;';
@@ -18212,78 +19765,98 @@ function _dsPopup(id, anchorId, build) {
         document.addEventListener('mousedown', off);
     }, 0);
 }
-function _dsTypeSection(title, getStyle, apply) {
+// ONE ROW per style: label, face, size, colour. It used to put the label on its own
+// line above the controls, which is two rows and roughly 62px for each of four styles
+// — enough on its own to push this column into a scroll once the footer block joined
+// it. The label is a fixed 46px so the four rows line up as a table rather than
+// jittering with the length of the word.
+//
+// `hint` carries what used to be in the heading's parentheses ('(new text)',
+// '/ image code'): the row has no space for it and a tooltip is where a clarification
+// belongs when the label alone is nearly enough.
+function _dsTypeSection(title, getStyle, apply, hint, opts) {
     const st = getStyle();
-    const wrap = document.createElement('div'); wrap.style.cssText = 'margin-bottom:12px;';
-    const h = document.createElement('div'); h.textContent = title; h.style.cssText = 'font-size:var(--fs-65); font-weight:700; color:var(--text-main); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.3px;'; wrap.appendChild(h);
-    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px; align-items:center;';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:5px; align-items:center; margin-bottom:5px;';
+    const h = document.createElement('div'); h.textContent = title;
+    h.title = hint || title;
+    h.style.cssText = 'flex:0 0 46px; font-size:var(--fs-60); font-weight:700; color:var(--text-main); text-transform:uppercase; letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+    row.appendChild(h);
     const fsel = _fillFontSelect(document.createElement('select'), st.font);
-    fsel.style.cssText = 'flex:1; min-width:70px; font-size:var(--fs-70); padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    fsel.title = (hint || title) + ' \u2014 typeface';
+    fsel.style.cssText = 'flex:1 1 auto; min-width:0; height:24px; font-size:var(--fs-60); padding:0 4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
     fsel.onchange = () => apply('font', fsel.value);
     const sin = document.createElement('input'); sin.type = 'number'; sin.min = '6'; sin.max = '60'; sin.value = st.size;
-    sin.style.cssText = 'width:50px; font-size:var(--fs-70); padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    sin.title = (hint || title) + ' \u2014 size in points';
+    sin.style.cssText = 'flex:0 0 38px; width:38px; height:24px; text-align:center; font-size:var(--fs-60); padding:0 2px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
     sin.onchange = () => { let v = parseFloat(sin.value); if (isNaN(v)) v = 16; v = Math.max(6, Math.min(60, v)); apply('size', v); };
     const cin = document.createElement('input'); cin.type = 'color'; cin.value = st.color || '#222222';
-    cin.style.cssText = 'width:34px; height:30px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); cursor:pointer;';
+    cin.title = (hint || title) + ' \u2014 colour';
+    cin.style.cssText = 'flex:0 0 auto;';
     cin.oninput = () => apply('color', cin.value);
-    row.appendChild(fsel); row.appendChild(sin); row.appendChild(cin); wrap.appendChild(row);
-    return wrap;
+    // opts.inkInline — the panel is showing the strip itself, so the dot is left
+    // as a plain system picker. Wiring both puts a popover over the panel that
+    // already offers the same ten dots.
+    if (!(opts && opts.inkInline)) _dsInkQuickPicks(cin, (hex) => apply('color', hex));
+    row.appendChild(fsel); row.appendChild(sin); row.appendChild(cin);
+    return row;
 }
-// Type menu (Aa): every text style in the deck in one place.
-function _dsOpenTypeMenu(ev) {
-    if (ev && ev.stopPropagation) ev.stopPropagation();
-    _dsPopup('dsTypeMenu', 'dsTypeBtn', (menu) => {
-        const save = (extra) => { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (extra) extra(); _dsRenderRail(); _dsRenderCenter(); };
-        menu.appendChild(_dsTypeSection('Titles', _titleStyle, (k, v) => { editorialContent.titleStyle = Object.assign({}, _titleStyle(), { [k]: v }); save(); }));
-        menu.appendChild(_dsTypeSection('Paragraphs (new text)', _paragraphStyle, (k, v) => { editorialContent.paragraphStyle = Object.assign({}, _paragraphStyle(), { [k]: v }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }));
-        menu.appendChild(_dsTypeSection('Captions / image code', _specCodeStyle, (k, v) => { editorialContent.specCodeStyle = Object.assign({}, _specCodeStyle(), { [k]: v }); save(); }));
-        // Spec text (font only) — the Application / Frame Size / Frame Code
-        // label:value list on every spec page. Just a font choice, no size or
-        // colour control since that list has its own fixed styling.
-        const sfWrap = document.createElement('div'); sfWrap.style.cssText = 'margin-bottom:12px;';
-        const sfH = document.createElement('div'); sfH.textContent = 'Spec text (Application, Frame Size, etc.)'; sfH.style.cssText = 'font-size:var(--fs-65); font-weight:700; color:var(--text-main); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.3px;'; sfWrap.appendChild(sfH);
-        const sfRow = document.createElement('div'); sfRow.style.cssText = 'display:flex; gap:6px;';
-        const sfSel = _fillFontSelect(document.createElement('select'), _specFont(), 'sans');
-        sfSel.style.cssText = 'flex:1; min-width:0; font-size:var(--fs-70); padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
-        sfSel.onchange = () => { editorialContent.specFont = sfSel.value; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRebuildAllThumbs(); _dsPriorityRerender(_dsPages[_dsIndex]); _dsRenderCenter(); };
-        sfRow.appendChild(sfSel);
-        sfWrap.appendChild(sfRow);
-        menu.appendChild(sfWrap);
-        const note = document.createElement('p'); note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:0; line-height:1.45;';
-        note.textContent = 'Sets the deck-wide defaults. Paragraph style applies to new text boxes you add. Brand fonts embed into the PDF; Universal fonts are installed everywhere, so SVG exports open with no missing-font warnings.';
-        menu.appendChild(note);
-    });
+// Deck-wide type defaults, on the PROJECT tab. They used to be the Aa popup on the
+// Pages toolbar, which put the one thing you set BEFORE building any pages behind a
+// button you only meet once you are already building them. Same four controls, same
+// _dsTypeSection rows, in the order the work happens.
+function _dsTypeDefaultsInto(host) {
+    if (!host) return;
+    host.innerHTML = '';
+    const lbl = document.createElement('div');
+    lbl.textContent = 'TYPE DEFAULTS';
+    lbl.title = 'Deck-wide. Brand fonts embed in the PDF; Universal fonts are installed everywhere.';
+    lbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px; cursor:help;';
+    host.appendChild(lbl);
+    // Changing a face re-typesets every page, so every built preview is stale. The
+    // rail and the centre live on the Pages tab and measure ZERO from here, so this
+    // drops the caches and repaints only this panel's own preview; the rail rebuilds
+    // on arrival.
+    const save = () => {
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        try { _dsClearBuiltAll(); } catch (e) {}
+        try { _dsRenderCoverPreview(); } catch (e) {}
+    };
+    host.appendChild(_dsTypeSection('Titles', _titleStyle, (k, v) => { editorialContent.titleStyle = Object.assign({}, _titleStyle(), { [k]: v }); save(); }, 'Page titles'));
+    host.appendChild(_dsTypeSection('Sub', _subtitleStyle, (k, v) => { editorialContent.subtitleStyle = Object.assign({}, _subtitleStyle(), { [k]: v }); save(); }, 'Page subheadings'));
+    host.appendChild(_dsTypeSection('Body', _paragraphStyle, (k, v) => { editorialContent.paragraphStyle = Object.assign({}, _paragraphStyle(), { [k]: v }); save(); }, 'Paragraphs \u2014 applies to new text boxes you add'));
+    host.appendChild(_dsTypeSection('Caption', _specCodeStyle, (k, v) => { editorialContent.specCodeStyle = Object.assign({}, _specCodeStyle(), { [k]: v }); save(); }, 'Captions and image codes'));
+    // Spec text is a font choice only: the Application / Frame Size / Frame Code list
+    // carries its own fixed size and colour.
+    const sfWrap = document.createElement('div'); sfWrap.style.cssText = 'display:flex; gap:5px; align-items:center; margin-bottom:5px;';
+    const sfH = document.createElement('div'); sfH.textContent = 'Spec';
+    sfH.title = 'Spec text \u2014 the Application / Frame Size / Frame Code list. Its size and colour are fixed by the layout.';
+    sfH.style.cssText = 'flex:0 0 46px; font-size:var(--fs-60); font-weight:700; color:var(--text-main); text-transform:uppercase; letter-spacing:0.2px;';
+    sfWrap.appendChild(sfH);
+    const sfSel = _fillFontSelect(document.createElement('select'), _specFont(), 'serif');
+    sfSel.title = 'Spec text \u2014 typeface';
+    sfSel.style.cssText = 'flex:1 1 auto; min-width:0; height:24px; font-size:var(--fs-60); padding:0 4px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    sfSel.onchange = () => { editorialContent.specFont = sfSel.value; save(); };
+    sfWrap.appendChild(sfSel);
+    host.appendChild(sfWrap);
+    // The note is on the heading's tooltip; see lbl above.
 }
-// Settings menu (gear): handy page-level actions.
-let _dsShowGuides = false;
-function _dsOpenSettingsMenu(ev) {
-    if (ev && ev.stopPropagation) ev.stopPropagation();
-    _dsPopup('dsSettingsMenu', 'dsStyleGear', (menu) => {
-        const item = (label, sub, onClick) => {
-            const b = document.createElement('button');
-            b.style.cssText = 'display:block; width:100%; text-align:left; background:transparent; border:none; border-radius:var(--r-4); padding:8px 8px; cursor:pointer; color:var(--text-main);';
-            b.onmouseenter = () => b.style.background = 'var(--bg-input)'; b.onmouseleave = () => b.style.background = 'transparent';
-            b.innerHTML = '<div style="font-size:var(--fs-75); font-weight:600;">' + label + '</div>' + (sub ? '<div style="font-size:var(--fs-60); color:var(--text-muted); margin-top:1px;">' + sub + '</div>' : '');
-            b.onclick = () => { onClick(); };
-            return b;
-        };
-        menu.appendChild(item(_dsShowGuides ? 'Hide alignment guides \u2713' : 'Show alignment guides', 'This page\u2019s guide set: safety frame, columns, ruler guides (preview only)', () => { _dsShowGuides = !_dsShowGuides; _dsOpenSettingsMenu(); _dsRenderCenter(); }));
-        const desc = _dsPages[_dsIndex]; const key = desc ? _deckPageKey(desc) : '';
-        const annCount = (key && editorialContent.annotations && editorialContent.annotations[key]) ? editorialContent.annotations[key].length : 0;
-        menu.appendChild(item('Clear text & images on this page' + (annCount ? ' (' + annCount + ')' : ''), 'Removes overlays you added to this page', () => {
-            if (!key || !annCount) { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); return; }
-            if (editorialContent.annotations) editorialContent.annotations[key] = [];
-            _dsSelKey = null; _dsSelIdx = -1;
-            if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
-            const m = document.getElementById('dsSettingsMenu'); if (m) m.remove();
-            _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail();
-        }));
-        menu.appendChild(item('Fit page to window', 'Re-center and fit the preview', () => { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); _dsRenderCenter(); }));
-        if (desc && desc.kind === 'spec' && _dsBuilt[key]) {
-            menu.appendChild(item('Revert to live preview', 'Drop the built render for this page', () => { const m = document.getElementById('dsSettingsMenu'); if (m) m.remove(); _dsClearBuilt(key); }));
-        }
-    });
-}
+// The page-settings GEAR lived here and is gone. Of its four items, two could not
+// work and two belonged somewhere else:
+//
+// 'Show alignment guides' was a SECOND toggle for the dedicated Guides button's own
+// 'Show guides' checkbox, and the two disagreed by construction: that one persists
+// deck-wide through _setDeckGuide, this one was a module flag OR'd into the paint call,
+// so switching it on left the Guides menu still reading off, and switching the Guides
+// menu on made this item do nothing visible.
+//
+// 'Fit page to window' re-rendered the centre and nothing else. There is no zoom or pan
+// state for the centre preview, so there was never anything to re-centre or re-fit.
+//
+// The two real ones (clear overlays, revert a built render) are now in the Page tab of
+// the tools panel, which is already this page's settings home and is always on screen
+// rather than behind a popup — the same move the type defaults made off the Aa button.
 function _dsAnnCycleAlign() { _dsOpenAlignMenu(); }
 // Leading (line spacing) nudge for the selected text — works on both page
 // annotations and template text boxes. Steps in 1pt (at the 540pt page scale);
@@ -18322,6 +19895,9 @@ function _dsTextGearGetEl(target) {
     if (target.kind === 'mb') return (_mbEls() || [])[target.i];
     return (_dsAnnList(target.key) || [])[target.i];
 }
+// Which tab the text popup is showing. Module state, because the popup is rebuilt
+// from scratch on every change it makes.
+let _dsTextGearTab = 'text';
 function _dsOpenTextGearPopup(target, cx, cy) {
     const old = document.getElementById('dsTextGearPopup'); if (old) old.remove();
     const a = _dsTextGearGetEl(target); if (!a) return;
@@ -18349,6 +19925,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
     head.innerHTML = '<span style="font-weight:700; font-size:var(--fs-60); letter-spacing:0.4px; text-transform:uppercase;">Text settings</span>';
     const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
+    closeB.title = 'Close';
     closeB.onclick = () => _dsCloseTextGearPopup();
     head.appendChild(closeB);
     head.onmousedown = (e) => {
@@ -18360,17 +19937,43 @@ function _dsOpenTextGearPopup(target, cx, cy) {
         document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
     };
     pop.appendChild(head);
-    const lbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; pop.appendChild(d); };
-    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:5px; align-items:center; flex-wrap:wrap;'; pop.appendChild(d); return d; };
+    // THREE TABS, because this popup had grown past the bottom of the screen and a
+    // feature you have to scroll to find is a feature most people never find. The
+    // named-styles grid is most of the height and is the part you visit deliberately,
+    // so it gets a tab of its own rather than sitting under everything else.
+    //
+    // Which tab is open is MODULE state: refresh() REBUILDS this popup on every single
+    // change, so a local would snap back to the first tab on each click.
+    const _paneText = document.createElement('div');
+    const _paneColour = document.createElement('div');
+    const _paneStyles = document.createElement('div');
+    let _host = _paneText;
+    const tabBar = document.createElement('div'); tabBar.className = 'frame-tabs fit'; tabBar.style.cssText = 'margin-bottom:8px;';
+    [['text', 'Text', 'Size, weight, alignment and lists'],
+     ['colour', 'Colour', 'Ink colour for this text'],
+     ['styles', 'Styles', 'Named paragraph styles from the template']].forEach(o => {
+        const b = document.createElement('button');
+        b.className = _tplTabClass(_dsTextGearTab === o[0]);
+        b.textContent = o[1]; b.title = o[2];
+        b.onclick = () => { _dsTextGearTab = o[0]; refresh(); };
+        tabBar.appendChild(b);
+    });
+    pop.appendChild(tabBar);
+    [['text', _paneText], ['colour', _paneColour], ['styles', _paneStyles]].forEach(p => {
+        p[1].style.display = (_dsTextGearTab === p[0]) ? '' : 'none';
+        pop.appendChild(p[1]);
+    });
+    const lbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; _host.appendChild(d); };
+    const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex; gap:5px; align-items:center; flex-wrap:wrap;'; _host.appendChild(d); return d; };
     const stepper = (r, get, set, min, max) => {
-        const dn = document.createElement('button'); dn.className = 'action-btn btn-secondary'; dn.textContent = '\u2212'; dn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        const dn = document.createElement('button'); dn.className = 'action-btn btn-secondary'; dn.textContent = '\u2212'; dn.title = 'Decrease'; dn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
         // Type the value directly — the +/- buttons still nudge by 1.
         const v = document.createElement('input'); v.type = 'number'; v.min = String(min); v.max = String(max); v.step = '1'; v.value = get();
         v.style.cssText = 'width:44px; height:22px; text-align:center; font-size:var(--fs-65); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); padding:0 2px;';
         const commit = () => { const n = parseFloat(v.value); if (!isNaN(n)) { set(Math.max(min, Math.min(max, Math.round(n)))); refresh(); } else { v.value = get(); } };
         v.onchange = commit;
         v.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') { ev.preventDefault(); commit(); } };
-        const up2 = document.createElement('button'); up2.className = 'action-btn btn-secondary'; up2.textContent = '+'; up2.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        const up2 = document.createElement('button'); up2.className = 'action-btn btn-secondary'; up2.textContent = '+'; up2.title = 'Increase'; up2.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
         dn.onclick = () => { set(Math.max(min, get() - 1)); refresh(); };
         up2.onclick = () => { set(Math.min(max, get() + 1)); refresh(); };
         r.appendChild(dn); r.appendChild(v); r.appendChild(up2);
@@ -18384,6 +19987,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     const str = row();
     [['bold', 'B', 'font-weight:800;'], ['italic', 'I', 'font-style:italic;'], ['outline', 'O', 'font-weight:800; -webkit-text-stroke:1px currentColor;']].forEach(([f, l, css]) => {
         const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+        b.title = { bold: 'Bold', italic: 'Italic', outline: 'Outlined \u2014 stroke only, no fill' }[f] || l;
         b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; ' + css + (a[f] ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         b.onclick = () => {
             if (f === 'outline') { a[f] = !a[f]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); refresh(); return; }
@@ -18409,33 +20013,38 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     [['left'], ['center'], ['right']].forEach(([v]) => {
         const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
         b.innerHTML = _dsAlignIconSVG(v);
+        b.title = { left: 'Align left', center: 'Align centre', right: 'Align right' }[v];
         const on = (a.align || 'left') === v;
         b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; display:inline-flex; align-items:center; justify-content:center;' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         b.onclick = () => { a.align = v; refresh(); };
         str.appendChild(b);
     });
-    lbl('List');
-    const lr = row();
-    [['none', 'None'], ['bullet', '\u2022 Bullets'], ['number', '1. Numbers']].forEach(([v, l]) => {
-        const b = document.createElement('button'); b.className = 'action-btn btn-secondary'; b.textContent = l;
+    // Lists join the Style row as icons. They were three full-width buttons on three
+    // rows, because none of them set a width and .action-btn is width:100%.
+    [['none', 'No list'], ['bullet', 'Bulleted list'], ['number', 'Numbered list']].forEach(([v, tip]) => {
+        const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
+        b.innerHTML = _dsListIconSVG(v); b.title = tip;
         const on = (a.listStyle || 'none') === v;
-        b.style.cssText = 'height:22px; padding:0 8px; font-size:var(--fs-60);' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
+        b.style.cssText = 'width:26px; height:22px; min-width:26px; padding:0; display:inline-flex; align-items:center; justify-content:center;' + (on ? ' border-color:var(--ui-active); color:var(--ui-active);' : '');
         b.onclick = () => { a.listStyle = v; refresh(); };
-        lr.appendChild(b);
+        str.appendChild(b);
     });
+    _host = _paneColour;
     lbl('Colour');
+    // The SHARED swatch grid, as in the shape popup. This was a hand-rolled copy that
+    // had drifted in two ways: it lost the white swatch's darker border (white on a
+    // dark panel with the default border is nearly invisible) and it ran every colour
+    // into one strip instead of grouping neutrals and accents.
+    const cSw = document.createElement('div'); _host.appendChild(cSw);
+    _frameSwatchesInto(cSw, a.color || '#222222', (hex) => { a.color = hex; refresh(); }, { size: 18 });
     const cr = row();
-    _frameSwatchList().forEach(hex => {
-        const s = document.createElement('button'); s.title = hex;
-        const on = (a.color || '#222222').toLowerCase() === hex;
-        s.style.cssText = 'width:20px; height:20px; min-width:20px; padding:0; border-radius:50%; background:' + hex + '; border:2px solid ' + (on ? 'var(--ui-active)' : 'var(--border-color)') + '; cursor:pointer;';
-        s.onclick = () => { a.color = hex; refresh(); };
-        cr.appendChild(s);
-    });
     const ci = document.createElement('input'); ci.type = 'color'; ci.value = a.color || '#222222';
-    ci.style.cssText = 'width:26px; height:22px; padding:1px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); cursor:pointer;';
+    ci.style.cssText = 'flex:0 0 auto;';
+    ci.title = 'Custom text colour';
     ci.onchange = () => { _popupApplyTextStyle(a, { color: ci.value }, pop.dataset.tgt); refresh(); };
+    _dsInkQuickPicks(ci, (hex) => { _popupApplyTextStyle(a, { color: hex }, pop.dataset.tgt); refresh(); });
     cr.appendChild(ci);
+    _host = _paneText;
     lbl('Font \u00b7 Weight');
     const fr = row();
     const fSel = _fillFontSelect(document.createElement('select'), a.font, 'serif');
@@ -18444,6 +20053,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     fSel.onchange = () => { _popupApplyTextStyle(a, { font: fSel.value }, pop.dataset.tgt); refresh(); };
     fr.appendChild(fSel);
     const wSel = document.createElement('select');
+    wSel.title = 'Font weight';
     wSel.style.cssText = 'width:82px; height:22px; font-size:var(--fs-60); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
     [['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'SemiBold'], ['700', 'Bold']].forEach(([v, l]) => {
         const o = document.createElement('option'); o.value = v; o.textContent = l;
@@ -18453,14 +20063,15 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     wSel.onchange = () => { const wv = parseInt(wSel.value, 10); _popupApplyTextStyle(a, { weight: wv, bold: wv >= 600 }, pop.dataset.tgt); refresh(); };
     fr.appendChild(wSel);
     // Your text styles — every style visible at once, 3 columns by category.
+    _host = _paneStyles;
     lbl('Text styles');
     // Distinct id from the right-panel version (used on layout/template
     // pages) so the two never collide if both happen to be in the DOM.
-    try { pop.appendChild(_dsDockedStylesSection(3, '_dsDockedStylesPopup')); } catch (e) {}
+    try { _paneStyles.appendChild(_dsDockedStylesSection(3, '_dsDockedStylesPopup')); } catch (e) {}
     const help = document.createElement('p');
     help.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
-    help.textContent = 'Double-click the box to edit the text. Drag the corner handle to resize the box \u2014 the text re-wraps, the font size stays. Save it to the T menu library to reuse on other pages and projects.';
-    pop.appendChild(help);
+    help.textContent = 'Double-click the box to edit its text. Drag a corner to resize \u2014 the text re-wraps and the size stays.';
+    _paneText.appendChild(help);
     document.body.appendChild(pop);
     _dsClampPopup(pop);   // measured, now that the popup has a real height
     try { _mbUpdateToolbar(); } catch (e) {}
@@ -18484,6 +20095,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
         const selCount = ((_mbSel && _mbSel.length) || 0) + ((_mbSelAnn && _mbSelAnn.length) || 0);
         if (selCount < 2) return;
         const btn = document.createElement('button'); btn.className = 'action-btn'; btn.textContent = 'Apply to selected (' + selCount + ')';
+        btn.title = 'Copy every setting in this popup onto all ' + selCount + ' selected boxes';
         btn.style.cssText = 'width:100%; height:26px; font-size:var(--fs-65); margin-top:10px;';
         btn.onclick = () => {
             const props = ['font', 'size', 'leading', 'weight', 'bold', 'italic', 'outline', 'caps', 'color', 'align', 'track', 'listStyle'];
@@ -18549,20 +20161,29 @@ function _dsCloseAlignMenu() { const m = document.getElementById('dsAlignMenu');
 function _dsAnnSet(prop, val) { const a = _dsCurrentAnnot(); if (!a) return; if (a.type === 'shape' && prop === 'color') { a.fill = val; a.dataUrl = null; } else { a[prop] = val; } if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnSetWeight(v) { const a = _dsCurrentAnnot(); if (!a) return; a.weight = parseInt(v, 10) || 400; a.bold = a.weight >= 600; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); }
 function _dsAnnHandles(box, a, w, hh) {
-    const _lockH = () => { if (a.lockAspect && a.type === 'shape') a.h = _dsShapeSquareH(a.w || 0.25); };
+    const _lockH = () => { if (a.lockAspect && a.type === 'shape') a.h = _dsShapeRatioH(a.w || 0.25, _dsShapeHeldRatio(a)); };
     const dirs = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
-    const pos = { nw: 'left:-4px;top:-4px;cursor:nwse-resize;', n: 'left:calc(50% - 4px);top:-4px;cursor:ns-resize;', ne: 'right:-4px;top:-4px;cursor:nesw-resize;', e: 'right:-4px;top:calc(50% - 4px);cursor:ew-resize;', se: 'right:-4px;bottom:-4px;cursor:nwse-resize;', s: 'left:calc(50% - 4px);bottom:-4px;cursor:ns-resize;', sw: 'left:-4px;bottom:-4px;cursor:nesw-resize;', w: 'left:-4px;top:calc(50% - 4px);cursor:ew-resize;' };
+    const _b = _dsBoxWH(box);
+    const HS = 11;   // the 8px dot plus its 1.5px border either side
+    const _hx = { nw: -4, n: (_b.w / 2) - 4, ne: _b.w - 7, e: _b.w - 7, se: _b.w - 7, s: (_b.w / 2) - 4, sw: -4, w: -4 };
+    const _hy = { nw: -4, n: -4, ne: -4, e: (_b.h / 2) - 4, se: _b.h - 7, s: _b.h - 7, sw: _b.h - 7, w: (_b.h / 2) - 4 };
+    const _hc = { nw: 'nwse-resize', n: 'ns-resize', ne: 'nesw-resize', e: 'ew-resize', se: 'nwse-resize', s: 'ns-resize', sw: 'nesw-resize', w: 'ew-resize' };
+    let _neL = _b.w - 7, _neT = -4;
     dirs.forEach(d => {
         const h = document.createElement('div');
         h.className = '_dsChrome';
-        h.style.cssText = 'position:absolute; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); z-index:22; ' + pos[d];
+        h.style.cssText = 'position:absolute; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); z-index:22; cursor:' + _hc[d] + ';';
+        _dsPinChrome(box, h, _hx[d], _hy[d], HS, HS, 0);
+        if (d === 'ne') { _neL = parseFloat(h.style.left) || 0; _neT = parseFloat(h.style.top) || 0; }
         h.onmousedown = (e) => {
             e.preventDefault(); e.stopPropagation();
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0, ow = a.w || 0.25, oh = a.h || 0.18;
             const mv = (ev) => {
                 const dx = (ev.clientX - sx) / w, dy = (ev.clientY - sy) / hh; let x = ox, y = oy, ww = ow, hgt = oh;
-                if (d.indexOf('e') >= 0) ww = ow + dx; if (d.indexOf('w') >= 0) { ww = ow - dx; x = ox + dx; }
-                if (d.indexOf('s') >= 0) hgt = oh + dy; if (d.indexOf('n') >= 0) { hgt = oh - dy; y = oy + dy; }
+                if (d.indexOf('e') >= 0) { const r = _dsAnnSnapEdge(ox + ow + dx, 'x', w, hh, ev); ww = r - ox; }
+                if (d.indexOf('w') >= 0) { const l = _dsAnnSnapEdge(ox + dx, 'x', w, hh, ev); ww = (ox + ow) - l; x = l; }
+                if (d.indexOf('s') >= 0) { const b = _dsAnnSnapEdge(oy + oh + dy, 'y', w, hh, ev); hgt = b - oy; }
+                if (d.indexOf('n') >= 0) { const t = _dsAnnSnapEdge(oy + dy, 'y', w, hh, ev); hgt = (oy + oh) - t; y = t; }
                 if (ev.shiftKey && d.length === 2 && ow && oh) { const k = Math.max(ww / ow, hgt / oh); ww = ow * k; hgt = oh * k; if (d.indexOf('w') >= 0) x = ox + (ow - ww); if (d.indexOf('n') >= 0) y = oy + (oh - hgt); }
                 a.w = Math.max(0.03, ww); a.h = Math.max(0.03, hgt); a.x = x; a.y = y; _lockH(); _dsRenderCenter();
             };
@@ -18575,15 +20196,14 @@ function _dsAnnHandles(box, a, w, hh) {
     // top-right corner along the diagonal by the CURRENT radius; drag it
     // toward the corner to sharpen, away from it to round more. Ellipses are
     // already fully round, so this only applies to rectangles.
-    if (a.type === 'shape' && a.shape !== 'ellipse') {
-        const bw = (a.w || 0.25) * w, bh = (a.h || 0.18) * hh;
+    const _rbw = (a.w || 0.25) * w, _rbh = (a.h || 0.18) * hh;
+    if (a.type === 'shape' && a.shape !== 'ellipse' && _dsCornerFitsLadder(_rbw, _rbh)) {
+        const bw = _rbw, bh = _rbh;
         const rHandle = document.createElement('div');
         rHandle.className = '_dsChrome';
         const posInset = () => {
-            const radPt = Math.max(0, (a.radius !== undefined ? a.radius : 3));
-            const radPx = Math.min(radPt * (w / 936), bw / 2, bh / 2);
-            rHandle.style.right = (radPx - 4) + 'px';
-            rHandle.style.top = (radPx - 4) + 'px';
+            const _d = _dsCornerSlot(box, 1);
+            _dsPinChrome(box, rHandle, _neL - _d, _neT + _d, 11, 11, 0);
         };
         rHandle.style.cssText = 'position:absolute; width:8px; height:8px; background:#f5c518; border:1.5px solid #fff; border-radius:50%; z-index:23; cursor:pointer; box-shadow:0 0 0 1px rgba(0,0,0,0.25);';
         rHandle.title = 'Drag to adjust corner radius';
@@ -19316,12 +20936,175 @@ async function _dsBakeSpecImages(page, desc, token) {
 // Clicking empty page space (nothing interactive under the cursor) clears the
 // annotation selection so transform handles/gear don't linger. Layout pages
 // already do this via the marquee path; this covers every other page kind.
+// WHICH PAGES PRINT A HEADING IS RECORDED, NOT PREDICTED. A predicate by page
+// kind looked tempting and is wrong: a fixed page renders as an element page
+// when it has elements and falls back to the prose renderer when it does not,
+// so the answer depends on content rather than on kind, and the list would
+// drift from the renderers the first time one changed. The drawer says what it
+// drew instead, and a page that draws no heading gets no handle by construction.
+const _dsTitleSlots = {};
+let _dsTitleSel = null;          // { key, which } — the selected heading line
+let _dsTitleSlotTimer = null;
+function _noteTitleSlot(which, on) {
+    const k = _curPageKey; if (!k) return;
+    const cur = _dsTitleSlots[k] || (_dsTitleSlots[k] = { title: false, sub: false });
+    if (!!cur[which] === !!on) return;
+    cur[which] = !!on;
+    // A spec page renders asynchronously, so the overlay is built BEFORE the
+    // drawer has said anything. One debounced repaint closes that gap; it cannot
+    // loop, because the second pass records the same values and returns above.
+    if (_dsTitleSlotTimer) return;
+    _dsTitleSlotTimer = setTimeout(() => {
+        _dsTitleSlotTimer = null;
+        try { if (_dsIsOpen()) _dsRenderCenter(); } catch (e) {}
+    }, 60);
+}
+// The heading and subheading as CLICK TARGETS on the rendered page. The preview
+// is a picture of paper with no DOM text to select, but the title band means
+// there is one answer to where each line sits on every automated page, so the
+// boxes can be placed without knowing anything about the page underneath.
+//
+// Added BEFORE _dsRenderAnnots so a note or arrow dropped over the title keeps
+// the click — the annotation is the thing you placed by hand.
+function _dsTitleHandles(page, desc, w, hh) {
+    if (!page || !desc) return;
+    let key = null; try { key = _deckPageKey(desc); } catch (e) {}
+    if (!key) return;
+    const slot = _dsTitleSlots[key];
+    if (!slot || (!slot.title && !slot.sub)) return;
+    const B = _titleBand(936, 540);
+    const sx = w / 936, sy = hh / 540;
+    const mk = (which, st, baseline, label) => {
+        const sel = !!(_dsTitleSel && _dsTitleSel.key === key && _dsTitleSel.which === which);
+        const top = (baseline - st.size * 0.80) * sy;
+        const h = Math.max(10, st.size * 1.02 * sy);
+        const box = document.createElement('div');
+        box.className = '_dsTitleHandle';
+        box.dataset.titleHandle = which;
+        box.title = label + ' — click to set the typeface and size';
+        box.style.cssText = 'position:absolute; left:' + (B.x * sx) + 'px; top:' + top + 'px; width:' + ((B.right - B.x) * sx) + 'px; height:' + h + 'px;'
+            + ' cursor:pointer; box-sizing:border-box; border-radius:var(--r-2);'
+            + ' border:1px ' + (sel ? 'solid var(--ui-active)' : 'dashed transparent') + ';';
+        if (sel) box.style.background = 'rgba(106,106,255,0.08)';
+        box.onmouseenter = () => { if (!sel) box.style.borderColor = 'rgba(106,106,255,0.5)'; };
+        box.onmouseleave = () => { if (!sel) box.style.borderColor = 'transparent'; };
+        box.onmousedown = (e) => {
+            e.preventDefault(); e.stopPropagation();
+            // Measured BEFORE the re-render, which replaces this element.
+            let r = null; try { r = box.getBoundingClientRect(); } catch (e2) {}
+            _dsDeselectAll();
+            _dsTitleSel = { key: key, which: which };
+            _dsRenderCenter();
+            _dsOpenTitleTypePopup(r, key, which);
+        };
+        // A page carrying an exception says so, rather than leaving a designer to
+        // wonder why this one page ignores the deck.
+        if (_pageTypeOv(key, which)) {
+            const dot = document.createElement('span');
+            dot.textContent = 'page';
+            dot.title = 'This page overrides the deck heading style';
+            dot.style.cssText = 'position:absolute; right:2px; top:50%; transform:translateY(-50%); font:700 8px Arial,sans-serif;'
+                + ' letter-spacing:0.4px; color:var(--warn); background:rgba(255,255,255,0.85); border-radius:var(--r-2); padding:0 3px; pointer-events:none;';
+            box.appendChild(dot);
+        }
+        page.appendChild(box);
+    };
+    if (slot.title) mk('title', _titleStyleFor(key), B.head, 'Page heading');
+    if (slot.sub) mk('sub', _subtitleStyleFor(key), B.sub, 'Page subheading');
+}
+// The heading type popup. Font, size and colour for whichever line was clicked,
+// plus the one decision that actually matters here: whether the change is the
+// house style or an exception on this page.
+//
+// DECK-WIDE IS THE DEFAULT, and it stays selected until the designer says
+// otherwise. A per-page control that defaults to per-page is how twenty spec
+// pages end up with twenty headings, which is the report this whole band came
+// out of.
+let _dsTitleTypeScope = 'deck';
+function _dsCloseTitleTypePopup() {
+    const p = document.getElementById('dsTitleTypePopup');
+    if (p && p.parentNode) p.parentNode.removeChild(p);
+}
+function _dsOpenTitleTypePopup(anchorRect, key, which) {
+    _dsCloseTitleTypePopup();
+    const pop = document.createElement('div');
+    pop.id = 'dsTitleTypePopup';
+    pop.style.cssText = 'position:fixed; z-index:var(--z-modal); width:250px; max-height:70vh; overflow-y:auto;'
+        + ' background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-6);'
+        + ' box-shadow:0 10px 34px rgba(0,0,0,0.45); padding:9px;';
+    // Left edge on the line's left edge, top just under its descenders. The
+    // clamp still moves it if that would run it off the bottom, and only by the
+    // overhang — so on a heading near the foot of the window it rides up rather
+    // than jumping to the top.
+    const r = anchorRect || { left: 200, bottom: 120 };
+    pop.style.left = Math.round(r.left) + 'px';
+    pop.style.top = Math.round(r.bottom + 6) + 'px';
+    pop.onmousedown = (e) => { e.stopPropagation(); };
+
+    const head = document.createElement('div');
+    head.style.cssText = 'display:flex; align-items:center; gap:6px; margin-bottom:7px;';
+    const ttl = document.createElement('div');
+    ttl.textContent = (which === 'sub') ? 'SUBHEADING' : 'HEADING';
+    ttl.style.cssText = 'flex:1 1 auto; font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted);';
+    head.appendChild(ttl);
+    const x = document.createElement('button');
+    x.innerHTML = '&times;'; x.title = 'Close';
+    x.className = 'action-btn btn-secondary';
+    x.style.cssText = 'width:20px; min-width:20px; height:20px; padding:0; line-height:1;';
+    x.onclick = () => { _dsCloseTitleTypePopup(); };
+    head.appendChild(x);
+    pop.appendChild(head);
+
+    // Same three controls as Type defaults, deliberately: this is a shortcut to
+    // that dial, not a second way of saying the same thing.
+    const body = document.createElement('div');
+    pop.appendChild(body);
+    const paint = () => {
+        body.innerHTML = '';
+        const readDeck = () => (which === 'sub') ? _subtitleStyle() : _titleStyle();
+        const getStyle = () => (_dsTitleTypeScope === 'page') ? ((which === 'sub') ? _subtitleStyleFor(key) : _titleStyleFor(key)) : readDeck();
+        body.appendChild(_dsTypeSection(which === 'sub' ? 'Sub' : 'Title', getStyle,
+            (k2, v) => { _setPageTypeStyle(key, which, k2, v, _dsTitleTypeScope); paint(); },
+            (which === 'sub' ? 'Page subheading' : 'Page heading') + ' — ' + (_dsTitleTypeScope === 'page' ? 'this page only' : 'every automated page'),
+            { inkInline: true }));
+        // The inks sit BETWEEN the row they change and the scope buttons that
+        // decide who the change reaches, which is the order the decision is made
+        // in. Hung off the dot instead they opened a popover over this panel and
+        // fought the input's own dialog.
+        _dsInkStripInto(body, getStyle().color, (hex) => { _setPageTypeStyle(key, which, 'color', hex, _dsTitleTypeScope); paint(); });
+        const lbl = document.createElement('div');
+        lbl.textContent = 'APPLIES TO';
+        lbl.style.cssText = 'font-size:var(--fs-55); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 3px;';
+        body.appendChild(lbl);
+        _dsSegRowInto(body, [
+            ['deck', 'Whole deck', 'Set the house style — every automated page follows it'],
+            ['page', 'Just this page', 'An exception on this page only; every other page keeps the deck style']
+        ], _dsTitleTypeScope, (v) => { _dsTitleTypeScope = v; paint(); });
+        if (_pageTypeOv(key, which)) {
+            const note = document.createElement('div');
+            note.textContent = 'This page overrides the deck.';
+            note.style.cssText = 'font-size:var(--fs-55); color:var(--warn); margin:7px 0 4px;';
+            body.appendChild(note);
+            const rst = document.createElement('button');
+            rst.textContent = 'Follow the deck again';
+            rst.className = 'action-btn btn-secondary';
+            rst.style.cssText = 'height:24px; font-size:var(--fs-60); padding:0 8px;';
+            rst.onclick = () => { _clearPageTypeStyle(key, which); _dsTitleTypeScope = 'deck'; paint(); };
+            body.appendChild(rst);
+        }
+    };
+    paint();
+    document.body.appendChild(pop);
+    _dsClampPopup(pop);
+    return pop;
+}
 function _dsWirePageDeselect(page) {
     page.addEventListener('mousedown', (ev) => {
         let n = ev.target, interactive = false;
         while (n && n !== page) { if (n.onmousedown || n.onclick || n.isContentEditable) { interactive = true; break; } n = n.parentElement; }
-        if (!interactive && ((_dsSelKey != null && _dsSelIdx >= 0) || (_mbSelAnn && _mbSelAnn.length) || (_mbSel && _mbSel.length) || (_mbSelected >= 0))) {
+        if (!interactive && ((_dsSelKey != null && _dsSelIdx >= 0) || (_mbSelAnn && _mbSelAnn.length) || (_mbSel && _mbSel.length) || (_mbSelected >= 0) || _dsTitleSel)) {
             _dsDeselectAll();
+            _dsTitleSel = null; _dsCloseTitleTypePopup();
             _dsSyncToolbar(); _dsRenderCenter();
         }
     });
@@ -19332,7 +21115,7 @@ function _dsAddGuides(page, w, hh) {
     // the latter is what "Apply to whole deck" sets, and it now covers EVERY
     // page kind (spec, floorplan, cards, prose…), not just layout pages.
     let G = null; try { G = _pageGuide(); } catch (e) {}
-    if (!_dsShowGuides && !(G && G.show) && !(G && G.grid)) return;
+    if (!(G && G.show) && !(G && G.grid)) return;
     // The editable layout canvas paints the guide set itself (with snapping);
     // painting here too would double every line.
     if (page.querySelector && page.querySelector('#dsLayoutCanvas')) return;
@@ -19340,7 +21123,7 @@ function _dsAddGuides(page, w, hh) {
         // Same InDesign-style painter as the layout editor — purple safety
         // frame + columns, cyan ruler guides, optional grid. `show` follows
         // either switch being on.
-        _paintGuideSet(page, Object.assign({}, G, { show: _dsShowGuides || G.show }));
+        _paintGuideSet(page, G);
         return;
     }
     // Fallback (no guide set resolvable): the old margin frame + center lines.
@@ -19421,7 +21204,7 @@ function _dsAddFooter(page, w, hh, desc) {
             const year = new Date().getFullYear();
             const cp = document.createElement('span');
             cp.style.cssText = 'font-family:' + SERIF + '; font-size:' + (5.8 * S) + 'px; color:' + rt + ';';
-            cp.textContent = 'Copyright \u00A9 ' + year + ' Farmboy Fine Arts Inc. | All rights reserved';
+            cp.textContent = _footerCopyrightText(year);
             right.appendChild(cp);
         }
         if (!F.hideLogo) {
@@ -19607,6 +21390,11 @@ CanvasPdfRec.prototype.render = async function (scale, onProgress) {
 };
 let _dsBuilt = {};
 async function renderSpecPageCanvas(desc, onProgress, scale) {
+    // Both canvas page renderers gate themselves rather than trusting callers to
+    // remember: this one is reached from renderDeckPageCanvas AND directly from the
+    // template-card pump, and a caller that forgets draws the deck in Helvetica.
+    // The gate is memoized, so asking twice costs nothing.
+    await _dsBrandFontsReady();
     const PW = 936, PH = 540, M = 40, r = desc.row; if (!r) return null;
     // Ignore any baked-in _specTpl for ordinary (non-manual, non-install) spec
     // pages and always re-resolve live \u2014 mirrors _dsThumbCacheKey so a render
@@ -19664,8 +21452,7 @@ function _withTimeout(p, ms) {
     ]).then(v => { if (t) clearTimeout(t); return v; }, e => { if (t) clearTimeout(t); throw e; });
 }
 async function renderDeckPageCanvas(desc, onProgress, opts) {
-    try { await _withTimeout(_loadEditorBrandFonts(), 2500); } catch (e) {}
-    try { if (document.fonts && document.fonts.ready) await _withTimeout(document.fonts.ready, 2500); } catch (e) {}
+    await _dsBrandFontsReady();
     if (!desc) return null;
     const _scale = (opts && opts.scale) || _previewScale('center');
     if (desc.kind === 'spec') return await renderSpecPageCanvas(desc, onProgress, _scale);
@@ -19736,8 +21523,13 @@ function _dsThumbCacheKey(desc) {
             // Always RE-resolve (never trust desc._specTpl, which is baked in at
             // list-build time) so the cache key changes the instant a template
             // is applied, even before the page list itself gets rebuilt.
-            const tpl = _specTplResolve(desc._ovKey || desc.row.id || '');
+            const ok = desc._ovKey || desc.row.id || '';
+            const tpl = _specTplResolve(ok);
             k += '|' + tpl;
+            // The ticks change what the page CONTAINS, so they belong in the key for
+            // the same reason the template does: a thumbnail keyed only on the
+            // template keeps showing a floorplan that has been switched off.
+            if (_specTplSlotAware(tpl)) { const sl = _specSlots(ok); k += '|' + SPEC_SLOT_KEYS.map(n => sl[n] ? 1 : 0).join(''); }
         } else if (desc && desc._specTpl) {
             k += '|' + desc._specTpl;
         }
@@ -19869,15 +21661,25 @@ function _dsRepwarmTplSwatches() { _dsTplPrewarmDone = false; _dsTplPrewarmTries
 // Memoized rather than awaited per job, which is the difference between two pending
 // timers and fourteen. Seven cards each doing two _withTimeout waits held the event
 // loop for ~7s past boot doing nothing.
-let _dsTplFontsReady = null;
-function _dsTplSwatchFonts() {
-    if (!_dsTplFontsReady) {
-        _dsTplFontsReady = (async () => {
-            try { await _withTimeout(_loadEditorBrandFonts(), 2500); } catch (e) {}
+//
+// ONE wait for the whole session, shared by the template cards and the Project
+// tab's page preview. Both are canvas renders of a page, and a canvas draws with
+// whatever the face resolves to at that instant — so either waits for the brand
+// faces or shows the designer a page set in Arial Narrow.
+let _dsBrandFontsMemo = null;
+function _dsBrandFontsReady() {
+    if (!_dsBrandFontsMemo) {
+        _dsBrandFontsMemo = (async () => {
+            try {
+                await _withTimeout(Promise.all([
+                    _loadEditorBrandFonts(),   // the glyphs, for the DOM and the canvas
+                    _loadPdfFontData()         // the bytes, which decide what _font() names
+                ]), 2500);
+            } catch (e) {}
             try { if (document.fonts && document.fonts.ready) await _withTimeout(document.fonts.ready, 2500); } catch (e) {}
         })();
     }
-    return _dsTplFontsReady;
+    return _dsBrandFontsMemo;
 }
 async function _dsTplSwatchPump() {
     if (_dsTplSwatchBusy) return;
@@ -19887,7 +21689,7 @@ async function _dsTplSwatchPump() {
     try {
         if (_dsTplSwatchCache[job.ck]) { _dsPaintTplSwatch(job.el, _dsTplSwatchCache[job.ck]); }
         else {
-            await _dsTplSwatchFonts();
+            await _dsBrandFontsReady();
             // Render with the SAME engine as the page previews — so a card can't
             // promise a layout the export doesn't draw — but on the standard demo
             // piece and with the raster thumbnails stubbed. 0.45 (not 0.32) because
@@ -20014,39 +21816,376 @@ function _dsTemplateSwatchHTML(key, cw, chh) {
     html += '</div>';
     return html;
 }
+// A small x badge, for clearing whatever it sits on. The same mark is used on the
+// colour dot, the gradient icon, the image icon and the selected gradient stop, so
+// 'there is an x on it' means one thing everywhere: this can be taken off.
+function _dsClearBadge(host, title, onClick, opts) {
+    const o = opts || {};
+    const x = document.createElement('button');
+    x.textContent = '\u00d7';
+    x.title = title;
+    x.setAttribute('data-clearx', '1');
+    x.style.cssText = 'position:absolute; right:' + (o.right || '-4px') + '; top:' + (o.top || '-5px') + ';'
+        + ' width:12px; height:12px; min-width:12px; padding:0; border-radius:50%;'
+        + ' border:1px solid var(--bg-panel); background:var(--text-muted); color:var(--bg-panel);'
+        + ' font-size:9px; line-height:10px; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:2;';
+    x.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
+    x.onclick = (e) => { e.preventDefault(); e.stopPropagation(); onClick(); };
+    host.appendChild(x);
+    return x;
+}
+// The gradient ramp: the stops, where they sit, and what sits between them.
+//
+// Drawn at 90deg regardless of the page's own angle, because the bar is about the
+// COLOUR ORDER and not the direction the page runs — showing it at 217deg would tilt
+// the ramp under handles that still slide left to right.
+//
+// Selection is MODULE state: the panel is rebuilt on every change, so a local index
+// would forget which stop you were editing between two clicks.
+let _dsGradSel = 0;
+let _dsAngleWheelT = null;
+function _dsGradBarInto(host, th, refresh, paintOnly, dot) {
+    const stops = _themeStops(th);
+    if (!stops) return;
+    if (_dsGradSel >= stops.length) _dsGradSel = stops.length - 1;
+    if (_dsGradSel < 0) _dsGradSel = 0;
+    const rowWrap = document.createElement('div');
+    // 9px of side padding: a handle is 14px wide and centred on its position, so at 0%
+    // and 100% half of it would otherwise hang outside the section's border.
+    rowWrap.style.cssText = 'position:relative; height:22px; margin:8px 0 2px; padding:0 9px;';
+    const rail = document.createElement('div');
+    rail.style.cssText = 'position:relative; height:100%;';
+    const track = document.createElement('div');
+    track.style.cssText = 'position:absolute; left:0; right:0; top:8px; height:6px; border-radius:var(--r-4); cursor:copy;'
+        + ' box-shadow:inset 0 0 0 1px var(--border-color); background:' + _themeGradCss(th, 90) + ';';
+    track.title = 'Click to add a stop. Drag a stop to move it.';
+    track.dataset.grad = 'track';
+    rail.appendChild(track);
+    rowWrap.appendChild(rail);
+    const pxToP = (clientX) => {
+        const r = track.getBoundingClientRect();
+        if (!r.width) return 0;
+        return Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    };
+    track.onmousedown = (e) => {
+        if (e.target !== track) return;
+        const p = pxToP(e.clientX);
+        const next = stops.slice();
+        next.push({ c: _themeColorAt(stops, p), p: p });
+        _themeSetStops(th, next);
+        _dsGradSel = _themeStops(th).findIndex(x => Math.abs(x.p - p) < 1e-9);
+        refresh();
+    };
+    const handles = [];
+    // Selection is painted IN PLACE rather than by rebuilding, because a rebuild is what
+    // broke dragging: refreshing on mousedown replaced the handle and the track before
+    // the first mousemove, so pxToP measured a detached element, got a zero width and
+    // snapped every stop to 0.
+    const paintSel = () => {
+        handles.forEach((hh, j) => {
+            const on = (j === _dsGradSel);
+            hh.style.borderColor = on ? 'var(--ui-active)' : 'var(--bg-panel)';
+            hh.style.zIndex = on ? '3' : '1';
+            const badge = hh.querySelector('[data-clearx]');
+            if (badge) badge.style.display = on ? 'flex' : 'none';
+        });
+    };
+    stops.forEach((st, i) => {
+        const h = document.createElement('div');
+        h.style.cssText = 'position:absolute; top:2px; width:14px; height:14px; margin-left:-7px; border-radius:50%;'
+            + ' left:' + (st.p * 100) + '%; background:' + st.c + '; cursor:grab;'
+            + ' border:2px solid var(--bg-panel); box-shadow:0 0 0 1px var(--border-color); transition:transform 0.1s;';
+        h.title = 'Drag to move \u00b7 ' + Math.round(st.p * 100) + '% \u00b7 ' + st.c;
+        h.dataset.stop = String(i);
+        h.onmouseenter = () => { h.style.transform = 'scale(1.18)'; };
+        h.onmouseleave = () => { h.style.transform = ''; };
+        // The x rides the SELECTED stop and is hidden on the others, so the way to delete
+        // a colour is to point at it — not to hunt for a button that names no stop.
+        if (stops.length > 2) {
+            _dsClearBadge(h, 'Remove this colour from the gradient', () => {
+                const live = _themeStops(th);
+                if (live.length <= 2) return;
+                live.splice(i, 1);
+                _themeSetStops(th, live);
+                if (_dsGradSel >= live.length) _dsGradSel = live.length - 1;
+                refresh();
+            }, { right: '-6px', top: '-7px' });
+        }
+        h.onmousedown = (e) => {
+            e.preventDefault(); e.stopPropagation();
+            _dsGradSel = i;
+            paintSel();
+            h.style.cursor = 'grabbing';
+            const live = _themeStops(th);
+            let moved = false;
+            const mv = (ev) => {
+                moved = true;
+                live[i].p = pxToP(ev.clientX);
+                h.style.left = (live[i].p * 100) + '%';
+                // Straight to the record and repaint the PAGE. NO refresh here or at
+                // mousedown: either one replaces the element being dragged.
+                th.bgStops = live.slice();
+                paintOnly();
+            };
+            const up = () => {
+                document.removeEventListener('mousemove', mv);
+                document.removeEventListener('mouseup', up);
+                h.style.cursor = 'grab';
+                if (moved) _themeSetStops(th, live);
+                refresh();
+            };
+            document.addEventListener('mousemove', mv);
+            document.addEventListener('mouseup', up);
+        };
+        handles.push(h);
+        rail.appendChild(h);
+    });
+    host.appendChild(rowWrap);
+    paintSel();
+
+    // ONE number: the angle. The stop's position is the handle you just dragged, so a box
+    // restating it was a second way to say the same thing — and the one that made the %
+    // read as the angle in the first place.
+    const cur = _themeStops(th)[_dsGradSel];
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; align-items:center; gap:6px; margin:6px 0 4px; font-size:var(--fs-55); color:var(--text-muted);';
+    const aIcon = document.createElement('span');
+    aIcon.innerHTML = _dsAngleIconSVG();
+    aIcon.title = 'Direction the gradient runs, in degrees: 0 points up, 90 right, 180 down.';
+    aIcon.style.cssText = 'display:inline-flex; align-items:center; flex:0 0 auto; color:var(--text-muted); cursor:help;';
+    row.appendChild(aIcon);
+    const ang = document.createElement('input'); ang.type = 'number';
+    ang.min = '0'; ang.max = '359'; ang.step = '1'; ang.value = _themeGradAngle(th);
+    ang.title = 'Direction the gradient runs. Scroll over this box to sweep it and watch the page.';
+    ang.style.cssText = 'width:52px; height:22px; text-align:center; font-size:var(--fs-60); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    // LIVE. Typing or scrolling repaints the page and the ramp without rebuilding the
+    // panel, which would take the focus (and, mid-scroll, the element) with it.
+    const liveAngle = (v) => {
+        const n = ((Math.round(v) % 360) + 360) % 360;
+        th.bgAngle = n;
+        ang.value = n;
+        paintOnly();
+    };
+    ang.oninput = () => { const v = parseFloat(ang.value); if (isFinite(v)) { th.bgAngle = v; paintOnly(); } };
+    ang.onchange = () => { const v = parseFloat(ang.value); liveAngle(isFinite(v) ? v : THEME_GRAD_DEFAULT_ANGLE); refresh(); };
+    ang.onkeydown = (e) => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); ang.onchange(); } };
+    // {passive:false} or preventDefault is ignored and the panel scrolls under the
+    // gesture — the same requirement the underlay's wheel zoom has.
+    ang.addEventListener('wheel', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const step = e.shiftKey ? 15 : 1;
+        liveAngle(_themeGradAngle(th) + (e.deltaY < 0 ? step : -step));
+        clearTimeout(_dsAngleWheelT);
+        // One undo entry and one rebuild for a run of wheel clicks, the way the elevation
+        // nudges debounce rather than writing history per tick.
+        _dsAngleWheelT = setTimeout(() => { refresh(); }, 400);
+    }, { passive: false });
+    row.appendChild(ang);
+    const deg = document.createElement('span'); deg.textContent = '\u00b0'; row.appendChild(deg);
+    // The stop's colour, with no label: it sits at the end of the gradient row and the
+    // swatch says what it is.
+    // The selected stop's colour sits at the START of the row, beside the angle, rather
+    // than pushed to the far edge: the two things you reach for while shaping a gradient
+    // are its colour and its direction, and a flex spacer put half the panel between them.
+    const sw = document.createElement('span');
+    sw.style.cssText = 'display:flex; align-items:center; flex:0 0 auto; margin-right:2px;';
+    sw.appendChild(dot(cur.c, '#ffffff', 'Colour of the selected stop', (v) => {
+        const live = _themeStops(th); live[_dsGradSel].c = v; _themeSetStops(th, live);
+    }, (v) => {
+        const hh = handles[_dsGradSel];
+        if (hh) hh.style.background = v;
+        track.style.background = _themeGradCss(th, 90);
+    }));
+    row.insertBefore(sw, row.firstChild);
+    host.appendChild(row);
+}
 function _dsThemeControlInto(t, key, desc) {
     const themes = _pageThemes();
     const th = themes[key] || (themes[key] = { mode: 'light', bg: null, image: null });
+    // In THIS function `th` is the live stored record, unlike _applyPageTheme where
+    // `th` is the normalised read-only view and `stored` is the record. Aliasing it
+    // keeps the gradient and tint code below reading the same in both places.
+    const stored = th;
     const sect = (label) => { const d = document.createElement('div'); d.textContent = label; d.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:12px 0 5px;'; t.appendChild(d); };
     const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); try { if (typeof _dsBuilt !== 'undefined' && _dsBuilt[key]) delete _dsBuilt[key]; } catch (e) {} _dsRenderTools(); _dsRenderCenter(); if (desc) _dsPriorityRerender(desc); else { _dsThumbCache = {}; _dsRenderRail(); } };
-    sect('Page theme');
-    const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:5px;';
-    [['light', 'Light'], ['dark', 'Dark']].forEach(([v, l]) => {
-        const b = document.createElement('button'); b.textContent = l; b.className = 'action-btn btn-secondary';
-        b.style.cssText = 'flex:1; height:28px; font-size:var(--fs-65);' + (th.mode === v ? ' outline:2px solid var(--accent); color:var(--text-strong);' : '');
-        b.onclick = () => { th.mode = v; refresh(); };
-        row.appendChild(b);
+    // A COLOUR DOT THAT CAN CLEAR ITSELF. The clear used to be a separate button that
+    // appeared when a colour was set, which moved everything below it the moment you
+    // picked one. The native colour picker has no 'none', and nothing can be added
+    // inside it, so the next best place is the swatch: a small x rides the dot's corner
+    // and takes no row of its own.
+    // Wheel scrubbing on a range, matching the angle boxes: a slider in this panel is a
+    // live control and reaching for the wheel over one is the same instinct. {passive:false}
+    // or preventDefault is ignored and the panel scrolls under the gesture instead.
+    const wheelScrub = (inp, onLive, onDone) => {
+        inp.addEventListener('wheel', (e) => {
+            e.preventDefault(); e.stopPropagation();
+            const step = parseFloat(inp.step) || 1;
+            const mult = e.shiftKey ? 4 : 1;
+            const min = parseFloat(inp.min), max = parseFloat(inp.max);
+            let v = parseFloat(inp.value) + (e.deltaY < 0 ? step * mult : -step * mult);
+            v = Math.max(min, Math.min(max, v));
+            inp.value = v;
+            onLive(v);
+            clearTimeout(_dsAngleWheelT);
+            _dsAngleWheelT = setTimeout(() => { onDone(); }, 400);
+        }, { passive: false });
+    };
+    const paintOnly = () => {
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        try { if (typeof _dsBuilt !== 'undefined' && _dsBuilt[key]) delete _dsBuilt[key]; } catch (e) {}
+        try { _dsRenderCenter(); } catch (e) {}
+    };
+    // The dot returns its WRAPPER, which is position:relative so a clear badge can ride
+    // it. WHICH control wears the badge is decided by the group below, not here: there is
+    // one x on screen at a time and it belongs to the outermost active layer.
+    const dot = (val, fallback, title, set, onLive) => {
+        const wrap = document.createElement('span');
+        wrap.style.cssText = 'position:relative; display:inline-flex; flex:0 0 auto; line-height:0;';
+        const i2 = document.createElement('input'); i2.type = 'color';
+        i2.value = val || fallback; i2.title = title;
+        i2.style.cssText = 'flex:0 0 auto;';
+        // A full refresh would rebuild this panel and take the open picker with it, so
+        // dragging repaints the page AND updates whatever in this panel shows the colour,
+        // in place. Without that second half the ramp sat unchanged until Enter, which is
+        // what made the picker feel like it had not applied anything.
+        i2.oninput = () => { set(i2.value); if (onLive) { try { onLive(i2.value); } catch (e) {} } paintOnly(); };
+        i2.onchange = () => { set(i2.value); refresh(); };
+        wrap.appendChild(i2);
+        return wrap;
+    };
+    const capRow = (txt, tip) => {
+        const d = document.createElement('div');
+        d.style.cssText = 'display:flex; align-items:center; font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:0 0 4px;';
+        d.appendChild(document.createTextNode(txt));
+        if (tip) d.appendChild(_dsHelpDot(tip));
+        t.appendChild(d);
+        return d;
+    };
+
+    // TWO GROUPS ON ONE ROW, separated by a gap rather than a rule. They are different
+    // questions — what the TYPE does, and what the PAGE is — so each keeps its own small
+    // heading; the gap is what makes them read as two sections without spending a row on
+    // a divider between them.
+    const grpRow = document.createElement('div');
+    // A stable hook: the Text and Background groups share this row, and anything looking
+    // for that fact should not have to guess at a style string.
+    grpRow.dataset.row = 'themeline';
+    grpRow.style.cssText = 'display:flex; align-items:flex-end; gap:14px; flex-wrap:wrap;';
+    const group = (label, tip) => {
+        const col = document.createElement('div');
+        col.style.cssText = 'display:flex; flex-direction:column; gap:3px; flex:0 0 auto;';
+        const cap = document.createElement('div');
+        cap.style.cssText = 'display:flex; align-items:center; font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted);';
+        cap.appendChild(document.createTextNode(label));
+        if (tip) cap.appendChild(_dsHelpDot(tip));
+        col.appendChild(cap);
+        const body = document.createElement('div');
+        body.style.cssText = 'display:flex; align-items:center; gap:5px;';
+        col.appendChild(body);
+        grpRow.appendChild(col);
+        return body;
+    };
+
+    const textBody = group('Text', 'Light pages take dark type; Dark pages take white type. This does not set the page colour \u2014 Background does.');
+    const modes = document.createElement('div');
+    modes.style.cssText = 'display:flex; gap:4px;';
+    // Deliberately NOT .frame-tab here, which is the app's tab strip and paints its
+    // selection as a solid fill. These two sit in the same cluster as the background
+    // icons and have to read as one system with them, so they take the same ring-and-fade
+    // treatment. Everywhere else in the app the tab strip is still the tab strip.
+    [['light', 'Light', 'Dark type on a light page'], ['dark', 'Dark', 'White type on your colour or image']].forEach(o => {
+        const on = (th.mode === o[0]);
+        const b2 = document.createElement('button');
+        b2.className = 'action-btn btn-secondary';
+        b2.textContent = o[1]; b2.title = o[2];
+        b2.style.cssText = 'width:auto; min-width:46px; height:24px; padding:0 9px; font-size:var(--fs-60);'
+            + (on ? ' border-color:var(--ui-active); color:var(--ui-active); opacity:1;' : ' opacity:0.5;');
+        b2.onmouseenter = () => { if (!on) b2.style.opacity = '0.85'; };
+        b2.onmouseleave = () => { if (!on) b2.style.opacity = '0.5'; };
+        b2.onclick = () => { th.mode = o[0]; refresh(); };
+        modes.appendChild(b2);
     });
-    t.appendChild(row);
-    // Background colour (used mainly by dark, but works for light too).
-    const cRow = document.createElement('label'); cRow.style.cssText = 'display:flex; align-items:center; gap:8px; margin-top:8px; font-size:var(--fs-65); color:var(--text-main);';
-    const sw = document.createElement('input'); sw.type = 'color'; sw.value = th.bg || (th.mode === 'dark' ? '#000000' : '#ffffff'); sw.style.cssText = 'width:34px; height:26px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); background:none;';
-    sw.oninput = () => { th.bg = sw.value; refresh(); };
-    cRow.appendChild(sw); cRow.appendChild(document.createTextNode('Background colour'));
-    const clr = document.createElement('button'); clr.textContent = 'clear'; clr.className = 'action-btn btn-secondary'; clr.style.cssText = 'height:24px; font-size:var(--fs-60); margin-left:auto;';
-    clr.onclick = () => { th.bg = null; refresh(); };
-    cRow.appendChild(clr);
-    t.appendChild(cRow);
-    // Background image upload.
-    const imgRow = document.createElement('div'); imgRow.style.cssText = 'display:flex; gap:6px; margin-top:8px; align-items:center;';
-    const up = document.createElement('button'); up.textContent = th.image ? 'Replace image' : 'Background image\u2026'; up.className = 'action-btn btn-secondary'; up.style.cssText = 'flex:1; height:28px; font-size:var(--fs-60);';
-    const file = document.createElement('input'); file.type = 'file'; file.accept = 'image/*'; file.style.display = 'none';
-    up.onclick = () => file.click();
+    textBody.appendChild(modes);
+
+    const bgBody = group('Background', 'A flat colour, a gradient, or an image. The x sits on the outermost one \u2014 take it off to see what is underneath. Clearing the colour returns the page to the Text theme: white on Light, black on Dark.');
+
+    // TOGGLING IS NON-DESTRUCTIVE. Each icon selects which layer is showing; the
+    // settings for the other two stay on the page, so trying a background image and
+    // going back does not cost you the gradient you built. The x is the only thing that
+    // throws anything away, and it clears the layer it sits on.
+    const mode = _themeBgMode(th);
+    const hasGrad = _themeHasGrad(th);
+    const hasImg = !!th.image;
+
+    const setMode = (m) => { th.bgMode = m; refresh(); };
+
+    const cWrap = dot(th.bg, (th.mode === 'dark' ? '#000000' : '#ffffff'),
+        'Background colour' + (mode === 'colour' ? ' \u2014 showing' : ' \u2014 click the swatch to set it, then this layer shows'),
+        (v) => {
+            th.bg = v;
+            // Picking a colour selects the flat layer, which is what you just asked for;
+            // the gradient's first stop follows so the two do not drift apart.
+            if (_themeStops(th)) { const st2 = _themeStops(th); st2[0].c = v; _themeSetStops(th, st2); }
+            if (_themeBgMode(th) !== 'colour') th.bgMode = 'colour';
+        });
+    if (mode === 'colour') {
+        _dsClearBadge(cWrap, 'Clear the colour and go back to the theme default', () => {
+            th.bg = null; th.bgMode = null; refresh();
+        });
+    } else if (th.bg) {
+        // Set but not showing: clicking it brings the flat colour back without opening
+        // the picker, which is the cheap way to flick between layers.
+        cWrap.style.cursor = 'pointer';
+        const sel = document.createElement('span');
+        sel.title = 'Show the flat colour';
+        sel.style.cssText = 'position:absolute; inset:0; cursor:pointer; z-index:1;';
+        sel.onclick = (e) => { e.preventDefault(); e.stopPropagation(); setMode('colour'); };
+        cWrap.appendChild(sel);
+    }
+    cWrap.style.opacity = (mode === 'colour' || !mode) ? '1' : '0.5';
+    bgBody.appendChild(cWrap);
+
+    const iconBtn = (html, on, title, fn) => {
+        const w2 = document.createElement('span');
+        w2.style.cssText = 'position:relative; display:inline-flex; flex:0 0 auto; line-height:0;';
+        const b3 = document.createElement('button');
+        b3.className = 'action-btn btn-secondary';
+        b3.innerHTML = html; b3.title = title;
+        b3.style.cssText = 'width:26px; min-width:26px; height:24px; padding:0; display:inline-flex; align-items:center; justify-content:center;'
+            + (on ? ' border-color:var(--ui-active); color:var(--ui-active); opacity:1;' : ' opacity:0.5;');
+        b3.onmouseenter = () => { if (!on) b3.style.opacity = '0.85'; };
+        b3.onmouseleave = () => { if (!on) b3.style.opacity = '0.5'; };
+        b3.onclick = fn;
+        w2.appendChild(b3);
+        return w2;
+    };
+
+    const gOn = (mode === 'gradient');
+    const gWrapBtn = iconBtn(_dsGradIconSVG(), gOn,
+        gOn ? 'Gradient is showing' : (hasGrad ? 'Show the gradient you set up' : 'Fade the background into other colours'),
+        () => {
+            if (gOn) return;
+            if (!hasGrad) {
+                const base = th.bg || (th.mode === 'dark' ? '#000000' : '#ffffff');
+                th.bg = base;
+                _themeSetStops(th, [{ c: base, p: 0 }, { c: _themeShade(base, th.mode === 'dark' ? 52 : -40), p: 1 }]);
+            }
+            setMode('gradient');
+        });
+    if (gOn) {
+        _dsClearBadge(gWrapBtn, 'Delete this gradient', () => {
+            th.bgStops = null; th.bg2 = null; th.bgMode = th.bg ? 'colour' : null; refresh();
+        });
+    }
+    bgBody.appendChild(gWrapBtn);
+
+    const file = document.createElement('input'); file.type = 'file'; file.accept = 'image/png,image/jpeg,image/webp'; file.style.display = 'none';
     file.onchange = () => {
         const f = file.files && file.files[0]; if (!f) return;
         const rd = new FileReader();
         rd.onload = () => {
             th.image = rd.result;
+            th.bgMode = 'image';
             const im = new Image();
             im.onload = () => { th.imgW = im.naturalWidth || 0; th.imgH = im.naturalHeight || 0; th._bakedImg = null; refresh(); };
             im.onerror = () => { th.imgW = 0; th.imgH = 0; th._bakedImg = null; refresh(); };
@@ -20054,27 +22193,159 @@ function _dsThemeControlInto(t, key, desc) {
         };
         rd.readAsDataURL(f);
     };
-    imgRow.appendChild(up); imgRow.appendChild(file);
-    t.appendChild(imgRow);
-    if (th.image) {
-        // Clear + zoom/pan crop controls for the background image.
-        const clr2 = document.createElement('button'); clr2.textContent = 'Clear background image'; clr2.className = 'action-btn btn-secondary'; clr2.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); margin-top:6px;';
-        clr2.onclick = () => { th.image = null; th._bakedImg = null; th.imageZoom = 1; th.imagePanX = 0; th.imagePanY = 0; th.imgW = null; th.imgH = null; refresh(); };
-        t.appendChild(clr2);
-        const crange = (label, prop, min, max, step, def) => {
-            const l = document.createElement('div'); l.textContent = label; l.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 2px;'; t.appendChild(l);
-            const inp = document.createElement('input'); inp.type = 'range'; inp.min = min; inp.max = max; inp.step = step;
-            inp.value = (typeof th[prop] === 'number') ? th[prop] : def; inp.style.cssText = 'width:100%;';
-            inp.oninput = () => { th[prop] = parseFloat(inp.value); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); clearTimeout(_dsSliderDebounce); _dsSliderDebounce = setTimeout(() => { if (desc) _dsPriorityRerender(desc); }, 350); };
-            t.appendChild(inp);
-        };
-        crange('Zoom', 'imageZoom', 1, 3, 0.05, 1);
-        crange('Pan horizontal', 'imagePanX', -1, 1, 0.05, 0);
-        crange('Pan vertical', 'imagePanY', -1, 1, 0.05, 0);
+    const iOn = (mode === 'image');
+    const iWrap = iconBtn(_dsImageIconSVG(), iOn,
+        iOn ? 'Image is showing \u2014 click to replace it' : (hasImg ? 'Show the image you added' : 'Fill the page with an image'),
+        () => { if (iOn || !hasImg) file.click(); else setMode('image'); });
+    if (iOn) {
+        _dsClearBadge(iWrap, 'Delete this image', () => {
+            th.image = null; th._bakedImg = null; th.imageZoom = 1; th.imagePanX = 0; th.imagePanY = 0;
+            th.imgW = null; th.imgH = null; th.tint = null; th.tint2 = null;
+            th.bgMode = hasGrad ? 'gradient' : (th.bg ? 'colour' : null);
+            refresh();
+        });
     }
-    const note = document.createElement('p'); note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:6px 0 0; line-height:1.4;';
-    note.textContent = 'Dark theme uses white text on your colour or image. A background image fills the page \u2014 use Zoom and Pan to crop it.';
-    t.appendChild(note);
+    bgBody.appendChild(iWrap);
+    bgBody.appendChild(file);
+    t.appendChild(grpRow);
+
+    // The ramp, its angle, and the selected stop's controls. The on/off lives on the
+    // gradient icon in the Background group above.
+    if (_themeGradOn(th)) {
+        const gWrap = document.createElement('div'); gWrap.style.cssText = 'margin-top:8px;';
+        _dsGradBarInto(gWrap, th, refresh, paintOnly, dot);
+        t.appendChild(gWrap);
+    }
+    // ── Tint over the image ───────────────────────────────────────────────
+    if (_themeImageOn(th)) {
+        const tn = _themeTint(th);
+        const tGrad = _themeTintHasGrad(th);
+        // An opacity control that shares one builder, because there are up to two of them
+        // and they must behave identically: live while dragging, committed on release.
+        const opacity = (get, set, min, tip) => {
+            const wrapO = document.createElement('span');
+            wrapO.style.cssText = 'display:flex; align-items:center; gap:5px; flex:1 1 60px; min-width:60px;';
+            const op = document.createElement('input'); op.type = 'range';
+            op.min = String(min); op.max = '100'; op.step = '5';
+            op.value = Math.round(get() * 100);
+            op.title = tip;
+            op.style.cssText = 'flex:1 1 auto; min-width:0;';
+            const pct = document.createElement('span');
+            pct.textContent = Math.round(get() * 100) + '%';
+            pct.style.cssText = 'flex:0 0 30px; text-align:right; color:var(--text-muted);';
+            op.oninput = () => { set(parseFloat(op.value) / 100); pct.textContent = op.value + '%'; paintOnly(); };
+            op.onchange = () => { set(parseFloat(op.value) / 100); refresh(); };
+            wheelScrub(op, (v) => { set(v / 100); pct.textContent = v + '%'; paintOnly(); }, () => refresh());
+            wrapO.appendChild(op); wrapO.appendChild(pct);
+            return wrapO;
+        };
+
+        const tRow = document.createElement('div');
+        tRow.style.cssText = 'display:flex; align-items:center; gap:6px; margin-top:7px; font-size:var(--fs-60); color:var(--text-main);';
+        const tTog = document.createElement('button'); tTog.className = 'action-btn btn-secondary';
+        tTog.textContent = 'Tint';
+        tTog.style.cssText = 'width:auto; min-width:44px; height:22px; padding:0 9px; font-size:var(--fs-60);'
+            + (tn ? ' border-color:var(--ui-active); color:var(--ui-active); opacity:1;' : ' opacity:0.5;');
+        tTog.onmouseenter = () => { if (!tn) tTog.style.opacity = '0.85'; };
+        tTog.onmouseleave = () => { if (!tn) tTog.style.opacity = '0.5'; };
+        tTog.title = tn ? 'Remove the tint' : 'Wash the image with a colour so type over it stays readable';
+        tTog.onclick = () => {
+            if (tn) { th.tint = null; th.tint2 = null; }
+            else { th.tint = (th.mode === 'dark' ? '#000000' : '#ffffff'); if (!(parseFloat(th.tintA) > 0)) th.tintA = 0.35; }
+            refresh();
+        };
+        tRow.appendChild(tTog);
+        if (tn) {
+            tRow.appendChild(dot(th.tint, '#000000', 'Tint colour', (v) => { th.tint = v; }, null));
+            tRow.appendChild(opacity(() => _themeTint(th).a, (v) => { th.tintA = v; }, 5,
+                tGrad ? 'How strong the tint is where the gradient starts' : 'How strong the tint is'));
+            // The same gradient chip as the background, so 'fade this' looks like one idea
+            // in both places.
+            const gT = document.createElement('button');
+            gT.className = 'action-btn btn-secondary';
+            gT.innerHTML = _dsGradIconSVG();
+            gT.title = tGrad ? 'Back to an even tint' : 'Fade the tint across the image \u2014 set the far end to 0% to fade it out completely';
+            gT.style.cssText = 'flex:0 0 auto; width:24px; min-width:24px; height:22px; padding:0; display:inline-flex; align-items:center; justify-content:center;'
+                + (tGrad ? ' border-color:var(--ui-active); color:var(--ui-active); opacity:1;' : ' opacity:0.5;');
+            gT.onmouseenter = () => { if (!tGrad) gT.style.opacity = '0.85'; };
+            gT.onmouseleave = () => { if (!tGrad) gT.style.opacity = '0.5'; };
+            gT.onclick = () => {
+                if (tGrad) { th.tint2 = null; }
+                else {
+                    // Seeded as the SAME colour fading to nothing, which is the move people
+                    // actually want: a wash that lifts off one side of the picture. A second
+                    // colour is then one click away on the dot.
+                    th.tint2 = th.tint;
+                    th.tintA2 = 0;
+                }
+                refresh();
+            };
+            tRow.appendChild(gT);
+        }
+        t.appendChild(tRow);
+
+        if (tn && tGrad) {
+            const t2Row = document.createElement('div');
+            t2Row.style.cssText = 'display:flex; align-items:center; gap:6px; margin-top:5px; font-size:var(--fs-60); color:var(--text-main);';
+            const arrow = document.createElement('span'); arrow.textContent = '\u2192';
+            arrow.style.cssText = 'flex:0 0 auto; color:var(--text-muted); margin-left:2px;';
+            arrow.title = 'The far end of the tint';
+            t2Row.appendChild(arrow);
+            t2Row.appendChild(dot(th.tint2, th.tint || '#000000', 'Colour at the far end', (v) => { th.tint2 = v; }, null));
+            // MIN 0 here, unlike the near end: fading a colour out completely is the
+            // whole point of the far stop, and 'transparent' is what 0 means.
+            t2Row.appendChild(opacity(() => {
+                const v = parseFloat(th.tintA2); return isFinite(v) ? Math.max(0, Math.min(1, v)) : 0;
+            }, (v) => { th.tintA2 = v; }, 0, 'Opacity at the far end \u2014 0% is fully transparent'));
+            const aI = document.createElement('span');
+            aI.innerHTML = _dsAngleIconSVG();
+            aI.title = 'Direction the tint fades, in degrees: 0 points up, 90 right, 180 down.';
+            aI.style.cssText = 'display:inline-flex; align-items:center; flex:0 0 auto; color:var(--text-muted); cursor:help;';
+            t2Row.appendChild(aI);
+            const tAng = document.createElement('input'); tAng.type = 'number';
+            tAng.min = '0'; tAng.max = '359'; tAng.step = '1'; tAng.value = _themeTintAngle(th);
+            tAng.title = 'Direction the tint fades. Scroll over this box to sweep it.';
+            tAng.style.cssText = 'flex:0 0 46px; width:46px; height:22px; text-align:center; font-size:var(--fs-60); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+            const liveT = (v) => { const n = ((Math.round(v) % 360) + 360) % 360; th.tintAngle = n; tAng.value = n; paintOnly(); };
+            tAng.oninput = () => { const v = parseFloat(tAng.value); if (isFinite(v)) { th.tintAngle = v; paintOnly(); } };
+            tAng.onchange = () => { const v = parseFloat(tAng.value); liveT(isFinite(v) ? v : THEME_GRAD_DEFAULT_ANGLE); refresh(); };
+            tAng.onkeydown = (e) => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); tAng.onchange(); } };
+            tAng.addEventListener('wheel', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                liveT(_themeTintAngle(th) + (e.deltaY < 0 ? (e.shiftKey ? 15 : 1) : -(e.shiftKey ? 15 : 1)));
+                clearTimeout(_dsAngleWheelT);
+                _dsAngleWheelT = setTimeout(() => { refresh(); }, 400);
+            }, { passive: false });
+            t2Row.appendChild(tAng);
+            const dg = document.createElement('span'); dg.textContent = '\u00b0'; dg.style.cssText = 'color:var(--text-muted);';
+            t2Row.appendChild(dg);
+            t.appendChild(t2Row);
+        }
+    }
+
+    // ── Crop: three sliders on three rows, not six ────────────────────────
+    if (_themeImageOn(th)) {
+        // Label inline with the slider. As a heading above each one this was six rows
+        // for three controls, which is what pushed everything else out of sight.
+        const crange = (label, prop, min, max, step, def, tip) => {
+            const r = document.createElement('div');
+            r.style.cssText = 'display:flex; align-items:center; gap:6px; margin-top:5px;';
+            const l = document.createElement('span'); l.textContent = label; l.title = tip;
+            l.style.cssText = 'flex:0 0 34px; font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.4px; color:var(--text-muted); cursor:help;';
+            const inp = document.createElement('input'); inp.type = 'range'; inp.min = min; inp.max = max; inp.step = step;
+            inp.value = (typeof th[prop] === 'number') ? th[prop] : def;
+            inp.title = tip;
+            inp.style.cssText = 'flex:1 1 auto; min-width:0;';
+            inp.oninput = () => { th[prop] = parseFloat(inp.value); paintOnly(); };
+            wheelScrub(inp, (v) => { th[prop] = v; paintOnly(); }, () => refresh());
+            r.appendChild(l); r.appendChild(inp);
+            t.appendChild(r);
+        };
+        crange('Zoom', 'imageZoom', 1, 3, 0.05, 1, 'Scale the image up to crop into it');
+        crange('Pan X', 'imagePanX', -1, 1, 0.05, 0, 'Slide the crop left or right');
+        crange('Pan Y', 'imagePanY', -1, 1, 0.05, 0, 'Slide the crop up or down');
+    }
+    // The standing paragraph that was here is on the Text and Background headings.
 }
 let _thumbQueue = [], _thumbBusy = false, _thumbRunToken = 0;
 // Every page kind gets a real, high-fidelity preview built via the lazy
@@ -20681,6 +22952,7 @@ function _dsRenderCenter() {
         page.innerHTML = '<img src="' + _builtSrc + '" style="position:absolute; inset:0; width:100%; height:100%;">';
         _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
         _dsAddGuides(page, Math.round(w), Math.round(hh));
+        _dsTitleHandles(page, desc, Math.round(w), Math.round(hh));
         _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
         c.appendChild(page);
         _dsSyncBuildBtn();
@@ -20814,6 +23086,7 @@ function _dsRenderCenter() {
     _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
     _dsAddGuides(page, Math.round(w), Math.round(hh));
     _dsWirePageDeselect(page);
+    _dsTitleHandles(page, desc, Math.round(w), Math.round(hh));
     _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
     if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); }
@@ -20861,12 +23134,12 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
         if (!interactive && (_dsSelKey != null && _dsSelIdx >= 0)) { _dsSelKey = null; _dsSelIdx = -1; _dsSyncToolbar(); _dsRenderCenter(); }
     });
 
-    const finish = () => { _dsAddStamp(page, w, hh, desc); _dsAddGuides(page, w, hh); _dsRenderAnnots(page, desc, w, hh); };
+    const finish = () => { _dsAddStamp(page, w, hh, desc); _dsAddGuides(page, w, hh); _dsTitleHandles(page, desc, w, hh); _dsRenderAnnots(page, desc, w, hh); };
     if (!lv.imageData) {
         // The exact render already shows the dashed "upload a plan" slot where
         // the image will land; just add a small hint for where to do that.
         const hint = document.createElement('div');
-        const R0 = _fpPlanRect(936, 540, 40);
+        const R0 = _fpPlanRect(936, 540);
         hint.style.cssText = 'position:absolute; left:' + Math.round(R0.x * S) + 'px; top:' + Math.round((R0.y + R0.h * 0.5 + 16) * S) + 'px; width:' + Math.round(R0.w * S) + 'px; text-align:center; color:#bbb; font-size:11px; pointer-events:none;';
         hint.textContent = 'Use "Place numbers / mark up" in the right panel to upload a plan for this level.';
         page.appendChild(hint);
@@ -20877,7 +23150,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     _loadImg(lv.imageData).then(pim => {
         if (tok !== _dsFpBaseTok || !page.isConnected || !pim) return;
         const iw = pim.naturalWidth || pim.width, ih = pim.naturalHeight || pim.height;
-        const f = _fpPlanFit(936, 540, 40, iw, ih);
+        const f = _fpPlanFit(936, 540, iw, ih);
         if (!f) return;
         const wrap = document.createElement('div');
         wrap.style.cssText = 'position:absolute; left:' + (f.dx * S) + 'px; top:' + (f.dy * S) + 'px; width:' + (f.dw * S) + 'px; height:' + (f.dh * S) + 'px; line-height:0;';
@@ -21185,7 +23458,9 @@ function _dsApplyTemplate(els, type) {
     _dsRefresh();
 }
 function _dsLayoutStyleControls(t) {
-    const wrap = document.createElement('div'); wrap.style.cssText = 'border:1px solid var(--border-color); border-radius:var(--r-6); padding:10px; margin-bottom:10px; background:var(--bg-input);';
+    // A clear gap above: the footer is a different subject from the theme and background
+    // controls it follows, and sharing their spacing made the section read as one list.
+    const wrap = document.createElement('div'); wrap.style.cssText = 'border:1px solid var(--border-color); border-radius:var(--r-6); padding:10px; margin:0 0 10px; background:var(--bg-input);';
     const lbl = document.createElement('div'); lbl.textContent = 'Edit this page'; lbl.style.cssText = 'font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:8px;'; wrap.appendChild(lbl);
     const addRow = document.createElement('div'); addRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:5px; margin-bottom:8px;';
     const ab = (label, fn) => { const b = document.createElement('button'); b.textContent = label; b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:var(--fs-65);'; b.onclick = fn; addRow.appendChild(b); };
@@ -21203,7 +23478,7 @@ function _dsLayoutStyleControls(t) {
     const sv = document.createElement('span'); sv.id = 'dsLaySizeVal'; sv.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); min-width:26px; text-align:center;';
     const ap = document.createElement('button'); ap.textContent = 'A+'; ap.className = 'action-btn btn-secondary'; ap.style.cssText = 'width:30px; height:28px; padding:0; font-size:var(--fs-70);'; ap.onclick = () => _mbNudgeSize(0.005);
     sizeWrap.appendChild(am); sizeWrap.appendChild(sv); sizeWrap.appendChild(ap); tc.appendChild(sizeWrap);
-    const col = document.createElement('input'); col.type = 'color'; col.id = 'dsLayColor'; col.style.cssText = 'width:30px; height:28px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-panel); cursor:pointer; padding:1px;'; col.onchange = () => _mbSetTextColor(col.value); tc.appendChild(col);
+    const col = document.createElement('input'); col.type = 'color'; col.id = 'dsLayColor'; col.style.cssText = 'flex:0 0 auto;'; col.onchange = () => _mbSetTextColor(col.value); _dsInkQuickPicks(col, (hex) => _mbSetTextColor(hex)); tc.appendChild(col);
     sel.appendChild(tc);
     const lr = document.createElement('div'); lr.id = 'dsLayActions'; lr.style.cssText = 'display:none; flex-wrap:wrap; gap:5px;';
     const fr = document.createElement('button'); fr.textContent = 'Front'; fr.className = 'action-btn btn-secondary'; fr.style.cssText = 'width:auto; height:28px; padding:0 9px; font-size:var(--fs-65);'; fr.onclick = () => _mbToFront();
@@ -21233,18 +23508,135 @@ function _dsUpdateLayoutStyleBar() {
         const c = document.getElementById('dsLayColor'); if (c) c.value = el.color || '#222222';
     }
 }
+// DECK-WIDE footer branding, on the Project tab. Which logo the deck carries, what the
+// copyright line says, and whether either appears at all, are facts about the
+// presentation — not about the page that happened to be open when you set them. They
+// were in the per-page footer panel, which is how a deck-wide change gets made by
+// someone who believes they are changing one page.
+function _dsDeckFooterInto(host) {
+    if (!host) return;
+    host.innerHTML = '';
+    const lbl = document.createElement('div');
+    lbl.textContent = 'FOOTER & BRANDING';
+    lbl.title = 'Per-page ink colour and hide toggles are on the Pages tab.';
+    lbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:6px; cursor:help;';
+    host.appendChild(lbl);
+    const save = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); try { _dsDeckFooterInto(host); } catch (e) {} try { _dsRenderCenter(); } catch (e) {} try { _dsRenderTools(); } catch (e) {} };
+    const sub2 = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:8px 0 4px;'; host.appendChild(d); return d; };
+    // One uploader, used for both logos: the only differences are which key it writes
+    // and what the empty state says.
+    const logoRow = (label, getter, setter, emptyLabel, tip) => {
+        sub2(label);
+        const has = !!getter();
+        const r = document.createElement('div'); r.style.cssText = 'display:flex; gap:6px;';
+        const up = document.createElement('button'); up.className = 'action-btn btn-secondary';
+        up.textContent = has ? 'Replace logo' : emptyLabel; up.title = tip;
+        up.style.cssText = 'flex:1; height:26px; font-size:var(--fs-60);';
+        const file = document.createElement('input'); file.type = 'file'; file.accept = 'image/*'; file.style.display = 'none';
+        up.onclick = () => file.click();
+        file.onchange = () => {
+            const f = file.files && file.files[0]; if (!f) return;
+            const rd = new FileReader();
+            rd.onload = () => {
+                const dataUrl = rd.result;
+                // The aspect is captured ONCE here so the PDF drawer never has to load
+                // the image asynchronously mid-page.
+                const img = new Image();
+                const done = (ar) => { setter({ dataUrl: dataUrl, aspect: ar }); save(); };
+                img.onload = () => done((img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 3);
+                img.onerror = () => done(3);
+                img.src = dataUrl;
+            };
+            rd.readAsDataURL(f);
+        };
+        r.appendChild(up); r.appendChild(file);
+        if (has) {
+            const rm = document.createElement('button'); rm.className = 'action-btn btn-secondary';
+            rm.textContent = '\u2715'; rm.title = 'Remove this logo';
+            rm.style.cssText = 'width:26px; height:26px; min-width:26px; font-size:var(--fs-65);';
+            rm.onclick = () => { setter(null); save(); };
+            r.appendChild(rm);
+        }
+        host.appendChild(r);
+    };
+    logoRow('Studio logo (right side)', _footerBrandLogo,
+        (v) => { editorialContent.footerBrandLogo = v; },
+        'Replace Farmboy logo\u2026',
+        'Use a different mark on every page. Remove it to go back to the Farmboy wordmark.');
+    logoRow('Client logo (left side)', () => (editorialContent.footerClientLogo && editorialContent.footerClientLogo.dataUrl) ? editorialContent.footerClientLogo : null,
+        (v) => { editorialContent.footerClientLogo = v; },
+        'Upload client logo\u2026',
+        'Printed beside the project code and location on every page.');
+    sub2('Copyright line');
+    // PREFILLED with the line that will actually print, not left empty behind a
+    // placeholder. Editing this is almost always 'keep the \u00a9 and the shape, change the
+    // name', and retyping a copyright symbol to do that is the wrong ask.
+    const _yr = new Date().getFullYear();
+    const _dflt = FOOTER_COPYRIGHT_DEFAULT.split('{year}').join(_yr);
+    const cin = document.createElement('input'); cin.type = 'text';
+    cin.value = _footerCopyrightText(_yr);
+    cin.title = 'Edit the wording. Matching the studio line exactly clears the override, so the year keeps rolling over on its own.';
+    cin.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); box-sizing:border-box; padding:0 7px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    cin.onchange = () => {
+        const v = cin.value.trim();
+        // Typing the studio line back in (or leaving it untouched) must NOT store it as a
+        // custom override: a stored copy is frozen to the year it was typed, while the
+        // default re-derives {year} every time it prints.
+        editorialContent.footerCopyright = (!v || v === _dflt) ? '' : v;
+        save();
+    };
+    cin.onkeydown = (e) => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); cin.onchange(); } };
+    host.appendChild(cin);
+    if (((editorialContent.footerCopyright || '') + '').trim()) {
+        const rst = document.createElement('button'); rst.className = 'action-btn btn-secondary';
+        rst.textContent = 'Reset to studio line';
+        rst.title = 'Back to \u201C' + _dflt + '\u201D, with the year kept live';
+        rst.style.cssText = 'width:100%; height:22px; font-size:var(--fs-55); margin-top:4px;';
+        rst.onclick = () => { editorialContent.footerCopyright = ''; save(); };
+        host.appendChild(rst);
+    }
+    // The note is on the heading's tooltip; see lbl above.
+    // Deck-wide, and now on the deck-wide tab: writes the SELECTED page's footer
+    // settings onto every page as the default.
+    const deckBtn = document.createElement('button'); deckBtn.className = 'action-btn btn-secondary';
+    deckBtn.textContent = 'Apply footer to whole deck';
+    deckBtn.title = 'Make the open page\u2019s footer ink and hide settings the deck default';
+    deckBtn.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); margin-top:8px;';
+    deckBtn.onclick = () => {
+        const d = _dsPages[_dsIndex];
+        const f = _resolveFooter(d ? _deckPageKey(d) : null);
+        editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo, hideFooter: f.hideFooter };
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        if (typeof _dsRenderCenter === 'function') _dsRenderCenter();
+        _toast && _toast('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.');
+    };
+    host.appendChild(deckBtn);
+}
+// Theme, background and footer for the open page, in one section, built ONCE ahead of
+// the kind-specific branches — the same rule _dsPlaceRelativeInto follows, and for the
+// same reason: several of those branches return early.
+function _dsPageAppearanceInto(t, desc) {
+    if (!desc) return;
+    const key = _deckPageKey(desc);
+    if (!key) return;
+    const body = _dsSection(t, 'Page appearance', 'appearance', false,
+        'Light or dark page, its background colour or image, and what the footer does about it. '
+        + 'Footer ink set to Auto follows the theme you pick here; Dark text / Light text override it '
+        + 'for this page only. Hide toggles are per page too, so a single dark spread can drop the logo '
+        + 'without touching the rest of the deck.');
+    const themeWrap = document.createElement('div');
+    themeWrap.dataset.themegap = '1';
+    themeWrap.style.cssText = 'margin-bottom:26px;';
+    try { _dsThemeControlInto(themeWrap, key, desc); } catch (e) {}
+    body.appendChild(themeWrap);
+    try { _dsPageChromeControls(body, desc); } catch (e) {}
+}
 function _dsPageChromeControls(t, desc) {
     if (!desc) return;
     const key = _deckPageKey(desc); if (!key) return;
     const wrap = document.createElement('div'); wrap.style.cssText = 'border:1px solid var(--border-color); border-radius:var(--r-6); padding:10px; margin-bottom:10px; background:var(--bg-input);';
-    // Rename (layout pages)
-    if (desc.kind === 'layout' && desc.page) {
-        const lab = document.createElement('div'); lab.textContent = 'Page name'; lab.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-bottom:3px;'; wrap.appendChild(lab);
-        const inp = document.createElement('input'); inp.type = 'text'; inp.value = desc.page.title || ''; inp.placeholder = 'Page name \u2014 e.g. TPL: Frame Right v2';
-        inp.style.cssText = 'width:100%; height:28px; font-size:var(--fs-70); margin-bottom:10px; box-sizing:border-box; padding:0 7px; background:var(--bg-panel); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
-        inp.onchange = () => { desc.page.title = inp.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
-        wrap.appendChild(inp);
-    }
+    // The 'Page name' field lived here and is gone: the panel heading above IS the
+    // rename field now, so the name was being shown twice and edited in the lower copy.
     // Footer / rights for this page — two INDEPENDENT colour zones (left:
     // code + location + client logo; right: copyright + Farmboy logo), plus
     // an optional client logo and hide toggles. Everything is responsive: a
@@ -21273,42 +23665,19 @@ function _dsPageChromeControls(t, desc) {
         row.appendChild(c); row.appendChild(document.createTextNode(label)); wrap.appendChild(row);
     };
     chk('Hide copyright line', 'hideCopyright');
-    chk('Hide Farmboy logo', 'hideLogo');
+    chk(_footerBrandLogo() ? 'Hide logo' : 'Hide Farmboy logo', 'hideLogo');
+    // Only offered when there IS a client logo, as before. It came back here with the
+    // other hide toggles when the upload control moved to the Project tab: WHICH logo
+    // the deck uses is deck-wide, but hiding it on one page is per page.
+    if (editorialContent.footerClientLogo && editorialContent.footerClientLogo.dataUrl) chk('Hide client logo on this page', 'hideClientLogo');
     chk('Hide entire footer on this page', 'hideFooter');
-    // Client logo — deck-wide, prints beside the project code/location on the
-    // left. Aspect ratio is captured once at upload so the PDF drawer never
-    // needs to load the image async.
-    const clWrap = document.createElement('div'); clWrap.style.cssText = 'margin-top:8px; padding-top:8px; border-top:1px dashed var(--border-color);';
-    const clLbl = document.createElement('div'); clLbl.textContent = 'Client logo (left side, deck-wide)'; clLbl.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-bottom:5px;'; clWrap.appendChild(clLbl);
-    const hasClientLogo = !!(editorialContent.footerClientLogo && editorialContent.footerClientLogo.dataUrl);
-    const clBtnRow = document.createElement('div'); clBtnRow.style.cssText = 'display:flex; gap:6px;';
-    const clUp = document.createElement('button'); clUp.textContent = hasClientLogo ? 'Replace logo' : 'Upload client logo\u2026'; clUp.className = 'action-btn btn-secondary'; clUp.style.cssText = 'flex:1; height:26px; font-size:var(--fs-60);';
-    const clFile = document.createElement('input'); clFile.type = 'file'; clFile.accept = 'image/*'; clFile.style.display = 'none';
-    clUp.onclick = () => clFile.click();
-    clFile.onchange = () => {
-        const f = clFile.files && clFile.files[0]; if (!f) return;
-        const rd = new FileReader();
-        rd.onload = () => {
-            const dataUrl = rd.result;
-            const img = new Image();
-            img.onload = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: (img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); };
-            img.onerror = () => { editorialContent.footerClientLogo = { dataUrl: dataUrl, aspect: 3 }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); if (typeof _dsRenderCenter === 'function') _dsRenderCenter(); };
-            img.src = dataUrl;
-        };
-        rd.readAsDataURL(f);
-    };
-    clBtnRow.appendChild(clUp); clBtnRow.appendChild(clFile);
-    if (hasClientLogo) { const rm = document.createElement('button'); rm.textContent = '\u2715'; rm.title = 'Remove client logo'; rm.className = 'action-btn btn-secondary'; rm.style.cssText = 'width:26px; height:26px; font-size:var(--fs-65);'; rm.onclick = () => { editorialContent.footerClientLogo = null; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); }; clBtnRow.appendChild(rm); }
-    clWrap.appendChild(clBtnRow);
-    wrap.appendChild(clWrap);
-    if (hasClientLogo) {
-        const row = document.createElement('label'); row.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:var(--fs-65); color:var(--text-main); margin:5px 0 0; cursor:pointer;';
-        const c = document.createElement('input'); c.type = 'checkbox'; c.checked = !!cur.hideClientLogo; c.onchange = () => set('hideClientLogo', c.checked);
-        row.appendChild(c); row.appendChild(document.createTextNode('Hide client logo on this page')); wrap.appendChild(row);
-    }
-    const deckBtn = document.createElement('button'); deckBtn.textContent = 'Apply footer to whole deck'; deckBtn.className = 'action-btn btn-secondary'; deckBtn.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); margin-top:8px;';
-    deckBtn.onclick = () => { const f = _resolveFooter(key); editorialContent.footer = { text: f.text, leftTheme: f.leftTheme, hideCopyright: f.hideCopyright, hideLogo: f.hideLogo, hideClientLogo: f.hideClientLogo, hideFooter: f.hideFooter }; if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (typeof _dsRenderCenter === 'function') _dsRenderCenter(); showInfoModal && showInfoModal('Footer applied', 'These footer settings are now the deck default. Per-page overrides still win where set.'); };
-    wrap.appendChild(deckBtn);
+    // THE CLIENT LOGO AND 'APPLY TO WHOLE DECK' LIVED HERE AND ARE NOW ON THE PROJECT
+    // TAB. Both are deck-wide: one uploads a logo used on every page, the other writes
+    // this page's footer onto every page. Deck-wide settings sitting in a per-PAGE panel
+    // is how you end up changing the whole deck while believing you changed one page.
+    // What stays here is exactly what is per page: the two ink zones and the three hide
+    // toggles, which is the reason to open this at all (a dark background image needs a
+    // white logo on that page and no other).
     t.appendChild(wrap);
 }
 // Human name for a style's colour — 'Black', 'White', or the hex itself.
@@ -21323,13 +23692,29 @@ function _styleColorName(hex) {
     return h;
 }
 const _dsToolsOpen = {};   // sectionId -> bool (session-persistent open state)
-function _dsSection(container, title, id, defaultOpen) {
+// A paragraph of explanation, folded into a '?' you can hover. The right panel was
+// carrying several standing paragraphs that said the same thing every time you looked
+// at them, and together they were most of the reason it scrolled. A bare `title` on the
+// heading hides that help exists at all, so this is a MARK you can see and point at.
+function _dsHelpDot(text, tag) {
+    const d = document.createElement(tag || 'span');
+    d.textContent = '?';
+    d.title = text;
+    d.setAttribute('data-help', '1');
+    d.style.cssText = 'display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;'
+        + ' width:14px; height:14px; margin-left:5px; border-radius:50%; cursor:help;'
+        + ' border:1px solid var(--border-color); background:var(--bg-input);'
+        + ' color:var(--text-muted); font-size:var(--fs-55); font-weight:700; line-height:1;';
+    return d;
+}
+function _dsSection(container, title, id, defaultOpen, help) {
     const det = document.createElement('details');
     det.open = (_dsToolsOpen[id] !== undefined) ? _dsToolsOpen[id] : !!defaultOpen;
     det.style.cssText = 'margin-bottom:8px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-panel);';
     const sum = document.createElement('summary');
     sum.textContent = title;
     sum.style.cssText = 'font-size:var(--fs-65); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-main); cursor:pointer; padding:7px 10px; user-select:none; list-style-position:inside;';
+    if (help) { const h = _dsHelpDot(help); h.onclick = (e) => e.preventDefault(); sum.appendChild(h); }
     det.appendChild(sum);
     const body = document.createElement('div');
     body.style.cssText = 'padding:2px 10px 10px;';
@@ -21378,6 +23763,10 @@ function _dsFillDockedStyles(wrap, cols) {
         _dsTextStyles().filter(s => s.group === g).forEach(s => {
             const b = document.createElement('button');
             b.dataset.styleId = s.id;
+            // Every button in these popups carries a hover helper. A named style's
+            // button shows its name in its own face, which says what it LOOKS like but
+            // not what it is for or what applying it will do.
+            b.title = 'Apply "' + s.name + '"  ·  ' + (s.group || 'Style') + '  ·  ' + Math.round((s.size || 0.03) * 1080) + 'pt ' + _styleColorName(s.color) + (tgt ? '' : '  —  select a text box first');
             const on = curId === s.id;
             b.style.cssText = 'display:flex; align-items:center; gap:6px; width:100%; text-align:left; margin-bottom:2px; padding:4px 7px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (on ? 'var(--ui-active)' : 'transparent') + '; background:' + (on ? 'rgba(106,106,255,0.18)' : 'transparent') + '; color:var(--text-main); font-size:var(--fs-70);';
             // Colour chip + name (e.g. Black / White / #hex) so a style's ink is
@@ -21701,7 +24090,7 @@ function _fpPanelCats(t) {
         if (!cc.key) return;   // 'None' stays fixed
         const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:4px;';
         const sw = document.createElement('input'); sw.type = 'color'; sw.value = cc.color || '#444444';
-        sw.style.cssText = 'width:26px; height:24px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); background:none; cursor:pointer; flex:0 0 auto;';
+        sw.style.cssText = 'flex:0 0 auto;';
         sw.oninput = () => { const a = _artCatsEnsure(); a[ci].color = sw.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
         const lbI = document.createElement('input'); lbI.type = 'text'; lbI.value = cc.label || ''; lbI.placeholder = 'Name';
         lbI.style.cssText = 'flex:1; min-width:0; height:24px; font-size:var(--fs-60); padding:0 5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
@@ -21818,12 +24207,40 @@ function _dsRenderTools() {
     }
     if (!desc) { const p = document.createElement('p'); p.style.cssText = 'color:var(--text-muted); font-size:var(--fs-75);'; p.textContent = 'Select a page.'; t.appendChild(p); return; }
     const head = document.createElement('div');
-    head.innerHTML = '<div style="font-size:var(--fs-85); font-weight:700; color:var(--text-strong);">' + _esc(desc.title || desc.type) + '</div><div style="font-size:var(--fs-70); color:var(--text-muted); margin-bottom:14px; text-transform:uppercase; letter-spacing:0.03em;">' + _esc(desc.type) + '</div>';
+    // THE HEADING IS THE RENAME FIELD on a layout page. There was a 'Page name' input
+    // further down the panel showing the same string the heading already showed, which
+    // is a row spent restating what is on screen two inches above it. Editing happens
+    // where you already read the name.
+    if (desc.kind === 'layout' && desc.page) {
+        const nin = document.createElement('input'); nin.type = 'text';
+        nin.value = desc.page.title || '';
+        nin.placeholder = _mbDefaultTitle(desc.page.type || 'moodboard') || 'Page name';
+        nin.title = 'Rename this page \u2014 shown in the rail and used to organise templates. It never prints.';
+        // Borderless until focused, so it reads as the heading it replaces rather than
+        // as a form field parked at the top of the panel.
+        nin.style.cssText = 'width:100%; box-sizing:border-box; font-size:var(--fs-85); font-weight:700; color:var(--text-strong); background:transparent; border:1px solid transparent; border-radius:var(--r-4); padding:1px 4px; margin:0 0 1px -4px;';
+        nin.onfocus = () => { nin.style.background = 'var(--bg-input)'; nin.style.borderColor = 'var(--border-color)'; };
+        nin.onblur = () => { nin.style.background = 'transparent'; nin.style.borderColor = 'transparent'; };
+        nin.onchange = () => { desc.page.title = nin.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+        nin.onkeydown = (e) => { e.stopPropagation(); if (e.key === 'Enter') { e.preventDefault(); nin.blur(); } };
+        head.appendChild(nin);
+    } else {
+        const ttl = document.createElement('div');
+        ttl.textContent = desc.title || desc.type;
+        ttl.style.cssText = 'font-size:var(--fs-85); font-weight:700; color:var(--text-strong);';
+        head.appendChild(ttl);
+    }
+    const sub2 = document.createElement('div');
+    sub2.textContent = desc.type;
+    sub2.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.03em;';
+    head.appendChild(sub2);
     t.appendChild(head);
     // WHERE THIS PAGE SITS, for any page that can be moved. Ahead of every kind-specific
     // branch below, because several of them return early and this belongs to all of them.
     // Self-hiding, so a generated page shows nothing rather than a control that refuses.
     _dsPlaceRelativeInto(t, desc);
+    _dsPageActionsInto(t, desc);
+    _dsPageAppearanceInto(t, desc);
 
     if (desc.kind === 'floorplan') {
         _fpPanelTabBar(t);
@@ -21843,32 +24260,14 @@ function _dsRenderTools() {
         const resolved = desc._specTpl || _specTplResolve(ovKey);
         const cw = 150, chh = Math.round(cw * 540 / 936);
 
-        // Per-page approval status (spec pages only): none / pending / approved.
-        const apprWrap = document.createElement('div');
-        apprWrap.style.cssText = 'margin-bottom:12px; padding:8px; border:1px solid var(--border-color); border-radius:var(--r-4);';
-        const apprTitle = document.createElement('div');
-        apprTitle.textContent = 'Approval status'; apprTitle.style.cssText = 'font-size:var(--fs-65); font-weight:700; color:var(--text-main); margin-bottom:6px;';
-        apprWrap.appendChild(apprTitle);
-        const apprRow = document.createElement('div');
-        apprRow.style.cssText = 'display:flex; gap:6px;';
-        const curSt = _approvalOf(ovKey);
-        const stBtn = (label, val, onColor) => {
-            const active = (curSt === val) || (val === '' && !curSt);
-            const b = document.createElement('button');
-            b.textContent = label;
-            b.style.cssText = 'flex:1; font-size:var(--fs-65); font-weight:700; padding:6px 4px; border-radius:var(--r-4); cursor:pointer; white-space:nowrap; border:1px solid ' + (active ? onColor : 'var(--border-color)') + '; background:' + (active ? onColor : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';';
-            b.onclick = () => _dsSetApproval(ovKey, val);
-            return b;
-        };
-        apprRow.appendChild(stBtn('None', '', 'var(--ui-active)'));
-        apprRow.appendChild(stBtn('Pending', 'pending', '#c0392b'));
-        apprRow.appendChild(stBtn('Approved', 'approved', '#1a7f37'));
-        apprWrap.appendChild(apprRow);
+        // APPROVAL STATUS LIVED HERE and is gone. The same three states sit in the
+        // header beside Save and Generate PDF, where they are visible on every page
+        // rather than only after opening this panel on a spec page — and where the
+        // button already shows the current state without being asked.
         // Sticky top: approval + layout controls stay locked while templates scroll.
         const _toolsBg = getComputedStyle(t).backgroundColor;
         const head = document.createElement('div');
         head.style.cssText = 'position:sticky; top:0; z-index:3; background:' + ((_toolsBg && _toolsBg !== 'rgba(0, 0, 0, 0)') ? _toolsBg : 'var(--bg-panel,#1d1d20)') + '; padding-bottom:10px; margin-bottom:8px; border-bottom:1px solid var(--border-color);';
-        head.appendChild(apprWrap);
 
         const lbl = document.createElement('div');
         lbl.textContent = 'Presentation layout'; lbl.style.cssText = 'font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:8px;';
@@ -21917,7 +24316,9 @@ function _dsRenderTools() {
         };
         const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:var(--fs-60); padding:6px 3px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (active ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (active ? 'var(--ui-active)' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = on; return b; };
         modeRow.appendChild(mkMode('Per piece', !isGroupGlobal && !isInstallGlobal, () => switchMode('classic')));
-        modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => switchMode('setRight')));
+        // Shared specs is the group default: the consolidated left column is what a
+        // salon hang wants, and it is the only group arrangement still offered.
+        modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => switchMode('setLegend')));
         modeRow.appendChild(mkMode('Install guide', isInstallGlobal, () => switchMode('installGuide')));
         head.appendChild(modeRow);
 
@@ -21932,8 +24333,6 @@ function _dsRenderTools() {
             _dsInstallGuideControls(igBodyM, desc);
             // Text styles now live in each text box's own gear popup (the T
             // caret on the box) — no separate panel needed here.
-            const thBM = _dsSection(t, 'Page theme', 'theme', false);
-            try { _dsThemeControlInto(thBM, _deckPageKey(desc), desc); } catch (e) {}
             return;
         }
 
@@ -21958,8 +24357,6 @@ function _dsRenderTools() {
             t.appendChild(head);
             const igBodyB = _dsSection(t, 'Elevation measurements & notes', 'installguide', true);
             _dsInstallGuideControls(igBodyB, desc, { variants: false });
-            const thBB = _dsSection(t, 'Page theme', 'theme', false);
-            try { _dsThemeControlInto(thBB, _deckPageKey(desc), desc); } catch (e) {}
             return;
         }
 
@@ -21988,26 +24385,16 @@ function _dsRenderTools() {
             _dsDualUnitInto(head);
             t.appendChild(head);
 
-            const cardsWrap = document.createElement('div');
-            cardsWrap.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px;';
-            ['setRight', 'setRow', 'setScale', 'setLegend'].forEach(key => {
-                const onCur = (key === globalTpl);
-                const cell = document.createElement('div');
-                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onCur ? 'var(--ui-active)' : 'var(--border-color)') + '; border-radius:var(--r-4); overflow:hidden; background:#fff;';
-                cell.onclick = () => { editorialContent.specTemplate = key; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsClearBuiltAll(); _dsRefresh(); };
-                const thumb = document.createElement('div');
-                // Same aspect-ratio box the page thumbnails use (see the rail holder): the
-                // height was pinned to a px figure derived from a NOMINAL 150px card, so in a
-                // narrower column the box stayed 87 tall and squeezed the page into a square.
-                thumb.style.cssText = 'position:relative; width:100%; aspect-ratio:936/540; background:#fff; overflow:hidden;';
-                // Diagram paints instantly, then the standard demo render swaps in.
-                try { thumb.innerHTML = _dsTemplateSwatchHTML(key, cw, chh); } catch (e) { thumb.innerHTML = ''; }
-                _dsQueueTplSwatch(key, thumb);
-                const nmi = _dsTplCardName(key, onCur ? '  ✓' : '', onCur ? 'var(--ui-active)' : 'var(--text-main)');
-                cell.title = nmi.tip;
-                cell.appendChild(thumb); cell.appendChild(nmi.row); cardsWrap.appendChild(cell);
-            });
-            t.appendChild(cardsWrap);
+            // THE GROUP CARDS ARE GONE, for the reason the per-piece ones went: four
+            // rendered demos under a picker invite browsing arrangements rather than
+            // ticking the parts of the page you actually have. Shared specs is the one
+            // arrangement now — the others differed mainly in how the left column was
+            // built, and the consolidated block is what a salon hang wants.
+            //
+            // SHOW ON PAGE, reading the GROUP map: these four mean the same things they
+            // do on a per-piece page but default differently, because a group page has
+            // never drawn a floorplan and its wall thumbnail was off.
+            _dsSpecSlotsInto(t, desc, ovKey, true);
             // Both as-hung layouts (To scale, Shared specs) read the same
             // scaleOpts, so these controls serve either one and your choices
             // survive flipping between the two cards.
@@ -22019,12 +24406,13 @@ function _dsRenderTools() {
                 const cr = document.createElement('div'); cr.style.cssText = 'display:flex; gap:6px; margin-bottom:10px;';
                 [['none', 'None'], ['frames', 'On frames'], ['legend', 'Legend']].forEach(pair => { const active = so.codes === pair[0]; const b = document.createElement('button'); b.textContent = pair[1]; b.style.cssText = 'flex:1; font-size:var(--fs-60); font-weight:700; padding:6px 3px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (active ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (active ? 'var(--ui-active)' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = () => setSO({ codes: pair[0] }); cr.appendChild(b); });
                 wrap.appendChild(cr);
-                const tr = document.createElement('label'); tr.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:var(--fs-65); color:var(--text-main); cursor:pointer;';
-                const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!so.elevThumb; cb.onchange = () => setSO({ elevThumb: cb.checked });
-                tr.appendChild(cb); tr.appendChild(document.createTextNode('Elevation thumbnail (bottom-right)')); wrap.appendChild(tr);
+                // The “Elevation thumbnail (bottom-right)” checkbox that used to sit
+                // here is GONE: the Elevation tick above is the one answer, and two
+                // controls for one setting is how a designer comes to believe they are
+                // two settings. The old value is not lost - it seeds the tick.
                 const note = document.createElement('div'); note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:8px; line-height:1.5;';
                 note.textContent = (SPEC_TEMPLATES[globalTpl] && SPEC_TEMPLATES[globalTpl].sharedSpec)
-                    ? 'Pieces that share a value share a line: the letters in the label say who (Matboard A/D). Anything common to the whole set drops the letters. Frame profiles appear under the specs when there is room.'
+                    ? 'Pieces that share a value share a line: the letters in the label say who (Matboard A/D). Anything common to the whole set drops the letters. The bottom band reads left to right: frame corner, moulding profile, floorplan, elevation.'
                     : 'All spec details (including mat sizes and overall dimensions) are listed on the left; the text shrinks to fit a full salon hang on one page.';
                 wrap.appendChild(note);
                 head.appendChild(wrap);
@@ -22113,7 +24501,7 @@ function _dsRenderTools() {
             bulkBtn.onclick = () => { bulkWrap.style.display = bulkWrap.style.display === 'none' ? 'block' : 'none'; };
             const sub = document.createElement('p');
             sub.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:0 0 4px; line-height:1.3;';
-            sub.innerHTML = hasOverride ? 'Overrides the deck default.' : 'Pick a template, then choose a scope above.';
+            sub.innerHTML = hasOverride ? 'Overrides the deck default.' : 'Tick what prints below. Apply moves the whole layout.';
             head.appendChild(sub);
             // — Elevation breaker toggle (deck-wide; applies to every wall group) —
             _dsBreakerToggleInto(head, false);
@@ -22126,40 +24514,28 @@ function _dsRenderTools() {
             _dsDualUnitInto(head);
             t.appendChild(head);
 
-            const cardsWrap = document.createElement('div');
-            cardsWrap.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:8px;';
-            Object.keys(SPEC_TEMPLATES).filter(k => !SPEC_TEMPLATES[k].group && k !== 'installGuide' && !SPEC_TEMPLATES[k].flat).forEach(key => {
-                const onCur = (key === resolved);         // currently applied to this page
-                const onArmed = (key === armedKey);          // picked but NOT yet applied
-                const cell = document.createElement('div');
-                cell.style.cssText = 'cursor:pointer; border:2px solid ' + (onArmed ? '#ff9f43' : onCur ? 'var(--ui-active)' : 'var(--border-color)') + '; border-radius:var(--r-4); overflow:hidden; background:#fff;';
-                // Clicking a swatch only ARMS it (highlights, doesn't touch the
-                // page or thumbnails yet). Nothing updates until an Apply button
-                // above is clicked, so you can browse templates freely.
-                cell.onclick = () => { _dsSpecTplSel = { ovKey: ovKey, key: key }; _dsRenderTools(); };
-                const thumb = document.createElement('div');
-                // Same aspect-ratio box the page thumbnails use (see the rail holder): the
-                // height was pinned to a px figure derived from a NOMINAL 150px card, so in a
-                // narrower column the box stayed 87 tall and squeezed the page into a square.
-                thumb.style.cssText = 'position:relative; width:100%; aspect-ratio:936/540; background:#fff; overflow:hidden;';
-                // Placeholder paints instantly; the real render (same engine as
-                // page previews) swaps in once and is then locked for the session.
-                try { thumb.innerHTML = _dsTemplateSwatchHTML(key, cw, chh); } catch (e) { thumb.innerHTML = ''; }
-                _dsQueueTplSwatch(key, thumb);
-                const tag = onArmed ? ' \u25cf selected' : onCur ? (hasOverride ? ' \u2713 applied' : ' \u2713 default') : (key === globalTpl ? ' \u00b7 default' : '');
-                const nmi = _dsTplCardName(key, tag, onArmed ? '#ff9f43' : onCur ? 'var(--ui-active)' : 'var(--text-main)');
-                cell.title = nmi.tip;
-                cell.appendChild(thumb); cell.appendChild(nmi.row); cardsWrap.appendChild(cell);
-            });
-            const themeBody = _dsSection(t, 'Page theme', 'theme', false);
-            try { _dsThemeControlInto(themeBody, _deckPageKey(desc), desc); } catch (e) {}
+            // THE PICTURE CARDS ARE GONE FROM THE PER-PIECE PANEL. They were rendered
+            // page demos under “Click to switch”, and once the SHOW ON PAGE ticks
+            // existed they were a second control for the same page inviting the wrong
+            // gesture: browsing layouts rather than ticking the parts you actually
+            // have. Reported as “I do not want designers clicking to switch, I want
+            // them choosing to check Frame corners, Mould profile, floorplan,
+            // elevation”.
+            //
+            // Group A/B/C KEEPS its grid: those four are genuinely different
+            // arrangements of several pieces on one page, and no tick expresses the
+            // difference between stacked and side by side.
             const tplBody = _dsSection(t, 'Spec template', 'spectpl', true);
             // A FLAT graphic never uses any of these. _specTplResolve returns egdDetail
-            // for a wallcovering or window film ahead of everything, so every card in
-            // this grid is a layout the page cannot take — clicking one looks like it
-            // did nothing. Say what the sheet actually does instead. A one-card grid
-            // would be the same non-choice with more furniture.
+            // for a wallcovering or window film ahead of everything, so every tick and
+            // every layout button below is something the page cannot take — using one
+            // looks like it did nothing. Say what the sheet actually does instead.
             const _flatPage = !!(desc && desc.row && _isFlatGraphic(desc.row.product));
+            // THE FLAT SHEET RETURNS FIRST, so everything below it can assume a framed
+            // page. It used to be an inline !_flatPage guard on the line above, which is
+            // the same behaviour and a worse shape: the invariant every test reads here
+            // is “the bail comes before any control is built”, and an inline guard makes
+            // that untrue on paper while staying true in fact.
             if (_flatPage) {
                 const n = document.createElement('div');
                 n.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); line-height:1.45;';
@@ -22170,81 +24546,42 @@ function _dsRenderTools() {
                 tplBody.appendChild(n);
                 return;
             }
-            const specLbl = document.createElement('div');
-            specLbl.textContent = 'Click to switch'; specLbl.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:2px 0 6px;';
-            tplBody.appendChild(specLbl);
-            tplBody.appendChild(cardsWrap);
+            // The parts of the page are what a designer changes on a per-piece deck, so
+            // the ticks are the whole panel.
+            if (_specTplSlotAware(resolved)) _dsSpecSlotsInto(tplBody, desc, ovKey);
+            // THE LAYOUT BUTTONS ARE GONE TOO. There is ONE per-piece layout now and the
+            // ticks above decide what it prints, so a row offering alternatives was the
+            // same invitation the picture cards were. Reported as “we will only keep the
+            // one layout option and designers can control what they show on page with
+            // the check boxes”.
+            //
+            // A CUSTOM page is the one thing that cannot take ticks: it is freeform, a
+            // page somebody placed by hand, so there are no parts to switch on and
+            // nothing above rendered. Say that rather than leaving the section empty —
+            // an empty panel reads as broken, and a custom page is still reachable from
+            // an older project.
+            if (!_specTplSlotAware(resolved)) {
+                const n = document.createElement('div');
+                n.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); line-height:1.45;';
+                n.textContent = 'This page is a free layout: everything on it was placed by hand, so there is nothing to tick. Drag, edit and place directly on the page — what you see is what exports.';
+                tplBody.appendChild(n);
+            }
             return;
         }
 
-        const themeBody2 = _dsSection(t, 'Page theme', 'theme', false);
-        try { _dsThemeControlInto(themeBody2, _deckPageKey(desc), desc); } catch (e) {}
         return;
     }
     // Text styles now live in each text box's own gear popup (every text box
     // on every page kind gets one) — no separate right-panel section needed.
     // Per-page theme (dark/light + background colour/image) — available on
     // every page now, not just the cover/slogan/thank-you trio.
-    if (desc.kind !== 'fixed' && !(desc.kind === 'card' && desc.card === 'contacts')) {
-        const themeBodyG = _dsSection(t, 'Page theme', 'theme', false);
-        try { _dsThemeControlInto(themeBodyG, _deckPageKey(desc), desc); } catch (e) {}
-    }
-    let _deferredTplGrid = null;
-    if (cat) {
-        const applyBtn = document.createElement('button');
-        const armed = !!(_dsTplSel && _dsTplSel.cat === cat);
-        applyBtn.textContent = armed ? ('Apply \u201C' + _dsTplSel.name + '\u201D to this page') : 'Apply selected template';
-        applyBtn.className = armed ? 'action-btn' : 'action-btn btn-secondary';
-        applyBtn.disabled = !armed;
-        applyBtn.style.cssText = 'width:100%; height:26px; margin-bottom:5px; font-size:var(--fs-65); font-weight:700;' + (armed ? '' : ' opacity:0.5; cursor:default;');
-        applyBtn.onclick = () => { if (!_dsTplSel) return; const els = _dsTplSel.els; _dsTplSel = null; _dsApplyTemplate(els, cat); };
-        t.appendChild(applyBtn);
 
-        // ONE merged template list for this category: pinned favourites first
-        // (\u2605), then everything else — builtins, InDesign masters, saved,
-        // studio — deduped by name. Two small columns, own scroll region.
-        const favs = _dsResolveFavs().filter(f => (f.cat || 'moodboard') === cat);
-        const cards = [];
-        const seen = {};
-        favs.forEach(f => { if (!seen[f.name]) { seen[f.name] = 1; cards.push({ name: f.name, els: f.els, fav: true }); } });
-        const push = (name, els) => { if (!seen[name]) { seen[name] = 1; try { cards.push({ name: name, els: els }); } catch (e) {} } };
-        (LAYOUT_TEMPLATES[cat] || []).forEach(b => { try { push(b.name, b.els()); } catch (e) {} });
-        (typeof IDML_MASTER_TEMPLATES !== 'undefined' ? IDML_MASTER_TEMPLATES : []).forEach(mt => { if ((_IDML_CAT_MAP[mt.type] || 'moodboard') === cat) push(mt.name.replace('Farmboy \u00b7 ', ''), JSON.parse(JSON.stringify(mt.elements || []))); });
-        (editorialContent.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat) push(tp.name || 'Saved', tp.elements || []); });
-        if (typeof studioDefaults !== 'undefined') (studioDefaults.templates || []).forEach(tp => { if ((tp.type || 'moodboard') === cat) push((tp.name || 'Studio') + ' \u00b7 studio', tp.elements || []); });
-
-        const lbl = document.createElement('div');
-        lbl.textContent = 'Templates \u2014 click to select, then Apply'; lbl.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin-bottom:6px;';
-
-        const grid = document.createElement('div');
-        grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:6px;';
-        const fcw = 116, fch = Math.round(fcw * 540 / 936);
-        cards.forEach((card, ci) => {
-            const selected = !!(_dsTplSel && _dsTplSel.cat === cat && _dsTplSel.ci === ci);
-            const cell = document.createElement('div');
-            cell.style.cssText = 'cursor:pointer; border:2px solid ' + (selected ? 'var(--ui-active)' : 'var(--border-color)') + '; border-radius:var(--r-4); overflow:hidden; background:#fff;';
-            cell.title = 'Select: ' + card.name;
-            cell.onmouseenter = () => { if (!selected) cell.style.borderColor = '#9a9aff'; };
-            cell.onmouseleave = () => { if (!selected) cell.style.borderColor = 'var(--border-color)'; };
-            cell.onclick = () => { _dsTplSel = { cat: cat, ci: ci, els: card.els, name: card.name }; _dsRenderTools(); };
-            const thumb = document.createElement('div');
-            thumb.style.cssText = 'position:relative; width:100%; height:' + fch + 'px; background:#fff;';
-            thumb.innerHTML = _mbThumbInner({ elements: card.els }, fcw, fch);
-            const nm = document.createElement('div');
-            nm.textContent = (card.fav ? '\u2605 ' : '') + card.name + (selected ? ' \u2713' : '');
-            nm.style.cssText = 'font-size:var(--fs-55); color:' + (selected ? 'var(--ui-active)' : (card.fav ? '#e5b53a' : 'var(--text-main)')) + '; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-top:1px solid var(--border-color);';
-            cell.appendChild(thumb); cell.appendChild(nm); grid.appendChild(cell);
-        });
-        if (!cards.length) { const e = document.createElement('p'); e.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted);'; e.textContent = 'No templates for this page type yet.'; grid.appendChild(e); }
-        const gridScroll = document.createElement('div');
-        gridScroll.style.cssText = 'max-height:60vh; overflow-y:auto; border:1px solid var(--border-color); border-radius:var(--r-6); padding:6px;';
-        gridScroll.appendChild(grid);
-        _deferredTplGrid = document.createElement('div');
-        _deferredTplGrid.appendChild(lbl); _deferredTplGrid.appendChild(gridScroll);
-    }
-
+    // The page-template grid used to be built here and shown at the bottom of this
+    // tab. It is gone: the panel's own TEMPLATES TAB already browses, previews and
+    // applies the same templates, so this was a second way to do one thing — and it
+    // rendered ~20 live thumbnails on every draw of a tab that is mostly used for
+    // something else.
     const addBtn = (label, fn, secondary) => { const b = document.createElement('button'); b.textContent = label; b.className = secondary ? 'action-btn btn-secondary' : 'action-btn'; b.style.cssText = 'width:100%; height:34px; margin-bottom:8px; font-size:var(--fs-75);'; b.onclick = fn; t.appendChild(b); };
-    try { _dsPageChromeControls(t, desc); } catch (e) {}
     const _hidF = editorialContent.hiddenFixed || {}; const _hiddenKeys = Object.keys(_hidF).filter(k => _hidF[k]);
     if (_hiddenKeys.length) {
         const box = document.createElement('div'); box.style.cssText = 'border:1px dashed var(--border-color); border-radius:var(--r-6); padding:8px; margin-bottom:10px;';
@@ -22259,8 +24596,14 @@ function _dsRenderTools() {
             + '<div style="font-size:var(--fs-65); color:var(--text-muted); line-height:1.5;">This ' + (desc.type === 'toc' ? 'contents page lists every section with its page number' : 'index lists every artwork with the page it appears on') + '. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
         t.appendChild(note);
     }
-    else if (desc.kind === 'layout') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); addBtn('Duplicate this page', () => _dsDuplicateLayoutPage(desc), true); addBtn('Move page earlier \u2191', () => _dsMoveLayoutPage(desc, -1), true); addBtn('Move page later \u2193', () => _dsMoveLayoutPage(desc, 1), true); addBtn('Delete this page', () => { if (confirm('Remove \u201C' + ((desc.page && desc.page.title) || 'this page') + '\u201D from the deck?')) _dsDeleteLayoutPage(desc); }, true); }
-    else if (desc.kind === 'fixed') { addBtn('Save this page as template', () => _dsSaveCurrentAsTemplate(), true); if (_FIXED_LABELS[desc.fixed]) addBtn('Remove this page from deck', () => { if (confirm('Remove the built-in ' + _FIXED_LABELS[desc.fixed] + ' page from this deck? You can restore it from the Pages tools.')) _dsRemoveFixed(desc.fixed); }, true); _dsThemeControlInto(t, 'fixed:' + desc.fixed, desc); }
+    // A layout page's five buttons are gone: duplicate, move earlier, move later and
+    // delete are all on the thumbnail in the rail, and 'Save as template' belongs with
+    // the other template work on the Templates tab. What stays is what the rail cannot
+    // do: the exact placement row, the theme, and the footer.
+    else if (desc.kind === 'layout') { /* no page-level buttons: see the rail and the Templates tab */ }
+    // 'Remove this page from deck' went the same way as Delete: the rail removes a page,
+    // and the Project tab's include list is where a built-in page is switched off.
+    else if (desc.kind === 'fixed') { /* theme + footer are in Page appearance, built above for every kind */ }
     else if (desc.kind === 'floorplan') addBtn('Place numbers / mark up', () => { if (typeof _fpLevel !== 'undefined') _fpLevel = desc.level; openFloorplanMarkup(); });
     else if (desc.type === 'contacts') {
         addBtn('Edit contacts', () => { openContactsEditor(); });
@@ -22268,14 +24611,14 @@ function _dsRenderTools() {
         const sect = (label) => { const d = document.createElement('div'); d.textContent = label; d.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:12px 0 5px;'; t.appendChild(d); };
         sect('Contact layout');
         const cur = editorialContent.contactLayout || 'grouped';
-        const lrow = document.createElement('div'); lrow.style.cssText = 'display:flex; flex-wrap:wrap; gap:5px;';
-        [['grouped', 'Grouped'], ['1', '1 col'], ['2', '2 cols'], ['3', '3 cols'], ['4', '4 cols']].forEach(([v, l]) => {
-            const b = document.createElement('button'); b.textContent = l; b.className = 'action-btn btn-secondary';
-            b.style.cssText = 'flex:1 1 auto; min-width:48px; height:28px; font-size:var(--fs-60);' + (cur === v ? ' outline:2px solid var(--accent); color:var(--text-strong);' : '');
-            b.onclick = () => { editorialContent.contactLayout = v; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsThumbCache = {}; _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
-            lrow.appendChild(b);
+        // 'Grouped' keeps its word; the column counts lose theirs, because the section
+        // label already says Contact layout and '1 col … 4 cols' was five wide buttons
+        // where five narrow ones say the same thing.
+        _dsSegRowInto(t, [['grouped', 'Grouped'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4']], cur, (v) => {
+            editorialContent.contactLayout = v;
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsThumbCache = {}; _dsRenderTools(); _dsRenderCenter(); _dsRenderRail();
         });
-        t.appendChild(lrow);
         // Spacing sliders — nudge contacts closer/further horizontally + vertically.
         const slider = (label, prop, min, max, step) => {
             const s2 = document.createElement('div'); s2.textContent = label; s2.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:10px 0 3px;'; t.appendChild(s2);
@@ -22287,7 +24630,6 @@ function _dsRenderTools() {
         };
         slider('Horizontal spacing', 'contactGapH', -0.8, 1.5, 0.05);
         slider('Vertical spacing', 'contactGapV', -0.6, 1.5, 0.05);
-        _dsThemeControlInto(t, 'card:contacts', desc);
     }
     else if (desc.kind === 'planDetail') {
         _pdEditorInto(t, desc.pd);
@@ -22295,19 +24637,13 @@ function _dsRenderTools() {
     else if (desc.type === 'frameRec') {
         const cfg = _frameRecCfg();
         const sect = (label) => { const d = document.createElement('div'); d.textContent = label; d.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin:12px 0 5px;'; t.appendChild(d); };
-        const pills = (opts, cur, on) => {
-            const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex; flex-wrap:wrap; gap:5px;';
-            opts.forEach(([v, l]) => {
-                const b = document.createElement('button'); b.textContent = l;
-                b.className = 'action-btn btn-secondary';
-                b.style.cssText = 'flex:1 1 auto; min-width:56px; height:28px; font-size:var(--fs-65);' + (cur === v ? ' outline:2px solid var(--accent); color:var(--text-strong);' : '');
-                b.onclick = () => { on(v); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
-                wrap.appendChild(b);
-            });
-            t.appendChild(wrap);
-        };
+        const pills = (opts, curVal, on) => _dsSegRowInto(t, opts, curVal, (v) => {
+            on(v);
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRenderTools(); _dsRenderCenter(); _dsRenderRail();
+        });
         sect('Group by');
-        pills([['none', 'None'], ['vendor', 'Vendor'], ['type', 'Frame type']], cfg.groupBy, v => cfg.groupBy = v);
+        pills([['none', 'None'], ['vendor', 'Vendor'], ['type', 'Type', 'Group by frame type']], cfg.groupBy, v => cfg.groupBy = v);
         sect('Columns');
         pills([[1, '1'], [2, '2'], [3, '3'], [4, '4']], cfg.cols, v => cfg.cols = v);
         sect('Image size');
@@ -22418,7 +24754,7 @@ function _dsRenderTools() {
                     // Row: colour swatch · reset · name · move · remove
                     const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:5px;';
                     const sw = document.createElement('input'); sw.type = 'color'; sw.value = _timelineColor(i);
-                    sw.style.cssText = 'width:28px; height:26px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); background:none; cursor:pointer; flex:0 0 auto;';
+                    sw.style.cssText = 'flex:0 0 auto;';
                     sw.oninput = () => { editorialContent.timelineColors[i] = sw.value; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
                     const rst = document.createElement('button'); rst.textContent = '\u21ba'; rst.title = 'Back to black'; rst.className = 'action-btn btn-secondary'; rst.style.cssText = 'width:24px; height:26px; padding:0; font-size:var(--fs-70); flex:0 0 auto;';
                     rst.onclick = () => { delete editorialContent.timelineColors[i]; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
@@ -22488,7 +24824,6 @@ function _dsRenderTools() {
                 ? 'Drag pins on the preview, or open the full markup tool.'
                 : 'Edits to this page save with the project.'));
     t.appendChild(note);
-    if (_deferredTplGrid) { const tplBodyG = _dsSection(t, 'Page templates', 'pagetpl', false); tplBodyG.appendChild(_deferredTplGrid); }
 }
 function _dsSave() {
     if (typeof pushHistory === 'function') pushHistory();
@@ -22630,7 +24965,6 @@ function applySpecPdfModal() {
         understanding: ck('specInc_understanding'),
         narrative: ck('specInc_narrative'),
         strategy: ck('specInc_strategy'),
-        moodboard: ck('specInc_moodboard'),
         frameRec: ck('specInc_frameRec'),
         floorplanKey: ck('specInc_floorplanKey'),
         spec: ck('specInc_spec'),
@@ -23552,7 +25886,15 @@ function _pageGuide() {
 // of sync with the deck setting.
 function _setDeckGuide(patch) {
     const g = _guidePref();   // also runs the per-page-era migration
+    const wasSet = g.setId;
     Object.keys(patch).forEach(k => { g[k] = patch[k]; });
+    // The set does not just DRAW the frame, it decides the layout: the safety
+    // margins every renderer lays out inside, and the title lines the heading
+    // and subheading sit on. Switching it re-typesets the deck, so every built
+    // page and thumbnail is stale. show / grid / snap change nothing that
+    // prints, and rebuilding the deck for those would be a visible stall on a
+    // checkbox.
+    if (g.setId !== wasSet) { try { _dsClearBuiltAll(); } catch (e) {} }
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
 // ── InDesign-style guide painter, shared by the editable layout canvas and
@@ -24863,13 +27205,18 @@ function _drawFrameStrip(doc, frames, box) {
     // frame already gets on a real page) and a grey box for the profile drawing.
     // Without the reserved profile width the strip would show corners only, and the
     // card would under-sell the one layout that prints profiles.
+    // Each half is its own tick on a group page. Defaulted ON so every existing
+    // caller - the per-piece sheet and the template cards - is unchanged by this.
+    const wantCorner = (box.corner !== false);
+    const wantProfile = (box.profile !== false);
+    if (!wantCorner && !wantProfile) return null;
     const cells = frames.map(f => {
-        const cw = f.img ? wideAt(f.img) : imgH * 0.45;
+        const cw = wantCorner ? (f.img ? wideAt(f.img) : imgH * 0.45) : 0;
         // 0.6, not the ~0.9 a real profile drawing tends to measure: three cells plus
         // gaps has to clear `box.maxW` or the whole strip returns null and vanishes
         // from the one card that exists to show it. Deliberate headroom, not a guess
         // at the drawing's aspect.
-        const pw = f.profileImg ? wideAt(f.profileImg) : (box.swatch ? imgH * 0.6 : 0);
+        const pw = !wantProfile ? 0 : (f.profileImg ? wideAt(f.profileImg) : (box.swatch ? imgH * 0.6 : 0));
         return { f: f, cw: cw, pw: pw, w: Math.max(MIN_CELL, cw + (pw ? 3 + pw : 0)) };
     });
     const total = cells.reduce((a, c) => a + c.w, 0) + GAP * (cells.length - 1);
@@ -24879,13 +27226,15 @@ function _drawFrameStrip(doc, frames, box) {
     cells.forEach(c => {
         const f = c.f;
         let drawnW = 0;
-        if (f.img) {
+        if (f.img && wantCorner) {
             try { doc.addImage(f.img, 'JPEG', x, box.top, c.cw, imgH); drawnW = c.cw; }
             catch (e) { try { _addPngImage(doc, f.img, x, box.top, c.cw, imgH); drawnW = c.cw; } catch (e2) { drawnW = 0; } }
         }
-        if (!drawnW) {
+        if (!drawnW && wantCorner) {
             // Colour-only frame, or a library with no corner photo: a filled
-            // chip stands in so the code still has something beside it.
+            // chip stands in so the code still has something beside it. Gated on the
+            // tick as well, or an unticked corner paints a zero-width rect where the
+            // chip used to be.
             drawnW = c.cw;
             try { const col = _annHexToRgb(f.color || '#888888'); doc.setFillColor(col.r, col.g, col.b); doc.rect(x, box.top, drawnW, imgH, 'F'); } catch (e) {}
         }
@@ -24944,23 +27293,18 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
     // labelled themselves '7'…'12'. Identical output for six or fewer.
     const letters = _setLetters(members.length);
     // — Title (group code) —
-    doc.setFont(_font('display'), 'bold');
-    doc.setFontSize(20);
-    doc.setTextColor(20, 20, 20);
-    // Baseline pushed down by the cap height so the glyphs sit inside the top
-    // guide rather than straddling it (same reasoning as the template drawer).
-    const _grpTitleY = TY + 20 * 0.72;
+    const GB = _titleBand(PW, PH);
     // A template card's unit key is the swatch sentinel (it has to be, to stay out
     // of every per-page map), so it titles itself with the demo group code instead
     // of printing '__TPLSWATCH__' across the top of four cards.
-    doc.text((SWATCH ? SPEC_TPL_DEMO_GROUP_ID : (unit.key || unit.rep.id || '')).toString().toUpperCase(), LX, _grpTitleY);
+    _drawPageTitle(doc, PW, PH, (SWATCH ? SPEC_TPL_DEMO_GROUP_ID : (unit.key || unit.rep.id || '')).toString().toUpperCase());
 
     // — Side-by-side (diptych / triptych / quad): members in columns —
     if (SPEC_TEMPLATES[tplKey] && SPEC_TEMPLATES[tplKey].row) {
         const cols = Math.max(1, Math.min(members.length, 4));
         const leftX = LX, rightX = RX, totalW = SW, gap = 14;
         const slotW = (totalW - gap * (cols - 1)) / cols;
-        const topY = TY + SH * 0.153, botY = BB, artH = (botY - topY) * 0.62;
+        const topY = GB.body + 8, botY = BB, artH = (botY - topY) * 0.62;
         const artOnly = _specArtOnly(unit.key);
         for (let i = 0; i < members.length && i < cols; i++) {
             const r = members[i];
@@ -25015,6 +27359,16 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         // the swatch cache key is template + unit, so a render that varied with
         // scaleOpts would go stale the moment you ticked the box below the cards.
         const opts = SWATCH ? { codes: 'frames', elevThumb: true } : _scaleOpts();
+        // THE FOUR TICKS, for a group page. A card pins them all on for the same
+        // reason it pins scaleOpts: a card is a menu and must advertise every slot the
+        // layout can fill.
+        // A card pins these rather than reading the deck's, for the same reason it
+        // pins scaleOpts. The PLAN is pinned OFF: the band is one row and the strip is
+        // the Shared specs card's whole point, so a fourth thumbnail squeezes three
+        // mouldings past _drawFrameStrip's fit check and the card silently loses the
+        // thing it exists to show. A card advertises the layout; the ticks are the
+        // page.
+        const SL = SWATCH ? { frame: true, profile: true, plan: false, elevation: true } : _specGroupSlots(unit && unit.key);
         // Pick the single elevation that holds the most of these members, then
         // read every frame's position FROM that one wall — otherwise a piece
         // that also appears on an earlier elevation grabs the wrong coordinates
@@ -25047,7 +27401,11 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 .filter(f => { if (seen[f.fCode]) return false; seen[f.fCode] = 1; return true; })
                 .map(f => ({ code: f.fCode, color: f.fColor }));
         } else if (_sharedSpec && !artOnly) { try { _sharedFrames = await _sharedSpecFrames(members); } catch (e) { _sharedFrames = []; } }
-        const bottomBand = (opts.elevThumb && (groupElev || SWATCH)) || opts.codes === 'legend' || _sharedFrames.length > 0;
+        // `scaleOpts.elevThumb` is GONE as a separate switch: the Elevation tick is the
+        // one answer now, and its seed carried the old value across so no deck moved.
+        const _wantElev = SL.elevation, _wantPlan = SL.plan;
+        const _wantStrip = (SL.frame || SL.profile) && _sharedFrames.length > 0;
+        const bottomBand = (_wantElev && (groupElev || SWATCH)) || _wantPlan || opts.codes === 'legend' || _wantStrip;
         // regH used to be a flat PH*0.77, so regY + regH reached 0.92 of the page
         // — 10.8pt PAST the bottom guide on the default set. Measured to the guide
         // instead, so the group always ends exactly on it.
@@ -25116,7 +27474,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
             const bandY = regY + regH + 12, bandBot = BB;
             let legendRight = regX + regW;
             let _thumbBox = null;               // the elevation thumbnail's rect, so the frame strip can match it
-            if (opts.elevThumb && SWATCH) {
+            if (_wantElev && SWATCH) {
                 // Grey box, roughly a wall's proportions, in the corner the real
                 // thumbnail lands in — a card shows where it goes, not what's on it.
                 const boxH = (bandBot - bandY) - 12, boxW = Math.min(SW * 0.17, boxH * 1.6);
@@ -25124,7 +27482,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 _specSwatchBox(doc, tx, ty, boxW, boxH, 'Elevation', Math.min(ty + boxH + 8, BB));
                 legendRight = tx - 14;
                 _thumbBox = { tx: tx, ty: ty, tw: boxW, th: boxH };
-            } else if (opts.elevThumb && groupElev) {
+            } else if (_wantElev && groupElev) {
                 try {
                     const er = await renderElevationToCanvas(groupElev, null, { wireframe: _isWireframe(), dpi: 24 });
                     if (er && er.canvas) {
@@ -25154,15 +27512,53 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                     }
                 } catch (e) {}
             }
-            // — Frame corner + profile strip, immediately left of the elevation
-            //   thumbnail and the same height as it. With no thumbnail on the
-            //   page it just anchors to the right edge of the band instead.
-            if (_sharedFrames.length) {
+            // TICKED BUT NOT ON A WALL: reserve the box. Same rule as the per-piece
+            // page - a deck part way through has groups whose wall is not drawn yet,
+            // and a page that reflows when it finally is cannot be laid out.
+            if (_wantElev && !_thumbBox) {
+                const boxH = (bandBot - bandY) - 12, boxW = Math.min(SW * 0.17, boxH * 1.6);
+                const tx = regX + regW - boxW, ty = bandY;
+                _specSwatchBox(doc, tx, ty, boxW, boxH, 'Elevation', Math.min(ty + boxH + 8, BB));
+                legendRight = tx - 14;
+                _thumbBox = { tx: tx, ty: ty, tw: boxW, th: boxH };
+            }
+            // — Floorplan, immediately LEFT of the elevation. Right to left the band
+            //   reads elevation, plan, profile, corner, so each thumbnail anchors to
+            //   whatever the one on its right actually drew rather than to a column of
+            //   its own: untick the elevation and everything slides right.
+            if (_wantPlan) {
+                const pH = _thumbBox ? _thumbBox.th : ((bandBot - bandY) - 12);
+                const pTop = _thumbBox ? _thumbBox.ty : bandY;
+                const pRight = _thumbBox ? (_thumbBox.tx - 14) : (regX + regW);
+                const px0 = pRight - pH;                    // square crop, matched to the band height
+                let pc = null;
+                if (!SWATCH) { try { pc = await _planCropCanvasForRow(members[0], { zoom: 3, aspect: 1 }); } catch (e) { pc = null; } }
+                if (pc) {
+                    const fit2 = Math.min(pH / pc.width, pH / pc.height);
+                    const dw = pc.width * fit2, dh = pc.height * fit2;
+                    try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', px0, pTop, dw, dh); } catch (e) {}
+                    doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(px0, pTop, dw, dh, 'S'); } catch (e) {}
+                    _specThumbCaption(doc, 'Floorplan', px0, Math.min(pTop + dh + 8, BB));
+                } else {
+                    _specSwatchBox(doc, px0, pTop, pH, pH, 'Floorplan', Math.min(pTop + pH + 8, BB));
+                }
+                legendRight = px0 - 14;
+                _thumbBox = { tx: px0, ty: pTop, tw: pH, th: pH };
+            }
+            // — Frame corner + profile strip, immediately left of whatever is already
+            //   in the band and the same height as it. With nothing else on the page
+            //   it anchors to the right edge of the band instead.
+            if (_wantStrip) {
                 const stripTop = _thumbBox ? _thumbBox.ty : bandY;
                 const stripH = _thumbBox ? _thumbBox.th : ((bandBot - bandY) - 12);
                 const stripRight = _thumbBox ? (_thumbBox.tx - 14) : (regX + regW);
                 const left = _drawFrameStrip(doc, _sharedFrames, {
-                    right: stripRight, top: stripTop, height: stripH, maxW: Math.max(0, stripRight - regX), swatch: SWATCH
+                    right: stripRight, top: stripTop, height: stripH, maxW: Math.max(0, stripRight - regX), swatch: SWATCH,
+                    // The corner and the profile are separate ticks, and they stay
+                    // INTERLEAVED per moulding rather than splitting into two blocks:
+                    // a shared-spec page carries three mouldings, so two blocks would
+                    // put a corner three cells away from its own profile.
+                    corner: SL.frame, profile: SL.profile
                 });
                 if (left != null) legendRight = Math.min(legendRight, left - 14);
             }
@@ -25186,7 +27582,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         // Specs on the LEFT — every line, font shrunk to fit them all on one page.
         // With many members (5-6+) one column can't fit above the readable font
         // floor, so the stack splits into two balanced columns, each re-fit.
-        const lX = LX, lWAll = SW * 0.315, sTop = TY + SH * 0.118, sBot = BB;
+        const lX = LX, lWAll = SW * 0.315, sTop = GB.body + 8, sBot = BB;
         // — Shared-spec variant: ONE consolidated block instead of per-piece —
         if (_sharedSpec) {
             _drawSharedSpecColumn(doc, {
@@ -26690,18 +29086,15 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
 
     // — Title block, same three lines and the same faces as the install guide, so a
     //   deck that mixes the two reads as one document.
-    const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
-    const tSize = Math.max(ts.size, 22);
-    doc.setFont(_font(ts.font), _pdfTitleStyle(ts.font));
-    doc.setFontSize(tSize); doc.setTextColor(trgb.r, trgb.g, trgb.b);
-    const titleY = SR.T + tSize * 0.72;
+    const B = _titleBand(PW, PH);
+    const titleY = B.head;
     // Every item code on the sheet, so a shared page is findable by any of them.
     // _dsFitTitle shrinks to fit, so a long list narrows rather than overrunning.
     const _hMem = (ctx && ctx.members && ctx.members.length) ? ctx.members : [r];
     const _codes = _hMem.map(m => (m && m.id) || '').filter(Boolean).join(' + ');
     const heading = ((_codes || r.id || '') + (r.location ? ' | ' + r.location : '')).toUpperCase();
-    _dsFitTitle(doc, heading, M, titleY, SR.R - M, tSize);
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(25, 25, 25);
+    _drawPageTitle(doc, PW, PH, heading);
+    _applySubtitleType(doc);
     // The subhead names what is ON the sheet. With several graphics sharing a wall it
     // has to describe the SET, not the first row — a page carrying film and
     // wallcovering that announced only one of them would be worse than no subhead.
@@ -26711,7 +29104,8 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
         const k = (m && m.product === 'Window Film (WF)') ? 'WINDOW FILM' : 'WALLCOVERING';
         if (_kinds.indexOf(k) < 0) _kinds.push(k);
     });
-    doc.text(_kinds.join(' + '), M, titleY + 16);
+    doc.text(_kinds.join(' + '), M, B.sub);
+    doc.setTextColor(20, 20, 20);
 
     // — Spec block. ONE dotted-leader row renderer, used for the spec lines and for
     //   the Image Code, so a row added here can't come out styled differently.
@@ -26728,8 +29122,8 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
     const _specCols = Math.min(_members.length, 2);
     const _colGut = 14;
     const _colX = (ci) => M + ci * (colW + _colGut);
-    let _cx = M, sy = titleY + 40;
-    const _colTop = titleY + 40;
+    let _cx = M, sy = B.body + _subtitleClear();
+    const _colTop = B.body + _subtitleClear();
     const _colBot = [];                      // where each column ended, for the plan
     const _specRow = (label, value) => {
         if (sy > SR.B - 12) return;
@@ -26805,7 +29199,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
         } catch (e) { return 0; }
     })();
     // The band has to clear the spec block AND leave the elevation room to be worth it.
-    const _bandBot = Math.max(sy, titleY + 40) + 10;
+    const _bandBot = Math.max(sy, B.body + _subtitleClear()) + 10;
     const _wideH = (SR.B - _elevCapH) - _bandBot;
     // Wide mode is a BAND, not a floor. Past about 6:1 the extra width stops buying
     // legibility: a 1000x108 wall is 9.3:1, and even at full page width that is
@@ -26841,7 +29235,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
     // page still getting the squeezed side-by-side drawing, with a huge floorplan and
     // dimensions too small to read. Asking the question directly fixes all three.
     const _thumb = 96;                       // the framed pages' floorplan thumbnail
-    const _bandBot2 = Math.max.apply(null, _colBot.concat([titleY + 40])) + 14;
+    const _bandBot2 = Math.max.apply(null, _colBot.concat([B.body + _subtitleClear()])) + 14;
     // Enough height left for a drawing worth having; below that, beside the spec.
     const _rows = ((SR.B - _elevCapH) - _bandBot2) >= 150;
     const planSide = _rows
@@ -27006,25 +29400,22 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     const planRow = isElev ? lookupRow(activeFrames[0] && activeFrames[0].id) : arg;
 
     // Title block (top-left): wall/zone name, ARTWORK DETAILS, item code.
-    const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
-    doc.setFont(_font(ts.font), _pdfTitleStyle(ts.font));
-    doc.setFontSize(Math.max(ts.size, 22)); doc.setTextColor(trgb.r, trgb.g, trgb.b);
     const zone = (isElev ? (elev && elev.name) : (arg.location || (elev && elev.name) || arg.category || arg.id) || '').toString().toUpperCase();
-    // First baseline pushed down by the cap height so the zone name sits inside
-    // the top guide instead of straddling it; the two lines under it keep their
-    // original 16pt / 34pt offsets from that baseline.
-    const _igTitleY = SR.T + Math.max(ts.size, 22) * 0.72;
+    // The zone name is the page heading and ELEVATION DETAIL is its subheading, so
+    // they sit on the two title guides; the item code follows the subheading at its
+    // own leading.
+    const _igBand = _titleBand(PW, PH);
     // Top of the drawing area, below the three-line title block. Was a flat
     // M + 58 (98pt); now it tracks the title block's real bottom.
     // Also clears the INSTALLATION NOTE box in the top-right. For one or two notes
     // the box is shorter than the title block, so this changes nothing; a long note
     // set pushes the drawing down rather than being drawn over.
-    const _igTop = Math.max(_igTitleY + 44, _igNoteBottom + 12);
-    doc.text(zone, M, _igTitleY);
-    doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(25, 25, 25);
-    doc.text('ELEVATION DETAIL', M, _igTitleY + 16);
+    const _igTop = Math.max(_igBand.body + _subtitleClear() + 22, _igNoteBottom + 12);
+    _drawPageTitle(doc, PW, PH, zone);
+    _applySubtitleType(doc);
+    doc.text('ELEVATION DETAIL', M, _igBand.sub);
     const codeId = isElev ? (activeFrames.length === 1 ? (activeFrames[0].id || '') : '') : (arg.id || '');
-    if (codeId) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text(codeId, M, _igTitleY + 34); }
+    if (codeId) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text(codeId, M, _igBand.sub + _subtitleClear() + 10); }
 
     try {
         const toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
@@ -27483,19 +29874,18 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
     // purple frame too. M keeps its name because it's used throughout below.
     const SR = _safeFrameRect(PW, PH);
     const M = SR.L;
+    const _csBand = _titleBand(PW, PH);
     const COL_X = M, ART_MAX_W = (SR.R - SR.L) * 0.42, ART_MAX_H = (SR.B - SR.T) * 0.5;
         // — Item code (top-left, large) — uses the deck title style —
-        const _ts = _titleStyle(); const _trgb = _annHexToRgb(_ts.color);
-        doc.setFont(_font(_ts.font), _pdfTitleStyle(_ts.font));
-        doc.setTextColor(_trgb.r, _trgb.g, _trgb.b);
+
         // Shrinks to fit rather than running off the right edge — a long
         // item ID (or a bumped-up custom title size) had no width limit at all.
-        _dsFitTitle(doc, (r.id || '').toString(), M, SR.T + Math.max(_ts.size, 20) * 0.72, SR.R - M, Math.max(_ts.size, 20));
+        _drawPageTitle(doc, PW, PH, (r.id || '').toString());
 
         // — Framed artwork render (reuse the per-frame canvas, artwork baked in) —
         // (No separate frame swatch chip — the framed mockup below already shows
         //  the moulding, so a swatch strip would be redundant.)
-        let cursorY = SR.T + Math.max(_ts.size, 20) * 0.72 + 16;
+        let cursorY = _csBand.body + 8;
         const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
         let artworkImg = null;
         if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
@@ -27667,6 +30057,116 @@ function _safeFrameRect(PW, PH) {
     if (!SF) return { L: M, T: M, R: PW - M, B: PH - M, fromGuides: false };
     return { L: SF.l * PW, T: SF.t * PH, R: (1 - SF.r) * PW, B: (1 - SF.b) * PH, fromGuides: true };
 }
+// ── THE PAGE TITLE BAND ───────────────────────────────────────────────────
+// WHERE A HEADING AND SUBHEADING PRINT, in ONE place, on every page this file
+// DRAWS rather than lays out from a template.
+//
+// There were nine answers to that question on pages that sit next to each
+// other in one deck: the floorplan key and the frame list at M+14 / M+30,
+// Thank You at M+18, Contents and the artwork index at M+24 off a margin of
+// 54 instead of 40, the placeholder at M+44 and indented another 24pt, the
+// group pages at TY + 20*0.72, the install and flat-graphic sheets at
+// SR.T + size*0.72, and the template spec pages wherever the affine remap
+// happened to drop tpl.title. Nine title treatments, and not one of them on
+// the cyan title-alignment guides the layout templates are built against —
+// which is what a designer sees the moment they turn Show guides on.
+//
+// THE GUIDE SET ALREADY CARRIED THE ANSWER. `hlines` on the Farmboy sets are
+// exactly those two cyan lines: the heading's BASELINE sits on the first and
+// the subheading's on the second. That is how the InDesign master is drawn,
+// and how the templates in this file were authored — the spec templates
+// still say title.y .15 and spec.y .2, which IS 0.145 / 0.205. They were
+// simply being overridden downstream.
+//
+// A ruler guide below the top third of the page is not a title line, so it is
+// ignored; a set that declares none (Margins only, Rule of Thirds, Center)
+// keeps the historical offsets off its OWN safety frame. Only a set that
+// actually declares title lines moves anything.
+// A ruler guide past this point down the page is somebody's layout line, not a
+// title line — honouring one would print the heading a third of the way down
+// the page, which is a worse answer than the margin fallback. Deliberately
+// BELOW a third: Rule of Thirds draws its first line at 0.3333 and is not a
+// title guide set. The Farmboy sets sit at .145 and .205, well clear.
+const TITLE_GUIDE_MAX = 0.30;
+function _titleBand(PW, PH) {
+    const SR = _safeFrameRect(PW, PH);
+    let hs = [];
+    try {
+        const G = _pageGuide();
+        hs = ((G && G.set && G.set.hlines) || [])
+            .map(v => parseFloat(v))
+            .filter(v => !isNaN(v) && v > 0 && v <= TITLE_GUIDE_MAX)
+            .sort((a, b) => a - b);
+    } catch (e) {}
+    const head = hs.length ? hs[0] * PH : SR.T + 14;
+    const sub = (hs.length > 1) ? hs[1] * PH : head + 16;
+    return {
+        x: SR.L, right: SR.R, w: SR.R - SR.L,
+        head: head, sub: sub,
+        // What a page's own content clears. A page with NO subheading still
+        // starts below the second line: otherwise two pages in one deck put
+        // their first row at different heights purely because one of them
+        // happened to have a subhead.
+        body: sub,
+        top: SR.T, bottom: SR.B,
+        fromGuides: hs.length > 0
+    };
+}
+// Draw the band. Returns it, so a caller lays out underneath without
+// recomputing anything.
+//
+// The heading is the deck's TITLE STYLE — the Type defaults dial that until
+// now reached the four spec renderers and nothing else, which is most of why
+// these titles did not match each other. opts.color overrides it for a page
+// that resolves its own ink from the page theme (Thank You over a dark
+// background), and opts.subAsTitle sets the second line in the title face for
+// a two-line heading.
+// Apply the resolved subheading type. The flat-graphic sheet and the install
+// guide build their own subhead STRING, so they cannot go through _drawPageTitle,
+// but they must not restate the type either.
+function _applySubtitleType(doc) {
+    try { _noteTitleSlot('sub', true); } catch (e) {}
+    const ss = _subtitleStyleFor();
+    const rgb = _annHexToRgb(ss.color);
+    doc.setFont(_font(ss.font), _pdfTitleStyle(ss.font));
+    doc.setFontSize(ss.size);
+    doc.setTextColor(rgb.r, rgb.g, rgb.b);
+    return ss;
+}
+function _drawPageTitle(doc, PW, PH, title, sub, opts) {
+    const _ink = (c) => Array.isArray(c) ? { r: c[0], g: c[1], b: c[2] } : _annHexToRgb(c);
+    const B = _titleBand(PW, PH);
+    const o = opts || {};
+    const ts = _titleStyleFor();
+    const ss = _subtitleStyleFor();
+    const size = o.size || ts.size;
+    const face = o.font || ts.font;
+    const weight = o.weight || _pdfTitleStyle(face);
+    if (title) {
+        const rgb = _ink(o.color || ts.color);
+        doc.setFont(_font(face), weight);
+        doc.setTextColor(rgb.r, rgb.g, rgb.b);
+        _dsFitTitle(doc, title.toString(), B.x, B.head, B.w, size, o.align ? { align: o.align } : undefined);
+    }
+    if (sub) {
+        if (o.subAsTitle) {
+            const rgb2 = _ink(o.subColor || o.color || ts.color);
+            doc.setFont(_font(face), weight);
+            doc.setTextColor(rgb2.r, rgb2.g, rgb2.b);
+            _dsFitTitle(doc, sub.toString(), B.x, B.sub, B.w, size);
+        } else {
+            const rgb2 = o.subColor ? _ink(o.subColor) : null;
+            doc.setFont(_font(ss.font), _pdfTitleStyle(ss.font));
+            doc.setFontSize(o.subSize || ss.size);
+            const _sr = rgb2 || _ink(ss.color);
+            doc.setTextColor(_sr.r, _sr.g, _sr.b);
+            _dsFitTitle(doc, sub.toString(), B.x, B.sub, B.w, o.subSize || ss.size, o.align ? { align: o.align } : undefined);
+        }
+    }
+    doc.setTextColor(20, 20, 20);
+    try { _noteTitleSlot('title', !!title); if (sub) _noteTitleSlot('sub', true); } catch (e) {}
+    return B;
+}
 // Contain-fit: largest w/h of aspect `asp` that fits inside maxW x maxH. This
 // exact three-line calculation was inlined in a dozen renderers; hoisted so a
 // fix lands everywhere at once.
@@ -27700,28 +30200,43 @@ function _tplDesignFrame(tpl) {
     }
     // frameDetail is a strip sitting ABOVE the plan box (see anchorAbovePlan), so
     // it extends the envelope upward from the plan, not downward.
-    if (tpl.frameDetail && tpl.plan) {
+    // The strip anchors above whichever thumbnail column survives: with the
+    // floorplan unticked the elevation IS the left column, and an envelope still
+    // measured from a plan that is no longer on the page maps the strip onto empty
+    // space.
+    const _fdAnchor = tpl.plan || tpl.elevation;
+    if (tpl.frameDetail && _fdAnchor) {
         const fdH = (tpl.frameDetail.h != null ? tpl.frameDetail.h : .16);
         const fdGap = (tpl.frameDetail.gap != null ? tpl.frameDetail.gap : .022);
-        add(tpl.plan.x, Math.max(0, tpl.plan.y - fdH - fdGap), tpl.plan.w, fdH + fdGap);
+        add(_fdAnchor.x, Math.max(0, _fdAnchor.y - fdH - fdGap), _fdAnchor.w, fdH + fdGap);
     }
     if (!isFinite(L) || !isFinite(T) || (R - L) < 0.1 || (B - T) < 0.1) return null;
     return { L: L, R: R, T: T, B: B };
 }
 async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) {
     const PW = ctx.PW, PH = ctx.PH;
-    const tpl = SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight;
+    // The ticks filter the template. NOT on a template card: a card shows the
+    // standard demo of what that layout IS, so filtering it by the deck's current
+    // ticks would make the card advertise the page you already have.
+    const tpl = (ctx && ctx.swatch) ? (SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight)
+                                    : _specTplEffective(tplKey, (r && r.id) || '');
     // Affine remap of template fractions onto the safety frame: positions go
     // through px/py, sizes through pw/ph (sizes scale but don't offset).
     // Falls back to the identity (original design) when no frame resolves.
     const SF = _layoutSafeFrame();
     const D = SF ? _tplDesignFrame(tpl) : null;
+    const _TB = _titleBand(PW, PH);
     let kx = 1, ky = 1, oxf = 0, oyf = 0;
     if (SF && D) {
         kx = (1 - SF.l - SF.r) / (D.R - D.L);
-        ky = (1 - SF.t - SF.b) / (D.B - D.T);
         oxf = SF.l - D.L * kx;
-        oyf = SF.t - D.T * ky;
+        // The envelope's top IS the title (it is the highest thing in every
+        // template), so anchoring the map there puts the title back on its own
+        // guide instead of on the top margin, and the rest of the page follows
+        // it down in the proportions it was drawn in.
+        const _topF = (tpl.title && _TB.fromGuides) ? (_TB.head / PH) : SF.t;
+        ky = (1 - SF.b - _topF) / (D.B - D.T);
+        oyf = _topF - D.T * ky;
     }
     const px = (f) => (oxf + f * kx) * PW, py = (f) => (oyf + f * ky) * PH;
     const pw = (f) => f * kx * PW, ph = (f) => f * ky * PH;
@@ -27744,20 +30259,24 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     if (tpl.title) {
         const tf = tpl.title.field || 'application';
         const titleText = (tf === 'id' ? (r.id || '') : tf === 'idLocation' ? ((r.id || '') + (r.location ? ' | ' + r.location : '')) : tf === 'product' ? (r.product || '') : (specs.application || r.product || r.id || 'SPECIFICATION')).toString().toUpperCase();
-        const ts = _titleStyle(); const trgb = _annHexToRgb(ts.color);
-        doc.setFont(_font(ts.font), _pdfTitleStyle(ts.font));
-        doc.setTextColor(trgb.r, trgb.g, trgb.b);
-        // A long ID, a long "id | location" combo, or a bumped-up custom
-        // title size had no width limit and could run off the right edge —
-        // shrink to fit the safe area instead.
-        // The template's title.y is a BASELINE, and it's the topmost thing in the
-        // design envelope — so the remap lands that baseline exactly on the top
-        // guide, leaving every ascender and cap above it. Push down by the cap
-        // height so the glyphs sit inside the frame instead of straddling it.
-        // 0.72em is the usual cap-height ratio and is close enough for Druk (.744)
-        // and Messina alike; jsPDF exposes no per-face cap height.
-        const _titleTop = Math.max(py(tpl.title.y), SR.T + ts.size * 0.72);
-        _dsFitTitle(doc, titleText, px(tpl.title.x), _titleTop, _rightLimit - px(tpl.title.x), ts.size, tpl.title.align ? { align: tpl.title.align } : undefined);
+        // _drawPageTitle shrinks a long ID (or a bumped-up title size) to fit
+        // rather than letting it run off the right edge.
+        // With title guides it goes on the first one, like every other page. With
+        // none, title.y is a BASELINE and the topmost thing in the design envelope,
+        // so the remap lands it exactly ON the top margin and the cap height has to
+        // push it back inside the frame (0.72em is close enough for Druk at .744 and
+        // Messina alike; jsPDF exposes no per-face cap height).
+        if (_TB.fromGuides) {
+            _drawPageTitle(doc, PW, PH, titleText, '', tpl.title.align ? { align: tpl.title.align } : undefined);
+        } else {
+            try { _noteTitleSlot('title', true); } catch (e) {}
+            const _ts2 = _titleStyleFor(), _trgb2 = _annHexToRgb(_ts2.color);
+            doc.setFont(_font(_ts2.font), _pdfTitleStyle(_ts2.font));
+            doc.setTextColor(_trgb2.r, _trgb2.g, _trgb2.b);
+            const _titleTop = Math.max(py(tpl.title.y), SR.T + _ts2.size * 0.72);
+            _dsFitTitle(doc, titleText, px(tpl.title.x), _titleTop, _rightLimit - px(tpl.title.x), _ts2.size, tpl.title.align ? { align: tpl.title.align } : undefined);
+            doc.setTextColor(20, 20, 20);
+        }
     }
 
     // — Artwork (baked frame mockup) + code beneath —
@@ -27837,6 +30356,17 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     } else if (tpl.elevation) {
         let elev = null;
         for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } }
+        // TICKED BUT NOT YET ON A WALL: reserve the box rather than collapsing it.
+        // A page that reflows every time a piece gets placed is a page you cannot
+        // lay out until the project is finished. Same grey box the template cards
+        // use, so “nothing here yet” looks the same everywhere.
+        const _elevMiss = () => {
+            const boxW = pw(tpl.elevation.w), boxH = ph(tpl.elevation.h), boxY = py(tpl.elevation.y);
+            const boxX = (tpl.plan && tpl.plan.matchElev) ? (px(tpl.plan.x) + boxH + 5) : px(tpl.elevation.x);
+            _specSwatchBox(doc, boxX, boxY, boxW, boxH, 'Elevation', _capY(boxY + boxH));
+            _elevDrawn = { y: boxY, h: boxH };
+        };
+        if (!elev) _elevMiss();
         if (elev) {
             const er = await renderElevationToCanvas(elev, r.id, { wireframe: _isWireframe(), dpi: 28 });
             if (er && er.canvas) {
@@ -27876,7 +30406,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                 // so it was the odd one out in a row of three labels — and it
                 // ignored the brand font entirely.
                 _specThumbCaption(doc, (elev.name || 'Elevation') + '', capX, _capY(boxY + eh));
-            }
+            } else { _elevMiss(); }
         }
     }
     let _planBoxTop = null;
@@ -27905,6 +30435,9 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, dy0, dw, dh); } catch (e) {}
             doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(bx, dy0, dw, dh, 'S'); } catch (e) {}
             _specThumbCaption(doc, 'Floorplan', bx, _capY(dy0 + dh));
+        } else {
+            // Ticked, but this piece is not pinned on a plan yet. Reserve it.
+            _specSwatchBox(doc, bx, dy0, bw, bh, 'Floorplan', _capY(dy0 + bh));
         }
     }
 
@@ -27915,7 +30448,16 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         // the demo piece has neither, and two grey boxes say "corner + profile land
         // here" as well as the real ones would at 150px wide.
         const imgs = SWATCH ? {} : await _rowFrameImages(r);
-        const leftX = px((tpl.plan && tpl.plan.x) != null ? tpl.plan.x : .025);
+        // The strip sits over whichever thumbnail column survives. With the floorplan
+        // unticked that is the elevation's, and _leftX carries what the packing chose.
+        const _fdCol = (tpl.plan && tpl.plan.x != null) ? tpl.plan.x
+                     : (tpl.elevation && tpl.elevation.x != null) ? tpl.elevation.x
+                     : (tpl._leftX != null ? tpl._leftX : .025);
+        const leftX = px(_fdCol);
+        // Each thumbnail is its own tick, because a piece can have a corner sample
+        // photographed and no profile drawing, or the other way round.
+        const wantCorner = (fd.corner !== false);
+        const wantProfile = (fd.profile !== false);
         const THUMB_GAP = 5;                 // corner ↔ profile, ~5px apart
         const labelH = 11;
         const stripH = ph(fd.h != null ? fd.h : .16);
@@ -27927,7 +30469,12 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         // locks onto a real elevation, but reverts to a larger unmatched default
         // when no elevation is set, which used to collide with a strip anchored
         // to the fixed nominal position.
-        const planTop = (_planBoxTop != null) ? _planBoxTop : py((tpl.plan && tpl.plan.y) != null ? tpl.plan.y : .62);
+        // The row's real drawn top, whichever thumbnail made it: the plan box shifts
+        // once matchElev locks onto a real elevation, and with no plan at all the
+        // elevation is the thing the strip has to clear.
+        const planTop = (_planBoxTop != null) ? _planBoxTop
+                      : (_elevDrawn ? _elevDrawn.y
+                      : py((tpl.plan && tpl.plan.y) != null ? tpl.plan.y : (tpl.elevation && tpl.elevation.y != null) ? tpl.elevation.y : .62));
         const gapPx = ph(fd.gap != null ? fd.gap : .022);
         const labelBaseline = planTop - gapPx;
         const imgBottom = labelBaseline - labelH;
@@ -27956,10 +30503,11 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                 doc.text('none', ox + m.w / 2, iy + m.h / 2, { align: 'center' }); doc.setTextColor(20, 20, 20);
             }
         };
-        drawOne(imgs.cornerImg, leftX, cM);
-        const profileX = leftX + cM.w + THUMB_GAP;
-        const pM = measure(imgs.profileImg, maxThumbW);
-        drawOne(imgs.profileImg, profileX, pM);
+        // PACK LEFT. With the corner unticked the profile takes the far-left slot
+        // rather than leaving a gap where the corner would have been.
+        let ox = leftX;
+        if (wantCorner) { drawOne(imgs.cornerImg, ox, cM); ox += cM.w + THUMB_GAP; }
+        if (wantProfile) { const pM = measure(imgs.profileImg, maxThumbW); drawOne(imgs.profileImg, ox, pM); }
         // Single caption "Frame" under the corner thumbnail only. labelBaseline
         // sits just below the images so it never overlaps them.
         _specThumbCaption(doc, 'Frame', leftX, labelBaseline);
@@ -39092,4 +41640,4 @@ async function exportElevSVG(opts) {
 
 // BOOT UP THE ENGINE
 initMasterApp();
-setTimeout(() => { try { _loadEditorBrandFonts(); } catch (e) {} }, 0);
+setTimeout(() => { try { _loadEditorBrandFonts(); } catch (e) {} try { _loadPdfFontData(); } catch (e) {} }, 0);

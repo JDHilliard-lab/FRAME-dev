@@ -114,10 +114,10 @@ const path = require('path');
         if (fontsFlags.some(f => f !== true)) throw new Error('a card was rendered before the fonts loaded — the cache is locked for the session, so it would keep Arial fallbacks all session');
         const i = S.indexOf('async function _dsTplSwatchPump');
         const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));
-        // The wait itself lives in the shared _dsTplSwatchFonts helper (memoized, so
+        // The wait itself lives in the shared _dsBrandFontsReady helper (memoized, so
         // seven cards don't queue fourteen timers) — the pump just has to await it.
-        if (body.indexOf('_dsTplSwatchFonts()') < 0) throw new Error('the pump no longer waits for the brand faces');
-        const j = S.indexOf('function _dsTplSwatchFonts');
+        if (body.indexOf('_dsBrandFontsReady()') < 0) throw new Error('the pump no longer waits for the brand faces');
+        const j = S.indexOf('function _dsBrandFontsReady');
         if (S.slice(j, S.indexOf('\\n}', j)).indexOf('_loadEditorBrandFonts') < 0) throw new Error('the shared font wait does not actually load the brand faces');
       });
 
@@ -195,16 +195,22 @@ const path = require('path');
       });
 
       // ── Where it is triggered from, which is a suite-runtime decision ───────
-      __check('it fires on entering the deck view, NOT from the boot tail', () => {
-        // Seven real page renders. From the boot tail, every load pays for a panel
-        // that may never open — and so does every one of the 100+ test harnesses,
-        // which boot app.js and never switch to this view. That measured at ~4.5s
-        // per file, roughly tripling a suite CLAUDE.md says to run on every change.
+      __check('it does not fire at all, because nothing paints cards any more', () => {
+        // It used to run on entering the deck view - seven real page renders - and the
+        // rule was "not from the boot tail", because every one of the 100+ test
+        // harnesses boots app.js and never opens that panel (~4.5s per file).
+        //
+        // Both picker grids are gone now (per-piece and group, each replaced by SHOW ON
+        // PAGE ticks), so the prewarm fills a cache nothing reads. The RENDERER stays
+        // and stays tested; only the cost of warming it on every visit goes.
         const i = S.indexOf("if (viewType === 'deck') {");
         if (i < 0) throw new Error('switchView deck branch not found');
-        if (S.slice(i, i + 1800).indexOf('_dsPrewarmTplSwatches') < 0) throw new Error('entering the deck view no longer prewarms the cards');
+        if (S.slice(i, i + 1800).indexOf('_dsPrewarmTplSwatches(') >= 0) throw new Error('the deck view is warming cards nobody paints');
         const boot = S.slice(S.indexOf('// BOOT UP THE ENGINE'));
-        if (boot.indexOf('_dsPrewarmTplSwatches') >= 0) throw new Error('the prewarm is back in the boot tail — that costs every test harness ~4.5s for a panel it never opens');
+        if (boot.indexOf('_dsPrewarmTplSwatches(') >= 0) throw new Error('the prewarm is in the boot tail - that costs every test harness ~4.5s for a panel that does not exist');
+        // If a picker ever comes back, this check is the reminder to re-decide WHERE
+        // the warming happens rather than letting it default to boot.
+        if (S.indexOf('_dsQueueTplSwatch(key, thumb)') >= 0) throw new Error('a card grid is back: decide where the prewarm fires again');
       });
 
       __check('_withTimeout clears its fallback timer, or the prewarm hangs the event loop', () => {
@@ -215,15 +221,15 @@ const path = require('path');
         const body = S.slice(i, S.indexOf('\\n}', i));
         if (body.indexOf('clearTimeout') < 0) throw new Error('_withTimeout leaves a dangling timer again');
         // And the font wait is memoized, not repeated per card.
-        if (S.indexOf('let _dsTplFontsReady') < 0) throw new Error('the per-session font wait is gone, so every card awaits again');
+        if (S.indexOf('let _dsBrandFontsMemo') < 0) throw new Error('the per-session font wait is gone, so every card awaits again');
       });
 
       __check('the memoized font wait really is shared, not re-run per card', () => {
         let calls = 0;
         const prev = _loadEditorBrandFonts;
-        _dsTplFontsReady = null;
+        _dsBrandFontsMemo = null;
         _loadEditorBrandFonts = async function () { calls++; window.__fontsLoaded = true; };
-        _dsTplSwatchFonts(); _dsTplSwatchFonts(); _dsTplSwatchFonts();
+        _dsBrandFontsReady(); _dsBrandFontsReady(); _dsBrandFontsReady();
         if (calls !== 1) throw new Error('the font load ran ' + calls + ' times for three waiters');
         _loadEditorBrandFonts = prev;
       });

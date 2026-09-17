@@ -220,12 +220,17 @@ const fs = require('fs');
       if (perPiece.textContent.indexOf('Add elevation breaker page') < 0) throw new Error('breaker label missing');
       if (perPiece.textContent.indexOf('Elevation only') < 0) throw new Error('elevation-only label missing');
       if (perPiece.textContent.indexOf('wallcovering / window film') < 0) throw new Error('skip-flat label missing');
-      if (perPiece.textContent.indexOf('these individual spec pages') < 0) throw new Error('per-piece wording missing');
+      // UPDATED 17.29: the sentence that explains what a breaker page is moved onto a
+      // hover ? , because it was the same two wrapped lines every time and three of them
+      // in this block cost more height than the controls they describe. The CLAIM is
+      // unchanged: the wording still adapts to the mode. It is read from the tooltip now.
+      const tips = (el) => Array.prototype.slice.call(el.querySelectorAll('[data-help]')).map(h => h.title || '').join(' | ');
+      if (tips(perPiece).indexOf('these individual spec pages') < 0) throw new Error('per-piece wording missing from the help: ' + tips(perPiece));
       const grp = document.createElement('div');
       _dsBreakerToggleInto(grp, true);
       if (grp.querySelectorAll('input[type=checkbox]').length !== 3) throw new Error('group block should have the same three checkboxes');
       if (labelsOf(grp).indexOf('wallcovering / window film') < 0) throw new Error('the group panel is missing the skip-flat option');
-      if (grp.textContent.indexOf('A/B/C spec page') < 0) throw new Error('group wording missing: ' + grp.textContent.slice(0, 200));
+      if (tips(grp).indexOf('A/B/C spec page') < 0) throw new Error('group wording missing from the help: ' + tips(grp));
       // and the group branch of the tools panel must actually call it
       if (!/_dsBreakerToggleInto\\(head, true\\)/.test(window.__appSrc)) throw new Error('the Group A/B/C tools branch never calls _dsBreakerToggleInto');
       if (!/_dsBreakerToggleInto\\(head, false\\)/.test(window.__appSrc)) throw new Error('the Per-piece tools branch never calls _dsBreakerToggleInto');

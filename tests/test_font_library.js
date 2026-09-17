@@ -80,18 +80,18 @@ const fs = require('fs');
     });
 
     __check('PDF resolution: brand faces embed, universal faces map to jsPDF cores', () => {
-      _pdfFontFams = {};   // nothing embedded (fetch is stubbed out)
+      _pdfBrandFams = {};   // no bytes available (fetch is stubbed out)
       if (_font('display') !== 'helvetica') throw new Error('display fallback wrong: ' + _font('display'));
       if (_font('serif') !== 'times') throw new Error('serif fallback wrong: ' + _font('serif'));
       if (_font('courier') !== 'courier') throw new Error('courier core wrong: ' + _font('courier'));
       ['arial','helvetica','segoe','verdana','tahoma','sans'].forEach(t => {
         if (_font(t) !== 'helvetica') throw new Error(t + ' should map to helvetica, got ' + _font(t));
       });
-      _pdfFontFams = { Druk: true, Messina: true };
+      _pdfBrandFams = { Druk: true, Messina: true };
       if (_font('display') !== 'Druk') throw new Error('embedded Druk not used');
       if (_font('serif') !== 'Messina') throw new Error('embedded Messina not used');
       if (_font('courier') !== 'courier') throw new Error('courier hijacked by an embed');
-      _pdfFontFams = {};
+      _pdfBrandFams = {};
     });
 
     __check('_pdfFontStyle: only Druk forces bold (captions and codes draw at natural weight)', () => {
@@ -111,7 +111,10 @@ const fs = require('fs');
       // And the three title draw sites use the title rule, not the caption one.
       const S = window.__appSrc;
       if (S.indexOf('_pdfFontStyle(ts.font)') >= 0 || S.indexOf('_pdfFontStyle(_ts.font)') >= 0) throw new Error('a title site still uses the caption weight rule');
-      if ((S.split('_pdfTitleStyle(').length - 1) < 4) throw new Error('expected the definition plus 3 title sites');
+      // ONE drawer for every page (17.40), so this is the definition plus
+      // _drawPageTitle plus the spec template's no-title-guides fallback.
+      if (S.indexOf('const weight = o.weight || _pdfTitleStyle(face);') < 0) throw new Error('the shared title drawer does not use the title weight rule');
+      if ((S.split('_pdfTitleStyle(').length - 1) < 2) throw new Error('nothing calls the title weight rule at all');
     });
 
     __check('_fillFontSelect builds Brand + Universal optgroups and selects the token', () => {
@@ -130,10 +133,14 @@ const fs = require('fs');
     __check('Elevations Settings offers the identical font list to Deck Studio', () => {
       _initFontSelects();
       const opts = (id) => Array.from(document.getElementById(id).querySelectorAll('option')).map(o => o.value).join(',');
-      const deck = opts('dsMbFont');
-      if (!deck) throw new Error('deck picker empty — _initFontSelects did not fill it');
-      ['mbFont','dsTextFont','annotFontFamily','imgCodeFontFamily'].forEach(id => {
-        if (opts(id) !== deck) throw new Error(id + ' differs from dsMbFont: ' + opts(id));
+      // UPDATED 17.27: the reference was dsMbFont, the font picker on the Deck Studio
+      // toolbar. That picker is gone — text styling moved into the settings popup, which
+      // is the one place it now lives — so the reference moves to another picker. The
+      // claim is unchanged: every picker in the app shows the same library list.
+      const deck = opts('mbFont');
+      if (!deck) throw new Error('reference picker empty — _initFontSelects did not fill it');
+      ['dsTextFont','annotFontFamily','imgCodeFontFamily'].forEach(id => {
+        if (opts(id) !== deck) throw new Error(id + ' differs from mbFont: ' + opts(id));
       });
       // And it is the library, not a stale copy of the old six-font list.
       if (deck !== FRAME_FONT_LIBRARY.map(e => e.token).join(',')) throw new Error('list is not the library: ' + deck);

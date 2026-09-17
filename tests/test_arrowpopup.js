@@ -30,9 +30,10 @@ const fs = require('fs');
       editorialContent.annotations = { 'layout:pgA': [{ type: 'arrow', x1: 0.1, y1: 0.1, x2: 0.4, y2: 0.4, color: '#9aa0a6' }] };
       _dsOpenArrowGearPopup('layout:pgA', 0, 100, 100);
       const pop = document.getElementById('dsArrowGearPopup');
-      const swatches = Array.from(pop.querySelectorAll('button')).filter(b => b.title === '#000000' || b.title === '#ffffff');
+      // The shared renderer titles a swatch '<family> <hex>', so match on the hex.
+      const swatches = Array.from(pop.querySelectorAll('button')).filter(b => (b.title || '').indexOf('#000000') >= 0 || (b.title || '').indexOf('#ffffff') >= 0);
       if (swatches.length !== 2) throw new Error('white/black swatches missing: ' + swatches.length);
-      swatches.find(b => b.title === '#000000').onclick();
+      swatches.find(b => (b.title || '').indexOf('#000000') >= 0).onclick();
       const a = editorialContent.annotations['layout:pgA'][0];
       if (a.color !== '#000000') throw new Error('black swatch did not set color: ' + a.color);
       _dsCloseArrowGearPopup();
@@ -165,9 +166,11 @@ const fs = require('fs');
       editorialContent.annotations = { 'layout:pgS': [{ type: 'shape', shape: 'rect', dataUrl: 'data:image/png;base64,X', stroke: '#c0392b', strokeW: 1.5 }] };
       _dsOpenGearPopup('layout:pgS', 0, 10, 10);
       const pop = document.getElementById('dsGearPopup');
-      const titles = Array.from(pop.querySelectorAll('button')).map(b => b.title);
-      if (titles.indexOf('Stroke #000000 (click again to remove)') < 0) throw new Error('black stroke swatch missing');
-      if (titles.indexOf('Stroke #ffffff (click again to remove)') < 0) throw new Error('white stroke swatch missing');
+      // Same change: the stroke swatches are the shared grid now, so their titles
+      // read 'Neutrals #000000' rather than 'Stroke #000000 (click again to remove)'.
+      const titles = Array.from(pop.querySelectorAll('button')).map(b => b.title || '');
+      if (!titles.some(t => t.indexOf('#000000') >= 0)) throw new Error('black stroke swatch missing');
+      if (!titles.some(t => t.indexOf('#ffffff') >= 0)) throw new Error('white stroke swatch missing');
       _dsCloseGearPopup();
     });
   `;

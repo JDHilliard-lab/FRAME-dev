@@ -27,6 +27,19 @@
     --art-color: rgba(100, 100, 100, 0.4); 
     --guide-color: #555555; 
 
+    /* THE ELEVATION'S GROUND, AND IT IS NOT A THEME COLOUR.
+     * The drawing is print colours in both themes - the wall, the dimension ink
+     * and every line weight come from annotationStyle, never from a theme var -
+     * so the surface it sits on has to be a print surface too. On the dark ground
+     * the outer wall dimensions, which are drawn OUTSIDE the wall in near-black,
+     * were invisible: the measurements were on screen and could not be read.
+     * Declared once here and deliberately NOT overridden in .light-theme, because
+     * a value that is the same in both themes is not a theme value.
+     * A shade DARKER than #wall (#f0f2f5), the way a pasteboard sits under a
+     * sheet, so the wall still reads as the page and the ink outside it reads at
+     * full contrast. */
+    --elev-ground: #e9ecf0;
+
     /* -- Modal shell --
      * The scrim and the blur are ONE value each. They were hand-written into 22
      * separate overlays and had drifted to five darknesses (0.55 to 0.8) and two
@@ -165,10 +178,19 @@
 
 .light-theme {
     /* LIGHT THEME OVERRIDES */
-    --bg-main: #f0f2f5;
-    --bg-nav: #ffffff;
-    --bg-panel: #ffffff;
-    --bg-subpanel: #f8f9fa;
+    /*
+     * OFF-WHITE, NOT WHITE. Three of these were #ffffff, so the nav, every panel
+     * and every input were the same flat sheet of paper and the whole app glared.
+     * They now step down light to dark - input, panel, nav, subpanel, main - which
+     * also fixes something that was never right: --bg-panel and --bg-input were the
+     * SAME colour, so a field in light mode was told apart from the panel behind it
+     * by its border alone.
+     * --bg-input stays #ffffff deliberately. It has to be the lightest thing on
+     * screen or a text field stops looking like somewhere you can type. */
+    --bg-main: #e9ecf0;
+    --bg-nav: #f2f4f7;
+    --bg-panel: #f8f9fb;
+    --bg-subpanel: #eef0f4;
     --bg-input: #ffffff;
     --border-color: #d1d5da;
     --text-strong: #111111;
@@ -223,6 +245,14 @@ input[type="number"] { -moz-appearance: textfield; }
 /* ========================================= */
 .app-top-nav { display: flex; align-items: center; background: var(--bg-nav); height: 45px; flex-shrink: 0; padding-right: 15px; border-bottom: 1px solid var(--border-color); z-index: 1000; transition: background 0.3s;}
 .nav-brand { display: flex; align-items: center; height: 100%; }
+/* THE THEME TOGGLE SHOWS THE MODE IT WILL SWITCH TO, not the one you are in.
+ * It carried a moon in both themes, so the one control whose whole job is to
+ * change something never changed itself - there was no feedback that the click
+ * had landed. Sun while dark (click for light), moon while light.
+ * Same swap the logo uses on the next line, and for the same reason: two elements
+ * and a CSS rule, so no JS has to remember to keep an icon in step. */
+.light-theme .theme-icon-sun { display: none !important; }
+body:not(.light-theme) .theme-icon-moon { display: none !important; }
 .light-theme .logo-dark { display: none !important; }
 .light-theme .logo-light { display: block !important; }
 body:not(.light-theme) .logo-light { display: none !important; }
@@ -1177,8 +1207,29 @@ select.no-arrow::-ms-expand { display: none; }
  * _dsToolsTab needed _dsSyncToolsTabBar() called AFTER it to put back a
  * display:none the rewrite had just clobbered. Toggling .active touches nothing
  * else, so that trap is gone rather than documented. */
+/* Custom colour picker: a dot with a colour-wheel ring, matching the swatch dots it
+ * sits beside. See the note in app.js about the ten hand-styled squares this replaces.
+ * Size is fixed here so every one of them is the same circle; call sites set position
+ * only. */
+input[type="color"] {
+    -webkit-appearance: none; -moz-appearance: none; appearance: none;
+    width: 20px; height: 20px; min-width: 20px; padding: 0;
+    border: none; border-radius: 50%; cursor: pointer;
+    background: conic-gradient(#ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+    box-sizing: border-box;
+}
+/* The inner swatch is the CURRENT colour; the 3px inset leaves the wheel as a ring. */
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 3px; }
+input[type="color"]::-webkit-color-swatch { border: none; border-radius: 50%; }
+input[type="color"]::-moz-color-swatch { border: none; border-radius: 50%; margin: 3px; width: 14px; height: 14px; }
+input[type="color"]:hover { filter: brightness(1.12); }
+
 .frame-tabs { display: flex; gap: 4px; flex: none; }
 .frame-tabs.fit > .frame-tab { flex: 1; }
+/* A strip with too many tabs for one line (the Project tab previews one page per
+ * included section). Everywhere else .frame-tabs is a single-row segmented
+ * control, so wrapping is opt-in rather than the default. */
+.frame-tabs.wrap { flex-wrap: wrap; }
 .frame-tab {
     height: 28px; padding: 0 12px;
     font-size: var(--fs-70); font-weight: 700;
@@ -1457,7 +1508,11 @@ select.no-arrow::-ms-expand { display: none; }
     border-color: #f0883e88;
     color: #f0883e;
 }
-.workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--bg-main);}
+/* The ONE .workspace in the app is the elevation's scroll region (#scrollArea),
+ * so this is the drawing board. It reads --elev-ground and not --bg-main: see
+ * that token. The two floating buttons on it keep the app's theme, because they
+ * are chrome rather than drawing. */
+.workspace { flex: 1; position: relative; overflow: auto; display: flex; background: var(--elev-ground);}
 /* Breathing room around the wall for the dimension callouts that hang outside
  * it. Horizontal is 65px, not 80: the wall rail took 30px and this gives it
  * back so the fitted drawing keeps its size (see .elev-wall-rail). drawElevAll

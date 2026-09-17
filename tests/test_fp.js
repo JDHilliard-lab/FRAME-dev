@@ -1505,12 +1505,38 @@ const fs = require('fs');
       // flex-wrap on it.
       // EVERY popup builder, not just the one it was seen on: the arrow popup had already
       // been fixed and the shape and text ones had not, which is exactly how it survived.
+      // The shape popup no longer has an identical row helper to count: its sections
+      // are a label COLUMN plus a control body now, so there are two container helpers
+      // in it rather than one. What has to hold is unchanged - every container that
+      // RECEIVES CONTROLS wraps - so each builder is asked about its own helpers by
+      // name, and a builder that stops declaring them fails loudly here rather than
+      // quietly passing.
       const A = window.__appSrc;
-      const helpers = A.split("const row = () => { const d = document.createElement('div'); d.style.cssText = 'display:flex");
-      if (helpers.length - 1 < 3) throw new Error('expected three popup row helpers, found ' + (helpers.length - 1));
-      helpers.slice(1).forEach((seg, n) => {
-        const decl = seg.slice(0, 160);
-        if (decl.indexOf('flex-wrap:wrap') < 0) throw new Error('popup row helper ' + (n + 1) + ' does not wrap: ' + decl.slice(0, 90));
+      const NL = String.fromCharCode(10);
+      const bodyOfFn = (fn) => {
+        const at = A.indexOf(NL + 'function ' + fn + '(');
+        if (at < 0) throw new Error(fn + ' is gone');
+        let end = A.length;
+        [NL + 'function ', NL + 'const ', NL + 'let '].forEach(c => { const k = A.indexOf(c, at + 1); if (k >= 0 && k < end) end = k; });
+        return A.slice(at, end);
+      };
+      const WANT = {
+        _dsOpenArrowGearPopup: ['const row = ()'],
+        _dsOpenTextGearPopup: ['const row = ()'],
+        // sec() hands its controls to body; subRow() is the continuation line.
+        _dsOpenGearPopup: ['body.style.cssText', 'const subRow = ()']
+      };
+      Object.keys(WANT).forEach(fn => {
+        const b = bodyOfFn(fn);
+        WANT[fn].forEach(marker => {
+          const at = b.indexOf(marker);
+          if (at < 0) throw new Error(fn + ' no longer declares its control container (' + marker + ')');
+          // To the end of the LINE: every one of these helpers is a one-liner, and a
+          // slice to the next semicolon stops inside the cssText string itself.
+          const decl = b.slice(at, b.indexOf(NL, at));
+          if (decl.indexOf('display:flex') < 0) throw new Error(fn + ': ' + marker + ' is not a row');
+          if (decl.indexOf('flex-wrap:wrap') < 0) throw new Error(fn + ': ' + marker + ' does not wrap, so a long row runs off the panel');
+        });
       });
     });
 
@@ -1582,11 +1608,16 @@ const fs = require('fs');
       if (A.indexOf('Math.min(window.innerHeight - popMaxH - 8') >= 0) {
         throw new Error('a popup still clamps against its maximum height at open time');
       }
-      // The three GEAR popups clamp after append. The edge-gap popover deliberately does
-      // NOT: it is appended empty and positioned by its own CSS class, so measuring it
-      // would read zero and clamping would move it.
+      // EVERY popup that measures itself clamps after append. The edge-gap popover
+      // deliberately does NOT: it is appended empty and positioned by its own CSS
+      // class, so measuring it would read zero and clamping would move it.
+      const CLAMPED = ['_dsOpenArrowGearPopup', '_dsOpenGearPopup', '_dsOpenTextGearPopup',
+                       '_dsOpenTitleTypePopup', '_dsOpenInkPopover'];
+      CLAMPED.forEach(fn => {
+        if (A.indexOf('function ' + fn) < 0) throw new Error(fn + ' is gone, so the count below is measuring something else');
+      });
       const n = A.split('_dsClampPopup(pop);').length - 1;
-      if (n !== 3) throw new Error('expected exactly the three gear popups to clamp, found ' + n);
+      if (n !== CLAMPED.length) throw new Error('expected ' + CLAMPED.length + ' clamped popups (' + CLAMPED.join(', ') + '), found ' + n + ' — a new popup that measures itself must clamp too');
       const eg = A.indexOf('function openEdgeGapPopover');
       if (A.slice(eg, eg + 900).indexOf('_dsClampPopup') >= 0) {
         throw new Error('the edge-gap popover is being clamped, and it is positioned by CSS');
@@ -1721,10 +1752,18 @@ const fs = require('fs');
       if (f.indexOf('n > (_dsPages || []).length') < 0) throw new Error('an out-of-range page number is not rejected');
       if (f.indexOf('target === desc') < 0) throw new Error('placing a page relative to itself is not rejected');
       // Offered for movable pages only, ahead of the branches that return early.
+      // UPDATED 17.26: this used to read a 3600-CHARACTER window after the function
+      // name, so it broke the moment the header above grew — which is the trap CLAUDE.md
+      // names outright. Sliced between landmarks now, and it checks the ORDER it
+      // actually cares about: the control must come before the first branch that returns.
       const rt = A.indexOf('function _dsRenderTools()');
-      if (A.slice(rt, rt + 3600).indexOf('_dsPlaceRelativeInto(t, desc)') < 0) {
-        throw new Error('the control is not in the page panel before the early returns');
-      }
+      const end = A.indexOf('function _dsSave()', rt);
+      if (end < 0) throw new Error('_dsSave does not follow _dsRenderTools');
+      const body = A.slice(rt, end);
+      const place = body.indexOf('_dsPlaceRelativeInto(t, desc)');
+      const firstBranch = body.indexOf("if (desc.kind === 'floorplan')");
+      if (place < 0) throw new Error('the control is not in the page panel at all');
+      if (firstBranch >= 0 && place > firstBranch) throw new Error('it renders after a branch that returns early, so some page kinds lose it');
     });
 
     __check('the rail header is a section, not something the pages show through', () => {

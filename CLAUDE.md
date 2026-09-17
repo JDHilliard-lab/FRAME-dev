@@ -946,6 +946,297 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `Image Size W/H` = print file**. Those columns are addressed BY NAME by the InDesign
   script, so they were deliberately NOT renamed with the row — the page label and the CSV
   header are allowed to differ here, and that is the one place in this file where they do.
+- **`_titleBand` / `_drawPageTitle` IS WHERE A HEADING AND SUBHEADING PRINT, on every
+  page this file DRAWS rather than lays out from a template.** There were nine answers,
+  on pages that sit next to each other in one deck: the floorplan key and the frame list
+  at `M + 14` / `M + 30`, Thank You at `M + 18`, Contents and the artwork index at
+  `M + 24` off a margin of **54** while everything else used 40, the placeholder at
+  `M + 44` and indented another 24pt, the group pages at `TY + 20 * 0.72`, the install
+  and flat-graphic sheets at `SR.T + size * 0.72`, and the template spec pages wherever
+  the affine remap happened to drop `tpl.title`. Reported as "all the titles look
+  different in the preview, which I think will confuse many designers."
+  **THE GUIDE SET ALREADY CARRIED THE ANSWER.** `hlines` on the Farmboy sets (0.145 /
+  0.205) ARE the two cyan ruler guides: the heading's BASELINE sits on the first and the
+  subheading's on the second, which is how the InDesign master is drawn and how every
+  layout template in this file was authored. The spec templates still say `title.y .15`
+  and `spec.y .2` — they were authored correctly and corrected wrongly downstream.
+  A ruler guide past `TITLE_GUIDE_MAX` (0.30) is somebody's layout line, not a title
+  line, and is ignored — deliberately BELOW a third, because Rule of Thirds draws at
+  0.3333 and honouring it would print the heading a third of the way down the page. A
+  set that declares no title lines (Margins only, Rule of Thirds, Center) keeps the
+  historical offsets off its OWN safety frame, so only a set that declares them moves
+  anything.
+  **THE HEADING IS `_titleStyle()`** — the Type defaults dial that used to reach four
+  spec renderers and nothing else, which is most of why these titles did not match. Two
+  of those four also floored it (`Math.max(ts.size, 22)`), so turning the deck title
+  DOWN moved every page except them; the floors are gone. A page with its own type
+  override passes it in (`opts.font`/`weight`/`size` — the timeline does) and borrows
+  only the POSITION. `opts.color` takes a hex OR an `[r,g,b]` triple, because a page
+  that resolves its ink from the page theme already has the triple.
+  **THE TYPE IS DRUK 32 OVER DRUK 22** (`TITLE_SIZE_DEFAULT`, `PAGE_SUBTITLE_FONT/SIZE`),
+  which is the InDesign master: its heading is 0.06 of a 540pt page (32.4pt) and its
+  subheading 0.0408 (22pt). The heading is a dial; **the subheading is not**, because two
+  dials for one relationship is how a deck ends up with a 32pt heading over a 10pt
+  subhead on one page and not on the next. The subhead keeps its own grey
+  (`PAGE_SUBTITLE_INK`) — it is a secondary line, not a second title.
+  These four consts sit **above `let editorialContent = _editorialDefaults()`**, and that
+  placement is load-bearing: that line RUNS at module scope, so a const declared further
+  down is read in the TDZ and the file dies on boot with "Cannot access
+  TITLE_SIZE_DEFAULT before initialization". Same trap that made `_specCodeStyleDefault`
+  a function; a plain number just needs declaring first. A test pins the ordering.
+  **`titleStyle` IS WRITTEN INTO EVERY PROJECT** by `_editorialDefaults()`, so changing
+  the default reaches new decks and nothing else. `_mbMigratePages` bumps a stored 22 to
+  32 **once**, keyed on `typeDefaultsV` rather than on the value — key it on the value
+  and a designer who deliberately sets 22 has it bumped back on every load.
+  **A 22pt subheading changed two things a 10pt one never could.** It can overrun the
+  page (a level name is user text with no length limit), so it goes through `_dsFitTitle`
+  like the heading; and content under it starts from its BASELINE, so the gap has to pay
+  for its descenders — `PAGE_SUBTITLE_CLEAR`, derived from the size so there is still one
+  number to change. At 10pt the old flat 8pt gap hid this; at 22pt the first spec row's
+  caps landed inside the descenders. Only the pages that actually PRINT a subheading use
+  it: the rest clear an empty guide line.
+  **ONLY WHAT SITS UNDER THE HEADING CLEARS THE BAND.** The floorplan image, the
+  spec-page artwork, the as-hung drawing and the flat sheet's elevation are all to the
+  RIGHT of the title column, so they rise beside it exactly as before. Pushing the
+  as-hung drawing down to the band cost it 37pt for nothing AND squeezed the bottom
+  band under it until a 12-moulding frame strip that used to drop itself squeezed in
+  instead — a threshold three points away, found by `test_shared_spec_legend`.
+  **THE TEMPLATE REMAP'S VERTICAL ANCHOR IS THE TITLE LINE, NOT THE TOP MARGIN.**
+  `_drawSpecPageTemplate` maps the design envelope onto the safety frame, and the
+  envelope's top IS `tpl.title.y` (the highest thing in every template), so mapping it
+  to `SF.t` dragged the title onto the top margin and the spec block behind it. The
+  HORIZONTAL half is untouched: a column starting on the left safety edge and a mockup
+  ending on the right one is what it was added for, and that part was right.
+  **A guide-set switch now drops the built pages** (`_setDeckGuide`), gated on `setId`
+  changing. The set does not just draw the frame, it decides the layout — margins AND
+  title lines — so switching it re-typesets the deck. `show` / `grid` / `snap` change
+  nothing that prints and must not trigger a rebuild, or a checkbox stalls the app.
+- **THE HEADING AND SUBHEADING ARE CLICK TARGETS ON THE RENDERED PAGE**
+  (`_dsTitleHandles` + `_dsOpenTitleTypePopup`). The preview is a picture of paper with
+  no DOM text to select, so this only became cheap once the title band existed: there is
+  ONE answer to where each line sits on every automated page, so two boxes can be placed
+  without knowing anything about the page underneath. They go in BEFORE `_dsRenderAnnots`,
+  so a note or arrow dropped over the title keeps the click — that one was placed by hand.
+  **WHICH PAGES PRINT A HEADING IS RECORDED, NEVER PREDICTED** (`_dsTitleSlots`,
+  written by `_drawPageTitle` / `_applySubtitleType`). A predicate by page KIND looked
+  obvious and is wrong: a fixed page renders as an element page when it has elements and
+  falls back to the prose renderer when it does not, so the answer depends on content,
+  and any hand-kept list would drift from the renderers. A spec page renders
+  asynchronously, so the overlay is built before the drawer has said anything — one
+  debounced `_dsRenderCenter()` closes that gap and cannot loop, because the second pass
+  records the same values and returns early.
+  **`_titleStyle()` STILL MEANS THE DECK VALUE.** It is what the Type defaults panel
+  reads, and folding the current page's override into it would make that panel show one
+  page's exception as if it were the house style. Renderers ask `_titleStyleFor()` /
+  `_subtitleStyleFor()`, which resolve against `_curPageKey` — set by all four render
+  paths before the body draws, the same hook `_curFooter` uses, so nothing is threaded
+  through twenty renderers.
+  **DECK-WIDE IS THE DEFAULT SCOPE AND STAYS SELECTED.** A per-page control that
+  defaults to per-page is how twenty spec pages end up with twenty headings, which is the
+  report the band came out of. `pageTitleStyle[key] = { title, sub }` mirrors
+  `pageFooters`, and **only the fields actually overridden are stored** — a page that
+  pins its size still follows the deck when the typeface changes. `_clearPageTypeStyle`
+  prunes the empty shells, or a project that has had every exception removed carries a
+  map of blank objects into every autosave and undo snapshot.
+  **`_pageTypeChanged` is DEBOUNCED**, because the colour input fires `oninput`
+  continuously while its swatch is dragged and each one would re-typeset the whole deck
+  and push an undo entry. Same shape as `_ctxScheduleHistory`.
+  **THE POPUP OPENS LEFT-ALIGNED UNDER THE LINE**, from the handle's measured rect
+  rather than at the cursor — opening at the click put the panel over the text being
+  changed, so the one thing you need to watch was the one thing hidden. The rect has to
+  be captured BEFORE `_dsRenderCenter()`, which replaces the element it came from.
+- **`FRAME_TEXT_INKS` IS THE FONT-COLOUR QUICK PICK, and it is not an invented ramp:**
+  six of its ten ARE the studio defaults (#141414 titles, #6e6e6e subheadings, #9c9c9c
+  captions, #8a8a8a thumbnail captions, #222222 body, plus white for type on a dark
+  page), so the dot under a designer's current colour is normally already lit. Ordered
+  light to dark like a tint chart, unlike the Neutrals row's black-first.
+  **THE RAMP IS GREYS AND THE ONE HUE BESIDE IT IS RED**, on its OWN family row. Red is
+  what a note or a called-out line weight is set in, so it is a real ink in this studio
+  rather than a colour you might fancy — and it is the same `#e00000` the shared Accents
+  family already offers, so a red heading and a red annotation match instead of being
+  two reds nobody chose. Its own row and not an eleventh dot on the ramp: after #000000
+  an extra dot reads as a darker step, and red is a departure from the ramp rather than
+  the end of it. Anything else that is an ink rather than a shade joins that row; a
+  colour that is neither is still a decision worth making in the picker.
+  **THE PICKS HANG OFF THE COLOUR DOT** (`_dsInkQuickPicks` + `_dsOpenInkPopover`), not
+  inline beside it. A ten-dot strip under each style is four extra rows in the Type
+  defaults column — the panel that had just been compacted to stop it scrolling. On the
+  dot it costs no height until asked for, and one implementation covers all four font
+  colours (deck styles, Type defaults, the text gear popup, the layout toolbar) rather
+  than the two someone remembers to wire up. The arrow, shape-fill, category and
+  timeline-stage pickers are deliberately NOT wired: they are not type, and this
+  strip there offers the wrong palette.
+  **A COLOUR INPUT OPENS ITS SYSTEM DIALOG ON THE CLICK, NOT THE MOUSEDOWN.** Cancelling
+  only the mousedown showed the picks while the button was held and then let the RGB
+  dialog take the screen on release — reported as “a flash of the grey colour choices and
+  then it opens the RGB picker”, with the giveaway that holding the button down showed
+  the strip perfectly. `_dsInkQuickPicks` cancels both. Custom… is the one click that IS
+  meant to open it and gets through on `input._inkNative`, a flag rather than an unbind
+  and rebind, which would leave the input bare if the dialog were dismissed with no
+  choice made.
+  **INSIDE A PANEL THAT IS ALREADY OPEN, THE STRIP GOES IN THE PANEL** (`_dsInkStripInto`,
+  and `_dsTypeSection`'s `opts.inkInline` to stop the row wiring the popover as well). A
+  popover over the heading popup is a second floating thing over the first AND the gesture
+  that fights the input it hangs off. In the heading popup it sits BETWEEN the type row it
+  changes and the scope buttons that decide who the change reaches, which is the order the
+  decision is made in. Same renderer either way — `_frameSwatchesInto` with
+  `FRAME_TEXT_INKS` — so a colour picked from a panel and one picked from a popover cannot
+  come out of different palettes.
+  **The element stays a real `<input type="color">`** — only the gesture that opens the
+  system picker moves behind Custom — so every existing handler and test that addresses
+  it by `value`/`oninput` keeps working, and the full range is still one click away.
+  **`_frameSwatchesInto` gained `opts.nearest`**, which rings the closest dot when the
+  current colour is near the strip but not on it (#1a1a1a beside #141414). Lighting
+  nothing reads as "no colour selected" — the trap `_personShadeNearestHex` was added
+  for on the scale figure. Opt-in, so the exact-match strips are unaffected.
+  **It resolves across EVERY family, never within each one.** Per-family it picks a winner
+  per ROW, which was invisible while there was one row and wrong the moment red got its
+  own: a #1a1a1a heading lit the black dot AND the red one, and the strip claimed two
+  colours were selected at once. Adding a family is what surfaces this, so check it before
+  adding a third.
+  **`_subtitleClear()` is a FUNCTION, not a constant**, for the same reason: the
+  subheading size is settable now, so a gap computed once from the default would let a
+  40pt subhead print straight through the first row under it.
+- **CHROME STAYS ON THE PAGE (`_dsPinChrome`).** The page clips at the trim, because it
+  is a picture of paper. That is right for CONTENT and wrong for the controls hanging
+  off it: the move grip sat at `left:-11px`, the gear at `right:-22px` and the zoom
+  stepper at `bottom:100%`, so on a full-bleed element every one of them was outside the
+  page and therefore **unreachable** — the control existed and could not be clicked.
+  Reported as "I lose my image placeholder setting + since it falls off the screen".
+  **CLAMPED, not moved into an unclipped layer above the page.** Every drag handler here
+  works from POINTER DELTAS (`ev.clientX - sx`), never from the handle's absolute
+  position, which is what makes clamping safe: a handle pulled inside still resizes from
+  wherever it was grabbed. It also reads correctly — a handle on the trim says "this
+  edge runs off the page". An element wholly on the page is not moved at all.
+  `Math.max` must be the OUTER call (`max(PAD, min(size - w - PAD, …))`) or an element
+  wider than the page resolves to a negative position and the control leaves the other
+  side. The clamp subtracts the chrome's own size, so its far edge is pinned too.
+  The clamp writes `left`/`top` in px and clears `right`/`bottom`/`transform`/
+  `margin-bottom` — the four properties the unclamped versions positioned with, any of
+  which would fight it. A test asserts none of them survive in any chrome builder.
+  **The page size rides on the box** (`box._page`, set at all four annotation boxes)
+  rather than being threaded through five signatures, so a new control gets the clamp by
+  asking for it. `_dsBoxWH` reads the box's own size back off what was written to it.
+  **The editable layout canvas has the same bug and is NOT fixed**: `_mbHandles`, plus
+  its text gear and pan disc, clip identically. Its boxes are positioned in PERCENT and
+  its text boxes have no fixed height, so it needs different geometry — `_dsPinChrome`
+  would need a `box._geo` in px rather than parsing `box.style`.
+  **A SELECTED IMAGE PUTS ONE CONTROL IN EACH CORNER IT CAN REACH.** Grip and zoom
+  stepper top-left, resize and corner-radius top-right, settings bottom-left. They all
+  wanted the top-right at one point, and once the clamp pulled them onto the page they
+  landed on the same few pixels.
+  **The top-right pair ladders inward** (`DS_CORNER_SLOT`, `_dsCornerSlot`): resize on
+  the corner, radius one slot in. A DIAGONAL step of d separates two squares of side n
+  only if d >= n — both are 11px, so a 10px slot left them overlapping by a pixel on
+  each axis. And the radius hangs off the resize handle's FINAL position, not the box
+  corner: the resize handle clamps to the trim on a full-bleed element, and a radius
+  measured from the unclamped corner closes the gap straight back up.
+  **The zoom stepper hangs off the grip the same way** (`box._gripBox`, written by
+  `_dsMoveGrip`), left-aligned and `DS_GRIP_GAP` below it. "Close but never touching"
+  cannot be a fixed offset from the box for exactly the same reason. The grip must be
+  BUILT before the stepper — both call sites drew the stepper first, and nothing else
+  depended on that order.
+  **The settings button is a white DISC carrying `svgEdit`** — the pen the elevation
+  frame list already means "edit this by hand" with — in the bottom-left, the one corner
+  nothing else wants. A plain floating plus is right over TEXT and over an ARROW, which
+  is why `_dsTextGearButton` and the arrow gear keep it and `test_v29` still pins that;
+  it is wrong over a PHOTOGRAPH, where a bare blue glyph reads as punctuation and then
+  disappears into the picture. It sits INSIDE the box clear of the `sw` resize handle
+  rather than straddling the corner the way the grip does at top-left: the grip already
+  covers the `nw` handle, and making a second corner unresizable to place a button is
+  not a trade worth repeating.
+  **17.46 put that button OUTSIDE the page instead**, which needed a stage wrapper and an
+  unclipped sibling layer, because the page clips at the trim and every alternative — an
+  absolutely-positioned child, a nested overlay, a `clip-path` — is a DESCENDANT and gets
+  cut. The disc solved the visibility that was reaching for, so the stage and the layer
+  went with their one consumer. If something genuinely has to sit beyond the trim again,
+  that is the shape it takes and nothing simpler works.
+  Removing it also demonstrated the landmark-slice trap this file warns about: cutting
+  between the layer's opening comment and the next function swallowed `_dsPinChrome` and
+  the whole corner ladder, which sat between them. `node --check` passed; the app died on
+  the first render. Assert what the slice CONTAINS before deleting it.
+  **The yellow handle NO LONGER READS THE RADIUS by its distance from the corner.** That
+  was the InDesign convention it was built on and it is exactly what made it collide: at
+  the default 3pt radius it sat within a pixel of the resize handle, so the affordance
+  was unusable precisely when the shape was square-cornered. It is still a radius
+  CONTROL (the drag works off the pointer delta, not the position) and the number lives
+  in the settings popup.
+  A box too small to hold three 20px controls in its corner (`_dsCornerFitsLadder`)
+  **drops** the radius handle rather than stacking it on the settings button — the house
+  rule for a control that cannot fit.
+- **A RESIZE SNAPS THE DRAGGED EDGE; A MOVE SNAPS THE BOX.** `_dsAnnSnap` (via
+  `_mbSnapBox`) had always covered dragging a box around, and its line set already
+  included the page edges — but resizing had NO snap at all, which is the gesture you
+  actually use to take an image full bleed, so the edge you pushed to the trim landed a
+  pixel or two off it every time. `_dsAnnSnapEdge` snaps ONE moving edge: offering the
+  other anchors on that axis would let the far edge, which is not moving, capture the
+  snap and drag the whole shape sideways. Alt bypasses, as it does for a move.
+- **PANNING IS GATED ON SLACK, NOT ON ZOOM.** The old test was `zoom > 1`, which
+  describes the commonest way to get slack rather than the thing that matters: squash a
+  box and cover-fit crops the image at zoom 1.0, so there is a real hidden strip to
+  slide. `_dsShapePanDown` already panned only the axis with slack, so the maths needed
+  nothing — only the gate was wrong. Reported as "I cannot pan to adjust the image
+  position when it is set to 1.0".
+- **`DS_ZOOM_STEP` IS THE ONE ZOOM GRAIN.** It was 0.5 in the stepper and 0.12 on the
+  wheel, so the same value answered to two different grains depending on how you reached
+  it, and neither let you land on a round number you had in mind. Both are 0.1; Shift
+  multiplies. The readout is an `<input>` you can type into, committing on Enter or blur
+  and **never per keystroke** — typing "2" on the way to "2.5" would re-render the page
+  at 2 and take the caret with it. `_dsZoomRound` exists because float addition does not
+  land on tenths (1.1 + 0.1 is 1.2000000000000002) and the field shows d.d, so without it
+  the stepper walks the value into digits the field cannot show and a typed 1.2 stops
+  matching a stepped 1.2.
+  Two test traps found by breaking this deliberately: a check that only calls the snap
+  HELPER cannot see the call being deleted from the resize handler, so the handler has to
+  be driven; and "0.6 does not snap to 1" proves nothing about the threshold, because
+  with a 12-column guide set almost every value is near SOME line — assert instead that a
+  snap never moves an edge further than the threshold.
+  A test trap worth keeping: `parseFloat('50%')` is `50`, so a control left on a
+  percentage centre reads as "50px from the box" and every position assertion passes on
+  a value that means something else. `test_chrome_onpage` rejects any chrome position
+  not written in px, because the clamp always writes px.
+- **`_font()` NAMES A BRAND FACE FROM ITS BYTES, NOT FROM A DOCUMENT REGISTERING IT**
+  (`_pdfBrandFams`, set once by `_loadPdfFontData`). It used to read `_pdfFontFams`,
+  which meant "registered into the CURRENT jsPDF document" — the wrong question for a
+  canvas preview, which has no document at all.
+  **`display` and `sans` share the core name `helvetica`**, so the answer is ambiguous
+  the moment it falls back: `_font('display')` returned `'helvetica'`, and
+  `CanvasPdfRec._fam()` maps that to the SANS stack. Every heading in the Deck Studio
+  preview drew in Sans. `_registerPdfFonts` is called from the PDF export and NOWHERE
+  ELSE, so a session that never generated a PDF never saw Druk in a preview — this was
+  deterministic, not a race. Messina worked the whole time only because its core name
+  (`times`) happens to be unambiguous, which is what made the bug so confusing to
+  report: "I select Sans and nothing happens, I select Messina and it changes".
+  The flag is set from the BYTES and **never cleared** — a document registering its own
+  copy must not blank the answer for a preview rendering beside it, which is what the
+  old `_pdfFontFams = {}` at the top of `_registerPdfFonts` did.
+  **A canvas render needs BOTH halves**: `_loadEditorBrandFonts` for the glyphs and
+  `_loadPdfFontData` for the name. Waiting for one and not the other draws Druk-the-shape
+  in the Sans stack. `_dsBrandFontsReady()` waits for both, in parallel, bounded, and
+  memoized for the session; both are kicked off at boot.
+  **Both canvas page renderers gate themselves** (`renderDeckPageCanvas`,
+  `renderSpecPageCanvas`) rather than trusting callers: the spec one is reached from the
+  deck renderer AND directly from the template-card pump, and a caller that forgets draws
+  the whole deck in Helvetica. The gate is memoized, so asking twice costs nothing.
+- **THE BRAND FACES LOAD IN PARALLEL, AND WHATEVER IS ON SCREEN IS TOLD WHEN THEY
+  ARRIVE.** A canvas draws with whatever the face resolves to at that instant, so a page
+  rendered before Druk and Messina land is set in the fallback stack. Reported as "the
+  previews are not rendering the headers properly... it ended up updating to what it is
+  supposed to look like as I'm writing this", which is the worst shape for this bug: it
+  looks broken and then silently corrects, so nobody reports it until they do.
+  Two causes compounded. `_loadEditorBrandFontsInner` loaded its SIX faces strictly
+  serially (fetch, decode, load, next) while every consumer waits behind
+  `_withTimeout(..., 2500)` and then renders with whatever it has — six round trips end
+  to end is how that deadline gets missed on a cold load. They load together now; each
+  settles on its own and the successes are counted afterwards, because `Promise.all`
+  rejects on the first rejection and one missing file would take the other five with it.
+  And the loader's "faces arrived" hook woke `renderMoodboardCanvas` plus — only if a
+  layout page happened to be open — the deck centre. **Nothing told the Project tab's
+  preview**, so a page drawn in the fallback face sat there until some unrelated event
+  redrew it. Any new canvas surface that survives across the font load needs adding to
+  that hook, or it inherits exactly this bug.
+  The preview was also the only consumer awaiting fonts with NO ceiling, so a fetch that
+  never settled would have left it on the HTML mock forever. One shared, bounded gate.
 - `_coverRect()` / `_cropToCanvas()` are the shared crop math for page background
   images. The DOM preview and the PDF must agree exactly — they diverged once because
   the DOM used aspect-blind CSS while the PDF used real cover-fit math.
@@ -1058,7 +1349,9 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   project — every artwork data URL — in there under one key and fails *silently* on
   quota, so cosmetic card images must not share that budget. Re-evaluate only if
   autosave moves to IndexedDB (a test pins that it hasn't).
-  `_dsTplSwatchFonts()` is ONE memoized font wait for the session. The type is baked
+  `_dsBrandFontsReady()` is ONE memoized font wait for the session, shared by the
+  template cards AND the Project tab's page preview (it was `_dsTplSwatchFonts` until
+  the preview wanted it too, at which point the name stopped being true). The type is baked
   into a cache locked for the session, so a card rendered before the brand faces land
   keeps its Arial fallbacks all session — and prewarming made that the normal case.
   Memoized because seven cards each doing two waits is fourteen pending timers.
@@ -1620,6 +1913,236 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   is only in markup SERIALIZED into an exported file, which has no `:root` to read — which
   is why the context art substitutes a real colour on the way out.
 
+- **A PER-PIECE DETAIL PAGE IS FOUR TICKS, NOT TWO TEMPLATE CARDS** (`_specSlots`,
+  `_specTplEffective`, `SPEC_SLOT_KEYS` = frame / profile / plan / elevation). The
+  bundle was the wrong unit: a deck part way through is missing these ONE AT A TIME.
+  Reported as "if I'm at a stage where I might be missing frames, elevations, plan
+  views". The frame corner and the moulding profile get SEPARATE ticks, because a
+  piece can have one photographed and not the other.
+  **The two rules pull opposite ways on purpose.** TICKED but empty **reserves** the
+  space (the shared `_specSwatchBox`, grey, with its own caption): the page being laid
+  out has to stop moving while it gets filled in, or every piece you add reflows the
+  ones already placed. UNTICKED **removes** it and everything after **packs left** —
+  untick the floorplan and the elevation takes the far-left column.
+  **THE TICKS PICK THE BASE LAYOUT, THEY DO NOT INVENT GEOMETRY.** `artSpecDetail` and
+  `frameSpecDetail` already ARE the no-frames / frames pair, so `_specTplEffective`
+  resolves to whichever one the frame ticks imply and then deletes and repacks. That is
+  what makes this safe on live decks: a project that never touches a tick renders byte
+  for byte as it did. Re-deriving one layout for both would have silently re-typeset
+  every artSpecDetail page in flight.
+  **The seeding is keyed on the field being ABSENT, not on a version counter**, and it
+  reads the template the deck is already on — an artSpecDetail deck chose "no frame
+  thumbnails", and defaulting it to all-on puts a corner sample on every page of a
+  project already sent to a client. Per-PAGE template overrides are seeded the same way
+  or one page pinned to artSpecDetail grows the strip it was pinned to avoid.
+  **Deck-wide with a per-page exception, deck-wide selected by default** — the same
+  shape and the same reason as the heading type controls. Setting a tick deck-wide
+  **clears that ONE slot** from every page exception (a page's other pins stand), or
+  "apply to all specs" visibly does not apply to all. `_clearSpecSlots` prunes the
+  empty shells.
+  **Three consumers, not one.** `_drawSpecPageTemplate` (the PDF), `_deckMockHTML` (the
+  instant preview, which IS a picture of the printed sheet) and `_dsThumbCacheKey` —
+  miss the mock and the preview lies about the export; miss the key and a thumbnail
+  keeps showing a floorplan that has been switched off.
+  **A template CARD is deliberately NOT filtered** (`ctx.swatch` takes the raw
+  template): a card shows what that layout IS, and filtering it by the deck's current
+  ticks makes it advertise the page you already have.
+  **THE PER-PIECE PICTURE CARDS ARE GONE.** They were rendered page demos under
+  "Click to switch", and once the ticks existed they were a second control for the same
+  page inviting the wrong gesture: browsing layouts rather than ticking the parts you
+  actually have. Reported as "I do not want designers clicking to switch, I want them
+  choosing to check Frame corners, Mould profile, floorplan, elevation".
+  **AND THEN THE LAYOUT BUTTONS WENT TOO: THERE IS ONE PER-PIECE LAYOUT.** A row of
+  alternatives was the same invitation the cards were. "We will only keep the one
+  layout option and designers can control what they show on page with the check boxes."
+  **That made the default load-bearing rather than cosmetic.** A new project opened on
+  `frameRight`, which drew no ticks — so with the buttons gone, every new project would
+  have started on a panel with no control in it. The default is `frameSpecDetail` now,
+  and so is the fallback for an unreadable stored value.
+  **`_specTplSlotAware` therefore covers `frameRight` and the legacy `classic` too.**
+  They re-typeset onto this geometry, which is the lesser evil: the alternative was a
+  page with no control at all. `SPEC_SLOT_SEEDS` is what makes it safe — one table
+  saying what each old layout ACTUALLY drew, so a frameRight deck seeds elevation ON and
+  floorplan and frame strip OFF and keeps the parts it had even though the column widths
+  move. The deck seed and the per-page seed read that same table or they drift.
+  **`custom` is deliberately NOT slot-aware.** It is `freeform` — a page somebody placed
+  by hand — and resolving it onto this geometry would throw that work away. It keeps its
+  own renderer, and the panel prints a sentence saying there is nothing to tick rather
+  than showing an empty section, because an empty panel reads as broken.
+  **The flat sheet's bail RETURNS before any per-piece control is built.** It was an
+  inline `!_flatPage &&` guard on the ticks line, which is the same behaviour and a
+  worse shape: the invariant the tests here read is "the bail comes first", and an
+  inline guard makes that untrue on paper while staying true in fact.
+  A negative control caught two things worth keeping in mind. Asserting only that the
+  default is *slot-aware* let a real regression through, because `frameRight` is
+  slot-aware too and seeds two of the four parts OFF — the check has to assert the
+  seeded TICKS, not the template name. And the `classic` seed row needed its own check;
+  one table does not mean one test.
+  **AND THEN GROUP A/B/C GOT THE SAME TREATMENT.** The line drawn one version earlier —
+  "a per-piece page has PARTS, a group page has an ARRANGEMENT" — did not survive
+  contact: the four group arrangements differed mainly in how the LEFT COLUMN was built,
+  and the consolidated one is what a salon hang wants. **Shared specs is the group
+  default and the only group layout offered**, and the four cards are gone.
+  **A GROUP PAGE KEEPS ITS OWN TICK MAP** (`specGroupSlots`, `_specGroupSlots`,
+  `_setSpecGroupSlot`), and that is not tidiness — the two page kinds disagree about the
+  DEFAULTS. A per-piece page has always drawn its elevation; a group page's wall
+  thumbnail was `scaleOpts.elevThumb`, **off** by default, and no group page has ever
+  had a floorplan. One shared map would have grown an elevation and a floorplan onto
+  every group page of every deck in flight. Same four names, same two rules, different
+  stored value. `_specSlotsFor(tplKey, ovKey)` is the one resolver, so a renderer asks
+  what a page shows without knowing which map answers.
+  The seed reads what each deck already drew: `elevation` from `scaleOpts.elevThumb`,
+  `frame`/`profile` on (the strip printed when there was room), `plan` off.
+  **THE BAND PACKS RIGHT TO LEFT: elevation, floorplan, profile, corner.** Each
+  thumbnail anchors to the box its RIGHT-hand neighbour actually drew (`_thumbBox`,
+  rewritten by each in turn) rather than to a column of its own, so unticking one slides
+  the rest right instead of leaving a hole. The corner and profile stay INTERLEAVED per
+  moulding inside `_drawFrameStrip` (`box.corner` / `box.profile`, defaulted true so
+  every existing caller is unchanged): a shared-spec page carries three mouldings, and
+  splitting them into two blocks would put a corner three cells from its own profile.
+  **The `Elevation thumbnail (bottom-right)` checkbox is gone** — the Elevation tick is
+  the one answer, and two controls for one setting is how a designer comes to believe
+  they are two settings.
+  **A template CARD pins the plan OFF.** The band is one row and the strip is the Shared
+  specs card's whole point; a fourth thumbnail pushed three mouldings past
+  `_drawFrameStrip`'s fit check and the card silently lost the thing it exists to show.
+  A card advertises the layout; the ticks are the page.
+  **NOTHING PAINTS TEMPLATE CARDS NOW, so the prewarm is off.** It rendered seven real
+  pages (~4.5s) on every entry to the deck view to fill a cache no one reads. The
+  RENDERER is deliberately still here and still tested — it is correct and a picker may
+  want it back — but if the cards never return, `_dsPrewarmTplSwatches`,
+  `_dsQueueTplSwatch`, `_dsPaintTplSwatch`, `_dsTemplateSwatchHTML`, `_specTplDemo*` and
+  `SPEC_TPL_DEMO_*` are the block to remove together.
+  A negative control was worth its weight here: SOURCE-ORDER checks on the band passed
+  every break that moved a thumbnail, dropped its rect handoff, or stopped the frame
+  ticks reaching the strip. Those four are RENDERED now and read off the captions, which
+  is the one mark a band thumbnail leaves whether it drew content or reserved its space.
+  And "both frame ticks off" proves nothing about the strip, because `_wantStrip` gates
+  it before `_drawFrameStrip` is called — the case that reaches the strip is ONE tick
+  off, and what changes is its width.
+  Removing the grid re-broke a check that sliced `S.slice(i, i + 4000)` — a character
+  distance, already widened once from 1600. The comments above the branch grew and the
+  append fell outside the window, which reads exactly like the gate having moved. It
+  slices between landmarks now. Two more test edits hit the backtick-in-a-template-
+  literal trap and one hit quote-hunting inside one; prefer `indexOf` and counts.
+  **The strip and the envelope anchor on whichever column survives**, never on
+  `tpl.plan`: with the floorplan unticked the elevation IS the left column, and
+  `_tplDesignFrame` measuring from a plan that is no longer on the page maps the strip
+  onto empty space.
+  Two traps for the next editor. `_dsSpecSlotsInto` is called AFTER `const _flatPage`
+  is declared — it reads it, and a `const` read above its declaration is a TDZ throw
+  that takes the whole panel out. And `tests/test_egd_wf_product.js` is mostly CRLF, so
+  a multi-line edit anchor written with `
+` matches nothing there, exactly as in
+  style.css.
+- **THE IMAGE CODE IS `_dsImageCode` (the file name, less its last extension), AND THE
+  GEAR POPUP SHOWS IT WHETHER OR NOT THE CAPTION PRINTS IT.** It used to be reachable
+  only by turning the caption ON and switching its source to Code — but that is a
+  decision about the DECK, and wanting the code is usually a decision about somewhere
+  else entirely: pasting it into a Dropbox or Finder search to find the original file.
+  Most boxes never turn the caption on at all.
+  ONE definition, shared with `_dsResolveCaptionText`, or the panel shows one string
+  while the page prints another — worse than not showing it. Only the LAST extension
+  goes, because the dots in a real code are part of it.
+  The field is **readonly**, so it cannot drift from the file it names, and it exists
+  so Copy has something to select.
+  **Copy is the shared `svgDup` glyph, LEFT of the field.** That constant is already the
+  universal copy icon (two overlapping rounded rectangles, the Dupe column's), and copy
+  and duplicate are the same idea — a second hand-drawn version is how two of them end
+  up subtly different. Left, because the field is the thing being read, so the action
+  belongs ahead of it; an icon, so the code gets the whole width of the row. Addressed
+  by `data-act="copy-code"`, since there is no label text to match on.
+  **The field is `flex: 1 1 60px`, not `1 1 auto`.** In a WRAPPING flex row an item is
+  wrapped on its hypothetical size before it is ever shrunk, and an `<input>` reports a
+  content width around 180px whatever `min-width: 0` says — which is why the button
+  beside it kept dropping onto a line of its own. Same trap for any control put next to
+  an input in these popups. An image with no name on record says so rather than
+  offering an empty box; there is nothing to recover it from.
+  **`_dsCopyText` needs its fallback.** `navigator.clipboard` is undefined outside a
+  secure context and this app is opened from `file://` about as often as from https, so
+  the async API alone leaves the button dead on exactly the machines a designer digs
+  through a Dropbox folder on. The fallback selects the field that is already on screen
+  and asks the document to copy; if even that is refused the text is left SELECTED,
+  which is itself the answer.
+- **THE GEAR POPUP IS A TABLE: A LABEL COLUMN, NOT A HEADER LINE PER SECTION.** Eleven
+  sections each spending a line on their own name ran it the full height of the screen
+  and it still scrolled. `sec(label, tip)` returns the control body; `subRow()` is a
+  continuation line indented to the same column; `swIn()` is the block form, because
+  `_frameSwatchesInto` lays out its own family rows and a flex body would put the
+  families side by side. Same move `_dsTypeSection` made for the type rows, and the
+  same fixed label width so the sections read as a table.
+  236px → **340px**, which is what pays for the column, and the box comes out roughly
+  square. Two labels are shortened to fit it (Weight, Radius) and carry their full
+  wording as a tooltip; a test pins that a shortened label still has one.
+  **`.action-btn` IS `width: 100%`, so any button with neither a width nor a `flex` is a
+  full-width slab the moment it wraps.** That is all the Pill button ever was — it was
+  appended to the radius row, overflowed at 236px, and landed on its own line at full
+  width. Size a button that is meant to be small.
+  **The `sec` WRAPPER deliberately has no `gap` and no `flex-wrap`**: it holds exactly
+  two things, the label and the control body, and the label must stay beside its
+  controls. Its spacing is the label's own `margin-right`. That keeps "a flex row with a
+  gap must wrap" true of every row in the popup that actually holds controls, which is
+  what `test_fp`'s spill check reads.
+- **FILLING A SHAPE WITH AN IMAGE IS ONE OPERATION: `_dsSetShapeImage`.** It was
+  written out twice and had drifted. The Replace… / Add image… button in the gear
+  popup goes through `_dsHandleImageFile`; dropping a file straight onto the box goes
+  through `_dsReadImageToShape`. Only the SECOND recorded `fileName`, and that field is
+  the only thing the caption's **Code** source can read — so an image added the way the
+  popup offers could never use it, and the Code button sat disabled directly underneath
+  the button that had just failed to enable it. Reported as "my image placeholder
+  settings is unable to switch over to image code for the caption".
+  The name is written **unconditionally**, never only when the field is empty: a
+  replacement has to take the new file's name or the caption goes on quoting a picture
+  that is no longer in the box, and a nameless image must clear it so Code correctly
+  disables itself again.
+  The two paths still **decode and downscale separately** — 1100px long edge from the
+  popup, 1400px from a drop — which predates this and is deliberately left alone, but it
+  does mean the same photo lands at two resolutions depending on how you added it. What
+  they share is what it MEANS to fill a shape, which is where the drift was.
+  Code stays disabled on an image that predates the field, with a title saying to
+  re-upload: the name was never stored, so there is nothing to recover.
+- **THE ELEVATION'S GROUND IS NOT A THEME COLOUR (`--elev-ground`).** The drawing is
+  print colours in BOTH themes — the wall, the dimension ink and every line weight come
+  from `annotationStyle` and never from a theme var — so the surface it sits on has to be
+  a print surface too. `.workspace` read `--bg-main`, so in dark mode the board went
+  #1e1e1e and the outer wall dimensions, which are drawn OUTSIDE the wall in near-black,
+  were **invisible**: the measurements were on screen and could not be read.
+  Declared once in `:root` and deliberately **NOT overridden in `.light-theme`** — a value
+  that is the same in both themes is not a theme value, and overriding it is how it
+  silently becomes one again.
+  A shade **darker** than `#wall` (#f0f2f5), the way a pasteboard sits under a sheet, so
+  the wall still reads as the page. Lighter and the wall reads as a hole; equal and the
+  page has no edge at all; a test pins both directions.
+  The two floating buttons on it keep the APP's theme, because they are chrome rather
+  than drawing. Nothing exported is affected: `html2canvas` captures `#export-wrap` with
+  `backgroundColor: null` and that element is `background: transparent`, so the board is
+  never in the picture.
+  `.workspace` is the ONE scroll region of that kind in the app (`#scrollArea`), which is
+  why the rule needs no scoping — but `_elevWrapPadding()` measures it, so keep changes
+  here to paint.
+- **LIGHT MODE IS OFF-WHITE, AND ONLY THE INPUT IS PURE WHITE.** `--bg-nav`, `--bg-panel`
+  and `--bg-input` were ALL `#ffffff`, so the nav, every panel and every field were one
+  flat sheet of paper and the app glared. Reported as "can we make the light theme mode
+  less intense with the white".
+  The surfaces now step light to dark — input, panel, nav, subpanel, main — and that
+  ordering is the rule, not the five particular values. It also fixed something that was
+  never right: `--bg-panel` and `--bg-input` being the same colour meant a field in light
+  mode was told apart from the panel behind it **by its border alone**. `--bg-input`
+  stays `#ffffff` deliberately: it has to be the lightest thing on screen or a text box
+  stops looking like somewhere you can type.
+  Safe to change because the deck preview reads NO theme token (see "the deck preview is
+  a picture of paper"), so a softer panel cannot move a colour the PDF prints.
+- **THE THEME TOGGLE SHOWS THE MODE IT WILL SWITCH TO.** It carried a moon in both
+  themes, so the one control whose whole job is to change something never changed itself
+  — there was no feedback that the click had landed. Sun while dark, moon while light.
+  Two `<svg>`s and a CSS rule (`.theme-icon-sun` / `.theme-icon-moon`), the same swap
+  `.logo-dark` / `.logo-light` two lines above it uses, so no JS has to remember to keep
+  an icon in step — `toggleTheme()` stays one line and a test pins that it does.
+  The sun is a stroked circle plus eight rays, because `.svg-icon` is `fill: none;
+  stroke: currentColor` — a filled disc would come out as an empty ring.
+  **`style.css` HAS MIXED LINE ENDINGS** (1728 CRLF among 2058 lines), so a multi-line
+  anchor written with `\n` matches NOTHING and an edit script reports "not found" on text
+  that is plainly there. Edit it line by line, or try both endings.
 - **A CLASS SET IS NOT A STYLE APPLIED — `.action-btn.active` now exists.**
   `.action-btn` is on 154 elements and had NO `.active` rule anywhere, so a button
   marked active tracked its state perfectly and painted nothing. That is most of why
