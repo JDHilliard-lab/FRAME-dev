@@ -70,6 +70,23 @@ const path = require('path');
     if (line.indexOf('ctx.swatch') < 0) throw new Error('swatch mode goes through the tick filter, so the cards restyle themselves');
   });
 
+  check('the cache key carries the GROUP ticks as well as the per-piece ones', () => {
+    // A group page keeps its own tick map, and it was missing from this key - so the
+    // only way to make a group tick show up was to wipe the WHOLE cache, which is what
+    // rebuilt all 86 pages of a deck on every click. Reported as a lot of flickering
+    // when turning check boxes off and on.
+    const b = codeOnly(fnBody('_dsThumbCacheKey'));
+    if (b.indexOf('_specGroupSlots(') < 0) throw new Error('the cache key does not carry the group ticks');
+  });
+
+  check('a tick does NOT wipe every cached thumbnail', () => {
+    // With the ticks in the key, the pages a tick can change miss on their own. Wiping
+    // the lot sends every cover, floorplan, breaker and untouched spec page back to a
+    // placeholder for no reason.
+    const b = codeOnly(fnBody('_dsSpecSlotsInto'));
+    if (b.indexOf('_dsThumbCache = {}') >= 0) throw new Error('the ticks panel still clears the whole thumbnail cache');
+  });
+
   check('the thumbnail cache key moves when a tick does', () => {
     // Keyed only on the template, a thumbnail keeps showing a floorplan that has
     // been switched off - the same trap the template key itself was added for.
@@ -294,7 +311,35 @@ const path = require('path');
     '  _mbMigratePages();',
     '  if (editorialContent.specSlots.frame !== true) throw new Error("a stored tick was overwritten by the seeding");',
     '  editorialContent = _editorialDefaults();',
+    '});',
+    '__check("EXACT BUG: a group tick moves only the pages it can change", () => {',
+    '  editorialContent = _editorialDefaults();',
+    '  editorialContent.specTemplate = "setLegend";',
+    '  const grp = { kind: "spec", title: "ART-1", row: { id: "ART-1" }, _ovKey: "ART-1" };',
+    '  const cover = { kind: "fixed", fixed: "cover" };',
+    '  const g0 = _dsThumbCacheKey(grp), c0 = _dsThumbCacheKey(cover);',
+    '  _setSpecGroupSlot(null, "plan", !_specGroupSlots(null).plan, "deck");',
+    '  const g1 = _dsThumbCacheKey(grp), c1 = _dsThumbCacheKey(cover);',
+    '  if (g0 === g1) throw new Error("the group page kept its key, so its thumbnail goes stale");',
+    '  if (c0 !== c1) throw new Error("the cover changed key off a spec tick, so it rebuilds for nothing");',
+    '  editorialContent = _editorialDefaults();',
+    '});',
+    '__check("EXACT BUG: ticking a box leaves every other page its thumbnail", () => {',
+    '  editorialContent = _editorialDefaults();',
+    '  editorialContent.specTemplate = "setLegend";',
+    '  const desc = { kind: "spec", title: "ART-1", row: { id: "ART-1" }, _ovKey: "ART-1" };',
+    '  const other = { kind: "fixed", fixed: "cover" };',
+    '  _dsThumbCache = {};',
+    '  _dsThumbCache[_dsThumbCacheKey(other)] = "painted";',
+    '  const host = document.createElement("div");',
+    '  _dsSpecSlotsInto(host, desc, "ART-1", true);',
+    '  const cb = host.querySelector("input[data-slot=plan]");',
+    '  if (!cb) throw new Error("no plan checkbox in the group panel");',
+    '  cb.checked = !cb.checked; cb.onchange();',
+    '  if (_dsThumbCache[_dsThumbCacheKey(other)] !== "painted") throw new Error("an unrelated page lost its thumbnail to a spec tick");',
+    '  editorialContent = _editorialDefaults(); _dsThumbCache = {};',
     '});'
+
   ].join('\n');
 
   try {

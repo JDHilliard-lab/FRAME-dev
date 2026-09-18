@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.58';
+const APP_VERSION = '17.60';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -14889,7 +14889,11 @@ function _dsSpecSlotsInto(host, desc, ovKey, group) {
             // LIVE. The centre preview is the page being laid out, so it is redrawn
             // at once; the rail follows on its own pump rather than making the tick
             // wait for every thumbnail in the deck.
-            _dsThumbCache = {};
+            // NO BLANKET CACHE WIPE. The ticks are in _dsThumbCacheKey, so the pages this
+            // can change miss on their own and everything else - covers, floorplans,
+            // breakers, install pages, every spec page a page-scoped tick does not
+            // touch - keeps the thumbnail it already has. Wiping the lot is what made a
+            // single tick rebuild the whole deck and flicker through it.
             _dsRenderTools(); _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
         };
         row.appendChild(cb);
@@ -14924,7 +14928,11 @@ function _dsSpecSlotsInto(host, desc, ovKey, group) {
             clr(ovKey); _dsSlotScope = 'deck';
             if (typeof pushHistory === 'function') pushHistory();
             if (typeof scheduleAutosave === 'function') scheduleAutosave();
-            _dsThumbCache = {};
+            // NO BLANKET CACHE WIPE. The ticks are in _dsThumbCacheKey, so the pages this
+            // can change miss on their own and everything else - covers, floorplans,
+            // breakers, install pages, every spec page a page-scoped tick does not
+            // touch - keeps the thumbnail it already has. Wiping the lot is what made a
+            // single tick rebuild the whole deck and flicker through it.
             _dsRenderTools(); _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
         };
         wrap.appendChild(rst);
@@ -21529,7 +21537,13 @@ function _dsThumbCacheKey(desc) {
             // The ticks change what the page CONTAINS, so they belong in the key for
             // the same reason the template does: a thumbnail keyed only on the
             // template keeps showing a floorplan that has been switched off.
-            if (_specTplSlotAware(tpl)) { const sl = _specSlots(ok); k += '|' + SPEC_SLOT_KEYS.map(n => sl[n] ? 1 : 0).join(''); }
+            // A GROUP PAGE HAS ITS OWN TICK MAP AND IT WAS MISSING FROM THIS KEY, so the
+            // only way to make a group tick show up was to wipe the WHOLE cache - which
+            // is what made every tick rebuild all 86 pages of a deck while you watched.
+            // With the group slots in the key, the pages a tick can change miss and
+            // rebuild and every other page keeps the thumbnail it already had.
+            if (SPEC_TEMPLATES[tpl] && SPEC_TEMPLATES[tpl].group) { const gs = _specGroupSlots(ok); k += '|g' + SPEC_SLOT_KEYS.map(n => gs[n] ? 1 : 0).join(''); }
+            else if (_specTplSlotAware(tpl)) { const sl = _specSlots(ok); k += '|' + SPEC_SLOT_KEYS.map(n => sl[n] ? 1 : 0).join(''); }
         } else if (desc && desc._specTpl) {
             k += '|' + desc._specTpl;
         }
@@ -27217,7 +27231,19 @@ function _drawFrameStrip(doc, frames, box) {
         // from the one card that exists to show it. Deliberate headroom, not a guess
         // at the drawing's aspect.
         const pw = !wantProfile ? 0 : (f.profileImg ? wideAt(f.profileImg) : (box.swatch ? imgH * 0.6 : 0));
-        return { f: f, cw: cw, pw: pw, w: Math.max(MIN_CELL, cw + (pw ? 3 + pw : 0)) };
+        // A CELL IS AT LEAST AS WIDE AS ITS OWN CODE. The label is left-aligned on the
+        // cell, and a corner chip is routinely much narrower than the code printed
+        // under it - MICH 432-29 measures ~33pt at 6.5pt against a 26pt floor cell - so
+        // the RIGHTMOST label ran past box.right, which on a group page IS the right
+        // safety guide. Reported as text falling outside the guide safety area with
+        // only FRAME CORNER ticked.
+        // Widening the cell rather than clamping or truncating the label: the strip
+        // already drops itself whole when it will not fit box.maxW, and every code is
+        // printed in full as a Frame Code row in the spec block, so a strip that gives
+        // way is a far better outcome than a label shortened to three characters.
+        let lw = 0;
+        try { doc.setFont(_font('sans'), 'bold'); doc.setFontSize(6.5); lw = doc.getTextWidth(('' + (f.code || '')).slice(0, 18)) || 0; } catch (e) {}
+        return { f: f, cw: cw, pw: pw, w: Math.max(MIN_CELL, lw, cw + (pw ? 3 + pw : 0)) };
     });
     const total = cells.reduce((a, c) => a + c.w, 0) + GAP * (cells.length - 1);
     if (total > box.maxW) return null;
@@ -27244,6 +27270,17 @@ function _drawFrameStrip(doc, frames, box) {
             _specSwatchBox(doc, x + drawnW + 3, box.top, c.pw, imgH);
         }
         doc.setFont(_font('sans'), 'bold'); doc.setFontSize(6.5); doc.setTextColor(60, 60, 60);
+        // THE CODE MUST NOT RUN PAST THE STRIP'S RIGHT EDGE, which on a group page IS
+        // the right safety guide. The label is left-aligned on its own cell, but a cell
+        // is only as wide as its chip (MIN_CELL 26pt at the floor) while a code like
+        // MICH 432-29 measures ~33pt at 6.5pt - so the RIGHTMOST label hung outside the
+        // guides with the chip correctly inside them. Reported as \"images or text
+        // going outside the guide safety area\".
+        // Shifted left to fit rather than truncated: the gap between cells is 10pt so
+        // the shift is invisible, and the code is the one string on this strip that
+        // identifies the moulding. Floored at the strip's own left bound so a code
+        // wider than the whole band cannot walk out of the other side.
+        // Left-aligned on the cell, which is now guaranteed wide enough to hold it.
         doc.text(('' + (f.code || '')).slice(0, 18), x, box.top + imgH + LABEL_H - 1);
         x += c.w + GAP;
     });
@@ -27411,14 +27448,33 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         // instead, so the group always ends exactly on it.
         const regX = LX + SW * 0.395, regY = TY + SH * 0.118, regW = RX - regX;
         const regH = bottomBand ? (BB - regY) * 0.72 : (BB - regY);
+        // THE GROUP HANGS FROM A FIXED TOP, NOT CENTRED IN WHATEVER IS LEFT.
+        // The region's HEIGHT changes with the ticks - 72% of the page when the bottom
+        // band is on, all of it when every tick is off - and the artwork was centred in
+        // it, so turning the band off dropped the frames to the middle of a page-tall
+        // region and turning it on slid them down onto the thumbnails. Reported as
+        // “make sure the frames do not fall to the bottom of the page if I uncheck all
+        // options” and “the frames are too close to the thumbnail placeholders”.
+        //
+        // The top is the line the SPEC COLUMN starts on (the same GB.body + 8 that
+        // column uses further down), so the two halves of the page start together and
+        // the drawing does not move when a tick does. Floored at regY, which is the
+        // region's own top, so this can never push the art ABOVE its region.
+        //
+        // regY itself is deliberately NOT moved: 16.xx pushed it down to the title band
+        // and that cost the drawing 37pt AND squeezed the bottom band until a 12-moulding
+        // frame strip that used to drop itself squeezed in instead, a threshold three
+        // points away that test_shared_spec_legend still guards.
+        const artTop = Math.max(regY, GB.body + 8);
+        const artH = Math.max(20, (regY + regH) - artTop);
         const placed = [];
         const haveGeo = geo.length && geo.every(g => g && g.w > 0 && g.h > 0);
         if (haveGeo) {
             let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
             geo.forEach(g => { minX = Math.min(minX, g.x); minY = Math.min(minY, g.y); maxX = Math.max(maxX, g.x + g.w); maxY = Math.max(maxY, g.y + g.h); });
             const bbW = Math.max(0.01, maxX - minX), bbH = Math.max(0.01, maxY - minY);
-            const sc = Math.min(regW / bbW, regH / bbH);
-            const offX = regX + (regW - bbW * sc) / 2, offY = regY + (regH - bbH * sc) / 2;
+            const sc = Math.min(regW / bbW, artH / bbH);
+            const offX = regX + (regW - bbW * sc) / 2, offY = artTop;
             // elevation y is measured bottom-up (larger y = higher on the wall),
             // so flip it into top-down page space or the stack comes out upside down.
             members.forEach((r, i) => { const g = geo[i]; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: offX + (g.x - minX) * sc, by: offY + (maxY - (g.y + g.h)) * sc, bw: g.w * sc, bh: g.h * sc }); });
@@ -27427,8 +27483,8 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
             const gap = 0.5;
             const totalW = dims.reduce((a, d) => a + d.w, 0) + gap * (dims.length - 1);
             const maxH = dims.reduce((a, d) => Math.max(a, d.h), 0);
-            const sc = Math.min(regW / totalW, regH / maxH);
-            let x = regX + (regW - totalW * sc) / 2; const baseY = regY + regH;
+            const sc = Math.min(regW / totalW, artH / maxH);
+            let x = regX + (regW - totalW * sc) / 2; const baseY = artTop + maxH * sc;
             members.forEach((r, i) => { const d = dims[i]; const bw = d.w * sc, bh = d.h * sc; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: x, by: baseY - bh, bw: bw, bh: bh }); x += bw + gap * sc; });
         }
         const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
@@ -27471,7 +27527,13 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         }
         // Bottom band: image-code legend (left) and/or elevation thumbnail (right).
         if (bottomBand) {
-            const bandY = regY + regH + 12, bandBot = BB;
+            // 22pt, not 12. Top-anchoring the artwork opens a real gap whenever the
+            // group is width-constrained, which is most of them - but a tall group
+            // fills its height exactly and then 12pt was a hairline between the art and
+            // the thumbnails under it. The band pays the 10pt out of its own height,
+            // which makes the frame strip MORE likely to fit rather than less: its cell
+            // widths derive from the band height, and it is width that drops it.
+            const bandY = regY + regH + 22, bandBot = BB;
             let legendRight = regX + regW;
             let _thumbBox = null;               // the elevation thumbnail's rect, so the frame strip can match it
             if (_wantElev && SWATCH) {

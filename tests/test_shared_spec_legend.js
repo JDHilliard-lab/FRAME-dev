@@ -457,6 +457,198 @@ const fs = require('fs');
     // or reserved its space, so the order can be read off the captions alone.
     const __capX = (ops, word) => { const o = (ops || []).find(op => op && op.t === 'text' && op.str === word); return o ? o.x : null; };
 
+    // The artwork's top must not move when a tick does. The region's HEIGHT changes
+    // with the bottom band, and the art used to be CENTRED in it, so turning every
+    // tick off dropped the frames into the middle of a page-tall region.
+    // Read off the LETTER and the IMAGE CODE, not the frame mockups: a mockup is a
+    // rasterised canvas and nothing rasterises in jsdom, while both of these are drawn
+    // from the slot geometry and survive a failed render on purpose (that is why the
+    // letter is drawn outside the mockup try in the first place).
+    //
+    // The letter sits 2pt above its slot; the code sits 7pt below it.
+    const __artBox = (ops) => {
+      const L = (ops || []).filter(o => o && o.t === 'text' && /^[A-Z]$/.test(o.str || ''));
+      // An image code has a dot and NO spaces. Without the space test this matched the
+      // footer's copyright line, which sits below the bottom guide and reported the art
+      // as ending 27pt past the page.
+      const C = (ops || []).filter(o => o && o.t === 'text' && (o.str || '').indexOf('.') > 0
+        && (o.str || '').indexOf(' ') < 0 && (o.str || '').length > 8 && o.y < 470);
+      if (!L.length) return null;
+      const top = Math.min.apply(null, L.map(o => o.y)) + 2;
+      const bot = C.length ? (Math.max.apply(null, C.map(o => o.y)) - 7) : top;
+      return { top: top, bot: bot };
+    };
+    const __artTop = (ops) => { const b = __artBox(ops); return b ? b.top : null; };
+
+    __checkAsync('EXACT BUG: the frames do not fall down the page when every tick is off', async () => {
+      __bandSetup({}, true);
+      const all = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(all, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const topAll = __artTop(all.ops);
+      __bandSetup({ frame: false, profile: false, plan: false, elevation: false }, true);
+      const none = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(none, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const topNone = __artTop(none.ops);
+      if (topAll == null || topNone == null) throw new Error('no artwork drawn in one of the two passes');
+      if (Math.abs(topNone - topAll) > 1) throw new Error('the frames moved when the ticks changed: ' + topAll.toFixed(1) + ' with all on, ' + topNone.toFixed(1) + ' with all off');
+    });
+
+    __checkAsync('EXACT BUG: with NO wall either, the frames still hang from the top', async () => {
+      // No wall means no geometry, so the pieces line up on a baseline - the path that
+      // used to bottom them out on the page edge. Driven separately because the check
+      // above has a wall and never reaches it.
+      __bandSetup({}, false);
+      const all = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(all, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const topAll = __artTop(all.ops);
+      __bandSetup({ frame: false, profile: false, plan: false, elevation: false }, false);
+      const none = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(none, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const topNone = __artTop(none.ops);
+      if (topAll == null || topNone == null) throw new Error('no artwork drawn in one of the two passes');
+      if (Math.abs(topNone - topAll) > 1) throw new Error('the baseline fell with the ticks: ' + topAll.toFixed(1) + ' vs ' + topNone.toFixed(1));
+      const SR = _safeFrameRect(936, 540);
+      if (topAll > SR.T + (SR.B - SR.T) * 0.45) throw new Error('the frames start halfway down the page: ' + topAll.toFixed(1));
+    });
+
+    __checkAsync('a TALL group is scaled to the height it actually has', async () => {
+      // Every other fixture here is width-constrained, so the height term never
+      // decides and swapping it for the old region height changed nothing.
+      // Two wide pieces STACKED, so the bounding box is tall and the height term wins,
+      // while each piece stays wide enough to print its code - which is the only mark
+      // at the BOTTOM of the artwork that survives a jsdom render.
+      const tall = SET.slice(0, 2).map(r => Object.assign({}, r, { extW: 72, extH: 38 }));
+      __bandSetup({}, true);
+      elevations = [{ name: 'WALL A', wallW: 240, wallH: 96, frames: tall.map((r, i) => ({ id: r.id, letter: L6[i], x: 0.2, y: 0.1 + i * 0.45, w: 0.3, h: 0.4, active: true, dimTo: [] })) }];
+      dashProjectData = tall.map(r => Object.assign({}, r));
+      const rec = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(rec, {}, 1, {}, { rep: tall[0], members: tall, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const ops = rec.ops || [];
+      // The pieces themselves are frame mockups rasterised onto a canvas, which draws
+      // nothing under jsdom, so the artwork's BOTTOM is derived from the two letters:
+      // they are 0.45 of a 96in wall apart, which gives the scale, and the lower piece
+      // is 0.4 of that wall tall.
+      const LY = ops.filter(o => o && o.t === 'text' && /^[AB]$/.test(o.str || '') && o.x > 380).map(o => o.y);
+      if (LY.length !== 2) throw new Error('expected two letters, got ' + LY.length);
+      const lo = Math.max.apply(null, LY), hi = Math.min.apply(null, LY);
+      const sc = (lo - hi) / (0.45 * 96);
+      const artBot = lo + 0.4 * 96 * sc;
+      const belowTops = ops.filter(o => o && o.t === 'rect' && o.a && o.a[1] > artBot - 60).map(o => o.a[1]);
+      if (!belowTops.length) throw new Error('no band below a tall group');
+      const bandTop = Math.min.apply(null, belowTops);
+      if (bandTop - artBot < 15) throw new Error('a tall group crowds the band: ' + (bandTop - artBot).toFixed(1) + 'pt of clearance');
+    });
+
+    __checkAsync('the frames start on the line the spec column starts on', async () => {
+      // What the top is anchored TO, not just that it is stable: the two halves of the
+      // page begin together. Floored at the region top so it can never ride above it.
+      __bandSetup({}, true);
+      const rec = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(rec, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const top = __artTop(rec.ops);
+      const GB = _titleBand(936, 540);
+      if (top == null) throw new Error('no artwork drawn');
+      if (Math.abs(top - (GB.body + 8)) > 2) throw new Error('the frames do not start on the spec line: ' + top.toFixed(1) + ' vs ' + (GB.body + 8).toFixed(1));
+    });
+
+    __checkAsync('EXACT BUG: the frames clear the thumbnails under them', async () => {
+      // Reported with the elevation ticked but no wall yet, so the band is all
+      // reserved boxes - which is exactly when the art was closest to them.
+      __bandSetup({}, false);
+      const rec = new CanvasPdfRec(936, 540);
+      await _drawSpecSetPage(rec, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+      const ops = rec.ops || [];
+      const box = __artBox(ops);
+      if (!box) throw new Error('no artwork drawn');
+      const artBot = box.bot;
+      // The TOP of the nearest box below the art, not a caption - a caption sits under
+      // its own box, which left this slack enough to pass with a 2pt gap.
+      const belowTops = ops.filter(o => o && o.t === 'rect' && o.a && o.a[1] > artBot + 1).map(o => o.a[1]);
+      if (!belowTops.length) throw new Error('no reserved box in the band below the artwork');
+      const bandTop = Math.min.apply(null, belowTops);
+      if (bandTop - artBot < 15) throw new Error('the artwork crowds the band: ' + (bandTop - artBot).toFixed(1) + 'pt of clearance');
+    });
+
+    __checkAsync('the artwork never rides above the region it is placed in', async () => {
+      // On the Farmboy sets the spec line sits well below the region top, so the floor
+      // under it never binds. A set that declares no title lines puts the line ABOVE
+      // the region - which is the only place removing the floor shows.
+      const _wasGuide = _guidePref().setId;
+      try {
+        // The set has to be chosen AFTER the fixture: __bandSetup rebuilds
+        // editorialContent, which is where the guide pref lives, so setting it first
+        // silently rendered on the default set and the check proved nothing.
+        __bandSetup({}, true);
+        _setDeckGuide({ setId: 'g_margins' });
+        const SR = _safeFrameRect(936, 540);
+        const regY = SR.T + (SR.B - SR.T) * 0.118;
+        const GB = _titleBand(936, 540);
+        if (GB.body + 8 >= regY) throw new Error('this set does not exercise the floor: spec line ' + (GB.body + 8).toFixed(1) + ' vs region top ' + regY.toFixed(1));
+        const rec = new CanvasPdfRec(936, 540);
+        await _drawSpecSetPage(rec, {}, 1, {}, { rep: SET[0], members: SET, key: 'ART-7.7' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+        const top = __artTop(rec.ops || []);
+        if (top == null) throw new Error('no artwork drawn');
+        if (top < regY - 4) throw new Error('the artwork starts above its own region: ' + top.toFixed(1) + ' against a region top of ' + regY.toFixed(1));
+      } finally { _setDeckGuide({ setId: _wasGuide }); }
+    });
+
+    // A stub doc that measures the way jsPDF does for this purpose: a width per
+    // character. _drawFrameStrip is driven DIRECTLY because the strip needs real
+    // frames in the library and its own box, and what is being asserted is one
+    // coordinate rather than a whole page.
+    const __stripDoc = (perChar) => ({
+      ops: [],
+      setFontSize() {}, setFont() {}, setTextColor() {}, setFillColor() {}, setDrawColor() {}, setLineWidth() {},
+      addImage() {}, rect() {}, line() {}, setLineDashPattern() {},
+      getTextWidth(t) { return ('' + t).length * perChar; },
+      text(str, x, y) { this.ops.push({ str: str, x: x, y: y }); }
+    });
+
+    __check('EXACT BUG: a frame code never prints past the strip right edge', () => {
+      // Reported as text falling outside the guide safety area with only FRAME
+      // CORNER ticked. The chip is as narrow as MIN_CELL (26pt) while MICH 432-29
+      // measures ~33pt at 6.5pt, and the label was drawn left-aligned on the cell
+      // with nothing bounding its right end, so the LAST one hung outside the guide
+      // the chip itself sat inside.
+      const RIGHT = 914;
+      const d = __stripDoc(3);
+      const frames = [{ code: 'MICH 432-29', color: '#111111' }];
+      const left = _drawFrameStrip(d, frames, { right: RIGHT, top: 395, height: 79, maxW: 520, corner: true, profile: false });
+      if (left == null) throw new Error('the strip refused to draw at all');
+      d.ops.forEach(op => {
+        const end = op.x + d.getTextWidth(op.str);
+        if (end > RIGHT + 0.01) throw new Error(op.str + ' ends at ' + end.toFixed(1) + ', past the right edge ' + RIGHT);
+      });
+    });
+
+    __check('a code that already fits is NOT shifted off its own chip', () => {
+      // The clamp must be a ceiling, not a re-anchor: a short code still starts on
+      // the left edge of the cell it belongs to, or every label slides right and
+      // stops naming the chip above it.
+      const RIGHT = 914;
+      const d = __stripDoc(1);
+      const frames = [{ code: 'A1', color: '#111111' }, { code: 'B2', color: '#222222' }];
+      const left = _drawFrameStrip(d, frames, { right: RIGHT, top: 395, height: 79, maxW: 520, corner: true, profile: false });
+      if (left == null) throw new Error('the strip refused to draw at all');
+      if (d.ops.length !== 2) throw new Error('expected two labels, got ' + d.ops.length);
+      if (Math.abs(d.ops[0].x - left) > 0.01) throw new Error('the first label moved off its cell: ' + d.ops[0].x + ' vs ' + left);
+      if (d.ops[1].x + 2 > RIGHT) throw new Error('the second label was pushed to the edge for no reason');
+    });
+
+    __check('a code wider than the band drops the strip rather than overhanging', () => {
+      // The floor matters as much as the ceiling: clamping to the right alone sends
+      // an over-long label left past the region the band is allowed to use.
+      const RIGHT = 914, MAXW = 120;
+      const d = __stripDoc(9);
+      const left = _drawFrameStrip(d, [{ code: 'MICH 432-29 BLACK', color: '#111111' }], { right: RIGHT, top: 395, height: 79, maxW: MAXW, corner: true, profile: false });
+      // A code wider than the band it is allowed is exactly the case the strip already
+      // drops itself for, and the code still prints in full as a Frame Code spec row.
+      if (left == null) { if (d.ops.length) throw new Error('the strip returned null but still drew'); return; }
+      const end = d.ops[0].x + d.getTextWidth(d.ops[0].str);
+      if (end > RIGHT + 0.01) throw new Error('an over-long code still ran past the edge: it ends at ' + end.toFixed(1));
+      if (d.ops[0].x < left - 0.01) throw new Error('the label started left of the strip edge the legend lays out against');
+    });
+
     __checkAsync('EXACT ASK: right to left the band is elevation, plan, profile+corner', async () => {
       __bandSetup({}, true);
       const rec = new CanvasPdfRec(936, 540);

@@ -1394,6 +1394,58 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `_drawSpecSetPage` is a thin wrapper whose sole job is the footer, because every
   arrangement returns from its own exit and they all used to forget it. Letters
   come from `_setLetters()` — never a local literal; the cap is 12 members.
+- **THE GROUP ARTWORK HANGS FROM THE SPEC LINE, IT IS NOT CENTRED IN A REGION.**
+  `artTop = Math.max(regY, GB.body + 8)` and `artH = (regY + regH) - artTop`, and both
+  halves matter. The pieces used to be centred vertically in a region whose HEIGHT
+  changes with the ticks (`regH = bottomBand ? (BB - regY) * 0.72 : (BB - regY)`), so
+  unticking everything made the region taller and the frames visibly sank down the page
+  — and the no-geo fallback was BOTTOM-aligned, which put them on the page edge. Both
+  are reported the same way: "the frames fall to the bottom of the page".
+  The top is the line the SPEC COLUMN starts on, so the drawing and the text beside it
+  begin together; `Math.max` floors it at the region top, which only binds on a guide
+  set that declares no title lines (Margins only, Rule of Thirds, Center) — there the
+  band falls back to `SR.T + 30` and would otherwise start the art ABOVE its own region.
+  `regY` itself is deliberately NOT moved: `test_shared_spec_legend` pins a 3.6pt
+  threshold below it where a 12-moulding frame strip stops dropping itself.
+  **Every scale term reads `artH`, never `regH`** — geo path and fallback alike, or the
+  art is scaled against a height it does not have and overruns the band. The gap to the
+  band is 22pt (`bandY = regY + regH + 22`), which is what "the frames are too close to
+  the thumbnail placeholders" was.
+  Two test traps here. The pieces are frame mockups rasterised onto a canvas, which
+  draws NOTHING under jsdom, so the artwork's extent has to be read off the LETTERS and
+  the image codes — and a narrow piece drops its code, so a height check needs a fixture
+  whose pieces are wide AND stacked. And every ordinary fixture is width-constrained, so
+  a break in the height term changes nothing unless the group is genuinely tall.
+  `__bandSetup` rebuilds `editorialContent`, which is where the guide pref lives, so a
+  check that switches the guide set must do it AFTER the fixture.
+- **A FRAME STRIP CELL IS AT LEAST AS WIDE AS ITS OWN CODE.** `_drawFrameStrip` lays its
+  cells out right to left ending exactly on `box.right`, which on a group page IS the
+  right safety guide — but the code label is drawn LEFT-ALIGNED on its cell with nothing
+  bounding its right end, and a corner chip is routinely much narrower than the code
+  under it (`MICH 432-29` measures ~33pt at 6.5pt against a `MIN_CELL` floor of 26). So
+  the RIGHTMOST label hung outside the guides while the chip it names sat correctly
+  inside them. Reported as "images or text going outside the guide safety area", with
+  only FRAME CORNER ticked — the case that makes the strip one narrow cell.
+  Fixed by widening the CELL, not by clamping or truncating the label. The strip already
+  drops itself whole when it will not fit `box.maxW`, and every code prints in full as a
+  `Frame Code` row in the spec block, so a strip that gives way is a much better outcome
+  than a label shortened to three characters — which is what a clamp-plus-truncate first
+  shipped as, and it cut every code on the page in the test harness.
+  The measure has to set the font first: it runs in the `cells` map, before the draw loop
+  that normally sets it per cell.
+- **A SPEC TICK MUST NOT WIPE THE WHOLE THUMBNAIL CACHE.** `_dsThumbCacheKey` carried the
+  per-piece slots and NOT the group ones, so the only way to make a group tick show up
+  was `_dsThumbCache = {}` — which sent every cover, floorplan, breaker, install page and
+  untouched spec page back to a placeholder and rebuilt all 86 pages of a deck on every
+  click. Reported as "a lot of flickering when turning off and on check boxes".
+  The group slots are in the key now (`|g` + the four digits, beside the per-piece `|`
+  form) and the wipe is gone from both handlers in `_dsSpecSlotsInto`. `_dsRefresh`
+  already prunes only the entries whose key is no longer live and says in its own comment
+  that it KEEPS valid ones so they do not flash — the wipe was defeating that. A
+  page-scoped tick now rebuilds one page.
+  The behavioural check drives the real checkbox and asserts an unrelated page keeps its
+  cached thumbnail; the source check asserts the wipe has not come back. Keep both — the
+  source one alone would pass if the key regressed instead.
 - `_specSetRows()` builds the shared-spec block: for each label, group the pieces
   that share a value; a group covering everyone drops the letters, anything else
   carries them (`Matboard A/D`). No "None" rows by design. Row order comes from
