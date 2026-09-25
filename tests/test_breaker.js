@@ -40,12 +40,23 @@ const fs = require('fs');
     // ── 2. Source-level guard: the EXPORT breaker step now carries the
     //       elevgrp ovKey exactly like the preview desc does ──
     __check('export breaker step includes _ovKey elevgrp (source guard)', () => {
+      // The literal moved behind _breakerOvKeyFor in 17.65, when the two builders' hand
+      // written breaker loops became ONE shared rule and a catalogue placement started
+      // keying its breaker on the MOCKUP rather than on whichever option came first.
+      // The invariant is what mattered all along: _drawInstallGuidePage keys everything
+      // breaker-specific off the 'elevgrp:' prefix, so every key must carry it and both
+      // builders must go through the one function that builds it.
       const src2 = window.__appSrc;
-      const lines = src2.split('\\n').filter(l => l.indexOf("type: 'install'") >= 0 && l.indexOf('_breakerCodeFor(u)') >= 0);
+      const lines = src2.split('\\n').filter(l => l.indexOf("type: 'install'") >= 0 && l.indexOf('_breakerNameFor(u, br)') >= 0);
       if (!lines.length) throw new Error('export breaker step line not found');
       for (const l of lines) {
-        if (l.indexOf("_ovKey: 'elevgrp:' + u.key") < 0) throw new Error('a breaker step line is missing the elevgrp ovKey: ' + l.trim().slice(0, 160));
+        if (l.indexOf('_breakerOvKeyFor(u, br)') < 0) throw new Error('a breaker step line does not build its ovKey through the shared function: ' + l.trim().slice(0, 160));
       }
+      if (typeof _breakerOvKeyFor !== 'function') throw new Error('_breakerOvKeyFor is missing');
+      const plain = _breakerOvKeyFor({ key: 'ART.9' }, { mockup: false });
+      if (plain !== 'elevgrp:ART.9') throw new Error('an ordinary breaker key changed: ' + plain);
+      const cat = _breakerOvKeyFor({ key: 'ART.1.1' }, { mockup: true, elev: { id: 'ev9' } });
+      if (cat.indexOf('elevgrp:') !== 0) throw new Error('a placement breaker key lost the elevgrp prefix: ' + cat);
     });
 
     // ── 3. Behavioral: BEHAVIOUR CHANGED (v15.86). A breaker used to take a

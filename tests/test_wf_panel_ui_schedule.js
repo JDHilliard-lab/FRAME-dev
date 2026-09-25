@@ -771,8 +771,19 @@ const path = require('path');
       if (S.indexOf('Print Panels (in)') < 0) throw new Error('no Print Panels column');
       // The InDesign script addresses columns by name, so a new column must be
       // trailing — inserting one mid-header shifts every position after it.
-      const hdr = S.indexOf('Material,Print Output,Print Panels (in)\\\\n');
-      if (hdr < 0) throw new Error('the new columns are not the last ones in the header');
+      const HDR3 = 'Material,Print Output,Print Panels (in)';
+      const hdr = S.indexOf(HDR3);
+      if (hdr < 0) throw new Error('the window-film columns are no longer contiguous');
+      // Everything AFTER them must itself be a later-appended trailing column, named
+      // here. Deliberately a list rather than "these must be last": appending a new
+      // trailing column is fine and inserting one BEFORE these is not, and spelling the
+      // tail out is what makes the next person choose rather than shuffle.
+      const tail = S.slice(hdr + HDR3.length, hdr + HDR3.length + 200);
+      const end = tail.indexOf('\\\\n');
+      if (end < 0) throw new Error('no end of header after the window-film columns');
+      const after = tail.slice(0, end).split(',').filter(Boolean);
+      const allowed = ['Arrangement'];
+      after.forEach(c => { if (allowed.indexOf(c) < 0) throw new Error('an unexpected column follows the window-film ones: ' + c); });
       // And it must read the same helper the sheet prints from.
       const rowI = S.indexOf("_isFlatGraphic(r.product) ? (r.printOutput || 'full') : ''");
       if (rowI < 0) throw new Error('the CSV row never emits printOutput');

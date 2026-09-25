@@ -61,12 +61,17 @@ say('  ' + tail);
 //    mislabelled by a typo on the command line.
 const version = (fs.readFileSync('app.js', 'utf8').match(/const APP_VERSION = '([^']+)'/) || [])[1];
 if (!version) die('could not read APP_VERSION from app.js.');
-// The stylesheet is cache-busted by the version; if the two disagree a browser serves an
-// old stylesheet next to a fresh app.js, which is a failure this project already has a
-// test for. Checked again here because promoting is the last chance to catch it.
-if (fs.readFileSync('index.html', 'utf8').indexOf('style.css?v=' + version) < 0) {
-    die('index.html does not link style.css?v=' + version + '.');
-}
+// BOTH assets are cache-busted by the version, and index.html stamps the version it was
+// built against. If any of the three disagree a browser can serve half an old build
+// beside half a new one, which this project already has tests for. Checked again here
+// because promoting is the last chance to catch it, and a stale pair on the STABLE site
+// is the one place nobody is watching a console.
+const indexSrc = fs.readFileSync('index.html', 'utf8');
+[
+    ['style.css?v=' + version, 'index.html does not link style.css?v=' + version + '.'],
+    ['app.js?v=' + version, 'index.html does not load app.js?v=' + version + '.'],
+    ["window.FRAME_HTML_VERSION = '" + version + "'", 'index.html does not stamp FRAME_HTML_VERSION = ' + version + '.'],
+].forEach(([needle, msg]) => { if (indexSrc.indexOf(needle) < 0) die(msg); });
 
 // Remote check in JS, not a shell `||` fallback: that is bash syntax, and this has to run
 // on Windows too.

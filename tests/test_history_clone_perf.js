@@ -105,12 +105,31 @@ const path = require('path');
       if (rbody.indexOf('const cloned') < 0) throw new Error('the restore installs the snapshot directly — live state would share references with history');
     });
 
-    __check('autosave does not clone the project just to serialize it', () => {
-      const i = S.indexOf('function performAutosave');
-      const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));
-      if (body.indexOf('snapshotProjectState()') >= 0) throw new Error('autosave still deep-clones before JSON.stringify, which copies every image for nothing');
-      if (body.indexOf('JSON.stringify(payload)') < 0) throw new Error('autosave no longer serializes its payload');
+    __check('autosave does not clone the project just to store it', () => {
+      // 17.80 moved autosave off localStorage, so it no longer JSON.stringifies:
+      // IndexedDB structured-clones the payload synchronously inside put(). The
+      // rule the old check was really about SURVIVES that move and matters more,
+      // because the record is now allowed to be tens of megabytes. The payload is
+      // assembled from the LIVE objects and handed straight to the store, and a
+      // _cloneData or snapshotProjectState here would copy every artwork data URL
+      // for nothing, on a 500 ms debounce, for the whole session.
+      //
+      // Sliced between landmarks rather than by a character distance: the builder
+      // is its own function now and the comment block between the two grows.
+      const a = S.indexOf('function _autosavePayload');
+      if (a < 0) throw new Error('missing _autosavePayload');
+      const b = S.indexOf('async function performAutosave');
+      if (b < 0) throw new Error('missing async function performAutosave');
+      if (b < a) throw new Error('the payload builder no longer sits above the writer, so this slice reads the wrong code');
+      const body = S.slice(a, b);
+      if (body.indexOf('snapshotProjectState()') >= 0) throw new Error('autosave still deep-clones its payload, which copies every image for nothing');
+      if (body.indexOf('_cloneData(') >= 0) throw new Error('autosave deep-clones its payload, which copies every image for nothing');
       if (body.indexOf('elevations: elevations') < 0) throw new Error('autosave does not pass the live objects through');
+      // And the writer must hand the BUILDER over rather than a built payload:
+      // built before the async open, a project load landing mid-write would
+      // store the project that was just closed.
+      const w = S.slice(b, S.indexOf('function _autosaveOk'));
+      if (w.indexOf('_aPut(_autosavePayload)') < 0) throw new Error('performAutosave no longer hands the live payload builder to the store');
     });
 
     // ── End to end: the thing undo actually depends on ──

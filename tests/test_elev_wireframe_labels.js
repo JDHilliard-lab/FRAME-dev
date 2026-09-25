@@ -135,10 +135,14 @@ const path = require('path');
     __check('EXACT RISK: the SVG decides at the same point as the artwork', () => {
       const i = S.indexOf('function _maybeAddArtworkToSvg');
       const body = S.slice(i, S.indexOf('\\nasync function ', i));
-      if (body.indexOf('_isWireframe()') < 0) throw new Error('the SVG export has no wireframe branch, so it would export the artwork the editor is hiding');
+      // _curElevIsWireframe, not _isWireframe: since catalogue mockups, the answer is a
+      // question about the WALL rather than only about the deck, so one deck can carry
+      // grey placement drawings and real artwork pages at once. The branch, and where it
+      // sits, are unchanged - only what it asks.
+      if (body.indexOf('_curElevIsWireframe()') < 0) throw new Error('the SVG export has no wireframe branch, so it would export the artwork the editor is hiding');
       // Before the artwork guards, or a frame with no artworkUrl returns early and
       // gets no placeholder at all.
-      const wf = body.indexOf('_isWireframe()');
+      const wf = body.indexOf('_curElevIsWireframe()');
       const guard = body.indexOf('if (!f || !f.artworkUrl) return;');
       if (!(guard > wf)) throw new Error('the wireframe branch runs after the artwork guard, so frames without artwork export blank');
       if (body.indexOf('ELEV_WF_FILL') < 0) throw new Error('the SVG does not use the shared fill');

@@ -42,8 +42,15 @@ const path = require('path');
 
     // ── 1. The drafting standard ────────────────────────────────────────────
     __check('the saved project carries annotationStyle and elevDualUnit', () => {
-      const i = S.indexOf("const masterData = { type: 'master-studio-v6'");
+      // 17.81 moved the payload out of saveMasterProject into _projectPayload,
+      // because there are three ways to save now (write in place, save a copy,
+      // download) and a second copy of this list is how a field reaches one of
+      // them and not the others. Same object, one definition, so the check
+      // follows it rather than being relaxed.
+      const i = S.indexOf("return { type: 'master-studio-v6'");
       if (i < 0) throw new Error('the project writer changed shape');
+      const fn = S.indexOf('function _projectPayload');
+      if (fn < 0 || fn > i) throw new Error('the payload is no longer built by _projectPayload');
       const decl = S.slice(i, i + 1400);
       if (decl.indexOf('annotationStyle:') < 0) throw new Error('annotationStyle is not written, so the drafting look cannot travel');
       if (decl.indexOf('elevDualUnit:') < 0) throw new Error('elevDualUnit is not written');

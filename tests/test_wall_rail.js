@@ -22,6 +22,16 @@ const fs = require('fs');
 
   const testBlock = `
     window.__testResults = [];
+    // The app no longer calls window.confirm. Destructive actions ask through its
+    // own dialog now (_confirmDestroy, then showConfirmModal), so "assume the
+    // designer says yes" means pressing that dialog's real confirm button - which
+    // also exercises the button's wiring rather than skipping past it.
+    const __realConfirm = showConfirmModal;
+    showConfirmModal = function () {
+      __realConfirm.apply(this, arguments);
+      const __yes = document.querySelector('#infoModalButtons button');
+      if (__yes) __yes.click();
+    };
     const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     editorialContent = editorialContent || {};
 

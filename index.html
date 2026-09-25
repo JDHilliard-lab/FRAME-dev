@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=17.60">
+    <link rel="stylesheet" href="style.css?v=17.83">
 </head>
 <body>
 
@@ -40,7 +40,7 @@
         </div>
         <!-- Three fixed view tabs, built by renderNavTabs. Individual walls are
              NOT here — they're in the wall rail inside #view-elevation. -->
-        <div class="nav-tabs-fixed" id="nav-tabs-fixed"></div>
+        <div class="nav-tabs-fixed" id="nav-tabs-fixed" role="tablist" aria-label="Views"></div>
 
         <div style="margin-left: auto; display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
             <!-- Two icons, one shown at a time by a rule in style.css, the same swap
@@ -103,7 +103,22 @@
                 <button id="globalBtnMm" onclick="setUnit('mm')">MM</button>
             </div>
             <!-- The Spec PDF button lived here. The Deck tab replaces it. -->
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('masterLoad').click()">Load Project</button>
+            <!-- UNDO AND REDO HAVE BUTTONS. updateUndoButtons() has enabled and disabled
+                 #undoBtn and #redoBtn for a long time; neither existed, so undo was
+                 Ctrl+Z only and nothing on screen said it was there at all. Icons in the
+                 theme toggle's shape, because this row is full and has no wrap. -->
+            <button id="undoBtn" class="action-btn btn-secondary" style="width:auto;" onclick="undo()" title="Undo (Ctrl+Z)" aria-label="Undo" disabled>
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"></path><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"></path></svg>
+            </button>
+            <button id="redoBtn" class="action-btn btn-secondary" style="width:auto;" onclick="redo()" title="Redo (Ctrl+Shift+Z or Ctrl+Y)" aria-label="Redo" disabled>
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"></path><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"></path></svg>
+            </button>
+            <!-- openMasterProject opens THROUGH a file handle where the browser has the
+                 File System Access API, so Save writes back to the file that was opened.
+                 It falls back to clicking the hidden input below, which is what every
+                 browser without that API still uses. It also asks before discarding
+                 unsaved work, which loading never used to do. -->
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMasterProject()" title="Open a FRAME project (.json)">Load Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
             <button class="action-btn btn-secondary" style="width:auto;" onclick="openVersionsModal()" title="Save and compare project versions">Versions</button>
@@ -777,6 +792,57 @@
                              on ART is correct. Without this line the only way to learn that
                              is to switch mode and watch the film move. -->
                         <div id="wallModeHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
+
+                        <!-- CATALOGUE MOCKUP is a different axis from the wall mode above,
+                             so it gets its own row rather than a fourth button in that one.
+                             ART / EGD / WF say what the SURFACE is; this says what the wall
+                             is FOR: it holds one arrangement that several sets of artwork
+                             will be shown in. Per elevation, like EGD and unlike every
+                             deck-wide control in this panel.
+                             Duplicating a marked wall mints an art option and its item
+                             codes (ART-1 -> ART-1.1, rows ART-1.1A / ART-1.1B) instead of a
+                             layout variation, which is why there is no separate add button:
+                             the duplicate control is already where a designer reaches. -->
+                        <div style="display:flex; gap:6px; margin-top:8px;">
+                            <button class="action-btn btn-secondary wall-mode-btn" id="catMasterBtn" onclick="toggleCatalogueMaster()" title="Catalogue mockup &mdash; this wall holds the arrangement and no artwork. Duplicate it to add an art option: the option keeps this wall's sizes, positions and frame spec and carries its own images and item codes." style="height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="4" width="11" height="13"/><path d="M7 8h6M7 12h6"/><path d="M17 7v13H6"/></svg>
+                                CATALOGUE MOCKUP
+                            </button>
+                        </div>
+                        <!-- THE TWO + BUTTONS GET THEIR OWN ROW. `.action-btn` is
+                             `width: 100%`, so `flex: 0 0 auto` resolves its basis from that
+                             and refuses to shrink - three of them in one row each demanded
+                             the whole panel and the last two ran off the left panel
+                             entirely. `flex: 1 1 0` with `min-width: 0` makes them share
+                             the row and shrink, which is what a pair of equal actions
+                             wants anyway. Same trap the Pill button in the gear popup hit. -->
+                        <div id="catAddRow" style="display:none; gap:6px; margin-top:6px;">
+                            <!-- The OTHER axis. Duplicate gives the same layout with different
+                                 images; this gives the same spot a different layout, which is a
+                                 second mockup under one placement (ART.001A -> ART.001B) sharing
+                                 one pin on the plan. Hidden until the wall is part of a
+                                 catalogue, since it has nothing to say otherwise. -->
+                            <button class="action-btn btn-secondary wall-mode-btn" id="catArrBtn" onclick="catArrangementAction()" style="flex:1 1 0; min-width:0; height:26px; padding:0 8px; font-size:var(--fs-60); letter-spacing:0.3px; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="flex:none; width:13px;height:13px;"><rect x="3" y="5" width="7" height="14"/><rect x="13" y="5" width="8" height="6"/><rect x="13" y="13" width="8" height="6"/></svg>
+                                + LAYOUT
+                            </button>
+                            <!-- The other axis again, one level up. + LAYOUT rearranges THESE
+                                 frames; + SET offers a DIFFERENT set of frames at the same spot
+                                 (ART.01 -> ART.01.2), which is the single / triptych / salon
+                                 case. Both share the placement's one pin on the plan. -->
+                            <button class="action-btn btn-secondary wall-mode-btn" id="catSetBtn" onclick="catFrameSetAction()" style="flex:1 1 0; min-width:0; height:26px; padding:0 8px; font-size:var(--fs-60); letter-spacing:0.3px; align-items:center; justify-content:center; gap:5px;">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="flex:none; width:13px;height:13px;"><rect x="3" y="4" width="8" height="16"/><rect x="14" y="4" width="7" height="7"/><rect x="14" y="14" width="7" height="6"/></svg>
+                                + SET
+                            </button>
+                        </div>
+                        <!-- Shown only on a layout that is not the primary: what it is called,
+                             and whether its frames follow the primary's. Both are set at
+                             creation by the + LAYOUT chooser; this is where they are changed
+                             once the drawing exists and the answer has become obvious. -->
+                        <div id="catLayoutRow" style="display:none; gap:6px; margin-top:6px; align-items:center;">
+                            <input type="text" id="catLayoutLabel" maxlength="40" placeholder="Name this layout" oninput="setCatLayoutLabel(this.value)" style="flex:1 1 60px; min-width:0; height:24px; font-size:var(--fs-60);">
+                        </div>
+                        <div id="catMasterHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
                     </div>
 
                 </div>
@@ -1068,7 +1134,7 @@
                     </select>
                     <div style="display:flex; gap:8px; align-items:center;">
                         <button class="action-btn btn-secondary" style="width:auto; height:34px; padding:0 14px; font-size:var(--fs-70);" title="Scan the deck for missing artwork, pins, plan images, and empty frames" onclick="_dsShowPreflight()">Run Preflight</button>
-                        <button class="action-btn btn-secondary" style="width:auto; height:34px; padding:0 14px; font-size:var(--fs-70); margin-left:auto;" onclick="document.getElementById('dsGenerateModal').style.display='none'">Cancel</button>
+                        <button data-modal-close class="action-btn btn-secondary" style="width:auto; height:34px; padding:0 14px; font-size:var(--fs-70); margin-left:auto;" onclick="document.getElementById('dsGenerateModal').style.display='none'">Cancel</button>
                         <button class="action-btn" style="width:auto; height:34px; padding:0 18px; font-size:var(--fs-80); font-weight:700;" onclick="document.getElementById('dsGenerateModal').style.display='none'; applySpecPdfModal();">Generate</button>
                     </div>
                 </div>
@@ -1151,7 +1217,7 @@
         <div style="display:flex; flex-direction:column; gap:10px;">
             <button class="action-btn" style="height: 32px;" onclick="confirmDuplicate('instance')">Create Linked Instance</button>
             <button class="action-btn btn-secondary" style="height: 32px;" onclick="confirmDuplicate('new')">Add as New Spec</button>
-            <button class="action-btn btn-outline" style="height: 32px; margin-top: 5px; color: var(--text-main); border-color: var(--border-color);" onclick="closeDuplicateModal()">Cancel</button>
+            <button data-modal-close class="action-btn btn-outline" style="height: 32px; margin-top: 5px; color: var(--text-main); border-color: var(--border-color);" onclick="closeDuplicateModal()">Cancel</button>
         </div>
     </div>
 </div>
@@ -1159,7 +1225,7 @@
 <!-- Generic info / confirm modal. Replaces window.alert() and window.confirm() calls
      with the studio's themed modal styling so popups feel consistent. Reused via
      showInfoModal() / showConfirmModal() helpers in app.js. -->
-<div id="infoModal" class="frame-modal fm-alert" style="display:none; z-index:100010;">
+<div id="infoModal" class="frame-modal fm-alert" style="display:none; z-index:100010;" data-modal-backdrop>
     <div style="background:var(--bg-panel); padding:20px; border-radius:var(--r-8); width:340px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 id="infoModalTitle" style="margin-top:0; margin-bottom: 8px; font-size:var(--fs-105); color:var(--text-strong);">Notice</h3>
         <p id="infoModalBody" style="font-size:var(--fs-75); color:var(--text-main); margin-bottom:20px; line-height: 1.4;">…</p>
@@ -1173,7 +1239,7 @@
      generating PNGs and bundling them. Three content states swap based on
      job phase: 'running' (during), 'done' (success), 'error' (failure).
      Modal is dismissible via Cancel during run, Close after done. -->
-<div id="batchZipModal" class="frame-modal" style="display:none;">
+<div id="batchZipModal" class="frame-modal" style="display:none;" data-modal-busy>
     <div style="background:var(--bg-panel); padding:24px; border-radius:var(--r-8); width:380px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
 
         <!-- RUNNING STATE -->
@@ -1214,7 +1280,7 @@
      and Reference (detailed feature documentation). Wider than other modals
      since reference content benefits from horizontal space — left sidebar
      for section navigation, right panel for content. -->
-<div id="helpModal" class="frame-modal" style="display:none;">
+<div id="helpModal" class="frame-modal" style="display:none;" data-modal-backdrop>
     <div style="background:var(--bg-panel); border-radius:var(--r-8); width:760px; max-width: 95vw; height:80vh; max-height:720px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); display:flex; flex-direction: column; overflow: hidden;">
 
         <!-- Header: title + tab strip + close button -->
@@ -1224,7 +1290,7 @@
                     <h3 style="margin: 0 0 2px; font-size:var(--fs-105); color:var(--text-strong);">Help</h3>
                     <p style="font-size:var(--fs-70); color:var(--text-muted); margin: 0;">Features, shortcuts, and the workflow at a glance.</p>
                 </div>
-                <button class="icon-btn" style="border:none; background:transparent; color:var(--text-muted); cursor:pointer; padding: 4px 8px; font-size: var(--fs-120); line-height: 1;" onclick="closeHelpModal()" title="Close help">×</button>
+                <button data-modal-close class="icon-btn" style="border:none; background:transparent; color:var(--text-muted); cursor:pointer; padding: 4px 8px; font-size: var(--fs-120); line-height: 1;" onclick="closeHelpModal()" title="Close help">×</button>
             </div>
             <!-- Tab strip -->
             <div class="help-tabs">
@@ -1282,7 +1348,7 @@
         <!-- The real dashboard form panel gets moved in here. -->
         <div id="bulkFormMount" style="overflow-y:auto; overflow-x:hidden; padding:0; width:fit-content; max-width:92vw; align-self:center;"></div>
         <div style="display:flex; gap:8px; justify-content:flex-end; padding:12px 18px; border-top:1px solid var(--border-color); flex-shrink:0; width:430px; max-width:92vw; box-sizing:border-box;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="cancelBulkEdit()">Cancel</button>
+            <button data-modal-close class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="cancelBulkEdit()">Cancel</button>
             <button class="action-btn" style="height:32px; padding:0 18px; font-size:var(--fs-75);" onclick="applyBulkEdit()">Apply to Selected</button>
         </div>
     </div>
@@ -1330,7 +1396,7 @@
         </div>
 
         <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:16px;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="document.getElementById('duplicateSeriesModal').style.display='none'">Cancel</button>
+            <button data-modal-close class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="document.getElementById('duplicateSeriesModal').style.display='none'">Cancel</button>
             <button class="action-btn" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="applyDuplicateSeries()">Apply</button>
         </div>
     </div>
@@ -1367,7 +1433,7 @@
         </div>
 
         <div style="display:flex; gap:8px; justify-content:flex-end;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="document.getElementById('moveToModal').style.display='none'">Cancel</button>
+            <button data-modal-close class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="document.getElementById('moveToModal').style.display='none'">Cancel</button>
             <button class="action-btn" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="applyMoveTo()">Apply</button>
         </div>
     </div>
@@ -1494,7 +1560,7 @@
             </div>
             <div style="display:flex; gap:8px; flex-shrink:0;">
                 <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 12px; font-size:var(--fs-75);" onclick="document.getElementById('fpMarkupFile').click()">Change plan…</button>
-                <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeFloorplanMarkup()">Done</button>
+                <button data-modal-close class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeFloorplanMarkup()">Done</button>
                 <input type="file" id="fpMarkupFile" accept="image/*" style="display:none;" onchange="loadSpecPdfFloorplan(event, true)">
             </div>
         </div>
@@ -1547,13 +1613,13 @@
     </div>
 </div>
 
-<div id="specPdfPreviewModal" class="frame-modal fm-nested" style="display:none;">
+<div id="specPdfPreviewModal" class="frame-modal fm-nested" style="display:none;" data-modal-backdrop>
     <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); width:94vw; max-width:1200px; height:90vh; display:flex; flex-direction:column; box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <div style="padding:12px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
             <h3 style="margin:0; font-size:var(--fs-105); color:var(--text-strong);">Presentation PDF — Preview</h3>
             <div style="display:flex; gap:8px;">
                 <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="downloadSpecPdfPreview()">Download</button>
-                <button class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 14px; font-size:var(--fs-75);" onclick="closeSpecPdfPreview()">Close</button>
+                <button data-modal-close class="action-btn btn-secondary" style="width:auto; height:30px; padding:0 14px; font-size:var(--fs-75);" onclick="closeSpecPdfPreview()">Close</button>
             </div>
         </div>
         <iframe id="specPdfPreviewFrame" title="PDF preview" style="flex:1; width:100%; border:0; background:#525659;"></iframe>
@@ -1577,7 +1643,7 @@
                 <button class="action-btn btn-secondary" title="Default styles" style="width:34px; height:30px; padding:0; display:inline-flex; align-items:center; justify-content:center;" onclick="openDeckStyles()"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
                 <span id="mbModeLabel" style="font-size:var(--fs-80); color:var(--text-muted); margin-left:8px;"></span>
                 <button class="action-btn btn-secondary" title="Layout templates" style="width:auto; height:30px; padding:0 12px; font-size:var(--fs-75);" onclick="openTemplatesModal()">Templates</button>
-                <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeMoodboardModal()">Done</button>
+                <button data-modal-close class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeMoodboardModal()">Done</button>
                 <input type="file" id="moodboardFile" accept="image/*" multiple style="display:none;" onchange="addMoodboardImages(event)">
             </div>
         </div>
@@ -1679,7 +1745,7 @@
             <div style="display:flex; align-items:center; justify-content:space-between; margin-top:10px;">
                 <span id="copyEditCount" style="font-size:var(--fs-70); color:var(--text-muted);">0 / 0 words</span>
                 <div style="display:flex; gap:8px;">
-                    <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="closeCopyEditor()">Cancel</button>
+                    <button data-modal-close class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="closeCopyEditor()">Cancel</button>
                     <button class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="saveCopyEditor()">Save</button>
                 </div>
             </div>
@@ -1696,7 +1762,7 @@
                 <h3 style="margin:0; font-size:var(--fs-105); color:var(--text-strong);">Thank You — contacts</h3>
                 <p style="margin:2px 0 0; font-size:var(--fs-70); color:var(--text-muted);">These appear on the Thank You page. Add or remove people as needed.</p>
             </div>
-            <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeContactsEditor()">Done</button>
+            <button data-modal-close class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeContactsEditor()">Done</button>
         </div>
         <div id="contactsRows" style="flex:1; overflow-y:auto; padding:16px 18px;"><!-- contact rows --></div>
         <div style="padding:12px 18px; border-top:1px solid var(--border-color);">
@@ -1713,7 +1779,7 @@
                 <h3 style="margin:0; font-size:var(--fs-105); color:var(--text-strong);">Layout templates</h3>
                 <p style="margin:2px 0 0; font-size:var(--fs-70); color:var(--text-muted);">Apply to the current page, or drop in as a new page. Image frames are placeholders — fill them after.</p>
             </div>
-            <button class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeTemplatesModal()">Done</button>
+            <button data-modal-close class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeTemplatesModal()">Done</button>
         </div>
         <div style="padding:10px 18px; border-bottom:1px solid var(--border-color); display:flex; gap:6px; flex-wrap:wrap;">
             <button id="tplTab_cover" onclick="_tplSetTab('cover')">Cover</button>
@@ -1790,7 +1856,7 @@
         </div>
         <div style="padding:12px 18px; border-top:1px solid var(--border-color); display:flex; justify-content:space-between; align-items:center;">
             <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-75);" onclick="_mbReapplyStyles()" title="Apply these defaults to every element already in the layout">Reapply to everything</button>
-            <button class="action-btn" style="width:auto; height:32px; padding:0 18px; font-size:var(--fs-75);" onclick="closeDeckStyles()">Done</button>
+            <button data-modal-close class="action-btn" style="width:auto; height:32px; padding:0 18px; font-size:var(--fs-75);" onclick="closeDeckStyles()">Done</button>
         </div>
     </div>
 </div>
@@ -1833,7 +1899,7 @@
         </label>
 
         <div style="display:flex; gap:8px; justify-content:flex-end;">
-            <button class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="document.getElementById('renumberModal').style.display='none'">Cancel</button>
+            <button data-modal-close class="action-btn btn-secondary" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="document.getElementById('renumberModal').style.display='none'">Cancel</button>
             <button class="action-btn" style="height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="applyRenumber()">Apply</button>
         </div>
     </div>
@@ -1841,7 +1907,7 @@
 
 <!-- InDesign Script install instructions modal. Triggered by the "InDesign Script"
      download button. Wider than the info modal to fit numbered steps + paths. -->
-<div id="installModal" class="frame-modal" style="display:none;">
+<div id="installModal" class="frame-modal" style="display:none;" data-modal-backdrop>
     <div style="background:var(--bg-panel); padding:24px; border-radius:var(--r-8); width:520px; max-height:85vh; overflow-y:auto; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 style="margin-top:0; margin-bottom: 4px; font-size:var(--fs-105); color:var(--text-strong);">Install the InDesign Script</h3>
         <p style="font-size:var(--fs-70); color:var(--text-muted); margin-bottom:16px;">AutoFrameSpecs.jsx has been downloaded. Follow these steps to install it in InDesign.</p>
@@ -1888,7 +1954,7 @@
             </ul>
         </div>
 
-        <button class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75);" onclick="document.getElementById('installModal').style.display='none'">Got it</button>
+        <button data-modal-close class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75);" onclick="document.getElementById('installModal').style.display='none'">Got it</button>
     </div>
 </div>
 
@@ -2233,13 +2299,13 @@
 
         </div><!-- /settings-cols -->
 
-        <button class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75);" onclick="closeAnnotationStyleModal()">Done</button>
+        <button data-modal-close class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75);" onclick="closeAnnotationStyleModal()">Done</button>
     </div>
 </div>
 
 <!-- Keyboard shortcuts modal — opened by the keyboard-icon button at the
      top-left outside the elevation. -->
-<div id="shortcutsModal" class="frame-modal" style="display:none;">
+<div id="shortcutsModal" class="frame-modal" style="display:none;" data-modal-backdrop>
     <div style="background:var(--bg-panel); padding:20px; border-radius:var(--r-8); width:380px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 style="margin-top:0; margin-bottom:12px; font-size:var(--fs-105); color:var(--text-strong);">Keyboard Shortcuts</h3>
         <div style="display:grid; grid-template-columns: auto 1fr; gap: 6px 12px; font-size:var(--fs-75); color:var(--text-main); line-height: 1.5;">
@@ -2265,7 +2331,7 @@
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Shift&nbsp;+&nbsp;Z</kbd><span>Redo</span>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;S</kbd><span>Save project</span>
         </div>
-        <button class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75); margin-top:16px;" onclick="document.getElementById('shortcutsModal').style.display='none'">Done</button>
+        <button data-modal-close class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75); margin-top:16px;" onclick="document.getElementById('shortcutsModal').style.display='none'">Done</button>
     </div>
 </div>
 
@@ -2335,7 +2401,7 @@
 <!-- Library Sync modal. Two ways to load swatches: drop a folder onto the dropzone,
      or click the Browse button to open the native folder picker. Either path ends
      up calling the same processFolderEntries / syncDashLibraryFolder logic. -->
-<div id="librarySyncModal" class="frame-modal" style="display:none;">
+<div id="librarySyncModal" class="frame-modal" style="display:none;" data-modal-backdrop>
     <div style="background:var(--bg-panel); padding:20px; border-radius:var(--r-8); width:420px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 style="margin-top:0; margin-bottom: 8px; font-size:var(--fs-105); color:var(--text-strong);">Load Frame Library</h3>
         <p style="font-size:var(--fs-75); color:var(--text-main); margin-bottom: 6px; line-height: 1.4;">Drop your Frame Library folder below, or browse to locate it. Frames you load here live in <strong>your browser only</strong> and override the shared repo &mdash; a handy stopgap until the frames are committed to the repo for everyone.</p>
@@ -2376,7 +2442,7 @@
         </div>
         <div style="display:flex; flex-direction:column; gap:10px;">
             <button id="libraryClearBtn" class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="handleClearCustomLibrary()">Clear My Saved Swatches</button>
-            <button class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="closeLibrarySyncModal()">Cancel</button>
+            <button data-modal-close class="action-btn btn-outline" style="height: 32px; color: var(--text-main); border-color: var(--border-color);" onclick="closeLibrarySyncModal()">Cancel</button>
         </div>
     </div>
 </div>
@@ -2409,7 +2475,18 @@
     .app-top-nav { flex-wrap: nowrap; }
 </style>
 
-<script src="app.js"></script>
+<!-- app.js IS CACHE-BUSTED TOO, and the stamp above it is the guard.
+     style.css has carried ?v= for a long time, for the reason written up in
+     the head - a cached stylesheet next to a fresh app.js makes every new
+     rule silently absent. The REVERSE was wide open: fresh HTML and CSS
+     against a cached app.js, where the version pill reads whatever the old
+     file says and the app behaves like a build nobody is looking at.
+
+     FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
+     APP_VERSION at boot and says so if the two disagree, because the query
+     string alone cannot help once a browser has already cached the pair. -->
+<script>window.FRAME_HTML_VERSION = '17.83';</script>
+<script src="app.js?v=17.83"></script>
 
 </body>
 </html>

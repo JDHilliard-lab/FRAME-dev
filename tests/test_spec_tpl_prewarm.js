@@ -171,21 +171,30 @@ const path = require('path');
       });
 
       // ── The two rejected approaches ────────────────────────────────────────
-      __check('the swatches stay OUT of localStorage, where the autosave lives', () => {
-        // performAutosave puts the entire project in localStorage under one key and
-        // fails silently on quota. Cosmetic card images must not share that budget.
-        // Just the swatch machinery, function by function — a fixed-size window from
-        // the cache declaration runs on into unrelated code that legitimately stores
-        // preferences, and would fail for the wrong reason.
+      __check('the swatches stay OUT of localStorage, where the user data lives', () => {
+        // Cosmetic card images must not share the localStorage budget with real
+        // user data. Just the swatch machinery, function by function - a
+        // fixed-size window from the cache declaration runs on into unrelated
+        // code that legitimately stores preferences, and would fail for the
+        // wrong reason.
         ['function _dsTplSwatchKey', 'function _dsQueueTplSwatch', 'function _dsPaintTplSwatch',
          'function _dsPrewarmTplSwatches', 'async function _dsTplSwatchPump'].forEach(sig => {
           const i = S.indexOf(sig);
           if (i < 0) throw new Error('missing ' + sig);
           const body = S.slice(i, S.indexOf('\\n}', i));
-          if (/localStorage/.test(body)) throw new Error(sig + ' touches localStorage, which is the autosave budget');
+          if (/localStorage/.test(body)) throw new Error(sig + ' touches localStorage, where the custom moulding library lives');
         });
-        const j = S.indexOf('function performAutosave');
-        if (S.slice(j, j + 1200).indexOf('localStorage.setItem') < 0) throw new Error('autosave moved off localStorage — re-evaluate whether persisting swatches is safe now');
+        // THE TRIPWIRE NOW POINTS THE OTHER WAY. Autosave moved to IndexedDB in
+        // 17.80 because a real project is ~23 MB against a ~5 MB localStorage
+        // budget, so it is no longer that budget's tenant - but the custom
+        // moulding library still is, and that is real user data rather than a
+        // cache. If autosave is ever moved back onto localStorage, the question
+        // this check was originally asking has to be asked again.
+        const j = S.indexOf('async function performAutosave');
+        if (j < 0) throw new Error('performAutosave is not async, so this check is reading the wrong thing');
+        const wbody = S.slice(j, S.indexOf('function _autosaveOk'));
+        if (wbody.indexOf('localStorage.setItem') >= 0) throw new Error('autosave writes localStorage again - re-evaluate whether persisting swatches is safe now');
+        if (wbody.indexOf('_aPut(') < 0) throw new Error('autosave no longer writes through the IndexedDB store');
       });
 
       __check('and the cards are still rendered by the real page engine, not baked artwork', () => {

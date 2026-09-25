@@ -241,8 +241,19 @@ const path = require('path');
       if (drawAt < 0) throw new Error('the page never draws the note box');
       const firstReturn = body.indexOf('return;');
       if (!(firstReturn < 0 || drawAt < firstReturn)) throw new Error('the box is drawn after an early return, so some pages would lose it');
-      const footers = (body.match(/_drawPdfFooter\\(/g) || []).length;
-      if (footers > 1 && (body.match(/_drawInstallNoteBox\\(/g) || []).length !== 1) throw new Error('the box should be drawn exactly once, up front — not repeated per exit');
+      // TWO draw calls since 17.70, and that is not the trap this guards. The box has a
+      // SIDE now: a right column is drawn up front, a left one is deferred until the
+      // title band is measured, because it has to stack under the letter legend. They
+      // are mutually exclusive branches of one conditional, and what still has to be true
+      // that BOTH land ahead of every early return - that is what covers each exit.
+      const calls = body.split('_drawInstallNoteBox(').length - 1;
+      if (calls < 1) throw new Error('the box is never drawn');
+      if (calls > 2) throw new Error(calls + ' draw calls: the box is being repeated per exit again');
+      if (firstReturn >= 0) {
+        const lastDraw = body.lastIndexOf('_drawInstallNoteBox(');
+        if (!(lastDraw < firstReturn)) throw new Error('a note draw sits after an early return, so some pages would lose it');
+      }
+      if (body.indexOf('if (!_igNoteLeft) {') < 0) throw new Error('the two draws are not one either/or on the side');
     });
 
     __check('a long note set reserves proportionally more room', () => {
@@ -278,7 +289,12 @@ const path = require('path');
       if (i < 0) throw new Error('THE BUG: nothing handles a non-manual install/breaker page before the mode branches');
       const body = S.slice(i, i + 1600);
       if (body.indexOf('_dsInstallGuideControls(') < 0) throw new Error('the breaker branch does not show the install controls (which carry the notes)');
-      if (body.indexOf('variants: false') < 0) throw new Error('a breaker is always elevation-only, so the layout variants should be hidden');
+      // 'breaker', not false, since 17.70. A breaker used to be FORCED elevation-only so
+      // that Install-guide's globals could not bleed onto it; breaker-owned slots do that
+      // job now without also making the plan unreachable. What must stay true is that a
+      // breaker never gets the FULL set - a moulding gallery is an install-guide idea.
+      if (body.indexOf("variants: 'breaker'") < 0) throw new Error('the breaker panel does not ask for the reduced variant set');
+      if (body.indexOf('variants: true') >= 0) throw new Error('a breaker is being offered the full install-guide layout set');
       // It must come BEFORE the per-piece / group branches, or they claim the page.
       const grp = S.indexOf('} else if (isGroupGlobal) {', i);
       const man = S.indexOf('if (desc._manual) {', i);
@@ -360,6 +376,345 @@ const path = require('path');
         if (!Array.isArray(lines)) throw new Error(JSON.stringify(v) + ' gave ' + typeof lines);
       });
       __reset();
+    });
+
+    // Slice a function by its OWN extent. A landmark that happens to sit nearby is how a
+    // check ends up reading an empty string and passing on nothing.
+    const NLFN = String.fromCharCode(10) + 'function ';
+    const fnBody = (name) => {
+      const at = S.indexOf('function ' + name + '(');
+      if (at < 0) throw new Error('missing function ' + name);
+      const end = S.indexOf(NLFN, at + 1);
+      return S.slice(at, end < 0 ? S.length : end);
+    };
+
+    // ── 17.72: THE NOTES PANEL IS A LIST, AN ADD BUTTON AND ONE EDITOR ───
+    __check('a custom note is a ROW with its own tick, not a line in a textarea', () => {
+      editorialContent.installNotes = { keys: {}, custom: 'first line\\nsecond line' };
+      const list = _installNoteList();
+      if (list.length !== 2) throw new Error('the old textarea did not migrate: ' + JSON.stringify(list));
+      if (!list[0].id || !list[1].id) throw new Error('a migrated note has no id');
+      if (!list[0].on) throw new Error('a migrated note came back unticked, so it would stop printing');
+      if (list[0].text !== 'first line') throw new Error('text is ' + list[0].text);
+    });
+
+    __check('the legacy custom string stays a DERIVED mirror', () => {
+      // The field is already in saved projects, so a file written here still prints in a
+      // build that only knows the string - the same shape variationOf keeps.
+      editorialContent.installNotes = { keys: {}, custom: 'a\\nb' };
+      const list = _installNoteList();
+      list[1].on = false;
+      _installNoteSyncCustom();
+      if (editorialContent.installNotes.custom !== 'a') throw new Error('mirror is ' + JSON.stringify(editorialContent.installNotes.custom));
+      list.push({ id: 'x1', text: 'c', on: true });
+      _installNoteSyncCustom();
+      if (editorialContent.installNotes.custom !== 'a\\nc') throw new Error('mirror after add is ' + JSON.stringify(editorialContent.installNotes.custom));
+    });
+
+    __check('an unticked custom note stops printing but is NOT deleted', () => {
+      editorialContent.installNotes = { keys: {}, custom: '' };
+      const list = _installNoteList();
+      list.push({ id: 'k1', text: 'do not break dry wall', on: true });
+      if (_installNoteLines().indexOf('do not break dry wall') < 0) throw new Error('a ticked custom note did not print');
+      list[0].on = false;
+      if (_installNoteLines().indexOf('do not break dry wall') >= 0) throw new Error('an unticked note still prints');
+      if (_installNoteList().length !== 1) throw new Error('unticking deleted the note');
+    });
+
+    __check('a STANDARD note can be reworded, and Reset gives the house wording back', () => {
+      editorialContent.installNotes = { keys: {}, custom: '' };
+      const note = FRAME_INSTALL_NOTES[0];
+      editorialContent.installNotes.keys[note.key] = true;
+      const houseText = note.text();
+      if (_installNoteText(note) !== houseText) throw new Error('the built-in wording did not resolve');
+      _installNoteEdits()[note.key] = 'Hang everything at 1500mm to centre.';
+      if (_installNoteText(note) !== 'Hang everything at 1500mm to centre.') throw new Error('the override did not win');
+      if (_installNoteLines()[0] !== 'Hang everything at 1500mm to centre.') throw new Error('the page still prints the built-in');
+      delete _installNoteEdits()[note.key];
+      if (_installNoteText(note) !== houseText) throw new Error('Reset did not restore the built-in');
+    });
+
+    __check('ONE resolver for a note wording, so the panel cannot disagree with the page', () => {
+      // The panel shows the text on a help dot and the page prints it; two readings of
+      // "which wording" is the trap the image code had.
+      const lines = fnBody('_installNoteLines');
+      if (lines.indexOf('_installNoteText(n)') < 0) throw new Error('the page does not use the resolver');
+      const panel = fnBody('_dsInstallNotesInto');
+      if (panel.indexOf('_installNoteText(note)') < 0) throw new Error('the panel does not use the resolver');
+    });
+
+    __check('the panel offers an add button and one editor, and selection is panel state', () => {
+      const b = fnBody('_dsInstallNotesInto');
+      if (b.indexOf('Add note') < 0) throw new Error('there is no add button');
+      if (b.indexOf('_dsNoteSel') < 0) throw new Error('nothing tracks which note is selected');
+      if (S.indexOf('let _dsNoteSel') < 0) throw new Error('the selection is not module state');
+      if (S.indexOf('editorialContent.noteSel') >= 0) throw new Error('the selection was stored in the project');
+      // A new note arrives selected, or adding one and hunting for where to type it is
+      // two steps for one intention.
+      if (b.indexOf("_dsNoteSel = 'c:' + r.id") < 0) throw new Error('a new note does not select itself');
+    });
+
+    __check('the tick and the label are SEPARATE targets', () => {
+      // Choosing which note to read must never change what prints.
+      const b = fnBody('_dsInstallNotesInto');
+      if (b.indexOf('cb.onclick = (e) => e.stopPropagation();') < 0) throw new Error('clicking the tick also selects the row');
+    });
+
+    __check('no paragraph of help survives in this panel', () => {
+      // Every one cost three or four lines and pushed the Layout buttons below the fold.
+      // The WORDS are kept - they hang off a help dot - so this counts PARAGRAPH
+      // ELEMENTS, not the strings. Searching for the strings matches the tooltips that
+      // now carry them, which is the opposite of the thing being asserted.
+      const b = fnBody('_dsInstallGuideControls');
+      const paras = b.split("createElement('p')").length - 1;
+      if (paras > 0) throw new Error(paras + ' help paragraph(s) still built in this panel');
+      ['legNote', 'wNote', 'psNote', 'pNote'].forEach(v => {
+        if (b.indexOf('const ' + v) >= 0) throw new Error('the ' + v + ' paragraph is back');
+      });
+      if (b.indexOf('secLbl(') < 0) throw new Error('secLbl is gone');
+      if (b.indexOf('_dsHelpDot(') < 0) throw new Error('nothing in this panel uses a help dot');
+    });
+
+    __check('ONE button goes to the elevation, and it is the one that records a return', () => {
+      const b = fnBody('_dsInstallGuideControls');
+      if (b.indexOf('_dsJumpToElevation(desc)') < 0) throw new Error('the jump that records a return trip is gone');
+      // The BUTTON, not the word: the comment explaining why the second one went still
+      // names it, and matching prose is how a check asserts the opposite of its intent.
+      if (b.indexOf('goB.textContent') >= 0) throw new Error('the second, return-less jump button is back');
+      const raw = b.split("switchView('elevation'").length - 1;
+      if (raw > 0) throw new Error(raw + ' raw switchView jumps in this panel; they leave no way back');
+    });
+
+    __check('Presentation layout sits ABOVE Page appearance on a breaker page', () => {
+      // Appearance is still BUILT up front, because several branches return early and it
+      // belongs to all of them; it is MOVED, not rebuilt.
+      if (S.indexOf('function _dsMoveAppearanceAfter') < 0) throw new Error('nothing repositions the appearance section');
+      const at = S.indexOf('if (desc._install && !desc._manual) {');
+      if (at < 0) throw new Error('the breaker branch moved');
+      const br = S.slice(at, at + 2400);
+      if (br.indexOf('_dsMoveAppearanceAfter(t,') < 0) throw new Error('the breaker branch does not reposition it');
+      const tools = fnBody('_dsRenderTools');
+      if (tools.indexOf('_dsPageAppearanceInto(t, desc);') < 0) throw new Error('appearance is no longer built ahead of the branches');
+    });
+
+    // ── A STUB THAT SWALLOWS ITS ARGUMENTS PROVES NOTHING ────────────────
+    // 17.71 gave the note an ink and read the colour as an ARRAY. _annHexToRgb returns
+    // {r,g,b}, so setTextColor was handed undefined three times and the note printed in
+    // nothing at all - on the page, in the PDF, everywhere. It was invisible to every
+    // probe because the stubs all had an empty setTextColor: a no-op cannot notice it was
+    // passed rubbish. Same family as the _round2 ReferenceError - a parse is not a
+    // render, and a recording stub is not a renderer.
+    __check('EXACT BUG: the note box never sets a colour channel to undefined or NaN', () => {
+      const bad = [];
+      const drawn = [];
+      const doc = {
+        setFont() {}, setFontSize() {}, setLineDashPattern() {},
+        setTextColor() {
+          const a = Array.prototype.slice.call(arguments);
+          if (a.length !== 1 && a.length !== 3) bad.push('setTextColor arity ' + a.length);
+          a.forEach((v, i) => {
+            if (typeof v !== 'number' || !isFinite(v)) bad.push('setTextColor arg ' + i + ' = ' + String(v));
+          });
+        },
+        text(t) { drawn.push(String(t)); },
+        splitTextToSize(t, w) {
+          const per = Math.max(8, Math.floor(w / 3.2)); const o = []; let str = t;
+          while (str.length > per) { o.push(str.slice(0, per)); str = str.slice(per); }
+          o.push(str); return o;
+        }
+      };
+      editorialContent.installNotes = { keys: {}, custom: '' };
+      editorialContent.installNotes.keys[FRAME_INSTALL_NOTES[0].key] = true;
+      _drawInstallNoteBox(doc, 22, 240, 150, 240, 1, '#e00000');
+      if (bad.length) throw new Error(bad.join('; '));
+      if (!drawn.length) throw new Error('the note drew no text at all');
+      if (drawn.indexOf('INSTALLATION NOTE') < 0) throw new Error('the heading never printed');
+    });
+
+    __check('the colour helpers speak the {r,g,b} shape _annHexToRgb returns', () => {
+      const c = _annHexToRgb('#141414');
+      if (typeof c.r !== 'number') throw new Error('_annHexToRgb no longer returns {r,g,b}');
+      if (Array.isArray(c)) throw new Error('_annHexToRgb returns an array now; the note drawer indexes by key');
+      const body = _installNoteBodyRgb(c);
+      ['r', 'g', 'b'].forEach(k => {
+        if (typeof body[k] !== 'number' || !isFinite(body[k])) throw new Error('_installNoteBodyRgb.' + k + ' = ' + body[k]);
+      });
+      // And lighter than the heading, which is the relationship it exists to keep.
+      if (!(body.r > c.r)) throw new Error('the body did not lift off the heading');
+    });
+
+    __check('A NOTE INK IS NEVER WHITE, and a stored pale one falls back', () => {
+      // White is the first swatch in FRAME_TEXT_INKS because type on a dark page needs
+      // it. An install or breaker sheet is always white, so picking it there prints a
+      // note nobody can see and nothing on the page says why.
+      const inks = [];
+      FRAME_NOTE_INKS.forEach(f => f.colors.forEach(c => inks.push(c.toLowerCase())));
+      if (inks.indexOf('#ffffff') >= 0) throw new Error('the note palette still offers white');
+      if (inks.indexOf('#e00000') < 0) throw new Error('the note palette lost red, which is what an urgent note is set in');
+      // A project that picked white before the palette changed must not go on printing
+      // nothing while the tick list insists the note is on.
+      if (_installNoteInk('#ffffff') !== IG_NOTE_INK_DEFAULT) throw new Error('a stored white still resolves to white');
+      if (_installNoteInk('#e00000') !== '#e00000') throw new Error('a real ink was rejected');
+      if (_installNoteInk('#141414') !== '#141414') throw new Error('the default was rejected');
+      const b = fnBody('_dsNoteSizeSliders');
+      if (b.indexOf('FRAME_NOTE_INKS') < 0) throw new Error('the picker still offers the full text palette');
+    });
+
+    __check('the panel shows what the page will print', () => {
+      // Three reports of "the notes are not showing up" came down to the panel having no
+      // opinion: the tick list says a note is ON and the page was the only other place
+      // that knew. Nothing in the chip means nothing prints.
+      const b = fnBody('_dsInstallNotesInto');
+      if (b.indexOf('_installNoteLines()') < 0) throw new Error('the panel does not resolve the printed lines');
+      if (b.indexOf('Prints on the page') < 0) throw new Error('there is no preview of what prints');
+      if (b.indexOf("background:#ffffff") < 0) throw new Error('the preview is not on white, so a pale ink would still look fine');
+    });
+
+    // ── 17.74: ONE WIDTH BUDGET, TWO WINDOWS ONTO IT ────────────────────
+    __check('Column width and Elevation width are the SAME number from two ends', () => {
+      const W = _igNominalContentW();
+      const cfg = { legendW: 170 };
+      const col = _igColW(cfg, W);
+      const elev = _igElevW(cfg, W);
+      if (Math.abs((col + elev + IG_COL_GUTTER) - W) > 0.01) throw new Error('the two do not add up to the content width: ' + col + ' + ' + elev + ' + ' + IG_COL_GUTTER + ' vs ' + W);
+      // And writing through the elevation end lands back on the same column.
+      const back = _igColWForElevW(elev, W);
+      if (Math.abs(back - col) > 0.01) throw new Error('the round trip moved the column: ' + back + ' vs ' + col);
+    });
+
+    __check('THE FAIL-SAFE BINDS BOTH WAYS: neither side can starve the other', () => {
+      const W = _igNominalContentW();
+      // Push the column absurdly wide.
+      const wide = _igColW({ legendW: 9999 }, W);
+      if (wide > IG_COL_MAX) throw new Error('the column ran past its cap: ' + wide);
+      const leftForElev = W - wide - IG_COL_GUTTER;
+      if (leftForElev < W * IG_ELEV_MIN_FRAC - 0.01) throw new Error('the drawing was squeezed below its floor: ' + leftForElev + ' of ' + W);
+      // Push it absurdly narrow.
+      const thin = _igColW({ legendW: 1 }, W);
+      if (thin < IG_COL_MIN) throw new Error('the column went under its floor: ' + thin);
+      // And through the elevation slider, which writes the same stored number.
+      const greedy = _igColWForElevW(W, W);
+      if (greedy < IG_COL_MIN) throw new Error('dragging the elevation to full width starved the column: ' + greedy);
+      const tiny = _igColWForElevW(0, W);
+      if (tiny > IG_COL_MAX) throw new Error('dragging the elevation to nothing blew past the column cap: ' + tiny);
+    });
+
+    __check('a narrow page cannot produce a column wider than its own share', () => {
+      // The cap is a FRACTION as well as a number, so a small page clamps before 340pt.
+      const small = 400;
+      const col = _igColW({ legendW: 340 }, small);
+      if (col > small * (1 - IG_ELEV_MIN_FRAC) - IG_COL_GUTTER + 0.01) throw new Error('a narrow page let the column take ' + col + ' of ' + small);
+      if (_igElevW({ legendW: 340 }, small) < small * IG_ELEV_MIN_FRAC - 0.01) throw new Error('the drawing lost its share on a narrow page');
+    });
+
+    __check('ONE stored number, so the two sliders cannot disagree', () => {
+      const b = fnBody('_dsInstallGuideControls');
+      if (b.indexOf("slider('Column width'") < 0) throw new Error('there is no column width slider');
+      if (b.indexOf("slider('Elevation width'") < 0) throw new Error('there is no elevation width slider');
+      // Both write legendW - a second stored field is how they start drifting.
+      if (b.indexOf('commit({ legendW: _igColWForElevW(v, contentW) })') < 0) throw new Error('the elevation slider does not write the shared number');
+      if (b.indexOf('elevW:') >= 0 || b.indexOf('breakerElevW') >= 0) throw new Error('a second width field was introduced');
+    });
+
+    __check('the note multiplier is offered for a RIGHT column only', () => {
+      // On the left the notes share the legend's column, so the % slider sized a width
+      // nothing read. An inert control beside a live one teaches that the panel is broken.
+      const b = fnBody('_dsNoteSizeSliders');
+      const at = b.indexOf("slider('Column width', 'noteW'");
+      if (at < 0) throw new Error('the note width slider is gone entirely');
+      if (b.slice(Math.max(0, at - 120), at).indexOf("cfg().noteSide !== 'left'") < 0) throw new Error('the note multiplier still shows on a left column');
+    });
+
+    // ── THE LEGEND SITS UNDER THE SUBHEADING ────────────────────────────
+    __check('the legend has its OWN top, higher than the drawing area', () => {
+      const b = fnBody('_drawInstallGuidePage');
+      if (b.indexOf('const _igLegTop =') < 0) throw new Error('the legend still starts at the drawing top');
+      if (b.indexOf('_igBand.sub + _subtitleClear()') < 0) throw new Error('the legend top is not measured off the subheading');
+      // Both layout branches draw from it, or one of them keeps the old hole.
+      const uses = b.split('drawLegendBlocks(M, _igLegTop').length - 1;
+      if (uses !== 2) throw new Error(uses + ' branches draw the legend from its own top; expected 2');
+      // And the notes follow it up, or they would overlap the legend that moved.
+      if (b.indexOf('const ny = _igLegTop +') < 0) throw new Error('the notes did not follow the legend up');
+    });
+
+    __check('the legend steps OVER the item code when a page carries one', () => {
+      const b = fnBody('_drawInstallGuidePage');
+      if (b.indexOf('(_igCodeId ? 10 : 0)') < 0) throw new Error('the legend can print through the item code');
+      // ONE code id, or the clearance and the drawn code disagree about whether there is one.
+      if (b.indexOf('const codeId = _igCodeId;') < 0) throw new Error('the item code is resolved twice');
+    });
+
+    __check('the legend metrics are declared BEFORE the first thing that reads them', () => {
+      // _igLegTop uses IG_LEG_TOP_GAP. A const declared further into the function is read
+      // in the TDZ: the file parses, node --check passes, and every install and breaker
+      // page throws on render. Third time this trap has been sprung in this file.
+      const b = fnBody('_drawInstallGuidePage');
+      const decl = b.indexOf('const IG_LEG_ROW_H');
+      const use = b.indexOf('IG_LEG_TOP_GAP;');
+      if (decl < 0) throw new Error('the legend metrics are gone');
+      if (!(decl < use)) throw new Error('IG_LEG_TOP_GAP is read before it is declared');
+    });
+
+    // ── 17.75: THE ELEVATION WIDTH SLIDER HAD TO MEAN SOMETHING ─────────
+    __check('EXACT BUG: a widescreen elevation is HEIGHT-bound, so width alone did nothing', () => {
+      // fitIn takes the smaller of the two fits. On a 915x340 content area a 1.9-aspect
+      // wall is already as wide as its height allows, so the slider only bit below about
+      // 646pt and "make it bigger" did nothing at all. The drawing rises beside the title
+      // now, which is the only place the extra height could come from.
+      const b = fnBody('_drawInstallGuidePage');
+      if (b.indexOf('const _igDrawTop = (left) =>') < 0) throw new Error('nothing decides whether the drawing may rise');
+      const uses = b.split('_igDrawTop(ex0)').length - 1;
+      if (uses !== 2) throw new Error(uses + ' layout branches ask; expected 2');
+      // Both must FIT against the raised top, or one of them rises and stays small.
+      if (b.indexOf('fitIn(aspect, SR.R - ex0, yBot - capH - eTop)') < 0) throw new Error('the elevation-only fit ignores the raised top');
+      if (b.indexOf('fitIn(aspect, SR.R - ex0, (yBot - capH) - eTop)') < 0) throw new Error('the plan-variant fit ignores the raised top');
+    });
+
+    __check('it rises only when it MEASURABLY clears the title, never on an assumption', () => {
+      // A wall name is user text with no length limit. Guessing from the column width
+      // would print the drawing through a long heading.
+      const b = fnBody('_drawInstallGuidePage');
+      if (b.indexOf('_igTitleRight') < 0) throw new Error('the title block is not measured');
+      if (b.indexOf('doc.getTextWidth((zone') < 0) throw new Error('the heading width is not measured');
+      if (b.indexOf("doc.getTextWidth('ELEVATION DETAIL'") < 0) throw new Error('the subheading is not in the measurement');
+      // …and it measures the SUBHEADING AS PRINTED. A catalogue page prints the layout
+      // name beside it, and measuring the bare words would underestimate the title block
+      // by exactly the part that grows with user text.
+      if (b.indexOf('_catLayoutTag(arg)') < 0) throw new Error('the layout name is drawn but not measured');
+      if (b.indexOf('_igCodeId + ') < 0) throw new Error('the item code is not in the measurement');
+      if (b.indexOf('IG_TITLE_CLEAR') < 0) throw new Error('there is no gap between the title and the drawing');
+      // And it degrades to the safe answer if anything throws while measuring.
+      const at = b.indexOf('catch (e) { _igTitleRight = SR.R; }');
+      if (at < 0) throw new Error('a failed measurement does not fall back to the safe full width');
+    });
+
+    // ── THE LEGEND FOLLOWS THE SPEC DUAL-UNIT SETTING ───────────────────
+    __check('the legend prints dual units exactly as the spec pages beside it do', () => {
+      const keepU = (typeof dashUnit !== 'undefined') ? dashUnit : 'in';
+      const keepD = editorialContent.specDualUnit;
+      dashUnit = 'in';
+      editorialContent.specDualUnit = '';
+      if (_igLegDimText(24, 24) !== '24 × 24 in') throw new Error('dual off: ' + _igLegDimText(24, 24));
+      editorialContent.specDualUnit = 'mm';
+      const mm = _igLegDimText(24, 24);
+      if (mm.indexOf('609.6mm') < 0) throw new Error('dual mm did not print the companion: ' + mm);
+      if (mm.indexOf('24') !== 0) throw new Error('INCHES must lead whatever the project stores: ' + mm);
+      editorialContent.specDualUnit = 'cm';
+      if (_igLegDimText(32, 18).indexOf('cm') < 0) throw new Error('dual cm did not print');
+      // A missing or zero size stays an em dash rather than printing 0.
+      editorialContent.specDualUnit = 'mm';
+      if (_igLegDimText(0, 0) !== '—') throw new Error('an empty size printed a number');
+      if (_igLegDimText(undefined, 10) !== '—') throw new Error('a missing size printed a number');
+      dashUnit = keepU; editorialContent.specDualUnit = keepD;
+    });
+
+    __check('BOTH legend lines go through the one formatter', () => {
+      // Overall dimensions and Art dimensions printed two different ways before: the
+      // stored sizes raw, labelled with elevUnit rather than the dashUnit they are in.
+      const b = fnBody('_drawInstallGuidePage');
+      if (b.indexOf('const dims = _igLegDimText(rr.extW, rr.extH);') < 0) throw new Error('overall dimensions bypass the formatter');
+      if (b.indexOf('_igLegDimText(_op.openW, _op.openH)') < 0) throw new Error('art dimensions bypass the formatter');
+      if (b.indexOf("' ' + _u") >= 0) throw new Error('a hand-built unit suffix survives in the legend');
     });
   `;
 

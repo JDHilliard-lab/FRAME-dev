@@ -143,7 +143,10 @@ const fs = require('fs');
       renderNavTabs();
       const tabs = document.querySelectorAll('#nav-tabs-fixed .nav-tab');
       if (tabs.length !== 3) throw new Error('expected 3 fixed tabs, got ' + tabs.length);
-      const labels = Array.prototype.map.call(tabs, t => t.textContent.trim());
+      // The LABEL, not the whole tab: since 17.83 a tab also carries its step number
+      // and a count of what is left (see _projectStepCounts), so its full text reads
+      // "2Elevation1". The names and their order are what this check is about.
+      const labels = Array.prototype.map.call(tabs, t => (t.querySelector('.nav-label') || t).textContent.trim());
       if (labels.join('|') !== 'Frame Dashboard|Elevation|Deck') throw new Error('unexpected tabs: ' + labels.join('|'));
       // DOM-based, not a source-string search: comments explaining where the
       // button used to live are fine, a real control is not.
@@ -157,7 +160,7 @@ const fs = require('fs');
       __seedElevs();
       const activeLabel = () => {
         const a = document.querySelector('#nav-tabs-fixed .nav-tab.active');
-        return a ? a.textContent.trim() : null;
+        return a ? (a.querySelector('.nav-label') || a).textContent.trim() : null;
       };
       switchView('dashboard'); if (activeLabel() !== 'Frame Dashboard') throw new Error('dashboard: ' + activeLabel());
       switchView('elevation', 0); if (activeLabel() !== 'Elevation') throw new Error('elevation: ' + activeLabel());

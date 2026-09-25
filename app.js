@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.60';
+const APP_VERSION = '17.83';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -41,6 +41,197 @@ const APP_BUILD = (function () {
     } catch (e) {}
     return 'dev';
 })();
+
+// A HALF-CACHED BUILD ANNOUNCES ITSELF RATHER THAN BEHAVING STRANGELY.
+// index.html has carried style.css?v= for a long time, because a cached
+// stylesheet beside a fresh app.js makes every new rule silently absent. The
+// reverse was unguarded: fresh HTML and CSS against a CACHED app.js, where the
+// version pill reads whatever the stale file says, so the one indicator a
+// designer would check agrees with itself and is wrong. app.js now carries the
+// same query, and index.html stamps the version it was built against.
+//
+// The stamp is the part that does the work. Once a browser holds a mismatched
+// pair the query string cannot help, because the URL in the cached HTML is the
+// old one - so the check has to happen at runtime, from the two files
+// themselves. Deliberately not fatal: the app mostly works, and telling someone
+// their tab is stale is more useful than refusing to open a project.
+function _checkBuildPairing() {
+    try {
+        const want = (typeof window !== 'undefined') ? window.FRAME_HTML_VERSION : null;
+        if (!want || want === APP_VERSION) return true;
+        if (typeof showInfoModal === 'function') {
+            showInfoModal('This tab is running mixed files',
+                'index.html is from build ' + want + ' but app.js is from build ' + APP_VERSION + '. '
+                + 'The browser has served part of an older build from its cache, so some things will '
+                + 'not work and the version pill cannot be trusted.'
+                + String.fromCharCode(10) + String.fromCharCode(10)
+                + 'Reload with Ctrl+Shift+R (Cmd+Shift+R on a Mac) before carrying on. Save your work first if you have any.');
+        }
+        try { console.warn('FRAME build mismatch: index.html ' + want + ' vs app.js ' + APP_VERSION); } catch (e) {}
+        return false;
+    } catch (e) { return true; }
+}
+
+// ── THE ORDER OF OPERATIONS ─────────────────────────────────────────────
+// Nothing said what order the work goes in: spec the pieces, place them on
+// walls, pin them on the plan, build the deck, generate the PDF. A designer
+// opening FRAME cold met three tabs and no sense of which came first, and a
+// project part way through said nothing about what was still missing until
+// Preflight did, at the very end.
+//
+// THREE PARTS, each doing the job the others cannot:
+//   - the view tabs are NUMBERED, so the order is on screen everywhere, at
+//     almost no width in a nav row that has none to spare;
+//   - a BADGE on Elevation and Deck counts what is left, so "what is still
+//     missing" is answered without opening anything;
+//   - Help's Start here opens with a LIVE checklist of all five steps, because
+//     two of them (pinning, the PDF) live inside the Deck tab and a tab can
+//     only carry one number.
+// Everything here is DERIVED from the project on each read and never stored,
+// so it cannot go stale - the same reason WF WALL is derived from the glass.
+//
+// "A piece" is _deckSpecRows(), the one answer to which rows earn a spec page,
+// so a catalogue mockup's slots are not counted as work to do. "On a wall" is
+// an ACTIVE frame carrying the row's id, the same test quantities use.
+
+// The cheap half, read on every nav render: no page list, no captures.
+function _projectStepCounts() {
+    const pieces = (typeof _deckSpecRows === 'function' ? _deckSpecRows() : []).filter(r => r && r.id);
+    const onWall = new Set();
+    (typeof elevations !== 'undefined' ? elevations : []).forEach(e => {
+        ((e && e.frames) || []).forEach(f => { if (f && f.active && f.id) onWall.add(f.id); });
+    });
+    const levels = (typeof floorplanLevels !== 'undefined' && Array.isArray(floorplanLevels)) ? floorplanLevels : [];
+    const hasPlan = !!(typeof floorplanImageData !== 'undefined' && floorplanImageData) || levels.some(l => l && l.imageData);
+    const unplaced = pieces.filter(r => !onWall.has(r.id));
+    // A plan with no image cannot be pinned on, so there is nothing to count yet.
+    const unpinned = hasPlan ? pieces.filter(r => !_fpPins(r).length) : [];
+    const noArt = pieces.filter(r => !r.artworkUrl);
+    return { pieces: pieces.length, unplaced: unplaced.length, unpinned: unpinned.length, noArt: noArt.length, hasPlan: hasPlan };
+}
+
+// The full list, for the Help checklist. Adds the page count, which builds the
+// page list and so is kept out of the nav path.
+function _projectSteps() {
+    const c = _projectStepCounts();
+    let pages = 0;
+    try { pages = (_deckPageList() || []).length; } catch (e) {}
+    const plural = (n, one, many) => n + ' ' + (n === 1 ? one : many);
+    return [
+        { n: 1, key: 'spec', label: 'Spec the pieces', view: 'Frame Dashboard',
+          state: c.pieces ? 'done' : 'todo',
+          detail: c.pieces
+            ? plural(c.pieces, 'piece', 'pieces') + (c.noArt ? ', ' + c.noArt + ' still without artwork.' : '.')
+            : 'No pieces yet. Add the first one with + Add.' },
+        { n: 2, key: 'walls', label: 'Place them on walls', view: 'Elevation',
+          state: !c.pieces ? 'waiting' : (c.unplaced ? 'todo' : 'done'),
+          detail: !c.pieces ? 'After step 1.'
+            : (c.unplaced ? c.unplaced + ' of ' + c.pieces + ' not on a wall yet.' : 'Every piece is on a wall.') },
+        { n: 3, key: 'plan', label: 'Pin them on the floorplan', view: 'Deck',
+          state: !c.hasPlan ? 'optional' : (c.unpinned ? 'todo' : 'done'),
+          detail: !c.hasPlan ? 'No floorplan yet. Skip this if the project has none.'
+            : (c.unpinned ? c.unpinned + ' of ' + c.pieces + ' not pinned yet.' : 'Every piece is pinned.') },
+        { n: 4, key: 'deck', label: 'Build the deck', view: 'Deck', state: 'open',
+          detail: plural(pages, 'page', 'pages') + '. Check each one before you generate.' },
+        { n: 5, key: 'pdf', label: 'Generate the PDF', view: 'Deck', state: 'open',
+          detail: 'When the pages look right. Run Preflight first.' },
+    ];
+}
+
+// What the Elevation and Deck badges say, and the tooltip that explains them.
+// One definition, used by the tab render AND the in-place update, or the badge
+// and its tooltip could describe two different counts.
+function _navStepBadge(view, c) {
+    if (view === 'elevation' && c.pieces && c.unplaced) {
+        return { n: c.unplaced, tip: (c.unplaced === 1 ? '1 piece is' : c.unplaced + ' pieces are') + ' not on a wall yet.' };
+    }
+    if (view === 'deck' && c.hasPlan && c.unpinned) {
+        return { n: c.unpinned, tip: (c.unpinned === 1 ? '1 piece is' : c.unpinned + ' pieces are') + ' not pinned on the floorplan yet.' };
+    }
+    return null;
+}
+const NAV_STEP_TIPS = {
+    dashboard: 'Step 1: spec the pieces.',
+    elevation: 'Step 2: place the pieces on walls.',
+    deck: 'Steps 3 to 5: pin the pieces on the floorplan, build the deck, generate the PDF.',
+};
+
+// Update the badges IN PLACE rather than re-rendering the tabs: a re-render
+// replaces the elements, which drops keyboard focus off a tab mid-Tab.
+function _syncNavBadges() {
+    let c;
+    try { c = _projectStepCounts(); } catch (e) { return; }
+    document.querySelectorAll('#nav-tabs-fixed .nav-tab[data-view]').forEach(tab => {
+        const v = tab.getAttribute('data-view');
+        const b = _navStepBadge(v, c);
+        const el = tab.querySelector('.nav-badge');
+        if (el) {
+            el.textContent = b ? String(b.n) : '';
+            el.style.display = b ? '' : 'none';
+        }
+        tab.title = (NAV_STEP_TIPS[v] || '') + (b ? ' ' + b.tip : '');
+    });
+}
+
+// Debounced off scheduleAutosave, the hook nearly every edit already calls.
+let _navBadgeTimer = null;
+function _scheduleNavBadges() {
+    if (_navBadgeTimer) clearTimeout(_navBadgeTimer);
+    _navBadgeTimer = setTimeout(() => { _navBadgeTimer = null; _syncNavBadges(); }, 400);
+}
+
+// The Help checklist. Built as markup for renderHelpRefSection, with a Go
+// button per step that closes Help and takes you there.
+function _helpLiveEntry(kind) {
+    if (kind !== 'steps') return '';
+    let steps;
+    try { steps = _projectSteps(); } catch (e) { return ''; }
+    const mark = { done: '&#10003;', todo: '&bull;', waiting: '&ndash;', optional: '&ndash;', open: '&bull;' };
+    return '<ul class="help-live-steps">' + steps.map(s =>
+        '<li class="hs-' + s.state + '">'
+        + '<span class="hs-mark" aria-hidden="true">' + mark[s.state] + '</span>'
+        + '<span class="hs-text"><strong>' + s.n + '. ' + _esc(s.label) + '</strong> '
+        + '<span class="hs-view">' + _esc(s.view) + '</span><br>' + _esc(s.detail) + '</span>'
+        + '<button class="action-btn btn-secondary hs-go" style="width:auto;" data-help-go="' + s.key + '">'
+        + (s.key === 'pdf' ? 'Generate' : 'Go') + '</button>'
+        + '</li>').join('') + '</ul>';
+}
+
+function _helpGoStep(key) {
+    try { closeHelpModal(); } catch (e) {}
+    if (key === 'spec') { switchView('dashboard'); return; }
+    if (key === 'walls') { switchView('elevation', typeof currentElevIndex === 'number' ? currentElevIndex : 0); return; }
+    switchView('deck');
+    if (key === 'pdf' && typeof _dsOpenGenerate === 'function') { try { _dsOpenGenerate(); } catch (e) {} }
+}
+
+// ARMED AT BOOT, SHOWN ON THE FIRST CLICK. A tip on a boot timer is a timer every
+// headless load pays for: the toast lives 12 seconds, so each of the 140-odd test
+// harnesses stayed alive that long after finishing and the suite ran for half an
+// hour. The same trap the template-card prewarm was moved off the boot tail for.
+// A real designer clicks within seconds of opening FRAME, so the tip still lands
+// at the start of the first session; a harness that never clicks never sees it.
+function _armStepsFirstRunTip() {
+    let seen = true;
+    try { seen = !!localStorage.getItem('frameStepsTipSeen'); } catch (e) {}
+    if (seen) return;
+    const once = function () { document.removeEventListener('pointerdown', once, true); _stepsFirstRunTip(); };
+    document.addEventListener('pointerdown', once, true);
+}
+
+// ONCE PER MACHINE, the first time FRAME opens there: a notice pointing at the
+// numbers and at Help. A notice and not a dialog, because a tip is safe to miss,
+// and a dialog at boot would sit on top of the autosave question.
+function _stepsFirstRunTip() {
+    let seen = true;
+    try { seen = !!localStorage.getItem('frameStepsTipSeen'); } catch (e) {}
+    if (seen) return;
+    try { localStorage.setItem('frameStepsTipSeen', '1'); } catch (e) {}
+    setTimeout(() => {
+        if (typeof _toast !== 'function') return;
+        _toast('New to FRAME?', 'The tabs are numbered in the order you work: 1 spec the pieces, 2 place them on walls, 3 build the deck and the PDF. Help > Start here has the full list, and where this project is.', { ms: 12000 });
+    }, 1500);
+}
 
 let currentView = 'dashboard';
 let dashUnit = 'in';
@@ -294,6 +485,16 @@ function _frameSwatchList() {
 // end of it. Anything else that is an ink rather than a shade joins that row.
 const FRAME_TEXT_INKS = [
     { name: 'Ink', colors: ['#ffffff', '#d8d8d8', '#b0b0b0', '#9c9c9c', '#8a8a8a', '#6e6e6e', '#4a4a4a', '#222222', '#141414', '#000000'] },
+    { name: 'Note', colors: ['#e00000'] },
+];
+// THE SAME RAMP WITHOUT WHITE, for the installation note. White is the FIRST swatch in
+// FRAME_TEXT_INKS because type on a dark page needs it - and an install or breaker sheet
+// is always white, so picking it there prints a note nobody can see and nothing on the
+// page says why. Exactly the reasoning FRAME_GREY_RAMP already carries for the scale
+// figure ("no pure white: a white figure is invisible").
+// #d8d8d8 goes too: legible on screen, invisible in print on coated stock.
+const FRAME_NOTE_INKS = [
+    { name: 'Ink', colors: ['#b0b0b0', '#9c9c9c', '#8a8a8a', '#6e6e6e', '#4a4a4a', '#222222', '#141414', '#000000'] },
     { name: 'Note', colors: ['#e00000'] },
 ];
 const FRAME_GREY_RAMP = [
@@ -664,7 +865,73 @@ function unitInfo(u) { return UNIT_INFO[u] || UNIT_INFO.in; }
 function unitFactor(from, to) {
     return unitInfo(to).factor / unitInfo(from).factor;
 }
-let elevations = [{ name: "Elevation 1", frames: [], wallW: 185, wallH: 108, personPos: { x: -60 } }];
+// ── A WALL'S IDENTITY ─────────────────────────────────────────────────────
+// AN ELEVATION IS ADDRESSED BY ITS ARRAY INDEX EVERYWHERE, and `variationOf` is
+// what that costs: THREE hand-written renumbering blocks for ONE field, one in
+// reorderElevation and two in deleteElevation, each of which has to stay right
+// on its own. Splice the array and a stored reference silently points at a
+// DIFFERENT wall - the trap `_dsDragFromKey`, the context blocks and the
+// floorplan level pins were each dug out of, and the one that makes anything
+// else pointing AT a wall unsafe to build.
+//
+// `variationOfId` is the truth. `variationOf` survives as a DERIVED numeric
+// mirror kept by _elevSyncVariationPrimary, exactly the way r.planX mirrors
+// planPins[0]: the field is already in saved projects, so a file written here
+// still opens in a build that only knows the number.
+//
+// Declared ABOVE `let elevations` on purpose. That literal RUNS at module scope,
+// so a counter declared further down is read in the TDZ and the file dies on boot
+// - the same trap that keeps TITLE_SIZE_DEFAULT above editorialContent.
+let _elevIdSeq = 0;
+function _elevNewId() { return 'ev' + (++_elevIdSeq) + '_' + Math.floor(Math.random() * 1e6).toString(36); }
+// Lazy, like _elevContextBlocks' id backfill: a wall that predates ids gets one
+// the first time anything asks, so there is no load path left to forget.
+function _elevId(elev) {
+    if (!elev) return '';
+    if (!elev.id) elev.id = _elevNewId();
+    return elev.id;
+}
+function _elevIndexById(id) {
+    if (!id) return -1;
+    const els = (typeof elevations !== 'undefined' && elevations) || [];
+    for (let i = 0; i < els.length; i++) { if (els[i] && els[i].id === id) return i; }
+    return -1;
+}
+function _elevById(id) { const i = _elevIndexById(id); return i < 0 ? null : elevations[i]; }
+// The numeric mirror, RE-DERIVED after any array mutation rather than patched by
+// hand. That is the whole point: one line to keep right instead of three shifting
+// blocks that each had to agree.
+function _elevSyncVariationPrimary() {
+    const els = (typeof elevations !== 'undefined' && elevations) || [];
+    els.forEach(e => {
+        if (!e) return;
+        if (!e.variationOfId) { delete e.variationOf; return; }
+        const i = _elevIndexById(e.variationOfId);
+        // Source gone: PROMOTE the variation rather than leave it flagged, or
+        // recalculateDashboardQuantities skips frames that ARE being ordered and
+        // the quantity reads 0. That promotion used to live in deleteElevation;
+        // here it also covers a wall removed by an undo or a project load.
+        if (i < 0) { delete e.variationOfId; delete e.isVariation; delete e.variationOf; delete e.catalogueOption; return; }
+        e.variationOf = i;
+    });
+}
+// Assign ids, and convert any index-keyed variationOf written by an older build.
+// Idempotent, and called from BOTH install points - the project-open path and
+// restoreProjectState, which undo, autosave-restore and version history all
+// funnel through. The index is read against the array AS SAVED, the only order it
+// was ever correct in, so this has to run before anything reorders.
+function _elevMigrateIds() {
+    const els = (typeof elevations !== 'undefined' && elevations) || [];
+    els.forEach(e => { if (e && !e.id) e.id = _elevNewId(); });
+    els.forEach(e => {
+        if (!e || e.variationOfId || typeof e.variationOf !== 'number') return;
+        const src = els[e.variationOf];
+        if (src && src.id) e.variationOfId = src.id;
+        else { delete e.variationOf; delete e.isVariation; }
+    });
+    _elevSyncVariationPrimary();
+}
+let elevations = [{ id: _elevNewId(), name: "Elevation 1", frames: [], wallW: 185, wallH: 108, personPos: { x: -60 } }];
 let _elevMarquee = null;   // marquee drag state for selecting frames on the wall
 let currentElevIndex = 0;
 let elevFrames = elevations[0].frames;
@@ -804,7 +1071,14 @@ function _fpNumbers() {
 function _artGroupKey(code) {
     const c = (code == null ? '' : String(code)).trim();
     const stripped = c.replace(/[-_\s]*[A-Za-z]\d*$/, '');   // drop a trailing piece suffix (-A, -B1…)
-    return (/\d/.test(stripped) && stripped) ? stripped : c; // keep pure-letter codes intact
+    // AND THE SEPARATOR THE SUFFIX HUNG OFF. A dot-style code (ART.1.A) left 'ART.1.'
+    // behind, which printed as the page title "ART.1." and, once catalogue options
+    // started being minted from the key, produced 'ART.1..2A'. Hyphen-style codes never
+    // showed it because the strip above already eats '-' and '_'; only '.' survived.
+    // Grouping is unchanged either way - every piece of one unit trims to the same
+    // string - so this moves the key's SPELLING, not which rows sit together.
+    const trimmed = stripped.replace(/[-._\s]+$/, '');
+    return (/\d/.test(trimmed) && trimmed) ? trimmed : c; // keep pure-letter codes intact
 }
 function _artGroupNum(code) {
     const key = _artGroupKey(code);
@@ -930,8 +1204,15 @@ function _fpWallPanelsOn(r, lv) {
 function _fpGroups(level) {
     const want = (level == null) ? null : _deckLvlOf(level);
     const order = [], map = {};
+    // Computed once rather than per row: this walks the walls, and _fpGroups is called
+    // on every plan render.
+    const _optRows = _catOptionRowIds();
+    // And the same for an alternate ARRANGEMENT: a diptych and a salon hang offered for
+    // one wall are one place on the plan, not two.
+    const _altArr = _catAltArrRowIds();
     (dashProjectData || []).forEach(r => {
         if (!r) return;
+        if (r.id && (_optRows[r.id] || _altArr[r.id])) return;   // an alternate, not a second placement
         const k = _artGroupKey(r.id || '');
         if (!map[k]) { map[k] = { key: k, num: _artGroupNum(r.id || ''), ids: [], rows: [], level: (r.level || 0), category: r.category || '', location: r.location || '', planX: null, planY: null, planZoom: null }; order.push(k); }
         const g = map[k];
@@ -2022,9 +2303,28 @@ function _pdEditorInto(t, pd) {
     hideCb.onchange = () => { pd.hidden = hideCb.checked; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
     hideRow.appendChild(hideCb); hideRow.appendChild(document.createTextNode('Hide this breaker from the deck'));
     t.appendChild(hideRow);
-    const delB = document.createElement('button'); delB.textContent = 'Delete this breaker'; delB.className = 'action-btn btn-secondary'; delB.style.cssText = 'width:100%; height:28px; margin-top:8px; font-size:var(--fs-65);';
-    delB.onclick = () => { if (!confirm('Delete \u201C' + (pd.title || 'Plan Detail') + '\u201D? This can\u2019t be undone except with Undo.')) return; const a = _planDetails(); const ix = a.indexOf(pd); if (ix >= 0) a.splice(ix, 1); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+    const delB = document.createElement('button'); delB.textContent = 'Delete this plan detail'; delB.className = 'action-btn btn-secondary'; delB.style.cssText = 'width:100%; height:28px; margin-top:8px; font-size:var(--fs-65);';
+    delB.onclick = () => _deletePlanDetail(pd);
     t.appendChild(delB);
+}
+// ONE DELETE FOR A PLAN DETAIL PAGE. It was written out three times - the page
+// panel, the rail and the plan tools - with three different sentences: "Delete",
+// "Remove", and "This can't be undone except with Undo", which is a claim and its
+// contradiction in one breath. Two of the three buttons also called it a BREAKER,
+// which is a different kind of page in this deck.
+function _deletePlanDetail(pd) {
+    if (!pd) return;
+    _confirmDestroy({
+        title: 'Delete \u201C' + (pd.title || 'Plan Detail') + '\u201D?',
+        body: 'This plan detail page comes out of the deck.',
+        undoable: true,
+        onConfirm: () => {
+            const a = _planDetails(); const ix = a.indexOf(pd); if (ix >= 0) a.splice(ix, 1);
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRefresh();
+        },
+    });
 }
 async function _drawPlanDetailPage(doc, logos, pageNum, meta, pd) {
     const PW = doc.internal.pageSize.getWidth(), PH = doc.internal.pageSize.getHeight(), M = 40;
@@ -2366,6 +2666,10 @@ function restoreProjectState(snap) {
     cloned.dashProjectData.forEach(r => dashProjectData.push(r));
     elevations.length = 0;
     cloned.elevations.forEach(e => elevations.push(e));
+    // Undo, autosave-restore and version history all land here. A snapshot written
+    // by this build already carries ids; one written before them is migrated now,
+    // while the array is still in the order the indices were saved against.
+    _elevMigrateIds();
     currentElevIndex = cloned.currentElevIndex;
     if (cloned.editorial) editorialContent = cloned.editorial;
     // A snapshot taken before these were part of the format has neither; leave the
@@ -2450,23 +2754,99 @@ function pushHistory() {
 // Undo: pop current state into redo, restore previous state.
 // We need at least 2 snapshots: current and the one we're going back to.
 function undo() {
-    if (undoStack.length < 2) return;  // nothing to undo
+    if (_historyBlockedByDialog()) return;
+    if (undoStack.length < 2) { _historyAnnounce('Nothing to undo', ''); return; }
     const current = undoStack.pop();
     redoStack.push(current);
     const previous = undoStack[undoStack.length - 1];
     restoreProjectState(previous);
     refreshAllViews();
     updateUndoButtons();
+    _historyAnnounce('Undone', _historyWhere(current, previous));
 }
 
 // Redo: pop from redo stack, push back to undo stack, restore.
 function redo() {
-    if (redoStack.length === 0) return;
+    if (_historyBlockedByDialog()) return;
+    if (redoStack.length === 0) { _historyAnnounce('Nothing to redo', ''); return; }
+    const before = undoStack[undoStack.length - 1];
     const next = redoStack.pop();
     undoStack.push(next);
     restoreProjectState(next);
     refreshAllViews();
     updateUndoButtons();
+    _historyAnnounce('Redone', _historyWhere(before, next));
+}
+
+// ── UNDO SAYS WHERE IT WENT ──────────────────────────────────────────────
+// Undo reverts the whole project, so the change it takes back is often on a
+// view you are not looking at - press Ctrl+Z in the Dashboard and a frame moves
+// on a wall you cannot see. It said nothing at all, so the only sign it had
+// worked was hunting for what was different. It now names WHERE the change
+// was: which wall, which piece, or the deck.
+//
+// Derived by COMPARING the two snapshots rather than by labelling each
+// pushHistory: there are 246 call sites, and a label written at each is 246
+// chances to describe the wrong thing. Long strings - every artwork data URL -
+// are compared by length and tail, as _elevCaptureSignature does, so this
+// costs a few milliseconds on a keypress and nothing on an edit.
+function _histSig(v) {
+    try {
+        return JSON.stringify(v, (k, x) => (typeof x === 'string' && x.length > 200) ? ('#' + x.length + ':' + x.slice(-24)) : x);
+    } catch (e) { return null; }
+}
+function _historyWhere(a, b) {
+    if (!a || !b) return '';
+    const parts = [];
+    const nm = (e) => '“' + ((e && e.name) || 'Untitled') + '”';
+    const ea = a.elevations || [], eb = b.elevations || [];
+    if (ea.length !== eb.length) {
+        const ida = new Set(ea.map(e => e && e.id)), idb = new Set(eb.map(e => e && e.id));
+        const w = eb.find(e => e && !ida.has(e.id)) || ea.find(e => e && !idb.has(e.id));
+        parts.push(w ? ('the ' + nm(w) + ' wall') : 'the walls');
+    } else {
+        const ch = [];
+        for (let i = 0; i < eb.length; i++) if (_histSig(ea[i]) !== _histSig(eb[i])) ch.push(eb[i]);
+        if (ch.length === 1) parts.push('the ' + nm(ch[0]) + ' wall');
+        else if (ch.length > 1) parts.push(ch.length + ' walls');
+    }
+    const ra = a.dashProjectData || [], rb = b.dashProjectData || [];
+    if (ra.length !== rb.length) {
+        const idsA = new Set(ra.map(r => r && r.id)), idsB = new Set(rb.map(r => r && r.id));
+        const r = rb.find(x => x && !idsA.has(x.id)) || ra.find(x => x && !idsB.has(x.id));
+        parts.push(r && r.id ? ('piece ' + r.id) : 'a piece');
+    } else {
+        const ch = [];
+        for (let i = 0; i < rb.length; i++) if (_histSig(ra[i]) !== _histSig(rb[i])) ch.push(rb[i]);
+        if (ch.length === 1) parts.push(ch[0] && ch[0].id ? ('piece ' + ch[0].id) : 'a piece');
+        else if (ch.length > 1) parts.push(ch.length + ' pieces');
+    }
+    if (_histSig(a.editorial) !== _histSig(b.editorial)) parts.push('the deck');
+    if (a.hangHeightIn !== b.hangHeightIn || a.baseboardIn !== b.baseboardIn) parts.push('the hang height and baseboard');
+    return parts.join(', ');
+}
+
+// One notice at a time: ten presses of Ctrl+Z are one conversation, and ten
+// stacked notices would bury the one that matters, the latest.
+let _historyToastEl = null;
+function _historyAnnounce(title, where) {
+    if (typeof _toast !== 'function') return;
+    try { if (_historyToastEl && _historyToastEl.isConnected) _historyToastEl.remove(); } catch (e) {}
+    const body = where === '' && /^(Undone|Redone)$/.test(title)
+        ? 'Nothing visible changed in that step.'
+        : (where ? ('Changed: ' + where) : '');
+    _historyToastEl = _toast(title, body, { ms: 2600 });
+}
+
+// A dialog in front means Ctrl+Z would change the project BEHIND it - the rows
+// Bulk Edit is editing, the wall a duplicate is being made from - with nothing
+// on screen showing it. Full-screen tools are the exception: the layout editor
+// and the floorplan markup ARE where the editing happens, and undo belongs to them.
+function _historyBlockedByDialog() {
+    const m = (typeof _modalTop === 'function') ? _modalTop() : null;
+    if (!m || m.classList.contains('fm-over')) return false;
+    _historyAnnounce('Close the dialog to undo', '');
+    return true;
 }
 
 // Re-render everything after a state restore. Called by undo/redo.
@@ -2564,7 +2944,8 @@ document.addEventListener('keydown', function(e) {
 //   ←  ↑  →  ↓       Nudge selected frames by SMALL step (defaults: 1" or 1cm)
 //   Shift+arrows     Nudge selected frames by BIG step (defaults: 10" or 10cm)
 //   Delete / Backspace   Remove all selected frames
-//   Escape           Deselect all (also closes modals — see modal handlers)
+//   Escape           Deselect all. With a dialog open it closes the dialog instead
+//                    and stops there - see the shared dialog handler by showConfirmModal.
 //   Ctrl+D / Cmd+D   Duplicate the FIRST selected frame (single-target action)
 //   Ctrl+G / Cmd+G   Toggle group on all selected frames
 //
@@ -3386,7 +3767,7 @@ if (document.readyState === 'loading') {
 // loads a fresh project.
 //
 // Autosave: a separate mechanism that periodically writes the current state
-// to localStorage so a browser crash or accidental close doesn't lose work.
+// to IndexedDB so a browser crash or accidental close doesn't lose work.
 // Doesn't replace explicit save — that's still file-based. On page load we
 // check for a recent autosave and offer to restore it.
 //
@@ -3395,10 +3776,25 @@ if (document.readyState === 'loading') {
 // before closing the tab if there are unsaved changes.
 
 let _isDirty = false;
+// The PRE-INDEXEDDB slot. Read on load so an autosave written by an older
+// build is still offered, and cleared by clearAutosave, but never written to
+// again: see the block above performAutosave for why a project does not fit.
 const AUTOSAVE_KEY = 'frame-tool-autosave';
+const ADB_NAME = 'frameAutosave';
+const ADB_ID = 'current';
 const AUTOSAVE_DEBOUNCE_MS = 500;  // wait this long after last change before autosaving
 let _autosaveTimer = null;
 let _dsThumbRerenderTimer = null;
+// Minted once per page load. It is what tells a stored autosave belonging to
+// THIS session (a genuine older snapshot of the work in front of you, worth
+// keeping when a later write fails) from one belonging to an earlier session,
+// which is stale relative to the current project and is the record that made a
+// failed write offer to restore a different job. See _autosaveFail.
+const _autosaveSession = 'as_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+let _autosaveFailed = false;    // sticky: a write failed and none has since succeeded
+let _autosaveToldUser = false;  // the modal is once per session, the dot stays
+let _autosaveInFlight = false;
+let _autosavePending = false;
 
 // Mark the project as having unsaved changes. Updates the visual indicator.
 function markDirty() {
@@ -3440,15 +3836,33 @@ function updateDirtyIndicator() {
             if (topNav) topNav.appendChild(dot);
         }
     }
-    dot.style.display = _isDirty ? 'inline-block' : 'none';
+    // TWO STATES ON ONE DOT. Orange is the ordinary "unsaved changes, press
+    // Ctrl+S". RED is "autosave is not running", which outranks it: the first
+    // says the file is behind the screen, the second says nothing at all is
+    // catching a crash. The red one shows even on a clean project, because the
+    // condition survives the save that cleared the dirty flag and the designer
+    // needs to keep knowing about it.
+    const shown = _isDirty || _autosaveFailed;
+    dot.style.display = shown ? 'inline-block' : 'none';
+    if (_autosaveFailed) {
+        dot.style.background = '#e00000';
+        dot.style.boxShadow = '0 0 6px rgba(224,0,0,0.55)';
+        dot.title = 'Autosave is not running - save to a file with Ctrl+S';
+    } else {
+        dot.style.background = '#ff8c00';
+        dot.style.boxShadow = '0 0 6px rgba(255,140,0,0.5)';
+        dot.title = 'Unsaved changes - press Ctrl+S to save';
+    }
 }
 
-// Schedule an autosave to localStorage. Debounced — repeated calls within
+// Schedule an autosave. Debounced — repeated calls within
 // AUTOSAVE_DEBOUNCE_MS reset the timer, so rapid changes only trigger one
 // save at the end of the burst.
 function scheduleAutosave() {
     if (_autosaveTimer) clearTimeout(_autosaveTimer);
     _autosaveTimer = setTimeout(performAutosave, AUTOSAVE_DEBOUNCE_MS);
+    // What is left to do moves with every edit that reaches here.
+    if (typeof _scheduleNavBadges === 'function') _scheduleNavBadges();
     // Any change significant enough to autosave is significant enough to
     // warrant a fresh thumbnail — otherwise the rail silently goes stale
     // the moment you edit text, move an element, swap an image, etc.,
@@ -3463,94 +3877,289 @@ function scheduleAutosave() {
     } catch (e) {}
 }
 
-// Actually write to localStorage. Wrapped in try/catch because localStorage
-// can throw on quota exceeded (~5MB limit), private browsing mode, or
-// disabled storage. We silently skip on error rather than crashing the app.
-function performAutosave() {
-    try {
-        const projName = (document.getElementById('g_projName') || {}).value || 'Untitled';
-        const payload = {
-            type: 'master-studio-autosave-v1',
-            timestamp: Date.now(),
-            projName: projName,
-            floorplan: floorplanImageData,
-            floorplanName: floorplanImageName,
-            floorplanLevels: floorplanLevels,
-            editorial: editorialContent,
-            // The LIVE objects, deliberately not a snapshot. This is serialized on
-            // the very next line and JSON.stringify doesn't mutate what it reads, so
-            // cloning first was a full copy of every artwork data URL thrown away
-            // microseconds later — on a debounce timer, for the whole session.
-            data: {
-                dashProjectData: dashProjectData,
-                elevations: elevations,
-                currentElevIndex: currentElevIndex,
-                editorial: editorialContent,
-                hangHeightIn: elevHangIn,
-                baseboardIn: elevBaseboardIn,
-            },
+// ── The write ───────────────────────────────────────────────────────────
+// THE AUTOSAVE LIVES IN INDEXEDDB, AND THAT IS NOT A PREFERENCE. It used to
+// JSON.stringify the whole project into ONE localStorage key. A real deck is
+// far past what that can hold: a 14-row, 4-wall project measured 22.9 MB
+// against a ~5 MB origin budget, because the payload carries every artwork
+// data URL. So the write threw on every project that mattered, the catch
+// console.warn'd, and the safety net silently did not exist on exactly the
+// work worth saving. Version history already knew this and already used
+// IndexedDB (see _vdb below, whose own comment says why); autosave is the one
+// that did not get the memo, and it is the one that covers a crash.
+//
+// TWO STORES, mirroring the version-history split. `ameta` is a few hundred
+// bytes (when, which session, what it was called) and `adata` holds the
+// payload. That is what lets the load path ASK before it reads 22 MB, and the
+// failure path decide whether a stored autosave has gone stale without
+// deserialising a whole project to find out.
+function _adb() {
+    return new Promise((res, rej) => {
+        if (typeof window === 'undefined' || !window.indexedDB) { rej(new Error('no-idb')); return; }
+        const req = indexedDB.open(ADB_NAME, 1);
+        req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains('ameta')) db.createObjectStore('ameta', { keyPath: 'id' });
+            if (!db.objectStoreNames.contains('adata')) db.createObjectStore('adata', { keyPath: 'id' });
         };
-        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(payload));
+        req.onsuccess = () => res(req.result);
+        req.onerror = () => rej(req.error || new Error('idb-open-failed'));
+        req.onblocked = () => rej(new Error('idb-blocked'));
+    });
+}
+
+// ONE WRITE PATH, and it takes a BUILDER rather than a payload. The payload
+// holds live object references, and `elevations` / `editorialContent` are
+// reassigned wholesale by a project load, so a payload built before the async
+// open and written after it would autosave the project you just closed.
+// Building inside the transaction closes that window.
+function _aPut(buildPayload) {
+    return _adb().then(db => new Promise((res, rej) => {
+        const payload = buildPayload();
+        const tx = db.transaction(['ameta', 'adata'], 'readwrite');
+        tx.oncomplete = () => res();
+        tx.onerror = () => rej(tx.error || new Error('idb-write-failed'));
+        // A quota refusal aborts the transaction rather than firing onerror on
+        // it, so both are wired or an over-budget write resolves as a success.
+        tx.onabort = () => rej(tx.error || new Error('idb-write-aborted'));
+        tx.objectStore('ameta').put({
+            id: ADB_ID, type: payload.type, timestamp: payload.timestamp,
+            session: payload.session, projName: payload.projName,
+        });
+        // The LIVE objects, deliberately not a snapshot: the structured clone
+        // runs synchronously inside put(), so the record cannot tear, and
+        // cloning first would copy every artwork data URL for nothing. Same
+        // reasoning the JSON.stringify version carried.
+        tx.objectStore('adata').put({ id: ADB_ID, payload: payload });
+    }));
+}
+
+function _aGetMeta() {
+    return _adb().then(db => new Promise((res, rej) => {
+        const rq = db.transaction('ameta', 'readonly').objectStore('ameta').get(ADB_ID);
+        rq.onsuccess = () => res(rq.result || null);
+        rq.onerror = () => rej(rq.error || new Error('idb-read-failed'));
+    }));
+}
+
+function _aGetData() {
+    return _adb().then(db => new Promise((res, rej) => {
+        const rq = db.transaction('adata', 'readonly').objectStore('adata').get(ADB_ID);
+        rq.onsuccess = () => res(rq.result ? rq.result.payload : null);
+        rq.onerror = () => rej(rq.error || new Error('idb-read-failed'));
+    }));
+}
+
+function _aDelete() {
+    return _adb().then(db => new Promise((res, rej) => {
+        const tx = db.transaction(['ameta', 'adata'], 'readwrite');
+        tx.oncomplete = () => res();
+        tx.onerror = () => rej(tx.error || new Error('idb-delete-failed'));
+        tx.onabort = () => rej(tx.error || new Error('idb-delete-aborted'));
+        tx.objectStore('ameta').delete(ADB_ID);
+        tx.objectStore('adata').delete(ADB_ID);
+    }));
+}
+
+// The payload, assembled from the LIVE objects. Its own function because the
+// write path builds it inside the transaction (see _aPut) and because the
+// check that autosave never deep-clones is about THIS, not about the plumbing.
+function _autosavePayload() {
+    const projName = (document.getElementById('g_projName') || {}).value || 'Untitled';
+    return {
+        type: 'master-studio-autosave-v1',
+        timestamp: Date.now(),
+        session: _autosaveSession,
+        projName: projName,
+        floorplan: floorplanImageData,
+        floorplanName: floorplanImageName,
+        floorplanLevels: floorplanLevels,
+        editorial: editorialContent,
+        data: {
+            dashProjectData: dashProjectData,
+            elevations: elevations,
+            currentElevIndex: currentElevIndex,
+            editorial: editorialContent,
+            hangHeightIn: elevHangIn,
+            baseboardIn: elevBaseboardIn,
+        },
+    };
+}
+
+// Write the current state. Async now, and never rejects: it is armed from a
+// setTimeout by 246 call sites, and a rejected promise there is an unhandled
+// rejection nobody is positioned to catch.
+async function performAutosave() {
+    // One write at a time. The payload is tens of megabytes and the debounce
+    // can fire again while a slow write is still in the transaction; two
+    // overlapping writes would queue a second copy of the whole project behind
+    // the first for nothing. A request that arrives mid-write re-arms instead.
+    if (_autosaveInFlight) { _autosavePending = true; return; }
+    _autosaveInFlight = true;
+    try {
+        await _aPut(_autosavePayload);
+        _autosaveOk();
     } catch (err) {
-        // Quota exceeded, private mode, etc. Silent failure — autosave is a
-        // safety net, not a primary feature.
-        console.warn('Autosave failed:', err);
+        try { await _autosaveFail(err); } catch (e) {}
+    } finally {
+        _autosaveInFlight = false;
+        if (_autosavePending) { _autosavePending = false; scheduleAutosave(); }
     }
 }
 
-// Clear the autosave slot. Called after a successful save or load — at
+// A write landed. Only says anything if the last one did not.
+function _autosaveOk() {
+    if (!_autosaveFailed) return;
+    _autosaveFailed = false;
+    _autosaveToldUser = false;   // a later failure deserves to be said again
+    updateDirtyIndicator();
+}
+
+// A FAILED WRITE IS REPORTED, NEVER SWALLOWED - the old code's silence IS the
+// bug, because a designer cannot act on a safety net they do not know is gone.
+// A modal and not a toast: the house rule is that a toast carries what is safe
+// to MISS, and "your work is no longer being backed up" is the exact opposite.
+// Once per session, because this is armed off a 500 ms debounce; the sticky
+// dot on the unsaved indicator is what carries it afterwards.
+async function _autosaveFail(err) {
+    // A stored autosave from an EARLIER session is now stale: the work in front
+    // of the user is not being captured, so on the next load that record offers
+    // to restore a DIFFERENT project behind a plausible-looking timestamp. That
+    // is how a failed write turned into restoring the wrong job. One from THIS
+    // session is a genuine older snapshot of the same work and is worth keeping.
+    // Reading `ameta` rather than `adata` keeps the decision cheap.
+    try {
+        const meta = await _aGetMeta();
+        if (meta && meta.session !== _autosaveSession) await _aDelete();
+    } catch (e) {}
+    _autosaveFailed = true;
+    updateDirtyIndicator();
+    console.warn('Autosave failed:', err);
+    if (_autosaveToldUser) return;
+    _autosaveToldUser = true;
+    const msg = (err && err.message) || '';
+    const blocked = (msg === 'no-idb' || msg === 'idb-blocked');
+    if (typeof showInfoModal === 'function') {
+        showInfoModal('Autosave is not running', blocked
+            ? 'This browser blocked local database storage, which is usually a private window or a locked-down profile. Nothing is being backed up, so use Save Project to write a file as you work.'
+            : 'The browser refused to store a backup of this project, most likely because it is out of space for this site. Nothing is being backed up, so use Save Project to write a file as you work.');
+    }
+}
+
+// Clear the autosave slot. Called after a successful save or load - at
 // that point the in-memory state matches a known file, so the autosave
 // is no longer the most-recent unsaved work.
 function clearAutosave() {
+    // The legacy localStorage slot as well as the live one. A build before this
+    // change may have left a payload there, and "the autosave is no longer the
+    // most recent work" has to clear both or the old one is still offered.
     try { localStorage.removeItem(AUTOSAVE_KEY); } catch (err) {}
+    _aDelete().catch(() => {});
+}
+
+// Read the pre-IndexedDB localStorage slot, if a build before this change left
+// one. Returns the same {type, timestamp, projName} shape the meta record has,
+// carrying the payload with it, so the load path handles one thing either way.
+function _legacyAutosaveRead() {
+    try {
+        const raw = localStorage.getItem(AUTOSAVE_KEY);
+        if (!raw) return null;
+        const p = JSON.parse(raw);
+        if (!p || p.type !== 'master-studio-autosave-v1') return null;
+        return { type: p.type, timestamp: p.timestamp, projName: p.projName, payload: p };
+    } catch (e) { return null; }
+}
+
+// Install a restored payload. Shared by the IndexedDB and legacy paths so the
+// two cannot drift about what restoring means.
+function _autosaveRestore(payload) {
+    // The binding goes: what is being installed is NOT the contents of whichever
+    // file is currently bound, and Save must not write it over that file. Moot
+    // while the handle is session-only and this only runs at boot, but the
+    // invariant is the point - see _setProjectFile.
+    if (typeof _setProjectFile === 'function') _setProjectFile(null, '');
+    restoreProjectState(payload.data);
+    floorplanImageData = payload.floorplan || '';
+    floorplanImageName = payload.floorplanName || '';
+    floorplanLevels = Array.isArray(payload.floorplanLevels) ? payload.floorplanLevels : [];
+    _fpLevel = 0; _fpMigrate();
+    editorialContent = Object.assign(_editorialDefaults(), payload.editorial || {});
+    refreshAllViews();
+    // After restore, push fresh history (clearing prior so undo doesn't
+    // jump back to the pre-restore empty state).
+    undoStack.length = 0;
+    redoStack.length = 0;
+    _isFirstHistoryPush = true;
+    pushHistory();
+    markDirty();  // the restored state isn't yet saved to a file
 }
 
 // On page load, check for an autosave. If one exists from this session
 // (less than 7 days old to avoid restoring ancient work) and the current
 // project hasn't been modified, offer to restore.
-function checkAutosaveOnLoad() {
+async function checkAutosaveOnLoad() {
     try {
-        const raw = localStorage.getItem(AUTOSAVE_KEY);
-        if (!raw) return;
-        const payload = JSON.parse(raw);
-        if (payload.type !== 'master-studio-autosave-v1') return;
-        const ageDays = (Date.now() - payload.timestamp) / (1000 * 60 * 60 * 24);
+        let meta = null;
+        try { meta = await _aGetMeta(); } catch (e) { meta = null; }
+        const legacy = meta ? null : _legacyAutosaveRead();
+        const stamp = meta || legacy;
+        if (!stamp) return;
+        if (stamp.type !== 'master-studio-autosave-v1') return;
+        const ageDays = (Date.now() - stamp.timestamp) / (1000 * 60 * 60 * 24);
         if (ageDays > 7) {
-            // Stale — clear and skip
+            // Stale - clear and skip
             clearAutosave();
             return;
         }
         // Format a human-readable "how long ago"
-        const minutesAgo = Math.round((Date.now() - payload.timestamp) / 60000);
+        const minutesAgo = Math.round((Date.now() - stamp.timestamp) / 60000);
         let timeStr;
         if (minutesAgo < 1) timeStr = 'less than a minute ago';
         else if (minutesAgo < 60) timeStr = `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
         else timeStr = `${Math.round(minutesAgo / 60)} hour${minutesAgo < 120 ? '' : 's'} ago`;
 
-        // Don't auto-restore — ask. Use a small custom prompt rather than
-        // confirm() so we can style it consistently.
-        const projName = payload.projName || 'Untitled';
-        if (confirm(`Found unsaved work from ${timeStr}\n("${projName}")\n\nRestore it?\n\nClick OK to restore, Cancel to discard.`)) {
-            restoreProjectState(payload.data);
-            floorplanImageData = payload.floorplan || '';
-            floorplanImageName = payload.floorplanName || '';
-            floorplanLevels = Array.isArray(payload.floorplanLevels) ? payload.floorplanLevels : [];
-            _fpLevel = 0; _fpMigrate();
-            editorialContent = Object.assign(_editorialDefaults(), payload.editorial || {});
-            refreshAllViews();
-            // After restore, push fresh history (clearing prior so undo doesn't
-            // jump back to the pre-restore empty state).
-            undoStack.length = 0;
-            redoStack.length = 0;
-            _isFirstHistoryPush = true;
-            pushHistory();
-            markDirty();  // the restored state isn't yet saved to a file
-        } else {
+        // Don't auto-restore - ask.
+        const projName = stamp.projName || 'Untitled';
+        const choice = await _askRestoreAutosave(timeStr, projName);
+        if (choice === true) {
+            // ASK FIRST, READ SECOND. The payload is the whole project, tens of
+            // megabytes of artwork; the old code parsed all of it at boot just to
+            // find out what to put in the prompt. The meta record answers that.
+            const payload = legacy ? legacy.payload : await _aGetData();
+            if (!payload || !payload.data) {
+                if (typeof showInfoModal === 'function') showInfoModal('Could not restore', 'The backup record is there but its contents could not be read, so nothing has been changed. Load a saved .json file instead.');
+                return;
+            }
+            _autosaveRestore(payload);
+            // A legacy payload has now been taken into the live project, so the
+            // old slot is no longer the most recent work.
+            if (legacy) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} }
+        } else if (choice === false) {
             clearAutosave();
         }
+        // null is "no answer at all" - there was no way to ask - and it leaves the
+        // backup exactly where it is. Only an explicit Discard throws it away.
     } catch (err) {
         console.warn('Autosave check failed:', err);
     }
+}
+
+// The one question in the app where BOTH answers act: restore the backup, or throw it
+// away. It used to be a raw confirm(), so it arrived as browser chrome and its Cancel
+// button MEANT DISCARD - which, once Escape closes every dialog, would have made an
+// accidental keypress at boot delete the only copy of the work. mustChoose takes Escape
+// and the backdrop out of it, and the buttons say what they do.
+function _askRestoreAutosave(timeStr, projName) {
+    return new Promise((resolve) => {
+        if (typeof showConfirmModal !== 'function') { resolve(null); return; }
+        const NL = String.fromCharCode(10);
+        showConfirmModal('Restore unsaved work?',
+            'FRAME found work from ' + timeStr + ' that was never saved to a file:' + NL + NL
+            + '“' + projName + '”' + NL + NL
+            + 'Restore it, or discard it for good?',
+            'Restore', 'Discard',
+            () => resolve(true), () => resolve(false), { mustChoose: true });
+    });
 }
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -3611,7 +4220,10 @@ function _vDiff(aPieces, bPieces) {
 function openVersionsModal() {
     const old = document.getElementById('versionsModal'); if (old) old.remove();
     const ov = document.createElement('div'); ov.id = 'versionsModal';
-    ov.style.cssText = 'position:fixed; inset:0; z-index:100040; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;';
+    // The shared shell, like every other dialog. This one used to carry its own
+    // fixed overlay at z-index 100040, ABOVE the alert box, so an error raised
+    // from inside it rendered behind it. fm-nested still clears Deck Studio.
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
     const card = document.createElement('div');
     card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:var(--r-10); width:640px; max-width:94vw; max-height:88vh; display:flex; flex-direction:column; overflow:hidden;';
     card.innerHTML = '<div style="display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border-color);">'
@@ -3627,8 +4239,8 @@ function openVersionsModal() {
     const list = document.createElement('div'); list.id = 'vList'; body.appendChild(list);
     const cmp = document.createElement('div'); cmp.id = 'vCompare'; cmp.style.cssText = 'margin-top:6px;'; body.appendChild(cmp);
     card.appendChild(body); ov.appendChild(card); document.body.appendChild(ov);
-    ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
     card.querySelector('#vClose').onclick = () => ov.remove();
+    card.querySelector('#vClose').setAttribute('data-modal-close', '');
     _versionsRender();
 }
 async function _versionsRender() {
@@ -3652,7 +4264,14 @@ async function _versionsRender() {
         const mk = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'font-size:var(--fs-65); font-weight:600; padding:6px 10px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (primary ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (primary ? 'var(--ui-active)' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
         btns.appendChild(mk('Compare', false, () => _vRenderCompare(m)));
         btns.appendChild(mk('Restore', true, () => _vRestore(m.id, m.label)));
-        btns.appendChild(mk('\u2715', false, async () => { if (confirm('Delete this version permanently?')) { await _vDelete(m.id); _versionsRender(); const c = document.getElementById('vCompare'); if (c) c.innerHTML = ''; } }));
+        // A version lives in this browser's database, OUTSIDE the project, so
+        // Ctrl+Z cannot bring it back and the box says so.
+        btns.appendChild(mk('\u2715', false, () => _confirmDestroy({
+            title: 'Delete this version?',
+            body: '\u201C' + (m.label || 'Version') + '\u201D is removed from this browser\u2019s version history.',
+            undoable: false,
+            onConfirm: async () => { await _vDelete(m.id); _versionsRender(); const c = document.getElementById('vCompare'); if (c) c.innerHTML = ''; },
+        })));
         top.appendChild(btns); row.appendChild(top);
         const sc = meta.statusCounts || {};
         const stats = document.createElement('div'); stats.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin-top:7px;';
@@ -3663,7 +4282,12 @@ async function _versionsRender() {
     });
 }
 async function _vRestore(id, label) {
-    if (!confirm('Restore "' + (label || 'this version') + '"?\n\nYour current work will first be saved as a new version, then the project will be replaced.')) return;
+    // Not a destroy: the current work is saved as a version first, so nothing is
+    // lost, and the box is the ordinary one rather than the red one.
+    const ok = await _askYesNo('Restore \u201C' + (label || 'this version') + '\u201D?',
+        'Your current work is saved as a new version first, then the project is replaced with this one.',
+        'Restore', 'Cancel');
+    if (!ok) return;
     try { await _vSaveCurrent('Auto-backup before restore \u2014 ' + new Date().toLocaleString()); } catch (e) {}
     let payload = null; try { payload = await _vGetData(id); } catch (e) {}
     if (!payload) { showInfoModal('Restore', 'Could not load that version\u2019s data.'); return; }
@@ -3689,8 +4313,8 @@ function _vRenderCompare(m) {
 
 // Save the project to a JSON file with a sensible name. Thin wrapper over
 // saveMasterProject for use by the Ctrl+S handler.
-function saveProjectWithIndicator() {
-    if (typeof saveMasterProject === 'function') saveMasterProject();
+function saveProjectWithIndicator(saveAs) {
+    if (typeof saveMasterProject === 'function') saveMasterProject(saveAs ? { saveAs: true } : undefined);
 }
 
 // Beforeunload handler: warn before closing/refreshing if there are unsaved
@@ -3710,7 +4334,11 @@ window.addEventListener('beforeunload', function(e) {
 document.addEventListener('keydown', function(e) {
     if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
         e.preventDefault();
-        saveProjectWithIndicator();
+        // Shift is Save As, the "put a copy somewhere else" gesture. It is a
+        // keyboard shortcut and a tooltip rather than a fourth button, because
+        // the top nav row has no width left and Save already raises the picker
+        // on its own whenever there is no file bound yet.
+        saveProjectWithIndicator(e.shiftKey);
     }
 });
 
@@ -3719,6 +4347,11 @@ document.addEventListener('keydown', function(e) {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         updateDirtyIndicator();
+        _syncProjectFileUI();
+        _armStepsFirstRunTip();
+        // Ahead of the autosave prompt: if the tab is running mixed files, that
+        // is the thing to deal with before deciding whether to restore anything.
+        _checkBuildPairing();
         // Check for autosave AFTER a small delay so the rest of the app's
         // init code (which calls pushHistory) has finished. Otherwise the
         // restore would be overwritten by the initial pushHistory.
@@ -3730,6 +4363,9 @@ if (document.readyState === 'loading') {
     });
 } else {
     updateDirtyIndicator();
+    _syncProjectFileUI();
+    _armStepsFirstRunTip();
+    _checkBuildPairing();
     setTimeout(checkAutosaveOnLoad, 200);
     if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
         if (typeof _wireArtPan === 'function') _wireArtPan();
@@ -3997,6 +4633,96 @@ function resizeImageDataUrl(srcDataUrl, maxSize, callback) {
         callback(c.toDataURL('image/png'));
     };
     img.onerror = () => callback(srcDataUrl); // fall back to original on error
+    img.src = srcDataUrl;
+}
+
+// ── THE BOUND ON AN IMPORTED PAGE BACKGROUND ────────────────────────────
+// A PAGE BACKGROUND WAS THE ONE IMAGE IMPORT WITH NO BOUND AT ALL, and it is
+// the one that fills a whole page, so it attracts the largest file anybody
+// has. Measured on a real project: two backgrounds at 5.51 MB and 5.58 MB
+// were 11.1 MB of a 22.9 MB file, nearly half of it, against 3.9 MB of
+// artwork across fourteen pieces. Every sibling path already bounds (1000 px
+// for dashboard artwork, 1100 from the shape popup, 1400 on a drop); this one
+// wrote FileReader's result straight into the project.
+//
+// THE COST IS THE ENCODING, NOT THE PIXELS, and that is the whole design.
+// Both of those were 1728x1956 RGBA PNGs: 3.4 megapixels, comfortably under
+// what the page can use, so a dimension bound would have left them untouched
+// and resizeImageDataUrl above would have returned them verbatim. A
+// photograph stored as RGBA PNG runs about twenty times its JPEG size. So
+// this re-encodes, and the dimension ceiling below is a backstop against a
+// camera export rather than the lever.
+//
+// PNG IS KEPT WHEN THE IMAGE ACTUALLY USES TRANSPARENCY. A background is
+// composited over the theme's own colour, so alpha can genuinely matter - but
+// a photo saved out as RGBA carries a fully opaque alpha channel and loses
+// nothing by dropping it. resizeImageDataUrl stays exactly as it is: it
+// serves frame swatches, which are line work on transparency where lossy
+// encoding would be the wrong trade.
+//
+// DELIBERATELY NOT APPLIED TO THE FLOORPLAN OR A CUSTOM SWATCH, which are the
+// other two unbounded paths. Both are usually LINE WORK, where JPEG ringing
+// eats hairlines and a plan is the drawing an installer works from. Those
+// want palette reduction rather than this, which is a different piece of work.
+const PAGE_BG_MAX_ZOOM = 3;   // the top of the Zoom slider in the page theme panel
+
+// A FUNCTION, not a const: PAGE_FORMAT and _PDF_QUALITY are declared further
+// down and a const here would read them in the TDZ, which is the trap
+// TITLE_SIZE_DEFAULT, _elevIdSeq and IG_LEG_TOP_GAP were each caught by.
+// Derived rather than chosen: the page is PAGE_FORMAT[0] points wide, the
+// highest export renders it at _PDF_QUALITY.print.r times that, and Zoom crops
+// into it by up to PAGE_BG_MAX_ZOOM. Past that product a background is
+// carrying pixels no export can ever print.
+function _pageBgMaxEdge() {
+    try { return Math.round(PAGE_FORMAT[0] * _PDF_QUALITY.print.r * PAGE_BG_MAX_ZOOM); }
+    catch (e) { return 8424; }
+}
+
+// Does any pixel actually carry transparency? Scanned in full rather than
+// sampled: a stride would miss a small cut-out corner and flatten it to black,
+// and this runs once on an import rather than in a draw loop.
+function _imageDataHasAlpha(ctx, w, h) {
+    try {
+        const d = ctx.getImageData(0, 0, w, h).data;
+        for (let i = 3; i < d.length; i += 4) if (d[i] !== 255) return true;
+        return false;
+    } catch (e) {
+        // No 2d context, or a tainted canvas. Assume alpha and keep PNG:
+        // guessing the other way flattens transparency the page was relying on.
+        return true;
+    }
+}
+
+// Calls back with (dataUrl, width, height). Never throws and never rejects:
+// it sits on an import path, and the fallback everywhere is the image exactly
+// as it arrived.
+function _boundImageDataUrl(srcDataUrl, maxEdge, quality, callback) {
+    const done = (url, w, h) => { try { callback(url, w, h); } catch (e) {} };
+    if (!srcDataUrl) { done(srcDataUrl, 0, 0); return; }
+    const img = new Image();
+    img.onload = () => {
+        const w0 = img.naturalWidth || 0, h0 = img.naturalHeight || 0;
+        if (!w0 || !h0) { done(srcDataUrl, w0, h0); return; }
+        const sc = Math.min(1, maxEdge / Math.max(w0, h0));
+        const w = Math.max(1, Math.round(w0 * sc)), h = Math.max(1, Math.round(h0 * sc));
+        let out = null;
+        try {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            const ctx = c.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            out = _imageDataHasAlpha(ctx, w, h)
+                ? c.toDataURL('image/png')
+                : c.toDataURL('image/jpeg', quality);
+        } catch (e) { out = null; }
+        // NEVER HAND BACK SOMETHING BIGGER THAN WHAT ARRIVED. A small JPEG
+        // re-encoded as PNG grows, and so does anything already under the
+        // bound whose format was already the right one. The original is then
+        // the right answer, and its own dimensions go back with it.
+        if (!out || out.length >= srcDataUrl.length) { done(srcDataUrl, w0, h0); return; }
+        done(out, w, h);
+    };
+    img.onerror = () => done(srcDataUrl, 0, 0);
     img.src = srcDataUrl;
 }
 
@@ -4343,6 +5069,7 @@ function syncLayoutGuideButtonStates() {
     // The pair of buttons implies you must pick EGD for any EGD or WF work; that is wrong
     // and costly, because window film is sized to the GLASS and the mode does not touch
     // it. A glazed wall left on ART is correct, and this is the only place that says so.
+    _syncCatalogueBtn();
     const hint = document.getElementById('wallModeHint');
     if (hint) {
         hint.textContent = on
@@ -4353,6 +5080,94 @@ function syncLayoutGuideButtonStates() {
     }
 }
 
+
+// The catalogue mockup switch. Lit from the wall itself, like the wall-mode pair above
+// it and unlike every deck-wide control in this panel. The hint is the only place that
+// says what the mode actually does, and an option wall says what it is rather than
+// offering a switch it will refuse.
+function _syncCatalogueBtn() {
+    const btn = document.getElementById('catMasterBtn');
+    const hint = document.getElementById('catMasterHint');
+    const elev = (typeof elevations !== 'undefined' && elevations) ? elevations[currentElevIndex] : null;
+    const isMaster = _isCatalogueMaster(elev);
+    const isOpt = _isCatalogueOption(elev);
+    if (btn) {
+        btn.classList.toggle('active', isMaster);
+        btn.disabled = isOpt;
+        btn.style.opacity = isOpt ? '0.5' : '';
+    }
+    // The duplicate control is the way an option is added, so it has to say so. Two
+    // gestures behind one button is fine; two gestures behind one unchanged tooltip is
+    // how a designer learns the wrong one.
+    // THE TWO AXES GET TWO CONTROLS. Duplicate means "same layout, different images";
+    // Add arrangement means "same spot, different layout". One button doing both behind a
+    // modifier is how a designer learns whichever one they pressed first.
+    // The ROW hides, not the buttons: they are alone on it now, so hiding only them
+    // would leave an empty 26px band on every wall outside a catalogue.
+    const addRow = document.getElementById('catAddRow');
+    if (addRow) addRow.style.display = (isMaster || isOpt) ? 'flex' : 'none';
+    const set = document.getElementById('catSetBtn');
+    if (set) {
+        const c2 = _catBaseCode(isOpt ? _catMasterOf(elev) : elev);
+        const p2 = _catPlacementKey(c2);
+        const n2 = c2 ? _catSetsOf(p2).length : 0;
+        set.title = c2
+            ? ('Add a DIFFERENT SET OF FRAMES at ' + p2 + ' \u2014 a single piece where this is a salon hang. '
+               + 'Its frames are its own and nothing here reaches the other sets; it shares this placement\u2019s pin on the floorplan. '
+               + n2 + ' frame set' + (n2 === 1 ? '' : 's') + ' so far.')
+            : 'Place a piece carrying an item code before adding a frame set.';
+    }
+    const arr = document.getElementById('catArrBtn');
+    if (arr) {
+        const code = _catBaseCode(isOpt ? _catMasterOf(elev) : elev);
+        const place = _catPlacementKey(code);
+        const n = code ? _catArrangementsOf(place).length : 0;
+        arr.title = code
+            ? ('Add another LAYOUT for ' + place + ' \u2014 a diptych where this is a salon hang, say. It becomes its own mockup with its own breaker page and shares this placement\u2019s pin on the floorplan, so the plan still shows one location. '
+               + n + ' arrangement' + (n === 1 ? '' : 's') + ' so far.'
+               + (isOpt ? ' Taken from an option, the new arrangement starts empty with its first option carrying these images.' : ''))
+            : 'Place a piece carrying an item code before adding a second arrangement.';
+    }
+    // The label + own-frames row, on a layout that is not the primary. The primary has
+    // nothing to follow, so offering it "Own frames" would be a control with no meaning.
+    const lrow = document.getElementById('catLayoutRow');
+    if (lrow) {
+        lrow.style.display = isMaster ? 'flex' : 'none';
+        const li = document.getElementById('catLayoutLabel');
+        if (li && document.activeElement !== li) li.value = _catLayoutLabel(elev);
+    }
+    const dup = document.getElementById('dupElevBtn');
+    if (dup) dup.title = isMaster
+        ? ('Add art option ' + _catNextOptionNum(elev) + ' \u2014 a copy of this arrangement with its own images and item codes')
+        : 'Duplicate this wall';
+    if (!hint) return;
+    if (isOpt) {
+        const m = _catMasterOf(elev);
+        hint.textContent = 'Art option ' + (elev.catalogueOption || '') + ' of ' + ((m && m.name) || 'its mockup')
+            + '. Size, position and frame spec follow the mockup; only the artwork is this wall\'s own.';
+    } else if (isMaster) {
+        const opts = _catOptionsOf(elev);
+        const code = _catBaseCode(elev);
+        const place = _catSetKey(code);
+        const prim = _catPrimaryArr(place);
+        const isPrim = !prim || prim === elev;
+        const sibs = _catArrangementsOf(place).length;
+        // ONE SENTENCE FOR WHAT IT GOVERNS, ONE FOR WHAT IT FOLLOWS. Those are the two
+        // questions a designer has before editing a frame, and the panel used to answer
+        // neither: every layout described itself as "the arrangement".
+        hint.textContent = (isPrim
+            ? ('Frame set ' + _catSetNum(code) + ' at ' + _catPlacementKey(code)
+               + '. These frames are its own; sizes, mouldings and mats set here reach '
+               + (sibs > 1 ? ('the other ' + (sibs - 1) + ' layout' + (sibs === 2 ? '' : 's') + ' of this set') : 'any layout you add to this set')
+               + ' and no other set.')
+            : ('Layout ' + (_catArrLetter(code) || '') + ' of frame set ' + place
+               + '. Frame specs follow ' + ((prim && _catBaseCode(prim)) || 'the primary') + '; the positions are this wall\u2019s.'))
+            + ' Drawn with no artwork \u2014 duplicate it to add image set ' + _catNextOptionNum(elev) + '. '
+            + (opts.length ? (opts.length + ' image set' + (opts.length === 1 ? '' : 's') + ' follow this wall.') : 'No image sets yet.');
+    } else {
+        hint.textContent = 'Mark this wall a catalogue mockup to hold one arrangement and offer several sets of artwork in it.';
+    }
+}
 // Toggle group-box visibility (only meaningful if one exists).
 function toggleGroupBoxVisibility(btn) {
     if (!anyGroupDimExists()) return; // nothing to toggle
@@ -4833,16 +5648,150 @@ function setupDashPreviewDragHandle() {
 function renderNavTabs() {
     const fixed = document.getElementById('nav-tabs-fixed');
     if (fixed) {
-        const tab = (view, label, onclick) =>
-            `<div class="nav-tab ${currentView === view ? 'active' : ''}" onclick="${onclick}">${label}</div>`;
+        // NUMBERED IN THE ORDER THE WORK GOES, with a badge counting what is left -
+        // see _projectStepCounts. The badge is always rendered and hidden when empty,
+        // so _syncNavBadges can update it in place without re-rendering the tabs.
+        let _c = null;
+        try { _c = _projectStepCounts(); } catch (e) {}
+        const tab = (view, step, label, onclick) => {
+            const bdg = _c ? _navStepBadge(view, _c) : null;
+            const tip = (NAV_STEP_TIPS[view] || '') + (bdg ? ' ' + bdg.tip : '');
+            return `<div class="nav-tab ${currentView === view ? 'active' : ''}" role="tab" tabindex="0" aria-selected="${currentView === view}" data-kbd-click data-view="${view}" title="${_esc(tip)}" onclick="${onclick}">`
+                + `<span class="nav-step" aria-hidden="true">${step}</span><span class="nav-label">${label}</span>`
+                + `<span class="nav-badge"${bdg ? '' : ' style="display:none;"'}>${bdg ? bdg.n : ''}</span></div>`;
+        };
         const div = '<div class="tab-divider"></div>';
         // Elevation reopens the wall you were last on, not always the first.
         fixed.innerHTML =
-            tab('dashboard', 'Frame Dashboard', "switchView('dashboard')") + div +
-            tab('elevation', 'Elevation', "switchView('elevation', currentElevIndex)") + div +
-            tab('deck', 'Deck', "switchView('deck')");
+            tab('dashboard', 1, 'Frame Dashboard', "switchView('dashboard')") + div +
+            tab('elevation', 2, 'Elevation', "switchView('elevation', currentElevIndex)") + div +
+            tab('deck', 3, 'Deck', "switchView('deck')");
     }
     renderWallRail();
+}
+// -- SAME IMAGES, DIFFERENT FRAMES -------------------------------------------
+// A salon hang where the client likes all five pictures and wants to see them in another
+// order. That is NOT a new level in the model - it is another IMAGE SET, which the codes
+// already express - it is a missing TOOL: today the only way to get one is to re-import
+// five files and place them by hand.
+// The gesture is a drag in the FRAME LIST, deliberately not on the wall: dragging a frame
+// on the wall already means move the frame, and one gesture meaning two things depending
+// on what is underneath is how a designer learns neither.
+// THE FRAMES DO NOT MOVE. Only the artwork is reassigned, and the dashboard ROW moves
+// with it, or the wall and the spec page disagree about which picture is piece B.
+function _elevArtPayload(f) {
+    const o = {};
+    ELEV_ART_FIELDS.forEach(k => { o[k] = f ? f[k] : undefined; });
+    return o;
+}
+function _elevApplyArt(f, payload) {
+    if (!f) return;
+    ELEV_ART_FIELDS.forEach(k => { f[k] = payload[k]; });
+    const row = (dashProjectData || []).filter(r => r && r.id === f.id)[0];
+    if (row) ELEV_ART_FIELDS.forEach(k => { row[k] = payload[k]; });
+}
+// Move the artwork sitting in `fromLetter` so that it lands where `toLetter`'s is, and
+// let everything between shuffle up or down - a LIST reorder, not a two-way swap, because
+// that is what dragging a row in a list means everywhere else in this app.
+function moveElevArtwork(fromLetter, toLetter) {
+    const elev = elevations[currentElevIndex];
+    if (!elev || fromLetter === toLetter) return false;
+    const fr = (elev.frames || []).filter(f => f && f.active !== false);
+    const order = fr.map(f => f.letter);
+    const i = order.indexOf(fromLetter), j = order.indexOf(toLetter);
+    if (i < 0 || j < 0) return false;
+    const load = fr.map(_elevArtPayload);
+    const moved = load.splice(i, 1)[0];
+    load.splice(j, 0, moved);
+    fr.forEach((f, k) => _elevApplyArt(f, load[k]));
+    drawElevAll();
+    initElevControls();
+    if (typeof renderDashTable === 'function') renderDashTable();
+    pushHistory();
+    scheduleAutosave();
+    return true;
+}
+let _elevArtDragFrom = '';
+function _wireElevArtReorder(container) {
+    container.querySelectorAll('.compact-frame-item[data-frame-letter]').forEach(row => {
+        row.setAttribute('draggable', 'true');
+        row.addEventListener('dragstart', (e) => {
+            // A drag that began on a control is that control's, not the row's. The item
+            // code input already cancels its own; this covers every button and toggle.
+            if (e.target && e.target.closest && e.target.closest('input,button,select,textarea')) { e.preventDefault(); return; }
+            _elevArtDragFrom = row.getAttribute('data-frame-letter') || '';
+            row.classList.add('art-dragging');
+            try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', _elevArtDragFrom); } catch (err) {}
+        });
+        row.addEventListener('dragover', (e) => {
+            if (!_elevArtDragFrom) return;
+            e.preventDefault();
+            const me = row.getAttribute('data-frame-letter') || '';
+            if (me !== _elevArtDragFrom) row.classList.add('art-drop-target');
+        });
+        row.addEventListener('dragleave', () => row.classList.remove('art-drop-target'));
+        row.addEventListener('drop', (e) => {
+            e.preventDefault();
+            row.classList.remove('art-drop-target');
+            const to = row.getAttribute('data-frame-letter') || '';
+            const from = _elevArtDragFrom;
+            _elevArtDragFrom = '';
+            if (from && to && from !== to) moveElevArtwork(from, to);
+        });
+        row.addEventListener('dragend', () => {
+            _elevArtDragFrom = '';
+            container.querySelectorAll('.art-dragging,.art-drop-target').forEach(n => n.classList.remove('art-dragging', 'art-drop-target'));
+        });
+    });
+}
+// -- WHAT EVERY WALL IS, IN ONE PASS ----------------------------------------
+// Three roles, not one. A placement carries a PRIMARY layout (the one whose frame specs
+// the others follow), any number of other LAYOUTS, and OPTIONS under each. All three
+// used to render as the word MOCKUP, so the single most important relationship on the
+// whole placement - which wall governs the rest - was invisible, and a rail of
+// ART.1A / ART.1B / ART.1C read as four unrelated walls.
+// Built in ONE pass with a map rather than asking `_catPrimaryArr` per wall: this runs on
+// every rail render, which is every wall click, rename, drag and undo.
+function _catRailRoles() {
+    const prim = {}, out = {};
+    (elevations || []).forEach(e => {
+        if (!_isCatalogueMaster(e)) return;
+        const code = _catBaseCode(e); if (!code) return;
+        const k = _catPlacementKey(code), cur = prim[k];
+        if (!cur || _catArrCmp(code, _catBaseCode(cur)) < 0) prim[k] = e;
+    });
+    (elevations || []).forEach(e => {
+        if (!e) return;
+        if (_isCatalogueMaster(e)) {
+            const code = _catBaseCode(e); if (!code) return;
+            const k = _catPlacementKey(code);
+            const sk = _catSetKey(code);
+            const sp = _catPrimaryArr(sk);
+            out[_elevId(e)] = {
+                place: k,
+                // A SET PRIMARY is the reference drawing for its frames; every other
+                // wall of that set is a LAYOUT of them. The placement's own primary is
+                // additionally the one wall that pins on the plan.
+                kind: (sp === e) ? 'set' : 'layout',
+                isPlacePrimary: (prim[k] === e),
+                letter: _catArrLetter(code) || 'A',
+                set: _catSetNum(code),
+                setKey: sk,
+                label: _catLayoutLabel(e),
+                primCode: (sp && _catBaseCode(sp)) || sk
+            };
+            return;
+        }
+        const m = _catMasterOf(e);
+        if (!m) return;
+        const mc = _catBaseCode(m);
+        out[_elevId(e)] = {
+            place: _catPlacementKey(mc), kind: 'option',
+            opt: String(e.catalogueOption || ''), of: mc,
+            label: _catLayoutLabel(m), letter: _catArrLetter(mc) || 'A', set: _catSetNum(mc)
+        };
+    });
+    return out;
 }
 // One row per wall, stacked down the right of the elevation drawing.
 function renderWallRail() {
@@ -4853,18 +5802,84 @@ function renderWallRail() {
     const prevScroll = container.scrollTop;
 
     let html = '';
+    const _roles = _catRailRoles();
+    // Counted up front so the placement header can say how big it is without the row
+    // loop having to look ahead.
+    const _placeN = {};
+    Object.keys(_roles).forEach(id => {
+        const r = _roles[id];
+        const c = (_placeN[r.place] = _placeN[r.place] || { lay: 0, opt: 0 });
+        if (r.kind === 'option') { c.opt++; return; }
+        c.lay++;
+        (c.sets = c.sets || {})[r.setKey] = true;
+    });
+    let _lastPlace = null;
     elevations.forEach((elev, idx) => {
         const isActive = (currentView === 'elevation' && currentElevIndex === idx) ? 'active' : '';
+        // THE CODES ALREADY CARRY THE HIERARCHY; the rail simply never showed it. A header
+        // per placement plus one level of indent is what turns four near-identical codes
+        // into a readable tree. The walls arrive in order because both minters append
+        // after the last wall of the placement, so no re-sort is needed - and re-sorting
+        // would fight the hand drag-reorder this rail already supports.
+        const _r = _roles[_elevId(elev)] || null;
+        if (_r && _r.place !== _lastPlace) {
+            const c = _placeN[_r.place] || { lay: 0, opt: 0 };
+            const nSets = Object.keys(c.sets || {}).length;
+            html += '<div class="wall-rail-place" title="One placement: ONE pin on the floorplan, whatever is offered here. '
+                + nSets + ' frame set' + (nSets === 1 ? '' : 's') + ', ' + c.lay + ' layout' + (c.lay === 1 ? '' : 's')
+                + ', ' + c.opt + ' image set' + (c.opt === 1 ? '' : 's') + '.">'
+                + '<span class="wall-rail-place-code">' + _esc(_r.place) + '</span>'
+                + '<span class="wall-rail-place-n">'
+                + (nSets > 1 ? (nSets + ' sets \u00b7 ') : '')
+                + c.lay + ' layout' + (c.lay === 1 ? '' : 's')
+                + (c.opt ? (' \u00b7 ' + c.opt + ' image set' + (c.opt === 1 ? '' : 's')) : '') + '</span></div>';
+        }
+        _lastPlace = _r ? _r.place : null;
         // Names are user-typed and now also land in a title attribute (the row
         // truncates, so hover is how you read a long one) — escape both.
         const nm = _esc(elev.name || '');
+        const _tip = !_r ? (elev.name || '')
+            : (_r.kind === 'set'
+                ? ((elev.name || '') + ' \u2014 frame set ' + _r.set + ' at ' + _r.place
+                    + '. Its frames are its own; sizes, mouldings and mats set here reach every LAYOUT of this set and no other set.'
+                    + (_r.isPlacePrimary ? ' It also holds the placement\u2019s pin on the floorplan.' : ''))
+                : (_r.kind === 'layout'
+                    ? ((elev.name || '') + ' \u2014 layout ' + _r.letter + ' of frame set ' + _r.setKey
+                        + '. Frame specs follow ' + _r.primCode + '; the positions are this wall\u2019s own.')
+                    : ((elev.name || '') + ' \u2014 image set ' + _r.opt + ' of ' + _r.of + '. Everything but the images follows that wall.')));
+        // A MOCKUP AND ITS OPTIONS LOOK IDENTICAL IN A LIST OF NAMES, and the one thing a
+        // designer needs to know before dragging a frame is which wall the others follow.
+        // The mockup carries the accent; an option carries its own and names its mockup in
+        // brackets, so the link is readable without opening anything.
+        // SOLID amber governs, HOLLOW amber follows, blue is an option. The stripe says
+        // the direction of inheritance at a glance, which is the question a designer has
+        // before touching a frame: will this edit reach other walls, or is it local.
+        // SOLID amber is a frame set's reference drawing, HOLLOW amber a layout of those
+        // frames, blue an image set. The stripe answers the question a designer has
+        // before touching a frame: will this edit reach other walls, and which ones.
+        const _multiSet = Object.keys((_placeN[(_r && _r.place) || ''] || {}).sets || {}).length > 1;
+        let _catCls = '', _catTag = '', _catLbl = '';
+        if (_r && _r.kind === 'set') {
+            _catCls = ' cat-mockup cat-primary';
+            _catTag = '<span class="wall-tab-cat">' + (_multiSet ? ('SET ' + _r.set) : 'SET')
+                + (_r.isPlacePrimary ? ' \u00b7 PRIMARY' : '') + '</span>';
+        } else if (_r && _r.kind === 'layout') {
+            _catCls = ' cat-mockup cat-layout cat-indent';
+            _catTag = '<span class="wall-tab-cat lay">LAYOUT ' + _esc(_r.letter) + '</span>';
+        } else if (_r && _r.kind === 'option') {
+            _catCls = ' cat-option cat-indent2';
+            _catTag = '<span class="wall-tab-cat opt">IMAGES ' + _esc(_r.opt) + '</span>';
+        }
+        // The NAME is how a placement is navigated; the code stays the identity. Shown
+        // muted beside the code rather than folded into it, so the two never blur.
+        if (_r && _r.kind !== 'option' && _r.label) _catLbl = '<span class="wall-tab-lbl">' + _esc(_r.label) + '</span>';
         // draggable=true enables HTML5 drag-and-drop; data-tab-idx tells the
         // drag handlers which wall is moving and where it landed. Handlers are
         // wired imperatively below rather than as inline attributes, since they
         // need the event's dataTransfer.
-        html += `<div class="wall-tab ${isActive}" draggable="true" data-tab-idx="${idx}" title="${nm}" onclick="switchView('elevation', ${idx})">
-                    <span class="wall-tab-name">${nm}</span>
-                    <span class="tab-close" onclick="deleteElevation(${idx}, event)" title="Delete Wall">×</span>
+        html += `<div class="wall-tab ${isActive}${_catCls}" role="tab" tabindex="0" aria-selected="${!!isActive}" data-kbd-click draggable="true" data-tab-idx="${idx}" title="${_esc(_tip)}" onclick="switchView('elevation', ${idx})">
+                    <span class="wall-tab-name">${nm}</span>${_catLbl}${_catTag}
+                    <span class="tab-close" role="button" tabindex="0" data-kbd-click aria-label="Delete this wall" onclick="deleteElevation(${idx}, event)" title="Delete this wall">×</span>
                  </div>`;
     });
     container.innerHTML = html;
@@ -4980,35 +5995,11 @@ function reorderElevation(fromIdx, toIdx) {
     const [moved] = elevations.splice(fromIdx, 1);
     elevations.splice(toIdx, 0, moved);
 
-    // Rebuild variationOf indices. The cleanest way is to map each
-    // variation's old source identity to its new index. We do this by
-    // remembering the source object reference, then looking it up after
-    // the splice. variationOf is just an integer hint; if the source can't
-    // be found (deleted), we clear it.
-    //
-    // Note: this requires us to capture identities BEFORE the splice for
-    // any variations that referenced fromIdx or any index between fromIdx
-    // and toIdx. Easier approach: since variationOf is metadata (currently
-    // unused by any feature), just clear it if the index is now stale.
-    // Simpler and avoids the bookkeeping.
-    elevations.forEach((elev, i) => {
-        if (typeof elev.variationOf !== 'number') return;
-        // If it pointed at the moved item, update to the moved item's new pos
-        if (elev.variationOf === fromIdx) {
-            elev.variationOf = toIdx;
-            return;
-        }
-        // Otherwise, the index may have shifted due to the splice
-        // The moved item went from fromIdx to toIdx; everything between
-        // shifts by 1 in the opposite direction.
-        if (fromIdx < toIdx) {
-            // Moved right: indices in (fromIdx, toIdx] shift left by 1
-            if (elev.variationOf > fromIdx && elev.variationOf <= toIdx) elev.variationOf--;
-        } else {
-            // Moved left: indices in [toIdx, fromIdx) shift right by 1
-            if (elev.variationOf >= toIdx && elev.variationOf < fromIdx) elev.variationOf++;
-        }
-    });
+    // A variation points at its source by ID, so a reorder moves nothing it can
+    // see; only the numeric mirror is re-derived. This block used to shift the
+    // indices by hand in two directions and its own comment proposed giving up
+    // and clearing the link instead.
+    _elevSyncVariationPrimary();
 
     // Restore currentElevIndex by object identity
     const newActiveIdx = elevations.indexOf(wasActive);
@@ -5024,32 +6015,35 @@ function updateElevationNameFromInput(newName) {
 }
 
 function deleteElevation(idx, e) {
-    e.stopPropagation();
-    if(confirm("Delete this entire elevation wall? This cannot be undone.")) {
-        // If deleting the source of any variations, promote those variations
-        // to primary status. Otherwise they'd stay flagged as `isVariation`
-        // and get skipped by recalculateDashboardQuantities, making qty
-        // unexpectedly 0 for frames that ARE physically being ordered.
-        elevations.forEach(other => {
-            if (other.variationOf === idx) {
-                delete other.isVariation;
-                delete other.variationOf;
-            }
-        });
+    if (e && e.stopPropagation) e.stopPropagation();
+    // IT SAID "This cannot be undone" AND IT COULD: pushHistory runs below. Telling
+    // designers the one real safety net does not exist is how they learn to never
+    // delete anything. Keyed on the wall's ID across the question, not the index
+    // it had when the button was clicked - see _elevIndexById.
+    const target = elevations[idx];
+    if (!target) return;
+    const wallId = _elevId(target);
+    _confirmDestroy({
+        title: 'Delete the \u201C' + (target.name || 'Untitled') + '\u201D wall?',
+        body: 'Every frame placed on it comes off with it. The pieces themselves stay in the Frame Dashboard.',
+        undoable: true,
+        onConfirm: () => _deleteElevationNow(_elevIndexById(wallId)),
+    });
+}
+function _deleteElevationNow(idx) {
+    if (idx < 0 || !elevations[idx]) return;
+    {
         elevations.splice(idx, 1);
-        // Fix up any remaining variationOf indices to account for the splice.
-        // variationOf indices >= idx need to shift down by 1.
-        elevations.forEach(other => {
-            if (typeof other.variationOf === 'number' && other.variationOf > idx) {
-                other.variationOf--;
-            }
-        });
+        // One pass does both jobs the two loops here used to: any variation whose
+        // source id is now absent is promoted, and the numeric mirror is
+        // re-derived. Nothing shifts, because nothing was keyed on an index.
+        _elevSyncVariationPrimary();
         if (elevations.length === 0) {
             const uf = unitFactor('in', elevUnit);
             let w = parseFloat((185 * uf).toFixed(2));
             let h = parseFloat((108 * uf).toFixed(2));
             let px = parseFloat((-60 * uf).toFixed(2));
-            elevations.push({ name: "Elevation 1", frames: [], wallW: w, wallH: h, personPos: {x: px} });
+            elevations.push({ id: _elevNewId(), name: "Elevation 1", frames: [], wallW: w, wallH: h, personPos: {x: px} });
             currentElevIndex = 0;
         } else if (currentElevIndex > idx) { currentElevIndex--; }
         // Land on a neighbouring wall rather than bouncing out to the Dashboard.
@@ -5084,19 +6078,47 @@ function duplicateCurrentElevation() {
     const srcIdx = currentElevIndex;
     const src = elevations[srcIdx];
     if (!src) return;
+    // A catalogue mockup duplicates into an ART OPTION, not a layout variation: it mints
+    // its own item codes and its own dashboard rows, and it stays linked to this wall for
+    // geometry. Everything else duplicates exactly as it always has.
+    if (_isCatalogueMaster(src)) { _catAddOption(srcIdx); return; }
+    // DUPLICATING AN IMAGE SET GIVES ANOTHER IMAGE SET, carrying the pictures. It used to
+    // fall through to the generic layout-variation path, which produced an `isVariation`
+    // copy sharing the option's row ids - neither a new option nor anything the catalogue
+    // model knows what to do with. Carrying the images is what makes "show the same
+    // pictures in a different order" two clicks: duplicate, then drag the rows.
+    const _optMaster = _catMasterOf(src);
+    if (_optMaster) {
+        const mi = elevations.indexOf(_optMaster);
+        if (mi >= 0) { _catAddOption(mi, { carryFrom: src }); return; }
+    }
 
-    // Deep clone so subsequent edits to the copy don't bleed into the
-    // original. JSON roundtrip is safe here because everything in an
-    // elevation is plain data (no functions, no DOM refs).
-    const copy = JSON.parse(JSON.stringify(src));
+    // Deep clone so subsequent edits to the copy don't bleed into the original.
+    // _cloneData, never a JSON round trip: an elevation's frames carry artworkUrl,
+    // a base64 data URL of megabytes, and the round trip re-encodes and re-parses
+    // every byte of it.
+    const copy = _cloneData(src);
+    // A CLONE CARRIES THE SOURCE'S ID. A duplicate that keeps it is the same wall
+    // twice, and _elevIndexById would hand back whichever one it met first.
+    copy.id = _elevNewId();
+    // AND IT CARRIES THE SOURCE'S CATALOGUE FLAGS, which is worse, because the copy then
+    // half-belongs to a catalogue: this path overwrites `variationOfId` with the SOURCE's
+    // id, so a duplicated option kept `catalogueOption` while its link now pointed at
+    // another option rather than at a mockup. `_catMasterOf` returns null for that,
+    // `_isCatalogueOption` reads false, and `toggleCatalogueMaster`'s guard - which is
+    // supposed to stop exactly this - lets the wall be marked a mockup. Minting options
+    // off it then produced a second set of row ids identical to the first.
+    delete copy.catalogueOption;
+    delete copy.catalogueMaster;
     copy.name = `${src.name} (Copy)`;
     copy.isVariation = true;
-    copy.variationOf = srcIdx;
+    copy.variationOfId = _elevId(src);
 
     // Insert right after the source so variations sit next to their
     // original in the tab strip. Then switch to it so the user lands
     // on the new tab ready to edit.
     elevations.splice(srcIdx + 1, 0, copy);
+    _elevSyncVariationPrimary();
     currentElevIndex = srcIdx + 1;
 
     renderNavTabs();
@@ -5113,7 +6135,7 @@ function addNewElevationTab() {
     let h = parseFloat((108 * uf).toFixed(2));
     let px = parseFloat((-60 * uf).toFixed(2));
     
-    elevations.push({ name: "Elevation " + (newIndex + 1), frames: [], wallW: w, wallH: h, personPos: {x: px} });
+    elevations.push({ id: _elevNewId(), name: "Elevation " + (newIndex + 1), frames: [], wallW: w, wallH: h, personPos: {x: px} });
     renderNavTabs(); populateDashPushSelector(); switchView('elevation', newIndex);
     pushHistory();
 }
@@ -5268,21 +6290,114 @@ function slugifyForFilename(s) {
     return slug || 'Untitled';
 }
 
-function saveMasterProject() {
-    if(currentView === 'elevation' && elevations[currentElevIndex]) {
-        elevations[currentElevIndex].wallW = parseFloat(document.getElementById('wallW').value) || 185;
-        elevations[currentElevIndex].wallH = parseFloat(document.getElementById('wallH').value) || 108;
-    }
+// ── WHERE A PROJECT SAVES, AND THE FILE IT REMEMBERS ────────────────────
+// Save used to be a DOWNLOAD, always, into a filename built from the project
+// name and today's date. So a week on one job left five
+// caesars-palace_2026-09-0*.json sitting in Downloads with nothing saying which
+// one was current, and two designers on one project had no story at all.
+//
+// With the File System Access API a project is opened THROUGH a handle and Save
+// writes back to that same file, which is what every other tool on the
+// designer's machine does. That API is Chrome and Edge only, and secure-context
+// only, so Firefox, Safari and a page opened from file:// keep the download
+// path exactly as it was: a half-working fallback is worse than the behaviour
+// people already know.
+//
+// THE HANDLE IS SESSION-ONLY, AND THAT IS THE SAFETY PROPERTY. It is set by
+// Open, or by the picker the first Save raises, and CLEARED by any load that
+// did not come through a handle. That keeps one invariant worth more than the
+// convenience: the handle always refers to the project currently in memory, so
+// Save can never write this project over a different one. Persisting it across
+// reloads breaks exactly that - a fresh tab holding a starter deck would carry
+// a handle to last week's job, and Ctrl+S would overwrite it - so the only safe
+// version of that ties the handle to a RESTORED AUTOSAVE, which is a separate
+// piece of work.
+let _projectFileHandle = null;
+let _projectFileName = '';
+
+function _fsaAvailable() {
+    try {
+        return typeof window !== 'undefined'
+            && typeof window.showSaveFilePicker === 'function'
+            && typeof window.showOpenFilePicker === 'function';
+    } catch (e) { return false; }
+}
+
+const PROJECT_FILE_TYPES = [{
+    description: 'FRAME project',
+    accept: { 'application/json': ['.json'] },
+}];
+
+// The Save Project button, found the way updateDirtyIndicator already found it.
+// One definition, because two searches for the same button by its label drift
+// the moment the label changes.
+function _saveProjectButton() {
+    let btn = null;
+    try {
+        document.querySelectorAll('.app-top-nav button').forEach(b => {
+            if (b.textContent.trim() === 'Save Project') btn = b;
+        });
+    } catch (e) {}
+    return btn;
+}
+
+function _setProjectFile(handle, name) {
+    _projectFileHandle = handle || null;
+    _projectFileName = name || '';
+    _syncProjectFileUI();
+}
+
+// WHICH FILE THIS IS goes in the document title, where every other application
+// puts it, so the answer is in the tab strip rather than in someone's memory.
+// The Save button's tooltip carries the rest: where it will go, and that
+// Ctrl+Shift+S puts a copy somewhere else. The tooltip is the right home for
+// Save As because it is read at the moment of deciding where this save lands,
+// and the top nav has no room for a fourth button on that row.
+function _syncProjectFileUI() {
+    try {
+        document.title = _projectFileName
+            ? ('FRAME - ' + _projectFileName)
+            : 'FRAME - Integrated Workspace';
+    } catch (e) {}
+    try {
+        const btn = _saveProjectButton();
+        if (!btn) return;
+        if (_projectFileHandle) {
+            btn.title = 'Save to ' + _projectFileName + ' (Ctrl+S). Ctrl+Shift+S saves a copy somewhere else.';
+        } else if (_fsaAvailable()) {
+            btn.title = 'Choose where to save this project (Ctrl+S). After that, Save writes straight back to it.';
+        } else {
+            btn.title = 'Download the project as a .json file (Ctrl+S). This browser cannot save in place.';
+        }
+    } catch (e) {}
+}
+
+// The wall size lives in two inputs until something reads them back, so any
+// path that serializes the project has to flush them first.
+function _flushElevationInputs() {
+    try {
+        if (currentView === 'elevation' && elevations[currentElevIndex]) {
+            elevations[currentElevIndex].wallW = parseFloat(document.getElementById('wallW').value) || 185;
+            elevations[currentElevIndex].wallH = parseFloat(document.getElementById('wallH').value) || 108;
+        }
+    } catch (e) {}
+}
+
+// ONE DEFINITION OF WHAT A PROJECT FILE CONTAINS. It was inline in
+// saveMasterProject, which was fine while there was one way to save; there are
+// three now (write in place, save a copy, download) and a second copy of this
+// list is how a field ends up in one of them and not the others.
+function _projectPayload() {
     const getStr = (id) => document.getElementById(id).value;
     const globalMeta = { projName: getStr('g_projName'), desc: getStr('g_desc'), date: getStr('g_date'), issued: getStr('g_issued'), client: getStr('g_client'), attn: getStr('g_attn'), delivery: getStr('g_delivery') };
     // hangHeightIn / baseboardIn are stored in INCHES, deliberately unit-independent
-    // — that's the whole point of the change, so a project written in inches and
+    // - that's the whole point of the change, so a project written in inches and
     // opened in cm still hangs at 57". They weren't saved at all before, so the
     // drawing silently inherited whatever the previous project had left in the box.
     // THE DRAFTING STANDARD TRAVELS WITH THE FILE.
     //
     // annotationStyle (dimension ink, weights, dash rhythm, font, line ends) and
-    // elevDualUnit live in localStorage — they are per-machine drafting preferences,
+    // elevDualUnit live in localStorage - they are per-machine drafting preferences,
     // deliberately not project data, so a metric project can be drawn in cm without
     // dragging the spec pages with it. That is right for one person's own work and
     // wrong the moment a file is handed over: the same project opened on another
@@ -5292,136 +6407,291 @@ function saveMasterProject() {
     // Written under distinct keys so the loader can tell "this file carries a
     // standard" from "this file predates the idea" and leave local preferences alone
     // in the second case. _cloneData, not a reference: annotationStyle keeps mutating
-    // after this and JSON.stringify runs on the next line only for the download path.
-    const masterData = { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, hangHeightIn: elevHangIn, baseboardIn: elevBaseboardIn, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, floorplanLevels: floorplanLevels, editorial: editorialContent,
+    // after this and the serialize happens on the caller's next line.
+    return { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, hangHeightIn: elevHangIn, baseboardIn: elevBaseboardIn, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, floorplanLevels: floorplanLevels, editorial: editorialContent,
         annotationStyle: _cloneData(annotationStyle), elevDualUnit: (typeof elevDualUnit !== 'undefined' ? (elevDualUnit || '') : '') };
-    const blob = new Blob([JSON.stringify(masterData, null, 2)], { type: 'application/json' });
+}
+
+// The name a NEW file is suggested under. Project name plus today's date, which
+// is what the download path has always produced - it is a good first name, and
+// it stops being the filename the moment the project is bound to a real file.
+function _projectSuggestedName() {
+    let projName = 'Untitled';
+    try { projName = (document.getElementById('g_projName') || {}).value || 'Untitled'; } catch (e) {}
+    const dateStr = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
+    return slugifyForFilename(projName) + '_' + dateStr + '.json';
+}
+
+// A handle's write permission can lapse between one save and the next. Asking
+// has to happen inside the user gesture that started the save, which is why
+// this is called from the save path and never from a timer.
+async function _fsaCanWrite(handle) {
+    try {
+        if (!handle || typeof handle.queryPermission !== 'function') return true;
+        const opts = { mode: 'readwrite' };
+        if ((await handle.queryPermission(opts)) === 'granted') return true;
+        return (await handle.requestPermission(opts)) === 'granted';
+    } catch (e) { return false; }
+}
+
+async function _fsaWrite(handle, text) {
+    const w = await handle.createWritable();
+    try { await w.write(text); } finally { await w.close(); }
+}
+
+// Returns 'ok', 'cancelled' or 'failed'. Three answers rather than a boolean
+// because they mean three different things to the caller: a cancel must NOT
+// mark the project clean, and a failure must still get the work out of the tab.
+async function _fsaSave(text, saveAs) {
+    let handle = saveAs ? null : _projectFileHandle;
+    try {
+        if (handle && !(await _fsaCanWrite(handle))) handle = null;
+        if (!handle) {
+            handle = await window.showSaveFilePicker({
+                suggestedName: _projectFileName || _projectSuggestedName(),
+                types: PROJECT_FILE_TYPES,
+            });
+        }
+        await _fsaWrite(handle, text);
+        _setProjectFile(handle, handle.name || _projectSuggestedName());
+        return 'ok';
+    } catch (err) {
+        // Dismissing the picker is a decision, not a fault. Reporting it would
+        // train people to ignore the box that reports real ones.
+        if (err && err.name === 'AbortError') return 'cancelled';
+        try {
+            showInfoModal('Could not write the file',
+                'FRAME could not save to that location: ' + ((err && err.message) || 'unknown error') + '.'
+                + String.fromCharCode(10) + String.fromCharCode(10)
+                + 'A copy is being downloaded instead so the work is not stuck in this tab.');
+        } catch (e) {}
+        return 'failed';
+    }
+}
+
+function _downloadProject(text) {
+    const blob = new Blob([text], { type: 'application/json' });
     // Filename uses the user's Project Name + today's date so multiple
     // projects don't overwrite each other in Downloads.
-    const projSlug = slugifyForFilename(globalMeta.projName);
-    const dateStr = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
-    const filename = `${projSlug}_${dateStr}.json`;
+    const filename = _projectSuggestedName();
     const link = document.createElement('a'); link.href = URL.createObjectURL(blob); link.download = filename; link.click();
-    // Successful save → no longer dirty, clear autosave (file is canonical now).
+    return filename;
+}
+
+function _afterSave() {
+    // Successful save -> no longer dirty, clear autosave (file is canonical now).
     if (typeof markClean === 'function') markClean();
     if (typeof clearAutosave === 'function') clearAutosave();
+}
+
+// opts.saveAs forces the picker, which is the "save a copy somewhere else"
+// gesture on Ctrl+Shift+S. Async now; every existing caller ignores the return,
+// and the two that care (the button and the shortcut) are both user gestures,
+// which showSaveFilePicker requires.
+async function saveMasterProject(opts) {
+    const o = opts || {};
+    _flushElevationInputs();
+    const text = JSON.stringify(_projectPayload(), null, 2);
+    if (_fsaAvailable()) {
+        const res = await _fsaSave(text, !!o.saveAs);
+        if (res === 'cancelled') return false;
+        if (res === 'ok') {
+            _afterSave();
+            if (typeof _toast === 'function') { try { _toast('Saved', _projectFileName); } catch (e) {} }
+            return true;
+        }
+        // 'failed' falls through on purpose: a permission or a disk error must
+        // not leave the only copy of the work inside a browser tab.
+    }
+    const name = _downloadProject(text);
+    // A download cannot be written back to, so this leaves the project UNBOUND
+    // and only records the name for display.
+    _setProjectFile(null, name);
+    _afterSave();
+    return true;
+}
+
+function saveMasterProjectAs() { return saveMasterProject({ saveAs: true }); }
+
+// LOADING USED TO DISCARD UNSAVED WORK WITHOUT ASKING. beforeunload covers
+// closing the tab and covered nothing here, so opening a second project over an
+// hour of edits was silent. The confirm runs FIRST and the picker is opened from
+// inside its Yes handler, because that handler is itself a click and a file
+// picker needs a user gesture - opening one after an awaited modal is refused.
+function _confirmDiscardUnsaved(proceed) {
+    if (!_isDirty) { proceed(); return; }
+    if (typeof showConfirmModal !== 'function') { proceed(); return; }
+    showConfirmModal('Open another project?',
+        'This project has changes that are not saved to a file. Opening another one discards them.',
+        'Discard and open', 'Cancel', proceed);
+}
+
+// Open through a HANDLE where the browser has one, so Save writes back to the
+// file that was opened. Falls back to the hidden <input type=file>, which is
+// what every browser without the API still uses.
+function openMasterProject() {
+    _confirmDiscardUnsaved(() => {
+        if (!_fsaAvailable()) {
+            const inp = document.getElementById('masterLoad');
+            if (inp) inp.click();
+            return;
+        }
+        window.showOpenFilePicker({ types: PROJECT_FILE_TYPES, multiple: false })
+            .then(([handle]) => handle.getFile().then(f => f.text()).then(text => {
+                if (_readProjectText(text)) _setProjectFile(handle, handle.name);
+            }))
+            .catch(err => {
+                if (err && err.name === 'AbortError') return;
+                try {
+                    showInfoModal('Could not open that file',
+                        ((err && err.message) || 'The file could not be read') + '.');
+                } catch (e) {}
+            });
+    });
+}
+
+// Parse a project file and install it. Extracted from loadMasterProject so the
+// <input type=file> path and the File System Access path cannot drift about what
+// opening a project MEANS - the handle is the only thing that differs between the
+// two. Returns whether the project was actually installed, which is what tells the
+// caller whether it may bind the file it came from.
+function _readProjectText(text) {
+    try {
+        const data = JSON.parse(text);
+        if (data.type && data.type.startsWith('master-studio')) {
+            _migrateLoadedProject(data);   // auto-correct mislabeled units etc.
+            // Unit handling: prefer dashUnit (it's the CSV-canonical one).
+            // If only elevUnit exists (older format edge case) use that.
+            // Force both internal vars equal to the chosen value since
+            // they're now treated as one unified setting.
+            const chosenUnit = data.dashUnit || data.elevUnit || 'in';
+            dashUnit = chosenUnit;
+            elevUnit = chosenUnit;
+            // Hang height and baseboard, in inches. A project written before
+            // they were saved has neither, and falls to the studio standards
+            // rather than to whatever the last project left in the inputs.
+            const _hIn = parseFloat(data.hangHeightIn);
+            elevHangIn = (isFinite(_hIn) && _hIn > 0) ? _hIn : ELEV_STD_HANG_IN;
+            const _bIn = parseFloat(data.baseboardIn);
+            elevBaseboardIn = (isFinite(_bIn) && _bIn >= 0) ? _bIn : ELEV_STD_BASEBOARD_IN;
+            seedHangBaseboardInputs();
+            seedDeckPlanOrderInput();
+            seedDeckIncludeInputs();
+            if (data.globalMeta) {
+                const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; };
+                setVal('g_projName', data.globalMeta.projName); setVal('g_desc', data.globalMeta.desc); setVal('g_date', data.globalMeta.date);
+                setVal('g_issued', data.globalMeta.issued); setVal('g_client', data.globalMeta.client); setVal('g_attn', data.globalMeta.attn); setVal('g_delivery', data.globalMeta.delivery);
+            }
+            if (data.dashProjectData) dashProjectData = data.dashProjectData;
+            if (data.elevations) elevations = data.elevations;
+            _elevMigrateIds();
+            floorplanImageData = data.floorplanImage || '';
+            floorplanImageName = data.floorplanImageName || '';
+            floorplanLevels = Array.isArray(data.floorplanLevels) ? data.floorplanLevels : [];
+            _fpLevel = 0; _fpMigrate();
+            editorialContent = Object.assign(_editorialDefaults(), data.editorial || {});
+            // The drafting standard, when the file carries one. OPTIONAL by design:
+            // absent means the file predates the idea (or was written by a tool that
+            // doesn't set it), and the machine's own preference is then correct — so
+            // loading an old project must not wipe the settings the user chose. Only
+            // an explicitly present key overrides them.
+            if (data.annotationStyle && typeof data.annotationStyle === 'object') {
+                // Merge onto the current object rather than replacing it: every
+                // renderer holds a live reference to `annotationStyle`, and a file
+                // missing a field it has since gained would otherwise leave that
+                // field undefined rather than at its default.
+                Object.assign(annotationStyle, data.annotationStyle);
+                // Re-derives the CSS stacks from the tokens and migrates the legacy
+                // px weight — never set annotationStyle.fontFamily by hand.
+                if (typeof _normalizeAnnotationStyle === 'function') _normalizeAnnotationStyle();
+                if (typeof applyAnnotationStyleToCSSVars === 'function') applyAnnotationStyleToCSSVars();
+                if (typeof saveAnnotationStyle === 'function') saveAnnotationStyle();
+            }
+            if (typeof data.elevDualUnit === 'string') {
+                elevDualUnit = (data.elevDualUnit === 'mm' || data.elevDualUnit === 'cm') ? data.elevDualUnit : '';
+                if (elevDualUnit) _elevDualLast = elevDualUnit;
+                try { localStorage.setItem('elevDualUnit', elevDualUnit); } catch (e) {}
+            }
+            // If the loaded project had divergent dashUnit / elevUnit
+            // (a relic of the pre-unified era), the elevations array
+            // values are in elevUnit while dashProjectData is in
+            // dashUnit. We picked dashUnit as canonical, so convert
+            // elevation values to match. Skip if they were already equal.
+            const origElevUnit = data.elevUnit || chosenUnit;
+            if (origElevUnit !== chosenUnit) {
+                const f = unitFactor(origElevUnit, chosenUnit);
+                elevations.forEach(elev => {
+                    elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
+                    elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
+                    elev.frames.forEach(fr => {
+                        ['w','h','fW','fHeight','rabbetDepth','floaterInset','sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2','x','y'].forEach(p => {
+                            fr[p] = parseFloat((parseFloat(fr[p] || 0) * f).toFixed(4));
+                        });
+                    });
+                    if (elev.personPos) elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
+                    // Glazing panel runs move with the wall — see _scaleElevGlazing.
+                    _scaleElevGlazing(elev, f);
+                    // Context blocks and the client-elevation underlay, likewise.
+                    _scaleElevContext(elev, f);
+                });
+            }
+        } else {
+            // A failure, so it takes the modal rather than a toast, and says what
+            // was wrong with the file rather than only that something was.
+            showInfoModal('Not a FRAME project',
+                'That file is valid JSON but it is not a FRAME project - it carries no "master-studio" type. '
+                + 'Open a .json that FRAME saved, or start a new project.');
+            return false;
+        }
+
+        // Sync all 3 toggle-button trios. Each guarded since not every
+        // trio is present in every state.
+        [
+            ['dashBtnInch', 'dashBtnCm', 'dashBtnMm'],
+            ['elevBtnInch', 'elevBtnCm', 'elevBtnMm'],
+            ['globalBtnInch', 'globalBtnCm', 'globalBtnMm'],
+        ].forEach(([inId, cmId, mmId]) => {
+            const inEl = document.getElementById(inId);
+            const cmEl = document.getElementById(cmId);
+            const mmEl = document.getElementById(mmId);
+            if (inEl) inEl.classList.toggle('active', dashUnit === 'in');
+            if (cmEl) cmEl.classList.toggle('active', dashUnit === 'cm');
+            if (mmEl) mmEl.classList.toggle('active', dashUnit === 'mm');
+        });
+        
+        recalculateDashboardQuantities(); selectDashRow(0); renderNavTabs(); switchView('dashboard');
+        // Loaded project becomes the new canonical state. Reset undo
+        // history (no point in being able to undo back to "before the
+        // load") and clear dirty flag.
+        if (typeof undoStack !== 'undefined') {
+            undoStack.length = 0;
+            redoStack.length = 0;
+            _isFirstHistoryPush = true;
+            pushHistory();
+        }
+        if (typeof markClean === 'function') markClean();
+        if (typeof clearAutosave === 'function') clearAutosave();
+        if (data._unitAutoFixed && typeof showInfoModal === 'function') {
+            showInfoModal('Units auto-corrected', 'This project was labeled "' + data._unitAutoFixed.from + '" but its measurements looked like "' + data._unitAutoFixed.to + '" (for example, a 108-unit-tall wall). FRAME corrected the unit to ' + data._unitAutoFixed.to + ' so the elevation, person, and hang heights scale correctly. Save the project to keep the fix.');
+        }
+        return true;
+    } catch (err) {
+        showInfoModal('Could not read that project',
+            'The file could not be parsed: ' + ((err && err.message) || 'unknown error') + '.'
+            + String.fromCharCode(10) + String.fromCharCode(10)
+            + 'Nothing has been changed, so the project you had open is still here.');
+        return false;
+    }
 }
 
 function loadMasterProject(event) {
     const file = event.target.files[0]; if (!file) return;
     const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const data = JSON.parse(e.target.result);
-            if (data.type && data.type.startsWith('master-studio')) {
-                _migrateLoadedProject(data);   // auto-correct mislabeled units etc.
-                // Unit handling: prefer dashUnit (it's the CSV-canonical one).
-                // If only elevUnit exists (older format edge case) use that.
-                // Force both internal vars equal to the chosen value since
-                // they're now treated as one unified setting.
-                const chosenUnit = data.dashUnit || data.elevUnit || 'in';
-                dashUnit = chosenUnit;
-                elevUnit = chosenUnit;
-                // Hang height and baseboard, in inches. A project written before
-                // they were saved has neither, and falls to the studio standards
-                // rather than to whatever the last project left in the inputs.
-                const _hIn = parseFloat(data.hangHeightIn);
-                elevHangIn = (isFinite(_hIn) && _hIn > 0) ? _hIn : ELEV_STD_HANG_IN;
-                const _bIn = parseFloat(data.baseboardIn);
-                elevBaseboardIn = (isFinite(_bIn) && _bIn >= 0) ? _bIn : ELEV_STD_BASEBOARD_IN;
-                seedHangBaseboardInputs();
-                seedDeckPlanOrderInput();
-                seedDeckIncludeInputs();
-                if (data.globalMeta) {
-                    const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; };
-                    setVal('g_projName', data.globalMeta.projName); setVal('g_desc', data.globalMeta.desc); setVal('g_date', data.globalMeta.date);
-                    setVal('g_issued', data.globalMeta.issued); setVal('g_client', data.globalMeta.client); setVal('g_attn', data.globalMeta.attn); setVal('g_delivery', data.globalMeta.delivery);
-                }
-                if (data.dashProjectData) dashProjectData = data.dashProjectData;
-                if (data.elevations) elevations = data.elevations;
-                floorplanImageData = data.floorplanImage || '';
-                floorplanImageName = data.floorplanImageName || '';
-                floorplanLevels = Array.isArray(data.floorplanLevels) ? data.floorplanLevels : [];
-                _fpLevel = 0; _fpMigrate();
-                editorialContent = Object.assign(_editorialDefaults(), data.editorial || {});
-                // The drafting standard, when the file carries one. OPTIONAL by design:
-                // absent means the file predates the idea (or was written by a tool that
-                // doesn't set it), and the machine's own preference is then correct — so
-                // loading an old project must not wipe the settings the user chose. Only
-                // an explicitly present key overrides them.
-                if (data.annotationStyle && typeof data.annotationStyle === 'object') {
-                    // Merge onto the current object rather than replacing it: every
-                    // renderer holds a live reference to `annotationStyle`, and a file
-                    // missing a field it has since gained would otherwise leave that
-                    // field undefined rather than at its default.
-                    Object.assign(annotationStyle, data.annotationStyle);
-                    // Re-derives the CSS stacks from the tokens and migrates the legacy
-                    // px weight — never set annotationStyle.fontFamily by hand.
-                    if (typeof _normalizeAnnotationStyle === 'function') _normalizeAnnotationStyle();
-                    if (typeof applyAnnotationStyleToCSSVars === 'function') applyAnnotationStyleToCSSVars();
-                    if (typeof saveAnnotationStyle === 'function') saveAnnotationStyle();
-                }
-                if (typeof data.elevDualUnit === 'string') {
-                    elevDualUnit = (data.elevDualUnit === 'mm' || data.elevDualUnit === 'cm') ? data.elevDualUnit : '';
-                    if (elevDualUnit) _elevDualLast = elevDualUnit;
-                    try { localStorage.setItem('elevDualUnit', elevDualUnit); } catch (e) {}
-                }
-                // If the loaded project had divergent dashUnit / elevUnit
-                // (a relic of the pre-unified era), the elevations array
-                // values are in elevUnit while dashProjectData is in
-                // dashUnit. We picked dashUnit as canonical, so convert
-                // elevation values to match. Skip if they were already equal.
-                const origElevUnit = data.elevUnit || chosenUnit;
-                if (origElevUnit !== chosenUnit) {
-                    const f = unitFactor(origElevUnit, chosenUnit);
-                    elevations.forEach(elev => {
-                        elev.wallW = parseFloat((parseFloat(elev.wallW) * f).toFixed(2));
-                        elev.wallH = parseFloat((parseFloat(elev.wallH) * f).toFixed(2));
-                        elev.frames.forEach(fr => {
-                            ['w','h','fW','fHeight','rabbetDepth','floaterInset','sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2','x','y'].forEach(p => {
-                                fr[p] = parseFloat((parseFloat(fr[p] || 0) * f).toFixed(4));
-                            });
-                        });
-                        if (elev.personPos) elev.personPos.x = parseFloat((parseFloat(elev.personPos.x || 0) * f).toFixed(2));
-                        // Glazing panel runs move with the wall — see _scaleElevGlazing.
-                        _scaleElevGlazing(elev, f);
-                        // Context blocks and the client-elevation underlay, likewise.
-                        _scaleElevContext(elev, f);
-                    });
-                }
-            } else { return alert("Invalid format. Please build a new project in Master Studio."); }
-
-            // Sync all 3 toggle-button trios. Each guarded since not every
-            // trio is present in every state.
-            [
-                ['dashBtnInch', 'dashBtnCm', 'dashBtnMm'],
-                ['elevBtnInch', 'elevBtnCm', 'elevBtnMm'],
-                ['globalBtnInch', 'globalBtnCm', 'globalBtnMm'],
-            ].forEach(([inId, cmId, mmId]) => {
-                const inEl = document.getElementById(inId);
-                const cmEl = document.getElementById(cmId);
-                const mmEl = document.getElementById(mmId);
-                if (inEl) inEl.classList.toggle('active', dashUnit === 'in');
-                if (cmEl) cmEl.classList.toggle('active', dashUnit === 'cm');
-                if (mmEl) mmEl.classList.toggle('active', dashUnit === 'mm');
-            });
-            
-            recalculateDashboardQuantities(); selectDashRow(0); renderNavTabs(); switchView('dashboard');
-            // Loaded project becomes the new canonical state. Reset undo
-            // history (no point in being able to undo back to "before the
-            // load") and clear dirty flag.
-            if (typeof undoStack !== 'undefined') {
-                undoStack.length = 0;
-                redoStack.length = 0;
-                _isFirstHistoryPush = true;
-                pushHistory();
-            }
-            if (typeof markClean === 'function') markClean();
-            if (typeof clearAutosave === 'function') clearAutosave();
-            if (data._unitAutoFixed && typeof showInfoModal === 'function') {
-                showInfoModal('Units auto-corrected', 'This project was labeled "' + data._unitAutoFixed.from + '" but its measurements looked like "' + data._unitAutoFixed.to + '" (for example, a 108-unit-tall wall). FRAME corrected the unit to ' + data._unitAutoFixed.to + ' so the elevation, person, and hang heights scale correctly. Save the project to keep the fix.');
-            }
-        } catch (err) { alert("Invalid project file."); }
+    reader.onload = function (e) {
+        // A File from an <input> cannot be written back to, so this path always
+        // leaves the project UNBOUND. Save must never write what was just opened
+        // over whichever file happened to be bound before it.
+        if (_readProjectText(e.target.result)) _setProjectFile(null, file.name);
     };
     reader.readAsText(file); event.target.value = '';
 }
@@ -5436,6 +6706,18 @@ function recalculateDashboardQuantities() {
     // reflect the number of UNIQUE physical frames across primary walls.
     elevations.forEach(elev => {
         if (elev.isVariation) return;
+        // A CATALOGUE MOCKUP'S SLOTS ARE A DRAWING, NOT STOCK. The master holds the
+        // arrangement and no artwork; its options carry the real items. Counting it would
+        // put an unselectable, imageless piece in the schedule beside the six real
+        // choices for the same wall.
+        if (_isCatalogueMaster(elev)) return;
+        // AND AN OPTION IS A CHOICE, NOT A PURCHASE. Three image options of a three-piece
+        // hang are nine distinct items - which is why each keeps its own code and its own
+        // row - but three pieces get bought, and which three is the client's decision.
+        // The reference decks say so on the page: "Consult your specific floorplan for
+        // full quantity of artwork." Deliberately NOT done by flagging `isVariation`,
+        // which also drives orphan promotion and the derived `variationOf` mirror.
+        if (_isCatalogueOption(elev)) return;
         elev.frames.forEach(f => { if (f.active && f.id) counts[f.id] = (counts[f.id] || 0) + 1; });
     });
     dashProjectData.forEach(d => { d.qty = counts[d.id] !== undefined ? counts[d.id] : 0; });
@@ -5471,7 +6753,7 @@ function populateElevBulkList() {
 
 function importSelectedFramesBulk() {
     const cbs = document.querySelectorAll('.bulk-import-cb:checked');
-    if(cbs.length === 0) return alert("Select at least one frame from the list!");
+    if(cbs.length === 0) { _toast('Nothing selected', 'Tick at least one frame in the list first.'); return; }
     
     let factor = unitFactor(dashUnit, elevUnit);
     let startX = 10;
@@ -6811,6 +8093,762 @@ function toggleEgdWall() {
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
+
+// ── CATALOGUE MASTERS AND ART OPTIONS ─────────────────────────────────────
+// A CATALOGUE IS A DOCUMENT OF CHOICES, NOT AN ORDER. A dealership catalogue shows one
+// arrangement several times over with different artwork in it, and the client picks. The
+// reference decks say so on the page itself: "each wall will require its own pair of
+// pieces. Consult your specific floorplan for full quantity of artwork." So a catalogue
+// deliberately does NOT state quantity, and every option piece is a real, distinct item
+// in the art library rather than a second copy of one piece.
+//
+// THE MASTER IS THE ARRANGEMENT; AN OPTION OWNS ONLY ITS ARTWORK. `catalogueMaster` marks
+// the wall that holds the hang: slot sizes, positions, mouldings, mats. Duplicating it
+// mints an OPTION - a wall linked back by `variationOfId` with `catalogueOption` set -
+// and one dashboard row per slot. The option's frames re-read their geometry and frame
+// spec off the master on every draw, which is the whole reason to do this here rather
+// than in InDesign: move a frame on the master and every option page moves with it.
+// A free copy gives you the swapping and not the fixing, and the seventh option added
+// next month gets built from whichever copy was to hand.
+//
+// ONE LINK FIELD, TWO FLAVOURS. `variationOfId` already meant "this wall exists because
+// that one does", so a catalogue option reuses it rather than adding a second link with
+// its own orphan rule. What tells them apart is `catalogueOption`: a plain layout
+// variation carries `isVariation` and is skipped by recalculateDashboardQuantities so a
+// duplicated wall cannot double-bill, while an art option is NOT flagged that way,
+// because its pieces genuinely are their own line items.
+//
+// THE CODES ALREADY WORK. `ART-1` is the master, `ART-1.1` an option, `ART-1.1A` a row.
+// _artGroupKey('ART-1.1A') already returns 'ART-1.1', _artGroupNum keeps the dotted form
+// rather than zero-padding it, and _breakerCodeFor renders the page title 'ART-1.1AB'.
+// Nothing in the grouping, page-titling or CSV machinery had to be taught this; the only
+// thing that was missing is the part that MINTS the codes, which was being done by hand.
+function _isCatalogueMaster(elev) { return !!(elev && elev.catalogueMaster); }
+function _catMasterOf(elev) {
+    if (!elev || !elev.catalogueOption || !elev.variationOfId) return null;
+    const m = _elevById(elev.variationOfId);
+    return _isCatalogueMaster(m) ? m : null;
+}
+function _isCatalogueOption(elev) { return !!_catMasterOf(elev); }
+// `catalogueFree` IS RETIRED. It meant "this layout owns its frames", which is now what
+// a FRAME SET is - a level rather than a flag. Two ways to say one thing is the
+// confusion the level was added to remove, so the flag does not survive as an escape
+// hatch. Nothing shipped with it in a real project.
+// A short name the designer types once - Single, Triptych, Salon hang. It is how a
+// placement is NAVIGATED; the code stays the identity. Never derived from anything, so
+// renaming a slot cannot move it.
+function _catLayoutLabel(elev) { return String((elev && elev.catalogueLabel) || ''); }
+// The layout a wall belongs to, written the way it should read on a page and in a CSV
+// cell: "C - Triptych", or just "C" when it has not been named. ONE definition, because
+// the breaker page and the CSV column would otherwise print the placement's structure
+// two different ways and a designer would reasonably read that as two things.
+function _catLayoutTag(elev) {
+    if (!_isCatalogueMaster(elev)) return '';
+    const code = _catBaseCode(elev); if (!code) return '';
+    const l = _catArrLetter(code), nm = _catLayoutLabel(elev);
+    if (!l && !nm) return '';
+    return l ? (nm ? (l + ' \u2014 ' + nm) : l) : nm;
+}
+// …and for a ROW, which is what the CSV walks. An option's row belongs to its mockup's
+// layout; a mockup slot belongs to its own. Anything outside a catalogue is blank.
+function _catLayoutTagForRow(rowId) {
+    if (!rowId) return '';
+    const walls = (elevations || []);
+    for (let i = 0; i < walls.length; i++) {
+        const e = walls[i];
+        if (!e || !(e.frames || []).some(f => f && f.id === rowId)) continue;
+        const m = _isCatalogueMaster(e) ? e : _catMasterOf(e);
+        if (m) return _catLayoutTag(m);
+    }
+    return '';
+}
+function _catOptionsOf(master) {
+    const id = master && master.id;
+    if (!id) return [];
+    return (elevations || []).filter(e => e && e.catalogueOption && e.variationOfId === id);
+}
+// The base item code is DERIVED from the master's own slots and never stored: the slots
+// already carry it, and a second copy is a second thing to keep right.
+function _catBaseCode(master) {
+    const f = (((master && master.frames) || []).filter(x => x && x.id))[0];
+    // The trim is belt and braces: _artGroupKey does it now, and a base carrying a
+    // trailing dot is what minted 'ART.1..2A'.
+    return f ? String(_artGroupKey(f.id)).replace(/[-._\s]+$/, '') : '';
+}
+// -- FOUR LEVELS, ALL DERIVED FROM THE CODE ---------------------------------
+//   ART.01        placement, frame set 1, its primary layout written the short way
+//   ART.01A       placement ART.01, frame set 1, layout A
+//   ART.01A.1     ...and image set 1 in that layout
+//   ART.01.2      placement ART.01, FRAME SET 2, its primary layout
+//   ART.01.2A     frame set 2, layout A
+//   ART.01.2A.1   ...and its image set 1
+// A FRAME SET is a different set of frames offered at the same spot - a single piece
+// where set 1 is a salon hang. A LAYOUT is that same set of frames somewhere else on the
+// wall. That distinction used to be a flag on a layout (`catalogueFree`) and is now a
+// level, which RETIRES the flag: within a frame set every layout shares the frames,
+// because that is what a frame set is, and two ways to say "different frames" is the
+// confusion this was meant to remove.
+// ALL DERIVED from the code, never stored, exactly as `_catBaseCode` is.
+//
+// THE ONE AMBIGUITY AND HOW IT IS RESOLVED. `ART.01.2` could be read as placement
+// `ART.01` frame set 2, or placement `ART` frame set `01.2`. The rule is that a
+// PLACEMENT ENDS AT ITS FIRST NUMBER GROUP, and a second dotted number after it is the
+// frame set. The regex requires the WHOLE code to parse, so the lazy prefix only settles
+// early when what follows really is `.<digits>` plus letters - which is why `L2.ART-2`
+// still resolves to itself rather than to `L2`, and `L2.ART-2.3A` to set 3 of it.
+// Image options are NOT parsed here: an option is identified by its LINK
+// (`catalogueOption` + `variationOfId`), never by its spelling, so an old `ART-1.1`
+// cannot be mistaken for a frame set.
+const CAT_CODE_RE = /^(.*?[0-9]+)(?:\.([0-9]+))?([A-Za-z]*)$/;
+function _catCodeParts(arrCode) {
+    const m = String(arrCode || '').match(CAT_CODE_RE);
+    if (!m) return { place: String(arrCode || ''), set: 1, letter: '' };
+    return { place: m[1], set: m[2] ? parseInt(m[2], 10) : 1, letter: m[3] || '' };
+}
+// The PLACEMENT: one pin on the floorplan, whatever is offered there.
+function _catPlacementKey(arrCode) { return _catCodeParts(arrCode).place; }
+// The FRAME SET: the placement plus its set number, which is what a layout belongs to
+// and what the frame specs are shared within. Set 1 is spelled without the number.
+function _catSetNum(arrCode) { return _catCodeParts(arrCode).set; }
+function _catSetKey(arrCode) {
+    const p = _catCodeParts(arrCode);
+    return p.set > 1 ? (p.place + '.' + p.set) : p.place;
+}
+function _catArrLetter(arrCode) { return _catCodeParts(arrCode).letter; }
+// Shortest letter first, then alphabetical, so Z comes before AA. An UNLETTERED
+// arrangement sorts first: it is the original, written before anyone needed a second.
+function _catArrCmp(a, b) {
+    const la = _catArrLetter(a), lb = _catArrLetter(b);
+    if (la === lb) return 0;
+    if (!la) return -1;
+    if (!lb) return 1;
+    return (la.length - lb.length) || (la < lb ? -1 : 1);
+}
+// The layouts of ONE FRAME SET, in letter order. Frame specs are shared within this
+// list and nowhere else: two frame sets are different frames by definition.
+function _catArrangementsOf(setKey) {
+    const k = String(setKey || '');
+    if (!k) return [];
+    return (elevations || [])
+        .filter(e => _isCatalogueMaster(e) && _catSetKey(_catBaseCode(e)) === k)
+        .sort((a, b) => _catArrCmp(_catBaseCode(a), _catBaseCode(b)));
+}
+// THE PRIMARY LAYOUT OF A FRAME SET governs that set's frame specs.
+function _catPrimaryArr(setKey) { return _catArrangementsOf(setKey)[0] || null; }
+// The frame SETS of a placement, in set order - the distinct keys, each represented by
+// its own primary layout. This is what the rail groups under one placement header and
+// what the plan treats as one pin.
+function _catSetsOf(placementKey) {
+    const k = String(placementKey || '');
+    if (!k) return [];
+    const seen = {}, out = [];
+    (elevations || []).forEach(e => {
+        if (!_isCatalogueMaster(e)) return;
+        const code = _catBaseCode(e); if (!code) return;
+        if (_catPlacementKey(code) !== k) return;
+        const sk = _catSetKey(code);
+        if (!seen[sk]) { seen[sk] = true; out.push(sk); }
+    });
+    return out.sort((a, b) => _catSetNum(a) - _catSetNum(b));
+}
+// THE PRIMARY LAYOUT OF THE PRIMARY SET OWNS THE PLAN PIN, because the pin belongs to the
+// PLACEMENT and a placement has exactly one spot however many frame sets are offered there.
+function _catPlacementPrimary(placementKey) {
+    const sets = _catSetsOf(placementKey);
+    return sets.length ? _catPrimaryArr(sets[0]) : null;
+}
+// Slot rows belonging to a NON-PRIMARY arrangement. Four arrangements of one hang are
+// one place on the plan, not four, so only the primary's slots may put a pin there -
+// the same rule an option already follows and for the same reason. Built in ONE pass
+// with a map rather than by asking `_catPrimaryArr` per wall, because `_fpGroups` calls
+// this on every plan render.
+// Slot rows belonging to any wall of a placement EXCEPT its one pinning layout. Four
+// layouts across three frame sets are one place on the plan, not seven, so only the
+// primary layout of the primary set may put a pin there - the same rule an option
+// already follows and for the same reason. Built in ONE pass with a map rather than
+// asking per wall, because `_fpGroups` calls this on every plan render.
+function _catAltArrRowIds() {
+    const prim = {};
+    (elevations || []).forEach(e => {
+        if (!_isCatalogueMaster(e)) return;
+        const code = _catBaseCode(e); if (!code) return;
+        const k = _catPlacementKey(code), cur = prim[k];
+        // Lowest SET first, then lowest letter within it.
+        if (!cur) { prim[k] = e; return; }
+        const cc = _catBaseCode(cur);
+        const ds = _catSetNum(code) - _catSetNum(cc);
+        if (ds < 0 || (ds === 0 && _catArrCmp(code, cc) < 0)) prim[k] = e;
+    });
+    const out = {};
+    (elevations || []).forEach(e => {
+        if (!_isCatalogueMaster(e)) return;
+        const code = _catBaseCode(e); if (!code) return;
+        if (prim[_catPlacementKey(code)] === e) return;
+        (e.frames || []).forEach(f => { if (f && f.id) out[f.id] = true; });
+    });
+    return out;
+}
+function _catNextOptionNum(master) {
+    let n = 0;
+    _catOptionsOf(master).forEach(o => { const v = parseInt(o.catalogueOption, 10); if (!isNaN(v) && v > n) n = v; });
+    return n + 1;
+}
+function _catOptionCode(base, n) { return base ? (base + '.' + n) : ''; }
+function _catRowId(base, n, letter) { const c = _catOptionCode(base, n); return c ? (c + (letter || '')) : ''; }
+// Every row id that belongs to a master's SLOTS rather than to a real catalogue item.
+// A Set built once, because the CSV asks this per row and the walls would otherwise be
+// re-walked for each one.
+// The mirror of _catSlotRowIds: every row id that belongs to an OPTION wall.
+// AN OPTION IS AN ALTERNATE FOR ONE LOCATION, NOT A SECOND LOCATION. Three options of a
+// three-piece hang put twelve ids in the floorplan legend and four pins on the same
+// spot, all of them the same placement. The mockup's slot is the placement and the only
+// thing that belongs on a plan; the options inherit its pin so their spec pages can
+// still draw the crop, which is exactly why they have to be filtered out here rather
+// than left to have no pin.
+function _catOptionRowIds() {
+    const out = {};
+    (elevations || []).forEach(e => {
+        if (!e || !e.catalogueOption || !_catMasterOf(e)) return;
+        (e.frames || []).forEach(f => { if (f && f.id) out[f.id] = true; });
+    });
+    return out;
+}
+function _catSlotRowIds() {
+    const out = {};
+    (elevations || []).forEach(e => {
+        if (!_isCatalogueMaster(e)) return;
+        (e.frames || []).forEach(f => { if (f && f.id) out[f.id] = true; });
+    });
+    return out;
+}
+// What an option INHERITS. Artwork is deliberately absent: that is the one thing an
+// option owns. So are `active`, `dimTo`, `distToggles` and `selected`, which are
+// per-wall authoring state rather than a description of the piece.
+const CAT_SLOT_FIELDS = ['w', 'h', 'x', 'y', 'fW', 'fType', 'fColor', 'fColorName', 'fCode',
+    'swatchDataUrl', 'product', 'material', 'floaterInset', 'fHeight', 'rabbetDepth',
+    'm1A', 'm1', 'm1ColorHex', 'm1Locked', 'm2A', 'm2', 'm2ColorHex',
+    'useFloatMount', 'useFauxMat', 'paperType'];
+// AND THE CALLOUT SPACERS, which are the dimension story rather than the piece.
+// `dimTo` and `distToggles` were excluded as "per-wall authoring state", which was right
+// while an option was only about swapping pictures - but an option IS the mockup's wall,
+// so a spacer moved on the mockup has to move on every option or the drawing a designer
+// arranged is not the drawing that prints. Asked for as "moving callout spacer dimensions
+// ... need to mirror the spawned elevations".
+// DEEP, because `distToggles` is an object: the shallow `!==` compares references, so it
+// would copy one every pass and then SHARE it between two walls, which aliases them
+// through every undo snapshot.
+const CAT_SLOT_DEEP = ['dimTo', 'distToggles'];
+// WHAT "THE ARTWORK" IS, as one list. It was written out four times - twice when minting
+// an option, once when minting a layout, once when clearing a frame - and moving an
+// image between frames is a fifth, so a missed field means a picture that half-moves
+// (its crop stays behind, or its image code names the wrong file).
+const ELEV_ART_FIELDS = ['artworkUrl', 'artworkFile', 'imageCode', 'artworkW', 'artworkH',
+    'artZoom', 'artPanX', 'artPanY', 'artist', 'artworkTitle'];
+// -- WHAT A LAYOUT TAKES, AS AGAINST WHAT AN OPTION TAKES --------------------
+// An OPTION is the same arrangement with different pictures, so it takes position too.
+// A LAYOUT is the same frames somewhere else on the wall, so it takes everything EXCEPT
+// position - x and y are the entire reason a second layout exists. Derived from the one
+// list rather than written out again, or a field added to a frame reaches one and not
+// the other and the two silently disagree about what a spec is.
+const CAT_SPEC_FIELDS = CAT_SLOT_FIELDS.filter(k => k !== 'x' && k !== 'y');
+// AN OPTION IS THE SAME WALL, so the wall follows too. Reported as the scale character
+// not moving with the mockup: the frames were being kept in step and nothing else was,
+// which reads as a half-built link. Everything here describes the PLACEMENT rather than
+// the artwork, so an option has no business owning its own copy.
+// `underlay` is deliberately absent: it is a tracing guide carrying a megabyte data URL
+// that never exports, so copying it per option would multiply the project size for
+// something no option page can show. It is stripped at creation instead.
+// `groupDims` / `customLines` ARE here as of 17.77, reversing an earlier exclusion. The
+// reasoning then was that the dimensioned drawing belongs to the breaker page and that an
+// option thumbnail carrying dimension lines over its artwork is not wanted. The designer
+// asking for it is the better evidence: the group dimensions and custom lines ARE the
+// layout work, and a mockup whose measurements do not reach its own options means doing
+// that work once per option. The layer toggles still decide what prints.
+const CAT_WALL_FIELDS = ['wallW', 'wallH', 'egdWall'];
+const CAT_WALL_DEEP = ['personPos', 'contextBlocks', 'glazing', 'groupDims', 'customLines'];
+// A row-level mirror as well: the PLAN PIN belongs to the placement. A dealership hangs
+// ONE piece in that spot and picks which image goes in it, so pinning the mockup's slot
+// on the floorplan has to reach every option's spec page. Pin ART.1.A once, not six
+// times, and a pin added after the options exist still finds them.
+const CAT_ROW_FIELDS = ['planX', 'planY', 'level', 'location'];
+const CAT_ROW_DEEP = ['planPins', 'planWalls', 'wallLine', 'wallLines', 'wallPanels'];
+// Matched by LETTER, because the letter is what the option's row ids were built from and
+// it is the only thing the two walls are guaranteed to share. Returns whether anything
+// moved, so a caller can skip a redraw it does not need.
+function _catSyncOption(opt) {
+    const master = _catMasterOf(opt);
+    if (!master) return false;
+    let moved = false;
+    CAT_WALL_FIELDS.forEach(k => { if (opt[k] !== master[k]) { opt[k] = master[k]; moved = true; } });
+    // Compared as JSON rather than cloned unconditionally: this runs on every redraw of
+    // the wall, and a handful of context blocks is cheap to stringify while a clone per
+    // frame of a drag is not. None of these carry image data (a context block stores its
+    // preset KEY, never the markup), so the strings stay short.
+    CAT_WALL_DEEP.forEach(k => {
+        const a = JSON.stringify(master[k] === undefined ? null : master[k]);
+        if (a !== JSON.stringify(opt[k] === undefined ? null : opt[k])) { opt[k] = _cloneData(master[k]); moved = true; }
+    });
+    const by = {};
+    (master.frames || []).forEach(f => { if (f && f.letter) by[f.letter] = f; });
+    (opt.frames || []).forEach(f => {
+        const src = f && by[f.letter];
+        if (!src) return;
+        CAT_SLOT_FIELDS.forEach(k => { if (f[k] !== src[k]) { f[k] = src[k]; moved = true; } });
+        CAT_SLOT_DEEP.forEach(k => {
+            const a = JSON.stringify(src[k] === undefined ? null : src[k]);
+            if (a !== JSON.stringify(f[k] === undefined ? null : f[k])) { f[k] = _cloneData(src[k]); moved = true; }
+        });
+        // And the option's own dashboard row follows the slot's row for everything that
+        // is about WHERE the piece hangs rather than what is in it.
+        const srcRow = (dashProjectData || []).filter(r => r && r.id === src.id)[0];
+        const optRow = (dashProjectData || []).filter(r => r && r.id === f.id)[0];
+        if (!srcRow || !optRow || srcRow === optRow) return;
+        CAT_ROW_FIELDS.forEach(k => { if (optRow[k] !== srcRow[k]) { optRow[k] = srcRow[k]; moved = true; } });
+        CAT_ROW_DEEP.forEach(k => {
+            const a = JSON.stringify(srcRow[k] === undefined ? null : srcRow[k]);
+            if (a !== JSON.stringify(optRow[k] === undefined ? null : optRow[k])) { optRow[k] = _cloneData(srcRow[k]); moved = true; }
+        });
+    });
+    return moved;
+}
+// The slot row a placement's pin actually lives on. `_fpGroups` takes the first pinned
+// row in a group, so that is the one to mirror from.
+function _catPinnedSlotRow(elev) {
+    const rows = ((elev && elev.frames) || [])
+        .map(f => (dashProjectData || []).filter(r => r && f && r.id === f.id)[0])
+        .filter(Boolean);
+    return rows.filter(r => r.planX != null && r.planY != null)[0] || rows[0] || null;
+}
+// THE PIN BELONGS TO THE PLACEMENT, so an alternate arrangement borrows the primary's
+// rather than owning one. Same two field lists an option already uses: pinning is about
+// WHERE the piece hangs, and every arrangement of a placement hangs in the same spot.
+// Mirrored rather than left empty, for the reason `_catRowAsPlanGroup` exists - a row
+// filtered off the plan still has to draw its own spec-page crop.
+// THREE SCOPES, AND KEEPING THEM APART IS THE WHOLE MODEL.
+//   PLACEMENT  the wall itself (size, character, context, glazing) and the plan pin.
+//              Every frame set offered at one spot is on the same physical wall.
+//   FRAME SET  the frame SPECS, matched by letter. Change a size on a set's primary and
+//              every layout of THAT set takes it; another frame set is different frames
+//              by definition and must not.
+//   LAYOUT     its own frame positions and its own dimension callouts.
+// Mixing any two of these is how a triptych ends up wearing a salon hang's frame sizes.
+function _catSyncArrangements() {
+    let moved = false;
+    const byPlace = {}, bySet = {};
+    (elevations || []).forEach(e => {
+        if (!_isCatalogueMaster(e)) return;
+        const code = _catBaseCode(e); if (!code) return;
+        (byPlace[_catPlacementKey(code)] = byPlace[_catPlacementKey(code)] || []).push(e);
+        (bySet[_catSetKey(code)] = bySet[_catSetKey(code)] || []).push(e);
+    });
+    // FRAME SPECS, within a set only.
+    Object.keys(bySet).forEach(sk => {
+        const arr = bySet[sk].sort((a, b) => _catArrCmp(_catBaseCode(a), _catBaseCode(b)));
+        if (arr.length < 2) return;
+        const prim = arr[0];
+        const byL = {};
+        (prim.frames || []).forEach(f => { if (f && f.letter) byL[f.letter] = f; });
+        arr.slice(1).forEach(e => {
+            (e.frames || []).forEach(f => {
+                const s2 = f && byL[f.letter];
+                if (!s2) return;
+                // POSITION IS NEVER TAKEN. Inheriting x/y would make every layout of a
+                // set the same layout, which is the one thing that must never happen.
+                CAT_SPEC_FIELDS.forEach(key => { if (f[key] !== s2[key]) { f[key] = s2[key]; moved = true; } });
+            });
+        });
+    });
+    // THE WALL AND THE PIN, across the whole placement.
+    Object.keys(byPlace).forEach(k => {
+        const arr = byPlace[k].sort((a, b) => {
+            const ca = _catBaseCode(a), cb = _catBaseCode(b);
+            return (_catSetNum(ca) - _catSetNum(cb)) || _catArrCmp(ca, cb);
+        });
+        if (arr.length < 2) return;
+        const prim = arr[0];
+        // THE WALL BELONGS TO THE PLACEMENT. Four layouts offered for one spot are four
+        // drawings of the SAME wall, so its size, its scale character and anything traced
+        // on it follow the primary. Only the frames are the layout's own.
+        // `groupDims` / `customLines` are deliberately NOT taken here even though they are
+        // in CAT_WALL_DEEP: those dimension lines measure gaps between frames, and the
+        // frames are in different places on every layout. They reach an OPTION, which is
+        // the same arrangement, and stop at a LAYOUT, which is not.
+        arr.slice(1).forEach(e => {
+            CAT_WALL_FIELDS.forEach(f2 => { if (e[f2] !== prim[f2]) { e[f2] = prim[f2]; moved = true; } });
+            CAT_WALL_DEEP.forEach(f2 => {
+                if (f2 === 'groupDims' || f2 === 'customLines') return;
+                const a = JSON.stringify(prim[f2] === undefined ? null : prim[f2]);
+                if (a !== JSON.stringify(e[f2] === undefined ? null : e[f2])) { e[f2] = _cloneData(prim[f2]); moved = true; }
+            });
+        });
+        const src = _catPinnedSlotRow(prim);
+        if (!src) return;
+        arr.slice(1).forEach(e => {
+            (e.frames || []).forEach(f => {
+                const row = (dashProjectData || []).filter(r => r && f && r.id === f.id)[0];
+                if (!row || row === src) return;
+                CAT_ROW_FIELDS.forEach(key => { if (row[key] !== src[key]) { row[key] = src[key]; moved = true; } });
+                CAT_ROW_DEEP.forEach(key => {
+                    const a = JSON.stringify(src[key] === undefined ? null : src[key]);
+                    if (a !== JSON.stringify(row[key] === undefined ? null : row[key])) { row[key] = _cloneData(src[key]); moved = true; }
+                });
+            });
+        });
+    });
+    return moved;
+}
+function _catSyncAllOptions() {
+    // ARRANGEMENTS FIRST. An option mirrors its own mockup's slot row, so if that mockup
+    // is an alternate arrangement its slots have to have taken the primary's pin before
+    // the option reads them, or the option lags one render behind.
+    let moved = _catSyncArrangements();
+    (elevations || []).forEach(e => { if (_catSyncOption(e)) moved = true; });
+    return moved;
+}
+// The switch the Elevations panel offers. Per ELEVATION, like EGD wall mode and unlike
+// every deck-wide control near it.
+function toggleCatalogueMaster() {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    if (_isCatalogueOption(elev)) {
+        _toast('This is an option', 'This wall is an art option of ' + (_catMasterOf(elev).name || 'its master') + '. Mark the master instead.');
+        return;
+    }
+    if (elev.catalogueMaster) {
+        if (_catOptionsOf(elev).length) {
+            _toast('Options are attached', 'Delete this wall\'s art options before turning the mockup off, or they lose the arrangement they follow.');
+            return;
+        }
+        delete elev.catalogueMaster;
+    } else {
+        elev.catalogueMaster = true;
+    }
+    initElevControls(); drawElevAll();
+    if (typeof _syncCatalogueBtn === 'function') _syncCatalogueBtn();
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+// Duplicate, when the wall is a master. One row per SLOT, minted EMPTY: an option that
+// has not been filled in has to read as unfilled rather than as absent, which is the
+// only way a 200-image catalogue can be checked at all.
+function _catAddOption(srcIdx, opts) {
+    const _oo = opts || {};
+    const master = elevations[srcIdx];
+    const base = _catBaseCode(master);
+    if (!base) {
+        showInfoModal('No item code on this wall', 'A catalogue mockup mints its option codes from its own slots, so the wall needs at least one placed piece with an item code (ART-1A) before it can produce options.');
+        return;
+    }
+    const n = _catNextOptionNum(master);
+    // TWO ROWS WITH ONE ID IS DATA CORRUPTION, NOT AN UNTIDY LIST. `recalculateDashboard
+    // Quantities` assigns by `counts[d.id]`, so both take the same number; `_elevShowing
+    // Piece` returns whichever it meets first; the CSV emits the piece twice. Refusing is
+    // cheap and there is no repair once the rows exist.
+    if (_catRowIdsTaken((master.frames || []).filter(f => f).map(f => _catRowId(base, n, f.letter)))) return;
+    const copy = _cloneData(master);
+    copy.id = _elevNewId();
+    delete copy.catalogueMaster;
+    copy.variationOfId = _elevId(master);
+    copy.catalogueOption = String(n);
+    copy.name = _catOptionCode(base, n);
+    // The tracing guide is the mockup's working material and never exports, so a copy per
+    // option would multiply a megabyte data URL for nothing. The dimensioned drawing
+    // belongs to the mockup's breaker page, not over an option's artwork.
+    delete copy.underlay;
+    copy.groupDims = [];
+    copy.customLines = [];
+    (copy.frames || []).forEach(f => {
+        if (!f) return;
+        const slotRow = (dashProjectData || []).filter(r => r && r.id === f.id)[0];
+        const row = _cloneData(slotRow || dashDefaultData);
+        row.id = _catRowId(base, n, f.letter);
+        row.qty = 0;
+        row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = '';
+        row.artworkW = 0; row.artworkH = 0; row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
+        row.artist = ''; row.artworkTitle = '';
+        dashProjectData.push(row);
+        f.id = row.id;
+        f.artworkUrl = ''; f.artworkFile = ''; f.imageCode = '';
+        f.artworkW = 0; f.artworkH = 0; f.artZoom = 1; f.artPanX = 0; f.artPanY = 0;
+        f.artist = ''; f.artworkTitle = '';
+    });
+    // AFTER THE LAST OPTION OF THIS MOCKUP, not immediately after the mockup. Inserting
+    // at srcIdx + 1 every time put option 3 in front of options 1 and 2, so the wall rail
+    // read backwards and the deck printed them out of order.
+    let at = srcIdx;
+    _catOptionsOf(master).forEach(o => { const i = elevations.indexOf(o); if (i > at) at = i; });
+    elevations.splice(at + 1, 0, copy);
+    _elevSyncVariationPrimary();
+    // CARRY THE IMAGES when asked. An option minted empty is right when you are adding a
+    // new set of pictures and wrong when you want THESE pictures in another order, which
+    // is the whole salon-hang case - and re-importing five files to get there is not a
+    // workflow. Matched by LETTER, like every other thing an option inherits.
+    if (_oo.carryFrom) {
+        const by = {};
+        ((_oo.carryFrom.frames) || []).forEach(f => { if (f && f.letter) by[f.letter] = f; });
+        (copy.frames || []).forEach(f => {
+            const s = f && by[f.letter];
+            if (s) _elevApplyArt(f, _elevArtPayload(s));
+        });
+    }
+    currentElevIndex = at + 1;
+    renderNavTabs();
+    populateDashPushSelector();
+    switchView('elevation', at + 1);
+    recalculateDashboardQuantities();
+    if (typeof renderDashTable === 'function') renderDashTable();
+    pushHistory();
+}
+// Shared by both minters. Returns true when it has already complained.
+function _catRowIdsTaken(want) {
+    const taken = {};
+    (dashProjectData || []).forEach(r => { if (r && r.id) taken[r.id] = true; });
+    const clash = (want || []).filter(id => id && taken[id]);
+    if (!clash.length) return false;
+    showInfoModal('Those item codes already exist',
+        'This would create a second row for ' + clash.slice(0, 4).join(', ')
+        + (clash.length > 4 ? ' and ' + (clash.length - 4) + ' more' : '')
+        + '. Two rows sharing an item code take the same quantity, print twice in the CSV, and draw whichever wall is met first beside the piece, so nothing was added. '
+        + 'Rename the pieces on this wall first, or add the arrangement to the placement that already owns those codes.');
+    return true;
+}
+// -- A SECOND LAYOUT FOR THE SAME SPOT, NOT A SECOND PICTURE -----------------
+// Duplicate answers "same layout, different images". This answers the other axis: one
+// big canvas, a diptych, a triptych and a salon hang all offered for ONE wall are four
+// drawings and therefore four walls, so this mints a sibling MOCKUP under the same
+// placement - ART.001A gains ART.001B - which shares the plan pin and gets its own
+// dimensioned breaker page.
+// It takes the SOURCE's separator rather than assuming one, so a project spelling its
+// slots ART.001A-A keeps the hyphen and one spelling them ART.001A.A keeps the dot.
+// ARTWORK IS CARRIED ONTO AN OPTION, NEVER ONTO THE NEW MOCKUP. A mockup slot is a
+// drawing and is excluded from the CSV, the quantities and the spec pages, so an image
+// left on one would be invisible everywhere. That is also what makes "rearrange the
+// salon hang but keep these images" one gesture: the new arrangement comes up empty with
+// its first option already holding them.
+function _catAddArrangement(srcIdx, opts) {
+    const src = elevations[srcIdx];
+    if (!src) return;
+    const o = opts || {};
+    const srcCode = _catBaseCode(src);
+    if (!srcCode) {
+        showInfoModal('No item code on this wall', 'An arrangement takes its code from the pieces on the wall, so place at least one piece carrying an item code (ART.001A) before adding a second arrangement for the same spot.');
+        return;
+    }
+    // AN ARRANGEMENT BELONGS TO THE PLACEMENT, NOT TO THE WALL YOU HAPPENED TO BE ON.
+    // Started from an option, `_catBaseCode` gives the OPTION's code (ART-1.1), whose
+    // placement key is itself because it ends in a digit - so the new arrangement came
+    // out as ART-1.1B, a sibling of the option rather than of its mockup. Resolve through
+    // the mockup: an option is a picture in an arrangement, and the arrangement is what
+    // is being given a second version.
+    const anchorWall = _isCatalogueOption(src) ? _catMasterOf(src) : src;
+    const anchorCode = _catBaseCode(anchorWall) || srcCode;
+    // WITHIN THE FRAME SET. A layout is another arrangement of THESE frames, so its
+    // letters run inside the set: ART.01.2A is layout A of frame set 2, and it has
+    // nothing to do with ART.01A.
+    // A NEW FRAME SET and a new LAYOUT are the same operation with a different code, so
+    // they share one minter: the slot renaming, the artwork carry, the collision guard
+    // and the insert point are identical, and a second copy is where they would drift.
+    let place = '', letter = '', newBase = '';
+    if (o.newSet) {
+        place = _catPlacementKey(anchorCode);
+        let n = 1;
+        _catSetsOf(place).forEach(sk => { const v = _catSetNum(sk); if (v > n) n = v; });
+        newBase = place + '.' + (n + 1);
+    } else {
+        place = _catSetKey(anchorCode);
+        // An UNLETTERED original occupies A: ART.01 and ART.01A are the same layout
+        // written two ways, and offering A again would mint a code that already exists.
+        const used = {};
+        _catArrangementsOf(place).forEach(e => { used[(_catArrLetter(_catBaseCode(e)) || 'A').toUpperCase()] = true; });
+        used[(_catArrLetter(anchorCode) || 'A').toUpperCase()] = true;
+        for (let i = 0; i < 26 && !letter; i++) { const c = String.fromCharCode(65 + i); if (!used[c]) letter = c; }
+        if (!letter) { _toast('No letters left', 'This frame set already carries 26 layouts.'); return; }
+        newBase = place + letter;
+    }
+    // The new wall is a MOCKUP, so it spells its slots the way the mockups do -
+    // ART.001B-A beside ART.001A-A - rather than the way the option it may have been
+    // started from does (ART.001A.1A, which has no separator at all).
+    // A SEPARATOR IS INTRODUCED WHERE THERE IS NONE, which is the one place this does
+    // not simply copy the project's spelling. A wall spelling its slots ART-1A has no
+    // separator, and ART-1B + A reads as ART-1BA, which is also how arrangement BA would
+    // be spelled - and ART-1B is already the id of arrangement A's second slot. The
+    // convention cannot express an arrangement letter, so a hyphen goes in.
+    const sepFor = (letter) => {
+        const f = ((anchorWall && anchorWall.frames) || []).filter(x => x && x.letter === letter)[0];
+        const old = String((f && f.id) || '');
+        const got = (old && old.indexOf(anchorCode) === 0) ? old.slice(anchorCode.length).replace(/[A-Za-z]+$/, '') : '';
+        return got || '-';
+    };
+    const idFor = (f) => newBase + sepFor(f && f.letter) + ((f && f.letter) || '');
+    if (_catRowIdsTaken((src.frames || []).filter(f => f).map(idFor))) return;
+
+    const copy = _cloneData(src);
+    copy.id = _elevNewId();
+    copy.catalogueMaster = true;
+    delete copy.catalogueOption;
+    delete copy.variationOfId; delete copy.variationOf; delete copy.isVariation;
+    // The tracing guide is working material and never exports; the dimensioned drawing
+    // belongs to this arrangement's own breaker page rather than to a copy of another's.
+    delete copy.underlay;
+    copy.groupDims = []; copy.customLines = [];
+    copy.name = newBase;
+    // ABSENT MEANS LINKED, so nothing is written for the common case.
+    delete copy.catalogueFree;
+    if (o.label) copy.catalogueLabel = String(o.label).slice(0, 40);
+    const carried = [];
+    (copy.frames || []).forEach(f => {
+        if (!f) return;
+        const srcRow = (dashProjectData || []).filter(r => r && r.id === f.id)[0];
+        const row = _cloneData(srcRow || dashDefaultData);
+        row.id = idFor(f);
+        row.qty = 0;
+        if (row.artworkUrl) carried.push({ letter: f.letter, url: row.artworkUrl, file: row.artworkFile, code: row.imageCode, w: row.artworkW, h: row.artworkH });
+        row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = '';
+        row.artworkW = 0; row.artworkH = 0; row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
+        row.artist = ''; row.artworkTitle = '';
+        dashProjectData.push(row);
+        f.id = row.id;
+        f.artworkUrl = ''; f.artworkFile = ''; f.imageCode = '';
+        f.artworkW = 0; f.artworkH = 0; f.artZoom = 1; f.artPanX = 0; f.artPanY = 0;
+        f.artist = ''; f.artworkTitle = '';
+    });
+    // After the last wall of this placement, options included, or the rail reads
+    // backwards - the same reason _catAddOption appends rather than inserting.
+    // A LAYOUT lands after the last wall of ITS SET; a FRAME SET after the last wall of
+    // the whole placement. Appending a layout at the end of the placement would drop
+    // ART.01B behind ART.01.2A and the rail would stop reading as a tree.
+    let at = srcIdx;
+    const _sibs = o.newSet
+        ? (elevations || []).filter(e => _isCatalogueMaster(e) && _catPlacementKey(_catBaseCode(e)) === place)
+        : _catArrangementsOf(place);
+    _sibs.forEach(e => {
+        const i = elevations.indexOf(e); if (i > at) at = i;
+        _catOptionsOf(e).forEach(o2 => { const j = elevations.indexOf(o2); if (j > at) at = j; });
+    });
+    elevations.splice(at + 1, 0, copy);
+    _elevSyncVariationPrimary();
+
+    if (carried.length) {
+        // Straight through the one option minter rather than a second copy of it.
+        _catAddOption(elevations.indexOf(copy));
+        const opt = elevations[currentElevIndex];
+        if (opt && _catMasterOf(opt) === copy) {
+            const by = {}; carried.forEach(c => { by[c.letter] = c; });
+            (opt.frames || []).forEach(f => {
+                const c = f && by[f.letter]; if (!c) return;
+                const row = (dashProjectData || []).filter(r => r && r.id === f.id)[0];
+                [f, row].forEach(t => {
+                    if (!t) return;
+                    t.artworkUrl = c.url; t.artworkFile = c.file; t.imageCode = c.code;
+                    if (c.w) t.artworkW = c.w; if (c.h) t.artworkH = c.h;
+                });
+            });
+        }
+    }
+    // Land on the MOCKUP, because rearranging its frames is the next move.
+    const ni = elevations.indexOf(copy);
+    if (ni >= 0) currentElevIndex = ni;
+    renderNavTabs();
+    populateDashPushSelector();
+    switchView('elevation', currentElevIndex);
+    recalculateDashboardQuantities();
+    if (typeof renderDashTable === 'function') renderDashTable();
+    if (o.newSet) {
+        _toast('Frame set ' + _catSetNum(newBase) + ' added',
+            newBase + (o.label ? (' \u00b7 ' + o.label) : '') + ' is a different set of frames offered at ' + place
+            + '. Its frames are its own \u2014 add, remove and resize them freely; nothing here reaches the other sets. '
+            + 'It shares the placement\u2019s pin and gets its own breaker page.');
+        pushHistory();
+        return;
+    }
+    _toast('Layout ' + letter + ' added',
+        newBase + (o.label ? (' \u00b7 ' + o.label) : '') + ' is another arrangement of frame set ' + place
+        + '. Its sizes, mouldings and mats follow ' + ((_catPrimaryArr(place) && _catBaseCode(_catPrimaryArr(place))) || place)
+        + ' by letter; only the positions are its own. It shares the placement\u2019s pin and gets its own breaker page.'
+        + (carried.length ? ' Its first option carries the images from the wall you copied.' : ''));
+    pushHistory();
+}
+// -- THE CHOICE IS MADE AT CREATION, NOT DEFAULTED -------------------------
+// Linked and free layouts look identical once they exist, so a default is a decision
+// made silently on a designer's behalf that they then have to discover. Asking once, at
+// the moment the wall is made, also puts the distinction in front of whoever meets it
+// first. The NAME is collected here for the same reason: Triptych is known now and gets
+// typed into a dialog that is already open, rather than hunted for in a panel later.
+function catArrangementAction() { _catLayoutChooser(currentElevIndex, 'layout'); }
+function catFrameSetAction() { _catLayoutChooser(currentElevIndex, 'set'); }
+function _catLayoutChooser(srcIdx, kind) {
+    const isSet = (kind === 'set');
+    const src = elevations[srcIdx];
+    if (!src) return;
+    const srcCode = _catBaseCode(src);
+    if (!srcCode) {
+        showInfoModal('No item code on this wall', 'A layout takes its code from the pieces on the wall, so place at least one piece carrying an item code (ART.1A) before adding a second layout for the same spot.');
+        return;
+    }
+    const anchor = _isCatalogueOption(src) ? _catMasterOf(src) : src;
+    const place = _catPlacementKey(_catBaseCode(anchor) || srcCode);
+    const prim = _catPrimaryArr(place);
+    const ov = document.createElement('div');
+    ov.className = 'frame-modal fm-nested';
+    ov.setAttribute('data-modal-backdrop', '');
+    ov.style.display = 'flex';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border); border-radius:var(--r-8); padding:20px; width:520px; max-width:92vw; max-height:88vh; overflow:auto;';
+    const h = document.createElement('div');
+    h.style.cssText = 'font-size:var(--fs-105); font-weight:700; color:var(--text-strong); margin-bottom:4px;';
+    h.textContent = isSet ? ('Add a frame set to ' + place) : ('Add a layout to ' + _catSetKey(_catBaseCode(anchor) || srcCode));
+    const sub = document.createElement('div');
+    sub.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); line-height:1.45; margin-bottom:14px;';
+    // The two sentences a designer needs: what this wall will BE, and what it will and
+    // will not follow. Said here rather than discovered later from a drawing that moved.
+    sub.textContent = isSet
+        ? ('A DIFFERENT SET OF FRAMES offered at the same spot \u2014 a single piece where this is a salon hang. Its frames are its own: add, remove and resize freely, and nothing reaches the other sets. It shares ' + place + '\u2019s pin on the floorplan and gets its own breaker page.')
+        : ('THE SAME FRAMES, REARRANGED. Sizes, mouldings and mats follow this frame set\u2019s primary layout by letter, so a resize there reaches this wall; only the positions are its own. It shares ' + place + '\u2019s pin and gets its own breaker page.');
+    const lbl = document.createElement('div');
+    lbl.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.4px; margin-bottom:5px;';
+    lbl.textContent = 'Name (optional)';
+    const nameIn = document.createElement('input');
+    nameIn.type = 'text';
+    nameIn.placeholder = isSet ? 'Triptych' : 'Stacked right';
+    nameIn.maxLength = 40;
+    nameIn.style.cssText = 'width:100%; height:30px; margin-bottom:16px;';
+    const go = document.createElement('button');
+    go.className = 'action-btn';
+    go.textContent = isSet ? 'ADD FRAME SET' : 'ADD LAYOUT';
+    go.style.cssText = 'width:100%; height:30px; letter-spacing:0.3px; margin-bottom:9px;';
+    go.onclick = () => {
+        const label = nameIn.value.trim();
+        ov.remove();
+        _catAddArrangement(srcIdx, { newSet: isSet, label: label });
+    };
+    nameIn.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') go.click(); });
+    const cancel = document.createElement('button');
+    cancel.className = 'action-btn btn-secondary';
+    cancel.textContent = 'Cancel';
+    cancel.style.cssText = 'width:auto; padding:0 16px; height:28px; margin-top:4px;';
+    cancel.onclick = () => ov.remove();
+    cancel.setAttribute('data-modal-close', '');
+    card.appendChild(h); card.appendChild(sub);
+    card.appendChild(lbl); card.appendChild(nameIn);
+    card.appendChild(go);
+    card.appendChild(cancel);
+    ov.appendChild(card);
+    // Backdrop and Escape come from the shared dialog handler, which knows a drag
+    // that started inside the card is not a click on the backdrop.
+    document.body.appendChild(ov);
+    try { nameIn.focus(); } catch (e) {}
+}
+// Changing the two after the fact. A layout can turn out to need its own frames once you
+// have moved them about, and a name is often only obvious once the drawing exists.
+function setCatLayoutLabel(v) {
+    const e = elevations[currentElevIndex];
+    if (!e || !_isCatalogueMaster(e)) return;
+    const s = String(v || '').trim().slice(0, 40);
+    if (s) e.catalogueLabel = s; else delete e.catalogueLabel;
+    renderNavTabs();
+    if (typeof _dsClearBuiltAll === 'function') _dsClearBuiltAll();
+    scheduleAutosave();
+}
 // The Elevations-panel button. Fits every selected flat graphic, or all of them on
 // this wall when nothing is selected.
 function fitFlatGraphicsToWallAction() {
@@ -6859,7 +8897,7 @@ function populateDashPushSelector() {
 
 function pushFrameToElevation() {
     const select = document.getElementById('dashPushSelector');
-    if (select.value === "") return alert("Select an elevation first!");
+    if (select.value === "") { _toast('No wall chosen', 'Pick the elevation to push to first.'); return; }
     const f0 = dashProjectData[dashSelectedRowIndex];
     // "New elevation for this graphic": make the wall, name it after the piece, set it
     // to EGD mode and select it, then fall through to the normal push. The graphic then
@@ -6867,7 +8905,7 @@ function pushFrameToElevation() {
     // one click gives a wall with the wallcovering already filling it.
     let _newIdx = null;
     if (select.value === '__new__') {
-        if (!f0 || !_isFlatGraphic(f0.product)) return alert("Select a wallcovering or window film item first!");
+        if (!f0 || !_isFlatGraphic(f0.product)) { _toast('Not a flat graphic', 'Select a wallcovering or window film item first.'); return; }
         const name = ((f0.location || '').trim() || (f0.id || '').trim() || 'Wallcovering');
         // Wall size in elevUnit. The graphic's own overall size is the best first guess
         // for the wall it covers; the studio wall height stands in when it looks unset.
@@ -6901,7 +8939,7 @@ function pushFrameToElevation() {
     // above is a convenience for the user's next click, not the source of truth.
     const eIdx = (_newIdx != null) ? _newIdx : parseInt(select.value);
     const targetElev = elevations[eIdx];
-    if (!targetElev) return alert("That elevation no longer exists — pick another.");
+    if (!targetElev) { _toast('That wall is gone', 'The elevation was deleted. Pick another one.'); return; }
     const f = dashProjectData[dashSelectedRowIndex];
     
     let factor = unitFactor(dashUnit, elevUnit);
@@ -6949,7 +8987,7 @@ function pushFrameToElevation() {
     }
     recalculateDashboardQuantities();
     pushHistory();
-    alert(`Pushed ${f.id} to ${targetElev.name}!`);
+    _toast('Pushed to wall', f.id + ' is on ' + targetElev.name + '.');
 }
 
 
@@ -7757,11 +9795,11 @@ function detachDashRow() {
     const newId = dashProjectData[dashSelectedRowIndex].id;
     // Force the banner to re-evaluate against the new (un-linked) spec.
     checkGlobalEditingWarning(newId);
-    alert(`Detached. Settings copied to a new independent item code (${newId}). The walls still reference the original; you can now edit this new spec without affecting them, or push it to new walls.`);
+    showInfoModal('Detached as ' + newId, 'The settings were copied to a new, independent item code. The walls still show the original, so editing this one no longer changes them. Push it to a wall when you want it placed.');
 }
 
 function deleteDashRow() {
-    if(dashProjectData.length <= 1) return alert("Cannot delete the last row.");
+    if(dashProjectData.length <= 1) { _toast('That is the last row', 'A project keeps at least one row, so it was not deleted.'); return; }
     const idToDelete = dashProjectData[dashSelectedRowIndex].id;
     dashProjectData.splice(dashSelectedRowIndex, 1);
     dashSelectedRowIndex = Math.max(0, dashSelectedRowIndex - 1);
@@ -9751,6 +11789,22 @@ function computeArtDrawRect(openW, openH, ar, zoom, panX, panY) {
     return { dx, dy, dw, dh };
 }
 
+// -- A MOCKUP SLOT IS A DRAWING, SO IT TAKES NO ARTWORK ---------------------
+// An image dropped on one used to go nowhere and say nothing: the mockup wall renders as
+// a grey wireframe, the row earns no spec page (`_deckSpecRows` filters it) and it is
+// dropped from the CSV, so the picture was invisible in every output with no message.
+// Enforced in the DATA rather than by hiding the upload box, because the form, the
+// elevation drop and Bulk Images are three separate write paths into the same field -
+// the rule `setRowPrintOutput` already follows for window-film-only.
+function _catRowTakesArt(row) {
+    return !(row && row.id && _catSlotRowIds()[row.id]);
+}
+function _catRefuseArt(row) {
+    if (_catRowTakesArt(row)) return false;
+    _toast('Mockup slot takes no artwork',
+        ((row && row.id) || 'This piece') + ' is a slot on a catalogue mockup, which is the arrangement drawing. Duplicate that wall to add an art option and put the image there.');
+    return true;
+}
 // File-picker path (Upload button / explorer).
 function handleDashArtworkUpload(e) {
     const file = e.target.files && e.target.files[0];
@@ -9763,6 +11817,7 @@ function handleDashArtworkUpload(e) {
 // preview drops). Honors bulk-edit scratch mode.
 function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
+    if (_catRefuseArt(row)) return;
     if (row) {
         row.artworkUrl = dataUrl; row.artworkFile = baseName;
         if (w) row.artworkW = w; if (h) row.artworkH = h;
@@ -9783,6 +11838,7 @@ function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
 function applyArtworkToRowIndex(idx, dataUrl, baseName, w, h) {
     const row = dashProjectData[idx];
     if (!row) return;
+    if (_catRefuseArt(row)) return;
     row.artworkUrl = dataUrl; row.artworkFile = baseName;
     if (w) row.artworkW = w; if (h) row.artworkH = h;
     row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
@@ -9805,12 +11861,15 @@ function _bulkNorm(s) { return (s || '').toString().toLowerCase().replace(/\.[^.
 function _bulkMatchPieces(basename) {
     const nb = _bulkNorm(basename); if (!nb) return [];
     const out = [];
-    (dashProjectData || []).forEach((r, i) => { if (!r) return; if ([r.imageCode, r.artworkFile, r.id].some(c => c && _bulkNorm(c) === nb)) out.push(i); });
+    // A slot must not even be OFFERED as a match: relink-by-code walks every row, and a
+    // mockup slot shares its stem with the options that are the real targets.
+    (dashProjectData || []).forEach((r, i) => { if (!r || !_catRowTakesArt(r)) return; if ([r.imageCode, r.artworkFile, r.id].some(c => c && _bulkNorm(c) === nb)) out.push(i); });
     return out;
 }
 function _processArtworkP(file) { return new Promise((res) => { try { processArtworkFile(file, (dataUrl, baseName, w, h) => res({ dataUrl: dataUrl, baseName: baseName, w: w, h: h })); } catch (e) { res(null); } }); }
 function _bulkApplyArtwork(idx, dataUrl, w, h) {
     const row = dashProjectData[idx]; if (!row) return;
+    if (_catRefuseArt(row)) return;
     row.artworkUrl = dataUrl; if (w) row.artworkW = w; if (h) row.artworkH = h;
     row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;        // fresh image → centered cover
     if (typeof pushUpdatesToElevations === 'function') pushUpdatesToElevations(idx);
@@ -9819,7 +11878,10 @@ function openBulkReplaceModal() {
     const old = document.getElementById('bulkReplaceModal'); if (old) old.remove();
     _bulkReplacePending = [];
     const ov = document.createElement('div'); ov.id = 'bulkReplaceModal';
-    ov.style.cssText = 'position:fixed; inset:0; z-index:100040; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;';
+    // The shared shell, like every other dialog. This one used to carry its own
+    // fixed overlay at z-index 100040, ABOVE the alert box, so an error raised
+    // from inside it rendered behind it. fm-nested still clears Deck Studio.
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
     const card = document.createElement('div');
     card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:var(--r-10); width:620px; max-width:94vw; max-height:88vh; display:flex; flex-direction:column; overflow:hidden;';
     card.innerHTML = '<div style="display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border-color);"><div style="font-size:var(--fs-95); font-weight:700; color:var(--text-main);">Bulk replace artwork</div><button id="brClose" style="border:none; background:none; color:var(--text-muted); font-size:var(--fs-120); cursor:pointer; line-height:1;">\u00d7</button></div>';
@@ -9834,8 +11896,8 @@ function openBulkReplaceModal() {
     const foot = document.createElement('div'); foot.id = 'brFoot'; foot.style.cssText = 'display:flex; justify-content:flex-end; gap:8px; margin-top:12px;';
     bodyEl.appendChild(foot);
     card.appendChild(bodyEl); ov.appendChild(card); document.body.appendChild(ov);
-    ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
     card.querySelector('#brClose').onclick = () => ov.remove();
+    card.querySelector('#brClose').setAttribute('data-modal-close', '');
 }
 async function _bulkReplacePicked(fileList) {
     const files = Array.from(fileList || []).filter(f => f && /^image\//.test(f.type));
@@ -10196,7 +12258,7 @@ function loadDashFromCustomLibrary(idx) {
         dashActiveImageObj.src = u; dashActiveImageObj.onload = () => syncDashAndCalculate();
     }).catch(err => {
         console.error('Failed to load swatch', err);
-        alert('Could not load that swatch from the library.');
+        showInfoModal('Could not load that swatch', 'The swatch image could not be read from the library. Try syncing the library again, or pick another moulding.');
     });
 }
 
@@ -10238,8 +12300,8 @@ function loadFramePreset(e) {
                     ['extW','extH','fW','fHeight','rabbetDepth','bleed','canvasDepth','canvasWrap','m1T','m1B','m1L','m1R','m2'].forEach(p => { if(d.frame[p] !== undefined && !isNaN(d.frame[p])) d.frame[p] = dashFmt(d.frame[p]*factor); });
                 }
                 dashProjectData[dashSelectedRowIndex] = d.frame; loadDashDataIntoControls(d.frame); renderDashTable(); pushUpdatesToElevations(dashSelectedRowIndex);
-            } else alert("Invalid preset.");
-        } catch(err) { alert("Error loading file."); }
+            } else showInfoModal('Not a preset file', 'That file does not look like a FRAME preset, so nothing was changed.');
+        } catch(err) { showInfoModal('Could not read that file', ((err && err.message) || 'The file could not be parsed') + '. Nothing was changed.'); }
     };
     r.readAsText(f); e.target.value = '';
 }
@@ -11184,6 +13246,11 @@ async function _getPdfLogos() {
 // everything else stays on jsPDF's built-in Helvetica. Missing/failed fonts
 // fall back to Helvetica so export never breaks.
 let _pdfQuality = 'standard';
+// THE DECK PAGE, in points. Module scope because _pageBgMaxEdge derives an
+// import ceiling from it: two numbers for one page size is how a background
+// gets bounded against a page that is not the one it prints on.
+const PAGE_FORMAT = [936, 540];   // pt — 936/540 ≈ 1.733, the reference aspect
+
 const _PDF_QUALITY = {
     draft:    { r: 1.2, q: 0.55 },
     standard: { r: 2,   q: 0.82 },
@@ -13753,8 +15820,109 @@ function _specTplEffective(tplKey, ovKey) {
     return tpl;
 }
 function _fixedHidden(f) { return !!(editorialContent.hiddenFixed && editorialContent.hiddenFixed[f]); }
+// ── WHICH ROWS PRODUCE SPEC PAGES: ONE DEFINITION, BOTH BUILDERS ─────────
+// _deckPageList and the export's _stepsFor each filtered dashProjectData with their own
+// copy of the same expression. That is the pairing this file has drifted on more than
+// any other, and a catalogue mockup's slots are the first rule that differs between a
+// row EXISTING and a row DESERVING A PAGE - so it goes in a shared function rather than
+// being written out twice and mirrored by hand.
+// A mockup's slots are the arrangement: no artwork, no image code, nothing to order.
+// They drew a spec page titled after the mockup with six grey blocks on it.
+// ── WHICH WALL IS DRAWN WHEN WE SHOW THIS PIECE: ONE DEFINITION ──────────
+// There were FIVE independent copies of this search - the baked elevation data URL, the
+// flat-graphic sheet, the install/breaker renderer, the classic spec page and the
+// template spec page - each a hand-written `find the first elevation whose frames carry
+// this id`. They all had to learn the same new rule at once, so they stopped being five.
+//
+// A CATALOGUE MOCKUP IS NEVER THE ANSWER. Its slots carry no artwork, and a mockup and
+// its options share letters, sizes and often ids, so a first-match search found the
+// mockup and drew a wall of grey blocks beside a real piece. Reported as "when I switch
+// the presentation type back to Final Spec it uses the mockup elevation in the
+// thumbnail". A mockup is a drawing OF an arrangement, not a wall a piece hangs on.
+// `opts.active` keeps the flat-graphic sheet's extra condition rather than forking.
+function _elevShowingPiece(rowId, opts) {
+    if (!rowId) return null;
+    const wantActive = !!(opts && opts.active);
+    const els = (typeof elevations !== 'undefined' ? elevations : []) || [];
+    for (let i = 0; i < els.length; i++) {
+        const e = els[i];
+        if (!e || !e.frames) continue;
+        if (_isCatalogueMaster(e)) continue;
+        if (e.frames.some(fr => fr && fr.id === rowId && (!wantActive || fr.active !== false))) return e;
+    }
+    return null;
+}
+// ── THE BREAKER'S WALL, AND WHETHER THIS UNIT EARNS ONE: ONE DEFINITION ──
+// Both page builders carried the same "find the elevation holding most of these members"
+// loop, written out twice. They stopped being two the moment a catalogue needed a
+// different answer, because a rule about WHICH PAGES EXIST that lives in one builder and
+// is mirrored by hand in the other is the failure this file has repeated most.
+// Returns {elev, idx} or null - not a page and not a step, because the studio emits a
+// page descriptor and the export emits a render step.
+//
+// A CATALOGUE PLACEMENT'S BREAKER IS THE MOCKUP'S DRAWING, AND IT PRINTS ONCE.
+// Taken from an option's own wall it would be the same picture as the option page right
+// behind it, with the artwork on it; and one per option prints the same dimensioned
+// drawing three times. The location page belongs to the PLACEMENT: grey blocks, letters
+// and dimensions, in front of the first option and nothing in front of the rest.
+// STATELESS on purpose, so neither builder has to carry an "already emitted" set that
+// the other could get out of step with: the unit that earns the breaker is the first one
+// in the shared `units` array belonging to that mockup, which both can ask independently
+// and get the same answer for.
+function _catMockupForUnit(u) {
+    const members = (u && u.members) || [];
+    const els = (typeof elevations !== 'undefined' ? elevations : []) || [];
+    for (let i = 0; i < members.length; i++) {
+        const id = members[i] && members[i].id;
+        if (!id) continue;
+        for (let j = 0; j < els.length; j++) {
+            const e = els[j];
+            if (!e || !e.catalogueOption || !e.frames) continue;
+            if (e.frames.some(f => f && f.id === id)) { const m = _catMasterOf(e); if (m) return m; }
+        }
+    }
+    return null;
+}
+function _breakerElevFor(u, units) {
+    const mock = _catMockupForUnit(u);
+    if (mock) {
+        let first = null;
+        (units || []).forEach(x => { if (!first && _catMockupForUnit(x) === mock) first = x; });
+        if (first && first !== u) return null;          // a later option of the same mockup
+        const gi = (elevations || []).indexOf(mock);
+        return gi < 0 ? null : { elev: mock, idx: gi, mockup: true };
+    }
+    const members = (u && u.members) || [];
+    let ge = null, gi = -1, best = 0;
+    (elevations || []).forEach((e, ei) => {
+        if (!e || !e.frames) return;
+        let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; });
+        if (c > best) { best = c; ge = e; gi = ei; }
+    });
+    return ge ? { elev: ge, idx: gi, mockup: false } : null;
+}
+// The breaker's title and its per-page settings key. A placement breaker is titled with
+// the MOCKUP's own code (ART.1, the way the reference sheets read) and keyed on the
+// mockup, so the settings stay with the placement rather than with whichever option
+// happened to come first.
+function _breakerNameFor(u, br) {
+    return (br && br.mockup) ? (_catBaseCode(br.elev) || br.elev.name || '') : _breakerCodeFor(u);
+}
+function _breakerOvKeyFor(u, br) {
+    return (br && br.mockup) ? ('elevgrp:cat:' + _elevId(br.elev)) : ('elevgrp:' + u.key);
+}
+function _deckSpecRows() {
+    const slots = _catSlotRowIds();
+    return (typeof dashProjectData !== 'undefined' ? (dashProjectData || []) : [])
+        .filter(r => r && (r.id || r.artworkUrl) && !(r.id && slots[r.id]));
+}
 function _deckPageList() {
     _mbMigratePages(); _fpMigrate();
+    // drawElevAll only runs while the Elevations tab is drawing, so a deck rebuilt from
+    // the Deck tab would render options against whatever the mockup looked like when it
+    // was last on screen. Cheap: a pass of scalar compares over the walls, and the deep
+    // fields are skipped entirely when they already match.
+    if (typeof _catSyncAllOptions === 'function') _catSyncAllOptions();
     const inc = _dsInclude();
     const ec = editorialContent;
     const pages = [];
@@ -13771,7 +15939,7 @@ function _deckPageList() {
     layoutAt('afterStrategy');
     if (inc.frameRec) pages.push({ kind: 'card', type: 'frameRec', title: 'Frame Recommendations' });
     layoutAt('beforeFloorplan');
-    const rows = (dashProjectData || []).filter(r => r && (r.id || r.artworkUrl));
+    const rows = _deckSpecRows();
     const specTplKey = ec.specTemplate || 'classic';
     const isGroupSpec = !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].group);
     const unitsFor = (rs) => _buildSpecUnits(rs, isGroupSpec || (_elevBreakers() && specTplKey !== 'installGuide'));
@@ -13813,16 +15981,17 @@ function _deckPageList() {
     // per piece in Per-piece mode, or the single grouped page in Group A/B/C.
     const _breakerPages = (u) => {
         const out = []; const members = u.members || [];
-        let ge = null, gi = -1, best = 0;
-        (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
-        const code = _breakerCodeFor(u);
+        const br = _breakerElevFor(u, units);
+        const ge = br && br.elev, gi = br ? br.idx : -1;
+        const code = _breakerNameFor(u, br);
+        const bKey = _breakerOvKeyFor(u, br);
         // A flat graphic's own sheet already carries the full dimensioned elevation —
         // wall dims, character dim, baseboard, the lot — so a breaker in front of it
         // is the same drawing twice. Framed-art walls still get theirs: a spec page
         // for one piece can't show the whole hang, which is what a breaker is for.
         // Per-product rather than deck-wide because presentations mix the two.
         const _skipBreaker = _breakerSkipUnit(members);
-        if (ge && !_skipBreaker) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _idx: gi, _ovKey: 'elevgrp:' + u.key }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: 'elevgrp:' + u.key, _specTpl: 'installGuide', row: {} });
+        if (ge && !_skipBreaker) out.push({ kind: 'spec', type: 'install', _install: true, elev: Object.assign({}, ge, { name: code, _noPlan: _breakerNoPlan(), _idx: gi, _ovKey: bKey }), _elevIdx: gi, _groupKey: u.key, title: code, _ovKey: bKey, _specTpl: 'installGuide', row: {} });
         // In group mode a flat graphic still has to be split out onto its own sheet —
         // _splitFlatUnits returns null when there's nothing flat, which is the norm.
         if (isGroupSpec) { const sp = _splitFlatUnits(u); if (sp) out.push.apply(out, sp); else out.push(specUnit(u)); }
@@ -14241,6 +16410,25 @@ function _dsFitTitle(doc, text, x, y, maxW, startSize, opts) {
     doc.text(text, x, y, opts);
 }
 function _isWireframe() { return !!editorialContent.wireframe; }
+// A CATALOGUE MOCKUP IS ALWAYS DRAWN AS A PLACEMENT, whatever the deck flag says: grey
+// fill and letters, never artwork. That is what makes a catalogue possible at all, since
+// one carries placement drawings and real artwork pages side by side and
+// `editorialContent.wireframe` is a single deck-wide answer.
+//
+// PER ELEVATION, and that is the whole simplification. A mockup and its options are
+// different WALLS, so the breaker page and the option pages already capture different
+// elevations: no page-kind override, no module flag spanning an await (the trap
+// `ctx.swatch` exists to avoid), and no second argument on `_captureElevWithGuides`,
+// whose taking an index and nothing else is a pinned invariant so that no caller can get
+// a different capture from the one the editor shows. A page-kind override was designed
+// twice before the data model made it unnecessary.
+// The cache follows for free: `toggleCatalogueMaster` pushes history, which re-reads
+// `_elevCaptureSignature` and bumps `_elevCapGen`, which `_igCapKey` carries.
+function _elevIsWireframe(elev) { return _isWireframe() || _isCatalogueMaster(elev); }
+function _curElevIsWireframe() {
+    const els = (typeof elevations !== 'undefined' && elevations) || [];
+    return _elevIsWireframe(els[typeof currentElevIndex !== 'undefined' ? currentElevIndex : 0]);
+}
 // The Elevations Settings toggle for the wireframe placement look.
 //
 // Everything downstream of this is a cache, and each one has its own reason to be
@@ -15029,7 +17217,7 @@ function _dsBreakerToggleInto(head, groupMode) {
 // A/B/C/D -> 'ART-2.1ABCD'.
 function _breakerCodeFor(u) {
     const base = (u && u.key) || '';
-    const letters = ((u && u.members) || []).map(m => { const id = ((m && m.id) || '') + ''; const s = (base && id.indexOf(base) === 0) ? id.slice(base.length).replace(/^[-_\s]*/, '') : id; return s || ''; }).join('');
+    const letters = ((u && u.members) || []).map(m => { const id = ((m && m.id) || '') + ''; const s = (base && id.indexOf(base) === 0) ? id.slice(base.length).replace(/^[-._\s]*/, '') : id; return s || ''; }).join('');
     return letters ? (base + letters) : base;
 }
 function _manualGroups() { return (editorialContent.manualGroups || (editorialContent.manualGroups = [])); }
@@ -15082,8 +17270,21 @@ const PRES_PRESETS = {
     wireframe: { label: 'Wireframe', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'frameRight', wf: true, note: 'Elevations & plan views with empty frame/canvas placements (no artwork yet). Specs optional per page.' },
     artdev: { label: 'Art Development', inc: { cover: 1, understanding: 1, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'frameRight', wf: false, note: 'Artwork populated in mockups, with specs figured alongside.' },
     final: { label: 'Final Spec', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 1, timeline: 0 }, tpl: 'frameRight', wf: false, note: 'Approval package: full specs, image codes, final selections.' },
-    install: { label: 'Install Guide', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 0, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'installGuide', wf: false, note: 'Dimensioned wall elevations (CL / EQ / AFF) + plan views.' }
+    install: { label: 'Install Guide', inc: { cover: 1, understanding: 0, narrative: 0, strategy: 0, slogan: 0, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'installGuide', wf: false, note: 'Dimensioned wall elevations (CL / EQ / AFF) + plan views.' },
+    // CATALOGUE IS A KIND OF DOCUMENT WHERE THE OTHER FIVE ARE STAGES OF ONE, which is
+    // the one thing that makes this list read oddly. It earns its place anyway, because
+    // the stage axis collapses for a catalogue: an unfinished one is simply a catalogue
+    // with empty option slots, so there is never a "Catalogue in wireframe" to pick and
+    // no second dropdown to add.
+    // `wf` stays FALSE on purpose. A catalogue needs BOTH answers in one deck - grey
+    // placement drawings on its breakers, real photographs on its option pages - and the
+    // deck-wide flag can only give one. The mockup WALLS supply their own through
+    // _elevIsWireframe, so turning the deck flag on here would grey out the artwork
+    // pages that are the entire point of the document.
+    // Breakers ON, because a placement's dimensioned drawing IS its location page.
+    catalogue: { label: 'Catalogue', inc: { cover: 1, understanding: 0, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'setLegend', wf: false, breakers: true, note: 'One arrangement offered with several sets of artwork. Mark a wall CATALOGUE MOCKUP in Elevations, then duplicate it for each option.' }
 };
+function _isCatalogueDeck() { return (editorialContent && editorialContent.presentationType) === 'catalogue'; }
 function _dsApplyPresentationType(type) {
     const p = PRES_PRESETS[type]; if (!p) return;
     Object.keys(p.inc).forEach(k => { const cb = document.getElementById('specInc_' + k); if (cb) cb.checked = !!p.inc[k]; });
@@ -15093,6 +17294,9 @@ function _dsApplyPresentationType(type) {
     _dsSyncIncludeSubs();
     try { _dsRenderPreviewTabs(); } catch (e) {}
     if (p.tpl) editorialContent.specTemplate = p.tpl;
+    // Only when the preset says so. Left undefined it is not the preset's business, so
+    // switching between the five that predate this cannot silently turn breakers off.
+    if (typeof p.breakers === 'boolean') editorialContent.elevBreakers = p.breakers;
     editorialContent.wireframe = !!p.wf;
     editorialContent.presentationType = type;
     if (typeof pushHistory === 'function') pushHistory();
@@ -15584,12 +17788,19 @@ function _dsPageActionsInto(parent, desc) {
         // Confirmed, unlike the menu item it replaces: it throws away work, and a
         // button in a panel is one click away rather than two through a popup.
         b.onclick = () => {
-            if (!confirm('Remove ' + anns.length + ' text/image overlay' + (anns.length === 1 ? '' : 's') + ' from this page?')) return;
-            editorialContent.annotations[key] = [];
-            _dsSelKey = null; _dsSelIdx = -1;
-            if (typeof pushHistory === 'function') pushHistory();
-            if (typeof scheduleAutosave === 'function') scheduleAutosave();
-            _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+            _confirmDestroy({
+                title: 'Remove ' + anns.length + ' overlay' + (anns.length === 1 ? '' : 's') + ' from this page?',
+                body: 'The text boxes and images placed over this page come off it.',
+                confirm: 'Remove',
+                undoable: true,
+                onConfirm: () => {
+                    editorialContent.annotations[key] = [];
+                    _dsSelKey = null; _dsSelIdx = -1;
+                    if (typeof pushHistory === 'function') pushHistory();
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                    _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+                },
+            });
         };
         wrap.appendChild(b);
     }
@@ -15850,8 +18061,16 @@ function _dsDeleteLayoutPage(desc) {
 }
 function _dsRemovePageQuick(desc) {
     if (!desc) return;
-    if (desc.kind === 'layout') { if (confirm('Remove this page from the deck?')) _dsDeleteLayoutPage(desc); }
-    else if (desc.kind === 'fixed' && _FIXED_LABELS[desc.fixed]) { if (confirm('Remove the built-in ' + _FIXED_LABELS[desc.fixed] + ' page? You can restore it from the Pages tools.')) _dsRemoveFixed(desc.fixed); }
+    // An inserted page is DELETED; a built-in one is REMOVED, because it can be
+    // put back from the Pages tools without Ctrl+Z. Both push history.
+    if (desc.kind === 'layout') {
+        _confirmDestroy({ title: 'Delete this page?', body: 'It comes out of the deck.', undoable: true,
+            onConfirm: () => _dsDeleteLayoutPage(desc) });
+    } else if (desc.kind === 'fixed' && _FIXED_LABELS[desc.fixed]) {
+        _confirmDestroy({ title: 'Remove the ' + _FIXED_LABELS[desc.fixed] + ' page?',
+            body: 'You can also put it back from the Pages tools.', confirm: 'Remove', undoable: true,
+            onConfirm: () => _dsRemoveFixed(desc.fixed) });
+    }
 }
 function _dsDuplicatePageQuick(desc) {
     if (!desc) return;
@@ -15958,11 +18177,18 @@ function _dsAddCategory() {
     _dsRenderTemplatesTab();
 }
 function _dsDeleteCategory(key) {
-    if (!confirm('Delete this category? Templates inside it will move to Moodboard.')) return;
-    (editorialContent.templates || []).forEach(t => { if (t.type === key) t.type = 'moodboard'; });
-    editorialContent.templateCategories = (editorialContent.templateCategories || []).filter(c => c.key !== key);
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    _dsRenderTemplatesTab();
+    _confirmDestroy({
+        title: 'Delete this category?',
+        body: 'Any templates inside it move to Moodboard.',
+        undoable: true,
+        onConfirm: () => {
+            (editorialContent.templates || []).forEach(t => { if (t.type === key) t.type = 'moodboard'; });
+            editorialContent.templateCategories = (editorialContent.templateCategories || []).filter(c => c.key !== key);
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRenderTemplatesTab();
+        },
+    });
 }
 function _dsTemplateToDeck(idx) {
     const t = (editorialContent.templates || [])[idx]; if (!t) return;
@@ -15987,13 +18213,27 @@ function _dsTemplateToDeck(idx) {
     _dsTab('pages');
     const k = 'layout:' + pg.id; const ni = _dsPages.findIndex(d => _deckPageKey(d) === k); if (ni >= 0) _dsSelectPage(ni);
 }
-function _dsDeleteUserTemplate(idx) {
-    if (!Array.isArray(editorialContent.templates)) return false;
-    if (!confirm('Delete this template?')) return false;
-    editorialContent.templates.splice(idx, 1);
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    _dsRenderTemplatesTab();
-    return true;
+// Takes a CALLBACK for what follows a delete, because the answer now arrives after
+// the question rather than as a return value. Resolved by the template OBJECT at
+// confirm time, not the index it had when the button was drawn.
+function _dsDeleteUserTemplate(idx, after) {
+    if (!Array.isArray(editorialContent.templates)) return;
+    const tpl = editorialContent.templates[idx];
+    if (!tpl) return;
+    _confirmDestroy({
+        title: 'Delete the \u201C' + (tpl.name || 'Untitled') + '\u201D template?',
+        body: 'Pages already made from it keep their layout.',
+        undoable: true,
+        onConfirm: () => {
+            const i = editorialContent.templates.indexOf(tpl);
+            if (i < 0) return;
+            editorialContent.templates.splice(i, 1);
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRenderTemplatesTab();
+            if (typeof after === 'function') after();
+        },
+    });
 }
 function _dsRenameUserTemplate(idx) {
     const t = (editorialContent.templates || [])[idx]; if (!t) return;
@@ -16220,7 +18460,7 @@ function _dsRenderTemplateManagementPanel(t) {
         const mgmtRow = document.createElement('div'); mgmtRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;';
         const mkSmall = (lbl, fn) => { const b = document.createElement('button'); b.textContent = lbl; b.className = 'action-btn btn-secondary'; b.style.cssText = 'flex:1; min-width:70px; height:28px; padding:0 8px; font-size:var(--fs-65);'; b.onclick = fn; return b; };
         mgmtRow.appendChild(mkSmall('Rename', () => { _dsRenameUserTemplate(s.idx); const cur = (editorialContent.templates || [])[s.idx]; if (cur) { s.name = cur.name; _dsRenderTools(); _dsRenderRail(); } }));
-        mgmtRow.appendChild(mkSmall('Delete', () => { if (_dsDeleteUserTemplate(s.idx) !== false) { _dsExitTemplateEditSession(); } }));
+        mgmtRow.appendChild(mkSmall('Delete', () => _dsDeleteUserTemplate(s.idx, () => _dsExitTemplateEditSession())));
         t.appendChild(mgmtRow);
     }
     const dirty = _dsTemplateHasUnsavedChanges();
@@ -16371,7 +18611,7 @@ function _dsPreviewTemplateInCenter(item) {
         const mkSmall = (lbl, fn) => { const b = document.createElement('button'); b.textContent = lbl; b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:auto; height:26px; padding:0 10px; font-size:var(--fs-65);'; b.onclick = fn; return b; };
         row2.appendChild(mkSmall('Rename', () => { _dsRenameUserTemplate(item.idx); _dsRenderToolsTemplatesTab(); }));
         row2.appendChild(mkSmall('Duplicate', () => { _dsDuplicateUserTemplate(item.idx); _dsRenderToolsTemplatesTab(); }));
-        row2.appendChild(mkSmall('Delete', () => { _dsDeleteUserTemplate(item.idx); _dsCenterPreviewItem = null; _dsRenderToolsTemplatesTab(); _dsRenderCenter(); }));
+        row2.appendChild(mkSmall('Delete', () => _dsDeleteUserTemplate(item.idx, () => { _dsCenterPreviewItem = null; _dsRenderToolsTemplatesTab(); _dsRenderCenter(); })));
         banner.appendChild(row2);
     }
     outer.appendChild(banner);
@@ -16712,7 +18952,19 @@ function _dsSaveSelectionAsStyle() {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderStylesTab();
 }
-function _dsDeleteStyle(id) { if (!confirm('Delete this style? (Text already using it keeps its look.)')) return; editorialContent.textStyles = _dsTextStyles().filter(s => s.id !== id); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
+function _dsDeleteStyle(id) {
+    _confirmDestroy({
+        title: 'Delete this style?',
+        body: 'Text already using it keeps its look.',
+        undoable: true,
+        onConfirm: () => {
+            editorialContent.textStyles = _dsTextStyles().filter(s => s.id !== id);
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRenderStylesTab();
+        },
+    });
+}
 function _dsDuplicateStyle(id) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; const c = JSON.parse(JSON.stringify(s)); c.id = 'sty_' + Math.random().toString(36).slice(2, 9); c.name = s.name + ' copy'; _dsTextStyles().push(c); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderStylesTab(); }
 function _dsStyleEdit(id, prop, val) { const s = _dsTextStyles().find(x => x.id === id); if (!s) return; if (prop === 'size') val = parseFloat(val) / 1080; else if (prop === 'track') val = parseFloat(val) / 1000; else if (prop === 'bold' || prop === 'italic') val = !!val; s[prop] = val; if (prop === 'bold') s.weight = val ? 700 : 400; _dsReapplyStyleEverywhere(id); try { renderMoodboardCanvas(); } catch (e) {} _dsRenderCenter(); _dsRenderRail(); _dsRenderStylesTab(); }
 function _dsStylePreviewCss(s) {
@@ -17115,11 +19367,18 @@ function _dsResetLayoutOrder() {
     const arr = (editorialContent.layoutPages || []);
     const hand = arr.filter(p => p && p.afterKey);
     if (!hand.length) { showInfoModal('Nothing to reset', 'No pages have been moved by hand — they are all still where their template puts them.'); return; }
-    if (!confirm('Put ' + hand.length + ' hand-placed page' + (hand.length === 1 ? '' : 's') + ' back to the default order?')) return;
-    hand.forEach(p => { delete p.afterKey; if (!p.place) p.place = 'afterStrategy'; });
-    if (typeof pushHistory === 'function') pushHistory();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    _dsRefresh();
+    _confirmDestroy({
+        title: 'Put ' + hand.length + ' hand-placed page' + (hand.length === 1 ? '' : 's') + ' back in the default order?',
+        body: 'Pages you moved by hand go back to where their template puts them.',
+        confirm: 'Reset order',
+        undoable: true,
+        onConfirm: () => {
+            hand.forEach(p => { delete p.afterKey; if (!p.place) p.place = 'afterStrategy'; });
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRefresh();
+        },
+    });
 }
 function _dsDeleteInserted(pageObj) {
     const delKey = 'layout:' + pageObj.id;
@@ -17340,7 +19599,7 @@ function _dsRenderRail() {
         if (desc.kind === 'planDetail' && desc.pd) {
             const db = document.createElement('button'); db.textContent = '\u2715'; db.title = 'Delete plan detail page';
             db.style.cssText = 'width:18px; height:18px; line-height:1; padding:0; border:1px solid var(--border-color); background:var(--bg-input); color:var(--text-muted); border-radius:var(--r-4); cursor:pointer; font-size:var(--fs-65);';
-            db.onclick = (e) => { e.stopPropagation(); if (!confirm('Remove \u201C' + (desc.pd.title || 'Plan Detail') + '\u201D?')) return; const a = _planDetails(); const ix = a.indexOf(desc.pd); if (ix >= 0) a.splice(ix, 1); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+            db.onclick = (e) => { e.stopPropagation(); _deletePlanDetail(desc.pd); };
             lab.appendChild(db);
         }
         // Deleting a layout page has exactly ONE control \u2014 the small \u2212 at the
@@ -20912,9 +23171,9 @@ async function _bakeFrameDataUrl(r) {
 async function _bakeElevationDataUrl(rowOrElev) {
     let elev = null, featuredId = null;
     if (rowOrElev && rowOrElev.frames) { elev = rowOrElev; featuredId = null; }
-    else { const r = rowOrElev || {}; for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } } featuredId = r.id || null; }
+    else { const r = rowOrElev || {}; elev = _elevShowingPiece(r.id); featuredId = r.id || null; }
     if (!elev) return null;
-    const er = await renderElevationToCanvas(elev, featuredId, { wireframe: _isWireframe(), dpi: 30 });
+    const er = await renderElevationToCanvas(elev, featuredId, { wireframe: _elevIsWireframe(elev), dpi: 30 });
     if (!er || !er.canvas) return null;
     try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#fff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); return flat.toDataURL('image/jpeg', _expJpegQ()); }
     catch (e) { return er.canvas.toDataURL('image/jpeg', _expJpegQ()); }
@@ -22198,12 +24457,17 @@ function _dsThemeControlInto(t, key, desc) {
         const f = file.files && file.files[0]; if (!f) return;
         const rd = new FileReader();
         rd.onload = () => {
-            th.image = rd.result;
-            th.bgMode = 'image';
-            const im = new Image();
-            im.onload = () => { th.imgW = im.naturalWidth || 0; th.imgH = im.naturalHeight || 0; th._bakedImg = null; refresh(); };
-            im.onerror = () => { th.imgW = 0; th.imgH = 0; th._bakedImg = null; refresh(); };
-            im.src = rd.result;
+            // THE ONE BOUND - see _boundImageDataUrl. This path used to write
+            // FileReader's result straight in, which is how two backgrounds came
+            // to be 11.1 MB of a 22.9 MB project. It reports the dimensions it
+            // ended up with, so th.imgW/imgH cannot disagree with th.image.
+            _boundImageDataUrl(rd.result, _pageBgMaxEdge(), 0.88, (url, w, h) => {
+                th.image = url;
+                th.bgMode = 'image';
+                th.imgW = w || 0; th.imgH = h || 0;
+                th._bakedImg = null;
+                refresh();
+            });
         };
         rd.readAsDataURL(f);
     };
@@ -22838,7 +25102,9 @@ function _dsCustomSection(desc) {
 function _dsPickMockupPiece(a) {
     const old = document.getElementById('dsMockPick'); if (old) old.remove();
     const ov = document.createElement('div'); ov.id = 'dsMockPick';
-    ov.style.cssText = 'position:fixed; inset:0; z-index:100030; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center;';
+    // The shared dialog shell - see _confirmDestroy's neighbours for Escape, the
+    // backdrop and focus. Its own overlay sat above the alert box at 100030.
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
     const card = document.createElement('div');
     card.style.cssText = 'background:var(--bg-panel,#1d1d20); border:1px solid var(--border-color); border-radius:var(--r-8); padding:16px; width:280px; max-width:90vw;';
     card.innerHTML = '<div style="font-size:var(--fs-80); font-weight:700; color:var(--text-main); margin-bottom:10px;">Choose artwork</div>';
@@ -22851,7 +25117,8 @@ function _dsPickMockupPiece(a) {
     const ok = document.createElement('button'); ok.textContent = 'Use'; ok.style.cssText = 'font-size:var(--fs-70); font-weight:700; padding:6px 14px; border-radius:var(--r-4); cursor:pointer; border:1px solid var(--ui-active); background:var(--ui-active); color:#fff;';
     ok.onclick = () => { a.pieceId = sel.value; a.aspect = null; if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (a.pieceId) _mockupEnsure(a.pieceId).then(() => _dsRenderCenter()); _dsRenderCenter(); ov.remove(); };
     row.appendChild(cancel); row.appendChild(ok); card.appendChild(row);
-    ov.appendChild(card); ov.onclick = (e) => { if (e.target === ov) ov.remove(); };
+    cancel.setAttribute('data-modal-close', '');
+    ov.appendChild(card);
     document.body.appendChild(ov);   // position:fixed overlay — see _dsPopup's host note
 }
 function _dsClearBuiltAll() { _invalidateFramesCache(); _dsThumbCache = {}; const desc = _dsPages[_dsIndex]; const wasBuilt = desc && desc.kind === 'spec' && !!_dsBuilt[_deckPageKey(desc)]; _dsBuilt = {}; if (wasBuilt) _dsQueuePreview(); }
@@ -23629,6 +25896,18 @@ function _dsDeckFooterInto(host) {
 // Theme, background and footer for the open page, in one section, built ONCE ahead of
 // the kind-specific branches — the same rule _dsPlaceRelativeInto follows, and for the
 // same reason: several of those branches return early.
+// Move the already-built Page appearance section so it sits immediately BEFORE
+// `anchor`. Presentation layout is the control a designer reaches for first on a spec
+// or breaker page, and appearance above it pushed it off the top of the panel.
+// A no-op when the section was never built (a page kind with no key), which is why the
+// caller does not have to check.
+function _dsMoveAppearanceAfter(t, anchor) {
+    try {
+        const el = t && t._apprEl;
+        if (!el || !anchor || !anchor.parentNode) return;
+        anchor.parentNode.insertBefore(el, anchor);
+    } catch (e) {}
+}
 function _dsPageAppearanceInto(t, desc) {
     if (!desc) return;
     const key = _deckPageKey(desc);
@@ -23638,6 +25917,8 @@ function _dsPageAppearanceInto(t, desc) {
         + 'Footer ink set to Auto follows the theme you pick here; Dark text / Light text override it '
         + 'for this page only. Hide toggles are per page too, so a single dark spread can drop the logo '
         + 'without touching the rest of the deck.');
+    // Remembered so a branch can reposition the whole section without rebuilding it.
+    try { t._apprEl = body._det; } catch (e) {}
     const themeWrap = document.createElement('div');
     themeWrap.dataset.themegap = '1';
     themeWrap.style.cssText = 'margin-bottom:26px;';
@@ -23735,6 +26016,10 @@ function _dsSection(container, title, id, defaultOpen, help) {
     det.appendChild(body);
     det.ontoggle = () => { _dsToolsOpen[id] = det.open; };
     container.appendChild(det);
+    // The BODY is what every caller fills, but a couple of them need the <details>
+    // itself to move a whole section in the panel order. Hung off the body rather
+    // than returned, so no existing call site changes.
+    body._det = det;
     return body;
 }
 function _dsDockedStylesSection(cols, idOverride) {
@@ -24115,10 +26400,20 @@ function _fpPanelCats(t) {
         const rm = document.createElement('button'); rm.textContent = '\u2715'; rm.title = 'Remove category'; rm.className = 'action-btn btn-secondary'; rm.style.cssText = 'width:22px; height:24px; padding:0; font-size:var(--fs-60); flex:0 0 auto;';
         rm.onclick = () => {
             const used = dashProjectData.some(r2 => (r2.category || '') === cc.key);
-            if (used) { alert('\u201C' + cc.label + '\u201D is assigned to artwork on the plan. Reassign those pieces first.'); return; }
-            if (!confirm('Remove category \u201C' + cc.label + '\u201D?')) return;
-            const a = _artCatsEnsure(); a.splice(ci, 1);
-            if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail();
+            // Why nothing happened, which is safe to miss - so a notice, not a box.
+            if (used) { _toast('\u201C' + cc.label + '\u201D is still in use', 'Reassign the pieces using it on the plan first.'); return; }
+            _confirmDestroy({
+                title: 'Delete the \u201C' + cc.label + '\u201D category?',
+                undoable: true,
+                onConfirm: () => {
+                    // By KEY: _artCats() hands back the built-in constant until a project
+                    // customises its list, and _artCatsEnsure() then writes a COPY - so the
+                    // object in this loop is not in the array being spliced.
+                    const a = _artCatsEnsure(); const i = a.findIndex(x => x && x.key === cc.key); if (i >= 0) a.splice(i, 1);
+                    if (typeof pushHistory === 'function') pushHistory();
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail();
+                },
+            });
         };
         row.appendChild(sw); row.appendChild(lbI); row.appendChild(sbI); row.appendChild(rm);
         t.appendChild(row);
@@ -24158,9 +26453,9 @@ function _fpPanelPlan(t, desc) {
         const eye = document.createElement('button'); eye.textContent = pd.hidden ? '\u2298' : '\u25c9'; eye.title = pd.hidden ? 'Show in deck' : 'Hide from deck';
         eye.style.cssText = 'flex:0 0 auto; width:20px; height:20px; padding:0; border:none; background:transparent; color:var(--text-muted); font-size:var(--fs-80); cursor:pointer;';
         eye.onclick = (e) => { e.stopPropagation(); pd.hidden = !pd.hidden; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
-        const trash = document.createElement('button'); trash.textContent = '\u2715'; trash.title = 'Delete this breaker';
+        const trash = document.createElement('button'); trash.textContent = '\u2715'; trash.title = 'Delete this plan detail';
         trash.style.cssText = 'flex:0 0 auto; width:20px; height:20px; padding:0; border:none; background:transparent; color:var(--text-muted); font-size:var(--fs-70); cursor:pointer;';
-        trash.onclick = (e) => { e.stopPropagation(); if (!confirm('Delete \u201C' + (pd.title || 'Plan Detail') + '\u201D?')) return; const a = _planDetails(); const ix = a.indexOf(pd); if (ix >= 0) a.splice(ix, 1); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
+        trash.onclick = (e) => { e.stopPropagation(); _deletePlanDetail(pd); };
         hd.onclick = () => { _pdOpenState[pd.id] = !_pdOpenState[pd.id]; _dsRenderTools(); };
         hd.appendChild(car); hd.appendChild(ttl); hd.appendChild(eye); hd.appendChild(trash); sec.appendChild(hd);
         if (_pdOpenState[pd.id]) {
@@ -24254,6 +26549,12 @@ function _dsRenderTools() {
     // Self-hiding, so a generated page shows nothing rather than a control that refuses.
     _dsPlaceRelativeInto(t, desc);
     _dsPageActionsInto(t, desc);
+    // Built HERE and possibly MOVED later. It has to be built ahead of the branches
+    // because several of them return early and this belongs to all of them - but on a
+    // spec or breaker page the thing a designer reaches for first is the Presentation
+    // layout, and Page appearance sitting above it pushed that off the top of the
+    // panel. `_dsMoveAppearanceAfter` repositions the built node; nothing is rebuilt
+    // and no branch can lose it.
     _dsPageAppearanceInto(t, desc);
 
     if (desc.kind === 'floorplan') {
@@ -24329,7 +26630,13 @@ function _dsRenderTools() {
             _dsRestoreSel(keepKey, keepKind);
         };
         const mkMode = (label, active, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1; font-size:var(--fs-60); padding:6px 3px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (active ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (active ? 'var(--ui-active)' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';'; if (!active) b.onclick = on; return b; };
-        modeRow.appendChild(mkMode('Per piece', !isGroupGlobal && !isInstallGlobal, () => switchMode('classic')));
+        // frameSpecDetail, NOT 'classic'. There is one per-piece layout and this is it;
+        // 'classic' is the legacy one that predates the four SHOW ON PAGE ticks, so
+        // clicking Per piece landed a designer on a page whose ticks mostly did nothing
+        // and whose title dropped the location. The default and the unreadable-value
+        // fallback both moved to frameSpecDetail when the layout buttons were removed;
+        // this button was the one caller still holding the old literal.
+        modeRow.appendChild(mkMode('Per piece', !isGroupGlobal && !isInstallGlobal, () => switchMode('frameSpecDetail')));
         // Shared specs is the group default: the consolidated left column is what a
         // salon hang wants, and it is the only group arrangement still offered.
         modeRow.appendChild(mkMode('Group A/B/C', isGroupGlobal, () => switchMode('setLegend')));
@@ -24363,14 +26670,21 @@ function _dsRenderTools() {
         // `variants: false` because a breaker is always elevation-only; the layout
         // choices belong to Install-guide mode (and _igCfg forces that anyway).
         if (desc._install && !desc._manual) {
+            // ONE LINE PLUS A ?, not a four-line box. Everything in this panel that
+            // explained itself in a paragraph pushed the controls further down, and the
+            // Layout buttons ended up below the fold - reported as "there is too much
+            // going on that I missed seeing the Layout option".
             const bnote = document.createElement('div');
-            bnote.style.cssText = 'padding:9px 10px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-input);';
-            bnote.innerHTML = '<div style="font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:3px;">Elevation breaker</div>'
-                + '<div style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.45;">A full-page wall elevation before this group’s spec pages. Measurements come from the Elevations tab; the notes below print on this page and on every install-guide page.</div>';
+            bnote.style.cssText = 'display:flex; align-items:center; font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:2px;';
+            bnote.appendChild(document.createTextNode('Elevation breaker'));
+            bnote.appendChild(_dsHelpDot('A full-page wall elevation before this group\u2019s spec pages. '
+                + 'Measurements come from the Elevations tab; the notes below print on this page and on every install-guide page.'));
             head.appendChild(bnote);
             t.appendChild(head);
             const igBodyB = _dsSection(t, 'Elevation measurements & notes', 'installguide', true);
-            _dsInstallGuideControls(igBodyB, desc, { variants: false });
+            // PRESENTATION LAYOUT, then PAGE APPEARANCE, then the measurements.
+            _dsMoveAppearanceAfter(t, igBodyB._det);
+            _dsInstallGuideControls(igBodyB, desc, { variants: 'breaker' });
             return;
         }
 
@@ -24379,7 +26693,7 @@ function _dsRenderTools() {
             t.appendChild(_dsManualSection(desc));
             if (desc._install) {
                 const igBody = _dsSection(t, 'Elevation measurements', 'installguide', true);
-                _dsInstallGuideControls(igBody, desc, { variants: false });
+                _dsInstallGuideControls(igBody, desc, { variants: 'breaker' });
             }
         } else if (isGroupGlobal) {
             const note = document.createElement('p');
@@ -24788,10 +27102,19 @@ function _dsRenderTools() {
                         _tlWriteStages(st2, order);
                     });
                     const rm = mkB('\u2715', 'Remove stage', () => {
-                        if (!confirm('Remove stage \u201C' + (s.label || 'Stage ' + (i + 1)) + '\u201D?')) return;
-                        const st2 = _timelineStages(); const order = st2.map((_, k) => k);
-                        st2.splice(i, 1); order.splice(i, 1);
-                        _tlWriteStages(st2, order);
+                        // History here and not inside _tlWriteStages, which also runs
+                        // on every keystroke of a stage label.
+                        _confirmDestroy({
+                            title: 'Delete the \u201C' + (s.label || 'Stage ' + (i + 1)) + '\u201D stage?',
+                            body: 'Its milestones go with it.',
+                            undoable: true,
+                            onConfirm: () => {
+                                const st2 = _timelineStages(); const order = st2.map((_, k) => k);
+                                st2.splice(i, 1); order.splice(i, 1);
+                                _tlWriteStages(st2, order);
+                                if (typeof pushHistory === 'function') pushHistory();
+                            },
+                        });
                     });
                     row.appendChild(sw); row.appendChild(rst); row.appendChild(nmI); row.appendChild(up); row.appendChild(dn); row.appendChild(rm);
                     blk.appendChild(row);
@@ -27546,7 +29869,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 _thumbBox = { tx: tx, ty: ty, tw: boxW, th: boxH };
             } else if (_wantElev && groupElev) {
                 try {
-                    const er = await renderElevationToCanvas(groupElev, null, { wireframe: _isWireframe(), dpi: 24 });
+                    const er = await renderElevationToCanvas(groupElev, null, { wireframe: _elevIsWireframe(groupElev), dpi: 24 });
                     if (er && er.canvas) {
                         const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
                         const boxW = SW * 0.17, boxH = (bandBot - bandY) - 12;   // leave room for the caption below
@@ -27797,6 +30120,9 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
 // handed to an installer, so you need to read exactly what you're sending. The
 // live ones (hang height, dual units) render their current wording, which is also
 // why the list rebuilds rather than caching.
+// WHICH NOTE THE EDITOR IS POINTED AT. Panel state, never project data - it is where
+// you are looking, the same reasoning as `_fpPanelTab` and `_ctxPaletteCat`.
+let _dsNoteSel = '';
 function _dsInstallNotesInto(body, desc) {
     const n = _installNotesCfg();
     const save = () => {
@@ -27806,35 +30132,173 @@ function _dsInstallNotesInto(body, desc) {
         _dsRenderTools(); _dsRefresh();
         try { if (desc) _dsPriorityRerender(desc); } catch (e) {}
     };
+    // ONE ROW PER NOTE: tick, label, ?. The body text used to print UNDER every label,
+    // four lines apiece, which is most of why this panel scrolled and why the Layout
+    // buttons ended up below the fold. It is on the ? now, and on the editor below.
+    //
+    // SELECTION drives the editor at the bottom. Clicking a label selects that note and
+    // loads its wording; the tick is a separate target, so choosing which note to read
+    // never changes what prints.
+    const sel = () => _dsNoteSel;
+    const selectNote = (id) => { _dsNoteSel = id; _dsRenderTools(); };
+    const rowCss = (on) => 'display:flex; align-items:center; gap:6px; margin:0 0 3px; padding:2px 4px;'
+        + ' border-radius:var(--r-4); cursor:pointer;'
+        + (on ? ' background:var(--bg-subpanel, rgba(127,127,127,0.14));' : '');
+
     FRAME_INSTALL_NOTES.forEach(note => {
         // The dual-units note has nothing to say when dual units are off.
         if (note.key === 'units' && !_specDualUnit()) return;
-        const row = document.createElement('label');
-        row.style.cssText = 'display:flex; align-items:flex-start; gap:6px; margin:0 0 5px; cursor:pointer;';
+        const id = 'std:' + note.key;
+        const row = document.createElement('div');
+        row.style.cssText = rowCss(sel() === id);
         const cb = document.createElement('input');
         cb.type = 'checkbox'; cb.checked = _installNoteOn(note.key);
-        cb.style.cssText = 'margin-top:2px; flex:0 0 auto;';
+        cb.title = 'Print this note';
+        cb.style.cssText = 'flex:0 0 auto; cursor:pointer;';
+        cb.onclick = (e) => e.stopPropagation();
         cb.onchange = () => { n.keys[note.key] = cb.checked; save(); };
-        const txt = document.createElement('div');
-        txt.style.cssText = 'font-size:var(--fs-60); line-height:1.35; color:var(--text-main);';
-        let body2 = ''; try { body2 = note.text(); } catch (e) {}
-        txt.innerHTML = '<b>' + _esc(note.label) + '</b><br><span style="color:var(--text-muted);">' + _esc(body2) + '</span>';
-        row.appendChild(cb); row.appendChild(txt);
+        const lab = document.createElement('div');
+        lab.textContent = note.label;
+        lab.style.cssText = 'flex:1 1 40px; min-width:0; font-size:var(--fs-60); font-weight:700; color:var(--text-main); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+        const edited = (typeof _installNoteEdits()[note.key] === 'string' && _installNoteEdits()[note.key].trim());
+        const dot = _dsHelpDot(_installNoteText(note) + (edited ? '\n\n(Edited for this project.)' : ''));
+        row.onclick = () => selectNote(id);
+        row.appendChild(cb); row.appendChild(lab);
+        if (edited) { const m = document.createElement('span'); m.textContent = '\u2022'; m.title = 'Edited for this project'; m.style.cssText = 'color:var(--ui-active); font-weight:700; flex:0 0 auto;'; row.appendChild(m); }
+        row.appendChild(dot);
         body.appendChild(row);
     });
+
+    // CUSTOM NOTES, each its own row with its own tick, so one can be turned off for a
+    // page without being deleted and retyped.
+    _installNoteList().forEach(r => {
+        const id = 'c:' + r.id;
+        const row = document.createElement('div');
+        row.style.cssText = rowCss(sel() === id);
+        const cb = document.createElement('input');
+        cb.type = 'checkbox'; cb.checked = !!r.on;
+        cb.title = 'Print this note';
+        cb.style.cssText = 'flex:0 0 auto; cursor:pointer;';
+        cb.onclick = (e) => e.stopPropagation();
+        cb.onchange = () => { r.on = cb.checked; _installNoteSyncCustom(); save(); };
+        const lab = document.createElement('div');
+        lab.textContent = (r.text || '').trim() || 'New note\u2026';
+        lab.style.cssText = 'flex:1 1 40px; min-width:0; font-size:var(--fs-60); color:'
+            + ((r.text || '').trim() ? 'var(--text-main)' : 'var(--text-muted)')
+            + '; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;';
+        const del = document.createElement('button');
+        del.type = 'button'; del.textContent = '\u00d7'; del.title = 'Delete this note';
+        del.style.cssText = 'flex:0 0 auto; width:16px; height:16px; line-height:1; padding:0; border:none; background:transparent; color:var(--text-muted); cursor:pointer; font-size:var(--fs-80);';
+        del.onclick = (e) => {
+            e.stopPropagation();
+            const list = _installNoteList();
+            const i = list.indexOf(r);
+            if (i >= 0) list.splice(i, 1);
+            if (_dsNoteSel === id) _dsNoteSel = '';
+            _installNoteSyncCustom(); save();
+        };
+        row.onclick = () => selectNote(id);
+        row.appendChild(cb); row.appendChild(lab); row.appendChild(del);
+        body.appendChild(row);
+    });
+
+    // ADD. A new note starts ticked and SELECTED, so the editor below is already
+    // pointing at it - adding a note and then hunting for where to type it is two steps
+    // for one intention.
+    const addB = document.createElement('button');
+    addB.type = 'button'; addB.className = 'action-btn btn-secondary';
+    addB.textContent = '+ Add note';
+    addB.style.cssText = 'width:100%; height:22px; font-size:var(--fs-60); margin:4px 0 6px;';
+    addB.onclick = () => {
+        const r = { id: _igNoteNewId(), text: '', on: true };
+        _installNoteList().push(r);
+        _dsNoteSel = 'c:' + r.id;
+        _installNoteSyncCustom(); save();
+    };
+    body.appendChild(addB);
+
+    // THE EDITOR. One box for whichever note is selected, standard or custom. Editing a
+    // standard note stores an override rather than changing the built-in, so Reset can
+    // put the house wording back and every other project is untouched.
+    const curId = sel();
+    const stdNote = (curId && curId.indexOf('std:') === 0)
+        ? FRAME_INSTALL_NOTES.filter(x => ('std:' + x.key) === curId)[0] : null;
+    const custRow = (curId && curId.indexOf('c:') === 0)
+        ? _installNoteList().filter(x => ('c:' + x.id) === curId)[0] : null;
+
+    const edLbl = document.createElement('div');
+    edLbl.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:var(--fs-55); color:var(--text-muted); margin:2px 0 3px;';
+    edLbl.appendChild(document.createTextNode(
+        stdNote ? ('Editing: ' + stdNote.label) : (custRow ? 'Editing: custom note' : 'Select a note to edit its wording')));
+    if (stdNote && typeof _installNoteEdits()[stdNote.key] === 'string') {
+        const rst = document.createElement('button');
+        rst.type = 'button'; rst.textContent = 'Reset';
+        rst.title = 'Put the built-in wording back';
+        rst.style.cssText = 'margin-left:auto; height:16px; padding:0 6px; font-size:var(--fs-55); border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); color:var(--text-main); cursor:pointer;';
+        rst.onclick = () => { delete _installNoteEdits()[stdNote.key]; save(); };
+        edLbl.appendChild(rst);
+    }
+    body.appendChild(edLbl);
+
     const ta = document.createElement('textarea');
-    ta.value = n.custom || '';
-    ta.placeholder = 'Extra notes, one per line…';
-    ta.style.cssText = 'width:100%; min-height:46px; resize:vertical; box-sizing:border-box; font-size:var(--fs-60); line-height:1.35; padding:5px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); color:var(--text-main);';
-    // Commit on blur/change, not on every keystroke: each commit rebuilds the
-    // page thumbnails, and doing that per character makes typing unusable.
-    ta.onchange = () => { n.custom = ta.value; save(); };
-    ta.onblur = () => { if (n.custom !== ta.value) { n.custom = ta.value; save(); } };
+    ta.value = stdNote ? _installNoteText(stdNote) : (custRow ? (custRow.text || '') : '');
+    ta.disabled = !(stdNote || custRow);
+    ta.placeholder = (stdNote || custRow) ? 'Note wording\u2026' : 'Pick a note above, or add one.';
+    ta.style.cssText = 'width:100%; min-height:44px; resize:vertical; box-sizing:border-box; font-size:var(--fs-60); line-height:1.35; padding:5px; border:1px solid var(--border-color); border-radius:var(--r-4); background:var(--bg-input); color:var(--text-main);'
+        + (ta.disabled ? ' opacity:0.55;' : '');
+    // Commit on blur/change, never per keystroke: each commit rebuilds the page
+    // thumbnails, and doing that per character makes typing unusable.
+    const commitText = () => {
+        const v = ta.value;
+        if (stdNote) {
+            if (v.trim() === (() => { try { return (stdNote.text() || '').trim(); } catch (e) { return ''; } })()) delete _installNoteEdits()[stdNote.key];
+            else _installNoteEdits()[stdNote.key] = v;
+            save();
+        } else if (custRow) {
+            if (custRow.text === v) return;
+            custRow.text = v; _installNoteSyncCustom(); save();
+        }
+    };
+    ta.onchange = commitText;
+    ta.onblur = commitText;
     body.appendChild(ta);
-    const hint = document.createElement('p');
-    hint.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:4px 0 0; line-height:1.35;';
-    hint.textContent = 'Ticked notes print in a column down the right of every install-guide and elevation breaker page. Untick everything for no notes at all.';
-    body.appendChild(hint);
+
+    // WHAT WILL ACTUALLY PRINT, on a white chip because the sheet is white and in the
+    // ink the page will use. Three separate reports of "the notes are not showing up"
+    // came down to not being able to see, from the panel, whether a note resolved to
+    // anything at all - the tick list says a note is ON, and the page is the only other
+    // place that has an opinion. This closes that gap without opening the PDF.
+    const prevLines = _installNoteLines();
+    const prevWrap = document.createElement('div');
+    prevWrap.style.cssText = 'margin-top:8px;';
+    const prevLbl = document.createElement('div');
+    prevLbl.style.cssText = 'display:flex; align-items:center; font-size:var(--fs-55); color:var(--text-muted); margin-bottom:3px;';
+    prevLbl.appendChild(document.createTextNode('Prints on the page'));
+    prevLbl.appendChild(_dsHelpDot('Exactly the lines this page will carry, in the colour it will use, on white because the sheet is white. '
+        + 'Nothing here means nothing prints, whatever is ticked above.'));
+    prevWrap.appendChild(prevLbl);
+    const chip = document.createElement('div');
+    chip.style.cssText = 'background:#ffffff; border:1px solid var(--border-color); border-radius:var(--r-4); padding:6px 7px; max-height:110px; overflow:auto;';
+    if (!prevLines.length) {
+        const empty = document.createElement('div');
+        empty.textContent = 'Nothing ticked \u2014 this page prints no note block.';
+        empty.style.cssText = 'font-size:var(--fs-55); color:#9c9c9c; font-style:italic;';
+        chip.appendChild(empty);
+    } else {
+        const ink = _installNoteInk((_igCfg((desc && desc._ovKey) || '') || {}).noteInk);
+        const head = document.createElement('div');
+        head.textContent = 'INSTALLATION NOTE';
+        head.style.cssText = 'font-size:var(--fs-50); font-weight:700; letter-spacing:0.3px; color:' + ink + '; margin-bottom:3px;';
+        chip.appendChild(head);
+        prevLines.forEach(t => {
+            const p = document.createElement('div');
+            p.textContent = t;
+            p.style.cssText = 'font-size:var(--fs-50); line-height:1.35; color:' + ink + '; margin-bottom:3px;';
+            chip.appendChild(p);
+        });
+    }
+    prevWrap.appendChild(chip);
+    body.appendChild(prevWrap);
     _dsNoteSizeSliders(body, desc);
 }
 // Width and type-size sliders for the note column. Both trade off directly against
@@ -27887,8 +30351,45 @@ function _dsNoteSizeSliders(body, desc) {
         wrap.appendChild(nm); wrap.appendChild(s); wrap.appendChild(val);
         body.appendChild(wrap);
     };
-    slider('Column width', 'noteW', (v) => Math.round(v * 100) + '%');
+    // WHICH EDGE THE COLUMN TAKES ITS WIDTH OFF. The drawing anchors bottom-right, so on
+    // a breaker the notes belong left, out of the one place the elevation wants. Install
+    // pages keep the right, where they have always printed.
+    {
+        const sideWrap = document.createElement('div');
+        sideWrap.style.cssText = 'display:flex; align-items:center; gap:7px; margin-top:3px;';
+        const sideNm = document.createElement('span'); sideNm.textContent = 'Side';
+        sideNm.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); width:62px; flex:0 0 auto;';
+        const seg = document.createElement('div'); seg.className = 'frame-tabs'; seg.style.cssText = 'flex:1; min-width:0;';
+        [['left', 'Left'], ['right', 'Right']].forEach(function (p) {
+            const b = document.createElement('button'); b.textContent = p[1];
+            b.className = _tplTabClass(cfg().noteSide === p[0]);
+            b.onclick = () => set({ noteSide: p[0] }, pageOnly);
+            seg.appendChild(b);
+        });
+        sideWrap.appendChild(sideNm); sideWrap.appendChild(seg);
+        body.appendChild(sideWrap);
+    }
+    // ONLY FOR A RIGHT-HAND COLUMN. On the left the notes share the legend's column, and
+    // this multiplier sized a width nothing read - an inert control beside a live one is
+    // worse than no control, because it teaches that the panel does not work.
+    if (cfg().noteSide !== 'left') slider('Column width', 'noteW', (v) => Math.round(v * 100) + '%');
     slider('Text size', 'noteFs', (v) => Math.round(v * 100) + '%');
+    // THE SAME STRIP EVERY OTHER TYPE COLOUR IN THIS APP USES. FRAME_TEXT_INKS is greys
+    // light to dark plus one red, which is exactly the range a note wants: red to be read
+    // first, near black for an ordinary instruction, light grey for reference that should
+    // not compete with the drawing. `nearest` rings the closest dot so a stored colour
+    // that is near the strip but not on it still reads as chosen.
+    {
+        const inkWrap = document.createElement('div');
+        inkWrap.style.cssText = 'display:flex; align-items:flex-start; gap:7px; margin-top:6px;';
+        const inkNm = document.createElement('span'); inkNm.textContent = 'Colour';
+        inkNm.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); width:62px; flex:0 0 auto; padding-top:2px;';
+        const strip = document.createElement('div'); strip.style.cssText = 'flex:1; min-width:0;';
+        _frameSwatchesInto(strip, _installNoteInk(cfg().noteInk), (hex) => set({ noteInk: hex }, pageOnly),
+            { families: FRAME_NOTE_INKS, size: 14, nearest: true });
+        inkWrap.appendChild(inkNm); inkWrap.appendChild(strip);
+        body.appendChild(inkWrap);
+    }
     const note = document.createElement('p');
     note.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:4px 0 0; line-height:1.35;';
     note.textContent = 'Narrower column and smaller text leave the elevation bigger. The notes shrink on their own if the column would run off the page.';
@@ -28074,11 +30575,18 @@ function _dsToggleElevGuide(lid) {
     return !on;
 }
 function _dsElevGuidesInto(parent, desc) {
-    const wrap = document.createElement('div');
+    // FOLDED AWAY BY DEFAULT. Eight deck-wide toggles are set once and then sit there
+    // for the life of the project, and at full height they pushed Layout and Plan view -
+    // the controls that decide what this page IS - far enough down the panel to be
+    // missed entirely. Reported as "there is too much going on that I missed seeing the
+    // Layout option". A <details>, like the glazing editor, and not toggleDashSection,
+    // which rewrites the label span with a chevron of its own.
+    const wrap = document.createElement('details');
     wrap.style.cssText = 'margin-top:8px; padding-top:9px; border-top:1px dashed var(--border-color);';
-    const lab = document.createElement('div');
+    const lab = document.createElement('summary');
     lab.textContent = 'Layout guides';
-    lab.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:5px;';
+    lab.title = 'Which measurements the elevation shows. Deck-wide, and the same switches as the Elevations tab.';
+    lab.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:5px; cursor:pointer; list-style:revert;';
     wrap.appendChild(lab);
     const grid = document.createElement('div');
     grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:4px;';
@@ -28145,7 +30653,18 @@ function _dsInstallGuideControls(body, desc, opts) {
             body.appendChild(j);
         }
     }
-    const secLbl = (txt) => { const d = document.createElement('div'); d.textContent = txt; d.style.cssText = 'font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;'; body.appendChild(d); };
+    // A LABEL CAN CARRY ITS OWN EXPLANATION. Every paragraph under a control in this
+    // panel cost three or four lines and pushed the next control down; with six of them
+    // the Layout buttons sat below the fold. The words are not lost - they hang off a ?
+    // beside the label, which costs 14px and is read when it is wanted.
+    const secLbl = (txt, help) => {
+        const d = document.createElement('div');
+        d.style.cssText = 'display:flex; align-items:center; font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin:8px 0 4px;';
+        d.appendChild(document.createTextNode(txt));
+        if (help) d.appendChild(_dsHelpDot(help));
+        body.appendChild(d);
+        return d;
+    };
     const segRow = (pairs, cur, onPick) => {
         const r = document.createElement('div'); r.style.cssText = 'display:flex; gap:5px;';
         pairs.forEach(([v, l]) => {
@@ -28169,18 +30688,26 @@ function _dsInstallGuideControls(body, desc, opts) {
         scRow.appendChild(b);
     });
     body.appendChild(scRow);
-    // Layout variant (Install-guide mode only — breakers stay elevation-only).
-    if (opts.variants !== false) {
-        secLbl('Layout');
-        segRow([['elevOnly', 'Elev only'], ['elevPlan', 'Elev + plan'], ['elevFrames', 'Elev + frames']], cfg().variant, (v) => commit({ variant: v }));
+    // Layout variant. A BREAKER gets a reduced set: elevation only, or elevation plus the
+    // plan. Never 'Elev + frames' - a moulding gallery is an install-guide idea and has no
+    // place on a location page. It used to get nothing at all, because the config FORCED
+    // elevation-only to stop Install-guide's globals bleeding across; breaker-owned slots
+    // do that job now without also making the setting unreachable.
+    const _igVariantMode = (opts.variants === false) ? 'none' : ((opts.variants === 'breaker') ? 'breaker' : 'full');
+    if (_igVariantMode !== 'none') {
+        secLbl('Layout', 'Elev only prints the drawing alone. Elev + plan adds the floorplan bottom-left, under the legend and the notes.');
+        const opt = (_igVariantMode === 'breaker')
+            ? [['elevOnly', 'Elev only'], ['elevPlan', 'Elev + plan']]
+            : [['elevOnly', 'Elev only'], ['elevPlan', 'Elev + plan'], ['elevFrames', 'Elev + frames']];
+        segRow(opt, cfg().variant, (v) => commit({ variant: v }));
         if (cfg().variant !== 'elevOnly') {
-            secLbl('Plan view');
+            secLbl('Plan view', 'Prints bottom-left, under the legend and notes, with the placement\u2019s pin and wall line marked in red. Needs a floorplan image on this level.');
             segRow([['full', 'Overall floor plan'], ['zoom', 'Zoomed to this wall']], cfg().plan, (v) => commit({ plan: v }));
         }
     }
     // Sliders — frame thumbnail size, legend width, section spacing, plan size.
-    const slider = (labelTxt, min, max, step, val, fmt, onPick) => {
-        secLbl(labelTxt);
+    const slider = (labelTxt, min, max, step, val, fmt, onPick, help) => {
+        secLbl(labelTxt, help);
         const r = document.createElement('div'); r.style.cssText = 'display:flex; gap:7px; align-items:center;';
         const s = document.createElement('input'); s.type = 'range'; s.min = min; s.max = max; s.step = step; s.value = val;
         s.style.cssText = 'flex:1;';
@@ -28191,57 +30718,88 @@ function _dsInstallGuideControls(body, desc, opts) {
         body.appendChild(r);
     };
     if (opts.variants !== false && cfg().variant === 'elevFrames') {
-        slider('Frame thumbnail size', 0.6, 1.8, 0.1, cfg().legendScale, (v) => Math.round(v * 100) + '%', (v) => commit({ legendScale: v }));
+        slider('Frame thumbnail size', 0.6, 1.8, 0.1, cfg().legendScale, (v) => Math.round(v * 100) + '%', (v) => commit({ legendScale: v }),
+            'Frame thumbnails sit directly above the plan, below the legend. If there is not room for them without squeezing the plan too small, they drop automatically.');
     }
-    if (opts.variants !== false && cfg().variant !== 'elevOnly' && cfg().plan === 'zoom') {
-        slider('Zoomed plan size', 0.4, 1, 0.05, cfg().planScale, (v) => Math.round(v * 100) + '%', (v) => commit({ planScale: v }));
-        const psNote = document.createElement('p'); psNote.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:2px 0 0; line-height:1.4;';
-        psNote.textContent = 'Scales down anchored to the plan\u2019s bottom-left corner \u2014 frees up room above it.';
-        body.appendChild(psNote);
+    // BOTH plan modes, not just the zoomed one: the plan has a target size now rather
+    // than filling the leftovers, so the overall floor plan is just as adjustable.
+    if (opts.variants !== false && cfg().variant !== 'elevOnly') {
+        slider('Plan size', 0.4, 1.4, 0.05, cfg().planScale, (v) => Math.round(v * 100) + '%', (v) => commit({ planScale: v }),
+            'Anchored to the plan\u2019s bottom-left corner, so it grows and shrinks upward.');
     }
-    if (opts.variants !== false && cfg().variant === 'elevFrames') {
-        const fitNote = document.createElement('p'); fitNote.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:4px 0 0; line-height:1.4;';
-        fitNote.textContent = 'Frame thumbnails sit directly above the plan, below the legend. If there isn\u2019t room for them without squeezing the plan too small, they drop automatically \u2014 nothing to configure.';
-        body.appendChild(fitNote);
-    }
+    // The frame-thumbnail note joins the Frame thumbnail size slider as its help, rather
+    // than as a fourth paragraph in a panel that was already scrolling.
+    // ── TWO SLIDERS, ONE NUMBER ─────────────────────────────────────────
+    // The left column and the elevation share the content width, so Column width and
+    // Elevation width are the same value read from opposite ends. Both write `legendW`
+    // through `_igColWForElevW`, so dragging either moves the other on the next render
+    // and they can never disagree - two stored numbers is how a designer ends up
+    // believing there are two settings and then fighting them.
+    //
+    // THE CLAMP IS THE FAIL-SAFE and it binds both ways: the drawing can never be pushed
+    // below IG_ELEV_MIN_FRAC of the width, and the column can never go under
+    // IG_COL_MIN, so pulling either slider past the limit simply stops.
+    const _igWidthPairInto = () => {
+        const contentW = _igNominalContentW();
+        const colNow = _igColW(cfg(), contentW);
+        const elevNow = _igElevW(cfg(), contentW);
+        const colMax = Math.min(IG_COL_MAX, contentW * (1 - IG_ELEV_MIN_FRAC) - IG_COL_GUTTER);
+        slider('Column width', IG_COL_MIN, colMax, 5, colNow, (v) => Math.round(v) + 'pt',
+            (v) => commit({ legendW: v }),
+            'The left column: the letter legend and the notes under it. Widening it takes the room from the drawing, '
+            + 'and the Elevation width below moves with it. It stops at ' + Math.round(colMax) + 'pt so the drawing always keeps '
+            + Math.round(IG_ELEV_MIN_FRAC * 100) + '% of the page.');
+        slider('Elevation width', Math.round(contentW - colMax - IG_COL_GUTTER), Math.round(contentW - IG_COL_MIN - IG_COL_GUTTER), 5,
+            elevNow, (v) => Math.round(v) + 'pt',
+            (v) => commit({ legendW: _igColWForElevW(v, contentW) }),
+            'The same width from the other end. The drawing anchors bottom-right, so this grows it leftward and '
+            + 'narrows the column by exactly as much.');
+    };
     // Letter legend (spec-style blocks) below the title.
     secLbl('Legend');
     const legRow = document.createElement('label'); legRow.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); cursor:pointer; margin-bottom:2px;';
     const legCb = document.createElement('input'); legCb.type = 'checkbox'; legCb.checked = !!cfg().legend;
     legCb.onchange = () => commit({ legend: legCb.checked });
-    legRow.appendChild(legCb); legRow.appendChild(document.createTextNode('Letter legend (A, B, C\u2026 with overall size + image code)'));
+    legRow.appendChild(legCb); legRow.appendChild(document.createTextNode('Letter legend (A, B, C\u2026)'));
+    legRow.appendChild(_dsHelpDot('Spec-style dotted rows under the title \u2014 keeps image codes off the elevation so the measurements stay clean. '
+        + 'The letter sits in its own gutter with the ticked lines aligned beside it.'));
     body.appendChild(legRow);
-    const legNote = document.createElement('p'); legNote.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:2px 0 0 21px; line-height:1.4;';
-    legNote.textContent = 'Spec-style dotted rows under the title \u2014 keeps image codes off the elevation so the measurements stay clean.';
-    body.appendChild(legNote);
+    // The column exists whenever anything is IN it: a legend, or notes on the left. The
+    // width pair used to live inside the legend branch, so a page with notes and no
+    // legend had a column nothing could size.
+    if (!cfg().legend && cfg().noteSide === 'left' && _installNoteLines().length) _igWidthPairInto();
     if (cfg().legend) {
-        slider('Legend spec width', 110, 300, 5, cfg().legendW, (v) => Math.round(v) + 'pt', (v) => commit({ legendW: v }));
-        const wNote = document.createElement('p'); wNote.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:2px 0 0; line-height:1.4;';
-        wNote.textContent = 'Narrower blocks fit more letters per row and leave more room for notes.';
-        body.appendChild(wNote);
+        // THREE LINES, THREE TICKS. A catalogue mockup carries no artwork, so its image
+        // code line prints a column of em dashes on exactly the page that uses the legend
+        // most. And art dimensions are what somebody ORDERS from while overall dimensions
+        // are what somebody HANGS from, which one tick could never say.
+        const subTick = (field, label, tip) => {
+            const r = document.createElement('label');
+            r.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-60); color:var(--text-main); cursor:pointer; margin:3px 0 0 21px;';
+            if (tip) r.title = tip;
+            const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cfg()[field];
+            cb.onchange = () => { const p = {}; p[field] = cb.checked; commit(p); };
+            r.appendChild(cb); r.appendChild(document.createTextNode(label));
+            body.appendChild(r);
+        };
+        subTick('legendDims', 'Overall dimensions', 'The framed size, which is what gets hung.');
+        subTick('legendArt', 'Art dimensions', 'The image opening, which is what gets printed. Off by default.');
+        subTick('legendCode', 'Image code', 'Untick on a mockup, where there is no artwork to name yet.');
+        _igWidthPairInto();
     }
     // Installation notes. Deck-wide on purpose, and deliberately NOT part of
     // _igCfg: that forces a fixed base for breaker pages so Install-guide globals
     // can't bleed onto them, and notes are the one thing that SHOULD reach both.
-    secLbl('Installation notes');
+    secLbl('Installation notes', 'Ticked notes print in a column beside the elevation on every install-guide and breaker page. '
+        + 'Click a note to read or edit its wording; + adds one of your own. Untick everything for no notes at all.');
     _dsInstallNotesInto(body, desc);
-    // Measurements live in the Elevations tab — point there instead of duplicating switches.
-    secLbl('Measurements');
-    const note = document.createElement('p'); note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:0 0 6px; line-height:1.45;';
-    note.textContent = 'The snapshot shows exactly what the elevation shows. If measurements are missing, turn them on in the Elevations tab working area (spacing pairs, wall dims, hang guides, image codes), then come back \u2014 the page refreshes on its own.';
-    body.appendChild(note);
-    const goB = document.createElement('button'); goB.className = 'action-btn btn-secondary';
-    goB.textContent = 'Go to elevations \u2192';
-    goB.style.cssText = 'width:100%; height:24px; font-size:var(--fs-60);';
-    goB.onclick = () => {
-        // switchView leaves the Deck view on its own — no separate close step.
-        try {
-            const idx = (desc.elev && typeof desc._idx === 'number') ? desc._idx
-                : (typeof elevations !== 'undefined' ? elevations : []).findIndex(e2 => e2 && desc.elev && e2.name === desc.elev.name);
-            switchView('elevation', idx >= 0 ? idx : 0);
-        } catch (e) { try { switchView('elevation', 0); } catch (e2) {} }
-    };
-    body.appendChild(goB);
+    // THE SECOND JUMP BUTTON IS GONE. This panel offered two ways to the same wall:
+    // "Edit <name> in Elevations" at the top, which records a return trip through
+    // _dsJumpToElevation, and a plain "Go to elevations" here, which called switchView
+    // raw and left you with no way back. Two buttons for one destination is how a
+    // designer learns the worse one, and the worse one was the one with no return.
+    // Its paragraph became the ? on this label - the advice is worth keeping and is not
+    // worth four lines of a panel that was already scrolling.
 }
 
 // ── INSTALLATION NOTES ─────────────────────────────────────────────────────
@@ -28292,6 +30850,48 @@ const FRAME_INSTALL_NOTES = [
         }
     }
 ];
+// A CUSTOM NOTE IS A ROW, NOT A LINE IN A TEXTAREA. One box of newline-separated text
+// could be typed into and nothing else: no way to turn one note off without deleting it,
+// and no way to tell which line you were editing. `list` is [{id, text, on}].
+// `custom` SURVIVES as a derived newline mirror of the ticked ones, the same shape
+// `variationOf` keeps beside `variationOfId`: the field is already in saved projects, so
+// a file written here still prints correctly in a build that only knows the string.
+// `edits` overrides a STANDARD note's wording by key. The built-in text is the house
+// default, not a rule - a site with its own hanging standard needs to say so, and
+// deleting the note and retyping it loses the tick that makes it a standard note at all.
+let _igNoteIdSeq = 0;
+function _igNoteNewId() { return 'n' + (++_igNoteIdSeq) + '_' + Math.floor(Math.random() * 1e6).toString(36); }
+function _installNoteList() {
+    const n = _installNotesCfg();
+    if (!Array.isArray(n.list)) {
+        // MIGRATE the old textarea ONCE: every non-empty line becomes a ticked row, so a
+        // project carrying free text keeps printing exactly what it printed before.
+        n.list = String(n.custom || '').split(/\n+/)
+            .map(l => l.trim()).filter(Boolean)
+            .map(t => ({ id: _igNoteNewId(), text: t, on: true }));
+    }
+    n.list.forEach(r => { if (r && !r.id) r.id = _igNoteNewId(); });
+    return n.list;
+}
+function _installNoteEdits() {
+    const n = _installNotesCfg();
+    if (!n.edits || typeof n.edits !== 'object' || Array.isArray(n.edits)) n.edits = {};
+    return n.edits;
+}
+// The wording a standard note prints: the site's own if it has been edited, else the
+// built-in. ONE resolver, so the panel cannot show one string while the page prints
+// another - the trap the image code had.
+function _installNoteText(note) {
+    const ov = _installNoteEdits()[note.key];
+    if (typeof ov === 'string' && ov.trim()) return ov.trim();
+    try { return note.text(); } catch (e) { return ''; }
+}
+// Re-derive the legacy string. Called after every write to the list.
+function _installNoteSyncCustom() {
+    const n = _installNotesCfg();
+    n.custom = _installNoteList().filter(r => r && r.on && (r.text || '').trim())
+        .map(r => r.text.trim()).join('\n');
+}
 function _installNotesCfg() {
     // Must be a real object, not merely truthy: a string or number from a
     // hand-edited project file would take the `||` branch, and then assigning
@@ -28320,10 +30920,10 @@ function _installNoteLines() {
         if (!_installNoteOn(n.key)) return;
         // The units note would be nonsense with dual units off, whatever is stored.
         if (n.key === 'units' && !_specDualUnit()) return;
-        try { const t = n.text(); if (t) out.push(t); } catch (e) {}
+        const t = _installNoteText(n);
+        if (t) out.push(t);
     });
-    const custom = (_installNotesCfg().custom || '').trim();
-    if (custom) custom.split(/\n+/).forEach(l => { const t = l.trim(); if (t) out.push(t); });
+    _installNoteList().forEach(r => { if (r && r.on) { const t = (r.text || '').trim(); if (t) out.push(t); } });
     return out;
 }
 
@@ -28406,6 +31006,51 @@ function _installNoteHeightAt(paras, fs, lead) {
 // every note ticked the column can outrun the page; shrinking a little beats
 // overflowing off the bottom, and beats shrinking the drawing.
 const IG_NOTE_FS_MIN = 5.8;
+// How much of the content height the install/breaker plan takes before the size slider
+// scales it. 0.42 lands close to the per-piece spec sheet's floorplan detail, which is
+// the size a designer already reads these at.
+const IG_PLAN_H_FRAC = 0.42;
+// ── THE PAGE'S WIDTH IS ONE BUDGET ───────────────────────────────────────
+// The left column and the elevation share the content width, so there is ONE number and
+// the drawing gets the rest. `legendW` is that number: an "Elevation width" control is
+// the SAME value read from the other end, which is why the two sliders track each other
+// instead of being two settings a designer has to reconcile. The Width field on a
+// glazing run is the same idea - an operation on one truth rather than a second store.
+//
+// THE FAIL-SAFE IS THE CLAMP, and it binds from both ends. The column can never take so
+// much that the drawing is a strip, and never so little that the legend wraps its own
+// labels; the elevation slider writes through the same clamp, so pulling the drawing
+// wider simply stops when the column reaches its floor.
+// A WIDESCREEN ELEVATION IS HEIGHT-CONSTRAINED, which is why an Elevation width slider
+// looked broken: `fitIn` takes the smaller of the two fits, so on a 915x340 content area
+// a 1.9-aspect wall is already as wide as its HEIGHT allows and extra width becomes
+// empty page. Widening only ever bit below about 646pt.
+// So the drawing is allowed to rise BESIDE the title, which is where the reference sheets
+// put it - heading and notes down the left, drawing against the right edge from the top
+// of the sheet. Guarded by a real MEASUREMENT of the title block rather than an
+// assumption about the column: a long wall name is user text with no length limit, and a
+// drawing that starts at the top margin behind it would print through the heading.
+const IG_TITLE_CLEAR = 18;   // gap between the title block's right edge and the drawing
+const IG_COL_MIN = 110, IG_COL_MAX = 340;
+const IG_ELEV_MIN_FRAC = 0.45;   // the drawing never drops below this share of the width
+const IG_COL_GUTTER = 20;
+function _igColW(cfg, contentW) {
+    const w = (cfg && isFinite(cfg.legendW)) ? Number(cfg.legendW) : 170;
+    const room = (contentW > 0) ? (contentW * (1 - IG_ELEV_MIN_FRAC) - IG_COL_GUTTER) : IG_COL_MAX;
+    return Math.max(IG_COL_MIN, Math.min(Math.min(IG_COL_MAX, room), w));
+}
+// The mirror: what the drawing gets once the column and its gutter are paid for.
+function _igElevW(cfg, contentW) {
+    return Math.max(0, contentW - _igColW(cfg, contentW) - IG_COL_GUTTER);
+}
+// …and back again, so the elevation slider writes the one stored number.
+function _igColWForElevW(elevW, contentW) {
+    return Math.max(IG_COL_MIN, Math.min(IG_COL_MAX, contentW - IG_COL_GUTTER - elevW));
+}
+// The nominal page, for a panel that has to offer a range before any page is rendered.
+function _igNominalContentW() {
+    try { const r = _safeFrameRect(960, 540); return r.R - r.L; } catch (e) { return 915; }
+}
 function _installNoteFit(doc, boxW, maxH, fsScale) {
     const start = IG_NOTE_FS * (fsScale || 1);
     let fs = start, lead = IG_NOTE_LEAD * (fsScale || 1);
@@ -28423,15 +31068,47 @@ function _installNoteBoxH(doc, boxW, maxH, fsScale) {
     const f = _installNoteFit(doc, boxW, maxH || 0, fsScale);
     return f ? f.h : 0;
 }
-function _drawInstallNoteBox(doc, x, y, boxW, maxH, fsScale) {
+// A hex, defaulted. Kept separate from the drawer so the measure pass and the draw pass
+// cannot disagree about which colour is in play, and so a bad stored value degrades to
+// the default rather than throwing out of a page render.
+const IG_NOTE_INK_DEFAULT = '#141414';
+// Anything too pale to read on a white sheet falls back to the default rather than
+// printing invisibly. A project that picked white while the strip still offered it would
+// otherwise go on printing nothing, with the tick list insisting the note is on.
+const IG_NOTE_INK_MIN_DARK = 0.82;   // relative luminance; #d8d8d8 is ~0.72, #e6e6e6 ~0.84
+function _installNoteInk(v) {
+    const s = ('' + (v || '')).trim();
+    if (!(s.charAt(0) === '#' && (s.length === 7 || s.length === 4))) return IG_NOTE_INK_DEFAULT;
+    // _annHexToRgb returns {r,g,b}, NOT an array. Indexing it gives three undefineds,
+    // which is exactly how the note ink shipped broken in 17.71: setTextColor was handed
+    // undefined three times and the note printed in nothing at all.
+    const rgb = _annHexToRgb(s);
+    if (!rgb) return IG_NOTE_INK_DEFAULT;
+    const lum = (0.2126 * rgb.r + 0.7152 * rgb.g + 0.0722 * rgb.b) / 255;
+    return (lum > IG_NOTE_INK_MIN_DARK) ? IG_NOTE_INK_DEFAULT : s;
+}
+// The body has always printed a shade lighter than the heading. Derived rather than a
+// second stored colour, so picking one ink keeps the two in relationship instead of
+// giving a designer two dials for one decision.
+function _installNoteBodyRgb(rgb) {
+    const lift = (c) => Math.max(0, Math.min(255, Math.round(c + (255 - c) * 0.12)));
+    return { r: lift(rgb.r), g: lift(rgb.g), b: lift(rgb.b) };
+}
+function _drawInstallNoteBox(doc, x, y, boxW, maxH, fsScale, ink) {
     const f = _installNoteFit(doc, boxW, maxH || 0, fsScale);
     if (!f) return;
     try { doc.setLineDashPattern([], 0); } catch (e) {}
     let ty = y + f.fs;
-    doc.setFont(_font('sans'), 'bold'); doc.setFontSize(f.fs + 0.5); doc.setTextColor(20, 20, 20);
+    // THE NOTE HAS AN INK. Red when it has to be read before anything is drilled, near
+    // black for an ordinary instruction, light grey when it is reference that should not
+    // compete with the drawing. The body sits a little lighter than the heading, as it
+    // always has, so the relationship survives whatever colour is picked.
+    const _nk = _annHexToRgb(_installNoteInk(ink)) || { r: 20, g: 20, b: 20 };
+    const _nb = _installNoteBodyRgb(_nk);
+    doc.setFont(_font('sans'), 'bold'); doc.setFontSize(f.fs + 0.5); doc.setTextColor(_nk.r, _nk.g, _nk.b);
     doc.text('INSTALLATION NOTE', x, ty);
     ty += IG_NOTE_HEAD_GAP + f.lead;
-    doc.setFont(_font('sans'), 'normal'); doc.setFontSize(f.fs); doc.setTextColor(45, 45, 45);
+    doc.setFont(_font('sans'), 'normal'); doc.setFontSize(f.fs); doc.setTextColor(_nb.r, _nb.g, _nb.b);
     f.paras.forEach((p, i) => {
         p.forEach(l => { doc.text(l, x, ty); ty += f.lead; });
         if (i < f.paras.length - 1) ty += IG_NOTE_PARA;
@@ -28459,15 +31136,32 @@ function _igCfg(ovKey) {
     // leaves breakers alone) while making the control actually work.
     const isBreaker = ('' + ovKey).indexOf('elevgrp:') === 0;
     const base = isBreaker ? {
-        variant: 'elevOnly',
-        plan: 'full',
+        // NOT FORCED ANY MORE, but still breaker-OWNED. The force existed so Install-guide
+        // globals could not bleed onto every breaker page; its own slots do that job
+        // without also making the setting unreachable. Default stays elevation-only, so a
+        // deck that never touches it is unchanged.
+        variant: (g.breakerVariant === 'elevPlan') ? 'elevPlan' : 'elevOnly',
+        plan: (g.breakerPlan === 'zoom') ? 'zoom' : 'full',
         legend: !!g.breakerLegend,
         legendCols: g.breakerLegendCols === 2 ? 2 : 1,
         legendScale: (typeof g.breakerLegendScale === 'number') ? g.breakerLegendScale : 1,
         legendW: (typeof g.breakerLegendW === 'number') ? g.breakerLegendW : 150,
-        planScale: 1,
+        planScale: (typeof g.breakerPlanScale === 'number') ? g.breakerPlanScale : 1,
         noteW: (typeof g.breakerNoteW === 'number') ? g.breakerNoteW : 1,
-        noteFs: (typeof g.breakerNoteFs === 'number') ? g.breakerNoteFs : 1
+        noteFs: (typeof g.breakerNoteFs === 'number') ? g.breakerNoteFs : 1,
+        noteInk: _installNoteInk(g.breakerNoteInk),
+        // LEFT on a breaker, and that is the pairing rather than a preference: the
+        // drawing anchors bottom-RIGHT on this page, so notes on the right would sit in
+        // the one place the elevation wants. The reference sheets read the same way,
+        // title and notes down the left, drawing against the right edge.
+        noteSide: (g.breakerNoteSide === 'right') ? 'right' : 'left',
+        // THREE TICKS, NOT ONE. A mockup has no artwork in it, so its image-code line
+        // prints a column of em dashes; and art dimensions matter on a sheet somebody
+        // orders from while overall dimensions matter on one somebody hangs from.
+        // Default: the two that were always there, so an existing deck is unchanged.
+        legendDims: (g.breakerLegendDims !== false),
+        legendArt: !!g.breakerLegendArt,
+        legendCode: (g.breakerLegendCode !== false)
     } : {
         variant: g.variant || 'elevPlan',
         plan: g.plan || 'full',                 // 'full' | 'zoom' (cropped around the pins)
@@ -28480,7 +31174,13 @@ function _igCfg(ovKey) {
         // directly against how big the elevation can be, which is why they're
         // adjustable per page rather than a fixed compromise.
         noteW: (typeof g.noteW === 'number') ? g.noteW : 1,
-        noteFs: (typeof g.noteFs === 'number') ? g.noteFs : 1
+        noteFs: (typeof g.noteFs === 'number') ? g.noteFs : 1,
+        noteInk: _installNoteInk(g.noteInk),
+        // RIGHT on an install-guide page, which is where it has always printed.
+        noteSide: (g.noteSide === 'left') ? 'left' : 'right',
+        legendDims: (g.legendDims !== false),
+        legendArt: !!g.legendArt,
+        legendCode: (g.legendCode !== false)
         // No `measure` here: which guides appear is decided in the Elevations
         // tab and captured verbatim, so there is nothing to configure per page.
     };
@@ -28495,7 +31195,12 @@ function _igCfg(ovKey) {
         legendW: (typeof ov.legendW === 'number') ? ov.legendW : base.legendW,
         planScale: (typeof ov.planScale === 'number') ? ov.planScale : base.planScale,
         noteW: (typeof ov.noteW === 'number') ? ov.noteW : base.noteW,
-        noteFs: (typeof ov.noteFs === 'number') ? ov.noteFs : base.noteFs
+        noteFs: (typeof ov.noteFs === 'number') ? ov.noteFs : base.noteFs,
+        noteInk: ov.noteInk ? _installNoteInk(ov.noteInk) : base.noteInk,
+        noteSide: ov.noteSide ? ((ov.noteSide === 'left') ? 'left' : 'right') : base.noteSide,
+        legendDims: (ov.legendDims !== undefined) ? !!ov.legendDims : base.legendDims,
+        legendArt: (ov.legendArt !== undefined) ? !!ov.legendArt : base.legendArt,
+        legendCode: (ov.legendCode !== undefined) ? !!ov.legendCode : base.legendCode
     };
 }
 // `forBreaker` routes the GLOBAL write to the breaker-only legend slots, so a
@@ -28505,8 +31210,12 @@ function _igCfg(ovKey) {
 function _igSet(patch, ovKey, forBreaker) {
     editorialContent.installGuide = editorialContent.installGuide || {};
     const g = editorialContent.installGuide;
-    const simple = ['variant', 'plan', 'legendCols', 'legend', 'legendScale', 'legendW', 'planScale', 'noteW', 'noteFs'];
-    const BREAKER_SLOT = { legend: 'breakerLegend', legendCols: 'breakerLegendCols', legendScale: 'breakerLegendScale', legendW: 'breakerLegendW', noteW: 'breakerNoteW', noteFs: 'breakerNoteFs' };
+    const simple = ['variant', 'plan', 'legendCols', 'legend', 'legendScale', 'legendW', 'planScale', 'noteW', 'noteFs', 'noteInk', 'noteSide', 'legendDims', 'legendArt', 'legendCode'];
+    // EVERY SETTING WITH A BREAKER-ONLY GLOBAL HAS TO BE IN HERE. A field missing from
+    // this map is written to the INSTALL slot while the breaker goes on reading its own,
+    // so the control moves a value nothing reads and reads as simply not working. That is
+    // what happened to noteInk and noteSide the day each was added.
+    const BREAKER_SLOT = { legend: 'breakerLegend', legendCols: 'breakerLegendCols', legendScale: 'breakerLegendScale', legendW: 'breakerLegendW', noteW: 'breakerNoteW', noteFs: 'breakerNoteFs', noteInk: 'breakerNoteInk', noteSide: 'breakerNoteSide', legendDims: 'breakerLegendDims', legendArt: 'breakerLegendArt', legendCode: 'breakerLegendCode', variant: 'breakerVariant', plan: 'breakerPlan', planScale: 'breakerPlanScale' };
     if (ovKey) {
         g.perPage = g.perPage || {};
         const cur = g.perPage[ovKey] || {};
@@ -29012,8 +31721,7 @@ async function _igElevCapture(elevIdx) {
 // `active !== false` because an inactive frame is still in the array but isn't drawn.
 function _flatGraphicElevFor(r) {
     if (!r) return null;
-    return (typeof elevations !== 'undefined' ? elevations : [])
-        .find(e => e && e.frames && e.frames.some(fr => fr && fr.id === r.id && fr.active !== false)) || null;
+    return _elevShowingPiece(r.id, { active: true });
 }
 // One graphic's panel schedule, drawn under its spec block. Only in Split output mode
 // and only when its wall carries a glazing run. Extracted when the sheet learned to
@@ -29439,15 +32147,28 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     const _igNoteCfg = _igCfg((arg && arg._ovKey) || '');
     const _igNoteFs = _installNoteFsScale(_igNoteCfg);
     const _igNoteW = _installNoteColW(SR.R - SR.L, _igNoteCfg);
-    const _igNoteX = SR.R - _igNoteW;
-    const _igNoteH = _installNoteBoxH(doc, _igNoteW, SR.B - SR.T, _igNoteFs);
-    if (_igNoteH > 0) {
-        _drawInstallNoteBox(doc, _igNoteX, SR.T, _igNoteW, SR.B - SR.T, _igNoteFs);
-        // Take the column off the RIGHT edge, not the bottom. Every layout below
-        // fits its drawing to SR.R, so shrinking it once here is the whole change —
-        // and on a widescreen page most of this width was slack the drawing wasn't
-        // using, which is why the column is so much cheaper than a band.
-        SR.R -= (_igNoteW + IG_NOTE_GUTTER);
+    // The column takes its width off whichever edge it sits on. Everything below fits to
+    // SR.L / SR.R, so moving one number is the whole change.
+    const _igNoteLeft = (_igNoteCfg.noteSide === 'left');
+    // A RIGHT column is drawn HERE, up front, for the reason above: it takes width off
+    // SR.R and every early return is already past this point.
+    //
+    // A LEFT column cannot be. It has to sit UNDER the letter legend, in ONE column, and
+    // both of those live below the title band whose height is not known yet. Drawn beside
+    // the legend instead it read as two stacked columns squeezing the drawing, which is
+    // what "when I have installation notes checked it pushes the letter legend to the
+    // right" was. So the left case is DEFERRED to _igDrawLeftNotes, called the moment the
+    // band is measured and still ahead of every early return.
+    let _igNoteH = 0;
+    if (!_igNoteLeft) {
+        _igNoteH = _installNoteBoxH(doc, _igNoteW, SR.B - SR.T, _igNoteFs);
+        if (_igNoteH > 0) {
+            _drawInstallNoteBox(doc, SR.R - _igNoteW, SR.T, _igNoteW, SR.B - SR.T, _igNoteFs, _igNoteCfg && _igNoteCfg.noteInk);
+            // Off the RIGHT edge, not the bottom. Every layout below fits its drawing to
+            // SR.R, so shrinking it once here is the whole change, and on a widescreen
+            // page most of that width was slack the drawing was not using.
+            SR.R -= (_igNoteW + IG_NOTE_GUTTER);
+        }
     }
     // The drawing keeps its FULL height: the column runs alongside it, so there is
     // nothing to clear vertically. _igNoteBottom stays at SR.T for that reason.
@@ -29455,7 +32176,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     const _igNoteBottom = SR.T;
     const M = SR.L;                       // keep the local name: it's used ~40 times below
     const isElev = !!(arg && arg.frames);                 // elevation vs single piece row
-    const elev = isElev ? arg : (typeof elevations !== 'undefined' ? elevations : []).find(e => e && e.frames && e.frames.some(fr => fr.id === arg.id));
+    const elev = isElev ? arg : _elevShowingPiece(arg && arg.id);
     const featuredId = isElev ? null : (arg && arg.id);   // null → all frames full opacity
     const activeFrames = elev ? elev.frames.filter(f => f && f.active !== false) : [];
     const lookupRow = (id) => (typeof dashProjectData !== 'undefined' ? dashProjectData : []).find(rr => rr && rr.id === id) || {};
@@ -29473,10 +32194,87 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     // the box is shorter than the title block, so this changes nothing; a long note
     // set pushes the drawing down rather than being drawn over.
     const _igTop = Math.max(_igBand.body + _subtitleClear() + 22, _igNoteBottom + 12);
+    // DECLARED ABOVE THE FIRST THING THAT READS THEM. `_igLegTop` two lines down uses
+    // IG_LEG_TOP_GAP, and a const declared further into the function is read in the TDZ -
+    // the file parses, `node --check` passes, and every install and breaker page throws
+    // on render. Third time this trap has been sprung in this file.
+    const IG_LEG_ROW_H = 8.6, IG_LEG_GAP = 4, IG_LEG_LETTER_W = 13, IG_LEG_TOP_GAP = 10;
+    // THE LEGEND IS TEXT, SO IT SITS ON THE SUBHEADING'S OWN CLEARANCE. `_igTop` is the
+    // DRAWING's top and carries an extra 22pt, which the elevation needs for the wall
+    // dimension that prints above it - the legend needs none of that, and starting it
+    // there left an obvious hole under ELEVATION DETAIL.
+    // The item code prints on that same clearance when a page carries one, so the legend
+    // steps over it rather than through it.
+    const _igCodeId = isElev ? (activeFrames.length === 1 ? (activeFrames[0].id || '') : '') : ((arg && arg.id) || '');
+    // The title block's real right edge, measured in the faces it prints in. Anything
+    // starting right of this can rise to the top margin without touching it.
+    let _igTitleRight = SR.R;
+    try {
+        // Resolved exactly as the two drawers resolve it - _titleStyleFor /
+        // _subtitleStyleFor so a per-page type override is measured too, and
+        // _pdfTitleStyle because a title prints BOLD. Measuring the heading in regular
+        // underestimates it, and a long bold heading is the thing being protected.
+        const _ts = _titleStyleFor();
+        doc.setFont(_font(_ts.font), _pdfTitleStyle(_ts.font)); doc.setFontSize(_ts.size);
+        let w = doc.getTextWidth((zone || '') + '');
+        const _ss = _subtitleStyleFor();
+        doc.setFont(_font(_ss.font), _pdfTitleStyle(_ss.font)); doc.setFontSize(_ss.size);
+        w = Math.max(w, doc.getTextWidth('ELEVATION DETAIL' + (isElev && _catLayoutTag(arg) ? (' \u00b7 ' + _catLayoutTag(arg)) : '')));
+        if (_igCodeId) { const _cs = _specCodeStyle(); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); w = Math.max(w, doc.getTextWidth(_igCodeId + '')); }
+        _igTitleRight = M + w;
+    } catch (e) { _igTitleRight = SR.R; }
+    // Where a drawing placed at `left` may start. Beside the title it gets the whole
+    // sheet; under it, the usual content top.
+    const _igDrawTop = (left) => ((left > _igTitleRight + IG_TITLE_CLEAR) ? SR.T : _igTop);
+    const _igLegTop = _igBand.sub + _subtitleClear() + (_igCodeId ? 10 : 0) + IG_LEG_TOP_GAP;
+    // ── THE LEFT COLUMN READS TOP TO BOTTOM: LEGEND, NOTES, PLAN ─────────
+    // One column, three things, in the order the reference sheets put them. The notes
+    // take the LEGEND's width when there is a legend, so the two align on both edges
+    // instead of being two ragged columns of different widths.
+    // `_igLeftColW` is what the layouts below reserve; it is the wider of the two, so a
+    // page with notes and no legend still gets its column.
+    // TIGHTER, AND THE LETTER GETS ITS OWN GUTTER. The letter used to be glued to the
+    // front of the first label ("A: Overall dimensions"), so the three lines of a block
+    // started at three different x positions and the block read as a paragraph rather
+    // than a table. It sits in a fixed column now with every line aligned after it,
+    // which also buys back the width the inline letter was eating.
+    // The leading came down from 10/6 to 8.6/4: at three lines per letter the old rhythm
+    // spent a third of the column on air, and that air is what the notes need.
+    const _igLegKeys = [
+        _igNoteCfg.legendDims !== false ? 'dims' : null,
+        _igNoteCfg.legendArt ? 'art' : null,
+        _igNoteCfg.legendCode !== false ? 'code' : null
+    ].filter(Boolean);
+    const _igLegendOn = !!(_igNoteCfg.legend && activeFrames.length);
+    const _igLegendW = _igLegendOn ? _igColW(_igNoteCfg, SR.R - SR.L) : 0;
+    // The same arithmetic drawLegendBlocks uses, and the constants are shared with it so
+    // the reserved height and the drawn height cannot drift.
+    const _igLegendH = _igLegendOn
+        ? activeFrames.length * ((Math.max(1, _igLegKeys.length) * IG_LEG_ROW_H + 5) + IG_LEG_GAP)
+        : 0;
+    // ONE WIDTH FOR THE LEFT COLUMN, legend or no legend. It used to be the legend's
+    // width when a legend printed and the note multiplier's when it did not, so the
+    // "Column width" slider moved nothing on exactly the page that shows a legend -
+    // two controls, one of them inert, for a single column.
+    let _igLeftColW = _igNoteLeft ? _igColW(_igNoteCfg, SR.R - SR.L) : _igLegendW;
+    if (_igNoteLeft) {
+        const nw = _igLeftColW;
+        const ny = _igLegTop + (_igLegendOn ? (_igLegendH + IG_NOTE_GUTTER) : 0);
+        _igNoteH = _installNoteBoxH(doc, nw, SR.B - ny, _igNoteFs);
+        if (_igNoteH > 0) _drawInstallNoteBox(doc, SR.L, ny, nw, SR.B - ny, _igNoteFs, _igNoteCfg && _igNoteCfg.noteInk);
+    }
+    // What the left column has already spent, so the plan knows where it can start.
+    const _igLeftUsedH = (_igLegendOn ? _igLegendH : 0)
+        + ((_igNoteLeft && _igNoteH > 0) ? (_igNoteH + (_igLegendOn ? IG_NOTE_GUTTER : 0)) : 0);
     _drawPageTitle(doc, PW, PH, zone);
     _applySubtitleType(doc);
-    doc.text('ELEVATION DETAIL', M, _igBand.sub);
-    const codeId = isElev ? (activeFrames.length === 1 ? (activeFrames[0].id || '') : '') : (arg.id || '');
+    // THE LAYOUT'S NAME RIDES THE SUBHEADING. A catalogue page titled ART.1C tells a
+    // client nothing about which of the four arrangements they are looking at, and the
+    // name is the one thing that does. Through `_catLayoutTag`, so this and the CSV
+    // column cannot describe the placement differently.
+    const _igArrTag = isElev ? _catLayoutTag(arg) : '';
+    doc.text('ELEVATION DETAIL' + (_igArrTag ? (' \u00b7 ' + _igArrTag) : ''), M, _igBand.sub);
+    const codeId = _igCodeId;
     if (codeId) { const _cs = _specCodeStyle(); const _crgb = _annHexToRgb(_cs.color); doc.setFont(_font(_cs.font), _pdfFontStyle(_cs.font)); doc.setFontSize(Math.min(_cs.size, 13)); doc.setTextColor(_crgb.r, _crgb.g, _crgb.b); doc.text(codeId, M, _igBand.sub + _subtitleClear() + 10); }
 
     try {
@@ -29564,8 +32362,16 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                         // destination box's own aspect, white-filled first (an
                         // unfilled canvas exports pure black once flattened to
                         // JPEG \u2014 that was the black-background bug).
-                        const xs = pins.filter(rr => rr && rr.planX != null).map(rr => rr.planX);
-                        const ys = pins.filter(rr => rr && rr.planY != null).map(rr => rr.planY);
+                        // The LINE ENDS count as well as the pins. A zoom centred on the
+                        // dot alone can cut a long wall run in half, and the half you lose
+                        // is the half that says how far the hang extends.
+                        const xs = [], ys = [];
+                        pins.forEach(rr => {
+                            if (!rr) return;
+                            if (rr.planX != null) xs.push(rr.planX);
+                            if (rr.planY != null) ys.push(rr.planY);
+                            _wallAllSegs(rr).forEach(sg => { xs.push(sg[0], sg[2]); ys.push(sg[1], sg[3]); });
+                        });
                         if (xs.length) {
                             const cxFrac = xs.reduce((a, b) => a + b, 0) / xs.length;
                             const cyFrac = ys.reduce((a, b) => a + b, 0) / ys.length;
@@ -29591,6 +32397,27 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const [pw2, ph2] = fitIn(pasp, pmaxW, pmaxH);
                     const py0 = planBottom - ph2;
                     doc.addImage(srcData, 'JPEG', px0, py0, pw2, ph2);
+                    // THE WALL LINE, the same mark the floorplan page draws. A pin says
+                    // which room; the line says which wall and how much of it, which is
+                    // the thing an installer standing in the room actually needs. Drawn
+                    // BEFORE the pins so the dot sits on top of its own line, and through
+                    // the shared _wallAllSegs so a custom multi-segment run and a simple
+                    // one behave identically here and on the plan page.
+                    // FP_WALL_LINE_ALPHA is the one value all the wall-line renderers
+                    // read; a local number here is how the preview starts lying.
+                    try {
+                        doc.setDrawColor(200, 40, 40); doc.setLineWidth(2.2);
+                        _fpDocLineAlpha(doc, FP_WALL_LINE_ALPHA);
+                        pins.forEach(rr => {
+                            _wallAllSegs(rr).forEach(sg => {
+                                const a = mapPin({ planX: sg[0], planY: sg[1] });
+                                const b = mapPin({ planX: sg[2], planY: sg[3] });
+                                doc.line(px0 + a[0] * pw2, py0 + a[1] * ph2, px0 + b[0] * pw2, py0 + b[1] * ph2);
+                            });
+                        });
+                        // Back to opaque, or the pins and everything under them inherit it.
+                        _fpDocLineAlpha(doc, 1);
+                    } catch (e) { try { _fpDocLineAlpha(doc, 1); } catch (e2) {} }
                     doc.setFillColor(200, 40, 40);
                     pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) { const mp = mapPin(rr); if (mp[0] >= 0 && mp[0] <= 1 && mp[1] >= 0 && mp[1] <= 1) doc.circle(px0 + mp[0] * pw2, py0 + mp[1] * ph2, 3, 'F'); } });
                     return { x: px0, y: py0, w: pw2, h: ph2 };
@@ -29601,24 +32428,40 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 // Compact 2 lines per letter: "A: Overall dimensions .... 24x24 in"
                 // then "Image code .... FJH.2503366".
                 const legendOn = !!(cfg.legend && activeFrames.length);
-                const legendBlockWDefault = Math.max(110, Math.min(300, cfg.legendW || 170));
-                const legendGutter = 20;
+                const legendBlockWDefault = _igColW(cfg, SR.R - M);
+                const legendGutter = IG_COL_GUTTER;
                 // Draws EVERY letter's block (2 lines each: "A: Overall
                 // dimensions .... 24x24 in" then "Image code .... FJH.2503366"),
                 // starting at topY, and returns the Y just past the last block.
                 // Never truncates — every frame's letter must always appear.
                 const sectionGap = 6;   // fixed, tight — not user-adjustable (see note below)
+                // WHICH LINES A LETTER BLOCK PRINTS. A mockup has no artwork in it, so the
+                // image-code line is a column of em dashes on exactly the page a catalogue
+                // uses most; and art dimensions matter to whoever orders the print while
+                // overall dimensions matter to whoever hangs it. One tick could not say
+                // that, so there are three. Ticking none leaves the letters themselves,
+                // which is still the thing the legend is for.
+                const _legLines = [
+                    cfg.legendDims !== false ? 'dims' : null,
+                    cfg.legendArt ? 'art' : null,
+                    cfg.legendCode !== false ? 'code' : null
+                ].filter(Boolean);
                 const drawLegendBlocks = (lx, topY, blockW) => {
-                    const rowH2 = 10, blockH = 2 * rowH2 + 5;
+                    // The SAME metrics the layout reserved above, or the notes stacked
+                    // under this block land on top of its last line.
+                    const rowH2 = IG_LEG_ROW_H, blockH = Math.max(1, _legLines.length) * rowH2 + 5;
+                    // Every line starts after the letter gutter and still ends on the
+                    // block's right edge, so the values form one column down the page.
+                    const tx = lx + IG_LEG_LETTER_W, tw = blockW - IG_LEG_LETTER_W;
                     const leader = (label, value, ly) => {
                         doc.setFont(_font('spec'), 'bold'); doc.setFontSize(7); doc.setTextColor(20, 20, 20);
-                        doc.text(label, lx, ly);
+                        doc.text(label, tx, ly);
                         const labelW2 = doc.getTextWidth(label);
                         doc.setFont(_font('spec'), 'normal');
                         const vs = (value || '') + '';
                         const vw = doc.getTextWidth(vs);
-                        doc.text(vs, lx + blockW - vw, ly);
-                        const d0 = lx + labelW2 + 3, d1 = lx + blockW - vw - 3;
+                        doc.text(vs, tx + tw - vw, ly);
+                        const d0 = tx + labelW2 + 3, d1 = tx + tw - vw - 3;
                         if (d1 > d0) {
                             doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(160, 160, 160); doc.setLineWidth(0.5);
                             doc.line(d0, ly - 1.8, d1, ly - 1.8);
@@ -29628,12 +32471,27 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const sorted = activeFrames.slice().sort((fa, fb) => ('' + (fa.letter || '')).localeCompare('' + (fb.letter || '')));
                     sorted.forEach((f, fi) => {
                         const rr = lookupRow(f.id);
-                        const by = topY + fi * (blockH + sectionGap) + rowH2;
-                        const dims = (rr.extW && rr.extH) ? (rr.extW + ' \u00d7 ' + rr.extH + ' ' + (typeof elevUnit !== 'undefined' ? elevUnit : 'in')) : '\u2014';
-                        leader((f.letter || '?') + ': Overall dimensions', dims, by);
-                        leader('Image code', (rr.imageCode || '').trim() || '\u2014', by + rowH2);
+                        const by = topY + fi * (blockH + IG_LEG_GAP) + rowH2;
+                        // Both through the ONE formatter, so the legend follows dual units
+                        // exactly as the spec pages beside it do. It also fixes a smaller
+                        // thing: the stored sizes are in `dashUnit` and were being labelled
+                        // with `elevUnit`, which only agreed because they usually match.
+                        const dims = _igLegDimText(rr.extW, rr.extH);
+                        // The IMAGE OPENING, through the one function that defines it, so
+                        // this cannot drift from the five other places that print it.
+                        const _op = (typeof _rowOpeningAndPrint === 'function') ? _rowOpeningAndPrint(rr) : null;
+                        const art = _op ? _igLegDimText(_op.openW, _op.openH) : '\u2014';
+                        const vals = { dims: dims, art: art, code: (rr.imageCode || '').trim() || '\u2014' };
+                        const labs = { dims: 'Overall dimensions', art: 'Art dimensions', code: 'Image code' };
+                        // THE LETTER IS ITS OWN COLUMN, drawn once on the first line
+                        // whatever that line turns out to be. Inline on the label it
+                        // pushed line one right and left lines two and three hanging.
+                        doc.setFont(_font('spec'), 'bold'); doc.setFontSize(7.6); doc.setTextColor(20, 20, 20);
+                        doc.text((f.letter || '?'), lx, by);
+                        if (!_legLines.length) return;
+                        _legLines.forEach((k, li) => { leader(labs[k], vals[k], by + li * rowH2); });
                     });
-                    return topY + sorted.length * (blockH + sectionGap);
+                    return topY + sorted.length * (blockH + IG_LEG_GAP);
                 };
                 // Light grey stroke — plan view only. Elevations never get one.
                 const strokeImg = (ix, iy, iw2, ih2) => { doc.setDrawColor(210, 210, 210); doc.setLineWidth(0.75); doc.rect(ix, iy, iw2, ih2, 'S'); };
@@ -29641,11 +32499,20 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     // Elevation fills the remaining width as large as it can,
                     // bottom-anchored. If the legend is on, it gets its own
                     // column to the left first — never over the drawing.
-                    const legendColW = legendOn ? (legendBlockWDefault + legendGutter) : 0;
-                    if (legendOn) drawLegendBlocks(M, yTop, legendBlockWDefault);
+                    // ONE column for the legend AND the notes stacked under it, not one
+                    // each. Two columns is what squeezed the drawing to a strip.
+                    const legendColW = _igLeftColW ? (_igLeftColW + legendGutter) : 0;
+                    if (legendOn) drawLegendBlocks(M, _igLegTop, legendBlockWDefault);
                     const ex0 = M + legendColW;
-                    const [ew, eh] = fitIn(aspect, SR.R - ex0, yBot - capH - yTop);
-                    const ex = ex0 + ((SR.R - ex0) - ew) / 2, ey = yBot - capH - eh;
+                    // The drawing rises beside the title when it clears it, which is what
+                    // makes the Elevation width control mean anything: with the extra
+                    // height the fit stops being height-bound and the width starts to bite.
+                    const eTop = _igDrawTop(ex0);
+                    const [ew, eh] = fitIn(aspect, SR.R - ex0, yBot - capH - eTop);
+                    // Bottom-RIGHT anchored, not centred: it reads against both page edges
+                    // the way the reference sheets do, and slack from the aspect ratio ends
+                    // up as one gap beside the legend rather than two smaller ones.
+                    const ex = Math.max(ex0, SR.R - ew), ey = yBot - capH - eh;
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
                     // Lines and numbers as real vector text on top of the picture.
                     _drawElevAnnOps(doc, cap.vec, ex, ey, ew, eh);
@@ -29664,13 +32531,19 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     // the plan — so the elevation is only ever pushed over by
                     // that ONE column, never squeezed further.
                     const gutter = 24;
-                    const leftW = (SR.R - M) * 0.26;
+                    // At least as wide as whatever the left column already holds, so the
+                    // plan lines up with the legend and the notes above it instead of
+                    // being a third width in the same column.
+                    const leftW = Math.max((SR.R - M) * 0.26, _igLeftColW);
                     const colH = yBot - capH - yTop;
                     let colTop = yTop;
                     if (legendOn) {
                         const blockW = Math.min(leftW, legendBlockWDefault);
-                        colTop = drawLegendBlocks(M, colTop, blockW) + sectionGap;
+                        colTop = drawLegendBlocks(M, _igLegTop, blockW) + sectionGap;
                     }
+                    // The notes were drawn up front, so the plan has to step over them
+                    // rather than under them. LEGEND, NOTES, PLAN, top to bottom.
+                    if (_igNoteLeft && _igNoteH > 0) colTop = Math.max(colTop, _igLegTop + _igLeftUsedH + sectionGap);
                     if (cfg.variant === 'elevFrames') {
                         try {
                             const codesOnWall = {};
@@ -29707,12 +32580,22 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                         } catch (e) {}
                     }
                     const planScale = Math.max(0.4, Math.min(1, cfg.planScale || 1));
-                    const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, ((yBot - capH) - colTop) * planScale);
+                    // A SIZE, NOT THE LEFTOVERS. It used to fill everything between the
+                    // column above and the page bottom, so ticking install notes pushed
+                    // colTop down and squeezed the plan until it could not be read - and
+                    // the more notes, the smaller the drawing that explains them.
+                    // IG_PLAN_H_FRAC is a proportion of the CONTENT height, near the size
+                    // the per-piece spec sheet's floorplan detail prints at, and the size
+                    // slider scales it in both plan modes rather than only the zoomed one.
+                    const planAvail = (yBot - capH) - colTop;
+                    const planTarget = Math.min(planAvail, (yBot - capH - yTop) * IG_PLAN_H_FRAC);
+                    const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, Math.max(0, planTarget) * planScale);
                     if (pr) { strokeImg(pr.x, pr.y, pr.w, pr.h); drawCaption('Floorplan', pr.x, yBot - 2); }
                     // Elevation: everything right of the left column, as large as it fits.
                     const ex0 = M + leftW + gutter;
-                    const [ew, eh] = fitIn(aspect, SR.R - ex0, colH);
-                    const ex = ex0 + ((SR.R - ex0) - ew) / 2, ey = yBot - capH - eh;
+                    const eTop = _igDrawTop(ex0);
+                    const [ew, eh] = fitIn(aspect, SR.R - ex0, (yBot - capH) - eTop);
+                    const ex = Math.max(ex0, SR.R - ew), ey = yBot - capH - eh;
                     doc.addImage(cap.dataUrl, 'JPEG', ex, ey, ew, eh);
                     // Lines and numbers as real vector text on top of the picture.
                     _drawElevAnnOps(doc, cap.vec, ex, ey, ew, eh);
@@ -29730,7 +32613,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             }
             // capture failed → fall through to the legacy vector render below
         }
-        const er = elev ? await renderElevationToCanvas(elev, featuredId, { wireframe: _isWireframe(), dpi: 46 }) : null;
+        const er = elev ? await renderElevationToCanvas(elev, featuredId, { wireframe: _elevIsWireframe(elev), dpi: 46 }) : null;
         if (er && er.canvas) {
             const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
             const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
@@ -29827,12 +32710,25 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
 // Auto-crop the marked-up floorplan around a piece's pin. Reuses the pin data
 // (planX/planY per placement group) and category colours from the floorplan
 // key page, so the crop matches the markup — no manual cropping per page.
+// AN OPTION ROW ANSWERS FOR ITSELF. `_fpGroups` deliberately leaves catalogue options
+// out - an alternate is not a second place on the plan - but a spec page for one still
+// has to draw the crop, and looking its group up there returned nothing. Every option
+// spec page lost its floorplan thumbnail, in catalogue AND in Final Spec, which is
+// exactly the set of pages a catalogue is made of.
+// It can answer because it already MIRRORS the mockup slot's pin (see CAT_ROW_DEEP), so
+// this reads the row rather than reaching back through the walls for the slot.
+function _catRowAsPlanGroup(r) {
+    if (!r || !r.id) return null;
+    if (!_catOptionRowIds()[r.id] && !_catAltArrRowIds()[r.id]) return null;
+    if (r.planX == null || r.planY == null) return null;
+    return { key: _artGroupKey(r.id), planX: r.planX, planY: r.planY, level: r.level || 0, planZoom: r.planZoom };
+}
 async function _planCropCanvasForRow(r, opts) {
     try {
         if (!r || !r.id) return null;
         const groups = _fpGroups();
         const gk = _artGroupKey(r.id || '');
-        const g = groups.find(x => x.key === gk);
+        const g = groups.find(x => x.key === gk) || _catRowAsPlanGroup(r);
         if (!g || g.planX == null || g.planY == null) return null;
         const lv = (typeof floorplanLevels !== 'undefined' ? floorplanLevels : [])[g.level || 0];
         if (!lv || !lv.imageData) return null;
@@ -30018,12 +32914,9 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
 
         // — Elevation context (lower-right, prominent): the wall this piece
         //   lives on, beauty view, with THIS piece full-color and the rest faded. —
-        let elevForPiece = null;
-        for (const e of elevations) {
-            if (e.frames && e.frames.some(fr => fr.id === r.id)) { elevForPiece = e; break; }
-        }
+        const elevForPiece = _elevShowingPiece(r.id);
         if (elevForPiece) {
-            const elevRender = await renderElevationToCanvas(elevForPiece, r.id, { wireframe: _isWireframe(), dpi: 28 });
+            const elevRender = await renderElevationToCanvas(elevForPiece, r.id, { wireframe: _elevIsWireframe(elevForPiece), dpi: 28 });
             if (elevRender && elevRender.canvas) {
                 // Flatten onto white for JPEG.
                 let elevUrl;
@@ -30417,7 +33310,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         _elevDrawn = { y: boxY, h: boxH };
     } else if (tpl.elevation) {
         let elev = null;
-        for (const e of elevations) { if (e.frames && e.frames.some(fr => fr.id === r.id)) { elev = e; break; } }
+        elev = _elevShowingPiece(r.id);
         // TICKED BUT NOT YET ON A WALL: reserve the box rather than collapsing it.
         // A page that reflows every time a piece gets placed is a page you cannot
         // lay out until the project is finished. Same grey box the template cards
@@ -30430,7 +33323,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         };
         if (!elev) _elevMiss();
         if (elev) {
-            const er = await renderElevationToCanvas(elev, r.id, { wireframe: _isWireframe(), dpi: 28 });
+            const er = await renderElevationToCanvas(elev, r.id, { wireframe: _elevIsWireframe(elev), dpi: 28 });
             if (er && er.canvas) {
                 let url;
                 try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); url = flat.toDataURL('image/jpeg', 0.82); }
@@ -30818,7 +33711,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // Which rows: current selection, or all rows if opts.all.
     let rows = [];
     if (opts.all) {
-        rows = dashProjectData.filter(r => r && (r.id || r.artworkUrl));
+        rows = _deckSpecRows();
         if (wantSpec && !rows.length) { showInfoModal('No pieces', 'There are no pieces in the project yet. Add frames in the Frame Dashboard, then try again.'); return; }
     } else {
         rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
@@ -30828,7 +33721,6 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // Page format: widescreen to match the studio's reference decks (~1.73:1),
     // not US-Letter. One constant drives both the first page and every addPage;
     // all draw code reads PW/PH from the page so layouts reflow automatically.
-    const PAGE_FORMAT = [936, 540];   // pt — 936/540 ≈ 1.733, the reference aspect
     const doc = new jsPDF({ orientation: 'landscape', unit: 'pt', format: PAGE_FORMAT });
     await _registerPdfFonts(doc);   // embed brand TTFs (Druk/Messina); Helvetica fallback
     // Wait for the BROWSER to have Druk/Messina before drawing anything.
@@ -31120,8 +34012,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const _stepsFor = (u, li) => {
         if (_useBreakers && !u._manual) {
             const out = []; const members = u.members || [];
-            let ge = null, gi = -1, best = 0;
-            (elevations || []).forEach((e, ei) => { if (!e || !e.frames) return; let c = 0; members.forEach(m => { if (e.frames.some(fr => fr && fr.id === m.id)) c++; }); if (c > best) { best = c; ge = e; gi = ei; } });
+            // THE SAME shared rule the studio calls. These were two hand-written copies
+            // of one loop, which is how the PDF grows a page the preview never showed.
+            const br = _breakerElevFor(u, _units);
+            const ge = br && br.elev, gi = br ? br.idx : -1;
             // _ovKey must ride along exactly like the studio preview's breaker
             // desc builds it (see _deckPageList): _drawInstallGuidePage keys
             // EVERYTHING breaker-specific off 'elevgrp:' — the elevation-only
@@ -31133,7 +34027,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             // wall that is only wallcovering / window film already prints its full
             // dimensioned elevation on its own sheet, so a breaker is that drawing
             // twice — and a page the preview doesn't show is worse than either.
-            if (ge && !_breakerSkipUnit(members)) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerCodeFor(u), _noPlan: _breakerNoPlan(), _idx: gi, _ovKey: 'elevgrp:' + u.key }), idx: gi, _groupKey: u.key, li: li });
+            if (ge && !_breakerSkipUnit(members)) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerNameFor(u, br), _noPlan: _breakerNoPlan(), _idx: gi, _ovKey: _breakerOvKeyFor(u, br) }), idx: gi, _groupKey: u.key, li: li });
             // Group A/B/C: the breaker is followed by the ONE grouped spec page,
             // not a page per member. No _forceTpl, so the walk below routes it
             // through _drawSpecSetPage exactly as it would without a breaker.
@@ -31556,6 +34450,24 @@ function _specDualPart(v, from, to) {
 // reads it — per piece, Group A/B/C, shared specs — because buildSpecStrings
 // defaults to it. Install-guide pages carry no spec text; their numbers come
 // from the elevation renderer, which is a separate job.
+// THE LETTER LEGEND PRINTS SPEC NUMBERS, so it follows the spec dual-unit setting and
+// the same convention the spec pages use: INCHES FIRST whatever the project stores, with
+// the companion in brackets. The comment on _specDualUnit used to say install pages carry
+// no spec text - the letter legend is exactly that, and it was printing raw stored values
+// labelled with the elevation's unit while every spec page beside it printed both.
+function _igLegDimText(w, h) {
+    const nw = parseFloat(w), nh = parseFloat(h);
+    if (!isFinite(nw) || !isFinite(nh) || nw <= 0 || nh <= 0) return '\u2014';
+    const from = (typeof dashUnit !== 'undefined' ? dashUnit : 'in');
+    const du = _specDualUnit();
+    if (!du) return dashFmt(nw) + ' \u00d7 ' + dashFmt(nh) + ' ' + from;
+    const one = (v) => {
+        const inches = v * unitFactor(from, 'in');
+        const snapped = Math.round(inches * 1e6) / 1e6;
+        return parseFloat(snapped.toFixed(2)).toString() + '\u0022' + _specDualPart(inches, 'in', du);
+    };
+    return one(nw) + ' \u00d7 ' + one(nh);
+}
 function _specDualUnit() {
     const ec = (typeof editorialContent !== 'undefined' && editorialContent) || {};
     let v = ec.specDualUnit;
@@ -32118,9 +35030,14 @@ function buildDashCSVString() {
         // Print Panels is the Illustrator artboard set for a split window-film
         // graphic: `panel:printW x printH` per panel, semicolon separated, RAW
         // INCHES like the columns above it. Blank for `full` output.
-        `Material,Print Output,Print Panels (in)\n`;
+        `Material,Print Output,Print Panels (in),Arrangement\n`;
+
+    // A catalogue mockup's slots define the arrangement and are not items anyone can
+    // order - they carry no artwork and no image code. Computed once rather than per row.
+    const _catSlots = _catSlotRowIds();
 
     dashProjectData.forEach(r => {
+        if (r && r.id && _catSlots[r.id]) return;
         // Factor to convert this row's display values back to inches.
         // Used for the RAW columns at the end of the row so InDesign can
         // re-render in any output unit without unit-suffix parsing.
@@ -32277,7 +35194,13 @@ function buildDashCSVString() {
                         .map(p => (r.id || '') + '.' + p.label + ':' + dashFmt(p.printW * toIn) + ' x ' + dashFmt(p.printH * toIn))
                         .join('; ');
                 } catch (e) { return ''; }
-            })()
+            })(),
+            // Arrangement: which LAYOUT of a catalogue placement this row belongs to,
+            // "C - Triptych". Blank on everything that is not a catalogue. Appended at the
+            // very end like the three columns above it, because the InDesign script
+            // addresses columns BY NAME and a new trailing one is invisible to it while an
+            // inserted one shifts every position after it.
+            _catLayoutTagForRow(r.id)
         ];
         csv += d.map(s => `"${String(s).replace(/"/g, '""')}"`).join(',') + '\n';
     });
@@ -32317,6 +35240,9 @@ function renderDashTable() {
         return;
     }
 
+    // Computed ONCE per render: each walks every wall, and this runs per row.
+    const _dashCatSlots = _catSlotRowIds();
+    const _dashCatOpts = _catOptionRowIds();
     dashProjectData.forEach((row, index) => {
         const isCanvas = (row.product === "Framed Canvas (Floater)");
         const isFrameless = (row.product === "Frameless Canvas (Wrapped)");
@@ -32339,6 +35265,12 @@ function renderDashTable() {
 
         const tr = document.createElement('tr');
         if (index === dashSelectedRowIndex) tr.className = 'selected';
+        // A LEFT STRIPE, NOT A TINTED ROW. `.selected` owns the background and two colours
+        // fighting over it is how the selected row stops reading as selected - the same
+        // reasoning the wall rail's mockup/option stripes were built on, and the same
+        // amber and blue, so one colour language covers both places these walls appear.
+        if (_dashCatSlots[row.id]) tr.classList.add('dash-cat-slot');
+        else if (_dashCatOpts[row.id]) tr.classList.add('dash-cat-option');
         // If the row has constraint violations, mark it with a yellow indicator
         // and stash the messages on the title attribute (hover tooltip).
         const rowWarnings = validateRow(row);
@@ -33023,6 +35955,8 @@ function initElevControls() {
             </div>`;
     });
     container.innerHTML = html;
+    // Drag a row to move its picture to another frame. The frames stay where they are.
+    _wireElevArtReorder(container);
     // Hover-pair wiring is done by drawElevAll after frame DOM is rendered,
     // since panels and frames need their events attached at the same time
     // and frame elements only exist after drawElevAll runs.
@@ -33371,6 +36305,8 @@ function showInfoModal(title, body, onOk) {
     okBtn.className = 'action-btn';
     okBtn.style.height = '32px';
     okBtn.innerText = 'OK';
+    // OK is how this box closes, so Escape and the backdrop press it too.
+    okBtn.setAttribute('data-modal-close', '');
     okBtn.onclick = () => {
         document.getElementById('infoModal').style.display = 'none';
         if (typeof onOk === 'function') onOk();
@@ -33390,13 +36326,21 @@ function showInfoModal(title, body, onOk) {
 // modal (primary action up top, cancel-style at bottom).
 //
 // Usage: showConfirmModal('Delete row?', 'This cannot be undone.', 'Delete', 'Cancel', onYes, onNo);
-function showConfirmModal(title, body, yesLabel, noLabel, onYes, onNo) {
+// opts.danger    - the Yes button DESTROYS something: it is painted as
+//                  destructive, and focus starts on the other button, so a
+//                  reflexive Enter cancels rather than deletes.
+// opts.mustChoose - there is no neutral way out, so Escape and the backdrop do
+//                  nothing. For a question where BOTH answers act, like
+//                  "restore this backup or throw it away", an accidental
+//                  Escape must not pick one of them.
+function showConfirmModal(title, body, yesLabel, noLabel, onYes, onNo, opts) {
+    const o = opts || {};
     document.getElementById('infoModalTitle').innerText = title;
     document.getElementById('infoModalBody').innerText = body;
     const btnRow = document.getElementById('infoModalButtons');
     btnRow.innerHTML = '';
     const yesBtn = document.createElement('button');
-    yesBtn.className = 'action-btn';
+    yesBtn.className = o.danger ? 'action-btn btn-danger' : 'action-btn';
     yesBtn.style.height = '32px';
     yesBtn.innerText = yesLabel || 'OK';
     yesBtn.onclick = () => {
@@ -33410,6 +36354,8 @@ function showConfirmModal(title, body, yesLabel, noLabel, onYes, onNo) {
     noBtn.style.color = 'var(--text-main)';
     noBtn.style.borderColor = 'var(--border-color)';
     noBtn.innerText = noLabel || 'Cancel';
+    if (!o.mustChoose) noBtn.setAttribute('data-modal-close', '');
+    if (o.danger) noBtn.setAttribute('data-modal-initial', '');
     noBtn.onclick = () => {
         document.getElementById('infoModal').style.display = 'none';
         if (typeof onNo === 'function') onNo();
@@ -33417,6 +36363,373 @@ function showConfirmModal(title, body, yesLabel, noLabel, onYes, onNo) {
     btnRow.appendChild(yesBtn);
     btnRow.appendChild(noBtn);
     const _im2 = document.getElementById('infoModal'); _im2.style.zIndex = '100010'; _im2.style.display = 'flex';
+}
+
+// ONE WAY TO ASK BEFORE DESTROYING SOMETHING. There were sixteen native
+// confirm() calls and five uses of the styled box, so the same kind of question
+// arrived in two looks, half of them as browser chrome over the app, in wording
+// that varied from call to call: some said Delete and some Remove, a few
+// mentioned Undo and most did not. One of them told designers deleting a wall
+// "cannot be undone" when deleteElevation pushes history and it can be.
+//
+// `undoable` is REQUIRED and there is no default, because the sentence it
+// chooses is a promise. Saying Ctrl+Z will bring something back when it will
+// not is worse than saying nothing, so every caller has to decide, and a test
+// reads that every call site states it.
+//
+// VERB RULE: Delete when the thing is gone (a wall, a template, a style, a
+// stage), Remove when it is taken out of the deck and can be put back without
+// Ctrl+Z (a built-in page, the overlays on one page).
+function _askYesNo(title, body, yes, no, opts) {
+    return new Promise((resolve) => {
+        if (typeof showConfirmModal !== 'function') { resolve(false); return; }
+        showConfirmModal(title, body, yes, no, () => resolve(true), () => resolve(false), opts);
+    });
+}
+function _confirmDestroy(o) {
+    const tail = o.undoable ? 'You can undo this with Ctrl+Z.' : 'This can’t be undone.';
+    const body = (o.body ? o.body + String.fromCharCode(10, 10) : '') + tail;
+    showConfirmModal(o.title, body, o.confirm || 'Delete', 'Cancel', o.onConfirm, null, { danger: true });
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// EVERY DIALOG BEHAVES THE SAME WAY: ESCAPE, THE BACKDROP, AND FOCUS.
+// There were 21 .frame-modal dialogs and not one closed on Escape, while the
+// shortcut comment above the elevation keys claimed Escape "also closes
+// modals". Three dialogs built in JS did close on a backdrop click, and all
+// three had the classic bug: `click` fires on the common ancestor of the
+// mousedown and the mouseup, so selecting text in a field and releasing past
+// the card's edge closed the dialog and threw the typing away.
+//
+// CLOSING GOES THROUGH EACH DIALOG'S OWN CLOSE CONTROL, never a blanket
+// display:none. The dialogs clean up after themselves in different ways -
+// Bulk Edit moves the real dashboard form back where it came from, the Frame
+// Pack build cancels a job - so the shared code finds the control marked
+// [data-modal-close] and clicks it. A dialog with no such control is left
+// alone rather than guessed at; a test walks every one so none is missed.
+//
+// ESCAPE is deliberate, so it closes anything that has a close control, with
+// three exceptions that each own Escape for something else:
+//   - a full-screen TOOL (.fm-over: the floorplan markup and the moodboard
+//     editor), where Escape already means "cancel the line I am drawing" and
+//     losing the whole tool to that reflex is the worse error;
+//   - a dialog marked [data-modal-busy], where Escape would cancel running
+//     work nobody meant to cancel;
+//   - focus inside a TEXTAREA or rich text, where a paragraph is at stake.
+// THE BACKDROP is not deliberate - it is where a slightly missed click lands -
+// so it closes only dialogs marked [data-modal-backdrop], the ones with
+// nothing in them to lose, and only when the press STARTED on the backdrop.
+//
+// FOCUS moves into a dialog when it opens and back to whatever opened it when
+// it closes, and Tab stays inside while it is open. Without that a keyboard
+// user is left tabbing through the page BEHIND the scrim. Driven by one
+// MutationObserver per dialog on its own style attribute, because dialogs are
+// opened from dozens of places by writing style.display and there is no
+// central open() to hang this on. The page's other observers are unaffected.
+const MODAL_SELECTOR = '.frame-modal';
+// Highest first. The ORDER is what matters here, not the z-index values, which
+// live in style.css as tokens and must not be written out a second time.
+const MODAL_LAYER_ORDER = ['fm-alert', 'fm-progress', 'fm-nested', 'fm-over'];
+
+function _modalIsOpen(m) {
+    if (!m || !m.isConnected) return false;
+    if (m.style && m.style.display === 'none') return false;
+    try { return window.getComputedStyle(m).display !== 'none'; } catch (e) { return true; }
+}
+
+function _modalRank(m) {
+    for (let i = 0; i < MODAL_LAYER_ORDER.length; i++) {
+        if (m.classList.contains(MODAL_LAYER_ORDER[i])) return MODAL_LAYER_ORDER.length - i;
+    }
+    return 0;
+}
+
+// The dialog on top: the highest layer, and among equals the one later in the
+// document, which for anything appended at runtime is the one opened last.
+function _modalTop() {
+    let best = null, bestRank = -1, bestIdx = -1;
+    document.querySelectorAll(MODAL_SELECTOR).forEach((m, i) => {
+        if (!_modalIsOpen(m)) return;
+        const r = _modalRank(m);
+        if (r > bestRank || (r === bestRank && i > bestIdx)) { best = m; bestRank = r; bestIdx = i; }
+    });
+    return best;
+}
+
+function _modalClose(m) {
+    const ctl = m && m.querySelector('[data-modal-close]');
+    if (!ctl) return false;
+    ctl.click();
+    return true;
+}
+
+// Visible WITHOUT asking for layout: offsetParent and getClientRects are both
+// empty under jsdom, and a filter built on them would call every control
+// hidden in every test. Computed display and visibility up to the dialog work
+// in both places.
+function _modalShown(el, m) {
+    for (let n = el; n && n !== m; n = n.parentElement) {
+        if (n.hidden) return false;
+        let cs = null;
+        try { cs = window.getComputedStyle(n); } catch (e) {}
+        const d = (n.style && n.style.display) || (cs && cs.display);
+        const v = (n.style && n.style.visibility) || (cs && cs.visibility);
+        if (d === 'none' || v === 'hidden') return false;
+    }
+    return true;
+}
+
+function _modalFocusables(m) {
+    const sel = 'button, [href], input:not([type=hidden]), select, textarea, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+    return Array.prototype.filter.call(m.querySelectorAll(sel), el => !el.disabled && _modalShown(el, m));
+}
+
+function _modalFocus(el) {
+    if (!el || typeof el.focus !== 'function') return;
+    try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (e2) {} }
+}
+
+const _modalOpener = new WeakMap();
+
+function _modalOnOpen(m) {
+    if (!_modalOpener.has(m)) _modalOpener.set(m, document.activeElement);
+    if (m.contains(document.activeElement)) return;
+    // [data-modal-initial] wins over document order, so a destructive
+    // confirm lands on Cancel rather than on the button that destroys.
+    const pref = m.querySelector('[data-modal-initial]');
+    const list = _modalFocusables(m);
+    const target = (pref && list.indexOf(pref) >= 0) ? pref : list[0];
+    if (target) _modalFocus(target);
+}
+
+function _modalOnClose(m) {
+    const back = _modalOpener.get(m);
+    _modalOpener.delete(m);
+    if (back && back.isConnected && back !== document.body) _modalFocus(back);
+}
+
+function _modalWatch(m) {
+    if (!m || m._modalWatched) return;
+    m._modalWatched = true;
+    if (!m.getAttribute('role')) m.setAttribute('role', 'dialog');
+    m.setAttribute('aria-modal', 'true');
+    if (!m.getAttribute('aria-label') && !m.getAttribute('aria-labelledby')) {
+        const h = m.querySelector('h1, h2, h3, h4');
+        if (h) {
+            if (!h.id) h.id = (m.id || 'frameModal' + Math.random().toString(36).slice(2, 8)) + 'Title';
+            m.setAttribute('aria-labelledby', h.id);
+        }
+    }
+    let was = _modalIsOpen(m);
+    try {
+        new MutationObserver(() => {
+            const now = _modalIsOpen(m);
+            // "Still open" runs the open path too: showInfoModal rebuilds its
+            // buttons while the box is up, which drops focus off the old ones.
+            if (now) _modalOnOpen(m);
+            else if (was) _modalOnClose(m);
+            was = now;
+        }).observe(m, { attributes: true, attributeFilter: ['style', 'class'] });
+    } catch (e) {}
+    if (was) _modalOnOpen(m);
+}
+
+function _modalInit() {
+    try { document.querySelectorAll(MODAL_SELECTOR).forEach(_modalWatch); } catch (e) {}
+    // Dialogs built at runtime are appended to <body> and closed by REMOVING
+    // them, which an attribute observer never sees. Direct children only, so a
+    // redraw deep in the elevation (sixty times a second on a drag) never
+    // reaches this.
+    try {
+        new MutationObserver(recs => recs.forEach(r => {
+            r.addedNodes.forEach(n => { if (n.nodeType === 1 && n.matches && n.matches(MODAL_SELECTOR)) _modalWatch(n); });
+            r.removedNodes.forEach(n => { if (n.nodeType === 1 && n._modalWatched) _modalOnClose(n); });
+        })).observe(document.body, { childList: true });
+    } catch (e) {}
+}
+
+// CAPTURE PHASE, so a dialog closes before the elevation's own Escape
+// (deselect everything) or Deck Studio's (disarm the tool) runs underneath it.
+// Closing a dialog is the whole meaning of that keypress.
+document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    const m = _modalTop();
+    if (!m) return;
+    if (m.classList.contains('fm-over') || m.hasAttribute('data-modal-busy')) return;
+    const t = e.target;
+    if (t && m.contains(t) && (t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (_modalClose(m)) { e.preventDefault(); e.stopImmediatePropagation(); }
+}, true);
+
+document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    const m = _modalTop();
+    if (!m) return;
+    const list = _modalFocusables(m);
+    if (!list.length) { e.preventDefault(); return; }
+    const first = list[0], last = list[list.length - 1], a = document.activeElement;
+    if (!m.contains(a)) { e.preventDefault(); _modalFocus(first); return; }
+    if (e.shiftKey && a === first) { e.preventDefault(); _modalFocus(last); }
+    else if (!e.shiftKey && a === last) { e.preventDefault(); _modalFocus(first); }
+}, true);
+
+// A DIV THAT ACTS AS A BUTTON IS PRESSED LIKE ONE. The three view tabs, the wall
+// rail and a wall's delete control are divs with an onclick, so a keyboard could
+// not reach them at all: tabindex puts them in the Tab order, and this presses them
+// on Enter or Space the way a real <button> is pressed. Opt-in by
+// [data-kbd-click] rather than by role, so nothing starts responding to keys it
+// did not ask for. Space is cancelled, or it also scrolls the page.
+document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const t = e.target;
+    if (!t || !t.hasAttribute || !t.hasAttribute('data-kbd-click')) return;
+    e.preventDefault();
+    t.click();
+});
+
+// Where the press STARTED. A click whose mousedown began inside the card is a
+// drag that happened to end on the backdrop, not a click on the backdrop.
+let _modalPressOn = null;
+document.addEventListener('mousedown', function (e) { _modalPressOn = e.target; }, true);
+document.addEventListener('click', function (e) {
+    const m = e.target;
+    if (!m || !m.classList || !m.classList.contains('frame-modal')) return;
+    if (_modalPressOn !== m) return;
+    if (!m.hasAttribute('data-modal-backdrop')) return;
+    if (m !== _modalTop()) return;
+    _modalClose(m);
+}, true);
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', _modalInit);
+else _modalInit();
+
+// ─────────────────────────────────────────────────────────────────────────
+// UNCAUGHT ERRORS. Nothing was listening for one, on a 27k-line file in a
+// single global scope where a parse is not a load and a load is not a render.
+// Four ReferenceErrors have shipped here that `node --check` waved through and
+// that died at render: _round2, _igElevIdx, IG_LEG_TOP_GAP, and the blanket
+// rename that rewrote a declaration into a self-call. On this machine you
+// notice, because the console is open. On a designer's machine the button
+// simply does nothing, they work around it, and the report arrives a week
+// later as "the breaker pages are weird sometimes".
+//
+// So: catch it, log it, and SAY it once. The value here is not recovery, it is
+// turning a silent dead end into something a designer can report and a
+// maintainer can act on - which is why the notice leads with the version and
+// the build, and offers to put the whole thing on the clipboard.
+//
+// ONCE, and then deduped by fault. A render loop can raise the same error
+// sixty times a second, and a modal per occurrence takes the app away from the
+// person trying to save their work. The first one is a modal because a failure
+// is never safe to miss; a NEW fault after that gets a toast; the same fault
+// again gets nothing but a console line and a slot in the log.
+const FRAME_ERR_MAX = 25;
+const _frameErrors = [];          // the session's log, for support
+const _frameErrSeen = Object.create(null);
+let _frameErrToldUser = false;
+
+// Noise that is not a fault in this app. A cross-origin script reports only
+// "Script error." with no file, line or stack, so there is nothing to report
+// and nothing to fix; ResizeObserver's loop warning is a browser scheduling
+// notice that every layout-heavy page raises.
+function _frameErrIsNoise(msg, where) {
+    const m = (msg || '') + '';
+    if (!m) return true;
+    if (m.indexOf('ResizeObserver loop') >= 0) return true;
+    if (m.indexOf('Script error') >= 0 && !where) return true;
+    return false;
+}
+
+// One string, and it is what gets copied. Version and build first because they
+// are the first question asked of any report, and the stack trimmed to the
+// frames that say where it happened rather than the whole descent.
+function _frameErrDetail(rec) {
+    const lines = [
+        'FRAME ' + APP_VERSION + ' (' + APP_BUILD + ')',
+        rec.when,
+        rec.kind + ': ' + rec.message,
+    ];
+    if (rec.where) lines.push('at ' + rec.where);
+    if (rec.stack) lines.push('', rec.stack);
+    try { lines.push('', navigator.userAgent); } catch (e) {}
+    return lines.join(String.fromCharCode(10));
+}
+
+function _frameReportError(kind, message, where, stack) {
+    try {
+        if (_frameErrIsNoise(message, where)) return;
+        const rec = {
+            when: new Date().toISOString(),
+            kind: kind,
+            message: (message || 'Unknown error') + '',
+            where: where || '',
+            stack: stack || '',
+        };
+        _frameErrors.push(rec);
+        if (_frameErrors.length > FRAME_ERR_MAX) _frameErrors.shift();
+        try { console.error('[FRAME ' + APP_VERSION + '] ' + rec.kind + ': ' + rec.message, rec.where, rec.stack); } catch (e) {}
+        // Deduped on the FAULT, not the occurrence: the same line failing again
+        // is the same news, and this can fire on every frame of a drag.
+        const key = rec.kind + '|' + rec.message + '|' + rec.where;
+        if (_frameErrSeen[key]) return;
+        _frameErrSeen[key] = true;
+        const detail = _frameErrDetail(rec);
+        if (!_frameErrToldUser) {
+            _frameErrToldUser = true;
+            _frameErrAnnounce(detail);
+        } else if (typeof _toast === 'function') {
+            try { _toast('Something else went wrong', rec.message); } catch (e) {}
+        }
+    } catch (e) {
+        // The reporter must never become the fault. Console and nothing else.
+        try { console.error('error reporter failed', e); } catch (e2) {}
+    }
+}
+
+// The first one, said properly. Two buttons rather than an OK, because the one
+// useful action is getting the details somewhere they can be pasted, and
+// _dsCopyText already carries the file:// fallback for a machine where
+// navigator.clipboard is not available.
+function _frameErrAnnounce(detail) {
+    const body = 'FRAME hit an error and part of the page may not have finished drawing. '
+        + 'Your project is still in memory, so use Save Project now before anything else.'
+        + String.fromCharCode(10) + String.fromCharCode(10)
+        + 'Then send these details with a note about what you were doing:'
+        + String.fromCharCode(10) + String.fromCharCode(10) + detail;
+    try {
+        if (typeof showConfirmModal === 'function') {
+            showConfirmModal('FRAME hit an error', body, 'Copy details', 'Close',
+                () => { try { _dsCopyText(detail); } catch (e) {} });
+            return;
+        }
+        if (typeof showInfoModal === 'function') { showInfoModal('FRAME hit an error', body); return; }
+    } catch (e) {}
+    try { console.error(body); } catch (e) {}
+}
+
+// Registered at module scope so a fault during boot is caught too. Both halves
+// are needed and they see different things: `error` catches a throw that
+// escaped, `unhandledrejection` catches a promise nobody attached a catch to,
+// which is most of the async work in this file (captures, font loads, the PDF
+// build, and now the autosave).
+if (typeof window !== 'undefined' && window.addEventListener) {
+    window.addEventListener('error', function (ev) {
+        // A failed <img>/<script> load fires `error` on the ELEMENT. Those do
+        // not bubble, so they should not arrive here at all, but a capture-phase
+        // listener added later would change that - and every one of them is
+        // already handled by its own onerror. Check rather than assume.
+        if (ev && ev.target && ev.target !== window && ev.target.nodeType === 1) return;
+        const err = ev && ev.error;
+        const where = (ev && ev.filename)
+            ? (ev.filename + (ev.lineno ? ':' + ev.lineno : '') + (ev.colno ? ':' + ev.colno : ''))
+            : '';
+        _frameReportError('Error', (err && err.message) || (ev && ev.message), where, err && err.stack);
+    });
+    window.addEventListener('unhandledrejection', function (ev) {
+        const r = ev && ev.reason;
+        const msg = (r && r.message) || (typeof r === 'string' ? r : '') || 'Promise rejected with no reason';
+        _frameReportError('Unhandled promise rejection', msg, '', r && r.stack);
+    });
 }
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -33436,314 +36749,236 @@ let HELP_VIDEO_TYPE = '';  // optional override
 
 // Module state remembers which tab + section was last viewed so reopening
 // the modal returns to where the user left off.
-let _helpActiveTab = 'video';
+let _helpActiveTab = 'reference';   // Video only once there is a video - see openHelpModal
 let _helpActiveSection = 'getting-started';
 
 // Reference content. Each section is a group of entries. Entry titles
 // match the visible UI labels users will search for. Body HTML supports
 // inline <strong>, <span class="help-kbd">…</span> for keyboard chips.
+// THE HELP REFERENCE. It stopped at roughly v1.1: eight sections covering the
+// Frame Dashboard and the Elevation view, and nothing on Deck Studio,
+// floorplans, spec pages, breaker and install pages, PDF generation, window
+// film, wall context or catalogues - which is most of the tool, and all of the
+// parts with conventions a new designer cannot guess. Some of what it did say
+// had stopped being true: walls as "tabs at the top" (they are a rail inside the
+// Elevation view now), multi-select as Shift-click (it is Ctrl+click; Shift is
+// the fine-drag modifier), Sort A-Z "leaving the wall unchanged" (it re-letters
+// the frames), and a Sourced Object "hiding the frame fields" (it behaves as
+// Framed Art, which the Product Type entry already said).
+//
+// BODIES ARE TEMPLATE LITERALS so the copy can carry apostrophes and HTML
+// attributes without escapes. Nothing here may contain a backtick or a dollar
+// brace. An entry with `live` is built when the section opens instead of being
+// read from `body`; see _helpLiveEntry.
+//
+// When something here changes, the words on screen are the source of truth:
+// every control named below is named the way its button or tab spells it.
 const HELP_REFERENCE_DATA = [
     {
         id: 'getting-started',
-        title: 'Getting Started',
-        intro: 'The tool has two main views — the Frame Dashboard, where you spec individual frames, and Elevations, where you arrange them on walls.',
+        title: 'Start here',
+        intro: `FRAME turns a list of pieces into a client presentation. You spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The three tabs at the top are numbered in that order.`,
         entries: [
+            { title: 'Where this project is', live: 'steps' },
             {
-                title: 'The Workflow',
-                body: 'Spec a frame in the <strong>Frame Dashboard</strong> (set the product, frame profile, mats, finish), then use <strong>Push to Wall</strong> to send it to the active elevation. Once frames are on the wall, drag them into place and use the alignment tools to lock the layout in.'
+                title: 'The five steps',
+                body: `<ol class="help-steps">
+<li><strong>Spec the pieces</strong> in <strong>1 Frame Dashboard</strong>. One row per piece: product, size, moulding, mats and artwork.</li>
+<li><strong>Place them on walls</strong> in <strong>2 Elevation</strong>. Pick a wall in the rail, add pieces with <strong>Add &amp; Arrange</strong> (or <strong>Push to Wall</strong> from the dashboard), then drag them into place and dimension them.</li>
+<li><strong>Pin them on the floorplan</strong> in <strong>3 Deck</strong>. Select the floorplan page and use <strong>Place numbers / mark up</strong>. Skip this if the project has no plan.</li>
+<li><strong>Build the deck</strong> in <strong>3 Deck</strong>. Choose a presentation type on the <strong>Project</strong> tab, then check each page on the <strong>Pages</strong> tab.</li>
+<li><strong>Generate the PDF</strong> with <strong>Generate PDF</strong> at the top of Deck Studio. Run <strong>Preflight</strong> first: it lists missing artwork, pins and plan images.</li>
+</ol>The badges on the Elevation and Deck tabs count what is left: pieces that are not on a wall yet, and pieces that are not pinned on the plan.`
             },
             {
-                title: 'Project Units',
-                body: 'The unit toggle in the header (<strong>IN / CM / MM</strong>) applies to the whole project. All values across the dashboard, elevations, and CSV export convert automatically when you switch. Pick the unit your team works in.'
+                title: 'Saving your work',
+                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Load Project</strong> opens the file and FRAME remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>FRAME also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.`
             },
             {
-                title: 'Save & Load Projects',
-                body: '<strong>Save Project</strong> downloads a .json file containing every frame, elevation, and setting. <strong>Load Project</strong> restores it. The tool also auto-saves locally to your browser; if you close the tab and come back, you\'ll be offered to restore.'
+                title: 'Undo',
+                body: `The two arrow buttons beside Load Project undo and redo, as do <span class="help-kbd">Ctrl+Z</span> and <span class="help-kbd">Ctrl+Shift+Z</span>. Undo covers the whole project, so after each one a notice says what changed back: which wall, which piece, or the deck. Most deletes can be undone, and their confirmation says so; the few that cannot (a saved version, for example) say that instead. Undo is paused while a dialog is open, so it cannot change what the dialog is editing.`
             },
             {
-                title: 'Export for Production',
-                body: 'When the project is final, export the CSV (toolbar in dashboard) and the PNG frame swatches (single via the download icon per row, or <strong>Batch PNGs</strong> for everything in one ZIP). Export elevations individually or use <strong>ALL PNG / ALL SVG</strong> to bundle every wall into one ZIP. The CSV feeds the AutoFrameSpecs.jsx InDesign script to generate spec sheets.'
+                title: 'Project units',
+                body: `The <strong>IN / CM / MM</strong> toggle in the header sets the unit for the whole project. The dashboard, the walls and the CSV all convert when you switch.`
+            },
+            {
+                title: 'Getting stuck',
+                body: `If FRAME hits an error it says so in a box with <strong>Copy details</strong>. Save your project first, then send those details with a note about what you were doing. The Version section below says where.`
             }
         ]
     },
     {
         id: 'dashboard',
         title: 'Frame Dashboard',
-        intro: 'Build and edit individual frames. The selected row syncs with the form and preview on the right.',
+        intro: `Build and edit individual pieces. The selected row fills the form and preview on the right.`,
         entries: [
-            {
-                title: '+ Add (new row)',
-                body: 'Creates a new row with default values. The new row inherits the current unit. Each row gets an auto-generated ITEM CODE like <strong>ART.001</strong>.'
-            },
-            {
-                title: 'Product Type',
-                body: 'Seven options: <strong>Framed Art</strong>, <strong>Framed Art (Shadow Box)</strong>, <strong>Framed Canvas (Floater)</strong>, <strong>Frameless Canvas (Wrapped)</strong>, <strong>Sourced Object</strong>, <strong>Wallcovering (EGD)</strong>, or <strong>Window Film (WF)</strong>. Selecting a Canvas variant hides the mat controls. The two flat graphics (EGD, WF) hide the mats and dim the frame fields — the overall size IS the graphic — and add a Material field for the substrate. Sourced Object currently behaves as Framed Art.'
-            },
-            {
-                title: 'Frame Profile (Library / Solid)',
-                body: '<strong>Library</strong> pulls real frame profiles from the synced folder (with depth and rabbet metadata if encoded in the filename). <strong>Solid</strong> uses a flat color for quick mockups. Toggle between them with the buttons under the swatch.'
-            },
-            {
-                title: 'Mat 1, Mat 2, Faux Mat',
-                body: '<strong>Mat 1</strong> is the primary mat — set T/B/L/R values (or use AA for "all around"). <strong>Mat 2</strong> adds a contrasting reveal under Mat 1. <strong>Faux Mat</strong> is a printed white border on the paper instead of an actual mat board (use for cheap or modern looks).'
-            },
-            {
-                title: 'Sync Mat Colors (Chain Icon)',
-                body: 'Between Mat 1 and Mat 2: when active (blue), Mat 2\'s color matches Mat 1 automatically. Turn it off to set them independently. Useful for the common case of matching mats with a small reveal.'
-            },
-            {
-                title: 'Float Mount Mode',
-                body: 'Activates when you switch the panel to <strong>FLOAT</strong> mode. The art floats above a paper backing with white margin around it (no traditional mat). Sets Paper Size, Paper Margin, and White Border separately.'
-            },
-            {
-                title: 'Lock Mat Values',
-                body: 'The <strong>UNLOCKED / LOCKED</strong> toggle next to Mat 1 controls whether T/B/L/R sync. When locked, editing one updates all four (treats them as AA). Convenient for symmetric mats; turn off when you want offset mats.'
-            },
-            {
-                title: 'Download PNG (single frame)',
-                body: 'The download icon in the toolbar exports the currently-selected row as a standalone PNG showing the frame, mats, and art opening with dim labels.'
-            },
-            {
-                title: 'Batch PNGs',
-                body: 'Exports every row as a PNG and bundles them with the project CSV into a single ZIP. Progress modal shows during work. ZIP filename uses your project name + today\'s date.'
-            },
-            {
-                title: 'Import / Export CSV',
-                body: 'The CSV roundtrips — export to share with collaborators or feed into the InDesign script, then re-import to continue editing. Includes raw-inch columns at the end so the InDesign script can render in any output unit.'
-            }
+            { title: '+ Add (new row)', body: `Creates a new row with default values in the current unit. Each row gets an item code like <strong>ART.001</strong>.` },
+            { title: 'Product type', body: `Seven options: <strong>Framed Art</strong>, <strong>Framed Art (Shadow Box)</strong>, <strong>Framed Canvas (Floater)</strong>, <strong>Frameless Canvas (Wrapped)</strong>, <strong>Sourced Object</strong>, <strong>Wallcovering (EGD)</strong> and <strong>Window Film (WF)</strong>. A canvas hides the mat controls. The two flat graphics hide the mats and dim the frame fields, because the overall size IS the graphic, and add a Material field. Sourced Object currently behaves as Framed Art.` },
+            { title: 'Frame profile (Library / Solid)', body: `<strong>Library</strong> uses real moulding profiles from the synced library, with depth and rabbet if the file name carries them. <strong>Solid</strong> uses a flat colour for quick mockups.` },
+            { title: 'Mat 1, Mat 2, Faux Mat', body: `<strong>Mat 1</strong> is the main mat (set top, bottom, left and right, or all around). <strong>Mat 2</strong> adds a reveal under it. <strong>Faux Mat</strong> is a printed white border on the paper instead of a mat board.` },
+            { title: 'Sync mat colours (chain icon)', body: `While it is on, Mat 2 takes Mat 1's colour. Turn it off to set them separately.` },
+            { title: 'Float mount', body: `Switch the panel to <strong>FLOAT</strong>: the art floats on a paper backing with a white margin instead of a mat, with Paper Size, Paper Margin and White Border set separately. It needs at least 0.625" of rabbet.` },
+            { title: 'Lock mat values', body: `<strong>LOCKED</strong> keeps all four mat sides equal as you edit one. Unlock for an offset mat.` },
+            { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
+            { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
+            { title: 'Bulk Images', body: `In the header. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
+            { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
     {
         id: 'elevation',
-        title: 'Elevation View',
-        intro: 'Arrange frames on walls. Each tab at the top is a separate elevation (wall).',
+        title: 'Elevations',
+        intro: `Each wall is its own drawing. The rail on the left lists the walls. The sidebar has three tabs: <strong>Art</strong> for the pieces, <strong>Context</strong> for what is in the room, and <strong>Glass</strong> for window panels.`,
         entries: [
-            {
-                title: 'Push to Wall',
-                body: 'On the dashboard, pick a frame from the <strong>Push to Wall</strong> dropdown and click <strong>Send</strong>. The frame appears on the active elevation, ready to position. Resending a frame creates additional copies (each copy is independent).'
-            },
-            {
-                title: '+ Add (in elevation)',
-                body: 'Adds a generic frame directly to the wall without going through the dashboard. Useful for placeholders. Customize it inline or push a designed frame later to override.'
-            },
-            {
-                title: 'Drag to Position',
-                body: 'Click and drag any frame to move it. Drag snaps to a configurable grid (set in <strong>Settings → Drag Snap</strong>). Shift-click to select multiple frames; drag any selected frame to move the group.'
-            },
-            {
-                title: 'Multi-Select',
-                body: 'Click one frame, then Shift-click others to add to the selection. Or drag a marquee box around them. <span class="help-kbd">Esc</span> deselects everything.'
-            },
-            {
-                title: 'Grouping',
-                body: 'Select multiple frames and press <span class="help-kbd">Ctrl+G</span> (or click the group icon in the panel). Grouped frames move together as one unit. Press again to ungroup.'
-            },
-            {
-                title: 'Align & Distribute',
-                body: 'Click the <strong>Align</strong> icon in the panel header to open the alignment dialog. Options: equal vertical gap, equal horizontal gap, snap-tops, snap-centers, snap-bottoms, distribute. Works on the current selection.'
-            },
-            {
-                title: 'Sort A-Z',
-                body: 'Reorders the frame panel list alphabetically by frame letter (A, B, C…). Visual placement on the wall is unchanged.'
-            },
-            {
-                title: 'Wall Dimensions + Settings Gear',
-                body: 'The W and H inputs set the wall size. The gear icon next to them opens <strong>Settings</strong>: units, hang height, font size, grid, drag snap, nudge step, and keyboard shortcut reference.'
-            },
-            {
-                title: 'Layout Guides',
-                body: 'Toggle icons control on-canvas overlays: <strong>Labels</strong> (A, B, C…), <strong>Frame OD</strong> (outer dimensions), <strong>Spacing</strong> (dim callouts), <strong>Person</strong> (6ft scale figure), <strong>Guides</strong> (center + hang height lines), <strong>Grid</strong>, <strong>Centers</strong> (frame crosshairs), <strong>Custom Lines</strong> (your drawn measure lines), and the <strong>Unit Suffix</strong> toggle.'
-            },
-            {
-                title: 'Zoom + Fit',
-                body: 'The slider zooms the elevation in/out. The <strong>Fit</strong> button auto-fits the wall to the available viewport area.'
-            },
-            {
-                title: 'Export Elevation as PNG',
-                body: 'The download icon in the Wall Dimensions row exports the current elevation including all visible guides as a single PNG. Hide guides you don\'t want baked in before exporting.'
-            },
-            {
-                title: 'Measure Line Tool (M)',
-                body: 'Press <span class="help-kbd">M</span> or click the measure-line button to draw your own dimension lines. Click two points to place a line — endpoints snap to frame corners, frame mid-edges, and wall edges (a blue dot shows the snap target). Drag a placed line away from a frame and a dashed leader bridges the gap only once it clears the frame edge. Select a line and use the arrow handles to slide it, the number to reposition the value, or <span class="help-kbd">Delete</span> to remove it. Toggle line visibility under Layout Guides.'
-            },
-            {
-                title: 'Adjustable Dimension Lines',
-                body: 'Every measurement type — spacing, edge-gap, hang-height, group-box, and drawn measure lines — behaves the same way. Click a line to select it, then drag its 4-way arrows to move the line, drag the number to slide it along the line, and use the × to hide it (where applicable). Dashed leaders only appear when a line is pulled clear of a frame, and never run along floor, ceiling, wall, or frame edges.'
-            },
-            {
-                title: 'Baseboard',
-                body: 'Set a baseboard height in <strong>Settings</strong> (shares the row with Units and Hang Height). It draws a horizontal line at that height across the wall, at the wall lineweight, and exports to SVG/PNG. Set it to 0 to turn it off. Default is 4".'
-            },
-            {
-                title: 'Unit Suffix & Legend',
-                body: 'The <strong>Unit Suffix</strong> toggle in Layout Guides controls how units appear. On: every number shows its unit (3", 6.3 cm, 64 mm). Off: numbers are bare and a single <strong>ALL DIMENSIONS IN INCHES / CENTIMETERS / MILLIMETERS</strong> legend is shown instead (and exported) — useful when per-number suffixes take up too much space.'
-            },
-            {
-                title: 'Export All Elevations (Bulk ZIP)',
-                body: 'The <strong>ALL PNG</strong> and <strong>ALL SVG</strong> buttons render every elevation in the project and bundle them into a single ZIP, one file per elevation named exactly like its tab. A progress bar shows during the run (with Cancel), and you\'re returned to the elevation you were working on when it finishes.'
-            },
-            {
-                title: 'Managing Elevation Tabs',
-                body: 'Each wall is a tab at the top. <strong>Drag tabs</strong> to reorder them. With many elevations the tab strip scrolls horizontally — use the scrollbar or hover and scroll your mouse wheel. The <strong>Frame Dashboard</strong> tab stays pinned on the left. Use <strong>+ Add Wall</strong> to create a new elevation and the × on a tab to delete one.'
-            }
+            { title: 'Walls and the rail', body: `Click a wall in the rail to open it and drag walls to reorder them. <strong>+ Add Wall</strong> makes a new one. The &times; on a wall deletes it, and that can be undone.` },
+            { title: 'Wall mode: ART, EGD, WF', body: `<strong>ART WALL</strong> is the default: framed art hangs on it. <strong>EGD WALL</strong> makes the wall a graphic surface: a wallcovering fills it and stays inside it, above the baseboard. <strong>WF WALL</strong> builds a standard window elevation for window film and opens the Glass tab. A wall with glass on it normally stays an ART wall.` },
+            { title: 'Adding pieces', body: `<strong>Add &amp; Arrange</strong> in the Art tab adds the pieces you tick in one go. From the dashboard, pick a piece in <strong>Push to Wall</strong> and press <strong>Send</strong>. <strong>+ Add</strong> drops a generic placeholder frame.` },
+            { title: 'Moving and selecting', body: `Drag a frame to move it; it snaps to the grid and to the other frames. <span class="help-kbd">Ctrl+click</span> adds a frame to the selection, or drag a box around several. Hold <span class="help-kbd">Shift</span> while dragging for fine movement. <span class="help-kbd">Esc</span> deselects.` },
+            { title: 'Grouping and aligning', body: `Select frames and press <span class="help-kbd">Ctrl+G</span> to group them so they move as one. The <strong>Align</strong> icon opens equal-gap, align-edge and distribute tools for the selection.` },
+            { title: 'Sort A&ndash;Z', body: `Re-letters the frames by their position from left to right, so A is the leftmost piece. The letters print on the drawings and the spec pages, so sort before the deck goes out.` },
+            { title: 'Wall size and Settings', body: `The W and H fields set the wall. The gear beside them opens <strong>Settings</strong>: units, hang height, baseboard, label and dimension style, grid, drag snap and nudge steps.` },
+            { title: 'Layout guides', body: `The guide toggles switch on-drawing overlays: frame letters, outside dimensions, spacing dimensions, the scale figure, the centre and hang lines, the grid, centre marks and more. They are shared by every wall, and Deck Studio's breaker and install pages show the same ones.` },
+            { title: 'Dimensions', body: `Every dimension line works the same way: click it, drag its arrows to move the line, drag the number to slide it along, and use the &times; to hide it. Press <span class="help-kbd">M</span> to draw your own; its ends snap to frame corners, frame edges and the wall.` },
+            { title: 'Baseboard, hang height, units on labels', body: `The baseboard (4" by default) and hang height (57") are in Settings. The <strong>Unit Suffix</strong> guide shows the unit on every number, or turn it off for one "ALL DIMENSIONS IN INCHES" legend instead.` },
+            { title: 'Exporting walls', body: `The download icon beside the wall size exports this wall as a PNG. <strong>ALL PNG</strong> and <strong>ALL SVG</strong> put every wall in one ZIP, named like the walls. The SVG opens as real line work in Illustrator.` },
+            { title: 'Zoom and fit', body: `The slider zooms. <strong>Fit</strong> fits the wall to the window.` }
+        ]
+    },
+    {
+        id: 'context',
+        title: 'Context & glass',
+        intro: `The Context and Glass tabs describe the room, not the art: the client's own elevation to trace from, the furniture and fixtures that decide where art can go, and window panels for film.`,
+        entries: [
+            { title: 'Trace a client elevation', body: `In the Context tab, <strong>+ Add client elevation</strong> puts the client's or architect's drawing behind the wall as a faded tracing guide. It never prints. Use <strong>Fade</strong> to set how strongly it shows and <strong>Place</strong> to move and scale it on the wall.` },
+            { title: 'Calibrate the drawing', body: `<strong>Calibrate</strong> scales the traced drawing to the wall: click the two ends of anything whose real size you know, type the size, and <strong>Apply</strong>. It scales both directions by the same amount, so nothing is stretched. <strong>Un-stretch</strong> undoes a stretch; <strong>Fill wall</strong> is the one deliberate stretch.` },
+            { title: 'Room objects', body: `Pick an item from the Context library (doors, beds, TVs, millwork, lighting and more) and click the wall to place it at its standard size, or drag to size it. Objects print, and they hide what is behind them, which is how you see how much of a wallcovering a headboard covers. Proportions are locked by default, and items with a side view can be turned.` },
+            { title: 'Window panels', body: `In the Glass tab, add a run of glass and divide it into panels; panel widths can differ. A second run continues the first. Drag a run by its grip, never by the glass, so film graphics on it stay clickable. Seams show over the art on purpose: that is where a graphic gets cut.` },
+            { title: 'Printing film per panel', body: `Set a window film piece's <strong>Print Output</strong> to split and it prints one file per pane, each with bleed on every edge, with a panel schedule on its spec sheet. It can be set on the dashboard row or on the spec page in Deck Studio.` }
+        ]
+    },
+    {
+        id: 'catalogue',
+        title: 'Catalogues',
+        intro: `A catalogue is a document of choices, not an order. It shows one arrangement several times over with different artwork, and the client picks. It deliberately does not state quantities.`,
+        entries: [
+            { title: 'The mockup wall', body: `<strong>CATALOGUE MOCKUP</strong> marks a wall as the arrangement: sizes, positions and frames, with no artwork on it. Its breaker page is the grey placement drawing with letters and dimensions.` },
+            { title: 'Image options', body: `Duplicate the mockup to add an image option. The option keeps the mockup's sizes, positions and frames and carries its own pictures and item codes. Move a frame on the mockup and it moves on every option.` },
+            { title: 'Layouts and frame sets', body: `<strong>+ LAYOUT</strong> puts the same frames somewhere else on the wall. <strong>+ SET</strong> offers a different set of frames at the same spot, for example a single piece where set 1 is a salon hang. The codes say which is which: ART.01 is the placement, ART.01A a layout, ART.01.2 frame set 2, and ART.01A.1 an image option.` },
+            { title: 'Reading the rail', body: `A placement is a header with its walls indented under it. Solid amber is the wall the others follow, hollow amber is a layout of it, and blue is an image option. Check the stripe before editing a frame: it tells you whether the change reaches other walls.` },
+            { title: 'Swapping pictures between frames', body: `Drag a row in the frame list to move its artwork to another frame. The frames stay where they are; only the pictures move.` }
+        ]
+    },
+    {
+        id: 'floorplan',
+        title: 'Floorplans',
+        intro: `The plan shows where each piece hangs. Pins say which room; a wall line says which wall and how much of it.`,
+        entries: [
+            { title: 'Adding a plan', body: `In Deck Studio, open the <strong>Pages</strong> tab, select the floorplan page and use <strong>Place numbers / mark up</strong>. <strong>Change plan…</strong> loads the plan image, and <strong>+ Level</strong> adds another floor.` },
+            { title: 'Pinning pieces', body: `In the floorplan panel's <strong>Items</strong> tab, click a piece and then click the plan. <strong>Unplaced</strong> shows only what is left to pin. <strong>Categories</strong> sets the pin colours.` },
+            { title: 'Wall lines', body: `Draw the line along the wall a piece hangs on. Hold <span class="help-kbd">Shift</span> to keep it straight. A magnifier follows the cursor while you place, for accuracy at the page edge.` },
+            { title: 'One piece on several plans', body: `A piece can be pinned on the overall plan and on each guestroom plan. Pins never change quantities: quantity comes from how many walls a piece is placed on.` },
+            { title: 'Plan order in the deck', body: `<strong>Floorplan order</strong> (on the Project tab and on the plan panel's Plan tab, the same setting) puts each plan before its level's pages, all plans first, or plans in an order you set by hand.` }
+        ]
+    },
+    {
+        id: 'deck',
+        title: 'Deck Studio',
+        intro: `The Deck tab lays out the client presentation. Every page on screen is a picture of the printed page, so what you see is what the PDF prints.`,
+        entries: [
+            { title: 'Presentation type', body: `On the <strong>Project</strong> tab, pick <strong>Concept</strong>, <strong>Wireframe</strong>, <strong>Art Development</strong>, <strong>Final Spec</strong>, <strong>Install Guide</strong> or <strong>Catalogue</strong>. Each one sets which pages appear. <strong>Include pages</strong> switches individual pages on and off.` },
+            { title: 'Pages', body: `The <strong>Pages</strong> tab shows every page in order; click one to edit it. Pages you insert can be dragged anywhere, or placed with the gap between two pages. Spec, floorplan and breaker pages follow the project's own order, and a note on each says where that order is set.` },
+            { title: 'Spec pages', body: `Under <strong>SHOW ON PAGE</strong>, tick what the page carries: <strong>Frame corner</strong>, <strong>Moulding profile</strong>, <strong>Floorplan</strong> and <strong>Elevation</strong>. A ticked part you do not have yet keeps its space, so the page does not move while you fill it in. An unticked part is removed. It applies deck-wide by default, or to one page. Pieces print one per page, or grouped A/B/C with shared specs.` },
+            { title: 'Breaker and install pages', body: `These carry a wall's dimensioned drawing with a letter legend, installation notes and, optionally, the plan. Notes are standard items you tick plus your own. <strong>Edit &hellip; in Elevations</strong> jumps to the wall, and a bar there brings you back to the same page.` },
+            { title: 'Headings', body: `Click a page's heading or subheading to change its type. The change applies to the whole deck unless you choose this page only.` },
+            { title: 'Text, arrows, shapes and images', body: `The toolbar adds text, arrows and image placeholders. Select one for its settings (the pen on an image, the + on text). <strong>Layers</strong> hides, locks and reorders everything on the page. Drag an image straight onto a placeholder to fill it.` },
+            { title: 'Page appearance', body: `A page's theme, background (colour, gradient or image) and footer are under its appearance settings. Large background images are stored at a sensible size automatically.` },
+            { title: 'Preview and Preflight', body: `<strong>Preview</strong> renders an exact preview of how the page exports. <strong>Preflight</strong> scans the whole deck for missing artwork, pins, plan images and empty pages. Run it before generating.` },
+            { title: 'Approved', body: `The APPROVED button stamps every page for client sign-off.` }
+        ]
+    },
+    {
+        id: 'export-indesign',
+        title: 'PDF & InDesign',
+        intro: `Generating the client PDF, and handing specs to InDesign.`,
+        entries: [
+            { title: 'Generate PDF', body: `At the top of Deck Studio. Choose all pages, the current page or a range, and a quality: <strong>Draft</strong> for small, fast proofs, <strong>Standard</strong> for everyday decks, <strong>Print</strong> for the highest fidelity and the largest file. <strong>Run Preflight</strong> is right there.` },
+            { title: 'Get the InDesign script', body: `<strong>InDesign Script</strong> downloads <strong>AutoFrameSpecs.jsx</strong>, with instructions for where it goes in InDesign's Scripts folder.` },
+            { title: 'Run the script', body: `In InDesign, with the frame images placed, open <strong>Window &gt; Utilities &gt; Scripts</strong>, double-click AutoFrameSpecs.jsx, point it at the project CSV, and pick the output unit. It builds a spec block under each image.` },
+            { title: 'One CSV, any unit', body: `The CSV carries raw inch columns, so one export runs in inches, centimetres or millimetres with no mixed-unit output.` },
+            { title: 'Batch PNGs for InDesign', body: `<strong>Batch PNGs</strong> bundles every piece and the CSV into one ZIP. Place the PNGs in your document and run the script on the CSV in the same folder: it matches each image to its row.` },
+            { title: 'Floater widths', body: `For floater frames the Frame Size width is the visible canvas face, not the whole moulding. The float reveal defaults to 0.25".` }
         ]
     },
     {
         id: 'settings',
         title: 'Settings',
-        intro: 'Open via the gear icon next to Wall Dimensions in the elevation view.',
+        intro: `The gear beside the wall size in the Elevation view.`,
         entries: [
-            {
-                title: 'Hang Height',
-                body: 'The vertical center line where the average viewer\'s eyes land. Studio standard is <strong>57"</strong> (144.78 cm / 1447.8 mm). The Guides overlay draws a horizontal line at this height for reference. Shares the top row of Settings with Units and Baseboard.'
-            },
-            {
-                title: 'Baseboard',
-                body: 'Draws a horizontal line at the set height from the floor, at the wall lineweight, on the elevation and in SVG/PNG exports. Default <strong>4"</strong>; set to 0 to turn it off. Converts automatically when you switch units.'
-            },
-            {
-                title: 'Dimension Font Size',
-                body: 'Controls the size of all on-canvas labels (frame letters, OD callouts, spacing dimensions). Increase for client review screenshots, decrease for dense walls.'
-            },
-            {
-                title: 'Grid Size',
-                body: 'The visible grid spacing when the Grid layer is on. Independent of Drag Snap — you can have a 6" visible grid but a 1" snap, or vice versa.'
-            },
-            {
-                title: 'Drag Snap',
-                body: 'How far frames "snap" to when dragged. Smaller = more freedom but more fiddly. Larger = cleaner grid alignment but less flexibility. 1" is a good default.'
-            },
-            {
-                title: 'Nudge Step',
-                body: 'Arrow keys nudge selected frames by the <strong>small</strong> value; <span class="help-kbd">Shift+Arrow</span> nudges by the <strong>big</strong> value. Defaults are 1" small and 10" big.'
-            }
+            { title: 'Hang height', body: `Where the centre of the art sits. The studio standard is <strong>57"</strong> (144.78 cm). The guides draw it across the wall.` },
+            { title: 'Baseboard', body: `Drawn at its height across the wall and exported with it. Default 4"; 0 turns it off.` },
+            { title: 'Label and dimension style', body: `The font, size, colour, line weight, dash and line-end style of every dimension and label. It travels in the project file, so a colleague opening it sees the same drawing.` },
+            { title: 'Grid and snap', body: `Grid size is what is drawn; drag snap is what frames move by. They are independent.` },
+            { title: 'Nudge steps', body: `Arrow keys nudge by the small step and <span class="help-kbd">Shift</span>+arrows by the big step. Defaults are 1" and 10".` }
         ]
     },
     {
         id: 'shortcuts',
-        title: 'Keyboard Shortcuts',
-        intro: 'Available throughout the elevation view (when no input field is focused).',
+        title: 'Keyboard shortcuts',
+        intro: `On the wall, these work whenever a text field does not have focus.`,
         entries: [
-            {
-                title: 'Selection',
-                body: '<span class="help-kbd">Click</span> selects one frame. <span class="help-kbd">Ctrl+Click</span> adds/removes from multi-selection. <span class="help-kbd">Esc</span> deselects everything.'
-            },
-            {
-                title: 'Nudging',
-                body: '<span class="help-kbd">↑</span> <span class="help-kbd">↓</span> <span class="help-kbd">←</span> <span class="help-kbd">→</span> nudge selected frames by the small step. Hold <span class="help-kbd">Shift</span> for the big step.'
-            },
-            {
-                title: 'Duplicate',
-                body: '<span class="help-kbd">Ctrl+D</span> duplicates the selected frame(s) with an offset so they\'re visible.'
-            },
-            {
-                title: 'Group / Ungroup',
-                body: '<span class="help-kbd">Ctrl+G</span> toggles grouping on the current selection.'
-            },
-            {
-                title: 'Delete',
-                body: '<span class="help-kbd">Delete</span> removes selected frames from the wall (not from the dashboard). With a measure line selected, it removes that line.'
-            },
-            {
-                title: 'Measure Line Tool',
-                body: '<span class="help-kbd">M</span> toggles the measure-line tool. With a line selected, the arrow keys move it (<span class="help-kbd">Shift</span> for a bigger step) and <span class="help-kbd">Esc</span> exits the tool or clears the selected line.'
-            },
-            {
-                title: 'Undo / Redo',
-                body: '<span class="help-kbd">Ctrl+Z</span> undoes the last action. <span class="help-kbd">Ctrl+Shift+Z</span> or <span class="help-kbd">Ctrl+Y</span> redoes.'
-            },
-            {
-                title: 'Save',
-                body: '<span class="help-kbd">Ctrl+S</span> triggers Save Project (downloads the .json).'
-            }
-        ]
-    },
-    {
-        id: 'export-indesign',
-        title: 'Export & InDesign',
-        intro: 'Hand the CSV + PNG pack off to InDesign for spec sheet generation.',
-        entries: [
-            {
-                title: 'Get the InDesign Script',
-                body: 'Click the <strong>InDesign Script</strong> button to download <strong>AutoFrameSpecs.jsx</strong>. The install instructions modal explains where to place it in your InDesign Scripts folder.'
-            },
-            {
-                title: 'Run the Script',
-                body: 'In InDesign, with a document open and frame images selected on the page, open <strong>Window → Utilities → Scripts</strong>, double-click AutoFrameSpecs.jsx, point it at the project CSV, and pick your output unit (IN / CM / MM). The script generates spec blocks under each image.'
-            },
-            {
-                title: 'One CSV, Any Output Unit',
-                body: 'The CSV includes raw-inch canonical columns so you can export once and run the script in any unit. Dashboard set to IN? Run the script in MM — it converts everything cleanly with no mixed-unit output.'
-            },
-            {
-                title: 'Batch PNGs (ZIP Export)',
-                body: 'The <strong>Batch PNGs</strong> button bundles every frame plus the project CSV into a single ZIP. Unzip into a folder, place all PNGs in your InDesign doc, then run AutoFrameSpecs.jsx pointed at the CSV in the same folder — the script auto-matches each image to its data.'
-            },
-            {
-                title: 'Bulk Elevation Export',
-                body: 'In the elevation view, <strong>ALL PNG</strong> / <strong>ALL SVG</strong> export every wall into one ZIP, each file named after its elevation tab. SVG opens crisp in Illustrator/InDesign; PNG is a flat raster.'
-            },
-            {
-                title: 'Floater Frame Width in Specs',
-                body: 'For floater frames, the spec\'s Frame Size width reports the visible canvas <strong>face width</strong> (the swatch\'s <code>_f</code> value), not the full moulding profile. The Float Reveal defaults to 0.25" and renders in whatever unit you run the script in.'
-            },
-            {
-                title: 'Consistent Units in Output',
-                body: 'Every dimension in the generated spec — Frame Size, Rabbet, mats, paper, Float Reveal, Stretcher — renders in the single unit you pick when running the script, regardless of the unit the CSV was exported in. No mixed in/cm/mm output.'
-            }
+            { title: 'Selection', body: `<span class="help-kbd">Click</span> selects one frame, <span class="help-kbd">Ctrl+Click</span> adds or removes one, <span class="help-kbd">Esc</span> deselects.` },
+            { title: 'Moving', body: `Arrow keys nudge the selection by the small step; hold <span class="help-kbd">Shift</span> for the big step.` },
+            { title: 'Duplicate, group, delete', body: `<span class="help-kbd">Ctrl+D</span> duplicates, <span class="help-kbd">Ctrl+G</span> groups or ungroups, and <span class="help-kbd">Delete</span> takes the selected frames off the wall (they stay in the dashboard).` },
+            { title: 'Measure line', body: `<span class="help-kbd">M</span> toggles the measure-line tool. With a line selected, arrow keys move it and <span class="help-kbd">Esc</span> clears it.` },
+            { title: 'Undo and save', body: `<span class="help-kbd">Ctrl+Z</span> undoes, <span class="help-kbd">Ctrl+Shift+Z</span> or <span class="help-kbd">Ctrl+Y</span> redoes. <span class="help-kbd">Ctrl+S</span> saves and <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else.` },
+            { title: 'Dialogs', body: `<span class="help-kbd">Esc</span> closes the dialog on top, and on a question it means Cancel. <span class="help-kbd">Tab</span> stays inside an open dialog. The full-screen tools (the floorplan markup and the layout editor) keep <span class="help-kbd">Esc</span> for their own tools instead.` },
+            { title: 'Getting around', body: `<span class="help-kbd">Tab</span> reaches every button, the view tabs and the wall rail; <span class="help-kbd">Enter</span> or <span class="help-kbd">Space</span> presses them.` }
         ]
     },
     {
         id: 'tips',
-        title: 'Tips & Gotchas',
+        title: 'Tips',
         entries: [
-            {
-                title: 'Match Mat Color With Reveal',
-                body: 'For the classic "white mat with thin black reveal" look: set Mat 1 to white, turn off the chain icon, set Mat 2 reveal to 0.25" with black color. Or click the chain to sync mat colors when you want them to match.'
-            },
-            {
-                title: 'Float Mount Needs Enough Rabbet',
-                body: 'The float mount stack (paper + spacer + glass + backing) needs at least <strong>0.625" rabbet depth</strong>. The tool warns when rabbet is too shallow for float mount. Increase rabbet or switch to a deeper frame profile.'
-            },
-            {
-                title: 'Sourced Object — No Frame Spec',
-                body: 'For 3D objects, sculptures, or pre-framed pieces from other vendors: pick <strong>Sourced Object</strong> as the product. The dashboard hides frame/mat fields. The wall layout still shows the object\'s overall dimensions.'
-            },
-            {
-                title: 'Use Custom Frame Profiles',
-                body: 'Put profile images in a folder (one PNG per profile), click the folder icon in the Frame Library section, and select that folder. The tool reads filenames for code, width, depth, and rabbet — e.g. <strong>MICH-41-12_1.75_0.625.png</strong> means code MICH-41-12, 1.75" wide, 0.625" rabbet.'
-            },
-            {
-                title: 'Switching Themes',
-                body: 'The sun/moon icon in the header toggles light/dark. The choice persists between sessions.'
-            }
+            { title: 'A white mat with a thin black reveal', body: `Set Mat 1 to white, turn the chain off, and give Mat 2 a 0.25" black reveal.` },
+            { title: 'Float mounts need rabbet', body: `A float mount stack needs at least <strong>0.625"</strong> of rabbet. FRAME warns when the moulding is too shallow.` },
+            { title: 'Sourced Object', body: `For sculptures, objects and pieces framed elsewhere. It currently renders and specs as Framed Art, so clear the frame and mat fields yourself if they should not print.` },
+            { title: 'Your own moulding profiles', body: `Put one image per profile in a folder and choose it from the Frame Library. The file name carries the code, width, depth and rabbet: <strong>MICH-41-12_1.75_0.625.png</strong> is code MICH-41-12, 1.75" wide, 0.625" rabbet.` },
+            { title: 'Light and dark', body: `The sun and moon button switches theme. The drawings and pages stay print colours either way.` }
         ]
     },
     {
         id: 'version',
         title: 'Version',
-        intro: 'About this build of the FRAME tool.',
+        intro: `About this build of FRAME.`,
         entries: [
             {
-                title: 'Current Version',
-                // Body is built dynamically when the section renders so it
-                // picks up the live APP_VERSION / APP_BUILD constants. The
-                // marker placeholders below are replaced at render time.
-                body: '<strong>Version:</strong> {{APP_VERSION}}<br><strong>Build:</strong> {{APP_BUILD}}<br><br>The colored dot in the header pill indicates which build you\'re on at a glance: <strong style="color:#46c772;">green</strong> for production, <strong style="color:#f0883e;">orange</strong> for development.'
+                title: 'Current version',
+                body: `<strong>Version:</strong> {{APP_VERSION}}<br><strong>Build:</strong> {{APP_BUILD}}<br><br>The dot in the header pill says which build you are on: <strong style="color:#46c772;">green</strong> for production, <strong style="color:#f0883e;">orange</strong> for development.`
             },
             {
-                title: 'What\'s New',
-                body: '<strong>v1.1</strong> — Measure-line (M) tool with frame/wall snapping; unified, draggable dimension lines (spacing, edge-gap, hang-height, group-box, custom) with smart dashed leaders that only appear once a line clears a frame; adjustable baseboard; unit-suffix legend; flush-to-floor vertical dims. Bulk elevation export (ALL PNG / ALL SVG to one ZIP); draggable + scrolling elevation tabs with a pinned dashboard tab; export filenames preserved exactly as named. InDesign AutoFrameSpecs: floater face-width in Frame Size, consistent units across all spec lines (incl. Float Reveal + Stretcher), Rabbet without trailing "D", natural-case text, no frame stroke or breaker line, and adjustable below-image gap/width.<br><br><em>Maintainers: edit this list in <code>HELP_REFERENCE_DATA</code> in <code>app.js</code>.</em>'
+                title: `What's new`,
+                body: `<strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+<strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
+<strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
+<strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
+<strong>Earlier</strong> One title band on every page, tick-driven spec pages, notices for things that are safe to miss, a return trip between the deck and the walls, drag-to-reorder deck pages, catalogues, window film panels, and wall context.`
             },
             {
-                title: 'Reporting Issues',
-                body: 'If something\'s not working as expected, note your version (shown above) and the steps to reproduce. Screenshots help. Send to the project maintainer.'
+                title: 'Reporting issues',
+                body: `Open an issue at <a href="https://github.com/JDHilliard-lab/FRAME-dev/issues" target="_blank" rel="noopener" style="color:var(--accent);">github.com/JDHilliard-lab/FRAME-dev/issues</a> with your version and build (above), what you were trying to do, and what happened. Screenshots help.<br><br>If FRAME shows a <strong>FRAME hit an error</strong> box, press <strong>Copy details</strong> and paste that in as well: it carries the version, the build and the stack, which is most of what a fix starts from.`
             }
         ]
     }
 ];
 
 function openHelpModal() {
+    // A Video tab that says "coming soon" is a control that produces no result,
+    // and it was the tab Help OPENED on - the first thing a new designer met.
+    // Hidden until setHelpVideoUrl gives it something to play.
+    const vt = document.getElementById('helpTabVideo');
+    if (vt) vt.style.display = HELP_VIDEO_URL ? '' : 'none';
+    if (!HELP_VIDEO_URL) _helpActiveTab = 'reference';
     document.getElementById('helpModal').style.display = 'flex';
     // Populate the reference sidebar + content (idempotent — re-rendering
     // is cheap and ensures any data updates take effect).
@@ -33804,9 +37039,17 @@ function renderHelpRefSection(sectionId) {
     let html = `<h4>${section.title}</h4>`;
     if (section.intro) html += `<p class="help-section-intro">${fill(section.intro)}</p>`;
     section.entries.forEach(e => {
-        html += `<div class="help-entry"><h5>${e.title}</h5><p>${fill(e.body)}</p></div>`;
+        // A LIVE entry is built now, from the project, rather than read from
+        // static copy - "where this project is" is only true of this project.
+        const body = e.live ? _helpLiveEntry(e.live) : fill(e.body);
+        html += `<div class="help-entry"><h5>${e.title}</h5><div class="help-entry-body">${body}</div></div>`;
     });
     content.innerHTML = html;
+    // The live checklist's Go buttons, wired here rather than inline so the
+    // markup carries no quoting for anything to strip.
+    content.querySelectorAll('[data-help-go]').forEach(btn => {
+        btn.onclick = () => _helpGoStep(btn.getAttribute('data-help-go'));
+    });
     // Update active nav button
     document.querySelectorAll('#helpRefNav button').forEach(b => {
         b.classList.toggle('active', b.dataset.section === sectionId);
@@ -34017,6 +37260,11 @@ async function batchDownloadAllFramesAsZip() {
             }
 
             const row = dashProjectData[i];
+            // A MOCKUP SLOT HAS NO ARTWORK AND IS NOT A PIECE ANYONE ORDERS. It is already
+            // out of the quantities, the spec pages and the CSV; this loop walked
+            // dashProjectData wholesale, so it was the one output still emitting an empty
+            // file named after the arrangement and dropping it in a folder bound for a printer.
+            if (!_catRowTakesArt(row)) { successCount++; continue; }
             const baseName = buildPngFilename(row).replace(/\.png$/i, '');
             let fileName = `${baseName}.png`;
             if (usedNames[fileName]) {
@@ -34671,6 +37919,12 @@ function _elevWrapPadding() {
 
 function drawElevAll() {
     if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
+    // An art option owns its artwork and NOTHING else, so it re-reads size, position and
+    // frame spec off its master here. Lazily, at the point of use, rather than pushed from
+    // every edit to a master: the master is dragged sixty times a second and this is the
+    // one place an option's geometry is ever read. Idempotent, so a wall that is not an
+    // option costs one predicate.
+    if (typeof _catSyncOption === 'function') _catSyncOption(elevations[currentElevIndex]);
     // Prefer the precise stored wall dims over the input field (which displays
     // a 2-decimal rounded value). Reading the rounded field while frames use
     // precise values caused the wall to drift relative to the frames on unit
@@ -35018,7 +38272,7 @@ function drawElevAll() {
         // Wireframe wins over the artwork: the whole point is to present placement
         // without committing to images, so a piece that HAS art still shows as a
         // placeholder while the mode is on.
-        const _wf = (typeof _isWireframe === 'function') && _isWireframe();
+        const _wf = (typeof _curElevIsWireframe === 'function') && _curElevIsWireframe();
         const hasArtwork = !_wf && f.artworkUrl && (typeof _showArtwork === 'undefined' || _showArtwork);
         if (isFlat) {
             // Flat graphic: no recessed-opening cues at all — it is printed ON the
@@ -39302,7 +42556,9 @@ function toggleAllElevGuides() {
 function _spacingScopePopup() {
     const old = document.getElementById('spacingScopePopup'); if (old) old.remove();
     const wrap = document.createElement('div'); wrap.id = 'spacingScopePopup';
-    wrap.style.cssText = 'position:fixed; inset:0; background:rgba(0,0,0,0.45); z-index:2000; display:flex; align-items:center; justify-content:center;';
+    // The shared dialog shell. Its own overlay sat at z-index 2000, BELOW every
+    // dialog layer in style.css, so anything else open at the time covered it.
+    wrap.className = 'frame-modal fm-nested'; wrap.setAttribute('data-modal-backdrop', ''); wrap.style.display = 'flex';
     const card = document.createElement('div');
     card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-10); padding:18px; width:300px; box-shadow:0 14px 44px rgba(0,0,0,0.55);';
     card.innerHTML = '<div style="font-size:var(--fs-80); font-weight:700; color:var(--text-main); margin-bottom:6px;">Auto-spacing</div>'
@@ -39315,8 +42571,8 @@ function _spacingScopePopup() {
     const cancel = document.createElement('button'); cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel';
     cancel.style.cssText = 'width:100%; height:24px; font-size:var(--fs-60); margin-top:8px;';
     cancel.onclick = () => wrap.remove();
+    cancel.setAttribute('data-modal-close', '');
     card.appendChild(cancel);
-    wrap.onclick = (e) => { if (e.target === wrap) wrap.remove(); };
     wrap.appendChild(card);
     document.body.appendChild(wrap);
 }
@@ -40633,8 +43889,8 @@ async function exportElevPNG(opts) {
         // Bulk mode: let the ZIP loop record the failure (one alert per
         // elevation would be hostile). Single export keeps the alert.
         if (opts && opts.returnBlob) throw err;
-        alert("Image Export Failed: " + (err && err.message ? err.message : "Unknown error") +
-              "\n\nIf you opened this file directly (file://...), browser security blocks local file access. Please serve the folder via a local web server (e.g. VS Code Live Server) and try again.");
+        showInfoModal('Image export failed', (err && err.message ? err.message : 'Unknown error') + String.fromCharCode(10, 10)
+            + 'If you opened FRAME straight from a file (file://...), the browser blocks it from reading local files. Open it from the site, or serve the folder with a local web server such as VS Code Live Server, and try again.');
     } finally {
         // Restore every frame we touched
         restoreList.forEach(({ div, hiddenChildren, overlayCanvas }) => {
@@ -40959,7 +44215,7 @@ function _maybeAddArtworkToSvg(f, frameEl, backLayer, rectToSvg) {
         //
         // The size, family and text are read off the live element rather than
         // recomputed, so the exported letter is by construction the one on screen.
-        if (r0 && r0.w > 0 && r0.h > 0 && typeof _isWireframe === 'function' && _isWireframe()) {
+        if (r0 && r0.w > 0 && r0.h > 0 && typeof _curElevIsWireframe === 'function' && _curElevIsWireframe()) {
             const cs = getComputedStyle(artEl);
             const fs = parseFloat(cs.fontSize) || _elevWfLetterPx(r0.w, r0.h);
             // Family, weight and slant come off the element too, not from the setting

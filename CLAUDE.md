@@ -22,20 +22,36 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
   and nobody wants fifteen dev commits in a release log — and **not a force-push**, because
   the one thing a stable site owes you is the ability to revert.
   `APP_VERSION` drives the version pill; bump it on every change so it's obvious in the
-  browser which build is loaded.
-- **`index.html` links `style.css?v=<APP_VERSION>` and the two must match** (pinned
-  by `test_dash_visible_and_tick_clearance.js`, so a forgotten bump fails the suite).
+  browser which build is loaded. **And add a line for it to Help's What's New**
+  (`HELP_REFERENCE_DATA`, section `version`): `test_help_and_steps.js` fails while What's
+  New does not mention the current `APP_VERSION`. That is deliberate. Nothing forced it
+  before, which is how Help sat at v1.1 while the app reached 17.82.
+- **THREE THINGS IN `index.html` CARRY `<APP_VERSION>` AND ALL THREE MUST MATCH IT**:
+  `style.css?v=`, `app.js?v=`, and `window.FRAME_HTML_VERSION`. Pinned by
+  `test_build_version_pin.js` and `test_dash_visible_and_tick_clearance.js`, and gated
+  again by `tools/promote.js`, so a forgotten bump fails the suite and cannot ship.
   Unversioned, a browser serves a cached stylesheet next to a fresh `app.js`: the
   version pill reads new, the exports are new, and anything needing a new CSS rule
   is silently *absent*. That's how the gradient dashes vanished on screen while
-  still exporting correctly. Bump both together.
+  still exporting correctly.
+  **The REVERSE was unguarded until 17.80 and is the worse direction.** `app.js` had no
+  query at all, so a browser could serve fresh HTML and fresh CSS against a CACHED
+  `app.js` - and the version pill is read *out of* `app.js`, so the one indicator a
+  designer would check agrees with itself and is wrong.
+  **The query string alone cannot fix a browser that already holds a mismatched pair**,
+  because the URL in the cached HTML is the old one. So `index.html` also stamps the
+  version it was built against and `_checkBuildPairing()` compares the two at boot,
+  from the two files themselves. It must be stamped BEFORE the `<script>` tag or it
+  reads `undefined`, and it is wired into BOTH boot branches. Deliberately not fatal:
+  the app mostly works, and telling someone their tab is stale beats refusing to open
+  a project. A page with no stamp (a test harness, an older build) is left alone.
 - **No em dashes in written output.** Casual, direct tone.
 
 ## Testing — do this every time
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-122 files, 1480 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+144 files, 2055 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -47,6 +63,37 @@ the normal way therefore either matches the wrong thing silently (`/[L\s]+/` bec
 `\${`, which the outer literal will otherwise interpolate. Prefer `indexOf` and
 `split().length` over a regex in these files; reach for a regex only when you need one,
 and double every escape when you do. This has cost time six times in one session.
+
+**`node --check` CANNOT SEE A CALL TO A FUNCTION THAT DOES NOT EXIST.** 17.68 shipped
+`_round2(...)` in the breaker page's letter legend; the identifier had never existed,
+because a rename inside the edit that introduced it silently failed to apply. The file
+parsed, the whole suite went green, and the page threw a ReferenceError the first time
+it was opened. That is the third trap in this family after the blanket rename that
+rewrote a declaration into a self-call and the landmark slice that deleted
+`_dsPinChrome`: **a parse is not a load, and a load is not a render.**
+`test_no_undefined_helpers.js` now asserts every bare `_helper()` call resolves to a
+declaration. It scans the RAW source: stripping comments first looked obviously right,
+removed three false positives and FORTY-FOUR real declarations, because app.js carries
+`/*` inside string literals and a naive block-comment strip swallows everything to the
+next `*/`. Four names are allowlisted instead - `_` and `_r` are groups inside
+`_parseFrameFile`'s regex literal, `_img` and `_igCaptureUsed` appear in prose.
+
+**A STUB THAT SWALLOWS ITS ARGUMENTS PROVES NOTHING.** 17.71 gave the installation note
+an ink and read the colour as an ARRAY - but `_annHexToRgb` returns `{r, g, b}`, so
+`setTextColor` was handed `undefined` three times and the note printed in nothing at
+all, on screen and in the PDF. It survived FOUR rounds of debugging because every probe
+and every harness stubbed `setTextColor` as a no-op: a stub that ignores its arguments
+cannot notice it was passed rubbish, and the recorded `text()` calls looked perfect.
+The check that catches it VALIDATES instead of recording - it fails the test if any
+colour channel is not a finite number - and it was confirmed by putting the bug back and
+watching it fail. Same family as the `_round2` ReferenceError: **a parse is not a load, a
+load is not a render, and a recording stub is not a renderer.**
+Two other lessons from the same bug. `_annHexToRgb` returns an OBJECT; anything reading
+`[0]/[1]/[2]` off it is silently broken. And `FRAME_TEXT_INKS` leads with `#ffffff`
+because type on a dark page needs it, which makes it the wrong palette for anything
+printing on a white sheet - the note picker uses `FRAME_NOTE_INKS`, the same ramp without
+white, and `_installNoteInk` falls a too-pale stored value back to the default rather
+than printing invisibly. The same reasoning `FRAME_GREY_RAMP` already carries.
 
 **Anchor a source-level check on the code it is about, not a character distance from
 it.** A window like `S.slice(i, i + 1600)` reads as the code having been deleted the
@@ -896,6 +943,590 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   **dropped**, not shrunk, when the block is too small to hold it. Both sidebar panels are
   built at the **top** of `initElevControls`, ahead of its no-frames early return, for the
   same reason `renderGlazingControls` is: a bare wall being traced has no frames on it yet.
+- **A WALL'S IDENTITY IS `elev.id`, NEVER ITS INDEX** (`_elevId`, `_elevById`,
+  `_elevIndexById`, `_elevMigrateIds`). Elevations were addressed by array position
+  everywhere, and `variationOf` is what that cost: THREE hand-written renumbering
+  blocks for ONE field, one in `reorderElevation` and two in `deleteElevation`, none
+  of them tested, and the reorder one's own comment proposed giving up and clearing
+  the link rather than tracking it. Splice the array and a stored reference points at
+  a **different wall**, silently, which is the trap `_dsDragFromKey`, the context
+  blocks and the floorplan level pins were each dug out of.
+  **`variationOfId` is the truth; `variationOf` survives as a DERIVED numeric
+  mirror**, re-derived by `_elevSyncVariationPrimary()` after every array mutation,
+  the way `r.planX` mirrors `planPins[0]`. Derived rather than dropped because the
+  field is already in saved projects: a file written here still opens in a build that
+  only knows the number. One writer, and a test pins that there is only one.
+  That function also **promotes an orphan** whose source is gone (clearing
+  `isVariation`), which used to be a separate loop in `deleteElevation` and now also
+  covers a wall removed by an undo or a project load. It has to: a variation is
+  skipped by `recalculateDashboardQuantities` so a duplicate does not double-bill, so
+  a link left dangling makes frames that ARE being ordered read **qty 0**.
+  **`let _elevIdSeq` is declared ABOVE `let elevations`** and that placement is
+  load-bearing: the boot literal RUNS at module scope and now calls `_elevNewId()`,
+  so a counter declared further down is read in the TDZ and the file dies on boot.
+  Same trap that keeps `TITLE_SIZE_DEFAULT` above `editorialContent`.
+  `_elevId()` backfills lazily, like `_elevContextBlocks` does for block ids, so
+  there is no load path left to forget; `_elevMigrateIds()` converts an old numeric
+  `variationOf` **against the array as saved**, the only order it was ever correct
+  in, and is called from **both** install points (the project-open assignment and
+  `restoreProjectState`, which undo, autosave-restore and version history all funnel
+  through).
+  **A CLONE CARRIES THE SOURCE'S ID.** `duplicateCurrentElevation` mints a new one,
+  or `_elevIndexById` hands back whichever of the two it meets first. It also uses
+  `_cloneData` now rather than a JSON round trip, which was re-encoding every
+  `artworkUrl` data URL on the wall.
+- **A CATALOGUE IS A DOCUMENT OF CHOICES, NOT AN ORDER** (`_isCatalogueMaster`,
+  `_catAddOption`, `_catSyncOption`, `elev.catalogueMaster` / `elev.catalogueOption`).
+  A dealership catalogue shows ONE arrangement several times over with different artwork
+  in it and the client picks, so every option piece is a real distinct item in the art
+  library rather than a second copy of one piece. The reference decks say the quantity
+  half out loud on the page: *"each wall will require its own pair of pieces. Consult
+  your specific floorplan for full quantity of artwork."* A catalogue deliberately does
+  not state quantity.
+  **THE MOCKUP IS THE ARRANGEMENT; AN OPTION OWNS ONLY ITS ARTWORK.** `catalogueMaster`
+  marks the wall holding the hang. Duplicating it mints an OPTION plus one dashboard row
+  per slot, and the option's frames re-read `CAT_SLOT_FIELDS` (size, position, moulding,
+  mat, product) off the mockup on every `drawElevAll`. That inheritance is the entire
+  reason this is worth building: a free copy gives you the image swapping and not the
+  arrangement fixing, so moving one frame on a six-option placement means moving it six
+  times and the seventh option added next month is built from whichever copy was to hand.
+  Lazy at the point of use rather than pushed from every master edit, because a master is
+  dragged sixty times a second and this is the one place an option's geometry is read.
+  **ONE LINK FIELD, TWO FLAVOURS.** `variationOfId` already meant "this wall exists
+  because that one does", so an option reuses it rather than adding a second link with
+  its own orphan rule. `catalogueOption` is what tells them apart, and the difference
+  that matters is **`isVariation`**: a layout variation carries it and is skipped by
+  `recalculateDashboardQuantities` so a duplicate cannot double-bill, while an art option
+  is deliberately NOT flagged, because its pieces genuinely are their own line items.
+  Flag an option and all four of its rows read qty 0.
+  **THE MOCKUP'S SLOTS ARE A DRAWING, NOT STOCK.** `recalculateDashboardQuantities` skips
+  a master outright and `buildDashCSVString` drops its rows through `_catSlotRowIds()`,
+  or the schedule offers an imageless, unselectable piece beside the six real choices for
+  the same wall. Option rows count normally and land at exactly 1 each, because an option
+  row id is unique to its option.
+  **THE CODES ALREADY WORKED, WHICH IS WHY THIS WAS SMALL.** `ART-1` is the mockup,
+  `ART-1.1` an option, `ART-1.1A` a row. `_artGroupKey('ART-1.1A')` already returned
+  `ART-1.1`, `_artGroupNum` already kept the dotted form instead of zero-padding it to
+  `01`, and `_breakerCodeFor` already rendered the page title `ART-1.1AB`. Nothing in the
+  grouping, page-titling or CSV machinery had to be taught the convention; the only
+  missing part was the thing that MINTS it, which was being done by hand. A test pins all
+  four, because they are load-bearing for a feature that does not own them.
+  `_catBaseCode` is DERIVED from the mockup's own slots and never stored, so renaming a
+  slot moves the option codes with it.
+  **The switch is PER ELEVATION** (`#catMasterBtn`), on its own row under the wall-mode
+  pair rather than as a fourth button in it: ART / EGD / WF say what the SURFACE is, this
+  says what the wall is FOR. There is no separate "add option" control, because
+  `duplicateCurrentElevation` branches on the flag and retitles itself; two gestures
+  behind one button is fine, two behind one unchanged tooltip is how a designer learns
+  the wrong one.
+  **WIREFRAME IS A QUESTION ABOUT THE WALL, NOT ONLY THE DECK** (`_elevIsWireframe`,
+  `_curElevIsWireframe`). A catalogue needs BOTH answers in one deck: grey placement
+  drawings on its breakers, real photographs on its option pages. `_isWireframe()` is a
+  single deck-wide flag and cannot say that, so a mockup wall now supplies its own.
+  **PER ELEVATION, and that is the whole simplification.** A page-kind override was
+  designed twice before the data model made it unnecessary: a mockup and its options are
+  different WALLS, so the breaker and the option pages already capture different
+  elevations. No module flag spanning an await (the trap `ctx.swatch` exists to avoid),
+  and no second argument on `_captureElevWithGuides`, whose taking an index and nothing
+  else is a pinned invariant so no caller can get a different capture from the editor's.
+  The cache follows for free, because `toggleCatalogueMaster` pushes history, which
+  re-reads `_elevCaptureSignature` and bumps the `_elevCapGen` in `_igCapKey`.
+  The five `renderElevationToCanvas` call sites and both live-elevation renderers ask
+  about the wall. **`renderFrameToCanvas` deliberately does NOT**: it draws ONE PIECE, so
+  it has a row and no wall, and a mockup's slot rows never print anyway. A test pins that
+  split, because "make them all consistent" is exactly the change that would undo it.
+  **The `catalogue` preset keeps `wf: false`**, and that looks wrong until you see why:
+  turning the deck-wide flag on would grey out the option pages that are the entire
+  document. It sets `breakers: true` (a placement's dimensioned drawing IS its location
+  page) and `tpl: 'setLegend'`, the shared-spec group page, which is what an option page
+  is. `breakers` is read only when the preset declares it, so the five presets that
+  predate the field cannot silently switch breakers off when a designer clicks between
+  types.
+  **A MOCKUP'S SLOTS ARE NOT PAGES AND NOT A WALL ANYONE HANGS ON.** Two shared
+  functions came out of one afternoon of real use, both because the alternative was
+  teaching the same rule to several hand-written copies:
+  `_deckSpecRows()` is now the ONE answer to which dashboard rows earn a spec page, called
+  by `_deckPageList` AND the export's `_stepsFor`, which each carried their own copy of
+  `filter(r => r && (r.id || r.artworkUrl))`. That is the pairing this file has drifted on
+  more than any other, and a mockup's slots are the first rule where a row EXISTING and a
+  row DESERVING A PAGE come apart.
+  `_elevShowingPiece(rowId, opts)` is the ONE answer to which wall is drawn beside a
+  piece. There were FIVE copies (the baked data URL, the flat-graphic sheet, the
+  install/breaker renderer, the classic spec page, the template spec page), and a mockup
+  won every one of them because it usually sits earlier in the array and shares ids,
+  letters and sizes with its options. Reported as "when I switch the presentation type
+  back to Final Spec it uses the mockup elevation in the thumbnail".
+  **A TRAILING SEPARATOR SURVIVED `_artGroupKey`.** `ART.1.A` gave `ART.1.`, which printed
+  as a page titled "ART.1." and, once options were minted from the key, produced
+  `ART.1..2A`. Hyphen codes never showed it because the suffix strip already ate `-` and
+  `_`; only `.` got through. `_breakerCodeFor` had to learn the same character, since it
+  slices the base off each member and strips what is left. Grouping is unchanged either
+  way, so this moved the key's SPELLING and not which rows sit together.
+  **Options APPEND after the last option**, not at `srcIdx + 1`: inserting next to the
+  mockup every time put option 3 in front of options 1 and 2 and the rail read backwards.
+  **`Per piece` switched to `'classic'`**, the legacy layout that predates the four SHOW
+  ON PAGE ticks, so clicking it gave a page whose ticks mostly did nothing and whose title
+  dropped the location. The deck default and the unreadable-value fallback both moved to
+  `frameSpecDetail` when the per-piece layout buttons were removed; this button was the
+  one caller still holding the old literal. `classic` is still valid as a REMEMBERED
+  choice, which `test_mode_memory` pins separately.
+  **THE PLACEMENT'S BREAKER IS THE MOCKUP'S DRAWING AND IT PRINTS ONCE**
+  (`_breakerElevFor`, `_breakerNameFor`, `_breakerOvKeyFor`, `_catMockupForUnit`). Asked
+  for in these words: "one breaker page with grey out with letters and dimensions, then
+  following page would show each set". Taken from an option's own wall the breaker is the
+  same picture as the option page behind it, with the artwork on it; one per option prints
+  the dimensioned drawing three times.
+  It is **STATELESS**, so neither builder carries an "already emitted" set the other could
+  fall out of step with: the unit that earns the breaker is the FIRST one in the shared
+  `units` array belonging to that mockup, which both builders ask independently and get
+  the same answer for. Titled with the mockup's own code (`ART.1`) and keyed
+  `elevgrp:cat:<elevId>`, so per-page settings stay with the PLACEMENT rather than with
+  whichever option happened to come first. The `elevgrp:` prefix is load-bearing -
+  `_drawInstallGuidePage` keys every breaker-specific decision off it.
+  Both builders had written that "elevation holding most of these members" loop out by
+  hand; they stopped being two the moment a catalogue needed a different answer.
+  **AN OPTION IS THE SAME WALL, so the WALL follows, not just the frames.** Reported as
+  the scale character staying put while the frames moved, which reads as a half-built
+  link. `CAT_WALL_FIELDS` (size, EGD mode) and `CAT_WALL_DEEP` (`personPos`,
+  `contextBlocks`, `glazing`) all describe the PLACEMENT, so an option has no business
+  owning a copy. The deep ones are compared as JSON and cloned only on a difference -
+  this runs on every redraw of a dragged wall, and none of them carries image data (a
+  context block stores its preset KEY, never the markup).
+  **`underlay` is deliberately excluded and STRIPPED at creation**: a tracing guide
+  carries a megabyte data URL and never exports, so a copy per option multiplies the
+  project for something no option page can show. `groupDims` / `customLines` are excluded
+  for the opposite reason - the dimensioned drawing belongs to the mockup's breaker page,
+  and dimension lines over an option's artwork is not what any of these pages want.
+  **THE PLAN PIN BELONGS TO THE PLACEMENT** (`CAT_ROW_FIELDS` / `CAT_ROW_DEEP`). A
+  dealership hangs ONE piece in that spot and picks which image goes in it, so the
+  mockup's slot row is pinned once and every option's row mirrors it - including options
+  that already existed when the pin was placed. Artwork fields are absent from both lists
+  and a test pins that, because the whole model is that an option owns its images and
+  nothing else.
+  `_deckPageList` calls `_catSyncAllOptions()` before it builds: `drawElevAll` only runs
+  while the Elevations tab is drawing, so a deck rebuilt from the Deck tab would otherwise
+  render options against whatever the mockup looked like when it was last on screen.
+  **AN OPTION IS AN ALTERNATE, NOT A SECOND PLACE ON THE PLAN** (`_catOptionRowIds`,
+  filtered out of `_fpGroups`). Inheriting the pin so option spec pages could draw their
+  crop immediately put every option in the floorplan legend, four pins on one spot for
+  one placement. Filtered at the PLAN rather than left unpinned, because the option still
+  needs the pin data - that is the whole reason both halves exist.
+  **THE WALL RAIL SAYS WHICH WALL THE OTHERS FOLLOW** (`.wall-tab.cat-mockup` /
+  `.cat-option` + `.wall-tab-cat`). A mockup and its options are identical in a list of
+  names, and the one thing a designer needs before dragging a frame is which wall is the
+  source. A LEFT STRIPE, not a tinted row: `.wall-tab.active` already owns the background
+  and two colours fighting over it is how the selected wall stops reading as selected.
+  The bracketed mockup name on an option stays AMBER on a blue-striped row, because the
+  bracket points at the mockup and takes the mockup's colour.
+  **THE INSTALLATION NOTE HAS AN INK** (`noteInk`, `_installNoteInk`,
+  `_installNoteBodyRgb`). Red when it must be read before anything is drilled, near black
+  for an ordinary instruction, light grey for reference that should not compete with the
+  drawing. Breaker and install pages have separate globals (`breakerNoteInk` / `noteInk`)
+  like the legend settings, plus the usual per-page override, and `noteInk` had to join
+  `_igSet`'s `simple` list or the write is silently dropped. The BODY colour is DERIVED
+  from the heading rather than stored, so one pick keeps the two in relationship instead
+  of offering two dials for one decision. The drawer takes the ink as an ARGUMENT so the
+  measure pass and the draw pass cannot resolve it differently.
+  **EVERY SETTING WITH A BREAKER-ONLY GLOBAL MUST BE IN `BREAKER_SLOT`.** A field in
+  `_igSet`'s `simple` list but missing from that map is written to the INSTALL slot while
+  the breaker goes on reading its own, so the control moves a value nothing reads and
+  reads as simply broken. `noteInk` shipped that way for one version ("the notes seem to
+  not work anymore"). A test now walks every breaker-global field and checks both.
+  **THE BREAKER'S ELEVATION ANCHORS BOTTOM-RIGHT**, in both layout branches, which is the
+  reasoning the flat-graphic sheet already carried: it reads against both page edges the
+  way the reference sheets do, and slack from the aspect ratio ends up as one gap beside
+  the legend rather than two smaller ones with the drawing adrift in the middle.
+  **SO THE NOTES MOVED LEFT** (`noteSide`, default `left` on a breaker and `right` on an
+  install page, where they have always printed). The column takes its width off whichever
+  edge it sits on - `SR.L +=` or `SR.R -=` - and everything below fits to those, so that
+  is the whole change.
+  **THE LETTER LEGEND IS THREE TICKS** (`legendDims` / `legendArt` / `legendCode`). A
+  catalogue mockup carries no artwork, so the image-code line printed a column of em
+  dashes on exactly the page that uses the legend most; and art dimensions are what
+  somebody ORDERS from while overall dimensions are what somebody HANGS from, which one
+  tick could never say. Art dimensions default OFF and the other two ON, so an existing
+  page is unchanged, and they come through `_rowOpeningAndPrint` rather than a local sum.
+  The block HEIGHT derives from how many lines survive, and the LETTER rides whichever
+  line comes first, or unticking the top row takes the letter with it.
+  **THE BREAKER'S LEFT COLUMN READS TOP TO BOTTOM: LEGEND, NOTES, PLAN.** One column,
+  three things, in the order the reference sheets put them. 17.68 gave the notes their own
+  slice of width (`SR.L +=`), which put them BESIDE the legend and squeezed the drawing to
+  a strip - "when I have installation notes checked it pushes the letter legend to the
+  right". A RIGHT column still takes width off `SR.R`, because there is nothing on that
+  side to share with; a LEFT one takes none and stacks inside the column the legend has
+  already reserved, at the legend's width so the two align on both edges.
+  **A LEFT COLUMN CANNOT BE DRAWN UP FRONT.** The box is drawn before everything precisely
+  because `_drawInstallGuidePage` has several early returns that each draw their own
+  footer - but a left column has to sit under the legend, below a title band whose height
+  is not known that early, and drawing at `SR.T` put it level with the title. So the left
+  case is DEFERRED to the moment `_igTop` is computed, which is still ahead of every early
+  return. Two `_drawInstallNoteBox` calls now, one per side, and the invariant a test
+  guards is no longer "exactly one" but "both land before the first return".
+  `IG_LEG_ROW_H` and the block-height expression are SHARED between the height reserved
+  for the legend and the height `drawLegendBlocks` actually draws, or the notes overlap it
+  the first time a legend line is unticked.
+  **A BREAKER IS NO LONGER FORCED TO `elevOnly`.** The force existed so Install-guide's
+  globals could not bleed onto every breaker page; `breakerVariant` / `breakerPlan` /
+  `breakerPlanScale` do that job without also making the plan unreachable. The panel
+  offers a REDUCED set (`variants: 'breaker'`): Elev only or Elev + plan, never
+  Elev + frames, because a moulding gallery is an install-guide idea and a location page
+  has no use for one. Defaults are unchanged, so an untouched deck renders as before.
+  **AN OPTION ROW ANSWERS FOR ITS OWN PLAN CROP** (`_catRowAsPlanGroup`). Leaving options
+  out of `_fpGroups` is right for the PLAN and broke every option's spec page, because
+  `_planCropCanvasForRow` looked the row's group up there - so the floorplan thumbnail
+  vanished from every spec page a catalogue has, in Final Spec too. The row can answer
+  because it already MIRRORS the mockup slot's pin, so the fallback reads the row rather
+  than reaching back through the walls. A mockup slot never takes that path; it has a
+  real group.
+  **THE PAGE'S WIDTH IS ONE BUDGET, READ FROM BOTH ENDS** (`_igColW` / `_igElevW` /
+  `_igColWForElevW`, `IG_COL_MIN` / `IG_COL_MAX` / `IG_ELEV_MIN_FRAC` / `IG_COL_GUTTER`).
+  Column width and Elevation width are the SAME stored number, `legendW`; the elevation
+  slider writes through `_igColWForElevW`, so the two cannot disagree and there is no
+  second field to go stale. Same shape as a glazing run's Width field, which is an
+  operation on one truth rather than a second store. The clamp binds both ways, which is
+  the fail-safe that was asked for: the drawing never drops below `IG_ELEV_MIN_FRAC` of
+  the width and the column never goes under `IG_COL_MIN`, so pulling either slider past
+  the limit simply stops instead of producing a page where the elevation crosses the
+  legend.
+  **AND A WIDESCREEN ELEVATION IS HEIGHT-CONSTRAINED, which is why the width slider first
+  shipped doing NOTHING.** `fitIn` takes the smaller of the two fits, so on a 915x340
+  content area a 1.9-aspect wall is already as wide as its height allows and the extra
+  width is empty page - widening only bit below about 646pt, which is off the bottom of
+  the useful range. The drawing is allowed to rise BESIDE the title instead (`_igDrawTop`),
+  which is where the reference sheets put it and the only place the extra height could
+  come from.
+  It rises only when it **MEASURABLY** clears the title block (`_igTitleRight` +
+  `IG_TITLE_CLEAR`), never on an assumption about the column width: a wall name is user
+  text with no length limit, so a drawing started at the top margin behind a long heading
+  prints through it. The measurement resolves the faces exactly as the two drawers do -
+  `_titleStyleFor` / `_subtitleStyleFor` so a per-page type override is measured too, and
+  **`_pdfTitleStyle`, because a title prints BOLD**; measuring the heading in regular
+  underestimates it, which is the one case this guard exists for. `test_font_library`
+  caught that within minutes of it being written. A failed measurement falls back to
+  `SR.R`, so the drawing stays under the title rather than risking the overlap.
+  **THE LETTER LEGEND FOLLOWS `_specDualUnit()`** through the one `_igLegDimText`
+  formatter, because the legend prints SPEC numbers and every spec page beside it already
+  printed both units. Inches first whatever the project stores, companion in brackets,
+  same convention as the flat-graphic sheet's schedule. It also fixed a quieter bug: the
+  stored sizes are in `dashUnit` and were being labelled with `elevUnit`, which only ever
+  agreed because the two usually match. Overall dimensions and Art dimensions both go
+  through it, or the two lines of one block print in two conventions.
+  **THE BREAKER PLAN HAS A TARGET SIZE** (`IG_PLAN_H_FRAC`), not whatever is left over.
+  Filling the gap between the column above and the page bottom meant each ticked note
+  pushed the plan smaller: the more explaining the notes did, the less readable the
+  drawing they explained. The size slider now covers BOTH plan modes rather than only the
+  zoomed one, and reaches 140%.
+  **AND IT DRAWS THE WALL LINE.** A pin says which room; the line says which wall and how
+  much of it, which is what somebody standing in the room needs. Through `_wallAllSegs`
+  and `FP_WALL_LINE_ALPHA` like the other five renderers, UNDER the pin so the dot sits on
+  its own line, with the alpha put back or everything below inherits it. The zoom crop
+  frames the LINE ENDS as well as the pin - centred on the dot alone it cuts a long run in
+  half, and the half it loses is the half that says how far the hang extends.
+  **The layout-guides grid folds away.** Eight deck-wide toggles, set once and then
+  permanent, pushed Layout and Plan view - the controls that decide what the page IS - far
+  enough down to be missed. A `<details>` like the glazing editor, closed by default.
+  **A PARAGRAPH UNDER A CONTROL COSTS THE CONTROL BELOW IT.** Six of them in the
+  install/breaker panel, three or four lines each, pushed Layout and Plan view below the
+  fold - "there is too much going on that I missed seeing the Layout option". Every one
+  is a `_dsHelpDot` on its label now (`secLbl(txt, help)`, `slider(..., help)`), which
+  costs 14px and is read when it is wanted. A test counts `createElement('p')` in that
+  function rather than searching for the STRINGS: the words still exist, on the tooltips,
+  so a string search asserts the opposite of the intent.
+  **ONE JUMP TO THE WALL.** The panel offered two: `Edit <name> in Elevations`, which
+  records a return trip through `_dsJumpToElevation`, and a plain `Go to elevations`,
+  which called `switchView` raw and left no way back. Two buttons for one destination is
+  how a designer learns the worse one, and the worse one was the one with no return.
+  **PRESENTATION LAYOUT SITS ABOVE PAGE APPEARANCE** on a spec or breaker page.
+  Appearance is still BUILT ahead of the kind-specific branches, because several of them
+  return early and it belongs to all of them; `_dsMoveAppearanceAfter` REPOSITIONS the
+  built node rather than rebuilding it, so no branch can lose it.
+  **A CUSTOM NOTE IS A ROW, NOT A LINE IN A TEXTAREA** (`installNotes.list` =
+  `[{id, text, on}]`). One box of newline-separated text could be typed into and nothing
+  else: no way to turn a note off without deleting it, and no way to tell which line you
+  were editing. `custom` SURVIVES as a derived newline mirror of the ticked ones, the
+  same shape `variationOf` keeps, so a file written here still prints in a build that
+  only knows the string; the old string MIGRATES once, every line becoming a ticked row.
+  **`installNotes.edits[key]` overrides a STANDARD note's wording.** The built-in text is
+  the house default, not a rule - a site with its own hanging standard has to be able to
+  say so, and deleting the note and retyping it loses the tick that makes it standard.
+  `_installNoteText` is the ONE resolver, used by the panel's tooltip AND by
+  `_installNoteLines`, or the panel shows one string while the page prints another.
+  The tick and the label are separate click targets: choosing which note to READ must
+  never change what PRINTS. `_dsNoteSel` is panel state, never project data.
+  **THE LEGEND'S LETTER IS ITS OWN COLUMN** (`IG_LEG_LETTER_W`). Glued to the front of
+  the first label it pushed line one right and left lines two and three hanging, so the
+  three lines of a block started at three different x positions and it read as a
+  paragraph rather than a table. Leading came down from 10/6 to 8.6/4 in the same change:
+  at three lines per letter the old rhythm spent a third of the column on air, and that
+  air is what the notes needed.
+  **THE BREAKER PAGE'S WIDTH IS ONE BUDGET** (`_igColW`, `_igElevW`, `_igColWForElevW`).
+  Column width and Elevation width are the SAME stored number read from opposite ends,
+  which is what makes them track each other instead of being two settings a designer has
+  to reconcile: both write `legendW`, the way the Width field on a glazing run is an
+  OPERATION on the panels rather than a second store. A second field is how they drift.
+  **THE CLAMP IS THE FAIL-SAFE AND IT BINDS BOTH WAYS.** `IG_COL_MIN` / `IG_COL_MAX` stop
+  the column, and `IG_ELEV_MIN_FRAC` (0.45) stops it as a FRACTION too, so a narrow page
+  clamps before 340pt rather than after it. Dragging either slider past the limit simply
+  stops; neither end can starve the other, and the elevation slider writes through the
+  same clamp so it cannot get round it.
+  **ONE WIDTH FOR THE LEFT COLUMN, legend or no legend.** It used to be the legend's width
+  when a legend printed and the note multiplier's when it did not, so the Column width
+  slider moved nothing on exactly the page that shows a legend. The note `%` multiplier is
+  now offered for a RIGHT-hand column only: an inert control beside a live one is worse
+  than no control, because it teaches that the panel does not work.
+  **THE LEGEND SITS ON THE SUBHEADING'S CLEARANCE, NOT THE DRAWING'S TOP** (`_igLegTop`).
+  `_igTop` carries an extra 22pt that the elevation needs for the wall dimension printed
+  above it; the legend needs none of that, and starting it there left an obvious hole
+  under ELEVATION DETAIL. It steps over the item code when a page carries one, resolved
+  through `_igCodeId` so the clearance and the drawn code cannot disagree about whether
+  there is one. Both layout branches and the notes read it, or one of them keeps the hole
+  while the other moves.
+  **`IG_LEG_TOP_GAP` MUST BE DECLARED ABOVE `_igLegTop`.** It was not, for one commit: the
+  file parsed, `node --check` passed, and every install and breaker page threw
+  "Cannot access before initialization" on render. Third time this trap has been sprung
+  here after `TITLE_SIZE_DEFAULT` and `_elevIdSeq`.
+  **A CATALOGUE HAS TWO AXES, AND THE MODEL ONLY HAD ONE.** An option answers "same
+  layout, different pictures". The other question is "same spot, different layout": one
+  big canvas, a diptych, a triptych, a salon hang, and a rearranged salon hang holding
+  the same images, all offered for ONE wall. A mockup was both at once, so there was
+  nowhere to put the second layout - reported as "I need a way to make several elevations
+  be one placement in the plan view", after trying to express it by marking an option as
+  a mockup, which minted colliding row ids.
+  **AN ARRANGEMENT IS A SIBLING MOCKUP; A PLACEMENT IS A DERIVED KEY** (`_catPlacementKey`,
+  `_catArrLetter`, `_catArrCmp`, `_catArrangementsOf`, `_catPrimaryArr`, `_catAltArrRowIds`,
+  `_catAddArrangement`). `ART.001A`, `ART.001B` and `ART.001C` are three walls, three
+  breaker pages and three drawings that share the stem `ART.001`. The placement is
+  **derived by stripping the trailing letter run**, never stored, exactly as `_catBaseCode`
+  is: the slots already carry it and a stored link is a second thing to keep right. A code
+  ending in a DIGIT has no arrangement letter and is its own placement, which is what makes
+  every project predating this group exactly as it did.
+  A three-level tree with a new Placement entity was the obvious alternative and is the
+  wrong shape. What was asked for is a GROUPING, and the machinery existed three times
+  over: options are already filtered off the plan, the pin already mirrors down two field
+  lists, and `_catRowAsPlanGroup` already lets a filtered row draw its own crop. The whole
+  feature is one predicate plus one clause in a filter that was already there.
+  **THE PRIMARY ARRANGEMENT OWNS THE PIN** - lowest letter, an unlettered original first,
+  `Z` before `AA` (shortest letter, then alphabetical). `_catSyncArrangements` mirrors it
+  onto the others through the SAME `CAT_ROW_FIELDS` / `CAT_ROW_DEEP` an option uses, and
+  runs **before** the option sync in `_catSyncAllOptions`: an option mirrors its own
+  mockup's slot row, so if that mockup is an alternate arrangement its slots have to have
+  taken the pin first or the option lags a render behind.
+  `_catAltArrRowIds` builds its map in ONE pass rather than asking `_catPrimaryArr` per
+  wall, because `_fpGroups` calls it on every plan render.
+  **`_catAddArrangement` RESOLVES THROUGH THE MOCKUP.** Started from an option,
+  `_catBaseCode` gives the OPTION's code (`ART-1.1`), whose placement key is itself
+  because it ends in a digit - so the first version minted `ART-1.1B`, a sibling of the
+  option rather than of its mockup.
+  **ARTWORK IS CARRIED ONTO AN OPTION, NEVER ONTO THE NEW MOCKUP.** A mockup slot is out
+  of the CSV, the quantities, the PNG pack and the spec pages, so an image left on one is
+  invisible everywhere. That is also what makes "rearrange the salon hang but keep these
+  images" a single gesture: the new arrangement comes up empty with its first option
+  already holding them.
+  **A SEPARATOR IS INTRODUCED WHERE THERE IS NONE**, the one place this does not copy the
+  project's own spelling. A wall spelling its slots `ART-1A` has no separator, so
+  `ART-1B` + `A` is `ART-1BA` - which is also how arrangement `BA` spells itself, and
+  `ART-1B` is already the id of arrangement A's second slot. The convention cannot express
+  an arrangement letter, so a hyphen goes in. A project that already uses one (`ART.001A-A`)
+  keeps it.
+  Not done yet: the plan LEGEND still labels the group `ART.001A` rather than the
+  placement `ART.001`, because `g.key` has many readers. One pin, right label pending.
+  **NOTHING IN A CATALOGUE BILLS, AND THAT REFINES AN EARLIER DECISION RATHER THAN
+  REVERSING IT.** A mockup slot was already skipped. An option now is too
+  (`_isCatalogueOption` in `recalculateDashboardQuantities`). The earlier "1 per catalogue
+  item" answer was about IDENTITY - is an option's piece its own item with its own code
+  and image, or a copy of the mockup's? Still its own, and a test pins that zeroing the
+  quantity did not merge the rows. QUANTITY is a different question and a catalogue
+  deliberately does not answer it: the reference decks print *"Consult your specific
+  floorplan for full quantity of artwork."* Nine option rows at qty 1 claim nine pieces
+  get bought when three hang.
+  Deliberately **not** done by flagging `isVariation`, which also drives orphan promotion
+  and the derived `variationOf` mirror. Its own clause, and a test reads for it.
+  **A MOCKUP SLOT TAKES NO ARTWORK** (`_catRowTakesArt` / `_catRefuseArt`). An image
+  dropped on one went nowhere and said nothing. Enforced in the DATA at all three write
+  paths - `applyArtworkToCurrentRow`, `applyArtworkToRowIndex`, `_bulkApplyArtwork` - plus
+  `_bulkMatchPieces`, which must not even OFFER a slot as a relink target. Hiding the
+  upload box is not enough, the rule `setRowPrintOutput` already follows for window-film.
+  A negative control has to break ONE path at a time: the check names which of the three.
+  **THE PNG PACK WAS THE LAST OUTPUT STILL EMITTING SLOTS.** Quantities, spec pages and
+  the CSV all filtered them; the batch loop walked `dashProjectData` wholesale, so each
+  slot exported an empty file named after the arrangement into a folder bound for a
+  printer. When a rule says "excluded from output", check all four.
+  **A PLAIN DUPLICATE MUST DROP THE CATALOGUE FLAGS.** `duplicateCurrentElevation`'s
+  ordinary path kept `catalogueOption` while overwriting `variationOfId` with the SOURCE's
+  id - so a duplicated option pointed at another option rather than at a mockup,
+  `_catMasterOf` returned null, `_isCatalogueOption` read false, and
+  `toggleCatalogueMaster`'s guard (which exists to stop exactly this) let the wall be
+  marked a mockup. That is how a second set of row ids identical to the first got minted.
+  **TWO ROWS WITH ONE ID IS CORRUPTION, NOT AN UNTIDY LIST** (`_catRowIdsTaken`, shared by
+  both minters): `counts[d.id]` gives both the same quantity, `_elevShowingPiece` returns
+  whichever it meets first, and the CSV emits the piece twice. There is no repair once the
+  rows exist, so both minters refuse up front.
+  **THE DASHBOARD SAYS WHICH ROWS ARE DRAWINGS AND WHICH ARE CHOICES**
+  (`.dash-cat-slot` amber, `.dash-cat-option` blue), the same two colours the wall rail
+  uses so one language covers both places these walls appear. A LEFT STRIPE on the first
+  cell, never a row background: `tr.selected` owns the background and a tint fighting it
+  is how the selected row stops reading as selected. On the CELL because a box-shadow on a
+  `tr` is unreliable under `border-collapse`. Both sets are computed once per render, not
+  per row - each walks every wall.
+  **A LAYOUT IS LINKED OR FREE, AND THAT ONE FLAG IS THE WHOLE ORGANISING IDEA**
+  (`_catLayoutIsFree`, `catalogueFree`). The designer described two things in one breath:
+  four rearrangements of the same three frames, and a single / triptych / salon hang
+  offered at one spot. They are the same object with different inheritance.
+  LINKED takes the primary's frame SPEC by letter and owns only its positions - change a
+  size on ART.1A and B, C and D take it, which is what was asked for in as many words.
+  FREE owns its frames outright. **Absent means linked**, so nothing is written for the
+  common case and a project predating the distinction opens with its layouts following
+  the primary, which is what they were doing anyway.
+  **MATCHED BY LETTER, which is what makes one rule cover both cases.** A five-piece
+  salon hang under a three-piece primary has no counterpart for D and E, so those are
+  simply its own. No second mechanism for "different frame counts".
+  **`CAT_SPEC_FIELDS` IS DERIVED FROM `CAT_SLOT_FIELDS`, minus x and y.** An OPTION is
+  the same arrangement with different pictures so it takes position too; a LAYOUT is the
+  same frames somewhere else, and inheriting x/y would make every layout the same layout
+  - the one thing that must never happen. Derived rather than written out again, or a
+  field added to a frame reaches one list and not the other.
+  **THE WALL RUNS DOWN THE PLACEMENT; THE DIMENSION LINES STOP AT A LAYOUT.** Four
+  layouts for one spot are four drawings of the SAME wall, so size, character, context
+  and glazing follow the primary. `groupDims` / `customLines` are in `CAT_WALL_DEEP` but
+  explicitly skipped on the layout hop: a group dim measures a gap BETWEEN FRAMES and the
+  frames are somewhere else on every layout, so it would measure the wrong thing. It
+  reaches an OPTION, which is the same arrangement, and stops there.
+  **AN OPTION NOW CARRIES THE MOCKUP'S WHOLE DRAWING**, reversing an earlier exclusion.
+  `groupDims`, `customLines` and the callout spacers (`CAT_SLOT_DEEP` = `dimTo`,
+  `distToggles`) all mirror. The old reasoning was that the dimensioned drawing belongs to
+  the breaker page; the designer asking for the opposite is better evidence, because that
+  dimension work IS the layout work and a mockup whose measurements do not reach its own
+  options means doing it once per option.
+  `CAT_SLOT_DEEP` is deep because `distToggles` is an OBJECT: the shallow `!==` compares
+  references, so it would copy one every pass and then SHARE it between two walls, which
+  aliases them through every undo snapshot.
+  **THE CHOICE IS MADE AT CREATION** (`_catLayoutChooser`). Linked and free look identical
+  once they exist, so a default is a decision made silently that has to be discovered
+  later. The + LAYOUT button opens a chooser naming both kinds and collecting the layout's
+  NAME, which is known at that moment and otherwise gets hunted for in a panel afterwards.
+  **THE RAIL HAS THREE ROLES, NOT ONE** (`_catRailRoles`, `.cat-primary` / `.cat-layout` /
+  `.cat-option`, `.wall-rail-place`). All three used to render the word MOCKUP, so the
+  single most important relationship on a placement - WHICH WALL GOVERNS THE REST - was
+  invisible and four layouts read as four unrelated walls. Reported as "hard to stay
+  focused knowing what is what".
+  SOLID amber governs, HOLLOW amber follows it, blue is an image option; the stripe
+  answers the question a designer has before touching a frame, which is whether this edit
+  reaches other walls. A placement HEADER plus one level of indent turns four near
+  identical codes into a tree. The walls are already in order because both minters append
+  after the last wall of the placement, so no re-sort is needed - and re-sorting would
+  fight the hand drag-reorder this rail already supports.
+  Built in ONE pass with a map rather than asking `_catPrimaryArr` per wall: this runs on
+  every wall click, rename, drag and undo.
+  **THE CODES DID NOT CHANGE, AND THAT WAS THE POINT.** `ART.1` placement, `ART.1B`
+  layout, `ART.1B.2` option, `ART.1B.2-A` piece. The hierarchy was always in the code; the
+  rail simply never drew it. Fixing the display rather than the convention meant no saved
+  project moved.
+  **THE LAYOUT'S NAME IS NAVIGATION, THE CODE IS IDENTITY** (`catalogueLabel`,
+  `_catLayoutTag`, `_catLayoutTagForRow`). Single / Triptych / Salon hang is how a
+  designer thinks about a placement and `ART.1C` is how the deck prints it, so the name
+  sits BESIDE the code and is never folded into it. ONE tag builder, shared by the rail,
+  the breaker subtitle (`ELEVATION DETAIL · C — Triptych`) and the CSV's trailing
+  `Arrangement` column, or the page and the schedule describe the same placement two
+  different ways and a designer reads that as two different things.
+  The subtitle carrying user text means `_igTitleRight` has to measure it too, or the
+  drawing rises into exactly the part of the title block that grows.
+  **`_igElevIdx` NEVER EXISTED.** The subtitle was written as
+  `_catLayoutTag(elevations[_igElevIdx])` when `arg` IS the elevation on that path.
+  `node --check` passed and six test files went red at render. Fourth in this family after
+  `_round2`, the blanket rename and the landmark slice, and the one that caught it was the
+  existing suite rather than anything new: `test_no_undefined_helpers` checks CALLS, not
+  bare identifiers, so a stray variable still gets through. Grep the identifier before
+  trusting a parse.
+  **A TEST THAT SETS UP BEFORE THE CLONE TESTS THE CLONE, NOT THE MIRROR.**
+  `_catAddOption` clones the whole wall, so an option minted from an already-dimensioned
+  mockup carries the drawing whatever the sync does - the dimension-mirroring check passed
+  with the mirroring deleted until the fields were set AFTER the option existed. Found by
+  deleting it.
+  **FOUR LEVELS, ALL DERIVED FROM THE CODE** (`CAT_CODE_RE`, `_catCodeParts`,
+  `_catPlacementKey`, `_catSetKey`, `_catSetNum`, `_catArrLetter`, `_catSetsOf`,
+  `_catPlacementPrimary`):
+  `ART.01` placement + frame set 1 + its primary layout, short form; `ART.01A` layout A;
+  `ART.01A.1` image set 1; `ART.01.2` FRAME SET 2; `ART.01.2A` layout A of set 2.
+  A FRAME SET is a different set of frames offered at the same spot - a single piece
+  where set 1 is a salon hang. A LAYOUT is those same frames somewhere else on the wall.
+  **THAT DISTINCTION USED TO BE A FLAG (`catalogueFree`) AND IS NOW A LEVEL, which
+  RETIRES the flag.** Within a frame set every layout shares the frames, because that is
+  what a frame set is; two ways to express one idea was the confusion the level was added
+  to remove, so the flag does not survive as an escape hatch and a test asserts it is
+  gone rather than merely unused. It shipped and was removed the same day, so no real
+  project carried it.
+  **THE ONE AMBIGUITY AND HOW IT IS RESOLVED.** `ART.01.2` could read as placement
+  `ART.01` set 2, or placement `ART` set `01.2`. The rule is that a PLACEMENT ENDS AT ITS
+  FIRST NUMBER GROUP and a second dotted number after it is the frame set. The regex
+  requires the WHOLE code to parse, so the lazy prefix only settles early when what
+  follows really is `.<digits>` plus letters - which is why `L2.ART-2` still resolves to
+  itself rather than to `L2`, and `L2.ART-2.3A` to set 3 of it. A test walks six shapes.
+  **IMAGE OPTIONS ARE NOT PARSED.** An option is identified by its LINK
+  (`catalogueOption` + `variationOfId`), never by its spelling, which is the only reason
+  an old `ART-1.1` cannot be mistaken for a frame set.
+  **THREE SCOPES, AND KEEPING THEM APART IS THE WHOLE MODEL** (`_catSyncArrangements`):
+  the PLACEMENT owns the wall (size, character, context, glazing) and the one plan pin,
+  because every frame set offered at one spot is on the same physical wall; the FRAME SET
+  owns the frame SPECS, matched by letter; the LAYOUT owns its positions and its own
+  dimension callouts; an OPTION owns only its images. Mixing any two is how a triptych
+  ends up wearing a salon hang's frame sizes.
+  **ONE PIN PER PLACEMENT** means the primary layout of the PRIMARY SET, so the tiebreak
+  is set number FIRST and letter second. A letter-only comparison looks right and is
+  wrong the moment set 1's primary is lettered (`ART-1A`) while set 2's is not
+  (`ART-1.2`): the unlettered one sorts first and takes the pin. The obvious fixture
+  cannot see it, because there both primaries are unlettered and array order covers the
+  bug - the check had to be built to make them disagree.
+  **ONE MINTER, TWO CODES** (`_catAddArrangement(srcIdx, {newSet})`). A frame set and a
+  layout differ only in the code they compute and where they land: a LAYOUT after the
+  last wall of ITS SET, a FRAME SET after the last wall of the whole placement. Appending
+  a layout at the end of the placement drops `ART.01B` behind `ART.01.2A` and the rail
+  stops reading as a tree. The slot renaming, the artwork carry and the collision guard
+  are shared, which is where a second copy would drift.
+  **`.action-btn` IS `width: 100%`, AND THAT BIT AGAIN.** The `+ LAYOUT` and `+ SET`
+  buttons were given `flex: 0 0 auto`, which takes its BASIS from `width` and then forbids
+  shrinking - so three buttons in one row each demanded the whole panel and two rendered
+  outside the left panel entirely. The pair has its own row now at `flex: 1 1 0` with
+  `min-width: 0`, which is what two equal actions want anyway, and the ROW carries the
+  hide so a wall outside a catalogue has no empty 26px band. Third time this constant has
+  caught someone after the gear popup's Pill button; the check is now general - no
+  `.action-btn` in index.html may combine `flex:0 0 auto` with no width of its own.
+  **THE RAIL DRAWS THE TREE** (`_catRailRoles`): a placement header, then SOLID amber for
+  a frame set's reference drawing, HOLLOW amber for a layout of those frames, blue for an
+  image set, at three indents. Badges read `SET n · PRIMARY`, `LAYOUT B`, `IMAGES 1`. The
+  CODES DID NOT CHANGE and that was the point - the hierarchy was always in them and the
+  rail simply never drew it, so fixing the display rather than the convention moved no
+  saved project.
+  **SAME IMAGES, DIFFERENT FRAMES IS A TOOL, NOT A LEVEL** (`moveElevArtwork`,
+  `ELEV_ART_FIELDS`, `_elevArtPayload` / `_elevApplyArt`). A salon hang reshuffled is
+  another IMAGE SET, which the codes already express; what was missing was any way to get
+  one without re-importing five files. Two gestures now: duplicating an OPTION mints a
+  sibling option CARRYING the pictures, and dragging a row in the frame list moves a
+  picture to another frame.
+  **THE DRAG IS IN THE LIST, NOT ON THE WALL**, because dragging a frame on the wall
+  already means move the frame, and one gesture meaning two things depending on what is
+  under it is how a designer learns neither. THE FRAMES DO NOT MOVE: only artwork is
+  reassigned, as a list reorder rather than a two-way swap, and the dashboard ROW travels
+  with it or the wall and the spec page disagree about which picture is piece B. A drag
+  begun on an input or a button belongs to that control, not the row.
+  `ELEV_ART_FIELDS` exists because "the artwork" was written out four times and a missed
+  field is a picture that half-moves - its crop left behind, or its image code naming the
+  wrong file.
+  **DUPLICATING AN OPTION USED TO FALL THROUGH TO THE LAYOUT-VARIATION PATH**, producing
+  an `isVariation` copy that shared the option's row ids and was neither a new option nor
+  anything the model knew. The check that guarded the old bug now asserts the INVARIANT
+  instead: nothing may claim to be an option while pointing at a wall that is not a
+  mockup. That is the shape that let a wall be marked a mockup and mint colliding ids.
+  **`_igElevIdx` NEVER EXISTED**, and a patch script that aborts mid-way writes NOTHING -
+  so a substitution reported `ok` in a run that then failed is not applied. Both cost a
+  round here. Grep the identifier, and re-check the anchors after a failed patch.
+  Still to build: the option matrix panel (arrangements down, image sets across, filled
+  and total per cell - a 200-image catalogue cannot be checked any other way, and the two
+  axes make it the only readable view), the two option page kinds (presentation page, spec
+  page), the plan legend labelling the PLACEMENT rather than the primary arrangement, a
+  `Catalogue Option` / `Arrangement` CSV column (with qty left BLANK rather than 0, since a
+  0 a vendor reads is worse than an absent number), notes on the LEFT of a breaker page
+  (they print as a right-hand column today), and Deck Studio arrows and lines that borrow
+  `annotationStyle` so a callout matches the drawing under it.
 - **`_elevArtImgCache` keeps decoded artwork nodes alive across redraws.** `drawElevAll`
   wipes `#frame-layer` and runs on EVERY mousemove of a drag, so rebuilding
   `<img src="data:…">` each pass re-decoded every artwork ~60×/sec. A 24" print hid it;
@@ -1261,6 +1892,268 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   way if you add fields.
 - `scheduleAutosave()` is the central debounce hook. Nearly every mutation calls it,
   which makes it the reliable place to hang follow-on work (e.g. thumbnail refresh).
+- **A PAGE BACKGROUND WAS THE ONE IMAGE IMPORT WITH NO BOUND, AND THE COST WAS THE
+  ENCODING RATHER THAN THE PIXELS** (`_boundImageDataUrl`, `_pageBgMaxEdge`,
+  `_imageDataHasAlpha`). Measured on the real project in `.claude/references`: 22.9 MB,
+  of which **11.1 MB is two page backgrounds** at 5.51 and 5.58 MB, against 3.9 MB for
+  all fourteen pieces of artwork. Every sibling path already bounds (1000 px for
+  dashboard artwork, 1100 from the shape popup, 1400 on a drop); this one wrote
+  `FileReader`'s result straight into the project.
+  **A dimension bound would have saved NOTHING on that file.** Both were 1728x1956
+  **RGBA PNGs** - 3.4 megapixels, under what a 936x540pt page can use even at print
+  quality with Zoom at 3 - so `resizeImageDataUrl` would have returned them verbatim.
+  A photograph stored as RGBA PNG runs about twenty times its JPEG size, and that is
+  the entire gap. So this helper **re-encodes**, and its dimension ceiling is a
+  backstop against a camera export rather than the lever. A test pins that a 1728x1956
+  image comes back at 1728x1956, because "simplify it into a resize" is exactly the
+  change that would quietly undo this.
+  **PNG is kept wherever transparency is REAL.** A background is composited over the
+  theme's own colour, so alpha can matter, but a photo saved as RGBA carries a fully
+  opaque alpha channel and loses nothing by dropping it. The scan reads every pixel
+  rather than sampling: a stride misses a cut-out corner and flattens it, and a test
+  puts the only transparent pixel LAST. An unreadable canvas assumes alpha, because
+  guessing the other way destroys something.
+  **It never hands back something bigger than what arrived** - a small JPEG re-encoded
+  as PNG grows - and every failure path returns the original untouched, so a browser
+  with no canvas still imports.
+  `PAGE_FORMAT` moved to module scope for this: the ceiling is
+  `PAGE_FORMAT[0] * _PDF_QUALITY.print.r * PAGE_BG_MAX_ZOOM`, and two numbers for one
+  page size is how a background gets bounded against a page it does not print on.
+  `_pageBgMaxEdge` is a **function** because both of those are declared further down
+  and a const would read them in the TDZ, the trap `TITLE_SIZE_DEFAULT`, `_elevIdSeq`
+  and `IG_LEG_TOP_GAP` were each caught by.
+  **Deliberately NOT applied to the floorplan or a custom swatch**, which are the other
+  two unbounded paths (`lv.imageData` and `swatchDataUrl`). Both are usually LINE WORK,
+  where JPEG ringing eats hairlines and a plan is the drawing an installer works from.
+  Those want palette reduction, which is different work.
+  **Still open, and measured rather than guessed.** The same file stores each artwork
+  TWICE, byte for byte (14 on `dashProjectData[].artworkUrl` and the same 14 on
+  `elevations[].frames[].artworkUrl`, 3.9 MB duplicated); 14 `swatchDataUrl` values are
+  only 4 distinct images held in 28 places; and `floorplanImage` is byte-identical to
+  `floorplanLevels[0].imageData`. About 5.6 MB of pure duplication. Pooling it into an
+  image table keyed by content is easy - **and every version of it breaks an older
+  build**, which would read the reference tokens as image URLs and show a deck with no
+  pictures, silently. The only guard an old build already honours is `data.type`, which
+  it tests with `startsWith('master-studio')`, so the safe form is a type it REFUSES
+  rather than mangles - and that makes the file unopenable on stable until stable is
+  promoted. Worth doing, worth doing deliberately, and not worth doing mid-rollout.
+- **A PROJECT IS SAVED BACK TO THE FILE IT WAS OPENED FROM** (`_projectFileHandle`,
+  `openMasterProject`, `saveMasterProject({saveAs})`, `_fsaAvailable`). Save used to be
+  a DOWNLOAD, always, into a name built from the project name plus today's date, so a
+  week on one job left five `caesars-palace_2026-09-0*.json` in Downloads with nothing
+  saying which was current, and two designers on one project had no story at all.
+  With the File System Access API a project is opened THROUGH a handle and Save writes
+  back to it. Chrome and Edge only, and secure-context only, so Firefox, Safari and a
+  page opened from `file://` keep the download path **byte for byte as it was**: a
+  half-working fallback is worse than the behaviour people already know, and a test
+  drives the no-API case to pin that.
+  **THE HANDLE IS SESSION-ONLY AND THAT IS THE SAFETY PROPERTY, not a limitation.** It
+  is set by Open or by the picker the first Save raises, and CLEARED by any load that
+  did not come through a handle - the `<input type=file>` path and an autosave restore
+  both clear it, because a `File` from an input cannot be written back to. That keeps
+  one invariant worth more than the convenience: **the handle always refers to the
+  project currently in memory**, so Save can never write this project over a different
+  one. Persisting it across reloads breaks exactly that (a fresh tab holding a starter
+  deck would carry a handle to last week's job, and Ctrl+S would overwrite it), so the
+  safe version of that ties the handle to a RESTORED AUTOSAVE and is separate work.
+  **Three answers from `_fsaSave`, not a boolean**: `ok`, `cancelled`, `failed`. A
+  cancel must NOT mark the project clean - a cleared unsaved dot is a lie the designer
+  acts on - and dismissing a picker is a decision rather than a fault, so it raises
+  nothing. A `failed` write reports AND falls through to the download, because a
+  permission or a disk error must not leave the only copy of the work inside a tab.
+  **`_projectPayload` and `_readProjectText` exist because there are three ways to save
+  and two to open.** A second copy of the field list is how a key reaches one save path
+  and not the others; a second copy of the install is how the two opens drift about what
+  opening a project MEANS. `_readProjectText` returns whether it installed, which is what
+  tells the caller it may bind the file it came from.
+  **Save As is Ctrl+Shift+S plus the Save button's tooltip, NOT a fourth nav button.**
+  That row is full (theme, view mode, a three-way unit toggle, Load, Save, Versions,
+  Bulk Images, the version pill) and it is already `flex-wrap: nowrap`. The tooltip is
+  the right home because it is read at the moment of deciding where a save lands, and
+  Save raises the picker by itself whenever nothing is bound yet. WHICH FILE THIS IS
+  goes in the document title, where every other application puts it.
+  **Loading used to discard unsaved work without asking.** `beforeunload` covered
+  closing the tab and covered nothing here. `_confirmDiscardUnsaved` runs first and the
+  picker opens from inside its Yes handler, because that handler is itself a click: a
+  file picker needs a user gesture and one opened after an awaited modal is refused.
+- **THE AUTOSAVE LIVES IN INDEXEDDB, AND IT NEVER WORKED ON A REAL PROJECT UNTIL IT
+  DID.** `performAutosave` used to `JSON.stringify` the whole project into ONE
+  localStorage key. A real deck is far past what that holds: a 14-row, 4-wall project
+  in `.claude/references` measures **22.9 MB** against a ~5 MB origin budget, because
+  the payload carries every artwork data URL. So the write threw on every project that
+  mattered, the catch `console.warn`'d, and a designer had a safety net they did not
+  have. Version history already knew this and already used IndexedDB, and says so in
+  its own comment; autosave is the one that did not get the memo, and it is the one
+  that covers a crash.
+  **THE SECOND HALF IS WORSE THAN THE FIRST.** A failed write leaves the PREVIOUS
+  successful payload in the slot, so the next load offers to restore *that* one: a
+  different project, behind a timestamp that reads as if it were this one.
+  `_autosaveFail` therefore drops a stored record belonging to an EARLIER session and
+  KEEPS one belonging to this session, which is a genuine older snapshot of the work in
+  front of you. `_autosaveSession` is minted once per page load and is the whole of
+  that distinction; it reads `ameta` rather than `adata` so the decision costs nothing.
+  **TWO STORES, mirroring the version-history split.** `ameta` is a few hundred bytes
+  (when, which session, what it was called) and `adata` holds the payload. That is what
+  lets `checkAutosaveOnLoad` **ASK BEFORE IT READS 22 MB** - the old code parsed the
+  whole project at boot just to fill in the prompt - and it is why the failure path can
+  decide staleness without deserialising a project to find out.
+  **`_aPut` TAKES A BUILDER, NOT A PAYLOAD.** The payload holds live object references
+  and `elevations` / `editorialContent` are reassigned wholesale by a project load, so
+  one built before the async open and written after it would autosave the project you
+  just closed. Building inside the transaction closes that window. Live objects are
+  still deliberately passed: the structured clone runs **synchronously inside `put()`**,
+  so the record cannot tear, and `_cloneData` first would copy every artwork data URL
+  for nothing on a 500 ms debounce. A test drives that by editing the live project and
+  asserting the stored copy did not move.
+  **A FAILED WRITE IS REPORTED, NEVER SWALLOWED**, and it is a MODAL rather than a
+  toast: the house rule is that a toast carries what is safe to MISS, and "nothing is
+  backing up your work" is the exact opposite. Once per session, because this is armed
+  off a 500 ms debounce; the unsaved dot then turns RED and stays, and that red state
+  shows even on a clean project, because the condition outlives the save that cleared
+  the dirty flag.
+  `AUTOSAVE_KEY` survives as a READ-ONLY legacy slot so an autosave written by an older
+  build is still offered once and then cleared. `clearAutosave` clears both, and its
+  IndexedDB delete is deliberately fire-and-forget (two sync callers, nothing downstream
+  waits on it), so a test asserting a record is gone has to let the transaction commit.
+  `performAutosave` is async and **never rejects**: 246 call sites arm it from a
+  `setTimeout`, where a rejection is an unhandled one nobody can catch.
+  Two traps in `test_autosave_idb.js` worth knowing before editing it. A fake store that
+  refuses a DELETE for quota is wrong and makes the stale-record cleanup look broken;
+  and **app.js arms its own `checkAutosaveOnLoad` at boot** (`setTimeout` 200), which
+  left to fire mid-run reads whatever record the current check just seeded, gets a falsy
+  `confirm`, and clears it. Let it run FIRST against an empty store. Both of those made
+  the suite pass or fail on timing, which is worse than not catching the bug at all.
+- **EVERY DIALOG CLOSES THE SAME WAY: ESCAPE, THE BACKDROP, AND ITS OWN CLOSE CONTROL**
+  (`_modalTop`, `_modalClose`, `_modalWatch`, `[data-modal-close]`, `[data-modal-backdrop]`,
+  `[data-modal-busy]`). None of 21 dialogs closed on Escape, while the elevation shortcut
+  comment claimed Escape "also closes modals". Five dialogs built in JS (Versions, Bulk
+  Images, the layout chooser, the mockup picker, Auto-spacing) had their own overlays and
+  their own `e.target === ov` backdrop handler, which has the classic bug: `click` fires on
+  the common ancestor of the press and the release, so dragging a text selection out past
+  the card closed the dialog. Two of them also sat ABOVE the alert box (z 100040 / 100030),
+  so an error raised from inside rendered behind them, and one BELOW every dialog layer
+  (z 2000). All five are on the `.frame-modal` shell now.
+  **Closing CLICKS the dialog's own `[data-modal-close]` control**, never a blanket
+  `display:none`: Bulk Edit moves the real dashboard form back, the Frame Pack build cancels
+  a job, and only each dialog knows its own cleanup. A test walks every dialog for exactly one.
+  **Escape is deliberate; the backdrop is not.** Escape closes anything with a close
+  control, except a full-screen TOOL (`.fm-over`: the floorplan markup and layout editor
+  own Escape for "cancel this line"), a `[data-modal-busy]` dialog (the Frame Pack build),
+  and focus inside a textarea or rich text. The backdrop closes only `[data-modal-backdrop]`
+  dialogs, the ones with nothing to lose, and only if the press STARTED on the backdrop.
+  The key handler runs in the CAPTURE phase and stops propagation, so the Escape that
+  closes a dialog never also deselects the frames behind it.
+  **`showConfirmModal(..., opts)`**: `opts.danger` paints Yes destructive and starts focus
+  on Cancel, so a reflexive Enter cancels; `opts.mustChoose` marks no close control, for a
+  question where BOTH answers act. The autosave restore prompt is one: its Cancel used to
+  MEAN DISCARD, so once Escape closed dialogs, a stray keypress at boot would have deleted
+  the backup. It is Restore / Discard now, mustChoose.
+  **Focus** moves into a dialog on open (`[data-modal-initial]` wins), returns to the
+  opener on close, and Tab stays inside. Driven by one MutationObserver per dialog on its
+  own `style` attribute, because dialogs are opened by writing `style.display` from dozens
+  of places, plus a `<body>` childList observer (direct children only) for the ones built at
+  runtime and closed by removal. Every dialog also gets `role="dialog"` and `aria-modal`.
+  **TWO JSDOM TRAPS, both hit writing the tests.** Under `runScripts: 'outside-only'` jsdom
+  never runs an inline `onclick="..."` attribute, so clicking a close control does nothing
+  and every Escape check passes or fails for the wrong reason: dialog tests use
+  `'dangerously'`. And jsdom does not implement `innerText`, which is how the info box sets
+  its title, body and button labels, so under test those are EMPTY: identify buttons by
+  position and attribute, and record a question's text by wrapping `showConfirmModal`.
+- **ONE WAY TO ASK BEFORE DESTROYING SOMETHING: `_confirmDestroy({title, body, confirm,
+  undoable, onConfirm})`.** There were sixteen native `confirm()`s and twelve `alert()`s,
+  browser chrome over the app in wording that varied call by call; none are left.
+  **`undoable` is REQUIRED, with no default**, because the sentence it picks ("You can
+  undo this with Ctrl+Z." / "This can't be undone.") is a promise, and a test reads that
+  every call site states it. The wall delete said "This cannot be undone" while
+  `deleteElevation` pushed history. Worse, five deletes (a text style, a template, a
+  template category, a floorplan category, a timeline stage) wrote `editorialContent`
+  WITHOUT pushing history, so they genuinely could not be undone and said nothing. All of
+  that data is already in the undo snapshot, so each gained a `pushHistory()`: making it
+  undoable beats warning about it. A version delete lives in IndexedDB, outside the
+  project, and says it cannot be undone.
+  **VERB RULE: Delete when the thing is gone, Remove when it is taken out of the deck and
+  can be put back without Ctrl+Z** (a built-in page, the overlays on one page).
+  **The answer arrives AFTER the question now**, so anything keyed on an index has to be
+  re-resolved at confirm time: the wall by `_elevIndexById`, a template by object, a
+  floorplan category by KEY - `_artCats()` returns the built-in constant until a project
+  customises its list and `_artCatsEnsure()` writes a COPY, so matching by object deletes
+  nothing. `_dsDeleteUserTemplate(idx, after)` takes a callback instead of returning a
+  boolean. `_askYesNo` is the promise form for async callers. The three copies of the
+  plan-detail delete are one `_deletePlanDetail`, and two of its buttons had called a plan
+  detail a "breaker", which is a different page.
+  **The alerts were sorted by the house rule**: nudges and acknowledgements to `_toast`
+  ("That is the last row", "Pushed to wall"), failures and must-reads to `showInfoModal`.
+- **UNDO HAS BUTTONS, AND SAYS WHERE IT WENT** (`#undoBtn` / `#redoBtn`, `_historyWhere`,
+  `_historyAnnounce`, `_historyBlockedByDialog`). `updateUndoButtons()` had managed two ids
+  that did not exist, so undo was Ctrl+Z only. Undo reverts the whole project, so the change
+  is often on a view you are not looking at; a notice now names the wall, piece or deck.
+  **Derived by COMPARING the two snapshots**, not by labelling 246 `pushHistory` call
+  sites; long strings compare by length and tail, like `_elevCaptureSignature`. One notice
+  at a time: ten presses are one conversation. **Undo is refused while a dialog is open**,
+  or Ctrl+Z changes the rows Bulk Edit is editing behind it - except inside a `.fm-over`
+  tool, where the editing actually happens.
+- **KEYBOARD FOCUS IS VISIBLE** (the `:focus-visible` block at the end of style.css). There
+  was one `:focus-visible` rule and six turning the outline off, so buttons, sliders and
+  checkboxes showed nothing. Text fields were already fine through `input:focus`'s accent
+  border and are untouched. A native checkbox does not paint `border-color`, so it needed
+  its own rule, at (0,2,1) to beat `input:focus`. Slider focus is on the THUMB, written for
+  both engines.
+  **`[data-kbd-click]` makes a div press like a button** on Enter or Space (Space is
+  cancelled, or it scrolls). The three view tabs, the wall rail and a wall's delete x were
+  divs with an `onclick` and no tabindex, so a keyboard could not reach them at all. Opt-in
+  by attribute rather than by role, so nothing starts answering keys it did not ask for.
+- **HELP IS `HELP_REFERENCE_DATA`, AND ITS TEST IS BUILT TO CATCH IT GOING STALE.** It had
+  stopped at v1.1 and said things that were no longer true: walls as "tabs at the top",
+  multi-select as Shift-click (it is Ctrl+click; Shift is fine drag), Sort A-Z "leaving the
+  wall unchanged" (it RE-LETTERS the frames, which prints), a Sourced Object "hiding the
+  frame fields". `test_help_and_steps.js` fails if Help names a control whose label is not
+  in index.html or app.js, lists a shortcut no handler binds, uses an em dash, or has a
+  What's New that does not mention `APP_VERSION`.
+  Bodies are **template literals** so the copy carries apostrophes and attributes with no
+  escapes; nothing in it may contain a backtick or a dollar brace. An entry with `live`
+  (`'steps'`) is built by `_helpLiveEntry` when the section opens. Help opens on Reference,
+  and the Video tab is HIDDEN until `setHelpVideoUrl` gives it something: it used to be the
+  tab Help opened on, reading "coming soon".
+- **THE ORDER OF OPERATIONS IS ON THE VIEW TABS** (`_projectStepCounts`, `_projectSteps`,
+  `_navStepBadge`, `_syncNavBadges`, `_scheduleNavBadges`). The tabs are numbered 1 Frame
+  Dashboard, 2 Elevation, 3 Deck; Elevation's badge counts pieces not on a wall, Deck's
+  counts pieces not pinned (only once a plan image exists). The full five steps, two of
+  which live inside Deck, are the live checklist that opens Help's Start here, with Go
+  buttons wired through `[data-help-go]` rather than inline quoting.
+  **All derived, never stored.** "A piece" is `_deckSpecRows()` (so a mockup's slots are not
+  work to do), "on a wall" is an ACTIVE frame with the row id (the quantity rule), "pinned"
+  is `_fpPins`. `_projectStepCounts` is the cheap half, read on every nav render; only the
+  checklist builds the page list. Badges update IN PLACE off `scheduleAutosave`, because
+  re-rendering the tabs replaces them and drops keyboard focus off a tab mid-Tab.
+  **The first-run tip is ARMED at boot and SHOWN on the first pointerdown.** Shown from a
+  boot timer, its 12-second toast kept every headless test process alive ~14 seconds past
+  finishing and the suite ran for half an hour - the template-card prewarm trap again.
+  **These are declared near the TOP of app.js, straight after `_checkBuildPairing`**, so no
+  module-scope code can read `NAV_STEP_TIPS` or `_navBadgeTimer` in the TDZ.
+- **UNCAUGHT ERRORS ARE CAUGHT, LOGGED AND SAID ONCE** (`_frameReportError`,
+  `_frameErrAnnounce`, `_frameErrors`). Nothing was listening, on a 27k-line file in one
+  global scope where a parse is not a load and a load is not a render. Four
+  ReferenceErrors have shipped that `node --check` waved through and that died at
+  render: `_round2`, `_igElevIdx`, `IG_LEG_TOP_GAP`, and the blanket rename that rewrote
+  a declaration into a self-call. On this machine you notice, because the console is
+  open. On a designer's machine the button simply does nothing, they work around it, and
+  the report arrives a week later as "the breaker pages are weird sometimes".
+  The value is **not recovery**, it is turning a silent dead end into something
+  reportable: the notice leads with `APP_VERSION` and `APP_BUILD`, carries the fault and
+  the stack, tells the designer to Save Project FIRST, and offers Copy details through
+  `_dsCopyText` (which already has the `file://` fallback).
+  **ONCE, THEN DEDUPED ON THE FAULT.** A render loop raises the same error sixty times a
+  second and a modal per occurrence takes the app away from the person trying to save.
+  First fault is a modal (a failure is never safe to miss), a NEW fault after that is a
+  toast, the same fault again is a console line and a slot in a 25-entry log.
+  **Both halves are registered** - `error` and `unhandledrejection` - at module scope
+  ahead of `initMasterApp()`, or a fault during init is the one class nobody hears about.
+  Two things are deliberately NOT reported: cross-origin `Script error.` with no file or
+  stack (nothing to report and nothing to fix), `ResizeObserver loop` (a browser
+  scheduling notice), and a failed `<img>`/`FileReader` load, which has ~20 handlers of
+  its own already saying something specific about the file that failed. The reporter is
+  wrapped so it can never become the fault itself; a test breaks the notifier and checks
+  the error still reaches the log.
 - `_resolveFooter()` handles footer theming. `'auto'` means *read this page's own
   theme* — not a fixed default.
 - Templates live in `editorialContent.templates`; `type` doubles as the category key.

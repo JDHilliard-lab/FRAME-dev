@@ -116,9 +116,13 @@ const path = require('path');
     __check('BOTH conversion sites call it — project load AND the unit toggle', () => {
       // Wiring one and not the other is the exact shape of the bug this guards: it looks
       // right until someone opens an inches project in cm, or toggles the unit.
-      const lm = S.indexOf('function loadMasterProject');
+      // The load body moved into _readProjectText in 17.81, shared by the
+      // <input type=file> path and the File System Access one. Sliced to the
+      // NEXT function rather than a character count, which read as the code
+      // having been deleted the moment it moved.
+      const lm = S.indexOf('function _readProjectText');
       if (lm < 0) throw new Error('could not find loadMasterProject');
-      if (S.slice(lm, lm + 9000).indexOf('_scaleElevContext(elev, f)') < 0) {
+      if (S.slice(lm, S.indexOf('\\nfunction ', lm + 10)).indexOf('_scaleElevContext(elev, f)') < 0) {
         throw new Error('project load does not convert wall context');
       }
       const su = S.indexOf('function setUnit(');

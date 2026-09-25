@@ -111,7 +111,13 @@ const fs = require('fs');
       editorialContent.specTemplate = 'installGuide';
       editorialContent.specTplMemory = { perPiece: 'nonsenseKey' };
       clickMode('Per piece');
-      if (editorialContent.specTemplate !== 'classic') throw new Error('bad memory not rejected: ' + editorialContent.specTemplate);
+      // frameSpecDetail, not 'classic'. There is ONE per-piece layout and this is it;
+      // 'classic' is the legacy one that predates the four SHOW ON PAGE ticks, so landing
+      // on it gave a page whose ticks mostly did nothing and whose title dropped the
+      // location. The deck default and the unreadable-value fallback both moved when the
+      // per-piece layout buttons were removed; this button kept the old literal until
+      // 17.64. 'classic' is still a valid REMEMBERED choice - the check above pins that.
+      if (editorialContent.specTemplate !== 'frameSpecDetail') throw new Error('bad memory not rejected: ' + editorialContent.specTemplate);
     });
   `;
 

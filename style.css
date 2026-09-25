@@ -2090,3 +2090,160 @@ button#matLinkBtn.active:hover { background: transparent !important; color: var(
 #lineToolBtn.active .svg-icon { stroke: #fff; }
 .custom-line { pointer-events: auto; cursor: move; }
 .custom-line .arch-label-new { pointer-events: auto; }
+
+/* CATALOGUE MOCKUPS IN THE WALL RAIL.
+   A mockup and its options are identical in a list of names, and the one thing a
+   designer needs before dragging a frame is which wall the others follow. A LEFT
+   STRIPE rather than a tinted row, because .wall-tab.active already owns the row's
+   background and two colours fighting over it is how the selected wall stops reading
+   as selected. Appended last on purpose: these have to outrank .wall-tab.active's
+   border, and source order is the only thing separating equal-weight selectors.
+   Amber is the house --warn; the option's own accent is --ui-active, "this is on". */
+.wall-tab.cat-mockup { border-left: 3px solid var(--warn); }
+.wall-tab.cat-option { border-left: 3px solid var(--ui-active); }
+.wall-tab-cat {
+    display: inline-block;
+    margin-left: 6px;
+    font-size: var(--fs-50);
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: var(--warn);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90px;
+    vertical-align: middle;
+}
+/* The bracketed mockup name stays AMBER on a blue-striped row: the bracket is a
+   pointer at the mockup, so it takes the mockup's colour rather than the option's. */
+.wall-tab-cat.opt { color: var(--warn); font-weight: 600; }
+
+/* A CATALOGUE ROW SAYS WHAT IT IS, IN THE SAME COLOURS THE WALL RAIL USES.
+   Amber = a mockup slot: the arrangement drawing, which takes no artwork and is out of
+   the quantities, the CSV, the PNG pack and the spec pages. Blue = an art option: a real
+   item with its own code and image, but a CHOICE, so it does not bill.
+   A LEFT STRIPE on the first cell, never a row background: `tr.selected` owns the
+   background, and a tint fighting it is how the selected row stops reading as selected.
+   On the cell rather than the row because a box-shadow on a tr is unreliable under
+   border-collapse. */
+tr.dash-cat-slot > td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
+tr.dash-cat-option > td:first-child { box-shadow: inset 3px 0 0 var(--ui-active); }
+
+/* A PLACEMENT IS A TREE AND THE RAIL NOW DRAWS IT. Three roles, three weights of the
+   same two colours: SOLID amber governs, HOLLOW amber follows it, blue is an image
+   option. Reported as "hard to stay focused knowing what is what" with four walls all
+   labelled MOCKUP.
+   The stripe is a BORDER on the row and the indent is padding, so neither fights
+   .wall-tab.active, which owns the background. */
+.wall-rail-place {
+    display: flex; align-items: baseline; gap: 8px;
+    padding: 9px 10px 4px 10px;
+    font-size: var(--fs-55);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+}
+.wall-rail-place:first-child { border-top: none; margin-top: 0; }
+.wall-rail-place-code { font-weight: 700; color: var(--text-main); letter-spacing: 0.8px; }
+.wall-rail-place-n { color: var(--text-muted); font-size: var(--fs-50); letter-spacing: 0.3px; }
+/* SOLID governs. */
+.wall-tab.cat-primary { border-left: 3px solid var(--warn); }
+/* HOLLOW follows: the same hue at a weight that reads as secondary without becoming a
+   third colour to learn. */
+.wall-tab.cat-layout { border-left: 3px solid color-mix(in srgb, var(--warn) 42%, transparent); }
+.wall-tab.cat-indent { padding-left: 16px; }
+.wall-tab.cat-indent2 { padding-left: 26px; }
+.wall-tab-cat.lay { color: color-mix(in srgb, var(--warn) 72%, var(--text-muted)); font-weight: 600; }
+/* The layout's NAME. Muted and beside the code, never folded into it: the code is the
+   identity and the name is only how you find the wall. */
+.wall-tab-lbl {
+    display: inline-block; margin-left: 7px;
+    font-size: var(--fs-55); color: var(--text-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    max-width: 92px; vertical-align: middle;
+}
+
+/* A row being dragged to move its picture, and the row it will land on. The FRAMES do
+   not move: this reassigns artwork between them, so the cue is a moving-row cue and not
+   a reorder bar. */
+.compact-frame-item.art-dragging { opacity: 0.45; }
+.compact-frame-item.art-drop-target { outline: 2px solid var(--ui-active); outline-offset: -2px; }
+
+/* ── KEYBOARD FOCUS IS VISIBLE ───────────────────────────────────────────────
+   There was ONE :focus-visible rule in this file, on the page-insert strip, and
+   six rules turning the outline off. So a keyboard user tabbing through a panel
+   could not see where they were on any button, slider, checkbox or nav tab.
+   Text fields were already fine: `input:focus` paints the accent border, which
+   IS a focus indicator, and they are left exactly as they were.
+
+   :focus-visible, not :focus, so this appears for the keyboard and not for the
+   mouse - a ring on every clicked button would be noise nobody asked for. The
+   specificity is deliberately ordinary, so a component that draws its own
+   keyboard state (.ds-insstrip) keeps it. */
+button:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible,
+a[href]:focus-visible,
+summary:focus-visible,
+[tabindex]:not([tabindex="-1"]):focus-visible,
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+/* A native checkbox does not paint `border-color`, so the `input:focus` rule
+   that serves text fields left a focused checkbox looking exactly like an
+   unfocused one. The rule above is (0,2,1) and wins over that (0,1,1) one. */
+
+/* A slider's focus goes on its THUMB, the part that moves. Written for both
+   engines, as every slider rule here is, because neither inherits the other's
+   pseudo-elements. */
+input[type=range]:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+input[type=range]:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+/* ── THE ORDER OF OPERATIONS ON THE VIEW TABS ────────────────────────────────
+   Numbered in the order the work goes, with a badge counting what is left:
+   pieces not on a wall on Elevation, pieces not pinned on Deck. Both are DERIVED
+   in app.js (_projectStepCounts), never stored. The number follows the tab's own
+   colour, so the active tab's reads in the accent like its label. The badge is
+   the warning amber, because it counts outstanding work, and it sits on the
+   corner ladder (--r-8 on a 16px box is fully round) rather than a new 99px
+   pill, which test_scale_ladders pins as the only one. */
+.nav-step {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 16px; height: 16px; box-sizing: border-box; flex: none;
+    border: 1px solid currentColor; border-radius: 50%;
+    font-size: var(--fs-55); line-height: 1; opacity: 0.7;
+}
+.nav-tab.active .nav-step { opacity: 1; }
+.nav-badge {
+    min-width: 16px; height: 16px; padding: 0 4px; box-sizing: border-box; flex: none;
+    border-radius: var(--r-8);
+    background: var(--warn); color: #ffffff;
+    font-size: var(--fs-55); line-height: 16px; text-align: center;
+}
+
+/* Help entries hold lists now (the five steps, the live checklist), which
+   cannot sit inside a <p>, so the body is a div carrying the old <p> look. */
+.help-ref-content .help-entry .help-entry-body {
+    margin: 0; font-size: var(--fs-70); line-height: 1.5; color: var(--text-main);
+}
+.help-ref-content .help-steps { margin: 4px 0 8px; padding-left: 20px; }
+.help-ref-content .help-steps li { margin-bottom: 6px; }
+.help-live-steps { list-style: none; margin: 0; padding: 0; }
+.help-live-steps li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--border-color);
+}
+.help-live-steps li:last-child { border-bottom: none; }
+.help-live-steps .hs-mark { width: 16px; flex: none; text-align: center; font-weight: 700; color: var(--text-muted); }
+.help-live-steps .hs-done .hs-mark { color: var(--accent); }
+.help-live-steps .hs-todo .hs-mark { color: var(--warn); }
+.help-live-steps .hs-text { flex: 1; min-width: 0; }
+.help-live-steps .hs-view { color: var(--text-muted); font-size: var(--fs-65); }
+.help-live-steps .hs-go { height: 24px; padding: 0 10px; font-size: var(--fs-65); flex: none; }

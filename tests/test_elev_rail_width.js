@@ -108,9 +108,16 @@ const path = require('path');
 
     // ── The fit maths ──
     __check('EXACT BUG: drawElevAll measures #export-wrap padding instead of hardcoding 160', () => {
+      // SLICED BY THE FUNCTION'S OWN EXTENT, never by a character distance. This read
+      // S.slice(i, i + 4000) and broke the day a comment was added at the top of
+      // drawElevAll: _elevWrapPadding() fell outside the window, which reads exactly
+      // like the measuring having been deleted. The function is the thing under test,
+      // so the function is what gets sliced.
       const i = S.indexOf('function drawElevAll');
       if (i < 0) throw new Error('drawElevAll not found');
-      const body = S.slice(i, i + 4000);
+      const end = S.indexOf(String.fromCharCode(10) + 'function ', i + 1);
+      const body = S.slice(i, end < 0 ? S.length : end);
+      if (body.indexOf('_elevWrapPadding') < 0 && body.length < 1000) throw new Error('the slice did not reach the body of drawElevAll');
       if (/wsW\\s*-\\s*160/.test(body) || /wsH\\s*-\\s*160/.test(body)) throw new Error('still subtracting a literal 160 for the padding — that was 2 x 80px and the padding is no longer 80px on both axes, so the fit is off by 30px');
       if (body.indexOf('_elevWrapPadding()') < 0) throw new Error('drawElevAll does not call _elevWrapPadding(), so the padding is not being measured');
     });

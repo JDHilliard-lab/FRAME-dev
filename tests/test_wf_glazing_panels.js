@@ -231,8 +231,12 @@ const path = require('path');
       if (Math.abs(r.panels[0] - 76.2) > 0.001) throw new Error('panel widths did not convert: ' + r.panels.join(','));
       // Called from BOTH conversion sites — a project load with divergent units, and
       // the unit toggle.
-      const lm = S.indexOf('function loadMasterProject');
-      if (S.slice(lm, lm + 9000).indexOf('_scaleElevGlazing(elev, f)') < 0) throw new Error('project load does not convert glazing');
+      // The load body moved into _readProjectText in 17.81, shared by the
+      // <input type=file> path and the File System Access one. Sliced to the
+      // NEXT function rather than a character count, which read as the code
+      // having been deleted the moment it moved.
+      const lm = S.indexOf('function _readProjectText');
+      if (S.slice(lm, S.indexOf('\\nfunction ', lm + 10)).indexOf('_scaleElevGlazing(elev, f)') < 0) throw new Error('project load does not convert glazing');
       const su = S.indexOf('function setUnit(');
       if (S.slice(su, su + 4000).indexOf('_scaleElevGlazing(elev, f)') < 0) throw new Error('the unit toggle does not convert glazing');
     });
