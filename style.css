@@ -1,7 +1,14 @@
 /* ========================================= */
 /* THEME ENGINE & VARIABLES                  */
 /* ========================================= */
-:root { 
+:root {
+    /* THE APP SPEAKS IN THE STUDIO'S TYPE. --ui-font is the brand Sans (the same stack
+     * as FRAME_FONT_LIBRARY's 'sans' token) for everything you read; --ui-display is
+     * Druk, for the few things that NAME a place - the view tabs and section titles -
+     * the way the decks this tool makes use it for headings. Druk loads from
+     * index.html's @font-face, so it is the same file the PDF embeds. */
+    --ui-font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --ui-display: 'Druk', 'Oswald', 'Arial Narrow', Arial, sans-serif; 
     /* DARK THEME (DEFAULT) */
     --accent: #3a86ff; 
     --accent-hover: #2170ed;
@@ -205,7 +212,7 @@
     --table-row-selected: #e0efff;
 }
 
-body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-main); color: var(--text-main); margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: background 0.3s, color 0.3s; }
+body { font-family: var(--ui-font); background: var(--bg-main); color: var(--text-main); margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: background 0.3s, color 0.3s; }
 
 input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 input[type="number"] { -moz-appearance: textfield; }
@@ -493,38 +500,25 @@ tr.multi-selected {
  *   │                    drag handle                      │
  *   └────────────────────────────────────────────────────┘
  */
-body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper {
-    position: fixed;
-    top: 156px;
-    right: 460px; /* anchored to the right, just left of the 440px form pane */
-    left: auto;
-    bottom: auto;
-    width: auto;
-    z-index: 50;
-    background: var(--bg-panel);
-    border: 1px solid var(--border-color);
-    border-radius: var(--r-8);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-    padding: 20px;
-    padding-left: 24px;  /* extra space on the left edge to make the drag handle reachable */
-    align-items: center;
-    justify-content: flex-start;  /* preview-container first, then toolbar below */
-    /* Drag handle hint: a subtle accent-colored vertical strip on the left
-     * edge. Becomes more visible on hover (via cursor change in JS, plus
-     * this static hint). */
-    border-left: 4px solid var(--accent);
+/* MODE 2: the preview is its own COLUMN between the table and the form (see
+ * _dashPreviewColumn), sized by JS to the frame's aspect at the size you dragged it to.
+ * Its LEFT edge is the drag handle; the accent strip says so. It used to be a fixed
+ * panel floating over the CSV, which covered the rows you were editing. */
+.dash-preview-col {
+    flex: none; display: flex; flex-direction: column; align-items: stretch;
+    background: var(--bg-panel); border-right: 1px solid var(--border-color);
+    overflow-y: auto; overflow-x: hidden; position: relative; z-index: 15;
 }
-body.dash-view-2 #view-dashboard .dash-right-pane .preview-wrapper .preview-container {
-    /* JS sets explicit width/height via inline style (see
-     * updateDashPreviewContainerSize). These rules override the Mode 1
-     * defaults (320px max-width, 1/1 aspect ratio) so JS can take control. */
-    max-width: none;
-    max-height: none;
-    width: 400px;  /* default before JS sets actual size */
-    height: 400px;
-    aspect-ratio: auto;
-    margin-bottom: 10px;
+.dash-preview-col .preview-wrapper {
+    position: relative; top: auto; padding: 18px 16px 14px 20px;
+    border-bottom: none; border-left: 4px solid var(--accent);
+    align-items: center; justify-content: flex-start; min-height: 100%; box-sizing: border-box;
 }
+.dash-preview-col .preview-wrapper .preview-container {
+    max-width: none; max-height: none; width: 400px; height: 400px; aspect-ratio: auto; margin-bottom: 10px;
+}
+.dash-preview-col .dash-toolbar { min-width: 260px; }
+#dashRightPane.bulk-mode ~ .dash-preview-col, body.dash-bulk .dash-preview-col { display: none; }
 
 /* When the toggle is active, give the button a tinted background so the
  * user can see at a glance which mode is active. */
@@ -2311,3 +2305,41 @@ input[type=range]:focus-visible::-moz-range-thumb {
 .wall-mode-btn .wm-off { display: none; margin-left: 2px; font-weight: 700; opacity: 0.85; }
 .wall-mode-btn.active .wm-off { display: inline; }
 #artWallBtn .wm-off { display: none !important; }
+
+
+/* ── Brand type in the chrome ───────────────────────────────────────────────
+ * Form controls do not inherit font-family by default, so without this every button
+ * and field stayed in the OS face while the text around it changed. */
+button, input, select, textarea { font-family: inherit; }
+.nav-tab {
+    font-family: var(--ui-display); font-weight: 700; font-size: var(--fs-95);
+    letter-spacing: 0.06em; text-transform: uppercase;
+}
+.section-title {
+    font-family: var(--ui-display); font-weight: 700; font-size: var(--fs-85);
+    letter-spacing: 0.07em;
+}
+.frame-modal h2, .frame-modal h3 { font-family: var(--ui-display); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+
+/* The table toolbar WRAPS rather than squeezing. With the preview column taking width,
+ * a button that shrinks breaks its own label onto two lines ("+ Add / Item"); a row
+ * that wraps keeps every label whole. */
+#view-dashboard .pane-header { flex-wrap: wrap; row-gap: 5px; }
+#view-dashboard .pane-header > div { flex-wrap: wrap; row-gap: 5px; }
+#view-dashboard .pane-header .action-btn { white-space: nowrap; flex: none; }
+
+/* PLACEMENT COLOUR on the dashboard: the grip cell of every row in one placement is
+ * painted the same (--plc, set per row by renderDashTable). The grip and not the row,
+ * because tr.selected owns the row background. A catalogue stripe (inset shadow on the
+ * same cell) still draws over it. */
+#rfiBody tr[data-placement] > td.drag-handle-cell {
+    background: color-mix(in srgb, var(--plc) 70%, transparent);
+    color: #fff;
+}
+/* An image used in another placement too: a small amber count before the code. */
+.dash-same-img {
+    position: absolute; left: 2px; top: 50%; transform: translateY(-50%);
+    font-size: var(--fs-55); font-weight: 700; line-height: 1; padding: 2px 4px;
+    border-radius: var(--r-4); background: var(--warn); color: #000; cursor: help;
+}
+.dash-same-img + .tbl-in { padding-left: 26px; }

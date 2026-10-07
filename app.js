@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.84';
+const APP_VERSION = '17.86';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -1079,6 +1079,101 @@ function _artGroupKey(code) {
     // string - so this moves the key's SPELLING, not which rows sit together.
     const trimmed = stripped.replace(/[-._\s]+$/, '');
     return (/\d/.test(trimmed) && trimmed) ? trimmed : c; // keep pure-letter codes intact
+}
+// ── PLACEMENT COLOURS ───────────────────────────────────────────────────────
+// Every PLACEMENT (the group a floorplan pin stands for: ART.1A, ART.1B and ART.1C are
+// one placement, ART.1) gets one colour, in the order placements first appear in the
+// schedule. The dashboard paints it on each row's grip and the floorplan Items list on
+// each row, so "which of these sixty rows hang together" is answered by eye in both
+// places. Deliberately NOT the category colour: there are four categories and sixty
+// placements, so a category colour would paint most neighbouring placements alike.
+// Mid-saturation hues that read on the dark and the light theme alike; neighbours in
+// the list are far apart on the wheel so two adjacent placements never look the same.
+const PLACEMENT_COLORS = ['#e4572e', '#2a9d8f', '#e9c46a', '#7b6ef6', '#43aa8b', '#d6457a', '#4a90d9', '#c08552', '#90be6d', '#b56576'];
+function _placementColorMap(rows) {
+    const out = {};
+    let n = 0;
+    (rows || dashProjectData || []).forEach(r => {
+        if (!r) return;
+        const k = _artGroupKey(r.id);
+        if (!k || out[k]) return;
+        out[k] = PLACEMENT_COLORS[n++ % PLACEMENT_COLORS.length];
+    });
+    return out;
+}
+function _placementColor(code) {
+    return _placementColorMap()[_artGroupKey(code)] || '';
+}
+
+// ── THE SAME IMAGE IN TWO PLACEMENTS ────────────────────────────────────────
+// A piece of art printed twice is sometimes the plan and very often a mistake: a file
+// dropped onto the wrong row, or a variant never swapped in. Two rows match when they
+// carry the same picture (same data URL, compared by length and tail so a megabyte
+// string is never compared whole) or the same real image code. Rows of ONE placement
+// are excluded, because a diptych cut from one image is the normal case. A catalogue
+// mockup slot never carries art, so it never matches.
+function _artSig(r) {
+    const u = r && r.artworkUrl;
+    return (u && u.length > 64) ? (u.length + ':' + u.slice(-48)) : '';
+}
+function _imgCodeKey(r) {
+    const c = String((r && r.imageCode) || '').trim().toLowerCase();
+    return (c && c !== 'tbd' && c !== '-') ? c : '';
+}
+function _sameImageElsewhere(rowIdx) {
+    const row = dashProjectData[rowIdx];
+    if (!row) return [];
+    const sig = _artSig(row), code = _imgCodeKey(row), plc = _artGroupKey(row.id);
+    if (!sig && !code) return [];
+    const out = [];
+    dashProjectData.forEach((r, i) => {
+        if (i === rowIdx || !r || _artGroupKey(r.id) === plc) return;
+        if ((sig && _artSig(r) === sig) || (code && _imgCodeKey(r) === code)) out.push(r);
+    });
+    return out;
+}
+// Map of row id -> list of OTHER placements' codes that share its image. One pass over
+// the rows, for the table badge.
+function _sameImageMap() {
+    const bySig = {}, byCode = {};
+    dashProjectData.forEach(r => {
+        if (!r) return;
+        const s = _artSig(r), c = _imgCodeKey(r);
+        if (s) (bySig[s] = bySig[s] || []).push(r);
+        if (c) (byCode[c] = byCode[c] || []).push(r);
+    });
+    const out = {};
+    const scan = (list) => {
+        if (list.length < 2) return;
+        list.forEach(r => {
+            const plc = _artGroupKey(r.id);
+            list.forEach(o => {
+                if (o === r || _artGroupKey(o.id) === plc) return;
+                const a = out[r.id] = out[r.id] || [];
+                if (a.indexOf(o.id) < 0) a.push(o.id);
+            });
+        });
+    };
+    Object.keys(bySig).forEach(k => scan(bySig[k]));
+    Object.keys(byCode).forEach(k => scan(byCode[k]));
+    return out;
+}
+// Asked right after an image lands. It is a question, not a refusal: the same print in
+// two lobbies is legitimate, so Keep is the default and Undo is one click away.
+let _sameImageAsking = false;
+function _warnSameImage(rowIdx) {
+    if (_sameImageAsking || (typeof _bulkEditing !== 'undefined' && _bulkEditing)) return;
+    const others = _sameImageElsewhere(rowIdx);
+    if (!others.length) return;
+    const row = dashProjectData[rowIdx];
+    const list = others.map(o => o.id + (o.location ? ' (' + o.location + ')' : '')).join(', ');
+    _sameImageAsking = true;
+    showConfirmModal('Image already used',
+        'This image on ' + row.id + ' is also used in another placement: ' + list + '.' + String.fromCharCode(10, 10) +
+        'Keep it if the same art really hangs in both places. Otherwise undo and choose a different image.',
+        'Keep it', 'Undo',
+        () => { _sameImageAsking = false; },
+        () => { _sameImageAsking = false; if (typeof undo === 'function') undo(); });
 }
 function _artGroupNum(code) {
     const key = _artGroupKey(code);
@@ -5362,6 +5457,8 @@ function _exportSettle() {
 // actual container W/H are derived from this + the current frame aspect.
 let dashPreviewSize = 400;
 const DASH_PREVIEW_SIZE_MIN = 200;
+// The narrowest the CSV table may be squeezed by a big preview column.
+const DASH_TABLE_MIN_W = 420;
 const DASH_PREVIEW_SIZE_DEFAULT = 400;
 
 // ──────────────────────────────────────────────────────────────────────────
@@ -5444,10 +5541,13 @@ function computeDashPreviewDims(extW, extH) {
     // the container + ~50px for the canvas toolbar below it = ~90px chrome.
     // Plus the panel sits at top:156 and the right edge is 460px from
     // viewport right (form pane room).
+    // THE PREVIEW IS A COLUMN NOW, so its limits are the column's: the table keeps at
+    // least DASH_TABLE_MIN_W beside it, and the height is the view under the nav less
+    // the toolbar beneath the picture.
     const vpW = window.innerWidth;
     const vpH = window.innerHeight;
-    const maxW = vpW - 460 - 40 - 40; // form pane + left margin + panel padding
-    const maxH = vpH - 156 - 20 - 50 - 40; // top + bottom margin + toolbar + padding
+    const maxW = vpW - 440 - DASH_TABLE_MIN_W - 48;
+    const maxH = vpH - 46 - 60 - 48;
     if (w > maxW) {
         const k = maxW / w;
         w *= k; h *= k;
@@ -5477,8 +5577,34 @@ function updateDashPreviewContainerSize() {
     container.style.maxHeight = 'none';
 }
 
+// MODE 2 IS A COLUMN, NOT A FLOATING PANEL. It used to be position:fixed over the CSV,
+// so a bigger preview simply covered more of the table you were editing. Now the
+// preview-wrapper is MOVED (the node itself, so every id and handler survives) into
+// #dashPreviewCol, a real flex column between the table and the form. Growing it takes
+// width from the table, the project fields above the table re-wrap to fit, and nothing
+// is ever hidden behind it.
+function _dashPreviewColumn(on) {
+    const view = document.getElementById('view-dashboard');
+    const right = document.getElementById('dashRightPane');
+    const wrap = document.querySelector('.preview-wrapper');
+    if (!view || !right || !wrap) return;
+    let col = document.getElementById('dashPreviewCol');
+    if (on) {
+        if (!col) {
+            col = document.createElement('div');
+            col.id = 'dashPreviewCol';
+            col.className = 'dash-preview-col';
+            view.insertBefore(col, right);
+        }
+        if (wrap.parentNode !== col) col.appendChild(wrap);
+    } else {
+        if (wrap.parentNode !== right) right.insertBefore(wrap, right.firstChild);
+        if (col) col.remove();
+    }
+}
 function applyDashViewMode(mode2) {
     document.body.classList.toggle('dash-view-2', mode2);
+    _dashPreviewColumn(mode2);
     const btn = document.getElementById('dashViewToggle');
     if (btn) btn.classList.toggle('active', mode2);
     if (mode2) {
@@ -5525,8 +5651,9 @@ function initDashViewMode() {
         if (!isNaN(savedSize) && savedSize >= DASH_PREVIEW_SIZE_MIN) {
             dashPreviewSize = savedSize;
         }
+        // The column is the default; '1' is someone who chose the compact preview.
         const saved = localStorage.getItem('dashViewMode');
-        if (saved === '2') {
+        if (saved !== '1') {
             applyDashViewMode(true);
         }
     } catch (e) {
@@ -5595,8 +5722,8 @@ function setupDashPreviewDragHandle() {
         // max-size in two ways and use the tighter.
         const vpW = window.innerWidth;
         const vpH = window.innerHeight;
-        const maxByW = vpW - 460 - 80;  // form pane + side margins
-        const maxByH = vpH - 256;       // top + bottom + toolbar
+        const maxByW = vpW - 440 - DASH_TABLE_MIN_W - 48;  // form pane + the table's floor
+        const maxByH = vpH - 46 - 60 - 48;                 // nav + toolbar + padding
         const data = dashProjectData[dashSelectedRowIndex];
         const ew = Math.max(1, parseFloat(data && data.extW) || 1);
         const eh = Math.max(1, parseFloat(data && data.extH) || 1);
@@ -9552,7 +9679,7 @@ function openBulkEditModal() {
     if (pane && mount) {
         _bulkFormHome = { parent: pane.parentNode, next: pane.nextSibling };
         mount.appendChild(pane);
-        pane.classList.add('bulk-mode');
+        pane.classList.add('bulk-mode'); document.body.classList.add('dash-bulk');
     }
     loadDashDataIntoControls(_bulkScratch);
 
@@ -9643,7 +9770,7 @@ function _bulkTeardown(commit) {
     _bulkEditing = false;
     const pane = document.getElementById('dashRightPane');
     if (pane && _bulkFormHome && _bulkFormHome.parent) {
-        pane.classList.remove('bulk-mode');
+        pane.classList.remove('bulk-mode'); document.body.classList.remove('dash-bulk');
         _bulkFormHome.parent.insertBefore(pane, _bulkFormHome.next);
     }
     _bulkFormHome = null;
@@ -11872,6 +11999,7 @@ function applyArtworkToCurrentRow(dataUrl, baseName, w, h) {
     updateDashArtworkThumb(dataUrl);
     _syncArtCropControls();
     syncDashAndCalculate();
+    if (!_bulkEditing && row) { pushHistory(); _warnSameImage(dashSelectedRowIndex); }
 }
 
 // Assign artwork to a specific dashboard row by index, then live-sync to its
@@ -11892,6 +12020,7 @@ function applyArtworkToRowIndex(idx, dataUrl, baseName, w, h) {
     }
     drawElevAll();
     pushHistory();
+    _warnSameImage(idx);
 }
 
 // ── Bulk artwork replacement (relink-by-code) ────────────────────────────
@@ -26408,6 +26537,9 @@ function _fpItemRow(g, desc) {
     const row = document.createElement('div');
     row.style.cssText = 'display:flex; align-items:center; gap:5px; padding:3px 4px; border-radius:var(--r-4); cursor:pointer; margin-bottom:2px; overflow:hidden; '
         + (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid var(--ui-active);' : 'background:transparent;');
+    // The same placement colour the dashboard paints on this group's rows, as a stripe.
+    const _plc = _placementColor(g.key);
+    if (_plc) row.style.boxShadow = 'inset 3px 0 0 ' + _plc;
     const num = document.createElement('span');
     num.textContent = g.num;
     const codes = g.ids.filter(Boolean).join(', ');
@@ -35399,6 +35531,8 @@ function renderDashTable() {
     // Computed ONCE per render: each walks every wall, and this runs per row.
     const _dashCatSlots = _catSlotRowIds();
     const _dashCatOpts = _catOptionRowIds();
+    const _dashPlc = _placementColorMap();
+    const _dashSame = _sameImageMap();
     dashProjectData.forEach((row, index) => {
         const isCanvas = (row.product === "Framed Canvas (Floater)");
         const isFrameless = (row.product === "Frameless Canvas (Wrapped)");
@@ -35427,6 +35561,11 @@ function renderDashTable() {
         // amber and blue, so one colour language covers both places these walls appear.
         if (_dashCatSlots[row.id]) tr.classList.add('dash-cat-slot');
         else if (_dashCatOpts[row.id]) tr.classList.add('dash-cat-option');
+        // The placement's colour rides a CSS variable onto the grip cell (style.css), so
+        // the rows of one placement read as one block without touching the row
+        // background `.selected` owns.
+        const _plcKey = _artGroupKey(row.id);
+        if (_dashPlc[_plcKey]) { tr.style.setProperty('--plc', _dashPlc[_plcKey]); tr.dataset.placement = _plcKey; }
         // If the row has constraint violations, mark it with a yellow indicator
         // and stash the messages on the title attribute (hover tooltip).
         const rowWarnings = validateRow(row);
@@ -35473,14 +35612,14 @@ function renderDashTable() {
         tr.addEventListener('dragend', handleDashRowDragEnd);
         
         tr.innerHTML = `
-            <td class="drag-handle-cell" title="Drag to reorder">
+            <td class="drag-handle-cell" title="Placement ${_plcKey}. Drag to reorder">
                 ${svgMove}
             </td>
             <td><input class="tbl-in" type="number" value="${row.qty}" disabled style="width:30px; opacity:0.6; background:transparent;"></td>
             <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" oninput="dashHtIn(${index}, 'id', this.value, true)" ondragstart="event.preventDefault()" style="width:80px; font-weight:bold;"></td>
             <td><select class="tbl-in no-arrow" onchange="dashHtIn(${index}, 'product', this.value)">${FRAME_PRODUCTS.map(p => `<option ${row.product === p ? 'selected' : ''}>${p}</option>`).join('')}</select></td>
             <td><input class="tbl-in" type="text" value="${row.location}" oninput="dashHtIn(${index}, 'location', this.value, true)" ondragstart="event.preventDefault()" style="width:90px;"></td>
-            <td><input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value, true)" ondragstart="event.preventDefault()" style="width:200px;"></td>
+            <td style="position:relative;">${_dashSame[row.id] ? `<span class="dash-same-img" title="Same image as ${_dashSame[row.id].join(', ')}">x${_dashSame[row.id].length + 1}</span>` : ''}<input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value, true)" ondragstart="event.preventDefault()" style="width:200px;"></td>
             <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extW)}" oninput="dashHtIn(${index}, 'extW', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
             <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extH)}" oninput="dashHtIn(${index}, 'extH', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
             <td id="calc-openW-${index}" style="padding: 4px 8px; color:var(--accent); font-weight:bold;">${dashFmt(Math.max(0, finalW))}</td><td id="calc-openH-${index}" style="padding: 4px 8px; color:var(--accent); font-weight:bold;">${dashFmt(Math.max(0, finalH))}</td><td id="calc-printW-${index}" style="color:var(--accent); font-weight:bold; padding: 4px 8px;">${imgW}</td><td id="calc-printH-${index}" style="color:var(--accent); font-weight:bold; padding: 4px 8px;">${imgH}</td>
@@ -37114,7 +37253,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
