@@ -662,7 +662,9 @@ const fs = require('fs');
       // and the remove X. One of them still writing r.wallLine directly would put the bug
       // straight back for whichever gesture it owns.
       const A = window.__appSrc;
-      const panel = A.slice(A.indexOf('function _fpItemRow'), A.indexOf('function _fpPanelCats'));
+      // 17.91: the picker is the pen's menu now, which writes through _fpPickLineStyle.
+      const panel = A.slice(A.indexOf('function _fpItemRow'), A.indexOf('function _fpPanelCats'))
+        + A.slice(A.indexOf('function _fpPickLineStyle'), A.indexOf('function _fpItemHeader'));
       if (/r2\\.wallLine\\s*=|delete r2\\.wallLine/.test(panel)) throw new Error('the panel still writes a single wall line');
       if (panel.indexOf('_fpSetWall(') < 0) throw new Error('the mode picker does not write per plan');
       if (panel.indexOf('_fpClearWall(') < 0) throw new Error('the remove button does not clear per plan');

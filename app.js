@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.90';
+const APP_VERSION = '17.91';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -200,6 +200,77 @@ function _helpLiveEntry(kind) {
         + '</li>').join('') + '</ul>';
 }
 
+// ── WHERE TO START (17.91) ──────────────────────────────────────────────────
+// A fresh project asks once: start on the floorplan (list and place the item codes
+// first) or in the Frame Dashboard (spec the frames first). Both are real starting
+// points in this studio, so it is a question, not a default. Asked only for a project
+// with nothing in it yet, never over another dialog (the autosave restore asks first),
+// and "Don't ask again" is remembered per machine.
+const START_CHOOSER_KEY = 'frameStartChooserOff';
+function _projectIsFresh() {
+    const rows = (dashProjectData || []).filter(Boolean);
+    if (rows.length > 1 || rows.some(r => r.artworkUrl || _fpPins(r).length)) return false;
+    if ((elevations || []).some(e => e && (e.frames || []).length)) return false;
+    if ((floorplanLevels || []).some(l => l && l.imageData) || floorplanImageData) return false;
+    return true;
+}
+function _startChooserMaybe() {
+    let off = false; try { off = localStorage.getItem(START_CHOOSER_KEY) === '1'; } catch (e) {}
+    if (off || !_projectIsFresh()) return;
+    if (typeof _modalTop === 'function' && _modalTop()) { setTimeout(_startChooserMaybe, 1500); return; }
+    openStartChooser();
+}
+function openStartChooser() {
+    const ov = document.createElement('div');
+    ov.className = 'frame-modal';
+    ov.id = 'startChooser';
+    ov.style.display = 'flex';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-10); padding:24px; width:600px; max-width:92vw;';
+    const h = document.createElement('div');
+    h.style.cssText = 'font-family:var(--ui-display); font-size:var(--fs-120); letter-spacing:0.04em; text-transform:uppercase; color:var(--text-strong); margin-bottom:4px;';
+    h.textContent = 'Where do you want to start?';
+    const sub = document.createElement('div');
+    sub.style.cssText = 'font-size:var(--fs-75); color:var(--text-muted); margin-bottom:16px;';
+    sub.textContent = 'Either way works. You can switch any time from the tabs at the top.';
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:12px; margin-bottom:14px;';
+    const choice = (title, body, icon, go) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'start-choice';
+        b.innerHTML = icon + '<strong></strong><span></span>';
+        b.querySelector('strong').textContent = title;
+        b.querySelector('span').textContent = body;
+        b.onclick = () => { remember(); ov.remove(); go(); };
+        return b;
+    };
+    const cb = document.createElement('input'); cb.type = 'checkbox';
+    const remember = () => { if (cb.checked) { try { localStorage.setItem(START_CHOOSER_KEY, '1'); } catch (e) {} } };
+    const fp = choice('Floorplan', 'Add item codes (ART.1, EGD.1, WF.1), pick each one’s frame set, and pin them on the plan. No plan image needed yet.',
+        '<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M3 12h7v9M14 3v8h7"/><circle cx="17" cy="16" r="2"/></svg>',
+        () => _dsGoFloorplanItems());
+    fp.setAttribute('data-modal-initial', '');
+    const db = choice('Frame Dashboard', 'Spec the frames first: sizes, mouldings, mats and artwork, one row per piece.',
+        '<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v16"/></svg>',
+        () => { try { switchView('dashboard'); } catch (e) {} });
+    row.appendChild(fp); row.appendChild(db);
+    const foot = document.createElement('div');
+    foot.style.cssText = 'display:flex; align-items:center; justify-content:space-between;';
+    const lab = document.createElement('label');
+    lab.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-muted); cursor:pointer;';
+    lab.appendChild(cb); lab.appendChild(document.createTextNode('Don’t ask again'));
+    const close = document.createElement('button');
+    close.className = 'action-btn btn-secondary'; close.textContent = 'Not now';
+    close.style.cssText = 'width:auto; padding:0 14px; height:28px;';
+    close.setAttribute('data-modal-close', '');
+    close.onclick = () => { remember(); ov.remove(); };
+    foot.appendChild(lab); foot.appendChild(close);
+    card.appendChild(h); card.appendChild(sub); card.appendChild(row); card.appendChild(foot);
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    try { fp.focus(); } catch (e) {}
+    return ov;
+}
 // Open Deck Studio on the first floorplan page with the Items tab up: where a project
 // starts. Falls back to the dashboard if the deck cannot open (a test harness).
 function _dsGoFloorplanItems() {
@@ -4557,6 +4628,9 @@ function initMasterApp() {
     document.getElementById('g_date').valueAsDate = new Date();
     _helpDotInit();
     _elevGuideGroupsInit();
+    // Not under a test harness: a modal appearing on its own at boot would land in the
+    // middle of whatever a headless check is doing (the autosave-warning flake again).
+    if (!(typeof navigator !== 'undefined' && /jsdom/i.test(navigator.userAgent || ''))) setTimeout(_startChooserMaybe, 1100);
     renderNavTabs();
     selectDashRow(0); 
     populateDashPushSelector();
@@ -5345,7 +5419,9 @@ function _syncCatalogueBtn() {
             + ' Drawn with no artwork \u2014 duplicate it to add image set ' + _catNextOptionNum(elev) + '. '
             + (opts.length ? (opts.length + ' image set' + (opts.length === 1 ? '' : 's') + ' follow this wall.') : 'No image sets yet.');
     } else {
-        hint.textContent = 'Mark this wall a catalogue mockup to hold one arrangement and offer several sets of artwork in it.';
+        // A plain wall says nothing here: options are made from Deck Studio now, and a
+        // line pointing at a button that no longer exists is worse than no line.
+        hint.textContent = '';
     }
 }
 // Toggle group-box visibility (only meaningful if one exists).
@@ -9476,6 +9552,34 @@ function populateDashPushSelector() {
     }
 }
 
+// ONE way to turn a dashboard row into a frame on a wall: Push to Wall and the floorplan
+// frame-set mockup both build frames here, so the two cannot disagree about which fields
+// a placed frame carries. `factor` converts dashUnit to elevUnit; x/y are elevUnit.
+function _elevFrameFromRow(f, factor, x, y, letter) {
+    return {
+        id: f.id, letter: letter,
+        w: (parseFloat(f.extW) || 24) * factor, h: (parseFloat(f.extH) || 30) * factor,
+        fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
+        product: f.product || '', material: f.material || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
+        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', imageCode: f.imageCode || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
+        fColorName: f.fColorName || '', paperType: f.paperType || '',
+        fHeight: (parseFloat(f.fHeight) || 0) * factor,
+        rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
+        useFloatMount: f.useFloatMount === true,
+        sbBackerColorHex: f.sbBackerColorHex || '#ffffff', sbBackerColorName: f.sbBackerColorName || 'B 97 White',
+        sbPaperColorHex: f.sbPaperColorHex || '#ffffff', sbPaperColorName: f.sbPaperColorName || 'White',
+        sbPaperMargin: (isNaN(parseFloat(f.sbPaperMargin)) ? 1.5 : parseFloat(f.sbPaperMargin)) * factor,
+        sbPaperBorder: (isNaN(parseFloat(f.sbPaperBorder)) ? 0.5 : parseFloat(f.sbPaperBorder)) * factor,
+        sbPaperEdge: f.sbPaperEdge || 'clean',
+        sbPaperEdgeSeed: f.sbPaperEdgeSeed || 0,
+        m1T: (parseFloat(f.m1T) || 0) * factor, m1B: (parseFloat(f.m1B) || 0) * factor, m1L: (parseFloat(f.m1L) || 0) * factor, m1R: (parseFloat(f.m1R) || 0) * factor,
+        m1A: f.m1A !== false, m1Locked: f.m1Locked || false, m1ColorHex: f.m1ColorHex || '#ffffff',
+        m2: (parseFloat(f.m2) || 0) * factor, m2A: f.m2A || false, m2ColorHex: f.m2ColorHex || '#ffffff',
+        x: x, y: y, isOpen: false, isGrouped: false, dimTo: [], active: true,
+        selected: false,
+        distToggles: { ceiling: false, floor: false, left: false, right: false }
+    };
+}
 function pushFrameToElevation() {
     const select = document.getElementById('dashPushSelector');
     if (select.value === "") { _toast('No wall chosen', 'Pick the elevation to push to first.'); return; }
@@ -9531,29 +9635,7 @@ function pushFrameToElevation() {
         startX = maxRight + 10;
     }
 
-    targetElev.frames.push({
-        id: f.id, letter: getElevLetter(targetElev.frames.length),
-        w: (parseFloat(f.extW) || 24) * factor, h: (parseFloat(f.extH) || 30) * factor,
-        fW: (parseFloat(f.fW) || 1.25) * factor, fType: f.fType || 'color', fColor: f.fColor || '#1a1a1a', fCode: f.fCode || '', swatchDataUrl: f.swatchDataUrl || '',
-        product: f.product || '', material: f.material || '', floaterInset: (parseFloat(f.floaterInset) || 0.75) * factor,
-        artist: f.artist || '', artworkTitle: f.artworkTitle || '', artType: f.artType || '', artworkUrl: f.artworkUrl || '', artworkFile: f.artworkFile || '', imageCode: f.imageCode || '', artworkW: f.artworkW||0, artworkH: f.artworkH||0, artZoom: f.artZoom||1, artPanX: f.artPanX||0, artPanY: f.artPanY||0,
-        fColorName: f.fColorName || '', paperType: f.paperType || '',
-        fHeight: (parseFloat(f.fHeight) || 0) * factor,
-        rabbetDepth: (parseFloat(f.rabbetDepth) || 0) * factor,
-        useFloatMount: f.useFloatMount === true,
-        sbBackerColorHex: f.sbBackerColorHex || '#ffffff', sbBackerColorName: f.sbBackerColorName || 'B 97 White',
-        sbPaperColorHex: f.sbPaperColorHex || '#ffffff', sbPaperColorName: f.sbPaperColorName || 'White',
-        sbPaperMargin: (isNaN(parseFloat(f.sbPaperMargin)) ? 1.5 : parseFloat(f.sbPaperMargin)) * factor,
-        sbPaperBorder: (isNaN(parseFloat(f.sbPaperBorder)) ? 0.5 : parseFloat(f.sbPaperBorder)) * factor,
-        sbPaperEdge: f.sbPaperEdge || 'clean',
-        sbPaperEdgeSeed: f.sbPaperEdgeSeed || 0,
-        m1T: (parseFloat(f.m1T) || 0) * factor, m1B: (parseFloat(f.m1B) || 0) * factor, m1L: (parseFloat(f.m1L) || 0) * factor, m1R: (parseFloat(f.m1R) || 0) * factor,
-        m1A: f.m1A !== false, m1Locked: f.m1Locked || false, m1ColorHex: f.m1ColorHex || '#ffffff',
-        m2: (parseFloat(f.m2) || 0) * factor, m2A: f.m2A || false, m2ColorHex: f.m2ColorHex || '#ffffff',
-        x: startX, y: 10, isOpen: false, isGrouped: false, dimTo: [], active: true,
-        selected: false,
-        distToggles: { ceiling: false, floor: false, left: false, right: false }
-    });
+    targetElev.frames.push(_elevFrameFromRow(f, factor, startX, 10, getElevLetter(targetElev.frames.length)));
     
     // Same auto-fit rule as Add & Arrange - see _shouldAutoFitFlat. Gated, because
     // this overwrites the size typed in the dashboard.
@@ -26890,11 +26972,18 @@ function _frameMenu(anchor, items) {
     m.setAttribute('role', 'menu');
     m._for = anchor;
     items.forEach(it => {
-        if (it.head) { const h = document.createElement('div'); h.className = 'frame-menu-head'; h.textContent = it.head; m.appendChild(h); return; }
+        if (it.head != null && !it.label) {
+            const h = document.createElement('div');
+            h.className = it.head ? 'frame-menu-head' : 'frame-menu-sep';
+            h.textContent = it.head; m.appendChild(h); return;
+        }
         const b = document.createElement('button');
         b.type = 'button';
-        b.setAttribute('role', 'menuitem');
-        const l = document.createElement('span'); l.textContent = it.label; b.appendChild(l);
+        b.setAttribute('role', it.on != null ? 'menuitemradio' : 'menuitem');
+        if (it.on != null) b.setAttribute('aria-checked', it.on ? 'true' : 'false');
+        if (it.on) b.classList.add('on');
+        if (it.danger) b.classList.add('danger');
+        const l = document.createElement('span'); l.textContent = (it.on != null ? (it.on ? '\u2713 ' : '\u2003') : '') + it.label; b.appendChild(l);
         if (it.hint) { const h = document.createElement('small'); h.textContent = it.hint; b.appendChild(h); }
         b.onclick = (e) => { e.stopPropagation(); m._close(); try { it.onClick(); } catch (err) { console.error(err); } };
         m.appendChild(b);
@@ -26912,7 +27001,7 @@ function _frameMenu(anchor, items) {
         document.addEventListener('mousedown', onDoc, true);
         document.addEventListener('keydown', onKey, true);
     }, 0);
-    const first = m.querySelector('button'); if (first) first.focus();
+    const first = m.querySelector('button.on') || m.querySelector('button'); if (first) first.focus();
     return m;
 }
 // The Elevations export: one menu, two questions (which file type, which walls).
@@ -27142,7 +27231,31 @@ function _fpPanelItems(t, desc) {
     _fpFillItemList(desc);
 }
 // The header widths are the row's widths (FP_ITEM_COLS), so the two cannot drift.
-const FP_ITEM_COLS = { num: 24, cat: 26, line: 24, type: 62, rm: 18 };
+const FP_ITEM_COLS = { num: 24, cat: 26, line: 34, frames: 38 };
+// The line styles, in menu order. 'custom' keeps its stored value and is labelled
+// BREAKER: separate start/end runs, the line drawn along a corridor between its doors.
+const FP_LINE_STYLES = [
+    ['1', 'Single', 'drag along the wall'],
+    ['2', 'Diptych', 'drag; split in two'],
+    ['3', 'Triptych', 'drag; split in three'],
+    ['custom', 'Breaker', 'click start, click end, repeat'],
+    ['wrap', 'Wrap', 'click round corners (EGD / WF)'],
+];
+function _fpPickLineStyle(g, lvl, v) {
+    g.rows.forEach(r2 => {
+        const w = _fpWallOn(r2, lvl);
+        if (_fpLineIsMulti(v)) {
+            const lines = (w && Array.isArray(w.wallLines) && w.wallLines.length) ? w.wallLines : (w && w.wallLine ? [w.wallLine] : []);
+            _fpSetWall(r2, lvl, { wallLines: lines, wallPanels: v });
+        } else {
+            const one = (w && Array.isArray(w.wallLines) && w.wallLines.length) ? w.wallLines[0] : (w ? w.wallLine : null);
+            _fpSetWall(r2, lvl, { wallLine: one, wallPanels: parseInt(v, 10) || 1 });
+        }
+    });
+    _fpLineArmId = g.key; _fpArmedId = null; _fpLineStart = null;
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+}
 function _fpItemHeader() {
     const h = document.createElement('div');
     h.className = 'fp-item-head';
@@ -27158,9 +27271,8 @@ function _fpItemHeader() {
     cell('#', FP_ITEM_COLS.num, 'Pin number. Hollow until the code is pinned on a plan.');
     cell('Item code', 0, 'Double-click a code to rename it', true);
     cell('Cat', FP_ITEM_COLS.cat, 'Category: sets the pin and line colour');
-    cell('Line', FP_ITEM_COLS.line, 'Draw the wall line on this plan');
-    cell('Line type', FP_ITEM_COLS.type, 'Single, Diptych, Triptych, Custom (separate lines) or Wrap (one line round corners, for EGD and WF)');
-    cell('', FP_ITEM_COLS.rm);
+    cell('Line', FP_ITEM_COLS.line, 'Pick a line style (Single, Diptych, Triptych, Breaker, Wrap) and draw it on this plan');
+    cell('Frames', FP_ITEM_COLS.frames, 'Single, Diptych, Triptych, Quad, or a 5 / 7 piece salon hang. Mocked up on the wall in Elevations.');
     return h;
 }
 
@@ -27187,22 +27299,19 @@ function _fpAddCodesBar(desc) {
     tSel.style.cssText = 'flex:1 1 0; min-width:0; ' + sty;
     cats.forEach(c => { const o = document.createElement('option'); o.value = c.key; o.textContent = c.label; if (c.key === _fpAddType) o.selected = true; tSel.appendChild(o); });
     tSel.onchange = () => { _fpAddType = tSel.value; };
-    const sSel = document.createElement('select');
-    sSel.title = 'Frame set: how many pieces hang at this spot';
-    sSel.style.cssText = 'flex:0 0 84px; ' + sty;
-    FP_FRAME_SETS.forEach(fs => { const o = document.createElement('option'); o.value = String(fs.n); o.textContent = fs.label; if (fs.n === _fpAddSet) o.selected = true; sSel.appendChild(o); });
-    sSel.onchange = () => { _fpAddSet = parseInt(sSel.value, 10) || 1; };
+    // No set picker here: a code starts as a Single and its row's FRAMES menu turns it
+    // into a set (and mocks that up on the wall), so there is one place to choose it.
     const add = document.createElement('button');
     add.className = 'action-btn';
     add.style.cssText = 'flex:0 0 auto; width:auto; height:26px; padding:0 10px; font-size:var(--fs-65);';
     add.textContent = '+ Add code';
     add.onclick = () => {
-        const code = _fpAddCodes(tSel.value, parseInt(sSel.value, 10) || 1);
+        const code = _fpAddCodes(tSel.value, 1);
         if (code) { _fpArmedId = code; _fpLineArmId = null; }
         _dsRefresh(); _dsRenderTools(); _dsRenderCenter();
         if (code) _toast('Added ' + code, (floorplanLevels.some(l => l && l.imageData) || floorplanImageData) ? 'Click the plan to pin it, or add the next one.' : 'Pin it once a plan image is in.');
     };
-    bar.appendChild(tSel); bar.appendChild(sSel); bar.appendChild(add);
+    bar.appendChild(tSel); bar.appendChild(add);
     return bar;
 }
 // Mint one placement: N dashboard rows sharing a code, typed and categorised. Returns the
@@ -27236,6 +27345,198 @@ function _fpAddCodes(catKey, n) {
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     return code;
+}
+
+// ── FRAME SETS, MOCKED UP ON THE WALL (17.91) ────────────────────────────────
+// Picking a frame set on the floorplan does two things: the placement gets that many
+// pieces (ART.4 becomes ART.4A to ART.4C), and a wall elevation is drawn with them hung
+// as a group - centred on the wall, its centre at hang height, 3" apart. The 5 and 7
+// sets are SALON HANGS from a small library: mixed sizes, some matted, some unmatted,
+// some float-mounted on deckled paper, the way a salon wall is actually built.
+// Every preset is in INCHES, x/y measured from the group's bottom-left (y up, like a
+// wall), and laid out so every neighbour gap is exactly SET_GAP_IN. A test checks that.
+const SET_GAP_IN = 3;
+// Simple sets keep whatever sizes the pieces already have (a size typed in the dashboard
+// is an instruction); these are only for pieces that do not have one yet.
+const FRAME_SET_SIMPLE = {
+    1: { label: 'Single', size: [30, 40] },
+    2: { label: 'Diptych', size: [24, 30] },
+    3: { label: 'Triptych', size: [20, 26] },
+    4: { label: 'Quad', size: [20, 20], grid: 2 },
+};
+// Styles: 'mat' (3" mat), 'plain' (no mat), 'float' (float mount, deckled paper edge).
+const SALON_PRESETS = [
+    { key: 's5-anchor', n: 5, label: 'Anchor left', frames: [
+        { x: 0,  y: 0,  w: 30, h: 40, s: 'mat' },
+        { x: 33, y: 16, w: 18, h: 24, s: 'plain' },
+        { x: 33, y: 0,  w: 18, h: 13, s: 'float' },
+        { x: 54, y: 22, w: 14, h: 18, s: 'mat' },
+        { x: 54, y: 0,  w: 14, h: 19, s: 'plain' } ] },
+    { key: 's5-center', n: 5, label: 'Centred', frames: [
+        { x: 19, y: 0,  w: 24, h: 32, s: 'mat' },
+        { x: 0,  y: 18, w: 16, h: 14, s: 'float' },
+        { x: 0,  y: 0,  w: 16, h: 15, s: 'plain' },
+        { x: 46, y: 14, w: 16, h: 18, s: 'plain' },
+        { x: 46, y: 0,  w: 16, h: 11, s: 'float' } ] },
+    { key: 's7-rows', n: 7, label: 'Two rows', frames: [
+        { x: 0,  y: 27, w: 18, h: 18, s: 'mat' },
+        { x: 21, y: 27, w: 12, h: 18, s: 'plain' },
+        { x: 36, y: 27, w: 14, h: 18, s: 'float' },
+        { x: 53, y: 27, w: 14, h: 18, s: 'plain' },
+        { x: 0,  y: 0,  w: 22, h: 24, s: 'plain' },
+        { x: 25, y: 0,  w: 20, h: 24, s: 'mat' },
+        { x: 48, y: 0,  w: 19, h: 24, s: 'float' } ] },
+    { key: 's7-cluster', n: 7, label: 'Cluster', frames: [
+        { x: 20, y: 0,  w: 26, h: 40, s: 'mat' },
+        { x: 0,  y: 18, w: 17, h: 22, s: 'plain' },
+        { x: 0,  y: 0,  w: 17, h: 15, s: 'float' },
+        { x: 49, y: 28, w: 15, h: 12, s: 'plain' },
+        { x: 49, y: 15, w: 15, h: 10, s: 'float' },
+        { x: 49, y: 0,  w: 15, h: 12, s: 'mat' },
+        { x: 67, y: 7,  w: 17, h: 26, s: 'plain' } ] },
+];
+function _salonPreset(key) { return SALON_PRESETS.find(p => p.key === key) || null; }
+// The layout for a set, in inches: [{x, y, w, h, s?}], x/y from the group's bottom-left.
+function _frameSetLayout(n, presetKey, sizes) {
+    const pre = presetKey ? _salonPreset(presetKey) : null;
+    if (pre) return pre.frames.map(f => Object.assign({}, f));
+    const S = FRAME_SET_SIMPLE[n] || FRAME_SET_SIMPLE[1];
+    const sz = (i) => (sizes && sizes[i]) || S.size;
+    const out = [];
+    if (S.grid) {
+        const cols = S.grid, rows = Math.ceil(n / cols);
+        const cw = [], rh = [];
+        for (let i = 0; i < n; i++) { const c = i % cols, r = Math.floor(i / cols); cw[c] = Math.max(cw[c] || 0, sz(i)[0]); rh[r] = Math.max(rh[r] || 0, sz(i)[1]); }
+        for (let i = 0; i < n; i++) {
+            const c = i % cols, r = Math.floor(i / cols);
+            let x = 0; for (let k = 0; k < c; k++) x += cw[k] + SET_GAP_IN;
+            let yTop = 0; for (let k = 0; k < r; k++) yTop += rh[k] + SET_GAP_IN;
+            const totalH = rh.reduce((a, b) => a + b, 0) + SET_GAP_IN * (rows - 1);
+            out.push({ x: x + (cw[c] - sz(i)[0]) / 2, y: totalH - yTop - rh[r] + (rh[r] - sz(i)[1]) / 2, w: sz(i)[0], h: sz(i)[1] });
+        }
+        return out;
+    }
+    // A row, centred on a common middle line.
+    const maxH = Math.max.apply(null, Array.from({ length: n }, (_, i) => sz(i)[1]));
+    let x = 0;
+    for (let i = 0; i < n; i++) { out.push({ x: x, y: (maxH - sz(i)[1]) / 2, w: sz(i)[0], h: sz(i)[1] }); x += sz(i)[0] + SET_GAP_IN; }
+    return out;
+}
+// The style a preset gives a piece, written onto the dashboard row (dash units).
+function _applyFrameStyle(row, style) {
+    const k = unitFactor('in', dashUnit);
+    if (style === 'mat') {
+        row.useFloatMount = false; row.m1A = true;
+        row.m1T = row.m1B = row.m1L = row.m1R = dashFmt(3 * k);
+    } else if (style === 'plain') {
+        row.useFloatMount = false; row.m1A = false;
+    } else if (style === 'float') {
+        row.useFloatMount = true; row.m1A = false;
+        row.sbPaperEdge = 'torn';
+        row.sbPaperMargin = dashFmt(1.5 * k); row.sbPaperBorder = dashFmt(0.5 * k);
+    }
+}
+// What set a placement is now: its piece count, and a salon preset if one was applied.
+function _fpGroupSet(g) {
+    const n = (g && g.rows) ? g.rows.length : 1;
+    const pre = g && g.rows && g.rows[0] && g.rows[0].salonPreset;
+    return { n: n, preset: (pre && _salonPreset(pre) && _salonPreset(pre).n === n) ? pre : '' };
+}
+function _fpApplyFrameSet(key, n, presetKey) {
+    const g = _fpFindGroup(key);
+    const rows0 = g ? g.rows.slice() : dashProjectData.filter(r => r && _artGroupKey(r.id) === key);
+    if (!rows0.length) return false;
+    n = Math.max(1, Math.min(12, n | 0));
+    const extra = rows0.slice(n);
+    const lossy = extra.filter(r => r.artworkUrl).length;
+    const go = () => _fpApplyFrameSetNow(key, rows0, n, presetKey);
+    if (extra.length) {
+        _confirmDestroy({
+            title: 'Make ' + key + ' a set of ' + n + '?',
+            body: 'This removes ' + extra.map(r => r.id).join(', ') + (lossy ? ', including ' + lossy + ' with artwork' : '') + '.',
+            confirm: 'Remove ' + extra.length,
+            undoable: true,
+            onConfirm: go,
+        });
+        return true;
+    }
+    return go();
+}
+function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
+    // A salon preset's geometry is fixed; a simple set is laid out AFTER the pieces exist
+    // and are sized, from their real sizes, or the new pieces get spaced for a default
+    // size they do not have and the group lands off-centre.
+    const pre0 = presetKey ? _frameSetLayout(n, presetKey) : null;
+    // The suffix style the placement already uses (ART.4A or ART.4-A).
+    const first = String(rows0[0].id || key);
+    const tail = first.slice(key.length);
+    const sep = (rows0.length > 1 && /^[-_.\s]/.test(tail)) ? tail.charAt(0) : '';
+    const letters = _setLetters(n);
+    // Rows: drop the extras, rename the survivors to their letters, add the rest.
+    rows0.slice(n).forEach(r => {
+        const i = dashProjectData.indexOf(r); if (i >= 0) dashProjectData.splice(i, 1);
+        elevations.forEach(e => { e.frames = (e.frames || []).filter(f => f && f.id !== r.id); });
+    });
+    const rows = rows0.slice(0, n);
+    rows.forEach((r, i) => { const want = n === 1 ? key : key + sep + letters[i]; if (r.id !== want) applyIdRename(r.id, want); });
+    let at = dashProjectData.indexOf(rows[rows.length - 1]);
+    for (let i = rows.length; i < n; i++) {
+        const nr = _cloneData(rows[0]);
+        ['artworkUrl', 'artworkFile', 'imageCode', 'artist', 'artworkTitle'].forEach(f => { nr[f] = ''; });
+        nr.artworkW = 0; nr.artworkH = 0; nr.artZoom = 1; nr.artPanX = 0; nr.artPanY = 0; nr.qty = 0;
+        nr.id = key + sep + letters[i];
+        dashProjectData.splice(++at, 0, nr);
+        rows.push(nr);
+    }
+    // Sizes and styles: a salon preset sets them (that is what choosing one means); a
+    // simple set only sizes pieces that had no size.
+    const kIn = unitFactor('in', dashUnit);
+    const S = FRAME_SET_SIMPLE[n] || FRAME_SET_SIMPLE[1];
+    rows.forEach((r, i) => {
+        if (pre0) { const L = pre0[i]; r.extW = dashFmt(L.w * kIn); r.extH = dashFmt(L.h * kIn); _applyFrameStyle(r, L.s); r.salonPreset = presetKey; }
+        else { delete r.salonPreset; if (!(parseFloat(r.extW) > 0) || !(parseFloat(r.extH) > 0)) { r.extW = dashFmt(S.size[0] * kIn); r.extH = dashFmt(S.size[1] * kIn); } }
+    });
+    const kOut = unitFactor(dashUnit, 'in');
+    const lay = pre0 || _frameSetLayout(n, '', rows.map(r => [parseFloat(r.extW) * kOut, parseFloat(r.extH) * kOut]));
+    _fpMockSetOnWall(key, rows, lay);
+    recalculateDashboardQuantities();
+    if (typeof renderDashTable === 'function') renderDashTable();
+    if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    const label = presetKey ? ('salon hang, ' + _salonPreset(presetKey).label) : (FRAME_SET_SIMPLE[n] ? FRAME_SET_SIMPLE[n].label : n + ' set');
+    _toast(key + ' is a ' + label.toLowerCase(), 'Mocked up on its wall in Elevations. Ctrl+Z undoes it.');
+    try { _dsRefresh(); _dsRenderTools(); _dsRenderCenter(); } catch (e) {}
+    return true;
+}
+// Hang the set on the placement's wall: the wall already holding any of its pieces, or
+// a new one named after it. Its old frames come off and the set goes up centred on the
+// wall with the group's centre at hang height.
+function _fpMockSetOnWall(key, rows, lay) {
+    const ids = {}; rows.forEach(r => { ids[r.id] = true; });
+    let wall = (elevations || []).find(e => (e.frames || []).some(f => f && (ids[f.id] || _artGroupKey(f.id) === key)));
+    const kE = unitFactor('in', elevUnit);
+    const W = Math.max.apply(null, lay.map(f => f.x + f.w)), H = Math.max.apply(null, lay.map(f => f.y + f.h));
+    if (!wall) {
+        const loc = (rows[0].location || '').trim();
+        wall = { id: _elevNewId(), name: key + (loc ? ' ' + loc : ''), frames: [],
+                 wallW: parseFloat((Math.max(144, Math.ceil(W + 72)) * kE).toFixed(2)),
+                 wallH: parseFloat((Math.max(108, Math.ceil((elevHangIn || 57) + H / 2 + 18)) * kE).toFixed(2)),
+                 personPos: { x: parseFloat((-60 * kE).toFixed(2)) }, groupDims: [], customLines: [] };
+        elevations.push(wall);
+    }
+    const others = (wall.frames || []).filter(f => f && !ids[f.id] && _artGroupKey(f.id) !== key);
+    const wallWin = (parseFloat(wall.wallW) || 185 * kE) / kE;
+    const x0 = (wallWin - W) / 2, y0 = (elevHangIn || 57) - H / 2;
+    const factor = unitFactor(dashUnit, elevUnit);
+    const placed = rows.map((r, i) => {
+        const L = lay[i];
+        const f = _elevFrameFromRow(r, factor, (x0 + L.x) * kE, (y0 + L.y) * kE, '');
+        return f;
+    });
+    wall.frames = others.concat(placed);
+    wall.frames.forEach((f, i) => { f.letter = getElevLetter(i); });
+    return wall;
 }
 
 // ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
@@ -27374,7 +27675,10 @@ function _fpItemRow(g, desc) {
     num.className = placed ? 'fp-num fp-num-placed' : 'fp-num fp-num-hollow';
     row.title = (codes || g.key) + ' \u2014 ' + status;
     const code = document.createElement('span');
-    code.textContent = codes || g.key;
+    // A set shows its PLACEMENT code (ART.2), not a truncated list of its pieces; the
+    // pieces are in the tooltip and on the Frames button's count.
+    code.textContent = (g.rows.length > 1 ? g.key : (codes || g.key));
+    code.title = codes || g.key;
     code.style.cssText = 'flex:1 1 auto; min-width:0; font-size:var(--fs-60); color:var(--text-main); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;'
         + (placed ? '' : ' color:var(--text-muted);');
     code.className = 'fp-code';
@@ -27415,41 +27719,48 @@ function _fpItemRow(g, desc) {
     const wallHere = _fpWallOn(g.rows[0], desc.level);
     const hasLine = _fpWallHas(wallHere);
     const pnHere = _fpWallPanelsOn(g.rows[0], desc.level);
+    // LINE: a pen. Clicking it opens the line styles; choosing one sets this plan's
+    // style for the piece AND arms drawing, so picking and drawing are one gesture. The
+    // pen is the edit glyph the elevation frame list already uses for "edit by hand".
+    const _pnCur = _fpLineIsMulti(pnHere) ? pnHere : String(pnHere || 1);
     const lnB = document.createElement('button');
-    lnB.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="4" y1="20" x2="20" y2="4"/></svg>';
-    lnB.title = (hasLine ? 'Redraw wall line' : 'Draw wall line')
-        + ' \u2014 click, then ' + (pnHere === 'wrap' ? 'click along the wall; each click continues round the corner (Esc to finish)' : (pnHere === 'custom') ? 'click start/end points on the plan (keep clicking to add more lines)' : 'drag along the wall on the plan')
-        + '. Hold Shift to lock the line horizontal or vertical.';
-    lnB.className = 'action-btn btn-secondary';
-    lnB.style.cssText = 'width:' + FP_ITEM_COLS.line + 'px; height:22px; padding:0; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;' + (_fpLineArmId === g.key ? ' outline:2px solid #e02b2b; color:#e02b2b;' : (hasLine ? ' color:' + categoryColor(g.category) + ';' : ''));
-    lnB.onclick = (e) => { e.stopPropagation(); _fpLineArmId = (_fpLineArmId === g.key ? null : g.key); _fpArmedId = null; _fpLineStart = null; _dsRenderCenter(); _dsRenderTools(); };
-    const pSel = document.createElement('select');
-    pSel.title = 'Line type \u2014 Single, Diptych, Triptych, Custom (click-to-click, separate lines) or Wrap (one line that turns corners, for EGD and WF)';
-    pSel.style.cssText = 'flex:0 0 auto; width:' + FP_ITEM_COLS.type + 'px; font-size:var(--fs-55); padding:1px 1px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
-    const curMode = _fpLineIsMulti(pnHere) ? pnHere : String(pnHere || 1);
-    [['1', 'Single'], ['2', 'Diptych'], ['3', 'Triptych'], ['custom', 'Custom'], ['wrap', 'Wrap']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (curMode === v) o.selected = true; pSel.appendChild(o); });
-    pSel.onclick = (e) => e.stopPropagation();
-    pSel.onchange = (e) => {
+    lnB.type = 'button';
+    lnB.className = 'action-btn btn-secondary fp-line-btn';
+    lnB.innerHTML = svgEdit + '<span class="fp-caret">▾</span>';
+    const _armedLine = (_fpLineArmId === g.key);
+    lnB.style.cssText = 'width:' + FP_ITEM_COLS.line + 'px; height:22px; padding:0 2px; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; gap:1px;'
+        + (_armedLine ? ' outline:2px solid #e02b2b; color:#e02b2b;' : (hasLine ? ' color:' + categoryColor(g.category) + ';' : ''));
+    lnB.title = (hasLine ? 'Wall line drawn (' + (FP_LINE_STYLES.find(x => x[0] === _pnCur) || ['', 'Single'])[1] + '). ' : 'No wall line yet. ') + 'Click to choose a line style and draw.';
+    lnB.onclick = (e) => {
         e.stopPropagation();
-        const v = pSel.value;
-        const lvl = desc.level;
-        g.rows.forEach(r2 => {
-            const w = _fpWallOn(r2, lvl);
-            if (_fpLineIsMulti(v)) {
-                const lines = (w && Array.isArray(w.wallLines) && w.wallLines.length) ? w.wallLines : (w && w.wallLine ? [w.wallLine] : []);
-                _fpSetWall(r2, lvl, { wallLines: lines, wallPanels: v });
-            } else {
-                const one = (w && Array.isArray(w.wallLines) && w.wallLines.length) ? w.wallLines[0] : (w ? w.wallLine : null);
-                _fpSetWall(r2, lvl, { wallLine: one, wallPanels: parseInt(v, 10) || 1 });
-            }
-        });
-        if (typeof scheduleAutosave === 'function') scheduleAutosave();
-        _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
+        const items = [{ head: 'DRAW A LINE' }].concat(FP_LINE_STYLES.map(([v, l, hint]) => ({
+            label: l, hint: hint, on: _pnCur === v,
+            onClick: () => _fpPickLineStyle(g, desc.level, v),
+        })));
+        if (hasLine) items.push({ head: '' }, { label: 'Remove line', danger: true, onClick: () => { g.rows.forEach(r2 => _fpClearWall(r2, desc.level)); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); } });
+        _frameMenu(lnB, items);
     };
-    const lnX = document.createElement('button'); lnX.textContent = '\u2715'; lnX.title = 'Remove wall line(s)';
-    lnX.className = 'action-btn btn-secondary'; lnX.style.cssText = 'width:' + FP_ITEM_COLS.rm + 'px; height:22px; padding:0; font-size:var(--fs-50); flex:0 0 auto;' + (hasLine ? '' : ' visibility:hidden;');
-    lnX.onclick = (e) => { e.stopPropagation(); g.rows.forEach(r2 => _fpClearWall(r2, desc.level)); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
-    row.appendChild(num); row.appendChild(code); row.appendChild(sel); row.appendChild(lnB); row.appendChild(pSel); row.appendChild(lnX);
+    // FRAMES: how many pieces hang at this spot. Choosing a set re-makes the placement's
+    // rows and mocks the set up on its wall (see _fpApplyFrameSet); the 5 and 7 sets are
+    // the salon-hang library.
+    const _set = _fpGroupSet(g);
+    const frB = document.createElement('button');
+    frB.type = 'button';
+    frB.className = 'action-btn btn-secondary fp-frames-btn';
+    frB.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><rect x="7" y="8" width="10" height="8"/></svg><span class="fp-set-n">' + _set.n + '</span>';
+    frB.style.cssText = 'width:' + FP_ITEM_COLS.frames + 'px; height:22px; padding:0 3px; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; gap:2px;';
+    frB.title = 'Frames: ' + (_set.preset ? ('salon hang, ' + _salonPreset(_set.preset).label) : (FRAME_SET_SIMPLE[_set.n] ? FRAME_SET_SIMPLE[_set.n].label : _set.n + ' pieces')) + '. Click to change the set; it is mocked up on the wall in Elevations.';
+    frB.onclick = (e) => {
+        e.stopPropagation();
+        const items = [{ head: 'FRAME SET' }];
+        [1, 2, 3, 4].forEach(k => items.push({ label: FRAME_SET_SIMPLE[k].label, on: !_set.preset && _set.n === k, onClick: () => _fpApplyFrameSet(g.key, k, '') }));
+        [5, 7].forEach(k => {
+            items.push({ head: k + ' SET · SALON HANGS' });
+            SALON_PRESETS.filter(p => p.n === k).forEach(p => items.push({ label: p.label, hint: k + ' pieces', on: _set.preset === p.key, onClick: () => _fpApplyFrameSet(g.key, k, p.key) }));
+        });
+        _frameMenu(frB, items);
+    };
+    row.appendChild(num); row.appendChild(code); row.appendChild(sel); row.appendChild(lnB); row.appendChild(frB);
     row.onclick = () => _dsFpArm(g.key);
     return row;
 }
@@ -38289,7 +38600,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>

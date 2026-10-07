@@ -173,7 +173,9 @@ check('the <input type=file> path leaves the project UNBOUND', async () => {
     fx.setFile(disk.handleFor('bound.json'), 'bound.json');
     const dropped = new window.File([JSON.stringify({ type: 'master-studio-v6' })], 'dropped.json', { type: 'application/json' });
     fx.load({ target: { files: [dropped], value: '' } });
-    await settle();
+    // A FileReader finishes when it finishes. A flat 20ms was enough alone and not with
+    // the suite running eight files in parallel, so wait for the install, up to 2s.
+    for (let i = 0; i < 100 && installed.length < 1; i++) await settle();
     if (installed.length < 1) throw new Error('the input path never installed anything');
     if (fx.handle) throw new Error('loading from an <input> left the old file bound, so Save would overwrite it');
     if (fx.fileName !== 'dropped.json') throw new Error('the loaded name is not shown, it is ' + JSON.stringify(fx.fileName));

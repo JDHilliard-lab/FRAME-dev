@@ -2392,3 +2392,32 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .cat-node-empty { font-size: var(--fs-60); color: var(--text-muted); font-style: italic; }
 .cat-node-fill { font-size: var(--fs-60); color: var(--text-muted); }
 .cat-node-fill.short { color: var(--warn); font-weight: 700; }
+.frame-menu-sep { height: 1px; background: var(--border-color); margin: 4px 6px; }
+.frame-menu button.on { color: var(--ui-active); font-weight: 700; }
+.frame-menu button.danger { color: #e0524a; }
+.fp-line-btn .svg-icon, .fp-frames-btn .svg-icon { width: 12px; height: 12px; }
+.fp-caret { font-size: 8px; line-height: 1; opacity: 0.7; }
+.fp-set-n { font-size: var(--fs-55); font-weight: 700; }
+
+/* PLACEMENT COLOUR ACROSS THE WHOLE ROW (17.91). The grip alone was too small to read a
+ * placement at a glance; every cell now carries a light wash of the placement's colour,
+ * so the rows of one placement read as one band. The wash sits on the CELLS, so the
+ * selected and multi-selected rows paint a stronger wash plus their accent edge on top,
+ * and selection still reads as selection. Light enough that the cell text keeps its
+ * contrast in both themes. */
+#rfiBody tr[data-placement] > td { background-color: color-mix(in srgb, var(--plc) 16%, transparent); }
+#rfiBody tr[data-placement]:hover > td { background-color: color-mix(in srgb, var(--plc) 24%, transparent); }
+#rfiBody tr.selected[data-placement] > td,
+#rfiBody tr.multi-selected[data-placement] > td { background-color: color-mix(in srgb, var(--plc) 34%, var(--table-row-selected)); }
+#rfiBody tr[data-placement] > td.drag-handle-cell { background: color-mix(in srgb, var(--plc) 75%, transparent); }
+
+/* Where-to-start choices: two big cards. */
+.start-choice {
+    flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+    padding: 16px; border: 1px solid var(--border-color); border-radius: var(--r-8);
+    background: var(--bg-input); color: var(--text-main); text-align: left; cursor: pointer; font-family: inherit;
+}
+.start-choice:hover, .start-choice:focus-visible { border-color: var(--ui-active); box-shadow: inset 0 0 0 1px var(--ui-active); }
+.start-choice .svg-icon { width: 26px; height: 26px; color: var(--ui-active); }
+.start-choice strong { font-family: var(--ui-display); font-size: var(--fs-105); letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-strong); }
+.start-choice span { font-size: var(--fs-70); color: var(--text-muted); line-height: 1.45; }

@@ -128,14 +128,14 @@ check('the Items list has a header, + Add code, and HOLLOW numbers until pinned'
   const t = doc.createElement('div'); doc.body.appendChild(t);
   fx.panel(t, { level: 0, kind: 'floorplan' });
   const head = t.querySelector('.fp-item-head');
-  if (!head || head.textContent.indexOf('Line type') < 0 || head.textContent.indexOf('Item code') < 0) throw new Error('no column header');
+  // 17.91: the header is # / Item code / Cat / Line / Frames (Line type moved into the pen's menu).
+  if (!head || head.textContent.indexOf('Frames') < 0 || head.textContent.indexOf('Item code') < 0) throw new Error('no column header');
   if (!t.querySelector('.fp-add-bar')) throw new Error('no + Add code bar');
   const nums = t.querySelectorAll('.fp-num');
   const placed = t.querySelectorAll('.fp-num-placed').length, hollow = t.querySelectorAll('.fp-num-hollow').length;
   if (nums.length !== 2 || placed !== 1 || hollow !== 1) throw new Error('placed ' + placed + ' hollow ' + hollow);
   if (t.querySelector('.fp-num-hollow').style.backgroundColor !== 'transparent') throw new Error('hollow chip has a fill');
-  const opts = Array.from(t.querySelectorAll('select')).find(s => Array.from(s.options).some(o => o.value === 'wrap'));
-  if (!opts) throw new Error('Wrap is not a line type');
+  if (APP.indexOf("['wrap', 'Wrap',") < 0) throw new Error('Wrap is not a line type');
   t.remove();
 });
 
