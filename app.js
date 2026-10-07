@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.91';
+const APP_VERSION = '17.92';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -14360,7 +14360,26 @@ function _specArtRectAdd(id, x, y, w, h) {
     if (!_curPageKey || !id || !(w > 0) || !(h > 0)) return;
     (_specArtRects[_curPageKey] = _specArtRects[_curPageKey] || []).push({ id: id, x: x, y: y, w: w, h: h });
 }
-function _specArtRectsReset() { if (_curPageKey) _specArtRects[_curPageKey] = []; }
+function _specArtRectsReset() { if (_curPageKey) { _specArtRects[_curPageKey] = []; _specPlanRects[_curPageKey] = []; } }
+// ...and where its FLOORPLAN thumbnail landed, with the level it shows. The PDF turns it
+// into a link to that level's floorplan page and Deck Studio into a click-through, which
+// is the half of the round trip the floorplan page (whose key list and pins already link
+// to their spec pages) did not have.
+const _specPlanRects = {};
+// In the PDF: every plan thumbnail on the page just drawn links to its level's
+// floorplan page (or the first floorplan page when that level has none).
+function _linkSpecPlanRects(doc, key, levelPages, firstKey) {
+    try {
+        (_specPlanRects[key] || []).forEach(q => {
+            const pg = (levelPages && levelPages[q.level]) || firstKey;
+            if (pg && typeof doc.link === 'function') doc.link(q.x, q.y, q.w, q.h, { pageNumber: pg });
+        });
+    } catch (e) {}
+}
+function _specPlanRectAdd(x, y, w, h, level) {
+    if (!_curPageKey || !(w > 0) || !(h > 0)) return;
+    (_specPlanRects[_curPageKey] = _specPlanRects[_curPageKey] || []).push({ x: x, y: y, w: w, h: h, level: _deckLvlOf(level) });
+}
 // Set to {} for the duration of a PDF build; records which page numbers had a
 // footer drawn so the build can sweep up any page a drawer forgot. null outside
 // a build (preview renders draw one page at a time and don't need the ledger).
@@ -26233,7 +26252,25 @@ function _dsSpecArtTarget(desc, page, clientX, clientY) {
     if (hit) return hit.id;
     return members.length === 1 ? members[0].id : null;
 }
+function _dsSpecPlanHit(desc, page, clientX, clientY) {
+    const rects = _specPlanRects[_deckPageKey(desc)] || [];
+    const b = page.getBoundingClientRect(); if (!(b.width > 0)) return null;
+    const x = (clientX - b.left) / b.width * 936, y = (clientY - b.top) / b.height * 540;
+    return rects.find(q => x >= q.x && x <= q.x + q.w && y >= q.y && y <= q.y + q.h) || null;
+}
 function _dsWireSpecArtDrop(page, desc) {
+    // The plan thumbnail is a link back to the floorplan, as it is in the PDF.
+    page.addEventListener('mousemove', (e) => {
+        const hit = _dsSpecPlanHit(desc, page, e.clientX, e.clientY);
+        page.style.cursor = hit ? 'pointer' : '';
+        page.title = hit ? 'Open the floorplan' : '';
+    });
+    page.addEventListener('click', (e) => {
+        const hit = _dsSpecPlanHit(desc, page, e.clientX, e.clientY);
+        if (!hit) return;
+        e.preventDefault(); e.stopPropagation();
+        _dsJumpToFloorplan(hit.level);
+    });
     const hasFile = (e) => e.dataTransfer && Array.from(e.dataTransfer.types || []).indexOf('Files') >= 0;
     page.addEventListener('dragover', (e) => {
         if (!hasFile(e)) return;
@@ -26555,9 +26592,9 @@ function _dsMakePin(g, S) {
     const pin = document.createElement('div');
     pin.style.cssText = 'position:absolute; left:' + (g.planX * 100) + '%; top:' + (g.planY * 100) + '%; transform:translate(-50%,-50%); min-width:' + d + 'px; height:' + d + 'px; padding:0 2px; border-radius:' + Math.ceil(d / 2 + 2) + 'px; box-sizing:border-box; background:' + categoryColor(g.category) + '; color:#fff; border:' + bw + 'px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center; font-size:' + fs + 'px; font-weight:700; cursor:grab; user-select:none;';
     pin.textContent = g.num;
-    pin.title = g.ids.filter(Boolean).join(', ') + ' — drag to move, double-click to remove';
+    pin.title = g.ids.filter(Boolean).join(', ') + ' — click to open its spec page, drag to move, double-click to remove';
     pin.onmousedown = (e) => _dsFpPinDown(e, g.key);
-    pin.ondblclick = (e) => { e.stopPropagation(); _dsFpRemove(g.key); };
+    pin.ondblclick = (e) => { e.stopPropagation(); if (_dsFpClickTimer) { clearTimeout(_dsFpClickTimer); _dsFpClickTimer = null; } _dsFpRemove(g.key); };
     return pin;
 }
 function _dsFpNorm(e) {
@@ -26579,14 +26616,21 @@ function _dsFpPlace(e) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRefresh();
 }
+// A CLICK on a pin (no drag) opens that piece's spec page, the other half of the round
+// trip the spec page's plan thumbnail starts. Held for a moment first, because the first
+// click of a double-click (remove) must not navigate away.
+let _dsFpClickTimer = null, _dsFpDownAt = null, _dsFpMoved = false;
 function _dsFpPinDown(e, key) {
     e.preventDefault(); e.stopPropagation();
+    _dsFpDownAt = { x: e.clientX, y: e.clientY }; _dsFpMoved = false;
     _dsFpDragKey = key; _dsFpDragPin = e.currentTarget;
     document.addEventListener('mousemove', _dsFpDragMove);
     document.addEventListener('mouseup', _dsFpDragUp);
 }
 function _dsFpDragMove(e) {
     if (!_dsFpDragKey) return;
+    if (_dsFpDownAt && Math.hypot(e.clientX - _dsFpDownAt.x, e.clientY - _dsFpDownAt.y) < 3) return;   // a click's jitter is not a drag
+    _dsFpMoved = true;
     const n = _dsFpNorm(e); if (!n) return;
     const g = _fpFindGroup(_dsFpDragKey); if (!g) return;
     // Moves the pin on the plan being looked at, never the same group's pin on another.
@@ -26597,9 +26641,42 @@ function _dsFpDragMove(e) {
 function _dsFpDragUp() {
     document.removeEventListener('mousemove', _dsFpDragMove);
     document.removeEventListener('mouseup', _dsFpDragUp);
-    if (_dsFpDragKey) { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
-    _dsFpDragKey = null; _dsFpDragPin = null;
+    const key = _dsFpDragKey, moved = _dsFpMoved;
+    if (key && moved) { if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+    _dsFpDragKey = null; _dsFpDragPin = null; _dsFpDownAt = null; _dsFpMoved = false;
+    if (key && !moved) {
+        if (_dsFpClickTimer) clearTimeout(_dsFpClickTimer);
+        _dsFpClickTimer = setTimeout(() => { _dsFpClickTimer = null; _dsJumpToSpecFor(key); }, 280);
+        return;
+    }
     _dsRefresh();
+}
+// The spec page for a placement: its own spec page first, else its breaker.
+function _dsSpecPageIndexFor(key) {
+    const pages = _dsPages || [];
+    const owns = (d) => ((d.members && d.members.length) ? d.members : (d.row ? [d.row] : [])).some(m => m && m.id && _artGroupKey(m.id) === key);
+    let i = pages.findIndex(d => d && d.kind === 'spec' && !d._install && owns(d));
+    if (i < 0) i = pages.findIndex(d => d && d.kind === 'spec' && d._install && d._groupKey === key);
+    return i;
+}
+function _dsJumpToSpecFor(key) {
+    try { _dsPages = _deckPageList(); } catch (e) {}
+    const i = _dsSpecPageIndexFor(key);
+    if (i < 0) { _toast('No spec page for ' + key + ' yet', 'Turn on Spec Pages under Project, Include pages.'); return false; }
+    _dsIndex = i;
+    _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
+    return true;
+}
+// …and back: the floorplan page for a level.
+function _dsJumpToFloorplan(level) {
+    try { _dsPages = _deckPageList(); } catch (e) {}
+    const n = _deckLvlOf(level);
+    let i = (_dsPages || []).findIndex(d => d && d.kind === 'floorplan' && (d.level || 0) === n);
+    if (i < 0) i = (_dsPages || []).findIndex(d => d && d.kind === 'floorplan');
+    if (i < 0) return false;
+    _dsIndex = i; _fpPanelTab = 'items';
+    _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
+    return true;
 }
 function _dsFpRemove(key) {
     const g = _fpFindGroup(key); if (!g) return;
@@ -26615,9 +26692,16 @@ function _dsFpArm(key) { _fpArmedId = (_fpArmedId === key) ? null : key; _dsRend
 function _dsFpSetCategory(key, cat) {
     const g = _fpFindGroup(key); if (!g) return;
     g.rows.forEach(r => { r.category = cat || ''; });
+    // A TYPE category (Framed Art, Canvas, EGD, WF) decides the code: ART.2 moved to EGD
+    // becomes an EGD code and an EGD product, and both prefixes renumber with no gaps, so
+    // the plan numbers, the spec pages and the walls all read 1, 2, 3 again.
+    let moved = null;
+    try { moved = _recodeForCategory(key, cat); } catch (e) { moved = null; }
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (moved && moved.from !== moved.to) _toast(moved.from + ' is now ' + moved.to, moved.renumbered ? 'Codes renumbered to stay in order. Ctrl+Z undoes it.' : 'Ctrl+Z undoes it.');
     _dsRefresh();
+    try { _dsRenderTools(); if (typeof renderDashTable === 'function') renderDashTable(); } catch (e) {}
 }
 function _dsTemplateCategory(desc) {
     if (!desc) return null;
@@ -27539,6 +27623,80 @@ function _fpMockSetOnWall(key, rows, lay) {
     return wall;
 }
 
+// ── CODES FOLLOW THEIR TYPE, AND STAY IN ORDER (17.92) ────────────────────────
+// Only plain placement codes take part: PREFIX.n with nothing after the number but a
+// piece letter. A catalogue code (ART.1.2, an arrangement's slots, an option's rows) is
+// structure, not a count, and renumbering it would scramble the tree it encodes.
+function _plainCodeParts(key) {
+    const m = /^([A-Za-z][A-Za-z0-9]*)\.(\d+)$/.exec(String(key || ''));
+    return m ? { prefix: m[1], n: parseInt(m[2], 10), raw: m[2] } : null;
+}
+function _catalogueRowIds() {
+    const out = {};
+    try { Object.assign(out, _catSlotRowIds(), _catOptionRowIds()); } catch (e) {}
+    return out;
+}
+function _isTypeCategory(cat) {
+    const c = _artCats().find(x => x && x.key === cat) || {};
+    return !!(c.prefix || ART_CATEGORY_TYPES.some(t => t.key === cat && t.prefix));
+}
+// Move a placement to its category's prefix and product, then renumber the prefixes it
+// left and joined. Returns { from, to, renumbered } or null when nothing changed.
+function _recodeForCategory(key, cat) {
+    if (!_isTypeCategory(cat)) return null;
+    const p = _plainCodeParts(key);
+    const g = _fpFindGroup(key);
+    if (!p || !g) return null;
+    const cr = _catalogueRowIds();
+    if (g.rows.some(r => cr[r.id])) return null;
+    const info = _catCodeInfo(cat);
+    // The product follows the type too (a Framed Art piece moved to EGD is wallcovering).
+    const kIn = unitFactor('in', dashUnit);
+    g.rows.forEach(r => {
+        if (r.product === info.product) return;
+        const wasFlat = _isFlatGraphic(r.product);
+        r.product = info.product;
+        if (_isFlatGraphic(r.product)) {
+            r.bleed = dashFmt(FLAT_GRAPHIC_BLEED_IN * kIn);
+            if (!(r.material || '').trim()) r.material = FLAT_GRAPHIC_APPLICATION[r.product] || '';
+        } else if (wasFlat) {
+            r.bleed = dashFmt((parseFloat(dashDefaultData.bleed) || 0.25) * kIn);
+        }
+    });
+    let to = key;
+    if (p.prefix !== info.prefix) {
+        to = _nextPlacementCode(info.prefix);
+        _fpRenameGroup(key, to, { quiet: true });
+    }
+    const a = _renumberPrefix(p.prefix), b = (p.prefix !== info.prefix) ? _renumberPrefix(info.prefix) : {};
+    const final = b[to] || a[to] || to;
+    return { from: key, to: final, renumbered: Object.keys(a).length + Object.keys(b).length > 0 };
+}
+// Renumber every plain placement of one prefix to 1..n in its current order, keeping the
+// project's padding. Two passes through temporary codes, so ART.3 -> ART.2 can never meet
+// an ART.2 that has not moved yet. Returns { oldKey: newKey } for what moved.
+function _renumberPrefix(prefix) {
+    const cr = _catalogueRowIds();
+    const seen = {}, keys = [];
+    (dashProjectData || []).forEach(r => {
+        if (!r || !r.id || cr[r.id]) return;
+        const k = _artGroupKey(r.id), p = _plainCodeParts(k);
+        if (!p || p.prefix !== prefix || seen[k]) return;
+        seen[k] = true; keys.push(k);
+    });
+    keys.sort((x, y) => _plainCodeParts(x).n - _plainCodeParts(y).n);
+    const padded = keys.some(k => { const r = _plainCodeParts(k).raw; return r.length > 1 && r.charAt(0) === '0'; });
+    const want = keys.map((k, i) => prefix + '.' + (padded ? String(i + 1).padStart(3, '0') : String(i + 1)));
+    const moves = {};
+    keys.forEach((k, i) => { if (k !== want[i]) moves[k] = want[i]; });
+    const list = Object.keys(moves);
+    if (!list.length) return {};
+    const tmp = {};
+    list.forEach((k, i) => { tmp[k] = '__RN' + i + '__' + Date.now().toString(36) + '.9'; _fpRenameGroup(k, tmp[k], { quiet: true, force: true }); });
+    list.forEach(k => _fpRenameGroup(tmp[k], moves[k], { quiet: true, force: true }));
+    return moves;
+}
+
 // ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
 // Every piece of the placement keeps its suffix (ART.4A -> ART.9A), so a rename is one
 // gesture for a triptych, not three. The id is the identity everything reads: the
@@ -27546,7 +27704,8 @@ function _fpMockSetOnWall(key, rows, lay) {
 // as a KEY and have to be moved by hand: plan-detail pages (they list group keys) and
 // the per-page settings maps (keyed 'spec:<code>'), or a renamed page silently loses
 // its layout choices and approval.
-function _fpRenameGroup(oldKey, newKey) {
+function _fpRenameGroup(oldKey, newKey, opts) {
+    const _o = opts || {};
     newKey = String(newKey || '').trim();
     if (!newKey || newKey === oldKey) return false;
     const g = _fpFindGroup(oldKey);
@@ -27556,7 +27715,7 @@ function _fpRenameGroup(oldKey, newKey) {
     const mine = new Set(rows);
     const clash = pairs.find(p => dashProjectData.some(o => o && !mine.has(o) && o.id === p.to));
     if (clash) { _toast(clash.to + ' is already taken', 'Pick a code nothing else uses.'); return false; }
-    if (_artGroupKey(pairs[0].to) !== newKey && rows.length > 1) {
+    if (!_o.force && _artGroupKey(pairs[0].to) !== newKey && rows.length > 1) {
         _toast('That code would split the set', 'End the code in a number, like ART.12, so its pieces stay one placement.');
         return false;
     }
@@ -27565,8 +27724,10 @@ function _fpRenameGroup(oldKey, newKey) {
         if (pd && Array.isArray(pd.ids)) pd.ids = pd.ids.map(x => x === oldKey ? newKey : x);
     });
     _renamePageKeys(oldKey, newKey);
-    if (typeof pushHistory === 'function') pushHistory();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (!_o.quiet) {
+        if (typeof pushHistory === 'function') pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    }
     return true;
 }
 // Per-page settings live in maps keyed by page key; move every key that names the old
@@ -31403,6 +31564,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                     const dw = pc.width * fit2, dh = pc.height * fit2;
                     try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', px0, pTop, dw, dh); } catch (e) {}
                     doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(px0, pTop, dw, dh, 'S'); } catch (e) {}
+                    _specPlanRectAdd(px0, pTop, dw, dh, members[0] && members[0].level);
                     _specThumbCaption(doc, 'Floorplan', px0, Math.min(pTop + dh + 8, BB));
                 } else {
                     _specSwatchBox(doc, px0, pTop, pH, pH, 'Floorplan', Math.min(pTop + pH + 8, BB));
@@ -31466,6 +31628,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                     if (pc) {
                         try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', x, top, rowH, rowH); } catch (e) {}
                         doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(x, top, rowH, rowH, 'S'); } catch (e) {}
+                        _specPlanRectAdd(x, top, rowH, rowH, members[0] && members[0].level);
                         _specThumbCaption(doc, 'Floorplan', x, Math.min(top + rowH + 8, BB));
                     } else {
                         _specSwatchBox(doc, x, top, rowH, rowH, 'Floorplan', Math.min(top + rowH + 8, BB));
@@ -33583,6 +33746,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
                 doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', px0, py0, dw, dh);
                 doc.setDrawColor(30, 30, 30); doc.setLineWidth(1);
                 try { doc.rect(px0, py0, dw, dh, 'S'); } catch (e) {}
+                _specPlanRectAdd(px0, py0, dw, dh, r && r.level);
                 _specThumbCaption(doc, 'Floorplan', px0, Math.min(py0 + dh + 9, SR.B));
             }
         } catch (e) { /* no plan pinned for this row — leave the corner empty */ }
@@ -34146,7 +34310,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const planAvail = (yBot - capH) - colTop;
                     const planTarget = Math.min(planAvail, (yBot - capH - yTop) * IG_PLAN_H_FRAC);
                     const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, Math.max(0, Math.min(planAvail, planTarget * planScale)));
-                    if (pr) { strokeImg(pr.x, pr.y, pr.w, pr.h); drawCaption('Floorplan', pr.x, yBot - 2); }
+                    if (pr) { strokeImg(pr.x, pr.y, pr.w, pr.h); drawCaption('Floorplan', pr.x, yBot - 2); _specPlanRectAdd(pr.x, pr.y, pr.w, pr.h, planRow && planRow.level); }
                     // Elevation: everything right of the left column (or of a plan grown past
                     // it), as large as it fits.
                     const ex0 = Math.max(M + leftW, pr ? (pr.x + pr.w) : 0) + gutter;
@@ -34267,6 +34431,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             } catch (e) { try { _fpDocLineAlpha(doc, 1); doc.setLineDashPattern([], 0); } catch (e2) {} }
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(138, 138, 138);
             doc.text('Floorplan', px0, py0 - 4);
+            _specPlanRectAdd(px0, py0, pw, ph, planRow && planRow.level);
         }
     } catch (e) { try { doc.setLineDashPattern([], 0); } catch (_) {} }
     _drawPdfFooter(doc, logos, pageNum, meta);
@@ -35011,6 +35176,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             const fit2 = Math.min(bw / pc.width, bh / pc.height); const dw = pc.width * fit2, dh = pc.height * fit2;
             try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, dy0, dw, dh); } catch (e) {}
             doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(bx, dy0, dw, dh, 'S'); } catch (e) {}
+            if (!SWATCH) _specPlanRectAdd(bx, dy0, dw, dh, r && r.level);
             _specThumbCaption(doc, 'Floorplan', bx, _capY(dy0 + dh));
         } else {
             // Ticked, but this piece is not pinned on a plan yet. Reserve it.
@@ -35433,6 +35599,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         pageNum += 1;
         if (key) _pageKeys[pageNum] = key;
         _curPageKey = key || null;
+        if (_curPageKey) { _specPlanRects[_curPageKey] = []; }
         try { _curFooter = _resolveFooter(key || null); } catch (e) { _curFooter = { text: 'dark' }; }
         // Per-page theme (background colour/image, dark-ink flip, footer mode)
         // — bg images were pre-baked before the page loop started.
@@ -35763,7 +35930,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             continue;
         }
         if (step.type === 'install') {
-            if (_scoped) await _drawInstallGuidePage(doc, logos, pageNum, meta, step.elev, { PW: PW, PH: PH, M: M });
+            if (_scoped) { await _drawInstallGuidePage(doc, logos, pageNum, meta, step.elev, { PW: PW, PH: PH, M: M }); _linkSpecPlanRects(doc, stepKey, _fpLevelKeyPage, fpKeyPageNum); }
             await emitAfterKey(stepKey);
             continue;
         }
@@ -35796,6 +35963,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             const backPage = _fpLevelKeyPage[(r.level || 0)] || fpKeyPageNum;
             await _drawClassicSpecPage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M, backPage: backPage });
         }
+        _linkSpecPlanRects(doc, stepKey, _fpLevelKeyPage, fpKeyPageNum);
         await emitAfterKey(stepKey);
     }
     
@@ -38600,7 +38768,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
