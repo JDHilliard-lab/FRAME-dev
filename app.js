@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.89';
+const APP_VERSION = '17.90';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -21775,9 +21775,7 @@ function _dsOpenPlaceholderMenu(ev) {
             grid.appendChild(b);
         });
         menu.appendChild(grid);
-        const note = document.createElement('p');
-        note.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:8px 0 0; line-height:1.5;';
-        note.textContent = 'Drop or click \u201c+ Add image\u201d to fill with an image. Scroll on the image to zoom; when zoomed, click-drag inside to pan, and use the grip handle (top-left) to move the shape. Perfect square/circle stay locked while resizing (1:1 button toggles it).';
+        const note = _dsHowToDot('Drop or click \u201c+ Add image\u201d to fill with an image. Scroll on the image to zoom; when zoomed, click-drag inside to pan, and use the grip handle (top-left) to move the shape. Perfect square/circle stay locked while resizing (1:1 button toggles it).');
         menu.appendChild(note);
     });
 }
@@ -22556,10 +22554,7 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         cr2.appendChild(capF);
     }
     // How-to.
-    const help = document.createElement('p');
-    help.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
-    help.textContent = 'Scroll to zoom, drag inside to pan, move it by the grip at top-left. Double-click the caption to edit it.';
-    pop.appendChild(help);
+    pop.appendChild(_dsHowToDot('Scroll to zoom, drag inside to pan, move it by the grip at top-left. Double-click the caption to edit it.'));
     document.body.appendChild(pop);
     _dsClampPopup(pop);   // measured, now that the popup has a real height
     try { _mbUpdateToolbar(); } catch (e) {}
@@ -23094,10 +23089,7 @@ function _dsOpenTextGearPopup(target, cx, cy) {
     // Distinct id from the right-panel version (used on layout/template
     // pages) so the two never collide if both happen to be in the DOM.
     try { _paneStyles.appendChild(_dsDockedStylesSection(3, '_dsDockedStylesPopup')); } catch (e) {}
-    const help = document.createElement('p');
-    help.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:10px 0 0; line-height:1.5; border-top:1px solid var(--border-color); padding-top:8px;';
-    help.textContent = 'Double-click the box to edit its text. Drag a corner to resize \u2014 the text re-wraps and the size stays.';
-    _paneText.appendChild(help);
+    _paneText.appendChild(_dsHowToDot('Double-click the box to edit its text. Drag a corner to resize \u2014 the text re-wraps and the size stays.'));
     document.body.appendChild(pop);
     _dsClampPopup(pop);   // measured, now that the popup has a real height
     try { _mbUpdateToolbar(); } catch (e) {}
@@ -25858,7 +25850,7 @@ function _dsCustomSection(desc) {
     const wrap = document.createElement('div');
     wrap.style.cssText = 'margin-top:12px; padding-top:10px; border-top:1px dashed var(--border-color);';
     const title = document.createElement('div'); title.style.cssText = 'font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:6px;'; title.textContent = 'Custom layout'; wrap.appendChild(title);
-    const hint = document.createElement('p'); hint.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:0 0 8px; line-height:1.5;'; hint.textContent = 'Drag mockups anywhere, resize from the corner, double-click one to swap its artwork. Use the toolbar for text, images and arrows.'; wrap.appendChild(hint);
+    title.appendChild(_dsHelpDot('Drag mockups anywhere, resize from the corner, double-click one to swap its artwork. Use the toolbar for text, images and arrows.'));
     const row = document.createElement('div'); row.style.cssText = 'display:flex; gap:6px;';
     const sel = document.createElement('select'); sel.style.cssText = 'flex:1; font-size:var(--fs-65); padding:5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
     const ph = document.createElement('option'); ph.value = ''; ph.textContent = 'Add a mockup\u2026'; sel.appendChild(ph);
@@ -26826,6 +26818,19 @@ function _dsHelpDot(text, tag) {
     return d;
 }
 
+// A how-to that used to be a three-line paragraph at the bottom of a popup, folded into
+// ONE short line with a dot: the words are a click away and the popup is that much
+// shorter. Right-aligned so it reads as a footnote rather than as a control.
+function _dsHowToDot(text, lead) {
+    // A <p>, as the paragraph it replaced was: it is a footnote line, not a row of
+    // controls, and the popup-shape check counts DIV rows.
+    const r = document.createElement('p');
+    r.className = 'ds-howto';
+    r.style.cssText = 'display:flex; align-items:center; justify-content:flex-end; gap:2px; margin:8px 0 0; font-size:var(--fs-55); color:var(--text-muted);';
+    r.appendChild(document.createTextNode(lead || 'How it works'));
+    r.appendChild(_dsHelpDot(text));
+    return r;
+}
 // ── THE ? DOT, APP-WIDE ─────────────────────────────────────────────────────
 // Hover shows the title; a CLICK opens a small popup that stays until you click
 // elsewhere, because a tooltip disappears the moment the cursor twitches and three
@@ -27844,10 +27849,8 @@ function _dsRenderTools() {
                 _dsInstallGuideControls(igBody, desc, { variants: 'breaker' });
             }
         } else if (isGroupGlobal) {
-            const note = document.createElement('p');
-            note.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin:0 0 4px; line-height:1.5;';
-            note.textContent = 'Set pieces (A / B / C…) are grouped onto one page. Pick how they sit:';
-            head.appendChild(note);
+            // The sentence that used to sit here as a paragraph rides the heading's dot.
+            if (head.firstChild) { head.firstChild.style.display = 'flex'; head.firstChild.style.alignItems = 'center'; head.firstChild.appendChild(_dsHelpDot('Group A/B/C: set pieces (A, B, C...) print together on one page.')); }
             // Same deck-wide breaker toggle Per-piece mode has. A Group A/B/C
             // deck doubles as an install guide, so it needs the wall elevation
             // in front of each group's spec page just as much.
@@ -27887,11 +27890,13 @@ function _dsRenderTools() {
                 // here is GONE: the Elevation tick above is the one answer, and two
                 // controls for one setting is how a designer comes to believe they are
                 // two settings. The old value is not lost - it seeds the tick.
-                const note = document.createElement('div'); note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:8px; line-height:1.5;';
+                const note = { textContent: '' };
                 note.textContent = (SPEC_TEMPLATES[globalTpl] && SPEC_TEMPLATES[globalTpl].sharedSpec)
                     ? 'Pieces that share a value share a line: the letters in the label say who (Matboard A/D). Anything common to the whole set drops the letters. The bottom band reads left to right: frame corner, moulding profile, floorplan, elevation.'
                     : 'All spec details (including mat sizes and overall dimensions) are listed on the left; the text shrinks to fit a full salon hang on one page.';
-                wrap.appendChild(note);
+                // On the label's dot, not as a paragraph under the buttons.
+                lab.style.display = 'flex'; lab.style.alignItems = 'center';
+                lab.appendChild(_dsHelpDot(note.textContent));
                 head.appendChild(wrap);
             }
         } else {
@@ -28301,8 +28306,7 @@ function _dsRenderTools() {
         }
     }
 
-    const note = document.createElement('p');
-    note.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin-top:6px; line-height:1.5;';
+    const note = { textContent: '' };
     note.textContent = cat
         ? 'Applying a template replaces this page\u2019s layout (images are filled in the editor). Use the editor for fine adjustments.'
         : (desc.type === 'timeline'
@@ -28310,7 +28314,7 @@ function _dsRenderTools() {
             : (desc.kind === 'floorplan'
                 ? 'Drag pins on the preview, or open the full markup tool.'
                 : 'Edits to this page save with the project.'));
-    t.appendChild(note);
+    t.appendChild(_dsHowToDot(note.textContent));
 }
 function _dsSave() {
     if (typeof pushHistory === 'function') pushHistory();
@@ -31628,10 +31632,7 @@ function _dsNoteSizeSliders(body, desc) {
         inkWrap.appendChild(inkNm); inkWrap.appendChild(strip);
         body.appendChild(inkWrap);
     }
-    const note = document.createElement('p');
-    note.style.cssText = 'font-size:var(--fs-55); color:var(--text-muted); margin:4px 0 0; line-height:1.35;';
-    note.textContent = 'Narrower column and smaller text leave the elevation bigger. The notes shrink on their own if the column would run off the page.';
-    body.appendChild(note);
+    body.appendChild(_dsHowToDot('Narrower column and smaller text leave the elevation bigger. The notes shrink on their own if the column would run off the page.', 'Column size'));
 }
 
 // ── The round trip between a breaker page and its wall ────────────────────
@@ -38288,7 +38289,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
