@@ -1066,14 +1066,16 @@ const path = require('path');
       // Anchored on the DRAWING block, not on the first _wallAllSegs in the file - the
       // zoom crop uses it too and sits earlier, so a naive first-match reads the wrong
       // span and reports a reset that is plainly there.
+      // 17.88: the red pin dots are GONE on purpose ("we do not want to include the
+      // circle number on the plan detail on spec page or the breaker pages"); a dashed
+      // box around the line marks the spot instead (test_plan_detail_box).
       const linesAt = b.indexOf('_fpDocLineAlpha(doc, FP_WALL_LINE_ALPHA)');
-      const pinsAt = b.indexOf('doc.setFillColor(200, 40, 40)');
+      const boxAt = b.indexOf('_drawPlanBoxPdf(doc, pins, mapPin');
       if (linesAt < 0) throw new Error('the line is never drawn translucent');
-      if (pinsAt < 0) throw new Error('the pins are gone');
-      // The line has to be UNDER the pin, so the dot sits on its own line.
-      if (!(linesAt < pinsAt)) throw new Error('the pins draw before the lines');
-      // Opacity must be put back between them, or the pins inherit it.
-      if (b.slice(linesAt, pinsAt).indexOf('_fpDocLineAlpha(doc, 1)') < 0) throw new Error('the line alpha is never reset');
+      if (boxAt < 0) throw new Error('the marking box is gone');
+      if (!(linesAt < boxAt)) throw new Error('the box draws before the line');
+      // Opacity must be put back between them, or the box inherits it.
+      if (b.slice(linesAt, boxAt).indexOf('_fpDocLineAlpha(doc, 1)') < 0) throw new Error('the line alpha is never reset');
     });
 
     __check('the zoomed crop frames the line ends, not only the pin', () => {

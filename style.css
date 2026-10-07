@@ -2348,3 +2348,6 @@ button, input, select, textarea { font-family: inherit; }
  * squashed letter under a chevron read as a typo), the open menu shows the names. */
 select.fp-cat-chip { color: transparent !important; text-shadow: none; }
 select.fp-cat-chip option { color: var(--text-strong); background: var(--bg-panel); }
+
+/* An image dragged over a frame on a spec page: the page says it will take it. */
+.ds-art-drop { outline: 3px dashed var(--ui-active); outline-offset: -3px; }

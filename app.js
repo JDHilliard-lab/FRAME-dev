@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.87';
+const APP_VERSION = '17.88';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -13934,6 +13934,17 @@ let _curFooter = { text: 'dark', leftTheme: 'dark', hideCopyright: false, hideLo
 // Lets drawers that only receive tiles (e.g. breaker pages) consult per-page
 // footer overrides without threading the key through every signature.
 let _curPageKey = null;
+// WHERE EACH PIECE'S ARTWORK LANDED on the spec page last rendered for a key, in page
+// points: { pageKey: [{ id, x, y, w, h }] }. Written by the renderers as they place the
+// art, read by the Deck Studio drop target so an image dropped on a frame goes to THAT
+// frame. Recorded rather than recomputed because the layout logic (bottom anchoring,
+// the as-hung scale, the spec-line clamp) lives in the renderer and nowhere else.
+const _specArtRects = {};
+function _specArtRectAdd(id, x, y, w, h) {
+    if (!_curPageKey || !id || !(w > 0) || !(h > 0)) return;
+    (_specArtRects[_curPageKey] = _specArtRects[_curPageKey] || []).push({ id: id, x: x, y: y, w: w, h: h });
+}
+function _specArtRectsReset() { if (_curPageKey) _specArtRects[_curPageKey] = []; }
 // Set to {} for the duration of a PDF build; records which page numbers had a
 // footer drawn so the build can sweep up any page a drawer forgot. null outside
 // a build (preview renders draw one page at a time and don't need the ledger).
@@ -15976,8 +15987,12 @@ function _specGroupSlots(ovKey) {
     return ov ? Object.assign(base, ov) : base;
 }
 function _specGroupSlotOv(ovKey) { return ovKey ? ((editorialContent.specGroupSlotOverrides || {})[ovKey] || null) : null; }
+// A GROUP page carries one LAYOUT switch beside the four parts: the thumbnails go in a
+// column under the specs instead of a band under the art. Stored in the same maps, so
+// it gets deck-wide / this-page scoping and the "this page" pin for free.
+const SPEC_GROUP_LAYOUT_KEYS = ['thumbsLeft'];
 function _setSpecGroupSlot(ovKey, slot, on, scope) {
-    if (SPEC_SLOT_KEYS.indexOf(slot) < 0) return;
+    if (SPEC_SLOT_KEYS.indexOf(slot) < 0 && SPEC_GROUP_LAYOUT_KEYS.indexOf(slot) < 0) return;
     if (scope === 'page') {
         if (!ovKey) return;
         const m = editorialContent.specGroupSlotOverrides = editorialContent.specGroupSlotOverrides || {};
@@ -17310,6 +17325,7 @@ function _dsPrintOutputInto(parent, desc) {
 // pages end up with twenty different layouts.
 let _dsSlotScope = 'deck';
 const SPEC_SLOT_LABELS = {
+    thumbsLeft: ['Thumbnails in left column', 'Moves the floorplan, elevation, corner and profile under the specs, so the grouping anchors to the bottom-right corner and scales up to use the space'],
     frame: ['Frame corner', 'The corner sample photograph, top of the strip'],
     profile: ['Moulding profile', 'The cross-section drawing beside the corner sample'],
     plan: ['Floorplan', 'The plan crop showing where this piece hangs'],
@@ -17332,7 +17348,7 @@ function _dsSpecSlotsInto(host, desc, ovKey, group) {
     wrap.appendChild(lab);
     const cur = rd(ovKey);
     const ov = rdOv(ovKey) || {};
-    SPEC_SLOT_KEYS.forEach(k => {
+    (group ? SPEC_SLOT_KEYS.concat(SPEC_GROUP_LAYOUT_KEYS) : SPEC_SLOT_KEYS).forEach(k => {
         const row = document.createElement('label');
         row.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); cursor:pointer; margin-bottom:3px;';
         const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cur[k];
@@ -23952,6 +23968,7 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     const meta = { location: r.location || '', code: r.id || '', version: '' };
     // Per-page theme for spec pages too: background + ink flip + footer mode.
     try { const _tk = _deckPageKey(desc); _curPageKey = _tk; _curFooter = _resolveFooter(_tk); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
+    if (!desc._tplSwatch) _specArtRectsReset();
     if (onProgress) onProgress(12);
     // Template-card mode rides on ctx, not a module flag — see SPEC_TPL_DEMO_SALON.
     const ctx = { PW: PW, PH: PH, M: M, swatch: !!desc._tplSwatch, members: desc.members };
@@ -24077,7 +24094,7 @@ function _dsThumbCacheKey(desc) {
             // is what made every tick rebuild all 86 pages of a deck while you watched.
             // With the group slots in the key, the pages a tick can change miss and
             // rebuild and every other page keeps the thumbnail it already had.
-            if (SPEC_TEMPLATES[tpl] && SPEC_TEMPLATES[tpl].group) { const gs = _specGroupSlots(ok); k += '|g' + SPEC_SLOT_KEYS.map(n => gs[n] ? 1 : 0).join(''); }
+            if (SPEC_TEMPLATES[tpl] && SPEC_TEMPLATES[tpl].group) { const gs = _specGroupSlots(ok); k += '|g' + SPEC_SLOT_KEYS.concat(SPEC_GROUP_LAYOUT_KEYS).map(n => gs[n] ? 1 : 0).join(''); }
             else if (_specTplSlotAware(tpl)) { const sl = _specSlots(ok); k += '|' + SPEC_SLOT_KEYS.map(n => sl[n] ? 1 : 0).join(''); }
         } else if (desc && desc._specTpl) {
             k += '|' + desc._specTpl;
@@ -25646,8 +25663,51 @@ function _dsRenderCenter() {
     _dsTitleHandles(page, desc, Math.round(w), Math.round(hh));
     _dsRenderAnnots(page, desc, Math.round(w), Math.round(hh));
     c.appendChild(page);
-    if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); }
+    if (desc.kind === 'spec') { const tok = _dsBakeToken; _dsBakeSpecImages(page, desc, tok); _dsWireSpecArtDrop(page, desc); }
     _dsSyncBuildBtn();
+}
+// DROP AN IMAGE ON A SPEC PAGE TO PUT IT IN THAT FRAME. The rendered page is a picture,
+// so the frame under the pointer comes from the rects the renderer recorded as it laid
+// the art out (_specArtRects); a page with one piece takes the drop anywhere on it. The
+// image goes through applyArtworkToRowIndex, the same path a drop on the elevation
+// uses, so the wall, the dashboard, undo and the "image already used" question all
+// follow. A mockup slot refuses it there, in the data, as it does everywhere else.
+function _dsSpecArtTarget(desc, page, clientX, clientY) {
+    const rects = _specArtRects[_deckPageKey(desc)] || [];
+    const members = (desc.members && desc.members.length) ? desc.members : (desc.row ? [desc.row] : []);
+    const b = page.getBoundingClientRect();
+    if (!(b.width > 0)) return members.length === 1 ? members[0].id : null;
+    const x = (clientX - b.left) / b.width * 936, y = (clientY - b.top) / b.height * 540;
+    const hit = rects.find(q => x >= q.x && x <= q.x + q.w && y >= q.y && y <= q.y + q.h);
+    if (hit) return hit.id;
+    return members.length === 1 ? members[0].id : null;
+}
+function _dsWireSpecArtDrop(page, desc) {
+    const hasFile = (e) => e.dataTransfer && Array.from(e.dataTransfer.types || []).indexOf('Files') >= 0;
+    page.addEventListener('dragover', (e) => {
+        if (!hasFile(e)) return;
+        e.preventDefault();
+        page.classList.toggle('ds-art-drop', !!_dsSpecArtTarget(desc, page, e.clientX, e.clientY));
+    });
+    page.addEventListener('dragleave', () => page.classList.remove('ds-art-drop'));
+    page.addEventListener('drop', (e) => {
+        if (!hasFile(e)) return;
+        e.preventDefault(); e.stopPropagation();
+        page.classList.remove('ds-art-drop');
+        const f = Array.from(e.dataTransfer.files || []).find(ff => /^image\//.test(ff.type || '') || /\.(jpe?g|png|webp|gif|tiff?)$/i.test(ff.name || ''));
+        if (!f) return;
+        const id = _dsSpecArtTarget(desc, page, e.clientX, e.clientY);
+        if (!id) { _toast('Drop it on a frame', 'This page has several pieces; drop the image onto the one it belongs in.'); return; }
+        const idx = dashProjectData.findIndex(r => r && r.id === id);
+        if (idx < 0) return;
+        processArtworkFile(f, (dataUrl, baseName, w, h) => {
+            applyArtworkToRowIndex(idx, dataUrl, baseName, w, h);
+            if (typeof renderDashTable === 'function') renderDashTable();
+            try { _dsPriorityRerender(desc); } catch (err) {}
+            _dsRefresh(); _dsRenderCenter();
+            _toast('Image placed in ' + id, baseName || '');
+        });
+    });
 }
 // — Interactive floorplan in the studio center (click to place, drag, dbl-click remove) —
 let _dsFpDragKey = null, _dsFpDragPin = null;
@@ -30335,6 +30395,10 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         // thing it exists to show. A card advertises the layout; the ticks are the
         // page.
         const SL = SWATCH ? { frame: true, profile: true, plan: false, elevation: true } : _specGroupSlots(unit && unit.key);
+        // THUMBNAILS IN THE LEFT COLUMN: the band under the art goes, the art gets the
+        // page's full height on the right and anchors BOTTOM-RIGHT, and the thumbnails
+        // stack under the specs. A card never shows it (the card advertises the layout).
+        const _thumbsLeft = !SWATCH && !!SL.thumbsLeft;
         // Pick the single elevation that holds the most of these members, then
         // read every frame's position FROM that one wall — otherwise a piece
         // that also appears on an earlier elevation grabs the wrong coordinates
@@ -30371,11 +30435,13 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         // one answer now, and its seed carried the old value across so no deck moved.
         const _wantElev = SL.elevation, _wantPlan = SL.plan;
         const _wantStrip = (SL.frame || SL.profile) && _sharedFrames.length > 0;
-        const bottomBand = (_wantElev && (groupElev || SWATCH)) || _wantPlan || opts.codes === 'legend' || _wantStrip;
+        const bottomBand = !_thumbsLeft && ((_wantElev && (groupElev || SWATCH)) || _wantPlan || opts.codes === 'legend' || _wantStrip);
         // regH used to be a flat PH*0.77, so regY + regH reached 0.92 of the page
         // — 10.8pt PAST the bottom guide on the default set. Measured to the guide
         // instead, so the group always ends exactly on it.
-        const regX = LX + SW * 0.395, regY = TY + SH * 0.118, regW = RX - regX;
+        // Left-column mode starts the art closer to the specs: nothing sits under it, so the
+        // gutter is the only thing between the column and the drawing.
+        const regX = LX + SW * (_thumbsLeft ? 0.345 : 0.395), regY = TY + SH * 0.118, regW = RX - regX;
         const regH = bottomBand ? (BB - regY) * 0.72 : (BB - regY);
         // THE GROUP HANGS FROM A FIXED TOP, NOT CENTRED IN WHATEVER IS LEFT.
         // The region's HEIGHT changes with the ticks - 72% of the page when the bottom
@@ -30394,8 +30460,13 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         // and that cost the drawing 37pt AND squeezed the bottom band until a 12-moulding
         // frame strip that used to drop itself squeezed in instead, a threshold three
         // points away that test_shared_spec_legend still guards.
-        const artTop = Math.max(regY, GB.body + 8);
-        const artH = Math.max(20, (regY + regH) - artTop);
+        // Left-column mode: 10pt over the top for the letters, and room under the bottom
+        // row for its image codes, which print 7pt below each frame. The art then sits on
+        // that line rather than on the guide, so a code never lands on the guide or on
+        // the frame under it.
+        const _codeClear = (_thumbsLeft && opts.codes === 'frames') ? 10 : 0;
+        const artTop = Math.max(regY, GB.body + 8) + (_thumbsLeft ? 10 : 0);
+        const artH = Math.max(20, (regY + regH) - artTop - _codeClear);
         const placed = [];
         const haveGeo = geo.length && geo.every(g => g && g.w > 0 && g.h > 0);
         if (haveGeo) {
@@ -30403,7 +30474,9 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
             geo.forEach(g => { minX = Math.min(minX, g.x); minY = Math.min(minY, g.y); maxX = Math.max(maxX, g.x + g.w); maxY = Math.max(maxY, g.y + g.h); });
             const bbW = Math.max(0.01, maxX - minX), bbH = Math.max(0.01, maxY - minY);
             const sc = Math.min(regW / bbW, artH / bbH);
-            const offX = regX + (regW - bbW * sc) / 2, offY = artTop;
+            // Bottom-right in left-column mode; centred and hung from the spec line otherwise.
+            const offX = _thumbsLeft ? (regX + regW - bbW * sc) : (regX + (regW - bbW * sc) / 2);
+            const offY = _thumbsLeft ? (artTop + artH - bbH * sc) : artTop;
             // elevation y is measured bottom-up (larger y = higher on the wall),
             // so flip it into top-down page space or the stack comes out upside down.
             members.forEach((r, i) => { const g = geo[i]; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: offX + (g.x - minX) * sc, by: offY + (maxY - (g.y + g.h)) * sc, bw: g.w * sc, bh: g.h * sc }); });
@@ -30413,10 +30486,12 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
             const totalW = dims.reduce((a, d) => a + d.w, 0) + gap * (dims.length - 1);
             const maxH = dims.reduce((a, d) => Math.max(a, d.h), 0);
             const sc = Math.min(regW / totalW, artH / maxH);
-            let x = regX + (regW - totalW * sc) / 2; const baseY = artTop + maxH * sc;
+            let x = _thumbsLeft ? (regX + regW - totalW * sc) : (regX + (regW - totalW * sc) / 2);
+            const baseY = _thumbsLeft ? (artTop + artH) : (artTop + maxH * sc);
             members.forEach((r, i) => { const d = dims[i]; const bw = d.w * sc, bh = d.h * sc; placed.push({ r: r, letter: letters[i] || ('' + (i + 1)), bx: x, by: baseY - bh, bw: bw, bh: bh }); x += bw + gap * sc; });
         }
         const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
+        if (!SWATCH) placed.forEach(p => _specArtRectAdd(p.r && p.r.id, p.bx, p.by, p.bw, p.bh));
         for (const p of placed) {
             // A shared-spec page refers to its pieces ONLY by letter
             // ('Mat 1 A/D'), so a letter that goes missing leaves the block
@@ -30570,10 +30645,83 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 });
             }
         }
+        // THUMBNAILS UNDER THE SPECS (left-column mode). Drawn bottom-up inside the spec
+        // column's width: the floorplan and elevation side by side on the bottom row, the
+        // corner/profile strip above them, the image-code list above that. Whatever they
+        // take comes off the BOTTOM of the spec column (sBot), so the specs re-fit above
+        // them through the same shrink-to-fit they already use and can never overlap.
+        let _leftTop = BB;
+        if (_thumbsLeft) {
+            const colX = LX, colW = SW * 0.315;
+            const capGap = 12;                                    // caption under each thumbnail
+            const budget = (BB - (GB.body + 8)) * 0.46;           // the most the thumbnails may take
+            const rowItems = (_wantPlan ? 1 : 0) + (_wantElev ? 1 : 0);
+            const rowH = rowItems ? Math.min(budget * (_wantStrip ? 0.58 : 1) - capGap, rowItems === 2 ? colW / 2.9 : colW / 1.7) : 0;
+            let y = BB;
+            if (rowItems) {
+                const top = BB - capGap - rowH;
+                let x = colX;
+                if (_wantPlan) {
+                    let pc = null;
+                    try { pc = await _planCropCanvasForRow(members[0], { zoom: 3, aspect: 1, placedPt: rowH }); } catch (e) { pc = null; }
+                    if (pc) {
+                        try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', x, top, rowH, rowH); } catch (e) {}
+                        doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(x, top, rowH, rowH, 'S'); } catch (e) {}
+                        _specThumbCaption(doc, 'Floorplan', x, Math.min(top + rowH + 8, BB));
+                    } else {
+                        _specSwatchBox(doc, x, top, rowH, rowH, 'Floorplan', Math.min(top + rowH + 8, BB));
+                    }
+                    x += rowH + 14;
+                }
+                if (_wantElev) {
+                    const ew = Math.max(20, colX + colW - x);
+                    let drew = false;
+                    if (groupElev) {
+                        try {
+                            const er = await renderElevationToCanvas(groupElev, null, { wireframe: _elevIsWireframe(groupElev), dpi: 24 });
+                            if (er && er.canvas) {
+                                const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+                                const fit = Math.min(ew / flat.width, rowH / flat.height);
+                                const tw = flat.width * fit, th = flat.height * fit;
+                                const ty = top + (rowH - th);
+                                doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', x, ty, tw, th);
+                                _specThumbCaption(doc, 'Elevation', x, Math.min(ty + th + 8, BB));
+                                drew = true;
+                            }
+                        } catch (e) {}
+                    }
+                    if (!drew) _specSwatchBox(doc, x, top, Math.min(ew, rowH * 1.6), rowH, 'Elevation', Math.min(top + rowH + 8, BB));
+                }
+                y = top - 14;
+            }
+            if (_wantStrip) {
+                const stripH = Math.max(24, Math.min(budget - (BB - y) - 4, 70));
+                const left = _drawFrameStrip(doc, _sharedFrames, {
+                    right: colX + colW, top: y - stripH, height: stripH, maxW: colW, swatch: false,
+                    corner: SL.frame, profile: SL.profile
+                });
+                if (left != null) y = y - stripH - 16;
+            }
+            if (opts.codes === 'legend') {
+                const rowH2 = 10, n = placed.length;
+                const listTop = y - 12 - n * rowH2;
+                doc.setFont(_font('display'), 'bold'); doc.setFontSize(8); doc.setTextColor(20, 20, 20);
+                doc.text('IMAGE CODES', colX, listTop);
+                doc.setFontSize(7.5);
+                placed.forEach((p, i) => {
+                    const ey = listTop + 12 + i * rowH2;
+                    doc.setFont(_font('display'), 'bold'); doc.setTextColor(20, 20, 20); doc.text(p.letter, colX, ey);
+                    doc.setFont(_font(cs.font), 'normal'); doc.setTextColor(crgb.r, crgb.g, crgb.b);
+                    doc.text((p.r.imageCode || p.r.artworkFile || '') + '', colX + 12, ey);
+                });
+                y = listTop - 14;
+            }
+            _leftTop = y;
+        }
         // Specs on the LEFT — every line, font shrunk to fit them all on one page.
         // With many members (5-6+) one column can't fit above the readable font
         // floor, so the stack splits into two balanced columns, each re-fit.
-        const lX = LX, lWAll = SW * 0.315, sTop = GB.body + 8, sBot = BB;
+        const lX = LX, lWAll = SW * 0.315, sTop = GB.body + 8, sBot = _thumbsLeft ? Math.max(GB.body + 60, _leftTop) : BB;
         // — Shared-spec variant: ONE consolidated block instead of per-piece —
         if (_sharedSpec) {
             _drawSharedSpecColumn(doc, {
@@ -33024,8 +33172,10 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                         // Back to opaque, or the pins and everything under them inherit it.
                         _fpDocLineAlpha(doc, 1);
                     } catch (e) { try { _fpDocLineAlpha(doc, 1); } catch (e2) {} }
-                    doc.setFillColor(200, 40, 40);
-                    pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) { const mp = mapPin(rr); if (mp[0] >= 0 && mp[0] <= 1 && mp[1] >= 0 && mp[1] <= 1) doc.circle(px0 + mp[0] * pw2, py0 + mp[1] * ph2, 3, 'F'); } });
+                    // NO DOTS: a 2pt red dashed box around the drawn line(s), the same mark
+                    // the spec page's plan detail carries, so the two pages point at a wall
+                    // the same way. A piece with no line yet gets the box round its pin.
+                    try { _drawPlanBoxPdf(doc, pins, mapPin, px0, py0, pw2, ph2); } catch (e) {}
                     return { x: px0, y: py0, w: pw2, h: ph2 };
                 };
                 // Letter legend: a DEDICATED column immediately to the left of the
@@ -33185,7 +33335,11 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                             }
                         } catch (e) {}
                     }
-                    const planScale = Math.max(0.4, Math.min(1, cfg.planScale || 1));
+                    // 40% to 140%, the range the slider offers. It was clamped at 1, so the
+                    // top 40% of the slider moved nothing. Past 100% the plan may grow wider
+                    // than the column; the elevation then starts after it (ex0 below), and
+                    // the height is still capped by the room between the column and the foot.
+                    const planScale = Math.max(0.4, Math.min(1.4, cfg.planScale || 1));
                     // A SIZE, NOT THE LEFTOVERS. It used to fill everything between the
                     // column above and the page bottom, so ticking install notes pushed
                     // colTop down and squeezed the plan until it could not be read - and
@@ -33195,10 +33349,11 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     // slider scales it in both plan modes rather than only the zoomed one.
                     const planAvail = (yBot - capH) - colTop;
                     const planTarget = Math.min(planAvail, (yBot - capH - yTop) * IG_PLAN_H_FRAC);
-                    const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, Math.max(0, planTarget) * planScale);
+                    const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, Math.max(0, Math.min(planAvail, planTarget * planScale)));
                     if (pr) { strokeImg(pr.x, pr.y, pr.w, pr.h); drawCaption('Floorplan', pr.x, yBot - 2); }
-                    // Elevation: everything right of the left column, as large as it fits.
-                    const ex0 = M + leftW + gutter;
+                    // Elevation: everything right of the left column (or of a plan grown past
+                    // it), as large as it fits.
+                    const ex0 = Math.max(M + leftW, pr ? (pr.x + pr.w) : 0) + gutter;
                     const eTop = _igDrawTop(ex0);
                     const [ew, eh] = fitIn(aspect, SR.R - ex0, (yBot - capH) - eTop);
                     const ex = Math.max(ex0, SR.R - ew), ey = yBot - capH - eh;
@@ -33305,8 +33460,15 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             const px0 = M, py0 = SR.B - ph;
             doc.addImage(lv.imageData, 'JPEG', px0, py0, pw, ph);
             const pins = isElev ? activeFrames.map(f => lookupRow(f.id)) : [arg];
-            doc.setFillColor(200, 40, 40);
-            pins.forEach(rr => { if (rr && rr.planX != null && rr.planY != null) doc.circle(px0 + rr.planX * pw, py0 + rr.planY * ph, 3, 'F'); });
+            // Same mark as every other plan detail: the line plus a dashed box, no dot.
+            try {
+                const ident = (rr) => [rr.planX, rr.planY];
+                doc.setDrawColor(200, 40, 40); doc.setLineWidth(2.2);
+                _fpDocLineAlpha(doc, FP_WALL_LINE_ALPHA);
+                pins.forEach(rr => { if (rr) _wallAllSegs(rr).forEach(sg => doc.line(px0 + sg[0] * pw, py0 + sg[1] * ph, px0 + sg[2] * pw, py0 + sg[3] * ph)); });
+                _fpDocLineAlpha(doc, 1);
+                _drawPlanBoxPdf(doc, pins, ident, px0, py0, pw, ph);
+            } catch (e) { try { _fpDocLineAlpha(doc, 1); doc.setLineDashPattern([], 0); } catch (e2) {} }
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(138, 138, 138);
             doc.text('Floorplan', px0, py0 - 4);
         }
@@ -33329,6 +33491,54 @@ function _catRowAsPlanGroup(r) {
     if (r.planX == null || r.planY == null) return null;
     return { key: _artGroupKey(r.id), planX: r.planX, planY: r.planY, level: r.level || 0, planZoom: r.planZoom };
 }
+// THE PLAN DETAIL ON A SPEC PAGE: the piece's own wall line, a 2pt red dashed box
+// around it, and NOTHING ELSE. It used to draw every numbered pin that fell inside the
+// crop plus every other piece's wall line, so a thumbnail meant to say "this piece hangs
+// HERE" carried three or four circles and the reader had to find the right number. The
+// numbered pins belong to the floorplan key page; this crop answers one question.
+// The crop is CENTRED ON THE LINE and widened to hold both of its ends, because
+// centring on the pin cut a long run in half. A piece with no line drawn yet gets the
+// box around its pin position instead, still with no circle.
+// PLAN_DETAIL_BOX_PT is in POINTS AT PRINT SIZE: the canvas is placed at
+// `opts.placedPt` wide (about 170pt on a spec page), so the stroke is converted from
+// that rather than from canvas pixels, which would print at whatever the crop's
+// resolution happened to make it.
+const PLAN_DETAIL_BOX_PT = 2;
+// The breaker / install page's version, drawn in vector on the page itself. Box = the
+// bounding box of every drawn segment (mapped into the placed plan), padded, clamped to
+// the plan; with no line, a small square at each pin.
+function _drawPlanBoxPdf(doc, rows, mapPin, px0, py0, pw, ph) {
+    const pts = [];
+    rows.forEach(rr => { if (rr) _wallAllSegs(rr).forEach(sg => { pts.push(mapPin({ planX: sg[0], planY: sg[1] }), mapPin({ planX: sg[2], planY: sg[3] })); }); });
+    const boxes = [];
+    const pad = 7;
+    if (pts.length) {
+        const xs = pts.map(p => px0 + p[0] * pw), ys = pts.map(p => py0 + p[1] * ph);
+        boxes.push([Math.min.apply(null, xs) - pad, Math.min.apply(null, ys) - pad, Math.max.apply(null, xs) + pad, Math.max.apply(null, ys) + pad]);
+    } else {
+        rows.forEach(rr => {
+            if (!rr || rr.planX == null || rr.planY == null) return;
+            const mp = mapPin(rr);
+            if (mp[0] < 0 || mp[0] > 1 || mp[1] < 0 || mp[1] > 1) return;
+            const cx = px0 + mp[0] * pw, cy = py0 + mp[1] * ph, h = 9;
+            boxes.push([cx - h, cy - h, cx + h, cy + h]);
+        });
+    }
+    if (!boxes.length) return;
+    const ink = _annHexToRgb(PLAN_DETAIL_BOX_INK);
+    doc.setDrawColor(ink.r, ink.g, ink.b);
+    doc.setLineWidth(PLAN_DETAIL_BOX_PT);
+    doc.setLineDashPattern([6, 4], 0);
+    const i = PLAN_DETAIL_BOX_PT / 2;
+    boxes.forEach(b => {
+        const x0 = Math.max(px0 + i, b[0]), y0 = Math.max(py0 + i, b[1]);
+        const x1 = Math.min(px0 + pw - i, b[2]), y1 = Math.min(py0 + ph - i, b[3]);
+        if (x1 > x0 && y1 > y0) doc.rect(x0, y0, x1 - x0, y1 - y0, 'S');
+    });
+    doc.setLineDashPattern([], 0);
+}
+const PLAN_DETAIL_BOX_INK = '#e02b2b';
+function _planDetailBoxDash(pxPerPt) { return [6 * pxPerPt, 4 * pxPerPt]; }
 async function _planCropCanvasForRow(r, opts) {
     try {
         if (!r || !r.id) return null;
@@ -33343,51 +33553,60 @@ async function _planCropCanvasForRow(r, opts) {
         if (!iw || !ih) return null;
         const zoom = (g.planZoom > 0 ? g.planZoom : ((opts && opts.zoom) || 3));
         const boxAspect = (opts && opts.aspect) || 1.1;
+        const segs = _wallAllSegs(g);
+        // The subject: the line's bounding box in image pixels, or the pin as a point.
+        let bx0 = g.planX * iw, by0 = g.planY * ih, bx1 = bx0, by1 = by0;
+        if (segs.length) {   // the line, not the pin, decides the box when there is one
+            bx0 = Math.min.apply(null, segs.map(sg => Math.min(sg[0], sg[2]) * iw));
+            bx1 = Math.max.apply(null, segs.map(sg => Math.max(sg[0], sg[2]) * iw));
+            by0 = Math.min.apply(null, segs.map(sg => Math.min(sg[1], sg[3]) * ih));
+            by1 = Math.max.apply(null, segs.map(sg => Math.max(sg[1], sg[3]) * ih));
+        }
+        const midX = (bx0 + bx1) / 2, midY = (by0 + by1) / 2;
         let cw = iw / zoom, chh = cw / boxAspect;
+        // Widen the crop (keeping its aspect) until the whole line fits with a margin.
+        const needW = (bx1 - bx0) * 1.5, needH = (by1 - by0) * 1.5;
+        if (needW > cw) { cw = needW; chh = cw / boxAspect; }
+        if (needH > chh) { chh = needH; cw = chh * boxAspect; }
         if (chh > ih) { chh = ih; cw = chh * boxAspect; }
         if (cw > iw) { cw = iw; chh = cw / boxAspect; }
-        let cx0 = g.planX * iw - cw / 2, cy0 = g.planY * ih - chh / 2;
+        let cx0 = midX - cw / 2, cy0 = midY - chh / 2;
         cx0 = Math.max(0, Math.min(iw - cw, cx0)); cy0 = Math.max(0, Math.min(ih - chh, cy0));
         const scale = Math.max(1, 640 / cw);
         const oc = document.createElement('canvas'); oc.width = Math.round(cw * scale); oc.height = Math.round(chh * scale);
         const x = oc.getContext('2d');
         x.fillStyle = '#ffffff'; x.fillRect(0, 0, oc.width, oc.height);
         x.drawImage(img, cx0, cy0, cw, chh, 0, 0, oc.width, oc.height);
-        // Wall lines inside the crop (same transform as the pins below).
-        groups.forEach(gr => {
-            const allSegs = _wallAllSegs(gr);
-            if (!allSegs.length || (gr.level || 0) !== (g.level || 0)) return;
-            x.strokeStyle = (typeof categoryColor === 'function') ? categoryColor(gr.category) : '#c0392b';
-            x.lineWidth = Math.max(3, oc.width * 0.012); x.lineCap = 'butt';
+        const pxPerPt = oc.width / Math.max(40, (opts && opts.placedPt) || 170);
+        const tx = (v) => (v - cx0) * scale, ty = (v) => (v - cy0) * scale;
+        // This piece's wall line only.
+        if (segs.length) {
+            x.strokeStyle = (typeof categoryColor === 'function') ? categoryColor(g.category) : '#c0392b';
+            x.lineWidth = Math.max(2, 2.2 * pxPerPt); x.lineCap = 'butt';
             x.globalAlpha = FP_WALL_LINE_ALPHA;      // see the constant: one value, five renderers
-            allSegs.forEach(sg => {
+            segs.forEach(sg => {
                 x.beginPath();
-                x.moveTo((sg[0] * iw - cx0) * scale, (sg[1] * ih - cy0) * scale);
-                x.lineTo((sg[2] * iw - cx0) * scale, (sg[3] * ih - cy0) * scale);
+                x.moveTo(tx(sg[0] * iw), ty(sg[1] * ih));
+                x.lineTo(tx(sg[2] * iw), ty(sg[3] * ih));
                 x.stroke();
             });
             x.globalAlpha = 1;
-        });
-        // Pins that fall inside the crop, drawn like the floorplan key page.
-        const pr = Math.max(11, oc.width * 0.05);
-        groups.forEach(gr => {
-            if (gr.planX == null || gr.planY == null || (gr.level || 0) !== (g.level || 0)) return;
-            const pxp = gr.planX * iw, pyp = gr.planY * ih;
-            if (pxp < cx0 - pr || pxp > cx0 + cw + pr || pyp < cy0 - pr || pyp > cy0 + chh + pr) return;
-            const dx = (pxp - cx0) * scale, dy = (pyp - cy0) * scale;
-            x.beginPath(); x.arc(dx, dy, pr, 0, Math.PI * 2);
-            x.fillStyle = (typeof categoryColor === 'function') ? categoryColor(gr.category) : '#c0392b';
-            x.fill(); x.lineWidth = Math.max(1.5, pr * 0.13); x.strokeStyle = '#ffffff'; x.stroke();
-            x.fillStyle = '#ffffff'; x.font = '700 ' + Math.round(pr * 0.95) + 'px Arial';
-            x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText((gr.num || '').toString(), dx, dy + 0.5);
-        });
-        // Dashed red highlight around the subject pin (matches the reference style)
-        const sx = (g.planX * iw - cx0) * scale, sy2 = (g.planY * ih - cy0) * scale;
-        const hw = Math.min(oc.width * 0.34, oc.width - 6), hh2 = Math.min(oc.height * 0.34, oc.height - 6);
-        let rx = Math.max(3, Math.min(oc.width - hw - 3, sx - hw / 2));
-        let ry = Math.max(3, Math.min(oc.height - hh2 - 3, sy2 - hh2 / 2));
-        x.setLineDash([12, 8]); x.lineWidth = Math.max(3, oc.width * 0.009); x.strokeStyle = '#e02b2b';
-        x.strokeRect(rx, ry, hw, hh2); x.setLineDash([]);
+        }
+        // The dashed box: hugging the line with a margin, or a modest square at the pin.
+        const pad = 7 * pxPerPt;
+        let rx0, ry0, rx1, ry1;
+        if (segs.length) {
+            rx0 = tx(bx0) - pad; ry0 = ty(by0) - pad; rx1 = tx(bx1) + pad; ry1 = ty(by1) + pad;
+        } else {
+            const h = Math.min(oc.width, oc.height) * 0.17;
+            rx0 = tx(midX) - h; rx1 = tx(midX) + h; ry0 = ty(midY) - h; ry1 = ty(midY) + h;
+        }
+        const inset = Math.max(2, PLAN_DETAIL_BOX_PT * pxPerPt / 2 + 1);
+        rx0 = Math.max(inset, rx0); ry0 = Math.max(inset, ry0);
+        rx1 = Math.min(oc.width - inset, rx1); ry1 = Math.min(oc.height - inset, ry1);
+        x.setLineDash(_planDetailBoxDash(pxPerPt)); x.lineWidth = PLAN_DETAIL_BOX_PT * pxPerPt; x.strokeStyle = PLAN_DETAIL_BOX_INK;
+        x.strokeRect(rx0, ry0, rx1 - rx0, ry1 - ry0); x.setLineDash([]);
+        oc._planBox = { x: rx0, y: ry0, w: rx1 - rx0, h: ry1 - ry0, lineW: PLAN_DETAIL_BOX_PT * pxPerPt, pxPerPt: pxPerPt };
         return oc;
     } catch (e) { return null; }
 }
@@ -33873,6 +34092,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         const aw = cnv.width * fit, ah = cnv.height * fit;
         const ax = tpl.artwork.align === 'right' ? (boxX + boxW - aw) : (tpl.artwork.align === 'center' ? (boxX + (boxW - aw) / 2) : boxX);
         try { doc.addImage(url, 'JPEG', ax, boxY, aw, ah); } catch (e) {}
+        if (!SWATCH) _specArtRectAdd(r.id, ax, boxY, aw, ah);
         if (tpl.code) {
             const cf = tpl.code.field || 'id';
             const codeText = (cf === 'imageCode' ? (r.imageCode || r.artworkFile || '') : (r.id || '')).toString();
@@ -37571,7 +37791,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
