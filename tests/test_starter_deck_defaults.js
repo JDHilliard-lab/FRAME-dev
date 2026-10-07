@@ -140,7 +140,10 @@ const path = require('path');
       const loaded = Object.assign(_editorialDefaults(), { coverPage: { elements: [] }, layoutPages: [] });
       if (loaded.coverPage.elements.length) throw new Error('a deliberately empty cover came back with the starter layout');
       if (loaded.layoutPages.length) throw new Error('a project with no layout pages had one reinstated');
-      if (S.indexOf('Object.assign(_editorialDefaults(), data.editorial || {})') < 0) throw new Error('the load path no longer merges the project OVER the defaults');
+      // 17.87: the merge moved into _editorialFromFile (which also keeps an old file on
+      // its own category list). Still a merge of the project OVER the defaults.
+      if (S.indexOf('editorialContent = _editorialFromFile(data.editorial)') < 0) throw new Error('the load path does not go through _editorialFromFile');
+      if (S.indexOf('const e = Object.assign(_editorialDefaults(), ed || {});') < 0) throw new Error('the load path no longer merges the project OVER the defaults');
     });
 
     __check('_mbMigratePages leaves the starter pages alone', () => {

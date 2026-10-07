@@ -2343,3 +2343,8 @@ button, input, select, textarea { font-family: inherit; }
     border-radius: var(--r-4); background: var(--warn); color: #000; cursor: help;
 }
 .dash-same-img + .tbl-in { padding-left: 26px; }
+
+/* The floorplan category picker is a COLOUR CHIP: the closed select shows no text (one
+ * squashed letter under a chevron read as a typo), the open menu shows the names. */
+select.fp-cat-chip { color: transparent !important; text-shadow: none; }
+select.fp-cat-chip option { color: var(--text-strong); background: var(--bg-panel); }

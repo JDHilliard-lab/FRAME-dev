@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.86';
+const APP_VERSION = '17.87';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -118,11 +118,14 @@ function _projectSteps() {
     try { pages = (_deckPageList() || []).length; } catch (e) {}
     const plural = (n, one, many) => n + ' ' + (n === 1 ? one : many);
     return [
-        { n: 1, key: 'spec', label: 'Spec the pieces', view: 'Frame Dashboard',
+        // A PROJECT STARTS ON THE FLOORPLAN: list what goes where (ART.1, EGD.1, a
+        // triptych at ART.2) before a frame is specced. Go opens the plan's Items tab;
+        // the dashboard's + Add still works for anyone who would rather start there.
+        { n: 1, key: 'spec', label: 'List the item codes', view: 'Deck > Floorplan',
           state: c.pieces ? 'done' : 'todo',
           detail: c.pieces
             ? plural(c.pieces, 'piece', 'pieces') + (c.noArt ? ', ' + c.noArt + ' still without artwork.' : '.')
-            : 'No pieces yet. Add the first one with + Add.' },
+            : 'No pieces yet. Add them on the floorplan Items tab, or with + Add in the Frame Dashboard.' },
         { n: 2, key: 'walls', label: 'Place them on walls', view: 'Elevation',
           state: !c.pieces ? 'waiting' : (c.unplaced ? 'todo' : 'done'),
           detail: !c.pieces ? 'After step 1.'
@@ -151,7 +154,7 @@ function _navStepBadge(view, c) {
     return null;
 }
 const NAV_STEP_TIPS = {
-    dashboard: 'Step 1: spec the pieces.',
+    dashboard: 'Step 1: list and spec the pieces (or list them on the floorplan in Deck).',
     elevation: 'Step 2: place the pieces on walls.',
     deck: 'Steps 3 to 5: pin the pieces on the floorplan, build the deck, generate the PDF.',
 };
@@ -197,9 +200,22 @@ function _helpLiveEntry(kind) {
         + '</li>').join('') + '</ul>';
 }
 
+// Open Deck Studio on the first floorplan page with the Items tab up: where a project
+// starts. Falls back to the dashboard if the deck cannot open (a test harness).
+function _dsGoFloorplanItems() {
+    try {
+        switchView('deck');
+        if (typeof openDeckStudio === 'function') openDeckStudio('pages');
+        _fpPanelTab = 'items';
+        _dsPages = _deckPageList();
+        const i = _dsPages.findIndex(d => d && d.kind === 'floorplan');
+        if (i >= 0) _dsIndex = i;
+        _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
+    } catch (e) { try { switchView('dashboard'); } catch (e2) {} }
+}
 function _helpGoStep(key) {
     try { closeHelpModal(); } catch (e) {}
-    if (key === 'spec') { switchView('dashboard'); return; }
+    if (key === 'spec') { _dsGoFloorplanItems(); return; }
     if (key === 'walls') { switchView('elevation', typeof currentElevIndex === 'number' ? currentElevIndex : 0); return; }
     switchView('deck');
     if (key === 'pdf' && typeof _dsOpenGenerate === 'function') { try { _dsOpenGenerate(); } catch (e) {} }
@@ -803,7 +819,7 @@ const svgAlign = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 6h12M3 1
 const svgSort = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>`;
 
 const dashDefaultData = { 
-    id: "ART.001", imageCode: "TBD", level: "1", qty: 0, product: "Framed Art", location: "LOBBY", 
+    id: "ART.1", imageCode: "TBD", level: "1", qty: 0, product: "Framed Art", location: "LOBBY", 
     // Phase A additions: artwork attribution + frame profile depth + paper type.
     // These are visible to the team in the dashboard form and the CSV. Several
     // are optional: empty values render as blank cells in CSV and are skipped
@@ -1273,6 +1289,18 @@ function _fpSetWall(r, lv, patch) {
     const next = Object.assign({ lv: n, wallLine: null, wallLines: null, wallPanels: 1 }, patch || {}, { lv: n });
     if (_fpWallHas(next)) ws.push(next);
     r.planWalls = ws;
+    // A LINE TYPE CHOSEN BEFORE ANY LINE IS DRAWN. A wall entry with no line is dropped
+    // above (it is not a wall), which threw the choice away: picking Custom or Wrap on a
+    // plan with no line yet silently reverted to Single, so the first click started a
+    // drag instead of a chain. The pending choice is kept per plan until a line exists.
+    if (!_fpWallHas(next) && patch && patch.wallPanels != null) {
+        r.planLineMode = Object.assign({}, r.planLineMode || {});
+        r.planLineMode[n] = patch.wallPanels;
+    } else if (r.planLineMode && (n in r.planLineMode)) {
+        const m = Object.assign({}, r.planLineMode); delete m[n];
+        r.planLineMode = Object.keys(m).length ? m : undefined;
+        if (!r.planLineMode) delete r.planLineMode;
+    }
     _fpSyncPrimaryWall(r);
 }
 function _fpClearWall(r, lv) {
@@ -1286,6 +1314,8 @@ function _fpClearWall(r, lv) {
 function _fpWallPanelsOn(r, lv) {
     const w = _fpWallOn(r, lv);
     if (w) return w.wallPanels || 1;
+    const n = _deckLvlOf(lv);
+    if (r && r.planLineMode && r.planLineMode[n] != null) return r.planLineMode[n];
     return (r && r.wallPanels) || 1;
 }
 // Collapse dashProjectData into placement groups (one pin per group per plan).
@@ -1364,6 +1394,21 @@ function _subtitleClear() {
     try { sz = _subtitleStyleFor().size || sz; } catch (e) {}
     return Math.round(sz * 0.22) + 8;
 }
+// THE PRODUCT-TYPE SET, the default for a NEW project. DECLARED ABOVE `let
+// editorialContent`, because _editorialDefaults() reads it and that line RUNS at module
+// scope (the TITLE_SIZE_DEFAULT / _elevIdSeq / IG_LEG_TOP_GAP trap). A plan legend of Framed Art /
+// Canvas / EGD / WF is what a designer reaches for first; the tier set above
+// (Primary / Secondary / Tertiary) is the older default and stays the answer for any
+// project file that never chose, so opening an old deck keeps its pins coloured.
+// `prefix` and `product` are what "+ Add codes" on the floorplan uses: picking EGD
+// mints EGD.1 as a Wallcovering row, picking WF mints WF.1 as Window Film.
+const ART_CATEGORY_TYPES = [
+    { key: '',       label: 'None',       sub: '',                              color: '#444444' },
+    { key: 'framed', label: 'Framed Art', sub: '',                              color: '#E2231A', prefix: 'ART', product: 'Framed Art' },
+    { key: 'canvas', label: 'Canvas',     sub: '',                              color: '#C07B2E', prefix: 'ART', product: 'Framed Canvas (Floater)' },
+    { key: 'egd',    label: 'EGD',        sub: 'Environmental Graphic Design', color: '#1F9E4A', prefix: 'EGD', product: 'Wallcovering (EGD)' },
+    { key: 'wf',     label: 'WF',         sub: 'Window Film',                   color: '#2D5BD6', prefix: 'WF',  product: 'Window Film (WF)' },
+];
 let editorialContent = _editorialDefaults();
 // Normalize an older / hand-edited project on load. The main hazard is a unit
 // mislabel: centimetre (or millimetre) geometry saved with an 'in' flag, which
@@ -1398,7 +1443,16 @@ function _migrateLoadedProject(data) {
 // copies the reference, so a shared literal would let one project's caption edits reach
 // another's.
 function _specCodeStyleDefault() { return { font: 'serif', size: 9, color: '#9c9c9c' }; }
-function _editorialDefaults() { return Object.assign({ narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameSpecDetail', specTemplateOverrides: {}, specSlots: { frame: true, profile: true, plan: true, elevation: true }, specSlotOverrides: {}, specGroupSlots: { frame: true, profile: true, plan: true, elevation: true }, specGroupSlotOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: _specCodeStyleDefault(), paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: TITLE_SIZE_DEFAULT, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, specDualUnit: '', elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }, _starterDeck()); }
+// A project FILE that predates the product-type categories never stored a list, and
+// its rows carry tier keys (primary/secondary...). Handing it the new default would
+// leave every pin uncoloured, so a file with no list gets none and _artCats() falls
+// back to the tier set it was built with.
+function _editorialFromFile(ed) {
+    const e = Object.assign(_editorialDefaults(), ed || {});
+    if (!ed || !Array.isArray(ed.artCategories)) delete e.artCategories;
+    return e;
+}
+function _editorialDefaults() { return Object.assign({ artCategories: JSON.parse(JSON.stringify(ART_CATEGORY_TYPES)), narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameSpecDetail', specTemplateOverrides: {}, specSlots: { frame: true, profile: true, plan: true, elevation: true }, specSlotOverrides: {}, specGroupSlots: { frame: true, profile: true, plan: true, elevation: true }, specGroupSlotOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: _specCodeStyleDefault(), paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: TITLE_SIZE_DEFAULT, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, specDualUnit: '', elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }, _starterDeck()); }
 
 // ── Starter deck ──────────────────────────────────────────────────────────
 // What a brand-new project opens with. Lifted verbatim from the studio's own
@@ -2288,6 +2342,31 @@ const ART_CATEGORIES = [
     { key: 'secondary', label: 'Secondary', sub: 'Licensed Reproduction', color: '#1F9E4A' },
     { key: 'tertiary',  label: 'Tertiary',  sub: 'Licensed Reproduction', color: '#2D5BD6' },
 ];
+// What a code prefix and product default to for a category that does not say (a tier,
+// or one the designer added): read from the label, so a custom "EGD - lobby" still
+// mints EGD codes.
+function _catCodeInfo(catKey) {
+    const c = _artCats().find(x => x && x.key === catKey) || {};
+    if (c.prefix) return { prefix: c.prefix, product: c.product || 'Framed Art' };
+    const t = ART_CATEGORY_TYPES.find(x => x.key === catKey);
+    if (t && t.prefix) return { prefix: t.prefix, product: t.product };
+    const l = String(c.label || '').toUpperCase();
+    if (l.indexOf('EGD') >= 0 || l.indexOf('WALLCOVER') >= 0) return { prefix: 'EGD', product: 'Wallcovering (EGD)' };
+    if (l.indexOf('WF') === 0 || l.indexOf('WINDOW') >= 0) return { prefix: 'WF', product: 'Window Film (WF)' };
+    if (l.indexOf('CANVAS') >= 0) return { prefix: 'ART', product: 'Framed Canvas (Floater)' };
+    return { prefix: 'ART', product: 'Framed Art' };
+}
+// Replace the category list with one of the presets, KEEPING any category a row still
+// uses (a quick set must never strand a pin with no colour).
+function _artCatsApplyPreset(which) {
+    const src = which === 'tiers' ? ART_CATEGORIES : ART_CATEGORY_TYPES;
+    const next = JSON.parse(JSON.stringify(src));
+    _artCats().forEach(c => {
+        if (!c || next.some(n => n.key === c.key)) return;
+        if (dashProjectData.some(r => (r.category || '') === c.key)) next.push(JSON.parse(JSON.stringify(c)));
+    });
+    editorialContent.artCategories = next;
+}
 // Custom categories: projects can rename Primary/Secondary/Tertiary, change
 // their colours, and add new tiers. Stored in editorialContent.artCategories;
 // the static list above is the seed/default.
@@ -4178,7 +4257,7 @@ function _autosaveRestore(payload) {
     floorplanImageName = payload.floorplanName || '';
     floorplanLevels = Array.isArray(payload.floorplanLevels) ? payload.floorplanLevels : [];
     _fpLevel = 0; _fpMigrate();
-    editorialContent = Object.assign(_editorialDefaults(), payload.editorial || {});
+    editorialContent = _editorialFromFile(payload.editorial);
     refreshAllViews();
     // After restore, push fresh history (clearing prior so undo doesn't
     // jump back to the pre-restore empty state).
@@ -6722,7 +6801,7 @@ function _readProjectText(text) {
             floorplanImageName = data.floorplanImageName || '';
             floorplanLevels = Array.isArray(data.floorplanLevels) ? data.floorplanLevels : [];
             _fpLevel = 0; _fpMigrate();
-            editorialContent = Object.assign(_editorialDefaults(), data.editorial || {});
+            editorialContent = _editorialFromFile(data.editorial);
             // The drafting standard, when the file carries one. OPTIONAL by design:
             // absent means the file predates the idea (or was written by a tool that
             // doesn't set it), and the machine's own preference is then correct — so
@@ -9319,15 +9398,33 @@ const dashFmt = (num) => {
     return parseFloat(n.toFixed(3)); 
 };
 
-function generateNextItemCode() {
-    let max = 0;
+// THE CODE SCHEME: PREFIX.N (ART.1, EGD.1, WF.1), a set's pieces lettered on the end
+// (ART.4A, ART.4B). Numbers count per prefix. A project already written with padded
+// codes (ART.001) keeps its padding, so a new code sorts beside the old ones.
+function _codeNumsFor(prefix) {
+    const re = new RegExp('^' + prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\.(\\d+)');
+    let max = 0, padded = false;
     dashProjectData.forEach(d => {
-        if (d.id.startsWith("ART.")) {
-            let num = parseInt(d.id.replace("ART.", ""), 10);
-            if (!isNaN(num) && num > max) max = num;
-        }
+        const m = re.exec(String((d && d.id) || ''));
+        if (!m) return;
+        const n = parseInt(m[1], 10);
+        if (!isNaN(n) && n > max) max = n;
+        if (m[1].length > 1 && m[1].charAt(0) === '0') padded = true;
     });
-    return "ART." + String(max + 1).padStart(3, '0');
+    return { max: max, padded: padded };
+}
+function _nextPlacementCode(prefix) {
+    const p = prefix || 'ART';
+    const info = _codeNumsFor(p);
+    let n = info.max + 1;
+    const fmt = (k) => p + '.' + (info.padded ? String(k).padStart(3, '0') : String(k));
+    // Never hand back a code something already owns (a typed-in ART.7B owns ART.7).
+    while (dashProjectData.some(d => d && _artGroupKey(d.id) === fmt(n))) n++;
+    return fmt(n);
+}
+// ART.n, unpadded unless the project already writes ART.001 (see _nextPlacementCode).
+function generateNextItemCode() {
+    return _nextPlacementCode('ART');
 }
 
 function toggleDashSection(id, btn) {
@@ -21104,6 +21201,15 @@ function _dsArmShapeDraw(virtualKind) {
     _dsRenderCenter();
 }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && _dsArmedShape && _dsArmedShape !== 'elbowPath') { _dsArmedShape = null; _dsRenderCenter(); } });
+// Esc on the floorplan: first ends a click-to-click chain (Wrap / Custom) where it is,
+// a second Esc puts the line tool down.
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || typeof _fpLineArmId === 'undefined' || !_fpLineArmId) return;
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    if (_fpLineStart) _fpLineStart = null; else _fpLineArmId = null;
+    try { _fpLoupeHide(); _dsRenderCenter(); _dsRenderTools(); } catch (err) {}
+});
 function _arrowPathPoints(a, X1, Y1, X2, Y2, scaleX, scaleY) {
     // 'elbow' with waypoints: a real multi-segment path, click-placed one
     // corner at a time (the "maze" tool) rather than a single computed bend.
@@ -25650,7 +25756,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
             // The MODE is per plan like the line itself, so arming on a plan where this
             // piece is set to Custom gives click-to-click there even if another plan has
             // it as a single run.
-            if (gArm && _fpWallPanelsOn(gArm.rows[0], desc.level) === 'custom') {
+            if (gArm && _fpLineIsMulti(_fpWallPanelsOn(gArm.rows[0], desc.level))) {
                 img.onclick = _dsFpLineClickPoint;      // click start, click end, repeat
             } else {
                 img.onmousedown = _dsFpLineDown;        // drag gesture
@@ -25663,6 +25769,9 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
 }
 // ── Wall-line drawing (drag along the wall) ──
 let _fpLineArmId = null;
+// Line types drawn click-to-click as several segments: Custom (separate lines) and Wrap
+// (one chain that turns corners, for EGD and WF).
+function _fpLineIsMulti(v) { return v === 'custom' || v === 'wrap'; }
 let _fpLineStart = null;
 // AXIS LOCK. Walls on a plan are overwhelmingly orthogonal, and a wall line drawn a
 // degree or two off reads as a mistake on the Plan detail page — it is compared directly
@@ -25784,6 +25893,8 @@ function _dsFpLineClickPoint(e) {
     const n = _fpAxisLock(_fpLineStart, raw, e);
     const g = _fpFindGroup(_fpLineArmId); if (!g) { _fpLineStart = null; return; }
     const seg = { x1: _fpLineStart.x, y1: _fpLineStart.y, x2: n.x, y2: n.y };
+    const lvl0 = (_dsPages[_dsIndex] && _dsPages[_dsIndex].level) || 0;
+    const wrapMode = _fpWallPanelsOn(g.rows[0], lvl0) === 'wrap';
     _fpLineStart = null;
     if (Math.hypot(seg.x2 - seg.x1, seg.y2 - seg.y1) < 0.004) return;
     const lvl = (_dsPages[_dsIndex] && _dsPages[_dsIndex].level) || 0;
@@ -25791,8 +25902,12 @@ function _dsFpLineClickPoint(e) {
         const w = _fpWallOn(r, lvl);
         const lines = (w && Array.isArray(w.wallLines) ? w.wallLines.slice() : (w && w.wallLine ? [w.wallLine] : []));
         lines.push(seg);
-        _fpSetWall(r, lvl, { wallLines: lines, wallPanels: 'custom' });
+        _fpSetWall(r, lvl, { wallLines: lines, wallPanels: wrapMode ? 'wrap' : 'custom' });
     });
+    // WRAP continues from where the last segment ended, so a wallcovering or a film run
+    // that turns a corner is one connected line rather than separate pieces that only
+    // nearly meet. Escape (or re-clicking the line button) ends the chain.
+    if (wrapMode) _fpLineStart = { x: n.x, y: n.y };
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderCenter(); _dsRenderRail();   // stay armed for the next line
@@ -26424,18 +26539,29 @@ function _fpRowMatches(g) {
     return hay.indexOf(q) >= 0;
 }
 function _fpPanelItems(t, desc) {
-    const hint = document.createElement('p');
-    hint.style.cssText = 'font-size:var(--fs-70); color:' + (_fpArmedId ? 'var(--ui-active)' : 'var(--text-muted)') + '; margin-bottom:8px; line-height:1.5;';
-    hint.textContent = _fpArmedId ? ('Click the plan to drop ' + _fpArmedId + '.')
-        : (_fpLineArmId ? 'Drawing a wall line — hold Shift to lock it horizontal or vertical.'
-                        : 'Click a group, then click the plan to drop its pin. Drag pins to move; double-click to remove.');
-    t.appendChild(hint);
+    // WHILE SOMETHING IS ARMED the line says what the next click does, because that is
+    // the one moment it is news. The standing how-to lives on the ? dot instead of a
+    // paragraph that pushed the list down every time the panel opened.
+    if (_fpArmedId || _fpLineArmId) {
+        const hint = document.createElement('p');
+        hint.style.cssText = 'font-size:var(--fs-70); color:var(--ui-active); margin:0 0 6px; line-height:1.45;';
+        const armedG = _fpLineArmId ? _fpFindGroup(_fpLineArmId) : null;
+        const wrapping = armedG && _fpWallPanelsOn(armedG.rows[0], desc.level) === 'wrap';
+        hint.textContent = _fpArmedId ? ('Click the plan to drop ' + _fpArmedId + '.')
+            : (wrapping ? 'Click along the wall; each click continues the line round the corner. Esc to finish.'
+                        : 'Drawing a wall line. Hold Shift to lock it horizontal or vertical.');
+        t.appendChild(hint);
+    }
+
+    // ADD CODES FROM HERE. A project can start on the floorplan: list what goes where
+    // before a single frame is specced, and before there is even a plan image to pin on.
+    t.appendChild(_fpAddCodesBar(desc));
 
     const groups = _fpGroups();
     if (!groups.length) {
         const e = document.createElement('p');
-        e.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted);';
-        e.textContent = 'No artwork groups yet. Add pieces in the Frame Dashboard.';
+        e.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); line-height:1.5;';
+        e.textContent = 'No item codes yet. Add them above: pick a type and a frame set. Each one gets its own code and a row in the Frame Dashboard.';
         t.appendChild(e);
         return;
     }
@@ -26461,12 +26587,160 @@ function _fpPanelItems(t, desc) {
         + (_fpUnplacedOnly ? 'background:var(--warn); color:#fff;' : 'background:var(--bg-input); color:var(--text-main);');
     un.onclick = () => { _fpUnplacedOnly = !_fpUnplacedOnly; _dsRenderTools(); };
     tools.appendChild(fi); tools.appendChild(un);
+    tools.appendChild(_dsHelpDot('Click a row, then click the plan to drop its pin. Drag a pin to move it; double-click a pin to remove it. Double-click a code to rename it: the dashboard, spec pages and plan all follow. A hollow number has no pin yet; it fills once the code is placed on a plan.'));
     t.appendChild(tools);
+
+    // COLUMN HEADER. Five controls per row with no labels meant learning the row by
+    // hovering each one; one header line names them once for the whole list.
+    t.appendChild(_fpItemHeader());
 
     const list = document.createElement('div');
     list.id = 'dsFpItemList';
     t.appendChild(list);
     _fpFillItemList(desc);
+}
+// The header widths are the row's widths (FP_ITEM_COLS), so the two cannot drift.
+const FP_ITEM_COLS = { num: 24, cat: 26, line: 24, type: 62, rm: 18 };
+function _fpItemHeader() {
+    const h = document.createElement('div');
+    h.className = 'fp-item-head';
+    h.style.cssText = 'display:flex; align-items:flex-end; gap:5px; padding:0 4px 3px 7px; margin-bottom:3px; border-bottom:1px solid var(--border-color);'
+        + ' font-size:var(--fs-50); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-muted);';
+    const cell = (txt, w, tip, grow) => {
+        const c = document.createElement('span');
+        c.textContent = txt;
+        if (tip) c.title = tip;
+        c.style.cssText = grow ? 'flex:1 1 auto; min-width:0;' : ('flex:0 0 ' + w + 'px; text-align:center; white-space:nowrap;');
+        h.appendChild(c);
+    };
+    cell('#', FP_ITEM_COLS.num, 'Pin number. Hollow until the code is pinned on a plan.');
+    cell('Item code', 0, 'Double-click a code to rename it', true);
+    cell('Cat', FP_ITEM_COLS.cat, 'Category: sets the pin and line colour');
+    cell('Line', FP_ITEM_COLS.line, 'Draw the wall line on this plan');
+    cell('Line type', FP_ITEM_COLS.type, 'Single, Diptych, Triptych, Custom (separate lines) or Wrap (one line round corners, for EGD and WF)');
+    cell('', FP_ITEM_COLS.rm);
+    return h;
+}
+
+// ── + ADD CODES ─────────────────────────────────────────────────────────────
+// Type (from the plan categories) decides the prefix and the product: Framed Art and
+// Canvas mint ART.n, EGD mints EGD.n, WF mints WF.n. The frame set decides how many
+// pieces the placement has: a Single is one row (ART.5), a Triptych three (ART.5A,
+// ART.5B, ART.5C), all one placement and so one pin.
+const FP_FRAME_SETS = [
+    { n: 1, label: 'Single' }, { n: 2, label: 'Diptych' }, { n: 3, label: 'Triptych' },
+    { n: 4, label: 'Quad' }, { n: 5, label: '5 set' }, { n: 7, label: '7 set' },
+];
+let _fpAddType = null;     // last type picked, so a run of EGD codes needs one choice
+let _fpAddSet = 1;
+function _fpAddCodesBar(desc) {
+    const bar = document.createElement('div');
+    bar.className = 'fp-add-bar';
+    bar.style.cssText = 'display:flex; gap:5px; align-items:center; margin-bottom:8px; padding:6px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-subpanel);';
+    const cats = _artCats().filter(c => c && c.key);
+    if (_fpAddType == null || !cats.some(c => c.key === _fpAddType)) _fpAddType = cats.length ? cats[0].key : '';
+    const sty = 'height:26px; font-size:var(--fs-65); padding:0 5px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    const tSel = document.createElement('select');
+    tSel.title = 'Type: sets the code prefix (ART, EGD, WF), the product and the pin colour';
+    tSel.style.cssText = 'flex:1 1 0; min-width:0; ' + sty;
+    cats.forEach(c => { const o = document.createElement('option'); o.value = c.key; o.textContent = c.label; if (c.key === _fpAddType) o.selected = true; tSel.appendChild(o); });
+    tSel.onchange = () => { _fpAddType = tSel.value; };
+    const sSel = document.createElement('select');
+    sSel.title = 'Frame set: how many pieces hang at this spot';
+    sSel.style.cssText = 'flex:0 0 84px; ' + sty;
+    FP_FRAME_SETS.forEach(fs => { const o = document.createElement('option'); o.value = String(fs.n); o.textContent = fs.label; if (fs.n === _fpAddSet) o.selected = true; sSel.appendChild(o); });
+    sSel.onchange = () => { _fpAddSet = parseInt(sSel.value, 10) || 1; };
+    const add = document.createElement('button');
+    add.className = 'action-btn';
+    add.style.cssText = 'flex:0 0 auto; width:auto; height:26px; padding:0 10px; font-size:var(--fs-65);';
+    add.textContent = '+ Add code';
+    add.onclick = () => {
+        const code = _fpAddCodes(tSel.value, parseInt(sSel.value, 10) || 1);
+        if (code) { _fpArmedId = code; _fpLineArmId = null; }
+        _dsRefresh(); _dsRenderTools(); _dsRenderCenter();
+        if (code) _toast('Added ' + code, (floorplanLevels.some(l => l && l.imageData) || floorplanImageData) ? 'Click the plan to pin it, or add the next one.' : 'Pin it once a plan image is in.');
+    };
+    bar.appendChild(tSel); bar.appendChild(sSel); bar.appendChild(add);
+    return bar;
+}
+// Mint one placement: N dashboard rows sharing a code, typed and categorised. Returns the
+// placement code. Rows go to the END of the schedule (the dashboard's + Add inserts after
+// the selection, but from the floorplan there is no selection to be next to).
+function _fpAddCodes(catKey, n) {
+    const info = _catCodeInfo(catKey);
+    const code = _nextPlacementCode(info.prefix);
+    const k = Math.max(1, Math.min(12, n || 1));
+    const letters = (typeof _setLetters === 'function') ? _setLetters(k) : 'ABCDEFGHIJKL'.slice(0, k).split('');
+    const _f = unitFactor('in', dashUnit);
+    const lenFields = ['extW', 'extH', 'fW', 'fHeight', 'rabbetDepth', 'bleed', 'floaterInset', 'sbPaperMargin', 'sbPaperBorder', 'm1T', 'm1B', 'm1L', 'm1R', 'm2'];
+    for (let i = 0; i < k; i++) {
+        const row = JSON.parse(JSON.stringify(dashDefaultData));
+        lenFields.forEach(f => { const v = parseFloat(row[f]); if (!isNaN(v)) row[f] = dashFmt(v * _f); });
+        row.fType = 'color'; row.fColor = '#000000'; row.fCode = 'Standard Black';
+        row.id = k === 1 ? code : code + letters[i];
+        row.category = catKey || '';
+        row.qty = 0;
+        row.product = info.product;
+        // A flat graphic gets what the product dropdown seeds for one: the 2" bleed and
+        // its application wording.
+        if (_isFlatGraphic(row.product)) {
+            row.bleed = dashFmt(FLAT_GRAPHIC_BLEED_IN * _f);
+            if (!(row.material || '').trim()) row.material = FLAT_GRAPHIC_APPLICATION[row.product] || '';
+        }
+        dashProjectData.push(row);
+    }
+    if (typeof renderDashTable === 'function') renderDashTable();
+    if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    return code;
+}
+
+// ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
+// Every piece of the placement keeps its suffix (ART.4A -> ART.9A), so a rename is one
+// gesture for a triptych, not three. The id is the identity everything reads: the
+// dashboard row, every wall's frames, the spec page titles. Two things store the code
+// as a KEY and have to be moved by hand: plan-detail pages (they list group keys) and
+// the per-page settings maps (keyed 'spec:<code>'), or a renamed page silently loses
+// its layout choices and approval.
+function _fpRenameGroup(oldKey, newKey) {
+    newKey = String(newKey || '').trim();
+    if (!newKey || newKey === oldKey) return false;
+    const g = _fpFindGroup(oldKey);
+    const rows = g ? g.rows : dashProjectData.filter(r => r && _artGroupKey(r.id) === oldKey);
+    if (!rows.length) return false;
+    const pairs = rows.map(r => ({ r: r, from: r.id, to: newKey + String(r.id).slice(String(oldKey).length) }));
+    const mine = new Set(rows);
+    const clash = pairs.find(p => dashProjectData.some(o => o && !mine.has(o) && o.id === p.to));
+    if (clash) { _toast(clash.to + ' is already taken', 'Pick a code nothing else uses.'); return false; }
+    if (_artGroupKey(pairs[0].to) !== newKey && rows.length > 1) {
+        _toast('That code would split the set', 'End the code in a number, like ART.12, so its pieces stay one placement.');
+        return false;
+    }
+    pairs.forEach(p => applyIdRename(p.from, p.to));
+    (editorialContent.planDetails || []).forEach(pd => {
+        if (pd && Array.isArray(pd.ids)) pd.ids = pd.ids.map(x => x === oldKey ? newKey : x);
+    });
+    _renamePageKeys(oldKey, newKey);
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    return true;
+}
+// Per-page settings live in maps keyed by page key; move every key that names the old
+// placement exactly, one level into editorialContent and one level below that.
+function _renamePageKeys(oldKey, newKey) {
+    const from = ['spec:' + oldKey, 'elevgrp:' + oldKey, 'spec:elevgrp:' + oldKey];
+    const to = ['spec:' + newKey, 'elevgrp:' + newKey, 'spec:elevgrp:' + newKey];
+    const isMap = (o) => o && typeof o === 'object' && !Array.isArray(o);
+    const walk = (o, depth) => {
+        if (!isMap(o) || depth > 2) return;
+        Object.keys(o).forEach(k => {
+            const i = from.indexOf(k);
+            if (i >= 0 && !(to[i] in o)) { o[to[i]] = o[k]; delete o[k]; }
+            else if (isMap(o[k])) walk(o[k], depth + 1);
+        });
+    };
+    walk(editorialContent, 0);
 }
 // The list body, rebuilt on its own so typing in the filter does not tear down the
 // input. Grouped by category with collapsible headers: five headers beats sixty rows.
@@ -26549,18 +26823,46 @@ function _fpItemRow(g, desc) {
     const status = !placed ? 'not placed \u2014 click the row, then click the plan'
         : (pins.length > 1 ? ('on ' + pins.length + ' plans: ' + pinNames.join(', ') + (here ? '' : ' \u2014 not this one'))
                            : (here ? 'placed here' : 'on ' + pinNames[0]));
-    num.style.cssText = 'flex:0 0 auto; min-width:20px; height:20px; padding:0 4px; border-radius:var(--r-10); display:inline-flex; align-items:center; justify-content:center; font-size:var(--fs-60); font-weight:700; color:#fff; background:' + categoryColor(g.category) + ';' + (placed ? '' : ' box-shadow:0 0 0 2px var(--warn);');
+    // HOLLOW UNTIL PINNED. A new code is a ring in its category colour; it fills once it
+    // has a pin on a plan. The old amber ring said "something is wrong" about a code that
+    // was simply not placed yet, which is the normal state of a plan being built.
+    const _cc = categoryColor(g.category);
+    num.style.cssText = 'flex:0 0 ' + FP_ITEM_COLS.num + 'px; box-sizing:border-box; height:20px; padding:0 3px; border-radius:var(--r-10); display:inline-flex; align-items:center; justify-content:center; font-size:var(--fs-60); font-weight:700; '
+        + (placed ? ('color:#fff; background:' + _cc + '; border:2px solid ' + _cc + ';') : ('color:' + _cc + '; background:transparent; border:2px solid ' + _cc + ';'));
+    num.className = placed ? 'fp-num fp-num-placed' : 'fp-num fp-num-hollow';
     row.title = (codes || g.key) + ' \u2014 ' + status;
     const code = document.createElement('span');
     code.textContent = codes || g.key;
     code.style.cssText = 'flex:1 1 auto; min-width:0; font-size:var(--fs-60); color:var(--text-main); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;'
         + (placed ? '' : ' color:var(--text-muted);');
+    code.className = 'fp-code';
+    // Double-click to rename the PLACEMENT. Inline, because the code is right there and a
+    // dialog for one word is a detour.
+    code.ondblclick = (e) => {
+        e.stopPropagation();
+        const inp = document.createElement('input');
+        inp.type = 'text'; inp.value = g.key;
+        inp.style.cssText = 'flex:1 1 auto; min-width:0; height:20px; font-size:var(--fs-60); padding:0 4px; background:var(--bg-input); color:var(--text-strong); border:1px solid var(--ui-active); border-radius:var(--r-4);';
+        let done = false;
+        const commit = (ok) => {
+            if (done) return; done = true;
+            if (ok && inp.value.trim() && inp.value.trim() !== g.key) {
+                if (_fpRenameGroup(g.key, inp.value.trim())) { _dsRefresh(); _dsRenderCenter(); }
+            }
+            _dsRenderTools();
+        };
+        inp.onkeydown = (ev) => { ev.stopPropagation(); if (ev.key === 'Enter') commit(true); else if (ev.key === 'Escape') commit(false); };
+        inp.onblur = () => commit(true);
+        inp.onclick = (ev) => ev.stopPropagation();
+        code.replaceWith(inp); inp.focus(); inp.select();
+    };
     // Category picker, reduced to a colour chip. It used to be the widest control in the
     // row while being the one changed least often; the native menu still opens with the
     // full labels in it.
     const sel = document.createElement('select');
     sel.title = 'Category';
-    sel.style.cssText = 'flex:0 0 auto; width:26px; height:20px; font-size:var(--fs-50); padding:0; cursor:pointer;'
+    sel.className = 'fp-cat-chip';
+    sel.style.cssText = 'flex:0 0 ' + FP_ITEM_COLS.cat + 'px; width:' + FP_ITEM_COLS.cat + 'px; height:20px; font-size:var(--fs-50); padding:0; cursor:pointer; -webkit-appearance:none; appearance:none;'
         + ' background:' + categoryColor(g.category) + '; color:#fff; border:1px solid var(--border-color); border-radius:var(--r-4);';
     _artCats().forEach(cc => { const o = document.createElement('option'); o.value = cc.key; o.textContent = cc.label; if ((g.category || '') === cc.key) o.selected = true; sel.appendChild(o); });
     sel.onclick = (e) => e.stopPropagation();
@@ -26574,16 +26876,16 @@ function _fpItemRow(g, desc) {
     const lnB = document.createElement('button');
     lnB.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="4" y1="20" x2="20" y2="4"/></svg>';
     lnB.title = (hasLine ? 'Redraw wall line' : 'Draw wall line')
-        + ' \u2014 click, then ' + ((pnHere === 'custom') ? 'click start/end points on the plan (keep clicking to add more lines)' : 'drag along the wall on the plan')
+        + ' \u2014 click, then ' + (pnHere === 'wrap' ? 'click along the wall; each click continues round the corner (Esc to finish)' : (pnHere === 'custom') ? 'click start/end points on the plan (keep clicking to add more lines)' : 'drag along the wall on the plan')
         + '. Hold Shift to lock the line horizontal or vertical.';
     lnB.className = 'action-btn btn-secondary';
-    lnB.style.cssText = 'width:24px; height:22px; padding:0; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;' + (_fpLineArmId === g.key ? ' outline:2px solid #e02b2b; color:#e02b2b;' : (hasLine ? ' color:' + categoryColor(g.category) + ';' : ''));
+    lnB.style.cssText = 'width:' + FP_ITEM_COLS.line + 'px; height:22px; padding:0; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;' + (_fpLineArmId === g.key ? ' outline:2px solid #e02b2b; color:#e02b2b;' : (hasLine ? ' color:' + categoryColor(g.category) + ';' : ''));
     lnB.onclick = (e) => { e.stopPropagation(); _fpLineArmId = (_fpLineArmId === g.key ? null : g.key); _fpArmedId = null; _fpLineStart = null; _dsRenderCenter(); _dsRenderTools(); };
     const pSel = document.createElement('select');
-    pSel.title = 'Line type \u2014 Single, Diptych, Triptych, or Custom (click-to-click, multiple lines)';
-    pSel.style.cssText = 'flex:0 0 auto; width:52px; font-size:var(--fs-55); padding:1px 1px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
-    const curMode = (pnHere === 'custom') ? 'custom' : String(pnHere || 1);
-    [['1', 'Single'], ['2', 'Diptych'], ['3', 'Triptych'], ['custom', 'Custom']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (curMode === v) o.selected = true; pSel.appendChild(o); });
+    pSel.title = 'Line type \u2014 Single, Diptych, Triptych, Custom (click-to-click, separate lines) or Wrap (one line that turns corners, for EGD and WF)';
+    pSel.style.cssText = 'flex:0 0 auto; width:' + FP_ITEM_COLS.type + 'px; font-size:var(--fs-55); padding:1px 1px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+    const curMode = _fpLineIsMulti(pnHere) ? pnHere : String(pnHere || 1);
+    [['1', 'Single'], ['2', 'Diptych'], ['3', 'Triptych'], ['custom', 'Custom'], ['wrap', 'Wrap']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; if (curMode === v) o.selected = true; pSel.appendChild(o); });
     pSel.onclick = (e) => e.stopPropagation();
     pSel.onchange = (e) => {
         e.stopPropagation();
@@ -26591,9 +26893,9 @@ function _fpItemRow(g, desc) {
         const lvl = desc.level;
         g.rows.forEach(r2 => {
             const w = _fpWallOn(r2, lvl);
-            if (v === 'custom') {
+            if (_fpLineIsMulti(v)) {
                 const lines = (w && Array.isArray(w.wallLines) && w.wallLines.length) ? w.wallLines : (w && w.wallLine ? [w.wallLine] : []);
-                _fpSetWall(r2, lvl, { wallLines: lines, wallPanels: 'custom' });
+                _fpSetWall(r2, lvl, { wallLines: lines, wallPanels: v });
             } else {
                 const one = (w && Array.isArray(w.wallLines) && w.wallLines.length) ? w.wallLines[0] : (w ? w.wallLine : null);
                 _fpSetWall(r2, lvl, { wallLine: one, wallPanels: parseInt(v, 10) || 1 });
@@ -26603,7 +26905,7 @@ function _fpItemRow(g, desc) {
         _dsRenderCenter(); _dsRenderRail(); _dsRenderTools();
     };
     const lnX = document.createElement('button'); lnX.textContent = '\u2715'; lnX.title = 'Remove wall line(s)';
-    lnX.className = 'action-btn btn-secondary'; lnX.style.cssText = 'width:18px; height:22px; padding:0; font-size:var(--fs-50); flex:0 0 auto;' + (hasLine ? '' : ' visibility:hidden;');
+    lnX.className = 'action-btn btn-secondary'; lnX.style.cssText = 'width:' + FP_ITEM_COLS.rm + 'px; height:22px; padding:0; font-size:var(--fs-50); flex:0 0 auto;' + (hasLine ? '' : ' visibility:hidden;');
     lnX.onclick = (e) => { e.stopPropagation(); g.rows.forEach(r2 => _fpClearWall(r2, desc.level)); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRefresh(); };
     row.appendChild(num); row.appendChild(code); row.appendChild(sel); row.appendChild(lnB); row.appendChild(pSel); row.appendChild(lnX);
     row.onclick = () => _dsFpArm(g.key);
@@ -26669,10 +26971,26 @@ function _fpPlanOrderInto(t) {
 // the tab it sits behind is already called Categories, and a panel that repeats its own
 // tab label wastes the first line of a narrow column.
 function _fpPanelCats(t) {
-    const catHdr = document.createElement('p');
-    catHdr.textContent = 'These are the tiers in the plan legend. Colour drives the pins and wall lines on every level.';
-    catHdr.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin:0 0 8px; line-height:1.5;';
-    t.appendChild(catHdr);
+    // QUICK SET: the two lists a designer actually starts from, one click each. Product
+    // types for a plan that says what each pin IS; tiers for one that says how it was
+    // sourced. Any category still in use survives the switch.
+    const qs = document.createElement('div');
+    qs.style.cssText = 'display:flex; gap:5px; align-items:center; margin:0 0 8px;';
+    const qsL = document.createElement('span');
+    qsL.textContent = 'Quick set';
+    qsL.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; text-transform:uppercase; color:var(--text-muted); margin-right:2px;';
+    qs.appendChild(qsL);
+    [['types', 'Framed Art / Canvas / EGD / WF'], ['tiers', 'Primary / Secondary / Tertiary']].forEach(([k, l]) => {
+        const b = document.createElement('button');
+        b.className = 'action-btn btn-secondary';
+        b.style.cssText = 'flex:1 1 0; min-width:0; width:auto; height:24px; padding:0 6px; font-size:var(--fs-55); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
+        b.textContent = l; b.title = 'Replace the category list with ' + l + '. Categories still used by a piece are kept.';
+        b.setAttribute('data-cat-preset', k);
+        b.onclick = () => { _artCatsApplyPreset(k); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTools(); _dsRenderCenter(); _dsRenderRail(); };
+        qs.appendChild(b);
+    });
+    qs.appendChild(_dsHelpDot('Categories are the groups in the plan legend. Their colour drives the pins and wall lines on every level, and the type you add a code under sets its prefix (ART, EGD, WF).'));
+    t.appendChild(qs);
     _artCats().forEach((cc, ci) => {
         if (!cc.key) return;   // 'None' stays fixed
         const row = document.createElement('div'); row.style.cssText = 'display:flex; align-items:center; gap:5px; margin-bottom:4px;';
@@ -37253,7 +37571,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>

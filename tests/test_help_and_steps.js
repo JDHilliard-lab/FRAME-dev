@@ -228,7 +228,8 @@ check('Help opens with a live checklist of THIS project', async () => {
     setup({ rows: [row('ART-1'), row('ART-2'), row('ART-3')],
         elevs: [{ id: 'w1', name: 'Lobby', frames: [frame('ART-1')] }] });
     const html = fx.live('steps');
-    ['1. Spec the pieces', '2. Place them on walls', '3. Pin them on the floorplan', '4. Build the deck', '5. Generate the PDF']
+    // 17.87: a project starts by listing its codes, on the floorplan or the dashboard.
+    ['1. List the item codes', '2. Place them on walls', '3. Pin them on the floorplan', '4. Build the deck', '5. Generate the PDF']
         .forEach((s) => { if (html.indexOf(s) < 0) throw new Error('the checklist is missing: ' + s); });
     if (html.indexOf('2 of 3 not on a wall yet') < 0) throw new Error('the checklist does not reflect the project');
     if (html.indexOf('No floorplan yet') < 0) throw new Error('the plan step does not say it can be skipped');
