@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.83';
+const APP_VERSION = '17.84';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -4381,6 +4381,8 @@ if (document.readyState === 'loading') {
 // =========================================================================
 function initMasterApp() {
     document.getElementById('g_date').valueAsDate = new Date();
+    _helpDotInit();
+    _elevGuideGroupsInit();
     renderNavTabs();
     selectDashRow(0); 
     populateDashPushSelector();
@@ -5062,9 +5064,13 @@ function syncLayoutGuideButtonStates() {
     const el0 = elevations[currentElevIndex];
     const hasGlass = !!(el0 && Array.isArray(el0.glazing) && el0.glazing.length);
     const wfBtn = document.getElementById('wfWallBtn');
-    if (wfBtn) wfBtn.classList.toggle('active', hasGlass);
-    if (egdBtn) egdBtn.classList.toggle('active', on);
-    if (artBtn) artBtn.classList.toggle('active', !on);
+    // ART is lit only when the wall is NEITHER of the others, so the row reads as "a plain
+    // wall, plus whatever is switched on", and a lit EGD or WF is visibly something that
+    // can be switched back off (its tooltip says how).
+    const artOn = !on && !hasGlass;
+    if (wfBtn) { wfBtn.classList.toggle('active', hasGlass); wfBtn.title = hasGlass ? 'WF wall is ON. Click to turn it off (removes the window panels from this wall).' : 'WF wall: window film on glass. Adds the standard run of three panels and opens the Glass tab.'; }
+    if (egdBtn) { egdBtn.classList.toggle('active', on); egdBtn.title = on ? 'EGD wall is ON. Click to turn it off and go back to an art wall.' : 'EGD wall: a wallcovering fills this wall and stays inside it, above the baseboard.'; }
+    if (artBtn) { artBtn.classList.toggle('active', artOn); artBtn.title = artOn ? 'Art wall, the default: framed art hangs on this wall.' : 'Back to a plain art wall: turns EGD and WF off.'; }
     // WHAT THE MODE GOVERNS, said out loud, and keyed to what is actually on this wall.
     // The pair of buttons implies you must pick EGD for any EGD or WF work; that is wrong
     // and costly, because window film is sized to the GLASS and the mode does not touch
@@ -8067,12 +8073,47 @@ function _clampFlatToWall(elev, frame) {
 // Two buttons, one setter. ART is the default for every elevation — `egdWall` absent is
 // an art wall — so nothing is written to a project to get the normal case, and an older
 // file opens as art without a migration.
+// A LIT TYPE CAN BE TURNED OFF BY CLICKING IT AGAIN, and ART is what is left. The pair
+// used to behave as a radio, so a lit EGD button did nothing when clicked and a lit WF
+// button did nothing at all, which read as "once a wall is EGD or WF it is stuck that
+// way". ART is the plain wall underneath both: clicking it turns EGD off and, if the
+// wall has glass, offers to take the glass away too.
 function setElevWallMode(mode) {
     const elev = elevations[currentElevIndex];
     if (!elev) return;
-    const want = (mode === 'egd');
-    if (!!elev.egdWall === want) return;    // already there; don't file an undo step for a no-op
-    toggleEgdWall();
+    if (mode === 'egd') { toggleEgdWall(); return; }
+    // ART: back to a plain wall.
+    const hasGlass = _elevGlazing(elev).length > 0;
+    if (!hasGlass) { if (elev.egdWall) toggleEgdWall(); return; }
+    _wfWallRemove(() => { if (elev.egdWall) { elev.egdWall = false; initElevControls(); drawElevAll(); pushHistory(); scheduleAutosave(); } });
+}
+// WF is DERIVED from the glass, so turning it off means removing the glass. Asked first,
+// because the runs and their panel widths are real measurements; undoable, because the
+// runs live in the elevation and therefore in the undo snapshot.
+function toggleWfWall() {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    if (_elevGlazing(elev).length) _wfWallRemove();
+    else buildWfWall();
+}
+function _wfWallRemove(after) {
+    const elev = elevations[currentElevIndex];
+    if (!elev) return;
+    const id = _elevId(elev);
+    const n = _elevGlazing(elev).length;
+    _confirmDestroy({
+        title: 'Turn off WF wall?',
+        body: 'This removes the window panels from this wall (' + n + (n === 1 ? ' run' : ' runs') + '). Window film graphics stay where they are.',
+        confirm: 'Remove panels',
+        undoable: true,
+        onConfirm: () => {
+            const i = _elevIndexById(id);
+            if (i < 0) return;
+            elevations[i].glazing = [];
+            _gzCommit();
+            if (typeof after === 'function') after();
+        }
+    });
 }
 function toggleEgdWall() {
     const elev = elevations[currentElevIndex];
@@ -25995,12 +26036,127 @@ function _dsHelpDot(text, tag) {
     const d = document.createElement(tag || 'span');
     d.textContent = '?';
     d.title = text;
+    d.className = 'help-dot';
     d.setAttribute('data-help', '1');
     d.style.cssText = 'display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto;'
         + ' width:14px; height:14px; margin-left:5px; border-radius:50%; cursor:help;'
         + ' border:1px solid var(--border-color); background:var(--bg-input);'
         + ' color:var(--text-muted); font-size:var(--fs-55); font-weight:700; line-height:1;';
     return d;
+}
+
+// ── THE ? DOT, APP-WIDE ─────────────────────────────────────────────────────
+// Hover shows the title; a CLICK opens a small popup that stays until you click
+// elsewhere, because a tooltip disappears the moment the cursor twitches and three
+// lines of explanation take longer than that to read. ONE delegated listener, so a dot
+// built at runtime by _dsHelpDot and one written into index.html behave identically.
+// Static dots carry their text in data-help; runtime ones carry it in title (their
+// data-help is the marker '1'). The click is swallowed so a dot inside a <summary> or
+// a button does not also fold the section or press the button.
+function _helpDotText(d) {
+    const a = d.getAttribute('data-help');
+    return (a && a !== '1') ? a : (d.getAttribute('title') || '');
+}
+function _helpPopClose() {
+    document.querySelectorAll('.help-pop').forEach(p => p.remove());
+}
+function _helpDotInit() {
+    if (typeof document === 'undefined' || document._helpDotWired) return;
+    document._helpDotWired = true;
+    document.querySelectorAll('.help-dot[data-help]').forEach(d => {
+        if (!d.title) d.title = _helpDotText(d);
+    });
+    document.addEventListener('click', (e) => {
+        const d = e.target && e.target.closest ? e.target.closest('.help-dot') : null;
+        const had = document.querySelector('.help-pop');
+        if (!d) { if (had && !(e.target.closest && e.target.closest('.help-pop'))) _helpPopClose(); return; }
+        e.preventDefault(); e.stopPropagation();
+        const same = had && had._for === d;
+        _helpPopClose();
+        if (same) return;
+        const txt = _helpDotText(d);
+        if (!txt) return;
+        const pop = document.createElement('div');
+        pop.className = 'help-pop';
+        pop.setAttribute('role', 'tooltip');
+        pop.textContent = txt;
+        pop._for = d;
+        document.body.appendChild(pop);
+        const r = d.getBoundingClientRect();
+        const pw = pop.offsetWidth || 260, ph = pop.offsetHeight || 60;
+        const vw = window.innerWidth || 1200, vh = window.innerHeight || 800;
+        let x = Math.min(Math.max(8, r.left), vw - pw - 8);
+        let y = r.bottom + 6;
+        if (y + ph > vh - 8) y = Math.max(8, r.top - ph - 6);
+        pop.style.left = x + 'px'; pop.style.top = y + 'px';
+    }, true);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && document.querySelector('.help-pop')) _helpPopClose(); });
+}
+
+// ── A SMALL ANCHORED MENU ───────────────────────────────────────────────────
+// items: [{head}] or [{label, hint, onClick}]. Closes on any outside click, on Escape,
+// and after a choice. Opening it again from the same button closes it (a toggle).
+function _frameMenu(anchor, items) {
+    const open = document.querySelector('.frame-menu');
+    if (open) { const same = open._for === anchor; open._close(); if (same) return null; }
+    const m = document.createElement('div');
+    m.className = 'frame-menu';
+    m.setAttribute('role', 'menu');
+    m._for = anchor;
+    items.forEach(it => {
+        if (it.head) { const h = document.createElement('div'); h.className = 'frame-menu-head'; h.textContent = it.head; m.appendChild(h); return; }
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('role', 'menuitem');
+        const l = document.createElement('span'); l.textContent = it.label; b.appendChild(l);
+        if (it.hint) { const h = document.createElement('small'); h.textContent = it.hint; b.appendChild(h); }
+        b.onclick = (e) => { e.stopPropagation(); m._close(); try { it.onClick(); } catch (err) { console.error(err); } };
+        m.appendChild(b);
+    });
+    const onDoc = (e) => { if (!m.contains(e.target) && e.target !== anchor && !(anchor.contains && anchor.contains(e.target))) m._close(); };
+    const onKey = (e) => { if (e.key === 'Escape') { e.stopPropagation(); m._close(); } };
+    m._close = () => { m.remove(); document.removeEventListener('mousedown', onDoc, true); document.removeEventListener('keydown', onKey, true); };
+    document.body.appendChild(m);
+    const r = anchor.getBoundingClientRect();
+    const vw = window.innerWidth || 1200, vh = window.innerHeight || 800;
+    const mw = m.offsetWidth || 200, mh = m.offsetHeight || 160;
+    m.style.left = Math.min(Math.max(8, r.right - mw), vw - mw - 8) + 'px';
+    m.style.top = ((r.bottom + 4 + mh > vh) ? Math.max(8, r.top - mh - 4) : r.bottom + 4) + 'px';
+    setTimeout(() => {
+        document.addEventListener('mousedown', onDoc, true);
+        document.addEventListener('keydown', onKey, true);
+    }, 0);
+    const first = m.querySelector('button'); if (first) first.focus();
+    return m;
+}
+// The Elevations export: one menu, two questions (which file type, which walls).
+function openElevExportMenu(btn) {
+    const n = (typeof elevations !== 'undefined' && elevations) ? elevations.length : 0;
+    _frameMenu(btn, [
+        { head: 'THIS WALL' },
+        { label: 'PNG', hint: 'image', onClick: () => exportElevPNG() },
+        { label: 'SVG', hint: 'vector, for Illustrator', onClick: () => exportElevSVG() },
+        { head: 'ALL WALLS (' + n + ')' },
+        { label: 'All as PNG', hint: 'one ZIP', onClick: () => bulkExportElevations('png') },
+        { label: 'All as SVG', hint: 'one ZIP', onClick: () => bulkExportElevations('svg') },
+    ]);
+}
+
+// Layout-guide groups remember whether they are folded, per machine: that is where
+// you are looking, not something the project should carry.
+const ELEV_GUIDE_GROUPS_KEY = 'frame_elev_guide_groups';
+function _elevGuideGroupsInit() {
+    if (typeof document === 'undefined') return;
+    let st = {};
+    try { st = JSON.parse(localStorage.getItem(ELEV_GUIDE_GROUPS_KEY) || '{}') || {}; } catch (e) { st = {}; }
+    document.querySelectorAll('details.lg-group[data-lg]').forEach(d => {
+        const k = d.getAttribute('data-lg');
+        if (st[k] === false) d.open = false;
+        d.addEventListener('toggle', () => {
+            st[k] = d.open;
+            try { localStorage.setItem(ELEV_GUIDE_GROUPS_KEY, JSON.stringify(st)); } catch (e) {}
+        });
+    });
 }
 function _dsSection(container, title, id, defaultOpen, help) {
     const det = document.createElement('details');
@@ -36958,7 +37114,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>

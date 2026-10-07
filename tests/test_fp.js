@@ -853,7 +853,9 @@ const fs = require('fs');
       // and both times a fixed window read as the code having been removed.
       const sb = A.slice(sy - 900, A.indexOf('function toggleGroupBoxVisibility'));
       if (sb.indexOf("classList.toggle('active', on)") < 0) throw new Error('the EGD button does not light for EGD');
-      if (sb.indexOf("classList.toggle('active', !on)") < 0) throw new Error('the ART button does not light for ART');
+      // 17.84: ART is lit only for a PLAIN wall (neither EGD nor glass), so a lit EGD or
+      // WF reads as something switched on that can be switched back off.
+      if (sb.indexOf("const artOn = !on && !hasGlass") < 0 || sb.indexOf("classList.toggle('active', artOn)") < 0) throw new Error('the ART button does not light for a plain wall');
       if (sb.indexOf('_isEgdWall(elevations[currentElevIndex])') < 0) throw new Error('the state is not read from this elevation');
       // ART is the DEFAULT: an elevation with no egdWall field is an art wall, so nothing
       // is written to a project for the normal case and old files open unchanged.
@@ -913,7 +915,9 @@ const fs = require('fs');
       const A = window.__appSrc;
       const i = A.indexOf("getElementById('wallModeHint')");
       if (i < 0) throw new Error('nothing writes the hint');
-      const body = A.slice(i - 900, A.indexOf('function toggleGroupBoxVisibility'));
+      // Anchored on the sync block's start, not a distance back from the hint: the
+      // button titles grew in 17.84 and pushed the glazing read outside a 900-char window.
+      const body = A.slice(A.indexOf("const egdBtn = document.getElementById('egdWallBtn')"), A.indexOf('function toggleGroupBoxVisibility'));
       if (body.indexOf('glazing') < 0) throw new Error('the hint does not look at whether the wall has glass');
       if (body.indexOf('hasGlass') < 0) throw new Error('the hint does not branch on the wall having glass');
       if (body.indexOf('does not need EGD mode') < 0) throw new Error('the hint never says a glazed wall is fine on ART');

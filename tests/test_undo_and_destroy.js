@@ -33,6 +33,10 @@ window.fetch = () => Promise.reject(new Error('no network in test'));
 global.window = window; global.document = window.document; global.navigator = window.navigator;
 const quiet = console.error; console.error = () => {};
 window.eval(APP + NL + [
+    // jsdom has no IndexedDB, so the first autosave fails and raises its once-per-session
+    // warning ~500ms in, landing on whichever check is running and blocking undo there.
+    // This file is not about autosave, so mark it already said.
+    '_autosaveToldUser = true;',
     'window.__fx = {',
     '  push: pushHistory, undo: undo, redo: redo,',
     '  get undoN() { return undoStack.length; }, get redoN() { return redoStack.length; },',

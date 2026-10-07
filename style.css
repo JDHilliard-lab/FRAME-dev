@@ -1243,7 +1243,10 @@ input[type="color"]:hover { filter: brightness(1.12); }
 .frame-tab.active:hover { background: var(--ui-active); filter: brightness(1.08); }
 /* The elevation sidebar is 425px wide and holds three of these, so they lose the
  * side padding and share the width instead of overflowing it. */
-.elev-tabs { margin-bottom: 6px; }
+/* Inset to the same 20px column as the sections above it. The strip used to run edge
+ * to edge of the sidebar while every button above it stopped 20px short, so the three
+ * tabs visibly overhung the panel's own content. */
+.elev-tabs { margin: 8px 20px 6px; }
 .elev-tabs > .frame-tab { padding: 0 4px; font-size: var(--fs-65); }
 
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────
@@ -2247,3 +2250,64 @@ input[type=range]:focus-visible::-moz-range-thumb {
 .help-live-steps .hs-text { flex: 1; min-width: 0; }
 .help-live-steps .hs-view { color: var(--text-muted); font-size: var(--fs-65); }
 .help-live-steps .hs-go { height: 24px; padding: 0 10px; font-size: var(--fs-65); flex: none; }
+
+
+/* ── Layout guide groups (Elevations sidebar) ──────────────────────────────
+ * Three foldable groups with a caption under every icon. The caption is what lets a
+ * designer find "Edge gap" without hovering sixteen buttons; the title keeps the full
+ * sentence. Captioned buttons opt back into a font size, since the base
+ * .layout-guide-btn is font-size:0 to keep icon-only buttons tight. */
+.lg-group { margin-bottom: 6px; }
+.lg-group > summary {
+    font-size: var(--fs-60); font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+    color: var(--text-muted); cursor: pointer; padding: 3px 0; user-select: none; list-style-position: inside;
+}
+.lg-group > summary:hover { color: var(--text-strong); }
+.layout-guides-grid.lg-captioned { grid-template-columns: repeat(5, 1fr); gap: 5px; margin: 2px 0 4px; }
+.lg-captioned .layout-guide-btn { flex-direction: column; gap: 2px; height: 42px; font-size: var(--fs-50); }
+.lg-captioned .layout-guide-btn .svg-icon { width: 15px; height: 15px; }
+.lg-cap { font-size: var(--fs-50); line-height: 1.05; font-weight: 600; letter-spacing: 0.1px; white-space: nowrap; color: inherit; }
+.elev-mini-label {
+    display: flex; align-items: center; font-size: var(--fs-60); font-weight: 700;
+    letter-spacing: 0.5px; color: var(--text-muted);
+}
+
+/* ── The ? help dot ─────────────────────────────────────────────────────────
+ * ONE mark for "there is an explanation here", used by static markup (data-help holds
+ * the text) and by _dsHelpDot. Hover shows the title; a CLICK opens .help-pop, because
+ * a tooltip is unreachable on a touch screen and vanishes the moment the cursor
+ * twitches while you are reading three lines of it. */
+.help-dot {
+    display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto;
+    width: 14px; height: 14px; margin-left: 5px; border-radius: 50%; cursor: help;
+    border: 1px solid var(--border-color); background: var(--bg-input);
+    color: var(--text-muted); font-size: var(--fs-55); font-weight: 700; line-height: 1;
+    letter-spacing: 0; text-transform: none; user-select: none;
+}
+.help-dot:hover { color: var(--text-strong); border-color: var(--text-muted); }
+.help-pop {
+    position: fixed; z-index: var(--z-toast); max-width: 280px; padding: 8px 10px;
+    background: var(--bg-nav); color: var(--text-strong); border: 1px solid var(--border-color);
+    border-radius: var(--r-6); box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    font-size: var(--fs-70); line-height: 1.45; font-weight: 400; text-transform: none; letter-spacing: 0;
+}
+
+/* ── Small dropdown menu (Elevations export) ───────────────────────────── */
+.frame-menu {
+    position: fixed; z-index: var(--z-toast); min-width: 190px; padding: 4px;
+    background: var(--bg-nav); border: 1px solid var(--border-color); border-radius: var(--r-6);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.frame-menu-head { font-size: var(--fs-55); font-weight: 700; letter-spacing: 0.5px; color: var(--text-muted); padding: 6px 8px 2px; }
+.frame-menu button {
+    display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 6px 8px; border: none; background: transparent; color: var(--text-strong);
+    font-size: var(--fs-70); text-align: left; cursor: pointer; border-radius: var(--r-4); font-family: inherit;
+}
+.frame-menu button:hover, .frame-menu button:focus-visible { background: var(--btn-hover); }
+.frame-menu button small { color: var(--text-muted); font-size: var(--fs-60); }
+
+/* A lit EGD/WF button shows a small x: the button turns it OFF from here. */
+.wall-mode-btn .wm-off { display: none; margin-left: 2px; font-weight: 700; opacity: 0.85; }
+.wall-mode-btn.active .wm-off { display: inline; }
+#artWallBtn .wm-off { display: none !important; }
