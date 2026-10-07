@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.88';
+const APP_VERSION = '17.89';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -8538,7 +8538,16 @@ function _catAltArrRowIds() {
 function _catNextOptionNum(master) {
     let n = 0;
     _catOptionsOf(master).forEach(o => { const v = parseInt(o.catalogueOption, 10); if (!isNaN(v) && v > n) n = v; });
-    return n + 1;
+    // The mirror of the frame-set rule: never an option code a frame set already owns.
+    const base = _catBaseCode(master);
+    n += 1;
+    while (base && _catCodeInUse(_catOptionCode(base, n))) n++;
+    return n;
+}
+// Is this code a group some row already belongs to (ART.1.2 for ART.1.2A or ART.1.2-A)?
+function _catCodeInUse(code) {
+    if (!code) return false;
+    return (dashProjectData || []).some(r => r && r.id && _artGroupKey(r.id) === code);
 }
 function _catOptionCode(base, n) { return base ? (base + '.' + n) : ''; }
 function _catRowId(base, n, letter) { const c = _catOptionCode(base, n); return c ? (c + (letter || '')) : ''; }
@@ -8841,7 +8850,9 @@ function _catAddOption(srcIdx, opts) {
     currentElevIndex = at + 1;
     renderNavTabs();
     populateDashPushSelector();
-    switchView('elevation', at + 1);
+    // From Deck Studio (`stay`) the designer is building options, not editing a wall, so
+    // the view does not jump; the wall is loaded quietly so the editor's globals agree.
+    if (_oo.stay) { try { _elevLoadWall(at + 1); } catch (e) {} } else switchView('elevation', at + 1);
     recalculateDashboardQuantities();
     if (typeof renderDashTable === 'function') renderDashTable();
     pushHistory();
@@ -8900,7 +8911,13 @@ function _catAddArrangement(srcIdx, opts) {
         place = _catPlacementKey(anchorCode);
         let n = 1;
         _catSetsOf(place).forEach(sk => { const v = _catSetNum(sk); if (v > n) n = v; });
-        newBase = place + '.' + (n + 1);
+        // NOT A NUMBER AN IMAGE OPTION ALREADY SPELLS. On an unlettered arrangement
+        // (ART.1) image option 2 is ART.1.2, which is also how frame set 2 spells itself,
+        // and the two then share a group key and print as ONE spec page. Skip any number
+        // whose code a row already groups under.
+        n += 1;
+        while (_catCodeInUse(place + '.' + n)) n++;
+        newBase = place + '.' + n;
     } else {
         place = _catSetKey(anchorCode);
         // An UNLETTERED original occupies A: ART.01 and ART.01A are the same layout
@@ -8975,9 +8992,9 @@ function _catAddArrangement(srcIdx, opts) {
     elevations.splice(at + 1, 0, copy);
     _elevSyncVariationPrimary();
 
-    if (carried.length) {
+    if (carried.length && !o.noCarry) {
         // Straight through the one option minter rather than a second copy of it.
-        _catAddOption(elevations.indexOf(copy));
+        _catAddOption(elevations.indexOf(copy), { stay: !!o.stay });
         const opt = elevations[currentElevIndex];
         if (opt && _catMasterOf(opt) === copy) {
             const by = {}; carried.forEach(c => { by[c.letter] = c; });
@@ -8997,7 +9014,7 @@ function _catAddArrangement(srcIdx, opts) {
     if (ni >= 0) currentElevIndex = ni;
     renderNavTabs();
     populateDashPushSelector();
-    switchView('elevation', currentElevIndex);
+    if (o.stay) { try { _elevLoadWall(currentElevIndex); } catch (e) {} } else switchView('elevation', currentElevIndex);
     recalculateDashboardQuantities();
     if (typeof renderDashTable === 'function') renderDashTable();
     if (o.newSet) {
@@ -9084,6 +9101,323 @@ function _catLayoutChooser(srcIdx, kind) {
     // that started inside the card is not a click on the backdrop.
     document.body.appendChild(ov);
     try { nameIn.focus(); } catch (e) {}
+}
+// ── OPTIONS, FROM DECK STUDIO (17.89) ──────────────────────────────────────
+// Options live where they are presented. A designer looking at ART.1's breaker or
+// spec page asks for "another option" and picks WHAT KIND; the wall machinery above
+// (mockup, layouts, frame sets, image sets) does the rest. The Elevations tab no longer
+// carries a Catalogue mockup button: turning a wall into a placement with options is
+// the first thing "+ Add option" does, so there is nothing to switch on first.
+const CAT_OPTION_KINDS = [
+    { key: 'images', title: 'Same frames, different images',
+      body: 'The same arrangement and frame specs with a new set of pictures. Drop the images in on its spec page.' },
+    { key: 'arrange', title: 'Same frames and images, new arrangement',
+      body: 'These pieces with these pictures, hung differently. Frame specs follow; move the frames on the new wall.' },
+    { key: 'arrangeNew', title: 'Same frames, new arrangement and images',
+      body: 'These frame specs in a different arrangement, with a fresh set of pictures.' },
+    { key: 'setSame', title: 'Different frames, same images',
+      body: 'A new set of frames (sizes, count, mouldings are its own) carrying these pictures by letter.' },
+    { key: 'setNew', title: 'Different frame count and images',
+      body: 'A completely different offer for this spot: its own frames, its own pictures. A single piece where this is a triptych.' },
+];
+// Which wall a deck page is about: a breaker carries its wall; a spec page is the wall
+// holding most of its pieces; the overview page is its placement's first wall.
+function _catWallIdxForDesc(desc) {
+    if (!desc) return -1;
+    if (desc.kind === 'catov') {
+        const w = _catPlacementWalls(desc.place)[0];
+        return w ? elevations.indexOf(w.layout) : -1;
+    }
+    if (desc.elev) {
+        const id = desc.elev.id;
+        const i = id ? _elevIndexById(id) : -1;
+        if (i >= 0) return i;
+        if (typeof desc.elev._idx === 'number') return desc.elev._idx;
+    }
+    const members = (desc.members && desc.members.length) ? desc.members : (desc.row && desc.row.id ? [desc.row] : []);
+    let best = -1, bestN = 0;
+    (elevations || []).forEach((e, ei) => {
+        if (!e || !e.frames) return;
+        let c = 0; members.forEach(m => { if (m && e.frames.some(f => f && f.id === m.id)) c++; });
+        if (c > bestN) { bestN = c; best = ei; }
+    });
+    return best;
+}
+// Make the wall a placement with options, once. Its current pictures become OPTION 1,
+// and the wall itself becomes the arrangement every option follows. Returns the index of
+// the arrangement (mockup) wall, or -1 with the reason already said.
+function _catEnsureCatalogue(idx) {
+    const w = elevations[idx];
+    if (!w) return -1;
+    if (_isCatalogueOption(w)) return elevations.indexOf(_catMasterOf(w));
+    if (_isCatalogueMaster(w)) return idx;
+    if (!_catBaseCode(w)) {
+        showInfoModal('No item code on this wall', 'Options take their codes from the pieces on the wall (ART.1 becomes ART.1.1, ART.1.2...). Place a piece with an item code on it first.');
+        return -1;
+    }
+    const lookup = (id) => (dashProjectData || []).find(r => r && r.id === id) || null;
+    const carry = { frames: (w.frames || []).filter(Boolean).map(f => Object.assign({}, f, _elevArtPayload(lookup(f.id) || f))) };
+    w.catalogueMaster = true;
+    _catAddOption(idx, { stay: true, carryFrom: carry });
+    // The arrangement is a drawing, not a piece: its slots never carry pictures.
+    (w.frames || []).forEach(f => {
+        if (!f) return;
+        const blank = { artworkUrl: '', artworkFile: '', imageCode: '', artworkW: 0, artworkH: 0, artZoom: 1, artPanX: 0, artPanY: 0, artist: '', artworkTitle: '' };
+        _elevApplyArt(f, blank);
+    });
+    return elevations.indexOf(w);
+}
+function _catAddOptionOfKind(idx, kind, label) {
+    const wasPlain = idx >= 0 && elevations[idx] && !_isCatalogueMaster(elevations[idx]) && !_isCatalogueOption(elevations[idx]);
+    const mi = _catEnsureCatalogue(idx);
+    if (mi < 0) return false;
+    const mock = elevations[mi];
+    // The images to carry come from an OPTION (the arrangement itself has none): the one
+    // the designer was looking at, or the layout's first.
+    const ctxWall = elevations[idx];
+    const optSrc = (ctxWall && _isCatalogueOption(ctxWall)) ? ctxWall : (_catOptionsOf(mock)[0] || null);
+    const optIdx = optSrc ? elevations.indexOf(optSrc) : mi;
+    const o = { stay: true, label: label || '' };
+    if (kind === 'images') {
+        // Converting a plain wall already made OPTION 1 from its pictures; the ask was for
+        // another one, so this adds OPTION 2 with empty openings.
+        _catAddOption(mi, { stay: true });
+    } else if (kind === 'arrange') {
+        _catAddArrangement(optIdx, o);
+    } else if (kind === 'arrangeNew') {
+        _catAddArrangement(mi, Object.assign({ noCarry: true }, o));
+    } else if (kind === 'setSame') {
+        _catAddArrangement(optIdx, Object.assign({ newSet: true }, o));
+    } else if (kind === 'setNew') {
+        _catAddArrangement(mi, Object.assign({ newSet: true, noCarry: true }, o));
+    }
+    void wasPlain;
+    try { _dsRefresh(); _dsRenderRail(); _dsRenderTools(); } catch (e) {}
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    return true;
+}
+function openCatOptionChooser(idx) {
+    const w = elevations[idx];
+    if (!w) return;
+    const place = _catPlacementOfWall(w) || _catBaseCode(w) || (w.name || 'this wall');
+    const ov = document.createElement('div');
+    ov.className = 'frame-modal fm-nested';
+    ov.setAttribute('data-modal-backdrop', '');
+    ov.style.display = 'flex';
+    const card = document.createElement('div');
+    card.className = 'cat-chooser';
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); padding:20px; width:560px; max-width:92vw; max-height:88vh; overflow:auto;';
+    const h = document.createElement('div');
+    h.style.cssText = 'font-family:var(--ui-display); font-size:var(--fs-120); letter-spacing:0.04em; text-transform:uppercase; color:var(--text-strong); margin-bottom:2px;';
+    h.textContent = 'Add an option to ' + place;
+    const sub = document.createElement('div');
+    sub.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:12px;';
+    sub.textContent = 'What changes in this option?';
+    card.appendChild(h); card.appendChild(sub);
+    let pick = 'images';
+    const list = document.createElement('div');
+    list.style.cssText = 'display:flex; flex-direction:column; gap:6px; margin-bottom:12px;';
+    CAT_OPTION_KINDS.forEach(k => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cat-kind' + (k.key === pick ? ' active' : '');
+        b.setAttribute('data-kind', k.key);
+        b.innerHTML = '<strong></strong><span></span>';
+        b.querySelector('strong').textContent = k.title;
+        b.querySelector('span').textContent = k.body;
+        b.onclick = () => { pick = k.key; list.querySelectorAll('.cat-kind').forEach(x => x.classList.toggle('active', x === b)); nameRow.style.display = (k.key === 'images') ? 'none' : ''; };
+        b.ondblclick = () => go.click();
+        list.appendChild(b);
+    });
+    card.appendChild(list);
+    const nameRow = document.createElement('div');
+    nameRow.style.display = 'none';
+    const nameIn = document.createElement('input');
+    nameIn.type = 'text'; nameIn.maxLength = 40; nameIn.placeholder = 'Name (optional): Triptych, Salon hang...';
+    nameIn.style.cssText = 'width:100%; height:30px; margin-bottom:12px;';
+    nameRow.appendChild(nameIn);
+    card.appendChild(nameRow);
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
+    const cancel = document.createElement('button');
+    cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel';
+    cancel.style.cssText = 'width:auto; padding:0 16px; height:30px;';
+    cancel.setAttribute('data-modal-close', '');
+    cancel.onclick = () => ov.remove();
+    const go = document.createElement('button');
+    go.className = 'action-btn'; go.textContent = 'Add option';
+    go.style.cssText = 'width:auto; padding:0 18px; height:30px;';
+    go.setAttribute('data-modal-initial', '');
+    go.onclick = () => { ov.remove(); _catAddOptionOfKind(idx, pick, nameIn.value.trim()); };
+    row.appendChild(cancel); row.appendChild(go);
+    card.appendChild(row);
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    try { go.focus(); } catch (e) {}
+    return ov;
+}
+// ── THE OPTIONS MAP ───────────────────────────────────────────────────────
+// One look at everything offered at a spot, branching the way the codes do: the
+// placement, its frame sets, each set's layouts, each layout's image options. Every
+// node is a to-scale sketch of its wall (one scale for the whole map, so a single big
+// canvas next to a salon hang looks like what it is) plus how many of its openings
+// have pictures - a 200-image catalogue cannot be checked any other way.
+function _catWallSketchSVG(wall, scale, maxH) {
+    const fr = ((wall && wall.frames) || []).filter(f => f && f.active !== false && f.w > 0 && f.h > 0);
+    if (!fr.length) return '<div class="cat-node-empty">no frames</div>';
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    fr.forEach(f => { x0 = Math.min(x0, f.x); y0 = Math.min(y0, f.y); x1 = Math.max(x1, f.x + f.w); y1 = Math.max(y1, f.y + f.h); });
+    const W = (x1 - x0) * scale, H = (y1 - y0) * scale;
+    const lookup = (id) => (dashProjectData || []).find(r => r && r.id === id) || {};
+    let g = '';
+    fr.forEach(f => {
+        const r = lookup(f.id);
+        const x = (f.x - x0) * scale, y = (y1 - f.y - f.h) * scale, w = f.w * scale, h = f.h * scale;
+        const url = r.artworkUrl || f.artworkUrl || '';
+        g += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '" fill="#d8d8de" stroke="#111" stroke-width="1.5"/>';
+        if (url) g += '<image href="' + url + '" x="' + (x + 2).toFixed(1) + '" y="' + (y + 2).toFixed(1) + '" width="' + Math.max(1, w - 4).toFixed(1) + '" height="' + Math.max(1, h - 4).toFixed(1) + '" preserveAspectRatio="xMidYMid slice"/>';
+    });
+    return '<svg width="' + Math.max(4, W).toFixed(0) + '" height="' + Math.max(4, Math.min(maxH, H)).toFixed(0) + '" viewBox="0 0 ' + W.toFixed(1) + ' ' + H.toFixed(1) + '">' + g + '</svg>';
+}
+function _catFilled(wall) {
+    const fr = ((wall && wall.frames) || []).filter(f => f && f.active !== false);
+    const lookup = (id) => (dashProjectData || []).find(r => r && r.id === id) || {};
+    return { have: fr.filter(f => (lookup(f.id).artworkUrl || f.artworkUrl)).length, total: fr.length };
+}
+function openOptionsMap(place) {
+    if (!place) return null;
+    const items = _catPlacementWalls(place);
+    const sets = _catSetsOf(place);
+    // One scale for the whole map: the widest wall sketch fits 220px.
+    let maxW = 1, maxH = 1;
+    (elevations || []).forEach(e => {
+        if (_catPlacementOfWall(e) !== place) return;
+        const fr = (e.frames || []).filter(f => f && f.w > 0);
+        if (!fr.length) return;
+        maxW = Math.max(maxW, Math.max.apply(null, fr.map(f => f.x + f.w)) - Math.min.apply(null, fr.map(f => f.x)));
+        maxH = Math.max(maxH, Math.max.apply(null, fr.map(f => f.y + f.h)) - Math.min.apply(null, fr.map(f => f.y)));
+    });
+    const sc = Math.min(200 / maxW, 110 / maxH);
+    const ov = document.createElement('div');
+    ov.className = 'frame-modal fm-nested';
+    ov.setAttribute('data-modal-backdrop', '');
+    ov.style.display = 'flex';
+    const card = document.createElement('div');
+    card.className = 'cat-map';
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); padding:20px; width:1100px; max-width:95vw; max-height:90vh; overflow:auto;';
+    const top = document.createElement('div');
+    top.style.cssText = 'display:flex; align-items:center; gap:10px; margin-bottom:14px;';
+    const h = document.createElement('div');
+    h.style.cssText = 'flex:1; font-family:var(--ui-display); font-size:var(--fs-120); letter-spacing:0.04em; text-transform:uppercase; color:var(--text-strong);';
+    h.textContent = place + ' options map';
+    const add = document.createElement('button');
+    add.className = 'action-btn'; add.textContent = '+ Add option'; add.style.cssText = 'width:auto; padding:0 14px; height:28px;';
+    const close = document.createElement('button');
+    close.className = 'action-btn btn-secondary'; close.textContent = 'Close'; close.style.cssText = 'width:auto; padding:0 14px; height:28px;';
+    close.setAttribute('data-modal-close', ''); close.onclick = () => ov.remove();
+    top.appendChild(h); top.appendChild(add); top.appendChild(close);
+    card.appendChild(top);
+    const tree = document.createElement('div');
+    tree.className = 'cat-tree';
+    const node = (wall, title, sub, kind) => {
+        const n = document.createElement('button');
+        n.type = 'button';
+        n.className = 'cat-node cat-node-' + kind;
+        const f = _catFilled(wall);
+        n.innerHTML = '<div class="cat-node-title"></div><div class="cat-node-sub"></div><div class="cat-node-sketch"></div><div class="cat-node-fill"></div>';
+        n.querySelector('.cat-node-title').textContent = title;
+        n.querySelector('.cat-node-sub').textContent = sub || '';
+        n.querySelector('.cat-node-sketch').innerHTML = _catWallSketchSVG(wall, sc, 120);
+        const fill = n.querySelector('.cat-node-fill');
+        if (kind === 'layout' && _catOptionsOf(wall).length) fill.textContent = _catOptionsOf(wall).length + ' image set' + (_catOptionsOf(wall).length === 1 ? '' : 's');
+        else { fill.textContent = f.have + ' / ' + f.total + ' images'; if (f.have < f.total) fill.classList.add('short'); }
+        n.title = 'Open ' + (wall.name || title) + ' in Elevations';
+        n.onclick = () => { ov.remove(); const i = elevations.indexOf(wall); if (i >= 0) switchView('elevation', i); };
+        return n;
+    };
+    const rootRow = document.createElement('div');
+    rootRow.className = 'cat-branch cat-root';
+    const root = document.createElement('div');
+    root.className = 'cat-node cat-node-root';
+    root.innerHTML = '<div class="cat-node-title"></div><div class="cat-node-sub"></div>';
+    root.querySelector('.cat-node-title').textContent = place;
+    root.querySelector('.cat-node-sub').textContent = items.length + ' option' + (items.length === 1 ? '' : 's') + ' · one pin on the plan';
+    rootRow.appendChild(root);
+    const kids = document.createElement('div'); kids.className = 'cat-kids';
+    sets.forEach((setKey, si) => {
+        const layouts = _catArrangementsOf(setKey);
+        const setBr = document.createElement('div'); setBr.className = 'cat-branch';
+        const setHd = document.createElement('div'); setHd.className = 'cat-node cat-node-set';
+        setHd.innerHTML = '<div class="cat-node-title"></div><div class="cat-node-sub"></div>';
+        setHd.querySelector('.cat-node-title').textContent = 'FRAME SET ' + (si + 1);
+        setHd.querySelector('.cat-node-sub').textContent = setKey + (layouts[0] && _catLayoutLabel(layouts[0]) ? ' · ' + _catLayoutLabel(layouts[0]) : '');
+        setBr.appendChild(setHd);
+        const lk = document.createElement('div'); lk.className = 'cat-kids';
+        layouts.forEach((lay, li) => {
+            const lb = document.createElement('div'); lb.className = 'cat-branch';
+            lb.appendChild(node(lay, 'LAYOUT ' + (_catArrLetter(_catBaseCode(lay)) || String.fromCharCode(65 + li)), [_catBaseCode(lay), _catLayoutLabel(lay)].filter(Boolean).join(' · '), 'layout'));
+            const ok = document.createElement('div'); ok.className = 'cat-kids';
+            const its = items.filter(it => it.layout === lay && it.kind === 'option');
+            its.forEach(it => { const ob = document.createElement('div'); ob.className = 'cat-branch'; ob.appendChild(node(it.wall, it.label, it.wall.name || '', 'option')); ok.appendChild(ob); });
+            if (its.length) lb.appendChild(ok);
+            const lone = items.find(it => it.layout === lay && it.kind === 'layout');
+            if (lone) lb.querySelector('.cat-node-title').textContent += '  ·  ' + lone.label;
+            lk.appendChild(lb);
+        });
+        setBr.appendChild(lk);
+        kids.appendChild(setBr);
+    });
+    rootRow.appendChild(kids);
+    tree.appendChild(rootRow);
+    card.appendChild(tree);
+    add.onclick = () => {
+        const first = items[0];
+        ov.remove();
+        if (first) openCatOptionChooser(elevations.indexOf(first.wall));
+    };
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    return ov;
+}
+// The panel section on any deck page that belongs to a wall.
+function _dsOptionsInto(t, desc) {
+    const idx = _catWallIdxForDesc(desc);
+    if (idx < 0) return null;
+    const wall = elevations[idx];
+    const place = _catPlacementOfWall(wall);
+    const body = _dsSection(t, 'Options', 'catoptions', true,
+        'Offer more than one choice for this spot: different images, a different arrangement, or different frames. Each option gets its own pages, they all share one pin on the plan, and the Options map shows them as a tree.');
+    const n = place ? _catPlacementWalls(place).length : 0;
+    const line = document.createElement('div');
+    line.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin-bottom:7px;';
+    line.textContent = place ? (place + ' has ' + n + ' option' + (n === 1 ? '' : 's') + '.') : 'One arrangement so far. Add an option to offer a choice here.';
+    body.appendChild(line);
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex; gap:6px;';
+    const a = document.createElement('button');
+    a.className = 'action-btn'; a.textContent = '+ Add option';
+    a.style.cssText = 'flex:1 1 0; min-width:0; height:26px; font-size:var(--fs-65);';
+    a.onclick = () => openCatOptionChooser(idx);
+    row.appendChild(a);
+    if (place) {
+        const m = document.createElement('button');
+        m.className = 'action-btn btn-secondary'; m.textContent = 'Options map';
+        m.style.cssText = 'flex:1 1 0; min-width:0; height:26px; font-size:var(--fs-65);';
+        m.onclick = () => openOptionsMap(place);
+        row.appendChild(m);
+    }
+    body.appendChild(row);
+    if (place) {
+        const lab = document.createElement('label');
+        lab.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); margin-top:8px; cursor:pointer;';
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = _catOverviewOn();
+        cb.onchange = () => { editorialContent.catOverview = cb.checked; if (typeof pushHistory === 'function') pushHistory(); scheduleAutosave(); _dsRefresh(); _dsRenderRail(); };
+        lab.appendChild(cb);
+        lab.appendChild(document.createTextNode('All-options page'));
+        lab.appendChild(_dsHelpDot('A page in front of each placement that has options, drawing every option side by side at ONE scale, so differences in frame size show. Deck-wide.'));
+        body.appendChild(lab);
+    }
+    return body;
 }
 // Changing the two after the fact. A layout can turn out to need its own frames once you
 // have moved them about, and a name is often only obvious once the drawing exists.
@@ -16187,6 +16521,130 @@ function _breakerElevFor(u, units) {
 // the MOCKUP's own code (ART.1, the way the reference sheets read) and keyed on the
 // mockup, so the settings stay with the placement rather than with whichever option
 // happened to come first.
+// ── PLACEMENT OPTIONS (17.89) ──────────────────────────────────────────────
+// "ART.1 OPTION 1, ART.1 OPTION 2": everything offered at one spot, in the order the
+// tree reads - frame set, then layout, then image set. A layout with no image sets yet
+// is itself an option (its frames are the choice); one that has image sets is
+// represented by them. The OPTION number is DERIVED from that order and never stored,
+// so adding an option to set 1 renumbers set 2's honestly instead of leaving a gap.
+function _catPlacementOfWall(elev) {
+    if (!elev) return '';
+    const m = _isCatalogueMaster(elev) ? elev : _catMasterOf(elev);
+    if (!m) return '';
+    const code = _catBaseCode(m);
+    return code ? _catPlacementKey(code) : '';
+}
+function _catPlacementWalls(place) {
+    const out = [];
+    if (!place) return out;
+    _catSetsOf(place).forEach((setKey, si) => {
+        _catArrangementsOf(setKey).forEach((layout, li) => {
+            const opts = _catOptionsOf(layout);
+            const base = { setKey: setKey, setNum: si + 1, layout: layout, layoutIdx: li };
+            if (opts.length) opts.forEach(o => out.push(Object.assign({ wall: o, kind: 'option' }, base)));
+            else out.push(Object.assign({ wall: layout, kind: 'layout' }, base));
+        });
+    });
+    out.forEach((it, i) => { it.n = i + 1; it.label = 'OPTION ' + (i + 1); });
+    return out;
+}
+// The overview page: emitted ONCE per placement with two or more options, ahead of the
+// placement's first page. STATELESS like _breakerElevFor - the unit that earns it is the
+// first one in the shared `units` array belonging to the placement - so the studio and
+// the PDF export ask independently and cannot disagree about which pages exist.
+function _catOverviewOn() { return !(editorialContent && editorialContent.catOverview === false); }
+function _catOverviewFor(u, units) {
+    if (!_catOverviewOn()) return null;
+    const mock = _catMockupForUnit(u);
+    const place = _catPlacementOfWall(mock);
+    if (!place || _catPlacementWalls(place).length < 2) return null;
+    let first = null;
+    (units || []).forEach(x => { if (!first && _catPlacementOfWall(_catMockupForUnit(x)) === place) first = x; });
+    return first === u ? place : null;
+}
+function _catOverviewDesc(place) {
+    return { kind: 'catov', type: 'options', place: place, title: place + ' OPTIONS', _ovKey: 'catov:' + place, row: {} };
+}
+// ALL OPTIONS ON ONE PAGE, ONE SCALE. Every option is drawn at the SAME scale, so a
+// triptych of 24" pieces next to a single 60" canvas reads as the size difference it
+// is; scaling each to fill its cell would make every option look the same size, which
+// is the one thing this page exists to show. The scale is the largest that fits every
+// option in a grid cell, trying each column count and keeping the best.
+async function _drawCatOverviewPage(doc, logos, pageNum, meta, place, ctx) {
+    const PW = (ctx && ctx.PW) || 936, PH = (ctx && ctx.PH) || 540;
+    const SR = _safeFrameRect(PW, PH);
+    const B = _drawPageTitle(doc, PW, PH, place, 'OPTIONS');
+    const items = _catPlacementWalls(place);
+    const k = unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
+    const geo = items.map(it => {
+        const fr = ((it.wall && it.wall.frames) || []).filter(f => f && f.active !== false && f.w > 0 && f.h > 0);
+        if (!fr.length) return null;
+        let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+        fr.forEach(f => { x0 = Math.min(x0, f.x); y0 = Math.min(y0, f.y); x1 = Math.max(x1, f.x + f.w); y1 = Math.max(y1, f.y + f.h); });
+        return { frames: fr, x0: x0 * k, y0: y0 * k, w: (x1 - x0) * k, h: (y1 - y0) * k };
+    });
+    const top = B.body + _subtitleClear() + 6, bottom = SR.B - 4;
+    const areaW = SR.R - SR.L, areaH = bottom - top;
+    // A real gutter, and each drawing kept to 90% of its cell: at 18pt two width-limited
+    // options read as one long hang.
+    const gap = 36, labH = 24, fill = 0.9;
+    const n = Math.max(1, items.length);
+    let best = { s: 0, cols: 1, rows: n };
+    for (let cols = 1; cols <= n; cols++) {
+        const rows = Math.ceil(n / cols);
+        const cw = (areaW - gap * (cols - 1)) / cols, ch = (areaH - gap * (rows - 1)) / rows - labH;
+        if (cw <= 0 || ch <= 0) continue;
+        let sc = Infinity;
+        geo.forEach(g => { if (g) sc = Math.min(sc, cw * fill / Math.max(1e-6, g.w), ch / Math.max(1e-6, g.h)); });
+        if (!isFinite(sc)) sc = 1;
+        if (sc > best.s) best = { s: sc, cols: cols, rows: rows };
+    }
+    const cols = best.cols, rows = best.rows, sc = best.s;
+    const cw = (areaW - gap * (cols - 1)) / cols, ch = (areaH - gap * (rows - 1)) / rows;
+    const lookup = (id) => (dashProjectData || []).find(r => r && r.id === id) || null;
+    const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
+    for (let i = 0; i < items.length; i++) {
+        const it = items[i], g = geo[i];
+        const cx = SR.L + (i % cols) * (cw + gap), cy = top + Math.floor(i / cols) * (ch + gap);
+        doc.setFont(_font('display'), 'bold'); doc.setFontSize(11); doc.setTextColor(20, 20, 20);
+        doc.text(it.label, cx, cy + 10);
+        // The option's OWN code (ART.1.2), then which layout it is, so two image sets of one
+        // arrangement are told apart on the page.
+        const own = it.kind === 'option' ? (it.wall.name || '') : _catBaseCode(it.layout);
+        const tag = [own, _catLayoutTag(it.layout)].filter(Boolean).join('  ·  ');
+        doc.setFont(_font(cs.font), _pdfFontStyle(cs.font)); doc.setFontSize(7); doc.setTextColor(crgb.r, crgb.g, crgb.b);
+        if (tag) doc.text(tag, cx, cy + 19);
+        if (!g) { _specSwatchBox(doc, cx, cy + labH, Math.min(cw, 80), Math.min(ch - labH, 60), 'No frames', Math.min(cy + ch, SR.B)); continue; }
+        // Bottom of the cell is the shared floor, so options in one row stand on one line.
+        const dw = g.w * sc, dh = g.h * sc;
+        const ox = cx + (cw - dw) / 2, oy = cy + ch - dh;
+        for (const f of g.frames) {
+            const r = lookup(f.id) || {};
+            const bx = ox + (f.x * k - g.x0) * sc, bw = f.w * k * sc, bh = f.h * k * sc;
+            const by = oy + (g.y0 + g.h - (f.y * k + f.h * k)) * sc;     // elevation y is bottom-up
+            let drew = false;
+            try {
+                const dIn = _frameDataInInches(Object.assign({}, r, { extW: r.extW || f.w, extH: r.extH || f.h }), dashUnit);
+                let art = null; if (r.artworkUrl) { try { art = await _loadImg(r.artworkUrl); } catch (e) {} }
+                const sw = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+                // An opening with no picture yet prints as the grey placement block with its
+                // letter, the same placeholder the breaker uses, not as an empty white mat.
+                const out = renderFrameToCanvas(dIn, sw, { wireframe: _isWireframe() || !art, dpi: 72, pad: 0, artworkImg: art, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+                const cnv = out && out.canvas;
+                if (cnv && cnv.width) {
+                    const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height;
+                    const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0);
+                    doc.addImage(flat.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, by, bw, bh);
+                    drew = true;
+                }
+            } catch (e) {}
+            if (!drew) { doc.setDrawColor(40, 40, 40); doc.setLineWidth(1); try { doc.rect(bx, by, bw, bh, 'S'); } catch (e) {} }
+            doc.setFont(_font('display'), 'bold'); doc.setFontSize(7); doc.setTextColor(20, 20, 20);
+            if (f.letter) doc.text(String(f.letter), bx, Math.max(cy + labH - 2, by - 2));
+        }
+    }
+    _drawPdfFooter(doc, logos, pageNum, meta);
+}
 function _breakerNameFor(u, br) {
     return (br && br.mockup) ? (_catBaseCode(br.elev) || br.elev.name || '') : _breakerCodeFor(u);
 }
@@ -16280,7 +16738,15 @@ function _deckPageList() {
         else members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
+    // THE OPTIONS OVERVIEW goes in front of a placement's first page, through the SAME
+    // stateless rule the export's _stepsFor asks (_catOverviewFor).
     const specPagesFor = (u) => {
+        const ov = u._manual ? null : _catOverviewFor(u, units);
+        const pages = _specPagesFor0(u);
+        if (ov) pages.unshift(_catOverviewDesc(ov));
+        return pages;
+    };
+    const _specPagesFor0 = (u) => {
         if (_useBreakers && !u._manual) return _breakerPages(u);
         // Same split without breakers. A manual group is the user's explicit grouping,
         // so it is left alone — if someone hand-groups a wallcovering with framed art
@@ -17565,7 +18031,7 @@ const PRES_PRESETS = {
     // _elevIsWireframe, so turning the deck flag on here would grey out the artwork
     // pages that are the entire point of the document.
     // Breakers ON, because a placement's dimensioned drawing IS its location page.
-    catalogue: { label: 'Catalogue', inc: { cover: 1, understanding: 0, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'setLegend', wf: false, breakers: true, note: 'One arrangement offered with several sets of artwork. Mark a wall CATALOGUE MOCKUP in Elevations, then duplicate it for each option.' }
+    catalogue: { label: 'Catalogue', inc: { cover: 1, understanding: 0, narrative: 1, strategy: 0, slogan: 1, contacts: 1, floorplanKey: 1, spec: 1, frameRec: 0, timeline: 0 }, tpl: 'setLegend', wf: false, breakers: true, note: 'One arrangement offered with several sets of artwork. Open a placement in Deck Studio and use + Add option in its Options section.' }
 };
 function _isCatalogueDeck() { return (editorialContent && editorialContent.presentationType) === 'catalogue'; }
 function _dsApplyPresentationType(type) {
@@ -19932,6 +20398,7 @@ function _deckPageKey(desc) {
     if (desc.kind === 'card') return 'card:' + desc.type;
     if (desc.kind === 'spec') return desc._install ? (desc._groupKey != null ? ('spec:elevgrp:' + desc._groupKey) : ('spec:elev:' + desc._elevIdx)) : desc._manual ? ('spec:' + desc._ovKey) : ('spec:' + desc.title);
     if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
+    if (desc.kind === 'catov') return 'catov:' + desc.place;
     return null;
 }
 function _dsAnnFam(font) { return _fontCss(font, 'sans'); }
@@ -24016,6 +24483,13 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
     if (!desc) return null;
     const _scale = (opts && opts.scale) || _previewScale('center');
     if (desc.kind === 'spec') return await renderSpecPageCanvas(desc, onProgress, _scale);
+    if (desc.kind === 'catov') {
+        const rec0 = new CanvasPdfRec(936, 540);
+        let lg = {}; try { lg = await _getPdfLogos(); } catch (e) {}
+        try { _curPageKey = _deckPageKey(desc); _curFooter = _resolveFooter(_curPageKey); await _pageThemeBake(_curPageKey); _pageThemeAutoApply(rec0, _curPageKey, 936, 540); } catch (e) {}
+        await _drawCatOverviewPage(rec0, lg, 1, { code: desc.place, location: '', version: '' }, desc.place, { PW: 936, PH: 540 });
+        return await rec0.render(_scale, onProgress);
+    }
     const PW = 936, PH = 540;
     const rec = new CanvasPdfRec(PW, PH);
     let logos = {}; try { logos = await _getPdfLogos(); } catch (e) {}
@@ -24099,6 +24573,8 @@ function _dsThumbCacheKey(desc) {
         } else if (desc && desc._specTpl) {
             k += '|' + desc._specTpl;
         }
+        // The overview draws every option's walls and images, so any edit can change it.
+        if (desc && desc.kind === 'catov') k += '|' + (typeof _dsEditGen !== 'undefined' ? _dsEditGen : 0);
         return k;
     } catch (e) { return (desc && (desc.type || desc.kind || '')) + '|' + _previewQuality(); }
 }
@@ -25533,7 +26009,8 @@ function _dsRenderCenter() {
         return;
     }
     page.innerHTML = '';
-    if (desc.kind === 'card' || desc.kind === 'fixed' || desc.kind === 'planDetail') {
+    // The all-options page draws through the same live path as cards and plan details.
+    if (desc.kind === 'card' || desc.kind === 'fixed' || desc.kind === 'planDetail' || desc.kind === 'catov') {
         // Live preview in the middle for every drawn (non-editable) page: show
         // the mock instantly, then swap in the real render from the same engine
         // as the PDF. No popup needed; controls update this in place.
@@ -27223,6 +27700,10 @@ function _dsRenderTools() {
     // and no branch can lose it.
     _dsPageAppearanceInto(t, desc);
 
+    if (desc.kind === 'catov') {
+        _dsOptionsInto(t, desc);
+        return;
+    }
     if (desc.kind === 'floorplan') {
         _fpPanelTabBar(t);
         if (_fpPanelTab === 'cats') { _fpPanelCats(t); return; }
@@ -27351,6 +27832,7 @@ function _dsRenderTools() {
             // PRESENTATION LAYOUT, then PAGE APPEARANCE, then the measurements.
             _dsMoveAppearanceAfter(t, igBodyB._det);
             _dsInstallGuideControls(igBodyB, desc, { variants: 'breaker' });
+            _dsOptionsInto(t, desc);
             return;
         }
 
@@ -27389,6 +27871,7 @@ function _dsRenderTools() {
             // do on a per-piece page but default differently, because a group page has
             // never drawn a floorplan and its wall thumbnail was off.
             _dsSpecSlotsInto(t, desc, ovKey, true);
+            _dsOptionsInto(t, desc);
             // Both as-hung layouts (To scale, Shared specs) read the same
             // scaleOpts, so these controls serve either one and your choices
             // survive flipping between the two cards.
@@ -27543,6 +28026,7 @@ function _dsRenderTools() {
             // The parts of the page are what a designer changes on a per-piece deck, so
             // the ticks are the whole panel.
             if (_specTplSlotAware(resolved)) _dsSpecSlotsInto(tplBody, desc, ovKey);
+            _dsOptionsInto(tplBody, desc);
             // THE LAYOUT BUTTONS ARE GONE TOO. There is ONE per-piece layout now and the
             // ticks above decide what it prints, so a row offering alternatives was the
             // same invitation the picture cards were. Reported as “we will only keep the
@@ -34835,7 +35319,14 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         }
         return [{ type: 'spec', unit: u, li: li }];
     };
+    // Mirrors specPagesFor in _deckPageList through the one shared rule.
     const _stepsFor = (u, li) => {
+        const ov = u._manual ? null : _catOverviewFor(u, _units);
+        const steps = _stepsFor0(u, li);
+        if (ov) steps.unshift({ type: 'catov', place: ov, li: li, _pageKey: 'catov:' + ov });
+        return steps;
+    };
+    const _stepsFor0 = (u, li) => {
         if (_useBreakers && !u._manual) {
             const out = []; const members = u.members || [];
             // THE SAME shared rule the studio calls. These were two hand-written copies
@@ -34961,6 +35452,11 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         }
         if (step.type === 'install') {
             if (_scoped) await _drawInstallGuidePage(doc, logos, pageNum, meta, step.elev, { PW: PW, PH: PH, M: M });
+            await emitAfterKey(stepKey);
+            continue;
+        }
+        if (step.type === 'catov') {
+            if (_scoped) await _drawCatOverviewPage(doc, logos, pageNum, meta, step.place, { PW: PW, PH: PH, M: M });
             await emitAfterKey(stepKey);
             continue;
         }
@@ -37695,9 +38191,10 @@ const HELP_REFERENCE_DATA = [
         title: 'Catalogues',
         intro: `A catalogue is a document of choices, not an order. It shows one arrangement several times over with different artwork, and the client picks. It deliberately does not state quantities.`,
         entries: [
-            { title: 'The mockup wall', body: `<strong>CATALOGUE MOCKUP</strong> marks a wall as the arrangement: sizes, positions and frames, with no artwork on it. Its breaker page is the grey placement drawing with letters and dimensions.` },
-            { title: 'Image options', body: `Duplicate the mockup to add an image option. The option keeps the mockup's sizes, positions and frames and carries its own pictures and item codes. Move a frame on the mockup and it moves on every option.` },
-            { title: 'Layouts and frame sets', body: `<strong>+ LAYOUT</strong> puts the same frames somewhere else on the wall. <strong>+ SET</strong> offers a different set of frames at the same spot, for example a single piece where set 1 is a salon hang. The codes say which is which: ART.01 is the placement, ART.01A a layout, ART.01.2 frame set 2, and ART.01A.1 an image option.` },
+            { title: 'Adding options', body: `In Deck Studio, open any page for the placement and use <strong>+ Add option</strong> in its Options section. Pick what changes: different images, a new arrangement (with the same or new images), or different frames (with the same or new images). The first time, the wall becomes the arrangement every option follows and its pictures become OPTION 1.` },
+            { title: 'The arrangement wall', body: `The wall the options follow holds the sizes, positions and frames, with no artwork on it. Its breaker page is the grey placement drawing with letters and dimensions. Duplicating it in Elevations still adds an image option.` },
+            { title: 'Options map', body: `<strong>Options map</strong> shows everything offered at the spot as a tree: the placement, its frame sets, each set's layouts and each layout's image options, every one sketched to the same scale with how many images it has. Click a node to open that wall. The codes say which is which: ART.01 is the placement, ART.01A a layout, ART.01.2 frame set 2, and ART.01A.1 an image option.` },
+            { title: 'All-options page', body: `With <strong>All-options page</strong> ticked, each placement that has options gets a page in front of its others drawing every option side by side at one scale, so a difference in frame size shows as one.` },
             { title: 'Reading the rail', body: `A placement is a header with its walls indented under it. Solid amber is the wall the others follow, hollow amber is a layout of it, and blue is an image option. Check the stripe before editing a frame: it tells you whether the change reaches other walls.` },
             { title: 'Swapping pictures between frames', body: `Drag a row in the frame list to move its artwork to another frame. The frames stay where they are; only the pictures move.` }
         ]
@@ -37791,7 +38288,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>

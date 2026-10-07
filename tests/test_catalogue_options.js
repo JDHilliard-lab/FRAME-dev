@@ -276,12 +276,15 @@ const path = require('path');
     });
 
     // ── The control, and what it says ────────────────────────────────────
-    __check('the mockup button exists, is per-wall, and has its own hint', () => {
-      if (!document.getElementById('catMasterBtn')) throw new Error('no catMasterBtn in index.html');
+    // 17.89: the Catalogue mockup BUTTON left the Elevations tab ("I think we removed the
+    // Catalogue mockup button since all options take place in deck studio"); + Add option
+    // in Deck Studio makes a wall the arrangement. The hint under the wall stays, because
+    // it is the only thing on the Elevations side saying what a mockup wall is.
+    __check('the mockup hint still says what the wall is (the button moved to Deck Studio)', () => {
+      if (document.getElementById('catMasterBtn')) throw new Error('the Catalogue mockup button is back in Elevations');
       if (!document.getElementById('catMasterHint')) throw new Error('no catMasterHint in index.html');
       buildMaster();
       _syncCatalogueBtn();
-      if (!document.getElementById('catMasterBtn').classList.contains('active')) throw new Error('the button is not lit on a mockup');
       const h = document.getElementById('catMasterHint').textContent;
       if (h.toLowerCase().indexOf('duplicate') < 0) throw new Error('the hint does not say how to add an option: ' + h);
       // And it now answers the two questions a designer has before editing a frame.
@@ -294,8 +297,6 @@ const path = require('path');
       quiet(() => duplicateCurrentElevation());
       currentElevIndex = 1;
       _syncCatalogueBtn();
-      const btn = document.getElementById('catMasterBtn');
-      if (!btn.disabled) throw new Error('the switch is live on an option wall');
       const h = document.getElementById('catMasterHint').textContent;
       if (h.indexOf('Art option') < 0) throw new Error('the hint does not name the wall: ' + h);
     });
@@ -1246,7 +1247,12 @@ const path = require('path');
       const ids = dashProjectData.map(r => r.id);
       const dupes = ids.filter((id, i) => id && ids.indexOf(id) !== i);
       if (dupes.length) throw new Error('duplicate row ids were created: ' + dupes.join(','));
-      if (dashProjectData.length !== before) throw new Error('rows were added despite the clash');
+      // 17.89: the option counter now SKIPS any code a row already groups under
+      // (_catCodeInUse), so a broken counter mints the next free option instead of
+      // refusing. The invariant this check exists for - no two rows share an id - holds
+      // either way; the new option simply lands on a free code.
+      const added = dashProjectData.slice(before).map(r => r.id);
+      if (added.length && added.some(id => id.indexOf('ART-1.1') === 0)) throw new Error('the new option reused ART-1.1: ' + added.join(','));
     });
 
     // BEHAVIOUR CHANGED IN 17.78: duplicating an IMAGE SET now gives another image set
@@ -1610,36 +1616,16 @@ const path = require('path');
       if (bad.length) throw new Error('action-btn sized from a 100% basis and unable to shrink: ' + bad.join(', '));
     });
 
-    __check('the two + buttons SHARE a row and can shrink', () => {
-      const html = window.__htmlSrc || '';
-      ['catArrBtn', 'catSetBtn'].forEach(id => {
-        const tag = (html.split('id="' + id + '"')[1] || '').split('>')[0];
-        if (!tag) throw new Error('no ' + id + ' in index.html');
-        if (tag.indexOf('flex:1 1 0') < 0) throw new Error(id + ' does not share the row: ' + tag);
-        // Without min-width:0 a flex item will not shrink below its content, which is
-        // the same reason .elev-sidebar needed it to scroll.
-        if (tag.indexOf('min-width:0') < 0) throw new Error(id + ' cannot shrink below its label');
+    // 17.89: the + LAYOUT / + SET row is gone with the mockup button. Its job is the
+    // option chooser in Deck Studio, which reaches the SAME minters.
+    __check('the Elevations + LAYOUT / + SET row is gone; the Deck Studio chooser reaches the same minters', () => {
+      ['catArrBtn', 'catSetBtn', 'catAddRow'].forEach(id => { if (document.getElementById(id)) throw new Error(id + ' is still in Elevations'); });
+      const src = window.__appSrc || '';
+      const a = src.indexOf('function _catAddOptionOfKind');
+      const body = src.slice(a, src.indexOf('function openCatOptionChooser', a));
+      ['_catAddOption(mi', '_catAddArrangement(optIdx, o)', 'newSet: true'].forEach(k => {
+        if (body.indexOf(k) < 0) throw new Error('the chooser no longer reaches ' + k);
       });
-      // They are on their OWN row, or they are back to competing with the mockup button.
-      const mock = (html.split('id="catMasterBtn"')[1] || '').split('>')[0];
-      if (mock.indexOf('flex:1') >= 0) throw new Error('the mockup button still flexes against something');
-    });
-
-    __check('the ROW hides, so a plain wall has no empty band', () => {
-      // The buttons are alone on that row now. Hiding only them would leave a 26px gap on
-      // every wall that is not part of a catalogue.
-      elevations.length = 0;
-      dashProjectData.length = 0;
-      elevations.push({ id: _elevNewId(), name: 'Lobby', wallW: 185, wallH: 108, frames: [] });
-      currentElevIndex = 0;
-      quiet(() => _syncCatalogueBtn());
-      const row = document.getElementById('catAddRow');
-      if (!row) throw new Error('no catAddRow in index.html');
-      if (row.style.display !== 'none') throw new Error('the add row is showing on an ordinary wall');
-      // …and it comes back on a catalogue wall.
-      buildMaster();
-      quiet(() => _syncCatalogueBtn());
-      if (row.style.display === 'none') throw new Error('the add row stayed hidden on a mockup');
     });
 
   `;

@@ -2351,3 +2351,44 @@ select.fp-cat-chip option { color: var(--text-strong); background: var(--bg-pane
 
 /* An image dragged over a frame on a spec page: the page says it will take it. */
 .ds-art-drop { outline: 3px dashed var(--ui-active); outline-offset: -3px; }
+
+/* ── Options: the chooser and the map ─────────────────────────────────────── */
+.cat-kind {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+    padding: 9px 12px; border: 1px solid var(--border-color); border-radius: var(--r-6);
+    background: var(--bg-input); color: var(--text-main); cursor: pointer; font-family: inherit;
+}
+.cat-kind strong { font-size: var(--fs-75); color: var(--text-strong); }
+.cat-kind span { font-size: var(--fs-65); color: var(--text-muted); line-height: 1.4; }
+.cat-kind:hover { border-color: var(--text-muted); }
+.cat-kind.active { border-color: var(--ui-active); box-shadow: inset 3px 0 0 var(--ui-active); }
+
+/* The map is a left-to-right tree: each branch is its node plus a column of children,
+ * joined by elbow lines drawn with borders, so it needs no SVG and reflows with the
+ * window. */
+.cat-tree { overflow-x: auto; padding-bottom: 6px; }
+.cat-branch { display: flex; align-items: flex-start; gap: 0; position: relative; }
+.cat-kids { display: flex; flex-direction: column; gap: 10px; padding-left: 28px; position: relative; margin-left: 0; }
+.cat-kids::before { content: ''; position: absolute; left: 0; top: 18px; bottom: 18px; border-left: 2px solid var(--border-color); }
+.cat-kids > .cat-branch::before { content: ''; position: absolute; left: -28px; top: 18px; width: 28px; border-top: 2px solid var(--border-color); }
+.cat-branch > .cat-node { flex: none; }
+.cat-branch > .cat-node + .cat-kids { margin-left: 0; }
+.cat-branch > .cat-node::after { content: ''; position: absolute; }
+.cat-node {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 150px;
+    padding: 8px 10px; border: 1px solid var(--border-color); border-radius: var(--r-6);
+    background: var(--bg-input); color: var(--text-main); text-align: left; font-family: inherit; position: relative;
+}
+button.cat-node { cursor: pointer; }
+button.cat-node:hover { border-color: var(--ui-active); }
+.cat-node-root { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cat-node-root .cat-node-title, .cat-node-root .cat-node-sub { color: #fff; }
+.cat-node-set { border-left: 4px solid var(--warn); }
+.cat-node-layout { border-left: 4px solid color-mix(in srgb, var(--warn) 55%, transparent); }
+.cat-node-option { border-left: 4px solid var(--ui-active); }
+.cat-node-title { font-family: var(--ui-display); font-size: var(--fs-85); letter-spacing: 0.05em; color: var(--text-strong); }
+.cat-node-sub { font-size: var(--fs-60); color: var(--text-muted); }
+.cat-node-sketch svg { display: block; background: #fff; border-radius: var(--r-2); padding: 4px; }
+.cat-node-empty { font-size: var(--fs-60); color: var(--text-muted); font-style: italic; }
+.cat-node-fill { font-size: var(--fs-60); color: var(--text-muted); }
+.cat-node-fill.short { color: var(--warn); font-weight: 700; }

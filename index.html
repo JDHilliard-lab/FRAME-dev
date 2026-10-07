@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=17.88">
+    <link rel="stylesheet" href="style.css?v=17.89">
 </head>
 <body>
 
@@ -813,48 +813,11 @@
                             RESET DIMENSION POSITIONS
                         </button>
 
-                        <!-- CATALOGUE MOCKUP is a different axis from the wall mode above,
-                             so it gets its own row rather than a fourth button in that one.
-                             ART / EGD / WF say what the SURFACE is; this says what the wall
-                             is FOR: it holds one arrangement that several sets of artwork
-                             will be shown in. Per elevation, like EGD and unlike every
-                             deck-wide control in this panel.
-                             Duplicating a marked wall mints an art option and its item
-                             codes (ART-1 -> ART-1.1, rows ART-1.1A / ART-1.1B) instead of a
-                             layout variation, which is why there is no separate add button:
-                             the duplicate control is already where a designer reaches. -->
-                        <div style="display:flex; gap:6px; margin-top:8px;">
-                            <button class="action-btn btn-secondary wall-mode-btn" id="catMasterBtn" onclick="toggleCatalogueMaster()" title="Catalogue mockup &mdash; this wall holds the arrangement and no artwork. Duplicate it to add an art option: the option keeps this wall's sizes, positions and frame spec and carries its own images and item codes." style="height:26px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:5px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><rect x="3" y="4" width="11" height="13"/><path d="M7 8h6M7 12h6"/><path d="M17 7v13H6"/></svg>
-                                CATALOGUE MOCKUP
-                            </button>
-                        </div>
-                        <!-- THE TWO + BUTTONS GET THEIR OWN ROW. `.action-btn` is
-                             `width: 100%`, so `flex: 0 0 auto` resolves its basis from that
-                             and refuses to shrink - three of them in one row each demanded
-                             the whole panel and the last two ran off the left panel
-                             entirely. `flex: 1 1 0` with `min-width: 0` makes them share
-                             the row and shrink, which is what a pair of equal actions
-                             wants anyway. Same trap the Pill button in the gear popup hit. -->
-                        <div id="catAddRow" style="display:none; gap:6px; margin-top:6px;">
-                            <!-- The OTHER axis. Duplicate gives the same layout with different
-                                 images; this gives the same spot a different layout, which is a
-                                 second mockup under one placement (ART.001A -> ART.001B) sharing
-                                 one pin on the plan. Hidden until the wall is part of a
-                                 catalogue, since it has nothing to say otherwise. -->
-                            <button class="action-btn btn-secondary wall-mode-btn" id="catArrBtn" onclick="catArrangementAction()" style="flex:1 1 0; min-width:0; height:26px; padding:0 8px; font-size:var(--fs-60); letter-spacing:0.3px; align-items:center; justify-content:center; gap:5px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="flex:none; width:13px;height:13px;"><rect x="3" y="5" width="7" height="14"/><rect x="13" y="5" width="8" height="6"/><rect x="13" y="13" width="8" height="6"/></svg>
-                                + LAYOUT
-                            </button>
-                            <!-- The other axis again, one level up. + LAYOUT rearranges THESE
-                                 frames; + SET offers a DIFFERENT set of frames at the same spot
-                                 (ART.01 -> ART.01.2), which is the single / triptych / salon
-                                 case. Both share the placement's one pin on the plan. -->
-                            <button class="action-btn btn-secondary wall-mode-btn" id="catSetBtn" onclick="catFrameSetAction()" style="flex:1 1 0; min-width:0; height:26px; padding:0 8px; font-size:var(--fs-60); letter-spacing:0.3px; align-items:center; justify-content:center; gap:5px;">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="flex:none; width:13px;height:13px;"><rect x="3" y="4" width="8" height="16"/><rect x="14" y="4" width="7" height="7"/><rect x="14" y="14" width="7" height="6"/></svg>
-                                + SET
-                            </button>
-                        </div>
+                        <!-- OPTIONS ARE MADE IN DECK STUDIO (17.89). The Catalogue mockup button and
+                             the + LAYOUT / + SET row lived here; "+ Add option" on a page's Options
+                             section now does all of it, including turning the wall into the
+                             arrangement its options follow. This row keeps the layout's NAME, which
+                             is still edited where the drawing is. -->
                         <!-- Shown only on a layout that is not the primary: what it is called,
                              and whether its frames follow the primary's. Both are set at
                              creation by the + LAYOUT chooser; this is where they are changed
@@ -2505,8 +2468,8 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '17.88';</script>
-<script src="app.js?v=17.88"></script>
+<script>window.FRAME_HTML_VERSION = '17.89';</script>
+<script src="app.js?v=17.89"></script>
 
 </body>
 </html>
