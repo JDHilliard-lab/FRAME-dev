@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.93';
+const APP_VERSION = '17.94';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -31152,6 +31152,25 @@ function _drawSharedSpecColumn(doc, o) {
 // up. Returns the left edge it used, or null when it wouldn't fit and was
 // dropped; nothing is lost in that case, because every code is already printed
 // as a 'Frame Code' row in the spec block.
+// The crisp vector wall outline + baseboard over a group page's elevation thumbnail
+// (the rendered lines vanish at thumbnail scale). ONE copy, shared by the bottom band
+// and the left-column layout, or the two placements draw two different walls.
+// Uses the render's returned hIn (already in inches, unit-independent) so this can't
+// drift with units.
+function _drawGroupElevOutline(doc, er, tx, ty, tw, th) {
+    try {
+        const totalHin = (er.hIn && er.hIn > 0) ? er.hIn : 102;   // = wallHin + 6 (padIn)
+        const wallHin = totalHin - 6;
+        let bbIn = 4; try { const u2i = (typeof unitFactor === 'function') ? unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in') : 1; const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * u2i; } catch (e) {}
+        const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
+        const wTopF = 6 / totalHin;
+        const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
+        doc.setLineDashPattern([], 0);   // ensure solid (some viewers honor a leaked dash)
+        doc.setDrawColor(80, 80, 80); doc.setLineWidth(1.0);
+        doc.rect(wx, wyTop, wW, wH, 'S');
+        if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
+    } catch (e) {}
+}
 function _drawFrameStrip(doc, frames, box) {
     if (!frames || !frames.length) return null;
     const LABEL_H = 9, GAP = 10, MIN_CELL = 26;
@@ -31195,6 +31214,9 @@ function _drawFrameStrip(doc, frames, box) {
         return { f: f, cw: cw, pw: pw, w: Math.max(MIN_CELL, lw, cw + (pw ? 3 + pw : 0)) };
     });
     const total = cells.reduce((a, c) => a + c.w, 0) + GAP * (cells.length - 1);
+    // Measure only: the width this strip WOULD take at this height, drawing nothing.
+    // The left-column layout sizes its one row of thumbnails off it.
+    if (box.measure) return total;
     if (total > box.maxW) return null;
     let x = box.right - total;
     const left = x;
@@ -31518,20 +31540,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                         const tw = flat.width * fit, th = flat.height * fit;
                         const tx = regX + regW - tw, ty = bandY + (boxH - th);
                         doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
-                        // crisp vector wall outline + baseboard (the rendered lines vanish at thumbnail scale).
-                        // Use the render's returned hIn (already in inches, unit-independent) so this can't drift with units.
-                        try {
-                            const totalHin = (er.hIn && er.hIn > 0) ? er.hIn : 102;   // = wallHin + 6 (padIn)
-                            const wallHin = totalHin - 6;
-                            let bbIn = 4; try { const u2i = (typeof unitFactor === 'function') ? unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in') : 1; const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * u2i; } catch (e) {}
-                            const wlf = (er.wallLeftFrac != null ? er.wallLeftFrac : 0), wrf = (er.wallRightFrac != null ? er.wallRightFrac : 1);
-                            const wTopF = 6 / totalHin;
-                            const wx = tx + wlf * tw, wW = (wrf - wlf) * tw, wyTop = ty + wTopF * th, wH = (1 - wTopF) * th;
-                            doc.setLineDashPattern([], 0);   // ensure solid (some viewers honor a leaked dash)
-                            doc.setDrawColor(80, 80, 80); doc.setLineWidth(1.0);
-                            doc.rect(wx, wyTop, wW, wH, 'S');
-                            if (bbIn > 0 && bbIn < wallHin) { const byy = ty + (1 - bbIn / totalHin) * th; doc.setLineWidth(0.8); doc.line(wx, byy, wx + wW, byy); }
-                        } catch (e) {}
+                        _drawGroupElevOutline(doc, er, tx, ty, tw, th);
                         doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(138, 138, 138); doc.text('Elevation', tx, Math.min(ty + th + 8, BB));
                         legendRight = tx - 14;
                         _thumbBox = { tx: tx, ty: ty, tw: tw, th: th };
@@ -31615,13 +31624,60 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
         if (_thumbsLeft) {
             const colX = LX, colW = SW * 0.315;
             const capGap = 12;                                    // caption under each thumbnail
+            const GAP = 14;
             const budget = (BB - (GB.body + 8)) * 0.46;           // the most the thumbnails may take
-            const rowItems = (_wantPlan ? 1 : 0) + (_wantElev ? 1 : 0);
-            const rowH = rowItems ? Math.min(budget * (_wantStrip ? 0.58 : 1) - capGap, rowItems === 2 ? colW / 2.9 : colW / 1.7) : 0;
+            // ONE ROW, never stacked: corner/profile strip, floorplan, elevation, left to
+            // right - the order the bottom band reads in. The strip used to sit ABOVE the
+            // plan and elevation, which piled three things up the column and pushed the
+            // specs into a sliver. The row height is the ONE dial: it starts at the most
+            // the budget allows and shrinks until everything fits the column width.
+            let er = null, flat = null;
+            if (_wantElev && groupElev) {
+                try {
+                    er = await renderElevationToCanvas(groupElev, null, { wireframe: _elevIsWireframe(groupElev), dpi: 24 });
+                    if (er && er.canvas) {
+                        flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
+                        const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+                    }
+                } catch (e) { er = null; flat = null; }
+            }
+            const elevAsp = (flat && flat.width > 0 && flat.height > 0) ? flat.width / flat.height : 1.6;
+            let useStrip = _wantStrip;
+            const stripW = (h) => {
+                if (!useStrip) return 0;
+                const w = _drawFrameStrip(doc, _sharedFrames, { right: 0, top: 0, height: h + 9, maxW: Infinity, measure: true, corner: SL.frame, profile: SL.profile });
+                return (w == null) ? 0 : w;
+            };
+            const rowW = (h) => {
+                const parts = [stripW(h), _wantPlan ? h : 0, _wantElev ? h * elevAsp : 0].filter(w => w > 0);
+                return parts.reduce((a, w) => a + w, 0) + GAP * Math.max(0, parts.length - 1);
+            };
+            const anyRow = _wantPlan || _wantElev || useStrip;
+            let rowH = 0;
+            if (anyRow) {
+                const MIN_H = 24;
+                rowH = Math.max(MIN_H, Math.min(budget - capGap, colW / 1.7));
+                while (rowH > MIN_H && rowW(rowH) > colW) rowH = Math.max(MIN_H, rowH * 0.94);
+                // Still too wide at the floor: the strip gives way, the house rule for a
+                // part that cannot fit (every code still prints as a Frame Code row).
+                if (rowW(rowH) > colW && useStrip) {
+                    useStrip = false;
+                    rowH = Math.max(MIN_H, Math.min(budget - capGap, colW / 1.7));
+                    while (rowH > MIN_H && rowW(rowH) > colW) rowH = Math.max(MIN_H, rowH * 0.94);
+                }
+            }
             let y = BB;
-            if (rowItems) {
+            if (anyRow && rowH > 0) {
                 const top = BB - capGap - rowH;
                 let x = colX;
+                if (useStrip) {
+                    const sw = stripW(rowH);
+                    const left = _drawFrameStrip(doc, _sharedFrames, {
+                        right: x + sw, top: top, height: rowH + 9, maxW: sw + 0.5, swatch: false,
+                        corner: SL.frame, profile: SL.profile
+                    });
+                    if (left != null) x += sw + GAP;
+                }
                 if (_wantPlan) {
                     let pc = null;
                     try { pc = await _planCropCanvasForRow(members[0], { zoom: 3, aspect: 1, placedPt: rowH }); } catch (e) { pc = null; }
@@ -31633,36 +31689,21 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                     } else {
                         _specSwatchBox(doc, x, top, rowH, rowH, 'Floorplan', Math.min(top + rowH + 8, BB));
                     }
-                    x += rowH + 14;
+                    x += rowH + GAP;
                 }
                 if (_wantElev) {
-                    const ew = Math.max(20, colX + colW - x);
-                    let drew = false;
-                    if (groupElev) {
+                    const tw = rowH * elevAsp, th = rowH;
+                    if (flat) {
                         try {
-                            const er = await renderElevationToCanvas(groupElev, null, { wireframe: _elevIsWireframe(groupElev), dpi: 24 });
-                            if (er && er.canvas) {
-                                const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
-                                const fit = Math.min(ew / flat.width, rowH / flat.height);
-                                const tw = flat.width * fit, th = flat.height * fit;
-                                const ty = top + (rowH - th);
-                                doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', x, ty, tw, th);
-                                _specThumbCaption(doc, 'Elevation', x, Math.min(ty + th + 8, BB));
-                                drew = true;
-                            }
+                            doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', x, top, tw, th);
+                            _drawGroupElevOutline(doc, er, x, top, tw, th);
                         } catch (e) {}
+                        _specThumbCaption(doc, 'Elevation', x, Math.min(top + th + 8, BB));
+                    } else {
+                        _specSwatchBox(doc, x, top, tw, th, 'Elevation', Math.min(top + th + 8, BB));
                     }
-                    if (!drew) _specSwatchBox(doc, x, top, Math.min(ew, rowH * 1.6), rowH, 'Elevation', Math.min(top + rowH + 8, BB));
                 }
                 y = top - 14;
-            }
-            if (_wantStrip) {
-                const stripH = Math.max(24, Math.min(budget - (BB - y) - 4, 70));
-                const left = _drawFrameStrip(doc, _sharedFrames, {
-                    right: colX + colW, top: y - stripH, height: stripH, maxW: colW, swatch: false,
-                    corner: SL.frame, profile: SL.profile
-                });
-                if (left != null) y = y - stripH - 16;
             }
             if (opts.codes === 'legend') {
                 const rowH2 = 10, n = placed.length;
@@ -38768,7 +38809,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
