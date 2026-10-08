@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.92';
+const APP_VERSION = '17.93';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -19987,7 +19987,7 @@ function _dsDragPill(text, x, y) {
         // position:fixed on <body>: the rail scrolls and clips, and a readout that
         // disappears behind the edge of the thing you are dragging in is no readout.
         el.style.cssText = 'position:fixed; z-index:5000; pointer-events:none; padding:3px 8px;'
-            + ' border-radius:var(--r-10); background:var(--ui-active); color:#fff; font-size:var(--fs-65); font-weight:700;'
+            + ' border-radius:var(--r-10); background:var(--selected); color:#fff; font-size:var(--fs-65); font-weight:700;'
             + ' box-shadow:0 2px 8px rgba(0,0,0,0.35); white-space:nowrap;';
         document.body.appendChild(el);
     }
@@ -20642,7 +20642,7 @@ function _dsAnnMarqueeAttach(page, key, list, w, hh) {
         const x0 = e.clientX, y0 = e.clientY;
         const additive = e.shiftKey;
         const box = document.createElement('div');
-        box.style.cssText = 'position:absolute; border:1px solid var(--ui-active); background:rgba(106,106,255,0.12); z-index:600; pointer-events:none; left:' + (x0 - rect.left) + 'px; top:' + (y0 - rect.top) + 'px; width:0; height:0;';
+        box.style.cssText = 'position:absolute; border:1px solid var(--selected); background:color-mix(in srgb, var(--selected) 12%, transparent); z-index:600; pointer-events:none; left:' + (x0 - rect.left) + 'px; top:' + (y0 - rect.top) + 'px; width:0; height:0;';
         page.appendChild(box);
         let moved = false;
         const mv = (ev) => {
@@ -20724,7 +20724,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + s + 'px; height:' + s + 'px; cursor:move; box-sizing:border-box;';
             box._page = { w: w, h: hh };
             const disc = document.createElement('div');
-            disc.style.cssText = 'position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#f2f2f4; outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + ';';
+            disc.style.cssText = 'position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#f2f2f4; outline:' + (sel ? '1.5px solid var(--selected)' : '1px dashed color-mix(in srgb, var(--selected) 45%, transparent)') + ';';
             const url = _artDetailCache[_artDetailKey(a.pieceId, a)];
             if (url) { const img = document.createElement('img'); img.src = url; img.draggable = false; img.style.cssText = 'width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;'; disc.appendChild(img); }
             else { disc.innerHTML = '<div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#999; font-size:10px; text-align:center; padding:6px;">detail\u2026</div>'; if (a.pieceId) _artDetailEnsure(a.pieceId, a).then(u => { if (u) _dsRenderCenter(); }); }
@@ -20734,7 +20734,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
                 const wasSel = (_dsSelKey === key && _dsSelIdx === i);
-                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); disc.style.outline = '1.5px solid var(--ui-active)';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); disc.style.outline = '1.5px solid var(--selected)';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const opx = a.panX || 0, opy = a.panY || 0;
                 const panning = e.shiftKey && ((a.zoom || 1) > 1);
@@ -20767,7 +20767,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             if (sel) {
                 const handle = document.createElement('div');
                 handle.className = '_dsChrome';
-                handle.style.cssText = 'position:absolute; right:4%; bottom:4%; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize; z-index:2;';
+                handle.style.cssText = 'position:absolute; right:4%; bottom:4%; width:8px; height:8px; background:var(--selected); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize; z-index:2;';
                 handle.onmousedown = (e) => {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.14;
@@ -20789,7 +20789,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const aspect = (entry && entry.aspect) || a.aspect || 1.2;
             const bw = (a.w || 0.3) * w, bh = bw * aspect;
             const box = document.createElement('div');
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;';
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid var(--selected)' : '1px dashed color-mix(in srgb, var(--selected) 45%, transparent)') + '; cursor:move; box-sizing:border-box;';
             box._page = { w: w, h: hh };
             if (entry && entry.url) {
                 const img = document.createElement('img'); img.src = entry.url; img.draggable = false;
@@ -20810,7 +20810,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.onmousedown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
                 e.preventDefault();
-                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--ui-active)';
+                _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--selected)';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
                 const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
@@ -20821,7 +20821,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             if (sel) {
                 const handle = document.createElement('div');
                 handle.className = '_dsChrome';
-                handle.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize;';
+                handle.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:var(--selected); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize;';
                 handle.onmousedown = (e) => {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.3;
@@ -20838,7 +20838,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const bw = (a.w || 0.25) * w, bh = bw * (a.aspect || 0.75);
             const box = document.createElement('div');
             box._page = { w: w, h: hh };
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; box-sizing:border-box;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; outline:' + (sel ? '1.5px solid var(--selected)' : '1px dashed color-mix(in srgb, var(--selected) 45%, transparent)') + '; cursor:move; box-sizing:border-box;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             const clipI = document.createElement('div');
             clipI.style.cssText = 'position:absolute; inset:0; overflow:hidden; background:#fff; pointer-events:none;';
             const img = document.createElement('img');
@@ -20861,7 +20861,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (_dsAnnGroupDragStart(e, key, i, list)) return;
                 e.preventDefault(); e.stopPropagation();
                 const wasSel = sel;
-                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--ui-active)';
+                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--selected)';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
@@ -20881,7 +20881,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             box.style.cursor = panModeI ? 'grab' : 'move';
             const handle = document.createElement('div');
             handle.className = '_dsChrome';
-            handle.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize;' + (sel ? '' : ' display:none;');
+            handle.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:var(--selected); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize;' + (sel ? '' : ' display:none;');
             handle.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
@@ -20907,7 +20907,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             // overflow stays VISIBLE on the box so the grip/gear handles just
             // outside its corners aren't clipped; an inner wrapper clips the image.
             box._page = { w: w, h: hh };
-            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + (a.dataUrl ? 'transparent' : (a.fill === 'none' ? 'transparent' : (a.fill || SHAPE_DEFAULT_FILL))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
+            box.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + bw + 'px; height:' + bh + 'px; box-sizing:border-box; cursor:move; border-radius:' + radius + '; background:' + (a.dataUrl ? 'transparent' : (a.fill === 'none' ? 'transparent' : (a.fill || SHAPE_DEFAULT_FILL))) + ';' + (a.stroke ? ' border:' + Math.max(1, (a.strokeW || 1.5) * (w / 936)) + 'px solid ' + a.stroke + ';' : '') + ' outline:' + (sel ? '1.5px solid var(--selected)' : '1px dashed color-mix(in srgb, var(--selected) 45%, transparent)') + '; outline-offset:1px;' + (a.shadow ? ' box-shadow:' + (0.004 * w) + 'px ' + (0.005 * w) + 'px ' + (0.026 * w) + 'px rgba(0,0,0,0.28);' : '');
             if (a.dataUrl) {
                 const clip = document.createElement('div');
                 clip.style.cssText = 'position:absolute; inset:0; overflow:hidden; border-radius:' + radius + '; background:#ececec; pointer-events:none;';
@@ -20917,8 +20917,8 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 clip.appendChild(img);
                 box.appendChild(clip);
             }
-            box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed var(--ui-active)'; };
-            box.ondragleave = () => { box.style.outline = sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)'; };
+            box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed var(--selected)'; };
+            box.ondragleave = () => { box.style.outline = sel ? '1.5px solid var(--selected)' : '1px dashed color-mix(in srgb, var(--selected) 45%, transparent)'; };
             box.ondrop = (e) => _dsShapeDropImage(e, key, i);
             const moveDown = (e) => {
                 if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; }
@@ -20926,7 +20926,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 if (_dsAnnGroupDragStart(e, key, i, list)) return;
                 e.preventDefault(); e.stopPropagation();
                 const wasSel = sel;
-                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--ui-active)';
+                _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--selected)';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const cap = page.querySelector('[data-cap-for="' + key + '|' + i + '"]');
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
@@ -20985,9 +20985,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
             hit.style.cssText = 'pointer-events:stroke; cursor:move;';
             // Hollow rings for the endpoint handles so the actual line end is
             // visible through the middle, not hidden under a solid dot.
-            const hEnds = [mk('circle', { r: 6, fill: 'none', stroke: 'var(--ui-active)', 'stroke-width': 2.5 }), mk('circle', { r: 6, fill: 'none', stroke: 'var(--ui-active)', 'stroke-width': 2.5 })];
+            const hEnds = [mk('circle', { r: 6, fill: 'none', stroke: 'var(--selected)', 'stroke-width': 2.5 }), mk('circle', { r: 6, fill: 'none', stroke: 'var(--selected)', 'stroke-width': 2.5 })];
             // Middle-segment handle (elbow/curve only) — drag to slide the bend.
-            const bendHandle = mk('rect', { width: 9, height: 9, fill: '#fff', stroke: 'var(--ui-active)', 'stroke-width': 2 });
+            const bendHandle = mk('rect', { width: 9, height: 9, fill: '#fff', stroke: 'var(--selected)', 'stroke-width': 2 });
             let lastPts = null;
             let _wpUISync = null;   // set once the waypoint-editing UI exists (elbow with a.waypoints)
             // Settings-gear button, midpoint-anchored, shown only while selected.
@@ -20999,7 +20999,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 gwrap.style.cssText = 'position:absolute; left:0; top:0; width:0; height:0; pointer-events:none; z-index:' + (101 + ((a.z !== undefined) ? a.z : 5000)) + ';';
                 gbtn = document.createElement('button');
                 gbtn.title = 'Line settings (colour, weight, head, caps)';
-                gbtn.style.cssText = 'position:absolute; width:20px; height:20px; padding:0; border-radius:0; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; pointer-events:auto; transform:translate(-50%,-50%); color:var(--ui-active); font-size:20px; font-weight:400; line-height:1; text-shadow:0 1px 3px rgba(255,255,255,0.9), 0 1px 2px rgba(0,0,0,0.35);';
+                gbtn.style.cssText = 'position:absolute; width:20px; height:20px; padding:0; border-radius:0; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; pointer-events:auto; transform:translate(-50%,-50%); color:var(--selected); font-size:20px; font-weight:400; line-height:1; text-shadow:0 1px 3px rgba(255,255,255,0.9), 0 1px 2px rgba(0,0,0,0.35);';
                 gbtn.textContent = '+';
                 gbtn.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
                 gbtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenArrowGearPopup(key, i, e.clientX, e.clientY); };
@@ -21138,13 +21138,13 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     bendHandle.style.display = 'none';
                     const wpDots = [], segHandles = [];
                     const mkWpDot = () => {
-                        const d = mk('circle', { r: 5.5, fill: '#fff', stroke: 'var(--ui-active)', 'stroke-width': 2 });
+                        const d = mk('circle', { r: 5.5, fill: '#fff', stroke: 'var(--selected)', 'stroke-width': 2 });
                         d.style.cssText = 'pointer-events:all; cursor:move;';
                         svg.appendChild(d);
                         return d;
                     };
                     const mkSegHandle = () => {
-                        const s = mk('rect', { width: 8, height: 8, fill: 'var(--ui-active)', stroke: '#fff', 'stroke-width': 1.5 });
+                        const s = mk('rect', { width: 8, height: 8, fill: 'var(--selected)', stroke: '#fff', 'stroke-width': 1.5 });
                         s.style.cssText = 'pointer-events:all;';
                         s.title = 'Drag to slide this segment';
                         svg.appendChild(s);
@@ -21243,21 +21243,21 @@ function _dsRenderAnnots(page, desc, w, hh) {
         el.spellcheck = false;
         const _fpx = Math.max(7, (a.size || 0.03) * hh);
         const _lh = a.leading ? ((a.leading / 540) * hh) / _fpx : 1.15;
-        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + _fpx + 'px; line-height:' + _lh + '; color:' + _dsDisplayInk(a.color || '#222222', key) + '; ' + _textExtraCss(a, _dsDisplayInk(a.color || '#222222', key)) + ' outline:' + (sel ? '1.5px solid var(--ui-active)' : '1px dashed rgba(106,106,255,0.45)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
+        el.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh) + 'px; width:' + ((a.w || 0.3) * w) + 'px; font-family:' + _dsAnnFam(a.font) + '; font-size:' + _fpx + 'px; line-height:' + _lh + '; color:' + _dsDisplayInk(a.color || '#222222', key) + '; ' + _textExtraCss(a, _dsDisplayInk(a.color || '#222222', key)) + ' outline:' + (sel ? '1.5px solid var(--selected)' : '1px dashed color-mix(in srgb, var(--selected) 45%, transparent)') + '; cursor:move; padding:1px 2px; box-sizing:border-box; min-height:1em; white-space:pre-wrap; word-break:break-word;';
         el.onmousedown = (e) => {
             if (el.isContentEditable) return;
             if (_dsAnnShiftToggle(e, i)) return;
             if (_dsAnnGroupDragStart(e, key, i, list)) return;
             e.preventDefault();
             const wasSel = sel;
-            _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '1.5px solid var(--ui-active)';
+            _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.style.outline = '1.5px solid var(--selected)';
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
             const _bwF = (el.offsetWidth || 0) / w, _bhF = (el.offsetHeight || 0) / hh;
             const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.985, _sp.x)); a.y = Math.max(0, Math.min(0.985, _sp.y)); el.style.left = (a.x * w) + 'px'; el.style.top = (a.y * hh) + 'px'; };
             const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); if (!wasSel) _dsRenderCenter(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
-        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '1.5px solid var(--ui-active)'; if (Array.isArray(a.runs) && a.runs.length) _richSpansInto(el, a, true); else if (a.listStyle && a.listStyle !== 'none') el.textContent = a.text || ''; el.focus(); };
+        el.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); el.contentEditable = 'true'; el.style.cursor = 'text'; el.style.outline = '1.5px solid var(--selected)'; if (Array.isArray(a.runs) && a.runs.length) _richSpansInto(el, a, true); else if (a.listStyle && a.listStyle !== 'none') el.textContent = a.text || ''; el.focus(); };
         // Sync continuously, not just on blur — a native browser or Grammarly
         // spellcheck correction edits the DOM directly, and only capturing on
         // blur left a window where an intervening re-render (or just closing
@@ -21270,7 +21270,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const th = document.createElement('div');
             th.contentEditable = 'false';
             th.className = '_dsChrome';
-            th.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize;';
+            th.style.cssText = 'position:absolute; right:-4px; bottom:-4px; width:8px; height:8px; background:var(--selected); border:1.5px solid #fff; border-radius:var(--r-2); cursor:nwse-resize;';
             th.onmousedown = (e) => {
                 e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
@@ -22217,8 +22217,8 @@ function _dsMoveGrip(box, onDown) {
     const g = document.createElement('div');
     g.className = '_dsChrome';
     g.title = 'Drag to move the shape (dragging the image pans it)';
-    g.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ui-active)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>';
-    g.style.cssText = 'position:absolute; width:20px; height:20px; border-radius:var(--r-4); background:#fff; border:1.5px solid var(--ui-active); cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
+    g.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--selected)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M19 9l3 3-3 3M9 19l3 3 3-3M2 12h20M12 2v20"/></svg>';
+    g.style.cssText = 'position:absolute; width:20px; height:20px; border-radius:var(--r-4); background:#fff; border:1.5px solid var(--selected); cursor:move; display:flex; align-items:center; justify-content:center; z-index:25; box-shadow:0 1px 4px rgba(0,0,0,0.3);';
     _dsPinChrome(box, g, -11, -11, DS_GRIP_SIZE, DS_GRIP_SIZE);
     box._gripBox = { l: parseFloat(g.style.left) || 0, t: parseFloat(g.style.top) || 0, s: DS_GRIP_SIZE };
     g.onmousedown = onDown;
@@ -22232,8 +22232,8 @@ function _dsGearButton(box, key, i) {
     g.title = 'Image placeholder settings (image, fill, stroke, caption)';
     g.innerHTML = svgEdit;
     g.style.cssText = 'position:absolute; width:' + DS_SETTINGS_SIZE + 'px; height:' + DS_SETTINGS_SIZE + 'px; padding:0;'
-        + ' border-radius:50%; background:#fff; border:1.5px solid var(--ui-active); cursor:pointer;'
-        + ' display:flex; align-items:center; justify-content:center; z-index:25; color:var(--ui-active);'
+        + ' border-radius:50%; background:#fff; border:1.5px solid var(--selected); cursor:pointer;'
+        + ' display:flex; align-items:center; justify-content:center; z-index:25; color:var(--selected);'
         + ' box-shadow:0 1px 4px rgba(0,0,0,0.3);';
     // x clears the sw resize handle, which reaches 7px in from the box's left
     // edge; y sits the disc just above the bottom edge.
@@ -22756,7 +22756,7 @@ function _dsImgZoomPill(box, opts) {
     const mk = (label, delta) => {
         const b = document.createElement('button'); b.textContent = label;
         b.title = (delta > 0 ? 'Zoom in' : 'Zoom out') + ' \u2014 you can also scroll on the box';
-        b.style.cssText = 'width:20px; height:20px; padding:0; font-size:12px; line-height:1; border-radius:50%; border:1px solid var(--ui-active); background:#fff; color:var(--ui-active); cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
+        b.style.cssText = 'width:20px; height:20px; padding:0; font-size:12px; line-height:1; border-radius:50%; border:1px solid var(--selected); background:#fff; color:var(--selected); cursor:pointer; box-shadow:0 1px 4px rgba(0,0,0,0.25);';
         b.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
         b.onclick = (e) => { e.preventDefault(); e.stopPropagation(); const cur = opts.get(); const nz = _dsZoomRound(Math.max(opts.min, Math.min(opts.max, cur + delta * (e.shiftKey ? 5 : 1)))); if (nz !== cur) opts.set(nz); };
         return b;
@@ -22769,7 +22769,7 @@ function _dsImgZoomPill(box, opts) {
     zLbl.type = 'text';
     zLbl.value = opts.get().toFixed(1);
     zLbl.title = 'Zoom \u2014 type a value, or scroll on the image';
-    zLbl.style.cssText = 'font-size:10px; color:#fff; background:var(--ui-active); border:none; border-radius:var(--r-8); padding:2px 0; width:34px; text-align:center; font-family:inherit;';
+    zLbl.style.cssText = 'font-size:10px; color:#fff; background:var(--selected); border:none; border-radius:var(--r-8); padding:2px 0; width:34px; text-align:center; font-family:inherit;';
     zLbl.onmousedown = (e) => { e.stopPropagation(); };
     zLbl.onclick = (e) => { e.stopPropagation(); zLbl.select(); };
     const commit = () => {
@@ -23007,7 +23007,7 @@ function _dsTextGearButton(el, target) {
     g.contentEditable = 'false';
     g.title = 'Text settings (size, leading, style, colour, alignment)';
     g.textContent = '+';
-    g.style.cssText = 'position:absolute; right:-20px; top:-4px; width:18px; height:18px; padding:0; border-radius:0; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; color:var(--ui-active); font-size:18px; font-weight:400; line-height:1; text-shadow:0 1px 2px rgba(0,0,0,0.45);';
+    g.style.cssText = 'position:absolute; right:-20px; top:-4px; width:18px; height:18px; padding:0; border-radius:0; background:transparent; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; z-index:25; color:var(--selected); font-size:18px; font-weight:400; line-height:1; text-shadow:0 1px 2px rgba(0,0,0,0.45);';
     g.onmousedown = (e) => { e.preventDefault(); e.stopPropagation(); };
     g.onclick = (e) => { e.preventDefault(); e.stopPropagation(); _dsOpenTextGearPopup(target, e.clientX, e.clientY); };
     el.appendChild(g);
@@ -23291,7 +23291,7 @@ function _dsAnnHandles(box, a, w, hh) {
     dirs.forEach(d => {
         const h = document.createElement('div');
         h.className = '_dsChrome';
-        h.style.cssText = 'position:absolute; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); z-index:22; cursor:' + _hc[d] + ';';
+        h.style.cssText = 'position:absolute; width:8px; height:8px; background:var(--selected); border:1.5px solid #fff; border-radius:var(--r-2); z-index:22; cursor:' + _hc[d] + ';';
         _dsPinChrome(box, h, _hx[d], _hy[d], HS, HS, 0);
         if (d === 'ne') { _neL = parseFloat(h.style.left) || 0; _neT = parseFloat(h.style.top) || 0; }
         h.onmousedown = (e) => {
@@ -24103,9 +24103,9 @@ function _dsTitleHandles(page, desc, w, hh) {
         box.title = label + ' — click to set the typeface and size';
         box.style.cssText = 'position:absolute; left:' + (B.x * sx) + 'px; top:' + top + 'px; width:' + ((B.right - B.x) * sx) + 'px; height:' + h + 'px;'
             + ' cursor:pointer; box-sizing:border-box; border-radius:var(--r-2);'
-            + ' border:1px ' + (sel ? 'solid var(--ui-active)' : 'dashed transparent') + ';';
-        if (sel) box.style.background = 'rgba(106,106,255,0.08)';
-        box.onmouseenter = () => { if (!sel) box.style.borderColor = 'rgba(106,106,255,0.5)'; };
+            + ' border:1px ' + (sel ? 'solid var(--selected)' : 'dashed transparent') + ';';
+        if (sel) box.style.background = 'color-mix(in srgb, var(--selected) 8%, transparent)';
+        box.onmouseenter = () => { if (!sel) box.style.borderColor = 'color-mix(in srgb, var(--selected) 50%, transparent)'; };
         box.onmouseleave = () => { if (!sel) box.style.borderColor = 'transparent'; };
         box.onmousedown = (e) => {
             e.preventDefault(); e.stopPropagation();
@@ -24248,9 +24248,9 @@ function _dsAddGuides(page, w, hh) {
     // Fallback (no guide set resolvable): the old margin frame + center lines.
     const mx = Math.round(w * 40 / 936), my = Math.round(hh * 40 / 540);
     const g = document.createElement('div');
-    g.style.cssText = 'position:absolute; left:' + mx + 'px; top:' + my + 'px; right:' + mx + 'px; bottom:' + my + 'px; border:1px dashed rgba(106,106,255,0.5); pointer-events:none;';
-    const vx = document.createElement('div'); vx.style.cssText = 'position:absolute; left:50%; top:0; bottom:0; width:1px; background:rgba(106,106,255,0.25); pointer-events:none;';
-    const hz = document.createElement('div'); hz.style.cssText = 'position:absolute; top:50%; left:0; right:0; height:1px; background:rgba(106,106,255,0.25); pointer-events:none;';
+    g.style.cssText = 'position:absolute; left:' + mx + 'px; top:' + my + 'px; right:' + mx + 'px; bottom:' + my + 'px; border:1px dashed color-mix(in srgb, var(--selected) 50%, transparent); pointer-events:none;';
+    const vx = document.createElement('div'); vx.style.cssText = 'position:absolute; left:50%; top:0; bottom:0; width:1px; background:color-mix(in srgb, var(--selected) 25%, transparent); pointer-events:none;';
+    const hz = document.createElement('div'); hz.style.cssText = 'position:absolute; top:50%; left:0; right:0; height:1px; background:color-mix(in srgb, var(--selected) 25%, transparent); pointer-events:none;';
     page.appendChild(g); page.appendChild(vx); page.appendChild(hz);
 }
 // Live footer overlay for DOM-rendered center pages (editable layout/fixed
@@ -25760,7 +25760,7 @@ function _dsUpdateThumbProgress() {
     const pct = Math.round(done / total * 100);
     el.style.display = 'flex';
     el.innerHTML = 'Building previews \u2014 ' + done + ' of ' + total + ' (' + pct + '%)' +
-        '<span style="display:block; height:3px; margin-top:4px; background:rgba(106,106,255,0.25); border-radius:var(--r-2); overflow:hidden;"><span style="display:block; height:100%; width:' + pct + '%; background:var(--ui-active);"></span></span>';
+        '<span style="display:block; height:3px; margin-top:4px; background:color-mix(in srgb, var(--ui-active) 25%, transparent); border-radius:var(--r-2); overflow:hidden;"><span style="display:block; height:100%; width:' + pct + '%; background:var(--ui-active);"></span></span>';
 }
 function _dsShowPreviewModal(url, title) {
     let m = document.getElementById('_dsPreviewModal'); if (m) m.remove();
@@ -27182,7 +27182,7 @@ function _dsFillDockedStyles(wrap, cols) {
             // not what it is for or what applying it will do.
             b.title = 'Apply "' + s.name + '"  ·  ' + (s.group || 'Style') + '  ·  ' + Math.round((s.size || 0.03) * 1080) + 'pt ' + _styleColorName(s.color) + (tgt ? '' : '  —  select a text box first');
             const on = curId === s.id;
-            b.style.cssText = 'display:flex; align-items:center; gap:6px; width:100%; text-align:left; margin-bottom:2px; padding:4px 7px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (on ? 'var(--ui-active)' : 'transparent') + '; background:' + (on ? 'rgba(106,106,255,0.18)' : 'transparent') + '; color:var(--text-main); font-size:var(--fs-70);';
+            b.style.cssText = 'display:flex; align-items:center; gap:6px; width:100%; text-align:left; margin-bottom:2px; padding:4px 7px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (on ? 'var(--ui-active)' : 'transparent') + '; background:' + (on ? 'color-mix(in srgb, var(--ui-active) 18%, transparent)' : 'transparent') + '; color:var(--text-main); font-size:var(--fs-70);';
             // Colour chip + name (e.g. Black / White / #hex) so a style's ink is
             // visible at a glance, right in the list.
             b.innerHTML = '<span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family:' + _mbFontCss(s.font || 'serif') + '; font-weight:' + (s.weight || (s.bold ? 700 : 400)) + ';' + (s.italic ? ' font-style:italic;' : '') + (s.caps === 'upper' ? ' text-transform:uppercase;' : '') + '">' + _esc(s.name) + '</span>' +
@@ -27814,7 +27814,7 @@ function _fpItemRow(g, desc) {
     const onThis = here;
     const row = document.createElement('div');
     row.style.cssText = 'display:flex; align-items:center; gap:5px; padding:3px 4px; border-radius:var(--r-4); cursor:pointer; margin-bottom:2px; overflow:hidden; '
-        + (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid var(--ui-active);' : 'background:transparent;');
+        + (armed ? 'background:color-mix(in srgb, var(--ui-active) 18%, transparent); outline:1px solid var(--ui-active);' : 'background:transparent;');
     // The same placement colour the dashboard paints on this group's rows, as a stripe.
     const _plc = _placementColor(g.key);
     if (_plc) row.style.boxShadow = 'inset 3px 0 0 ' + _plc;
@@ -29035,7 +29035,7 @@ function renderFloorplanMarkup() {
         const armed = (_fpArmedId === g.key);
         const rowEl = document.createElement('div');
         rowEl.style.cssText = 'display:flex; align-items:center; gap:8px; padding:6px; border-radius:var(--r-4); cursor:pointer; margin-bottom:3px; ' +
-            (armed ? 'background:rgba(106,106,255,0.18); outline:1px solid var(--ui-active);' : 'background:transparent;');
+            (armed ? 'background:color-mix(in srgb, var(--ui-active) 18%, transparent); outline:1px solid var(--ui-active);' : 'background:transparent;');
         const num = document.createElement('span');
         num.textContent = g.num;
         num.style.cssText = 'flex:0 0 auto; min-width:20px; height:20px; padding:0 4px; border-radius:var(--r-10); display:inline-flex; align-items:center; justify-content:center; font-size:var(--fs-60); font-weight:700; color:#fff; background:' + categoryColor(g.category) + ';';
@@ -29693,7 +29693,7 @@ function _mbSegEl(Ax, Ay, Bx, By, color, wt, withHead, sel) {
     const wrap = document.createElement('div');
     wrap.style.cssText = 'position:absolute; left:' + Ax + 'px; top:' + (Ay - hit / 2) + 'px; width:' + len + 'px; height:' + hit + 'px; transform-origin:0 50%; transform:rotate(' + ang + 'deg); cursor:grab;';
     const line = document.createElement('div');
-    line.style.cssText = 'position:absolute; left:0; top:' + (hit / 2 - wt / 2) + 'px; width:100%; height:' + wt + 'px; background:' + color + ';' + (sel ? ' box-shadow:0 0 0 1px var(--ui-active);' : '');
+    line.style.cssText = 'position:absolute; left:0; top:' + (hit / 2 - wt / 2) + 'px; width:100%; height:' + wt + 'px; background:' + color + ';' + (sel ? ' box-shadow:0 0 0 1px var(--selected);' : '');
     wrap.appendChild(line);
     if (withHead) {
         const hH = 3 + wt * 1.2, hL = 6 + wt * 2.2;
@@ -29706,7 +29706,7 @@ function _mbSegEl(Ax, Ay, Bx, By, color, wt, withHead, sel) {
 function _mbDot(px, py, onDown, color) {
     const hnd = document.createElement('div');
     hnd.className = '_dsChrome';
-    hnd.style.cssText = 'position:absolute; left:' + (px - 6) + 'px; top:' + (py - 6) + 'px; width:12px; height:12px; background:' + (color || 'var(--ui-active)') + '; border:2px solid #fff; border-radius:50%; cursor:move; z-index:20;';
+    hnd.style.cssText = 'position:absolute; left:' + (px - 6) + 'px; top:' + (py - 6) + 'px; width:12px; height:12px; background:' + (color || 'var(--selected)') + '; border:2px solid #fff; border-radius:50%; cursor:move; z-index:20;';
     if (onDown) hnd.onmousedown = onDown;
     return hnd;
 }
@@ -30133,7 +30133,7 @@ function _dsRenderLayersPanel() {
     const row = (label, item, selected, isAnn, onSelect, pos) => {
         const r = document.createElement('div');
         r.draggable = true;
-        r.style.cssText = 'display:flex; align-items:center; gap:5px; padding:4px 8px; border-bottom:1px solid rgba(120,120,130,0.12); cursor:grab;' + (selected ? ' background:rgba(106,106,255,0.18);' : '') + (item.hidden ? ' opacity:0.55;' : '');
+        r.style.cssText = 'display:flex; align-items:center; gap:5px; padding:4px 8px; border-bottom:1px solid rgba(120,120,130,0.12); cursor:grab;' + (selected ? ' background:color-mix(in srgb, var(--ui-active) 18%, transparent);' : '') + (item.hidden ? ' opacity:0.55;' : '');
         r.ondragstart = (e) => { _dsLayersDragFrom = pos; e.dataTransfer.effectAllowed = 'move'; r.style.opacity = '0.4'; };
         r.ondragend = () => { r.style.opacity = item.hidden ? '0.55' : '1'; };
         r.ondragover = (e) => { e.preventDefault(); r.style.borderTop = '2px solid var(--ui-active)'; };
@@ -30311,10 +30311,10 @@ function renderMoodboardCanvas() {
         try { const annL = _mbCurAnnList(); if (annL) (_mbSelAnn || []).forEach(ix => { const b2 = _mbAnnBox(annL.list[ix]); if (!b2) return; L = Math.min(L, b2.x); T = Math.min(T, b2.y); R = Math.max(R, b2.x + b2.w); B = Math.max(B, b2.y + b2.h); }); } catch (e) {}
         if (!isFinite(L) || !isFinite(R)) return;
         const g = document.createElement('div');
-        g.style.cssText = 'position:absolute; left:' + (L * 100) + '%; top:' + (T * 100) + '%; width:' + ((R - L) * 100) + '%; height:' + ((B - T) * 100) + '%; border:1.5px dashed var(--ui-active); border-radius:var(--r-4); pointer-events:none; z-index:9000;';
+        g.style.cssText = 'position:absolute; left:' + (L * 100) + '%; top:' + (T * 100) + '%; width:' + ((R - L) * 100) + '%; height:' + ((B - T) * 100) + '%; border:1.5px dashed var(--selected); border-radius:var(--r-4); pointer-events:none; z-index:9000;';
         const chip = document.createElement('div');
         chip.textContent = selCount + ' selected \u2014 drag any one to move all';
-        chip.style.cssText = 'position:absolute; top:-20px; left:0; background:var(--ui-active); color:#fff; font:600 10px Arial,sans-serif; padding:2px 7px; border-radius:var(--r-8); white-space:nowrap;';
+        chip.style.cssText = 'position:absolute; top:-20px; left:0; background:var(--selected); color:#fff; font:600 10px Arial,sans-serif; padding:2px 7px; border-radius:var(--r-8); white-space:nowrap;';
         g.appendChild(chip);
         canvas.appendChild(g);
     })();
@@ -30352,17 +30352,17 @@ function renderMoodboardCanvas() {
             const fs = Math.max(8, (t.size || 0.045) * cr.height);
             const _mlh = (typeof t.leading === 'number' && t.leading > 0) ? ((t.leading / 540) * cr.height) / fs : 1.15;
             const _mink = (_mbActiveCanvasId === 'dsLayoutCanvas' && _dsPages[_dsIndex]) ? _dsDisplayInk(t.color || '#222', _deckPageKey(_dsPages[_dsIndex])) : (t.color || '#222');
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:' + _mlh + '; color:' + _mink + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + _textExtraCss(t, _mink) + (sel ? ' outline:1px dashed var(--ui-active); outline-offset:2px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; font-size:' + fs + 'px; line-height:' + _mlh + '; color:' + _mink + '; cursor:grab; font-family:' + _mbFontCss(t.font) + '; white-space:pre-wrap; overflow-wrap:break-word; outline:none;' + _textExtraCss(t, _mink) + (sel ? ' outline:1px dashed var(--selected); outline-offset:2px;' : '');
             if (Array.isArray(t.runs) && t.runs.length) _richSpansInto(box, t, false);
             else box.textContent = _listPrefixText(t.text || 'Text', t.listStyle);
             box.title = 'Double-click to edit text';
             box.dataset.dsTgt = 'mb:' + i;
             box.ondblclick = (e) => { e.stopPropagation(); _mbBeginTextEdit(box, i); };
         } else {
-            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:' + (t.shadow ? '0 9px 24px rgba(0,0,0,0.42)' : '0 1px 6px rgba(0,0,0,0.18)') + ';' + (sel ? ' outline:2px solid var(--ui-active); outline-offset:1px;' : '');
+            box.style.cssText = 'position:absolute; left:' + (t.x * 100) + '%; top:' + (t.y * 100) + '%; width:' + (t.w * 100) + '%; height:' + ((t.h || (t.w * (936 / 540) / (t.aspect || 1.33))) * 100) + '%; overflow:hidden; cursor:grab; box-shadow:' + (t.shadow ? '0 9px 24px rgba(0,0,0,0.42)' : '0 1px 6px rgba(0,0,0,0.18)') + ';' + (sel ? ' outline:2px solid var(--selected); outline-offset:1px;' : '');
             const boxW = t.w * cr.width, boxH = (t.h || 0.2) * cr.height;
-            box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed var(--ui-active)'; };
-            box.ondragleave = () => { box.style.outline = sel ? '1.5px solid var(--ui-active)' : ''; };
+            box.ondragover = (e) => { e.preventDefault(); box.style.outline = '2px dashed var(--selected)'; };
+            box.ondragleave = () => { box.style.outline = sel ? '1.5px solid var(--selected)' : ''; };
             box.ondrop = (e) => _mbDropImage(e, i);
             if (t.img) {
                 const cv = _imgRect(t.fit || 'cover', boxW, boxH, t.aspect || 1.33, t.zoom || 1, t.panX || 0, t.panY || 0);
@@ -30395,7 +30395,7 @@ function renderMoodboardCanvas() {
             if (sel && t.img) {   // center handle pans the image inside its crop box
                 const ph = document.createElement('div');
                 ph.title = 'Drag to pan image inside the frame';
-                ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:26px; height:26px; border-radius:50%; background:rgba(106,106,255,0.85); border:2px solid #fff; cursor:move; z-index:21; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px;';
+                ph.style.cssText = 'position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:26px; height:26px; border-radius:50%; background:color-mix(in srgb, var(--selected) 85%, transparent); border:2px solid #fff; cursor:move; z-index:21; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px;';
                 ph.textContent = '\u2725';
                 ph.onmousedown = (e) => _mbImgPanDown(e, i);
                 box.appendChild(ph);
@@ -30418,7 +30418,7 @@ function renderMoodboardCanvas() {
         canvas.appendChild(p);
     }
     if (_mbPlacing && _mbDraft) {
-        const pts = _mbDraft.pts, col = _mbDraft.color || 'var(--ui-active)';
+        const pts = _mbDraft.pts, col = _mbDraft.color || 'var(--selected)';
         for (let k = 0; k < pts.length - 1; k++) {
             canvas.appendChild(_mbSegEl(pts[k].x * cr.width, pts[k].y * cr.height, pts[k + 1].x * cr.width, pts[k + 1].y * cr.height, col, Math.max(0.5, _mbDraft.weight || 1.2), k === pts.length - 2, false));
         }
@@ -30477,8 +30477,8 @@ function _mbDrawGuides(canvas) {
     if (pg && pg.type === 'breaker') {
         // Full-bleed treatment: image runs to the edge, no title printed. The
         // footer still prints (auto-flipped to light ink) via _dsAddFooter.
-        mk('left:0; top:0; right:0; bottom:0; border:1px dashed rgba(106,106,255,0.35);');
-        mk('left:50%; top:6px; transform:translateX(-50%); font:700 9px Arial,sans-serif; letter-spacing:1px; color:rgba(106,106,255,0.5); background:rgba(255,255,255,0.6); padding:1px 6px; border-radius:var(--r-4);', 'FULL BLEED');
+        mk('left:0; top:0; right:0; bottom:0; border:1px dashed color-mix(in srgb, var(--selected) 35%, transparent);');
+        mk('left:50%; top:6px; transform:translateX(-50%); font:700 9px Arial,sans-serif; letter-spacing:1px; color:color-mix(in srgb, var(--selected) 50%, transparent); background:rgba(255,255,255,0.6); padding:1px 6px; border-radius:var(--r-4);', 'FULL BLEED');
         return;
     }
     // Safety-area frame. There is exactly ONE safety area and it belongs to
@@ -30737,7 +30737,7 @@ function _mbHandles(box, i, ty) {
     dirs.forEach(d => {
         const h = document.createElement('div');
         h.className = '_dsChrome';
-        h.style.cssText = 'position:absolute; width:8px; height:8px; background:var(--ui-active); border:1.5px solid #fff; border-radius:var(--r-2); z-index:22; ' + pos[d];
+        h.style.cssText = 'position:absolute; width:8px; height:8px; background:var(--selected); border:1.5px solid #fff; border-radius:var(--r-2); z-index:22; ' + pos[d];
         h.onmousedown = (e) => _mbHandleDown(e, i, d);
         box.appendChild(h);
     });
@@ -30783,7 +30783,7 @@ function _mbMarqueeStart(e) {
     canvas.style.userSelect = 'none';
     _mbMarquee = { r, x0: e.clientX, y0: e.clientY, moved: false, additive: e.shiftKey };
     const box = document.createElement('div'); box.id = '_mbMarqueeBox'; box.className = '_dsChrome';
-    box.style.cssText = 'position:absolute; border:1px solid var(--ui-active); background:rgba(106,106,255,0.12); z-index:30; pointer-events:none; left:' + (e.clientX - r.left) + 'px; top:' + (e.clientY - r.top) + 'px; width:0; height:0;';
+    box.style.cssText = 'position:absolute; border:1px solid var(--selected); background:color-mix(in srgb, var(--selected) 12%, transparent); z-index:30; pointer-events:none; left:' + (e.clientX - r.left) + 'px; top:' + (e.clientY - r.top) + 'px; width:0; height:0;';
     canvas.appendChild(box); _mbMarquee.box = box;
     document.addEventListener('mousemove', _mbMarqueeMove); document.addEventListener('mouseup', _mbMarqueeUp);
 }
@@ -38768,7 +38768,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
@@ -40342,7 +40342,7 @@ function _elevMarqueeStart(e) {
     const r = wall.getBoundingClientRect();
     _elevMarquee = { wall, r, x0: e.clientX, y0: e.clientY, moved: false, additive: e.shiftKey };
     const box = document.createElement('div'); box.id = '_elevMarqueeBox';
-    box.style.cssText = 'position:absolute; border:1px solid var(--ui-active); background:rgba(106,106,255,0.14); z-index:60; pointer-events:none; left:' + (e.clientX - r.left) + 'px; top:' + (e.clientY - r.top) + 'px; width:0; height:0;';
+    box.style.cssText = 'position:absolute; border:1px solid var(--selected); background:color-mix(in srgb, var(--selected) 14%, transparent); z-index:60; pointer-events:none; left:' + (e.clientX - r.left) + 'px; top:' + (e.clientY - r.top) + 'px; width:0; height:0;';
     wall.appendChild(box); _elevMarquee.box = box;
     document.addEventListener('mousemove', _elevMarqueeMove);
     document.addEventListener('mouseup', _elevMarqueeUp);
@@ -41674,7 +41674,7 @@ function renderGlazingRuns(wallW, wallH) {
             // graphic on the pane it belongs to.
             grip.style.cssText = 'position:absolute; left:' + (x0 * elevScale) + 'px; bottom:'
                 + ((y0 + h) * elevScale + 3) + 'px; width:16px; height:12px; border-radius:var(--r-4);'
-                + ' background:var(--accent,var(--ui-active)); border:1px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,0.4);'
+                + ' background:var(--selected); border:1px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,0.4);'
                 + ' cursor:move; pointer-events:auto; display:flex; align-items:center; justify-content:center;';
             grip.innerHTML = '<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 9h14M5 15h14"/></svg>';
             _makeGlazingDraggable(grip, ri);
@@ -42243,7 +42243,7 @@ function renderElevUnderlay(wallW, wallH) {
     box.setAttribute('data-export-skip', '1');
     box.setAttribute('data-html2canvas-ignore', 'true');
     box.style.cssText = 'position:absolute; left:' + L + 'px; top:' + T + 'px; width:' + W + 'px; height:' + Hp
-        + 'px; border:1px dashed var(--accent,#3b82f6); box-sizing:border-box; pointer-events:none;';
+        + 'px; border:1px dashed var(--selected); box-sizing:border-box; pointer-events:none;';
     layer.appendChild(box);
     [['nw', L, T], ['ne', L + W, T], ['sw', L, T + Hp], ['se', L + W, T + Hp]].forEach(([corner, hx, hy]) => {
         const g = document.createElement('div');
@@ -42251,7 +42251,7 @@ function renderElevUnderlay(wallW, wallH) {
         g.setAttribute('data-export-skip', '1');
         g.setAttribute('data-html2canvas-ignore', 'true');
         g.style.cssText = 'position:absolute; left:' + hx + 'px; top:' + hy + 'px; width:11px; height:11px;'
-            + ' margin:-6px 0 0 -6px; background:#fff; border:2px solid var(--accent,#3b82f6);'
+            + ' margin:-6px 0 0 -6px; background:#fff; border:2px solid var(--selected);'
             + ' border-radius:var(--r-2); pointer-events:auto; z-index:2; cursor:'
             + ((corner === 'nw' || corner === 'se') ? 'nwse-resize' : 'nesw-resize') + ';';
         g.onmousedown = (ev) => _ulScaleStart(ev, corner);
@@ -43328,8 +43328,8 @@ function _ulCalMark(xU, yU) {
     d.className = '_ulCalMark';
     d.setAttribute('data-export-skip', '1');
     d.setAttribute('data-html2canvas-ignore', 'true');
-    d.style.cssText = 'position:absolute; width:9px; height:9px; border-radius:50%; background:var(--accent,#3b82f6);'
-        + ' border:2px solid #fff; box-shadow:0 0 0 1px var(--accent,#3b82f6); z-index:61; pointer-events:none;'
+    d.style.cssText = 'position:absolute; width:9px; height:9px; border-radius:50%; background:var(--selected);'
+        + ' border:2px solid #fff; box-shadow:0 0 0 1px var(--selected); z-index:61; pointer-events:none;'
         + ' transform:translate(-50%,50%); left:' + (xU * elevScale) + 'px; bottom:' + (yU * elevScale) + 'px;';
     wall.appendChild(d);
 }
@@ -44001,7 +44001,7 @@ function updateAnchorHoverDot(e) {
         dot.id = 'anchor-hover-dot';
         dot.setAttribute('data-export-skip', '1');
         dot.setAttribute('data-html2canvas-ignore', 'true');
-        dot.style.cssText = 'position:absolute; width:11px; height:11px; border-radius:50%; background:var(--accent,#3b82f6); border:2px solid #fff; box-shadow:0 0 0 1px var(--accent,#3b82f6); transform:translate(-50%,50%); z-index:70; pointer-events:none; display:none;';
+        dot.style.cssText = 'position:absolute; width:11px; height:11px; border-radius:50%; background:var(--selected); border:2px solid #fff; box-shadow:0 0 0 1px var(--selected); transform:translate(-50%,50%); z-index:70; pointer-events:none; display:none;';
         layer.appendChild(dot);
     }
     const pt = eventToElevInches(e);
@@ -44041,7 +44041,7 @@ function renderCustomLines() {
         const m = document.createElement('div');
         m.setAttribute('data-export-skip', '1');
         m.setAttribute('data-html2canvas-ignore', 'true');
-        m.style.cssText = `position:absolute; left:${lineToolFirstPt.x*elevScale}px; bottom:${lineToolFirstPt.y*elevScale}px; width:8px; height:8px; transform:translate(-50%,50%); background:var(--accent,#3b82f6); border-radius:50%; z-index:60;`;
+        m.style.cssText = `position:absolute; left:${lineToolFirstPt.x*elevScale}px; bottom:${lineToolFirstPt.y*elevScale}px; width:8px; height:8px; transform:translate(-50%,50%); background:var(--selected); border-radius:50%; z-index:60;`;
         layer.appendChild(m);
     }
     if (hidden) return; // toggle off — draw nothing else
@@ -44124,11 +44124,11 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
 
     if (type === 'h') {
         const width = spanLen * elevScale, left = originX * elevScale, bottom = originY * elevScale;
-        dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--accent,#3b82f6); outline-offset:3px;' : '');
+        dim.style.cssText = `width:${width}px; height:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--selected); outline-offset:3px;' : '');
         dim.innerHTML = `<div class="dim-line-segment"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment"></div>${_dimTicksHTML('h')}`;
     } else {
         const height = spanLen * elevScale, left = originX * elevScale, bottom = originY * elevScale;
-        dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--accent,#3b82f6); outline-offset:3px;' : '');
+        dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--selected); outline-offset:3px;' : '');
         dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>${_dimTicksHTML('v')}`;
     }
     const L = getElevCustomLines().find(l => l.id === id);
@@ -44915,7 +44915,7 @@ function buildDimControls(opts) {
     lblEl.style.zIndex = '56';
     lblEl.style.cursor = 'pointer';
     lblEl.style.pointerEvents = 'auto';
-    if (sel) dim.style.outline = '1px dashed var(--accent,#3b82f6)';
+    if (sel) dim.style.outline = '1px dashed var(--selected)';
 
     // Click number to select.
     lblEl.addEventListener('mousedown', (e) => {

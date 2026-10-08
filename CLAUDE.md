@@ -2837,6 +2837,15 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   match. The fourth blue, #3b82f6, existed ONLY as the fallback inside `var(--accent, …)`
   and did not equal `--accent`; all 11 now read the real value. `--warn` (#c98a2e) is the
   same story for amber, which had drifted to #c08a2e across app.js.
+  **IN THE LIGHT THEME THE CHROME IS MONOCHROME (17.93).** `.light-theme` overrides
+  `--accent`, `--ui-active` and `--btn-primary` to near-black, so a control that is ON
+  inverts (light grey, darker on hover, black with white type when chosen), and the
+  surfaces are warm off-white rather than blue-grey (`--bg-input` stays pure white).
+  `--selected` is NOT overridden: it is the one blue left, for things selected ON THE
+  DRAWING OR PAGE, where black would vanish into the linework. That makes the token a
+  real contract: every on-canvas outline, handle, grip, marquee and line-tool marker
+  reads `--selected`, never a chrome token, or it silently turns black in light mode.
+  `test_light_monochrome.js` lists those renderers by name; add a new one there.
   **`STATUS_DEFS` STAYS A HEX LITERAL AND MUST.** It feeds `_annHexToRgb` →
   `doc.setFillColor` for the PDF status legend, and a `var()` there parses to nothing and
   silently drops the swatch.

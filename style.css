@@ -45,7 +45,7 @@
      * A shade DARKER than #wall (#f0f2f5), the way a pasteboard sits under a
      * sheet, so the wall still reads as the page and the ink outside it reads at
      * full contrast. */
-    --elev-ground: #e9ecf0;
+    --elev-ground: #e7e4de;
 
     /* -- Modal shell --
      * The scrim and the blur are ONE value each. They were hand-written into 22
@@ -194,22 +194,34 @@
      * by its border alone.
      * --bg-input stays #ffffff deliberately. It has to be the lightest thing on
      * screen or a text field stops looking like somewhere you can type. */
-    --bg-main: #e9ecf0;
-    --bg-nav: #f2f4f7;
-    --bg-panel: #f8f9fb;
-    --bg-subpanel: #eef0f4;
+    --bg-main: #e4ded2;
+    --bg-nav: #f1ede5;
+    --bg-panel: #f7f4ee;
+    --bg-subpanel: #ebe6dc;
     --bg-input: #ffffff;
-    --border-color: #d1d5da;
+    --border-color: #d6cfc2;
     --text-strong: #111111;
     --text-main: #444444;
     --text-muted: #666666;
     
-    --btn-secondary: #e2e6ea;
-    --btn-hover: #d3d7db;
+    --btn-secondary: #e6e0d5;
+    --btn-hover: #d8d1c4;
     
-    --table-header: #f8f9fa;
-    --table-row-hover: #f0f7ff;
-    --table-row-selected: #e0efff;
+    --table-header: #f1ede5;
+    --table-row-hover: #efeae1;
+    --table-row-selected: #e3ddd1;
+
+    /* MONOCHROME, NOT BLUE. In light mode a control that is ON inverts: light grey
+     * at rest, a darker grey under the cursor, near-black with white type when
+     * chosen. --accent and --ui-active are the CHROME tokens (tabs, toggles,
+     * primary buttons, focus rings), so overriding them here is the whole switch.
+     * --selected is deliberately NOT overridden: it marks an object selected ON THE
+     * DRAWING or the page, which is black linework, and a black outline there would
+     * vanish into what it is outlining. Blue survives in light mode for that alone. */
+    --accent: #1d1b18;
+    --accent-hover: #3b3833;
+    --btn-primary: #1d1b18;
+    --ui-active: #1d1b18;
 }
 
 body { font-family: var(--ui-font); background: var(--bg-main); color: var(--text-main); margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: background 0.3s, color 0.3s; }
@@ -372,7 +384,7 @@ textarea { width: 100%; padding: 6px; border: 1px solid var(--border-color); bor
     background: var(--border-color);
 }
 .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-.btn-outline:hover { background: rgba(58, 134, 255, 0.1); }
+.btn-outline:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
 .btn-secondary { background: var(--btn-secondary); color: var(--text-strong); border: 1px solid var(--border-color);}
 .btn-secondary:hover { background: var(--btn-hover); }
 .btn-danger { background: var(--btn-danger); }
@@ -404,6 +416,7 @@ textarea { width: 100%; padding: 6px; border: 1px solid var(--border-color); bor
    outline. The outline makes the selected state unmistakable on glance — without
    it, the contrast against the toggle's own backplate was too subtle. */
 .unit-toggle button.active { background: var(--btn-secondary); color: var(--text-strong); box-shadow: 0 0 0 1px var(--accent) inset; }
+.light-theme .unit-toggle button.active { background: var(--accent); color: #fff; box-shadow: none; }
 /* Line-weight ladder — a .unit-toggle carrying SIX segments instead of two or
    three, so the labels have to give up their padding and bold to fit the same
    width. Tabular figures keep '.25' and '1' the same width, which is what stops
@@ -619,9 +632,9 @@ tr.multi-selected {
 .section-title.section-title-static { cursor: default; }
 .section-title.section-title-static:hover { color: var(--text-strong); }
 /* ── Artwork drag-and-drop targets ── */
-.art-drop-zone.art-drop-hover { border-color: var(--accent) !important; background: rgba(120,160,255,0.08); }
+.art-drop-zone.art-drop-hover { border-color: var(--accent) !important; background: color-mix(in srgb, var(--accent) 8%, transparent); }
 #dash-frame-visual.art-drop-hover { outline: 2px dashed var(--accent); outline-offset: 3px; }
-.frame-vis.art-drop-hover { outline: 2px solid var(--accent); outline-offset: 2px; cursor: copy; }
+.frame-vis.art-drop-hover { outline: 2px solid var(--selected); outline-offset: 2px; cursor: copy; }
 .frame-imgcode-caption { font-family: Arial, Helvetica, sans-serif; }
 #m_artworkDrop:hover { border-color: var(--text-muted); }
 /* ── Bulk Edit: the real dashboard form panel is moved into the modal ── */
@@ -2350,7 +2363,7 @@ select.fp-cat-chip { color: transparent !important; text-shadow: none; }
 select.fp-cat-chip option { color: var(--text-strong); background: var(--bg-panel); }
 
 /* An image dragged over a frame on a spec page: the page says it will take it. */
-.ds-art-drop { outline: 3px dashed var(--ui-active); outline-offset: -3px; }
+.ds-art-drop { outline: 3px dashed var(--selected); outline-offset: -3px; }
 
 /* ── Options: the chooser and the map ─────────────────────────────────────── */
 .cat-kind {
