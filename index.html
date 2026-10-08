@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=17.94">
+    <link rel="stylesheet" href="style.css?v=17.95">
 </head>
 <body>
 
@@ -156,6 +156,8 @@
                                  Useful when the table is too long to drag rows around
                                  conveniently. -->
                             <button class="action-btn btn-secondary" style="width:auto;" onclick="openMoveToModal()">Move To…</button>
+                            <!-- Codes: the floorplan Items list runs every item code (17.95). -->
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="_jumpToCodes()" title="Open the floorplan Items list, where every code is added, renamed and dragged into order. The number sets the order everywhere.">Codes</button>
                             <!-- Bulk Edit: change one field on all selected rows at once.
                                  Single-field-per-run keeps the UI simple. -->
                             <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkEditModal()">Bulk Edit…</button>
@@ -253,7 +255,7 @@
                     <div class="section-title" onclick="toggleDashSection('sec-meta', this)">Item Metadata <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
                     <div id="sec-meta" class="collapsible-section open">
                         <div class="grid-custom-meta">
-                            <div><label>Item Code</label><input type="text" id="m_itemCode" oninput="syncDashAndCalculate()"></div>
+                            <div><label>Item Code</label><input type="text" id="m_itemCode" onchange="_codesCommitFormId(this)" onkeydown="if(event.key==='Enter')this.blur()" title="The number sets the order everywhere. Type a number to move it there."></div>
                             <div><label>Image Code</label><input type="text" id="m_imageCode" oninput="syncDashAndCalculate()"></div>
                             <div><label>Level</label><input type="text" id="m_level" oninput="syncDashAndCalculate()"></div>
                             <div><label>Qty</label><input type="number" id="m_qty" oninput="syncDashAndCalculate()" disabled title="Auto-Calculated by Elevations"></div>
@@ -877,7 +879,7 @@
                                  template + location number, then bulk-renames all frame
                                  ITEM CODES in this elevation to follow that pattern.
                                  Optionally reorders the dashboard rows to match. -->
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openRenumberModal()" title="Re-number all ITEM CODES in this elevation">
+                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="_jumpToCodes()" title="Item codes: open the floorplan Items list, where every code is added, renamed and dragged into order">
                                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
                             </button>
                             <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
@@ -2468,8 +2470,8 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '17.94';</script>
-<script src="app.js?v=17.94"></script>
+<script>window.FRAME_HTML_VERSION = '17.95';</script>
+<script src="app.js?v=17.95"></script>
 
 </body>
 </html>

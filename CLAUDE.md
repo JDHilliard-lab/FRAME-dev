@@ -51,7 +51,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-144 files, 2055 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+157 files, 2165 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -435,6 +435,39 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   and drops the title and the `ALL PRINT FILES` footer. It borrows the second spec column
   ONLY on a single-graphic sheet — on a shared sheet that column is the other graphic’s,
   and taking it would draw one table through the other’s specs.
+- **ITEM CODES ARE IN NUMBER ORDER EVERYWHERE, AND IT IS NOT A SETTING (17.95).** Asked
+  for as "set in stone, I do not want designer presentations looking different from one
+  another", so there is no toggle and none should be added. Every surface that lists codes
+  (dashboard, Items list, plan legend, spec pages, CSV) reads `dashProjectData` in stored
+  order, so the rule is enforced on the DATA: `_codesSortRows()` (type order ART, EGD, WF
+  from `_codePrefixOrder`, then number, then piece letter) and `_codesSortWalls()` (a wall
+  sorts by the lowest code on it; blank walls last). 17.92's renumber closed gaps by
+  renaming in place while rows stayed put, which is how a deck read ART.1, ART.3, ART.2.
+  **Four gestures, one rule each.** `_codesSettle()` after anything that adds, deletes or
+  recodes (closes gaps, sorts rows and walls). `_codesAdoptRowOrder()` after a USER
+  reorder (dashboard drag, Move To): the new order IS the instruction, so it renumbers.
+  `_codesMovePlacement` / `_codesMoveBeside` for the Items drag. `_codesRenameRow` for a
+  typed code: the NUMBER is a position (ART.9 on a five-code project lands as ART.5), a new
+  PREFIX recodes through `_recodeForCategory`, a letter change renames one piece, and a
+  number change on one piece of a set moves the whole set. None push history; the caller
+  does, so a gesture is one Ctrl+Z.
+  **A structured or catalogue code is never renumbered and RESERVES its number**
+  (`_renumberPrefix`), or ART.5 closes up onto ART.1 beside ART.1.2A and two placements
+  print as one. **`applyIdRename(…, quiet)`** skips its four re-renders: a renumber renames
+  every piece twice, and per-row redraws made sixty codes crawl; `_codesRefreshViews()`
+  redraws once. `_fpRenameGroup` also renames a wall NAMED after the code ("ART.4 LOBBY"),
+  at a word boundary.
+  **The code field commits on change, never per keystroke** (table cell, `m_itemCode`,
+  the wall frame field). The live rename renamed wall frames on every key, so typing ART.12
+  passed through ART.1 and merged two pieces' frames irreversibly.
+  `_codesSortRows()` also runs at the top of `renderDashTable`, `_deckPageList` and
+  `_fpFillItemList` as a cheap safety net (it returns early when already sorted), which is
+  why a negative control removing the settle from `_fpAddCodes` stays green.
+  **The floorplan Items list is where codes are run from**; `_jumpToCodes()` (dashboard
+  Codes button, the Elevations # button, which used to open a template renumber that minted
+  a second scheme) opens it with a Back bar (`deckReturnBar`, filled by `_returnBarInto`
+  because the panel is built before it is attached). The template renumber modal
+  (`openRenumberModal` / `renumberElevation`) is now unreferenced from the UI.
 - **A ROW CAN BE PINNED ON SEVERAL PLANS** (`r.planPins = [{lv,x,y}]`). A hotel deck
   carries an overall floor plan plus a plan per guestroom type and the same piece hangs in
   all of them; with one pin per row, placing the code on Guestroom B silently took it off

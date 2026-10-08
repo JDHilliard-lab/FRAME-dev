@@ -2434,3 +2434,7 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .start-choice .svg-icon { width: 26px; height: 26px; color: var(--ui-active); }
 .start-choice strong { font-family: var(--ui-display); font-size: var(--fs-105); letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-strong); }
 .start-choice span { font-size: var(--fs-70); color: var(--text-muted); line-height: 1.45; }
+
+/* Floorplan Items: drag a code to renumber it. The bar marks the gap it will land in. */
+.fp-drop-before { box-shadow: inset 0 2px 0 var(--ui-active) !important; }
+.fp-drop-after { box-shadow: inset 0 -2px 0 var(--ui-active) !important; }

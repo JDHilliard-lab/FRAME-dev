@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.94';
+const APP_VERSION = '17.95';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6282,6 +6282,11 @@ function reorderElevation(fromIdx, toIdx) {
     // Move via splice-remove + splice-insert. Standard array reorder pattern.
     const [moved] = elevations.splice(fromIdx, 1);
     elevations.splice(toIdx, 0, moved);
+    // Walls follow their codes, so a wall holding coded frames cannot be dragged out of
+    // order; renumber the code instead. A drop that only does that snaps back and says so.
+    const _wantOrder = elevations.slice();
+    _codesSortWalls();
+    if (elevations.some((e, i) => e !== _wantOrder[i])) _toast('Walls stay in code order', 'Change a code (or drag it in the floorplan Items list) to move its wall.');
 
     // A variation points at its source by ID, so a reorder moves nothing it can
     // see; only the numeric mirror is re-derived. This block used to shift the
@@ -6878,6 +6883,10 @@ function _readProjectText(text) {
             floorplanLevels = Array.isArray(data.floorplanLevels) ? data.floorplanLevels : [];
             _fpLevel = 0; _fpMigrate();
             editorialContent = _editorialFromFile(data.editorial);
+            // Code order is the house standard, so a project opens in it: gaps closed,
+            // rows and walls sorted. Needs the categories (prefix order) and the walls
+            // (catalogue structure), so it runs here and not earlier.
+            try { _codesSettle(); } catch (e) {}
             // The drafting standard, when the file carries one. OPTIONAL by design:
             // absent means the file predates the idea (or was written by a tool that
             // doesn't set it), and the machine's own preference is then correct — so
@@ -10417,6 +10426,7 @@ function applyDuplicateSeries() {
     });
     // Insert all new rows just after source
     dashProjectData.splice(sourceIdx + 1, 0, ...newRows);
+    _codesSettle();
 
     recalculateDashboardQuantities();
     renderDashTable();
@@ -10447,6 +10457,8 @@ function addDashRow() {
         : dashProjectData.length;
     dashProjectData.splice(insertAt, 0, newRow);
     dashSelectedRowIndex = insertAt;
+    // A new code takes the next number, so it sorts to the end of its type.
+    _codesSettle();
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(newRow.id);
     pushHistory();
@@ -10464,6 +10476,8 @@ function duplicateDashRow() {
         : dashProjectData.length;
     dashProjectData.splice(insertAt, 0, newRow);
     dashSelectedRowIndex = insertAt;
+    // A new code takes the next number, so it sorts to the end of its type.
+    _codesSettle();
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(newRow.id);
     pushHistory();
@@ -10486,6 +10500,10 @@ function deleteDashRow() {
     dashSelectedRowIndex = Math.max(0, dashSelectedRowIndex - 1);
     
     elevations.forEach(elev => { elev.frames = elev.frames.filter(f => f.id !== idToDelete); });
+    // The gap it leaves closes: the codes after it move up one.
+    const _mv = _codesSettle();
+    _codesRefreshViews();
+    _codesAnnounce(null, null, _mv);
     
     loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
     renderDashTable(); checkGlobalEditingWarning(dashProjectData[dashSelectedRowIndex].id);
@@ -10707,8 +10725,10 @@ function syncDashAndCalculate() {
     const getStr = (id) => getRaw(id);
     const row = _bulkEditing ? (_bulkScratch || {}) : dashProjectData[dashSelectedRowIndex];
     
-    const oldId = row.id; const newId = getStr('m_itemCode');
-    if (!_bulkEditing && oldId !== newId) { elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = newId; }); }); }
+    // The CODE is not synced per keystroke: typing ART.12 passes through ART.1, and a
+    // live rename merged the two pieces' wall frames on the way. It commits on Enter or
+    // blur through _codesCommitFormId, which also keeps the numbering in order.
+    const oldId = row.id; const newId = _bulkEditing ? getStr('m_itemCode') : row.id;
 
     const isColor = getStr('fType') === 'color';
     const isLinked = document.getElementById('matLinkBtn').classList.contains('active');
@@ -11356,6 +11376,7 @@ function importDashCSV(e) {
 
         dashProjectData = newData;
         dashSelectedRowIndex = 0;
+        _codesSettle({ walls: false });
         loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
         renderDashTable();
         elevations.forEach(elev => elev.frames = []);
@@ -16759,6 +16780,8 @@ function _deckSpecRows() {
 }
 function _deckPageList() {
     _mbMigratePages(); _fpMigrate();
+    // Spec pages print in row order, so rows in code order is pages in code order.
+    try { _codesSortRows(); } catch (e) {}
     // drawElevAll only runs while the Elevations tab is drawing, so a deck rebuilt from
     // the Deck tab would render options against whatever the mockup looked like when it
     // was last on screen. Cheap: a pass of scalar compares over the walls, and the deep
@@ -27270,6 +27293,11 @@ function _fpPanelItems(t, desc) {
 
     // ADD CODES FROM HERE. A project can start on the floorplan: list what goes where
     // before a single frame is specced, and before there is even a plan image to pin on.
+    // The way back to the dashboard or the wall, when the Codes button brought you here.
+    const _rb = document.createElement('div');
+    _rb.id = 'deckReturnBar';
+    _returnBarInto(_rb, 'deck');
+    t.appendChild(_rb);
     t.appendChild(_fpAddCodesBar(desc));
 
     const groups = _fpGroups();
@@ -27424,6 +27452,9 @@ function _fpAddCodes(catKey, n) {
         }
         dashProjectData.push(row);
     }
+    // Pushed at the end of the schedule, then sorted in behind its own type: an EGD
+    // added after ART.4 belongs after EGD.1, not after ART.4.
+    _codesSettle();
     if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
     if (typeof pushHistory === 'function') pushHistory();
@@ -27583,6 +27614,7 @@ function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
     const kOut = unitFactor(dashUnit, 'in');
     const lay = pre0 || _frameSetLayout(n, '', rows.map(r => [parseFloat(r.extW) * kOut, parseFloat(r.extH) * kOut]));
     _fpMockSetOnWall(key, rows, lay);
+    _codesSettle();
     recalculateDashboardQuantities();
     if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
@@ -27668,33 +27700,321 @@ function _recodeForCategory(key, cat) {
         to = _nextPlacementCode(info.prefix);
         _fpRenameGroup(key, to, { quiet: true });
     }
-    const a = _renumberPrefix(p.prefix), b = (p.prefix !== info.prefix) ? _renumberPrefix(info.prefix) : {};
-    const final = b[to] || a[to] || to;
-    return { from: key, to: final, renumbered: Object.keys(a).length + Object.keys(b).length > 0 };
+    const moves = _codesSettle();
+    const final = moves[to] || to;
+    return { from: key, to: final, renumbered: Object.keys(moves).length > 0 };
 }
-// Renumber every plain placement of one prefix to 1..n in its current order, keeping the
-// project's padding. Two passes through temporary codes, so ART.3 -> ART.2 can never meet
-// an ART.2 that has not moved yet. Returns { oldKey: newKey } for what moved.
-function _renumberPrefix(prefix) {
+
+// ── ITEM CODES ARE IN ORDER, EVERYWHERE, AND THAT IS NOT A SETTING (17.95) ──────────
+// The NUMBER is the order. ART.1, ART.2, ART.3, then EGD.1, EGD.2, then WF.1, with no
+// gaps, in the dashboard, the floorplan Items list and legend, the wall rail, the spec
+// pages and the CSV. Every one of those reads the dashboard rows (or the walls) in
+// stored order, so the rule is enforced on the DATA and they all follow for free.
+// Asked for in these words: "it has to be set in stone, I do not want designer
+// presentations looking different from one another." So there is no option, and every
+// gesture that would put the two out of step is turned into one that keeps them together:
+//   - a NEW code takes the next number (_codesSettle sorts it into place),
+//   - a DELETED code closes its gap,
+//   - a REORDER (dashboard drag, Move To, Items drag) RENUMBERS to match the new order,
+//   - TYPING a number moves the placement to that position, renumbering around it.
+// Before this, 17.92's renumber closed gaps by renaming codes in place while every row
+// stayed where it was, and + Add code appended at the end, so a project read ART.1,
+// ART.3, ART.2, EGD.1, WF.1, ART.4 down the dashboard and 01, 03, 02, 04 on the plan.
+//
+// Catalogue codes (ART.1.2, an arrangement's slots, an option's rows) are STRUCTURE and
+// are never renumbered, but they still sort by their placement number, and that number
+// is RESERVED so a plain code can never be renumbered onto it.
+//
+// Prefix order: the type list (ART, EGD, WF), then any prefix a project category adds,
+// then anything else A to Z. A code with no prefix-and-number sorts last, in its order.
+function _codePrefixOrder() {
+    const out = [];
+    let cats = [];
+    try { cats = _artCats() || []; } catch (e) {}
+    ART_CATEGORY_TYPES.concat(cats).forEach(c => { if (c && c.prefix && out.indexOf(c.prefix) < 0) out.push(c.prefix); });
+    return out;
+}
+// Prefix and placement number of ANY code, plain or catalogue: ART.12B, ART.01A.1, EGD-3.
+function _codeSortParts(id) {
+    const m = /^([A-Za-z]+)[.\-_ ]?(\d+)/.exec(String(id || '').trim());
+    return m ? { prefix: m[1], n: parseInt(m[2], 10) } : null;
+}
+function _codeRowKey(id, idx, cr, order) {
+    const sp = _codeSortParts(id);
+    if (!sp) return { rank: Infinity, prefix: '', n: 0, cat: 0, suf: '', idx: idx };
+    const r = order.indexOf(sp.prefix);
+    const isCat = !!(cr && cr[id]);
+    const gk = _artGroupKey(id);
+    return { rank: r < 0 ? 1000 : r, prefix: sp.prefix, n: sp.n, cat: isCat ? 1 : 0,
+             suf: isCat ? '' : String(id).slice(gk.length).replace(/^[-_.\s]+/, ''), idx: idx };
+}
+function _codeKeyCmp(a, b) {
+    if (a.rank !== b.rank) return a.rank < b.rank ? -1 : 1;
+    if (a.prefix !== b.prefix) return a.prefix < b.prefix ? -1 : 1;
+    if (a.n !== b.n) return a.n - b.n;
+    if (a.cat !== b.cat) return a.cat - b.cat;
+    // Piece letters: A..Z then AA (shortest first), the order _setLetters mints them in.
+    // A catalogue placement keeps its own order: its rows encode a tree, not a count.
+    if (!a.cat && a.suf !== b.suf) {
+        if (a.suf.length !== b.suf.length) return a.suf.length - b.suf.length;
+        return a.suf < b.suf ? -1 : 1;
+    }
+    return a.idx - b.idx;
+}
+// Sort the dashboard rows into code order IN PLACE (other code holds the array), keeping
+// the selection on the same ROWS. Returns whether anything moved. Cheap when nothing
+// did, which is why it can sit at the top of the renderers as a safety net.
+function _codesSortRows() {
+    const rows = (typeof dashProjectData !== 'undefined' && dashProjectData) || [];
+    if (rows.length < 2) return false;
+    const cr = _catalogueRowIds(), order = _codePrefixOrder();
+    const keyed = rows.map((r, i) => ({ r: r, k: _codeRowKey(r && r.id, i, cr, order) }));
+    keyed.sort((x, y) => _codeKeyCmp(x.k, y.k));
+    if (keyed.every((x, i) => x.k.idx === i)) return false;
+    const sel = rows[dashSelectedRowIndex];
+    const multi = (typeof dashMultiSelectedIndices !== 'undefined') ? [...dashMultiSelectedIndices].map(i => rows[i]) : [];
+    keyed.forEach((x, i) => { rows[i] = x.r; });
+    const si = rows.indexOf(sel);
+    if (si >= 0) dashSelectedRowIndex = si;
+    if (typeof dashMultiSelectedIndices !== 'undefined') {
+        dashMultiSelectedIndices.clear();
+        multi.forEach(r => { const i = rows.indexOf(r); if (i >= 0) dashMultiSelectedIndices.add(i); });
+    }
+    return true;
+}
+// Walls follow their codes too: a wall sorts by the lowest code hanging on it. A wall
+// with nothing on it goes last. Stable, so a catalogue's mockup, layouts and options
+// (which all share one placement number) keep the order their minters gave them.
+function _codesSortWalls() {
+    const els = (typeof elevations !== 'undefined' && elevations) || [];
+    if (els.length < 2) return false;
+    const cr = _catalogueRowIds(), order = _codePrefixOrder();
+    const none = { rank: Infinity, prefix: '', n: 0, cat: 0, suf: '' };
+    const keyed = els.map((e, i) => {
+        let best = null;
+        ((e && e.frames) || []).forEach(f => {
+            if (!f || !f.id) return;
+            const k = _codeRowKey(f.id, 0, cr, order);
+            if (k.rank === Infinity) return;
+            if (!best || _codeKeyCmp(k, best) < 0) best = k;
+        });
+        const k = Object.assign({}, best || none, { idx: i, suf: '', cat: 0 });
+        return { e: e, k: k };
+    });
+    keyed.sort((x, y) => _codeKeyCmp(x.k, y.k));
+    if (keyed.every((x, i) => x.k.idx === i)) return false;
+    const active = els[currentElevIndex];
+    keyed.forEach((x, i) => { els[i] = x.e; });
+    const ai = els.indexOf(active);
+    if (ai >= 0) currentElevIndex = ai;
+    try { _elevSyncVariationPrimary(); } catch (e) {}
+    return true;
+}
+// Every prefix that has a plain (renumberable) placement.
+function _codePrefixesInUse() {
+    const cr = _catalogueRowIds(), out = [];
+    (dashProjectData || []).forEach(r => {
+        if (!r || !r.id || cr[r.id]) return;
+        const p = _plainCodeParts(_artGroupKey(r.id));
+        if (p && out.indexOf(p.prefix) < 0) out.push(p.prefix);
+    });
+    return out;
+}
+// Renumber every plain placement of one prefix to 1..n, in numeric order or in the
+// ORDER given (a list of placement keys; any not listed follow in numeric order),
+// skipping numbers a catalogue placement owns and keeping the project's padding. Two
+// passes through temporary codes, so ART.3 -> ART.2 can never meet an ART.2 that has
+// not moved yet. Returns { oldKey: newKey } for what moved.
+function _renumberPrefix(prefix, order) {
     const cr = _catalogueRowIds();
-    const seen = {}, keys = [];
+    const seen = {}, keys = [], reserved = {};
+    (dashProjectData || []).forEach(r => {
+        if (!r || !r.id) return;
+        const k = _artGroupKey(r.id), p = _plainCodeParts(k);
+        // A catalogue or structured code (ART.1.2A) is not renumbered, and it OWNS its
+        // placement number: renumbering ART.5 onto ART.1 beside it would make two
+        // placements read as one on the plan and in the page titles.
+        if (cr[r.id] || !p) { const sp = _codeSortParts(r.id); if (sp && sp.prefix === prefix) reserved[sp.n] = true; return; }
+        if (p.prefix !== prefix || seen[k]) return;
+        seen[k] = true; keys.push(k);
+    });
+    let list = keys.slice().sort((x, y) => _plainCodeParts(x).n - _plainCodeParts(y).n);
+    if (Array.isArray(order)) {
+        const first = order.filter((k, i) => seen[k] && order.indexOf(k) === i);
+        list = first.concat(list.filter(k => first.indexOf(k) < 0));
+    }
+    const padded = keys.some(k => { const r = _plainCodeParts(k).raw; return r.length > 1 && r.charAt(0) === '0'; });
+    let n = 0;
+    const want = list.map(() => { do { n++; } while (reserved[n]); return prefix + '.' + (padded ? String(n).padStart(3, '0') : String(n)); });
+    const moves = {};
+    list.forEach((k, i) => { if (k !== want[i]) moves[k] = want[i]; });
+    const mv = Object.keys(moves);
+    if (!mv.length) return {};
+    const tmp = {}, stamp = Date.now().toString(36);
+    mv.forEach((k, i) => { tmp[k] = '__RN' + i + '__' + stamp + '.9'; _fpRenameGroup(k, tmp[k], { quiet: true, force: true }); });
+    mv.forEach(k => _fpRenameGroup(tmp[k], moves[k], { quiet: true, force: true }));
+    return moves;
+}
+// THE ONE CALL after anything that adds, removes or recodes a placement: close every
+// gap, then put the rows and the walls in code order. Pushes no history; the caller's
+// own entry covers it, so one gesture is one Ctrl+Z.
+function _codesSettle(opts) {
+    const moves = {};
+    _codePrefixesInUse().forEach(p => Object.assign(moves, _renumberPrefix(p)));
+    _codesSortRows();
+    if (!opts || opts.walls !== false) _codesSortWalls();
+    return moves;
+}
+// After the USER reorders rows (a drag, Move To): the new order is the instruction, so
+// each prefix renumbers in the order its placements now FIRST appear, then everything
+// sorts. Moving ART.4's first row above ART.2 makes it ART.2.
+function _codesAdoptRowOrder() {
+    const cr = _catalogueRowIds(), byPrefix = {};
     (dashProjectData || []).forEach(r => {
         if (!r || !r.id || cr[r.id]) return;
         const k = _artGroupKey(r.id), p = _plainCodeParts(k);
-        if (!p || p.prefix !== prefix || seen[k]) return;
-        seen[k] = true; keys.push(k);
+        if (!p) return;
+        const a = byPrefix[p.prefix] = byPrefix[p.prefix] || [];
+        if (a.indexOf(k) < 0) a.push(k);
     });
-    keys.sort((x, y) => _plainCodeParts(x).n - _plainCodeParts(y).n);
-    const padded = keys.some(k => { const r = _plainCodeParts(k).raw; return r.length > 1 && r.charAt(0) === '0'; });
-    const want = keys.map((k, i) => prefix + '.' + (padded ? String(i + 1).padStart(3, '0') : String(i + 1)));
     const moves = {};
-    keys.forEach((k, i) => { if (k !== want[i]) moves[k] = want[i]; });
-    const list = Object.keys(moves);
-    if (!list.length) return {};
-    const tmp = {};
-    list.forEach((k, i) => { tmp[k] = '__RN' + i + '__' + Date.now().toString(36) + '.9'; _fpRenameGroup(k, tmp[k], { quiet: true, force: true }); });
-    list.forEach(k => _fpRenameGroup(tmp[k], moves[k], { quiet: true, force: true }));
+    Object.keys(byPrefix).forEach(p => Object.assign(moves, _renumberPrefix(p, byPrefix[p])));
+    _codesSortRows(); _codesSortWalls();
     return moves;
+}
+// Plain placement keys of one prefix, in number order.
+function _codesPlainKeys(prefix) {
+    const cr = _catalogueRowIds(), out = [];
+    (dashProjectData || []).forEach(r => {
+        if (!r || !r.id || cr[r.id]) return;
+        const k = _artGroupKey(r.id), p = _plainCodeParts(k);
+        if (p && p.prefix === prefix && out.indexOf(k) < 0) out.push(k);
+    });
+    return out.sort((x, y) => _plainCodeParts(x).n - _plainCodeParts(y).n);
+}
+// Move one placement to position `pos` (1-based) among its prefix and renumber around
+// it. Returns the placement's final key. Tracked by ROW, because the renumber renames
+// the key out from under any string we hold.
+function _codesMovePlacement(key, pos) {
+    const p = _plainCodeParts(key);
+    const row = (dashProjectData || []).find(r => r && _artGroupKey(r.id) === key);
+    if (!p || !row) return key;
+    const list = _codesPlainKeys(p.prefix).filter(k => k !== key);
+    const at = Math.max(0, Math.min(list.length, (pos | 0) - 1));
+    list.splice(at, 0, key);
+    _renumberPrefix(p.prefix, list);
+    _codesSortRows(); _codesSortWalls();
+    return _artGroupKey(row.id);
+}
+// Drop one placement just before or after another of the same prefix (the Items drag).
+function _codesMoveBeside(key, targetKey, after) {
+    const a = _plainCodeParts(key), b = _plainCodeParts(targetKey);
+    if (!a || !b || key === targetKey) return null;
+    if (a.prefix !== b.prefix) return null;
+    const list = _codesPlainKeys(a.prefix).filter(k => k !== key);
+    const ti = list.indexOf(targetKey);
+    if (ti < 0) return null;
+    return _codesMovePlacement(key, ti + (after ? 2 : 1));
+}
+// A type category for a prefix: the row's own category if it already has that prefix,
+// else the first category in the project's list that does, else the built-in type.
+function _codeCategoryForPrefix(prefix, cur) {
+    try { if (cur && _catCodeInfo(cur).prefix === prefix && _isTypeCategory(cur)) return cur; } catch (e) {}
+    const c = _artCats().find(x => x && x.key && _isTypeCategory(x.key) && _catCodeInfo(x.key).prefix === prefix);
+    if (c) return c.key;
+    const t = ART_CATEGORY_TYPES.find(x => x.prefix === prefix);
+    return t ? t.key : null;
+}
+// Give a placement a typed code: a different PREFIX recodes it to that type (product and
+// all, the 17.92 rule), and the NUMBER is the position it takes. ART.9 on a project with
+// five ART codes is ART.5, at the end: the number says where, never leaves a gap.
+// Returns the final key, or null when it refused (and said why).
+function _codesRenamePlacement(fromKey, toKey) {
+    const a = _plainCodeParts(fromKey), b = _plainCodeParts(toKey);
+    if (!a) return null;
+    if (!b) {
+        _toast('Codes are a type and a number', 'Like ART.4 or EGD.2. The number sets the order everywhere, so ' + fromKey + ' was left as it is.');
+        return null;
+    }
+    const row = (dashProjectData || []).find(r => r && _artGroupKey(r.id) === fromKey);
+    if (!row) return null;
+    if (_catalogueRowIds()[row.id]) return null;
+    if (b.prefix !== a.prefix) {
+        const cat = _codeCategoryForPrefix(b.prefix, row.category);
+        if (!cat) { _toast('No type uses ' + b.prefix, 'Add a category with that prefix first, or use ART, EGD or WF.'); return null; }
+        const g = _fpFindGroup(fromKey);
+        (g ? g.rows : [row]).forEach(r => { r.category = cat; });
+        _recodeForCategory(fromKey, cat);
+    }
+    return _codesMovePlacement(_artGroupKey(row.id), b.n);
+}
+// A code typed into ONE ROW (the dashboard table, the dashboard form, a wall's frame
+// list). The placement part moves the whole placement, because a set's pieces are one
+// placement; the letter part renames just that piece. Returns { ok, from, to }.
+function _codesRenameRow(row, to) {
+    to = String(to || '').trim();
+    if (!row || !to || to === row.id) return { ok: false };
+    const from = row.id;
+    const taken = (id) => (dashProjectData || []).some(o => o && o !== row && o.id === id);
+    const fromKey = _artGroupKey(from), fromP = _plainCodeParts(fromKey);
+    const plainRename = () => {
+        if (taken(to)) { _toast(to + ' is already taken', 'Pick a code nothing else uses.'); return { ok: false }; }
+        applyIdRename(from, to, true);
+        _codesSettle();
+        return { ok: true, from: from, to: row.id };
+    };
+    // A catalogue row, or a code that predates the convention: renamed as typed, and
+    // still sorted into place.
+    if (_catalogueRowIds()[from] || !fromP) return plainRename();
+    const toKey = _artGroupKey(to);
+    if (toKey === fromKey) return plainRename();                 // only the piece letter changed
+    const fromSuf = from.slice(fromKey.length), toSuf = to.slice(toKey.length);
+    const g = _fpFindGroup(fromKey);
+    const many = !!(g && g.rows.length > 1);
+    if (many && toSuf !== fromSuf) {
+        _toast('Change the number to move ' + fromKey, 'Its pieces keep their letters, so type ' + (_plainCodeParts(toKey) ? toKey + fromSuf : 'a code like ART.4' + fromSuf) + '.');
+        return { ok: false };
+    }
+    const key = _codesRenamePlacement(fromKey, toKey);
+    if (!key) return { ok: false };
+    if (!many && toSuf !== fromSuf) {
+        const want = key + toSuf;
+        if (!taken(want)) { applyIdRename(row.id, want, true); _codesSortRows(); }
+    }
+    return { ok: true, from: from, to: row.id };
+}
+// Redraw everything that shows a code, once, after a batch of quiet renames.
+function _codesRefreshViews() {
+    try { if (!_bulkEditing && dashProjectData[dashSelectedRowIndex]) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]); } catch (e) {}
+    try { if (typeof elevations !== 'undefined' && elevations[currentElevIndex]) elevFrames = elevations[currentElevIndex].frames; } catch (e) {}
+    try { initElevControls(); } catch (e) {}
+    try { drawElevAll(); } catch (e) {}
+    try { renderNavTabs(); } catch (e) {}
+    try { renderDashTable(); } catch (e) {}
+    try { populateDashPushSelector(); } catch (e) {}
+    try { recalculateDashboardQuantities(); } catch (e) {}
+}
+// Say what moved, in one line. A rename that only re-sorted says nothing.
+function _codesAnnounce(from, to, moves) {
+    const n = Object.keys(moves || {}).length;
+    if (from && to && from !== to) _toast(from + ' is now ' + to, n > 1 ? 'Codes renumbered to stay in order. Ctrl+Z undoes it.' : 'Ctrl+Z undoes it.');
+    else if (n) _toast('Codes renumbered to stay in order', 'Ctrl+Z undoes it.');
+}
+// The table cell, the form field and a wall's frame field all commit here.
+function _codesCommitRowId(idx, inputEl) {
+    const row = dashProjectData[idx];
+    if (!row || !inputEl) return;
+    const res = _codesRenameRow(row, inputEl.value);
+    if (!res.ok) { inputEl.value = row.id; return; }
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _codesRefreshViews();
+    _codesAnnounce(res.from, res.to);
+    try { _dsRefresh(); } catch (e) {}
+}
+function _codesCommitFormId(inputEl) {
+    if (_bulkEditing) return;
+    _codesCommitRowId(dashSelectedRowIndex, inputEl);
 }
 
 // ── RENAME A PLACEMENT ──────────────────────────────────────────────────────
@@ -27719,12 +28039,19 @@ function _fpRenameGroup(oldKey, newKey, opts) {
         _toast('That code would split the set', 'End the code in a number, like ART.12, so its pieces stay one placement.');
         return false;
     }
-    pairs.forEach(p => applyIdRename(p.from, p.to));
+    pairs.forEach(p => applyIdRename(p.from, p.to, true));
+    // A wall named after its placement ("ART.4 LOBBY") keeps saying which one it holds.
+    // Only at a word boundary, or renaming ART.1 would rewrite "ART.12 LOBBY".
+    (elevations || []).forEach(e => {
+        const nm = String((e && e.name) || '');
+        if (nm === oldKey || nm.indexOf(oldKey + ' ') === 0) e.name = newKey + nm.slice(String(oldKey).length);
+    });
     (editorialContent.planDetails || []).forEach(pd => {
         if (pd && Array.isArray(pd.ids)) pd.ids = pd.ids.map(x => x === oldKey ? newKey : x);
     });
     _renamePageKeys(oldKey, newKey);
     if (!_o.quiet) {
+        _codesRefreshViews();
         if (typeof pushHistory === 'function') pushHistory();
         if (typeof scheduleAutosave === 'function') scheduleAutosave();
     }
@@ -27751,6 +28078,7 @@ function _renamePageKeys(oldKey, newKey) {
 function _fpFillItemList(desc) {
     const list = document.getElementById('dsFpItemList');
     if (!list) return;
+    try { _codesSortRows(); } catch (e) {}
     list.innerHTML = '';
     const groups = _fpGroups().filter(_fpRowMatches);
     if (!groups.length) {
@@ -27853,8 +28181,19 @@ function _fpItemRow(g, desc) {
         let done = false;
         const commit = (ok) => {
             if (done) return; done = true;
-            if (ok && inp.value.trim() && inp.value.trim() !== g.key) {
-                if (_fpRenameGroup(g.key, inp.value.trim())) { _dsRefresh(); _dsRenderCenter(); }
+            const v = inp.value.trim();
+            if (ok && v && v !== g.key) {
+                // A plain code renames by the house rule: the number is its position.
+                if (_plainCodeParts(g.key) && !g.rows.some(r => _catalogueRowIds()[r.id])) {
+                    const fin = _codesRenamePlacement(g.key, v);
+                    if (fin) {
+                        if (typeof pushHistory === 'function') pushHistory();
+                        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                        _codesRefreshViews();
+                        _codesAnnounce(g.key, fin, { x: 1, y: 1 });
+                        _dsRefresh(); _dsRenderCenter();
+                    }
+                } else if (_fpRenameGroup(g.key, v)) { _dsRefresh(); _dsRenderCenter(); }
             }
             _dsRenderTools();
         };
@@ -27923,7 +28262,66 @@ function _fpItemRow(g, desc) {
     };
     row.appendChild(num); row.appendChild(code); row.appendChild(sel); row.appendChild(lnB); row.appendChild(frB);
     row.onclick = () => _dsFpArm(g.key);
+    _fpWireItemDrag(row, g);
     return row;
+}
+// DRAG A CODE TO RENUMBER IT. The Items list is where codes are run from, and its order
+// IS the numbering, so dropping ART.4 above ART.2 makes it ART.2 and moves the others
+// up one, in the dashboard, on the walls and on every page at once. Keyed on the
+// placement CODE captured at dragstart, never a row index: the list is rebuilt by
+// anything that touches the plan. Only within a type, because crossing ART into EGD
+// is a recode (the category chip), not a reorder.
+let _fpDragKey = null;
+function _fpWireItemDrag(row, g) {
+    const plain = !!_plainCodeParts(g.key) && !g.rows.some(r => _catalogueRowIds()[r.id]);
+    row.dataset.fpKey = g.key;
+    if (plain) {
+        row.draggable = true;
+        row.addEventListener('dragstart', (e) => {
+            _fpDragKey = g.key;
+            try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', g.key); } catch (_) {}
+            row.style.opacity = '0.45';
+        });
+        row.addEventListener('dragend', () => {
+            _fpDragKey = null; row.style.opacity = '';
+            document.querySelectorAll('.fp-drop-before, .fp-drop-after').forEach(t => t.classList.remove('fp-drop-before', 'fp-drop-after'));
+        });
+    }
+    row.addEventListener('dragover', (e) => {
+        if (!_fpDragKey || _fpDragKey === g.key) return;
+        const a = _plainCodeParts(_fpDragKey), b = _plainCodeParts(g.key);
+        if (!a || !b || a.prefix !== b.prefix) return;
+        e.preventDefault();
+        const r = row.getBoundingClientRect();
+        const after = e.clientY > r.top + r.height / 2;
+        document.querySelectorAll('.fp-drop-before, .fp-drop-after').forEach(t => t.classList.remove('fp-drop-before', 'fp-drop-after'));
+        row.classList.add(after ? 'fp-drop-after' : 'fp-drop-before');
+    });
+    row.addEventListener('dragleave', () => row.classList.remove('fp-drop-before', 'fp-drop-after'));
+    row.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const from = _fpDragKey;
+        _fpDragKey = null;
+        const after = row.classList.contains('fp-drop-after');
+        row.classList.remove('fp-drop-before', 'fp-drop-after');
+        if (!from || from === g.key) return;
+        _fpMoveCode(from, g.key, after);
+    });
+}
+function _fpMoveCode(fromKey, targetKey, after) {
+    const a = _plainCodeParts(fromKey), b = _plainCodeParts(targetKey);
+    if (!a || !b) return null;
+    if (a.prefix !== b.prefix) { _toast(fromKey + ' is a different type', 'Change its category chip to move it to ' + b.prefix + '.'); return null; }
+    const before = (dashProjectData || []).map(r => r && r.id).join('|');
+    const fin = _codesMoveBeside(fromKey, targetKey, after);
+    if (!fin || before === (dashProjectData || []).map(r => r && r.id).join('|')) return fin;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _codesRefreshViews();
+    _codesAnnounce(fromKey, fin, { x: 1, y: 1 });
+    if (_fpArmedId === fromKey) _fpArmedId = fin;
+    try { _dsRefresh(); _dsRenderTools(); _dsRenderCenter(); } catch (e) {}
+    return fin;
 }
 // The deck-wide floorplan order, offered HERE as well as on the Project tab. It is one
 // setting with two controls, not a copy: both read `_deckPlanOrder()` and both write
@@ -32220,13 +32618,45 @@ function _dashJumpToWall() {
     return true;
 }
 
+// ONE PLACE RUNS THE CODES: the floorplan Items list (17.95). Codes are a placement
+// fact (ART.4) and the dashboard is a list of PIECES (ART.4A to ART.4G), so the list of
+// placements is where they are added, typed, retyped and dragged into order. It lives
+// in Deck Studio on a floorplan page, which is a long way from the dashboard, so the
+// Codes button goes there directly and the trip back is kept, like every other jump.
+// The trip back is anchored on the ROW and the WALL objects, not their codes or index:
+// the codes are exactly what is likely to change while you are over there.
+function _jumpToCodes() {
+    const from = currentView;
+    const row = (from === 'dashboard') ? dashProjectData[dashSelectedRowIndex] : null;
+    const wall = (from === 'elevation') ? elevations[currentElevIndex] : null;
+    let level = 0;
+    try { const pin = row && _fpPins(row)[0]; if (pin) level = _deckLvlOf(pin.lv); } catch (e) {}
+    switchView('deck');
+    try { _dsTab('pages'); } catch (e) {}
+    let ok = false;
+    try { ok = _dsJumpToFloorplan(level); } catch (e) { ok = false; }
+    if (!ok) {
+        _toast('This deck has no floorplan page', 'Codes are run from the floorplan Items list. Turn the floorplan on in Deck > Project.');
+        return false;
+    }
+    if (from === 'dashboard' || from === 'elevation') {
+        _viewReturn = { view: from, at: 'deck', row: row, rowId: row && row.id, wall: wall,
+                        elevIdx: currentElevIndex, title: from === 'dashboard' ? 'the Frame Dashboard' : ((wall && wall.name) || 'the wall') };
+    }
+    try { _syncReturnBars(); _dsRenderTools(); } catch (e) {}
+    return true;
+}
+
 // Take the trip back, whichever trip it is. Cleared FIRST, so a failure part way through
 // cannot leave a bar pointing at somewhere we have already left.
 function _takeReturnTrip() {
     const back = _viewReturn;
     _viewReturn = null;
     if (!back) return;
-    switchView(back.view, back.view === 'elevation' ? (back.elevIdx || 0) : 0);
+    // A wall carried by object first: the walls re-sort by code, so its index may have moved.
+    let _ei = back.elevIdx || 0;
+    if (back.wall && elevations.indexOf(back.wall) >= 0) _ei = elevations.indexOf(back.wall);
+    switchView(back.view, back.view === 'elevation' ? _ei : 0);
     try { _syncReturnBars(); } catch (e) {}
     if (back.view === 'deck') {
         // _dsRefresh first: the deck may have been rebuilt while the wall was being edited
@@ -32236,7 +32666,8 @@ function _takeReturnTrip() {
         try { _dsRestoreSel(back.key, 'spec'); } catch (e) {}
     } else if (back.view === 'dashboard' && back.rowId) {
         const rows = (typeof dashProjectData !== 'undefined' ? dashProjectData : []);
-        const i = rows.findIndex(d => d && d.id === back.rowId);
+        let i = back.row ? rows.indexOf(back.row) : -1;
+        if (i < 0) i = rows.findIndex(d => d && d.id === back.rowId);
         if (i >= 0) { try { selectDashRow(i); } catch (e) {} }
     }
 }
@@ -32248,30 +32679,33 @@ function _elevReturnToDeck() { _takeReturnTrip(); }
 // BOTH bars are synced on every call, so the one you are not looking at cannot be left
 // armed and waiting to confuse you on a later visit.
 function _syncReturnBars() {
-    const fill = (id, wantView) => {
-        const bar = document.getElementById(id);
-        if (!bar) return;
-        // Both conditions matter. 'at' is the view this trip landed in, so a trip to
-        // the elevation never paints a back button in the dashboard; currentView keeps
-        // the hidden view's bar empty rather than pre-armed.
-        const on = !!(_viewReturn && _viewReturn.at === wantView && currentView === wantView);
-        if (!on) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
-        bar.style.display = 'block';
-        bar.innerHTML = '';
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'action-btn btn-secondary';
-        b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); font-weight:700; letter-spacing:0.2px;'
-            + ' display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:8px;'
-            + ' border:1px solid var(--accent); color:var(--accent);';
-        b.title = 'Go back where you came from. Your changes are already saved.';
-        b.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>'
-            + '<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Back to ' + _esc(_viewReturn.title) + '</span>';
-        b.onclick = () => _takeReturnTrip();
-        bar.appendChild(b);
-    };
+    const fill = (id, wantView) => _returnBarInto(document.getElementById(id), wantView);
     fill('elevReturnBar', 'elevation');
     fill('dashReturnBar', 'dashboard');
+    fill('deckReturnBar', 'deck');
+}
+// The bar itself. Separate so a panel BUILT before it is attached (the floorplan Items
+// panel) can fill its own bar in place rather than waiting to be found by id.
+function _returnBarInto(bar, wantView) {
+    if (!bar) return;
+    // Both conditions matter. 'at' is the view this trip landed in, so a trip to
+    // the elevation never paints a back button in the dashboard; currentView keeps
+    // the hidden view's bar empty rather than pre-armed.
+    const on = !!(_viewReturn && _viewReturn.at === wantView && currentView === wantView);
+    if (!on) { bar.style.display = 'none'; bar.innerHTML = ''; return; }
+    bar.style.display = 'block';
+    bar.innerHTML = '';
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'action-btn btn-secondary';
+    b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); font-weight:700; letter-spacing:0.2px;'
+        + ' display:flex; align-items:center; justify-content:center; gap:6px; margin-bottom:8px;'
+        + ' border:1px solid var(--accent); color:var(--accent);';
+    b.title = 'Go back where you came from. Your changes are already saved.';
+    b.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>'
+        + '<span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Back to ' + _esc(_viewReturn.title) + '</span>';
+    b.onclick = () => _takeReturnTrip();
+    bar.appendChild(b);
 }
 // The name the rest of the file and the tests already call.
 function _elevSyncReturnBtn() { _syncReturnBars(); }
@@ -37061,6 +37495,8 @@ function exportDashCSV() {
 }
 
 function renderDashTable() {
+    // Safety net: whatever added a row, the table shows it in code order.
+    try { _codesSortRows(); } catch (e) {}
     const tbody = document.getElementById('rfiBody'); tbody.innerHTML = '';
 
     // Empty state: when no frames have been added yet (or all deleted), show
@@ -37171,7 +37607,7 @@ function renderDashTable() {
                 ${svgMove}
             </td>
             <td><input class="tbl-in" type="number" value="${row.qty}" disabled style="width:30px; opacity:0.6; background:transparent;"></td>
-            <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" oninput="dashHtIn(${index}, 'id', this.value, true)" ondragstart="event.preventDefault()" style="width:80px; font-weight:bold;"></td>
+            <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" onchange="_codesCommitRowId(${index}, this)" onkeydown="if(event.key==='Enter')this.blur()" ondragstart="event.preventDefault()" title="The number sets the order everywhere. Type a number to move it there." style="width:80px; font-weight:bold;"></td>
             <td><select class="tbl-in no-arrow" onchange="dashHtIn(${index}, 'product', this.value)">${FRAME_PRODUCTS.map(p => `<option ${row.product === p ? 'selected' : ''}>${p}</option>`).join('')}</select></td>
             <td><input class="tbl-in" type="text" value="${row.location}" oninput="dashHtIn(${index}, 'location', this.value, true)" ondragstart="event.preventDefault()" style="width:90px;"></td>
             <td style="position:relative;">${_dashSame[row.id] ? `<span class="dash-same-img" title="Same image as ${_dashSame[row.id].join(', ')}">x${_dashSame[row.id].length + 1}</span>` : ''}<input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value, true)" ondragstart="event.preventDefault()" style="width:200px;"></td>
@@ -37366,8 +37802,20 @@ function reorderDashRow(fromIdx, toIdx) {
     // Restore selection by identity
     const newSelectedIdx = dashProjectData.indexOf(selectedRow);
     if (newSelectedIdx >= 0) dashSelectedRowIndex = newSelectedIdx;
-    renderDashTable();
+    // The order IS the numbering: the move renumbers, then everything re-sorts.
+    _codesAfterUserReorder();
     pushHistory();
+}
+// A drag or a Move To on the dashboard. A piece cannot leave its placement and a type
+// cannot cross into another, so a drop that only does that snaps back and says why.
+function _codesAfterUserReorder() {
+    const before = (dashProjectData || []).map(r => r && r.id).join('|');
+    const moves = _codesAdoptRowOrder();
+    _codesRefreshViews();
+    try { _dsRefresh(); } catch (e) {}
+    const after = (dashProjectData || []).map(r => r && r.id).join('|');
+    if (Object.keys(moves).length) _codesAnnounce(null, null, moves);
+    else if (before !== after) _toast('Codes stay in number order', 'Pieces stay with their placement and types stay grouped. Drag a whole placement to renumber it.');
 }
 
 // Move multiple rows (by their CURRENT indices) to a new position. The rows
@@ -37411,7 +37859,7 @@ function reorderDashRows(indices, insertBefore) {
         if (i >= 0 && i !== dashSelectedRowIndex) dashMultiSelectedIndices.add(i);
     });
 
-    renderDashTable();
+    _codesAfterUserReorder();
     pushHistory();
 }
 
@@ -37480,6 +37928,11 @@ function renameFrameId(inputEl, idx) {
         inputEl.value = oldId;  // restore if blank
         return;
     }
+    // A frame backed by a dashboard row goes through the same rule as the dashboard:
+    // the number is the position (so ART.2 typed here MOVES it to 2, it does not
+    // collide), the letter is the piece. The list is rebuilt by the commit.
+    const di = dashProjectData.findIndex(r => r && r.id === oldId);
+    if (di >= 0) { _codesCommitRowId(di, inputEl); return; }
     // Collision check: is newId already used by a DIFFERENT dashboard row?
     const collidingRow = dashProjectData.find(r => r.id === newId && r.id !== oldId);
     if (collidingRow) {
@@ -37498,7 +37951,7 @@ function renameFrameId(inputEl, idx) {
 // Core rename: update the dashboard row's id + every frame.id reference in
 // every elevation. Caller is responsible for collision-checking and for
 // pushing history.
-function applyIdRename(oldId, newId) {
+function applyIdRename(oldId, newId, quiet) {
     if (oldId === newId) return;
     // Rename in dashboard
     const dashRow = dashProjectData.find(r => r.id === oldId);
@@ -37507,6 +37960,10 @@ function applyIdRename(oldId, newId) {
     elevations.forEach(elev => {
         elev.frames.forEach(f => { if (f.id === oldId) f.id = newId; });
     });
+    // QUIET for a batch: a renumber renames every piece twice, and re-rendering the
+    // elevation, the dashboard and the push list per row made sixty codes crawl. The
+    // batch redraws once at the end (_codesRefreshViews).
+    if (quiet) return;
     // Re-render to show the change
     initElevControls();
     drawElevAll();
@@ -38809,7 +39266,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.95</strong> Item codes are always in number order, everywhere: ART.1, ART.2, ART.3, then EGD, then WF, with no gaps, in the Frame Dashboard, the floorplan Items list and plan, the wall list in Elevations, the spec pages and the CSV. This is the house standard, not a setting. A new code takes the next number, deleting one closes the gap, and dragging a code in the floorplan Items list (or a row in the dashboard) renumbers it to where you dropped it. Typing a number moves the placement there: ART.4 typed as ART.1 becomes ART.1 and the rest move down one. Walls named after a code follow it. The floorplan Items list is where codes are run from: the new Codes button in the dashboard, and the # button in Elevations, open it, with a Back button to return. The item code field now saves on Enter or when you click away, instead of on every keystroke.<br><br><strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>
@@ -38982,6 +39439,7 @@ function confirmDuplicate(type) {
     }
 
     elevFrames.push(nF); 
+    if (type === 'new') _codesSettle({ walls: false });
     initElevControls(); drawElevAll(); recalculateDashboardQuantities(); 
     closeDuplicateModal();
     pushHistory();
