@@ -799,7 +799,8 @@ const path = require('path');
       if (!tabs[0].classList.contains('cat-primary')) throw new Error('the governing wall is not marked primary');
       if (!tabs[1].classList.contains('cat-option')) throw new Error('the option row is not marked');
       if (tabs[0].textContent.indexOf('PRIMARY') < 0) throw new Error('row 0: ' + tabs[0].textContent);
-      if (tabs[1].textContent.indexOf('IMAGES 1') < 0) throw new Error('row 1: ' + tabs[1].textContent);
+      // 17.97: options read OPTION n (was IMAGES n), numbered across the placement.
+      if (tabs[1].textContent.indexOf('OPTION 1') < 0) throw new Error('row 1: ' + tabs[1].textContent);
       // An option is indented under its layout, or the tree is flat again.
       if (!tabs[1].classList.contains('cat-indent2')) throw new Error('the option is not indented');
       // And ONE header per placement, never one per wall.
@@ -1402,8 +1403,11 @@ const path = require('path');
       elevations[0].name = 'ART-1';
       currentElevIndex = 0;
       quiet(() => _catAddArrangement(0, { newSet: true, label: 'Single' }));
-      const set2 = elevations.filter(e => _isCatalogueMaster(e) && _catBaseCode(e) === 'ART-1.2')[0];
+      // 17.97: a frame set is a LETTER of the placement (ART-1B) with its set number
+      // stored on the wall, because options own the dotted numbers now (ART-1.2 is option 2).
+      const set2 = elevations.filter(e => _isCatalogueMaster(e) && _catBaseCode(e) === 'ART-1B')[0];
       if (!set2) throw new Error('no second frame set: ' + elevations.map(e => _catBaseCode(e)).join(','));
+      if (set2.catalogueSet !== 2) throw new Error('the set number is not stored on the wall');
       if (_catSetNum(_catBaseCode(set2)) !== 2) throw new Error('the set number is wrong');
       if (_catLayoutLabel(set2) !== 'Single') throw new Error('the label did not stick: ' + _catLayoutLabel(set2));
       // Same PLACEMENT, so one pin; different SET, so its frames are its own.
@@ -1494,11 +1498,12 @@ const path = require('path');
       _catSyncAllOptions();
       const keys = _fpGroups().map(g => g.key);
       if (keys.indexOf('ART-1') < 0) throw new Error('the placement lost its pin: ' + keys.join(','));
-      ['ART-1.2', 'ART-1B'].forEach(k => {
+      // 17.97: frame set 2 is ART-1B and the layout ART-1C (letters across the placement).
+      ['ART-1B', 'ART-1C'].forEach(k => {
         if (keys.indexOf(k) >= 0) throw new Error(k + ' put a SECOND pin on the plan');
       });
       // But each still answers for its own spec-page crop.
-      const r2 = dashProjectData.filter(r => r.id === 'ART-1.2-A')[0];
+      const r2 = dashProjectData.filter(r => r.id === 'ART-1B-A')[0];
       if (!r2) throw new Error('no slot row for set 2');
       if (r2.planX !== 0.4) throw new Error('set 2 did not borrow the placement pin');
       // THE SET NUMBER DECIDES BEFORE THE LETTER. Rename set 1's primary to ART-1A and

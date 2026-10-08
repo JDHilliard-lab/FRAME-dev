@@ -51,7 +51,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-158 files, 2174 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+159 files, 2184 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1569,6 +1569,29 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   0 a vendor reads is worse than an absent number), notes on the LEFT of a breaker page
   (they print as a right-hand column today), and Deck Studio arrows and lines that borrow
   `annotationStyle` so a callout matches the drawing under it.
+- **17.97 REPLACED THE FOUR-LEVEL SPELLING: OPTIONS ARE ART.1.1, ART.1.2, ART.1.3 ACROSS THE
+  PLACEMENT, AND EVERY ARRANGEMENT IS A LETTER.** The designer chose "option number in the
+  code". Read the older catalogue notes above with this in mind: a frame set is NO LONGER
+  spelled `ART.01.2`; it is the next free letter of the placement (`ART.1B`) with
+  `elev.catalogueSet` stored on the mockup, and `_catSetNum` / `_catSetKey` read the wall
+  first (`_catWallSetOf`) and parse only as a legacy fallback. The set KEY they return is a
+  grouping key, never a code anything is named with. Layout-vs-set inheritance is unchanged.
+  Why: image options and frame sets shared one number line (ART.1.1 images, ART.1.2 frames,
+  ART.1.3 images), so "option 3" meant nothing on a page.
+  **`_catSettleAll()` runs first inside `_codesSettle()`**: `_catMigrateSetCodes` converts a
+  legacy project once, `_catRenumberOptions(place)` numbers options 1..n in TREE order
+  (`_catTree`: set, then letter, then stored option number) through two-pass temp renames,
+  and `_catOrderWalls(place)` puts the placement's walls in tree order in the slots they
+  already hold. Rows of a catalogue sort by their wall and frame position (`catOrd` in
+  `_codesSortRows`), which is what makes each breaker be followed by ITS options, in both
+  page builders, without touching either.
+  **Every arrangement mints its first option** (empty when not carrying), or it produced no
+  unit and therefore no breaker and no pages. **Deleting an option deletes its rows**; they
+  were orphaned and printed as stray spec pages holding their number.
+  **A catalogue placement is a renumber unit like a plain one**: `_codeUnitOf` gives its stem
+  (`_catStemOf`, dot codes only) and `_codesRenameStem` renames everything under it at a
+  number boundary. Its temp stem must itself parse as a stem (`ZZRN<letters>.9000nn`), or
+  the second pass cannot find it. `_renamePageKeys` now also moves `catov:` keys.
 - **`_elevArtImgCache` keeps decoded artwork nodes alive across redraws.** `drawElevAll`
   wipes `#frame-layer` and runs on EVERY mousemove of a drag, so rebuilding
   `<img src="data:…">` each pass re-decoded every artwork ~60×/sec. A 24" print hid it;
