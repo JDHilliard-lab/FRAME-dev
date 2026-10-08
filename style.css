@@ -694,7 +694,10 @@ select.no-arrow::-ms-expand { display: none; }
  * because the outer wall dimensions sit 6in outside the wall (~74px at a
  * typical fit scale), so the next 15px came out of the sidebar instead. */
 .elev-wall-rail { width: 165px; flex-shrink: 0; display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--border-color); background: var(--bg-panel); }
-#nav-tabs-container { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 6px 0; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
+/* flex 0 1 auto, not flex 1: the list is as tall as its walls, so + Add Wall sits right
+ * under the last one instead of at the foot of the rail where it got lost. A long list
+ * still shrinks to the rail and scrolls, and the button stays in view below it. */
+#nav-tabs-container { flex: 0 1 auto; min-height: 0; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 6px 0; scrollbar-width: thin; scrollbar-color: var(--border-color) transparent; }
 #nav-tabs-container::-webkit-scrollbar { width: 6px; }
 #nav-tabs-container::-webkit-scrollbar-track { background: transparent; }
 #nav-tabs-container::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: var(--r-4); }
@@ -2438,3 +2441,6 @@ button.cat-node:hover { border-color: var(--ui-active); }
 /* Floorplan Items: drag a code to renumber it. The bar marks the gap it will land in. */
 .fp-drop-before { box-shadow: inset 0 2px 0 var(--ui-active) !important; }
 .fp-drop-after { box-shadow: inset 0 -2px 0 var(--ui-active) !important; }
+
+/* Deck Studio floorplan: a code in the key list opens its spec page (17.96). */
+.ds-fp-listlink:hover { background: color-mix(in srgb, var(--selected) 10%, transparent); outline: 1px solid color-mix(in srgb, var(--selected) 45%, transparent); }

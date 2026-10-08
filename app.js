@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '17.95';
+const APP_VERSION = '17.96';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -14895,7 +14895,7 @@ function _fpKeyEntries(li, idToPage) {
         const codesLabel = (g.ids.length > 1)
             ? (g.key + ' (' + g.ids.map(id => { const s = id.indexOf(g.key) === 0 ? id.slice(g.key.length).replace(/^[-_\s]*/, '') : id; return s || id; }).join('/') + ')')
             : (g.ids[0] || g.key);
-        return { num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage, wallLine: g.wallLine || null, wallLines: g.wallLines || null, wallPanels: g.wallPanels || 1 };
+        return { key: g.key, num: g.num, codes: codesLabel, location: g.location, category: g.category, planX: g.planX, planY: g.planY, linkPage: linkPage, wallLine: g.wallLine || null, wallLines: g.wallLines || null, wallPanels: g.wallPanels || 1 };
     });
 }
 // The exact rectangle _drawFloorplanKeyPage reserves for the plan image, plus
@@ -14920,7 +14920,17 @@ function _fpPlanFit(PW, PH, iw, ih) {
 // PINS placed ON the plan are deferred until per-item coordinates exist; the
 // list numbers still establish the legend the pins will use. `items` is the
 // full row set; `idToPage` maps item id -> spec page number.
+// WHERE EACH CODE IN THE KEY LIST LANDED, so Deck Studio can make the rows clickable
+// (17.96). The PDF already linked them to their spec pages; the preview is a baked
+// canvas, so the rows were dead there and only the pins opened a spec page. Recorded by
+// the drawer itself, the same rectangle it hands doc.link, so the two cannot disagree.
+// Keyed by the list's codes: thumbnails of other plans render through the same function
+// and must not overwrite the one on screen.
+const _fpListRects = {};
+function _fpListSig(keys) { return (keys || []).join('|'); }
 function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, levelName) {
+    const _listRects = [];
+    _fpListRects[_fpListSig((entries || []).map(e => e.key))] = _listRects;
     const PW = doc.internal.pageSize.getWidth();
     const PH = doc.internal.pageSize.getHeight();
     const hx = (h) => { const m = (h || '#444444').replace('#', ''); return [parseInt(m.slice(0, 2), 16), parseInt(m.slice(2, 4), 16), parseInt(m.slice(4, 6), 16)]; };
@@ -14997,6 +15007,7 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, leve
         const fitted = doc.splitTextToSize(label, colW - (br * 2 + 12))[0] || label;
         doc.text(fitted, tx, bcy, { baseline: 'middle' });
         if (en.linkPage) doc.link(x, y - 4, colW - 6, rowH, { pageNumber: en.linkPage });
+        if (en.key) _listRects.push({ x: x, y: y - 4, w: colW - 6, h: rowH, key: en.key });
     });
 
     // — Wall lines on the plan (artwork on walls; 2/3 segments for dip/triptychs) —
@@ -26353,6 +26364,7 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
         if (tok !== _dsFpBaseTok || !base.isConnected) return;
         cv.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
         base.innerHTML = ''; base.appendChild(cv);
+        _dsFpListLinks(page, desc, S);
     }).catch(() => {});
 
     // Clicking empty page space deselects any selected annotation.
@@ -26681,6 +26693,23 @@ function _dsSpecPageIndexFor(key) {
     let i = pages.findIndex(d => d && d.kind === 'spec' && !d._install && owns(d));
     if (i < 0) i = pages.findIndex(d => d && d.kind === 'spec' && d._install && d._groupKey === key);
     return i;
+}
+// The key list's rows, clickable in Deck Studio the way they already are in the PDF:
+// a click opens that code's spec page, through the same jump a pin click uses.
+function _dsFpListLinks(page, desc, S) {
+    if (!page) return;
+    page.querySelectorAll('.ds-fp-listlink').forEach(n => n.remove());
+    let keys = [];
+    try { keys = _fpKeyEntries(_deckLvlOf(desc.level || 0)).map(e => e.key); } catch (e) {}
+    const rects = _fpListRects[_fpListSig(keys)] || [];
+    rects.forEach(q => {
+        const a = document.createElement('div');
+        a.className = 'ds-fp-listlink _dsChrome';
+        a.title = 'Open the ' + q.key + ' spec page';
+        a.style.cssText = 'position:absolute; left:' + (q.x * S) + 'px; top:' + (q.y * S) + 'px; width:' + (q.w * S) + 'px; height:' + (q.h * S) + 'px; cursor:pointer; z-index:4;';
+        a.onclick = (ev) => { ev.stopPropagation(); _dsJumpToSpecFor(q.key); };
+        page.appendChild(a);
+    });
 }
 function _dsJumpToSpecFor(key) {
     try { _dsPages = _deckPageList(); } catch (e) {}
@@ -31940,6 +31969,8 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                         doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
                         _drawGroupElevOutline(doc, er, tx, ty, tw, th);
                         doc.setFont(_font('serif'), 'italic'); doc.setFontSize(7); doc.setTextColor(138, 138, 138); doc.text('Elevation', tx, Math.min(ty + th + 8, BB));
+                        // The elevation thumbnail links to the floorplan too, the same as the plan (17.96).
+                        _specPlanRectAdd(tx, ty, tw, th, members[0] && members[0].level);
                         legendRight = tx - 14;
                         _thumbBox = { tx: tx, ty: ty, tw: tw, th: th };
                     }
@@ -32097,6 +32128,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                             _drawGroupElevOutline(doc, er, x, top, tw, th);
                         } catch (e) {}
                         _specThumbCaption(doc, 'Elevation', x, Math.min(top + th + 8, BB));
+                        _specPlanRectAdd(x, top, tw, th, members[0] && members[0].level);   // links to the floorplan (17.96)
                     } else {
                         _specSwatchBox(doc, x, top, tw, th, 'Elevation', Math.min(top + th + 8, BB));
                     }
@@ -34283,6 +34315,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
             // no baseboard — which is exactly what this page shipped as first.
             if (drew) _drawElevAnnOps(doc, res.cap.vec, dx, dy, dw, dh);
             if (drew) _specThumbCaption(doc, 'Elevation', SR.R, Math.min(dy + dh + 9, SR.B), { align: 'right' });
+            if (drew) _specPlanRectAdd(dx, dy, dw, dh, r && r.level);   // links to the floorplan (17.96)
             // Say it on the page rather than letting an unreadable drawing speak for
             // itself. A sheet that quietly prints 6pt dimensions looks like a bug; one
             // that states the wall is past what a single view holds is a drawing note.
@@ -34312,6 +34345,53 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
     }
     _drawPdfFooter(doc, logos, pageNum, meta);
 }
+// ── THE LETTER LEGEND FITS ITS COLUMN, AT ANY WIDTH (17.96) ──────────────────────
+// Each line is a bold label on the left and its value right-aligned, and nothing checked
+// that the two fit: at the breaker's 150pt default a dual-unit size like
+// 24"(609.6mm) x 30"(762mm) printed straight over "Overall dimensions". Reported as
+// "the spec for the letter legends sometimes crash into each other; at 200pt it seems
+// safe". So the line is LAID OUT, not assumed: side by side when it fits, otherwise the
+// value drops onto its own line under the label, and a value too wide even for that is
+// set smaller (never below IG_LEG_VAL_FS_MIN) rather than cut. No setting: the column
+// width stays the designer's call and the legend follows it.
+// ONE measure shared by the height the page RESERVES (which places the notes and the
+// plan under the legend) and the drawer, or a stacked line lands on the notes.
+// The legend's leading and letter gutter. MODULE scope since 17.96: they lived inside
+// _drawInstallGuidePage, and the shared measure below runs outside it, so leaving them
+// there threw on every breaker render while the file parsed perfectly well.
+const IG_LEG_ROW_H = 8.6, IG_LEG_GAP = 4, IG_LEG_LETTER_W = 13, IG_LEG_TOP_GAP = 10;
+const IG_LEG_FS = 7, IG_LEG_VAL_FS_MIN = 5;
+const IG_LEG_LABELS = { dims: 'Overall dimensions', art: 'Art dimensions', code: 'Image code' };
+function _igLegVals(rr) {
+    rr = rr || {};
+    const dims = _igLegDimText(rr.extW, rr.extH);
+    // The IMAGE OPENING, through the one function that defines it, so this cannot drift
+    // from the five other places that print it.
+    const _op = (typeof _rowOpeningAndPrint === 'function') ? _rowOpeningAndPrint(rr) : null;
+    const art = _op ? _igLegDimText(_op.openW, _op.openH) : '\u2014';
+    return { dims: dims, art: art, code: (rr.imageCode || '').trim() || '\u2014' };
+}
+// { stacked, valFs } for one line: stacked when label + gap + value overruns tw.
+function _igLegLineFit(doc, label, value, tw) {
+    doc.setFont(_font('spec'), 'bold'); doc.setFontSize(IG_LEG_FS);
+    const lw = doc.getTextWidth(label);
+    doc.setFont(_font('spec'), 'normal');
+    const vw = doc.getTextWidth(String(value || ''));
+    if (lw + 6 + vw <= tw) return { stacked: false, valFs: IG_LEG_FS };
+    const fs = vw > tw ? Math.max(IG_LEG_VAL_FS_MIN, IG_LEG_FS * tw / vw) : IG_LEG_FS;
+    return { stacked: true, valFs: fs };
+}
+// Text rows one block takes (a stacked line is two), so heights can vary per letter.
+function _igLegBlockRows(doc, rr, keys, tw) {
+    if (!keys.length) return 1;
+    const v = _igLegVals(rr);
+    return keys.reduce((n, k) => n + (_igLegLineFit(doc, IG_LEG_LABELS[k], v[k], tw).stacked ? 2 : 1), 0);
+}
+function _igLegendHeight(doc, rows, keys, blockW) {
+    const tw = blockW - IG_LEG_LETTER_W;
+    return rows.reduce((h, rr) => h + _igLegBlockRows(doc, rr, keys, tw) * IG_LEG_ROW_H + 5 + IG_LEG_GAP, 0);
+}
+
 async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     try { doc.setLineDashPattern([], 0); } catch (e) {}
     const PW = ctx.PW, PH = ctx.PH;
@@ -34387,7 +34467,9 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     // IG_LEG_TOP_GAP, and a const declared further into the function is read in the TDZ -
     // the file parses, `node --check` passes, and every install and breaker page throws
     // on render. Third time this trap has been sprung in this file.
-    const IG_LEG_ROW_H = 8.6, IG_LEG_GAP = 4, IG_LEG_LETTER_W = 13, IG_LEG_TOP_GAP = 10;
+    // The legend metrics (IG_LEG_ROW_H, IG_LEG_GAP, IG_LEG_LETTER_W, IG_LEG_TOP_GAP) are at
+    // MODULE scope since 17.96, beside _igLegendHeight, which the reservation above and
+    // the drawer below both measure through.
     // THE LEGEND IS TEXT, SO IT SITS ON THE SUBHEADING'S OWN CLEARANCE. `_igTop` is the
     // DRAWING's top and carries an extra 22pt, which the elevation needs for the wall
     // dimension that prints above it - the legend needs none of that, and starting it
@@ -34439,7 +34521,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
     // The same arithmetic drawLegendBlocks uses, and the constants are shared with it so
     // the reserved height and the drawn height cannot drift.
     const _igLegendH = _igLegendOn
-        ? activeFrames.length * ((Math.max(1, _igLegKeys.length) * IG_LEG_ROW_H + 5) + IG_LEG_GAP)
+        ? _igLegendHeight(doc, activeFrames.map(f => lookupRow(f.id)), _igLegKeys, _igLegendW)
         : 0;
     // ONE WIDTH FOR THE LEFT COLUMN, legend or no legend. It used to be the legend's
     // width when a legend printed and the note multiplier's when it did not, so the
@@ -34638,18 +34720,28 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     cfg.legendCode !== false ? 'code' : null
                 ].filter(Boolean);
                 const drawLegendBlocks = (lx, topY, blockW) => {
-                    // The SAME metrics the layout reserved above, or the notes stacked
-                    // under this block land on top of its last line.
-                    const rowH2 = IG_LEG_ROW_H, blockH = Math.max(1, _legLines.length) * rowH2 + 5;
+                    // The SAME metrics the layout reserved above (_igLegendHeight), or the
+                    // notes stacked under this block land on top of its last line.
+                    const rowH2 = IG_LEG_ROW_H;
                     // Every line starts after the letter gutter and still ends on the
                     // block's right edge, so the values form one column down the page.
                     const tx = lx + IG_LEG_LETTER_W, tw = blockW - IG_LEG_LETTER_W;
+                    // Returns the rows it used: 1 side by side, 2 when the value had to
+                    // drop under its label to stay clear of it (_igLegLineFit).
                     const leader = (label, value, ly) => {
-                        doc.setFont(_font('spec'), 'bold'); doc.setFontSize(7); doc.setTextColor(20, 20, 20);
+                        const vs = (value || '') + '';
+                        const fit = _igLegLineFit(doc, label, vs, tw);
+                        doc.setFont(_font('spec'), 'bold'); doc.setFontSize(IG_LEG_FS); doc.setTextColor(20, 20, 20);
                         doc.text(label, tx, ly);
                         const labelW2 = doc.getTextWidth(label);
                         doc.setFont(_font('spec'), 'normal');
-                        const vs = (value || '') + '';
+                        if (fit.stacked) {
+                            doc.setFontSize(fit.valFs);
+                            const vw2 = doc.getTextWidth(vs);
+                            doc.text(vs, tx + Math.max(0, tw - vw2), ly + rowH2);
+                            doc.setFontSize(IG_LEG_FS);
+                            return 2;
+                        }
                         const vw = doc.getTextWidth(vs);
                         doc.text(vs, tx + tw - vw, ly);
                         const d0 = tx + labelW2 + 3, d1 = tx + tw - vw - 3;
@@ -34658,31 +34750,30 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                             doc.line(d0, ly - 1.8, d1, ly - 1.8);
                             doc.setLineDashPattern([], 0);
                         }
+                        return 1;
                     };
                     const sorted = activeFrames.slice().sort((fa, fb) => ('' + (fa.letter || '')).localeCompare('' + (fb.letter || '')));
-                    sorted.forEach((f, fi) => {
+                    let cy = topY;
+                    sorted.forEach((f) => {
                         const rr = lookupRow(f.id);
-                        const by = topY + fi * (blockH + IG_LEG_GAP) + rowH2;
+                        const by = cy + rowH2;
+                        cy += _igLegBlockRows(doc, rr, _legLines, tw) * rowH2 + 5 + IG_LEG_GAP;
                         // Both through the ONE formatter, so the legend follows dual units
                         // exactly as the spec pages beside it do. It also fixes a smaller
                         // thing: the stored sizes are in `dashUnit` and were being labelled
                         // with `elevUnit`, which only agreed because they usually match.
-                        const dims = _igLegDimText(rr.extW, rr.extH);
-                        // The IMAGE OPENING, through the one function that defines it, so
-                        // this cannot drift from the five other places that print it.
-                        const _op = (typeof _rowOpeningAndPrint === 'function') ? _rowOpeningAndPrint(rr) : null;
-                        const art = _op ? _igLegDimText(_op.openW, _op.openH) : '\u2014';
-                        const vals = { dims: dims, art: art, code: (rr.imageCode || '').trim() || '\u2014' };
-                        const labs = { dims: 'Overall dimensions', art: 'Art dimensions', code: 'Image code' };
+                        const vals = _igLegVals(rr);
+                        const labs = IG_LEG_LABELS;
                         // THE LETTER IS ITS OWN COLUMN, drawn once on the first line
                         // whatever that line turns out to be. Inline on the label it
                         // pushed line one right and left lines two and three hanging.
                         doc.setFont(_font('spec'), 'bold'); doc.setFontSize(7.6); doc.setTextColor(20, 20, 20);
                         doc.text((f.letter || '?'), lx, by);
                         if (!_legLines.length) return;
-                        _legLines.forEach((k, li) => { leader(labs[k], vals[k], by + li * rowH2); });
+                        let ly = by;
+                        _legLines.forEach((k) => { ly += leader(labs[k], vals[k], ly) * rowH2; });
                     });
-                    return topY + sorted.length * (blockH + IG_LEG_GAP);
+                    return cy;
                 };
                 // Light grey stroke — plan view only. Elevations never get one.
                 const strokeImg = (ix, iy, iw2, ih2) => { doc.setDrawColor(210, 210, 210); doc.setLineWidth(0.75); doc.rect(ix, iy, iw2, ih2, 'S'); };
@@ -35216,6 +35307,7 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
                 doc.setFontSize(7.5);
                 doc.setTextColor(120, 120, 120);
                 doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
+                _specPlanRectAdd(ex0, ey0, ew, eh, r && r.level);   // links to the floorplan (17.96)
             }
         }
 
@@ -35623,6 +35715,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                 // so it was the odd one out in a row of three labels — and it
                 // ignored the brand font entirely.
                 _specThumbCaption(doc, (elev.name || 'Elevation') + '', capX, _capY(boxY + eh));
+                if (!SWATCH) _specPlanRectAdd(boxX, boxY, ew, eh, r && r.level);   // links to the floorplan (17.96)
             } else { _elevMiss(); }
         }
     }
@@ -39266,7 +39359,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>17.95</strong> Item codes are always in number order, everywhere: ART.1, ART.2, ART.3, then EGD, then WF, with no gaps, in the Frame Dashboard, the floorplan Items list and plan, the wall list in Elevations, the spec pages and the CSV. This is the house standard, not a setting. A new code takes the next number, deleting one closes the gap, and dragging a code in the floorplan Items list (or a row in the dashboard) renumbers it to where you dropped it. Typing a number moves the placement there: ART.4 typed as ART.1 becomes ART.1 and the rest move down one. Walls named after a code follow it. The floorplan Items list is where codes are run from: the new Codes button in the dashboard, and the # button in Elevations, open it, with a Back button to return. The item code field now saves on Enter or when you click away, instead of on every keystroke.<br><br><strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
+                body: `<strong>17.96</strong> The letter legend on breaker and install pages no longer prints a size over its label: when a line does not fit the column width, the size drops onto its own line under the label (and is set a little smaller only if it still does not fit), so any column width is safe. Elevation thumbnails on spec pages link to the floorplan, like the plan thumbnail beside them. On the floorplan page in Deck Studio, clicking a code in the list opens its spec page (the PDF already did this). In Elevations, + Add Wall sits right under the last wall instead of at the bottom of the list.<br><br><strong>17.95</strong> Item codes are always in number order, everywhere: ART.1, ART.2, ART.3, then EGD, then WF, with no gaps, in the Frame Dashboard, the floorplan Items list and plan, the wall list in Elevations, the spec pages and the CSV. This is the house standard, not a setting. A new code takes the next number, deleting one closes the gap, and dragging a code in the floorplan Items list (or a row in the dashboard) renumbers it to where you dropped it. Typing a number moves the placement there: ART.4 typed as ART.1 becomes ART.1 and the rest move down one. Walls named after a code follow it. The floorplan Items list is where codes are run from: the new Codes button in the dashboard, and the # button in Elevations, open it, with a Back button to return. The item code field now saves on Enter or when you click away, instead of on every keystroke.<br><br><strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>
 <strong>17.80</strong> Autosave works on real projects and says when it cannot; errors are reported with details to copy; a half-updated browser tab says so.<br><br>

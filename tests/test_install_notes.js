@@ -648,10 +648,12 @@ const path = require('path');
       // _igLegTop uses IG_LEG_TOP_GAP. A const declared further into the function is read
       // in the TDZ: the file parses, node --check passes, and every install and breaker
       // page throws on render. Third time this trap has been sprung in this file.
-      const b = fnBody('_drawInstallGuidePage');
-      const decl = b.indexOf('const IG_LEG_ROW_H');
-      const use = b.indexOf('IG_LEG_TOP_GAP;');
+      // 17.96: they moved to MODULE scope, ahead of the function, because the shared
+      // legend measure (_igLegendHeight) runs outside it. Same invariant, new place.
+      const decl = S.indexOf('const IG_LEG_ROW_H');
+      const use = S.indexOf('IG_LEG_TOP_GAP;', S.indexOf('function _drawInstallGuidePage('));
       if (decl < 0) throw new Error('the legend metrics are gone');
+      if (!(decl < S.indexOf('function _drawInstallGuidePage('))) throw new Error('the legend metrics are not declared ahead of the page renderer');
       if (!(decl < use)) throw new Error('IG_LEG_TOP_GAP is read before it is declared');
     });
 
@@ -711,7 +713,9 @@ const path = require('path');
     __check('BOTH legend lines go through the one formatter', () => {
       // Overall dimensions and Art dimensions printed two different ways before: the
       // stored sizes raw, labelled with elevUnit rather than the dashUnit they are in.
-      const b = fnBody('_drawInstallGuidePage');
+      // 17.96: built once in _igLegVals, which the measure and the drawer both read.
+      const b = fnBody('_igLegVals');
+      if (fnBody('_drawInstallGuidePage').indexOf('_igLegVals(rr)') < 0) throw new Error('the drawer builds its own values');
       if (b.indexOf('const dims = _igLegDimText(rr.extW, rr.extH);') < 0) throw new Error('overall dimensions bypass the formatter');
       if (b.indexOf('_igLegDimText(_op.openW, _op.openH)') < 0) throw new Error('art dimensions bypass the formatter');
       if (b.indexOf("' ' + _u") >= 0) throw new Error('a hand-built unit suffix survives in the legend');

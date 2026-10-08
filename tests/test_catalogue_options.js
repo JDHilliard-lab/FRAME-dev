@@ -918,13 +918,16 @@ const path = require('path');
       if (b.indexOf("(li === 0 ? ((f.letter || '?') + ': ') : '')") >= 0) throw new Error('the letter is glued to a label again');
       if (b.indexOf('const tx = lx + IG_LEG_LETTER_W') < 0) throw new Error('the label lines do not start after the gutter');
       // And the leading came down, which is what buys the notes their room.
-      if (b.indexOf('IG_LEG_ROW_H = 8.6') < 0) throw new Error('the legend leading is not tightened');
+      // 17.96: the metrics moved to module scope, beside the shared legend measure.
+      if (S.indexOf('IG_LEG_ROW_H = 8.6') < 0) throw new Error('the legend leading is not tightened');
     });
 
     __check('art dimensions come from the ONE opening definition', () => {
       // Five other places print this number; a local calculation here is how they drift.
+      // 17.96: the values are built once, in _igLegVals, for the measure and the drawer.
       const b = fnBody('_drawInstallGuidePage');
-      if (b.indexOf('_rowOpeningAndPrint(rr)') < 0) throw new Error('the legend computes the opening itself');
+      if (b.indexOf('_igLegVals(rr)') < 0) throw new Error('the legend builds its values itself');
+      if (fnBody('_igLegVals').indexOf('_rowOpeningAndPrint(rr)') < 0) throw new Error('the legend computes the opening itself');
     });
 
     // ── THE BREAKER'S LEFT COLUMN: LEGEND, NOTES, PLAN ──────────────────
@@ -961,7 +964,10 @@ const path = require('path');
       // the legend the first time someone unticks a line.
       const b = fnBody('_drawInstallGuidePage');
       if (b.indexOf('IG_LEG_ROW_H') < 0) throw new Error('the row height is not shared');
-      if (b.indexOf('Math.max(1, _igLegKeys.length) * IG_LEG_ROW_H + 5') < 0) throw new Error('the reserved block height is written out differently');
+      // 17.96: a line can stack when it does not fit, so the height is MEASURED, through
+      // one function both the reservation and the drawer call.
+      if (b.indexOf('_igLegendHeight(doc,') < 0) throw new Error('the reservation does not use the shared measure');
+      if (b.indexOf('_igLegBlockRows(doc, rr, _legLines, tw)') < 0) throw new Error('the drawer does not use the shared measure');
     });
 
     __check('the plan steps OVER the notes rather than under them', () => {

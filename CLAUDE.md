@@ -51,7 +51,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-157 files, 2165 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+158 files, 2174 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -1307,6 +1307,15 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   slider moved nothing on exactly the page that shows a legend. The note `%` multiplier is
   now offered for a RIGHT-hand column only: an inert control beside a live one is worse
   than no control, because it teaches that the panel does not work.
+  **THE LEGEND LAYS EACH LINE OUT; IT DOES NOT ASSUME IT FITS (17.96).** Label left, value
+  right-aligned, and nothing checked the two against each other, so at the breaker's 150pt
+  default a dual-unit size printed straight over "Overall dimensions" (safe only from about
+  195pt). `_igLegLineFit` stacks the value under its label when they do not fit, and only
+  then shrinks it (floor `IG_LEG_VAL_FS_MIN`). Block heights therefore VARY, so the height
+  the page reserves (`_igLegendHeight`) and the drawer (`_igLegBlockRows`) share one measure,
+  or the notes land on a stacked line. **The `IG_LEG_*` metrics are MODULE scope now**: they
+  were function-local, and the shared measure runs outside the function, which threw on
+  every breaker render while `node --check` passed. No setting, by design.
   **THE LEGEND SITS ON THE SUBHEADING'S CLEARANCE, NOT THE DRAWING'S TOP** (`_igLegTop`).
   `_igTop` carries an extra 22pt that the elevation needs for the wall dimension printed
   above it; the legend needs none of that, and starting it there left an obvious hole
