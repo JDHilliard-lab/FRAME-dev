@@ -678,11 +678,15 @@ const path = require('path');
       const b = fnBody('_drawInstallGuidePage');
       if (b.indexOf('_igTitleRight') < 0) throw new Error('the title block is not measured');
       if (b.indexOf('doc.getTextWidth((zone') < 0) throw new Error('the heading width is not measured');
-      if (b.indexOf("doc.getTextWidth('ELEVATION DETAIL'") < 0) throw new Error('the subheading is not in the measurement');
+      // 17.99: the subheading is built by _catBreakerSub (ALTERNATE LAYOUT etc.), so the
+      // measure reads it through the same builder the draw uses.
+      if (b.indexOf("doc.getTextWidth(isElev ? _catBreakerSub(arg) : 'ELEVATION DETAIL')") < 0) throw new Error('the subheading is not in the measurement');
       // …and it measures the SUBHEADING AS PRINTED. A catalogue page prints the layout
       // name beside it, and measuring the bare words would underestimate the title block
       // by exactly the part that grows with user text.
-      if (b.indexOf('_catLayoutTag(arg)') < 0) throw new Error('the layout name is drawn but not measured');
+      // 17.99: the name is added inside _catBreakerSub, which both the measure (checked
+      // above) and the draw call, so measured and printed text cannot differ.
+      if (b.indexOf('doc.text(isElev ? _catBreakerSub(arg)') < 0 || fnBody('_catBreakerSub').indexOf('_catLayoutLabel(elev)') < 0) throw new Error('the layout name is drawn but not measured');
       if (b.indexOf('_igCodeId + ') < 0) throw new Error('the item code is not in the measurement');
       if (b.indexOf('IG_TITLE_CLEAR') < 0) throw new Error('there is no gap between the title and the drawing');
       // And it degrades to the safe answer if anything throws while measuring.

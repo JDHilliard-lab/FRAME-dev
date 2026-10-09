@@ -1598,12 +1598,14 @@ const path = require('path');
       // (Blank outside a catalogue is covered by the _catLayoutTagForRow check above.)
     });
 
-    __check('the breaker subtitle prints the layout name beside ELEVATION DETAIL', () => {
+    // CHANGED IN 17.99, deliberately: the subtitle used to read ELEVATION DETAIL · C — name
+    // through _catLayoutTag. An alternate arrangement now reads ALTERNATE LAYOUT /
+    // ALTERNATE FRAME SET · name, and the bare letter is dropped (the heading already says
+    // ART.1C). The layout NAME must still print, through the one breaker-subtitle builder.
+    __check('the breaker subtitle prints the layout name, through _catBreakerSub', () => {
       const b = fnBody('_drawInstallGuidePage');
-      if (b.indexOf("doc.text('ELEVATION DETAIL' + (_igArrTag") < 0) throw new Error('the subtitle does not carry the layout');
-      // Through the ONE tag builder, or the page and the CSV describe the placement two
-      // different ways and a designer reads that as two different things.
-      if (b.indexOf('_catLayoutTag(arg)') < 0) throw new Error('the page builds its own version of the tag');
+      if (b.indexOf('doc.text(isElev ? _catBreakerSub(arg)') < 0) throw new Error('the subtitle does not go through _catBreakerSub');
+      if (fnBody('_catBreakerSub').indexOf('_catLayoutLabel(elev)') < 0) throw new Error('the layout name no longer prints');
     });
 
     // == THE PANEL BUTTONS FIT THE PANEL ==================================
