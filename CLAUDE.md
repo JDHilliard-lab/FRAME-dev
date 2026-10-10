@@ -2239,6 +2239,11 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   shares `_autosavePeek` / `_autosaveRestoreNow` with the Continue card so the two
   cannot disagree about what counts as a backup. `_readProjectText` closes the screen on
   a successful install (the `<input type=file>` path arrives asynchronously).
+  **`#bootCover` (18.17) is the first element in `<body>`**, styled by style.css, so the
+  first paint is the start screen's background instead of the dashboard (the default
+  view, which flashed for the ~200ms before the screen was attached). `openStartScreen`
+  removes it in the same tick it attaches, `_bootStart`'s harness branch removes it too,
+  and a CSS animation hides it after 6s if app.js never gets there.
   **The logo is inline SVG (`FRAME_LOGO_PARTS`, the six shapes from the logo files,
   byte for byte) so it can come together**: the mark slides in from the left, the
   letters close up from slightly spread with a 70ms stagger, all in SVG user units so

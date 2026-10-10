@@ -2563,3 +2563,10 @@ button.cat-node:hover { border-color: var(--ui-active); }
    paper, so it reads --selected like every other control drawn over the page. */
 .fp-upload-slot { height: 30px; padding: 0 16px; font-size: 12px; font-weight: 600; cursor: pointer; color: #fff; background: var(--selected); border: none; border-radius: var(--r-6); box-shadow: 0 2px 10px rgba(0,0,0,0.18); z-index: 5; }
 .fp-upload-slot:hover { filter: brightness(1.08); }
+
+/* BOOT COVER (18.17): the start screen's own background, painted before any script so
+   the dashboard never flashes ahead of the logo. Same layer as the start screen, which is
+   appended later and therefore sits on top; app.js removes the cover in the same tick.
+   The animation is a dead man's switch: if app.js never removes it, it hides itself. */
+.boot-cover { position: fixed; inset: 0; z-index: var(--z-modal-over); background: var(--bg-main); animation: bootCoverGiveUp 0s linear 6s forwards; }
+@keyframes bootCoverGiveUp { to { visibility: hidden; pointer-events: none; } }

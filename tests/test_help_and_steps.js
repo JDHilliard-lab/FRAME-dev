@@ -280,6 +280,19 @@ check('the start screen offers New and Open, and Continue only when there is uns
     if (!ov.querySelector('.ss-note')) throw new Error('nothing says New or Open will replace the unsaved work');
 });
 
+check('no dashboard flash: a cover is the first thing painted, and the start screen removes it', async () => {
+    // 18.17: the dashboard is the page's default view, so it painted for the ~200ms
+    // before the start screen was attached. The cover is in the HTML, ahead of any script.
+    const bodyAt = HTML.indexOf('<body>');
+    const firstEl = HTML.slice(bodyAt + 6).replace(/<!--[\s\S]*?-->/g, '').trim();
+    if (firstEl.indexOf('<div id="bootCover"') !== 0) throw new Error('the boot cover is not the first element in <body>');
+    if (CSS.indexOf('.boot-cover {') < 0 || CSS.indexOf('@keyframes bootCoverGiveUp') < 0) throw new Error('the cover has no style or no self-removal safety net');
+    const c = doc.createElement('div'); c.id = 'bootCover'; doc.body.insertBefore(c, doc.body.firstChild);
+    fx.setPeek(async () => null);
+    await fx.startScreen();
+    if (doc.getElementById('bootCover')) throw new Error('opening the start screen left the cover up');
+});
+
 check('Escape does not dismiss the start screen', async () => {
     doc.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
     await tick(10);
