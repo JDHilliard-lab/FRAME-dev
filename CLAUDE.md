@@ -3374,7 +3374,9 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   exported* carries instructions), any change you did not ask for (*Units auto-corrected*
   rewrote the project's units), and every failure. A notice you can miss is the wrong
   shape for information you cannot afford to miss - a test pins those three by name.
-  18 call sites moved; 63 correctly stayed.
+  18 call sites moved; 63 correctly stayed. 18.12 moved nineteen more (every "Nothing to ..." / "No ..." nudge, "Too small",
+  "Favourites full", "Custom layout", "Saved", "Import Complete"); "Restored", "Detached as" and
+  "No wall elevations yet" stay modals because each carries something to act on.
   **`--z-toast` sits ABOVE `--z-modal-alert`**, which looks wrong and is not: a toast is
   routinely raised from inside a modal, and one rendering behind the dialog that
   triggered it is worse than not showing it at all.

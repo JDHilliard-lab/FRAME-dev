@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.11';
+const APP_VERSION = '18.12';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -9950,7 +9950,7 @@ function fitFlatGraphicsToWallAction() {
     if (!elev || !elev.frames) return;
     const flats = elev.frames.filter(f => f && f.active !== false && _isFlatGraphic(f.product));
     if (!flats.length) {
-        showInfoModal('Nothing to fit', 'This wall has no wallcovering or window film on it. Fit to wall sizes a flat graphic to the wall inside its dimension lines — add one from the dashboard first.');
+        _toast('Nothing to fit', 'This wall has no wallcovering or window film on it. Fit to wall sizes a flat graphic to the wall inside its dimension lines — add one from the dashboard first.');
         return;
     }
     const picked = flats.filter(f => f.selected);
@@ -10490,7 +10490,7 @@ function dashGetSelectedIndices() {
 
 function openMoveToModal() {
     if (!dashProjectData || dashProjectData.length < 2) {
-        showInfoModal('Nothing to move', 'You need at least two rows for Move To to make sense.');
+        _toast('Nothing to move', 'You need at least two rows for Move To to make sense.');
         return;
     }
     const selected = dashGetSelectedIndices();
@@ -10514,7 +10514,7 @@ function openMoveToModal() {
         select.appendChild(opt);
     });
     if (select.options.length === 0) {
-        showInfoModal('No targets', 'There are no other rows to move next to.');
+        _toast('No targets', 'There are no other rows to move next to.');
         return;
     }
     // Default position: above (the radio's default checked attribute already
@@ -10601,7 +10601,7 @@ const BULK_LOCKED_ELEMENTS = ['m_itemCode', 'm_imageCode', 'extW', 'extH', 'm_qt
 
 function openBulkEditModal() {
     if (!dashProjectData || dashProjectData.length === 0) {
-        showInfoModal('Nothing to edit', 'Add some rows first.');
+        _toast('Nothing to edit', 'Add some rows first.');
         return;
     }
     const selected = dashGetSelectedIndices();
@@ -10759,7 +10759,7 @@ function cancelBulkEdit() { _bulkTeardown(false); }
 
 function openDuplicateSeriesModal() {
     if (!dashProjectData || dashProjectData.length === 0) {
-        showInfoModal('Nothing to duplicate', 'Add a row first.');
+        _toast('Nothing to duplicate', 'Add a row first.');
         return;
     }
     const sourceIdx = dashSelectedRowIndex;
@@ -10822,7 +10822,7 @@ function updateDupSeriesPreview() {
 function applyDuplicateSeries() {
     const ids = buildDupSeriesIds();
     if (ids.length === 0) {
-        showInfoModal('Nothing to do', 'Set a count of at least 1.');
+        _toast('Nothing to do', 'Set a count of at least 1.');
         return;
     }
     // Validate: check for collisions with existing IDs and with each other
@@ -11809,7 +11809,7 @@ function importDashCSV(e) {
         renderDashTable();
         elevations.forEach(elev => elev.frames = []);
         recalculateDashboardQuantities();
-        showInfoModal('Import Complete', `Imported ${newData.length} items successfully.`);
+        _toast('Import Complete', `Imported ${newData.length} items successfully.`);
     };
     r.readAsText(f); e.target.value = '';
 }
@@ -13225,7 +13225,7 @@ function handleODInput(which) {
 function fitODToImage() {
     const row = _bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex];
     if (!row || !row.artworkUrl || !row.artworkW || !row.artworkH) {
-        showInfoModal('No artwork', 'Add artwork to this piece first, then fit the frame to its ratio.');
+        _toast('No artwork', 'Add artwork to this piece first, then fit the frame to its ratio.');
         return;
     }
     const artAR = row.artworkW / row.artworkH;          // image aspect (W/H)
@@ -13254,7 +13254,7 @@ function fitODToImage() {
     const borderH = fW + m1T + m2 + faux;               // per-side, vertical
 
     const openingW = odW - 2 * borderW;
-    if (openingW <= 0) { showInfoModal('Too small', 'The frame width is too small for this operation. Reduce mats or increase OD width.'); return; }
+    if (openingW <= 0) { _toast('Too small', 'The frame width is too small for this operation. Reduce mats or increase OD width.'); return; }
     const openingH = openingW / artAR;
     const newODH = +(openingH + 2 * borderH).toFixed(3);
     document.getElementById('extH').value = newODH;
@@ -19775,7 +19775,7 @@ function _dsToggleFav(key) {
     const f = _dsFavs(); const i = f.indexOf(key);
     if (i >= 0) f.splice(i, 1);
     else {
-        if (f.length >= 4) { showInfoModal('Favourites full', 'You can pin up to four templates. Unstar one first.'); return; }
+        if (f.length >= 4) { _toast('Favourites full', 'You can pin up to four templates. Unstar one first.'); return; }
         f.push(key);
     }
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
@@ -20872,7 +20872,7 @@ function _dsPlaceRelativeInto(parent, desc) {
 function _dsResetLayoutOrder() {
     const arr = (editorialContent.layoutPages || []);
     const hand = arr.filter(p => p && p.afterKey);
-    if (!hand.length) { showInfoModal('Nothing to reset', 'No pages have been moved by hand — they are all still where their template puts them.'); return; }
+    if (!hand.length) { _toast('Nothing to reset', 'No pages have been moved by hand — they are all still where their template puts them.'); return; }
     _confirmDestroy({
         title: 'Put ' + hand.length + ' hand-placed page' + (hand.length === 1 ? '' : 's') + ' back in the default order?',
         body: 'Pages you moved by hand go back to where their template puts them.',
@@ -22549,13 +22549,13 @@ async function _dsSaveSelectedTextPreset() {
     const a = _dsCurrentAnnot();
     if (a && (a.type === 'text' || a.type === 'note')) payload = { text: a.text || '', size: a.size, italic: !!a.italic, bold: !!a.bold, color: a.color, font: a.font, align: a.align };
     else if (typeof _mbSelEl === 'function') { const el = _mbSelEl(); if (el && el.type === 'text') payload = { text: el.text || '', size: el.size, italic: !!el.italic, bold: !!el.bold, color: el.color, font: el.font, align: el.align }; }
-    if (!payload || !payload.text.trim()) { showInfoModal('Nothing to save', 'Select a text box on the page first, then save it to the library.'); return; }
+    if (!payload || !payload.text.trim()) { _toast('Nothing to save', 'Select a text box on the page first, then save it to the library.'); return; }
     const name = (await _askText('Save to text library', 'Preset name', payload.text.split('\n')[0].slice(0, 30)) || '').trim();
     if (!name) return;
     _dsUserTextPresets().push(Object.assign({ name: name }, payload));
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
-    showInfoModal('Saved', '\u201c' + name + '\u201d is now in your text library (T menu). It saves with the project.');
+    _toast('Saved', '\u201c' + name + '\u201d is now in your text library (T menu). It saves with the project.');
 }
 function _dsOpenTextMenu(ev) {
     if (ev && ev.stopPropagation) ev.stopPropagation();
@@ -26446,7 +26446,7 @@ async function _dsBuildPage(silent) {
     if (!desc) return;
     if (desc.kind === 'spec') {
         const _bt = desc._specTpl || _specTplResolve(desc._ovKey || (desc.row && desc.row.id) || '');
-        if (SPEC_TEMPLATES[_bt] && SPEC_TEMPLATES[_bt].freeform) { if (!silent) showInfoModal('Custom layout', 'Custom pages already show an exact live preview \u2014 what you place is what exports.'); return; }
+        if (SPEC_TEMPLATES[_bt] && SPEC_TEMPLATES[_bt].freeform) { if (!silent) _toast('Custom layout', 'Custom pages already show an exact live preview \u2014 what you place is what exports.'); return; }
     }
     const key = _deckPageKey(desc);
     // A batch capture already owns the view. Rendering now would draw the
@@ -37054,10 +37054,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     let rows = [];
     if (opts.all) {
         rows = _deckSpecRows();
-        if (wantSpec && !rows.length) { showInfoModal('No pieces', 'There are no pieces in the project yet. Add frames in the Frame Dashboard, then try again.'); return; }
+        if (wantSpec && !rows.length) { _toast('No pieces', 'There are no pieces in the project yet. Add frames in the Frame Dashboard, then try again.'); return; }
     } else {
         rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
-        if (wantSpec && !rows.length) { showInfoModal('Nothing to export', 'Select a frame row first.'); return; }
+        if (wantSpec && !rows.length) { _toast('Nothing to export', 'Select a frame row first.'); return; }
     }
 
     // Page format: widescreen to match the studio's reference decks (~1.73:1),
@@ -39163,7 +39163,7 @@ function renumberElevation(template, locValue, reorderDashboard) {
 // elevation's index + 1 (so wall 1 = "001", wall 2 = "002") padded to 3 digits.
 function openRenumberModal() {
     if (currentView !== 'elevation' || !elevFrames || elevFrames.length === 0) {
-        showInfoModal('Nothing to re-number', 'Add some frames to this elevation first, then come back to this button.');
+        _toast('Nothing to re-number', 'Add some frames to this elevation first, then come back to this button.');
         return;
     }
     const defaultLoc = String((currentElevIndex || 0) + 1).padStart(3, '0');
@@ -40408,7 +40408,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.11</strong> Every name box and yes/no question (templates, text styles, text presets, levels) is now a FRAME dialog instead of a plain browser box, and saving a text style offers your existing groups. An empty floor plan page has an <strong>Upload floor plan</strong> button right in the middle. Deleting a level is now properly undoable, and wall lines on the plans above it stay on the right plan.<br><br>
+                body: `<strong>18.12</strong> Notices that only explain why nothing happened ("Nothing to move", "Add a row first") or confirm something worked ("Saved", "Import complete") are now small notices that fade away, instead of a box you have to click to dismiss. The size and weight nudge buttons in the text and arrow settings have tooltips.<br><br>
+<strong>18.11</strong> Every name box and yes/no question (templates, text styles, text presets, levels) is now a FRAME dialog instead of a plain browser box, and saving a text style offers your existing groups. An empty floor plan page has an <strong>Upload floor plan</strong> button right in the middle. Deleting a level is now properly undoable, and wall lines on the plans above it stay on the right plan.<br><br>
 <strong>18.10</strong> FRAME opens on a calm start screen: the logo comes together, then <strong>Continue</strong> (unsaved work, when there is some), <strong>New project</strong> (name, client, units, then straight to the floorplan Items list) or <strong>Open project</strong>. A bar at the bottom left says the next step for a new project. The old start question and the separate restore prompt are gone.<br><br>
 <strong>18.09</strong> Jump to lists cleaner results: typing a code shows only the matching codes (not every piece whose description mentions the word), each group appears once, and a spec page is not listed twice unless you type its page number.<br><br>
 <strong>18.08</strong> Text on deck pages wraps in the editor exactly where it wraps in the PDF. The editor was kerning letter pairs (up to 5% tighter on pairs like AV and TA) and the PDF never does, so a heading could fit on screen and break onto a second line in the export. Nothing in the PDF changes.<br><br>
@@ -40680,7 +40681,7 @@ async function batchDownloadAllFrames() {
 // discarded — either the user gets a complete pack or nothing.
 async function batchDownloadAllFramesAsZip() {
     if (dashProjectData.length === 0) {
-        return showInfoModal('Nothing to Pack', 'There are no frames in the project yet. Add some via the Dashboard before running a batch export.');
+        return _toast('Nothing to Pack', 'There are no frames in the project yet. Add some via the Dashboard before running a batch export.');
     }
     if (typeof JSZip === 'undefined') {
         return showInfoModal('Library Not Loaded', 'JSZip failed to load (network issue?). Refresh the page and try again — if it keeps failing the CDN may be blocked by your network.');
@@ -40854,7 +40855,7 @@ function cancelBatchZip() {
 async function bulkExportElevations(format) {
     const isSvg = (format === 'svg');
     if (!elevations.length) {
-        return showInfoModal('Nothing to Export', 'There are no elevations in the project yet.');
+        return _toast('Nothing to Export', 'There are no elevations in the project yet.');
     }
     if (typeof JSZip === 'undefined') {
         return showInfoModal('Library Not Loaded', 'JSZip failed to load. Refresh the page and try again.');

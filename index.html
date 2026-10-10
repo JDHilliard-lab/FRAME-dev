@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.11">
+    <link rel="stylesheet" href="style.css?v=18.12">
 </head>
 <body>
 
@@ -1802,9 +1802,9 @@
                     <label style="font-size:var(--fs-75); color:var(--text-main); display:flex; align-items:center; gap:6px;">Color <input id="dsArrowColor" type="color" oninput="_dsSet('arrowColor', this.value)" style="width:30px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); background:none; cursor:pointer;"></label>
                     <label style="font-size:var(--fs-75); color:var(--text-main); display:flex; align-items:center; gap:6px;">Weight
                         <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:var(--r-4); overflow:hidden;">
-                            <button onclick="_dsNudge('arrowWeight', -0.3, 0.5, 6)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">−</button>
+                            <button title="Thinner line" aria-label="Thinner line" onclick="_dsNudge('arrowWeight', -0.3, 0.5, 6)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">−</button>
                             <span id="dsArrowWtVal" style="min-width:30px; text-align:center; font-size:var(--fs-70); color:var(--text-muted);">1.2</span>
-                            <button onclick="_dsNudge('arrowWeight', 0.3, 0.5, 6)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">+</button>
+                            <button title="Thicker line" aria-label="Thicker line" onclick="_dsNudge('arrowWeight', 0.3, 0.5, 6)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">+</button>
                         </span>
                     </label>
                 </div>
@@ -1816,9 +1816,9 @@
                         <!-- filled from FRAME_FONT_LIBRARY -->
                     </select>
                     <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:var(--r-4); overflow:hidden;">
-                        <button onclick="_dsNudge('textSize', -0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
+                        <button title="Smaller text" aria-label="Smaller text" onclick="_dsNudge('textSize', -0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
                         <span id="dsTextSizeVal" style="min-width:26px; text-align:center; font-size:var(--fs-70); color:var(--text-muted);">45</span>
-                        <button onclick="_dsNudge('textSize', 0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
+                        <button title="Larger text" aria-label="Larger text" onclick="_dsNudge('textSize', 0.005, 0.02, 0.22)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
                     </span>
                     <label style="font-size:var(--fs-75); color:var(--text-main); display:flex; align-items:center; gap:6px;">Color <input id="dsTextColor" type="color" oninput="_dsSet('textColor', this.value)" style="width:30px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); background:none; cursor:pointer;"></label>
                 </div>
@@ -1827,9 +1827,9 @@
                 <div style="font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:6px;">Image captions</div>
                 <div style="display:flex; align-items:center; gap:10px;">
                     <span style="display:inline-flex; align-items:center; border:1px solid var(--border-color); border-radius:var(--r-4); overflow:hidden;">
-                        <button onclick="_dsNudge('capSize', -0.003, 0.01, 0.08)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
+                        <button title="Smaller caption" aria-label="Smaller caption" onclick="_dsNudge('capSize', -0.003, 0.01, 0.08)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A-</button>
                         <span id="dsCapSizeVal" style="min-width:26px; text-align:center; font-size:var(--fs-70); color:var(--text-muted);">20</span>
-                        <button onclick="_dsNudge('capSize', 0.003, 0.01, 0.08)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
+                        <button title="Larger caption" aria-label="Larger caption" onclick="_dsNudge('capSize', 0.003, 0.01, 0.08)" style="width:26px; height:28px; border:0; background:transparent; color:var(--text-main); cursor:pointer;">A+</button>
                     </span>
                     <label style="font-size:var(--fs-75); color:var(--text-main); display:flex; align-items:center; gap:6px;">Position
                         <select id="dsCapSide" onchange="_dsSet('capSide', this.value)" style="height:28px; font-size:var(--fs-70); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);">
@@ -2470,8 +2470,8 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.11';</script>
-<script src="app.js?v=18.11"></script>
+<script>window.FRAME_HTML_VERSION = '18.12';</script>
+<script src="app.js?v=18.12"></script>
 
 </body>
 </html>
