@@ -2497,3 +2497,53 @@ button.cat-node:hover { border-color: var(--ui-active); }
    deck centre and rail, the Project tab preview and the layout editor. The text tiles
    themselves carry it inline as well, for thumbnails hosted anywhere else. */
 #dsCenter, #dsRail, #dsProjCoverPrev, #moodboardCanvas, #dsLayoutCanvas { font-kerning: none; }
+
+/* THE START SCREEN (18.10). Opaque, not a scrim: the busy app behind it is exactly
+   what a designer should not be looking at before choosing a project. */
+.frame-modal.start-screen { background: var(--bg-main); backdrop-filter: none; -webkit-backdrop-filter: none; align-items: center; justify-content: center; }
+.ss-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; width: min(760px, 92vw); color: var(--text-main); }
+.ss-logo { width: min(340px, 70vw); height: auto; color: var(--text-strong); fill: currentColor; overflow: visible; }
+.ss-tag { margin-top: 14px; font-size: var(--fs-65); letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); opacity: 0; animation: ssFade 700ms ease 1050ms forwards; }
+.ss-body { width: 100%; margin-top: 44px; opacity: 0; transform: translateY(6px); animation: ssRise 600ms cubic-bezier(.2,.7,.2,1) 1250ms forwards; }
+.ss-cards { display: flex; gap: 14px; justify-content: center; }
+.ss-card { flex: 1 1 0; min-width: 0; max-width: 240px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px; text-align: left; cursor: pointer;
+    background: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-8); transition: border-color 120ms ease, transform 120ms ease; }
+.ss-card:hover, .ss-card:focus-visible { border-color: var(--ui-active); transform: translateY(-1px); }
+.ss-card strong { font-family: var(--ui-display); font-size: var(--fs-105); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-strong); }
+.ss-txt { font-size: var(--fs-70); line-height: 1.45; color: var(--text-muted); }
+.ss-ic .svg-icon { width: 20px; height: 20px; color: var(--ui-active); }
+.ss-continue { border-color: var(--ui-active); }
+.ss-note { margin-top: 12px; text-align: center; font-size: var(--fs-65); color: var(--text-muted); }
+.ss-ver { margin-top: 36px; font-size: var(--fs-55); color: var(--text-muted); opacity: 0; animation: ssFade 700ms ease 1500ms forwards; }
+.ss-form { width: min(400px, 92vw); margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.ss-form label { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-65); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.ss-form input[type=text] { height: 34px; padding: 0 10px; font-size: var(--fs-85); text-transform: none; letter-spacing: 0; }
+.ss-units-row { display: flex; align-items: center; gap: 12px; font-size: var(--fs-65); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.ss-units { flex: 0 0 180px; }
+.ss-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+.ss-actions .action-btn { width: auto; height: 32px; padding: 0 18px; }
+
+/* THE LOGO COMES TOGETHER. The mark slides in from the left while the letters close
+   up from slightly spread, staggered, each fading in. Small distances and an
+   ease-out, so it settles rather than arrives. In SVG user units (the viewBox is
+   346 wide), so the move scales with the logo. */
+.ss-logo .fl-mark { opacity: 0; transform: translateX(-26px); animation: flMark 950ms cubic-bezier(.2,.7,.2,1) 120ms forwards; }
+.ss-logo .fl-l { opacity: 0; transform: translateX(calc(14px + var(--i) * 6px)); animation: flLetter 900ms cubic-bezier(.2,.7,.2,1) calc(260ms + var(--i) * 70ms) forwards; }
+@keyframes flMark { to { opacity: 1; transform: translateX(0); } }
+@keyframes flLetter { to { opacity: 1; transform: translateX(0); } }
+@keyframes ssFade { to { opacity: 1; } }
+@keyframes ssRise { to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+    .ss-logo .fl-mark, .ss-logo .fl-l, .ss-tag, .ss-body, .ss-ver { animation: none; opacity: 1; transform: none; }
+}
+
+/* NEXT STEP (18.10): one line, bottom-left, the one thing this project needs next.
+   Below every dialog layer, and left of the toasts, which sit bottom-centre. */
+.next-step { position: fixed; left: 14px; bottom: 14px; z-index: 9000; display: flex; align-items: center; gap: 8px; max-width: min(520px, 60vw);
+    padding: 6px 6px 6px 12px; background: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-8);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.28); font-size: var(--fs-70); }
+.next-step .ns-n { flex: none; font-size: var(--fs-55); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ui-active); font-weight: 700; }
+.next-step .ns-text { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.next-step button { flex: none; height: 24px; padding: 0 10px; font-size: var(--fs-65); cursor: pointer; border-radius: var(--r-4); border: 1px solid var(--border-color); background: transparent; color: var(--text-main); }
+.next-step .ns-go { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
+.next-step .ns-x { padding: 0 7px; border: none; color: var(--text-muted); font-size: var(--fs-85); }

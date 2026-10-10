@@ -30,7 +30,7 @@ window.eval(APP + NL + [
   '  get elevs() { return elevations; }, set elevs(v) { elevations = v; },',
   '  get ed() { return editorialContent; }, set ed(v) { editorialContent = v; },',
   '  defaults: _editorialDefaults, add: _fpAddCodes, apply: _fpApplyFrameSet, presets: SALON_PRESETS, layout: _frameSetLayout,',
-  '  hang: function () { return elevHangIn; }, panel: _fpPanelItems, fresh: _projectIsFresh, chooser: openStartChooser,',
+  '  hang: function () { return elevHangIn; }, panel: _fpPanelItems, fresh: _projectIsFresh, newProject: _startNewProject,',
   '  get armLine() { return _fpLineArmId; }, wallMode: _fpWallPanelsOn, styles: FP_LINE_STYLES, GAP: SET_GAP_IN,',
   '  goFp: function (fn) { _dsGoFloorplanItems = fn; },',
   '};',
@@ -167,19 +167,20 @@ check('EXACT ASK: the pen opens the line styles, Breaker included; picking one a
   t.remove();
 });
 
-check('EXACT ASK: a fresh project asks where to start; floorplan opens the Items tab', () => {
+// CHANGED IN 18.10, deliberately: the "Where do you want to start?" chooser is gone. A
+// new project is started from the start screen and ALWAYS lands on the floorplan Items
+// list, a house standard rather than a question (the Frame Dashboard is still tab 1).
+check('a new project starts on the floorplan Items tab (the chooser it replaces is gone)', () => {
   fresh();
   if (!fx.fresh()) throw new Error('an empty project does not count as fresh');
   let went = false;
   fx.goFp(() => { went = true; });
-  const ov = fx.chooser();
-  const btns = ov.querySelectorAll('.start-choice');
-  if (btns.length !== 2) throw new Error(btns.length + ' choices');
-  btns[0].click();
-  if (!went) throw new Error('Floorplan did not go to the floorplan');
+  fx.newProject({ name: 'Test', unit: 'in' });
+  if (!went) throw new Error('New project did not go to the floorplan Items list');
+  if (APP.indexOf('function openStartChooser') >= 0) throw new Error('the old two-way chooser is still in the app');
   fx.add('framed', 1); fx.apply('ART.1', 2, '');
   if (fx.fresh()) throw new Error('a project with walls still counts as fresh');
-  if (APP.indexOf('/jsdom/i.test(navigator.userAgent') < 0) throw new Error('the boot popup is not kept out of test harnesses');
+  if (APP.indexOf('/jsdom/i.test(navigator.userAgent') < 0) throw new Error('the boot screen is not kept out of test harnesses');
 });
 
 check('EXACT ASK: the placement colour spans the whole dashboard row, selection still reads', () => {

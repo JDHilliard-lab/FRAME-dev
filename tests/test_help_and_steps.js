@@ -23,6 +23,7 @@ const root = path.join(__dirname, '..');
 const APP = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
 const HTML = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const NL = String.fromCharCode(10);
+const CSS = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
 
 const results = [];
 const check = (label, fn) => results.push({ label, fn });
@@ -40,7 +41,9 @@ window.eval(APP + NL + [
     '  counts: _projectStepCounts, steps: _projectSteps, live: _helpLiveEntry,',
     '  renderTabs: renderNavTabs, syncBadges: _syncNavBadges, schedule: scheduleAutosave,',
     '  openHelp: openHelpModal, closeHelp: closeHelpModal, setVideo: setHelpVideoUrl, section: renderHelpRefSection,',
-    '  firstRun: _stepsFirstRunTip,',
+    '  startScreen: openStartScreen, nextStep: _syncNextStep, newProject: _startNewProject, logo: _frameLogoSvg,',
+    '  setPeek: function (f) { _autosavePeek = f; }, setGoFp: function (f) { _dsGoFloorplanItems = f; },',
+    '  get unit() { return dashUnit; }, set dismissed(v) { _nextStepDismissed = v; },',
     '  set elevs(v) { elevations = v; }, set rows(v) { dashProjectData = v; },',
     '  set plan(v) { floorplanImageData = v; }, set levels(v) { floorplanLevels = v; },',
     '};',
@@ -251,42 +254,84 @@ check('its Go buttons take you to the step', async () => {
     if (doc.getElementById('helpModal').style.display !== 'none') throw new Error('Help stayed open over the view it sent you to');
 });
 
-check('boot does NOT put the tip on a timer, it waits for the first click', async () => {
-    // A 12-second toast scheduled at boot kept every headless test process alive
-    // ~14 seconds after it finished, and the suite ran for half an hour.
-    const i = APP.indexOf("if (document.readyState === 'loading') {" + NL + "    document.addEventListener('DOMContentLoaded', () => {" + NL + "        updateDirtyIndicator();");
-    const boot = APP.slice(i, APP.indexOf('END SAVE / AUTOSAVE', i));
-    if (i < 0) throw new Error('could not find the boot branches');
-    if (boot.indexOf('_stepsFirstRunTip()') >= 0) throw new Error('boot shows the tip on a timer again');
-    if (boot.split('_armStepsFirstRunTip()').length - 1 !== 2) throw new Error('the tip is not armed on both boot branches');
-    try { window.localStorage.removeItem('frameStepsTipSeen'); } catch (e) {}
-    doc.querySelectorAll('.frame-toast').forEach((t) => t.remove());
-    window.eval('_armStepsFirstRunTip()');
-    await tick(1700);
-    if (doc.querySelectorAll('.frame-toast').length) throw new Error('the tip appeared with nobody having clicked');
-    doc.body.dispatchEvent(new window.Event('pointerdown', { bubbles: true }));
-    await tick(1700);
-    const n = Array.from(doc.querySelectorAll('.frame-toast')).filter((t) => t.textContent.indexOf('New to FRAME') >= 0).length;
-    if (n !== 1) throw new Error('the first click did not bring the tip up');
-    doc.querySelectorAll('.frame-toast').forEach((t) => t.remove());
+// ── the start screen (18.10) ────────────────────────────────────────────
+// CHANGED IN 18.10, deliberately: the first-run toast ("New to FRAME?") and the
+// "Where do you want to start?" chooser are gone. Every boot opens on the start
+// screen, and the next step lives in a bar beside the work, not in a toast.
+check('both boot branches open through _bootStart, which keeps a harness on the restore question', async () => {
+    if (APP.split('setTimeout(_bootStart, 200);').length - 1 !== 2) throw new Error('not wired into both boot branches');
+    if (APP.indexOf('_armStepsFirstRunTip') >= 0 || APP.indexOf('_stepsFirstRunTip') >= 0) throw new Error('the old first-run toast is still armed');
+    const b = APP.slice(APP.indexOf('function _bootStart()'), APP.indexOf('function _confirmDiscardUnsaved'));
+    if (b.indexOf('jsdom') < 0 || b.indexOf('checkAutosaveOnLoad') < 0 || b.indexOf('openStartScreen') < 0) throw new Error('_bootStart does not split browser and harness');
 });
 
-check('the first-run tip shows ONCE per machine', async () => {
-    // The page's own boot already ran this, as a first boot should, and its tip
-    // may still be on its timer. Let it land before measuring, or it arrives
-    // mid-check and reads as a second tip.
-    await tick(1700);
-    try { window.localStorage.removeItem('frameStepsTipSeen'); } catch (e) {}
-    doc.querySelectorAll('.frame-toast').forEach((t) => t.remove());
-    fx.firstRun();
-    await tick(1700);
-    const first = Array.from(doc.querySelectorAll('.frame-toast')).filter((t) => t.textContent.indexOf('New to FRAME') >= 0).length;
-    if (first !== 1) throw new Error('the first-run tip did not appear');
-    doc.querySelectorAll('.frame-toast').forEach((t) => t.remove());
-    fx.firstRun();
-    await tick(1700);
-    const again = Array.from(doc.querySelectorAll('.frame-toast')).filter((t) => t.textContent.indexOf('New to FRAME') >= 0).length;
-    if (again) throw new Error('the tip came back on the second boot');
+check('the start screen offers New and Open, and Continue only when there is unsaved work', async () => {
+    fx.setPeek(async () => null);
+    let ov = await fx.startScreen();
+    let titles = Array.from(ov.querySelectorAll('.ss-card strong')).map((s) => s.textContent);
+    if (titles.join() !== 'New project,Open project') throw new Error('with no backup: ' + titles.join());
+    if (ov.querySelector('[data-modal-close]')) throw new Error('it has a close control, so Escape would dismiss it with no project chosen');
+    fx.setPeek(async () => ({ projName: 'Lobby deck', timeStr: '5 minutes ago', stamp: {}, legacy: null }));
+    ov = await fx.startScreen();
+    if (doc.querySelectorAll('#startScreen').length !== 1) throw new Error('opening it twice stacked two');
+    titles = Array.from(ov.querySelectorAll('.ss-card strong')).map((s) => s.textContent);
+    if (titles[0] !== 'Continue') throw new Error('unsaved work is not offered first: ' + titles.join());
+    if (ov.querySelector('.ss-continue .ss-txt').textContent.indexOf('Lobby deck') < 0) throw new Error('Continue does not name the work');
+    if (!ov.querySelector('.ss-note')) throw new Error('nothing says New or Open will replace the unsaved work');
+});
+
+check('Escape does not dismiss the start screen', async () => {
+    doc.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+    await tick(10);
+    if (!doc.getElementById('startScreen')) throw new Error('Escape closed it with no project chosen');
+});
+
+check('New project takes a name, client and units, then lands on the floorplan Items list', async () => {
+    let went = false;
+    fx.setGoFp(() => { went = true; });
+    const ov = doc.getElementById('startScreen');
+    Array.from(ov.querySelectorAll('.ss-card')).find((c) => c.textContent.indexOf('New project') >= 0).click();
+    const form = ov.querySelector('.ss-form');
+    if (!form) throw new Error('no form');
+    form.elements.name.value = 'Marriott Downtown';
+    form.elements.client.value = 'Marriott';
+    Array.from(form.querySelectorAll('.ss-units .frame-tab')).find((b) => b.textContent === 'CM').click();
+    form.dispatchEvent(new window.Event('submit', { cancelable: true }));
+    if (doc.getElementById('startScreen')) throw new Error('the start screen stayed up');
+    if (doc.getElementById('g_projName').value !== 'Marriott Downtown') throw new Error('name not set');
+    if (doc.getElementById('g_client').value !== 'Marriott') throw new Error('client not set');
+    if (fx.unit !== 'cm') throw new Error('units not set: ' + fx.unit);
+    if (!went) throw new Error('did not land on the floorplan Items list');
+    fx.newProject({ unit: 'in' });
+});
+
+check('the logo is six parts, the mark first, and the motion respects reduced motion', async () => {
+    const holder = doc.createElement('div'); holder.innerHTML = fx.logo('x');
+    const parts = holder.querySelectorAll('path');
+    if (parts.length !== 6) throw new Error(parts.length + ' parts');
+    if (!parts[0].classList.contains('fl-mark') || holder.querySelectorAll('.fl-l').length !== 5) throw new Error('mark and letters are not tagged for the animation');
+    if (CSS.indexOf('@keyframes flLetter') < 0 || CSS.indexOf('prefers-reduced-motion: reduce') < 0) throw new Error('the animation or its reduced-motion override is missing');
+});
+
+check('the next-step bar names the one next thing and folds away when the project is underway', async () => {
+    fx.dismissed = false;
+    fx.rows = [{ id: 'ART.1' }]; fx.elevs = [{ id: 'w', name: 'W', frames: [] }]; fx.plan = ''; fx.levels = [];
+    fx.nextStep();
+    let bar = doc.getElementById('nextStep');
+    if (!bar || bar.querySelector('.ns-n').textContent !== 'Step 1') throw new Error('a fresh project is not on step 1');
+    fx.rows = [{ id: 'ART.1' }, { id: 'ART.2' }];
+    fx.nextStep();
+    bar = doc.getElementById('nextStep');
+    if (bar.querySelector('.ns-n').textContent !== 'Step 2' || bar.textContent.indexOf('2 pieces are not on a wall') < 0) throw new Error('step 2 not reported: ' + bar.textContent);
+    fx.elevs = [{ id: 'w', name: 'W', frames: [{ id: 'ART.1', active: true }, { id: 'ART.2', active: true }] }];
+    fx.nextStep();
+    if (doc.getElementById('nextStep')) throw new Error('the bar stayed after every piece was placed and there is no plan to pin on');
+    fx.elevs = [{ id: 'w', name: 'W', frames: [] }];
+    fx.nextStep();
+    doc.getElementById('nextStep').querySelector('.ns-x').click();
+    fx.nextStep();
+    if (doc.getElementById('nextStep')) throw new Error('dismissing did not hold');
+    fx.dismissed = false;
 });
 
 // ── run ─────────────────────────────────────────────────────────────────

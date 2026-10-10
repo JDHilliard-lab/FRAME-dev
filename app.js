@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.09';
+const APP_VERSION = '18.10';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -174,6 +174,7 @@ function _syncNavBadges() {
         }
         tab.title = (NAV_STEP_TIPS[v] || '') + (b ? ' ' + b.tip : '');
     });
+    try { _syncNextStep(); } catch (e) {}
 }
 
 // Debounced off scheduleAutosave, the hook nearly every edit already calls.
@@ -200,13 +201,27 @@ function _helpLiveEntry(kind) {
         + '</li>').join('') + '</ul>';
 }
 
-// ── WHERE TO START (17.91) ──────────────────────────────────────────────────
-// A fresh project asks once: start on the floorplan (list and place the item codes
-// first) or in the Frame Dashboard (spec the frames first). Both are real starting
-// points in this studio, so it is a question, not a default. Asked only for a project
-// with nothing in it yet, never over another dialog (the autosave restore asks first),
-// and "Don't ask again" is remembered per machine.
-const START_CHOOSER_KEY = 'frameStartChooserOff';
+// ── THE START SCREEN (18.10) ────────────────────────────────────────────────
+// FRAME used to open on whichever view booted, with a "Where do you want to start?"
+// modal over a screen already full of controls, and the autosave question as a
+// second modal 200ms later. A designer had to choose between two views before
+// knowing what either was, in front of the busiest screen in the app.
+//
+// Now every boot opens on ONE calm screen: the logo comes together, then three
+// choices. Continue (only when there is unsaved work in the browser; it replaces the
+// old restore prompt), New project, Open project. Every visit, not just the first, so
+// "first time" and "every time" are one path to keep right.
+//
+// NEW PROJECT ALWAYS LANDS ON THE FLOORPLAN ITEMS LIST. Since 17.95 the item codes
+// are run from there and everything else hangs off them, so it is the one starting
+// point - a house standard, not a question. The Frame Dashboard is still tab 1 for
+// anyone who wants it.
+//
+// It is a .frame-modal with NO close control, so the shell ignores Escape and the
+// backdrop: there is no neutral way out of "which project are you working on", the
+// same reasoning as the old restore prompt's mustChoose. Kept out of test harnesses,
+// like the chooser it replaces, because a modal arriving by itself at boot lands in
+// the middle of whatever a headless check is doing.
 function _projectIsFresh() {
     const rows = (dashProjectData || []).filter(Boolean);
     if (rows.length > 1 || rows.some(r => r.artworkUrl || _fpPins(r).length)) return false;
@@ -214,62 +229,149 @@ function _projectIsFresh() {
     if ((floorplanLevels || []).some(l => l && l.imageData) || floorplanImageData) return false;
     return true;
 }
-function _startChooserMaybe() {
-    let off = false; try { off = localStorage.getItem(START_CHOOSER_KEY) === '1'; } catch (e) {}
-    if (off || !_projectIsFresh()) return;
-    if (typeof _modalTop === 'function' && _modalTop()) { setTimeout(_startChooserMaybe, 1500); return; }
-    openStartChooser();
+// The FRAME logo as inline SVG, one shape per part, so it can come together.
+// The two logo files are the same six shapes in two fills; currentColor covers both
+// themes. Mark first, then F R A M E, each carrying its index for the stagger.
+const FRAME_LOGO_PARTS = [
+    'M0 19.23 0 57.23 22.86 57.23 22.86 0 0 19.23Z',
+    'M57.15 .43 62.67 6.32 62.67 51.51 57.15 57.25 80.69 57.25 75.17 51.52 75.17 30.8 92.22 30.8 92.22 27.03 75.17 27.03 75.17 4.14 91.01 4.14 98.27 10.62 98.27 .42 57.15 .43Z',
+    'M150.88,13.84c0-9.97-8.46-13.42-22.56-13.42h-20.97l5.51,5.89v45.21l-5.51,5.72h22.2l-5.31-5.72v-20.4h4.63l15.18,26.12h12.96l-17.07-28.6c7.38-2.36,10.95-7.71,10.95-14.8M135.98,24.72c-2.39,1.83-5.75,2.63-10.04,2.63h-1.7s0-23.25,0-23.25h3.23c8.05,0,12.33,1.8,12.33,10.95,0,4.98-1.43,7.84-3.83,9.67',
+    'M193.48.42h-12l3.08,7.97-15.35,41.57-.53,1.43-4.93,5.86h13.54l-4.6-5.47.61-1.64,4.23-11.47h18.94l4.93,12.52-5.09,6.05h22.16l-4.98-5.91L193.48.42ZM178.92,34.9l7.78-21.06,8.29,21.06h-16.06Z',
+    'M297.52 57.25 292.62 51.48 285.2 6.81 289.97 .5 275.67 .49 261.7 40.85 247.21 .5 232.48 .5 236.9 6.9 230.45 51.48 225.43 57.25 239.28 57.25 234.29 51.48 239.44 16.36 255.09 57.25 259.72 57.25 274.94 14.58 280.65 51.48 276.41 57.25 297.52 57.25Z',
+    'M338.78 4.14 346.03 10.62 346.03 .42 304.92 .43 310.43 6.32 310.43 51.36 304.92 57.25 346.03 57.26 346.03 47.06 338.78 53.54 322.93 53.54 322.93 51.52 322.93 30.8 339.98 30.8 339.98 30.65 339.98 27.03 339.98 26.88 322.93 26.88 322.93 4.14 338.78 4.14Z'
+];
+function _frameLogoSvg(cls) {
+    return '<svg class="' + (cls || '') + '" viewBox="0 0 346.03 57.26" role="img" aria-label="FRAME">'
+        + FRAME_LOGO_PARTS.map((d, k) => '<path class="' + (k === 0 ? 'fl-mark' : 'fl-l') + '" style="--i:' + (k - 1) + '" d="' + d + '"/>').join('')
+        + '</svg>';
 }
-function openStartChooser() {
+// The file the last project was opened from or saved to, by NAME only. The handle
+// itself is session-only on purpose (see _projectFileHandle), so this cannot reopen
+// anything; it tells you which file to pick.
+const LAST_FILE_KEY = 'frameLastFileName';
+function _startScreenClose() { const m = document.getElementById('startScreen'); if (m) m.remove(); }
+async function openStartScreen() {
+    _startScreenClose();
+    let peek = null;
+    try { peek = await _autosavePeek(); } catch (e) { peek = null; }
     const ov = document.createElement('div');
-    ov.className = 'frame-modal';
-    ov.id = 'startChooser';
+    ov.id = 'startScreen';
+    ov.className = 'frame-modal fm-over start-screen';
     ov.style.display = 'flex';
-    const card = document.createElement('div');
-    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-10); padding:24px; width:600px; max-width:92vw;';
-    const h = document.createElement('div');
-    h.style.cssText = 'font-family:var(--ui-display); font-size:var(--fs-120); letter-spacing:0.04em; text-transform:uppercase; color:var(--text-strong); margin-bottom:4px;';
-    h.textContent = 'Where do you want to start?';
-    const sub = document.createElement('div');
-    sub.style.cssText = 'font-size:var(--fs-75); color:var(--text-muted); margin-bottom:16px;';
-    sub.textContent = 'Either way works. You can switch any time from the tabs at the top.';
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex; gap:12px; margin-bottom:14px;';
-    const choice = (title, body, icon, go) => {
-        const b = document.createElement('button');
-        b.type = 'button'; b.className = 'start-choice';
-        b.innerHTML = icon + '<strong></strong><span></span>';
+    const wrap = document.createElement('div'); wrap.className = 'ss-wrap';
+    wrap.innerHTML = _frameLogoSvg('ss-logo') + '<div class="ss-tag">Presentation builder</div>';
+    const body = document.createElement('div'); body.className = 'ss-body';
+    const cards = document.createElement('div'); cards.className = 'ss-cards';
+    const card = (title, text, icon) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'ss-card';
+        b.innerHTML = '<span class="ss-ic">' + icon + '</span><strong></strong><span class="ss-txt"></span>';
         b.querySelector('strong').textContent = title;
-        b.querySelector('span').textContent = body;
-        b.onclick = () => { remember(); ov.remove(); go(); };
+        b.querySelector('.ss-txt').textContent = text;
         return b;
     };
-    const cb = document.createElement('input'); cb.type = 'checkbox';
-    const remember = () => { if (cb.checked) { try { localStorage.setItem(START_CHOOSER_KEY, '1'); } catch (e) {} } };
-    const fp = choice('Floorplan', 'Add item codes (ART.1, EGD.1, WF.1), pick each one’s frame set, and pin them on the plan. No plan image needed yet.',
-        '<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M3 12h7v9M14 3v8h7"/><circle cx="17" cy="16" r="2"/></svg>',
-        () => _dsGoFloorplanItems());
-    fp.setAttribute('data-modal-initial', '');
-    const db = choice('Frame Dashboard', 'Spec the frames first: sizes, mouldings, mats and artwork, one row per piece.',
-        '<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M3 9h18M3 14h18M9 4v16"/></svg>',
-        () => { try { switchView('dashboard'); } catch (e) {} });
-    row.appendChild(fp); row.appendChild(db);
-    const foot = document.createElement('div');
-    foot.style.cssText = 'display:flex; align-items:center; justify-content:space-between;';
-    const lab = document.createElement('label');
-    lab.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-muted); cursor:pointer;';
-    lab.appendChild(cb); lab.appendChild(document.createTextNode('Don’t ask again'));
-    const close = document.createElement('button');
-    close.className = 'action-btn btn-secondary'; close.textContent = 'Not now';
-    close.style.cssText = 'width:auto; padding:0 14px; height:28px;';
-    close.setAttribute('data-modal-close', '');
-    close.onclick = () => { remember(); ov.remove(); };
-    foot.appendChild(lab); foot.appendChild(close);
-    card.appendChild(h); card.appendChild(sub); card.appendChild(row); card.appendChild(foot);
-    ov.appendChild(card);
+    let first = null;
+    if (peek) {
+        const c = card('Continue', '“' + peek.projName + '” from ' + peek.timeStr + ', not saved to a file yet.',
+            '<svg class="svg-icon" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>');
+        c.classList.add('ss-continue');
+        c.onclick = async () => { const ok = await _autosaveRestoreNow(peek); if (ok !== false) _startScreenClose(); };
+        cards.appendChild(c); first = c;
+    }
+    const nw = card('New project', 'Name it, pick the units, and start by listing the item codes on the floorplan.',
+        '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>');
+    nw.onclick = () => _startScreenNewForm(body, cards, peek);
+    cards.appendChild(nw); if (!first) first = nw;
+    let last = ''; try { last = localStorage.getItem(LAST_FILE_KEY) || ''; } catch (e) {}
+    const op = card('Open project', last ? ('Last file: ' + last) : 'A .json project file saved from FRAME.',
+        '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v10H3z"/></svg>');
+    op.onclick = () => { if (typeof openMasterProject === 'function') openMasterProject(); };
+    cards.appendChild(op);
+    body.appendChild(cards);
+    if (peek) {
+        const note = document.createElement('div'); note.className = 'ss-note';
+        note.textContent = 'Starting a new project or opening a file replaces this unsaved work once you make a change.';
+        body.appendChild(note);
+    }
+    wrap.appendChild(body);
+    const ver = document.createElement('div'); ver.className = 'ss-ver';
+    ver.textContent = 'Version ' + APP_VERSION;
+    wrap.appendChild(ver);
+    ov.appendChild(wrap);
     document.body.appendChild(ov);
-    try { fp.focus(); } catch (e) {}
+    if (first) first.setAttribute('data-modal-initial', '');
+    try { first.focus({ preventScroll: true }); } catch (e) {}
     return ov;
+}
+// The new-project fields, in place of the three cards. Only what is known on day one
+// and expensive to change later: the name (it becomes the file name), the client, and
+// the units, which every dimension in the project is stored in.
+function _startScreenNewForm(body, cards, peek) {
+    const form = document.createElement('form'); form.className = 'ss-form';
+    form.innerHTML = '<label>Project name<input type="text" name="name" autocomplete="off" placeholder="e.g. Marriott Downtown"></label>'
+        + '<label>Client<input type="text" name="client" autocomplete="off" placeholder="Optional"></label>'
+        + '<div class="ss-units-row"><span>Units</span><div class="frame-tabs ss-units"></div></div>'
+        + '<div class="ss-actions"><button type="button" class="action-btn btn-secondary ss-back">Back</button><button type="submit" class="action-btn ss-go">Start</button></div>';
+    let unit = (typeof dashUnit !== 'undefined' && UNIT_INFO[dashUnit]) ? dashUnit : 'in';
+    const ub = form.querySelector('.ss-units');
+    ['in', 'cm', 'mm'].forEach(u => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'frame-tab' + (u === unit ? ' active' : '');
+        b.textContent = UNIT_INFO[u].label; b.dataset.unit = u;
+        b.onclick = () => { unit = u; ub.querySelectorAll('.frame-tab').forEach(x => x.classList.toggle('active', x === b)); };
+        ub.appendChild(b);
+    });
+    form.querySelector('.ss-back').onclick = () => { form.remove(); cards.style.display = ''; };
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        _startNewProject({ name: form.elements.name.value, client: form.elements.client.value, unit: unit });
+    };
+    cards.style.display = 'none';
+    body.insertBefore(form, cards);
+    try { form.elements.name.focus(); } catch (e) {}
+    return form;
+}
+function _startNewProject(o) {
+    const setVal = (id, v) => { const el = document.getElementById(id); if (!el) return; el.value = v; try { el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); } catch (e) {} };
+    const name = String((o && o.name) || '').trim() || 'Untitled project';
+    setVal('g_projName', name);
+    if (o && String(o.client || '').trim()) setVal('g_client', String(o.client).trim());
+    if (o && UNIT_INFO[o.unit] && typeof setUnit === 'function') { try { setUnit(o.unit); } catch (e) {} }
+    _startScreenClose();
+    _dsGoFloorplanItems();
+    _nextStepDismissed = false;
+    try { _syncNextStep(); } catch (e) {}
+}
+
+// ── NEXT STEP (18.10) ───────────────────────────────────────────────────────
+// A slim bar, bottom-left, saying the ONE next thing this project needs and taking
+// you there. The five-step checklist already existed in Help > Start here, which is
+// exactly where a new designer would never look. The nav badges carry the counts;
+// this carries the sentence. It is derived from _projectStepCounts on every sync, so
+// it ticks itself along and folds away once the pieces are listed, on walls and (if
+// there is a plan) pinned: steps 4 and 5 are open-ended and do not need a nag.
+// Dismissing it is session state, never project data.
+let _nextStepDismissed = false;
+function _nextStepNow() {
+    let c; try { c = _projectStepCounts(); } catch (e) { return null; }
+    if (!c.pieces || _projectIsFresh()) return { key: 'spec', n: 1, text: 'List the item codes on the floorplan.' };
+    if (c.unplaced) return { key: 'walls', n: 2, text: (c.unplaced === 1 ? '1 piece is' : c.unplaced + ' pieces are') + ' not on a wall yet.' };
+    if (c.hasPlan && c.unpinned) return { key: 'plan', n: 3, text: (c.unpinned === 1 ? '1 piece is' : c.unpinned + ' pieces are') + ' not pinned on the floorplan.' };
+    return null;
+}
+function _syncNextStep() {
+    const old = document.getElementById('nextStep');
+    const st = _nextStepDismissed ? null : _nextStepNow();
+    if (!st || document.getElementById('startScreen')) { if (old) old.remove(); return; }
+    const bar = old || document.createElement('div');
+    bar.id = 'nextStep'; bar.className = 'next-step';
+    bar.innerHTML = '<span class="ns-n"></span><span class="ns-text"></span>'
+        + '<button type="button" class="ns-go">Go</button><button type="button" class="ns-all" title="All five steps, in Help">All steps</button>'
+        + '<button type="button" class="ns-x" title="Hide until next time" aria-label="Hide">×</button>';
+    bar.querySelector('.ns-n').textContent = 'Step ' + st.n;
+    bar.querySelector('.ns-text').textContent = st.text;
+    bar.querySelector('.ns-go').onclick = () => _helpGoStep(st.key);
+    bar.querySelector('.ns-all').onclick = () => { try { openHelpModal(); renderHelpRefSection('getting-started'); } catch (e) {} };
+    bar.querySelector('.ns-x').onclick = () => { _nextStepDismissed = true; bar.remove(); };
+    if (!old) document.body.appendChild(bar);
 }
 // Open Deck Studio on the first floorplan page with the Items tab up: where a project
 // starts. Falls back to the dashboard if the deck cannot open (a test harness).
@@ -290,34 +392,6 @@ function _helpGoStep(key) {
     if (key === 'walls') { switchView('elevation', typeof currentElevIndex === 'number' ? currentElevIndex : 0); return; }
     switchView('deck');
     if (key === 'pdf' && typeof _dsOpenGenerate === 'function') { try { _dsOpenGenerate(); } catch (e) {} }
-}
-
-// ARMED AT BOOT, SHOWN ON THE FIRST CLICK. A tip on a boot timer is a timer every
-// headless load pays for: the toast lives 12 seconds, so each of the 140-odd test
-// harnesses stayed alive that long after finishing and the suite ran for half an
-// hour. The same trap the template-card prewarm was moved off the boot tail for.
-// A real designer clicks within seconds of opening FRAME, so the tip still lands
-// at the start of the first session; a harness that never clicks never sees it.
-function _armStepsFirstRunTip() {
-    let seen = true;
-    try { seen = !!localStorage.getItem('frameStepsTipSeen'); } catch (e) {}
-    if (seen) return;
-    const once = function () { document.removeEventListener('pointerdown', once, true); _stepsFirstRunTip(); };
-    document.addEventListener('pointerdown', once, true);
-}
-
-// ONCE PER MACHINE, the first time FRAME opens there: a notice pointing at the
-// numbers and at Help. A notice and not a dialog, because a tip is safe to miss,
-// and a dialog at boot would sit on top of the autosave question.
-function _stepsFirstRunTip() {
-    let seen = true;
-    try { seen = !!localStorage.getItem('frameStepsTipSeen'); } catch (e) {}
-    if (seen) return;
-    try { localStorage.setItem('frameStepsTipSeen', '1'); } catch (e) {}
-    setTimeout(() => {
-        if (typeof _toast !== 'function') return;
-        _toast('New to FRAME?', 'The tabs are numbered in the order you work: 1 spec the pieces, 2 place them on walls, 3 build the deck and the PDF. Help > Start here has the full list, and where this project is.', { ms: 12000 });
-    }, 1500);
 }
 
 let currentView = 'dashboard';
@@ -4342,46 +4416,50 @@ function _autosaveRestore(payload) {
 // On page load, check for an autosave. If one exists from this session
 // (less than 7 days old to avoid restoring ancient work) and the current
 // project hasn't been modified, offer to restore.
+// What is in the autosave slot, without reading the payload: the meta record (or the
+// legacy localStorage slot) answers "is there anything, from when, called what". A
+// backup older than a week is cleared here and reported as nothing. Shared by the
+// start screen's Continue card and checkAutosaveOnLoad, so the two cannot disagree
+// about what counts as a backup worth offering.
+async function _autosavePeek() {
+    let meta = null;
+    try { meta = await _aGetMeta(); } catch (e) { meta = null; }
+    const legacy = meta ? null : _legacyAutosaveRead();
+    const stamp = meta || legacy;
+    if (!stamp) return null;
+    if (stamp.type !== 'master-studio-autosave-v1') return null;
+    const ageDays = (Date.now() - stamp.timestamp) / (1000 * 60 * 60 * 24);
+    if (ageDays > 7) { clearAutosave(); return null; }
+    const minutesAgo = Math.round((Date.now() - stamp.timestamp) / 60000);
+    let timeStr;
+    if (minutesAgo < 1) timeStr = 'less than a minute ago';
+    else if (minutesAgo < 60) timeStr = `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
+    else timeStr = `${Math.round(minutesAgo / 60)} hour${minutesAgo < 120 ? '' : 's'} ago`;
+    return { stamp: stamp, legacy: legacy, timeStr: timeStr, projName: stamp.projName || 'Untitled' };
+}
+// Read the payload and install it. ASK FIRST, READ SECOND: the payload is the whole
+// project, tens of megabytes of artwork, so it is only read once somebody has chosen
+// to restore it. Returns false when the record could not be read.
+async function _autosaveRestoreNow(peek) {
+    const payload = peek.legacy ? peek.legacy.payload : await _aGetData();
+    if (!payload || !payload.data) {
+        if (typeof showInfoModal === 'function') showInfoModal('Could not restore', 'The backup record is there but its contents could not be read, so nothing has been changed. Load a saved .json file instead.');
+        return false;
+    }
+    _autosaveRestore(payload);
+    // A legacy payload has now been taken into the live project, so the
+    // old slot is no longer the most recent work.
+    if (peek.legacy) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} }
+    return true;
+}
 async function checkAutosaveOnLoad() {
     try {
-        let meta = null;
-        try { meta = await _aGetMeta(); } catch (e) { meta = null; }
-        const legacy = meta ? null : _legacyAutosaveRead();
-        const stamp = meta || legacy;
-        if (!stamp) return;
-        if (stamp.type !== 'master-studio-autosave-v1') return;
-        const ageDays = (Date.now() - stamp.timestamp) / (1000 * 60 * 60 * 24);
-        if (ageDays > 7) {
-            // Stale - clear and skip
-            clearAutosave();
-            return;
-        }
-        // Format a human-readable "how long ago"
-        const minutesAgo = Math.round((Date.now() - stamp.timestamp) / 60000);
-        let timeStr;
-        if (minutesAgo < 1) timeStr = 'less than a minute ago';
-        else if (minutesAgo < 60) timeStr = `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
-        else timeStr = `${Math.round(minutesAgo / 60)} hour${minutesAgo < 120 ? '' : 's'} ago`;
-
+        const peek = await _autosavePeek();
+        if (!peek) return;
         // Don't auto-restore - ask.
-        const projName = stamp.projName || 'Untitled';
-        const choice = await _askRestoreAutosave(timeStr, projName);
-        if (choice === true) {
-            // ASK FIRST, READ SECOND. The payload is the whole project, tens of
-            // megabytes of artwork; the old code parsed all of it at boot just to
-            // find out what to put in the prompt. The meta record answers that.
-            const payload = legacy ? legacy.payload : await _aGetData();
-            if (!payload || !payload.data) {
-                if (typeof showInfoModal === 'function') showInfoModal('Could not restore', 'The backup record is there but its contents could not be read, so nothing has been changed. Load a saved .json file instead.');
-                return;
-            }
-            _autosaveRestore(payload);
-            // A legacy payload has now been taken into the live project, so the
-            // old slot is no longer the most recent work.
-            if (legacy) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} }
-        } else if (choice === false) {
-            clearAutosave();
-        }
+        const choice = await _askRestoreAutosave(peek.timeStr, peek.projName);
+        if (choice === true) await _autosaveRestoreNow(peek);
+        else if (choice === false) clearAutosave();
         // null is "no answer at all" - there was no way to ask - and it leaves the
         // backup exactly where it is. Only an explicit Discard throws it away.
     } catch (err) {
@@ -4599,14 +4677,13 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         updateDirtyIndicator();
         _syncProjectFileUI();
-        _armStepsFirstRunTip();
         // Ahead of the autosave prompt: if the tab is running mixed files, that
         // is the thing to deal with before deciding whether to restore anything.
         _checkBuildPairing();
-        // Check for autosave AFTER a small delay so the rest of the app's
-        // init code (which calls pushHistory) has finished. Otherwise the
-        // restore would be overwritten by the initial pushHistory.
-        setTimeout(checkAutosaveOnLoad, 200);
+        // AFTER a small delay so the rest of the app's init code (which calls
+        // pushHistory) has finished. Otherwise a restore would be overwritten by the
+        // initial pushHistory.
+        setTimeout(_bootStart, 200);
         if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
         if (typeof _wireArtPan === 'function') _wireArtPan();
         if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
@@ -4615,9 +4692,8 @@ if (document.readyState === 'loading') {
 } else {
     updateDirtyIndicator();
     _syncProjectFileUI();
-    _armStepsFirstRunTip();
     _checkBuildPairing();
-    setTimeout(checkAutosaveOnLoad, 200);
+    setTimeout(_bootStart, 200);
     if (typeof wireDashArtworkDrops === 'function') wireDashArtworkDrops();
         if (typeof _wireArtPan === 'function') _wireArtPan();
     if (typeof wireElevArtworkDrop === 'function') wireElevArtworkDrop();
@@ -4636,7 +4712,6 @@ function initMasterApp() {
     _elevGuideGroupsInit();
     // Not under a test harness: a modal appearing on its own at boot would land in the
     // middle of whatever a headless check is doing (the autosave-warning flake again).
-    if (!(typeof navigator !== 'undefined' && /jsdom/i.test(navigator.userAgent || ''))) setTimeout(_startChooserMaybe, 1100);
     renderNavTabs();
     selectDashRow(0); 
     populateDashPushSelector();
@@ -6654,6 +6729,7 @@ function _saveProjectButton() {
 function _setProjectFile(handle, name) {
     _projectFileHandle = handle || null;
     _projectFileName = name || '';
+    if (name) { try { localStorage.setItem(LAST_FILE_KEY, name); } catch (e) {} }
     _syncProjectFileUI();
 }
 
@@ -6828,6 +6904,12 @@ function saveMasterProjectAs() { return saveMasterProject({ saveAs: true }); }
 // hour of edits was silent. The confirm runs FIRST and the picker is opened from
 // inside its Yes handler, because that handler is itself a click and a file
 // picker needs a user gesture - opening one after an awaited modal is refused.
+// The start screen in a browser; under a test harness, the restore question alone, as
+// before (a harness that boots app.js must not be met by a full-screen dialog).
+function _bootStart() {
+    if (typeof navigator !== 'undefined' && /jsdom/i.test(navigator.userAgent || '')) return checkAutosaveOnLoad();
+    return openStartScreen();
+}
 function _confirmDiscardUnsaved(proceed) {
     if (!_isDirty) { proceed(); return; }
     if (typeof showConfirmModal !== 'function') { proceed(); return; }
@@ -6988,6 +7070,7 @@ function _readProjectText(text) {
         if (data._unitAutoFixed && typeof showInfoModal === 'function') {
             showInfoModal('Units auto-corrected', 'This project was labeled "' + data._unitAutoFixed.from + '" but its measurements looked like "' + data._unitAutoFixed.to + '" (for example, a 108-unit-tall wall). FRAME corrected the unit to ' + data._unitAutoFixed.to + ' so the elevation, person, and hang heights scale correctly. Save the project to keep the fix.');
         }
+        try { _startScreenClose(); } catch (e) {}
         return true;
     } catch (err) {
         showInfoModal('Could not read that project',
@@ -40018,6 +40101,7 @@ const HELP_REFERENCE_DATA = [
         intro: `FRAME turns a list of pieces into a client presentation. You spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The three tabs at the top are numbered in that order.`,
         entries: [
             { title: 'Where this project is', live: 'steps' },
+            { title: 'Opening FRAME', body: `FRAME opens on the start screen. <strong>Continue</strong> brings back work that was never saved to a file (it only appears when there is some). <strong>New project</strong> asks for the project name, the client and the units, then takes you to the floorplan <strong>Items</strong> list to add the item codes. <strong>Open project</strong> opens a saved .json file.<br><br>While a project is getting started, a bar at the bottom left says the one next step and has a <strong>Go</strong> button. It goes away once the pieces are listed, on walls and pinned. Click the × to hide it until next time.` },
             {
                 title: 'The five steps',
                 body: `<ol class="help-steps">
@@ -40199,7 +40283,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.09</strong> Jump to lists cleaner results: typing a code shows only the matching codes (not every piece whose description mentions the word), each group appears once, and a spec page is not listed twice unless you type its page number.<br><br>
+                body: `<strong>18.10</strong> FRAME opens on a calm start screen: the logo comes together, then <strong>Continue</strong> (unsaved work, when there is some), <strong>New project</strong> (name, client, units, then straight to the floorplan Items list) or <strong>Open project</strong>. A bar at the bottom left says the next step for a new project. The old start question and the separate restore prompt are gone.<br><br>
+<strong>18.09</strong> Jump to lists cleaner results: typing a code shows only the matching codes (not every piece whose description mentions the word), each group appears once, and a spec page is not listed twice unless you type its page number.<br><br>
 <strong>18.08</strong> Text on deck pages wraps in the editor exactly where it wraps in the PDF. The editor was kerning letter pairs (up to 5% tighter on pairs like AV and TA) and the PDF never does, so a heading could fit on screen and break onto a second line in the export. Nothing in the PDF changes.<br><br>
 <strong>18.07</strong> Vertical spacing and measure-line numbers on elevations now read along their line, like the wall and glass dimensions already did, whenever the number fits the gap. A number too long for its gap stays upright beside the line.<br><br>
 <strong>18.06</strong> <strong>Catalogue overview</strong>: every placement on one screen with how many openings in each image option still need a picture, an Only incomplete filter, and a click to open the wall. From All placements in the Options map, the deck Options section, or Ctrl+K.<br><br>

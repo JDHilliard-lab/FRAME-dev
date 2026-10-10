@@ -2190,6 +2190,25 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   (`'steps'`) is built by `_helpLiveEntry` when the section opens. Help opens on Reference,
   and the Video tab is HIDDEN until `setHelpVideoUrl` gives it something: it used to be the
   tab Help opened on, reading "coming soon".
+- **EVERY BOOT OPENS ON THE START SCREEN (`openStartScreen`, 18.10).** It replaced the
+  17.91 "Where do you want to start?" chooser, the separate autosave restore modal and
+  the first-run toast. Continue (only when `_autosavePeek` finds a backup), New project,
+  Open project. New project (`_startNewProject`) sets name, client and units and ALWAYS
+  lands on the floorplan Items list: since 17.95 the codes are run from there, so it is a
+  house standard, not a question. A `.frame-modal` with NO close control, so Escape and
+  the backdrop do nothing; opaque, because the busy app is what you should not be
+  looking at yet. `_bootStart` keeps a test harness on `checkAutosaveOnLoad`, which now
+  shares `_autosavePeek` / `_autosaveRestoreNow` with the Continue card so the two
+  cannot disagree about what counts as a backup. `_readProjectText` closes the screen on
+  a successful install (the `<input type=file>` path arrives asynchronously).
+  **The logo is inline SVG (`FRAME_LOGO_PARTS`, the six shapes from the logo files,
+  byte for byte) so it can come together**: the mark slides in from the left, the
+  letters close up from slightly spread with a 70ms stagger, all in SVG user units so
+  the move scales with the logo. `prefers-reduced-motion` turns it off. `currentColor`
+  covers both themes, since the two logo files differ only in fill.
+  **The next-step bar (`_syncNextStep`)** rides `_syncNavBadges`, says the ONE next thing
+  from `_projectStepCounts`, and folds away once steps 1 to 3 are done; × is session
+  state. A fresh project's placeholder `ART.1` counts as step 1, through `_projectIsFresh`.
 - **THE ORDER OF OPERATIONS IS ON THE VIEW TABS** (`_projectStepCounts`, `_projectSteps`,
   `_navStepBadge`, `_syncNavBadges`, `_scheduleNavBadges`). The tabs are numbered 1 Frame
   Dashboard, 2 Elevation, 3 Deck; Elevation's badge counts pieces not on a wall, Deck's

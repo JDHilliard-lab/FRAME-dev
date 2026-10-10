@@ -325,7 +325,9 @@ check('the prompt is answered from meta alone - cancelling never reads the paylo
   store.reads = {};
   answerRestore(() => false);
   await fx.checkAutosaveOnLoad();
-  await settle();
+  // clearAutosave's delete is fire-and-forget, so wait for it rather than for a fixed
+  // 50ms: under the parallel suite a busy machine missed that window now and then.
+  for (let k = 0; k < 30 && ameta().current; k++) await settle();
   if (!store.reads.ameta) throw new Error('the load path did not read the meta record at all');
   if (store.reads.adata) throw new Error('the load path read the whole payload before asking, which is what boot used to pay for');
   if (ameta().current) throw new Error('declining the restore left the record in place');
