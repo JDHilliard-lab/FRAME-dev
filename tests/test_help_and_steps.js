@@ -63,7 +63,7 @@ check('EXACT BUG: Help covers the parts it never mentioned', async () => {
     const missing = need.filter((id) => have.indexOf(id) < 0);
     if (missing.length) throw new Error('Help has no section for: ' + missing.join(', '));
     const t = helpText();
-    ['Deck Studio', 'SHOW ON PAGE', 'Preflight', 'window film', '+ Add option', 'Place numbers / mark up', 'Calibrate'].forEach((w) => {
+    ['Deck Studio', 'SHOW ON PAGE', 'Preflight', 'window film', '+ Add option', 'Open full markup tool', 'Upload floor plan', 'Calibrate'].forEach((w) => {
         if (t.indexOf(w) < 0) throw new Error('Help never mentions ' + w);
     });
 });
@@ -93,7 +93,7 @@ check('every control Help names by its label exists in the app', async () => {
     // the ones the new text names outright; each must appear in index.html or
     // app.js exactly as the button, tab or heading spells it.
     const ui = HTML + APP;
-    const named = ['Add &amp; Arrange', 'Push to Wall', 'Send', 'Place numbers / mark up', 'Change plan', '+ Level',
+    const named = ['Add &amp; Arrange', 'Push to Wall', 'Send', 'Open full markup tool', 'Upload floor plan', 'Change plan', '+ Level',
         '+ Add option', 'Options map', 'All-options page', 'ART WALL', 'EGD WALL', 'WF WALL', '+ Add Wall', 'Generate PDF',
         'Run Preflight', 'Bulk Edit', 'Apply to Selected', '+ Add client elevation', 'Calibrate', 'Un-stretch',
         'Fill wall', 'Floorplan order', 'Include pages', 'SHOW ON PAGE', 'Frame corner', 'Moulding profile',

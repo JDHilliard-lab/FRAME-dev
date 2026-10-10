@@ -2547,3 +2547,17 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .next-step button { flex: none; height: 24px; padding: 0 10px; font-size: var(--fs-65); cursor: pointer; border-radius: var(--r-4); border: 1px solid var(--border-color); background: transparent; color: var(--text-main); }
 .next-step .ns-go { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
 .next-step .ns-x { padding: 0 7px; border: none; color: var(--text-muted); font-size: var(--fs-85); }
+
+/* ASKING FOR A NAME (18.11): the styled replacement for window.prompt(). */
+.ask-card { width: min(380px, 92vw); display: flex; flex-direction: column; gap: 12px; padding: 20px; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-8); box-shadow: 0 18px 60px rgba(0,0,0,0.45); }
+.ask-title { margin: 0; font-family: var(--ui-display); font-size: var(--fs-105); font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-strong); }
+.ask-body { font-size: var(--fs-70); color: var(--text-muted); line-height: 1.45; }
+.ask-field { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-60); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.ask-field input { height: 32px; padding: 0 10px; font-size: var(--fs-80); text-transform: none; letter-spacing: 0; }
+.ask-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 2px; }
+.ask-actions .action-btn { width: auto; height: 30px; padding: 0 16px; }
+
+/* The empty floor plan slot in Deck Studio is its own upload control (18.11). Chrome on
+   paper, so it reads --selected like every other control drawn over the page. */
+.fp-upload-slot { height: 30px; padding: 0 16px; font-size: 12px; font-weight: 600; cursor: pointer; color: #fff; background: var(--selected); border: none; border-radius: var(--r-6); box-shadow: 0 2px 10px rgba(0,0,0,0.18); z-index: 5; }
+.fp-upload-slot:hover { filter: brightness(1.08); }

@@ -161,7 +161,8 @@ const path = require('path');
     __check('the undo stack is still bounded', () => {
       // The clone made snapshots cheap, which is not a reason to keep more of them.
       if (typeof MAX_HISTORY !== 'number' || !(MAX_HISTORY > 0 && MAX_HISTORY <= 200)) throw new Error('MAX_HISTORY is ' + MAX_HISTORY);
-      const i = S.indexOf('undoStack.push(snapshotProjectState())');
+      // 18.11: the undo entry also carries the floor plan levels ({ plans: true }).
+      const i = S.indexOf('undoStack.push(snapshotProjectState(');
       if (S.slice(i, i + 200).indexOf('undoStack.shift()') < 0) throw new Error('the undo stack is no longer trimmed');
     });
   `;

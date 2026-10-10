@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.10';
+const APP_VERSION = '18.11';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -2355,9 +2355,9 @@ function _tplApply(els, type, asNew) {
     closeTemplatesModal();
     renderMoodboardCanvas(); _mbAutosave();
 }
-function saveCurrentAsTemplate() {
+async function saveCurrentAsTemplate() {
     const pg = _mbPage();
-    const name = (window.prompt('Name this template:', pg.title || (pg.type + ' template')) || '').trim();
+    const name = (await _askText('Save as template', 'Template name', pg.title || (pg.type + ' template')) || '').trim();
     if (!name) return;
     const els = JSON.parse(JSON.stringify(pg.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; });   // strip image data — templates are structural
     editorialContent.templates = editorialContent.templates || [];
@@ -2955,8 +2955,14 @@ function _cloneData(v) {
 }
 
 // Snapshot current project state as a plain JS object (deep-cloned).
-function snapshotProjectState() {
-    return {
+// opts.plans: also carry the floor plan levels. ONLY the undo stack asks for it.
+// Without it, Ctrl+Z after deleting a level restored the pins' old level numbers onto
+// a list that had lost a level, so a pin silently re-homed onto whichever plan slid
+// into its slot. Autosave and version history already store the levels beside the
+// snapshot, so putting them inside it too would write every plan image twice.
+// Shared strings, so fifty undo entries still hold one copy of each image.
+function snapshotProjectState(opts) {
+    const snap = {
         dashProjectData: _cloneData(dashProjectData),
         elevations: _cloneData(elevations),
         currentElevIndex: currentElevIndex,
@@ -2967,6 +2973,8 @@ function snapshotProjectState() {
         hangHeightIn: elevHangIn,
         baseboardIn: elevBaseboardIn,
     };
+    if (opts && opts.plans) snap.floorplanLevels = _cloneData(floorplanLevels || []);
+    return snap;
 }
 
 // Restore the given snapshot in-place. Re-binds derived references
@@ -2995,6 +3003,13 @@ function restoreProjectState(snap) {
     // live values alone in that case rather than resetting to the standard.
     if (typeof cloned.hangHeightIn === 'number' && cloned.hangHeightIn > 0) elevHangIn = cloned.hangHeightIn;
     if (typeof cloned.baseboardIn === 'number' && cloned.baseboardIn >= 0) elevBaseboardIn = cloned.baseboardIn;
+    // Absent on autosave and version snapshots, which install the levels themselves.
+    if (Array.isArray(cloned.floorplanLevels)) {
+        floorplanLevels = cloned.floorplanLevels;
+        const _l0 = floorplanLevels[0] || {};
+        floorplanImageData = _l0.imageData || ''; floorplanImageName = _l0.imageName || '';
+        if (typeof _fpLevel === 'number' && _fpLevel >= floorplanLevels.length) _fpLevel = Math.max(0, floorplanLevels.length - 1);
+    }
     try { seedHangBaseboardInputs(); } catch (e) {}
     try { seedDeckPlanOrderInput(); } catch (e) {}
     try { seedDeckIncludeInputs(); } catch (e) {}
@@ -3058,7 +3073,7 @@ function pushHistory() {
         const sig = _elevCaptureSignature();
         if (sig === null || sig !== _lastElevSig) { _elevCapGen++; _lastElevSig = sig; }
     } catch (e) { _elevCapGen++; }
-    undoStack.push(snapshotProjectState());
+    undoStack.push(snapshotProjectState({ plans: true }));
     if (undoStack.length > MAX_HISTORY) undoStack.shift();
     redoStack.length = 0;  // new action invalidates future
     updateUndoButtons();
@@ -15403,7 +15418,9 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, leve
         doc.setLineDashPattern([], 0);
         doc.setFont('helvetica', 'normal'); doc.setFontSize(8);
         doc.setTextColor(160, 160, 160);
-        doc.text('FLOORPLAN IMAGE \u2014 upload one in the Presentation PDF dialog', planX + planW / 2, planY + planH / 2, { align: 'center' });
+        // Neutral wording: this can print on a page that reaches a client, and it named a
+        // dialog that no longer exists. Preflight is what tells the designer it is missing.
+        doc.text('FLOOR PLAN IMAGE GOES HERE', planX + planW / 2, planY + planH / 2, { align: 'center' });
         doc.setTextColor(20, 20, 20);
     }
 
@@ -19026,9 +19043,15 @@ function _dsOpenTemplateEditor() {
     }
 }
 let _dsInTemplateLibraryMode = false;
-function _dsTab(which) {
+function _dsTab(which, _confirmed) {
     if (_dsInTemplateLibraryMode && which !== 'templateEditor' && _dsTemplateEditSession) {
-        if (_dsTemplateHasUnsavedChanges() && !window.confirm('Leave without saving your changes to "' + (_dsTemplateEditSession.name || 'this template') + '"?')) return;
+        // Asked, then the switch is re-run with _confirmed so it does not ask twice.
+        // NOT by relying on cleanup to clear the session: cleanup can throw before it
+        // nulls it, and re-asking on every pass looped forever (test_tab_exit_fix).
+        if (!_confirmed && _dsTemplateHasUnsavedChanges()) {
+            _dsAskLeaveTemplate().then(yes => { if (yes) _dsTab(which, true); });
+            return;
+        }
         try { _dsCleanupTemplateEditSession(); } catch (e) { console.error(e); }
     }
     _dsActiveTab = which;
@@ -19608,11 +19631,11 @@ function _dsDuplicateUserTemplate(idx) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderTemplatesTab();
 }
-function _dsUpdateTemplateFromPage(idx) {
+async function _dsUpdateTemplateFromPage(idx) {
     const t = (editorialContent.templates || [])[idx]; if (!t) return;
     const ep = _dsCurrentEditablePage();
     if (!ep) { _toast('Not a layout page', 'Open the page you want to copy from in Pages, then press Update from page on the template.'); return; }
-    if (!window.confirm('Replace the layout of template "' + (t.name || 'Untitled') + '" with the page you have open now?')) return;
+    if (!(await _askYesNo('Update template?', 'Replace the layout of \u201c' + (t.name || 'Untitled') + '\u201d with the page you have open now? You can undo this with Ctrl+Z.', 'Replace layout', 'Cancel'))) return;
     t.elements = JSON.parse(JSON.stringify(ep.page.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; });
     const annKey = 'layout:' + ep.page.id;
     t.annotations = JSON.parse(JSON.stringify((editorialContent.annotations && editorialContent.annotations[annKey]) || [])).map(a => { if (a.dataUrl) a.dataUrl = null; return a; });
@@ -19620,10 +19643,10 @@ function _dsUpdateTemplateFromPage(idx) {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderTemplatesTab();
 }
-function _dsSaveCurrentAsTemplate() {
+async function _dsSaveCurrentAsTemplate() {
     const ep = _dsCurrentEditablePage();
     if (!ep) { _toast('Not a layout page', 'Open a moodboard, cover, narrative or other layout page in Pages, then save it as a template.'); return; }
-    const name = (window.prompt('Name this template:', ep.page.title || (_dsCatLabel(ep.type) + ' template')) || '').trim();
+    const name = (await _askText('Save as template', 'Template name', ep.page.title || (_dsCatLabel(ep.type) + ' template')) || '').trim();
     if (!name) return;
     const els = JSON.parse(JSON.stringify(ep.page.elements || [])).map(e => { if ((e.type || 'image') === 'image') e.img = ''; return e; }); // structural — strip embedded image data
     const annKey = 'layout:' + ep.page.id;
@@ -19636,8 +19659,8 @@ function _dsSaveCurrentAsTemplate() {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsTab('templates');
 }
-function _dsAddCategory() {
-    const label = (window.prompt('New template category name:', '') || '').trim();
+async function _dsAddCategory() {
+    const label = (await _askText('New template category', 'Category name', '', 'Add') || '').trim();
     if (!label) return;
     const key = 'cat_' + label.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '') + '_' + Math.random().toString(36).slice(2, 6);
     editorialContent.templateCategories = editorialContent.templateCategories || [];
@@ -19704,9 +19727,9 @@ function _dsDeleteUserTemplate(idx, after) {
         },
     });
 }
-function _dsRenameUserTemplate(idx) {
+async function _dsRenameUserTemplate(idx) {
     const t = (editorialContent.templates || [])[idx]; if (!t) return;
-    const nm = (window.prompt('Rename template:', t.name || '') || '').trim(); if (!nm) return;
+    const nm = (await _askText('Rename template', 'Template name', t.name || '', 'Rename') || '').trim(); if (!nm) return;
     t.name = nm; if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderTemplatesTab();
 }
 function _dsRecategorize(idx, type) {
@@ -19897,12 +19920,12 @@ function _dsRenderTemplateRail(rail) {
     });
     rail.appendChild(list);
 }
-function _dsNewTemplateFromScratch() {
+async function _dsNewTemplateFromScratch() {
     if (_dsTemplateEditSession) {
-        if (_dsTemplateHasUnsavedChanges() && !window.confirm('Switch away without saving your changes to "' + (_dsTemplateEditSession.name || 'this template') + '"?')) return;
+        if (_dsTemplateHasUnsavedChanges() && !(await _dsAskLeaveTemplate('Start a new template?'))) return;
         _dsExitTemplateEditSession();
     }
-    const name = (window.prompt('Name the new template:', 'Untitled template') || '').trim();
+    const name = (await _askText('New template', 'Template name', 'Untitled template', 'Create') || '').trim();
     if (!name) return;
     editorialContent.templates = editorialContent.templates || [];
     editorialContent.templates.push({ name: name, type: 'custom', elements: [], annotations: [] });
@@ -20096,10 +20119,10 @@ function _dsPreviewTemplateInCenter(item) {
 // layers, add text/image/arrow, all of it. Saving copies the result back
 // into the template; discarding just removes the temporary page.
 let _dsTemplateEditSession = null;   // { source, mi, idx, catForBuiltin, tempPageId, name }
-function _dsEditTemplate(item) {
+async function _dsEditTemplate(item) {
     if (item.source === 'builtin') return;   // function-based starters aren't editable in place
     if (_dsTemplateEditSession && _dsTemplateEditSession.__selKey !== item.selKey) {
-        if (_dsTemplateHasUnsavedChanges() && !window.confirm('Switch templates without saving your changes to "' + (_dsTemplateEditSession.name || 'this template') + '"?')) return;
+        if (_dsTemplateHasUnsavedChanges() && !(await _dsAskLeaveTemplate('Switch templates?'))) return;
         _dsExitTemplateEditSession();
     } else if (_dsTemplateEditSession && _dsTemplateEditSession.__selKey === item.selKey) {
         return;   // already editing this exact template
@@ -20128,6 +20151,12 @@ function _dsEditTemplate(item) {
 // Compares the temp page's current content against the snapshot captured
 // when editing began. Browsing between templates should never interrupt you
 // with a confirm — only an actual, unsaved edit should.
+// The one question for leaving a template being edited with unsaved changes. It was
+// four native confirm() boxes in four wordings.
+function _dsAskLeaveTemplate(title) {
+    const nm = (_dsTemplateEditSession && _dsTemplateEditSession.name) || 'this template';
+    return _askYesNo(title || 'Leave this template?', 'Your changes to \u201c' + nm + '\u201d are not saved and will be lost.', 'Discard changes', 'Keep editing', { danger: true });
+}
 function _dsTemplateHasUnsavedChanges() {
     const s = _dsTemplateEditSession; if (!s) return false;
     const pg = (editorialContent.layoutPages || []).find(p => p.id === s.tempPageId);
@@ -20135,7 +20164,7 @@ function _dsTemplateHasUnsavedChanges() {
     const current = JSON.stringify({ elements: pg.elements || [], annotations: (editorialContent.annotations || {})['layout:' + s.tempPageId] || [] });
     return current !== s.baseline;
 }
-function _dsSaveTemplateEditSession() {
+async function _dsSaveTemplateEditSession() {
     const s = _dsTemplateEditSession; if (!s) return;
     const pg = (editorialContent.layoutPages || []).find(p => p.id === s.tempPageId);
     if (!pg) { _dsExitTemplateEditSession(); return; }
@@ -20148,15 +20177,15 @@ function _dsSaveTemplateEditSession() {
     } else {
         // 'blank' (or anything else with no underlying template yet) — this is
         // a brand-new template, so saving means naming and creating it now.
-        const name = (window.prompt('Name this template:', 'Untitled template') || '').trim();
+        const name = (await _askText('Save as template', 'Template name', 'Untitled template') || '').trim();
         if (!name) return;   // keep the session open — don't lose the work over a cancelled prompt
         editorialContent.templates = editorialContent.templates || [];
         editorialContent.templates.push({ name: name, type: 'moodboard', elements: els, annotations: anns });
     }
     _dsExitTemplateEditSession();
 }
-function _dsDiscardTemplateEditSession() {
-    if (_dsTemplateHasUnsavedChanges() && !window.confirm('Discard your edits to this template?')) return;
+async function _dsDiscardTemplateEditSession() {
+    if (_dsTemplateHasUnsavedChanges() && !(await _dsAskLeaveTemplate('Discard your edits?'))) return;
     _dsExitTemplateEditSession();
 }
 function _dsCleanupTemplateEditSession() {
@@ -20171,12 +20200,12 @@ function _dsExitTemplateEditSession() {
     _dsCleanupTemplateEditSession();
     _dsRefresh();
 }
-function _dsApplyTemplateToCurrentPage(item) {
+async function _dsApplyTemplateToCurrentPage(item) {
     const desc = _dsPages[_dsIndex];
     const ep = _dsCurrentEditablePage();
     if (!desc || !ep) { showInfoModal('Can\u2019t apply here', 'Select an editable page (layout, cover, or slogan) in Pages first, then apply a template to it.'); return; }
     const hasContent = (ep.page.elements && ep.page.elements.length) || (editorialContent.annotations && editorialContent.annotations[_deckPageKey(desc)] && editorialContent.annotations[_deckPageKey(desc)].length);
-    if (hasContent && !window.confirm('This page already has content. Replace it with "' + (item.name || 'this template') + '"?')) return;
+    if (hasContent && !(await _askYesNo('Replace this page?', 'This page already has content. Replace it with \u201c' + (item.name || 'this template') + '\u201d? You can undo this with Ctrl+Z.', 'Replace', 'Cancel'))) return;
     const key = _deckPageKey(desc);
     if (item.source === 'blank') {
         ep.page.elements = [];
@@ -20412,11 +20441,19 @@ function _dsShuffleGroup(group) {
     _dsRenderStylesTab();
     const lbl = document.getElementById('dsShuffleLbl' + group.replace(/\W/g, '')); if (lbl) lbl.textContent = st.name;
 }
-function _dsSaveSelectionAsStyle() {
+async function _dsSaveSelectionAsStyle() {
     const t = _dsStyleTarget(); if (!t) { _toast('Select a text box', 'Select a styled text element first, then save its look as a new style.'); return; }
-    const el = t.el; const name = (window.prompt('Name this style:', 'My Style') || '').trim(); if (!name) return;
+    const el = t.el;
     const groups = _dsStyleGroups();
-    const group = (window.prompt('Group (e.g. ' + groups.slice(0, 4).join(', ') + '…):', el.styleId ? (_dsTextStyles().find(s => s.id === el.styleId) || {}).group || 'Body Copy' : 'Body Copy') || 'Body Copy').trim();
+    // ONE dialog for both: it used to be two browser prompts in a row, and the group
+    // one could only list four examples in its question. The datalist offers them all.
+    const ans = await _askFields({ title: 'Save text style', confirm: 'Save style', fields: [
+        { key: 'name', label: 'Style name', value: 'My Style' },
+        { key: 'group', label: 'Group', value: el.styleId ? (_dsTextStyles().find(s => s.id === el.styleId) || {}).group || 'Body Copy' : 'Body Copy', list: groups, required: false },
+    ] });
+    if (!ans || !ans.name) return;
+    const name = ans.name;
+    const group = (ans.group || 'Body Copy').trim();
     _dsTextStyles().push({ id: 'sty_' + Math.random().toString(36).slice(2, 9), name: name, group: group, font: el.font || 'serif', size: el.size || 0.03, bold: !!el.bold, italic: !!el.italic, color: el.color || '#222222', align: el.align || 'left', caps: el.caps || 'none', track: el.track || 0, outline: !!el.outline });
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsRenderStylesTab();
@@ -22507,13 +22544,13 @@ const _DS_NOTE_PRESETS = [
 ];
 const _DS_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
 function _dsUserTextPresets() { return editorialContent.textPresets || (editorialContent.textPresets = []); }
-function _dsSaveSelectedTextPreset() {
+async function _dsSaveSelectedTextPreset() {
     let payload = null;
     const a = _dsCurrentAnnot();
     if (a && (a.type === 'text' || a.type === 'note')) payload = { text: a.text || '', size: a.size, italic: !!a.italic, bold: !!a.bold, color: a.color, font: a.font, align: a.align };
     else if (typeof _mbSelEl === 'function') { const el = _mbSelEl(); if (el && el.type === 'text') payload = { text: el.text || '', size: el.size, italic: !!el.italic, bold: !!el.bold, color: el.color, font: el.font, align: el.align }; }
     if (!payload || !payload.text.trim()) { showInfoModal('Nothing to save', 'Select a text box on the page first, then save it to the library.'); return; }
-    const name = (window.prompt('Name this text preset:', payload.text.split('\n')[0].slice(0, 30)) || '').trim();
+    const name = (await _askText('Save to text library', 'Preset name', payload.text.split('\n')[0].slice(0, 30)) || '').trim();
     if (!name) return;
     _dsUserTextPresets().push(Object.assign({ name: name }, payload));
     if (typeof pushHistory === 'function') pushHistory();
@@ -26399,7 +26436,9 @@ function _dsShowPreviewModal(url, title) {
     const img = document.createElement('img'); img.src = url; img.style.cssText = 'max-width:92vw; max-height:78vh; box-shadow:0 12px 48px rgba(0,0,0,0.6); border-radius:var(--r-4); background:#fff;';
     const close = document.createElement('button'); close.textContent = 'Close'; close.className = 'action-btn'; close.style.cssText = 'padding:8px 20px;'; close.onclick = () => m.remove();
     m.appendChild(cap); m.appendChild(img); m.appendChild(close);
-    m.onclick = (e) => { if (e.target === m) m.remove(); };
+    // The shared dialog shell: Escape closes it, and the backdrop only on a press that
+    // started there (the old e.target test closed on a drag released past the image).
+    m.className = 'frame-modal fm-nested'; m.setAttribute('data-modal-backdrop', ''); close.setAttribute('data-modal-close', '');
     document.body.appendChild(m);
 }
 async function _dsBuildPage(silent) {
@@ -26973,10 +27012,20 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
     if (!lv.imageData) {
         // The exact render already shows the dashed "upload a plan" slot where
         // the image will land; just add a small hint for where to do that.
-        const hint = document.createElement('div');
+        // THE EMPTY SLOT UPLOADS (18.11). It used to say 'use "Place numbers / mark up"
+        // in the right panel', a button the floorplan panel does not show; the upload
+        // was two clicks deep in the full markup tool. The slot is where the eye already
+        // is, so the slot is the control.
         const R0 = _fpPlanRect(936, 540);
-        hint.style.cssText = 'position:absolute; left:' + Math.round(R0.x * S) + 'px; top:' + Math.round((R0.y + R0.h * 0.5 + 16) * S) + 'px; width:' + Math.round(R0.w * S) + 'px; text-align:center; color:#bbb; font-size:11px; pointer-events:none;';
-        hint.textContent = 'Use "Place numbers / mark up" in the right panel to upload a plan for this level.';
+        const hint = document.createElement('button'); hint.type = 'button'; hint.className = 'fp-upload-slot _dsChrome';
+        hint.style.cssText = 'position:absolute; left:' + Math.round((R0.x + R0.w / 2) * S) + 'px; top:' + Math.round((R0.y + R0.h * 0.5 + 14) * S) + 'px; transform:translateX(-50%);';
+        hint.textContent = 'Upload floor plan';
+        hint.title = 'Choose the plan image for ' + ((floorplanLevels[desc.level] || {}).name || 'this level');
+        const pick = document.createElement('input'); pick.type = 'file'; pick.accept = 'image/*'; pick.style.display = 'none';
+        pick.onchange = (ev) => { _fpLevel = desc.level; loadSpecPdfFloorplan(ev); };
+        hint.onclick = (ev) => { ev.stopPropagation(); pick.click(); };
+        hint.onmousedown = (ev) => ev.stopPropagation();
+        page.appendChild(pick);
         page.appendChild(hint);
         finish(); c.appendChild(page); return;
     }
@@ -30048,7 +30097,12 @@ function loadSpecPdfFloorplan(event, fromMarkup) {
         lv.imageData = reader.result; lv.imageName = file.name;
         floorplanImageData = lv.imageData; floorplanImageName = lv.imageName;   // legacy mirror
         if (status) status.textContent = file.name;
+        // Undoable, and it MUST push: the undo snapshot carries the levels, so a plan
+        // changed without an entry would be reverted by the next unrelated Ctrl+Z.
+        if (typeof pushHistory === 'function') pushHistory();
         if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        // The deck shows this plan in the centre and the rail; redraw them.
+        try { if (typeof currentView !== 'undefined' && currentView === 'deck' && typeof _dsRefresh === 'function') _dsRefresh(); } catch (e) {}
         const mk = document.getElementById('fpMarkupModal');
         if (fromMarkup || (mk && mk.style.display !== 'none')) renderFloorplanMarkup();
     };
@@ -30267,19 +30321,19 @@ function _fpRenderLevelBar() {
     }
 }
 function _fpSwitchLevel(i) { _fpMigrate(); if (i < 0 || i >= floorplanLevels.length) return; _fpLevel = i; _fpArmedId = null; const a = _fpActive(); floorplanImageData = a.imageData; floorplanImageName = a.imageName; renderFloorplanMarkup(); }
-function _fpAddLevel() { _fpMigrate(); floorplanLevels.push({ name: 'Level ' + (floorplanLevels.length + 1), imageData: '', imageName: '' }); _fpLevel = floorplanLevels.length - 1; if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup(); }
-function _fpRenameLevel() {
+function _fpAddLevel() { _fpMigrate(); floorplanLevels.push({ name: 'Level ' + (floorplanLevels.length + 1), imageData: '', imageName: '' }); _fpLevel = floorplanLevels.length - 1; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup(); }
+async function _fpRenameLevel() {
     _fpMigrate();
     const lv = floorplanLevels[_fpLevel];
-    const nm = (window.prompt('Level name:', lv.name || ('Level ' + (_fpLevel + 1))) || '').trim();
+    const nm = (await _askText('Rename level', 'Level name', lv.name || ('Level ' + (_fpLevel + 1)), 'Rename') || '').trim();
     if (!nm) return;
-    lv.name = nm; if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup();
+    lv.name = nm; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); renderFloorplanMarkup();
 }
-function _fpDeleteLevel() {
+async function _fpDeleteLevel() {
     _fpMigrate();
     if (floorplanLevels.length <= 1) return;
     const removed = _fpLevel;
-    if (!window.confirm('Delete "' + (floorplanLevels[removed].name || ('Level ' + (removed + 1))) + '"? Pins on it will be cleared.')) return;
+    if (!(await _askYesNo('Delete level?', 'Delete \u201c' + (floorplanLevels[removed].name || ('Level ' + (removed + 1))) + '\u201d? Its plan image and the pins on it go with it. You can undo this with Ctrl+Z.', 'Delete', 'Cancel', { danger: true }))) return;
     // clear pins for rows on the removed level; shift higher levels down
     (dashProjectData || []).forEach(r => {
         if (!r) return;
@@ -30288,6 +30342,13 @@ function _fpDeleteLevel() {
         // silently re-homes onto whatever plan slid into its slot.
         const kept = _fpPins(r).filter(p => _deckLvlOf(p.lv) !== removed)
             .map(p => ({ lv: _deckLvlOf(p.lv) > removed ? _deckLvlOf(p.lv) - 1 : _deckLvlOf(p.lv), x: p.x, y: p.y }));
+        // THE WALL LINES ARE KEYED THE SAME WAY AND WERE NOT RENUMBERED (18.11), so a
+        // line drawn on Level 3 moved onto Level 2's plan when Level 1 was deleted. Read
+        // BEFORE r.level changes below: a row with no planWalls derives its one line from
+        // r.level, and resetting that to 0 would move the line onto the first plan.
+        const keptWalls = _fpWalls(r).filter(w => _deckLvlOf(w.lv) !== removed)
+            .map(w => Object.assign({}, w, { lv: _deckLvlOf(w.lv) > removed ? _deckLvlOf(w.lv) - 1 : _deckLvlOf(w.lv) }));
+        if (Array.isArray(r.planWalls) || _fpWalls(r).length) { r.planWalls = keptWalls; _fpSyncPrimaryWall(r); }
         r.planPins = kept;
         const rl = r.level || 0;
         if (rl === removed) r.level = 0; else if (rl > removed) r.level = rl - 1;
@@ -31151,8 +31212,12 @@ function _mbOpenGuideManager() {
     add.onclick = () => { _guideSets().push({ id: 'g_' + Math.random().toString(36).slice(2, 8), name: 'Custom guides', builtin: false, margin: { t: 0.05, b: 0.05, l: 0.05, r: 0.05 }, cols: 0, gutter: 0, rows: 0, rowGutter: 0, vlines: [], hlines: [] }); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _mbOpenGuideManager(); };
     panel.appendChild(add);
     const close = document.createElement('button'); close.textContent = 'Done'; close.className = 'action-btn btn-secondary'; close.style.cssText = 'height:30px; font-size:var(--fs-70); padding:0 18px; margin:8px 0 0 8px;'; close.onclick = () => m.remove();
+    close.setAttribute('data-modal-close', '');
     panel.appendChild(close);
-    m.appendChild(panel); m.onclick = (e) => { if (e.target === m) m.remove(); };
+    // On the shared dialog shell (18.11), like Preflight and the page preview: Escape
+    // closes it and the backdrop only does on a press that started there.
+    m.classList.add('frame-modal', 'fm-nested'); m.setAttribute('data-modal-backdrop', ''); m.style.display = 'flex';
+    m.appendChild(panel);
     document.body.appendChild(m);
 }
 // ── Layers panel (InDesign-style object list: hide / lock / select / reorder) ──
@@ -39707,6 +39772,66 @@ function _askYesNo(title, body, yes, no, opts) {
         showConfirmModal(title, body, yes, no, () => resolve(true), () => resolve(false), opts);
     });
 }
+// ONE WAY TO ASK FOR A NAME (18.11): _askFields / _askText. There were eleven native
+// window.prompt() boxes (naming templates, styles, text presets, categories, levels),
+// browser chrome over the app with its own look and its own Escape, and no way to offer
+// the existing style groups as choices. On the shared .frame-modal shell, so Escape,
+// the backdrop and focus behave like every other dialog. Resolves to the trimmed
+// values, or null when cancelled; a field may carry `list` (a datalist of suggestions).
+// An empty required field disables the confirm button rather than resolving to '' and
+// leaving every caller to check.
+function _askFields(o) {
+    return new Promise((resolve) => {
+        const ov = document.createElement('div');
+        ov.className = 'frame-modal fm-nested ask-fields'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+        const card = document.createElement('form'); card.className = 'ask-card';
+        const h = document.createElement('h3'); h.className = 'ask-title'; h.textContent = o.title || 'Name'; card.appendChild(h);
+        if (o.body) { const b = document.createElement('div'); b.className = 'ask-body'; b.textContent = o.body; card.appendChild(b); }
+        const inputs = {};
+        (o.fields || []).forEach((f, k) => {
+            const lab = document.createElement('label'); lab.className = 'ask-field';
+            const span = document.createElement('span'); span.textContent = f.label || ''; lab.appendChild(span);
+            const inp = document.createElement('input'); inp.type = 'text'; inp.autocomplete = 'off';
+            inp.value = f.value == null ? '' : String(f.value);
+            if (f.placeholder) inp.placeholder = f.placeholder;
+            if (k === 0) inp.setAttribute('data-modal-initial', '');
+            if (Array.isArray(f.list) && f.list.length) {
+                const dl = document.createElement('datalist'); dl.id = 'askList' + Math.random().toString(36).slice(2, 8);
+                f.list.forEach(v => { const op = document.createElement('option'); op.value = v; dl.appendChild(op); });
+                lab.appendChild(dl); inp.setAttribute('list', dl.id);
+            }
+            lab.appendChild(inp); card.appendChild(lab);
+            inputs[f.key] = inp;
+        });
+        const row = document.createElement('div'); row.className = 'ask-actions';
+        const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel';
+        cancel.setAttribute('data-modal-close', '');
+        const ok = document.createElement('button'); ok.type = 'submit'; ok.className = 'action-btn'; ok.textContent = o.confirm || 'Save';
+        row.appendChild(cancel); row.appendChild(ok); card.appendChild(row);
+        let done = false;
+        const finish = (v) => { if (done) return; done = true; ov.remove(); resolve(v); };
+        const required = (o.fields || []).filter(f => f.required !== false);
+        const sync = () => { ok.disabled = required.some(f => !String(inputs[f.key].value || '').trim()); };
+        Object.keys(inputs).forEach(k => { inputs[k].oninput = sync; });
+        sync();
+        cancel.onclick = () => finish(null);
+        card.onsubmit = (e) => {
+            e.preventDefault();
+            if (ok.disabled) return;
+            const out = {};
+            Object.keys(inputs).forEach(k => { out[k] = String(inputs[k].value || '').trim(); });
+            finish(out);
+        };
+        // Closed by the backdrop or by removal from elsewhere: answer null, never hang.
+        try { new MutationObserver(() => { if (!ov.isConnected) finish(null); }).observe(document.body, { childList: true }); } catch (e) {}
+        ov.appendChild(card);
+        document.body.appendChild(ov);
+        try { const f0 = card.querySelector('input'); if (f0) { f0.focus(); f0.select(); } } catch (e) {}
+    });
+}
+function _askText(title, label, value, confirm) {
+    return _askFields({ title: title, confirm: confirm, fields: [{ key: 'v', label: label, value: value }] }).then(r => r ? r.v : null);
+}
 function _confirmDestroy(o) {
     const tail = o.undoable ? 'You can undo this with Ctrl+Z.' : 'This can’t be undone.';
     const body = (o.body ? o.body + String.fromCharCode(10, 10) : '') + tail;
@@ -40107,7 +40232,7 @@ const HELP_REFERENCE_DATA = [
                 body: `<ol class="help-steps">
 <li><strong>Spec the pieces</strong> in <strong>1 Frame Dashboard</strong>. One row per piece: product, size, moulding, mats and artwork.</li>
 <li><strong>Place them on walls</strong> in <strong>2 Elevation</strong>. Pick a wall in the rail, add pieces with <strong>Add &amp; Arrange</strong> (or <strong>Push to Wall</strong> from the dashboard), then drag them into place and dimension them.</li>
-<li><strong>Pin them on the floorplan</strong> in <strong>3 Deck</strong>. Select the floorplan page and use <strong>Place numbers / mark up</strong>. Skip this if the project has no plan.</li>
+<li><strong>Pin them on the floorplan</strong> in <strong>3 Deck</strong>. Select the floorplan page, upload the plan from the middle of the page, then add each code from the <strong>Items</strong> tab. Skip this if the project has no plan.</li>
 <li><strong>Build the deck</strong> in <strong>3 Deck</strong>. Choose a presentation type on the <strong>Project</strong> tab, then check each page on the <strong>Pages</strong> tab.</li>
 <li><strong>Generate the PDF</strong> with <strong>Generate PDF</strong> at the top of Deck Studio. Run <strong>Preflight</strong> first: it lists missing artwork, pins and plan images.</li>
 </ol>The badges on the Elevation and Deck tabs count what is left: pieces that are not on a wall yet, and pieces that are not pinned on the plan.`
@@ -40198,7 +40323,7 @@ const HELP_REFERENCE_DATA = [
         title: 'Floorplans',
         intro: `The plan shows where each piece hangs. Pins say which room; a wall line says which wall and how much of it.`,
         entries: [
-            { title: 'Adding a plan', body: `In Deck Studio, open the <strong>Pages</strong> tab, select the floorplan page and use <strong>Place numbers / mark up</strong>. <strong>Change plan…</strong> loads the plan image, and <strong>+ Level</strong> adds another floor.` },
+            { title: 'Adding a plan', body: `In Deck Studio, open the <strong>Pages</strong> tab and select the floorplan page. While it has no plan, click <strong>Upload floor plan</strong> in the middle of the page. For everything else, open the panel's <strong>Plan</strong> tab and use <strong>Open full markup tool</strong>. <strong>Change plan…</strong> loads the plan image, and <strong>+ Level</strong> adds another floor.` },
             { title: 'Pinning pieces', body: `In the floorplan panel's <strong>Items</strong> tab, click a piece and then click the plan. <strong>Unplaced</strong> shows only what is left to pin. <strong>Categories</strong> sets the pin colours.` },
             { title: 'Wall lines', body: `Draw the line along the wall a piece hangs on. Hold <span class="help-kbd">Shift</span> to keep it straight. A magnifier follows the cursor while you place, for accuracy at the page edge.` },
             { title: 'One piece on several plans', body: `A piece can be pinned on the overall plan and on each guestroom plan. Pins never change quantities: quantity comes from how many walls a piece is placed on.` },
@@ -40283,7 +40408,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.10</strong> FRAME opens on a calm start screen: the logo comes together, then <strong>Continue</strong> (unsaved work, when there is some), <strong>New project</strong> (name, client, units, then straight to the floorplan Items list) or <strong>Open project</strong>. A bar at the bottom left says the next step for a new project. The old start question and the separate restore prompt are gone.<br><br>
+                body: `<strong>18.11</strong> Every name box and yes/no question (templates, text styles, text presets, levels) is now a FRAME dialog instead of a plain browser box, and saving a text style offers your existing groups. An empty floor plan page has an <strong>Upload floor plan</strong> button right in the middle. Deleting a level is now properly undoable, and wall lines on the plans above it stay on the right plan.<br><br>
+<strong>18.10</strong> FRAME opens on a calm start screen: the logo comes together, then <strong>Continue</strong> (unsaved work, when there is some), <strong>New project</strong> (name, client, units, then straight to the floorplan Items list) or <strong>Open project</strong>. A bar at the bottom left says the next step for a new project. The old start question and the separate restore prompt are gone.<br><br>
 <strong>18.09</strong> Jump to lists cleaner results: typing a code shows only the matching codes (not every piece whose description mentions the word), each group appears once, and a spec page is not listed twice unless you type its page number.<br><br>
 <strong>18.08</strong> Text on deck pages wraps in the editor exactly where it wraps in the PDF. The editor was kerning letter pairs (up to 5% tighter on pairs like AV and TA) and the PDF never does, so a heading could fit on screen and break onto a second line in the export. Nothing in the PDF changes.<br><br>
 <strong>18.07</strong> Vertical spacing and measure-line numbers on elevations now read along their line, like the wall and glass dimensions already did, whenever the number fits the gap. A number too long for its gap stays upright beside the line.<br><br>

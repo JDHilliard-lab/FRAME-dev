@@ -2159,6 +2159,31 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   detail a "breaker", which is a different page.
   **The alerts were sorted by the house rule**: nudges and acknowledgements to `_toast`
   ("That is the last row", "Pushed to wall"), failures and must-reads to `showInfoModal`.
+- **NO NATIVE DIALOGS, PROMPTS INCLUDED (18.11): `_askFields` / `_askText` / `_askYesNo`.**
+  The 17.x cleanup took out `confirm()` and `alert()` but left eleven `window.prompt()`
+  and six `window.confirm()` in the template, style, preset and level code.
+  `_askFields` resolves trimmed values or null, disables its confirm button while a
+  required field is empty, and takes `list` for a datalist (the style dialog offers
+  every existing group, which the old prompt could only list four of in its question).
+  `_dsAskLeaveTemplate` is the ONE "unsaved template edits" question; there were four
+  wordings. **`_dsTab` re-enters with `_confirmed`**, never by relying on cleanup to
+  clear the session: cleanup can throw before nulling it, and the first version looped
+  forever re-asking (caught by `test_tab_exit_fix`). Six older template tests were
+  written against the native dialogs; they now run their checks `async` and bridge
+  `_askYesNo`/`_askFields` back to their `window.confirm`/`window.prompt` stubs, so every
+  assertion is unchanged. Add a `test_no_native_dialogs` check, not a native call.
+- **FLOOR PLANS ARE IN THE UNDO ENTRY (`snapshotProjectState({ plans: true })`, 18.11).**
+  Without it, Ctrl+Z after deleting a level restored the pins' old level numbers onto a
+  list that had lost the level, re-homing them onto the wrong plan. ONLY the undo stack
+  asks for it: autosave and version history already store the levels beside the
+  snapshot, and carrying them inside too would write every plan image twice. The rule
+  that comes with it: **every level mutation pushes history** (upload, add, rename,
+  delete), or the next unrelated Ctrl+Z silently reverts it. Deleting a level also
+  renumbers the WALL LINES now, not just the pins, reading `_fpWalls(r)` before
+  `r.level` changes (a legacy row derives its line from `r.level`).
+  The empty plan slot in Deck Studio is an **Upload floor plan** button for that level;
+  the hint pointed at a button the floorplan panel does not show, and the PDF
+  placeholder named a dialog that no longer exists (now "FLOOR PLAN IMAGE GOES HERE").
 - **UNDO HAS BUTTONS, AND SAYS WHERE IT WENT** (`#undoBtn` / `#redoBtn`, `_historyWhere`,
   `_historyAnnounce`, `_historyBlockedByDialog`). `updateUndoButtons()` had managed two ids
   that did not exist, so undo was Ctrl+Z only. Undo reverts the whole project, so the change

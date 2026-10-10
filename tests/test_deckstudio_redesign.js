@@ -10,24 +10,41 @@ const fs = require('fs');
   global.window = window; global.document = window.document;
   const testBlock = `
     window.__testResults = [];
-    const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
+    window.__done = (async () => {
+    const __check = async (label, fn) => { try { await fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
+    // 18.11 replaced window.confirm / window.prompt with styled async dialogs
+    // (_askYesNo, _askFields). These checks were written against the native ones, so
+    // the helpers are bridged back to whatever window.confirm / window.prompt the
+    // check installs: accept, decline and typed names mean exactly what they did.
+    _askYesNo = (t, b) => Promise.resolve(!!(typeof window.confirm === 'function' ? window.confirm(b) : true));
+    _askFields = (o) => Promise.resolve((() => {
+      const out = {};
+      for (const f of (o.fields || [])) {
+        const v = (typeof window.prompt === 'function') ? window.prompt(f.label, f.value) : f.value;
+        if (v == null) return null;
+        out[f.key] = String(v).trim();
+      }
+      return out;
+    })());
+    const __tick = () => new Promise(r => setTimeout(r, 0));
+
     editorialContent = editorialContent || {};
     scheduleAutosave = () => {}; pushHistory = () => {}; _dsRenderRail = () => {}; _dsSyncToolbar = () => {}; _dsSyncApprovedBtn = () => {}; renderMoodboardCanvas = () => {};
 
-    __check('right panel structure: Page/Templates sub-tabs and their body containers exist', () => {
+    await __check('right panel structure: Page/Templates sub-tabs and their body containers exist', async () => {
       if (!document.getElementById('dsToolsBtnPage')) throw new Error('Page tab button missing');
       if (!document.getElementById('dsToolsBtnTemplates')) throw new Error('Templates tab button missing');
       if (!document.getElementById('dsToolsPageBody')) throw new Error('Page body missing');
       if (!document.getElementById('dsToolsTemplatesBody')) throw new Error('Templates body missing');
     });
 
-    __check('top-level Templates nav button is visible again, now as its own dedicated template-editor destination', () => {
+    await __check('top-level Templates nav button is visible again, now as its own dedicated template-editor destination', async () => {
       const btn = document.getElementById('dsTabBtnTemplates');
       if (btn.style.display === 'none') throw new Error('Templates button should be visible \u2014 it is now a dedicated editing destination');
       if (btn.getAttribute('onclick').indexOf('_dsOpenTemplateEditor()') < 0) throw new Error('Templates button does not open the dedicated template-editor mode');
     });
 
-    __check('THE + BUTTON: quick-add creates a blank, footer-only page with no menu', () => {
+    await __check('THE + BUTTON: quick-add creates a blank, footer-only page with no menu', async () => {
       editorialContent.layoutPages = [];
       _dsPages = []; _dsIndex = 0;
       window._dsCurrentEditablePage = () => null;
@@ -37,7 +54,7 @@ const fs = require('fs');
       if (pg.elements.length !== 0) throw new Error('page not blank: ' + JSON.stringify(pg.elements));
     });
 
-    __check('_dsToolsTab switches visibility and highlight correctly', () => {
+    await __check('_dsToolsTab switches visibility and highlight correctly', async () => {
       _dsToolsTab('templates');
       if (document.getElementById('dsToolsTemplatesBody').style.display !== 'flex') throw new Error('templates body not shown');
       if (document.getElementById('dsToolsPageBody').style.display !== 'none') throw new Error('page body not hidden');
@@ -46,7 +63,7 @@ const fs = require('fs');
       if (document.getElementById('dsToolsTemplatesBody').style.display !== 'none') throw new Error('templates body not hidden after switch');
     });
 
-    __check('the compact Templates browser lists a Blank category first, then real categories with items', () => {
+    await __check('the compact Templates browser lists a Blank category first, then real categories with items', async () => {
       _dsToolsTab('templates');
       const host = document.getElementById('dsToolsTemplatesBody');
       const secs = Array.from(host.querySelectorAll('.tpl-sec'));
@@ -56,7 +73,7 @@ const fs = require('fs');
       if (!catalogueSec.querySelectorAll('.tpl-card').length) throw new Error('Catalogue has no template cards');
     });
 
-    __check('clicking a compact thumbnail previews it in the CENTER canvas, not a side panel', () => {
+    await __check('clicking a compact thumbnail previews it in the CENTER canvas, not a side panel', async () => {
       editorialContent.layoutPages = [{ id: 'pgReal', type: 'moodboard', title: 'Real page', elements: [{ type: 'text', text: 'Existing content', x:0.1,y:0.1,w:0.3 }] }];
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => ({ page: editorialContent.layoutPages[0], type: 'moodboard' });
@@ -70,25 +87,25 @@ const fs = require('fs');
       if (editorialContent.layoutPages[0].elements[0].text !== 'Existing content') throw new Error('real page data was mutated just by previewing');
     });
 
-    __check('preview banner has Apply and Cancel actions', () => {
+    await __check('preview banner has Apply and Cancel actions', async () => {
       const center = document.getElementById('dsCenter');
       const labels = Array.from(center.querySelectorAll('button')).map(b => b.textContent);
       if (labels.indexOf('Apply to this page') < 0) throw new Error('Apply button missing');
       if (labels.indexOf('Cancel') < 0) throw new Error('Cancel button missing');
     });
 
-    __check('APPLY: confirms before overwriting a page that already has content', () => {
+    await __check('APPLY: confirms before overwriting a page that already has content', async () => {
       editorialContent.layoutPages = [{ id: 'pgReal2', type: 'moodboard', title: 'Real page 2', elements: [{ type: 'text', text: 'Do not lose me', x:0.1,y:0.1,w:0.3 }] }];
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => ({ page: editorialContent.layoutPages[0], type: 'moodboard' });
       let confirmCalled = false;
       window.confirm = () => { confirmCalled = true; return false; };   // decline
-      _dsApplyTemplateToCurrentPage({ selKey: 'blank', name: 'Blank page', els: [], source: 'blank' });
+      await _dsApplyTemplateToCurrentPage({ selKey: 'blank', name: 'Blank page', els: [], source: 'blank' });
       if (!confirmCalled) throw new Error('did not confirm before overwriting existing content');
       if (editorialContent.layoutPages[0].elements[0].text !== 'Do not lose me') throw new Error('content was overwritten despite declining the confirm');
     });
 
-    __check('APPLY: accepting the confirm applies a MASTER template correctly (elements AND annotations, images preserved)', () => {
+    await __check('APPLY: accepting the confirm applies a MASTER template correctly (elements AND annotations, images preserved)', async () => {
       const savedMaster = IDML_MASTER_TEMPLATES.slice();
       IDML_MASTER_TEMPLATES.push({ name: 'Farmboy \\u00b7 Test Apply', type: 'moodboard', elements: [{ type: 'text', text: 'Template title', x:0.1,y:0.1,w:0.3 }], annotations: [{ type: 'shape', shape: 'rect', x:0.5,y:0.1,w:0.3,h:0.3, dataUrl: 'data:image/jpeg;base64,REALPHOTO' }] });
       const mi = IDML_MASTER_TEMPLATES.length - 1;
@@ -97,7 +114,7 @@ const fs = require('fs');
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => ({ page: editorialContent.layoutPages[0], type: 'moodboard' });
       window.confirm = () => true;
-      _dsApplyTemplateToCurrentPage({ selKey: 'm:' + mi, name: 'Test Apply', els: [], source: 'master', mi: mi });
+      await _dsApplyTemplateToCurrentPage({ selKey: 'm:' + mi, name: 'Test Apply', els: [], source: 'master', mi: mi });
       const pg = editorialContent.layoutPages[0];
       if (pg.elements[0].text !== 'Template title') throw new Error('elements not applied: ' + JSON.stringify(pg.elements));
       const anns = editorialContent.annotations['layout:pgReal3'];
@@ -106,28 +123,28 @@ const fs = require('fs');
       IDML_MASTER_TEMPLATES.length = 0; savedMaster.forEach(m => IDML_MASTER_TEMPLATES.push(m));
     });
 
-    __check('APPLY: the "blank" option clears both elements and annotations for the current page', () => {
+    await __check('APPLY: the "blank" option clears both elements and annotations for the current page', async () => {
       editorialContent.layoutPages = [{ id: 'pgReal4', type: 'moodboard', title: 'Real page 4', elements: [{ type: 'text', text: 'x', x:0.1,y:0.1,w:0.3 }] }];
       editorialContent.annotations = { 'layout:pgReal4': [{ type: 'arrow', x1:0,y1:0,x2:1,y2:1 }] };
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => ({ page: editorialContent.layoutPages[0], type: 'moodboard' });
       window.confirm = () => true;
-      _dsApplyTemplateToCurrentPage({ selKey: 'blank', name: 'Blank page', els: [], source: 'blank' });
+      await _dsApplyTemplateToCurrentPage({ selKey: 'blank', name: 'Blank page', els: [], source: 'blank' });
       const pg = editorialContent.layoutPages[0];
       if (pg.elements.length !== 0) throw new Error('elements not cleared: ' + JSON.stringify(pg.elements));
       if (editorialContent.annotations['layout:pgReal4']) throw new Error('annotations not cleared');
     });
 
-    __check('APPLY guards against a non-editable page (e.g. spec) with a message, does not throw', () => {
+    await __check('APPLY guards against a non-editable page (e.g. spec) with a message, does not throw', async () => {
       _dsPages = [{ kind: 'spec', row: { id: 'ART.001' } }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => null;
       let modalShown = false;
       window.showInfoModal = () => { modalShown = true; };
-      _dsApplyTemplateToCurrentPage({ selKey: 'blank', name: 'Blank page', els: [], source: 'blank' });
+      await _dsApplyTemplateToCurrentPage({ selKey: 'blank', name: 'Blank page', els: [], source: 'blank' });
       if (!modalShown) throw new Error('no guard message shown for a non-editable page');
     });
 
-    __check('CANCEL: exits preview mode and clears the flag without touching real page data', () => {
+    await __check('CANCEL: exits preview mode and clears the flag without touching real page data', async () => {
       editorialContent.layoutPages = [{ id: 'pgReal5', type: 'moodboard', title: 'Real page 5', elements: [{ type: 'text', text: 'Keep me', x:0.1,y:0.1,w:0.3 }] }];
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => ({ page: editorialContent.layoutPages[0], type: 'moodboard' });
@@ -141,7 +158,7 @@ const fs = require('fs');
       if (editorialContent.layoutPages[0].elements[0].text !== 'Keep me') throw new Error('real page data touched by cancel');
     });
 
-    __check('switching away from the Templates sub-tab while previewing cancels the preview', () => {
+    await __check('switching away from the Templates sub-tab while previewing cancels the preview', async () => {
       editorialContent.layoutPages = [{ id: 'pgReal6', type: 'moodboard', title: 'Real page 6', elements: [] }];
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }]; _dsIndex = 0;
       window._dsCurrentEditablePage = () => ({ page: editorialContent.layoutPages[0], type: 'moodboard' });
@@ -152,7 +169,7 @@ const fs = require('fs');
       if (_dsCenterPreviewItem !== null) throw new Error('preview not cancelled when switching to Page tab');
     });
 
-    __check('selecting a different page clears any in-progress preview', () => {
+    await __check('selecting a different page clears any in-progress preview', async () => {
       editorialContent.layoutPages = [{ id: 'pgA', type: 'moodboard', title: 'A', elements: [] }, { id: 'pgB', type: 'moodboard', title: 'B', elements: [] }];
       _dsPages = [{ kind: 'layout', page: editorialContent.layoutPages[0] }, { kind: 'layout', page: editorialContent.layoutPages[1] }];
       _dsIndex = 0;
@@ -161,8 +178,9 @@ const fs = require('fs');
       _dsSelectPage(1);
       if (_dsCenterPreviewItem !== null) throw new Error('preview state leaked across a page switch');
     });
+    })();
   `;
-  try { window.eval(src + '\n' + testBlock); }
+  try { window.eval(src + '\n' + testBlock); await window.__done; }
   catch (e) { console.error('LOAD/RUN FAILED:', e.message); process.exit(1); }
   const results = window.__testResults || [];
   let failures = [];

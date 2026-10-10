@@ -557,7 +557,7 @@ const fs = require('fs');
       // Without the renumber a guestroom pin silently re-homes onto whatever plan slid
       // into its slot — a wrong drawing that looks completely normal.
       const A = window.__appSrc;
-      const del = A.slice(A.indexOf('Pins on it will be cleared'), A.indexOf('floorplanLevels.splice(removed, 1)'));
+      const del = A.slice(A.indexOf('async function _fpDeleteLevel'), A.indexOf('floorplanLevels.splice(removed, 1)'));
       if (del.indexOf('_fpPins(r)') < 0) throw new Error('level deletion ignores the pin array');
       if (del.indexOf('- 1') < 0) throw new Error('level deletion does not renumber the pins above it');
       // The arithmetic itself, as the deletion does it.
