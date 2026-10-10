@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.06';
+const APP_VERSION = '18.07';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -40177,7 +40177,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.06</strong> <strong>Catalogue overview</strong>: every placement on one screen with how many openings in each image option still need a picture, an Only incomplete filter, and a click to open the wall. From All placements in the Options map, the deck Options section, or Ctrl+K.<br><br>
+                body: `<strong>18.07</strong> Vertical spacing and measure-line numbers on elevations now read along their line, like the wall and glass dimensions already did, whenever the number fits the gap. A number too long for its gap stays upright beside the line.<br><br>
+<strong>18.06</strong> <strong>Catalogue overview</strong>: every placement on one screen with how many openings in each image option still need a picture, an Only incomplete filter, and a click to open the wall. From All placements in the Options map, the deck Options section, or Ctrl+K.<br><br>
 <strong>18.05</strong> Preflight no longer lists a catalogue mockup's slots as missing artwork (they never take any). A missing image or wall placement has a <strong>Piece</strong> button that opens that piece on the dashboard, beside the existing <strong>Page</strong> button, and Esc closes Preflight.<br><br>
 <strong>18.04</strong> <strong>Jump to</strong>: press Ctrl+K (Cmd+K on a Mac) anywhere and type a code, wall name, page number or page title. A piece offers Piece, Wall and Page, and Enter picks the one for the view you are in.<br><br>
 <strong>18.03</strong> Resize handles, the text settings button and the image pan control on cover, narrative and layout pages stay on the page when a box runs to the edge, instead of falling off where they could not be clicked.<br><br>
@@ -45530,6 +45531,8 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
     dim.setAttribute('data-custom-line', id);
     const sel = (selectedCustomLine === id);
     const label = elevFmtU(value);
+    // A vertical measure line reads along itself when its number fits (see _dimRotateFits).
+    const _rot = (type !== 'h') && _dimRotateFits(layer, label, spanLen * elevScale);
     // Drag direction, for _autoLiftDimLabel's side choice (see there).
     {
         const _L = getElevCustomLines().find(l => l.id === id);
@@ -45543,7 +45546,7 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
     } else {
         const height = spanLen * elevScale, left = originX * elevScale, bottom = originY * elevScale;
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;` + (sel ? 'outline:1px dashed var(--selected); outline-offset:3px;' : '');
-        dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new">${label}</span><div class="dim-line-segment-v"></div>${_dimTicksHTML('v')}`;
+        dim.innerHTML = `<div class="dim-line-segment-v"></div><span class="arch-label-new${_rot ? ' arch-label-rot' : ''}">${label}</span><div class="dim-line-segment-v"></div>${_dimTicksHTML('v')}`;
     }
     const L = getElevCustomLines().find(l => l.id === id);
 
@@ -45565,6 +45568,7 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
         buildDimControls({
             dim, type, container: layer,
             id,
+            rotateLabel: _rot,
             isSelected: () => selectedCustomLine === id,
             select: () => { selectedCustomLine = id; selectedDimId = null; },
             getLabelOff: () => (L.lblOff || 0) * inFromStore,        // inches→cur
@@ -45892,7 +45896,7 @@ function drawElevTargetedSpacing() {
                         const vId = 'spacing-v-' + pairId;
                         const vOff = getDimOffset(vId);
                         anchorX += vOff;
-                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, _spacingLabel(gapY), vId, vOff, {
+                        createElevArchSpacing(anchorX, botF.y + botF.h, anchorX, topF.y, 'v', layer, _spacingLabel(gapY), vId, vOff, { rotateLabel: 'auto',
                             band1: { lo: botF.x, hi: botF.x + botF.w },
                             band2: { lo: topF.x, hi: topF.x + topF.w },
                         });
@@ -45946,7 +45950,7 @@ function drawPerFrameDistanceDims() {
             if (ceilingDist > 0) {
                 const id = 'edge-' + f.letter + '-ceiling';
                 const o = getDimOffset(id); const ax = verticalAnchorX + o;
-                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, _spacingLabel(ceilingDist), id, o, {
+                createElevArchSpacing(ax, f.y + f.h, ax, wallH, 'v', layer, _spacingLabel(ceilingDist), id, o, { rotateLabel: 'auto',
                     band1: { lo: f.x, hi: f.x + f.w }, // frame endpoint (y = f.y+f.h)
                     band2: null,                        // wall (ceiling) endpoint
                 });
@@ -45958,7 +45962,7 @@ function drawPerFrameDistanceDims() {
             if (floorDist > 0) {
                 const id = 'edge-' + f.letter + '-floor';
                 const o = getDimOffset(id); const ax = verticalAnchorX + o;
-                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, _spacingLabel(floorDist), id, o, {
+                createElevArchSpacing(ax, 0, ax, f.y, 'v', layer, _spacingLabel(floorDist), id, o, { rotateLabel: 'auto',
                     band1: null,                        // wall (floor) endpoint (y = 0)
                     band2: { lo: f.x, hi: f.x + f.w },  // frame endpoint (y = f.y)
                 });
@@ -46044,6 +46048,30 @@ function createElevArchDim(x1, y1, x2, y2, type, label, container, isWallOuter) 
     _autoLiftDimLabel(dim, type);
 }
 
+// DOES A VERTICAL DIMENSION NUMBER READ ALONG ITS LINE? (18.07)
+// The outer wall dims, the figure dim and the glazing dims were rotated; the spacing
+// and custom-line dims beside them were not, so one drawing set its vertical numbers
+// two ways. Every vertical dim that is passed 'auto' now rotates WHEN ITS NUMBER FITS
+// THE GAP lengthways, and stays upright otherwise. Upright is the fallback because
+// _autoLiftDimLabel can then move it beside the line; a rotated label has no such
+// escape, so rotating a number longer than its gap would print it across the frames
+// at either end. Measured with a throwaway upright label in the same container, so
+// the font, size and dual-unit text are exactly what will be drawn. Something that
+// cannot measure (detached, jsdom) reports 0 and rotates, which is the common case.
+function _dimRotateFits(container, label, spanPx) {
+    if (!container || !container.appendChild) return true;
+    let w = 0;
+    try {
+        const probe = document.createElement('span');
+        probe.className = 'arch-label-new';
+        probe.style.cssText = 'position:absolute; visibility:hidden; left:-9999px; top:0; white-space:nowrap;';
+        probe.innerHTML = label;
+        container.appendChild(probe);
+        w = probe.offsetWidth || 0;
+        probe.remove();
+    } catch (e) { w = 0; }
+    return w + 2 * DIM_LABEL_END_ROOM <= spanPx;
+}
 function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, offsetAmt, bandOpt) {
     offsetAmt = offsetAmt || 0;
     bandOpt = bandOpt || {};
@@ -46099,6 +46127,7 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
         // Floor-anchored lines (y≈0) extend down past the content box to touch
         // the 1px floor border, so they sit flush on the floor.
         if (Math.min(y1, y2) < 0.001) { bottom = -1; height += 1; }
+        if (bandOpt.rotateLabel === 'auto') bandOpt.rotateLabel = _dimRotateFits(container, label, height);
         dim.style.cssText = `height:${height}px; width:1.2px; left:${left}px; bottom:${bottom}px;`;
         // A vertical dim NUMBER can be ROTATED to run along its own line
         // (bandOpt.rotateLabel). Upright, a label like 82"(2083mm) is far wider than the

@@ -1676,8 +1676,9 @@ body.dragging-frame .frame-vis:hover {
  * Absolute, so the line runs through unbroken behind it (the two segments split the
  * span evenly with the label out of flow). Only applied where there are no drag
  * arrows on the label: the arrows are children of it and would rotate too, turning
- * up/down into left/right. The outer wall dims have no arrows, which is why they get
- * this and the spacing dims don't yet. */
+ * up/down into left/right. buildDimControls({rotateLabel}) solved that with an
+ * unrotated stand-in box, and since 18.07 the spacing and custom-line dims rotate too,
+ * whenever the number fits its gap (_dimRotateFits). */
 .arch-dim-v .arch-label-rot {
     position: absolute;
     top: 50%;

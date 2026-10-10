@@ -3375,14 +3375,12 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   and **every** cache write is gated on `_igRenderWasComplete()`. The centre preview
   (the selected page) is also allowed to capture again, which is what makes a breaker
   build itself; thumbnails stay suppressed so background renders never steal the view.
-- **Vertical dimension text is rotated on the outer WALL dims and the scale-figure
-  height dim; the spacing/custom ones are still upright.** The blocker is **gone**
-  (16.26) — `buildDimControls({rotateLabel: true})` hangs the chevrons off an
-  unrotated stand-in box, which is the fix this item asked for. Turning the rest on
-  is now just passing the flag from `createElevArchSpacing` and the custom-line
-  renderer, plus a look at how the rotated chip crowds a short spacing gap
-  (`_autoLiftDimLabel` deliberately no-ops on a rotated label, so a number too tall
-  for its gap has no escape hatch yet).
+- ~~Vertical spacing / custom dims are still upright.~~ **Done (18.07).** They pass
+  `rotateLabel: 'auto'` and `_dimRotateFits` rotates the number when its length fits the
+  gap, else leaves it upright so `_autoLiftDimLabel` can lift it beside the line (a
+  rotated label has no escape hatch). The probe is a throwaway upright label in the same
+  container, so the measured text is the drawn text. The export needed nothing: `emitEl`
+  reads rotation off the computed transform.
 - **Rich text wraps ~1% differently in Deck Studio and the PDF**, because the two
   compute the font size from DIFFERENT BASES. Size is stored as a FRACTION of page
   height; the PDF does `(r.size || t.size) * PH` (the nominal 540pt page) while the
