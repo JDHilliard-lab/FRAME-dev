@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.12';
+const APP_VERSION = '18.13';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -964,7 +964,7 @@ const svgAlign = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 6h12M3 1
 const svgSort = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>`;
 
 const dashDefaultData = { 
-    id: "ART.1", imageCode: "TBD", level: "1", qty: 0, product: "Framed Art", location: "LOBBY", 
+    id: "ART.1", imageCode: "TBD", level: 0, qty: 0, product: "Framed Art", location: "LOBBY", 
     // Phase A additions: artwork attribution + frame profile depth + paper type.
     // These are visible to the team in the dashboard form and the CSV. Several
     // are optional: empty values render as blank cells in CSV and are skipped
@@ -1207,6 +1207,43 @@ let floorplanImageName = '';
 // Legacy single-plan projects migrate into Level 1.
 let floorplanLevels = [];        // [{ name, imageData, imageName }]
 let _fpLevel = 0;                // active level in the markup tool
+// A ROW'S LEVEL IS A 0-BASED PLAN INDEX, AND THE DASHBOARD USED TO SAY OTHERWISE (18.13).
+// The pin code writes the index (0 = the first plan); the dashboard's Level box was free
+// text defaulting to the STRING "1", meaning the first level to the person reading it. So
+// every new, unpinned piece was filed under the SECOND plan, and in a hotel deck its spec
+// page printed in the wrong plan's block. Pinning wrote 0 into a box that had shown 1.
+// Unpinned rows carrying a string are read as the 1-based number a person typed. A row
+// with a pin is left alone: its level comes from the pin (a legacy pin even derives FROM
+// r.level, so rewriting it would move the pin). Numbers are never touched, so this is a
+// one-way, idempotent pass that is safe to run on every _fpMigrate.
+function _rowLevelsMigrate() {
+    (typeof dashProjectData !== 'undefined' ? dashProjectData : []).forEach(r => {
+        if (!r || typeof r.level !== 'string') return;
+        if (_fpPins(r).length) return;
+        const n = parseInt(r.level, 10);
+        r.level = isNaN(n) ? 0 : Math.max(0, n - 1);
+    });
+}
+// The dashboard Level control: the plans BY NAME, valued by index. Disabled while the
+// piece is pinned, because the pin decides the level and a choice here would be undone
+// by the next sync.
+function _fillLevelSelect(data) {
+    const sel = document.getElementById('m_level'); if (!sel || sel.tagName !== 'SELECT') return;
+    try { _fpMigrate(); } catch (e) {}
+    const levels = (typeof floorplanLevels !== 'undefined' && floorplanLevels.length) ? floorplanLevels : [{ name: 'Level 1' }];
+    const cur = _deckLvlOf(data && data.level);
+    sel.innerHTML = '';
+    const n = Math.max(levels.length, cur + 1);
+    for (let i = 0; i < n; i++) {
+        const o = document.createElement('option'); o.value = String(i);
+        o.textContent = (levels[i] && levels[i].name) || ('Level ' + (i + 1));
+        sel.appendChild(o);
+    }
+    sel.value = String(cur);
+    const pinned = !!(data && _fpPins(data).length);
+    sel.disabled = pinned;
+    sel.title = pinned ? 'Set by where this piece is pinned on the floor plan' : 'Which floor plan this piece is listed under in the deck';
+}
 function _fpMigrate() {
     if (!Array.isArray(floorplanLevels) || !floorplanLevels.length) {
         floorplanLevels = [{ name: 'Level 1', imageData: floorplanImageData || '', imageName: floorplanImageName || '' }];
@@ -1217,6 +1254,7 @@ function _fpMigrate() {
         if (typeof lv.imageData !== 'string') lv.imageData = '';
         if (typeof lv.imageName !== 'string') lv.imageName = '';
     });
+    _rowLevelsMigrate();
     if (_fpLevel < 0 || _fpLevel >= floorplanLevels.length) _fpLevel = 0;
 }
 function _fpActive() { _fpMigrate(); return floorplanLevels[_fpLevel]; }
@@ -1484,7 +1522,7 @@ function _fpGroups(level) {
         if (!r) return;
         if (r.id && (_optRows[r.id] || _altArr[r.id])) return;   // an alternate, not a second placement
         const k = _artGroupKey(r.id || '');
-        if (!map[k]) { map[k] = { key: k, num: _artGroupNum(r.id || ''), ids: [], rows: [], level: (r.level || 0), category: r.category || '', location: r.location || '', planX: null, planY: null, planZoom: null }; order.push(k); }
+        if (!map[k]) { map[k] = { key: k, num: _artGroupNum(r.id || ''), ids: [], rows: [], level: _deckLvlOf(r.level), category: r.category || '', location: r.location || '', planX: null, planY: null, planZoom: null }; order.push(k); }
         const g = map[k];
         g.ids.push(r.id || ''); g.rows.push(r);
         const use = (want == null) ? (_fpPins(r)[0] || null) : _fpPinOn(r, want);
@@ -10940,7 +10978,7 @@ function deleteDashRow() {
 
 function loadDashDataIntoControls(data) {
     const setVal = (id, val) => { const el = document.getElementById(id); if(el) el.value = val; };
-    setVal('m_itemCode', data.id); setVal('m_imageCode', data.imageCode); setVal('m_level', data.level); setVal('m_qty', data.qty);
+    setVal('m_itemCode', data.id); setVal('m_imageCode', data.imageCode); _fillLevelSelect(data); setVal('m_qty', data.qty);
     setVal('m_product', data.product); setVal('m_location', data.location); setVal('m_bleed', dashFmt(data.bleed)); setVal('canvasDepth', dashFmt(data.canvasDepth)); setVal('canvasWrap', dashFmt(data.canvasWrap)); setVal('floaterInset', dashFmt(data.floaterInset !== undefined ? data.floaterInset : 0.75));
     // Phase A: artwork attribution + frame profile depth + paper type.
     // All optional — defaulted to '' / 0 for older saved rows that don't have them yet.
@@ -11038,6 +11076,7 @@ function loadDashDataIntoControls(data) {
 function dashHtIn(idx, field, val, fromTable) {
     let row = dashProjectData[idx];
     if(['qty','extW','extH','fW','fHeight','m1T','m1R','m1B','m1L','m2','m_bleed','canvasDepth','canvasWrap'].includes(field)) val = parseFloat(val) || 0;
+    if (field === 'level') val = _deckLvlOf(val);   // a 0-based plan index, never text (18.13)
     if (field === 'id') { const oldId = row.id; elevations.forEach(elev => { elev.frames.forEach(f => { if (f.id === oldId) f.id = val; }); }); }
     row[field] = val;
 
@@ -11171,7 +11210,7 @@ function syncDashAndCalculate() {
     const m2Active = m1Active && document.getElementById('m2Toggle').classList.contains('active');
 
     const _assembledRow = {
-        id: newId, imageCode: getStr('m_imageCode'), level: getStr('m_level'), qty: getVal('m_qty'), product: getStr('m_product'), location: getStr('m_location'),
+        id: newId, imageCode: getStr('m_imageCode'), level: _deckLvlOf(getStr('m_level')), qty: getVal('m_qty'), product: getStr('m_product'), location: getStr('m_location'),
         // Phase A artwork attribution fields. Empty values are preserved as-is — they
         // render as blank cells in CSV and skipped lines in the InDesign spec block.
         artist: getStr('m_artist'), artworkTitle: getStr('m_artworkTitle'),
@@ -28301,6 +28340,15 @@ function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
 // Hang the set on the placement's wall: the wall already holding any of its pieces, or
 // a new one named after it. Its old frames come off and the set goes up centred on the
 // wall with the group's centre at hang height.
+// A wall nobody has touched: the default name, nothing on it, nothing traced on it, and
+// no catalogue role. Only such a wall may be taken over by a new placement.
+function _elevPristine(e) {
+    if (!e || !/^Elevation \d+$/.test(String(e.name || ''))) return false;
+    if ((e.frames || []).length || (e.contextBlocks || []).length || (e.glazing || []).length) return false;
+    if (e.underlay || e.catalogueMaster || e.catalogueOption || e.isVariation || e.variationOfId) return false;
+    if ((e.customLines || []).length || (e.groupDims || []).length) return false;
+    return true;
+}
 function _fpMockSetOnWall(key, rows, lay) {
     const ids = {}; rows.forEach(r => { ids[r.id] = true; });
     let wall = (elevations || []).find(e => (e.frames || []).some(f => f && (ids[f.id] || _artGroupKey(f.id) === key)));
@@ -28308,11 +28356,17 @@ function _fpMockSetOnWall(key, rows, lay) {
     const W = Math.max.apply(null, lay.map(f => f.x + f.w)), H = Math.max.apply(null, lay.map(f => f.y + f.h));
     if (!wall) {
         const loc = (rows[0].location || '').trim();
-        wall = { id: _elevNewId(), name: key + (loc ? ' ' + loc : ''), frames: [],
+        const fresh = { id: _elevNewId(), name: key + (loc ? ' ' + loc : ''), frames: [],
                  wallW: parseFloat((Math.max(144, Math.ceil(W + 72)) * kE).toFixed(2)),
                  wallH: parseFloat((Math.max(108, Math.ceil((elevHangIn || 57) + H / 2 + 18)) * kE).toFixed(2)),
                  personPos: { x: parseFloat((-60 * kE).toFixed(2)) }, groupDims: [], customLines: [] };
-        elevations.push(wall);
+        // ADOPT THE UNTOUCHED DEFAULT WALL (18.13). Every project starts with a blank
+        // "Elevation 1"; starting from the floorplan, each set made its own wall and that
+        // one sat empty at the end of the rail for the life of the project. It keeps its
+        // id (nothing references a blank wall, but an id is identity) and takes the rest.
+        const blank = (elevations || []).find(_elevPristine);
+        if (blank) { const keepId = _elevId(blank); Object.keys(blank).forEach(k => { delete blank[k]; }); Object.assign(blank, fresh, { id: keepId }); wall = blank; }
+        else { wall = fresh; elevations.push(wall); }
     }
     const others = (wall.frames || []).filter(f => f && !ids[f.id] && _artGroupKey(f.id) !== key);
     const wallWin = (parseFloat(wall.wallW) || 185 * kE) / kE;
@@ -40408,7 +40462,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.12</strong> Notices that only explain why nothing happened ("Nothing to move", "Add a row first") or confirm something worked ("Saved", "Import complete") are now small notices that fade away, instead of a box you have to click to dismiss. The size and weight nudge buttons in the text and arrow settings have tooltips.<br><br>
+                body: `<strong>18.13</strong> Fixed: in a deck with more than one floor plan, a new piece that was not pinned yet had its spec page listed under the second plan. The Level field on the dashboard is now a list of your plans by name (locked while the piece is pinned, since the pin decides). Starting from the floorplan no longer leaves an empty Elevation 1 wall behind.<br><br>
+<strong>18.12</strong> Notices that only explain why nothing happened ("Nothing to move", "Add a row first") or confirm something worked ("Saved", "Import complete") are now small notices that fade away, instead of a box you have to click to dismiss. The size and weight nudge buttons in the text and arrow settings have tooltips.<br><br>
 <strong>18.11</strong> Every name box and yes/no question (templates, text styles, text presets, levels) is now a FRAME dialog instead of a plain browser box, and saving a text style offers your existing groups. An empty floor plan page has an <strong>Upload floor plan</strong> button right in the middle. Deleting a level is now properly undoable, and wall lines on the plans above it stay on the right plan.<br><br>
 <strong>18.10</strong> FRAME opens on a calm start screen: the logo comes together, then <strong>Continue</strong> (unsaved work, when there is some), <strong>New project</strong> (name, client, units, then straight to the floorplan Items list) or <strong>Open project</strong>. A bar at the bottom left says the next step for a new project. The old start question and the separate restore prompt are gone.<br><br>
 <strong>18.09</strong> Jump to lists cleaner results: typing a code shows only the matching codes (not every piece whose description mentions the word), each group appears once, and a spec page is not listed twice unless you type its page number.<br><br>

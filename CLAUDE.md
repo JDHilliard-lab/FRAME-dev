@@ -468,6 +468,19 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   a second scheme) opens it with a Back bar (`deckReturnBar`, filled by `_returnBarInto`
   because the panel is built before it is attached). The template renumber modal
   (`openRenumberModal` / `renumberElevation`) is now unreferenced from the UI.
+- **`r.level` IS A 0-BASED PLAN INDEX, ALWAYS A NUMBER (18.13).** The dashboard Level
+  box was free text defaulting to the STRING `"1"` (a person's "first level") while the
+  pin code wrote the index, so every new unpinned piece was filed under the SECOND plan
+  and printed in the wrong plan's block of a multi-plan deck. `dashDefaultData.level` is
+  `0`; `_rowLevelsMigrate` (inside `_fpMigrate`) reads an UNPINNED row's string as the
+  1-based number a person typed and never touches a pinned row (a legacy pin derives its
+  level FROM `r.level`) or a number. The dashboard control is a `<select>` of plan NAMES
+  (`_fillLevelSelect`), disabled while pinned because the pin decides. Every write path
+  stores `_deckLvlOf(...)`, and `_fpGroups` compares numbers. The CSV and the InDesign
+  script never read the level, which is what made this safe to change.
+  **A new placement adopts the untouched default wall** (`_elevPristine`) instead of
+  leaving a blank "Elevation 1" at the end of the rail. Only the default name with
+  nothing on, traced on or linked to it qualifies.
 - **A ROW CAN BE PINNED ON SEVERAL PLANS** (`r.planPins = [{lv,x,y}]`). A hotel deck
   carries an overall floor plan plus a plan per guestroom type and the same piece hangs in
   all of them; with one pin per row, placing the code on Guestroom B silently took it off

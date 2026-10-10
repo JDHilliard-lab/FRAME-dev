@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.12">
+    <link rel="stylesheet" href="style.css?v=18.13">
 </head>
 <body>
 
@@ -257,7 +257,7 @@
                         <div class="grid-custom-meta">
                             <div><label>Item Code</label><input type="text" id="m_itemCode" onchange="_codesCommitFormId(this)" onkeydown="if(event.key==='Enter')this.blur()" title="The number sets the order everywhere. Type a number to move it there."></div>
                             <div><label>Image Code</label><input type="text" id="m_imageCode" oninput="syncDashAndCalculate()"></div>
-                            <div><label>Level</label><input type="text" id="m_level" oninput="syncDashAndCalculate()"></div>
+                            <div><label>Level</label><select id="m_level" onchange="syncDashAndCalculate()" title="Which floor plan this piece is listed under in the deck"></select></div>
                             <div><label>Qty</label><input type="number" id="m_qty" oninput="syncDashAndCalculate()" disabled title="Auto-Calculated by Elevations"></div>
                         </div>
                         
@@ -2470,8 +2470,8 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.12';</script>
-<script src="app.js?v=18.12"></script>
+<script>window.FRAME_HTML_VERSION = '18.13';</script>
+<script src="app.js?v=18.13"></script>
 
 </body>
 </html>
