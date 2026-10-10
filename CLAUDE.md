@@ -1813,10 +1813,12 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   **The page size rides on the box** (`box._page`, set at all four annotation boxes)
   rather than being threaded through five signatures, so a new control gets the clamp by
   asking for it. `_dsBoxWH` reads the box's own size back off what was written to it.
-  **The editable layout canvas has the same bug and is NOT fixed**: `_mbHandles`, plus
-  its text gear and pan disc, clip identically. Its boxes are positioned in PERCENT and
-  its text boxes have no fixed height, so it needs different geometry — `_dsPinChrome`
-  would need a `box._geo` in px rather than parsing `box.style`.
+  **The editable layout canvas is fixed differently (18.03, `_mbPinChrome`).** Its
+  boxes are in PERCENT and a text box has no height, so there is nothing to do the
+  arithmetic on; it MEASURES instead, after every box is in the canvas, and slides each
+  `[data-mb-pin]` control (`edge` = resize handles, `pad` = gear and pan disc) back
+  inside. A canvas measuring zero is left alone. `test_mb_chrome_onpage` carries a tiny
+  fake layout engine because jsdom has none.
   **A SELECTED IMAGE PUTS ONE CONTROL IN EACH CORNER IT CAN REACH.** Grip and zoom
   stepper top-left, resize and corner-radius top-right, settings bottom-left. They all
   wanted the top-right at one point, and once the clamp pulled them onto the page they
@@ -3378,10 +3380,10 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   the displayed pt IS the PDF pt by construction. Do it deliberately: it changes the
   rendered size of every text box in every saved project by that same ~1%, which can
   reflow anything else sitting near a boundary.
-- **Thumbnail canvas renderer mis-lays-out large display type.** It positions text
-  using built-in font width tables that lack Druk, so words overlap. The real PDF is
-  fine (it embeds the font). Candidate fix: route element pages to the lightweight
-  `_mbThumbInner` HTML renderer instead of the canvas path.
+- ~~Thumbnail canvas renderer mis-lays-out large display type.~~ **Already fixed**:
+  `_dsThumbDrawable` returns false for element pages, so the rail draws them with
+  `_dsElementPageThumbHTML` (real HTML) and the Project tab preview uses the HTML mock
+  too. Pinned by `test_thumb_drawable_fix`.
 - **`app.js` is ~2.4 MB and GitHub won't display it.** ~634 KB is a single line:
   `IDML_MASTER_TEMPLATES`, of which ~560 KB is base64 photos baked into four
   templates (barn, signature, install photo, hardware diagram). Plan, in order:
