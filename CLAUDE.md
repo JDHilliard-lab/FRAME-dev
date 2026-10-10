@@ -2287,6 +2287,11 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   its own already saying something specific about the file that failed. The reporter is
   wrapped so it can never become the fault itself; a test breaks the notifier and checks
   the error still reaches the log.
+- **THE FOOTER'S CODE AND LOCATION ARE DECK-WIDE (`_deckFooterMeta`, 18.15)**: the
+  Project tab's document code / version / location, which the PDF export passes to every
+  page. The spec-page preview renderer used the piece's own id and location instead, so
+  the preview footer read "LOBBY | ART.3A" on a page that prints the document code, and a
+  group page titled ART.3 said ART.3A. Both preview renderers now call the one helper.
 - `_resolveFooter()` handles footer theming. `'auto'` means *read this page's own
   theme* — not a fixed default.
 - Templates live in `editorialContent.templates`; `type` doubles as the category key.
