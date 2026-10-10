@@ -1370,8 +1370,9 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `ART-1B` is already the id of arrangement A's second slot. The convention cannot express
   an arrangement letter, so a hyphen goes in. A project that already uses one (`ART.001A-A`)
   keeps it.
-  Not done yet: the plan LEGEND still labels the group `ART.001A` rather than the
-  placement `ART.001`, because `g.key` has many readers. One pin, right label pending.
+  The plan LEGEND labelling the primary arrangement rather than the placement was
+  listed here as pending; 17.97's spelling resolved it (the primary's slots are
+  `ART.1A/B/C`, so the group key IS `ART.1`) and `test_catalogue_plan_legend` pins it.
   **NOTHING IN A CATALOGUE BILLS, AND THAT REFINES AN EARLIER DECISION RATHER THAN
   REVERSING IT.** A mockup slot was already skipped. An option now is too
   (`_isCatalogueOption` in `recalculateDashboardQuantities`). The earlier "1 per catalogue
@@ -1564,7 +1565,7 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   Still to build: the option matrix panel (arrangements down, image sets across, filled
   and total per cell - a 200-image catalogue cannot be checked any other way, and the two
   axes make it the only readable view), the two option page kinds (presentation page, spec
-  page), the plan legend labelling the PLACEMENT rather than the primary arrangement, a
+  page), a
   `Catalogue Option` / `Arrangement` CSV column (with qty left BLANK rather than 0, since a
   0 a vendor reads is worse than an absent number), notes on the LEFT of a breaker page
   (they print as a right-hand column today), and Deck Studio arrows and lines that borrow
