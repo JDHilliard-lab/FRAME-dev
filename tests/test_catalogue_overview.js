@@ -1,3 +1,4 @@
+// Catalogue: the plan legend and the deck-wide overview (18.06).
 // The plan legend labels a catalogue PLACEMENT (ART.1), with its layouts (ART.1B-A...)
 // and image options (ART.1.2A...) filtered off the plan. Listed as "not done yet" in
 // the notes; 17.97's spelling resolved it, and this pins it so it stays resolved.
@@ -100,6 +101,65 @@ const path = require('path');
       if (art1[0].key !== 'ART.1') throw new Error('the legend reads ' + art1[0].key + ' instead of the placement ART.1');
       if (art1[0].ids.some(id => id.indexOf('ART.1.') === 0 || id.indexOf('-') >= 0)) throw new Error('an option or alternate arrangement row joined the placement group: ' + art1[0].ids.join(', '));
       if (!gs.some(g => g.key === 'ART.2') || !gs.some(g => g.key === 'ART.3')) throw new Error('the neighbours lost their pins');
+    });
+
+    const second = () => {
+      // A second placement: ART.2 as a two-slot mockup with one image option.
+      dashProjectData.push(row('ART.2A')); dashProjectData.push(row('ART.2B'));
+      elevations.push({ id: _elevNewId(), name: 'ART.2', wallW: 185, wallH: 108, personPos: { x: -60 }, catalogueMaster: true,
+        frames: [slot('ART.2A', 'A', 40), slot('ART.2B', 'B', 80)] });
+      _catAddOptionOfKind(elevations.length - 1, 'images');
+      _codesSettle(); _catSyncAllOptions();
+    };
+
+    __check('the overview lists every placement in order with one cell per image option', () => {
+      project(false);
+      elevations[0].catalogueMaster = true;
+      kind('images'); kind('images'); kind('arrangeNew', 'Triptych');
+      second();
+      const d = _catOverviewData();
+      if (d.map(x => x.place).join() !== 'ART.1,ART.2') throw new Error('placements: ' + d.map(x => x.place).join());
+      const codes = d[0].cells.map(c => c.code).join();
+      if (codes !== 'ART.1.1,ART.1.2,ART.1.3') throw new Error('ART.1 cells in the wrong order or shape: ' + codes);
+      if (d[1].cells.length !== 1 || d[1].cells[0].total !== 2) throw new Error('ART.2 cell: ' + JSON.stringify(d[1].cells.map(c => [c.code, c.have, c.total])));
+    });
+
+    __check('a cell counts the images actually on its option, and the totals add up', () => {
+      const d0 = _catOverviewData();
+      const opt = d0[0].cells[0].wall;
+      const r = dashProjectData.find(x => x.id === opt.frames[0].id);
+      r.artworkUrl = 'data:image/png;base64,AAAA';
+      const d = _catOverviewData();
+      if (d[0].cells[0].have !== 1) throw new Error('filled one image, cell reads ' + d[0].cells[0].have);
+      const sum = d[0].cells.reduce((a, c) => a + c.total, 0);
+      if (d[0].total !== sum) throw new Error('placement total ' + d[0].total + ' is not the sum of its cells ' + sum);
+    });
+
+    __check('the dialog opens on the shared shell; Only incomplete hides finished cells; a cell opens its wall', () => {
+      const ov = openCatalogueOverview();
+      if (!ov.classList.contains('frame-modal') || ov.querySelectorAll('[data-modal-close]').length !== 1) throw new Error('not on the shell with one close control');
+      const before = ov.querySelectorAll('.cat-ov-cell').length;
+      // Fill option 1.1 completely, then filter.
+      const opt = _catOverviewData()[0].cells[0].wall;
+      opt.frames.forEach(f => { const r = dashProjectData.find(x => x.id === f.id); if (r) r.artworkUrl = 'data:image/png;base64,AAAA'; });
+      const cb = ov.querySelector('.cat-ov-filter input'); cb.checked = true; cb.onchange();
+      const after = Array.from(ov.querySelectorAll('.cat-ov-ccode')).map(e => e.textContent);
+      if (after.indexOf('ART.1.1') >= 0) throw new Error('a finished option still shows under Only incomplete');
+      if (after.length >= before) throw new Error('the filter hid nothing');
+      cb.checked = false; cb.onchange(); _catOverviewShort = false;
+      const cell = Array.from(ov.querySelectorAll('.cat-ov-cell')).find(b => b.querySelector('.cat-ov-ccode').textContent === 'ART.1.2');
+      const target = _catOverviewData()[0].cells[1].wall;
+      cell.click();
+      if (document.getElementById('catOverviewModal')) throw new Error('the overview stayed open');
+      if (elevations[currentElevIndex] !== target) throw new Error('opened ' + elevations[currentElevIndex].name);
+    });
+
+    __check('it is reachable from Jump to and from the Options map once there are two placements', () => {
+      if (!_jumpEntries().some(e => e.title === 'Catalogue overview')) throw new Error('not in Jump to');
+      const m = openOptionsMap('ART.1');
+      const btn = Array.from(m.querySelectorAll('button')).find(b => b.textContent === 'All placements');
+      m.remove();
+      if (!btn) throw new Error('the Options map has no way to the overview');
     });
 
 })();

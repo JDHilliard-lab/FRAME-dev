@@ -1372,7 +1372,7 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   keeps it.
   The plan LEGEND labelling the primary arrangement rather than the placement was
   listed here as pending; 17.97's spelling resolved it (the primary's slots are
-  `ART.1A/B/C`, so the group key IS `ART.1`) and `test_catalogue_plan_legend` pins it.
+  `ART.1A/B/C`, so the group key IS `ART.1`) and `test_catalogue_overview` pins it.
   **NOTHING IN A CATALOGUE BILLS, AND THAT REFINES AN EARLIER DECISION RATHER THAN
   REVERSING IT.** A mockup slot was already skipped. An option now is too
   (`_isCatalogueOption` in `recalculateDashboardQuantities`). The earlier "1 per catalogue
@@ -1562,9 +1562,17 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   **`_igElevIdx` NEVER EXISTED**, and a patch script that aborts mid-way writes NOTHING -
   so a substitution reported `ok` in a run that then failed is not applied. Both cost a
   round here. Grep the identifier, and re-check the anchors after a failed patch.
-  Still to build: the option matrix panel (arrangements down, image sets across, filled
-  and total per cell - a 200-image catalogue cannot be checked any other way, and the two
-  axes make it the only readable view), the two option page kinds (presentation page, spec
+  **THE MATRIX TURNED OUT TO BE TWO VIEWS (18.06).** Per placement it is the Options
+  map, which already shows filled / total on every node. What was missing was the
+  DECK-WIDE question, "which of the 200 openings still have no picture": that is
+  `openCatalogueOverview` / `_catOverviewData`, a row per placement (`_catPlaces`
+  order) and a cell per image option (`_catTree` order, so a row reads like its pages).
+  An arrangement with no options gets a dashed "no image sets" cell rather than
+  vanishing. Offered only once there are two placements, from the Options map, the deck
+  panel's Options section and Jump to. A matrix of arrangements x option numbers would
+  have been almost all empty, because since 17.97 an option number belongs to exactly
+  one arrangement.
+  Still to build: the two option page kinds (presentation page, spec
   page), a
   `Catalogue Option` / `Arrangement` CSV column (with qty left BLANK rather than 0, since a
   0 a vendor reads is worse than an absent number), notes on the LEFT of a breaker page

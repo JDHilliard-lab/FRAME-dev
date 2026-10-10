@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.05';
+const APP_VERSION = '18.06';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -9616,7 +9616,15 @@ function openOptionsMap(place) {
     const close = document.createElement('button');
     close.className = 'action-btn btn-secondary'; close.textContent = 'Close'; close.style.cssText = 'width:auto; padding:0 14px; height:28px;';
     close.setAttribute('data-modal-close', ''); close.onclick = () => ov.remove();
-    top.appendChild(h); top.appendChild(add); top.appendChild(close);
+    top.appendChild(h); top.appendChild(add);
+    if (_catPlaces().length > 1) {
+        const all = document.createElement('button');
+        all.className = 'action-btn btn-secondary'; all.textContent = 'All placements'; all.style.cssText = 'width:auto; padding:0 14px; height:28px;';
+        all.title = 'The catalogue overview: every placement and option, with what still needs an image';
+        all.onclick = () => { ov.remove(); openCatalogueOverview(); };
+        top.appendChild(all);
+    }
+    top.appendChild(close);
     card.appendChild(top);
     const tree = document.createElement('div');
     tree.className = 'cat-tree';
@@ -9680,6 +9688,90 @@ function openOptionsMap(place) {
     document.body.appendChild(ov);
     return ov;
 }
+// ── THE CATALOGUE OVERVIEW (18.06) ───────────────────────────────────────────
+// The Options map answers "what is offered at THIS spot". A catalogue is twenty spots,
+// and the question before it goes to a client is "which of the 200 openings still have
+// no picture", which no per-placement view can answer without opening twenty of them.
+// One row per placement, in deck order; one cell per image option, in tree order, so a
+// row reads like the pages it produces. A cell is that option's filled / total and opens
+// its wall. Derived on open, never stored. "Only incomplete" is panel state, not project
+// data, the same as the Items list's Unplaced toggle.
+let _catOverviewShort = false;
+function _catOverviewData() {
+    return _catPlaces().map(place => {
+        const cells = [];
+        _catTree(place).forEach(t => {
+            const tag = _catLayoutTag(t.m);
+            if (!t.opts.length) { cells.push({ wall: t.m, code: _catBaseCode(t.m), tag: tag, have: 0, total: 0, empty: true }); return; }
+            t.opts.forEach(o => {
+                const f = _catFilled(o);
+                cells.push({ wall: o, code: _catOptGroupKey(o) || o.name || '', tag: tag, have: f.have, total: f.total });
+            });
+        });
+        const have = cells.reduce((a, c) => a + c.have, 0), total = cells.reduce((a, c) => a + c.total, 0);
+        return { place: place, cells: cells, have: have, total: total };
+    });
+}
+function openCatalogueOverview() {
+    const old = document.getElementById('catOverviewModal'); if (old) old.remove();
+    const ov = document.createElement('div'); ov.id = 'catOverviewModal';
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'cat-ov';
+    const top = document.createElement('div'); top.className = 'cat-ov-top';
+    const h = document.createElement('div'); h.className = 'cat-ov-title'; h.textContent = 'Catalogue overview';
+    const sum = document.createElement('div'); sum.className = 'cat-ov-sum';
+    const lab = document.createElement('label'); lab.className = 'cat-ov-filter';
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = _catOverviewShort;
+    lab.appendChild(cb); lab.appendChild(document.createTextNode('Only incomplete'));
+    const close = document.createElement('button'); close.type = 'button'; close.className = 'action-btn btn-secondary'; close.textContent = 'Close';
+    close.style.cssText = 'width:auto; padding:0 14px; height:28px;';
+    close.setAttribute('data-modal-close', ''); close.onclick = () => ov.remove();
+    top.appendChild(h); top.appendChild(lab); top.appendChild(close);
+    card.appendChild(top); card.appendChild(sum);
+    const body = document.createElement('div'); body.className = 'cat-ov-body'; card.appendChild(body);
+    const paint = () => {
+        const data = _catOverviewData();
+        const have = data.reduce((a, d) => a + d.have, 0), total = data.reduce((a, d) => a + d.total, 0);
+        const nOpt = data.reduce((a, d) => a + d.cells.filter(c => !c.empty).length, 0);
+        sum.textContent = data.length
+            ? (have + ' of ' + total + ' openings have images, across ' + data.length + ' placement' + (data.length === 1 ? '' : 's') + ' and ' + nOpt + ' option' + (nOpt === 1 ? '' : 's') + '.')
+            : 'No catalogue placements yet. Mark a wall as a catalogue mockup to start one.';
+        body.innerHTML = '';
+        data.forEach(d => {
+            const cells = _catOverviewShort ? d.cells.filter(c => c.empty || c.have < c.total) : d.cells;
+            if (_catOverviewShort && !cells.length) return;
+            const row = document.createElement('div'); row.className = 'cat-ov-row';
+            const head = document.createElement('button'); head.type = 'button'; head.className = 'cat-ov-head';
+            head.title = 'Open the options map for ' + d.place;
+            head.innerHTML = '<div class="cat-ov-code"></div><div class="cat-ov-count"></div>';
+            head.querySelector('.cat-ov-code').textContent = d.place;
+            const ct = head.querySelector('.cat-ov-count'); ct.textContent = d.have + ' / ' + d.total;
+            if (d.have < d.total) ct.classList.add('short');
+            head.onclick = () => { ov.remove(); openOptionsMap(d.place); };
+            row.appendChild(head);
+            const strip = document.createElement('div'); strip.className = 'cat-ov-cells';
+            cells.forEach(c => {
+                const b = document.createElement('button'); b.type = 'button';
+                b.className = 'cat-ov-cell' + (c.empty ? ' empty' : (c.have < c.total ? ' short' : ' done'));
+                b.innerHTML = '<div class="cat-ov-ccode"></div><div class="cat-ov-ctag"></div><div class="cat-ov-cfill"></div>';
+                b.querySelector('.cat-ov-ccode').textContent = c.code;
+                b.querySelector('.cat-ov-ctag').textContent = c.tag ? ('Layout ' + c.tag) : '';
+                b.querySelector('.cat-ov-cfill').textContent = c.empty ? 'no image sets' : (c.have + ' / ' + c.total);
+                b.title = 'Open ' + (c.wall.name || c.code) + ' in Elevations';
+                b.onclick = () => { ov.remove(); const i = elevations.indexOf(c.wall); if (i >= 0) switchView('elevation', i); };
+                strip.appendChild(b);
+            });
+            row.appendChild(strip);
+            body.appendChild(row);
+        });
+        if (data.length && !body.children.length) { const n = document.createElement('div'); n.className = 'cat-ov-none'; n.textContent = 'Every opening has an image.'; body.appendChild(n); }
+    };
+    cb.onchange = () => { _catOverviewShort = cb.checked; paint(); };
+    paint();
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    return ov;
+}
 // The panel section on any deck page that belongs to a wall.
 function _dsOptionsInto(t, desc) {
     const idx = _catWallIdxForDesc(desc);
@@ -9708,6 +9800,14 @@ function _dsOptionsInto(t, desc) {
         row.appendChild(m);
     }
     body.appendChild(row);
+    if (place && _catPlaces().length > 1) {
+        const ovb = document.createElement('button');
+        ovb.className = 'action-btn btn-secondary'; ovb.textContent = 'Catalogue overview';
+        ovb.title = 'Every placement and option in the deck, with how many openings still need an image';
+        ovb.style.cssText = 'width:100%; height:26px; font-size:var(--fs-65); margin-top:6px;';
+        ovb.onclick = () => openCatalogueOverview();
+        body.appendChild(ovb);
+    }
     if (place) {
         const lab = document.createElement('label');
         lab.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); margin-top:8px; cursor:pointer;';
@@ -33215,6 +33315,9 @@ function _jumpEntries() {
         const num = String(i + 1);
         out.push({ group: 'Pages', title: num + '  ' + label, sub: d.kind === 'spec' ? 'spec page' : (d.kind === 'floorplan' ? 'floor plan' : (d.kind || 'page')), go: [{ kind: 'page', label: 'Page ' + num, pageKey: _deckPageKey(d) }], hay: num + ' ' + label + ' ' + d.kind + ' page', num: num });
     });
+    try {
+        if (_catPlaces().length) out.push({ group: 'Views', title: 'Catalogue overview', sub: 'every placement and option', go: [{ kind: 'run', label: 'Open', run: openCatalogueOverview }], hay: 'catalogue overview options images missing' });
+    } catch (e) {}
     [['dashboard', '1  Frame Dashboard'], ['elevation', '2  Elevation'], ['deck', '3  Deck']].forEach(v => {
         out.push({ group: 'Views', title: v[1], sub: 'view', go: [{ kind: 'view', label: 'Open', view: v[0] }], hay: v[1] + ' view tab' });
     });
@@ -33251,6 +33354,7 @@ function _jumpGo(g) {
     _jumpClose();
     if (!g) return;
     if (g.kind === 'view') { switchView(g.view); return; }
+    if (g.kind === 'run') { g.run(); return; }
     if (g.kind === 'piece') {
         const i = (dashProjectData || []).findIndex(r => r && r.id === g.rowId); if (i < 0) return;
         switchView('dashboard'); selectDashRow(i);
@@ -39976,6 +40080,7 @@ const HELP_REFERENCE_DATA = [
         entries: [
             { title: 'Adding options', body: `In Deck Studio, open any page for the placement and use <strong>+ Add option</strong> in its Options section. Pick what changes: different images, a new arrangement (with the same or new images), or different frames (with the same or new images). The first time, the wall becomes the arrangement every option follows and its pictures become OPTION 1.` },
             { title: 'The arrangement wall', body: `The wall the options follow holds the sizes, positions and frames, with no artwork on it. Its breaker page is the grey placement drawing with letters and dimensions. Duplicating it in Elevations still adds an image option.` },
+            { title: 'Catalogue overview', body: `<strong>Catalogue overview</strong> shows every placement in the deck on one screen, one row each, with a box per image option saying how many of its openings have a picture. Amber means some are still empty. Tick <strong>Only incomplete</strong> to see just what is left, and click a box to open that wall. Open it from <strong>All placements</strong> in the Options map, the Options section of a deck page, or Ctrl+K.` },
             { title: 'Options map', body: `<strong>Options map</strong> shows everything offered at the spot as a tree: the placement, its frame sets, each set's layouts and each layout's image options, every one sketched to the same scale with how many images it has. Click a node to open that wall. The codes say which is which: ART.01 is the placement, ART.01A a layout, ART.01.2 frame set 2, and ART.01A.1 an image option.` },
             { title: 'All-options page', body: `With <strong>All-options page</strong> ticked, each placement that has options gets a page in front of its others drawing every option side by side at one scale, so a difference in frame size shows as one. Every option after the first says what changes: the images, the layout, or the frames. <strong>Options per page</strong> keeps them on one page (All) or splits them over several, still at one scale.` },
             { title: 'Reading the rail', body: `A placement is a header with its walls indented under it. Solid amber is the wall the others follow, hollow amber is a layout of it, and blue is an image option. Check the stripe before editing a frame: it tells you whether the change reaches other walls.` },
@@ -40072,7 +40177,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.05</strong> Preflight no longer lists a catalogue mockup's slots as missing artwork (they never take any). A missing image or wall placement has a <strong>Piece</strong> button that opens that piece on the dashboard, beside the existing <strong>Page</strong> button, and Esc closes Preflight.<br><br>
+                body: `<strong>18.06</strong> <strong>Catalogue overview</strong>: every placement on one screen with how many openings in each image option still need a picture, an Only incomplete filter, and a click to open the wall. From All placements in the Options map, the deck Options section, or Ctrl+K.<br><br>
+<strong>18.05</strong> Preflight no longer lists a catalogue mockup's slots as missing artwork (they never take any). A missing image or wall placement has a <strong>Piece</strong> button that opens that piece on the dashboard, beside the existing <strong>Page</strong> button, and Esc closes Preflight.<br><br>
 <strong>18.04</strong> <strong>Jump to</strong>: press Ctrl+K (Cmd+K on a Mac) anywhere and type a code, wall name, page number or page title. A piece offers Piece, Wall and Page, and Enter picks the one for the view you are in.<br><br>
 <strong>18.03</strong> Resize handles, the text settings button and the image pan control on cover, narrative and layout pages stay on the page when a box runs to the edge, instead of falling off where they could not be clicked.<br><br>
 <strong>18.02</strong> The All-options page lines each drawing up under its OPTION title and draws them larger: every column is as wide as its widest option and every row as tall as its tallest, instead of every option getting a box the size of the biggest one. Each option after the first says in a line what changes (for example Same frames and images, different layout, or Different frames). Options per page, next to the All-options page tick, splits a long list over several pages, all drawn at the same scale.<br><br><strong>18.01</strong> The elevation thumbnail on spec pages is cropped to the wall itself, so it lines up top and bottom with the floorplan beside it. The frame corner thumbnail fills the same height too, and its code is now set in the same caption type as Floorplan and Elevation.<br><br><strong>18.00</strong> Per-piece option pages now name their option too: OPTION 3, or OPTION 3 · ALTERNATE FRAME SET, under the item code, the same line Group A/B/C option pages carry. The spec list moves down to make room, and on a very long list the rows sit a little closer so they never run into the frame corner and thumbnails below. Pages that are not options are unchanged.<br><br><strong>17.99</strong> Alternate arrangements say so on the page. The breaker for the original arrangement still reads ELEVATION DETAIL; one that hangs the same frames another way reads ALTERNATE LAYOUT, and one with different frames reads ALTERNATE FRAME SET, with the layout's name after it when it has one (the bare letter is gone, since the heading already carries the code). Each option's spec page now names itself under the heading, OPTION 4 or OPTION 4 · ALTERNATE FRAME SET, so a page read out of order still says where it belongs.<br><br><strong>17.98</strong> Fixed: an option's spec page could show the wrong frame sizes, mats or mouldings when its arrangement was changed after the option was made (or a new frame set was given its own sizes). The elevation was right but the spec text and the artwork on the page were not. Every option's pieces now follow their arrangement's sizes, mats and moulding, and keep their own images and notes.<br><br><strong>17.97</strong> Options stay inside their placement as Option 1, 2, 3: every option of ART.1 is ART.1.1, ART.1.2, ART.1.3, in order and with no gaps, and they renumber when one is added or deleted. A different frame arrangement is a letter of the placement (ART.1B, ART.1C) with its own greyed, lettered breaker page, followed by the spec pages of its own options; arrangement A's options always come before arrangement B's. A new arrangement always gets its first option, so it never goes missing from the deck. Deleting an option deletes its pieces too, instead of leaving them behind as stray spec pages. A placement with options renumbers like any other when codes before it are added or removed. The wall list labels options OPTION 1, OPTION 2. Projects made before this are converted once when opened.<br><br><strong>17.96</strong> The letter legend on breaker and install pages no longer prints a size over its label: when a line does not fit the column width, the size drops onto its own line under the label (and is set a little smaller only if it still does not fit), so any column width is safe. Elevation thumbnails on spec pages link to the floorplan, like the plan thumbnail beside them. On the floorplan page in Deck Studio, clicking a code in the list opens its spec page (the PDF already did this). In Elevations, + Add Wall sits right under the last wall instead of at the bottom of the list.<br><br><strong>17.95</strong> Item codes are always in number order, everywhere: ART.1, ART.2, ART.3, then EGD, then WF, with no gaps, in the Frame Dashboard, the floorplan Items list and plan, the wall list in Elevations, the spec pages and the CSV. This is the house standard, not a setting. A new code takes the next number, deleting one closes the gap, and dragging a code in the floorplan Items list (or a row in the dashboard) renumbers it to where you dropped it. Typing a number moves the placement there: ART.4 typed as ART.1 becomes ART.1 and the rest move down one. Walls named after a code follow it. The floorplan Items list is where codes are run from: the new Codes button in the dashboard, and the # button in Elevations, open it, with a Back button to return. The item code field now saves on Enter or when you click away, instead of on every keystroke.<br><br><strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>

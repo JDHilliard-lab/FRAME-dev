@@ -2464,3 +2464,27 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .jump-row.active .jump-chip.default { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
 .jump-none { padding: 18px 14px; font-size: var(--fs-70); color: var(--text-muted); }
 .jump-foot { padding: 7px 14px; font-size: var(--fs-55); color: var(--text-muted); border-top: 1px solid var(--border-color); }
+
+/* CATALOGUE OVERVIEW (18.06). A row per placement, a cell per image option. Amber is
+   the same --warn the Options map uses for "openings without a picture". */
+.cat-ov { width: min(1100px, 95vw); max-height: 88vh; display: flex; flex-direction: column; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-8); padding: 18px; }
+.cat-ov-top { display: flex; align-items: center; gap: 12px; }
+.cat-ov-title { flex: 1 1 auto; font-family: var(--ui-display); font-size: var(--fs-120); letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-strong); }
+.cat-ov-filter { display: flex; align-items: center; gap: 6px; font-size: var(--fs-70); color: var(--text-main); cursor: pointer; }
+.cat-ov-sum { font-size: var(--fs-70); color: var(--text-muted); margin: 6px 0 12px; }
+.cat-ov-body { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.cat-ov-row { display: flex; align-items: stretch; gap: 8px; }
+.cat-ov-head { flex: 0 0 110px; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 6px 10px; text-align: left; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--r-6); cursor: pointer; color: var(--text-main); }
+.cat-ov-code { font-size: var(--fs-80); font-weight: 700; }
+.cat-ov-count { font-size: var(--fs-60); color: var(--text-muted); }
+.cat-ov-count.short { color: var(--warn); font-weight: 700; }
+.cat-ov-cells { flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.cat-ov-cell { width: 104px; padding: 6px 8px; text-align: left; background: transparent; border: 1px solid var(--border-color); border-radius: var(--r-6); cursor: pointer; color: var(--text-main); }
+.cat-ov-cell:hover { border-color: var(--ui-active); }
+.cat-ov-cell.short { border-color: var(--warn); }
+.cat-ov-cell.empty { border-style: dashed; color: var(--text-muted); }
+.cat-ov-ccode { font-size: var(--fs-70); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cat-ov-ctag { font-size: var(--fs-55); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 0.8em; }
+.cat-ov-cfill { font-size: var(--fs-60); color: var(--text-muted); }
+.cat-ov-cell.short .cat-ov-cfill { color: var(--warn); font-weight: 700; }
+.cat-ov-none { font-size: var(--fs-75); color: var(--text-muted); padding: 14px 4px; }
