@@ -559,7 +559,9 @@ tr.multi-selected {
 .dash-toolbar > * { margin: 0; }
 .dash-toolbar .select-wrapper { flex: 1; min-width: 120px; }
 
-.grid-custom-meta { display: grid; grid-template-columns: 2fr 3fr 1fr 1.2fr; gap: 4px; margin-bottom: 3px; }
+/* Level is a list of plan NAMES since 18.13, so it takes width from Image Code and Qty
+   (an auto-calculated one- or two-digit number); at 1fr "Level 1" was cut to "Leve". */
+.grid-custom-meta { display: grid; grid-template-columns: 2fr 2.5fr 1.7fr 0.8fr; gap: 4px; margin-bottom: 3px; }
 .grid-custom-bleed { display: grid; grid-template-columns: 1fr 1fr 0.8fr 1.5fr; gap: 4px; margin-bottom: 3px; }
 .grid-row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 3px; }
 .grid-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-bottom: 3px; }
