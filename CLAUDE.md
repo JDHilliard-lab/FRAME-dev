@@ -2648,6 +2648,14 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   notes) via the `desc._install && !desc._manual` branch, which must stay ahead of
   the mode branches — otherwise the tick list is reachable only from Install-guide
   mode, which nobody would guess.
+- **THE INSTANT SPEC PREVIEW SETS ITS ROWS LIKE THE PDF (18.14).** `_deckMockHTML` drew
+  the spec list as one paragraph at ~14pt on a 1.6 line height, a third taller than the
+  PDF's 8.5pt on a 13pt rhythm, so the last rows of a ten-row page ran under the frame
+  and profile boxes in the preview designers check pages in. It now builds one row per
+  `buildSpecStrings` line (bold label, dotted leader, right-aligned value), sized from
+  the same two numbers scaled by `h / 540`, with `tpl.spec.y` as the first BASELINE as
+  in `_drawSpecPageTemplate`. `test_mock_spec_rows` reads those numbers out of the PDF
+  block, so changing one without the other fails.
 - `_specThumbCaption()` is the ONLY way to draw a thumbnail caption (Frame,
   Floorplan, Elevation on spec pages; the breaker/install captions too). They sit
   in a row, so any difference reads as a mistake — the elevation one was hardcoded
