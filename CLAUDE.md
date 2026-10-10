@@ -3352,6 +3352,13 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   null on transient conditions (`lineToolActive`, an SVG export that didn't settle).
 - ~~Elevation dimension text reads softer than spec-page text.~~ **Fixed (16.21)**
   by drawing it as real vector PDF text — see the vector-annotation anchor above.
+- **SUPERSEDED, deliberately not built (18.08 review):** the two items below predate
+  the bottom-right elevation anchor, left-side notes stacked under the legend, the
+  `noteW`/`noteFs` sliders, the shared `_igColW` width budget and the 17.96 legend
+  layout (`_igLegLineFit` stacks, then shrinks a value). On a widescreen page a right
+  column now moves the drawing without shrinking it, and auto-shrinking the note type
+  would fight a width the designer set by hand. Reopen only with a concrete page that
+  still prints badly.
 - **The install-notes column nudges the elevation left instead of shrinking itself.**
   Asked for: keep the drawing at its current size and centred, shrink the note type
   to fit whatever width is spare. The blocker is ordering — `_installNoteColW` is
@@ -3381,21 +3388,20 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   rotated label has no escape hatch). The probe is a throwaway upright label in the same
   container, so the measured text is the drawn text. The export needed nothing: `emitEl`
   reads rotation off the computed transform.
-- **Rich text wraps ~1% differently in Deck Studio and the PDF**, because the two
-  compute the font size from DIFFERENT BASES. Size is stored as a FRACTION of page
-  height; the PDF does `(r.size || t.size) * PH` (the nominal 540pt page) while the
-  editor does `(t.size || 0.045) * cr.height` (the MEASURED height of the rendered page
-  element in CSS px). A border, a content-box difference or sub-pixel layout rounding
-  puts those ~1% apart, so the pt value in the Text Settings box is not quite the pt
-  value the PDF sets.
-  Invisible on body copy (0.16pt at 16pt type) and invisible on display type UNLESS a
-  line sits on a wrap boundary — then one point flips the break and a whole word
-  cascades. Reproduced at Druk Bold 91pt: the PDF matched the editor at **92pt**, and
-  the user's workaround was to widen the box so the line was no longer borderline.
-  Fix = derive the editor size from the same nominal PH scaled by the preview zoom, so
-  the displayed pt IS the PDF pt by construction. Do it deliberately: it changes the
-  rendered size of every text box in every saved project by that same ~1%, which can
-  reflow anything else sitting near a boundary.
+- ~~Rich text wraps ~1% differently in Deck Studio and the PDF.~~ **Fixed (18.08), and
+  the cause written here before was WRONG.** It blamed a different size basis (nominal
+  540 vs the measured element), but the editor scales box width and font size off the
+  same page box, so the ratio is exact to within rounding (~0.2%). Measured in real
+  Chrome against the vendored jsPDF with the same Druk TTF: unkerned browser text
+  matches jsPDF to 0.1pt, and the default KERNED text runs 0.5-1.1% narrower on
+  ordinary headings and **5%** on AV/TA pairs. jsPDF never kerns. So every surface that
+  shows a picture of a page is unkerned now: the five `white-space:pre-wrap` text tiles
+  (inline `font-kerning:none`), a CSS rule on the deck centre / rail / Project preview /
+  layout canvases, and `fontKerning = 'none'` on `CanvasPdfRec`'s measuring AND drawing
+  contexts and `_richMeasureCtx`. The PDF itself is unchanged. A new text renderer
+  must do the same or it starts promising a tighter set than prints
+  (`test_type_unkerned` counts the tiles). To measure again: a headless Chrome
+  `--dump-dom` page loading the TTF via @font-face beside `lib-jspdf.min.js`.
 - ~~Thumbnail canvas renderer mis-lays-out large display type.~~ **Already fixed**:
   `_dsThumbDrawable` returns false for element pages, so the rail draws them with
   `_dsElementPageThumbHTML` (real HTML) and the Project tab preview uses the HTML mock

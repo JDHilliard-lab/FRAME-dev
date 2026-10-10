@@ -2489,3 +2489,11 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .cat-ov-cfill { font-size: var(--fs-60); color: var(--text-muted); }
 .cat-ov-cell.short .cat-ov-cfill { color: var(--warn); font-weight: 700; }
 .cat-ov-none { font-size: var(--fs-75); color: var(--text-muted); padding: 14px 4px; }
+
+/* PAGE TYPE IS NOT KERNED, ON SCREEN, BECAUSE THE PDF IS NOT (18.08). jsPDF has no
+   kerning, so every page prints unkerned; a browser kerns by default and set the same
+   heading 0.5-1.1% narrower (5% on AV / TA pairs), which is how a line that fit in the
+   editor wrapped in the PDF. These are the surfaces that show a picture of a page: the
+   deck centre and rail, the Project tab preview and the layout editor. The text tiles
+   themselves carry it inline as well, for thumbnails hosted anywhere else. */
+#dsCenter, #dsRail, #dsProjCoverPrev, #moodboardCanvas, #dsLayoutCanvas { font-kerning: none; }
