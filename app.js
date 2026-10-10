@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.03';
+const APP_VERSION = '18.04';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -4584,6 +4584,12 @@ document.addEventListener('keydown', function(e) {
         // the top nav row has no width left and Save already raises the picker
         // on its own whenever there is no file bound yet.
         saveProjectWithIndicator(e.shiftKey);
+    }
+    // Ctrl+K / Cmd+K: jump to a code, wall or page. Global like save, including from a
+    // text field, because "where is ART.12" comes up mid-typing as often as not.
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && !e.altKey && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        openJump();
     }
 });
 
@@ -33147,6 +33153,164 @@ function _dashJumpToWall() {
     return true;
 }
 
+// JUMP TO (Ctrl+K / Cmd+K, 18.04). A real deck is ~60 codes, a dozen walls and 80+
+// pages, and the only way between them was scrolling the rail or the Items list. Type a
+// code, a wall name, a page number or a page title and go.
+//
+// A PIECE IS ONE ROW WITH UP TO THREE DESTINATIONS (Piece / Wall / Page), never three
+// rows: a code is one thing and listing it three times triples the scan for nothing.
+// Enter takes the destination matching the view you are IN, so Ctrl+K from the deck
+// lands on the spec page and from the elevation on the wall; that is almost always the
+// one wanted, and the chips are there for the other two.
+//
+// Built fresh on every open and never cached, so a code renamed a second ago is found
+// by its new name. Navigation goes by page KEY and row ID, never an index, for the
+// usual reason: the deck rebuilds on the way in.
+let _jumpSel = 0, _jumpList = [];
+function _jumpCompact(t) { return String(t || '').toLowerCase().replace(/[^a-z0-9]/g, ''); }
+function _jumpEntries() {
+    const out = [];
+    const rows = (typeof dashProjectData !== 'undefined' ? dashProjectData : []) || [];
+    let pages = [];
+    try { pages = _deckPageList() || []; } catch (e) {}
+    const pageIdxByRow = {};
+    pages.forEach((d, i) => { if (d && d.kind === 'spec' && d.row && d.row.id && pageIdxByRow[d.row.id] == null) pageIdxByRow[d.row.id] = i; });
+    const els = (typeof elevations !== 'undefined' ? elevations : []) || [];
+    rows.forEach((r, ri) => {
+        if (!r || !r.id) return;
+        const go = [{ kind: 'piece', label: 'Piece', rowId: r.id }];
+        const wi = _rowElevIndex(r.id);
+        if (wi >= 0) go.push({ kind: 'wall', label: 'Wall', elevId: _elevId(els[wi]) });
+        const pi = pageIdxByRow[r.id];
+        if (pi != null) go.push({ kind: 'page', label: 'Page ' + (pi + 1), pageKey: _deckPageKey(pages[pi]) });
+        const sub = [r.artworkName || r.imageCode || '', r.product || '', wi >= 0 ? ('on ' + (els[wi].name || 'a wall')) : 'not on a wall'].filter(Boolean).join(' · ');
+        out.push({ group: 'Pieces', title: r.id, sub: sub, go: go, hay: r.id + ' ' + sub });
+    });
+    els.forEach(el => {
+        if (!el) return;
+        const n = (el.frames || []).filter(f => f && f.active !== false).length;
+        out.push({ group: 'Walls', title: el.name || 'Untitled wall', sub: n + ' piece' + (n === 1 ? '' : 's'), go: [{ kind: 'wall', label: 'Wall', elevId: _elevId(el) }], hay: (el.name || '') + ' wall elevation' });
+    });
+    pages.forEach((d, i) => {
+        if (!d) return;
+        let label = '';
+        try { label = _dsPageLabel(d); } catch (e) {}
+        const num = String(i + 1);
+        out.push({ group: 'Pages', title: num + '  ' + label, sub: d.kind === 'spec' ? 'spec page' : (d.kind === 'floorplan' ? 'floor plan' : (d.kind || 'page')), go: [{ kind: 'page', label: 'Page ' + num, pageKey: _deckPageKey(d) }], hay: num + ' ' + label + ' ' + d.kind + ' page', num: num });
+    });
+    [['dashboard', '1  Frame Dashboard'], ['elevation', '2  Elevation'], ['deck', '3  Deck']].forEach(v => {
+        out.push({ group: 'Views', title: v[1], sub: 'view', go: [{ kind: 'view', label: 'Open', view: v[0] }], hay: v[1] + ' view tab' });
+    });
+    return out;
+}
+// Score: an exact page number wins outright, then a title that STARTS with the query,
+// then one containing it, then a match only in the subtitle. Every word of the query
+// must be found somewhere, and punctuation is ignored on both sides so "art1a" finds
+// ART.1A and "art 1" finds ART-1. An empty query lists the pieces and walls in order.
+function _jumpFilter(q, entries) {
+    const words = String(q || '').toLowerCase().split(/\s+/).filter(Boolean);
+    if (!words.length) return entries.filter(e => e.group !== 'Pages').slice(0, 60);
+    const qc = _jumpCompact(q);
+    const scored = [];
+    entries.forEach((e, i) => {
+        const hay = e.hay.toLowerCase(), hc = _jumpCompact(e.hay), tc = _jumpCompact(e.title.replace(/^\d+\s+/, ''));
+        if (!words.every(w => hay.indexOf(w) >= 0 || hc.indexOf(_jumpCompact(w)) >= 0)) return;
+        let sc = 1;
+        if (e.num && e.num === qc) sc = 100;
+        else if (tc === qc) sc = 80;
+        else if (tc.indexOf(qc) === 0) sc = 60;
+        else if (tc.indexOf(qc) >= 0) sc = 40;
+        if (e.group === 'Pages' && sc < 100) sc -= 5;   // a piece beats the page about it
+        scored.push({ e, sc, i });
+    });
+    scored.sort((a, b) => (b.sc - a.sc) || (a.i - b.i));
+    return scored.slice(0, 60).map(x => x.e);
+}
+function _jumpDefault(e) {
+    const want = (typeof currentView !== 'undefined' && currentView === 'deck') ? 'page' : (currentView === 'elevation' ? 'wall' : 'piece');
+    return e.go.find(g => g.kind === want) || e.go[0];
+}
+function _jumpGo(g) {
+    _jumpClose();
+    if (!g) return;
+    if (g.kind === 'view') { switchView(g.view); return; }
+    if (g.kind === 'piece') {
+        const i = (dashProjectData || []).findIndex(r => r && r.id === g.rowId); if (i < 0) return;
+        switchView('dashboard'); selectDashRow(i);
+        try { const tr = document.querySelectorAll('#rfiBody tr')[i]; if (tr && tr.scrollIntoView) tr.scrollIntoView({ block: 'center' }); } catch (e) {}
+        return;
+    }
+    if (g.kind === 'wall') { const i = _elevIndexById(g.elevId); if (i >= 0) switchView('elevation', i); return; }
+    if (g.kind === 'page') {
+        if (currentView !== 'deck') switchView('deck');
+        if (_dsActiveTab !== 'pages') _dsTab('pages');
+        try { _dsPages = _deckPageList(); } catch (e) {}
+        const i = _dsPages.findIndex(d => { try { return _deckPageKey(d) === g.pageKey; } catch (e) { return false; } });
+        if (i >= 0) _dsSelectPage(i);
+    }
+}
+function _jumpClose() { const m = document.getElementById('jumpModal'); if (m) m.remove(); }
+function _jumpPaint() {
+    const list = document.getElementById('jumpList'); if (!list) return;
+    list.innerHTML = '';
+    let lastGroup = '';
+    _jumpList.forEach((e, i) => {
+        if (e.group !== lastGroup) {
+            lastGroup = e.group;
+            const h = document.createElement('div'); h.className = 'jump-group'; h.textContent = e.group; list.appendChild(h);
+        }
+        const row = document.createElement('div'); row.className = 'jump-row' + (i === _jumpSel ? ' active' : '');
+        row.dataset.jumpIdx = String(i);
+        const txt = document.createElement('div'); txt.className = 'jump-text';
+        const t = document.createElement('div'); t.className = 'jump-title'; t.textContent = e.title; txt.appendChild(t);
+        if (e.sub) { const s2 = document.createElement('div'); s2.className = 'jump-sub'; s2.textContent = e.sub; txt.appendChild(s2); }
+        row.appendChild(txt);
+        const def = _jumpDefault(e);
+        e.go.forEach(g => {
+            const b = document.createElement('button'); b.type = 'button'; b.tabIndex = -1;
+            b.className = 'jump-chip' + (g === def ? ' default' : ''); b.textContent = g.label;
+            b.onclick = (ev) => { ev.stopPropagation(); _jumpGo(g); };
+            row.appendChild(b);
+        });
+        row.onmousemove = () => { if (_jumpSel !== i) { _jumpSel = i; _jumpPaint(); } };
+        row.onclick = () => _jumpGo(def);
+        list.appendChild(row);
+    });
+    if (!_jumpList.length) { const n = document.createElement('div'); n.className = 'jump-none'; n.textContent = 'Nothing matches.'; list.appendChild(n); }
+    const act = list.querySelector('.jump-row.active');
+    if (act && act.scrollIntoView) { try { act.scrollIntoView({ block: 'nearest' }); } catch (e) {} }
+}
+function openJump() {
+    if (document.getElementById('jumpModal')) { _jumpClose(); return; }
+    const entries = _jumpEntries();
+    const ov = document.createElement('div'); ov.id = 'jumpModal';
+    ov.className = 'frame-modal fm-nested'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    ov.style.alignItems = 'flex-start'; ov.style.paddingTop = '12vh';
+    const card = document.createElement('div'); card.className = 'jump-card';
+    const top = document.createElement('div'); top.className = 'jump-top';
+    const inp = document.createElement('input'); inp.type = 'text'; inp.id = 'jumpInput'; inp.setAttribute('data-modal-initial', '');
+    inp.placeholder = 'Jump to a code, wall or page';
+    inp.setAttribute('aria-label', 'Jump to a code, wall or page');
+    const esc = document.createElement('button'); esc.type = 'button'; esc.className = 'jump-esc'; esc.textContent = 'Esc'; esc.title = 'Close';
+    esc.setAttribute('data-modal-close', ''); esc.onclick = _jumpClose;
+    top.appendChild(inp); top.appendChild(esc); card.appendChild(top);
+    const list = document.createElement('div'); list.id = 'jumpList'; list.className = 'jump-list'; card.appendChild(list);
+    const foot = document.createElement('div'); foot.className = 'jump-foot';
+    foot.textContent = 'Enter goes to the highlighted chip. Up and down to move.';
+    card.appendChild(foot);
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    const refilter = () => { _jumpList = _jumpFilter(inp.value, entries); _jumpSel = 0; _jumpPaint(); };
+    inp.oninput = refilter;
+    inp.onkeydown = (e) => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); if (_jumpList.length) { _jumpSel = (_jumpSel + 1) % _jumpList.length; _jumpPaint(); } }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); if (_jumpList.length) { _jumpSel = (_jumpSel - 1 + _jumpList.length) % _jumpList.length; _jumpPaint(); } }
+        else if (e.key === 'Enter') { e.preventDefault(); const it = _jumpList[_jumpSel]; if (it) _jumpGo(_jumpDefault(it)); }
+    };
+    refilter();
+    try { inp.focus(); } catch (e) {}
+}
+
 // ONE PLACE RUNS THE CODES: the floorplan Items list (17.95). Codes are a placement
 // fact (ART.4) and the dashboard is a list of PIECES (ART.4A to ART.4G), so the list of
 // placements is where they are added, typed, retyped and dragged into order. It lives
@@ -39865,6 +40029,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Measure line', body: `<span class="help-kbd">M</span> toggles the measure-line tool. With a line selected, arrow keys move it and <span class="help-kbd">Esc</span> clears it.` },
             { title: 'Undo and save', body: `<span class="help-kbd">Ctrl+Z</span> undoes, <span class="help-kbd">Ctrl+Shift+Z</span> or <span class="help-kbd">Ctrl+Y</span> redoes. <span class="help-kbd">Ctrl+S</span> saves and <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else.` },
             { title: 'Dialogs', body: `<span class="help-kbd">Esc</span> closes the dialog on top, and on a question it means Cancel. <span class="help-kbd">Tab</span> stays inside an open dialog. The full-screen tools (the floorplan markup and the layout editor) keep <span class="help-kbd">Esc</span> for their own tools instead.` },
+            { title: 'Jump to', body: `<span class="help-kbd">Ctrl+K</span> (<span class="help-kbd">Cmd+K</span> on a Mac) opens Jump to from anywhere. Type a code, a wall name, a page number or a page title, then <strong>Enter</strong>. A piece offers Piece, Wall and Page, and Enter picks the one for the view you are in.` },
             { title: 'Getting around', body: `<span class="help-kbd">Tab</span> reaches every button, the view tabs and the wall rail; <span class="help-kbd">Enter</span> or <span class="help-kbd">Space</span> presses them.` }
         ]
     },
@@ -39890,7 +40055,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.03</strong> Resize handles, the text settings button and the image pan control on cover, narrative and layout pages stay on the page when a box runs to the edge, instead of falling off where they could not be clicked.<br><br>
+                body: `<strong>18.04</strong> <strong>Jump to</strong>: press Ctrl+K (Cmd+K on a Mac) anywhere and type a code, wall name, page number or page title. A piece offers Piece, Wall and Page, and Enter picks the one for the view you are in.<br><br>
+<strong>18.03</strong> Resize handles, the text settings button and the image pan control on cover, narrative and layout pages stay on the page when a box runs to the edge, instead of falling off where they could not be clicked.<br><br>
 <strong>18.02</strong> The All-options page lines each drawing up under its OPTION title and draws them larger: every column is as wide as its widest option and every row as tall as its tallest, instead of every option getting a box the size of the biggest one. Each option after the first says in a line what changes (for example Same frames and images, different layout, or Different frames). Options per page, next to the All-options page tick, splits a long list over several pages, all drawn at the same scale.<br><br><strong>18.01</strong> The elevation thumbnail on spec pages is cropped to the wall itself, so it lines up top and bottom with the floorplan beside it. The frame corner thumbnail fills the same height too, and its code is now set in the same caption type as Floorplan and Elevation.<br><br><strong>18.00</strong> Per-piece option pages now name their option too: OPTION 3, or OPTION 3 · ALTERNATE FRAME SET, under the item code, the same line Group A/B/C option pages carry. The spec list moves down to make room, and on a very long list the rows sit a little closer so they never run into the frame corner and thumbnails below. Pages that are not options are unchanged.<br><br><strong>17.99</strong> Alternate arrangements say so on the page. The breaker for the original arrangement still reads ELEVATION DETAIL; one that hangs the same frames another way reads ALTERNATE LAYOUT, and one with different frames reads ALTERNATE FRAME SET, with the layout's name after it when it has one (the bare letter is gone, since the heading already carries the code). Each option's spec page now names itself under the heading, OPTION 4 or OPTION 4 · ALTERNATE FRAME SET, so a page read out of order still says where it belongs.<br><br><strong>17.98</strong> Fixed: an option's spec page could show the wrong frame sizes, mats or mouldings when its arrangement was changed after the option was made (or a new frame set was given its own sizes). The elevation was right but the spec text and the artwork on the page were not. Every option's pieces now follow their arrangement's sizes, mats and moulding, and keep their own images and notes.<br><br><strong>17.97</strong> Options stay inside their placement as Option 1, 2, 3: every option of ART.1 is ART.1.1, ART.1.2, ART.1.3, in order and with no gaps, and they renumber when one is added or deleted. A different frame arrangement is a letter of the placement (ART.1B, ART.1C) with its own greyed, lettered breaker page, followed by the spec pages of its own options; arrangement A's options always come before arrangement B's. A new arrangement always gets its first option, so it never goes missing from the deck. Deleting an option deletes its pieces too, instead of leaving them behind as stray spec pages. A placement with options renumbers like any other when codes before it are added or removed. The wall list labels options OPTION 1, OPTION 2. Projects made before this are converted once when opened.<br><br><strong>17.96</strong> The letter legend on breaker and install pages no longer prints a size over its label: when a line does not fit the column width, the size drops onto its own line under the label (and is set a little smaller only if it still does not fit), so any column width is safe. Elevation thumbnails on spec pages link to the floorplan, like the plan thumbnail beside them. On the floorplan page in Deck Studio, clicking a code in the list opens its spec page (the PDF already did this). In Elevations, + Add Wall sits right under the last wall instead of at the bottom of the list.<br><br><strong>17.95</strong> Item codes are always in number order, everywhere: ART.1, ART.2, ART.3, then EGD, then WF, with no gaps, in the Frame Dashboard, the floorplan Items list and plan, the wall list in Elevations, the spec pages and the CSV. This is the house standard, not a setting. A new code takes the next number, deleting one closes the gap, and dragging a code in the floorplan Items list (or a row in the dashboard) renumbers it to where you dropped it. Typing a number moves the placement there: ART.4 typed as ART.1 becomes ART.1 and the rest move down one. Walls named after a code follow it. The floorplan Items list is where codes are run from: the new Codes button in the dashboard, and the # button in Elevations, open it, with a Back button to return. The item code field now saves on Enter or when you click away, instead of on every keystroke.<br><br><strong>17.94</strong> Group A/B/C with Thumbnails in left column: the frame corner and profile, floorplan and elevation now sit in one row under the specs instead of stacking up the column, and the row scales down to fit the column width.<br><br><strong>17.93</strong> Light theme is warmer and quieter: an off-white paper colour instead of blue-grey, and controls that are switched on turn near-black with white type instead of blue. Blue now only marks something selected on a drawing or page, where black would disappear into the linework.<br><br><strong>17.92</strong> Codes follow their type: moving a code to EGD or WF on the floorplan makes it EGD.n or WF.n (and a wallcovering or film), and every code of both types renumbers from 1 with no gaps, so the plan numbers, spec pages and walls stay in step. One Ctrl+Z undoes it. The floorplan thumbnail on spec and breaker pages links to its floorplan page, in the PDF and in Deck Studio. Clicking a pin on the floorplan opens its spec page (drag still moves it, double-click still removes it).<br><br><strong>17.91</strong> A fresh project asks where to start: Floorplan or Frame Dashboard. Floorplan Items rows are now #, Item code, Cat, Line and Frames. The pen opens the line styles (Single, Diptych, Triptych, Breaker, Wrap) and arms drawing. The frame icon picks the set (Single, Diptych, Triptych, Quad, or a 5 or 7 piece salon hang from a small library) and mocks it up on the wall in Elevations: centred, at hang height, 3 inches apart, the salons mixing matted, unmatted and float-mounted deckled pieces. Dashboard rows are washed in their placement colour across the whole row.<br><br><strong>17.90</strong> Tighter panels: the how-to paragraphs in the image, text and shape popups, the custom layout section, Group A/B/C and the notes column are now ? dots (hover, or click to keep them open), so the controls sit higher and the panels scroll less.<br><br><strong>17.89</strong> Options: on any page for a placement, + Add option in the Options section asks what changes (different images; a new arrangement with the same or new images; different frames with the same or new images). The first option turns the wall into the arrangement and its pictures become OPTION 1. Options map shows everything at the spot as a tree with to-scale sketches and image counts. The All-options page draws every option side by side at one scale. The Catalogue mockup, + LAYOUT and + SET buttons left Elevations. Fixed: an image option and a frame set could get the same code (ART.1.2) and print as one page.<br><br><strong>17.88</strong> Spec pages: the plan detail shows only this piece's wall line inside a 2pt red dashed box, with no numbered circles, on spec pages and breaker pages alike, and the crop widens so a long line is never cut off. Group A/B/C pages have a new Thumbnails in left column option: the floorplan, elevation, corner and profile move under the specs and the grouping anchors bottom-right and scales up. Drop an image file onto a frame on a spec page to put it in that frame. The breaker Plan size slider now really goes to 140% (it stopped at 100%).<br><br><strong>17.87</strong> Floorplan: a project can start here. The Items tab has + Add code: pick a type (Framed Art, Canvas, EGD, WF) and a frame set (Single, Diptych, Triptych, Quad, 5 set, 7 set) and it mints the codes (ART.1, ART.2A to ART.2C, EGD.1, WF.1) as dashboard rows, no plan image needed. Double-click a code to rename it; its pieces, walls, spec pages and plan details all follow. The list has a column header, a code's number stays hollow until it is pinned, and Wrap is a new line type for EGD and WF that turns corners in one line. New projects default to Framed Art / Canvas / EGD / WF categories, with a Quick set to switch. Choosing Custom or Wrap before drawing a line now sticks.<br><br><strong>17.86</strong> Frame Dashboard: the frame preview is its own column between the table and the form instead of floating over the table. Drag its left edge to resize it, and the project fields re-wrap to fit. Every row in one placement shares a colour on its grip (the same colour marks it in the floorplan Items list). An image used in more than one placement shows a count next to its image code, and dropping one in asks whether that was intended, with Undo.<br><br><strong>17.85</strong> The app itself is now set in the studio type: the brand Sans for everything you read, and Druk for the view tabs and section titles.<br><br><strong>17.84</strong> Elevations: EGD and WF wall buttons now turn off when you click them again, and ART is the plain wall underneath (turning WF off removes the window panels, and asks first). PNG, SVG, All PNG and All SVG are one Export menu. Layout guides are grouped into Dimensions, Labels and View, each group folds away, and every icon has a caption. The Art / Context / Glass tabs line up with the rest of the panel. A ? dot shows its explanation on hover, or click it to keep it open.<br><br><strong>17.83</strong> Undo and redo buttons, and a notice after each undo saying where the change was. Every dialog closes on Esc, and a stray click outside closes only the ones with nothing to lose. Every delete confirms the same way and says whether it can be undone; style, template, category and timeline-stage deletes can be now. Keyboard focus is visible and the tabs are reachable by keyboard. The view tabs are numbered in the order you work and count what is left. This Help was rewritten.<br><br>
 <strong>17.82</strong> Page background images are stored at a sensible size, which roughly halved a real project file.<br><br>
 <strong>17.81</strong> Save writes back to the file you opened (Chrome and Edge), and opening a project over unsaved work asks first.<br><br>

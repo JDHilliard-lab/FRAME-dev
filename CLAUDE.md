@@ -3297,6 +3297,15 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `test_return_trips.js` now has a check for one-line functions that call themselves.
   Rename by whole identifier, or not at all.
 
+- **JUMP TO IS CTRL+K / CMD+K (`openJump`, `_jumpEntries`, `_jumpFilter`, `_jumpGo`,
+  18.04).** Codes, walls, deck pages and the three views in one list, rebuilt on every
+  open so a code renamed a second ago is found by its new name. A piece is ONE row with
+  up to three chips (Piece / Wall / Page), never three rows, and Enter takes the chip
+  for the view you are in (`_jumpDefault`). Navigation is by row ID, `elev.id` and page
+  KEY, never an index. Punctuation is ignored on both sides (`_jumpCompact`), so
+  "art1a" finds ART.1A. On the `.frame-modal` shell, so Escape and the backdrop close
+  it like everything else. A page's search text must carry its NUMBER, or typing "12"
+  finds the twelfth view tab instead.
 - **`_toast` IS FOR WHAT IS NOT A DECISION; THE MODAL KEEPS EVERYTHING ELSE.** There were
   EIGHTY `showInfoModal()` calls and no other way for this app to say anything, so
   "Nothing selected" took over the screen and demanded a click to dismiss information you
