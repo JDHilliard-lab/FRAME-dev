@@ -3315,6 +3315,11 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   "art1a" finds ART.1A. On the `.frame-modal` shell, so Escape and the backdrop close
   it like everything else. A page's search text must carry its NUMBER, or typing "12"
   finds the twelfth view tab instead.
+  Three ranking rules came from LOOKING at it in Chrome (18.09), not from the tests:
+  title matches evict subtitle-only matches ("art 1" listed EGD.1 because its subtitle
+  says Framed Art), a spec page is listed on its own only for its typed number (it is
+  the piece row's Page chip otherwise), and each group stays contiguous. jsdom cannot
+  show any of that; a headless Chrome over CDP (Node's built-in WebSocket) can.
 - **`_toast` IS FOR WHAT IS NOT A DECISION; THE MODAL KEEPS EVERYTHING ELSE.** There were
   EIGHTY `showInfoModal()` calls and no other way for this app to say anything, so
   "Nothing selected" took over the screen and demanded a click to dismiss information you

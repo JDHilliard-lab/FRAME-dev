@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.08';
+const APP_VERSION = '18.09';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -33333,26 +33333,39 @@ function _jumpEntries() {
     return out;
 }
 // Score: an exact page number wins outright, then a title that STARTS with the query,
-// then one containing it, then a match only in the subtitle. Every word of the query
-// must be found somewhere, and punctuation is ignored on both sides so "art1a" finds
-// ART.1A and "art 1" finds ART-1. An empty query lists the pieces and walls in order.
+// then one containing it. Every word of the query must be found somewhere, and
+// punctuation is ignored on both sides so "art1a" finds ART.1A and "art 1" finds ART-1.
+// Three rules keep the list readable, all found by looking at it in a browser:
+// - When anything matches on its TITLE, entries that only matched on subtitle text
+//   go. "art 1" otherwise listed EGD.1 and WF.1, whose subtitles say "Framed Art".
+//   Searching an artwork name still works, because then nothing matches on title.
+// - A spec page is listed on its own only when its NUMBER was typed. Otherwise it is
+//   the same thing as the piece above it, which already carries a Page chip.
+// - A group stays together, and groups are ordered by their best match, or the
+//   headings repeat as PIECES, PAGES, PIECES, PAGES.
+// An empty query lists the pieces and walls in order.
 function _jumpFilter(q, entries) {
     const words = String(q || '').toLowerCase().split(/\s+/).filter(Boolean);
     if (!words.length) return entries.filter(e => e.group !== 'Pages').slice(0, 60);
     const qc = _jumpCompact(q);
-    const scored = [];
+    let scored = [];
     entries.forEach((e, i) => {
         const hay = e.hay.toLowerCase(), hc = _jumpCompact(e.hay), tc = _jumpCompact(e.title.replace(/^\d+\s+/, ''));
         if (!words.every(w => hay.indexOf(w) >= 0 || hc.indexOf(_jumpCompact(w)) >= 0)) return;
-        let sc = 1;
-        if (e.num && e.num === qc) sc = 100;
+        const numHit = !!(e.num && e.num === qc);
+        if (e.group === 'Pages' && e.sub === 'spec page' && !numHit) return;
+        const titleHit = numHit || words.every(w => tc.indexOf(_jumpCompact(w)) >= 0);
+        let sc = titleHit ? 20 : 1;
+        if (numHit) sc = 100;
         else if (tc === qc) sc = 80;
         else if (tc.indexOf(qc) === 0) sc = 60;
         else if (tc.indexOf(qc) >= 0) sc = 40;
-        if (e.group === 'Pages' && sc < 100) sc -= 5;   // a piece beats the page about it
-        scored.push({ e, sc, i });
+        scored.push({ e, sc, i, titleHit });
     });
-    scored.sort((a, b) => (b.sc - a.sc) || (a.i - b.i));
+    if (scored.some(x => x.titleHit)) scored = scored.filter(x => x.titleHit);
+    const best = {}, first = {};
+    scored.forEach(x => { const g = x.e.group; if (!(g in best) || x.sc > best[g]) best[g] = x.sc; if (!(g in first)) first[g] = x.i; });
+    scored.sort((a, b) => (best[b.e.group] - best[a.e.group]) || (first[a.e.group] - first[b.e.group]) || (b.sc - a.sc) || (a.i - b.i));
     return scored.slice(0, 60).map(x => x.e);
 }
 function _jumpDefault(e) {
@@ -40186,7 +40199,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.08</strong> Text on deck pages wraps in the editor exactly where it wraps in the PDF. The editor was kerning letter pairs (up to 5% tighter on pairs like AV and TA) and the PDF never does, so a heading could fit on screen and break onto a second line in the export. Nothing in the PDF changes.<br><br>
+                body: `<strong>18.09</strong> Jump to lists cleaner results: typing a code shows only the matching codes (not every piece whose description mentions the word), each group appears once, and a spec page is not listed twice unless you type its page number.<br><br>
+<strong>18.08</strong> Text on deck pages wraps in the editor exactly where it wraps in the PDF. The editor was kerning letter pairs (up to 5% tighter on pairs like AV and TA) and the PDF never does, so a heading could fit on screen and break onto a second line in the export. Nothing in the PDF changes.<br><br>
 <strong>18.07</strong> Vertical spacing and measure-line numbers on elevations now read along their line, like the wall and glass dimensions already did, whenever the number fits the gap. A number too long for its gap stays upright beside the line.<br><br>
 <strong>18.06</strong> <strong>Catalogue overview</strong>: every placement on one screen with how many openings in each image option still need a picture, an Only incomplete filter, and a click to open the wall. From All placements in the Options map, the deck Options section, or Ctrl+K.<br><br>
 <strong>18.05</strong> Preflight no longer lists a catalogue mockup's slots as missing artwork (they never take any). A missing image or wall placement has a <strong>Piece</strong> button that opens that piece on the dashboard, beside the existing <strong>Page</strong> button, and Esc closes Preflight.<br><br>

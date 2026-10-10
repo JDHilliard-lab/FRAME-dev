@@ -61,6 +61,29 @@ const path = require('path');
       if (!r.length || r[0].num !== '3') throw new Error('first result for "3" was ' + (r[0] && r[0].title));
     });
 
+    __check('"art 1" lists ART pieces only, not EGD.1 whose subtitle says Framed Art', () => {
+      const r = _jumpFilter('art 1', _jumpEntries()).map(e => e.title);
+      if (r.indexOf('EGD.1') >= 0) throw new Error('subtitle-only match listed beside code matches: ' + r.join(', '));
+      if (r[0] !== 'ART.1A') throw new Error('first was ' + r[0]);
+    });
+
+    __check('an artwork name is still searchable when no code matches', () => {
+      dashProjectData.find(x => x.id === 'ART.2').artworkName = 'Harbour at dusk';
+      const r = _jumpFilter('harbour dusk', _jumpEntries());
+      if (!r.length || r[0].title !== 'ART.2') throw new Error('artwork-name search lost: ' + r.map(e => e.title).join(', '));
+    });
+
+    __check('each group heading appears once', () => {
+      const gs = _jumpFilter('art', _jumpEntries()).map(e => e.group);
+      const runs = gs.filter((g, i) => i === 0 || gs[i - 1] !== g);
+      if (new Set(runs).size !== runs.length) throw new Error('groups interleave: ' + runs.join(' > '));
+    });
+
+    __check('a spec page is not listed twice unless its number was typed', () => {
+      const r = _jumpFilter('ART.1A', _jumpEntries());
+      if (r.some(e => e.group === 'Pages' && e.sub === 'spec page')) throw new Error('the spec page duplicates the piece row');
+    });
+
     __check('a piece offers Piece, Wall and Page, and Wall only when it is on one', () => {
       const all = _jumpEntries();
       const a = all.find(e => e.title === 'ART.1A'), b = all.find(e => e.title === 'ART.1B');
