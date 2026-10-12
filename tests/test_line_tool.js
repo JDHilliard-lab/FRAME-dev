@@ -118,10 +118,65 @@ const path = require('path');
       if (a !== 45) throw new Error('expected 45, got ' + a);
       if (_dsLineAngle(0.2, 0.5, 0.6, 0.5, W, H) !== 0) throw new Error('level is not 0');
     });
+    __check('the menu offers both zig-zags and no curve', () => {
+      const k = _DS_LINE_TOOLS.map(t => t[1]);
+      if (k.indexOf('Elbow arrow') < 0 || k.indexOf('Elbow arrow, upright') < 0) throw new Error(k.join(', '));
+    });
     __check('the curved arrow is off the menu, but a saved curve still draws', () => {
       if (_DS_LINE_TOOLS.some(t => t[0] === 'curve')) throw new Error('curve still offered');
       const pts = _arrowPathPoints({ type: 'curve', bend: 0.7 }, 0, 0, 100, 0);
       if (pts.length < 10) throw new Error('an existing curve no longer renders as a curve');
+    });
+
+    // ── 18.22: the elbow opens as a zig-zag, its grip shows only when selected
+    __check('a NEW elbow is a zig-zag with the riser in the middle, not an L', () => {
+      const a = Object.assign(_dsShapeDefaultsFor('elbow'), { x1: 0, y1: 0, x2: 1, y2: 1 });
+      const p = _arrowPathPoints(a, 0, 200, 300, 0);
+      if (p.length !== 4) throw new Error('expected 4 points, got ' + p.length);
+      if (p[1][0] !== 150 || p[2][0] !== 150) throw new Error('riser not centred: ' + JSON.stringify(p));
+      if (p[1][1] !== 200 || p[2][1] !== 0) throw new Error('not across-up-across: ' + JSON.stringify(p));
+    });
+    __check('the upright elbow is down-across-down, bend along Y', () => {
+      const a = Object.assign(_dsShapeDefaultsFor('elbowRev'), { x1: 0, y1: 0, x2: 1, y2: 1 });
+      if (a.axis !== 'v') throw new Error('upright elbow carries no axis');
+      const p = _arrowPathPoints(a, 0, 0, 300, 200);
+      if (JSON.stringify(p) !== JSON.stringify([[0, 0], [0, 100], [300, 100], [300, 200]])) throw new Error('wrong path: ' + JSON.stringify(p));
+    });
+    __check('a SAVED elbow draws exactly as before (bend 1 = L, bend 0 = reversed L, absent = L)', () => {
+      const L = JSON.stringify([[0, 0], [300, 0], [300, 200], [300, 200]]);
+      if (JSON.stringify(_arrowPathPoints({ type: 'elbow', bend: 1 }, 0, 0, 300, 200)) !== L) throw new Error('bend 1 moved');
+      if (JSON.stringify(_arrowPathPoints({ type: 'elbow' }, 0, 0, 300, 200)) !== L) throw new Error('an elbow with no bend moved');
+      if (JSON.stringify(_arrowPathPoints({ type: 'elbow', bend: 0 }, 0, 0, 300, 200)) !== JSON.stringify([[0, 0], [0, 0], [0, 200], [300, 200]])) throw new Error('bend 0 moved');
+    });
+    __check('the rail thumbnail draws the zig-zag, not a straight diagonal', () => {
+      const html = _dsAnnotationsThumbHTML([{ type: 'elbow', bend: 0.5, x1: 0, y1: 1, x2: 1, y2: 0, color: '#c0392b' }], 100, 50, 'k');
+      if (html.indexOf('<polyline points="0,50 50,50 50,0 100,0"') < 0) throw new Error('thumbnail path is wrong: ' + html.slice(html.indexOf('<svg'), html.indexOf('<svg') + 220));
+    });
+    __check('an elbow is called an Elbow arrow; a waypoint path is still Multi-point', () => {
+      if (_dsLineLabel({ type: 'elbow', bend: 0.5 }) !== 'Elbow arrow') throw new Error(_dsLineLabel({ type: 'elbow' }));
+      if (_dsLineLabel({ type: 'elbow', tip: 'none' }) !== 'Elbow line') throw new Error('headless elbow mislabelled');
+      if (_dsLineLabel({ type: 'elbow', waypoints: [] }) !== 'Multi-point arrow') throw new Error('waypoint path mislabelled');
+      if (_dsLineLabel({ type: 'elbow', pts: [{ x: 0, y: 0 }, { x: 1, y: 1 }] }) !== 'Multi-point arrow') throw new Error('legacy pts path mislabelled');
+    });
+    __check('the bend grip is hidden until the elbow is selected, then sits mid-riser as a pill', () => {
+      const realKey = _deckPageKey;
+      _deckPageKey = () => 'spec:E1';
+      editorialContent.annotations = { 'spec:E1': [{ type: 'elbow', bend: 0.5, x1: 0.1, y1: 0.8, x2: 0.5, y2: 0.2, color: '#c0392b', weight: 1, tip: 'arrow' }] };
+      const render = () => { const pg = document.createElement('div'); document.body.appendChild(pg); _dsRenderAnnots(pg, { kind: 'spec' }, 936, 540); const g = pg.querySelector('[data-bend-grip]'); return { pg, g }; };
+      _dsSelKey = null; _dsSelIdx = -1;
+      let r = render();
+      if (r.g && r.g.style.display !== 'none') throw new Error('grip shows on an UNSELECTED elbow');
+      r.pg.remove();
+      _dsSelKey = 'spec:E1'; _dsSelIdx = 0;
+      r = render();
+      if (!r.g || r.g.style.display === 'none') throw new Error('grip missing on the selected elbow');
+      const gx = +r.g.getAttribute('x') + (+r.g.getAttribute('width')) / 2, gy = +r.g.getAttribute('y') + (+r.g.getAttribute('height')) / 2;
+      if (Math.abs(gx - 0.3 * 936) > 0.5) throw new Error('grip is not on the riser: x ' + gx);
+      if (Math.abs(gy - 0.5 * 540) > 0.5) throw new Error('grip is not mid-riser (it used to sit on the corner): y ' + gy);
+      if (!(+r.g.getAttribute('height') > +r.g.getAttribute('width'))) throw new Error('grip is not laid along the vertical riser');
+      if (r.g.style.cursor !== 'ew-resize') throw new Error('grip cursor does not say slide sideways: ' + r.g.style.cursor);
+      r.pg.remove();
+      _deckPageKey = realKey; _dsSelKey = null; _dsSelIdx = -1;
     });
 
     __check('_dsDragDone pushes for a real change and NOT for a plain click', () => {

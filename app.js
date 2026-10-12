@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.21';
+const APP_VERSION = '18.22';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -2046,7 +2046,11 @@ function _dsAnnotationsThumbHTML(list, wpx, hpx, pageKey) {
                 const pts = a.pts.map(p => ((p.x || 0) * wpx) + ',' + ((p.y || 0) * hpx)).join(' ');
                 svg += '<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="' + wt + '"/>';
             } else {
-                svg += '<line x1="' + ((a.x1 || 0) * wpx) + '" y1="' + ((a.y1 || 0) * hpx) + '" x2="' + ((a.x2 || 0) * wpx) + '" y2="' + ((a.y2 || 0) * hpx) + '" stroke="' + col + '" stroke-width="' + wt + '"/>';
+                // The same path the page and the PDF draw. This was a straight
+                // <line> from end to end, so every elbow and curve read as a
+                // diagonal in the rail.
+                const pp = _arrowPathPoints(a, (a.x1 || 0) * wpx, (a.y1 || 0) * hpx, (a.x2 || 0) * wpx, (a.y2 || 0) * hpx, wpx, hpx);
+                svg += '<polyline points="' + pp.map(p => p.join(',')).join(' ') + '" fill="none" stroke="' + col + '" stroke-width="' + wt + '"/>';
             }
         }
     });
@@ -21835,7 +21839,13 @@ function _dsRenderAnnots(page, desc, w, hh) {
             // visible through the middle, not hidden under a solid dot.
             const hEnds = [mk('circle', { r: 6, fill: 'none', stroke: 'var(--selected)', 'stroke-width': 2.5 }), mk('circle', { r: 6, fill: 'none', stroke: 'var(--selected)', 'stroke-width': 2.5 })];
             // Middle-segment handle (elbow/curve only) — drag to slide the bend.
-            const bendHandle = mk('rect', { width: 9, height: 9, fill: '#fff', stroke: 'var(--selected)', 'stroke-width': 2 });
+            // 18.22: a PILL on the MIDDLE of the riser, laid along it, and only
+            // while selected. It was a square on the CORNER, drawn whether or not
+            // the arrow was selected, which read as part of the drawing and never
+            // said "slide me".
+            const bendHandle = mk('rect', { rx: 3, ry: 3, fill: '#fff', stroke: 'var(--selected)', 'stroke-width': 2 });
+            bendHandle.setAttribute('data-bend-grip', '1');
+            { const t = document.createElementNS('http://www.w3.org/2000/svg', 'title'); t.textContent = 'Drag to move the bend'; bendHandle.appendChild(t); }
             let lastPts = null;
             let _wpUISync = null;   // set once the waypoint-editing UI exists (elbow with a.waypoints)
             // Settings-gear button, midpoint-anchored, shown only while selected.
@@ -21881,9 +21891,17 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     // since pts[0] is always the first point either way.
                     gbtn.style.left = (pts[0][0] - 20) + 'px'; gbtn.style.top = (pts[0][1] - 16) + 'px';
                 }
-                if ((a.type === 'elbow' || a.type === 'curve') && pts.length >= 3 && a.waypoints === undefined) {
-                    const mi = Math.floor(pts.length / 2);
-                    const mp = pts[mi];
+                if (sel && a.type === 'elbow' && pts.length === 4 && a.waypoints === undefined) {
+                    const p1 = pts[1], p2 = pts[2];
+                    const mx = (p1[0] + p2[0]) / 2, my = (p1[1] + p2[1]) / 2;
+                    const vert = Math.abs(p2[0] - p1[0]) <= Math.abs(p2[1] - p1[1]);
+                    const lw = vert ? 7 : 18, lh = vert ? 18 : 7;
+                    bendHandle.setAttribute('width', lw); bendHandle.setAttribute('height', lh);
+                    bendHandle.setAttribute('x', mx - lw / 2); bendHandle.setAttribute('y', my - lh / 2);
+                    bendHandle.style.display = '';
+                } else if (sel && a.type === 'curve' && pts.length >= 3) {
+                    const mp = pts[Math.floor(pts.length / 2)];
+                    bendHandle.setAttribute('width', 9); bendHandle.setAttribute('height', 9);
                     bendHandle.setAttribute('x', mp[0] - 4.5); bendHandle.setAttribute('y', mp[1] - 4.5);
                     bendHandle.style.display = '';
                 } else { bendHandle.style.display = 'none'; }
@@ -22051,13 +22069,18 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     _wpUISync = syncWaypointUI;
                     syncWaypointUI();
                 } else if (a.type === 'elbow' || a.type === 'curve') {
-                    bendHandle.style.cssText = 'pointer-events:all; cursor:' + (a.type === 'elbow' ? 'ew-resize' : 'move') + ';';
+                    bendHandle.style.cssText = 'pointer-events:all; cursor:' + (a.type === 'elbow' ? (a.axis === 'v' ? 'ns-resize' : 'ew-resize') : 'move') + ';';
                     bendHandle.onmousedown = (e) => {
                         e.preventDefault(); e.stopPropagation();
                         const rect = svg.getBoundingClientRect();
                         const X1 = (a.x1 || 0) * w, X2 = (a.x2 || 0) * w, Y1 = (a.y1 || 0) * hh, Y2 = (a.y2 || 0) * hh;
                         const mv = (ev) => {
-                            if (a.type === 'elbow') {
+                            if (a.type === 'elbow' && a.axis === 'v') {
+                                // Upright zig-zag: the middle run is level; slide it up/down.
+                                const my = ev.clientY - rect.top;
+                                const t = (Y2 - Y1) !== 0 ? (my - Y1) / (Y2 - Y1) : 0.5;
+                                a.bend = Math.max(0, Math.min(1, t));
+                            } else if (a.type === 'elbow') {
                                 // Segment is vertical; slide it left/right along X.
                                 const mx = ev.clientX - rect.left;
                                 const t = (X2 - X1) !== 0 ? (mx - X1) / (X2 - X1) : 0.5;
@@ -22607,8 +22630,8 @@ function _dsSetArrowDefault(prop, val) {
 let _dsArmedShape = null;   // 'arrow' | 'elbow' | 'elbowRev' | 'curve' — click-drag to draw
 function _dsShapeDefaultsFor(virtualKind) {
     const d = _dsArrowDefaults();
-    if (virtualKind === 'elbow') return Object.assign({}, d, { type: 'elbow', bend: 1 });
-    if (virtualKind === 'elbowRev') return Object.assign({}, d, { type: 'elbow', bend: 0 });
+    if (virtualKind === 'elbow') return Object.assign({}, d, { type: 'elbow', bend: 0.5 });
+    if (virtualKind === 'elbowRev') return Object.assign({}, d, { type: 'elbow', bend: 0.5, axis: 'v' });
     if (virtualKind === 'elbowPath') return Object.assign({}, d, { type: 'elbow', bend: 1, waypoints: [] });
     if (virtualKind === 'curve') return Object.assign({}, d, { type: 'curve', bend: 0.5 });
     return Object.assign({}, d, { type: 'arrow' });
@@ -22705,8 +22728,8 @@ function _dsDockOpenMark(id) {
 const _DS_LINE_TOOLS = [
     ['line', 'Line', 'L', '<line x1="5" y1="19" x2="19" y2="5"/>'],
     ['arrow', 'Arrow', 'A', '<line x1="5" y1="19" x2="19" y2="5"/><polyline points="11 5 19 5 19 13"/>'],
-    ['elbow', 'Elbow arrow', '', '<polyline points="5 4 5 18 17 18"/><polyline points="14 15 17 18 14 21"/>'],
-    ['elbowRev', 'Elbow arrow, other way', '', '<polyline points="4 6 14 6 14 19"/><polyline points="11 16 14 19 17 16"/>'],
+    ['elbow', 'Elbow arrow', '', '<polyline points="3 18 11 18 11 6 19 6"/><polyline points="16 3 19 6 16 9"/>'],
+    ['elbowRev', 'Elbow arrow, upright', '', '<polyline points="6 3 6 11 18 11 18 19"/><polyline points="15 16 18 19 21 16"/>'],
     ['elbowPath', 'Multi-point path', '', '<polyline points="3 20 3 12 10 12 10 5 17 5 17 15 21 15"/>']
 ];
 // Arm a line tool by kind. 'line' is the arrow tool with its head taken off;
@@ -22758,6 +22781,16 @@ document.addEventListener('keydown', (e) => {
     if (_fpLineStart) _fpLineStart = null; else _fpLineArmId = null;
     try { _fpLoupeHide(); _dsRenderCenter(); _dsRenderTools(); } catch (err) {}
 });
+// What a line is called in its settings popup and in Layers. An elbow with no
+// waypoints (and no legacy pts) is a two-point zig-zag, not a multi-point path.
+function _dsLineLabel(a) {
+    const head = (a && a.tip === 'none') ? 'line' : 'arrow';
+    if (a && a.type === 'elbow') {
+        const multi = a.waypoints !== undefined || Array.isArray(a.pts);
+        return (multi ? 'Multi-point ' : 'Elbow ') + head;
+    }
+    return head === 'line' ? 'Line' : 'Arrow';
+}
 function _arrowPathPoints(a, X1, Y1, X2, Y2, scaleX, scaleY) {
     // 'elbow' with waypoints: a real multi-segment path, click-placed one
     // corner at a time (the "maze" tool) rather than a single computed bend.
@@ -22777,8 +22810,16 @@ function _arrowPathPoints(a, X1, Y1, X2, Y2, scaleX, scaleY) {
     // change, so every already-saved elbow renders identically, unchanged.
     // Dragging the middle segment slides bend from 0 (vertical-first L) to 1
     // (horizontal-first L); every corner is always exactly 90 degrees.
+    // 18.22: a NEW elbow is drawn at bend 0.5, a zig-zag with the riser in the
+    // middle, because an L hides that the bend can move at all. a.axis 'v' is the
+    // upright zig-zag (down, across, down) with the bend along Y. Absent axis is
+    // the original horizontal form, so a saved elbow draws exactly as it did.
     if (a.type === 'elbow') {
         const t = (typeof a.bend === 'number') ? a.bend : 1;
+        if (a.axis === 'v') {
+            const cy = Y1 + (Y2 - Y1) * t;
+            return [[X1, Y1], [X1, cy], [X2, cy], [X2, Y2]];
+        }
         const cx = X1 + (X2 - X1) * t;
         return [[X1, Y1], [cx, Y1], [cx, Y2], [X2, Y2]];
     }
@@ -23295,7 +23336,7 @@ function _dsOpenArrowGearPopup(key, i, cx, cy) {
     };
     const head = document.createElement('div');
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
-    const label = (a.type === 'elbow') ? ((a.tip === 'none') ? 'Multi-point line' : 'Multi-point arrow') : ((a.tip === 'none') ? 'Line' : 'Arrow');
+    const label = _dsLineLabel(a);
     head.innerHTML = '<span style="font-weight:700; font-size:var(--fs-60); letter-spacing:0.4px; text-transform:uppercase;">' + label + ' settings</span>';
     const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.title = 'Close'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
     closeB.onclick = () => _dsCloseArrowGearPopup();
@@ -31647,7 +31688,7 @@ function _dsAnnLabel(a) {
     if (a.type === 'text' || a.type === 'note') { const tx = ((a.text || '') + '').replace(/\s+/g, ' ').trim(); return tx ? ('Text \u2014 ' + tx.slice(0, 22)) : 'Text'; }
     if (a.type === 'image') return 'Image placeholder';
     if (a.type === 'arrow') return (a.tip === 'none') ? 'Line' : 'Arrow';
-    if (a.type === 'elbow') return 'Multi-point ' + (a.tip === 'none' ? 'line' : 'arrow');
+    if (a.type === 'elbow') return _dsLineLabel(a);
     return a.type || 'Item';
 }
 // Re-rank element z values to unique sequential integers in current visual
@@ -40814,7 +40855,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.21</strong> Hold <strong>Shift</strong> while drawing a line or arrow to keep it level, upright or at 45 degrees, and the angle shows beside the cursor. Shift works when dragging a line's end and when moving a whole line too. <strong>Esc</strong> while drawing drops that line. A line placed with a single click comes out level. The curved arrow is gone (curves already on a page stay). Moving, resizing and panning a box can now be undone one step at a time, and adding a second text box or shape no longer hides it under the first.<br><br>
+                body: `<strong>18.22</strong> A new elbow arrow opens as a zig-zag with the bend in the middle, and <strong>Elbow arrow, upright</strong> goes down, across and down. Select one and a grip appears on the middle of the bend: drag it to slide the bend. The grip is hidden when the arrow is not selected, and the page thumbnails now show elbows as they are drawn instead of as a straight line. Elbows already on your pages are unchanged.<br><br>
+<strong>18.21</strong> Hold <strong>Shift</strong> while drawing a line or arrow to keep it level, upright or at 45 degrees, and the angle shows beside the cursor. Shift works when dragging a line's end and when moving a whole line too. <strong>Esc</strong> while drawing drops that line. A line placed with a single click comes out level. The curved arrow is gone (curves already on a page stay). Moving, resizing and panning a box can now be undone one step at a time, and adding a second text box or shape no longer hides it under the first.<br><br>
 <strong>18.20</strong> Deck Studio's tools for text, notes, lines, shapes and images now sit in one toolbar beside the page, with a picture and a shortcut for each. Put it on the left, the right or back on top with the last button on it. New: <strong>Divider</strong> (a level line across the page), <strong>Stamps</strong> (DRAFT, FOR APPROVAL and more) and single-key tools: V select, T text, L line, A arrow, R rectangle, O oval, I image.<br><br>
 <strong>18.19</strong> The PDF flip-book now shows only your artwork, not the page previews.<br><br>
 <strong>18.18</strong> While a PDF builds, your deck's pages flip by full screen behind the progress box, one every half second. It uses the page previews already built in the rail (or your artwork if there are none yet), so it does not slow the build down.<br><br>

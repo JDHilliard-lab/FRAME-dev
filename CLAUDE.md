@@ -2314,6 +2314,14 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   them, and a line started on another line's end grabbed its handle (found only in Chrome).
   Esc mid-draw is a capture-phase listener that drops the line and keeps the tool. The
   curved arrow is off the menu; saved curves still render and bend.
+  **A NEW ELBOW IS A ZIG-ZAG (18.22)**: bend 0.5, riser in the middle; `a.axis = 'v'` is the
+  upright one (down, across, down), bend along Y. Both go through `_arrowPathPoints`, which
+  is the ONE path for the page, the PDF, the canvas preview AND the rail thumbnail (that last
+  one drew a straight `<line>` until 18.22). Absent `axis` / stored `bend` keep every saved
+  elbow drawing as it did. The bend grip (`[data-bend-grip]`) is a pill on the MIDDLE of
+  the riser and only exists visibly while selected; it was a square on the corner, always
+  drawn, which read as drawing rather than a control. `_dsLineLabel` names it: an elbow
+  with no `waypoints`/`pts` is an "Elbow arrow", not "Multi-point".
   **EVERY ANNOTATION DRAG ENDS IN `_dsDragDone(_dsGeo0, a)` or `pushHistory`.** Seven
   move/resize/pan handlers pushed none, so a drag was folded into the next undo step.
   `_dsDragDone` pushes only when `_dsGeoSig` changed, so a click-to-select adds nothing;
