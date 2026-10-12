@@ -2592,3 +2592,62 @@ button.cat-node:hover { border-color: var(--ui-active); }
 @media (prefers-reduced-motion: reduce) {
     .pdf-flip-page.turn { animation: none; opacity: 0; }
 }
+
+/* ── Deck Studio tool dock (18.20) ─────────────────────────────────────────
+   The creation tools (select, text, notes, lines, shapes, image) in one dock
+   that sits beside the page, Left or Right, or in the toolbar row, Top. The
+   position is a per-machine preference (_dsDockSide, localStorage), never
+   project data. The slots beside the page share the preview's own ground so
+   the dock reads as floating over it rather than as another panel. */
+.ds-dock-slot-left, .ds-dock-slot-right {
+    flex-shrink: 0; display: flex; align-items: flex-start;
+    padding: 14px 0; background: var(--bg-input);
+}
+.ds-dock-slot-left { padding-left: 10px; }
+.ds-dock-slot-right { padding-right: 10px; }
+.ds-dock-slot-top { display: inline-flex; align-items: center; }
+.ds-dock {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 5px; background: var(--bg-panel);
+    border: 1px solid var(--border-color); border-radius: var(--r-10);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.16);
+}
+.ds-dock.horiz { flex-direction: row; padding: 0; gap: 3px; border: none; box-shadow: none; background: transparent; }
+.ds-dock-btn {
+    position: relative; width: 36px; height: 36px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: none; border-radius: var(--r-6); background: transparent;
+    color: var(--text-main); cursor: pointer;
+}
+.ds-dock.horiz .ds-dock-btn { width: 32px; height: 32px; }
+.ds-dock-btn:hover { background: var(--btn-hover); color: var(--text-strong); }
+.ds-dock-btn.active { background: var(--ui-active); color: #fff; }
+.ds-dock-btn.active:hover { background: var(--ui-active); filter: brightness(1.08); }
+.ds-dock-btn.open { background: var(--btn-hover); }
+/* A tool with a flyout carries a small corner triangle, the way Miro and
+   Figma mark the buttons that open a menu rather than act at once. */
+.ds-dock-btn.has-fly::after {
+    content: ''; position: absolute; right: 4px; bottom: 4px;
+    border-left: 4px solid transparent; border-bottom: 4px solid currentColor; opacity: 0.55;
+}
+.ds-dock-sep { width: 22px; height: 1px; margin: 4px 0; background: var(--border-color); }
+.ds-dock.horiz .ds-dock-sep { width: 1px; height: 20px; margin: 0 3px; }
+
+/* The flyout menus the dock opens: icon, label, shortcut, one row each. */
+.ds-fly-head { font-size: var(--fs-55); font-weight: 700; letter-spacing: 0.4px; color: var(--text-muted); margin: 8px 6px 4px; }
+.ds-fly-head:first-child { margin-top: 2px; }
+.ds-fly-row { display: flex; align-items: stretch; gap: 2px; }
+.ds-fly-item {
+    flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px;
+    padding: 6px 8px; border: none; border-radius: var(--r-6); background: transparent;
+    color: var(--text-main); font: inherit; font-size: var(--fs-75); text-align: left; cursor: pointer;
+}
+.ds-fly-item:hover { background: var(--btn-hover); color: var(--text-strong); }
+.ds-fly-item.on { background: var(--btn-hover); color: var(--text-strong); box-shadow: inset 2px 0 0 var(--ui-active); }
+.ds-fly-ico { flex: none; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; }
+.ds-fly-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.ds-fly-hint { font-size: var(--fs-55); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ds-fly-kbd { flex: none; font-size: var(--fs-65); color: var(--text-muted); min-width: 12px; text-align: right; }
+.ds-fly-del { flex: none; width: 22px; border: none; border-radius: var(--r-6); background: transparent; color: var(--text-muted); cursor: pointer; }
+.ds-fly-del:hover { background: var(--btn-hover); color: var(--text-strong); }
+.ds-fly-sep { height: 1px; background: var(--border-color); margin: 6px 4px; }

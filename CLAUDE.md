@@ -2297,6 +2297,20 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   page. The spec-page preview renderer used the piece's own id and location instead, so
   the preview footer read "LOBBY | ART.3A" on a page that prints the document code, and a
   group page titled ART.3 said ART.3A. Both preview renderers now call the one helper.
+- **THE DECK STUDIO CREATION TOOLS ARE ONE DOCK (`#dsToolDock`, 18.20)**: Select, Text,
+  Notes (presets, stamps, library), Lines, Shapes, Image, Position. `_dsDockPlace` MOVES the
+  node between three fixed slots (`dsDockLeftSlot` / `dsDockRightSlot` / `dsDockTopSlot`), so
+  every button keeps its id; the side is localStorage `dsDockSide`, never project data, and
+  `_dsDockSync` (top of `_dsRenderCenter`) both lights the live tool and lazily re-places
+  the dock, so there is no boot hook. `_dsPopup` flies a menu SIDEWAYS when its anchor is in
+  a `.ds-dock.vert`. Menu rows are `_dsFlyItem` (icon, label, shortcut), one builder for all
+  four flyouts. Single keys V T L A R O I go through `_dsDockKey`, after the typing guard in
+  `_dsAnnotKeydown`, never with a modifier or a dialog open.
+  **ONE GLOBAL SCOPE MEANS A NAME COLLISION IS A DELETION.** The stamp tool was first written
+  as `_dsAddStamp`, which already existed as the spec page's APPROVAL stamp; the later
+  declaration won, the file parsed and the whole suite stayed green. It is
+  `_dsAddStatusStamp`, and `test_ds_tool_dock` now fails on any top-level function declared
+  twice. Grep a new name before using it.
 - `_resolveFooter()` handles footer theming. `'auto'` means *read this page's own
   theme* — not a fixed default.
 - Templates live in `editorialContent.templates`; `type` doubles as the category key.

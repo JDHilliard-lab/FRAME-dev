@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.19';
+const APP_VERSION = '18.20';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -22512,40 +22512,130 @@ function _dsShapeDefaultsFor(virtualKind) {
 }
 // Arm a shape for click-drag drawing on the page. Click again / Escape cancels.
 let _dsLastShapeKind = 'arrow';
-// Main button quick-click: arm whichever shape was used last time.
-function _dsArrowMainClick() { _dsAddArrowSmart(_dsLastShapeKind); }
-// Caret opens a small popup to actually pick among all 4 shapes.
+// ── THE TOOL DOCK (18.20) ──────────────────────────────────────────────────
+// The creation tools sit in ONE dock (#dsToolDock) that a designer can put beside
+// the page, Left or Right, or back in the toolbar row, Top. It replaced three
+// split buttons whose carets opened grids of captioned tiles: a menu now reads
+// like Miro's, an icon, a name and a shortcut per row, so the tool you want is
+// found by its shape and the key is learned by seeing it every time.
+// The side is a per-machine preference in localStorage, never project data:
+// it is where YOU like your tools, not something the deck should carry.
+const DS_DOCK_SIDES = ['left', 'right', 'top'];
+const DS_DOCK_KEY = 'dsDockSide';
+function _dsDockSide() {
+    let v = null;
+    try { v = localStorage.getItem(DS_DOCK_KEY); } catch (e) {}
+    return DS_DOCK_SIDES.indexOf(v) >= 0 ? v : 'left';
+}
+// Moves the dock into the slot for its side. The slots are fixed in index.html,
+// so moving the node is the whole job: every button keeps its id and handler.
+function _dsDockPlace(side) {
+    const dock = document.getElementById('dsToolDock'); if (!dock) return;
+    side = DS_DOCK_SIDES.indexOf(side) >= 0 ? side : 'left';
+    const slots = { left: 'dsDockLeftSlot', right: 'dsDockRightSlot', top: 'dsDockTopSlot' };
+    const host = document.getElementById(slots[side]); if (!host) return;
+    if (dock.parentNode !== host) host.appendChild(dock);
+    DS_DOCK_SIDES.forEach(k => { const el = document.getElementById(slots[k]); if (el) el.style.display = (k === side) ? '' : 'none'; });
+    dock.classList.toggle('vert', side !== 'top');
+    dock.classList.toggle('horiz', side === 'top');
+    const sep = document.getElementById('dsDockTopSep'); if (sep) sep.style.display = side === 'top' ? '' : 'none';
+}
+function _dsSetDockSide(side) {
+    if (DS_DOCK_SIDES.indexOf(side) < 0) return;
+    try { localStorage.setItem(DS_DOCK_KEY, side); } catch (e) {}
+    _dsDockPlace(side);
+    // The page preview is sized off #dsCenter's width, which the dock just changed.
+    try { _dsRenderCenter(); } catch (e) {}
+}
+// Lights the tool that is live. Called from the top of _dsRenderCenter, which
+// every arm, disarm, draw and selection change already runs through, so no path
+// has to remember to call it. Placement is applied here too, lazily, so a fresh
+// load needs no boot hook to put the dock where it was left.
+function _dsDockSync() {
+    const dock = document.getElementById('dsToolDock'); if (!dock) return;
+    const side = _dsDockSide();
+    const want = side === 'top' ? 'dsDockTopSlot' : (side === 'right' ? 'dsDockRightSlot' : 'dsDockLeftSlot');
+    if (!dock.parentNode || dock.parentNode.id !== want) _dsDockPlace(side);
+    const set = (id, on) => { const b = document.getElementById(id); if (b) b.classList.toggle('active', !!on); };
+    set('dsDockSelect', !_dsArmedShape);
+    set('dsDockLines', !!_dsArmedShape);
+    const li = document.querySelector('#dsDockLines svg');
+    const k = _DS_LINE_TOOLS.find(t => t[0] === _dsLastShapeKind);
+    if (li && k && li.getAttribute('data-kind') !== k[0]) { li.innerHTML = k[3]; li.setAttribute('data-kind', k[0]); }
+}
+// Select: put the drawing tool down. Selection itself is a click on the page.
+function _dsDockSelect() {
+    if (_dsArmedShape) { _dsArmedShape = null; }
+    try { _dsRenderCenter(); } catch (e) {}
+}
+// One menu row: icon, label (and an optional second line), shortcut. Shared by
+// every dock flyout so the four menus cannot drift into four looks.
+function _dsFlyItem(menu, o) {
+    const row = document.createElement('div'); row.className = 'ds-fly-row';
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'ds-fly-item' + (o.on ? ' on' : '');
+    if (o.title) b.title = o.title;
+    const ico = o.icon ? '<span class="ds-fly-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + o.icon + '</svg></span>' : '<span class="ds-fly-ico"></span>';
+    b.innerHTML = ico + '<span class="ds-fly-txt"><span>' + o.label + '</span>' + (o.hint ? '<span class="ds-fly-hint">' + o.hint + '</span>' : '') + '</span>' + (o.kbd ? '<span class="ds-fly-kbd">' + o.kbd + '</span>' : '');
+    b.onclick = () => { const m = b.closest('[id]'); if (m && m.parentNode === document.body) m.remove(); _dsDockOpenMark(null); o.run(); };
+    row.appendChild(b);
+    if (o.onDelete) {
+        const del = document.createElement('button'); del.type = 'button'; del.className = 'ds-fly-del'; del.textContent = '×';
+        del.title = 'Remove from library';
+        del.onclick = (e2) => { e2.stopPropagation(); o.onDelete(); };
+        row.appendChild(del);
+    }
+    menu.appendChild(row);
+    return b;
+}
+function _dsFlyHead(menu, t) { const d = document.createElement('div'); d.className = 'ds-fly-head'; d.textContent = t; menu.appendChild(d); }
+function _dsFlySep(menu) { const d = document.createElement('div'); d.className = 'ds-fly-sep'; menu.appendChild(d); }
+// The dock button whose menu is open reads as pressed, so the flyout beside it
+// visibly belongs to it.
+function _dsDockOpenMark(id) {
+    document.querySelectorAll('.ds-dock-btn.open').forEach(b => b.classList.remove('open'));
+    if (id) { const b = document.getElementById(id); if (b) b.classList.add('open'); }
+}
+// [kind, label, shortcut, icon]. 'line' is the straight tool with no head.
+const _DS_LINE_TOOLS = [
+    ['line', 'Line', 'L', '<line x1="5" y1="19" x2="19" y2="5"/>'],
+    ['arrow', 'Arrow', 'A', '<line x1="5" y1="19" x2="19" y2="5"/><polyline points="11 5 19 5 19 13"/>'],
+    ['elbow', 'Elbow arrow', '', '<polyline points="5 4 5 18 17 18"/><polyline points="14 15 17 18 14 21"/>'],
+    ['elbowRev', 'Elbow arrow, other way', '', '<polyline points="4 6 14 6 14 19"/><polyline points="11 16 14 19 17 16"/>'],
+    ['curve', 'Curved arrow', '', '<path d="M4 19 Q 12 3 20 8"/><polyline points="15 6 20 8 19 13"/>'],
+    ['elbowPath', 'Multi-point path', '', '<polyline points="3 20 3 12 10 12 10 5 17 5 17 15 21 15"/>']
+];
+// Arm a line tool by kind. 'line' is the arrow tool with its head taken off;
+// choosing Arrow puts the head back, so drawing lines never leaves arrows headless.
+function _dsPickLineTool(kind) {
+    _dsLastShapeKind = kind;
+    if (kind === 'line') _dsSetArrowDefault('tip', 'none');
+    else if (kind === 'arrow') _dsSetArrowDefault('tip', 'arrow');
+    _dsArmedShape = null;   // so the arm below always arms rather than toggling off
+    _dsAddArrowSmart(kind === 'line' ? 'arrow' : kind);
+}
+// A horizontal rule across the safe area, placed at once. Drawing a level line
+// by hand is the one thing the line tool is bad at.
+function _dsAddDivider() {
+    if (_dsActiveTab !== 'pages') return;
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
+    if (!key) { _toast('Not available here', 'This page type doesn’t support lines.'); return; }
+    const list = _dsAnnList(key);
+    const a = Object.assign(_dsShapeDefaultsFor('arrow'), { tip: 'none', startCap: 'none', x1: 0.08, y1: 0.5, x2: 0.92, y2: 0.5 });
+    list.push(a);
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1);
+    _dsRenderRail();
+}
 function _dsOpenArrowShapeMenu(ev) {
     if (ev && ev.stopPropagation) ev.stopPropagation();
-    _dsPopup('dsArrowShapeMenu', 'dsArrowMenuBtn', (menu) => {
-        const lbl = document.createElement('div'); lbl.textContent = 'ARROW SHAPE'; lbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:8px;';
-        menu.appendChild(lbl);
-        const grid = document.createElement('div'); grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:6px;';
-        const shapes = [
-            ['arrow', 'Straight', '<line x1="4" y1="20" x2="20" y2="4"/><polyline points="10 4 20 4 20 14"/>'],
-            ['elbow', 'Elbow', '<polyline points="4 5 4 19 16 19"/><polyline points="12 15 17 20"/>'],
-            ['elbowRev', 'Elbow (rev.)', '<polyline points="4 8 12 8 12 20 20 20"/><polyline points="16 16 20 20 16 24" transform="translate(0,-4)"/>'],
-            ['curve', 'Curve', '<path d="M4 19 Q 12 3 20 8"/><polyline points="15 6 20 8 19 13"/>'],
-            ['elbowPath', 'Multi-point', '<polyline points="3 20 3 12 10 12 10 5 17 5 17 15 21 15"/>'],
-            ['line', 'Line (no head)', '<line x1="4" y1="20" x2="20" y2="4"/>']
-        ];
-        shapes.forEach(([kind, label, svgInner]) => {
-            const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
-            b.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 4px; font-size:var(--fs-60); border-radius:var(--r-6); cursor:pointer; border:1px solid ' + (_dsLastShapeKind === kind ? 'var(--ui-active)' : 'var(--border-color)') + ';';
-            b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + svgInner + '</svg><span>' + label + '</span>';
-            b.onclick = () => {
-                _dsLastShapeKind = kind;
-                // 'line' = the straight arrow with no head: a plain divider
-                // rule for separating text areas. Choosing Arrow restores the
-                // head, so drawing lines never leaves arrows headless.
-                if (kind === 'line') _dsSetArrowDefault('tip', 'none');
-                else if (kind === 'arrow') _dsSetArrowDefault('tip', 'arrow');
-                const m = document.getElementById('dsArrowShapeMenu'); if (m) m.remove();
-                _dsAddArrowSmart(kind === 'line' ? 'arrow' : kind);
-            };
-            grid.appendChild(b);
+    _dsPopup('dsArrowShapeMenu', 'dsDockLines', (menu) => {
+        menu.style.width = '230px';
+        _DS_LINE_TOOLS.forEach(([kind, label, kbd, icon]) => {
+            _dsFlyItem(menu, { icon: icon, label: label, kbd: kbd, on: _dsLastShapeKind === kind, run: () => _dsPickLineTool(kind) });
         });
-        menu.appendChild(grid);
+        _dsFlySep(menu);
+        _dsFlyItem(menu, { icon: '<line x1="3" y1="12" x2="21" y2="12"/>', label: 'Divider', hint: 'A level rule across the page', run: _dsAddDivider });
     });
 }
 function _dsArmShapeDraw(virtualKind) {
@@ -22625,27 +22715,25 @@ function _dsPlaceholderMainClick() {
         : _dsLastPlaceholderKind === 'square' ? ['rect', true] : ['rect', false];
     _dsAddShape(shape, locked);
 }
+const _DS_SHAPE_TOOLS = [
+    ['rect', 'Rectangle', 'R', '<rect x="3" y="6" width="18" height="12" rx="1"/>'],
+    ['square', 'Square', '', '<rect x="5" y="5" width="14" height="14" rx="1"/>'],
+    ['ellipse', 'Oval', 'O', '<ellipse cx="12" cy="12" rx="9" ry="6.5"/>'],
+    ['circle', 'Circle', '', '<circle cx="12" cy="12" r="8"/>']
+];
+function _dsPickShapeTool(kind) { _dsLastPlaceholderKind = kind; _dsPlaceholderMainClick(); }
 function _dsOpenPlaceholderMenu(ev) {
     if (ev && ev.stopPropagation) ev.stopPropagation();
-    _dsPopup('dsPlaceholderMenu', 'dsShapeMenuBtn', (menu) => {
-        const lbl = document.createElement('div'); lbl.textContent = 'IMAGE PLACEHOLDER / SHAPE'; lbl.style.cssText = 'font-size:var(--fs-60); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin-bottom:8px;';
-        menu.appendChild(lbl);
-        const grid = document.createElement('div'); grid.style.cssText = 'display:grid; grid-template-columns:1fr 1fr; gap:6px;';
-        const kinds = [
-            ['rect', 'Rectangle', '<rect x="3" y="6" width="18" height="12" rx="1"/>'],
-            ['ellipse', 'Ellipse / oval', '<ellipse cx="12" cy="12" rx="9" ry="6.5"/>'],
-            ['square', 'Perfect square', '<rect x="5" y="5" width="14" height="14" rx="1"/>'],
-            ['circle', 'Perfect circle', '<circle cx="12" cy="12" r="8"/>']
-        ];
-        kinds.forEach(([kind, label, svgInner]) => {
-            const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
-            b.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:4px; padding:8px 4px; font-size:var(--fs-60); border-radius:var(--r-6); cursor:pointer; border:1px solid ' + (_dsLastPlaceholderKind === kind ? 'var(--ui-active)' : 'var(--border-color)') + ';';
-            b.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' + svgInner + '</svg><span>' + label + '</span>';
-            b.onclick = () => { _dsLastPlaceholderKind = kind; const m = document.getElementById('dsPlaceholderMenu'); if (m) m.remove(); _dsPlaceholderMainClick(); };
-            grid.appendChild(b);
+    _dsPopup('dsPlaceholderMenu', 'dsDockShapes', (menu) => {
+        menu.style.width = '230px';
+        _dsFlyHead(menu, 'IMAGE PLACEHOLDERS');
+        _DS_SHAPE_TOOLS.forEach(([kind, label, kbd, icon]) => {
+            _dsFlyItem(menu, { icon: icon, label: label, kbd: kbd, on: _dsLastPlaceholderKind === kind, run: () => _dsPickShapeTool(kind) });
         });
-        menu.appendChild(grid);
-        const note = _dsHowToDot('Drop or click \u201c+ Add image\u201d to fill with an image. Scroll on the image to zoom; when zoomed, click-drag inside to pan, and use the grip handle (top-left) to move the shape. Perfect square/circle stay locked while resizing (1:1 button toggles it).');
+        _dsFlySep(menu);
+        _dsFlyItem(menu, { icon: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>', label: 'Upload image', kbd: 'I', run: _dsAddImageSmart });
+        const note = _dsHowToDot('Drop or click \u201c+ Add image\u201d to fill a placeholder with an image. Scroll on the image to zoom; when zoomed, click-drag inside to pan, and use the grip handle (top-left) to move the shape. Square and circle stay locked while resizing (1:1 in the settings toggles it).');
+        note.style.margin = '6px 6px 2px';
         menu.appendChild(note);
     });
 }
@@ -22670,52 +22758,99 @@ async function _dsSaveSelectedTextPreset() {
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _toast('Saved', '\u201c' + name + '\u201d is now in your text library (T menu). It saves with the project.');
 }
+// Stamps: the status marks a deck goes out under. Bold red caps, top right,
+// in the same red the text-ink strip offers, so a stamp and a red note match.
+const _DS_STAMPS = ['DRAFT', 'FOR APPROVAL', 'CONCEPT ONLY', 'NOT TO SCALE', 'PRELIMINARY'];
+const _DS_STAMP_INK = '#e00000';
+function _dsAddStatusStamp(word) {
+    if (_dsCurrentEditablePage()) {
+        try {
+            addMoodboardText();
+            const els = _mbEls(); const el = els[els.length - 1];
+            if (el && el.type === 'text') { el.text = word; el.w = 0.26; el.x = 0.68; el.y = 0.05; el.size = 0.034; el.bold = true; el.color = _DS_STAMP_INK; el.font = 'display'; el.align = 'right'; renderMoodboardCanvas(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); }
+        } catch (e) {}
+        return;
+    }
+    const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
+    if (!key) { _toast('Not available here', 'This page type doesn’t support overlay text.'); return; }
+    const list = _dsAnnList(key);
+    list.push({ type: 'note', text: word, x: 0.68, y: 0.05, w: 0.26, size: 0.034, color: _DS_STAMP_INK, font: 'display', bold: true, italic: false, align: 'right' });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
+}
 function _dsOpenTextMenu(ev) {
     if (ev && ev.stopPropagation) ev.stopPropagation();
-    _dsPopup('dsTextMenu', 'dsTextMenuBtn', (menu) => {
-        menu.style.width = '240px';
-        const lbl = (t) => { const d = document.createElement('div'); d.textContent = t; d.style.cssText = 'font-size:var(--fs-55); font-weight:700; letter-spacing:0.4px; color:var(--text-muted); margin:8px 0 5px;'; menu.appendChild(d); };
-        const mk = (label, hint, on, onDelete) => {
-            const wrap = document.createElement('div'); wrap.style.cssText = 'display:flex; gap:4px; align-items:stretch; margin-bottom:5px;';
-            const b = document.createElement('button'); b.className = 'action-btn btn-secondary';
-            b.style.cssText = 'flex:1; display:block; height:auto; min-height:0; text-align:left; padding:6px 9px; font-size:var(--fs-60); line-height:1.35; border-radius:var(--r-6); cursor:pointer; white-space:normal;';
-            b.innerHTML = '<div style="font-weight:700; line-height:1.3;">' + label + '</div>' + (hint ? '<div style="font-size:var(--fs-55); color:var(--text-muted); line-height:1.35; margin-top:2px;">' + hint + '</div>' : '');
-            b.onclick = () => { const m = document.getElementById('dsTextMenu'); if (m) m.remove(); on(); };
-            wrap.appendChild(b);
-            if (onDelete) {
-                const del = document.createElement('button'); del.className = 'action-btn btn-secondary'; del.textContent = '\u00d7';
-                del.title = 'Remove from library';
-                del.style.cssText = 'width:20px; min-width:20px; height:auto; padding:0; font-size:12px; color:var(--text-muted);';
-                del.onclick = (e2) => { e2.stopPropagation(); onDelete(); };
-                wrap.appendChild(del);
-            }
-            menu.appendChild(wrap);
-        };
+    _dsPopup('dsTextMenu', 'dsDockNotes', (menu) => {
+        menu.style.width = '260px';
+        menu.style.maxHeight = 'calc(100vh - 24px)'; menu.style.overflowY = 'auto';
         const esc = (s) => ('' + s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
-        lbl('ADD TEXT');
-        mk('Text box', 'A plain text box \u2014 style it with your text styles', () => _dsAddTextSmart());
-        mk('Paragraph (lorem ipsum)', 'Placeholder copy \u2014 size the box, try alignment and leading', () => _dsAddParagraph());
-        lbl('NOTE PRESETS');
+        const IC_TEXT = '<path d="M5 7V5h14v2"/><line x1="12" y1="5" x2="12" y2="19"/><line x1="9" y1="19" x2="15" y2="19"/>';
+        const IC_PARA = '<line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="4" y1="14" x2="20" y2="14"/><line x1="4" y1="18" x2="13" y2="18"/>';
+        const IC_NOTE = '<path d="M4 4h16v10l-6 6H4z"/><path d="M14 20v-6h6"/>';
+        const IC_STAMP = '<rect x="3" y="7" width="18" height="10" rx="1"/><line x1="7" y1="12" x2="17" y2="12"/>';
+        const IC_LIB = '<path d="M4 4h5v16H4z"/><path d="M10 4h5v16h-5z"/><path d="M16 5l4 1-3 14-4-1"/>';
+        _dsFlyHead(menu, 'ADD TEXT');
+        _dsFlyItem(menu, { icon: IC_TEXT, label: 'Text box', hint: 'Styled with your paragraph style', kbd: 'T', run: () => _dsAddTextSmart() });
+        _dsFlyItem(menu, { icon: IC_PARA, label: 'Paragraph (lorem ipsum)', hint: 'Placeholder copy to size a box', run: () => _dsAddParagraph() });
+        _dsFlyHead(menu, 'NOTE PRESETS');
         _DS_NOTE_PRESETS.forEach(([name, text]) => {
-            mk(esc(name), esc(text.split('\n')[1] || '').slice(0, 52) + '\u2026', () => _dsAddPresetNote(text));
+            _dsFlyItem(menu, { icon: IC_NOTE, label: esc(name), hint: esc(text.split('\n')[1] || ''), title: text.split('\n')[1] || '', run: () => _dsAddPresetNote(text) });
+        });
+        _dsFlyHead(menu, 'STAMPS');
+        _DS_STAMPS.forEach(word => {
+            _dsFlyItem(menu, { icon: IC_STAMP, label: '<span style="color:' + _DS_STAMP_INK + '; font-weight:700; letter-spacing:0.4px;">' + word + '</span>', run: () => _dsAddStatusStamp(word) });
         });
         const user = _dsUserTextPresets();
         if (user.length) {
-            lbl('YOUR LIBRARY');
+            _dsFlyHead(menu, 'YOUR LIBRARY');
             user.forEach((p, pi) => {
-                mk(esc(p.name), esc((p.text || '').split('\n')[0]).slice(0, 52), () => _dsAddLibraryText(p), () => {
+                _dsFlyItem(menu, { icon: IC_LIB, label: esc(p.name), hint: esc((p.text || '').split('\n')[0]), run: () => _dsAddLibraryText(p), onDelete: () => {
                     user.splice(pi, 1);
                     if (typeof scheduleAutosave === 'function') scheduleAutosave();
                     const m = document.getElementById('dsTextMenu'); if (m) m.remove(); _dsOpenTextMenu();
-                });
+                } });
             });
         }
-        const save = document.createElement('button'); save.className = 'action-btn btn-secondary';
-        save.textContent = '+ Save selected text box to library';
-        save.style.cssText = 'width:100%; height:auto; min-height:0; padding:6px; font-size:var(--fs-60); margin-top:6px; border-style:dashed;';
-        save.onclick = () => { const m = document.getElementById('dsTextMenu'); if (m) m.remove(); _dsSaveSelectedTextPreset(); };
-        menu.appendChild(save);
+        _dsFlySep(menu);
+        _dsFlyItem(menu, { icon: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>', label: 'Save selected text box to library', run: () => _dsSaveSelectedTextPreset() });
     });
+}
+function _dsOpenDockPosMenu(ev) {
+    if (ev && ev.stopPropagation) ev.stopPropagation();
+    _dsPopup('dsDockPosMenu', 'dsDockPos', (menu) => {
+        menu.style.width = '200px';
+        _dsFlyHead(menu, 'TOOLBAR POSITION');
+        const cur = _dsDockSide();
+        [['left', 'Left of the page', '<rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/>'],
+         ['right', 'Right of the page', '<rect x="3" y="4" width="18" height="16" rx="2"/><line x1="15" y1="4" x2="15" y2="20"/>'],
+         ['top', 'Top, in the toolbar', '<rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/>']].forEach(([side, label, icon]) => {
+            _dsFlyItem(menu, { icon: icon, label: label, kbd: cur === side ? '✓' : '', on: cur === side, run: () => _dsSetDockSide(side) });
+        });
+    });
+}
+// Single-key tools, Miro style. Only on the Pages tab, never while typing or with
+// a dialog open, and never with a modifier held, so Ctrl+C / Ctrl+V and the rest
+// keep their meaning.
+const DS_TOOL_KEYS = {
+    v: () => _dsDockSelect(),
+    t: () => _dsAddTextSmart(),
+    l: () => _dsPickLineTool('line'),
+    a: () => _dsPickLineTool('arrow'),
+    r: () => _dsPickShapeTool('rect'),
+    o: () => _dsPickShapeTool('ellipse'),
+    i: () => _dsAddImageSmart()
+};
+function _dsDockKey(e) {
+    if (e.ctrlKey || e.metaKey || e.altKey) return false;
+    if (_dsActiveTab !== 'pages') return false;
+    const el = document.activeElement;
+    if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.isContentEditable)) return false;
+    try { if (typeof _modalTop === 'function' && _modalTop()) return false; } catch (x) {}
+    const fn = DS_TOOL_KEYS[(e.key || '').toLowerCase()];
+    if (!fn || e.key.length !== 1) return false;
+    fn();
+    return true;
 }
 function _dsAddLibraryText(p) {
     if (_dsCurrentEditablePage()) {
@@ -23628,7 +23763,7 @@ function _paragraphStyle() { const s = editorialContent.paragraphStyle || {}; re
 // given button, toggles off if already open, closes on outside click.
 // Every popup _dsPopup owns. They anchor to neighbouring toolbar buttons, so two
 // open at once overlap; opening one closes the rest.
-const _DS_POPUP_IDS = ['dsArrowShapeMenu', 'dsPlaceholderMenu', 'dsTextMenu'];
+const _DS_POPUP_IDS = ['dsArrowShapeMenu', 'dsPlaceholderMenu', 'dsTextMenu', 'dsDockPosMenu'];
 function _dsPopup(id, anchorId, build) {
     const existing = document.getElementById(id);
     if (existing) { existing.remove(); return; }
@@ -23647,10 +23782,26 @@ function _dsPopup(id, anchorId, build) {
     // future containing-block property can clip it.
     document.body.appendChild(menu);
     const a = document.getElementById(anchorId);
-    const r = a ? a.getBoundingClientRect() : { left: 20, bottom: 80 };
-    menu.style.top = (r.bottom + 6) + 'px';
-    let left = r.left; if (left + 248 > window.innerWidth - 8) left = window.innerWidth - 256;
+    const r = a ? a.getBoundingClientRect() : { left: 20, right: 20, top: 80, bottom: 80 };
+    // A menu opened from the dock while it stands beside the page flies out
+    // SIDEWAYS, away from the page edge it sits on, the way Miro's does; from a
+    // toolbar row it drops below as before. Measured, then kept on screen.
+    const side = (a && a.closest && a.closest('.ds-dock.vert')) ? _dsDockSide() : null;
+    const mw = menu.offsetWidth || 248, mh = menu.offsetHeight || 0;
+    let left, top;
+    if (side === 'left') { left = r.right + 10; top = r.top - 6; }
+    else if (side === 'right') { left = r.left - mw - 10; top = r.top - 6; }
+    else { left = r.left; top = r.bottom + 6; }
+    if (left + mw > window.innerWidth - 8) left = window.innerWidth - mw - 8;
+    if (mh && top + mh > window.innerHeight - 8) top = window.innerHeight - mh - 8;
+    menu.style.top = Math.max(8, top) + 'px';
     menu.style.left = Math.max(8, left) + 'px';
+    if (a && a.classList && a.classList.contains('ds-dock-btn')) {
+        _dsDockOpenMark(anchorId);
+        // Cleared when the menu leaves the page, however it leaves.
+        const mo = new MutationObserver(() => { if (!menu.isConnected) { a.classList.remove('open'); mo.disconnect(); } });
+        mo.observe(document.body, { childList: true });
+    }
     setTimeout(() => {
         const off = (e) => { if (!menu.contains(e.target) && !(a && a.contains(e.target))) { menu.remove(); document.removeEventListener('mousedown', off); } };
         document.addEventListener('mousedown', off);
@@ -24657,6 +24808,7 @@ function _dsAnnotKeydown(e) {
     // deselect" is exactly what Escape means whether or not you're mid-edit.
     if (e.key === 'Escape') { e.preventDefault(); _dsDeselectAll(); _dsSyncToolbar(); try { _dsRenderCenter(); } catch (e2) { try { renderMoodboardCanvas(); } catch (e3) {} } return; }
     if (typing) return;   // never hijack real typing
+    if (_dsDockKey(e)) { e.preventDefault(); return; }
     const meta = e.ctrlKey || e.metaKey;
     if (meta && (e.key === 'c' || e.key === 'C')) { if (_dsCopySelection()) e.preventDefault(); return; }
     if (meta && (e.key === 'v' || e.key === 'V')) { if (_dsPasteClipboard()) e.preventDefault(); return; }
@@ -26819,6 +26971,7 @@ let _dsTlRenderTok = 0;
 // function a no-op under jsdom, where clientWidth is always 0 — which would
 // blind every test that asserts on what it renders.
 function _dsRenderCenter() {
+    try { _dsDockSync(); } catch (e) {}
     const c = document.getElementById('dsCenter'); if (!c) return;
     c.innerHTML = '';
     if (_dsInTemplateLibraryMode && !_dsTemplateEditSession) {
@@ -40479,7 +40632,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Spec pages', body: `Under <strong>SHOW ON PAGE</strong>, tick what the page carries: <strong>Frame corner</strong>, <strong>Moulding profile</strong>, <strong>Floorplan</strong> and <strong>Elevation</strong>. A ticked part you do not have yet keeps its space, so the page does not move while you fill it in. An unticked part is removed. It applies deck-wide by default, or to one page. Pieces print one per page, or grouped A/B/C with shared specs.` },
             { title: 'Breaker and install pages', body: `These carry a wall's dimensioned drawing with a letter legend, installation notes and, optionally, the plan. Notes are standard items you tick plus your own. <strong>Edit &hellip; in Elevations</strong> jumps to the wall, and a bar there brings you back to the same page.` },
             { title: 'Headings', body: `Click a page's heading or subheading to change its type. The change applies to the whole deck unless you choose this page only.` },
-            { title: 'Text, arrows, shapes and images', body: `The toolbar adds text, arrows and image placeholders. Select one for its settings (the pen on an image, the + on text). <strong>Layers</strong> hides, locks and reorders everything on the page. Drag an image straight onto a placeholder to fill it.` },
+            { title: 'Text, arrows, shapes and images', body: `The tool dock beside the page adds text, notes and stamps, lines and arrows, image placeholders and images. A button with a small corner triangle opens a menu of choices. The last button moves the dock to the left, the right or the top. Select one for its settings (the pen on an image, the + on text). <strong>Layers</strong> hides, locks and reorders everything on the page. Drag an image straight onto a placeholder to fill it.` },
             { title: 'Page appearance', body: `A page's theme, background (colour, gradient or image) and footer are under its appearance settings. Large background images are stored at a sensible size automatically.` },
             { title: 'Preview and Preflight', body: `<strong>Preview</strong> renders an exact preview of how the page exports. <strong>Preflight</strong> scans the whole deck for missing artwork, pins, plan images and empty pages. Run it before generating.` },
             { title: 'Approved', body: `The APPROVED button stamps every page for client sign-off.` }
@@ -40521,6 +40674,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Measure line', body: `<span class="help-kbd">M</span> toggles the measure-line tool. With a line selected, arrow keys move it and <span class="help-kbd">Esc</span> clears it.` },
             { title: 'Undo and save', body: `<span class="help-kbd">Ctrl+Z</span> undoes, <span class="help-kbd">Ctrl+Shift+Z</span> or <span class="help-kbd">Ctrl+Y</span> redoes. <span class="help-kbd">Ctrl+S</span> saves and <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else.` },
             { title: 'Dialogs', body: `<span class="help-kbd">Esc</span> closes the dialog on top, and on a question it means Cancel. <span class="help-kbd">Tab</span> stays inside an open dialog. The full-screen tools (the floorplan markup and the layout editor) keep <span class="help-kbd">Esc</span> for their own tools instead.` },
+            { title: 'Deck Studio tools', body: `On the Pages tab, with nothing being typed: <span class="help-kbd">V</span> select, <span class="help-kbd">T</span> text box, <span class="help-kbd">L</span> line, <span class="help-kbd">A</span> arrow, <span class="help-kbd">R</span> rectangle, <span class="help-kbd">O</span> oval, <span class="help-kbd">I</span> upload an image. <span class="help-kbd">Esc</span> puts a line tool down.` },
             { title: 'Jump to', body: `<span class="help-kbd">Ctrl+K</span> (<span class="help-kbd">Cmd+K</span> on a Mac) opens Jump to from anywhere. Type a code, a wall name, a page number or a page title, then <strong>Enter</strong>. A piece offers Piece, Wall and Page, and Enter picks the one for the view you are in.` },
             { title: 'Getting around', body: `<span class="help-kbd">Tab</span> reaches every button, the view tabs and the wall rail; <span class="help-kbd">Enter</span> or <span class="help-kbd">Space</span> presses them.` }
         ]
@@ -40547,7 +40701,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.19</strong> The PDF flip-book now shows only your artwork, not the page previews.<br><br>
+                body: `<strong>18.20</strong> Deck Studio's tools for text, notes, lines, shapes and images now sit in one toolbar beside the page, with a picture and a shortcut for each. Put it on the left, the right or back on top with the last button on it. New: <strong>Divider</strong> (a level line across the page), <strong>Stamps</strong> (DRAFT, FOR APPROVAL and more) and single-key tools: V select, T text, L line, A arrow, R rectangle, O oval, I image.<br><br>
+<strong>18.19</strong> The PDF flip-book now shows only your artwork, not the page previews.<br><br>
 <strong>18.18</strong> While a PDF builds, your deck's pages flip by full screen behind the progress box, one every half second. It uses the page previews already built in the rail (or your artwork if there are none yet), so it does not slow the build down.<br><br>
 <strong>18.17</strong> FRAME opens straight into the logo intro, without the Frame Dashboard flashing up first.<br><br>
 <strong>18.16</strong> The Level list on the dashboard is wide enough to read the plan name.<br><br>
