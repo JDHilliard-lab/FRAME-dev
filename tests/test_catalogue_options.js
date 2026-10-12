@@ -1069,21 +1069,20 @@ const path = require('path');
     __check('the breaker plan draws the WALL LINE, through the shared pieces', () => {
       // A pin says which room; the line says which wall and how much of it.
       const b = fnBody('_drawInstallGuidePage');
-      if (b.indexOf('_wallAllSegs(rr)') < 0) throw new Error('the plan draws no wall line');
-      if (b.indexOf('FP_WALL_LINE_ALPHA') < 0) throw new Error('it does not use the one shared alpha');
-      // Anchored on the DRAWING block, not on the first _wallAllSegs in the file - the
-      // zoom crop uses it too and sits earlier, so a naive first-match reads the wrong
-      // span and reports a reset that is plainly there.
-      // 17.88: the red pin dots are GONE on purpose ("we do not want to include the
-      // circle number on the plan detail on spec page or the breaker pages"); a dashed
-      // box around the line marks the spot instead (test_plan_detail_box).
-      const linesAt = b.indexOf('_fpDocLineAlpha(doc, FP_WALL_LINE_ALPHA)');
+      // 18.24: the line is drawn by _drawPlanLinePdf, SHARED with the spec pages so the
+      // two print one weight and one ink. The checks follow it there; what they assert
+      // (segments, the one alpha, reset before the box) is unchanged.
+      const L = fnBody('_drawPlanLinePdf');
+      if (L.indexOf('_wallAllSegs(rr)') < 0) throw new Error('the plan draws no wall line');
+      if (L.indexOf('FP_WALL_LINE_ALPHA') < 0) throw new Error('it does not use the one shared alpha');
+      if (L.indexOf('_fpDocLineAlpha(doc, FP_WALL_LINE_ALPHA)') < 0) throw new Error('the line is never drawn translucent');
+      if (L.indexOf('_fpDocLineAlpha(doc, 1)') < 0) throw new Error('the line alpha is never reset');
+      // 17.88: no pin dots; a dashed box around the line marks the spot (test_plan_detail_box).
+      const linesAt = b.indexOf('_drawPlanLinePdf(doc, pins, mapPin');
       const boxAt = b.indexOf('_drawPlanBoxPdf(doc, pins, mapPin');
-      if (linesAt < 0) throw new Error('the line is never drawn translucent');
+      if (linesAt < 0) throw new Error('the breaker plan does not draw its line');
       if (boxAt < 0) throw new Error('the marking box is gone');
       if (!(linesAt < boxAt)) throw new Error('the box draws before the line');
-      // Opacity must be put back between them, or the box inherits it.
-      if (b.slice(linesAt, boxAt).indexOf('_fpDocLineAlpha(doc, 1)') < 0) throw new Error('the line alpha is never reset');
     });
 
     __check('the zoomed crop frames the line ends, not only the pin', () => {

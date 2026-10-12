@@ -47,7 +47,7 @@ window.eval(APP + NL + [
   '  set key(v) { _curPageKey = v; }, rects: _specPlanRects,',
   '  set pages(v) { _dsPages = v; },',
   '  crop: _planCropCanvasForRow, asGroup: _catRowAsPlanGroup, detail: _drawPlanDetailPage,',
-  '  area: _planDetailArea, link: _linkSpecPlanRects, specIdx: _dsSpecPageIndexFor, entries: _fpKeyEntries,',
+  '  area: _planDetailArea, marks: _drawPlanCropMarks, LPT: PLAN_DETAIL_LINE_PT, LRGB: PLAN_DETAIL_LINE_RGB, link: _linkSpecPlanRects, specIdx: _dsSpecPageIndexFor, entries: _fpKeyEntries,',
   '};',
 ].join(NL));
 console.error = quiet;
@@ -126,6 +126,34 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     const es = fx.entries(0, { 'ART.1.2A': 9, 'ART.1.1A': 7, 'ART.10A': 3 });
     const e = es.find(x => x.key === 'ART.1');
     if (!e || e.linkPage !== 7) throw new Error('linkPage ' + (e && e.linkPage));
+  });
+
+  await check('18.24 EXACT ASK: a spec page plan line prints at the BREAKER weight and ink, whatever size the thumbnail is', async () => {
+    window.__optIds = {};
+    ops = [];
+    const pc = await fx.crop(row('ART.1A'), { zoom: 3, aspect: 1, vector: true });
+    if (ops.some(o => o.op === 'lineTo')) throw new Error('vector crop still bakes a raster line');
+    [60, 170, 300].forEach(size => {
+      const calls = [];
+      let lw = null, ink = null;
+      const doc = new Proxy({}, { get(t, k) {
+        if (k === 'setLineWidth') return (v) => { fin(v, 'lw'); lw = v; };
+        if (k === 'setDrawColor') return (r, g, b) => { [r, g, b].forEach(v => fin(v, 'ink')); ink = [r, g, b]; };
+        if (k === 'line') return (...a) => { a.forEach(v => fin(v, 'line')); calls.push({ lw: lw, ink: ink.join(',') }); };
+        return () => {};
+      } });
+      fx.marks(doc, pc, 10, 10, size, size);
+      if (!calls.length) throw new Error('no line at ' + size);
+      if (calls.some(c => c.lw !== fx.LPT || c.ink !== fx.LRGB.join(','))) throw new Error('at ' + size + 'pt drew ' + JSON.stringify(calls[0]));
+    });
+  });
+  await check('every spec layout and both breaker paths draw through the one line drawer', async () => {
+    const n = APP.split('_planCropCanvasForRow(').length - 2;   // minus the declaration
+    const v = APP.split('vector: true });').length - 1;
+    if (n !== v) throw new Error(n + ' crop callers, ' + v + ' vector');
+    if (APP.split('_drawPlanCropMarks(doc, pc,').length - 2 !== n) throw new Error('a crop caller draws no marks');
+    if (APP.indexOf('setLineWidth(2.2)') >= 0) throw new Error('a local 2.2 survives');
+    if (APP.split('_drawPlanLinePdf(doc, pins,').length - 1 !== 2) throw new Error('breaker paths not shared');
   });
 
   let bad = 0;
