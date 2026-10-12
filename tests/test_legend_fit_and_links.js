@@ -123,8 +123,11 @@ const root = path.join(__dirname, '..');
         if (SRC.indexOf('cy += _igLegBlockRows(doc, rr, _legLines, tw)') < 0) throw new Error('drawer does not use the shared measure');
       });
 
-      await check('EXACT ASK: every elevation thumbnail on a spec page records a link to the floorplan', async () => {
-        const n = SRC.split('links to the floorplan (17.96)').length - 1 + SRC.split('the same as the plan (17.96)').length - 1;
+      // CHANGED ON PURPOSE (18.27): "currently we have the elevation thumbnails opening to
+      // the floorplan, can we have it open to the elevation". Still five linked sites; each
+      // now names the wall it drew so Deck Studio opens THAT wall (test_plan_backlinks).
+      await check('EXACT ASK: every elevation thumbnail on a spec page records a link (to its wall since 18.27)', async () => {
+        const n = SRC.split('// opens its wall (18.27)').length - 1;
         if (n < 5) throw new Error('only ' + n + ' of 5 elevation thumbnail sites link');
       });
 

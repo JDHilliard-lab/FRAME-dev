@@ -47,6 +47,7 @@ window.eval(APP + NL + [
   '  set key(v) { _curPageKey = v; }, rects: _specPlanRects, begin: _specPlanRectsBegin, commit: _specPlanRectsCommit, add: _specPlanRectAdd,',
   '  set pages(v) { _dsPages = v; },',
   '  crop: _planCropCanvasForRow, asGroup: _catRowAsPlanGroup, detail: _drawPlanDetailPage,',
+  '  get ret() { return _viewReturn; }, set els(v) { elevations = v; }, set sv(f) { switchView = f; }, ret0() { _viewReturn = null; },',
   '  backlinks: _dsPlanBacklinks, pageKey: _deckPageKey, set jump(f) { _dsJumpToFloorplan = f; },',
   '  area: _planDetailArea, marks: _drawPlanCropMarks, LPT: PLAN_DETAIL_LINE_PT, LRGB: PLAN_DETAIL_LINE_RGB, link: _linkSpecPlanRects, specIdx: _dsSpecPageIndexFor, entries: _fpKeyEntries,',
   '};',
@@ -215,6 +216,36 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     if (APP.indexOf('_specPlanRects[_curPageKey]') >= 0) throw new Error('something still files rects by the global key');
     const pi = APP.indexOf("} else if (desc.kind === 'planDetail') {", APP.indexOf('async function renderDeckPageCanvas('));
     if (APP.slice(pi, pi + 300).indexOf('_specPlanRectsCommit(rec)') < 0) throw new Error('plan detail preview does not commit');
+  });
+
+  await check('18.27 EXACT ASK: the elevation thumbnail opens ITS WALL, with a way back to this spec page', async () => {
+    fx.els = [{ id: 'eA', name: 'Lobby', frames: [] }, { id: 'eB', name: 'Corridor', frames: [] }];
+    const desc = { kind: 'spec', title: 'ART.1.5', row: { id: 'ART.1.5A' }, members: [{ id: 'ART.1.5A' }] };
+    const key = fx.pageKey(desc);
+    fx.rects[key] = [{ x: 30, y: 400, w: 100, h: 100, level: 0 }, { x: 140, y: 400, w: 150, h: 100, level: 0, kind: 'elev', elevId: 'eB' }];
+    const page = window.document.createElement('div'); page.innerHTML = '<img>';
+    let went = null, fp = null;
+    fx.sv = (v, i) => { went = v + ':' + i; };
+    fx.jump = (lv) => { fp = lv; return true; };
+    fx.ret0();
+    fx.backlinks(page, desc);
+    const bs = page.querySelectorAll('.ds-plan-backlink');
+    if (bs.length !== 2) throw new Error(bs.length + ' buttons');
+    const ev = Array.from(bs).find(b => b.textContent.indexOf('elevation') >= 0);
+    if (!ev) throw new Error('no Open elevation label');
+    ev.dispatchEvent(new window.MouseEvent('click', { bubbles: true }));
+    if (went !== 'elevation:1') throw new Error('went to ' + went + (fp != null ? ' / floorplan ' + fp : ''));
+    const r = fx.ret;
+    if (!r || r.view !== 'deck' || r.at !== 'elevation' || r.key !== key || r.title !== 'ART.1.5') throw new Error('no return trip: ' + JSON.stringify(r));
+    // The plan button beside it still opens the floorplan.
+    went = null; fp = null;
+    Array.from(bs).find(b => b !== ev).dispatchEvent(new window.MouseEvent('click', { bubbles: true }));
+    if (fp !== 0 || went) throw new Error('plan button went to ' + went + ' / ' + fp);
+  });
+  await check('...every elevation thumbnail site names the wall it drew', async () => {
+    const n = APP.split('// opens its wall (18.27)').length - 1;
+    if (n !== 5) throw new Error(n + ' sites, expected 5 (two group layouts, flat, classic, template)');
+    if (APP.indexOf('links to the floorplan (17.96)') >= 0) throw new Error('an elevation thumbnail still records itself as a plan');
   });
 
   let bad = 0;

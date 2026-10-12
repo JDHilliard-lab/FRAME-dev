@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.26';
+const APP_VERSION = '18.27';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -14916,9 +14916,13 @@ function _linkSpecPlanRects(doc, key, levelPages, firstKey) {
 // page is done, so a half-drawn or interleaved render can never mix two pages' rects.
 function _specPlanRectsBegin(doc, key) { if (doc) { doc._planKey = key || null; doc._planRects = []; } }
 function _specPlanRectsCommit(doc) { if (doc && doc._planKey && Array.isArray(doc._planRects)) _specPlanRects[doc._planKey] = doc._planRects; }
-function _specPlanRectAdd(doc, x, y, w, h, level) {
+// `elev` marks an ELEVATION thumbnail (18.27): in Deck Studio it opens that wall, with a
+// way back, instead of the floorplan. The PDF still links it to the floorplan, as before.
+function _specPlanRectAdd(doc, x, y, w, h, level, elev) {
     if (!doc || !Array.isArray(doc._planRects) || !(w > 0) || !(h > 0)) return;
-    doc._planRects.push({ x: x, y: y, w: w, h: h, level: _deckLvlOf(level) });
+    const q = { x: x, y: y, w: w, h: h, level: _deckLvlOf(level) };
+    if (elev) { q.kind = 'elev'; q.elevId = _elevId(elev); }
+    doc._planRects.push(q);
 }
 // Set to {} for the duration of a PDF build; records which page numbers had a
 // footer drawn so the build can sweep up any page a drawer forgot. null outside
@@ -27390,18 +27394,23 @@ function _dsSpecArtTarget(desc, page, clientX, clientY) {
 // renderer itself, so it sits exactly on the drawn plan), outlined on hover with a label.
 // Inserted straight after the page image, so notes and title handles above it keep their
 // clicks; called again when an async render lands, since that is when the rects are new.
-function _dsPlanBacklinkEl(x, y, w, h, level) {
+function _dsPlanBacklinkEl(x, y, w, h, level, desc, elevId) {
+    const toWall = !!(elevId && desc);
     const lk = document.createElement('div');
     lk.className = 'ds-plan-backlink _dsChrome';
-    lk.title = 'Open the floorplan';
+    lk.title = toWall ? 'Open this wall in Elevations' : 'Open the floorplan';
     lk.setAttribute('role', 'button'); lk.setAttribute('tabindex', '0'); lk.setAttribute('data-kbd-click', '');
     lk.style.cssText = 'position:absolute; left:' + (x / 936 * 100) + '%; top:' + (y / 540 * 100) + '%; width:' + (w / 936 * 100) + '%; height:' + (h / 540 * 100) + '%;';
     const tag = document.createElement('span');
     tag.className = 'ds-plan-backlink-tag';
-    tag.textContent = 'Open floorplan';
+    tag.textContent = toWall ? 'Open elevation' : 'Open floorplan';
     lk.appendChild(tag);
     lk.onmousedown = (ev) => { ev.stopPropagation(); };
-    lk.onclick = (ev) => { ev.preventDefault(); ev.stopPropagation(); _dsJumpToFloorplan(level); };
+    lk.onclick = (ev) => {
+        ev.preventDefault(); ev.stopPropagation();
+        if (toWall && _dsJumpToWall(desc, elevId)) return;
+        _dsJumpToFloorplan(level);
+    };
     return lk;
 }
 function _dsPlanBacklinks(page, desc) {
@@ -27410,7 +27419,7 @@ function _dsPlanBacklinks(page, desc) {
     const rects = _specPlanRects[_deckPageKey(desc)] || [];
     const after = page.firstElementChild;
     rects.forEach(q => {
-        const lk = _dsPlanBacklinkEl(q.x, q.y, q.w, q.h, q.level);
+        const lk = _dsPlanBacklinkEl(q.x, q.y, q.w, q.h, q.level, desc, q.kind === 'elev' ? q.elevId : null);
         page.insertBefore(lk, after ? after.nextSibling : null);
     });
 }
@@ -33240,8 +33249,8 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                         doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', tx, ty, tw, th);
                         _drawGroupElevOutline(doc, er, tx, ty, tw, th);
                         _specThumbCaption(doc, 'Elevation', tx, Math.min(ty + th + 8, BB));
-                        // The elevation thumbnail links to the floorplan too, the same as the plan (17.96).
-                        _specPlanRectAdd(doc, tx, ty, tw, th, members[0] && members[0].level);
+                        // The elevation thumbnail is a link too; in Deck Studio it opens this wall (18.27).
+                        _specPlanRectAdd(doc, tx, ty, tw, th, members[0] && members[0].level, groupElev);   // opens its wall (18.27)
                         legendRight = tx - 14;
                         _thumbBox = { tx: tx, ty: ty, tw: tw, th: th };
                     }
@@ -33405,7 +33414,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                             _drawGroupElevOutline(doc, er, x, top, tw, th);
                         } catch (e) {}
                         _specThumbCaption(doc, 'Elevation', x, Math.min(top + th + 8, BB));
-                        _specPlanRectAdd(doc, x, top, tw, th, members[0] && members[0].level);   // links to the floorplan (17.96)
+                        _specPlanRectAdd(doc, x, top, tw, th, members[0] && members[0].level, groupElev);   // opens its wall (18.27)
                     } else {
                         _specSwatchBox(doc, x, top, tw, th, 'Elevation', Math.min(top + th + 8, BB));
                     }
@@ -33889,6 +33898,18 @@ function _rowElevIndex(rowId) {
     return -1;
 }
 
+// A spec page's elevation thumbnail -> that wall (18.27). Same return trip as the
+// breaker's Edit button, so the Elevations tab shows "Back to <page>" and lands back on
+// THIS page by its key. Keyed on elev.id, never an index: the walls can be reordered
+// between the render that recorded the rect and the click.
+function _dsJumpToWall(desc, elevId) {
+    const idx = _elevIndexById(elevId);
+    if (!desc || idx < 0) return false;
+    _viewReturn = { view: 'deck', at: 'elevation', key: _deckPageKey(desc), title: (desc.title || 'the deck') };
+    switchView('elevation', idx);
+    try { _syncReturnBars(); } catch (e) {}
+    return true;
+}
 function _dsJumpToElevation(desc) {
     const idx = _dsPageElevIdx(desc);
     if (idx < 0) return false;
@@ -35768,7 +35789,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
             // no baseboard — which is exactly what this page shipped as first.
             if (drew) _drawElevAnnOps(doc, res.cap.vec, dx, dy, dw, dh);
             if (drew) _specThumbCaption(doc, 'Elevation', SR.R, Math.min(dy + dh + 9, SR.B), { align: 'right' });
-            if (drew) _specPlanRectAdd(doc, dx, dy, dw, dh, r && r.level);   // links to the floorplan (17.96)
+            if (drew) _specPlanRectAdd(doc, dx, dy, dw, dh, r && r.level, elev);   // opens its wall (18.27)
             // Say it on the page rather than letting an unreadable drawing speak for
             // itself. A sheet that quietly prints 6pt dimensions looks like a bug; one
             // that states the wall is past what a single view holds is a drawing note.
@@ -36792,7 +36813,7 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
                 doc.setFontSize(7.5);
                 doc.setTextColor(120, 120, 120);
                 doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
-                _specPlanRectAdd(doc, ex0, ey0, ew, eh, r && r.level);   // links to the floorplan (17.96)
+                _specPlanRectAdd(doc, ex0, ey0, ew, eh, r && r.level, elevForPiece);   // opens its wall (18.27)
             }
         }
 
@@ -37234,7 +37255,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                 // so it was the odd one out in a row of three labels — and it
                 // ignored the brand font entirely.
                 _specThumbCaption(doc, (elev.name || 'Elevation') + '', capX, _capY(boxY + eh));
-                if (!SWATCH) _specPlanRectAdd(doc, boxX, boxY, ew, eh, r && r.level);   // links to the floorplan (17.96)
+                if (!SWATCH) _specPlanRectAdd(doc, boxX, boxY, ew, eh, r && r.level, elev);   // opens its wall (18.27)
             } else { _elevMiss(); }
         }
     }
@@ -40943,7 +40964,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
+                body: `<strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
+<strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
 <strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
 <strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
 <strong>18.23</strong> The floorplan on a catalogue option's spec page now shows the wall line, not just the red box. Click the plan on a plan detail page, in Deck Studio or in the PDF, and it takes you to its floorplan page. On the floorplan page, clicking a catalogue placement in the list on the left opens its breaker page (or its first option page) instead of saying there is no spec page.<br><br>
