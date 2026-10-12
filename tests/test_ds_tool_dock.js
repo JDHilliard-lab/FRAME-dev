@@ -132,10 +132,11 @@ const path = require('path');
       _dsOpenArrowShapeMenu();
       const m = document.getElementById('dsArrowShapeMenu');
       const t = m.textContent;
-      ['Line', 'Arrow', 'Elbow arrow', 'Curved arrow', 'Multi-point path', 'Divider'].forEach(w => { if (t.indexOf(w) < 0) throw new Error('missing ' + w); });
+      ['Line', 'Arrow', 'Elbow arrow', 'Multi-point path', 'Divider'].forEach(w => { if (t.indexOf(w) < 0) throw new Error('missing ' + w); });
       const kbds = Array.from(m.querySelectorAll('.ds-fly-kbd')).map(k => k.textContent);
+      // 18.21 took Curved arrow off this menu on purpose (test_line_tool covers it).
       if (kbds.indexOf('L') < 0 || kbds.indexOf('A') < 0) throw new Error('shortcuts not shown: ' + kbds.join(','));
-      if (m.querySelectorAll('.ds-fly-item svg').length < 7) throw new Error('a row has no icon');
+      if (m.querySelectorAll('.ds-fly-item svg').length < 6) throw new Error('a row has no icon');
       m.remove();
     });
 

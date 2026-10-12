@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.20';
+const APP_VERSION = '18.21';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -21479,6 +21479,80 @@ function _dsAnnSnap(nx, ny, bwF, bhF, w, hh, ev) {
         return { x: nx + sn.dx, y: ny + sn.dy };
     } catch (e) { return { x: nx, y: ny }; }
 }
+// ── LINE CONSTRAINTS (18.21) ──────────────────────────────────────────────
+// ONE rule for where a straight line's free end may go, shared by the draw tool
+// (preview AND commit, or the line you were shown is not the line you get) and
+// the end-handle drag. Shift locks to 0 / 45 / 90 degrees; without it, an end
+// within ~6 degrees of level or plumb settles onto it so a line meant to be
+// straight never comes out a hair crooked; Alt turns that settling off.
+// Decided in PIXELS, never in the 0..1 page fractions the points are stored in:
+// a page is 936 x 540, so 45 degrees in fractions is a much shallower line on paper.
+// The free end is PROJECTED onto the locked direction rather than snapped to the
+// cursor's distance, so the end tracks the pointer along the axis.
+const DS_LINE_LEVEL_DEG = 6;
+// While a line tool is armed its drawing layer sits over EVERYTHING on the page.
+// It was z 500, under every annotation (100 + z, z defaulting to 5000), so a line
+// started on another line's end - which is how connected rules get drawn - grabbed
+// that line's handle and dragged it instead of drawing. Armed means the next press
+// draws; V or Esc puts the tool down to get at the objects again.
+const DS_DRAW_LAYER_Z = 2000000;
+function _dsLineConstrain(fx, fy, nx, ny, w, hh, ev) {
+    const dx = (nx - fx) * w, dy = (ny - fy) * hh;
+    if (!dx && !dy) return { x: nx, y: ny };
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    if (ev && ev.shiftKey) {
+        const step = Math.PI / 4;
+        const ang = Math.round(Math.atan2(dy, dx) / step) * step;
+        const c = Math.cos(ang), sn = Math.sin(ang);
+        const L = dx * c + dy * sn;
+        // Exact zeros on the locked axis, never a 1e-17 residue from cos(90deg).
+        const px = Math.abs(c) < 1e-9 ? 0 : L * c, py = Math.abs(sn) < 1e-9 ? 0 : L * sn;
+        return { x: clamp(fx + px / w), y: clamp(fy + py / hh) };
+    }
+    if (ev && ev.altKey) return { x: nx, y: ny };
+    const deg = Math.abs(Math.atan2(dy, dx)) * 180 / Math.PI;
+    if (deg < DS_LINE_LEVEL_DEG || deg > 180 - DS_LINE_LEVEL_DEG) return { x: nx, y: fy };
+    if (Math.abs(deg - 90) < DS_LINE_LEVEL_DEG) return { x: fx, y: ny };
+    return { x: nx, y: ny };
+}
+// The angle readout beside the cursor while a line is drawn or an end dragged.
+// Paper convention: 0 is level, counter-clockwise positive, so a line rising to
+// the right reads 45 and not -45. Fixed on <body> so the page's clip cannot cut it.
+function _dsLineAngle(fx, fy, nx, ny, w, hh) {
+    const d = Math.atan2(-(ny - fy) * hh, (nx - fx) * w) * 180 / Math.PI;
+    let r = Math.round(d); if (r <= -180) r += 360;
+    return r === -0 ? 0 : r;
+}
+function _dsAngleChip(ev, deg) {
+    let c = document.getElementById('dsAngleChip');
+    if (!c) {
+        c = document.createElement('div'); c.id = 'dsAngleChip';
+        c.style.cssText = 'position:fixed; z-index:100030; pointer-events:none; padding:2px 6px; border-radius:var(--r-4); background:var(--selected); color:#fff; font-size:var(--fs-65); font-weight:700; font-variant-numeric:tabular-nums;';
+        document.body.appendChild(c);
+    }
+    c.textContent = deg + '°';
+    c.style.left = ((ev && ev.clientX) || 0) + 14 + 'px'; c.style.top = ((ev && ev.clientY) || 0) + 14 + 'px';
+}
+function _dsAngleChipHide() { const c = document.getElementById('dsAngleChip'); if (c) c.remove(); }
+// UNDO FOR DRAGS. A move or resize that never pushes history is folded into the
+// NEXT undoable edit, so Ctrl+Z reverts the two together - or, with nothing after
+// it, reverts the edit BEFORE it and leaves the move standing. Seven handlers here
+// had that gap. Capture the geometry at mousedown and push on mouseup only if it
+// changed, so a plain click-to-select adds no empty undo step.
+const DS_GEO_KEYS = ['x', 'y', 'w', 'h', 'x1', 'y1', 'x2', 'y2', 'zoom', 'panX', 'panY', 'radius', 'bend'];
+function _dsGeoSig(a) { return a ? DS_GEO_KEYS.map(k => a[k]).join('|') + '|' + JSON.stringify(a.waypoints || null) : ''; }
+function _dsDragDone(before, a) {
+    if (_dsGeoSig(a) !== before && typeof pushHistory === 'function') pushHistory();
+}
+// Where a NEW box lands. Every add used a fixed spot, so pressing T twice put the
+// second box exactly on the first and it looked like nothing happened. Step down
+// and right past anything already sitting there.
+function _dsFreeSpot(list, x, y) {
+    const taken = (px, py) => (list || []).some(o => o && typeof o.x === 'number' && Math.abs(o.x - px) < 0.006 && Math.abs((o.y || 0) - py) < 0.006);
+    let n = 0;
+    while (taken(x, y) && n < 20) { x += 0.025; y += 0.035; n++; if (x > 0.85 || y > 0.85) { x = 0.06 + (n % 5) * 0.02; y = 0.1; } }
+    return { x: x, y: y };
+}
 function _dsRenderAnnots(page, desc, w, hh) {
     _dsLastAnnW = w; _dsLastAnnH = hh;
 
@@ -21508,6 +21582,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 const opx = a.panX || 0, opy = a.panY || 0;
                 const panning = e.shiftKey && ((a.zoom || 1) > 1);
                 let movedAny = false;
+                const _dsGeo0 = _dsGeoSig(a);
                 const mv = (ev) => {
                     movedAny = true;
                     if (panning) {
@@ -21521,7 +21596,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                     }
                 };
                 const up = () => {
-                    document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
+                    document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a);
                     if (typeof scheduleAutosave === 'function') scheduleAutosave();
                     // Always re-render the center on mouseup: a plain click-select
                     // gets its resize + zoom controls (this was the "can't edit it
@@ -21540,8 +21615,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 handle.onmousedown = (e) => {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.14;
+                    const _dsGeo0 = _dsGeoSig(a);
                     const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(0.8, nw)); a.w = nw; const ns = nw * w; box.style.width = ns + 'px'; box.style.height = ns + 'px'; };
-                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
+                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); _dsRenderRail(); };
                     document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                 };
                 box.appendChild(handle);
@@ -21582,8 +21658,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); box.style.outline = '1.5px solid var(--selected)';
                 const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0;
                 const _bwF = (box.offsetWidth || 0) / w, _bhF = (box.offsetHeight || 0) / hh;
+                const _dsGeo0 = _dsGeoSig(a);
                 const mv = (ev) => { const _sp = _dsAnnSnap(ox + (ev.clientX - sx) / w, oy + (ev.clientY - sy) / hh, _bwF, _bhF, w, hh, ev); a.x = Math.max(0, Math.min(0.99, _sp.x)); a.y = Math.max(0, Math.min(0.99, _sp.y)); box.style.left = (a.x * w) + 'px'; box.style.top = (a.y * hh) + 'px'; };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             box.ondblclick = (e) => { e.stopPropagation(); _dsSelKey = key; _dsSelIdx = i; _dsPickMockupPiece(a); };
@@ -21594,8 +21671,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 handle.onmousedown = (e) => {
                     e.preventDefault(); e.stopPropagation();
                     const sx = e.clientX, ow = a.w || 0.3;
+                    const _dsGeo0 = _dsGeoSig(a);
                     const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.05, Math.min(1, nw)); a.w = nw; const nbw = nw * w; box.style.width = nbw + 'px'; box.style.height = (nbw * aspect) + 'px'; };
-                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                     document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                 };
                 box.appendChild(handle);
@@ -21655,8 +21733,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 e.preventDefault(); e.stopPropagation();
                 _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar();
                 const sx = e.clientX, ow = a.w || 0.25;
+                const _dsGeo0 = _dsGeoSig(a);
                 const mv = (ev) => { let nw = ow + (ev.clientX - sx) / w; nw = Math.max(0.04, Math.min(1, nw)); a.w = nw; const nbw = nw * w; box.style.width = nbw + 'px'; box.style.height = (nbw * (a.aspect || 0.75)) + 'px'; };
-                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                 document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
             };
             box.appendChild(handle);
@@ -21825,7 +21904,10 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 const isMazeHit = (a.type === 'elbow' && a.waypoints !== undefined);
                 const owp = isMazeHit ? a.waypoints.map(p => [p[0], p[1]]) : null;
                 const mv = (ev) => {
-                    const ddx = (ev.clientX - sx) / w, ddy = (ev.clientY - sy) / hh;
+                    let ddx = (ev.clientX - sx) / w, ddy = (ev.clientY - sy) / hh;
+                    // Shift moves it along ONE axis, whichever the pointer has
+                    // travelled further on, measured in pixels (18.21).
+                    if (ev.shiftKey) { if (Math.abs(ev.clientX - sx) >= Math.abs(ev.clientY - sy)) ddy = 0; else ddx = 0; }
                     a.x1 = ox1 + ddx; a.y1 = oy1 + ddy; a.x2 = ox2 + ddx; a.y2 = oy2 + ddy;
                     if (isMazeHit) a.waypoints = owp.map(p => [p[0] + ddx, p[1] + ddy]);
                     redraw();
@@ -21878,20 +21960,16 @@ function _dsRenderAnnots(page, desc, w, hh) {
                                 // waypoint constraint above; this covers the
                                 // simple two-point case. Alt bypasses it for
                                 // a deliberately angled line.
-                                if (!ev.altKey) {
-                                    const fixed = (ep[2] === 0) ? { x: a.x2 || 0, y: a.y2 || 0 } : { x: a.x1 || 0, y: a.y1 || 0 };
-                                    const ddx = (nx - fixed.x) * w, ddy = (ny - fixed.y) * hh;
-                                    if (ddx || ddy) {
-                                        const ang = Math.abs(Math.atan2(ddy, ddx)) * 180 / Math.PI;
-                                        if (ang < 6 || ang > 174) ny = fixed.y;
-                                        else if (Math.abs(ang - 90) < 6) nx = fixed.x;
-                                    }
-                                }
+                                // Shift locks to 0/45/90 (18.21), the same rule as drawing.
+                                const fixed = (ep[2] === 0) ? { x: a.x2 || 0, y: a.y2 || 0 } : { x: a.x1 || 0, y: a.y1 || 0 };
+                                const cp = _dsLineConstrain(fixed.x, fixed.y, nx, ny, w, hh, ev);
+                                nx = cp.x; ny = cp.y;
                                 a[ep[0]] = nx; a[ep[1]] = ny;
+                                if (a.type === 'arrow') _dsAngleChip(ev, _dsLineAngle(fixed.x, fixed.y, nx, ny, w, hh));
                             }
                             redraw();
                         };
-                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+                        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsAngleChipHide(); if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
                         document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
                     };
                     svg.appendChild(c);
@@ -22065,7 +22143,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         // every segment snaps to horizontal or vertical as you move the mouse.
         // Double-click, Enter, or Escape finishes the path.
         const ov = document.createElement('div');
-        ov.style.cssText = 'position:absolute; inset:0; cursor:crosshair; z-index:500;';
+        ov.style.cssText = 'position:absolute; inset:0; cursor:crosshair; z-index:' + DS_DRAW_LAYER_Z + ';';
         const NS = 'http://www.w3.org/2000/svg';
         const mk = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
         const svg = document.createElementNS(NS, 'svg');
@@ -22129,7 +22207,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
         page.appendChild(ov);
     } else if (_dsArmedShape) {
         const ov = document.createElement('div');
-        ov.style.cssText = 'position:absolute; inset:0; cursor:crosshair; z-index:500;';
+        ov.style.cssText = 'position:absolute; inset:0; cursor:crosshair; z-index:' + DS_DRAW_LAYER_Z + ';';
         const NS = 'http://www.w3.org/2000/svg';
         const mk = (tag, attrs) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
         ov.onmousedown = (e) => {
@@ -22143,22 +22221,47 @@ function _dsRenderAnnots(page, desc, w, hh) {
             const preview = mk('polyline', { fill: 'none', stroke: (_dsArrowDefaults().color), 'stroke-width': (_dsArrowDefaults().weight || 1.4) * (w / 936), 'stroke-dasharray': '5,4', 'stroke-linecap': 'round' });
             svg.appendChild(preview); ov.appendChild(svg);
             const draftAnn = () => Object.assign({ x1: sx / w, y1: sy / hh, x2: sx / w, y2: sy / hh }, _dsShapeDefaultsFor(shapeKind));
-            const mv = (ev) => {
+            // A straight line takes the shared constraint; an elbow's corner is
+            // already square, so its free end stays where the pointer is.
+            const straight = (shapeKind === 'arrow');
+            const endAt = (ev) => {
                 const ex = ev.clientX - rect.left, ey = ev.clientY - rect.top;
+                if (!straight) return { ex: ex, ey: ey };
+                const cp = _dsLineConstrain(sx / w, sy / hh, ex / w, ey / hh, w, hh, ev);
+                return { ex: cp.x * w, ey: cp.y * hh };
+            };
+            let cancelled = false;
+            const mv = (ev) => {
+                const { ex, ey } = endAt(ev);
                 const a = draftAnn(); a.x2 = ex / w; a.y2 = ey / hh;
                 const pts = _arrowPathPoints(a, sx, sy, ex, ey);
                 preview.setAttribute('points', pts.map(p => p.join(',')).join(' '));
+                if (straight && Math.hypot(ex - sx, ey - sy) > 6) _dsAngleChip(ev, _dsLineAngle(sx / w, sy / hh, ex / w, ey / hh, w, hh));
+            };
+            // Esc mid-drag drops the line being drawn and keeps the tool in hand.
+            const onKey = (ev) => {
+                if (ev.key !== 'Escape') return;
+                ev.preventDefault(); ev.stopImmediatePropagation();
+                cancelled = true;
+                document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); document.removeEventListener('keydown', onKey, true);
+                _dsAngleChipHide();
+                try { svg.remove(); } catch (x) {}
             };
             const up = (ev) => {
-                document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up);
-                const ex = ev.clientX - rect.left, ey = ev.clientY - rect.top;
+                document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); document.removeEventListener('keydown', onKey, true);
+                _dsAngleChipHide();
+                if (cancelled) return;
+                const { ex, ey } = endAt(ev);
                 // A genuine click with no drag still creates a small default-sized
                 // shape, rather than a zero-length one that's impossible to see.
                 const moved = Math.hypot(ex - sx, ey - sy) > 6;
                 const a = _dsShapeDefaultsFor(shapeKind);
                 a.x1 = sx / w; a.y1 = sy / hh;
+                // A headless line placed by a click comes out LEVEL: that is what a
+                // rule is for. An arrow keeps its rising default, which reads as a callout.
+                const level = a.type === 'arrow' && a.tip === 'none';
                 a.x2 = moved ? (ex / w) : Math.min(0.98, sx / w + 0.2);
-                a.y2 = moved ? (ey / hh) : Math.max(0.02, sy / hh - 0.12);
+                a.y2 = moved ? (ey / hh) : (level ? sy / hh : Math.max(0.02, sy / hh - 0.12));
                 const arr = _dsAnnList(key);
                 arr.push(a);
                 _dsArmedShape = null;
@@ -22167,7 +22270,7 @@ function _dsRenderAnnots(page, desc, w, hh) {
                 _dsSelectAnnot(key, arr.length - 1);
                 _dsRenderRail();
             };
-            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+            document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up); document.addEventListener('keydown', onKey, true);
         };
         page.appendChild(ov);
     }
@@ -22596,12 +22699,14 @@ function _dsDockOpenMark(id) {
     if (id) { const b = document.getElementById(id); if (b) b.classList.add('open'); }
 }
 // [kind, label, shortcut, icon]. 'line' is the straight tool with no head.
+// The curved arrow was taken off in 18.21: it was hard to aim and nobody used it.
+// A curve already on a page still draws, bends and exports exactly as before;
+// only the way to make a new one is gone.
 const _DS_LINE_TOOLS = [
     ['line', 'Line', 'L', '<line x1="5" y1="19" x2="19" y2="5"/>'],
     ['arrow', 'Arrow', 'A', '<line x1="5" y1="19" x2="19" y2="5"/><polyline points="11 5 19 5 19 13"/>'],
     ['elbow', 'Elbow arrow', '', '<polyline points="5 4 5 18 17 18"/><polyline points="14 15 17 18 14 21"/>'],
     ['elbowRev', 'Elbow arrow, other way', '', '<polyline points="4 6 14 6 14 19"/><polyline points="11 16 14 19 17 16"/>'],
-    ['curve', 'Curved arrow', '', '<path d="M4 19 Q 12 3 20 8"/><polyline points="15 6 20 8 19 13"/>'],
     ['elbowPath', 'Multi-point path', '', '<polyline points="3 20 3 12 10 12 10 5 17 5 17 15 21 15"/>']
 ];
 // Arm a line tool by kind. 'line' is the arrow tool with its head taken off;
@@ -22701,7 +22806,8 @@ function _dsAddShape(shape, locked) {
     if (!key) { _toast('Not available here', 'This page type doesn\u2019t support shapes.'); return; }
     const list = _dsAnnList(key);
     const w = 0.24;
-    const a = { type: 'shape', shape: (shape === 'ellipse' ? 'ellipse' : 'rect'), x: 0.18, y: 0.18, w: w, h: locked ? _dsShapeSquareH(w) : 0.2, fill: SHAPE_DEFAULT_FILL, dataUrl: null, aspect: 1.33, zoom: 1, panX: 0, panY: 0, shadow: false };
+    const _fs = _dsFreeSpot(list, 0.18, 0.18);
+    const a = { type: 'shape', shape: (shape === 'ellipse' ? 'ellipse' : 'rect'), x: _fs.x, y: _fs.y, w: w, h: locked ? _dsShapeSquareH(w) : 0.2, fill: SHAPE_DEFAULT_FILL, dataUrl: null, aspect: 1.33, zoom: 1, panX: 0, panY: 0, shadow: false };
     if (locked) a.lockAspect = true;
     list.push(a);
     if (typeof pushHistory === 'function') pushHistory();
@@ -22774,7 +22880,8 @@ function _dsAddStatusStamp(word) {
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc);
     if (!key) { _toast('Not available here', 'This page type doesn’t support overlay text.'); return; }
     const list = _dsAnnList(key);
-    list.push({ type: 'note', text: word, x: 0.68, y: 0.05, w: 0.26, size: 0.034, color: _DS_STAMP_INK, font: 'display', bold: true, italic: false, align: 'right' });
+    const _fs = _dsFreeSpot(list, 0.68, 0.05);
+    list.push({ type: 'note', text: word, x: _fs.x, y: _fs.y, w: 0.26, size: 0.034, color: _DS_STAMP_INK, font: 'display', bold: true, italic: false, align: 'right' });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
@@ -22863,7 +22970,8 @@ function _dsAddLibraryText(p) {
     }
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
     const list = _dsAnnList(key);
-    list.push({ type: 'note', text: p.text, x: 0.2, y: 0.2, w: 0.3, size: p.size || 0.019, color: p.color || '#555555', font: p.font || 'serif', italic: !!p.italic, bold: !!p.bold, align: p.align || 'left' });
+    const _fs = _dsFreeSpot(list, 0.2, 0.2);
+    list.push({ type: 'note', text: p.text, x: _fs.x, y: _fs.y, w: 0.3, size: p.size || 0.019, color: p.color || '#555555', font: p.font || 'serif', italic: !!p.italic, bold: !!p.bold, align: p.align || 'left' });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
@@ -22879,7 +22987,8 @@ function _dsAddParagraph() {
     }
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
     const list = _dsAnnList(key);
-    list.push({ type: 'text', text: _DS_LOREM, x: 0.16, y: 0.2, w: 0.34, size: 0.024, color: '#222222', font: 'serif', align: 'left' });
+    const _fs = _dsFreeSpot(list, 0.16, 0.2);
+    list.push({ type: 'text', text: _DS_LOREM, x: _fs.x, y: _fs.y, w: 0.34, size: 0.024, color: '#222222', font: 'serif', align: 'left' });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
@@ -22895,7 +23004,8 @@ function _dsAddPresetNote(text) {
     }
     const desc = _dsPages[_dsIndex]; const key = _deckPageKey(desc); if (!key) return;
     const list = _dsAnnList(key);
-    list.push({ type: 'note', text: text, x: 0.62, y: 0.72, w: 0.3, size: 0.019, color: '#555555', font: 'serif', italic: true, align: 'left' });
+    const _fs = _dsFreeSpot(list, 0.62, 0.72);
+    list.push({ type: 'note', text: text, x: _fs.x, y: _fs.y, w: 0.3, size: 0.019, color: '#555555', font: 'serif', italic: true, align: 'left' });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1); _dsRenderRail();
@@ -23721,12 +23831,13 @@ function _dsShapePanDown(e, key, idx, bw, bh) {
     const list = (editorialContent.annotations || {})[key]; const a = list && list[idx]; if (!a) return;
     const cr = _coverRect(bw, bh, a.aspect || 1.33, a.zoom || 1, a.panX || 0, a.panY || 0);
     const sx = e.clientX, sy = e.clientY, opx = a.panX || 0, opy = a.panY || 0;
+    const _dsGeo0 = _dsGeoSig(a);
     const mv = (ev) => {
         if (cr.slackX > 0) a.panX = Math.max(-1, Math.min(1, opx + (ev.clientX - sx) * 2 / cr.slackX));
         if (cr.slackY > 0) a.panY = Math.max(-1, Math.min(1, opy + (ev.clientY - sy) * 2 / cr.slackY));
         _dsRenderCenter();
     };
-    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
+    const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a); if (typeof scheduleAutosave === 'function') scheduleAutosave(); };
     document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
 }
 // A styled note callout: Messina Serif Regular Italic, 14pt / 18pt leading,
@@ -23750,7 +23861,8 @@ function _dsAddTextBox() {
     if (!key) { _toast('Not available here', 'This page type doesn\u2019t support overlay text boxes.'); return; }
     const ps = editorialContent.paragraphStyle || {};
     const list = _dsAnnList(key);
-    list.push({ x: 0.1, y: 0.12, w: 0.34, text: 'New text', font: ps.font || 'sans', size: (ps.size || 16) / 540, color: ps.color || '#222222', bold: false, italic: false, align: 'left' });
+    const _fs = _dsFreeSpot(list, 0.1, 0.12);
+    list.push({ x: _fs.x, y: _fs.y, w: 0.34, text: 'New text', font: ps.font || 'sans', size: (ps.size || 16) / 540, color: ps.color || '#222222', bold: false, italic: false, align: 'left' });
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     _dsSelectAnnot(key, list.length - 1);
@@ -24218,6 +24330,7 @@ function _dsAnnHandles(box, a, w, hh) {
         h.onmousedown = (e) => {
             e.preventDefault(); e.stopPropagation();
             const sx = e.clientX, sy = e.clientY, ox = a.x || 0, oy = a.y || 0, ow = a.w || 0.25, oh = a.h || 0.18;
+            const _dsGeo0 = _dsGeoSig(a);
             const mv = (ev) => {
                 const dx = (ev.clientX - sx) / w, dy = (ev.clientY - sy) / hh; let x = ox, y = oy, ww = ow, hgt = oh;
                 if (d.indexOf('e') >= 0) { const r = _dsAnnSnapEdge(ox + ow + dx, 'x', w, hh, ev); ww = r - ox; }
@@ -24227,7 +24340,7 @@ function _dsAnnHandles(box, a, w, hh) {
                 if (ev.shiftKey && d.length === 2 && ow && oh) { const k = Math.max(ww / ow, hgt / oh); ww = ow * k; hgt = oh * k; if (d.indexOf('w') >= 0) x = ox + (ow - ww); if (d.indexOf('n') >= 0) y = oy + (oh - hgt); }
                 a.w = Math.max(0.03, ww); a.h = Math.max(0.03, hgt); a.x = x; a.y = y; _lockH(); _dsRenderCenter();
             };
-            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
+            const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); _dsDragDone(_dsGeo0, a); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderRail(); };
             document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
         };
         box.appendChild(h);
@@ -40632,7 +40745,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Spec pages', body: `Under <strong>SHOW ON PAGE</strong>, tick what the page carries: <strong>Frame corner</strong>, <strong>Moulding profile</strong>, <strong>Floorplan</strong> and <strong>Elevation</strong>. A ticked part you do not have yet keeps its space, so the page does not move while you fill it in. An unticked part is removed. It applies deck-wide by default, or to one page. Pieces print one per page, or grouped A/B/C with shared specs.` },
             { title: 'Breaker and install pages', body: `These carry a wall's dimensioned drawing with a letter legend, installation notes and, optionally, the plan. Notes are standard items you tick plus your own. <strong>Edit &hellip; in Elevations</strong> jumps to the wall, and a bar there brings you back to the same page.` },
             { title: 'Headings', body: `Click a page's heading or subheading to change its type. The change applies to the whole deck unless you choose this page only.` },
-            { title: 'Text, arrows, shapes and images', body: `The tool dock beside the page adds text, notes and stamps, lines and arrows, image placeholders and images. A button with a small corner triangle opens a menu of choices. The last button moves the dock to the left, the right or the top. Select one for its settings (the pen on an image, the + on text). <strong>Layers</strong> hides, locks and reorders everything on the page. Drag an image straight onto a placeholder to fill it.` },
+            { title: 'Text, arrows, shapes and images', body: `The tool dock beside the page adds text, notes and stamps, lines and arrows, image placeholders and images. A button with a small corner triangle opens a menu of choices. The last button moves the dock to the left, the right or the top. Hold <span class="help-kbd">Shift</span> while drawing or dragging a line to keep it level, upright or at 45 degrees; <span class="help-kbd">Alt</span> stops a nearly level line from settling level. Select one for its settings (the pen on an image, the + on text). <strong>Layers</strong> hides, locks and reorders everything on the page. Drag an image straight onto a placeholder to fill it.` },
             { title: 'Page appearance', body: `A page's theme, background (colour, gradient or image) and footer are under its appearance settings. Large background images are stored at a sensible size automatically.` },
             { title: 'Preview and Preflight', body: `<strong>Preview</strong> renders an exact preview of how the page exports. <strong>Preflight</strong> scans the whole deck for missing artwork, pins, plan images and empty pages. Run it before generating.` },
             { title: 'Approved', body: `The APPROVED button stamps every page for client sign-off.` }
@@ -40674,7 +40787,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Measure line', body: `<span class="help-kbd">M</span> toggles the measure-line tool. With a line selected, arrow keys move it and <span class="help-kbd">Esc</span> clears it.` },
             { title: 'Undo and save', body: `<span class="help-kbd">Ctrl+Z</span> undoes, <span class="help-kbd">Ctrl+Shift+Z</span> or <span class="help-kbd">Ctrl+Y</span> redoes. <span class="help-kbd">Ctrl+S</span> saves and <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else.` },
             { title: 'Dialogs', body: `<span class="help-kbd">Esc</span> closes the dialog on top, and on a question it means Cancel. <span class="help-kbd">Tab</span> stays inside an open dialog. The full-screen tools (the floorplan markup and the layout editor) keep <span class="help-kbd">Esc</span> for their own tools instead.` },
-            { title: 'Deck Studio tools', body: `On the Pages tab, with nothing being typed: <span class="help-kbd">V</span> select, <span class="help-kbd">T</span> text box, <span class="help-kbd">L</span> line, <span class="help-kbd">A</span> arrow, <span class="help-kbd">R</span> rectangle, <span class="help-kbd">O</span> oval, <span class="help-kbd">I</span> upload an image. <span class="help-kbd">Esc</span> puts a line tool down.` },
+            { title: 'Deck Studio tools', body: `On the Pages tab, with nothing being typed: <span class="help-kbd">V</span> select, <span class="help-kbd">T</span> text box, <span class="help-kbd">L</span> line, <span class="help-kbd">A</span> arrow, <span class="help-kbd">R</span> rectangle, <span class="help-kbd">O</span> oval, <span class="help-kbd">I</span> upload an image. <span class="help-kbd">Shift</span> while drawing keeps a line level, upright or at 45 degrees, and <span class="help-kbd">Esc</span> mid-line drops it; <span class="help-kbd">Esc</span> again puts the tool down.` },
             { title: 'Jump to', body: `<span class="help-kbd">Ctrl+K</span> (<span class="help-kbd">Cmd+K</span> on a Mac) opens Jump to from anywhere. Type a code, a wall name, a page number or a page title, then <strong>Enter</strong>. A piece offers Piece, Wall and Page, and Enter picks the one for the view you are in.` },
             { title: 'Getting around', body: `<span class="help-kbd">Tab</span> reaches every button, the view tabs and the wall rail; <span class="help-kbd">Enter</span> or <span class="help-kbd">Space</span> presses them.` }
         ]
@@ -40701,7 +40814,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.20</strong> Deck Studio's tools for text, notes, lines, shapes and images now sit in one toolbar beside the page, with a picture and a shortcut for each. Put it on the left, the right or back on top with the last button on it. New: <strong>Divider</strong> (a level line across the page), <strong>Stamps</strong> (DRAFT, FOR APPROVAL and more) and single-key tools: V select, T text, L line, A arrow, R rectangle, O oval, I image.<br><br>
+                body: `<strong>18.21</strong> Hold <strong>Shift</strong> while drawing a line or arrow to keep it level, upright or at 45 degrees, and the angle shows beside the cursor. Shift works when dragging a line's end and when moving a whole line too. <strong>Esc</strong> while drawing drops that line. A line placed with a single click comes out level. The curved arrow is gone (curves already on a page stay). Moving, resizing and panning a box can now be undone one step at a time, and adding a second text box or shape no longer hides it under the first.<br><br>
+<strong>18.20</strong> Deck Studio's tools for text, notes, lines, shapes and images now sit in one toolbar beside the page, with a picture and a shortcut for each. Put it on the left, the right or back on top with the last button on it. New: <strong>Divider</strong> (a level line across the page), <strong>Stamps</strong> (DRAFT, FOR APPROVAL and more) and single-key tools: V select, T text, L line, A arrow, R rectangle, O oval, I image.<br><br>
 <strong>18.19</strong> The PDF flip-book now shows only your artwork, not the page previews.<br><br>
 <strong>18.18</strong> While a PDF builds, your deck's pages flip by full screen behind the progress box, one every half second. It uses the page previews already built in the rail (or your artwork if there are none yet), so it does not slow the build down.<br><br>
 <strong>18.17</strong> FRAME opens straight into the logo intro, without the Frame Dashboard flashing up first.<br><br>

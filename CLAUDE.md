@@ -2306,6 +2306,19 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   a `.ds-dock.vert`. Menu rows are `_dsFlyItem` (icon, label, shortcut), one builder for all
   four flyouts. Single keys V T L A R O I go through `_dsDockKey`, after the typing guard in
   `_dsAnnotKeydown`, never with a modifier or a dialog open.
+  **THE LINE RULE IS `_dsLineConstrain` (18.21)**, one function for the draw tool (preview
+  AND commit, through its `endAt`) and the end-handle drag: Shift locks 0/45/90 by
+  PROJECTION, in PIXELS (a page is 936x540, so 45 in fractions is a shallow line on paper);
+  without Shift an end within `DS_LINE_LEVEL_DEG` settles level or plumb; Alt skips that.
+  The armed draw layer is `DS_DRAW_LAYER_Z`, above every annotation: at z 500 it sat under
+  them, and a line started on another line's end grabbed its handle (found only in Chrome).
+  Esc mid-draw is a capture-phase listener that drops the line and keeps the tool. The
+  curved arrow is off the menu; saved curves still render and bend.
+  **EVERY ANNOTATION DRAG ENDS IN `_dsDragDone(_dsGeo0, a)` or `pushHistory`.** Seven
+  move/resize/pan handlers pushed none, so a drag was folded into the next undo step.
+  `_dsDragDone` pushes only when `_dsGeoSig` changed, so a click-to-select adds nothing;
+  `test_line_tool` scans every `const up` in those handlers. New boxes go through
+  `_dsFreeSpot` so a second T or R does not land exactly on the first.
   **ONE GLOBAL SCOPE MEANS A NAME COLLISION IS A DELETION.** The stamp tool was first written
   as `_dsAddStamp`, which already existed as the spec page's APPROVAL stamp; the later
   declaration won, the file parsed and the whole suite stayed green. It is

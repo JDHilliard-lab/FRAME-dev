@@ -117,7 +117,12 @@ const fs = require('fs');
 
     __check('Alt bypasses the angle snap (source guard)', () => {
       const S = window.__appSrc;
-      if (S.indexOf('if (!ev.altKey) {') < 0) throw new Error('alt-bypass guard missing from angle snap');
+      // 18.21: the snap moved into the shared _dsLineConstrain (drawing and
+      // handle drag both use it), so the bypass is read there now.
+      // test_line_tool.js drives it behaviourally.
+      const i = S.indexOf('function _dsLineConstrain(');
+      if (i < 0) throw new Error('shared line constraint missing');
+      if (S.slice(i, S.indexOf('function _dsLineAngle(', i)).indexOf('if (ev && ev.altKey) return') < 0) throw new Error('alt-bypass guard missing from angle snap');
     });
   `;
   try { window.__appSrc = JSON.stringify(src); window.eval('window.__appSrc = ' + window.__appSrc + ';\n' + src + '\n' + testBlock); }
