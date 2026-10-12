@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.22';
+const APP_VERSION = '18.23';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -2688,6 +2688,9 @@ function _deletePlanDetail(pd) {
         },
     });
 }
+// Where a plan detail page puts its plan. One definition, because the PDF links this
+// rectangle back to the floorplan page and Deck Studio lays its click-through over it.
+function _planDetailArea(PW, PH) { return { x: PW * 0.295, y: PH * 0.2, w: PW * 0.41, h: PH * 0.68 }; }
 async function _drawPlanDetailPage(doc, logos, pageNum, meta, pd) {
     const PW = doc.internal.pageSize.getWidth(), PH = doc.internal.pageSize.getHeight(), M = 40;
     doc.setFont(_font('display'), 'bold'); doc.setFontSize(26); doc.setTextColor(20, 20, 20);
@@ -2712,7 +2715,7 @@ async function _drawPlanDetailPage(doc, logos, pageNum, meta, pd) {
         _wallAllSegs(g).forEach(sg => { x0 = Math.min(x0, sg[0], sg[2]); x1 = Math.max(x1, sg[0], sg[2]); y0 = Math.min(y0, sg[1], sg[3]); y1 = Math.max(y1, sg[1], sg[3]); });
     });
     const padF = (pd.zoomPad != null ? pd.zoomPad : 0.35);
-    const planArea = { x: PW * 0.295, y: PH * 0.2, w: PW * 0.41, h: PH * 0.68 };
+    const planArea = _planDetailArea(PW, PH);
     const arA = planArea.w / planArea.h;
     // Required rect (image px): pin/line bounds + a pin-radius margin so the
     // numbered circles are never clipped, no matter the zoom.
@@ -2766,6 +2769,10 @@ async function _drawPlanDetailPage(doc, logos, pageNum, meta, pd) {
     }
     try { doc.addImage(oc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', planArea.x, planArea.y, planArea.w, planArea.h); } catch (e) {}
     doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(planArea.x, planArea.y, planArea.w, planArea.h, 'S'); } catch (e) {}
+    // The plan links back to its floorplan page (18.23), like every spec page's plan
+    // thumbnail. Reset first: the preview re-renders this page and nothing else clears it.
+    if (_curPageKey) _specPlanRects[_curPageKey] = [];
+    _specPlanRectAdd(planArea.x, planArea.y, planArea.w, planArea.h, pd.level || 0);
     // Mockups: each piece lands in the column NEAREST its pin, stacked in pin
     // order; drag overrides (pd.pos) place it anywhere. Leaders are elbow-routed
     // through stacked lanes so parallel lines never overlap.
@@ -15394,6 +15401,9 @@ function _fpKeyEntries(li, idToPage) {
     return levelGroups.map(g => {
         let linkPage = null;
         if (idToPage) { for (const id of g.ids) { if (idToPage[id]) { linkPage = idToPage[id]; break; } } }
+        // Same fallback as _dsSpecPageIndexFor: a catalogue placement with no breaker
+        // links to its first option page.
+        if (idToPage && !linkPage) { Object.keys(idToPage).forEach(id => { if (_catStemOf(id) === g.key && (!linkPage || idToPage[id] < linkPage)) linkPage = idToPage[id]; }); }
         const codesLabel = (g.ids.length > 1)
             ? (g.key + ' (' + g.ids.map(id => { const s = id.indexOf(g.key) === 0 ? id.slice(g.key.length).replace(/^[-_\s]*/, '') : id; return s || id; }).join('/') + ')')
             : (g.ids[0] || g.key);
@@ -27216,6 +27226,17 @@ function _dsRenderCenter() {
             if (!cv2) { if (base.isConnected) _dsAddFooter(page, Math.round(w), Math.round(hh), desc); return; }   // no renderer — mock stays, footer still shows
             cv2.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
             base.innerHTML = ''; base.appendChild(cv2);
+            // The plan on a plan detail page opens its floorplan page, as it does in the PDF.
+            // Appended BEFORE the mockup handles below, so a mockup over the plan keeps its drag.
+            if (desc.kind === 'planDetail' && desc.pd) {
+                const A = _planDetailArea(936, 540);
+                const lk = document.createElement('div');
+                lk.className = 'ds-plan-backlink _dsChrome';
+                lk.title = 'Open the floorplan';
+                lk.style.cssText = 'position:absolute; left:' + (A.x / 936 * 100) + '%; top:' + (A.y / 540 * 100) + '%; width:' + (A.w / 936 * 100) + '%; height:' + (A.h / 540 * 100) + '%; cursor:pointer;';
+                lk.onclick = (ev) => { ev.stopPropagation(); _dsJumpToFloorplan(desc.level != null ? desc.level : (desc.pd.level || 0)); };
+                base.appendChild(lk);
+            }
             // Plan Detail: draggable artwork — move a mockup and the elbow
             // leaders re-route live (throttled re-renders while dragging).
             if (desc.kind === 'planDetail' && desc.pd && Array.isArray(desc.pd._layout)) {
@@ -27767,6 +27788,12 @@ function _dsSpecPageIndexFor(key) {
     const owns = (d) => ((d.members && d.members.length) ? d.members : (d.row ? [d.row] : [])).some(m => m && m.id && _artGroupKey(m.id) === key);
     let i = pages.findIndex(d => d && d.kind === 'spec' && !d._install && owns(d));
     if (i < 0) i = pages.findIndex(d => d && d.kind === 'spec' && d._install && d._groupKey === key);
+    // A CATALOGUE placement's codes are the mockup's slots, which never get a spec page,
+    // so the two lookups above found nothing and the key list said "No spec page" (18.23).
+    // Its breaker draws the mockup wall, so the slots are on THAT page; failing that, the
+    // first option page under the placement's stem.
+    if (i < 0) i = pages.findIndex(d => d && d.kind === 'spec' && d._install && d.elev && (d.elev.frames || []).some(f => f && f.id && _artGroupKey(f.id) === key));
+    if (i < 0) i = pages.findIndex(d => d && d.kind === 'spec' && !d._install && ((d.members && d.members.length) ? d.members : (d.row ? [d.row] : [])).some(m => m && m.id && _catStemOf(m.id) === key));
     return i;
 }
 // The key list's rows, clickable in Deck Studio the way they already are in the PDF:
@@ -36414,7 +36441,15 @@ function _catRowAsPlanGroup(r) {
     if (!r || !r.id) return null;
     if (!_catOptionRowIds()[r.id] && !_catAltArrRowIds()[r.id]) return null;
     if (r.planX == null || r.planY == null) return null;
-    return { key: _artGroupKey(r.id), planX: r.planX, planY: r.planY, level: r.level || 0, planZoom: r.planZoom };
+    // The WALL LINE too, resolved on the same plan as the pin. Without it an option's
+    // spec page drew the dashed box around an empty patch of plan (18.23): the row
+    // already mirrors the mockup slot's planWalls, it just was not being read.
+    const lv = _deckLvlOf(r.level || 0);
+    const w = _fpWallOn(r, lv) || _fpWalls(r)[0] || null;
+    const g = { key: _artGroupKey(r.id), planX: r.planX, planY: r.planY, level: r.level || 0, planZoom: r.planZoom, category: r.category || '' };
+    if (w && w.wallLine) { g.wallLine = w.wallLine; g.wallPanels = w.wallPanels || 1; }
+    if (w && Array.isArray(w.wallLines) && w.wallLines.length) { g.wallLines = w.wallLines; g.wallPanels = 'custom'; }
+    return g;
 }
 // THE PLAN DETAIL ON A SPEC PAGE: the piece's own wall line, a 2pt red dashed box
 // around it, and NOTHING ELSE. It used to draw every numbered pin that fell inside the
@@ -37925,7 +37960,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             continue;
         }
         if (step.type === 'detail') {
-            if (_scoped) await _drawPlanDetailPage(doc, logos, pageNum, meta, step.pd);
+            if (_scoped) { await _drawPlanDetailPage(doc, logos, pageNum, meta, step.pd); _linkSpecPlanRects(doc, stepKey, _fpLevelKeyPage, fpKeyPageNum); }
             await emitAfterKey(stepKey);
             continue;
         }
@@ -40855,7 +40890,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.22</strong> A new elbow arrow opens as a zig-zag with the bend in the middle, and <strong>Elbow arrow, upright</strong> goes down, across and down. Select one and a grip appears on the middle of the bend: drag it to slide the bend. The grip is hidden when the arrow is not selected, and the page thumbnails now show elbows as they are drawn instead of as a straight line. Elbows already on your pages are unchanged.<br><br>
+                body: `<strong>18.23</strong> The floorplan on a catalogue option's spec page now shows the wall line, not just the red box. Click the plan on a plan detail page, in Deck Studio or in the PDF, and it takes you to its floorplan page. On the floorplan page, clicking a catalogue placement in the list on the left opens its breaker page (or its first option page) instead of saying there is no spec page.<br><br>
+<strong>18.22</strong> A new elbow arrow opens as a zig-zag with the bend in the middle, and <strong>Elbow arrow, upright</strong> goes down, across and down. Select one and a grip appears on the middle of the bend: drag it to slide the bend. The grip is hidden when the arrow is not selected, and the page thumbnails now show elbows as they are drawn instead of as a straight line. Elbows already on your pages are unchanged.<br><br>
 <strong>18.21</strong> Hold <strong>Shift</strong> while drawing a line or arrow to keep it level, upright or at 45 degrees, and the angle shows beside the cursor. Shift works when dragging a line's end and when moving a whole line too. <strong>Esc</strong> while drawing drops that line. A line placed with a single click comes out level. The curved arrow is gone (curves already on a page stay). Moving, resizing and panning a box can now be undone one step at a time, and adding a second text box or shape no longer hides it under the first.<br><br>
 <strong>18.20</strong> Deck Studio's tools for text, notes, lines, shapes and images now sit in one toolbar beside the page, with a picture and a shortcut for each. Put it on the left, the right or back on top with the last button on it. New: <strong>Divider</strong> (a level line across the page), <strong>Stamps</strong> (DRAFT, FOR APPROVAL and more) and single-key tools: V select, T text, L line, A arrow, R rectangle, O oval, I image.<br><br>
 <strong>18.19</strong> The PDF flip-book now shows only your artwork, not the page previews.<br><br>
