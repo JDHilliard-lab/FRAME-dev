@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.24';
+const APP_VERSION = '18.25';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -27202,6 +27202,7 @@ function _dsRenderCenter() {
     const _builtSrc = (desc.kind === 'spec') ? _dsBuilt[_pk] : null;
     if (_builtSrc) {
         page.innerHTML = '<img src="' + _builtSrc + '" style="position:absolute; inset:0; width:100%; height:100%;">';
+        _dsPlanBacklinks(page, desc);
         _dsAddStamp(page, Math.round(w), Math.round(hh), desc);
         _dsAddGuides(page, Math.round(w), Math.round(hh));
         _dsTitleHandles(page, desc, Math.round(w), Math.round(hh));
@@ -27230,12 +27231,7 @@ function _dsRenderCenter() {
             // Appended BEFORE the mockup handles below, so a mockup over the plan keeps its drag.
             if (desc.kind === 'planDetail' && desc.pd) {
                 const A = _planDetailArea(936, 540);
-                const lk = document.createElement('div');
-                lk.className = 'ds-plan-backlink _dsChrome';
-                lk.title = 'Open the floorplan';
-                lk.style.cssText = 'position:absolute; left:' + (A.x / 936 * 100) + '%; top:' + (A.y / 540 * 100) + '%; width:' + (A.w / 936 * 100) + '%; height:' + (A.h / 540 * 100) + '%; cursor:pointer;';
-                lk.onclick = (ev) => { ev.stopPropagation(); _dsJumpToFloorplan(desc.level != null ? desc.level : (desc.pd.level || 0)); };
-                base.appendChild(lk);
+                base.appendChild(_dsPlanBacklinkEl(A.x, A.y, A.w, A.h, desc.level != null ? desc.level : (desc.pd.level || 0)));
             }
             // Plan Detail: draggable artwork — move a mockup and the elbow
             // leaders re-route live (throttled re-renders while dragging).
@@ -27339,6 +27335,7 @@ function _dsRenderCenter() {
                     if (tok !== _dsTlRenderTok || !specBase.isConnected) return;
                     cv2.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
                     specBase.innerHTML = ''; specBase.appendChild(cv2);
+                    _dsPlanBacklinks(page, desc);
                 }).catch(() => { _igNoCapture = _prevNoCap; });
             }
         } else {
@@ -27372,25 +27369,40 @@ function _dsSpecArtTarget(desc, page, clientX, clientY) {
     if (hit) return hit.id;
     return members.length === 1 ? members[0].id : null;
 }
-function _dsSpecPlanHit(desc, page, clientX, clientY) {
+// THE PLAN THUMBNAIL IS A BUTTON (18.25). Every plan detail on a spec, group or breaker
+// page opens its floorplan page, as the PDF link does. It used to be an invisible hit
+// test wired only at the END of _dsRenderCenter, so a page shown from its built image
+// (which returns early - most breakers) had a dead plan, and nothing on screen said it
+// could be clicked. Now a real element per recorded rect (_specPlanRects, written by the
+// renderer itself, so it sits exactly on the drawn plan), outlined on hover with a label.
+// Inserted straight after the page image, so notes and title handles above it keep their
+// clicks; called again when an async render lands, since that is when the rects are new.
+function _dsPlanBacklinkEl(x, y, w, h, level) {
+    const lk = document.createElement('div');
+    lk.className = 'ds-plan-backlink _dsChrome';
+    lk.title = 'Open the floorplan';
+    lk.setAttribute('role', 'button'); lk.setAttribute('tabindex', '0'); lk.setAttribute('data-kbd-click', '');
+    lk.style.cssText = 'position:absolute; left:' + (x / 936 * 100) + '%; top:' + (y / 540 * 100) + '%; width:' + (w / 936 * 100) + '%; height:' + (h / 540 * 100) + '%;';
+    const tag = document.createElement('span');
+    tag.className = 'ds-plan-backlink-tag';
+    tag.textContent = 'Open floorplan';
+    lk.appendChild(tag);
+    lk.onmousedown = (ev) => { ev.stopPropagation(); };
+    lk.onclick = (ev) => { ev.preventDefault(); ev.stopPropagation(); _dsJumpToFloorplan(level); };
+    return lk;
+}
+function _dsPlanBacklinks(page, desc) {
+    if (!page || !desc) return;
+    page.querySelectorAll(':scope > .ds-plan-backlink').forEach(n => n.remove());
     const rects = _specPlanRects[_deckPageKey(desc)] || [];
-    const b = page.getBoundingClientRect(); if (!(b.width > 0)) return null;
-    const x = (clientX - b.left) / b.width * 936, y = (clientY - b.top) / b.height * 540;
-    return rects.find(q => x >= q.x && x <= q.x + q.w && y >= q.y && y <= q.y + q.h) || null;
+    const after = page.firstElementChild;
+    rects.forEach(q => {
+        const lk = _dsPlanBacklinkEl(q.x, q.y, q.w, q.h, q.level);
+        page.insertBefore(lk, after ? after.nextSibling : null);
+    });
 }
 function _dsWireSpecArtDrop(page, desc) {
-    // The plan thumbnail is a link back to the floorplan, as it is in the PDF.
-    page.addEventListener('mousemove', (e) => {
-        const hit = _dsSpecPlanHit(desc, page, e.clientX, e.clientY);
-        page.style.cursor = hit ? 'pointer' : '';
-        page.title = hit ? 'Open the floorplan' : '';
-    });
-    page.addEventListener('click', (e) => {
-        const hit = _dsSpecPlanHit(desc, page, e.clientX, e.clientY);
-        if (!hit) return;
-        e.preventDefault(); e.stopPropagation();
-        _dsJumpToFloorplan(hit.level);
-    });
+    _dsPlanBacklinks(page, desc);   // the plan thumbnail is a button back to the floorplan
     const hasFile = (e) => e.dataTransfer && Array.from(e.dataTransfer.types || []).indexOf('Files') >= 0;
     page.addEventListener('dragover', (e) => {
         if (!hasFile(e)) return;
@@ -40918,7 +40930,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
+                body: `<strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
+<strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
 <strong>18.23</strong> The floorplan on a catalogue option's spec page now shows the wall line, not just the red box. Click the plan on a plan detail page, in Deck Studio or in the PDF, and it takes you to its floorplan page. On the floorplan page, clicking a catalogue placement in the list on the left opens its breaker page (or its first option page) instead of saying there is no spec page.<br><br>
 <strong>18.22</strong> A new elbow arrow opens as a zig-zag with the bend in the middle, and <strong>Elbow arrow, upright</strong> goes down, across and down. Select one and a grip appears on the middle of the bend: drag it to slide the bend. The grip is hidden when the arrow is not selected, and the page thumbnails now show elbows as they are drawn instead of as a straight line. Elbows already on your pages are unchanged.<br><br>
 <strong>18.21</strong> Hold <strong>Shift</strong> while drawing a line or arrow to keep it level, upright or at 45 degrees, and the angle shows beside the cursor. Shift works when dragging a line's end and when moving a whole line too. <strong>Esc</strong> while drawing drops that line. A line placed with a single click comes out level. The curved arrow is gone (curves already on a page stay). Moving, resizing and panning a box can now be undone one step at a time, and adding a second text box or shape no longer hides it under the first.<br><br>

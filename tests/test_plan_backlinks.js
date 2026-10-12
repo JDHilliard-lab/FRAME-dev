@@ -47,6 +47,7 @@ window.eval(APP + NL + [
   '  set key(v) { _curPageKey = v; }, rects: _specPlanRects,',
   '  set pages(v) { _dsPages = v; },',
   '  crop: _planCropCanvasForRow, asGroup: _catRowAsPlanGroup, detail: _drawPlanDetailPage,',
+  '  backlinks: _dsPlanBacklinks, pageKey: _deckPageKey, set jump(f) { _dsJumpToFloorplan = f; },',
   '  area: _planDetailArea, marks: _drawPlanCropMarks, LPT: PLAN_DETAIL_LINE_PT, LRGB: PLAN_DETAIL_LINE_RGB, link: _linkSpecPlanRects, specIdx: _dsSpecPageIndexFor, entries: _fpKeyEntries,',
   '};',
 ].join(NL));
@@ -104,8 +105,10 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     const i = APP.indexOf("if (step.type === 'detail') {");
     const seg = APP.slice(i, APP.indexOf("if (step.type === 'install') {", i));
     if (seg.indexOf('_linkSpecPlanRects(') < 0) throw new Error('detail step does not link');
-    const j = APP.indexOf("lk.className = 'ds-plan-backlink");
-    if (j < 0 || APP.indexOf('_dsJumpToFloorplan(', j) - j > 600) throw new Error('no Deck Studio back link on plan detail');
+    // 18.25: the element is built by _dsPlanBacklinkEl, shared with the spec pages.
+    const j = APP.indexOf('function _dsPlanBacklinkEl(');
+    const body = APP.slice(j, APP.indexOf('function _dsPlanBacklinks(', j));
+    if (j < 0 || body.indexOf('_dsJumpToFloorplan(') < 0) throw new Error('no Deck Studio back link on plan detail');
   });
   await check('EXACT ASK: a catalogue placement in the key list opens its BREAKER in Deck Studio', async () => {
     const brk = { kind: 'spec', _install: true, _groupKey: 'ART.1.1', elev: { frames: [{ id: 'ART.1A' }, { id: 'ART.1B' }] } };
@@ -154,6 +157,38 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     if (APP.split('_drawPlanCropMarks(doc, pc,').length - 2 !== n) throw new Error('a crop caller draws no marks');
     if (APP.indexOf('setLineWidth(2.2)') >= 0) throw new Error('a local 2.2 survives');
     if (APP.split('_drawPlanLinePdf(doc, pins,').length - 1 !== 2) throw new Error('breaker paths not shared');
+  });
+
+  await check('18.25 EXACT ASK: the whole plan thumbnail is a button that opens its floorplan', async () => {
+    const desc = { kind: 'spec', row: { id: 'ART.3A' }, members: [{ id: 'ART.3A' }] };
+    const key = fx.pageKey(desc);
+    fx.rects[key] = [{ x: 30, y: 400, w: 150, h: 120, level: 1 }];
+    const page = window.document.createElement('div');
+    page.innerHTML = '<img><div class="note"></div>';
+    let went = null;
+    fx.jump = (lv) => { went = lv; return true; };
+    fx.backlinks(page, desc);
+    fx.backlinks(page, desc);   // a re-render must not stack a second one
+    const bs = page.querySelectorAll('.ds-plan-backlink');
+    if (bs.length !== 1) throw new Error(bs.length + ' buttons');
+    const b = bs[0];
+    if (b.style.left !== (30 / 936 * 100) + '%' || b.style.height !== (120 / 540 * 100) + '%') throw new Error('not over the whole plan: ' + b.style.cssText);
+    if (page.children[1] !== b) throw new Error('not directly above the page image, so it would cover notes');
+    if (b.className.indexOf('_dsChrome') < 0) throw new Error('would show in thumbnails');
+    b.dispatchEvent(new window.MouseEvent('click', { bubbles: true }));
+    if (went !== 1) throw new Error('jumped to ' + went);
+  });
+  await check('...wired on EVERY Deck Studio path: built image, fresh render, and plan detail pages', async () => {
+    const bi = APP.indexOf("const _builtSrc = (desc.kind === 'spec')");
+    const built = APP.slice(bi, APP.indexOf('return;', bi));
+    if (built.indexOf('_dsPlanBacklinks(page, desc)') < 0) throw new Error('a built page (most breakers) has a dead plan');
+    const si = APP.indexOf("specBase.innerHTML = ''; specBase.appendChild(cv2);");
+    if (APP.slice(si, si + 200).indexOf('_dsPlanBacklinks(page, desc)') < 0) throw new Error('not re-laid when the render lands');
+    const pi = APP.indexOf("if (desc.kind === 'planDetail' && desc.pd) {", APP.indexOf('renderDeckPageCanvas(desc).then'));
+    if (APP.slice(pi, pi + 400).indexOf('_dsPlanBacklinkEl(') < 0) throw new Error('plan detail page not a button');
+    const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
+    const ci = css.indexOf('.ds-plan-backlink:hover');
+    if (ci < 0 || css.slice(ci, css.indexOf('}', ci)).indexOf('var(--selected)') < 0) throw new Error('no hover cue in --selected');
   });
 
   let bad = 0;
