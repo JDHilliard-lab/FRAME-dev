@@ -51,7 +51,7 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
 ```
 node tests/run-all.js        # must print ALL GREEN before anything ships
 ```
-159 files, 2184 checks. Add a new `tests/test_<topic>.js` for every fix; each should
+179 files, 2370 checks. Add a new `tests/test_<topic>.js` for every fix; each should
 reproduce the actual reported bug, not just assert the new code exists. If a test
 fails because behaviour intentionally changed, update the test and say so explicitly —
 never delete a check to make the suite pass.
@@ -2287,6 +2287,24 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   finishing and the suite ran for half an hour - the template-card prewarm trap again.
   **These are declared near the TOP of app.js, straight after `_checkBuildPairing`**, so no
   module-scope code can read `NAV_STEP_TIPS` or `_navBadgeTimer` in the TDZ.
+- **THE GUIDED TOUR IS READ-ONLY AND ITS STEPS ARE DATA (`FRAME_TOUR`, `startTour`,
+  `endTour`, `_tourGo`, `_tourTarget`, 18.30).** A step is `{ch, view, target, prep, title,
+  body}`; `prep` may only NAVIGATE (switchView, a Deck Studio tab, the selected page, the
+  elevation sidebar tab), never write the project, and `test_guided_tour` walks every step and
+  fails on a pushed undo or a changed row, wall, plan or deck setting. Viewing seeds two empty
+  defaults the same way a click does (a page's `pageThemes` entry, a wall's `hiddenDims`,
+  `frameRec` from any render of that page, background thumbnails included, so it only showed
+  under a loaded machine), and the check leaves exactly those out. The page is covered by a click-eating blocker and a
+  window CAPTURE keydown swallows every key, so V/T/Delete/Ctrl+Z cannot edit under it. The
+  spotlight is a box-shadow hole in the dimming, not a hole in the blocker.
+  `target` is a list and the first VISIBLE match of ANY selector wins (`querySelectorAll`, not
+  `querySelector`: a rail thumbnail can carry a hidden copy of the control first); nothing
+  visible centres the card, never throws. "Tour this screen" is `_tourStepsFor(view)`, the same
+  steps filtered, so the two cannot describe one control two ways. Entry points: Help > Start
+  here (`live: 'tour'`), the start screen link (re-opens the start screen on end), the
+  next-step bar's Tour button (until `frameTourDone` is set). `--z-tour` sits under the alert
+  so a failure raised mid-tour is still read. Renamed a control the tour points at? The test
+  checks every `#id` and `.class` in a target still exists.
 - **UNCAUGHT ERRORS ARE CAUGHT, LOGGED AND SAID ONCE** (`_frameReportError`,
   `_frameErrAnnounce`, `_frameErrors`). Nothing was listening, on a 27k-line file in one
   global scope where a parse is not a load and a load is not a render. Four

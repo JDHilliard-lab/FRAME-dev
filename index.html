@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.29">
+    <link rel="stylesheet" href="style.css?v=18.30">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -93,7 +93,7 @@
                  until a URL is plugged in) and a Reference section explaining
                  every feature. Lives next to the theme toggle so help is always
                  reachable, never blocks workflow. -->
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="openHelpModal()" title="Help — features, shortcuts, and tutorial">
+            <button id="helpBtn" class="action-btn btn-secondary" style="width:auto;" onclick="openHelpModal()" title="Help — features, shortcuts, and tutorial">
                 <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </button>
             <!-- Global unit toggle. Lives in the header so it's always visible
@@ -124,7 +124,7 @@
                  unsaved work, which loading never used to do. -->
             <button class="action-btn btn-secondary" style="width:auto;" onclick="openMasterProject()" title="Open a FRAME project (.json)">Load Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
-            <button class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
+            <button id="saveProjectBtn" class="action-btn" style="width:auto;" onclick="saveMasterProject()">Save Project</button>
             <button class="action-btn btn-secondary" style="width:auto;" onclick="openVersionsModal()" title="Save and compare project versions">Versions</button>
             <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkReplaceModal()" title="Replace artwork across many pieces at once">Bulk Images</button>
             <!-- Version pill: rendered into by renderVersionPill() in app.js
@@ -1099,7 +1099,7 @@
                 <span style="flex:1;"></span>
                 <button id="dsApprovedBtn" onclick="_dsToggleApproved()" title="Stamp every page APPROVED (client sign-off)" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-70); font-weight:700; letter-spacing:0.04em; border-radius:var(--r-4); cursor:pointer; border:1.5px solid var(--border-color); background:var(--bg-input); color:var(--text-main);">APPROVED</button>
                 <button id="dsSaveBtn" class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="_dsSave()">Save</button>
-                <button class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="_dsOpenGenerate()">Generate PDF</button>
+                <button id="dsGenerateBtn" class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="_dsOpenGenerate()">Generate PDF</button>
                 <!-- No Done button: the top-nav tabs are how you leave. The
                      second margin-right:auto spacer that used to sit before
                      Generate PDF went with it (the flex:1 span above already
@@ -2485,8 +2485,8 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.29';</script>
-<script src="app.js?v=18.29"></script>
+<script>window.FRAME_HTML_VERSION = '18.30';</script>
+<script src="app.js?v=18.30"></script>
 
 </body>
 </html>

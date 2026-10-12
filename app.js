@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.29';
+const APP_VERSION = '18.30';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -187,6 +187,7 @@ function _scheduleNavBadges() {
 // The Help checklist. Built as markup for renderHelpRefSection, with a Go
 // button per step that closes Help and takes you there.
 function _helpLiveEntry(kind) {
+    if (kind === 'tour') return _tourHelpEntry();
     if (kind !== 'steps') return '';
     let steps;
     try { steps = _projectSteps(); } catch (e) { return ''; }
@@ -287,6 +288,12 @@ async function openStartScreen() {
     op.onclick = () => { if (typeof openMasterProject === 'function') openMasterProject(); };
     cards.appendChild(op);
     body.appendChild(cards);
+    // The tour runs over the app behind this screen and brings you back here when it
+    // ends, so the choice between Continue, New and Open is still yours to make.
+    const tl = document.createElement('button'); tl.type = 'button'; tl.className = 'ss-tour';
+    tl.textContent = 'New to FRAME? Take the guided tour';
+    tl.onclick = () => { _startScreenClose(); startTour({ onEnd: () => { openStartScreen(); } }); };
+    body.appendChild(tl);
     if (peek) {
         const note = document.createElement('div'); note.className = 'ss-note';
         note.textContent = 'Starting a new project or opening a file replaces this unsaved work once you make a change.';
@@ -361,16 +368,18 @@ function _nextStepNow() {
 function _syncNextStep() {
     const old = document.getElementById('nextStep');
     const st = _nextStepDismissed ? null : _nextStepNow();
-    if (!st || document.getElementById('startScreen')) { if (old) old.remove(); return; }
+    if (!st || document.getElementById('startScreen') || document.getElementById('frameTour')) { if (old) old.remove(); return; }
     const bar = old || document.createElement('div');
     bar.id = 'nextStep'; bar.className = 'next-step';
     bar.innerHTML = '<span class="ns-n"></span><span class="ns-text"></span>'
         + '<button type="button" class="ns-go">Go</button><button type="button" class="ns-all" title="All five steps, in Help">All steps</button>'
+        + (_tourDone() ? '' : '<button type="button" class="ns-tour" title="A guided walk through every screen">Tour</button>')
         + '<button type="button" class="ns-x" title="Hide until next time" aria-label="Hide">×</button>';
     bar.querySelector('.ns-n').textContent = 'Step ' + st.n;
     bar.querySelector('.ns-text').textContent = st.text;
     bar.querySelector('.ns-go').onclick = () => _helpGoStep(st.key);
     bar.querySelector('.ns-all').onclick = () => { try { openHelpModal(); renderHelpRefSection('getting-started'); } catch (e) {} };
+    const nt = bar.querySelector('.ns-tour'); if (nt) nt.onclick = () => startTour();
     bar.querySelector('.ns-x').onclick = () => { _nextStepDismissed = true; bar.remove(); };
     if (!old) document.body.appendChild(bar);
 }
@@ -393,6 +402,348 @@ function _helpGoStep(key) {
     if (key === 'walls') { switchView('elevation', typeof currentElevIndex === 'number' ? currentElevIndex : 0); return; }
     switchView('deck');
     if (key === 'pdf' && typeof _dsOpenGenerate === 'function') { try { _dsOpenGenerate(); } catch (e) {} }
+}
+
+// ── GUIDED TOUR (18.30) ─────────────────────────────────────────────────────
+// A new designer learned FRAME on a call. The five-step checklist (Help > Start
+// here, the next-step bar) says WHAT comes next; nothing showed WHERE on screen
+// any of it lives. The tour walks the real app: it dims everything except one
+// control, says what it is for and why it comes at that point in the work, and
+// moves between the three views by itself.
+//
+// THE TOUR IS READ-ONLY. A step's prep only NAVIGATES (switchView, a Deck Studio
+// tab, which page is selected, the elevation sidebar tab) and never writes the
+// project, so taking the tour on a live job cannot change it and pushes no undo.
+// The page underneath is blocked while it runs, for the same reason: a click that
+// landed on the app mid-tour would be an edit the designer did not mean to make.
+//
+// ONE LIST, TWO TOURS. FRAME_TOUR is the whole job in the order a deck is built;
+// "Tour this screen" is the same steps filtered to the view you are on, so the two
+// cannot describe one control two ways.
+//
+// A TARGET THAT IS NOT ON SCREEN IS NOT AN ERROR. A fresh project has no spec page
+// to select and an uploaded plan has no Upload slot; `target` takes a list and the
+// first VISIBLE match wins, and with none the card centres and dims the whole
+// screen. A tour that died on the one screen that differs from the author's would
+// be worse than no tour.
+//
+// Whether you have finished it is a per-machine fact (localStorage), never project
+// data, like the next-step bar's dismissal.
+const TOUR_DONE_KEY = 'frameTourDone';
+const TOUR_CHAPTERS = [
+    'Welcome', 'List the codes', 'Spec the pieces', 'Place on walls',
+    'Pin the plan', 'Build the deck', 'Generate', 'Finish',
+];
+function _tourElev() { switchView('elevation', typeof currentElevIndex === 'number' ? currentElevIndex : 0); }
+function _tourElevTab(k) { _tourElev(); if (_elevSidebarTab !== k) switchElevTab(k); }
+function _tourDeck(tab) { switchView('deck'); if (typeof openDeckStudio === 'function') openDeckStudio(tab); }
+// Select the first page of a kind on the Pages tab. A navigation, the same move
+// _dsGoFloorplanItems makes; nothing is written to the project.
+function _tourDeckPage(kinds) {
+    _tourDeck('pages');
+    _dsPages = _deckPageList();
+    for (const k of kinds) {
+        const i = _dsPages.findIndex(d => d && d.kind === k);
+        if (i >= 0) { _dsIndex = i; break; }
+    }
+    _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
+}
+function _tourParentOf(id) { const el = document.getElementById(id); return el ? el.parentElement : null; }
+const FRAME_TOUR = [
+    { ch: 0, title: 'Welcome to FRAME',
+      body: 'FRAME turns a list of artwork into a client presentation: spec pages, wall elevations, floor plans and the PDF. This tour walks the job in the order a deck is built. It only looks around, so it cannot change your project. Use the arrow keys or the buttons, and Esc to leave at any point.' },
+    { ch: 0, target: '#nav-tabs-fixed', prep: () => switchView('dashboard'),
+      title: 'Three views, numbered in work order',
+      body: '1 Frame Dashboard is where pieces are specced, 2 Elevation is where they hang on walls, and 3 Deck is the presentation itself. The little counters on Elevation and Deck tell you what is still left: pieces not on a wall, and pieces not pinned on the plan.' },
+    { ch: 1, view: 'deck', target: ['#dsToolsPageBody .fp-add-bar', '#dsToolsPageBody'], prep: () => _dsGoFloorplanItems(),
+      title: 'Start by listing the item codes',
+      body: 'Every project starts here, on the floorplan Items list. Add a code for each placement: ART for framed art, EGD for wallcovering, WF for window film. Codes are always numbered in order with no gaps (that is the house standard, not a setting), and everything else in the deck hangs off them.' },
+    { ch: 1, view: 'deck', target: ['#dsToolsPageBody .fp-item-head', '#dsToolsPageBody'], prep: () => _dsGoFloorplanItems(),
+      title: 'One row per placement',
+      body: 'Each row is a placement. Its Frames menu turns a Single into a Diptych, Triptych or salon hang (ART.2A, ART.2B, ART.2C), drag a row to renumber it, and double-click a code to rename it. Walls, spec pages and the plan all follow.' },
+    { ch: 2, view: 'dashboard', target: '.table-container', prep: () => switchView('dashboard'),
+      title: 'The Frame Dashboard: one row per piece',
+      body: 'Every piece you listed has a row here. Click a row to edit it. Ctrl+click or Shift+click several rows and use Bulk Edit to change one field on all of them at once.' },
+    { ch: 2, view: 'dashboard', target: ['#dashRightPane .controls', '#dashRightPane'], prep: () => switchView('dashboard'),
+      title: 'Spec it',
+      body: 'The form sets the product, the size, the moulding, the mats and the glass. Pick the moulding from the Library so the spec page shows the real corner and profile. Everything you set here prints on the spec page and goes into the CSV.' },
+    { ch: 2, view: 'dashboard', target: '#dash-frame-visual', prep: () => switchView('dashboard'),
+      title: 'Drop the artwork in',
+      body: 'Drag an image file onto the preview to give the piece its artwork. The file name becomes its image code. Revised images later? Bulk Images in the header swaps many at once by matching names.' },
+    { ch: 2, view: 'dashboard', target: ['#dashPushSelector', '#dashRightPane'], prep: () => switchView('dashboard'),
+      title: 'Push to Wall',
+      body: 'Pick a wall here and press Send to hang the selected piece on it. You can also add pieces from the Elevation side, which is next.' },
+    { ch: 3, view: 'elevation', target: '#elev-wall-rail', prep: () => _tourElev(),
+      title: 'The wall rail',
+      body: 'Every wall is its own drawing and its own page in the deck. Click a wall to open it, drag to reorder. + Add Wall asks which item code the wall is for, so no wall is left out of the deck.' },
+    { ch: 3, view: 'elevation', target: '.elev-add-arrange-fixed', prep: () => _tourElevTab('art'),
+      title: 'Add & Arrange',
+      body: 'Import Frames adds the pieces you tick in one go. The frame list below it is every piece on this wall: lock, hide, re-letter and swap artwork from there.' },
+    { ch: 3, view: 'elevation', target: '#wall', prep: () => _tourElevTab('art'),
+      title: 'Hang the work',
+      body: 'Drag frames into place; they snap to the grid and to each other. Hold Shift for fine moves, Ctrl+click to select several, Ctrl+G to group. Dimensions are live: drag a line to move it, drag its number to slide it, and press M to draw your own measure line.' },
+    { ch: 3, view: 'elevation', target: ['#elev-sec-wall', '#wallW'], prep: () => _tourElevTab('art'),
+      title: 'Wall size and wall type',
+      body: 'Set the real wall width and height first, so every dimension is true. ART WALL is the default. EGD WALL turns the wall into a wallcovering surface, and WF WALL builds a window for film and opens the Glass tab.' },
+    { ch: 3, view: 'elevation', target: '#elev-sec-layout', prep: () => _tourElevTab('art'),
+      title: 'Layout guides',
+      body: 'These switch on the overlays: letters, outside and spacing dimensions, the scale figure, centre and hang lines. They are shared by every wall, and the breaker pages in the deck print the same ones, so set them once the way you want the drawings to read.' },
+    { ch: 3, view: 'elevation', target: '.elev-tabs', prep: () => _tourElevTab('art'),
+      title: 'Context and Glass',
+      body: 'Context is the room: trace the client’s elevation behind the wall, and drop in doors, beds, TVs and millwork at standard sizes so you can see what the art has to clear. Glass is window panels for film. Both are optional.' },
+    { ch: 4, view: 'deck', target: ['.fp-upload-slot', '#dsCenter'], prep: () => _dsGoFloorplanItems(),
+      title: 'Upload the floor plan',
+      body: 'Back in the Deck, the floorplan page. While it has no plan, Upload floor plan sits right in the middle of the page. A project with several floors gets a plan per level from the panel’s Plan tab.' },
+    { ch: 4, view: 'deck', target: ['#dsToolsPageBody', '#dsTools'], prep: () => _dsGoFloorplanItems(),
+      title: 'Pin each piece',
+      body: 'Click a code in Items, then click the plan to pin it. Draw a wall line to show which wall and how much of it. Tick Unplaced to see only what is left. Hold Shift to keep a line straight.' },
+    { ch: 5, view: 'deck', target: ['#dsPresetBar', '#dsTabProject'], prep: () => _tourDeck('project'),
+      title: 'Pick the presentation type',
+      body: 'Concept, Wireframe, Art Development, Final Spec, Install Guide or Catalogue. Each one decides which pages are in the deck, so choose it before you start polishing pages.' },
+    { ch: 5, view: 'deck', target: ['#dsProjLeft', '#dsTabProject'], prep: () => _tourDeck('project'),
+      title: 'Project details and Include pages',
+      body: 'The project name, client and footer details print on every page. Include pages switches individual sections on and off, and the preview on the right is the real page as it will print.' },
+    { ch: 5, view: 'deck', target: '#dsRail', prep: () => _tourDeckPage(['spec', 'floorplan']),
+      title: 'Every page, in order',
+      body: 'The Pages tab lists the whole deck. Click a page to edit it. Pages you insert can be dragged anywhere, or added from the gap between two pages. Spec, floorplan and breaker pages follow the project’s own order, and a locked page says where that order is set.' },
+    { ch: 5, view: 'deck', target: ['#dsTools', '#dsToolsPageBody'], prep: () => _tourDeckPage(['spec', 'floorplan']),
+      title: 'What each page shows',
+      body: 'On a spec page, Show on page ticks the frame corner, the moulding profile, the floorplan and the elevation. A ticked part you do not have yet keeps its space, so the page does not jump around while you fill it in. Changes apply to the whole deck unless you pick this page only.' },
+    { ch: 5, view: 'deck', target: '#dsToolDock', prep: () => _tourDeckPage(['spec', 'floorplan']),
+      title: 'Notes, arrows and images',
+      body: 'The tool dock adds text, notes and stamps, lines and arrows, image placeholders and images. Single keys work too: T text, L line, A arrow, R rectangle, I image. Click a heading on any page to change its type.' },
+    { ch: 6, view: 'deck', target: '#dsBuildBtn', prep: () => _tourDeckPage(['spec', 'floorplan']),
+      title: 'Preview the exact page',
+      body: 'Preview renders the page exactly as the PDF will print it. Use it on anything you are unsure of before sending.' },
+    { ch: 6, view: 'deck', target: '#dsPreflightBtn', prep: () => _tourDeckPage(['spec', 'floorplan']),
+      title: 'Run Preflight',
+      body: 'Preflight scans the whole deck for missing artwork, unpinned pieces, missing plans and empty pages, with a button to jump to each one. Run it every time before you generate.' },
+    { ch: 6, view: 'deck', target: '#dsGenerateBtn', prep: () => _tourDeck('pages'),
+      title: 'Generate the PDF',
+      body: 'When Preflight is clean, Generate PDF builds the client deck. Draft is quick for proofs, Print is full image quality for the final.' },
+    { ch: 7, target: '#saveProjectBtn',
+      title: 'Save the project file',
+      body: 'Save Project (Ctrl+S) writes one .json file with everything in it. In Chrome and Edge it saves straight back to the file you opened. Versions keeps named snapshots you can compare and go back to.' },
+    { ch: 7, target: '#helpBtn',
+      title: 'You are ready',
+      body: 'Help has the full reference and a live checklist of where this project is. Ctrl+K (Cmd+K on a Mac) jumps to any code, wall or page by typing. You can replay this tour, or tour just the screen you are on, from Help > Start here.' },
+];
+
+let _tour = null;   // { steps, i, onEnd, els, timer, keyFn, resizeFn }
+function _tourIsOpen() { return !!(_tour && _tour.els && _tour.els.root.isConnected); }
+function _tourDone() { try { return !!localStorage.getItem(TOUR_DONE_KEY); } catch (e) { return false; } }
+// The steps for one view: everything that happens on the screen you are on. The
+// global steps (Welcome, Save, Help) are left out; they are not about this screen.
+function _tourStepsFor(view) { return FRAME_TOUR.filter(s => s.view === view); }
+
+function startTour(opts) {
+    const o = opts || {};
+    const steps = o.steps || FRAME_TOUR;
+    if (!steps.length || typeof document === 'undefined' || !document.body) return null;
+    endTour(true);
+    try { closeHelpModal(); } catch (e) {}
+    const root = document.createElement('div');
+    root.id = 'frameTour'; root.className = 'frame-tour';
+    // The blocker swallows every click meant for the app; the spotlight is a hole
+    // DRAWN in the dimming (a box-shadow), never a hole in the blocker, so the
+    // highlighted control is shown but not pressed.
+    root.innerHTML = '<div class="tour-block"></div><div class="tour-spot"></div>'
+        + '<div class="tour-card" role="dialog" aria-modal="true" aria-labelledby="tourTitle">'
+        + '<div class="tour-top"><span class="tour-ch"></span><span class="tour-count"></span>'
+        + '<button type="button" class="tour-x" aria-label="End tour" title="End tour (Esc)">×</button></div>'
+        + '<div class="tour-title" id="tourTitle"></div><div class="tour-body"></div>'
+        + '<div class="tour-bar"><span class="tour-fill"></span></div>'
+        + '<div class="tour-list" hidden></div>'
+        + '<div class="tour-foot"><button type="button" class="tour-steps-btn" aria-expanded="false">All steps</button><span class="tour-sp"></span>'
+        + '<button type="button" class="tour-back">Back</button><button type="button" class="tour-next">Next</button></div>'
+        + '</div>';
+    document.body.appendChild(root);
+    const q = s => root.querySelector(s);
+    const els = { root, spot: q('.tour-spot'), card: q('.tour-card'), block: q('.tour-block') };
+    _tour = { steps, i: 0, onEnd: o.onEnd || null, els, opener: document.activeElement };
+    q('.tour-x').onclick = () => endTour();
+    q('.tour-back').onclick = () => _tourGo(_tour.i - 1);
+    q('.tour-next').onclick = () => (_tour.i >= _tour.steps.length - 1 ? endTour() : _tourGo(_tour.i + 1));
+    q('.tour-steps-btn').onclick = () => _tourToggleList();
+    // A click on the dimmed app nudges the card rather than doing nothing silently.
+    els.block.onclick = () => { els.card.classList.remove('tour-nudge'); void els.card.offsetWidth; els.card.classList.add('tour-nudge'); };
+    // CAPTURE on window, so it runs ahead of every document-level shortcut: V, T, Delete
+    // or Ctrl+Z reaching the app mid-tour would edit a project the tour promised not to
+    // touch. Typing is not a thing the tour asks for, so every other key is swallowed.
+    _tour.keyFn = (e) => {
+        if (!_tourIsOpen()) return;
+        const k = e.key;
+        if (k === 'Tab') {
+            const f = Array.from(els.card.querySelectorAll('button:not([disabled])')).filter(b => !b.closest('[hidden]'));
+            if (!f.length) return;
+            const at = f.indexOf(document.activeElement);
+            e.preventDefault();
+            const n = e.shiftKey ? (at <= 0 ? f.length - 1 : at - 1) : (at < 0 || at >= f.length - 1 ? 0 : at + 1);
+            f[n].focus();
+            e.stopImmediatePropagation();
+            return;
+        }
+        if ((k === 'Enter' || k === ' ') && document.activeElement && els.card.contains(document.activeElement) && document.activeElement.tagName === 'BUTTON') {
+            e.stopImmediatePropagation();   // let the focused tour button take it
+            return;
+        }
+        e.stopImmediatePropagation(); e.preventDefault();
+        if (k === 'Escape') endTour();
+        else if (k === 'ArrowRight' || k === 'Enter') q('.tour-next').click();
+        else if (k === 'ArrowLeft') { if (_tour.i > 0) _tourGo(_tour.i - 1); }
+    };
+    window.addEventListener('keydown', _tour.keyFn, true);
+    _tour.resizeFn = () => _tourPlace();
+    window.addEventListener('resize', _tour.resizeFn);
+    // Views render in stages (Deck Studio builds its panel after the page list), so a
+    // control can move after the step lands. A slow re-measure follows it; it is only
+    // a getBoundingClientRect and it stops with the tour.
+    _tour.timer = setInterval(() => { if (_tourIsOpen()) _tourPlace(); }, 600);
+    _tourGo(Math.max(0, Math.min(steps.length - 1, o.at | 0)));
+    return root;
+}
+
+function endTour(silent) {
+    if (!_tour) return;
+    const t = _tour;
+    _tour = null;
+    clearInterval(t.timer);
+    window.removeEventListener('keydown', t.keyFn, true);
+    window.removeEventListener('resize', t.resizeFn);
+    try { t.els.root.remove(); } catch (e) {}
+    if (silent) return;
+    try { localStorage.setItem(TOUR_DONE_KEY, APP_VERSION); } catch (e) {}
+    try { _syncNextStep(); } catch (e) {}
+    if (typeof t.onEnd === 'function') { try { t.onEnd(); } catch (e) {} }
+    else { try { if (t.opener && t.opener.focus && t.opener.isConnected) t.opener.focus({ preventScroll: true }); } catch (e) {} }
+}
+
+// The first VISIBLE match. Takes a selector, a list of them, or a function.
+function _tourTarget(step) {
+    const list = typeof step.target === 'function' ? [step.target] : [].concat(step.target || []);
+    // Every match, not the first: a rail thumbnail can carry a hidden copy of the
+    // same control ahead of the live one in document order.
+    for (const t of list) {
+        let els = [];
+        try { els = typeof t === 'function' ? [t()] : Array.from(document.querySelectorAll(t)); } catch (e) { els = []; }
+        for (const el of els) {
+            if (!el || !el.getBoundingClientRect) continue;
+            const r = el.getBoundingClientRect();
+            if (r.width > 2 && r.height > 2) return el;
+        }
+    }
+    return null;
+}
+
+function _tourGo(i) {
+    if (!_tour) return;
+    const steps = _tour.steps;
+    i = Math.max(0, Math.min(steps.length - 1, i));
+    _tour.i = i;
+    const s = steps[i];
+    if (s.prep) { try { s.prep(); } catch (e) {} }
+    // A prep can open a dialog of its own (an unsaved-template question); the tour
+    // is not the place to answer it, so it stays on top and simply waits.
+    const el = _tourTarget(s);
+    if (el && el.scrollIntoView) { try { el.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) {} }
+    const q = sel => _tour.els.card.querySelector(sel);
+    q('.tour-ch').textContent = TOUR_CHAPTERS[s.ch] || '';
+    q('.tour-count').textContent = (i + 1) + ' of ' + steps.length;
+    q('.tour-title').textContent = s.title;
+    q('.tour-body').textContent = s.body;
+    q('.tour-fill').style.width = Math.round(((i + 1) / steps.length) * 100) + '%';
+    q('.tour-back').disabled = i === 0;
+    q('.tour-next').textContent = i === steps.length - 1 ? 'Finish' : 'Next';
+    if (!q('.tour-list').hidden) _tourFillList();
+    _tourPlace();
+    // Once more after the view has painted: Deck Studio lays its panel out a frame late.
+    setTimeout(() => { if (_tour && _tour.i === i) _tourPlace(); }, 120);
+    try { q('.tour-next').focus({ preventScroll: true }); } catch (e) {}
+}
+
+// The steps list is the "where am I" menu: grouped by chapter, current step lit,
+// any step a click away.
+function _tourToggleList() {
+    const list = _tour.els.card.querySelector('.tour-list');
+    const btn = _tour.els.card.querySelector('.tour-steps-btn');
+    list.hidden = !list.hidden;
+    btn.setAttribute('aria-expanded', String(!list.hidden));
+    btn.classList.toggle('active', !list.hidden);
+    if (!list.hidden) _tourFillList();
+    _tourPlace();
+}
+function _tourFillList() {
+    const list = _tour.els.card.querySelector('.tour-list');
+    list.innerHTML = '';
+    let ch = -1;
+    _tour.steps.forEach((s, k) => {
+        if (s.ch !== ch) {
+            ch = s.ch;
+            const h = document.createElement('div'); h.className = 'tour-list-ch';
+            h.textContent = TOUR_CHAPTERS[ch] || '';
+            list.appendChild(h);
+        }
+        const b = document.createElement('button'); b.type = 'button';
+        b.className = 'tour-list-step' + (k === _tour.i ? ' active' : '') + (k < _tour.i ? ' seen' : '');
+        b.textContent = (k + 1) + '. ' + s.title;
+        b.onclick = () => _tourGo(k);
+        list.appendChild(b);
+    });
+    const cur = list.querySelector('.active');
+    if (cur && cur.scrollIntoView) { try { cur.scrollIntoView({ block: 'nearest' }); } catch (e) {} }
+}
+
+const TOUR_PAD = 6;     // spotlight margin round the control
+const TOUR_GAP = 14;    // card to spotlight
+const TOUR_EDGE = 12;   // card to window edge
+function _tourPlace() {
+    if (!_tour) return;
+    const { spot, card } = _tour.els;
+    const W = window.innerWidth || document.documentElement.clientWidth || 1200;
+    const H = window.innerHeight || document.documentElement.clientHeight || 800;
+    const el = _tourTarget(_tour.steps[_tour.i]);
+    const cw = card.offsetWidth || 360, chh = card.offsetHeight || 220;
+    let left, top;
+    if (!el) {
+        // Nothing to point at: dim everything and centre the card.
+        spot.style.cssText = 'left:' + Math.round(W / 2) + 'px; top:' + Math.round(H / 2) + 'px; width:0; height:0;';
+        spot.classList.add('tour-none');
+        left = (W - cw) / 2; top = (H - chh) / 2;
+    } else {
+        spot.classList.remove('tour-none');
+        const r = el.getBoundingClientRect();
+        const x = Math.max(0, r.left - TOUR_PAD), y = Math.max(0, r.top - TOUR_PAD);
+        const w = Math.min(W, r.right + TOUR_PAD) - x, h = Math.min(H, r.bottom + TOUR_PAD) - y;
+        spot.style.cssText = 'left:' + Math.round(x) + 'px; top:' + Math.round(y) + 'px; width:' + Math.round(w) + 'px; height:' + Math.round(h) + 'px;';
+        // Beside it where there is room, in the order the eye reads; a control too big
+        // to sit beside (the wall, the page rail) gets the card in its own corner.
+        const fits = [
+            [x + w + TOUR_GAP, y, W - (x + w) - TOUR_GAP >= cw + TOUR_EDGE],
+            [x - TOUR_GAP - cw, y, x - TOUR_GAP >= cw + TOUR_EDGE],
+            [x, y + h + TOUR_GAP, H - (y + h) - TOUR_GAP >= chh + TOUR_EDGE],
+            [x, y - TOUR_GAP - chh, y - TOUR_GAP >= chh + TOUR_EDGE],
+        ].find(f => f[2]);
+        if (fits) { left = fits[0]; top = fits[1]; }
+        else { left = Math.min(x + w, W) - cw - 20; top = Math.min(y + h, H) - chh - 20; }
+    }
+    left = Math.max(TOUR_EDGE, Math.min(W - cw - TOUR_EDGE, left));
+    top = Math.max(TOUR_EDGE, Math.min(H - chh - TOUR_EDGE, top));
+    card.style.left = Math.round(left) + 'px';
+    card.style.top = Math.round(top) + 'px';
+}
+// Help > Start here: both ways in, as buttons wired by renderHelpRefSection.
+function _tourHelpEntry() {
+    const v = (typeof currentView === 'string' && _tourStepsFor(currentView).length) ? currentView : '';
+    const name = { dashboard: 'Frame Dashboard', elevation: 'Elevation', deck: 'Deck' }[v];
+    return '<p style="margin:0 0 10px;">A walk through the real screens in the order a deck is built: list the codes, spec, hang, pin, build, generate. It only looks around and never changes your project. About five minutes.</p>'
+        + '<div style="display:flex; gap:8px; flex-wrap:wrap;">'
+        + '<button class="action-btn" style="width:auto;" data-tour-start="all">Take the tour</button>'
+        + (v ? '<button class="action-btn btn-secondary" style="width:auto;" data-tour-start="' + v + '">Tour the ' + name + ' screen</button>' : '')
+        + '</div>';
+}
+function _tourStartFrom(which) {
+    if (which === 'all') return startTour();
+    return startTour({ steps: _tourStepsFor(which) });
 }
 
 let currentView = 'dashboard';
@@ -41068,6 +41419,7 @@ const HELP_REFERENCE_DATA = [
         title: 'Start here',
         intro: `FRAME turns a list of pieces into a client presentation. You spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The three tabs at the top are numbered in that order.`,
         entries: [
+            { title: 'Guided tour', live: 'tour' },
             { title: 'Where this project is', live: 'steps' },
             { title: 'Opening FRAME', body: `FRAME opens on the start screen. <strong>Continue</strong> brings back work that was never saved to a file (it only appears when there is some). <strong>New project</strong> asks for the project name, the client and the units, then takes you to the floorplan <strong>Items</strong> list to add the item codes. <strong>Open project</strong> opens a saved .json file.<br><br>While a project is getting started, a bar at the bottom left says the one next step and has a <strong>Go</strong> button. It goes away once the pieces are listed, on walls and pinned. Click the × to hide it until next time.` },
             {
@@ -41252,7 +41604,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.29</strong> A CSV import follows the same rules: the export now writes a Category column at the end, the import puts each row back in its category (or works it out from the code and product), and a row whose code is not a real item code (like Lobby piece) is given the next code of its type, with a list of what changed. Lobby-A and Lobby-B stay together as one set. Making a frame a new item from Elevations keeps its type too.<br><br><strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
+                body: `<strong>18.30</strong> <strong>Guided tour</strong>: a walk through the real screens in the order a deck is built (list the codes, spec, hang, pin, build, generate). It dims everything but the control it is talking about, moves between the views for you, and has an All steps list to jump around. It only looks, so it never changes your project. Start it from Help > Start here, the start screen, or the next-step bar; Help can also tour just the screen you are on.<br><br>
+<strong>18.29</strong> A CSV import follows the same rules: the export now writes a Category column at the end, the import puts each row back in its category (or works it out from the code and product), and a row whose code is not a real item code (like Lobby piece) is given the next code of its type, with a list of what changed. Lobby-A and Lobby-B stay together as one set. Making a frame a new item from Elevations keeps its type too.<br><br><strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
 <strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
 <strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
 <strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
@@ -41368,6 +41721,9 @@ function renderHelpRefSection(sectionId) {
     // markup carries no quoting for anything to strip.
     content.querySelectorAll('[data-help-go]').forEach(btn => {
         btn.onclick = () => _helpGoStep(btn.getAttribute('data-help-go'));
+    });
+    content.querySelectorAll('[data-tour-start]').forEach(btn => {
+        btn.onclick = () => _tourStartFrom(btn.getAttribute('data-tour-start'));
     });
     // Update active nav button
     document.querySelectorAll('#helpRefNav button').forEach(b => {

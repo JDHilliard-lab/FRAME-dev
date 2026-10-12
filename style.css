@@ -68,6 +68,8 @@
     --z-modal-progress: 100004;
     --z-modal-alert: 100010;
     /* Above every modal layer: a toast is routinely raised from inside one. */
+    --z-tour: 100006;   /* guided tour: over the app and its progress boxes, under an alert
+                           so a failure raised while it runs is still read */
     --z-toast: 100020;
 
     /* -- The blues, which were four --
@@ -2663,3 +2665,52 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .ds-plan-backlink:hover, .ds-plan-backlink:focus-visible { outline-color: var(--selected); background-color: rgba(33, 150, 243, 0.06); }
 .ds-plan-backlink-tag { position: absolute; left: 4px; top: 4px; padding: 2px 6px; border-radius: var(--r-4); background: var(--selected); color: #fff; font-size: var(--fs-65); font-weight: 600; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.12s; }
 .ds-plan-backlink:hover .ds-plan-backlink-tag, .ds-plan-backlink:focus-visible .ds-plan-backlink-tag { opacity: 1; }
+
+/* ── GUIDED TOUR (18.30) ────────────────────────────────────────────────
+   The spotlight is a box-shadow hole in the dimming, never a hole in the
+   blocker: the highlighted control is SHOWN, not pressed, so the tour cannot
+   edit the project it is walking through. */
+.frame-tour { position: fixed; inset: 0; z-index: var(--z-tour); pointer-events: none; }
+.frame-tour .tour-block { position: absolute; inset: 0; pointer-events: auto; background: transparent; }
+.frame-tour .tour-spot { position: absolute; pointer-events: none; border-radius: var(--r-6);
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.9), 0 0 0 200vmax rgba(10,10,14,0.62);
+    transition: left 260ms ease, top 260ms ease, width 260ms ease, height 260ms ease; }
+.frame-tour .tour-spot.tour-none { box-shadow: 0 0 0 200vmax rgba(10,10,14,0.62); }
+.frame-tour .tour-card { position: absolute; pointer-events: auto; width: 360px; max-width: calc(100vw - 24px);
+    background: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border-color);
+    border-radius: var(--r-8); box-shadow: 0 18px 50px rgba(0,0,0,0.45); padding: 14px 16px 12px;
+    transition: left 260ms ease, top 260ms ease; }
+.frame-tour .tour-card.tour-nudge { animation: tourNudge 360ms ease; }
+@keyframes tourNudge { 0%,100% { transform: none; } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+.frame-tour .tour-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.frame-tour .tour-ch { font-size: var(--fs-55); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--ui-active); }
+.frame-tour .tour-count { flex: 1; font-size: var(--fs-60); color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.frame-tour .tour-x { border: none; background: transparent; color: var(--text-muted); font-size: var(--fs-105); line-height: 1; cursor: pointer; padding: 0 2px; }
+.frame-tour .tour-x:hover { color: var(--text-strong); }
+.frame-tour .tour-title { font-size: var(--fs-95); font-weight: 700; color: var(--text-strong); margin-bottom: 6px; }
+.frame-tour .tour-body { font-size: var(--fs-75); line-height: 1.5; }
+.frame-tour .tour-bar { height: 3px; border-radius: var(--r-2); background: var(--border-color); margin: 12px 0 10px; overflow: hidden; }
+.frame-tour .tour-fill { display: block; height: 100%; background: var(--ui-active); transition: width 260ms ease; }
+.frame-tour .tour-list { max-height: 220px; overflow-y: auto; margin-bottom: 10px; padding: 4px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+.frame-tour .tour-list[hidden] { display: none; }
+.frame-tour .tour-list-ch { font-size: var(--fs-55); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin: 8px 0 2px; }
+.frame-tour .tour-list-step { display: block; width: 100%; text-align: left; border: none; background: transparent; color: var(--text-main);
+    font-size: var(--fs-65); padding: 3px 6px; border-radius: var(--r-4); cursor: pointer; }
+.frame-tour .tour-list-step.seen { color: var(--text-muted); }
+.frame-tour .tour-list-step:hover { background: var(--bg-subpanel); }
+.frame-tour .tour-list-step.active { background: var(--ui-active); color: #fff; }
+.frame-tour .tour-foot { display: flex; align-items: center; gap: 6px; }
+.frame-tour .tour-sp { flex: 1; }
+.frame-tour .tour-foot button { height: 28px; padding: 0 12px; font-size: var(--fs-70); border-radius: var(--r-4); cursor: pointer;
+    border: 1px solid var(--border-color); background: transparent; color: var(--text-main); }
+.frame-tour .tour-foot button:disabled { opacity: 0.4; cursor: default; }
+.frame-tour .tour-foot .tour-steps-btn.active { border-color: var(--ui-active); color: var(--ui-active); }
+.frame-tour .tour-foot .tour-next { background: var(--ui-active); border-color: var(--ui-active); color: #fff; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) {
+    .frame-tour .tour-spot, .frame-tour .tour-card, .frame-tour .tour-fill { transition: none; }
+    .frame-tour .tour-card.tour-nudge { animation: none; }
+}
+.ss-tour { display: block; margin: 14px auto 0; border: none; background: transparent; color: var(--text-muted);
+    font-size: var(--fs-70); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.ss-tour:hover { color: var(--text-strong); }
+.next-step .ns-tour { border-color: var(--ui-active); color: var(--ui-active); }
