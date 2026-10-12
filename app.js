@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.28';
+const APP_VERSION = '18.29';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -11618,6 +11618,65 @@ function updateDashVisualsFromDOM() {
 }
 
 // CSV IMPORT PARSER
+// THE IMPORT FOLLOWS THE SAME RULES AS + Add Item (18.28). Every row ends up in a
+// category and under a placement code; nothing arrives floating.
+//  - CATEGORY: the CSV's Category column (label or key), else the category whose type
+//    matches the code's prefix AND the product, else any category with that prefix. A
+//    tier-style project (Primary / Secondary) has no prefixes, so a row with no column
+//    there stays None, which is a real category in that scheme.
+//  - CODE: a row whose code has no PREFIX.number (`Lobby piece`, `12`) gets the next
+//    code of its category's type. Rows that grouped together keep grouping (two
+//    `Lobby-A` / `Lobby-B` become ART.4A / ART.4B), so a set stays one placement. A
+//    code that already parses is IDENTITY and is never touched, catalogue codes included.
+// Returns { renamed: [{from, to}] }. `cats` is the raw Category cell per row.
+function _csvPlaceRows(rows, cats) {
+    const all = _artCats();
+    const norm = (v) => String(v || '').trim().toLowerCase();
+    const prefixOf = (c) => (c && (c.prefix || (ART_CATEGORY_TYPES.find(t => t.key === c.key) || {}).prefix)) || '';
+    const productOf = (c) => (c && (c.product || (ART_CATEGORY_TYPES.find(t => t.key === c.key) || {}).product)) || '';
+    const isCode = (id) => /^[A-Za-z][A-Za-z0-9]*\.\d/.test(_artGroupKey(id));
+    rows.forEach((r, i) => {
+        const cell = norm(cats && cats[i]);
+        let c = cell ? all.find(x => x && (norm(x.label) === cell || norm(x.key) === cell)) : null;
+        if (!c && isCode(r.id)) {
+            const pre = String(r.id).split('.')[0].toUpperCase();
+            const withPre = all.filter(x => x && x.key && prefixOf(x).toUpperCase() === pre);
+            c = withPre.find(x => productOf(x) === r.product) || withPre[0] || null;
+        }
+        if (!c && !isCode(r.id)) {
+            c = all.find(x => x && x.key && productOf(x) && productOf(x) === r.product) || null;
+        }
+        if (c) r.category = c.key;
+    });
+    // Codes. Built against the incoming rows, since they REPLACE the project.
+    const renamed = [], groups = {}, order = [];
+    rows.forEach(r => {
+        if (isCode(r.id)) return;
+        // `Lobby-A` / `Lobby B` share the stem `Lobby`; _artGroupKey keeps a code with no
+        // number whole, so the stem is read here, and only off a SEPARATED single letter.
+        const id = String(r.id).trim();
+        const stem = id.replace(/[-_.\s]+[A-Za-z]$/, '') || id;
+        const k = stem + '|' + (r.category || '');
+        if (!groups[k]) { groups[k] = []; order.push(k); }
+        groups[k].push(r);
+    });
+    const saved = dashProjectData;
+    try {
+        dashProjectData = rows;
+        order.forEach(k => {
+            const g = groups[k];
+            const code = _nextPlacementCode(_catCodeInfo(g[0].category || '').prefix);
+            const letters = _setLetters(g.length);
+            g.forEach((r, j) => {
+                const to = g.length === 1 ? code : code + letters[j];
+                renamed.push({ from: String(r.id), to: to });
+                r.id = to;
+            });
+        });
+    } finally { dashProjectData = saved; }
+    return { renamed: renamed };
+}
+
 function importDashCSV(e) {
     const f = e.target.files[0]; if(!f) return;
     const r = new FileReader();
@@ -11846,6 +11905,7 @@ function importDashCSV(e) {
             d.mount = cellOr(cols, 'Mount', '');
             d.notes = cellOr(cols, 'Notes', '');
             d.prodNotes = cellOr(cols, 'Production Notes', '');
+            d._csvCat = cellOr(cols, 'Category', '');
 
             newData.push(d);
         }
@@ -11854,6 +11914,8 @@ function importDashCSV(e) {
             return showInfoModal('Import Failed', 'No valid rows found in the CSV. Each row needs at least an ITEM CODE.');
         }
 
+        const _placed = _csvPlaceRows(newData, newData.map(d => d._csvCat));
+        newData.forEach(d => { delete d._csvCat; });
         dashProjectData = newData;
         dashSelectedRowIndex = 0;
         _codesSettle({ walls: false });
@@ -11861,7 +11923,16 @@ function importDashCSV(e) {
         renderDashTable();
         elevations.forEach(elev => elev.frames = []);
         recalculateDashboardQuantities();
-        _toast('Import Complete', `Imported ${newData.length} items successfully.`);
+        // A code the import CHANGED is a change nobody asked for, so it is a modal (the
+        // house rule); a clean import is safe to miss and stays a toast.
+        if (_placed.renamed.length) {
+            const list = _placed.renamed.slice(0, 12).map(x => x.from + '  \u2192  ' + x.to).join('\n');
+            showInfoModal('Imported with new item codes',
+                'Imported ' + newData.length + ' items. ' + _placed.renamed.length + ' had no item code the deck can use (every piece belongs to a code like ART.4 or EGD.2), so each was given the next code of its type:\n\n'
+                + list + (_placed.renamed.length > 12 ? '\n\u2026and ' + (_placed.renamed.length - 12) + ' more' : ''));
+        } else {
+            _toast('Import Complete', `Imported ${newData.length} items successfully.`);
+        }
     };
     r.readAsText(f); e.target.value = '';
 }
@@ -39155,7 +39226,7 @@ function buildDashCSVString() {
         // Print Panels is the Illustrator artboard set for a split window-film
         // graphic: `panel:printW x printH` per panel, semicolon separated, RAW
         // INCHES like the columns above it. Blank for `full` output.
-        `Material,Print Output,Print Panels (in),Arrangement\n`;
+        `Material,Print Output,Print Panels (in),Arrangement,Category\n`;
 
     // A catalogue mockup's slots define the arrangement and are not items anyone can
     // order - they carry no artwork and no image code. Computed once rather than per row.
@@ -39325,7 +39396,10 @@ function buildDashCSVString() {
             // very end like the three columns above it, because the InDesign script
             // addresses columns BY NAME and a new trailing one is invisible to it while an
             // inserted one shifts every position after it.
-            _catLayoutTagForRow(r.id)
+            _catLayoutTagForRow(r.id),
+            // Category (18.28): the placement's type, by LABEL, so an import puts the row
+            // back in its category instead of guessing. Trailing, for the same reason.
+            ((_artCats().find(c => c && c.key === (r.category || '')) || {}).label || '')
         ];
         csv += d.map(s => `"${String(s).replace(/"/g, '""')}"`).join(',') + '\n';
     });
@@ -41178,7 +41252,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
+                body: `<strong>18.29</strong> A CSV import follows the same rules: the export now writes a Category column at the end, the import puts each row back in its category (or works it out from the code and product), and a row whose code is not a real item code (like Lobby piece) is given the next code of its type, with a list of what changed. Lobby-A and Lobby-B stay together as one set. Making a frame a new item from Elevations keeps its type too.<br><br><strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
 <strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
 <strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
 <strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
@@ -41369,7 +41443,7 @@ function confirmDuplicate(type) {
     if(type === 'new') {
         const dashSrc = dashProjectData.find(d => d.id === temp.id);
         const newDash = JSON.parse(JSON.stringify(dashSrc || dashDefaultData));
-        newDash.id = generateNextItemCode();
+        newDash.id = _nextPlacementCode(_codePrefixOfRow(newDash));   // keeps its type (18.28)
         newDash.qty = 0;
         dashProjectData.push(newDash);
         nF.id = newDash.id;

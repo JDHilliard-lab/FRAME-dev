@@ -31,7 +31,7 @@ window.eval(APP + NL + [
   '  get sel() { return dashSelectedRowIndex; }, set sel(v) { dashSelectedRowIndex = v; },',
   '  get cur() { return currentElevIndex; },',
   '  defaults: _editorialDefaults, add: _fpAddCodes, addWall: addNewElevationTab, addItem: addDashRow, dup: duplicateDashRow,',
-  '  list: _placementList,',
+  '  list: _placementList, place: _csvPlaceRows, csv: buildDashCSVString, imp: importDashCSV,',
   '};',
   'window.__hist = 0; var __ph = pushHistory; pushHistory = function () { window.__hist++; return __ph.apply(this, arguments); };',
 ].join(NL));
@@ -164,6 +164,57 @@ check('duplicating EGD.1 gives EGD.2, not ART', () => {
   fresh(); fx.add('egd', 1); fx.sel = 0;
   fx.dup();
   if (!fx.rows.some(r => r.id === 'EGD.2')) throw new Error('rows ' + fx.rows.map(r => r.id).join());
+});
+
+check('IMPORT: a code with no PREFIX.number gets the next code of its type; a set stays one placement; real codes are untouched', () => {
+  fresh();
+  const rows = [
+    { id: 'ART.1', product: 'Framed Art' },
+    { id: 'Lobby-A', product: 'Framed Art' }, { id: 'Lobby-B', product: 'Framed Art' },
+    { id: 'Feature wall', product: 'Wallcovering (EGD)' },
+    { id: 'EGD.1', product: 'Wallcovering (EGD)' },
+    { id: 'ART.7.2A', product: 'Framed Art' },   // a catalogue code: reserves ART.7, so the next is ART.8
+  ];
+  const res = fx.place(rows, []);
+  const ids = rows.map(r => r.id + ':' + r.category).join();
+  if (ids !== 'ART.1:framed,ART.8A:framed,ART.8B:framed,EGD.2:egd,EGD.1:egd,ART.7.2A:framed') throw new Error(ids);
+  if (res.renamed.map(x => x.from + '>' + x.to).join() !== 'Lobby-A>ART.8A,Lobby-B>ART.8B,Feature wall>EGD.2') throw new Error(JSON.stringify(res.renamed));
+});
+
+check('IMPORT: the Category column wins over the product, by label or key', () => {
+  fresh();
+  const rows = [{ id: 'ART.1', product: 'Framed Art' }, { id: 'ART.2', product: 'Framed Art' }];
+  fx.place(rows, ['Canvas', 'framed']);
+  if (rows[0].category !== 'canvas' || rows[1].category !== 'framed') throw new Error(rows.map(r => r.category).join());
+});
+
+check('CSV ROUND TRIP: export writes Category as the LAST column, and an import puts each row back in it', async () => {
+  fresh(); fx.add('canvas', 1); fx.add('egd', 1);
+  const text = fx.csv();
+  const header = text.split(String.fromCharCode(10)).find(l => l.indexOf('ITEM CODE') >= 0);
+  if (header.slice(-',Arrangement,Category'.length) !== ',Arrangement,Category') throw new Error('header ends ' + header.slice(-40));
+  fx.rows.forEach(r => { r.category = ''; });
+  let said = null; window.showInfoModal = (t) => { said = t; };
+  fx.imp({ target: { files: [new window.File([text], 'x.csv')], value: '' } });
+  for (let i = 0; i < 50 && fx.rows.some(r => !r.category); i++) await new Promise(r => setTimeout(r, 10));
+  const got = fx.rows.map(r => r.id + ':' + r.category).join();
+  if (got !== 'ART.1:canvas,EGD.1:egd') throw new Error(got);
+  if (said) throw new Error('a clean import raised a modal: ' + said);
+});
+
+check('IMPORT: renamed codes are SAID in a modal, since nobody asked for them', async () => {
+  fresh(); fx.add('framed', 1);
+  const text = fx.csv().replace('"ART.1"', '"Lobby piece"');
+  let said = null; window.showInfoModal = (t) => { said = t; };
+  fx.imp({ target: { files: [new window.File([text], 'x.csv')], value: '' } });
+  for (let i = 0; i < 50 && !said; i++) await new Promise(r => setTimeout(r, 10));
+  if (said !== 'Imported with new item codes') throw new Error('said ' + said);
+  if (fx.rows[0].id !== 'ART.1') throw new Error('row ' + fx.rows[0].id);
+});
+
+check('no row creator mints a bare ART code any more: generateNextItemCode has no callers', () => {
+  const n = APP.split('generateNextItemCode(').length - 1;
+  if (n !== 1) throw new Error(n - 1 + ' caller(s) left');
 });
 
 check('the empty-wall hint and Help no longer promise a generic-frame button', () => {

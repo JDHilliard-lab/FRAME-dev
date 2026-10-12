@@ -1585,14 +1585,16 @@ const path = require('path');
       const head = lines.filter(l => l.indexOf('Print Panels (in)') >= 0)[0];
       if (!head) throw new Error('no header line');
       const cols = head.split(',');
-      if (cols[cols.length - 1].trim() !== 'Arrangement') throw new Error('last header column: ' + cols[cols.length - 1]);
+      // CHANGED IN 18.28, deliberately: Category is appended after it (test_nothing_floats),
+      // so Arrangement is the second-to-last column and its value the second-to-last cell.
+      if (cols[cols.length - 2].trim() !== 'Arrangement' || cols[cols.length - 1].trim() !== 'Category') throw new Error('last header columns: ' + cols.slice(-2).join());
       // And the VALUE lands in that last cell. Counting cells would pass on a row whose
       // tag was blank, which is the failure that matters.
       const q = String.fromCharCode(34);
       const row = lines.filter(l => l.indexOf(q + _optId + q) >= 0)[0];
       if (!row) throw new Error('no CSV row for option piece ' + _optId);
       const cells = row.split(q + ',' + q);
-      const last = cells[cells.length - 1].split(q)[0];
+      const last = cells[cells.length - 2].split(q)[0];
       if (last.indexOf('Triptych') < 0) throw new Error('the Arrangement cell reads: ' + last);
       // (Blank outside a catalogue is covered by the _catLayoutTagForRow check above.)
     });

@@ -477,6 +477,13 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   moving the arranged ones) or mints a new one, with NO wall. Catalogue rows are never
   offered (`_catalogueRowIds`). One history entry per gesture: `_fpAddCodes(..., {quiet})`
   skips its own push. A duplicate keeps its prefix (`_codePrefixOfRow`).
+  **The CSV import follows the same rules (18.29)** (`_csvPlaceRows`): the export appends a
+  trailing `Category` column (by label; trailing because InDesign reads by name), the
+  import resolves category from it, else code prefix + product, and a code with no
+  `PREFIX.n` gets the next code of its type, separated single-letter stems (`Lobby-A`)
+  staying one set. A code that parses is identity and is never touched. Renames are a
+  modal. Bulk Images never creates rows (it relinks), so it needed nothing.
+  `generateNextItemCode` has no callers left; a test keeps it that way.
   **A LOCAL `const` NAMED LIKE A GLOBAL FUNCTION SHADOWS IT FOR THE WHOLE BLOCK.**
   `drawElevAll` had `const unitSuffix` below a `unitSuffix()` call in the flat-graphic
   placeholder, so any EGD/WF with no art on the open wall threw in the TDZ. Now `_openSfx`.

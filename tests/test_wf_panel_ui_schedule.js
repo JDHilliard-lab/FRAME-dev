@@ -782,7 +782,7 @@ const path = require('path');
       const end = tail.indexOf('\\\\n');
       if (end < 0) throw new Error('no end of header after the window-film columns');
       const after = tail.slice(0, end).split(',').filter(Boolean);
-      const allowed = ['Arrangement'];
+      const allowed = ['Arrangement', 'Category'];   // Category appended in 18.28
       after.forEach(c => { if (allowed.indexOf(c) < 0) throw new Error('an unexpected column follows the window-film ones: ' + c); });
       // And it must read the same helper the sheet prints from.
       const rowI = S.indexOf("_isFlatGraphic(r.product) ? (r.printOutput || 'full') : ''");

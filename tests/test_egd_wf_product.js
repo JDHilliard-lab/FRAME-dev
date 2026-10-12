@@ -533,7 +533,9 @@ const path = require('path');
       // A framed row leaves it blank rather than shifting the column.
       dashProjectData = [base({ id: 'ART.900' })];
       const row2 = buildDashCSVString().split('\\n').find(l => l.indexOf('ART.900') >= 0);
-      if (!/,""\\s*$/.test(row2)) throw new Error('a framed row did not leave Material empty: ' + row2.slice(-60));
+      // 18.28 appends Category after the blank trailing cells, so check the row WITHOUT it.
+      const row2b = row2.replace(/\\s+$/, '').slice(0, row2.replace(/\\s+$/, '').lastIndexOf(','));
+      if (!/,""$/.test(row2b)) throw new Error('a framed row did not leave Material empty: ' + row2.slice(-60));
       // A flat graphic's Art Size must equal its Overall size in the CSV too.
       if (row.indexOf('"192","120","192","120","192.5","120.5"') < 0) throw new Error('CSV sizes disagree with the spec block: ' + row.slice(0, 160));
       dashProjectData = saved;
