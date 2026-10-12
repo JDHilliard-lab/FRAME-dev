@@ -1,4 +1,5 @@
-// The PDF build flip-book (18.18).
+// The PDF build flip-book (18.18; artwork only since 18.19, by request:
+// "can we only use the artwork as the slideshow flip book").
 //
 // Asked for: "a cool little animation behind the pop up window when generating
 // the PDF ... the images in the presentation flipping through 0.5 seconds a
@@ -56,54 +57,53 @@ const path = require('path');
       if (c.indexOf('@keyframes pdfFlipTurn') < 0) throw new Error('no page-turn animation');
     });
 
-    __check('EXACT REQUEST: the deck pages flip every 0.5s, in deck order, while the PDF builds', () => {
+    const __art = (urls) => {
+      _dsPages = []; _dsThumbCache = {};
+      for (const k in _dsThumbLast) delete _dsThumbLast[k];
+      dashProjectData.length = 0;
+      urls.forEach((u, i) => dashProjectData.push({ id: 'ART.' + (i + 1), artworkUrl: u }));
+    };
+
+    __check('EXACT REQUEST: the artwork flips every 0.5s, in code order, while the PDF builds', () => {
       __fakeTimers();
       try {
-        _dsPages = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
-        _dsThumbCacheKey = d => 'k:' + d.id;
-        _dsThumbCache = { 'k:a': __url(1), 'k:b': __url(2), 'k:c': __url(3) };
+        __art([__url(1), __url(2), __url(3)]);
         _pdfShowOverlay();
         const st = document.getElementById('pdfFlipStage');
         if (!__iv) throw new Error('no flip timer started when the overlay opened');
         if (__iv.ms !== 500) throw new Error('flips every ' + __iv.ms + 'ms, asked for 500');
         const top = () => Array.from(st.children).filter(c => !c.classList.contains('turn')).map(c => c.src)[0];
-        if (top() !== __url(1)) throw new Error('first page shown is not the first page of the deck');
+        if (top() !== __url(1)) throw new Error('first picture shown is not ART.1');
         __iv.fn();
-        if (top() !== __url(2)) throw new Error('second flip did not show page 2');
+        if (top() !== __url(2)) throw new Error('second flip did not show ART.2');
         const turning = st.querySelector('.turn');
-        if (!turning || turning.src !== __url(1)) throw new Error('page 1 is not the one turning away');
-        if (st.lastElementChild !== turning) throw new Error('the turning page is not on top of the one it reveals');
+        if (!turning || turning.src !== __url(1)) throw new Error('ART.1 is not the one turning away');
+        if (st.lastElementChild !== turning) throw new Error('the turning picture is not on top of the one it reveals');
         __iv.fn(); __iv.fn();
         if (top() !== __url(1)) throw new Error('the book does not loop back to the start');
-        if (st.children.length > 2) throw new Error('old pages pile up in the stage: ' + st.children.length);
+        if (st.children.length > 2) throw new Error('old pictures pile up in the stage: ' + st.children.length);
         _pdfHideOverlay();
         if (__iv) throw new Error('hiding the overlay left the flip timer running');
-        if (st.children.length) throw new Error('hiding the overlay left pages in the stage');
+        if (st.children.length) throw new Error('hiding the overlay left pictures in the stage');
       } finally { __restoreTimers(); }
     });
 
-    __check('a page with no preview yet is skipped, and duplicates are dropped', () => {
-      _dsPages = [{ id: 'a' }, { id: 'b' }, { id: 'c' }];
+    __check('ARTWORK ONLY (18.19): built page previews never enter the book', () => {
+      __art([__url(1), __url(2)]);
+      _dsPages = [{ id: 'a' }, { id: 'b' }];
       _dsThumbCacheKey = d => 'k:' + d.id;
-      _dsThumbCache = { 'k:a': __url(1), 'k:c': __url(1) };
-      for (const k in _dsThumbLast) delete _dsThumbLast[k];
+      _dsThumbCache = { 'k:a': __url(90), 'k:b': __url(91) };
+      _dsThumbLast['p1'] = __url(92);
       const imgs = _pdfFlipImages();
-      if (imgs.length !== 1 || imgs[0] !== __url(1)) throw new Error('got ' + imgs.length + ' images');
+      if (imgs.length !== 2) throw new Error('expected the two artworks only, got ' + imgs.length);
+      if (imgs.some(u => u === __url(90) || u === __url(91) || u === __url(92))) throw new Error('a page preview got into the flip-book');
+      for (const k in _dsThumbLast) delete _dsThumbLast[k];
     });
 
-    __check('no previews built yet: falls back to the artwork', () => {
-      __fakeTimers();
-      try {
-        _dsPages = []; _dsThumbCache = {};
-        for (const k in _dsThumbLast) delete _dsThumbLast[k];
-        dashProjectData.length = 0;
-        dashProjectData.push({ id: 'ART.1', artworkUrl: __url(7) }, { id: 'ART.2', artworkUrl: __url(8) }, { id: 'ART.3' });
-        const imgs = _pdfFlipImages();
-        if (imgs.length !== 2) throw new Error('expected the two artworks, got ' + imgs.length);
-        _pdfShowOverlay();
-        if (!document.getElementById('pdfFlipStage').children.length) throw new Error('artwork fallback did not reach the stage');
-        _pdfHideOverlay();
-      } finally { __restoreTimers(); }
+    __check('a piece with no artwork is skipped, and a shared image appears once', () => {
+      __art([__url(1), '', __url(1), __url(2)]);
+      const imgs = _pdfFlipImages();
+      if (imgs.length !== 2) throw new Error('got ' + imgs.length + ' images');
     });
 
     __check('nothing to show: the stage stays empty and no timer runs', () => {
@@ -119,9 +119,9 @@ const path = require('path');
       } finally { __restoreTimers(); }
     });
 
-    __check('a broken thumbnail cache can never stop the overlay opening', () => {
-      _dsPages = [{ id: 'a' }];
-      _dsThumbCacheKey = () => { throw new Error('boom'); };
+    __check('a broken row can never stop the overlay opening', () => {
+      dashProjectData.length = 0;
+      dashProjectData.push({ id: 'ART.1', get artworkUrl() { throw new Error('boom'); } });
       _pdfShowOverlay();
       if (document.getElementById('pdfBuildOverlay').style.display !== 'flex') throw new Error('overlay did not open');
       _pdfHideOverlay();

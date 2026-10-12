@@ -2571,12 +2571,12 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .boot-cover { position: fixed; inset: 0; z-index: var(--z-modal-over); background: var(--bg-main); animation: bootCoverGiveUp 0s linear 6s forwards; }
 @keyframes bootCoverGiveUp { to { visibility: hidden; pointer-events: none; } }
 
-/* PDF BUILD FLIP-BOOK (18.18): the deck's page previews, full bleed, turning one every
+/* PDF BUILD FLIP-BOOK (18.18, artwork only since 18.19): the project's artwork, full bleed, turning one every
    half second behind the "Generating presentation" card. The page on top turns AWAY,
    hinged on its left edge like a book, revealing the next one already lying underneath,
    so it reads as flipping through rather than as a slideshow cross-fade. Transform and
    opacity only, so it stays smooth while the build keeps the main thread busy. Empty
-   (no previews built yet) means hidden, and the overlay looks as it always did. */
+   (no artwork) means hidden, and the overlay looks as it always did. */
 .pdf-flip { position: absolute; inset: 0; overflow: hidden; perspective: 2200px; background: #111; z-index: 0; }
 .pdf-flip:empty { display: none; }
 .pdf-flip::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
