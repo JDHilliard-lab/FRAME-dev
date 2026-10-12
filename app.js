@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.27';
+const APP_VERSION = '18.28';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6577,16 +6577,20 @@ function duplicateCurrentElevation() {
     pushHistory();
 }
 
+// + Add Wall asks which placement the wall is for (18.28). A bare "Elevation 9" had no
+// code, no row and no pin, and a wall with nothing on it prints no page, so it floated
+// until something adopted it. See _askPlacement.
 function addNewElevationTab() {
-    let newIndex = elevations.length;
-    const uf = unitFactor('in', elevUnit);
-    let w = parseFloat((185 * uf).toFixed(2));
-    let h = parseFloat((108 * uf).toFixed(2));
-    let px = parseFloat((-60 * uf).toFixed(2));
-    
-    elevations.push({ id: _elevNewId(), name: "Elevation " + (newIndex + 1), frames: [], wallW: w, wallH: h, personPos: {x: px} });
-    renderNavTabs(); populateDashPushSelector(); switchView('elevation', newIndex);
-    pushHistory();
+    return _askPlacement('wall').then(ans => {
+        if (!ans) return null;
+        let wall = null;
+        if (ans.kind === 'hang') wall = _placementHang(ans.key);
+        else if (ans.kind === 'new') wall = _placementMint(ans.cat, ans.set, true).wall;
+        const idx = wall ? elevations.indexOf(wall) : -1;
+        if (idx < 0) return null;
+        renderNavTabs(); populateDashPushSelector(); switchView('elevation', idx);
+        return wall;
+    });
 }
 
 // Arriving anywhere that is NOT where this trip landed ends it. Otherwise a back
@@ -10913,39 +10917,35 @@ function applyDuplicateSeries() {
     document.getElementById('duplicateSeriesModal').style.display = 'none';
 }
 
+// + Add Item asks which placement the piece belongs to (18.28): more pieces on an
+// existing code (a 5 set asked for two more is ART.3F, ART.3G), or a new code of a
+// chosen type. It used to mint ART.n whatever the piece was, with no category.
 function addDashRow() {
-    const newRow = JSON.parse(JSON.stringify(dashDefaultData)); 
-    newRow.id = generateNextItemCode();
-    // dashDefaultData holds INCH values. Convert every dimensional (length)
-    // field to the current unit so a fresh item is the same physical size
-    // regardless of the active unit (e.g. a 3" mat stays 3" → ~76mm in mm).
-    const _f = unitFactor('in', dashUnit);
-    const lenFields = ['extW','extH','fW','fHeight','rabbetDepth','bleed','floaterInset',
-        'sbPaperMargin','sbPaperBorder','m1T','m1B','m1L','m1R','m2'];
-    lenFields.forEach(k => {
-        const v = parseFloat(newRow[k]);
-        if (!isNaN(v)) newRow[k] = dashFmt(v * _f);
+    const cur = dashProjectData[dashSelectedRowIndex];
+    const curKey = cur && cur.id ? _artGroupKey(cur.id) : '';
+    return _askPlacement('item', { key: curKey, cat: cur ? (cur.category || '') : null }).then(ans => {
+        if (!ans) return null;
+        let id = null;
+        if (ans.kind === 'grow') { const ids = _placementGrow(ans.key, ans.count); id = ids && ids[0]; }
+        else if (ans.kind === 'new') { const code = _placementMint(ans.cat, ans.set, false).code; const r = dashProjectData.find(x => x && _artGroupKey(x.id) === code); id = r && r.id; }
+        const i = id ? dashProjectData.findIndex(r => r && r.id === id) : -1;
+        if (i < 0) return null;
+        dashSelectedRowIndex = i;
+        loadDashDataIntoControls(dashProjectData[i]);
+        renderDashTable(); checkGlobalEditingWarning(id);
+        return id;
     });
-    newRow.fType = "color"; newRow.fColor = "#000000"; newRow.fCode = "Standard Black";
-    
-    // Insert right after the currently-selected row (so the new row appears
-    // visually adjacent to where the user was working). Falls back to
-    // pushing at the end if the selection is out of bounds (e.g. empty table).
-    const insertAt = (dashSelectedRowIndex >= 0 && dashSelectedRowIndex < dashProjectData.length)
-        ? dashSelectedRowIndex + 1
-        : dashProjectData.length;
-    dashProjectData.splice(insertAt, 0, newRow);
-    dashSelectedRowIndex = insertAt;
-    // A new code takes the next number, so it sorts to the end of its type.
-    _codesSettle();
-    loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]);
-    renderDashTable(); checkGlobalEditingWarning(newRow.id);
-    pushHistory();
+}
+
+// A duplicate is a new placement of the SAME type: duplicating EGD.1 gave ART.n.
+function _codePrefixOfRow(r) {
+    const m = /^([A-Za-z][A-Za-z0-9]*)\./.exec(String((r && r.id) || ''));
+    return m ? m[1] : _catCodeInfo((r && r.category) || '').prefix;
 }
 
 function duplicateDashRow() {
     const newRow = JSON.parse(JSON.stringify(dashProjectData[dashSelectedRowIndex])); 
-    newRow.id = generateNextItemCode(); 
+    newRow.id = _nextPlacementCode(_codePrefixOfRow(newRow)); 
     newRow.qty = 0; 
     // Insert right after the source row so the dupe lands visually next to
     // its original. (Was previously pushing to the end of the array, which
@@ -28594,7 +28594,7 @@ function _fpAddCodesBar(desc) {
 // Mint one placement: N dashboard rows sharing a code, typed and categorised. Returns the
 // placement code. Rows go to the END of the schedule (the dashboard's + Add inserts after
 // the selection, but from the floorplan there is no selection to be next to).
-function _fpAddCodes(catKey, n) {
+function _fpAddCodes(catKey, n, opts) {
     const info = _catCodeInfo(catKey);
     const code = _nextPlacementCode(info.prefix);
     const k = Math.max(1, Math.min(12, n || 1));
@@ -28620,6 +28620,9 @@ function _fpAddCodes(catKey, n) {
     // Pushed at the end of the schedule, then sorted in behind its own type: an EGD
     // added after ART.4 belongs after EGD.1, not after ART.4.
     _codesSettle();
+    // A caller building a bigger gesture on top (a frame set, a wall) pushes ONE history
+    // entry at the end, so the whole thing is one Ctrl+Z.
+    if (opts && opts.quiet) return code;
     if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
     if (typeof pushHistory === 'function') pushHistory();
@@ -28833,6 +28836,217 @@ function _fpMockSetOnWall(key, rows, lay) {
     wall.frames = others.concat(placed);
     wall.frames.forEach((f, i) => { f.letter = getElevLetter(i); });
     return wall;
+}
+
+// ── NOTHING FLOATS (18.28) ───────────────────────────────────────────────────
+// Every piece belongs to a placement code and every wall to a placement. + Add Wall made
+// a bare "Elevation 9" (no code, no row, no pin, and no page, since a wall with nothing
+// on it prints nothing), and + Add Item minted an ART code whatever the type. Both now
+// ask WHICH PLACEMENT through _askPlacement, and act through the same three operations
+// the floorplan Items list uses:
+//   _placementMint  - a new code of a type, as a single or a frame set
+//   _placementHang  - an existing code with nothing on a wall, hung on its own wall
+//   _placementGrow  - more pieces on an existing code (a 5 set asked for two more)
+// A catalogue placement is left out of all three: its rows are slots and options whose
+// codes are structure, and adding pieces to one goes through its arrangement.
+function _placementList() {
+    const cat = _catalogueRowIds();
+    const on = {};
+    (elevations || []).forEach(e => (e.frames || []).forEach(f => { if (f && f.id && f.active !== false) on[f.id] = true; }));
+    const map = {}, out = [];
+    dashProjectData.forEach(r => {
+        if (!r || !r.id || cat[r.id]) return;
+        const key = _artGroupKey(r.id);
+        if (!key) return;
+        if (!map[key]) { map[key] = { key: key, rows: [], onWall: false, location: '', category: r.category || '' }; out.push(map[key]); }
+        const g = map[key];
+        g.rows.push(r);
+        if (on[r.id]) g.onWall = true;
+        if (!g.location && r.location) g.location = String(r.location).trim();
+    });
+    return out;
+}
+// The frame sets offered when a code is minted: the simple ones, then the salon presets.
+function _placementSetChoices() {
+    const out = FP_FRAME_SETS.filter(s => FRAME_SET_SIMPLE[s.n]).map(s => ({ value: 'n' + s.n, n: s.n, preset: '', label: s.label }));
+    SALON_PRESETS.forEach(p => out.push({ value: p.key, n: p.n, preset: p.key, label: p.n + ' set salon, ' + p.label.toLowerCase() }));
+    return out;
+}
+// The layout a placement's rows hang in, in inches. A salon preset only counts while
+// the piece count still matches it.
+function _placementLayout(rows) {
+    const pre = rows[0] && rows[0].salonPreset;
+    const p = pre ? _salonPreset(pre) : null;
+    if (p && p.n === rows.length) return _frameSetLayout(rows.length, pre);
+    const kOut = unitFactor(dashUnit, 'in');
+    return _frameSetLayout(rows.length, '', rows.map(r => [(parseFloat(r.extW) || 24) * kOut, (parseFloat(r.extH) || 30) * kOut]));
+}
+function _placementDone(wall) {
+    _codesSettle();
+    _codesRefreshViews();
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsRefresh(); } catch (e) {}
+    return wall;
+}
+// A new code of a type, as a single or a set. With `hang`, it goes straight onto its own
+// wall (adopting an untouched default wall first, like the floorplan mockup does).
+// Returns { code, wall }.
+function _placementMint(catKey, setValue, hang) {
+    const choice = _placementSetChoices().find(c => c.value === setValue) || _placementSetChoices()[0];
+    const code = _fpAddCodes(catKey, choice.n, { quiet: true });
+    const rows = dashProjectData.filter(r => r && _artGroupKey(r.id) === code);
+    const kIn = unitFactor('in', dashUnit);
+    if (choice.preset) {
+        const lay = _frameSetLayout(choice.n, choice.preset);
+        rows.forEach((r, i) => { const L = lay[i]; if (!L) return; r.extW = dashFmt(L.w * kIn); r.extH = dashFmt(L.h * kIn); _applyFrameStyle(r, L.s); r.salonPreset = choice.preset; });
+    } else if (choice.n > 1) {
+        const S = FRAME_SET_SIMPLE[choice.n];
+        rows.forEach(r => { r.extW = dashFmt(S.size[0] * kIn); r.extH = dashFmt(S.size[1] * kIn); });
+    }
+    const wall = hang ? _fpMockSetOnWall(code, rows, _placementLayout(rows)) : null;
+    _placementDone(wall);
+    return { code: code, wall: wall };
+}
+// An existing code that is on no wall yet, hung on its own wall.
+function _placementHang(key) {
+    const g = _placementList().find(x => x.key === key);
+    if (!g || !g.rows.length) return null;
+    const wall = _fpMockSetOnWall(key, g.rows, _placementLayout(g.rows));
+    return _placementDone(wall);
+}
+// More pieces on an existing placement. The new pieces copy the LAST piece's spec (a
+// salon hang's extra frames usually match its smaller ones better than its anchor) but
+// not its artwork, take the next free letters, and if the placement is already on a
+// wall they hang there, to the right of it at the set gap, without moving what is
+// already arranged. A single piece becomes a set: ART.4 is renamed ART.4A first.
+// Returns the new ids, or null.
+function _placementGrow(key, count) {
+    const g = _placementList().find(x => x.key === key);
+    if (!g || !g.rows.length) return null;
+    const k = Math.max(1, Math.min(25, count | 0));
+    const rows0 = g.rows;
+    const first = String(rows0[0].id);
+    const tail = first.slice(key.length);
+    const sep = (rows0.length > 1 && /^[-_.\s]/.test(tail)) ? tail.charAt(0) : '';
+    if (rows0.length === 1 && first === key) applyIdRename(key, key + 'A', true);
+    const taken = {}; dashProjectData.forEach(r => { if (r && r.id) taken[r.id] = true; });
+    const letters = _setLetters(26 + k).filter(L => !taken[key + sep + L]);
+    const src = rows0[rows0.length - 1];
+    let at = dashProjectData.indexOf(src);
+    const added = [];
+    for (let i = 0; i < k; i++) {
+        const nr = _cloneData(src);
+        ['artworkUrl', 'artworkFile', 'imageCode', 'artist', 'artworkTitle'].forEach(f => { nr[f] = ''; });
+        nr.artworkW = 0; nr.artworkH = 0; nr.artZoom = 1; nr.artPanX = 0; nr.artPanY = 0; nr.qty = 0;
+        nr.id = key + sep + letters[i];
+        dashProjectData.splice(++at, 0, nr);
+        added.push(nr);
+    }
+    // The preset described the old count; the set is no longer that preset.
+    rows0.concat(added).forEach(r => { delete r.salonPreset; });
+    const ids = {}; rows0.forEach(r => { ids[r.id] = true; });
+    const wall = (elevations || []).find(e => (e.frames || []).some(f => f && f.active !== false && ids[f.id]));
+    if (wall) {
+        const factor = unitFactor(dashUnit, elevUnit), gap = SET_GAP_IN * unitFactor('in', elevUnit);
+        const mine = wall.frames.filter(f => f && ids[f.id]);
+        const last = mine.reduce((a, f) => (!a || f.x + f.w > a.x + a.w) ? f : a, null);
+        let x = last.x + last.w + gap;
+        added.forEach(r => {
+            const f = _elevFrameFromRow(r, factor, x, last.y, getElevLetter(wall.frames.length));
+            wall.frames.push(f);
+            x += f.w + gap;
+        });
+    }
+    _placementDone(wall || null);
+    return added.map(r => r.id);
+}
+
+// ONE DIALOG, TWO CALLERS: + Add Wall ('wall') and + Add Item ('item'). Both start with
+// the codes that already exist, because that is the usual answer, and both offer a new
+// code of a chosen type below. Resolves to
+//   { kind: 'hang', key } | { kind: 'grow', key, count } | { kind: 'new', cat, set } | null.
+function _askPlacement(mode, opts) {
+    opts = opts || {};
+    return new Promise((resolve) => {
+        const wallMode = mode === 'wall';
+        const ov = document.createElement('div');
+        ov.className = 'frame-modal fm-nested ask-fields ask-placement'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+        const card = document.createElement('div'); card.className = 'ask-card';
+        const h = document.createElement('h3'); h.className = 'ask-title'; h.textContent = wallMode ? 'New wall' : 'Add item'; card.appendChild(h);
+        const b = document.createElement('div'); b.className = 'ask-body';
+        b.textContent = wallMode
+            ? 'Every wall belongs to an item code, so it gets its pages, its pin on the plan and its place in the code order.'
+            : 'Every piece belongs to an item code. Add it to a placement that already exists, or start a new code.';
+        card.appendChild(b);
+        let done = false;
+        const finish = (v) => { if (done) return; done = true; ov.remove(); resolve(v); };
+        const mkSel = (items, cur) => {
+            const s = document.createElement('select');
+            items.forEach(it => { const o = document.createElement('option'); o.value = it.value; o.textContent = it.label; if (it.value === cur) o.selected = true; s.appendChild(o); });
+            return s;
+        };
+        const field = (label, el) => { const l = document.createElement('label'); l.className = 'ask-field'; const sp = document.createElement('span'); sp.textContent = label; l.appendChild(sp); l.appendChild(el); return l; };
+        const sect = (title) => { const d = document.createElement('div'); d.className = 'ask-section'; const t = document.createElement('div'); t.className = 'ask-section-title'; t.textContent = title; d.appendChild(t); card.appendChild(d); return d; };
+        const btn = (txt) => { const x = document.createElement('button'); x.type = 'button'; x.className = 'action-btn'; x.textContent = txt; return x; };
+
+        // ── existing codes
+        const list = _placementList().filter(g => wallMode ? !g.onWall : true);
+        const lbl = (g) => g.key + (g.rows.length > 1 ? ' · ' + g.rows.length + ' pieces' : '') + (g.location ? ' · ' + g.location : '');
+        if (list.length) {
+            const s1 = sect(wallMode ? 'An item code not on a wall yet' : 'Add to an existing code');
+            const cur = (opts.key && list.some(g => g.key === opts.key)) ? opts.key : list[0].key;
+            const pSel = mkSel(list.map(g => ({ value: g.key, label: lbl(g) })), cur);
+            pSel.setAttribute('data-ask', 'existing');
+            s1.appendChild(field('Item code', pSel));
+            let nIn = null;
+            if (!wallMode) {
+                nIn = document.createElement('input'); nIn.type = 'number'; nIn.min = '1'; nIn.max = '25'; nIn.value = '1';
+                nIn.setAttribute('data-ask', 'count');
+                s1.appendChild(field('How many pieces to add', nIn));
+            }
+            const go1 = btn(''); go1.setAttribute('data-ask', 'go-existing');
+            const sync1 = () => {
+                if (wallMode) { go1.textContent = 'Hang ' + pSel.value + ' on a new wall'; return; }
+                const n = Math.max(1, Math.min(25, parseInt(nIn.value, 10) || 1));
+                go1.textContent = 'Add ' + n + ' to ' + pSel.value;
+            };
+            pSel.onchange = sync1; if (nIn) nIn.oninput = sync1; sync1();
+            go1.onclick = () => wallMode
+                ? finish({ kind: 'hang', key: pSel.value })
+                : finish({ kind: 'grow', key: pSel.value, count: Math.max(1, Math.min(25, parseInt(nIn.value, 10) || 1)) });
+            s1.appendChild(go1);
+        }
+
+        // ── a new code
+        const s2 = sect(list.length ? 'Or a new item code' : 'A new item code');
+        const cats = _artCats().filter(c => c && (c.key || _artCats().length === 1));
+        const catItems = (cats.length ? cats : _artCats()).map(c => ({ value: c.key, label: c.label || 'None' }));
+        const startCat = (opts.cat != null && catItems.some(c => c.value === opts.cat)) ? opts.cat
+            : ((_fpAddType != null && catItems.some(c => c.value === _fpAddType)) ? _fpAddType : (catItems[0] && catItems[0].value));
+        const cSel = mkSel(catItems, startCat); cSel.setAttribute('data-ask', 'cat');
+        const sSel = mkSel(_placementSetChoices(), 'n1'); sSel.setAttribute('data-ask', 'set');
+        s2.appendChild(field('Category', cSel));
+        s2.appendChild(field('Frame set', sSel));
+        const go2 = btn(''); go2.setAttribute('data-ask', 'go-new');
+        const sync2 = () => {
+            const code = _nextPlacementCode(_catCodeInfo(cSel.value).prefix);
+            go2.textContent = (wallMode ? 'Create ' + code + ' and its wall' : 'Create ' + code);
+        };
+        cSel.onchange = sync2; sync2();
+        go2.onclick = () => { _fpAddType = cSel.value; finish({ kind: 'new', cat: cSel.value, set: sSel.value }); };
+        s2.appendChild(go2);
+
+        const row = document.createElement('div'); row.className = 'ask-actions';
+        const cancel = document.createElement('button'); cancel.type = 'button'; cancel.className = 'action-btn btn-secondary'; cancel.textContent = 'Cancel';
+        cancel.setAttribute('data-modal-close', '');
+        cancel.onclick = () => finish(null);
+        row.appendChild(cancel); card.appendChild(row);
+        try { new MutationObserver(() => { if (!ov.isConnected) finish(null); }).observe(document.body, { childList: true }); } catch (e) {}
+        ov.appendChild(card);
+        document.body.appendChild(ov);
+        try { const f0 = card.querySelector('select'); if (f0) { f0.setAttribute('data-modal-initial', ''); f0.focus(); } } catch (e) {}
+    });
 }
 
 // ── CODES FOLLOW THEIR TYPE, AND STAY IN ORDER (17.92) ────────────────────────
@@ -39783,8 +39997,8 @@ function initElevControls() {
             <div class="elev-empty-state">
                 <svg class="svg-icon elev-empty-icon" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
                 <h4>No frames on this wall yet</h4>
-                <p>Build frames in the <strong>Frame Dashboard</strong>, then use <strong>Push to Wall</strong> to send them here.</p>
-                <p class="elev-empty-tip">Or click <strong>+ Add</strong> above to place a generic frame and customize it inline.</p>
+                <p>Tick pieces in <strong>Import Frames</strong> above and press <strong>Add</strong>, or use <strong>Push to Wall</strong> in the Frame Dashboard.</p>
+                <p class="elev-empty-tip">New codes start in the floorplan <strong>Items</strong> list, the dashboard's <strong>+ Add Item</strong>, or <strong>+ Add Wall</strong>.</p>
             </div>
         `;
         return;
@@ -40833,9 +41047,9 @@ const HELP_REFERENCE_DATA = [
         title: 'Elevations',
         intro: `Each wall is its own drawing. The rail on the left lists the walls. The sidebar has three tabs: <strong>Art</strong> for the pieces, <strong>Context</strong> for what is in the room, and <strong>Glass</strong> for window panels.`,
         entries: [
-            { title: 'Walls and the rail', body: `Click a wall in the rail to open it and drag walls to reorder them. <strong>+ Add Wall</strong> makes a new one. The &times; on a wall deletes it, and that can be undone.` },
+            { title: 'Walls and the rail', body: `Click a wall in the rail to open it and drag walls to reorder them. <strong>+ Add Wall</strong> asks which item code the wall is for: one that is not on a wall yet, or a new code of a type and frame set. Every wall belongs to a code, so none is left out of the deck. The &times; on a wall deletes it, and that can be undone.` },
             { title: 'Wall mode: ART, EGD, WF', body: `<strong>ART WALL</strong> is the default: framed art hangs on it. <strong>EGD WALL</strong> makes the wall a graphic surface: a wallcovering fills it and stays inside it, above the baseboard. <strong>WF WALL</strong> builds a standard window elevation for window film and opens the Glass tab. A wall with glass on it normally stays an ART wall.` },
-            { title: 'Adding pieces', body: `<strong>Add &amp; Arrange</strong> in the Art tab adds the pieces you tick in one go. From the dashboard, pick a piece in <strong>Push to Wall</strong> and press <strong>Send</strong>. <strong>+ Add</strong> drops a generic placeholder frame.` },
+            { title: 'Adding pieces', body: `<strong>Add &amp; Arrange</strong> in the Art tab adds the pieces you tick in one go. From the dashboard, pick a piece in <strong>Push to Wall</strong> and press <strong>Send</strong>.` },
             { title: 'Moving and selecting', body: `Drag a frame to move it; it snaps to the grid and to the other frames. <span class="help-kbd">Ctrl+click</span> adds a frame to the selection, or drag a box around several. Hold <span class="help-kbd">Shift</span> while dragging for fine movement. <span class="help-kbd">Esc</span> deselects.` },
             { title: 'Grouping and aligning', body: `Select frames and press <span class="help-kbd">Ctrl+G</span> to group them so they move as one. The <strong>Align</strong> icon opens equal-gap, align-edge and distribute tools for the selection.` },
             { title: 'Sort A&ndash;Z', body: `Re-letters the frames by their position from left to right, so A is the leftmost piece. The letters print on the drawings and the spec pages, so sort before the deck goes out.` },
@@ -40964,7 +41178,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
+                body: `<strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
 <strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
 <strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
 <strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
@@ -42399,7 +42613,9 @@ function drawElevAll() {
             art.appendChild(aimg);
         }
         
-        const unitSuffix = unitInfo(elevUnit).suffix;
+        // NOT named unitSuffix: a const of that name shadowed the unitSuffix() FUNCTION for
+        // the whole block, so the flat-graphic placeholder above threw in the TDZ (18.28).
+        const _openSfx = unitInfo(elevUnit).suffix;
         if (!hasArtwork) {
             if (_wf) {
                 // The frame's LETTER, centred. .art-visual is already a centred flex
@@ -42420,7 +42636,7 @@ function drawElevAll() {
                 art.style.fontWeight = _elevWfFontWeight();
                 art.style.fontStyle = _elevWfFontStyle();
             } else {
-                art.innerText = (artW > 0) ? `${artW.toFixed(1)}${unitSuffix}\nx\n${artH.toFixed(1)}${unitSuffix}` : "";
+                art.innerText = (artW > 0) ? `${artW.toFixed(1)}${_openSfx}\nx\n${artH.toFixed(1)}${_openSfx}` : "";
             }
         }
         el.appendChild(art);

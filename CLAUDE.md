@@ -468,6 +468,18 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   a second scheme) opens it with a Back bar (`deckReturnBar`, filled by `_returnBarInto`
   because the panel is built before it is attached). The template renumber modal
   (`openRenumberModal` / `renumberElevation`) is now unreferenced from the UI.
+- **NOTHING FLOATS (18.28): + Add Wall and + Add Item ask WHICH PLACEMENT** (`_askPlacement`,
+  `_placementList`, `_placementMint`, `_placementHang`, `_placementGrow`). + Add Wall made a
+  bare "Elevation N" with no code, row or pin (and so no page); + Add Item minted ART.n
+  whatever the type. Wall mode offers codes with nothing on a wall, or a new typed code
+  hung on its own wall; item mode grows an existing code (next free letters, a single
+  ART.4 renamed ART.4A first, new frames hung RIGHT of the set at `SET_GAP_IN` without
+  moving the arranged ones) or mints a new one, with NO wall. Catalogue rows are never
+  offered (`_catalogueRowIds`). One history entry per gesture: `_fpAddCodes(..., {quiet})`
+  skips its own push. A duplicate keeps its prefix (`_codePrefixOfRow`).
+  **A LOCAL `const` NAMED LIKE A GLOBAL FUNCTION SHADOWS IT FOR THE WHOLE BLOCK.**
+  `drawElevAll` had `const unitSuffix` below a `unitSuffix()` call in the flat-graphic
+  placeholder, so any EGD/WF with no art on the open wall threw in the TDZ. Now `_openSfx`.
 - **`r.level` IS A 0-BASED PLAN INDEX, ALWAYS A NUMBER (18.13).** The dashboard Level
   box was free text defaulting to the STRING `"1"` (a person's "first level") while the
   pin code wrote the index, so every new unpinned piece was filed under the SECOND plan

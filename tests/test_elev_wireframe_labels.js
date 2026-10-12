@@ -126,7 +126,10 @@ const path = require('path');
       // The opening-size text is set with innerText (its newlines have to become
       // line breaks), which jsdom does not reflect — so that branch is pinned in
       // the source rather than in the DOM.
-      const i = S.indexOf('const unitSuffix = unitInfo(elevUnit).suffix;');
+      // Anchored on _openSfx since 18.28: it was named unitSuffix, which shadowed the
+      // unitSuffix() function and threw in the TDZ (test_nothing_floats).
+      const i = S.indexOf('const _openSfx = unitInfo(elevUnit).suffix;');
+      if (i < 0) throw new Error('anchor not found');
       const body = S.slice(i, i + 2000);
       if (body.indexOf('art.innerText = (artW > 0)') < 0) throw new Error('the opening-size text was lost from the non-wireframe branch');
     });

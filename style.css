@@ -2558,6 +2558,12 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .ask-field input { height: 32px; padding: 0 10px; font-size: var(--fs-80); text-transform: none; letter-spacing: 0; }
 .ask-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 2px; }
 .ask-actions .action-btn { width: auto; height: 30px; padding: 0 16px; }
+/* + Add Wall / + Add Item (18.28): which placement? Existing codes first, a new one below. */
+.ask-placement .ask-card { width: min(420px, 92vw); }
+.ask-section { display: flex; flex-direction: column; gap: 8px; padding: 12px; border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-subpanel); }
+.ask-section-title { font-size: var(--fs-65); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-strong); }
+.ask-field select { height: 32px; font-size: var(--fs-80); text-transform: none; letter-spacing: 0; }
+.ask-section > .action-btn { align-self: flex-start; width: auto; height: 30px; padding: 0 14px; }
 
 /* The empty floor plan slot in Deck Studio is its own upload control (18.11). Chrome on
    paper, so it reads --selected like every other control drawn over the page. */
