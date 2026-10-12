@@ -44,7 +44,7 @@ window.eval(APP + NL + [
   '_catOptionRowIds = function () { return window.__optIds; };',
   'window.__fx = {',
   '  set rows(v) { dashProjectData = v; }, set levels(v) { floorplanLevels = v; },',
-  '  set key(v) { _curPageKey = v; }, rects: _specPlanRects,',
+  '  set key(v) { _curPageKey = v; }, rects: _specPlanRects, begin: _specPlanRectsBegin, commit: _specPlanRectsCommit, add: _specPlanRectAdd,',
   '  set pages(v) { _dsPages = v; },',
   '  crop: _planCropCanvasForRow, asGroup: _catRowAsPlanGroup, detail: _drawPlanDetailPage,',
   '  backlinks: _dsPlanBacklinks, pageKey: _deckPageKey, set jump(f) { _dsJumpToFloorplan = f; },',
@@ -91,8 +91,7 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     fx.rows = [row('ART.1')];
     fx.key = 'plandetail:pd1';
     const pd = { id: 'pd1', level: 0, ids: ['ART.1'], title: 'Detail' };
-    await fx.detail(docStub([]), {}, 1, {}, pd);
-    await fx.detail(docStub([]), {}, 1, {}, pd);
+    for (let n = 0; n < 2; n++) { const d = docStub([]); fx.begin(d, 'plandetail:pd1'); await fx.detail(d, {}, 1, {}, pd); fx.commit(d); }
     const rs = fx.rects['plandetail:pd1'] || [];
     if (rs.length !== 1) throw new Error('expected one rect, got ' + rs.length);
     const A = fx.area(936, 540);
@@ -189,6 +188,33 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     const css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
     const ci = css.indexOf('.ds-plan-backlink:hover');
     if (ci < 0 || css.slice(ci, css.indexOf('}', ci)).indexOf('var(--selected)') < 0) throw new Error('no hover cue in --selected');
+  });
+
+  await check('18.26 EXACT ASK: two pages rendering at once each keep THEIR OWN plan link', async () => {
+    // The centre page and a rail thumbnail interleave across an await (an elevation
+    // capture); _curPageKey ends up naming whichever started last.
+    const A = {}, B = {};
+    fx.begin(A, 'spec:ART.1');
+    fx.key = 'spec:ART.1';
+    fx.begin(B, 'spec:ART.2');
+    fx.key = 'spec:ART.2';           // B set the global last...
+    fx.add(A, 20, 400, 130, 130, 0); // ...and A draws its plan now
+    fx.add(B, 22, 410, 67, 67, 1);
+    fx.commit(B); fx.commit(A);
+    const a = fx.rects['spec:ART.1'], b = fx.rects['spec:ART.2'];
+    if (!a || a.length !== 1 || a[0].w !== 130) throw new Error('ART.1 holds ' + JSON.stringify(a));
+    if (!b || b.length !== 1 || b[0].level !== 1) throw new Error('ART.2 holds ' + JSON.stringify(b));
+    // A second render of the same page REPLACES its list rather than stacking onto it.
+    const A2 = {}; fx.begin(A2, 'spec:ART.1'); fx.add(A2, 20, 400, 130, 130, 0); fx.commit(A2);
+    if (fx.rects['spec:ART.1'].length !== 1) throw new Error('re-render stacked rects');
+  });
+  await check('...and every preview path begins and commits its own list', async () => {
+    const si = APP.indexOf('async function renderSpecPageCanvas(');
+    const sb = APP.slice(si, APP.indexOf('function _previewQuality(', si));
+    if (sb.indexOf('_specPlanRectsBegin(rec,') < 0 || sb.indexOf('_specPlanRectsCommit(rec)') < 0) throw new Error('spec preview does not own its rects');
+    if (APP.indexOf('_specPlanRects[_curPageKey]') >= 0) throw new Error('something still files rects by the global key');
+    const pi = APP.indexOf("} else if (desc.kind === 'planDetail') {", APP.indexOf('async function renderDeckPageCanvas('));
+    if (APP.slice(pi, pi + 300).indexOf('_specPlanRectsCommit(rec)') < 0) throw new Error('plan detail preview does not commit');
   });
 
   let bad = 0;

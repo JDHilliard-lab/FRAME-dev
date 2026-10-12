@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.25';
+const APP_VERSION = '18.26';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -2770,9 +2770,8 @@ async function _drawPlanDetailPage(doc, logos, pageNum, meta, pd) {
     try { doc.addImage(oc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', planArea.x, planArea.y, planArea.w, planArea.h); } catch (e) {}
     doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(planArea.x, planArea.y, planArea.w, planArea.h, 'S'); } catch (e) {}
     // The plan links back to its floorplan page (18.23), like every spec page's plan
-    // thumbnail. Reset first: the preview re-renders this page and nothing else clears it.
-    if (_curPageKey) _specPlanRects[_curPageKey] = [];
-    _specPlanRectAdd(planArea.x, planArea.y, planArea.w, planArea.h, pd.level || 0);
+    // thumbnail. The list it lands in is this render's own (_specPlanRectsBegin).
+    _specPlanRectAdd(doc, planArea.x, planArea.y, planArea.w, planArea.h, pd.level || 0);
     // Mockups: each piece lands in the column NEAREST its pin, stacked in pin
     // order; drag overrides (pd.pos) place it anywhere. Leaders are elbow-routed
     // through stacked lanes so parallel lines never overlap.
@@ -14890,7 +14889,7 @@ function _specArtRectAdd(id, x, y, w, h) {
     if (!_curPageKey || !id || !(w > 0) || !(h > 0)) return;
     (_specArtRects[_curPageKey] = _specArtRects[_curPageKey] || []).push({ id: id, x: x, y: y, w: w, h: h });
 }
-function _specArtRectsReset() { if (_curPageKey) { _specArtRects[_curPageKey] = []; _specPlanRects[_curPageKey] = []; } }
+function _specArtRectsReset() { if (_curPageKey) { _specArtRects[_curPageKey] = []; } }
 // ...and where its FLOORPLAN thumbnail landed, with the level it shows. The PDF turns it
 // into a link to that level's floorplan page and Deck Studio into a click-through, which
 // is the half of the round trip the floorplan page (whose key list and pins already link
@@ -14900,15 +14899,26 @@ const _specPlanRects = {};
 // floorplan page (or the first floorplan page when that level has none).
 function _linkSpecPlanRects(doc, key, levelPages, firstKey) {
     try {
-        (_specPlanRects[key] || []).forEach(q => {
+        const list = (doc && doc._planKey === key && Array.isArray(doc._planRects)) ? doc._planRects : (_specPlanRects[key] || []);
+        list.forEach(q => {
             const pg = (levelPages && levelPages[q.level]) || firstKey;
             if (pg && typeof doc.link === 'function') doc.link(q.x, q.y, q.w, q.h, { pageNumber: pg });
         });
     } catch (e) {}
 }
-function _specPlanRectAdd(x, y, w, h, level) {
-    if (!_curPageKey || !(w > 0) || !(h > 0)) return;
-    (_specPlanRects[_curPageKey] = _specPlanRects[_curPageKey] || []).push({ x: x, y: y, w: w, h: h, level: _deckLvlOf(level) });
+// EACH RENDER OWNS ITS LIST (18.26). The rects used to be pushed onto
+// the map entry named by `_curPageKey`, and `_curPageKey` is ONE global while the centre page
+// and the rail thumbnails render concurrently and await elevation captures mid-page. So
+// a page's floorplan rect landed under whichever page set the key last: measured on a
+// deck with artwork and a wall, ART.1 held five rects and ART.2 had none, and ART.2's
+// plan was a dead button. The list now rides on the render's own `doc` (a CanvasPdfRec
+// per preview, one jsPDF page at a time in the export) and is swapped in WHOLE when the
+// page is done, so a half-drawn or interleaved render can never mix two pages' rects.
+function _specPlanRectsBegin(doc, key) { if (doc) { doc._planKey = key || null; doc._planRects = []; } }
+function _specPlanRectsCommit(doc) { if (doc && doc._planKey && Array.isArray(doc._planRects)) _specPlanRects[doc._planKey] = doc._planRects; }
+function _specPlanRectAdd(doc, x, y, w, h, level) {
+    if (!doc || !Array.isArray(doc._planRects) || !(w > 0) || !(h > 0)) return;
+    doc._planRects.push({ x: x, y: y, w: w, h: h, level: _deckLvlOf(level) });
 }
 // Set to {} for the duration of a PDF build; records which page numbers had a
 // footer drawn so the build can sweep up any page a drawer forgot. null outside
@@ -25626,7 +25636,7 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     const meta = _deckFooterMeta();
     // Per-page theme for spec pages too: background + ink flip + footer mode.
     try { const _tk = _deckPageKey(desc); _curPageKey = _tk; _curFooter = _resolveFooter(_tk); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
-    if (!desc._tplSwatch) _specArtRectsReset();
+    if (!desc._tplSwatch) { _specArtRectsReset(); _specPlanRectsBegin(rec, _deckPageKey(desc)); }
     if (onProgress) onProgress(12);
     // Template-card mode rides on ctx, not a module flag — see SPEC_TPL_DEMO_SALON.
     const ctx = { PW: PW, PH: PH, M: M, swatch: !!desc._tplSwatch, members: desc.members };
@@ -25645,6 +25655,7 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     } else {
         return null;   // unsupported → keep the live preview
     }
+    _specPlanRectsCommit(rec);
     if (onProgress) onProgress(40);
     return await rec.render(scale || _previewScale('center'), onProgress);
 }
@@ -25737,7 +25748,9 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
             if (opts && opts.fpNoPins) entries = entries.map(en => Object.assign({}, en, { planX: null, planY: null, wallLine: null, wallLines: null }));
             _drawFloorplanKeyPage(rec, logos, 1, meta, entries, planImg, lv.name || ('Level ' + (desc.level + 1)));
         } else if (desc.kind === 'planDetail') {
+            _specPlanRectsBegin(rec, _deckPageKey(desc));
             await _drawPlanDetailPage(rec, logos, 1, meta, desc.pd);
+            _specPlanRectsCommit(rec);
         } else if (desc.kind === 'card') {
             if (desc.type === 'timeline') _drawTimelinePage(rec, logos, 1, meta, editorialContent.timeline);
             else if (desc.type === 'frameRec') { const frames = (typeof _collectProjectFramesCached === 'function') ? await _collectProjectFramesCached() : []; const pgs = _frameRecPlanPages(frames || [], _frameRecCfg()); _drawFrameRecPage(rec, logos, 1, meta, pgs[Math.min(desc.frPage || 0, pgs.length - 1)]); }
@@ -33228,7 +33241,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                         _drawGroupElevOutline(doc, er, tx, ty, tw, th);
                         _specThumbCaption(doc, 'Elevation', tx, Math.min(ty + th + 8, BB));
                         // The elevation thumbnail links to the floorplan too, the same as the plan (17.96).
-                        _specPlanRectAdd(tx, ty, tw, th, members[0] && members[0].level);
+                        _specPlanRectAdd(doc, tx, ty, tw, th, members[0] && members[0].level);
                         legendRight = tx - 14;
                         _thumbBox = { tx: tx, ty: ty, tw: tw, th: th };
                     }
@@ -33261,7 +33274,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                     try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', px0, pTop, dw, dh); } catch (e) {}
                     _drawPlanCropMarks(doc, pc, px0, pTop, dw, dh);
                     doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(px0, pTop, dw, dh, 'S'); } catch (e) {}
-                    _specPlanRectAdd(px0, pTop, dw, dh, members[0] && members[0].level);
+                    _specPlanRectAdd(doc, px0, pTop, dw, dh, members[0] && members[0].level);
                     _specThumbCaption(doc, 'Floorplan', px0, Math.min(pTop + dh + 8, BB));
                 } else {
                     _specSwatchBox(doc, px0, pTop, pH, pH, 'Floorplan', Math.min(pTop + pH + 8, BB));
@@ -33377,7 +33390,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                         try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', x, top, rowH, rowH); } catch (e) {}
                         _drawPlanCropMarks(doc, pc, x, top, rowH, rowH);
                         doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(x, top, rowH, rowH, 'S'); } catch (e) {}
-                        _specPlanRectAdd(x, top, rowH, rowH, members[0] && members[0].level);
+                        _specPlanRectAdd(doc, x, top, rowH, rowH, members[0] && members[0].level);
                         _specThumbCaption(doc, 'Floorplan', x, Math.min(top + rowH + 8, BB));
                     } else {
                         _specSwatchBox(doc, x, top, rowH, rowH, 'Floorplan', Math.min(top + rowH + 8, BB));
@@ -33392,7 +33405,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                             _drawGroupElevOutline(doc, er, x, top, tw, th);
                         } catch (e) {}
                         _specThumbCaption(doc, 'Elevation', x, Math.min(top + th + 8, BB));
-                        _specPlanRectAdd(x, top, tw, th, members[0] && members[0].level);   // links to the floorplan (17.96)
+                        _specPlanRectAdd(doc, x, top, tw, th, members[0] && members[0].level);   // links to the floorplan (17.96)
                     } else {
                         _specSwatchBox(doc, x, top, tw, th, 'Elevation', Math.min(top + th + 8, BB));
                     }
@@ -35693,7 +35706,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
                 _drawPlanCropMarks(doc, pc, px0, py0, dw, dh);
                 doc.setDrawColor(30, 30, 30); doc.setLineWidth(1);
                 try { doc.rect(px0, py0, dw, dh, 'S'); } catch (e) {}
-                _specPlanRectAdd(px0, py0, dw, dh, r && r.level);
+                _specPlanRectAdd(doc, px0, py0, dw, dh, r && r.level);
                 _specThumbCaption(doc, 'Floorplan', px0, Math.min(py0 + dh + 9, SR.B));
             }
         } catch (e) { /* no plan pinned for this row — leave the corner empty */ }
@@ -35755,7 +35768,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
             // no baseboard — which is exactly what this page shipped as first.
             if (drew) _drawElevAnnOps(doc, res.cap.vec, dx, dy, dw, dh);
             if (drew) _specThumbCaption(doc, 'Elevation', SR.R, Math.min(dy + dh + 9, SR.B), { align: 'right' });
-            if (drew) _specPlanRectAdd(dx, dy, dw, dh, r && r.level);   // links to the floorplan (17.96)
+            if (drew) _specPlanRectAdd(doc, dx, dy, dw, dh, r && r.level);   // links to the floorplan (17.96)
             // Say it on the page rather than letting an unreadable drawing speak for
             // itself. A sheet that quietly prints 6pt dimensions looks like a bug; one
             // that states the wall is past what a single view holds is a drawing note.
@@ -36306,7 +36319,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     const planAvail = (yBot - capH) - colTop;
                     const planTarget = Math.min(planAvail, (yBot - capH - yTop) * IG_PLAN_H_FRAC);
                     const pr = await drawPlanAt(M, yBot - capH, leftW * planScale, Math.max(0, Math.min(planAvail, planTarget * planScale)));
-                    if (pr) { strokeImg(pr.x, pr.y, pr.w, pr.h); drawCaption('Floorplan', pr.x, yBot - 2); _specPlanRectAdd(pr.x, pr.y, pr.w, pr.h, planRow && planRow.level); }
+                    if (pr) { strokeImg(pr.x, pr.y, pr.w, pr.h); drawCaption('Floorplan', pr.x, yBot - 2); _specPlanRectAdd(doc, pr.x, pr.y, pr.w, pr.h, planRow && planRow.level); }
                     // Elevation: everything right of the left column (or of a plan grown past
                     // it), as large as it fits.
                     const ex0 = Math.max(M + leftW, pr ? (pr.x + pr.w) : 0) + gutter;
@@ -36424,7 +36437,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
             } catch (e) { try { _fpDocLineAlpha(doc, 1); doc.setLineDashPattern([], 0); } catch (e2) {} }
             doc.setFont(_font('serif'), 'italic'); doc.setFontSize(8); doc.setTextColor(138, 138, 138);
             doc.text('Floorplan', px0, py0 - 4);
-            _specPlanRectAdd(px0, py0, pw, ph, planRow && planRow.level);
+            _specPlanRectAdd(doc, px0, py0, pw, ph, planRow && planRow.level);
         }
     } catch (e) { try { doc.setLineDashPattern([], 0); } catch (_) {} }
     _drawPdfFooter(doc, logos, pageNum, meta);
@@ -36779,7 +36792,7 @@ async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
                 doc.setFontSize(7.5);
                 doc.setTextColor(120, 120, 120);
                 doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
-                _specPlanRectAdd(ex0, ey0, ew, eh, r && r.level);   // links to the floorplan (17.96)
+                _specPlanRectAdd(doc, ex0, ey0, ew, eh, r && r.level);   // links to the floorplan (17.96)
             }
         }
 
@@ -37221,7 +37234,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
                 // so it was the odd one out in a row of three labels — and it
                 // ignored the brand font entirely.
                 _specThumbCaption(doc, (elev.name || 'Elevation') + '', capX, _capY(boxY + eh));
-                if (!SWATCH) _specPlanRectAdd(boxX, boxY, ew, eh, r && r.level);   // links to the floorplan (17.96)
+                if (!SWATCH) _specPlanRectAdd(doc, boxX, boxY, ew, eh, r && r.level);   // links to the floorplan (17.96)
             } else { _elevMiss(); }
         }
     }
@@ -37251,7 +37264,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, dy0, dw, dh); } catch (e) {}
             _drawPlanCropMarks(doc, pc, bx, dy0, dw, dh);
             doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(bx, dy0, dw, dh, 'S'); } catch (e) {}
-            if (!SWATCH) _specPlanRectAdd(bx, dy0, dw, dh, r && r.level);
+            if (!SWATCH) _specPlanRectAdd(doc, bx, dy0, dw, dh, r && r.level);
             _specThumbCaption(doc, 'Floorplan', bx, _capY(dy0 + dh));
         } else {
             // Ticked, but this piece is not pinned on a plan yet. Reserve it.
@@ -37674,7 +37687,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         pageNum += 1;
         if (key) _pageKeys[pageNum] = key;
         _curPageKey = key || null;
-        if (_curPageKey) { _specPlanRects[_curPageKey] = []; }
+        _specPlanRectsBegin(doc, _curPageKey);
         try { _curFooter = _resolveFooter(key || null); } catch (e) { _curFooter = { text: 'dark' }; }
         // Per-page theme (background colour/image, dark-ink flip, footer mode)
         // — bg images were pre-baked before the page loop started.
@@ -40930,7 +40943,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
+                body: `<strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
+<strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>
 <strong>18.24</strong> The wall line on a spec page's floorplan thumbnail now prints at the same weight and the same red as on the breaker pages, with the same dashed box, whatever size the thumbnail is.<br><br>
 <strong>18.23</strong> The floorplan on a catalogue option's spec page now shows the wall line, not just the red box. Click the plan on a plan detail page, in Deck Studio or in the PDF, and it takes you to its floorplan page. On the floorplan page, clicking a catalogue placement in the list on the left opens its breaker page (or its first option page) instead of saying there is no spec page.<br><br>
 <strong>18.22</strong> A new elbow arrow opens as a zig-zag with the bend in the middle, and <strong>Elbow arrow, upright</strong> goes down, across and down. Select one and a grip appears on the middle of the bend: drag it to slide the bend. The grip is hidden when the arrow is not selected, and the page thumbnails now show elbows as they are drawn instead of as a straight line. Elbows already on your pages are unchanged.<br><br>
