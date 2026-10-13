@@ -34,7 +34,7 @@ const path = require('path');
     });
     __check('the theme toggle, help, units, undo and save are in every view', () => {
       switchView('deck');
-      ['helpBtn', 'globalUnitToggle', 'undoBtn', 'saveProjectBtn', 'saveMenuBtn'].forEach(id => { const e = document.getElementById(id); if (!e || e.classList.contains('hdr-off')) throw new Error(id + ' missing in Deck Studio'); });
+      ['helpBtn', 'unitChip', 'undoBtn', 'saveProjectBtn', 'saveMenuBtn'].forEach(id => { const e = document.getElementById(id); if (!e || e.classList.contains('hdr-off')) throw new Error(id + ' missing in Deck Studio'); });
     });
     __check('Versions moved into the Save menu, which also offers Save and Save As', () => {
       let opened = 0; openVersionsModal = () => { opened++; };

@@ -190,10 +190,12 @@ const path = require('path');
     });
 
     // ── 2. Elevation dual units ──
-    __check('elevation dual units are off by default and independent of the spec setting', () => {
+    // 18.37 REVERSED the old "independent" rule on purpose: one second unit per project,
+    // so the same project cannot print mm on one designer's elevations and not another's.
+    __check('elevation dual units are off by default and follow the project second unit', () => {
       if (_elevDualUnit() !== '') throw new Error('default is ' + _elevDualUnit());
       editorialContent.specDualUnit = 'mm';
-      if (_elevDualUnit() !== '') throw new Error('the elevation followed the SPEC setting; they are meant to be separate');
+      if (_elevDualUnit() !== 'mm') throw new Error('the elevation ignores the project second unit');
       editorialContent.specDualUnit = '';
     });
 
@@ -287,13 +289,14 @@ const path = require('path');
       toggleElevDualUnit(true);
       if (_elevDualUnit() !== 'cm') throw new Error('re-ticking forgot the cm choice, got ' + _elevDualUnit());
       setElevDualUnit('');
-      if (S.indexOf('loadElevDualUnit()') < 0) throw new Error('the preference is never loaded at boot');
+      // 18.37: it is project data now, so it travels in the file rather than localStorage.
+      if (S.indexOf("localStorage.getItem('elevDualUnit')") >= 0) throw new Error('a per-computer elevation unit is read again');
       if (S.indexOf('seedElevDualUnitInputs()') < 0) throw new Error('the modal never reflects the stored value');
     });
 
     __check('switching it invalidates the breaker/install captures', () => {
-      const i = S.indexOf('function saveElevDualUnit');
-      const body = S.slice(i, i + 500);
+      const i = S.indexOf('function setProjectDualUnit');
+      const body = S.slice(i, S.indexOf('\\n}\\n', i));
       if (body.indexOf('_elevGuidesChanged') < 0) throw new Error('cached elevation images would keep the old units on every deck page');
     });
 

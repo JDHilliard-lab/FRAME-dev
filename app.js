@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.36';
+const APP_VERSION = '18.37';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -345,6 +345,10 @@ function _startNewProject(o) {
     setVal('g_projName', name);
     if (o && String(o.client || '').trim()) setVal('g_client', String(o.client).trim());
     if (o && UNIT_INFO[o.unit] && typeof setUnit === 'function') { try { setUnit(o.unit); } catch (e) {} }
+    // New projects print inches with mm alongside, on spec pages and elevations alike
+    // (18.37). Set here, not in _editorialDefaults, so only a NEW project gets it.
+    editorialContent.specDualUnit = 'mm'; _elevDualLast = 'mm';
+    try { _syncUnitChip(); } catch (e) {}
     _startScreenClose();
     _dsGoFloorplanItems();
     _nextStepDismissed = false;
@@ -1986,6 +1990,9 @@ function _specCodeStyleDefault() { return { font: 'serif', size: 9, color: '#9c9
 // back to the tier set it was built with.
 function _editorialFromFile(ed) {
     const e = Object.assign(_editorialDefaults(), ed || {});
+    // A file that predates the field has NO second unit (or its legacy scaleOpts one,
+    // which _specDualUnit reads when this is null), never a newer default.
+    if (!ed || ed.specDualUnit === undefined) e.specDualUnit = null;
     if (!ed || !Array.isArray(ed.artCategories)) delete e.artCategories;
     return e;
 }
@@ -3457,7 +3464,7 @@ function _elevCaptureSignature() {
         parts.push(String(elevHangIn), String(elevBaseboardIn));
         parts.push(typeof elevUnit !== 'undefined' ? elevUnit : '');
         parts.push(typeof showUnitSuffix !== 'undefined' ? String(showUnitSuffix) : '');
-        parts.push(typeof elevDualUnit !== 'undefined' ? elevDualUnit : '');
+        parts.push(_specDualUnit());
         parts.push(typeof elevPersonShade !== 'undefined' ? String(elevPersonShade) : '');
         // The wireframe look changes what every frame DRAWS, so it has to invalidate
         // the cached captures like any other drawing input. Without it, toggling it
@@ -5143,7 +5150,6 @@ function initMasterApp() {
     loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
     loadDimVisibility();   // restore saved per-element dimension hide flags
     loadUnitSuffixPref();  // restore interior unit-suffix on/off preference
-    loadElevDualUnit();    // restore elevation dual-unit preference (off / mm / cm)
     loadSvgFrameMode();    // restore SVG frame export mode (texture/autocolor)
     loadSnapPref();        // restore snap-to-align on/off preference
     loadDimSnapPref();     // restore dimension-drag snap preference
@@ -6437,6 +6443,7 @@ function setupDashPreviewDragHandle() {
 // The dashboard layout toggle and the drop-shadow toggle were live in Deck Studio,
 // where neither changes anything you can see.
 function _syncHeaderForView() {
+    try { _syncUnitChip(); } catch (e) {}
     document.querySelectorAll('[data-views]').forEach(el => {
         const on = (el.getAttribute('data-views') || '').split(/\s+/).indexOf(currentView) >= 0;
         el.classList.toggle('hdr-off', !on);
@@ -7221,7 +7228,7 @@ function _projectPayload() {
     // in the second case. _cloneData, not a reference: annotationStyle keeps mutating
     // after this and the serialize happens on the caller's next line.
     return { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, hangHeightIn: elevHangIn, baseboardIn: elevBaseboardIn, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, floorplanLevels: floorplanLevels, editorial: editorialContent,
-        annotationStyle: _cloneData(annotationStyle), elevDualUnit: (typeof elevDualUnit !== 'undefined' ? (elevDualUnit || '') : '') };
+        annotationStyle: _cloneData(annotationStyle), elevDualUnit: _specDualUnit() };   // still written, so an older build reading only this key prints the same
 }
 
 // The name a NEW file is suggested under. Project name plus today's date, which
@@ -7439,10 +7446,13 @@ function _readProjectText(text) {
                 if (typeof applyAnnotationStyleToCSSVars === 'function') applyAnnotationStyleToCSSVars();
                 if (typeof saveAnnotationStyle === 'function') saveAnnotationStyle();
             }
-            if (typeof data.elevDualUnit === 'string') {
-                elevDualUnit = (data.elevDualUnit === 'mm' || data.elevDualUnit === 'cm') ? data.elevDualUnit : '';
-                if (elevDualUnit) _elevDualLast = elevDualUnit;
-                try { localStorage.setItem('elevDualUnit', elevDualUnit); } catch (e) {}
+            // ONE second unit per project since 18.37 (editorialContent.specDualUnit). A
+            // file from before then may carry it only as the elevation's elevDualUnit: if
+            // its spec pages had none, the elevation's choice becomes the project's, so
+            // an elevation that printed dual still does.
+            if (typeof data.elevDualUnit === 'string' && !_specDualUnit()) {
+                const _ed = (data.elevDualUnit === 'mm' || data.elevDualUnit === 'cm') ? data.elevDualUnit : '';
+                if (_ed) { editorialContent.specDualUnit = _ed; _elevDualLast = _ed; }
             }
             // If the loaded project had divergent dashUnit / elevUnit
             // (a relic of the pre-unified era), the elevations array
@@ -10722,6 +10732,47 @@ function setDashUnit(newUnit) {
 // so all toggles stay in sync. Keeps dashUnit and elevUnit always equal —
 // they exist as separate variables only because lots of call sites read
 // them independently, but they're functionally one value now.
+// ── UNITS: ONE CHIP, ONE SETTING EACH (18.37) ───────────────────────────────────
+// Two questions, asked in one place: what unit sizes are TYPED in (setUnit, which
+// converts every stored value) and which SECOND unit prints beside inches on spec pages
+// and elevations (setProjectDualUnit). The header chip and Deck Studio's Project tab
+// build their controls here, so they cannot disagree.
+function _unitControlsInto(host) {
+    host.innerHTML = '';
+    const seg = (label, opts, cur, on, help) => {
+        const wrap = document.createElement('div'); wrap.style.cssText = 'margin-bottom:10px;';
+        const l = document.createElement('div'); l.textContent = label;
+        l.style.cssText = 'font-size:var(--fs-60); font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;';
+        wrap.appendChild(l);
+        const row = document.createElement('div'); row.className = 'unit-toggle'; row.style.cssText = 'height:28px;';
+        opts.forEach(o => {
+            const b = document.createElement('button'); b.type = 'button'; b.textContent = o[1];
+            b.setAttribute('data-unit-opt', label + ':' + o[0]);
+            if (o[0] === cur) b.classList.add('active');
+            b.onclick = () => { on(o[0]); _unitControlsInto(host); };
+            row.appendChild(b);
+        });
+        wrap.appendChild(row);
+        if (help) { const h = document.createElement('div'); h.textContent = help; h.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:4px; line-height:1.4;'; wrap.appendChild(h); }
+        host.appendChild(wrap);
+    };
+    seg('Enter sizes in', [['in', 'IN'], ['cm', 'CM'], ['mm', 'MM']], dashUnit, (u) => setUnit(u));
+    seg('Second unit', [['', 'None'], ['mm', '+ MM'], ['cm', '+ CM']], _specDualUnit(), (u) => setProjectDualUnit(u),
+        'Spec pages and elevations print inches first with the second unit in brackets: 24"(610mm).');
+}
+function _syncUnitChip() {
+    const m = document.getElementById('unitChipMain'), d = document.getElementById('unitChipDual');
+    if (m) m.textContent = String(dashUnit || 'in').toUpperCase();
+    const du = _specDualUnit();
+    if (d) d.textContent = du ? '+' + du.toUpperCase() : '';
+    const chip = document.getElementById('unitChip');
+    if (chip) chip.title = 'Units: sizes typed in ' + String(dashUnit || 'in').toUpperCase() + (du ? ', ' + du + ' printed beside inches' : ', no second unit') + '. Click to change.';
+    const host = document.getElementById('projUnitsHost');
+    if (host) _unitControlsInto(host);
+}
+function openUnitMenu() {
+    _dsPopup('unitMenu', 'unitChip', (menu) => { menu.style.width = '250px'; _unitControlsInto(menu); });
+}
 function setUnit(newUnit) {
     if (!UNIT_INFO[newUnit]) return;  // unknown unit, ignore
     if (dashUnit === newUnit && elevUnit === newUnit) return;  // already set
@@ -10817,6 +10868,7 @@ function setUnit(newUnit) {
     if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof initElevControls === 'function') initElevControls();
     if (typeof drawElevAll === 'function') drawElevAll();
+    try { _syncUnitChip(); } catch (e) {}
 }
 
 function selectDashRow(index) {
@@ -19139,38 +19191,20 @@ function _dsSpecSlotsInto(host, desc, ovKey, group) {
     host.appendChild(wrap);
     return wrap;
 }
+// What units this page prints, as one line with a Change link (18.37). The setting is
+// the PROJECT's second unit (header chip), so this is a readout, not a second control.
 function _dsDualUnitInto(parent) {
-    const cur = _specDualUnit();
-    const set = (v) => {
-        editorialContent.specDualUnit = v;
-        if (typeof pushHistory === 'function') pushHistory();
-        if (typeof scheduleAutosave === 'function') scheduleAutosave();
-        _dsClearBuiltAll(); _dsRefresh();
-    };
+    const du = _specDualUnit();
     const wrap = document.createElement('div');
-    wrap.style.cssText = 'margin-top:8px; padding-top:9px; border-top:1px dashed var(--border-color);';
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex; align-items:center; gap:8px;';
-    const lab = document.createElement('label');
-    lab.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:var(--fs-65); font-weight:700; color:var(--text-main); cursor:pointer;';
-    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = !!cur;
-    cb.onchange = () => set(cb.checked ? (cur || 'mm') : '');
-    lab.appendChild(cb); lab.appendChild(document.createTextNode('Dual units'));
-    lab.appendChild(_dsHelpDot('Spec dimensions print in inches with the metric equivalent in brackets: 0.75"(19mm)W. '
-        + 'Applies to every spec page and leaves the project unit (and your elevations) alone.'));
-    row.appendChild(lab);
-    const pick = document.createElement('div');
-    pick.style.cssText = 'display:flex; gap:4px; margin-left:auto;' + (cur ? '' : ' opacity:0.4; pointer-events:none;');
-    [['mm', 'MM'], ['cm', 'CM']].forEach(pair => {
-        const active = cur === pair[0];
-        const b = document.createElement('button'); b.textContent = pair[1];
-        b.style.cssText = 'width:38px; font-size:var(--fs-60); font-weight:700; padding:4px 0; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (active ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (active ? 'var(--ui-active)' : 'transparent') + '; color:' + (active ? '#fff' : 'var(--text-main)') + ';';
-        if (!active) b.onclick = () => set(pair[0]);
-        pick.appendChild(b);
-    });
-    row.appendChild(pick);
-    wrap.appendChild(row);
-    // The explanation is on the label's ? — see above.
+    wrap.style.cssText = 'margin-top:8px; padding-top:9px; border-top:1px dashed var(--border-color); display:flex; align-items:center; gap:8px; font-size:var(--fs-65); color:var(--text-main);';
+    const t = document.createElement('span'); t.id = 'dsUnitsLine';
+    t.innerHTML = '<b>Units</b> &nbsp;inches' + (du ? ' + ' + du : ' only');
+    const ch = document.createElement('button'); ch.type = 'button'; ch.id = 'dsUnitsChange';
+    ch.className = 'action-btn btn-secondary'; ch.style.cssText = 'width:auto; height:22px; padding:0 8px; margin-left:auto; font-size:var(--fs-60);';
+    ch.textContent = 'Change';
+    ch.title = 'The second unit is set for the whole project: spec pages and elevations';
+    ch.onclick = () => _dsPopup('unitMenu', 'dsUnitsChange', (menu) => { menu.style.width = '250px'; _unitControlsInto(menu); });
+    wrap.appendChild(t); wrap.appendChild(ch);
     parent.appendChild(wrap);
 }
 function _dsBreakerToggleInto(head, groupMode) {
@@ -40777,7 +40811,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
+                body: `<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
 <strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
@@ -42709,20 +42743,10 @@ function saveUnitSuffixPref() {
 // list, and a designer will reasonably want brackets on one and not the other.
 // Kept in localStorage next to the other elevation display prefs, not in the
 // project, because it's a drafting preference rather than project data.
-let elevDualUnit = '';
-function loadElevDualUnit() {
-    try {
-        const v = localStorage.getItem('elevDualUnit');
-        if (v === 'mm' || v === 'cm') { elevDualUnit = v; _elevDualLast = v; }
-    } catch (e) { /* default off */ }
-}
-function saveElevDualUnit() {
-    try { localStorage.setItem('elevDualUnit', elevDualUnit || ''); } catch (e) {}
-    // Deck-wide: breaker and install pages capture the elevation, so their cached
-    // images have to be dropped like any other guide change.
-    try { _elevGuidesChanged(); } catch (e) {}
-}
-function _elevDualUnit() { return (elevDualUnit === 'mm' || elevDualUnit === 'cm') ? elevDualUnit : ''; }
+// ONE SECOND UNIT FOR THE PROJECT (18.37). Elevations and spec pages used to have
+// separate switches, one of them saved per computer, so the same project printed mm on
+// one designer's elevations and not another's. Both read the project setting now.
+function _elevDualUnit() { return _specDualUnit(); }
 // The unit the PRIMARY number prints in: inches under dual units, otherwise the
 // project unit.
 function _elevPrimaryUnit() { return _elevDualUnit() ? 'in' : elevUnit; }
@@ -42796,13 +42820,23 @@ function unitLegendText() {
 // memory has to live in its OWN variable: elevDualUnit becomes '' when off, so
 // reading the choice back out of it would always give the default.
 let _elevDualLast = 'mm';
-function toggleElevDualUnit(on) { setElevDualUnit(on ? (_elevDualLast || 'mm') : ''); }
-function setElevDualUnit(mode) {
-    elevDualUnit = (mode === 'mm' || mode === 'cm') ? mode : '';
-    if (elevDualUnit) _elevDualLast = elevDualUnit;
-    saveElevDualUnit();
-    seedElevDualUnitInputs();
-    drawElevAll();
+function toggleElevDualUnit(on) { setProjectDualUnit(on ? (_elevDualLast || 'mm') : ''); }
+function setElevDualUnit(mode) { setProjectDualUnit(mode); }
+// THE one writer for the project's second unit: the header chip, the Elevations
+// Settings modal and anything else all come through here, so every view repaints.
+function setProjectDualUnit(mode) {
+    const v = (mode === 'mm' || mode === 'cm') ? mode : '';
+    if (v === _specDualUnit() && editorialContent.specDualUnit != null) { _syncUnitChip(); return; }
+    editorialContent.specDualUnit = v;
+    if (v) _elevDualLast = v;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _elevGuidesChanged(); } catch (e) {}   // breaker / install captures print the dims
+    try { seedElevDualUnitInputs(); } catch (e) {}
+    try { if (currentView === 'elevation') drawElevAll(); } catch (e) {}
+    try { if (typeof _dsClearBuiltAll === 'function') { _dsClearBuiltAll(); _dsRefresh(); } } catch (e) {}
+    try { if (currentView === 'dashboard' && typeof renderDashTable === 'function') renderDashTable(); } catch (e) {}
+    _syncUnitChip();
 }
 // Reflect the stored value in the Settings modal.
 function seedElevDualUnitInputs() {

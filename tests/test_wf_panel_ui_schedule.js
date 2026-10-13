@@ -529,7 +529,7 @@ const path = require('path');
       // Dual units ON: that is the reported case. "31"" alone fits fine; it is
       // "31"(783mm)" that does not, which is why the stagger keys on the LABEL and
       // not on the panel count.
-      elevDualUnit = 'mm';
+      editorialContent.specDualUnit = 'mm';   // 18.37: one project setting
       renderGlazingRuns(400, 108);
       const L = document.getElementById('glazing-dim-layer');
       const rows = Array.from(L.querySelectorAll('.arch-dim-h')).map(d => Math.round(parseFloat(d.style.bottom)));

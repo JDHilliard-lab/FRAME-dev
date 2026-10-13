@@ -190,17 +190,19 @@ const path = require('path');
       if (S.indexOf(\"specDualUnit: ''\") < 0) throw new Error('the editorialContent literal was not updated alongside _editorialDefaults');
     });
 
-    __check('the control appears in BOTH spec panels and nowhere it would do nothing', () => {
+    // 18.37: the second unit is ONE project setting (header chip, Project tab, and a
+    // readout with Change in both spec panels). One writer, setProjectDualUnit.
+    __check('both spec panels show the units line, and it opens the shared controls', () => {
       const S = window.__appSrc;
-      if (S.indexOf('function _dsDualUnitInto') < 0) throw new Error('no _dsDualUnitInto helper — the control was inlined, so the two panels can drift');
       const calls = (S.match(/_dsDualUnitInto\\(/g) || []).length;
       if (calls < 3) throw new Error('expected the helper plus a call from each of the two spec panels, found ' + calls + ' references');
       const i = S.indexOf('function _dsDualUnitInto');
-      const body = S.slice(i, i + 2600);
-      if (body.indexOf('specDualUnit =') < 0) throw new Error('the control does not write the deck-wide setting');
-      if (body.indexOf(\"cur || 'mm'\") < 0) throw new Error('unticking should remember the unit rather than resetting the picker');
-      if (body.indexOf('_dsClearBuiltAll') < 0 || body.indexOf('_dsRefresh') < 0) throw new Error('the control does not rebuild the previews, so it would only take effect on the next PDF');
-      if (body.indexOf('scheduleAutosave') < 0) throw new Error('the setting is not saved');
+      const body = S.slice(i, S.indexOf('\\n}\\n', i));
+      if (body.indexOf('_unitControlsInto(') < 0) throw new Error('the panel line does not open the shared unit controls');
+      if (body.indexOf('specDualUnit =') >= 0) throw new Error('the panel writes the setting itself again');
+      const w = S.indexOf('function setProjectDualUnit');
+      const wb = S.slice(w, S.indexOf('\\n}\\n', w));
+      ['pushHistory', 'scheduleAutosave', '_dsClearBuiltAll', '_dsRefresh', '_elevGuidesChanged'].forEach(n => { if (wb.indexOf(n) < 0) throw new Error('setProjectDualUnit does not call ' + n); });
     });
   `;
 

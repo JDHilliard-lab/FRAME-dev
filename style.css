@@ -2723,3 +2723,8 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .save-split > #saveProjectBtn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
 .save-split > #saveMenuBtn { border-top-left-radius: 0; border-bottom-left-radius: 0; padding: 0 6px; margin-left: 1px; }
 .save-split > #saveMenuBtn .svg-icon { width: 12px; height: 12px; }
+/* 18.37: the units chip. Main unit plus the second unit as a quieter badge. */
+.unit-chip { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; letter-spacing: 0.3px; }
+#unitChipDual { font-size: var(--fs-60); color: var(--text-muted); font-weight: 700; }
+#unitChipDual:empty { display: none; }
+

@@ -63,15 +63,15 @@ const path = require('path');
       // chosen dimension colour on opening an old job would be a bad trade.
       annotationStyle.color = '#123456';
       annotationStyle.fontSize = 21;
-      elevDualUnit = 'mm';
-      const before = { c: annotationStyle.color, f: annotationStyle.fontSize, d: elevDualUnit };
+      editorialContent.specDualUnit = 'mm';   // 18.37: the project's second unit
+      const before = { c: annotationStyle.color, f: annotationStyle.fontSize, d: _specDualUnit() };
       _migrateLoadedProject({ type: 'master-studio-v6', elevations: [] });
       // The loader's guards are what matter; assert the conditions it uses.
       const i = S.indexOf('if (data.annotationStyle && typeof data.annotationStyle === ');
       if (i < 0) throw new Error('the loader does not guard on the key being present');
-      const j = S.indexOf("if (typeof data.elevDualUnit === 'string')");
+      const j = S.indexOf("if (typeof data.elevDualUnit === 'string' && !_specDualUnit())");
       if (j < 0) throw new Error('elevDualUnit is not guarded on being present');
-      if (annotationStyle.color !== before.c || elevDualUnit !== before.d) throw new Error('a migration pass mutated the local style');
+      if (annotationStyle.color !== before.c || _specDualUnit() !== before.d) throw new Error('a migration pass mutated the local style');
     });
 
     __check('and when they ARE present it merges rather than replaces', () => {
@@ -90,7 +90,7 @@ const path = require('path');
     });
 
     __check('a loaded elevDualUnit is validated, not trusted', () => {
-      const i = S.indexOf("if (typeof data.elevDualUnit === 'string')");
+      const i = S.indexOf("if (typeof data.elevDualUnit === 'string' && !_specDualUnit())");
       const body = S.slice(i, i + 500);
       if (body.indexOf("=== 'mm' || data.elevDualUnit === 'cm'") < 0) throw new Error('any string would be accepted as a unit');
       if (body.indexOf('_elevDualLast') < 0) throw new Error('the remembered unit is not updated, so unticking and reticking loses the choice');
@@ -100,24 +100,24 @@ const path = require('path');
       // Write, then read back into a deliberately different local state.
       annotationStyle.color = '#e00000'; annotationStyle.fontSize = 13;
       annotationStyle.dimEnds = 'tick'; annotationStyle.lineWeightPt = 0.5;
-      elevDualUnit = 'mm';
+      editorialContent.specDualUnit = 'mm';
       const payload = {
         type: 'master-studio-v6', dashUnit: 'in', elevUnit: 'in',
-        annotationStyle: _cloneData(annotationStyle), elevDualUnit: elevDualUnit
+        annotationStyle: _cloneData(annotationStyle), elevDualUnit: _specDualUnit()
       };
       const wire = JSON.parse(JSON.stringify(payload));
       // Now the "other machine".
       annotationStyle.color = '#00ff00'; annotationStyle.fontSize = 30;
       annotationStyle.dimEnds = 'none'; annotationStyle.lineWeightPt = 3;
-      elevDualUnit = '';
+      editorialContent.specDualUnit = '';
       Object.assign(annotationStyle, wire.annotationStyle);
       _normalizeAnnotationStyle();
-      elevDualUnit = (wire.elevDualUnit === 'mm' || wire.elevDualUnit === 'cm') ? wire.elevDualUnit : '';
+      editorialContent.specDualUnit = (wire.elevDualUnit === 'mm' || wire.elevDualUnit === 'cm') ? wire.elevDualUnit : '';
       if (annotationStyle.color !== '#e00000') throw new Error('colour did not survive: ' + annotationStyle.color);
       if (annotationStyle.fontSize !== 13) throw new Error('label size did not survive: ' + annotationStyle.fontSize);
       if (annotationStyle.dimEnds !== 'tick') throw new Error('line ends did not survive: ' + annotationStyle.dimEnds);
       if (annotationStyle.lineWeightPt !== 0.5) throw new Error('line weight did not survive: ' + annotationStyle.lineWeightPt);
-      if (elevDualUnit !== 'mm') throw new Error('dual unit did not survive: ' + elevDualUnit);
+      if (_specDualUnit() !== 'mm') throw new Error('dual unit did not survive: ' + _specDualUnit());
       // The derived stack must be rebuilt, not left from the other machine.
       if (!annotationStyle.fontFamily) throw new Error('the derived CSS stack was not re-derived');
     });

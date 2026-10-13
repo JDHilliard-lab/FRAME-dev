@@ -79,7 +79,8 @@ const path = require('path');
       __seed();
       [
         () => { editorialContent.specTemplate = 'setRight'; },
-        () => { editorialContent.specDualUnit = 'mm'; },
+        // (specDualUnit left this list in 18.37: it is the project's ONE second unit and
+        // prints on elevations too, so it must invalidate. See the list below.)
         () => { editorialContent.installNotes = { keys: {}, custom: 'Site contact: Jordan.' }; },
         () => { editorialContent.approvedStamp = true; }
       ].forEach((fn, i) => {
@@ -108,13 +109,13 @@ const path = require('path');
         'baseboard':             () => { elevBaseboardIn = 6; },
         'unit':                  () => { elevUnit = 'cm'; },
         'interior suffix':       () => { showUnitSuffix = !showUnitSuffix; },
-        'elevation dual units':  () => { elevDualUnit = 'mm'; }
+        'elevation dual units':  () => { editorialContent.specDualUnit = 'mm'; }   // 18.37: the project setting
       };
       Object.keys(cases).forEach(name => {
-        __seed(); elevUnit = 'in'; elevDualUnit = '';
+        __seed(); elevUnit = 'in'; editorialContent.specDualUnit = '';
         if (!__gen(cases[name])) throw new Error(name + ' did NOT invalidate the capture — that page would keep a stale drawing');
       });
-      elevUnit = 'in'; elevDualUnit = '';
+      elevUnit = 'in'; editorialContent.specDualUnit = '';
     });
 
     __check('a huge artwork data URL is hashed by length, not stringified whole', () => {

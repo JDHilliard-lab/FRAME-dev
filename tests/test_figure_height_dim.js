@@ -52,7 +52,7 @@ const path = require('path');
 
     const __seed = (unit, dual) => {
       elevUnit = unit || 'in';
-      elevDualUnit = dual || '';
+      editorialContent.specDualUnit = dual || '';   // 18.37: one project setting
       elevations = [{ name: 'Wall A', wallW: 185, wallH: 108, personPos: { x: 6, placed: true }, frames: [
         { letter: 'A', id: 'P1', x: 40, y: 40, w: 30, h: 24, active: true }
       ] }];

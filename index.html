@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.36">
+    <link rel="stylesheet" href="style.css?v=18.37">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -101,11 +101,9 @@
                  values across dashboard rows + elevation frames + all input
                  fields, then syncs the other unit toggles (dashboard, Settings
                  modal) so all three stay in lockstep. -->
-            <div class="unit-toggle unit-toggle-3" id="globalUnitToggle" style="height:28px;" title="Project units (applies to dashboard and elevation)">
-                <button id="globalBtnInch" class="active" onclick="setUnit('in')">IN</button>
-                <button id="globalBtnCm" onclick="setUnit('cm')">CM</button>
-                <button id="globalBtnMm" onclick="setUnit('mm')">MM</button>
-            </div>
+            <!-- 18.37: ONE chip for units. What sizes are typed in (IN / CM / MM) and the second
+                 unit printed beside inches on spec pages and elevations, in one popover. -->
+            <button id="unitChip" class="action-btn btn-secondary unit-chip" style="width:auto;" onclick="openUnitMenu()" title="Units: what you type sizes in, and the second unit printed beside inches"><span id="unitChipMain">IN</span><span id="unitChipDual"></span></button>
             <!-- The Spec PDF button lived here. The Deck tab replaces it. -->
             <!-- UNDO AND REDO HAVE BUTTONS. updateUndoButtons() has enabled and disabled
                  #undoBtn and #redoBtn for a long time; neither existed, so undo was
@@ -1457,6 +1455,8 @@
             <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Project Name</label>
             <input type="text" id="specPdfProjName" placeholder="Untitled project" style="width:100%; font-size:var(--fs-85); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
         </div>
+        <!-- 18.37: the same units controls as the header chip, built by _unitControlsInto. -->
+        <div id="projUnitsHost" style="margin-bottom:14px;"></div>
         <div style="display:flex; gap:10px; margin-bottom:16px;">
             <div style="flex:2;">
                 <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Project Code</label>
@@ -1963,15 +1963,13 @@
                     </div>
                 </div>
             </div>
-            <!-- Elevation dual units. Independent of the spec-page setting: an
-                 elevation is dimensioned in a dozen places at once, so it's far
-                 tighter on space than a spec list and you may well want brackets
-                 on one and not the other. Inches always lead; the picker chooses
-                 the companion. The project unit above is untouched. -->
+            <!-- The project's SECOND UNIT (18.37): the same setting as the header units chip
+                 and the spec pages, written through setProjectDualUnit. Inches lead; the
+                 picker chooses the companion. -->
             <div style="display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-color);">
                 <label style="display:flex; align-items:center; gap:8px; font-size:var(--fs-65); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; cursor:pointer;">
                     <input type="checkbox" id="elevDualUnitCb" onchange="toggleElevDualUnit(this.checked)">
-                    Dual Units
+                    Second unit (whole project)
                 </label>
                 <div class="unit-toggle" id="elevDualUnitPick" style="height:26px; margin-left:auto; width:96px;">
                     <button id="elevDualMm" type="button" onclick="setElevDualUnit('mm')">MM</button>
@@ -1979,7 +1977,7 @@
                 </div>
             </div>
             <div style="font-size:var(--fs-60); color:var(--text-muted); margin-top:4px; line-height:1.4;">
-                Elevation dimensions print in inches with the metric equivalent in brackets: 4"(102mm). Leaves the project unit above alone.
+                Elevations and spec pages print inches with the second unit in brackets: 4"(102mm). The same setting as the units chip in the header.
             </div>
         </div>
 
@@ -2445,9 +2443,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.36';</script>
-<script src="templates.js?v=18.36"></script>
-<script src="app.js?v=18.36"></script>
+<script>window.FRAME_HTML_VERSION = '18.37';</script>
+<script src="templates.js?v=18.37"></script>
+<script src="app.js?v=18.37"></script>
 
 </body>
 </html>
