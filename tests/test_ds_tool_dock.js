@@ -30,7 +30,9 @@ const path = require('path');
   const pre = [];
   const pcheck = (label, fn) => { try { fn(); pre.push({ label, ok: true }); } catch (e) { pre.push({ label, ok: false, err: e.message }); } };
   pcheck('index.html carries one dock with every creation tool, and the old split buttons are gone', () => {
-    ['dsToolDock', 'dsDockSelect', 'dsDockText', 'dsDockNotes', 'dsDockLines', 'dsDockShapes', 'dsDockImage', 'dsDockPos',
+    // 18.40: Text box joined the Text menu (dsDockNotes) and Upload image the Shapes menu.
+    ['dsDockText', 'dsDockImage'].forEach(id => { if (html.indexOf('id="' + id + '"') >= 0) throw new Error('#' + id + ' is back as its own button beside the menu that already has it'); });
+    ['dsToolDock', 'dsDockSelect', 'dsDockNotes', 'dsDockLines', 'dsDockShapes', 'dsDockPos',
      'dsDockLeftSlot', 'dsDockRightSlot', 'dsDockTopSlot'].forEach(id => {
       if (html.indexOf('id="' + id + '"') < 0) throw new Error('missing #' + id);
     });
