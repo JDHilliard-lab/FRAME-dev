@@ -212,9 +212,9 @@ check('IMPORT: renamed codes are SAID in a modal, since nobody asked for them', 
   if (fx.rows[0].id !== 'ART.1') throw new Error('row ' + fx.rows[0].id);
 });
 
-check('no row creator mints a bare ART code any more: generateNextItemCode has no callers', () => {
-  const n = APP.split('generateNextItemCode(').length - 1;
-  if (n !== 1) throw new Error(n - 1 + ' caller(s) left');
+check('no row creator mints a bare ART code any more: generateNextItemCode is gone', () => {
+  const n = APP.split('generateNextItemCode').length - 1;
+  if (n !== 0) throw new Error('generateNextItemCode is back (' + n + ' mention(s))');
 });
 
 check('the empty-wall hint and Help no longer promise a generic-frame button', () => {

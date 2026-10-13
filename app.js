@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.30';
+const APP_VERSION = '18.31';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6978,23 +6978,6 @@ function switchView(viewType, index = 0) {
         // the console rather than a half-switched UI.
         try { openDeckStudio(_dsActiveTab || 'project'); }
         catch (e) { console.error('Deck view failed to prepare:', e); }
-        // Build the template picker's demo cards in the background now that they're
-        // reachable. Deliberately HERE and not in the boot tail: it is seven real page
-        // renders, and doing them at boot meant every load — and every one of the 100+
-        // test harnesses, which boot app.js and never open this view — paid for a panel
-        // that might never be opened. The rail build in front of this covers it (the
-        // prewarm yields while _thumbBusy), and the cards paint their per-arrangement
-        // diagram instantly either way, so there is nothing to watch.
-        // THE PREWARM IS OFF: nothing paints template cards any more. Both picker
-        // grids are gone (the per-piece one and the group one, each replaced by SHOW
-        // ON PAGE ticks), so this was rendering seven real pages - measured ~4.5s of
-        // work - on every entry to the deck view to fill a cache no one reads.
-        //
-        // The RENDERER is deliberately still here and still tested: it is correct, and
-        // a picker may want it again. What is gone is paying for it on every visit.
-        // If nothing brings the cards back, _dsPrewarmTplSwatches, _dsQueueTplSwatch,
-        // _dsPaintTplSwatch, _dsTemplateSwatchHTML, _specTplDemo* and SPEC_TPL_DEMO_*
-        // are the block to remove together.
         return;
     }
 
@@ -10681,10 +10664,6 @@ function _nextPlacementCode(prefix) {
     while (dashProjectData.some(d => d && _artGroupKey(d.id) === fmt(n))) n++;
     return fmt(n);
 }
-// ART.n, unpadded unless the project already writes ART.001 (see _nextPlacementCode).
-function generateNextItemCode() {
-    return _nextPlacementCode('ART');
-}
 
 function toggleDashSection(id, btn) {
     const sec = document.getElementById(id);
@@ -10806,10 +10785,6 @@ function setUnit(newUnit) {
     if (typeof renderDashTable === 'function') renderDashTable();
     if (typeof initElevControls === 'function') initElevControls();
     if (typeof drawElevAll === 'function') drawElevAll();
-    // The template cards' demo prints its dimensions in the project unit, so the
-    // whole swatch set is re-keyed by this. Rebuild it in the background rather than
-    // leaving the picker to render on open again.
-    if (typeof _dsRepwarmTplSwatches === 'function') setTimeout(_dsRepwarmTplSwatches, 400);
 }
 
 function selectDashRow(index) {
@@ -19167,8 +19142,6 @@ function _dsDualUnitInto(parent) {
         if (typeof pushHistory === 'function') pushHistory();
         if (typeof scheduleAutosave === 'function') scheduleAutosave();
         _dsClearBuiltAll(); _dsRefresh();
-        // Part of the swatch key too — the demo's dimensions print dual or not.
-        if (typeof _dsRepwarmTplSwatches === 'function') setTimeout(_dsRepwarmTplSwatches, 400);
     };
     const wrap = document.createElement('div');
     wrap.style.cssText = 'margin-top:8px; padding-top:9px; border-top:1px dashed var(--border-color);';
@@ -26221,131 +26194,12 @@ function _dsThumbCacheKey(desc) {
 // once and freezes the studio.
 // Builds a Light/Dark + colour + background-image control block into `t` for a
 // given page key. Writes to editorialContent.pageThemes[key].
-// Clean, alignment-accurate PLACEHOLDER mockup for the template picker: grey
-// boxes wherever a real image would go (artwork/frame mockup, corner, profile,
-// floorplan, elevation) and lorem ipsum for text blocks. Positions come from
-// the SAME fractions the real renderer uses, so what you see here is exactly
-// how the template blocks out \u2014 no real project data, no confusing partial
-// renders for someone seeing the tool for the first time.
-// A plain grey square where an image goes \u2014 no label inside it (matches
-// how a real designer would want to scan a template: image slot, then its
-// caption + a code placeholder sitting below it, same as the real pages do).
-//
-// GEOMETRY IS IN PERCENT, not px. The card is an `aspect-ratio` box now — it takes
-// its width from the grid column and its height follows — so the nominal `cw`/`chh`
-// a caller passes are only there to size TYPE. Lay any of this out in px against a
-// nominal width and the diagram slides off a card that turned out narrower, which
-// is the same class of mistake as the square cards it replaced.
-const _pc = (v) => (Math.round(v * 1e4) / 100) + '%';
-function _dsSwatchBox(xPct, yPct, wPct, hPct, cw, chh) {
-    return '<div style="position:absolute; left:' + _pc(xPct) + '; top:' + _pc(yPct) + '; width:' + _pc(wPct) + '; height:' + _pc(hPct) + '; background:#e4e4e4; border:1px solid #d6d6d6; border-radius:var(--r-2); box-sizing:border-box;"></div>';
-}
-// Caption sitting just under a box: the block's name (e.g. "Floorplan") plus a
-// thin grey bar standing in for an image code / item id that would print there.
-function _dsSwatchCaption(xPct, yBelowPct, wPct, cw, chh, label) {
-    const fs = Math.max(5, Math.round(chh * 0.052));
-    return '<div style="position:absolute; left:' + _pc(xPct) + '; top:' + _pc(yBelowPct) + '; width:' + _pc(Math.max(wPct, 0.18)) + '; font-size:' + fs + 'px; line-height:1.1; color:#9a9a9a; font-family:Arial,Helvetica,sans-serif; white-space:nowrap; overflow:hidden;">' + label + '</div>' +
-        '<div style="position:absolute; left:' + _pc(xPct) + '; top:calc(' + _pc(yBelowPct) + ' + ' + (fs + 2) + 'px); width:' + _pc(Math.max(wPct, 0.18) * 0.45) + '; height:' + Math.max(2, Math.round(fs * 0.4)) + 'px; background:#dcdcdc; border-radius:var(--r-2);"></div>';
-}
-// Draw a box + its caption together, using the box's own bottom edge so the
-// label always sits directly under it regardless of the box height.
-function _dsSwatchImageSlot(xPct, yPct, wPct, hPct, cw, chh, label) {
-    return _dsSwatchBox(xPct, yPct, wPct, hPct, cw, chh) + _dsSwatchCaption(xPct, yPct + hPct + 0.012, wPct, cw, chh, label);
-}
-function _dsSwatchLoremLines(xPct, yPct, wPct, cw, chh, n) {
-    const lhPct = 0.05, hPct = lhPct * 0.42;
-    let html = '';
-    for (let i = 0; i < n; i++) {
-        const lwPct = wPct * (i === 0 ? 0.55 : (0.3 + (i % 3) * 0.12));
-        html += '<div style="position:absolute; left:' + _pc(xPct) + '; top:' + _pc(yPct + i * lhPct) + '; width:' + _pc(lwPct) + '; height:' + _pc(hPct) + '; background:#e2e2e2; border-radius:var(--r-2);"></div>';
-        html += '<div style="position:absolute; left:' + _pc(xPct + wPct * 0.55) + '; top:' + _pc(yPct + i * lhPct) + '; width:' + _pc(wPct * 0.4) + '; height:' + _pc(hPct) + '; background:#ececec; border-radius:var(--r-2);"></div>';
-    }
-    return html;
-}
-function _dsSwatchPerson(xPct, cw, chh, hPct) {
-    const h = (hPct || 0.42);
-    return '<img src="Character_Lady_walk.svg" style="position:absolute; left:' + _pc(xPct) + '; bottom:14%; height:' + _pc(h) + '; filter:brightness(0); opacity:0.85;" onerror="this.style.display=\'none\'">';
-}
-const _dsTplSwatchCache = {};   // tplKey|unit -> dataURL, locked for the session
-let _dsTplSwatchQueue = [];
-let _dsTplSwatchBusy = false;
-// Keyed on the template and the units its numbers print in — NOT on the page you
-// happen to have selected. Every card draws the same standard demo piece now, so
-// one render per template serves the whole session instead of one per template per
-// piece, which is what made opening the panel on a fresh page churn.
-function _dsTplSwatchKey(tplKey) {
-    return tplKey + '|' + ((typeof dashUnit !== 'undefined') ? dashUnit : 'in')
-        + '|' + ((typeof _specDualUnit === 'function') ? _specDualUnit() : '');
-}
-function _dsQueueTplSwatch(tplKey, el) {
-    const ck = _dsTplSwatchKey(tplKey);
-    if (_dsTplSwatchCache[ck]) { _dsPaintTplSwatch(el, _dsTplSwatchCache[ck]); return; }
-    _dsTplSwatchQueue.push({ ck, tplKey, el });
-    _dsTplSwatchPump();
-}
-// NO `isConnected` GUARD. The cards call _dsQueueTplSwatch while their thumb div is
-// still DETACHED — the grid is appended to the panel several lines later — so a
-// cache hit, which paints synchronously, was skipped every single time and the card
-// kept its instant diagram. That looked like "the demos work when I first open the
-// tool and then vanish if I toggle Per piece / Group A/B/C": the first build has a
-// cold cache and goes down the async path, by which time the div IS attached, while
-// every rebuild after that hits the warm cache and painted into nothing. The guard
-// was pointless as well as harmful — writing innerHTML on a detached node is cheap
-// and correct, and the node is either about to be attached or about to be discarded.
-function _dsPaintTplSwatch(el, url) {
-    if (!el) return;
-    // object-fit:contain, not a stretched 100%/100%: the card cell and the page are
-    // both ~16:9 but not identically so, and a card that squeezes its own demo is
-    // the first thing you notice when comparing four of them.
-    el.innerHTML = '<img src="' + url + '" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#fff;">';
-}
-// Fill every template card's demo QUIETLY, once, shortly after boot — so opening the
-// picker shows finished cards instead of seven of them rendering one at a time while
-// you watch. The instant diagram still paints first (it costs nothing and now shows
-// the right arrangement), this just means the real demo is already sitting behind it.
-//
-// Deliberately NOT persisted to localStorage. performAutosave puts the whole project
-// — every artwork data URL, megabytes of it — in there under one key, and it fails
-// SILENTLY on quota. A few hundred ms of idle work per load is much cheaper than
-// spending the same origin budget and taking away the crash safety net.
-let _dsTplPrewarmDone = false, _dsTplPrewarmTries = 0;
-function _dsPrewarmTplSwatches() {
-    if (_dsTplPrewarmDone) return;
-    // Never compete with real work: a rail build and an elevation prime pass want the
-    // same main thread, and the prime pass wants the one #wall element as well. Bounded
-    // so a deck that stays busy doesn't leave a retry ticking for the whole session —
-    // the cards render on demand in that case, which is just the old behaviour.
-    if ((typeof _thumbBusy !== 'undefined' && _thumbBusy) || (typeof _elevPrimeActive !== 'undefined' && _elevPrimeActive)) {
-        if (++_dsTplPrewarmTries < 20) setTimeout(_dsPrewarmTplSwatches, 1500);
-        return;
-    }
-    _dsTplPrewarmDone = true;
-    Object.keys(SPEC_TEMPLATES).forEach(k => {
-        // installGuide isn't offered as a card, and a freeform one has no canvas
-        // render by design — renderSpecPageCanvas returns null and it keeps its
-        // diagram, so queueing it would just churn.
-        if (k === 'installGuide' || SPEC_TEMPLATES[k].freeform) return;
-        _dsQueueTplSwatch(k, null);            // no element: fill the cache only
-    });
-}
-// A unit change re-keys every swatch (the demo's numbers print in the project unit),
-// so the set has to be built again or the picker goes back to rendering on open.
-function _dsRepwarmTplSwatches() { _dsTplPrewarmDone = false; _dsTplPrewarmTries = 0; _dsPrewarmTplSwatches(); }
-// ONE font wait for the whole session, shared by every card.
-//
-// The brand faces have to be loaded BEFORE a swatch renders: the type is baked into
-// the cached JPEG and that cache is locked for the session, so a card built at 300ms
-// would keep its Arial fallbacks for as long as the tab is open — and prewarming made
-// that the normal case rather than a rare one.
-//
-// Memoized rather than awaited per job, which is the difference between two pending
-// timers and fourteen. Seven cards each doing two _withTimeout waits held the event
-// loop for ~7s past boot doing nothing.
-//
-// ONE wait for the whole session, shared by the template cards and the Project
-// tab's page preview. Both are canvas renders of a page, and a canvas draws with
-// whatever the face resolves to at that instant — so either waits for the brand
-// faces or shows the designer a page set in Arial Narrow.
+// ONE wait for the brand faces, memoized for the session, shared by every canvas
+// render of a page (the Project tab preview, the Type defaults demo). A canvas
+// draws with whatever the face resolves to at that instant, so it waits for both
+// halves: the glyphs (_loadEditorBrandFonts) and the bytes that decide what
+// _font() names (_loadPdfFontData). Bounded, so a fetch that never settles
+// cannot hold a preview on its fallback forever.
 let _dsBrandFontsMemo = null;
 function _dsBrandFontsReady() {
     if (!_dsBrandFontsMemo) {
@@ -26360,141 +26214,6 @@ function _dsBrandFontsReady() {
         })();
     }
     return _dsBrandFontsMemo;
-}
-async function _dsTplSwatchPump() {
-    if (_dsTplSwatchBusy) return;
-    const job = _dsTplSwatchQueue.shift();
-    if (!job) return;
-    _dsTplSwatchBusy = true;
-    try {
-        if (_dsTplSwatchCache[job.ck]) { _dsPaintTplSwatch(job.el, _dsTplSwatchCache[job.ck]); }
-        else {
-            await _dsBrandFontsReady();
-            // Render with the SAME engine as the page previews — so a card can't
-            // promise a layout the export doesn't draw — but on the standard demo
-            // piece and with the raster thumbnails stubbed. 0.45 (not 0.32) because
-            // the cards are read at ~150px wide and the spec labels have to be
-            // legible enough to tell two templates apart.
-            const cv = await renderSpecPageCanvas(_specTplDemoDesc(job.tplKey), null, 0.45);
-            if (cv) {
-                const url = cv.toDataURL('image/jpeg', 0.8);
-                _dsTplSwatchCache[job.ck] = url;               // locked — never refreshed
-                _dsPaintTplSwatch(job.el, url);
-            }
-        }
-    } catch (e) {}
-    _dsTplSwatchBusy = false;
-    if (_dsTplSwatchQueue.length) setTimeout(_dsTplSwatchPump, 30);
-}
-// The name strip under a template card: the label plus a ? that spells out what
-// the layout actually puts on the page, and the same text as the card's hover
-// tooltip. Four labels like 'Artwork spec — detail (plan + elevation)' ellipsised
-// into a 150px cell told you almost nothing about what you were choosing.
-function _dsTplCardName(key, tag, colour) {
-    const T = SPEC_TEMPLATES[key] || {};
-    const label = T.label || key;
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex; align-items:center; gap:3px; padding:3px 4px 3px 5px; border-top:1px solid var(--border-color);';
-    const nm = document.createElement('div');
-    nm.textContent = label + (tag || '');
-    nm.style.cssText = 'flex:1; min-width:0; font-size:var(--fs-60); color:' + colour + '; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;';
-    row.appendChild(nm);
-    if (T.help) {
-        const q = document.createElement('button');
-        q.type = 'button'; q.textContent = '?';
-        q.title = 'What this layout includes';
-        q.style.cssText = 'flex:0 0 auto; width:15px; height:15px; padding:0; line-height:13px; text-align:center; border-radius:50%; border:1px solid var(--border-color); background:transparent; color:var(--text-muted); font-size:var(--fs-55); font-weight:700; cursor:help;';
-        // stopPropagation because the whole CELL is the pick target — reading the
-        // blurb must not arm or apply the template sitting behind the modal.
-        q.onclick = (ev) => { ev.stopPropagation(); ev.preventDefault(); showInfoModal(label, T.help); };
-        row.appendChild(q);
-    }
-    return { row: row, tip: label + (T.help ? '\n\n' + T.help : '') };
-}
-function _dsTemplateSwatchHTML(key, cw, chh) {
-    const T = SPEC_TEMPLATES[key] || {};
-    const M = '4.5%';
-    let html = '<div style="position:absolute; inset:0; background:#fff; font-family:Arial,Helvetica,sans-serif;">';
-    html += '<div style="position:absolute; left:' + M + '; top:6%; font-size:' + Math.max(6, Math.round(chh * 0.075)) + 'px; font-weight:800; letter-spacing:0.2px; color:#222;">ART.00 | LOCATION</div>';
-    html += '<div style="position:absolute; right:' + M + '; bottom:4.5%; font-size:' + Math.max(5, Math.round(chh * 0.045)) + 'px; color:#aaa; text-transform:uppercase; letter-spacing:0.4px;">Farmboy</div>';
-    html += '<div style="position:absolute; left:' + M + '; bottom:9%; width:18%; height:1px; background:#ddd;"></div>';
-    if (T.group) {
-        // Per-ARRANGEMENT blocking. The four group cards are chosen between each
-        // other, so one generic diagram for all of them — which is what used to
-        // show — says nothing at all about the thing being picked, and reads as
-        // four broken cards. Each branch mirrors what _drawSpecSetPageBody does
-        // with the same flag.
-        //
-        // A card is 936:540, so a uniform scale in FRACTION space would squash a
-        // square frame wide. `AR` converts a width fraction into the height
-        // fraction that covers the same physical size.
-        const AR = 936 / 540;
-        if (T.row) {
-            // Side by side: equal columns, artwork bottom-aligned in the top band,
-            // a short spec list under each.
-            for (let i = 0; i < 3; i++) {
-                const cx = 0.05 + i * 0.315;
-                html += _dsSwatchBox(cx + 0.035, 0.20, 0.19, 0.19 * AR, cw, chh);
-                html += _dsSwatchLoremLines(cx, 0.62, 0.27, cw, chh, 4);
-            }
-        } else if (T.scale) {
-            // As hung: the real salon geometry on the right at relative size, specs
-            // down the left. Driven by SPEC_TPL_DEMO_SALON, so the diagram cannot
-            // disagree with the arrangement the render actually draws.
-            const RX = 0.42, RY = 0.17, RW = 0.54, RH = 0.50;
-            let mnX = Infinity, mxX = -Infinity, mnY = Infinity, mxY = -Infinity;
-            SPEC_TPL_DEMO_SALON.forEach(s => {
-                mnX = Math.min(mnX, s.x); mxX = Math.max(mxX, s.x + s.extW);
-                mnY = Math.min(mnY, s.y); mxY = Math.max(mxY, s.y + s.extH);
-            });
-            const bw = Math.max(1, mxX - mnX), bh = Math.max(1, mxY - mnY);
-            const k = Math.min(RW / bw, (RH / AR) / bh);      // width fractions per inch
-            const oX = RX + (RW - bw * k) / 2, oY = RY + (RH - bh * k * AR) / 2;
-            // y is bottom-up on a wall, so flip it into top-down card space.
-            SPEC_TPL_DEMO_SALON.forEach(s => {
-                html += _dsSwatchBox(oX + (s.x - mnX) * k, oY + (mxY - (s.y + s.extH)) * k * AR,
-                    s.extW * k, s.extH * k * AR, cw, chh);
-            });
-            // Shared specs consolidates the left column into fewer lines and prints
-            // the frame corner + profile strip in the bottom band; To scale lists
-            // every piece and doesn't.
-            html += _dsSwatchLoremLines(0.045, 0.19, 0.31, cw, chh, T.sharedSpec ? 8 : 11);
-            if (T.sharedSpec) {
-                for (let i = 0; i < 3; i++) html += _dsSwatchBox(0.44 + i * 0.10, 0.74, 0.075, 0.075 * AR, cw, chh);
-            }
-            html += _dsSwatchBox(0.855, 0.74, 0.105, 0.075 * AR, cw, chh);
-            html += _dsSwatchCaption(0.855, 0.74 + 0.075 * AR + 0.012, 0.105, cw, chh, 'Elevation');
-        } else {
-            // Stacked: one row per piece — letter and a short spec block on the
-            // left, the framed piece on the right.
-            for (let i = 0; i < 3; i++) {
-                const ry = 0.19 + i * 0.25;
-                html += _dsSwatchLoremLines(0.09, ry, 0.30, cw, chh, 3);
-                html += _dsSwatchBox(0.58, ry - 0.015, 0.16, 0.16 * AR, cw, chh);
-            }
-        }
-    } else if (T.custom || T.freeform || key === 'installGuide' || !(T.title || T.spec || T.artwork)) {
-        html += _dsSwatchLoremLines(0.045, 0.20, 0.32, cw, chh, 6);
-        html += _dsSwatchBox(0.045, 0.52, 0.13, 0.30, cw, chh);
-        html += _dsSwatchBox(0.19, 0.52, 0.13, 0.30, cw, chh);
-        html += _dsSwatchCaption(0.045, 0.83, 0.27, cw, chh, T.label || 'Layout');
-        html += _dsSwatchPerson(0.40, cw, chh, 0.46);
-        html += _dsSwatchBox(0.46, 0.16, 0.50, 0.66, cw, chh);
-    } else {
-        if (T.spec) html += _dsSwatchLoremLines(T.spec.x, T.spec.y, T.spec.w, cw, chh, 6);
-        if (T.frameDetail) {
-            const planY = (T.plan ? T.plan.y : 0.62) - 0.16;
-            const cornerX = T.plan ? T.plan.x : 0.045;
-            html += _dsSwatchBox(cornerX, planY, 0.13, 0.10, cw, chh);
-            html += _dsSwatchBox(cornerX + 0.145, planY, 0.13, 0.10, cw, chh);
-            html += _dsSwatchCaption(cornerX, planY + 0.10 + 0.012, 0.27, cw, chh, 'Frame');
-        }
-        if (T.plan) html += _dsSwatchImageSlot(T.plan.x, T.plan.y, T.plan.w, T.plan.h, cw, chh, 'Floorplan');
-        if (T.elevation) html += _dsSwatchImageSlot(T.elevation.x, T.elevation.y, T.elevation.w, T.elevation.h, cw, chh, 'Elevation 1');
-        if (T.artwork) html += _dsSwatchImageSlot(T.artwork.x, T.artwork.y, T.artwork.w, T.artwork.h, cw, chh, 'ART.00');
-    }
-    html += '</div>';
-    return html;
 }
 // A small x badge, for clearing whatever it sits on. The same mark is used on the
 // colour dot, the gradient icon, the image icon and the selected gradient stop, so
@@ -31786,26 +31505,6 @@ function _fixedPageFor(key) {
         page.type = 'narrative';
     } else { return null; }
     return { page: page, label: label, key: key };
-}
-// Legacy entry point. The pencil buttons beside Cover / Art Narrative / Good
-// Art Good People in the Project tab's "Include pages" list called this and are
-// gone (16.37) — those pages are edited in Deck Studio now, and the modal this
-// opens no longer feeds the page you see. Kept only for a saved onclick.
-function openFixedPageEditor(key) {
-    const r = _fixedPageFor(key); if (!r) return;
-    const page = r.page, label = r.label;
-    _mbEditTarget = { key: key, label: label, page: page };
-    _mbActiveCanvasId = 'moodboardCanvas';
-    const m = document.getElementById('moodboardModal'); if (!m) return;
-    const sp = document.getElementById('specPdfModal'); if (sp) sp.style.display = 'none';
-    _mbSelected = -1;
-    _normalizeMoodboard();
-    _mbApplyModeUI();
-    m.style.display = 'flex';
-    window.addEventListener('resize', _mbOnResize);
-    document.addEventListener('keydown', _mbKeyDelete);
-    _mbBackfillAspects(renderMoodboardCanvas);
-    renderMoodboardCanvas();
 }
 function _mbApplyModeUI() {
     const fixed = !!_mbEditTarget;
@@ -40178,15 +39877,14 @@ function autoElevRelabel() {
 // ──────────────────────────────────────────────────────────────────────────
 // ITEM CODE EDITING (from the elevation panel)
 // ──────────────────────────────────────────────────────────────────────────
-// Two entry points:
+// Entry point:
 //   - renameFrameId: single-frame rename triggered by the inline input under
 //     each panel row. User types a new code → it's applied to the underlying
 //     dashboard row (which propagates everywhere by id reference).
-//   - renumberElevation: bulk re-number all frames in the active elevation
-//     using a template like "ART.{LOC}-{LET}". Optionally reorders the
-//     dashboard rows to match the elevation's letter order.
+//   (Bulk renumbering lives in the floorplan Items list now, through
+//   _codesSettle / _codesRenameRow, and keeps every surface in number order.)
 //
-// Both functions share the same invariant: ITEM CODE is a property of the
+// It shares the same invariant: ITEM CODE is a property of the
 // dashboard row. Frames in elevations reference the row by id. So renaming
 // the row's id requires updating every frame in every elevation that
 // referenced the OLD id. The dashboard row itself is the single source of
@@ -40242,162 +39940,6 @@ function applyIdRename(oldId, newId, quiet) {
     drawElevAll();
     if (currentView === 'dashboard') renderDashTable();
     populateDashPushSelector();
-}
-
-// Bulk re-number all frames in the current elevation following a template.
-// Default template: "ART.{LOC}-{LET}" where {LOC} is a 3-digit location
-// number (padded) and {LET} is the frame's elevation letter (A, B, C...).
-//
-// Two passes to avoid temporary collisions during the rename:
-//   1. Rename everything to a temporary unique prefix ("__TMP_<idx>__")
-//   2. Rename from temp → final code
-// This way if the final code "ART.001-A" happens to match another existing
-// id mid-rename, we won't trip the collision check.
-//
-// If reorderDashboard is true, also reorders dashProjectData so the
-// re-numbered rows appear contiguously at the top in elevation letter order.
-function renumberElevation(template, locValue, reorderDashboard) {
-    if (!elevFrames || elevFrames.length === 0) return;
-    template = template || 'ART.{LOC}-{LET}';
-    const locStr = String(locValue || '001').padStart(3, '0');
-
-    // Compute the target id for each frame based on its current letter.
-    // We sort by letter so the iteration order is deterministic (A, B, C...).
-    // The output map preserves original order for the reorder step.
-    const sortedFrames = [...elevFrames].sort((a, b) => {
-        const la = a.letter || '', lb = b.letter || '';
-        if (la.length !== lb.length) return la.length - lb.length;
-        return la < lb ? -1 : la > lb ? 1 : 0;
-    });
-
-    // Build the rename plan: [{oldId, newId}, ...]
-    const plan = sortedFrames.map(f => ({
-        oldId: f.id,
-        newId: template.replace('{LOC}', locStr).replace('{LET}', f.letter || ''),
-        letter: f.letter,
-    }));
-
-    // Validate: any duplicate newIds in the plan itself?
-    const seen = new Set();
-    for (const p of plan) {
-        if (seen.has(p.newId)) {
-            showInfoModal(
-                'Template Produces Duplicate Codes',
-                `The template "${template}" with location "${locStr}" would produce duplicate codes (e.g. "${p.newId}"). Try a template that includes {LET} so each frame gets a unique suffix.`
-            );
-            return;
-        }
-        seen.add(p.newId);
-    }
-
-    // Validate: any newIds that collide with EXISTING dashboard rows not in
-    // this elevation? (Frames already in this elevation are OK — they're
-    // the ones being renamed.)
-    const frameIdsInThisElev = new Set(elevFrames.map(f => f.id));
-    for (const p of plan) {
-        // Skip if this code is one we're currently renaming away from
-        if (frameIdsInThisElev.has(p.newId)) continue;
-        // Skip if newId is the row's own oldId (no real change)
-        if (p.newId === p.oldId) continue;
-        // Otherwise check the dashboard
-        if (dashProjectData.some(r => r.id === p.newId)) {
-            showInfoModal(
-                'Code Conflict',
-                `"${p.newId}" is already used by a dashboard row outside this elevation. Pick a different location number or delete the conflicting row first.`
-            );
-            return;
-        }
-    }
-
-    // Two-pass rename. Pass 1: every frame → unique temp id.
-    // Capturing stamp ONCE outside the loop is critical — each Date.now()
-    // call returns a different value, which would mean pass 1 writes to one
-    // temp id and pass 2 looks for a different one. Single stamp ensures
-    // pass 1's outputs are exactly what pass 2 reads.
-    const stamp = Date.now();
-    plan.forEach((p, i) => {
-        applyIdRename(p.oldId, `__RNTMP_${i}_${stamp}__`);
-    });
-    // Pass 2: temp id → final newId.
-    plan.forEach((p, i) => {
-        applyIdRename(`__RNTMP_${i}_${stamp}__`, p.newId);
-    });
-
-    // Optional: reorder dashboard rows so the re-numbered ones are contiguous
-    // at the top of the table in elevation letter order. Preserves the
-    // selection by identity.
-    if (reorderDashboard) {
-        const reorderedIds = plan.map(p => p.newId);
-        const selectedRow = dashProjectData[dashSelectedRowIndex];
-        // Partition: rows in our plan (in plan order), then everything else
-        // in its current relative order.
-        const inPlan = [];
-        const rest = [];
-        dashProjectData.forEach(row => {
-            const idx = reorderedIds.indexOf(row.id);
-            if (idx >= 0) inPlan[idx] = row;
-            else rest.push(row);
-        });
-        // Filter out any undefined gaps (defensive — every reorderedId
-        // should resolve to a row, but just in case)
-        const ordered = inPlan.filter(Boolean);
-        dashProjectData.length = 0;
-        ordered.forEach(r => dashProjectData.push(r));
-        rest.forEach(r => dashProjectData.push(r));
-        // Restore selection by identity
-        const newIdx = dashProjectData.indexOf(selectedRow);
-        if (newIdx >= 0) dashSelectedRowIndex = newIdx;
-        if (currentView === 'dashboard') renderDashTable();
-    }
-
-    pushHistory();
-}
-
-// Modal: open with sensible defaults. Location defaults to the current
-// elevation's index + 1 (so wall 1 = "001", wall 2 = "002") padded to 3 digits.
-function openRenumberModal() {
-    if (currentView !== 'elevation' || !elevFrames || elevFrames.length === 0) {
-        _toast('Nothing to re-number', 'Add some frames to this elevation first, then come back to this button.');
-        return;
-    }
-    const defaultLoc = String((currentElevIndex || 0) + 1).padStart(3, '0');
-    document.getElementById('renumberLoc').value = defaultLoc;
-    // Don't reset template — let it persist across opens so a project's
-    // chosen convention sticks
-    if (!document.getElementById('renumberTemplate').value) {
-        document.getElementById('renumberTemplate').value = 'ART.{LOC}-{LET}';
-    }
-    document.getElementById('renumberReorderDash').checked = true;
-    updateRenumberPreview();
-    document.getElementById('renumberModal').style.display = 'flex';
-}
-
-// Refresh the preview area based on current template + location inputs.
-// Shows each frame's letter → resulting ITEM CODE, one line per frame.
-function updateRenumberPreview() {
-    const tmpl = document.getElementById('renumberTemplate').value || 'ART.{LOC}-{LET}';
-    const locRaw = document.getElementById('renumberLoc').value || '';
-    // Pad if pure-numeric, otherwise leave as-is (lets user put alpha codes like "LBY")
-    const loc = /^\d+$/.test(locRaw) ? locRaw.padStart(3, '0') : locRaw;
-    const sortedFrames = [...elevFrames].sort((a, b) => {
-        const la = a.letter || '', lb = b.letter || '';
-        if (la.length !== lb.length) return la.length - lb.length;
-        return la < lb ? -1 : la > lb ? 1 : 0;
-    });
-    const lines = sortedFrames.map(f => {
-        const newId = tmpl.replace('{LOC}', loc).replace('{LET}', f.letter || '');
-        return `${f.letter || '?'}: <strong>${f.id}</strong> → <strong style="color:var(--accent);">${newId}</strong>`;
-    });
-    document.getElementById('renumberPreview').innerHTML = lines.join('<br>');
-}
-
-// Read modal inputs and run renumberElevation. Closes the modal on success.
-function applyRenumber() {
-    const tmpl = document.getElementById('renumberTemplate').value || 'ART.{LOC}-{LET}';
-    const loc = document.getElementById('renumberLoc').value || '001';
-    const reorder = document.getElementById('renumberReorderDash').checked;
-    document.getElementById('renumberModal').style.display = 'none';
-    renumberElevation(tmpl, loc, reorder);
 }
 
 function initElevControls() {
@@ -41604,7 +41146,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.30</strong> <strong>Guided tour</strong>: a walk through the real screens in the order a deck is built (list the codes, spec, hang, pin, build, generate). It dims everything but the control it is talking about, moves between the views for you, and has an All steps list to jump around. It only looks, so it never changes your project. Start it from Help > Start here, the start screen, or the next-step bar; Help can also tour just the screen you are on.<br><br>
+                body: `<strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
+<strong>18.30</strong> <strong>Guided tour</strong>: a walk through the real screens in the order a deck is built (list the codes, spec, hang, pin, build, generate). It dims everything but the control it is talking about, moves between the views for you, and has an All steps list to jump around. It only looks, so it never changes your project. Start it from Help > Start here, the start screen, or the next-step bar; Help can also tour just the screen you are on.<br><br>
 <strong>18.29</strong> A CSV import follows the same rules: the export now writes a Category column at the end, the import puts each row back in its category (or works it out from the code and product), and a row whose code is not a real item code (like Lobby piece) is given the next code of its type, with a list of what changed. Lobby-A and Lobby-B stay together as one set. Making a frame a new item from Elevations keeps its type too.<br><br><strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
 <strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>
 <strong>18.25</strong> In Deck Studio the whole floorplan thumbnail on a spec, group, breaker or plan detail page is now a button: hover it and it outlines with <strong>Open floorplan</strong>, click it to go to that floorplan page. It works on built pages too, where it used to do nothing. The PDF links the same area.<br><br>

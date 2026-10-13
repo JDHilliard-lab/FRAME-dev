@@ -1,3 +1,8 @@
+// 18.31: the card cache, its painter and the instant diagrams were REMOVED along with
+// the card grids, so the checks on faults 1 and 2 below went with them (see
+// test_dead_code_removed). What survives is the reported symptom's other half: toggling
+// Per piece <-> Group A/B/C must leave both panels usable, with ticks and no cards.
+//
 // Reported: "when I first open the frametool I see the Group A/B/C thumbnails using
 // the grey placeholders we just fixed, but they disappear if I toggle between Per
 // piece and Group A/B/C... they do not totally disappear but they lose their
@@ -35,7 +40,6 @@ const path = require('path');
     window.__testResults = [];
     const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     const S = window.__appSrc;
-    const FAKE = 'data:image/jpeg;base64,AAAA';
 
     const __seed = (tpl) => {
       dashUnit = 'in'; elevUnit = 'in';
@@ -61,35 +65,6 @@ const path = require('path');
     const __modeBtn = (label) => Array.from(document.querySelectorAll('#dsToolsPageBody button'))
       .find(b => (b.textContent || '').trim() === label);
 
-    // ── The unit-level fault ────────────────────────────────────────────────
-    __check('EXACT BUG: a cached swatch paints into a card that is not in the DOM yet', () => {
-      // Exactly the order the card builder uses: build the div, queue it, attach later.
-      const ck = _dsTplSwatchKey('setRow');
-      _dsTplSwatchCache[ck] = FAKE;
-      const thumb = document.createElement('div');
-      if (thumb.isConnected) throw new Error('the test element is already attached, so this proves nothing');
-      _dsQueueTplSwatch('setRow', thumb);
-      const img = thumb.querySelector('img');
-      if (!img) throw new Error('THE BUG: the cached demo was dropped because the card was still detached');
-      if (img.getAttribute('src') !== FAKE) throw new Error('painted the wrong image');
-      // Attaching afterwards must not lose it.
-      document.body.appendChild(thumb);
-      if (!thumb.querySelector('img')) throw new Error('the paint did not survive being attached');
-      thumb.remove();
-      delete _dsTplSwatchCache[ck];
-    });
-
-    __check('and the guard that caused it is gone for good', () => {
-      const i = S.indexOf('function _dsPaintTplSwatch');
-      const body = S.slice(i, S.indexOf('\\n}', i));
-      if (/isConnected/.test(body)) throw new Error('_dsPaintTplSwatch gates on isConnected again');
-      if (body.indexOf('if (!el) return;') < 0) throw new Error('the null check went missing with it');
-    });
-
-    // ── The reported sequence ───────────────────────────────────────────────
-    // Both picker grids are gone: the per-piece one and the group one, each replaced
-    // by SHOW ON PAGE ticks. The toggle is still driven, because a panel that came
-    // back EMPTY would look exactly like the repaint bug this file was written for.
     __check('EXACT BUG: toggling Per piece <-> Group A/B/C leaves both panels usable', () => {
       __seed('setLegend');
       const txtNow = () => (document.getElementById('dsToolsPageBody') || {}).textContent || '';
@@ -166,61 +141,6 @@ const path = require('path');
       }
     });
 
-    // ── The four group diagrams must differ from each other ─────────────────
-    __check('EXACT BUG: the four group arrangements no longer draw the same diagram', () => {
-      const keys = ['setRight', 'setRow', 'setScale', 'setLegend'];
-      // Compare the GEOMETRY only: the caption already carried the label, which is
-      // exactly how four identical diagrams passed for four different ones.
-      const shapes = keys.map(k => {
-        const h = _dsTemplateSwatchHTML(k, 150, 87);
-        return (h.match(/left:[\\d.]+%; top:[\\d.]+%; width:[\\d.]+%; height:[\\d.]+%/g) || []).sort().join('|');
-      });
-      keys.forEach((k, i) => { if (!shapes[i]) throw new Error(k + ' draws no boxes at all'); });
-      for (let i = 0; i < keys.length; i++) {
-        for (let j = i + 1; j < keys.length; j++) {
-          if (shapes[i] === shapes[j]) throw new Error('THE BUG: ' + keys[i] + ' and ' + keys[j] + ' block out identically');
-        }
-      }
-    });
-
-    __check('each group diagram shows more than one frame, and the as-hung ones are staggered', () => {
-      // Frame placeholders only. The thin lorem-line divs carry the same four
-      // properties, so they have to be filtered out by height or every count is
-      // meaningless — a lorem line is ~2% tall and a frame box is 13%+.
-      const frames = (k) => (_dsTemplateSwatchHTML(k, 150, 87)
-        .match(/left:[\\d.]+%; top:[\\d.]+%; width:[\\d.]+%; height:[\\d.]+%/g) || [])
-        .map(s => s.match(/left:([\\d.]+)%; top:([\\d.]+)%; width:([\\d.]+)%; height:([\\d.]+)%/))
-        .filter(Boolean)
-        .map(m => ({ x: +m[1], y: +m[2], w: +m[3], h: +m[4] }))
-        .filter(r => r.h > 8);
-      ['setRight', 'setRow', 'setScale', 'setLegend'].forEach(k => {
-        const f = frames(k);
-        if (f.length < 3) throw new Error(k + ' shows only ' + f.length + ' frame boxes — it has to read as multi-frame');
-      });
-      // The whole point of the as-hung cards: pieces at different heights, which a
-      // row of equal columns cannot produce.
-      ['setScale', 'setLegend'].forEach(k => {
-        const ys = new Set(frames(k).map(p => Math.round(p.y)));
-        if (ys.size < 3) throw new Error(k + ' draws its frames on ' + ys.size + ' height(s) — it will read as Side by side');
-      });
-      if (frames('setScale').length < SPEC_TPL_DEMO_SALON.length) throw new Error('the as-hung diagram drops salon pieces');
-      // Side by side is equal columns: one shared top edge, one shared width.
-      const row = frames('setRow');
-      if (new Set(row.map(p => Math.round(p.y))).size !== 1) throw new Error('Side by side should align its columns on one edge');
-      if (new Set(row.map(p => Math.round(p.w))).size !== 1) throw new Error('Side by side columns should be equal width');
-      // Stacked is rows: one shared left edge, distinct tops.
-      const stack = frames('setRight');
-      if (new Set(stack.map(p => Math.round(p.x))).size !== 1) throw new Error('Stacked should put every piece in one column');
-      if (new Set(stack.map(p => Math.round(p.y))).size !== stack.length) throw new Error('Stacked should put each piece on its own row');
-    });
-
-    __check('the as-hung diagram is driven by the same salon table the render uses', () => {
-      const i = S.indexOf('function _dsTemplateSwatchHTML');
-      const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));
-      if (body.indexOf('SPEC_TPL_DEMO_SALON') < 0) throw new Error('the diagram hardcodes its own arrangement, so it can drift from the render');
-      // A card is 16:9, so a uniform fraction scale would squash a square frame.
-      if (body.indexOf('936 / 540') < 0) throw new Error('the diagram does not correct for the card aspect, so square frames come out wide');
-    });
   `;
 
   try {

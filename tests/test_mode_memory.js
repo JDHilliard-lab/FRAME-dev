@@ -31,7 +31,6 @@ const fs = require('fs');
     _dsRefresh = () => {};
     _dsClearBuiltAll = () => {};
     _dsBuildAllThumbs = () => {};
-    _dsQueueTplSwatch = () => {};
     _dsPriorityRerender = () => {};
     _dsRenderCenter = () => {};
     scheduleAutosave = () => {};

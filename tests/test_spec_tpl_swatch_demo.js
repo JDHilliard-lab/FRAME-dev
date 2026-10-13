@@ -317,61 +317,6 @@ const path = require('path');
       if (!t.some(s => /\\b[A-E]\\/[A-E]/.test(s))) throw new Error('no spec row carries sharing letters, so the card cannot show what it is for');
     });
 
-    // ── The cards themselves ────────────────────────────────────────────────
-    __check('one swatch render per template, not one per template per page', () => {
-      dashUnit = 'in'; editorialContent.specDualUnit = '';
-      const a = _dsTplSwatchKey('frameRight');
-      if (a !== _dsTplSwatchKey('frameRight')) throw new Error('the same template keyed two ways');
-      if (a === _dsTplSwatchKey('artSpecDetail')) throw new Error('two templates share one cache entry');
-      if (_dsQueueTplSwatch.length !== 2) throw new Error('_dsQueueTplSwatch still takes a per-page desc (arity ' + _dsQueueTplSwatch.length + ')');
-      // The unit IS part of the key: the demo's numbers print in it.
-      dashUnit = 'cm';
-      if (_dsTplSwatchKey('frameRight') === a) throw new Error('a unit change reuses the old render, so the card prints inches on a cm deck');
-      dashUnit = 'in';
-    });
-
-    // The 936:540 card box check is GONE, and deliberately: nothing builds a
-    // template card grid any more. Both pickers were replaced by SHOW ON PAGE
-    // ticks, so there is no box left to measure and a check that walked zero
-    // boxes would pass for the wrong reason. The DEMO RENDERER below is still
-    // exercised in full - it is correct and a picker may want it again - but it
-    // has no UI consumer, so if the cards do not come back it and its helpers
-    // should be removed together rather than left as machinery with tests.
-    __check('the demo renderer has no UI consumer left, and that is recorded', () => {
-      const s = window.__appSrc;
-      if (s.indexOf('_dsQueueTplSwatch(key, thumb)') >= 0) throw new Error('a card grid is back: give it its aspect-ratio check again');
-      if (s.indexOf('THE PREWARM IS OFF') < 0) throw new Error('the prewarm is running for cards nobody paints');
-    });
-
-    __check('the card image is contained, not stretched to the cell', () => {
-      const host = document.createElement('div');
-      document.body.appendChild(host);       // it no-ops on a detached element
-      _dsPaintTplSwatch(host, 'data:image/jpeg;base64,AA');
-      const img = host.querySelector('img');
-      if (!img) throw new Error('nothing was painted into the card');
-      const style = img.getAttribute('style') || '';
-      host.remove();
-      if (!/object-fit:\\s*contain/.test(style)) throw new Error('the swatch image is still stretched to fill: ' + style);
-    });
-
-    __check('every template explains what it includes, and the card offers it two ways', () => {
-      Object.keys(SPEC_TEMPLATES).forEach(k => {
-        const h = SPEC_TEMPLATES[k].help;
-        if (!h || h.length < 40) throw new Error(k + ' has no usable help text');
-      });
-      const info = _dsTplCardName('frameSpecDetail', ' \\u2713 default', '#6a6aff');
-      if (!/corner/i.test(info.tip)) throw new Error('the hover tooltip does not describe the layout');
-      if (info.tip.indexOf(SPEC_TEMPLATES.frameSpecDetail.label) !== 0) throw new Error('the tooltip does not lead with the label');
-      const q = Array.from(info.row.querySelectorAll('button')).find(b => b.textContent === '?');
-      if (!q) throw new Error('no ? button on the card');
-      // Reading the blurb must not arm or apply the template behind the modal.
-      let stopped = false;
-      q.onclick({ stopPropagation: () => { stopped = true; }, preventDefault: () => {} });
-      if (!stopped) throw new Error('the ? click bubbles to the card and picks the template');
-      if (document.getElementById('infoModalTitle').innerText !== SPEC_TEMPLATES.frameSpecDetail.label) throw new Error('the ? opened the wrong thing');
-      if ((document.getElementById('infoModalBody').innerText || '').indexOf('profile') < 0) throw new Error('the ? body is not the help text');
-      document.getElementById('infoModal').style.display = 'none';
-    });
     })();
   `;
 

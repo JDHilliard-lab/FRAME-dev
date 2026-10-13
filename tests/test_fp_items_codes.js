@@ -32,7 +32,7 @@ window.eval(APP + NL + [
   '  get ed() { return editorialContent; }, set ed(v) { editorialContent = v; },',
   '  defaults: _editorialDefaults, fromFile: _editorialFromFile, cats: _artCats, preset: _artCatsApplyPreset,',
   '  add: _fpAddCodes, next: _nextPlacementCode, rename: _fpRenameGroup, groups: _fpGroups,',
-  '  panel: _fpPanelItems, setPin: _fpSetPin, gen: generateNextItemCode,',
+  '  panel: _fpPanelItems, setPin: _fpSetPin, gen: function () { return _nextPlacementCode("ART"); },',
   '  get armLine() { return _fpLineArmId; }, set armLine(v) { _fpLineArmId = v; },',
   '  get lineStart() { return _fpLineStart; }, set lineStart(v) { _fpLineStart = v; },',
   '  click: _dsFpLineClickPoint, setWall: _fpSetWall, wallOn: _fpWallOn, quiet: function () { _dsRenderCenter = function () {}; _dsRenderRail = function () {}; _dsRenderTools = function () {}; _dsRefresh = function () {}; },',
