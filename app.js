@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.33';
+const APP_VERSION = '18.34';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -2126,10 +2126,9 @@ function _mbMigratePages() {
     if (!ec.sloganPage || !Array.isArray(ec.sloganPage.elements)) ec.sloganPage = { elements: [] };
     if (!ec.understandingPage || !Array.isArray(ec.understandingPage.elements)) ec.understandingPage = { elements: [] };
     if (!ec.strategyPage || !Array.isArray(ec.strategyPage.elements)) ec.strategyPage = { elements: [] };
-    // 'classic' is no longer in the picker but is still a valid legacy value —
-    // an old project that already chose it should keep rendering that way, not
-    // get silently migrated. Anything genuinely missing/invalid falls back to
-    // the current default template.
+    // Missing or unreadable falls back to the one per-piece layout. 'classic' is let
+    // through HERE only so the tick seeding below can read what it drew; the old
+    // per-piece names are renamed right after that (see _specTplRetireLegacy).
     if (typeof ec.specTemplate !== 'string' || !(SPEC_TEMPLATES[ec.specTemplate] || ec.specTemplate === 'classic')) ec.specTemplate = 'frameSpecDetail';
     if (!ec.specTemplateOverrides || typeof ec.specTemplateOverrides !== 'object') ec.specTemplateOverrides = {};
     // SEEDED FROM THE TEMPLATE THE DECK IS ALREADY ON, once, and keyed on the field
@@ -2154,6 +2153,7 @@ function _mbMigratePages() {
         ec.specSlotOverrides = m;
     }
     SPEC_SLOT_KEYS.forEach(k => { if (typeof ec.specSlots[k] !== 'boolean') ec.specSlots[k] = SPEC_SLOT_DEFAULT[k]; });
+    _specTplRetireLegacy(ec);
     // The group map is seeded from what a group page ALREADY draws: the wall
     // thumbnail is `scaleOpts.elevThumb` (off by default), the frame corner and
     // moulding profile print under the shared specs when there is room, and there has
@@ -4943,7 +4943,7 @@ function _versionRestore(snap) {
 function _versionMeta() {
     const pieces = (dashProjectData || []).filter(r => r && (r.id || r.imageCode)).map(r => ({ id: (r.id || '') + '', code: (r.imageCode || r.artworkFile || '') + '', status: _pieceStatus(r), w: r.extW, h: r.extH }));
     let pages = 0; try { pages = (_deckPageList() || []).length; } catch (e) {}
-    return { projName: (document.getElementById('g_projName') || {}).value || 'Untitled', pieces: pieces, pages: pages, statusCounts: _statusCounts(), specTemplate: editorialContent.specTemplate || 'classic' };
+    return { projName: (document.getElementById('g_projName') || {}).value || 'Untitled', pieces: pieces, pages: pages, statusCounts: _statusCounts(), specTemplate: editorialContent.specTemplate || 'frameSpecDetail' };
 }
 async function _vSaveCurrent(label) {
     const id = 'v_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
@@ -17273,7 +17273,7 @@ const DECK_INCLUDE_PAGES = [
     //
     // It also means the tab EXISTS on a deck with nothing on the dashboard yet, which is
     // exactly when type gets set up.
-    { key: 'spec', def: true, label: 'Spec', demo: () => _specTplDemoDesc(editorialContent.specTemplate || 'classic') },
+    { key: 'spec', def: true, label: 'Spec', demo: () => _specTplDemoDesc(editorialContent.specTemplate || 'frameSpecDetail') },
     { key: 'slogan', def: true, label: 'Good Art', match: d => d.kind === 'fixed' && d.fixed === 'slogan' },
     { key: 'contacts', def: true, label: 'Thank You', match: d => d.kind === 'card' && d.type === 'contacts' }
 ];
@@ -17371,7 +17371,7 @@ function _dsIncludeChanged() {
 // default; a group template (Set) always wins because it changes page count.
 // Otherwise a per-page override (single layouts only) takes precedence.
 function _specTplResolve(unitKey) {
-    const g = (editorialContent.specTemplate || 'classic');
+    const g = (editorialContent.specTemplate || 'frameSpecDetail');
     // A FLAT GRAPHIC has exactly one layout and it is not negotiable — and this check
     // comes FIRST, ahead of even the group template.
     //
@@ -17421,6 +17421,25 @@ const SPEC_SLOT_SEEDS = {
     classic: { frame: false, profile: false, plan: false }
 };
 function _specSlotSeedFor(tplKey) { return Object.assign({}, SPEC_SLOT_SEEDS[tplKey] || {}); }
+// THE OLD PER-PIECE LAYOUT NAMES ARE RENAMED ON LOAD (18.34). There is one per-piece
+// layout, frameSpecDetail, and the four SHOW ON PAGE ticks decide what is on it.
+// 'frameRight' already resolved onto that geometry through the ticks, so renaming it
+// changes nothing on the page. 'classic' did NOT: it had no SPEC_TEMPLATES entry and
+// printed through its own legacy drawer, so on a classic page the ticks were on screen
+// and did nothing, and switching Group A/B/C back to Per piece could restore it from
+// specTplMemory. That drawer is gone; a classic page now prints the per-piece layout
+// with the ticks seeded from SPEC_SLOT_SEEDS (elevation only, what classic drew).
+// Runs AFTER the tick seeding, which reads the old name, and covers the deck setting,
+// every per-page override and the per-mode memory.
+function _specTplRetireLegacy(ec) {
+    const OLD = { classic: 1, frameRight: 1 };
+    const NEW = 'frameSpecDetail';
+    if (OLD[ec.specTemplate]) ec.specTemplate = NEW;
+    const tov = ec.specTemplateOverrides || {};
+    Object.keys(tov).forEach(k => { if (OLD[tov[k]]) tov[k] = NEW; });
+    const mem = ec.specTplMemory;
+    if (mem && typeof mem === 'object') Object.keys(mem).forEach(k => { if (OLD[mem[k]]) mem[k] = NEW; });
+}
 // A GROUP PAGE KEEPS ITS OWN TICKS, and that is not tidiness - the two page kinds
 // disagree about the DEFAULTS. A per-piece page has always drawn its elevation; a
 // group page's wall thumbnail was `scaleOpts.elevThumb`, off by default. Sharing one
@@ -17525,7 +17544,7 @@ function _clearSpecSlots(ovKey) {
 // renderer and the panel says so rather than showing ticks that would do nothing.
 function _specTplSlotAware(tplKey) {
     return tplKey === 'artSpecDetail' || tplKey === 'frameSpecDetail'
-        || tplKey === 'frameRight' || tplKey === 'classic';
+        || tplKey === 'frameRight';
 }
 function _specTplEffective(tplKey, ovKey) {
     const raw = SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight;
@@ -17923,7 +17942,7 @@ function _deckPageList() {
     if (inc.frameRec) pages.push({ kind: 'card', type: 'frameRec', title: 'Frame Recommendations' });
     layoutAt('beforeFloorplan');
     const rows = _deckSpecRows();
-    const specTplKey = ec.specTemplate || 'classic';
+    const specTplKey = ec.specTemplate || 'frameSpecDetail';
     const isGroupSpec = !!(SPEC_TEMPLATES[specTplKey] && SPEC_TEMPLATES[specTplKey].group);
     const unitsFor = (rs) => _buildSpecUnits(rs, isGroupSpec || (_elevBreakers() && specTplKey !== 'installGuide'));
     const specUnit = (u) => {
@@ -18167,7 +18186,7 @@ inner += '<div style="position:absolute; left:' + (g.planX * 100) + '%; top:' + 
         try { const s = buildSpecStrings(r); if (s && s.lines) { specPairs = s.lines; lines = s.lines.map(l => l.label + '  ' + (l.value || '')); } } catch (e) {}
         const _artOnly = _specArtOnly(desc._ovKey || (r.id || ''));
         if (_artOnly) { lines = []; specPairs = []; }
-        const tplKey = (desc._previewTpl || desc._specTpl || editorialContent.specTemplate || 'classic');
+        const tplKey = (desc._previewTpl || desc._specTpl || editorialContent.specTemplate || 'frameSpecDetail');
         // The same effective template the PDF draws. This mock IS a picture of the
         // printed sheet, so a tick that reaches one and not the other is a preview
         // lying about the export.
@@ -25993,7 +26012,7 @@ let _dsBuilt = {};
 // Returns false when the page has nothing a doc can draw (a freeform spec page, whose
 // content is all annotations) so a preview can keep its live HTML instead.
 //
-// env: { logos, meta, pageNum, PW, PH, M, idToPage, backPage(row), frPage, fpNoPins,
+// env: { logos, meta, pageNum, PW, PH, M, idToPage, frPages, frPage, fpNoPins,
 //        swatch }
 async function _deckLoadTiles(els) {
     const src = els || [];
@@ -26031,10 +26050,8 @@ async function _drawDeckSpecPage(doc, desc, env) {
         await _drawFlatGraphicSpecPage(doc, logos, pn, meta, r, ctx);
     } else if (tpl === 'installGuide') {
         await _drawInstallGuidePage(doc, logos, pn, meta, r, ctx);
-    } else if (tpl !== 'classic' && !T.legacy && !T.custom) {
+    } else if (!T.custom) {
         await _drawSpecPageTemplate(doc, logos, pn, meta, r, tpl, ctx);
-    } else if (tpl === 'classic' || T.legacy) {
-        await _drawClassicSpecPage(doc, logos, pn, meta, r, { PW: env.PW, PH: env.PH, M: env.M, backPage: env.backPage ? env.backPage(r) : 0 });
     } else {
         return false;
     }
@@ -30239,7 +30256,7 @@ function _dsRenderTools() {
 
     const cat = _dsTemplateCategory(desc);
     if (desc.kind === 'spec') {
-        const globalTpl = editorialContent.specTemplate || 'classic';
+        const globalTpl = editorialContent.specTemplate || 'frameSpecDetail';
         const isGroupGlobal = !!(SPEC_TEMPLATES[globalTpl] && SPEC_TEMPLATES[globalTpl].group);
         const overrides = editorialContent.specTemplateOverrides || (editorialContent.specTemplateOverrides = {});
         const ovKey = desc._ovKey || (desc.row && desc.row.id) || '';
@@ -30274,7 +30291,7 @@ function _dsRenderTools() {
         // a first-time default. (Per-page overrides were never touched by
         // mode switching and continue to survive as before.)
         const _tplModeOf = (k) => (k === 'installGuide') ? 'install' : ((SPEC_TEMPLATES[k] && SPEC_TEMPLATES[k].group) ? 'group' : 'perPiece');
-        const _tplKnown = (k) => !!SPEC_TEMPLATES[k] || k === 'classic';   // 'classic' is the legacy per-piece layout, valid but not in the map
+        const _tplKnown = (k) => !!SPEC_TEMPLATES[k];
         const switchMode = (tpl) => {
             // Install guide emits one page per WALL and NO per-piece spec pages at
             // all. With nothing placed on a wall that means clicking it deletes
@@ -30293,7 +30310,7 @@ function _dsRenderTools() {
             const keepKey = keep ? _deckPageKey(keep) : null;
             const keepKind = keep ? keep.kind : null;
             const mem = editorialContent.specTplMemory = editorialContent.specTplMemory || {};
-            const curTpl = editorialContent.specTemplate || 'classic';
+            const curTpl = editorialContent.specTemplate || 'frameSpecDetail';
             if (_tplKnown(curTpl)) mem[_tplModeOf(curTpl)] = curTpl;
             const targetMode = _tplModeOf(tpl);
             const restored = mem[targetMode];
@@ -37059,156 +37076,6 @@ async function _artDetailEnsure(pieceId, a) {
     try { _artDetailCache[ck] = c.toDataURL('image/png'); } catch (e) { return null; }
     return _artDetailCache[ck];
 }
-async function _drawClassicSpecPage(doc, logos, pageNum, meta, r, ctx) {
-    const PW = ctx.PW, PH = ctx.PH;
-    // Same treatment as the other spec renderers: margins come from the active
-    // guide set rather than a flat 40pt, so this page type stays inside the
-    // purple frame too. M keeps its name because it's used throughout below.
-    const SR = _safeFrameRect(PW, PH);
-    const M = SR.L;
-    const _csBand = _titleBand(PW, PH);
-    const COL_X = M, ART_MAX_W = (SR.R - SR.L) * 0.42, ART_MAX_H = (SR.B - SR.T) * 0.5;
-        // — Item code (top-left, large) — uses the deck title style —
-
-        // Shrinks to fit rather than running off the right edge — a long
-        // item ID (or a bumped-up custom title size) had no width limit at all.
-        _drawPageTitle(doc, PW, PH, (r.id || '').toString());
-
-        // — Framed artwork render (reuse the per-frame canvas, artwork baked in) —
-        // (No separate frame swatch chip — the framed mockup below already shows
-        //  the moulding, so a swatch strip would be redundant.)
-        let cursorY = _csBand.body + 8;
-        const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
-        let artworkImg = null;
-        if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
-        const { canvas } = renderFrameToCanvas(dInches, (r.fType === 'image' ? await _loadImg(r.swatchDataUrl) : null), { wireframe: _isWireframe(),
-            dpi: 96, pad: 0, artworkImg,
-            artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY },
-        });
-        // Fit the rendered frame into the art box, preserving aspect.
-        const cw = canvas.width, ch = canvas.height;
-        const fit = Math.min(ART_MAX_W / cw, ART_MAX_H / ch);
-        const aw = cw * fit, ah = ch * fit;
-        const artX = COL_X, artY = cursorY;
-
-        // Image code under the framed mockup (bottom-right), per studio convention.
-        const _icClassic = (r.imageCode || r.artworkFile || '') + '';
-        // (drawn after the frame image below, once artY/ah are placed)
-        // Flatten onto white (JPEG has no alpha → transparent areas would go
-        // black). Keeps the PDF light while avoiding black artifacts.
-        let frameDataUrl;
-        try {
-            const flat = document.createElement('canvas');
-            flat.width = canvas.width; flat.height = canvas.height;
-            const fx = flat.getContext('2d');
-            fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height);
-            fx.drawImage(canvas, 0, 0);
-            frameDataUrl = flat.toDataURL('image/jpeg', 0.85);
-        } catch (e) { frameDataUrl = canvas.toDataURL('image/jpeg', 0.85); }
-        try { doc.addImage(frameDataUrl, 'JPEG', artX, artY, aw, ah); } catch (e) {}
-        if (_icClassic) {
-            const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
-            doc.setFont(_font(cs.font), _pdfFontStyle(cs.font));
-            doc.setFontSize(cs.size);
-            doc.setTextColor(crgb.r, crgb.g, crgb.b);
-            doc.text(_icClassic, artX + aw, artY + ah + 12, { align: 'right' });
-        }
-
-        // — Spec block (dotted-leader rows) beneath the artwork —
-        const specs = buildSpecStrings(r);
-        const blockTop = artY + ah + (_icClassic ? 30 : 22);
-        const rowH = 13;
-        const blockW = Math.max(aw, 300);
-        doc.setFontSize(8.5);
-        let sy = blockTop;
-        if (!_specArtOnly(r.id)) specs.lines.forEach(ln => {
-            // label (bold, left)
-            doc.setFont(_font('spec'), 'bold');
-            doc.setTextColor(20, 20, 20);
-            doc.text(ln.label, COL_X, sy);
-            const labelW = doc.getTextWidth(ln.label);
-            // value (right)
-            doc.setFont(_font('spec'), 'normal');
-            const valStr = (ln.value || '') + '';
-            const valW = doc.getTextWidth(valStr);
-            const valX = COL_X + blockW - valW;
-            doc.text(valStr, valX, sy);
-            // dotted leader between label and value
-            const dotStart = COL_X + labelW + 4;
-            const dotEnd = valX - 4;
-            if (dotEnd > dotStart) {
-                doc.setLineDashPattern([0.5, 1.5], 0);
-                doc.setDrawColor(160, 160, 160);
-                doc.setLineWidth(0.5);
-                doc.line(dotStart, sy - 2, dotEnd, sy - 2);
-                doc.setLineDashPattern([], 0);
-            }
-            sy += rowH;
-        });
-
-        // — Elevation context (lower-right, prominent): the wall this piece
-        //   lives on, beauty view, with THIS piece full-color and the rest faded. —
-        const elevForPiece = _elevShowingPiece(r.id);
-        if (elevForPiece) {
-            const elevRender = await renderElevationToCanvas(elevForPiece, r.id, { wireframe: _elevIsWireframe(elevForPiece), dpi: 28, tight: true });
-            if (elevRender && elevRender.canvas) {
-                // Flatten onto white for JPEG.
-                let elevUrl;
-                try {
-                    const flat = document.createElement('canvas');
-                    flat.width = elevRender.canvas.width; flat.height = elevRender.canvas.height;
-                    const ex = flat.getContext('2d');
-                    ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height);
-                    ex.drawImage(elevRender.canvas, 0, 0);
-                    elevUrl = flat.toDataURL('image/jpeg', 0.82);
-                } catch (e) { elevUrl = elevRender.canvas.toDataURL('image/jpeg', 0.82); }
-                // Prominent box in the right ~half, lower area.
-                const boxW = PW * 0.46;
-                const boxMaxH = PH * 0.42;
-                const ecw = elevRender.canvas.width, ech = elevRender.canvas.height;
-                const efit = Math.min(boxW / ecw, boxMaxH / ech);
-                const ew = ecw * efit, eh = ech * efit;
-                const ex0 = SR.R - ew;
-                const ey0 = SR.B - 14 - eh;   // leave room above footer
-                try { doc.addImage(elevUrl, 'JPEG', ex0, ey0, ew, eh); } catch (e) {}
-                // Crisp vector wall + baseboard + floor (raster hairline drops in Acrobat).
-                try {
-                    const _toIn = (v) => parseFloat(v) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
-                    const totalHin = (elevRender.hIn && elevRender.hIn > 0) ? elevRender.hIn : 1;
-                    const wallHin = _toIn(elevForPiece.wallH) || 96;
-                    const wTopF = (elevRender.wallTopFrac != null) ? elevRender.wallTopFrac : 6 / totalHin;
-                    const wlf = (elevRender.wallLeftFrac != null ? elevRender.wallLeftFrac : 0), wrf = (elevRender.wallRightFrac != null ? elevRender.wallRightFrac : 1);
-                    const wx = ex0 + wlf * ew, wW = (wrf - wlf) * ew, wyTop = ey0 + wTopF * eh, wH = (1 - wTopF) * eh;
-                    doc.setLineDashPattern([], 0); doc.setDrawColor(70, 70, 70); doc.setLineWidth(0.8);
-                    doc.rect(wx, wyTop, wW, wH, 'S');
-                    let bbIn = 4; try { const b = getBaseboardHeight(); if (!isNaN(b)) bbIn = parseFloat(b) * unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in'); } catch (e) {}
-                    if (bbIn > 0 && bbIn < wallHin) { const byy = ey0 + (1 - bbIn / totalHin) * eh; doc.setLineWidth(0.6); doc.line(wx, byy, wx + wW, byy); }
-                } catch (e) {}
-                // Caption under the elevation: the wall name.
-                doc.setFont('helvetica', 'normal');
-                doc.setFontSize(7.5);
-                doc.setTextColor(120, 120, 120);
-                doc.text((elevForPiece.name || 'Elevation') + '', ex0, ey0 + eh + 9);
-                _specPlanRectAdd(doc, ex0, ey0, ew, eh, r && r.level, elevForPiece);   // opens its wall (18.27)
-            }
-        }
-
-        // — Back-link to the floorplan key for THIS item's level —
-        const backPage = ctx.backPage || 0;
-        if (backPage) {
-            doc.setFont('helvetica', 'bold');
-            doc.setFontSize(8);
-            doc.setTextColor(90, 90, 90);
-            const blText = '\u2190 Floorplan';
-            doc.text(blText, SR.R, SR.T + 10, { align: 'right' });
-            const blW = doc.getTextWidth(blText);
-            doc.link(SR.R - blW, SR.T + 2, blW + 2, 12, { pageNumber: backPage });
-            doc.setTextColor(20, 20, 20);
-        }
-
-        // — Footer (page number + project line) on every spec page —
-        _drawPdfFooter(doc, logos, pageNum, meta);
-}
 
 // ── Template layout ↔ safety frame alignment ──────────────────────────────
 // The guide set assigned to a page doesn't just DRAW the safety frame — it
@@ -38123,9 +37990,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         return _scopeSet.has(pn);
     };
     const env = {
-        logos: logos, meta: meta, PW: PW, PH: PH, M: M, idToPage: idToPage, frPages: _frPages,
-        // A classic spec page links back to its own level's key, else the first one.
-        backPage: (r) => _fpLevelKeyPage[(r && r.level) || 0] || fpKeyPageNum
+        logos: logos, meta: meta, PW: PW, PH: PH, M: M, idToPage: idToPage, frPages: _frPages
     };
 
     for (const desc of pages) {
@@ -40851,7 +40716,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
+                body: `<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
+<strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
 <strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
 <strong>18.30</strong> <strong>Guided tour</strong>: a walk through the real screens in the order a deck is built (list the codes, spec, hang, pin, build, generate). It dims everything but the control it is talking about, moves between the views for you, and has an All steps list to jump around. It only looks, so it never changes your project. Start it from Help > Start here, the start screen, or the next-step bar; Help can also tour just the screen you are on.<br><br>

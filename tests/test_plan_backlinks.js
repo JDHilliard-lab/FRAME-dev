@@ -247,7 +247,7 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
   });
   await check('...every elevation thumbnail site names the wall it drew', async () => {
     const n = APP.split('// opens its wall (18.27)').length - 1;
-    if (n !== 5) throw new Error(n + ' sites, expected 5 (two group layouts, flat, classic, template)');
+    if (n !== 4) throw new Error(n + ' sites, expected 4 (two group layouts, flat, template; the classic drawer went in 18.34)');
     if (APP.indexOf('links to the floorplan (17.96)') >= 0) throw new Error('an elevation thumbnail still records itself as a plan');
   });
 

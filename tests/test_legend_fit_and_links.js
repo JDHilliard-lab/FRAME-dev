@@ -128,7 +128,7 @@ const root = path.join(__dirname, '..');
       // now names the wall it drew so Deck Studio opens THAT wall (test_plan_backlinks).
       await check('EXACT ASK: every elevation thumbnail on a spec page records a link (to its wall since 18.27)', async () => {
         const n = SRC.split('// opens its wall (18.27)').length - 1;
-        if (n < 5) throw new Error('only ' + n + ' of 5 elevation thumbnail sites link');
+        if (n < 4) throw new Error('only ' + n + ' of 4 elevation thumbnail sites link');   // 18.34: classic drawer removed
       });
 
       await check('EXACT ASK: a code in the floorplan key list opens its spec page in Deck Studio', async () => {

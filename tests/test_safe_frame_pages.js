@@ -220,16 +220,7 @@ const fs = require('fs');
       if (t.y < SR.T) throw new Error('title block baseline is above the top guide');
     });
 
-    __checkAsync('a classic spec page stays inside the guides too', async () => {
-      useDefaultGuides();
-      elevations = []; dashProjectData = [ROW()];
-      _curPageKey = 'spec:ART.001';
-      const rec = new CanvasPdfRec(PW, PH);
-      _curFooter = _resolveFooter('spec:ART.001');
-      await _drawClassicSpecPage(rec, {}, 1, { location: '', code: '', version: '' }, ROW(), CTX);
-      assertInside(rec, 'classic spec page');
-      _curPageKey = null;
-    });
+    // (18.34: the classic drawer is gone; classic pages print the per-piece template.)
 
     // ── Guard against the pattern coming back ──
     __check('the spec-family renderers no longer hardcode their own page margins', () => {
@@ -237,7 +228,7 @@ const fs = require('fs');
       // _drawSpecSetPage is now a thin wrapper that guarantees the footer (see
       // test_group_footer_breaker.js); the layout code it used to hold moved to
       // _drawSpecSetPageBody, so that's the function to slice here.
-      const fns = ['_drawSpecPageTemplate', '_drawSpecSetPageBody', '_drawInstallGuidePage', '_drawClassicSpecPage'];
+      const fns = ['_drawSpecPageTemplate', '_drawSpecSetPageBody', '_drawInstallGuidePage'];
       fns.forEach(fn => {
         const i = S.indexOf('async function ' + fn);
         if (i < 0) throw new Error(fn + ' not found');

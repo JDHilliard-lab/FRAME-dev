@@ -71,7 +71,7 @@ const path = require('path');
     ['_drawFloorplanKeyPage', '_drawFrameRecPage', '_drawTimelinePagePills', '_drawTimelinePageDots',
      '_drawProsePage', '_drawStrategyPage', '_drawTOCPage', '_drawArtIndexPage', '_drawThankYouPage',
      '_drawPlaceholderPage', '_drawFlatGraphicSpecPage', '_drawSpecSetPageBody',
-     '_drawInstallGuidePage', '_drawClassicSpecPage'].forEach(fn => {
+     '_drawInstallGuidePage'].forEach(fn => {
       if (codeOnly(fnBody(fn)).indexOf('_drawPageTitle(') < 0) throw new Error(fn + ' does not call _drawPageTitle');
     });
   });
@@ -87,7 +87,7 @@ const path = require('path');
     // Math.max(ts.size, 22) on the install sheet and Math.max(_ts.size, 20) on the
     // classic one meant turning the deck title DOWN moved every page except those
     // two, which is the same class of bug as nine different title offsets.
-    ['_drawInstallGuidePage', '_drawClassicSpecPage', '_drawFlatGraphicSpecPage'].forEach(fn => {
+    ['_drawInstallGuidePage', '_drawFlatGraphicSpecPage'].forEach(fn => {
       const b = codeOnly(fnBody(fn));
       if (b.indexOf('Math.max(ts.size') >= 0 || b.indexOf('Math.max(_ts.size') >= 0) throw new Error(fn + ' still floors the title size');
     });

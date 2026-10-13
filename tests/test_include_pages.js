@@ -502,9 +502,10 @@ const path = require('path');
       editorialContent.specTemplate = 'setRow';
       let d = _dsPreviewSections().filter(x => x.key === 'spec')[0].desc;
       if (d._specTpl !== 'setRow') throw new Error('demo ignored the deck template, got ' + d._specTpl);
-      editorialContent.specTemplate = 'frameRight';
+      // artSpecDetail, not frameRight: since 18.34 frameRight is renamed on load.
+      editorialContent.specTemplate = 'artSpecDetail';
       d = _dsPreviewSections().filter(x => x.key === 'spec')[0].desc;
-      if (d._specTpl !== 'frameRight') throw new Error('demo did not follow a template change');
+      if (d._specTpl !== 'artSpecDetail') throw new Error('demo did not follow a template change');
     });
 
     __check('unticking Spec Pages still removes the tab, demo or not', () => {
