@@ -81,6 +81,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   opens the "nothing is backing up your work" modal, which blocks `undo()` and shows up in
   dialog checks. Alone a file often finishes first; under the parallel suite it does not,
   which is how a file passes alone and fails in `run-all`.
+- **A probe page reading app state through an iframe:** top-level `let`/`const`
+  (`editorialContent`, `_igCapCache`, `_elevPrimeActive`, ...) are NOT `window` properties;
+  read and write them with `w.eval('...')`. Deck Studio has no pages until the Pages tab
+  opens (`_dsTab('pages')`). Wrap the probe body in try/catch and write the error to the
+  title, or a throw just looks like a hang.
 - **Mixed line endings.** `style.css` and some tests (e.g. `test_egd_wf_product.js`) are
   partly CRLF; a multi-line edit anchor written with `\n` matches nothing there.
 ## Architecture anchors (hard-won; don't rediscover)
@@ -1577,6 +1582,29 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **Vertical spacing and custom dims pass `rotateLabel: 'auto'`**: `_dimRotateFits`
   rotates the number when it fits the gap, else leaves it upright so `_autoLiftDimLabel`
   can lift it.
+
+- **THE HEADER SHOWS A CONTROL ONLY WHERE IT WORKS (18.36).** A header element with
+  `data-views="dashboard elevation"` is hidden elsewhere by `_syncHeaderForView()` (called
+  from `renderNavTabs`) via the `.hdr-off` class, never `style.display`, because those
+  buttons set `display:flex` inline. Save Project is a split button; `openSaveMenu` holds
+  Save / Save As / Versions. Bulk Images lives in the Dashboard row by Import CSV.
+- **ONE SECOND UNIT PER PROJECT (18.37).** `editorialContent.specDualUnit` drives spec
+  pages AND elevations (`_elevDualUnit()` returns `_specDualUnit()`); the old per-computer
+  `elevDualUnit` localStorage switch is gone. `setProjectDualUnit` is the one writer.
+  Units UI is `#unitChip` + `openUnitMenu`, and the Project tab's `#projUnitsHost`; both
+  are built by `_unitControlsInto`. New projects get `'mm'` in `_startNewProject` (NOT
+  `_editorialDefaults`, or every harness would print dual units); `_editorialFromFile`
+  nulls a missing field so an old file keeps none; a file carrying only `elevDualUnit`
+  adopts it on load, and saves still write `elevDualUnit` for older builds.
+- **THE DECK STUDIO DOCK HOLDS THE PAGE TOOLS AND SELECTION ACTIONS (18.38).** Guides,
+  Layers (hidden), Preview, Preflight, then `#dsSelGroup` (`.ds-dock-group`: settings,
+  front, back, delete). Front/back/delete go through `_dsSelToFront` / `_dsSelToBack` /
+  `_dsSelDelete`, which pick a layout-page box (`_dsMbHasSel`) or a page note.
+- **PREVIEWS REBUILD BY THEMSELVES (18.39).** `_dsBuildAllThumbs` primes elevation
+  captures by default, SILENTLY (`onStep: _dsPrimeProgress` feeds `#dsThumbProgress`, which
+  has a Stop link); `opts.prime === false` skips it. `_dsRefresh` calls
+  `_dsScheduleAutoBuild` (1.5 s debounce, deck open only). There is no Build all button;
+  `_dsRebuildEverything` (the small icon by the page filter) forces a full rebuild.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
