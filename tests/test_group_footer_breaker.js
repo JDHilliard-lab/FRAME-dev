@@ -160,20 +160,19 @@ const fs = require('fs');
       if (grpBreakers.length) throw new Error('install-guide mode grew duplicate breaker pages: ' + grpBreakers.length);
     });
 
-    // The export walk builds its own plan (_stepsFor); it must agree with
-    // _deckPageList or the PDF and the studio disagree about page count.
+    // 18.32: the export has no plan of its own; it walks _deckPageList, so breakers in
+    // group mode reach the PDF exactly as the studio lists them (test_export_walks_deck
+    // runs the real export against the list).
     __check('the EXPORT walk also allows breakers in group mode and follows them with the grouped page', () => {
       const s = window.__appSrc;
       const gate = s.match(/const _useBreakers = _elevBreakers\\(\\)[^;]*;/g) || [];
-      if (gate.length !== 2) throw new Error('expected 2 _useBreakers gates (studio + export), found ' + gate.length);
-      gate.forEach(g => { if (/_specIsGroup|isGroupSpec/.test(g)) throw new Error('a _useBreakers gate still excludes group mode: ' + g); });
-      // ONE grouped spec page after the breaker, not a page per member. 16.53 routed
-      // this through _specStepsFor so a flat graphic can be split onto its own sheet
-      // (the export used to draw a wallcovering as a set member), but the grouped
-      // case must still collapse to the single unit — which is what _specStepsFor
-      // returns when nothing in the group is flat.
-      if (!/if \\(_specIsGroup\\) out\\.push\\.apply\\(out, _specStepsFor\\(u, li\\)\\);/.test(s)) throw new Error('the export breaker step does not emit the single grouped spec page');
-      if (!/return \\[\\{ type: 'spec', unit: u, li: li \\}\\];/.test(s)) throw new Error('_specStepsFor no longer falls back to the single grouped unit');
+      if (gate.length !== 1) throw new Error('expected ONE _useBreakers gate (the studio list), found ' + gate.length);
+      gate.forEach(g => { if (/_specIsGroup|isGroupSpec/.test(g)) throw new Error('the _useBreakers gate excludes group mode: ' + g); });
+      const ea = s.indexOf('async function _buildSpecPagePDF');
+      if (s.slice(ea, s.indexOf('async function exportDashNativePNG', ea)).indexOf('const pages = _deckPageList();') < 0) throw new Error('the PDF export no longer walks _deckPageList');
+      // ONE grouped spec page after the breaker in the studio list, not a page per member.
+      const dpl = s.indexOf('function _deckPageList');
+      if (s.slice(dpl, dpl + 12000).indexOf('if (isGroupSpec) { const sp = _splitFlatUnits(u); if (sp) out.push.apply(out, sp); else out.push(specUnit(u)); }') < 0) throw new Error('the breaker path no longer emits the single grouped spec page');
     });
 
     // ── 3. "Make sure ALL pages end up getting a footer" ──

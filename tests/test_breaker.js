@@ -39,7 +39,7 @@ const fs = require('fs');
 
     // ── 2. Source-level guard: the EXPORT breaker step now carries the
     //       elevgrp ovKey exactly like the preview desc does ──
-    __check('export breaker step includes _ovKey elevgrp (source guard)', () => {
+    __check('breaker page includes _ovKey elevgrp, and the export prints that page (source guard)', () => {
       // The literal moved behind _breakerOvKeyFor in 17.65, when the two builders' hand
       // written breaker loops became ONE shared rule and a catalogue placement started
       // keying its breaker on the MOCKUP rather than on whichever option came first.
@@ -47,11 +47,12 @@ const fs = require('fs');
       // breaker-specific off the 'elevgrp:' prefix, so every key must carry it and both
       // builders must go through the one function that builds it.
       const src2 = window.__appSrc;
-      const lines = src2.split('\\n').filter(l => l.indexOf("type: 'install'") >= 0 && l.indexOf('_breakerNameFor(u, br)') >= 0);
-      if (!lines.length) throw new Error('export breaker step line not found');
-      for (const l of lines) {
-        if (l.indexOf('_breakerOvKeyFor(u, br)') < 0) throw new Error('a breaker step line does not build its ovKey through the shared function: ' + l.trim().slice(0, 160));
-      }
+      // 18.32: the export prints the studio's breaker descriptor (it walks _deckPageList),
+      // so there is one breaker line to check, and it carries the key on the elev too.
+      if (src2.indexOf('const bKey = _breakerOvKeyFor(u, br);') < 0) throw new Error('the breaker key is not built through the shared function');
+      const lines = src2.split('\\n').filter(l => l.indexOf("type: 'install'") >= 0 && l.indexOf('_groupKey: u.key') >= 0);
+      if (lines.length !== 1) throw new Error('expected ONE breaker descriptor line, found ' + lines.length);
+      if (lines[0].indexOf('_ovKey: bKey }') < 0) throw new Error('the breaker elev does not carry the elevgrp key: ' + lines[0].trim().slice(0, 160));
       if (typeof _breakerOvKeyFor !== 'function') throw new Error('_breakerOvKeyFor is missing');
       const plain = _breakerOvKeyFor({ key: 'ART.9' }, { mockup: false });
       if (plain !== 'elevgrp:ART.9') throw new Error('an ordinary breaker key changed: ' + plain);

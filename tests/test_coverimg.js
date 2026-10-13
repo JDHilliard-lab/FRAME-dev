@@ -82,19 +82,35 @@ const fs = require('fs');
     });
 
     // ── Export: annKey passed so cover/slogan annotations draw inline ──
-    __check('source guard: cover export branch now passes fixed:cover as annKey (draws annotations inline, in correct z-order)', () => {
-      const S = window.__appSrc;
-      if (S.indexOf("_drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker', 'fixed:cover');") < 0) throw new Error('annKey missing from cover export branch');
+    // 18.32: the export and the preview draw fixed pages through ONE branch of
+    // _drawDeckPage, so these are driven through it rather than read off the source.
+    // _annInlineDrawn[key] is only set when _drawMoodboardPage is handed the page key,
+    // which is what makes the annotations draw inline in z-order.
+    const __fixedDraw = async (fixed, page, anns) => {
+      editorialContent.annotations = {}; editorialContent.annotations['fixed:' + fixed] = anns || [];
+      _annInlineDrawn = {};
+      const rec = new CanvasPdfRec(936, 540);
+      const ok = await _drawDeckPage(rec, { kind: 'fixed', fixed: fixed, page: page }, { logos: {}, meta: { location: '', code: '', version: '' }, pageNum: 1, PW: 936, PH: 540, M: 40 });
+      return { ok: ok, inline: !!_annInlineDrawn['fixed:' + fixed] };
+    };
+    const __txt = { elements: [{ type: 'text', text: 'X', x: 0.1, y: 0.1, w: 0.3, size: 0.03 }] };
+    __checkAsync('source guard: cover export branch now passes fixed:cover as annKey (draws annotations inline, in correct z-order)', async () => {
+      const r = await __fixedDraw('cover', __txt, []);
+      if (!r.ok || !r.inline) throw new Error('the cover is not drawn with its own annotation key');
     });
 
-    __check('source guard: slogan export branch now passes fixed:slogan as annKey', () => {
-      const S = window.__appSrc;
-      if (S.indexOf("_drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker', 'fixed:slogan');") < 0) throw new Error('annKey missing from slogan export branch');
+    __checkAsync('source guard: slogan export branch now passes fixed:slogan as annKey', async () => {
+      const r = await __fixedDraw('slogan', __txt, []);
+      if (!r.ok || !r.inline) throw new Error('the slogan page is not drawn with its own annotation key');
     });
 
-    __check('source guard: preview-render function also passes the fixed page annKey', () => {
+    __checkAsync('source guard: preview-render function also passes the fixed page annKey', async () => {
+      // The preview IS this function now; both renderers call it.
       const S = window.__appSrc;
-      if (S.indexOf("_drawMoodboardPage(rec, logos, 1, meta, tiles, '', ty, _fk);") < 0) throw new Error('annKey missing from preview renderer');
+      const i = S.indexOf('async function renderDeckPageCanvas');
+      if (S.slice(i, S.indexOf('\\n}\\n', i)).indexOf('_drawDeckPage(') < 0) throw new Error('the preview has its own fixed-page drawer again');
+      const r = await __fixedDraw('narrative', __txt, []);
+      if (!r.inline) throw new Error('a narrative page is drawn without its annotation key');
     });
 
     __checkAsync('BEHAVIORAL: a cover page annotation (background image + a line) draws inline in the RIGHT order via the real export path', async () => {
@@ -128,10 +144,15 @@ const fs = require('fs');
       if (!_annInlineDrawn['fixed:cover']) throw new Error('inline-drawn ledger not set \\u2014 post-pass would double-draw or skip incorrectly');
     });
 
-    __check('hardened branch: a cover with ONLY annotations (no text elements left) still takes the union-aware path, not the bespoke drawer', () => {
-      const S = window.__appSrc;
-      if (S.indexOf("if (cov && ((Array.isArray(cov.elements) && cov.elements.length) || (editorialContent.annotations && editorialContent.annotations['fixed:cover'] && editorialContent.annotations['fixed:cover'].length))) {") < 0) throw new Error('hardened cover branch condition missing');
-      if (S.indexOf("if (sg && ((Array.isArray(sg.elements) && sg.elements.length) || (editorialContent.annotations && editorialContent.annotations['fixed:slogan'] && editorialContent.annotations['fixed:slogan'].length))) {") < 0) throw new Error('hardened slogan branch condition missing');
+    __checkAsync('hardened branch: a cover with ONLY annotations (no text elements left) still takes the union-aware path, not the bespoke drawer', async () => {
+      const line = [{ type: 'arrow', x1: 0.1, y1: 0.3, x2: 0.3, y2: 0.3, color: '#000000', weight: 1, tip: 'none' }];
+      for (const f of ['cover', 'slogan']) {
+        const r = await __fixedDraw(f, { elements: [] }, line);
+        if (!r.inline) throw new Error(f + ' with only annotations fell through to the bespoke drawer');
+      }
+      // And with nothing at all, the bespoke drawer is right (no ledger entry).
+      const bare = await __fixedDraw('cover', { elements: [] }, []);
+      if (!bare.ok || bare.inline) throw new Error('an empty cover did not take the bespoke drawer');
     });
 
     __check('DOM: the migrated shape annotation actually renders an <img> tag with the real background photo', () => {

@@ -330,16 +330,18 @@ const fs = require('fs');
 
     __check('the order is ONE shared function, not mirrored into the exporter', () => {
       const A = window.__appSrc;
-      // Both builders must CALL it...
+      // 18.32: ONE call site. The export walks _deckPageList instead of mirroring it,
+      // so a second caller would mean a second page list had grown back.
       const calls = (A.match(/_deckPlanSlots\\(/g) || []).length;
-      if (calls < 3) throw new Error('expected a definition and two call sites, found ' + calls);
+      if (calls !== 2) throw new Error('expected a definition and one call site, found ' + calls);
       const dsAt = A.indexOf('function _deckPageList');
       const ds = A.slice(dsAt, dsAt + 9000);
       if (ds.indexOf('_deckPlanSlots(') < 0) throw new Error('Deck Studio does not use the shared order');
-      // ...and the export's builder, which lives near _stepsFor.
-      const exAt = A.indexOf('const _stepsFor =');
-      const ex = A.slice(exAt, exAt + 6000);
-      if (ex.indexOf('_deckPlanSlots(') < 0) throw new Error('the PDF export does not use the shared order');
+      // ...and the export prints that list rather than building its own.
+      { const _ea = A.indexOf('async function _buildSpecPagePDF');
+        if (A.slice(_ea, A.indexOf('async function exportDashNativePNG', _ea)).indexOf('const pages = _deckPageList();') < 0) throw new Error('the PDF export no longer walks _deckPageList'); }
+      const exAt = A.indexOf('async function _buildSpecPagePDF');
+      const ex = A.slice(exAt, A.indexOf('async function exportDashNativePNG', exAt));
       // Neither may still be walking the levels itself: that is the mirrored copy that
       // drifts. The old shape was floorplanLevels.forEach(...) building an emit list.
       if (/floorplanLevels\\.forEach\\([^)]*\\)\\s*\\{[\\s\\S]{0,400}?emitLevels\\.push/.test(ex)) {

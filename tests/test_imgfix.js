@@ -85,9 +85,9 @@ const fs = require('fs');
       const S = window.__appSrc;
       const primeIdx = S.indexOf("if (_a2 && _a2.type === 'image' && _a2.dataUrl) { const _fm2 = (_a2.zoom || 1) > 1 ? 'cover' : 'contain';");
       if (primeIdx < 0) throw new Error('upfront priming pass not found');
-      const drawLayoutIdx = S.indexOf('const drawLayoutPage = async (page) => {');
-      if (drawLayoutIdx < 0) throw new Error('drawLayoutPage not found');
-      if (!(primeIdx < drawLayoutIdx)) throw new Error('priming pass does not come before drawLayoutPage is defined \\u2014 ordering regression');
+      // 18.32: layout pages are drawn by the page walk over _deckPageList.
+      const drawLayoutIdx = S.indexOf('for (const desc of pages) {', primeIdx);
+      if (drawLayoutIdx < 0) throw new Error('the export page walk not found after the priming pass');
       // The old per-pagenum loop (which ran AFTER all pages were emitted, the
       // actual bug) must no longer prime images/shapes \\u2014 only mockups,
       // which are a different, already-canvas-composited pipeline.

@@ -567,13 +567,16 @@ const path = require('path');
       if (_breakerNameFor(units[0], br) !== _breakerCodeFor(units[0])) throw new Error('a plain breaker title changed');
     });
 
-    __check('BOTH page builders call the shared breaker rule', () => {
+    __check('the one page builder calls the shared breaker rule, and the PDF prints it', () => {
       // The studio and the export each had their own copy of the same loop. A rule about
       // which pages exist that lives in one and is mirrored by hand in the other is the
       // failure this file has repeated most.
       const studio = fnBody('_deckPageList');
       if (studio.indexOf('_breakerElevFor(') < 0) throw new Error('the studio builder does not call it');
-      if (S.split('_breakerElevFor(').length - 1 < 3) throw new Error('the export builder does not call it');
+      // 18.32: the export prints _deckPageList rather than building its own, so the
+      // definition plus the studio's call is all there should be.
+      if (S.split('_breakerElevFor(').length - 1 !== 2) throw new Error('a second page builder calls it again');
+      if (S.indexOf('const pages = _deckPageList();') < 0) throw new Error('the PDF export no longer walks _deckPageList');
       const copies = S.split('if (c > best) { best = c; ge = e; gi = ei; }').length - 1;
       if (copies > 1) throw new Error(copies + ' hand-written copies of the breaker-wall loop survive');
     });

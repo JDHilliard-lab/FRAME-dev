@@ -844,74 +844,54 @@ const path = require('path');
       }
     });
 
+    // 18.32: the PDF export walks _deckPageList, so the studio's merge IS the export's.
+    // These three used to drive _mergeFlatSteps, the export's own copy, which is gone.
+    const __flatPg = (r) => ({ kind: 'spec', type: 'spec', title: r.id, row: r, members: [r], _ovKey: r.id, _specTpl: 'egdDetail' });
     __check('EXACT BUG: the PDF merges flat sheets too, not just Deck Studio', () => {
-      // Deck Studio showed one combined sheet while the PDF still printed two. There
-      // are TWO page-list builders and the merge had only been wired into the studio
-      // one — the exact failure the "TWO PAGE-LIST BUILDERS" note warns about.
+      // Deck Studio showed one combined sheet while the PDF still printed two.
       const el = seed([]);
       el.frames.push({ id: 'W-A', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
       el.frames.push({ id: 'W-B', x: 120, y: 4, w: 80, h: 82, active: true, product: 'Window Film (WF)' });
       const a = { id: 'W-A', product: 'Window Film (WF)' }, b = { id: 'W-B', product: 'Window Film (WF)' };
       dashProjectData = [a, b];
-      const steps = [
-        { type: 'spec', unit: { rep: a, members: [a], key: 'W-A' }, li: 0 },
-        { type: 'spec', unit: { rep: b, members: [b], key: 'W-B' }, li: 0 }
-      ];
-      const merged = _mergeFlatSteps(steps);
-      if (merged.length !== 1) throw new Error('the export still emits ' + merged.length + ' sheets');
-      if (!merged[0].unit.members || merged[0].unit.members.length !== 2) throw new Error('the surviving step does not carry both graphics');
-      // Without _forceTpl the surviving step falls back to the group/per-piece dispatch
-      // and a merged sheet renders as something other than the flat layout.
-      if (merged[0]._forceTpl !== 'egdDetail') throw new Error('the merged step does not force the flat layout');
-      // Non-flat and unplaced steps are left alone.
-      const keep = _mergeFlatSteps([
-        { type: 'spec', unit: { rep: { id: 'ART.1', product: 'Framed Art' } } },
-        { type: 'key', li: 0 },
-        { type: 'spec', unit: { rep: { id: 'ORPH', product: 'Window Film (WF)' } } }
+      const merged = _mergeFlatPages([__flatPg(a), __flatPg(b)]);
+      if (merged.length !== 1) throw new Error('still ' + merged.length + ' sheets');
+      if (!merged[0].members || merged[0].members.length !== 2) throw new Error('the surviving page does not carry both graphics');
+      // The one dispatch must draw it as the flat sheet, not fall back to a set or a frame page.
+      if (_deckSpecTpl(merged[0]) !== 'egdDetail') throw new Error('the merged page resolves to ' + _deckSpecTpl(merged[0]));
+      // Non-flat and unplaced pages are left alone.
+      const keep = _mergeFlatPages([
+        { kind: 'spec', title: 'ART.1', row: { id: 'ART.1', product: 'Framed Art' }, members: [], _specTpl: 'frameSpecDetail' },
+        { kind: 'floorplan', level: 0 },
+        __flatPg({ id: 'ORPH', product: 'Window Film (WF)' })
       ]);
-      if (keep.length !== 3) throw new Error('the export merge touched steps it should not have');
+      if (keep.length !== 3) throw new Error('the merge touched pages it should not have');
     });
 
     __check('EXACT BUG: the PDF keys a merged sheet the same way the studio does', () => {
       // Reported: dividers held their place in Deck Studio but some were kicked to the
-      // bottom of the generated PDF. The studio keys a spec page 'spec:' + its TITLE;
-      // the export keys it 'spec:' + unit.key. Identical for every ordinary page, which
-      // is why it went unnoticed — but a merged flat sheet's title is the joined codes
-      // while unit.key stays the first one, so the export never emitted the key the
-      // divider was pinned to and the end-of-run sweep appended it at the end.
+      // bottom of the generated PDF, because the export keyed a merged sheet by its first
+      // code while the studio keyed it by the joined title. One list, one key now.
       const el = seed([]);
       el.frames.push({ id: 'W-A', x: 0, y: 4, w: 100, h: 82, active: true, product: 'Window Film (WF)' });
       el.frames.push({ id: 'W-B', x: 120, y: 4, w: 80, h: 82, active: true, product: 'Window Film (WF)' });
       const a = { id: 'W-A', product: 'Window Film (WF)' }, b = { id: 'W-B', product: 'Window Film (WF)' };
       dashProjectData = [a, b];
-      const merged = _mergeFlatSteps([
-        { type: 'spec', unit: { rep: a, members: [a], key: 'W-A' }, li: 0 },
-        { type: 'spec', unit: { rep: b, members: [b], key: 'W-B' }, li: 0 }
-      ]);
-      if (merged.length !== 1) throw new Error('expected one merged step');
-      // The key the export will emit must equal the studio's 'spec:' + merged title.
-      if (merged[0]._pageKey !== 'spec:W-A + W-B') throw new Error('export page key is ' + merged[0]._pageKey);
-      // unit.key is deliberately NOT rewritten — it also resolves per-page overrides
-      // and approval state.
-      if (merged[0].unit.key !== 'W-A') throw new Error('unit.key was rewritten, which moves per-page overrides');
-      // And the walk must actually prefer it.
-      if (S.indexOf('const stepKey = step._pageKey ? step._pageKey :') < 0) {
-        throw new Error('the export walk ignores _pageKey, so the pinned divider is still unanchored');
-      }
+      const merged = _mergeFlatPages([__flatPg(a), __flatPg(b)]);
+      if (_deckPageKey(merged[0]) !== 'spec:W-A + W-B') throw new Error('page key is ' + _deckPageKey(merged[0]));
+      // _ovKey is deliberately NOT rewritten: it resolves per-page overrides and approval.
+      if (merged[0]._ovKey !== 'W-A') throw new Error('_ovKey was rewritten, which moves per-page overrides');
+      // And the export names each page with that same function.
+      const ea = S.indexOf('async function _buildSpecPagePDF');
+      if (S.slice(ea, S.indexOf('async function exportDashNativePNG', ea)).indexOf('const key = _deckPageKey(desc);') < 0) throw new Error('the export names its pages some other way');
     });
 
-    __check('BOTH page-list builders wire the merge in', () => {
-      // Source-level, because the two builders are structurally separate and a fix to
-      // one has already silently missed the other twice now.
+    __check('the one page list wires the merge in, and the PDF prints that list', () => {
       const dpl = S.indexOf('function _deckPageList');
       if (S.slice(dpl, dpl + 22000).indexOf('_mergeFlatPages(') < 0) throw new Error('the studio builder does not merge');
-      const sf = S.indexOf('const _stepsFor = (u, li) =>');
-      if (S.slice(sf, sf + 12000).indexOf('_mergeFlatSteps(') < 0) throw new Error('the export builder does not merge');
-      // And the export must merge BEFORE it counts pages, or page numbers and the
-      // id-to-page map are built from a list that no longer exists.
-      const mg = S.indexOf('_mergeFlatSteps(plan)');
-      const cnt = S.indexOf('const idToPage = {};');
-      if (mg < 0 || cnt < 0 || mg > cnt) throw new Error('the export merges after it has already numbered the pages');
+      const ea = S.indexOf('async function _buildSpecPagePDF');
+      if (S.slice(ea, S.indexOf('async function exportDashNativePNG', ea)).indexOf('const pages = _deckPageList();') < 0) throw new Error('the PDF export no longer walks _deckPageList');
+      if (S.indexOf('function _mergeFlatSteps') >= 0) throw new Error('the export has its own merge again');
     });
 
     __check('EXACT BUG: ghost panel dims do not survive onto the next elevation', () => {

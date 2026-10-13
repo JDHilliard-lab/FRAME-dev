@@ -637,17 +637,21 @@ const path = require('path');
 
     __check('both render paths draw the flat sheet, and neither falls through to a framed one', () => {
       if (typeof _drawFlatGraphicSpecPage !== 'function') throw new Error('the flat sheet renderer is missing');
-      // Deck Studio preview / rail thumbnails.
-      const i = S.indexOf('async function renderSpecPageCanvas');
-      const b1 = S.slice(i, S.indexOf('\\nfunction ', i + 10));
-      if (b1.indexOf('_drawFlatGraphicSpecPage(') < 0) throw new Error('the canvas preview does not draw the flat sheet');
-      // The PDF export. egdDetail carries custom:true (no coordinate map), so its
+      // 18.32: the preview and the PDF export draw spec pages through ONE function,
+      // _drawDeckSpecPage. egdDetail carries custom:true (no coordinate map), so its
       // branch MUST come before the generic template branch or it renders as a
       // frameRight fallback complete with a frame mockup.
-      const j = S.indexOf('SPEC_TEMPLATES[_specTpl].flat');
-      const k = S.indexOf("_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy");
-      if (j < 0) throw new Error('the PDF export has no flat-sheet branch');
+      const i = S.indexOf('async function _drawDeckSpecPage');
+      const b1 = S.slice(i, S.indexOf('async function _drawDeckPage(', i));
+      if (i < 0) throw new Error('the shared spec dispatch is missing');
+      const j = b1.indexOf('_drawFlatGraphicSpecPage('), k = b1.indexOf('_drawSpecPageTemplate(');
+      if (j < 0) throw new Error('the shared dispatch has no flat-sheet branch');
       if (k >= 0 && j > k) throw new Error('the flat branch sits AFTER the generic one, so it never runs');
+      // Both renderers go through it.
+      const p1 = S.indexOf('async function renderSpecPageCanvas');
+      if (S.slice(p1, S.indexOf('async function renderDeckPageCanvas', p1)).indexOf('_drawDeckSpecPage(') < 0) throw new Error('the canvas preview does not draw through the shared dispatch');
+      const e1 = S.indexOf('async function _buildSpecPagePDF');
+      if (S.slice(e1, S.indexOf('async function exportDashNativePNG', e1)).indexOf('_drawDeckPage(') < 0) throw new Error('the PDF export does not draw through the shared dispatch');
     });
 
     __check('the flat sheet reuses the shared elevation capture rather than its own copy', () => {

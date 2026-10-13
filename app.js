@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.31';
+const APP_VERSION = '18.32';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -17549,12 +17549,11 @@ function _specTplEffective(tplKey, ovKey) {
     return tpl;
 }
 function _fixedHidden(f) { return !!(editorialContent.hiddenFixed && editorialContent.hiddenFixed[f]); }
-// ── WHICH ROWS PRODUCE SPEC PAGES: ONE DEFINITION, BOTH BUILDERS ─────────
-// _deckPageList and the export's _stepsFor each filtered dashProjectData with their own
-// copy of the same expression. That is the pairing this file has drifted on more than
-// any other, and a catalogue mockup's slots are the first rule that differs between a
-// row EXISTING and a row DESERVING A PAGE - so it goes in a shared function rather than
-// being written out twice and mirrored by hand.
+// ── WHICH ROWS PRODUCE SPEC PAGES: ONE DEFINITION ────────────────────────
+// _deckPageList and the export's old hand-mirrored builder each filtered dashProjectData
+// with their own copy of this expression. Since 18.32 the export walks _deckPageList
+// itself, but the rule stays a function: a catalogue mockup's slots are the first rule
+// that differs between a row EXISTING and a row DESERVING A PAGE.
 // A mockup's slots are the arrangement: no artwork, no image code, nothing to order.
 // They drew a spec page titled after the mockup with six grey blocks on it.
 // ── WHICH WALL IS DRAWN WHEN WE SHOW THIS PIECE: ONE DEFINITION ──────────
@@ -17980,8 +17979,7 @@ function _deckPageList() {
         else members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
-    // THE OPTIONS OVERVIEW goes in front of a placement's first page, through the SAME
-    // stateless rule the export's _stepsFor asks (_catOverviewFor).
+    // THE OPTIONS OVERVIEW goes in front of a placement's first page (_catOverviewFor).
     const specPagesFor = (u) => {
         const ov = u._manual ? null : _catOverviewFor(u, units);
         const pages = _specPagesFor0(u);
@@ -18717,12 +18715,10 @@ function _breakerNoPlan() { return !!(editorialContent && editorialContent.break
 // a framed-art breaker shows a hang no single spec page can. `=== false` rather than
 // truthiness so a project saved before this existed gets the useful default.
 function _breakerSkipFlat() { return !(editorialContent && editorialContent.breakerSkipFlat === false); }
-// Does THIS unit skip its breaker? One definition, called by both page-list builders.
-// It was written out inline in _deckPageList only, so Deck Studio dropped the breaker
-// and the PDF still printed one: the export's _stepsFor mirrors that function by hand
-// and never got the clause. "Mirrors _deckPageList" in a comment is not a mechanism —
-// a shared predicate is. Takes the members array so neither caller has to agree on the
-// shape of a unit.
+// Does THIS unit skip its breaker? Once written inline in _deckPageList only, while the
+// export's hand mirror of it never got the clause, so Deck Studio dropped the breaker and
+// the PDF still printed one. The export walks _deckPageList since 18.32, so that class of
+// bug is gone; this stays a named predicate because it is a rule worth reading on its own.
 function _breakerSkipUnit(members) {
     const m = members || [];
     return m.length > 0 && m.every(x => x && _isFlatGraphic(x.product)) && _breakerSkipFlat();
@@ -18730,10 +18726,8 @@ function _breakerSkipUnit(members) {
 // Split a group unit's members into the flat graphics (each of which needs its own
 // sheet) and everything left over. Returns null when nothing is flat, so the common
 // path is untouched.
-// Shared because the studio's _splitFlatUnits and the PDF's _stepsFor need the same
-// decision but emit DIFFERENT shapes — a page descriptor vs a render step. Only the
-// partition is common, so only the partition is shared; forcing one shape on both is
-// what would make the next caller write its own copy again.
+// Returns only the partition, not a page shape: _splitFlatUnits turns it into page
+// descriptors.
 // Flat graphics that share a WALL share a SHEET. Two window films on one elevation
 // were producing two pages carrying the same drawing twice — the elevation is the
 // subject of this sheet, so repeating it per item code is a duplicate, not a spec.
@@ -18766,44 +18760,6 @@ function _mergeFlatPages(pages) {
     });
     return drop.size ? pages.filter(p => !drop.has(p)) : pages;
 }
-// The export's equivalent of _mergeFlatPages. Same decision, different shape: the PDF
-// walks `steps` ({type:'spec', unit:{rep, members, key}}) while the studio walks page
-// descriptors, so the shapes cannot be shared — only the rule can. Keeping them as two
-// functions that read the same way is the least-bad option; collapsing them would mean
-// one of the two builders growing a shape it does not use.
-function _mergeFlatSteps(steps) {
-    const seen = [];
-    const drop = new Set();
-    (steps || []).forEach(s => {
-        if (!s || s.type !== 'spec' || !s.unit || !s.unit.rep) return;
-        if (!_isFlatGraphic(s.unit.rep.product)) return;
-        const el = _flatGraphicElevFor(s.unit.rep);
-        if (!el) return;                        // not on a wall — nothing to share
-        const hit = seen.find(x => x.el === el);
-        const rows = (s.unit.members && s.unit.members.length) ? s.unit.members : [s.unit.rep];
-        if (!hit) { seen.push({ el: el, step: s, rows: rows.slice() }); return; }
-        rows.forEach(m => { if (hit.rows.indexOf(m) < 0) hit.rows.push(m); });
-        drop.add(s);
-    });
-    seen.forEach(x => {
-        if (x.rows.length < 2) return;
-        // _forceTpl, or the surviving step falls back to the group/per-piece dispatch
-        // and a merged sheet renders as something other than the flat layout.
-        x.step.unit = Object.assign({}, x.step.unit, { members: x.rows });
-        x.step._forceTpl = 'egdDetail';
-        // The PAGE KEY a pinned divider anchors to. The studio keys a spec page by its
-        // TITLE ('spec:' + title) while the export keys it by unit.key — the same string
-        // for every ordinary page, which is why this went unnoticed, but NOT for a
-        // merged sheet: _mergeFlatPages rewrites the studio title to the joined codes
-        // while unit.key stays the first one. So the export never emitted the key the
-        // divider was pinned to, and the end-of-run sweep for un-emitted layout pages
-        // put it at the BOTTOM of the PDF while Deck Studio showed it in place.
-        // Carried as its own field rather than by rewriting unit.key, because that key
-        // also resolves per-page overrides and approval state.
-        x.step._pageKey = 'spec:' + x.rows.map(m => (m && m.id) || '').filter(Boolean).join(' + ');
-    });
-    return drop.size ? steps.filter(s => !drop.has(s)) : steps;
-}
 // Flat graphics that share a WALL share a SHEET, used by the group-mode split.
 function _groupFlatsByElev(flats) {
     const byElev = [], loose = [];
@@ -18822,12 +18778,9 @@ function _partitionFlatMembers(members) {
     return { flats: flats, rest: m.filter(x => x && !_isFlatGraphic(x.product)) };
 }
 // ── Floorplan / spec page ORDER ───────────────────────────────────────────
-// THE definition of which floorplan and spec pages exist and in what order, called by
-// BOTH page-list builders — `_deckPageList` for Deck Studio and the export's plan builder
-// for the PDF. Read the "TWO PAGE-LIST BUILDERS" note above before touching it: every
-// rule about which pages exist that was written into one builder and mirrored by hand
-// into the other has eventually drifted, and the failure mode is the worst kind here,
-// because the preview is how the deck gets checked.
+// THE definition of which floorplan and spec pages exist and in what order. It was
+// shared by two page-list builders; since 18.32 the PDF export walks `_deckPageList`
+// directly, so this has one caller and the export cannot disagree with it.
 //
 // It returns neutral SLOTS rather than pages, for the same reason `_partitionFlatMembers`
 // returns only the partition: the two builders emit genuinely different things (a page
@@ -21691,6 +21644,10 @@ function _deckPageKey(desc) {
     if (desc.kind === 'card') return 'card:' + desc.type;
     if (desc.kind === 'spec') return desc._install ? (desc._groupKey != null ? ('spec:elevgrp:' + desc._groupKey) : ('spec:elev:' + desc._elevIdx)) : desc._manual ? ('spec:' + desc._ovKey) : ('spec:' + desc.title);
     if (desc.kind === 'floorplan') return 'floorplan:' + desc.level;
+    // The key the PDF export always printed plan details under (18.32). The studio had
+    // none, so every plan detail shared one thumbnail cache slot and nothing could be
+    // pinned after one.
+    if (desc.kind === 'planDetail') return (desc.pd && desc.pd.id) ? ('plandetail:' + desc.pd.id) : null;
     if (desc.kind === 'catov') return _catOverviewKey(desc.place, desc.part || 0);
     return null;
 }
@@ -26012,6 +25969,150 @@ CanvasPdfRec.prototype.render = async function (scale, onProgress) {
     return cv;
 };
 let _dsBuilt = {};
+// ── ONE PAGE DISPATCH (18.32) ────────────────────────────────────────────────
+// `_drawDeckPage(doc, desc, env)` draws ONE page descriptor from `_deckPageList()` onto
+// a doc, and it is the only place that decides which drawer a page goes to. The Deck
+// Studio preview (`renderDeckPageCanvas` / `renderSpecPageCanvas`, onto a
+// CanvasPdfRec) and the PDF export (`_buildSpecPagePDF`, onto jsPDF) both call it.
+//
+// There used to be three copies of this decision: the export built its own page list
+// (`_stepsFor`, mirrored from `_deckPageList` by hand) and its own dispatch, and the
+// preview had a third. They had drifted, and each drift was a PDF that did not match
+// the preview the deck was checked in. Breaker pages, flat sheets and the flat merge
+// had already been patched one shared helper at a time; what was still different was
+// the order of a `beforeContacts` layout page against Good Art Good People, where an
+// empty layout page printed (at the END of the PDF), whether a one-piece group page
+// drew as a set, the footer code on an options overview, and whether annotations on
+// Understanding / Narrative / Strategy sat in z-order with the page or on top of it.
+// With one list and one dispatch there is nothing left to drift.
+//
+// The CALLER owns the page: creating it, its theme background (_pageThemeAutoApply),
+// the plan-link rect ledger and the footer sweep. This owns what is drawn ON it.
+// Returns false when the page has nothing a doc can draw (a freeform spec page, whose
+// content is all annotations) so a preview can keep its live HTML instead.
+//
+// env: { logos, meta, pageNum, PW, PH, M, idToPage, backPage(row), frPage, fpNoPins,
+//        swatch }
+async function _deckLoadTiles(els) {
+    const src = els || [];
+    const t = src.map(x => Object.assign({}, x, { _img: null }));
+    for (let i = 0; i < src.length; i++) {
+        if ((src[i].type || 'image') === 'image' && src[i].img) { try { t[i]._img = await _loadImg(src[i].img); } catch (e) {} }
+    }
+    return t;
+}
+// The template a spec page draws with. An ordinary page is RE-resolved live rather than
+// trusting the _specTpl baked in at list-build time, mirroring _dsThumbCacheKey so a
+// render cannot disagree with its own cache key; manual groups and wall pages carry
+// theirs.
+function _deckSpecTpl(desc) {
+    const r = desc.row || {};
+    const ok = desc._ovKey || (r.id || '');
+    return (!desc._manual && !desc._install) ? _specTplResolve(ok) : (desc._specTpl || _specTplResolve(ok));
+}
+async function _drawDeckSpecPage(doc, desc, env) {
+    const logos = env.logos || {}, meta = env.meta || {}, pn = env.pageNum || 1;
+    const ctx = { PW: env.PW, PH: env.PH, M: env.M, swatch: !!env.swatch, members: desc.members };
+    if (desc._install) { await _drawInstallGuidePage(doc, logos, pn, meta, desc.elev, ctx); return true; }
+    const r = desc.row; if (!r) return false;
+    const tpl = _deckSpecTpl(desc);
+    const T = SPEC_TEMPLATES[tpl] || {};
+    if (T.freeform) return false;
+    if (desc._manual || (T.group && !T.flat)) {
+        // A group template draws as a set even with one member left in it, which is
+        // what the export always did; the preview used to fall back to its HTML mock.
+        const unit = { rep: r, members: (desc.members && desc.members.length) ? desc.members : [r], key: desc._ovKey || r.id, demoSet: desc._demoSet };
+        await _drawSpecSetPage(doc, logos, pn, meta, unit, tpl, ctx);
+    } else if (T.flat) {
+        // Wallcovering / window film. Ahead of the generic branch: egdDetail carries
+        // `custom: true` and would otherwise draw a frameRight fallback with a frame on it.
+        await _drawFlatGraphicSpecPage(doc, logos, pn, meta, r, ctx);
+    } else if (tpl === 'installGuide') {
+        await _drawInstallGuidePage(doc, logos, pn, meta, r, ctx);
+    } else if (tpl !== 'classic' && !T.legacy && !T.custom) {
+        await _drawSpecPageTemplate(doc, logos, pn, meta, r, tpl, ctx);
+    } else if (tpl === 'classic' || T.legacy) {
+        await _drawClassicSpecPage(doc, logos, pn, meta, r, { PW: env.PW, PH: env.PH, M: env.M, backPage: env.backPage ? env.backPage(r) : 0 });
+    } else {
+        return false;
+    }
+    return true;
+}
+async function _drawDeckPage(doc, desc, env) {
+    if (!desc) return false;
+    const logos = env.logos || {}, meta = env.meta || {}, pn = env.pageNum || 1;
+    const PW = env.PW, PH = env.PH;
+    const ec = editorialContent;
+    if (desc.kind === 'spec') return await _drawDeckSpecPage(doc, desc, env);
+    if (desc.kind === 'catov') {
+        await _drawCatOverviewPage(doc, logos, pn, meta, desc.place, { PW: PW, PH: PH, M: env.M, part: desc.part || 0 });
+        return true;
+    }
+    if (desc.kind === 'layout') {
+        if (!desc.page) return false;
+        // The page name is an organisational label (rail, template naming); it never prints.
+        _drawMoodboardPage(doc, logos, pn, meta, await _deckLoadTiles(desc.page.elements), '', desc.page.type || 'moodboard', 'layout:' + desc.page.id);
+        return true;
+    }
+    if (desc.kind === 'fixed') {
+        const fk = 'fixed:' + desc.fixed;
+        const els = (desc.page && Array.isArray(desc.page.elements)) ? desc.page.elements : [];
+        const art = (desc.fixed === 'cover' || desc.fixed === 'slogan');
+        const hasAnn = !!(ec.annotations && ec.annotations[fk] && ec.annotations[fk].length);
+        if (els.length || (art && hasAnn)) {
+            // Cover and Good Art Good People paint their OWN theme (_THEME_SELF_KEYS), so
+            // the caller's _pageThemeAutoApply skipped them; _drawMoodboardPage knows
+            // nothing of themes, so without this the background and the dark-ink flip
+            // were silently missing on exactly the pages that use them most.
+            if (_THEME_SELF_KEYS[fk]) {
+                try {
+                    await _pageThemeBake(fk);
+                    const st = _pageThemes()[fk] || {};
+                    const ink = _applyPageTheme(doc, fk, PW, PH, st._bakedImg || null);
+                    _themeRemapRemove(doc);
+                    if (ink && ink.dark) _themeRemapInstall(doc);
+                } catch (e) {}
+            }
+            _drawMoodboardPage(doc, logos, pn, meta, await _deckLoadTiles(els), '', art ? 'breaker' : 'narrative', fk);
+            return true;
+        }
+        if (desc.fixed === 'cover') { try { await _pageThemeBake(fk); } catch (e) {} _drawCoverPage(doc, logos, pn, meta); return true; }
+        if (desc.fixed === 'slogan') { try { await _pageThemeBake(fk); } catch (e) {} _drawSloganPage(doc, logos, pn, meta); return true; }
+        if (desc.fixed === 'understanding') { _drawProsePage(doc, logos, pn, meta, 'PROJECT UNDERSTANDING', ec.understanding, 'Add project understanding copy in the Presentation PDF dialog.'); return true; }
+        if (desc.fixed === 'narrative') { _drawProsePage(doc, logos, pn, meta, 'ART NARRATIVE', ec.narrative, 'Add narrative copy in the Presentation PDF dialog.'); return true; }
+        if (desc.fixed === 'strategy') { _drawStrategyPage(doc, logos, pn, meta, ec.strategy); return true; }
+        return false;
+    }
+    if (desc.kind === 'card') {
+        if (desc.type === 'timeline') { _drawTimelinePage(doc, logos, pn, meta, ec.timeline); return true; }
+        if (desc.type === 'frameRec') {
+            const pgs = env.frPages || _frameRecPlanPages((await _collectProjectFramesCached()) || [], _frameRecCfg());
+            const pg = pgs[Math.min(env.frPage || desc.frPage || 0, pgs.length - 1)];
+            if (!pg) return false;
+            _drawFrameRecPage(doc, logos, pn, meta, pg);
+            return true;
+        }
+        if (desc.type === 'contacts') {
+            let rc; try { rc = await _contactsResolved(); } catch (e) { rc = ec.contacts || ''; }
+            try { await _pageThemeBake('card:contacts'); } catch (e) {}
+            _drawThankYouPage(doc, logos, pn, meta, rc);
+            return true;
+        }
+        return false;
+    }
+    if (desc.kind === 'floorplan') {
+        const lv = floorplanLevels[desc.level] || {};
+        let planImg = null; if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
+        let entries = _fpKeyEntries(desc.level, env.idToPage || null);
+        // The studio centre draws pins and wall lines as its own interactive layer over
+        // this render, so it asks for the page WITHOUT them; thumbnails and the PDF keep them.
+        if (env.fpNoPins) entries = entries.map(en => Object.assign({}, en, { planX: null, planY: null, wallLine: null, wallLines: null }));
+        _drawFloorplanKeyPage(doc, logos, pn, meta, entries, planImg, lv.name || ('Level ' + (desc.level + 1)));
+        return true;
+    }
+    if (desc.kind === 'planDetail') { await _drawPlanDetailPage(doc, logos, pn, meta, desc.pd); return true; }
+    return false;
+}
 async function renderSpecPageCanvas(desc, onProgress, scale) {
     // Both canvas page renderers gate themselves rather than trusting callers to
     // remember: this one is reached from renderDeckPageCanvas AND directly from the
@@ -26022,9 +26123,7 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     // Ignore any baked-in _specTpl for ordinary (non-manual, non-install) spec
     // pages and always re-resolve live \u2014 mirrors _dsThumbCacheKey so a render
     // can never disagree with its own cache key about which template applies.
-    const tpl = (!desc._manual && !desc._install) ? _specTplResolve(desc._ovKey || (r.id || '')) : (desc._specTpl || _specTplResolve(desc._ovKey || (r.id || '')));
-    const T = SPEC_TEMPLATES[tpl] || {};
-    if (T.freeform) return null;
+    if (!desc._install && (SPEC_TEMPLATES[_deckSpecTpl(desc)] || {}).freeform) return null;
     const rec = new CanvasPdfRec(PW, PH);
     // Real logos + a meta line so the footer (page #, project line, logo) shows
     // in preview exactly like the export.
@@ -26037,23 +26136,10 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     try { const _tk = _deckPageKey(desc); _curPageKey = _tk; _curFooter = _resolveFooter(_tk); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
     if (!desc._tplSwatch) { _specArtRectsReset(); _specPlanRectsBegin(rec, _deckPageKey(desc)); }
     if (onProgress) onProgress(12);
-    // Template-card mode rides on ctx, not a module flag — see SPEC_TPL_DEMO_SALON.
-    const ctx = { PW: PW, PH: PH, M: M, swatch: !!desc._tplSwatch, members: desc.members };
-    if (desc._install) {
-        await _drawInstallGuidePage(rec, logos, 1, meta, desc.elev, ctx);
-    } else if (T.flat) {
-        await _drawFlatGraphicSpecPage(rec, logos, 1, meta, r, ctx);
-    } else if (desc.members && desc.members.length > 1 && T.group) {
-        await _drawSpecSetPage(rec, logos, 1, meta, { rep: r, members: desc.members, key: desc._ovKey || r.id, demoSet: desc._demoSet }, tpl, ctx);
-    } else if (tpl === 'installGuide') {
-        await _drawInstallGuidePage(rec, logos, 1, meta, r, ctx);
-    } else if (tpl !== 'classic' && !T.legacy && !T.custom && !T.group) {
-        await _drawSpecPageTemplate(rec, logos, 1, meta, r, tpl, ctx);
-    } else if (tpl === 'classic' || (T.legacy && !T.group && !T.custom)) {
-        await _drawClassicSpecPage(rec, logos, 1, meta, r, { PW: PW, PH: PH, M: M, backPage: 0 });
-    } else {
-        return null;   // unsupported → keep the live preview
-    }
+    // Template-card mode rides on env.swatch, not a module flag — see SPEC_TPL_DEMO_SALON.
+    // The page itself goes through the ONE dispatch the PDF export uses.
+    const drawn = await _drawDeckSpecPage(rec, desc, { logos: logos, meta: meta, pageNum: 1, PW: PW, PH: PH, M: M, swatch: !!desc._tplSwatch });
+    if (!drawn) return null;   // unsupported → keep the live preview
     _specPlanRectsCommit(rec);
     if (onProgress) onProgress(40);
     return await rec.render(scale || _previewScale('center'), onProgress);
@@ -26092,70 +26178,23 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
     if (!desc) return null;
     const _scale = (opts && opts.scale) || _previewScale('center');
     if (desc.kind === 'spec') return await renderSpecPageCanvas(desc, onProgress, _scale);
-    if (desc.kind === 'catov') {
-        const rec0 = new CanvasPdfRec(936, 540);
-        let lg = {}; try { lg = await _getPdfLogos(); } catch (e) {}
-        try { _curPageKey = _deckPageKey(desc); _curFooter = _resolveFooter(_curPageKey); await _pageThemeBake(_curPageKey); _pageThemeAutoApply(rec0, _curPageKey, 936, 540); } catch (e) {}
-        await _drawCatOverviewPage(rec0, lg, 1, { code: desc.place, location: '', version: '' }, desc.place, { PW: 936, PH: 540, part: desc.part || 0 });
-        return await rec0.render(_scale, onProgress);
-    }
     const PW = 936, PH = 540;
     const rec = new CanvasPdfRec(PW, PH);
     let logos = {}; try { logos = await _getPdfLogos(); } catch (e) {}
-    const mm = (typeof window !== 'undefined' && window._specPdfMeta) ? window._specPdfMeta : {};
-    const g = (id) => { const el = document.getElementById(id); return el ? (el.value || '').trim() : ''; };
     const meta = _deckFooterMeta();
     try { _curPageKey = _deckPageKey(desc); _curFooter = _resolveFooter(_curPageKey); } catch (e) { _curFooter = { text: 'dark' }; }
     // Per-page theme (any page kind): bake the bg image if there is one, paint
     // the background, flip dark inks, steer the footer.
     try { const _tk = _deckPageKey(desc); await _pageThemeBake(_tk); _pageThemeAutoApply(rec, _tk, PW, PH); } catch (e) {}
-    const loadTiles = async (els) => { const t = (els || []).map(x => Object.assign({}, x, { _img: null })); for (let i = 0; i < (els || []).length; i++) { if ((els[i].type || 'image') === 'image' && els[i].img) { try { t[i]._img = await _loadImg(els[i].img); } catch (e) {} } } return t; };
     if (onProgress) onProgress(15);
+    // The ONE dispatch the PDF export uses, so a preview cannot draw a page the PDF
+    // will not. Plan rects are begun for every page (a plan detail and a breaker both
+    // carry a link back to the floorplan) and committed after.
     try {
-        if (desc.kind === 'layout' && desc.page) {
-            const tiles = await loadTiles(desc.page.elements);
-            // Layout pages: the Page name is an organizational label (template
-            // naming, rail identification) — it never prints on the page or PDF.
-            _drawMoodboardPage(rec, logos, 1, meta, tiles, '', desc.page.type || 'moodboard', 'layout:' + desc.page.id);
-        } else if (desc.kind === 'fixed' && desc.page) {
-            const els = desc.page.elements || [];
-            if (els.length) {
-                const tiles = await loadTiles(els);
-                const ty = desc.fixed === 'cover' ? 'breaker' : (desc.fixed === 'slogan' ? 'slogan' : 'narrative');
-                const _fk = 'fixed:' + desc.fixed;
-                try {
-                    const stored0 = _pageThemes()[_fk] || {};
-                    await _pageThemeBake(_fk);
-                    const _ink0 = _applyPageTheme(rec, _fk, PW, PH, stored0._bakedImg || null);
-                    _themeRemapRemove(rec);
-                    if (_ink0 && _ink0.dark) _themeRemapInstall(rec);
-                } catch (e) {}
-                _drawMoodboardPage(rec, logos, 1, meta, tiles, '', ty, _fk);
-            }
-            else if (desc.fixed === 'cover') { try { await _pageThemeBake('fixed:cover'); } catch (e) {} _drawCoverPage(rec, logos, 1, meta); }
-            else if (desc.fixed === 'slogan') { try { await _pageThemeBake('fixed:slogan'); } catch (e) {} _drawSloganPage(rec, logos, 1, meta); }
-            else return null;
-        } else if (desc.kind === 'floorplan') {
-            const lv = floorplanLevels[desc.level] || {};
-            let planImg = null; if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
-            // Same entry builder as the export — full level list (not just
-            // pinned groups) with identical code labels.
-            let entries = _fpKeyEntries(desc.level, null);
-            // The studio center draws pins + wall lines as its own interactive
-            // layer over this render, so it asks for the page WITHOUT them to
-            // avoid doubled marks; thumbnails and Build previews keep them.
-            if (opts && opts.fpNoPins) entries = entries.map(en => Object.assign({}, en, { planX: null, planY: null, wallLine: null, wallLines: null }));
-            _drawFloorplanKeyPage(rec, logos, 1, meta, entries, planImg, lv.name || ('Level ' + (desc.level + 1)));
-        } else if (desc.kind === 'planDetail') {
-            _specPlanRectsBegin(rec, _deckPageKey(desc));
-            await _drawPlanDetailPage(rec, logos, 1, meta, desc.pd);
-            _specPlanRectsCommit(rec);
-        } else if (desc.kind === 'card') {
-            if (desc.type === 'timeline') _drawTimelinePage(rec, logos, 1, meta, editorialContent.timeline);
-            else if (desc.type === 'frameRec') { const frames = (typeof _collectProjectFramesCached === 'function') ? await _collectProjectFramesCached() : []; const pgs = _frameRecPlanPages(frames || [], _frameRecCfg()); _drawFrameRecPage(rec, logos, 1, meta, pgs[Math.min(desc.frPage || 0, pgs.length - 1)]); }
-            else if (desc.type === 'contacts') { let rc; try { rc = await _contactsResolved(); } catch (e) { rc = editorialContent.contacts || ''; } try { await _pageThemeBake('card:contacts'); } catch (e) {} _drawThankYouPage(rec, logos, 1, meta, rc); }
-            else return null;
-        } else return null;
+        _specPlanRectsBegin(rec, _deckPageKey(desc));
+        const drawn = await _drawDeckPage(rec, desc, { logos: logos, meta: meta, pageNum: 1, PW: PW, PH: PH, M: 40, fpNoPins: !!(opts && opts.fpNoPins) });
+        if (!drawn) return null;
+        _specPlanRectsCommit(rec);
     } catch (e) { console.error('preview build failed', e); return null; }
     if (onProgress) onProgress(45);
     return await rec.render(_scale, onProgress);
@@ -37939,16 +37978,10 @@ function _drawApprovalStamp(doc, PW, PH, M, status) {
     doc.text(txt, x + padX, y + bh - padY);
 }
 async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
+    // The whole deck, always: the page list is the studio's (see below), so there is no
+    // single-row mode left. That one had no caller.
     const wantSpec = opts.include ? !!opts.include.spec : true;
-    // Which rows: current selection, or all rows if opts.all.
-    let rows = [];
-    if (opts.all) {
-        rows = _deckSpecRows();
-        if (wantSpec && !rows.length) { _toast('No pieces', 'There are no pieces in the project yet. Add frames in the Frame Dashboard, then try again.'); return; }
-    } else {
-        rows = [dashProjectData[dashSelectedRowIndex]].filter(Boolean);
-        if (wantSpec && !rows.length) { _toast('Nothing to export', 'Select a frame row first.'); return; }
-    }
+    if (wantSpec && !_deckSpecRows().length) { _toast('No pieces', 'There are no pieces in the project yet. Add frames in the Frame Dashboard, then try again.'); return; }
 
     // Page format: widescreen to match the studio's reference decks (~1.73:1),
     // not US-Letter. One constant drives both the first page and every addPage;
@@ -38005,32 +38038,32 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         }
     } catch (e) {}
     const M = 40;                  // page margin
-    const COL_X = M;               // left column (artwork + spec) start
-    const ART_MAX_W = PW * 0.40;   // artwork max width
-    const ART_MAX_H = PH * 0.42;   // artwork max height
 
     const logos = await _getPdfLogos();
     const meta = opts.meta || null;
-    // Which sections to include. Defaults preserve legacy behavior: a bare
-    // exportSpecPagePDF({all:true}) still produces cover + spec pages.
-    const inc = opts.include || { cover: !!opts.all, spec: true };
 
-    // Rough page estimate so the progress bar advances meaningfully.
-    let _pdfEst = 0;
-    if (inc.cover) _pdfEst++; if (inc.understanding) _pdfEst++; if (inc.narrative) _pdfEst++;
-    if (inc.strategy) _pdfEst++; if (inc.timeline) _pdfEst++; if (inc.frameRec) _pdfEst++;
-    _pdfEst += (editorialContent.layoutPages || []).length;
-    if (inc.spec) _pdfEst += rows.length;
-    if (inc.floorplanKey) { _fpMigrate(); _pdfEst += (floorplanLevels || []).length; }
-    if (inc.slogan) _pdfEst++; if (inc.contacts) _pdfEst++;
-    _pdfEst = Math.max(1, _pdfEst);
+    // THE PAGE LIST IS THE STUDIO'S (18.32). The export used to build its own plan
+    // (`_stepsFor`, a hand mirror of _deckPageList) and its own dispatch, and every rule
+    // about which pages exist had to be wired into both; three drifted before they were
+    // made shared helpers, and the rest still disagreed in small ways. Now it walks the
+    // exact descriptors the rail shows and draws each through _drawDeckPage, the same
+    // function the preview renders with. `opts.include` is the same checkbox state
+    // _deckPageList reads through _dsInclude(), so the two cannot select differently.
+    const pages = _deckPageList();
+    // Frame Recommendations is the one descriptor that can span several PDF pages: how
+    // many depends on the frame library, which is async, so the studio lists it once.
+    const _hasFrameRec = pages.some(d => d.kind === 'card' && d.type === 'frameRec');
+    const _frPages = _hasFrameRec ? _frameRecPlanPages(await _collectProjectFrames(), _frameRecCfg()) : [];
+    const _span = (d) => (d.kind === 'card' && d.type === 'frameRec') ? _frPages.length : 1;
+    let _pdfEst = Math.max(1, pages.reduce((n, d) => n + _span(d), 0));
     _pdfShowOverlay(); _pdfProgress(0.04, 'Building presentation…'); await _pdfYield();
 
     let pageNum = 0;               // 1-based footer counter
     // Pre-bake every themed page's background image so the synchronous
     // newPage() theme hook has them ready when each page is drawn.
     try { const _thms = _pageThemes(); for (const _tk of Object.keys(_thms)) { if (_thms[_tk] && _thms[_tk].image) { try { await _pageThemeBake(_tk); } catch (e) {} } } } catch (e) {}
-    let fpKeyPageNum = 0;          // page of the floorplan key (for back-links)
+    let fpKeyPageNum = 0;          // page of the first floorplan key (for back-links)
+    const _fpLevelKeyPage = {};    // level -> page of its floorplan key
     const _pageKeys = {};          // pageNum -> annotation key
     _annInlineDrawn = {};          // fresh ledger per export
     _pdfFooterDrawn = {};          // pageNum -> 1 once a footer is drawn (swept below)
@@ -38048,281 +38081,25 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         // Per-page theme (background colour/image, dark-ink flip, footer mode)
         // — bg images were pre-baked before the page loop started.
         try { _pageThemeAutoApply(doc, key || null, PW, PH); } catch (e) {}
-        // _pdfEst is a pre-count that can't see every page type the walk below
-        // emits (elevation breakers, install-guide pages, the reserved TOC /
-        // artwork-index pages), so a big deck could overshoot it and display
-        // nonsense like "page 289 of ~238". Track it upward so the total is
-        // never lower than the page actually being drawn.
         if (pageNum > _pdfEst) _pdfEst = pageNum;
         _pdfProgress(Math.min(0.97, pageNum / _pdfEst), 'Building page ' + pageNum + ' of ~' + _pdfEst + '…');
         return pageNum;
     };
-    // Emit the layout pages anchored to a given point in the deck. Default
-    // anchor 'afterStrategy' = the classic layout block. NOTE: we never anchor
-    // between the Floorplan Key and Spec pages — their page numbers must stay
-    // adjacent for the key's clickable links to resolve.
-    const emitLayout = async (anchor) => {
-        // Layout pages always emit where the rail shows them (the legacy
-        // 'moodboard' include flag no longer gates them out of their slot —
-        // that used to strand them in the tail sweep at the END of the PDF).
-        _mbMigratePages();
-        const pages = (editorialContent.layoutPages || []).filter(p => !p.afterKey && (p.place || 'afterStrategy') === anchor);
-        for (const page of pages) {
-            const src = page.elements || [];
-            if (!src.length) continue;
-            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-            for (let ti = 0; ti < src.length; ti++) {
-                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
-            }
-            newPage('layout:' + page.id);
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', page.type, 'layout:' + page.id);
-        }
-    };
-    // Inserted pages anchored after a specific page key (page management).
-    const _layoutAfter = (key) => (editorialContent.layoutPages || []).filter(p => p.afterKey === key);
-    const _afterKeyCount = (key) => { let n = 0; _layoutAfter(key).forEach(p => { n += 1 + _afterKeyCount('layout:' + p.id); }); return n; };
-    const drawLayoutPage = async (page) => {
-        if (page.type === 'toc' || page.type === 'artindex') { newPage('layout:' + page.id); _autoPages.push({ pageNum: pageNum, type: page.type }); await emitAfterKey('layout:' + page.id); return; }
-        const src = page.elements || [];
-        const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-        for (let ti = 0; ti < src.length; ti++) { if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} } }
-        newPage('layout:' + page.id);
-        _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', page.type, 'layout:' + page.id);
-    };
-    const emitAfterKey = async (key) => { if (!key) return; for (const p of _layoutAfter(key)) { await drawLayoutPage(p); await emitAfterKey('layout:' + p.id); } };
-
-    await emitAfterKey('__start__');
-    // — Cover —
-    if (inc.cover && !_fixedHidden('cover')) {
-        newPage('fixed:cover');
-        // Bake the theme's background image ONCE, upfront — both branches
-        // below need it, and _drawCoverPage will re-read the same _bakedImg
-        // rather than re-decoding.
-        try { await _pageThemeBake('fixed:cover'); } catch (e) {}
-        const cov = editorialContent.coverPage;
-        if (cov && ((Array.isArray(cov.elements) && cov.elements.length) || (editorialContent.annotations && editorialContent.annotations['fixed:cover'] && editorialContent.annotations['fixed:cover'].length))) {
-            // A cover with any elements (a title, virtually always) took
-            // this branch, which draws via _drawMoodboardPage — a function
-            // with no awareness of the page-theme system at all. The theme's
-            // background colour/image was silently never painted here, even
-            // though it renders fine on a bare/empty cover (the other branch
-            // below). Paint it explicitly first so the elements draw on top.
-            const stored0 = _pageThemes()['fixed:cover'] || {};
-            const _ink0 = _applyPageTheme(doc, 'fixed:cover', PW, PH, stored0._bakedImg || null);
-            // The background paint alone doesn't make text legible on a dark
-            // theme — _drawMoodboardPage has no idea this page is dark, so
-            // without this it would keep drawing default-dark text straight
-            // onto a dark background. Installing the remap makes every
-            // subsequent setTextColor/setDrawColor call on THIS page
-            // automatically flip to a light colour when needed; removing it
-            // first clears any leftover remap a previous (dark) page left on
-            // this same jsPDF document.
-            _themeRemapRemove(doc);
-            if (_ink0 && _ink0.dark) _themeRemapInstall(doc);
-            const src = cov.elements;
-            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-            for (let ti = 0; ti < src.length; ti++) {
-                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
-            }
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker', 'fixed:cover');
-        } else {
-            _drawCoverPage(doc, logos, pageNum, meta);
-        }
-    }
-    await emitAfterKey('fixed:cover');
-    await emitLayout('afterCover');
-    // — Process & Timeline (real) —
-    if (inc.timeline) { newPage('card:timeline'); _drawTimelinePage(doc, logos, pageNum, meta, editorialContent.timeline); }
-    await emitAfterKey('card:timeline');
-    await emitLayout('afterTimeline');
-    // — Project Understanding (real): custom freeform page if built, else prose —
-    if (inc.understanding && !_fixedHidden('understanding')) {
-        newPage('fixed:understanding');
-        const un = editorialContent.understandingPage;
-        if (un && Array.isArray(un.elements) && un.elements.length) {
-            const src = un.elements;
-            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-            for (let ti = 0; ti < src.length; ti++) {
-                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
-            }
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'narrative');
-        } else {
-            _drawProsePage(doc, logos, pageNum, meta, 'PROJECT UNDERSTANDING', editorialContent.understanding, 'Add project understanding copy in the Presentation PDF dialog.');
-        }
-    }
-    await emitAfterKey('fixed:understanding');
-    await emitLayout('afterUnderstanding');
-    // — Art Narrative (real): custom freeform page if built, else prose —
-    if (inc.narrative && !_fixedHidden('narrative')) {
-        newPage('fixed:narrative');
-        const nv = editorialContent.narrativePage;
-        if (nv && Array.isArray(nv.elements) && nv.elements.length) {
-            const src = nv.elements;
-            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-            for (let ti = 0; ti < src.length; ti++) {
-                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
-            }
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'narrative');
-        } else {
-            _drawProsePage(doc, logos, pageNum, meta, 'ART NARRATIVE', editorialContent.narrative, 'Add narrative copy in the Presentation PDF dialog.');
-        }
-    }
-    await emitAfterKey('fixed:narrative');
-    await emitLayout('afterNarrative');
-    // — Art Collection Strategy (real): custom freeform page if built, else tiers —
-    if (inc.strategy && !_fixedHidden('strategy')) {
-        newPage('fixed:strategy');
-        const st = editorialContent.strategyPage;
-        if (st && Array.isArray(st.elements) && st.elements.length) {
-            const src = st.elements;
-            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-            for (let ti = 0; ti < src.length; ti++) {
-                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
-            }
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'narrative');
-        } else {
-            _drawStrategyPage(doc, logos, pageNum, meta, editorialContent.strategy);
-        }
-    }
-    // — Layout pages (default anchor): freeform image / text / arrow pages —
-    await emitAfterKey('fixed:strategy');
-    await emitLayout('afterStrategy');
-    // — Frame Recommendations (real): summary of frames specified across rows —
-    if (inc.frameRec) {
-        const projFrames = await _collectProjectFrames();
-        const recPages = _frameRecPlanPages(projFrames, _frameRecCfg());
-        recPages.forEach(pg => { newPage('card:frameRec'); _drawFrameRecPage(doc, logos, pageNum, meta, pg); });
-    }
-    await emitAfterKey('card:frameRec');
-    await emitLayout('beforeFloorplan');
-    // — Build the emission plan: interleave each level's floorplan key with that
-    //   level's spec pages (Level 1 plan → Level 1 specs → Level 2 plan → …),
-    //   breaker-style. Page numbers are precomputed so every key→spec forward
-    //   link and spec→key back-link resolves exactly. —
-    const _fpLevelKeyPage = {};
-    _fpMigrate();
-    const _doKeys = !!inc.floorplanKey;
-    const _specRows = inc.spec ? rows.slice() : [];
-    const _specTplKey = (editorialContent.specTemplate || 'classic');
-    const _specIsGroup = !!(SPEC_TEMPLATES[_specTplKey] && SPEC_TEMPLATES[_specTplKey].group);
-    const _isInstall = (_specTplKey === 'installGuide');
-    // Mirrors _deckPageList: breakers apply in Per-piece AND Group A/B/C mode,
-    // and only Install-guide mode opts out (it already draws every wall).
-    const _useBreakers = _elevBreakers() && !_isInstall;
-    // A "unit" is one spec page. Normally one piece per page; for a set template
-    // (group:true) a whole set-piece group (ART.005-A/-B/-C…) shares one page.
-    // With breakers on we also group, so each wall-group gets an elevation page.
-    const _unitsFromRows = (rs) => _buildSpecUnits(rs, _specIsGroup || _useBreakers);
-    const _units = _unitsFromRows(_specRows);
-    const _installUnits = () => (elevations || []).map((e, ei) => ({ elev: e, idx: ei })).filter(o => o.elev && o.elev.frames && o.elev.frames.some(f => f && f.active !== false));
-    // Breaker: a group becomes [full-page wall elevation] + [individual specs in the per-piece template].
-    // The spec step(s) for one unit. In Group A/B/C a flat graphic has to come OUT of
-    // its group onto its own sheet — the same split _deckPageList does, through the
-    // same _partitionFlatMembers. Without it the export sent a wallcovering through
-    // _drawSpecSetPageBody and drew it as a set member: a letter, a frame mockup of a
-    // 240" wall and unstyled spec text, while the studio preview beside it showed the
-    // correct egdDetail sheet.
-    // A MANUAL group is deliberately left alone — that grouping is the user's explicit
-    // instruction. Per-piece mode needs nothing: it already resolves each row's own
-    // template, and _specTplResolve returns egdDetail for a flat row.
-    const _specStepsFor = (u, li) => {
-        if (_specIsGroup && !u._manual) {
-            const part = _partitionFlatMembers(u.members);
-            if (part) {
-                const out = part.flats.map(m => ({
-                    type: 'spec', unit: { rep: m, members: [m], key: (m.id || '') },
-                    _forceTpl: 'egdDetail', li: li
-                }));
-                // Framed members keep the group's key, so per-page settings and
-                // approval stay attached and the page count stays right.
-                if (part.rest.length) out.push({ type: 'spec', li: li,
-                    unit: Object.assign({}, u, { members: part.rest, rep: part.rest[0] }) });
-                return out;
-            }
-        }
-        return [{ type: 'spec', unit: u, li: li }];
-    };
-    // Mirrors specPagesFor in _deckPageList through the one shared rule.
-    const _stepsFor = (u, li) => {
-        const ov = u._manual ? null : _catOverviewFor(u, _units);
-        const steps = _stepsFor0(u, li);
-        if (ov) steps.unshift.apply(steps, _catOverviewDescs(ov).map(d => ({ type: 'catov', place: ov, part: d.part, li: li, _pageKey: d._ovKey })));
-        return steps;
-    };
-    const _stepsFor0 = (u, li) => {
-        if (_useBreakers && !u._manual) {
-            const out = []; const members = u.members || [];
-            // THE SAME shared rule the studio calls. These were two hand-written copies
-            // of one loop, which is how the PDF grows a page the preview never showed.
-            const br = _breakerElevFor(u, _units);
-            const ge = br && br.elev, gi = br ? br.idx : -1;
-            // _ovKey must ride along exactly like the studio preview's breaker
-            // desc builds it (see _deckPageList): _drawInstallGuidePage keys
-            // EVERYTHING breaker-specific off 'elevgrp:' — the elevation-only
-            // config in _igCfg, the clean no-guides capture options, the cache
-            // key, and per-page overrides. Without it the export resolved this
-            // page as a regular install-guide page and rendered the full spec
-            // chrome, while the preview (which had the key) stayed clean.
-            // …and the same skip the studio applies, through the SAME predicate. A
-            // wall that is only wallcovering / window film already prints its full
-            // dimensioned elevation on its own sheet, so a breaker is that drawing
-            // twice — and a page the preview doesn't show is worse than either.
-            if (ge && !_breakerSkipUnit(members)) out.push({ type: 'install', elev: Object.assign({}, ge, { name: _breakerNameFor(u, br), _noPlan: _breakerNoPlan(), _idx: gi, _ovKey: _breakerOvKeyFor(u, br) }), idx: gi, _groupKey: u.key, li: li });
-            // Group A/B/C: the breaker is followed by the ONE grouped spec page,
-            // not a page per member. No _forceTpl, so the walk below routes it
-            // through _drawSpecSetPage exactly as it would without a breaker.
-            if (_specIsGroup) out.push.apply(out, _specStepsFor(u, li));
-            else members.forEach(m => out.push({ type: 'spec', unit: { rep: m, members: [m], key: m.id }, _forceTpl: _specTplResolve(m.id || ''), li: li }));
-            return out;
-        }
-        return _specStepsFor(u, li);
-    };
-    const plan = [];
-    if (_isInstall) {
-        // Install guide: one page per elevation (full wall), no per-piece repeats.
-        if (_doKeys) {
-            // Shared with the studio's install branch, see _deckEmitLevels.
-            _deckEmitLevels(_units).forEach(li => { plan.push({ type: 'key', li: li }); _planDetailsSorted(li).forEach((pd) => { if (!pd.hidden) plan.push({ type: 'detail', li: li, pd: pd, pi: pd.id }); }); });
-        }
-        if (inc.spec) _installUnits().forEach(o => plan.push({ type: 'install', elev: o.elev, idx: o.idx }));
-    } else if (_doKeys || inc.spec) {
-        // SAME _deckPlanSlots the studio uses, so the PDF cannot grow, lose or reorder a
-        // page relative to the preview. Only the mapping from slot to render STEP is
-        // local — a step is not a page descriptor, which is why the shared function hands
-        // back neither.
-        _deckPlanSlots(_units, { keys: !!_doKeys, spec: !!inc.spec }).forEach(sl => {
-            if (sl.t === 'key') plan.push({ type: 'key', li: sl.li });
-            else if (sl.t === 'detail') plan.push({ type: 'detail', li: sl.li, pd: sl.pd, pi: sl.pd.id });
-            else if (sl.t === 'unit') _stepsFor(sl.u, sl.li).forEach(s => plan.push(s));
-        });
-    }
-    // Flat graphics sharing a wall share a sheet — the SAME merge the studio applies,
-    // and it has to be applied here too because these are two separate page-list
-    // builders. Deck Studio showed one combined sheet while the PDF still printed two,
-    // which is the exact failure mode the "TWO PAGE-LIST BUILDERS" note in CLAUDE.md
-    // was written about, one commit after writing it. Done in place, before anything
-    // counts pages, so page numbers and the id→page map see the merged list.
-    {
-        const _merged = _mergeFlatSteps(plan);
-        if (_merged.length !== plan.length) { plan.length = 0; _merged.forEach(s => plan.push(s)); }
-    }
-    // Every step (key or spec) consumes one page; map every member id to its page.
+    // Every piece id -> the page it prints on, computed up front so a floorplan key
+    // drawn BEFORE its spec pages can still link forward to them.
     const idToPage = {};
-    let _planLastPage = pageNum;   // highest page number the plan will reach
     {
-        let _p = pageNum;
-        for (const step of plan) {
-            _p++;
-            const _sk = step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'detail' ? ('plandetail:' + (step.pd.id || step.pi)) : step.type === 'install' ? (step._groupKey != null ? ('spec:elevgrp:' + step._groupKey) : ('spec:elev:' + step.idx)) : ('spec:' + (step.unit && step.unit.key));
-            if (step.type === 'spec' && step.unit) step.unit.members.forEach(m => { if (m && m.id) idToPage[m.id] = _p; });
-            else if (step.type === 'install' && step.elev && step.elev.frames) step.elev.frames.forEach(f => { if (f && f.id) idToPage[f.id] = _p; });
-            _p += _afterKeyCount(_sk);
+        let _p = 0;
+        for (const d of pages) {
+            const first = _p + 1;
+            _p += _span(d);
+            if (d.kind !== 'spec') continue;
+            if (d._install) ((d.elev && d.elev.frames) || []).forEach(f => { if (f && f.id) idToPage[f.id] = first; });
+            else (d.members || [d.row]).forEach(m => { if (m && m.id) idToPage[m.id] = first; });
         }
-        _planLastPage = _p;
     }
-    // Resolve the export scope to a set of page numbers NOW, so we can skip the
-    // expensive rendering of out-of-scope pages instead of drawing all 235 and
-    // deleting later. `current` maps the selected deck page to its built page(s).
+    // Resolve the export scope NOW, so out-of-scope pages are created (page numbers and
+    // links must not move) but not rendered, instead of drawing all 235 and deleting.
     const _sc = window._exportScope || { mode: 'all' };
     let _scopeSet = null;   // null = render everything
     if (_sc.mode === 'range') {
@@ -38336,126 +38113,53 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
         if (!_scopeSet.size) _scopeSet = null;
     } else if (_sc.mode === 'current') {
         _scopeSet = new Set();
-        const ck = (typeof _dsPages !== 'undefined' && _dsPages && _dsPages[_dsIndex]) ? _deckPageKey(_dsPages[_dsIndex]) : null;
-        // The key→page map is filled as pages are created; for 'current' we match
-        // by key during the build via _drawIfScoped below.
-        _scopeSet._byKey = ck;
+        _scopeSet._byKey = (typeof _dsPages !== 'undefined' && _dsPages && _dsPages[_dsIndex]) ? _deckPageKey(_dsPages[_dsIndex]) : null;
     }
-    // True when the page currently being built should be fully rendered.
     const _inScope = (pn, key) => {
         if (!_scopeSet) return true;
         if (_scopeSet._byKey) return key === _scopeSet._byKey;
         return _scopeSet.has(pn);
     };
+    const env = {
+        logos: logos, meta: meta, PW: PW, PH: PH, M: M, idToPage: idToPage, frPages: _frPages,
+        // A classic spec page links back to its own level's key, else the first one.
+        backPage: (r) => _fpLevelKeyPage[(r && r.level) || 0] || fpKeyPageNum
+    };
 
-    // — Emit the plan: floorplan keys and spec pages, interleaved per level —
-    for (const step of plan) {
-        // _pageKey wins when a step carries one: a merged flat sheet's studio title is the
-        // joined codes while its unit.key is only the first, and a pinned divider anchors
-        // to the title. See _mergeFlatSteps.
-        const stepKey = step._pageKey ? step._pageKey : step.type === 'key' ? ('floorplan:' + step.li) : step.type === 'detail' ? ('plandetail:' + (step.pd.id || step.pi)) : step.type === 'install' ? (step._groupKey != null ? ('spec:elevgrp:' + step._groupKey) : ('spec:elev:' + step.idx)) : ('spec:' + (step.unit && step.unit.key));
-        newPage(stepKey);
-        const _scoped = _inScope(pageNum, stepKey);
-        if (step.type === 'key') {
-            _fpLevelKeyPage[step.li] = pageNum;
-            if (!_scoped) { await emitAfterKey(stepKey); continue; }
-            const lv = floorplanLevels[step.li] || {};
-            const entries = _fpKeyEntries(step.li, idToPage);
-            let planImg = null;
-            if (lv.imageData) { try { planImg = await _loadImg(lv.imageData); } catch (e) {} }
-            _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, lv.name || ('Level ' + (step.li + 1)));
-            if (!fpKeyPageNum) fpKeyPageNum = pageNum;
-            await emitAfterKey(stepKey);
+    for (const desc of pages) {
+        const key = _deckPageKey(desc);
+        if (desc.kind === 'layout' && desc.page && (desc.page.type === 'toc' || desc.page.type === 'artindex')) {
+            // Reserved now, drawn in the post-pass once every page number is known.
+            newPage(key); _autoPages.push({ pageNum: pageNum, type: desc.page.type });
             continue;
         }
-        if (step.type === 'detail') {
-            if (_scoped) { await _drawPlanDetailPage(doc, logos, pageNum, meta, step.pd); _linkSpecPlanRects(doc, stepKey, _fpLevelKeyPage, fpKeyPageNum); }
-            await emitAfterKey(stepKey);
-            continue;
-        }
-        if (step.type === 'install') {
-            if (_scoped) { await _drawInstallGuidePage(doc, logos, pageNum, meta, step.elev, { PW: PW, PH: PH, M: M }); _linkSpecPlanRects(doc, stepKey, _fpLevelKeyPage, fpKeyPageNum); }
-            await emitAfterKey(stepKey);
-            continue;
-        }
-        if (step.type === 'catov') {
-            if (_scoped) await _drawCatOverviewPage(doc, logos, pageNum, meta, step.place, { PW: PW, PH: PH, M: M, part: step.part || 0 });
-            await emitAfterKey(stepKey);
-            continue;
-        }
-        if (!_scoped) { await emitAfterKey(stepKey); continue; }   // spec page out of scope — skip heavy render
-        const r = step.unit.rep;
-        const _specTpl = step._forceTpl || (step.unit._manual ? (step.unit.layout || 'setRow') : _specTplResolve(step.unit.key || (r.id || '')));
-        if (!step._forceTpl && (_specIsGroup || step.unit._manual)) {
-            await _drawSpecSetPage(doc, logos, pageNum, meta, step.unit, _specTpl, { PW: PW, PH: PH, M: M });
-        } else if (SPEC_TEMPLATES[_specTpl] && SPEC_TEMPLATES[_specTpl].freeform) {
-            // Custom free layout: the page is a blank canvas; mockups/text/images/
-            // arrows are all annotations, painted by the annotation post-pass.
-            // The footer still prints — project info belongs on every page.
-            _drawPdfFooter(doc, logos, pageNum, meta);
-        } else if (_specTpl === 'installGuide') {
-            await _drawInstallGuidePage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M });
-        } else if (SPEC_TEMPLATES[_specTpl] && SPEC_TEMPLATES[_specTpl].flat) {
-            // Wallcovering / window film — its own single layout. Must sit AHEAD of the
-            // generic template branch: egdDetail carries `custom: true` (it has no
-            // coordinate map) and would otherwise fall through to _drawSpecPageTemplate,
-            // which would draw a frameRight fallback with a frame mockup on it.
-            await _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M, members: step.unit.members });
-        } else if (_specTpl !== 'classic' && SPEC_TEMPLATES[_specTpl] && !SPEC_TEMPLATES[_specTpl].legacy) {
-            await _drawSpecPageTemplate(doc, logos, pageNum, meta, r, _specTpl, { PW: PW, PH: PH, M: M });
-        } else {
-            const backPage = _fpLevelKeyPage[(r.level || 0)] || fpKeyPageNum;
-            await _drawClassicSpecPage(doc, logos, pageNum, meta, r, { PW: PW, PH: PH, M: M, backPage: backPage });
-        }
-        _linkSpecPlanRects(doc, stepKey, _fpLevelKeyPage, fpKeyPageNum);
-        await emitAfterKey(stepKey);
-    }
-    
-    await emitLayout('afterSpec');
-
-    await emitLayout('beforeContacts');
-    // — Good Art. Good People. (real) —
-    if (inc.slogan && !_fixedHidden('slogan')) {
-        newPage('fixed:slogan');
-        // Same fix as the cover page above: bake the theme background once
-        // upfront, and paint it explicitly when the slogan page has elements
-        // (the branch that otherwise never painted it at all).
-        try { await _pageThemeBake('fixed:slogan'); } catch (e) {}
-        const sg = editorialContent.sloganPage;
-        if (sg && ((Array.isArray(sg.elements) && sg.elements.length) || (editorialContent.annotations && editorialContent.annotations['fixed:slogan'] && editorialContent.annotations['fixed:slogan'].length))) {
-            const stored0 = _pageThemes()['fixed:slogan'] || {};
-            const _ink0 = _applyPageTheme(doc, 'fixed:slogan', PW, PH, stored0._bakedImg || null);
-            _themeRemapRemove(doc);
-            if (_ink0 && _ink0.dark) _themeRemapInstall(doc);
-            const src = sg.elements;
-            const tiles = src.map(t => Object.assign({}, t, { _img: null }));
-            for (let ti = 0; ti < src.length; ti++) {
-                if ((src[ti].type || 'image') === 'image' && src[ti].img) { try { tiles[ti]._img = await _loadImg(src[ti].img); } catch (e) {} }
+        if (desc.kind === 'card' && desc.type === 'frameRec') {
+            for (let i = 0; i < _frPages.length; i++) {
+                newPage(key);
+                if (_inScope(pageNum, key)) await _drawDeckPage(doc, desc, Object.assign({}, env, { pageNum: pageNum, frPage: i }));
             }
-            _drawMoodboardPage(doc, logos, pageNum, meta, tiles, '', 'breaker', 'fixed:slogan');
-        } else {
-            _drawSloganPage(doc, logos, pageNum, meta);
+            continue;
         }
-        await emitAfterKey('fixed:slogan');
+        newPage(key);
+        if (desc.kind === 'floorplan') { _fpLevelKeyPage[desc.level] = pageNum; if (!fpKeyPageNum) fpKeyPageNum = pageNum; }
+        if (!_inScope(pageNum, key)) continue;
+        // A freeform spec page draws nothing here (its content is all annotations); the
+        // footer sweep below gives it its footer.
+        await _drawDeckPage(doc, desc, Object.assign({}, env, { pageNum: pageNum }));
+        if (desc.kind === 'spec' || desc.kind === 'planDetail') _linkSpecPlanRects(doc, key, _fpLevelKeyPage, fpKeyPageNum);
     }
-    // — Thank You / contacts (real) —
-    if (inc.contacts && !_fixedHidden('contacts')) { newPage('card:contacts'); try { await _pageThemeBake('card:contacts'); } catch (e) {} let _resolvedContacts; try { _resolvedContacts = await _contactsResolved(); } catch (e) { _resolvedContacts = editorialContent.contacts || ''; } _drawThankYouPage(doc, logos, pageNum, meta, _resolvedContacts); await emitAfterKey('card:contacts'); }
 
     if (pageNum === 0) { _toast('Nothing selected', 'No pages were included. Pick at least one section.'); return; }
     // — Overlay text boxes per page —
     if (_autoPages.length) {
         const keyToPage = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) keyToPage[_pageKeys[p]] = p; }
-        const tocEntries = _deckTocList(_deckPageList()).map(e => ({ label: e.label, page: keyToPage[e.key] || null })).filter(e => e.page);
+        const tocEntries = _deckTocList(pages).map(e => ({ label: e.label, page: keyToPage[e.key] || null })).filter(e => e.page);
         const idxEntries = _artIndexList().map(e => ({ id: e.id, code: e.code, location: e.location, status: e.status, page: idToPage[e.id] || null }))
             .sort((a, b) => (a.page || 1e9) - (b.page || 1e9) || (a.id < b.id ? -1 : 1));
         for (const ap of _autoPages) {
             try { doc.setPage(ap.pageNum); if (ap.type === 'toc') _drawTOCPage(doc, logos, ap.pageNum, meta, tocEntries); else _drawArtIndexPage(doc, logos, ap.pageNum, meta, idxEntries); } catch (e) {}
         }
         try { doc.setPage(pageNum); } catch (e) {}
-    }
-    {
-        const _emitted = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) _emitted[_pageKeys[p]] = 1; }
-        for (const pg of (editorialContent.layoutPages || [])) { if (!_emitted['layout:' + pg.id]) { await drawLayoutPage(pg); await emitAfterKey('layout:' + pg.id); } }
     }
     // — Footer safety sweep: EVERY page gets a footer —
     // Each page drawer calls _drawPdfFooter itself, and one that forgets ships a
@@ -38515,8 +38219,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
             if (keep.size) { for (let p = pageNum; p >= 1; p--) { if (!keep.has(p)) { try { doc.deletePage(p); } catch (e) {} } } }
         }
     } catch (e) {}
-    const single = !opts.all && rows[0];
-    const fname = single ? `${(rows[0].id || 'spec').toString().replace(/[\\/:*?"<>|]/g, '_')}_spec.pdf` : 'FRAME_Presentation.pdf';
+    const fname = 'FRAME_Presentation.pdf';
     // Last line of defence for a cancel. The page walk above is peppered with
     // `try { } catch (e) {}` blocks that deliberately swallow per-page failures
     // so one bad asset can't kill a whole deck — but that means one of them
@@ -41146,7 +40849,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
+                body: `<strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
+<strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
 <strong>18.30</strong> <strong>Guided tour</strong>: a walk through the real screens in the order a deck is built (list the codes, spec, hang, pin, build, generate). It dims everything but the control it is talking about, moves between the views for you, and has an All steps list to jump around. It only looks, so it never changes your project. Start it from Help > Start here, the start screen, or the next-step bar; Help can also tour just the screen you are on.<br><br>
 <strong>18.29</strong> A CSV import follows the same rules: the export now writes a Category column at the end, the import puts each row back in its category (or works it out from the code and product), and a row whose code is not a real item code (like Lobby piece) is given the next code of its type, with a list of what changed. Lobby-A and Lobby-B stay together as one set. Making a frame a new item from Elevations keeps its type too.<br><br><strong>18.28</strong> Nothing floats. <strong>+ Add Wall</strong> asks which item code the wall is for: a code that is not on a wall yet (it hangs there, centred at hang height), or a new code with its category and frame set. It no longer makes a bare Elevation with no code. <strong>+ Add Item</strong> in the Frame Dashboard asks the same thing: add pieces to an existing code (two more frames on a 5 set salon hang become ART.3F and ART.3G, and go up on its wall beside the others without moving them), or start a new code of a category. Duplicating a piece keeps its type, so a copy of EGD.1 is EGD.2, not ART. The empty-wall hint no longer mentions a generic frame button that does not exist.<br><br><strong>18.27</strong> In Deck Studio, clicking the elevation thumbnail on a spec page now opens that wall in Elevations instead of the floorplan. A <strong>Back to</strong> button at the top of the Elevations panel takes you straight back to the spec page you came from. The floorplan thumbnail still opens the floorplan.<br><br>
 <strong>18.26</strong> Fixed the floorplan button on spec pages: on a deck with artwork and walls, some spec pages lost their link while the page thumbnails were building, so clicking the plan did nothing. Every spec page now keeps its own link.<br><br>

@@ -100,15 +100,19 @@ const fs = require('fs');
 
     __check('source guard: both fixed cover/slogan branches now install/remove the remap correctly', () => {
       const S = window.__appSrc;
-      const coverIdx = S.indexOf("_applyPageTheme(doc, 'fixed:cover', PW, PH, stored0._bakedImg || null);");
-      const sloganIdx = S.indexOf("_applyPageTheme(doc, 'fixed:slogan', PW, PH, stored0._bakedImg || null);");
-      if (coverIdx < 0 || sloganIdx < 0) throw new Error('applyPageTheme calls not found');
-      const coverNearby = S.slice(coverIdx, coverIdx + 1200);
-      const sloganNearby = S.slice(sloganIdx, sloganIdx + 1200);
-      if (coverNearby.indexOf('_themeRemapInstall(doc)') < 0) throw new Error('cover branch missing remap install');
-      if (sloganNearby.indexOf('_themeRemapInstall(doc)') < 0) throw new Error('slogan branch missing remap install');
-      if (coverNearby.indexOf('_themeRemapRemove(doc)') < 0) throw new Error('cover branch missing remap removal (stale-remap guard)');
-      if (sloganNearby.indexOf('_themeRemapRemove(doc)') < 0) throw new Error('slogan branch missing remap removal (stale-remap guard)');
+      // 18.32: cover and slogan share ONE branch of _drawDeckPage (gated on
+      // _THEME_SELF_KEYS), used by both the export and the preview.
+      const d = S.indexOf('async function _drawDeckPage(');
+      const i = S.indexOf("if (desc.kind === 'fixed') {", d);
+      const nearby = S.slice(i, S.indexOf("if (desc.kind === 'card') {", i));
+      if (d < 0 || i < 0) throw new Error('the shared fixed-page branch was not found');
+      const paint = nearby.indexOf('_applyPageTheme(doc, fk, PW, PH, st._bakedImg || null);');
+      if (paint < 0) throw new Error('applyPageTheme call not found');
+      const rm = nearby.indexOf('_themeRemapRemove(doc)'), ins = nearby.indexOf('_themeRemapInstall(doc)');
+      if (rm < 0) throw new Error('remap removal missing (stale-remap guard)');
+      if (ins < 0) throw new Error('remap install missing');
+      if (!(paint < rm && rm < ins)) throw new Error('the remap is not removed then installed after the paint');
+      if (!_THEME_SELF_KEYS['fixed:cover'] || !_THEME_SELF_KEYS['fixed:slogan']) throw new Error('cover or slogan no longer paints its own theme');
     });
   `;
   try { window.__appSrc = JSON.stringify(src); window.eval('window.__appSrc = ' + window.__appSrc + ';\n' + src + '\n' + testBlock); }

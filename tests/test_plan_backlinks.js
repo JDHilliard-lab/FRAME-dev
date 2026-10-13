@@ -102,9 +102,8 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     if (links.length !== 1 || links[0].page !== 4) throw new Error('not linked to the level floorplan: ' + JSON.stringify(links));
   });
   await check('the PDF export links the plan detail step, and Deck Studio lays a click-through over its plan', async () => {
-    const i = APP.indexOf("if (step.type === 'detail') {");
-    const seg = APP.slice(i, APP.indexOf("if (step.type === 'install') {", i));
-    if (seg.indexOf('_linkSpecPlanRects(') < 0) throw new Error('detail step does not link');
+    // 18.32: the export walks the studio list, one link call for spec AND plan detail pages.
+    if (APP.indexOf("if (desc.kind === 'spec' || desc.kind === 'planDetail') _linkSpecPlanRects(doc, key, _fpLevelKeyPage, fpKeyPageNum);") < 0) throw new Error('detail step does not link');
     // 18.25: the element is built by _dsPlanBacklinkEl, shared with the spec pages.
     const j = APP.indexOf('function _dsPlanBacklinkEl(');
     const body = APP.slice(j, APP.indexOf('function _dsPlanBacklinks(', j));
@@ -214,8 +213,12 @@ const docStub = (links) => new Proxy({ internal: { pageSize: { getWidth: () => 9
     const sb = APP.slice(si, APP.indexOf('function _previewQuality(', si));
     if (sb.indexOf('_specPlanRectsBegin(rec,') < 0 || sb.indexOf('_specPlanRectsCommit(rec)') < 0) throw new Error('spec preview does not own its rects');
     if (APP.indexOf('_specPlanRects[_curPageKey]') >= 0) throw new Error('something still files rects by the global key');
-    const pi = APP.indexOf("} else if (desc.kind === 'planDetail') {", APP.indexOf('async function renderDeckPageCanvas('));
-    if (APP.slice(pi, pi + 300).indexOf('_specPlanRectsCommit(rec)') < 0) throw new Error('plan detail preview does not commit');
+    // 18.32: renderDeckPageCanvas begins and commits around the shared dispatch for
+    // every page kind, plan details included.
+    const pi = APP.indexOf('async function renderDeckPageCanvas(');
+    const pb = APP.slice(pi, APP.indexOf('function _dsThumbCacheKey(', pi));
+    const b0 = pb.indexOf('_specPlanRectsBegin(rec,'), d0 = pb.indexOf('_drawDeckPage('), c0 = pb.indexOf('_specPlanRectsCommit(rec)');
+    if (b0 < 0 || c0 < 0 || !(b0 < d0 && d0 < c0)) throw new Error('plan detail preview does not commit');
   });
 
   await check('18.27 EXACT ASK: the elevation thumbnail opens ITS WALL, with a way back to this spec page', async () => {

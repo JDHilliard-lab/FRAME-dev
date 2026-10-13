@@ -1,7 +1,8 @@
 // REPORTED BUG: "the EGD is getting an elevation breaker page in the generated PDF
 // even though it is not showing in Deck Studio."
 //
-// Cause: there are TWO page-list builders. _deckPageList drives Deck Studio; the PDF
+// (18.32: there is now ONE. The export walks _deckPageList; see test_export_walks_deck.)
+// Cause: there were TWO page-list builders. _deckPageList drives Deck Studio; the PDF
 // export's _stepsFor mirrors it BY HAND and its own comment says "Mirrors
 // _deckPageList". The flat-graphic breaker skip was written inline in _deckPageList
 // only, so the studio dropped the breaker and the export still printed one.
@@ -36,6 +37,12 @@ const path = require('path');
     const S = window.__appSrc;
     scheduleAutosave = () => {}; pushHistory = () => {};
 
+    // Since 18.32 the export has no page list of its own; it walks the studio's.
+    const __exportWalksStudio = () => {
+      const a = S.indexOf('async function _buildSpecPagePDF');
+      const body = S.slice(a, S.indexOf('\\nasync function exportDashNativePNG', a));
+      if (body.indexOf('const pages = _deckPageList();') < 0) throw new Error('the PDF export no longer walks _deckPageList');
+    };
     const flat = (id) => ({ id: id, product: 'Wallcovering (EGD)', extW: 192, extH: 120, location: 'Lobby' });
     const framed = (id) => ({ id: id, product: 'Framed Art', extW: 24, extH: 30, location: 'Lobby' });
 
@@ -66,21 +73,20 @@ const path = require('path');
       editorialContent.breakerSkipFlat = undefined;
     });
 
-    __check('BOTH page-list builders call the shared predicate — not one, not a copy', () => {
+    __check('the one page list calls the shared predicate, and the PDF walks that list', () => {
       // This is the actual regression guard. The bug was a clause living in one
       // builder while the other had a comment claiming to mirror it.
       const uses = (S.match(/_breakerSkipUnit\\(/g) || []).length;
-      if (uses < 3) throw new Error('expected the definition plus both callers, found ' + uses + ' mentions');
+      // 18.32: the definition plus ONE caller. The export walks _deckPageList, so a
+      // second caller would mean a second page list had grown back.
+      if (uses !== 2) throw new Error('expected the definition plus _deckPageList, found ' + uses + ' mentions');
       // The studio builder.
       const dpl = S.indexOf('function _deckPageList');
       if (dpl < 0) throw new Error('_deckPageList not found');
       if (S.slice(dpl, dpl + 12000).indexOf('_breakerSkipUnit(') < 0) throw new Error('_deckPageList does not use the shared predicate');
-      // The export builder.
-      const sf = S.indexOf('const _stepsFor = (u, li) =>');
-      if (sf < 0) throw new Error('_stepsFor not found');
-      if (S.slice(sf, sf + 3000).indexOf('_breakerSkipUnit(') < 0) {
-        throw new Error('the PDF export still pushes a breaker without asking the shared predicate');
-      }
+      // The export. Since 18.32 it has no builder of its own: it walks _deckPageList,
+      // so it cannot print a breaker the studio skipped (test_export_walks_deck runs it).
+      __exportWalksStudio();
       // And the old inline copy must not come back.
       if (S.indexOf('_flatOnly && _breakerSkipFlat()') >= 0) throw new Error('the inline copy of the skip is back in _deckPageList');
     });
@@ -100,29 +106,24 @@ const path = require('path');
       // Without this the export renders a wallcovering through _drawSpecSetPageBody:
       // a letter, a frame mockup of a 240" wall, unstyled spec text. The studio
       // preview beside it shows the correct egdDetail sheet.
-      const sf = S.indexOf('const _specStepsFor = (u, li) =>');
-      if (sf < 0) throw new Error('the export has no flat-split step builder');
-      const body = S.slice(sf, sf + 1400);
-      if (body.indexOf('_partitionFlatMembers(') < 0) throw new Error('it does not use the shared partition');
-      if (body.indexOf("_forceTpl: 'egdDetail'") < 0) throw new Error('a split-out flat page must force its own sheet');
-      // _forceTpl matters specifically: the dispatch tests
-      // "!step._forceTpl && _specIsGroup" FIRST, so without it the page falls
-      // straight back into the set renderer this split exists to avoid.
-      const disp = S.indexOf('if (!step._forceTpl && (_specIsGroup || step.unit._manual))');
-      if (disp < 0) throw new Error('the group dispatch branch changed shape — recheck that _forceTpl still bypasses it');
-      // Both export paths, breaker and non-breaker, must go through it.
-      const stepsFor = S.slice(S.indexOf('const _stepsFor = (u, li) =>'), S.indexOf('const _stepsFor = (u, li) =>') + 3000);
-      if ((stepsFor.match(/_specStepsFor\\(/g) || []).length < 2) {
-        throw new Error('only one of the breaker / non-breaker export paths splits flats');
-      }
+      // 18.32: the PDF walks _deckPageList, so the studio's split IS the export's split.
+      __exportWalksStudio();
+      // Both studio paths, breaker and non-breaker, go through it.
+      const dpl = S.indexOf('function _deckPageList');
+      const body = S.slice(dpl, S.indexOf('\\nfunction ', dpl + 10));
+      if (body.split('_splitFlatUnits(u)').length - 1 < 2) throw new Error('only one of the breaker / non-breaker paths splits flats');
+      // And the one dispatch sends a flat page to its own sheet BEFORE the generic
+      // template branch, where egdDetail's custom flag would draw a frame mockup.
+      const d = S.indexOf('async function _drawDeckSpecPage');
+      const db = S.slice(d, S.indexOf('\\n}\\n', d));
+      if (db.indexOf('T.flat') < 0 || db.indexOf('T.flat') > db.indexOf('_drawSpecPageTemplate(')) throw new Error('the flat branch is missing or sits behind the template branch');
     });
 
     __check('a MANUAL group is left alone in both builders — it is the user instruction', () => {
-      const sf = S.indexOf('const _specStepsFor = (u, li) =>');
-      if (S.slice(sf, sf + 1400).indexOf('!u._manual') < 0) throw new Error('the export splits manual groups');
-      // The studio agrees (its call site is guarded the same way).
+      // One builder now (18.32); its non-breaker call site is guarded on _manual.
       const dpl = S.indexOf('function _deckPageList');
-      if (S.slice(dpl, dpl + 12000).indexOf('_splitFlatUnits') < 0) throw new Error('_deckPageList lost its split');
+      if (S.slice(dpl, dpl + 12000).indexOf('if (!u._manual) { const sp = _splitFlatUnits(u)') < 0) throw new Error('_deckPageList splits manual groups, or lost its split');
+      __exportWalksStudio();
     });
 
     __check('the studio split now delegates to the shared partition, not its own filter', () => {
@@ -137,9 +138,9 @@ const path = require('path');
     __check('a split-out flat page keeps the group key on the framed remainder', () => {
       // Same key, so per-page settings and approval stay attached and the page count
       // stays right rather than a set silently losing pieces.
-      const sf = S.indexOf('const _specStepsFor = (u, li) =>');
-      const body = S.slice(sf, sf + 1400);
-      if (body.indexOf('Object.assign({}, u, { members: part.rest') < 0) {
+      const sf = S.indexOf('const _splitFlatUnits = (u) =>');
+      const body = S.slice(sf, sf + 1600);
+      if (body.indexOf('Object.assign({}, u, { members: rest') < 0) {
         throw new Error('the framed remainder does not inherit the group unit');
       }
     });

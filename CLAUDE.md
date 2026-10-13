@@ -681,31 +681,26 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   indicator as the elevation rail** — two rails in one app that reorder differently is two
   things to learn. A locked page is not draggable but IS still a drop target, since placing
   an inserted page between two spec pages is most of what inserted pages are for.
-- **THERE ARE TWO PAGE-LIST BUILDERS AND THEY DRIFT.** `_deckPageList` drives Deck
-  Studio; the PDF export's `_stepsFor` mirrors it **by hand**, and its own comment used
-  to say "Mirrors `_deckPageList`". That comment is not a mechanism. Any rule about
-  *which pages exist* has to be a **shared function called by both**, or the PDF grows
-  pages the preview never showed — which is the worst kind of bug here, because the
-  preview is how the deck gets checked.
-  THREE clauses have now drifted this way (`_mergeFlatSteps` was the third, missed
-  one commit AFTER this note was written — the studio merged flat sheets and the PDF
-  still printed two). Any rule about which pages exist needs wiring into BOTH, and a
-  source-level test asserting both call sites, because behaviour tests on one builder
-  pass happily while the other is wrong.
-  Two clauses had already drifted this way, both found from one report ("the EGD is
-  getting a breaker page in the PDF even though it is not showing in Deck Studio"):
-  `_breakerSkipUnit(members)` (a wall that is *entirely* flat graphics skips its
-  breaker — its own sheet already carries the full dimensioned elevation, so a breaker
-  is the same drawing twice) and `_partitionFlatMembers(members)` (in Group A/B/C a
-  flat graphic comes **out** of its group onto its own sheet). The export had neither,
-  so it printed a phantom breaker *and* drew a grouped wallcovering as a set member.
-  `_partitionFlatMembers` returns only the **partition**, not a page shape, because the
-  two builders emit genuinely different things (a page descriptor vs a render step) —
-  forcing one shape on both is what makes the next caller write its own copy again.
-  In the export, a split-out flat page **must carry `_forceTpl: 'egdDetail'`**: the
-  dispatch tests `!step._forceTpl && (_specIsGroup || _manual)` *first*, so without it
-  the page falls straight back into the set renderer the split exists to avoid.
-  Per-piece mode needs no split — it already resolves each row's own template.
+- **THERE IS ONE PAGE LIST AND ONE PAGE DISPATCH (18.32).** `_deckPageList` is the deck;
+  the PDF export (`_buildSpecPagePDF`) walks it and draws each descriptor through
+  `_drawDeckPage(doc, desc, env)` (spec pages via `_drawDeckSpecPage`), the same function
+  `renderDeckPageCanvas` / `renderSpecPageCanvas` use for the preview. There used to be a
+  second builder (`_stepsFor`, a hand mirror) and three dispatches; three rules drifted
+  between them, and two still disagreed when it was removed (a `beforeContacts` layout
+  page printed before Good Art Good People; an empty layout page was swept to the END of
+  the PDF). A rule about which pages exist goes in `_deckPageList` and nowhere else; a
+  rule about which drawer a page uses goes in `_drawDeckPage` and nowhere else.
+  The CALLER owns the page (create it, `_pageThemeAutoApply`, the plan-link ledger, the
+  footer sweep); the dispatch owns what is drawn on it, and returns false for a page with
+  nothing a doc can draw (a freeform spec page) so the preview keeps its live HTML.
+  **Frame Recommendations is the one descriptor that spans several PDF pages**: its page
+  count depends on the async frame library, so the export expands it (`env.frPage`) while
+  the studio lists it once. That is a known gap, not a second list.
+  `_deckPageKey` now keys plan detail pages `plandetail:<id>` (the key the export always
+  used); they were null in the studio, sharing one thumbnail cache slot.
+  `test_export_walks_deck` runs the REAL export with real jsPDF and compares the page keys
+  it creates against `_deckPageList()`; it failed on 18.31.
+
 - **EGD wall mode** (`elev.egdWall`, `_isEgdWall`, `toggleEgdWall`) is **per elevation**,
   unlike every other button in that guides row — easy to add to the wrong list.
   Anything flat on such a wall is filled to it and pinned inside it above the baseboard

@@ -22,28 +22,28 @@ const fs = require('fs');
     editorialContent = editorialContent || {};
     scheduleAutosave = () => {};
 
+    // 18.32: the export and the preview draw fixed pages through ONE branch of
+    // _drawDeckPage, shared by the cover and Good Art Good People.
+    const __fixedBranch = (S) => {
+      const d = S.indexOf('async function _drawDeckPage(');
+      const i = S.indexOf("if (desc.kind === 'fixed') {", d);
+      if (d < 0 || i < 0) throw new Error('the shared fixed-page branch was not found');
+      return S.slice(i, S.indexOf("if (desc.kind === 'card') {", i));
+    };
     __check('source guard: cover-page export branch now paints the theme background before drawing elements', () => {
-      const S = window.__appSrc;
-      const idx = S.indexOf("if (cov && ((Array.isArray(cov.elements) && cov.elements.length) || (editorialContent.annotations && editorialContent.annotations['fixed:cover'] && editorialContent.annotations['fixed:cover'].length))) {");
-      if (idx < 0) throw new Error('cover branch not found');
-      const nearby = S.slice(idx, idx + 2000);
-      if (nearby.indexOf('_applyPageTheme(doc,') < 0) throw new Error('background paint call missing from the elements-present cover branch');
-      if (nearby.indexOf('_drawMoodboardPage(') < 0) throw new Error('expected _drawMoodboardPage call not found nearby');
-      // background paint must come BEFORE the moodboard draw call
+      const nearby = __fixedBranch(window.__appSrc);
+      if (nearby.indexOf("const art = (desc.fixed === 'cover' || desc.fixed === 'slogan');") < 0) throw new Error('the cover is no longer an art page in the shared branch');
       const paintIdx = nearby.indexOf('_applyPageTheme(doc,');
       const drawIdx = nearby.indexOf('_drawMoodboardPage(');
+      if (paintIdx < 0) throw new Error('background paint call missing from the elements-present branch');
       if (!(paintIdx < drawIdx)) throw new Error('background paint does not precede the element draw');
     });
 
     __check('source guard: slogan-page export branch has the identical fix', () => {
-      const S = window.__appSrc;
-      const idx = S.indexOf("if (sg && ((Array.isArray(sg.elements) && sg.elements.length) || (editorialContent.annotations && editorialContent.annotations['fixed:slogan'] && editorialContent.annotations['fixed:slogan'].length))) {");
-      if (idx < 0) throw new Error('slogan branch not found');
-      const nearby = S.slice(idx, idx + 2000);
-      if (nearby.indexOf('_applyPageTheme(doc,') < 0) throw new Error('background paint call missing from the elements-present slogan branch');
-      const paintIdx = nearby.indexOf('_applyPageTheme(doc,');
-      const drawIdx = nearby.indexOf('_drawMoodboardPage(');
-      if (!(paintIdx < drawIdx)) throw new Error('background paint does not precede the element draw');
+      // Same branch, gated on _THEME_SELF_KEYS, which must name both pages.
+      const nearby = __fixedBranch(window.__appSrc);
+      if (nearby.indexOf('if (_THEME_SELF_KEYS[fk])') < 0) throw new Error('the paint is not gated on the self-theming pages');
+      if (!_THEME_SELF_KEYS['fixed:slogan'] || !_THEME_SELF_KEYS['fixed:cover']) throw new Error('cover or slogan is not a self-theming page');
     });
 
     __checkAsync('BEHAVIORAL: reproduces the exact bug scenario \\u2014 a cover WITH a title element AND a background image now paints the background before the title', async () => {
