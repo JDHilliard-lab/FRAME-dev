@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.38';
+const APP_VERSION = '18.39';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -19470,8 +19470,7 @@ function openDeckStudio(tab) {
     // (skips anything already cached) and never blocks the UI. Re-checks the
     // view is still open when it fires — you can navigate away inside 1.5s and
     // there's no reason to churn renders for a view nobody is looking at.
-    clearTimeout(_dsAutoBuildTimer);
-    _dsAutoBuildTimer = setTimeout(() => { if (!_dsIsOpen()) return; try { _dsBuildAllThumbs(); } catch (e) {} }, 1500);
+    _dsScheduleAutoBuild();
 }
 // Fixed-position satellites that would otherwise hang over whatever view you
 // switch to. Called from switchView when leaving the Deck view.
@@ -19707,6 +19706,7 @@ function _dsRefresh() {
     const liveKeys = {}; _dsPages.forEach(d => { try { liveKeys[_dsThumbCacheKey(d)] = 1; } catch (e) {} });
     Object.keys(_dsThumbCache).forEach(k => { if (!liveKeys[k]) delete _dsThumbCache[k]; });
     _dsRenderRail(); _dsRenderCenter(); _dsRenderTools();
+    try { _dsScheduleAutoBuild(); } catch (e) {}
 }
 // Full preview rebuild — clears every cached thumbnail and re-renders. Used by
 // the "Build all previews" button and by quality changes.
@@ -21516,25 +21516,20 @@ function _dsRenderRail() {
     count.id = 'dsRailCount';
     count.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:4px;';
     bar.appendChild(count);
-    // Build-all previews button (prominent) + progress + cancel. Previews still
-    // render lazily on scroll by default; this proactively builds the whole deck
-    // in the background so you can scroll freely with everything ready.
-    const buildRow = document.createElement('div'); buildRow.style.cssText = 'display:flex; gap:6px; margin-top:6px;';
-    const buildBtn = document.createElement('button');
-    buildBtn.id = 'dsBuildAllBtn';
-    buildBtn.textContent = '\u25a6 Build all previews';
-    buildBtn.title = 'Renders every wall elevation once, then every page thumbnail — run it when the layouts are done';
-    buildBtn.style.cssText = 'flex:1; height:30px; font-size:var(--fs-70); font-weight:700; background:var(--ui-active); color:#fff; border:none; border-radius:var(--r-4); cursor:pointer;';
-    // prime:true — the explicit build captures the elevations first (phase 1). The
-    // automatic post-edit sweep calls this with no options and skips that.
-    buildBtn.onclick = () => _dsBuildAllThumbs({ prime: true });
-    const cancelBtn = document.createElement('button');
-    cancelBtn.id = 'dsBuildCancelBtn';
-    cancelBtn.textContent = 'Cancel';
-    cancelBtn.style.cssText = 'display:none; height:30px; padding:0 12px; font-size:var(--fs-65); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); cursor:pointer;';
-    cancelBtn.onclick = () => _dsCancelBuildAll();
-    buildRow.appendChild(buildBtn); buildRow.appendChild(cancelBtn);
-    bar.appendChild(buildRow);
+    // NO BUILD BUTTON (18.39): previews rebuild by themselves after a change, elevations
+    // included, and the progress line below says so. The small rebuild icon in the filter
+    // row is for the rare full reset.
+    {
+        const rb = document.createElement('button');
+        rb.id = 'dsRebuildAllBtn'; rb.type = 'button';
+        rb.title = 'Rebuild every page preview from scratch (they normally update by themselves)';
+        rb.innerHTML = _dsRefreshSVG;
+        rb.style.cssText = 'flex:0 0 26px; height:26px; padding:0; display:inline-flex; align-items:center; justify-content:center; background:var(--bg-input); color:var(--text-muted); border:1px solid var(--border-color); border-radius:var(--r-4); cursor:pointer;';
+        rb.onclick = () => _dsRebuildEverything();
+        const frow = document.createElement('div'); frow.style.cssText = 'display:flex; gap:6px; align-items:center;';
+        inp.style.flex = '1'; inp.style.width = 'auto'; inp.style.minWidth = '0';
+        bar.insertBefore(frow, inp); frow.appendChild(inp); frow.appendChild(rb);
+    }
     // RESET ORDER, shown only once something has actually been moved by hand. Once a few
     // inserted pages are anchored there is otherwise no way back to where their templates
     // put them short of deleting and re-adding each one. Hidden when there is nothing to
@@ -27088,28 +27083,42 @@ function _dsPriorityRerender(desc) {
 //
 // PHASE 2 — the thumbnails, through the same serial queue as always.
 //
-// Only EXPLICIT builds prime (opts.prime). The automatic post-edit sweep must not:
-// a modal that appears by itself 1.5s after you type is worse than a placeholder.
+// EVERY build primes now, SILENTLY (18.39). It used to be only the Build all previews
+// button, behind a full-screen modal, so a breaker thumbnail sat on its placeholder until
+// someone pressed it; the automatic sweep skipped the elevations because a modal that
+// appears by itself is worse than a placeholder. With no modal there is nothing to
+// avoid: the rail's own progress line says what is rendering, and only walls whose
+// capture is out of date are in the job list, so a sweep after an unrelated edit does
+// no elevation work at all. opts.prime === false skips phase 1.
+let _dsPrimeStep = null;   // {n, total} while phase 1 runs, for the rail's progress line
+function _dsPrimeProgress(n, total) { _dsPrimeStep = (n < total) ? { n: n, total: total } : null; _dsUpdateThumbProgress(); }
 function _dsBuildAllThumbs(opts) {
     if (_dsBuildAllActive || _elevPrimeActive) return;
-    if (opts && opts.prime) {
+    if (!opts || opts.prime !== false) {
         const jobs = _elevPrimeJobs(_dsDeckElevIdxs());
         if (jobs.length) {
             _dsBuildAllActive = true;
             const _phase2 = () => {
-                _dsBuildAllActive = false;
-                // Cancel means cancel: don't roll straight into the thumbnails the
-                // user just stopped. The elevations captured before the stop stay
-                // cached, so hitting Build again resumes rather than restarts.
-                if (_elevPrimeLastCancelled) { _dsSyncBuildAllUI(); return; }
+                _dsBuildAllActive = false; _dsPrimeStep = null;
+                // Stop means stop: don't roll straight into the thumbnails just stopped.
+                // Walls captured before it stay cached, so the next sweep resumes.
+                if (_elevPrimeLastCancelled) { _dsSyncBuildAllUI(); _dsUpdateThumbProgress(); return; }
                 _dsQueueAllThumbs();
             };
-            _elevPrimeCaptures(jobs.map(j => j.idx)).then(_phase2).catch(_phase2);
+            _elevPrimeCaptures(jobs.map(j => j.idx), { silent: true, onStep: _dsPrimeProgress }).then(_phase2).catch(_phase2);
             return;
         }
     }
     _dsQueueAllThumbs();
 }
+// Rebuild after a change, by itself (18.39): debounced, and only while the deck is on
+// screen. _dsRefresh runs after every deck edit, so this is the auto-refresh.
+function _dsScheduleAutoBuild(ms) {
+    clearTimeout(_dsAutoBuildTimer);
+    _dsAutoBuildTimer = setTimeout(() => { if (!_dsIsOpen()) return; try { _dsBuildAllThumbs(); } catch (e) {} }, ms || 1500);
+}
+// Force every preview to render again from scratch: the rail's small rebuild button.
+function _dsRebuildEverything() { _dsCancelBuildAll(); _dsRebuildAllThumbs(); _dsScheduleAutoBuild(50); }
 function _dsQueueAllThumbs() {
     if (_dsBuildAllActive) return;
     _dsBuildAllActive = true;
@@ -27131,11 +27140,12 @@ function _dsCancelBuildAll() {
     _thumbQueue = [];            // drop everything pending
     _thumbRunToken++;            // invalidate the in-flight render's result
     try { _elevPrimeCancel(); } catch (e) {}   // phase 1 too, if that's what's running
-    _dsBuildAllActive = false;
+    _dsBuildAllActive = false; _dsPrimeStep = null;
     _dsSyncBuildAllUI();
     _dsUpdateThumbProgress();
 }
 function _dsSyncBuildAllUI() {
+    // The button is gone (18.39); these lookups stay null-safe for any old caller.
     const b = document.getElementById('dsBuildAllBtn'), c = document.getElementById('dsBuildCancelBtn');
     // Phase 1 counts as running, or the button re-enables itself mid-prime (the
     // thumbnail queue is still empty at that point) and a second click could start
@@ -27149,14 +27159,23 @@ function _dsSyncBuildAllUI() {
 function _dsUpdateThumbProgress() {
     _dsSyncBuildAllUI();
     const el = document.getElementById('dsThumbProgress'); if (!el) return;
+    const stop = '<a href="#" data-thumb-stop style="margin-left:auto; color:var(--text-muted); text-decoration:underline;">Stop</a>';
+    const bar = (pct) => '<span style="display:block; height:3px; margin-top:4px; background:color-mix(in srgb, var(--ui-active) 25%, transparent); border-radius:var(--r-2); overflow:hidden;"><span style="display:block; height:100%; width:' + pct + '%; background:var(--ui-active);"></span></span>';
+    const wire = () => { const s = el.querySelector('[data-thumb-stop]'); if (s) s.onclick = (ev) => { ev.preventDefault(); _dsCancelBuildAll(); }; };
+    if (_dsPrimeStep) {
+        const p = _dsPrimeStep, pct = Math.round(p.n / p.total * 100);
+        el.style.display = 'flex';
+        el.innerHTML = '<span style="display:flex; gap:6px;"><span>Updating elevations \u2014 ' + Math.min(p.n + 1, p.total) + ' of ' + p.total + '</span>' + stop + '</span>' + bar(pct);
+        wire(); return;
+    }
     const remaining = _thumbQueue.length + (_thumbBusy ? 1 : 0);
     if (remaining <= 0) { el.style.display = 'none'; el._total = 0; return; }
     const total = el._total = Math.max(el._total || 0, remaining);
     const done = total - remaining;
     const pct = Math.round(done / total * 100);
     el.style.display = 'flex';
-    el.innerHTML = 'Building previews \u2014 ' + done + ' of ' + total + ' (' + pct + '%)' +
-        '<span style="display:block; height:3px; margin-top:4px; background:color-mix(in srgb, var(--ui-active) 25%, transparent); border-radius:var(--r-2); overflow:hidden;"><span style="display:block; height:100%; width:' + pct + '%; background:var(--ui-active);"></span></span>';
+    el.innerHTML = '<span style="display:flex; gap:6px;"><span>Updating previews \u2014 ' + done + ' of ' + total + '</span>' + stop + '</span>' + bar(pct);
+    wire();
 }
 function _dsShowPreviewModal(url, title) {
     let m = document.getElementById('_dsPreviewModal'); if (m) m.remove();
@@ -35611,6 +35630,7 @@ async function _elevPrimeCaptures(idxs, opts) {
             if (_elevPrimeCancelled) break;
             const e = elevations[jobs[n].idx] || {};
             if (!opts.silent) _elevPrimeStep(n, jobs.length, e.name || ('Elevation ' + (jobs[n].idx + 1)));
+            if (opts.onStep) { try { opts.onStep(n, jobs.length, e.name || ''); } catch (err) {} }
             // Yield so the overlay actually paints its new label/bar before the
             // capture blocks the main thread rasterizing at export resolution.
             await new Promise(r => setTimeout(r, 0));
@@ -35634,6 +35654,7 @@ async function _elevPrimeCaptures(idxs, opts) {
     } finally {
         _elevPrimeLastCancelled = _elevPrimeCancelled;
         if (!opts.silent) _elevPrimeStep(jobs.length, jobs.length, '');
+        if (opts.onStep) { try { opts.onStep(jobs.length, jobs.length, ''); } catch (e) {} }
         try { _popElevLightTheme(); } catch (e) {}
         // Clear the flag BEFORE the restore below, so the redraw it triggers isn't
         // treated as part of the batch.
@@ -36311,7 +36332,7 @@ async function _drawFlatGraphicSpecPage(doc, logos, pageNum, meta, r, ctx) {
         doc.setFont(_font('serif'), 'italic'); doc.setFontSize(9.5); doc.setTextColor(180, 180, 180);
         const msg = (elevIdx < 0)
             ? 'Place this graphic on a wall in the Elevations tab'
-            : 'Elevation preview pending — hit Build';
+            : 'Elevation preview updating\u2026';
         doc.text(msg, elevLeft + Math.max(0, boxW) / 2, elevTop + Math.max(0, boxH) / 2, { align: 'center' });
         doc.setTextColor(20, 20, 20);
     }
@@ -36571,7 +36592,7 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 // just ran.
                 doc.text(capFailed
                         ? 'Elevation capture failed — open the Elevations tab and Build again'
-                        : 'Hit Build to update this elevation drawing',
+                        : 'Updating this elevation drawing\u2026',
                     bx + bw / 2, by + bh / 2, { align: 'center' });
                 doc.setTextColor(20, 20, 20);
                 _drawPdfFooter(doc, logos, pageNum, meta);
@@ -40821,7 +40842,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
+                body: `<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
 <strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>

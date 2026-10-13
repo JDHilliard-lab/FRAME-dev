@@ -107,7 +107,7 @@ const fs = require('fs');
       // real correctness is validated by the async check right after.
     });
 
-    __checkAsync('_drawInstallGuidePage ambient placeholder: no throw, draws "Hit Build" text, never calls switchView', async () => {
+    __checkAsync('_drawInstallGuidePage ambient placeholder: no throw, draws the "Updating" placeholder text (18.39 wording), never calls switchView', async () => {
       elevations = [{ name: 'WALL A', wallW: 240, wallH: 96, frames: [{ id: 'ART.001', letter: 'A', x: 0.4, y: 0.4, w: 0.1, h: 0.1, active: true, dimTo: [] }] }];
       dashProjectData = [{ id: 'ART.001', location: 'Wall A' }];
       floorplanLevels = [{ name: 'Level 1', imageData: '' }];
@@ -123,7 +123,7 @@ const fs = require('fs');
       const rec = new CanvasPdfRec(936, 540);
       await _drawInstallGuidePage(rec, {}, 1, { location: '', code: '', version: '' }, elevations[0], { PW: 936, PH: 540, M: 40 });
       if (switchViewCalled) throw new Error('ambient render triggered switchView — this is exactly the flash bug');
-      const drewPlaceholder = rec.ops.some(o => o.t === 'text' && typeof o.str === 'string' && o.str.indexOf('Hit Build') >= 0);
+      const drewPlaceholder = rec.ops.some(o => o.t === 'text' && typeof o.str === 'string' && o.str.indexOf('Updating this elevation drawing') >= 0);
       if (!drewPlaceholder) throw new Error('placeholder text not drawn; ops: ' + JSON.stringify(rec.ops.slice(0,5)));
       if (_origSwitchView) switchView = _origSwitchView;
     });

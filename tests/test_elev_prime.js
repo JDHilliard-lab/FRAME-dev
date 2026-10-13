@@ -226,17 +226,16 @@ const path = require('path');
     });
 
     // ── The build-all button: prime first, thumbnails second ──
-    __check('EXACT REQUEST: the explicit build primes the elevations, the automatic sweep does not', () => {
+    // 18.39 REVERSED the old rule on purpose: there is no Build all button, so EVERY build
+    // primes, and it is SILENT (progress goes to the rail, never a modal that appears by itself).
+    __check('every build primes the elevations, silently, and reports to the rail', () => {
       const i = S.indexOf('function _dsBuildAllThumbs(');
-      const body = S.slice(i, S.indexOf('function _dsCancelBuildAll', i));
-      if (body.indexOf('opts.prime') < 0) throw new Error('the build-all has no priming phase, so breaker thumbnails stay placeholders until something else captures');
+      const body = S.slice(i, S.indexOf('function _dsQueueAllThumbs', i));
+      if (body.indexOf("opts.prime !== false") < 0) throw new Error('priming is opt-in again, so breaker thumbnails stay placeholders');
       if (body.indexOf('_elevPrimeCaptures(') < 0) throw new Error('phase 1 does not run the batch');
-      // The 1.5s post-edit sweep calls it with no options — a modal that appears by
-      // itself after you type is worse than a placeholder.
-      const auto = S.indexOf('_dsBuildAllThumbs(); } catch (e) {} }, 1500)');
-      if (auto < 0) throw new Error('the automatic sweep now passes options; it must not prime');
-      const btn = S.indexOf('buildBtn.onclick');
-      if (S.slice(btn, btn + 120).indexOf('{ prime: true }') < 0) throw new Error('the Build all previews button does not prime');
+      if (body.indexOf('silent: true') < 0) throw new Error('the automatic build would pop the render modal');
+      if (body.indexOf('onStep: _dsPrimeProgress') < 0) throw new Error('the silent prime says nothing in the rail');
+      if (S.indexOf("buildBtn.id = 'dsBuildAllBtn'") >= 0) throw new Error('the Build all previews button is back');
     });
 
     __checkAsync('phase 2 does not start off the back of a cancelled phase 1', async () => {
@@ -248,7 +247,7 @@ const path = require('path');
       _dsQueueAllThumbs = () => { queued = true; };
       _captureElevWithGuides = async (idx) => { _elevPrimeCancel(); return { dataUrl: 'data:image/jpeg;base64,AAAA', w: 800, h: 400 }; };
       try {
-        _dsBuildAllThumbs({ prime: true });
+        _dsBuildAllThumbs();
         await new Promise(r => setTimeout(r, 30));
         if (queued) throw new Error('cancelling the elevation pass rolled straight into the thumbnail build anyway');
         if (Object.keys(_igCapCache).length !== 1) throw new Error('the walls captured before the stop should stay cached so a second Build resumes; got ' + Object.keys(_igCapCache).length);
