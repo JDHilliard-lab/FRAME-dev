@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.41';
+const APP_VERSION = '18.42';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6151,6 +6151,7 @@ let dashOuterShadowsOn = true;
 // into FRAME_FX_DEFAULT.
 const FRAME_FX_DEFAULT = { outer: 1, frame: 1, mat: 1, art: 1, paper: 1 };
 const FRAME_FX_KEYS = Object.keys(FRAME_FX_DEFAULT);
+// pageShadow (18.42) is a switch, not a strength: drop shadow under frames on spec pages.
 let frameFx = Object.assign({}, FRAME_FX_DEFAULT);
 function _fx(k) { const v = parseFloat(frameFx && frameFx[k]); return isFinite(v) ? Math.max(0, Math.min(2, v)) : 1; }
 // Scale one shadow recipe. Opacity carries the strength; blur and offset grow more
@@ -6167,6 +6168,7 @@ function _fxCss(k, x, y, blur, alpha, inset) {
 function _frameFxNormalize(src) {
     const out = Object.assign({}, FRAME_FX_DEFAULT);
     FRAME_FX_KEYS.forEach(k => { const v = parseFloat(src && src[k]); if (isFinite(v)) out[k] = Math.max(0, Math.min(2, v)); });
+    out.pageShadow = !!(src && src.pageShadow);
     return out;
 }
 function loadFrameFx() { try { const j = JSON.parse(localStorage.getItem('frameFx') || 'null'); if (j) frameFx = _frameFxNormalize(j); } catch (e) {} applyFrameFxCssVars(); }
@@ -6225,6 +6227,12 @@ function openFrameFx() {
     cb.onchange = () => { applyOuterShadowsState(cb.checked); try { localStorage.setItem('dashOuterShadowsOn', cb.checked ? '1' : '0'); } catch (e) {} _frameFxPreview(); _frameFxChanged(); _frameFxSyncRows(); };
     on.appendChild(cb); on.appendChild(document.createTextNode('Show the drop shadow'));
     ctl.appendChild(on);
+    // Spec pages are opt-in: switching it on changes every deck's next PDF (18.42).
+    const ps = document.createElement('label'); ps.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:var(--fs-70); color:var(--text-main); cursor:pointer; margin:-4px 0 0 2px;';
+    const pcb = document.createElement('input'); pcb.type = 'checkbox'; pcb.id = 'frameFxPageShadow'; pcb.checked = !!frameFx.pageShadow;
+    pcb.onchange = () => { frameFx.pageShadow = pcb.checked; saveFrameFx(); _frameFxChanged(); };
+    ps.appendChild(pcb); ps.appendChild(document.createTextNode('Also on spec pages (the PDF and its previews)'));
+    ctl.appendChild(ps);
     FRAME_FX_ROWS.forEach(([k, label, help]) => {
         const row = document.createElement('div'); row.setAttribute('data-fx-row', k);
         const top = document.createElement('div'); top.style.cssText = 'display:flex; justify-content:space-between; font-size:var(--fs-70); color:var(--text-main); margin-bottom:3px;';
@@ -6244,7 +6252,7 @@ function openFrameFx() {
     card.appendChild(body);
     const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
     const rs = document.createElement('button'); rs.className = 'action-btn btn-secondary'; rs.style.cssText = 'width:auto; height:32px; padding:0 14px;'; rs.textContent = 'Reset to studio look';
-    rs.onclick = () => { resetFrameFx(); _frameFxSyncRows(); _frameFxPreview(); };
+    rs.onclick = () => { resetFrameFx(); _frameFxSyncRows(); _frameFxPreview(); const p = document.getElementById('frameFxPageShadow'); if (p) p.checked = false; };
     const done = document.createElement('button'); done.className = 'action-btn'; done.style.cssText = 'width:auto; height:32px; padding:0 18px;'; done.textContent = 'Done';
     done.setAttribute('data-modal-close', ''); done.onclick = () => m.remove();
     foot.appendChild(rs); foot.appendChild(done); card.appendChild(foot);
@@ -6276,7 +6284,37 @@ async function _frameFxPreview() {
         host.innerHTML = ''; host.appendChild(c);
     } catch (e) { host.textContent = 'Preview unavailable for this piece.'; }
 }
-function resetFrameFx() { FRAME_FX_KEYS.forEach(k => { frameFx[k] = FRAME_FX_DEFAULT[k]; }); saveFrameFx(); applyFrameFxCssVars(); try { updateDashVisualsFromDOM(); } catch (e) {} _frameFxChanged(); }
+// DROP SHADOW ON SPEC PAGES (18.42). The frame images on spec pages are flattened onto
+// white JPEGs at exactly the frame's size (pad 0), so the outer shadow had nowhere to
+// go and the PDF never had one. Giving the JPEG room would draw a white box round the
+// frame on a dark page, so the shadow is its OWN small transparent PNG, drawn under the
+// unchanged frame image: the frame keeps its exact size and place, and the shadow works
+// on any page colour. Opt-in (frameFx.pageShadow), because switching it on changes
+// every deck's next PDF. Same recipe and strength as the PNG export's drop shadow
+// (35px blur, 18px drop at 72dpi). Never on a flat graphic, which sits flush.
+function _pdfFrameShadow(doc, d, x, y, w, h) {
+    try {
+        if (!frameFx.pageShadow || !dashOuterShadowsOn || _fx('outer') <= 0) return false;
+        if (!d || _isFlatGraphic(d.product)) return false;
+        const wIn = parseFloat(d.extW), hIn = parseFloat(d.extH);
+        if (!(wIn > 0 && hIn > 0 && w > 0 && h > 0)) return false;
+        const v = _fxSh('outer', 35 / 72, 18 / 72, 0.55);          // inches
+        const padIn = v.b * 1.5 + v.o;
+        const D = 24;                                              // px per inch: a soft shadow needs few
+        const c = document.createElement('canvas');
+        c.width = Math.max(1, Math.ceil((wIn + padIn * 2) * D)); c.height = Math.max(1, Math.ceil((hIn + padIn * 2) * D));
+        const x2 = c.getContext('2d'); if (!x2) return false;
+        // Draw the rectangle one canvas-width off to the left and throw only its SHADOW
+        // back in, so nothing but the shadow lands on the transparent canvas.
+        x2.shadowColor = 'rgba(0,0,0,' + v.a + ')'; x2.shadowBlur = v.b * D;
+        x2.shadowOffsetX = c.width; x2.shadowOffsetY = v.o * D;
+        x2.fillStyle = '#000'; x2.fillRect(padIn * D - c.width, padIn * D, wIn * D, hIn * D);
+        const ppi = w / wIn;
+        doc.addImage(c.toDataURL('image/png'), 'PNG', x - padIn * ppi, y - padIn * ppi, (wIn + padIn * 2) * ppi, (hIn + padIn * 2) * ppi);
+        return true;
+    } catch (e) { return false; }
+}
+function resetFrameFx() { FRAME_FX_KEYS.forEach(k => { frameFx[k] = FRAME_FX_DEFAULT[k]; }); frameFx.pageShadow = false; saveFrameFx(); applyFrameFxCssVars(); try { updateDashVisualsFromDOM(); } catch (e) {} _frameFxChanged(); }
 
 // Re-render everything that uses shadows after a toggle change. The CSS
 // classes drive the live preview (via .no-outer-shadows on body), but the
@@ -18142,7 +18180,7 @@ async function _drawCatOverviewPage(doc, logos, pageNum, meta, place, ctx) {
                 if (cnv && cnv.width) {
                     const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height;
                     const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0);
-                    doc.addImage(flat.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, by, bw, bh);
+                    _pdfFrameShadow(doc, dIn, bx, by, bw, bh); doc.addImage(flat.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, by, bw, bh);
                     drew = true;
                 }
             } catch (e) {}
@@ -33718,7 +33756,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 const fit = Math.min(slotW / cnv.width, artH / cnv.height);
                 const aw = cnv.width * fit, ah = cnv.height * fit;
                 const ax = cx + (slotW - aw) / 2, ay = topY + (artH - ah);
-                try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
+                _pdfFrameShadow(doc, dInches, ax, ay, aw, ah); try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
                 const ic = (r.imageCode || r.artworkFile || '') + '';
                 if (ic) { const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color); doc.setFont(_font(cs.font), _pdfFontStyle(cs.font)); doc.setFontSize(Math.min(cs.size, 8.5)); doc.setTextColor(crgb.r, crgb.g, crgb.b); doc.text(ic, ax + aw, Math.min(ay + ah + 9, BB), { align: 'right' }); }
             } catch (e) {}
@@ -33886,7 +33924,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 const fit = Math.min(p.bw / cnv.width, p.bh / cnv.height);
                 const aw = cnv.width * fit, ah = cnv.height * fit;
                 const ax = p.bx + (p.bw - aw) / 2, ay = p.by + (p.bh - ah) / 2;
-                try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
+                _pdfFrameShadow(doc, dInches, ax, ay, aw, ah); try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
                 if (!_sharedSpec) {
                     doc.setFont(_font('display'), 'bold'); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
                     doc.text(p.letter, ax, ay - 2);   // top-left, ~2px clear of the frame
@@ -34250,7 +34288,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
             const fit = Math.min(boxW / cnv.width, boxH / cnv.height);
             const aw = cnv.width * fit, ah = cnv.height * fit;
             const ax = rX + (boxW - aw) / 2, ay = sy + (slotH - ah) / 2;
-            try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
+            _pdfFrameShadow(doc, dInches, ax, ay, aw, ah); try { doc.addImage(url, 'JPEG', ax, ay, aw, ah); } catch (e) {}
             // image code under the artwork (bottom-right) — the letter is already
             // shown on the left, and at the end of the item code, so no frame letter.
             const ic = (r.imageCode || r.artworkFile || '') + '';
@@ -37678,7 +37716,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         const fit = Math.min(boxW / cnv.width, boxH / cnv.height);
         const aw = cnv.width * fit, ah = cnv.height * fit;
         const ax = tpl.artwork.align === 'right' ? (boxX + boxW - aw) : (tpl.artwork.align === 'center' ? (boxX + (boxW - aw) / 2) : boxX);
-        try { doc.addImage(url, 'JPEG', ax, boxY, aw, ah); } catch (e) {}
+        _pdfFrameShadow(doc, dInches, ax, boxY, aw, ah); try { doc.addImage(url, 'JPEG', ax, boxY, aw, ah); } catch (e) {}
         if (!SWATCH) _specArtRectAdd(r.id, ax, boxY, aw, ah);
         if (tpl.code) {
             const cf = tpl.code.field || 'id';
@@ -41008,7 +41046,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.41</strong> <strong>Frame effects.</strong> The shadow button in the header (and Frame effects in Deck Studio under Project) opens sliders for each shadow a frame casts: the drop shadow onto the wall and page, the frame onto the mat, mat onto mat, onto the artwork, and the lift of a float-mounted sheet. 100% is the old look; a live preview of the selected piece shows the result. It reaches the Dashboard preview, elevations, PNG exports and spec pages, and travels in the project file. Also fixed: the shadow inside the opening now falls on the artwork (it was hidden under it), and framed pieces in the Dashboard preview show the same drop shadow as their PNG.<br><br>\n<strong>18.40</strong> A shorter Deck Studio tool bar. Text box and Paragraph live in the Text menu (T still adds a text box straight away), and Upload image lives in the Shapes menu (I still works). The settings button for a selected object is a gear now, not a sun that looked like the theme switch.<br><br>\n<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
+                body: `<strong>18.42</strong> Drop shadows on spec pages: tick <strong>Also on spec pages</strong> in Frame effects and every framed piece on a spec page casts its drop shadow onto the page, in the PDF and its previews, at the Drop shadow slider's strength. Off by default so existing decks print as before. The frame itself keeps its exact size and position, and the shadow works on dark pages too.<br><br>\n<strong>18.41</strong> <strong>Frame effects.</strong> The shadow button in the header (and Frame effects in Deck Studio under Project) opens sliders for each shadow a frame casts: the drop shadow onto the wall and page, the frame onto the mat, mat onto mat, onto the artwork, and the lift of a float-mounted sheet. 100% is the old look; a live preview of the selected piece shows the result. It reaches the Dashboard preview, elevations, PNG exports and spec pages, and travels in the project file. Also fixed: the shadow inside the opening now falls on the artwork (it was hidden under it), and framed pieces in the Dashboard preview show the same drop shadow as their PNG.<br><br>\n<strong>18.40</strong> A shorter Deck Studio tool bar. Text box and Paragraph live in the Text menu (T still adds a text box straight away), and Upload image lives in the Shapes menu (I still works). The settings button for a selected object is a gear now, not a sun that looked like the theme switch.<br><br>\n<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
 <strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>

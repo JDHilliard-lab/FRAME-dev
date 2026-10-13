@@ -1606,6 +1606,20 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_dsScheduleAutoBuild` (1.5 s debounce, deck open only). There is no Build all button;
   `_dsRebuildEverything` (the small icon by the page filter) forces a full rebuild.
 
+- **FRAME EFFECTS (18.41/18.42): every frame shadow has a strength in `frameFx`**
+  (`outer`, `frame`, `mat`, `art`, `paper`, 0-2, 1 = the old look exactly, plus the switch
+  `pageShadow`). A NEW shadow anywhere must go through `_fxSh` (canvas) or `_fxCss` (inline
+  CSS) or read `--fx-*` (style.css), or the panel tunes every view but that one. Saved per
+  computer and in the project file, and in `_elevCaptureSignature`. Changing it runs
+  `_frameFxChanged` (frames cache, mockups, captures, built pages). The opening's `art`
+  shadow is drawn AGAIN after the artwork, because artwork covers the opening (never for
+  wireframe, floater, float mount or faux mat). Spec-page frames are flattened JPEGs at
+  pad 0, so their drop shadow is a separate transparent PNG from `_pdfFrameShadow`, drawn
+  just before each of the five frame `addImage` calls; opt-in, off by default.
+- **The Deck Studio dock (18.40):** Text box and Paragraph are in the Text menu
+  (`dsDockNotes`), Upload image in Shapes; no standalone T or image button. Selection
+  settings is a gear, never the theme sun.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.
