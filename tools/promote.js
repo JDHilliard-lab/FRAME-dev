@@ -70,6 +70,7 @@ const indexSrc = fs.readFileSync('index.html', 'utf8');
 [
     ['style.css?v=' + version, 'index.html does not link style.css?v=' + version + '.'],
     ['app.js?v=' + version, 'index.html does not load app.js?v=' + version + '.'],
+    ['templates.js?v=' + version, 'index.html does not load templates.js?v=' + version + '.'],
     ["window.FRAME_HTML_VERSION = '" + version + "'", 'index.html does not stamp FRAME_HTML_VERSION = ' + version + '.'],
 ].forEach(([needle, msg]) => { if (indexSrc.indexOf(needle) < 0) die(msg); });
 

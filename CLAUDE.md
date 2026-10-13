@@ -26,8 +26,14 @@ Replaces manual InDesign work: wall elevations, artwork spec pages, client PDFs.
   (`HELP_REFERENCE_DATA`, section `version`): `test_help_and_steps.js` fails while What's
   New does not mention the current `APP_VERSION`. That is deliberate. Nothing forced it
   before, which is how Help sat at v1.1 while the app reached 17.82.
-- **THREE THINGS IN `index.html` CARRY `<APP_VERSION>` AND ALL THREE MUST MATCH IT**:
-  `style.css?v=`, `app.js?v=`, and `window.FRAME_HTML_VERSION`. Pinned by
+- **FOUR THINGS IN `index.html` CARRY `<APP_VERSION>` AND ALL FOUR MUST MATCH IT**:
+  `style.css?v=`, `templates.js?v=`, `app.js?v=`, and `window.FRAME_HTML_VERSION`.
+  `templates.js` (18.33) holds the master layout templates (`window.FRAME_MASTER_TEMPLATES`,
+  634 KB, mostly four base64 photos kept embedded on purpose: an applied template copies
+  its image data into the project). It loads BEFORE `app.js`, which reads it once as
+  `IDML_MASTER_TEMPLATES` and falls back to `[]`, so a test harness that evals only
+  `app.js` gets no masters rather than a ReferenceError. A test needing the real data
+  prepends `templates.js` to the source it evals. Pinned by
   `test_build_version_pin.js` and `test_dash_visible_and_tick_clearance.js`, and gated
   again by `tools/promote.js`, so a forgotten bump fails the suite and cannot ship.
   Unversioned, a browser serves a cached stylesheet next to a fresh `app.js`: the
@@ -3555,9 +3561,7 @@ one `async` IIFE assigned to a `window.__…` promise and await that from Node.
   `_dsThumbDrawable` returns false for element pages, so the rail draws them with
   `_dsElementPageThumbHTML` (real HTML) and the Project tab preview uses the HTML mock
   too. Pinned by `test_thumb_drawable_fix`.
-- **`app.js` is ~2.4 MB and GitHub won't display it.** ~634 KB is a single line:
-  `IDML_MASTER_TEMPLATES`, of which ~560 KB is base64 photos baked into four
-  templates (barn, signature, install photo, hardware diagram). Plan, in order:
-  (1) move those photos to `assets/` as real image files, (2) move the template
-  constant to its own file, (3) split `app.js` by area into several scripts loaded
-  in order — safe here because everything shares one global scope.
+- **`app.js` is ~3.1 MB.** Steps (1) and (2) of the old plan are done differently: the
+  template constant is `templates.js` (18.33), photos still embedded (moving them to
+  `assets/` would put URLs into projects). What's left is (3): split `app.js` by area
+  into several scripts loaded in order, safe because everything shares one global scope.

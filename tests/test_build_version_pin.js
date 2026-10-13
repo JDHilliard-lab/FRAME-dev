@@ -40,6 +40,15 @@ check('EXACT BUG: app.js is cache-busted, or a JS change never reaches the user'
   if (m[2] !== VER) throw new Error('app.js?v=' + m[2] + ' but APP_VERSION is ' + VER + ' - bump both together');
 });
 
+check('templates.js (18.33) is pinned too, and loads BEFORE app.js reads it', () => {
+  // A cached templates.js beside a fresh app.js serves last build's master layouts;
+  // loaded after app.js, IDML_MASTER_TEMPLATES reads it as absent and is empty.
+  const m = HTML.match(/<script src="templates\.js(\?v=([^"]*))?"><\/script>/);
+  if (!m) throw new Error('could not find the templates.js script tag');
+  if (m[2] !== VER) throw new Error('templates.js?v=' + m[2] + ' but APP_VERSION is ' + VER + ' - bump them together');
+  if (HTML.indexOf('<script src="templates.js') > HTML.indexOf('<script src="app.js')) throw new Error('templates.js loads after app.js');
+});
+
 check('style.css is still pinned to the same version', () => {
   const m = HTML.match(/style\.css\?v=([^"]*)"/);
   if (!m) throw new Error('style.css lost its version query');

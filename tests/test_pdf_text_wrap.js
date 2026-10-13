@@ -16,7 +16,8 @@ const { JSDOM } = require('jsdom');
 const fs = require('fs');
 
 (async () => {
-  const src = fs.readFileSync(require('path').join(__dirname, '..', 'app.js'), 'utf8');
+  // 18.33: the master templates live in templates.js, which index.html loads first.
+  const src = fs.readFileSync(require('path').join(__dirname, '..', 'templates.js'), 'utf8') + '\n' + fs.readFileSync(require('path').join(__dirname, '..', 'app.js'), 'utf8');
   const htmlSrc = fs.readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   const dom = new JSDOM(htmlSrc, { url: 'https://example.com/', pretendToBeVisual: true, runScripts: 'outside-only' });
   const { window } = dom;

@@ -16,7 +16,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const APP = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+// 18.33: the template DATA moved to templates.js; it is still data this file pins.
+const APP = fs.readFileSync(path.join(__dirname, '..', 'templates.js'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
 const NL = String.fromCharCode(10);
 
 const results = [];
