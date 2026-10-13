@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.40';
+const APP_VERSION = '18.41';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -3465,6 +3465,7 @@ function _elevCaptureSignature() {
         parts.push(typeof elevUnit !== 'undefined' ? elevUnit : '');
         parts.push(typeof showUnitSuffix !== 'undefined' ? String(showUnitSuffix) : '');
         parts.push(_specDualUnit());
+        parts.push(JSON.stringify(frameFx));   // Frame Effects change what every frame draws
         parts.push(typeof elevPersonShade !== 'undefined' ? String(elevPersonShade) : '');
         // The wireframe look changes what every frame DRAWS, so it has to invalidate
         // the cached captures like any other drawing input. Without it, toggling it
@@ -6135,6 +6136,148 @@ const DASH_PREVIEW_SIZE_DEFAULT = 400;
 // the frame visually grounded when outer shadows are off.
 let dashOuterShadowsOn = true;
 
+// ── FRAME EFFECTS (18.41) ──────────────────────────────────────────────────────
+// One strength per shadow a framed piece casts, 0 to 2 (100% = the studio's look
+// before this panel existed, byte for byte). Read by EVERY renderer through _fxSh /
+// _fxCss (canvas: PNG exports, spec pages, PDF) and CSS variables (the Dashboard
+// preview's mat and art classes), so the panel cannot tune one view and not another.
+//   outer  the drop shadow onto the wall / page (also gated by dashOuterShadowsOn)
+//   frame  the frame onto mat 1, the backer, or the paper when there is no mat
+//   mat    one mat onto the next, or onto the faux-mat paper
+//   art    the opening onto the artwork
+//   paper  a float-mounted (deckled) sheet lifting off its backer
+// Saved per computer like the drafting style AND carried in the project file, so a
+// deck prints the same on anyone's machine. Meant to be tuned, agreed, then baked
+// into FRAME_FX_DEFAULT.
+const FRAME_FX_DEFAULT = { outer: 1, frame: 1, mat: 1, art: 1, paper: 1 };
+const FRAME_FX_KEYS = Object.keys(FRAME_FX_DEFAULT);
+let frameFx = Object.assign({}, FRAME_FX_DEFAULT);
+function _fx(k) { const v = parseFloat(frameFx && frameFx[k]); return isFinite(v) ? Math.max(0, Math.min(2, v)) : 1; }
+// Scale one shadow recipe. Opacity carries the strength; blur and offset grow more
+// gently (0.6 + 0.4s), so 200% is a deeper shadow rather than a grey smear, and at
+// 100% every number comes back exactly as written.
+function _fxSh(k, blur, off, alpha) {
+    const s = _fx(k), g = 0.6 + 0.4 * s;
+    return { b: blur * g, o: off * g, a: Math.min(1, alpha * s), g: g };
+}
+function _fxCss(k, x, y, blur, alpha, inset) {
+    const v = _fxSh(k, blur, y, alpha);
+    return (inset ? 'inset ' : '') + +(x * v.g).toFixed(2) + 'px ' + +v.o.toFixed(2) + 'px ' + +v.b.toFixed(2) + 'px rgba(0,0,0,' + +v.a.toFixed(3) + ')';
+}
+function _frameFxNormalize(src) {
+    const out = Object.assign({}, FRAME_FX_DEFAULT);
+    FRAME_FX_KEYS.forEach(k => { const v = parseFloat(src && src[k]); if (isFinite(v)) out[k] = Math.max(0, Math.min(2, v)); });
+    return out;
+}
+function loadFrameFx() { try { const j = JSON.parse(localStorage.getItem('frameFx') || 'null'); if (j) frameFx = _frameFxNormalize(j); } catch (e) {} applyFrameFxCssVars(); }
+function saveFrameFx() { try { localStorage.setItem('frameFx', JSON.stringify(frameFx)); } catch (e) {} }
+function applyFrameFxCssVars() {
+    const r = document.documentElement; if (!r || !r.style) return;
+    FRAME_FX_KEYS.forEach(k => { r.style.setProperty('--fx-' + k, String(_fx(k))); r.style.setProperty('--fx-' + k + '-g', String(0.6 + 0.4 * _fx(k))); });
+}
+// Every view repaints at once for the panel's own preview; the expensive ones (deck
+// pages, elevation captures, cached mockups) are dropped on a short debounce, because
+// a slider fires on every pixel of a drag.
+let _frameFxTimer = null;
+function setFrameFx(k, v) {
+    if (FRAME_FX_KEYS.indexOf(k) < 0) return;
+    frameFx[k] = Math.max(0, Math.min(2, parseFloat(v) || 0));
+    saveFrameFx(); applyFrameFxCssVars();
+    try { if (typeof updateDashVisualsFromDOM === 'function') updateDashVisualsFromDOM(); } catch (e) {}
+    clearTimeout(_frameFxTimer);
+    _frameFxTimer = setTimeout(_frameFxChanged, 250);
+}
+function _frameFxChanged() {
+    try { _invalidateFramesCache(); } catch (e) {}
+    try { for (const k in _mockupCache) delete _mockupCache[k]; } catch (e) {}
+    try { _elevGuidesChanged(); } catch (e) {}
+    try { if (typeof _dsClearBuiltAll === 'function') _dsClearBuiltAll(); } catch (e) {}
+    try { if (typeof elevations !== 'undefined' && elevations.length && currentView === 'elevation') drawElevAll(); } catch (e) {}
+    try { if (_dsIsOpen && _dsIsOpen()) { _dsRebuildAllThumbs(); _dsRefresh(); } } catch (e) {}
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
+// THE FRAME EFFECTS PANEL (18.41). Opened from the header's shadow button (Dashboard,
+// Elevations) and from Deck Studio's Project tab. The preview is the SELECTED piece
+// through renderFrameToCanvas, the same renderer as the PNG export and the spec pages,
+// so what the sliders show is what exports.
+const FRAME_FX_ROWS = [
+    ['outer', 'Drop shadow', 'The frame onto the wall and onto the white of a spec page'],
+    ['frame', 'Frame onto mat', 'The moulding onto mat 1 (or the backer, or the paper when there is no mat)'],
+    ['mat', 'Mat onto mat', 'Mat 1 onto mat 2, or a mat onto the faux-mat paper'],
+    ['art', 'Onto artwork', 'The opening onto the artwork itself'],
+    ['paper', 'Paper lift', 'A float-mounted or deckled sheet lifting off its backer']
+];
+function openFrameFx() {
+    let m = document.getElementById('frameFxModal'); if (m) m.remove();
+    m = document.createElement('div'); m.id = 'frameFxModal';
+    m.className = 'frame-modal'; m.setAttribute('data-modal-backdrop', '');
+    m.style.display = 'flex';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:760px; max-width:94vw; max-height:90vh; overflow:auto; padding:20px; display:flex; flex-direction:column; gap:14px;';
+    card.innerHTML = '<div><h3 style="margin:0 0 4px; font-size:var(--fs-105); color:var(--text-strong);">Frame effects</h3>'
+        + '<div style="font-size:var(--fs-70); color:var(--text-muted);">How deep the shadows are on every frame: the Dashboard preview, elevations, PNG exports and spec pages. 100% is the studio look. Saved on this computer and in the project file.</div></div>';
+    const body = document.createElement('div'); body.style.cssText = 'display:flex; gap:18px; align-items:stretch; flex-wrap:wrap;';
+    const pv = document.createElement('div'); pv.id = 'frameFxPreview';
+    pv.style.cssText = 'flex:1 1 300px; min-height:300px; background:#ececec; border-radius:var(--r-6); display:flex; align-items:center; justify-content:center; overflow:hidden; padding:10px;';
+    const ctl = document.createElement('div'); ctl.style.cssText = 'flex:1 1 300px; display:flex; flex-direction:column; gap:12px;';
+    const on = document.createElement('label'); on.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:var(--fs-75); font-weight:700; color:var(--text-main); cursor:pointer;';
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = 'frameFxOuterOn'; cb.checked = !!dashOuterShadowsOn;
+    cb.onchange = () => { applyOuterShadowsState(cb.checked); try { localStorage.setItem('dashOuterShadowsOn', cb.checked ? '1' : '0'); } catch (e) {} _frameFxPreview(); _frameFxChanged(); _frameFxSyncRows(); };
+    on.appendChild(cb); on.appendChild(document.createTextNode('Show the drop shadow'));
+    ctl.appendChild(on);
+    FRAME_FX_ROWS.forEach(([k, label, help]) => {
+        const row = document.createElement('div'); row.setAttribute('data-fx-row', k);
+        const top = document.createElement('div'); top.style.cssText = 'display:flex; justify-content:space-between; font-size:var(--fs-70); color:var(--text-main); margin-bottom:3px;';
+        const l = document.createElement('span'); l.textContent = label; l.title = help;
+        const val = document.createElement('span'); val.style.cssText = 'color:var(--text-muted); font-variant-numeric:tabular-nums;';
+        top.appendChild(l); top.appendChild(val);
+        const r = document.createElement('input'); r.type = 'range'; r.min = '0'; r.max = '200'; r.step = '5'; r.style.width = '100%';
+        r.setAttribute('data-fx', k); r.value = String(Math.round(_fx(k) * 100));
+        const show = () => { val.textContent = r.value + '%'; };
+        r.oninput = () => { show(); setFrameFx(k, (parseFloat(r.value) || 0) / 100); _frameFxPreview(); };
+        show();
+        const h = document.createElement('div'); h.textContent = help; h.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:2px;';
+        row.appendChild(top); row.appendChild(r); row.appendChild(h);
+        ctl.appendChild(row);
+    });
+    body.appendChild(pv); body.appendChild(ctl);
+    card.appendChild(body);
+    const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
+    const rs = document.createElement('button'); rs.className = 'action-btn btn-secondary'; rs.style.cssText = 'width:auto; height:32px; padding:0 14px;'; rs.textContent = 'Reset to studio look';
+    rs.onclick = () => { resetFrameFx(); _frameFxSyncRows(); _frameFxPreview(); };
+    const done = document.createElement('button'); done.className = 'action-btn'; done.style.cssText = 'width:auto; height:32px; padding:0 18px;'; done.textContent = 'Done';
+    done.setAttribute('data-modal-close', ''); done.onclick = () => m.remove();
+    foot.appendChild(rs); foot.appendChild(done); card.appendChild(foot);
+    m.appendChild(card);
+    document.body.appendChild(m);
+    _frameFxSyncRows();
+    _frameFxPreview();
+}
+function _frameFxSyncRows() {
+    document.querySelectorAll('#frameFxModal input[data-fx]').forEach(r => {
+        const k = r.getAttribute('data-fx'); r.value = String(Math.round(_fx(k) * 100));
+        const v = r.parentNode.querySelector('span:last-child'); if (v) v.textContent = r.value + '%';
+        if (k === 'outer') { const row = r.closest('[data-fx-row]'); if (row) row.style.opacity = dashOuterShadowsOn ? '' : '0.45'; }
+    });
+}
+let _frameFxPvTok = 0;
+async function _frameFxPreview() {
+    const host = document.getElementById('frameFxPreview'); if (!host) return;
+    const tok = ++_frameFxPvTok;
+    const d = (typeof dashProjectData !== 'undefined' && dashProjectData[dashSelectedRowIndex]) || null;
+    if (!d) { host.textContent = 'Select a piece in the Frame Dashboard to preview it here.'; return; }
+    let art = null; if (d.artworkUrl) { try { art = await _loadImg(d.artworkUrl); } catch (e) {} }
+    let sw = null; if (d.fType === 'image' && d.swatchDataUrl) { try { sw = await _loadImg(d.swatchDataUrl); } catch (e) {} }
+    if (tok !== _frameFxPvTok) return;
+    try {
+        const out = renderFrameToCanvas(_frameDataInInches(d, dashUnit), sw, { dpi: 72, pad: 60, artworkImg: art, artCrop: { zoom: d.artZoom, panX: d.artPanX, panY: d.artPanY } });
+        const c = out && out.canvas; if (!c) return;
+        c.style.cssText = 'max-width:100%; max-height:360px; width:auto; height:auto; display:block;';
+        host.innerHTML = ''; host.appendChild(c);
+    } catch (e) { host.textContent = 'Preview unavailable for this piece.'; }
+}
+function resetFrameFx() { FRAME_FX_KEYS.forEach(k => { frameFx[k] = FRAME_FX_DEFAULT[k]; }); saveFrameFx(); applyFrameFxCssVars(); try { updateDashVisualsFromDOM(); } catch (e) {} _frameFxChanged(); }
+
 // Re-render everything that uses shadows after a toggle change. The CSS
 // classes drive the live preview (via .no-outer-shadows on body), but the
 // PNG renderer and elevation rendering need explicit re-rendering since
@@ -6322,6 +6465,7 @@ function initDashViewMode() {
     setupDashPreviewDragHandle();
     // Restore the outer-shadow toggle state (default ON).
     initOuterShadowsToggle();
+    try { loadFrameFx(); } catch (e) {}
 }
 
 // Wire up the left-edge drag handle that lets the user resize the Mode 2
@@ -7228,7 +7372,7 @@ function _projectPayload() {
     // in the second case. _cloneData, not a reference: annotationStyle keeps mutating
     // after this and the serialize happens on the caller's next line.
     return { type: 'master-studio-v6', dashUnit: dashUnit, elevUnit: elevUnit, hangHeightIn: elevHangIn, baseboardIn: elevBaseboardIn, globalMeta: globalMeta, dashProjectData: dashProjectData, elevations: elevations, floorplanImage: floorplanImageData, floorplanImageName: floorplanImageName, floorplanLevels: floorplanLevels, editorial: editorialContent,
-        annotationStyle: _cloneData(annotationStyle), elevDualUnit: _specDualUnit() };   // still written, so an older build reading only this key prints the same
+        annotationStyle: _cloneData(annotationStyle), elevDualUnit: _specDualUnit(), frameFx: _cloneData(frameFx) };   // still written, so an older build reading only this key prints the same
 }
 
 // The name a NEW file is suggested under. Project name plus today's date, which
@@ -7434,6 +7578,9 @@ function _readProjectText(text) {
             // doesn't set it), and the machine's own preference is then correct — so
             // loading an old project must not wipe the settings the user chose. Only
             // an explicitly present key overrides them.
+            // Frame Effects travel with the project (18.41), the drafting-style rule: absent
+            // means the file predates them, so this machine's settings stand.
+            if (data.frameFx && typeof data.frameFx === 'object') { frameFx = _frameFxNormalize(data.frameFx); saveFrameFx(); applyFrameFxCssVars(); }
             if (data.annotationStyle && typeof data.annotationStyle === 'object') {
                 // Merge onto the current object rather than replacing it: every
                 // renderer holds a live reference to `annotationStyle`, and a file
@@ -11819,7 +11966,7 @@ function updateDashVisualsFromDOM() {
         fVis.style.background = 'transparent';
         // Outer shadow gated by dashOuterShadowsOn.
         fVis.style.boxShadow = dashOuterShadowsOn
-            ? '0 6px 20px rgba(0,0,0,0.35), 0 2px 6px rgba(0,0,0,0.2)'
+            ? _fxCss('outer', 0, 6, 20, 0.35) + ', ' + _fxCss('outer', 0, 2, 6, 0.2)
             : 'none';
     } else if (data.fType === 'color') {
         fVis.className = 'frame-vis frame-vis-solid';
@@ -11836,6 +11983,13 @@ function updateDashVisualsFromDOM() {
         });
     }
 
+    // A FRAMED piece casts the same drop shadow on screen as in its PNG (18.41): the
+    // canvas renderer's recipe (35px blur, 18px drop at 72dpi) converted to this preview's
+    // px-per-inch. It had none here, so the preview and the export disagreed.
+    if (!_isFlatGraphic(data.product) && !isFrameless) {
+        const _pxIn = ratio / 72;
+        fVis.style.boxShadow = dashOuterShadowsOn ? _fxCss('outer', 0, 18 * _pxIn, 35 * _pxIn, 0.55) : 'none';
+    }
     let offsetW = (data.fType === 'color' || isFrameless) ? 0 : (effFw_dash * ratio);
 
     if(effM1A) { 
@@ -14104,7 +14258,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         // resulting in a cleaner PNG for compositing in InDesign without an
         // unwanted bleed halo around the frame.
         if (dashOuterShadowsOn) {
-            x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 35; x.shadowOffsetY = 18;
+            { const _o = _fxSh('outer', 35, 18, 0.55); x.shadowColor = 'rgba(0,0,0,' + _o.a + ')'; x.shadowBlur = _o.b; x.shadowOffsetY = _o.o; }
             x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
             x.shadowColor = 'transparent';
         }
@@ -14137,7 +14291,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     // toggle — when off, no outer shadow is painted, giving cleaner PNGs for
     // InDesign compositing without an unwanted bleed halo.
     if (dashOuterShadowsOn) {
-        x.shadowColor = 'rgba(0,0,0,0.55)'; x.shadowBlur = 35; x.shadowOffsetY = 18;
+        { const _o = _fxSh('outer', 35, 18, 0.55); x.shadowColor = 'rgba(0,0,0,' + _o.a + ')'; x.shadowBlur = _o.b; x.shadowOffsetY = _o.o; }
         x.fillStyle = '#000'; x.fillRect(0, 0, w, h);
         x.shadowColor = 'transparent';
     } else {
@@ -14244,7 +14398,9 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     // so all inner shadows render slightly darker than their original calibration.
     // This makes the frame look properly "grounded" even when the outer drop
     // shadow is off (user toggle). Clamped to 1.0 so we don't oversaturate.
-    function dIS(bx, by, bw, bh, bl, os, op) {
+    function dIS(bx, by, bw, bh, bl, os, op, kind) {
+        // 18.41: scaled by the Frame Effects strength for this shadow's kind.
+        const _v = _fxSh(kind || 'frame', bl, os, op); bl = _v.b; os = _v.o; op = _v.a;
         const boostedOp = Math.min(1.0, op * 1.25);
         x.save(); x.beginPath(); x.rect(bx,by,bw,bh); x.clip();
         x.shadowColor = `rgba(0,0,0,${boostedOp})`; x.shadowBlur = bl; x.shadowOffsetY = os;
@@ -14267,7 +14423,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.fillStyle = mat1Color; x.fillRect(iX, iY, iW, iH);
         // Frame casts a strong inset shadow onto Mat 1 (bumped per user request:
         // gives clearer visual separation between frame profile and mat surface).
-        dIS(iX, iY, iW, iH, 35, 14, 0.6);
+        dIS(iX, iY, iW, iH, 35, 14, 0.6, 'frame');
         x.strokeStyle = "#cccccc"; x.lineWidth = 1; x.strokeRect(iX, iY, iW, iH);
     }
     const m2X = iX + (mL*dpi), m2Y = iY + (mT*dpi);
@@ -14275,7 +14431,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     if (m2On) {
         x.fillStyle = mat2Color; x.fillRect(m2X, m2Y, m2W, m2H);
         // Mat 1 casts a moderate inset shadow onto Mat 2 (slightly bumped to match)
-        dIS(m2X, m2Y, m2W, m2H, 20, 8, 0.45);
+        dIS(m2X, m2Y, m2W, m2H, 20, 8, 0.45, 'mat');
         x.strokeStyle = "#cccccc"; x.lineWidth = 1; x.strokeRect(m2X, m2Y, m2W, m2H);
     }
 
@@ -14314,10 +14470,10 @@ function renderFrameToCanvas(d, swatchImg, opts) {
             // Cast shadow of the mat (or frame, if no mats) above onto the white paper.
             // Magnitude matches the shadow Mat 2 / Mat 1 would project onto each other.
             if (m1On || m2On) {
-                dIS(fauxX, fauxY, fauxW, fauxH, 20, 8, 0.45);
+                dIS(fauxX, fauxY, fauxW, fauxH, 20, 8, 0.45, 'mat');
             } else {
                 // No mats — the frame casts a stronger shadow (same as Mat 1 would get)
-                dIS(fauxX, fauxY, fauxW, fauxH, 35, 14, 0.6);
+                dIS(fauxX, fauxY, fauxW, fauxH, 35, 14, 0.6, 'frame');
             }
             // Subtle outline so the paper edge is visible against the mat above
             x.strokeStyle = "#cccccc"; x.lineWidth = 1;
@@ -14340,7 +14496,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.fillRect(iX, iY, iW, iH);
         // Frame casts a strong inset shadow onto the backer too (matches the bumped
         // mat shadow above for visual consistency across products).
-        dIS(iX, iY, iW, iH, 35, 14, 0.6);
+        dIS(iX, iY, iW, iH, 35, 14, 0.6, 'frame');
 
         // Paper rectangle, inset from frame inner edge by paperMargin
         sbPaperX = iX + paperMarginPx; sbPaperY = iY + paperMarginPx;
@@ -14405,7 +14561,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         // (rgba opacity 0.55 * 1.25 = ~0.69, rounded to 0.7).
         // Use a separate save/restore so the shadow doesn't bleed onto subsequent draws.
         x.save();
-        x.shadowColor = 'rgba(0,0,0,0.7)'; x.shadowBlur = 18; x.shadowOffsetX = 2; x.shadowOffsetY = 4;
+        { const _p = _fxSh('paper', 18, 4, 0.7); x.shadowColor = 'rgba(0,0,0,' + _p.a + ')'; x.shadowBlur = _p.b; x.shadowOffsetX = 2 * _p.g; x.shadowOffsetY = _p.o; }
         x.fillStyle = paperColor;
         x.fill(paperPath);
         x.restore();
@@ -14451,7 +14607,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.rect(-pad, -pad, c.width, c.height);
         x.rect(aX, aY, aW, aH);
         x.clip('evenodd');
-        x.shadowColor = `rgba(0,0,0,0.8)`; x.shadowBlur = 25; x.shadowOffsetX = 0; x.shadowOffsetY = 3;
+        { const _f = _fxSh('frame', 25, 3, 0.8); x.shadowColor = 'rgba(0,0,0,' + _f.a + ')'; x.shadowBlur = _f.b; x.shadowOffsetX = 0; x.shadowOffsetY = _f.o; }
         x.lineWidth = 6; x.strokeStyle = '#000';
         x.strokeRect(aX + 4, aY + 4, aW - 8, aH - 8);
         x.restore();
@@ -14462,7 +14618,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         // mat above, handled in the faux mat / paper fill blocks above.
         // (Intentionally no shadow drawn here.)
     } else {
-        dIS(aX, aY, aW, aH, 8, 3, 0.25);
+        dIS(aX, aY, aW, aH, 8, 3, 0.25, 'art');
         x.strokeStyle = "#aaaaaa"; x.lineWidth = 1; x.strokeRect(aX, aY, aW, aH);
     }
 
@@ -14501,6 +14657,16 @@ function renderFrameToCanvas(d, swatchImg, opts) {
             x.fillText(String(opts.wireframeLetter), aX + aW / 2, aY + aH / 2);
         }
         x.restore();
+    }
+
+    // THE OPENING'S SHADOW FALLS ON THE ARTWORK (18.41). It was drawn before the artwork,
+    // and the artwork covers the whole opening, so a piece with art never showed the mat's
+    // shadow on it at all. Drawn again on top of real artwork only: the opening treatment
+    // above already gave the empty opening its one shadow, and the wireframe look drops it
+    // on purpose (the wrong cue on a placement drawing). Floaters, float mounts and faux
+    // mats keep their own rules: the print sits flat, no shadow.
+    if (opts.artworkImg && !opts.wireframe && !isC && !useFM && !useFauxMat && aW > 0 && aH > 0) {
+        dIS(aX, aY, aW, aH, 8, 3, 0.25, 'art');
     }
 
     // Optional art-opening size label (for elevation export — dashboard already shows this elsewhere)
@@ -40842,7 +41008,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.40</strong> A shorter Deck Studio tool bar. Text box and Paragraph live in the Text menu (T still adds a text box straight away), and Upload image lives in the Shapes menu (I still works). The settings button for a selected object is a gear now, not a sun that looked like the theme switch.<br><br>\n<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
+                body: `<strong>18.41</strong> <strong>Frame effects.</strong> The shadow button in the header (and Frame effects in Deck Studio under Project) opens sliders for each shadow a frame casts: the drop shadow onto the wall and page, the frame onto the mat, mat onto mat, onto the artwork, and the lift of a float-mounted sheet. 100% is the old look; a live preview of the selected piece shows the result. It reaches the Dashboard preview, elevations, PNG exports and spec pages, and travels in the project file. Also fixed: the shadow inside the opening now falls on the artwork (it was hidden under it), and framed pieces in the Dashboard preview show the same drop shadow as their PNG.<br><br>\n<strong>18.40</strong> A shorter Deck Studio tool bar. Text box and Paragraph live in the Text menu (T still adds a text box straight away), and Upload image lives in the Shapes menu (I still works). The settings button for a selected object is a gear now, not a sun that looked like the theme switch.<br><br>\n<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
 <strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
@@ -41995,8 +42161,9 @@ function drawElevAll() {
         // Outer drop-shadow strings (used by all three render branches below).
         // Gated on dashOuterShadowsOn: when off, the shadow halo is suppressed
         // so elevations match the toggle-off PNG export look.
+        // Every shadow here goes through _fxCss, so the Frame Effects panel reaches the wall.
         const elevOuterShadow = dashOuterShadowsOn
-            ? `0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`
+            ? _fxCss('outer', 0, 16 * elevScale, 40 * elevScale, 0.45) + ', ' + _fxCss('outer', 0, 6 * elevScale, 12 * elevScale, 0.3)
             : 'none';
 
         if (isFlat) {
@@ -42023,7 +42190,7 @@ function drawElevAll() {
             // outer shadow, so it stays regardless of the toggle. Only the
             // ambient/contact shadows are conditional.
             el.style.boxShadow = dashOuterShadowsOn
-                ? `0 0 0 1.5px ${f.fColor || '#1a1a1a'}, 0 ${16 * elevScale}px ${40 * elevScale}px rgba(0,0,0,0.45), 0 ${6 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.3)`
+                ? `0 0 0 1.5px ${f.fColor || '#1a1a1a'}, ` + elevOuterShadow
                 : `0 0 0 1.5px ${f.fColor || '#1a1a1a'}`;
         } else {
             el.classList.add('frame-vis-image');
@@ -42054,7 +42221,7 @@ function drawElevAll() {
             el.style.setProperty('--m1-color', m1Color);
             // Bumped inset shadow: frame casts a stronger shadow onto the mat surface
             // (matches the canvas renderer's bumped shadow for visual consistency).
-            m1.style.boxShadow = `0 0 0 1.5px ${m1Color}, inset 0 ${4 * elevScale}px ${10 * elevScale}px rgba(0,0,0,0.45), 0 ${2 * elevScale}px ${5 * elevScale}px rgba(0,0,0,0.15)`;
+            m1.style.boxShadow = `0 0 0 1.5px ${m1Color}, ` + _fxCss('frame', 0, 4 * elevScale, 10 * elevScale, 0.45, true) + ', ' + _fxCss('mat', 0, 2 * elevScale, 5 * elevScale, 0.15);
             el.appendChild(m1);
         }
         
@@ -42068,7 +42235,7 @@ function drawElevAll() {
             // Explicit borderColor — must NOT depend on inherited theme color
             m2.style.borderColor = m2Color;
             el.style.setProperty('--m2-color', m2Color);
-            m2.style.boxShadow = `0 0 0 1.5px ${m2Color}, inset 0 ${2 * elevScale}px ${6 * elevScale}px rgba(0,0,0,0.3), 0 ${2 * elevScale}px ${5 * elevScale}px rgba(0,0,0,0.15)`;
+            m2.style.boxShadow = `0 0 0 1.5px ${m2Color}, ` + _fxCss('mat', 0, 2 * elevScale, 6 * elevScale, 0.3, true) + ', ' + _fxCss('mat', 0, 2 * elevScale, 5 * elevScale, 0.15);
             el.appendChild(m2);
         }
 
@@ -42108,9 +42275,9 @@ function drawElevAll() {
                 // Magnitude similar to mat 2's inset shadow but slightly stronger
                 // when no mats above (frame casts directly).
                 if (m1Active || m2Active) {
-                    faux.style.boxShadow = `inset 0 ${2 * elevScale}px ${6 * elevScale}px rgba(0,0,0,0.3)`;
+                    faux.style.boxShadow = _fxCss('mat', 0, 2 * elevScale, 6 * elevScale, 0.3, true);
                 } else {
-                    faux.style.boxShadow = `inset 0 ${4 * elevScale}px ${10 * elevScale}px rgba(0,0,0,0.45)`;
+                    faux.style.boxShadow = _fxCss('frame', 0, 4 * elevScale, 10 * elevScale, 0.45, true);
                 }
                 el.appendChild(faux);
             }
@@ -42218,7 +42385,7 @@ function drawElevAll() {
             }
         } else if (isFloater) {
             // Floater: subtle dashed outline + inner shadow (image opening recessed into the canvas).
-            art.style.boxShadow = `inset 0 0 ${10 * elevScale}px rgba(0,0,0,0.35)`;
+            art.style.boxShadow = _fxCss('frame', 0, 0, 10 * elevScale, 0.35, true);
             art.style.border = '1px dashed rgba(0,0,0,0.25)';
         } else if (isFrameless || useFM) {
             // Frameless canvas & float mount: dashed outline only — NO inner shadow.
@@ -42230,7 +42397,7 @@ function drawElevAll() {
             // paper margin / white border should show white.
             art.style.background = 'rgb(120,120,120)';
         } else {
-            art.style.boxShadow = `inset 0 ${2 * elevScale}px ${8 * elevScale}px rgba(0,0,0,0.2)`;
+            art.style.boxShadow = _fxCss('art', 0, 2 * elevScale, 8 * elevScale, 0.2, true);
         }
         // LAST, so it overrides the per-product opening treatments above: a wireframe
         // is a flat grey block. The inset shadow and the recessed-opening cues sell

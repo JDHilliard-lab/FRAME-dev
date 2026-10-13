@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.40">
+    <link rel="stylesheet" href="style.css?v=18.41">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -81,7 +81,7 @@
                  compositing get the original look. Persists to localStorage
                  as 'dashOuterShadowsOn'. Icon = a small square with a soft
                  shadow underneath, slashed when off. -->
-            <button id="outerShadowToggle" data-views="dashboard elevation" class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;" onclick="toggleOuterShadows()" title="Toggle outer drop shadows (off = cleaner PNGs for InDesign)">
+            <button id="outerShadowToggle" data-views="dashboard elevation" class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;" onclick="openFrameFx()" title="Frame effects: drop shadow and the shadows inside the frame">
                 <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;">
                     <!-- Soft "shadow" trail below the square — gets visually
                          "cut" by the .active state CSS rule. -->
@@ -1460,6 +1460,7 @@
         </div>
         <!-- 18.37: the same units controls as the header chip, built by _unitControlsInto. -->
         <div id="projUnitsHost" style="margin-bottom:14px;"></div>
+        <button type="button" id="projFrameFxBtn" class="action-btn btn-secondary" style="width:auto; height:28px; padding:0 12px; margin:-4px 0 14px;" onclick="openFrameFx()" title="Drop shadow and the shadows inside the frame, for every preview, export and spec page">Frame effects&hellip;</button>
         <div style="display:flex; gap:10px; margin-bottom:16px;">
             <div style="flex:2;">
                 <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Project Code</label>
@@ -2446,9 +2447,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.40';</script>
-<script src="templates.js?v=18.40"></script>
-<script src="app.js?v=18.40"></script>
+<script>window.FRAME_HTML_VERSION = '18.41';</script>
+<script src="templates.js?v=18.41"></script>
+<script src="app.js?v=18.41"></script>
 
 </body>
 </html>
