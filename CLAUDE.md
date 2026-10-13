@@ -76,6 +76,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   `getAttribute('style')`). Real jsPDF loads under Node via `require('lib-jspdf.min.js')`.
   For anything about what a browser actually draws or measures, use headless Chrome
   (`--headless=new --dump-dom` with a probe page writing results into `document.title`).
+- **jsdom has no IndexedDB, so set `_autosaveToldUser = true` in any harness that pushes
+  history or opens dialogs.** Otherwise the first debounced autosave (500 ms) fails and
+  opens the "nothing is backing up your work" modal, which blocks `undo()` and shows up in
+  dialog checks. Alone a file often finishes first; under the parallel suite it does not,
+  which is how a file passes alone and fails in `run-all`.
 - **Mixed line endings.** `style.css` and some tests (e.g. `test_egd_wf_product.js`) are
   partly CRLF; a multi-line edit anchor written with `\n` matches nothing there.
 ## Architecture anchors (hard-won; don't rediscover)

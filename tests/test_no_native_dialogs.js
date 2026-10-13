@@ -33,6 +33,12 @@ const path = require('path');
     const __check = async (label, fn) => { try { await fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     const S = window.__appSrc;
     const tick = (ms) => new Promise(r => setTimeout(r, ms || 5));
+    // jsdom has no IndexedDB, so the first debounced autosave fails and opens the
+    // "nothing is backing up your work" dialog, and undo() is (correctly) refused while
+    // a dialog is open. Alone this file finished before the 500ms debounce; under the
+    // parallel suite it did not, and the two undo checks failed. Same flag other
+    // harnesses set: the notice counts as already shown.
+    _autosaveToldUser = true;
     renderFloorplanMarkup = function () {};
     _toast = function () { return null; };
 

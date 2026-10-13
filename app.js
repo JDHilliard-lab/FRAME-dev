@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.34';
+const APP_VERSION = '18.35';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -7391,7 +7391,15 @@ function _readProjectText(text) {
             // Code order is the house standard, so a project opens in it: gaps closed,
             // rows and walls sorted. Needs the categories (prefix order) and the walls
             // (catalogue structure), so it runs here and not earlier.
-            try { _codesSettle(); } catch (e) {}
+            {
+                // ...and it SAYS SO (18.35). Codes are file names: a mockup PNG is named
+                // after its code and InDesign links to it by name, so renaming ART.004-A to
+                // ART.003-A silently on open meant the next re-export broke links nobody
+                // knew had moved. Compared by ROW, so catalogue renames are caught too.
+                const _before = (dashProjectData || []).filter(Boolean).map(r => [r, r.id]);
+                try { _codesSettle(); } catch (e) {}
+                _codesReportOpenRenames(_before);
+            }
             // The drafting standard, when the file carries one. OPTIONAL by design:
             // absent means the file predates the idea (or was written by a tool that
             // doesn't set it), and the machine's own preference is then correct — so
@@ -29504,6 +29512,37 @@ function _renumberPrefix(prefix, order) {
 // THE ONE CALL after anything that adds, removes or recodes a placement: close every
 // gap, then put the rows and the walls in code order. Pushes no history; the caller's
 // own entry covers it, so one gesture is one Ctrl+Z.
+// Tell the designer which codes changed when a project opened (18.35). `before` is
+// [[row, idAtOpen], ...]; anything whose id differs now was renumbered by the settle.
+// A MODAL, not a toast: it is a change they did not ask for and it moves file names.
+// Returns the list so a caller or test can read it.
+function _codesReportOpenRenames(before) {
+    const moved = (before || []).filter(p => p[0] && p[0].id && p[0].id !== p[1]).map(p => [p[1], p[0].id]);
+    if (!moved.length) return moved;
+    const line = (m) => m[0] + '  \u2192  ' + m[1];
+    const SHOW = 25;
+    const listed = moved.slice(0, SHOW).map(line).join('\n') + (moved.length > SHOW ? '\n...and ' + (moved.length - SHOW) + ' more (Copy list has them all)' : '');
+    const all = moved.map(m => m[0] + '\t' + m[1]).join('\n');
+    const body = 'Item codes are always in number order, so this project\'s codes were closed up when it opened:\n\n'
+        + listed + '\n\nMockup and elevation PNGs exported from now on use the NEW codes in their file names. '
+        + 'If an InDesign file links the old names, relink or rename those files.\n\nSave the project to keep the new codes.';
+    setTimeout(() => {
+        try {
+            showInfoModal(moved.length === 1 ? '1 item code renumbered' : moved.length + ' item codes renumbered', body);
+            const row = document.getElementById('infoModalButtons');
+            if (row) {
+                const cp = document.createElement('button');
+                cp.className = 'action-btn btn-secondary';
+                cp.style.height = '32px';   // the row stacks, so it takes OK's full width
+                cp.textContent = 'Copy list';
+                cp.setAttribute('data-codes-copy', '');
+                cp.onclick = () => { _dsCopyText('Old code\tNew code\n' + all); _toast('Copied', moved.length + ' renamed codes, old and new.'); };
+                row.insertBefore(cp, row.firstChild);
+            }
+        } catch (e) {}
+    }, 0);
+    return moved;
+}
 function _codesSettle(opts) {
     // Options first: Option 1..n and tree order inside each placement, then the
     // placements themselves (17.97).
@@ -40716,7 +40755,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
+                body: `<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
 <strong>18.31</strong> Housekeeping: removed the old template-card renderer, the template Re-number dialog and two other leftovers nothing used any more. Nothing you can see changes; the app loads a little less code.<br><br>
