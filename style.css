@@ -2714,3 +2714,12 @@ button.cat-node:hover { border-color: var(--ui-active); }
     font-size: var(--fs-70); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .ss-tour:hover { color: var(--text-strong); }
 .next-step .ns-tour { border-color: var(--ui-active); color: var(--ui-active); }
+
+/* 18.36: header controls that only mean something in some views (data-views). A class,
+   not inline display, because those buttons set display:flex inline. */
+.hdr-off { display: none !important; }
+/* Save Project and its menu read as one split button. */
+.save-split { display: inline-flex; align-items: stretch; }
+.save-split > #saveProjectBtn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.save-split > #saveMenuBtn { border-top-left-radius: 0; border-bottom-left-radius: 0; padding: 0 6px; margin-left: 1px; }
+.save-split > #saveMenuBtn .svg-icon { width: 12px; height: 12px; }
