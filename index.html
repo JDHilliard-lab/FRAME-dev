@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.37">
+    <link rel="stylesheet" href="style.css?v=18.38">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -1137,29 +1137,14 @@
                     <!-- The creation tools live in #dsToolDock, which _dsDockPlace moves between
                          this slot (Top) and the two slots beside the page (Left / Right). -->
                     <span id="dsDockTopSep" style="width:1px; height:20px; background:var(--border-color); margin:0 2px; display:none;"></span>
-                    <button id="dsMbGuides" onclick="_mbOpenGuidesMenu()" title="Guides &amp; snapping — column/margin guides, presets, custom sets" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:none; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></button>
-                    <button id="dsMbLayers" onclick="_dsToggleLayersPanel()" title="Layers — hide, lock, select, and reorder everything on this page" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:none; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></button>
-                    <span style="width:1px; height:20px; background:var(--border-color); margin:0 2px;"></span>
-                    <span style="width:1px; height:20px; background:var(--border-color); margin:0 2px;"></span>
-                    <button id="dsBuildBtn" onclick="_dsBuildPage()" class="action-btn btn-secondary" title="Preview — render an exact preview of how this page exports (auto-refreshes after edits)" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
-                    <button id="dsPreflightBtn" onclick="_dsShowPreflight()" class="action-btn btn-secondary" title="Preflight — scan the whole deck for missing artwork, pins, plan images, empty frames, and hidden items before exporting" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></button>
+                    
+                    
+                    
+                    
+                    
+                    
                     <input type="file" id="dsAnnImageFile" accept="image/*" style="display:none" onchange="_dsImageFilePicked(this)">
-                    <span style="width:1px; height:20px; background:var(--border-color); margin:0 2px;"></span>
-                    <span id="dsSelGroup" style="display:inline-flex; align-items:center; gap:6px; opacity:0.4; pointer-events:none;">
-                        <span id="dsArrowGroup" style="display:none; align-items:center; gap:4px;">
-                            <!-- Arrow styling (colour, weight, tip, start cap) lives in the arrow settings popup. It was here AND there. -->
-                        </span>
-                        <span id="dsShapeGroup" style="display:none; align-items:center; gap:4px;">
-                            <!-- Shape / image styling (fill, stroke, weight, 1:1, image, fit, caption, shadow) lives in the shape settings popup. It was here AND there. -->
-                        </span>
-                        <span id="dsImgGroup" style="display:none; align-items:center; gap:4px;">
-                            <!-- Image actions (clear, caption on/off, caption align) live in the shape settings popup. -->
-                        </span>
-                        <button id="dsSelSettings" onclick="_dsOpenSelSettings(event)" title="Settings for the selected object — fill, stroke, type, image, caption. Double-clicking the object opens it too." class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></button>
-                        <button id="dsAnnFront" onclick="_dsAnnToFront()" title="Bring to front" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg></button>
-                        <button id="dsAnnBack" onclick="_dsAnnToBack()" title="Send to back" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="12" rx="1"/><path d="M20 8v11a1 1 0 0 1-1 1H8"/></svg></button>
-                        <button id="dsAnnDelete" onclick="_dsDeleteAnnot()" title="Delete selected" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; color:#c0392b; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
-                    </span>
+                    
                     <span id="dsMbGroup" style="display:none; align-items:center; gap:6px;">
                         <span id="dsMbSizeWrap" style="display:inline-flex; align-items:center; gap:2px;">
                             <button onclick="_mbNudgeSize(-0.005)" title="Smaller" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; font-size:var(--fs-80); display:inline-flex; align-items:center; justify-content:center;">A−</button>
@@ -1169,9 +1154,6 @@
                             <button onclick="_dsBumpLeading(-1)" title="Tighter leading (line spacing)" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="8" x2="19" y2="8"/><line x1="5" y1="13" x2="19" y2="13"/><line x1="5" y1="18" x2="19" y2="18"/><polyline points="9 4 12 1 15 4" transform="translate(0,2)"/></svg></button>
                             <button onclick="_dsBumpLeading(1)" title="Looser leading (line spacing)" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="5"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="5" y1="19" x2="19" y2="19"/><polyline points="9 22 12 25 15 22" transform="translate(0,-3)"/></svg></button></span>
                         <button id="dsMbArrange" onclick="_mbOpenAlignMenu()" title="Align &amp; distribute objects" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:none; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="3" x2="3" y2="21"/><rect x="7" y="6" width="10" height="5"/><rect x="7" y="14" width="6" height="5"/></svg></button>
-                        <button onclick="_mbToFront()" title="Bring to front" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg></button>
-                        <button onclick="_mbToBack()" title="Send to back" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="12" rx="1"/><path d="M20 8v11a1 1 0 0 1-1 1H8"/></svg></button>
-                        <button onclick="_mbDelete()" title="Delete selected" class="action-btn btn-secondary" style="width:30px; height:30px; min-width:30px; padding:0; box-sizing:border-box; color:#c0392b; display:inline-flex; align-items:center; justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
                     </span>
                     <span style="flex:1;"></span>
                     <span id="dsSelHint" style="font-size:var(--fs-65); color:var(--text-muted);">Select a box to style it · double-click to edit · drag to move</span>
@@ -1186,6 +1168,29 @@
                         <button type="button" id="dsDockLines" class="ds-dock-btn has-fly" data-tool="lines" title="Lines and arrows (L, A)" onclick="_dsOpenArrowShapeMenu(event)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="11 5 19 5 19 13"/></svg></button>
                         <button type="button" id="dsDockShapes" class="ds-dock-btn has-fly" data-tool="shapes" title="Image placeholders and shapes (R, O)" onclick="_dsOpenPlaceholderMenu(event)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="11" height="11" rx="1"/><circle cx="16" cy="8" r="5"/></svg></button>
                         <button type="button" id="dsDockImage" class="ds-dock-btn" data-tool="image" title="Upload image (I)" onclick="_dsAddImageSmart()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></button>
+                        <span class="ds-dock-sep"></span>
+                        <!-- 18.38: page tools, moved off the row above the thumbnails where they got lost. -->
+                        <button id="dsMbGuides" onclick="_mbOpenGuidesMenu()" title="Guides &amp; snapping — column/margin guides, presets, custom sets" class="ds-dock-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/></svg></button>
+                        <button id="dsMbLayers" onclick="_dsToggleLayersPanel()" title="Layers — hide, lock, select, and reorder everything on this page" class="ds-dock-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></svg></button>
+                        <button id="dsBuildBtn" onclick="_dsBuildPage()" class="ds-dock-btn" title="Preview — render an exact preview of how this page exports (auto-refreshes after edits)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></button>
+                        <button id="dsPreflightBtn" onclick="_dsShowPreflight()" class="ds-dock-btn" title="Preflight — scan the whole deck for missing artwork, pins, plan images, empty frames, and hidden items before exporting"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></button>
+                        <span class="ds-dock-sep"></span>
+                        <!-- Acts on whatever is selected: a page note or a layout-page box (_dsSelToFront etc). -->
+                        <span id="dsSelGroup" class="ds-dock-group" style="opacity:0.4; pointer-events:none;">
+                        <span id="dsArrowGroup" style="display:none; align-items:center; gap:4px;">
+                            <!-- Arrow styling (colour, weight, tip, start cap) lives in the arrow settings popup. It was here AND there. -->
+                        </span>
+                        <span id="dsShapeGroup" style="display:none; align-items:center; gap:4px;">
+                            <!-- Shape / image styling (fill, stroke, weight, 1:1, image, fit, caption, shadow) lives in the shape settings popup. It was here AND there. -->
+                        </span>
+                        <span id="dsImgGroup" style="display:none; align-items:center; gap:4px;">
+                            <!-- Image actions (clear, caption on/off, caption align) live in the shape settings popup. -->
+                        </span>
+                        <button id="dsSelSettings" onclick="_dsOpenSelSettings(event)" title="Settings for the selected object — fill, stroke, type, image, caption. Double-clicking the object opens it too." class="ds-dock-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/></svg></button>
+                        <button id="dsAnnFront" onclick="_dsSelToFront()" title="Bring to front" class="ds-dock-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg></button>
+                        <button id="dsAnnBack" onclick="_dsSelToBack()" title="Send to back" class="ds-dock-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="12" height="12" rx="1"/><path d="M20 8v11a1 1 0 0 1-1 1H8"/></svg></button>
+                        <button id="dsAnnDelete" onclick="_dsSelDelete()" title="Delete selected" class="ds-dock-btn ds-dock-danger"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>
+                    </span>
                         <span class="ds-dock-sep"></span>
                         <button type="button" id="dsDockPos" class="ds-dock-btn has-fly" data-tool="position" title="Toolbar position: left, right or top" onclick="_dsOpenDockPosMenu(event)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg></button>
                         </div>
@@ -2443,9 +2448,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.37';</script>
-<script src="templates.js?v=18.37"></script>
-<script src="app.js?v=18.37"></script>
+<script>window.FRAME_HTML_VERSION = '18.38';</script>
+<script src="templates.js?v=18.38"></script>
+<script src="app.js?v=18.38"></script>
 
 </body>
 </html>

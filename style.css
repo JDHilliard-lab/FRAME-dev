@@ -2727,4 +2727,13 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .unit-chip { display: inline-flex; align-items: center; gap: 4px; font-weight: 700; letter-spacing: 0.3px; }
 #unitChipDual { font-size: var(--fs-60); color: var(--text-muted); font-weight: 700; }
 #unitChipDual:empty { display: none; }
+/* 18.38: the dock carries the page tools and the selection actions too. A group lays
+   out the way the dock does (a column beside the page, a row on top). */
+.ds-dock-group { display: flex; flex-direction: column; align-items: center; gap: 2px; transition: opacity .12s; }
+.ds-dock.horiz .ds-dock-group { flex-direction: row; gap: 3px; }
+.ds-dock-btn.ds-dock-danger { color: #c0392b; }
+.ds-dock-btn.ds-dock-danger:hover { background: rgba(192,57,43,0.14); color: #c0392b; }
+/* A tall dock on a short window scrolls rather than running off the bottom. */
+.ds-dock.vert { max-height: calc(100vh - 170px); overflow-y: auto; scrollbar-width: none; }
+.ds-dock.vert::-webkit-scrollbar { display: none; }
 
