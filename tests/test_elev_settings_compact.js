@@ -49,7 +49,7 @@ const path = require('path');
       if (M().querySelectorAll('.es-grid > .es-col').length !== 3) throw new Error('not three columns');
       if (css.indexOf('.es-grid { display: grid; grid-template-columns: repeat(3,') < 0) throw new Error('the three-column grid rule is missing');
       ['annotColorSwatches', 'annotLineWeight', 'annotTickWeight', 'annotWeightLink', 'annotDashOn', 'annotDashSpacing', 'annotFontSize', 'annotFontFamily', 'annotWeightSemi',
-       'imgCodeColorSwatches', 'imgCodeFontSize', 'imgCodeFontFamily', 'elevWireframeToggle', 'annotWfSize', 'svgModeTexture',
+       'imgCodeColorSwatches', 'imgCodeFontSize', 'imgCodeFontFamily', 'annotWfSize',
        'hangHeight', 'baseboardHeight', 'personShadeSwatches', 'figureDimToggle', 'gridSize', 'dragSnap', 'nudgeSmall', 'nudgeBig', 'snapEnabledToggle', 'dimSnapEnabledToggle']
         .forEach(id => { if (!M().querySelector('#' + id)) throw new Error('lost #' + id); });
       if (M().querySelectorAll('[data-modal-close]').length !== 1) throw new Error('needs exactly one close control');

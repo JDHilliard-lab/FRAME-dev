@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.48';
+const APP_VERSION = '18.49';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -3785,11 +3785,6 @@ function seedAnnotationStyleInputs() {
     if (wReg) wReg.classList.toggle('active', fw === 400);
     if (wSemi) wSemi.classList.toggle('active', fw === 600);
     if (wBold) wBold.classList.toggle('active', fw === 700);
-    // SVG frame mode buttons
-    const mTex = document.getElementById('svgModeTexture');
-    const mCol = document.getElementById('svgModeColor');
-    if (mTex) mTex.classList.toggle('active', svgFrameMode === 'texture');
-    if (mCol) mCol.classList.toggle('active', svgFrameMode === 'autocolor');
 }
 
 // ── Line-weight ladders (Settings → Label & Dimension Style) ─────────────────
@@ -4197,18 +4192,15 @@ function _normalizeAnnotationStyle() {
 
 // SVG export frame mode: 'texture' embeds the rendered frame raster (crisp
 // but large files); 'autocolor' draws frames as solid vector rects colored to
-// match the swatch's average color (tiny files, fully vector). Persisted.
+// match the swatch's average color (tiny files, fully vector).
+// 18.49: CHOSEN PER EXPORT, in the SVG export menu (_svgExportAs), never stored. As a
+// remembered setting it also steered the elevation captures on PDF pages, invisibly.
 let svgFrameMode = 'texture';
 
 function loadSvgFrameMode() {
-    try {
-        const v = localStorage.getItem('svgFrameMode');
-        if (v === 'autocolor' || v === 'texture') svgFrameMode = v;
-    } catch (e) { /* default */ }
+    try { localStorage.removeItem('svgFrameMode'); } catch (e) {}   // the old remembered choice
 }
-function saveSvgFrameMode() {
-    try { localStorage.setItem('svgFrameMode', svgFrameMode); } catch (e) {}
-}
+function saveSvgFrameMode() {}
 
 // Compute the average color of an image (drawn small for speed). Returns a
 // hex string. Used by autocolor SVG mode so a wood-grain swatch becomes a
@@ -5790,6 +5782,9 @@ function syncLayoutGuideButtonStates() {
     const archLayer = document.getElementById('arch-dim-layer');
     if (archLayer) archLayer.style.display = dimVisibility.wallDims ? 'block' : 'none';
     if (wdBtn) wdBtn.classList.toggle('active', dimVisibility.wallDims);
+    // Wireframe (18.49): project data, so it can change under the button (a deck preset, undo, a load).
+    const wireBtn = document.getElementById('wireframeToggle');
+    if (wireBtn) wireBtn.classList.toggle('active', _isWireframe());
     // Unit suffix toggle: active when interior suffix is shown.
     const usBtn = document.getElementById('unitSuffixToggle');
     if (usBtn) usBtn.classList.toggle('active', showUnitSuffix);
@@ -18906,7 +18901,7 @@ function _curElevIsWireframe() {
 //    than after the next pushHistory settles.
 function setElevWireframe(on) {
     editorialContent.wireframe = !!on;
-    try { seedElevWireframeToggle(); } catch (e) {}   // checkbox + un-dim the style rows
+    try { seedElevWireframeToggle(); } catch (e) {}   // guide button + un-dim the style rows
     try { _invalidateFramesCache(); } catch (e) {}
     try { _elevGuidesChanged(); } catch (e) {}
     try { if (typeof _dsClearBuiltAll === 'function') _dsClearBuiltAll(); } catch (e) {}
@@ -18920,8 +18915,6 @@ function setAnnotWfStyle(style) {
     applyAnnotationStyleFromModal();
 }
 function seedElevWireframeToggle() {
-    const cb = document.getElementById('elevWireframeToggle');
-    if (cb) cb.checked = _isWireframe();
     _normalizeAnnotationStyle();
     const sz = document.getElementById('annotWfSize');
     if (sz) sz.value = annotationStyle.wfSize;
@@ -18938,6 +18931,8 @@ function seedElevWireframeToggle() {
     // Still reachable: setting the look up before switching the mode on is fine.
     const rows = document.getElementById('elevWfStyleRows');
     if (rows) rows.style.opacity = _isWireframe() ? '' : '0.5';
+    const gb = document.getElementById('wireframeToggle');
+    if (gb) gb.classList.toggle('active', _isWireframe());
 }
 function _specArtOnly(ovKey) { return !!(ovKey && editorialContent.specArtOnly && editorialContent.specArtOnly[ovKey]); }
 const STATUS_DEFS = { concept: { label: 'Concept', color: '#8a8f98' }, review: { label: 'In Review', color: '#c98a2e' }, approved: { label: 'Approved', color: '#1a7f37' }, production: { label: 'Production', color: '#3457d5' } };
@@ -28931,11 +28926,24 @@ function openElevExportMenu(btn) {
     _frameMenu(btn, [
         { head: 'THIS WALL' },
         { label: 'PNG', hint: 'image', onClick: () => exportElevPNG() },
-        { label: 'SVG', hint: 'vector, for Illustrator', onClick: () => exportElevSVG() },
+        { label: 'SVG', hint: 'frame photos, for Illustrator', onClick: () => _svgExportAs('texture', () => exportElevSVG()) },
+        { label: 'SVG, vector frames', hint: 'all shapes, tiny file', onClick: () => _svgExportAs('autocolor', () => exportElevSVG()) },
         { head: 'ALL WALLS (' + n + ')' },
         { label: 'All as PNG', hint: 'one ZIP', onClick: () => bulkExportElevations('png') },
-        { label: 'All as SVG', hint: 'one ZIP', onClick: () => bulkExportElevations('svg') },
+        { label: 'All as SVG', hint: 'frame photos, one ZIP', onClick: () => _svgExportAs('texture', () => bulkExportElevations('svg')) },
+        { label: 'All as SVG, vector frames', hint: 'one ZIP', onClick: () => _svgExportAs('autocolor', () => bulkExportElevations('svg')) },
     ]);
+}
+// How frames are drawn in THIS SVG export (18.49): 'texture' embeds the frame photos,
+// 'autocolor' rebuilds each frame as coloured vector shapes. Set for the one export and
+// put back, so nothing else (PDF captures) inherits it.
+async function _svgExportAs(mode, run) {
+    const keep = svgFrameMode;
+    svgFrameMode = (mode === 'autocolor') ? 'autocolor' : 'texture';
+    let out;
+    try { out = await run(); } catch (e) { svgFrameMode = keep; throw e; }
+    svgFrameMode = keep;
+    return out;
 }
 
 // Layout-guide groups remember whether they are folded, per machine: that is where
@@ -41201,7 +41209,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.48</strong> Elevation settings is one screen with no scrolling: three tidy columns, every explanation behind a <strong>?</strong> dot, units moved to Settings (the button at the top goes there). Dimension ends are always ticks, the house style. The corner note naming the units is gone from the elevation: with the second unit on, every number carries its own units.<br><br>
+                body: `<strong>18.49</strong> <strong>Wireframe</strong> is a button in Layout Guides, View, beside Artwork (its letter style stays in Elevation settings). The SVG frame choice moved into the export menu: <strong>SVG</strong> embeds the frame photos, <strong>SVG, vector frames</strong> rebuilds them as shapes, chosen each time you export.<br><br>
+<strong>18.48</strong> Elevation settings is one screen with no scrolling: three tidy columns, every explanation behind a <strong>?</strong> dot, units moved to Settings (the button at the top goes there). Dimension ends are always ticks, the house style. The corner note naming the units is gone from the elevation: with the second unit on, every number carries its own units.<br><br>
 <strong>18.47</strong> One <strong>Settings</strong> gear in the header, in every view, for what you set up at the start of a project: Units, Frame effects and Elevations. The units chip opens it on Units.<br><br>
 <strong>18.46</strong> Mat shadows actually land now: the shadow a mat casts onto the artwork, and mat 1 onto mat 2, were drawn too far outside the edge to reach it, so only the frame's shadow showed. Every inner shadow is now a true inset shadow, so Onto artwork and Mat onto mat read at every setting.<br><br>
 <strong>18.45</strong> Frame effects samples are all in MICH-32-22 (the floater in MICH-301-22), the double mat is two white mats of one width, and the panel no longer shows the selected piece. With no mat, the frame now casts its shadow onto the artwork, everywhere a frame is drawn.<br><br>

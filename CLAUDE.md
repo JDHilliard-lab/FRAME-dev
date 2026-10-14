@@ -1632,6 +1632,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_normalizeAnnotationStyle` forces `dimEnds = 'tick'` AFTER the weight migration (which
   still reads the stored value), `setAnnotDimEnds` ignores its argument, no control. The
   corner "units" legend on the wall is gone (`unitLegendText` deleted).
+- **WIREFRAME IS A LAYOUT GUIDE, SVG FRAMES ARE AN EXPORT CHOICE (18.49).** `#wireframeToggle`
+  (View group, beside Artwork) calls `setElevWireframe(!_isWireframe())`; lit by
+  `seedElevWireframeToggle` AND `syncLayoutGuideButtonStates` (presets, undo and loads change
+  it). Letter STYLE stays in Elevation settings. `svgFrameMode` is NOT stored: the export
+  menu picks it per export through `_svgExportAs(mode, run)`, which puts it back (also on a
+  throw) so PDF captures never inherit vector frames; `loadSvgFrameMode` clears the old key.
 - **INNER SHADOWS ARE TRUE INSETS (18.46, `dIS`)**: the casting stroke runs up to the edge
   and is parked off-canvas with the shadow thrown back by `shadowOffsetX`. The old stroke
   sat 10px outside, so small shadows (Onto artwork, Mat onto mat) never arrived. With NO

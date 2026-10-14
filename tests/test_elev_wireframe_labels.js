@@ -53,14 +53,16 @@ const path = require('path');
     const __arts = () => Array.from(document.querySelectorAll('#wall .art-visual'));
 
     // ── The control ──
-    __check('EXACT REQUEST: a Wireframe letter labels & grey fill toggle in Elevations Settings', () => {
-      const cb = document.getElementById('elevWireframeToggle');
-      if (!cb) throw new Error('the toggle is not in the Settings panel');
-      if (cb.type !== 'checkbox') throw new Error('expected a checkbox');
-      if (!/setElevWireframe\\(this\\.checked\\)/.test(cb.getAttribute('onchange') || '')) throw new Error('the toggle is not wired to a handler');
-      // The label the user asked for, so it is findable.
-      const lbl = cb.closest('label');
-      if (!lbl || !/wireframe/i.test(lbl.textContent) || !/grey fill/i.test(lbl.textContent)) throw new Error('the control is not labelled as asked: ' + (lbl && lbl.textContent || '').trim());
+    // 18.49: moved on request from a checkbox in Elevation settings to a Layout Guides
+    // button in View, beside Artwork (it is project data, a view of the openings).
+    __check('EXACT REQUEST: a Wireframe toggle in Layout Guides, View, beside Artwork', () => {
+      const b = document.getElementById('wireframeToggle');
+      if (!b || !b.classList.contains('layout-guide-btn')) throw new Error('no Wireframe guide button');
+      if ((b.getAttribute('onclick') || '').indexOf('setElevWireframe(!_isWireframe())') < 0) throw new Error('the button is not wired to setElevWireframe');
+      if (b.closest('details.lg-group').getAttribute('data-lg') !== 'view') throw new Error('not in the View group');
+      if (b.previousElementSibling.id !== 'artworkToggle') throw new Error('not beside Artwork');
+      if (!/wireframe/i.test(b.textContent)) throw new Error('the button is not labelled Wireframe');
+      if (document.getElementById('elevWireframeToggle')) throw new Error('the old checkbox is still in Elevation settings');
       if (typeof setElevWireframe !== 'function' || typeof seedElevWireframeToggle !== 'function') throw new Error('handler or seeder missing');
     });
 
@@ -75,15 +77,15 @@ const path = require('path');
       if (S.indexOf('editorialContent.wireframe = !!p.wf') < 0) throw new Error('the deck preset no longer shares this flag');
     });
 
-    __check('the checkbox re-reads the project on every Settings open', () => {
+    __check('the button shows the project state, whoever changed it', () => {
       // It is PROJECT data (it travels in the file), not a localStorage drafting
       // pref, so a stale checkbox would misreport a loaded project.
       editorialContent.wireframe = true;
-      seedElevWireframeToggle();
-      if (!document.getElementById('elevWireframeToggle').checked) throw new Error('the seeder does not reflect the project');
+      syncLayoutGuideButtonStates();
+      if (!document.getElementById('wireframeToggle').classList.contains('active')) throw new Error('the guide sync does not light it from the project');
       editorialContent.wireframe = false;
       seedElevWireframeToggle();
-      if (document.getElementById('elevWireframeToggle').checked) throw new Error('the seeder does not clear');
+      if (document.getElementById('wireframeToggle').classList.contains('active')) throw new Error('the seeder does not clear it');
       const i = S.indexOf('seedElevDualUnitInputs();');
       if (S.slice(i, i + 200).indexOf('seedElevWireframeToggle()') < 0) throw new Error('the seeder is not called when the panel opens');
     });
@@ -236,8 +238,8 @@ const path = require('path');
       if (!labelSize) throw new Error('the Label Size control is gone');
       if (size.closest('div[id]') && labelSize.closest('div[id]')) { /* structural check below */ }
       const snap = document.getElementById('snapEnabledToggle');
-      const cb = document.getElementById('elevWireframeToggle');
-      if (!cb) throw new Error('the toggle is gone');
+      const cb = document.getElementById('annotWfSize');
+      if (!cb) throw new Error('the letter style is gone');
       // Same panel as the label size; a different one from the snap toggles.
       const panelOf = (el) => { let n = el; while (n && n !== document.body) { if (n.className && /panel|section/i.test(n.className)) return n; n = n.parentElement; } return null; };
       if (snap && panelOf(cb) && panelOf(snap) && panelOf(cb) === panelOf(snap)) throw new Error('the toggle is still in the Grid & Snap panel');

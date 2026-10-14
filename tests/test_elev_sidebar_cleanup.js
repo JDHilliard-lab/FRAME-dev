@@ -111,7 +111,8 @@ check('a lit EGD/WF says how to turn it off, in its tooltip and with an x', () =
   if (CSS.indexOf('.wall-mode-btn.active .wm-off { display: inline; }') < 0) throw new Error('the x is never shown when lit');
 });
 
-check('EXPORT is one menu with the four choices, each wired to the real exporter', () => {
+// 18.49: six choices; SVG comes in frame photos or vector frames, picked per export.
+check('EXPORT is one menu with the six choices, each wired to the real exporter', () => {
   ['onclick="exportElevPNG()"', 'onclick="exportElevSVG()"', "bulkExportElevations('png')\"", "bulkExportElevations('svg')\""].forEach(k => {
     if (HTML.indexOf(k) >= 0) throw new Error('a separate export button survived: ' + k);
   });
@@ -121,14 +122,14 @@ check('EXPORT is one menu with the four choices, each wired to the real exporter
   window.exportElevPNG = () => called.push('png');
   window.exportElevSVG = () => called.push('svg');
   window.bulkExportElevations = (f) => called.push('all-' + f);
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     window.openElevExportMenu(btn);
     const items = doc.querySelectorAll('.frame-menu button');
-    if (items.length !== 4) throw new Error('menu has ' + items.length + ' items, want 4');
+    if (items.length !== 6) throw new Error('menu has ' + items.length + ' items, want 6');
     items[i].click();
     if (doc.querySelector('.frame-menu')) throw new Error('menu stayed open after a choice');
   }
-  if (called.join(',') !== 'png,svg,all-png,all-svg') throw new Error('menu items call: ' + called.join(','));
+  if (called.join(',') !== 'png,svg,svg,all-png,all-svg,all-svg') throw new Error('menu items call: ' + called.join(','));
 });
 
 check('layout guides are three foldable groups and every one of the 16 buttons has a caption', () => {
