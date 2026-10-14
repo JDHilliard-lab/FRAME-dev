@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.47">
+    <link rel="stylesheet" href="style.css?v=18.48">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -72,7 +72,7 @@
                     <rect x="7" y="13.5" width="10" height="4" rx="0.5" fill="currentColor" stroke="none"/>
                 </svg>
             </button>
-            <!-- 18.47: SETTINGS. One gear, in every view, for what a designer sets up once at
+            <!-- 18.48: SETTINGS. One gear, in every view, for what a designer sets up once at
                  the start of a project: units, frame effects, elevation drafting. Replaces the
                  Dashboard/Elevations-only frame effects button. -->
             <button id="appSettingsBtn" class="action-btn btn-secondary" style="width:auto;" onclick="openAppSettings()" title="Settings: units, frame effects, elevations" aria-label="Settings">
@@ -1911,346 +1911,162 @@
     </div>
 </div>
 
-<!-- Settings modal. Opened from the gear icon in Layout Guides. Houses the
-     "set once" controls (Hang height, font size) plus the nudge step
-     config and a keyboard shortcuts reference. Hang/Font inputs share IDs
-     with their previous sidebar locations so existing handlers work. -->
+<!-- ELEVATION SETTINGS (18.48). Opened from the gear in Layout Guides and from the header
+     Settings > Elevations tab. Three tight columns on one 26px row rhythm so it never
+     scrolls on a laptop; every explanation is a ? dot (.help-dot data-help), never a
+     paragraph. Units live in Settings > Units (the chip at the top goes there). Line
+     ends are ticks, the one house style, so there is no PLAIN/TICKS control. IDs are
+     what app.js seeds and reads; keep them. -->
 <div id="precisionModal" class="frame-modal" style="display:none;">
-    <div style="background:var(--bg-panel); padding:20px; border-radius:var(--r-8); width:min(860px,94vw); border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4); max-height: 92vh; overflow-y: auto;">
-        <h3 style="margin-top:0; margin-bottom: 14px; font-size:var(--fs-105); color:var(--text-strong);">Elevation settings</h3>
-
-        <div class="settings-cols">
-
-        <!-- UNIT + HEIGHTS row: unit choice, hang height, and baseboard height
-             share one row to keep the panel compact. setElevUnit() converts
-             all stored values + labels. Baseboard draws a horizontal line at
-             that height (0 = off), same lineweight as the wall line. -->
-        <div style="margin-bottom: 12px;">
-            <div style="display:flex; gap:10px; align-items:flex-end;">
-                <div style="flex:1.4;">
-                    <div style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Units</div>
-                    <div class="unit-toggle unit-toggle-3" style="height:34px; width:100%;">
-                        <button id="elevBtnInch" class="active" onclick="setElevUnit('in')">IN</button>
-                        <button id="elevBtnCm" onclick="setElevUnit('cm')">CM</button>
-                        <button id="elevBtnMm" onclick="setElevUnit('mm')">MM</button>
-                    </div>
-                </div>
-                <!-- Hang height and baseboard are stored in INCHES and shown in the
-                     active unit, so the studio standards stay exact whichever unit
-                     you work in: 57" / 144.78cm / 1447.8mm and 4" / 10.16cm /
-                     101.6mm. They used to be plain DOM values that a unit switch
-                     multiplied and a project load left alone, so opening an inches
-                     project while set to cm read 144.78 as inches. -->
-                <div style="flex:1;">
-                    <label style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; display:block; margin-bottom:6px;" title="Center of art height. Gallery/museum standard is 57&quot; (144.78cm / 1447.8mm) — press the ⌖ button to snap back to it.">Hang Height <span id="hangHeightUnitLabel" style="text-transform:none; font-weight:400;">(in)</span></label>
-                    <div style="display:flex; gap:4px;">
-                        <input type="number" id="hangHeight" value="57" oninput="updateHangHeight()" onchange="pushHistory()" style="padding: 7px 6px; font-size: var(--fs-85); flex:1; min-width:0; text-align: center; box-sizing:border-box; height:34px;">
-                        <button type="button" class="icon-btn" onclick="resetHangHeightToStandard()" title="Back to the 57&quot; studio standard" style="height:34px; width:26px; flex:0 0 26px;">⌖</button>
-                    </div>
-                </div>
-                <div style="flex:1;">
-                    <label style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; display:block; margin-bottom:6px;" title="Baseboard height from the floor. 0 = no baseboard. Standard is 4&quot; (10.16cm / 101.6mm).">Baseboard <span id="baseboardUnitLabel" style="text-transform:none; font-weight:400;">(in)</span></label>
-                    <div style="display:flex; gap:4px;">
-                        <input type="number" id="baseboardHeight" value="4" oninput="updateBaseboard()" onchange="pushHistory()" style="padding: 7px 6px; font-size: var(--fs-85); flex:1; min-width:0; text-align: center; box-sizing:border-box; height:34px;">
-                        <button type="button" class="icon-btn" onclick="resetBaseboardToStandard()" title="Back to the 4&quot; standard" style="height:34px; width:26px; flex:0 0 26px;">⌖</button>
-                    </div>
-                </div>
-            </div>
-            <!-- The project's SECOND UNIT (18.37): the same setting as the header units chip
-                 and the spec pages, written through setProjectDualUnit. Inches lead; the
-                 picker chooses the companion. -->
-            <div style="display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed var(--border-color);">
-                <label style="display:flex; align-items:center; gap:8px; font-size:var(--fs-65); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; cursor:pointer;">
-                    <input type="checkbox" id="elevDualUnitCb" onchange="toggleElevDualUnit(this.checked)">
-                    Second unit (whole project)
-                </label>
-                <div class="unit-toggle" id="elevDualUnitPick" style="height:26px; margin-left:auto; width:96px;">
-                    <button id="elevDualMm" type="button" onclick="setElevDualUnit('mm')">MM</button>
-                    <button id="elevDualCm" type="button" onclick="setElevDualUnit('cm')">CM</button>
-                </div>
-            </div>
-            <div style="font-size:var(--fs-60); color:var(--text-muted); margin-top:4px; line-height:1.4;">
-                Elevations and spec pages print inches with the second unit in brackets: 4"(102mm). The same setting as the units chip in the header.
-            </div>
+    <div class="es-card">
+        <div class="es-head">
+            <h3>Elevation settings</h3>
+            <button type="button" id="elevSetUnitsBtn" class="es-units" onclick="closeAnnotationStyleModal(); openAppSettings('units')" title="Units are set for the whole project in Settings. Click to change them.">Units <b id="elevSetUnitsTxt">IN</b></button>
         </div>
 
-        <!-- LABEL & DIMENSION STYLE: controls the look of every dimension and
-             label in the elevation (frame dims, wall dims, OD tags, center
-             line, hang line, group dimensions). Single source of truth. Wired
-             to applyAnnotationStyleFromModal() which updates CSS vars + all
-             group dims live and persists to localStorage. -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Label &amp; Dimension Style</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:var(--r-6); border:1px solid var(--border-color); display:flex; flex-direction:column; gap:12px;">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Color</span>
-                    <input type="color" id="annotColor" value="#e00000" style="width:40px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); cursor:pointer;" oninput="applyAnnotationStyleFromModal()">
-                    <span id="annotColorHex" style="font-size:var(--fs-65); color:var(--text-muted); font-family:monospace;">#e00000</span>
+        <div class="es-grid">
+
+        <!-- COLUMN 1: dimensions. One style for every dimension and label on the wall. -->
+        <div class="es-col">
+            <div class="es-sec">
+                <div class="es-h">Dimensions<span class="help-dot" data-help="Every dimension and label on the elevation: frame and wall dimensions, gaps, the hang line and group boxes. Ends are architectural 45&deg; ticks.">?</span></div>
+                <div class="es-row es-top"><span class="es-lbl">Colour</span>
+                    <div id="annotColorSwatches" class="es-fill"></div>
+                    <input type="color" id="annotColor" value="#e00000" class="es-color" title="Custom colour" oninput="applyAnnotationStyleFromModal()">
                 </div>
-                <!-- Shared swatch families (same rows as the Deck Studio gear
-                     popups) so a dimension colour can be matched exactly to a
-                     deck text colour. Filled by _frameSwatchesInto(). -->
-                <div style="display:flex; align-items:flex-start; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px; flex:0 0 80px;">Swatches</span>
-                    <div id="annotColorSwatches" style="flex:1;"></div>
+                <div class="es-row"><span class="es-lbl">Lines<span class="help-dot" data-help="Dimension, extension and leader lines, and the group box. Points, absolute: 0.25pt prints as 0.25pt at any size.">?</span></span>
+                    <div class="unit-toggle wt-ladder es-fill" id="annotLineWeight"></div>
                 </div>
-                <!-- LINE WEIGHTS. Two independent pickers off the same drafting pen
-                     set (ELEV_WEIGHT_PT), plus a link so "all the same weight" is
-                     one click. Points, not pixels: these are absolute print weights
-                     and a 0.25pt line exports as 0.25pt whatever size the drawing
-                     lands at, the same as a stroke weight in InDesign. Built by
-                     _seedAnnotWeightControls() so the ladder has one source. -->
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;" title="Dimension lines, extension lines, leaders and the group-dimension box.">Lines (pt)</span>
-                    <div class="unit-toggle wt-ladder" id="annotLineWeight" style="height:26px; flex:1;"></div>
+                <div class="es-row" id="annotTickWeightRow"><span class="es-lbl">Ticks<span class="help-dot" data-help="The 45&deg; ticks. The drafting convention is a lighter line with a heavier tick, e.g. 0.5pt lines and 1pt ticks: untick Same weight to set them apart.">?</span></span>
+                    <div class="unit-toggle wt-ladder es-fill" id="annotTickWeight"></div>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px;" id="annotTickWeightRow">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;" title="The 45-degree architectural ticks. Only drawn when Line Ends is set to TICKS below.">Ticks (pt)</span>
-                    <div class="unit-toggle wt-ladder" id="annotTickWeight" style="height:26px; flex:1;"></div>
-                </div>
-                <label style="display:flex; align-items:center; gap:8px; font-size:var(--fs-65); color:var(--text-main); cursor:pointer; margin-left:90px;" title="Ticks take the line weight. Untick to set them apart — the architectural convention is lighter lines against a heavier tick, e.g. 0.5pt lines with 1pt ticks.">
-                    <input type="checkbox" id="annotWeightLink" checked onchange="setAnnotWeightLinked(this.checked)" style="width:14px; height:14px; cursor:pointer;">
-                    Same weight for lines and ticks
-                </label>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Line Style</span>
-                    <div class="unit-toggle" style="height:26px; flex:1;">
+                <label class="es-check es-indent"><input type="checkbox" id="annotWeightLink" checked onchange="setAnnotWeightLinked(this.checked)">Same weight for lines and ticks</label>
+                <div class="es-row"><span class="es-lbl">Line</span>
+                    <div class="unit-toggle es-fill">
                         <button id="annotDashOn" type="button" class="active" onclick="setAnnotDash(true)">DASHED</button>
                         <button id="annotDashOff" type="button" onclick="setAnnotDash(false)">SOLID</button>
                     </div>
                 </div>
-                <!-- Dash spacing. In POINTS and absolute, like the weights above:
-                     the dash used to be a multiple of the stroke width, so a light
-                     pen gave a rhythm too fine to read as dashed at all. Built by
-                     _seedAnnotWeightControls() from ELEV_DASH_PT. -->
-                <div style="display:flex; align-items:center; gap:10px;" id="annotDashSpacingRow">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;" title="Length of each dash, in points. The gap follows at two thirds of it, so the whole rhythm scales together. Absolute, so changing a line weight never changes the dash.">Dash (pt)</span>
-                    <div class="unit-toggle wt-ladder" id="annotDashSpacing" style="height:26px; flex:1;"></div>
+                <div class="es-row" id="annotDashSpacingRow"><span class="es-lbl">Dash<span class="help-dot" data-help="Length of each dash in points; the gap follows at two thirds. Absolute, so changing a line weight never changes the dash.">?</span></span>
+                    <div class="unit-toggle wt-ladder es-fill" id="annotDashSpacing"></div>
                 </div>
-                <!-- Dimension line ends. PLAIN is what FRAME has always drawn.
-                     TICKS applies the architectural standard: a 45-degree oblique
-                     stroke centred on every dimension/extension intersection, with
-                     the extension lines overhanging it to form the crosshair
-                     underneath. The lighter-lines half of that standard is now the
-                     Ticks weight above rather than a split derived here.
-                     Deliberately no arrowhead option — that is not architectural
-                     dimensioning practice. -->
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Line Ends</span>
-                    <div class="unit-toggle" style="height:26px; flex:1;">
-                        <button id="annotEndsNone" type="button" class="active" onclick="setAnnotDimEnds('none')" title="Plain butt ends">PLAIN</button>
-                        <button id="annotEndsTick" type="button" onclick="setAnnotDimEnds('tick')" title="Architectural 45&deg; ticks: lighter lines, heavier tick centred on each intersection, extension lines overhanging to form a crosshair">TICKS</button>
-                    </div>
+                <div class="es-row"><span class="es-lbl">Size</span>
+                    <input type="range" id="annotFontSize" min="9" max="22" step="1" value="13" class="es-fill" oninput="applyAnnotationStyleFromModal()">
+                    <span id="annotFontSizeVal" class="es-val">13px</span>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Label Size</span>
-                    <input type="range" id="annotFontSize" min="9" max="22" step="1" value="13" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
-                    <span id="annotFontSizeVal" style="font-size:var(--fs-65); color:var(--text-muted); width:30px; text-align:right;">13px</span>
+                <div class="es-row"><span class="es-lbl">Font<span class="help-dot" data-help="The same font list Deck Studio uses. Brand fonts (Druk, Sans, Messina) embed in the PDF; Universal fonts are on every Mac and PC, so SVG exports open in Illustrator with no missing fonts. Messina is the default.">?</span></span>
+                    <select id="annotFontFamily" data-font-select data-font-default="serif" class="es-fill" onchange="applyAnnotationStyleFromModal()"></select>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Font</span>
-                    <select id="annotFontFamily" data-font-select data-font-default="serif" onchange="applyAnnotationStyleFromModal()" style="flex:1; padding:5px; font-size:var(--fs-75);">
-                        <!-- filled from FRAME_FONT_LIBRARY -->
-                    </select>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Weight</span>
-                    <div class="unit-toggle" style="height:26px; flex:1;">
+                <div class="es-row"><span class="es-lbl">Weight</span>
+                    <div class="unit-toggle es-fill">
                         <button id="annotWeightReg" type="button" onclick="setAnnotFontWeight(400)">REGULAR</button>
                         <button id="annotWeightSemi" type="button" class="active" onclick="setAnnotFontWeight(600)">SEMIBOLD</button>
                         <button id="annotWeightBold" type="button" onclick="setAnnotFontWeight(700)">BOLD</button>
                     </div>
                 </div>
-                <!-- WIREFRAME LETTER LABELS. Here rather than with Grid & Snap because
-                     it IS label styling: the letter follows the same font library and
-                     sits with the label size, font and weight it should look like a
-                     sibling of. The ON/OFF is project data (editorialContent.wireframe,
-                     shared with the Wireframe deck preset); the three style controls
-                     are drawing style like everything else in this panel. -->
-                <div style="border-top:1px solid var(--border-color); padding-top:12px;">
-                    <label style="display:flex; align-items:center; gap:8px; font-size:var(--fs-70); color:var(--text-main); cursor:pointer;" title="Present placement without committing to images: every image opening becomes a flat grey block with the frame's letter in the middle, in the editor and in every export. Pieces that already have artwork show as placeholders too while this is on.">
-                        <input type="checkbox" id="elevWireframeToggle" onchange="setElevWireframe(this.checked)" style="width:15px; height:15px; cursor:pointer;">
-                        Wireframe letter labels &amp; grey fill
-                    </label>
-                    <!-- Dimmed, not hidden, when the mode is off — the panel would
-                         jump height on every toggle. Same rule as the tick-weight row. -->
-                    <div id="elevWfStyleRows" style="display:flex; flex-direction:column; gap:8px; margin-top:10px;">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;" title="Letter height in px. Capped per frame so it can never spill outside a small opening.">Letter Size</span>
-                            <input type="range" id="annotWfSize" min="9" max="48" step="1" value="18" style="flex:1;" oninput="applyAnnotationStyleFromModal()">
-                            <span id="annotWfSizeVal" style="font-size:var(--fs-65); color:var(--text-muted); width:30px; text-align:right;">18px</span>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Letter Font</span>
-                            <select id="annotWfFont" data-font-select data-font-default="serif" onchange="applyAnnotationStyleFromModal()" style="flex:1; padding:5px; font-size:var(--fs-75);">
-                                <!-- filled from FRAME_FONT_LIBRARY -->
-                            </select>
-                        </div>
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Letter Style</span>
-                            <div class="unit-toggle" style="height:26px; flex:1;">
-                                <button id="annotWfReg" type="button" onclick="setAnnotWfStyle('regular')">REGULAR</button>
-                                <button id="annotWfBold" type="button" class="active" onclick="setAnnotWfStyle('bold')">BOLD</button>
-                                <button id="annotWfItal" type="button" onclick="setAnnotWfStyle('italic')">ITALIC</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px; border-top:1px solid var(--border-color); padding-top:12px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">SVG Frames</span>
-                    <div class="unit-toggle" style="height:26px; flex:1;">
-                        <button id="svgModeTexture" type="button" class="active" onclick="setSvgFrameMode('texture')" title="Embed frame textures (photo-real, larger files)">TEXTURE</button>
-                        <button id="svgModeColor" type="button" onclick="setSvgFrameMode('autocolor')" title="Build frame as vector shapes — rail, mats, paper (small files, all vector)">VECTOR</button>
-                    </div>
-                </div>
-                <p style="font-size:var(--fs-60); color:var(--text-muted); margin:0; line-height:1.4;">Font list is the same one Deck Studio uses. <b>Brand</b> fonts (Druk, Sans, Messina) embed into the PDF; <b>Universal</b> fonts are installed on every Mac and PC, so SVG exports open in Illustrator with no missing-font warnings. Dimensions default to Messina — size and colour are yours to set.</p>
-                <p style="font-size:var(--fs-60); color:var(--text-muted); margin:0; line-height:1.4;">SVG export: <b>Texture</b> embeds frame photos (crisp, larger). <b>Vector</b> rebuilds each frame as vector shapes \u2014 rail, mats, reveal, paper \u2014 colored to match (tiny files, fully editable in Illustrator).</p>
             </div>
         </div>
 
-        <!-- IMAGE CODE STYLE: controls the artwork image-code caption beneath
-             each frame (color, size, font). Separate from dimension styling so
-             codes can be made subtle (e.g. light grey). Wired to
-             applyImageCodeStyleFromModal(); persists to localStorage. -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Image Code Style</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:var(--r-6); border:1px solid var(--border-color); display:flex; flex-direction:column; gap:12px;">
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Color</span>
-                    <input type="color" id="imgCodeColor" value="#9c9c9c" style="width:40px; height:28px; padding:0; border:1px solid var(--border-color); border-radius:var(--r-4); cursor:pointer;" oninput="applyImageCodeStyleFromModal()">
-                    <span id="imgCodeColorHex" style="font-size:var(--fs-65); color:var(--text-muted); font-family:monospace;">#9c9c9c</span>
+        <!-- COLUMN 2: what is written on and under the frames. -->
+        <div class="es-col">
+            <div class="es-sec">
+                <div class="es-h">Image codes<span class="help-dot" data-help="The image-code caption under each frame. Turn it on with Image Code in Layout Guides. Studio default is Messina 9pt in #9c9c9c, subtle in a presentation.">?</span></div>
+                <div class="es-row es-top"><span class="es-lbl">Colour</span>
+                    <div id="imgCodeColorSwatches" class="es-fill"></div>
+                    <input type="color" id="imgCodeColor" value="#9c9c9c" class="es-color" title="Custom colour" oninput="applyImageCodeStyleFromModal()">
                 </div>
-                <div style="display:flex; align-items:flex-start; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px; flex:0 0 80px;">Swatches</span>
-                    <div id="imgCodeColorSwatches" style="flex:1;"></div>
+                <div class="es-row"><span class="es-lbl">Size</span>
+                    <input type="range" id="imgCodeFontSize" min="6" max="20" step="1" value="9" class="es-fill" oninput="applyImageCodeStyleFromModal()">
+                    <span id="imgCodeFontSizeVal" class="es-val">9px</span>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Size</span>
-                    <input type="range" id="imgCodeFontSize" min="6" max="20" step="1" value="9" style="flex:1;" oninput="applyImageCodeStyleFromModal()">
-                    <span id="imgCodeFontSizeVal" style="font-size:var(--fs-65); color:var(--text-muted); width:30px; text-align:right;">9px</span>
+                <div class="es-row"><span class="es-lbl">Font</span>
+                    <select id="imgCodeFontFamily" data-font-select data-font-default="serif" class="es-fill" onchange="applyImageCodeStyleFromModal()"></select>
                 </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Font</span>
-                    <select id="imgCodeFontFamily" data-font-select data-font-default="serif" onchange="applyImageCodeStyleFromModal()" style="flex:1; padding:5px; font-size:var(--fs-75);">
-                        <!-- filled from FRAME_FONT_LIBRARY -->
-                    </select>
-                </div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <span style="font-size:var(--fs-65); color:var(--text-muted); width:80px;">Weight</span>
-                    <div class="unit-toggle" style="height:26px; flex:1;">
+                <div class="es-row"><span class="es-lbl">Weight</span>
+                    <div class="unit-toggle es-fill">
                         <button id="imgCodeWeightReg" type="button" class="active" onclick="setImageCodeWeight(400)">REGULAR</button>
                         <button id="imgCodeWeightSemi" type="button" onclick="setImageCodeWeight(600)">SEMIBOLD</button>
                         <button id="imgCodeWeightBold" type="button" onclick="setImageCodeWeight(700)">BOLD</button>
                     </div>
                 </div>
-                <p style="font-size:var(--fs-60); color:var(--text-muted); margin:0; line-height:1.4;">Controls the image-code caption beneath each frame (toggle it on via the Image Code button in Layout Guides). Studio default is Messina 9pt in #9c9c9c, which keeps codes subtle in presentations.</p>
             </div>
-        </div>
-
-        <!-- GRID & SNAP: visual grid spacing + drag snap-to-grid increment.
-             These are independent: grid is purely visual (how far apart the
-             gridlines render), snap controls what the dragged frame's
-             position rounds to during a drag. User can set them the same
-             for "everything aligns to the grid lines I see" or differently
-             for "see a coarse grid but position frames finely". -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Grid &amp; Snap</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:var(--r-6); border:1px solid var(--border-color);">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                    <div>
-                        <label style="font-size:var(--fs-65); color:var(--text-muted); display:block; margin-bottom:4px;" title="Visual grid spacing on the elevation. Toggle grid visibility from Layout Guides.">Grid Size</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="gridSize" value="1" min="0.25" step="0.25" style="padding: 6px; font-size: var(--fs-85); flex:1; text-align: center;" oninput="updateGridSize()">
-                            <span style="font-size:var(--fs-75); color:var(--text-muted);" id="gridSizeUnitLabel">in</span>
-                        </div>
+            <div class="es-sec">
+                <label class="es-h es-check"><input type="checkbox" id="elevWireframeToggle" onchange="setElevWireframe(this.checked)">Wireframe letters &amp; grey fill<span class="help-dot" data-help="Present placement without images: every opening becomes a flat grey block with the frame's letter in the middle, in the editor and every export. Pieces with artwork show as placeholders too while this is on.">?</span></label>
+                <div id="elevWfStyleRows" class="es-rows">
+                    <div class="es-row"><span class="es-lbl">Size<span class="help-dot" data-help="Letter height in px, capped per frame so it never spills out of a small opening.">?</span></span>
+                        <input type="range" id="annotWfSize" min="9" max="48" step="1" value="18" class="es-fill" oninput="applyAnnotationStyleFromModal()">
+                        <span id="annotWfSizeVal" class="es-val">18px</span>
                     </div>
-                    <div>
-                        <label style="font-size:var(--fs-65); color:var(--text-muted); display:block; margin-bottom:4px;" title="Increment that frame positions snap to when dragging.">Drag Snap</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="dragSnap" value="1" min="0.25" step="0.25" style="padding: 6px; font-size: var(--fs-85); flex:1; text-align: center;" oninput="updateDragSnap()">
-                            <span style="font-size:var(--fs-75); color:var(--text-muted);" id="dragSnapUnitLabel">in</span>
+                    <div class="es-row"><span class="es-lbl">Font</span>
+                        <select id="annotWfFont" data-font-select data-font-default="serif" class="es-fill" onchange="applyAnnotationStyleFromModal()"></select>
+                    </div>
+                    <div class="es-row"><span class="es-lbl">Style</span>
+                        <div class="unit-toggle es-fill">
+                            <button id="annotWfReg" type="button" onclick="setAnnotWfStyle('regular')">REGULAR</button>
+                            <button id="annotWfBold" type="button" class="active" onclick="setAnnotWfStyle('bold')">BOLD</button>
+                            <button id="annotWfItal" type="button" onclick="setAnnotWfStyle('italic')">ITALIC</button>
                         </div>
                     </div>
                 </div>
-                <label style="display:flex; align-items:center; gap:8px; margin-top:10px; font-size:var(--fs-70); color:var(--text-main); cursor:pointer;" title="Show red alignment guide lines that snap frames to each other, the wall, and the hang line while dragging.">
-                    <input type="checkbox" id="snapEnabledToggle" checked onchange="toggleSnapEnabled(this.checked)" style="width:15px; height:15px; cursor:pointer;">
-                    Snap to alignment guides (red lines while dragging)
-                </label>
-                <label style="display:flex; align-items:center; gap:8px; margin-top:8px; font-size:var(--fs-70); color:var(--text-main); cursor:pointer;" title="When dragging a dimension line, snap its position to whole-inch increments and align it with other dimension lines (e.g. matching left/right edge-gap lines).">
-                    <input type="checkbox" id="dimSnapEnabledToggle" checked onchange="toggleDimSnapEnabled(this.checked)" style="width:15px; height:15px; cursor:pointer;">
-                    Snap dimension lines (increments &amp; align to each other)
-                </label>
             </div>
-        </div>
-
-        <!-- SCALE FIGURE. The shade dropdown became a swatch strip so it reads the
-             same as the Label & Dimension and Image Code colour pickers a few
-             sections up — same dots, same size, same selected ring, via
-             _frameSwatchesInto. Black through grey only, no hues: the figure is a
-             silhouette on a technical drawing, and a coloured one would read as an
-             annotation. The live preview beside it is the real character art under
-             the same CSS filter the wall uses, so the choice is visible without
-             closing the panel. -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Scale Figure</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:var(--r-6); border:1px solid var(--border-color);">
-                <div style="display:flex; align-items:flex-start; gap:12px;">
-                    <div style="flex:0 0 44px; height:72px; display:flex; align-items:flex-end; justify-content:center; background:var(--bg-main); border:1px solid var(--border-color); border-radius:var(--r-4); overflow:hidden;">
-                        <img src="Character_Lady_walk.svg" id="personShadePreview" alt="Scale figure preview" style="height:64px; width:auto; display:block;" onerror="this.style.display='none'">
-                    </div>
-                    <div style="flex:1; min-width:0;">
-                        <label style="font-size:var(--fs-65); color:var(--text-muted); display:block; margin-bottom:6px;" title="Make the scale figure more subtle by lightening it from solid black to shades of grey.">Figure Shade</label>
-                        <div id="personShadeSwatches"></div>
-                    </div>
-                </div>
-                <!-- Height dimension on the figure. A real dimension built from the
-                     same parts as every other one on the drawing — same line, same
-                     colour/weight/dash, same Line Ends, same chevron drag controls,
-                     with a dashed leader from the crown across to the line. -->
-                <div style="border-top:1px solid var(--border-color); margin-top:12px; padding-top:10px;">
-                    <div style="display:flex; align-items:center; gap:8px;">
-                        <label style="display:flex; align-items:center; gap:8px; font-size:var(--fs-70); color:var(--text-main); cursor:pointer; flex:1;" title="Dimension the figure floor-to-crown, e.g. 72&quot;. Uses the same style as every other dimension and follows the Dual Units setting above.">
-                            <input type="checkbox" id="figureDimToggle" onchange="toggleFigureDim(this.checked)" style="width:15px; height:15px; cursor:pointer;">
-                            Show height dimension on the figure
-                        </label>
-                        <button type="button" class="icon-btn" onclick="resetFigureDimPos()" title="Put the line back down the figure's centre" style="height:26px; width:26px;">⌖</button>
-                    </div>
-                    <div style="font-size:var(--fs-60); color:var(--text-muted); margin-top:6px; line-height:1.4;">
-                        Floor to the top of the head, reading <b>72&quot;</b> with the metric equivalent in brackets when Dual Units is on. The number sits vertically along the line. Use the arrows to slide the line left or right of the figure — a dashed leader connects it back to the crown — or to slide the number along it.
-                    </div>
-                    <div id="figureDimHint" style="display:none; font-size:var(--fs-60); color:var(--text-muted); margin-top:6px; line-height:1.4;">
-                        The figure itself is hidden — turn <b>Person</b> on in Layout Guides to see the dimension.
+            <div class="es-sec">
+                <div class="es-h">Export</div>
+                <div class="es-row"><span class="es-lbl">SVG frames<span class="help-dot" data-help="Texture embeds the frame photos (crisp, larger files). Vector rebuilds each frame as shapes: rail, mats, reveal, paper, coloured to match (tiny files, editable in Illustrator).">?</span></span>
+                    <div class="unit-toggle es-fill">
+                        <button id="svgModeTexture" type="button" class="active" onclick="setSvgFrameMode('texture')">TEXTURE</button>
+                        <button id="svgModeColor" type="button" onclick="setSvgFrameMode('autocolor')">VECTOR</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- NUDGE STEP: arrow-key step sizes -->
-        <div style="margin-bottom: 12px;">
-            <div style="font-size:var(--fs-60); color:var(--text-muted); text-transform:uppercase; letter-spacing:0.7px; font-weight:600; margin-bottom: 6px;">Nudge Step (Arrow Keys)</div>
-            <div style="background:var(--bg-subpanel); padding:12px; border-radius:var(--r-6); border:1px solid var(--border-color);">
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                    <div>
-                        <label style="font-size:var(--fs-65); color:var(--text-muted); display:block; margin-bottom:4px;">Arrow alone (small)</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" style="padding: 6px; font-size: var(--fs-85); flex:1; text-align: center;" oninput="updateNudgeSteps()">
-                            <span style="font-size:var(--fs-75); color:var(--text-muted);" id="nudgeUnitLabel1">in</span>
-                        </div>
-                    </div>
-                    <div>
-                        <label style="font-size:var(--fs-65); color:var(--text-muted); display:block; margin-bottom:4px;">Shift + Arrow (big)</label>
-                        <div style="display:flex; align-items:center; gap:6px;">
-                            <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" style="padding: 6px; font-size: var(--fs-85); flex:1; text-align: center;" oninput="updateNudgeSteps()">
-                            <span style="font-size:var(--fs-75); color:var(--text-muted);" id="nudgeUnitLabel2">in</span>
-                        </div>
-                    </div>
+        <!-- COLUMN 3: the wall, the figure, and how things move. -->
+        <div class="es-col">
+            <div class="es-sec">
+                <div class="es-h">Wall</div>
+                <div class="es-row"><span class="es-lbl">Hang height<span class="help-dot" data-help="Centre of the art from the floor. Gallery standard is 57 in (144.78cm); the target button puts it back.">?</span></span>
+                    <input type="number" id="hangHeight" value="57" class="es-num es-fill" oninput="updateHangHeight()" onchange="pushHistory()">
+                    <span id="hangHeightUnitLabel" class="es-unit">(in)</span>
+                    <button type="button" class="icon-btn es-icon" onclick="resetHangHeightToStandard()" title="Back to the 57&quot; studio standard">&#8982;</button>
                 </div>
+                <div class="es-row"><span class="es-lbl">Baseboard<span class="help-dot" data-help="Baseboard height from the floor; 0 for none. Standard is 4 in (10.16cm).">?</span></span>
+                    <input type="number" id="baseboardHeight" value="4" class="es-num es-fill" oninput="updateBaseboard()" onchange="pushHistory()">
+                    <span id="baseboardUnitLabel" class="es-unit">(in)</span>
+                    <button type="button" class="icon-btn es-icon" onclick="resetBaseboardToStandard()" title="Back to the 4&quot; standard">&#8982;</button>
+                </div>
+            </div>
+            <div class="es-sec">
+                <div class="es-h">Scale figure</div>
+                <div class="es-row es-top"><span class="es-lbl">Shade</span>
+                    <div id="personShadeSwatches" class="es-fill"></div>
+                    <div class="es-fig"><img src="Character_Lady_walk.svg" id="personShadePreview" alt="Scale figure preview" onerror="this.style.display='none'"></div>
+                </div>
+                <div class="es-row">
+                    <label class="es-check es-fill"><input type="checkbox" id="figureDimToggle" onchange="toggleFigureDim(this.checked)">Height dimension<span class="help-dot" data-help="Dimensions the figure floor to crown (72 in, with the second unit when it is on), in the same style as every other dimension. Use the arrows on the drawing to slide the line beside the figure or the number along it.">?</span></label>
+                    <button type="button" class="icon-btn es-icon" onclick="resetFigureDimPos()" title="Put the line back down the figure's centre">&#8982;</button>
+                </div>
+                <div id="figureDimHint" class="es-note" style="display:none;">The figure is hidden: turn <b>Person</b> on in Layout Guides to see it.</div>
+            </div>
+            <div class="es-sec">
+                <div class="es-h">Grid, snap &amp; nudge</div>
+                <div class="es-pair">
+                    <div class="es-row"><span class="es-lbl">Grid<span class="help-dot" data-help="Spacing of the visible grid. Show it from Layout Guides.">?</span></span>
+                        <input type="number" id="gridSize" value="1" min="0.25" step="0.25" class="es-num es-fill" oninput="updateGridSize()"><span class="es-unit" id="gridSizeUnitLabel">in</span></div>
+                    <div class="es-row"><span class="es-lbl">Snap<span class="help-dot" data-help="The increment frame positions round to while dragging.">?</span></span>
+                        <input type="number" id="dragSnap" value="1" min="0.25" step="0.25" class="es-num es-fill" oninput="updateDragSnap()"><span class="es-unit" id="dragSnapUnitLabel">in</span></div>
+                    <div class="es-row"><span class="es-lbl">Nudge<span class="help-dot" data-help="How far an arrow key moves the selection.">?</span></span>
+                        <input type="number" id="nudgeSmall" value="1" min="0.1" step="0.1" class="es-num es-fill" oninput="updateNudgeSteps()"><span class="es-unit" id="nudgeUnitLabel1">in</span></div>
+                    <div class="es-row"><span class="es-lbl">Shift<span class="help-dot" data-help="How far Shift + arrow moves the selection.">?</span></span>
+                        <input type="number" id="nudgeBig" value="10" min="0.1" step="0.1" class="es-num es-fill" oninput="updateNudgeSteps()"><span class="es-unit" id="nudgeUnitLabel2">in</span></div>
+                </div>
+                <label class="es-check"><input type="checkbox" id="snapEnabledToggle" checked onchange="toggleSnapEnabled(this.checked)">Alignment guides<span class="help-dot" data-help="Red guide lines that snap frames to each other, the wall and the hang line while dragging.">?</span></label>
+                <label class="es-check"><input type="checkbox" id="dimSnapEnabledToggle" checked onchange="toggleDimSnapEnabled(this.checked)">Snap dimension lines<span class="help-dot" data-help="A dragged dimension line snaps to whole increments and lines up with other dimension lines.">?</span></label>
             </div>
         </div>
 
-        </div><!-- /settings-cols -->
+        </div><!-- /es-grid -->
 
-        <button data-modal-close class="action-btn" style="width:100%; height:32px; font-size:var(--fs-75);" onclick="closeAnnotationStyleModal()">Done</button>
+        <div class="es-foot"><button data-modal-close class="action-btn" style="width:auto; height:32px; padding:0 22px;" onclick="closeAnnotationStyleModal()">Done</button></div>
     </div>
 </div>
 
@@ -2436,9 +2252,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.47';</script>
-<script src="templates.js?v=18.47"></script>
-<script src="app.js?v=18.47"></script>
+<script>window.FRAME_HTML_VERSION = '18.48';</script>
+<script src="templates.js?v=18.48"></script>
+<script src="app.js?v=18.48"></script>
 
 </body>
 </html>

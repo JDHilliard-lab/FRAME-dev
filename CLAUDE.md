@@ -1625,6 +1625,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).
   `openFrameFx` / `openUnitMenu` / the units chip / `projFrameFxBtn` all land on their tab;
   there is no separate Frame effects modal (`#frameFxModal` is gone) or units popover.
+- **ELEVATION SETTINGS IS ONE SCREEN (18.48, `#precisionModal`, `.es-*` in style.css).**
+  Three columns, 26px rows, ~520px tall: no scrolling on a laptop. NO paragraphs: every
+  explanation is a static `.help-dot` with `data-help`. Units are NOT set here (Settings >
+  Units; `#elevSetUnitsBtn` shows them and goes there). **Line ends are ticks, always**:
+  `_normalizeAnnotationStyle` forces `dimEnds = 'tick'` AFTER the weight migration (which
+  still reads the stored value), `setAnnotDimEnds` ignores its argument, no control. The
+  corner "units" legend on the wall is gone (`unitLegendText` deleted).
 - **INNER SHADOWS ARE TRUE INSETS (18.46, `dIS`)**: the casting stroke runs up to the edge
   and is parked off-canvas with the shadow thrown back by `shadowOffsetX`. The old stroke
   sat 10px outside, so small shadows (Onto artwork, Mat onto mat) never arrived. With NO

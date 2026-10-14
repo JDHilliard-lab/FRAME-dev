@@ -344,7 +344,9 @@ const path = require('path');
     __check('the old px slider is gone from the panel, not left sitting there dead', () => {
       if (/id="annotWeight"/.test(H)) throw new Error('the 1-6px Line Weight slider is still in index.html');
       if (/Line Weight<\\/span>/.test(H)) throw new Error('the old Line Weight row label is still there');
-      if (!/Lines \\(pt\\)/.test(H) || !/Ticks \\(pt\\)/.test(H)) throw new Error('the two point ladders are not labelled in the panel');
+      // 18.48: compact labels; the point unit is in each row's ? dot.
+      if (H.indexOf('>Lines<span class="help-dot"') < 0 || H.indexOf('>Ticks<span class="help-dot"') < 0) throw new Error('the two point ladders are not labelled in the panel');
+      if (H.indexOf('Points, absolute') < 0) throw new Error('the Lines help no longer says the weights are points');
     });
 
     __check('six segments get their own CSS so the labels fit the strip', () => {

@@ -56,18 +56,22 @@ const path = require('path');
     const __cssVar = (n) => document.documentElement.style.getPropertyValue(n);
 
     // ── The option ──
-    __check('the plain style is the default, so no existing deck restyles itself', () => {
-      if (annotationStyle.dimEnds !== 'none') throw new Error('default dimEnds is ' + annotationStyle.dimEnds);
+    // 18.48: ONE house style. Ticks are the default and the only line ends; the plain
+    // style and its control are gone (changed on purpose, these used to pin plain).
+    __check('EXACT ASK (18.48): ticks are the default and the only style', () => {
+      if (annotationStyle.dimEnds !== 'tick') throw new Error('default dimEnds is ' + annotationStyle.dimEnds);
       __seed();
-      if (__ticks().length !== 0) throw new Error('the plain style drew ' + __ticks().length + ' ticks');
+      if (__ticks().length === 0) throw new Error('the default drew no ticks');
     });
 
-    __check('a stored style from before the option existed, or any junk value, reads as plain', () => {
-      [undefined, '', 'arrow', 'arrowhead', 'TICK', true, 1, {}].forEach(v => {
+    __check('any stored value, plain included, opens as ticks', () => {
+      [undefined, '', 'none', 'arrow', 'arrowhead', 'TICK', true, 1, {}].forEach(v => {
         annotationStyle.dimEnds = v;
         _normalizeAnnotationStyle();
-        if (annotationStyle.dimEnds !== 'none') throw new Error(JSON.stringify(v) + ' normalised to ' + annotationStyle.dimEnds);
+        if (annotationStyle.dimEnds !== 'tick') throw new Error(JSON.stringify(v) + ' normalised to ' + annotationStyle.dimEnds);
       });
+      setAnnotDimEnds('none');
+      if (annotationStyle.dimEnds !== 'tick') throw new Error('an old caller asking for plain got ' + annotationStyle.dimEnds);
       annotationStyle.dimEnds = 'tick';
       _normalizeAnnotationStyle();
       if (annotationStyle.dimEnds !== 'tick') throw new Error('tick did not survive normalising');
@@ -192,9 +196,7 @@ const path = require('path');
       });
     });
 
-    __check('EXACT SPEC: extension lines overhang the intersection, and only under the tick style', () => {
-      setAnnotDimEnds('none');
-      if (_dimExtOverhang() !== 0) throw new Error('the plain style should have no overhang, got ' + _dimExtOverhang());
+    __check('EXACT SPEC: extension lines overhang the intersection', () => {
       setAnnotDimEnds('tick');
       const ov = _dimExtOverhang();
       if (!(ov > 0)) throw new Error('no overhang under the tick style');
@@ -226,7 +228,7 @@ const path = require('path');
       if (fh.querySelectorAll('.dim-tick').length !== 2) throw new Error('the hang dimension kept its own end style: ' + fh.innerHTML.slice(0, 200));
       setAnnotDimEnds('none'); __seed();
       const fh2 = document.querySelector('.floor-hang-dim');
-      if (fh2.querySelectorAll('.dim-tick').length !== 0) throw new Error('the plain style should restore the perpendicular ends');
+      if (fh2.querySelectorAll('.dim-tick').length !== 2) throw new Error('asking for plain dropped the ticks; there is no plain style any more');
     });
 
     __check('EXACT RISK: the SVG exporter has a case for the rotated tick', () => {
@@ -254,18 +256,14 @@ const path = require('path');
       if (rule.indexOf('pointer-events: none') < 0) throw new Error('.dim-tick should be pointer-events:none: ' + rule);
     });
 
-    __check('the setting is in the Elevations gear panel and persists', () => {
+    __check('the Elevations gear panel has no Line Ends choice any more', () => {
       const H = window.__htmlSrc;
-      if (H.indexOf('annotEndsTick') < 0) throw new Error('no TICKS button in the Settings modal');
-      if (H.indexOf('setAnnotDimEnds') < 0) throw new Error('the buttons are not wired to setAnnotDimEnds');
+      if (H.indexOf('annotEndsTick') >= 0 || H.indexOf('annotEndsNone') >= 0 || H.indexOf('setAnnotDimEnds') >= 0) throw new Error('the PLAIN / TICKS control is still in the Settings modal');
       // A real arrow OPTION would be a third button or a third mode value. (The
       // control's comment mentions arrowheads to say why there isn't one, so
       // match the wiring, not the prose.)
       if (H.indexOf('annotEndsArrow') >= 0) throw new Error('an arrowhead button appears in the Line Ends control');
       if (/setAnnotDimEnds\\((['"])arrow/.test(H) || /setAnnotDimEnds\\((['"])arrow/.test(S)) throw new Error('something calls setAnnotDimEnds with an arrow mode');
-      // Seeding the modal must reflect the stored value, or reopening Settings
-      // would show PLAIN while the drawing has ticks.
-      if (S.indexOf('setAnnotDimEnds(annotationStyle.dimEnds)') < 0) throw new Error('seedAnnotationStyleInputs does not restore the stored value');
       // dimEnds rides on annotationStyle, which saveAnnotationStyle persists whole.
       if (S.indexOf('dimEnds:') < 0) throw new Error('dimEnds is not part of annotationStyle');
     });

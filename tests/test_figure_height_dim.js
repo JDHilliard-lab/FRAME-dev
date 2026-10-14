@@ -72,7 +72,7 @@ const path = require('path');
     __check('EXACT REQUEST: a tick box in the elevation settings turns it on and off', () => {
       if (!/id="figureDimToggle"/.test(H)) throw new Error('no tick box in the Settings panel');
       if (!/onchange="toggleFigureDim\\(this.checked\\)"/.test(H)) throw new Error('the tick box is not wired to toggleFigureDim');
-      const sf = H.indexOf('SCALE FIGURE'), cb = H.indexOf('figureDimToggle'), next = H.indexOf('NUDGE STEP', sf);
+      const sf = H.indexOf('>Scale figure<'), cb = H.indexOf('figureDimToggle'), next = H.indexOf('>Grid, snap', sf);
       if (!(cb > sf && cb < next)) throw new Error('the tick box is not inside the Scale Figure section');
       if (dimVisibility.figureHeight !== false) throw new Error('it should default off, got ' + dimVisibility.figureHeight);
       __seed('in');
@@ -144,9 +144,8 @@ const path = require('path');
 
     __check('it takes the shared dimension styling — colour, weight, dash and line ends', () => {
       toggleFigureDim(true);
+      // 18.48: ticks are the only line ends; asking for plain still draws them.
       setAnnotDimEnds('none'); __seed('in');
-      if (__layer().querySelectorAll('[data-svg-tick]').length) throw new Error('ticks drew under the PLAIN style');
-      setAnnotDimEnds('tick'); __seed('in');
       if (__layer().querySelectorAll('[data-svg-tick]').length !== 2) throw new Error('TICKS mode did not put an architectural tick on each end');
       // The segments are the CSS-var-driven ones, so weight and colour arrive for free.
       const seg = __layer().querySelector('.dim-line-segment-v');
@@ -179,10 +178,13 @@ const path = require('path');
 
     __check('the leader overhangs the dimension line under TICKS, so the tick has its crosshair', () => {
       toggleFigureDim(true);
-      setAnnotDimEnds('none'); __seed('in');
-      elevPersonPos.dimOff = 0.8; drawElevAll();
+      // 18.48: no plain style to compare against, so take the overhang away for one
+      // draw and put it back: the leader must grow by exactly that much.
+      setAnnotDimEnds('tick'); __seed('in');
+      elevPersonPos.dimOff = 0.8;
+      const _ov = _dimExtOverhang; _dimExtOverhang = () => 0; drawElevAll();
       const plain = parseFloat(__leader().style.width);
-      setAnnotDimEnds('tick'); drawElevAll();
+      _dimExtOverhang = _ov; drawElevAll();
       const ticked = parseFloat(__leader().style.width);
       if (!(ticked > plain)) throw new Error('the leader did not gain the overhang under TICKS: ' + plain + ' vs ' + ticked);
       if (ticked - plain !== _dimExtOverhang()) throw new Error('the overhang is ' + (ticked - plain) + ', expected ' + _dimExtOverhang());

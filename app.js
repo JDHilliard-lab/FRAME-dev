@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.47';
+const APP_VERSION = '18.48';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -3746,6 +3746,8 @@ function openPrecisionModal() {
     if (snapCb) snapCb.checked = elevSnapEnabled;
     const dimSnapCb = document.getElementById('dimSnapEnabledToggle');
     if (dimSnapCb) dimSnapCb.checked = elevDimSnapEnabled;
+    const ut = document.getElementById('elevSetUnitsTxt');
+    if (ut) { const du = _specDualUnit(); ut.textContent = String(dashUnit || 'in').toUpperCase() + (du ? ' + ' + du.toUpperCase() : ''); }
     document.getElementById('precisionModal').style.display = 'flex';
 }
 
@@ -3954,7 +3956,7 @@ let annotationStyle = {
     // Arrowheads are deliberately not an option: they are not architectural
     // dimensioning practice, and the dim-arrow chevrons in the editor are drag
     // controls (data-export-skip), never output.
-    dimEnds: 'none',
+    dimEnds: 'tick',
 };
 // Architectural tick geometry, in CSS px at 1:1 zoom. These are PRINT
 // conventions, not measurements, so they stay constant rather than scaling with
@@ -4168,6 +4170,10 @@ function _normalizeAnnotationStyle() {
             annotationStyle.weightLinked = true;
         }
     }
+    // ONE HOUSE STYLE (18.48): dimension ends are ticks, always. The weight migration
+    // above still reads what a stored style HAD, so an old plain-ends style keeps its
+    // one linked weight; only the ends change.
+    annotationStyle.dimEnds = 'tick';
     annotationStyle.lineWeightPt = _snapWeightPt(annotationStyle.lineWeightPt);
     annotationStyle.weightLinked = (annotationStyle.weightLinked !== false);
     // Linked writes the value through rather than only reading past it, so the
@@ -41073,7 +41079,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wall size and Settings', body: `The W and H fields set the wall. The gear beside them opens <strong>Settings</strong>: units, hang height, baseboard, label and dimension style, grid, drag snap and nudge steps.` },
             { title: 'Layout guides', body: `The guide toggles switch on-drawing overlays: frame letters, outside dimensions, spacing dimensions, the scale figure, the centre and hang lines, the grid, centre marks and more. They are shared by every wall, and Deck Studio's breaker and install pages show the same ones.` },
             { title: 'Dimensions', body: `Every dimension line works the same way: click it, drag its arrows to move the line, drag the number to slide it along, and use the &times; to hide it. Press <span class="help-kbd">M</span> to draw your own; its ends snap to frame corners, frame edges and the wall.` },
-            { title: 'Baseboard, hang height, units on labels', body: `The baseboard (4" by default) and hang height (57") are in Settings. The <strong>Unit Suffix</strong> guide shows the unit on every number, or turn it off for one "ALL DIMENSIONS IN INCHES" legend instead.` },
+            { title: 'Baseboard, hang height, units on labels', body: `The baseboard (4" by default) and hang height (57") are in Elevation settings (the gear in Layout Guides, or Settings, Elevations). The <strong>Unit Suffix</strong> guide shows the unit mark on every number, or turn it off for bare numbers.` },
             { title: 'Exporting walls', body: `The download icon beside the wall size exports this wall as a PNG. <strong>ALL PNG</strong> and <strong>ALL SVG</strong> put every wall in one ZIP, named like the walls. The SVG opens as real line work in Illustrator.` },
             { title: 'Zoom and fit', body: `The slider zooms. <strong>Fit</strong> fits the wall to the window.` }
         ]
@@ -41195,7 +41201,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.47</strong> One <strong>Settings</strong> gear in the header, in every view, for what you set up at the start of a project: Units, Frame effects and Elevations. The units chip opens it on Units.<br><br>
+                body: `<strong>18.48</strong> Elevation settings is one screen with no scrolling: three tidy columns, every explanation behind a <strong>?</strong> dot, units moved to Settings (the button at the top goes there). Dimension ends are always ticks, the house style. The corner note naming the units is gone from the elevation: with the second unit on, every number carries its own units.<br><br>
+<strong>18.47</strong> One <strong>Settings</strong> gear in the header, in every view, for what you set up at the start of a project: Units, Frame effects and Elevations. The units chip opens it on Units.<br><br>
 <strong>18.46</strong> Mat shadows actually land now: the shadow a mat casts onto the artwork, and mat 1 onto mat 2, were drawn too far outside the edge to reach it, so only the frame's shadow showed. Every inner shadow is now a true inset shadow, so Onto artwork and Mat onto mat read at every setting.<br><br>
 <strong>18.45</strong> Frame effects samples are all in MICH-32-22 (the floater in MICH-301-22), the double mat is two white mats of one width, and the panel no longer shows the selected piece. With no mat, the frame now casts its shadow onto the artwork, everywhere a frame is drawn.<br><br>
 <strong>18.44</strong> Frame effects has sample tabs: step through No mat, Single mat, Double mat, Faux mat, Float mount and Canvas floater on one square composition, in the selected piece's moulding, to see where every shadow lands. The sliders are global: they change every frame in the project.<br><br>
@@ -42764,24 +42771,9 @@ function drawElevAll() {
     // Drop any cached artwork node this pass didn't use — see _elevArtImgCache.
     _sweepElevArtImgCache();
 
-    // Unit legend (top-left corner of the wall). Shown only when the interior
-    // suffix is OFF — so the reader knows what unit the bare numbers are in.
-    // When the suffix is ON, every number is self-labeling and the legend is
-    // hidden to avoid redundancy.
-    (function renderUnitLegend() {
-        const wallEl = document.getElementById('wall');
-        if (!wallEl) return;
-        let legend = document.getElementById('elev-unit-legend');
-        if (legend) legend.remove();
-        // Legend and per-number suffixes are mutually exclusive: when suffixes
-        // are ON each number carries its unit, so the legend is hidden.
-        if (showUnitSuffix) return;
-        legend = document.createElement('div');
-        legend.id = 'elev-unit-legend';
-        legend.className = 'elev-unit-legend';
-        legend.textContent = unitLegendText();
-        wallEl.appendChild(legend);
-    })();
+    // 18.48: no corner note naming the units on the wall. With the second unit on, every
+    // number reads 24"(610mm) and says its own units. Remove a stale one from an old pass.
+    { const _leg = document.getElementById('elev-unit-legend'); if (_leg) _leg.remove(); }
 
     // Sync the Group Box + Edge Gap Layout Guides buttons' blue state to
     // reflect whether those annotations currently exist + are visible.
@@ -43199,13 +43191,6 @@ function _elevDualPart(val) {
     return '(' + num + unitInfo(dual).suffix.trim() + ')';
 }
 
-// Human-readable unit name for the corner legend.
-function unitLegendText() {
-    const names = { in: 'INCHES', cm: 'CENTIMETERS', mm: 'MILLIMETERS' };
-    const dual = _elevDualUnit();
-    if (dual) return 'ALL DIMENSIONS IN INCHES (' + names[dual] + ')';
-    return 'ALL DIMENSIONS IN ' + (names[elevUnit] || elevUnit.toUpperCase());
-}
 
 // Elevation dual units, from the Settings modal. Unticking keeps the last unit
 // picked so turning it back on is one click, matching the spec-page control. The
@@ -43278,8 +43263,9 @@ function setAnnotDash(on) {
 // Flipping this also changes the line-weight hierarchy and the extension
 // overhang, all of which fall out of applyAnnotationStyleFromModal → the CSS vars
 // and the next redraw.
+// 18.48: ticks are the only style; kept so an older caller still lands on ticks.
 function setAnnotDimEnds(mode) {
-    annotationStyle.dimEnds = (mode === 'tick') ? 'tick' : 'none';
+    annotationStyle.dimEnds = 'tick';
     const nBtn = document.getElementById('annotEndsNone');
     const tBtn = document.getElementById('annotEndsTick');
     if (nBtn) nBtn.classList.toggle('active', annotationStyle.dimEnds === 'none');
@@ -48780,20 +48766,6 @@ async function exportElevSVG(opts) {
                     cx = Math.max(cx, b);
                 });
                 seg(Math.max(cx, x0), x1);
-            }
-            // Unit legend ("ALL DIMENSIONS IN …") — emit as text so it appears
-            // in the SVG like on screen.
-            const legEl = wall.querySelector('#elev-unit-legend');
-            if (legEl && legEl.textContent) {
-                const lr = rectToSvg(legEl);
-                const lcs = getComputedStyle(legEl);
-                const lfs = parseFloat(lcs.fontSize) || 11;
-                const lcolor = lcs.color || wallLine;
-                const lfw = lcs.fontWeight || '600';
-                // baseline ~ top + fontSize*0.8 (text sits near the top-left of its box)
-                const lx = lr.x.toFixed(1);
-                const ly = (lr.y + lfs * 0.85).toFixed(1);
-                frontLayer.push(`<text x="${lx}" y="${ly}" font-family="Arial, Helvetica, sans-serif" font-size="${lfs.toFixed(1)}" font-weight="${lfw}" fill="${lcolor}">${legEl.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;')}</text>`);
             }
             // Image-code captions beneath frames (right-aligned). Read the live
             // caption elements so they match the screen + the Image Code toggle.

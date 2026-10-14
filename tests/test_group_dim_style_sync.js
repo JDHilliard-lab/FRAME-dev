@@ -148,10 +148,9 @@ const path = require('path');
     });
 
     // ── The tick style ──
-    __check('EXACT BUG: the group box honours the Line Ends setting', () => {
+    // 18.48: ticks are the only line ends, so the group box always carries them.
+    __check('EXACT BUG: the group box carries the same ticks as every other dimension', () => {
       setAnnotDimEnds('none'); __seed();
-      if (__gTicks() !== 0) throw new Error('plain style produced ' + __gTicks() + ' architectural ticks');
-      setAnnotDimEnds('tick');
       if (__aTicks() === 0) throw new Error('no ticks on the ordinary dimensions, so this proves nothing');
       if (__gTicks() === 0) throw new Error('THE BUG: ordinary dimensions have ' + __aTicks() + ' ticks and the group box has none');
       // Width line + height line, two ends each.

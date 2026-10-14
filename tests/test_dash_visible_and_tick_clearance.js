@@ -111,11 +111,7 @@ const path = require('path');
       // The oblique is centred on the line, so it reaches DIM_TICK_LEN/2 above it.
       // The chip is opaque white; land inside that and it rubs the tick out.
       if (!(withTick > DIM_TICK_LEN / 2)) throw new Error('THE BUG: the number is lifted ' + withTick + 'px but the tick reaches ' + (DIM_TICK_LEN / 2) + 'px above the line, so the white chip still covers it');
-      setAnnotDimEnds('none');
-      const noTick = _dimLabelLift();
-      if (!(noTick > 0)) throw new Error('the number sits flush on the line under the plain style');
-      if (!(noTick < withTick)) throw new Error('the plain style pays for a tick that is not drawn (' + noTick + ' vs ' + withTick + ')');
-      setAnnotDimEnds('tick');
+      // 18.48: there is no plain style left to compare against (ticks are the only ends).
     });
 
     __check('the lift is used on all four sides, not just the one that was reported', () => {
