@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.52';
+const APP_VERSION = '18.53';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -21793,11 +21793,29 @@ function _dsPlaceRelativeInto(parent, desc) {
     wrap.appendChild(note);
     parent.appendChild(wrap);
 }
+// IS THIS PAGE WHERE A HAND PUT IT (18.53)? Any page with an afterKey counted, so the
+// starter deck's Moodboard (anchored after Good Art. Good People. by _starterDeck itself)
+// offered the rail reset button (count 1) on a brand-new project, and resetting MOVED it away from
+// where the starter deck puts it. A starter page still on its starter anchor is home.
+// The anchors are read from _starterDeck once, so the two can never disagree.
+function _starterLayoutHome() {
+    if (!_starterLayoutHome._c) {
+        const m = {};
+        try { (_starterDeck().layoutPages || []).forEach(p => { if (p && p.id && p.afterKey) m[p.id] = p.afterKey; }); } catch (e) {}
+        _starterLayoutHome._c = m;
+    }
+    return _starterLayoutHome._c;
+}
+function _dsPageHandPlaced(p) {
+    if (!p || !p.afterKey) return false;
+    const home = _starterLayoutHome()[p.id];
+    return !(home && home === p.afterKey);
+}
 // Put every inserted page back where its template meant it to go. Once a few have been
 // hand-anchored there is otherwise no way back short of deleting and re-adding them.
 function _dsResetLayoutOrder() {
     const arr = (editorialContent.layoutPages || []);
-    const hand = arr.filter(p => p && p.afterKey);
+    const hand = arr.filter(_dsPageHandPlaced);
     if (!hand.length) { _toast('Nothing to reset', 'No pages have been moved by hand — they are all still where their template puts them.'); return; }
     _confirmDestroy({
         title: 'Put ' + hand.length + ' hand-placed page' + (hand.length === 1 ? '' : 's') + ' back in the default order?',
@@ -21805,7 +21823,8 @@ function _dsResetLayoutOrder() {
         confirm: 'Reset order',
         undoable: true,
         onConfirm: () => {
-            hand.forEach(p => { delete p.afterKey; if (!p.place) p.place = 'afterStrategy'; });
+            // A starter page goes back to its starter anchor; anything else to its template's.
+            hand.forEach(p => { const home = _starterLayoutHome()[p.id]; if (home) { p.afterKey = home; return; } delete p.afterKey; if (!p.place) p.place = 'afterStrategy'; });
             if (typeof pushHistory === 'function') pushHistory();
             if (typeof scheduleAutosave === 'function') scheduleAutosave();
             _dsRefresh();
@@ -21887,7 +21906,7 @@ function _dsRenderRail() {
     // put them short of deleting and re-adding each one. Hidden when there is nothing to
     // undo, so it is not a permanently-armed button for a rare job.
     {
-        const handPlaced = (editorialContent.layoutPages || []).filter(p => p && p.afterKey).length;
+        const handPlaced = (editorialContent.layoutPages || []).filter(_dsPageHandPlaced).length;
         if (handPlaced) {
             const rst = document.createElement('button');
             rst.textContent = '↺ Reset page order (' + handPlaced + ')';
@@ -22082,6 +22101,28 @@ function _deckPageKey(desc) {
     if (desc.kind === 'planDetail') return (desc.pd && desc.pd.id) ? ('plandetail:' + desc.pd.id) : null;
     if (desc.kind === 'catov') return _catOverviewKey(desc.place, desc.part || 0);
     return null;
+}
+// THE PAGE NUMBER A PREVIEW FOOTER PRINTS (18.53): the number the PDF will give this
+// page, counted the way _buildSpecPagePDF counts (deck order, Frame Recommendations
+// spanning as many pages as it plans). The previews used to print 1 on every canvas
+// page and _dsIndex + 1 on the DOM ones, which on the Project tab is whatever page was
+// last selected on the Pages tab. A page not in the deck (a template demo) says 1.
+// The Frame Recommendations span reads the frames cache rather than waiting on the
+// library; before it is filled the page counts as one.
+function _deckPageSpan(d) {
+    if (!(d && d.kind === 'card' && d.type === 'frameRec')) return 1;
+    if (!_projFramesCache) return 1;
+    try { return _frameRecPlanPages(_projFramesCache, _frameRecCfg()).length; } catch (e) { return 1; }
+}
+function _deckPageNumFor(desc) {
+    if (!desc || desc._tplSwatch) return 1;
+    let key = null; try { key = _deckPageKey(desc); } catch (e) {}
+    if (!key) return 1;
+    const walk = (pages) => { let n = 0; for (const d of (pages || [])) { if (d === desc || _deckPageKey(d) === key) return n + 1; n += _deckPageSpan(d); } return 0; };
+    let got = 0;
+    try { got = walk(_dsPages); } catch (e) {}
+    if (!got) { try { got = walk(_deckPageList()); } catch (e) {} }
+    return got || 1;
 }
 function _dsAnnFam(font) { return _fontCss(font, 'sans'); }
 function _dsAnnList(key) { if (!editorialContent.annotations) editorialContent.annotations = {}; if (!editorialContent.annotations[key]) editorialContent.annotations[key] = []; return editorialContent.annotations[key]; }
@@ -26198,7 +26239,7 @@ function _dsAddFooter(page, w, hh, desc) {
         left.style.cssText = 'position:absolute; left:' + M + 'px; bottom:' + rowBottom + 'px; display:flex; align-items:flex-end; gap:' + (10 * S) + 'px; line-height:1; white-space:nowrap;';
         const pn = document.createElement('span');
         pn.style.cssText = 'font-family:Arial,Helvetica,sans-serif; font-size:' + (8 * S) + 'px; color:' + lt + '; min-width:' + (4 * S) + 'px;';
-        pn.textContent = String((typeof _dsIndex !== 'undefined' ? _dsIndex : 0) + 1);
+        pn.textContent = String(_deckPageNumFor(desc));
         left.appendChild(pn);
         const pl = document.createElement('span');
         pl.style.cssText = 'font-family:' + SERIF + '; font-size:' + (5.8 * S) + 'px; color:' + lt + ';';
@@ -26578,7 +26619,7 @@ async function renderSpecPageCanvas(desc, onProgress, scale) {
     if (onProgress) onProgress(12);
     // Template-card mode rides on env.swatch, not a module flag — see SPEC_TPL_DEMO_SALON.
     // The page itself goes through the ONE dispatch the PDF export uses.
-    const drawn = await _drawDeckSpecPage(rec, desc, { logos: logos, meta: meta, pageNum: 1, PW: PW, PH: PH, M: M, swatch: !!desc._tplSwatch });
+    const drawn = await _drawDeckSpecPage(rec, desc, { logos: logos, meta: meta, pageNum: _deckPageNumFor(desc), PW: PW, PH: PH, M: M, swatch: !!desc._tplSwatch });
     if (!drawn) return null;   // unsupported → keep the live preview
     _specPlanRectsCommit(rec);
     if (onProgress) onProgress(40);
@@ -26632,7 +26673,7 @@ async function renderDeckPageCanvas(desc, onProgress, opts) {
     // carry a link back to the floorplan) and committed after.
     try {
         _specPlanRectsBegin(rec, _deckPageKey(desc));
-        const drawn = await _drawDeckPage(rec, desc, { logos: logos, meta: meta, pageNum: 1, PW: PW, PH: PH, M: 40, fpNoPins: !!(opts && opts.fpNoPins) });
+        const drawn = await _drawDeckPage(rec, desc, { logos: logos, meta: meta, pageNum: _deckPageNumFor(desc), PW: PW, PH: PH, M: 40, fpNoPins: !!(opts && opts.fpNoPins) });
         if (!drawn) return null;
         _specPlanRectsCommit(rec);
     } catch (e) { console.error('preview build failed', e); return null; }
@@ -41227,7 +41268,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.52</strong> The Frame Dashboard toolbar is one row: <strong>+ Add Item</strong>, Duplicate, Delete and an <strong>Edit</strong> menu (Move To, Bulk Edit, Duplicate as Series, Item codes), then <strong>Import</strong> (Import CSV, Bulk Images) and <strong>Export</strong> (Export Database, Batch PNGs, InDesign Script). Nothing was removed, only grouped.<br><br>
+                body: `<strong>18.53</strong> Page previews print the page number the PDF will (they printed 1 on every page, or on the Project tab whichever page was last selected). A new project no longer shows <strong>Reset page order (1)</strong>: the starter Moodboard is where the starter deck puts it, and resetting puts a moved Moodboard back there.<br><br>
+<strong>18.52</strong> The Frame Dashboard toolbar is one row: <strong>+ Add Item</strong>, Duplicate, Delete and an <strong>Edit</strong> menu (Move To, Bulk Edit, Duplicate as Series, Item codes), then <strong>Import</strong> (Import CSV, Bulk Images) and <strong>Export</strong> (Export Database, Batch PNGs, InDesign Script). Nothing was removed, only grouped.<br><br>
 <strong>18.51</strong> In Elevations, <strong>Layout Guides</strong> has its own <strong>Guides</strong> tab beside Art, Context and Glass, and the tabs sit right under the wall size. The frame list starts near the top of the panel instead of below the fold.<br><br>
 <strong>18.50</strong> Deck Studio no longer has its own <strong>Save</strong> button. It never saved the file (it only marked an undo step), which next to <strong>Save Project</strong> looked like your work was on disk when it was not. <strong>Save Project</strong> in the header is the one save, in every view.<br><br>
 <strong>18.49</strong> <strong>Wireframe</strong> is a button in Layout Guides, View, beside Artwork (its letter style stays in Elevation settings). The SVG frame choice moved into the export menu: <strong>SVG</strong> embeds the frame photos, <strong>SVG, vector frames</strong> rebuilds them as shapes, chosen each time you export.<br><br>
