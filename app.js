@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.57';
+const APP_VERSION = '18.58';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -41293,7 +41293,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.57</strong> The view tabs are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>. The units chip is gone from the header (units are in Settings, the gear), and the dashboard layout toggle moved beside <strong>Download Frame PNG</strong>.<br><br>
+                body: `<strong>18.58</strong> A dimension number that sits beside a tight line (between two frames) now stays on its side while you drag the line, so you can push it clear of the frames. It used to jump across onto the neighbouring frame. <strong>Reset dimension positions</strong> puts it back to automatic.<br><br>
+<strong>18.57</strong> The view tabs are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>. The units chip is gone from the header (units are in Settings, the gear), and the dashboard layout toggle moved beside <strong>Download Frame PNG</strong>.<br><br>
 <strong>18.56</strong> The client you type when starting a <strong>New project</strong> now goes on the cover in place of CLIENT NAME. The heading is left for you to write.<br><br>
 <strong>18.55</strong> The next-step bar sits at the bottom-centre, where every view has open space, instead of bottom-left over the page rail, the dashboard rows and + Add Wall. Messages stack above it.<br><br>
 <strong>18.54</strong> Small fixes: the header button is <strong>Open Project</strong>, like the start screen. In Layout Guides the EQ tile is captioned <strong>EQ spacing</strong>, and a faded Group, Edge gap or Lines tile says in its tooltip how to make one. The first piece of a project is no longer washed in red on the dashboard. The project code placeholder no longer looks like a real job.<br><br>
@@ -46302,9 +46303,24 @@ function getLabelOffset(id) {
 function setLabelOffset(id, valueInCurrentUnit) {
     getElevDimOffsets()[id + '-lbl'] = valueInCurrentUnit * unitFactor(elevUnit, 'in');
 }
+// Which side of its line a LIFTED number sits on (18.58): 1 = above / right, -1 = below /
+// left. Its own map, NOT dimOffsets: snapDimOffset aligns against every value in that map,
+// and a stored 1 or -1 would become a snap target an inch off the frames.
+function getDimLiftSide(id) {
+    const ce = elevations[currentElevIndex];
+    const m = ce && ce.dimLiftSide;
+    const v = m ? m[id] : 0;
+    return (v === 1 || v === -1) ? v : 0;
+}
+function setDimLiftSide(id, s) {
+    const ce = elevations[currentElevIndex];
+    if (!ce || (s !== 1 && s !== -1)) return;
+    if (!ce.dimLiftSide || typeof ce.dimLiftSide !== 'object') ce.dimLiftSide = {};
+    ce.dimLiftSide[id] = s;
+}
 function resetDimOffsets() {
     const ce = elevations[currentElevIndex];
-    if (ce) { ce.dimOffsets = {}; ce.hiddenDims = {}; }
+    if (ce) { ce.dimOffsets = {}; ce.hiddenDims = {}; delete ce.dimLiftSide; (ce.customLines || []).forEach(l => { if (l) delete l.lblSide; }); }
     drawElevAll();
     if (typeof pushHistory === 'function') pushHistory();
 }
@@ -46718,6 +46734,8 @@ function renderOneCustomLine(layer, id, type, originX, originY, spanLen, value) 
             setLabelOff: (v) => { L.lblOff = v * toStore; },
             getLineOff: () => (L.off || 0) * inFromStore,
             setLineOff: (v) => { L.off = v * toStore; },
+            getLiftSide: () => L.lblSide,
+            setLiftSide: (s) => { L.lblSide = s; },
             onDelete: () => deleteCustomLine(id),
             spanPx,
         });
@@ -47319,6 +47337,8 @@ function createElevArchSpacing(x1, y1, x2, y2, type, container, label, dimId, of
             setLabelOff: (v) => setLabelOffset(dimId, v),
             getLineOff: () => getDimOffset(dimId),
             setLineOff: (v) => setDimOffset(dimId, snapDimOffset(v, dimId).value),
+            getLiftSide: () => getDimLiftSide(dimId),
+            setLiftSide: (s) => setDimLiftSide(dimId, s),
             onDelete: () => hideDim(dimId),
             spanPx,
         });
@@ -47399,7 +47419,14 @@ function _autoLiftDimLabel(dim, type) {
     // pair of frames put the number on top of the dashes coming off their corners,
     // which read as a broken line. Dragging up always looked right because up
     // happens to be the default side.
-    const lineOff = parseFloat(dim.getAttribute('data-line-off') || '0') || 0;
+    let lineOff = parseFloat(dim.getAttribute('data-line-off') || '0') || 0;
+    // A SIDE THE DESIGNER HAS ALREADY SEEN WINS (18.58). Read from the offset sign alone,
+    // the number jumped a whole label-width across the line the moment a drag carried the
+    // line past its starting position, landing on the neighbouring frame. Dragging the line
+    // pins the side it was on (buildDimControls, data-lift-pin), so the number now travels
+    // WITH the drag and can be pushed clear. Reset dimension positions clears the pins.
+    const pin = parseFloat(dim.getAttribute('data-lift-pin') || '0') || 0;
+    if (pin) lineOff = pin;
     // The line becomes continuous: with the number out of flow the two segments
     // split the span evenly again.
     dim.querySelectorAll('.dim-line-segment, .dim-line-segment-v').forEach(s => { s.style.flex = '1 1 50%'; });
@@ -47444,6 +47471,10 @@ function _autoLiftDimLabel(dim, type) {
 function buildDimControls(opts) {
     const { dim, type, id, isSelected, select, getLabelOff, setLabelOff,
             getLineOff, setLineOff, onDelete, spanPx } = opts;
+    // The side a lifted number is pinned to (18.58; see _autoLiftDimLabel). Optional:
+    // a dim type that does not store one keeps the old offset-sign rule.
+    const getLiftSide = opts.getLiftSide || null, setLiftSide = opts.setLiftSide || null;
+    if (getLiftSide) { const ps = getLiftSide(); if (ps === 1 || ps === -1) dim.setAttribute('data-lift-pin', String(ps)); }
     const sel = isSelected();
     const lblEl = dim.querySelector('.arch-label-new');
     if (!lblEl) return;
@@ -47544,6 +47575,12 @@ function buildDimControls(opts) {
             const startX = e.clientX, startY = e.clientY;
             const startLabel = getLabelOff();
             const startLine = getLineOff();
+            // Moving the LINE of a lifted number: keep the number on the side it is on
+            // now, for this drag and after it, so it never jumps across onto a frame.
+            if (!isNumberAxis && setLiftSide) {
+                const sd = lblEl.getAttribute('data-lift-side');
+                if (sd) setLiftSide((sd === 'above' || sd === 'right') ? 1 : -1);
+            }
             document.body.style.cursor = cur;
             const onMove = (mv) => {
                 const dxIn = (mv.clientX - startX) / elevScale;

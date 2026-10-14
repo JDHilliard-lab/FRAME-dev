@@ -1247,6 +1247,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   (artwork photos make lossless megabytes).
 - Per-piece spec pages clamp the artwork top to the spec text top (`specTop` in
   `_drawSpecPageTemplate`); the box loses that height rather than spilling past its bottom.
+- **A LIFTED NUMBER'S SIDE IS PINNED BY DRAGGING ITS LINE (18.58).** Without a pin the side
+  follows the sign of `data-line-off`, which flipped the number across onto a neighbour mid-drag.
+  Pins: `elev.dimLiftSide[id]` (spacing dims; NOT in `dimOffsets`, which `snapDimOffset` aligns
+  against) and `line.lblSide` (measure lines); `buildDimControls` writes `data-lift-pin`.
 - `_autoLiftDimLabel(dim, type)` lifts a dim number out of its line when the gap can't
   hold it. It **measures**, so run it after `appendChild` (detached = 0, no-op).
   `data-lbl-off` carries the along-line nudge; the side comes from `data-line-off`, the
