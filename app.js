@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.70';
+const APP_VERSION = '18.71';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -17392,26 +17392,6 @@ function _drawSloganPage(doc, logos, pageNum, meta) {
 
 // Thank You / contacts page. contactsRaw: one per line, fields separated by
 // "|" or "," as Name, Role, Email, Phone. Renders a grid + studio block.
-function _drawTOCPage(doc, logos, pageNum, meta, entries) {
-    const PW = 936, PH = 540;
-    doc.setFillColor(255, 255, 255); doc.rect(0, 0, PW, PH, 'F');
-    const B = _drawPageTitle(doc, PW, PH, 'CONTENTS');
-    const M = B.x;
-    let y = B.body + 10; const rowH = 25, maxY = B.bottom - 14;
-    doc.setFontSize(12.5);
-    (entries || []).forEach(e => {
-        if (y > maxY) return;
-        doc.setFont(_font('serif'), 'normal'); doc.setTextColor(40, 40, 40);
-        const label = (e.label || '') + ''; doc.text(label, M, y);
-        const lw = doc.getTextWidth(label);
-        const ps = (e.page || '') + ''; const pw = doc.getTextWidth(ps);
-        const px = PW - M - pw; doc.text(ps, px, y);
-        const ds = M + lw + 8, de = px - 8;
-        if (de > ds) { doc.setLineDashPattern([0.5, 2.5], 0); doc.setDrawColor(185, 185, 185); doc.setLineWidth(0.5); doc.line(ds, y - 3.5, de, y - 3.5); doc.setLineDashPattern([], 0); }
-        y += rowH;
-    });
-    _drawPdfFooter(doc, logos, pageNum, meta);
-}
 function _drawArtIndexPage(doc, logos, pageNum, meta, entries) {
     const PW = 936, PH = 540;
     doc.setFillColor(255, 255, 255); doc.rect(0, 0, PW, PH, 'F');
@@ -18791,6 +18771,8 @@ function _deckPageList() {
         pages.splice(j, 0, d);
     });
     // Already merged and hidden-filtered above, before the pins were placed.
+    // The contents page is written from this list, so it is synced here, last.
+    _tocSyncAll(pages);
     return pages;
 }
 function _deckMockHTML(desc, w, h) {
@@ -18843,14 +18825,9 @@ function _deckMockHTML(desc, w, h) {
     const fs = (frac) => Math.max(7, Math.round(h * frac));
     const wrap = (inner, bg) => '<div style="position:absolute; inset:0; background:' + (bg || '#ffffff') + "; overflow:hidden; font-family:'Messina',Georgia,serif;\">" + inner + '</div>';
     const DRUK = "'Druk','Arial Narrow',Arial,sans-serif";
-    if (desc.kind === 'layout' && (desc.type === 'toc' || desc.type === 'artindex')) {
-        const title = desc.type === 'toc' ? 'CONTENTS' : 'ARTWORK INDEX';
-        let rows = '';
-        if (desc.type === 'toc') {
-            rows = _deckTocList(_dsPages).map(e => '<div style="display:flex; justify-content:space-between; gap:8px; font-size:' + fs(0.034) + 'px; color:#333; padding:' + Math.round(h * 0.007) + 'px 0; border-bottom:1px solid #f0f0f0;"><span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc(e.label) + '</span><span style="color:#999;">' + (e.idx + 1) + '</span></div>').join('');
-        } else {
-            rows = _artIndexList().map(e => { const pn = _dsPageNumForPiece(e.id); return '<div style="display:flex; align-items:center; gap:6px; font-size:' + fs(0.026) + 'px; color:#333; padding:' + Math.round(h * 0.004) + 'px 0; border-bottom:1px solid #f5f5f5;"><span style="flex:0 0 auto; width:' + fs(0.022) + 'px; height:' + fs(0.022) + 'px; border-radius:50%; background:' + _statusColor(e.status) + ';"></span><span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc(e.id) + (e.code ? ' \u00b7 ' + _esc(e.code) : '') + '</span><span style="color:#999;">' + (pn || '\u2014') + '</span></div>'; }).join('');
-        }
+    if (desc.kind === 'layout' && desc.type === 'artindex') {
+        const title = 'ARTWORK INDEX';
+        const rows = _artIndexList().map(e => { const pn = _dsPageNumForPiece(e.id); return '<div style="display:flex; align-items:center; gap:6px; font-size:' + fs(0.026) + 'px; color:#333; padding:' + Math.round(h * 0.004) + 'px 0; border-bottom:1px solid #f5f5f5;"><span style="flex:0 0 auto; width:' + fs(0.022) + 'px; height:' + fs(0.022) + 'px; border-radius:50%; background:' + _statusColor(e.status) + ';"></span><span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc(e.id) + (e.code ? ' \u00b7 ' + _esc(e.code) : '') + '</span><span style="color:#999;">' + (pn || '\u2014') + '</span></div>'; }).join('');
         let summary = '';
         if (desc.type === 'artindex') { const c = _statusCounts(); summary = '<div style="font-size:' + fs(0.024) + 'px; color:#888; margin-bottom:' + Math.round(h * 0.02) + 'px;">' + STATUS_ORDER.map(s => '<span style="color:' + _statusColor(s) + ';">\u25cf</span> ' + _statusLabel(s) + ' ' + c[s]).join('&nbsp;&nbsp;') + '</div>'; }
         return wrap('<div style="position:absolute; left:' + pad + 'px; top:' + pad + 'px; right:' + pad + 'px; bottom:' + pad + 'px; overflow:hidden;"><div style="font-family:' + DRUK + '; font-weight:700; color:#111; font-size:' + fs(0.07) + 'px; text-transform:uppercase; margin-bottom:' + Math.round(h * 0.02) + 'px;">' + title + '</div>' + summary + rows + '</div>');
@@ -20398,23 +20375,437 @@ function _dsRestoreFixed(fixed) {
     _dsRefresh();
 }
 const _FIXED_LABELS = { cover: 'Cover', understanding: 'Project Understanding', narrative: 'Art Narrative', strategy: 'Art Collection Strategy', slogan: 'Good Art. Good People.', contacts: 'Contacts' };
-function _tocLabelFor(desc) {
-    if (!desc) return null;
-    if (desc.kind === 'fixed') { if (desc.fixed === 'cover' || desc.fixed === 'slogan') return null; return desc.title || desc.fixed; }
-    if (desc.kind === 'card') return desc.title || desc.type;
-    if (desc.kind === 'floorplan') return desc.title || 'Floorplan';
-    if (desc.kind === 'layout') { const t = desc.type; if (t === 'toc') return 'Contents'; if (t === 'artindex') return 'Artwork Index'; return (desc.page && desc.page.title) || _mbDefaultTitle(t) || (t === 'breaker' ? 'Section' : 'Page'); }
-    if (desc.kind === 'spec') return '__SPEC__';
-    return null;
-}
-function _deckTocList(descs) {
-    const out = []; let specSeen = false;
-    (descs || []).forEach((d, i) => {
-        const lab = _tocLabelFor(d); if (!lab) return;
-        if (lab === '__SPEC__') { if (specSeen) return; specSeen = true; out.push({ idx: i, key: _deckPageKey(d), label: 'Artwork Specifications' }); return; }
-        out.push({ idx: i, key: _deckPageKey(d), label: lab });
+// ── THE CONTENTS PAGE FILLS ITSELF (18.71) ─────────────────────────────────────
+// A layout page of type 'toc' is written from the deck, never by hand. Its template
+// (Farmboy Contents Full / Half) is read ONCE, by _tocSeed: the "Section Title" boxes,
+// the "#<tab>Page Title" boxes and the rules over them become a style and a grid
+// (`page.toc`), and are taken off the page. Everything else on the page (the
+// CONTENTS heading, the Half page's image and caption) stays the designer's.
+// Every rebuild of the page list (_deckPageList) re-derives the outline and rewrites
+// the generated elements, which carry `_toc` and `locked`. They are ordinary text and
+// line elements, so the editor, the rail, the canvas preview and the PDF all draw them
+// with the code they already use for every layout page; nothing renders a contents
+// page specially.
+// SECTIONS: a divider/breaker layout page starts one, titled by its heading. A deck
+// with no dividers falls back to Introduction / one per floor level (or Floor Plans +
+// Artwork when plans print first) / Closing. ENTRIES: a page's heading. Runs of spec
+// pages collapse to one "Artwork ART.1 - ART.12" line; a wall breaker is one line
+// that absorbs the spec pages after it. Overrides (`editorialContent.tocOverrides`,
+// keyed by page KEY) leave an entry out or rename it; set from the contents page's
+// own panel.
+// Page numbers are the EXPORT's numbers (_tocPageNums walks the same list with the
+// same Frame Recommendations span), and the export re-syncs once it knows the real
+// span, so the preview and the PDF print the same numbers.
+const TOC_FALLBACK_CFG = {
+    v: 1,
+    cols: [
+        { tx: 0.0469, tw: 0.12, ex: 0.1883, ew: 0.272, rx1: 0.0477, rx2: 0.4585 },
+        { tx: 0.5065, tw: 0.12, ex: 0.6477, ew: 0.272, rx1: 0.5049, rx2: 0.9057 }
+    ],
+    top: 0.2222, pitch: 0.2804, ruleGap: 0.0159, bottom: 0.9,
+    title: { font: 'serif', size: 0.02626, color: '#222222' },
+    entry: { font: 'serif', size: 0.02058, color: '#1a1a1a', weight: 400 },
+    rule: { color: '#9aa0a6', weight: 1.2 }
+};
+const TOC_HEADING_EL = { type: 'text', text: 'CONTENTS', x: 0.0256, y: 0.1032, w: 0.192, size: 0.06, color: '#1a1a1a', font: 'display', z: 5, leading: 21 };
+const TOC_LEADING = 1.15;      // line pitch over type size, the editor's default for a text box
+const TOC_MIN_SCALE = 0.7;     // type shrinks this far before sections are dropped
+const TOC_PAGE_W = 936, TOC_PAGE_H = 540;
+
+function _tocIsEntryText(t) { return !!(t && t.type === 'text' && !t._toc && /^\s*(#|\d+)\t/.test((t.text || '') + '')); }
+function _tocIsTemplateEdit(p) { return !!(p && String(p.id || '').indexOf('tpledit') === 0); }
+function _tocIsAutoPage(p) { return !!(p && p.type === 'toc' && !_tocIsTemplateEdit(p)); }
+
+// Reads a contents template: pairs a section-title box with the entries box beside
+// it, clusters the pairs into columns, and finds the rule above each pair (in the
+// annotations, where the Farmboy templates keep them, or in the elements).
+function _tocDerive(els, anns) {
+    els = els || []; anns = anns || [];
+    const slots = [];
+    els.forEach((e, i) => {
+        if (!_tocIsEntryText(e)) return;
+        let best = -1, bd = 1;
+        els.forEach((t, j) => {
+            if (j === i || !t || t.type !== 'text' || t._toc || _tocIsEntryText(t)) return;
+            if ((t.x || 0) >= (e.x || 0) || (e.x || 0) - (t.x || 0) > 0.3) return;
+            const d = Math.abs((t.y || 0) - (e.y || 0));
+            if (d < 0.03 && d < bd) { bd = d; best = j; }
+        });
+        if (best >= 0) slots.push({ ti: best, ei: i, t: els[best], e: e, y: Math.min(els[best].y || 0, e.y || 0) });
     });
-    return out;
+    if (!slots.length) return null;
+    const cols = [];
+    slots.slice().sort((a, b) => a.t.x - b.t.x).forEach(s => {
+        let c = cols.find(c2 => Math.abs(c2.tx - s.t.x) < 0.06);
+        if (!c) { c = { tx: s.t.x, tw: s.t.w || 0.12, ex: s.e.x, ew: s.e.w || 0.27, ys: [] }; cols.push(c); }
+        c.ew = Math.max(c.ew, s.e.w || 0); c.ys.push(s.y);
+    });
+    let pitch = 0;
+    cols.forEach(c => { c.ys.sort((a, b) => a - b); for (let k = 1; k < c.ys.length; k++) { const d = c.ys[k] - c.ys[k - 1]; if (d > 0.05 && (!pitch || d < pitch)) pitch = d; } });
+    const top = Math.min.apply(null, slots.map(s => s.y));
+    let rule = null, ruleGap = 0;
+    const ruleAnns = [], ruleEls = [];
+    const takeRule = (a, i, into) => {
+        if (!a || a.type !== 'arrow' || a.tip !== 'none' || a._toc) return;
+        if (Math.abs((a.y1 || 0) - (a.y2 || 0)) > 0.01) return;
+        const y = ((a.y1 || 0) + (a.y2 || 0)) / 2, x1 = Math.min(a.x1 || 0, a.x2 || 0), x2 = Math.max(a.x1 || 0, a.x2 || 0);
+        const s = slots.find(s2 => s2.y - y > 0 && s2.y - y < 0.05 && x1 < s2.e.x && x2 > s2.t.x);
+        if (!s) return;
+        into.push(i);
+        if (!rule) { rule = { color: a.color || '#9aa0a6', weight: a.weight || 1.2 }; ruleGap = s.y - y; }
+        const c = cols.find(c2 => Math.abs(c2.tx - s.t.x) < 0.06);
+        if (c && c.rx1 == null) { c.rx1 = x1; c.rx2 = x2; }
+    };
+    anns.forEach((a, i) => takeRule(a, i, ruleAnns));
+    els.forEach((a, i) => takeRule(a, i, ruleEls));
+    cols.forEach(c => { if (c.rx1 == null) { c.rx1 = c.tx; c.rx2 = c.ex + c.ew; } delete c.ys; });
+    cols.sort((a, b) => a.tx - b.tx);
+    const st = (t) => { const o = {}; ['font', 'size', 'color', 'bold', 'italic', 'weight', 'caps', 'track'].forEach(k => { if (t[k] !== undefined) o[k] = t[k]; }); return o; };
+    return {
+        cfg: { v: 1, cols: cols, top: top, pitch: pitch || TOC_FALLBACK_CFG.pitch, ruleGap: ruleGap, bottom: TOC_FALLBACK_CFG.bottom, title: st(slots[0].t), entry: st(slots[0].e), rule: rule },
+        slotEls: slots.reduce((a, s) => a.concat([s.ti, s.ei]), []).concat(ruleEls),
+        ruleAnns: ruleAnns
+    };
+}
+function _tocMasterTemplate() {
+    const all = (typeof IDML_MASTER_TEMPLATES !== 'undefined' && Array.isArray(IDML_MASTER_TEMPLATES)) ? IDML_MASTER_TEMPLATES : [];
+    return all.find(t => t && t.type === 'toc' && /\(Full\)/.test(t.name || '')) || all.find(t => t && t.type === 'toc') || null;
+}
+// Turns a contents page into an auto one, once. A page holding a template's slots
+// keeps its look; an empty one (the old "Contents (auto)" insert) takes Contents (Full).
+function _tocSeed(p) {
+    const key = 'layout:' + p.id;
+    p.elements = Array.isArray(p.elements) ? p.elements : [];
+    const annMap = (typeof editorialContent !== 'undefined' && editorialContent) ? (editorialContent.annotations || {}) : {};
+    const r = _tocDerive(p.elements, annMap[key]);
+    if (r) {
+        const drop = {}; r.slotEls.forEach(i => { drop[i] = 1; });
+        p.elements = p.elements.filter((e, i) => !drop[i]);
+        if (r.ruleAnns.length && annMap[key]) { const da = {}; r.ruleAnns.forEach(i => { da[i] = 1; }); annMap[key] = annMap[key].filter((a, i) => !da[i]); }
+        p.toc = r.cfg;
+        return;
+    }
+    const mt = _tocMasterTemplate();
+    const r2 = mt ? _tocDerive(mt.elements, mt.annotations) : null;
+    p.toc = r2 ? r2.cfg : _cloneData(TOC_FALLBACK_CFG);
+    const hasText = p.elements.some(e => e && e.type === 'text' && !e._toc);
+    if (!hasText) {
+        let head = null;
+        if (mt && r2) { const skip = {}; r2.slotEls.forEach(i => { skip[i] = 1; }); head = (mt.elements || []).filter((e, i) => !skip[i] && e && e.type === 'text'); }
+        (head && head.length ? head : [TOC_HEADING_EL]).forEach(e => p.elements.push(_cloneData(e)));
+    }
+}
+
+// Width of a string in points, from a per-character table for a book serif. Not a
+// font measurement, deliberately: the result is written into the project, so it must
+// be the same in every browser, in Node and before the brand fonts arrive. It errs
+// wide, and a line is broken at 94% of the box, so no renderer wraps it again.
+function _tocTextW(s, pt) {
+    let em = 0;
+    for (const ch of (s || '') + '') {
+        if (ch === ' ') em += 0.26;
+        else if ('iljtf.,;:\'!|()[]-’'.indexOf(ch) >= 0) em += 0.31;
+        else if (ch === 'r') em += 0.4;
+        else if ('mw'.indexOf(ch) >= 0) em += 0.82;
+        else if ('MW'.indexOf(ch) >= 0) em += 0.92;
+        else if (ch >= '0' && ch <= '9') em += 0.56;
+        else if (ch >= 'A' && ch <= 'Z') em += 0.7;
+        else if (ch === '–') em += 0.56;
+        else em += 0.54;
+    }
+    return em * pt;
+}
+function _tocWrap(text, maxPt, pt) {
+    const words = ((text || '') + '').split(/\s+/).filter(Boolean);
+    const lines = []; let cur = '';
+    words.forEach(w => {
+        const t = cur ? cur + ' ' + w : w;
+        if (!cur || _tocTextW(t, pt) <= maxPt * 0.94) cur = t;
+        else { lines.push(cur); cur = w; }
+    });
+    if (cur) lines.push(cur);
+    return lines.length ? lines : [''];
+}
+const TOC_SMALL_WORDS = { a: 1, an: 1, and: 1, as: 1, at: 1, by: 1, for: 1, in: 1, of: 1, on: 1, or: 1, the: 1, to: 1, with: 1 };
+// An ALL-CAPS heading reads as Title Case in a list. Codes and anything with a digit
+// or a dot (ART.1, L2) are left alone, and so is text that is not all caps.
+function _tocTitleCase(s) {
+    s = ((s || '') + '').replace(/\s+/g, ' ').trim();
+    if (!s || s !== s.toUpperCase() || !/[A-Z]/.test(s)) return s;
+    return s.split(' ').map((w, i) => {
+        if (/[\d.]/.test(w)) return w;
+        const lw = w.toLowerCase();
+        if (i > 0 && TOC_SMALL_WORDS[lw]) return lw;
+        return lw.charAt(0).toUpperCase() + lw.slice(1);
+    }).join(' ');
+}
+// A layout page's heading is its biggest text, read as it prints.
+function _tocHeadingOf(p) {
+    let best = null;
+    ((p && p.elements) || []).forEach(e => {
+        if (!e || e.type !== 'text' || e._toc || e.hidden) return;
+        const tx = ((e.text || '') + '').replace(/\t/g, ' ').trim();
+        if (!tx) return;
+        if (!best || (e.size || 0) > (best.size || 0)) best = { size: e.size || 0, text: tx };
+    });
+    return best ? _tocTitleCase(best.text.replace(/\n+/g, ' ')) : '';
+}
+function _tocSpecCodes(d) {
+    const ms = (d && d.members && d.members.length) ? d.members : (d && d.row && d.row.id ? [d.row] : []);
+    const first = (ms[0] && ms[0].id) || (d && d.title) || '';
+    const last = (ms[ms.length - 1] && ms[ms.length - 1].id) || first;
+    return { first: first + '', last: last + '' };
+}
+function _tocPlanLabel(name) { name = (name || '') + ''; return /plan/i.test(name) ? name : (name + ' Floor Plan').trim(); }
+// What a page is, to the contents: skip | divider | art | wall | plan | detail | entry.
+function _tocKindOf(d) {
+    if (!d) return 'skip';
+    if (d.kind === 'layout') {
+        const t = d.type || (d.page && d.page.type);
+        if (t === 'toc') return 'skip';
+        if (t === 'breaker' || t === 'divider') return 'divider';
+        return 'entry';
+    }
+    if (d.kind === 'fixed') return (d.fixed === 'cover' || d.fixed === 'slogan') ? 'skip' : 'entry';
+    if (d.kind === 'spec') return d._install ? 'wall' : 'art';
+    if (d.kind === 'catov') return 'art';
+    if (d.kind === 'floorplan') return 'plan';
+    if (d.kind === 'planDetail') return 'detail';
+    return 'entry';
+}
+function _tocAutoLabel(d) {
+    if (d.kind === 'layout') {
+        const t = d.type || (d.page && d.page.type);
+        if (t === 'artindex') return 'Artwork Index';
+        return _tocHeadingOf(d.page) || _tocTitleCase(_mbDefaultTitle(t) || '') || 'Page';
+    }
+    if (d.kind === 'floorplan') return _tocPlanLabel(d.title);
+    if (d.kind === 'spec' && d._install) {
+        const code = (d.title || '') + '';
+        const el = (typeof elevations !== 'undefined' && d._elevIdx != null) ? elevations[d._elevIdx] : null;
+        const nm = el && el.name ? (el.name + '').trim() : '';
+        return (nm && nm !== code && !/^(elevation|wall)\s*\d+$/i.test(nm)) ? code + ' – ' + nm : code;
+    }
+    return (d.title || '') + '';
+}
+// The page each descriptor starts on, counted the way the export counts.
+function _tocPageNums(pages, span) {
+    const m = {}; let n = 1;
+    (pages || []).forEach(d => { const k = _deckPageKey(d); const s = span ? span(d) : _deckPageSpan(d); if (k != null && !(k in m) && s > 0) m[k] = n; n += s; });
+    return m;
+}
+function _tocOverrides() { return (typeof editorialContent !== 'undefined' && editorialContent && editorialContent.tocOverrides) || {}; }
+// The outline: [{title, divKey, entries:[{label, auto, num, keys}]}], plus the entries
+// left out (same collapsing) so the panel can offer them back.
+function _tocModel(pages, span) {
+    const nums = _tocPageNums(pages, span), ov = _tocOverrides();
+    const items = [];
+    (pages || []).forEach(d => {
+        const kind = _tocKindOf(d); if (kind === 'skip') return;
+        const key = _deckPageKey(d); if (key == null || !(key in nums)) return;
+        const o = ov[key] || {};
+        const it = { kind: kind, key: key, num: nums[key], d: d, hide: !!o.hide, rename: (o.label || '').trim() };
+        if (kind === 'art') it.codes = _tocSpecCodes(d);
+        else it.auto = _tocAutoLabel(d);
+        items.push(it);
+    });
+    const order = (typeof _deckPlanOrder === 'function') ? _deckPlanOrder() : 'byLevel';
+    const hasDiv = items.some(i => i.kind === 'divider' && !i.hide);
+    let lastArt = -1; items.forEach((it, i) => { if (it.kind !== 'entry' && it.kind !== 'divider') lastArt = i; });
+    const sections = [], leftOut = { title: '', entries: [] };
+    let cur = null;
+    const open = (title, tag, divKey) => { cur = { title: title, tag: tag, divKey: divKey || null, entries: [] }; sections.push(cur); };
+    const add = (sec, it) => {
+        const es = sec.entries, last = es[es.length - 1];
+        if (it.kind === 'art') {
+            if (last && !sec._brk && last._absorb) { last.keys.push(it.key); return; }
+            if (last && !sec._brk && last._run) {
+                last._run.last = it.codes.last; last.keys.push(it.key);
+                if (!last.rename) last.label = 'Artwork ' + last._run.first + (last._run.last !== last._run.first ? ' – ' + last._run.last : '');
+                last.auto = 'Artwork ' + last._run.first + (last._run.last !== last._run.first ? ' – ' + last._run.last : '');
+                sec._brk = false; return;
+            }
+            const auto = 'Artwork ' + it.codes.first + (it.codes.last !== it.codes.first ? ' – ' + it.codes.last : '');
+            es.push({ label: it.rename || auto, auto: auto, rename: it.rename, num: it.num, keys: [it.key], _run: { first: it.codes.first, last: it.codes.last } });
+        } else {
+            es.push({ label: it.rename || it.auto, auto: it.auto, rename: it.rename, num: it.num, keys: [it.key], _absorb: it.kind === 'wall' });
+        }
+        sec._brk = false;
+    };
+    items.forEach((it, i) => {
+        if (it.hide) { if (it.kind !== 'divider') add(leftOut, it); if (cur) cur._brk = true; return; }
+        if (hasDiv) {
+            if (it.kind === 'divider') { open(it.rename || it.auto || 'Section', 'div', it.key); return; }
+            if (!cur) open('Introduction', 'intro');
+            add(cur, it); return;
+        }
+        if (lastArt >= 0 && i > lastArt) { if (!cur || cur.tag !== 'closing') open('Closing', 'closing'); add(cur, it); return; }
+        if (it.kind === 'plan') {
+            if (order === 'byLevel') { open((it.d.title || '') + '' || 'Floor Plan', 'level'); add(cur, Object.assign({}, it, { auto: 'Floor Plan' })); }
+            else { if (!cur || cur.tag !== 'plans') open('Floor Plans', 'plans'); add(cur, it); }
+            return;
+        }
+        if (it.kind === 'art' || it.kind === 'wall') { if (!cur || (cur.tag !== 'level' && cur.tag !== 'art')) open('Artwork', 'art'); add(cur, it); return; }
+        if (it.kind === 'detail') { if (!cur || (cur.tag !== 'level' && cur.tag !== 'plans')) open('Floor Plans', 'plans'); add(cur, it); return; }
+        if (!cur) open('Introduction', 'intro');
+        add(cur, it);
+    });
+    return { sections: sections.filter(s => s.entries.length), leftOut: leftOut.entries };
+}
+
+// Lays the outline into the template's grid. First choice keeps the template's
+// rhythm (each section starts on a row of the grid, column by column); a deck too
+// long for that stacks sections tight; then the type steps down to TOC_MIN_SCALE;
+// past that, the sections that do not fit are dropped with a "+ n more" line.
+function _tocLayout(cfg, model) {
+    const secs = (model && model.sections) || [];
+    const cols = (cfg.cols && cfg.cols.length) ? cfg.cols : TOC_FALLBACK_CFG.cols;
+    const bottom = cfg.bottom || 0.9, top = cfg.top || 0.2, pitch = cfg.pitch || 0.28, rg = cfg.ruleGap || 0;
+    const minTw = Math.min.apply(null, cols.map(c => c.tw)), minEw = Math.min.apply(null, cols.map(c => c.ew));
+    const measure = (s) => {
+        const tPt = cfg.title.size * s * TOC_PAGE_H, ePt = cfg.entry.size * s * TOC_PAGE_H;
+        const numW = Math.max(0.026, (_tocTextW('888', ePt) + 8) / TOC_PAGE_W);
+        return secs.map(sec => {
+            const tl = _tocWrap(sec.title, minTw * TOC_PAGE_W, tPt);
+            const es = sec.entries.map(e => ({ e: e, lines: _tocWrap(e.label, (minEw - numW) * TOC_PAGE_W, ePt) }));
+            const nLines = es.reduce((a, x) => a + x.lines.length, 0);
+            return { sec: sec, tl: tl, es: es, h: Math.max(tl.length * cfg.title.size * s, nLines * cfg.entry.size * s) * TOC_LEADING, numW: numW };
+        });
+    };
+    // Returns [{m, col, y}] or null when something does not fit.
+    const place = (ms, grid, s) => {
+        const out = []; let c = 0, row = 0, y = top;
+        const gap = 0.045 * s + rg;
+        for (const m of ms) {
+            if (grid) {
+                const k = Math.max(1, Math.ceil((m.h + 0.03) / pitch));
+                if (top + row * pitch + m.h > bottom) { c++; row = 0; }
+                if (c >= cols.length || top + row * pitch + m.h > bottom) return null;
+                out.push({ m: m, col: cols[c], y: top + row * pitch }); row += k;
+            } else {
+                if (y + m.h > bottom && y > top) { c++; y = top; }
+                if (c >= cols.length || y + m.h > bottom) return null;
+                out.push({ m: m, col: cols[c], y: y }); y += m.h + gap;
+            }
+        }
+        return out;
+    };
+    let s = 1, dropped = 0;
+    let plan = place(measure(1), true, 1);
+    while (!plan && s >= TOC_MIN_SCALE - 1e-9) { plan = place(measure(s), false, s); if (!plan) s = Math.round((s - 0.05) * 100) / 100; }
+    if (!plan) {
+        s = TOC_MIN_SCALE;
+        const ms = measure(s);
+        for (let n = ms.length - 1; n >= 0 && !plan; n--) { plan = place(ms.slice(0, n), false, s); if (plan) dropped = ms.length - n; }
+        plan = plan || [];
+    }
+    const els = [];
+    const tSize = cfg.title.size * s, eSize = cfg.entry.size * s;
+    const text = (role, txt, x, y, w, st, size) => Object.assign({ type: 'text' }, st, { text: txt, x: x, y: y, w: w, size: size, leading: Math.round(size * TOC_PAGE_H * TOC_LEADING * 100) / 100, z: 6, locked: true, _toc: role });
+    plan.forEach(p => {
+        const col = p.col, m = p.m, y0 = p.y;
+        if (cfg.rule) els.push({ type: 'arrow', x1: col.rx1, y1: y0 - rg, x2: col.rx2, y2: y0 - rg, color: cfg.rule.color, weight: cfg.rule.weight, tip: 'none', startCap: 'none', z: 4, locked: true, _toc: 'rule' });
+        els.push(text('title', m.tl.join('\n'), col.tx, y0, col.tw + 0.01, cfg.title, tSize));
+        let ly = y0;
+        m.es.forEach(x => {
+            els.push(text('num', (x.e.num || '') + '', col.ex, ly, m.numW, cfg.entry, eSize));
+            els.push(text('entry', x.lines.join('\n'), col.ex + m.numW, ly, col.ew - m.numW + 0.01, cfg.entry, eSize));
+            ly += x.lines.length * eSize * TOC_LEADING;
+        });
+    });
+    if (dropped) {
+        const last = cols[cols.length - 1];
+        els.push(text('more', '+ ' + dropped + ' more section' + (dropped === 1 ? '' : 's'), last.ex, bottom + 0.005, last.ew, Object.assign({}, cfg.entry, { italic: true }), eSize));
+    }
+    return { els: els, scale: s, dropped: dropped };
+}
+function _tocSig(s) { let h = 0; s = (s || '') + ''; for (let i = 0; i < s.length; i++) h = ((h * 31) + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36) + '.' + s.length; }
+// Rewrites one contents page's generated elements; writes only on a difference.
+function _tocSyncPage(p, model) {
+    if (!p.toc) _tocSeed(p);
+    const gen = _tocLayout(p.toc, model).els;
+    const sig = _tocSig(JSON.stringify(gen));
+    const els = p.elements || (p.elements = []);
+    const had = els.filter(e => e && e._toc).length;
+    if (p.toc.sig === sig && had === gen.length) return false;
+    for (let i = els.length - 1; i >= 0; i--) if (els[i] && els[i]._toc) els.splice(i, 1);
+    gen.forEach(e => els.push(e));
+    p.toc.sig = sig;
+    return true;
+}
+// Called at the end of _deckPageList (and by the export once it knows how many pages
+// Frame Recommendations really takes). Returns the model, or null with no contents page.
+function _tocSyncAll(pages, span) {
+    const tocs = (pages || []).filter(d => d && d.kind === 'layout' && _tocIsAutoPage(d.page));
+    if (!tocs.length) return null;
+    const model = _tocModel(pages, span);
+    tocs.forEach(d => { try { _tocSyncPage(d.page, model); } catch (e) {} });
+    return model;
+}
+// One override writer. Every key in `keys` (a collapsed entry stands for several pages)
+// takes the same answer; a field set back to its default is removed, and an empty
+// record is pruned so nothing rides the autosave for no reason.
+function setTocOverride(keys, field, value) {
+    editorialContent.tocOverrides = editorialContent.tocOverrides || {};
+    const ov = editorialContent.tocOverrides;
+    (keys || []).forEach((k, i) => {
+        if (field === 'label' && i > 0) return;   // a rename belongs to the entry's first page
+        const o = ov[k] || {};
+        if (field === 'hide') { if (value) o.hide = true; else delete o.hide; }
+        if (field === 'label') { const v = ((value || '') + '').trim(); if (v) o.label = v; else delete o.label; }
+        if (Object.keys(o).length) ov[k] = o; else delete ov[k];
+    });
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (typeof _dsRefresh === 'function') { try { _dsRefresh(); } catch (e) {} }
+    if (typeof _dsRenderCenter === 'function') { try { _dsRenderCenter(); } catch (e) {} }
+    if (typeof _dsRenderTools === 'function') { try { _dsRenderTools(); } catch (e) {} }
+}
+// The contents page's panel: the outline as it prints. Tick to keep a line, type to
+// rename it (commits on change, never per keystroke). Left-out lines stay listed so
+// they can be ticked back.
+function _tocPanelInto(host) {
+    const model = _tocModel(_dsPages) || { sections: [], leftOut: [] };
+    const box = document.createElement('div');
+    box.className = 'toc-panel';
+    box.style.cssText = 'padding:10px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-input); margin-bottom:8px;';
+    const head = document.createElement('div');
+    head.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:6px;';
+    head.textContent = 'Contents (automatic)';
+    if (typeof _dsHelpDot === 'function') { try { head.appendChild(_dsHelpDot('Written from the deck every time it changes. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. Runs of spec pages print as one Artwork line, and a wall page stands for the spec pages after it. Untick a line to leave it out; type over a line to rename it.')); } catch (e) {} }
+    box.appendChild(head);
+    const row = (e, on) => {
+        const r = document.createElement('div');
+        r.className = 'toc-row';
+        r.style.cssText = 'display:flex; align-items:center; gap:6px; margin:2px 0;';
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = on;
+        cb.title = on ? 'Leave this out of the contents' : 'Put this back in the contents';
+        cb.onchange = () => setTocOverride(e.keys, 'hide', !cb.checked);
+        const inp = document.createElement('input'); inp.type = 'text'; inp.value = e.rename || ''; inp.placeholder = e.auto || '';
+        inp.title = 'Type to rename this line; clear it to go back to "' + (e.auto || '') + '"';
+        inp.style.cssText = 'flex:1 1 60px; min-width:0; height:22px; font-size:var(--fs-65); padding:0 6px; background:var(--bg-panel); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+        inp.disabled = !on;
+        inp.onchange = () => setTocOverride(e.keys, 'label', inp.value);
+        const n = document.createElement('span'); n.textContent = (e.num || '') + ''; n.style.cssText = 'flex:0 0 auto; min-width:18px; text-align:right; font-size:var(--fs-65); color:var(--text-muted);';
+        r.appendChild(cb); r.appendChild(inp); r.appendChild(n);
+        return r;
+    };
+    if (!model.sections.length) {
+        const none = document.createElement('div'); none.textContent = 'Nothing to list yet.'; none.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted);'; box.appendChild(none);
+    }
+    model.sections.forEach(sec => {
+        const st = document.createElement('div');
+        st.style.cssText = 'font-size:var(--fs-65); font-weight:700; color:var(--text-main); margin:8px 0 2px;';
+        st.textContent = sec.title + (sec.tag === 'div' ? '' : '  (automatic section)');
+        box.appendChild(st);
+        sec.entries.forEach(e => box.appendChild(row(e, true)));
+    });
+    if (model.leftOut.length) {
+        const st = document.createElement('div'); st.style.cssText = 'font-size:var(--fs-65); font-weight:700; color:var(--text-muted); margin:10px 0 2px;'; st.textContent = 'Left out';
+        box.appendChild(st);
+        model.leftOut.forEach(e => box.appendChild(row(e, false)));
+    }
+    host.appendChild(box);
 }
 function _artIndexList() {
     return (typeof dashProjectData !== 'undefined' ? dashProjectData : []).filter(r => r && (r.id || r.imageCode)).map(r => ({ id: (r.id || '') + '', code: (r.imageCode || r.artworkFile || '') + '', location: (r.location || r.category || '') + '', status: _pieceStatus(r) }));
@@ -27021,6 +27412,8 @@ function _dsThumbCacheKey(desc) {
         }
         // The overview draws every option's walls and images, so any edit can change it.
         if (desc && desc.kind === 'catov') k += '|' + (typeof _dsEditGen !== 'undefined' ? _dsEditGen : 0);
+        // The contents page rewrites itself when anything else in the deck moves.
+        if (desc && desc.kind === 'layout' && desc.page && desc.page.toc) k += '|toc' + (desc.page.toc.sig || '');
         return k;
     } catch (e) { return (desc && (desc.type || desc.kind || '')) + '|' + _previewQuality(); }
 }
@@ -31519,11 +31912,12 @@ function _dsRenderTools() {
         _hiddenKeys.forEach(k => { const b = document.createElement('button'); b.textContent = '\u21ba Restore ' + (_FIXED_LABELS[k] || k); b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); margin-bottom:4px;'; b.onclick = () => _dsRestoreFixed(k); box.appendChild(b); });
         t.appendChild(box);
     }
-    if (desc.kind === 'layout' && (desc.type === 'toc' || desc.type === 'artindex')) {
+    if (desc.kind === 'layout' && desc.type === 'toc' && _tocIsAutoPage(desc.page)) _tocPanelInto(t);
+    else if (desc.kind === 'layout' && desc.type === 'artindex') {
         const note = document.createElement('div');
         note.style.cssText = 'padding:10px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-input); margin-bottom:8px;';
         note.innerHTML = '<div style="font-size:var(--fs-70); font-weight:700; color:var(--text-main); margin-bottom:4px;">Auto-generated</div>'
-            + '<div style="font-size:var(--fs-65); color:var(--text-muted); line-height:1.5;">This ' + (desc.type === 'toc' ? 'contents page lists every section with its page number' : 'index lists every artwork with the page it appears on') + '. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
+            + '<div style="font-size:var(--fs-65); color:var(--text-muted); line-height:1.5;">This index lists every artwork with the page it appears on. It updates automatically as the deck changes — page numbers are finalised on export.</div>';
         t.appendChild(note);
     }
     // A layout page's five buttons are gone: duplicate, move earlier, move later and
@@ -33317,6 +33711,7 @@ function renderMoodboardCanvas() {
             const wrap = _mbSegEl(Ax, Ay, Bx, By, col, wt, t.tip !== 'none', sel);
             wrap.dataset.idx = i; wrap.onmousedown = (e) => _mbTileDown(e, i);
             wrap.style.zIndex = String(100 + (t.z || 0));
+            if (t._toc) { wrap.onmousedown = null; wrap.style.pointerEvents = 'none'; }
             canvas.appendChild(wrap);
             if (sel) {
                 canvas.appendChild(_mbDot(Ax, Ay, (e) => _mbArrowHandleDown(e, i, 'A')));
@@ -33397,6 +33792,9 @@ function renderMoodboardCanvas() {
         }
         box.onmousedown = (e) => _mbTileDown(e, i);
         box.style.zIndex = String(100 + (t.z || 0));
+        // A contents line is written from the deck (_tocSyncPage); editing it in place
+        // would be undone by the next sync, so it takes no pointer at all.
+        if (t._toc) { box.onmousedown = null; box.ondblclick = null; box.removeAttribute('title'); box.style.pointerEvents = 'none'; box.style.cursor = 'default'; }
         canvas.appendChild(box);
     });
     _mbPinChrome(canvas);
@@ -38877,6 +39275,9 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     const _hasFrameRec = pages.some(d => d.kind === 'card' && d.type === 'frameRec');
     const _frPages = _hasFrameRec ? _frameRecPlanPages(await _collectProjectFrames(), _frameRecCfg()) : [];
     const _span = (d) => (d.kind === 'card' && d.type === 'frameRec') ? _frPages.length : 1;
+    // The contents page was synced with the studio's guess at that span (the frames cache);
+    // now the real one is known, so its numbers are the ones this file prints.
+    _tocSyncAll(pages, _span);
     let _pdfEst = Math.max(1, pages.reduce((n, d) => n + _span(d), 0));
     _pdfShowOverlay(); _pdfProgress(0.04, 'Building presentation…'); await _pdfYield();
 
@@ -38948,7 +39349,7 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
 
     for (const desc of pages) {
         const key = _deckPageKey(desc);
-        if (desc.kind === 'layout' && desc.page && (desc.page.type === 'toc' || desc.page.type === 'artindex')) {
+        if (desc.kind === 'layout' && desc.page && desc.page.type === 'artindex') {
             // Reserved now, drawn in the post-pass once every page number is known.
             newPage(key); _autoPages.push({ pageNum: pageNum, type: desc.page.type });
             continue;
@@ -38973,11 +39374,10 @@ async function _buildSpecPagePDF(opts) {    const { jsPDF } = window.jspdf;
     // — Overlay text boxes per page —
     if (_autoPages.length) {
         const keyToPage = {}; for (let p = 1; p <= pageNum; p++) { if (_pageKeys[p]) keyToPage[_pageKeys[p]] = p; }
-        const tocEntries = _deckTocList(pages).map(e => ({ label: e.label, page: keyToPage[e.key] || null })).filter(e => e.page);
         const idxEntries = _artIndexList().map(e => ({ id: e.id, code: e.code, location: e.location, status: e.status, page: idToPage[e.id] || null }))
             .sort((a, b) => (a.page || 1e9) - (b.page || 1e9) || (a.id < b.id ? -1 : 1));
         for (const ap of _autoPages) {
-            try { doc.setPage(ap.pageNum); if (ap.type === 'toc') _drawTOCPage(doc, logos, ap.pageNum, meta, tocEntries); else _drawArtIndexPage(doc, logos, ap.pageNum, meta, idxEntries); } catch (e) {}
+            try { doc.setPage(ap.pageNum); _drawArtIndexPage(doc, logos, ap.pageNum, meta, idxEntries); } catch (e) {}
         }
         try { doc.setPage(pageNum); } catch (e) {}
     }
@@ -41757,7 +42157,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

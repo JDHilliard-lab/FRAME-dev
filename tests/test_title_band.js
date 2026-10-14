@@ -57,7 +57,6 @@ const path = require('path');
       ['_drawTimelinePageDots', 'M, M + 14'],
       ['_drawProsePage', 'M, M + 14'],
       ['_drawStrategyPage', 'M, M + 14'],
-      ['_drawTOCPage', 'M, M + 24'],
       ['_drawArtIndexPage', 'M, M + 24'],
       ['_drawThankYouPage', 'M, M + 18'],
       ['_drawPlaceholderPage', 'M + 24, M + 44']
@@ -69,7 +68,7 @@ const path = require('path');
 
   check('every automated renderer goes through the one title drawer', () => {
     ['_drawFloorplanKeyPage', '_drawFrameRecPage', '_drawTimelinePagePills', '_drawTimelinePageDots',
-     '_drawProsePage', '_drawStrategyPage', '_drawTOCPage', '_drawArtIndexPage', '_drawThankYouPage',
+     '_drawProsePage', '_drawStrategyPage', '_drawArtIndexPage', '_drawThankYouPage',
      '_drawPlaceholderPage', '_drawFlatGraphicSpecPage', '_drawSpecSetPageBody',
      '_drawInstallGuidePage'].forEach(fn => {
       if (codeOnly(fnBody(fn)).indexOf('_drawPageTitle(') < 0) throw new Error(fn + ' does not call _drawPageTitle');
@@ -525,14 +524,12 @@ const path = require('path');
     '  rec = new CanvasPdfRec(PW, PH);',
     '  _drawStrategyPage(rec, {}, 1, {}, { primary: "a", secondary: "b", tertiary: "c" }); grab(rec, "strategy");',
     '  rec = new CanvasPdfRec(PW, PH);',
-    '  _drawTOCPage(rec, {}, 1, {}, [{ label: "Cover", page: "1" }]); grab(rec, "contents");',
-    '  rec = new CanvasPdfRec(PW, PH);',
     '  _drawArtIndexPage(rec, {}, 1, {}, []); grab(rec, "artwork index");',
     '  seen.forEach((p) => {',
     '    if (!near(p[1], B.head, 0.5)) throw new Error(p[0] + " heading at y=" + p[1] + ", the title guide is at " + B.head);',
     '    if (!near(p[2], B.x, 0.5)) throw new Error(p[0] + " heading at x=" + p[2] + ", the left guide is at " + B.x);',
     '  });',
-    '  if (seen.length !== 8) throw new Error("only " + seen.length + " pages were exercised");',
+    '  if (seen.length !== 7) throw new Error("only " + seen.length + " pages were exercised");',
     '});',
     '',
     '__checkAsync("a spec page title lands on the guide, not on the top margin", async () => {',

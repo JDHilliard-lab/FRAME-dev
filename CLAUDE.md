@@ -624,6 +624,19 @@ run but passes alone is usually load timing: rerun before chasing it.
   per-piece render).
   Options per page is `per` in the SAME map (0 = auto, 1..10 honoured exactly, even past the
   floor; auto splits evenly). `_catSheetLayout(place, PW, PH, {auto})` reports what auto would pick.
+- **THE CONTENTS PAGE WRITES ITSELF (18.71).** A layout page of type `toc` is generated:
+  `_tocSeed` reads its template ONCE (section-title box + `#<tab>` entries box pairs, rules
+  in the annotations) into `page.toc` (grid + style) and removes those slots; `_tocSyncAll`
+  runs at the END of `_deckPageList` and rewrites the `_toc` + `locked` elements (writes
+  only when `page.toc.sig` changes). They are plain text/arrow elements, so every renderer
+  draws them; the editor gives them no pointer. Sections: divider/breaker layout pages,
+  else Introduction / per level (or Floor Plans + Artwork) / Closing. Spec runs collapse
+  to one Artwork line; a wall breaker absorbs the spec pages after it. Numbers come from
+  `_tocPageNums` (same span as the export); the export re-syncs with its real
+  `_span`. Overrides: `editorialContent.tocOverrides[pageKey] = {hide, label}`, one
+  writer `setTocOverride`, panel `_tocPanelInto`. A `tpledit*` page (template editor) is
+  never converted. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages
   go blank in the rail while selected.
