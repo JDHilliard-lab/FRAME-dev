@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.63';
+const APP_VERSION = '18.64';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -9988,7 +9988,12 @@ function _catAddOption(srcIdx, opts) {
     // Quantities` assigns by `counts[d.id]`, so both take the same number; `_elevShowing
     // Piece` returns whichever it meets first; the CSV emits the piece twice. Refusing is
     // cheap and there is no repair once the rows exist.
-    if (_catRowIdsTaken((master.frames || []).filter(f => f).map(f => _catRowId(place, n, f.letter)))) return;
+    // A SINGLE PIECE IS ART.1.1, NOT ART.1.1A (18.64): letters name the pieces of a set,
+    // and a one-frame mockup has no set to name. Keyed on the mockup's frame count, so a
+    // set's options keep ART.1.2A, ART.1.2B.
+    const _single = (master.frames || []).filter(f => f).length === 1;
+    const _slotL = (f) => _single ? '' : f.letter;
+    if (_catRowIdsTaken((master.frames || []).filter(f => f).map(f => _catRowId(place, n, _slotL(f))))) return;
     const copy = _cloneData(master);
     copy.id = _elevNewId();
     delete copy.catalogueMaster;
@@ -10005,7 +10010,7 @@ function _catAddOption(srcIdx, opts) {
         if (!f) return;
         const slotRow = (dashProjectData || []).filter(r => r && r.id === f.id)[0];
         const row = _cloneData(slotRow || dashDefaultData);
-        row.id = _catRowId(place, n, f.letter);
+        row.id = _catRowId(place, n, _slotL(f));
         row.qty = 0;
         row.artworkUrl = ''; row.artworkFile = ''; row.imageCode = '';
         row.artworkW = 0; row.artworkH = 0; row.artZoom = 1; row.artPanX = 0; row.artPanY = 0;
@@ -10706,9 +10711,16 @@ function _dsOptionsInto(t, desc) {
         cb.onchange = () => { editorialContent.catOverview = cb.checked; if (typeof pushHistory === 'function') pushHistory(); scheduleAutosave(); _dsRefresh(); _dsRenderRail(); };
         lab.appendChild(cb);
         lab.appendChild(document.createTextNode('All-options page'));
-        lab.appendChild(_dsHelpDot('A page in front of each placement that has options, drawing every option side by side at ONE scale, so differences in frame size show. Deck-wide.'));
+        lab.appendChild(_dsHelpDot('A page after each placement\'s breaker showing every option at ONE scale, so differences in frame size show. When every option is a single piece it is an options sheet: shared specs on the left, framed mockups on the right, and it replaces the options\' own spec pages. Untick to get one spec page per option back. Deck-wide.'));
         body.appendChild(lab);
-        if (_catOverviewOn()) {
+        if (_catOverviewOn() && _catSheetMode(place)) {
+            const pr = document.createElement('div');
+            pr.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-muted); margin-top:6px;';
+            const L = _catSheetLayout(place);
+            pr.appendChild(document.createTextNode('Options per page: ' + L.per + (L.parts > 1 ? (' (' + L.parts + ' pages)') : '')));
+            pr.appendChild(_dsHelpDot('Automatic for single pieces: as many as still print about 2in across, all at one scale. Portrait art fits four in a row, landscape and square six in two rows. More than that splits evenly over pages, each carrying the specs.'));
+            body.appendChild(pr);
+        } else if (_catOverviewOn()) {
             const pr = document.createElement('label');
             pr.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); margin-top:6px;';
             pr.appendChild(document.createTextNode('Options per page'));
@@ -18227,8 +18239,137 @@ function setCatOverviewPer(v) {
 }
 // ONE answer to how many overview pages a placement gets, asked by BOTH page builders.
 function _catOverviewParts(place) {
-    const n = _catPlacementWalls(place).length, per = _catOverviewPer();
+    const n = _catPlacementWalls(place).length;
+    if (_catSheetMode(place)) return _catSheetLayout(place).parts;
+    const per = _catOverviewPer();
     return (per && n > per) ? Math.ceil(n / per) : 1;
+}
+// ── THE OPTIONS SHEET (18.64) ─────────────────────────────────────────────
+// "I want the client to see more options on a page ... sometimes these documents get
+// printed and pinned up on a physical board, and I do not want specs to get lost."
+// A placement whose every option is ONE piece prints as a catalogue sheet: the shared spec
+// column on the left (repeated on every page, so a sheet pulled off the board still
+// carries its specs), the framed mockups on the right with the option code above and the
+// image code below. The sheet REPLACES the options' own spec pages (_deckPageList), and
+// follows the breaker. Turning the All-options page off brings the spec pages back.
+// A multi-piece placement keeps the drawing overview above.
+function _catSheetMode(place) {
+    if (!place || !_catOverviewOn()) return false;
+    const all = _catPlacementWalls(place);
+    if (all.length < 2) return false;
+    return all.every(it => ((it.wall && it.wall.frames) || []).filter(f => f && f.active !== false && f.w > 0 && f.h > 0).length === 1);
+}
+// HOW MANY TO A PAGE IS NOT A SETTING: it is however many still print at a readable size.
+// Every mockup is drawn at ONE scale (the largest option sets it), and a page holds the
+// most options whose mockups still cover CAT_SHEET_MIN_PT on the square root of their
+// area (~2in across). Portrait art lands at four in a row; landscape and square at six in
+// two rows. Past that the options split EVENLY (7 is 4 + 3, never 6 + 1) and every page
+// uses the same grid and scale, so sizes still compare across pages.
+const CAT_SHEET_MIN_PT = 140, CAT_SHEET_MAX_PER = 10;
+const CAT_SHEET_LAB_H = 15, CAT_SHEET_CODE_H = 13, CAT_SHEET_GAP = 22, CAT_SHEET_COL_FRAC = 0.25;
+function _catSheetArea(PW, PH) {
+    const SR = _safeFrameRect(PW, PH), B = _titleBand(PW, PH);
+    const colW = (SR.R - SR.L) * CAT_SHEET_COL_FRAC;
+    const x0 = SR.L + colW + 24;
+    return { SR: SR, colX: SR.L, colW: colW, x: x0, w: SR.R - x0, top: B.body + _subtitleClear() + 6, bottom: SR.B - 4 };
+}
+function _catSheetLayout(place, PW, PH) {
+    PW = PW || PAGE_FORMAT[0]; PH = PH || PAGE_FORMAT[1];
+    const A = _catSheetArea(PW, PH);
+    const all = _catPlacementWalls(place);
+    const k = unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
+    let mw = 0, mh = 0;
+    all.forEach(it => {
+        const f = ((it.wall && it.wall.frames) || []).find(x => x && x.active !== false && x.w > 0 && x.h > 0);
+        if (f) { mw = Math.max(mw, f.w * k); mh = Math.max(mh, f.h * k); }
+    });
+    if (!(mw > 0 && mh > 0)) { mw = 24; mh = 30; }
+    const areaH = A.bottom - A.top;
+    // The best grid for n options: try every row count, keep the largest scale.
+    const fit = (n) => {
+        let best = { s: 0, rows: 1, cols: n };
+        for (let rows = 1; rows <= n; rows++) {
+            const cols = Math.ceil(n / rows);
+            const sw = (A.w - CAT_SHEET_GAP * (cols - 1)) / cols / mw;
+            const sh = (areaH - rows * (CAT_SHEET_LAB_H + CAT_SHEET_CODE_H) - CAT_SHEET_GAP * (rows - 1)) / rows / mh;
+            const s = Math.min(sw, sh);
+            if (s > best.s) best = { s: s, rows: rows, cols: cols };
+        }
+        return best;
+    };
+    const readable = (b) => Math.sqrt(mw * b.s * mh * b.s) >= CAT_SHEET_MIN_PT;
+    let maxPer = 1;
+    for (let n = 2; n <= Math.min(CAT_SHEET_MAX_PER, all.length); n++) { if (readable(fit(n))) maxPer = n; else break; }
+    const parts = Math.max(1, Math.ceil(all.length / maxPer));
+    const per = Math.ceil(all.length / parts);
+    const g = fit(per);
+    return { area: A, parts: parts, per: per, rows: g.rows, cols: g.cols, scale: g.s, cellW: mw * g.s, cellH: mh * g.s, k: k };
+}
+async function _drawCatSheetPage(doc, logos, pageNum, meta, place, ctx) {
+    const PW = (ctx && ctx.PW) || 936, PH = (ctx && ctx.PH) || 540;
+    const L = _catSheetLayout(place, PW, PH), A = L.area;
+    const all = _catPlacementWalls(place);
+    const part = Math.max(0, Math.min(L.parts - 1, (ctx && ctx.part) || 0));
+    const items = all.slice(part * L.per, part * L.per + L.per);
+    const rowOf = (id) => (dashProjectData || []).find(r => r && r.id === id) || null;
+    const frameOf = (it) => ((it.wall && it.wall.frames) || []).find(f => f && f.active !== false && f.w > 0 && f.h > 0);
+    const codeOf = (it) => it.kind === 'option' ? (it.wall.name || '') : (_catBaseCode(it.layout) || '');
+    const first = rowOf((frameOf(all[0]) || {}).id) || {};
+    const sub = L.parts > 1 ? ('OPTIONS ' + items[0].n + (items.length > 1 ? ('\u2013' + items[items.length - 1].n) : '')) : 'OPTIONS';
+    _drawPageTitle(doc, PW, PH, place + (first.location ? ' | ' + first.location : ''), sub);
+    // THE SPEC COLUMN covers THIS page's options only, so it never names an option the
+    // sheet does not show. A line the options share prints once; one that differs carries
+    // the option's tail (.1, .2), the way a set carries its letters.
+    const members = [], tags = [];
+    items.forEach(it => { const f = frameOf(it); const r = f && rowOf(f.id); if (!r) return; const c = codeOf(it); members.push(r); tags.push(c.indexOf(place) === 0 && c.length > place.length ? c.slice(place.length) : c); });
+    let specEnd = A.top;
+    if (members.length) {
+        specEnd = _drawSharedSpecColumn(doc, { members: members, letters: tags, noQty: true, x: A.colX, w: A.colW, top: A.top, bottom: A.bottom - 70 }) || A.top;
+        // The moulding, under the specs, as on a spec page. Dropped whole when it will not
+        // fit the column (every code is already a Frame Code line).
+        let frames = [];
+        try { frames = await _sharedSpecFrames(members); } catch (e) { frames = []; }
+        if (frames.length) {
+            const h = 40, sw = _drawFrameStrip(doc, frames, { right: 0, top: 0, height: h + 9, maxW: Infinity, measure: true });
+            if (sw != null && sw <= A.colW) _drawFrameStrip(doc, frames, { right: A.colX + sw, top: Math.min(specEnd + 12, A.bottom - h - 9), height: h + 9, maxW: sw + 0.5, swatch: false });
+        }
+    }
+    const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
+    // Leftover width (a height-limited grid) goes into the gutters so the sheet spans the
+    // page; each option hangs from its code at the top-left of its cell.
+    const xgap = L.cols > 1 ? CAT_SHEET_GAP + Math.max(0, A.w - L.cols * L.cellW - CAT_SHEET_GAP * (L.cols - 1)) / (L.cols - 1) : 0;
+    for (let i = 0; i < items.length; i++) {
+        const it = items[i], f = frameOf(it);
+        const cx = A.x + (i % L.cols) * (L.cellW + xgap);
+        const cy = A.top + Math.floor(i / L.cols) * (CAT_SHEET_LAB_H + L.cellH + CAT_SHEET_CODE_H + CAT_SHEET_GAP);
+        doc.setFont(_font('display'), _pdfFontStyle('display')); doc.setFontSize(10); doc.setTextColor(20, 20, 20);
+        doc.text(codeOf(it), cx, cy + 10);
+        if (!f) continue;
+        const r = rowOf(f.id) || {};
+        const bw = f.w * L.k * L.scale, bh = f.h * L.k * L.scale, bx = cx, by = cy + CAT_SHEET_LAB_H;
+        let drew = false;
+        try {
+            const dIn = _frameDataInInches(Object.assign({}, r, { extW: r.extW || f.w, extH: r.extH || f.h }), dashUnit);
+            let art = null; if (r.artworkUrl) { try { art = await _loadImg(r.artworkUrl); } catch (e) {} }
+            const sw = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
+            const out = renderFrameToCanvas(dIn, sw, { wireframe: _elevIsWireframe(it.wall) || !art, dpi: 110, pad: 0, artworkImg: art, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
+            const cnv = out && out.canvas;
+            if (cnv && cnv.width) {
+                const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height;
+                const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0);
+                _pdfFrameShadow(doc, dIn, bx, by, bw, bh); doc.addImage(flat.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, by, bw, bh);
+                drew = true;
+            }
+        } catch (e) {}
+        if (!drew) { doc.setDrawColor(40, 40, 40); doc.setLineWidth(1); try { doc.rect(bx, by, bw, bh, 'S'); } catch (e) {} }
+        const ic = (r.imageCode || '') + '';
+        if (ic) {
+            doc.setFont(_font(cs.font), _pdfFontStyle(cs.font)); doc.setFontSize(cs.size); doc.setTextColor(crgb.r, crgb.g, crgb.b);
+            doc.text(ic, bx + bw, by + bh + CAT_SHEET_CODE_H - 2, { align: 'right' });
+        }
+    }
+    doc.setTextColor(20, 20, 20);
+    _drawPdfFooter(doc, logos, pageNum, meta);
 }
 // Part 0 keeps the key the page always had, so a deck that never splits is untouched and
 // per-page settings already stored on it stay put.
@@ -18287,6 +18428,7 @@ function _catOptionDescribe(it, first) {
 // is the one thing this page exists to show. The scale is the largest that fits every
 // option in a grid cell, trying each column count and keeping the best.
 async function _drawCatOverviewPage(doc, logos, pageNum, meta, place, ctx) {
+    if (_catSheetMode(place)) return _drawCatSheetPage(doc, logos, pageNum, meta, place, ctx);
     const PW = (ctx && ctx.PW) || 936, PH = (ctx && ctx.PH) || 540;
     const SR = _safeFrameRect(PW, PH);
     const all = _catPlacementWalls(place);
@@ -18512,11 +18654,15 @@ function _deckPageList() {
         else members.forEach(m => out.push({ kind: 'spec', type: 'spec', title: (m.id || 'Spec'), row: m, members: [m], _ovKey: (m.id || ''), _specTpl: _specTplResolve(m.id || '') }));
         return out;
     };
-    // THE OPTIONS OVERVIEW goes in front of a placement's first page (_catOverviewFor).
+    // THE OPTIONS OVERVIEW goes right AFTER the placement's breaker (18.64; it used to lead
+    // the placement): the breaker says where and how big, the options say which art. With
+    // no breaker it leads, as before. On a single-piece placement it is the options SHEET,
+    // which carries the specs, so the options' own spec pages are dropped (_catSheetMode).
     const specPagesFor = (u) => {
         const ov = u._manual ? null : _catOverviewFor(u, units);
-        const pages = _specPagesFor0(u);
-        if (ov) pages.unshift.apply(pages, _catOverviewDescs(ov));
+        let pages = _specPagesFor0(u);
+        if (!u._manual) { const pl = _catPlacementOfWall(_catMockupForUnit(u)); if (pl && _catSheetMode(pl)) pages = pages.filter(d => d._install); }
+        if (ov) { let at = 0; while (at < pages.length && pages[at]._install) at++; pages.splice.apply(pages, [at, 0].concat(_catOverviewDescs(ov))); }
         return pages;
     };
     const _specPagesFor0 = (u) => {
@@ -19129,7 +19275,7 @@ function _specRowSlot(label) {
     }
     return { group: _SPEC_ROW_UNKNOWN_GROUP, idx: 0 };
 }
-function _specSetRows(members, letters) {
+function _specSetRows(members, letters, opts) {
     const rows = [];
     const ms = members || [];
     const L = letters || _setLetters(ms.length);
@@ -19173,7 +19319,8 @@ function _specSetRows(members, letters) {
     };
     const pushRow = (label, v, idxs, all) => {
         let val = v;
-        if (all && ms.length > 1 && SPEC_QTY_LABELS.indexOf(label) >= 0) val = ms.length + ' @ ' + v;
+        // Not on a catalogue sheet (opts.noQty): options are choices, so '3 @' would read as stock.
+        if (all && ms.length > 1 && !(opts && opts.noQty) && SPEC_QTY_LABELS.indexOf(label) >= 0) val = ms.length + ' @ ' + v;
         const lts = idxs.map(i => L[i] || String(i + 1));
         rows.push({
             base: label,
@@ -33775,7 +33922,7 @@ function _drawSharedSpecColumn(doc, o) {
     const members = o.members || [], letters = o.letters || [];
     const x = o.x, w = o.w, top = o.top, bottom = o.bottom;
     if (o.artOnly) return;                                  // artwork-only page: no specs at all
-    const rows = _specSetRows(members, letters);
+    const rows = _specSetRows(members, letters, { noQty: !!o.noQty });
     if (!rows.length) return;
 
     // A blank half-line wherever the category changes, so the block reads as
@@ -33814,7 +33961,7 @@ function _drawSharedSpecColumn(doc, o) {
     // 'Matboard B/C/E/F' in different columns, where they read as unrelated
     // rows. Only split when a single column can't hold the block above the
     // readable floor, and then keep whole categories together.
-    let cols = [allIdx], colW = w, gut = 0;
+    let cols = [allIdx], colW = w, gut = 0, endY = top;
     let fit = solve(availH, colW, allIdx);
     if (fit.units * fit.lineH > availH && fit.fs <= 4.61 && rows.length > 1) {
         gut = 10; colW = (w - gut) / 2;
@@ -33853,8 +34000,10 @@ function _drawSharedSpecColumn(doc, o) {
             if (de > ds) { doc.setLineDashPattern([0.5, 1.5], 0); doc.setDrawColor(180, 180, 180); doc.setLineWidth(0.35); doc.line(ds, y - 2, de, y - 2); doc.setLineDashPattern([], 0); }
             y += fit.lineH;
         });
+        endY = Math.max(endY, y - fit.lineH + 3);
     });
     doc.setTextColor(20, 20, 20);
+    return endY;
 }
 // Frame corner + profile pairs for the set, laid out RIGHT to left so the strip
 // ends exactly where it is told - immediately left of the elevation thumbnail -
@@ -41423,7 +41572,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 2in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

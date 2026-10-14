@@ -85,9 +85,10 @@ const path = require('path');
         dashOuterShadowsOn = prev; frameFx.pageShadow = false;
         if (got.length) throw new Error('a shadow was drawn with the drop shadow switched off');
       });
-      __check('all five spec-page frame sites draw the shadow first', () => {
+      // 18.64: the catalogue options sheet is a sixth frame site.
+      __check('all six spec-page frame sites draw the shadow first', () => {
         const S = window.__appSrc;
-        if ((S.match(/_pdfFrameShadow\\(doc, /g) || []).length !== 6) throw new Error('expected the helper plus five call sites');
+        if ((S.match(/_pdfFrameShadow\\(doc, /g) || []).length !== 7) throw new Error('expected the helper plus six call sites');
       });
     })();
   `;

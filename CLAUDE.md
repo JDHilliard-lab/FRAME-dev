@@ -607,6 +607,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   with no options gets a dashed "no image sets" cell). Offered only with two or more
   placements.
 
+- **CATALOGUE: THE OPTIONS SHEET (18.64).** A placement whose every option is ONE piece
+  (`_catSheetMode`) prints its All-options page as a sheet (`_drawCatSheetPage`): shared spec
+  column (`_drawSharedSpecColumn`, `noQty`, option tails `.1` as letters) on EVERY page, mockups
+  coded above, image code below. It REPLACES the options' spec pages and sits AFTER the breaker
+  (`specPagesFor`). Per page is DERIVED (`_catSheetLayout`: one scale, `CAT_SHEET_MIN_PT` on
+  sqrt(area), even split), never a setting. Multi-piece placements keep the drawing overview.
+  A single-piece mockup mints `ART.1.1`, not `ART.1.1A` (`_slotL` in `_catAddOption`).
 - **CATALOGUE: PLAN PINS.** The primary's slot row is pinned once and every arrangement and
   option row mirrors it through `CAT_ROW_FIELDS` / `CAT_ROW_DEEP`, including options that
   existed before the pin. Options (`_catOptionRowIds`) and alternate arrangements

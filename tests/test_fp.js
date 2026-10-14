@@ -335,7 +335,8 @@ const fs = require('fs');
       const calls = (A.match(/_deckPlanSlots\\(/g) || []).length;
       if (calls !== 2) throw new Error('expected a definition and one call site, found ' + calls);
       const dsAt = A.indexOf('function _deckPageList');
-      const ds = A.slice(dsAt, dsAt + 9000);
+      // Sliced to the function's own closing brace, never a character count (it outgrew 9000).
+      const ds = A.slice(dsAt, A.indexOf(String.fromCharCode(10) + '}', dsAt));
       if (ds.indexOf('_deckPlanSlots(') < 0) throw new Error('Deck Studio does not use the shared order');
       // ...and the export prints that list rather than building its own.
       { const _ea = A.indexOf('async function _buildSpecPagePDF');
