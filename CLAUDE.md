@@ -617,6 +617,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   Its SHOW ON PAGE ticks are a THIRD map (`catSheetSlots` / `catSheetSlotOverrides`,
   `_catSheetSlots`, default plan + elevation OFF), keyed per placement (`_catOverviewKey(place)`)
   so a split agrees; panel is `_dsSpecSlotsInto(..., 'sheet')`. `catov` is thumbnail-drawable.
+  **Its left column IS the per-piece page's** (18.66): `_drawSpecPageTemplate(..., {sheet})`
+  draws title + thumbnails only and returns `{specX, specW, specY, thumbTop}`; the shared spec
+  block is fitted above `thumbTop`. `_specTplMap` is the ONE template-to-page map. Never
+  hand-place sheet thumbnails again (`test_cat_options_sheet` compares positions to a real
+  per-piece render).
 - **CATALOGUE: PLAN PINS.** The primary's slot row is pinned once and every arrangement and
   option row mirrors it through `CAT_ROW_FIELDS` / `CAT_ROW_DEEP`, including options that
   existed before the pin. Options (`_catOptionRowIds`) and alternate arrangements

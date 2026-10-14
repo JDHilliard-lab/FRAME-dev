@@ -146,7 +146,7 @@ window.__res = (async function () {
   await check('EXACT ASK: by default the sheet shows the moulding strip and no plan or elevation', async function () {
     build(3, 24, 32);
     const t = texts(await draw(0));
-    if (count(t, 'MICH 240-32') !== 2) throw new Error('expected the Frame Code line plus the strip caption: ' + count(t, 'MICH 240-32'));
+    if (count(t, 'Frame') !== 1) throw new Error('expected the strip and its Frame caption: ' + count(t, 'Frame'));
     if (t.indexOf('Floorplan') >= 0 || t.indexOf('Elevation') >= 0) throw new Error('plan or elevation printed by default');
   });
   await check('EXACT ASK: ticking Floorplan and Elevation puts both on the sheet; unticking Frame corner and Profile drops the strip', async function () {
@@ -155,7 +155,7 @@ window.__res = (async function () {
     _setCatSheetSlot(null, 'frame', false); _setCatSheetSlot(null, 'profile', false);
     const t = texts(await draw(0));
     if (t.indexOf('Floorplan') < 0 || t.indexOf('Elevation') < 0) throw new Error('plan/elevation missing: ' + JSON.stringify(t));
-    if (count(t, 'MICH 240-32') !== 1) throw new Error('the strip still printed');
+    if (count(t, 'Frame') !== 0) throw new Error('the strip still printed');
     if (t.indexOf('Frame Code') < 0) throw new Error('the specs went with it');
   });
   await check('the sheet keeps its OWN tick map: per-piece and group ticks do not move it, and it does not move them', async function () {
@@ -190,6 +190,41 @@ window.__res = (async function () {
   });
   await check('the rail renders the options sheet instead of leaving a text placeholder', async function () {
     if (!_dsThumbDrawable({ kind: 'catov' })) throw new Error('catov is not thumbnail-drawable');
+  });
+  // 18.65: "make sure the size of the thumbnails on the all options pages are the same size
+  // and layout as the per piece options ... and make sure nothing crashes into each other."
+  const allOn = function () { SPEC_SLOT_KEYS.forEach(function (k) { _setCatSheetSlot(null, k, true); _setSpecSlot(null, k, true); }); };
+  const capPos = function (ops) { const o = {}; ops.filter(function (x) { return x.t === 'text'; }).forEach(function (x) { if (['Frame', 'Floorplan', 'Elevation', 'none'].indexOf(String(x.str)) >= 0) o[x.str + '@' + Math.round(x.x)] = Math.round(x.y * 10) / 10; }); return o; };
+  await check('EXACT ASK: corner, profile, floorplan and elevation land exactly where the per-piece page puts them', async function () {
+    build(3, 24, 32); allOn();
+    const sheet = capPos(await draw(0));
+    const r = dashProjectData.find(function (x) { return x.id === 'ART.1.1'; });
+    const rec = new CanvasPdfRec(936, 540);
+    await _drawSpecPageTemplate(rec, {}, 1, {}, r, 'frameSpecDetail', { PW: 936, PH: 540 });
+    const piece = capPos(rec.ops);
+    if (!Object.keys(piece).length) throw new Error('the per-piece page drew no thumbnail captions');
+    if (JSON.stringify(sheet) !== JSON.stringify(piece)) throw new Error('sheet ' + JSON.stringify(sheet) + ' vs per-piece ' + JSON.stringify(piece));
+  });
+  await check('EXACT ASK: nothing collides: a long, differing spec list stops above the thumbnails, and the mockups stay right of the column', async function () {
+    build(6, 32, 24); allOn();
+    dashProjectData.filter(function (x) { return x.id.indexOf('ART.1.') === 0; }).forEach(function (x, i) { x.fCode = 'MICH ' + (100 + i); x.notes = 'n' + i; });
+    const L = _catSheetLayout('ART.1');
+    const ops = await draw(0);
+    const tx = ops.filter(function (o) { return o.t === 'text'; });
+    const thumbs = ops.filter(function (o) { return o.t === 'img' && o.a[0] < L.area.x; }).map(function (o) { return o.a[1]; });
+    const caps = tx.filter(function (o) { return ['Frame', 'none'].indexOf(String(o.str)) >= 0; }).map(function (o) { return o.y - 30; });
+    const thumbTop = Math.min.apply(null, thumbs.concat(caps));
+    const specs = tx.filter(function (o) { return o.x < L.area.x && o.y > L.area.top && o.y < thumbTop + 60 && ['Frame', 'Floorplan', 'Elevation', 'none'].indexOf(String(o.str)) < 0 && String(o.str).indexOf('Copyright') < 0; });
+    const lastSpec = Math.max.apply(null, specs.map(function (o) { return o.y; }));
+    if (!(lastSpec < thumbTop)) throw new Error('spec text at y=' + lastSpec.toFixed(1) + ' runs into the thumbnails at ' + thumbTop.toFixed(1));
+    const mock = ops.filter(function (o) { return o.t === 'img' && o.a[0] >= L.area.x - 0.5; });
+    if (mock.length !== 6) throw new Error('mockups: ' + mock.length);
+    const colRight = L.area.colX + L.area.colW;
+    if (mock.some(function (o) { return o.a[0] < colRight + 10; })) throw new Error('a mockup starts inside the left column');
+    const codes = tx.filter(function (o) { return String(o.str).indexOf('IMG-') === 0; });
+    const labels = tx.filter(function (o) { return String(o.str).indexOf('ART.1.') === 0; });
+    codes.forEach(function (c) { labels.forEach(function (l) { if (Math.abs(l.x - (c.x - L.cellW)) < 2 && l.y > c.y && l.y - c.y < 10) throw new Error('image code ' + c.str + ' crowds ' + l.str); }); });
+    mock.forEach(function (o) { if (o.a[1] + o.a[3] > L.area.bottom + 0.5) throw new Error('a mockup runs past the bottom guide'); });
   });
   return out;
 })();

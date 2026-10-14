@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.65';
+const APP_VERSION = '18.66';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -10718,7 +10718,7 @@ function _dsOptionsInto(t, desc) {
             pr.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-muted); margin-top:6px;';
             const L = _catSheetLayout(place);
             pr.appendChild(document.createTextNode('Options per page: ' + L.per + (L.parts > 1 ? (' (' + L.parts + ' pages)') : '')));
-            pr.appendChild(_dsHelpDot('Automatic for single pieces: as many as still print about 2in across, all at one scale. Portrait art fits four in a row, landscape and square six in two rows. More than that splits evenly over pages, each carrying the specs.'));
+            pr.appendChild(_dsHelpDot('Automatic for single pieces: as many as still print about 1.8in across, all at one scale. Portrait art fits four in a row, landscape and square six in two rows. More than that splits evenly over pages, each carrying the specs.'));
             body.appendChild(pr);
             // What the left column carries under the specs, on the options sheet itself.
             if (desc && desc.kind === 'catov') { const sh = document.createElement('div'); sh.style.marginTop = '10px'; body.appendChild(sh); _dsSpecSlotsInto(sh, desc, _catOverviewKey(place), 'sheet'); }
@@ -18107,10 +18107,11 @@ function _specTplSlotAware(tplKey) {
     return tplKey === 'artSpecDetail' || tplKey === 'frameSpecDetail'
         || tplKey === 'frameRight';
 }
-function _specTplEffective(tplKey, ovKey) {
+function _specTplEffective(tplKey, ovKey, slots) {
     const raw = SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight;
     if (!_specTplSlotAware(tplKey)) return raw;
-    const s = _specSlots(ovKey);
+    // `slots` (18.65): the catalogue options sheet borrows this layout with its OWN ticks.
+    const s = slots || _specSlots(ovKey);
     const base = SPEC_TEMPLATES[(s.frame || s.profile) ? 'frameSpecDetail' : 'artSpecDetail'];
     const tpl = {};
     Object.keys(base).forEach(k => {
@@ -18302,17 +18303,25 @@ function _catSheetMode(place) {
 // area (~2in across). Portrait art lands at four in a row; landscape and square at six in
 // two rows. Past that the options split EVENLY (7 is 4 + 3, never 6 + 1) and every page
 // uses the same grid and scale, so sizes still compare across pages.
-const CAT_SHEET_MIN_PT = 140, CAT_SHEET_MAX_PER = 10;
-const CAT_SHEET_LAB_H = 15, CAT_SHEET_CODE_H = 13, CAT_SHEET_GAP = 22, CAT_SHEET_COL_FRAC = 0.25;
-function _catSheetArea(PW, PH) {
+// 130pt (~1.8in) since 18.65: the left column became the per-piece column (wider, so its
+// thumbnails match that page), and this keeps four portrait or six landscape to a page.
+const CAT_SHEET_MIN_PT = 130, CAT_SHEET_MAX_PER = 10;
+const CAT_SHEET_LAB_H = 15, CAT_SHEET_CODE_H = 13, CAT_SHEET_GAP = 22;
+// THE LEFT COLUMN IS THE PER-PIECE PAGE'S (18.65): the same template, the same map, so the
+// spec rows, corner, profile, floorplan and elevation land where a per-piece page puts
+// them. The mockups start clear of the widest thing in it.
+function _catSheetTpl(place) { return _specTplEffective('frameSpecDetail', '', _catSheetSlots(_catOverviewKey(place))); }
+function _catSheetArea(PW, PH, place) {
     const SR = _safeFrameRect(PW, PH), B = _titleBand(PW, PH);
-    const colW = (SR.R - SR.L) * CAT_SHEET_COL_FRAC;
-    const x0 = SR.L + colW + 24;
-    return { SR: SR, colX: SR.L, colW: colW, x: x0, w: SR.R - x0, top: B.body + _subtitleClear() + 6, bottom: SR.B - 4 };
+    const tpl = _catSheetTpl(place), M = _specTplMap(tpl, PW, PH);
+    const right = (b) => b ? M.px(b.x) + M.pw(b.w || 0) : -Infinity;
+    const colX = M.px(tpl.spec.x), colR = Math.max(right(tpl.spec), right(tpl.plan), right(tpl.elevation));
+    const x0 = colR + 22;
+    return { SR: SR, colX: colX, colW: colR - colX, x: x0, w: SR.R - x0, top: B.body + _subtitleClear() + 6, bottom: SR.B - 4 };
 }
 function _catSheetLayout(place, PW, PH) {
     PW = PW || PAGE_FORMAT[0]; PH = PH || PAGE_FORMAT[1];
-    const A = _catSheetArea(PW, PH);
+    const A = _catSheetArea(PW, PH, place);
     const all = _catPlacementWalls(place);
     const k = unitFactor((typeof elevUnit !== 'undefined' ? elevUnit : 'in'), 'in');
     let mw = 0, mh = 0;
@@ -18353,69 +18362,24 @@ async function _drawCatSheetPage(doc, logos, pageNum, meta, place, ctx) {
     const codeOf = (it) => it.kind === 'option' ? (it.wall.name || '') : (_catBaseCode(it.layout) || '');
     const first = rowOf((frameOf(all[0]) || {}).id) || {};
     const sub = L.parts > 1 ? ('OPTIONS ' + items[0].n + (items.length > 1 ? ('\u2013' + items[items.length - 1].n) : '')) : 'OPTIONS';
-    _drawPageTitle(doc, PW, PH, place + (first.location ? ' | ' + first.location : ''), sub);
+    const title = place + (first.location ? ' | ' + first.location : '');
     // THE SPEC COLUMN covers THIS page's options only, so it never names an option the
     // sheet does not show. A line the options share prints once; one that differs carries
     // the option's tail (.1, .2), the way a set carries its letters.
     const members = [], tags = [];
     items.forEach(it => { const f = frameOf(it); const r = f && rowOf(f.id); if (!r) return; const c = codeOf(it); members.push(r); tags.push(c.indexOf(place) === 0 && c.length > place.length ? c.slice(place.length) : c); });
-    // THE LEFT COLUMN, as on a per-piece page: specs, then the moulding strip (corner +
-    // profile), then floorplan + elevation along the bottom. What prints is the sheet's own
-    // ticks (_catSheetSlots); ticked-but-empty reserves its space, unticked packs.
-    const SL = _catSheetSlots(_catOverviewKey(place));
-    const GAP = 10, CAP = 10, STRIP_H = 40;
-    let specEnd = A.top;
-    if (members.length) {
-        const mock = items[0] && items[0].layout;
-        let er = null, flat = null;
-        if (SL.elevation && mock) {
-            try {
-                er = await renderElevationToCanvas(mock, null, { wireframe: _elevIsWireframe(mock), dpi: 24, tight: true });
-                if (er && er.canvas && er.canvas.width) {
-                    flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
-                    const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
-                }
-            } catch (e) { er = null; flat = null; }
-        }
-        const elevAsp = (flat && flat.width > 0 && flat.height > 0) ? flat.width / flat.height : 1.6;
-        let rowH = 0;
-        if (SL.plan || SL.elevation) {
-            const units = (SL.plan ? 1 : 0) + (SL.elevation ? elevAsp : 0);
-            rowH = Math.min((A.colW - ((SL.plan && SL.elevation) ? GAP : 0)) / units, 110);
-        }
-        const rowTop = A.bottom - CAP - rowH;
-        let frames = [];
-        if (SL.frame || SL.profile) { try { frames = await _sharedSpecFrames(members); } catch (e) { frames = []; } }
-        const sw = frames.length ? _drawFrameStrip(doc, frames, { right: 0, top: 0, height: STRIP_H + 9, maxW: Infinity, measure: true, corner: SL.frame, profile: SL.profile }) : null;
-        // Dropped whole when it will not fit the column (every code is already a Frame Code line).
-        const useStrip = sw != null && sw > 0 && sw <= A.colW;
-        const specBottom = (rowH ? rowTop - 14 : A.bottom) - (useStrip ? STRIP_H + 9 + 12 : 0);
-        specEnd = _drawSharedSpecColumn(doc, { members: members, letters: tags, noQty: true, x: A.colX, w: A.colW, top: A.top, bottom: Math.max(A.top + 40, specBottom) }) || A.top;
-        if (useStrip) _drawFrameStrip(doc, frames, { right: A.colX + sw, top: Math.min(specEnd + 12, specBottom + 12), height: STRIP_H + 9, maxW: sw + 0.5, swatch: false, corner: SL.frame, profile: SL.profile });
-        if (rowH > 0) {
-            let x = A.colX;
-            const capY = Math.min(rowTop + rowH + 8, A.bottom);
-            if (SL.plan) {
-                let pc = null;
-                try { pc = await _planCropCanvasForRow(members[0], { zoom: 3, aspect: 1, vector: true }); } catch (e) { pc = null; }
-                if (pc) {
-                    try { doc.addImage(pc.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', x, rowTop, rowH, rowH); } catch (e) {}
-                    _drawPlanCropMarks(doc, pc, x, rowTop, rowH, rowH);
-                    doc.setDrawColor(30, 30, 30); doc.setLineWidth(1); try { doc.rect(x, rowTop, rowH, rowH, 'S'); } catch (e) {}
-                    _specPlanRectAdd(doc, x, rowTop, rowH, rowH, members[0] && members[0].level);
-                    _specThumbCaption(doc, 'Floorplan', x, capY);
-                } else _specSwatchBox(doc, x, rowTop, rowH, rowH, 'Floorplan', capY);
-                x += rowH + GAP;
-            }
-            if (SL.elevation) {
-                const tw = rowH * elevAsp;
-                if (flat) {
-                    try { doc.addImage(flat.toDataURL('image/jpeg', 0.85), 'JPEG', x, rowTop, tw, rowH); _drawGroupElevOutline(doc, er, x, rowTop, tw, rowH); } catch (e) {}
-                    _specThumbCaption(doc, 'Elevation', x, capY);
-                    _specPlanRectAdd(doc, x, rowTop, tw, rowH, members[0] && members[0].level, mock);
-                } else _specSwatchBox(doc, x, rowTop, tw, rowH, 'Elevation', capY);
-            }
-        }
+    if (!members.length) _drawPageTitle(doc, PW, PH, title, sub);
+    else {
+        // Title and the left-column thumbnails come from the PER-PIECE renderer itself
+        // (ctx.sheet), so they cannot drift from that page. The wall is the placement's
+        // mockup: a grey drawing of where it hangs, favouring no one option.
+        const geo = await _drawSpecPageTemplate(doc, logos, pageNum, meta, members[0], 'frameSpecDetail',
+            { PW: PW, PH: PH, sheet: { slots: _catSheetSlots(_catOverviewKey(place)), title: title, sub: sub, elev: (items[0] && items[0].layout) || null } }) || {};
+        // The shared spec block fits BETWEEN the first spec line and the thumbnails, at the
+        // per-piece page's 8.5pt on 13pt, shrinking only if it has to.
+        const sTop = (geo.specY != null ? geo.specY : A.top + 8.5) - 8.5;
+        const sBot = (geo.thumbTop != null) ? geo.thumbTop - 14 : A.bottom;
+        _drawSharedSpecColumn(doc, { members: members, letters: tags, noQty: true, lead: 13, x: geo.specX != null ? geo.specX : A.colX, w: geo.specW || A.colW, top: sTop, bottom: Math.max(sTop + 20, sBot) });
     }
     const cs = _specCodeStyle(); const crgb = _annHexToRgb(cs.color);
     // Leftover width (a height-limited grid) goes into the gutters so the sheet spans the
@@ -34013,6 +33977,7 @@ function _drawSharedSpecColumn(doc, o) {
     const x = o.x, w = o.w, top = o.top, bottom = o.bottom;
     if (o.artOnly) return;                                  // artwork-only page: no specs at all
     const rows = _specSetRows(members, letters, { noQty: !!o.noQty });
+    const LEAD_MAX = o.lead || Infinity;
     if (!rows.length) return;
 
     // A blank half-line wherever the category changes, so the block reads as
@@ -34027,7 +33992,7 @@ function _drawSharedSpecColumn(doc, o) {
         const units = idxs.length + GAP_UNITS * gapsIn(idxs);
         let lineH = h / Math.max(1, units);
         let fs = Math.max(4.6, Math.min(8.5, lineH / 1.38));
-        lineH = Math.max(fs * 1.32, Math.min(lineH, fs * 1.6));
+        lineH = Math.max(fs * 1.32, Math.min(lineH, fs * 1.6, LEAD_MAX));
         try {
             doc.setFontSize(fs);
             let maxPair = 0;
@@ -38126,16 +38091,9 @@ function _tplDesignFrame(tpl) {
     if (!isFinite(L) || !isFinite(T) || (R - L) < 0.1 || (B - T) < 0.1) return null;
     return { L: L, R: R, T: T, B: B };
 }
-async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) {
-    const PW = ctx.PW, PH = ctx.PH;
-    // The ticks filter the template. NOT on a template card: a card shows the
-    // standard demo of what that layout IS, so filtering it by the deck's current
-    // ticks would make the card advertise the page you already have.
-    const tpl = (ctx && ctx.swatch) ? (SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight)
-                                    : _specTplEffective(tplKey, (r && r.id) || '');
-    // Affine remap of template fractions onto the safety frame: positions go
-    // through px/py, sizes through pw/ph (sizes scale but don't offset).
-    // Falls back to the identity (original design) when no frame resolves.
+// The template-to-page map, ONE copy: the per-piece page and the options sheet (which
+// borrows its left column) must put the same thumbnail in the same place.
+function _specTplMap(tpl, PW, PH) {
     const SF = _layoutSafeFrame();
     const D = SF ? _tplDesignFrame(tpl) : null;
     const _TB = _titleBand(PW, PH);
@@ -38151,8 +38109,26 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         ky = (1 - SF.b - _topF) / (D.B - D.T);
         oyf = _topF - D.T * ky;
     }
-    const px = (f) => (oxf + f * kx) * PW, py = (f) => (oyf + f * ky) * PH;
-    const pw = (f) => f * kx * PW, ph = (f) => f * ky * PH;
+    return { px: (f) => (oxf + f * kx) * PW, py: (f) => (oyf + f * ky) * PH, pw: (f) => f * kx * PW, ph: (f) => f * ky * PH };
+}
+// ctx.sheet (18.65): the catalogue options sheet borrows this page's TITLE and LEFT-COLUMN
+// THUMBNAILS (corner, profile, floorplan, elevation) so they print at exactly the per-piece
+// size and position. It brings its own ticks (`slots`), title, subheading and wall, skips
+// the artwork, the spec rows and the footer, and gets back where the specs go and the top
+// of the thumbnails, so its shared spec block can be fitted between them.
+async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) {
+    const PW = ctx.PW, PH = ctx.PH;
+    const SHEET = (ctx && ctx.sheet) || null;
+    // The ticks filter the template. NOT on a template card: a card shows the
+    // standard demo of what that layout IS, so filtering it by the deck's current
+    // ticks would make the card advertise the page you already have.
+    const tpl = (ctx && ctx.swatch) ? (SPEC_TEMPLATES[tplKey] || SPEC_TEMPLATES.frameRight)
+                                    : _specTplEffective(tplKey, (r && r.id) || '', SHEET ? SHEET.slots : null);
+    // Affine remap of template fractions onto the safety frame: positions go
+    // through px/py, sizes through pw/ph (sizes scale but don't offset).
+    // Falls back to the identity (original design) when no frame resolves.
+    const _TB = _titleBand(PW, PH);
+    const { px, py, pw, ph } = _specTplMap(tpl, PW, PH);
     const SR = _safeFrameRect(PW, PH);
     const _rightLimit = SR.R;
     // Caption baseline under a thumbnail: 9pt below the box, but never past the
@@ -38171,13 +38147,13 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     // same line its group page carries. This layout starts its spec rows ON the
     // subheading line, so when one prints the rows move down by `_specShift` to clear
     // it - and ONLY then, so every other per-piece page prints exactly as before.
-    const _optSub = (SWATCH || !tpl.title) ? '' : _catOptionPageSub([r && r.id]);
+    const _optSub = SHEET ? (SHEET.sub || '') : (SWATCH || !tpl.title) ? '' : _catOptionPageSub([r && r.id]);
     let _specShift = 0;
 
     // — Title —
     if (tpl.title) {
         const tf = tpl.title.field || 'application';
-        const titleText = (tf === 'id' ? (r.id || '') : tf === 'idLocation' ? ((r.id || '') + (r.location ? ' | ' + r.location : '')) : tf === 'product' ? (r.product || '') : (specs.application || r.product || r.id || 'SPECIFICATION')).toString().toUpperCase();
+        const titleText = SHEET ? String(SHEET.title || '').toUpperCase() : (tf === 'id' ? (r.id || '') : tf === 'idLocation' ? ((r.id || '') + (r.location ? ' | ' + r.location : '')) : tf === 'product' ? (r.product || '') : (specs.application || r.product || r.id || 'SPECIFICATION')).toString().toUpperCase();
         // _drawPageTitle shrinks a long ID (or a bumped-up title size) to fit
         // rather than letting it run off the right edge.
         // With title guides it goes on the first one, like every other page. With
@@ -38211,7 +38187,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     }
 
     // — Artwork (baked frame mockup) + code beneath —
-    if (tpl.artwork) {
+    if (tpl.artwork && !SHEET) {
         const dInches = _frameDataInInches(Object.assign({}, r, { extW: r.extW, extH: r.extH }), dashUnit);
         let artworkImg = null;
         if (r.artworkUrl) { try { artworkImg = await _loadImg(r.artworkUrl); } catch (e) {} }
@@ -38260,7 +38236,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     }
 
     // — Spec block (dotted leaders) —
-    if (tpl.spec && !_artOnly) {
+    if (tpl.spec && !_artOnly && !SHEET) {
         const sx = px(tpl.spec.x), sw = pw(tpl.spec.w);
         let sy = py(tpl.spec.y) + _specShift;
         // Shifted for an option's subheading, a long spec list could now reach the
@@ -38291,7 +38267,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
     }
 
     // — Elevation (wall thumbnail) —
-    let _elevDrawn = null;
+    let _elevDrawn = null, _thumbTop = null;
     if (tpl.elevation && SWATCH) {
         // The card only has to show WHERE the wall drawing lands. Capturing a real
         // elevation per card was the expensive half of the old swatches, and the
@@ -38303,7 +38279,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         _elevDrawn = { y: boxY, h: boxH };
     } else if (tpl.elevation) {
         let elev = null;
-        elev = _elevShowingPiece(r.id);
+        elev = SHEET ? (SHEET.elev || null) : _elevShowingPiece(r.id);
         // TICKED BUT NOT YET ON A WALL: reserve the box rather than collapsing it.
         // A page that reflows every time a piece gets placed is a page you cannot
         // lay out until the project is finished. Same grey box the template cards
@@ -38464,6 +38440,11 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         // Single caption "Frame" under the corner thumbnail only. labelBaseline
         // sits just below the images so it never overlaps them.
         _specThumbCaption(doc, 'Frame', leftX, labelBaseline);
+        _thumbTop = imgBottom - imgAreaH;
+    }
+    if (SHEET) {
+        if (_thumbTop == null) _thumbTop = (_planBoxTop != null) ? _planBoxTop : (_elevDrawn ? _elevDrawn.y : null);
+        return { specX: tpl.spec ? px(tpl.spec.x) : SR.L, specW: tpl.spec ? pw(tpl.spec.w) : 0, specY: tpl.spec ? py(tpl.spec.y) + _specShift : SR.T, thumbTop: _thumbTop };
     }
     // Footer (page number + project line + logo) on template spec pages too.
     _drawPdfFooter(doc, logos, pageNum, meta);
@@ -41662,7 +41643,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 2in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

@@ -77,7 +77,9 @@ const path = require('path');
   });
 
   check('the template remap anchors its vertical map on the title line', () => {
-    const b = codeOnly(fnBody('_drawSpecPageTemplate'));
+    // 18.65: the map moved into _specTplMap (shared with the options sheet); the page must still use it.
+    if (codeOnly(fnBody('_drawSpecPageTemplate')).indexOf('_specTplMap(tpl, PW, PH)') < 0) throw new Error('the spec page no longer uses the shared map');
+    const b = codeOnly(fnBody('_specTplMap'));
     if (b.indexOf('ky = (1 - SF.t - SF.b) / (D.B - D.T);') >= 0) throw new Error('the vertical map still starts at the top margin, which is what pulled the title off its guide');
     if (b.indexOf('_TB.head / PH') < 0) throw new Error('the map never reaches for the title line');
     if (b.indexOf('oxf = SF.l - D.L * kx;') < 0) throw new Error('the HORIZONTAL map was changed too; only the vertical one was wrong');
