@@ -17,7 +17,7 @@ const path = require('path');
   window.__log = [];
   const mk = () => { const st = {}; return new Proxy(st, {
     get: (t, k) => { if (k in t) return t[k]; if (k === 'measureText') return () => ({ width: 0 }); if (k === 'createLinearGradient' || k === 'createPattern') return () => ({ addColorStop() {} });
-      if (k === 'drawImage') return () => window.__log.push({ t: 'img' }); if (k === 'strokeRect') return () => window.__log.push({ t: 'stroke', blur: t.shadowBlur, off: t.shadowOffsetY, col: t.shadowColor }); return () => {}; },
+      if (k === 'drawImage') return () => window.__log.push({ t: 'img' }); if (k === 'strokeRect') return (...a) => window.__log.push({ t: 'stroke', blur: t.shadowBlur, off: t.shadowOffsetY, ox: t.shadowOffsetX || 0, lw: t.lineWidth, a: a, col: t.shadowColor }); return () => {}; },
     set: (t, k, v) => { t[k] = v; return true; } }); };
   window.HTMLCanvasElement.prototype.getContext = function () { return this.__c || (this.__c = mk()); };
   window.fetch = () => Promise.reject(new Error('no network in test'));
@@ -79,6 +79,23 @@ const path = require('path');
     __check('the live Dashboard and elevation views give an unmatted frame the same cast', () => {
       if (css.indexOf('.art-visual.fx-frame-cast {') < 0 || css.indexOf('var(--fx-frame', css.indexOf('.art-visual.fx-frame-cast {')) < 0) throw new Error('no fx-frame-cast rule reading --fx-frame');
       if (window.__appSrc.split("classList.add('fx-frame-cast')").length - 1 !== 2) throw new Error('both DOM views must set fx-frame-cast');
+    });
+    __check('EXACT BUG (18.46): an inner shadow is cast from the EDGE it shades, not 10px outside it', () => {
+      // Reported: no shadow on the single mat's art, none from mat 1 onto mat 2. The
+      // casting stroke sat at bx-20..bx-10, so an 8px shadow never crossed the gap.
+      resetFrameFx();
+      const r = row();                               // 24 x 30, 0.75 frame, 3in mat
+      const log = strokes(() => renderFrameToCanvas(r, null, { dpi: 72, pad: 0, artworkImg: art }));
+      const img = log.findIndex(s => s.t === 'img');
+      const sh = log.slice(img + 1).filter(s => s.t === 'stroke' && s.blur);
+      if (!sh.length) throw new Error('no shadow on the art');
+      const aX = (parseFloat(r.fW) + parseFloat(r.m1L)) * 72;
+      sh.forEach(s => {
+        const inner = s.a[0] + s.ox + s.lw / 2;     // where the stroke's shadow-casting edge lands
+        if (Math.abs(inner - aX) > 0.01) throw new Error('casting edge at ' + inner.toFixed(2) + ', opening at ' + aX + ' (gap ' + (aX - inner).toFixed(2) + 'px)');
+        if (s.lw < s.blur * 2) throw new Error('casting stroke too thin to stay solid under the blur');
+        if (s.a[0] + s.lw / 2 + s.a[2] > 0) throw new Error('the stroke itself is not parked off the canvas');
+      });
     });
     __check('...but not on a wireframe placement block', () => {
       const log = strokes(() => renderFrameToCanvas(row(), null, { dpi: 72, pad: 0, wireframe: true }));
