@@ -41,17 +41,17 @@ const path = require('path');
       if (!modal().querySelector('[data-unit-opt="Enter sizes in:in"]')) throw new Error('Units tab has no unit controls');
       modal().remove();
     });
-    __check('the Units tab really sets the units, and the header chip follows', () => {
+    __check('the Units tab really sets the units', () => {
       openAppSettings('units');
       modal().querySelector('[data-unit-opt="Second unit:cm"]').onclick();
       if (_specDualUnit() !== 'cm') throw new Error('second unit not set');
-      if (document.getElementById('unitChipDual').textContent !== '+CM') throw new Error('chip reads ' + document.getElementById('unitChipDual').textContent);
       if (!modal().querySelector('[data-unit-opt="Second unit:cm"].active')) throw new Error('tab did not redraw lit');
       setProjectDualUnit('mm'); modal().remove();
     });
-    __check('the units chip opens Settings on Units, the Deck button on Frame effects', () => {
-      document.getElementById('unitChip').click();
-      if (!modal() || !tabIs('units')) throw new Error('chip did not land on Units');
+    __check('openUnitMenu opens Settings on Units (18.57: no header chip), the Deck button on Frame effects', () => {
+      if (document.getElementById('unitChip')) throw new Error('the units chip is back in the header');
+      openUnitMenu();
+      if (!modal() || !tabIs('units')) throw new Error('openUnitMenu did not land on Units');
       modal().remove();
       document.getElementById('projFrameFxBtn').click();
       if (!modal() || !tabIs('fx')) throw new Error('Deck Studio button did not land on Frame effects');

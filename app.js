@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.56';
+const APP_VERSION = '18.57';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -156,9 +156,9 @@ function _navStepBadge(view, c) {
     return null;
 }
 const NAV_STEP_TIPS = {
-    dashboard: 'Step 1: list and spec the pieces (or list them on the floorplan in Deck).',
-    elevation: 'Step 2: place the pieces on walls.',
-    deck: 'Steps 3 to 5: pin the pieces on the floorplan, build the deck, generate the PDF.',
+    deck: 'Step 1: list the item codes on the floorplan Items list. Come back at the end to pin the pieces, build the deck and generate the PDF.',
+    dashboard: 'Step 2: spec the pieces: size, moulding, mats and artwork.',
+    elevation: 'Step 3: place the pieces on walls.',
 };
 
 // Update the badges IN PLACE rather than re-rendering the tabs: a re-render
@@ -470,7 +470,7 @@ const FRAME_TOUR = [
       body: 'FRAME turns a list of artwork into a client presentation: spec pages, wall elevations, floor plans and the PDF. This tour walks the job in the order a deck is built. It only looks around, so it cannot change your project. Use the arrow keys or the buttons, and Esc to leave at any point.' },
     { ch: 0, target: '#nav-tabs-fixed', prep: () => switchView('dashboard'),
       title: 'Three views, numbered in work order',
-      body: '1 Frame Dashboard is where pieces are specced, 2 Elevation is where they hang on walls, and 3 Deck is the presentation itself. The little counters on Elevation and Deck tell you what is still left: pieces not on a wall, and pieces not pinned on the plan.' },
+      body: '1 Deck is where a project starts (the floorplan Items list) and ends (the presentation itself), 2 Frame Dashboard is where pieces are specced, and 3 Elevation is where they hang on walls. The little counters on Elevation and Deck tell you what is still left: pieces not on a wall, and pieces not pinned on the plan.' },
     { ch: 1, view: 'deck', target: ['#dsToolsPageBody .fp-add-bar', '#dsToolsPageBody'], prep: () => _dsGoFloorplanItems(),
       title: 'Start by listing the item codes',
       body: 'Every project starts here, on the floorplan Items list. Add a code for each placement: ART for framed art, EGD for wallcovering, WF for window film. Codes are always numbered in order with no gaps (that is the house standard, not a setting), and everything else in the deck hangs off them.' },
@@ -6280,7 +6280,7 @@ function _appSettingsShow() {
         body.appendChild(host);
         _unitControlsInto(host);
         const note = document.createElement('div');
-        note.textContent = 'Changing the entry unit converts every size already in the project. The header chip shows the current units; click it to come back here.';
+        note.textContent = 'Changing the entry unit converts every size already in the project. Units live here: the gear in the header, Units tab.';
         note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; max-width:420px;';
         body.appendChild(note);
     } else if (_appSettingsTab === 'fx') {
@@ -6812,10 +6812,13 @@ function renderNavTabs() {
         };
         const div = '<div class="tab-divider"></div>';
         // Elevation reopens the wall you were last on, not always the first.
+        // 18.57: DECK IS 1. A project starts on the floorplan Items list (New project lands
+        // there and the next-step bar says so), and the tab numbers said Dashboard was 1.
+        // Deck is also where it ends (pin, build, generate); its tooltip says both.
         fixed.innerHTML =
-            tab('dashboard', 1, 'Frame Dashboard', "switchView('dashboard')") + div +
-            tab('elevation', 2, 'Elevation', "switchView('elevation', currentElevIndex)") + div +
-            tab('deck', 3, 'Deck', "switchView('deck')");
+            tab('deck', 1, 'Deck', "switchView('deck')") + div +
+            tab('dashboard', 2, 'Frame Dashboard', "switchView('dashboard')") + div +
+            tab('elevation', 3, 'Elevation', "switchView('elevation', currentElevIndex)");
     }
     renderWallRail();
 }
@@ -41103,7 +41106,7 @@ const HELP_REFERENCE_DATA = [
     {
         id: 'getting-started',
         title: 'Start here',
-        intro: `FRAME turns a list of pieces into a client presentation. You spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The three tabs at the top are numbered in that order.`,
+        intro: `FRAME turns a list of pieces into a client presentation. You list the item codes, spec each piece, place it on its wall, pin it on the floorplan, lay out the deck, and generate the PDF. The tabs at the top are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>, then back to the Deck to pin, build and generate.`,
         entries: [
             { title: 'Guided tour', live: 'tour' },
             { title: 'Where this project is', live: 'steps' },
@@ -41111,10 +41114,10 @@ const HELP_REFERENCE_DATA = [
             {
                 title: 'The five steps',
                 body: `<ol class="help-steps">
-<li><strong>Spec the pieces</strong> in <strong>1 Frame Dashboard</strong>. One row per piece: product, size, moulding, mats and artwork.</li>
-<li><strong>Place them on walls</strong> in <strong>2 Elevation</strong>. Pick a wall in the rail, add pieces with <strong>Add &amp; Arrange</strong> (or <strong>Push to Wall</strong> from the dashboard), then drag them into place and dimension them.</li>
-<li><strong>Pin them on the floorplan</strong> in <strong>3 Deck</strong>. Select the floorplan page, upload the plan from the middle of the page, then add each code from the <strong>Items</strong> tab. Skip this if the project has no plan.</li>
-<li><strong>Build the deck</strong> in <strong>3 Deck</strong>. Choose a presentation type on the <strong>Project</strong> tab, then check each page on the <strong>Pages</strong> tab.</li>
+<li><strong>List the item codes</strong> in <strong>1 Deck</strong>, on the floorplan <strong>Items</strong> list. New project takes you there.</li>
+<li><strong>Spec the pieces</strong> in <strong>2 Frame Dashboard</strong>. One row per piece: product, size, moulding, mats and artwork.</li>
+<li><strong>Place them on walls</strong> in <strong>3 Elevation</strong>. Pick a wall in the rail, add pieces with <strong>Add &amp; Arrange</strong> (or <strong>Push to Wall</strong> from the dashboard), then drag them into place and dimension them.</li>
+<li><strong>Pin them and build the deck</strong> back in <strong>1 Deck</strong>. Upload the plan from the middle of the floorplan page and place each code from the <strong>Items</strong> tab (skip this if there is no plan), choose a presentation type on the <strong>Project</strong> tab, then check each page on the <strong>Pages</strong> tab.</li>
 <li><strong>Generate the PDF</strong> with <strong>Generate PDF</strong> at the top of Deck Studio. Run <strong>Preflight</strong> first: it lists missing artwork, pins and plan images.</li>
 </ol>The badges on the Elevation and Deck tabs count what is left: pieces that are not on a wall yet, and pieces that are not pinned on the plan.`
             },
@@ -41290,7 +41293,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.56</strong> The client you type when starting a <strong>New project</strong> now goes on the cover in place of CLIENT NAME. The heading is left for you to write.<br><br>
+                body: `<strong>18.57</strong> The view tabs are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>. The units chip is gone from the header (units are in Settings, the gear), and the dashboard layout toggle moved beside <strong>Download Frame PNG</strong>.<br><br>
+<strong>18.56</strong> The client you type when starting a <strong>New project</strong> now goes on the cover in place of CLIENT NAME. The heading is left for you to write.<br><br>
 <strong>18.55</strong> The next-step bar sits at the bottom-centre, where every view has open space, instead of bottom-left over the page rail, the dashboard rows and + Add Wall. Messages stack above it.<br><br>
 <strong>18.54</strong> Small fixes: the header button is <strong>Open Project</strong>, like the start screen. In Layout Guides the EQ tile is captioned <strong>EQ spacing</strong>, and a faded Group, Edge gap or Lines tile says in its tooltip how to make one. The first piece of a project is no longer washed in red on the dashboard. The project code placeholder no longer looks like a real job.<br><br>
 <strong>18.53</strong> Page previews print the page number the PDF will (they printed 1 on every page, or on the Project tab whichever page was last selected). A new project no longer shows <strong>Reset page order (1)</strong>: the starter Moodboard is where the starter deck puts it, and resetting puts a moved Moodboard back there.<br><br>

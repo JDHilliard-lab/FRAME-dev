@@ -167,7 +167,8 @@ check('the view tabs are numbered in the order the work goes', async () => {
     fx.renderTabs();
     const t = tabs();
     const order = t.map((x) => (x.querySelector('.nav-step') || {}).textContent + ' ' + x.getAttribute('data-view'));
-    if (order.join(',') !== '1 dashboard,2 elevation,3 deck') throw new Error('tabs are not numbered 1-2-3 in working order: ' + order.join(', '));
+    // 18.57: Deck is 1 (New project lands on its floorplan Items list).
+    if (order.join(',') !== '1 deck,2 dashboard,3 elevation') throw new Error('tabs are not numbered 1-2-3 in working order: ' + order.join(', '));
 });
 
 check('the Elevation badge counts pieces not on a wall yet', async () => {
@@ -177,7 +178,7 @@ check('the Elevation badge counts pieces not on a wall yet', async () => {
     if (badge('elevation') !== '2') throw new Error('expected 2 unplaced, the badge says ' + JSON.stringify(badge('elevation')));
     const tip = doc.querySelector('.nav-tab[data-view="elevation"]').title;
     if (tip.indexOf('2 pieces are not on a wall yet') < 0) throw new Error('the tooltip does not explain the badge: ' + tip);
-    if (tip.indexOf('Step 2') < 0) throw new Error('the tooltip does not say which step this is');
+    if (tip.indexOf('Step 3') < 0) throw new Error('the tooltip does not say which step this is');
 });
 
 check('a frame switched OFF does not count as placed', async () => {

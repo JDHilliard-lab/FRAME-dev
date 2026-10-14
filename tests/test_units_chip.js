@@ -19,11 +19,12 @@ const path = require('path');
     window.__testResults = [];
     const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     _autosaveToldUser = true;
-    const chip = () => document.getElementById('unitChip').textContent.replace(/\\\\s+/g, '');
+    // 18.57: no header chip any more; this reads the same state the chip used to show.
+    const chip = () => String(dashUnit || 'in').toUpperCase() + (_specDualUnit() ? '+' + _specDualUnit().toUpperCase() : '');
     const proj = (ed, extra) => JSON.stringify(Object.assign({ type: 'master-studio-v6', dashUnit: 'in', elevUnit: 'in', dashProjectData: [], elevations: [], editorial: ed }, extra || {}));
 
-    __check('the header has one units chip and no IN/CM/MM trio', () => {
-      if (!document.getElementById('unitChip')) throw new Error('no chip');
+    __check('the header has no units chip (18.57: units live in Settings) and no IN/CM/MM trio', () => {
+      if (document.getElementById('unitChip')) throw new Error('the units chip is back in the header');
       if (document.getElementById('globalUnitToggle')) throw new Error('the old trio is still in the header');
     });
     __check('EXACT ASK: a NEW project starts at inches + mm, and the chip says so', () => {

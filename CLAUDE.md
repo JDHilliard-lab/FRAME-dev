@@ -1008,8 +1008,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_projectStepCounts`, folds away after steps 1-3; x is session state. A fresh project's
   placeholder `ART.1` counts as step 1 via `_projectIsFresh`.
 - **THE ORDER OF OPERATIONS IS ON THE VIEW TABS** (`_projectStepCounts`, `_projectSteps`,
-  `_navStepBadge`, `_syncNavBadges`, `_scheduleNavBadges`): 1 Frame Dashboard, 2 Elevation
-  (badge: pieces not on a wall), 3 Deck (pieces not pinned, once a plan image exists). The
+  `_navStepBadge`, `_syncNavBadges`, `_scheduleNavBadges`): 1 Deck (since 18.57; a project
+  starts on its floorplan Items list; badge: pieces not pinned, once a plan image exists),
+  2 Frame Dashboard, 3 Elevation (badge: pieces not on a wall). The
   five-step checklist opens Help's Start here, Go buttons via `[data-help-go]`.
   **All derived, never stored**: a piece is `_deckSpecRows()`, on a wall is an ACTIVE frame
   with the row id, pinned is `_fpPins`. Badges update IN PLACE off `scheduleAutosave` (a
@@ -1596,7 +1597,8 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **ONE SECOND UNIT PER PROJECT (18.37).** `editorialContent.specDualUnit` drives spec
   pages AND elevations (`_elevDualUnit()` returns `_specDualUnit()`); the old per-computer
   `elevDualUnit` localStorage switch is gone. `setProjectDualUnit` is the one writer.
-  Units UI is `#unitChip` + `openUnitMenu`, and the Project tab's `#projUnitsHost`; both
+  Units UI is Settings > Units (`openUnitMenu`; the header chip was removed in 18.57) and
+  the Project tab's `#projUnitsHost`; both
   are built by `_unitControlsInto`. New projects get `'mm'` in `_startNewProject` (NOT
   `_editorialDefaults`, or every harness would print dual units); `_editorialFromFile`
   nulls a missing field so an old file keeps none; a file carrying only `elevDualUnit`

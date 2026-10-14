@@ -22,10 +22,14 @@ const path = require('path');
     const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     _autosaveToldUser = true;
     const vis = (id) => !document.getElementById(id).classList.contains('hdr-off');
-    __check('EXACT ASK: the dashboard layout toggle shows only in the Frame Dashboard', () => {
-      switchView('dashboard'); if (!vis('dashViewToggle')) throw new Error('hidden in the dashboard');
-      switchView('elevation'); if (vis('dashViewToggle')) throw new Error('shown in Elevations');
-      switchView('deck'); if (vis('dashViewToggle')) throw new Error('shown in Deck Studio');
+    // 18.57: moved out of the header to sit beside Download Frame PNG, in the dashboard itself.
+    __check('EXACT ASK: the dashboard layout toggle sits beside Download Frame PNG, not in the header', () => {
+      const t = document.getElementById('dashViewToggle');
+      if (!t) throw new Error('toggle missing');
+      if (!t.closest('#view-dashboard')) throw new Error('toggle is not in the Frame Dashboard view');
+      if (t.closest('.header-actions, header') || document.getElementById('helpBtn').parentElement.contains(t)) throw new Error('toggle is still in the header');
+      const prev = t.previousElementSibling;
+      if (!prev || prev.getAttribute('title') !== 'Download Frame PNG') throw new Error('toggle is not next to Download Frame PNG');
     });
     // 18.47: the Dashboard/Elevations-only frame effects button became the Settings gear,
     // shown in EVERY view (frame effects reach spec pages too, so the Deck needs it).
@@ -35,7 +39,7 @@ const path = require('path');
     });
     __check('the theme toggle, help, units, undo and save are in every view', () => {
       switchView('deck');
-      ['helpBtn', 'appSettingsBtn', 'unitChip', 'undoBtn', 'saveProjectBtn', 'saveMenuBtn'].forEach(id => { const e = document.getElementById(id); if (!e || e.classList.contains('hdr-off')) throw new Error(id + ' missing in Deck Studio'); });
+      ['helpBtn', 'appSettingsBtn', 'undoBtn', 'saveProjectBtn', 'saveMenuBtn'].forEach(id => { const e = document.getElementById(id); if (!e || e.classList.contains('hdr-off')) throw new Error(id + ' missing in Deck Studio'); });
     });
     __check('Versions moved into the Save menu, which also offers Save and Save As', () => {
       let opened = 0; openVersionsModal = () => { opened++; };
