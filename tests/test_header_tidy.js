@@ -49,11 +49,20 @@ const path = require('path');
       if (opened !== 1) throw new Error('Versions item does not open Versions');
       if (document.getElementById('saveMenu')) throw new Error('menu stayed open after choosing');
     });
-    __check('Versions and Bulk Images are no longer header buttons; Bulk Images is in the dashboard row', () => {
+    __check('Versions and Bulk Images are no longer header buttons; Bulk Images is in the dashboard Import menu', () => {
       const header = document.getElementById('saveProjectBtn').closest('.save-split').parentElement;
       Array.from(header.querySelectorAll(':scope > button')).forEach(b => { const t = (b.textContent || '').trim(); if (t === 'Versions' || t === 'Bulk Images') throw new Error(t + ' is still in the header'); });
-      const pane = document.querySelector('#view-dashboard .dash-left-pane');
-      if (!Array.from(pane.querySelectorAll('button')).some(b => (b.textContent || '').trim() === 'Bulk Images' && (b.getAttribute('onclick') || '').indexOf('openBulkReplaceModal') >= 0)) throw new Error('Bulk Images is not in the dashboard row');
+      // 18.52: the dashboard row groups it under Import (openDashMenu).
+      const imp = document.querySelector('#view-dashboard .dash-left-pane #dashImportMenuBtn');
+      if (!imp) throw new Error('no Import menu in the dashboard row');
+      let called = 0; const real = window.openBulkReplaceModal; window.openBulkReplaceModal = () => { called++; };
+      try {
+        openDashMenu(imp, 'import');
+        const it = Array.from(document.querySelectorAll('.frame-menu button')).find(x => (x.textContent || '').indexOf('Bulk Images') === 0);
+        if (!it) throw new Error('Bulk Images is not in the dashboard Import menu');
+        it.click();
+      } finally { window.openBulkReplaceModal = real; }
+      if (called !== 1) throw new Error('Bulk Images item does not open Bulk Images');
     });
   `;
   try { window.eval(src + '\n' + testBlock); }

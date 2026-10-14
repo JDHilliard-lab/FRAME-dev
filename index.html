@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.51">
+    <link rel="stylesheet" href="style.css?v=18.52">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -140,38 +140,19 @@
                         <div><label>Delivery</label><input type="text" id="g_delivery" value="TBD"></div>
                     </div>
                     <div class="pane-header" style="border-top: 1px solid var(--border-color); border-bottom: none; padding: 6px 20px;">
+                        <!-- 18.52: THREE BUTTONS AND THREE MENUS. Thirteen equal-weight buttons in two rows
+                             made the one you use most (+ Add Item) look like everything else. The rarer jobs
+                             are grouped by what they do (openDashMenu): Edit, Import, Export. -->
                         <div style="display:flex; align-items:center; gap:5px;">
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="addDashRow()">+ Add Item</button>
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="duplicateDashRow()">Duplicate Item</button>
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="deleteDashRow()">- Delete Item</button>
-                            <!-- Move To: opens a modal where the user selects a target
-                                 ITEM CODE and Above/Below. Moves the currently-selected
-                                 row(s) — including multi-selection — to that position.
-                                 Useful when the table is too long to drag rows around
-                                 conveniently. -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMoveToModal()">Move To…</button>
-                            <!-- Codes: the floorplan Items list runs every item code (17.95). -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="_jumpToCodes()" title="Open the floorplan Items list, where every code is added, renamed and dragged into order. The number sets the order everywhere.">Codes</button>
-                            <!-- Bulk Edit: change one field on all selected rows at once.
-                                 Single-field-per-run keeps the UI simple. -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkEditModal()">Bulk Edit…</button>
-                            <!-- Duplicate as Series: from one source row, create N copies
-                                 with sequential IDs (e.g., ART.001 → ART.002…ART.012). -->
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openDuplicateSeriesModal()">Duplicate as Series…</button>
+                            <button class="action-btn" id="dashAddBtn" style="width:auto; padding:0 12px;" onclick="addDashRow()">+ Add Item</button>
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="duplicateDashRow()" title="Duplicate the selected piece">Duplicate</button>
+                            <button class="action-btn btn-secondary" style="width:auto;" onclick="deleteDashRow()" title="Delete the selected piece(s)">Delete</button>
+                            <button class="action-btn btn-secondary dash-menu-btn" id="dashEditMenuBtn" style="width:auto; display:flex; align-items:center;" aria-haspopup="menu" onclick="openDashMenu(this, 'edit')" title="Move To, Bulk Edit, Duplicate as Series, item codes">Edit<svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                         </div>
                         <div style="display:flex; gap:5px; align-items: center;">
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="document.getElementById('csvImport').click()">Import CSV</button>
                             <input type="file" id="csvImport" accept=".csv" style="display:none;" onchange="importDashCSV(event)">
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="exportDashCSV()">Export Database</button>
-                            <button class="action-btn btn-secondary" style="width:auto;" onclick="openBulkReplaceModal()" title="Replace artwork across many pieces at once, matched by image code, item code or file name">Bulk Images</button>
-                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Batch Download All Frames as PNG" onclick="batchDownloadAllFrames()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 2v10M7 7l5 5 5-5M4 14v5a1 1 0 001 1h14a1 1 0 001-1v-5M3 14h18"/></svg>
-                                <span style="font-size:var(--fs-65); margin-left:3px;">Batch PNGs</span>
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:auto; padding:0 8px;" title="Download the InDesign script (AutoFrameSpecs.jsx) for generating spec sheets" onclick="downloadInDesignScript()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M10 13l2 2 2-2M12 11v6"/></svg>
-                                <span style="font-size:var(--fs-65); margin-left:3px;">InDesign Script</span>
-                            </button>
+                            <button class="action-btn btn-secondary dash-menu-btn" id="dashImportMenuBtn" style="width:auto; display:flex; align-items:center;" aria-haspopup="menu" onclick="openDashMenu(this, 'import')" title="Import CSV, Bulk Images">Import<svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
+                            <button class="action-btn btn-secondary dash-menu-btn" id="dashExportMenuBtn" style="width:auto; display:flex; align-items:center;" aria-haspopup="menu" onclick="openDashMenu(this, 'export')" title="Export Database, Batch PNGs, InDesign Script">Export<svg class="svg-icon" viewBox="0 0 24 24" style="width:9px; height:9px; margin-left:4px;"><polyline points="6 9 12 15 18 9"></polyline></svg></button>
                         </div>
                     </div>
                 </div>
@@ -2250,9 +2231,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.51';</script>
-<script src="templates.js?v=18.51"></script>
-<script src="app.js?v=18.51"></script>
+<script>window.FRAME_HTML_VERSION = '18.52';</script>
+<script src="templates.js?v=18.52"></script>
+<script src="app.js?v=18.52"></script>
 
 </body>
 </html>

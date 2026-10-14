@@ -1587,7 +1587,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `data-views="dashboard elevation"` is hidden elsewhere by `_syncHeaderForView()` (called
   from `renderNavTabs`) via the `.hdr-off` class, never `style.display`, because those
   buttons set `display:flex` inline. Save Project is a split button; `openSaveMenu` holds
-  Save / Save As / Versions. Bulk Images lives in the Dashboard row by Import CSV.
+  Save / Save As / Versions. Deck Studio has NO save of its own (18.50; it once had a
+  fake one that only pushed history).
+- **THE DASHBOARD TOOLBAR IS THREE BUTTONS AND THREE MENUS (18.52, `openDashMenu`).**
+  + Add Item (primary), Duplicate, Delete, then Edit / Import / Export menus on the shared
+  `_frameMenu`. Menu labels keep the old button wording (Help names them). A new dashboard
+  action goes in a menu, not a new button; `test_dash_toolbar_menus` pins six controls.
 - **ONE SECOND UNIT PER PROJECT (18.37).** `editorialContent.specDualUnit` drives spec
   pages AND elevations (`_elevDualUnit()` returns `_specDualUnit()`); the old per-computer
   `elevDualUnit` localStorage switch is gone. `setProjectDualUnit` is the one writer.
