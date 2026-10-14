@@ -1183,6 +1183,8 @@ select.no-arrow::-ms-expand { display: none; }
     pointer-events: none;
     max-width: min(520px, 92vw);
 }
+/* Above the next-step bar, which shares the bottom-centre (18.55). */
+body:has(> #nextStep) .frame-toast-host { bottom: 64px; }
 .frame-toast {
     pointer-events: auto;
     display: flex; align-items: baseline; gap: 8px;
@@ -2526,9 +2528,12 @@ button.cat-node:hover { border-color: var(--ui-active); }
     .ss-logo .fl-mark, .ss-logo .fl-l, .ss-tag, .ss-body, .ss-ver { animation: none; opacity: 1; transform: none; }
 }
 
-/* NEXT STEP (18.10): one line, bottom-left, the one thing this project needs next.
-   Below every dialog layer, and left of the toasts, which sit bottom-centre. */
-.next-step { position: fixed; left: 14px; bottom: 14px; z-index: 9000; display: flex; align-items: center; gap: 8px; max-width: min(520px, 60vw);
+/* NEXT STEP (18.10): one line, the one thing this project needs next. Below every dialog
+   layer. BOTTOM-CENTRE since 18.55: bottom-left sat on the controls every view keeps
+   there (the deck rail, the dashboard rows, + Add Wall in Elevations), while the centre
+   bottom is open in all three (under the page, the preview, the wall). The toasts share
+   that spot, so while the bar is up they stack above it. */
+.next-step { position: fixed; left: 50%; transform: translateX(-50%); bottom: 14px; z-index: 9000; display: flex; align-items: center; gap: 8px; max-width: min(520px, 60vw);
     padding: 6px 6px 6px 12px; background: var(--bg-panel); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-8);
     box-shadow: 0 6px 22px rgba(0,0,0,0.28); font-size: var(--fs-70); }
 .next-step .ns-n { flex: none; font-size: var(--fs-55); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ui-active); font-weight: 700; }
