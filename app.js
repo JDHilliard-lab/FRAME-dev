@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.58';
+const APP_VERSION = '18.59';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -31016,91 +31016,81 @@ function _dsRenderTools() {
                 head.appendChild(wrap);
             }
         } else {
-            // Apply-scope buttons. All of these APPLY THE CURRENTLY RESOLVED
-            // template (the one highlighted below) to a chosen scope, then force
-            // an immediate rebuild of that scope's thumbnails + the center
-            // preview — no more "nothing happened" after clicking Apply.
-            const armedKey = (_dsSpecTplSel && _dsSpecTplSel.ovKey === ovKey) ? _dsSpecTplSel.key : null;
-            const chosenKey = armedKey || resolved;
-            const applyScoped = (setKeys) => {
-                setKeys.forEach(k => { if (chosenKey === globalTpl) delete overrides[k]; else overrides[k] = chosenKey; });
-                if (chosenKey === 'custom') _dsSeedCustom(desc);
-                _dsSpecTplSel = null;
-                if (typeof pushHistory === 'function') pushHistory();
-                if (typeof scheduleAutosave === 'function') scheduleAutosave();
-                _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
-            };
-            const btnRow = document.createElement('div');
-            btnRow.style.cssText = 'display:flex; flex-wrap:wrap; gap:4px; margin-bottom:4px;';
-            const mkBtn = (label, primary, on) => { const b = document.createElement('button'); b.textContent = label; b.style.cssText = 'flex:1 1 auto; min-width:96px; font-size:var(--fs-60); font-weight:600; padding:4px 3px; border-radius:var(--r-4); cursor:pointer; border:1px solid ' + (primary ? 'var(--ui-active)' : 'var(--border-color)') + '; background:' + (primary ? 'var(--ui-active)' : 'transparent') + '; color:' + (primary ? '#fff' : 'var(--text-main)') + ';'; b.onclick = on; return b; };
-            const curLabel = armedKey ? ('Apply \u201c' + (SPEC_TEMPLATES[armedKey].label || armedKey) + '\u201d to this page') : 'Apply to current page';
-            btnRow.appendChild(mkBtn(curLabel, true, () => applyScoped([ovKey])));
-            btnRow.appendChild(mkBtn('Apply to all pages', false, () => {
-                editorialContent.specTemplate = chosenKey; editorialContent.specTemplateOverrides = {};
-                _dsSpecTplSel = null;
-                if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave();
-                _dsThumbCache = {}; _dsRefresh(); _dsBuildAllThumbs(); _dsRenderCenter();
-            }));
-            // Apply to this elevation/salon-hang group only — every item code
-            // that shares this piece's wall group, not the whole deck.
-            const grp = (typeof _fpGroups === 'function') ? _fpGroups().find(g => (g.ids || []).indexOf(ovKey) >= 0) : null;
-            if (grp && grp.ids && grp.ids.length > 1) {
-                btnRow.appendChild(mkBtn('Apply to this elevation (' + grp.ids.length + ' items)', false, () => applyScoped(grp.ids)));
+            // ONE LINE, AND ONLY WHEN THERE IS SOMETHING TO SAY (18.59). Four "Apply to..."
+            // buttons and a checklist sat here, built for the layout cards removed in 18.31:
+            // they copied the card you had ARMED to a scope. With no cards nothing arms, so on
+            // an ordinary page they copied the deck layout onto itself. A page carries its OWN
+            // layout only from an older project; then this line says so and offers Reset and
+            // Copy to (all pages / this elevation / chosen items, through _frameMenu).
+            if (hasOverride) {
+                const ownKey = overrides[ovKey];
+                const ownName = (SPEC_TEMPLATES[ownKey] && SPEC_TEMPLATES[ownKey].label) || ownKey;
+                const afterChange = (all) => {
+                    if (typeof pushHistory === 'function') pushHistory();
+                    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+                    _dsThumbCache = {}; _dsRefresh();
+                    if (all) _dsBuildAllThumbs(); else _dsPriorityRerender(desc);
+                    _dsRenderCenter();
+                };
+                const copyTo = (keys) => {
+                    keys.forEach(k => { if (ownKey === globalTpl) delete overrides[k]; else overrides[k] = ownKey; });
+                    if (ownKey === 'custom') _dsSeedCustom(desc);
+                    afterChange(false);
+                };
+                const own = document.createElement('div');
+                own.className = 'ds-own-layout';
+                own.style.cssText = 'display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:6px;';
+                const msg = document.createElement('span');
+                msg.style.cssText = 'flex:1 1 140px; min-width:0; font-size:var(--fs-60); color:var(--text-muted); line-height:1.3;';
+                msg.textContent = 'This page has its own layout: ' + ownName + '.';
+                own.appendChild(msg);
+                const mk = (label, title, on) => {
+                    const b = document.createElement('button'); b.type = 'button';
+                    b.className = 'action-btn btn-secondary'; b.textContent = label; b.title = title;
+                    b.style.cssText = 'width:auto; flex:0 0 auto; height:22px; padding:0 8px; font-size:var(--fs-60);';
+                    b.onclick = on; return b;
+                };
+                own.appendChild(mk('Reset this page', 'Use the deck layout on this page again', () => { delete overrides[ovKey]; afterChange(false); }));
+                // Choose items: the checklist, shown from the Copy to menu.
+                const pick = document.createElement('div');
+                pick.className = 'ds-own-pick';
+                pick.style.cssText = 'display:none; border:1px solid var(--border-color); border-radius:var(--r-4); padding:6px; margin-bottom:6px;';
+                const checks = [];
+                const list = document.createElement('div');
+                list.style.cssText = 'max-height:30vh; overflow-y:auto; margin-bottom:6px;';
+                _dsPages.forEach(d => {
+                    if (d.kind !== 'spec' || d._install) return;
+                    const k = d._ovKey || (d.row && d.row.id) || '';
+                    if (!k || k === ovKey) return;
+                    const row = document.createElement('label');
+                    row.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:var(--fs-60); color:var(--text-main); cursor:pointer; margin-bottom:2px;';
+                    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = k;
+                    checks.push(cb); row.appendChild(cb);
+                    row.appendChild(document.createTextNode(k + ((d.row && d.row.location) ? (' — ' + d.row.location) : '')));
+                    list.appendChild(row);
+                });
+                pick.appendChild(list);
+                const pickGo = mk('Copy to ticked items', '', () => {
+                    const keys = checks.filter(c => c.checked).map(c => c.value);
+                    if (!keys.length) { _toast('Nothing ticked', 'Tick at least one item code first.'); return; }
+                    copyTo(keys);
+                });
+                pickGo.style.width = '100%';
+                pick.appendChild(pickGo);
+                const grp = (typeof _fpGroups === 'function') ? _fpGroups().find(g => (g.ids || []).indexOf(ovKey) >= 0) : null;
+                const copyBtn = mk('Copy to…', 'Use this page’s layout on other pages', () => {
+                    const items = [{ label: 'All pages', hint: 'becomes the deck layout', onClick: () => {
+                        editorialContent.specTemplate = ownKey; editorialContent.specTemplateOverrides = {}; afterChange(true);
+                    } }];
+                    if (grp && grp.ids && grp.ids.length > 1) items.push({ label: 'This elevation', hint: grp.ids.length + ' items', onClick: () => copyTo(grp.ids) });
+                    items.push({ label: 'Choose items…', hint: 'tick the codes', onClick: () => { pick.style.display = 'block'; } });
+                    _frameMenu(copyBtn, items);
+                });
+                copyBtn.setAttribute('aria-haspopup', 'menu');
+                own.appendChild(copyBtn);
+                head.appendChild(own);
+                head.appendChild(pick);
             }
-            if (hasOverride) btnRow.appendChild(mkBtn('Reset this page', false, () => { delete overrides[ovKey]; if (typeof pushHistory === 'function') pushHistory(); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter(); }));
-            head.appendChild(btnRow);
-            // Bulk apply: pick item codes from a checklist, then apply the
-            // chosen template to all of them at once.
-            const bulkBtn = document.createElement('button'); bulkBtn.textContent = 'Apply to selected items\u2026'; bulkBtn.className = 'action-btn btn-secondary';
-            bulkBtn.style.cssText = 'width:100%; height:22px; font-size:var(--fs-60); margin-bottom:5px;';
-            head.appendChild(bulkBtn);
-            const bulkWrap = document.createElement('div');
-            bulkWrap.style.cssText = 'display:none; border:1px solid var(--border-color); border-radius:var(--r-4); padding:6px; margin-bottom:6px;';
-            const bulkTop = document.createElement('div'); bulkTop.style.cssText = 'display:flex; gap:4px; margin-bottom:5px;';
-            const selAll = document.createElement('button'); selAll.textContent = 'All'; selAll.className = 'action-btn btn-secondary'; selAll.style.cssText = 'flex:1; height:18px; font-size:var(--fs-55);';
-            const selNone = document.createElement('button'); selNone.textContent = 'None'; selNone.className = 'action-btn btn-secondary'; selNone.style.cssText = 'flex:1; height:18px; font-size:var(--fs-55);';
-            bulkTop.appendChild(selAll); bulkTop.appendChild(selNone); bulkWrap.appendChild(bulkTop);
-            const bulkList = document.createElement('div');
-            bulkList.style.cssText = 'max-height:30vh; overflow-y:auto; margin-bottom:6px;';
-            const bulkChecks = [];
-            _dsPages.forEach(d => {
-                if (d.kind !== 'spec' || d._install) return;
-                const k = d._ovKey || (d.row && d.row.id) || '';
-                if (!k) return;
-                const row = document.createElement('label');
-                row.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:var(--fs-60); color:var(--text-main); cursor:pointer; margin-bottom:2px;';
-                const cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = k;
-                bulkChecks.push(cb);
-                row.appendChild(cb);
-                const loc = (d.row && d.row.location) ? (' \u2014 ' + d.row.location) : '';
-                row.appendChild(document.createTextNode(k + loc));
-                bulkList.appendChild(row);
-            });
-            bulkWrap.appendChild(bulkList);
-            selAll.onclick = () => bulkChecks.forEach(c => { c.checked = true; });
-            selNone.onclick = () => bulkChecks.forEach(c => { c.checked = false; });
-            const bulkApply = document.createElement('button'); bulkApply.className = 'action-btn btn-primary';
-            bulkApply.textContent = 'Apply template to selected'; bulkApply.style.cssText = 'width:100%; height:22px; font-size:var(--fs-60);';
-            bulkApply.onclick = () => {
-                const keys = bulkChecks.filter(c => c.checked).map(c => c.value);
-                if (!keys.length) { _toast('Nothing selected', 'Tick at least one item code first.'); return; }
-                // Read the armed template NOW (the panel may have rendered
-                // before the user picked one from the template grid).
-                const ck = _dsSpecTplSel || chosenKey;
-                keys.forEach(k => { if (ck === globalTpl) delete overrides[k]; else overrides[k] = ck; });
-                if (ck === 'custom') _dsSeedCustom(desc);
-                _dsSpecTplSel = null;
-                if (typeof pushHistory === 'function') pushHistory();
-                if (typeof scheduleAutosave === 'function') scheduleAutosave();
-                _dsThumbCache = {}; _dsRefresh(); _dsPriorityRerender(desc); _dsRenderCenter();
-            };
-            bulkWrap.appendChild(bulkApply);
-            head.appendChild(bulkWrap);
-            bulkBtn.onclick = () => { bulkWrap.style.display = bulkWrap.style.display === 'none' ? 'block' : 'none'; };
-            const sub = document.createElement('p');
-            sub.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin:0 0 4px; line-height:1.3;';
-            sub.innerHTML = hasOverride ? 'Overrides the deck default.' : 'Tick what prints below. Apply moves the whole layout.';
-            head.appendChild(sub);
             // — Elevation breaker toggle (deck-wide; applies to every wall group) —
             _dsBreakerToggleInto(head, false);
             // Print output sits ABOVE dual units: it is the one on this list that can be
@@ -41293,7 +41283,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.58</strong> A dimension number that sits beside a tight line (between two frames) now stays on its side while you drag the line, so you can push it clear of the frames. It used to jump across onto the neighbouring frame. <strong>Reset dimension positions</strong> puts it back to automatic.<br><br>
+                body: `<strong>18.59</strong> On a spec page, the four <strong>Apply to…</strong> buttons are gone. They were left over from the old layout cards and, on an ordinary page, did nothing. A page that has its own layout (from an older project) shows one line saying so, with <strong>Reset this page</strong> and <strong>Copy to…</strong> (all pages, this elevation, or items you tick).<br><br>
+<strong>18.58</strong> A dimension number that sits beside a tight line (between two frames) now stays on its side while you drag the line, so you can push it clear of the frames. It used to jump across onto the neighbouring frame. <strong>Reset dimension positions</strong> puts it back to automatic.<br><br>
 <strong>18.57</strong> The view tabs are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>. The units chip is gone from the header (units are in Settings, the gear), and the dashboard layout toggle moved beside <strong>Download Frame PNG</strong>.<br><br>
 <strong>18.56</strong> The client you type when starting a <strong>New project</strong> now goes on the cover in place of CLIENT NAME. The heading is left for you to write.<br><br>
 <strong>18.55</strong> The next-step bar sits at the bottom-centre, where every view has open space, instead of bottom-left over the page rail, the dashboard rows and + Add Wall. Messages stack above it.<br><br>
