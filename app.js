@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.53';
+const APP_VERSION = '18.54';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -1646,7 +1646,9 @@ function _artGroupKey(code) {
 // placements, so a category colour would paint most neighbouring placements alike.
 // Mid-saturation hues that read on the dark and the light theme alike; neighbours in
 // the list are far apart on the wheel so two adjacent placements never look the same.
-const PLACEMENT_COLORS = ['#e4572e', '#2a9d8f', '#e9c46a', '#7b6ef6', '#43aa8b', '#d6457a', '#4a90d9', '#c08552', '#90be6d', '#b56576'];
+// The red-orange is NOT first (18.54): the first piece of every project is selected on
+// open, and a red wash at selection strength read as an error row.
+const PLACEMENT_COLORS = ['#2a9d8f', '#e9c46a', '#7b6ef6', '#e4572e', '#43aa8b', '#d6457a', '#4a90d9', '#c08552', '#90be6d', '#b56576'];
 function _placementColorMap(rows) {
     const out = {};
     let n = 0;
@@ -5759,6 +5761,16 @@ function anyEdgeGapActive() {
     });
 }
 
+// A guide that has nothing on this wall to show is faded (18.54). Faded alone read as
+// "broken" or "off", so the tooltip now says WHY and how to make one, and the tile is
+// marked aria-disabled. The base tooltip is kept on the element so it is never stacked.
+function _lgAvail(btn, exists, how) {
+    if (!btn) return;
+    if (btn.dataset.baseTitle == null) btn.dataset.baseTitle = btn.title || '';
+    btn.style.opacity = exists ? '1' : '0.4';
+    if (exists) { btn.removeAttribute('aria-disabled'); btn.title = btn.dataset.baseTitle; }
+    else { btn.setAttribute('aria-disabled', 'true'); btn.title = btn.dataset.baseTitle + '\n\nNothing on this wall yet: ' + how; }
+}
 // Sync the two Layout Guides toggle buttons' blue (active) state:
 //   - Group Box button: blue when a group dim exists AND it's visible
 //   - Edge Gap button: blue when any edge gap is active AND visible
@@ -5768,13 +5780,13 @@ function syncLayoutGuideButtonStates() {
     if (gbBtn) {
         const exists = anyGroupDimExists();
         gbBtn.classList.toggle('active', exists && dimVisibility.groupBox);
-        gbBtn.style.opacity = exists ? '1' : '0.4'; // dim when nothing to toggle
+        _lgAvail(gbBtn, exists, 'select two or more frames and press the group dimension button in Add & Arrange (Art tab).');
     }
     const egBtn = document.getElementById('edgeGapToggle');
     if (egBtn) {
         const exists = anyEdgeGapActive();
         egBtn.classList.toggle('active', exists && dimVisibility.edgeGap);
-        egBtn.style.opacity = exists ? '1' : '0.4';
+        _lgAvail(egBtn, exists, 'click a frame\'s Edge button in the frame list (Art tab).');
     }
     // Wall dims: always available (not conditional on existence). Keep the
     // arch-dim-layer display + button blue state in sync with the flag.
@@ -5793,7 +5805,7 @@ function syncLayoutGuideButtonStates() {
     if (clBtn) {
         const exists = (typeof getElevCustomLines === 'function') && getElevCustomLines().length > 0;
         clBtn.classList.toggle('active', exists && dimVisibility.customLines);
-        clBtn.style.opacity = exists ? '1' : '0.4';
+        _lgAvail(clBtn, exists, 'press M on the wall to draw a measurement line.');
     }
     // Image-code caption toggle: active when the flag is on.
     const icBtn = document.getElementById('imageCodeToggle');
@@ -41098,11 +41110,11 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: 'Saving your work',
-                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Load Project</strong> opens the file and FRAME remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>FRAME also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> (in the menu beside Save) keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.`
+                body: `A project is one <strong>.json</strong> file carrying every piece, wall, page and setting.<br><br>In <strong>Chrome and Edge</strong>, <strong>Open Project</strong> opens the file and FRAME remembers it, so <strong>Save Project</strong> (<span class="help-kbd">Ctrl+S</span>) writes straight back to that same file. The first save of a new project asks where to put it. <span class="help-kbd">Ctrl+Shift+S</span> saves a copy somewhere else and switches to it. The file you are working on is named in the browser tab.<br><br>In <strong>Firefox and Safari</strong>, and on a page opened straight from disk, Save downloads a new .json each time, so watch which copy is current.<br><br>FRAME also autosaves to your browser as you work. If a tab crashes or closes you are offered the work back when you return. If the unsaved dot beside Save turns <strong>red</strong>, autosave has stopped: save to a file.<br><br><strong>Versions</strong> (in the menu beside Save) keeps named snapshots in this browser (for example "V1 sent to client") that you can compare and restore.`
             },
             {
                 title: 'Undo',
-                body: `The two arrow buttons beside Load Project undo and redo, as do <span class="help-kbd">Ctrl+Z</span> and <span class="help-kbd">Ctrl+Shift+Z</span>. Undo covers the whole project, so after each one a notice says what changed back: which wall, which piece, or the deck. Most deletes can be undone, and their confirmation says so; the few that cannot (a saved version, for example) say that instead. Undo is paused while a dialog is open, so it cannot change what the dialog is editing.`
+                body: `The two arrow buttons beside Open Project undo and redo, as do <span class="help-kbd">Ctrl+Z</span> and <span class="help-kbd">Ctrl+Shift+Z</span>. Undo covers the whole project, so after each one a notice says what changed back: which wall, which piece, or the deck. Most deletes can be undone, and their confirmation says so; the few that cannot (a saved version, for example) say that instead. Undo is paused while a dialog is open, so it cannot change what the dialog is editing.`
             },
             {
                 title: 'Project units',
@@ -41268,7 +41280,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.53</strong> Page previews print the page number the PDF will (they printed 1 on every page, or on the Project tab whichever page was last selected). A new project no longer shows <strong>Reset page order (1)</strong>: the starter Moodboard is where the starter deck puts it, and resetting puts a moved Moodboard back there.<br><br>
+                body: `<strong>18.54</strong> Small fixes: the header button is <strong>Open Project</strong>, like the start screen. In Layout Guides the EQ tile is captioned <strong>EQ spacing</strong>, and a faded Group, Edge gap or Lines tile says in its tooltip how to make one. The first piece of a project is no longer washed in red on the dashboard. The project code placeholder no longer looks like a real job.<br><br>
+<strong>18.53</strong> Page previews print the page number the PDF will (they printed 1 on every page, or on the Project tab whichever page was last selected). A new project no longer shows <strong>Reset page order (1)</strong>: the starter Moodboard is where the starter deck puts it, and resetting puts a moved Moodboard back there.<br><br>
 <strong>18.52</strong> The Frame Dashboard toolbar is one row: <strong>+ Add Item</strong>, Duplicate, Delete and an <strong>Edit</strong> menu (Move To, Bulk Edit, Duplicate as Series, Item codes), then <strong>Import</strong> (Import CSV, Bulk Images) and <strong>Export</strong> (Export Database, Batch PNGs, InDesign Script). Nothing was removed, only grouped.<br><br>
 <strong>18.51</strong> In Elevations, <strong>Layout Guides</strong> has its own <strong>Guides</strong> tab beside Art, Context and Glass, and the tabs sit right under the wall size. The frame list starts near the top of the panel instead of below the fold.<br><br>
 <strong>18.50</strong> Deck Studio no longer has its own <strong>Save</strong> button. It never saved the file (it only marked an undo step), which next to <strong>Save Project</strong> looked like your work was on disk when it was not. <strong>Save Project</strong> in the header is the one save, in every view.<br><br>

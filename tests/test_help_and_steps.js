@@ -98,7 +98,7 @@ check('every control Help names by its label exists in the app', async () => {
         'Run Preflight', 'Bulk Edit', 'Apply to Selected', '+ Add client elevation', 'Calibrate', 'Un-stretch',
         'Fill wall', 'Floorplan order', 'Include pages', 'SHOW ON PAGE', 'Frame corner', 'Moulding profile',
         'Unplaced', 'InDesign Script', 'Final Spec', 'Art Development', 'Install Guide', 'Catalogue', 'Wireframe',
-        'Concept', 'Draft', 'Standard', 'Print', 'Copy details', 'Versions', 'Bulk Images', 'Save Project', 'Load Project'];
+        'Concept', 'Draft', 'Standard', 'Print', 'Copy details', 'Versions', 'Bulk Images', 'Save Project', 'Open Project'];
     const missing = named.filter((n) => ui.indexOf(n) < 0 && ui.indexOf(n.replace('&amp;', '&')) < 0);
     if (missing.length) throw new Error('Help names controls the UI does not have: ' + missing.join(', '));
     const t = helpText();

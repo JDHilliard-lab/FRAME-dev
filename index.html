@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.53">
+    <link rel="stylesheet" href="style.css?v=18.54">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -109,7 +109,7 @@
                  It falls back to clicking the hidden input below, which is what every
                  browser without that API still uses. It also asks before discarding
                  unsaved work, which loading never used to do. -->
-            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMasterProject()" title="Open a FRAME project (.json)">Load Project</button>
+            <button class="action-btn btn-secondary" style="width:auto;" onclick="openMasterProject()" title="Open a FRAME project (.json)">Open Project</button>
             <input type="file" id="masterLoad" accept=".json" style="display:none;" onchange="loadMasterProject(event)">
             <!-- 18.36: Versions lives in the Save menu (it is about saving), Bulk Images in the
                  Frame Dashboard's own row (it relinks artwork onto pieces). -->
@@ -847,7 +847,7 @@
                             </button>
                             <button class="layout-guide-btn toggle-status" id="spacingEQToggle" title="EQ — print EQ instead of the measurement on spacing and edge-gap dimensions (the drafting convention for equally spaced). Applies to every spacing dim on the wall." onclick="toggleSpacingEQ(this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><text x="12" y="16.5" text-anchor="middle" font-size="12" font-weight="700" letter-spacing="0.5" fill="currentColor" stroke="none">EQ</text></svg>
-                                <span class="lg-cap">EQ</span>
+                                <span class="lg-cap">EQ spacing</span>
                             </button>
                         </div>
                         </details>
@@ -1441,7 +1441,7 @@
         <div style="display:flex; gap:10px; margin-bottom:16px;">
             <div style="flex:2;">
                 <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Project Code</label>
-                <input type="text" id="specPdfCode" placeholder="MARN-CAESARS-PALACE-HIGH-LIMIT" style="width:100%; font-family:monospace; font-size:var(--fs-80); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
+                <input type="text" id="specPdfCode" placeholder="e.g. CLIENT-PROJECT-AREA" style="width:100%; font-family:monospace; font-size:var(--fs-80); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
             </div>
             <div style="flex:0 0 56px;">
                 <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Version</label>
@@ -1450,7 +1450,7 @@
         </div>
         <div style="margin-bottom:18px;">
             <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Location</label>
-            <input type="text" id="specPdfLocation" list="specPdfLocationList" placeholder="Las Vegas, NV" style="width:100%; font-size:var(--fs-85); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
+            <input type="text" id="specPdfLocation" list="specPdfLocationList" placeholder="City, State" style="width:100%; font-size:var(--fs-85); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
             <datalist id="specPdfLocationList"></datalist>
         </div>
 
@@ -2231,9 +2231,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.53';</script>
-<script src="templates.js?v=18.53"></script>
-<script src="app.js?v=18.53"></script>
+<script>window.FRAME_HTML_VERSION = '18.54';</script>
+<script src="templates.js?v=18.54"></script>
+<script src="app.js?v=18.54"></script>
 
 </body>
 </html>
