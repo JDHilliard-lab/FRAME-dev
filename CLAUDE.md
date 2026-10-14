@@ -614,6 +614,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   (`specPagesFor`). Per page is DERIVED (`_catSheetLayout`: one scale, `CAT_SHEET_MIN_PT` on
   sqrt(area), even split), never a setting. Multi-piece placements keep the drawing overview.
   A single-piece mockup mints `ART.1.1`, not `ART.1.1A` (`_slotL` in `_catAddOption`).
+  Its SHOW ON PAGE ticks are a THIRD map (`catSheetSlots` / `catSheetSlotOverrides`,
+  `_catSheetSlots`, default plan + elevation OFF), keyed per placement (`_catOverviewKey(place)`)
+  so a split agrees; panel is `_dsSpecSlotsInto(..., 'sheet')`. `catov` is thumbnail-drawable.
 - **CATALOGUE: PLAN PINS.** The primary's slot row is pinned once and every arrangement and
   option row mirrors it through `CAT_ROW_FIELDS` / `CAT_ROW_DEEP`, including options that
   existed before the pin. Options (`_catOptionRowIds`) and alternate arrangements

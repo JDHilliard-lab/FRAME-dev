@@ -139,6 +139,58 @@ window.__res = (async function () {
     const ps = pageKinds();
     if (!ps.length || ps[0].kind !== 'catov' || ps.some(function (d) { return d.kind === 'spec'; })) throw new Error('pages: ' + ps.map(function (d) { return d.kind; }).join());
   });
+  // SHOW ON PAGE (18.64): "have an option for the all options to be able to include planview
+  // and elevation and frame swatch and profile similar to the per piece option, but have a
+  // check box system like the group A/B/C so designers can decide what to include."
+  const count = function (t, s) { return t.filter(function (x) { return x === s; }).length; };
+  await check('EXACT ASK: by default the sheet shows the moulding strip and no plan or elevation', async function () {
+    build(3, 24, 32);
+    const t = texts(await draw(0));
+    if (count(t, 'MICH 240-32') !== 2) throw new Error('expected the Frame Code line plus the strip caption: ' + count(t, 'MICH 240-32'));
+    if (t.indexOf('Floorplan') >= 0 || t.indexOf('Elevation') >= 0) throw new Error('plan or elevation printed by default');
+  });
+  await check('EXACT ASK: ticking Floorplan and Elevation puts both on the sheet; unticking Frame corner and Profile drops the strip', async function () {
+    build(3, 24, 32);
+    _setCatSheetSlot(null, 'plan', true); _setCatSheetSlot(null, 'elevation', true);
+    _setCatSheetSlot(null, 'frame', false); _setCatSheetSlot(null, 'profile', false);
+    const t = texts(await draw(0));
+    if (t.indexOf('Floorplan') < 0 || t.indexOf('Elevation') < 0) throw new Error('plan/elevation missing: ' + JSON.stringify(t));
+    if (count(t, 'MICH 240-32') !== 1) throw new Error('the strip still printed');
+    if (t.indexOf('Frame Code') < 0) throw new Error('the specs went with it');
+  });
+  await check('the sheet keeps its OWN tick map: per-piece and group ticks do not move it, and it does not move them', async function () {
+    build(3, 24, 32);
+    const g0 = JSON.stringify(_specGroupSlots(null)), p0 = JSON.stringify(_specSlots(null));
+    _setCatSheetSlot(null, 'plan', true);
+    if (JSON.stringify(_specGroupSlots(null)) !== g0 || JSON.stringify(_specSlots(null)) !== p0) throw new Error('a sheet tick leaked into the spec maps');
+    _setSpecGroupSlot(null, 'elevation', true);
+    if (_catSheetSlots(null).elevation) throw new Error('a group tick reached the sheet');
+  });
+  await check('Just this placement pins every page of a split sheet, and only that placement', async function () {
+    build(5, 24, 32);
+    _setCatSheetSlot(_catOverviewKey('ART.1'), 'plan', true, 'page');
+    for (let p = 0; p < 2; p++) { if (texts(await draw(p)).indexOf('Floorplan') < 0) throw new Error('page ' + (p + 1) + ' lacks the plan'); }
+    if (_catSheetSlots(_catOverviewKey('ART.9')).plan) throw new Error('another placement picked up the exception');
+    _setCatSheetSlot(null, 'plan', false);
+    if (_catSheetSlotOv(_catOverviewKey('ART.1'))) throw new Error('deck-wide did not clear the exception');
+  });
+  await check('the Options panel on a sheet carries the ticks and they write the sheet map', async function () {
+    build(3, 24, 32);
+    const desc = _deckPageList().find(function (d) { return d.kind === 'catov'; });
+    const host = document.createElement('div');
+    _dsOptionsInto(host, desc);
+    const cb = host.querySelector('input[data-slot="elevation"]');
+    if (!cb) throw new Error('no Elevation tick on the options sheet panel');
+    if (host.querySelector('input[data-slot="thumbsLeft"]')) throw new Error('the group layout switch leaked onto the sheet');
+    cb.checked = true; cb.onchange();
+    if (!_catSheetSlots(null).elevation) throw new Error('the tick did not write the sheet map');
+    _setCatSheetSlot(null, 'frame', false);
+    const h2 = document.createElement('div'); _dsOptionsInto(h2, desc);
+    if (h2.querySelector('input[data-slot="frame"]').checked || !h2.querySelector('input[data-slot="elevation"]').checked) throw new Error('the panel does not show the sheet map');
+  });
+  await check('the rail renders the options sheet instead of leaving a text placeholder', async function () {
+    if (!_dsThumbDrawable({ kind: 'catov' })) throw new Error('catov is not thumbnail-drawable');
+  });
   return out;
 })();
 `;
