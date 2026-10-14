@@ -1594,6 +1594,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   buttons set `display:flex` inline. Save Project is a split button; `openSaveMenu` holds
   Save / Save As / Versions. Deck Studio has NO save of its own (18.50; it once had a
   fake one that only pushed history).
+- **DASHBOARD ROWS SHOW AN ARTWORK THUMBNAIL (18.61, `_dashArtThumbHTML`).** Never the full
+  artwork in the table: each source is shrunk once to a 64px JPEG in `_dashThumbCache` (key =
+  length + last 32 chars, bounded at `DASH_THUMB_CACHE_MAX`), and a placeholder swaps in place.
 - **THE DASHBOARD TOOLBAR IS THREE BUTTONS AND THREE MENUS (18.52, `openDashMenu`).**
   + Add Item (primary), Duplicate, Delete, then Edit / Import / Export menus on the shared
   `_frameMenu`. Menu labels keep the old button wording (Help names them). A new dashboard

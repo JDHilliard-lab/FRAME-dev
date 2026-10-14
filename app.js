@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.60';
+const APP_VERSION = '18.61';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -39651,6 +39651,65 @@ function exportDashCSV() {
     a.click();
 }
 
+// ── ARTWORK THUMBNAILS IN THE DASHBOARD TABLE (18.61) ──────────────────────────
+// A 22px picture at the left of each row's Img Code cell, or a dashed empty slot, so
+// "which pieces still have no artwork" is answered by eye. Artwork is often a
+// multi-megabyte data URL and the table re-renders on most edits, so the table NEVER
+// carries the full image: each source is shrunk ONCE to a small JPEG and cached. The key
+// is length + last 32 characters (the _elevArtImgCache rule): the full URL as a key is
+// megabytes of string work, and a row id alone would show the old picture after a swap.
+// A miss draws a placeholder carrying the key; when the shrink lands, every placeholder
+// with that key is swapped in place, with no table re-render (which would drop focus).
+const DASH_THUMB_PX = 64;          // drawn size: 22px CSS at up to ~3x density
+const DASH_THUMB_CACHE_MAX = 400;  // oldest entries drop past this
+const _dashThumbCache = new Map(); // key -> small data URL, or '' while it is being made
+function _dashArtThumbKey(src) {
+    const s = String(src || '');
+    return s ? (s.length + ':' + s.slice(-32)) : '';
+}
+function _dashArtThumbHTML(row) {
+    const src = row && row.artworkUrl;
+    if (!src) return '<span class="dash-art-thumb dash-art-empty" title="No artwork yet"></span>';
+    const key = _dashArtThumbKey(src);
+    const tip = _esc(String((row.imageCode && row.imageCode !== 'TBD') ? row.imageCode : (row.artworkFile || 'Artwork')));
+    const got = _dashThumbCache.get(key);
+    if (got) return '<img class="dash-art-thumb" src="' + got + '" alt="" title="' + tip + '">';
+    _dashArtThumbMake(key, src);
+    return '<span class="dash-art-thumb dash-art-pending" data-art-thumb-key="' + _esc(key) + '" title="' + tip + '"></span>';
+}
+function _dashArtThumbMake(key, src) {
+    if (_dashThumbCache.has(key)) return;           // already made or in flight
+    _dashThumbCache.set(key, '');
+    let img;
+    try { img = new Image(); } catch (e) { return; }
+    img.onload = () => {
+        let out = '';
+        try {
+            const k = DASH_THUMB_PX / Math.max(1, Math.min(img.naturalWidth || img.width, img.naturalHeight || img.height));
+            const w = Math.max(1, Math.round((img.naturalWidth || img.width) * k)), h = Math.max(1, Math.round((img.naturalHeight || img.height) * k));
+            const c = document.createElement('canvas'); c.width = w; c.height = h;
+            const x = c.getContext('2d');
+            x.fillStyle = '#ffffff'; x.fillRect(0, 0, w, h);   // a transparent PNG thumbs onto white, like paper
+            x.drawImage(img, 0, 0, w, h);
+            out = c.toDataURL('image/jpeg', 0.8);
+        } catch (e) { out = (String(src).length < 2048) ? String(src) : ''; }   // a tainted canvas: a short URL can stand in
+        _dashArtThumbDone(key, out);
+    };
+    img.onerror = () => { _dashThumbCache.delete(key); };
+    img.src = src;
+}
+function _dashArtThumbDone(key, url) {
+    if (!url) { _dashThumbCache.delete(key); return; }
+    _dashThumbCache.set(key, url);
+    while (_dashThumbCache.size > DASH_THUMB_CACHE_MAX) _dashThumbCache.delete(_dashThumbCache.keys().next().value);
+    if (typeof document === 'undefined') return;
+    document.querySelectorAll('.dash-art-pending[data-art-thumb-key]').forEach(el => {
+        if (el.getAttribute('data-art-thumb-key') !== key) return;
+        const im = document.createElement('img');
+        im.className = 'dash-art-thumb'; im.src = url; im.alt = ''; im.title = el.title || '';
+        el.replaceWith(im);
+    });
+}
 function renderDashTable() {
     // Safety net: whatever added a row, the table shows it in code order.
     try { _codesSortRows(); } catch (e) {}
@@ -39767,7 +39826,7 @@ function renderDashTable() {
             <td style="font-weight:bold;"><input class="tbl-in" type="text" value="${row.id}" onchange="_codesCommitRowId(${index}, this)" onkeydown="if(event.key==='Enter')this.blur()" ondragstart="event.preventDefault()" title="The number sets the order everywhere. Type a number to move it there." style="width:80px; font-weight:bold;"></td>
             <td><select class="tbl-in no-arrow" onchange="dashHtIn(${index}, 'product', this.value)">${FRAME_PRODUCTS.map(p => `<option ${row.product === p ? 'selected' : ''}>${p}</option>`).join('')}</select></td>
             <td><input class="tbl-in" type="text" value="${row.location}" oninput="dashHtIn(${index}, 'location', this.value, true)" ondragstart="event.preventDefault()" style="width:90px;"></td>
-            <td style="position:relative;">${_dashSame[row.id] ? `<span class="dash-same-img" title="Same image as ${_dashSame[row.id].join(', ')}">x${_dashSame[row.id].length + 1}</span>` : ''}<input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value, true)" ondragstart="event.preventDefault()" style="width:200px;"></td>
+            <td style="position:relative; white-space:nowrap;">${_dashSame[row.id] ? `<span class="dash-same-img" title="Same image as ${_dashSame[row.id].join(', ')}">x${_dashSame[row.id].length + 1}</span>` : ''}${_dashArtThumbHTML(row)}<input class="tbl-in" type="text" value="${row.imageCode}" oninput="dashHtIn(${index}, 'imageCode', this.value, true)" ondragstart="event.preventDefault()" style="width:172px;"></td>
             <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extW)}" oninput="dashHtIn(${index}, 'extW', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
             <td><input class="tbl-in" type="number" step="0.125" value="${dashFmt(row.extH)}" oninput="dashHtIn(${index}, 'extH', this.value, true)" ondragstart="event.preventDefault()" style="width:45px;"></td>
             <td id="calc-openW-${index}" style="padding: 4px 8px; color:var(--accent); font-weight:bold;">${dashFmt(Math.max(0, finalW))}</td><td id="calc-openH-${index}" style="padding: 4px 8px; color:var(--accent); font-weight:bold;">${dashFmt(Math.max(0, finalH))}</td><td id="calc-printW-${index}" style="color:var(--accent); font-weight:bold; padding: 4px 8px;">${imgW}</td><td id="calc-printH-${index}" style="color:var(--accent); font-weight:bold; padding: 4px 8px;">${imgH}</td>
@@ -41331,7 +41390,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>
+                body: `<strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
+<strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>
 <strong>18.59</strong> On a spec page, the four <strong>Apply to…</strong> buttons are gone. They were left over from the old layout cards and, on an ordinary page, did nothing. A page that has its own layout (from an older project) shows one line saying so, with <strong>Reset this page</strong> and <strong>Copy to…</strong> (all pages, this elevation, or items you tick).<br><br>
 <strong>18.58</strong> A dimension number that sits beside a tight line (between two frames) now stays on its side while you drag the line, so you can push it clear of the frames. It used to jump across onto the neighbouring frame. <strong>Reset dimension positions</strong> puts it back to automatic.<br><br>
 <strong>18.57</strong> The view tabs are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>. The units chip is gone from the header (units are in Settings, the gear), and the dashboard layout toggle moved beside <strong>Download Frame PNG</strong>.<br><br>
