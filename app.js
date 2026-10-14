@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.68';
+const APP_VERSION = '18.69';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -28144,6 +28144,33 @@ function _dsSyncBuildBtn() {
     }
 }
 let _dsTlRenderTok = 0;
+// LAST REAL RENDER OF EACH DRAWN PAGE (18.69), shown in the centre while the page redraws, so
+// selecting a card, plan detail or options sheet never flashes the title-only placeholder.
+// Keeps the canvas itself (no encode cost on every re-render); bounded, oldest dropped first.
+const _dsCenterLast = new Map();
+const DS_CENTER_LAST_MAX = 6;
+function _dsCenterLastSet(key, cv) {
+    if (!key || !cv) return;
+    _dsCenterLast.delete(key); _dsCenterLast.set(key, cv);
+    while (_dsCenterLast.size > DS_CENTER_LAST_MAX) _dsCenterLast.delete(_dsCenterLast.keys().next().value);
+}
+// What a drawn page shows while its real render is on the way: its last render, else its
+// rail thumbnail stretched to fill, else null (the caller falls back to the mock).
+function _dsCenterPlaceholder(desc, key) {
+    const last = _dsCenterLast.get(key);
+    if (last) {
+        const c = document.createElement('canvas'); c.width = last.width; c.height = last.height;
+        try { c.getContext('2d').drawImage(last, 0, 0); } catch (e) { return null; }
+        c.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
+        return c;
+    }
+    let url = null;
+    try { url = _dsThumbCache[_dsThumbCacheKey(desc)] || _dsThumbLast[key]; } catch (e) {}
+    if (!url) return null;
+    const img = document.createElement('img'); img.src = url;
+    img.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:fill;';
+    return img;
+}
 // NOTE on rendering into a hidden view: this measures #dsCenter and falls back
 // to a nominal 760x460 when it can't (see below), so calling it while the Deck
 // view is hidden would lay the page out at the wrong size. That's prevented at
@@ -28238,12 +28265,24 @@ function _dsRenderCenter() {
         // as the PDF. No popup needed; controls update this in place.
         const base = document.createElement('div'); base.style.cssText = 'position:absolute; inset:0; background:#fff;';
         try { if (_dsPageThemeCss(_pk)) base.style.background = 'transparent'; } catch (e) {}
-        try { base.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); } catch (e) {}
+        // The page's last real render (or its thumbnail) holds the space while it redraws; the
+        // title-only mock is only for a page that has never been drawn (18.69).
+        const _ph = _dsCenterPlaceholder(desc, _pk);
+        if (_ph) base.appendChild(_ph);
+        else { try { base.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); } catch (e) {} }
+        // Pending: the rail cell keeps its own thumbnail rather than mirroring a placeholder.
+        base.dataset.dsPending = '1';
         page.appendChild(base);
         const tok = (++_dsTlRenderTok);
         renderDeckPageCanvas(desc).then(cv2 => {
             if (tok !== _dsTlRenderTok) return;
-            if (!cv2) { if (base.isConnected) _dsAddFooter(page, Math.round(w), Math.round(hh), desc); return; }   // no renderer — mock stays, footer still shows
+            delete base.dataset.dsPending;
+            if (!cv2) {   // no renderer — mock stays, footer still shows
+                if (_ph && base.isConnected) { try { base.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); } catch (e) {} }
+                if (base.isConnected) _dsAddFooter(page, Math.round(w), Math.round(hh), desc);
+                return;
+            }
+            _dsCenterLastSet(_pk, cv2);
             cv2.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
             base.innerHTML = ''; base.appendChild(cv2);
             // The selected rail cell mirrors the centre, and it was cloned while the centre still
@@ -28293,7 +28332,7 @@ function _dsRenderCenter() {
                     base.appendChild(hnd);
                 });
             }
-        }).catch(() => {});
+        }).catch(() => { delete base.dataset.dsPending; });
     }
     else {
         try { page.innerHTML = _deckMockHTML(desc, Math.round(w), Math.round(hh)); }
@@ -28327,6 +28366,7 @@ function _dsRenderCenter() {
                         specBase.appendChild(ph);
                     }
                 } catch (e) {}
+                specBase.dataset.dsPending = '1';   // rail cell keeps its thumbnail until the render lands (18.69)
                 page.appendChild(specBase);
                 // Ambient/background render, not something the person asked
                 // to Build — never allowed to trigger a live elevation capture
@@ -28347,7 +28387,8 @@ function _dsRenderCenter() {
                 _igBeginRender();
                 renderDeckPageCanvas(desc).then(cv2 => {
                     _igNoCapture = _prevNoCap;
-                    if (!cv2) return;
+                    delete specBase.dataset.dsPending;
+                    if (!cv2) { _dsRequestThumbnailSync(); return; }
                     // Cache a COMPLETE page only. Storing the placeholder here, stamped
                     // with the current edit generation so it counted as fresh, is what
                     // pinned breaker previews on "Hit Build" until something unrelated
@@ -28360,7 +28401,7 @@ function _dsRenderCenter() {
                     specBase.innerHTML = ''; specBase.appendChild(cv2);
                     _dsPlanBacklinks(page, desc);
                     _dsRequestThumbnailSync();   // re-mirror the real render into the selected rail cell (18.68)
-                }).catch(() => { _igNoCapture = _prevNoCap; });
+                }).catch(() => { _igNoCapture = _prevNoCap; delete specBase.dataset.dsPending; });
             }
         } else {
             // Any other kind that stays on the HTML mock (e.g. prose pages)
@@ -28483,17 +28524,19 @@ function _dsRenderCenterFloorplan(desc, c, w, hh) {
         ph.style.cssText = 'position:absolute; inset:0; width:100%; height:100%; object-fit:fill;';
         base.appendChild(ph);
     }
+    base.dataset.dsPending = '1';   // rail cell keeps its thumbnail until the render lands (18.69)
     page.appendChild(base);
     const tok = (++_dsFpBaseTok);
     renderDeckPageCanvas(desc, null, { fpNoPins: true }).then(cv => {
-        if (!cv) return;
+        delete base.dataset.dsPending;
+        if (!cv) { _dsRequestThumbnailSync(); return; }
         try { _dsFpBaseLast[desc.level] = cv.toDataURL('image/jpeg', 0.92); } catch (e) {}
         if (tok !== _dsFpBaseTok || !base.isConnected) return;
         cv.style.cssText = 'position:absolute; inset:0; width:100%; height:100%;';
         base.innerHTML = ''; base.appendChild(cv);
         _dsFpListLinks(page, desc, S);
         _dsRequestThumbnailSync();   // re-mirror the real render into the selected rail cell (18.68)
-    }).catch(() => {});
+    }).catch(() => { delete base.dataset.dsPending; });
 
     // Clicking empty page space deselects any selected annotation.
     page.addEventListener('mousedown', (ev) => {
@@ -33142,6 +33185,10 @@ function _dsSyncActiveThumbnailMirror() {
         const centerEl = document.getElementById('dsCenter');
         const source = (centerEl && centerEl.firstElementChild) || document.getElementById(_mbActiveCanvasId) || document.getElementById('dsLayoutCanvas') || document.getElementById('moodboardCanvas');
         if (!source) return;
+        // The centre is still showing a stand-in while the real render draws. Mirroring it is
+        // the flash (a blank card with a title, then the page); leave the cell on its own
+        // thumbnail and let the swap ask again (18.69).
+        if (source.querySelector && source.querySelector('[data-ds-pending]')) return;
         const rail = document.getElementById('dsRail'); if (!rail) return;
         const ck = _dsThumbCacheKey(desc);
         const esc = (window.CSS && CSS.escape) ? CSS.escape(ck) : ck;
@@ -41702,7 +41749,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>
