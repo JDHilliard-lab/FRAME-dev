@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.44';
+const APP_VERSION = '18.45';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6204,7 +6204,7 @@ function _frameFxChanged() {
 // so what the sliders show is what exports.
 const FRAME_FX_ROWS = [
     ['outer', 'Drop shadow', 'The frame onto the wall and onto the white of a spec page'],
-    ['frame', 'Frame onto mat', 'The moulding onto mat 1 (or the backer, or the paper when there is no mat)'],
+    ['frame', 'Frame onto mat', 'The moulding onto mat 1, or straight onto the art, backer or paper when there is no mat'],
     ['mat', 'Mat onto mat', 'Mat 1 onto mat 2, or a mat onto the faux-mat paper'],
     ['art', 'Onto artwork', 'The opening onto the artwork itself'],
     ['paper', 'Paper lift', 'A float-mounted or deckled sheet lifting off its backer']
@@ -6272,12 +6272,12 @@ function openFrameFx() {
     _frameFxSyncCases();
     _frameFxPreview();
 }
-// THE SAMPLE CASES (18.44). Each shadow only shows on some builds (Mat onto mat needs
-// two mats, Paper lift a float mount), so the panel can step through every build on
-// one square composition, framed in the selected piece's moulding. Panel state, never
-// project data. 'piece' is the selected piece exactly as it is.
+// THE SAMPLE CASES (18.44, 18.45). Each shadow only shows on some builds (Mat onto mat
+// needs two mats, Paper lift a float mount), so the panel steps through every build on
+// one square composition in a fixed reference moulding (FRAME_FX_MOULDING; the floater
+// in FRAME_FX_FLOATER), so every designer tunes against the same picture. Panel state,
+// never project data. No "selected piece" tab: the sliders are global.
 const FRAME_FX_CASES = [
-    ['piece', 'This piece', 'The selected piece as it is'],
     ['nomat', 'No mat', 'Moulding straight onto the art (Frame onto mat, Onto artwork)'],
     ['mat1', 'Single mat', 'One mat (Frame onto mat, Onto artwork)'],
     ['mat2', 'Double mat', 'Two mats (Mat onto mat)'],
@@ -6285,23 +6285,36 @@ const FRAME_FX_CASES = [
     ['float', 'Float mount', 'A deckled sheet floated on a backer (Paper lift)'],
     ['floater', 'Canvas floater', 'A canvas in a floater frame']
 ];
-let _frameFxCase = 'piece';
+let _frameFxCase = 'mat1';
+// Reference mouldings from the bundled library (library-manifest.json). A mid-tone
+// wood shows every shadow; black hides the frame-onto-mat one in its own colour.
+const FRAME_FX_MOULDING = { code: 'MICH-32-22', fW: 0.875, fHeight: 1.25, rabbetDepth: 1, fColor: '#6b5a44',
+    path: 'library/michaelangelo/avant-garde/MICH-32-22_0.875_d1.25_r1.png' };
+const FRAME_FX_FLOATER = { code: 'MICH-301-22', fW: 1.5, fHeight: 1.875, rabbetDepth: 1.625, faceWidth: 0.5, fColor: '#2a2a2a',
+    path: 'library/michaelangelo/floaters/MICH-301-22_1.5_d1.875_r1.625_f0.5.jpg' };
+const _frameFxSwatches = {};
+function _frameFxSwatch(m) {
+    if (!_frameFxSwatches[m.code]) _frameFxSwatches[m.code] = _loadImg(m.path).catch(() => null);
+    return _frameFxSwatches[m.code];
+}
 function _frameFxSyncCases() {
     document.querySelectorAll('#frameFxCases [data-fx-case]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fx-case') === _frameFxCase));
 }
-// The sample: a 24in square in the piece's own moulding (or the house black when
-// nothing is selected). Every case starts from dashDefaultData in inches so a field
-// the piece happens to carry (a second mat, a float mount) cannot leak into another.
-function _frameFxSample(kind, piece) {
+// The sample: a 24in square in the reference moulding. Every case starts from
+// dashDefaultData in inches so one case's fields cannot leak into another. The
+// moulding's swatch is loaded by the preview; without it the colour stands in.
+function _frameFxSample(kind) {
     const d = _cloneData(dashDefaultData);
-    if (piece) ['fType', 'fColor', 'fCode', 'fW', 'fHeight', 'rabbetDepth', 'swatchDataUrl', 'swatchName'].forEach(k => { if (piece[k] !== undefined) d[k] = piece[k]; });
+    const m = kind === 'floater' ? FRAME_FX_FLOATER : FRAME_FX_MOULDING;
+    Object.assign(d, { fType: 'color', fColor: m.fColor, fCode: m.code, fW: m.fW, fHeight: m.fHeight, rabbetDepth: m.rabbetDepth, swatchName: m.code });
     d.extW = 24; d.extH = 24; d.product = 'Framed Art';
     d.m1T = d.m1B = d.m1L = d.m1R = 3; d.m1A = true; d.m2A = false; d.useFauxMat = false; d.useFloatMount = false;
     if (kind === 'nomat') d.m1A = false;
-    else if (kind === 'mat2') { d.m2A = true; d.m2 = 0.375; d.m2ColorHex = '#2b2b2b'; d.m2ColorName = 'Black'; }
+    // Two white mats of one width: the double-mat look, so Mat onto mat lands on white.
+    else if (kind === 'mat2') { d.m1T = d.m1B = d.m1L = d.m1R = 2; d.m2A = true; d.m2 = 2; d.m2ColorHex = d.m1ColorHex; d.m2ColorName = d.m1ColorName; }
     else if (kind === 'faux') { d.useFauxMat = true; d.sbPaperBorder = 0.75; }
     else if (kind === 'float') { d.m1A = false; d.useFloatMount = true; d.sbPaperMargin = 2.5; d.sbPaperBorder = 0.75; d.sbPaperEdge = 'torn'; d.sbBackerColorHex = '#f4f1ea'; }
-    else if (kind === 'floater') { d.m1A = false; d.product = 'Framed Canvas (Floater)'; d.floaterInset = 0.375; }
+    else if (kind === 'floater') { d.m1A = false; d.product = 'Framed Canvas (Floater)'; d.floaterInset = m.faceWidth + FLOATER_SHADOW_REVEAL; }
     return d;
 }
 // A square abstract composition, drawn once: light enough that a shadow falling on it
@@ -6330,21 +6343,18 @@ let _frameFxPvTok = 0;
 async function _frameFxPreview() {
     const host = document.getElementById('frameFxPreview'); if (!host) return;
     const tok = ++_frameFxPvTok;
-    const piece = (typeof dashProjectData !== 'undefined' && dashProjectData[dashSelectedRowIndex]) || null;
-    if (!piece && _frameFxCase === 'piece') { host.textContent = 'Select a piece in the Frame Dashboard to preview it here, or pick a sample above.'; return; }
-    const sample = _frameFxCase !== 'piece';
-    const d = sample ? _frameFxSample(_frameFxCase, piece && _frameDataInInches(piece, dashUnit)) : piece;
-    let art = null;
-    if (sample) art = _frameFxComposition();
-    else if (d.artworkUrl) { try { art = await _loadImg(d.artworkUrl); } catch (e) {} }
-    let sw = null; if (d.fType === 'image' && d.swatchDataUrl) { try { sw = await _loadImg(d.swatchDataUrl); } catch (e) {} }
+    if (!FRAME_FX_CASES.some(c => c[0] === _frameFxCase)) _frameFxCase = 'mat1';
+    const d = _frameFxSample(_frameFxCase);
+    const art = _frameFxComposition();
+    const sw = await _frameFxSwatch(_frameFxCase === 'floater' ? FRAME_FX_FLOATER : FRAME_FX_MOULDING);
+    if (sw) d.fType = 'image';
     if (tok !== _frameFxPvTok) return;
     try {
-        const out = renderFrameToCanvas(sample ? d : _frameDataInInches(d, dashUnit), sw, { dpi: 72, pad: 60, artworkImg: art, artCrop: sample ? undefined : { zoom: d.artZoom, panX: d.artPanX, panY: d.artPanY } });
+        const out = renderFrameToCanvas(d, sw, { dpi: 72, pad: 60, artworkImg: art });
         const c = out && out.canvas; if (!c) return;
         c.style.cssText = 'max-width:100%; max-height:360px; width:auto; height:auto; display:block;';
         host.innerHTML = ''; host.appendChild(c);
-    } catch (e) { host.textContent = 'Preview unavailable for this piece.'; }
+    } catch (e) { host.textContent = 'Preview unavailable.'; }
 }
 // DROP SHADOW ON SPEC PAGES (18.42). The frame images on spec pages are flattened onto
 // white JPEGs at exactly the frame's size (pad 0), so the outer shadow had nowhere to
@@ -11977,6 +11987,7 @@ function syncDashAndCalculate() {
 
 function updateDashVisualsFromDOM() {
     const data = _bulkEditing ? (_bulkScratch || {}) : dashProjectData[dashSelectedRowIndex];
+    if (!data) return;   // a queued redraw can land after a load emptied the rows
     const fVis = document.getElementById('dash-frame-visual');
     const viewObj = document.getElementById('view-dashboard');
     
@@ -12182,6 +12193,8 @@ function updateDashVisualsFromDOM() {
     // Float mount / frameless: opaque print fill so the white paper beneath
     // doesn't bleed through (keeps dashboard + elevation identical).
     if (isFrameless || useFM) artVis.style.background = 'rgb(120,120,120)';
+    // No mat: the moulding sits on the art and casts the frame's shadow onto it (18.45).
+    if (!effM1A && !isCanvas && !isFrameless && !useFM && !_flatDash && data.useFauxMat !== true) artVis.classList.add('fx-frame-cast');
 
     let artTopOffset, artLeftOffset;
     if (_flatDash) {
@@ -14697,6 +14710,14 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         aW = fauxW - fauxBorderPx * 2; aH = fauxH - fauxBorderPx * 2;
     }
     x.clearRect(aX, aY, aW, aH);
+    // WHAT CASTS INTO THE OPENING (18.45). Behind a mat it is the mat's bevel, a thin
+    // 'art' shadow. With NO mat it is the moulding itself, sitting right on the art, so
+    // it casts the frame's own shadow, scaled by Frame onto mat; the thin bevel shadow
+    // alone made an unmatted frame look painted on.
+    const _openShadow = () => {
+        if (m1On) dIS(aX, aY, aW, aH, 8, 3, 0.25, 'art');
+        else { dIS(aX, aY, aW, aH, 35, 14, 0.6, 'frame'); dIS(aX, aY, aW, aH, 8, 3, 0.25, 'art'); }
+    };
 
     if (isC) {
         // FLOATER: opening is fully transparent so artwork composited behind shows
@@ -14718,7 +14739,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         // mat above, handled in the faux mat / paper fill blocks above.
         // (Intentionally no shadow drawn here.)
     } else {
-        dIS(aX, aY, aW, aH, 8, 3, 0.25, 'art');
+        _openShadow();
         x.strokeStyle = "#aaaaaa"; x.lineWidth = 1; x.strokeRect(aX, aY, aW, aH);
     }
 
@@ -14766,7 +14787,7 @@ function renderFrameToCanvas(d, swatchImg, opts) {
     // on purpose (the wrong cue on a placement drawing). Floaters, float mounts and faux
     // mats keep their own rules: the print sits flat, no shadow.
     if (opts.artworkImg && !opts.wireframe && !isC && !useFM && !useFauxMat && aW > 0 && aH > 0) {
-        dIS(aX, aY, aW, aH, 8, 3, 0.25, 'art');
+        _openShadow();
     }
 
     // Optional art-opening size label (for elevation export — dashboard already shows this elsewhere)
@@ -41110,7 +41131,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.44</strong> Frame effects has sample tabs: step through No mat, Single mat, Double mat, Faux mat, Float mount and Canvas floater on one square composition, in the selected piece's moulding, to see where every shadow lands. The sliders are global: they change every frame in the project.<br><br>
+                body: `<strong>18.45</strong> Frame effects samples are all in MICH-32-22 (the floater in MICH-301-22), the double mat is two white mats of one width, and the panel no longer shows the selected piece. With no mat, the frame now casts its shadow onto the artwork, everywhere a frame is drawn.<br><br>
+<strong>18.44</strong> Frame effects has sample tabs: step through No mat, Single mat, Double mat, Faux mat, Float mount and Canvas floater on one square composition, in the selected piece's moulding, to see where every shadow lands. The sliders are global: they change every frame in the project.<br><br>
 <strong>18.43</strong> The elevation thumbnail on a per-piece spec page is captioned <strong>Elevation</strong>, like the group pages, instead of the wall's code.<br><br>
 <strong>18.42</strong> Drop shadows on spec pages: tick <strong>Also on spec pages</strong> in Frame effects and every framed piece on a spec page casts its drop shadow onto the page, in the PDF and its previews, at the Drop shadow slider's strength. Off by default so existing decks print as before. The frame itself keeps its exact size and position, and the shadow works on dark pages too.<br><br>\n<strong>18.41</strong> <strong>Frame effects.</strong> The shadow button in the header (and Frame effects in Deck Studio under Project) opens sliders for each shadow a frame casts: the drop shadow onto the wall and page, the frame onto the mat, mat onto mat, onto the artwork, and the lift of a float-mounted sheet. 100% is the old look; a live preview of the selected piece shows the result. It reaches the Dashboard preview, elevations, PNG exports and spec pages, and travels in the project file. Also fixed: the shadow inside the opening now falls on the artwork (it was hidden under it), and framed pieces in the Dashboard preview show the same drop shadow as their PNG.<br><br>\n<strong>18.40</strong> A shorter Deck Studio tool bar. Text box and Paragraph live in the Text menu (T still adds a text box straight away), and Upload image lives in the Shapes menu (I still works). The settings button for a selected object is a gear now, not a sun that looked like the theme switch.<br><br>\n<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
@@ -42452,6 +42474,8 @@ function drawElevAll() {
             }
         }
         const art = document.createElement('div'); art.className = 'art-visual';
+        // No mat: the moulding casts the frame's shadow onto the art (18.45).
+        if (!m1Active && !isFloater && !isFrameless && !isFlat && !useFM && f.useFauxMat !== true) art.classList.add('fx-frame-cast');
         
         art.style.cssText = `top:${artTopOffset}px; left:${artLeftOffset}px; width:${artW*elevScale}px; height:${artH*elevScale}px; z-index:4;`;
         // Uploaded artwork: when present, fill the opening with the image

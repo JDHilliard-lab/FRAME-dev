@@ -61,6 +61,25 @@ const path = require('path');
       if (img < 0) throw new Error('the artwork was not drawn');
       if (!log.slice(img + 1).some(s => s.t === 'stroke' && s.blur)) throw new Error('no shadow is drawn after the artwork, so it is hidden under it');
     });
+    __check('EXACT BUG (18.45): with no mat, the FRAME casts its shadow onto the artwork', () => {
+      resetFrameFx();
+      const r = Object.assign(row(), { m1A: false });
+      const log = strokes(() => renderFrameToCanvas(r, null, { dpi: 72, pad: 0, artworkImg: art }));
+      const img = log.findIndex(s => s.t === 'img');
+      const after = log.slice(img + 1).filter(s => s.t === 'stroke' && s.blur);
+      if (!after.some(s => s.blur >= 30)) throw new Error('only the thin opening shadow lands on the art: blurs ' + after.map(s => s.blur).join(','));
+      setFrameFx('frame', 2);
+      const deep = strokes(() => renderFrameToCanvas(r, null, { dpi: 72, pad: 0, artworkImg: art }));
+      resetFrameFx();
+      if (Math.max(...deep.filter(s => s.t === 'stroke' && s.blur).map(s => s.blur)) <= Math.max(...after.map(s => s.blur))) throw new Error('Frame onto mat does not drive it');
+      const matted = strokes(() => renderFrameToCanvas(row(), null, { dpi: 72, pad: 0, artworkImg: art }));
+      const mi = matted.findIndex(s => s.t === 'img');
+      if (matted.slice(mi + 1).some(s => s.t === 'stroke' && s.blur >= 30)) throw new Error('a matted piece now gets the frame shadow on its art');
+    });
+    __check('the live Dashboard and elevation views give an unmatted frame the same cast', () => {
+      if (css.indexOf('.art-visual.fx-frame-cast {') < 0 || css.indexOf('var(--fx-frame', css.indexOf('.art-visual.fx-frame-cast {')) < 0) throw new Error('no fx-frame-cast rule reading --fx-frame');
+      if (window.__appSrc.split("classList.add('fx-frame-cast')").length - 1 !== 2) throw new Error('both DOM views must set fx-frame-cast');
+    });
     __check('...but not on a wireframe placement block', () => {
       const log = strokes(() => renderFrameToCanvas(row(), null, { dpi: 72, pad: 0, wireframe: true }));
       if (log.some(s => s.t === 'img')) throw new Error('wireframe drew an image');
@@ -97,17 +116,16 @@ const path = require('path');
       openFrameFx();
       const m = document.getElementById('frameFxModal');
       const tabs = Array.from(m.querySelectorAll('#frameFxCases [data-fx-case]'));
-      const want = ['piece', 'nomat', 'mat1', 'mat2', 'faux', 'float', 'floater'];
+      const want = ['nomat', 'mat1', 'mat2', 'faux', 'float', 'floater'];
       if (tabs.map(b => b.getAttribute('data-fx-case')).join() !== want.join()) throw new Error('tabs: ' + tabs.map(b => b.getAttribute('data-fx-case')).join());
-      tabs[3].onclick();
+      tabs[2].onclick();
       if (_frameFxCase !== 'mat2') throw new Error('tab did not pick its case');
       const lit = tabs.filter(b => b.classList.contains('active'));
-      if (lit.length !== 1 || lit[0] !== tabs[3]) throw new Error(lit.length + ' tabs lit');
-      _frameFxCase = 'piece'; m.remove();
+      if (lit.length !== 1 || lit[0] !== tabs[2]) throw new Error(lit.length + ' tabs lit');
+      _frameFxCase = 'mat1'; m.remove();
     });
     __check('each sample is the build its tab names, and nothing leaks between them', () => {
-      const piece = Object.assign(_cloneData(dashDefaultData), { fType: 'color', fColor: '#7a5230', fW: 1.25, m2A: true, useFloatMount: true, extW: 40, extH: 10 });
-      const S = k => _frameFxSample(k, piece);
+      const S = k => _frameFxSample(k);
       if (S('nomat').m1A || S('nomat').m2A || S('nomat').useFloatMount) throw new Error('no-mat sample carries a mat or float');
       if (!S('mat1').m1A || S('mat1').m2A) throw new Error('single mat is not one mat');
       if (!(S('mat2').m1A && S('mat2').m2A)) throw new Error('double mat is not two mats');
@@ -115,13 +133,22 @@ const path = require('path');
       if (!S('float').useFloatMount || S('float').sbPaperEdge !== 'torn') throw new Error('float sample is not a deckled float mount');
       if (S('floater').product !== 'Framed Canvas (Floater)') throw new Error('floater sample wrong');
       const one = S('mat1'); if (one.extW !== 24 || one.extH !== 24) throw new Error('sample is not square');
-      if (one.fColor !== '#7a5230' || one.fW !== 1.25) throw new Error('sample is not in the piece moulding');
-      if (piece.extW !== 40) throw new Error('the sample wrote back into the piece');
+      // 18.45: asked for MICH-32-22 everywhere, MICH-301-22 on the floater, and a
+      // double mat of two white mats of one width (it showed a black band).
+      if (one.fCode !== 'MICH-32-22' || S('nomat').fCode !== 'MICH-32-22') throw new Error('samples are not in MICH-32-22: ' + one.fCode);
+      if (S('floater').fCode !== 'MICH-301-22') throw new Error('floater is not MICH-301-22');
+      if (S('floater').floaterInset !== FRAME_FX_FLOATER.faceWidth + FLOATER_SHADOW_REVEAL) throw new Error('floater inset is not face + reveal');
+      const d2 = S('mat2');
+      if (d2.m2ColorHex !== d2.m1ColorHex) throw new Error('double mat inner mat is ' + d2.m2ColorHex + ', not the first mat colour');
+      if (d2.m2 !== d2.m1T) throw new Error('double mat widths differ: ' + d2.m1T + ' and ' + d2.m2);
+
     });
-    __check('a sample previews with no piece selected', async () => {
-      const keep = dashSelectedRowIndex; dashSelectedRowIndex = -1;
+    __check('a sample previews whatever piece is selected', async () => {
       openFrameFx(); _frameFxCase = 'float';
-      window.__fxPv = _frameFxPreview().then(() => { const h = document.getElementById('frameFxPreview'); window.__fxPvTxt = h.textContent; window.__fxPvCanvas = !!h.querySelector('canvas'); dashSelectedRowIndex = keep; _frameFxCase = 'piece'; });
+      window.__fxPv = _frameFxPreview().then(() => { const h = document.getElementById('frameFxPreview'); window.__fxPvTxt = h.textContent; window.__fxPvCanvas = !!h.querySelector('canvas'); _frameFxCase = 'mat1'; });
+    });
+    __check('the panel has no "this piece" tab (the sliders are global)', () => {
+      if (FRAME_FX_CASES.some(c => c[0] === 'piece')) throw new Error('the selected-piece tab is back');
     });
     __check('the panel is reachable from the header and from Deck Studio', () => {
       if ((document.getElementById('outerShadowToggle').getAttribute('onclick') || '').indexOf('openFrameFx') < 0) throw new Error('header button does not open it');
@@ -131,8 +158,8 @@ const path = require('path');
   try { window.eval('window.__appSrc = ' + JSON.stringify(src) + ';\nconst css = ' + JSON.stringify(css) + ';\n' + src + '\n' + testBlock); }
   catch (e) { console.error('LOAD/RUN FAILED:', e.message); process.exit(1); }
   await window.__fxPv;
-  window.__testResults.push(window.__fxPvCanvas ? { label: 'the float-mount sample drew with no piece selected', ok: true }
-    : { label: 'the float-mount sample drew with no piece selected', ok: false, err: 'no canvas: ' + window.__fxPvTxt });
+  window.__testResults.push(window.__fxPvCanvas ? { label: 'the float-mount sample drew', ok: true }
+    : { label: 'the float-mount sample drew', ok: false, err: 'no canvas: ' + window.__fxPvTxt });
   const all = window.__testResults || [];
   const failures = [];
   all.forEach(r => { console.log((r.ok ? 'OK:  ' : 'FAIL:') + ' ' + r.label + (r.ok ? '' : ' -> ' + r.err)); if (!r.ok) failures.push(r.label); });
