@@ -281,6 +281,31 @@ window.__res = (async function () {
     _dsCopyCanvasPixels(a, b);
     if (drew !== c || b.querySelector('canvas').width !== 30) throw new Error('pixels were not copied');
   });
+  await check('EXACT ASK (18.70): the sheet elevation draws the mockup frame SOLID, not faded', async function () {
+    // The sheet draws the MOCKUP wall; featuring the option's own code (not on that wall)
+    // put every frame at 0.28 alpha.
+    build(3, 24, 32);
+    editorialContent.catSheetSlots = { elevation: true };
+    const calls = [];
+    const orig = renderElevationToCanvas;
+    renderElevationToCanvas = async function (elev, feat) { calls.push({ elev: elev, feat: feat }); return null; };
+    try { await draw(); } finally { renderElevationToCanvas = orig; }
+    const c = calls.find(function (x) { return x.elev && x.elev.catalogueMaster; });
+    if (!c) throw new Error('sheet did not draw the mockup wall (' + calls.length + ' elevation calls)');
+    if (c.feat) throw new Error('featured ' + c.feat + ' on the mockup wall, so its frame prints faded');
+  });
+  await check('...a per-piece spec page still features its own piece (others on the wall stay faded)', async function () {
+    build(3, 24, 32);
+    const row = dashProjectData.find(function (x) { return x.id === 'ART.1'; });
+    const calls = [];
+    const orig = renderElevationToCanvas;
+    renderElevationToCanvas = async function (elev, feat) { calls.push(feat); return null; };
+    const origShow = _elevShowingPiece;
+    _elevShowingPiece = function () { return elevations[0]; };
+    try { await _drawSpecPageTemplate(new CanvasPdfRec(936, 540), {}, 1, {}, row, 'frameSpecDetail', { PW: 936, PH: 540 }); }
+    finally { renderElevationToCanvas = orig; _elevShowingPiece = origShow; }
+    if (calls.indexOf('ART.1') < 0) throw new Error('per-piece page lost its featured piece: ' + JSON.stringify(calls));
+  });
   return out;
 })();
 `;

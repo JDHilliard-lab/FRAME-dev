@@ -54,6 +54,19 @@ const path = require('path');
       if (!cell.querySelector('._dsThumbMirrorWrap canvas')) throw new Error('no mirror of the rendered page');
     });
 
+    __check('EXACT ASK (18.70): the selected thumbnail does not shift or crop; the mirror fills the VISIBLE box, border excluded', () => {
+      const { base, cell } = setup();
+      base.innerHTML = '<canvas width="10" height="10"></canvas>';
+      // As the rail sets it: a shorthand holding var(), whose longhands read back empty.
+      cell.style.cssText = 'position:relative; width:168px; height:97px; border:2px solid var(--ui-active);';
+      mockRect(cell, 172, 101);
+      Object.defineProperty(cell, 'clientWidth', { value: 168 }); Object.defineProperty(cell, 'clientHeight', { value: 97 });
+      _dsSyncActiveThumbnailMirror();
+      const clone = cell.querySelector('._dsThumbMirrorWrap > *');
+      if (!clone) throw new Error('no mirror');
+      const t = clone.style.transform;
+      if (t.indexOf('scale(' + (168 / 936) + ', ' + (97 / 540) + ')') < 0 && t.indexOf('scale(' + (168 / 936) + ',' + (97 / 540) + ')') < 0) throw new Error('scaled to the border box, cropping the edges: ' + t);
+    });
     __check('EXACT ASK: a page drawn before shows its LAST RENDER in the centre while it redraws, never the mock', () => {
       const d = { kind: 'catov', type: 'catov', title: 'ART.1 OPTIONS 1/2' };
       const cv = document.createElement('canvas'); cv.width = 936; cv.height = 540;
