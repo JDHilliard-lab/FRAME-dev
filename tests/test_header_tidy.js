@@ -27,14 +27,15 @@ const path = require('path');
       switchView('elevation'); if (vis('dashViewToggle')) throw new Error('shown in Elevations');
       switchView('deck'); if (vis('dashViewToggle')) throw new Error('shown in Deck Studio');
     });
-    __check('drop shadows show in the Dashboard and Elevations, where they change frames, not in the Deck', () => {
-      switchView('dashboard'); if (!vis('outerShadowToggle')) throw new Error('hidden in the dashboard');
-      switchView('elevation'); if (!vis('outerShadowToggle')) throw new Error('hidden in Elevations, where it changes walls and their exports');
-      switchView('deck'); if (vis('outerShadowToggle')) throw new Error('shown in Deck Studio');
+    // 18.47: the Dashboard/Elevations-only frame effects button became the Settings gear,
+    // shown in EVERY view (frame effects reach spec pages too, so the Deck needs it).
+    __check('the Settings gear shows in every view, and the old shadow button is gone', () => {
+      if (document.getElementById('outerShadowToggle')) throw new Error('the old frame effects button is still in the header');
+      ['dashboard', 'elevation', 'deck'].forEach(v => { switchView(v); if (!vis('appSettingsBtn')) throw new Error('gear hidden in ' + v); });
     });
     __check('the theme toggle, help, units, undo and save are in every view', () => {
       switchView('deck');
-      ['helpBtn', 'unitChip', 'undoBtn', 'saveProjectBtn', 'saveMenuBtn'].forEach(id => { const e = document.getElementById(id); if (!e || e.classList.contains('hdr-off')) throw new Error(id + ' missing in Deck Studio'); });
+      ['helpBtn', 'appSettingsBtn', 'unitChip', 'undoBtn', 'saveProjectBtn', 'saveMenuBtn'].forEach(id => { const e = document.getElementById(id); if (!e || e.classList.contains('hdr-off')) throw new Error(id + ' missing in Deck Studio'); });
     });
     __check('Versions moved into the Save menu, which also offers Save and Save As', () => {
       let opened = 0; openVersionsModal = () => { opened++; };

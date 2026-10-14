@@ -1620,6 +1620,16 @@ run but passes alone is usually load timing: rerun before chasing it.
   (`dsDockNotes`), Upload image in Shapes; no standalone T or image button. Selection
   settings is a gear, never the theme sun.
 
+- **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
+  view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
+  (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).
+  `openFrameFx` / `openUnitMenu` / the units chip / `projFrameFxBtn` all land on their tab;
+  there is no separate Frame effects modal (`#frameFxModal` is gone) or units popover.
+- **INNER SHADOWS ARE TRUE INSETS (18.46, `dIS`)**: the casting stroke runs up to the edge
+  and is parked off-canvas with the shadow thrown back by `shadowOffsetX`. The old stroke
+  sat 10px outside, so small shadows (Onto artwork, Mat onto mat) never arrived. With NO
+  mat the frame recipe casts onto the art (`_openShadow`, `.art-visual.fx-frame-cast`).
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

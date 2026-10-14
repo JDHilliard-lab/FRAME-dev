@@ -40,9 +40,11 @@ const path = require('path');
       if (_elevDualUnit() !== '' || elevFmtU(24).indexOf('(') >= 0) throw new Error('turning it off did not reach the elevation');
       if (chip() !== 'IN') throw new Error('chip reads ' + chip());
     });
-    __check('the chip menu and the Project tab are the same controls, and they work', () => {
+    __check('the chip Settings tab and the Project tab are the same controls, and they work', () => {
+      // 18.47: the chip opens Settings on its Units tab (was a popover).
       openUnitMenu();
-      const m = document.getElementById('unitMenu');
+      const m = document.getElementById('appSettingsModal');
+      if (!m || _appSettingsTab !== 'units') throw new Error('the chip did not open Settings on Units');
       const b = m.querySelector('[data-unit-opt="Second unit:mm"]');
       if (!b) throw new Error('no + MM option in the menu');
       b.onclick();

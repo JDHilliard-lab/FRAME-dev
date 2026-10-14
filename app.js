@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.46';
+const APP_VERSION = '18.47';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6209,16 +6209,79 @@ const FRAME_FX_ROWS = [
     ['art', 'Onto artwork', 'The opening onto the artwork itself'],
     ['paper', 'Paper lift', 'A float-mounted or deckled sheet lifting off its backer']
 ];
-function openFrameFx() {
-    let m = document.getElementById('frameFxModal'); if (m) m.remove();
-    m = document.createElement('div'); m.id = 'frameFxModal';
+// FRAME SETTINGS (18.47). One gear in the header, in every view: the things a designer
+// sets up once at the start of a project and that apply everywhere (Frame Dashboard,
+// Elevations, Deck Studio). Units and Frame effects are built here; Elevations hands off
+// to the drafting settings modal, which belongs to the drawing. The units chip and Deck
+// Studio's buttons open the same window on their own tab, so there is one place.
+const APP_SETTINGS_TABS = [
+    ['units', 'Units', 'What sizes are typed in, and the second unit printed beside inches'],
+    ['fx', 'Frame effects', 'The drop shadow and the shadows inside every frame'],
+    ['elev', 'Elevations', 'Hang height, baseboard, dimension style, scale figure, snapping']
+];
+let _appSettingsTab = 'units';
+function openAppSettings(tab) {
+    if (tab && APP_SETTINGS_TABS.some(t => t[0] === tab)) _appSettingsTab = tab;
+    let m = document.getElementById('appSettingsModal'); if (m) m.remove();
+    m = document.createElement('div'); m.id = 'appSettingsModal';
     m.className = 'frame-modal'; m.setAttribute('data-modal-backdrop', '');
     m.style.display = 'flex';
     const card = document.createElement('div');
-    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:760px; max-width:94vw; max-height:90vh; overflow:auto; padding:20px; display:flex; flex-direction:column; gap:14px;';
-    card.innerHTML = '<div><h3 style="margin:0 0 4px; font-size:var(--fs-105); color:var(--text-strong);">Frame effects</h3>'
-        + '<div style="font-size:var(--fs-70); color:var(--text-muted);">How deep the shadows are on EVERY frame in the project (not just the one shown): the Dashboard preview, elevations, PNG exports and spec pages. 100% is the studio look. Saved on this computer and in the project file.</div></div>';
-    const body = document.createElement('div'); body.style.cssText = 'display:flex; gap:18px; align-items:stretch; flex-wrap:wrap;';
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:800px; max-width:94vw; max-height:90vh; overflow:auto; padding:20px; display:flex; flex-direction:column; gap:14px;';
+    card.innerHTML = '<div><h3 style="margin:0 0 4px; font-size:var(--fs-105); color:var(--text-strong);">Settings</h3>'
+        + '<div style="font-size:var(--fs-70); color:var(--text-muted);">Set these up at the start of a project. They apply everywhere: the Frame Dashboard, Elevations and Deck Studio.</div></div>';
+    const tabs = document.createElement('div'); tabs.id = 'appSettingsTabs'; tabs.className = 'frame-tabs';
+    APP_SETTINGS_TABS.forEach(([k, label, tip]) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'frame-tab'; b.textContent = label; b.title = tip;
+        b.setAttribute('data-settings-tab', k);
+        b.onclick = () => { _appSettingsTab = k; _appSettingsShow(); };
+        tabs.appendChild(b);
+    });
+    card.appendChild(tabs);
+    const body = document.createElement('div'); body.id = 'appSettingsBody';
+    card.appendChild(body);
+    const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
+    const done = document.createElement('button'); done.className = 'action-btn'; done.style.cssText = 'width:auto; height:32px; padding:0 18px;'; done.textContent = 'Done';
+    done.setAttribute('data-modal-close', ''); done.onclick = () => m.remove();
+    foot.appendChild(done); card.appendChild(foot);
+    m.appendChild(card);
+    document.body.appendChild(m);
+    _appSettingsShow();
+}
+function _appSettingsShow() {
+    const body = document.getElementById('appSettingsBody'); if (!body) return;
+    document.querySelectorAll('#appSettingsTabs [data-settings-tab]').forEach(b => b.classList.toggle('active', b.getAttribute('data-settings-tab') === _appSettingsTab));
+    body.innerHTML = '';
+    if (_appSettingsTab === 'units') {
+        const host = document.createElement('div'); host.id = 'appSettingsUnits'; host.style.cssText = 'max-width:360px;';
+        body.appendChild(host);
+        _unitControlsInto(host);
+        const note = document.createElement('div');
+        note.textContent = 'Changing the entry unit converts every size already in the project. The header chip shows the current units; click it to come back here.';
+        note.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; max-width:420px;';
+        body.appendChild(note);
+    } else if (_appSettingsTab === 'fx') {
+        _frameFxInto(body);
+    } else {
+        const p = document.createElement('div');
+        p.textContent = 'Hang height, baseboard, dimension and label style, line weights, the scale figure, snapping and nudge. They travel with the drawing, so they have their own window, also on the gear in the Elevations panel.';
+        p.style.cssText = 'font-size:var(--fs-70); color:var(--text-main); line-height:1.5; max-width:520px; margin-bottom:12px;';
+        body.appendChild(p);
+        const go = document.createElement('button'); go.type = 'button'; go.id = 'appSettingsElevBtn';
+        go.className = 'action-btn btn-secondary'; go.style.cssText = 'width:auto; height:30px; padding:0 14px;';
+        go.textContent = 'Open elevation settings';
+        go.onclick = () => { const m = document.getElementById('appSettingsModal'); if (m) m.remove(); openPrecisionModal(); };
+        body.appendChild(go);
+    }
+}
+// The units chip and Deck Studio open Settings on their own tab.
+function openFrameFx() { openAppSettings('fx'); }
+function _frameFxInto(host) {
+    const intro = document.createElement('div');
+    intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:12px;';
+    intro.textContent = 'How deep the shadows are on EVERY frame in the project: the Dashboard preview, elevations, PNG exports and spec pages. 100% is the studio look. Saved on this computer and in the project file.';
+    host.appendChild(intro);
+    const body = document.createElement('div'); body.id = 'frameFxBody'; body.style.cssText = 'display:flex; gap:18px; align-items:stretch; flex-wrap:wrap;';
     const pvCol = document.createElement('div'); pvCol.style.cssText = 'flex:1 1 300px; display:flex; flex-direction:column; gap:8px; min-width:0;';
     const tabs = document.createElement('div'); tabs.id = 'frameFxCases'; tabs.className = 'frame-tabs wrap';
     FRAME_FX_CASES.forEach(([k, label, tip]) => {
@@ -6259,15 +6322,10 @@ function openFrameFx() {
     });
     pvCol.appendChild(pv);
     body.appendChild(pvCol); body.appendChild(ctl);
-    card.appendChild(body);
-    const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
-    const rs = document.createElement('button'); rs.className = 'action-btn btn-secondary'; rs.style.cssText = 'width:auto; height:32px; padding:0 14px;'; rs.textContent = 'Reset to studio look';
+    host.appendChild(body);
+    const rs = document.createElement('button'); rs.className = 'action-btn btn-secondary'; rs.style.cssText = 'width:auto; height:30px; padding:0 14px; align-self:flex-end; margin-top:4px;'; rs.textContent = 'Reset to studio look';
     rs.onclick = () => { resetFrameFx(); _frameFxSyncRows(); _frameFxPreview(); const p = document.getElementById('frameFxPageShadow'); if (p) p.checked = false; };
-    const done = document.createElement('button'); done.className = 'action-btn'; done.style.cssText = 'width:auto; height:32px; padding:0 18px;'; done.textContent = 'Done';
-    done.setAttribute('data-modal-close', ''); done.onclick = () => m.remove();
-    foot.appendChild(rs); foot.appendChild(done); card.appendChild(foot);
-    m.appendChild(card);
-    document.body.appendChild(m);
+    ctl.appendChild(rs);
     _frameFxSyncRows();
     _frameFxSyncCases();
     _frameFxPreview();
@@ -6333,7 +6391,7 @@ function _frameFxComposition() {
     return c;
 }
 function _frameFxSyncRows() {
-    document.querySelectorAll('#frameFxModal input[data-fx]').forEach(r => {
+    document.querySelectorAll('#appSettingsModal input[data-fx]').forEach(r => {
         const k = r.getAttribute('data-fx'); r.value = String(Math.round(_fx(k) * 100));
         const v = r.parentNode.querySelector('span:last-child'); if (v) v.textContent = r.value + '%';
         if (k === 'outer') { const row = r.closest('[data-fx-row]'); if (row) row.style.opacity = dashOuterShadowsOn ? '' : '0.45'; }
@@ -11027,9 +11085,7 @@ function _syncUnitChip() {
     const host = document.getElementById('projUnitsHost');
     if (host) _unitControlsInto(host);
 }
-function openUnitMenu() {
-    _dsPopup('unitMenu', 'unitChip', (menu) => { menu.style.width = '250px'; _unitControlsInto(menu); });
-}
+function openUnitMenu() { openAppSettings('units'); }
 function setUnit(newUnit) {
     if (!UNIT_INFO[newUnit]) return;  // unknown unit, ignore
     if (dashUnit === newUnit && elevUnit === newUnit) return;  // already set
@@ -41139,7 +41195,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.46</strong> Mat shadows actually land now: the shadow a mat casts onto the artwork, and mat 1 onto mat 2, were drawn too far outside the edge to reach it, so only the frame's shadow showed. Every inner shadow is now a true inset shadow, so Onto artwork and Mat onto mat read at every setting.<br><br>
+                body: `<strong>18.47</strong> One <strong>Settings</strong> gear in the header, in every view, for what you set up at the start of a project: Units, Frame effects and Elevations. The units chip opens it on Units.<br><br>
+<strong>18.46</strong> Mat shadows actually land now: the shadow a mat casts onto the artwork, and mat 1 onto mat 2, were drawn too far outside the edge to reach it, so only the frame's shadow showed. Every inner shadow is now a true inset shadow, so Onto artwork and Mat onto mat read at every setting.<br><br>
 <strong>18.45</strong> Frame effects samples are all in MICH-32-22 (the floater in MICH-301-22), the double mat is two white mats of one width, and the panel no longer shows the selected piece. With no mat, the frame now casts its shadow onto the artwork, everywhere a frame is drawn.<br><br>
 <strong>18.44</strong> Frame effects has sample tabs: step through No mat, Single mat, Double mat, Faux mat, Float mount and Canvas floater on one square composition, in the selected piece's moulding, to see where every shadow lands. The sliders are global: they change every frame in the project.<br><br>
 <strong>18.43</strong> The elevation thumbnail on a per-piece spec page is captioned <strong>Elevation</strong>, like the group pages, instead of the wall's code.<br><br>

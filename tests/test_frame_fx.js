@@ -118,7 +118,7 @@ const path = require('path');
     });
     __check('the panel has the on/off, five sliders and a reset, and the sliders drive the setting', () => {
       openFrameFx();
-      const m = document.getElementById('frameFxModal');
+      const m = document.getElementById('appSettingsModal');
       if (!m.querySelector('#frameFxOuterOn')) throw new Error('no drop shadow on/off');
       const rs = m.querySelectorAll('input[type=range][data-fx]');
       if (rs.length !== 5) throw new Error(rs.length + ' sliders');
@@ -131,7 +131,7 @@ const path = require('path');
     // 18.44: sample tabs, so every shadow can be seen on a build that actually casts it.
     __check('the panel steps through every build on a sample, one tab lit at a time', () => {
       openFrameFx();
-      const m = document.getElementById('frameFxModal');
+      const m = document.getElementById('appSettingsModal');
       const tabs = Array.from(m.querySelectorAll('#frameFxCases [data-fx-case]'));
       const want = ['nomat', 'mat1', 'mat2', 'faux', 'float', 'floater'];
       if (tabs.map(b => b.getAttribute('data-fx-case')).join() !== want.join()) throw new Error('tabs: ' + tabs.map(b => b.getAttribute('data-fx-case')).join());
@@ -168,7 +168,9 @@ const path = require('path');
       if (FRAME_FX_CASES.some(c => c[0] === 'piece')) throw new Error('the selected-piece tab is back');
     });
     __check('the panel is reachable from the header and from Deck Studio', () => {
-      if ((document.getElementById('outerShadowToggle').getAttribute('onclick') || '').indexOf('openFrameFx') < 0) throw new Error('header button does not open it');
+      // 18.47: Frame effects is a tab of the header Settings gear, in every view.
+      if ((document.getElementById('appSettingsBtn').getAttribute('onclick') || '').indexOf('openAppSettings') < 0) throw new Error('header gear does not open Settings');
+      openFrameFx(); if (_appSettingsTab !== 'fx' || !document.querySelector('#appSettingsModal input[data-fx]')) throw new Error('openFrameFx does not land on the Frame effects tab');
       if (!document.getElementById('projFrameFxBtn')) throw new Error('no entry in the Project tab');
     });
   `;
