@@ -2344,13 +2344,14 @@ button, input, select, textarea { font-family: inherit; }
     background: color-mix(in srgb, var(--plc) 70%, transparent);
     color: #fff;
 }
-/* An image used in another placement too: a small amber count before the code. */
+/* An image used in another placement too: a small amber count. At the RIGHT end of the
+   Img Code field since 18.62: on the left it sat on the artwork thumbnail (18.61). */
 .dash-same-img {
-    position: absolute; left: 2px; top: 50%; transform: translateY(-50%);
+    position: absolute; right: 12px; top: 50%; transform: translateY(-50%); z-index: 1;
     font-size: var(--fs-55); font-weight: 700; line-height: 1; padding: 2px 4px;
     border-radius: var(--r-4); background: var(--warn); color: #000; cursor: help;
 }
-.dash-same-img + .tbl-in { padding-left: 26px; }
+.dash-same-img + .tbl-in { padding-right: 30px; }
 
 /* The floorplan category picker is a COLOUR CHIP: the closed select shows no text (one
  * squashed letter under a chevron read as a typo), the open menu shows the names. */

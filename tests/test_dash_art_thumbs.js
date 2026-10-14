@@ -92,6 +92,22 @@ check('the cache is bounded', () => {
   fx.cache.clear();
 });
 
+check('EXACT BUG (18.62): the x2 same-image badge does not sit on the thumbnail', () => {
+  fx.cache.clear();
+  const r1 = row('ART.1', BIG), r2 = row('ART.2', BIG);
+  r1.imageCode = r2.imageCode = 'SAME_CODE';
+  fx.rows([r1, r2]);
+  const td = render().querySelector('.dash-same-img');
+  if (!td) throw new Error('setup: no badge for a shared image');
+  const cell = td.parentElement;
+  const kids = Array.prototype.slice.call(cell.children);
+  if (kids.indexOf(cell.querySelector('.dash-art-thumb')) > kids.indexOf(td)) throw new Error('badge comes before the thumbnail');
+  const CSS = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
+  const i = CSS.indexOf('.dash-same-img {'), rule = CSS.slice(i, CSS.indexOf('}', i));
+  if (rule.indexOf('right:') < 0 || rule.indexOf('left: 2px') >= 0) throw new Error('badge is pinned to the left, over the thumbnail');
+  if (CSS.indexOf('.dash-same-img + .tbl-in { padding-right:') < 0) throw new Error('the code runs under the badge');
+});
+
 const failed = results.filter(r => !r.ok);
 results.forEach(r => console.log((r.ok ? 'PASS: ' : 'FAIL: ') + r.label + (r.ok ? '' : ' -- ' + r.err)));
 if (failed.length) { console.log(failed.length + ' FAILURE' + (failed.length > 1 ? 'S' : '')); process.exit(1); }
