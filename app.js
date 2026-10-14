@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.66';
+const APP_VERSION = '18.67';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -10714,12 +10714,6 @@ function _dsOptionsInto(t, desc) {
         lab.appendChild(_dsHelpDot('A page after each placement\'s breaker showing every option at ONE scale, so differences in frame size show. When every option is a single piece it is an options sheet: shared specs on the left, framed mockups on the right, and it replaces the options\' own spec pages. Untick to get one spec page per option back. Deck-wide.'));
         body.appendChild(lab);
         if (_catOverviewOn() && _catSheetMode(place)) {
-            const pr = document.createElement('div');
-            pr.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-muted); margin-top:6px;';
-            const L = _catSheetLayout(place);
-            pr.appendChild(document.createTextNode('Options per page: ' + L.per + (L.parts > 1 ? (' (' + L.parts + ' pages)') : '')));
-            pr.appendChild(_dsHelpDot('Automatic for single pieces: as many as still print about 1.8in across, all at one scale. Portrait art fits four in a row, landscape and square six in two rows. More than that splits evenly over pages, each carrying the specs.'));
-            body.appendChild(pr);
             // What the left column carries under the specs, on the options sheet itself.
             if (desc && desc.kind === 'catov') { const sh = document.createElement('div'); sh.style.marginTop = '10px'; body.appendChild(sh); _dsSpecSlotsInto(sh, desc, _catOverviewKey(place), 'sheet'); }
         } else if (_catOverviewOn()) {
@@ -18012,7 +18006,10 @@ function _clearSpecGroupSlots(ovKey) {
 // different defaults. It has always printed the moulding (corner + profile) and never a plan
 // or a wall, because the breaker in front of it carries both. Keyed per PLACEMENT
 // (_catOverviewKey(place), part 0), so every page of a split sheet shows the same parts.
-const CAT_SHEET_SLOT_DEFAULT = { frame: true, profile: true, plan: false, elevation: false };
+// `per` (18.67) rides in the same map: options per page, 0 = automatic. Same scope, same
+// "this placement" pin, same reset as the ticks, so a designer can try 3 or 6 on one
+// placement or the whole deck.
+const CAT_SHEET_SLOT_DEFAULT = { frame: true, profile: true, plan: false, elevation: false, per: 0 };
 function _catSheetSlots(ovKey) {
     const ec = editorialContent || {};
     const base = Object.assign({}, CAT_SHEET_SLOT_DEFAULT, ec.catSheetSlots || {});
@@ -18021,14 +18018,16 @@ function _catSheetSlots(ovKey) {
 }
 function _catSheetSlotOv(ovKey) { return ovKey ? ((editorialContent.catSheetSlotOverrides || {})[ovKey] || null) : null; }
 function _setCatSheetSlot(ovKey, slot, on, scope) {
-    if (SPEC_SLOT_KEYS.indexOf(slot) < 0) return;
+    if (SPEC_SLOT_KEYS.indexOf(slot) < 0 && slot !== 'per') return;
+    if (slot === 'per') on = Math.max(0, Math.min(CAT_SHEET_MAX_PER, parseInt(on, 10) || 0));
+    else on = !!on;
     if (scope === 'page') {
         if (!ovKey) return;
         const m = editorialContent.catSheetSlotOverrides = editorialContent.catSheetSlotOverrides || {};
-        (m[ovKey] = m[ovKey] || {})[slot] = !!on;
+        (m[ovKey] = m[ovKey] || {})[slot] = on;
         return;
     }
-    editorialContent.catSheetSlots = Object.assign({}, _catSheetSlots(null), { [slot]: !!on });
+    editorialContent.catSheetSlots = Object.assign({}, _catSheetSlots(null), { [slot]: on });
     const m = editorialContent.catSheetSlotOverrides || {};
     Object.keys(m).forEach(k => {
         if (m[k] && Object.prototype.hasOwnProperty.call(m[k], slot)) {
@@ -18319,7 +18318,7 @@ function _catSheetArea(PW, PH, place) {
     const x0 = colR + 22;
     return { SR: SR, colX: colX, colW: colR - colX, x: x0, w: SR.R - x0, top: B.body + _subtitleClear() + 6, bottom: SR.B - 4 };
 }
-function _catSheetLayout(place, PW, PH) {
+function _catSheetLayout(place, PW, PH, opts) {
     PW = PW || PAGE_FORMAT[0]; PH = PH || PAGE_FORMAT[1];
     const A = _catSheetArea(PW, PH, place);
     const all = _catPlacementWalls(place);
@@ -18344,12 +18343,21 @@ function _catSheetLayout(place, PW, PH) {
         return best;
     };
     const readable = (b) => Math.sqrt(mw * b.s * mh * b.s) >= CAT_SHEET_MIN_PT;
-    let maxPer = 1;
-    for (let n = 2; n <= Math.min(CAT_SHEET_MAX_PER, all.length); n++) { if (readable(fit(n))) maxPer = n; else break; }
-    const parts = Math.max(1, Math.ceil(all.length / maxPer));
-    const per = Math.ceil(all.length / parts);
+    // A CHOSEN count is honoured exactly (6 means 6, then the rest), whatever the size
+    // floor says: the designer is looking at it. Automatic splits evenly.
+    const chosen = (opts && opts.auto) ? 0 : _catSheetSlots(_catOverviewKey(place)).per;
+    let parts, per;
+    if (chosen > 0) {
+        per = Math.max(1, Math.min(chosen, all.length));
+        parts = Math.max(1, Math.ceil(all.length / per));
+    } else {
+        let maxPer = 1;
+        for (let n = 2; n <= Math.min(CAT_SHEET_MAX_PER, all.length); n++) { if (readable(fit(n))) maxPer = n; else break; }
+        parts = Math.max(1, Math.ceil(all.length / maxPer));
+        per = Math.ceil(all.length / parts);
+    }
     const g = fit(per);
-    return { area: A, parts: parts, per: per, rows: g.rows, cols: g.cols, scale: g.s, cellW: mw * g.s, cellH: mh * g.s, k: k };
+    return { area: A, parts: parts, per: per, auto: !(chosen > 0), rows: g.rows, cols: g.cols, scale: g.s, cellW: mw * g.s, cellH: mh * g.s, k: k };
 }
 async function _drawCatSheetPage(doc, logos, pageNum, meta, place, ctx) {
     const PW = (ctx && ctx.PW) || 936, PH = (ctx && ctx.PH) || 540;
@@ -19754,6 +19762,36 @@ function _dsSpecSlotsInto(host, desc, ovKey, group) {
     wrap.appendChild(lab);
     const cur = rd(ovKey);
     const ov = rdOv(ovKey) || {};
+    if (sheet) {
+        // OPTIONS PER PAGE, scoped by the same APPLIES TO as the ticks below.
+        const place = desc && desc.place;
+        const row = document.createElement('label');
+        row.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); margin-bottom:8px;';
+        row.appendChild(document.createTextNode('Options per page'));
+        const sel = document.createElement('select');
+        sel.id = 'dsCatSheetPer';
+        sel.style.cssText = 'height:24px; font-size:var(--fs-65); flex:0 0 auto;';
+        let autoN = 0;
+        try { if (place) autoN = _catSheetLayout(place, 0, 0, { auto: true }).per; } catch (e) { autoN = 0; }
+        const o0 = document.createElement('option'); o0.value = '0'; o0.textContent = 'Auto' + (autoN ? ' (' + autoN + ')' : ''); sel.appendChild(o0);
+        for (let n = 1; n <= CAT_SHEET_MAX_PER; n++) { const o = document.createElement('option'); o.value = String(n); o.textContent = String(n); sel.appendChild(o); }
+        sel.value = String(cur.per || 0);
+        sel.onchange = () => {
+            wr(ovKey, 'per', sel.value, _dsSlotScope);
+            if (typeof pushHistory === 'function') pushHistory();
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+            _dsRenderTools(); _dsRefresh(); _dsRenderRail(); _dsPriorityRerender(desc); _dsRenderCenter();
+        };
+        row.appendChild(sel);
+        row.appendChild(_dsHelpDot('Auto fits as many as still print about 1.8in across, all at one scale, and splits evenly. Pick a number to try it: that many go on each page, the rest follow. Applies to every options sheet or just this placement, set below.'));
+        if (Object.prototype.hasOwnProperty.call(ov, 'per')) {
+            const pin = document.createElement('span');
+            pin.textContent = 'this placement';
+            pin.style.cssText = 'font-size:var(--fs-50); color:var(--warn);';
+            row.appendChild(pin);
+        }
+        wrap.appendChild(row);
+    }
     ((group && !sheet) ? SPEC_SLOT_KEYS.concat(SPEC_GROUP_LAYOUT_KEYS) : SPEC_SLOT_KEYS).forEach(k => {
         const row = document.createElement('label');
         row.style.cssText = 'display:flex; align-items:center; gap:7px; font-size:var(--fs-65); color:var(--text-main); cursor:pointer; margin-bottom:3px;';
@@ -33069,6 +33107,17 @@ function _dsRequestThumbnailSync() {
     if (elapsed >= _DS_THUMB_MIRROR_INTERVAL_MS) fire();
     else _dsThumbMirrorTimeout = setTimeout(fire, _DS_THUMB_MIRROR_INTERVAL_MS - elapsed);   // trailing catch-up once dragging stops
 }
+function _dsCopyCanvasPixels(src, dst) {
+    try {
+        const a = (src.tagName === 'CANVAS') ? [src] : Array.from(src.querySelectorAll('canvas'));
+        const b = (dst.tagName === 'CANVAS') ? [dst] : Array.from(dst.querySelectorAll('canvas'));
+        a.forEach((c, i) => {
+            const d = b[i]; if (!d || !c.width || !c.height) return;
+            d.width = c.width; d.height = c.height;
+            try { d.getContext('2d').drawImage(c, 0, 0); } catch (e) {}
+        });
+    } catch (e) {}
+}
 function _dsSyncActiveThumbnailMirror() {
     try {
         if (!_dsIsOpen()) return;   // Deck view isn't showing — nothing to mirror
@@ -33129,6 +33178,10 @@ function _dsSyncActiveThumbnailMirror() {
         // contentEditable text boxes would otherwise clone as editable too —
         // strip it so the mirror is inert, matching pointer-events:none below.
         clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+        // cloneNode copies a <canvas> ELEMENT but not its pixels, so a page the centre draws
+        // to a canvas (the options sheet, cards, plan details) mirrored as a blank cell and
+        // the thumbnail vanished while that page was selected (18.67). Copy the pixels over.
+        _dsCopyCanvasPixels(source, clone);
         const origStyle = source.getAttribute('style') || '';
         clone.setAttribute('style', origStyle + '; position:absolute; left:0; top:0; margin:0; box-shadow:none; border-radius:0; width:' + rect.width + 'px; height:' + rect.height + 'px; transform:scale(' + scaleX + ',' + scaleY + '); transform-origin:top left; pointer-events:none;');
         let wrap = cell.querySelector('._dsThumbMirrorWrap');
@@ -41643,7 +41696,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

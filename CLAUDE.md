@@ -622,6 +622,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   block is fitted above `thumbTop`. `_specTplMap` is the ONE template-to-page map. Never
   hand-place sheet thumbnails again (`test_cat_options_sheet` compares positions to a real
   per-piece render).
+  Options per page is `per` in the SAME map (0 = auto, 1..10 honoured exactly, even past the
+  floor; auto splits evenly). `_catSheetLayout(place, PW, PH, {auto})` reports what auto would pick.
+- **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
+  `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages
+  go blank in the rail while selected.
 - **CATALOGUE: PLAN PINS.** The primary's slot row is pinned once and every arrangement and
   option row mirrors it through `CAT_ROW_FIELDS` / `CAT_ROW_DEEP`, including options that
   existed before the pin. Options (`_catOptionRowIds`) and alternate arrangements

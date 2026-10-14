@@ -226,10 +226,66 @@ window.__res = (async function () {
     codes.forEach(function (c) { labels.forEach(function (l) { if (Math.abs(l.x - (c.x - L.cellW)) < 2 && l.y > c.y && l.y - c.y < 10) throw new Error('image code ' + c.str + ' crowds ' + l.str); }); });
     mock.forEach(function (o) { if (o.a[1] + o.a[3] > L.area.bottom + 0.5) throw new Error('a mockup runs past the bottom guide'); });
   });
+  // 18.67: "where are my controls to choose how many options get displayed per page. I want
+  // designers to be able to experiment what 3 on a page look like or 6 on a page look like,
+  // and this should be able to choose that it is applied to this placement only or all
+  // placements in the presentation."
+  const nSheets = function () { return _deckPageList().filter(function (d) { return d.kind === 'catov'; }).length; };
+  await check('EXACT ASK: 3 per page puts three on each page, the rest after (5 = 3 + 2)', async function () {
+    build(5, 24, 32);
+    _setCatSheetSlot(null, 'per', 3);
+    const L = _catSheetLayout('ART.1');
+    if (L.per !== 3 || L.parts !== 2 || L.auto) throw new Error(JSON.stringify([L.per, L.parts, L.auto]));
+    if (nSheets() !== 2) throw new Error('page list: ' + nSheets());
+    if (imgs(await draw(0)).filter(function (o) { return o.a[0] > L.area.x - 1; }).length !== 3) throw new Error('page 1 does not hold three');
+  });
+  await check('EXACT ASK: 6 per page means six on the page, even past the auto size floor', async function () {
+    build(7, 24, 32);
+    _setCatSheetSlot(null, 'per', 6);
+    const L = _catSheetLayout('ART.1');
+    if (L.per !== 6 || L.parts !== 2) throw new Error(JSON.stringify([L.per, L.parts]));
+    if (imgs(await draw(0)).filter(function (o) { return o.a[0] > L.area.x - 1; }).length !== 6) throw new Error('page 1 does not hold six');
+    _setCatSheetSlot(null, 'per', 0);
+    if (!_catSheetLayout('ART.1').auto) throw new Error('0 is not automatic');
+  });
+  await check('EXACT ASK: Just this placement changes only that placement; All option sheets clears the exception', async function () {
+    build(5, 24, 32);
+    const k = _catOverviewKey('ART.1');
+    _setCatSheetSlot(k, 'per', 2, 'page');
+    if (_catSheetLayout('ART.1').per !== 2) throw new Error('the placement did not take its own count');
+    if (_catSheetSlots(_catOverviewKey('ART.9')).per !== 0) throw new Error('another placement picked it up');
+    _setCatSheetSlot(null, 'per', 4);
+    if (_catSheetSlotOv(k)) throw new Error('deck-wide did not clear the exception');
+    if (_catSheetLayout('ART.1').per !== 4) throw new Error('deck-wide count not applied');
+  });
+  await check('the panel offers Auto (with what it picked) and 1 to 10, and writes through the scope', async function () {
+    build(5, 24, 32);
+    const desc = _deckPageList().find(function (d) { return d.kind === 'catov'; });
+    const host = document.createElement('div'); _dsOptionsInto(host, desc);
+    const sel = host.querySelector('#dsCatSheetPer');
+    if (!sel) throw new Error('no Options per page control on the sheet');
+    const opts = Array.from(sel.options).map(function (o) { return o.textContent; });
+    if (opts[0] !== 'Auto (3)' || opts.length !== 11 || opts[10] !== '10') throw new Error('options: ' + opts.join());
+    _dsSlotScope = 'page'; sel.value = '2'; sel.onchange(); _dsSlotScope = 'deck';
+    if ((_catSheetSlotOv(_catOverviewKey('ART.1')) || {}).per !== 2) throw new Error('Just this placement did not write the placement');
+    if (_catSheetSlots(null).per !== 0) throw new Error('it leaked to the deck');
+  });
+  await check('EXACT ASK: the selected page keeps its rail thumbnail: the live mirror copies canvas pixels', async function () {
+    const S2 = window.__appSrc;
+    const i = S2.indexOf('function _dsSyncActiveThumbnailMirror(');
+    const body = S2.slice(i, S2.indexOf(String.fromCharCode(10) + '}', i));
+    if (body.indexOf('_dsCopyCanvasPixels(source, clone)') < 0) throw new Error('the mirror clones canvases without their pixels');
+    const a = document.createElement('div'), c = document.createElement('canvas'); c.width = 30; c.height = 20; a.appendChild(c);
+    const b = a.cloneNode(true); let drew = null;
+    b.querySelector('canvas').getContext = function () { return { drawImage: function (src) { drew = src; } }; };
+    _dsCopyCanvasPixels(a, b);
+    if (drew !== c || b.querySelector('canvas').width !== 30) throw new Error('pixels were not copied');
+  });
   return out;
 })();
 `;
 const quiet = console.error; console.error = () => {};
+window.__appSrc = APP;
 window.eval(APP + NL + body);
 console.error = quiet;
 window.__res.then((results) => {
