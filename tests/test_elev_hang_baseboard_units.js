@@ -118,7 +118,8 @@ const path = require('path');
     __check('the unit conversion pass no longer multiplies these two inputs', () => {
       // It is what rounded 57 -> 144.78 -> 57.00 and back, a little off each time.
       // setElevUnit / setDashUnit are both thin wrappers; setUnit does the work.
-      const i = S.indexOf('function setUnit');
+      // 'function setUnit(' with the paren: setUnitPrecision (18.60) also starts with setUnit.
+      const i = S.indexOf('function setUnit(');
       if (i < 0) throw new Error('setUnit not found');
       const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));
       if (/\\['hangHeight', null\\]|\\['baseboardHeight', null\\]/.test(body)) throw new Error('hangHeight/baseboardHeight are still in the multiply-the-input list');

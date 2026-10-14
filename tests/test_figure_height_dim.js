@@ -123,9 +123,8 @@ const path = require('path');
       if (!/rotate\\(-90deg\\)/.test(rule)) throw new Error('the rotation is not the architectural 90 CCW: ' + rule);
     });
 
-    __check('the number follows the deck dual-unit setting and the suffix toggle', () => {
+    __check('the number follows the deck dual-unit setting and always carries its unit', () => {
       toggleFigureDim(true);
-      const sfx = showUnitSuffix; showUnitSuffix = true;
       __seed('in', '');
       if (__lbl().textContent !== '72\\u0022') throw new Error('inches gave: ' + __lbl().textContent);
       __seed('in', 'mm');
@@ -133,10 +132,9 @@ const path = require('path');
       if (__lbl().textContent !== '72\\u0022(1829mm)') throw new Error('dual mm gave: ' + __lbl().textContent);
       __seed('cm', '');
       if (__lbl().textContent !== '182.9 cm') throw new Error('a cm project gave: ' + __lbl().textContent);
-      // Interior dims drop the suffix when that toggle is off — this is one of them.
-      showUnitSuffix = false; __seed('in', '');
-      if (__lbl().textContent !== '72') throw new Error('with the suffix toggle off it still reads: ' + __lbl().textContent);
-      showUnitSuffix = sfx;
+      // 18.60: no suffix toggle any more; a single-unit drawing keeps the mark.
+      __seed('in', '');
+      if (__lbl().textContent !== '72\\u0022') throw new Error('single unit lost its mark: ' + __lbl().textContent);
       // One height for the drawn figure and the number that measures it.
       const i = S.indexOf('function _elevFigureDimLabel');
       if (S.slice(i, i + 200).indexOf('ELEV_PERSON_HEIGHT_IN') < 0) throw new Error('the dimension hardcodes its own height');

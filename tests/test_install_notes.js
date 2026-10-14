@@ -703,7 +703,8 @@ const path = require('path');
       if (_igLegDimText(24, 24) !== '24 × 24 in') throw new Error('dual off: ' + _igLegDimText(24, 24));
       editorialContent.specDualUnit = 'mm';
       const mm = _igLegDimText(24, 24);
-      if (mm.indexOf('609.6mm') < 0) throw new Error('dual mm did not print the companion: ' + mm);
+      // 18.60: whole mm by default (project rounding), as the spec pages beside it print.
+      if (mm.indexOf('(610mm)') < 0) throw new Error('dual mm did not print the companion: ' + mm);
       if (mm.indexOf('24') !== 0) throw new Error('INCHES must lead whatever the project stores: ' + mm);
       editorialContent.specDualUnit = 'cm';
       if (_igLegDimText(32, 18).indexOf('cm') < 0) throw new Error('dual cm did not print');

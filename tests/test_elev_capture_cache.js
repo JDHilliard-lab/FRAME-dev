@@ -108,7 +108,7 @@ const path = require('path');
         'hang height':           () => { elevHangIn = 60; },
         'baseboard':             () => { elevBaseboardIn = 6; },
         'unit':                  () => { elevUnit = 'cm'; },
-        'interior suffix':       () => { showUnitSuffix = !showUnitSuffix; },
+        'rounding (18.60)':      () => { editorialContent.unitPrecision = { in: 1, mm: 0, cm: 1 }; },
         'elevation dual units':  () => { editorialContent.specDualUnit = 'mm'; }   // 18.37: the project setting
       };
       Object.keys(cases).forEach(name => {

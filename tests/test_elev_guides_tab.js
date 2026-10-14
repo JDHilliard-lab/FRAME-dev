@@ -39,7 +39,7 @@ const fx = window.__fx;
 const doc = window.document;
 
 const GUIDE_IDS = ['labelToggle', 'odToggle', 'dimToggle', 'personToggle', 'guideToggle', 'gridToggle', 'frameCenterToggle',
-  'wallDimToggle', 'groupBoxToggle', 'edgeGapToggle', 'autoSpacingToggle', 'unitSuffixToggle', 'customLinesToggle',
+  'wallDimToggle', 'groupBoxToggle', 'edgeGapToggle', 'autoSpacingToggle', 'customLinesToggle',
   'artworkToggle', 'imageCodeToggle', 'spacingEQToggle', 'wireframeToggle', 'allGuidesToggle', 'resetDimPosBtn'];
 
 check('EXACT BUG: the sidebar header no longer holds the layout guides', () => {

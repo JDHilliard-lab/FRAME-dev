@@ -209,8 +209,9 @@ const path = require('path');
       dashUnit = 'in'; editorialContent.specDualUnit = 'mm';
       const s = buildSpecStrings(egd());
       const od = s.lines.find(l => l.label === 'Overall Dimensions').value;
-      // The Ford catalog writes 192"(4876.8mm) W x 120"(3048mm) H.
-      if (od.indexOf('192"(4876.8mm)W') < 0 || od.indexOf('120"(3048mm)H') < 0) throw new Error('dual-unit overall reads: ' + od);
+      // The Ford catalog writes 192"(4876.8mm) W x 120"(3048mm) H. 18.60: mm rounds to the
+      // project setting, whole mm by default, so 4877mm.
+      if (od.indexOf('192"(4877mm)W') < 0 || od.indexOf('120"(3048mm)H') < 0) throw new Error('dual-unit overall reads: ' + od);
       editorialContent.specDualUnit = '';
     });
 

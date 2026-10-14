@@ -92,17 +92,15 @@ const path = require('path');
       if (t !== '60\\" AFF') throw new Error('a 60in hang height gave "' + t + '"');
     });
 
-    __check('EXACT RISK: AFF keeps its unit mark even with the interior-suffix toggle off', () => {
+    // 18.60: the interior-suffix toggle is gone (every number carries its mark), so this
+    // now just pins the AFF mark itself.
+    __check('EXACT RISK: AFF keeps its unit mark', () => {
       // That toggle de-clutters dozens of repeated spacing numbers and leans on
       // the corner legend. AFF is a single absolute instruction an installer
       // works to, so '57 AFF' would invite the mistake the callout prevents.
       __seed('in', 185, 108);
-      const save = showUnitSuffix;
-      showUnitSuffix = false;
       drawElevAll();
       const t = (document.querySelector('.hang-dim-num').textContent || '').trim();
-      showUnitSuffix = save;
-      drawElevAll();
       if (t !== '57\\" AFF') throw new Error('lost the unit mark with suffixes off: "' + t + '"');
     });
 

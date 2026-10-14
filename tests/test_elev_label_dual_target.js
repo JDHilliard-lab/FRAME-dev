@@ -214,20 +214,21 @@ const path = require('path');
       const before = elevUnit;
       setElevDualUnit('mm');
       const got = elevFmtU(102);         // 102mm stored
-      if (got.indexOf('4\\"') !== 0) throw new Error('expected inches first, got "' + got + '"');
+      // 18.60: inches print to the project rounding (0.### by default), so 102mm is 4.016".
+      if (got.indexOf('4.016\\"') !== 0) throw new Error('expected inches first, got "' + got + '"');
       if (got.indexOf('(102mm)') < 0) throw new Error('lost the companion: "' + got + '"');
       if (elevUnit !== before) throw new Error('the project unit changed to ' + elevUnit);
       setElevDualUnit('');
       elevUnit = 'in';
     });
 
-    __check('dual units bring the unit mark back even with the interior-suffix toggle off', () => {
+    // 18.60: the interior-suffix toggle is gone; every elevation number carries its unit.
+    __check('every interior number carries its unit mark, with or without dual units', () => {
       __seed('in');
-      const save = showUnitSuffix; showUnitSuffix = false;
-      if (elevFmtU(4) !== '4') throw new Error('suffix-off baseline changed: ' + elevFmtU(4));
+      if (elevFmtU(4) !== '4\\"') throw new Error('single-unit interior number lost its mark: ' + elevFmtU(4));
       setElevDualUnit('mm');
       const got = elevFmtU(4);
-      showUnitSuffix = save; setElevDualUnit('');
+      setElevDualUnit('');
       if (got.indexOf('\\"') < 0) throw new Error('a bare number with a bracketed one reads as a mistake: "' + got + '"');
     });
 

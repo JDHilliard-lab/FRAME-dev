@@ -132,11 +132,11 @@ check('EXPORT is one menu with the six choices, each wired to the real exporter'
   if (called.join(',') !== 'png,svg,svg,all-png,all-svg,all-svg') throw new Error('menu items call: ' + called.join(','));
 });
 
-check('layout guides are three foldable groups and every one of the 16 buttons has a caption', () => {
+check('layout guides are three foldable groups and every one of the 15 buttons has a caption (Units went in 18.60)', () => {
   const groups = doc.querySelectorAll('#elev-sec-layout details.lg-group');
   if (groups.length !== 3) throw new Error(groups.length + ' groups');
   const ids = ['labelToggle', 'odToggle', 'dimToggle', 'personToggle', 'guideToggle', 'gridToggle', 'frameCenterToggle',
-    'wallDimToggle', 'groupBoxToggle', 'edgeGapToggle', 'autoSpacingToggle', 'unitSuffixToggle', 'customLinesToggle',
+    'wallDimToggle', 'groupBoxToggle', 'edgeGapToggle', 'autoSpacingToggle', 'customLinesToggle',
     'artworkToggle', 'imageCodeToggle', 'spacingEQToggle'];
   ids.forEach(id => {
     const b = doc.getElementById(id);

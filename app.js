@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.59';
+const APP_VERSION = '18.60';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -1389,6 +1389,30 @@ const UNIT_INFO = {
     mm: { factor: 25.4, suffix: ' mm', label: 'MM', decimals: 0 },
 };
 function unitInfo(u) { return UNIT_INFO[u] || UNIT_INFO.in; }
+// ROUNDING IS ONE PROJECT SETTING PER UNIT (18.60): Settings > Units > Rounding. Before,
+// the same 1.875" moulding printed 2" on an elevation, 1.875" on its spec page and 1.88" in
+// the letter legend, and 47.6mm beside one and 48mm beside the other. Every printed
+// dimension now goes through _fmtUnitNum, which rounds to the unit's setting and trims
+// trailing zeros (the 0.## style: 24 stays 24, 1.875 stays 1.875 at three places).
+// NOT used for data entry (dashFmt keeps the full value) or machine output (CSV numbers).
+// Travels in the project (editorialContent.unitPrecision); absent means the defaults.
+const UNIT_PRECISION_DEFAULT = { in: 3, mm: 0, cm: 1 };
+const UNIT_PRECISION_MAX = 4;
+function _unitPrecision(u) {
+    const ec = (typeof editorialContent !== 'undefined' && editorialContent) || {};
+    const v = ec.unitPrecision ? ec.unitPrecision[u] : undefined;
+    if (Number.isInteger(v) && v >= 0 && v <= UNIT_PRECISION_MAX) return v;
+    return (UNIT_PRECISION_DEFAULT[u] != null) ? UNIT_PRECISION_DEFAULT[u] : 3;
+}
+function _fmtUnitNum(n, u) {
+    n = parseFloat(n);
+    if (!isFinite(n)) return '0';
+    // Snap the float residue first: 0.75 * 25.4 is 19.049999999999997, which must round
+    // like the 19.05 it is.
+    const snapped = Math.round(n * 1e6) / 1e6;
+    const s = parseFloat(snapped.toFixed(_unitPrecision(u))).toString();
+    return (s === '-0') ? '0' : s;
+}
 // Conversion multiplier between any two units. unitFactor('in', 'cm') = 2.54.
 // Math: 1 in = X (unit_to / unit_from) means factor = UNIT[to]/UNIT[from].
 function unitFactor(from, to) {
@@ -3475,7 +3499,7 @@ function _elevCaptureSignature() {
         // recaptured every elevation for nothing.
         parts.push(String(elevHangIn), String(elevBaseboardIn));
         parts.push(typeof elevUnit !== 'undefined' ? elevUnit : '');
-        parts.push(typeof showUnitSuffix !== 'undefined' ? String(showUnitSuffix) : '');
+        parts.push(JSON.stringify(((typeof editorialContent !== 'undefined' && editorialContent) || {}).unitPrecision || null));   // 18.60 rounding
         parts.push(_specDualUnit());
         parts.push(JSON.stringify(frameFx));   // Frame Effects change what every frame draws
         parts.push(typeof elevPersonShade !== 'undefined' ? String(elevPersonShade) : '');
@@ -5160,7 +5184,6 @@ function initMasterApp() {
     _initFontSelects();    // fill every static font picker from FRAME_FONT_LIBRARY
     loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
     loadDimVisibility();   // restore saved per-element dimension hide flags
-    loadUnitSuffixPref();  // restore interior unit-suffix on/off preference
     loadSvgFrameMode();    // restore SVG frame export mode (texture/autocolor)
     loadSnapPref();        // restore snap-to-align on/off preference
     loadDimSnapPref();     // restore dimension-drag snap preference
@@ -5808,8 +5831,6 @@ function syncLayoutGuideButtonStates() {
     const wireBtn = document.getElementById('wireframeToggle');
     if (wireBtn) wireBtn.classList.toggle('active', _isWireframe());
     // Unit suffix toggle: active when interior suffix is shown.
-    const usBtn = document.getElementById('unitSuffixToggle');
-    if (usBtn) usBtn.classList.toggle('active', showUnitSuffix);
     // Custom lines toggle: blue when lines exist + visible; dim when none.
     const clBtn = document.getElementById('customLinesToggle');
     if (clBtn) {
@@ -11100,6 +11121,38 @@ function _unitControlsInto(host) {
     seg('Enter sizes in', [['in', 'IN'], ['cm', 'CM'], ['mm', 'MM']], dashUnit, (u) => setUnit(u));
     seg('Second unit', [['', 'None'], ['mm', '+ MM'], ['cm', '+ CM']], _specDualUnit(), (u) => setProjectDualUnit(u),
         'Spec pages and elevations print inches first with the second unit in brackets: 24"(610mm).');
+    // ROUNDING (18.60): how many places each unit prints, everywhere a dimension prints.
+    // 0.## means "up to two": trailing zeros are dropped, so 24 never reads 24.00.
+    const places = [[0, '0'], [1, '0.#'], [2, '0.##'], [3, '0.###'], [4, '0.####']];
+    const rh = document.createElement('div'); rh.textContent = 'Rounding';
+    rh.style.cssText = 'font-size:var(--fs-60); font-weight:700; color:var(--text-strong); text-transform:uppercase; letter-spacing:0.3px; margin:14px 0 6px;';
+    host.appendChild(rh);
+    [['in', 'Inches'], ['mm', 'Millimetres'], ['cm', 'Centimetres']].forEach(p => {
+        seg(p[1], places, _unitPrecision(p[0]), (d) => setUnitPrecision(p[0], d));
+    });
+    const ex = document.createElement('div');
+    ex.className = 'unit-rounding-example';
+    ex.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-top:-2px; line-height:1.4;';
+    ex.textContent = 'A 1.875" moulding (47.625 mm) prints as ' + _fmtUnitNum(1.875, 'in') + '", '
+        + _fmtUnitNum(47.625, 'mm') + ' mm or ' + _fmtUnitNum(4.7625, 'cm') + ' cm, on spec pages, elevations and legends alike.';
+    host.appendChild(ex);
+}
+// THE one writer for the project rounding (18.60). Every page and every elevation capture
+// prints numbers through it, so all of them are rebuilt, the same way a second-unit change is.
+function setUnitPrecision(u, d) {
+    if (!UNIT_INFO[u] || !Number.isInteger(d) || d < 0 || d > UNIT_PRECISION_MAX) return;
+    if (_unitPrecision(u) === d) return;
+    const cur = {};
+    Object.keys(UNIT_PRECISION_DEFAULT).forEach(k => { cur[k] = _unitPrecision(k); });
+    cur[u] = d;
+    editorialContent.unitPrecision = cur;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _elevGuidesChanged(); } catch (e) {}
+    try { if (currentView === 'elevation') drawElevAll(); } catch (e) {}
+    try { if (typeof _dsClearBuiltAll === 'function') { _dsThumbCache = {}; _dsClearBuiltAll(); _dsRefresh(); } } catch (e) {}
+    try { if (currentView === 'dashboard' && typeof updateDashVisualsFromDOM === 'function') updateDashVisualsFromDOM(); } catch (e) {}
+    try { const h = document.getElementById('projUnitsHost'); if (h) _unitControlsInto(h); } catch (e) {}
 }
 function _syncUnitChip() {
     const m = document.getElementById('unitChipMain'), d = document.getElementById('unitChipDual');
@@ -14889,9 +14942,9 @@ function renderFrameToCanvas(d, swatchImg, opts) {
         x.textAlign = 'center'; x.textBaseline = 'middle';
         const cx = aX + aW/2, cy = aY + aH/2;
         const lineH = fontSize * 1.15;
-        x.fillText(`${(d.extW - d.fW*2 - mL - mR - m2*2).toFixed(1)}${unitSuffix}`, cx, cy - lineH);
+        x.fillText(`${_fmtUnitNum(d.extW - d.fW*2 - mL - mR - m2*2, opts.unit || 'in')}${unitSuffix}`, cx, cy - lineH);
         x.fillText(`x`, cx, cy);
-        x.fillText(`${(d.extH - d.fW*2 - mT - mB - m2*2).toFixed(1)}${unitSuffix}`, cx, cy + lineH);
+        x.fillText(`${_fmtUnitNum(d.extH - d.fW*2 - mT - mB - m2*2, opts.unit || 'in')}${unitSuffix}`, cx, cy + lineH);
     }
 
     return { canvas: c, pad: pad, frameW: w, frameH: h };
@@ -16479,7 +16532,7 @@ function _parseFrameFile(name) {
 }
 function _frameSizeTextFromParts(face, depth, rabbet) {
     const suf = '"';
-    const fmt = (v) => { const n = parseFloat(v); if (isNaN(n) || n === 0) return null; return parseFloat(n.toFixed(3)).toString(); };
+    const fmt = (v) => { const n = parseFloat(v); if (isNaN(n) || n === 0) return null; return _fmtUnitNum(n, 'in'); };
     const w = fmt(face), d = fmt(depth), rb = fmt(rabbet);
     const parts = [];
     if (w) parts.push(w + suf + 'W');
@@ -16578,7 +16631,7 @@ async function _loadFrameLibrary() {
 function _frameSizeStringForRow(row) {
     const u = (typeof dashUnit !== 'undefined') ? dashUnit : 'in';
     const suf = u === 'in' ? '"' : (' ' + u + ' ');
-    const fmt = (v) => { const n = parseFloat(v); if (isNaN(n) || n === 0) return null; return parseFloat(n.toFixed(3)).toString(); };
+    const fmt = (v) => { const n = parseFloat(v); if (isNaN(n) || n === 0) return null; return _fmtUnitNum(n, u); };
     const w = fmt(row.fW), h = fmt(row.fHeight), rb = fmt(row.rabbetDepth);
     const parts = [];
     if (w) parts.push(`${w}${suf}W`);
@@ -36431,10 +36484,9 @@ function _drawGlazingSchedule(doc, rows, x, y, w, bottom, col2X, isCont) {
     const du = (typeof _specDualUnit === 'function' ? _specDualUnit() : '');
     const prim = du ? 'in' : dashUnit;
     const sfx = (typeof unitInfo === 'function' ? (unitInfo(prim).suffix || '') : '');
-    const dec = prim === 'mm' ? 0 : (prim === 'cm' ? 1 : 2);
     const fmt = (v) => {
         const n = (parseFloat(v) || 0) * unitFactor(elevUnit, prim);
-        return parseFloat(n.toFixed(dec)).toString() + sfx
+        return _fmtUnitNum(n, prim) + sfx
             + (typeof _specDualPart === 'function' ? _specDualPart(n, prim, du) : '');
     };
     let cy = y;
@@ -38801,11 +38853,8 @@ function suggestedCanvasWrapFromRabbet(r) {
 //
 // Mount line auto-composes "Float Mount, 0.25\" Reveal" when useFloatMount.
 // Otherwise uses the user's Mount field text.
-// Companion-unit precision. 0.1mm / 0.01cm is the same physical precision and
-// finer than any framing tolerance, so it converts exactly without inventing
-// digits: 18" -> 457.2mm, 0.875" -> 22.2mm. Trailing zeros are stripped, so
-// round numbers stay round (1.25" -> 31.75mm, 2" -> 50.8mm).
-const _SPEC_DUAL_DECIMALS = { mm: 1, cm: 2, in: 3 };
+// Companion-unit precision is the project rounding since 18.60 (_fmtUnitNum); it was a
+// fixed 0.1mm / 0.01cm here, finer than the elevations beside it.
 // One dimension's companion value, e.g. '(19.1mm)'. `from` is the unit the value
 // is stored in, `to` the companion. Empty when dual units are off or the value
 // is missing — callers concatenate it blind.
@@ -38819,15 +38868,14 @@ function _specDualPart(v, from, to) {
     if (!to) return '';
     const n = parseFloat(v);
     if (isNaN(n) || n === 0) return '';
-    const d = _SPEC_DUAL_DECIMALS[to];
+    // 18.60: the project rounding, so a companion reads the same here and on an elevation.
     // Kill the float residue BEFORE the display rounding, or the same physical
     // size prints differently depending on which unit the project stores it in:
     // 0.75 in * 25.4 is 19.049999999999997 (rounds to 19), while the identical
     // 1.905 cm * 10 is exactly 19.05 (rounds to 19.1). Snapping to 6 decimals
     // first makes both 19.05, so both print 19.1.
     const raw = Math.round(n * unitFactor(from, to) * 1e6) / 1e6;
-    const num = parseFloat(raw.toFixed(d === undefined ? 2 : d)).toString();
-    return '(' + num + unitInfo(to).suffix.trim() + ')';
+    return '(' + _fmtUnitNum(raw, to) + unitInfo(to).suffix.trim() + ')';
 }
 // The deck-wide dual-unit setting: '' (off), 'mm' or 'cm'. Every spec layout
 // reads it — per piece, Group A/B/C, shared specs — because buildSpecStrings
@@ -38843,11 +38891,11 @@ function _igLegDimText(w, h) {
     if (!isFinite(nw) || !isFinite(nh) || nw <= 0 || nh <= 0) return '\u2014';
     const from = (typeof dashUnit !== 'undefined' ? dashUnit : 'in');
     const du = _specDualUnit();
-    if (!du) return dashFmt(nw) + ' \u00d7 ' + dashFmt(nh) + ' ' + from;
+    if (!du) return _fmtUnitNum(nw, from) + ' \u00d7 ' + _fmtUnitNum(nh, from) + ' ' + from;
     const one = (v) => {
         const inches = v * unitFactor(from, 'in');
         const snapped = Math.round(inches * 1e6) / 1e6;
-        return parseFloat(snapped.toFixed(2)).toString() + '\u0022' + _specDualPart(inches, 'in', du);
+        return _fmtUnitNum(snapped, 'in') + '\u0022' + _specDualPart(inches, 'in', du);
     };
     return one(nw) + ' \u00d7 ' + one(nh);
 }
@@ -38906,7 +38954,7 @@ function buildSpecStrings(r, opts) {
     const fmt = (v) => {
         const n = parseFloat(v);
         if (isNaN(n) || n === 0) return null;
-        return parseFloat((n * _pf).toFixed(3)).toString();
+        return _fmtUnitNum(n * _pf, _pu);   // 18.60: the project rounding
     };
 
     // Unit suffix used in human-readable strings throughout this function. Two
@@ -41161,7 +41209,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wall size and Settings', body: `The W and H fields set the wall. The gear beside them opens <strong>Settings</strong>: units, hang height, baseboard, label and dimension style, grid, drag snap and nudge steps.` },
             { title: 'Layout guides', body: `The guide toggles switch on-drawing overlays: frame letters, outside dimensions, spacing dimensions, the scale figure, the centre and hang lines, the grid, centre marks and more. They are shared by every wall, and Deck Studio's breaker and install pages show the same ones.` },
             { title: 'Dimensions', body: `Every dimension line works the same way: click it, drag its arrows to move the line, drag the number to slide it along, and use the &times; to hide it. Press <span class="help-kbd">M</span> to draw your own; its ends snap to frame corners, frame edges and the wall.` },
-            { title: 'Baseboard, hang height, units on labels', body: `The baseboard (4" by default) and hang height (57") are in Elevation settings (the gear in Layout Guides, or Settings, Elevations). The <strong>Unit Suffix</strong> guide shows the unit mark on every number, or turn it off for bare numbers.` },
+            { title: 'Baseboard, hang height, units on labels', body: `The baseboard (4" by default) and hang height (57") are in Elevation settings (the gear in Layout Guides, or Settings, Elevations). Every number on an elevation carries its unit mark. How many decimal places each unit prints is <strong>Rounding</strong> in Settings, Units.` },
             { title: 'Exporting walls', body: `The download icon beside the wall size exports this wall as a PNG. <strong>ALL PNG</strong> and <strong>ALL SVG</strong> put every wall in one ZIP, named like the walls. The SVG opens as real line work in Illustrator.` },
             { title: 'Zoom and fit', body: `The slider zooms. <strong>Fit</strong> fits the wall to the window.` }
         ]
@@ -41283,7 +41331,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.59</strong> On a spec page, the four <strong>Apply to…</strong> buttons are gone. They were left over from the old layout cards and, on an ordinary page, did nothing. A page that has its own layout (from an older project) shows one line saying so, with <strong>Reset this page</strong> and <strong>Copy to…</strong> (all pages, this elevation, or items you tick).<br><br>
+                body: `<strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>
+<strong>18.59</strong> On a spec page, the four <strong>Apply to…</strong> buttons are gone. They were left over from the old layout cards and, on an ordinary page, did nothing. A page that has its own layout (from an older project) shows one line saying so, with <strong>Reset this page</strong> and <strong>Copy to…</strong> (all pages, this elevation, or items you tick).<br><br>
 <strong>18.58</strong> A dimension number that sits beside a tight line (between two frames) now stays on its side while you drag the line, so you can push it clear of the frames. It used to jump across onto the neighbouring frame. <strong>Reset dimension positions</strong> puts it back to automatic.<br><br>
 <strong>18.57</strong> The view tabs are numbered from where a project starts: <strong>1 Deck</strong> (the floorplan Items list), <strong>2 Frame Dashboard</strong>, <strong>3 Elevation</strong>. The units chip is gone from the header (units are in Settings, the gear), and the dashboard layout toggle moved beside <strong>Download Frame PNG</strong>.<br><br>
 <strong>18.56</strong> The client you type when starting a <strong>New project</strong> now goes on the cover in place of CLIENT NAME. The heading is left for you to write.<br><br>
@@ -41944,8 +41993,7 @@ function elevFmt(val) {
     // stored unit's value with an inch mark after it.
     const pu = _elevPrimaryUnit();
     const n = (pu === elevUnit) ? parseFloat(val) : parseFloat(val) * unitFactor(elevUnit, pu);
-    const dec = unitInfo(pu).decimals;
-    return dec === 0 ? Math.round(n).toString() : n.toFixed(dec);
+    return _fmtUnitNum(n, pu);   // the project rounding (18.60)
 }
 
 // Hang height and baseboard are held in INCHES and shown in the active unit.
@@ -42769,7 +42817,7 @@ function drawElevAll() {
                 art.style.fontWeight = _elevWfFontWeight();
                 art.style.fontStyle = _elevWfFontStyle();
             } else {
-                art.innerText = (artW > 0) ? `${artW.toFixed(1)}${_openSfx}\nx\n${artH.toFixed(1)}${_openSfx}` : "";
+                art.innerText = (artW > 0) ? `${_fmtUnitNum(artW, elevUnit)}${_openSfx}\nx\n${_fmtUnitNum(artH, elevUnit)}${_openSfx}` : "";
             }
         }
         el.appendChild(art);
@@ -42782,7 +42830,7 @@ function drawElevAll() {
         odTag.style.left = ((f.x + f.w) * elevScale) + 'px'; odTag.style.bottom = ((f.y + f.h) * elevScale) + 'px';
         // OD label appends the unit directly without leading space ('24"x36"', '60x90cm')
         const odSuffix = elevUnit === 'in' ? '"' : elevUnit;
-        odTag.innerText = `OD: ${f.w.toFixed(1)}x${f.h.toFixed(1)}${odSuffix}`; odLayer.appendChild(odTag);
+        odTag.innerText = `OD: ${_fmtUnitNum(f.w, elevUnit)}x${_fmtUnitNum(f.h, elevUnit)}${odSuffix}`; odLayer.appendChild(odTag);
 
         const crossH = document.createElement('div'); crossH.className = 'crosshair-h';
         // Crosshair padding: 6 inches worth in whatever unit we're in
@@ -43189,24 +43237,10 @@ function unitSuffix() {
     return ' ' + u;
 }
 
-// Whether INTERIOR dimension labels (spacing, group box, hang height, edge
-// gaps) include the unit suffix. Default OFF for a cleaner look that fits
-// tight spaces; a corner legend shows the active unit instead. The OUTER
-// wall dimensions ALWAYS show their suffix regardless (plenty of room
-// outside the elevation), so they bypass this toggle.
-let showUnitSuffix = false;
-
-function loadUnitSuffixPref() {
-    try {
-        const raw = localStorage.getItem('showUnitSuffix');
-        if (raw !== null) showUnitSuffix = (raw === '1');
-    } catch (e) { /* default */ }
-}
-
-function saveUnitSuffixPref() {
-    try { localStorage.setItem('showUnitSuffix', showUnitSuffix ? '1' : '0'); }
-    catch (e) { /* ignore */ }
-}
+// EVERY ELEVATION NUMBER CARRIES ITS UNIT (18.60). Interior dimensions used to drop
+// the mark by default (a Units toggle in Layout Guides, saved per computer), so a mm-only
+// drawing read "1727" beside an outer "3658 mm". House standard now: always the mark.
+// The toggle, its tile and its localStorage key (showUnitSuffix) are gone.
 
 // ── ELEVATION DUAL UNITS ───────────────────────────────────────────────────
 // '' (off), 'mm' or 'cm': the companion unit printed in brackets after every
@@ -43237,7 +43271,7 @@ function _elevPrimaryUnit() { return _elevDualUnit() ? 'in' : elevUnit; }
 function elevFmtU(val) {
     const dual = _elevDualUnit();
     if (dual) return elevFmt(val) + unitSuffix() + _elevDualPart(val);
-    return elevFmt(val) + (showUnitSuffix ? unitSuffix() : '');
+    return elevFmt(val) + unitSuffix();
 }
 // EXACT variant, for dimensions that are FABRICATION numbers rather than set-out
 // numbers. elevFmt rounds inches to whole for legibility, which is right for a hang
@@ -43250,12 +43284,12 @@ function _elevFmtExact(val) {
     const pu = _elevPrimaryUnit();
     const n = (pu === elevUnit) ? parseFloat(val) : parseFloat(val) * unitFactor(elevUnit, pu);
     if (!isFinite(n)) return '0';
-    return parseFloat(n.toFixed(3)).toString();
+    return _fmtUnitNum(n, pu);   // 18.60: the project rounding, same as the schedule beside it
 }
 function _elevFmtExactU(val) {
     const dual = _elevDualUnit();
     if (dual) return _elevFmtExact(val) + unitSuffix() + _elevDualPart(val);
-    return _elevFmtExact(val) + (showUnitSuffix ? unitSuffix() : '');
+    return _elevFmtExact(val) + unitSuffix();
 }
 // The glazing equivalent of _spacingLabel — EQ still wins, because that is a statement
 // of intent and outranks any precision question.
@@ -43279,9 +43313,7 @@ function _elevDualPart(val) {
     // Snap the float residue before the display rounding, or the same physical size
     // prints differently depending on the stored unit (see _specDualPart).
     const raw = Math.round(n * unitFactor(elevUnit, dual) * 1e6) / 1e6;
-    const dec = unitInfo(dual).decimals;
-    const num = dec === 0 ? Math.round(raw).toString() : parseFloat(raw.toFixed(dec)).toString();
-    return '(' + num + unitInfo(dual).suffix.trim() + ')';
+    return '(' + _fmtUnitNum(raw, dual) + unitInfo(dual).suffix.trim() + ')';
 }
 
 
@@ -43323,14 +43355,6 @@ function seedElevDualUnitInputs() {
     if (cm) cm.classList.toggle('active', shown === 'cm');
 }
 
-// Toggle the interior-suffix preference + re-render. Updates the button
-// state and the legend visibility.
-function toggleUnitSuffix(btn) {
-    showUnitSuffix = !showUnitSuffix;
-    saveUnitSuffixPref();
-    if (btn) btn.classList.toggle('active', showUnitSuffix);
-    drawElevAll();
-}
 
 // ── Annotation style modal ──
 function openAnnotationStyleModal() {

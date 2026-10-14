@@ -36,6 +36,11 @@ const path = require('path');
     window.__testResults = [];
     const __check = (label, fn) => { try { fn(); window.__testResults.push({ label, ok: true }); } catch (e) { window.__testResults.push({ label, ok: false, err: e.message }); } };
     editorialContent = editorialContent || {};
+    // 18.60: rounding became a project setting (Settings > Units > Rounding). This file is
+    // about FORMAT (inches first, brackets, AA as its own word), so it pins the rounding the
+    // spec pages used before: mm to 0.1, cm and inches to 0.001. The defaults have their
+    // own checks in test_unit_precision.js.
+    editorialContent.unitPrecision = { in: 3, mm: 1, cm: 3 };
 
     // A plain framed print: 0.75" profile, 0.625" rabbet, 18" square, 3" mat.
     // \`scale\` restates the same physical piece in another project unit, which is

@@ -1598,6 +1598,16 @@ run but passes alone is usually load timing: rerun before chasing it.
   + Add Item (primary), Duplicate, Delete, then Edit / Import / Export menus on the shared
   `_frameMenu`. Menu labels keep the old button wording (Help names them). A new dashboard
   action goes in a menu, not a new button; `test_dash_toolbar_menus` pins six controls.
+- **ROUNDING IS ONE PROJECT SETTING PER UNIT (18.60): `_fmtUnitNum(n, unit)`.** Every PRINTED
+  dimension (elevation `elevFmt`/`_elevDualPart`/`_elevFmtExact`, spec `fmt` + `_specDualPart`,
+  letter legend, glazing schedule, frame-size strings, opening/OD labels, dashboard preview)
+  rounds through it to `editorialContent.unitPrecision[unit]` (0..4 places, trailing zeros
+  trimmed; defaults `UNIT_PRECISION_DEFAULT` in 3 / mm 0 / cm 1). `setUnitPrecision` is the one
+  writer; it is in `_elevCaptureSignature`. NOT for data entry (`dashFmt`) or CSV numbers. A new
+  print site must use it, or the same moulding prints two ways again. `_num1` (flat-graphic
+  captions, space-bound) is deliberately outside it.
+  **Every elevation number carries its unit**: the interior-suffix toggle (`showUnitSuffix`, the
+  Units tile) was removed in 18.60.
 - **ONE SECOND UNIT PER PROJECT (18.37).** `editorialContent.specDualUnit` drives spec
   pages AND elevations (`_elevDualUnit()` returns `_specDualUnit()`); the old per-computer
   `elevDualUnit` localStorage switch is gone. `setProjectDualUnit` is the one writer.
