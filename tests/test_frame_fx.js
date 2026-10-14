@@ -21,6 +21,8 @@ const path = require('path');
     set: (t, k, v) => { t[k] = v; return true; } }); };
   window.HTMLCanvasElement.prototype.getContext = function () { return this.__c || (this.__c = mk()); };
   window.fetch = () => Promise.reject(new Error('no network in test'));
+  // jsdom has no Path2D; the deckled paper edge builds one.
+  window.Path2D = function () { return { moveTo() {}, lineTo() {}, closePath() {}, rect() {}, quadraticCurveTo() {}, bezierCurveTo() {}, arc() {} }; };
   global.window = window; global.document = window.document; global.navigator = window.navigator;
   const testBlock = `
     window.__testResults = [];
@@ -90,6 +92,37 @@ const path = require('path');
       if (_fx('art') !== 1) throw new Error('reset did not restore');
       m.remove();
     });
+    // 18.44: sample tabs, so every shadow can be seen on a build that actually casts it.
+    __check('the panel steps through every build on a sample, one tab lit at a time', () => {
+      openFrameFx();
+      const m = document.getElementById('frameFxModal');
+      const tabs = Array.from(m.querySelectorAll('#frameFxCases [data-fx-case]'));
+      const want = ['piece', 'nomat', 'mat1', 'mat2', 'faux', 'float', 'floater'];
+      if (tabs.map(b => b.getAttribute('data-fx-case')).join() !== want.join()) throw new Error('tabs: ' + tabs.map(b => b.getAttribute('data-fx-case')).join());
+      tabs[3].onclick();
+      if (_frameFxCase !== 'mat2') throw new Error('tab did not pick its case');
+      const lit = tabs.filter(b => b.classList.contains('active'));
+      if (lit.length !== 1 || lit[0] !== tabs[3]) throw new Error(lit.length + ' tabs lit');
+      _frameFxCase = 'piece'; m.remove();
+    });
+    __check('each sample is the build its tab names, and nothing leaks between them', () => {
+      const piece = Object.assign(_cloneData(dashDefaultData), { fType: 'color', fColor: '#7a5230', fW: 1.25, m2A: true, useFloatMount: true, extW: 40, extH: 10 });
+      const S = k => _frameFxSample(k, piece);
+      if (S('nomat').m1A || S('nomat').m2A || S('nomat').useFloatMount) throw new Error('no-mat sample carries a mat or float');
+      if (!S('mat1').m1A || S('mat1').m2A) throw new Error('single mat is not one mat');
+      if (!(S('mat2').m1A && S('mat2').m2A)) throw new Error('double mat is not two mats');
+      if (!S('faux').useFauxMat || S('faux').useFloatMount) throw new Error('faux mat sample wrong');
+      if (!S('float').useFloatMount || S('float').sbPaperEdge !== 'torn') throw new Error('float sample is not a deckled float mount');
+      if (S('floater').product !== 'Framed Canvas (Floater)') throw new Error('floater sample wrong');
+      const one = S('mat1'); if (one.extW !== 24 || one.extH !== 24) throw new Error('sample is not square');
+      if (one.fColor !== '#7a5230' || one.fW !== 1.25) throw new Error('sample is not in the piece moulding');
+      if (piece.extW !== 40) throw new Error('the sample wrote back into the piece');
+    });
+    __check('a sample previews with no piece selected', async () => {
+      const keep = dashSelectedRowIndex; dashSelectedRowIndex = -1;
+      openFrameFx(); _frameFxCase = 'float';
+      window.__fxPv = _frameFxPreview().then(() => { const h = document.getElementById('frameFxPreview'); window.__fxPvTxt = h.textContent; window.__fxPvCanvas = !!h.querySelector('canvas'); dashSelectedRowIndex = keep; _frameFxCase = 'piece'; });
+    });
     __check('the panel is reachable from the header and from Deck Studio', () => {
       if ((document.getElementById('outerShadowToggle').getAttribute('onclick') || '').indexOf('openFrameFx') < 0) throw new Error('header button does not open it');
       if (!document.getElementById('projFrameFxBtn')) throw new Error('no entry in the Project tab');
@@ -97,6 +130,9 @@ const path = require('path');
   `;
   try { window.eval('window.__appSrc = ' + JSON.stringify(src) + ';\nconst css = ' + JSON.stringify(css) + ';\n' + src + '\n' + testBlock); }
   catch (e) { console.error('LOAD/RUN FAILED:', e.message); process.exit(1); }
+  await window.__fxPv;
+  window.__testResults.push(window.__fxPvCanvas ? { label: 'the float-mount sample drew with no piece selected', ok: true }
+    : { label: 'the float-mount sample drew with no piece selected', ok: false, err: 'no canvas: ' + window.__fxPvTxt });
   const all = window.__testResults || [];
   const failures = [];
   all.forEach(r => { console.log((r.ok ? 'OK:  ' : 'FAIL:') + ' ' + r.label + (r.ok ? '' : ' -> ' + r.err)); if (!r.ok) failures.push(r.label); });

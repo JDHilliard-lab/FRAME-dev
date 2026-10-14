@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.43';
+const APP_VERSION = '18.44';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6217,10 +6217,19 @@ function openFrameFx() {
     const card = document.createElement('div');
     card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:760px; max-width:94vw; max-height:90vh; overflow:auto; padding:20px; display:flex; flex-direction:column; gap:14px;';
     card.innerHTML = '<div><h3 style="margin:0 0 4px; font-size:var(--fs-105); color:var(--text-strong);">Frame effects</h3>'
-        + '<div style="font-size:var(--fs-70); color:var(--text-muted);">How deep the shadows are on every frame: the Dashboard preview, elevations, PNG exports and spec pages. 100% is the studio look. Saved on this computer and in the project file.</div></div>';
+        + '<div style="font-size:var(--fs-70); color:var(--text-muted);">How deep the shadows are on EVERY frame in the project (not just the one shown): the Dashboard preview, elevations, PNG exports and spec pages. 100% is the studio look. Saved on this computer and in the project file.</div></div>';
     const body = document.createElement('div'); body.style.cssText = 'display:flex; gap:18px; align-items:stretch; flex-wrap:wrap;';
+    const pvCol = document.createElement('div'); pvCol.style.cssText = 'flex:1 1 300px; display:flex; flex-direction:column; gap:8px; min-width:0;';
+    const tabs = document.createElement('div'); tabs.id = 'frameFxCases'; tabs.className = 'frame-tabs wrap';
+    FRAME_FX_CASES.forEach(([k, label, tip]) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'frame-tab'; b.textContent = label; b.title = tip;
+        b.setAttribute('data-fx-case', k);
+        b.onclick = () => { _frameFxCase = k; _frameFxSyncCases(); _frameFxPreview(); };
+        tabs.appendChild(b);
+    });
+    pvCol.appendChild(tabs);
     const pv = document.createElement('div'); pv.id = 'frameFxPreview';
-    pv.style.cssText = 'flex:1 1 300px; min-height:300px; background:#ececec; border-radius:var(--r-6); display:flex; align-items:center; justify-content:center; overflow:hidden; padding:10px;';
+    pv.style.cssText = 'flex:1 1 auto; min-height:300px; background:#ececec; border-radius:var(--r-6); display:flex; align-items:center; justify-content:center; overflow:hidden; padding:10px;';
     const ctl = document.createElement('div'); ctl.style.cssText = 'flex:1 1 300px; display:flex; flex-direction:column; gap:12px;';
     const on = document.createElement('label'); on.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:var(--fs-75); font-weight:700; color:var(--text-main); cursor:pointer;';
     const cb = document.createElement('input'); cb.type = 'checkbox'; cb.id = 'frameFxOuterOn'; cb.checked = !!dashOuterShadowsOn;
@@ -6248,7 +6257,8 @@ function openFrameFx() {
         row.appendChild(top); row.appendChild(r); row.appendChild(h);
         ctl.appendChild(row);
     });
-    body.appendChild(pv); body.appendChild(ctl);
+    pvCol.appendChild(pv);
+    body.appendChild(pvCol); body.appendChild(ctl);
     card.appendChild(body);
     const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
     const rs = document.createElement('button'); rs.className = 'action-btn btn-secondary'; rs.style.cssText = 'width:auto; height:32px; padding:0 14px;'; rs.textContent = 'Reset to studio look';
@@ -6259,7 +6269,55 @@ function openFrameFx() {
     m.appendChild(card);
     document.body.appendChild(m);
     _frameFxSyncRows();
+    _frameFxSyncCases();
     _frameFxPreview();
+}
+// THE SAMPLE CASES (18.44). Each shadow only shows on some builds (Mat onto mat needs
+// two mats, Paper lift a float mount), so the panel can step through every build on
+// one square composition, framed in the selected piece's moulding. Panel state, never
+// project data. 'piece' is the selected piece exactly as it is.
+const FRAME_FX_CASES = [
+    ['piece', 'This piece', 'The selected piece as it is'],
+    ['nomat', 'No mat', 'Moulding straight onto the art (Frame onto mat, Onto artwork)'],
+    ['mat1', 'Single mat', 'One mat (Frame onto mat, Onto artwork)'],
+    ['mat2', 'Double mat', 'Two mats (Mat onto mat)'],
+    ['faux', 'Faux mat', 'A mat over a printed white border (Mat onto mat)'],
+    ['float', 'Float mount', 'A deckled sheet floated on a backer (Paper lift)'],
+    ['floater', 'Canvas floater', 'A canvas in a floater frame']
+];
+let _frameFxCase = 'piece';
+function _frameFxSyncCases() {
+    document.querySelectorAll('#frameFxCases [data-fx-case]').forEach(b => b.classList.toggle('active', b.getAttribute('data-fx-case') === _frameFxCase));
+}
+// The sample: a 24in square in the piece's own moulding (or the house black when
+// nothing is selected). Every case starts from dashDefaultData in inches so a field
+// the piece happens to carry (a second mat, a float mount) cannot leak into another.
+function _frameFxSample(kind, piece) {
+    const d = _cloneData(dashDefaultData);
+    if (piece) ['fType', 'fColor', 'fCode', 'fW', 'fHeight', 'rabbetDepth', 'swatchDataUrl', 'swatchName'].forEach(k => { if (piece[k] !== undefined) d[k] = piece[k]; });
+    d.extW = 24; d.extH = 24; d.product = 'Framed Art';
+    d.m1T = d.m1B = d.m1L = d.m1R = 3; d.m1A = true; d.m2A = false; d.useFauxMat = false; d.useFloatMount = false;
+    if (kind === 'nomat') d.m1A = false;
+    else if (kind === 'mat2') { d.m2A = true; d.m2 = 0.375; d.m2ColorHex = '#2b2b2b'; d.m2ColorName = 'Black'; }
+    else if (kind === 'faux') { d.useFauxMat = true; d.sbPaperBorder = 0.75; }
+    else if (kind === 'float') { d.m1A = false; d.useFloatMount = true; d.sbPaperMargin = 2.5; d.sbPaperBorder = 0.75; d.sbPaperEdge = 'torn'; d.sbBackerColorHex = '#f4f1ea'; }
+    else if (kind === 'floater') { d.m1A = false; d.product = 'Framed Canvas (Floater)'; d.floaterInset = 0.375; }
+    return d;
+}
+// A square abstract composition, drawn once: light enough that a shadow falling on it
+// reads, with a few tones so the opening shadow is visible against shapes too.
+let _frameFxArt = null;
+function _frameFxComposition() {
+    if (_frameFxArt) return _frameFxArt;
+    const c = document.createElement('canvas'); c.width = c.height = 600;
+    const x = c.getContext('2d'); if (!x) return null;
+    x.fillStyle = '#e9e2d4'; x.fillRect(0, 0, 600, 600);
+    x.fillStyle = '#c96f4a'; x.fillRect(70, 90, 260, 300);
+    x.fillStyle = '#2f4858'; x.fillRect(250, 300, 280, 220);
+    x.fillStyle = '#d8b25c'; x.beginPath(); x.arc(420, 170, 95, 0, Math.PI * 2); x.fill();
+    x.fillStyle = '#f7f4ee'; x.fillRect(110, 450, 120, 60);
+    _frameFxArt = c;
+    return c;
 }
 function _frameFxSyncRows() {
     document.querySelectorAll('#frameFxModal input[data-fx]').forEach(r => {
@@ -6272,13 +6330,17 @@ let _frameFxPvTok = 0;
 async function _frameFxPreview() {
     const host = document.getElementById('frameFxPreview'); if (!host) return;
     const tok = ++_frameFxPvTok;
-    const d = (typeof dashProjectData !== 'undefined' && dashProjectData[dashSelectedRowIndex]) || null;
-    if (!d) { host.textContent = 'Select a piece in the Frame Dashboard to preview it here.'; return; }
-    let art = null; if (d.artworkUrl) { try { art = await _loadImg(d.artworkUrl); } catch (e) {} }
+    const piece = (typeof dashProjectData !== 'undefined' && dashProjectData[dashSelectedRowIndex]) || null;
+    if (!piece && _frameFxCase === 'piece') { host.textContent = 'Select a piece in the Frame Dashboard to preview it here, or pick a sample above.'; return; }
+    const sample = _frameFxCase !== 'piece';
+    const d = sample ? _frameFxSample(_frameFxCase, piece && _frameDataInInches(piece, dashUnit)) : piece;
+    let art = null;
+    if (sample) art = _frameFxComposition();
+    else if (d.artworkUrl) { try { art = await _loadImg(d.artworkUrl); } catch (e) {} }
     let sw = null; if (d.fType === 'image' && d.swatchDataUrl) { try { sw = await _loadImg(d.swatchDataUrl); } catch (e) {} }
     if (tok !== _frameFxPvTok) return;
     try {
-        const out = renderFrameToCanvas(_frameDataInInches(d, dashUnit), sw, { dpi: 72, pad: 60, artworkImg: art, artCrop: { zoom: d.artZoom, panX: d.artPanX, panY: d.artPanY } });
+        const out = renderFrameToCanvas(sample ? d : _frameDataInInches(d, dashUnit), sw, { dpi: 72, pad: 60, artworkImg: art, artCrop: sample ? undefined : { zoom: d.artZoom, panX: d.artPanX, panY: d.artPanY } });
         const c = out && out.canvas; if (!c) return;
         c.style.cssText = 'max-width:100%; max-height:360px; width:auto; height:auto; display:block;';
         host.innerHTML = ''; host.appendChild(c);
@@ -41048,7 +41110,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.43</strong> The elevation thumbnail on a per-piece spec page is captioned <strong>Elevation</strong>, like the group pages, instead of the wall's code.<br><br>
+                body: `<strong>18.44</strong> Frame effects has sample tabs: step through No mat, Single mat, Double mat, Faux mat, Float mount and Canvas floater on one square composition, in the selected piece's moulding, to see where every shadow lands. The sliders are global: they change every frame in the project.<br><br>
+<strong>18.43</strong> The elevation thumbnail on a per-piece spec page is captioned <strong>Elevation</strong>, like the group pages, instead of the wall's code.<br><br>
 <strong>18.42</strong> Drop shadows on spec pages: tick <strong>Also on spec pages</strong> in Frame effects and every framed piece on a spec page casts its drop shadow onto the page, in the PDF and its previews, at the Drop shadow slider's strength. Off by default so existing decks print as before. The frame itself keeps its exact size and position, and the shadow works on dark pages too.<br><br>\n<strong>18.41</strong> <strong>Frame effects.</strong> The shadow button in the header (and Frame effects in Deck Studio under Project) opens sliders for each shadow a frame casts: the drop shadow onto the wall and page, the frame onto the mat, mat onto mat, onto the artwork, and the lift of a float-mounted sheet. 100% is the old look; a live preview of the selected piece shows the result. It reaches the Dashboard preview, elevations, PNG exports and spec pages, and travels in the project file. Also fixed: the shadow inside the opening now falls on the artwork (it was hidden under it), and framed pieces in the Dashboard preview show the same drop shadow as their PNG.<br><br>\n<strong>18.40</strong> A shorter Deck Studio tool bar. Text box and Paragraph live in the Text menu (T still adds a text box straight away), and Upload image lives in the Shapes menu (I still works). The settings button for a selected object is a gear now, not a sun that looked like the theme switch.<br><br>\n<strong>18.39</strong> Page previews update by themselves after a change, wall elevations included, with a progress line at the top of the page list (and a Stop link). The Build all previews button is gone; a small rebuild icon beside the page filter redoes everything from scratch if you ever need it.<br><br>\n<strong>18.38</strong> Deck Studio's Guides, Preview and Preflight buttons, and the settings, bring to front, send to back and delete buttons, moved from the row above the page thumbnails into the tool bar beside the page. Front, back and delete work on whatever you have selected, a note or a box on a layout page.<br><br>\n<strong>18.37</strong> Units are one chip in the header (it reads IN + MM). Click it to choose what you type sizes in and the second unit printed beside inches. That second unit is now one setting for the whole project, covering spec pages and elevations alike (it used to be two switches, one saved per computer). New projects start at inches + mm; existing projects keep what they had. The same controls are in Deck Studio under Project.<br><br>\n<strong>18.36</strong> A tidier header. The dashboard layout and drop-shadow buttons only show where they do something (drop shadows in the Dashboard and Elevations). Versions moved into the small menu beside Save Project, with Save As. Bulk Images moved to the Frame Dashboard, beside Import CSV.<br><br>\n<strong>18.35</strong> Opening an older project whose item codes have gaps (say a deleted ART.006) still closes them up, but now it tells you: a dialog lists every old and new code, with a Copy list button. Mockup and elevation PNGs exported afterwards use the new codes in their file names, so InDesign links to the old names need updating.<br><br>\n<strong>18.34</strong> Old decks that still used the original per-piece spec layout now open on the current one, with only Elevation ticked (what the old layout showed). The Show on Page checkboxes now work on those pages; before, they did nothing. Their spec pages will look like every other per-piece page in the next PDF.<br><br>
 <strong>18.33</strong> Housekeeping: the built-in layout templates moved into their own file, so the main app file is about a fifth smaller. Nothing you use changes.<br><br>
 <strong>18.32</strong> The PDF now prints exactly the pages Deck Studio shows, in the same order: it builds from the same page list and draws each page the same way as the preview. Two places they used to disagree are fixed: a page placed before the Thank You page now prints after Good Art Good People, as the preview shows it, and an empty layout page prints where it sits instead of at the end of the PDF.<br><br>
