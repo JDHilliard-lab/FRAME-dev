@@ -61,7 +61,8 @@ check('every panel tab strip in the markup uses it', () => {
     }
   });
   const elev = document.querySelectorAll('[data-elevtab]');
-  if (elev.length !== 3) throw new Error('expected 3 elevation tabs, found ' + elev.length);
+  // 4 since 18.51: Art, Guides, Context, Glass.
+  if (elev.length !== 4) throw new Error('expected 4 elevation tabs, found ' + elev.length);
   elev.forEach(el => {
     if (!el.classList.contains('frame-tab')) {
       throw new Error('elevation tab is not a .frame-tab: class="' + el.className + '"');

@@ -222,7 +222,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   "is it flat" sweeps window film in and tears it off its panes. A glazed wall is NOT an EGD
   wall; on ART is correct, and `#wallModeHint` (keyed to `elev.glazing`) says so.
 - **THE WALL MODE IS TWO NAMED BUTTONS** (`artWallBtn` / `egdWallBtn`, both
-  `setElevWallMode`), under RESET DIMENSION POSITIONS. Exactly one lit, from
+  `setElevWallMode`), in the wall section under W/H. Exactly one lit, from
   `_isEgdWall(elevations[currentElevIndex])`. EGD mode is **per elevation** while the rest of
   that panel is deck-wide. It has its own `.wall-mode-btn.active` rule (a test reads the
   stylesheet). ART carries the accent too. **ART is the default**: `egdWall` absent = art
@@ -476,7 +476,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   `computeSnapForDrag` and `_ctxComputeSnap` (wall edges/centre, hang line, frames,
   glazing seams, blocks). `skip` excludes the dragged thing. Group drags skip snapping.
   Nudges debounce via `_ctxScheduleHistory`.
-  **The sidebar is tabbed** (`switchElevTab`, Art / Context / Glass). Hide panes with
+  **The sidebar is tabbed** (`switchElevTab`, Art / Guides / Context / Glass; the strip sits right under the wall section, and Layout Guides is the Guides tab since 18.51, keeping the frame list above the fold). Hide panes with
   `display`, never detach (`initElevControls` renders all containers every time). Restore
   with `''`, never `'block'`.
   **The pane is the scroll region and needs `min-height: 0`** (`overflow-y: auto` alone

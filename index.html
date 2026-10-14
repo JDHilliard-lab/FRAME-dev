@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.49">
+    <link rel="stylesheet" href="style.css?v=18.51">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -711,14 +711,107 @@
                              on ART is correct. Without this line the only way to learn that
                              is to switch mode and watch the film move. -->
                         <div id="wallModeHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
+                        <!-- OPTIONS ARE MADE IN DECK STUDIO (17.89). The Catalogue mockup button and
+                             the + LAYOUT / + SET row lived here; "+ Add option" on a page's Options
+                             section now does all of it, including turning the wall into the
+                             arrangement its options follow. This row keeps the layout's NAME, which
+                             is still edited where the drawing is. -->
+                        <!-- Shown only on a layout that is not the primary: what it is called,
+                             and whether its frames follow the primary's. Both are set at
+                             creation by the + LAYOUT chooser; this is where they are changed
+                             once the drawing exists and the answer has become obvious. -->
+                        <div id="catLayoutRow" style="display:none; gap:6px; margin-top:6px; align-items:center;">
+                            <input type="text" id="catLayoutLabel" maxlength="40" placeholder="Name this layout" oninput="setCatLayoutLabel(this.value)" style="flex:1 1 60px; min-width:0; height:24px; font-size:var(--fs-60);">
+                        </div>
+                        <div id="catMasterHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
                     </div>
 
-                    <!-- ─── LAYOUT GUIDES ─────────────────────────────────
-                         Overlay toggles: labels, frame OD, spacing dims,
-                         scale figure, guides, grid, centers. Settings gear
-                         moved to the Wall Dimensions title row. -->
-                    <div class="section-title" onclick="toggleDashSection('elev-sec-layout', this)">Layout Guides <span><svg class="svg-icon" style="width:10px; height:10px;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-                    <div id="elev-sec-layout" class="collapsible-section open">
+
+                </div>
+
+                <!-- ─── ADD & ARRANGE (fixed, always visible) ────────────
+                     This is the high-traffic section. Pinned between the
+                     collapsible header sections and the frame panel list
+                     so it's always accessible regardless of which header
+                     sections the user has collapsed. Uses a static label
+                     (no chevron, not clickable) to signal it can't be
+                     hidden. -->
+                <!-- SIDEBAR TABS. Art / Context / Glass. Every section used to be
+                     stacked in one column, so the wall-context and window-panel panels
+                     ate the room that Add & Arrange and the frame list need — and those
+                     are the high-traffic ones. Tabs give each group the full height
+                     instead of a slice of it.
+                     The panes are display:none, not detached: initElevControls renders
+                     into all four containers on every state change regardless of which
+                     tab is showing, and every button here is still findable by id (the
+                     EGD/tool buttons are synced by id from several places). -->
+                <div class="elev-tabs frame-tabs fit" role="tablist">
+                    <button class="frame-tab active" data-elevtab="art" onclick="switchElevTab('art')">Art</button>
+                    <button class="frame-tab" data-elevtab="guides" onclick="switchElevTab('guides')">Guides</button>
+                    <button class="frame-tab" data-elevtab="context" onclick="switchElevTab('context')">Context</button>
+                    <button class="frame-tab" data-elevtab="glass" onclick="switchElevTab('glass')">Glass</button>
+                </div>
+                <div class="elev-tabpane" data-elevtabpane="art">
+                <div class="elev-add-arrange-fixed">
+                    <div class="section-title section-title-static">Add &amp; Arrange</div>
+                    <div class="elev-section-emphasis-inner">
+                        <div style="display: flex; gap: 6px; align-items: center;">
+                            <div style="position: relative; flex: 1; min-width: 0;">
+                                <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: var(--fs-70); justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                                    <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
+                                    <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; max-width: 380px; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: var(--r-4); padding: 4px; box-sizing: border-box; margin-top: 2px;">
+                                    <div id="bulkImportCheckboxes"></div>
+                                </div>
+                            </div>
+                            <button class="action-btn" style="width:auto; font-size: var(--fs-70); padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
+                                Add
+                            </button>
+                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
+                            </button>
+                            <!-- Re-number button. Opens a modal where the user picks a
+                                 template + location number, then bulk-renames all frame
+                                 ITEM CODES in this elevation to follow that pattern.
+                                 Optionally reorders the dashboard rows to match. -->
+                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="_jumpToCodes()" title="Item codes: open the floorplan Items list, where every code is added, renamed and dragged into order">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
+                            </button>
+                            <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
+                            </button>
+                            <!-- Fit to wall: sizes a wallcovering / window film to the wall
+                                 inside its dimension lines (full width, baseboard to
+                                 ceiling). Placement already does this automatically; this
+                                 re-runs it after the wall or baseboard changes. Selected
+                                 flat graphics only, or all of them when nothing is picked. -->
+                            <button class="action-btn btn-secondary" id="fitFlatBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="fitFlatGraphicsToWallAction()" title="Fit to wall — size the wallcovering / window film to the wall inside the dimension lines (set baseboard to 0 to run floor to ceiling)">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="4" width="18" height="14"/><path d="M3 18h18M7 8h10M7 12h10"/></svg>
+                            </button>
+                            <!-- Group dimension: draws a dashed bounding box with width +
+                                 height measurement callouts around the selected frames.
+                                 Mirrors the client's install-drawing convention. -->
+                            <button class="action-btn btn-secondary" id="groupDimBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="createGroupDimFromSelection()" title="Add group dimension box around selected frames">
+                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="6" width="18" height="12" fill="none" stroke-dasharray="3 2"/><path d="M3 3h0M21 3h0" /><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="1.5" x2="3" y2="4.5"/><line x1="21" y1="1.5" x2="21" y2="4.5"/></svg>
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- CONTEXT TAB. The client's elevation and the blocks traced off it are
+                     one workflow, so they share a pane: drop the drawing in, calibrate
+                     it, then trace onto it. Open by default here, unlike the collapsed
+                     <details> they used to be — on this tab they ARE the content. -->
+                </div>
+                <!-- GUIDES TAB (18.51). The layout guides used to sit in the header above the tabs,
+                     open, so the header was ~550px tall and the frame list, the thing you
+                     actually work in, started below the fold. A tab gives them their own height. -->
+                <div class="elev-tabpane" data-elevtabpane="guides" style="display:none;">
+                    <div id="elev-sec-layout" class="elev-guides-pane">
+                        <div class="section-title section-title-static">Layout Guides</div>
                         <!-- LAYOUT GUIDES IN THREE FOLDABLE GROUPS, EACH ICON CAPTIONED. Sixteen bare icons in
                              three unlabelled rows meant hovering every one to find the right one, which
                              is the opposite of a tool a new designer can pick up. Grouped by what the
@@ -816,99 +909,7 @@
                             <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
                             RESET DIMENSION POSITIONS
                         </button>
-
-                        <!-- OPTIONS ARE MADE IN DECK STUDIO (17.89). The Catalogue mockup button and
-                             the + LAYOUT / + SET row lived here; "+ Add option" on a page's Options
-                             section now does all of it, including turning the wall into the
-                             arrangement its options follow. This row keeps the layout's NAME, which
-                             is still edited where the drawing is. -->
-                        <!-- Shown only on a layout that is not the primary: what it is called,
-                             and whether its frames follow the primary's. Both are set at
-                             creation by the + LAYOUT chooser; this is where they are changed
-                             once the drawing exists and the answer has become obvious. -->
-                        <div id="catLayoutRow" style="display:none; gap:6px; margin-top:6px; align-items:center;">
-                            <input type="text" id="catLayoutLabel" maxlength="40" placeholder="Name this layout" oninput="setCatLayoutLabel(this.value)" style="flex:1 1 60px; min-width:0; height:24px; font-size:var(--fs-60);">
-                        </div>
-                        <div id="catMasterHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
                     </div>
-
-                </div>
-
-                <!-- ─── ADD & ARRANGE (fixed, always visible) ────────────
-                     This is the high-traffic section. Pinned between the
-                     collapsible header sections and the frame panel list
-                     so it's always accessible regardless of which header
-                     sections the user has collapsed. Uses a static label
-                     (no chevron, not clickable) to signal it can't be
-                     hidden. -->
-                <!-- SIDEBAR TABS. Art / Context / Glass. Every section used to be
-                     stacked in one column, so the wall-context and window-panel panels
-                     ate the room that Add & Arrange and the frame list need — and those
-                     are the high-traffic ones. Tabs give each group the full height
-                     instead of a slice of it.
-                     The panes are display:none, not detached: initElevControls renders
-                     into all four containers on every state change regardless of which
-                     tab is showing, and every button here is still findable by id (the
-                     EGD/tool buttons are synced by id from several places). -->
-                <div class="elev-tabs frame-tabs fit" role="tablist">
-                    <button class="frame-tab active" data-elevtab="art" onclick="switchElevTab('art')">Art</button>
-                    <button class="frame-tab" data-elevtab="context" onclick="switchElevTab('context')">Context</button>
-                    <button class="frame-tab" data-elevtab="glass" onclick="switchElevTab('glass')">Glass</button>
-                </div>
-                <div class="elev-tabpane" data-elevtabpane="art">
-                <div class="elev-add-arrange-fixed">
-                    <div class="section-title section-title-static">Add &amp; Arrange</div>
-                    <div class="elev-section-emphasis-inner">
-                        <div style="display: flex; gap: 6px; align-items: center;">
-                            <div style="position: relative; flex: 1; min-width: 0;">
-                                <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: var(--fs-70); justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                                    <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
-                                    <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </button>
-                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; max-width: 380px; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: var(--r-4); padding: 4px; box-sizing: border-box; margin-top: 2px;">
-                                    <div id="bulkImportCheckboxes"></div>
-                                </div>
-                            </div>
-                            <button class="action-btn" style="width:auto; font-size: var(--fs-70); padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
-                                Add
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
-                            </button>
-                            <!-- Re-number button. Opens a modal where the user picks a
-                                 template + location number, then bulk-renames all frame
-                                 ITEM CODES in this elevation to follow that pattern.
-                                 Optionally reorders the dashboard rows to match. -->
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="_jumpToCodes()" title="Item codes: open the floorplan Items list, where every code is added, renamed and dragged into order">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
-                            </button>
-                            <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
-                            </button>
-                            <!-- Fit to wall: sizes a wallcovering / window film to the wall
-                                 inside its dimension lines (full width, baseboard to
-                                 ceiling). Placement already does this automatically; this
-                                 re-runs it after the wall or baseboard changes. Selected
-                                 flat graphics only, or all of them when nothing is picked. -->
-                            <button class="action-btn btn-secondary" id="fitFlatBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="fitFlatGraphicsToWallAction()" title="Fit to wall — size the wallcovering / window film to the wall inside the dimension lines (set baseboard to 0 to run floor to ceiling)">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="4" width="18" height="14"/><path d="M3 18h18M7 8h10M7 12h10"/></svg>
-                            </button>
-                            <!-- Group dimension: draws a dashed bounding box with width +
-                                 height measurement callouts around the selected frames.
-                                 Mirrors the client's install-drawing convention. -->
-                            <button class="action-btn btn-secondary" id="groupDimBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="createGroupDimFromSelection()" title="Add group dimension box around selected frames">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="6" width="18" height="12" fill="none" stroke-dasharray="3 2"/><path d="M3 3h0M21 3h0" /><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="1.5" x2="3" y2="4.5"/><line x1="21" y1="1.5" x2="21" y2="4.5"/></svg>
-                            </button>
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- CONTEXT TAB. The client's elevation and the blocks traced off it are
-                     one workflow, so they share a pane: drop the drawing in, calibrate
-                     it, then trace onto it. Open by default here, unlike the collapsed
-                     <details> they used to be — on this tab they ARE the content. -->
                 </div>
                 <div class="elev-tabpane" data-elevtabpane="context" style="display:none;">
                 <details id="sec-underlay" class="elev-add-arrange-fixed" open>
@@ -1096,7 +1097,6 @@
                 </div>
                 <span style="flex:1;"></span>
                 <button id="dsApprovedBtn" onclick="_dsToggleApproved()" title="Stamp every page APPROVED (client sign-off)" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-70); font-weight:700; letter-spacing:0.04em; border-radius:var(--r-4); cursor:pointer; border:1.5px solid var(--border-color); background:var(--bg-input); color:var(--text-main);">APPROVED</button>
-                <button id="dsSaveBtn" class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="_dsSave()">Save</button>
                 <button id="dsGenerateBtn" class="action-btn" style="width:auto; height:32px; padding:0 16px; font-size:var(--fs-75);" onclick="_dsOpenGenerate()">Generate PDF</button>
                 <!-- No Done button: the top-nav tabs are how you leave. The
                      second margin-right:auto spacer that used to sit before
@@ -2250,9 +2250,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.49';</script>
-<script src="templates.js?v=18.49"></script>
-<script src="app.js?v=18.49"></script>
+<script>window.FRAME_HTML_VERSION = '18.51';</script>
+<script src="templates.js?v=18.51"></script>
+<script src="app.js?v=18.51"></script>
 
 </body>
 </html>

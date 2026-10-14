@@ -1155,6 +1155,7 @@ select.no-arrow::-ms-expand { display: none; }
  * giving it flex:1 would squash the frame list that is meant to take the height. */
 .elev-tabpane { min-height: 0; }
 .elev-tabpane[data-elevtabpane="art"] { flex: none; }
+.elev-tabpane[data-elevtabpane="guides"],
 .elev-tabpane[data-elevtabpane="context"],
 .elev-tabpane[data-elevtabpane="glass"] {
     flex: 1; min-height: 0; overflow-y: auto; padding-bottom: 12px;
@@ -1261,6 +1262,8 @@ input[type="color"]:hover { filter: brightness(1.12); }
  * to edge of the sidebar while every button above it stopped 20px short, so the three
  * tabs visibly overhung the panel's own content. */
 .elev-tabs { margin: 8px 20px 6px; }
+/* Guides tab (18.51): the same 20px column as the header it moved out of. */
+.elev-guides-pane { padding: 4px 20px 0; }
 .elev-tabs > .frame-tab { padding: 0 4px; font-size: var(--fs-65); }
 
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────

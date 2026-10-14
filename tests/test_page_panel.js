@@ -53,7 +53,7 @@ const path = require('path');
   });
 
   check('page actions the rail already offers are off the Page tab', () => {
-    const body = codeOnly(bodyOf('function _dsRenderTools()', 'function _dsSave()'));
+    const body = codeOnly(bodyOf('function _dsRenderTools()', "window.addEventListener('resize', () => { if (_dsIsOpen() && _dsActiveTab === 'pages')"));
     ['Duplicate this page', 'Move page earlier', 'Move page later', 'Delete this page', 'Remove this page from deck']
       .forEach(label => {
         if (body.indexOf(label) >= 0) throw new Error('"' + label + '" is back on the Page tab');
@@ -63,7 +63,7 @@ const path = require('path');
   check('Save as template moved to the Templates tab, and still works there', () => {
     if (src.indexOf('function _dsSaveCurrentPageBtnInto') < 0) throw new Error('no save-page button builder');
     if (src.indexOf('_dsSaveCurrentPageBtnInto(header)') < 0) throw new Error('nothing renders it into the Templates tab');
-    const body = codeOnly(bodyOf('function _dsRenderTools()', 'function _dsSave()'));
+    const body = codeOnly(bodyOf('function _dsRenderTools()', "window.addEventListener('resize', () => { if (_dsIsOpen() && _dsActiveTab === 'pages')"));
     if (body.indexOf('Save this page as template') >= 0) throw new Error('it is still on the Page tab too');
     if (src.indexOf('function _dsSaveCurrentAsTemplate') < 0) throw new Error('the save itself is gone');
   });
@@ -101,7 +101,7 @@ const path = require('path');
     // The spec branch returns before the old footer call, so a spec page got a theme and
     // never got a footer. A dark background image on a spec page had no way to turn the
     // logo white.
-    const body = bodyOf('function _dsRenderTools()', 'function _dsSave()');
+    const body = bodyOf('function _dsRenderTools()', "window.addEventListener('resize', () => { if (_dsIsOpen() && _dsActiveTab === 'pages')");
     const call = body.indexOf('_dsPageAppearanceInto(t, desc)');
     const specBranch = body.indexOf("if (desc.kind === 'spec')");
     if (call < 0) throw new Error('appearance is not built in the page panel');
@@ -110,7 +110,7 @@ const path = require('path');
 
   check('approval status is no longer in two places', () => {
     // The same three states sit in the header beside Save and Generate PDF.
-    const body = codeOnly(bodyOf('function _dsRenderTools()', 'function _dsSave()'));
+    const body = codeOnly(bodyOf('function _dsRenderTools()', "window.addEventListener('resize', () => { if (_dsIsOpen() && _dsActiveTab === 'pages')"));
     if (body.indexOf('apprWrap') >= 0) throw new Error('the right-panel approval block is back');
     if (src.indexOf('function _dsSyncApprovedBtn') < 0) throw new Error('the header control it defers to is gone');
   });

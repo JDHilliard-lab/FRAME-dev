@@ -1097,8 +1097,9 @@ const fs = require('fs');
       // The grips are rendered only on the Glass tab. Without a redraw on the tab change
       // they show up only after some unrelated edit happens to trigger one.
       const A = window.__appSrc;
+      // Sliced between landmarks (18.51): a 1100-character window broke when the tab list grew.
       const i = A.indexOf('function switchElevTab');
-      const body = A.slice(i, i + 1100);
+      const body = A.slice(i, A.indexOf('function _initElevSidebarTab', i));
       if (body.indexOf('drawElevAll()') < 0) throw new Error('changing tab does not redraw the wall');
     });
 
@@ -1765,8 +1766,8 @@ const fs = require('fs');
       // names outright. Sliced between landmarks now, and it checks the ORDER it
       // actually cares about: the control must come before the first branch that returns.
       const rt = A.indexOf('function _dsRenderTools()');
-      const end = A.indexOf('function _dsSave()', rt);
-      if (end < 0) throw new Error('_dsSave does not follow _dsRenderTools');
+      const end = A.indexOf("window.addEventListener('resize', () => { if (_dsIsOpen() && _dsActiveTab === 'pages')", rt);
+      if (end < 0) throw new Error('the resize listener does not follow _dsRenderTools');
       const body = A.slice(rt, end);
       const place = body.indexOf('_dsPlaceRelativeInto(t, desc)');
       const firstBranch = body.indexOf("if (desc.kind === 'floorplan')");
