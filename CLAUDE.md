@@ -666,6 +666,17 @@ run but passes alone is usually load timing: rerun before chasing it.
   reset arrow (`_tocResetBtn`).
   Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
+- **IMAGES PRINT AT THE SIZE THEY PRINT (18.80).** Mockups/thumbnails are still DRAWN as
+  before (shadows are fixed pixel blurs; drawing smaller changes the look) but the
+  flattened copy is sized by `_rasterFit(cnv, boxW, boxH, head)` before encoding (contain
+  fit x `_expR()` x head: 1.5 pictures, 2.5 line work; 0 box = the page). A new deck-page
+  raster site must go through it. The PDF capture asks `exportElevSVG({forCapture})` for
+  capture-sized frame rasters and `_imgDownsized` artwork; the SVG download and bulk
+  export keep full resolution. `_loadImg` caches `data:` decodes (`_imgCache`, LRU 40,
+  failed loads not kept); callers must not mutate or re-parent the element.
+  **EVERY PNG INTO THE PDF GOES THROUGH `_addPngImage`**, and a PNG source must never be
+  added as 'JPEG' (jsPDF stores both RAW: 30 MB of a 35 MB file).
+  `test_image_print_size` fails on any raw image in a real export.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages
   go blank in the rail while selected.

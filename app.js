@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.79';
+const APP_VERSION = '18.80';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -6484,7 +6484,9 @@ function _pdfFrameShadow(doc, d, x, y, w, h) {
         x2.shadowOffsetX = c.width; x2.shadowOffsetY = v.o * D;
         x2.fillStyle = '#000'; x2.fillRect(padIn * D - c.width, padIn * D, wIn * D, hIn * D);
         const ppi = w / wIn;
-        doc.addImage(c.toDataURL('image/png'), 'PNG', x - padIn * ppi, y - padIn * ppi, (wIn + padIn * 2) * ppi, (hIn + padIn * 2) * ppi);
+        // Through _addPngImage (Flate), never a bare 'PNG' add: jsPDF stores that RAW plus a raw
+        // alpha mask, and on a real 30-page deck these shadows were 30 MB of a 35 MB PDF (18.80).
+        _addPngImage(doc, c.toDataURL('image/png'), x - padIn * ppi, y - padIn * ppi, (wIn + padIn * 2) * ppi, (hIn + padIn * 2) * ppi);
         return true;
     } catch (e) { return false; }
 }
@@ -15397,6 +15399,23 @@ const _PDF_QUALITY = {
 // PNG (not JPEG) is the right format where alpha matters: letterboxed 'contain' fits
 // let the page background show through, and the soft shadows are alpha by definition.
 // Flattening those to JPEG would put a white box behind them on a dark page.
+// IMAGES PRINT AT THE SIZE THEY PRINT (18.80). Mockups were drawn at 96-110 dpi of the
+// piece's REAL size and encoded whole, so a 60" wallcovering went into the PDF 5760 px
+// wide for a box a few inches across: on a real 30-page deck, 532 million pixels went
+// through JPEG/PNG for one export. The mockup is still DRAWN exactly as before (its
+// shadows are fixed pixel blurs, so drawing smaller would change the look); only the
+// flattened copy that gets encoded is sized to the box it prints in (contain fit) at
+// the export quality, with 50% headroom (Print lands above 300 dpi). boxW/boxH 0 = the page.
+// `head` is the headroom over the print size: 1.5 for pictures, 2.5 for LINE WORK
+// (elevation thumbnails, plans), where a hairline needs more than one pixel to stay a
+// line rather than a grey smudge.
+function _rasterFit(cnv, boxW, boxH, head) {
+    const R = _expR() * (head || 1.5);
+    const w = (cnv && cnv.width) || 1, h = (cnv && cnv.height) || 1;
+    const fit = Math.min((boxW || PAGE_FORMAT[0]) / w, (boxH || PAGE_FORMAT[1]) / h);
+    const sc = Math.min(1, fit * R);
+    return { w: Math.max(1, Math.round(w * sc)), h: Math.max(1, Math.round(h * sc)), s: sc };
+}
 function _addPngImage(doc, data, x, y, w, h) {
     doc.addImage(data, 'PNG', x, y, w, h, undefined, 'MEDIUM');
 }
@@ -16286,7 +16305,7 @@ function _drawPdfFooter(doc, logos, pageNum, meta) {
         let fmt = 'JPEG';
         if (typeof src === 'string') { fmt = src.indexOf('image/jpeg') >= 0 || src.indexOf('image/jpg') >= 0 ? 'JPEG' : 'PNG'; }
         else { fmt = rightLight ? 'PNG' : 'JPEG'; }
-        try { doc.addImage(src, fmt, rx - logoW, PH - 27, logoW, h); } catch (e) { try { doc.addImage(logos.farmboy, 'JPEG', rx - logoW, PH - 27, logoW, h); } catch (e2) {} }
+        try { if (/png/i.test(String(fmt))) _addPngImage(doc, src, rx - logoW, PH - 27, logoW, h); else doc.addImage(src, fmt, rx - logoW, PH - 27, logoW, h); } catch (e) { try { doc.addImage(logos.farmboy, 'JPEG', rx - logoW, PH - 27, logoW, h); } catch (e2) {} }
     }
     if (!F.hideCopyright) {
         const year = new Date().getFullYear();
@@ -16396,7 +16415,9 @@ function _drawFloorplanKeyPage(doc, logos, pageNum, meta, entries, planImg, leve
         const ih = planImg.naturalHeight || planImg.height;
         const f = _fpPlanFit(PW, PH, iw, ih);
         const dx = f.dx, dy = f.dy, dw = f.dw, dh = f.dh;
-        try { doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
+        // A PNG plan (line work) goes in through _addPngImage, losslessly compressed; handed
+        // over as 'JPEG' it was stored RAW, 12 MB for one plan page (18.80). Full size either way.
+        try { if (planImg && /^data:image\/png/i.test(planImg.src || '')) _addPngImage(doc, planImg.src, dx, dy, dw, dh); else doc.addImage(planImg, 'JPEG', dx, dy, dw, dh); } catch (e) {
             try { _addPngImage(doc, planImg, dx, dy, dw, dh); } catch (e2) {}
         }
         planRect = { dx, dy, dw, dh };
@@ -18396,8 +18417,8 @@ async function _drawCatSheetPage(doc, logos, pageNum, meta, place, ctx) {
             const out = renderFrameToCanvas(dIn, sw, { wireframe: _elevIsWireframe(it.wall) || !art, dpi: 110, pad: 0, artworkImg: art, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
             const cnv = out && out.canvas;
             if (cnv && cnv.width) {
-                const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height;
-                const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0);
+                const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, bw, bh); flat.width = _rf.w; flat.height = _rf.h;
+                const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h);
                 _pdfFrameShadow(doc, dIn, bx, by, bw, bh); doc.addImage(flat.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, by, bw, bh);
                 drew = true;
             }
@@ -18587,8 +18608,8 @@ async function _drawCatOverviewPage(doc, logos, pageNum, meta, place, ctx) {
                 const out = renderFrameToCanvas(dIn, sw, { wireframe: _isWireframe() || !art, dpi: 72, pad: 0, artworkImg: art, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
                 const cnv = out && out.canvas;
                 if (cnv && cnv.width) {
-                    const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height;
-                    const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0);
+                    const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, bw, bh); flat.width = _rf.w; flat.height = _rf.h;
+                    const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h);
                     _pdfFrameShadow(doc, dIn, bx, by, bw, bh); doc.addImage(flat.toDataURL('image/jpeg', _expJpegQ()), 'JPEG', bx, by, bw, bh);
                     drew = true;
                 }
@@ -27123,7 +27144,7 @@ async function _bakeMockup(row) {
     const swatch = (row.fType === 'image' && row.swatchDataUrl) ? await _loadImg(row.swatchDataUrl) : null;
     const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 110, pad: 0, artworkImg, artCrop: { zoom: row.artZoom, panX: row.artPanX, panY: row.artPanY } });
     const cnv = out.canvas; const aspect = cnv.height / Math.max(1, cnv.width);
-    let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
+    let url; try { const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, 0, 0); flat.width = _rf.w; flat.height = _rf.h; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
     return { url: url, aspect: aspect };
 }
 async function _mockupEnsure(id) {
@@ -27141,7 +27162,7 @@ async function _bakeFrameDataUrl(r) {
     const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
     const out = renderFrameToCanvas(dInches, swatch, { wireframe: _isWireframe(), dpi: 110, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
     const cnv = out.canvas;
-    try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); return flat.toDataURL('image/jpeg', _expJpegQ()); }
+    try { const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, 0, 0); flat.width = _rf.w; flat.height = _rf.h; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h); return flat.toDataURL('image/jpeg', _expJpegQ()); }
     catch (e) { return cnv.toDataURL('image/jpeg', _expJpegQ()); }
 }
 async function _bakeElevationDataUrl(rowOrElev) {
@@ -27151,7 +27172,7 @@ async function _bakeElevationDataUrl(rowOrElev) {
     if (!elev) return null;
     const er = await renderElevationToCanvas(elev, featuredId, { wireframe: _elevIsWireframe(elev), dpi: 30, tight: true });
     if (!er || !er.canvas) return null;
-    try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#fff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); return flat.toDataURL('image/jpeg', _expJpegQ()); }
+    try { const flat = document.createElement('canvas'); const _rf = _rasterFit(er.canvas, 0, 0, 2.5); flat.width = _rf.w; flat.height = _rf.h; const ex = flat.getContext('2d'); ex.fillStyle = '#fff'; ex.fillRect(0, 0, flat.width, flat.height); ex.imageSmoothingQuality = 'high', ex.drawImage(er.canvas, 0, 0, _rf.w, _rf.h); return flat.toDataURL('image/jpeg', _expJpegQ()); }
     catch (e) { return er.canvas.toDataURL('image/jpeg', _expJpegQ()); }
 }
 async function _dsBakeSpecImages(page, desc, token) {
@@ -35247,7 +35268,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
                 const out = renderFrameToCanvas(dInches, swatch, { wireframe: _wf(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
                 const cnv = out.canvas;
-                let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
+                let url; try { const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, slotW, artH); flat.width = _rf.w; flat.height = _rf.h; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
                 const fit = Math.min(slotW / cnv.width, artH / cnv.height);
                 const aw = cnv.width * fit, ah = cnv.height * fit;
                 const ax = cx + (slotW - aw) / 2, ay = topY + (artH - ah);
@@ -35415,7 +35436,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
                 const out = renderFrameToCanvas(dInches, swatch, { wireframe: _wf(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
                 const cnv = out.canvas;
-                let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
+                let url; try { const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, p.bw, p.bh); flat.width = _rf.w; flat.height = _rf.h; const fx = flat.getContext('2d'); fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
                 const fit = Math.min(p.bw / cnv.width, p.bh / cnv.height);
                 const aw = cnv.width * fit, ah = cnv.height * fit;
                 const ax = p.bx + (p.bw - aw) / 2, ay = p.by + (p.bh - ah) / 2;
@@ -35457,7 +35478,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 try {
                     const er = await renderElevationToCanvas(groupElev, null, { wireframe: _elevIsWireframe(groupElev), dpi: 24, tight: true });
                     if (er && er.canvas) {
-                        const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+                        const flat = document.createElement('canvas'); const _rf = _rasterFit(er.canvas, SW * 0.17, (bandBot - bandY) - 12, 2.5); flat.width = _rf.w; flat.height = _rf.h; const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.imageSmoothingQuality = 'high', fc.drawImage(er.canvas, 0, 0, _rf.w, _rf.h);
                         const boxW = SW * 0.17, boxH = (bandBot - bandY) - 12;   // leave room for the caption below
                         const fit = Math.min(boxW / flat.width, boxH / flat.height);
                         const tw = flat.width * fit, th = flat.height * fit;
@@ -35566,8 +35587,8 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
                 try {
                     er = await renderElevationToCanvas(groupElev, null, { wireframe: _elevIsWireframe(groupElev), dpi: 24, tight: true });
                     if (er && er.canvas) {
-                        flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
-                        const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+                        flat = document.createElement('canvas'); const _rf = _rasterFit(er.canvas, 0, 0, 2.5); flat.width = _rf.w; flat.height = _rf.h;
+                        const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.imageSmoothingQuality = 'high', fc.drawImage(er.canvas, 0, 0, _rf.w, _rf.h);
                     }
                 } catch (e) { er = null; flat = null; }
             }
@@ -35778,7 +35799,7 @@ async function _drawSpecSetPageBody(doc, logos, pageNum, meta, unit, tplKey, ctx
             const swatch = (r.fType === 'image' && r.swatchDataUrl) ? await _loadImg(r.swatchDataUrl) : null;
             const out = renderFrameToCanvas(dInches, swatch, { wireframe: _wf(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
             const cnv = out.canvas;
-            let url; try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
+            let url; try { const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, rW, slotH * 0.84); flat.width = _rf.w; flat.height = _rf.h; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h); url = flat.toDataURL('image/jpeg', _expJpegQ()); } catch (e) { url = cnv.toDataURL('image/jpeg', _expJpegQ()); }
             const boxH = slotH * 0.84, boxW = rW;
             const fit = Math.min(boxW / cnv.width, boxH / cnv.height);
             const aw = cnv.width * fit, ah = cnv.height * fit;
@@ -37448,7 +37469,7 @@ async function _captureElevRun(elevIdx) {
     try {
         _elevLoadWall(elevIdx);
         await _exportSettle();
-        res = await exportElevSVG({ returnBlob: true });
+        res = await exportElevSVG({ returnBlob: true, forCapture: true });
     } catch (e) { res = null; }
     // Put the wall the user was on back. SKIPPED while a prime pass owns the portal:
     // it walks several walls in a row and restores once at the end, so this would be
@@ -38315,6 +38336,9 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                 const drawPlanAt = async (px0, planBottom, pmaxW, pmaxH) => {
                     if (!havePlan) return null;
                     const pim = await _loadImg(planLv.imageData);
+                    // 18.80: shrunk to its box (line work headroom) before it is embedded;
+                    // the whole plan file used to go into a 3in box on every such page.
+                    const _fitPlan = async (src) => (pmaxW > 0 && pmaxH > 0) ? await _imgDownsized(src, pmaxW * _expR() * 2.5, pmaxH * _expR() * 2.5) : src;
                     const natW2 = pim.naturalWidth || 1, natH2 = pim.naturalHeight || 1;
                     let srcData = planLv.imageData, pasp = natW2 / natH2;
                     let mapPin = (rr) => [rr.planX, rr.planY];
@@ -38358,7 +38382,10 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
                     }
                     const [pw2, ph2] = fitIn(pasp, pmaxW, pmaxH);
                     const py0 = planBottom - ph2;
-                    doc.addImage(srcData, 'JPEG', px0, py0, pw2, ph2);
+                    srcData = await _fitPlan(srcData);
+                    // A PNG plan handed over as 'JPEG' was stored RAW by jsPDF (18.80).
+                    if (/^data:image\/png/i.test(srcData || '')) _addPngImage(doc, srcData, px0, py0, pw2, ph2);
+                    else doc.addImage(srcData, 'JPEG', px0, py0, pw2, ph2);
                     // THE WALL LINE, the same mark the floorplan page draws. A pin says
                     // which room; the line says which wall and how much of it, which is
                     // the thing an installer standing in the room actually needs. Drawn
@@ -38583,8 +38610,8 @@ async function _drawInstallGuidePage(doc, logos, pageNum, meta, arg, ctx) {
         }
         const er = elev ? await renderElevationToCanvas(elev, featuredId, { wireframe: _elevIsWireframe(elev), dpi: 46 }) : null;
         if (er && er.canvas) {
-            const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height;
-            const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.drawImage(er.canvas, 0, 0);
+            const flat = document.createElement('canvas'); const _rf = _rasterFit(er.canvas, 0, 0, 2.5); flat.width = _rf.w; flat.height = _rf.h;
+            const fc = flat.getContext('2d'); fc.fillStyle = '#fff'; fc.fillRect(0, 0, flat.width, flat.height); fc.imageSmoothingQuality = 'high', fc.drawImage(er.canvas, 0, 0, _rf.w, _rf.h);
             const aspect = er.wIn / er.hIn;
             const noPlan = !!(arg && arg._noPlan);
             const maxW = noPlan ? (SR.R - M) : (SR.R - M) * 0.62, maxH = noPlan ? (SR.B - _igTop) : (SR.B - SR.T - 16);
@@ -39201,7 +39228,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
         const out = renderFrameToCanvas(dInches, swatch, { wireframe: SWATCH || _isWireframe(), dpi: 96, pad: 0, artworkImg, artCrop: { zoom: r.artZoom, panX: r.artPanX, panY: r.artPanY } });
         const cnv = out.canvas;
         let url;
-        try { const flat = document.createElement('canvas'); flat.width = cnv.width; flat.height = cnv.height; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.drawImage(cnv, 0, 0); url = flat.toDataURL('image/jpeg', 0.85); }
+        try { const flat = document.createElement('canvas'); const _rf = _rasterFit(cnv, pw(tpl.artwork.w), ph(tpl.artwork.h)); flat.width = _rf.w; flat.height = _rf.h; const fx = flat.getContext('2d'); fx.fillStyle = '#ffffff'; fx.fillRect(0, 0, flat.width, flat.height); fx.imageSmoothingQuality = 'high'; fx.drawImage(cnv, 0, 0, _rf.w, _rf.h); url = flat.toDataURL('image/jpeg', 0.85); }
         catch (e) { url = cnv.toDataURL('image/jpeg', 0.85); }
         const boxX = px(tpl.artwork.x), boxW = pw(tpl.artwork.w);
         let boxY = py(tpl.artwork.y), boxH = ph(tpl.artwork.h);
@@ -39301,7 +39328,7 @@ async function _drawSpecPageTemplate(doc, logos, pageNum, meta, r, tplKey, ctx) 
             const er = await renderElevationToCanvas(elev, SHEET ? null : r.id, { wireframe: _elevIsWireframe(elev), dpi: 28, tight: true });
             if (er && er.canvas) {
                 let url;
-                try { const flat = document.createElement('canvas'); flat.width = er.canvas.width; flat.height = er.canvas.height; const ex = flat.getContext('2d'); ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height); ex.drawImage(er.canvas, 0, 0); url = flat.toDataURL('image/jpeg', 0.82); }
+                try { const flat = document.createElement('canvas'); const _rf = _rasterFit(er.canvas, pw(tpl.elevation.w), ph(tpl.elevation.h), 2.5); flat.width = _rf.w; flat.height = _rf.h; const ex = flat.getContext('2d'); ex.fillStyle = '#ffffff'; ex.fillRect(0, 0, flat.width, flat.height); ex.imageSmoothingQuality = 'high', ex.drawImage(er.canvas, 0, 0, _rf.w, _rf.h); url = flat.toDataURL('image/jpeg', 0.82); }
                 catch (e) { url = er.canvas.toDataURL('image/jpeg', 0.82); }
                 const boxY0 = py(tpl.elevation.y), boxW = pw(tpl.elevation.w), boxH = ph(tpl.elevation.h);
                 const fit = Math.min(boxW / er.canvas.width, boxH / er.canvas.height);
@@ -42651,7 +42678,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>
@@ -49292,7 +49319,56 @@ function setElevUnit(u) {
 }
 
 // Helper: load an image from a data URL and resolve when ready (or reject on error)
+// DECODED ONCE (18.80): one export decoded 43 images 218 times. A `data:` image is kept
+// (the most recent _IMG_CACHE_MAX) and every caller gets the same element, which is safe
+// because no caller changes or re-parents what it gets back (they draw it or read its
+// size). Keyed on length + head + tail, never the whole megabyte string. A failed or
+// timed-out load is not kept, so it is tried again next time. Other URLs (repo files,
+// blob: URLs that are revoked after use) are not cached.
+const _IMG_CACHE_MAX = 40;
+const _imgCache = new Map();
+function _imgCacheKey(u) { return u.length + ':' + u.slice(5, 69) + ':' + u.slice(-64); }
 function _loadImg(dataUrl) {
+    if (typeof dataUrl === 'string' && dataUrl.length > 256 && dataUrl.indexOf('data:') === 0) {
+        const k = _imgCacheKey(dataUrl);
+        const hit = _imgCache.get(k);
+        if (hit) { _imgCache.delete(k); _imgCache.set(k, hit); return hit; }
+        const pr = _loadImgRaw(dataUrl).then(img => { if (!img) _imgCache.delete(k); return img; });
+        _imgCache.set(k, pr);
+        while (_imgCache.size > _IMG_CACHE_MAX) _imgCache.delete(_imgCache.keys().next().value);
+        return pr;
+    }
+    return _loadImgRaw(dataUrl);
+}
+// A copy of an image no bigger than wPx x hPx, as a data URL, for embedding where a
+// full-resolution photo would only be scaled down again (the elevation capture). PNG
+// stays PNG (it may carry alpha), anything else becomes JPEG. Cached on the source and
+// the size rounded up to 64 px. Returns the source itself when it is already small enough.
+const _imgDownCache = new Map();
+async function _imgDownsized(src, wPx, hPx) {
+    if (!src || !(wPx > 0) || !(hPx > 0)) return src;
+    const bw = Math.ceil(wPx / 64) * 64, bh = Math.ceil(hPx / 64) * 64;
+    const k = _imgCacheKey(src) + '@' + bw + 'x' + bh;
+    if (_imgDownCache.has(k)) { const v = _imgDownCache.get(k); _imgDownCache.delete(k); _imgDownCache.set(k, v); return v; }
+    let out = src;
+    try {
+        const img = await _loadImg(src);
+        const iw = img && (img.naturalWidth || img.width), ih = img && (img.naturalHeight || img.height);
+        if (iw && ih) {
+            const sc = Math.min(1, bw / iw, bh / ih);
+            if (sc < 0.85) {
+                const c = document.createElement('canvas'); c.width = Math.max(1, Math.round(iw * sc)); c.height = Math.max(1, Math.round(ih * sc));
+                const cx = c.getContext('2d'); cx.imageSmoothingQuality = 'high'; cx.drawImage(img, 0, 0, c.width, c.height);
+                out = /^data:image\/png/i.test(src) ? c.toDataURL('image/png') : c.toDataURL('image/jpeg', 0.9);
+                if (!out || out.length < 32) out = src;
+            }
+        }
+    } catch (e) { out = src; }
+    _imgDownCache.set(k, out);
+    while (_imgDownCache.size > 60) _imgDownCache.delete(_imgDownCache.keys().next().value);
+    return out;
+}
+function _loadImgRaw(dataUrl) {
     return new Promise((resolve) => {
         if (!dataUrl) { resolve(null); return; }
         const img = new Image();
@@ -49974,7 +50050,7 @@ function _measureSvgText(text, fontSize, fontWeight, fontFamily) {
 // Artwork toggle is off or the frame has no image. Each call adds a unique
 // clipPath so multiple frames don't collide.
 let _svgArtClipCounter = 0;
-function _maybeAddArtworkToSvg(f, frameEl, backLayer, rectToSvg) {
+function _maybeAddArtworkToSvg(f, frameEl, backLayer, rectToSvg, hrefOverride) {
     try {
         const artEl = frameEl && frameEl.querySelector('.art-visual');
         if (!artEl) return;
@@ -50041,7 +50117,7 @@ function _maybeAddArtworkToSvg(f, frameEl, backLayer, rectToSvg) {
         const iw = g.dw.toFixed(1), ih = g.dh.toFixed(1);
         backLayer.push(
             `<clipPath id="${id}"><rect x="${r.x.toFixed(1)}" y="${r.y.toFixed(1)}" width="${r.w.toFixed(1)}" height="${r.h.toFixed(1)}"/></clipPath>` +
-            `<image clip-path="url(#${id})" x="${ix}" y="${iy}" width="${iw}" height="${ih}" xlink:href="${f.artworkUrl}" preserveAspectRatio="none"/>`
+            `<image clip-path="url(#${id})" x="${ix}" y="${iy}" width="${iw}" height="${ih}" xlink:href="${hrefOverride || f.artworkUrl}" preserveAspectRatio="none"/>`
         );
     } catch (e) { /* skip artwork on error */ }
 }
@@ -50360,6 +50436,20 @@ async function exportElevSVG(opts) {
         });
 
         // ── FRAMES (back layer): embed as <image> ──
+        // THE PDF CAPTURE asks for `forCapture` (18.80): it rasterizes this SVG at
+        // _ELEV_CAP_QUALITY width, so each frame and artwork only needs pixels for the
+        // size it will be drawn there. The frame raster is still drawn at 150 dpi (look
+        // unchanged) and then shrunk; the artwork is a cached, shrunk copy. The download
+        // and the bulk SVG export keep full resolution.
+        const _capK = (opts && opts.forCapture) ? Math.min(8, Math.max(1, ((_ELEV_CAP_QUALITY[_pdfQuality] || _ELEV_CAP_QUALITY.standard).w) / Math.max(1, svgW))) : 0;
+        const _artHref = async (f, el) => {
+            if (!_capK || !f.artworkUrl) return null;
+            const artEl = el.querySelector('.art-visual'); if (!artEl) return null;
+            const r0 = rectToSvg(artEl); if (!(r0.w > 0) || !(r0.h > 0)) return null;
+            const ar = (f.artworkW && f.artworkH) ? (f.artworkW / f.artworkH) : 0;
+            const g = computeArtDrawRect(r0.w, r0.h, ar, f.artZoom, f.artPanX, f.artPanY);
+            return await _imgDownsized(f.artworkUrl, g.dw * _capK * 1.5, g.dh * _capK * 1.5);
+        };
         for (const f of elevFrames) {
             if (!f.active) continue;
             const el = wall.querySelector(`.frame-vis[data-frame-letter="${f.letter}"]`);
@@ -50367,6 +50457,7 @@ async function exportElevSVG(opts) {
             const pos = rectToSvg(el);
             try {
                 const swatchImg = f.swatchDataUrl ? await _loadImg(f.swatchDataUrl) : null;
+                const _href = await _artHref(f, el);
 
                 if (svgFrameMode === 'autocolor') {
                     // Build the frame as a vector construction (rail + mats +
@@ -50379,7 +50470,7 @@ async function exportElevSVG(opts) {
                     }
                     const frameParts = buildFrameSVG(f, pos, elevUnit, railColor);
                     frameParts.forEach(s => backLayer.push(s));
-                    _maybeAddArtworkToSvg(f, el, backLayer, rectToSvg);
+                    _maybeAddArtworkToSvg(f, el, backLayer, rectToSvg, _href);
                     continue;
                 }
 
@@ -50388,15 +50479,20 @@ async function exportElevSVG(opts) {
                 const dInches = _frameDataInInches(renderData, elevUnit);
                 const prevShadow = dashOuterShadowsOn;
                 dashOuterShadowsOn = false;
-                const { canvas } = renderFrameToCanvas(dInches, swatchImg, { dpi: 150, pad: 0 });
+                const { canvas: _fc } = renderFrameToCanvas(dInches, swatchImg, { dpi: 150, pad: 0 });
                 dashOuterShadowsOn = prevShadow;
-                if (!canvas.width || !canvas.height) throw new Error('zero-size canvas');
+                if (!_fc.width || !_fc.height) throw new Error('zero-size canvas');
+                let canvas = _fc;
+                if (_capK) {
+                    const sc = Math.min(1, (pos.w * _capK * 1.5) / _fc.width, (pos.h * _capK * 1.5) / _fc.height);
+                    if (sc < 0.85) { canvas = document.createElement('canvas'); canvas.width = Math.max(1, Math.round(_fc.width * sc)); canvas.height = Math.max(1, Math.round(_fc.height * sc)); const cx = canvas.getContext('2d'); cx.imageSmoothingQuality = 'high'; cx.drawImage(_fc, 0, 0, canvas.width, canvas.height); }
+                }
                 const dataUrl = canvas.toDataURL('image/png');
                 backLayer.push(`<image x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" xlink:href="${dataUrl}" preserveAspectRatio="none"/>`);
                 // Uploaded artwork: layer into the opening (cover-fit, clipped) so
                 // the exported SVG matches the on-screen "beauty" view. Honors the
                 // Artwork layout-guide toggle via _showArtwork.
-                _maybeAddArtworkToSvg(f, el, backLayer, rectToSvg);
+                _maybeAddArtworkToSvg(f, el, backLayer, rectToSvg, _href);
             } catch (err) {
                 backLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${f.fColor || '#222'}"/>`);
             }
