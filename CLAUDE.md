@@ -1217,6 +1217,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   codes; a narrow piece drops its code, so a height check needs wide AND stacked pieces in a
   genuinely tall group. `__bandSetup` rebuilds `editorialContent` (where the guide pref
   lives), so switch the guide set AFTER the fixture.
+- **THE FRAME STRIP SHRINKS BEFORE IT GIVES WAY (18.89).** Past `box.maxW` it draws its images
+  smaller (to `FRAME_STRIP_MIN_SCALE`, bottom-aligned, codes never shrink), then drops PROFILES and
+  keeps corners, and only then returns null. It records the outcome per page in `_frameStripFit`
+  (`_noteStripFit`, debounced panel rebuild); the Show on page ticks read it for the *no room* note.
+  A `measure` is always full size. `test_frame_strip_fit` pins the order.
 - **A FRAME STRIP CELL IS AT LEAST AS WIDE AS ITS OWN CODE.** `_drawFrameStrip` lays cells
   right to left ending on `box.right` (the right safety guide on a group page) but draws the
   code left-aligned and unbounded (`MICH 432-29` is ~33pt at 6.5pt vs `MIN_CELL` 26). Widen
