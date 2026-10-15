@@ -1222,6 +1222,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   keeps corners, and only then returns null. It records the outcome per page in `_frameStripFit`
   (`_noteStripFit`, debounced panel rebuild); the Show on page ticks read it for the *no room* note.
   A `measure` is always full size. `test_frame_strip_fit` pins the order.
+  **18.90: a strip that won't fit BESIDE the band thumbnails gets its OWN ROW** (`_stripRow`), decided
+  before the art is drawn (measured at the band thumb height against the width plan + elevation leave,
+  elevation at its widest SW*0.17). The row spans the art region; the ART pays the height, the band
+  does not move. Twelve distinct codes still give way (labels alone are too wide).
 - **A FRAME STRIP CELL IS AT LEAST AS WIDE AS ITS OWN CODE.** `_drawFrameStrip` lays cells
   right to left ending on `box.right` (the right safety guide on a group page) but draws the
   code left-aligned and unbounded (`MICH 432-29` is ~33pt at 6.5pt vs `MIN_CELL` 26). Widen

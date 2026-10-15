@@ -741,6 +741,48 @@ const fs = require('fs');
       if (code.y > SR.B) throw new Error('strip label below the bottom guide at y ' + code.y.toFixed(1));
     });
 
+    __checkAsync('EXACT BUG (18.90): seven mouldings keep corners AND profiles, on a row of their own', async () => {
+      // Reported: seven different mouldings on one group page, Moulding profile ticked,
+      // and the strip had no room beside the floorplan and elevation. It now takes its
+      // own row under the art, full width, with the art giving up the height.
+      const corner = { naturalWidth: 150, naturalHeight: 400, width: 150, height: 400 };
+      const prof = { naturalWidth: 244, naturalHeight: 304, width: 244, height: 304 };
+      const L7 = _setLetters(7);
+      const codes = ['MICH 243-11', 'MICH 216-20', 'MICH 241-10', 'MICH 276-15', 'MICH 43-29', 'MICH 204-20', 'MICH 633-490'];
+      const render = async (ticks) => {
+        _collectProjectFramesCached = async () => codes.map(c => ({ code: c, finish: 'X', img: corner, profileImg: prof, color: '#888888' }));
+        const seven = L7.map((L, i) => mk('ART-9.9-' + L, { extW: 18 + i, extH: 22 + i, fCode: codes[i] }));
+        editorialContent = _editorialDefaults();
+        editorialContent.annotations = {}; editorialContent.pageFooters = {};
+        editorialContent.scaleOpts = { codes: 'frames' };
+        editorialContent.specGroupSlots = Object.assign({ frame: true, profile: true, plan: true, elevation: true }, ticks || {});
+        editorialContent.specGroupSlotOverrides = {};
+        dashProjectData = seven.slice();
+        elevations = [{ name: 'WALL C', wallW: 240, wallH: 96, frames: seven.map((r, i) => ({ id: r.id, letter: L7[i], x: 0.05 + i * 0.13, y: 0.4, w: 0.1, h: 0.14, active: true, dimTo: [] })) }];
+        const rec = new CanvasPdfRec(936, 540); const imgs = [];
+        const real = rec.addImage.bind(rec);
+        rec.addImage = function (src, fmt, x, y, w, h) { imgs.push({ src: src, x: x, y: y, w: w, h: h }); return real.apply(rec, arguments); };
+        _curPageKey = 'test:seven';
+        await _drawSpecSetPage(rec, {}, 1, {}, { rep: seven[0], members: seven, key: 'ART-9.9' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+        return { ops: rec.ops || [], corners: imgs.filter(i => i.src === corner), profiles: imgs.filter(i => i.src === prof) };
+      };
+      const r = await render({});
+      if (r.corners.length !== 7) throw new Error('corners drawn: ' + r.corners.length + ' of 7');
+      if (r.profiles.length !== 7) throw new Error('profiles drawn: ' + r.profiles.length + ' of 7 (fit: ' + _frameStripFit['test:seven'] + ')');
+      const SR = _safeFrameRect(936, 540);
+      r.corners.concat(r.profiles).forEach(i => { if (i.x < SR.L - 0.01 || i.x + i.w > SR.R + 0.01) throw new Error('strip outside the guides at x ' + i.x.toFixed(1)); });
+      // Its own row: wholly above the floorplan and elevation band.
+      const capY = (w) => { const o = r.ops.find(op => op && op.t === 'text' && op.str === w); return o ? o.y : null; };
+      const fy = capY('Floorplan');
+      if (fy == null) throw new Error('the floorplan left the band');
+      const stripBottom = Math.max.apply(null, r.corners.map(i => i.y + i.h));
+      const planTop = fy - 8 - 10;
+      if (!(stripBottom < planTop)) throw new Error('the strip row overlaps the band: strip ends ' + stripBottom.toFixed(1) + ', band caption at ' + fy.toFixed(1));
+      // With both ticks off there is no row at all.
+      const off = await render({ frame: false, profile: false });
+      if (off.corners.length || off.profiles.length) throw new Error('strip drew with both ticks off');
+    });
+
     __checkAsync('the frame strip drops itself rather than crowding the specs', async () => {
       // 12 distinct frame codes cannot fit as legible cells in the spec column,
       // so the strip must be dropped. Nothing is lost: the codes are already
