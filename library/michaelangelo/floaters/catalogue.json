@@ -1,0 +1,1376 @@
+{
+ "MICH 515-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-301-10": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-13": {
+  "color": "Satin Pewter",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-18": {
+  "color": "Satin Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-33": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-38": {
+  "color": "Burnished Bronze",
+  "family": "Bronze",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-73": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-301-93": {
+  "color": "Satin Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "301"
+ },
+ "MICH-303-11": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Floater",
+  "series": "303"
+ },
+ "MICH-303-12": {
+  "color": "Natural",
+  "family": "Natural",
+  "profile": "Medium Floater",
+  "series": "303"
+ },
+ "MICH-303-18": {
+  "color": "Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "303"
+ },
+ "MICH-303-19": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "303"
+ },
+ "MICH-303-28": {
+  "color": "Driftwood Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "303"
+ },
+ "MICH-303-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Floater",
+  "series": "303"
+ },
+ "MICH-304-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "304"
+ },
+ "MICH-304-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Floater",
+  "series": "304"
+ },
+ "MICH-305-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Small Floater",
+  "series": "305"
+ },
+ "MICH-305-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Floater",
+  "series": "305"
+ },
+ "MICH-305-31": {
+  "color": "Truffle",
+  "family": "Espresso",
+  "profile": "Small Floater",
+  "series": "305"
+ },
+ "MICH-305-33": {
+  "color": "Pattern Silver",
+  "family": "Silver",
+  "profile": "Small Floater",
+  "series": "305"
+ },
+ "MICH-306-02": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-09": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-10": {
+  "color": "Gold & Black",
+  "family": "Black & Gold",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-13": {
+  "color": "Satin Pewter",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-18": {
+  "color": "Satin Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-20": {
+  "color": "Pale Gold",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-233": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-30": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-33": {
+  "color": "Pattern Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-38": {
+  "color": "Burnished Bronze",
+  "family": "Bronze",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-43": {
+  "color": "Stainless Steel",
+  "family": "Stainless Steel",
+  "profile": "Medium Flat",
+  "series": "306"
+ },
+ "MICH-306-73": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-90": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-306-93": {
+  "color": "Satin Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "306"
+ },
+ "MICH-307-20": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Medium Large Floater",
+  "series": "307"
+ },
+ "MICH-307-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Large Floater",
+  "series": "307"
+ },
+ "MICH-307-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Large Floater",
+  "series": "307"
+ },
+ "MICH-307-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Medium Large Floater",
+  "series": "307"
+ },
+ "MICH-307-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Large Floater",
+  "series": "307"
+ },
+ "MICH-317-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-317-18": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-317-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-317-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-317-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-317-30": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-317-73": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Tall Floater",
+  "series": "317"
+ },
+ "MICH-319-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Floater",
+  "series": "319"
+ },
+ "MICH-337-20": {
+  "color": "Dark Gold",
+  "family": "Gold",
+  "profile": "Medium Radius Top Floater",
+  "series": "337"
+ },
+ "MICH-337-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Radius Top Floater",
+  "series": "337"
+ },
+ "MICH-337-33": {
+  "color": "Pattern Bright Silver",
+  "family": "Silver",
+  "profile": "Medium Radius Top Floater",
+  "series": "337"
+ },
+ "MICH-339-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Extra Tall Floater",
+  "series": "339"
+ },
+ "MICH-339-20": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Extra Tall Floater",
+  "series": "339"
+ },
+ "MICH-339-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Extra Tall Floater",
+  "series": "339"
+ },
+ "MICH-339-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Extra Tall Floater",
+  "series": "339"
+ },
+ "MICH-339-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Extra Tall Floater",
+  "series": "339"
+ },
+ "MICH-339-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Extra Tall Floater",
+  "series": "339"
+ },
+ "MICH-340-20": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Large Floater",
+  "series": "340"
+ },
+ "MICH-340-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Large Floater",
+  "series": "340"
+ },
+ "MICH-340-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Large Floater",
+  "series": "340"
+ },
+ "MICH-340-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Floater",
+  "series": "340"
+ },
+ "MICH-341-20": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Very Large Floater",
+  "series": "341"
+ },
+ "MICH-341-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Very Large Floater",
+  "series": "341"
+ },
+ "MICH-341-23": {
+  "color": "Warm silver",
+  "family": "Silver",
+  "profile": "Very Large Floater",
+  "series": "341"
+ },
+ "MICH-341-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Very Large Floater",
+  "series": "341"
+ },
+ "MICH-342-13": {
+  "color": "Metallic Pewter",
+  "family": "Silver",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-15": {
+  "color": "Metallic Bronze",
+  "family": "Bronze",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-20": {
+  "color": "Metallic Pale Gold",
+  "family": "Gold",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-22": {
+  "color": "Matte White",
+  "family": "Ivory-White",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-23": {
+  "color": "Metallic Silver",
+  "family": "Silver",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-28": {
+  "color": "Metallic Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-342-30": {
+  "color": "Metallic Gold",
+  "family": "Gold",
+  "profile": "Medium Bevel Top Floater",
+  "series": "342"
+ },
+ "MICH-343-10": {
+  "color": "Gold & Black",
+  "family": "Black & Gold",
+  "profile": "Small Step Floater",
+  "series": "343"
+ },
+ "MICH-343-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Small Step Floater",
+  "series": "343"
+ },
+ "MICH-343-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Step Floater",
+  "series": "343"
+ },
+ "MICH-343-23": {
+  "color": "Silver & Black",
+  "family": "Black & Silver",
+  "profile": "Small Step Floater",
+  "series": "343"
+ },
+ "MICH-343-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Step Floater",
+  "series": "343"
+ },
+ "MICH-344-10": {
+  "color": "Gold & Black",
+  "family": "Black & Gold",
+  "profile": "Medium Step Floater",
+  "series": "344"
+ },
+ "MICH-344-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Step Floater",
+  "series": "344"
+ },
+ "MICH-344-23": {
+  "color": "Silver & Black",
+  "family": "Black & Silver",
+  "profile": "Medium Step Floater",
+  "series": "344"
+ },
+ "MICH-344-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Step Floater",
+  "series": "344"
+ },
+ "MICH-348-02": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "348"
+ },
+ "MICH-348-09": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "348"
+ },
+ "MICH-348-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "348"
+ },
+ "MICH-348-28": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Floater",
+  "series": "348"
+ },
+ "MICH-348-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "348"
+ },
+ "MICH-348-32": {
+  "color": "White Woodgrain",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "348"
+ },
+ "MICH-349-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "",
+  "series": "349"
+ },
+ "MICH-349-28": {
+  "color": "Truffle",
+  "family": "Espresso",
+  "profile": "",
+  "series": "349"
+ },
+ "MICH-349-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "",
+  "series": "349"
+ },
+ "MICH-360-02": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-09": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-108": {
+  "color": "Grey & Brown Driftwood",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-111": {
+  "color": "Black & Brown Driftwood",
+  "family": "Others",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-112": {
+  "color": "Light Brown & White Driftwood",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-118": {
+  "color": "Brown & Beige Driftwood",
+  "family": "Others",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-18": {
+  "color": "Satin Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-30": {
+  "color": "Bright Gold",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-71": {
+  "color": "Walnut Woodgrain",
+  "family": "Walnut",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-72": {
+  "color": "Off-White Woodgrain",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-73": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-78": {
+  "color": "Grey Woodgrain",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-79": {
+  "color": "Black Woodgrain",
+  "family": "Black",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-81": {
+  "color": "Dark Walnut Woodgrain",
+  "family": "Walnut",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-82": {
+  "color": "Natural Woodgrain",
+  "family": "Natural",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-360-88": {
+  "color": "Charcoal Woodgrain",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "360"
+ },
+ "MICH-361-121": {
+  "color": "Brown & White",
+  "family": "Others",
+  "profile": "Medium Large Floater",
+  "series": "361"
+ },
+ "MICH-361-122": {
+  "color": "White & Brown",
+  "family": "Others",
+  "profile": "Medium Large Floater",
+  "series": "361"
+ },
+ "MICH-361-125": {
+  "color": "Dark Brown",
+  "family": "Others",
+  "profile": "Medium Large Floater",
+  "series": "361"
+ },
+ "MICH-361-128": {
+  "color": "Light Grey",
+  "family": "Others",
+  "profile": "Medium Large Floater",
+  "series": "361"
+ },
+ "MICH-361-131": {
+  "color": "Grey & Brown",
+  "family": "Others",
+  "profile": "Medium Large Floater",
+  "series": "361"
+ },
+ "MICH-361-138": {
+  "color": "White & Grey",
+  "family": "Others",
+  "profile": "Medium Large Floater",
+  "series": "361"
+ },
+ "MICH-362-12": {
+  "color": "White w/Red Lines",
+  "family": "Ivory-White",
+  "profile": "Large Floater",
+  "series": "362"
+ },
+ "MICH-362-19": {
+  "color": "Black w/Light Brown Lines",
+  "family": "Black",
+  "profile": "Large Floater",
+  "series": "362"
+ },
+ "MICH-362-28": {
+  "color": "Charcoal w/Light Brown Lines",
+  "family": "Grey & Charcoal",
+  "profile": "Large Floater",
+  "series": "362"
+ },
+ "MICH-363-293": {
+  "color": "Silver and Black",
+  "family": "Silver",
+  "profile": "Medium Layered Top Floater",
+  "series": "363"
+ },
+ "MICH-364-20": {
+  "color": "Gold Top with Natural Color Sides",
+  "family": "Gold",
+  "profile": "Tall Floater w/inside Wedge",
+  "series": "364"
+ },
+ "MICH-364-73": {
+  "color": "Silver Top with Natural Color Sides",
+  "family": "Silver",
+  "profile": "Tall Floater w/inside Wedge",
+  "series": "364"
+ },
+ "MICH-365-11": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Small Floater",
+  "series": "365"
+ },
+ "MICH-365-12": {
+  "color": "Natural",
+  "family": "Natural",
+  "profile": "Small Floater",
+  "series": "365"
+ },
+ "MICH-365-18": {
+  "color": "Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floater",
+  "series": "365"
+ },
+ "MICH-365-19": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Floater",
+  "series": "365"
+ },
+ "MICH-365-28": {
+  "color": "Driftwood Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floater",
+  "series": "365"
+ },
+ "MICH-365-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Small Floater",
+  "series": "365"
+ },
+ "MICH-366-183": {
+  "color": "Silver Leaf with Light Grey Paint Back",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "366"
+ },
+ "MICH-368-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "368"
+ },
+ "MICH-368-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Floater",
+  "series": "368"
+ },
+ "MICH-368-30": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Tall Floater",
+  "series": "368"
+ },
+ "MICH-368-31": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Tall Floater",
+  "series": "368"
+ },
+ "MICH-368-73": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Tall Floater",
+  "series": "368"
+ },
+ "MICH-513-33": {
+  "color": "Stainless Steel",
+  "family": "Stainless Steel",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-40": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-41": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-473": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-50": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-51": {
+  "color": "Truffle",
+  "family": "Espresso",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-52": {
+  "color": "Grey & Beige Barnwood",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-55": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-58": {
+  "color": "Grey Barnwood",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-60": {
+  "color": "Pattern Gold with Lines",
+  "family": "Gold",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-61": {
+  "color": "Oak",
+  "family": "Others",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-71": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-72": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-78": {
+  "color": "Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-79": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-81": {
+  "color": "Beige",
+  "family": "Ivory-White",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-513-82": {
+  "color": "Natural Woodgrain",
+  "family": "Natural",
+  "profile": "Small Floater",
+  "series": "513"
+ },
+ "MICH-514-40": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-41": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-42": {
+  "color": "Ivory",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-473": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-50": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-51": {
+  "color": "Truffle",
+  "family": "Espresso",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-52": {
+  "color": "Grey & Beige Barnwood",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-55": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-58": {
+  "color": "Grey Barnwood",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-60": {
+  "color": "Pattern Gold with Lines",
+  "family": "Gold",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-61": {
+  "color": "Oak",
+  "family": "Others",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-71": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-72": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-78": {
+  "color": "Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-79": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-81": {
+  "color": "Beige",
+  "family": "Ivory-White",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-514-82": {
+  "color": "Natural Woodgrain",
+  "family": "Natural",
+  "profile": "Tall Floater",
+  "series": "514"
+ },
+ "MICH-515-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-473": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-50": {
+  "color": "Bright Gold",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-55": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-60": {
+  "color": "Pattern Gold with Lines",
+  "family": "Gold",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-71": {
+  "color": "Walnut Woodgrain",
+  "family": "Walnut",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-78": {
+  "color": "Grey Woodgrain",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-81": {
+  "color": "Beige Woodgrain",
+  "family": "Ivory-White",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-515-82": {
+  "color": "Natural Woodgrain",
+  "family": "Natural",
+  "profile": "Medium Floater",
+  "series": "515"
+ },
+ "MICH-609-40": {
+  "color": "Antique Gold with Black outer side",
+  "family": "Gold",
+  "profile": "Tall Beaded Floater",
+  "series": "609"
+ },
+ "MICH-609-43": {
+  "color": "Antique Silver with Black outer side",
+  "family": "Silver",
+  "profile": "Tall Beaded Floater",
+  "series": "609"
+ },
+ "MICH-613-42": {
+  "color": "White with Silver Top Line",
+  "family": "Ivory-White",
+  "profile": "",
+  "series": "613"
+ },
+ "MICH-613-43": {
+  "color": "Silver with Black Top Line",
+  "family": "Silver",
+  "profile": "",
+  "series": "613"
+ },
+ "MICH-613-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "",
+  "series": "613"
+ },
+ "MICH-613-50": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "613"
+ },
+ "MICH-613-53": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "",
+  "series": "613"
+ },
+ "MICH-613-59": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "",
+  "series": "613"
+ },
+ "MICH-620-40": {
+  "color": "Antique Gold",
+  "family": "Gold",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-620-41": {
+  "color": "Champagne",
+  "family": "Walnut",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-620-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-620-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-620-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-620-53": {
+  "color": "Pewter",
+  "family": "Silver",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-620-61": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Large Step Floater",
+  "series": "620"
+ },
+ "MICH-626-102": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-109": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-43": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-473": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-50": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-51": {
+  "color": "Oak Woodgrain",
+  "family": "Others",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-71": {
+  "color": "Walnut Woodgrain",
+  "family": "Walnut",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-72": {
+  "color": "White Woodgrain",
+  "family": "Walnut",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-626-82": {
+  "color": "Natural",
+  "family": "Natural",
+  "profile": "Medium Step Floater",
+  "series": "626"
+ },
+ "MICH-644-41": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Small Step Floater",
+  "series": "644"
+ },
+ "MICH-644-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Step Floater",
+  "series": "644"
+ },
+ "MICH-644-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Small Step Floater",
+  "series": "644"
+ },
+ "MICH-644-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Step Floater",
+  "series": "644"
+ },
+ "MICH-644-50": {
+  "color": "Bright Gold",
+  "family": "Gold",
+  "profile": "Small Step Floater",
+  "series": "644"
+ },
+ "MICH-648-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Step Floater",
+  "series": "648"
+ }
+}

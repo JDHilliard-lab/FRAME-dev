@@ -1744,6 +1744,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `scripts/build-library-manifest.js` with the `corners/` + `profiles/` paths. Michelangelo source is the
   Google Sheet behind their site search (Photo_3 = corner, Photo_4 = line art); the swatch is the
   corner's face, cross-faded to tile down the rail.
+  **Floaters need the lip width (`_f`), which the sheet does NOT carry**: it is read off each series'
+  line art (top callout; for stepped/wedge/cove profiles the wall at the canvas). The app derives the
+  inset as lip + `FLOATER_SHADOW_REVEAL`, and a collection named *floater* switches the product.
 - **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
   view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).

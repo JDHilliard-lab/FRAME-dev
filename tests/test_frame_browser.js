@@ -70,6 +70,20 @@ check('every catalogue-imported swatch has a corner photo and a profile on disk'
   });
   if (missing.length) throw new Error(missing.length + ' missing, e.g. ' + missing.slice(0, 5).join(', '));
 });
+check('every floater has its corner, profile and lip width (the inset depends on it)', () => {
+  const dir = path.join(root, 'library', 'michaelangelo', 'floaters');
+  const meta = JSON.parse(fs.readFileSync(path.join(dir, 'catalogue.json'), 'utf8'));
+  const fl = MAN.filter(x => x.collection === 'floaters');
+  if (fl.length < 200) throw new Error('only ' + fl.length + ' floaters in the manifest');
+  const bad = [];
+  fl.forEach(x => {
+    if (!(x.faceWidth > 0)) bad.push(x.code + ' no lip width');
+    if (!x.corner || !fs.existsSync(path.join(root, x.corner))) bad.push(x.code + ' corner');
+    if (!x.profileImg || !fs.existsSync(path.join(root, x.profileImg))) bad.push(x.code + ' profile');
+    if (!meta[x.code]) bad.push(x.code + ' no catalogue facts');
+  });
+  if (bad.length) throw new Error(bad.length + ' problems, e.g. ' + bad.slice(0, 5).join(', '));
+});
 check('library/groupings.json is a valid (possibly empty) team list', () => {
   const j = JSON.parse(fs.readFileSync(path.join(root, 'library', 'groupings.json'), 'utf8'));
   if (!Array.isArray(j.groupings)) throw new Error('groupings is not a list');
