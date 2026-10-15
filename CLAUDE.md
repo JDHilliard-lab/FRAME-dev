@@ -637,7 +637,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   writer `setTocOverride`, panel `_tocPanelInto`. A `tpledit*` page (template editor) is
   never converted. A page of ANY type holding the template's slots under a CONTENTS heading
   is converted (`_tocLooksLikeContents`), and `_dsApplyTemplateToCurrentPage` carries the
-  template's role (toc / breaker, and back off toc). Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  template's role (toc / breaker, and back off toc). Overrides are stored RELATIVE TO THE
+  DEFAULT (`_tocDefaultIn`: a layout page with no heading starts OUT and records `show`;
+  everything else records `hide`; `section` overrides `_tocSectionDefault`). The per-page
+  tick is `_tocPageInto`, in `_dsRenderTools` after `_dsPageActionsInto`, shown only while
+  the deck has a contents page. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages

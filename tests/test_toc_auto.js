@@ -211,6 +211,57 @@ const path = require('path');
       });
       editorialContent.layoutPages.pop();
 
+      // 18.73: a blank page added to the deck printed as "Page" in the contents.
+      const b1 = { id: 'pgb1', type: 'custom', title: 'New Page', elements: [], afterKey: 'fixed:narrative' };
+      const h1 = { id: 'pgh1', type: 'moodboard', title: 'Mood', elements: [{ type: 'text', text: 'MATERIALS AND MOOD', x: .05, y: .1, w: .5, size: .06 }], afterKey: 'pgb1' };
+      h1.afterKey = 'layout:pgb1';
+      editorialContent.layoutPages.push(b1, h1);
+      _dsPages = _deckPageList();
+      __check('EXACT BUG: a blank page stays out of the contents until it is ticked in', () => {
+        if (texts('entry').some(t => t === 'Page')) throw new Error('blank page listed: ' + texts('entry').join(' | '));
+        if (texts('entry').indexOf('Materials and Mood') < 0) throw new Error('a page with a heading should still be listed');
+        setTocOverride(['layout:pgb1'], 'hide', false);
+        _dsPages = _deckPageList();
+        if (!texts('entry').some(t => t === 'Custom' || t === 'Page')) throw new Error('ticked-in blank page not listed: ' + texts('entry').join(' | '));
+        if (!(editorialContent.tocOverrides['layout:pgb1'] || {}).show) throw new Error('should be stored as show, the page starts out');
+        setTocOverride(['layout:pgb1'], 'hide', true);
+        if (editorialContent.tocOverrides['layout:pgb1']) throw new Error('back to default should leave no record');
+      });
+      __check('any layout page can start a section, and stop being one', () => {
+        setTocOverride(['layout:pgh1'], 'section', true);
+        _dsPages = _deckPageList();
+        if (texts('title').indexOf('Materials and Mood') < 0) throw new Error('not a section: ' + texts('title').join(' | '));
+        setTocOverride(['layout:pgdiv'], 'section', false);
+        _dsPages = _deckPageList();
+        if (texts('title').indexOf('The Art of the Lobby') >= 0) throw new Error('divider still a section');
+        if (texts('entry').indexOf('The Art of the Lobby') < 0) throw new Error('a divider that is not a section lists as a page');
+        setTocOverride(['layout:pgdiv'], 'section', true); setTocOverride(['layout:pgh1'], 'section', false);
+        if (editorialContent.tocOverrides['layout:pgdiv'] || editorialContent.tocOverrides['layout:pgh1']) throw new Error('defaults left records');
+      });
+      __check('every page panel offers the tick while there is a contents page', () => {
+        _dsPages = _deckPageList();
+        const host = document.createElement('div');
+        _tocPageInto(host, _dsPages.find(d => _deckPageKey(d) === 'layout:pgb1'));
+        const labels = Array.from(host.querySelectorAll('label')).map(l => l.textContent);
+        if (labels.join('|') !== 'In contents|Starts a section') throw new Error(labels.join('|'));
+        if (host.querySelector('input').checked) throw new Error('blank page shows as in');
+        const h2 = document.createElement('div');
+        _tocPageInto(h2, _dsPages.find(d => _deckPageKey(d) === 'fixed:understanding'));
+        if (h2.querySelectorAll('input').length !== 1 || !h2.querySelector('input').checked) throw new Error('fixed page tick wrong');
+        const h3 = document.createElement('div');
+        _tocPageInto(h3, _dsPages.find(d => _deckPageKey(d) === 'layout:pgtoc'));
+        if (h3.children.length) throw new Error('the contents page offers to list itself');
+        const live = S.slice(S.indexOf('function _dsRenderTools()'), S.indexOf('_dsPageAppearanceInto(t, desc);', S.indexOf('function _dsRenderTools()')));
+        if (live.indexOf('_tocPageInto(t, desc)') < 0) throw new Error('not wired into the page panel');
+      });
+      editorialContent.layoutPages = editorialContent.layoutPages.filter(p => p !== b1 && p !== h1);
+      __check('a wall named with its own code prints the name once', () => {
+        const nm0 = elevations[0].name; elevations[0].name = 'ART.3 LOBBY';
+        const lab = _tocAutoLabel({ kind: 'spec', _install: true, title: 'ART.3', _elevIdx: 0 });
+        elevations[0].name = nm0;
+        if (lab !== 'ART.3 LOBBY') throw new Error(lab);
+      });
+
       // THE EXPORT prints the generated page, not the old flat list.
       pages = _deckPageList();
       const tocNum = pages.map(_deckPageKey).indexOf('layout:pgtoc') + 1;
