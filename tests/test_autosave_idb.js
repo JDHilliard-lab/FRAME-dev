@@ -66,6 +66,12 @@ function makeStore() {
           return {};
         },
         delete(k) { ops.push(() => { delete db.stores[n][k]; delete db.bytes[n][k]; }); return {}; },
+        getAll() {
+          state.reads[n] = (state.reads[n] || 0) + 1;
+          const rq = { onsuccess: null, onerror: null, result: undefined };
+          later(() => { rq.result = Object.keys(db.stores[n]).map((k) => clone(db.stores[n][k])); if (rq.onsuccess) rq.onsuccess(); });
+          return rq;
+        },
         get(k) {
           state.reads[n] = (state.reads[n] || 0) + 1;
           const rq = { onsuccess: null, onerror: null, result: undefined };
@@ -205,6 +211,9 @@ const answerRestore = (fn) => fx.stub({ showConfirmModal: (t, b, y, n, onYes, on
   if (fn()) { if (onYes) onYes(); } else if (onNo) onNo();
 } });
 const ameta = () => store.recs('frameAutosave', 'ameta');
+// 18.82: one record per TAB SESSION, keyed by the session id (it was one shared
+// 'current' record). `mine` is this tab's.
+const mine = (m) => m[fx.session];
 const adata = () => store.recs('frameAutosave', 'adata');
 const wipe = () => { delete store.dbs.frameAutosave; store.reads = {}; };
 
@@ -219,7 +228,7 @@ check('a project too big for localStorage now actually autosaves', async () => {
 
   await fx.performAutosave();
   if (fx.failed) throw new Error('autosave reported a failure on a project IndexedDB can hold');
-  const rec = adata().current;
+  const rec = adata()[fx.session];
   if (!rec) throw new Error('nothing was stored');
   const el = rec.payload.data.elevations;
   if (!el || !el[0] || !el[0].frames[0]) throw new Error('the stored payload has no elevations');
@@ -228,7 +237,7 @@ check('a project too big for localStorage now actually autosaves', async () => {
 });
 
 check('the meta record is small, so the load path can ask before it reads', async () => {
-  const m = ameta().current;
+  const m = ameta()[fx.session];
   if (!m) throw new Error('no meta record was written');
   if (JSON.stringify(m).length > 2048) throw new Error('the meta record carries the payload, so asking costs as much as reading');
   if (!m.timestamp || !m.session || !m.projName) throw new Error('the meta record cannot answer the restore prompt on its own');
@@ -237,10 +246,10 @@ check('the meta record is small, so the load path can ask before it reads', asyn
 check('the live objects are cloned at put time, so a later edit cannot rewrite the backup', async () => {
   // The writer deliberately hands over live references. That is only safe
   // because the clone is synchronous inside put(), so this drives it.
-  const before = adata().current.payload.data.elevations[0].frames[0].x;
+  const before = adata()[fx.session].payload.data.elevations[0].frames[0].x;
   if (fx.frameX() !== before) throw new Error('the fixture and the stored copy already disagree');
   fx.setFrameX(999);
-  if (adata().current.payload.data.elevations[0].frames[0].x !== before) {
+  if (adata()[fx.session].payload.data.elevations[0].frames[0].x !== before) {
     throw new Error('the stored backup moved when the live project was edited');
   }
   fx.setFrameX(before);
@@ -294,16 +303,21 @@ check('and it clears itself once a write lands again', async () => {
 });
 
 // ── restoring the WRONG project, which is the expensive half ────────────
-check('a failed write drops a stale autosave left by an EARLIER session', async () => {
+check('a failed write drops an EARLIER backup of THIS project, and keeps other projects', async () => {
+  // 18.82: other sessions are mostly other TABS, i.e. other projects, and their backups
+  // are real work. The stale one is an earlier backup of the project on screen, which
+  // would be offered as its latest work while this session's writes fail.
   wipe(); fx.reset(); infos.length = 0;
   store.quota = IDB_BUDGET;
-  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now(), session: 'some-other-session', projName: 'A Different Job', data: {} }));
-  if (!ameta().current) throw new Error('the fixture record was not stored');
+  const here = doc.getElementById('g_projName').value || 'Untitled';
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now(), session: 'earlier-same', projName: here, data: {} }));
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now(), session: 'other-tab', projName: 'A Different Job', data: {} }));
+  if (!ameta()['earlier-same'] || !ameta()['other-tab']) throw new Error('the fixture records were not stored');
   store.quota = 1;                   // now nothing this session writes can land
   await fx.performAutosave();
   await settle();
-  if (ameta().current) throw new Error('the stale record survived, so the next load offers to restore a different project');
-  if (adata().current) throw new Error('the stale payload survived alongside its cleared meta');
+  if (ameta()['earlier-same'] || adata()['earlier-same']) throw new Error('the stale backup of this project survived, so the next load offers it as the latest work');
+  if (!ameta()['other-tab'] || !adata()['other-tab']) throw new Error('another project\'s backup was thrown away');
 });
 
 check('but a failed write KEEPS one from this session, which is real older work', async () => {
@@ -313,8 +327,8 @@ check('but a failed write KEEPS one from this session, which is real older work'
   store.quota = 1;
   await fx.performAutosave();
   await settle();
-  if (!ameta().current) throw new Error('a genuine older snapshot of the current work was thrown away');
-  if (!adata().current || adata().current.payload.data.marker !== 'keep me') throw new Error('the kept record lost its payload');
+  if (!mine(ameta())) throw new Error('a genuine older snapshot of the current work was thrown away');
+  if (!mine(adata()) || mine(adata()).payload.data.marker !== 'keep me') throw new Error('the kept record lost its payload');
 });
 
 // ── the load path ───────────────────────────────────────────────────────
@@ -327,10 +341,10 @@ check('the prompt is answered from meta alone - cancelling never reads the paylo
   await fx.checkAutosaveOnLoad();
   // clearAutosave's delete is fire-and-forget, so wait for it rather than for a fixed
   // 50ms: under the parallel suite a busy machine missed that window now and then.
-  for (let k = 0; k < 30 && ameta().current; k++) await settle();
+  for (let k = 0; k < 30 && mine(ameta()); k++) await settle();
   if (!store.reads.ameta) throw new Error('the load path did not read the meta record at all');
   if (store.reads.adata) throw new Error('the load path read the whole payload before asking, which is what boot used to pay for');
-  if (ameta().current) throw new Error('declining the restore left the record in place');
+  if (mine(ameta())) throw new Error('declining the restore left the record in place');
 });
 
 check('accepting it restores the project that was actually stored', async () => {
@@ -389,7 +403,7 @@ check('a stale record past the age limit is cleared without asking', async () =>
   await fx.checkAutosaveOnLoad();
   await settle();
   if (asked) throw new Error('a nine-day-old autosave still prompted');
-  if (ameta().current) throw new Error('the expired record was not cleared');
+  if (ameta().old) throw new Error('the expired record was not cleared');
 });
 
 check('clearAutosave clears BOTH the live store and the legacy slot', async () => {
@@ -400,7 +414,74 @@ check('clearAutosave clears BOTH the live store and the legacy slot', async () =
   fx.clearAutosave();
   await settle();
   if (window.localStorage.getItem('frame-tool-autosave')) throw new Error('the legacy slot survived');
-  if (ameta().current || adata().current) throw new Error('the IndexedDB record survived');
+  if (mine(ameta()) || mine(adata())) throw new Error('the IndexedDB record survived');
+});
+
+// ── two projects open at once (18.82) ──────────────────────────────────
+check('EXACT BUG: two tabs keep two backups; neither overwrites the other', async () => {
+  wipe(); fx.reset();
+  store.quota = IDB_BUDGET;
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now() - 1000, session: 'tab-B', projName: 'Guest Rooms', data: { marker: 'B' } }));
+  await fx.performAutosave();
+  if (!ameta()['tab-B'] || adata()['tab-B'].payload.data.marker !== 'B') throw new Error('this tab overwrote the other tab\'s backup');
+  if (!mine(ameta())) throw new Error('this tab did not keep its own');
+  if (ameta().current) throw new Error('the shared record is still written');
+});
+
+check('saving or opening clears only THIS tab\'s backup (and an older build\'s shared one)', async () => {
+  wipe(); fx.reset();
+  store.quota = IDB_BUDGET;
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now(), session: 'tab-B', projName: 'Guest Rooms', data: {} }));
+  await fx.aPut(() => ({ id: 'x', type: 'master-studio-autosave-v1', timestamp: Date.now(), session: 'current', projName: 'Old Build', data: {} }));
+  await fx.performAutosave();
+  fx.clearAutosave();
+  await settle();
+  if (mine(ameta())) throw new Error('this tab\'s backup survived its own save');
+  if (!ameta()['tab-B']) throw new Error('saving in this tab deleted ANOTHER tab\'s unsaved work');
+  if (ameta().current) throw new Error('the older build\'s shared record survived');
+});
+
+check('only the newest few backups are kept, and this tab\'s always is', async () => {
+  wipe(); fx.reset();
+  store.quota = IDB_BUDGET;
+  for (let i = 0; i < 8; i++) await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now() - (i + 1) * 60000, session: 'old' + i, projName: 'Job ' + i, data: {} }));
+  await fx.performAutosave();
+  await settle(); await settle();
+  const ids = Object.keys(ameta());
+  if (ids.length !== 5) throw new Error(ids.length + ' kept: ' + ids.join(','));
+  if (!mine(ameta())) throw new Error('this tab\'s backup was pruned');
+  if (ameta().old7 || !ameta().old0) throw new Error('pruned the wrong ones: ' + ids.join(','));
+  if (Object.keys(adata()).length !== 5) throw new Error('payloads were not pruned with their meta');
+});
+
+check('the start screen offers each backup by name; Continue moves it into this tab', async () => {
+  wipe(); fx.reset();
+  store.quota = IDB_BUDGET;
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now() - 1000, session: 'tab-B', projName: 'Guest Rooms', data: { elevations: [{ name: 'B wall', frames: [] }], dashProjectData: [] } }));
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now() - 5000, session: 'tab-C', projName: 'Lobby', data: { elevations: [], dashProjectData: [] } }));
+  const all = await window.eval('_autosavePeekAll()');
+  if (all.map(p => p.projName).join('|') !== 'Guest Rooms|Lobby') throw new Error('not listed newest first by name: ' + all.map(p => p.projName).join('|'));
+  let got = null;
+  fx.stub({ restoreProjectState: (d) => { got = d; }, refreshAllViews: () => {}, pushHistory: () => {} });
+  const ok = await window.eval('_autosaveRestoreNow')(all[0]);
+  await settle();
+  if (!ok || !got || got.elevations[0].name !== 'B wall') throw new Error('the chosen backup was not restored');
+  if (ameta()['tab-B']) throw new Error('the backup was restored but its old record is still offered');
+  if (!mine(ameta())) throw new Error('the restored work is not backed up under this tab');
+  if (!ameta()['tab-C']) throw new Error('restoring one backup touched another');
+});
+
+check('a backup whose tab is still open is labelled, not offered as lost work', async () => {
+  wipe(); fx.reset();
+  store.quota = IDB_BUDGET;
+  await fx.aPut(() => ({ type: 'master-studio-autosave-v1', timestamp: Date.now(), session: 'tab-live', projName: 'Open Elsewhere', data: {} }));
+  window.eval('_liveTabSessions = async () => ({ "tab-live": true })');
+  const all = await window.eval('_autosavePeekAll({ live: true })');
+  if (!all[0] || !all[0].live) throw new Error('the open tab was not detected');
+  const box = window.eval('_startScreenOthers')(all);
+  const txt = box.textContent;
+  if (txt.indexOf('open in another tab') < 0) throw new Error('no label');
+  if (box.querySelector('.ss-other-go')) throw new Error('it offers Continue on work that is already open in another tab');
 });
 
 // ── the plumbing that keeps the above true ──────────────────────────────

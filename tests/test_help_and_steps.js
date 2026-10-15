@@ -42,7 +42,7 @@ window.eval(APP + NL + [
     '  renderTabs: renderNavTabs, syncBadges: _syncNavBadges, schedule: scheduleAutosave,',
     '  openHelp: openHelpModal, closeHelp: closeHelpModal, setVideo: setHelpVideoUrl, section: renderHelpRefSection,',
     '  startScreen: openStartScreen, nextStep: _syncNextStep, newProject: _startNewProject, logo: _frameLogoSvg,',
-    '  setPeek: function (f) { _autosavePeek = f; }, setGoFp: function (f) { _dsGoFloorplanItems = f; },',
+    '  setPeek: function (f) { _autosavePeek = f; _autosavePeekAll = async function () { const p = await f(); return p ? [p] : []; }; }, setGoFp: function (f) { _dsGoFloorplanItems = f; },',  // 18.82: the start screen lists every backup
     '  get unit() { return dashUnit; }, set dismissed(v) { _nextStepDismissed = v; },',
     '  set elevs(v) { elevations = v; }, set rows(v) { dashProjectData = v; },',
     '  set plan(v) { floorplanImageData = v; }, set levels(v) { floorplanLevels = v; },',

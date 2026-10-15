@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.81';
+const APP_VERSION = '18.82';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -255,8 +255,12 @@ const LAST_FILE_KEY = 'frameLastFileName';
 function _startScreenClose() { const m = document.getElementById('startScreen'); if (m) m.remove(); }
 async function openStartScreen() {
     _startScreenClose();
-    let peek = null;
-    try { peek = await _autosavePeek(); } catch (e) { peek = null; }
+    let peeks = [];
+    try { peeks = await _autosavePeekAll({ live: true }); } catch (e) { peeks = []; }
+    // The newest backup that is NOT open in another tab gets the Continue card; the rest
+    // (and any still open elsewhere) are listed under the cards.
+    const peek = peeks.find(p => !p.live) || null;
+    const others = peeks.filter(p => p !== peek);
     const ov = document.createElement('div');
     ov.id = 'startScreen';
     ov.className = 'frame-modal fm-over start-screen';
@@ -296,9 +300,10 @@ async function openStartScreen() {
     tl.textContent = 'New to FRAME? Take the guided tour';
     tl.onclick = () => { _startScreenClose(); startTour({ onEnd: () => { openStartScreen(); } }); };
     body.appendChild(tl);
-    if (peek) {
+    if (others.length) body.appendChild(_startScreenOthers(others));
+    if (peek || others.length) {
         const note = document.createElement('div'); note.className = 'ss-note';
-        note.textContent = 'Starting a new project or opening a file replaces this unsaved work once you make a change.';
+        note.textContent = 'Unsaved work is kept for a week, one backup per tab. Save Project to keep it for good.';
         body.appendChild(note);
     }
     wrap.appendChild(body);
@@ -311,6 +316,37 @@ async function openStartScreen() {
     if (first) first.setAttribute('data-modal-initial', '');
     try { first.focus({ preventScroll: true }); } catch (e) {}
     return ov;
+}
+// The other backups, under the cards (18.82): one row each, by project name and age,
+// with Continue and a delete. A project still open in another tab is labelled and
+// offers no Continue: the work is already on screen there.
+function _startScreenOthers(list) {
+    const box = document.createElement('div'); box.className = 'ss-others';
+    const h = document.createElement('div'); h.className = 'ss-others-h'; h.textContent = 'Other unsaved work';
+    box.appendChild(h);
+    list.forEach(p => {
+        const r = document.createElement('div'); r.className = 'ss-other';
+        const t = document.createElement('div'); t.className = 'ss-other-t';
+        t.textContent = '\u201c' + p.projName + '\u201d  \u00b7  ' + p.timeStr + (p.live ? '  \u00b7  open in another tab' : '');
+        r.appendChild(t);
+        if (!p.live) {
+            const go = document.createElement('button'); go.type = 'button'; go.className = 'action-btn ss-other-go'; go.textContent = 'Continue';
+            go.style.cssText = 'width:auto; height:26px; padding:0 12px;';
+            go.onclick = async () => { const ok = await _autosaveRestoreNow(p); if (ok !== false) _startScreenClose(); };
+            r.appendChild(go);
+            const del = document.createElement('button'); del.type = 'button'; del.className = 'action-btn btn-secondary ss-other-del'; del.textContent = 'Delete';
+            del.style.cssText = 'width:auto; height:26px; padding:0 10px;';
+            del.onclick = () => _confirmDestroy({
+                title: 'Delete this unsaved work?',
+                body: '\u201c' + p.projName + '\u201d from ' + p.timeStr + ' was never saved to a file.',
+                confirm: 'Delete', undoable: false,
+                onConfirm: async () => { if (p.legacy) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} } else { try { await _aDelete(p.id); } catch (e) {} } r.remove(); if (!box.querySelector('.ss-other')) box.remove(); }
+            });
+            r.appendChild(del);
+        }
+        box.appendChild(r);
+    });
+    return box;
 }
 // The new-project fields, in place of the three cards. Only what is known on day one
 // and expensive to change later: the name (it becomes the file name), the client, and
@@ -4559,7 +4595,13 @@ let _isDirty = false;
 // again: see the block above performAutosave for why a project does not fit.
 const AUTOSAVE_KEY = 'frame-tool-autosave';
 const ADB_NAME = 'frameAutosave';
-const ADB_ID = 'current';
+const ADB_ID = 'current';   // the single record older builds wrote; read and cleared, never written
+// ONE BACKUP PER TAB (18.82). Every tab wrote the one 'current' record, so two projects
+// open side by side overwrote each other's backup and Continue could bring back the
+// OTHER one. Each tab now writes under its own session id; the newest AUTOSAVE_KEEP
+// are kept (a week at most) and the start screen lists them by project name.
+const AUTOSAVE_KEEP = 5;
+const AUTOSAVE_MAX_DAYS = 7;
 const AUTOSAVE_DEBOUNCE_MS = 500;  // wait this long after last change before autosaving
 let _autosaveTimer = null;
 let _dsThumbRerenderTimer = null;
@@ -4700,43 +4742,90 @@ function _aPut(buildPayload) {
         // A quota refusal aborts the transaction rather than firing onerror on
         // it, so both are wired or an over-budget write resolves as a success.
         tx.onabort = () => rej(tx.error || new Error('idb-write-aborted'));
+        const id = payload.session || _autosaveSession;
         tx.objectStore('ameta').put({
-            id: ADB_ID, type: payload.type, timestamp: payload.timestamp,
+            id: id, type: payload.type, timestamp: payload.timestamp,
             session: payload.session, projName: payload.projName,
         });
         // The LIVE objects, deliberately not a snapshot: the structured clone
         // runs synchronously inside put(), so the record cannot tear, and
         // cloning first would copy every artwork data URL for nothing. Same
         // reasoning the JSON.stringify version carried.
-        tx.objectStore('adata').put({ id: ADB_ID, payload: payload });
+        tx.objectStore('adata').put({ id: id, payload: payload });
     }));
 }
 
-function _aGetMeta() {
+function _aGetMeta(id) {
     return _adb().then(db => new Promise((res, rej) => {
-        const rq = db.transaction('ameta', 'readonly').objectStore('ameta').get(ADB_ID);
+        const rq = db.transaction('ameta', 'readonly').objectStore('ameta').get(id || _autosaveSession);
         rq.onsuccess = () => res(rq.result || null);
         rq.onerror = () => rej(rq.error || new Error('idb-read-failed'));
     }));
 }
-
-function _aGetData() {
+// Every backup's meta record (never the payloads).
+function _aListMeta() {
     return _adb().then(db => new Promise((res, rej) => {
-        const rq = db.transaction('adata', 'readonly').objectStore('adata').get(ADB_ID);
+        const st = db.transaction('ameta', 'readonly').objectStore('ameta');
+        if (typeof st.getAll !== 'function') { const one = st.get(ADB_ID); one.onsuccess = () => res(one.result ? [one.result] : []); one.onerror = () => rej(one.error); return; }
+        const rq = st.getAll();
+        rq.onsuccess = () => res(rq.result || []);
+        rq.onerror = () => rej(rq.error || new Error('idb-read-failed'));
+    }));
+}
+
+function _aGetData(id) {
+    return _adb().then(db => new Promise((res, rej) => {
+        const rq = db.transaction('adata', 'readonly').objectStore('adata').get(id || _autosaveSession);
         rq.onsuccess = () => res(rq.result ? rq.result.payload : null);
         rq.onerror = () => rej(rq.error || new Error('idb-read-failed'));
     }));
 }
 
-function _aDelete() {
+function _aDelete(id) {
+    const ids = Array.isArray(id) ? id : [id || _autosaveSession];
     return _adb().then(db => new Promise((res, rej) => {
         const tx = db.transaction(['ameta', 'adata'], 'readwrite');
         tx.oncomplete = () => res();
         tx.onerror = () => rej(tx.error || new Error('idb-delete-failed'));
         tx.onabort = () => rej(tx.error || new Error('idb-delete-aborted'));
-        tx.objectStore('ameta').delete(ADB_ID);
-        tx.objectStore('adata').delete(ADB_ID);
+        ids.forEach(k => { tx.objectStore('ameta').delete(k); tx.objectStore('adata').delete(k); });
     }));
+}
+// Keeps the newest AUTOSAVE_KEEP backups and none older than AUTOSAVE_MAX_DAYS. This
+// tab's own record is always kept. Runs after a write lands.
+async function _aPrune() {
+    let all = [];
+    try { all = await _aListMeta(); } catch (e) { return; }
+    const cutoff = Date.now() - AUTOSAVE_MAX_DAYS * 864e5;
+    const keep = all.filter(m => m && m.id === _autosaveSession);
+    const rest = all.filter(m => m && m.id !== _autosaveSession).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    const drop = [];
+    rest.forEach(m => { if ((m.timestamp || 0) < cutoff || keep.length >= AUTOSAVE_KEEP) drop.push(m.id); else keep.push(m); });
+    if (drop.length) { try { await _aDelete(drop); } catch (e) {} }
+}
+
+// WHICH TABS ARE OPEN (18.82), so a backup of a project still open in another tab is
+// labelled rather than offered as lost work. Every tab answers a 'who' on one
+// BroadcastChannel with its session; the asker listens for a moment. No channel (an
+// old browser, a test harness) means no labels, never an error.
+let _tabChan = null, _tabSeen = null;
+function _tabChannel() {
+    if (_tabChan !== null) return _tabChan || null;
+    try { _tabChan = (typeof BroadcastChannel === 'function') ? new BroadcastChannel('frame-tabs') : false; } catch (e) { _tabChan = false; }
+    if (_tabChan) _tabChan.onmessage = (e) => {
+        const m = (e && e.data) || {};
+        if (m.t === 'who') { try { _tabChan.postMessage({ t: 'here', session: _autosaveSession }); } catch (x) {} }
+        else if (m.t === 'here' && _tabSeen && m.session) _tabSeen[m.session] = true;
+    };
+    return _tabChan || null;
+}
+async function _liveTabSessions(ms) {
+    const ch = _tabChannel(); if (!ch) return {};
+    _tabSeen = {};
+    try { ch.postMessage({ t: 'who' }); } catch (e) { return {}; }
+    await new Promise(r => setTimeout(r, ms || 250));
+    const out = _tabSeen; _tabSeen = null;
+    return out;
 }
 
 // The payload, assembled from the LIVE objects. Its own function because the
@@ -4777,6 +4866,7 @@ async function performAutosave() {
     try {
         await _aPut(_autosavePayload);
         _autosaveOk();
+        _aPrune().catch(() => {});
     } catch (err) {
         try { await _autosaveFail(err); } catch (e) {}
     } finally {
@@ -4806,9 +4896,14 @@ async function _autosaveFail(err) {
     // is how a failed write turned into restoring the wrong job. One from THIS
     // session is a genuine older snapshot of the same work and is worth keeping.
     // Reading `ameta` rather than `adata` keeps the decision cheap.
+    // 18.82: backups from other sessions are mostly OTHER projects (other tabs), which
+    // are fine; the stale one is an earlier backup of THIS project, which would be
+    // offered as the latest work. Those go, matched by project name.
     try {
-        const meta = await _aGetMeta();
-        if (meta && meta.session !== _autosaveSession) await _aDelete();
+        const name = (document.getElementById('g_projName') || {}).value || 'Untitled';
+        const all = await _aListMeta();
+        const stale = all.filter(m => m && m.id !== _autosaveSession && (m.projName || 'Untitled') === name).map(m => m.id);
+        if (stale.length) await _aDelete(stale);
     } catch (e) {}
     _autosaveFailed = true;
     updateDirtyIndicator();
@@ -4832,7 +4927,9 @@ function clearAutosave() {
     // change may have left a payload there, and "the autosave is no longer the
     // most recent work" has to clear both or the old one is still offered.
     try { localStorage.removeItem(AUTOSAVE_KEY); } catch (err) {}
-    _aDelete().catch(() => {});
+    // THIS tab's backup (and the single record an older build left). Other tabs' backups
+    // are other projects' unsaved work and are none of this tab's business (18.82).
+    _aDelete([_autosaveSession, ADB_ID]).catch(() => {});
 }
 
 // Read the pre-IndexedDB localStorage slot, if a build before this change left
@@ -4880,27 +4977,48 @@ function _autosaveRestore(payload) {
 // backup older than a week is cleared here and reported as nothing. Shared by the
 // start screen's Continue card and checkAutosaveOnLoad, so the two cannot disagree
 // about what counts as a backup worth offering.
+function _autosaveAgo(ts) {
+    const minutesAgo = Math.round((Date.now() - ts) / 60000);
+    if (minutesAgo < 1) return 'less than a minute ago';
+    if (minutesAgo < 60) return `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
+    if (minutesAgo < 60 * 48) return `${Math.round(minutesAgo / 60)} hour${minutesAgo < 120 ? '' : 's'} ago`;
+    return `${Math.round(minutesAgo / 1440)} days ago`;
+}
+// EVERY backup worth offering, newest first (18.82): one per tab session, plus the
+// single record or localStorage slot an older build left. Expired ones are cleared here.
+// `live` marks a backup whose tab is still open (opts.live: ask the other tabs).
+async function _autosavePeekAll(opts) {
+    let metas = [];
+    try { metas = await _aListMeta(); } catch (e) { metas = []; }
+    const out = [], expired = [];
+    metas.forEach(m => {
+        if (!m || m.type !== 'master-studio-autosave-v1') return;
+        if ((Date.now() - (m.timestamp || 0)) / 864e5 > AUTOSAVE_MAX_DAYS) { expired.push(m.id); return; }
+        out.push({ id: m.id, stamp: m, legacy: null, timeStr: _autosaveAgo(m.timestamp), projName: m.projName || 'Untitled' });
+    });
+    if (expired.length) { try { await _aDelete(expired); } catch (e) {} }
+    const legacy = _legacyAutosaveRead();
+    if (legacy && legacy.type === 'master-studio-autosave-v1') {
+        if ((Date.now() - (legacy.timestamp || 0)) / 864e5 > AUTOSAVE_MAX_DAYS) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} }
+        else out.push({ id: null, stamp: legacy, legacy: legacy, timeStr: _autosaveAgo(legacy.timestamp), projName: legacy.projName || 'Untitled' });
+    }
+    out.sort((a, b) => (b.stamp.timestamp || 0) - (a.stamp.timestamp || 0));
+    if (opts && opts.live && out.length) {
+        const live = await _liveTabSessions();
+        out.forEach(p => { p.live = !!(p.stamp && p.stamp.session && live[p.stamp.session]); });
+    }
+    return out;
+}
+// The newest backup, for the one-question boot path (checkAutosaveOnLoad).
 async function _autosavePeek() {
-    let meta = null;
-    try { meta = await _aGetMeta(); } catch (e) { meta = null; }
-    const legacy = meta ? null : _legacyAutosaveRead();
-    const stamp = meta || legacy;
-    if (!stamp) return null;
-    if (stamp.type !== 'master-studio-autosave-v1') return null;
-    const ageDays = (Date.now() - stamp.timestamp) / (1000 * 60 * 60 * 24);
-    if (ageDays > 7) { clearAutosave(); return null; }
-    const minutesAgo = Math.round((Date.now() - stamp.timestamp) / 60000);
-    let timeStr;
-    if (minutesAgo < 1) timeStr = 'less than a minute ago';
-    else if (minutesAgo < 60) timeStr = `${minutesAgo} minute${minutesAgo === 1 ? '' : 's'} ago`;
-    else timeStr = `${Math.round(minutesAgo / 60)} hour${minutesAgo < 120 ? '' : 's'} ago`;
-    return { stamp: stamp, legacy: legacy, timeStr: timeStr, projName: stamp.projName || 'Untitled' };
+    const all = await _autosavePeekAll();
+    return all[0] || null;
 }
 // Read the payload and install it. ASK FIRST, READ SECOND: the payload is the whole
 // project, tens of megabytes of artwork, so it is only read once somebody has chosen
 // to restore it. Returns false when the record could not be read.
 async function _autosaveRestoreNow(peek) {
-    const payload = peek.legacy ? peek.legacy.payload : await _aGetData();
+    const payload = peek.legacy ? peek.legacy.payload : await _aGetData(peek.id);
     if (!payload || !payload.data) {
         if (typeof showInfoModal === 'function') showInfoModal('Could not restore', 'The backup record is there but its contents could not be read, so nothing has been changed. Load a saved .json file instead.');
         return false;
@@ -4909,6 +5027,13 @@ async function _autosaveRestoreNow(peek) {
     // A legacy payload has now been taken into the live project, so the
     // old slot is no longer the most recent work.
     if (peek.legacy) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} }
+    // The work now lives in THIS tab: write it under this session first, then drop the
+    // record it came from, so there is never a moment with no backup and never two.
+    // A backup whose tab is still open belongs to that tab and is left alone.
+    else if (peek.id && peek.id !== _autosaveSession && !peek.live) {
+        try { await performAutosave(); } catch (e) {}
+        if (!_autosaveFailed) { try { await _aDelete(peek.id); } catch (e) {} }
+    }
     return true;
 }
 async function checkAutosaveOnLoad() {
@@ -4918,7 +5043,7 @@ async function checkAutosaveOnLoad() {
         // Don't auto-restore - ask.
         const choice = await _askRestoreAutosave(peek.timeStr, peek.projName);
         if (choice === true) await _autosaveRestoreNow(peek);
-        else if (choice === false) clearAutosave();
+        else if (choice === false) { if (peek.legacy) { try { localStorage.removeItem(AUTOSAVE_KEY); } catch (e) {} } else { try { await _aDelete(peek.id); } catch (e) {} } }
         // null is "no answer at all" - there was no way to ask - and it leaves the
         // backup exactly where it is. Only an explicit Discard throws it away.
     } catch (err) {
@@ -7744,6 +7869,9 @@ function saveMasterProjectAs() { return saveMasterProject({ saveAs: true }); }
 // before (a harness that boots app.js must not be met by a full-screen dialog).
 function _bootStart() {
     if (typeof navigator !== 'undefined' && /jsdom/i.test(navigator.userAgent || '')) { _bootCoverOff(); return checkAutosaveOnLoad(); }
+    // Open the tab channel at boot, so this tab answers the others' "who is open"
+    // from the start (18.82). The harness branch above skips it: no tabs in a test.
+    try { _tabChannel(); } catch (e) {}
     // A failed start screen must not leave the cover up over a working app.
     return openStartScreen().catch(e => { _bootCoverOff(); throw e; });
 }
@@ -42720,7 +42848,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

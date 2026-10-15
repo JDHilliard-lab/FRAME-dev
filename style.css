@@ -2506,6 +2506,11 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .ss-ic .svg-icon { width: 20px; height: 20px; color: var(--ui-active); }
 .ss-continue { border-color: var(--ui-active); }
 .ss-note { margin-top: 12px; text-align: center; font-size: var(--fs-65); color: var(--text-muted); }
+.ss-others { margin: 14px auto 0; max-width: 560px; border: 1px solid var(--border-color); border-radius: var(--r-8); padding: 8px 10px; background: var(--bg-panel); }
+.ss-others-h { font-size: var(--fs-60); text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 4px; }
+.ss-other { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-top: 1px solid var(--border-color); }
+.ss-other:first-of-type { border-top: none; }
+.ss-other-t { flex: 1 1 auto; min-width: 0; font-size: var(--fs-70); color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ss-ver { margin-top: 36px; font-size: var(--fs-55); color: var(--text-muted); opacity: 0; animation: ssFade 700ms ease 1500ms forwards; }
 .ss-form { width: min(400px, 92vw); margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
 .ss-form label { display: flex; flex-direction: column; gap: 5px; font-size: var(--fs-65); text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }

@@ -994,6 +994,15 @@ run but passes alone is usually load timing: rerun before chasing it.
   File name goes in the document title.
   `_confirmDiscardUnsaved` runs before loading, and the picker opens from inside its Yes
   handler (a picker needs a user gesture; after an awaited modal it is refused).
+- **ONE AUTOSAVE PER TAB (18.82).** Records are keyed by `_autosaveSession` (the old
+  shared `ADB_ID = 'current'` is read and cleared, never written). `_aPrune` keeps the
+  newest `AUTOSAVE_KEEP` (5), max `AUTOSAVE_MAX_DAYS`, never this tab's. `clearAutosave`
+  deletes ONLY this tab's (+ 'current'). `_autosavePeekAll` lists them; the start screen
+  shows the newest not-live one as Continue and the rest in `_startScreenOthers`. A tab
+  still open answers `_liveTabSessions` over BroadcastChannel 'frame-tabs' (opened in
+  `_bootStart`) and is labelled, never offered. Restoring another tab's backup writes it
+  under this session, then deletes the old record. A failed write deletes only earlier
+  backups of the SAME project name.
 - **THE AUTOSAVE LIVES IN INDEXEDDB** (a real project is ~23 MB vs a ~5 MB localStorage
   budget). Two stores: `ameta` (small: when, session, name) and `adata` (payload), so
   `checkAutosaveOnLoad` asks before reading the payload.
