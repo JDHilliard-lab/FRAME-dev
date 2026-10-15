@@ -741,10 +741,11 @@ const fs = require('fs');
       if (code.y > SR.B) throw new Error('strip label below the bottom guide at y ' + code.y.toFixed(1));
     });
 
-    __checkAsync('EXACT BUG (18.90): seven mouldings keep corners AND profiles, on a row of their own', async () => {
+    __checkAsync('EXACT BUG (18.90): seven mouldings keep corners AND profiles, in two rows inside the band', async () => {
       // Reported: seven different mouldings on one group page, Moulding profile ticked,
-      // and the strip had no room beside the floorplan and elevation. It now takes its
-      // own row under the art, full width, with the art giving up the height.
+      // and the strip had no room beside the floorplan and elevation. A first fix gave
+      // it a row of its own above the band, which shrank the art; the designer asked
+      // for two rows INSIDE the band's height instead, so nothing else moves.
       const corner = { naturalWidth: 150, naturalHeight: 400, width: 150, height: 400 };
       const prof = { naturalWidth: 244, naturalHeight: 304, width: 244, height: 304 };
       const L7 = _setLetters(7);
@@ -771,19 +772,24 @@ const fs = require('fs');
       if (r.profiles.length !== 7) throw new Error('profiles drawn: ' + r.profiles.length + ' of 7 (fit: ' + _frameStripFit['test:seven'] + ')');
       const SR = _safeFrameRect(936, 540);
       r.corners.concat(r.profiles).forEach(i => { if (i.x < SR.L - 0.01 || i.x + i.w > SR.R + 0.01) throw new Error('strip outside the guides at x ' + i.x.toFixed(1)); });
-      // Its own row: wholly above the floorplan and elevation band.
-      const capY = (w) => { const o = r.ops.find(op => op && op.t === 'text' && op.str === w); return o ? o.y : null; };
-      const fy = capY('Floorplan');
-      if (fy == null) throw new Error('the floorplan left the band');
-      const stripBottom = Math.max.apply(null, r.corners.map(i => i.y + i.h));
-      const planTop = fy - 8 - 10;
-      if (!(stripBottom < planTop)) throw new Error('the strip row overlaps the band: strip ends ' + stripBottom.toFixed(1) + ', band caption at ' + fy.toFixed(1));
-      // With both ticks off there is no row at all.
+      // Inside the band: between the top and bottom of the floorplan thumbnail.
+      const fp = r.ops.find(op => op && op.t === 'text' && op.str === 'Floorplan');
+      if (!fp) throw new Error('the floorplan left the band');
+      const imgs = r.corners.concat(r.profiles);
+      const top = Math.min.apply(null, imgs.map(i => i.y)), bot = Math.max.apply(null, imgs.map(i => i.y + i.h));
+      const planBot = fp.y - 8, planTop = planBot - (bot - top) - 40;
+      if (bot > planBot + 0.5) throw new Error('strip runs below the floorplan: ' + bot.toFixed(1) + ' vs ' + planBot.toFixed(1));
+      // Two rows: two distinct image tops among the corners.
+      const tops = Array.from(new Set(r.corners.map(i => Math.round(i.y))));
+      if (tops.length !== 2) throw new Error('want two rows of corners, got tops ' + tops.join(','));
+      // The art does not move for the strip: same letters with and without it.
+      const letterY = (ops) => ops.filter(o => o && o.t === 'text' && /^[A-G]$/.test(o.str || '')).map(o => Math.round(o.y)).join(',');
       const off = await render({ frame: false, profile: false });
       if (off.corners.length || off.profiles.length) throw new Error('strip drew with both ticks off');
+      if (letterY(off.ops) !== letterY(r.ops)) throw new Error('the art moved for the strip: ' + letterY(r.ops) + ' vs ' + letterY(off.ops));
     });
 
-    __checkAsync('the frame strip drops itself rather than crowding the specs', async () => {
+    __checkAsync('the frame strip never crowds the specs (twelve wrap into two rows in the band)', async () => {
       // 12 distinct frame codes cannot fit as legible cells in the spec column,
       // so the strip must be dropped. Nothing is lost: the codes are already
       // printed as Frame Code rows.
@@ -801,8 +807,12 @@ const fs = require('fs');
       } catch (e) { threw = e; }
       if (threw) throw new Error('a 12-piece hang threw: ' + threw.message);
       const texts = (rec.ops || []).filter(o => o && o.t === 'text').map(o => '' + (o.str == null ? '' : o.str));
-      const cells = texts.filter(s => /^CODE-\\d+$/.test(s));
-      if (cells.length) throw new Error('the frame strip crowded in anyway with ' + cells.length + ' cells');
+      // 18.90: twelve now fit as TWO ROWS inside the band. What this guards is unchanged:
+      // the strip never crowds into the spec column, wherever it lands.
+      const SRc = _safeFrameRect(936, 540), regXc = SRc.L + (SRc.R - SRc.L) * 0.395;
+      const cellOps = (rec.ops || []).filter(o => o && o.t === 'text' && /^CODE-\\d+$/.test('' + o.str));
+      const intoSpecs = cellOps.filter(o => o.x < regXc - 0.5);
+      if (intoSpecs.length) throw new Error(intoSpecs.length + ' strip cells crowded into the spec column');
       // ...and the specs themselves still drew, with G-L not 7-12
       if (!texts.some(s => /Overall Dimensions/.test(s))) throw new Error('spec rows vanished');
       if (texts.indexOf('7') >= 0) throw new Error('piece 7 labelled itself "7" instead of "G"');

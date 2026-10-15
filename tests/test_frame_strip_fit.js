@@ -67,12 +67,35 @@ function inApp() {
     if (Math.abs(a[0].y - b[0].y) > 0.01) throw new Error('baseline moved: ' + a[0].y + ' -> ' + b[0].y);
   });
 
-  ok('when even shrunk it cannot fit, PROFILES go and the corners stay', () => {
+  ok('past half size in one row it WRAPS into two rows in the same height, profiles kept', () => {
     const r = draw(full * 0.42);
-    if (r.left == null) throw new Error('dropped the corners too');
-    if (r.corners.length !== 3) throw new Error('corners drawn: ' + r.corners.length);
-    if (r.profiles.length !== 0) throw new Error('profiles still drawn: ' + r.profiles.length);
-    if (_frameStripFit['test:strip'] !== 'noProfile') throw new Error('recorded ' + _frameStripFit['test:strip']);
+    if (r.left == null) throw new Error('dropped');
+    if (r.corners.length !== 3 || r.profiles.length !== 3) throw new Error(r.corners.length + ' corners, ' + r.profiles.length + ' profiles');
+    const tops = Array.from(new Set(r.corners.map(i => Math.round(i.y))));
+    if (tops.length !== 2) throw new Error('rows: ' + tops.join(','));
+    r.imgs.forEach(i => { if (i.y < TOP - 0.01 || i.y + i.h > TOP + H + 0.01) throw new Error('outside the band height'); });
+    if (_frameStripFit['test:strip'] !== 'twoRows') throw new Error('recorded ' + _frameStripFit['test:strip']);
+    const bases = Array.from(new Set(r.texts.map(t => Math.round(t.y))));
+    if (bases.indexOf(Math.round(draw(full + 1).texts[0].y)) < 0) throw new Error('lower row codes left the caption baseline');
+  });
+
+  ok('when even two rows cannot fit, PROFILES go and the corners stay', () => {
+    // Short codes, so the IMAGES set the width (with long codes the label floor makes
+    // corners-only no narrower than two rows, and the step can never win).
+    const saved = frames.map(f => f.code);
+    frames.forEach((f, i) => { f.code = 'X' + i; });
+    try {
+      const fullS = _drawFrameStrip(new CanvasPdfRec(936, 540), frames, { right: 0, top: 0, height: H, maxW: Infinity, measure: true, corner: true, profile: true });
+      let r = null;
+      for (let f = 0.6; f > 0.05; f -= 0.01) {
+        const t = draw(fullS * f);
+        if (_frameStripFit['test:strip'] === 'noProfile') { r = t; break; }
+        if (_frameStripFit['test:strip'] === 'none') break;
+      }
+      if (!r) throw new Error('never reached the corners-only step before giving way');
+      if (r.corners.length !== 3) throw new Error('corners drawn: ' + r.corners.length);
+      if (r.profiles.length !== 0) throw new Error('profiles still drawn: ' + r.profiles.length);
+    } finally { frames.forEach((f, i) => { f.code = saved[i]; }); }
   });
 
   ok('a measure is always full size (the left column shrinks its own row)', () => {
