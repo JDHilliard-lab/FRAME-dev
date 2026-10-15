@@ -1,0 +1,356 @@
+{
+ "MICH-16-250": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Reverse with Compo Panel",
+  "series": "16"
+ },
+ "MICH-16-259": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "",
+  "series": "16"
+ },
+ "MICH-203-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Floral Compo Ornate",
+  "series": "203"
+ },
+ "MICH-203-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Floral Compo Ornate",
+  "series": "203"
+ },
+ "MICH-211-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Reverse with Notched Bevel",
+  "series": "211"
+ },
+ "MICH-24-250": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Classic Paneled Ornamental",
+  "series": "24"
+ },
+ "MICH-24-253": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Classic Paneled Ornamental",
+  "series": "24"
+ },
+ "MICH-24-258": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Medium Classic Paneled Ornamental",
+  "series": "24"
+ },
+ "MICH-24-260": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "24"
+ },
+ "MICH-24-263": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "24"
+ },
+ "MICH-24-268": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "24"
+ },
+ "MICH-277-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Wide Classic Paneled Compo Trimmed",
+  "series": "277"
+ },
+ "MICH-277-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Wide Classic Paneled Compo Trimmed",
+  "series": "277"
+ },
+ "MICH-435-09": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "435"
+ },
+ "MICH-435-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "435"
+ },
+ "MICH-435-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "435"
+ },
+ "MICH-437-220": {
+  "color": "White with Gold Pattern",
+  "family": "Ivory-White",
+  "profile": "Small Traditional Stem",
+  "series": "437"
+ },
+ "MICH-437-223": {
+  "color": "White with Silver Pattern",
+  "family": "Ivory-White",
+  "profile": "Small Traditional Stem",
+  "series": "437"
+ },
+ "MICH-437-290": {
+  "color": "Black with Gold Pattern",
+  "family": "Black & Gold",
+  "profile": "Small Traditional Stem",
+  "series": "437"
+ },
+ "MICH-437-293": {
+  "color": "Black with Silver Pattern",
+  "family": "Black & Silver",
+  "profile": "Small Traditional Stem",
+  "series": "437"
+ },
+ "MICH-628-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "628"
+ },
+ "MICH-628-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Classic Paneled Ornamental",
+  "series": "628"
+ },
+ "MICH-629-102": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Large Floral Compo Ornate",
+  "series": "629"
+ },
+ "MICH-629-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Floral Compo Ornate",
+  "series": "629"
+ },
+ "MICH-629-50": {
+  "color": "Distressed Gold",
+  "family": "Gold",
+  "profile": "Large Floral Compo Ornate",
+  "series": "629"
+ },
+ "MICH-629-53": {
+  "color": "Distressed Silver",
+  "family": "Silver",
+  "profile": "Large Floral Compo Ornate",
+  "series": "629"
+ },
+ "MICH-629-63": {
+  "color": "Silver with White Undertone",
+  "family": "Silver",
+  "profile": "Large Floral Compo Ornate",
+  "series": "629"
+ },
+ "MICH-736-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Large Panel w/Lined Front and Rear Trim",
+  "series": "736"
+ },
+ "MICH-737-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Classic Panel",
+  "series": "737"
+ },
+ "MICH-738-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Large Classic Scoop",
+  "series": "738"
+ },
+ "MICH-739-20": {
+  "color": "Bright Gold Leaf",
+  "family": "Gold",
+  "profile": "Medium Contemporary Scoop w/Ornamental Lip",
+  "series": "739"
+ },
+ "MICH-741-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Large Scoop w/Three Step Front",
+  "series": "741"
+ },
+ "MICH-743-20": {
+  "color": "Washed Gold",
+  "family": "Gold",
+  "profile": "Wide Reverse w/Ornamental Front and Back",
+  "series": "743"
+ },
+ "MICH-744-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Medium Reverse Slope",
+  "series": "744"
+ },
+ "MICH-746-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Classic Striped",
+  "series": "746"
+ },
+ "MICH-748-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Classic Panel",
+  "series": "748"
+ },
+ "MICH-750-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Large Scoop w/Three Step Front",
+  "series": "750"
+ },
+ "MICH-751-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Large Flat w/Inside-Outside Steps",
+  "series": "751"
+ },
+ "MICH-753-293": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "Small Stem w/Ornamental Silver Lip",
+  "series": "753"
+ },
+ "MICH-754-220": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Scoop Gold Beaded Lip",
+  "series": "754"
+ },
+ "MICH-754-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Small Scoop Beaded Lip",
+  "series": "754"
+ },
+ "MICH-754-293": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "Small Scoop Silver Beaded Lip",
+  "series": "754"
+ },
+ "MICH-755-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Small Scoop w/Ornamental Lip",
+  "series": "755"
+ },
+ "MICH-757-20": {
+  "color": "Ornate Gold",
+  "family": "Gold",
+  "profile": "Small Wavy with Ornate Crosses",
+  "series": "757"
+ },
+ "MICH-762-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Tall Classic Panel",
+  "series": "762"
+ },
+ "MICH-764-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Thin Stem Classic Panel",
+  "series": "764"
+ },
+ "MICH-764-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Thin Stem Classic Panel",
+  "series": "764"
+ },
+ "MICH-764-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Thin Stem Classic Panel",
+  "series": "764"
+ },
+ "MICH-765-23": {
+  "color": "Silver Leaf with Black Lines",
+  "family": "Silver",
+  "profile": "Small Classic Panel",
+  "series": "765"
+ },
+ "MICH-771-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Very Large Panel with Front and Rear Trim",
+  "series": "771"
+ },
+ "MICH-784-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Floral Compo Ornate",
+  "series": "784"
+ },
+ "MICH-785-18": {
+  "color": "Navy Blue",
+  "family": "Others",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-785-20": {
+  "color": "Bright Gold",
+  "family": "Gold",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-785-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-785-23": {
+  "color": "Bright Silver",
+  "family": "Silver",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-785-28": {
+  "color": "Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-785-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-785-35": {
+  "color": "Coral",
+  "family": "Others",
+  "profile": "Small Floral Compo Ornate",
+  "series": "785"
+ },
+ "MICH-791-30": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Tall Panel with Double Lip",
+  "series": "791"
+ }
+}

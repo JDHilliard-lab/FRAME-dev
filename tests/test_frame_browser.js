@@ -60,13 +60,15 @@ check('the manifest carries catalogue facts and the corner photo', () => {
   if (e.depth !== 0.5625 || e.rabbet !== 0.3125 || e.width !== 1.25) throw new Error('dimensions wrong: ' + JSON.stringify(e));
 });
 check('every catalogue-imported swatch has a corner photo and a profile on disk', () => {
-  const dir = path.join(root, 'library', 'michaelangelo', 'avant-garde');
-  const meta = JSON.parse(fs.readFileSync(path.join(dir, 'catalogue.json'), 'utf8'));
   const missing = [];
-  MAN.filter(x => x.collection === 'avant-garde' && meta[x.code]).forEach(x => {
+  ['avant-garde', 'Ornate'].forEach(col => {
+  const dir = path.join(root, 'library', 'michaelangelo', col);
+  const meta = JSON.parse(fs.readFileSync(path.join(dir, 'catalogue.json'), 'utf8'));
+  MAN.filter(x => x.collection === col && meta[x.code]).forEach(x => {
     if (!x.corner || !fs.existsSync(path.join(root, x.corner))) missing.push(x.code + ' corner');
     if (!x.profileImg || !fs.existsSync(path.join(root, x.profileImg))) missing.push(x.code + ' profile');
     if (!fs.existsSync(path.join(root, x.path))) missing.push(x.code + ' swatch');
+  });
   });
   if (missing.length) throw new Error(missing.length + ' missing, e.g. ' + missing.slice(0, 5).join(', '));
 });
