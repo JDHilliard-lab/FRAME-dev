@@ -1,0 +1,164 @@
+{
+ "MICH-1001-32": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Flat",
+  "series": "1001"
+ },
+ "MICH-1001-39": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Flat",
+  "series": "1001"
+ },
+ "MICH-251-25": {
+  "color": "Barnwood Walnut",
+  "family": "Walnut",
+  "profile": "Small Flat",
+  "series": "251"
+ },
+ "MICH-251-39": {
+  "color": "Barnwood Black",
+  "family": "Black",
+  "profile": "Small Flat",
+  "series": "251"
+ },
+ "MICH-252-25": {
+  "color": "Barnwood Walnut",
+  "family": "Walnut",
+  "profile": "Medium Flat",
+  "series": "252"
+ },
+ "MICH-252-39": {
+  "color": "Barnwood Black",
+  "family": "Black",
+  "profile": "Medium Flat",
+  "series": "252"
+ },
+ "MICH-253-128": {
+  "color": "Light Grey Barnwood",
+  "family": "Others",
+  "profile": "Large Flat Radius Edges",
+  "series": "253"
+ },
+ "MICH-253-131": {
+  "color": "Grey & Brown Barnwood",
+  "family": "Others",
+  "profile": "Large Flat Radius Edges",
+  "series": "253"
+ },
+ "MICH-253-25": {
+  "color": "Barnwood Walnut",
+  "family": "Walnut",
+  "profile": "Large Flat",
+  "series": "253"
+ },
+ "MICH-253-39": {
+  "color": "Barnwood Black",
+  "family": "Black",
+  "profile": "Large Flat",
+  "series": "253"
+ },
+ "MICH-424-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "",
+  "series": "424"
+ },
+ "MICH-424-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "",
+  "series": "424"
+ },
+ "MICH-425-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "",
+  "series": "425"
+ },
+ "MICH-425-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "",
+  "series": "425"
+ },
+ "MICH-429-121": {
+  "color": "Brown & White",
+  "family": "Others",
+  "profile": "Small Flat",
+  "series": "429"
+ },
+ "MICH-429-122": {
+  "color": "White & Brown",
+  "family": "Others",
+  "profile": "Small Flat",
+  "series": "429"
+ },
+ "MICH-429-125": {
+  "color": "Dark Brown",
+  "family": "Others",
+  "profile": "Small Flat",
+  "series": "429"
+ },
+ "MICH-429-128": {
+  "color": "Light Grey",
+  "family": "Others",
+  "profile": "Small Flat",
+  "series": "429"
+ },
+ "MICH-429-131": {
+  "color": "Grey & Brown",
+  "family": "Others",
+  "profile": "Small Flat",
+  "series": "429"
+ },
+ "MICH-429-138": {
+  "color": "White & Grey",
+  "family": "Others",
+  "profile": "Small Flat",
+  "series": "429"
+ },
+ "MICH-430-121": {
+  "color": "Brown & White",
+  "family": "Others",
+  "profile": "Medium Flat",
+  "series": "430"
+ },
+ "MICH-430-122": {
+  "color": "White & Brown",
+  "family": "Others",
+  "profile": "Medium Flat",
+  "series": "430"
+ },
+ "MICH-430-125": {
+  "color": "Dark Brown",
+  "family": "Others",
+  "profile": "Medium Flat",
+  "series": "430"
+ },
+ "MICH-430-128": {
+  "color": "Light Grey",
+  "family": "Others",
+  "profile": "Medium Flat",
+  "series": "430"
+ },
+ "MICH-430-131": {
+  "color": "Grey & Brown",
+  "family": "Others",
+  "profile": "Medium Flat",
+  "series": "430"
+ },
+ "MICH-430-138": {
+  "color": "White & Grey",
+  "family": "Others",
+  "profile": "Medium Flat",
+  "series": "430"
+ },
+ "MICH-630-61": {
+  "color": "Brown & Grey Barnwood",
+  "family": "Others",
+  "profile": "Large Flat",
+  "series": "630"
+ }
+}

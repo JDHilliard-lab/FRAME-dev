@@ -1747,6 +1747,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Floaters need the lip width (`_f`), which the sheet does NOT carry**: it is read off each series'
   line art (top callout; for stepped/wedge/cove profiles the wall at the canvas). The app derives the
   inset as lip + `FLOATER_SHADOW_REVEAL`, and a collection named *floater* switches the product.
+  **Left out on purpose:** Liners and Fillets (they nest inside another frame; FRAME has no such
+  product), Flat Surfaces (rabbetless, holds no art), Stretchers (hidden). 627-45 has no photo upstream.
+  **Swatch cut:** standard (outer-edge colour change or hard edge) by default; ornate/barnwood faces
+  are busy and use the bottom-up smooth-end finder. Never floor a swatch past a real cut: deep shadow
+  boxes have a face only ~17% of the photo.
 - **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
   view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).

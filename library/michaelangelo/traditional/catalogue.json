@@ -1,0 +1,356 @@
+{
+ "MICH-185-21": {
+  "color": "Light Walnut & Black",
+  "family": "Walnut",
+  "profile": "Small Soft Cove Traditional",
+  "series": "185"
+ },
+ "MICH-185-24": {
+  "color": "Mahogany & Black",
+  "family": "Mahogany",
+  "profile": "Small Soft Cove Traditional",
+  "series": "185"
+ },
+ "MICH-185-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Soft Cove Traditional",
+  "series": "185"
+ },
+ "MICH-186-21": {
+  "color": "Light Walnut & Black",
+  "family": "Walnut",
+  "profile": "Medium Soft Cove Traditional",
+  "series": "186"
+ },
+ "MICH-186-24": {
+  "color": "Mahogany & Black",
+  "family": "Mahogany",
+  "profile": "Medium Soft Cove Traditional",
+  "series": "186"
+ },
+ "MICH-186-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Soft Cove Traditional",
+  "series": "186"
+ },
+ "MICH-199-23": {
+  "color": "Distressed Silver with Black Distressed outer side",
+  "family": "Silver",
+  "profile": "Small Classic Scoop",
+  "series": "199"
+ },
+ "MICH-209-20": {
+  "color": "Gold & Grey outer back",
+  "family": "Gold",
+  "profile": "",
+  "series": "209"
+ },
+ "MICH-216-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Wide Traditional Panel with Ornamental Back/Bead Lip",
+  "series": "216"
+ },
+ "MICH-243-11": {
+  "color": "Bronze Gold",
+  "family": "Gold",
+  "profile": "Small Compo Ornamental",
+  "series": "243"
+ },
+ "MICH-243-15": {
+  "color": "Satin Bronze",
+  "family": "Bronze",
+  "profile": "Small Compo Ornamental",
+  "series": "243"
+ },
+ "MICH-243-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Small Compo Ornamental",
+  "series": "243"
+ },
+ "MICH-25-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Small Vintage Beaded Leaf",
+  "series": "25"
+ },
+ "MICH-25-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Small Vintage Beaded Leaf",
+  "series": "25"
+ },
+ "MICH-275-15": {
+  "color": "Bronze Leaf",
+  "family": "Bronze",
+  "profile": "Small Flat Top Decorative",
+  "series": "275"
+ },
+ "MICH-275-18": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Small Flat Top Decorative",
+  "series": "275"
+ },
+ "MICH-275-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Small Flat Top Decorative",
+  "series": "275"
+ },
+ "MICH-276-15": {
+  "color": "Bronze Leaf",
+  "family": "Bronze",
+  "profile": "Medium Flat Top Decorative",
+  "series": "276"
+ },
+ "MICH-276-18": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Flat Top Decorative",
+  "series": "276"
+ },
+ "MICH-276-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Medium Flat Top Decorative",
+  "series": "276"
+ },
+ "MICH-295-21": {
+  "color": "Dark Walnut",
+  "family": "Walnut",
+  "profile": "Small Traditional with Distressed Panel",
+  "series": "295"
+ },
+ "MICH-295-25": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Small Traditional with Distressed Panel",
+  "series": "295"
+ },
+ "MICH-295-29": {
+  "color": "Dark Espresso",
+  "family": "Espresso",
+  "profile": "Small Traditional with Distressed Panel",
+  "series": "295"
+ },
+ "MICH-296-21": {
+  "color": "Dark Walnut",
+  "family": "Walnut",
+  "profile": "Medium Traditional with Distressed Panel",
+  "series": "296"
+ },
+ "MICH-296-29": {
+  "color": "Dark Espresso",
+  "family": "Espresso",
+  "profile": "Medium Traditional with Distressed Panel",
+  "series": "296"
+ },
+ "MICH-33-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Small Classic Reverse with Beaded Lip",
+  "series": "33"
+ },
+ "MICH-33-24": {
+  "color": "Mahogany & Gold",
+  "family": "Mahogany",
+  "profile": "Small Classic Reverse with Gold Lip",
+  "series": "33"
+ },
+ "MICH-33-29": {
+  "color": "Black & Gold",
+  "family": "Black",
+  "profile": "",
+  "series": "33"
+ },
+ "MICH-34-21": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Small Traditional with Beaded Lip",
+  "series": "34"
+ },
+ "MICH-34-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Traditional with Beaded Lip",
+  "series": "34"
+ },
+ "MICH-501-410": {
+  "color": "Dark Brown & Gold",
+  "family": "Espresso & Gold",
+  "profile": "Medium Panel",
+  "series": "501"
+ },
+ "MICH-501-413": {
+  "color": "Dark Grey & Gold",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Panel",
+  "series": "501"
+ },
+ "MICH-504-40": {
+  "color": "Reddish Gold",
+  "family": "Gold",
+  "profile": "Wide Reverse with Bead Front/Ornamented Back",
+  "series": "504"
+ },
+ "MICH-504-41": {
+  "color": "Brownish Gold",
+  "family": "Walnut",
+  "profile": "Wide Reverse with Bead Front/Ornamented Back",
+  "series": "504"
+ },
+ "MICH-504-43": {
+  "color": "Silver & Black",
+  "family": "Black & Silver",
+  "profile": "Wide Reverse with Bead Front/Ornamented Back",
+  "series": "504"
+ },
+ "MICH-504-44": {
+  "color": "Mahogany & Gold",
+  "family": "Mahogany",
+  "profile": "Wide Reverse with Bead Front/Ornamented Back",
+  "series": "504"
+ },
+ "MICH-521-45": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Reverse Contrasting Notch Lip",
+  "series": "521"
+ },
+ "MICH-522-45": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Wide Reverse Contrasting Notch Lip",
+  "series": "522"
+ },
+ "MICH-526-44": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Large Leather Round Top with Gold Ornamentation",
+  "series": "526"
+ },
+ "MICH-526-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Leather Round Top with Gold Ornamentation",
+  "series": "526"
+ },
+ "MICH-57-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Small Classic Panel",
+  "series": "57"
+ },
+ "MICH-661-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Bamboo Stem",
+  "series": "661"
+ },
+ "MICH-661-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Bamboo Stem",
+  "series": "661"
+ },
+ "MICH-661-49": {
+  "color": "Black Distress",
+  "family": "Black",
+  "profile": "Medium Bamboo Stem",
+  "series": "661"
+ },
+ "MICH-734-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium w/Large Bead",
+  "series": "734"
+ },
+ "MICH-735-24": {
+  "color": "Black w/Brown Undertones",
+  "family": "Others",
+  "profile": "Medium w/Large Bead",
+  "series": "735"
+ },
+ "MICH-760-20": {
+  "color": "Antique Gold with Black outer side",
+  "family": "Gold",
+  "profile": "Small Panel",
+  "series": "760"
+ },
+ "MICH-761-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Bamboo Stem",
+  "series": "761"
+ },
+ "MICH-761-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Bamboo Stem",
+  "series": "761"
+ },
+ "MICH-761-29": {
+  "color": "Black Distressed",
+  "family": "Black",
+  "profile": "Medium Bamboo Stem",
+  "series": "761"
+ },
+ "MICH-763-293": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Medium Traditional",
+  "series": "763"
+ },
+ "MICH-766-20": {
+  "color": "Gold Leaf with Black Lines",
+  "family": "Gold",
+  "profile": "Classic Panel",
+  "series": "766"
+ },
+ "MICH-766-23": {
+  "color": "Silver Leaf with Black Lines",
+  "family": "Silver",
+  "profile": "Classic Panel",
+  "series": "766"
+ },
+ "MICH-770-210": {
+  "color": "Black Distressed",
+  "family": "Black & Gold",
+  "profile": "Medium Slant Traditional with Gold Beaded Lip",
+  "series": "770"
+ },
+ "MICH-779-10": {
+  "color": "Pattern Gold with Edge and a Grey outer side",
+  "family": "Gold",
+  "profile": "Small Stem with Bevel",
+  "series": "779"
+ },
+ "MICH-786-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Very Small Edged Extended Back with Lip",
+  "series": "786"
+ },
+ "MICH-786-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Very Small Edged Extended Back with Lip",
+  "series": "786"
+ },
+ "MICH-786-290": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Very Small Edged Extended Back with Lip",
+  "series": "786"
+ },
+ "MICH-96-200": {
+  "color": "Brownish Gold",
+  "family": "Gold",
+  "profile": "Reverse Mottled with Rope",
+  "series": "96"
+ }
+}

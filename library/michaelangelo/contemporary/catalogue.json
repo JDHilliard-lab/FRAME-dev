@@ -1,0 +1,656 @@
+{
+ "MICH-139-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Shallow Scoop",
+  "series": "139"
+ },
+ "MICH-139-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Shallow Scoop",
+  "series": "139"
+ },
+ "MICH-144-21": {
+  "color": "Truffle & Silver",
+  "family": "Espresso & Silver",
+  "profile": "Medium Contemporary Bevel",
+  "series": "144"
+ },
+ "MICH-144-29": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "Medium Contemporary Bevel",
+  "series": "144"
+ },
+ "MICH-147-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Small Contemporary Shape",
+  "series": "147"
+ },
+ "MICH-147-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Contemporary Shape",
+  "series": "147"
+ },
+ "MICH-164-21": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Small Soft Curve",
+  "series": "164"
+ },
+ "MICH-164-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Small Soft Curve",
+  "series": "164"
+ },
+ "MICH-164-25": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Small Soft Curve",
+  "series": "164"
+ },
+ "MICH-165-21": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Medium Soft Curve",
+  "series": "165"
+ },
+ "MICH-165-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Soft Curve",
+  "series": "165"
+ },
+ "MICH-165-25": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Soft Curve",
+  "series": "165"
+ },
+ "MICH-2000-20": {
+  "color": "Light Gold",
+  "family": "Gold",
+  "profile": "Small Elegant European Bevel",
+  "series": "2000"
+ },
+ "MICH-2000-22": {
+  "color": "Distress White",
+  "family": "Ivory-White",
+  "profile": "Small Elegant European Bevel",
+  "series": "2000"
+ },
+ "MICH-2000-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Small Elegant European Bevel",
+  "series": "2000"
+ },
+ "MICH-2000-28": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Small Elegant European Bevel",
+  "series": "2000"
+ },
+ "MICH-2000-29": {
+  "color": "Distress Black",
+  "family": "Black",
+  "profile": "Small Elegant European Bevel",
+  "series": "2000"
+ },
+ "MICH-2000-33": {
+  "color": "Bright Silver",
+  "family": "Silver",
+  "profile": "Small Elegant European Bevel",
+  "series": "2000"
+ },
+ "MICH-2001-20": {
+  "color": "Light Gold",
+  "family": "Gold",
+  "profile": "Medium Elegant European Bevel",
+  "series": "2001"
+ },
+ "MICH-2001-22": {
+  "color": "Distress White",
+  "family": "Ivory-White",
+  "profile": "Medium Elegant European Bevel",
+  "series": "2001"
+ },
+ "MICH-2001-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Medium Elegant European Bevel",
+  "series": "2001"
+ },
+ "MICH-2001-28": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Medium Elegant European Bevel",
+  "series": "2001"
+ },
+ "MICH-2001-29": {
+  "color": "Distress Black",
+  "family": "Black",
+  "profile": "Medium Elegant European Bevel",
+  "series": "2001"
+ },
+ "MICH-2001-33": {
+  "color": "Bright Silver",
+  "family": "Silver",
+  "profile": "Medium Elegant European Bevel",
+  "series": "2001"
+ },
+ "MICH-202-21": {
+  "color": "Walnut Lattice Pattern with Distressed Black & Espresso Outer Back",
+  "family": "Walnut",
+  "profile": "Medium Flat with Rounded Lip",
+  "series": "202"
+ },
+ "MICH-202-43": {
+  "color": "Silver Lattice Pattern with Distressed Black & Black Outer Back",
+  "family": "Silver",
+  "profile": "",
+  "series": "202"
+ },
+ "MICH-206-21": {
+  "color": "Walnut Lattice Pattern with Distressed Black & Espresso Outer Back",
+  "family": "Walnut",
+  "profile": "Small Flat with Rounded Lip",
+  "series": "206"
+ },
+ "MICH-208-210": {
+  "color": "Antique Gold & Distressed Black Outer Back",
+  "family": "Black & Gold",
+  "profile": "Medium Soft Curve",
+  "series": "208"
+ },
+ "MICH-239-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Large Shallow Scoop",
+  "series": "239"
+ },
+ "MICH-239-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Shallow Scoop",
+  "series": "239"
+ },
+ "MICH-244-21": {
+  "color": "Truffle & Silver",
+  "family": "Espresso & Silver",
+  "profile": "Medium Contemporary Bevel",
+  "series": "244"
+ },
+ "MICH-244-29": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "Medium Contemporary Bevel",
+  "series": "244"
+ },
+ "MICH-248-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Large Shallow Scoop",
+  "series": "248"
+ },
+ "MICH-248-39": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Shallow Scoop",
+  "series": "248"
+ },
+ "MICH-291-20": {
+  "color": "Warm Gold",
+  "family": "Gold",
+  "profile": "Large Stylized Classic Scoop",
+  "series": "291"
+ },
+ "MICH-291-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Large Stylized Classic Scoop",
+  "series": "291"
+ },
+ "MICH-293-21": {
+  "color": "Espresso & Silver",
+  "family": "Espresso & Silver",
+  "profile": "Medium Flat Top Beveled Lip",
+  "series": "293"
+ },
+ "MICH-293-29": {
+  "color": "Dark Truffle & Silver",
+  "family": "Espresso & Silver",
+  "profile": "Medium Flat Top Beveled Lip",
+  "series": "293"
+ },
+ "MICH-39-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Shallow Scoop",
+  "series": "39"
+ },
+ "MICH-40-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Bevel Top",
+  "series": "40"
+ },
+ "MICH-40-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Bevel Top",
+  "series": "40"
+ },
+ "MICH-40-24": {
+  "color": "Burnt Orange",
+  "family": "Others",
+  "profile": "Bevel Top",
+  "series": "40"
+ },
+ "MICH-40-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Bevel Top",
+  "series": "40"
+ },
+ "MICH-401-10": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Small Scoop with Ledge Top",
+  "series": "401"
+ },
+ "MICH-401-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Scoop with Ledge Top",
+  "series": "401"
+ },
+ "MICH-406-23": {
+  "color": "Silver Lattice Pattern with Black Scratch & Black outer side",
+  "family": "Silver",
+  "profile": "Small Flat",
+  "series": "406"
+ },
+ "MICH-409-290": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Small Undulating Surface",
+  "series": "409"
+ },
+ "MICH-46-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Notchback Soft Bevel",
+  "series": "46"
+ },
+ "MICH-47-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Notchback Soft Bevel",
+  "series": "47"
+ },
+ "MICH-517-41": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Reverse with Gold Trim",
+  "series": "517"
+ },
+ "MICH-517-45": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Reverse with Gold Trim",
+  "series": "517"
+ },
+ "MICH-517-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Reverse with Silver Trim",
+  "series": "517"
+ },
+ "MICH-517-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Reverse with Silver Trim",
+  "series": "517"
+ },
+ "MICH-518-41": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Large Reverse with Gold Trim",
+  "series": "518"
+ },
+ "MICH-518-48": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Large Reverse with Silver Trim",
+  "series": "518"
+ },
+ "MICH-518-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Reverse with Silver Trim",
+  "series": "518"
+ },
+ "MICH-534-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Scoop",
+  "series": "534"
+ },
+ "MICH-534-41": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Medium Scoop",
+  "series": "534"
+ },
+ "MICH-534-410": {
+  "color": "Brownish Gold",
+  "family": "Gold",
+  "profile": "Medium Scoop",
+  "series": "534"
+ },
+ "MICH-534-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Scoop",
+  "series": "534"
+ },
+ "MICH-534-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Scoop",
+  "series": "534"
+ },
+ "MICH-534-493": {
+  "color": "Greyish Silver",
+  "family": "Silver",
+  "profile": "Medium Scoop",
+  "series": "534"
+ },
+ "MICH-535-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Scoop",
+  "series": "535"
+ },
+ "MICH-535-41": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Large Scoop",
+  "series": "535"
+ },
+ "MICH-535-410": {
+  "color": "Brownish Gold",
+  "family": "Gold",
+  "profile": "Large Scoop",
+  "series": "535"
+ },
+ "MICH-535-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Scoop",
+  "series": "535"
+ },
+ "MICH-535-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Scoop",
+  "series": "535"
+ },
+ "MICH-535-493": {
+  "color": "Greyish Silver",
+  "family": "Silver",
+  "profile": "Large Scoop",
+  "series": "535"
+ },
+ "MICH-544-05": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Classic",
+  "series": "544"
+ },
+ "MICH-544-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Classic",
+  "series": "544"
+ },
+ "MICH-544-34": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Classic",
+  "series": "544"
+ },
+ "MICH-544-39": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Classic",
+  "series": "544"
+ },
+ "MICH-58-10": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Small Classic Elegant Panel",
+  "series": "58"
+ },
+ "MICH-58-13": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Small Classic Elegant Panel",
+  "series": "58"
+ },
+ "MICH-58-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Small Classic Elegant Panel",
+  "series": "58"
+ },
+ "MICH-58-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Small Classic Elegant Panel",
+  "series": "58"
+ },
+ "MICH-59-10": {
+  "color": "Dark Gold Leaf",
+  "family": "Gold",
+  "profile": "Medium Classic Elegant Panel",
+  "series": "59"
+ },
+ "MICH-59-13": {
+  "color": "Dark Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Classic Elegant Panel",
+  "series": "59"
+ },
+ "MICH-59-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Medium Classic Elegant Panel",
+  "series": "59"
+ },
+ "MICH-59-210": {
+  "color": "Espresso & Gold",
+  "family": "Espresso & Gold",
+  "profile": "Medium Classic Elegant Espresso Panel",
+  "series": "59"
+ },
+ "MICH-59-213": {
+  "color": "Espresso & Silver",
+  "family": "Espresso & Silver",
+  "profile": "Medium Classic Elegant Espresso Panel",
+  "series": "59"
+ },
+ "MICH-59-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Classic Elegant Panel",
+  "series": "59"
+ },
+ "MICH-598-41": {
+  "color": "Distress Walnut",
+  "family": "Walnut",
+  "profile": "Medium Flat Dimpled",
+  "series": "598"
+ },
+ "MICH-598-49": {
+  "color": "Distress Black",
+  "family": "Black",
+  "profile": "Medium Flat Dimpled",
+  "series": "598"
+ },
+ "MICH-599-31": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Large Shallow Scoop",
+  "series": "599"
+ },
+ "MICH-599-39": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Shallow Scoop",
+  "series": "599"
+ },
+ "MICH-603-53": {
+  "color": "Pattern Silver",
+  "family": "Silver",
+  "profile": "Pointed Reverse",
+  "series": "603"
+ },
+ "MICH-603-55": {
+  "color": "Pattern Bronze",
+  "family": "Bronze",
+  "profile": "Pointed Reverse",
+  "series": "603"
+ },
+ "MICH-603-59": {
+  "color": "Pattern Black",
+  "family": "Black",
+  "profile": "Pointed Reverse",
+  "series": "603"
+ },
+ "MICH-603-593": {
+  "color": "Pattern Silver & Black",
+  "family": "Silver",
+  "profile": "Pointed Reverse",
+  "series": "603"
+ },
+ "MICH-619-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Bevel Smooth",
+  "series": "619"
+ },
+ "MICH-619-51": {
+  "color": "Pattern Light Walnut",
+  "family": "Walnut",
+  "profile": "Large Bevel Textured",
+  "series": "619"
+ },
+ "MICH-627-40": {
+  "color": "Pale Gold",
+  "family": "Gold",
+  "profile": "Wide Flat with Scoop Lip",
+  "series": "627"
+ },
+ "MICH-627-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Wide Flat with Scoop Lip",
+  "series": "627"
+ },
+ "MICH-633-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Panel with Lined Front and Rear Trim",
+  "series": "633"
+ },
+ "MICH-633-41": {
+  "color": "Walnut Pattern",
+  "family": "Walnut",
+  "profile": "Large Panel with Lined Front and Rear Trim",
+  "series": "633"
+ },
+ "MICH-633-42": {
+  "color": "Ivory Wood-Tone",
+  "family": "Ivory-White",
+  "profile": "Large Panel with Lined Front and Rear Trim",
+  "series": "633"
+ },
+ "MICH-633-43": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Large Panel with Lined Front and Rear Trim",
+  "series": "633"
+ },
+ "MICH-633-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Panel with Lined Front and Rear Trim",
+  "series": "633"
+ },
+ "MICH-633-490": {
+  "color": "Black & Gold with a Black outer side",
+  "family": "Black & Gold",
+  "profile": "Large Panel with Lined Front and Rear Trim",
+  "series": "633"
+ },
+ "MICH-709-290": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Small Flat",
+  "series": "709"
+ },
+ "MICH-710-290": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Medium Flat",
+  "series": "710"
+ },
+ "MICH-72-290": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Transitional Reverse",
+  "series": "72"
+ },
+ "MICH-72-293": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "Transitional Reverse",
+  "series": "72"
+ },
+ "MICH-731-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Steep Bevel",
+  "series": "731"
+ },
+ "MICH-759-20": {
+  "color": "Gold Leaf",
+  "family": "Gold",
+  "profile": "Solid Bevel",
+  "series": "759"
+ },
+ "MICH-759-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Solid Bevel",
+  "series": "759"
+ },
+ "MICH-773-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Wide Scoop",
+  "series": "773"
+ },
+ "MICH-777-23": {
+  "color": "Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Classic Panel",
+  "series": "777"
+ }
+}

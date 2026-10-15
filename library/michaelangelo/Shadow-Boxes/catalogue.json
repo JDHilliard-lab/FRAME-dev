@@ -1,0 +1,830 @@
+{
+ "MICH-205-20": {
+  "color": "Gold Leaf with Thin Red Lines",
+  "family": "Gold",
+  "profile": "Medium Stem",
+  "series": "205"
+ },
+ "MICH-205-23": {
+  "color": "Silver Leaf with Thin Red Lines",
+  "family": "Silver",
+  "profile": "Medium Stem",
+  "series": "205"
+ },
+ "MICH-240-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-42": {
+  "color": "Bleached Natural Woodgrain",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-50": {
+  "color": "Shiny Gold",
+  "family": "Gold",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-51": {
+  "color": "Dark Espresso",
+  "family": "Espresso",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-52": {
+  "color": "Blonde Maple",
+  "family": "Natural",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-53": {
+  "color": "Silver with Black Lines",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-58": {
+  "color": "Taupe",
+  "family": "Others",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-71": {
+  "color": "Walnut Woodgrain",
+  "family": "Walnut",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-72": {
+  "color": "Off-White Woodgrain",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-73": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-78": {
+  "color": "Grey Woodgrain",
+  "family": "Grey & Charcoal",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-79": {
+  "color": "Black Woodgrain",
+  "family": "Black",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-81": {
+  "color": "Dark Walnut Woodgrain",
+  "family": "Walnut",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-82": {
+  "color": "Natural Woodgrain",
+  "family": "Natural",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-240-88": {
+  "color": "Charcoal Woodgrain",
+  "family": "Grey & Charcoal",
+  "profile": "Large Stem Shadow Box",
+  "series": "240"
+ },
+ "MICH-241-02": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-09": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-10": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-13": {
+  "color": "Satin Dark Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-15": {
+  "color": "Satin Bronze",
+  "family": "Bronze",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-18": {
+  "color": "Satin Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-30": {
+  "color": "Bright Gold",
+  "family": "Gold",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-33": {
+  "color": "Pattern Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-38": {
+  "color": "Burnished Bronze",
+  "family": "Bronze",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-53": {
+  "color": "Metallic Dark Silver with Silver Trim",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-55": {
+  "color": "Metallic Bronze with Silver Trim",
+  "family": "Bronze",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-73": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-241-93": {
+  "color": "Satin Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "241"
+ },
+ "MICH-302-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Small Shadow Box",
+  "series": "302"
+ },
+ "MICH-327-20": {
+  "color": "Gold Leaf with Black Lines",
+  "family": "Gold",
+  "profile": "Thin Tall Shadow Box",
+  "series": "327"
+ },
+ "MICH-327-23": {
+  "color": "Silver Leaf with Black Lines",
+  "family": "Silver",
+  "profile": "Thin Tall Shadow Box",
+  "series": "327"
+ },
+ "MICH-328-183": {
+  "color": "Silver Leaf with Light Grey Paint Back",
+  "family": "Silver",
+  "profile": "Tall Thin Shadow Box",
+  "series": "328"
+ },
+ "MICH-329-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Extra Tall Shadow Box",
+  "series": "329"
+ },
+ "MICH-329-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Extra Tall Shadow Box",
+  "series": "329"
+ },
+ "MICH-330-121": {
+  "color": "Brown & White Barnwood",
+  "family": "Others",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-122": {
+  "color": "White & Brown Barnwood",
+  "family": "Others",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-125": {
+  "color": "Dark Brown Barnwood",
+  "family": "Others",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-128": {
+  "color": "Light Grey Barnwood",
+  "family": "Others",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-131": {
+  "color": "Grey & Brown Barnwood",
+  "family": "Others",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-138": {
+  "color": "White & Grey Barnwood",
+  "family": "Others",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-18": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-19": {
+  "color": "Black w/Light Brown Lines",
+  "family": "Black",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-53": {
+  "color": "Metallic Dark Silver with Silver Trim",
+  "family": "Silver",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-55": {
+  "color": "Metallic Bronze with Silver Trim",
+  "family": "Bronze",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-330-73": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Medium Stem Shadow Box",
+  "series": "330"
+ },
+ "MICH-331-02": {
+  "color": "White Lacquer",
+  "family": "Ivory-White",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-09": {
+  "color": "Black Lacquer",
+  "family": "Black",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-131": {
+  "color": "Grey & Brown",
+  "family": "Others",
+  "profile": "Extra Tall Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-15": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Extra Tall Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-18": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Extra Tall Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Extra Tall Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Extra Tall Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-53": {
+  "color": "Metallic Dark Silver with Silver Trim",
+  "family": "Silver",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-331-55": {
+  "color": "Metallic Bronze with Silver Trim",
+  "family": "Bronze",
+  "profile": "Extra Tall Flat Top Shadow Box",
+  "series": "331"
+ },
+ "MICH-332-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Extra Tall Shadow Box",
+  "series": "332"
+ },
+ "MICH-332-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Extra Tall Shadow Box",
+  "series": "332"
+ },
+ "MICH-402-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Very Large Shadow Box with Hand Finish",
+  "series": "402"
+ },
+ "MICH-402-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Very Large Shadow Box with Hand Finish",
+  "series": "402"
+ },
+ "MICH-402-43": {
+  "color": "Silver with Black outer side",
+  "family": "Silver",
+  "profile": "Very Large Shadow Box with Hand Finish",
+  "series": "402"
+ },
+ "MICH-403-10": {
+  "color": "Satin Gold",
+  "family": "Gold",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-18": {
+  "color": "Satin Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-28": {
+  "color": "Dark Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-403-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Reverse Bevel Shadow Box",
+  "series": "403"
+ },
+ "MICH-405-17": {
+  "color": "Grey with Scratched Pattern outer side",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Stem Shadow Box",
+  "series": "405"
+ },
+ "MICH-427-10": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-18": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-427-33": {
+  "color": "Pattern Silver",
+  "family": "Silver",
+  "profile": "Large Bevel Top",
+  "series": "427"
+ },
+ "MICH-433-11": {
+  "color": "Bronze with Distress Edges",
+  "family": "Bronze",
+  "profile": "Medium Stem Shadow Box",
+  "series": "433"
+ },
+ "MICH-433-13": {
+  "color": "Silver with Distress Edges",
+  "family": "Silver",
+  "profile": "Medium Stem Shadow Box",
+  "series": "433"
+ },
+ "MICH-433-20": {
+  "color": "Gold with Distress Edges",
+  "family": "Gold",
+  "profile": "Medium Stem Shadow Box",
+  "series": "433"
+ },
+ "MICH-433-23": {
+  "color": "Warm Silver with Distress Edges",
+  "family": "Silver",
+  "profile": "Medium Stem Shadow Box",
+  "series": "433"
+ },
+ "MICH-434-290": {
+  "color": "Black & Burnished Gold",
+  "family": "Black & Gold",
+  "profile": "Medium Large Stem",
+  "series": "434"
+ },
+ "MICH-434-292": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "",
+  "series": "434"
+ },
+ "MICH-434-293": {
+  "color": "Black with Grey & Distress Silver",
+  "family": "Black & Silver",
+  "profile": "Medium Large Stem",
+  "series": "434"
+ },
+ "MICH-438-220": {
+  "color": "White with Gold Pattern",
+  "family": "Ivory-White",
+  "profile": "Tall Traditional Stem Shadow Box",
+  "series": "438"
+ },
+ "MICH-438-223": {
+  "color": "White with Silver Pattern",
+  "family": "Ivory-White",
+  "profile": "Tall Traditional Stem Shadow Box",
+  "series": "438"
+ },
+ "MICH-438-290": {
+  "color": "Black with Gold Pattern",
+  "family": "Black & Gold",
+  "profile": "Tall Traditional Stem Shadow Box",
+  "series": "438"
+ },
+ "MICH-438-293": {
+  "color": "Black with Silver Pattern",
+  "family": "Black & Silver",
+  "profile": "Tall Traditional Stem Shadow Box",
+  "series": "438"
+ },
+ "MICH-616-33": {
+  "color": "Stainless Steel",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-41": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-473": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-48": {
+  "color": "Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-50": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-60": {
+  "color": "Pattern Gold with Lines",
+  "family": "Gold",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-72": {
+  "color": "Natural Woodgrain",
+  "family": "Natural",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-616-82": {
+  "color": "Off-White Driftwood",
+  "family": "Ivory-White",
+  "profile": "Large Stem Shadow Box",
+  "series": "616"
+ },
+ "MICH-624-141": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-624-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-624-473": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-624-48": {
+  "color": "Light Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-624-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-624-60": {
+  "color": "Pattern Gold with Lines",
+  "family": "Gold",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-624-63": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Medium Stem Shadow Box",
+  "series": "624"
+ },
+ "MICH-625-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Stem Shadow Box",
+  "series": "625"
+ },
+ "MICH-625-48": {
+  "color": "Light Grey",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Stem Shadow Box",
+  "series": "625"
+ },
+ "MICH-625-58": {
+  "color": "Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Medium Stem Shadow Box",
+  "series": "625"
+ },
+ "MICH-724-108": {
+  "color": "Grey & Brown Driftwood",
+  "family": "Grey & Charcoal",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-11": {
+  "color": "Bronze",
+  "family": "Bronze",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-111": {
+  "color": "Black & Brown Driftwood",
+  "family": "Others",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-112": {
+  "color": "Light Brown & White Driftwood",
+  "family": "Ivory-White",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-118": {
+  "color": "Brown & Beige Driftwood",
+  "family": "Others",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-12": {
+  "color": "Natural",
+  "family": "Natural",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-18": {
+  "color": "Satin Charcoal",
+  "family": "Grey & Charcoal",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-19": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-23": {
+  "color": "Warm Silver",
+  "family": "Silver",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-30": {
+  "color": "Bright Gold",
+  "family": "Gold",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-32": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-724-73": {
+  "color": "True Silver",
+  "family": "Silver",
+  "profile": "Thin Tall Shadow Box",
+  "series": "724"
+ },
+ "MICH-725-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Thin Tall Shadow Box",
+  "series": "725"
+ },
+ "MICH-726-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Thin Tall Shadow Box",
+  "series": "726"
+ },
+ "MICH-758-23": {
+  "color": "Pattern Silver Leaf with Charcoal outer side",
+  "family": "Silver",
+  "profile": "Large Shadow Box",
+  "series": "758"
+ },
+ "MICH-781-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Tall Shadow Box",
+  "series": "781"
+ },
+ "MICH-781-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Tall Shadow Box",
+  "series": "781"
+ },
+ "MICH-789-20": {
+  "color": "Shiny Gold",
+  "family": "Gold",
+  "profile": "Tall Stem Shadow Box",
+  "series": "789"
+ }
+}

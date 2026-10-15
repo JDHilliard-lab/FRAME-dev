@@ -61,7 +61,8 @@ check('the manifest carries catalogue facts and the corner photo', () => {
 });
 check('every catalogue-imported swatch has a corner photo and a profile on disk', () => {
   const missing = [];
-  ['avant-garde', 'Ornate'].forEach(col => {
+  const MICH = path.join(root, 'library', 'michaelangelo');
+  fs.readdirSync(MICH).filter(c => fs.existsSync(path.join(MICH, c, 'catalogue.json'))).forEach(col => {
   const dir = path.join(root, 'library', 'michaelangelo', col);
   const meta = JSON.parse(fs.readFileSync(path.join(dir, 'catalogue.json'), 'utf8'));
   MAN.filter(x => x.collection === col && meta[x.code]).forEach(x => {

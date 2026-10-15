@@ -1,0 +1,476 @@
+{
+ "MICH-115-05": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Reverse",
+  "series": "115"
+ },
+ "MICH-115-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Reverse",
+  "series": "115"
+ },
+ "MICH-115-27": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Reverse",
+  "series": "115"
+ },
+ "MICH-115-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Reverse",
+  "series": "115"
+ },
+ "MICH-115-88": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Medium Reverse",
+  "series": "115"
+ },
+ "MICH-173-290": {
+  "color": "Dark Mahogany & Gold",
+  "family": "Mahogany",
+  "profile": "Medium Classic Panel",
+  "series": "173"
+ },
+ "MICH-173-293": {
+  "color": "Dark Mahogany & Silver",
+  "family": "Mahogany",
+  "profile": "Medium Classic Panel",
+  "series": "173"
+ },
+ "MICH-174-290": {
+  "color": "Dark Mahogany & Gold",
+  "family": "Mahogany",
+  "profile": "Large Classic Panel",
+  "series": "174"
+ },
+ "MICH-174-293": {
+  "color": "Dark Mahogany & Silver",
+  "family": "Mahogany",
+  "profile": "Large Classic Panel",
+  "series": "174"
+ },
+ "MICH-176-210": {
+  "color": "Brownish Gold Leaf",
+  "family": "Gold",
+  "profile": "Medium Shallow Scoop",
+  "series": "176"
+ },
+ "MICH-176-213": {
+  "color": "Brownish Silver Leaf",
+  "family": "Silver",
+  "profile": "Medium Shallow Scoop",
+  "series": "176"
+ },
+ "MICH-177-210": {
+  "color": "Brownish Gold Leaf",
+  "family": "Gold",
+  "profile": "Large Shallow Scoop",
+  "series": "177"
+ },
+ "MICH-177-213": {
+  "color": "Brownish Silver Leaf",
+  "family": "Silver",
+  "profile": "Large Shallow Scoop",
+  "series": "177"
+ },
+ "MICH-207-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Classic Medium Dome Reverse with Notched Bevel",
+  "series": "207"
+ },
+ "MICH-254-21": {
+  "color": "Brown Terrain",
+  "family": "Walnut",
+  "profile": "Large Mottled Reverse",
+  "series": "254"
+ },
+ "MICH-254-25": {
+  "color": "Gold Terrain",
+  "family": "Gold",
+  "profile": "Large Mottled Reverse",
+  "series": "254"
+ },
+ "MICH-254-28": {
+  "color": "Grey Terrain",
+  "family": "Grey & Charcoal",
+  "profile": "Large Mottled Reverse",
+  "series": "254"
+ },
+ "MICH-400-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Small Bevel Flat Lip",
+  "series": "400"
+ },
+ "MICH-400-23": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Small Bevel Flat Lip",
+  "series": "400"
+ },
+ "MICH-510-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Small Reverse",
+  "series": "510"
+ },
+ "MICH-510-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Reverse",
+  "series": "510"
+ },
+ "MICH-52-440": {
+  "color": "Mahogany Lacquer & Gold",
+  "family": "Mahogany",
+  "profile": "Classic Medium Dome",
+  "series": "52"
+ },
+ "MICH-520-21": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Medium Reverse",
+  "series": "520"
+ },
+ "MICH-520-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Reverse",
+  "series": "520"
+ },
+ "MICH-520-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Reverse",
+  "series": "520"
+ },
+ "MICH-529-41": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Scoop with Black Bead",
+  "series": "529"
+ },
+ "MICH-529-44": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Scoop with Black Bead",
+  "series": "529"
+ },
+ "MICH-529-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Scoop with Black Bead",
+  "series": "529"
+ },
+ "MICH-530-41": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Large Scoop with Black Bead",
+  "series": "530"
+ },
+ "MICH-530-44": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Large Scoop with Black Bead",
+  "series": "530"
+ },
+ "MICH-530-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Scoop with Black Bead",
+  "series": "530"
+ },
+ "MICH-533-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "533"
+ },
+ "MICH-533-21": {
+  "color": "Light Walnut & Gold",
+  "family": "Walnut",
+  "profile": "Classic Small Dome Reverse",
+  "series": "533"
+ },
+ "MICH-533-210": {
+  "color": "Light Walnut & Black",
+  "family": "Walnut",
+  "profile": "Classic Small Dome Reverse",
+  "series": "533"
+ },
+ "MICH-533-24": {
+  "color": "Mahogany & Gold",
+  "family": "Mahogany",
+  "profile": "Classic Small Dome Reverse",
+  "series": "533"
+ },
+ "MICH-533-240": {
+  "color": "Mahogany & Black",
+  "family": "Mahogany",
+  "profile": "Classic Small Dome Reverse",
+  "series": "533"
+ },
+ "MICH-533-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Classic Small Dome Reverse",
+  "series": "533"
+ },
+ "MICH-545-40": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Large Panel Traditional with Bead",
+  "series": "545"
+ },
+ "MICH-545-41": {
+  "color": "Brown & Gold",
+  "family": "Espresso & Gold",
+  "profile": "Large Panel Traditional with Bead",
+  "series": "545"
+ },
+ "MICH-545-43": {
+  "color": "Silver",
+  "family": "Silver",
+  "profile": "Large Panel Traditional with Bead",
+  "series": "545"
+ },
+ "MICH-546-41": {
+  "color": "Light Walnut & Black",
+  "family": "Walnut",
+  "profile": "Small Round Reverse",
+  "series": "546"
+ },
+ "MICH-546-42": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Small Round Reverse",
+  "series": "546"
+ },
+ "MICH-546-44": {
+  "color": "Mahogany & Black",
+  "family": "Mahogany",
+  "profile": "Small Round Reverse",
+  "series": "546"
+ },
+ "MICH-546-49": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Round Reverse",
+  "series": "546"
+ },
+ "MICH-554-59": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Reverse",
+  "series": "554"
+ },
+ "MICH-60-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Reverse",
+  "series": "60"
+ },
+ "MICH-60-91": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Medium Reverse",
+  "series": "60"
+ },
+ "MICH-60-94": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "",
+  "series": "60"
+ },
+ "MICH-60-940": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Large Reverse w/Gold Lip",
+  "series": "60"
+ },
+ "MICH-61-21": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Small Reverse with Rope",
+  "series": "61"
+ },
+ "MICH-61-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Small Reverse with Rope",
+  "series": "61"
+ },
+ "MICH-63-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Small Flat Top with Front/Back Highlight",
+  "series": "63"
+ },
+ "MICH-63-25": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Small Flat Top with Front/Back Highlight",
+  "series": "63"
+ },
+ "MICH-66-20": {
+  "color": "Gold",
+  "family": "Gold",
+  "profile": "Medium Reverse with Rope",
+  "series": "66"
+ },
+ "MICH-66-21": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Medium Reverse with Rope",
+  "series": "66"
+ },
+ "MICH-66-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Reverse with Rope",
+  "series": "66"
+ },
+ "MICH-68-31": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Medium Shallow Scoop Black Beaded Lip",
+  "series": "68"
+ },
+ "MICH-68-34": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Shallow Scoop Black Beaded Lip",
+  "series": "68"
+ },
+ "MICH-69-21": {
+  "color": "Light Walnut",
+  "family": "Walnut",
+  "profile": "Small Shallow Scoop Black Beaded Lip",
+  "series": "69"
+ },
+ "MICH-69-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Small Shallow Scoop Black Beaded Lip",
+  "series": "69"
+ },
+ "MICH-700-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Classic Dome Reverse",
+  "series": "700"
+ },
+ "MICH-701-21": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Classic Round Top",
+  "series": "701"
+ },
+ "MICH-701-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Classic Round Top",
+  "series": "701"
+ },
+ "MICH-701-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Classic Round Top",
+  "series": "701"
+ },
+ "MICH-702-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Scoop",
+  "series": "702"
+ },
+ "MICH-704-22": {
+  "color": "White",
+  "family": "Ivory-White",
+  "profile": "Medium Round Top Reverse",
+  "series": "704"
+ },
+ "MICH-704-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Round Top Reverse",
+  "series": "704"
+ },
+ "MICH-704-940": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Reverse w/Gold Lip",
+  "series": "704"
+ },
+ "MICH-706-21": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Medium Classic Scoop",
+  "series": "706"
+ },
+ "MICH-706-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Medium Classic Scoop",
+  "series": "706"
+ },
+ "MICH-707-21": {
+  "color": "Walnut",
+  "family": "Walnut",
+  "profile": "Large Reverse",
+  "series": "707"
+ },
+ "MICH-707-24": {
+  "color": "Mahogany",
+  "family": "Mahogany",
+  "profile": "Large Reverse",
+  "series": "707"
+ },
+ "MICH-707-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Large Reverse",
+  "series": "707"
+ },
+ "MICH-708-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Small Flat Beveled Lip",
+  "series": "708"
+ },
+ "MICH-708-290": {
+  "color": "Black & Gold",
+  "family": "Black & Gold",
+  "profile": "Small Flat Beveled Lip",
+  "series": "708"
+ },
+ "MICH-708-293": {
+  "color": "Black & Silver",
+  "family": "Black & Silver",
+  "profile": "Small Flat Beveled Lip",
+  "series": "708"
+ },
+ "MICH-721-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Flat with Radius Back",
+  "series": "721"
+ },
+ "MICH-772-21": {
+  "color": "Espresso",
+  "family": "Espresso",
+  "profile": "Small Flat with Back Notch",
+  "series": "772"
+ },
+ "MICH-788-29": {
+  "color": "Black",
+  "family": "Black",
+  "profile": "Medium Shallow Scoop",
+  "series": "788"
+ }
+}
