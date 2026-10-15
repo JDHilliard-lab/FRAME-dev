@@ -455,6 +455,59 @@ const path = require('path');
         if (btns.indexOf('B,I,AA') !== 0) throw new Error(btns);
       });
 
+      // 18.79: doubled rules, renaming made-up sections, name fields keep their text.
+      __check('EXACT BUG: template rules left on the page are cleared, so lines never double', () => {
+        const ann = editorialContent.annotations['layout:pgtoc'] = editorialContent.annotations['layout:pgtoc'] || [];
+        _cloneData(mt.annotations).filter(a => a.type === 'arrow').forEach(a => ann.push(a));
+        ann.push({ type: 'arrow', x1: 0.6, y1: 0.5, x2: 0.7, y2: 0.55, tip: 'arrow', color: '#000' });   // the designer's own arrow stays
+        _dsPages = _deckPageList();
+        const left = (editorialContent.annotations['layout:pgtoc'] || []).filter(a => a.type === 'arrow');
+        if (left.length !== 1 || left[0].tip !== 'arrow') throw new Error(left.length + ' arrows left: ' + JSON.stringify(left.map(a => a.tip)));
+      });
+      _askYesNo = async () => true;
+      {
+        _dsPages = _deckPageList(); _dsIndex = _dsPages.findIndex(d => _deckPageKey(d) === 'layout:pgtoc');
+        await _dsApplyTemplateToCurrentPage({ source: 'master', mi: IDML_MASTER_TEMPLATES.indexOf(mt), name: 'Contents (Full)' });
+        _dsPages = _deckPageList();
+        __check('EXACT BUG: applying the Contents template again leaves no placeholders or template rules', () => {
+          if (tocPg.elements.some(e => !e._toc && /Section Title|Page Title/.test(e.text || ''))) throw new Error('placeholder boxes back on the page');
+          if ((editorialContent.annotations['layout:pgtoc'] || []).some(a => a.type === 'arrow' && a.tip === 'none')) throw new Error('template rules back on the page');
+          if (!gen().some(e => e._toc === 'entry')) throw new Error('not filled in again');
+        });
+      }
+      __check('Introduction, a level and Closing can be renamed, and reset', () => {
+        setTocOverride(['tocsec:intro'], 'label', 'Overview');
+        setTocOverride(['tocsec:closing'], 'label', 'Thanks');
+        _dsPages = _deckPageList();
+        const ts = texts('title');
+        if (ts.indexOf('Overview') < 0 || ts.indexOf('Thanks') < 0) throw new Error(ts.join(' | '));
+        setTocOverride(['tocsec:intro'], 'label', ''); setTocOverride(['tocsec:closing'], 'label', '');
+        _dsPages = _deckPageList();
+        if (texts('title').indexOf('Introduction') < 0) throw new Error('reset failed');
+        const k = Object.keys(_tocModel(_dsPages).sections.reduce((a, x) => (x.secKey && (a[x.secKey] = 1), a), {}));
+        if (k.join(',').indexOf('tocsec:intro') < 0) throw new Error('made-up sections carry no key: ' + k.join(','));
+      });
+      __check('a name field holds the real name, so it can be added to; equal to automatic stores nothing', () => {
+        let got = null;
+        const f = _tocNameField('', 'ART.1C', (v) => { got = v; }, 'line');
+        if (f.value !== 'ART.1C') throw new Error('field empty: the first keystroke would wipe the code');
+        f.value = 'Lobby ART.1C'; f.onchange();
+        if (got !== 'Lobby ART.1C') throw new Error('rename not committed: ' + got);
+        f.value = 'ART.1C'; f.onchange();
+        if (got !== '') throw new Error('the automatic name was stored as a rename');
+      });
+      __check('a renamed field has a reset arrow; an automatic one does not', () => {
+        _dsPages = _deckPageList();
+        const m = _tocModel(_dsPages), e = m.sections[0].entries[0];
+        setTocOverride(e.keys, 'label', 'Renamed Thing');
+        _dsPages = _deckPageList();
+        const host = document.createElement('div'); _tocPanelInto(host, _dsPages.find(d => _deckPageKey(d) === 'layout:pgtoc'));
+        const resets = host.querySelectorAll('.toc-reset');
+        if (resets.length !== 1) throw new Error(resets.length + ' reset arrows');
+        resets[0].onclick();
+        if ((editorialContent.tocOverrides[e.keys[0]] || {}).label) throw new Error('reset did not clear');
+      });
+
       // THE EXPORT prints the generated page, not the old flat list.
       pages = _deckPageList();
       const tocNum = pages.map(_deckPageKey).indexOf('layout:pgtoc') + 1;

@@ -660,6 +660,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   page get Closing in divider mode too; `_tocAutoInk` (page Text Dark, or a dark bg
   colour/gradient) gives white unless the colour is the designer's (`colorSet`, or differs
   from `toc.base`). Options on `toc`: `ruleOff`, `rule.colorSet`, `numColor`, `even`.
+  18.79: `_tocStripTemplateRules` runs on EVERY sync (template rules were found doubled
+  under the generated ones). Made-up sections rename via `tocsec:<tag>[:<level>]` keys.
+  Name fields hold the real text (`_tocNameField`; equal to auto stores nothing) with a
+  reset arrow (`_tocResetBtn`).
   Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
