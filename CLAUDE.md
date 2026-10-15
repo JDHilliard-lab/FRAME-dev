@@ -655,7 +655,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   first line). Contents TYPE lives in the FIRST page's `toc.title`/`toc.entry`
   (`_tocSetType`, original kept in `toc.base` for Reset; continued pages follow it).
   `_tocRenameSource` writes a line's rename into the page's biggest text (layout pages
-  only) and clears the override. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  only) and clears the override. 18.78: the title column WIDENS to the longest title,
+  taking only what the lines do not need (no setting); closing pages after the last artwork
+  page get Closing in divider mode too; `_tocAutoInk` (page Text Dark, or a dark bg
+  colour/gradient) gives white unless the colour is the designer's (`colorSet`, or differs
+  from `toc.base`). Options on `toc`: `ruleOff`, `rule.colorSet`, `numColor`, `even`.
+  Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages

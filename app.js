@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.77';
+const APP_VERSION = '18.78';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -20661,6 +20661,10 @@ function _tocModel(pages, span) {
     const order = (typeof _deckPlanOrder === 'function') ? _deckPlanOrder() : 'byLevel';
     const hasDiv = items.some(i => i.kind === 'divider' && !i.hide);
     let lastArt = -1; items.forEach((it, i) => { if (it.kind !== 'entry' && it.kind !== 'divider') lastArt = i; });
+    // With dividers, the closing pages (Thank You and anything after the last artwork page)
+    // got swept into the last divider's section. They close the deck instead (18.78),
+    // unless a divider comes after the artwork to claim them.
+    const divAfterArt = items.some((it, i) => i > lastArt && it.kind === 'divider' && !it.hide);
     const sections = [], leftOut = { title: '', entries: [] };
     let cur = null;
     const open = (title, tag, divKey) => { cur = { title: title, tag: tag, divKey: divKey || null, entries: [] }; sections.push(cur); };
@@ -20686,6 +20690,7 @@ function _tocModel(pages, span) {
     items.forEach((it, i) => {
         if (it.hide) { if (it.kind !== 'divider') add(leftOut, it); if (cur && it.kind !== 'art') cur._brk = true; return; }
         if (hasDiv) {
+            if (lastArt >= 0 && i > lastArt && !divAfterArt && it.kind !== 'divider') { if (!cur || cur.tag !== 'closing') open('Closing', 'closing'); add(cur, it); return; }
             if (it.kind === 'divider') { open(it.rename || it.auto || 'Section', 'div', it.key); cur.ph = !!it.ph; cur.num = it.num; cur.rename = it.rename; cur.auto = it.auto; return; }
             if (!cur) open('Introduction', 'intro');
             add(cur, it); return;
@@ -20710,18 +20715,35 @@ function _tocModel(pages, span) {
 // the whole outline FLOWS: sections stack tight and a long one breaks between lines,
 // its title carried on as "(continued)". Grid wins unless it takes more pages. The type
 // never shrinks and nothing is dropped. Returns { parts: [els, ...], els: parts[0] }.
-function _tocLayout(cfg, model) {
+function _tocLayout(cfg, model, ink) {
     const secs = (model && model.sections) || [];
-    const cols = (cfg.cols && cfg.cols.length) ? cfg.cols : TOC_FALLBACK_CFG.cols;
+    const caps = cfg.title.caps === 'upper';
+    const titleOf = (t) => caps ? ((t || '') + '').toUpperCase() : t;
     const bottom = cfg.bottom || 0.9, top = cfg.top || 0.2, pitch = cfg.pitch || 0.28, rg = cfg.ruleGap || 0;
-    const minTw = Math.min.apply(null, cols.map(c => c.tw)), minEw = Math.min.apply(null, cols.map(c => c.ew));
     const tSize = cfg.title.size, eSize = cfg.entry.size;
     const tPt = tSize * TOC_PAGE_H, ePt = eSize * TOC_PAGE_H;
     const tLH = tSize * TOC_LEADING, eLH = eSize * TOC_LEADING;
     const numW = Math.max(0.026, (_tocTextW('888', ePt) + 8) / TOC_PAGE_W);
+    // TITLES KEEP TO ONE LINE WHEN THEY CAN (18.78). The title column takes whatever the
+    // lines do not need: it widens to the longest title, and the lines column moves over,
+    // never narrower than its own longest line (or the template's width, whichever is
+    // less). Only a title that still does not fit wraps. Nothing to set.
+    const cols = ((cfg.cols && cfg.cols.length) ? cfg.cols : TOC_FALLBACK_CFG.cols).map(c => Object.assign({}, c));
+    {
+        const wTitle = secs.reduce((m, sec) => Math.max(m, _tocTextW(titleOf(sec.title), tPt) / 0.94), 0) / TOC_PAGE_W + 0.004;
+        const wLines = secs.reduce((m, sec) => sec.entries.reduce((m2, e) => Math.max(m2, _tocTextW(e.label, ePt) / 0.94), m), 0) / TOC_PAGE_W + numW + 0.006;
+        cols.forEach(c => {
+            const gapT = Math.max(0.012, c.ex - (c.tx + c.tw));
+            const avail = (c.ex + c.ew) - c.tx;
+            const linesNeed = Math.max(numW + 0.08, Math.min(c.ew, wLines));
+            const tw = Math.max(c.tw, Math.min(wTitle, avail - gapT - linesNeed));
+            if (tw > c.tw) { c.tw = tw; c.ex = c.tx + tw + gapT; c.ew = avail - tw - gapT; }
+        });
+    }
+    const minTw = Math.min.apply(null, cols.map(c => c.tw)), minEw = Math.min.apply(null, cols.map(c => c.ew));
     const colH = bottom - top, gap = 0.045 + rg;
     const ms = secs.map(sec => {
-        const tl = _tocWrap(sec.title, minTw * TOC_PAGE_W, tPt);
+        const tl = _tocWrap(titleOf(sec.title), minTw * TOC_PAGE_W, tPt);
         const es = sec.entries.map(e => ({ e: e, lines: _tocWrap(e.label, (minEw - numW) * TOC_PAGE_W, ePt) }));
         const nLines = es.reduce((a, x) => a + x.lines.length, 0);
         return { sec: sec, tl: tl, es: es, h: Math.max(tl.length * tLH, nLines * eLH) };
@@ -20742,7 +20764,7 @@ function _tocLayout(cfg, model) {
         for (const m of ms) {
             let i = 0, first = true;
             do {
-                const tl = first ? m.tl : _tocWrap(m.sec.title + ' (continued)', minTw * TOC_PAGE_W, tPt);
+                const tl = first ? m.tl : _tocWrap(titleOf(m.sec.title + ' (continued)'), minTw * TOC_PAGE_W, tPt);
                 const need = Math.max(tl.length * tLH, m.es.length ? m.es[i].lines.length * eLH : 0);
                 if (y > top && y + need > bottom) next();
                 const chunk = []; let ly = y;
@@ -20755,31 +20777,69 @@ function _tocLayout(cfg, model) {
         }
         return out;
     };
-    let plan = grid();
+    // `cfg.even` stacks sections at one even gap instead of on the template's grid rows.
+    let plan = cfg.even ? null : grid();
     const fl = flow();
     const lastPi = (pl) => (pl && pl.length) ? pl[pl.length - 1].pi : 0;
     if (!plan || lastPi(plan) > lastPi(fl)) plan = fl;
     const parts = []; for (let n = 0; n <= lastPi(plan); n++) parts.push([]);
     const text = (role, txt, x, y, w, st, size) => Object.assign({ type: 'text' }, st, { text: txt, x: x, y: y, w: w, size: size, leading: Math.round(size * TOC_PAGE_H * TOC_LEADING * 100) / 100, z: 6, locked: true, _toc: role });
+    // One style per role: the template's, the designer's B / I, and the ink. A colour the
+    // designer set wins; otherwise `ink` (a dark page background) supplies white.
+    const sty = (st, colorSet, inkHex) => {
+        const o = { font: st.font || 'serif', color: (!colorSet && inkHex) ? inkHex : (st.color || '#222222'), bold: !!st.bold, weight: st.bold ? 700 : 400, italic: !!st.italic };
+        if (st.track !== undefined) o.track = st.track;
+        return o;
+    };
+    const tSt = sty(cfg.title, _tocColorSet(cfg, 'title'), ink && ink.text);
+    const eSt = sty(cfg.entry, _tocColorSet(cfg, 'entry'), ink && ink.text);
+    const nSt = Object.assign({}, eSt, cfg.numColor ? { color: cfg.numColor } : {});
+    const ruleCol = (cfg.rule && cfg.rule.colorSet) ? cfg.rule.color : ((ink && ink.rule) || (cfg.rule && cfg.rule.color) || '#9aa0a6');
     plan.forEach(p => {
         const els = parts[p.pi], col = p.col, y0 = p.y;
-        if (cfg.rule) els.push({ type: 'arrow', x1: col.rx1, y1: y0 - rg, x2: col.rx2, y2: y0 - rg, color: cfg.rule.color, weight: cfg.rule.weight, tip: 'none', startCap: 'none', z: 4, locked: true, _toc: 'rule' });
+        if (cfg.rule && !cfg.ruleOff) els.push({ type: 'arrow', x1: col.rx1, y1: y0 - rg, x2: col.rx2, y2: y0 - rg, color: ruleCol, weight: cfg.rule.weight, tip: 'none', startCap: 'none', z: 4, locked: true, _toc: 'rule' });
         // A section title links too (18.77): to its divider, or for a section the contents
         // made up (Introduction, a level, Closing) to the first page listed under it.
         const e0 = p.sec.entries && p.sec.entries[0];
         const sgo = p.sec.divKey ? { _tocKey: p.sec.divKey, _tocPage: p.sec.num || null } : { _tocKey: (e0 && e0.keys && e0.keys[0]) || null, _tocPage: (e0 && e0.num) || null };
-        els.push(Object.assign(text('title', p.tl.join('\n'), col.tx, y0, col.tw + 0.01, cfg.title, tSize), sgo));
+        els.push(Object.assign(text('title', p.tl.join('\n'), col.tx, y0, col.tw + 0.01, tSt, tSize), sgo));
         let ly = y0;
         p.es.forEach(x => {
             // `_tocKey` / `_tocPage` make the line a link: to the page in Deck Studio
             // (_tocGoTo) and to the page number in the PDF (_drawMoodboardPage).
             const go = { _tocKey: (x.e.keys && x.e.keys[0]) || null, _tocPage: x.e.num || null };
-            els.push(Object.assign(text('num', (x.e.num || '') + '', col.ex, ly, numW, cfg.entry, eSize), go));
-            els.push(Object.assign(text('entry', x.lines.join('\n'), col.ex + numW, ly, col.ew - numW + 0.01, cfg.entry, eSize), go));
+            els.push(Object.assign(text('num', (x.e.num || '') + '', col.ex, ly, numW, nSt, eSize), go));
+            els.push(Object.assign(text('entry', x.lines.join('\n'), col.ex + numW, ly, col.ew - numW + 0.01, eSt, eSize), go));
             ly += x.lines.length * eLH;
         });
     });
     return { parts: parts, els: parts[0] };
+}
+// A colour counts as the designer's when it was set here (18.78 marks it) or, for a page
+// restyled in 18.77, when it differs from the template's.
+function _tocColorSet(cfg, which) {
+    const st = cfg[which] || {};
+    if (st.colorSet) return true;
+    const b = cfg.base && cfg.base[which];
+    return !!(b && b.color && st.color && b.color.toLowerCase() !== st.color.toLowerCase());
+}
+// THE CONTENTS READS ITS PAGE (18.78): on a dark background, white type and a light rule,
+// unless the designer chose a colour. Dark = the page's Text set to Dark, or a background
+// colour / gradient whose average is dark. A photo background is not measured; its page
+// sets Text to Dark like any other page.
+function _tocAutoInk(key) {
+    let th = null, st = null;
+    try { th = _pageTheme(key); st = _pageThemes()[key] || null; } catch (e) { return null; }
+    let dark = !!(th && th.mode === 'dark');
+    if (!dark && st) {
+        const stops = (typeof _themeStops === 'function') ? _themeStops(st) : null;
+        const cs = stops ? stops.map(x => x.c) : (st.bg ? [st.bg] : []);
+        if (cs.length) {
+            let L = 0; cs.forEach(c => { const r = _annHexToRgb(c); L += 0.299 * r.r + 0.587 * r.g + 0.114 * r.b; });
+            dark = (L / cs.length) < 120;
+        }
+    }
+    return dark ? { text: '#ffffff', rule: '#e4e7ec' } : null;
 }
 function _tocSig(s) { let h = 0; s = (s || '') + ''; for (let i = 0; i < s.length; i++) h = ((h * 31) + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36) + '.' + s.length; }
 // Rewrites a page's generated elements; writes only on a difference.
@@ -20812,7 +20872,7 @@ function _tocDropPart(pp) {
 // Returns true when continuation pages were added or removed (the page list must be rebuilt).
 function _tocSyncPage(p, model) {
     if (!p.toc) _tocSeed(p);
-    const L = _tocLayout(p.toc, model);
+    const L = _tocLayout(p.toc, model, _tocAutoInk('layout:' + p.id));
     _tocWriteEls(p, L.parts[0]);
     const parts = _tocPartsOf(p.id), want = L.parts.length - 1;
     let changed = false;
@@ -20921,16 +20981,34 @@ function _tocSetType(p, which, prop, value) {
     const st = p.toc[which] || (p.toc[which] = {});
     if (prop === 'size') st.size = Math.max(6, Math.min(60, +value || 12)) / TOC_PAGE_H;
     else if (prop === 'font') st.font = value;
-    else if (prop === 'color') st.color = value;
+    else if (prop === 'color') { st.color = value; st.colorSet = true; }
+    else if (prop === 'bold' || prop === 'italic') st[prop] = !!value;
+    else if (prop === 'caps') st.caps = value ? 'upper' : 'none';
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
     // The colour dot fires continuously while dragged: one undo entry for the burst.
     clearTimeout(_tocTypeTimer);
     _tocTypeTimer = setTimeout(() => { if (typeof pushHistory === 'function') pushHistory(); }, 400);
 }
+// Page-wide contents options that are not a type style: rules, number colour, spacing.
+function _tocSetOpt(p, prop, value) {
+    p = _tocFirstPage(p); if (!p || !p.toc) return;
+    if (!p.toc.base) p.toc.base = { title: _cloneData(p.toc.title), entry: _cloneData(p.toc.entry) };
+    const t = p.toc;
+    if (prop === 'ruleOff') { if (value) t.ruleOff = true; else delete t.ruleOff; }
+    else if (prop === 'ruleColor') { t.rule = t.rule || { color: '#9aa0a6', weight: 1.2 }; t.rule.color = value; t.rule.colorSet = true; }
+    else if (prop === 'numColor') { if (value) t.numColor = value; else delete t.numColor; }
+    else if (prop === 'even') { if (value) t.even = true; else delete t.even; }
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
+    clearTimeout(_tocTypeTimer);
+    _tocTypeTimer = setTimeout(() => { if (typeof pushHistory === 'function') pushHistory(); }, 400);
+}
 function _tocResetType(p) {
     p = _tocFirstPage(p); if (!p || !p.toc || !p.toc.base) return;
     p.toc.title = _cloneData(p.toc.base.title); p.toc.entry = _cloneData(p.toc.base.entry); delete p.toc.base;
+    delete p.toc.ruleOff; delete p.toc.numColor; delete p.toc.even;
+    if (p.toc.rule) delete p.toc.rule.colorSet;
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
     try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {}
@@ -20991,6 +21069,54 @@ function _tocPanelInto(host, desc) {
         const asPt = (st) => ({ font: _fontToken(st.font || 'serif', 'serif'), size: Math.round((st.size || 0.02) * TOC_PAGE_H * 10) / 10, color: st.color || '#222222' });
         box.appendChild(_dsTypeSection('Titles', () => asPt(tp.toc.title), (k, v) => _tocSetType(tp, 'title', k, v), 'Section titles on the contents page'));
         box.appendChild(_dsTypeSection('Lines', () => asPt(tp.toc.entry), (k, v) => _tocSetType(tp, 'entry', k, v), 'Page lines and their numbers on the contents page'));
+        // B / I (and caps for titles) beside each style; rules, number colour, spacing.
+        const optRow = (label, tip) => {
+            const r = document.createElement('div'); r.className = 'toc-opt-row';
+            r.style.cssText = 'display:flex; flex-wrap:wrap; align-items:center; gap:5px; margin:0 0 5px;';
+            const h = document.createElement('div'); h.textContent = label; h.title = tip;
+            h.style.cssText = 'flex:0 0 46px; font-size:var(--fs-60); font-weight:700; color:var(--text-main); text-transform:uppercase; letter-spacing:0.2px;';
+            r.appendChild(h); box.appendChild(r); return r;
+        };
+        const tog = (row, txt, on, tip, fn, disabled, css) => {
+            const b = document.createElement('button'); b.type = 'button'; b.textContent = txt; b.title = tip;
+            b.className = 'action-btn btn-secondary' + (on ? ' active' : '');
+            b.style.cssText = 'flex:0 0 auto; width:auto; min-width:24px; height:22px; padding:0 6px; font-size:var(--fs-60);' + (css || '');
+            b.disabled = !!disabled; b.onclick = () => { fn(!on); try { _dsRenderTools(); } catch (e) {} };
+            row.appendChild(b); return b;
+        };
+        const druk = (st) => _fontToken(st.font || 'serif', 'serif') === 'display';
+        const styleRow = (which, label, withCaps) => {
+            const st = tp.toc[which], r = optRow(label, (which === 'title' ? 'Section titles' : 'Lines') + ': bold, italic' + (withCaps ? ', all caps' : ''));
+            tog(r, 'B', !!st.bold, 'Bold', (v) => _tocSetType(tp, which, 'bold', v), druk(st), ' font-weight:800;');
+            tog(r, 'I', !!st.italic, druk(st) ? 'Druk has no italic' : 'Italic', (v) => _tocSetType(tp, which, 'italic', v), druk(st), ' font-style:italic;');
+            if (withCaps) tog(r, 'AA', st.caps === 'upper', 'All caps', (v) => _tocSetType(tp, which, 'caps', v));
+            return r;
+        };
+        styleRow('title', 'Titles', true);
+        const lr = styleRow('entry', 'Lines', false);
+        {
+            const nl = document.createElement('span'); nl.textContent = 'Numbers'; nl.style.cssText = 'font-size:var(--fs-60); color:var(--text-muted); margin-left:6px;'; lr.appendChild(nl);
+            const nc = document.createElement('input'); nc.type = 'color'; nc.value = tp.toc.numColor || (tp.toc.entry.color || '#222222');
+            nc.title = 'Page number colour (same as the lines until you pick one)';
+            nc.oninput = () => _tocSetOpt(tp, 'numColor', nc.value);
+            if (typeof _dsInkQuickPicks === 'function') _dsInkQuickPicks(nc, (hex) => _tocSetOpt(tp, 'numColor', hex));
+            lr.appendChild(nc);
+            if (tp.toc.numColor) tog(lr, 'Same', false, 'Numbers the same colour as the lines', () => _tocSetOpt(tp, 'numColor', null));
+        }
+        if (tp.toc.rule) {
+            const rr = optRow('Rules', 'The line over each section');
+            tog(rr, tp.toc.ruleOff ? 'Off' : 'On', !tp.toc.ruleOff, 'Show the line over each section', (v) => _tocSetOpt(tp, 'ruleOff', !v));
+            const rc = document.createElement('input'); rc.type = 'color'; rc.value = tp.toc.rule.color || '#9aa0a6'; rc.title = 'Rule colour';
+            rc.disabled = !!tp.toc.ruleOff;
+            rc.oninput = () => _tocSetOpt(tp, 'ruleColor', rc.value);
+            if (typeof _dsInkQuickPicks === 'function') _dsInkQuickPicks(rc, (hex) => _tocSetOpt(tp, 'ruleColor', hex));
+            rr.appendChild(rc);
+        }
+        {
+            const sr = optRow('Spacing', 'Where each section starts');
+            tog(sr, 'Grid', !tp.toc.even, 'Sections start on the template\u2019s rows', () => _tocSetOpt(tp, 'even', false));
+            tog(sr, 'Even', !!tp.toc.even, 'Sections stack with one even gap', () => _tocSetOpt(tp, 'even', true));
+        }
         if (tp.toc.base) {
             const rs = document.createElement('button'); rs.type = 'button'; rs.className = 'action-btn btn-secondary toc-type-reset';
             rs.textContent = 'Reset to template type'; rs.title = 'Go back to the type the Contents template uses';
@@ -42476,7 +42602,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

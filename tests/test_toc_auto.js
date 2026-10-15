@@ -120,7 +120,8 @@ const path = require('path');
       pages = _deckPageList();
       __check('a divider page starts a section titled by its heading, in Title Case', () => {
         const titles = texts('title').join(' | ');
-        if (titles !== 'Introduction | The Art of the Lobby') throw new Error(titles);
+        // 18.78: Thank You closes the deck instead of joining the last divider's section.
+        if (titles !== 'Introduction | The Art of the Lobby | Closing') throw new Error(titles);
         if (texts('entry').join(' | ').indexOf('Divider') >= 0) throw new Error('the divider listed itself');
       });
 
@@ -385,6 +386,73 @@ const path = require('path');
       });
       __check('a fixed page cannot be renamed at the source (its heading is not a layout box)', () => {
         if (_tocCanRenameSource('fixed:understanding')) throw new Error('offered on a fixed page');
+      });
+
+      // 18.78: automatic title width, auto ink, style toggles, rules, numbers, spacing.
+      __check('EXACT BUG: a long section title widens its column instead of stacking', () => {
+        const m = { sections: [{ title: 'Environmental Graphic Design', entries: [{ label: 'Lobby: EGD.1 \\u2013 EGD.4', num: 26, keys: ['a'] }] }] };
+        const cfg = _cloneData(tocPg.toc); cfg.title.size = 18 / 540;
+        const t = _tocLayout(cfg, m).els.find(e => e._toc === 'title');
+        if (t.text.indexOf('\\n') >= 0) throw new Error('still stacks: ' + JSON.stringify(t.text));
+        const en = _tocLayout(cfg, m).els.find(e => e._toc === 'entry');
+        if (en.x < t.x + _tocTextW(t.text, 18) / 936) throw new Error('lines overlap the title');
+        if (en.text.indexOf('\\n') >= 0) throw new Error('the lines were squeezed into wrapping');
+      });
+      __check('a title too long even then still wraps, and the lines keep their room', () => {
+        const m = { sections: [{ title: 'An Extraordinarily Long Section Title That Cannot Possibly Fit On One Line', entries: [{ label: 'A page with quite a long name here', num: 3, keys: ['a'] }] }] };
+        const L = _tocLayout(tocPg.toc, m).els;
+        if (L.find(e => e._toc === 'title').text.indexOf('\\n') < 0) throw new Error('did not wrap');
+        if (L.find(e => e._toc === 'entry').text.indexOf('\\n') >= 0) throw new Error('lines lost their width to the title');
+      });
+      __check('a dark background sets the contents white with light rules; a chosen colour wins', () => {
+        editorialContent.pageThemes = editorialContent.pageThemes || {};
+        editorialContent.pageThemes['layout:pgtoc'] = { bgStops: [{ c: '#002a5c', p: 0 }, { c: '#3d6fa8', p: 1 }] };
+        _dsPages = _deckPageList();
+        if (gen().filter(e => e.type === 'text').some(e => e.color !== '#ffffff')) throw new Error('not white on a dark gradient');
+        if (gen().filter(e => e._toc === 'rule').some(e => e.color !== '#e4e7ec')) throw new Error('rules not light');
+        _tocSetType(tocPg, 'entry', 'color', '#ffd400');
+        _dsPages = _deckPageList();
+        if (gen().filter(e => e._toc === 'entry').some(e => e.color !== '#ffd400')) throw new Error('chosen colour overridden');
+        if (gen().filter(e => e._toc === 'title').some(e => e.color !== '#ffffff')) throw new Error('titles lost auto ink');
+        _tocResetType(tocPg); delete editorialContent.pageThemes['layout:pgtoc'];
+        _dsPages = _deckPageList();
+        if (gen().find(e => e._toc === 'entry').color === '#ffffff') throw new Error('stayed white on a light page');
+      });
+      __check('bold, italic and caps reach the printed lines', () => {
+        _tocSetType(tocPg, 'title', 'bold', true); _tocSetType(tocPg, 'title', 'caps', true); _tocSetType(tocPg, 'entry', 'italic', true);
+        _dsPages = _deckPageList();
+        const t = gen().find(e => e._toc === 'title'), en = gen().find(e => e._toc === 'entry');
+        if (!t.bold || t.weight !== 700) throw new Error('title not bold');
+        if (t.text !== t.text.toUpperCase()) throw new Error('title not caps: ' + t.text);
+        if (!en.italic || en.bold) throw new Error('lines style wrong');
+        _tocResetType(tocPg); _dsPages = _deckPageList();
+        if (gen().find(e => e._toc === 'title').bold) throw new Error('reset kept bold');
+      });
+      __check('rules can be switched off; numbers can take their own colour', () => {
+        _tocSetOpt(tocPg, 'ruleOff', true); _tocSetOpt(tocPg, 'numColor', '#888888');
+        _dsPages = _deckPageList();
+        if (gen().some(e => e._toc === 'rule')) throw new Error('rules still drawn');
+        if (gen().filter(e => e._toc === 'num').some(e => e.color !== '#888888')) throw new Error('number colour not applied');
+        if (gen().filter(e => e._toc === 'entry').some(e => e.color === '#888888')) throw new Error('lines took the number colour');
+        _tocResetType(tocPg); _dsPages = _deckPageList();
+        if (!gen().some(e => e._toc === 'rule')) throw new Error('reset did not bring rules back');
+      });
+      __check('Even spacing stacks sections at one gap instead of the template rows', () => {
+        const m = { sections: [{ title: 'A', entries: [{ label: 'x', num: 1, keys: ['a'] }] }, { title: 'B', entries: [{ label: 'y', num: 2, keys: ['b'] }] }] };
+        const cfg = _cloneData(tocPg.toc);
+        const yGrid = _tocLayout(cfg, m).els.filter(e => e._toc === 'title')[1].y;
+        cfg.even = true;
+        const yEven = _tocLayout(cfg, m).els.filter(e => e._toc === 'title')[1].y;
+        if (Math.abs(yGrid - (cfg.top + cfg.pitch)) > 1e-6) throw new Error('grid row not used: ' + yGrid);
+        if (!(yEven < yGrid)) throw new Error('even did not tighten: ' + yEven + ' vs ' + yGrid);
+      });
+      __check('the panel offers the new controls', () => {
+        _dsPages = _deckPageList();
+        const host = document.createElement('div'); _tocPanelInto(host, _dsPages.find(d => _deckPageKey(d) === 'layout:pgtoc'));
+        const labels = Array.from(host.querySelectorAll('.toc-opt-row')).map(r => r.firstChild.textContent).join('|');
+        if (labels !== 'Titles|Lines|Rules|Spacing') throw new Error(labels);
+        const btns = Array.from(host.querySelectorAll('.toc-opt-row button')).map(b => b.textContent).join(',');
+        if (btns.indexOf('B,I,AA') !== 0) throw new Error(btns);
       });
 
       // THE EXPORT prints the generated page, not the old flat list.
