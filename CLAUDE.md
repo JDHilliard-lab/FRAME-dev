@@ -1003,6 +1003,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_bootStart`) and is labelled, never offered. Restoring another tab's backup writes it
   under this session, then deletes the old record. A failed write deletes only earlier
   backups of the SAME project name.
+  **Copy reaches the other tabs (18.83):** `_dsCopySelection` wraps `_dsCopySelectionHere`
+  and posts `{t:'clip'}` on the same channel; `_tabOnMessage` makes it this tab's
+  `_dsClipboard` with `srcKey: null` (pastes in place). Ignores its own echo.
 - **THE AUTOSAVE LIVES IN INDEXEDDB** (a real project is ~23 MB vs a ~5 MB localStorage
   budget). Two stores: `ameta` (small: when, session, name) and `adata` (payload), so
   `checkAutosaveOnLoad` asks before reading the payload.
