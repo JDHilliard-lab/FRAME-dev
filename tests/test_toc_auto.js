@@ -94,7 +94,8 @@ const path = require('path');
         const titles = texts('title').join(' | ');
         if (titles !== 'Introduction | Level 1 | Closing') throw new Error(titles);
         const ents = texts('entry').join(' | ');
-        if (ents.indexOf('Artwork ART.1 \\u2013 ART.3B') < 0) throw new Error('spec run not collapsed: ' + ents);
+        // 18.75: a run is named by where it hangs.
+        if (ents.indexOf('Lobby: ART.1 \\u2013 ART.3B') < 0) throw new Error('spec run not collapsed: ' + ents);
         if (ents.indexOf('Project Understanding') < 0 || ents.indexOf('Floor Plan') < 0) throw new Error(ents);
         if (/Cover|Good Art|Contents/.test(ents)) throw new Error('cover, slogan or the contents page itself listed: ' + ents);
       });
@@ -125,7 +126,7 @@ const path = require('path');
 
       // Overrides: leave one out, rename another.
       const m0 = _tocModel(pages);
-      const art = m0.sections[1].entries.find(e => /^Artwork/.test(e.label));
+      const art = m0.sections[1].entries.find(e => e._run);
       setTocOverride(['fixed:narrative'], 'hide', true);
       setTocOverride(art.keys, 'label', 'Selected Artwork');
       pages = _deckPageList();
@@ -149,7 +150,7 @@ const path = require('path');
       __check('a wall breaker is one entry that absorbs its spec pages', () => {
         const ents = texts('entry').join(' | ');
         if (ents.indexOf('Lobby North') < 0) throw new Error('wall not listed by name: ' + ents);
-        if (texts('entry').some(t => /^Artwork .*ART\\.3/.test(t))) throw new Error('spec pages of the wall listed separately: ' + ents);
+        if (texts('entry').some(t => /^Lobby: .*ART\\.3/.test(t))) throw new Error('spec pages of the wall listed separately: ' + ents);
       });
       editorialContent.elevBreakers = false;
 
@@ -260,6 +261,64 @@ const path = require('path');
         const lab = _tocAutoLabel({ kind: 'spec', _install: true, title: 'ART.3', _elevIdx: 0 });
         elevations[0].name = nm0;
         if (lab !== 'ART.3 LOBBY') throw new Error(lab);
+      });
+
+      // 18.75: runs split where the location changes.
+      dashProjectData[1].location = 'Corridor';
+      _dsPages = _deckPageList();
+      __check('a run of spec pages splits where the location changes and is named by it', () => {
+        const ents = texts('entry');
+        ['Lobby: ART.1', 'Corridor: ART.2', 'Lobby: ART.3A \\u2013 ART.3B'].forEach(w => { if (ents.indexOf(w) < 0) throw new Error('missing ' + w + ' in ' + ents.join(' | ')); });
+      });
+      dashProjectData[1].location = 'Lobby';
+      __check('pieces with no location keep the Artwork wording', () => {
+        if (_tocRunLabel('', 'ART.1', 'ART.4') !== 'Artwork ART.1 \\u2013 ART.4') throw new Error(_tocRunLabel('', 'ART.1', 'ART.4'));
+      });
+      // 18.75: template filler is flagged.
+      const phDiv = { id: 'pgph', type: 'breaker', elements: _cloneData(divider.elements), afterKey: 'fixed:understanding' };
+      const phMood = { id: 'pgph2', type: 'moodboard', elements: [{ type: 'text', text: 'SECTION HEADING', x: .05, y: .1, w: .5, size: .06 }], afterKey: 'layout:pgph' };
+      const okMood = { id: 'pgok', type: 'moodboard', elements: [{ type: 'text', text: 'INSPIRATION', x: .05, y: .1, w: .5, size: .06 }], afterKey: 'layout:pgph2' };
+      editorialContent.layoutPages.push(phDiv, phMood, okMood);
+      _dsPages = _deckPageList();
+      __check('a divider or page still reading as template filler is flagged; a real heading is not', () => {
+        const m = _tocModel(_dsPages);
+        const sec = m.sections.find(x => x.divKey === 'layout:pgph');
+        if (!sec || !sec.ph) throw new Error('placeholder divider not flagged: ' + JSON.stringify(sec && sec.title));
+        const all = m.sections.reduce((a, x) => a.concat(x.entries), []);
+        const e1 = all.find(e => e.keys[0] === 'layout:pgph2'), e2 = all.find(e => e.keys[0] === 'layout:pgok');
+        if (!e1 || !e1.ph) throw new Error('SECTION HEADING page not flagged');
+        if (!e2 || e2.ph) throw new Error('INSPIRATION flagged as a placeholder');
+        setTocOverride(['layout:pgph2'], 'label', 'Material Palette');
+        const e3 = _tocModel(_deckPageList()).sections.reduce((a, x) => a.concat(x.entries), []).find(e => e.keys[0] === 'layout:pgph2');
+        if (e3.ph) throw new Error('a typed name is still flagged');
+        setTocOverride(['layout:pgph2'], 'label', '');
+      });
+      __check('Preflight lists the placeholders with a jump to each page', () => {
+        _dsPages = _deckPageList();
+        const iss = _dsRunPreflight().filter(x => x.text.indexOf('Contents') === 0);
+        if (iss.length !== 2) throw new Error(iss.length + ': ' + iss.map(x => x.text).join(' / '));
+        const ks = iss.map(x => _deckPageKey(_dsPages[x.idx])).sort().join(',');
+        if (ks !== 'layout:pgph,layout:pgph2') throw new Error(ks);
+      });
+      __check('the contents panel marks them', () => {
+        const host = document.createElement('div'); _dsPages = _deckPageList(); _tocPanelInto(host);
+        if (host.querySelectorAll('.toc-ph').length !== 2) throw new Error(host.querySelectorAll('.toc-ph').length + ' marked');
+      });
+      editorialContent.layoutPages = editorialContent.layoutPages.filter(p => p !== phDiv && p !== phMood && p !== okMood);
+      // 18.75: the rail numbers pages as printed.
+      __check('the rail numbers pages the way the PDF does when a card spans two pages', () => {
+        _dsPages = _deckPageList();
+        const iFr = 3;
+        const o = _deckPageSpan;
+        _deckPageSpan = (d) => (_dsPages.indexOf(d) === iFr ? 2 : 1);
+        _dsPnCache = { pages: null, sig: null, starts: [] };
+        try {
+          if (_dsPrintedLabel(iFr) !== (iFr + 1) + '\\u2013' + (iFr + 2)) throw new Error('span label ' + _dsPrintedLabel(iFr));
+          if (_dsPrintedLabel(iFr + 1) !== String(iFr + 3)) throw new Error('after the span: ' + _dsPrintedLabel(iFr + 1));
+          if (_dsIndexForPrinted(iFr + 2) !== iFr || _dsIndexForPrinted(iFr + 3) !== iFr + 1) throw new Error('printed number to position wrong');
+        } finally { _deckPageSpan = o; _dsPnCache = { pages: null, sig: null, starts: [] }; }
+        const R = S.slice(S.indexOf('function _dsRenderRail'), S.indexOf('\\nfunction ', S.indexOf('function _dsRenderRail') + 10));
+        if (R.indexOf("txt.textContent = (i + 1)") >= 0 || R.indexOf('_dsPrintedLabel(i)') < 0) throw new Error('rail label still counts positions');
       });
 
       // THE EXPORT prints the generated page, not the old flat list.

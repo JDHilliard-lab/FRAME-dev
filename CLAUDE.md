@@ -643,7 +643,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   tick is `_tocPageInto`, in `_dsRenderTools` after `_dsPageActionsInto`, shown only while
   the deck has a contents page. Lines carry `_tocKey` / `_tocPage`: a PDF link in
   `_drawMoodboardPage` (guarded on `doc.link`, which `CanvasPdfRec` lacks) and a click to
-  `_tocGoTo(key)` in the editor (only on `dsLayoutCanvas`). Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  `_tocGoTo(key)` in the editor (only on `dsLayoutCanvas`). Spec runs split by LOCATION
+  (`_tocSpecLoc`, `_tocRunLabel`); placeholder lines are matched on wording
+  (`TOC_PLACEHOLDER_RE`, never "came from a template") and go to Preflight. The RAIL counts
+  printed pages too (`_dsPrintedStarts` / `_dsPrintedLabel` / `_dsIndexForPrinted`), and a
+  typed move number is a printed number. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages

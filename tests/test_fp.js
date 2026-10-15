@@ -1250,7 +1250,8 @@ const fs = require('fs');
       if (body.indexOf('delete desc.page.place') < 0) throw new Error('the template anchor survives a hand move and will fight it');
       if (body.indexOf('_dsSyncLayoutPageOrder(list)') < 0) throw new Error('layoutPages is not reordered, so an anchor can fail to resolve');
       // The rail's number field and the drop handlers must all call it.
-      if (A.indexOf('_dsMovePageTo(desc, v - 1)') < 0) throw new Error('the number field does not use the shared move');
+      // 18.75: the field takes a PRINTED page number and resolves it to a rail position first.
+      if (A.indexOf('_dsMovePageTo(desc, to)') < 0 || A.indexOf('const to = v ? _dsIndexForPrinted(v) : -1;') < 0) throw new Error('the number field does not use the shared move');
       // ONE drop path now (it was two near-identical copies, one per cell kind), so this
       // asserts it exists rather than counting copies.
       if (A.indexOf('_dsMovePageTo(src, idx)') < 0) throw new Error('the drop path does not use the shared move');
@@ -1759,7 +1760,8 @@ const fs = require('fs');
       // Same shift the drop applies, or the two disagree by one.
       if (f.indexOf('if (from >= 0 && from < gap) gap--') < 0) throw new Error('it does not account for lifting the page out of the list');
       // Out of range, or relative to itself, does nothing rather than something wrong.
-      if (f.indexOf('n > (_dsPages || []).length') < 0) throw new Error('an out-of-range page number is not rejected');
+      // 18.75: printed numbers; one past the last printed page resolves to no position.
+      if (f.indexOf('_dsIndexForPrinted(pn)') < 0 || f.indexOf('if (ti < 0) return false;') < 0) throw new Error('an out-of-range page number is not rejected');
       if (f.indexOf('target === desc') < 0) throw new Error('placing a page relative to itself is not rejected');
       // Offered for movable pages only, ahead of the branches that return early.
       // UPDATED 17.26: this used to read a 3600-CHARACTER window after the function
