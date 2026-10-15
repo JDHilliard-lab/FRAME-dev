@@ -345,6 +345,48 @@ const path = require('path');
         if (R.indexOf("txt.textContent = (i + 1)") >= 0 || R.indexOf('_dsPrintedLabel(i)') < 0) throw new Error('rail label still counts positions');
       });
 
+      // 18.77: section links, contents type, rename at the source.
+      _dsPages = _deckPageList();
+      __check('a section title links to its divider; a made-up section to its first line', () => {
+        const ts = gen().filter(e => e._toc === 'title');
+        const div = ts.find(e => e.text.split('\\n').join(' ') === 'The Art of the Lobby');
+        const intro = ts.find(e => e.text === 'Introduction');
+        const keys = _dsPages.map(_deckPageKey);
+        if (!div || div._tocKey !== 'layout:pgdiv' || div._tocPage !== keys.indexOf('layout:pgdiv') + 1) throw new Error('divider link ' + JSON.stringify(div && [div._tocKey, div._tocPage]));
+        const first = _tocModel(_dsPages).sections[0].entries[0];
+        if (!intro || intro._tocKey !== first.keys[0] || intro._tocPage !== first.num) throw new Error('Introduction link ' + JSON.stringify(intro && [intro._tocKey, intro._tocPage]));
+      });
+      __check('the contents type is set on the page, reaches every line, and resets to the template', () => {
+        const t0 = _cloneData(tocPg.toc.title);
+        _tocSetType(tocPg, 'title', 'size', 20);
+        _tocSetType(tocPg, 'entry', 'color', '#e00000');
+        _dsPages = _deckPageList();
+        if (gen().filter(e => e._toc === 'title').some(e => Math.abs(e.size * 540 - 20) > 0.01)) throw new Error('title size not applied');
+        if (gen().filter(e => e._toc === 'entry' || e._toc === 'num').some(e => e.color !== '#e00000')) throw new Error('line colour not applied');
+        const host = document.createElement('div'); _tocPanelInto(host, _dsPages.find(d => _deckPageKey(d) === 'layout:pgtoc'));
+        if (!host.querySelector('.toc-type-reset')) throw new Error('no reset offered after a change');
+        _tocResetType(tocPg);
+        _dsPages = _deckPageList();
+        if (JSON.stringify(tocPg.toc.title) !== JSON.stringify(t0) || tocPg.toc.base) throw new Error('reset did not restore the template type');
+      });
+      __check('a renamed line can rename the page itself, and then needs no override', () => {
+        setTocOverride(['layout:pgdiv'], 'label', 'Lobby Collection');
+        _dsPages = _deckPageList();
+        const host = document.createElement('div'); _tocPanelInto(host, _dsPages.find(d => _deckPageKey(d) === 'layout:pgtoc'));
+        if (!host.querySelector('.toc-src')) throw new Error('no Page button beside the renamed section');
+        if (!_tocRenameSource('layout:pgdiv')) throw new Error('rename refused');
+        const pg = editorialContent.layoutPages.find(p => p.id === 'pgdiv');
+        if (!pg.elements.some(e => e.text === 'LOBBY COLLECTION')) throw new Error('heading not rewritten (caps kept): ' + pg.elements.map(e => e.text).join(' / '));
+        if ((editorialContent.tocOverrides['layout:pgdiv'] || {}).label) throw new Error('override left behind');
+        _dsPages = _deckPageList();
+        if (texts('title').indexOf('Lobby Collection') < 0) throw new Error('contents does not read the new heading: ' + texts('title').join(' | '));
+        pg.elements.forEach(e => { if (e.text === 'LOBBY COLLECTION') e.text = 'THE ART OF THE LOBBY'; });
+        _dsPages = _deckPageList();
+      });
+      __check('a fixed page cannot be renamed at the source (its heading is not a layout box)', () => {
+        if (_tocCanRenameSource('fixed:understanding')) throw new Error('offered on a fixed page');
+      });
+
       // THE EXPORT prints the generated page, not the old flat list.
       pages = _deckPageList();
       const tocNum = pages.map(_deckPageKey).indexOf('layout:pgtoc') + 1;
@@ -364,7 +406,9 @@ const path = require('path');
       __check('every contents line links to its page in the PDF', () => {
         const ann = (shown.internal.getPageInfo(tocNum).pageContext.annotations || []).filter(a => a.type === 'link' && a.options && a.options.pageNumber);
         const want = gen().filter(e => e._toc === 'entry');
-        if (!want.length || ann.length !== want.length * 2) throw new Error(ann.length + ' links for ' + want.length + ' lines (number + label each)');
+        // 18.77: section titles link too.
+        const titles = gen().filter(e => e._toc === 'title');
+        if (!want.length || ann.length !== want.length * 2 + titles.length) throw new Error(ann.length + ' links for ' + want.length + ' lines (number + label each) and ' + titles.length + ' titles');
         const iU = pages.map(_deckPageKey).indexOf('fixed:understanding') + 1;
         if (!ann.some(a => a.options.pageNumber === iU)) throw new Error('no link to Project Understanding on page ' + iU);
         if (ann.some(a => a.options.pageNumber < 1 || a.options.pageNumber > shown.getNumberOfPages())) throw new Error('a link points past the document');

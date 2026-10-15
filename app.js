@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.76';
+const APP_VERSION = '18.77';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -20686,7 +20686,7 @@ function _tocModel(pages, span) {
     items.forEach((it, i) => {
         if (it.hide) { if (it.kind !== 'divider') add(leftOut, it); if (cur && it.kind !== 'art') cur._brk = true; return; }
         if (hasDiv) {
-            if (it.kind === 'divider') { open(it.rename || it.auto || 'Section', 'div', it.key); cur.ph = !!it.ph; cur.num = it.num; return; }
+            if (it.kind === 'divider') { open(it.rename || it.auto || 'Section', 'div', it.key); cur.ph = !!it.ph; cur.num = it.num; cur.rename = it.rename; cur.auto = it.auto; return; }
             if (!cur) open('Introduction', 'intro');
             add(cur, it); return;
         }
@@ -20764,7 +20764,11 @@ function _tocLayout(cfg, model) {
     plan.forEach(p => {
         const els = parts[p.pi], col = p.col, y0 = p.y;
         if (cfg.rule) els.push({ type: 'arrow', x1: col.rx1, y1: y0 - rg, x2: col.rx2, y2: y0 - rg, color: cfg.rule.color, weight: cfg.rule.weight, tip: 'none', startCap: 'none', z: 4, locked: true, _toc: 'rule' });
-        els.push(text('title', p.tl.join('\n'), col.tx, y0, col.tw + 0.01, cfg.title, tSize));
+        // A section title links too (18.77): to its divider, or for a section the contents
+        // made up (Introduction, a level, Closing) to the first page listed under it.
+        const e0 = p.sec.entries && p.sec.entries[0];
+        const sgo = p.sec.divKey ? { _tocKey: p.sec.divKey, _tocPage: p.sec.num || null } : { _tocKey: (e0 && e0.keys && e0.keys[0]) || null, _tocPage: (e0 && e0.num) || null };
+        els.push(Object.assign(text('title', p.tl.join('\n'), col.tx, y0, col.tw + 0.01, cfg.title, tSize), sgo));
         let ly = y0;
         p.es.forEach(x => {
             // `_tocKey` / `_tocPage` make the line a link: to the page in Deck Studio
@@ -20872,6 +20876,65 @@ function setTocOverride(keys, field, value) {
     if (typeof _dsRenderCenter === 'function') { try { _dsRenderCenter(); } catch (e) {} }
     if (typeof _dsRenderTools === 'function') { try { _dsRenderTools(); } catch (e) {} }
 }
+// RENAME AT THE SOURCE (18.77): a name typed for a contents line can be written into the
+// page's own heading, so the page and the contents say the same thing. Layout pages
+// only (their heading is the biggest text, the same one the contents reads); an
+// ALL-CAPS heading stays all caps. The override is then cleared, since the automatic
+// name now matches.
+function _tocHeadingEl(p) {
+    let best = null;
+    ((p && p.elements) || []).forEach(e => {
+        if (!e || e.type !== 'text' || e._toc || e.hidden || !((e.text || '') + '').trim()) return;
+        if (!best || (e.size || 0) > (best.size || 0)) best = e;
+    });
+    return best;
+}
+function _tocCanRenameSource(key) {
+    const d = _tocDescForKey(key);
+    return !!(d && d.kind === 'layout' && d.page && !d.page._tocPartOf && _tocHeadingEl(d.page));
+}
+function _tocRenameSource(key) {
+    const d = _tocDescForKey(key); if (!d || d.kind !== 'layout' || !d.page) return false;
+    const el = _tocHeadingEl(d.page); if (!el) return false;
+    const name = ((_tocOverrides()[key] || {}).label || '').trim(); if (!name) return false;
+    const old = ((el.text || '') + '').trim();
+    el.text = (old && old === old.toUpperCase() && /[A-Z]/.test(old)) ? name.toUpperCase() : name;
+    delete el.runs;
+    const ov = editorialContent.tocOverrides || {};
+    if (ov[key]) { delete ov[key].label; if (!Object.keys(ov[key]).length) delete ov[key]; }
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {}
+    return true;
+}
+// THE CONTENTS TYPE (18.77): section titles and lines, set on the contents page and
+// written into its `toc` style (the first page's; continued pages follow it). The
+// template's own style is kept in `toc.base` so Reset can put it back.
+function _tocFirstPage(p) {
+    if (!p || !p._tocPartOf) return p;
+    return (editorialContent.layoutPages || []).find(x => x && x.id === p._tocPartOf) || p;
+}
+let _tocTypeTimer = null;
+function _tocSetType(p, which, prop, value) {
+    p = _tocFirstPage(p); if (!p || !p.toc) return;
+    if (!p.toc.base) p.toc.base = { title: _cloneData(p.toc.title), entry: _cloneData(p.toc.entry) };
+    const st = p.toc[which] || (p.toc[which] = {});
+    if (prop === 'size') st.size = Math.max(6, Math.min(60, +value || 12)) / TOC_PAGE_H;
+    else if (prop === 'font') st.font = value;
+    else if (prop === 'color') st.color = value;
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsRefresh(); _dsRenderCenter(); } catch (e) {}
+    // The colour dot fires continuously while dragged: one undo entry for the burst.
+    clearTimeout(_tocTypeTimer);
+    _tocTypeTimer = setTimeout(() => { if (typeof pushHistory === 'function') pushHistory(); }, 400);
+}
+function _tocResetType(p) {
+    p = _tocFirstPage(p); if (!p || !p.toc || !p.toc.base) return;
+    p.toc.title = _cloneData(p.toc.base.title); p.toc.entry = _cloneData(p.toc.base.entry); delete p.toc.base;
+    if (typeof pushHistory === 'function') pushHistory();
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    try { _dsRefresh(); _dsRenderCenter(); _dsRenderTools(); } catch (e) {}
+}
 // Opens a contents line's page in Deck Studio, by KEY, and brings its rail cell into view.
 function _tocGoTo(key) {
     try { _dsPages = _deckPageList(); } catch (e) {}
@@ -20913,8 +20976,9 @@ function _tocPageInto(host, desc) {
 // The contents page's panel: the outline as it prints. Tick to keep a line, type to
 // rename it (commits on change, never per keystroke). Left-out lines stay listed so
 // they can be ticked back.
-function _tocPanelInto(host) {
+function _tocPanelInto(host, desc) {
     const model = _tocModel(_dsPages) || { sections: [], leftOut: [] };
+    const tp = _tocFirstPage(desc && desc.page);
     const box = document.createElement('div');
     box.className = 'toc-panel';
     box.style.cssText = 'padding:10px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-input); margin-bottom:8px;';
@@ -20923,6 +20987,26 @@ function _tocPanelInto(host) {
     head.textContent = 'Contents (automatic)';
     if (typeof _dsHelpDot === 'function') { try { head.appendChild(_dsHelpDot('Written from the deck every time it changes. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. Runs of spec pages print as one Artwork line, and a wall page stands for the spec pages after it. Untick a line to leave it out; type over a line to rename it.')); } catch (e) {} }
     box.appendChild(head);
+    if (tp && tp.toc && tp.toc.title && tp.toc.entry && typeof _dsTypeSection === 'function') {
+        const asPt = (st) => ({ font: _fontToken(st.font || 'serif', 'serif'), size: Math.round((st.size || 0.02) * TOC_PAGE_H * 10) / 10, color: st.color || '#222222' });
+        box.appendChild(_dsTypeSection('Titles', () => asPt(tp.toc.title), (k, v) => _tocSetType(tp, 'title', k, v), 'Section titles on the contents page'));
+        box.appendChild(_dsTypeSection('Lines', () => asPt(tp.toc.entry), (k, v) => _tocSetType(tp, 'entry', k, v), 'Page lines and their numbers on the contents page'));
+        if (tp.toc.base) {
+            const rs = document.createElement('button'); rs.type = 'button'; rs.className = 'action-btn btn-secondary toc-type-reset';
+            rs.textContent = 'Reset to template type'; rs.title = 'Go back to the type the Contents template uses';
+            rs.style.cssText = 'width:auto; height:22px; padding:0 8px; font-size:var(--fs-60); margin:0 0 4px;';
+            rs.onclick = () => _tocResetType(tp);
+            box.appendChild(rs);
+        }
+    }
+    // The "write it into the page" button beside a renamed line.
+    const srcBtn = (key) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'action-btn btn-secondary toc-src';
+        b.textContent = 'Page'; b.title = 'Also rename the page: write this name into its heading';
+        b.style.cssText = 'flex:0 0 auto; width:auto; height:22px; padding:0 6px; font-size:var(--fs-55);';
+        b.onclick = () => _tocRenameSource(key);
+        return b;
+    };
     const row = (e, on) => {
         const r = document.createElement('div');
         r.className = 'toc-row';
@@ -20936,7 +21020,9 @@ function _tocPanelInto(host) {
         inp.disabled = !on;
         inp.onchange = () => setTocOverride(e.keys, 'label', inp.value);
         const n = document.createElement('span'); n.textContent = (e.num || '') + ''; n.style.cssText = 'flex:0 0 auto; min-width:18px; text-align:right; font-size:var(--fs-65); color:var(--text-muted);';
-        r.appendChild(cb); r.appendChild(inp); r.appendChild(n);
+        r.appendChild(cb); r.appendChild(inp);
+        if (on && e.rename && _tocCanRenameSource(e.keys[0])) r.appendChild(srcBtn(e.keys[0]));
+        r.appendChild(n);
         if (e.ph && on) {
             r.classList.add('toc-ph');
             r.style.boxShadow = 'inset 3px 0 0 var(--warn)'; r.style.paddingLeft = '6px';
@@ -20951,8 +21037,19 @@ function _tocPanelInto(host) {
     model.sections.forEach(sec => {
         const st = document.createElement('div');
         st.style.cssText = 'font-size:var(--fs-65); font-weight:700; color:var(--text-main); margin:8px 0 2px;';
-        st.textContent = sec.title + (sec.tag === 'div' ? '' : '  (automatic section)');
-        if (sec.ph) { st.classList.add('toc-ph'); st.style.color = 'var(--warn)'; st.title = 'This section title is still the divider template\u2019s placeholder. Change the divider\u2019s heading.'; }
+        if (sec.tag === 'div' && sec.divKey) {
+            // A divider's section title can be renamed here like a line (18.77).
+            st.style.cssText = 'display:flex; align-items:center; gap:6px; margin:8px 0 2px;';
+            const inp = document.createElement('input'); inp.type = 'text'; inp.value = sec.rename || ''; inp.placeholder = sec.auto || sec.title;
+            inp.title = 'Section title. Type to rename it; clear it to go back to the divider\u2019s heading.';
+            inp.style.cssText = 'flex:1 1 60px; min-width:0; height:22px; font-size:var(--fs-65); font-weight:700; padding:0 6px; background:var(--bg-panel); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
+            inp.onchange = () => setTocOverride([sec.divKey], 'label', inp.value);
+            st.appendChild(inp);
+            if (sec.rename && _tocCanRenameSource(sec.divKey)) st.appendChild(srcBtn(sec.divKey));
+            if (sec.ph) { st.classList.add('toc-ph'); inp.style.borderColor = 'var(--warn)'; inp.title = 'This section title is still the divider template\u2019s placeholder. Change the divider\u2019s heading, or type a name here.'; }
+        } else {
+            st.textContent = sec.title + '  (automatic section)';
+        }
         box.appendChild(st);
         sec.entries.forEach(e => box.appendChild(row(e, true)));
     });
@@ -32122,7 +32219,7 @@ function _dsRenderTools() {
         _hiddenKeys.forEach(k => { const b = document.createElement('button'); b.textContent = '\u21ba Restore ' + (_FIXED_LABELS[k] || k); b.className = 'action-btn btn-secondary'; b.style.cssText = 'width:100%; height:26px; font-size:var(--fs-60); margin-bottom:4px;'; b.onclick = () => _dsRestoreFixed(k); box.appendChild(b); });
         t.appendChild(box);
     }
-    if (desc.kind === 'layout' && desc.type === 'toc' && _tocIsAutoPage(desc.page)) _tocPanelInto(t);
+    if (desc.kind === 'layout' && desc.type === 'toc' && _tocIsAutoPage(desc.page)) _tocPanelInto(t, desc);
     else if (desc.kind === 'layout' && desc.type === 'artindex') {
         const note = document.createElement('div');
         note.style.cssText = 'padding:10px; border:1px solid var(--border-color); border-radius:var(--r-6); background:var(--bg-input); margin-bottom:8px;';
@@ -42379,7 +42476,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

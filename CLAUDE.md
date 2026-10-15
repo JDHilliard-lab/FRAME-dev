@@ -651,7 +651,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   (`_tocPartOf`, id `<id>~2`, anchored after the first, not movable) created/removed by
   `_tocSyncPage`; a structural change makes `_deckPageList` rebuild ONCE
   (`_tocSyncAll._rebuilding`). `_tocLayout` returns `parts`; type never shrinks, nothing is
-  dropped; grid unless it takes more pages than flow. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  dropped; grid unless it takes more pages than flow. Section titles link (divider, or
+  first line). Contents TYPE lives in the FIRST page's `toc.title`/`toc.entry`
+  (`_tocSetType`, original kept in `toc.base` for Reset; continued pages follow it).
+  `_tocRenameSource` writes a line's rename into the page's biggest text (layout pages
+  only) and clears the override. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages
