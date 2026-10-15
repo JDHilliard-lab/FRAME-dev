@@ -24,6 +24,9 @@ const NL = String.fromCharCode(10);
 const results = [];
 const check = (label, fn) => results.push({ label, fn });
 const settle = () => new Promise((r) => setTimeout(r, 20));
+// 18.81: a saved file wraps the project ({type: 'frame-project-v7', imagePool, project}).
+// Read it the way the app does, so these checks keep testing the project inside.
+const readSaved = (text) => { const d = JSON.parse(text); return (d && d.type === 'frame-project-v7') ? d.project : d; };
 
 // ── a fake File System Access API that really stores ────────────────────
 function makeDisk() {
@@ -136,12 +139,12 @@ check('the first save asks where, and the SECOND writes the same file again', as
     if (disk.savePicks.length !== 1) throw new Error('the second save asked again instead of writing back to the bound file');
     if (Object.keys(disk.files).length !== 1) throw new Error('saving twice produced ' + Object.keys(disk.files).length + ' files');
     if (disk.files['caesars.json'] === first) throw new Error('the second save did not actually update the file');
-    if (JSON.parse(disk.files['caesars.json']).globalMeta.desc !== 'second pass') throw new Error('the file does not carry the edit');
+    if (readSaved(disk.files['caesars.json']).globalMeta.desc !== 'second pass') throw new Error('the file does not carry the edit');
     if (downloads.length) throw new Error('it downloaded a copy as well, which is the pile of files this replaces');
 });
 
 check('what was written is a real project file', async () => {
-    const data = JSON.parse(disk.files['caesars.json']);
+    const data = readSaved(disk.files['caesars.json']);
     if (data.type !== 'master-studio-v6') throw new Error('the written file is not a FRAME project');
     if (!data.globalMeta || !data.elevations || !data.dashProjectData) throw new Error('the written file is missing whole sections');
     if (!data.annotationStyle) throw new Error('the drafting standard did not travel with the file');
@@ -160,7 +163,7 @@ check('opening through a handle binds it, so Save goes straight back', async () 
     fx.markDirty();
     await fx.save();
     if (disk.savePicks.length) throw new Error('Save asked where to go instead of writing back to the opened file');
-    if (JSON.parse(disk.files['guestrooms.json']).type !== 'master-studio-v6') throw new Error('the opened file was not written back');
+    if (readSaved(disk.files['guestrooms.json']).type !== 'master-studio-v6') throw new Error('the opened file was not written back');
 });
 
 // ── the binding rules, which are the dangerous half ─────────────────────
@@ -211,7 +214,7 @@ check('Save As forces the picker and moves the binding to the new file', async (
     fx.markDirty();
     await fx.save();
     if (disk.savePicks.length !== 2) throw new Error('Save after a Save As asked again');
-    if (JSON.parse(disk.files['v2.json']).globalMeta.desc !== 'copy') throw new Error('Save went to the old file, not the one Save As chose');
+    if (readSaved(disk.files['v2.json']).globalMeta.desc !== 'copy') throw new Error('Save went to the old file, not the one Save As chose');
 });
 
 // ── cancelling and failing ──────────────────────────────────────────────

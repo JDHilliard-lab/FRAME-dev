@@ -677,6 +677,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   **EVERY PNG INTO THE PDF GOES THROUGH `_addPngImage`**, and a PNG source must never be
   added as 'JPEG' (jsPDF stores both RAW: 30 MB of a 35 MB file).
   `test_image_print_size` fails on any raw image in a real export.
+- **THE PROJECT FILE STORES EACH IMAGE ONCE (18.81).** `_projectFileText(payload)` writes
+  `{type: 'frame-project-v7', imagePool: [...], project: <payload>}`, every `data:` string
+  >= `POOL_MIN` replaced by `POOL_MARK + index`; `_projectFromFile` (first line of
+  `_readProjectText`) puts them back, and passes an older single-level file through. The
+  outer type must NOT start with 'master-studio' (older builds refuse instead of opening a
+  picture-less deck). Only the FILE is pooled: memory, autosave and undo are not. Real
+  project: 44.0 MB -> 28.2 MB, round trip byte-identical.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages
   go blank in the rail while selected.
@@ -971,10 +978,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   (TDZ).
   **NOT applied to floorplans (`lv.imageData`) or custom swatches (`swatchDataUrl`)**: line
   work, where JPEG eats hairlines.
-  Open: ~5.6 MB of duplication (artwork stored on both rows and frames, swatches, 
-  `floorplanImage` == `floorplanLevels[0].imageData`). Pooling breaks older builds silently;
-  the safe form is a new `data.type` an old build refuses (it tests
-  `startsWith('master-studio')`), so do it only after a stable promote.
+  The duplication in the project FILE is pooled since 18.81 (see the image-pool rule).
 - **A PROJECT IS SAVED BACK TO THE FILE IT WAS OPENED FROM** (`_projectFileHandle`,
   `openMasterProject`, `saveMasterProject({saveAs})`, `_fsaAvailable`). File System Access
   API (Chrome/Edge, secure context); otherwise the download path stays byte for byte as it
