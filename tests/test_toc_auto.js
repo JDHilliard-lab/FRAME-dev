@@ -164,21 +164,45 @@ const path = require('path');
       });
       editorialContent.layoutPages.pop();
 
-      __check('a deck too long for the page shrinks the type and nothing runs past the bottom', () => {
+      // 18.76: a long contents runs onto more pages at full size; nothing is dropped.
+      __check('a contents too long for one page runs onto more pages at full size, nothing dropped', () => {
         const many = { sections: [] };
-        for (let i = 0; i < 9; i++) many.sections.push({ title: 'Section ' + i, entries: Array.from({ length: 6 }, (x, j) => ({ label: 'A fairly long page title number ' + j, num: j + 1 })) });
+        for (let i = 0; i < 9; i++) many.sections.push({ title: 'Section ' + i, entries: Array.from({ length: 6 }, (x, j) => ({ label: 'A fairly long page title number ' + j, num: j + 1, keys: ['k' + i + j] })) });
         const r = _tocLayout(tocPg.toc, many);
-        if (!(r.scale < 1)) throw new Error('type did not shrink');
-        r.els.filter(e => e.type === 'text' && e._toc !== 'more').forEach(e => {
-          const bottom = e.y + e.text.split('\\n').length * e.size * TOC_LEADING;
-          if (bottom > tocPg.toc.bottom + 1e-6) throw new Error(e.text + ' runs to ' + bottom);
-        });
-        const way = { sections: [] };
-        for (let i = 0; i < 30; i++) way.sections.push({ title: 'S' + i, entries: Array.from({ length: 8 }, (x, j) => ({ label: 'Page ' + j, num: j })) });
-        const r2 = _tocLayout(tocPg.toc, way);
-        if (!r2.dropped || r2.els.filter(e => e._toc === 'more').length !== 1) throw new Error('overflow not reported: dropped ' + r2.dropped);
+        if (r.parts.length < 2) throw new Error('no second page: ' + r.parts.length);
+        const all = r.parts.reduce((a, x) => a.concat(x), []);
+        if (all.filter(e => e._toc === 'entry').length !== 54) throw new Error('lines dropped: ' + all.filter(e => e._toc === 'entry').length);
+        if (all.some(e => e.type === 'text' && e.size !== (e._toc === 'title' ? tocPg.toc.title.size : tocPg.toc.entry.size))) throw new Error('type was resized');
+        all.filter(e => e.type === 'text').forEach(e => { const bt = e.y + e.text.split('\\n').length * e.size * TOC_LEADING; if (bt > tocPg.toc.bottom + 1e-6) throw new Error(e.text + ' runs to ' + bt); });
       });
-
+      __check('a section taller than a column breaks between lines and carries its title on', () => {
+        const big = { sections: [{ title: 'Level 1', entries: Array.from({ length: 60 }, (x, j) => ({ label: 'Wall ' + j, num: j + 1, keys: ['w' + j] })) }] };
+        const r = _tocLayout(tocPg.toc, big);
+        const titles = r.parts.reduce((a, x) => a.concat(x), []).filter(e => e._toc === 'title').map(e => e.text);
+        if (titles[0] !== 'Level 1' || !titles.slice(1).length || titles.slice(1).some(t => t.split('\\n').join(' ') !== 'Level 1 (continued)')) throw new Error(titles.join(' | '));
+      });
+      // Integration: a real deck that overflows gets a real second Contents page.
+      const many = []; for (let i = 1; i <= 70; i++) many.push(row('ART.' + i, { location: 'Room ' + i }));
+      const rows0 = dashProjectData; dashProjectData = many;
+      _dsPages = _deckPageList();
+      const keysNow = _dsPages.map(_deckPageKey);
+      __check('a long deck adds a real continued Contents page right after the first', () => {
+        const parts = _tocPartsOf('pgtoc');
+        if (!parts.length) throw new Error('no continuation page');
+        if (keysNow[keysNow.indexOf('layout:pgtoc') + 1] !== 'layout:' + parts[0].id) throw new Error('not next to the first page: ' + keysNow.slice(0, 6).join(', '));
+        if (_dsPageMovable(_dsPages[keysNow.indexOf('layout:' + parts[0].id)])) throw new Error('the continued page can be moved away');
+        if (!parts[0].elements.some(e => !e._toc && e.text === 'CONTENTS')) throw new Error('continued page lost the heading');
+        const m = _tocModel(_dsPages);
+        m.sections.forEach(sec => sec.entries.forEach(e => { const n = keysNow.indexOf(e.keys[0]) + 1; if (e.num !== n) throw new Error(e.label + ' says ' + e.num + ', page is ' + n); }));
+        const lines = [tocPg].concat(parts).reduce((a, p) => a.concat(p.elements.filter(e => e._toc === 'entry')), []);
+        if (lines.length !== m.sections.reduce((a, x) => a + x.entries.length, 0)) throw new Error('lines missing across pages');
+      });
+      dashProjectData = rows0;
+      _dsPages = _deckPageList();
+      __check('it goes away when the contents fits on one page again', () => {
+        if (_tocPartsOf('pgtoc').length) throw new Error('continued page left behind');
+        if (_dsPages.some(d => d.page && d.page._tocPartOf)) throw new Error('still in the page list');
+      });
       // 18.72: the template APPLIED to a Custom page (what a designer actually did)
       // left the page Custom, so nothing filled it in.
       const custom = { id: 'pgcustom', type: 'custom', title: 'New Page', elements: _cloneData(mt.elements), afterKey: 'fixed:narrative' };
