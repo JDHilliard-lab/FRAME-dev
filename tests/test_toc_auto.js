@@ -278,6 +278,24 @@ const path = require('path');
         ['Lobby', 'Introduction', 'Understanding', String(pages.map(_deckPageKey).indexOf('fixed:understanding') + 1)].forEach(w => { if (!has(w)) throw new Error('"' + w + '" not printed on page ' + tocNum); });
         if (has('Section') || has('Title') || ops.indexOf('(#)') >= 0) throw new Error('template placeholder printed');
       });
+      __check('every contents line links to its page in the PDF', () => {
+        const ann = (shown.internal.getPageInfo(tocNum).pageContext.annotations || []).filter(a => a.type === 'link' && a.options && a.options.pageNumber);
+        const want = gen().filter(e => e._toc === 'entry');
+        if (!want.length || ann.length !== want.length * 2) throw new Error(ann.length + ' links for ' + want.length + ' lines (number + label each)');
+        const iU = pages.map(_deckPageKey).indexOf('fixed:understanding') + 1;
+        if (!ann.some(a => a.options.pageNumber === iU)) throw new Error('no link to Project Understanding on page ' + iU);
+        if (ann.some(a => a.options.pageNumber < 1 || a.options.pageNumber > shown.getNumberOfPages())) throw new Error('a link points past the document');
+      });
+      __check('clicking a contents line in Deck Studio opens that page', () => {
+        _dsPages = _deckPageList(); _dsIndex = 0;
+        const e = gen().find(x => x._toc === 'entry' && x._tocKey === 'fixed:understanding');
+        if (!e) throw new Error('line carries no target');
+        _tocGoTo(e._tocKey);
+        if (_deckPageKey(_dsPages[_dsIndex]) !== 'fixed:understanding') throw new Error('landed on ' + _deckPageKey(_dsPages[_dsIndex]));
+        const a = S.indexOf('function renderMoodboardCanvas()');
+        const body = S.slice(a, S.indexOf('_mbPinChrome(canvas);', a));
+        if (body.indexOf('_tocGoTo(t._tocKey)') < 0) throw new Error('editor lines are not wired to _tocGoTo');
+      });
     })();
     __check('one contents path: the old flat drawer and its list are gone', () => {
       ['function _drawTOCPage', 'function _deckTocList', 'function _tocLabelFor'].forEach(n => { if (S.indexOf(n) >= 0) throw new Error(n + ' is back'); });

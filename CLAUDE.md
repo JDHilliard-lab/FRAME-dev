@@ -641,7 +641,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   DEFAULT (`_tocDefaultIn`: a layout page with no heading starts OUT and records `show`;
   everything else records `hide`; `section` overrides `_tocSectionDefault`). The per-page
   tick is `_tocPageInto`, in `_dsRenderTools` after `_dsPageActionsInto`, shown only while
-  the deck has a contents page. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  the deck has a contents page. Lines carry `_tocKey` / `_tocPage`: a PDF link in
+  `_drawMoodboardPage` (guarded on `doc.link`, which `CanvasPdfRec` lacks) and a click to
+  `_tocGoTo(key)` in the editor (only on `dsLayoutCanvas`). Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages
