@@ -635,7 +635,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_tocPageNums` (same span as the export); the export re-syncs with its real
   `_span`. Overrides: `editorialContent.tocOverrides[pageKey] = {hide, label}`, one
   writer `setTocOverride`, panel `_tocPanelInto`. A `tpledit*` page (template editor) is
-  never converted. Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
+  never converted. A page of ANY type holding the template's slots under a CONTENTS heading
+  is converted (`_tocLooksLikeContents`), and `_dsApplyTemplateToCurrentPage` carries the
+  template's role (toc / breaker, and back off toc). Wrapping uses `_tocTextW` (a fixed char table, NOT a font measure,
   because the result is stored); checked against real Messina within ~2%, breaks at 94%.
 - **THE SELECTED RAIL CELL IS A CLONE OF THE CENTRE (`_dsSyncActiveThumbnailMirror`), AND
   `cloneNode` DROPS CANVAS PIXELS.** `_dsCopyCanvasPixels` copies them, or canvas-drawn pages

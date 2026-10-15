@@ -178,6 +178,39 @@ const path = require('path');
         if (!r2.dropped || r2.els.filter(e => e._toc === 'more').length !== 1) throw new Error('overflow not reported: dropped ' + r2.dropped);
       });
 
+      // 18.72: the template APPLIED to a Custom page (what a designer actually did)
+      // left the page Custom, so nothing filled it in.
+      const custom = { id: 'pgcustom', type: 'custom', title: 'New Page', elements: _cloneData(mt.elements), afterKey: 'fixed:narrative' };
+      editorialContent.layoutPages.push(custom);
+      editorialContent.annotations['layout:pgcustom'] = _cloneData(mt.annotations);
+      _deckPageList();
+      __check('EXACT BUG: a Custom page carrying the Contents template fills itself in', () => {
+        if (custom.type !== 'toc') throw new Error('page left as ' + custom.type);
+        if (custom.elements.some(e => !e._toc && /Section Title|Page Title/.test(e.text || ''))) throw new Error('placeholders left on the page');
+        if (!custom.elements.some(e => e._toc === 'entry')) throw new Error('no outline written');
+      });
+      editorialContent.layoutPages.pop();
+      const blank = { id: 'pgblank', type: 'custom', title: 'Blank', elements: [], afterKey: 'fixed:narrative' };
+      editorialContent.layoutPages.push(blank);
+      _dsPages = _deckPageList(); _dsIndex = _dsPages.findIndex(d => _deckPageKey(d) === 'layout:pgblank');
+      await _dsApplyTemplateToCurrentPage({ source: 'master', mi: IDML_MASTER_TEMPLATES.indexOf(mt), name: 'Contents (Full)' });
+      _deckPageList();
+      __check('applying the Contents template to a page makes it a contents page', () => {
+        if (blank.type !== 'toc') throw new Error('type ' + blank.type);
+        if (!blank.elements.some(e => e._toc === 'entry')) throw new Error('not filled in');
+      });
+      const div = IDML_MASTER_TEMPLATES.find(t => t.type === 'breaker');
+      _askYesNo = async () => true;
+      blank.elements = []; delete editorialContent.annotations['layout:pgblank'];
+      _dsPages = _deckPageList(); _dsIndex = _dsPages.findIndex(d => _deckPageKey(d) === 'layout:pgblank');
+      await _dsApplyTemplateToCurrentPage({ source: 'master', mi: IDML_MASTER_TEMPLATES.indexOf(div), name: 'Divider' });
+      __check('applying another template to a contents page makes it that page again', () => {
+        if (blank.type !== 'breaker') throw new Error('type ' + blank.type);
+        if (blank.toc) throw new Error('old contents grid kept');
+        if (blank.elements.some(e => e._toc)) throw new Error('outline left on the divider');
+      });
+      editorialContent.layoutPages.pop();
+
       // THE EXPORT prints the generated page, not the old flat list.
       pages = _deckPageList();
       const tocNum = pages.map(_deckPageKey).indexOf('layout:pgtoc') + 1;
