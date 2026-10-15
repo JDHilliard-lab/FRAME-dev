@@ -107,6 +107,29 @@ function buildManifest() {
             const collectionDir = path.join(vendorDir, collection);
             const files = fs.readdirSync(collectionDir, { withFileTypes: true })
                 .filter(d => d.isFile()).map(d => d.name);
+            // Optional catalogue.json beside the swatches: { "<code>": { color, family,
+            // profile, series } }, written by the importer from the vendor's catalogue.
+            // It feeds the frame browser's search and filters; a swatch without an
+            // entry still lists, just with fewer filters.
+            let meta = {};
+            const metaPath = path.join(collectionDir, 'catalogue.json');
+            if (fs.existsSync(metaPath)) {
+                try { meta = JSON.parse(fs.readFileSync(metaPath, 'utf8')) || {}; }
+                catch (e) { console.warn(`Ignoring unreadable ${metaPath}: ${e.message}`); }
+            }
+            // corners/<code>.<ext> and profiles/<code>.<ext>, matched on the code.
+            const sideFiles = (sub) => {
+                const dir = path.join(collectionDir, sub), byCode = {};
+                if (!fs.existsSync(dir)) return byCode;
+                for (const f of fs.readdirSync(dir)) {
+                    const e = path.extname(f).toLowerCase();
+                    if (!IMG_EXTS.has(e) && e !== '.gif') continue;
+                    const c = f.slice(0, -e.length);
+                    if (!byCode[c]) byCode[c] = ['library', vendor, collection, sub, f].join('/');
+                }
+                return byCode;
+            };
+            const corners = sideFiles('corners'), profiles = sideFiles('profiles');
 
             for (const filename of files) {
                 const ext = path.extname(filename).toLowerCase();
@@ -123,6 +146,10 @@ function buildManifest() {
                 if (parsed.faceWidth !== undefined) item.faceWidth = parsed.faceWidth;
                 if (parsed.depth !== undefined) item.depth = parsed.depth;
                 if (parsed.rabbet !== undefined) item.rabbet = parsed.rabbet;
+                if (corners[parsed.code]) item.corner = corners[parsed.code];
+                if (profiles[parsed.code]) item.profileImg = profiles[parsed.code];
+                const m = meta[parsed.code];
+                if (m) ['color', 'family', 'profile', 'series'].forEach(k => { if (m[k]) item[k] = String(m[k]); });
                 items.push(item);
             }
         }

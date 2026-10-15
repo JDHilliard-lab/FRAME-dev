@@ -67,7 +67,13 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-132-21_0.75_d1_r0.8125.jpg",
     "depth": 1,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-132-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-132-21.gif",
+    "color": "Walnut",
+    "family": "Walnut",
+    "profile": "Small Stem",
+    "series": "132"
   },
   {
     "vendor": "michaelangelo",
@@ -76,7 +82,13 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-132-24_0.75_d1_r0.8125.jpg",
     "depth": 1,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-132-24.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-132-24.gif",
+    "color": "Mahogany",
+    "family": "Mahogany",
+    "profile": "Small Stem",
+    "series": "132"
   },
   {
     "vendor": "michaelangelo",
@@ -85,7 +97,13 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-132-29_0.75_d1_r0.8125.jpg",
     "depth": 1,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-132-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-132-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Small Stem",
+    "series": "132"
   },
   {
     "vendor": "michaelangelo",
@@ -94,7 +112,13 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-132-31_0.75_d1_r0.8125.jpg",
     "depth": 1,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-132-31.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-132-31.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Small Stem",
+    "series": "132"
   },
   {
     "vendor": "michaelangelo",
@@ -103,7 +127,13 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-132-33_0.75_d1_r0.8125.jpg",
     "depth": 1,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-132-33.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-132-33.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Small Stem",
+    "series": "132"
   },
   {
     "vendor": "michaelangelo",
@@ -112,7 +142,13 @@
     "width": 1.75,
     "path": "library/michaelangelo/avant-garde/MICH-133-21_1.75_d1_r0.3125.jpg",
     "depth": 1,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-133-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-133-21.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Soft Curved Scoop",
+    "series": "133"
   },
   {
     "vendor": "michaelangelo",
@@ -121,7 +157,13 @@
     "width": 1.75,
     "path": "library/michaelangelo/avant-garde/MICH-133-22_1.75_d1_r0.3125.jpg",
     "depth": 1,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-133-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-133-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Soft Curved Scoop",
+    "series": "133"
   },
   {
     "vendor": "michaelangelo",
@@ -130,7 +172,13 @@
     "width": 1.75,
     "path": "library/michaelangelo/avant-garde/MICH-133-29_1.75_d1_r0.3125.jpg",
     "depth": 1,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-133-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-133-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Soft Curved Scoop",
+    "series": "133"
   },
   {
     "vendor": "michaelangelo",
@@ -139,7 +187,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-10_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-10.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-10.gif",
+    "color": "Satin Gold",
+    "family": "Gold",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -148,7 +202,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-11_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-11.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-11.gif",
+    "color": "Bronze",
+    "family": "Bronze",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -157,7 +217,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-12_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-12.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-12.gif",
+    "color": "Natural",
+    "family": "Natural",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -166,7 +232,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-13_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-13.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-13.gif",
+    "color": "Satin Pewter",
+    "family": "Silver",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -175,7 +247,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-15_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-15.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-15.gif",
+    "color": "Satin Bronze",
+    "family": "Bronze",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -184,7 +262,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-18_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-18.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-18.gif",
+    "color": "Satin Charcoal",
+    "family": "Grey & Charcoal",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -193,7 +277,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-21_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-21.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -202,7 +292,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-22_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -211,7 +307,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-233_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-233.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-233.gif",
+    "color": "Silver",
+    "family": "Silver",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -220,7 +322,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-24_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-24.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-24.gif",
+    "color": "Mahogany",
+    "family": "Mahogany",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -229,7 +337,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-28_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-28.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-28.gif",
+    "color": "Dark Grey",
+    "family": "Grey & Charcoal",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -238,7 +352,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-29_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -247,7 +367,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-33_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-33.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-33.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -256,7 +382,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-38_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-38.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-38.gif",
+    "color": "Burnished Bronze",
+    "family": "Bronze",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -265,7 +397,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-42_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-42.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-42.gif",
+    "color": "Bleached Natural Woodgrain",
+    "family": "Ivory-White",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -274,7 +412,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-43_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-43.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-43.gif",
+    "color": "Stainless Steel",
+    "family": "Stainless Steel",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -283,7 +427,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-51_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-51.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-51.gif",
+    "color": "Dark Espresso",
+    "family": "Espresso",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -292,7 +442,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-52_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-52.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-52.gif",
+    "color": "Blonde Maple",
+    "family": "Natural",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -301,7 +457,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-53_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-53.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-53.gif",
+    "color": "Silver with Black Lines",
+    "family": "Silver",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -310,7 +472,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-58_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-58.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-58.gif",
+    "color": "Taupe",
+    "family": "Others",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -319,7 +487,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-61_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-61.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-61.gif",
+    "color": "Dark Walnut Woodgrain",
+    "family": "Walnut",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -328,7 +502,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-73_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-73.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-73.gif",
+    "color": "Silver",
+    "family": "Silver",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -337,7 +517,13 @@
     "width": 1.625,
     "path": "library/michaelangelo/avant-garde/MICH-141-93_1.625_d1.375_r0.875.jpg",
     "depth": 1.375,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-141-93.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-141-93.gif",
+    "color": "Satin Silver",
+    "family": "Silver",
+    "profile": "Large Cube",
+    "series": "141"
   },
   {
     "vendor": "michaelangelo",
@@ -346,7 +532,13 @@
     "width": 2,
     "path": "library/michaelangelo/avant-garde/MICH-142-29_2_d1.375_r0.75.jpg",
     "depth": 1.375,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-142-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-142-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Solid Chunky Bevel",
+    "series": "142"
   },
   {
     "vendor": "michaelangelo",
@@ -355,7 +547,13 @@
     "width": 2.75,
     "path": "library/michaelangelo/avant-garde/MICH-143-29_2.75_d1.375_r0.3125.jpg",
     "depth": 1.375,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-143-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-143-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Large Soft Curved Scoop",
+    "series": "143"
   },
   {
     "vendor": "michaelangelo",
@@ -364,7 +562,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-02_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-02.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-02.gif",
+    "color": "White Lacquer",
+    "family": "Ivory-White",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -373,7 +577,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-09_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-09.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-09.gif",
+    "color": "Black Lacquer",
+    "family": "Black",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -382,7 +592,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-10_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-10.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-10.gif",
+    "color": "Satin Gold",
+    "family": "Gold",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -391,7 +607,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-11_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-11.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-11.gif",
+    "color": "Bronze",
+    "family": "Bronze",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -400,7 +622,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-12_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-12.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-12.gif",
+    "color": "Natural",
+    "family": "Natural",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -409,7 +637,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-18_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-18.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-18.gif",
+    "color": "Satin Charcoal",
+    "family": "Grey & Charcoal",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -418,7 +652,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-20_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-20.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-20.gif",
+    "color": "Gold",
+    "family": "Gold",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -427,7 +667,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-21_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-21.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -436,7 +682,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-22_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -445,7 +697,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-233_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-233.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-233.gif",
+    "color": "Warm Silver",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -454,7 +712,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-23_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-23.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-23.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -463,7 +727,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-24_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-24.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-24.gif",
+    "color": "Mahogany",
+    "family": "Mahogany",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -472,7 +742,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-28_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-28.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-28.gif",
+    "color": "Dark Grey",
+    "family": "Grey & Charcoal",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -481,7 +757,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-293_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-293.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-293.gif",
+    "color": "Black & Silver",
+    "family": "Black & Silver",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -490,7 +772,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-29_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -499,7 +787,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-30_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-30.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-30.gif",
+    "color": "Bright Gold",
+    "family": "Gold",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -508,7 +802,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-33_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-33.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-33.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -517,7 +817,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-43_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-43.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-43.gif",
+    "color": "Stainless Steel",
+    "family": "Stainless Steel",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -526,7 +832,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-72_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-72.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-72.gif",
+    "color": "Off-White Woodgrain",
+    "family": "Ivory-White",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -535,7 +847,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-73_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-73.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-73.gif",
+    "color": "Silver",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -544,7 +862,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-79_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-79.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-79.gif",
+    "color": "Black Woodgrain",
+    "family": "Black",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -553,7 +877,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-145-93_1.25_d0.5625_r0.3125.jpg",
     "depth": 0.5625,
-    "rabbet": 0.3125
+    "rabbet": 0.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-145-93.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-145-93.gif",
+    "color": "Satin Silver",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "145"
   },
   {
     "vendor": "michaelangelo",
@@ -562,7 +892,13 @@
     "width": 3.875,
     "path": "library/michaelangelo/avant-garde/MICH-155-22_3.875_d1.125_r0.8125.jpg",
     "depth": 1.125,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-155-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-155-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Very Wide Flat Surface",
+    "series": "155"
   },
   {
     "vendor": "michaelangelo",
@@ -571,7 +907,13 @@
     "width": 3.875,
     "path": "library/michaelangelo/avant-garde/MICH-155-29_3.875_d1.125_r0.8125.jpg",
     "depth": 1.125,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-155-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-155-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Very Wide Flat Surface",
+    "series": "155"
   },
   {
     "vendor": "michaelangelo",
@@ -580,7 +922,13 @@
     "width": 3.875,
     "path": "library/michaelangelo/avant-garde/MICH-155-33_3.875_d1.125_r0.8125.jpg",
     "depth": 1.125,
-    "rabbet": 0.8125
+    "rabbet": 0.8125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-155-33.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-155-33.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Very Wide Flat Surface",
+    "series": "155"
   },
   {
     "vendor": "michaelangelo",
@@ -589,7 +937,13 @@
     "width": 2.125,
     "path": "library/michaelangelo/avant-garde/MICH-157-21_2.125_d2.125_r1.25.jpg",
     "depth": 2.125,
-    "rabbet": 1.25
+    "rabbet": 1.25,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-157-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-157-21.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Very Large Cube",
+    "series": "157"
   },
   {
     "vendor": "michaelangelo",
@@ -598,7 +952,13 @@
     "width": 2.125,
     "path": "library/michaelangelo/avant-garde/MICH-157-29_2.125_d2.125_r1.25.jpg",
     "depth": 2.125,
-    "rabbet": 1.25
+    "rabbet": 1.25,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-157-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-157-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Very Large Cube",
+    "series": "157"
   },
   {
     "vendor": "michaelangelo",
@@ -607,7 +967,13 @@
     "width": 2.625,
     "path": "library/michaelangelo/avant-garde/MICH-162-21_2.625_d0.875_r0.5.jpg",
     "depth": 0.875,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-162-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-162-21.gif",
+    "color": "Woodgrain Espresso",
+    "family": "Espresso",
+    "profile": "Medium Soft Slope",
+    "series": "162"
   },
   {
     "vendor": "michaelangelo",
@@ -616,7 +982,13 @@
     "width": 2.625,
     "path": "library/michaelangelo/avant-garde/MICH-162-29_2.625_d0.875_r0.5.jpg",
     "depth": 0.875,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-162-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-162-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Medium Soft Slope",
+    "series": "162"
   },
   {
     "vendor": "michaelangelo",
@@ -625,7 +997,13 @@
     "width": 1.75,
     "path": "library/michaelangelo/avant-garde/MICH-189-23_1.75_d0.875_r0.375.jpg",
     "depth": 0.875,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-189-23.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-189-23.gif",
+    "color": "Silver & Espresso",
+    "family": "Espresso & Silver",
+    "profile": "Medium Transitional Cove with Espresso Back",
+    "series": "189"
   },
   {
     "vendor": "michaelangelo",
@@ -634,7 +1012,13 @@
     "width": 2.75,
     "path": "library/michaelangelo/avant-garde/MICH-190-23_2.75_d1.125_r0.375.jpg",
     "depth": 1.125,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-190-23.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-190-23.gif",
+    "color": "Silver & Espresso",
+    "family": "Espresso & Silver",
+    "profile": "Large Transitional Cove with Espresso Back",
+    "series": "190"
   },
   {
     "vendor": "michaelangelo",
@@ -643,7 +1027,13 @@
     "width": 1.5,
     "path": "library/michaelangelo/avant-garde/MICH-197-29_1.5_d1.5625_r0.375.jpg",
     "depth": 1.5625,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-197-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-197-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Medium Steep Bevel",
+    "series": "197"
   },
   {
     "vendor": "michaelangelo",
@@ -652,7 +1042,13 @@
     "width": 1.5,
     "path": "library/michaelangelo/avant-garde/MICH-197-31_1.5_d1.5625_r0.375.jpg",
     "depth": 1.5625,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-197-31.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-197-31.gif",
+    "color": "Truffle",
+    "family": "Espresso",
+    "profile": "Medium Steep Bevel",
+    "series": "197"
   },
   {
     "vendor": "michaelangelo",
@@ -661,7 +1057,13 @@
     "width": 2,
     "path": "library/michaelangelo/avant-garde/MICH-198-29_2_d2.125_r0.75.jpg",
     "depth": 2.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-198-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-198-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Large Steep Bevel",
+    "series": "198"
   },
   {
     "vendor": "michaelangelo",
@@ -670,7 +1072,13 @@
     "width": 2,
     "path": "library/michaelangelo/avant-garde/MICH-198-33_2_d2.125_r0.75.jpg",
     "depth": 2.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-198-33.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-198-33.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Large Steep Bevel",
+    "series": "198"
   },
   {
     "vendor": "michaelangelo",
@@ -679,7 +1087,13 @@
     "width": 1.5,
     "path": "library/michaelangelo/avant-garde/MICH-200-22_1.5_d0.75_r0.5.jpg",
     "depth": 0.75,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-200-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-200-22.gif",
+    "color": "White with Black Scratch",
+    "family": "Ivory-White",
+    "profile": "Medium Flat",
+    "series": "200"
   },
   {
     "vendor": "michaelangelo",
@@ -688,7 +1102,13 @@
     "width": 2.25,
     "path": "library/michaelangelo/avant-garde/MICH-201-28_2.25_d0.875_r0.625.jpg",
     "depth": 0.875,
-    "rabbet": 0.625
+    "rabbet": 0.625,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-201-28.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-201-28.gif",
+    "color": "Grey with Scratched Pattern on outer edge",
+    "family": "Grey & Charcoal",
+    "profile": "Medium Flat",
+    "series": "201"
   },
   {
     "vendor": "michaelangelo",
@@ -697,7 +1117,13 @@
     "width": 0.6875,
     "path": "library/michaelangelo/avant-garde/MICH-204-20_0.6875_d0.6875_r0.5.jpg",
     "depth": 0.6875,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-204-20.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-204-20.gif",
+    "color": "Gold Leaf with Thin Red Lines",
+    "family": "Gold",
+    "profile": "Very Small Stem",
+    "series": "204"
   },
   {
     "vendor": "michaelangelo",
@@ -706,7 +1132,13 @@
     "width": 0.6875,
     "path": "library/michaelangelo/avant-garde/MICH-204-23_0.6875_d0.6875_r0.5.jpg",
     "depth": 0.6875,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-204-23.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-204-23.gif",
+    "color": "Silver Leaf with Thin Red Lines",
+    "family": "Silver",
+    "profile": "Very Small Stem",
+    "series": "204"
   },
   {
     "vendor": "michaelangelo",
@@ -715,7 +1147,13 @@
     "width": 2.375,
     "path": "library/michaelangelo/avant-garde/MICH-225-151_2.375_d0.75_r0.4375.jpg",
     "depth": 0.75,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-225-151.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-225-151.gif",
+    "color": "Dark espresso",
+    "family": "Espresso",
+    "profile": "Large Flat",
+    "series": "225"
   },
   {
     "vendor": "michaelangelo",
@@ -724,7 +1162,13 @@
     "width": 2.375,
     "path": "library/michaelangelo/avant-garde/MICH-225-22_2.375_d0.75_r0.4375.jpg",
     "depth": 0.75,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-225-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-225-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Large Flat",
+    "series": "225"
   },
   {
     "vendor": "michaelangelo",
@@ -733,7 +1177,13 @@
     "width": 2.375,
     "path": "library/michaelangelo/avant-garde/MICH-225-29_2.375_d0.75_r0.4375.jpg",
     "depth": 0.75,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-225-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-225-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Large Flat",
+    "series": "225"
   },
   {
     "vendor": "michaelangelo",
@@ -742,7 +1192,13 @@
     "width": 2.375,
     "path": "library/michaelangelo/avant-garde/MICH-225-52_2.375_d0.75_r0.4375.jpg",
     "depth": 0.75,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-225-52.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-225-52.gif",
+    "color": "Blonde Maple",
+    "family": "Natural",
+    "profile": "Large Flat",
+    "series": "225"
   },
   {
     "vendor": "michaelangelo",
@@ -751,7 +1207,13 @@
     "width": 2.375,
     "path": "library/michaelangelo/avant-garde/MICH-225-53_2.375_d0.75_r0.4375.jpg",
     "depth": 0.75,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-225-53.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-225-53.gif",
+    "color": "Silver with Black Lines",
+    "family": "Silver",
+    "profile": "Large Flat",
+    "series": "225"
   },
   {
     "vendor": "michaelangelo",
@@ -760,7 +1222,13 @@
     "width": 2.375,
     "path": "library/michaelangelo/avant-garde/MICH-225-58_2.375_d0.75_r0.4375.jpg",
     "depth": 0.75,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-225-58.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-225-58.gif",
+    "color": "Taupe",
+    "family": "Others",
+    "profile": "Large Flat",
+    "series": "225"
   },
   {
     "vendor": "michaelangelo",
@@ -769,7 +1237,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-241-11_1.25_d2.125_r1.875.jpg",
     "depth": 2.125,
-    "rabbet": 1.875
+    "rabbet": 1.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-241-11.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-241-11.gif",
+    "color": "Bronze",
+    "family": "Bronze",
+    "profile": "Large Stem Shadow Box",
+    "series": "241"
   },
   {
     "vendor": "michaelangelo",
@@ -778,7 +1252,13 @@
     "width": 2.625,
     "path": "library/michaelangelo/avant-garde/MICH-245-22_2.625_d0.875_r0.5.jpg",
     "depth": 0.875,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-245-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-245-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Large Slight Convex Contemporary",
+    "series": "245"
   },
   {
     "vendor": "michaelangelo",
@@ -787,7 +1267,13 @@
     "width": 2.625,
     "path": "library/michaelangelo/avant-garde/MICH-245-29_2.625_d0.875_r0.5.jpg",
     "depth": 0.875,
-    "rabbet": 0.5
+    "rabbet": 0.5,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-245-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-245-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Large Slight Convex Contemporary",
+    "series": "245"
   },
   {
     "vendor": "michaelangelo",
@@ -796,7 +1282,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-10_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-10.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-10.gif",
+    "color": "Satin Gold",
+    "family": "Gold",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -805,7 +1297,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-11_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-11.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-11.gif",
+    "color": "Bronze",
+    "family": "Bronze",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -814,7 +1312,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-13_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-13.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-13.gif",
+    "color": "Satin Pewter",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -823,7 +1327,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-15_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-15.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-15.gif",
+    "color": "Satin Bronze",
+    "family": "Bronze",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -832,7 +1342,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-18_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-18.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-18.gif",
+    "color": "Satin Charcoal",
+    "family": "Grey & Charcoal",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -841,7 +1357,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-21_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-21.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -850,7 +1372,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-22_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -859,7 +1387,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-23_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-23.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-23.gif",
+    "color": "Silver",
+    "family": "Silver",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -868,7 +1402,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-28_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-28.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-28.gif",
+    "color": "Dark Grey",
+    "family": "Grey & Charcoal",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -877,7 +1417,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-246-29_0.875_d0.5_r0.375.jpg",
     "depth": 0.5,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-246-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-246-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Small Flat",
+    "series": "246"
   },
   {
     "vendor": "michaelangelo",
@@ -886,7 +1432,13 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-247-79_0.75_d0.75_r0.625.jpg",
     "depth": 0.75,
-    "rabbet": 0.625
+    "rabbet": 0.625,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-247-79.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-247-79.gif",
+    "color": "Black Woodgrain",
+    "family": "Black",
+    "profile": "Small Flat",
+    "series": "247"
   },
   {
     "vendor": "michaelangelo",
@@ -895,14 +1447,26 @@
     "width": 0.75,
     "path": "library/michaelangelo/avant-garde/MICH-247-81_0.75_d0.75_r0.625.jpg",
     "depth": 0.75,
-    "rabbet": 0.625
+    "rabbet": 0.625,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-247-81.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-247-81.gif",
+    "color": "Dark Walnut Woodgrain",
+    "family": "Walnut",
+    "profile": "Small Flat",
+    "series": "247"
   },
   {
     "vendor": "michaelangelo",
     "collection": "avant-garde",
     "code": "MICH-247-82",
     "width": 0.75,
-    "path": "library/michaelangelo/avant-garde/MICH-247-82_0.75.jpg"
+    "path": "library/michaelangelo/avant-garde/MICH-247-82_0.75.jpg",
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-247-82.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-247-82.gif",
+    "color": "Natural Woodgrain",
+    "family": "Natural",
+    "profile": "Small Flat",
+    "series": "247"
   },
   {
     "vendor": "michaelangelo",
@@ -911,7 +1475,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-32-22_0.875_d1.25_r1.png",
     "depth": 1.25,
-    "rabbet": 1
+    "rabbet": 1,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-32-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-32-22.gif",
+    "color": "Grooved Pattern White",
+    "family": "Ivory-White",
+    "profile": "Small Stem",
+    "series": "32"
   },
   {
     "vendor": "michaelangelo",
@@ -920,7 +1490,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-10_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-10.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-10.gif",
+    "color": "Satin Gold",
+    "family": "Gold",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -929,7 +1505,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-11_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-11.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-11.gif",
+    "color": "Bronze",
+    "family": "Bronze",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -938,7 +1520,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-12_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-12.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-12.gif",
+    "color": "Natural",
+    "family": "Natural",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -947,7 +1535,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-13_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-13.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-13.gif",
+    "color": "Satin Pewter",
+    "family": "Silver",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -956,7 +1550,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-15_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-15.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-15.gif",
+    "color": "Satin Bronze",
+    "family": "Bronze",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -965,7 +1565,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-18_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-18.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-18.gif",
+    "color": "Satin Charcoal",
+    "family": "Grey & Charcoal",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -974,7 +1580,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-21_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-21.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-21.gif",
+    "color": "Espresso",
+    "family": "Espresso",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -983,7 +1595,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-22_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-22.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-22.gif",
+    "color": "White",
+    "family": "Ivory-White",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -992,7 +1610,12 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-233_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-233.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-233.gif",
+    "color": "Silver",
+    "family": "Silver",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1001,7 +1624,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-29_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1010,7 +1639,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-33_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-33.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-33.gif",
+    "color": "Pattern Silver",
+    "family": "Silver",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1019,7 +1654,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-35_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-35.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-35.gif",
+    "color": "Grey Woodgrain",
+    "family": "Grey & Charcoal",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1028,7 +1669,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-42_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-42.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-42.gif",
+    "color": "Bleached Natural Woodgrain",
+    "family": "Ivory-White",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1037,7 +1684,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-43_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-43.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-43.gif",
+    "color": "Stainless Steel",
+    "family": "Stainless Steel",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1046,7 +1699,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-50_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-50.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-50.gif",
+    "color": "Shiny Gold",
+    "family": "Gold",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1055,7 +1714,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-51_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-51.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-51.gif",
+    "color": "Dark Espresso",
+    "family": "Espresso",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1064,7 +1729,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-52_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-52.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-52.gif",
+    "color": "Blonde Maple",
+    "family": "Natural",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1073,7 +1744,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-53_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-53.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-53.gif",
+    "color": "Silver with Black Lines",
+    "family": "Silver",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1082,7 +1759,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-58_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-58.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-58.gif",
+    "color": "Taupe",
+    "family": "Others",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1091,7 +1774,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-41-73_1.25_d1.125_r0.75.jpg",
     "depth": 1.125,
-    "rabbet": 0.75
+    "rabbet": 0.75,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-41-73.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-41-73.gif",
+    "color": "True Silver",
+    "family": "Silver",
+    "profile": "Medium Cube",
+    "series": "41"
   },
   {
     "vendor": "michaelangelo",
@@ -1100,7 +1789,13 @@
     "width": 1.125,
     "path": "library/michaelangelo/avant-garde/MICH-43-29_1.125_d1.6875_r1.3125.jpg",
     "depth": 1.6875,
-    "rabbet": 1.3125
+    "rabbet": 1.3125,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-43-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-43-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Large Bevel Top",
+    "series": "43"
   },
   {
     "vendor": "michaelangelo",
@@ -1109,7 +1804,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-432-20_0.875_d1.25_r1.jpg",
     "depth": 1.25,
-    "rabbet": 1
+    "rabbet": 1,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-432-20.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-432-20.gif",
+    "color": "Gold",
+    "family": "Gold",
+    "profile": "Small Stem",
+    "series": "432"
   },
   {
     "vendor": "michaelangelo",
@@ -1118,7 +1819,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-432-29_0.875_d1.25_r1.jpg",
     "depth": 1.25,
-    "rabbet": 1
+    "rabbet": 1,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-432-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-432-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Small Stem",
+    "series": "432"
   },
   {
     "vendor": "michaelangelo",
@@ -1127,7 +1834,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-432-52_0.875_d1.25_r1.jpg",
     "depth": 1.25,
-    "rabbet": 1
+    "rabbet": 1,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-432-52.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-432-52.gif",
+    "color": "Blonde Maple",
+    "family": "Natural",
+    "profile": "Small Stem",
+    "series": "432"
   },
   {
     "vendor": "michaelangelo",
@@ -1136,7 +1849,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-432-55_0.875_d1.25_r1.jpg",
     "depth": 1.25,
-    "rabbet": 1
+    "rabbet": 1,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-432-55.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-432-55.gif",
+    "color": "Metallic Bronze with Silver Trim",
+    "family": "Bronze",
+    "profile": "Small Stem",
+    "series": "432"
   },
   {
     "vendor": "michaelangelo",
@@ -1145,7 +1864,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-436-112_0.875_d1.125_r0.875.jpg",
     "depth": 1.125,
-    "rabbet": 0.875
+    "rabbet": 0.875,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-436-112.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-436-112.gif",
+    "color": "Light Brown & White Driftwood",
+    "family": "Ivory-White",
+    "profile": "Small Stern",
+    "series": "436"
   },
   {
     "vendor": "michaelangelo",
@@ -1154,7 +1879,13 @@
     "width": 0.875,
     "path": "library/michaelangelo/avant-garde/MICH-45-29_0.875_d0.5625_r0.4375.jpg",
     "depth": 0.5625,
-    "rabbet": 0.4375
+    "rabbet": 0.4375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-45-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-45-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Small Soft Curved Top",
+    "series": "45"
   },
   {
     "vendor": "michaelangelo",
@@ -1163,7 +1894,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-516-152_1.25_d0.625_r0.375.jpg",
     "depth": 0.625,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-516-152.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-516-152.gif",
+    "color": "Pale Walnut",
+    "family": "Walnut",
+    "profile": "Small Flat",
+    "series": "516"
   },
   {
     "vendor": "michaelangelo",
@@ -1172,7 +1909,13 @@
     "width": 1,
     "path": "library/michaelangelo/avant-garde/MICH-575-52_1_d0.75_r0.375.jpg",
     "depth": 0.75,
-    "rabbet": 0.375
+    "rabbet": 0.375,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-575-52.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-575-52.gif",
+    "color": "Light Walnut Woodgrain",
+    "family": "Walnut",
+    "profile": "Small Flat",
+    "series": "575"
   },
   {
     "vendor": "michaelangelo",
@@ -1181,7 +1924,13 @@
     "width": 1.25,
     "path": "library/michaelangelo/avant-garde/MICH-65-29_1.25_d0.875_r0.5625.jpg",
     "depth": 0.875,
-    "rabbet": 0.5625
+    "rabbet": 0.5625,
+    "corner": "library/michaelangelo/avant-garde/corners/MICH-65-29.jpg",
+    "profileImg": "library/michaelangelo/avant-garde/profiles/MICH-65-29.gif",
+    "color": "Black",
+    "family": "Black",
+    "profile": "Small Flat with Front Notch",
+    "series": "65"
   },
   {
     "vendor": "michaelangelo",

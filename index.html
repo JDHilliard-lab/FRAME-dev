@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=18.83">
+    <link rel="stylesheet" href="style.css?v=18.84">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -337,16 +337,18 @@
                         <!-- Legacy container kept (empty) so any code paths that flip its display don't error -->
                         <div id="colorControls" style="display:none;"></div>
 
-                        <!-- ROW 2: Vendor / Collection / Swatch selectors. Visible only in
+                        <!-- ROW 2: the Frame box opens the frame browser (openFrameBrowser, 18.84). The
+                             Vendor / Collection selects stay in the DOM, hidden: the apply
+                             path (loadDashFromCustomLibrary) still reads them. Visible only in
                              LIBRARY mode (dimmed in COLOR mode via .fstyle-lib-side). The
                              upload-single-image button + redundant thumb preview were
                              removed from this row in the v2 reshuffle. -->
                         <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px; width: 100%;">
-                            <select id="libVendor" class="no-arrow" style="flex: 1; padding: 2px; font-size: var(--fs-65); min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
-                            <select id="libCollection" class="no-arrow" style="flex: 1; padding: 2px; font-size: var(--fs-65); min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
+                            <select id="libVendor" class="no-arrow" style="display:none; flex: 1; padding: 2px; font-size: var(--fs-65); min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
+                            <select id="libCollection" class="no-arrow" style="display:none; flex: 1; padding: 2px; font-size: var(--fs-65); min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
 
-                            <div id="customSwatchContainer" style="flex: 1.2; position: relative; min-width: 0; height: 26px;">
-                                <div id="swatchSelectedDisplay" style="border: 1px solid var(--border-color); border-radius: var(--r-4); font-size: var(--fs-65); height: 26px; padding: 0 4px; background: var(--bg-input); cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong);" onclick="toggleDashSwatchDropdown()">Frame</div>
+                            <div id="customSwatchContainer" style="flex: 1; position: relative; min-width: 0; height: 26px;">
+                                <div id="swatchSelectedDisplay" style="border: 1px solid var(--border-color); border-radius: var(--r-4); font-size: var(--fs-65); height: 26px; padding: 0 4px; background: var(--bg-input); cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong);" onclick="openFrameBrowser()" title="Choose a frame: search the library, your project's frames and saved groupings" data-kbd-click tabindex="0">Frame</div>
                                 <ul id="swatchDropdownList" class="custom-dropdown-list"></ul>
                             </div>
                             <!-- Hidden thumb preview kept in the DOM as a sink so any JS that
@@ -2213,9 +2215,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '18.83';</script>
-<script src="templates.js?v=18.83"></script>
-<script src="app.js?v=18.83"></script>
+<script>window.FRAME_HTML_VERSION = '18.84';</script>
+<script src="templates.js?v=18.84"></script>
+<script src="app.js?v=18.84"></script>
 
 </body>
 </html>

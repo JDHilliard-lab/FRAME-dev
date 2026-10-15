@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '18.83';
+const APP_VERSION = '18.84';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -5492,6 +5492,9 @@ async function loadBundledLibrary() {
             if (it.rabbet !== undefined && it.rabbet !== null && !isNaN(parseFloat(it.rabbet))) {
                 entry.rabbet = parseFloat(it.rabbet);
             }
+            // Catalogue facts for the frame browser's search and filters (18.84), plus
+            // the corner photo it shows on each card. All optional.
+            ['corner', 'profileImg', 'color', 'family', 'profile', 'series'].forEach(k => { if (typeof it[k] === 'string' && it[k]) entry[k] = it[k]; });
             dashLocalLibrary[it.vendor][it.collection].push(entry);
         });
         populateDashVendorDropdown();
@@ -14508,6 +14511,370 @@ function loadDashFromCustomLibrary(idx) {
         console.error('Failed to load swatch', err);
         showInfoModal('Could not load that swatch', 'The swatch image could not be read from the library. Try syncing the library again, or pick another moulding.');
     });
+}
+
+// ── THE FRAME BROWSER (18.84): openFrameBrowser ─────────────────────────────────
+// The library outgrew a dropdown (Avant-Garde alone is ~550 mouldings), so picking a
+// frame is a grid with search and filters, organised three ways:
+//   THIS PROJECT  frames already on an item (DERIVED from the rows, never stored) plus
+//                 a shortlist of candidates (editorialContent.frameShortlist, codes).
+//   TEAM          groupings everyone sees: library/groupings.json, committed to the repo.
+//                 FRAME is a static site and cannot write there, so a designer's
+//                 "Share with team" downloads a file and a person commits it. No tokens.
+//   MINE          groupings on this computer (localStorage), usable at once.
+// Frames are addressed by CODE everywhere (rows already store fCode); a code missing
+// from the library still lists in a grouping, as a greyed card, rather than vanishing.
+// Picking a card goes through loadDashFromCustomLibrary, the one apply path.
+const FB_MINE_KEY = 'frameGroupingsMine';
+const FB_WIDTHS = [['', 'Any width'], ['lt1', 'Under 1"'], ['1to15', '1" to 1½"'], ['15to2', '1½" to 2"'], ['gt2', 'Over 2"']];
+let _fbState = { src: 'project', q: '', family: '', width: '', profile: '' };
+let _fbTeam = null;          // [{id, name, note, codes}] once loaded
+let _fbTeamErr = '';
+let _fbObjUrls = [];         // object URLs for synced (File) swatches, revoked on close
+
+function _fbNorm(code) { return String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); }
+// Every library frame, flattened: { vendor, collection, idx, item }.
+function _fbAll() {
+    const out = [];
+    const lib = (typeof dashLocalLibrary !== 'undefined' && dashLocalLibrary) || {};
+    Object.keys(lib).sort().forEach(v => Object.keys(lib[v] || {}).sort().forEach(c => {
+        (lib[v][c] || []).forEach((item, idx) => out.push({ vendor: v, collection: c, idx: idx, item: item }));
+    }));
+    return out;
+}
+function _fbByCode(all) {
+    const m = {};
+    (all || _fbAll()).forEach(r => { const k = _fbNorm(r.item.code); if (k && !m[k]) m[k] = r; });
+    return m;
+}
+// Frames on an item in this project, in first-use order. Derived, so it can't go stale.
+function _fbInUse() {
+    const seen = {}, out = [];
+    ((typeof dashProjectData !== 'undefined' && dashProjectData) || []).forEach(r => {
+        if (!r || r.fType !== 'image' || !r.fCode) return;
+        const k = _fbNorm(r.fCode); if (seen[k]) return; seen[k] = 1; out.push(r.fCode);
+    });
+    return out;
+}
+// READ-ONLY: never seeds the field (an empty array would ride every snapshot).
+function _fbShortlist() {
+    const s = (typeof editorialContent !== 'undefined' && editorialContent) ? editorialContent.frameShortlist : null;
+    return Array.isArray(s) ? s.filter(x => typeof x === 'string' && x) : [];
+}
+function _fbOnShortlist(code) { const k = _fbNorm(code); return _fbShortlist().some(c => _fbNorm(c) === k); }
+// The one writer. Adds or removes codes; one undo entry per gesture.
+function _fbSetShortlist(codes, on) {
+    const cur = _fbShortlist().slice();
+    let changed = false;
+    (codes || []).forEach(code => {
+        const k = _fbNorm(code); const i = cur.findIndex(c => _fbNorm(c) === k);
+        if (on && i < 0 && k) { cur.push(code); changed = true; }
+        if (!on && i >= 0) { cur.splice(i, 1); changed = true; }
+    });
+    if (!changed) return false;
+    if (cur.length) editorialContent.frameShortlist = cur; else delete editorialContent.frameShortlist;
+    pushHistory(); scheduleAutosave();
+    return true;
+}
+function _fbMine() {
+    try { const v = JSON.parse(localStorage.getItem(FB_MINE_KEY) || '[]'); return Array.isArray(v) ? v.filter(_fbValidGrouping) : []; }
+    catch (e) { return []; }
+}
+function _fbSaveMine(list) {
+    try { localStorage.setItem(FB_MINE_KEY, JSON.stringify(list)); return true; }
+    catch (e) { showInfoModal('Grouping not saved', 'This browser refused to store your groupings (storage may be full or blocked). Share the grouping with the team so it is kept in the library instead.'); return false; }
+}
+function _fbValidGrouping(g) { return !!(g && typeof g.id === 'string' && g.id && typeof g.name === 'string' && Array.isArray(g.codes)); }
+async function _fbLoadTeam() {
+    if (_fbTeam) return _fbTeam;
+    try {
+        const r = await fetch('library/groupings.json', { cache: 'no-cache' });
+        if (!r.ok) { _fbTeam = []; return _fbTeam; }   // no team file yet: nothing to show
+        const j = await r.json();
+        const list = Array.isArray(j) ? j : (j && j.groupings);
+        _fbTeam = (Array.isArray(list) ? list : []).filter(_fbValidGrouping);
+    } catch (e) { _fbTeam = []; _fbTeamErr = String(e && e.message || e); }
+    return _fbTeam;
+}
+function _fbGroupingFor(src) {
+    if (src.indexOf('team:') === 0) return (_fbTeam || []).find(g => 'team:' + g.id === src) || null;
+    if (src.indexOf('mine:') === 0) return _fbMine().find(g => 'mine:' + g.id === src) || null;
+    return null;
+}
+// Folder names are storage (avant-garde, Shadow-Boxes); show them as words.
+function _fbColLabel(vendor, collection) {
+    const words = (t) => String(t || '').replace(/[-_]+/g, ' ').replace(/\b[a-z]/g, ch => ch.toUpperCase());
+    return (typeof _prettyVendor === 'function' ? _prettyVendor(vendor) : words(vendor)) + ' › ' + words(collection);
+}
+function _fbWidthOk(w, b) {
+    if (!b) return true; const n = parseFloat(w); if (isNaN(n)) return false;
+    if (b === 'lt1') return n < 1;
+    if (b === '1to15') return n >= 1 && n <= 1.5;
+    if (b === '15to2') return n > 1.5 && n <= 2;
+    if (b === 'gt2') return n > 2;
+    return true;
+}
+// What the grid shows: { rec, code } cards, rec null for a code not in the library.
+// Sections ({head}) split THIS PROJECT into In use / Shortlist.
+function _fbCards(all, byCode) {
+    const st = _fbState, q = st.q.trim().toLowerCase();
+    const keep = (rec) => {
+        if (!rec) return !q && !st.family && !st.width && !st.profile;
+        const it = rec.item;
+        if (st.family && it.family !== st.family) return false;
+        if (st.profile && it.profile !== st.profile) return false;
+        if (!_fbWidthOk(it.width, st.width)) return false;
+        if (q) {
+            const hay = [it.code, it.color, it.family, it.profile, it.series, rec.vendor, rec.collection].join(' ').toLowerCase();
+            if (!q.split(/\s+/).every(w => hay.indexOf(w) >= 0)) return false;
+        }
+        return true;
+    };
+    const fromCodes = (codes) => codes.map(c => ({ code: c, rec: byCode[_fbNorm(c)] || null })).filter(x => keep(x.rec));
+    if (st.src === 'project') {
+        const used = fromCodes(_fbInUse());
+        const usedK = {}; _fbInUse().forEach(c => usedK[_fbNorm(c)] = 1);
+        const short = fromCodes(_fbShortlist().filter(c => !usedK[_fbNorm(c)]));
+        return [{ head: 'In use', cards: used, empty: 'No item in this project has a library frame yet.' },
+                { head: 'Shortlist', cards: short, empty: 'Star a frame anywhere in the library to shortlist it here.' }];
+    }
+    const g = _fbGroupingFor(st.src);
+    if (g) return [{ cards: fromCodes(g.codes), empty: g.codes.length ? 'No frame in this grouping matches the filters.' : 'Empty. Add frames from the library with the ⋯ menu on a card.' }];
+    let pool = all;
+    if (st.src.indexOf('col:') === 0) pool = all.filter(r => 'col:' + r.vendor + '/' + r.collection === st.src);
+    return [{ cards: pool.filter(keep).map(r => ({ code: r.item.code, rec: r })), empty: 'No frame matches the filters.' }];
+}
+function _fbClose() {
+    const m = document.getElementById('frameBrowser'); if (m) m.remove();
+    _fbObjUrls.forEach(u => { try { URL.revokeObjectURL(u); } catch (e) {} }); _fbObjUrls = [];
+}
+function openFrameBrowser() {
+    if (document.getElementById('frameBrowser')) return;
+    const ov = document.createElement('div'); ov.id = 'frameBrowser';
+    ov.className = 'frame-modal'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'fb-card';
+    card.innerHTML = '<div class="fb-side" id="fbSide"></div>'
+        + '<div class="fb-main"><div class="fb-top" id="fbTop"></div><div class="fb-head" id="fbHead"></div>'
+        + '<div class="fb-grid" id="fbGrid"></div><div class="fb-foot" id="fbFoot"></div></div>';
+    ov.appendChild(card); document.body.appendChild(ov);
+    _fbBuildTop();
+    _fbRender();
+    _fbLoadTeam().then(() => { if (document.getElementById('frameBrowser')) _fbRender(); });
+}
+function _fbBuildTop() {
+    const top = document.getElementById('fbTop'); if (!top) return;
+    const all = _fbAll();
+    const uniq = (k) => Array.from(new Set(all.map(r => r.item[k]).filter(Boolean))).sort();
+    const sel = (id, first, vals, key, title) => {
+        const s = document.createElement('select'); s.id = id; s.title = title;
+        [['', first]].concat(vals.map(v => Array.isArray(v) ? v : [v, v])).forEach(o => {
+            const op = document.createElement('option'); op.value = o[0]; op.textContent = o[1]; s.appendChild(op);
+        });
+        s.value = _fbState[key] || '';
+        s.onchange = () => { _fbState[key] = s.value; _fbRender(); };
+        return s;
+    };
+    top.innerHTML = '';
+    const q = document.createElement('input'); q.type = 'text'; q.id = 'fbSearch'; q.placeholder = 'Search code, colour, profile';
+    q.setAttribute('aria-label', 'Search frames'); q.setAttribute('data-modal-initial', ''); q.value = _fbState.q;
+    q.oninput = () => { _fbState.q = q.value; _fbRender(); };
+    top.appendChild(q);
+    top.appendChild(sel('fbFamily', 'Any colour', uniq('family'), 'family', 'Colour family'));
+    top.appendChild(sel('fbWidth', 'Any width', FB_WIDTHS.slice(1), 'width', 'Face width'));
+    top.appendChild(sel('fbProfile', 'Any profile', uniq('profile'), 'profile', 'Profile shape'));
+    const x = document.createElement('button'); x.type = 'button'; x.className = 'jump-esc'; x.textContent = 'Esc'; x.title = 'Close';
+    x.setAttribute('data-modal-close', ''); x.onclick = _fbClose;
+    top.appendChild(x);
+    try { q.focus(); } catch (e) {}
+}
+function _fbSideItem(host, src, label, count, extraCls) {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'fb-src' + (extraCls ? ' ' + extraCls : '') + (_fbState.src === src ? ' active' : '');
+    b.setAttribute('data-fb-src', src);
+    const l = document.createElement('span'); l.textContent = label; b.appendChild(l);
+    if (count != null) { const n = document.createElement('small'); n.textContent = count; b.appendChild(n); }
+    b.onclick = () => { _fbState.src = src; _fbRender(); };
+    host.appendChild(b);
+}
+function _fbSideHead(host, text, action) {
+    const h = document.createElement('div'); h.className = 'fb-side-head';
+    const t = document.createElement('span'); t.textContent = text; h.appendChild(t);
+    if (action) {
+        const a = document.createElement('button'); a.type = 'button'; a.className = 'fb-side-add'; a.textContent = action.label; a.title = action.title;
+        a.onclick = action.onClick; h.appendChild(a);
+    }
+    host.appendChild(h);
+}
+function _fbRender() {
+    const side = document.getElementById('fbSide'); if (!side) return;
+    const all = _fbAll(), byCode = _fbByCode(all);
+    // A source that no longer exists (deleted grouping) falls back to the project.
+    if ((_fbState.src.indexOf('team:') === 0 || _fbState.src.indexOf('mine:') === 0) && !_fbGroupingFor(_fbState.src)) _fbState.src = 'project';
+    side.innerHTML = '';
+    _fbSideHead(side, 'This project');
+    const usedN = _fbInUse().length, shortN = _fbShortlist().filter(c => _fbInUse().every(u => _fbNorm(u) !== _fbNorm(c))).length;
+    _fbSideItem(side, 'project', 'Project frames', usedN + shortN);
+    _fbSideHead(side, 'Team groupings');
+    const team = _fbTeam || [];
+    if (!_fbTeam) { const p = document.createElement('div'); p.className = 'fb-side-note'; p.textContent = 'Loading…'; side.appendChild(p); }
+    else if (!team.length) { const p = document.createElement('div'); p.className = 'fb-side-note'; p.textContent = 'None yet. Share one of yours.'; side.appendChild(p); }
+    team.forEach(g => _fbSideItem(side, 'team:' + g.id, g.name, g.codes.length));
+    _fbSideHead(side, 'My groupings', { label: '+', title: 'New grouping', onClick: () => _fbNewGrouping([]) });
+    const mine = _fbMine();
+    if (!mine.length) { const p = document.createElement('div'); p.className = 'fb-side-note'; p.textContent = 'Group frames you reach for together.'; side.appendChild(p); }
+    mine.forEach(g => _fbSideItem(side, 'mine:' + g.id, g.name, g.codes.length, team.some(t => t.id === g.id) ? 'shared' : ''));
+    _fbSideHead(side, 'Library');
+    _fbSideItem(side, 'all', 'All frames', all.length);
+    const cols = {}; all.forEach(r => { const k = r.vendor + '/' + r.collection; cols[k] = (cols[k] || 0) + 1; });
+    Object.keys(cols).forEach(k => {
+        const p = k.split('/');
+        _fbSideItem(side, 'col:' + k, _fbColLabel(p[0], p[1]), cols[k], 'col');
+    });
+    _fbRenderHead();
+    _fbRenderGrid(all, byCode);
+}
+function _fbRenderHead() {
+    const head = document.getElementById('fbHead'); if (!head) return;
+    head.innerHTML = '';
+    const st = _fbState, g = _fbGroupingFor(st.src);
+    const title = document.createElement('div'); title.className = 'fb-title';
+    title.textContent = st.src === 'project' ? 'Project frames' : st.src === 'all' ? 'All frames'
+        : g ? g.name : st.src.indexOf('col:') === 0 ? _fbColLabel.apply(null, st.src.slice(4).split('/')) : '';
+    head.appendChild(title);
+    if (g && g.note) { const n = document.createElement('div'); n.className = 'fb-note'; n.textContent = g.note; head.appendChild(n); }
+    const acts = document.createElement('div'); acts.className = 'fb-acts';
+    const btn = (label, title, fn, cls) => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'fb-act' + (cls ? ' ' + cls : ''); b.textContent = label; b.title = title; b.onclick = fn; acts.appendChild(b);
+    };
+    if (g) {
+        btn('Add all to project', 'Shortlist every frame in this grouping on this project', () => {
+            const n = g.codes.filter(c => !_fbOnShortlist(c)).length;
+            if (_fbSetShortlist(g.codes, true)) _toast('Shortlisted', n + ' frame' + (n === 1 ? '' : 's') + ' added to this project.');
+            _fbRender();
+        });
+    }
+    if (g && st.src.indexOf('mine:') === 0) {
+        btn('Rename', 'Rename this grouping', () => _fbRenameGrouping(g));
+        btn('Share with team', 'Download this grouping as a file to add to the team library', () => _fbShareGrouping(g));
+        btn('Delete', 'Delete this grouping', () => _fbDeleteGrouping(g), 'danger');
+    }
+    if (st.src === 'project' && _fbShortlist().length) {
+        btn('Save as grouping', 'Save this project’s frames as one of your groupings', () => _fbNewGrouping(_fbInUse().concat(_fbShortlist())));
+    }
+    head.appendChild(acts);
+}
+function _fbImgUrl(item) {
+    const src = item.corner || item.file;
+    if (typeof src === 'string') return src;
+    const u = _libEntryToUrl(src); if (u && u.indexOf('blob:') === 0) _fbObjUrls.push(u);
+    return u;
+}
+function _fbRenderGrid(all, byCode) {
+    const grid = document.getElementById('fbGrid'); if (!grid) return;
+    grid.innerHTML = '';
+    let shown = 0;
+    _fbCards(all, byCode).forEach(sec => {
+        if (sec.head) { const h = document.createElement('div'); h.className = 'fb-sec'; h.textContent = sec.head + ' (' + sec.cards.length + ')'; grid.appendChild(h); }
+        if (!sec.cards.length) { const e = document.createElement('div'); e.className = 'fb-empty'; e.textContent = sec.empty; grid.appendChild(e); return; }
+        sec.cards.forEach(c => { grid.appendChild(_fbCardEl(c)); shown++; });
+    });
+    const foot = document.getElementById('fbFoot');
+    if (foot) {
+        const row = (typeof dashProjectData !== 'undefined' && dashProjectData[dashSelectedRowIndex]) || null;
+        foot.textContent = (typeof _bulkEditing !== 'undefined' && _bulkEditing) ? 'Click a frame to use it on every item in the bulk edit.'
+            : 'Click a frame to use it on ' + ((row && row.id) || 'the selected item') + '. ★ shortlists it on this project.';
+    }
+}
+function _fbCardEl(c) {
+    const rec = c.rec, it = rec ? rec.item : null;
+    const el = document.createElement('div'); el.className = 'fb-frame' + (rec ? '' : ' missing');
+    el.setAttribute('data-fb-code', c.code);
+    const pic = document.createElement('div'); pic.className = 'fb-pic';
+    if (it) { const img = document.createElement('img'); img.loading = 'lazy'; img.alt = ''; img.src = _fbImgUrl(it); pic.appendChild(img); }
+    el.appendChild(pic);
+    const t = document.createElement('div'); t.className = 'fb-code'; t.textContent = c.code; el.appendChild(t);
+    const s = document.createElement('div'); s.className = 'fb-sub';
+    s.textContent = it ? [it.color, it.width ? it.width + '"' : ''].filter(Boolean).join(' · ') : 'Not in the library';
+    el.appendChild(s);
+    const used = _fbInUse().some(u => _fbNorm(u) === _fbNorm(c.code));
+    if (used) { const b = document.createElement('span'); b.className = 'fb-used'; b.textContent = 'In use'; el.appendChild(b); }
+    const star = document.createElement('button'); star.type = 'button'; star.className = 'fb-star' + (_fbOnShortlist(c.code) ? ' on' : '');
+    star.textContent = _fbOnShortlist(c.code) ? '★' : '☆';
+    star.title = _fbOnShortlist(c.code) ? 'Remove from this project’s shortlist' : 'Shortlist on this project';
+    star.onclick = (e) => { e.stopPropagation(); _fbSetShortlist([c.code], !_fbOnShortlist(c.code)); _fbRender(); };
+    el.appendChild(star);
+    const more = document.createElement('button'); more.type = 'button'; more.className = 'fb-more'; more.textContent = '⋯'; more.title = 'Groupings';
+    more.onclick = (e) => { e.stopPropagation(); _fbCardMenu(more, c.code); };
+    el.appendChild(more);
+    if (rec) {
+        el.title = [it.code, it.color, it.profile, it.width ? it.width + '" face' : '', it.depth ? it.depth + '" deep' : ''].filter(Boolean).join(' · ');
+        el.onclick = () => _fbPick(rec);
+    }
+    return el;
+}
+function _fbCardMenu(anchor, code) {
+    const mine = _fbMine(), k = _fbNorm(code);
+    const items = [{ head: 'ADD TO GROUPING' }];
+    mine.forEach(g => {
+        const has = g.codes.some(x => _fbNorm(x) === k);
+        items.push({ label: g.name, on: has, onClick: () => _fbToggleInGrouping(g.id, code, !has) });
+    });
+    items.push({ label: 'New grouping…', onClick: () => _fbNewGrouping([code]) });
+    _frameMenu(anchor, items);
+}
+function _fbToggleInGrouping(id, code, on) {
+    const list = _fbMine(), g = list.find(x => x.id === id); if (!g) return;
+    const k = _fbNorm(code), i = g.codes.findIndex(x => _fbNorm(x) === k);
+    if (on && i < 0) g.codes.push(code);
+    if (!on && i >= 0) g.codes.splice(i, 1);
+    if (_fbSaveMine(list)) _fbRender();
+}
+async function _fbNewGrouping(codes) {
+    const r = await _askFields({ title: 'New frame grouping', confirm: 'Create', fields: [
+        { key: 'name', label: 'Name', placeholder: 'e.g. Thin black modern' },
+        { key: 'note', label: 'Note (optional)', required: false, placeholder: 'When to reach for these' }] });
+    if (!r) return null;
+    const seen = {}, uniq = (codes || []).filter(c => { const k = _fbNorm(c); if (!k || seen[k]) return false; seen[k] = 1; return true; });
+    const g = { id: 'g' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: r.name, note: r.note || '', codes: uniq };
+    const list = _fbMine(); list.push(g);
+    if (!_fbSaveMine(list)) return null;
+    _fbState.src = 'mine:' + g.id; _fbRender();
+    return g;
+}
+async function _fbRenameGrouping(g) {
+    const r = await _askFields({ title: 'Rename grouping', confirm: 'Save', fields: [
+        { key: 'name', label: 'Name', value: g.name }, { key: 'note', label: 'Note (optional)', value: g.note || '', required: false }] });
+    if (!r) return;
+    const list = _fbMine(), x = list.find(y => y.id === g.id); if (!x) return;
+    x.name = r.name; x.note = r.note || '';
+    if (_fbSaveMine(list)) _fbRender();
+}
+function _fbDeleteGrouping(g) {
+    _confirmDestroy({ title: 'Delete “' + g.name + '”?', confirm: 'Delete', undoable: false,
+        body: 'The grouping is removed from this computer. The frames stay in the library and on any project using them.',
+        onConfirm: () => { const list = _fbMine().filter(x => x.id !== g.id); if (_fbSaveMine(list)) { _fbState.src = 'project'; _fbRender(); } } });
+}
+// The team list is a file in the repo. Sharing downloads the grouping in the exact
+// shape library/groupings.json holds, so adding it is a paste, never a rewrite.
+function _fbGroupingFileText(g) {
+    return JSON.stringify({ type: 'frame-grouping', id: g.id, name: g.name, note: g.note || '', codes: g.codes.slice() }, null, 2) + '\n';
+}
+function _fbShareGrouping(g) {
+    const slug = String(g.name || 'grouping').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'grouping';
+    const blob = new Blob([_fbGroupingFileText(g)], { type: 'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'frame-grouping-' + slug + '.json'; a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
+    showInfoModal('Grouping ready to share', 'Saved as frame-grouping-' + slug + '.json in your Downloads. Send that file to whoever looks after the FRAME library. Once it is added to library/groupings.json it appears under Team groupings for everyone, and yours is marked as shared.');
+}
+// Pick = the existing dropdown path, so a frame chosen here is applied exactly as before.
+function _fbPick(rec) {
+    const v = document.getElementById('libVendor'), c = document.getElementById('libCollection');
+    if (!v || !c) return;
+    v.value = rec.vendor; updateDashCollectionDropdown();
+    c.value = rec.collection; updateDashCustomSwatchDropdown();
+    const disp = document.getElementById('swatchSelectedDisplay');
+    if (disp) disp.textContent = rec.item.code + ' (' + rec.item.width + '")';
+    _fbClose();
+    loadDashFromCustomLibrary(rec.idx);
 }
 
 function loadDashCustomSwatch(e) {
@@ -42868,7 +43235,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>

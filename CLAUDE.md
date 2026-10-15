@@ -1733,6 +1733,17 @@ run but passes alone is usually load timing: rerun before chasing it.
   (`dsDockNotes`), Upload image in Shapes; no standalone T or image button. Selection
   settings is a gear, never the theme sun.
 
+- **THE FRAME BROWSER (18.84, `openFrameBrowser`, `_fb*`)** replaces the flat Frame dropdown. Frames are
+  addressed by CODE. Project frames = frames on an item (`_fbInUse`, DERIVED from rows, never stored) +
+  `editorialContent.frameShortlist` (codes; `_fbShortlist` is READ-ONLY, `_fbSetShortlist` the one
+  writer, pushes history, deletes the field when empty). My groupings: localStorage `FB_MINE_KEY`.
+  Team groupings: `library/groupings.json`, committed by a person; the app is static and never writes
+  to GitHub (no tokens). Picking goes through `loadDashFromCustomLibrary` via the hidden
+  `libVendor`/`libCollection` selects, which must stay in the DOM. Catalogue facts (colour, family,
+  profile, series) come from `library/<v>/<c>/catalogue.json`, merged by
+  `scripts/build-library-manifest.js` with the `corners/` + `profiles/` paths. Michelangelo source is the
+  Google Sheet behind their site search (Photo_3 = corner, Photo_4 = line art); the swatch is the
+  corner's face, cross-faded to tile down the rail.
 - **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
   view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).
