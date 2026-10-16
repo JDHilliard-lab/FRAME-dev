@@ -1763,6 +1763,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Floaters need the lip width (`_f`), which the sheet does NOT carry**: it is read off each series'
   line art (top callout; for stepped/wedge/cove profiles the wall at the canvas). The app derives the
   inset as lip + `FLOATER_SHADOW_REVEAL`, and a collection named *floater* switches the product.
+  **THE REVEAL IS A GAP, NOT MOULDING (19.02):** `_floaterRevealOf(inset, unit)` (derived from the inset, never
+  `_faceWidth`, which is not unit-converted or carried onto wall frames) is painted dark just outside the canvas in
+  all four views (canvas renderer ring, DOM spread shadow `_floaterGapCss` KEPT when the canvas has artwork, SVG ring),
+  strength `frameFx.gap`. A lip named in the maker's text (`5/8" Face`) beats one read off a drawing.
   **Larson-Juhl (18.92):** source is their Magento GraphQL (GET only, header `Store: us`, category
   uid `Nzk1` = Mouldings) for sizes/facets, and each product page's fotorama JSON for images (GraphQL
   media is empty). Corners are L-shaped and cropped to one leg; some galleries list the drawing first.
