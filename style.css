@@ -2878,3 +2878,9 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .proj-settings-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; margin-bottom: 18px; padding: 8px 10px; background: var(--bg-subpanel); border: 1px solid var(--border-color); border-radius: var(--r-6); }
 .proj-settings-row #projUnitsHost { flex: 1 1 140px; min-width: 0; font-size: var(--fs-70); color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .proj-settings-row .proj-set-btn { width: auto; flex: none; height: 26px; padding: 0 10px; font-size: var(--fs-65); }
+
+/* 19.08: an empty opening shows an add-image icon (_artAddIconHTML), not its size. On the
+   dashboard it is a button into the artwork upload; .art-visual itself takes no pointer. */
+.art-add-ph { display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); line-height: 0; }
+.art-add-btn { pointer-events: auto; padding: 6px; border: 1px dashed rgba(255,255,255,0.55); border-radius: var(--r-6); background: rgba(0,0,0,0.12); cursor: pointer; transition: background 0.12s, color 0.12s, border-color 0.12s; }
+.art-add-btn:hover { background: rgba(0,0,0,0.28); color: #fff; border-color: #fff; }

@@ -125,15 +125,10 @@ const path = require('path');
         if ((a.style.background || '').indexOf(ELEV_WF_FILL) >= 0) throw new Error('the wireframe grey is applied with the mode off');
         if (a.style.fontSize) throw new Error('the letter sizing is applied with the mode off');
       });
-      // The opening-size text is set with innerText (its newlines have to become
-      // line breaks), which jsdom does not reflect — so that branch is pinned in
-      // the source rather than in the DOM.
-      // Anchored on _openSfx since 18.28: it was named unitSuffix, which shadowed the
-      // unitSuffix() function and threw in the TDZ (test_nothing_floats).
-      const i = S.indexOf('const _openSfx = unitInfo(elevUnit).suffix;');
-      if (i < 0) throw new Error('anchor not found');
-      const body = S.slice(i, i + 2000);
-      if (body.indexOf('art.innerText = (artW > 0)') < 0) throw new Error('the opening-size text was lost from the non-wireframe branch');
+      // 19.08: with wireframe off an empty opening shows the add-image icon, never the letter.
+      __seed(); setElevWireframe(false); Object.assign(elevFrames[1], { fW: 1.25, fType: 'color', m1A: false, m1T: 0, m1B: 0, m1L: 0, m1R: 0, m2: 0, m2A: false }); drawElevAll();
+      const empty = Array.prototype.filter.call(document.querySelectorAll('#wall .art-visual'), a => !a.querySelector('.art-img'));
+      if (!empty.length || !empty.every(a => a.querySelector('.art-add-ph'))) throw new Error('an empty opening lost its add-image icon');
     });
 
     // ── The look, in the exports ──
