@@ -1784,8 +1784,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   rabbet notch RIGHT (MICH); `renderFrameToCanvas` draws the image's left edge as the outside of the rail.
   IM photos are all mirrored (importer flips); Framerica is mixed (importer reads the notch side).
   **Every corner photo is 150x400 (MICH's shape), cut end at the bottom (18.96).** A taller one reads as a
-  sliver in the browser card; the importers crop the bottom 400 (`corner_crop` grows it for a deep
-  shadowbox so some face always shows above the cut end).
+  sliver in the browser card; the importers crop the bottom 400. A deep shadowbox may be taller, sized
+  from the FRAME's own depth/width (cut end = 150*depth/width px, +120 face, max 600), never from a cut
+  detected in the photo (fine wood grain fooled it into 1650px corners). Floater corners: wall LEFT,
+  floor along the bottom. The browser's Type filter (`FB_KINDS`) splits frames from floaters by faceWidth.
   **Left out on purpose:** Liners and Fillets (they nest inside another frame; FRAME has no such
   product), Flat Surfaces (rabbetless, holds no art), Stretchers (hidden). 627-45 has no photo upstream.
   **Swatch cut:** standard (outer-edge colour change or hard edge) by default; ornate/barnwood faces

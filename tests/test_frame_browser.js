@@ -236,6 +236,18 @@ function inApp() {
       _fbState.style = ''; _fbRender();
     });
 
+    ok('the Type filter shows floaters only, or frames only', () => {
+      lib[1].faceWidth = 0.5;   // the fixture is Avant-Garde: make one of them a floater
+      _fbState = { src: 'all', q: '', family: '', width: '', profile: '', style: '', kind: 'floater' }; _fbRender();
+      const all = _fbAll(); const by = {}; all.forEach(r => by[r.item.code] = r.item);
+      const fl = cardsIn(); if (!fl.length) throw new Error('no floaters listed');
+      fl.forEach(c => { if (!(by[c].faceWidth > 0)) throw new Error(c + ' is not a floater'); });
+      _fbState.kind = 'frame'; _fbRender();
+      cardsIn().forEach(c => { if (by[c].faceWidth > 0) throw new Error(c + ' is a floater'); });
+      if (!document.getElementById('fbKind')) throw new Error('no Type filter');
+    });
+    _fbState.kind = ''; delete lib[1].faceWidth; _fbRender();
+
     // Groupings.
     await _fbLoadTeam(); _fbRender();
     ok('team groupings come from library/groupings.json', () => {
