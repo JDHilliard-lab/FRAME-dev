@@ -1780,6 +1780,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Framerica (18.98):** WooCommerce Store API; sizes parsed from the short description; L corners like LJ;
   drawings picked by the BW profile number (pages carry other profiles' drawings). No floaters.
   Floater folders: never double the suffix when the collection is already named for floaters.
+  **ORIENTATION IS PART OF THE SWATCH (18.99):** every corner and swatch has the OUTER edge LEFT and the
+  rabbet notch RIGHT (MICH); `renderFrameToCanvas` draws the image's left edge as the outside of the rail.
+  IM photos are all mirrored (importer flips); Framerica is mixed (importer reads the notch side).
   **Every corner photo is 150x400 (MICH's shape), cut end at the bottom (18.96).** A taller one reads as a
   sliver in the browser card; the importers crop the bottom 400 (`corner_crop` grows it for a deep
   shadowbox so some face always shows above the cut end).

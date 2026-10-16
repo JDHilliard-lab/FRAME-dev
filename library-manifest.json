@@ -58117,24 +58117,6 @@
     "series": "96"
   },
   {
-    "vendor": "universal",
-    "collection": "Standard",
-    "code": "UA-EC2403",
-    "width": 1.25,
-    "path": "library/universal/Standard/UA-EC2403_1.25_d1.25_r0.875.jpg",
-    "depth": 1.25,
-    "rabbet": 0.875
-  },
-  {
-    "vendor": "universal",
-    "collection": "Standard",
-    "code": "UA-N2611",
-    "width": 1.5,
-    "path": "library/universal/Standard/UA-N2611_1.5_d1.25_r0.875.jpg",
-    "depth": 1.25,
-    "rabbet": 0.875
-  },
-  {
     "vendor": "universal_arquati",
     "collection": "3-4-italian-prime",
     "code": "UA-G0003",
