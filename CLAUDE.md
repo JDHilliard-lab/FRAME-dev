@@ -1226,6 +1226,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   codes on the caption baseline; only then profiles go. Nothing else on the page moves. A separate
   row above the band (18.90) was tried and rejected by the designer: it shrank the art.
   Twelve distinct codes fit as two rows of six.
+  **18.97: before any of that the gap tightens** (10pt down to `GAP_MIN` 4pt, at full size); two rows use the tight gap.
 - **A FRAME STRIP CELL IS AT LEAST AS WIDE AS ITS OWN CODE.** `_drawFrameStrip` lays cells
   right to left ending on `box.right` (the right safety guide on a group page) but draws the
   code left-aligned and unbounded (`MICH 432-29` is ~33pt at 6.5pt vs `MIN_CELL` 26). Widen

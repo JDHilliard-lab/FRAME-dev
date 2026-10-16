@@ -46,6 +46,15 @@ function inApp() {
   });
 
   _curPageKey = 'test:strip';
+  ok('EXACT ASK (18.97): the gaps tighten before the images shrink or wrap', () => {
+    // full is measured at the 10pt gap; with 4pt gaps the same cells need 12pt less.
+    const r = draw(full - 10);
+    if (r.left == null) throw new Error('dropped');
+    const tops = Array.from(new Set(r.corners.map(i => Math.round(i.y))));
+    if (tops.length !== 1) throw new Error('wrapped into ' + tops.length + ' rows');
+    r.imgs.forEach(i => { if (Math.abs(i.h - imgH) > 0.01) throw new Error('shrank to h ' + i.h.toFixed(1) + ' when tighter gaps fit'); });
+    if (_frameStripFit['test:strip'] !== 'full') throw new Error('recorded ' + _frameStripFit['test:strip']);
+  });
   ok('EXACT BUG: too wide at full size, it SHRINKS instead of dropping every corner', () => {
     const r = draw(full * 0.8);
     if (r.left == null) throw new Error('the strip vanished (corners and profiles both gone)');
