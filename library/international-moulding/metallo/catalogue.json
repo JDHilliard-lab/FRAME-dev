@@ -1,0 +1,66 @@
+{
+ "IM-305-945": {
+  "collection": "Metallo",
+  "color": "7/8\" Gold Metal-Leaf Shadowbox",
+  "family": "Gold",
+  "profile": "Gold Metal-Leaf Shadowbox",
+  "series": "Metallo",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-305-950": {
+  "collection": "Metallo",
+  "color": "7/8\" Silver Metal-Leaf Shadowbox",
+  "family": "Silver",
+  "profile": "Silver Metal-Leaf Shadowbox",
+  "series": "Metallo",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-305-955": {
+  "collection": "Metallo",
+  "color": "5/8\" Gold Metal-Leaf Mini Cube",
+  "family": "Gold",
+  "profile": "Gold Metal-Leaf Mini Cube",
+  "series": "Metallo",
+  "style": "Mini Frames < 3/4\""
+ },
+ "IM-305-960": {
+  "collection": "Metallo",
+  "color": "5/8\" Silver Metal-Leaf Mini Cube",
+  "family": "Silver",
+  "profile": "Silver Metal-Leaf Mini Cube",
+  "series": "Metallo",
+  "style": "Mini Frames < 3/4\""
+ },
+ "IM-310-675": {
+  "collection": "Metallo",
+  "color": "1 1/8\"  Silver Metal-Leaf Streak",
+  "family": "Silver",
+  "profile": "Silver Metal-Leaf Streak",
+  "series": "Metallo",
+  "style": "Contemporary Metallics"
+ },
+ "IM-310-685": {
+  "collection": "Metallo",
+  "color": "1 1/8\"  Gold Metal-Leaf Streak",
+  "family": "Gold",
+  "profile": "Gold Metal-Leaf Streak",
+  "series": "Metallo",
+  "style": "Contemporary Metallics"
+ },
+ "IM-325-25": {
+  "collection": "Metallo",
+  "color": "7/8\" Rub Gold Metal-Leaf Shadowbox",
+  "family": "Gold",
+  "profile": "Rub Gold Metal-Leaf Shadowbox",
+  "series": "Metallo",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-345-35": {
+  "collection": "Metallo",
+  "color": "7/8\" Silver Leaf-Line Shadowbox",
+  "family": "Silver",
+  "profile": "Silver Leaf-Line Shadowbox",
+  "series": "Metallo",
+  "style": "Shadowbox/Canvas Depth"
+ }
+}

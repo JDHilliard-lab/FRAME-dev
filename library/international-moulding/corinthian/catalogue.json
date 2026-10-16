@@ -1,0 +1,42 @@
+{
+ "IM-305-480": {
+  "collection": "Corinthian",
+  "color": "2 1/4\"  Antique Gold Decorative",
+  "family": "Gold",
+  "profile": "Antique Gold Decorative",
+  "series": "Corinthian",
+  "style": "Traditional Decoratives"
+ },
+ "IM-305-485": {
+  "collection": "Corinthian",
+  "color": "2 1/4\" Antique Pewter Decorative",
+  "family": "Silver",
+  "profile": "Antique Pewter Decorative",
+  "series": "Corinthian",
+  "style": "Traditional Decoratives"
+ },
+ "IM-365-80": {
+  "collection": "Corinthian",
+  "color": "2 1/4\" Dark Bronze Decorative Scoop",
+  "family": "Bronze",
+  "profile": "Dark Bronze Decorative Scoop",
+  "series": "Corinthian",
+  "style": "Traditional Old World"
+ },
+ "IM-715-20": {
+  "collection": "Corinthian",
+  "color": "4 1/8\" Antique Pewter Palmetto",
+  "family": "Silver",
+  "profile": "Antique Pewter Palmetto",
+  "series": "Corinthian",
+  "style": "Oversize > 3.5\""
+ },
+ "IM-790-10": {
+  "collection": "Corinthian",
+  "color": "4 1/8\" Antique Gold Decorative",
+  "family": "Bronze",
+  "profile": "Antique Gold Decorative",
+  "series": "Corinthian",
+  "style": "Oversize > 3.5\""
+ }
+}

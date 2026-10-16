@@ -1,0 +1,90 @@
+{
+ "IM-2400-05": {
+  "collection": "IC Caps",
+  "color": "3/4\" Black IC Cap No-Gesso",
+  "family": "Black",
+  "profile": "Black IC Cap No-Gesso",
+  "series": "IC Caps",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2400-10": {
+  "collection": "IC Caps",
+  "color": "3/4\" x 1 1/4\" White IC Cap No-Gesso",
+  "family": "White",
+  "profile": "White IC Cap No-Gesso",
+  "series": "IC Caps",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2400-15": {
+  "collection": "IC Caps",
+  "color": "3/4\" Mahogany Stained Cap",
+  "family": "Brown",
+  "profile": "Mahogany Stained Cap",
+  "series": "IC Caps",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2400-20": {
+  "collection": "IC Caps",
+  "color": "3/4\" Walnut Stained Cap",
+  "family": "Brown",
+  "profile": "Walnut Stained Cap",
+  "series": "IC Caps",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2425-05": {
+  "collection": "IC Caps",
+  "color": "3/4\"x 1.25 Espresso Cap",
+  "family": "Brown",
+  "profile": "Espresso Cap",
+  "series": "IC Caps",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2440-65": {
+  "collection": "IC Caps",
+  "color": "7/8\" Antiq. Gold No gesso Cap",
+  "family": "Gold",
+  "profile": "Antiq. Gold No gesso Cap",
+  "series": "IC Caps",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2440-75": {
+  "collection": "IC Caps",
+  "color": "3/4\" x 1 1/4\" Muted Silver Cap No Gesso",
+  "family": "Silver",
+  "profile": "Muted Silver Cap No Gesso",
+  "series": "IC Caps",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2440-80": {
+  "collection": "IC Caps",
+  "color": "3/4\" x 1 1/4\" Natural IC Cap No Gesso",
+  "family": "White",
+  "profile": "Natural IC Cap No Gesso",
+  "series": "IC Caps",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2440-85": {
+  "collection": "IC Caps",
+  "color": "3/4\" x 1 1/4\" Pickled White IC Cap",
+  "family": "White",
+  "profile": "Pickled White IC Cap",
+  "series": "IC Caps",
+  "style": "Rustic - Transitional White"
+ },
+ "IM-2440-90": {
+  "collection": "IC Caps",
+  "color": "3/4\" x 1 1/4\" Bright Silver IC Cap",
+  "family": "Silver",
+  "profile": "Bright Silver IC Cap",
+  "series": "IC Caps",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2450-65": {
+  "collection": "IC Caps",
+  "color": "3/4\" x 1 1/4\" Bright Gold Cap",
+  "family": "Gold",
+  "profile": "Bright Gold Cap",
+  "series": "IC Caps",
+  "style": "Contemporary Metallics"
+ }
+}

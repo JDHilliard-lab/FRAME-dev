@@ -1,0 +1,26 @@
+{
+ "FA-BW26-2158": {
+  "collection": "Cathedral Greige",
+  "color": "Cathedral Greige BW26",
+  "family": "Gray",
+  "profile": "BW26",
+  "series": "BW26",
+  "style": ""
+ },
+ "FA-BW66-2158": {
+  "collection": "Cathedral Greige",
+  "color": "Cathedral Greige BW66",
+  "family": "Wood",
+  "profile": "BW66",
+  "series": "BW66",
+  "style": ""
+ },
+ "FA-BW74-2158": {
+  "collection": "Cathedral Greige",
+  "color": "Cathedral Greige BW74",
+  "family": "Wood",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

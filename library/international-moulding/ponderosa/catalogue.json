@@ -1,0 +1,50 @@
+{
+ "IM-850-95": {
+  "collection": "Ponderosa",
+  "color": "1 5/8\"  Walnut Wormwood",
+  "family": "Brown",
+  "profile": "Walnut Wormwood",
+  "series": "Ponderosa",
+  "style": "Rustic - Rakes / Distress"
+ },
+ "IM-855-05": {
+  "collection": "Ponderosa",
+  "color": "1 5/8\" Light Walnut Wormwood",
+  "family": "Brown",
+  "profile": "Light Walnut Wormwood",
+  "series": "Ponderosa",
+  "style": "Rustic - Rakes / Distress"
+ },
+ "IM-855-10": {
+  "collection": "Ponderosa",
+  "color": "1 5/8\" Charcoal Grey Wormwood",
+  "family": "Grey",
+  "profile": "Charcoal Grey Wormwood",
+  "series": "Ponderosa",
+  "style": "Rustic - Rakes / Distress"
+ },
+ "IM-855-15": {
+  "collection": "Ponderosa",
+  "color": "1\" Walnut Wormwood",
+  "family": "Brown",
+  "profile": "Walnut Wormwood",
+  "series": "Ponderosa",
+  "style": "Rustic - Rakes / Distress"
+ },
+ "IM-855-20": {
+  "collection": "Ponderosa",
+  "color": "1\" Light Walnut Wormwood",
+  "family": "Brown",
+  "profile": "Light Walnut Wormwood",
+  "series": "Ponderosa",
+  "style": "Rustic - Rakes / Distress"
+ },
+ "IM-855-25": {
+  "collection": "Ponderosa",
+  "color": "1\" Charcoal Grey Wormwood",
+  "family": "Grey",
+  "profile": "Charcoal Grey Wormwood",
+  "series": "Ponderosa",
+  "style": "Rustic - Rakes / Distress"
+ }
+}

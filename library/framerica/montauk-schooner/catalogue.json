@@ -1,0 +1,26 @@
+{
+ "FA-BW26-688": {
+  "collection": "Montauk Schooner",
+  "color": "Montauk Schooner BW26",
+  "family": "Wood",
+  "profile": "BW26",
+  "series": "BW26",
+  "style": ""
+ },
+ "FA-BW66-688": {
+  "collection": "Montauk Schooner",
+  "color": "Montauk Schooner BW66",
+  "family": "Wood",
+  "profile": "BW66",
+  "series": "BW66",
+  "style": ""
+ },
+ "FA-BW74-688": {
+  "collection": "Montauk Schooner",
+  "color": "Montauk Schooner BW74",
+  "family": "Wood",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

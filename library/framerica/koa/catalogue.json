@@ -1,0 +1,26 @@
+{
+ "FA-BW217-2401": {
+  "collection": "Koa",
+  "color": "Amber Koa BW217",
+  "family": "Color",
+  "profile": "BW217",
+  "series": "BW217",
+  "style": ""
+ },
+ "FA-BW26-2401": {
+  "collection": "Koa",
+  "color": "Amber Koa BW26",
+  "family": "Wood",
+  "profile": "BW26",
+  "series": "BW26",
+  "style": ""
+ },
+ "FA-BW74-2401": {
+  "collection": "Koa",
+  "color": "Amber Koa BW74",
+  "family": "Color",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

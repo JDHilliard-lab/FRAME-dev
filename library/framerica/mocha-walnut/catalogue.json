@@ -1,0 +1,50 @@
+{
+ "FA-BW14060": {
+  "collection": "Mocha Walnut",
+  "color": "Mocha Walnut BW14",
+  "family": "Color",
+  "profile": "BW14060",
+  "series": "BW14060",
+  "style": ""
+ },
+ "FA-BW204-060": {
+  "collection": "Mocha Walnut",
+  "color": "Mocha Walnut BW204",
+  "family": "Color",
+  "profile": "BW204",
+  "series": "BW204",
+  "style": ""
+ },
+ "FA-BW26060": {
+  "collection": "Mocha Walnut",
+  "color": "Mocha Walnut BW26",
+  "family": "Wood",
+  "profile": "BW26060",
+  "series": "BW26060",
+  "style": ""
+ },
+ "FA-BW66060": {
+  "collection": "Mocha Walnut",
+  "color": "Mocha Walnut BW66",
+  "family": "Wood",
+  "profile": "BW66060",
+  "series": "BW66060",
+  "style": ""
+ },
+ "FA-BW72060": {
+  "collection": "Mocha Walnut",
+  "color": "Mocha Walnut BW72",
+  "family": "Wood",
+  "profile": "BW72060",
+  "series": "BW72060",
+  "style": ""
+ },
+ "FA-BW74060": {
+  "collection": "Mocha Walnut",
+  "color": "Mocha Walnut BW74",
+  "family": "Wood",
+  "profile": "BW74060",
+  "series": "BW74060",
+  "style": ""
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "IM-2420-70": {
+  "collection": "IC Rounded Low",
+  "color": "1\" Rounded Walnut Stain/Black Edges",
+  "family": "Brown",
+  "profile": "Rounded Walnut Stain/Black Edges",
+  "series": "IC Rounded Low",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2420-75": {
+  "collection": "IC Rounded Low",
+  "color": "1\" Black Rounded Low Profile",
+  "family": "Black",
+  "profile": "Black Rounded Low Profile",
+  "series": "IC Rounded Low",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2420-80": {
+  "collection": "IC Rounded Low",
+  "color": "1\" White Rounded Low Profile",
+  "family": "White",
+  "profile": "White Rounded Low Profile",
+  "series": "IC Rounded Low",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2420-90": {
+  "collection": "IC Rounded Low",
+  "color": "1\" Mahogany Low Profile/Black Edges",
+  "family": "Brown",
+  "profile": "Mahogany Low Profile/Black Edges",
+  "series": "IC Rounded Low",
+  "style": "Ital. Class. Stained Wood"
+ }
+}

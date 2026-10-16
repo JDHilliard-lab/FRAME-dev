@@ -1,0 +1,26 @@
+{
+ "IM-1600-05": {
+  "collection": "Baxter",
+  "color": "7/8 Charcoal Streak Bevel",
+  "family": "Black",
+  "profile": "Charcoal Streak Bevel",
+  "series": "Baxter",
+  "style": "Contemporary Blacks"
+ },
+ "IM-1600-10": {
+  "collection": "Baxter",
+  "color": "7/8\"  Muted Silver Streak Bevel",
+  "family": "Silver",
+  "profile": "Muted Silver Streak Bevel",
+  "series": "Baxter",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1600-15": {
+  "collection": "Baxter",
+  "color": "7/8\"  Muted Gold Streak Bevel",
+  "family": "Gold",
+  "profile": "Muted Gold Streak Bevel",
+  "series": "Baxter",
+  "style": "Contemporary Metallics"
+ }
+}

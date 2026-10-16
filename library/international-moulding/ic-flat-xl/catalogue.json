@@ -1,0 +1,58 @@
+{
+ "IM-2430-15": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" Black Flat No-gesso",
+  "family": "Black",
+  "profile": "Black Flat No-gesso",
+  "series": "IC Flat XL",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2430-20": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" White Flat No-gesso",
+  "family": "White",
+  "profile": "White Flat No-gesso",
+  "series": "IC Flat XL",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2430-45": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" Dk.Taupe IC Flat No-gesso",
+  "family": "Grey",
+  "profile": "Dk.Taupe IC Flat No-gesso",
+  "series": "IC Flat XL",
+  "style": "Italian Classic Neutrals"
+ },
+ "IM-2430-50": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" Espresso IC Flat No-gesso",
+  "family": "Brown",
+  "profile": "Espresso IC Flat No-gesso",
+  "series": "IC Flat XL",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2430-55": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" Antiq.Gold IC Flat No-gesso",
+  "family": "Gold",
+  "profile": "Antiq.Gold IC Flat No-gesso",
+  "series": "IC Flat XL",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2430-60": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" Muted Silver IC Flat",
+  "family": "Silver",
+  "profile": "Muted Silver IC Flat",
+  "series": "IC Flat XL",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2430-65": {
+  "collection": "IC Flat XL",
+  "color": "2 1/4\" Natural Stain IC Flat",
+  "family": "White",
+  "profile": "Natural Stain IC Flat",
+  "series": "IC Flat XL",
+  "style": "Contemporary Woodtones"
+ }
+}

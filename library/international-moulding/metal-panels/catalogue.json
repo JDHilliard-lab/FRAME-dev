@@ -1,0 +1,66 @@
+{
+ "IM-1380-65": {
+  "collection": "Metal Panels",
+  "color": "1 1/8\" Rubbed Gold Slope",
+  "family": "Gold",
+  "profile": "Rubbed Gold Slope",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-1380-70": {
+  "collection": "Metal Panels",
+  "color": "1 1/8\" Rubbed Silver Slope",
+  "family": "Silver",
+  "profile": "Rubbed Silver Slope",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-1380-95": {
+  "collection": "Metal Panels",
+  "color": "1 1/4\" Streaked Gold Panel",
+  "family": "Gold",
+  "profile": "Streaked Gold Panel",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-1385-05": {
+  "collection": "Metal Panels",
+  "color": "1 1/4\" Streaked Silver Panel",
+  "family": "Silver",
+  "profile": "Streaked Silver Panel",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-305-40": {
+  "collection": "Metal Panels",
+  "color": "2 1/8\" Antique Gold Federal Panel",
+  "family": "Gold",
+  "profile": "Antique Gold Federal Panel",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-305-45": {
+  "collection": "Metal Panels",
+  "color": "2 1/8\" Antique Silver Federal Panel",
+  "family": "Silver",
+  "profile": "Antique Silver Federal Panel",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-920-35": {
+  "collection": "Metal Panels",
+  "color": "1 1/4\" Light Gold Federal Panel",
+  "family": "Gold",
+  "profile": "Light Gold Federal Panel",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ },
+ "IM-920-35S": {
+  "collection": "Metal Panels",
+  "color": "1 1/4\" Soft Silver Federal Panel",
+  "family": "Silver",
+  "profile": "Soft Silver Federal Panel",
+  "series": "Metal Panels",
+  "style": "Transitional Metallics"
+ }
+}

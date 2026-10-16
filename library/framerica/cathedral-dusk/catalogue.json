@@ -1,0 +1,26 @@
+{
+ "FA-BW26-2170": {
+  "collection": "Cathedral Dusk",
+  "color": "Cathedral Dusk BW26",
+  "family": "Gray",
+  "profile": "BW26",
+  "series": "BW26",
+  "style": ""
+ },
+ "FA-BW66-2170": {
+  "collection": "Cathedral Dusk",
+  "color": "Cathedral Dusk BW66",
+  "family": "Wood",
+  "profile": "BW66",
+  "series": "BW66",
+  "style": ""
+ },
+ "FA-BW74-2170": {
+  "collection": "Cathedral Dusk",
+  "color": "Modern Cathedral Dusk BW74",
+  "family": "Wood",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

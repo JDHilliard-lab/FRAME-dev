@@ -1,0 +1,1770 @@
+{
+ "LJ-N10014": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N10021": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1101": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 9/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1102": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 9/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1103": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 9/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1104": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 9/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1108": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Bronze 9/32\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1110": {
+  "collection": "Nielsen",
+  "color": "Nielsen Graphite 9/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1112": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Pewter 9/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1113": {
+  "collection": "Nielsen",
+  "color": "Nielsen Contrast Gray 9/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1114": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 9/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11154": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Grey 9/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11156": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Black 9/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1120": {
+  "collection": "Nielsen",
+  "color": "NIELSEN ANODIC BLACK 9/32\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N1121": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 9/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1123": {
+  "collection": "Nielsen",
+  "color": "Nielsen Antique Gold 9/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1150": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 9/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11701": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11702": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11704": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 7/16\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11710": {
+  "collection": "Nielsen",
+  "color": "Nielsen Graphite 7/16\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11712": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Pewter 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11714": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117164": {
+  "collection": "Nielsen",
+  "color": "Nielsen Dusk7/16\"",
+  "family": "Dusk",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11719": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Walnut 7/16\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11720": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black 7/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11721": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 7/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117227": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tornado Red 7/16\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11723": {
+  "collection": "Nielsen",
+  "color": "Nielsen Antique Gold 7/16\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117230": {
+  "collection": "Nielsen",
+  "color": "Nielsen Reflect Silver 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117231": {
+  "collection": "Nielsen",
+  "color": "Nielsen Vivid Gold Bullion 7/16\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117232": {
+  "collection": "Nielsen",
+  "color": "Nielsen Galactic Blue 7/16\"",
+  "family": "Blue",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117233": {
+  "collection": "Nielsen",
+  "color": "Nielsen Purple Haze 7/16\"",
+  "family": "Pink/Purple",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117235": {
+  "collection": "Nielsen",
+  "color": "Nielsen Vivid Tangerine Twist 7/16\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117236": {
+  "collection": "Nielsen",
+  "color": "Nielsen Cyber Green 7/16\"",
+  "family": "Green",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117237": {
+  "collection": "Nielsen",
+  "color": "Nielsen Vivid Raspberry Fizz 7/16\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117238": {
+  "collection": "Nielsen",
+  "color": "Nielsen Vivid Turquoise 7/16\"",
+  "family": "Green",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117240": {
+  "collection": "Nielsen",
+  "color": "Nielsen Vivid Amethyst 7/16\"",
+  "family": "Pink/Purple",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117270": {
+  "collection": "Nielsen",
+  "color": "Nielsen Burnt Sienna 7/16\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117280": {
+  "collection": "Nielsen",
+  "color": "Nielsen American Natural 7/16\"",
+  "family": "Beige/Tan",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117400": {
+  "collection": "Nielsen",
+  "color": "Nielsen Satin Brushed Aluminum 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117470": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Nickel 7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N117478": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Pewter7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11750": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 7/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N11752": {
+  "collection": "Nielsen",
+  "color": "NielsenBright White 7/16\"",
+  "family": "White",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1202": {
+  "collection": "Nielsen",
+  "color": "NielsenFrosted Silver 9/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1221": {
+  "collection": "Nielsen",
+  "color": "NielsenMatte Black 9/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12901": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 5/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12907": {
+  "collection": "Nielsen",
+  "color": "Nielsen Bronze 5/16\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12913": {
+  "collection": "Nielsen",
+  "color": "Nielsen Contrast Grey 5/16\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12915": {
+  "collection": "Nielsen",
+  "color": "Nielsen Amber 5/16\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12920": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 5/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12921": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 5/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N12952": {
+  "collection": "Nielsen",
+  "color": "Nielsen Bright White 5/16\"",
+  "family": "White",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N130400": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Aluminum7/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N130414": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed German Silver 7/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N130475": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Chocolate 7/8\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N13052": {
+  "collection": "Nielsen",
+  "color": "Nielsen Bright White 7/8\"",
+  "family": "White",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1314": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 1/4\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1321": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black Float 1/4\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1414": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 1/4\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 1/4\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1501": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1502": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1503": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 3/8\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1504": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 3/8\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1508": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Bronze 3/8\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1510": {
+  "collection": "Nielsen",
+  "color": "Nielsen Graphite 3/8\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1512": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Pewter 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1513": {
+  "collection": "Nielsen",
+  "color": "Nielsen Contrast Gray 3/8\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1514": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15150": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15153": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Pewter 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15154": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Grey 3/8\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15155": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Amber 3/8\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15156": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15164": {
+  "collection": "Nielsen",
+  "color": "Nielsen Dusk3/8\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N15170": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Umber 3/8\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1519": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Walnut 3/8\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1520": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1521": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1523": {
+  "collection": "Nielsen",
+  "color": "NielsenAntique Gold 3/8\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1524": {
+  "collection": "Nielsen",
+  "color": "NielsenCobalt 3/8\"",
+  "family": "Blue",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1550": {
+  "collection": "Nielsen",
+  "color": "NielsenBlack 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1552": {
+  "collection": "Nielsen",
+  "color": "Nielsen Bright White 3/8\"",
+  "family": "White",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1555": {
+  "collection": "Nielsen",
+  "color": "Nielsen Right Red 3/8\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1558": {
+  "collection": "Nielsen",
+  "color": "Nielsen Indigo 3/8\"",
+  "family": "Blue",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1566": {
+  "collection": "Nielsen",
+  "color": "Nielsen Lapis 3/8\"",
+  "family": "Blue",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N1568": {
+  "collection": "Nielsen",
+  "color": "Nielsen Chinese Red 3/8\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2108": {
+  "collection": "Nielsen",
+  "color": "NIELSEN FROST ROSE GOLD 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N2121": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 9/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N21227": {
+  "collection": "Nielsen",
+  "color": "NIELSEN VIVID RED 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N2123": {
+  "collection": "Nielsen",
+  "color": "NIELSEN ANTIQUE GOLD 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N21233": {
+  "collection": "Nielsen",
+  "color": "NIELSEN PURPLE HAZE 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N21235": {
+  "collection": "Nielsen",
+  "color": "NIELSEN TANGERINE TWIST 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N21250": {
+  "collection": "Nielsen",
+  "color": "Nielsen Merlot 19/32\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N21257": {
+  "collection": "Nielsen",
+  "color": "NIELSEN SAPPHIRE 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N21258": {
+  "collection": "Nielsen",
+  "color": "NIELSEN REALLY TEAL 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N21261": {
+  "collection": "Nielsen",
+  "color": "NIELSEN DAWN 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N21400": {
+  "collection": "Nielsen",
+  "color": "Nielsen Chrome 19/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2150": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 19/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2201": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 5/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2202": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 5/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2203": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 5/16\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2214": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 5/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2220": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black 5/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2221": {
+  "collection": "Nielsen",
+  "color": "NielsenMatte Black 5/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N225154": {
+  "collection": "Nielsen",
+  "color": "Nielsen Graphite1 1/4\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N225421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Jet Black 1 1/4\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N225452": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 1 1/4\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N225469": {
+  "collection": "Nielsen",
+  "color": "Nielsen Modern Pewter 1 1/4\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24414": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 1/2\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Black 1/2\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24423": {
+  "collection": "Nielsen",
+  "color": "Nielsen Antique Gold 1/2\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24469": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Stainless Steel 1/2\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24471": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Slate 1/2\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24475": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Chocolate 1/2\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N24476": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Sapphire 1/2\"",
+  "family": "Blue",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2501": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 19/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2502": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 19/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2504": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 19/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2514": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 19/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2520": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black 19/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N2521": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 19/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N3350": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N3414": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 7/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N34179": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black Metalline 7/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N3421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 7/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N34280": {
+  "collection": "Nielsen",
+  "color": "Nielsen American Natural 7/32\"",
+  "family": "Beige/Tan",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N3501": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver7/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N3520": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black7/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N5801": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 5/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N5803": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 5/16\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N5804": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 5/16\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N5814": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 5/16\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N5820": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black 5/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65246": {
+  "collection": "Nielsen",
+  "color": "Nielsen Old Gold 1/2\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65251": {
+  "collection": "Nielsen",
+  "color": "Nielsen Barely Gold 1/2\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65252": {
+  "collection": "Nielsen",
+  "color": "Nielsen Robin's Egg 1/2\"",
+  "family": "Blue",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65280": {
+  "collection": "Nielsen",
+  "color": "Nielsen American Natural 1/2\"",
+  "family": "Beige/Tan",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65282": {
+  "collection": "Nielsen",
+  "color": "Nielsen Walnut 1/2\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 1/2\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N65429": {
+  "collection": "Nielsen",
+  "color": "Nielsen Ebony 1/2\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N7101": {
+  "collection": "Nielsen",
+  "color": "NIELSEN SILVER 9/16\"",
+  "family": "",
+  "profile": "",
+  "series": "Nielsen",
+  "style": ""
+ },
+ "LJ-N7121": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 9/16\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9301": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 13/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9304": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Gold 13/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9314": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 13/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93150": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Silver 13/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93154": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Grey 13/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93156": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Black 13/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93170": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Brass 13/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9319": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Walnut 13/32\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9320": {
+  "collection": "Nielsen",
+  "color": "Nielsen Anodic Black 13/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9321": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 13/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9323": {
+  "collection": "Nielsen",
+  "color": "Nielsen Antique Gold 13/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9350": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 13/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9352": {
+  "collection": "Nielsen",
+  "color": "Nielsen Bright White 13/32\"",
+  "family": "White",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93550": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver Linen 13/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93552": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Raw Steel 13/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93553": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Caramel 13/32\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93555": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold Linen 13/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93556": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Black 13/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93557": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Pewter 13/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N93558": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Slate 13/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9402": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 5/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N94156": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Black 5/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 5/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9510": {
+  "collection": "Nielsen",
+  "color": "Nielsen Graphite 29/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9514": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9521": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 29/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N95224": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte White 29/32\"",
+  "family": "White",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9523": {
+  "collection": "Nielsen",
+  "color": "Nielsen Antique Gold 29/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N95429": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brite Black Brushed 29/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N95470": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Nickel 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9714": {
+  "collection": "Nielsen",
+  "color": "Nielsen German Silver 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97150": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Silver 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97151": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Gold 29/32\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97154": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Grey 29/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97155": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Amber 29/32\"",
+  "family": "Yellow",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97156": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Black 29/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97167": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Walnut 29/32\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9721": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 29/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97400": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Alum. Satin 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9750": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 29/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97550": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Silver 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97552": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Raw Steel 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97553": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Caramel 29/32\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97555": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Amber 29/32\"",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97556": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Black 29/32\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97557": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Pewter 29/32\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N97558": {
+  "collection": "Nielsen",
+  "color": "Nielsen Tuscan Linen Slate 29/32\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99150": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Silver 1 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99154": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Grey 1 3/8\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99156": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Black 1 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99167": {
+  "collection": "Nielsen",
+  "color": "Nielsen Florentine Walnut 1 3/8\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N9921": {
+  "collection": "Nielsen",
+  "color": "Nielsen Matte Black 1 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99421": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Black 1 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99430": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed German Silver 1 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99470": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Nickel 1 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99475": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Chocolate 1 3/8\"",
+  "family": "Brown",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-N99478": {
+  "collection": "Nielsen",
+  "color": "Nielsen Brushed Satin Pewter 1 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM101": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 1/4\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM103": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 1/4\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM120": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 1/4\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM121": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 1/4\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1501": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1502": {
+  "collection": "Nielsen",
+  "color": "Nielsen Frosted Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1503": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 3/8\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1504": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 3/8\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1513": {
+  "collection": "Nielsen",
+  "color": "Nielsen Grey 3/8\"",
+  "family": "Grey",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1514": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1520": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM1521": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM201": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM220": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM221": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM501": {
+  "collection": "Nielsen",
+  "color": "Nielsen Silver 3/8\"",
+  "family": "Silver",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM503": {
+  "collection": "Nielsen",
+  "color": "Nielsen Gold 3/8\"",
+  "family": "Gold",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM520": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ },
+ "LJ-NOEM521": {
+  "collection": "Nielsen",
+  "color": "Nielsen Black 3/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Nielsen",
+  "style": "Contemporary"
+ }
+}

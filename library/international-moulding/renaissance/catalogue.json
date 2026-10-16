@@ -1,0 +1,42 @@
+{
+ "IM-1325-40": {
+  "collection": "Renaissance",
+  "color": "2\" Black Gold Acanthus Carve",
+  "family": "Gold",
+  "profile": "Black Gold Acanthus Carve",
+  "series": "Renaissance",
+  "style": "Traditional Old World"
+ },
+ "IM-1325-45": {
+  "collection": "Renaissance",
+  "color": "2\" Rub Silver Acanthus Carve",
+  "family": "Silver",
+  "profile": "Rub Silver Acanthus Carve",
+  "series": "Renaissance",
+  "style": "Traditional Old World"
+ },
+ "IM-1325-60": {
+  "collection": "Renaissance",
+  "color": "3 3/8\" Gold Rub Carve Acanthus",
+  "family": "Gold",
+  "profile": "Gold Rub Carve Acanthus",
+  "series": "Renaissance",
+  "style": "Traditional Old World"
+ },
+ "IM-1325-65": {
+  "collection": "Renaissance",
+  "color": "3 3/8\" Silver Rub Acanthus Carve",
+  "family": "Silver",
+  "profile": "Silver Rub Acanthus Carve",
+  "series": "Renaissance",
+  "style": "Traditional Old World"
+ },
+ "IM-372-958": {
+  "collection": "Renaissance",
+  "color": "4 1/8\" Black Acanthus Carve Reverse",
+  "family": "Black",
+  "profile": "Black Acanthus Carve Reverse",
+  "series": "Renaissance",
+  "style": "Oversize > 3.5\""
+ }
+}

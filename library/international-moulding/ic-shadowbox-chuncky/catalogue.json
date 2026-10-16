@@ -1,0 +1,58 @@
+{
+ "IM-2425-50": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" Black Block Cap",
+  "family": "Black",
+  "profile": "Black Block Cap",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2425-55": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" White Block Cap box",
+  "family": "White",
+  "profile": "White Block Cap box",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2425-85": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" Espresso Block Cap",
+  "family": "Brown",
+  "profile": "Espresso Block Cap",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2425-90": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" Gold Block Cap",
+  "family": "Gold",
+  "profile": "Gold Block Cap",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2425-95": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" Muted Silver Block Cap",
+  "family": "Silver",
+  "profile": "Muted Silver Block Cap",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2430-05": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" Natural Block Cap",
+  "family": "White",
+  "profile": "Natural Block Cap",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2430-10": {
+  "collection": "IC Shadowbox Chuncky",
+  "color": "1 1/2\" x 2 1/4\" Pickled White Block Cap",
+  "family": "White",
+  "profile": "Pickled White Block Cap",
+  "series": "IC Shadowbox Chuncky",
+  "style": "Shadowbox/Canvas Depth"
+ }
+}

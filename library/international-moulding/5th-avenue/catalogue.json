@@ -1,0 +1,74 @@
+{
+ "IM-1100-70": {
+  "collection": "5th Avenue",
+  "color": "2 1/8\" Scoop Silver Flat Panel",
+  "family": "Silver",
+  "profile": "Scoop Silver Flat Panel",
+  "series": "5th Avenue",
+  "style": "Transitional Metallics"
+ },
+ "IM-1100-75": {
+  "collection": "5th Avenue",
+  "color": "2 1/8\" Scoop Gold Flat Panel",
+  "family": "Gold",
+  "profile": "Scoop Gold Flat Panel",
+  "series": "5th Avenue",
+  "style": "Transitional Metallics"
+ },
+ "IM-1100-80": {
+  "collection": "5th Avenue",
+  "color": "1 1/4\" Scoop Silver Flat Panel",
+  "family": "Silver",
+  "profile": "Scoop Silver Flat Panel",
+  "series": "5th Avenue",
+  "style": "Transitional Metallics"
+ },
+ "IM-1100-85": {
+  "collection": "5th Avenue",
+  "color": "1 1/4\" Scoop Gold Flat Panel",
+  "family": "Gold",
+  "profile": "Scoop Gold Flat Panel",
+  "series": "5th Avenue",
+  "style": "Transitional Metallics"
+ },
+ "IM-1100-90": {
+  "collection": "5th Avenue",
+  "color": "5/8\" Scoop Silver Flat Panel",
+  "family": "Silver",
+  "profile": "Scoop Silver Flat Panel",
+  "series": "5th Avenue",
+  "style": "Transitional Metallics"
+ },
+ "IM-1100-95": {
+  "collection": "5th Avenue",
+  "color": "5/8\" Scoop Gold Flat Panel",
+  "family": "Gold",
+  "profile": "Scoop Gold Flat Panel",
+  "series": "5th Avenue",
+  "style": "Transitional Metallics"
+ },
+ "IM-1110-60": {
+  "collection": "5th Avenue",
+  "color": "1 1/4\" Scoop Black Flat Panel w Gold Lip",
+  "family": "Black",
+  "profile": "Scoop Black Flat Panel w Gold Lip",
+  "series": "5th Avenue",
+  "style": "Transitional Blacks"
+ },
+ "IM-1110-65": {
+  "collection": "5th Avenue",
+  "color": "2-1/8\" Scoop Black Flat Panel w Gold Lip",
+  "family": "Black",
+  "profile": "-1/8\" Scoop Black Flat Panel w Gold Lip",
+  "series": "5th Avenue",
+  "style": "Transitional Blacks"
+ },
+ "IM-1110-70": {
+  "collection": "5th Avenue",
+  "color": "5/8\" Black Scoop Panel w Gold Lip",
+  "family": "Black",
+  "profile": "Black Scoop Panel w Gold Lip",
+  "series": "5th Avenue",
+  "style": "Transitional Blacks"
+ }
+}

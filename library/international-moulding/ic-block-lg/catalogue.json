@@ -1,0 +1,74 @@
+{
+ "IM-2445-95": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Black Cap",
+  "family": "Black",
+  "profile": "Black Cap",
+  "series": "IC Block Lg",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2450-05": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" White Cap",
+  "family": "White",
+  "profile": "White Cap",
+  "series": "IC Block Lg",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2450-10": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Espresso Cap",
+  "family": "Brown",
+  "profile": "Espresso Cap",
+  "series": "IC Block Lg",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2450-15": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" DK Taupe Cap",
+  "family": "Grey",
+  "profile": "DK Taupe Cap",
+  "series": "IC Block Lg",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2450-20": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Muted Silver Cap",
+  "family": "Silver",
+  "profile": "Muted Silver Cap",
+  "series": "IC Block Lg",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2450-25": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Natural Cap",
+  "family": "White",
+  "profile": "Natural Cap",
+  "series": "IC Block Lg",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2450-30": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Pickled White Cap",
+  "family": "White",
+  "profile": "Pickled White Cap",
+  "series": "IC Block Lg",
+  "style": "Rustic - Transitional White"
+ },
+ "IM-2450-70": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Bright Silver Cap",
+  "family": "Silver",
+  "profile": "Bright Silver Cap",
+  "series": "IC Block Lg",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2450-75": {
+  "collection": "IC Block Lg",
+  "color": "1 3/4\" x 1 1/2\" Bright Gold Cap",
+  "family": "Gold",
+  "profile": "Bright Gold Cap",
+  "series": "IC Block Lg",
+  "style": "Contemporary Metallics"
+ }
+}

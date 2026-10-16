@@ -1,0 +1,26 @@
+{
+ "FA-BW26067": {
+  "collection": "Coffee Bean",
+  "color": "Coffee Bean BW26",
+  "family": "Color",
+  "profile": "BW26067",
+  "series": "BW26067",
+  "style": ""
+ },
+ "FA-BW66067": {
+  "collection": "Coffee Bean",
+  "color": "Coffee Bean BW66",
+  "family": "Color",
+  "profile": "BW66067",
+  "series": "BW66067",
+  "style": ""
+ },
+ "FA-BW74-067": {
+  "collection": "Coffee Bean",
+  "color": "Coffee Bean BW74",
+  "family": "Color",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

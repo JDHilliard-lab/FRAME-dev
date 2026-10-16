@@ -1,0 +1,50 @@
+{
+ "IM-2445-60": {
+  "collection": "IC Block",
+  "color": "1 1/2\" x 1 1/8\" Black Block",
+  "family": "Black",
+  "profile": "Black Block",
+  "series": "IC Block",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2445-65": {
+  "collection": "IC Block",
+  "color": "1 1/2\" x 1 1/8\" White Block",
+  "family": "White",
+  "profile": "White Block",
+  "series": "IC Block",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2445-70": {
+  "collection": "IC Block",
+  "color": "1 1/2\" x 1 1/8\" Espresso Block",
+  "family": "Brown",
+  "profile": "Espresso Block",
+  "series": "IC Block",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2445-80": {
+  "collection": "IC Block",
+  "color": "1 1/2\" x 1 1/8\" Muted Silver Block",
+  "family": "Silver",
+  "profile": "Muted Silver Block",
+  "series": "IC Block",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2445-85": {
+  "collection": "IC Block",
+  "color": "1 1/2\" x 1 1/8\" Natural Block",
+  "family": "White",
+  "profile": "Natural Block",
+  "series": "IC Block",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2445-90": {
+  "collection": "IC Block",
+  "color": "1 1/2\" x 1 1/8\" Pickled White Block",
+  "family": "White",
+  "profile": "Pickled White Block",
+  "series": "IC Block",
+  "style": "Rustic - Transitional White"
+ }
+}

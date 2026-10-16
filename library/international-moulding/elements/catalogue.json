@@ -1,0 +1,42 @@
+{
+ "IM-310-985": {
+  "collection": "Elements",
+  "color": "3/4\" Antique Gold Cap",
+  "family": "Gold",
+  "profile": "Antique Gold Cap",
+  "series": "Elements",
+  "style": "Contemporary Metallics"
+ },
+ "IM-310-990": {
+  "collection": "Elements",
+  "color": "3/4\" Antique Silver Cap",
+  "family": "Silver",
+  "profile": "Antique Silver Cap",
+  "series": "Elements",
+  "style": "Contemporary Metallics"
+ },
+ "IM-310-995": {
+  "collection": "Elements",
+  "color": "3/4\" Antique Bronze Cap",
+  "family": "Bronze",
+  "profile": "Antique Bronze Cap",
+  "series": "Elements",
+  "style": "Contemporary Metallics"
+ },
+ "IM-315-005": {
+  "collection": "Elements",
+  "color": "3/4\" Antique Pewter Cap",
+  "family": "Silver",
+  "profile": "Antique Pewter Cap",
+  "series": "Elements",
+  "style": "Contemporary Metallics"
+ },
+ "IM-315-010": {
+  "collection": "Elements",
+  "color": "3/4\" Black Cap",
+  "family": "Black",
+  "profile": "Black Cap",
+  "series": "Elements",
+  "style": "Contemporary Blacks"
+ }
+}

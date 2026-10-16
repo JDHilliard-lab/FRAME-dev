@@ -1,0 +1,66 @@
+{
+ "IM-300-760": {
+  "collection": "Arrondi",
+  "color": "1 3/8\" Rounded Gold Streak",
+  "family": "Gold",
+  "profile": "Rounded Gold Streak",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-300-765": {
+  "collection": "Arrondi",
+  "color": "1 3/8\" Rounded Silver Streak",
+  "family": "Silver",
+  "profile": "Rounded Silver Streak",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-305-180": {
+  "collection": "Arrondi",
+  "color": "1\" Gold Rubbed Peak",
+  "family": "Gold",
+  "profile": "Gold Rubbed Peak",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-305-185": {
+  "collection": "Arrondi",
+  "color": "1\" Silver Rubbed Peak",
+  "family": "Silver",
+  "profile": "Silver Rubbed Peak",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-470-05": {
+  "collection": "Arrondi",
+  "color": "1 3/4\"  Gold Streaked Slope",
+  "family": "Gold",
+  "profile": "Gold Streaked Slope",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-470-10": {
+  "collection": "Arrondi",
+  "color": "1 3/4\"  Silver Streaked Slope",
+  "family": "Silver",
+  "profile": "Silver Streaked Slope",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-475-10": {
+  "collection": "Arrondi",
+  "color": "2 3/4\"  Gold Streaked Slope",
+  "family": "Gold",
+  "profile": "Gold Streaked Slope",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ },
+ "IM-475-15": {
+  "collection": "Arrondi",
+  "color": "2 3/4\"  Silver Streaked Slope",
+  "family": "Silver",
+  "profile": "Silver Streaked Slope",
+  "series": "Arrondi",
+  "style": "Contemporary Metallics"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "FA-BW26030": {
+  "collection": "Gray Barnwood",
+  "color": "Gray Barnwood BW26",
+  "family": "Wood",
+  "profile": "BW26030",
+  "series": "BW26030",
+  "style": ""
+ },
+ "FA-BW66-030": {
+  "collection": "Gray Barnwood",
+  "color": "Gray Barnwood BW66",
+  "family": "Wood",
+  "profile": "BW66",
+  "series": "BW66",
+  "style": ""
+ },
+ "FA-BW74030": {
+  "collection": "Gray Barnwood",
+  "color": "Gray Barnwood BW74",
+  "family": "Wood",
+  "profile": "BW74030",
+  "series": "BW74030",
+  "style": ""
+ }
+}

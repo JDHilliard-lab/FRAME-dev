@@ -1,0 +1,66 @@
+{
+ "IM-2440-95": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Black Tall Bevel",
+  "family": "Black",
+  "profile": "Black Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2445-05": {
+  "collection": "IC Bevels",
+  "color": "7/8\" White Tall Bevel",
+  "family": "White",
+  "profile": "White Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2445-10": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Espresso Tall Bevel",
+  "family": "Brown",
+  "profile": "Espresso Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2445-20": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Muted Silver Tall Bevel",
+  "family": "Silver",
+  "profile": "Muted Silver Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2445-25": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Natural Tall Bevel",
+  "family": "White",
+  "profile": "Natural Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2445-30": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Pickled White Tall Bevel",
+  "family": "White",
+  "profile": "Pickled White Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Rustic - Transitional White"
+ },
+ "IM-2445-35": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Brite Silver Tall Bevel",
+  "family": "Silver",
+  "profile": "Brite Silver Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2450-60": {
+  "collection": "IC Bevels",
+  "color": "7/8\" Bright Gold Tall Bevel",
+  "family": "Gold",
+  "profile": "Bright Gold Tall Bevel",
+  "series": "IC Bevels",
+  "style": "Contemporary Metallics"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "FA-BW26024": {
+  "collection": "Red Colori",
+  "color": "Red Colori BW26",
+  "family": "Color",
+  "profile": "BW26024",
+  "series": "BW26024",
+  "style": ""
+ },
+ "FA-BW72-024": {
+  "collection": "Red Colori",
+  "color": "Red Colori BW72",
+  "family": "Color",
+  "profile": "BW72",
+  "series": "BW72",
+  "style": ""
+ },
+ "FA-BW74024": {
+  "collection": "Red Colori",
+  "color": "Red Colori BW74",
+  "family": "Color",
+  "profile": "BW74024",
+  "series": "BW74024",
+  "style": ""
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "IM-880-85": {
+  "collection": "Plaza",
+  "color": "1 1/8\"  Gold Cross-Hatch Flat",
+  "family": "Gold",
+  "profile": "Gold Cross-Hatch Flat",
+  "series": "Plaza",
+  "style": "Contemporary Metallics"
+ },
+ "IM-880-90": {
+  "collection": "Plaza",
+  "color": "1 1/8\" Silver Cross-Hatch Flat",
+  "family": "Silver",
+  "profile": "Silver Cross-Hatch Flat",
+  "series": "Plaza",
+  "style": "Contemporary Metallics"
+ },
+ "IM-885-10": {
+  "collection": "Plaza",
+  "color": "1 1/8\" Gold Cross-Hatch Tall Cap",
+  "family": "Gold",
+  "profile": "Gold Cross-Hatch Tall Cap",
+  "series": "Plaza",
+  "style": "Shadowbox/Canvas Depth"
+ }
+}

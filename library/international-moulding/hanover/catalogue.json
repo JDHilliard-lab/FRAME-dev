@@ -1,0 +1,58 @@
+{
+ "IM-1105-10": {
+  "collection": "Hanover",
+  "color": "1 3/4\" Flat Silver Panel w Raised Edge",
+  "family": "Silver",
+  "profile": "Flat Silver Panel w Raised Edge",
+  "series": "Hanover",
+  "style": "Transitional Metallics"
+ },
+ "IM-1105-15": {
+  "collection": "Hanover",
+  "color": "1 5/8\" Flat Silver Panel w Raised Edge",
+  "family": "Silver",
+  "profile": "Flat Silver Panel w Raised Edge",
+  "series": "Hanover",
+  "style": "Transitional Metallics"
+ },
+ "IM-800-345": {
+  "collection": "Hanover",
+  "color": "1\" Antique Silver Bevel Cap",
+  "family": "Silver",
+  "profile": "Antique Silver Bevel Cap",
+  "series": "Hanover",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-865-75": {
+  "collection": "Hanover",
+  "color": "3/4\" Light Gold Distress Cap",
+  "family": "Gold",
+  "profile": "Light Gold Distress Cap",
+  "series": "Hanover",
+  "style": "Contemporary Metallics"
+ },
+ "IM-865-80": {
+  "collection": "Hanover",
+  "color": "3/4\" Warm Silver Distress Cap",
+  "family": "Silver",
+  "profile": "Warm Silver Distress Cap",
+  "series": "Hanover",
+  "style": "Contemporary Metallics"
+ },
+ "IM-865-85": {
+  "collection": "Hanover",
+  "color": "1 1/4\" Light Gold Distress Block",
+  "family": "Gold",
+  "profile": "Light Gold Distress Block",
+  "series": "Hanover",
+  "style": "Contemporary Metallics"
+ },
+ "IM-865-90": {
+  "collection": "Hanover",
+  "color": "1 1/4\" Warm Silver Distress Block",
+  "family": "Silver",
+  "profile": "Warm Silver Distress Block",
+  "series": "Hanover",
+  "style": "Contemporary Metallics"
+ }
+}

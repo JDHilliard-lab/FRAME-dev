@@ -1,0 +1,26 @@
+{
+ "IM-1615-80": {
+  "collection": "Illumination",
+  "color": "5/8\" Round Black Distressed Mini",
+  "family": "Black",
+  "profile": "Round Black Distressed Mini",
+  "series": "Illumination",
+  "style": "Transitional Metallics"
+ },
+ "IM-1615-85": {
+  "collection": "Illumination",
+  "color": "5/8\" Round Gold Distressed Mini",
+  "family": "Gold",
+  "profile": "Round Gold Distressed Mini",
+  "series": "Illumination",
+  "style": "Transitional Metallics"
+ },
+ "IM-1615-90": {
+  "collection": "Illumination",
+  "color": "5/8\" Round Silver Distressed Mini",
+  "family": "Silver",
+  "profile": "Round Silver Distressed Mini",
+  "series": "Illumination",
+  "style": "Transitional Metallics"
+ }
+}

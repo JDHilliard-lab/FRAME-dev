@@ -1,0 +1,50 @@
+{
+ "IM-2415-35": {
+  "collection": "IC Rounded Small",
+  "color": "1\" Rounded Black No-Gesso",
+  "family": "Black",
+  "profile": "Rounded Black No-Gesso",
+  "series": "IC Rounded Small",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2415-40": {
+  "collection": "IC Rounded Small",
+  "color": "1\" Rounded White No-Gesso",
+  "family": "White",
+  "profile": "Rounded White No-Gesso",
+  "series": "IC Rounded Small",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2415-45": {
+  "collection": "IC Rounded Small",
+  "color": "1\" Rounded Walnut Stain",
+  "family": "Brown",
+  "profile": "Rounded Walnut Stain",
+  "series": "IC Rounded Small",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2415-50": {
+  "collection": "IC Rounded Small",
+  "color": "1\" Rounded Espresso",
+  "family": "Brown",
+  "profile": "Rounded Espresso",
+  "series": "IC Rounded Small",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2420-20": {
+  "collection": "IC Rounded Small",
+  "color": "1\" White Round Classic",
+  "family": "White",
+  "profile": "White Round Classic",
+  "series": "IC Rounded Small",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2420-25": {
+  "collection": "IC Rounded Small",
+  "color": "1\" Black Round Classic",
+  "family": "Black",
+  "profile": "Black Round Classic",
+  "series": "IC Rounded Small",
+  "style": "Transitional Blacks"
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "IM-1615-40": {
+  "collection": "Vault",
+  "color": "7/8\" Black Metallic Embossed Cap",
+  "family": "Black",
+  "profile": "Black Metallic Embossed Cap",
+  "series": "Vault",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1615-45": {
+  "collection": "Vault",
+  "color": "7/8\" Bronze Metallic Embossed Cap",
+  "family": "Bronze",
+  "profile": "Bronze Metallic Embossed Cap",
+  "series": "Vault",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1615-50": {
+  "collection": "Vault",
+  "color": "7/8\" Gold Metallic Embossed Cap",
+  "family": "Gold",
+  "profile": "Gold Metallic Embossed Cap",
+  "series": "Vault",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1615-55": {
+  "collection": "Vault",
+  "color": "7/8\" Silver/Champagne Metallic Embossed Cap",
+  "family": "Silver",
+  "profile": "Silver/Champagne Metallic Embossed Cap",
+  "series": "Vault",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1615-60": {
+  "collection": "Vault",
+  "color": "7/8\" Light Pewter Metallic Embossed Cap",
+  "family": "Silver",
+  "profile": "Light Pewter Metallic Embossed Cap",
+  "series": "Vault",
+  "style": "Contemporary Metallics"
+ }
+}

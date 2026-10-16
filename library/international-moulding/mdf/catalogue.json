@@ -1,0 +1,58 @@
+{
+ "IM-4100-20": {
+  "collection": "MDF",
+  "color": "1 3/4\" Flat Black MDF",
+  "family": "Black",
+  "profile": "Flat Black MDF",
+  "series": "MDF",
+  "style": "Contemporary Blacks"
+ },
+ "IM-4100-25": {
+  "collection": "MDF",
+  "color": "1 3/4\" Flat Black  w/ Bevel Lip MDF",
+  "family": "Black",
+  "profile": "Flat Black  w/ Bevel Lip MDF",
+  "series": "MDF",
+  "style": "Contemporary Blacks"
+ },
+ "IM-4100-40": {
+  "collection": "MDF",
+  "color": "1\" Flat Black MDF",
+  "family": "Black",
+  "profile": "Flat Black MDF",
+  "series": "MDF",
+  "style": "Contemporary Blacks"
+ },
+ "IM-4100-45": {
+  "collection": "MDF",
+  "color": "2\" Flat Black MDF",
+  "family": "Black",
+  "profile": "Flat Black MDF",
+  "series": "MDF",
+  "style": "Contemporary Blacks"
+ },
+ "IM-4100-60": {
+  "collection": "MDF",
+  "color": "1-3/4\" Round Black MDF",
+  "family": "Black",
+  "profile": "-3/4\" Round Black MDF",
+  "series": "MDF",
+  "style": "Transitional Blacks"
+ },
+ "IM-4100-65": {
+  "collection": "MDF",
+  "color": "1-1/4\" Slope Black MDF",
+  "family": "Black",
+  "profile": "-1/4\" Slope Black MDF",
+  "series": "MDF",
+  "style": "Transitional Blacks"
+ },
+ "IM-4100-75": {
+  "collection": "MDF",
+  "color": "2-1/8\" Flat Black MDF w Bevel Lip",
+  "family": "Black",
+  "profile": "-1/8\" Flat Black MDF w Bevel Lip",
+  "series": "MDF",
+  "style": "Contemporary Blacks"
+ }
+}

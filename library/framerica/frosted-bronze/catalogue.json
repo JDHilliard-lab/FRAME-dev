@@ -1,0 +1,26 @@
+{
+ "FA-BW26-975": {
+  "collection": "Frosted Bronze",
+  "color": "Frosted Bronze BW26",
+  "family": "Silver",
+  "profile": "BW26",
+  "series": "BW26",
+  "style": ""
+ },
+ "FA-BW66-975": {
+  "collection": "Frosted Bronze",
+  "color": "Frosted Bronze BW66",
+  "family": "Metallic",
+  "profile": "BW66",
+  "series": "BW66",
+  "style": ""
+ },
+ "FA-BW74-975": {
+  "collection": "Frosted Bronze",
+  "color": "Frosted Bronze BW74",
+  "family": "Silver",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

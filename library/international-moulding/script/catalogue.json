@@ -1,0 +1,26 @@
+{
+ "IM-1615-65": {
+  "collection": "Script",
+  "color": "2 1/2\" Soft Gold Panel w Embossing",
+  "family": "Gold",
+  "profile": "Soft Gold Panel w Embossing",
+  "series": "Script",
+  "style": "Transitional Metallics"
+ },
+ "IM-1615-70": {
+  "collection": "Script",
+  "color": "2 1/2\" Soft Silver Panel w Embossing",
+  "family": "Silver",
+  "profile": "Soft Silver Panel w Embossing",
+  "series": "Script",
+  "style": "Transitional Metallics"
+ },
+ "IM-1615-75": {
+  "collection": "Script",
+  "color": "2 1/2\" Black w Gold Panel w Embossing",
+  "family": "Black",
+  "profile": "Black w Gold Panel w Embossing",
+  "series": "Script",
+  "style": "Transitional Blacks"
+ }
+}

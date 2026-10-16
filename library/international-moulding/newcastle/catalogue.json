@@ -1,0 +1,26 @@
+{
+ "IM-1615-15": {
+  "collection": "Newcastle",
+  "color": "Brown Slope with Contrast Panel",
+  "family": "Bronze",
+  "profile": "Brown Slope with Contrast Panel",
+  "series": "Newcastle",
+  "style": "Transitional Metallics"
+ },
+ "IM-1615-20": {
+  "collection": "Newcastle",
+  "color": "Gold Slope with Contrast Panel",
+  "family": "Gold",
+  "profile": "Gold Slope with Contrast Panel",
+  "series": "Newcastle",
+  "style": "Transitional Metallics"
+ },
+ "IM-1615-25": {
+  "collection": "Newcastle",
+  "color": "Silver Slope with Contrast Panel",
+  "family": "Silver",
+  "profile": "Silver Slope with Contrast Panel",
+  "series": "Newcastle",
+  "style": "Transitional Metallics"
+ }
+}

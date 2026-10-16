@@ -1,0 +1,26 @@
+{
+ "IM-315-035": {
+  "collection": "Stanford",
+  "color": "5/8\" Gold Pattern Mini",
+  "family": "Gold",
+  "profile": "Gold Pattern Mini",
+  "series": "Stanford",
+  "style": "Mini Frames < 3/4\""
+ },
+ "IM-315-040": {
+  "collection": "Stanford",
+  "color": "5/8\" Silver Pattern Mini",
+  "family": "Silver",
+  "profile": "Silver Pattern Mini",
+  "series": "Stanford",
+  "style": "Mini Frames < 3/4\""
+ },
+ "IM-315-045": {
+  "collection": "Stanford",
+  "color": "5/8\" Bronze Pattern Mini",
+  "family": "Bronze",
+  "profile": "Bronze Pattern Mini",
+  "series": "Stanford",
+  "style": "Mini Frames < 3/4\""
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "IM-2420-40": {
+  "collection": "IC Reverse",
+  "color": "1 3/8\" Black Reverse /No-Gesso",
+  "family": "Black",
+  "profile": "Black Reverse /No-Gesso",
+  "series": "IC Reverse",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2420-45": {
+  "collection": "IC Reverse",
+  "color": "1 3/8\"  White Reverse /No-Gesso",
+  "family": "White",
+  "profile": "White Reverse /No-Gesso",
+  "series": "IC Reverse",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2420-60": {
+  "collection": "IC Reverse",
+  "color": "1 1/2\"  Black Rolltop Reverse",
+  "family": "Black",
+  "profile": "Black Rolltop Reverse",
+  "series": "IC Reverse",
+  "style": "Transitional Blacks"
+ },
+ "IM-2420-65": {
+  "collection": "IC Reverse",
+  "color": "1 1/2\"  White Rolltop Reverse",
+  "family": "White",
+  "profile": "White Rolltop Reverse",
+  "series": "IC Reverse",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2425-15": {
+  "collection": "IC Reverse",
+  "color": "1 1/2\" Mahogany Stain Reverse",
+  "family": "Brown",
+  "profile": "Mahogany Stain Reverse",
+  "series": "IC Reverse",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2425-20": {
+  "collection": "IC Reverse",
+  "color": "1 1/2\"  Walnut Stain Reverse",
+  "family": "Brown",
+  "profile": "Walnut Stain Reverse",
+  "series": "IC Reverse",
+  "style": "Ital. Class. Stained Wood"
+ }
+}

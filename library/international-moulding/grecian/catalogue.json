@@ -1,0 +1,50 @@
+{
+ "IM-420-80": {
+  "collection": "Grecian",
+  "color": "2 7/8\" Gold Lace Compo Reverse",
+  "family": "Gold",
+  "profile": "Gold Lace Compo Reverse",
+  "series": "Grecian",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-420-90": {
+  "collection": "Grecian",
+  "color": "1 3/8\"  Gold Lace Compo Reverse",
+  "family": "Gold",
+  "profile": "Gold Lace Compo Reverse",
+  "series": "Grecian",
+  "style": "Traditional Decoratives"
+ },
+ "IM-420-95": {
+  "collection": "Grecian",
+  "color": "1 3/8\" Silver Lace Compo Reverse",
+  "family": "Silver",
+  "profile": "Silver Lace Compo Reverse",
+  "series": "Grecian",
+  "style": "Traditional Decoratives"
+ },
+ "IM-465-75": {
+  "collection": "Grecian",
+  "color": "2 1/2\" Gold Lace Compo Reverse",
+  "family": "Gold",
+  "profile": "Gold Lace Compo Reverse",
+  "series": "Grecian",
+  "style": "Traditional Decoratives"
+ },
+ "IM-465-80": {
+  "collection": "Grecian",
+  "color": "2 1/2\" Silver Lace Compo Reverse",
+  "family": "Silver",
+  "profile": "Silver Lace Compo Reverse",
+  "series": "Grecian",
+  "style": "Traditional Decoratives"
+ },
+ "IM-465-85": {
+  "collection": "Grecian",
+  "color": "2 1/2\" Dark Umber Lace Reverse",
+  "family": "Brown",
+  "profile": "Dark Umber Lace Reverse",
+  "series": "Grecian",
+  "style": "Traditional Decoratives"
+ }
+}

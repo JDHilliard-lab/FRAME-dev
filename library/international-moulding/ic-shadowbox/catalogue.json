@@ -1,0 +1,74 @@
+{
+ "IM-2420-30": {
+  "collection": "IC Shadowbox",
+  "color": "1\" x 2 1/4\" White IC Shadowbox",
+  "family": "White",
+  "profile": "White IC Shadowbox",
+  "series": "IC Shadowbox",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2420-35": {
+  "collection": "IC Shadowbox",
+  "color": "1\" x 2 1/4\" Black IC Shadowbox",
+  "family": "Black",
+  "profile": "Black IC Shadowbox",
+  "series": "IC Shadowbox",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2425-25": {
+  "collection": "IC Shadowbox",
+  "color": "1\"x 2-1/8\" Gold Shadowbox/No-Gesso",
+  "family": "Gold",
+  "profile": "-1/8\" Gold Shadowbox/No-Gesso",
+  "series": "IC Shadowbox",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2425-30": {
+  "collection": "IC Shadowbox",
+  "color": "1\"x 2-1/8\" Silver Shadowbox/No-Gesso",
+  "family": "Silver",
+  "profile": "-1/8\" Silver Shadowbox/No-Gesso",
+  "series": "IC Shadowbox",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2440-30": {
+  "collection": "IC Shadowbox",
+  "color": "1\"x 2 1/8\" Espresso Tall Cap",
+  "family": "Brown",
+  "profile": "Espresso Tall Cap",
+  "series": "IC Shadowbox",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2440-35": {
+  "collection": "IC Shadowbox",
+  "color": "1\"x 2 1/8\" Natural Stain Tall Cap",
+  "family": "White",
+  "profile": "Natural Stain Tall Cap",
+  "series": "IC Shadowbox",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2440-40": {
+  "collection": "IC Shadowbox",
+  "color": "1\"x 2 1/8\" Pickled White Tall Cap",
+  "family": "White",
+  "profile": "Pickled White Tall Cap",
+  "series": "IC Shadowbox",
+  "style": "Shadowbox/Canvas Depth"
+ },
+ "IM-2450-35": {
+  "collection": "IC Shadowbox",
+  "color": "1\" x 2 1/8\" Muted Silver Tall Cap",
+  "family": "Silver",
+  "profile": "Muted Silver Tall Cap",
+  "series": "IC Shadowbox",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2450-50": {
+  "collection": "IC Shadowbox",
+  "color": "1\" x 2 1/8\" Bright Gold Tall Cap",
+  "family": "Gold",
+  "profile": "Bright Gold Tall Cap",
+  "series": "IC Shadowbox",
+  "style": "Contemporary Metallics"
+ }
+}

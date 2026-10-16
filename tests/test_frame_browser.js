@@ -61,7 +61,7 @@ check('the manifest carries catalogue facts and the corner photo', () => {
 });
 check('every catalogue-imported swatch has a corner photo and a profile on disk', () => {
   const missing = [];
-  ['michaelangelo', 'larson_juhl', 'universal_arquati'].forEach(ven => {
+  ['michaelangelo', 'larson_juhl', 'universal_arquati', 'international-moulding', 'framerica'].forEach(ven => {
   const MICH = path.join(root, 'library', ven);
   fs.readdirSync(MICH).filter(c => fs.existsSync(path.join(MICH, c, 'catalogue.json'))).forEach(col => {
   const dir = path.join(root, 'library', ven, col);
@@ -103,6 +103,14 @@ check('every Universal Arquati floater has a lip width in a floaters folder, and
   if (bad.length) throw new Error(bad.length + ' floater/folder mismatches, e.g. ' + bad.slice(0, 4).join(', '));
   const disc = ua.filter(x => /discontinu/i.test(x.color || '')).map(x => x.code);
   if (disc.length) throw new Error('discontinued frames imported: ' + disc.slice(0, 4).join(', '));
+});
+check('International Moulding and Framerica are in, floaters only in floater folders', () => {
+  [['international-moulding', 900], ['framerica', 300]].forEach(([v, min]) => {
+    const u = MAN.filter(x => x.vendor === v);
+    if (u.length < min) throw new Error(v + ': only ' + u.length);
+    const bad = u.filter(x => (x.faceWidth > 0) !== /floater/i.test(x.collection));
+    if (bad.length) throw new Error(v + ': ' + bad.length + ' floater/folder mismatches, e.g. ' + bad[0].code);
+  });
 });
 check('library/groupings.json is a valid (possibly empty) team list', () => {
   const j = JSON.parse(fs.readFileSync(path.join(root, 'library', 'groupings.json'), 'utf8'));

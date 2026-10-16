@@ -1,0 +1,50 @@
+{
+ "IM-2415-10": {
+  "collection": "IC Flat Small",
+  "color": "3/4\"  Black /Low Profile",
+  "family": "Black",
+  "profile": "Black /Low Profile",
+  "series": "IC Flat Small",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2415-15": {
+  "collection": "IC Flat Small",
+  "color": "3/4\" White /Low Profile No-Gesso",
+  "family": "White",
+  "profile": "White /Low Profile No-Gesso",
+  "series": "IC Flat Small",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2415-20": {
+  "collection": "IC Flat Small",
+  "color": "3/4\"  Walnut Stain /Low-Profile",
+  "family": "Brown",
+  "profile": "Walnut Stain /Low-Profile",
+  "series": "IC Flat Small",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2415-25": {
+  "collection": "IC Flat Small",
+  "color": "3/4\" Espresso Low-Profile IC",
+  "family": "Brown",
+  "profile": "Espresso Low-Profile IC",
+  "series": "IC Flat Small",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2425-35": {
+  "collection": "IC Flat Small",
+  "color": "3/4\" Gold Low-Profile Flat",
+  "family": "Gold",
+  "profile": "Gold Low-Profile Flat",
+  "series": "IC Flat Small",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2425-40": {
+  "collection": "IC Flat Small",
+  "color": "3/4\" Silver Low-Profile Flat",
+  "family": "Silver",
+  "profile": "Silver Low-Profile Flat",
+  "series": "IC Flat Small",
+  "style": "Contemporary Metallics"
+ }
+}

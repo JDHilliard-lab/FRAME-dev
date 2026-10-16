@@ -1,0 +1,42 @@
+{
+ "IM-315-050": {
+  "collection": "Chesterfield",
+  "color": "1 3/4\" Dark Bronze Slope w Flat Panel",
+  "family": "Bronze",
+  "profile": "Dark Bronze Slope w Flat Panel",
+  "series": "Chesterfield",
+  "style": "Traditional Old World"
+ },
+ "IM-315-055": {
+  "collection": "Chesterfield",
+  "color": "1 3/4\" Light Bronze Slope w Flat Panel",
+  "family": "Bronze",
+  "profile": "Light Bronze Slope w Flat Panel",
+  "series": "Chesterfield",
+  "style": "Traditional Old World"
+ },
+ "IM-315-060": {
+  "collection": "Chesterfield",
+  "color": "1 3/4\" Champagne Slope w Flat Panel",
+  "family": "Cream",
+  "profile": "Champagne Slope w Flat Panel",
+  "series": "Chesterfield",
+  "style": "Traditional Old World"
+ },
+ "IM-315-065": {
+  "collection": "Chesterfield",
+  "color": "1 3/4\" Silver Slope w Flat Panel",
+  "family": "Silver",
+  "profile": "Silver Slope w Flat Panel",
+  "series": "Chesterfield",
+  "style": "Traditional Old World"
+ },
+ "IM-315-070": {
+  "collection": "Chesterfield",
+  "color": "1 3/4\" Silver Contrast Slope w Flat Panel",
+  "family": "Silver",
+  "profile": "Silver Contrast Slope w Flat Panel",
+  "series": "Chesterfield",
+  "style": "Traditional Old World"
+ }
+}

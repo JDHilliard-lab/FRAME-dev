@@ -1,0 +1,50 @@
+{
+ "IM-2400-95": {
+  "collection": "IC Flat Lg",
+  "color": "2\" Black No-Gesso Flat",
+  "family": "Black",
+  "profile": "Black No-Gesso Flat",
+  "series": "IC Flat Lg",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2405-05": {
+  "collection": "IC Flat Lg",
+  "color": "2\" White IC Flat No-Gesso",
+  "family": "White",
+  "profile": "White IC Flat No-Gesso",
+  "series": "IC Flat Lg",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2405-10": {
+  "collection": "IC Flat Lg",
+  "color": "2\" Mahogany Stained Flat",
+  "family": "Brown",
+  "profile": "Mahogany Stained Flat",
+  "series": "IC Flat Lg",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2405-15": {
+  "collection": "IC Flat Lg",
+  "color": "2\" Walnut Stained Flat",
+  "family": "Brown",
+  "profile": "Walnut Stained Flat",
+  "series": "IC Flat Lg",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2405-20": {
+  "collection": "IC Flat Lg",
+  "color": "2\" Grey No-Gesso Flat",
+  "family": "Grey",
+  "profile": "Grey No-Gesso Flat",
+  "series": "IC Flat Lg",
+  "style": "Italian Classic Neutrals"
+ },
+ "IM-2405-25": {
+  "collection": "IC Flat Lg",
+  "color": "2\" Taupe IC Flat No-Gesso",
+  "family": "Grey",
+  "profile": "Taupe IC Flat No-Gesso",
+  "series": "IC Flat Lg",
+  "style": "Italian Classic Neutrals"
+ }
+}

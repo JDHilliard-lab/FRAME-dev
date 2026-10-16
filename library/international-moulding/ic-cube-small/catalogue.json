@@ -1,0 +1,82 @@
+{
+ "IM-2400-35": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Black No-Gesso Cube",
+  "family": "Black",
+  "profile": "Black No-Gesso Cube",
+  "series": "IC Cube Small",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2400-40": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" White No-Gesso Cube",
+  "family": "White",
+  "profile": "White No-Gesso Cube",
+  "series": "IC Cube Small",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2400-45": {
+  "collection": "IC Cube Small",
+  "color": "3/4\"  Mahogany Stained Cube",
+  "family": "Brown",
+  "profile": "Mahogany Stained Cube",
+  "series": "IC Cube Small",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2400-50": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Walnut Stained Cube",
+  "family": "Brown",
+  "profile": "Walnut Stained Cube",
+  "series": "IC Cube Small",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2400-55": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Grey No-Gesso Cube",
+  "family": "Grey",
+  "profile": "Grey No-Gesso Cube",
+  "series": "IC Cube Small",
+  "style": "Italian Classic Neutrals"
+ },
+ "IM-2435-75": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Espresso Cube No-gesso",
+  "family": "Brown",
+  "profile": "Espresso Cube No-gesso",
+  "series": "IC Cube Small",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2435-80": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Antiq.Gold Cube No-gesso Cap",
+  "family": "Gold",
+  "profile": "Antiq.Gold Cube No-gesso Cap",
+  "series": "IC Cube Small",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2435-85": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Muted Silver Cube No-gesso",
+  "family": "Silver",
+  "profile": "Muted Silver Cube No-gesso",
+  "series": "IC Cube Small",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2435-90": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Natural Stain Cube",
+  "family": "White",
+  "profile": "Natural Stain Cube",
+  "series": "IC Cube Small",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2435-95": {
+  "collection": "IC Cube Small",
+  "color": "3/4\" Pickled White Stain Cube",
+  "family": "White",
+  "profile": "Pickled White Stain Cube",
+  "series": "IC Cube Small",
+  "style": "Contemp. Whites/Neutrals"
+ }
+}

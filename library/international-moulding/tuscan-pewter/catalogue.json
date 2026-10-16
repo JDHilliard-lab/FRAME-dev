@@ -1,0 +1,50 @@
+{
+ "IM-1380-10": {
+  "collection": "Tuscan Pewter",
+  "color": "1\" Antique Pewter Bevel Lip",
+  "family": "Silver",
+  "profile": "Antique Pewter Bevel Lip",
+  "series": "Tuscan Pewter",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1380-20": {
+  "collection": "Tuscan Pewter",
+  "color": "1 3/8\" Antiqued Pewter Rounded",
+  "family": "Silver",
+  "profile": "Antiqued Pewter Rounded",
+  "series": "Tuscan Pewter",
+  "style": "Transitional Metallics"
+ },
+ "IM-1380-30": {
+  "collection": "Tuscan Pewter",
+  "color": "7/8\" Antique Pewter Veined Cap",
+  "family": "Silver",
+  "profile": "Antique Pewter Veined Cap",
+  "series": "Tuscan Pewter",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1380-40": {
+  "collection": "Tuscan Pewter",
+  "color": "1 7/8\" Antique Pewter Bevel Block",
+  "family": "Silver",
+  "profile": "Antique Pewter Bevel Block",
+  "series": "Tuscan Pewter",
+  "style": "Contemporary Metallics"
+ },
+ "IM-1380-60": {
+  "collection": "Tuscan Pewter",
+  "color": "1\" Antique Pewter Notch Lip Cap",
+  "family": "Silver",
+  "profile": "Antique Pewter Notch Lip Cap",
+  "series": "Tuscan Pewter",
+  "style": "Contemporary Metallics"
+ },
+ "IM-800-390": {
+  "collection": "Tuscan Pewter",
+  "color": "1 1/4\" Antique Pewter Dutch Bead",
+  "family": "Silver",
+  "profile": "Antique Pewter Dutch Bead",
+  "series": "Tuscan Pewter",
+  "style": "Transitional Metallics"
+ }
+}

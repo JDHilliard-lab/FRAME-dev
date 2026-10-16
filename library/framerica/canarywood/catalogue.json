@@ -1,0 +1,42 @@
+{
+ "FA-BW217-2407": {
+  "collection": "Canarywood",
+  "color": "Canarywood BW217",
+  "family": "Color",
+  "profile": "BW217",
+  "series": "BW217",
+  "style": ""
+ },
+ "FA-BW26-2407": {
+  "collection": "Canarywood",
+  "color": "Canarywood BW26",
+  "family": "Color",
+  "profile": "BW26",
+  "series": "BW26",
+  "style": ""
+ },
+ "FA-BW74-2403": {
+  "collection": "Canarywood",
+  "color": "Afromosia BW74",
+  "family": "Color",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ },
+ "FA-BW74-2407": {
+  "collection": "Canarywood",
+  "color": "Canarywood BW74",
+  "family": "Color",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ },
+ "FA-BW74-2408": {
+  "collection": "Canarywood",
+  "color": "Blackwood BW74",
+  "family": "Color",
+  "profile": "BW74",
+  "series": "BW74",
+  "style": ""
+ }
+}

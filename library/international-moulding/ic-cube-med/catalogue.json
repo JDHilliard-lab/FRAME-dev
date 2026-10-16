@@ -1,0 +1,74 @@
+{
+ "IM-2410-30": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\"  Black Block-NoGesso",
+  "family": "Black",
+  "profile": "Black Block-NoGesso",
+  "series": "IC Cube Med",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2410-35": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\" White Block-NoGesso",
+  "family": "White",
+  "profile": "White Block-NoGesso",
+  "series": "IC Cube Med",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2410-40": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\"  Walnut Stained Block",
+  "family": "Brown",
+  "profile": "Walnut Stained Block",
+  "series": "IC Cube Med",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2410-45": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\"  Espresso Block",
+  "family": "Brown",
+  "profile": "Espresso Block",
+  "series": "IC Cube Med",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2445-40": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\" Muted Silver Block",
+  "family": "Silver",
+  "profile": "Muted Silver Block",
+  "series": "IC Cube Med",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2445-45": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\" Natural Block",
+  "family": "White",
+  "profile": "Natural Block",
+  "series": "IC Cube Med",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2445-50": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\" Pickled White Block",
+  "family": "White",
+  "profile": "Pickled White Block",
+  "series": "IC Cube Med",
+  "style": "Rustic - Transitional White"
+ },
+ "IM-2445-55": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\" Bright Silver Block",
+  "family": "Silver",
+  "profile": "Bright Silver Block",
+  "series": "IC Cube Med",
+  "style": "Contemporary Metallics"
+ },
+ "IM-2450-55": {
+  "collection": "IC Cube Med",
+  "color": "1 1/4\" Bright Gold Block",
+  "family": "Gold",
+  "profile": "Bright Gold Block",
+  "series": "IC Cube Med",
+  "style": "Contemporary Metallics"
+ }
+}

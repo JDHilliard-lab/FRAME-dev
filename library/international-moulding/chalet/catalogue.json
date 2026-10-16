@@ -1,0 +1,34 @@
+{
+ "IM-315-015": {
+  "collection": "Chalet",
+  "color": "1 1/4\" Slope Dotted Gold Pattern",
+  "family": "Gold",
+  "profile": "Slope Dotted Gold Pattern",
+  "series": "Chalet",
+  "style": "Contemporary Metallics"
+ },
+ "IM-315-020": {
+  "collection": "Chalet",
+  "color": "1 1/4\" Slope Silver Dotted Pattern",
+  "family": "Silver",
+  "profile": "Slope Silver Dotted Pattern",
+  "series": "Chalet",
+  "style": "Contemporary Metallics"
+ },
+ "IM-315-025": {
+  "collection": "Chalet",
+  "color": "2 3/4\" Slope Gold Dotted Pattern",
+  "family": "Gold",
+  "profile": "Slope Gold Dotted Pattern",
+  "series": "Chalet",
+  "style": "Contemporary Metallics"
+ },
+ "IM-315-030": {
+  "collection": "Chalet",
+  "color": "2 3/4\" Slope Silver Dotted Pattern",
+  "family": "Silver",
+  "profile": "Slope Silver Dotted Pattern",
+  "series": "Chalet",
+  "style": "Contemporary Metallics"
+ }
+}

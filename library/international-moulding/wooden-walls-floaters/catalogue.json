@@ -1,0 +1,42 @@
+{
+ "IM-805-500": {
+  "collection": "Wooden Walls",
+  "color": "3/8\" x 2 1/8\" Dark Walnut Floater",
+  "family": "Brown",
+  "profile": "Dark Walnut Floater",
+  "series": "Wooden Walls",
+  "style": "Floaters / Stretchers"
+ },
+ "IM-805-505": {
+  "collection": "Wooden Walls",
+  "color": "3/8\" x 2 1/8\" Light Walnut Floater",
+  "family": "Brown",
+  "profile": "Light Walnut Floater",
+  "series": "Wooden Walls",
+  "style": "Floaters / Stretchers"
+ },
+ "IM-805-510": {
+  "collection": "Wooden Walls",
+  "color": "3/8\" x 2 1/8\" Grey Wood Floater",
+  "family": "Grey",
+  "profile": "Grey Wood Floater",
+  "series": "Wooden Walls",
+  "style": "Floaters / Stretchers"
+ },
+ "IM-805-515": {
+  "collection": "Wooden Walls",
+  "color": "3/8\" x 2 1/8\" Pickled Wood Floater",
+  "family": "Grey",
+  "profile": "Pickled Wood Floater",
+  "series": "Wooden Walls",
+  "style": "Floaters / Stretchers"
+ },
+ "IM-805-520": {
+  "collection": "Wooden Walls",
+  "color": "3/8\" x 2 1/8\" Natural Wood Floater",
+  "family": "White",
+  "profile": "Natural Wood Floater",
+  "series": "Wooden Walls",
+  "style": "Floaters / Stretchers"
+ }
+}

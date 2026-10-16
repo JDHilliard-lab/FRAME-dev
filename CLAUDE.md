@@ -1774,8 +1774,15 @@ run but passes alone is usually load timing: rerun before chasing it.
   sideways (cut end LEFT, code label under it), image 1 the drawing. Rotated a quarter anticlockwise it
   matches MICH. White mouldings need the near-white threshold. Discontinued = '(Discontinued)' in the
   NAME. Floater Width is the LIP; the full rail width is read off the drawing. Codes `UA-<sku>`.
+  **International Moulding (18.98):** SvelteKit site; items from POST `newapi.internationalmoulding.com/api/
+  inventoryitem/getpagedinventoryitems2` (catalogId 741, own brand id 37, `discontinued` flag, Width = full
+  rail); images `s3.amazonaws.com/im-dropbox-sync/<itemnum>-2.jpg` (strip) and `-3.jpg` (drawing).
+  **Framerica (18.98):** WooCommerce Store API; sizes parsed from the short description; L corners like LJ;
+  drawings picked by the BW profile number (pages carry other profiles' drawings). No floaters.
+  Floater folders: never double the suffix when the collection is already named for floaters.
   **Every corner photo is 150x400 (MICH's shape), cut end at the bottom (18.96).** A taller one reads as a
-  sliver in the browser card; the importers crop the bottom 400.
+  sliver in the browser card; the importers crop the bottom 400 (`corner_crop` grows it for a deep
+  shadowbox so some face always shows above the cut end).
   **Left out on purpose:** Liners and Fillets (they nest inside another frame; FRAME has no such
   product), Flat Surfaces (rabbetless, holds no art), Stretchers (hidden). 627-45 has no photo upstream.
   **Swatch cut:** standard (outer-edge colour change or hard edge) by default; ornate/barnwood faces

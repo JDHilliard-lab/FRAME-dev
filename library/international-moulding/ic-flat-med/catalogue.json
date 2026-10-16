@@ -1,0 +1,58 @@
+{
+ "IM-2415-60": {
+  "collection": "IC Flat Med",
+  "color": "1 1/4\"  Black Flat- No-Gesso",
+  "family": "Black",
+  "profile": "Black Flat- No-Gesso",
+  "series": "IC Flat Med",
+  "style": "Contemporary Blacks"
+ },
+ "IM-2415-65": {
+  "collection": "IC Flat Med",
+  "color": "1 1/4\"  White Flat - No-Gesso",
+  "family": "White",
+  "profile": "White Flat - No-Gesso",
+  "series": "IC Flat Med",
+  "style": "Contemp. Whites/Neutrals"
+ },
+ "IM-2415-70": {
+  "collection": "IC Flat Med",
+  "color": "1 1/4\"  Walnut Stained Flat",
+  "family": "Brown",
+  "profile": "Walnut Stained Flat",
+  "series": "IC Flat Med",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2415-75": {
+  "collection": "IC Flat Med",
+  "color": "1 1/4\"  Espresso Flat-NoGesso",
+  "family": "Brown",
+  "profile": "Espresso Flat-NoGesso",
+  "series": "IC Flat Med",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2425-10": {
+  "collection": "IC Flat Med",
+  "color": "1 1/8\"  Mahogany Stained Flat",
+  "family": "Brown",
+  "profile": "Mahogany Stained Flat",
+  "series": "IC Flat Med",
+  "style": "Ital. Class. Stained Wood"
+ },
+ "IM-2440-45": {
+  "collection": "IC Flat Med",
+  "color": "1 1/4\" Natural Stain Flat",
+  "family": "White",
+  "profile": "Natural Stain Flat",
+  "series": "IC Flat Med",
+  "style": "Contemporary Woodtones"
+ },
+ "IM-2440-50": {
+  "collection": "IC Flat Med",
+  "color": "1 1/4\" Pickled White Stain Flat",
+  "family": "White",
+  "profile": "Pickled White Stain Flat",
+  "series": "IC Flat Med",
+  "style": "Contemp. Whites/Neutrals"
+ }
+}

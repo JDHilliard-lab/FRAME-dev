@@ -1,0 +1,26 @@
+{
+ "FA-BW14062": {
+  "collection": "Black Oak",
+  "color": "Classic Black Oak BW14",
+  "family": "Wood",
+  "profile": "BW14062",
+  "series": "BW14062",
+  "style": ""
+ },
+ "FA-BW26062": {
+  "collection": "Black Oak",
+  "color": "Modern Black Oak BW26",
+  "family": "Wood",
+  "profile": "BW26062",
+  "series": "BW26062",
+  "style": ""
+ },
+ "FA-BW74062": {
+  "collection": "Black Oak",
+  "color": "Traditional Black Oak BW74",
+  "family": "Wood",
+  "profile": "BW74062",
+  "series": "BW74062",
+  "style": ""
+ }
+}
