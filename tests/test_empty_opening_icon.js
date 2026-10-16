@@ -40,6 +40,15 @@ const path = require('path');
       window.eval(av().querySelector('.art-add-btn').getAttribute('onclick'));
       if (!clicked) throw new Error('the upload did not open');
     });
+    __check('19.10: the preview is the ONE place to add artwork: a caption on the button, no upload row in the panel', () => {
+      const b = av().querySelector('.art-add-btn');
+      if (!b.querySelector('.art-add-cap') || b.querySelector('.art-add-cap').textContent !== 'Click or drag & drop here') throw new Error('no caption under the icon');
+      if (document.getElementById('m_artworkDrop')) throw new Error('the Upload / Drag & Drop row is still in the panel');
+      const f = document.getElementById('m_artworkFile');
+      if (!f || f.style.display !== 'none') throw new Error('the file input must stay, hidden');
+      if (!document.getElementById('m_artCropControls').contains(document.getElementById('m_artworkClear'))) throw new Error('Remove is not with the zoom controls');
+      if (_artAddIconHTML(80, 80, 'x()').indexOf('art-add-cap') >= 0) throw new Error('a small opening got a caption it cannot fit');
+    });
     __check('the icon scales with the opening, and drops out where it cannot be read', () => {
       const big = _artAddIconHTML(400, 500), tiny = _artAddIconHTML(20, 16);
       if (_artAddIconHTML(12, 9) !== '') throw new Error('a 12px opening still draws an icon');

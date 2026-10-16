@@ -2899,4 +2899,16 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .frame-card:hover .frame-card-change { color: var(--text-strong); }
 .fb-custom { margin-left: auto; flex: none; height: 24px; padding: 0 10px; font-size: var(--fs-65); font-weight: 700; color: var(--text-main); background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--r-4); cursor: pointer; }
 .fb-custom:hover { background: var(--btn-hover); color: var(--text-strong); }
-#imageControls > #customSwatchContainer { flex: 1 1 auto; min-width: 0; }
+/* 19.10: the frame is a SQUARE button (corner photo, Change strip) with Frame Code and
+   Color / Texture stacked beside it; the catalogue line sits on the section heading. */
+.frame-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 8px; }
+.frame-row > #customSwatchContainer { position: relative; flex: none; }
+.frame-row-fields { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; }
+.frame-card.frame-card-sq { position: relative; width: 88px; height: 88px; padding: 0; gap: 0; overflow: hidden; display: block; box-sizing: border-box; }
+.frame-card-sq .frame-card-pic { width: 100%; height: 100%; border: none; border-radius: 0; display: block; }
+.frame-card-sq .frame-card-change { position: absolute; left: 0; right: 0; bottom: 0; padding: 3px 0; border: none; border-radius: 0; text-align: center; background: rgba(0,0,0,0.6); color: #fff; font-size: var(--fs-60); }
+.frame-card-sq:hover .frame-card-change { background: rgba(0,0,0,0.78); color: #fff; }
+.frame-sec-title { display: flex; align-items: baseline; gap: 8px; }
+.frame-sec-title .frame-card-sub { font-family: var(--ui-font); font-size: var(--fs-65); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: auto; min-width: 0; }
+.art-add-btn { flex-direction: column; gap: 6px; }
+.art-add-cap { font-size: var(--fs-65); font-weight: 600; line-height: 1.2; color: inherit; white-space: nowrap; }

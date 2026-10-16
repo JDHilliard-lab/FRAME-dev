@@ -1821,6 +1821,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Custom swatch...** in the frame browser foot (`#fbCustomSwatch` -> `#swatchUpload`). Picking a frame
   fills `fColorName` from the catalogue only while it holds nothing or the previous frame's colour.
   The Sync Folder modal code is dormant (previously stored swatches still load).
+  **19.10:** the card is a SQUARE picture button (`.frame-card-sq`) with `m_fCode` / `m_fColorName`
+  stacked beside it (`.frame-row-fields`); the catalogue line (`#frameCardSub`) is on the heading.
+  **Artwork is added only from the preview** (the empty opening's `.art-add-btn` with its caption,
+  and drops on `#dash-frame-visual`); the panel's upload row (`#m_artworkDrop`) is gone, and
+  `#m_artCropControls` (zoom, Reset, 1:1, Remove = `#m_artworkClear`) shows once there is artwork.
 - **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
   view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).

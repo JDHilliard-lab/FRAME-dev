@@ -74,7 +74,11 @@ const path = require('path');
         _dashFrameCardSync(row);
         const card = document.getElementById('swatchSelectedDisplay');
         if ((card.getAttribute('onclick') || '').indexOf('openFrameBrowser()') < 0) throw new Error('card does not open the browser');
-        if (document.getElementById('frameCardCode').textContent !== 'MICH-132-29') throw new Error('code reads ' + document.getElementById('frameCardCode').textContent);
+        // 19.10: a SQUARE picture button, with Frame Code and Color / Texture stacked beside it.
+        if (!card.classList.contains('frame-card-sq')) throw new Error('the frame button is not the square');
+        const fields = document.querySelector('#imageControls .frame-row-fields');
+        if (!fields || !fields.contains(document.getElementById('m_fCode')) || !fields.contains(document.getElementById('m_fColorName'))) throw new Error('Frame Code and Color / Texture are not beside the square');
+        const ins = fields.querySelectorAll('input'); if (ins[0].id !== 'm_fCode' || ins[1].id !== 'm_fColorName') throw new Error('field order');
         const sub = document.getElementById('frameCardSub').textContent;
         if (sub.indexOf('Black') < 0 || sub.indexOf('Michelangelo') < 0) throw new Error('facts read ' + sub);
         if (!document.querySelector('#frameCardPic img')) throw new Error('no picture');
