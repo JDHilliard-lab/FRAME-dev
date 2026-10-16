@@ -51,8 +51,9 @@ const path = require('path');
       b.onclick();
       if (_specDualUnit() !== 'mm') throw new Error('menu did not set mm');
       const host = document.getElementById('projUnitsHost');
-      if (!host || !host.querySelector('[data-unit-opt="Second unit:mm"].active')) throw new Error('the Project tab does not show the same choice');
-      if (!host.querySelector('[data-unit-opt="Enter sizes in:in"].active')) throw new Error('the Project tab does not show the entry unit');
+      // 19.06: the Project tab reads the setting back in one line; Settings holds the controls.
+      if (!host || host.textContent.indexOf('Inches + mm') !== 0) throw new Error('the Project tab does not show the same choice: ' + (host && host.textContent));
+      if (host.querySelector('[data-unit-opt]')) throw new Error('the full units controls are back on the Project tab');
       m.remove();
     });
     __check('an EXISTING project opens with what it had: no field means no second unit', () => {

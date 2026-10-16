@@ -2869,3 +2869,12 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .fb-frame:hover .fb-more, .fb-more:focus-visible { opacity: 1; }
 .fb-star.on { color: var(--warn); }
 .fb-foot { padding: 8px 14px; font-size: var(--fs-60); color: var(--text-muted); border-top: 1px solid var(--border-color); }
+
+/* 19.06: the Project tab's facts block and the one-line settings readback. */
+.proj-fields { display: grid; grid-template-columns: 1.3fr 1fr 52px; gap: 10px 8px; margin-bottom: 12px; }
+.proj-fields > .proj-f-name { grid-column: 1 / -1; }
+.proj-lbl { display: block; font-size: var(--fs-65); font-weight: bold; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+.proj-in { width: 100%; font-size: var(--fs-85); padding: 6px 8px; background: var(--bg-input); color: var(--text-main); border: 1px solid var(--border-color); border-radius: var(--r-4); box-sizing: border-box; }
+.proj-settings-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; margin-bottom: 18px; padding: 8px 10px; background: var(--bg-subpanel); border: 1px solid var(--border-color); border-radius: var(--r-6); }
+.proj-settings-row #projUnitsHost { flex: 1 1 140px; min-width: 0; font-size: var(--fs-70); color: var(--text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.proj-settings-row .proj-set-btn { width: auto; flex: none; height: 26px; padding: 0 10px; font-size: var(--fs-65); }

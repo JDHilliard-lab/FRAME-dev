@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.05">
+    <link rel="stylesheet" href="style.css?v=19.06">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -1419,27 +1419,34 @@
         <h3 style="margin-top:0; margin-bottom:4px; font-size:var(--fs-105); color:var(--text-strong);">Project</h3>
         <p id="specPdfSummary" style="font-size:var(--fs-70); color:var(--text-muted); margin:0 0 16px 0;"><!-- populated by openSpecPdfModal --></p>
 
-        <div style="margin-bottom:14px;">
-            <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Project Name</label>
-            <input type="text" id="specPdfProjName" placeholder="Untitled project" style="width:100%; font-size:var(--fs-85); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
-        </div>
-        <!-- 18.37: the same units controls as the header chip, built by _unitControlsInto. -->
-        <div id="projUnitsHost" style="margin-bottom:14px;"></div>
-        <button type="button" id="projFrameFxBtn" class="action-btn btn-secondary" style="width:auto; height:28px; padding:0 12px; margin:-4px 0 14px;" onclick="openFrameFx()" title="Drop shadow and the shadows inside the frame, for every preview, export and spec page">Frame effects&hellip;</button>
-        <div style="display:flex; gap:10px; margin-bottom:16px;">
-            <div style="flex:2;">
-                <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Project Code</label>
-                <input type="text" id="specPdfCode" placeholder="e.g. CLIENT-PROJECT-AREA" style="width:100%; font-family:monospace; font-size:var(--fs-80); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
+        <!-- 19.06: THE PROJECT'S FOUR FACTS IN ONE BLOCK. Units, rounding and Frame effects sat
+             between the name and the code, so the tab scrolled before the footer facts were
+             done; they are deck-wide settings that live in the header gear, so here they are
+             one line that reads them back (_projUnitsSummaryInto) and two buttons into Settings. -->
+        <div class="proj-fields">
+            <div class="proj-f-name">
+                <label class="proj-lbl">Project Name</label>
+                <input type="text" id="specPdfProjName" placeholder="Untitled project" class="proj-in">
             </div>
-            <div style="flex:0 0 56px;">
-                <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Version</label>
-                <input type="text" id="specPdfVersion" placeholder="V1" maxlength="4" style="width:100%; font-size:var(--fs-85); padding:6px 6px; text-align:center; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
+            <div>
+                <label class="proj-lbl">Project Code</label>
+                <input type="text" id="specPdfCode" placeholder="e.g. CLIENT-PROJECT-AREA" class="proj-in" style="font-family:monospace; font-size:var(--fs-80);">
+            </div>
+            <div>
+                <label class="proj-lbl">Location</label>
+                <input type="text" id="specPdfLocation" list="specPdfLocationList" placeholder="City, State" class="proj-in">
+                <datalist id="specPdfLocationList"></datalist>
+            </div>
+            <div>
+                <label class="proj-lbl">Version</label>
+                <input type="text" id="specPdfVersion" placeholder="V1" maxlength="4" class="proj-in" style="text-align:center; padding:6px 4px;">
             </div>
         </div>
-        <div style="margin-bottom:18px;">
-            <label style="display:block; font-size:var(--fs-65); font-weight:bold; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px;">Location</label>
-            <input type="text" id="specPdfLocation" list="specPdfLocationList" placeholder="City, State" style="width:100%; font-size:var(--fs-85); padding:6px 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); box-sizing:border-box;">
-            <datalist id="specPdfLocationList"></datalist>
+        <div class="proj-settings-row">
+            <span class="proj-lbl" style="margin:0;">Units</span>
+            <div id="projUnitsHost"></div>
+            <button type="button" class="action-btn btn-secondary proj-set-btn" onclick="openAppSettings('units')" title="Units and rounding are set in Settings (the gear in the header): what you type sizes in, the second unit printed beside inches, and how many places each prints">Units&hellip;</button>
+            <button type="button" id="projFrameFxBtn" class="action-btn btn-secondary proj-set-btn" onclick="openFrameFx()" title="Drop shadow and the shadows inside the frame, for every preview, export and deck page (Settings, Frame effects)">Frame effects&hellip;</button>
         </div>
 
         <div style="margin-bottom:18px; display:none;">
@@ -2223,9 +2230,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.05';</script>
-<script src="templates.js?v=19.05"></script>
-<script src="app.js?v=19.05"></script>
+<script>window.FRAME_HTML_VERSION = '19.06';</script>
+<script src="templates.js?v=19.06"></script>
+<script src="app.js?v=19.06"></script>
 
 </body>
 </html>

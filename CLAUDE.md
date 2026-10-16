@@ -1804,6 +1804,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Swatch cut:** standard (outer-edge colour change or hard edge) by default; ornate/barnwood faces
   are busy and use the bottom-up smooth-end finder. Never floor a swatch past a real cut: deep shadow
   boxes have a face only ~17% of the photo.
+- **THE PROJECT TAB READS SETTINGS BACK, IT DOES NOT HOLD THEM (19.06).** Units, rounding and
+  Frame effects are changed in Settings; `#projUnitsHost` is a one-line readback
+  (`_projUnitsSummaryInto`, refreshed by `_syncUnitChip` and `setUnitPrecision`) beside Units... and
+  `#projFrameFxBtn`. Name, code, location, version are one `.proj-fields` block.
+  **Its page preview draws an element page with `_dsElementPageThumbHTML(desc, w, h, undefined,
+  true)`** (the rail's builder: theme background, dark ink, notes, footer; `noBadge`), never the
+  bare `_deckMockHTML`, which ignores the page theme.
 - **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
   view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).

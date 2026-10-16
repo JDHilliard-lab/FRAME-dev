@@ -142,7 +142,9 @@ const path = require('path');
     // _drawPdfFooter through the same doc the real PDF uses; the HTML mock has none,
     // and a second footer builder here would be a third geometry to keep in step.
     const body = bodyOf('async function _dsRenderCoverPreview()', 'function _dsOpenTemplateEditor');
-    if (body.indexOf('_dsAddFooter(') < 0) throw new Error('no footer on the HTML-mock branch');
+    // 19.06: through the rail's own builder, which borrows _dsAddFooter itself.
+    if (body.indexOf('_dsElementPageThumbHTML(') < 0) throw new Error('the element page is not drawn by the shared builder');
+    if (bodyOf('function _dsElementPageThumbHTML(', 'const _dsThumbLast').indexOf('_dsAddFooter(') < 0) throw new Error('no footer on the element-page branch');
     if (src.indexOf('function _dsAddFooter') < 0) throw new Error('_dsAddFooter itself is gone');
   });
 
