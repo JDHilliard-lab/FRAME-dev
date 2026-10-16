@@ -2904,10 +2904,12 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .frame-row { display: flex; gap: 10px; align-items: stretch; margin-bottom: 8px; }
 .frame-row > #customSwatchContainer { position: relative; flex: none; }
 .frame-row-fields { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 6px; }
-.frame-card.frame-card-sq { position: relative; width: 88px; height: 88px; padding: 0; gap: 0; overflow: hidden; display: block; box-sizing: border-box; }
-.frame-card-sq .frame-card-pic { width: 100%; height: 100%; border: none; border-radius: 0; display: block; }
-.frame-card-sq .frame-card-change { position: absolute; left: 0; right: 0; bottom: 0; padding: 3px 0; border: none; border-radius: 0; text-align: center; background: rgba(0,0,0,0.6); color: #fff; font-size: var(--fs-60); }
-.frame-card-sq:hover .frame-card-change { background: rgba(0,0,0,0.78); color: #fff; }
+.frame-card.frame-card-sq { position: relative; width: 104px; height: 104px; padding: 0; gap: 0; overflow: hidden; display: flex; flex-direction: column; box-sizing: border-box; }
+/* 19.11: the corner photo as the frame browser shows it (.fb-pic): whole, contained, on white. */
+.frame-card-sq .frame-card-pic { flex: 1 1 auto; min-height: 0; width: 100%; border: none; border-radius: 0; display: flex; align-items: center; justify-content: center; background: #ffffff; padding: 4px 0; box-sizing: border-box; }
+.frame-card-sq .frame-card-pic img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; }
+.frame-card-sq .frame-card-change { flex: none; padding: 3px 0; border: none; border-radius: 0; text-align: center; background: var(--bg-panel); color: var(--text-main); font-size: var(--fs-60); }
+.frame-card-sq:hover .frame-card-change { background: var(--btn-hover); color: var(--text-strong); }
 .frame-sec-title { display: flex; align-items: baseline; gap: 8px; }
 .frame-sec-title .frame-card-sub { font-family: var(--ui-font); font-size: var(--fs-65); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: auto; min-width: 0; }
 .art-add-btn { flex-direction: column; gap: 6px; }
