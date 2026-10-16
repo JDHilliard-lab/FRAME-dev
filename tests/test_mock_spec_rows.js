@@ -48,7 +48,11 @@ const path = require('path');
     __check('each row carries a dotted leader, like the printed one', () => {
       if (!host.querySelector('span[style*="dotted"]')) throw new Error('no leader');
       const pdf = S.slice(S.indexOf('// — Spec block (dotted leaders) —'), S.indexOf('// — Elevation (wall thumbnail) —'));
-      if (pdf.indexOf('doc.setFontSize(8.5)') < 0 || pdf.indexOf('let _lead = 13') < 0) throw new Error('the PDF spec numbers moved; update the mock to match them');
+      // 18.94: both sides read _specRowFit, so the numbers live in one place.
+      if (pdf.indexOf('_specRowFit(') < 0 || pdf.indexOf('doc.setFontSize(_size)') < 0) throw new Error('the PDF no longer sets its rows through _specRowFit');
+      if (_deckMockHTML.toString().indexOf('_specRowFit(') < 0) throw new Error('the mock no longer sets its rows through _specRowFit');
+      const fit = _specRowFit(10, 100, 1000);
+      if (fit.lead !== 13 || fit.size !== 8.5) throw new Error('a list with room no longer sets on the house 8.5 / 13');
     });
   `;
 

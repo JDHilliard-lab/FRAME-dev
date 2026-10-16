@@ -1333,6 +1333,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   persisted and permanent; wording may change. A breaker selected in Per-piece or Group
   A/B/C mode gets the install-guide panel via the `desc._install && !desc._manual` branch,
   which must stay ahead of the mode branches.
+- **A NEW PICTURE NEVER KEEPS THE OLD PICTURE'S SIZE (18.94).** Every artwork apply path writes
+  `artworkW/H = w || 0` and every drop passes `(u, n, w, h)`; the dashboard and wall previews correct a
+  stored size whose proportions disagree with the pixels (`_artSizeStale`). The spec page reads real
+  pixels, so a stale size showed a squashed picture on screen and the true crop in print.
+- **SPEC ROW SPACING IS `_specRowFit` (18.94)**, for the PDF and `_deckMockHTML` alike: 8.5 on 13 unless
+  the list would pass the frame strip / thumbnails by more than 4pt, then down to 9pt lead, type to 7pt.
 - **THE INSTANT SPEC PREVIEW SETS ITS ROWS LIKE THE PDF.** `_deckMockHTML` builds one row
   per `buildSpecStrings` line (bold label, dotted leader, right-aligned value) at the PDF's
   8.5pt on a 13pt rhythm scaled by `h / 540`, with `tpl.spec.y` as the first BASELINE as in
