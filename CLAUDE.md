@@ -1767,6 +1767,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_faceWidth`, which is not unit-converted or carried onto wall frames) is painted dark just outside the canvas in
   all four views (canvas renderer ring, DOM spread shadow `_floaterGapCss` KEPT when the canvas has artwork, SVG ring),
   strength `frameFx.gap`. A lip named in the maker's text (`5/8" Face`) beats one read off a drawing.
+  **THE FRAME PICKS THE PRODUCT BOTH WAYS (19.03):** `applySwatchToRow` makes a floater (`_swatchIsFloater`: collection
+  name OR `faceWidth > 0`) a floater canvas, and a regular moulding on a FLOATER item Framed Art again. Every other
+  product is left alone; the form dropdown follows `row.product`.
   **Larson-Juhl (18.92):** source is their Magento GraphQL (GET only, header `Store: us`, category
   uid `Nzk1` = Mouldings) for sizes/facets, and each product page's fotorama JSON for images (GraphQL
   media is empty). Corners are L-shaped and cropped to one leg; some galleries list the drawing first.
