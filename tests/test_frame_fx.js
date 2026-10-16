@@ -116,12 +116,12 @@ const path = require('path');
       if (_fx('outer') !== 1.8 || _fx('art') !== 0.5 || _fx('frame') !== 1) throw new Error('loaded ' + JSON.stringify(frameFx));
       resetFrameFx();
     });
-    __check('the panel has the on/off, five sliders and a reset, and the sliders drive the setting', () => {
+    __check('the panel has the on/off, six sliders (19.01 adds Floater gap) and a reset, and the sliders drive the setting', () => {
       openFrameFx();
       const m = document.getElementById('appSettingsModal');
       if (!m.querySelector('#frameFxOuterOn')) throw new Error('no drop shadow on/off');
       const rs = m.querySelectorAll('input[type=range][data-fx]');
-      if (rs.length !== 5) throw new Error(rs.length + ' sliders');
+      if (rs.length !== 6) throw new Error(rs.length + ' sliders');
       const art = m.querySelector('[data-fx="art"]'); art.value = '150'; art.oninput();
       if (_fx('art') !== 1.5) throw new Error('slider did not set art');
       Array.from(m.querySelectorAll('button')).find(b => b.textContent.indexOf('Reset') === 0).onclick();
