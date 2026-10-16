@@ -476,7 +476,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   `computeSnapForDrag` and `_ctxComputeSnap` (wall edges/centre, hang line, frames,
   glazing seams, blocks). `skip` excludes the dragged thing. Group drags skip snapping.
   Nudges debounce via `_ctxScheduleHistory`.
-  **The sidebar is tabbed** (`switchElevTab`, Art / Guides / Context / Glass; the strip sits right under the wall section, and Layout Guides is the Guides tab since 18.51, keeping the frame list above the fold). Hide panes with
+  **The sidebar is tabbed** (`switchElevTab`, Art / Guides / Context / Glass; the strip sits right under the wall section, and Layout Guides is the Guides tab since 18.51, keeping the frame list above the fold). Since 19.05 they are category tabs (`.elev-cat-tabs`: icon, name, count), still `.frame-tab`/`.active`. Hide panes with
   `display`, never detach (`initElevControls` renders all containers every time). Restore
   with `''`, never `'block'`.
   **The pane is the scroll region and needs `min-height: 0`** (`overflow-y: auto` alone
@@ -1822,6 +1822,22 @@ run but passes alone is usually load timing: rerun before chasing it.
   it). Letter STYLE stays in Elevation settings. `svgFrameMode` is NOT stored: the export
   menu picks it per export through `_svgExportAs(mode, run)`, which puts it back (also on a
   throw) so PDF captures never inherit vector frames; `loadSvgFrameMode` clears the old key.
+- **ELEVATION SHADOWS ARE IN REAL INCHES (19.05).** `elevScale` is px per elevUnit, so `N * elevScale`
+  is N INCHES (the old drop shadow was a 40" blur). Every wall shadow uses the canvas recipe in
+  points: `_ePt = elevScale * unitFactor('in', elevUnit) / 72` (outer 35/18/0.55, frame 35/14/0.75
+  inset, mat 20/8/0.5625, art 8/3/0.3125; insets carry `dIS`'s 1.25). With artwork the picture
+  covers the opening's inset, so `.art-shade` casts it again over the `<img>`.
+- **ONE DECK-PAGE DROP SHADOW: `_frameShadowCanvas(d, wIn, hIn)`** (gated by `frameFx.pageShadow`,
+  "Also on deck pages"). `_pdfFrameShadow` (spec pages) and `exportElevSVG` `forCapture` (breaker
+  and install pages) both draw it; the capture splices all shadows in UNDER all frames
+  (`_shadowAt`), skips wireframe walls, and the SVG download never gets one.
+- **THE ELEVATION TOOL DOCK (19.05, `#elevToolDock` in `#elevDockSlot`)** is Deck Studio's
+  `.ds-dock` (not `.vert`: it scrolls and would clip the Add frames flyout `#bulkDropdownList`).
+  A 54px column between sidebar and workspace, the one deliberate cost to the on-screen fit
+  (`test_elev_rail_width`); BOTH exports hide it beside the rail. Select (V) is lit when no wall
+  tool is armed (`_elevDockSync`, from `initElevControls` and `toggleLineTool`), which also writes
+  the tab counts (`data-elevtab-n`). Moved ids kept: `lineToolBtn`, `alignBtn`, `groupDimBtn`,
+  `fitFlatBtn`, `bulkImportBtn`, `shortcutsBtn`; `contextToolBtn` now exists.
 - **INNER SHADOWS ARE TRUE INSETS (18.46, `dIS`)**: the casting stroke runs up to the edge
   and is parked off-canvas with the shadow thrown back by `shadowOffsetX`. The old stroke
   sat 10px outside, so small shadows (Onto artwork, Mat onto mat) never arrived. With NO

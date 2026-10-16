@@ -844,9 +844,13 @@ const fs = require('fs');
       if (H.indexOf('ART WALL') < 0 || H.indexOf('EGD WALL') < 0) throw new Error('a mode is unnamed');
       // Out of the Add & Arrange toolbar: that row is icons plus one long select, and a
       // labelled button in it squeezed the thing you actually pick items from.
-      const aa = H.indexOf('Add &amp; Arrange');
-      const tools = H.slice(aa, H.indexOf('elev-tabpane', aa));
-      if (tools.indexOf('egdWallBtn') >= 0) throw new Error('the wall-mode button is back in the Add & Arrange toolbar');
+      // 19.05: those tools are the dock beside the drawing (#elevToolDock) now. Anchored on
+      // the dock itself, so this cannot pass by not finding it.
+      const aa = H.indexOf('id="elevToolDock"');
+      if (aa < 0) throw new Error('the elevation tool dock is missing');
+      const tools = H.slice(aa, H.indexOf('<div class="workspace"', aa));
+      if (tools.indexOf('bulkImportBtn') < 0) throw new Error('the dock slice did not reach its tools');
+      if (tools.indexOf('egdWallBtn') >= 0) throw new Error('the wall-mode button is back in the tools');
       const A = window.__appSrc;
       // Exactly one is highlighted, and from THIS elevation - EGD mode is per wall while
       // every other button in that panel is deck-wide, which is the trap here.

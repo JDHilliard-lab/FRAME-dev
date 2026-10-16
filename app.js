@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.04';
+const APP_VERSION = '19.05';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -528,9 +528,9 @@ const FRAME_TOUR = [
     { ch: 3, view: 'elevation', target: '#elev-wall-rail', prep: () => _tourElev(),
       title: 'The wall rail',
       body: 'Every wall is its own drawing and its own page in the deck. Click a wall to open it, drag to reorder. + Add Wall asks which item code the wall is for, so no wall is left out of the deck.' },
-    { ch: 3, view: 'elevation', target: '.elev-add-arrange-fixed', prep: () => _tourElevTab('art'),
-      title: 'Add & Arrange',
-      body: 'Import Frames adds the pieces you tick in one go. The frame list below it is every piece on this wall: lock, hide, re-letter and swap artwork from there.' },
+    { ch: 3, view: 'elevation', target: '#elevToolDock', prep: () => _tourElevTab('art'),
+      title: 'The tool bar',
+      body: 'The bar beside the wall holds the tools: Select, Measure (M) and Context block (C), then Add frames (tick pieces and add them in one go), Sort A to Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The frame list in the Art tab is every piece on this wall: lock, hide, re-letter and swap artwork from there.' },
     { ch: 3, view: 'elevation', target: '#wall', prep: () => _tourElevTab('art'),
       title: 'Hang the work',
       body: 'Drag frames into place; they snap to the grid and to each other. Hold Shift for fine moves, Ctrl+click to select several, Ctrl+G to group. Dimensions are live: drag a line to move it, drag its number to slide it, and press M to draw your own measure line.' },
@@ -5367,6 +5367,9 @@ function initMasterApp() {
         if (!elevVisible) return;
         if ((e.key === 'm' || e.key === 'M') && !e.ctrlKey && !e.metaKey) {
             toggleLineTool();
+        } else if ((e.key === 'v' || e.key === 'V') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            // The dock's Select (19.05). Not Ctrl/Cmd+V, which is paste.
+            _elevDockSelect();
         } else if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey) {
             // Not Ctrl/Cmd — that is copy, and stealing it here would break it on the
             // one view where a letter shortcut and a clipboard shortcut share a key.
@@ -5442,6 +5445,7 @@ function initMasterApp() {
         if (bList && bList.style.display === 'block') {
             if (bBtn && !bBtn.contains(event.target) && !bList.contains(event.target)) {
                 bList.style.display = 'none';
+                bBtn.classList.remove('open');
             }
         }
     });
@@ -6493,7 +6497,7 @@ function _frameFxInto(host) {
     const ps = document.createElement('label'); ps.style.cssText = 'display:flex; align-items:center; gap:8px; font-size:var(--fs-70); color:var(--text-main); cursor:pointer; margin:-4px 0 0 2px;';
     const pcb = document.createElement('input'); pcb.type = 'checkbox'; pcb.id = 'frameFxPageShadow'; pcb.checked = !!frameFx.pageShadow;
     pcb.onchange = () => { frameFx.pageShadow = pcb.checked; saveFrameFx(); _frameFxChanged(); };
-    ps.appendChild(pcb); ps.appendChild(document.createTextNode('Also on spec pages (the PDF and its previews)'));
+    ps.appendChild(pcb); ps.appendChild(document.createTextNode('Also on deck pages: spec, breaker and install (the PDF and its previews)'));
     ctl.appendChild(ps);
     FRAME_FX_ROWS.forEach(([k, label, help]) => {
         const row = document.createElement('div'); row.setAttribute('data-fx-row', k);
@@ -6614,27 +6618,38 @@ async function _frameFxPreview() {
 // (35px blur, 18px drop at 72dpi). Never on a flat graphic, which sits flush.
 function _pdfFrameShadow(doc, d, x, y, w, h) {
     try {
-        if (!frameFx.pageShadow || !dashOuterShadowsOn || _fx('outer') <= 0) return false;
-        if (!d || _isFlatGraphic(d.product)) return false;
+        if (!d) return false;
         const wIn = parseFloat(d.extW), hIn = parseFloat(d.extH);
-        if (!(wIn > 0 && hIn > 0 && w > 0 && h > 0)) return false;
-        const v = _fxSh('outer', 35 / 72, 18 / 72, 0.55);          // inches
-        const padIn = v.b * 1.5 + v.o;
-        const D = 24;                                              // px per inch: a soft shadow needs few
-        const c = document.createElement('canvas');
-        c.width = Math.max(1, Math.ceil((wIn + padIn * 2) * D)); c.height = Math.max(1, Math.ceil((hIn + padIn * 2) * D));
-        const x2 = c.getContext('2d'); if (!x2) return false;
-        // Draw the rectangle one canvas-width off to the left and throw only its SHADOW
-        // back in, so nothing but the shadow lands on the transparent canvas.
-        x2.shadowColor = 'rgba(0,0,0,' + v.a + ')'; x2.shadowBlur = v.b * D;
-        x2.shadowOffsetX = c.width; x2.shadowOffsetY = v.o * D;
-        x2.fillStyle = '#000'; x2.fillRect(padIn * D - c.width, padIn * D, wIn * D, hIn * D);
+        if (!(w > 0 && h > 0)) return false;
+        const s = _frameShadowCanvas(d, wIn, hIn); if (!s) return false;
         const ppi = w / wIn;
         // Through _addPngImage (Flate), never a bare 'PNG' add: jsPDF stores that RAW plus a raw
         // alpha mask, and on a real 30-page deck these shadows were 30 MB of a 35 MB PDF (18.80).
-        _addPngImage(doc, c.toDataURL('image/png'), x - padIn * ppi, y - padIn * ppi, (wIn + padIn * 2) * ppi, (hIn + padIn * 2) * ppi);
+        _addPngImage(doc, s.canvas.toDataURL('image/png'), x - s.padIn * ppi, y - s.padIn * ppi, (wIn + s.padIn * 2) * ppi, (hIn + s.padIn * 2) * ppi);
         return true;
     } catch (e) { return false; }
+}
+// THE ONE DECK-PAGE DROP SHADOW (19.05): a transparent canvas holding only the shadow of a
+// wIn x hIn frame, padIn inches of room on every side. Spec pages (_pdfFrameShadow) and the
+// elevation capture behind breaker and install pages (exportElevSVG forCapture) both draw
+// it, so a frame casts the same shadow on every page the switch covers. Null when the
+// switch, the drop shadow or the piece says no shadow.
+function _frameShadowCanvas(d, wIn, hIn) {
+    if (!frameFx.pageShadow || !dashOuterShadowsOn || _fx('outer') <= 0) return null;
+    if (!d || _isFlatGraphic(d.product)) return null;
+    if (!(wIn > 0 && hIn > 0)) return null;
+    const v = _fxSh('outer', 35 / 72, 18 / 72, 0.55);          // inches
+    const padIn = v.b * 1.5 + v.o;
+    const D = 24;                                              // px per inch: a soft shadow needs few
+    const c = document.createElement('canvas');
+    c.width = Math.max(1, Math.ceil((wIn + padIn * 2) * D)); c.height = Math.max(1, Math.ceil((hIn + padIn * 2) * D));
+    const x2 = c.getContext('2d'); if (!x2) return null;
+    // Draw the rectangle one canvas-width off to the left and throw only its SHADOW
+    // back in, so nothing but the shadow lands on the transparent canvas.
+    x2.shadowColor = 'rgba(0,0,0,' + v.a + ')'; x2.shadowBlur = v.b * D;
+    x2.shadowOffsetX = c.width; x2.shadowOffsetY = v.o * D;
+    x2.fillStyle = '#000'; x2.fillRect(padIn * D - c.width, padIn * D, wIn * D, hIn * D);
+    return { canvas: c, padIn: padIn };
 }
 function resetFrameFx() { FRAME_FX_KEYS.forEach(k => { frameFx[k] = FRAME_FX_DEFAULT[k]; }); frameFx.pageShadow = false; saveFrameFx(); applyFrameFxCssVars(); try { updateDashVisualsFromDOM(); } catch (e) {} _frameFxChanged(); }
 
@@ -8160,9 +8175,49 @@ function recalculateDashboardQuantities() {
     if (currentView === 'dashboard') { loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]); renderDashTable(); }
 }
 
-function toggleBulkDropdown() {
+function toggleBulkDropdown(e) {
+    // Opened from the dock AND from the Art tab's Add frames: the document click that
+    // closes the list on an outside click must not see the opening click.
+    if (e && e.stopPropagation) e.stopPropagation();
     const list = document.getElementById('bulkDropdownList');
-    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+    if (!list) return;
+    const open = list.style.display === 'none';
+    if (open) populateElevBulkList();
+    list.style.display = open ? 'block' : 'none';
+    const btn = document.getElementById('bulkImportBtn');
+    if (btn) btn.classList.toggle('open', open);
+}
+// ── THE ELEVATION TOOL DOCK (19.05, #elevToolDock) ─────────────────────────────
+// Deck Studio's dock, beside the drawing: Select, Measure, Context block, then the old
+// Add & Arrange tools, codes and shortcuts. Select is lit whenever no wall tool is armed,
+// so there is always one lit button saying what a click on the wall will do.
+function _elevDockSelect() {
+    if (typeof lineToolActive !== 'undefined' && lineToolActive) toggleLineTool(false);
+    if (typeof contextToolActive !== 'undefined' && contextToolActive) toggleContextTool(false);
+    if (typeof _ulCalibrateActive !== 'undefined' && _ulCalibrateActive) _ulCancelCalibrate(true);
+    _elevDockSync();
+}
+// Arming a context block brings its tab forward: the palette is where the kind is picked.
+function _elevDockContext() {
+    _elevShowTabFor('context');
+    toggleContextTool();
+}
+// Select's light and the tab counts. Called from initElevControls (every structural
+// change, and every exit of the context tool) and toggleLineTool. Never stored.
+function _elevDockSync() {
+    const sel = document.getElementById('elevDockSelect');
+    const armed = (typeof lineToolActive !== 'undefined' && lineToolActive) || (typeof contextToolActive !== 'undefined' && contextToolActive);
+    if (sel) sel.classList.toggle('active', !armed);
+    const ce = (typeof elevations !== 'undefined') ? elevations[currentElevIndex] : null;
+    const n = {
+        art: (typeof elevFrames !== 'undefined' && Array.isArray(elevFrames)) ? elevFrames.filter(f => f && f.active !== false).length : 0,
+        context: ce ? _elevContextBlocks(ce).length : 0,
+        glass: (ce && Array.isArray(ce.glazing)) ? ce.glazing.length : 0
+    };
+    document.querySelectorAll('[data-elevtab-n]').forEach(el => {
+        const v = n[el.getAttribute('data-elevtab-n')] || 0;
+        el.textContent = v ? String(v) : '';
+    });
 }
 
 function populateElevBulkList() {
@@ -8250,6 +8305,7 @@ function importSelectedFramesBulk() {
     });
 
     document.getElementById('bulkDropdownList').style.display = 'none';
+    { const b = document.getElementById('bulkImportBtn'); if (b) b.classList.remove('open'); }
     initElevControls(); drawElevAll(); recalculateDashboardQuantities();
     if (typeof renderDashTable === 'function') renderDashTable();
     pushHistory();
@@ -42262,6 +42318,7 @@ function applyIdRename(oldId, newId, quiet) {
 }
 
 function initElevControls() {
+    _elevDockSync();
     // Window panels first, and BEFORE the no-frames early return below: glass is
     // independent of frames, and a window-film-only wall legitimately has none. Same
     // trap as _drawSpecSetPage's footer — calling it at the top covers every exit.
@@ -43345,11 +43402,12 @@ const HELP_REFERENCE_DATA = [
     {
         id: 'elevation',
         title: 'Elevations',
-        intro: `Each wall is its own drawing. The rail on the left lists the walls. The sidebar has three tabs: <strong>Art</strong> for the pieces, <strong>Context</strong> for what is in the room, and <strong>Glass</strong> for window panels.`,
+        intro: `Each wall is its own drawing. The rail on the left lists the walls. The sidebar has four tabs: <strong>Art</strong> for the pieces, <strong>Guides</strong> for what the drawings show, <strong>Context</strong> for what is in the room, and <strong>Glass</strong> for window panels.`,
         entries: [
             { title: 'Walls and the rail', body: `Click a wall in the rail to open it and drag walls to reorder them. <strong>+ Add Wall</strong> asks which item code the wall is for: one that is not on a wall yet, or a new code of a type and frame set. Every wall belongs to a code, so none is left out of the deck. The &times; on a wall deletes it, and that can be undone.` },
             { title: 'Wall mode: ART, EGD, WF', body: `<strong>ART WALL</strong> is the default: framed art hangs on it. <strong>EGD WALL</strong> makes the wall a graphic surface: a wallcovering fills it and stays inside it, above the baseboard. <strong>WF WALL</strong> builds a standard window elevation for window film and opens the Glass tab. A wall with glass on it normally stays an ART wall.` },
-            { title: 'Adding pieces', body: `<strong>Add &amp; Arrange</strong> in the Art tab adds the pieces you tick in one go. From the dashboard, pick a piece in <strong>Push to Wall</strong> and press <strong>Send</strong>.` },
+            { title: 'The tool bar', body: `The bar to the left of the wall holds the elevation tools. <strong>Select</strong> (<span class="help-kbd">V</span>) puts a tool down, <strong>Measure</strong> (<span class="help-kbd">M</span>) draws your own dimension line and <strong>Context block</strong> (<span class="help-kbd">C</span>) draws a door, window or piece of furniture. Below them: Add frames, Sort A&ndash;Z, Align, Group dimension, Fit to wall, Item codes, and the keyboard shortcuts.` },
+            { title: 'Adding pieces', body: `<strong>Add frames</strong> (the framed plus in the tool bar, or the button over the frame list) adds the pieces you tick in one go. From the dashboard, pick a piece in <strong>Push to Wall</strong> and press <strong>Send</strong>.` },
             { title: 'Moving and selecting', body: `Drag a frame to move it; it snaps to the grid and to the other frames. <span class="help-kbd">Ctrl+click</span> adds a frame to the selection, or drag a box around several. Hold <span class="help-kbd">Shift</span> while dragging for fine movement. <span class="help-kbd">Esc</span> deselects.` },
             { title: 'Grouping and aligning', body: `Select frames and press <span class="help-kbd">Ctrl+G</span> to group them so they move as one. The <strong>Align</strong> icon opens equal-gap, align-edge and distribute tools for the selection.` },
             { title: 'Sort A&ndash;Z', body: `Re-letters the frames by their position from left to right, so A is the leftmost piece. The letters print on the drawings and the spec pages, so sort before the deck goes out.` },
@@ -43478,7 +43536,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.04</strong> Deleting a wall asks about its pieces. When pieces hang on that wall and nowhere else, you choose <strong>Delete wall and pieces</strong> (they leave the Frame Dashboard and the presentation: the way to drop the options a client turned down) or <strong>Delete wall, keep pieces</strong> (as before: they stay in the Dashboard, and + Add Wall offers them to hang again). Pieces also shown on another wall are never deleted, and Ctrl+Z brings back the wall and its pieces together.<br><br><strong>19.03</strong> The frame you pick sets the product both ways. Picking a floater makes the item Framed Canvas (Floater), as before, and picking a regular moulding on a floater item now turns it back into Framed Art (it used to stay a floater, with its canvas inset and no mats). A floater counts by its lip width too, whatever its collection is called. Shadow boxes, frameless canvas, wallcovering and window film are left as you set them.<br><br><strong>19.02</strong> Floaters show their gap. The quarter inch between a floater's face and the canvas now draws as a dark slot instead of more moulding, on the Dashboard preview, the wall, PNG and SVG exports and spec pages, and the canvas casts its shadow into it. Settings, Frame effects has a new <strong>Floater gap</strong> slider for how dark it reads (the canvas used to borrow Frame onto mat). The three Cape Cod floaters (IM-310-715, 720 and 725) now carry their 5/8in face, so a new pick sets a 7/8in inset.<br><br><strong>19.01</strong> More frames turned round to face the right way: 46 Larson-Juhl floaters (Axom, Bauhaus II, Cranbrook, Eiffel, Gramercy, Metalia, Moderne, Olsen, Ravello, Shoji and Spencer II) now show the wall on the left and the floor along the bottom like every other floater, and Academie Silver 3in (LJ-733237) matches its gold and black siblings.<br><br><strong>19.00</strong> The frame browser has a <strong>Type</strong> filter: show only floaters, or only frames, across every vendor. Frame thumbnails are cropped consistently again: about 290 International Moulding and Framerica corners had kept far too much of the moulding and showed as thin slivers. Seven more mouldings that faced the wrong way (including IM-310-710) are turned round.<br><br><strong>18.99</strong> International Moulding and Framerica frames now face the same way as every other moulding: outer edge on the left, rabbet lip on the right. Many were mirror images, so the mockup drew the lip on the outside of the frame. The old Universal folder with two frames is gone; both are in Universal Arquati.<br><br><strong>18.98</strong> The frame library adds International Moulding (about 1,000 current mouldings in 153 collections, 37 of them floaters) and Framerica (336 mouldings in 91 finishes), each with its corner photo, sizes, colour family and, where the maker publishes one, its profile drawing. Deep shadowbox corners now show the frame face above the cut end instead of only raw wood.<br><br><strong>18.97</strong> More frame corners and profiles fit on one row of a group page before it wraps: the space between mouldings tightens first, then the pictures shrink, and only then does the strip go to two rows.<br><br><strong>18.96</strong> Frame corner photos all share one shape now. Thin Universal Arquati and Larson-Juhl mouldings showed as long skinny slivers in the frame browser and on spec pages; every corner is cropped to the same proportions as the Michelangelo ones, showing the cut end and a short run of the face.<br><br><strong>18.95</strong> The frame library adds Universal Arquati: about 1,050 current mouldings in 156 collections (Universal, Valucore and the Arquati lines), including 177 floaters, each with its corner photo, profile drawing, sizes, colour, profile type and style. Discontinued mouldings, fillets, liners and stretcher bars are left out.<br><br><strong>18.94</strong> Two spec page fixes. A picture dropped onto the dashboard preview or onto a frame on the wall kept the previous picture's proportions, so the dashboard and wall stretched it to fit while the spec page printed its true crop; every drop now records the new picture's size, and pieces affected before this correct themselves the next time they are shown. On a per-piece page, a long spec list (float-mounted paper adds four rows) now tightens its rows to stop above the frame corner and profile instead of running into them.<br><br><strong>18.93</strong> The Frame Recommendations page lays frames out on an even grid. With a count that does not divide by the columns (8 frames in 3 columns), the last column used to stretch its frames to fill the page; now every frame is the same size and the last column simply ends early.<br><br><strong>18.92</strong> The frame library adds Larson-Juhl: about 1,030 current mouldings in 156 collections, including 91 floaters, each with its corner photo, profile drawing, sizes, colour family, profile type and style. In the frame browser the Library now lists each vendor once (click it to open its collections), and there is a new <strong>Style</strong> filter (Contemporary, Modern, Classic and so on). Nielsen metal frames are left out because Larson-Juhl has no photos of them.<br><br><strong>18.91</strong> When a Group A/B/C page has too many mouldings for the frame corners and profiles to fit in one row beside the floorplan and elevation, they wrap into two rows in the same space, so the artwork, floorplan and elevation keep their size and place. Seven different mouldings now show every corner and profile.<br><br><strong>18.89</strong> On a Group A/B/C page with several mouldings, ticking Moulding profile no longer makes every frame corner disappear. The corners and profiles now shrink to fit beside the floorplan and elevation; if there is still not enough room, the profiles are left off and the corners kept, and a <strong>no room</strong> note appears beside Moulding profile under Show on page.<br><br><strong>18.88</strong> The frame library now has every Michelangelo collection that works as a frame in FRAME: Barnwood, Contemporary, Modern, Shadow Boxes and Traditional join Avant-Garde, Floaters and Ornate, about 1,240 mouldings in all, each with its corner photo, profile drawing, sizes, colour and profile name. Liners, fillets, rabbetless flat surfaces and stretchers are left out because they are not a frame on their own.<br><br><strong>18.87</strong> The frame library adds Michelangelo's ornate mouldings: all 59 current ones, each with its corner photo, profile drawing, sizes, colour and profile name. Their swatches repeat the ornament down the rail without a visible seam.<br><br><strong>18.86</strong> The frame library adds Michelangelo's floaters: 229 current floater frames for canvas, each with its corner photo, profile drawing, sizes and lip width. Picking one switches the item to Framed Canvas (Floater) and sets the inset from the lip, as before.<br><br><strong>18.85</strong> The frame library now has the whole Michelangelo Avant-Garde collection: 539 current mouldings, each with its corner photo, profile drawing, sizes, colour and profile name, so the frame browser can search and filter all of them.<br><br><strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
+                body: `<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
+<strong>19.04</strong> Deleting a wall asks about its pieces. When pieces hang on that wall and nowhere else, you choose <strong>Delete wall and pieces</strong> (they leave the Frame Dashboard and the presentation: the way to drop the options a client turned down) or <strong>Delete wall, keep pieces</strong> (as before: they stay in the Dashboard, and + Add Wall offers them to hang again). Pieces also shown on another wall are never deleted, and Ctrl+Z brings back the wall and its pieces together.<br><br><strong>19.03</strong> The frame you pick sets the product both ways. Picking a floater makes the item Framed Canvas (Floater), as before, and picking a regular moulding on a floater item now turns it back into Framed Art (it used to stay a floater, with its canvas inset and no mats). A floater counts by its lip width too, whatever its collection is called. Shadow boxes, frameless canvas, wallcovering and window film are left as you set them.<br><br><strong>19.02</strong> Floaters show their gap. The quarter inch between a floater's face and the canvas now draws as a dark slot instead of more moulding, on the Dashboard preview, the wall, PNG and SVG exports and spec pages, and the canvas casts its shadow into it. Settings, Frame effects has a new <strong>Floater gap</strong> slider for how dark it reads (the canvas used to borrow Frame onto mat). The three Cape Cod floaters (IM-310-715, 720 and 725) now carry their 5/8in face, so a new pick sets a 7/8in inset.<br><br><strong>19.01</strong> More frames turned round to face the right way: 46 Larson-Juhl floaters (Axom, Bauhaus II, Cranbrook, Eiffel, Gramercy, Metalia, Moderne, Olsen, Ravello, Shoji and Spencer II) now show the wall on the left and the floor along the bottom like every other floater, and Academie Silver 3in (LJ-733237) matches its gold and black siblings.<br><br><strong>19.00</strong> The frame browser has a <strong>Type</strong> filter: show only floaters, or only frames, across every vendor. Frame thumbnails are cropped consistently again: about 290 International Moulding and Framerica corners had kept far too much of the moulding and showed as thin slivers. Seven more mouldings that faced the wrong way (including IM-310-710) are turned round.<br><br><strong>18.99</strong> International Moulding and Framerica frames now face the same way as every other moulding: outer edge on the left, rabbet lip on the right. Many were mirror images, so the mockup drew the lip on the outside of the frame. The old Universal folder with two frames is gone; both are in Universal Arquati.<br><br><strong>18.98</strong> The frame library adds International Moulding (about 1,000 current mouldings in 153 collections, 37 of them floaters) and Framerica (336 mouldings in 91 finishes), each with its corner photo, sizes, colour family and, where the maker publishes one, its profile drawing. Deep shadowbox corners now show the frame face above the cut end instead of only raw wood.<br><br><strong>18.97</strong> More frame corners and profiles fit on one row of a group page before it wraps: the space between mouldings tightens first, then the pictures shrink, and only then does the strip go to two rows.<br><br><strong>18.96</strong> Frame corner photos all share one shape now. Thin Universal Arquati and Larson-Juhl mouldings showed as long skinny slivers in the frame browser and on spec pages; every corner is cropped to the same proportions as the Michelangelo ones, showing the cut end and a short run of the face.<br><br><strong>18.95</strong> The frame library adds Universal Arquati: about 1,050 current mouldings in 156 collections (Universal, Valucore and the Arquati lines), including 177 floaters, each with its corner photo, profile drawing, sizes, colour, profile type and style. Discontinued mouldings, fillets, liners and stretcher bars are left out.<br><br><strong>18.94</strong> Two spec page fixes. A picture dropped onto the dashboard preview or onto a frame on the wall kept the previous picture's proportions, so the dashboard and wall stretched it to fit while the spec page printed its true crop; every drop now records the new picture's size, and pieces affected before this correct themselves the next time they are shown. On a per-piece page, a long spec list (float-mounted paper adds four rows) now tightens its rows to stop above the frame corner and profile instead of running into them.<br><br><strong>18.93</strong> The Frame Recommendations page lays frames out on an even grid. With a count that does not divide by the columns (8 frames in 3 columns), the last column used to stretch its frames to fill the page; now every frame is the same size and the last column simply ends early.<br><br><strong>18.92</strong> The frame library adds Larson-Juhl: about 1,030 current mouldings in 156 collections, including 91 floaters, each with its corner photo, profile drawing, sizes, colour family, profile type and style. In the frame browser the Library now lists each vendor once (click it to open its collections), and there is a new <strong>Style</strong> filter (Contemporary, Modern, Classic and so on). Nielsen metal frames are left out because Larson-Juhl has no photos of them.<br><br><strong>18.91</strong> When a Group A/B/C page has too many mouldings for the frame corners and profiles to fit in one row beside the floorplan and elevation, they wrap into two rows in the same space, so the artwork, floorplan and elevation keep their size and place. Seven different mouldings now show every corner and profile.<br><br><strong>18.89</strong> On a Group A/B/C page with several mouldings, ticking Moulding profile no longer makes every frame corner disappear. The corners and profiles now shrink to fit beside the floorplan and elevation; if there is still not enough room, the profiles are left off and the corners kept, and a <strong>no room</strong> note appears beside Moulding profile under Show on page.<br><br><strong>18.88</strong> The frame library now has every Michelangelo collection that works as a frame in FRAME: Barnwood, Contemporary, Modern, Shadow Boxes and Traditional join Avant-Garde, Floaters and Ornate, about 1,240 mouldings in all, each with its corner photo, profile drawing, sizes, colour and profile name. Liners, fillets, rabbetless flat surfaces and stretchers are left out because they are not a frame on their own.<br><br><strong>18.87</strong> The frame library adds Michelangelo's ornate mouldings: all 59 current ones, each with its corner photo, profile drawing, sizes, colour and profile name. Their swatches repeat the ornament down the rail without a visible seam.<br><br><strong>18.86</strong> The frame library adds Michelangelo's floaters: 229 current floater frames for canvas, each with its corner photo, profile drawing, sizes and lip width. Picking one switches the item to Framed Canvas (Floater) and sets the inset from the lip, as before.<br><br><strong>18.85</strong> The frame library now has the whole Michelangelo Avant-Garde collection: 539 current mouldings, each with its corner photo, profile drawing, sizes, colour and profile name, so the frame browser can search and filter all of them.<br><br><strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>
 <strong>18.60</strong> <strong>Rounding</strong> is a project setting, in Settings, Units: how many decimal places inches, millimetres and centimetres print (0, 0.#, 0.##, 0.###, 0.####), and it is the same everywhere a size prints: spec pages, elevations, legends and schedules. Defaults are 0.### for inches (so 1.875" stays 1.875"), whole mm and 0.# cm. Every number on an elevation now carries its unit (1727 mm, not 1727); the Units tile in Layout Guides is gone.<br><br>
@@ -44652,8 +44711,13 @@ function drawElevAll() {
         // Gated on dashOuterShadowsOn: when off, the shadow halo is suppressed
         // so elevations match the toggle-off PNG export look.
         // Every shadow here goes through _fxCss, so the Frame Effects panel reaches the wall.
+        // 19.05: SIZED IN REAL INCHES, from the canvas renderer's own recipes (calibrated in px
+        // at 72 dpi, so _ePt is screen px per 1/72"). They were N * elevScale, i.e. N INCHES:
+        // a 16" drop under a 40" blur, which is why the wall looked smeared next to the PNG
+        // and the spec pages. Inset alphas carry dIS's 1.25 boost so the two agree.
+        const _ePt = elevScale * unitFactor('in', elevUnit) / 72;
         const elevOuterShadow = dashOuterShadowsOn
-            ? _fxCss('outer', 0, 16 * elevScale, 40 * elevScale, 0.45) + ', ' + _fxCss('outer', 0, 6 * elevScale, 12 * elevScale, 0.3)
+            ? _fxCss('outer', 0, 18 * _ePt, 35 * _ePt, 0.55)
             : 'none';
 
         if (isFlat) {
@@ -44711,7 +44775,7 @@ function drawElevAll() {
             el.style.setProperty('--m1-color', m1Color);
             // Bumped inset shadow: frame casts a stronger shadow onto the mat surface
             // (matches the canvas renderer's bumped shadow for visual consistency).
-            m1.style.boxShadow = `0 0 0 1.5px ${m1Color}, ` + _fxCss('frame', 0, 4 * elevScale, 10 * elevScale, 0.45, true) + ', ' + _fxCss('mat', 0, 2 * elevScale, 5 * elevScale, 0.15);
+            m1.style.boxShadow = `0 0 0 1.5px ${m1Color}, ` + _fxCss('frame', 0, 14 * _ePt, 35 * _ePt, 0.75, true) + ', ' + _fxCss('mat', 0, 2 * _ePt, 5 * _ePt, 0.15);
             el.appendChild(m1);
         }
         
@@ -44725,7 +44789,7 @@ function drawElevAll() {
             // Explicit borderColor — must NOT depend on inherited theme color
             m2.style.borderColor = m2Color;
             el.style.setProperty('--m2-color', m2Color);
-            m2.style.boxShadow = `0 0 0 1.5px ${m2Color}, ` + _fxCss('mat', 0, 2 * elevScale, 6 * elevScale, 0.3, true) + ', ' + _fxCss('mat', 0, 2 * elevScale, 5 * elevScale, 0.15);
+            m2.style.boxShadow = `0 0 0 1.5px ${m2Color}, ` + _fxCss('mat', 0, 8 * _ePt, 20 * _ePt, 0.5625, true) + ', ' + _fxCss('mat', 0, 2 * _ePt, 5 * _ePt, 0.15);
             el.appendChild(m2);
         }
 
@@ -44765,9 +44829,9 @@ function drawElevAll() {
                 // Magnitude similar to mat 2's inset shadow but slightly stronger
                 // when no mats above (frame casts directly).
                 if (m1Active || m2Active) {
-                    faux.style.boxShadow = _fxCss('mat', 0, 2 * elevScale, 6 * elevScale, 0.3, true);
+                    faux.style.boxShadow = _fxCss('mat', 0, 8 * _ePt, 20 * _ePt, 0.5625, true);
                 } else {
-                    faux.style.boxShadow = _fxCss('frame', 0, 4 * elevScale, 10 * elevScale, 0.45, true);
+                    faux.style.boxShadow = _fxCss('frame', 0, 14 * _ePt, 35 * _ePt, 0.75, true);
                 }
                 el.appendChild(faux);
             }
@@ -44797,7 +44861,7 @@ function drawElevAll() {
             paper.className = 'sb-paper-visual';
             const paperPx = sbPaperMarginVal * elevScale;
             const isTorn = (f.sbPaperEdge || 'clean') === 'torn';
-            paper.style.cssText = `position:absolute; box-sizing:border-box; top:${frameInsetPx + paperPx}px; left:${frameInsetPx + paperPx}px; width:${(f.w - effFw*2 - sbPaperMarginVal*2) * elevScale}px; height:${(f.h - effFw*2 - sbPaperMarginVal*2) * elevScale}px; background:${paperColor}; box-shadow: ${2 * elevScale}px ${4 * elevScale}px ${12 * elevScale}px rgba(0,0,0,0.45); ${isTorn ? `border: 1px dashed rgba(0,0,0,0.4);` : ''} pointer-events:none; z-index:3;`;
+            paper.style.cssText = `position:absolute; box-sizing:border-box; top:${frameInsetPx + paperPx}px; left:${frameInsetPx + paperPx}px; width:${(f.w - effFw*2 - sbPaperMarginVal*2) * elevScale}px; height:${(f.h - effFw*2 - sbPaperMarginVal*2) * elevScale}px; background:${paperColor}; box-shadow: ${_fxCss('paper', 2 * _ePt, 4 * _ePt, 18 * _ePt, 0.7)}; ${isTorn ? `border: 1px dashed rgba(0,0,0,0.4);` : ''} pointer-events:none; z-index:3;`;
             el.appendChild(paper);
         }
 
@@ -44842,6 +44906,11 @@ function drawElevAll() {
         if (!m1Active && !isFloater && !isFrameless && !isFlat && !useFM && f.useFauxMat !== true) art.classList.add('fx-frame-cast');
         
         art.style.cssText = `top:${artTopOffset}px; left:${artLeftOffset}px; width:${artW*elevScale}px; height:${artH*elevScale}px; z-index:4;`;
+        // THE OPENING'S SHADOW (19.05), the canvas renderer's recipe: the opening onto the art,
+        // and with no mat the moulding onto the art as well. It is an inline style, so it has to
+        // carry the frame cast itself (the .fx-frame-cast class rule loses to it).
+        const _openShadowCss = (art.classList.contains('fx-frame-cast') ? _fxCss('frame', 0, 14 * _ePt, 35 * _ePt, 0.75, true) + ', ' : '')
+            + _fxCss('art', 0, 3 * _ePt, 8 * _ePt, 0.3125, true);
         // Uploaded artwork: when present, fill the opening with the image
         // (cover-fit) rather than the grey placeholder. _showArtwork is a global
         // view toggle so the "beauty" presentation shows art and the technical
@@ -44891,7 +44960,7 @@ function drawElevAll() {
             // paper margin / white border should show white.
             art.style.background = 'rgb(120,120,120)';
         } else {
-            art.style.boxShadow = _fxCss('art', 0, 2 * elevScale, 8 * elevScale, 0.2, true);
+            art.style.boxShadow = _openShadowCss;
         }
         // LAST, so it overrides the per-product opening treatments above: a wireframe
         // is a flat grey block. The inset shadow and the recessed-opening cues sell
@@ -44945,6 +45014,15 @@ function drawElevAll() {
             aimg.style.cssText = `position:absolute; left:${rect.dx}px; top:${rect.dy}px; width:${rect.dw}px; height:${rect.dh}px; display:block; pointer-events:none;`;
             _elevArtImgSeen[_aKey] = 1;
             art.appendChild(aimg);
+            // The picture covers the opening's inset shadow, so it is cast again OVER the
+            // picture, as the canvas renderer does after drawing the artwork (18.46). Same
+            // products as the plain opening above; never on a floater, frameless canvas,
+            // float mount, flat graphic or wireframe.
+            if (!isFlat && !isFloater && !isFrameless && !useFM) {
+                const sh = document.createElement('div'); sh.className = 'art-shade';
+                sh.style.cssText = 'position:absolute; inset:0; pointer-events:none; box-shadow:' + _openShadowCss + ';';
+                art.appendChild(sh);
+            }
         }
         
         // NOT named unitSuffix: a const of that name shadowed the unitSuffix() FUNCTION for
@@ -48536,6 +48614,7 @@ function toggleLineTool(on) {
     }
     const btn = document.getElementById('lineToolBtn');
     if (btn) btn.classList.toggle('active', lineToolActive);
+    _elevDockSync();
     const wall = document.getElementById('wall');
     if (wall) wall.style.cursor = lineToolActive ? 'crosshair' : '';
     drawElevAll();
@@ -50240,6 +50319,10 @@ async function exportElevPNG(opts) {
     const _rail = document.getElementById('elev-wall-rail');
     const _railDisp = _rail ? _rail.style.display : null;
     if (_rail) _rail.style.display = 'none';
+    // The tool dock (19.05) takes width off the workspace the same way: out for the export.
+    const _dockSl = document.getElementById('elevDockSlot');
+    const _dockDisp = _dockSl ? _dockSl.style.display : null;
+    if (_dockSl) _dockSl.style.display = 'none';
 
     // THE CLIENT-ELEVATION UNDERLAY COMES OUT, for the whole export and for the same
     // reason the rail does. This path rasterises the LIVE DOM through html2canvas,
@@ -50563,6 +50646,7 @@ async function exportElevPNG(opts) {
         // Wall rail back before the final redraw, so it re-fits to the real
         // (narrower) on-screen workspace rather than the export layout.
         if (_rail) _rail.style.display = _railDisp;
+        if (_dockSl) _dockSl.style.display = _dockDisp;
         // …and the tracing guide, which is authoring UI and belongs back on screen.
         if (_ulLayer) _ulLayer.style.display = _ulDisp;
         // Restore zoom factor and re-render at user's zoom level
@@ -50940,6 +51024,10 @@ async function exportElevSVG(opts) {
     const _rail = document.getElementById('elev-wall-rail');
     const _railDisp = _rail ? _rail.style.display : null;
     if (_rail) _rail.style.display = 'none';
+    // The tool dock (19.05) takes width off the workspace the same way: out for the export.
+    const _dockSl = document.getElementById('elevDockSlot');
+    const _dockDisp = _dockSl ? _dockSl.style.display : null;
+    if (_dockSl) _dockSl.style.display = 'none';
 
     const _svgWrap = document.getElementById('export-wrap');
     const _svgWrapPadInline = _svgWrap ? _svgWrap.style.padding : '';
@@ -51255,11 +51343,28 @@ async function exportElevSVG(opts) {
             const g = computeArtDrawRect(r0.w, r0.h, ar, f.artZoom, f.artPanX, f.artPanY);
             return await _imgDownsized(f.artworkUrl, g.dw * _capK * 1.5, g.dh * _capK * 1.5);
         };
+        // BREAKER AND INSTALL PAGES CAST THE SPEC PAGES' DROP SHADOW (19.05). Only the PDF
+        // capture (`forCapture`) gets it, under the same "also on deck pages" switch, from
+        // the same _frameShadowCanvas; the SVG download stays shadowless for Illustrator,
+        // and a wireframe wall is a flat placement drawing. All shadows go in UNDER all the
+        // frames, so a neighbour's shadow never lands on a frame.
+        const _shadowAt = backLayer.length, _shadows = [];
+        const _wantShadow = !!_capK && !(typeof _curElevIsWireframe === 'function' && _curElevIsWireframe());
         for (const f of elevFrames) {
             if (!f.active) continue;
             const el = wall.querySelector(`.frame-vis[data-frame-letter="${f.letter}"]`);
             if (!el) continue;
             const pos = rectToSvg(el);
+            if (_wantShadow) {
+                try {
+                    const dIn = _frameDataInInches(Object.assign({}, f, { extW: f.w, extH: f.h }), elevUnit);
+                    const s = _frameShadowCanvas(dIn, parseFloat(dIn.extW), parseFloat(dIn.extH));
+                    if (s && pos.w > 0) {
+                        const ppi = pos.w / parseFloat(dIn.extW), p = s.padIn * ppi;
+                        _shadows.push(`<image data-frame-shadow="1" x="${(pos.x - p).toFixed(1)}" y="${(pos.y - p).toFixed(1)}" width="${(pos.w + p * 2).toFixed(1)}" height="${(pos.h + p * 2).toFixed(1)}" xlink:href="${s.canvas.toDataURL('image/png')}" preserveAspectRatio="none"/>`);
+                    }
+                } catch (e) { /* a frame without its shadow, never a page without its frame */ }
+            }
             try {
                 const swatchImg = f.swatchDataUrl ? await _loadImg(f.swatchDataUrl) : null;
                 const _href = await _artHref(f, el);
@@ -51302,6 +51407,7 @@ async function exportElevSVG(opts) {
                 backLayer.push(`<rect x="${pos.x.toFixed(1)}" y="${pos.y.toFixed(1)}" width="${pos.w.toFixed(1)}" height="${pos.h.toFixed(1)}" fill="${f.fColor || '#222'}"/>`);
             }
         }
+        if (_shadows.length) backLayer.splice(_shadowAt, 0, ..._shadows);
 
         // ── PERSON (back layer): inline the character SVG as editable vector ──
         const personWrap = document.getElementById('person-wrap');
@@ -51608,6 +51714,7 @@ async function exportElevSVG(opts) {
         // Rail back and padding un-pinned before the redraw so it re-fits the
         // real on-screen width.
         if (_rail) _rail.style.display = _railDisp;
+        if (_dockSl) _dockSl.style.display = _dockDisp;
         if (_svgWrap) _svgWrap.style.padding = _svgWrapPadInline;
         elevZoomFactor = oldZoom;
         drawElevAll();

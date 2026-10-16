@@ -96,7 +96,7 @@ const path = require('path');
         _loadImgRaw = realRaw;
       }
       __check('PNGs reach the PDF compressed: shadows, plans, logos', () => {
-        if (fnBody('_pdfFrameShadow').indexOf("_addPngImage(doc, c.toDataURL('image/png')") < 0) throw new Error('the frame shadow is added as a bare PNG');
+        if (fnBody('_pdfFrameShadow').indexOf("_addPngImage(doc, s.canvas.toDataURL('image/png')") < 0) throw new Error('the frame shadow is added as a bare PNG');
         if (fnBody('_drawFloorplanKeyPage').indexOf('_addPngImage(doc, planImg.src') < 0) throw new Error('a PNG plan page is stored raw');
         if (S.indexOf("if (/^data:image\\\\/png/i.test(srcData || '')) _addPngImage(doc, srcData, px0, py0, pw2, ph2);") < 0) throw new Error('the plan thumbnail on breaker pages is stored raw');
         const bare = (S.match(/addImage\\([^;]*'PNG'[^;]*\\)/g) || []).filter(x => x.indexOf("'MEDIUM'") < 0);

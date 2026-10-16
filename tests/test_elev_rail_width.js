@@ -84,6 +84,16 @@ const path = require('path');
       if (budget !== 720) throw new Error('sidebar ' + SIDEBAR_W + ' + rail ' + RAIL_W + ' + horizontal padding ' + WRAP_PAD.x + ' = ' + budget + 'px, expected 720px. The drawing just got ' + Math.abs(budget - 720) + 'px ' + (budget > 720 ? 'SMALLER' : 'LARGER') + ' at fit-to-window.');
     });
 
+    // 19.05: the tool dock beside the drawing is the ONE deliberate cost to the on-screen
+    // fit. The sidebar has ~9px to give and a dock floating on the ground would cover a
+    // wide wall's height dimension, so it is a 54px column; only width-limited (very wide)
+    // walls fit smaller on screen. Exports hide it with the rail, so print is unchanged.
+    __check('the tool dock is the only other column, at its stated width, and exports hide it', () => {
+      const DOCK_W = parseFloat(__decl('.elev-dock-slot', 'width'));
+      if (DOCK_W !== 54) throw new Error('.elev-dock-slot is ' + DOCK_W + 'px; the on-screen fit was agreed at a 54px dock');
+      if (S.split("if (_dockSl) _dockSl.style.display = 'none';").length - 1 !== 2) throw new Error('both exports must hide the dock, like the rail');
+    });
+
     __check('vertical padding is untouched, so the fit is unchanged on the height axis too', () => {
       if (WRAP_PAD.y !== 160) throw new Error('#export-wrap vertical padding totals ' + WRAP_PAD.y + 'px, expected 160px — the rail costs no vertical space, so nothing should have been traded away here');
     });

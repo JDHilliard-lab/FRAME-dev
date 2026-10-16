@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.04">
+    <link rel="stylesheet" href="style.css?v=19.05">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -714,61 +714,35 @@
                      into all four containers on every state change regardless of which
                      tab is showing, and every button here is still findable by id (the
                      EGD/tool buttons are synced by id from several places). -->
-                <div class="elev-tabs frame-tabs fit" role="tablist">
-                    <button class="frame-tab active" data-elevtab="art" onclick="switchElevTab('art')">Art</button>
-                    <button class="frame-tab" data-elevtab="guides" onclick="switchElevTab('guides')">Guides</button>
-                    <button class="frame-tab" data-elevtab="context" onclick="switchElevTab('context')">Context</button>
-                    <button class="frame-tab" data-elevtab="glass" onclick="switchElevTab('glass')">Glass</button>
+                <!-- 19.05: CATEGORIES, NOT A SWITCH. Four same-looking 28px pills read as a
+                     segmented control and got lost under the wall section; each tab now carries
+                     an icon, its name and a count of what is in it (_elevDockSync), on a well of
+                     its own. The tools that used to be the Add & Arrange row are in the
+                     toolbar beside the drawing (#elevToolDock). -->
+                <div class="elev-tabs elev-cat-tabs frame-tabs fit" role="tablist">
+                    <button class="frame-tab active" data-elevtab="art" onclick="switchElevTab('art')" title="Art: the frames on this wall">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18"/><rect x="8" y="7" width="8" height="10"/></svg>
+                        <span>Art</span><span class="elev-tab-n" data-elevtab-n="art"></span>
+                    </button>
+                    <button class="frame-tab" data-elevtab="guides" onclick="switchElevTab('guides')" title="Guides: which dimensions, labels and lines show on every wall">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 7h18M3 7v3M21 7v3"/><path d="M4 21V13h16v8"/><path d="M8 13v3M12 13v4M16 13v3"/></svg>
+                        <span>Guides</span>
+                    </button>
+                    <button class="frame-tab" data-elevtab="context" onclick="switchElevTab('context')" title="Context: the client elevation and the doors, furniture and fixtures on this wall">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><rect x="5" y="3" width="11" height="18"/><path d="M2 21h20"/><circle cx="13" cy="12" r="0.6"/></svg>
+                        <span>Context</span><span class="elev-tab-n" data-elevtab-n="context"></span>
+                    </button>
+                    <button class="frame-tab" data-elevtab="glass" onclick="switchElevTab('glass')" title="Glass: window panels for film">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><path d="M9 4v16M15 4v16"/></svg>
+                        <span>Glass</span><span class="elev-tab-n" data-elevtab-n="glass"></span>
+                    </button>
                 </div>
                 <div class="elev-tabpane" data-elevtabpane="art">
-                <div class="elev-add-arrange-fixed">
-                    <div class="section-title section-title-static">Add &amp; Arrange</div>
-                    <div class="elev-section-emphasis-inner">
-                        <div style="display: flex; gap: 6px; align-items: center;">
-                            <div style="position: relative; flex: 1; min-width: 0;">
-                                <button type="button" class="action-btn btn-secondary" id="bulkImportBtn" style="font-size: var(--fs-70); justify-content: space-between; padding: 0 6px; width:100%; cursor:pointer; display:flex; align-items:center; gap:4px; height: 28px;" onclick="toggleBulkDropdown()">
-                                    <svg class="svg-icon" viewBox="0 0 24 24" style="flex-shrink:0; width:12px; height:12px;"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                                    <span style="flex: 1; text-align:left; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">Import Frames</span>
-                                    <svg class="svg-icon" style="width:10px; height:10px; flex-shrink:0;" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                                </button>
-                                <div id="bulkDropdownList" style="display:none; position: absolute; top: 100%; left: 0; min-width: 100%; width: max-content; max-width: 380px; background: var(--bg-panel); border: 1px solid var(--border-color); box-shadow: 0 4px 12px rgba(0,0,0,0.3); max-height: 200px; overflow-y: auto; z-index: 200; border-radius: var(--r-4); padding: 4px; box-sizing: border-box; margin-top: 2px;">
-                                    <div id="bulkImportCheckboxes"></div>
-                                </div>
-                            </div>
-                            <button class="action-btn" style="width:auto; font-size: var(--fs-70); padding: 0 10px; display:flex; align-items:center; gap:4px; height:28px; flex-shrink:0;" onclick="importSelectedFramesBulk()" title="Add the checked frames to this elevation">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
-                                Add
-                            </button>
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="autoElevRelabel()" title="Sort A–Z — re-letter frames by horizontal position">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg>
-                            </button>
-                            <!-- Re-number button. Opens a modal where the user picks a
-                                 template + location number, then bulk-renames all frame
-                                 ITEM CODES in this elevation to follow that pattern.
-                                 Optionally reorders the dashboard rows to match. -->
-                            <button class="action-btn btn-secondary" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="_jumpToCodes()" title="Item codes: open the floorplan Items list, where every code is added, renamed and dragged into order">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg>
-                            </button>
-                            <button class="action-btn btn-secondary" id="alignBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="openAlignmentDialog()" title="Align & space frames in bulk">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M3 6h12M3 12h18M3 18h9"/></svg>
-                            </button>
-                            <!-- Fit to wall: sizes a wallcovering / window film to the wall
-                                 inside its dimension lines (full width, baseboard to
-                                 ceiling). Placement already does this automatically; this
-                                 re-runs it after the wall or baseboard changes. Selected
-                                 flat graphics only, or all of them when nothing is picked. -->
-                            <button class="action-btn btn-secondary" id="fitFlatBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="fitFlatGraphicsToWallAction()" title="Fit to wall — size the wallcovering / window film to the wall inside the dimension lines (set baseboard to 0 to run floor to ceiling)">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="4" width="18" height="14"/><path d="M3 18h18M7 8h10M7 12h10"/></svg>
-                            </button>
-                            <!-- Group dimension: draws a dashed bounding box with width +
-                                 height measurement callouts around the selected frames.
-                                 Mirrors the client's install-drawing convention. -->
-                            <button class="action-btn btn-secondary" id="groupDimBtn" style="width:28px; height:28px; padding:0; flex-shrink:0;" onclick="createGroupDimFromSelection()" title="Add group dimension box around selected frames">
-                                <svg class="svg-icon" viewBox="0 0 24 24" style="width:14px; height:14px;"><rect x="3" y="6" width="18" height="12" fill="none" stroke-dasharray="3 2"/><path d="M3 3h0M21 3h0" /><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="1.5" x2="3" y2="4.5"/><line x1="21" y1="1.5" x2="21" y2="4.5"/></svg>
-                            </button>
-                            
-                        </div>
-                    </div>
+                <div class="elev-art-head">
+                    <div class="section-title section-title-static">Frames on this wall</div>
+                    <button type="button" class="elev-art-add" onclick="toggleBulkDropdown(event)" title="Add frames: tick items from the project and add them to this wall (the same as the + frame button in the toolbar)">
+                        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add frames
+                    </button>
                 </div>
                 <!-- CONTEXT TAB. The client's elevation and the blocks traced off it are
                      one workflow, so they share a pane: drop the drawing in, calibrate
@@ -937,13 +911,43 @@
                 </div>
             </div>
 
+            <!-- THE ELEVATION TOOL DOCK (19.05). The Add & Arrange row (an icon strip in the
+                 sidebar) and the two buttons floating on the drawing's ground got lost, so they
+                 are one dock beside the drawing, the same component as Deck Studio's (.ds-dock).
+                 Its own column, because the sidebar has 9px to spare and a dock floating over
+                 the ground would sit on a wide wall's height dimension. Hidden during every
+                 export and capture, like the rail, so PDF and PNG scale is unchanged. Ids are
+                 kept (lineToolBtn, alignBtn, groupDimBtn, fitFlatBtn, bulkImportBtn, shortcutsBtn):
+                 code syncs them. contextToolBtn is new here; toggleContextTool already lit it. -->
+            <div class="elev-dock-slot" id="elevDockSlot">
+                <div id="elevToolDock" class="ds-dock elev-dock" role="toolbar" aria-label="Elevation tools">
+                    <button type="button" id="elevDockSelect" class="ds-dock-btn active" title="Select (V): put the measure or context tool down, and select and drag frames" onclick="_elevDockSelect()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l12 9-5.5 1.2L15.5 20l-2.6 1.1-3-6.6L6 18z"/></svg></button>
+                    <button type="button" id="lineToolBtn" class="ds-dock-btn" title="Measure (M): click two points to draw your own dimension line. Snaps to frame, wall, floor and ceiling edges." onclick="toggleLineTool()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L17 3"/><path d="M2 14 L6 18 M5 11 L9 15 M8 8 L12 12 M11 5 L15 9" stroke-width="1.3"/></svg></button>
+                    <button type="button" id="contextToolBtn" class="ds-dock-btn" title="Context block (C): draw a door, window, furniture or fixture on the wall. Opens the Context tab to pick one." onclick="_elevDockContext()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="11" height="18"/><path d="M2 21h20"/><circle cx="13" cy="12" r="0.6"/></svg></button>
+                    <span class="ds-dock-sep"></span>
+                    <div class="elev-dock-fly">
+                        <button type="button" id="bulkImportBtn" class="ds-dock-btn has-fly" title="Add frames: tick items from the project and add them to this wall" onclick="toggleBulkDropdown(event)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 8v8M8 12h8"/></svg></button>
+                        <div id="bulkDropdownList" style="display:none;">
+                            <div class="elev-fly-title">Add frames to this wall</div>
+                            <div id="bulkImportCheckboxes"></div>
+                            <div class="elev-fly-foot">
+                                <button class="action-btn" style="width:auto; font-size: var(--fs-70); padding: 0 12px; display:flex; align-items:center; gap:4px; height:28px;" onclick="importSelectedFramesBulk()" title="Add the ticked frames to this elevation">
+                                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:12px; height:12px;"><path d="M12 5v14M5 12h14"/></svg>
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="ds-dock-btn" onclick="autoElevRelabel()" title="Sort A&ndash;Z: re-letter the frames by position, left to right"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16M3 17l3 3 3-3M14 4h7l-7 7h7M14 13h7l-7 7h7"/></svg></button>
+                    <button type="button" class="ds-dock-btn" id="alignBtn" onclick="openAlignmentDialog()" title="Align &amp; space: equal gaps, align edges and distribute the selected frames"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h12M3 12h18M3 18h9"/></svg></button>
+                    <button type="button" class="ds-dock-btn" id="groupDimBtn" onclick="createGroupDimFromSelection()" title="Group dimension: a dashed box with width and height around the selected frames"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" stroke-dasharray="3 2"/><line x1="3" y1="3" x2="21" y2="3"/><line x1="3" y1="1.5" x2="3" y2="4.5"/><line x1="21" y1="1.5" x2="21" y2="4.5"/></svg></button>
+                    <button type="button" class="ds-dock-btn" id="fitFlatBtn" onclick="fitFlatGraphicsToWallAction()" title="Fit to wall: size the wallcovering or window film to the wall inside the dimension lines (baseboard 0 runs floor to ceiling)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14"/><path d="M3 18h18M7 8h10M7 12h10"/></svg></button>
+                    <span class="ds-dock-sep"></span>
+                    <button type="button" class="ds-dock-btn" onclick="_jumpToCodes()" title="Item codes: open the floorplan Items list, where every code is added, renamed and put in order"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></svg></button>
+                    <button type="button" class="ds-dock-btn" id="shortcutsBtn" title="Keyboard shortcuts" onclick="document.getElementById('shortcutsModal').style.display='flex'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="10"/><line x1="10" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="14" y2="10"/><line x1="18" y1="10" x2="18" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg></button>
+                </div>
+            </div>
             <div class="workspace" id="scrollArea">
-                <button class="action-btn btn-secondary" id="shortcutsBtn" title="Keyboard shortcuts" onclick="document.getElementById('shortcutsModal').style.display='flex'" style="position:absolute; top:10px; left:10px; z-index:50; width:32px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;">
-                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><rect x="2" y="6" width="20" height="12" rx="2" fill="none"/><line x1="6" y1="10" x2="6" y2="10"/><line x1="10" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="14" y2="10"/><line x1="18" y1="10" x2="18" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>
-                </button>
-                <button class="action-btn btn-secondary" id="lineToolBtn" title="Measure tool (M) — click two points to draw a custom dimension line. Snaps to frame/wall/floor/ceiling edges. Horizontal or vertical." onclick="toggleLineTool()" style="position:absolute; top:10px; left:50px; z-index:50; width:32px; height:28px; padding:0; display:flex; align-items:center; justify-content:center;">
-                    <svg class="svg-icon" viewBox="0 0 24 24" style="width:18px;height:18px;"><path d="M3 17 L17 3" stroke-width="1.6"/><path d="M2 14 L6 18 M5 11 L9 15 M8 8 L12 12 M11 5 L15 9" stroke-width="1.2"/></svg>
-                </button>
                 <div id="export-wrap">
                     <div id="wall">
                         <!-- CLIENT ELEVATION UNDERLAY. The architect's drawing, dropped in
@@ -2033,8 +2037,8 @@
     </div>
 </div>
 
-<!-- Keyboard shortcuts modal — opened by the keyboard-icon button at the
-     top-left outside the elevation. -->
+<!-- Keyboard shortcuts modal — opened by the keyboard button at the foot of the
+     elevation tool dock (#elevToolDock). -->
 <div id="shortcutsModal" class="frame-modal" style="display:none;" data-modal-backdrop>
     <div style="background:var(--bg-panel); padding:20px; border-radius:var(--r-8); width:380px; border:1px solid var(--border-color); box-shadow:0 15px 35px rgba(0,0,0,0.4);">
         <h3 style="margin-top:0; margin-bottom:12px; font-size:var(--fs-105); color:var(--text-strong);">Keyboard Shortcuts</h3>
@@ -2048,6 +2052,10 @@
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;G</kbd><span>Group / ungroup selected frames</span>
             <kbd class="kbd-key">Click</kbd><span>Select one frame</span>
             <kbd class="kbd-key">Ctrl&nbsp;+&nbsp;Click</kbd><span>Add/remove from multi-selection</span>
+
+            <div style="grid-column:1/-1; font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); font-weight:700; margin-top:8px;">Tools (the bar left of the wall)</div>
+            <kbd class="kbd-key">V</kbd><span>Select: put the measure or context tool down</span>
+            <kbd class="kbd-key">C</kbd><span>Draw a context block</span>
 
             <div style="grid-column:1/-1; font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); font-weight:700; margin-top:8px;">Measure Line Tool</div>
             <kbd class="kbd-key">M</kbd><span>Toggle the measure-line tool on / off</span>
@@ -2215,9 +2223,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.04';</script>
-<script src="templates.js?v=19.04"></script>
-<script src="app.js?v=19.04"></script>
+<script>window.FRAME_HTML_VERSION = '19.05';</script>
+<script src="templates.js?v=19.05"></script>
+<script src="app.js?v=19.05"></script>
 
 </body>
 </html>

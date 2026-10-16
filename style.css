@@ -1267,6 +1267,37 @@ input[type="color"]:hover { filter: brightness(1.12); }
 /* Guides tab (18.51): the same 20px column as the header it moved out of. */
 .elev-guides-pane { padding: 4px 20px 0; }
 .elev-tabs > .frame-tab { padding: 0 4px; font-size: var(--fs-65); }
+/* 19.05: THE ELEVATION TABS ARE CATEGORIES. Four same-looking pills under the wall
+ * section read as one segmented switch and got lost; each tab now has an icon, its name
+ * and a count of what is in it, on a well of its own. Still .frame-tab/.active. */
+.elev-tabs.elev-cat-tabs { gap: 3px; padding: 3px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--r-8); }
+.elev-cat-tabs > .frame-tab {
+    position: relative; height: 46px; padding: 0 2px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    border: none; border-radius: var(--r-6); background: transparent; color: var(--text-muted);
+    font-size: var(--fs-60); letter-spacing: 0.6px; text-transform: uppercase;
+}
+.elev-cat-tabs > .frame-tab .svg-icon { width: 17px; height: 17px; }
+.elev-cat-tabs > .frame-tab:hover { background: var(--bg-input); color: var(--text-strong); }
+.elev-cat-tabs > .frame-tab.active, .elev-cat-tabs > .frame-tab.active:hover { background: var(--ui-active); color: #fff; }
+.elev-tab-n {
+    position: absolute; top: 4px; right: 5px; min-width: 14px; height: 14px; padding: 0 3px; box-sizing: border-box;
+    border-radius: var(--r-6); background: var(--bg-input); color: var(--text-main);
+    font-size: var(--fs-55); font-weight: 700; line-height: 14px; letter-spacing: 0; text-align: center;
+}
+.elev-tab-n:empty { display: none; }
+.elev-cat-tabs > .frame-tab.active .elev-tab-n { background: rgba(255,255,255,0.22); color: #fff; }
+/* The Art pane once held the Add & Arrange row; now a heading over the frame list with
+ * the one action a new wall needs. */
+.elev-art-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 20px 2px; }
+.elev-art-head .section-title { margin: 0; }
+.elev-art-add {
+    display: inline-flex; align-items: center; gap: 4px; height: 24px; padding: 0 9px;
+    border: 1px solid var(--border-color); border-radius: var(--r-4); background: var(--bg-input);
+    color: var(--text-main); font-size: var(--fs-65); font-weight: 700; cursor: pointer;
+}
+.elev-art-add:hover { background: var(--btn-hover); color: var(--text-strong); }
+.elev-art-add .svg-icon { width: 11px; height: 11px; }
 
 /* ── Window panels (glazing) editor, #glazingControls ──────────────────────
  * Sits in the Elevations sidebar, which is narrow, so the four run fields are a
@@ -2732,6 +2763,27 @@ button.cat-node:hover { border-color: var(--ui-active); }
 /* A tall dock on a short window scrolls rather than running off the bottom. */
 .ds-dock.vert { max-height: calc(100vh - 170px); overflow-y: auto; scrollbar-width: none; }
 .ds-dock.vert::-webkit-scrollbar { display: none; }
+/* ── Elevation tool dock (19.05, #elevToolDock) ─────────────────────────────
+   Deck Studio's dock beside the elevation. Its own column on the drawing's ground
+   (54px: the sidebar has no width to give). NOT .vert: that scrolls, and a scroll box
+   clips the Add frames flyout. Hidden during exports like the rail. */
+.elev-dock-slot {
+    width: 54px; box-sizing: border-box; flex-shrink: 0; position: relative; z-index: 60;
+    display: flex; align-items: flex-start; padding: 10px 0 10px 8px; background: var(--elev-ground);
+}
+.elev-dock { gap: 1px; }
+.elev-dock .ds-dock-btn { width: 34px; height: 34px; }
+.elev-dock-fly { position: relative; }
+#bulkDropdownList {
+    position: absolute; left: calc(100% + 10px); top: -6px; z-index: 200;
+    min-width: 240px; width: max-content; max-width: 380px; box-sizing: border-box;
+    background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-8);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); padding: 6px;
+}
+#bulkImportCheckboxes { max-height: min(55vh, 420px); overflow-y: auto; }
+#bulkImportCheckboxes:empty::before { content: 'No items in the project yet. Add them on the Frame Dashboard.'; display: block; padding: 8px 6px; color: var(--text-muted); font-size: var(--fs-70); white-space: normal; }
+.elev-fly-title { padding: 4px 6px 6px; font-size: var(--fs-60); font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); }
+.elev-fly-foot { display: flex; justify-content: flex-end; padding: 6px 2px 0; }
 
 /* ── ELEVATION SETTINGS (18.48) ──────────────────────────────────────────────
  * Three columns on one 26px row rhythm so the window fits a laptop screen without
