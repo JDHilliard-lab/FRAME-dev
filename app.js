@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.08';
+const APP_VERSION = '19.09';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -5332,6 +5332,11 @@ function initMasterApp() {
         // previously uploaded. Saved entries override bundled ones with the
         // same code, matching the precedence rule of live syncDashLibraryFolder.
         restoreCustomLibraryFromStorage();
+        // 19.09: the default frame. The boot placeholder row (a project nobody has touched)
+        // is dressed in it too, so a new project's first item is never the flat colour.
+        const r0 = dashProjectData.length === 1 ? dashProjectData[0] : null;
+        if (r0 && r0.fType === 'color' && r0.fCode === dashDefaultData.fCode && !r0.swatchDataUrl) { _defaultFrameApply(r0); try { loadDashDataIntoControls(r0); } catch (e) {} }
+        _defaultFrameLoad();
     });
     _initFontSelects();    // fill every static font picker from FRAME_FONT_LIBRARY
     loadAnnotationStyle(); // restore saved annotation color/weight/dash defaults
@@ -12159,10 +12164,7 @@ function loadDashDataIntoControls(data) {
     applyMatFloatModeUI(!!data.useFloatMount);
     setVal('extW', dashFmt(data.extW)); setVal('extH', dashFmt(data.extH)); setVal('fType', data.fType); setVal('fW', dashFmt(data.fW)); 
     setVal('fColor', data.fColor); setVal('m_fCode', data.fCode); 
-    // Reflect frame style on the toggle buttons (hidden #fType is the source of truth)
-    document.getElementById('fTypeBtnLibrary').classList.toggle('active', data.fType === 'image');
-    document.getElementById('fTypeBtnSolid').classList.toggle('active', data.fType === 'color');
-    applyFrameStyleDimming(data.fType);
+    _dashFrameCardSync(data);
     setVal('m1_color', data.m1ColorName); setVal('m1_colorHex', data.m1ColorHex || '#ffffff');
     setVal('m2_color', data.m2ColorName); setVal('m2_colorHex', data.m2ColorHex || '#ffffff');
     setVal('m_glass', data.glass); setVal('m_hardware', data.hardware); setVal('m_mount', data.mount); setVal('m_backing', data.backing); setVal('m_notes', data.notes); setVal('m_prodNotes', data.prodNotes);
@@ -12204,7 +12206,6 @@ function loadDashDataIntoControls(data) {
     }
 
     handleDashProductChange(false);
-    document.getElementById('swatchSelectedDisplay').textContent = (data.fType === 'image' && data.swatchName) ? data.swatchName : 'Frame';
 
     if(data.swatchDataUrl && data.fType === 'image') { dashActiveImageObj.src = data.swatchDataUrl; document.getElementById('swatchThumbPreview').style.backgroundImage = `url(${data.swatchDataUrl})`; } 
     else { dashActiveImageObj.src = emptyImgUrl; document.getElementById('swatchThumbPreview').style.backgroundImage = `none`; }
@@ -12460,11 +12461,9 @@ function updateDashVisualsFromDOM() {
     // Both Library and Color rows stay visible; the inactive side dims.
     // (Previously imageControls was display:none in Color mode, which felt jarring.)
     document.getElementById('imageControls').style.display = 'flex';
-    applyFrameStyleDimming(data.fType);
+    _dashFrameCardSync(data);
     if (data.fType === 'color') {
         viewObj.style.setProperty('--frame-bg', `none`);
-        document.getElementById('swatchSelectedDisplay').textContent = "Frame";
-        document.getElementById('swatchThumbPreview').style.backgroundImage = `none`;
     } else {
         viewObj.style.setProperty('--frame-bg', `url(${data.swatchDataUrl})`);
     }
@@ -13340,30 +13339,8 @@ function toggleDashLock() {
 
 // Frame Style toggle (Library / Color). Writes through to the hidden #fType input
 // so the existing syncDashAndCalculate plumbing keeps working unchanged.
-function setFrameStyle(val) {
-    document.getElementById('fType').value = val;
-    document.getElementById('fTypeBtnLibrary').classList.toggle('active', val === 'image');
-    document.getElementById('fTypeBtnSolid').classList.toggle('active', val === 'color');
-    applyFrameStyleDimming(val);
-    syncDashAndCalculate();
-}
 
-// Dim the accessory controls on the side that's NOT in use:
-//   Library mode → dim the color swatch
-//   Color mode   → dim the folder icon AND the library row (vendor/collection/swatch/upload)
-function applyFrameStyleDimming(val) {
-    const libSide = (val !== 'image'); // dim library accessories when NOT in library mode
-    const colSide = (val !== 'color'); // dim color swatch when NOT in color mode
-    document.getElementById('libFolderBtn').classList.toggle('fstyle-disabled', libSide);
-    document.getElementById('fColor').classList.toggle('fstyle-disabled', colSide);
-    // The vendor/collection/frame/upload row is also library-side
-    const imageControls = document.getElementById('imageControls');
-    if (imageControls) imageControls.classList.toggle('fstyle-disabled', libSide);
-}
 
-// Shadow Box: edge-style toggle (clean | torn). Writes to hidden #sbPaperEdge so
-// existing sync flow picks it up. Generates a fixed seed the first time TORN is
-// chosen so the irregular outline is stable across redraws of the same frame.
 // Rabbet field has special behavior on floaters: changing it auto-suggests
 // BOTH the canvasDepth (stretcher bar must be flush with rabbet pocket)
 // AND the canvasWrap (= rabbet + 0.5" safety margin). Both are suggestions —
@@ -14090,7 +14067,7 @@ function updateDashCustomSwatchDropdown() {
             dashTempHoverUrl = _libEntryToUrl(i.file);
             document.getElementById('swatchThumbPreview').style.backgroundImage = `url(${dashTempHoverUrl})`;
         };
-        li.onclick = () => { document.getElementById('swatchSelectedDisplay').textContent = li.dataset.label; s.style.display = 'none'; loadDashFromCustomLibrary(idx); };
+        li.onclick = () => { s.style.display = 'none'; loadDashFromCustomLibrary(idx); };
         s.appendChild(li);
     });
     s.onmouseleave = restoreDashThumbnail;
@@ -14617,12 +14594,103 @@ function updateDashArtworkThumb(dataUrl) {
 function _swatchIsFloater(collectionName, item) {
     return /floater/i.test(collectionName || '') || (!!item && parseFloat(item.faceWidth) > 0);
 }
+// ── THE FRAME CARD (19.09) ─────────────────────────────────────────────────────
+// The dashboard shows the item's frame as one card (corner photo, code, colour, width,
+// vendor) that opens the frame browser. Facts come from the library by CODE; a code no
+// library lists (a custom swatch) shows its own swatch; a legacy colour frame says so.
+function _dashFrameCardSync(row) {
+    const pic = document.getElementById('frameCardPic'), code = document.getElementById('frameCardCode'), sub = document.getElementById('frameCardSub');
+    if (!pic || !code || !sub) return;
+    row = row || (_bulkEditing ? _bulkScratch : dashProjectData[dashSelectedRowIndex]) || {};
+    const rec = row.fCode ? _fbByCode()[_fbNorm(row.fCode)] : null;
+    pic.innerHTML = ''; pic.style.background = '';
+    if (row.fType === 'color') {
+        pic.style.background = row.fColor || '#111111';
+        code.textContent = row.fCode || 'Solid colour';
+        sub.textContent = 'Solid colour (older project). Pick a library frame';
+        return;
+    }
+    const img = document.createElement('img'); img.alt = '';
+    const sw = row.swatchDataUrl || '';
+    img.onerror = () => { img.remove(); if (sw) pic.style.background = 'url(' + sw + ') center/cover'; };
+    if (rec) img.src = _fbImgUrl(rec.item); else if (sw) img.src = sw;
+    if (img.src) pic.appendChild(img);
+    code.textContent = row.fCode || row.swatchName || 'Frame';
+    if (rec) {
+        const it = rec.item, u = unitFactor('in', dashUnit);
+        const vend = { michaelangelo: 'Michelangelo', larson_juhl: 'Larson-Juhl', universal_arquati: 'Universal Arquati', 'international-moulding': 'International Moulding', framerica: 'Framerica' }[rec.vendor] || rec.vendor;
+        sub.textContent = [it.color, it.width ? dashFmt(it.width * u) + unitSuffix() : '', vend].filter(Boolean).join(' · ');
+    } else {
+        sub.textContent = row.swatchDataUrl ? 'Custom swatch' : 'Pick a frame';
+    }
+}
+// ── THE DEFAULT FRAME (19.09) ──────────────────────────────────────────────────
+// Every new item starts in MICH-132-29 (a 3/4" black Small Stem), a real library moulding,
+// instead of a flat-colour "Standard Black". The swatch is a library image, so it loads
+// once at boot (_defaultFrameLoad, after the bundled library) and is cached. An item made
+// before it arrives (or offline, file://) starts as a black colour frame carrying the same
+// code and sizes, and is upgraded in place when it lands (_defaultFramePending, held by
+// object identity, never a field on the row).
+const DEFAULT_FRAME_CODE = 'MICH-132-29';
+const DEFAULT_FRAME_IN = { fW: 0.75, fHeight: 1, rabbetDepth: 0.8125, fColor: '#111111' };
+let _defaultFrameSwatch = null;
+const _defaultFramePending = new Set();
+function _defaultFrameApply(row) {
+    if (!row || _isFlatGraphic(row.product)) return row;
+    const u = unitFactor('in', dashUnit);
+    row.fW = dashFmt(DEFAULT_FRAME_IN.fW * u); row.fHeight = dashFmt(DEFAULT_FRAME_IN.fHeight * u); row.rabbetDepth = dashFmt(DEFAULT_FRAME_IN.rabbetDepth * u);
+    row.fCode = DEFAULT_FRAME_CODE; row.swatchName = DEFAULT_FRAME_CODE; row.fColor = DEFAULT_FRAME_IN.fColor;
+    if (!String(row.fColorName || '').trim()) row.fColorName = 'Black';   // the catalogue's colour for it
+    if (_defaultFrameSwatch) { row.fType = 'image'; row.swatchDataUrl = _defaultFrameSwatch; }
+    else { row.fType = 'color'; row.swatchDataUrl = ''; _defaultFramePending.add(row); _defaultFrameLoad(); }
+    return row;
+}
+let _defaultFrameLoading = null;
+function _defaultFrameLoad() {
+    if (_defaultFrameSwatch) return Promise.resolve(_defaultFrameSwatch);
+    if (_defaultFrameLoading) return _defaultFrameLoading;
+    const rec = _fbByCode()[_fbNorm(DEFAULT_FRAME_CODE)];
+    if (!rec) return Promise.resolve(null);   // library not loaded yet: boot calls again after it is
+    _defaultFrameLoading = _libEntryToDataUrl(rec.item.file).then(u => {
+        _defaultFrameSwatch = u;
+        _defaultFrameUpgradePending();
+        return u;
+    }).catch(() => null).then(u => { _defaultFrameLoading = null; return u; });
+    return _defaultFrameLoading;
+}
+// Rows (and their wall copies) still exactly as minted get the real swatch. A row the
+// designer has since changed is theirs and is left alone.
+function _defaultFrameUpgradePending() {
+    if (!_defaultFrameSwatch || !_defaultFramePending.size) return;
+    const fresh = (r) => r && r.fType === 'color' && !r.swatchDataUrl && r.fCode === DEFAULT_FRAME_CODE;
+    let n = 0;
+    _defaultFramePending.forEach(row => {
+        if (!fresh(row) || dashProjectData.indexOf(row) < 0) return;
+        row.fType = 'image'; row.swatchDataUrl = _defaultFrameSwatch; n++;
+        (elevations || []).forEach(e => (e.frames || []).forEach(f => { if (f && f.id === row.id && fresh(f)) { f.fType = 'image'; f.swatchDataUrl = _defaultFrameSwatch; } }));
+    });
+    _defaultFramePending.clear();
+    if (!n) return;
+    try { renderDashTable(); } catch (e) {}
+    try { if (currentView === 'dashboard' && dashProjectData[dashSelectedRowIndex]) loadDashDataIntoControls(dashProjectData[dashSelectedRowIndex]); } catch (e) {}
+    try { if (currentView === 'elevation') drawElevAll(); } catch (e) {}
+    try { _invalidateFramesCache(); } catch (e) {}
+    if (typeof scheduleAutosave === 'function') scheduleAutosave();
+}
 function applySwatchToRow(rowIdx, collectionName, item, dataUrl) {
     // In bulk-edit mode, target the scratch object (the form's data source),
     // never a real project row. rowIdx is ignored while bulk editing.
     const row = _bulkEditing ? _bulkScratch : dashProjectData[rowIdx];
     if (!row || !item) return false;
     const _uf = unitFactor('in', dashUnit);
+    // COLOR / TEXTURE FOLLOWS THE FRAME (19.09) from the catalogue, but only while it still
+    // holds the PREVIOUS frame's catalogue colour (or nothing): words typed by a designer
+    // are theirs. Designers used to leave "Standard Black" on a wood-grain moulding.
+    {
+        const prev = row.fCode ? _fbByCode()[_fbNorm(row.fCode)] : null;
+        const was = String(row.fColorName || '').trim();
+        if (item.color && (!was || (prev && prev.item.color && was === prev.item.color))) row.fColorName = item.color;
+    }
     row.fType = 'image';
     row.fW = dashFmt(item.width * _uf);
     row.fCode = item.code;
@@ -14663,10 +14731,10 @@ function loadDashFromCustomLibrary(idx) {
         // Reflect the new values in the form controls.
         document.getElementById('fW').value = row.fW;
         document.getElementById('m_fCode').value = row.fCode;
+        { const cn = document.getElementById('m_fColorName'); if (cn) cn.value = row.fColorName || ''; }
         document.getElementById('view-dashboard').style.setProperty('--frame-bg', `url(${u})`);
         document.getElementById('fType').value = 'image';
-        document.getElementById('fTypeBtnLibrary').classList.add('active');
-        document.getElementById('fTypeBtnSolid').classList.remove('active');
+        _dashFrameCardSync(row);
 
         const productSelect = document.getElementById('m_product');
         if (productSelect && row.product && productSelect.value !== row.product) {
@@ -14978,6 +15046,16 @@ function _fbRenderGrid(all, byCode) {
         const row = (typeof dashProjectData !== 'undefined' && dashProjectData[dashSelectedRowIndex]) || null;
         foot.textContent = (typeof _bulkEditing !== 'undefined' && _bulkEditing) ? 'Click a frame to use it on every item in the bulk edit.'
             : 'Click a frame to use it on ' + ((row && row.id) || 'the selected item') + '. ★ shortlists it on this project.';
+        // 19.09: the one-off frame no vendor lists (a client's own, a custom build). It was the
+        // dashboard's Upload swatch button; it lives where frames are chosen now. Not offered
+        // in bulk edit, which applies library frames by code.
+        if (!(typeof _bulkEditing !== 'undefined' && _bulkEditing)) {
+            const cu = document.createElement('button'); cu.type = 'button'; cu.className = 'fb-custom'; cu.id = 'fbCustomSwatch';
+            cu.textContent = 'Custom swatch\u2026';
+            cu.title = 'For a frame no vendor lists: upload a photo of its face (outer edge on the left). The code comes from the file name.';
+            cu.onclick = () => { _fbClose(); const u = document.getElementById('swatchUpload'); if (u) u.click(); };
+            foot.appendChild(cu);
+        }
     }
 }
 function _fbCardEl(c) {
@@ -15067,23 +15145,20 @@ function _fbPick(rec) {
     if (!v || !c) return;
     v.value = rec.vendor; updateDashCollectionDropdown();
     c.value = rec.collection; updateDashCustomSwatchDropdown();
-    const disp = document.getElementById('swatchSelectedDisplay');
-    if (disp) disp.textContent = rec.item.code + ' (' + rec.item.width + '")';
     _fbClose();
     loadDashFromCustomLibrary(rec.idx);
 }
 
 function loadDashCustomSwatch(e) {
     const f = e.target.files[0]; if(!f) return;
+    e.target.value = '';   // the same file can be picked again
     const n = f.name.split('.')[0]; const r = new FileReader();
     r.onload = e => {
         document.getElementById('fType').value = 'image';
-        document.getElementById('fTypeBtnLibrary').classList.add('active');
-        document.getElementById('fTypeBtnSolid').classList.remove('active');
         document.getElementById('view-dashboard').style.setProperty('--frame-bg', `url(${e.target.result})`);
         dashProjectData[dashSelectedRowIndex].fType = 'image'; dashProjectData[dashSelectedRowIndex].swatchDataUrl = e.target.result; dashProjectData[dashSelectedRowIndex].swatchName = n;
-        document.getElementById('m_fCode').value = n; document.getElementById('swatchSelectedDisplay').textContent = 'Frame';
-        document.getElementById('swatchThumbPreview').style.backgroundImage = `url(${e.target.result})`;
+        document.getElementById('m_fCode').value = n; dashProjectData[dashSelectedRowIndex].fCode = n;
+        _dashFrameCardSync(dashProjectData[dashSelectedRowIndex]);
         dashActiveImageObj.src = e.target.result; dashActiveImageObj.onload = () => syncDashAndCalculate();
     };
     r.readAsDataURL(f);
@@ -31379,7 +31454,6 @@ function _fpAddCodes(catKey, n, opts) {
     for (let i = 0; i < k; i++) {
         const row = JSON.parse(JSON.stringify(dashDefaultData));
         lenFields.forEach(f => { const v = parseFloat(row[f]); if (!isNaN(v)) row[f] = dashFmt(v * _f); });
-        row.fType = 'color'; row.fColor = '#000000'; row.fCode = 'Standard Black';
         row.id = k === 1 ? code : code + letters[i];
         row.category = catKey || '';
         row.qty = 0;
@@ -31389,7 +31463,7 @@ function _fpAddCodes(catKey, n, opts) {
         if (_isFlatGraphic(row.product)) {
             row.bleed = dashFmt(FLAT_GRAPHIC_BLEED_IN * _f);
             if (!(row.material || '').trim()) row.material = FLAT_GRAPHIC_APPLICATION[row.product] || '';
-        }
+        } else _defaultFrameApply(row);   // 19.09: a real moulding, not a flat colour
         dashProjectData.push(row);
     }
     // Pushed at the end of the schedule, then sorted in behind its own type: an EGD
@@ -43428,7 +43502,7 @@ const HELP_REFERENCE_DATA = [
         entries: [
             { title: '+ Add (new row)', body: `Creates a new row with default values in the current unit. Each row gets an item code like <strong>ART.001</strong>.` },
             { title: 'Product type', body: `Seven options: <strong>Framed Art</strong>, <strong>Framed Art (Shadow Box)</strong>, <strong>Framed Canvas (Floater)</strong>, <strong>Frameless Canvas (Wrapped)</strong>, <strong>Sourced Object</strong>, <strong>Wallcovering (EGD)</strong> and <strong>Window Film (WF)</strong>. A canvas hides the mat controls. The two flat graphics hide the mats and dim the frame fields, because the overall size IS the graphic, and add a Material field. Sourced Object currently behaves as Framed Art.` },
-            { title: 'Frame profile (Library / Solid)', body: `<strong>Library</strong> uses real moulding profiles from the synced library, with depth and rabbet if the file name carries them. <strong>Solid</strong> uses a flat colour for quick mockups.` },
+            { title: 'Frame', body: `The card under <strong>Frame</strong> shows the item's moulding: its corner, code, colour, width and vendor. Click it (or <strong>Change</strong>) to open the frame browser and pick from every vendor's library, this project's frames or a saved grouping. Picking a frame fills in its width, depth and rabbet, and the Color / Texture line unless you typed your own. New items start in <strong>MICH-132-29</strong>. For a frame no vendor lists, use <strong>Custom swatch…</strong> at the foot of the frame browser.` },
             { title: 'Mat 1, Mat 2, Faux Mat', body: `<strong>Mat 1</strong> is the main mat (set top, bottom, left and right, or all around). <strong>Mat 2</strong> adds a reveal under it. <strong>Faux Mat</strong> is a printed white border on the paper instead of a mat board.` },
             { title: 'Sync mat colours (chain icon)', body: `While it is on, Mat 2 takes Mat 1's colour. Turn it off to set them separately.` },
             { title: 'Float mount', body: `Switch the panel to <strong>FLOAT</strong>: the art floats on a paper backing with a white margin instead of a mat, with Paper Size, Paper Margin and White Border set separately. It needs at least 0.625" of rabbet.` },
@@ -43576,7 +43650,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.08</strong> An empty opening shows an add-image icon instead of its size, on the wall and in the Frame Dashboard preview. In the dashboard, click it to upload the artwork. The size is still in the dashboard fields and the dimension guides.<br><br>\n<strong>19.07</strong> Frame effects in Settings fits on one screen: the sample frame and the sliders sit side by side, and each slider's explanation is behind a <strong>?</strong> instead of a line of text under it.<br><br>\n<strong>19.06</strong> Deck Studio's Project tab is shorter. Project name, code, location and version sit together at the top, and units, rounding and frame effects are one line that says what they are, with <strong>Units&hellip;</strong> and <strong>Frame effects&hellip;</strong> buttons into Settings (the gear in the header), where they are changed. Fixed: the page preview on the Project tab now shows a page's background image, colour and text colour, like the Pages tab; a cover with a picture showed on white before, even after Refresh preview.<br><br>\n<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
+                body: `<strong>19.09</strong> Frames come from the library. New items start in <strong>MICH-132-29</strong>, a black moulding with a three-quarter inch face, instead of a flat black colour. In the Frame Dashboard the Library / Color switch, the colour picker, Sync Folder and the swatch upload are gone: the frame is one card showing its corner, code, colour, width and vendor, and clicking it opens the frame browser. Picking a frame also fills Color / Texture from the catalogue (never over words you typed). A frame no vendor lists can still be added with <strong>Custom swatch…</strong> in the frame browser. Older projects with colour frames still open and print as before.<br><br>\n<strong>19.08</strong> An empty opening shows an add-image icon instead of its size, on the wall and in the Frame Dashboard preview. In the dashboard, click it to upload the artwork. The size is still in the dashboard fields and the dimension guides.<br><br>\n<strong>19.07</strong> Frame effects in Settings fits on one screen: the sample frame and the sliders sit side by side, and each slider's explanation is behind a <strong>?</strong> instead of a line of text under it.<br><br>\n<strong>19.06</strong> Deck Studio's Project tab is shorter. Project name, code, location and version sit together at the top, and units, rounding and frame effects are one line that says what they are, with <strong>Units&hellip;</strong> and <strong>Frame effects&hellip;</strong> buttons into Settings (the gear in the header), where they are changed. Fixed: the page preview on the Project tab now shows a page's background image, colour and text colour, like the Pages tab; a cover with a picture showed on white before, even after Refresh preview.<br><br>\n<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
 <strong>19.04</strong> Deleting a wall asks about its pieces. When pieces hang on that wall and nowhere else, you choose <strong>Delete wall and pieces</strong> (they leave the Frame Dashboard and the presentation: the way to drop the options a client turned down) or <strong>Delete wall, keep pieces</strong> (as before: they stay in the Dashboard, and + Add Wall offers them to hang again). Pieces also shown on another wall are never deleted, and Ctrl+Z brings back the wall and its pieces together.<br><br><strong>19.03</strong> The frame you pick sets the product both ways. Picking a floater makes the item Framed Canvas (Floater), as before, and picking a regular moulding on a floater item now turns it back into Framed Art (it used to stay a floater, with its canvas inset and no mats). A floater counts by its lip width too, whatever its collection is called. Shadow boxes, frameless canvas, wallcovering and window film are left as you set them.<br><br><strong>19.02</strong> Floaters show their gap. The quarter inch between a floater's face and the canvas now draws as a dark slot instead of more moulding, on the Dashboard preview, the wall, PNG and SVG exports and spec pages, and the canvas casts its shadow into it. Settings, Frame effects has a new <strong>Floater gap</strong> slider for how dark it reads (the canvas used to borrow Frame onto mat). The three Cape Cod floaters (IM-310-715, 720 and 725) now carry their 5/8in face, so a new pick sets a 7/8in inset.<br><br><strong>19.01</strong> More frames turned round to face the right way: 46 Larson-Juhl floaters (Axom, Bauhaus II, Cranbrook, Eiffel, Gramercy, Metalia, Moderne, Olsen, Ravello, Shoji and Spencer II) now show the wall on the left and the floor along the bottom like every other floater, and Academie Silver 3in (LJ-733237) matches its gold and black siblings.<br><br><strong>19.00</strong> The frame browser has a <strong>Type</strong> filter: show only floaters, or only frames, across every vendor. Frame thumbnails are cropped consistently again: about 290 International Moulding and Framerica corners had kept far too much of the moulding and showed as thin slivers. Seven more mouldings that faced the wrong way (including IM-310-710) are turned round.<br><br><strong>18.99</strong> International Moulding and Framerica frames now face the same way as every other moulding: outer edge on the left, rabbet lip on the right. Many were mirror images, so the mockup drew the lip on the outside of the frame. The old Universal folder with two frames is gone; both are in Universal Arquati.<br><br><strong>18.98</strong> The frame library adds International Moulding (about 1,000 current mouldings in 153 collections, 37 of them floaters) and Framerica (336 mouldings in 91 finishes), each with its corner photo, sizes, colour family and, where the maker publishes one, its profile drawing. Deep shadowbox corners now show the frame face above the cut end instead of only raw wood.<br><br><strong>18.97</strong> More frame corners and profiles fit on one row of a group page before it wraps: the space between mouldings tightens first, then the pictures shrink, and only then does the strip go to two rows.<br><br><strong>18.96</strong> Frame corner photos all share one shape now. Thin Universal Arquati and Larson-Juhl mouldings showed as long skinny slivers in the frame browser and on spec pages; every corner is cropped to the same proportions as the Michelangelo ones, showing the cut end and a short run of the face.<br><br><strong>18.95</strong> The frame library adds Universal Arquati: about 1,050 current mouldings in 156 collections (Universal, Valucore and the Arquati lines), including 177 floaters, each with its corner photo, profile drawing, sizes, colour, profile type and style. Discontinued mouldings, fillets, liners and stretcher bars are left out.<br><br><strong>18.94</strong> Two spec page fixes. A picture dropped onto the dashboard preview or onto a frame on the wall kept the previous picture's proportions, so the dashboard and wall stretched it to fit while the spec page printed its true crop; every drop now records the new picture's size, and pieces affected before this correct themselves the next time they are shown. On a per-piece page, a long spec list (float-mounted paper adds four rows) now tightens its rows to stop above the frame corner and profile instead of running into them.<br><br><strong>18.93</strong> The Frame Recommendations page lays frames out on an even grid. With a count that does not divide by the columns (8 frames in 3 columns), the last column used to stretch its frames to fill the page; now every frame is the same size and the last column simply ends early.<br><br><strong>18.92</strong> The frame library adds Larson-Juhl: about 1,030 current mouldings in 156 collections, including 91 floaters, each with its corner photo, profile drawing, sizes, colour family, profile type and style. In the frame browser the Library now lists each vendor once (click it to open its collections), and there is a new <strong>Style</strong> filter (Contemporary, Modern, Classic and so on). Nielsen metal frames are left out because Larson-Juhl has no photos of them.<br><br><strong>18.91</strong> When a Group A/B/C page has too many mouldings for the frame corners and profiles to fit in one row beside the floorplan and elevation, they wrap into two rows in the same space, so the artwork, floorplan and elevation keep their size and place. Seven different mouldings now show every corner and profile.<br><br><strong>18.89</strong> On a Group A/B/C page with several mouldings, ticking Moulding profile no longer makes every frame corner disappear. The corners and profiles now shrink to fit beside the floorplan and elevation; if there is still not enough room, the profiles are left off and the corners kept, and a <strong>no room</strong> note appears beside Moulding profile under Show on page.<br><br><strong>18.88</strong> The frame library now has every Michelangelo collection that works as a frame in FRAME: Barnwood, Contemporary, Modern, Shadow Boxes and Traditional join Avant-Garde, Floaters and Ornate, about 1,240 mouldings in all, each with its corner photo, profile drawing, sizes, colour and profile name. Liners, fillets, rabbetless flat surfaces and stretchers are left out because they are not a frame on their own.<br><br><strong>18.87</strong> The frame library adds Michelangelo's ornate mouldings: all 59 current ones, each with its corner photo, profile drawing, sizes, colour and profile name. Their swatches repeat the ornament down the rail without a visible seam.<br><br><strong>18.86</strong> The frame library adds Michelangelo's floaters: 229 current floater frames for canvas, each with its corner photo, profile drawing, sizes and lip width. Picking one switches the item to Framed Canvas (Floater) and sets the inset from the lip, as before.<br><br><strong>18.85</strong> The frame library now has the whole Michelangelo Avant-Garde collection: 539 current mouldings, each with its corner photo, profile drawing, sizes, colour and profile name, so the frame browser can search and filter all of them.<br><br><strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>

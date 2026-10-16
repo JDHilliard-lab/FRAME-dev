@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.08">
+    <link rel="stylesheet" href="style.css?v=19.09">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -300,60 +300,33 @@
                             <div><label>Print File</label><div class="calc-box calc-box-blue" id="printFileDisplay">0 x 0</div></div>
                         </div>
 
-                        <!-- FRAME STYLE: tight section with a Library/Solid toggle + sync folder icon.
-                             Wrapped in #frameStyleSection so the whole section can be greyed out
-                             via .fl-disabled when Frameless Canvas is selected (no frame applies).
-                             canvasSettings stays OUTSIDE this wrapper since canvas products
-                             still need to edit canvas depth/wrap/inset. -->
+                        <!-- FRAME (19.09). The frame is picked from the library, always: the LIBRARY /
+                             COLOR toggle, the colour picker, Sync Folder and Upload single swatch are
+                             gone (the bundled library has thousands of mouldings from five vendors).
+                             What is left is ONE card showing the frame on this item (corner photo,
+                             code, colour, width, vendor); clicking it opens the frame browser, which
+                             also carries "Custom swatch..." for a one-off frame no vendor lists.
+                             A legacy colour frame still loads and prints; the card says so.
+                             Wrapped in #frameStyleSection so .fl-disabled can grey it for Frameless
+                             Canvas. Hidden inputs keep the data flow: syncDashAndCalculate reads
+                             fType / fColor, and the apply path reads libVendor / libCollection. -->
                         <div id="frameStyleSection">
-                        <div class="section-title section-title-static" style="margin-top:8px;">Frame Style</div>
-                        <!-- ROW 1: folder + upload icons | LIBRARY/COLOR toggle | color picker.
-                             Upload was moved up from the old imageControls row so both
-                             file-input icons live together (they're both "where do swatches
-                             come from"). When LIBRARY is active, the COLOR side dims via
-                             the .fstyle-color-side / .fstyle-lib-side classes. -->
-                        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 6px;">
-                            <input type="file" id="libFolderInput" webkitdirectory directory multiple style="display:none;" onchange="syncDashLibraryFolder(event)">
-                            <button id="libFolderBtn" class="icon-btn fstyle-lib-side" style="width:26px; height:26px; border:1px solid var(--border-color); background:var(--btn-secondary); cursor:pointer; flex-shrink:0; padding: 0; display: flex; align-items: center; justify-content: center;" title="Sync Folder — import a folder of frame swatches" onclick="openLibrarySyncModal()">
-                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-                            </button>
-                            <!-- Upload single image — moved up from old imageControls row.
-                                 Visually grouped with the folder button since both feed
-                                 swatches into the LIBRARY side. -->
-                            <div class="file-upload-wrapper fstyle-lib-side" style="margin:0; width: 26px; height:26px; flex-shrink:0;">
-                                <input type="file" id="swatchUpload" class="file-upload-input" accept="image/*" onchange="loadDashCustomSwatch(event)">
-                                <label for="swatchUpload" class="btn-secondary" style="height:26px; width:26px; border-radius:var(--r-4); padding: 0; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid var(--border-color);" title="Upload Single Image">
-                                    <svg class="svg-icon" style="width:12px; height:12px;" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-                                </label>
-                            </div>
-                            <div class="unit-toggle" style="flex: 1;">
-                                <button id="fTypeBtnLibrary" class="active fstyle-lib-side" type="button" onclick="setFrameStyle('image')">LIBRARY</button>
-                                <button id="fTypeBtnSolid" class="fstyle-color-side" type="button" onclick="setFrameStyle('color')">COLOR</button>
-                            </div>
-                            <input type="color" id="fColor" class="color-swatch-flat fstyle-color-side" oninput="syncDashAndCalculate()" style="width:26px; height:26px;" title="Frame color">
-                            <!-- Hidden field preserves the existing data flow: syncDashAndCalculate reads getStr('fType') -->
-                            <input type="hidden" id="fType" value="image">
-                        </div>
-                        <!-- Legacy container kept (empty) so any code paths that flip its display don't error -->
+                        <div class="section-title section-title-static" style="margin-top:8px;">Frame</div>
+                        <input type="hidden" id="fType" value="image">
+                        <input type="hidden" id="fColor" value="#111111">
+                        <input type="file" id="swatchUpload" accept="image/*" style="display:none;" onchange="loadDashCustomSwatch(event)">
                         <div id="colorControls" style="display:none;"></div>
-
-                        <!-- ROW 2: the Frame box opens the frame browser (openFrameBrowser, 18.84). The
-                             Vendor / Collection selects stay in the DOM, hidden: the apply
-                             path (loadDashFromCustomLibrary) still reads them. Visible only in
-                             LIBRARY mode (dimmed in COLOR mode via .fstyle-lib-side). The
-                             upload-single-image button + redundant thumb preview were
-                             removed from this row in the v2 reshuffle. -->
-                        <div id="imageControls" style="display: flex; align-items: center; gap: 4px; margin-bottom: 6px; width: 100%;">
-                            <select id="libVendor" class="no-arrow" style="display:none; flex: 1; padding: 2px; font-size: var(--fs-65); min-width:0;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
-                            <select id="libCollection" class="no-arrow" style="display:none; flex: 1; padding: 2px; font-size: var(--fs-65); min-width:0;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
-
-                            <div id="customSwatchContainer" style="flex: 1; position: relative; min-width: 0; height: 26px;">
-                                <div id="swatchSelectedDisplay" style="border: 1px solid var(--border-color); border-radius: var(--r-4); font-size: var(--fs-65); height: 26px; padding: 0 4px; background: var(--bg-input); cursor: pointer; display: flex; align-items: center; justify-content: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text-strong);" onclick="openFrameBrowser()" title="Choose a frame: search the library, your project's frames and saved groupings" data-kbd-click tabindex="0">Frame</div>
+                        <div id="imageControls" style="margin-bottom: 8px;">
+                            <select id="libVendor" class="no-arrow" style="display:none;" onchange="updateDashCollectionDropdown()"><option value="">Vendor</option></select>
+                            <select id="libCollection" class="no-arrow" style="display:none;" onchange="updateDashCustomSwatchDropdown()"><option value="">Collection</option></select>
+                            <div id="customSwatchContainer" style="position: relative;">
+                                <div id="swatchSelectedDisplay" class="frame-card" onclick="openFrameBrowser()" title="Change the frame: search every vendor's library, this project's frames and saved groupings" data-kbd-click tabindex="0" role="button">
+                                    <span class="frame-card-pic" id="frameCardPic"></span>
+                                    <span class="frame-card-text"><span class="frame-card-code" id="frameCardCode">Frame</span><span class="frame-card-sub" id="frameCardSub"></span></span>
+                                    <span class="frame-card-change">Change</span>
+                                </div>
                                 <ul id="swatchDropdownList" class="custom-dropdown-list"></ul>
                             </div>
-                            <!-- Hidden thumb preview kept in the DOM as a sink so any JS that
-                                 writes to swatchThumbPreview.style.backgroundImage doesn't
-                                 break — it just never renders visually. -->
                             <div id="swatchThumbPreview" style="display:none;"></div>
                         </div>
 
@@ -2230,9 +2203,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.08';</script>
-<script src="templates.js?v=19.08"></script>
-<script src="app.js?v=19.08"></script>
+<script>window.FRAME_HTML_VERSION = '19.09';</script>
+<script src="templates.js?v=19.09"></script>
+<script src="app.js?v=19.09"></script>
 
 </body>
 </html>

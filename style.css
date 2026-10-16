@@ -2868,7 +2868,7 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .fb-more { top: 34px; opacity: 0; }
 .fb-frame:hover .fb-more, .fb-more:focus-visible { opacity: 1; }
 .fb-star.on { color: var(--warn); }
-.fb-foot { padding: 8px 14px; font-size: var(--fs-60); color: var(--text-muted); border-top: 1px solid var(--border-color); }
+.fb-foot { padding: 8px 14px; font-size: var(--fs-60); color: var(--text-muted); border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; }
 
 /* 19.06: the Project tab's facts block and the one-line settings readback. */
 .proj-fields { display: grid; grid-template-columns: 1.3fr 1fr 52px; gap: 10px 8px; margin-bottom: 12px; }
@@ -2884,3 +2884,19 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .art-add-ph { display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.8); line-height: 0; }
 .art-add-btn { pointer-events: auto; padding: 6px; border: 1px dashed rgba(255,255,255,0.55); border-radius: var(--r-6); background: rgba(0,0,0,0.12); cursor: pointer; transition: background 0.12s, color 0.12s, border-color 0.12s; }
 .art-add-btn:hover { background: rgba(0,0,0,0.28); color: #fff; border-color: #fff; }
+
+/* 19.09: THE FRAME CARD. The item's frame in the dashboard: corner photo, code, colour,
+   width, vendor; the whole card opens the frame browser. Replaces the LIBRARY / COLOR
+   toggle, colour picker, Sync Folder and Upload buttons. */
+.frame-card { display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 6px; border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-input); cursor: pointer; transition: border-color 0.12s, background 0.12s; }
+.frame-card:hover { border-color: var(--text-muted); background: var(--btn-hover); }
+.frame-card-pic { flex: none; width: 34px; height: 44px; border-radius: var(--r-4); overflow: hidden; background: var(--bg-panel); border: 1px solid var(--border-color); }
+.frame-card-pic img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.frame-card-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.frame-card-code { font-size: var(--fs-80); font-weight: 700; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.frame-card-sub { font-size: var(--fs-65); color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.frame-card-change { flex: none; font-size: var(--fs-65); font-weight: 700; color: var(--text-main); padding: 4px 9px; border: 1px solid var(--border-color); border-radius: var(--r-4); background: var(--bg-panel); }
+.frame-card:hover .frame-card-change { color: var(--text-strong); }
+.fb-custom { margin-left: auto; flex: none; height: 24px; padding: 0 10px; font-size: var(--fs-65); font-weight: 700; color: var(--text-main); background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--r-4); cursor: pointer; }
+.fb-custom:hover { background: var(--btn-hover); color: var(--text-strong); }
+#imageControls > #customSwatchContainer { flex: 1 1 auto; min-width: 0; }

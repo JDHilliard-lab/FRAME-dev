@@ -1811,6 +1811,16 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Its page preview draws an element page with `_dsElementPageThumbHTML(desc, w, h, undefined,
   true)`** (the rail's builder: theme background, dark ink, notes, footer; `noBadge`), never the
   bare `_deckMockHTML`, which ignores the page theme.
+- **FRAMES COME FROM THE LIBRARY (19.09).** New items start in `DEFAULT_FRAME_CODE` (MICH-132-29) via
+  `_defaultFrameApply` in `_fpAddCodes` (and the boot placeholder). The swatch loads once
+  (`_defaultFrameLoad`, after the bundled library); a row minted before it lands is a black colour
+  stand-in with the same code, upgraded by `_defaultFramePending` (object identity, never a row field)
+  only while untouched. The dashboard's Frame is ONE card (`#swatchSelectedDisplay` = `.frame-card`,
+  `_dashFrameCardSync`); the colour toggle, colour picker, Sync Folder and Upload buttons are gone
+  (`#fType`, `#fColor` stay as hidden inputs; colour frames still load and print). A one-off frame is
+  **Custom swatch...** in the frame browser foot (`#fbCustomSwatch` -> `#swatchUpload`). Picking a frame
+  fills `fColorName` from the catalogue only while it holds nothing or the previous frame's colour.
+  The Sync Folder modal code is dormant (previously stored swatches still load).
 - **ONE SETTINGS GEAR (18.47): `#appSettingsBtn` -> `openAppSettings(tab)`**, in every
   view (no `data-views`). Tabs `APP_SETTINGS_TABS`: `units` (`_unitControlsInto`), `fx`
   (`_frameFxInto`), `elev` (hands off to `openPrecisionModal`, closing Settings first).
