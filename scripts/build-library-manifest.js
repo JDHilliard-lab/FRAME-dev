@@ -149,7 +149,7 @@ function buildManifest() {
                 if (corners[parsed.code]) item.corner = corners[parsed.code];
                 if (profiles[parsed.code]) item.profileImg = profiles[parsed.code];
                 const m = meta[parsed.code];
-                if (m) ['color', 'family', 'profile', 'series'].forEach(k => { if (m[k]) item[k] = String(m[k]); });
+                if (m) ['color', 'family', 'profile', 'series', 'style'].forEach(k => { if (m[k]) item[k] = String(m[k]); });
                 items.push(item);
             }
         }

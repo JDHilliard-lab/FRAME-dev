@@ -1,0 +1,42 @@
+{
+ "LJ-332900": {
+  "collection": "Foundry",
+  "color": "Foundry Brass 1 1/8\"",
+  "family": "Bronze",
+  "profile": "Cube",
+  "series": "Foundry",
+  "style": "Contemporary"
+ },
+ "LJ-332902": {
+  "collection": "Foundry",
+  "color": "Foundry Iron 1 1/8\"",
+  "family": "Dark Silver/Gunmetal",
+  "profile": "Cube",
+  "series": "Foundry",
+  "style": "Contemporary"
+ },
+ "LJ-432900": {
+  "collection": "Foundry",
+  "color": "Foundry Brass 1 3/4\"",
+  "family": "Bronze",
+  "profile": "Flat",
+  "series": "Foundry",
+  "style": "Contemporary"
+ },
+ "LJ-432902": {
+  "collection": "Foundry",
+  "color": "Foundry Iron 1 3/4\"",
+  "family": "Dark Silver/Gunmetal",
+  "profile": "Flat",
+  "series": "Foundry",
+  "style": "Contemporary"
+ },
+ "LJ-632900": {
+  "collection": "Foundry",
+  "color": "Foundry Brass 2 9/16\"",
+  "family": "Bronze",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Foundry",
+  "style": "Contemporary"
+ }
+}

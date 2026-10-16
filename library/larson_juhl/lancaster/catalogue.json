@@ -1,0 +1,82 @@
+{
+ "LJ-269240": {
+  "collection": "Lancaster",
+  "color": "Lancaster Covered Bridge Grey 13/16\"",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-269250": {
+  "collection": "Lancaster",
+  "color": "Lancaster Split Rail Tan 13/16\"",
+  "family": "Light Woodtone",
+  "profile": "Cap",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-269260": {
+  "collection": "Lancaster",
+  "color": "Lancaster Amish Black 13/16\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-359240": {
+  "collection": "Lancaster",
+  "color": "Lancaster Covered Bridge Grey 1 1/4\"",
+  "family": "Grey",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-359260": {
+  "collection": "Lancaster",
+  "color": "Lancaster Amish Black 1 1/4\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-379240": {
+  "collection": "Lancaster",
+  "color": "Lancaster Covered Bridge Grey 1 3/4\"",
+  "family": "Grey",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-379250": {
+  "collection": "Lancaster",
+  "color": "Lancaster Split Rail Tan 1 3/4\"",
+  "family": "Light Woodtone",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-379260": {
+  "collection": "Lancaster",
+  "color": "Lancaster Amish Black 1 3/4\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-569240": {
+  "collection": "Lancaster",
+  "color": "Lancaster Covered Bridge Grey 2' 3/4\"",
+  "family": "Grey",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ },
+ "LJ-569260": {
+  "collection": "Lancaster",
+  "color": "Lancaster Amish Black 2' 3/4\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Lancaster",
+  "style": "Rustic"
+ }
+}

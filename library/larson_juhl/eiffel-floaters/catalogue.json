@@ -1,0 +1,34 @@
+{
+ "LJ-695100": {
+  "collection": "Eiffel",
+  "color": "Eiffel Float Silver 3\"",
+  "family": "Silver",
+  "profile": "Float",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-695110": {
+  "collection": "Eiffel",
+  "color": "Eiffel Float Pewter 3\"",
+  "family": "Dark Silver/Gunmetal",
+  "profile": "Float",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-695120": {
+  "collection": "Eiffel",
+  "color": "Eiffel Float Gold 3\"",
+  "family": "Gold",
+  "profile": "Float",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-695130": {
+  "collection": "Eiffel",
+  "color": "Eiffel Float Bronze 3\"",
+  "family": "Bronze",
+  "profile": "Float",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ }
+}

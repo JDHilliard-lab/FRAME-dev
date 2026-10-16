@@ -1,0 +1,34 @@
+{
+ "LJ-277605": {
+  "collection": "Axel",
+  "color": "Axel Antique Chestnut 3/4\"",
+  "family": "Medium Woodtone",
+  "profile": "Cap",
+  "series": "Axel",
+  "style": "Rustic"
+ },
+ "LJ-277610": {
+  "collection": "Axel",
+  "color": "Axel Smoked Timber 3/4\"",
+  "family": "Dark Woodtone",
+  "profile": "Cap",
+  "series": "Axel",
+  "style": "Rustic"
+ },
+ "LJ-384605": {
+  "collection": "Axel",
+  "color": "Axel Antique Chestnut 1 1/2\"",
+  "family": "Medium Woodtone",
+  "profile": "Cube",
+  "series": "Axel",
+  "style": "Rustic"
+ },
+ "LJ-384610": {
+  "collection": "Axel",
+  "color": "Axel Smoked Timber 1 1/2\"",
+  "family": "Dark Woodtone",
+  "profile": "Cube",
+  "series": "Axel",
+  "style": "Rustic"
+ }
+}

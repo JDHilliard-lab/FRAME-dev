@@ -1,0 +1,98 @@
+{
+ "LJ-200750": {
+  "collection": "Sofia",
+  "color": "Sofia Bronze 7/8\"",
+  "family": "Bronze",
+  "profile": "Bevel / Slope",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-200751": {
+  "collection": "Sofia",
+  "color": "Sofia Gold 7/8\"",
+  "family": "Gold",
+  "profile": "Bevel / Slope",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-200752": {
+  "collection": "Sofia",
+  "color": "Sofia Iron 7/8\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-300750": {
+  "collection": "Sofia",
+  "color": "Sofia Bronze 15/16\"",
+  "family": "Bronze",
+  "profile": "Bevel / Slope",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-300751": {
+  "collection": "Sofia",
+  "color": "Sofia Gold 15/16\"",
+  "family": "Gold",
+  "profile": "Bevel / Slope",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-300752": {
+  "collection": "Sofia",
+  "color": "Sofia Iron 15/16\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-400750": {
+  "collection": "Sofia",
+  "color": "Sofia Bronze 1 5/8\"",
+  "family": "Bronze",
+  "profile": "Cube",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-400751": {
+  "collection": "Sofia",
+  "color": "Sofia Gold 1 5/8\"",
+  "family": "Gold",
+  "profile": "Cube",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-400752": {
+  "collection": "Sofia",
+  "color": "Sofia Iron 1 5/8\"",
+  "family": "Black",
+  "profile": "Cube",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-520750": {
+  "collection": "Sofia",
+  "color": "Sofia Bronze 2 1/2\"",
+  "family": "Bronze",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-520751": {
+  "collection": "Sofia",
+  "color": "Sofia Gold 2 1/2\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Sofia",
+  "style": "Classic"
+ },
+ "LJ-520752": {
+  "collection": "Sofia",
+  "color": "Sofia Iron 2 1/2\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Sofia",
+  "style": "Classic"
+ }
+}

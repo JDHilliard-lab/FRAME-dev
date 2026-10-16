@@ -1,0 +1,42 @@
+{
+ "LJ-618184": {
+  "collection": "L7",
+  "color": "L7 Float White Silver 1 5/8\"",
+  "family": "Silver",
+  "profile": "Float",
+  "series": "L7",
+  "style": "Modern"
+ },
+ "LJ-618185": {
+  "collection": "L7",
+  "color": "L7 Float Gold 1 5/8\"",
+  "family": "Gold",
+  "profile": "Float",
+  "series": "L7",
+  "style": "Modern"
+ },
+ "LJ-628184": {
+  "collection": "L7",
+  "color": "L7 Float White Silver 2 3/8\"",
+  "family": "Silver",
+  "profile": "Float",
+  "series": "L7",
+  "style": "Modern"
+ },
+ "LJ-628185": {
+  "collection": "L7",
+  "color": "L7 Float Gold 2 3/8\"",
+  "family": "Gold",
+  "profile": "Float",
+  "series": "L7",
+  "style": "Modern"
+ },
+ "LJ-628186": {
+  "collection": "L7",
+  "color": "L7 Float Black Silver 2 3/8\"",
+  "family": "Silver",
+  "profile": "Float",
+  "series": "L7",
+  "style": "Modern"
+ }
+}

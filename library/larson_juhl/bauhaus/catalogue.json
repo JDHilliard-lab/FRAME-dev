@@ -1,0 +1,66 @@
+{
+ "LJ-842440": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus White 3/4\"",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-842450": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus Black 3/4\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-852440": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus Shadowbox White 3/4\"",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-852450": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus Shadowbox Black 3/4\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-862440": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus White 1 1/4\"",
+  "family": "White",
+  "profile": "Cube",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-862450": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus Black 1 1/4\"",
+  "family": "Black",
+  "profile": "Cube",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-872440": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus White 3\"",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ },
+ "LJ-872450": {
+  "collection": "Bauhaus",
+  "color": "Bauhaus Black 3\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Bauhaus",
+  "style": "Contemporary"
+ }
+}

@@ -1,0 +1,34 @@
+{
+ "LJ-202110": {
+  "collection": "Stitch",
+  "color": "Stitch Light Tangerine 3/4\"",
+  "family": "Red/Orange",
+  "profile": "Dome",
+  "series": "Stitch",
+  "style": "Classic"
+ },
+ "LJ-202113": {
+  "collection": "Stitch",
+  "color": "Stitch Light Citron Green 3/4\"",
+  "family": "Green",
+  "profile": "Dome",
+  "series": "Stitch",
+  "style": "Classic"
+ },
+ "LJ-202118": {
+  "collection": "Stitch",
+  "color": "Stitch Dark Royal Blue 3/4\"",
+  "family": "Blue",
+  "profile": "Dome",
+  "series": "Stitch",
+  "style": "Classic"
+ },
+ "LJ-202123": {
+  "collection": "Stitch",
+  "color": "Stitch Black 3/4\"",
+  "family": "Black",
+  "profile": "Dome",
+  "series": "Stitch",
+  "style": "Classic"
+ }
+}

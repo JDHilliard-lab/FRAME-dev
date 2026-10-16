@@ -1,0 +1,26 @@
+{
+ "LJ-434110": {
+  "collection": "CR2",
+  "color": "CR2 Silver 1 1/4\"",
+  "family": "Silver",
+  "profile": "Cube",
+  "series": "CR2",
+  "style": "Contemporary"
+ },
+ "LJ-444110": {
+  "collection": "CR2",
+  "color": "CR2 Silver 1 5/8\"",
+  "family": "Silver",
+  "profile": "Rooftop",
+  "series": "CR2",
+  "style": "Contemporary"
+ },
+ "LJ-474110": {
+  "collection": "CR2",
+  "color": "CR2 Silver 2\"",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "CR2",
+  "style": "Contemporary"
+ }
+}

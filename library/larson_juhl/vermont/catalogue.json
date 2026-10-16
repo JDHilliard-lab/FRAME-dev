@@ -1,0 +1,50 @@
+{
+ "LJ-321720": {
+  "collection": "Vermont",
+  "color": "Vermont Brick Red 1\"",
+  "family": "Red/Orange",
+  "profile": "Cube",
+  "series": "Vermont",
+  "style": "Rustic"
+ },
+ "LJ-321721": {
+  "collection": "Vermont",
+  "color": "Vermont Denim 1\"",
+  "family": "Blue",
+  "profile": "Cube",
+  "series": "Vermont",
+  "style": "Rustic"
+ },
+ "LJ-321723": {
+  "collection": "Vermont",
+  "color": "Vermont Thunder Gray 1\"",
+  "family": "Grey",
+  "profile": "Cube",
+  "series": "Vermont",
+  "style": "Rustic"
+ },
+ "LJ-321725": {
+  "collection": "Vermont",
+  "color": "Vermont Saddle Brown 1\"",
+  "family": "Brown",
+  "profile": "Cube",
+  "series": "Vermont",
+  "style": "Rustic"
+ },
+ "LJ-521720": {
+  "collection": "Vermont",
+  "color": "Vermont Brick Red 2 1/4\"",
+  "family": "Red/Orange",
+  "profile": "Bevel / Slope",
+  "series": "Vermont",
+  "style": "Rustic"
+ },
+ "LJ-521726": {
+  "collection": "Vermont",
+  "color": "Vermont Oat 2 1/4\"",
+  "family": "Beige/Tan",
+  "profile": "Bevel / Slope",
+  "series": "Vermont",
+  "style": "Rustic"
+ }
+}

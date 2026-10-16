@@ -1,0 +1,66 @@
+{
+ "LJ-350790": {
+  "collection": "Lucerne",
+  "color": "Lucerne Onyx 1 1/4\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-350791": {
+  "collection": "Lucerne",
+  "color": "Lucerne Sage 1 1/4\"",
+  "family": "Green",
+  "profile": "Cap",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-350793": {
+  "collection": "Lucerne",
+  "color": "Lucerne Topaz 1 1/4\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-650790": {
+  "collection": "Lucerne",
+  "color": "Lucerne Onyx 2 1/8\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-650793": {
+  "collection": "Lucerne",
+  "color": "Lucerne Topaz 2 1/8\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-850790": {
+  "collection": "Lucerne",
+  "color": "Lucerne Onyx 3 5/8\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-850791": {
+  "collection": "Lucerne",
+  "color": "Lucerne Sage 3 5/8\"",
+  "family": "Green",
+  "profile": "Panel / Cassetta",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ },
+ "LJ-850793": {
+  "collection": "Lucerne",
+  "color": "Lucerne Topaz 3 5/8\"",
+  "family": "Gold",
+  "profile": "Panel / Cassetta",
+  "series": "Lucerne",
+  "style": "Contemporary"
+ }
+}

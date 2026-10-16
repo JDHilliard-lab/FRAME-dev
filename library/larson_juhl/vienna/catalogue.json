@@ -1,0 +1,26 @@
+{
+ "LJ-105CB": {
+  "collection": "Vienna",
+  "color": "Vienna Black 1/2\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Vienna",
+  "style": "Classic"
+ },
+ "LJ-340CB": {
+  "collection": "Vienna",
+  "color": "Vienna Black 1 1/8\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Vienna",
+  "style": "Classic"
+ },
+ "LJ-400CB": {
+  "collection": "Vienna",
+  "color": "Vienna Black 1 1/2\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Vienna",
+  "style": "Classic"
+ }
+}

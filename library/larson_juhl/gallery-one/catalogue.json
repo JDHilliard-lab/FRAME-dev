@@ -1,0 +1,50 @@
+{
+ "LJ-220940": {
+  "collection": "Gallery One",
+  "color": "Gallery One Black 11/16\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Gallery One",
+  "style": "Contemporary"
+ },
+ "LJ-220941": {
+  "collection": "Gallery One",
+  "color": "Gallery One White 11/16\"",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Gallery One",
+  "style": "Modern"
+ },
+ "LJ-222940": {
+  "collection": "Gallery One",
+  "color": "Gallery One Black 3/4\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Gallery One",
+  "style": "Modern"
+ },
+ "LJ-222941": {
+  "collection": "Gallery One",
+  "color": "Gallery One White 3/4\"",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Gallery One",
+  "style": "Modern"
+ },
+ "LJ-320940": {
+  "collection": "Gallery One",
+  "color": "Gallery One Black 1 1/2\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Gallery One",
+  "style": "Modern"
+ },
+ "LJ-320941": {
+  "collection": "Gallery One",
+  "color": "Gallery One White 1 1/2\"",
+  "family": "White",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Gallery One",
+  "style": "Modern"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "LJ-215680": {
+  "collection": "Artifact",
+  "color": "Artifact Book Binding Antique Grey  Cap 5/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-217680": {
+  "collection": "Artifact",
+  "color": "Artifact Greek Key Grey  Cap 7/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-217682": {
+  "collection": "Artifact",
+  "color": "Artifact Greek Key Black Cap 7/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-233680": {
+  "collection": "Artifact",
+  "color": "Artifact Caviar Dot Antique Grey Cap 7/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-239680": {
+  "collection": "Artifact",
+  "color": "Artifact Carved Rope Antique Grey Cap 7/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-307680": {
+  "collection": "Artifact",
+  "color": "Artifact Greek Column Antique Grey Cap 1 1/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-307682": {
+  "collection": "Artifact",
+  "color": "Artifact Greek Column Antique Black Cap 1 1/8\"",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-312680": {
+  "collection": "Artifact",
+  "color": "Artifact Deco Bevel Antique Grey  1 1/4\"",
+  "family": "Gold",
+  "profile": "Bevel / Slope",
+  "series": "Artifact",
+  "style": "Eclectic"
+ },
+ "LJ-312682": {
+  "collection": "Artifact",
+  "color": "Artifact Deco Bevel Antique Black  1 1/4\"",
+  "family": "Gold",
+  "profile": "Bevel / Slope",
+  "series": "Artifact",
+  "style": "Eclectic"
+ }
+}

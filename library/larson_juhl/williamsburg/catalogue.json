@@ -1,0 +1,26 @@
+{
+ "LJ-145BL": {
+  "collection": "Williamsburg",
+  "color": "Williamsburg Black 1/2\"",
+  "family": "Black",
+  "profile": "Dome",
+  "series": "Williamsburg",
+  "style": "Contemporary"
+ },
+ "LJ-291BDG": {
+  "collection": "Williamsburg",
+  "color": "Williamsburg Black 3/4\"",
+  "family": "Black",
+  "profile": "Cube",
+  "series": "Williamsburg",
+  "style": "Contemporary"
+ },
+ "LJ-487BDG": {
+  "collection": "Williamsburg",
+  "color": "Williamsburg Black 1 1/4\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Williamsburg",
+  "style": "Contemporary"
+ }
+}

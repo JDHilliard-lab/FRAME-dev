@@ -1,0 +1,50 @@
+{
+ "LJ-241240": {
+  "collection": "Komodo",
+  "color": "Komodo Red 3/4\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Komodo",
+  "style": "Contemporary"
+ },
+ "LJ-241250": {
+  "collection": "Komodo",
+  "color": "Komodo Black 3/4\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Komodo",
+  "style": "Contemporary"
+ },
+ "LJ-261240": {
+  "collection": "Komodo",
+  "color": "Komodo Red 1\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Komodo",
+  "style": "Contemporary"
+ },
+ "LJ-314240": {
+  "collection": "Komodo",
+  "color": "Komodo Red 1 1/2\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Komodo",
+  "style": "Contemporary"
+ },
+ "LJ-314250": {
+  "collection": "Komodo",
+  "color": "Komodo Black 1 1/2\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Komodo",
+  "style": "Contemporary"
+ },
+ "LJ-401240": {
+  "collection": "Komodo",
+  "color": "Komodo Float Red 2 11/16\"",
+  "family": "Red/Orange",
+  "profile": "",
+  "series": "Komodo",
+  "style": "Contemporary"
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "LJ-80900": {
+  "collection": "Jasper II",
+  "color": "Jasper II 3/4\" Cap White",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Jasper II",
+  "style": "Modern"
+ },
+ "LJ-80901": {
+  "collection": "Jasper II",
+  "color": "Jasper II 3/4\" Cap Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Jasper II",
+  "style": "Modern"
+ },
+ "LJ-80904": {
+  "collection": "Jasper II",
+  "color": "Jasper II 1\" Cap White",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Jasper II",
+  "style": "Modern"
+ },
+ "LJ-80905": {
+  "collection": "Jasper II",
+  "color": "Jasper II 1\" Cap Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Jasper II",
+  "style": "Modern"
+ },
+ "LJ-80908": {
+  "collection": "Jasper II",
+  "color": "Jasper II 1 1/8\" Cube White",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Jasper II",
+  "style": "Modern"
+ },
+ "LJ-80909": {
+  "collection": "Jasper II",
+  "color": "Jasper II 1 1/8\" Cube Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Jasper II",
+  "style": "Modern"
+ }
+}

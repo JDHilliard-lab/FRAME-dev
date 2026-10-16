@@ -1,0 +1,42 @@
+{
+ "LJ-80902": {
+  "collection": "Essentials",
+  "color": "Essentials 3/4\" Cap Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Essentials",
+  "style": "Modern"
+ },
+ "LJ-80903": {
+  "collection": "Essentials",
+  "color": "Essentials 3/4\" Cap Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Essentials",
+  "style": "Modern"
+ },
+ "LJ-80906": {
+  "collection": "Essentials",
+  "color": "Essentials 1\" Cap Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Essentials",
+  "style": "Modern"
+ },
+ "LJ-80907": {
+  "collection": "Essentials",
+  "color": "Essentials 1\" Cap Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Essentials",
+  "style": "Modern"
+ },
+ "LJ-80910": {
+  "collection": "Essentials",
+  "color": "Essentials 1 1/8\" Cube Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Essentials",
+  "style": "Modern"
+ }
+}

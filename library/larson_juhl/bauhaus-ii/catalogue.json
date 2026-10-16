@@ -1,0 +1,66 @@
+{
+ "LJ-210440": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II White Cap 3/4\"",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-210450": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Black Cap 3/4\"",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-372440": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Small White Flat 1 1/4\"",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-372450": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Small Black Flat 1 1/4\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-382440": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Large White Flat 1 5/8\"",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-382450": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Large Black Flat 1 5/8\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-553440": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Wide White Flat 2\"",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ },
+ "LJ-553450": {
+  "collection": "Bauhaus II",
+  "color": "Bauhaus II Wide Black Flat 2\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Bauhaus II",
+  "style": "Contemporary"
+ }
+}

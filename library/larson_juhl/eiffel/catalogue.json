@@ -1,0 +1,66 @@
+{
+ "LJ-309100": {
+  "collection": "Eiffel",
+  "color": "Eiffel Silver 1 9/16\"",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-309110": {
+  "collection": "Eiffel",
+  "color": "Eiffel Pewter 1 9/16\"",
+  "family": "Dark Silver/Gunmetal",
+  "profile": "Flat",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-309120": {
+  "collection": "Eiffel",
+  "color": "Eiffel Gold 1 9/16\"",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-309130": {
+  "collection": "Eiffel",
+  "color": "Eiffel Bronze 1 9/16\"",
+  "family": "Bronze",
+  "profile": "Flat",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-579100": {
+  "collection": "Eiffel",
+  "color": "Eiffel Silver 1 1/4\"",
+  "family": "Silver",
+  "profile": "Bevel / Slope",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-579110": {
+  "collection": "Eiffel",
+  "color": "Eiffel Pewter 1 1/4\"",
+  "family": "Dark Silver/Gunmetal",
+  "profile": "Bevel / Slope",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-579120": {
+  "collection": "Eiffel",
+  "color": "Eiffel Gold 1 1/4\"",
+  "family": "Gold",
+  "profile": "Bevel / Slope",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ },
+ "LJ-579130": {
+  "collection": "Eiffel",
+  "color": "Eiffel Bronze 1 1/4\"",
+  "family": "Bronze",
+  "profile": "Bevel / Slope",
+  "series": "Eiffel",
+  "style": "Contemporary"
+ }
+}

@@ -1756,6 +1756,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Floaters need the lip width (`_f`), which the sheet does NOT carry**: it is read off each series'
   line art (top callout; for stepped/wedge/cove profiles the wall at the canvas). The app derives the
   inset as lip + `FLOATER_SHADOW_REVEAL`, and a collection named *floater* switches the product.
+  **Larson-Juhl (18.92):** source is their Magento GraphQL (GET only, header `Store: us`, category
+  uid `Nzk1` = Mouldings) for sizes/facets, and each product page's fotorama JSON for images (GraphQL
+  media is empty). Corners are L-shaped and cropped to one leg; some galleries list the drawing first.
+  Codes `LJ-<sku>`, folders `library/larson_juhl/<collection>[-floaters]`. Floater lips read off the
+  drawings. Nielsen metal (no photos), Raw Maple (drawings only), fillets, liners, strainers left out.
+  The browser's Library groups by VENDOR (`ven:` source, `_fbOpenVendors`), plus a Style filter.
   **Left out on purpose:** Liners and Fillets (they nest inside another frame; FRAME has no such
   product), Flat Surfaces (rabbetless, holds no art), Stretchers (hidden). 627-45 has no photo upstream.
   **Swatch cut:** standard (outer-edge colour change or hard edge) by default; ornate/barnwood faces

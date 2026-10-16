@@ -1,0 +1,122 @@
+{
+ "LJ-242250": {
+  "collection": "Andover",
+  "color": "Andover Black 5/8\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-242260": {
+  "collection": "Andover",
+  "color": "Andover White 5/8\"",
+  "family": "White",
+  "profile": "Bevel / Slope",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-242270": {
+  "collection": "Andover",
+  "color": "Andover Silver 5/8\"",
+  "family": "Silver",
+  "profile": "Bevel / Slope",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-242290": {
+  "collection": "Andover",
+  "color": "Andover Suede 5/8\"",
+  "family": "Brown",
+  "profile": "Bevel / Slope",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-453250": {
+  "collection": "Andover",
+  "color": "Andover Black 1 1/2\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-453260": {
+  "collection": "Andover",
+  "color": "Andover White 1 1/2\"",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-453270": {
+  "collection": "Andover",
+  "color": "Andover Silver 1 1/2\"",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-470270": {
+  "collection": "Andover",
+  "color": "Andover Silver 1 11/16\"",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-470280": {
+  "collection": "Andover",
+  "color": "Andover Gold 1 11/16\"",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-470290": {
+  "collection": "Andover",
+  "color": "Andover Suede 1 11/16\"",
+  "family": "Brown",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-573250": {
+  "collection": "Andover",
+  "color": "Andover Black 2 11/16\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-573260": {
+  "collection": "Andover",
+  "color": "Andover White 2 11/16\"",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-573270": {
+  "collection": "Andover",
+  "color": "Andover Silver 2 11/16\"",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-573280": {
+  "collection": "Andover",
+  "color": "Andover Gold 2 11/16\"",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ },
+ "LJ-573290": {
+  "collection": "Andover",
+  "color": "Andover Suede 2 11/16\"",
+  "family": "Brown",
+  "profile": "Flat",
+  "series": "Andover",
+  "style": "Contemporary"
+ }
+}

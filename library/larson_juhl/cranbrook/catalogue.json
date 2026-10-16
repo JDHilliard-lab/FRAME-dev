@@ -1,0 +1,186 @@
+{
+ "LJ-313183": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook White-Wash Maple 1\"",
+  "family": "Light Woodtone",
+  "profile": "Cube",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-313674": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Ebonized Walnut 1\"",
+  "family": "Dark Woodtone",
+  "profile": "Cube",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-313675": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Walnut 1\"",
+  "family": "Medium Woodtone",
+  "profile": "Cube",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-313676": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Dark Walnut 1\"",
+  "family": "Dark Woodtone",
+  "profile": "Cube",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-313677": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Maple 1\"",
+  "family": "Light Woodtone",
+  "profile": "Cube",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-363176": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Dark Walnut 1\"",
+  "family": "Dark Woodtone",
+  "profile": "Bevel / Slope",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-363177": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Maple 1\"",
+  "family": "Light Woodtone",
+  "profile": "Bevel / Slope",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-363180": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Ebonized Walnut 1\"",
+  "family": "Dark Woodtone",
+  "profile": "Bevel / Slope",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-413674": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Ebonized Walnut 1 5/8\"",
+  "family": "Dark Woodtone",
+  "profile": "Flat",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-413675": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Walnut 1 5/8\"",
+  "family": "Medium Woodtone",
+  "profile": "Flat",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-413676": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Dark Walnut 1 5/8\"",
+  "family": "Dark Woodtone",
+  "profile": "Flat",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-413677": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Maple 1 5/8\"",
+  "family": "Light Woodtone",
+  "profile": "Flat",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-603674": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Ebonized Walnut 2 1/8\"",
+  "family": "Dark Woodtone",
+  "profile": "Flat",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-603676": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Dark Walnut 2 1/8\"",
+  "family": "Dark Woodtone",
+  "profile": "Flat",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-613183": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook White-Wash Maple 3/4\"",
+  "family": "Light Woodtone",
+  "profile": "Cap",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-613674": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Ebonized Walnut 3/4\"",
+  "family": "Dark Woodtone",
+  "profile": "Cap",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-613675": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Walnut 3/4\"",
+  "family": "Medium Woodtone",
+  "profile": "Cap",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-613676": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Dark Walnut 3/4\"",
+  "family": "Dark Woodtone",
+  "profile": "Cap",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-613677": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Natural Maple 3/4\"",
+  "family": "Light Woodtone",
+  "profile": "Cap",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-663175": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Shadowbox Natural Walnut 1\"",
+  "family": "Medium Woodtone",
+  "profile": "Shadowbox",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-663176": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Shadowbox Dark Walnut 1\"",
+  "family": "Dark Woodtone",
+  "profile": "Shadowbox",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-663177": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Shadowbox Natural Maple 1\"",
+  "family": "Light Woodtone",
+  "profile": "Shadowbox",
+  "series": "Cranbrook",
+  "style": "Modern"
+ },
+ "LJ-663180": {
+  "collection": "Cranbrook",
+  "color": "Cranbrook Shadowbox Ebonized Walnut 1\"",
+  "family": "Dark Woodtone",
+  "profile": "Shadowbox",
+  "series": "Cranbrook",
+  "style": "Modern"
+ }
+}

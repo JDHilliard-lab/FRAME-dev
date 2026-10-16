@@ -1,0 +1,74 @@
+{
+ "LJ-334082": {
+  "collection": "Soho",
+  "color": "Soho Black 7/8\"",
+  "family": "Black",
+  "profile": "Cube",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-334084": {
+  "collection": "Soho",
+  "color": "Soho Black w/Silver 7/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-334086": {
+  "collection": "Soho",
+  "color": "Soho Black w/Gold 7/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-345082": {
+  "collection": "Soho",
+  "color": "Soho Black 1 1/16\"",
+  "family": "Black",
+  "profile": "Rooftop",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-345086": {
+  "collection": "Soho",
+  "color": "Soho Black w/Gold 1 1/8\"",
+  "family": "Black",
+  "profile": "",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-433082": {
+  "collection": "Soho",
+  "color": "Soho Black 1 3/4\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-433084": {
+  "collection": "Soho",
+  "color": "Soho Black w/Silver 1 3/4\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-439082": {
+  "collection": "Soho",
+  "color": "Soho Black 2\"",
+  "family": "Black",
+  "profile": "Rooftop",
+  "series": "Soho",
+  "style": "Contemporary"
+ },
+ "LJ-671082": {
+  "collection": "Soho",
+  "color": "Soho Black 2 3/4\"",
+  "family": "Black",
+  "profile": "Rooftop",
+  "series": "Soho",
+  "style": "Contemporary"
+ }
+}

@@ -1,0 +1,66 @@
+{
+ "LJ-200350": {
+  "collection": "Brimfield",
+  "color": "Brimfield Black 7/8\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-200360": {
+  "collection": "Brimfield",
+  "color": "Brimfield Cottage White 7/8\"",
+  "family": "White",
+  "profile": "Bevel / Slope",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-400350": {
+  "collection": "Brimfield",
+  "color": "Brimfield Weathered Black 1 5/8\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-400360": {
+  "collection": "Brimfield",
+  "color": "Brimfield Cottage White 1 5/8\"",
+  "family": "White",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-550350": {
+  "collection": "Brimfield",
+  "color": "Brimfield Black 2' 9/16\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-550360": {
+  "collection": "Brimfield",
+  "color": "Brimfield Cottage White 2' 9/16\"",
+  "family": "White",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-593350": {
+  "collection": "Brimfield",
+  "color": "Brimfield Black 2 1/4\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Brimfield",
+  "style": "Rustic"
+ },
+ "LJ-593360": {
+  "collection": "Brimfield",
+  "color": "Brimfield White 2 1/4\"",
+  "family": "White",
+  "profile": "Panel / Cassetta",
+  "series": "Brimfield",
+  "style": "Rustic"
+ }
+}

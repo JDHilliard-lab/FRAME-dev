@@ -1,0 +1,74 @@
+{
+ "LJ-195203": {
+  "collection": "Madison",
+  "color": "Madison Natural 1 1/8\"",
+  "family": "Medium Woodtone",
+  "profile": "Cap",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-195204": {
+  "collection": "Madison",
+  "color": "Madison Black 1 1/8\"",
+  "family": "Dark Woodtone",
+  "profile": "Cap",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-195205": {
+  "collection": "Madison",
+  "color": "Madison Grey 1 1/8\"",
+  "family": "Medium Woodtone",
+  "profile": "Cap",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-595203": {
+  "collection": "Madison",
+  "color": "Madison Natural 2 3/8\"",
+  "family": "Medium Woodtone",
+  "profile": "Flat",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-595204": {
+  "collection": "Madison",
+  "color": "Madison Black 2 3/8\"",
+  "family": "Dark Woodtone",
+  "profile": "Flat",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-595205": {
+  "collection": "Madison",
+  "color": "Madison Grey 2 3/8\"",
+  "family": "Medium Woodtone",
+  "profile": "Flat",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-795203": {
+  "collection": "Madison",
+  "color": "Madison Natural 3 5/16\"",
+  "family": "Medium Woodtone",
+  "profile": "Flat",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-795204": {
+  "collection": "Madison",
+  "color": "Madison Black 3 5/16\"",
+  "family": "Dark Woodtone",
+  "profile": "Flat",
+  "series": "Madison",
+  "style": "Rustic"
+ },
+ "LJ-795205": {
+  "collection": "Madison",
+  "color": "Madison Grey 3 5/16\"",
+  "family": "Medium Woodtone",
+  "profile": "Flat",
+  "series": "Madison",
+  "style": "Rustic"
+ }
+}

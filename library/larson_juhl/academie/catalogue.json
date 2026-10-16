@@ -1,0 +1,98 @@
+{
+ "LJ-203235": {
+  "collection": "Academie",
+  "color": "Academie Gold 3/4\"",
+  "family": "Gold",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-203237": {
+  "collection": "Academie",
+  "color": "Academie Silver 3/4\"",
+  "family": "Silver",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-203239": {
+  "collection": "Academie",
+  "color": "Academie Black 3/4\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-403235": {
+  "collection": "Academie",
+  "color": "Academie Gold 1 1/4\"",
+  "family": "Gold",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-403237": {
+  "collection": "Academie",
+  "color": "Academie Silver 1 1/4\"",
+  "family": "Silver",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-403239": {
+  "collection": "Academie",
+  "color": "Academie Black 1 1/4\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-573235": {
+  "collection": "Academie",
+  "color": "Academie Gold 2 1/8\"",
+  "family": "Gold",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-573237": {
+  "collection": "Academie",
+  "color": "Academie Silver 2 1/8\"",
+  "family": "Silver",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-573239": {
+  "collection": "Academie",
+  "color": "Academie Black 2 1/8\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-733235": {
+  "collection": "Academie",
+  "color": "Academie Gold 3\"",
+  "family": "Gold",
+  "profile": "Panel / Cassetta",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-733237": {
+  "collection": "Academie",
+  "color": "Academie Silver 3\"",
+  "family": "Silver",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Academie",
+  "style": "Classic"
+ },
+ "LJ-733239": {
+  "collection": "Academie",
+  "color": "Academie Black 3\"",
+  "family": "Black",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Academie",
+  "style": "Classic"
+ }
+}

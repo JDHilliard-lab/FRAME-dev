@@ -61,14 +61,17 @@ check('the manifest carries catalogue facts and the corner photo', () => {
 });
 check('every catalogue-imported swatch has a corner photo and a profile on disk', () => {
   const missing = [];
-  const MICH = path.join(root, 'library', 'michaelangelo');
+  ['michaelangelo', 'larson_juhl'].forEach(ven => {
+  const MICH = path.join(root, 'library', ven);
   fs.readdirSync(MICH).filter(c => fs.existsSync(path.join(MICH, c, 'catalogue.json'))).forEach(col => {
-  const dir = path.join(root, 'library', 'michaelangelo', col);
+  const dir = path.join(root, 'library', ven, col);
   const meta = JSON.parse(fs.readFileSync(path.join(dir, 'catalogue.json'), 'utf8'));
-  MAN.filter(x => x.collection === col && meta[x.code]).forEach(x => {
+  MAN.filter(x => x.vendor === ven && x.collection === col && meta[x.code]).forEach(x => {
     if (!x.corner || !fs.existsSync(path.join(root, x.corner))) missing.push(x.code + ' corner');
-    if (!x.profileImg || !fs.existsSync(path.join(root, x.profileImg))) missing.push(x.code + ' profile');
+    if (ven === 'michaelangelo' && (!x.profileImg || !fs.existsSync(path.join(root, x.profileImg)))) missing.push(x.code + ' profile');
+    if (x.profileImg && !fs.existsSync(path.join(root, x.profileImg))) missing.push(x.code + ' profile file');
     if (!fs.existsSync(path.join(root, x.path))) missing.push(x.code + ' swatch');
+  });
   });
   });
   if (missing.length) throw new Error(missing.length + ' missing, e.g. ' + missing.slice(0, 5).join(', '));
@@ -86,6 +89,12 @@ check('every floater has its corner, profile and lip width (the inset depends on
     if (!meta[x.code]) bad.push(x.code + ' no catalogue facts');
   });
   if (bad.length) throw new Error(bad.length + ' problems, e.g. ' + bad.slice(0, 5).join(', '));
+});
+check('every Larson-Juhl floater has a lip width, and lives in a folder named for floaters', () => {
+  const lj = MAN.filter(x => x.vendor === 'larson_juhl');
+  if (lj.length < 900) throw new Error('only ' + lj.length + ' Larson-Juhl frames in the manifest');
+  const bad = lj.filter(x => (x.faceWidth > 0) !== /floater/i.test(x.collection)).map(x => x.code + ' in ' + x.collection);
+  if (bad.length) throw new Error(bad.length + ' floater/folder mismatches, e.g. ' + bad.slice(0, 4).join(', '));
 });
 check('library/groupings.json is a valid (possibly empty) team list', () => {
   const j = JSON.parse(fs.readFileSync(path.join(root, 'library', 'groupings.json'), 'utf8'));
@@ -187,6 +196,28 @@ function inApp() {
       _fbState.width = 'lt1'; _fbRender();
       cardsIn().forEach(code => { const e = lib.find(x => x.code === code); if (!(e.width < 1)) throw new Error(code + ' is ' + e.width + ' wide'); });
       _fbState.family = ''; _fbState.width = ''; _fbRender();
+    });
+
+    ok('the Library lists VENDORS, collections only under an open vendor', () => {
+      _fbState = { src: 'all', q: '', family: '', width: '', profile: '', style: '' }; _fbOpenVendors = {}; _fbRender();
+      const ven = document.querySelector('[data-fb-src="ven:michaelangelo"]');
+      if (!ven) throw new Error('no vendor row for michaelangelo');
+      if (document.querySelector('[data-fb-src^="col:michaelangelo/"]')) throw new Error('collections listed while the vendor is closed');
+      ven.click();
+      if (_fbState.src !== 'ven:michaelangelo') throw new Error('vendor click did not select the vendor');
+      if (!document.querySelector('[data-fb-src="col:michaelangelo/avant-garde"]')) throw new Error('collections not listed once open');
+      const c = cardsIn();
+      if (!c.length || c.some(code => !lib.find(x => x.code === code))) throw new Error('vendor view shows frames from elsewhere');
+    });
+    ok('the Style filter narrows the grid', () => {
+      const styles = Array.from(new Set(lib.map(x => x.style).filter(Boolean)));
+      if (!styles.length) { lib[0].style = 'Modern'; styles.push('Modern'); }
+      if (!document.getElementById('fbStyle')) throw new Error('no Style filter');
+      _fbState.style = styles[0]; _fbRender();
+      const c = cardsIn();
+      if (!c.length) throw new Error('no frames for style ' + styles[0]);
+      c.forEach(code => { const e = lib.find(x => x.code === code); if (e && e.style !== styles[0]) throw new Error(code + ' is ' + e.style); });
+      _fbState.style = ''; _fbRender();
     });
 
     // Groupings.

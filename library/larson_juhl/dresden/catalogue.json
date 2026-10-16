@@ -1,0 +1,50 @@
+{
+ "LJ-238120": {
+  "collection": "Dresden",
+  "color": "Dresden Black Umber 1\"",
+  "family": "Black",
+  "profile": "Bevel / Slope",
+  "series": "Dresden",
+  "style": "Traditional"
+ },
+ "LJ-338120": {
+  "collection": "Dresden",
+  "color": "Dresden Black Umber 1 3/8\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Dresden",
+  "style": "Traditional"
+ },
+ "LJ-438120": {
+  "collection": "Dresden",
+  "color": "Dresden Black Umber 2\"",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Dresden",
+  "style": "Traditional"
+ },
+ "LJ-468120": {
+  "collection": "Dresden",
+  "color": "Dresden Black Umber 1 1/2\"",
+  "family": "Black",
+  "profile": "Cube",
+  "series": "Dresden",
+  "style": "Traditional"
+ },
+ "LJ-538120": {
+  "collection": "Dresden",
+  "color": "Dresden Black Umber 3\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Dresden",
+  "style": "Traditional"
+ },
+ "LJ-638120": {
+  "collection": "Dresden",
+  "color": "Dresden Black Umber 2 3/8\"",
+  "family": "Black",
+  "profile": "Panel / Cassetta",
+  "series": "Dresden",
+  "style": "Traditional"
+ }
+}

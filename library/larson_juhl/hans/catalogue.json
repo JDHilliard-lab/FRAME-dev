@@ -1,0 +1,34 @@
+{
+ "LJ-272310": {
+  "collection": "Hans",
+  "color": "Hans 3/4 Cap Wishbone",
+  "family": "Light Woodtone",
+  "profile": "Cap",
+  "series": "Hans",
+  "style": "Modern"
+ },
+ "LJ-272311": {
+  "collection": "Hans",
+  "color": "Hans 3/4 Cap Hare",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Hans",
+  "style": "Modern"
+ },
+ "LJ-272312": {
+  "collection": "Hans",
+  "color": "Hans 3/4 Cap Muskrat",
+  "family": "Medium Woodtone",
+  "profile": "Cap",
+  "series": "Hans",
+  "style": "Modern"
+ },
+ "LJ-272313": {
+  "collection": "Hans",
+  "color": "Hans 3/4 Cap Pheasant",
+  "family": "Dark Woodtone",
+  "profile": "Cap",
+  "series": "Hans",
+  "style": "Modern"
+ }
+}

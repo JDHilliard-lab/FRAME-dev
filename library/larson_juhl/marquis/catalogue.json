@@ -1,0 +1,106 @@
+{
+ "LJ-102CG": {
+  "collection": "Marquis",
+  "color": "Marquis Gold 1/2\"",
+  "family": "Gold",
+  "profile": "Cube",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-206CG": {
+  "collection": "Marquis",
+  "color": "Marquis Gold 3/4\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-206S": {
+  "collection": "Marquis",
+  "color": "Marquis Silver 3/4\"",
+  "family": "Silver",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-208CG": {
+  "collection": "Marquis",
+  "color": "Marquis Classic Gold 3/4\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-208CS": {
+  "collection": "Marquis",
+  "color": "Marquis Silver 3/4\"",
+  "family": "Silver",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-210G": {
+  "collection": "Marquis",
+  "color": "Marquis Gold 7/8\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-303CG": {
+  "collection": "Marquis",
+  "color": "Marquis Classic Gold 1\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-406CG": {
+  "collection": "Marquis",
+  "color": "Marquis Gold 1 1/8\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-406CS": {
+  "collection": "Marquis",
+  "color": "Marquis Silver 1 1/8\"",
+  "family": "Silver",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-492G": {
+  "collection": "Marquis",
+  "color": "Marquis Gold 1 1/2\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-500CG": {
+  "collection": "Marquis",
+  "color": "Marquis Classic Gold 2\"",
+  "family": "Gold",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-500CS": {
+  "collection": "Marquis",
+  "color": "Marquis Silver 2\"",
+  "family": "Silver",
+  "profile": "Scoop / Reverse Scoop",
+  "series": "Marquis",
+  "style": "Classic"
+ },
+ "LJ-600G": {
+  "collection": "Marquis",
+  "color": "Marquis Gold 2\"",
+  "family": "Gold",
+  "profile": "Bevel / Slope",
+  "series": "Marquis",
+  "style": "Classic"
+ }
+}
