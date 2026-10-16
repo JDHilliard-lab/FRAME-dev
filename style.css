@@ -2914,3 +2914,10 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .frame-sec-title .frame-card-sub { font-family: var(--ui-font); font-size: var(--fs-65); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-transform: none; letter-spacing: 0; font-weight: 400; margin-left: auto; min-width: 0; }
 .art-add-btn { flex-direction: column; gap: 6px; }
 .art-add-cap { font-size: var(--fs-65); font-weight: 600; line-height: 1.2; color: inherit; white-space: nowrap; }
+/* 19.12: Replace / Remove and the swap hint, on the dashboard picture, shown on hover. */
+.art-tools { position: absolute; top: 6px; right: 6px; display: flex; gap: 4px; opacity: 0; transition: opacity 0.12s; z-index: 2; }
+.art-tool-btn { pointer-events: auto; height: 22px; padding: 0 8px; font-size: var(--fs-60); font-weight: 700; color: #fff; background: rgba(0,0,0,0.62); border: 1px solid rgba(255,255,255,0.35); border-radius: var(--r-4); cursor: pointer; }
+.art-tool-btn:hover { background: rgba(0,0,0,0.85); border-color: #fff; }
+.art-hint { position: absolute; left: 0; right: 0; bottom: 0; padding: 5px 6px; font-size: var(--fs-60); font-weight: 600; color: #fff; background: rgba(0,0,0,0.5); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transition: opacity 0.12s; pointer-events: none; z-index: 2; }
+#dash-frame-visual:hover .art-tools, #dash-frame-visual:hover .art-hint, .art-tool-btn:focus-visible { opacity: 1; }
+.art-tools:focus-within { opacity: 1; }

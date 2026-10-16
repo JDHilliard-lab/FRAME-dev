@@ -49,6 +49,31 @@ const path = require('path');
       if (!document.getElementById('m_artCropControls').contains(document.getElementById('m_artworkClear'))) throw new Error('Remove is not with the zoom controls');
       if (_artAddIconHTML(80, 80, 'x()').indexOf('art-add-cap') >= 0) throw new Error('a small opening got a caption it cannot fit');
     });
+    // 19.12: "once an image is framed you can still swap images by dragging and dropping. maybe a
+    // little note somewhere, or how do you clear the image in case designers want to remove it"
+    __check('EXACT ASK: a framed picture carries Replace, Remove and the swap note', () => {
+      const r = dashProjectData[0];
+      r.artworkUrl = 'data:image/png;base64,AAAA'; r.artworkW = 100; r.artworkH = 100;
+      updateDashVisualsFromDOM();
+      const tools = av().querySelector('.art-tools');
+      if (!tools) throw new Error('no tools on the picture');
+      const btns = tools.querySelectorAll('.art-tool-btn');
+      if (btns.length !== 2) throw new Error(btns.length + ' buttons');
+      if ((btns[0].getAttribute('onclick') || '').indexOf("m_artworkFile") < 0) throw new Error('Replace does not open the upload');
+      if ((btns[1].getAttribute('onclick') || '').indexOf('clearDashArtwork()') < 0) throw new Error('Remove does not clear');
+      const pxW = parseFloat(av().style.width);
+      const hint = av().querySelector('.art-hint');
+      if (pxW >= 150 && (!hint || hint.textContent.indexOf('drop an image to replace') < 0)) throw new Error('no swap note on a ' + pxW + 'px picture');
+      if (av().querySelector('.art-add-btn')) throw new Error('the empty-opening button is still there');
+      window.eval(btns[1].getAttribute('onclick'));
+      if (r.artworkUrl) throw new Error('Remove left the picture');
+      if (!av().querySelector('.art-add-btn')) throw new Error('after Remove the opening is not empty again');
+    });
+    __check('a press on Replace or Remove never starts a pan', () => {
+      const S = window.__src || '';
+      const i = S.indexOf('function _wireArtPan()'); const B = S.slice(i, S.indexOf('function ', i + 30));
+      if (B.indexOf(".closest('.art-tool-btn')) return;") < 0) throw new Error('the pan ignores nothing');
+    });
     __check('the icon scales with the opening, and drops out where it cannot be read', () => {
       const big = _artAddIconHTML(400, 500), tiny = _artAddIconHTML(20, 16);
       if (_artAddIconHTML(12, 9) !== '') throw new Error('a 12px opening still draws an icon');
@@ -57,7 +82,7 @@ const path = require('path');
       if (big.indexOf('<button') >= 0) throw new Error('without an action it must not be a button (a click on the wall selects)');
     });
   `;
-  try { window.eval(src + '\n' + testBlock); }
+  try { window.eval('window.__src = ' + JSON.stringify(src) + ';\n' + src + '\n' + testBlock); }
   catch (e) { console.error('LOAD/RUN FAILED:', e.message); process.exit(1); }
   const all = window.__testResults || [];
   const failures = [];
