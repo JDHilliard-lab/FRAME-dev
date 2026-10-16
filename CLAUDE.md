@@ -502,6 +502,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   `restoreProjectState`).
   **A clone must get a new id**: `duplicateCurrentElevation` mints one (else
   `_elevIndexById` is ambiguous) and copies with `_cloneData`.
+  **DELETING A WALL ASKS ABOUT ITS PIECES (19.04).** `_elevOwnPieceIds(wall)` = rows hung (active) on this wall
+  and no other; never on a catalogue wall, never every row. When non-empty, `_confirmDestroy` gets an `alt`
+  (`Delete wall, keep pieces`) beside `Delete wall and N pieces`; `_deleteElevationNow(idx, {withPieces})`
+  re-reads the ids at confirm time and deletes them with the option-rows path (one history entry).
 - **CATALOGUE: THE MODEL AND THE CODES.** A catalogue is a document of CHOICES, not an
   order: one placement offered with several arrangements and several sets of artwork, and
   the client picks. It deliberately states no quantity.
