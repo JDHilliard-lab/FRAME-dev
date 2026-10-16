@@ -1,0 +1,50 @@
+{
+ "UA-G3307": {
+  "collection": "Danica",
+  "color": "G3307 Danica Natural Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G3308": {
+  "collection": "Danica",
+  "color": "G3308 Danica Natural Silver Floater",
+  "family": "Natural",
+  "profile": "Floater",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G3407": {
+  "collection": "Danica",
+  "color": "G3407 Danica White Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G3408": {
+  "collection": "Danica",
+  "color": "G3408 Danica White Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G3507": {
+  "collection": "Danica",
+  "color": "G3507 Danica Grey Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G3508": {
+  "collection": "Danica",
+  "color": "G3508 Danica Grey Silver Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Danica",
+  "style": "Transitional"
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "UA-450-1007": {
+  "collection": "Positano",
+  "color": "450-1007 Positano Gold",
+  "family": "Gold",
+  "profile": "Slope Square",
+  "series": "Positano",
+  "style": "Transitional"
+ },
+ "UA-450-1008": {
+  "collection": "Positano",
+  "color": "450-1008 Positano Silver",
+  "family": "Silver",
+  "profile": "Slope Square",
+  "series": "Positano",
+  "style": "Transitional"
+ },
+ "UA-450-1010": {
+  "collection": "Positano",
+  "color": "450-1010 Positano Black",
+  "family": "Black",
+  "profile": "Slope Square",
+  "series": "Positano",
+  "style": "Transitional"
+ },
+ "UA-451-1007": {
+  "collection": "Positano",
+  "color": "451-1007 Positano Gold",
+  "family": "Gold",
+  "profile": "Slope",
+  "series": "Positano",
+  "style": "Transitional"
+ },
+ "UA-451-1008": {
+  "collection": "Positano",
+  "color": "451-1008 Positano Silver",
+  "family": "Silver",
+  "profile": "Slope",
+  "series": "Positano",
+  "style": "Transitional"
+ },
+ "UA-451-1010": {
+  "collection": "Positano",
+  "color": "451-1010 Positano Black",
+  "family": "Black",
+  "profile": "Slope",
+  "series": "Positano",
+  "style": "Transitional"
+ }
+}

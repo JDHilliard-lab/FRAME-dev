@@ -1,0 +1,34 @@
+{
+ "UA-203-246-000": {
+  "collection": "Arabesco",
+  "color": "203-246-000 Arabesco Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Arabesco",
+  "style": "Traditional"
+ },
+ "UA-214-757-200": {
+  "collection": "Arabesco",
+  "color": "214-757-200 Arabesco Espresso",
+  "family": "Espresso",
+  "profile": "Cap",
+  "series": "Arabesco",
+  "style": "Traditional"
+ },
+ "UA-214-760-800": {
+  "collection": "Arabesco",
+  "color": "214-760-800 Arabesco White",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Arabesco",
+  "style": "Traditional"
+ },
+ "UA-214-775-000": {
+  "collection": "Arabesco",
+  "color": "214-775-000 Arabesco Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Arabesco",
+  "style": "Ornate"
+ }
+}

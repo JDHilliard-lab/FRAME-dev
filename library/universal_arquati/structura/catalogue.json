@@ -1,0 +1,50 @@
+{
+ "UA-P4721": {
+  "collection": "Structura",
+  "color": "P4721 Structura Bronze",
+  "family": "Bronze",
+  "profile": "Cap",
+  "series": "Structura",
+  "style": "Transitional"
+ },
+ "UA-P4722": {
+  "collection": "Structura",
+  "color": "P4722 Structura Bronze",
+  "family": "Bronze",
+  "profile": "Reverse Slant",
+  "series": "Structura",
+  "style": "Transitional"
+ },
+ "UA-P4725": {
+  "collection": "Structura",
+  "color": "P4725 Structura Bronze",
+  "family": "Bronze",
+  "profile": "Scoop",
+  "series": "Structura",
+  "style": "Transitional"
+ },
+ "UA-P4821": {
+  "collection": "Structura",
+  "color": "P4821 Structura Charcoal",
+  "family": "Charcoal",
+  "profile": "Cap",
+  "series": "Structura",
+  "style": "Transitional"
+ },
+ "UA-P4822": {
+  "collection": "Structura",
+  "color": "P4822 Structura Charcoal",
+  "family": "Charcoal",
+  "profile": "Reverse Slant",
+  "series": "Structura",
+  "style": "Transitional"
+ },
+ "UA-P4825": {
+  "collection": "Structura",
+  "color": "P4825 Structura Charcoal",
+  "family": "Charcoal",
+  "profile": "Scoop",
+  "series": "Structura",
+  "style": "Transitional"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "UA-EC120": {
+  "collection": "Metropolis",
+  "color": "EC120 Metropolis Black &#038; Silver",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC121": {
+  "collection": "Metropolis",
+  "color": "EC121 Metropolis White and Gold",
+  "family": "Gold",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC122": {
+  "collection": "Metropolis",
+  "color": "EC122 Metropolis Black and Gold",
+  "family": "Black",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC123": {
+  "collection": "Metropolis",
+  "color": "EC123 Metropolis Bronze",
+  "family": "Bronze",
+  "profile": "Slope",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC124": {
+  "collection": "Metropolis",
+  "color": "EC124 Metropolis Pewter",
+  "family": "Pewter",
+  "profile": "Slope",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC126": {
+  "collection": "Metropolis",
+  "color": "EC126 Metropolis Matte Black",
+  "family": "Black",
+  "profile": "Slope",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC127": {
+  "collection": "Metropolis",
+  "color": "EC127 Metropolis White and Silver",
+  "family": "Silver",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC220": {
+  "collection": "Metropolis",
+  "color": "EC220 Metropolis Black and Silver",
+  "family": "Black",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC221": {
+  "collection": "Metropolis",
+  "color": "EC221 Metropolis White and Gold",
+  "family": "Gold",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC222": {
+  "collection": "Metropolis",
+  "color": "EC222 Metropolis Black and Gold",
+  "family": "Black",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC223": {
+  "collection": "Metropolis",
+  "color": "EC223 Metropolis Bronze",
+  "family": "Bronze",
+  "profile": "Slope",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC224": {
+  "collection": "Metropolis",
+  "color": "EC224 Metropolis Pewter",
+  "family": "Pewter",
+  "profile": "Slope",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC226": {
+  "collection": "Metropolis",
+  "color": "EC226 Metropolis Matte Black",
+  "family": "Matte Black",
+  "profile": "Slope",
+  "series": "Metropolis",
+  "style": "Modern"
+ },
+ "UA-EC227": {
+  "collection": "Metropolis",
+  "color": "EC227 Metropolis White and Silver",
+  "family": "Silver",
+  "profile": "Other",
+  "series": "Metropolis",
+  "style": "Modern"
+ }
+}

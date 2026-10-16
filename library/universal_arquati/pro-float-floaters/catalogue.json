@@ -1,0 +1,42 @@
+{
+ "UA-P1805": {
+  "collection": "Pro Float",
+  "color": "P1805 Pro Float Espresso Floater",
+  "family": "Espresso",
+  "profile": "Floater",
+  "series": "Pro Float",
+  "style": "Traditional"
+ },
+ "UA-P1807": {
+  "collection": "Pro Float",
+  "color": "P1807 Pro Float Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Pro Float",
+  "style": "Traditional"
+ },
+ "UA-P1808": {
+  "collection": "Pro Float",
+  "color": "P1808 Pro Float Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Pro Float",
+  "style": "Traditional"
+ },
+ "UA-P1810": {
+  "collection": "Pro Float",
+  "color": "P1810 Pro Float Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Pro Float",
+  "style": "Traditional"
+ },
+ "UA-P1811": {
+  "collection": "Pro Float",
+  "color": "P1811 Pro Float Matte White Floater",
+  "family": "Matte White",
+  "profile": "Floater",
+  "series": "Pro Float",
+  "style": "Traditional"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "UA-B420": {
+  "collection": "Barnwood II",
+  "color": "B420 Barnwood II Brown Floater",
+  "family": "Brown",
+  "profile": "Floater",
+  "series": "Barnwood II",
+  "style": "Transitional"
+ },
+ "UA-B422": {
+  "collection": "Barnwood II",
+  "color": "B422 Barnwood II Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Barnwood II",
+  "style": "Transitional"
+ },
+ "UA-B424": {
+  "collection": "Barnwood II",
+  "color": "Barnwood II White B424 Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Barnwood II",
+  "style": "Transitional"
+ }
+}

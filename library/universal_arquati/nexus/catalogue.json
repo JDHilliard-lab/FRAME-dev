@@ -1,0 +1,42 @@
+{
+ "UA-D2000": {
+  "collection": "Nexus",
+  "color": "D2000 Nexus Matte Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Nexus",
+  "style": "Traditional"
+ },
+ "UA-D2001": {
+  "collection": "Nexus",
+  "color": "D2001 Nexus Matte White",
+  "family": "Matte White",
+  "profile": "Flat",
+  "series": "Nexus",
+  "style": "Traditional"
+ },
+ "UA-D2003": {
+  "collection": "Nexus",
+  "color": "D2003 Nexus Gold",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Nexus",
+  "style": "Traditional"
+ },
+ "UA-D2004": {
+  "collection": "Nexus",
+  "color": "D2004 Nexus Steel",
+  "family": "Steel",
+  "profile": "Flat",
+  "series": "Nexus",
+  "style": "Traditional"
+ },
+ "UA-D2005": {
+  "collection": "Nexus",
+  "color": "D2005 Nexus Pewter",
+  "family": "Pewter",
+  "profile": "Flat",
+  "series": "Nexus",
+  "style": "Traditional"
+ }
+}

@@ -1,0 +1,74 @@
+{
+ "UA-V101": {
+  "collection": "Rainbow",
+  "color": "V101 Rainbow Matte White",
+  "family": "Matte White",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V102": {
+  "collection": "Rainbow",
+  "color": "V102 Rainbow Red",
+  "family": "Red",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V103": {
+  "collection": "Rainbow",
+  "color": "V103 Rainbow Green",
+  "family": "Green",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V104": {
+  "collection": "Rainbow",
+  "color": "V104 Rainbow Royal Blue",
+  "family": "Blue",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V105": {
+  "collection": "Rainbow",
+  "color": "V105 Rainbow Yellow",
+  "family": "Yellow",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V106": {
+  "collection": "Rainbow",
+  "color": "V106 Rainbow Orange",
+  "family": "Orange",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V108": {
+  "collection": "Rainbow",
+  "color": "V108 Rainbow Navy Blue",
+  "family": "Blue",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-V110": {
+  "collection": "Rainbow",
+  "color": "V110 Rainbow Matte Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ },
+ "UA-v210": {
+  "collection": "Rainbow",
+  "color": "V210 Rainbow Matte Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Rainbow",
+  "style": "Contemporary"
+ }
+}

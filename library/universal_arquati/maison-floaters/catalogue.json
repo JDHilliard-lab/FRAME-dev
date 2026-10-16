@@ -1,0 +1,26 @@
+{
+ "UA-043-100": {
+  "collection": "Maison",
+  "color": "043-100 Maison Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Maison",
+  "style": "Contemporary"
+ },
+ "UA-043-120": {
+  "collection": "Maison",
+  "color": "043-120 Maison Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Maison",
+  "style": "Contemporary"
+ },
+ "UA-043-121": {
+  "collection": "Maison",
+  "color": "043-121 Maison Ivory Floater",
+  "family": "Ivory",
+  "profile": "Floater",
+  "series": "Maison",
+  "style": "Contemporary"
+ }
+}

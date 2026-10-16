@@ -1,0 +1,42 @@
+{
+ "UA-040-100": {
+  "collection": "Maison",
+  "color": "040-100 Maison Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Maison",
+  "style": "Contemporary"
+ },
+ "UA-040-120": {
+  "collection": "Maison",
+  "color": "040-120 Maison Grey",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Maison",
+  "style": "Contemporary"
+ },
+ "UA-041-100": {
+  "collection": "Maison",
+  "color": "041-100 Maison Black",
+  "family": "Black",
+  "profile": "",
+  "series": "Maison",
+  "style": "Contemporary"
+ },
+ "UA-041-121": {
+  "collection": "Maison",
+  "color": "041-121 Maison Ivory",
+  "family": "Ivory",
+  "profile": "",
+  "series": "Maison",
+  "style": "Contemporary"
+ },
+ "UA-042-120": {
+  "collection": "Maison",
+  "color": "042-120 Maison Grey",
+  "family": "Grey",
+  "profile": "",
+  "series": "Maison",
+  "style": "Contemporary"
+ }
+}

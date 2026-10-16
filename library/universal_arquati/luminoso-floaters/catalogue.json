@@ -1,0 +1,26 @@
+{
+ "UA-H5200": {
+  "collection": "Luminoso",
+  "color": "H5200 Luminoso Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5201": {
+  "collection": "Luminoso",
+  "color": "H5201 Luminoso Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5300": {
+  "collection": "Luminoso",
+  "color": "H5300 Luminoso Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Luminoso",
+  "style": "Transitional"
+ }
+}

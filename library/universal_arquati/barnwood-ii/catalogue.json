@@ -1,0 +1,26 @@
+{
+ "UA-B520": {
+  "collection": "Barnwood II",
+  "color": "B520 Barnwood II Brown",
+  "family": "Brown",
+  "profile": "Stem",
+  "series": "Barnwood II",
+  "style": "Transitional"
+ },
+ "UA-B522": {
+  "collection": "Barnwood II",
+  "color": "B522 Barnwood II Grey",
+  "family": "Grey",
+  "profile": "Stem",
+  "series": "Barnwood II",
+  "style": "Transitional"
+ },
+ "UA-B524": {
+  "collection": "Barnwood II",
+  "color": "B524 Barnwood II White",
+  "family": "White",
+  "profile": "Stem",
+  "series": "Barnwood II",
+  "style": "Transitional"
+ }
+}

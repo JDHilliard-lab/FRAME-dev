@@ -1,0 +1,42 @@
+{
+ "UA-EC240": {
+  "collection": "Oxido",
+  "color": "EC240 Oxido Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Oxido",
+  "style": "Traditional"
+ },
+ "UA-EC242": {
+  "collection": "Oxido",
+  "color": "EC242 Oxido Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Oxido",
+  "style": "Traditional"
+ },
+ "UA-EC244": {
+  "collection": "Oxido",
+  "color": "EC244 Oxido Gold",
+  "family": "Gold",
+  "profile": "Slope",
+  "series": "Oxido",
+  "style": "Traditional"
+ },
+ "UA-EC246": {
+  "collection": "Oxido",
+  "color": "EC246 Oxido Gold",
+  "family": "Gold",
+  "profile": "Slope",
+  "series": "Oxido",
+  "style": "Traditional"
+ },
+ "UA-EC247": {
+  "collection": "Oxido",
+  "color": "EC247 Oxido Silver",
+  "family": "Silver",
+  "profile": "Slope",
+  "series": "Oxido",
+  "style": "Traditional"
+ }
+}

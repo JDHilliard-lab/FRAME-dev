@@ -1,0 +1,74 @@
+{
+ "UA-P1705": {
+  "collection": "Gallery Float",
+  "color": "P1705 Gallery Float Espresso Floater",
+  "family": "Espresso",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1706": {
+  "collection": "Gallery Float",
+  "color": "P1706 Gallery Float Bordeaux Floater",
+  "family": "Bordeaux",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1707": {
+  "collection": "Gallery Float",
+  "color": "P1707 Gallery Float Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1708": {
+  "collection": "Gallery Float",
+  "color": "P1708 Gallery Float Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1710": {
+  "collection": "Gallery Float",
+  "color": "P1710 Gallery Float Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1711": {
+  "collection": "Gallery Float",
+  "color": "P1711 Gallery Float Matte White Floater",
+  "family": "Matte White",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1712": {
+  "collection": "Gallery Float",
+  "color": "P1712 Gallery Float Natural Floater",
+  "family": "Natural",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1722": {
+  "collection": "Gallery Float",
+  "color": "P1722 Gallery Float Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ },
+ "UA-P1728": {
+  "collection": "Gallery Float",
+  "color": "P1728 Gallery Float Dark Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Gallery Float",
+  "style": "Traditional"
+ }
+}

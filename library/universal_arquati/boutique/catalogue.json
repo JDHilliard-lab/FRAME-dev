@@ -1,0 +1,50 @@
+{
+ "UA-EC930": {
+  "collection": "Boutique",
+  "color": "EC930 Boutique Silver",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Boutique",
+  "style": "Traditional"
+ },
+ "UA-EC931": {
+  "collection": "Boutique",
+  "color": "EC931 Boutique Silver",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Boutique",
+  "style": "Traditional"
+ },
+ "UA-EC932": {
+  "collection": "Boutique",
+  "color": "EC932 Boutique Silver",
+  "family": "Silver",
+  "profile": "Slope",
+  "series": "Boutique",
+  "style": "Traditional"
+ },
+ "UA-EC933": {
+  "collection": "Boutique",
+  "color": "EC933 Boutique Silver",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Boutique",
+  "style": "Traditional"
+ },
+ "UA-EC937": {
+  "collection": "Boutique",
+  "color": "EC937 Boutique Matte Black",
+  "family": "Matte Black",
+  "profile": "Slope",
+  "series": "Boutique",
+  "style": "Traditional"
+ },
+ "UA-EC938": {
+  "collection": "Boutique",
+  "color": "EC938 Boutique Matte Black",
+  "family": "Matte Black",
+  "profile": "Slope",
+  "series": "Boutique",
+  "style": "Traditional"
+ }
+}

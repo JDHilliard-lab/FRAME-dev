@@ -1,0 +1,34 @@
+{
+ "UA-N7807": {
+  "collection": "Novo Float",
+  "color": "N7807 Novo Float Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Novo Float",
+  "style": "Transitional"
+ },
+ "UA-N7808": {
+  "collection": "Novo Float",
+  "color": "N7808 Novo Float Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Novo Float",
+  "style": "Transitional"
+ },
+ "UA-N7810": {
+  "collection": "Novo Float",
+  "color": "N7810 Novo Float Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Novo Float",
+  "style": "Transitional"
+ },
+ "UA-N7811": {
+  "collection": "Novo Float",
+  "color": "N7811 Novo Float Matte White Floater",
+  "family": "Matte White",
+  "profile": "Floater",
+  "series": "Novo Float",
+  "style": "Transitional"
+ }
+}

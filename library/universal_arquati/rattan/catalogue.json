@@ -1,0 +1,66 @@
+{
+ "UA-EC2302": {
+  "collection": "Rattan",
+  "color": "EC2302 Rattan Natural",
+  "family": "Natural",
+  "profile": "Wide Slant",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2303": {
+  "collection": "Rattan",
+  "color": "EC2303 Rattan Dark Natural",
+  "family": "Natural",
+  "profile": "Wide Slant",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2304": {
+  "collection": "Rattan",
+  "color": "EC2304 Rattan Grey",
+  "family": "Grey",
+  "profile": "Wide Slant",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2305": {
+  "collection": "Rattan",
+  "color": "EC2305 Rattan Walnut",
+  "family": "Walnut",
+  "profile": "Wide Slant",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2402": {
+  "collection": "Rattan",
+  "color": "EC2402 Rattan Natural",
+  "family": "Natural",
+  "profile": "Slanted Cap",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2403": {
+  "collection": "Rattan",
+  "color": "EC2403 Rattan Dark Natural",
+  "family": "Natural",
+  "profile": "Slanted Cap",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2404": {
+  "collection": "Rattan",
+  "color": "EC2404 Rattan Grey",
+  "family": "Grey",
+  "profile": "Slanted Cap",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2405": {
+  "collection": "Rattan",
+  "color": "EC2405 Rattan Walnut",
+  "family": "Walnut",
+  "profile": "Slanted Cap",
+  "series": "Rattan",
+  "style": "Modern"
+ }
+}

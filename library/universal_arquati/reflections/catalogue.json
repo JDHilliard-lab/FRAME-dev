@@ -1,0 +1,50 @@
+{
+ "UA-A2211": {
+  "collection": "Reflections",
+  "color": "A2211 Reflections Black",
+  "family": "Black",
+  "profile": "Swan",
+  "series": "Reflections",
+  "style": "Transitional"
+ },
+ "UA-B7514": {
+  "collection": "Reflections",
+  "color": "B7514 Reflections Black",
+  "family": "Black",
+  "profile": "Block",
+  "series": "Reflections",
+  "style": "Traditional"
+ },
+ "UA-B7515": {
+  "collection": "Reflections",
+  "color": "B7515 Reflections White",
+  "family": "White",
+  "profile": "Block",
+  "series": "Reflections",
+  "style": "Traditional"
+ },
+ "UA-B7516": {
+  "collection": "Reflections",
+  "color": "B7516 Reflections Red",
+  "family": "Red",
+  "profile": "Block",
+  "series": "Reflections",
+  "style": "Traditional"
+ },
+ "UA-B7519": {
+  "collection": "Reflections",
+  "color": "B7519 Reflections Black",
+  "family": "Black",
+  "profile": "Stem",
+  "series": "Reflections",
+  "style": "Traditional"
+ },
+ "UA-B7521": {
+  "collection": "Reflections",
+  "color": "B7521 Reflections Red",
+  "family": "Red",
+  "profile": "Stem",
+  "series": "Reflections",
+  "style": "Traditional"
+ }
+}

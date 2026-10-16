@@ -1,0 +1,42 @@
+{
+ "UA-EC570": {
+  "collection": "Sumatra",
+  "color": "EC570 Sumatra Espresso",
+  "family": "Espresso",
+  "profile": "Cap",
+  "series": "Sumatra",
+  "style": "Traditional"
+ },
+ "UA-EC571": {
+  "collection": "Sumatra",
+  "color": "EC571 Sumatra Espresso",
+  "family": "Espresso",
+  "profile": "Square",
+  "series": "Sumatra",
+  "style": "Traditional"
+ },
+ "UA-EC572": {
+  "collection": "Sumatra",
+  "color": "EC572 Sumatra Espresso",
+  "family": "Espresso",
+  "profile": "Square",
+  "series": "Sumatra",
+  "style": "Traditional"
+ },
+ "UA-EC573": {
+  "collection": "Sumatra",
+  "color": "EC573 Sumatra Espresso",
+  "family": "Espresso",
+  "profile": "Flat",
+  "series": "Sumatra",
+  "style": "Traditional"
+ },
+ "UA-EC574": {
+  "collection": "Sumatra",
+  "color": "EC574 Sumatra Espresso",
+  "family": "Espresso",
+  "profile": "",
+  "series": "Sumatra",
+  "style": "Traditional"
+ }
+}

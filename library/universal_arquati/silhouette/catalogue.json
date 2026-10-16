@@ -1,0 +1,26 @@
+{
+ "UA-BR5510": {
+  "collection": "Silhouette",
+  "color": "BR5510 Silhouette Matte Black",
+  "family": "Black",
+  "profile": "Swan",
+  "series": "Silhouette",
+  "style": "Traditional"
+ },
+ "UA-BR5511": {
+  "collection": "Silhouette",
+  "color": "BR5511 Silhouette Matte White",
+  "family": "Matte White",
+  "profile": "Swan",
+  "series": "Silhouette",
+  "style": "Traditional"
+ },
+ "UA-BR5518": {
+  "collection": "Silhouette",
+  "color": "BR5518 Silhouette Espresso",
+  "family": "Espresso",
+  "profile": "Swan",
+  "series": "Silhouette",
+  "style": "Traditional"
+ }
+}

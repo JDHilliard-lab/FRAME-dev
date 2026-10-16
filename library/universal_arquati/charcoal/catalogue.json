@@ -1,0 +1,42 @@
+{
+ "UA-N1214": {
+  "collection": "Charcoal",
+  "color": "N1214 Charcoal",
+  "family": "Charcoal",
+  "profile": "Stem",
+  "series": "Charcoal",
+  "style": "Modern"
+ },
+ "UA-N2014": {
+  "collection": "Charcoal",
+  "color": "N2014 Charcoal",
+  "family": "Charcoal",
+  "profile": "Cap",
+  "series": "Charcoal",
+  "style": "Modern"
+ },
+ "UA-N2214": {
+  "collection": "Charcoal",
+  "color": "N2214 Charcoal",
+  "family": "Charcoal",
+  "profile": "",
+  "series": "Charcoal",
+  "style": "Modern"
+ },
+ "UA-N2814": {
+  "collection": "Charcoal",
+  "color": "N2814 Charcoal",
+  "family": "Charcoal",
+  "profile": "Cube",
+  "series": "Charcoal",
+  "style": "Modern"
+ },
+ "UA-N2914": {
+  "collection": "Charcoal",
+  "color": "N2914 Charcoal Shadow Box",
+  "family": "Charcoal",
+  "profile": "Shadow Box",
+  "series": "Charcoal",
+  "style": "Modern"
+ }
+}

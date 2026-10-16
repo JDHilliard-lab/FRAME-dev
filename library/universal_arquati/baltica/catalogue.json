@@ -1,0 +1,42 @@
+{
+ "UA-240-7007": {
+  "collection": "Baltica",
+  "color": "240-7007 Baltica Gold",
+  "family": "Gold",
+  "profile": "Slope",
+  "series": "Baltica",
+  "style": "Transitional"
+ },
+ "UA-240-7008": {
+  "collection": "Baltica",
+  "color": "240-7008 Baltica Silver",
+  "family": "Silver",
+  "profile": "Slope",
+  "series": "Baltica",
+  "style": "Transitional"
+ },
+ "UA-240-7009": {
+  "collection": "Baltica",
+  "color": "240-7009 Baltica Pewter",
+  "family": "Pewter",
+  "profile": "Slope",
+  "series": "Baltica",
+  "style": "Transitional"
+ },
+ "UA-240-7010": {
+  "collection": "Baltica",
+  "color": "240-7010 Baltica Black",
+  "family": "Black",
+  "profile": "Slope",
+  "series": "Baltica",
+  "style": "Transitional"
+ },
+ "UA-240-7012": {
+  "collection": "Baltica",
+  "color": "240-7012 Baltica Bronze",
+  "family": "Bronze",
+  "profile": "Slope",
+  "series": "Baltica",
+  "style": "Transitional"
+ }
+}

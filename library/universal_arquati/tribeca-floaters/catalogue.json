@@ -1,0 +1,42 @@
+{
+ "UA-EC1805": {
+  "collection": "Tribeca",
+  "color": "EC1805 Tribeca Espresso Floater",
+  "family": "Espresso",
+  "profile": "Floater",
+  "series": "Tribeca",
+  "style": "Traditional"
+ },
+ "UA-EC1807": {
+  "collection": "Tribeca",
+  "color": "EC1807 Tribeca Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Tribeca",
+  "style": "Traditional"
+ },
+ "UA-EC1808": {
+  "collection": "Tribeca",
+  "color": "EC1808 Tribeca Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Tribeca",
+  "style": "Traditional"
+ },
+ "UA-EC1810": {
+  "collection": "Tribeca",
+  "color": "EC1810 Tribeca Matte Black Floater",
+  "family": "Matte Black",
+  "profile": "Floater",
+  "series": "Tribeca",
+  "style": "Traditional"
+ },
+ "UA-EC1811": {
+  "collection": "Tribeca",
+  "color": "EC1811 Tribeca Matte White Floater",
+  "family": "Matte White",
+  "profile": "Floater",
+  "series": "Tribeca",
+  "style": "Traditional"
+ }
+}

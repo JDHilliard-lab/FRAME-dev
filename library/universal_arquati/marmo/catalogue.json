@@ -1,0 +1,66 @@
+{
+ "UA-350-1007": {
+  "collection": "Marmo",
+  "color": "350-1007 Marmo Gold",
+  "family": "Gold",
+  "profile": "Square",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-350-1010": {
+  "collection": "Marmo",
+  "color": "350-1010 Marmo Black",
+  "family": "Black",
+  "profile": "Square",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-350-1013": {
+  "collection": "Marmo",
+  "color": "350-1013 Marmo Platinum",
+  "family": "Platinum",
+  "profile": "Square",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-350-1014": {
+  "collection": "Marmo",
+  "color": "350-1014 Marmo Pewter",
+  "family": "Pewter",
+  "profile": "Square",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-351-1007": {
+  "collection": "Marmo",
+  "color": "351-1007 Marmo Gold",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-351-1010": {
+  "collection": "Marmo",
+  "color": "351-1010 Marmo Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-351-1013": {
+  "collection": "Marmo",
+  "color": "351-1013 Marmo Platinum",
+  "family": "Platinum",
+  "profile": "Flat",
+  "series": "Marmo",
+  "style": "Modern"
+ },
+ "UA-351-1014": {
+  "collection": "Marmo",
+  "color": "351-1014 Marmo Pewter",
+  "family": "Pewter",
+  "profile": "Flat",
+  "series": "Marmo",
+  "style": "Modern"
+ }
+}

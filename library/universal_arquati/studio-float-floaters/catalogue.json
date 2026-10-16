@@ -1,0 +1,74 @@
+{
+ "UA-EC340": {
+  "collection": "Studio Float",
+  "color": "EC340 Studio Float II Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC341": {
+  "collection": "Studio Float",
+  "color": "EC341 Studio Float II White Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC343": {
+  "collection": "Studio Float",
+  "color": "EC343 Studio Float II Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC344": {
+  "collection": "Studio Float",
+  "color": "EC344 Studio Float II Bronze Floater",
+  "family": "Bronze",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC345": {
+  "collection": "Studio Float",
+  "color": "EC345 Studio Float II Espresso Floater",
+  "family": "Espresso",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC350": {
+  "collection": "Studio Float",
+  "color": "EC350 Studio Float Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC351": {
+  "collection": "Studio Float",
+  "color": "EC351 Studio Float White Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC352": {
+  "collection": "Studio Float",
+  "color": "EC352 Studio Float Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ },
+ "UA-EC353": {
+  "collection": "Studio Float",
+  "color": "EC353 Studio Float Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Studio Float",
+  "style": "Traditional"
+ }
+}

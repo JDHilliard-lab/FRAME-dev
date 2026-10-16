@@ -1,0 +1,42 @@
+{
+ "UA-P4021": {
+  "collection": "Rustique",
+  "color": "P4021 Rustique Dark Grey",
+  "family": "Grey",
+  "profile": "",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4022": {
+  "collection": "Rustique",
+  "color": "P4022 Rustique Grey Brown",
+  "family": "Brown",
+  "profile": "",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4023": {
+  "collection": "Rustique",
+  "color": "P4023 Rustique Walnut",
+  "family": "Walnut",
+  "profile": "",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4024": {
+  "collection": "Rustique",
+  "color": "P4024 Rustique Tan",
+  "family": "Brown",
+  "profile": "",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4027": {
+  "collection": "Rustique",
+  "color": "P4027 Rustique Dark Grey w/ Silver",
+  "family": "Grey",
+  "profile": "",
+  "series": "Rustique",
+  "style": "Traditional"
+ }
+}

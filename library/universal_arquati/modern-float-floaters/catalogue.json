@@ -1,0 +1,26 @@
+{
+ "UA-P2007": {
+  "collection": "Modern Float",
+  "color": "P2007 Modern Float Gold Floater",
+  "family": "Gold",
+  "profile": "Floater",
+  "series": "Modern Float",
+  "style": "Modern"
+ },
+ "UA-P2008": {
+  "collection": "Modern Float",
+  "color": "P2008 Modern Float Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Modern Float",
+  "style": "Modern"
+ },
+ "UA-P2020": {
+  "collection": "Modern Float",
+  "color": "P2020 Modern Float Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Modern Float",
+  "style": "Modern"
+ }
+}

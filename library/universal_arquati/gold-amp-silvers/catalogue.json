@@ -1,0 +1,50 @@
+{
+ "UA-015-282-001": {
+  "collection": "Gold &amp; Silvers",
+  "color": "015-282-001 Gold &#038; Silvers Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Gold &amp; Silvers",
+  "style": "Traditional"
+ },
+ "UA-015-383-001": {
+  "collection": "Gold &amp; Silvers",
+  "color": "015-383-001 Gold &#038; Silvers Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Gold &amp; Silvers",
+  "style": "Traditional"
+ },
+ "UA-020-282-001": {
+  "collection": "Gold &amp; Silvers",
+  "color": "020-282-001 Gold &#038; Silvers Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Gold &amp; Silvers",
+  "style": "Traditional"
+ },
+ "UA-020-383-001": {
+  "collection": "Gold &amp; Silvers",
+  "color": "020-383-001 Gold &#038; Silvers Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Gold &amp; Silvers",
+  "style": "Traditional"
+ },
+ "UA-033-282-001": {
+  "collection": "Gold &amp; Silvers",
+  "color": "033-282-001 Gold &#038; Silvers Gold",
+  "family": "Gold",
+  "profile": "Stem",
+  "series": "Gold &amp; Silvers",
+  "style": "Traditional"
+ },
+ "UA-N116": {
+  "collection": "Gold &amp; Silvers",
+  "color": "N116 Gold &#038; Silvers Pewter",
+  "family": "Pewter",
+  "profile": "",
+  "series": "Gold &amp; Silvers",
+  "style": "Ornate"
+ }
+}

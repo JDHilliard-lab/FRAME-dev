@@ -1,0 +1,74 @@
+{
+ "UA-EC1605": {
+  "collection": "ValuFloat",
+  "color": "EC1605 ValuFloat Espresso Floater",
+  "family": "Espresso",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": "Wood Foil"
+ },
+ "UA-EC1607": {
+  "collection": "ValuFloat",
+  "color": "EC1607 ValuFloat Gold Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": ""
+ },
+ "UA-EC1608": {
+  "collection": "ValuFloat",
+  "color": "EC1608 ValuFloat Silver Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": ""
+ },
+ "UA-EC1609": {
+  "collection": "ValuFloat",
+  "color": "EC1609 ValuFloat Bronze Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": ""
+ },
+ "UA-EC1610": {
+  "collection": "ValuFloat",
+  "color": "EC1610 ValuFloat Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": "Matte Black"
+ },
+ "UA-EC1611": {
+  "collection": "ValuFloat",
+  "color": "EC1611 ValuFloat White Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": "Matte White"
+ },
+ "UA-EC1612": {
+  "collection": "ValuFloat",
+  "color": "EC1612 ValuFloat Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": "Gold"
+ },
+ "UA-EC1613": {
+  "collection": "ValuFloat",
+  "color": "EC1613 ValuFloat Oak Floater",
+  "family": "Oak",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": "Wood Foil"
+ },
+ "UA-EC1614": {
+  "collection": "ValuFloat",
+  "color": "EC1614 ValuFloat Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "ValuFloat",
+  "style": ""
+ }
+}

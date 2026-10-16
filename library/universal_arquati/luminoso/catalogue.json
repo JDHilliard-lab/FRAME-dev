@@ -1,0 +1,74 @@
+{
+ "UA-H5000": {
+  "collection": "Luminoso",
+  "color": "H5000 Luminoso Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5001": {
+  "collection": "Luminoso",
+  "color": "H5001 Luminoso Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5002": {
+  "collection": "Luminoso",
+  "color": "H5002 Luminoso Bronze",
+  "family": "Bronze",
+  "profile": "Cap",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5003": {
+  "collection": "Luminoso",
+  "color": "H5003 Luminoso Smoke",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5100": {
+  "collection": "Luminoso",
+  "color": "H5100 Luminoso Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5101": {
+  "collection": "Luminoso",
+  "color": "H5101 Luminoso Silver",
+  "family": "Silver",
+  "profile": "",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5102": {
+  "collection": "Luminoso",
+  "color": "H5102 Luminoso Bronze",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5400": {
+  "collection": "Luminoso",
+  "color": "H5400 Luminoso Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Luminoso",
+  "style": "Transitional"
+ },
+ "UA-H5402": {
+  "collection": "Luminoso",
+  "color": "H5402 Luminoso Bronze",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Luminoso",
+  "style": "Transitional"
+ }
+}

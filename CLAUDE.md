@@ -1768,6 +1768,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   Codes `LJ-<sku>`, folders `library/larson_juhl/<collection>[-floaters]`. Floater lips read off the
   drawings. Nielsen metal (no photos), Raw Maple (drawings only), fillets, liners, strainers left out.
   The browser's Library groups by VENDOR (`ven:` source, `_fbOpenVendors`), plus a Style filter.
+  **Universal Arquati (18.95):** WooCommerce Store API (`/wp-json/wc/store/v1/products`, public) gives
+  Width/Height/Rabbet/Collection/Color/Style/Profile as attributes; image 0 is a photo of a strip lying
+  sideways (cut end LEFT, code label under it), image 1 the drawing. Rotated a quarter anticlockwise it
+  matches MICH. White mouldings need the near-white threshold. Discontinued = '(Discontinued)' in the
+  NAME. Floater Width is the LIP; the full rail width is read off the drawing. Codes `UA-<sku>`.
   **Left out on purpose:** Liners and Fillets (they nest inside another frame; FRAME has no such
   product), Flat Surfaces (rabbetless, holds no art), Stretchers (hidden). 627-45 has no photo upstream.
   **Swatch cut:** standard (outer-edge colour change or hard edge) by default; ornate/barnwood faces

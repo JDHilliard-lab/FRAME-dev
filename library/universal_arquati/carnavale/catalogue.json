@@ -1,0 +1,26 @@
+{
+ "UA-341-1200": {
+  "collection": "Carnavale",
+  "color": "341-1200 Carnavale Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Carnavale",
+  "style": "Transitional"
+ },
+ "UA-341-1202": {
+  "collection": "Carnavale",
+  "color": "341-1202 Carnavale Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Carnavale",
+  "style": "Transitional"
+ },
+ "UA-341-1203": {
+  "collection": "Carnavale",
+  "color": "341-1203 Carnavale Grey",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Carnavale",
+  "style": "Transitional"
+ }
+}

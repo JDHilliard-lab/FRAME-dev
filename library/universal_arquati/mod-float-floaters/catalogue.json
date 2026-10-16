@@ -1,0 +1,26 @@
+{
+ "UA-EC360": {
+  "collection": "Mod Float",
+  "color": "EC360 Mod Float Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Mod Float",
+  "style": "Traditional"
+ },
+ "UA-EC363": {
+  "collection": "Mod Float",
+  "color": "EC363 Mod Float Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Mod Float",
+  "style": "Traditional"
+ },
+ "UA-EC365": {
+  "collection": "Mod Float",
+  "color": "EC365 Mod Float Espresso Floater",
+  "family": "Espresso",
+  "profile": "Floater",
+  "series": "Mod Float",
+  "style": "Traditional"
+ }
+}

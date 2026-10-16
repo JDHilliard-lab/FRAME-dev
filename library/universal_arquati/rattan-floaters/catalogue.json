@@ -1,0 +1,34 @@
+{
+ "UA-EC2202": {
+  "collection": "Rattan",
+  "color": "EC2202 Rattan Natural Floater",
+  "family": "Natural",
+  "profile": "Floater",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2203": {
+  "collection": "Rattan",
+  "color": "EC2203 Rattan Dark Natural Floater",
+  "family": "Natural",
+  "profile": "Floater",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2204": {
+  "collection": "Rattan",
+  "color": "EC2204 Rattan Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Rattan",
+  "style": "Modern"
+ },
+ "UA-EC2205": {
+  "collection": "Rattan",
+  "color": "EC2205 Rattan Walnut Floater",
+  "family": "Walnut",
+  "profile": "Floater",
+  "series": "Rattan",
+  "style": "Modern"
+ }
+}

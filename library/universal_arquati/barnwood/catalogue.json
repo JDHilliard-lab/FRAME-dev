@@ -1,0 +1,58 @@
+{
+ "UA-B821": {
+  "collection": "Barnwood",
+  "color": "B821 Barnwood Brown",
+  "family": "Brown",
+  "profile": "Cap",
+  "series": "Barnwood",
+  "style": "Rustic"
+ },
+ "UA-B822": {
+  "collection": "Barnwood",
+  "color": "B822 Barnwood Grey",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Barnwood",
+  "style": "Rustic"
+ },
+ "UA-B831": {
+  "collection": "Barnwood",
+  "color": "B831 Barnwood Brown",
+  "family": "Brown",
+  "profile": "Scoop",
+  "series": "Barnwood",
+  "style": "Rustic"
+ },
+ "UA-B832": {
+  "collection": "Barnwood",
+  "color": "B832 Barnwood Grey",
+  "family": "Grey",
+  "profile": "Scoop",
+  "series": "Barnwood",
+  "style": "Rustic"
+ },
+ "UA-B841": {
+  "collection": "Barnwood",
+  "color": "B841 Barnwood Brown",
+  "family": "Brown",
+  "profile": "Flat Scoop",
+  "series": "Barnwood",
+  "style": "Rustic"
+ },
+ "UA-B861": {
+  "collection": "Barnwood",
+  "color": "B861 Barnwood Brown",
+  "family": "Brown",
+  "profile": "Square",
+  "series": "Barnwood",
+  "style": "Rustic"
+ },
+ "UA-B862": {
+  "collection": "Barnwood",
+  "color": "B862 Barnwood Grey",
+  "family": "Grey",
+  "profile": "Square",
+  "series": "Barnwood",
+  "style": "Rustic"
+ }
+}

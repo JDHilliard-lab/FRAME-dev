@@ -1,0 +1,34 @@
+{
+ "UA-N2707": {
+  "collection": "Collins II",
+  "color": "N2707 Collins II Gold",
+  "family": "Gold",
+  "profile": "Stem",
+  "series": "Collins II",
+  "style": "Modern"
+ },
+ "UA-N2711": {
+  "collection": "Collins II",
+  "color": "N2711 Collins II White",
+  "family": "White",
+  "profile": "Stem",
+  "series": "Collins II",
+  "style": "Modern"
+ },
+ "UA-N2713": {
+  "collection": "Collins II",
+  "color": "N2713 Collins II Brown",
+  "family": "Brown",
+  "profile": "Stem",
+  "series": "Collins II",
+  "style": "Modern"
+ },
+ "UA-N2714": {
+  "collection": "Collins II",
+  "color": "N2714 Collins II Charcoal Grey",
+  "family": "Grey",
+  "profile": "Stem",
+  "series": "Collins II",
+  "style": "Modern"
+ }
+}

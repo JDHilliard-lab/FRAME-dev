@@ -1,0 +1,50 @@
+{
+ "UA-EC430": {
+  "collection": "Napa",
+  "color": "EC430 Napa Walnut",
+  "family": "Walnut",
+  "profile": "Slant",
+  "series": "Napa",
+  "style": "Traditional"
+ },
+ "UA-EC431": {
+  "collection": "Napa",
+  "color": "EC431 Napa Mahogany",
+  "family": "Mahogany",
+  "profile": "Slant",
+  "series": "Napa",
+  "style": "Traditional"
+ },
+ "UA-EC432": {
+  "collection": "Napa",
+  "color": "EC432 Napa Charcoal",
+  "family": "Charcoal",
+  "profile": "Slant",
+  "series": "Napa",
+  "style": "Traditional"
+ },
+ "UA-EC433": {
+  "collection": "Napa",
+  "color": "EC433 Napa Walnut",
+  "family": "Walnut",
+  "profile": "",
+  "series": "Napa",
+  "style": "Traditional"
+ },
+ "UA-EC434": {
+  "collection": "Napa",
+  "color": "EC434 Napa Mahogany",
+  "family": "Mahogany",
+  "profile": "",
+  "series": "Napa",
+  "style": "Traditional"
+ },
+ "UA-EC435": {
+  "collection": "Napa",
+  "color": "EC435 Napa Charcoal",
+  "family": "Charcoal",
+  "profile": "",
+  "series": "Napa",
+  "style": "Traditional"
+ }
+}

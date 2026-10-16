@@ -1,0 +1,66 @@
+{
+ "UA-EC131": {
+  "collection": "Metropolis II",
+  "color": "EC131 Metropolis II Grey",
+  "family": "Grey",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC133": {
+  "collection": "Metropolis II",
+  "color": "EC133 Metropolis II Grey",
+  "family": "Grey",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC136": {
+  "collection": "Metropolis II",
+  "color": "EC136 Metropolis II Natural",
+  "family": "Natural",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC137": {
+  "collection": "Metropolis II",
+  "color": "EC137 Metropolis II White",
+  "family": "White",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC138": {
+  "collection": "Metropolis II",
+  "color": "EC138 Metropolis II White",
+  "family": "White",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC139": {
+  "collection": "Metropolis II",
+  "color": "EC139 Metropolis II Natural",
+  "family": "Natural",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC157": {
+  "collection": "Metropolis II",
+  "color": "EC157 Metropolis II Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ },
+ "UA-EC158": {
+  "collection": "Metropolis II",
+  "color": "EC158 Metropolis II Silver",
+  "family": "Silver",
+  "profile": "",
+  "series": "Metropolis II",
+  "style": "Modern"
+ }
+}

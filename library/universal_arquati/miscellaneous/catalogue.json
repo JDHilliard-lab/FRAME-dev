@@ -1,0 +1,258 @@
+{
+ "UA-EC1107": {
+  "collection": "Miscellaneous",
+  "color": "EC1107 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "Square",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC1108": {
+  "collection": "Miscellaneous",
+  "color": "EC1108 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "Square",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC405": {
+  "collection": "Miscellaneous",
+  "color": "EC405 Miscellaneous Bronze",
+  "family": "Bronze",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Ornate"
+ },
+ "UA-EC407": {
+  "collection": "Miscellaneous",
+  "color": "EC407 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Ornate"
+ },
+ "UA-EC503": {
+  "collection": "Miscellaneous",
+  "color": "EC503 Miscellaneous Champagne",
+  "family": "Champagne",
+  "profile": "Slope",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC6060": {
+  "collection": "Miscellaneous",
+  "color": "EC6060 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC6061": {
+  "collection": "Miscellaneous",
+  "color": "EC6061 Miscellaneous Mahogany",
+  "family": "Mahogany",
+  "profile": "Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC6062": {
+  "collection": "Miscellaneous",
+  "color": "EC6062 Miscellaneous Espresso",
+  "family": "Espresso",
+  "profile": "Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC702": {
+  "collection": "Miscellaneous",
+  "color": "EC702 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC712B": {
+  "collection": "Miscellaneous",
+  "color": "EC712B Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC725": {
+  "collection": "Miscellaneous",
+  "color": "EC725 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC740": {
+  "collection": "Miscellaneous",
+  "color": "EC740 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "Square",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC755": {
+  "collection": "Miscellaneous",
+  "color": "EC755 Miscellaneous Brown",
+  "family": "Brown",
+  "profile": "Swan",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC762": {
+  "collection": "Miscellaneous",
+  "color": "EC762 Miscellaneous Bronze",
+  "family": "Bronze",
+  "profile": "Slant",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC763": {
+  "collection": "Miscellaneous",
+  "color": "EC763 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "Slant",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC764": {
+  "collection": "Miscellaneous",
+  "color": "EC764 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "Slant",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC773": {
+  "collection": "Miscellaneous",
+  "color": "EC773 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "Curved",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC885": {
+  "collection": "Miscellaneous",
+  "color": "EC885 Miscellaneous Brown",
+  "family": "Brown",
+  "profile": "Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC888": {
+  "collection": "Miscellaneous",
+  "color": "EC888 Miscellaneous Black",
+  "family": "Black",
+  "profile": "Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC889": {
+  "collection": "Miscellaneous",
+  "color": "EC889 Miscellaneous Black",
+  "family": "Black",
+  "profile": "Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-EC920": {
+  "collection": "Miscellaneous",
+  "color": "EC920 Miscellaneous Mahogany",
+  "family": "Mahogany",
+  "profile": "Swan",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-H11677": {
+  "collection": "Miscellaneous",
+  "color": "H11677 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "Swan",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-H120101": {
+  "collection": "Miscellaneous",
+  "color": "H120101 Miscellaneous Black",
+  "family": "Black",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Ornate"
+ },
+ "UA-H3408": {
+  "collection": "Miscellaneous",
+  "color": "H3408 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "Reverse Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-I528": {
+  "collection": "Miscellaneous",
+  "color": "I528 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "Flat Scoop",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-N1107": {
+  "collection": "Miscellaneous",
+  "color": "N1107 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-N1914": {
+  "collection": "Miscellaneous",
+  "color": "N1914 Miscellaneous Matte Black",
+  "family": "Black",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-N2210": {
+  "collection": "Miscellaneous",
+  "color": "N2210 Miscellaneous Matte Black",
+  "family": "Black",
+  "profile": "Slope",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-N2307": {
+  "collection": "Miscellaneous",
+  "color": "N2307 Miscellaneous Gold",
+  "family": "Gold",
+  "profile": "Slope",
+  "series": "Miscellaneous",
+  "style": "Ornate"
+ },
+ "UA-N2508": {
+  "collection": "Miscellaneous",
+  "color": "N2508 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Ornate"
+ },
+ "UA-N2710": {
+  "collection": "Miscellaneous",
+  "color": "N2710 Miscellaneous Matte Black",
+  "family": "Matte Black",
+  "profile": "Reverse",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ },
+ "UA-N5080": {
+  "collection": "Miscellaneous",
+  "color": "N5080 Miscellaneous Silver",
+  "family": "Silver",
+  "profile": "",
+  "series": "Miscellaneous",
+  "style": "Traditional"
+ }
+}

@@ -1,0 +1,18 @@
+{
+ "UA-N7710": {
+  "collection": "Piano",
+  "color": "N7710 Piano Matte Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Piano",
+  "style": "Traditional"
+ },
+ "UA-N7711": {
+  "collection": "Piano",
+  "color": "N7711 Piano Matte White Floater",
+  "family": "Matte White",
+  "profile": "Floater",
+  "series": "Piano",
+  "style": "Traditional"
+ }
+}

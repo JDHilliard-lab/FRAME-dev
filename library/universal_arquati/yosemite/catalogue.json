@@ -1,0 +1,58 @@
+{
+ "UA-S7001": {
+  "collection": "Yosemite",
+  "color": "S7001 Yosemite Grey",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Yosemite",
+  "style": "Rustic"
+ },
+ "UA-S7002": {
+  "collection": "Yosemite",
+  "color": "S7002 Yosemite Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Yosemite",
+  "style": "Rustic"
+ },
+ "UA-S7003": {
+  "collection": "Yosemite",
+  "color": "S7003 Yosemite Espresso",
+  "family": "Espresso",
+  "profile": "Cap",
+  "series": "Yosemite",
+  "style": "Rustic"
+ },
+ "UA-S7004": {
+  "collection": "Yosemite",
+  "color": "S7004 Yosemite White",
+  "family": "White",
+  "profile": "Cap",
+  "series": "Yosemite",
+  "style": "Rustic"
+ },
+ "UA-S7005": {
+  "collection": "Yosemite",
+  "color": "S7005 Yosemite Grey",
+  "family": "Grey",
+  "profile": "Scoop",
+  "series": "Yosemite",
+  "style": "Rustic"
+ },
+ "UA-S7006": {
+  "collection": "Yosemite",
+  "color": "S7006 Yosemite Black",
+  "family": "Black",
+  "profile": "Scoop",
+  "series": "Yosemite",
+  "style": "Rustic"
+ },
+ "UA-S7007": {
+  "collection": "Yosemite",
+  "color": "S7007 Yosemite Espresso",
+  "family": "Espresso",
+  "profile": "Scoop",
+  "series": "Yosemite",
+  "style": "Rustic"
+ }
+}

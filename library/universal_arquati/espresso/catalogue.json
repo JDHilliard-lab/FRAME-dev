@@ -1,0 +1,34 @@
+{
+ "UA-I205": {
+  "collection": "Espresso",
+  "color": "I205 Espresso",
+  "family": "Espresso",
+  "profile": "Flat",
+  "series": "Espresso",
+  "style": "Traditional"
+ },
+ "UA-I305": {
+  "collection": "Espresso",
+  "color": "I305 Espresso",
+  "family": "Espresso",
+  "profile": "Flat",
+  "series": "Espresso",
+  "style": "Traditional"
+ },
+ "UA-I405": {
+  "collection": "Espresso",
+  "color": "I405 Espresso",
+  "family": "Espresso",
+  "profile": "Cap",
+  "series": "Espresso",
+  "style": "Traditional"
+ },
+ "UA-I705": {
+  "collection": "Espresso",
+  "color": "I705 Espresso",
+  "family": "Espresso",
+  "profile": "Crescent",
+  "series": "Espresso",
+  "style": "Traditional"
+ }
+}

@@ -1,0 +1,58 @@
+{
+ "UA-530-6004": {
+  "collection": "Bianco",
+  "color": "530-6004 Bianco Red",
+  "family": "Red",
+  "profile": "Cap",
+  "series": "Bianco",
+  "style": "Transitional"
+ },
+ "UA-530-6010": {
+  "collection": "Bianco",
+  "color": "530-6010 Bianco Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Bianco",
+  "style": "Transitional"
+ },
+ "UA-530-6011": {
+  "collection": "Bianco",
+  "color": "530-6011 Bianco Grey",
+  "family": "Grey",
+  "profile": "Cap",
+  "series": "Bianco",
+  "style": "Transitional"
+ },
+ "UA-531-6004": {
+  "collection": "Bianco",
+  "color": "531-6004 Bianco Red",
+  "family": "Red",
+  "profile": "",
+  "series": "Bianco",
+  "style": "Transitional"
+ },
+ "UA-531-6005": {
+  "collection": "Bianco",
+  "color": "531-6005 Bianco Blue",
+  "family": "Blue",
+  "profile": "",
+  "series": "Bianco",
+  "style": "Transitional"
+ },
+ "UA-531-6010": {
+  "collection": "Bianco",
+  "color": "531-6010 Bianco Black",
+  "family": "Black",
+  "profile": "",
+  "series": "Bianco",
+  "style": "Transitional"
+ },
+ "UA-531-6011": {
+  "collection": "Bianco",
+  "color": "531-6011 Bianco Grey",
+  "family": "Grey",
+  "profile": "",
+  "series": "Bianco",
+  "style": "Transitional"
+ }
+}

@@ -1,0 +1,90 @@
+{
+ "UA-031-500": {
+  "collection": "Sherwood",
+  "color": "031-500 Sherwood Espresso",
+  "family": "Espresso",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-031-600": {
+  "collection": "Sherwood",
+  "color": "031-600 Sherwood Grey",
+  "family": "Grey",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-031-700": {
+  "collection": "Sherwood",
+  "color": "031-700 Sherwood Walnut",
+  "family": "Walnut",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-032-500": {
+  "collection": "Sherwood",
+  "color": "032-500 Sherwood Espresso",
+  "family": "Espresso",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-032-600": {
+  "collection": "Sherwood",
+  "color": "032-600 Sherwood Grey",
+  "family": "Grey",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-032-700": {
+  "collection": "Sherwood",
+  "color": "032-700 Sherwood Walnut",
+  "family": "Walnut",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-033-500": {
+  "collection": "Sherwood",
+  "color": "033-500 Sherwood Espresso",
+  "family": "Espresso",
+  "profile": "Square",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-033-600": {
+  "collection": "Sherwood",
+  "color": "033-600 Sherwood Grey",
+  "family": "Grey",
+  "profile": "Square",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-033-700": {
+  "collection": "Sherwood",
+  "color": "033-700 Sherwood Walnut",
+  "family": "Walnut",
+  "profile": "Square",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-870-9013": {
+  "collection": "Sherwood",
+  "color": "870-9013 Artigiana I Gold",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ },
+ "UA-870-9015": {
+  "collection": "Sherwood",
+  "color": "870-9015 Artigiana I Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Sherwood",
+  "style": "Traditional"
+ }
+}

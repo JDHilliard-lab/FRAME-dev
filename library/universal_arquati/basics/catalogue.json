@@ -1,0 +1,34 @@
+{
+ "UA-I610": {
+  "collection": "Basics",
+  "color": "I610 Ebony Basics",
+  "family": "Ebony",
+  "profile": "Block",
+  "series": "Basics",
+  "style": "Traditional"
+ },
+ "UA-I6213": {
+  "collection": "Basics",
+  "color": "I6213 Mahogany Basics",
+  "family": "Mahogany",
+  "profile": "Cap",
+  "series": "Basics",
+  "style": "Traditional"
+ },
+ "UA-I6405": {
+  "collection": "Basics",
+  "color": "I6405 Espresso Basics",
+  "family": "Espresso",
+  "profile": "Large Cap",
+  "series": "Basics",
+  "style": "Traditional"
+ },
+ "UA-I6410": {
+  "collection": "Basics",
+  "color": "I6410 Black Basics",
+  "family": "Black",
+  "profile": "Large Cap",
+  "series": "Basics",
+  "style": "Traditional"
+ }
+}

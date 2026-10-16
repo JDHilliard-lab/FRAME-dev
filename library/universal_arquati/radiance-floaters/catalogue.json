@@ -1,0 +1,18 @@
+{
+ "UA-EC1650": {
+  "collection": "Radiance",
+  "color": "EC1650 Radiance Black",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC1651": {
+  "collection": "Radiance",
+  "color": "EC1651 Radiance White",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Radiance",
+  "style": "Modern"
+ }
+}

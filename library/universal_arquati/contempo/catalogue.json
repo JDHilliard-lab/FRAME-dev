@@ -1,0 +1,26 @@
+{
+ "UA-N03": {
+  "collection": "Contempo",
+  "color": "N03 Contempo Gold",
+  "family": "Gold",
+  "profile": "Swan",
+  "series": "Contempo",
+  "style": "Traditional"
+ },
+ "UA-V1270": {
+  "collection": "Contempo",
+  "color": "V1270 Contempo Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Contempo",
+  "style": "Transitional"
+ },
+ "UA-V1280": {
+  "collection": "Contempo",
+  "color": "V1280 Contempo Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Contempo",
+  "style": "Transitional"
+ }
+}

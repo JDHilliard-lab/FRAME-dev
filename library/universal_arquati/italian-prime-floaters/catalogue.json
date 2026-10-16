@@ -1,0 +1,42 @@
+{
+ "UA-G3001": {
+  "collection": "Italian Prime",
+  "color": "G3001 Italian Prime Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Italian Prime",
+  "style": "Traditional"
+ },
+ "UA-G3002": {
+  "collection": "Italian Prime",
+  "color": "G3002 Italian Prime Natural Floater",
+  "family": "Natural",
+  "profile": "Floater",
+  "series": "Italian Prime",
+  "style": "Traditional"
+ },
+ "UA-G3010": {
+  "collection": "Italian Prime",
+  "color": "G3010 Italian Prime Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Italian Prime",
+  "style": "Traditional"
+ },
+ "UA-G3011": {
+  "collection": "Italian Prime",
+  "color": "G3011 Italian Prime Light Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Italian Prime",
+  "style": "Traditional"
+ },
+ "UA-G3211": {
+  "collection": "Italian Prime",
+  "color": "G3211 Italian Prime White Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Italian Prime",
+  "style": "Traditional"
+ }
+}

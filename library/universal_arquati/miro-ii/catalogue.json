@@ -1,0 +1,50 @@
+{
+ "UA-P407": {
+  "collection": "Miro II",
+  "color": "P407 Miro II Gold",
+  "family": "Gold",
+  "profile": "Flat",
+  "series": "Miro II",
+  "style": "Modern"
+ },
+ "UA-P408": {
+  "collection": "Miro II",
+  "color": "P408 Miro II Silver",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Miro II",
+  "style": "Modern"
+ },
+ "UA-P410": {
+  "collection": "Miro II",
+  "color": "P410 Miro II Pewter",
+  "family": "Pewter",
+  "profile": "Flat",
+  "series": "Miro II",
+  "style": "Modern"
+ },
+ "UA-P418": {
+  "collection": "Miro II",
+  "color": "P418 Miro II Silver",
+  "family": "Silver",
+  "profile": "Flat",
+  "series": "Miro II",
+  "style": "Modern"
+ },
+ "UA-P419": {
+  "collection": "Miro II",
+  "color": "P419 Miro II Bronze",
+  "family": "Bronze",
+  "profile": "Flat",
+  "series": "Miro II",
+  "style": "Modern"
+ },
+ "UA-P420": {
+  "collection": "Miro II",
+  "color": "P420 Miro II Pewter",
+  "family": "Pewter",
+  "profile": "Flat",
+  "series": "Miro II",
+  "style": "Modern"
+ }
+}

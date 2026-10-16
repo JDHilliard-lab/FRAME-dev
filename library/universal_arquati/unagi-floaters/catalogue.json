@@ -1,0 +1,34 @@
+{
+ "UA-643-2008": {
+  "collection": "Unagi",
+  "color": "643-2008 Unagi Pewter Floater",
+  "family": "Pewter",
+  "profile": "Floater",
+  "series": "Unagi",
+  "style": "Transitional"
+ },
+ "UA-643-2009": {
+  "collection": "Unagi",
+  "color": "643-2009 Unagi Bronze Floater",
+  "family": "Bronze",
+  "profile": "Floater",
+  "series": "Unagi",
+  "style": "Transitional"
+ },
+ "UA-643-2010": {
+  "collection": "Unagi",
+  "color": "643-2010 Unagi Black Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Unagi",
+  "style": "Transitional"
+ },
+ "UA-643-2011": {
+  "collection": "Unagi",
+  "color": "643-2011 Unagi White Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Unagi",
+  "style": "Transitional"
+ }
+}

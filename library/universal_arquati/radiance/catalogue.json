@@ -1,0 +1,66 @@
+{
+ "UA-EC2350": {
+  "collection": "Radiance",
+  "color": "EC2350 Radiance Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2351": {
+  "collection": "Radiance",
+  "color": "EC2351 Radiance White",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2650": {
+  "collection": "Radiance",
+  "color": "EC2650 Radiance Black",
+  "family": "Black",
+  "profile": "Stem",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2651": {
+  "collection": "Radiance",
+  "color": "EC2651 Radiance White",
+  "family": "White",
+  "profile": "Stem",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2750": {
+  "collection": "Radiance",
+  "color": "EC2750 Radiance Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2751": {
+  "collection": "Radiance",
+  "color": "EC2751 Radiance White",
+  "family": "White",
+  "profile": "Flat",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2850": {
+  "collection": "Radiance",
+  "color": "EC2850 Radiance Black",
+  "family": "Black",
+  "profile": "Stem",
+  "series": "Radiance",
+  "style": "Modern"
+ },
+ "UA-EC2851": {
+  "collection": "Radiance",
+  "color": "EC2851 Radiance White",
+  "family": "White",
+  "profile": "Stem",
+  "series": "Radiance",
+  "style": "Modern"
+ }
+}

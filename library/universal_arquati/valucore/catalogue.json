@@ -1,0 +1,106 @@
+{
+ "UA-EC1010": {
+  "collection": "Valucore",
+  "color": "EC1010 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Valucore",
+  "style": "Traditional"
+ },
+ "UA-EC1110": {
+  "collection": "Valucore",
+  "color": "EC1110 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Cap",
+  "series": "Valucore",
+  "style": "Traditional"
+ },
+ "UA-EC1210": {
+  "collection": "Valucore",
+  "color": "EC1210 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Stem",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC1211": {
+  "collection": "Valucore",
+  "color": "EC1211 Valucore Matte White",
+  "family": "Matte White",
+  "profile": "Stem",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC1710": {
+  "collection": "Valucore",
+  "color": "EC1710 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC2100": {
+  "collection": "Valucore",
+  "color": "EC2100 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC4100": {
+  "collection": "Valucore",
+  "color": "EC4100 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Transitional"
+ },
+ "UA-EC577": {
+  "collection": "Valucore",
+  "color": "EC577 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC728": {
+  "collection": "Valucore",
+  "color": "EC728 Valucore Black",
+  "family": "Black",
+  "profile": "Swan",
+  "series": "Valucore",
+  "style": "Traditional"
+ },
+ "UA-EC742": {
+  "collection": "Valucore",
+  "color": "EC742 Miscellaneous Matte Black",
+  "family": "Black",
+  "profile": "",
+  "series": "Valucore",
+  "style": "Traditional"
+ },
+ "UA-EC800": {
+  "collection": "Valucore",
+  "color": "EC800 Valucore Matte Black",
+  "family": "Black",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC946": {
+  "collection": "Valucore",
+  "color": "EC946 Valucore Matte White",
+  "family": "Matte White",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Modern"
+ },
+ "UA-EC948": {
+  "collection": "Valucore",
+  "color": "EC948 Valucore Matte White",
+  "family": "Matte White",
+  "profile": "Flat",
+  "series": "Valucore",
+  "style": "Traditional"
+ }
+}

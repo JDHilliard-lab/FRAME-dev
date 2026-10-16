@@ -1,0 +1,26 @@
+{
+ "UA-G1407": {
+  "collection": "Danica",
+  "color": "G1407 Danica Natural Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G1507": {
+  "collection": "Danica",
+  "color": "G1507 Danica White Gold",
+  "family": "Gold",
+  "profile": "Cap",
+  "series": "Danica",
+  "style": "Transitional"
+ },
+ "UA-G1508": {
+  "collection": "Danica",
+  "color": "G1508 Danica White Silver",
+  "family": "Silver",
+  "profile": "Cap",
+  "series": "Danica",
+  "style": "Transitional"
+ }
+}

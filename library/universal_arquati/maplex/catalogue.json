@@ -1,0 +1,26 @@
+{
+ "UA-M2001": {
+  "collection": "Maplex",
+  "color": "M2001 Maplex Maple",
+  "family": "Maple",
+  "profile": "Stem",
+  "series": "Maplex",
+  "style": "Traditional"
+ },
+ "UA-M2002": {
+  "collection": "Maplex",
+  "color": "M2002 Maplex Maple Shadow Box",
+  "family": "Maple",
+  "profile": "Shadow Box",
+  "series": "Maplex",
+  "style": "Traditional"
+ },
+ "UA-M2005": {
+  "collection": "Maplex",
+  "color": "M2005 Maplex Maple",
+  "family": "Maple",
+  "profile": "Block",
+  "series": "Maplex",
+  "style": "Traditional"
+ }
+}

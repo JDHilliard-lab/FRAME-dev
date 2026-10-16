@@ -1,0 +1,82 @@
+{
+ "UA-P4001": {
+  "collection": "Rustique",
+  "color": "P4001 Rustique Dark Grey Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4002": {
+  "collection": "Rustique",
+  "color": "P4002 Rustique Grey Brown Floater",
+  "family": "Brown",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4003": {
+  "collection": "Rustique",
+  "color": "P4003 Rustique Walnut Floater",
+  "family": "Walnut",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4004": {
+  "collection": "Rustique",
+  "color": "P4004 Rustique Tan Floater",
+  "family": "Brown",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4005": {
+  "collection": "Rustique",
+  "color": "P4005 Rustique White Floater",
+  "family": "White",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4011": {
+  "collection": "Rustique",
+  "color": "P4011 Rustique Black w/ Silver Floater",
+  "family": "Black",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4012": {
+  "collection": "Rustique",
+  "color": "P4012 Rustique Grey w/ Silver Floater",
+  "family": "Grey",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4013": {
+  "collection": "Rustique",
+  "color": "P4013 Rustique Tan w/ Gold Floater",
+  "family": "Brown",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4014": {
+  "collection": "Rustique",
+  "color": "P4014 Rustique Tan w/ Silver Floater",
+  "family": "Brown",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ },
+ "UA-P4015": {
+  "collection": "Rustique",
+  "color": "P4015 Rustique White w/ Silver Floater",
+  "family": "Silver",
+  "profile": "Floater",
+  "series": "Rustique",
+  "style": "Traditional"
+ }
+}

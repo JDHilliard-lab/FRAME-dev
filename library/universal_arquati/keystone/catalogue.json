@@ -1,0 +1,66 @@
+{
+ "UA-N4517": {
+  "collection": "Keystone",
+  "color": "N4517 Keystone Muted Gold",
+  "family": "Gold",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4519": {
+  "collection": "Keystone",
+  "color": "N4519 Keystone Muted Grey",
+  "family": "Grey",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4520": {
+  "collection": "Keystone",
+  "color": "N4520 Keystone Matte Black",
+  "family": "Black",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4521": {
+  "collection": "Keystone",
+  "color": "N4521 Keystone Matte White",
+  "family": "Matte White",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4522": {
+  "collection": "Keystone",
+  "color": "N4522 Keystone Gold",
+  "family": "Gold",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4523": {
+  "collection": "Keystone",
+  "color": "N4523 Keystone Silver",
+  "family": "Silver",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4526": {
+  "collection": "Keystone",
+  "color": "N4526 Keystone Scratch White with Silver",
+  "family": "Silver",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ },
+ "UA-N4528": {
+  "collection": "Keystone",
+  "color": "N4528 Keystone Scratch White with Gold",
+  "family": "Gold",
+  "profile": "Stem",
+  "series": "Keystone",
+  "style": "Modern"
+ }
+}

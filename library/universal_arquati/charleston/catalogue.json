@@ -1,0 +1,50 @@
+{
+ "UA-BR4016": {
+  "collection": "Charleston",
+  "color": "BR4016 Charleston Walnut",
+  "family": "Walnut",
+  "profile": "",
+  "series": "Charleston",
+  "style": "Traditional"
+ },
+ "UA-BR4020": {
+  "collection": "Charleston",
+  "color": "BR4020 Charleston Matte Black",
+  "family": "Black",
+  "profile": "",
+  "series": "Charleston",
+  "style": "Traditional"
+ },
+ "UA-BR4113": {
+  "collection": "Charleston",
+  "color": "BR4113 Charleston Mahogany",
+  "family": "Mahogany",
+  "profile": "Reverse Slope",
+  "series": "Charleston",
+  "style": "Traditional"
+ },
+ "UA-BR4116": {
+  "collection": "Charleston",
+  "color": "BR4116 Charleston Walnut",
+  "family": "Walnut",
+  "profile": "Reverse Slope",
+  "series": "Charleston",
+  "style": "Traditional"
+ },
+ "UA-BR4120": {
+  "collection": "Charleston",
+  "color": "BR4120 Charleston Matte Black",
+  "family": "Black",
+  "profile": "Reverse Slope",
+  "series": "Charleston",
+  "style": "Traditional"
+ },
+ "UA-BR4216": {
+  "collection": "Charleston",
+  "color": "BR4216 Charleston Walnut",
+  "family": "Walnut",
+  "profile": "Slope",
+  "series": "Charleston",
+  "style": "Traditional"
+ }
+}
