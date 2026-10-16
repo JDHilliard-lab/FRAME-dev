@@ -33,7 +33,9 @@ const REMOTE = 'stable';
 const REMOTE_URL = 'https://github.com/JDHilliard-lab/FRAME.git';
 const doPush = process.argv.indexOf('--push') >= 0;
 
-const git = (args) => execFileSync('git', args, { encoding: 'utf8' }).trim();
+// maxBuffer: the default 1 MB is not enough once a release carries the frame library (the
+// diff --stat summary of thousands of images ran past it and the dry run crashed).
+const git = (args) => execFileSync('git', args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 }).trim();
 const say = (s) => process.stdout.write(s + '\n');
 const die = (s) => { process.stdout.write('\nSTOPPED: ' + s + '\n'); process.exit(1); };
 
@@ -51,7 +53,7 @@ if (head !== git(['rev-parse', 'origin/main'])) die('HEAD is not what origin/mai
 //    designers open, and "it was green when I wrote it" is not the same as green now.
 say('Running the suite...');
 let out = '';
-try { out = execFileSync(process.execPath, ['tests/run-all.js'], { encoding: 'utf8' }); }
+try { out = execFileSync(process.execPath, ['tests/run-all.js'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 }); }
 catch (e) { out = String((e.stdout || '') + (e.stderr || '')); }
 const tail = out.split('\n').filter(Boolean).slice(-2).join(' | ');
 if (out.indexOf('ALL GREEN') < 0) die('the suite is not green.\n' + tail);
