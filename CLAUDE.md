@@ -1392,6 +1392,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   sets `selectedGroupDim` (frames deselected) and Delete removes it; the frame-delete handler
   returns while a group dim is selected, or Delete takes the frames. The × carries
   `data-group-dim` so the wall's deselect-on-press does not redraw it out from under the click.
+- **A GROUP DIM IS THE OUTER STRING (19.16).** `renderGroupDims` moves its width line above
+  and its height line left of every spacing dim beside the box (`_groupDimObstacles`, DOM rects
+  from `#dim-layer` only; `_groupDimClearTop` / `_groupDimClearLeft`), then adds the drag.
+  Crossing lines (`ax` = the other axis) are skipped, and edge gaps are never read, or a ceiling
+  gap throws the line off the wall. Needs spacing drawn first (`drawElevAll` order).
 - `_autoLiftDimLabel(dim, type)` lifts a dim number out of its line when the gap can't
   hold it. It **measures**, so run it after `appendChild` (detached = 0, no-op).
   `data-lbl-off` carries the along-line nudge; the side comes from `data-line-off`, the
