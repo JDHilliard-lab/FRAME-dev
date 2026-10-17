@@ -1886,6 +1886,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   points: `_ePt = elevScale * unitFactor('in', elevUnit) / 72` (outer 35/18/0.55, frame 35/14/0.75
   inset, mat 20/8/0.5625, art 8/3/0.3125; insets carry `dIS`'s 1.25). With artwork the picture
   covers the opening's inset, so `.art-shade` casts it again over the `<img>`.
+- **AN EMPTY OPENING ON A DECK PAGE IS `ELEV_EMPTY_OPENING_FILL` (19.17).** `renderFrameToCanvas`
+  leaves the opening transparent; on deck pages the drop shadow sits UNDER the frame and showed
+  through as black. `opts.emptyFill` fills it (before the opening's inner shadow; never under
+  artwork or wireframe). Passed by `renderElevationToCanvas` and by `exportElevSVG` ONLY when
+  `forCapture` (`_capK`); downloads stay transparent.
 - **ONE DECK-PAGE DROP SHADOW: `_frameShadowCanvas(d, wIn, hIn)`** (gated by `frameFx.pageShadow`,
   "Also on deck pages"). `_pdfFrameShadow` (spec pages) and `exportElevSVG` `forCapture` (breaker
   and install pages) both draw it; the capture splices all shadows in UNDER all frames
