@@ -1907,6 +1907,17 @@ run but passes alone is usually load timing: rerun before chasing it.
   sat 10px outside, so small shadows (Onto artwork, Mat onto mat) never arrived. With NO
   mat the frame recipe casts onto the art (`_openShadow`, `.art-visual.fx-frame-cast`).
 
+- **TOUCH IS ONE LAYER OVER THE MOUSE HANDLERS (19.18, `_touchInstall`, `_touchArms`).** iPad
+  landscape is the touch target (iPhone not yet). A finger sends a synthetic mousedown; if its
+  handler ARMED a drag (registered mousemove/mouseup, or assigned `document/window.onmousemove`)
+  the moves are forwarded and scrolling stops, else the touch scrolls/taps natively. So a NEW
+  drag written the house way (mousedown registers document listeners) works by touch for free;
+  one that reads moves any other way will not. Inside a real scroller an armed drag waits
+  `TOUCH_HOLD_MS`; `TOUCH_SURFACES` drag at once. The layer also listens on the START element,
+  because `drawElevAll` rebuilds it mid-drag and a detached node's touches never reach window.
+  iOS compat mousedown/up/move are swallowed for `TOUCH_COMPAT_MS`; the trusted click is kept.
+  A control shown only on `:hover` needs a line in style.css's `@media (hover: none)` block.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

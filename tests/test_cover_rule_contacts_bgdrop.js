@@ -118,6 +118,9 @@ const path = require('path');
       _boundImageDataUrl = (u, max, q, cb) => cb('data:image/jpeg;base64,BG', 800, 500);
       _dsRenderTools = () => {}; _dsRenderCenter = () => {}; _dsPriorityRerender = () => {};
       const settle = () => new Promise(r => setTimeout(r, 30));
+      // The drop goes through a FileReader, which under the parallel suite can take far
+      // longer than 30ms: wait for the result (bounded) rather than guess a delay.
+      const settleUntil = async (fn) => { for (let i = 0; i < 100 && !fn(); i++) await new Promise(r => setTimeout(r, 20)); };
       const c = document.getElementById('dsCenter');
       _dsWireBgDrop(c);
 
@@ -125,7 +128,7 @@ const path = require('path');
         editorialContent = _editorialDefaults();
         _dsPages = [{ kind: 'fixed', fixed: 'cover' }]; _dsIndex = 0;
         dropOn(c, img());
-        await settle();
+        await settleUntil(() => (_pageThemes()['fixed:cover'] || {}).image);
         const th = _pageThemes()['fixed:cover'] || {};
         if (th.image !== 'data:image/jpeg;base64,BG') throw new Error('THE REQUEST: no background after the drop');
         if (th.bgMode !== 'image') throw new Error('bgMode is ' + th.bgMode);
@@ -137,7 +140,7 @@ const path = require('path');
         editorialContent.layoutPages.push(pg);
         _dsPages = [{ kind: 'layout', page: pg }]; _dsIndex = 0;
         dropOn(c, img());
-        await settle();
+        await settleUntil(() => (_pageThemes()[_deckPageKey(_dsPages[0])] || {}).image);
         if ((_pageThemes()[_deckPageKey(_dsPages[0])] || {}).image !== 'data:image/jpeg;base64,BG') throw new Error('no background on a layout page');
       });
 

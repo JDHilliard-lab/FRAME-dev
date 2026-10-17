@@ -2925,3 +2925,19 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .contacts-dir-item:not(:disabled):hover { background: var(--bg-main); }
 
 #dsCenter.ds-bg-drop { outline: 2px dashed var(--selected); outline-offset: -6px; }
+
+/* TOUCH (19.18). The finger-to-mouse layer is in app.js (_touchInstall); this is the
+ * CSS half. (1) No double-tap zoom, so a double tap reaches the app as a dblclick.
+ * (2) A long press on a drawing surface must not select text or raise the iOS
+ * callout, or every held drag starts a selection. (3) Controls that only appear on
+ * :hover never appear without a mouse, so on a hover-less device they show. */
+html { touch-action: manipulation; }
+html.touch #scrollArea, html.touch #dsCenter, html.touch #fpPlanArea, html.touch #dsRail,
+html.touch #nav-tabs-container, html.touch .draggable {
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+@media (hover: none) {
+    .fb-more, .art-tools { opacity: 1; }
+    .ds-insstrip > button { opacity: 1; }
+    .tab-close { opacity: 0.8; }
+}
