@@ -30,7 +30,10 @@ window.eval(APP + NL + [
   '_autosaveToldUser = true;',
   'window.__fx = {',
   '  get pages() { return editorialContent.layoutPages; },',
-  '  fresh: function () { editorialContent = _editorialDefaults(); },',
+  // 19.14: the Moodboard left the starter deck. A deck made before then still holds it
+  // on its old anchor, so 'fresh' here is such a deck.
+  '  brandNew: function () { editorialContent = _editorialDefaults(); },',
+  "  fresh: function () { editorialContent = _editorialDefaults(); editorialContent.layoutPages.push({ id: 'pg5ef7lopj50a', type: 'custom', title: 'Moodboard', afterKey: 'fixed:slogan', place: 'afterStrategy', elements: [] }); },",
   '};',
 ].join(NL));
 console.error = quiet; console.log = qlog;
@@ -44,7 +47,12 @@ window._dsRefresh = () => {};
 const MOOD = 'pg5ef7lopj50a';
 const mood = () => fx.pages.find(p => p && p.id === MOOD);
 
-check('the starter deck still anchors its Moodboard after the slogan (else this test proves nothing)', () => {
+check('19.14: a brand-new project has no layout pages at all', () => {
+  fx.brandNew();
+  if (fx.pages.length) throw new Error('the starter deck still inserts ' + fx.pages.length + ' layout page(s)');
+});
+
+check('a pre-19.14 deck holds its Moodboard after the slogan (else this test proves nothing)', () => {
   fx.fresh();
   const m = mood();
   if (!m) throw new Error('no starter Moodboard page');

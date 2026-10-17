@@ -236,7 +236,12 @@ check('the page background import goes through the bound', async () => {
     // worth pinning is that the raw result is no longer written straight in.
     const i = APP.indexOf('const file = document.createElement(\'input\'); file.type = \'file\'; file.accept = \'image/png,image/jpeg,image/webp\'');
     if (i < 0) throw new Error('could not find the page background file input');
-    const body = APP.slice(i, APP.indexOf('const iOn = (mode ===', i));
+    // 19.14: the file input and the Deck Studio page drop share one setter,
+    // _pageBgImageFromFile; the input must hand off to it, and IT must bound.
+    const input = APP.slice(i, APP.indexOf('const iOn = (mode ===', i));
+    if (input.indexOf('_pageBgImageFromFile(') < 0) throw new Error('the file input no longer goes through the one background setter');
+    const s0 = APP.indexOf('function _pageBgImageFromFile(');
+    const body = APP.slice(s0, APP.indexOf('function _dsBgDropTarget(', s0));
     if (body.indexOf('_boundImageDataUrl(') < 0) throw new Error('the page background import does not bound its image, which IS the bug');
     if (body.indexOf('th.image = rd.result') >= 0) throw new Error('it still writes the raw file straight into the project');
     if (body.indexOf('_pageBgMaxEdge()') < 0) throw new Error('it bounds against something other than the derived page ceiling');

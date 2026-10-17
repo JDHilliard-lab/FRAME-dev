@@ -1174,9 +1174,20 @@ run but passes alone is usually load timing: rerun before chasing it.
   (one definition, also used for cold boot). Content exported to
   `.claude/references/Concept.json`. It is a **function, not a constant** (`Object.assign`
   shares references). Every key is top-level so a loaded project overwrites it wholesale.
-  The moodboard page id is **fixed** (`pg5ef7lopj50a`): its twelve placeholder blocks are
-  keyed `layout:<id>`. `timelineStemPos` is keyed by stage **index** and only valid with the
-  default timeline; pin checks to the stage LABEL.
+  **No starter layout page since 19.14** (the Moodboard was removed on request); older decks
+  still hold `pg5ef7lopj50a` after `fixed:slogan`, which `_starterLayoutHome` keeps as its home
+  so Reset page order leaves it alone. The cover carries a 1.5pt `#000000` rule element
+  between client name and heading. `timelineStemPos` is keyed by stage **index** and only
+  valid with the default timeline; pin checks to the stage LABEL.
+- **LINES ON A DARK PAGE FLIP ON SCREEN AS THEY DO IN THE PDF (19.14).** The PDF flips dark
+  draw colours through `_themeRemapInstall`; the layout editor (`_mbLineInk`) and the rail
+  thumbnail (`_mbThumbInner`) pass line colours through `_dsDisplayInk`, like their text.
+- **A FILE DROPPED ON A DECK STUDIO PAGE IS ITS BACKGROUND (19.14, `_dsWireBgDrop` on
+  `#dsCenter`, `_pageBgImageFromFile`, the one setter shared with Page appearance).** It only
+  takes drops nothing inside claimed (`e.defaultPrevented`: image boxes, shapes); spec pages
+  (artwork drop) and floorplans are excluded in `_dsBgDropTarget`.
+- **Thank You: `contactShiftY` (pt, moves the people, not the studio block) and
+  `contactNameSize` (`_contactNameSize`, default 12; row height grows with it).**
 - The Include-pages list in the Project tab is **checkboxes only**; fixed pages are edited in
   Deck Studio.
 - `_dsThumbCacheKey()` ↔ `data-thumb-key` identifies rail cells.

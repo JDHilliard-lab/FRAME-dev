@@ -370,7 +370,7 @@ function waitLoaded() {
     const failed = [];
     for (const r of results) {
         try { await r.fn(); console.log('OK:   ' + r.label); pass++; }
-        catch (e) { console.log('FAIL: ' + r.label + ' -> ' + e.message); failed.push(r.label); }
+        catch (e) { console.log('FAIL: ' + r.label + ' -> ' + e.message + (process.env.DBG ? e.stack : '')); failed.push(r.label); }
     }
     console.error = quiet;
     console.log('');

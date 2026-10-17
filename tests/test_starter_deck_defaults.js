@@ -86,12 +86,16 @@ const path = require('path');
     // ── 2. The starter deck ──
     __check('EXACT REQUEST: a new project opens with the built-out pages, not five blank ones', () => {
       const d = _editorialDefaults();
-      [['coverPage', 3], ['understandingPage', 4], ['narrativePage', 4], ['strategyPage', 5], ['sloganPage', 1]].forEach(([k, n]) => {
+      [['coverPage', 4], ['understandingPage', 4], ['narrativePage', 4], ['strategyPage', 5], ['sloganPage', 1]].forEach(([k, n]) => {
         const els = (d[k] || {}).elements;
         if (!Array.isArray(els) || !els.length) throw new Error('THE REQUEST: ' + k + ' is still empty in a new project');
         if (els.length !== n) throw new Error(k + ' has ' + els.length + ' elements, expected ' + n + ' — the Concept.json layout changed shape');
       });
-      if (!Array.isArray(d.layoutPages) || d.layoutPages.length !== 1) throw new Error('the moodboard layout page is missing from the default');
+      // 19.14: the starter Moodboard was a leftover and is gone on request.
+      if (!Array.isArray(d.layoutPages) || d.layoutPages.length !== 0) throw new Error('the starter deck still inserts a layout page (the Moodboard was removed in 19.14)');
+      const rule = d.coverPage.elements.find(e => e.type === 'arrow');
+      if (!rule || rule.weight !== 1.5 || rule.tip !== 'none') throw new Error('the cover has no 1.5pt rule between client name and heading');
+      if (rule.color !== '#000000') throw new Error('the cover rule must be heading black so a dark page flips it to white, got ' + rule.color);
     });
 
     __check('a cold boot IS a new project, so the live editorialContent starts from the same defaults', () => {
@@ -117,11 +121,8 @@ const path = require('path');
         if (!Array.isArray(a[k]) || !a[k].length) throw new Error('no placeholder art on ' + k);
       });
       if (a['fixed:strategy'].length !== 3) throw new Error('the strategy page wants one block per tier; got ' + a['fixed:strategy'].length);
-      // The layout page's annotations are keyed by its ID. A generated id would
-      // orphan all twelve blocks with no error — the page would just come up bare.
-      const id = d.layoutPages[0].id;
-      const key = 'layout:' + id;
-      if (!Array.isArray(a[key]) || a[key].length !== 12) throw new Error('the moodboard placeholders are not keyed to the page id (' + id + '), so they render nowhere');
+      // The Moodboard's twelve blocks went with it (19.14); none may be left orphaned.
+      if (Object.keys(a).some(k => k.indexOf('layout:') === 0)) throw new Error('layout-page placeholder blocks are still in the starter deck with no page to land on');
     });
 
     __check('two new projects do not share one element array', () => {
@@ -148,11 +149,8 @@ const path = require('path');
 
     __check('_mbMigratePages leaves the starter pages alone', () => {
       editorialContent = _editorialDefaults();
-      const before = editorialContent.layoutPages.length;
-      const id = editorialContent.layoutPages[0].id;
       _mbMigratePages();
-      if (editorialContent.layoutPages.length !== before) throw new Error('the migration seeded a second layout page on top of the starter one');
-      if (editorialContent.layoutPages[0].id !== id) throw new Error('the migration reassigned the page id, orphaning its 12 placeholder blocks');
+      if (editorialContent.layoutPages.length !== 0) throw new Error('the migration seeded a layout page into a starter deck that has none');
       if (!editorialContent.coverPage.elements.length) throw new Error('the migration reset the starter cover to empty');
     });
 

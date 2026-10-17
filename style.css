@@ -2923,3 +2923,5 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .art-tools:focus-within { opacity: 1; }
 
 .contacts-dir-item:not(:disabled):hover { background: var(--bg-main); }
+
+#dsCenter.ds-bg-drop { outline: 2px dashed var(--selected); outline-offset: -6px; }
