@@ -56,7 +56,7 @@ const path = require('path');
 
     __check('the gap, floor and ceiling callers all ask for it', () => {
       const S = window.__appSrc;
-      ['_spacingLabel(gapY), vId, vOff, { rotateLabel', '_spacingLabel(ceilingDist), id, o, { rotateLabel', '_spacingLabel(floorDist), id, o, { rotateLabel'].forEach(k => {
+      ['vLbl, vId, vOff, { rotateLabel', '_spacingLabel(ceilingDist), id, o, { rotateLabel', '_spacingLabel(floorDist), id, o, { rotateLabel'].forEach(k => {
         if (S.indexOf(k) < 0) throw new Error('a vertical spacing caller does not request rotation: ' + k.split(',')[0]);
       });
     });

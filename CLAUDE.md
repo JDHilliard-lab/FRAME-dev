@@ -1379,6 +1379,19 @@ run but passes alone is usually load timing: rerun before chasing it.
   follows the sign of `data-line-off`, which flipped the number across onto a neighbour mid-drag.
   Pins: `elev.dimLiftSide[id]` (spacing dims; NOT in `dimOffsets`, which `snapDimOffset` aligns
   against) and `line.lblSide` (measure lines); `buildDimControls` writes `data-lift-pin`.
+- **AN UNTOUCHED SPACING DIM IS PLACED BY THE DRAWING (19.15, `_spacingAutoPlace`).** No stored
+  offset = auto: a number that doesn't fit its gap moves the line to the least-covering spot
+  (frames + numbers already placed are obstacles; the pair's own frames weigh 1, others 3; a
+  number hanging off its column while the line is in it pays for the overhang). Derived every
+  draw at the drawn scale, NEVER written to `dimOffsets`; `_dimAutoOff` (inches, current wall)
+  feeds `getDimOffset` so a drag starts from the drawn line. Number size via `_dimLabelPx`
+  (0 in jsdom = nothing moves). Side order in `_autoLiftDimLabel`: `data-lift-force` (every
+  leader runs one way: number goes the other) > pin > `data-lift-auto` > offset sign.
+- **ONE GROUP DIM PER SET OF FRAMES (19.15, `_groupDimKey` = sorted letters).** A repeat
+  selects the existing one; `getElevGroupDims` drops saved duplicates. Clicking a group number
+  sets `selectedGroupDim` (frames deselected) and Delete removes it; the frame-delete handler
+  returns while a group dim is selected, or Delete takes the frames. The × carries
+  `data-group-dim` so the wall's deselect-on-press does not redraw it out from under the click.
 - `_autoLiftDimLabel(dim, type)` lifts a dim number out of its line when the gap can't
   hold it. It **measures**, so run it after `appendChild` (detached = 0, no-op).
   `data-lbl-off` carries the along-line nudge; the side comes from `data-line-off`, the
