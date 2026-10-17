@@ -18,6 +18,9 @@ const check = (label, fn) => { try { fn(); results.push({ label, ok: true }); } 
 const dom = new JSDOM(fs.readFileSync(path.join(root, 'index.html'), 'utf8'),
   { url: 'https://example.com/', pretendToBeVisual: true, runScripts: 'outside-only' });
 const { window } = dom;
+// 19.19: the column stands aside on a window too narrow for it (_dashColumnFits), and
+// jsdom's default window is 1024 wide. These checks are about a desktop, so say so.
+Object.defineProperty(window, 'innerWidth', { value: 1440, configurable: true });
 window.HTMLCanvasElement.prototype.getContext = () => ({});
 window.fetch = () => Promise.reject(new Error('no network in test'));
 global.window = window; global.document = window.document; global.navigator = window.navigator;

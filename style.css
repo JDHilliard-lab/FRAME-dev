@@ -2941,3 +2941,25 @@ html.touch #nav-tabs-container, html.touch .draggable {
     .ds-insstrip > button { opacity: 1; }
     .tab-close { opacity: 0.8; }
 }
+
+/* THE WALL LIST FOLDS AWAY (19.19, toggleElevRail). A strip with the chevron; the
+ * chevron points right (fold) while open and turns to point left (unfold) when closed. */
+.elev-rail-toggle { align-self: flex-start; display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; margin: 4px 0 0 2px; padding: 0; background: transparent; border: none;
+    border-radius: var(--r-4); color: var(--text-muted); cursor: pointer; flex: none; }
+.elev-rail-toggle:hover { background: var(--bg-subpanel); color: var(--text-strong); }
+.elev-wall-rail.collapsed { width: 32px; }
+/* Named, not :not(): #nav-tabs-container's own display:flex is an ID rule and outranks a class-only one. */
+.elev-wall-rail.collapsed > #nav-tabs-container, .elev-wall-rail.collapsed > .nav-add-tab { display: none; }
+.elev-wall-rail.collapsed .elev-rail-toggle svg { transform: rotate(180deg); }
+
+/* THE TOUCH KEY BAR (19.19, _touchKeysBuild): only built on a touch screen. Bottom-right,
+ * clear of the toasts and next-step bar (bottom-centre); under every dialog. Finger-sized. */
+.touch-keys { position: fixed; right: 12px; bottom: 12px; z-index: 9000; display: flex; gap: 6px;
+    padding: 6px; background: var(--bg-panel); border: 1px solid var(--border-color);
+    border-radius: var(--r-8); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+.touch-key { min-width: 52px; height: 38px; padding: 0 10px; font-size: var(--fs-70); font-weight: 700;
+    color: var(--text-main); background: var(--bg-subpanel); border: 1px solid var(--border-color);
+    border-radius: var(--r-6); cursor: pointer; -webkit-user-select: none; user-select: none; }
+.touch-key.active { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
+.touch-key-del { color: var(--btn-danger); }

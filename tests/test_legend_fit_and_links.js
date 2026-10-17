@@ -159,7 +159,11 @@ const root = path.join(__dirname, '..');
         if (CSS.indexOf('#nav-tabs-container { flex: 0 1 auto;') < 0) throw new Error('the wall list still stretches to fill the rail');
         const rail = document.getElementById('elev-wall-rail');
         const kids = Array.from(rail.children);
-        if (kids[0].id !== 'nav-tabs-container' || !kids[1].classList.contains('nav-add-tab')) throw new Error('button is not straight after the list');
+        // 19.19: the fold button (#elevRailToggle) may sit above the list; the button must
+        // still come straight after the list.
+        const iL = kids.findIndex(k => k.id === 'nav-tabs-container');
+        if (iL < 0 || !kids[iL + 1] || !kids[iL + 1].classList.contains('nav-add-tab')) throw new Error('button is not straight after the list');
+        if (kids.slice(0, iL).some(k => k.id !== 'elevRailToggle')) throw new Error('something other than the fold button sits above the wall list');
       });
       return out;
     })();

@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.18">
+    <link rel="stylesheet" href="style.css?v=19.19">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -1003,6 +1003,8 @@
                  lookup is unchanged, but drops the .nav-tabs class, which
                  carried the old horizontal overflow rules. -->
             <div class="elev-wall-rail" id="elev-wall-rail">
+                <!-- 19.19: folds the rail to a strip so the wall gets the width (toggleElevRail). -->
+                <button class="elev-rail-toggle" id="elevRailToggle" type="button" onclick="toggleElevRail()" title="Hide the wall list" aria-expanded="true"><svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14"><path d="M9 6l6 6-6 6"/></svg></button>
                 <div id="nav-tabs-container"></div>
                 <button class="nav-add-tab" onclick="addNewElevationTab()">+ Add Wall</button>
             </div>
@@ -2200,9 +2202,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.18';</script>
-<script src="templates.js?v=19.18"></script>
-<script src="app.js?v=19.18"></script>
+<script>window.FRAME_HTML_VERSION = '19.19';</script>
+<script src="templates.js?v=19.19"></script>
+<script src="app.js?v=19.19"></script>
 
 </body>
 </html>

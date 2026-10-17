@@ -211,6 +211,107 @@ function inApp() {
       touch('touchstart', el, 0, 0); touch('touchend', el, 0, 0);
       if (EventTarget.prototype.addEventListener !== before) throw new Error('prototype left patched');
     });
+    // ── 19.19 ──
+    await ok('a latched modifier rides on every synthetic mouse event, and lets go when tapped off', () => {
+      const el = document.createElement('div'); host.appendChild(el);
+      const seen = [];
+      el.addEventListener('mousedown', (e) => {
+        seen.push([e.shiftKey, e.ctrlKey, e.metaKey, e.altKey].join());
+        const mv = (m) => seen.push('m' + [m.shiftKey, m.altKey].join());
+        const up = () => { document.removeEventListener('mousemove', mv); document.removeEventListener('mouseup', up); };
+        document.addEventListener('mousemove', mv); document.addEventListener('mouseup', up);
+      });
+      _touchKeyPress('shift'); _touchKeyPress('ctrl'); _touchKeyPress('alt');
+      touch('touchstart', el, 0, 0); touch('touchmove', el, 20, 0); touch('touchend', el, 20, 0);
+      _touchKeyPress('shift'); _touchKeyPress('ctrl'); _touchKeyPress('alt');
+      touch('touchstart', el, 0, 0); touch('touchend', el, 0, 0);
+      if (seen[0] !== 'true,true,true,true') throw new Error('mousedown carried ' + seen[0]);
+      if (seen[1] !== 'mtrue,true') throw new Error('mousemove carried ' + seen[1]);
+      if (seen[2] !== 'false,false,false,false') throw new Error('still latched after tapping off: ' + seen[2]);
+    });
+
+    await ok('the key bar: four keys, latches light, Delete sends the Delete key, its presses stay on the bar', () => {
+      _touchKeysBuild();
+      const bar = document.getElementById('touchKeys');
+      if (!bar || bar.querySelectorAll('.touch-key').length !== 4) throw new Error('bar not built with four keys');
+      const sh = bar.querySelector('[data-key="shift"]');
+      sh.click();
+      if (!sh.classList.contains('active') || sh.getAttribute('aria-pressed') !== 'true' || !_touchMods.shift) throw new Error('Shift did not latch visibly');
+      sh.click();
+      if (sh.classList.contains('active') || _touchMods.shift) throw new Error('Shift did not release');
+      let keys = [], downs = 0;
+      const kd = (e) => keys.push(e.key), md = () => downs++;
+      document.addEventListener('keydown', kd); document.addEventListener('mousedown', md);
+      bar.querySelector('[data-key="del"]').dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      bar.querySelector('[data-key="del"]').click();
+      document.removeEventListener('keydown', kd); document.removeEventListener('mousedown', md);
+      if (keys.join() !== 'Delete') throw new Error('Delete sent ' + JSON.stringify(keys));
+      if (downs) throw new Error('a press on the bar reached the page (it would clear the selection Delete is for)');
+    });
+
+    await ok('Delete leaves a focused text field alone', () => {
+      const inp = document.createElement('input'); host.appendChild(inp); inp.focus();
+      let n = 0; const kd = () => n++;
+      document.addEventListener('keydown', kd);
+      _touchKeyPress('del');
+      document.removeEventListener('keydown', kd);
+      inp.remove();
+      if (n) throw new Error('Delete fired while typing in a field');
+    });
+
+    await ok('a finger just off a small handle grabs the handle; a big resize box is never a magnet', () => {
+      const box = document.createElement('div'); host.appendChild(box);
+      const handle = document.createElement('div');
+      handle.style.cssText = 'position:absolute; width:8px; height:8px; cursor:nwse-resize;';
+      box.appendChild(handle);
+      const big = document.createElement('div'); big.style.cssText = 'cursor:ew-resize;'; host.appendChild(big);
+      handle.getBoundingClientRect = () => ({ left: 100, top: 100, right: 108, bottom: 108, width: 8, height: 8 });
+      big.getBoundingClientRect = () => ({ left: 0, top: 0, right: 300, bottom: 300, width: 300, height: 300 });
+      box.getBoundingClientRect = () => ({ left: 0, top: 0, right: 104, bottom: 104, width: 104, height: 104 });
+      const efp = document.elementFromPoint;
+      document.elementFromPoint = (x, y) => (x >= 100 && x <= 108 && y >= 100 && y <= 108) ? handle : box;
+      let got = '';
+      handle.addEventListener('mousedown', () => { got = 'handle'; });
+      box.addEventListener('mousedown', (e) => { if (!got) got = 'box'; });
+      try {
+        touch('touchstart', box, 118, 116); touch('touchend', box, 118, 116);   // 10px off the corner
+        if (got !== 'handle') throw new Error('near miss went to ' + got);
+        got = '';
+        touch('touchstart', box, 60, 60); touch('touchend', box, 60, 60);       // far away
+        if (got !== 'box') throw new Error('a far touch was pulled to ' + got);
+        // Covered by something else (a dialog): not a magnet.
+        document.elementFromPoint = () => box;
+        got = '';
+        touch('touchstart', box, 112, 112); touch('touchend', box, 112, 112);
+        if (got !== 'box') throw new Error('a hidden handle was grabbed');
+      } finally { document.elementFromPoint = efp; }
+    });
+
+    await ok('the dashboard preview column stands aside when it cannot fit, and the choice is kept', () => {
+      const iw = Object.getOwnPropertyDescriptor(window, 'innerWidth');
+      const setW = (w) => Object.defineProperty(window, 'innerWidth', { value: w, configurable: true });
+      try {
+        setW(1024);
+        applyDashViewMode(true);
+        if (document.getElementById('dashPreviewCol')) throw new Error('THE BUG: the column squeezes the table at 1024px');
+        if (!_dashWantMode2) throw new Error('the saved choice was dropped');
+        if (document.body.classList.contains('dash-view-2')) throw new Error('mode-2 class left on');
+        setW(1440);
+        applyDashViewMode(_dashWantMode2);
+        if (!document.getElementById('dashPreviewCol')) throw new Error('the column did not come back with room');
+      } finally { if (iw) Object.defineProperty(window, 'innerWidth', iw); else setW(1024); applyDashViewMode(false); }
+    });
+
+    await ok('the wall list folds by a CLASS (exports restore style.display) and is remembered', () => {
+      const rail = document.getElementById('elev-wall-rail');
+      const before = rail.classList.contains('collapsed');
+      toggleElevRail();
+      if (rail.classList.contains('collapsed') === before) throw new Error('did not fold');
+      if (rail.style.display) throw new Error('fold wrote an inline display');
+      if (localStorage.getItem('elevRailCollapsed') !== (before ? '0' : '1')) throw new Error('not remembered');
+      toggleElevRail();
+      if (rail.classList.contains('collapsed') !== before) throw new Error('did not unfold');
+    });
     host.remove();
     return out;
   })();

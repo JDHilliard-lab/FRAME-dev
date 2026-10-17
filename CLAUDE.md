@@ -1917,6 +1917,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   because `drawElevAll` rebuilds it mid-drag and a detached node's touches never reach window.
   iOS compat mousedown/up/move are swallowed for `TOUCH_COMPAT_MS`; the trusted click is kept.
   A control shown only on `:hover` needs a line in style.css's `@media (hover: none)` block.
+  **19.19:** `_touchMods` (Shift/Ctrl/Alt latched from the `#touchKeys` bar, touch screens only)
+  ride on every synthetic mouse event; the bar's Delete dispatches a real Delete keydown, and the
+  bar stops its own presses or they clear the selection. `_touchReach` retargets a touch within
+  `TOUCH_HANDLE_REACH` to a visible handle no bigger than `TOUCH_HANDLE_MAX` (`TOUCH_HANDLES`,
+  incl. any inline `-resize` cursor). The dashboard preview column yields below
+  `_dashColumnFits` without touching the saved choice (`_dashWantMode2`); the wall rail folds by
+  the `.collapsed` CLASS (`toggleElevRail`), never an inline display, which the exports own.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
