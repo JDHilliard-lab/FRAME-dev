@@ -2921,3 +2921,5 @@ button.cat-node:hover { border-color: var(--ui-active); }
 .art-hint { position: absolute; left: 0; right: 0; bottom: 0; padding: 5px 6px; font-size: var(--fs-60); font-weight: 600; color: #fff; background: rgba(0,0,0,0.5); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transition: opacity 0.12s; pointer-events: none; z-index: 2; }
 #dash-frame-visual:hover .art-tools, #dash-frame-visual:hover .art-hint, .art-tool-btn:focus-visible { opacity: 1; }
 .art-tools:focus-within { opacity: 1; }
+
+.contacts-dir-item:not(:disabled):hover { background: var(--bg-main); }

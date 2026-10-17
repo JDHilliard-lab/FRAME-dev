@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.12">
+    <link rel="stylesheet" href="style.css?v=19.13">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -1700,13 +1700,23 @@
         <div style="padding:14px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; justify-content:space-between;">
             <div>
                 <h3 style="margin:0; font-size:var(--fs-105); color:var(--text-strong);">Thank You — contacts</h3>
-                <p style="margin:2px 0 0; font-size:var(--fs-70); color:var(--text-muted);">These appear on the Thank You page. Add or remove people as needed.</p>
+                <p style="margin:2px 0 0; font-size:var(--fs-70); color:var(--text-muted);">The people on this project’s Thank You page, in print order. Pick them from the company directory, and save your usual team as your default so new projects start with it.</p>
             </div>
             <button data-modal-close class="action-btn" style="width:auto; height:30px; padding:0 16px; font-size:var(--fs-75);" onclick="closeContactsEditor()">Done</button>
         </div>
-        <div id="contactsRows" style="flex:1; overflow-y:auto; padding:16px 18px;"><!-- contact rows --></div>
-        <div style="padding:12px 18px; border-top:1px solid var(--border-color);">
+        <div style="flex:1; overflow-y:auto; padding:16px 18px;">
+            <div id="contactsRows"><!-- contact rows --></div>
+            <div id="contactsDirectory" style="display:none; margin-top:10px; border:1px solid var(--border-color); border-radius:var(--r-4); padding:8px;">
+                <input id="contactsDirSearch" type="text" placeholder="Search the company directory" oninput="_contactsDirQuery = this.value; _contactsDirRender();" style="width:100%; box-sizing:border-box; height:30px; font-size:var(--fs-75); padding:0 8px; margin-bottom:6px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);">
+                <div id="contactsDirList" style="max-height:240px; overflow-y:auto;"></div>
+            </div>
+        </div>
+        <div style="padding:12px 18px; border-top:1px solid var(--border-color); display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <button id="contactsDirBtn" class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-75);" onclick="toggleContactsDirectory()">+ From directory</button>
             <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-75);" onclick="addContact()">+ Add contact</button>
+            <span style="flex:1;"></span>
+            <button id="contactsUseDefaultBtn" class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-75);" onclick="useMyDefaultContacts()">Use my default</button>
+            <button class="action-btn btn-secondary" style="width:auto; height:32px; padding:0 14px; font-size:var(--fs-75);" onclick="saveMyDefaultContacts()" title="New projects you start on this computer begin with these people">Save as my default</button>
         </div>
     </div>
 </div>
@@ -2190,9 +2200,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.12';</script>
-<script src="templates.js?v=19.12"></script>
-<script src="app.js?v=19.12"></script>
+<script>window.FRAME_HTML_VERSION = '19.13';</script>
+<script src="templates.js?v=19.13"></script>
+<script src="app.js?v=19.13"></script>
 
 </body>
 </html>

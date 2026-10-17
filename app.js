@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.12';
+const APP_VERSION = '19.13';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -394,6 +394,8 @@ function _startNewProject(o) {
     // New projects print inches with mm alongside, on spec pages and elevations alike
     // (18.37). Set here, not in _editorialDefaults, so only a NEW project gets it.
     editorialContent.specDualUnit = 'mm'; _elevDualLast = 'mm';
+    // The Thank You page starts empty, or with this designer's saved default team (19.13).
+    editorialContent.contacts = _myContactsDefault(); editorialContent.contactsHidden = []; editorialContent.contactsV = 2;
     try { _syncUnitChip(); } catch (e) {}
     _startScreenClose();
     _dsGoFloorplanItems();
@@ -2093,9 +2095,11 @@ function _editorialFromFile(ed) {
     // which _specDualUnit reads when this is null), never a newer default.
     if (!ed || ed.specDualUnit === undefined) e.specDualUnit = null;
     if (!ed || !Array.isArray(ed.artCategories)) delete e.artCategories;
+    // Before 19.13 every deck printed the whole company directory on its Thank You page.
+    if (ed && ed.contactsV === undefined) _contactsMigrateLegacy(e);
     return e;
 }
-function _editorialDefaults() { return Object.assign({ artCategories: JSON.parse(JSON.stringify(ART_CATEGORY_TYPES)), narrative: '', contacts: '', understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameSpecDetail', specTemplateOverrides: {}, specSlots: { frame: true, profile: true, plan: true, elevation: true }, specSlotOverrides: {}, specGroupSlots: { frame: true, profile: true, plan: true, elevation: true }, specGroupSlotOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: _specCodeStyleDefault(), paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: TITLE_SIZE_DEFAULT, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, specDualUnit: '', elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }, _starterDeck()); }
+function _editorialDefaults() { return Object.assign({ artCategories: JSON.parse(JSON.stringify(ART_CATEGORY_TYPES)), narrative: '', contacts: '', contactsV: 2, understanding: '', strategy: { primary: '', secondary: '', tertiary: '' }, layoutPages: [], templates: [], coverPage: { elements: [] }, narrativePage: { elements: [] }, sloganPage: { elements: [] }, understandingPage: { elements: [] }, strategyPage: { elements: [] }, specTemplate: 'frameSpecDetail', specTemplateOverrides: {}, specSlots: { frame: true, profile: true, plan: true, elevation: true }, specSlotOverrides: {}, specGroupSlots: { frame: true, profile: true, plan: true, elevation: true }, specGroupSlotOverrides: {}, approvedStamp: false, approvedPages: {}, approvalStatus: {}, specCodeStyle: _specCodeStyleDefault(), paragraphStyle: { font: 'sans', size: 16, color: '#222222' }, titleStyle: { font: 'display', size: TITLE_SIZE_DEFAULT, color: '#141414' }, wireframe: false, specArtOnly: {}, manualGroups: [], scaleOpts: { codes: 'frames', elevThumb: false }, specDualUnit: '', elevBreakers: false, breakerNoPlan: false, annotations: {}, timeline: '', styles: { arrowColor: '#9aa0a6', arrowWeight: 1.2, textFont: 'serif', textSize: 0.045, textColor: '#222222', capSize: 0.02, capSide: 'bottom' } }, _starterDeck()); }
 
 // ── Starter deck ──────────────────────────────────────────────────────────
 // What a brand-new project opens with. Lifted verbatim from the studio's own
@@ -3506,7 +3510,7 @@ function restoreProjectState(snap) {
     // while the array is still in the order the indices were saved against.
     _elevMigrateIds();
     currentElevIndex = cloned.currentElevIndex;
-    if (cloned.editorial) editorialContent = cloned.editorial;
+    if (cloned.editorial) { editorialContent = cloned.editorial; if (editorialContent.contactsV === undefined) _contactsMigrateLegacy(editorialContent); }
     // A snapshot taken before these were part of the format has neither; leave the
     // live values alone in that case rather than resetting to the standard.
     if (typeof cloned.hangHeightIn === 'number' && cloned.hangHeightIn > 0) elevHangIn = cloned.hangHeightIn;
@@ -5132,6 +5136,7 @@ function _versionRestore(snap) {
     floorplanLevels = Array.isArray(snap.floorplanLevels) ? snap.floorplanLevels : [];
     _fpLevel = 0; _fpMigrate();
     editorialContent = Object.assign(_editorialDefaults(), snap.editorial || {});
+    if (snap.editorial && snap.editorial.contactsV === undefined) _contactsMigrateLegacy(editorialContent);
     refreshAllViews();
     undoStack.length = 0; redoStack.length = 0; _isFirstHistoryPush = true; pushHistory(); markDirty();
 }
@@ -28798,6 +28803,8 @@ function _dsThumbCacheKey(desc) {
         }
         // The overview draws every option's walls and images, so any edit can change it.
         if (desc && desc.kind === 'catov') k += '|' + (typeof _dsEditGen !== 'undefined' ? _dsEditGen : 0);
+        // The Thank You page draws the project's own contact list (19.13).
+        if (desc && desc.kind === 'card' && desc.type === 'contacts') { const cs = (editorialContent.contacts || '') + '#' + (editorialContent.contactsHidden || []).join(','); let h = 5381; for (let i = 0; i < cs.length; i++) h = ((h * 33) ^ cs.charCodeAt(i)) >>> 0; k += '|c' + h.toString(36); }
         // The contents page rewrites itself when anything else in the deck moves.
         if (desc && desc.kind === 'layout' && desc.page && desc.page.toc) k += '|toc' + (desc.page.toc.sig || '');
         return k;
@@ -34255,14 +34262,32 @@ function _mbApplyModeUI() {
     const lab = document.getElementById('mbModeLabel'); if (lab) lab.textContent = fixed ? ('Editing: ' + (_mbEditTarget.label || 'Page')) : '';
 }
 
-// ── Contacts editor: structured add/remove for the Thank You page. Reads and
-// writes editorialContent.contacts (the "Name | Role | Email | Phone" string),
-// so the deck renderer and persistence are unchanged. ──────────────────────
+// ── Contacts editor: the Thank You page's people (19.13). The project holds its OWN
+// list (editorialContent.contacts, "Name | Role | Email | Phone" per line, in print
+// order); a new project starts empty, or with the designer's saved default team.
+// contacts/contacts.json is the company DIRECTORY: a pick list, never printed by
+// itself. Before 19.13 every directory entry printed on every deck; a file from then
+// (no contactsV) has that old list written into it once by _contactsMigrateLegacy,
+// from the frozen CONTACTS_LEGACY_DIRECTORY, so an old deck prints what it printed.
+const CONTACTS_LEGACY_DIRECTORY = [
+    { name: 'Jordan Hilliard', role: 'Principal', email: 'jordan@farmboyfinearts.com', phone: '' },
+    { name: 'Todd Towers', role: 'President & CEO', email: 'ttowers@farmboyfinearts.com', phone: '604 699 2462' },
+    { name: 'Laurenn Machin', role: 'Creative Director', email: 'lmachin@farmboyfinearts.com', phone: '604-200-4018' },
+    { name: 'Heather Merenda', role: 'Art Director', email: 'hmerenda@farmboyfinearts.com', phone: '672-275-0542' },
+    { name: 'Michael Clarke', role: 'Project Manager', email: 'mclarke@farmboyfinearts.com', phone: '604-398-3382' },
+    { name: 'Dominique Cassidy', role: 'Art Director', email: 'dcassidy@farmboyfinearts.com', phone: '604-256-6835' },
+    { name: 'Sarah Goble', role: 'Project Manager', email: 'sgoble@farmboyfinearts.com', phone: '604 630 1672' },
+    { name: 'Ricky Alvarez', role: 'Sales Coordinator', email: 'ralvarez@farmboyfinearts.com', phone: '604-332-4718' },
+    { name: 'Farmboy Fine Arts', role: 'Studio', email: 'studio@farmboyfinearts.com', phone: '' }
+];
+const MY_CONTACTS_KEY = 'frameMyContacts';
 let _contactsDraft = [];
 let _contactsDragFrom = null;
 let _contactsSelected = -1;
 let _repoContactsCache = null;
-// Load the shared company contacts committed to the repo (contacts/contacts.json).
+let _contactsDirOpen = false;
+let _contactsDirQuery = '';
+// Load the company directory committed to the repo (contacts/contacts.json).
 // Falls back silently if the file is missing. Cached for the session.
 async function _loadRepoContacts() {
     if (_repoContactsCache) return _repoContactsCache;
@@ -34286,66 +34311,83 @@ async function _loadRepoContacts() {
             }
             if (!j) continue;
             const arr = Array.isArray(j) ? j : (Array.isArray(j.contacts) ? j.contacts : null);
-            if (arr) { _repoContactsCache = arr.map(c => ({ name: c.name || '', role: c.role || '', email: c.email || '', phone: c.phone || '', _repo: true })); return _repoContactsCache; }
+            if (arr) { _repoContactsCache = arr.map(c => ({ name: c.name || '', role: c.role || '', email: c.email || '', phone: c.phone || '', team: c.team || '' })); return _repoContactsCache; }
         } catch (e) {}
     }
     _repoContactsCache = [];
     return _repoContactsCache;
 }
+// A line written by FRAME uses '|', so a comma inside a role ("Senior Designer, 3D &
+// Innovation") stays in the role. Commas separate fields only on a line with no '|'.
 function _contactsParse(str) {
-    return (str || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const p = l.split(/\s*[|,]\s*/); return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' }; });
+    return (str || '').split('\n').map(l => l.trim()).filter(Boolean).map(l => { const p = l.split(l.indexOf('|') >= 0 ? /\s*\|\s*/ : /\s*,\s*/); return { name: p[0] || '', role: p[1] || '', email: p[2] || '', phone: p[3] || '' }; });
 }
-// A stable identity for a contact (name+email) so hide/order survive edits.
+// A stable identity for a contact (name+email) so the hide flag survives edits.
 function _contactKey(c) { return ((c.name || '') + '~' + (c.email || '')).toLowerCase().trim(); }
-// The merged working list: repo contacts first, then project-added ones, with
-// per-project hide flags and custom order applied. Used by BOTH the editor and
+// The project's list, in print order, with hide flags. Used by BOTH the editor and
 // the Thank You page so preview and PDF always match.
 async function _contactsResolved() {
-    const repo = await _loadRepoContacts();
-    const local = _contactsParse(editorialContent.contacts || '').map(c => Object.assign({}, c, { _repo: false }));
-    // De-dupe: a project-added contact with the same key overrides the repo one.
-    const byKey = {}; const merged = [];
-    repo.forEach(c => { const k = _contactKey(c); byKey[k] = c; merged.push(c); });
-    local.forEach(c => { const k = _contactKey(c); if (byKey[k]) { Object.assign(byKey[k], c, { _repo: byKey[k]._repo }); } else { byKey[k] = c; merged.push(c); } });
     const hidden = new Set(editorialContent.contactsHidden || []);
-    merged.forEach(c => { c._hidden = hidden.has(_contactKey(c)); });
-    // Apply custom order: keys listed in contactsOrder come first, in that order.
-    const order = editorialContent.contactsOrder || [];
+    return _contactsParse(editorialContent.contacts || '').map(c => Object.assign(c, { _hidden: hidden.has(_contactKey(c)) }));
+}
+// Once, on a file from before 19.13: write the list it used to print (frozen directory
+// merged with its own additions, its custom order applied) into the project itself.
+function _contactsMigrateLegacy(e) {
+    const local = _contactsParse(e.contacts || '');
+    const byKey = {}; const merged = [];
+    CONTACTS_LEGACY_DIRECTORY.forEach(c => { const x = Object.assign({}, c); byKey[_contactKey(x)] = x; merged.push(x); });
+    local.forEach(c => { const k = _contactKey(c); if (byKey[k]) Object.assign(byKey[k], c); else { byKey[k] = c; merged.push(c); } });
+    const order = Array.isArray(e.contactsOrder) ? e.contactsOrder : [];
     if (order.length) {
         merged.sort((a, b) => {
             const ia = order.indexOf(_contactKey(a)), ib = order.indexOf(_contactKey(b));
             if (ia < 0 && ib < 0) return 0; if (ia < 0) return 1; if (ib < 0) return -1; return ia - ib;
         });
     }
-    return merged;
+    e.contacts = _contactsSerialize(merged);
+    delete e.contactsOrder;
+    e.contactsV = 2;
+    return e;
 }
 function _contactsSerialize(arr) {
     return (arr || []).filter(c => (c.name || c.role || c.email || c.phone)).map(c => [c.name || '', c.role || '', c.email || '', c.phone || ''].join(' | ')).join('\n');
 }
+// The designer's own default team, per computer. A new project starts with it.
+function _myContactsDefault() { try { return localStorage.getItem(MY_CONTACTS_KEY) || ''; } catch (e) { return ''; } }
+function saveMyDefaultContacts() {
+    const s = _contactsSerialize(_contactsDraft.filter(c => !c._hidden));
+    if (!s) { _toast('Add some people first, then save them as your default.'); return; }
+    try { localStorage.setItem(MY_CONTACTS_KEY, s); } catch (e) { showInfoModal('Could not save your default', 'This browser would not store it. Your contacts on this project are unchanged.'); return; }
+    const n = s.split('\n').length;
+    _toast('Saved ' + n + (n === 1 ? ' person' : ' people') + ' as your default team. New projects start with them.');
+    _contactsRender();
+}
+function useMyDefaultContacts() {
+    const s = _myContactsDefault(); if (!s) return;
+    if (typeof pushHistory === 'function') pushHistory();
+    _contactsDraft = _contactsParse(s).map(c => Object.assign(c, { _hidden: false }));
+    _contactsSelected = -1;
+    _contactsCommit(); _contactsRender();
+}
 function _contactsCommit() {
-    // Persist project-added contacts (legacy string) + order + hidden flags.
-    editorialContent.contacts = _contactsSerialize(_contactsDraft.filter(c => !c._repo));
-    editorialContent.contactsOrder = _contactsDraft.map(c => _contactKey(c));
+    editorialContent.contacts = _contactsSerialize(_contactsDraft);
     editorialContent.contactsHidden = _contactsDraft.filter(c => c._hidden).map(c => _contactKey(c));
+    delete editorialContent.contactsOrder;
+    editorialContent.contactsV = 2;
     const ta = document.getElementById('specPdfContacts'); if (ta) ta.value = editorialContent.contacts;
     if (typeof markDirty === 'function') markDirty();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
 }
-// _contactsDraft is the merged, ordered working list (repo + project contacts).
-// Repo contacts show a small badge and can't be edited or deleted here (edit
-// them in the repo sheet), but they CAN be hidden or reordered per project.
-function _contactsPersistOrderHide() {
-    editorialContent.contactsOrder = _contactsDraft.map(c => _contactKey(c));
-    editorialContent.contactsHidden = _contactsDraft.filter(c => c._hidden).map(c => _contactKey(c));
-    // Project-added (non-repo) contacts persist as the legacy string.
-    editorialContent.contacts = _contactsSerialize(_contactsDraft.filter(c => !c._repo));
-    const ta = document.getElementById('specPdfContacts'); if (ta) ta.value = editorialContent.contacts;
-    if (typeof markDirty === 'function') markDirty();
-    if (typeof scheduleAutosave === 'function') scheduleAutosave();
-}
+function _contactsPersistOrderHide() { _contactsCommit(); }
 function _contactsRender() {
     const wrap = document.getElementById('contactsRows'); if (!wrap) return;
     wrap.innerHTML = '';
+    if (!_contactsDraft.length) {
+        const p = document.createElement('div');
+        p.textContent = 'No one on the Thank You page yet. Add people from the directory, or type someone in.';
+        p.style.cssText = 'color:var(--text-muted); font-size:var(--fs-75); padding:6px 0 10px;';
+        wrap.appendChild(p);
+    }
     _contactsDraft.forEach((c, i) => {
         const row = document.createElement('div');
         row.draggable = true;
@@ -34355,28 +34397,60 @@ function _contactsRender() {
         row.ondragend = () => { row.style.opacity = c._hidden ? '0.45' : '1'; };
         row.ondragover = (e) => { e.preventDefault(); row.style.borderTop = '2px solid var(--accent)'; };
         row.ondragleave = () => { row.style.borderTop = ''; };
-        row.ondrop = (e) => { e.preventDefault(); row.style.borderTop = ''; const from = _contactsDragFrom; const to = i; if (from == null || from === to) return; const moved = _contactsDraft.splice(from, 1)[0]; _contactsDraft.splice(to, 0, moved); _contactsDragFrom = null; _contactsPersistOrderHide(); _contactsRender(); };
+        row.ondrop = (e) => { e.preventDefault(); row.style.borderTop = ''; const from = _contactsDragFrom; const to = i; if (from == null || from === to) return; const moved = _contactsDraft.splice(from, 1)[0]; _contactsDraft.splice(to, 0, moved); _contactsDragFrom = null; _contactsCommit(); _contactsRender(); };
         // Single drag handle (grip). Click a row to select it, then use the
         // Up/Down arrow keys to nudge it — mirrors the CSV grip behaviour.
         if (i === _contactsSelected) row.style.outline = '2px solid var(--accent)';
         row.onclick = (e) => { if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return; _contactsSelected = i; _contactsRender(); const w2 = document.getElementById('contactsRows'); if (w2 && w2.children[i]) w2.children[i].focus && w2.children[i].focus(); };
         const grip = document.createElement('div'); grip.innerHTML = svgMove; grip.title = 'Drag to reorder (or select the row and use the up/down arrow keys)'; grip.style.cssText = 'flex:0 0 auto; color:var(--text-muted); cursor:grab; padding:0 2px; user-select:none; display:flex; align-items:center; justify-content:center;';
         row.appendChild(grip);
-        const mk = (ph, field, w) => { const inp = document.createElement('input'); inp.type = 'text'; inp.value = c[field] || ''; inp.placeholder = ph; inp.disabled = !!c._repo; inp.oninput = () => { _contactsDraft[i][field] = inp.value; _contactsCommit(); }; inp.style.cssText = 'flex:' + w + '; min-width:0; height:30px; font-size:var(--fs-75); padding:0 8px; background:' + (c._repo ? 'var(--bg-main)' : 'var(--bg-input)') + '; color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);'; return inp; };
+        const mk = (ph, field, w) => { const inp = document.createElement('input'); inp.type = 'text'; inp.value = c[field] || ''; inp.placeholder = ph; inp.oninput = () => { _contactsDraft[i][field] = inp.value; _contactsCommit(); }; inp.style.cssText = 'flex:' + w + '; min-width:0; height:30px; font-size:var(--fs-75); padding:0 8px; background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);'; return inp; };
         row.appendChild(mk('Name', 'name', '2'));
         row.appendChild(mk('Role', 'role', '2'));
         row.appendChild(mk('Email', 'email', '3'));
         row.appendChild(mk('Phone', 'phone', '2'));
-        if (c._repo) { const badge = document.createElement('span'); badge.textContent = 'repo'; badge.title = 'From the shared company sheet \u2014 edit it in the repo'; badge.style.cssText = 'flex:0 0 auto; font-size:var(--fs-55); text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); border:1px solid var(--border-color); border-radius:var(--r-4); padding:2px 4px;'; row.appendChild(badge); }
         // Hide toggle
-        const hide = document.createElement('button'); hide.textContent = c._hidden ? '\u2298' : '\u25c9'; hide.title = c._hidden ? 'Show on Thank You page' : 'Hide from Thank You page'; hide.className = 'action-btn btn-secondary'; hide.style.cssText = 'width:30px; height:30px; padding:0; font-size:var(--fs-80); flex:0 0 auto;';
-        hide.onclick = () => { _contactsDraft[i]._hidden = !_contactsDraft[i]._hidden; _contactsPersistOrderHide(); _contactsRender(); };
+        const hide = document.createElement('button'); hide.textContent = c._hidden ? '⊘' : '◉'; hide.title = c._hidden ? 'Show on Thank You page' : 'Hide from Thank You page'; hide.className = 'action-btn btn-secondary'; hide.style.cssText = 'width:30px; height:30px; padding:0; font-size:var(--fs-80); flex:0 0 auto;';
+        hide.onclick = () => { _contactsDraft[i]._hidden = !_contactsDraft[i]._hidden; _contactsCommit(); _contactsRender(); };
         row.appendChild(hide);
-        // Delete (project contacts only; repo ones are hidden instead)
-        const del = document.createElement('button'); del.textContent = '\u2715'; del.title = c._repo ? 'Repo contacts can\u2019t be deleted here \u2014 hide it, or edit the repo sheet' : 'Remove contact'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:30px; height:30px; padding:0; font-size:var(--fs-75); flex:0 0 auto;' + (c._repo ? ' opacity:0.4; cursor:not-allowed;' : ''); del.disabled = !!c._repo; if (!c._repo) del.onclick = () => removeContact(i);
+        const del = document.createElement('button'); del.textContent = '✕'; del.title = 'Take off this project'; del.className = 'action-btn btn-secondary'; del.style.cssText = 'width:30px; height:30px; padding:0; font-size:var(--fs-75); flex:0 0 auto;'; del.onclick = () => removeContact(i);
         row.appendChild(del);
         wrap.appendChild(row);
     });
+    const useBtn = document.getElementById('contactsUseDefaultBtn');
+    if (useBtn) { const has = !!_myContactsDefault(); useBtn.disabled = !has; useBtn.title = has ? 'Replace this list with your saved default team' : 'Nothing saved yet: set up the list, then Save as my default'; }
+    _contactsDirRender();
+}
+// The company directory as a pick list: click a person to add them to this project.
+function toggleContactsDirectory() { _contactsDirOpen = !_contactsDirOpen; _contactsDirRender(); if (_contactsDirOpen) { const q = document.getElementById('contactsDirSearch'); if (q) q.focus(); } }
+async function _contactsDirRender() {
+    const box = document.getElementById('contactsDirectory'); if (!box) return;
+    box.style.display = _contactsDirOpen ? '' : 'none';
+    const btn = document.getElementById('contactsDirBtn'); if (btn) btn.classList.toggle('active', _contactsDirOpen);
+    if (!_contactsDirOpen) return;
+    const list = document.getElementById('contactsDirList'); if (!list) return;
+    const dir = await _loadRepoContacts();
+    const have = new Set(_contactsDraft.map(c => (c.name || '').toLowerCase().trim()));
+    const q = (_contactsDirQuery || '').toLowerCase().trim();
+    const hits = dir.filter(c => !q || [c.name, c.role, c.team, c.email].join(' ').toLowerCase().indexOf(q) >= 0);
+    list.innerHTML = '';
+    if (!dir.length) { list.innerHTML = '<div style="color:var(--text-muted); font-size:var(--fs-70); padding:6px 2px;">The company directory (contacts/contacts.json) could not be loaded.</div>'; return; }
+    if (!hits.length) { list.innerHTML = '<div style="color:var(--text-muted); font-size:var(--fs-70); padding:6px 2px;">No one matches.</div>'; return; }
+    hits.forEach(c => {
+        const added = have.has((c.name || '').toLowerCase().trim());
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'contacts-dir-item'; b.disabled = added;
+        b.title = added ? 'Already on this project' : 'Add to the Thank You page';
+        b.style.cssText = 'display:flex; align-items:baseline; gap:8px; width:100%; text-align:left; padding:5px 8px; background:none; border:0; border-radius:var(--r-4); color:var(--text-main); font-size:var(--fs-75); cursor:' + (added ? 'default' : 'pointer') + ';' + (added ? ' opacity:0.45;' : '');
+        b.innerHTML = '<span style="flex:0 0 auto; width:14px; color:var(--text-muted);">' + (added ? '✓' : '+') + '</span><span style="flex:0 0 auto; font-weight:600;">' + _esc(c.name) + '</span><span style="flex:1; min-width:0; color:var(--text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">' + _esc([c.role, c.team].filter(Boolean).join(' · ')) + '</span>';
+        if (!added) b.onclick = () => addContactFromDirectory(c);
+        list.appendChild(b);
+    });
+}
+function addContactFromDirectory(c) {
+    if (typeof pushHistory === 'function') pushHistory();
+    _contactsDraft.push({ name: c.name || '', role: c.role || '', email: c.email || '', phone: c.phone || '', _hidden: false });
+    _contactsCommit(); _contactsRender();
 }
 function _contactsKeydown(e) {
     if (_contactsSelected < 0) return;
@@ -34390,19 +34464,25 @@ function _contactsKeydown(e) {
     const moved = _contactsDraft.splice(i, 1)[0];
     _contactsDraft.splice(to, 0, moved);
     _contactsSelected = to;
-    _contactsPersistOrderHide(); _contactsRender();
+    _contactsCommit(); _contactsRender();
 }
 async function openContactsEditor() {
     const m = document.getElementById('contactsModal'); if (m) m.style.display = 'flex';
     document.removeEventListener('keydown', _contactsKeydown); document.addEventListener('keydown', _contactsKeydown);
-    const wrap = document.getElementById('contactsRows'); if (wrap) wrap.innerHTML = '<p style="color:var(--text-muted); font-size:var(--fs-70);">Loading company contacts\u2026</p>';
     try { _contactsDraft = await _contactsResolved(); } catch (e) { _contactsDraft = _contactsParse(editorialContent.contacts || ''); }
-    if (!_contactsDraft.length) _contactsDraft = [{ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }];
+    // An empty project opens straight onto the directory: picking people is the job.
+    _contactsDirOpen = !_contactsDraft.length;
+    _contactsDirQuery = ''; const q = document.getElementById('contactsDirSearch'); if (q) q.value = '';
     _contactsRender();
 }
-function closeContactsEditor() { document.removeEventListener('keydown', _contactsKeydown); _contactsSelected = -1; const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none'; }
-function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '', _repo: false, _hidden: false }); _contactsRender(); _contactsCommit(); }
-function removeContact(i) { if (_contactsDraft[i] && _contactsDraft[i]._repo) return; _contactsDraft.splice(i, 1); _contactsRender(); _contactsCommit(); }
+function closeContactsEditor() {
+    document.removeEventListener('keydown', _contactsKeydown); _contactsSelected = -1;
+    const m = document.getElementById('contactsModal'); if (m) m.style.display = 'none';
+    // The Thank You page's picture is stale now; redraw it if Deck Studio is showing.
+    try { if (typeof _dsRefresh === 'function' && typeof _dsPages !== 'undefined' && _dsPages && _dsPages.length) { _dsRefresh(); _dsRenderCenter(); } } catch (e) {}
+}
+function addContact() { _contactsDraft.push({ name: '', role: '', email: '', phone: '', _hidden: false }); _contactsCommit(); _contactsRender(); }
+function removeContact(i) { if (!_contactsDraft[i]) return; if (typeof pushHistory === 'function') pushHistory(); _contactsDraft.splice(i, 1); if (_contactsSelected >= _contactsDraft.length) _contactsSelected = -1; _contactsCommit(); _contactsRender(); }
 
 function _mbKeyDelete(e) {
     if (_mbPlacing) return;
@@ -43668,7 +43748,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.12</strong> A framed picture in the Frame Dashboard preview shows what you can do with it when you hover: <strong>Replace</strong> and <strong>Remove</strong> in its corner, and a note that you can drag to pan or drop another image on it to swap it.<br><br>\n<strong>19.11</strong> The frame button in the Frame Dashboard shows the frame's corner the way the frame browser does: the whole corner photo on white, with Change underneath.<br><br>\n<strong>19.10</strong> A tighter Frame Dashboard panel. The frame is a square picture button (click it to change the frame) with Frame Code and Color / Texture beside it, and the frame's colour, width and vendor on the Frame heading. Artwork is added from the preview: click the empty opening or drag a picture onto it. The upload row in the panel is gone; once a piece has artwork, its zoom, Reset, 1:1 and Remove sit in one row under the sizes.<br><br>\n<strong>19.09</strong> Frames come from the library. New items start in <strong>MICH-132-29</strong>, a black moulding with a three-quarter inch face, instead of a flat black colour. In the Frame Dashboard the Library / Color switch, the colour picker, Sync Folder and the swatch upload are gone: the frame is one card showing its corner, code, colour, width and vendor, and clicking it opens the frame browser. Picking a frame also fills Color / Texture from the catalogue (never over words you typed). A frame no vendor lists can still be added with <strong>Custom swatch…</strong> in the frame browser. Older projects with colour frames still open and print as before.<br><br>\n<strong>19.08</strong> An empty opening shows an add-image icon instead of its size, on the wall and in the Frame Dashboard preview. In the dashboard, click it to upload the artwork. The size is still in the dashboard fields and the dimension guides.<br><br>\n<strong>19.07</strong> Frame effects in Settings fits on one screen: the sample frame and the sliders sit side by side, and each slider's explanation is behind a <strong>?</strong> instead of a line of text under it.<br><br>\n<strong>19.06</strong> Deck Studio's Project tab is shorter. Project name, code, location and version sit together at the top, and units, rounding and frame effects are one line that says what they are, with <strong>Units&hellip;</strong> and <strong>Frame effects&hellip;</strong> buttons into Settings (the gear in the header), where they are changed. Fixed: the page preview on the Project tab now shows a page's background image, colour and text colour, like the Pages tab; a cover with a picture showed on white before, even after Refresh preview.<br><br>\n<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
+                body: `<strong>19.13</strong> The Thank You page starts empty. Open <strong>Edit contacts</strong> and pick your team with <strong>+ From directory</strong> (the company directory, now updated), or type someone in. <strong>Save as my default</strong> keeps that team on this computer, and every new project you start begins with it; <strong>Use my default</strong> puts it back on an existing project. Older projects keep the people they already printed.<br><br>
+<strong>19.12</strong> A framed picture in the Frame Dashboard preview shows what you can do with it when you hover: <strong>Replace</strong> and <strong>Remove</strong> in its corner, and a note that you can drag to pan or drop another image on it to swap it.<br><br>\n<strong>19.11</strong> The frame button in the Frame Dashboard shows the frame's corner the way the frame browser does: the whole corner photo on white, with Change underneath.<br><br>\n<strong>19.10</strong> A tighter Frame Dashboard panel. The frame is a square picture button (click it to change the frame) with Frame Code and Color / Texture beside it, and the frame's colour, width and vendor on the Frame heading. Artwork is added from the preview: click the empty opening or drag a picture onto it. The upload row in the panel is gone; once a piece has artwork, its zoom, Reset, 1:1 and Remove sit in one row under the sizes.<br><br>\n<strong>19.09</strong> Frames come from the library. New items start in <strong>MICH-132-29</strong>, a black moulding with a three-quarter inch face, instead of a flat black colour. In the Frame Dashboard the Library / Color switch, the colour picker, Sync Folder and the swatch upload are gone: the frame is one card showing its corner, code, colour, width and vendor, and clicking it opens the frame browser. Picking a frame also fills Color / Texture from the catalogue (never over words you typed). A frame no vendor lists can still be added with <strong>Custom swatch…</strong> in the frame browser. Older projects with colour frames still open and print as before.<br><br>\n<strong>19.08</strong> An empty opening shows an add-image icon instead of its size, on the wall and in the Frame Dashboard preview. In the dashboard, click it to upload the artwork. The size is still in the dashboard fields and the dimension guides.<br><br>\n<strong>19.07</strong> Frame effects in Settings fits on one screen: the sample frame and the sliders sit side by side, and each slider's explanation is behind a <strong>?</strong> instead of a line of text under it.<br><br>\n<strong>19.06</strong> Deck Studio's Project tab is shorter. Project name, code, location and version sit together at the top, and units, rounding and frame effects are one line that says what they are, with <strong>Units&hellip;</strong> and <strong>Frame effects&hellip;</strong> buttons into Settings (the gear in the header), where they are changed. Fixed: the page preview on the Project tab now shows a page's background image, colour and text colour, like the Pages tab; a cover with a picture showed on white before, even after Refresh preview.<br><br>\n<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
 <strong>19.04</strong> Deleting a wall asks about its pieces. When pieces hang on that wall and nowhere else, you choose <strong>Delete wall and pieces</strong> (they leave the Frame Dashboard and the presentation: the way to drop the options a client turned down) or <strong>Delete wall, keep pieces</strong> (as before: they stay in the Dashboard, and + Add Wall offers them to hang again). Pieces also shown on another wall are never deleted, and Ctrl+Z brings back the wall and its pieces together.<br><br><strong>19.03</strong> The frame you pick sets the product both ways. Picking a floater makes the item Framed Canvas (Floater), as before, and picking a regular moulding on a floater item now turns it back into Framed Art (it used to stay a floater, with its canvas inset and no mats). A floater counts by its lip width too, whatever its collection is called. Shadow boxes, frameless canvas, wallcovering and window film are left as you set them.<br><br><strong>19.02</strong> Floaters show their gap. The quarter inch between a floater's face and the canvas now draws as a dark slot instead of more moulding, on the Dashboard preview, the wall, PNG and SVG exports and spec pages, and the canvas casts its shadow into it. Settings, Frame effects has a new <strong>Floater gap</strong> slider for how dark it reads (the canvas used to borrow Frame onto mat). The three Cape Cod floaters (IM-310-715, 720 and 725) now carry their 5/8in face, so a new pick sets a 7/8in inset.<br><br><strong>19.01</strong> More frames turned round to face the right way: 46 Larson-Juhl floaters (Axom, Bauhaus II, Cranbrook, Eiffel, Gramercy, Metalia, Moderne, Olsen, Ravello, Shoji and Spencer II) now show the wall on the left and the floor along the bottom like every other floater, and Academie Silver 3in (LJ-733237) matches its gold and black siblings.<br><br><strong>19.00</strong> The frame browser has a <strong>Type</strong> filter: show only floaters, or only frames, across every vendor. Frame thumbnails are cropped consistently again: about 290 International Moulding and Framerica corners had kept far too much of the moulding and showed as thin slivers. Seven more mouldings that faced the wrong way (including IM-310-710) are turned round.<br><br><strong>18.99</strong> International Moulding and Framerica frames now face the same way as every other moulding: outer edge on the left, rabbet lip on the right. Many were mirror images, so the mockup drew the lip on the outside of the frame. The old Universal folder with two frames is gone; both are in Universal Arquati.<br><br><strong>18.98</strong> The frame library adds International Moulding (about 1,000 current mouldings in 153 collections, 37 of them floaters) and Framerica (336 mouldings in 91 finishes), each with its corner photo, sizes, colour family and, where the maker publishes one, its profile drawing. Deep shadowbox corners now show the frame face above the cut end instead of only raw wood.<br><br><strong>18.97</strong> More frame corners and profiles fit on one row of a group page before it wraps: the space between mouldings tightens first, then the pictures shrink, and only then does the strip go to two rows.<br><br><strong>18.96</strong> Frame corner photos all share one shape now. Thin Universal Arquati and Larson-Juhl mouldings showed as long skinny slivers in the frame browser and on spec pages; every corner is cropped to the same proportions as the Michelangelo ones, showing the cut end and a short run of the face.<br><br><strong>18.95</strong> The frame library adds Universal Arquati: about 1,050 current mouldings in 156 collections (Universal, Valucore and the Arquati lines), including 177 floaters, each with its corner photo, profile drawing, sizes, colour, profile type and style. Discontinued mouldings, fillets, liners and stretcher bars are left out.<br><br><strong>18.94</strong> Two spec page fixes. A picture dropped onto the dashboard preview or onto a frame on the wall kept the previous picture's proportions, so the dashboard and wall stretched it to fit while the spec page printed its true crop; every drop now records the new picture's size, and pieces affected before this correct themselves the next time they are shown. On a per-piece page, a long spec list (float-mounted paper adds four rows) now tightens its rows to stop above the frame corner and profile instead of running into them.<br><br><strong>18.93</strong> The Frame Recommendations page lays frames out on an even grid. With a count that does not divide by the columns (8 frames in 3 columns), the last column used to stretch its frames to fill the page; now every frame is the same size and the last column simply ends early.<br><br><strong>18.92</strong> The frame library adds Larson-Juhl: about 1,030 current mouldings in 156 collections, including 91 floaters, each with its corner photo, profile drawing, sizes, colour family, profile type and style. In the frame browser the Library now lists each vendor once (click it to open its collections), and there is a new <strong>Style</strong> filter (Contemporary, Modern, Classic and so on). Nielsen metal frames are left out because Larson-Juhl has no photos of them.<br><br><strong>18.91</strong> When a Group A/B/C page has too many mouldings for the frame corners and profiles to fit in one row beside the floorplan and elevation, they wrap into two rows in the same space, so the artwork, floorplan and elevation keep their size and place. Seven different mouldings now show every corner and profile.<br><br><strong>18.89</strong> On a Group A/B/C page with several mouldings, ticking Moulding profile no longer makes every frame corner disappear. The corners and profiles now shrink to fit beside the floorplan and elevation; if there is still not enough room, the profiles are left off and the corners kept, and a <strong>no room</strong> note appears beside Moulding profile under Show on page.<br><br><strong>18.88</strong> The frame library now has every Michelangelo collection that works as a frame in FRAME: Barnwood, Contemporary, Modern, Shadow Boxes and Traditional join Avant-Garde, Floaters and Ornate, about 1,240 mouldings in all, each with its corner photo, profile drawing, sizes, colour and profile name. Liners, fillets, rabbetless flat surfaces and stretchers are left out because they are not a frame on their own.<br><br><strong>18.87</strong> The frame library adds Michelangelo's ornate mouldings: all 59 current ones, each with its corner photo, profile drawing, sizes, colour and profile name. Their swatches repeat the ornament down the rail without a visible seam.<br><br><strong>18.86</strong> The frame library adds Michelangelo's floaters: 229 current floater frames for canvas, each with its corner photo, profile drawing, sizes and lip width. Picking one switches the item to Framed Canvas (Floater) and sets the inset from the lip, as before.<br><br><strong>18.85</strong> The frame library now has the whole Michelangelo Avant-Garde collection: 539 current mouldings, each with its corner photo, profile drawing, sizes, colour and profile name, so the frame browser can search and filter all of them.<br><br><strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
 <strong>18.62</strong> The amber <strong>x2</strong> badge (the same image used in another placement) sits at the right end of the Img Code field, so it no longer covers the artwork thumbnail.<br><br>
 <strong>18.61</strong> Each row in the Frame Dashboard shows a small picture of its artwork beside the Img Code, or a dashed empty slot when the piece has no artwork yet.<br><br>

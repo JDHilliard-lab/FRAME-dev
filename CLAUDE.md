@@ -1158,6 +1158,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   silently; e.g. `_dsAddStamp` is the approval stamp, the status stamp is
   `_dsAddStatusStamp`). `test_ds_tool_dock` fails on any duplicate top-level function. Grep a
   new name before using it.
+- **THE THANK YOU PAGE PRINTS THE PROJECT'S OWN LIST (19.13).** `editorialContent.contacts`
+  (pipe lines, print order) + `contactsHidden`; `contacts/contacts.json` is a DIRECTORY to pick
+  from (`_loadRepoContacts`, `addContactFromDirectory`), never merged in. New projects start
+  empty or with the designer's `MY_CONTACTS_KEY` (localStorage) team, seeded in `_startNewProject`.
+  A file with no `contactsV` gets the old merged list written in once (`_contactsMigrateLegacy`,
+  from the FROZEN `CONTACTS_LEGACY_DIRECTORY`; don't sync it to the json) in `_editorialFromFile`,
+  `restoreProjectState` and `_versionRestore`. `_contactsParse` splits on `|` when present (roles
+  carry commas).
 - `_resolveFooter()` handles footer theming. `'auto'` means *read this page's own theme*,
   not a fixed default.
 - Templates live in `editorialContent.templates`; `type` doubles as the category key.
