@@ -1939,6 +1939,17 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_elevApplyArtFile` is the ONE way a picture file reaches a wall frame (drop and the dock's
   `elevAddArtwork`). Home-screen app: `manifest.webmanifest` (relative start_url/scope: two
   sites, one tree), `icon-180.png`/`icon-512.png`; `_homeScreenTitle` names dev "FRAME dev".
+  **19.22:** joystick rim arrows (`_touchArrowDown`) stop their touches so the knob never
+  starts. Delete removes a selected dim via `_selDimDelete` = `{id, fn}` recorded by
+  `buildDimControls` (keyed by id); frame Delete returns while a dim/line/group dim is selected.
+- **AN EXPORT IS NEVER LAID OUT SMALLER THAN A DESKTOP (19.22, `_elevExportFloor`,
+  `ELEV_EXPORT_MIN_WS_W/H` = 1494x1034, the workspace an export gets at 1920x1080).** Dim
+  numbers and ticks are fixed print sizes, so a smaller drawn wall printed them bigger beside
+  it (an iPad deck ~2x). Both exports raise the counter beside the sidebar unfold and lower it
+  in the same `finally`; `drawElevAll` floors the measured workspace while it is > 0. A bigger
+  screen is untouched (the designer's choice). On SCREEN the iPad still draws ticks relatively
+  bigger (screen matches print by design); folding the panels brings it close to desktop.
+- **THE LETTER LEGEND DEFAULTS TO 200pt (`IG_LEGEND_W_DEFAULT`)**, install and breaker pages.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

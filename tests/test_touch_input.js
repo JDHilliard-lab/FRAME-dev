@@ -64,6 +64,18 @@ check('ADD TO HOME SCREEN: manifest, a crisp icon and the web-app tags', () => {
   if (H.indexOf('rel="apple-touch-icon" href="favicon.png"') >= 0) throw new Error('the 32px favicon is still the home-screen icon');
 });
 
+check('the letter legend defaults to 200pt on install AND breaker pages', () => {
+  if (APP.indexOf('const IG_LEGEND_W_DEFAULT = 200;') < 0) throw new Error('no 200pt default');
+  ["typeof g.breakerLegendW === 'number') ? g.breakerLegendW : IG_LEGEND_W_DEFAULT",
+   "typeof g.legendW === 'number') ? g.legendW : IG_LEGEND_W_DEFAULT",
+   "Number(cfg.legendW) : IG_LEGEND_W_DEFAULT"].forEach(t => { if (APP.indexOf(t) < 0) throw new Error('a default still bypasses the constant: ' + t); });
+  [": 170;", "g.breakerLegendW : 150"].forEach(t => { if (APP.indexOf('legendW) ? Number(cfg.legendW) ' + t) >= 0 || APP.indexOf(t + ',') >= 0 && t.indexOf('150') >= 0) throw new Error('old default left: ' + t); });
+});
+check('both exports raise and lower the export floor in step', () => {
+  if (APP.split('    _elevExportFloor++;').length - 1 !== 2) throw new Error('an export does not raise the floor');
+  if (APP.split('        _elevExportFloor = Math.max(0, _elevExportFloor - 1);').length - 1 !== 2) throw new Error('an export does not lower it');
+});
+
 function inApp() {
   window.__touchDone = (async () => {
     const out = [];
@@ -548,6 +560,73 @@ function inApp() {
       const msgs = []; const rt = _toast; _toast = (t) => msgs.push(t);
       try { elevAddArtwork(); } finally { _toast = rt; elevFrames.length = 0; saved.forEach(f => elevFrames.push(f)); }
       if (!msgs.length) throw new Error('no nudge when nothing is selected');
+    });
+    // ── 19.22 ──
+    await ok('joystick arrows: one exact nudge per tap, held they repeat, and the knob does not start', async () => {
+      _touchKeysBuild();
+      const arrows = document.querySelectorAll('#touchKeys .touch-stick-arrow');
+      if (arrows.length !== 4) throw new Error(arrows.length + ' arrows on the joystick');
+      const keys = []; const kd = (e) => keys.push(e.key);
+      document.addEventListener('keydown', kd);
+      const up = document.querySelector('#touchKeys .touch-stick-arrow-u');
+      touch('touchstart', up, 0, 0, 6); touch('touchend', up, 0, 0, 6);
+      await new Promise(r => setTimeout(r, TOUCH_ARROW_HOLD_MS + 50));
+      const tapN = keys.length;
+      const right = document.querySelector('#touchKeys .touch-stick-arrow-r');
+      touch('touchstart', right, 0, 0, 6);
+      await new Promise(r => setTimeout(r, TOUCH_ARROW_HOLD_MS + TOUCH_ARROW_REPEAT_MS * 2 + 40));
+      touch('touchend', right, 0, 0, 6);
+      const heldN = keys.length - tapN;
+      await new Promise(r => setTimeout(r, 200));
+      document.removeEventListener('keydown', kd);
+      if (tapN !== 1 || keys[0] !== 'ArrowUp') throw new Error('a tap sent ' + JSON.stringify(keys.slice(0, tapN)));
+      if (heldN < 3) throw new Error('a held arrow sent only ' + heldN);
+      if (keys.slice(tapN).some(k => k !== 'ArrowRight')) throw new Error('the knob joined in: ' + keys.join());
+      if (keys.length !== tapN + heldN) throw new Error('kept repeating after release');
+      if (_touchStick) throw new Error('the knob push started under an arrow');
+    });
+
+    await ok('EXACT BUG: Delete removes a selected spacing dimension (only the x did)', () => {
+      let gone = null;
+      _selDimDelete = { id: 'spacing-h-A-B', fn: () => { gone = 'spacing-h-A-B'; } };
+      selectedDimId = 'spacing-h-A-B';
+      const iv = document.getElementById('view-elevation'); const wasD = iv.style.display; iv.style.display = 'flex';
+      try { document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Delete', bubbles: true, cancelable: true })); }
+      finally { iv.style.display = wasD; }
+      if (gone !== 'spacing-h-A-B') throw new Error('THE BUG: Delete did nothing to the selected dimension');
+      if (selectedDimId) throw new Error('selection left behind');
+    });
+
+    await ok('a remembered delete for another dimension never runs', () => {
+      let ran = false;
+      _selDimDelete = { id: 'edge-A-floor', fn: () => { ran = true; } };
+      selectedDimId = 'spacing-h-A-B';
+      const iv = document.getElementById('view-elevation'); const wasD = iv.style.display; iv.style.display = 'flex';
+      try { document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Delete', bubbles: true, cancelable: true })); }
+      finally { iv.style.display = wasD; selectedDimId = null; _selDimDelete = null; }
+      if (ran) throw new Error('deleted a dimension that was not the selected one');
+    });
+
+    await ok('Delete with a dimension selected leaves a still-selected frame alone', () => {
+      const saved = elevFrames.slice();
+      const F = { id: 'zF', letter: 'A', active: true, selected: true, x: 0, y: 0, w: 10, h: 10 };
+      elevFrames.length = 0; elevFrames.push(F);
+      _selDimDelete = { id: 'spacing-h-A-B', fn: () => {} }; selectedDimId = 'spacing-h-A-B';
+      const iv = document.getElementById('view-elevation'); const wasD = iv.style.display; iv.style.display = 'flex';
+      let n;
+      try { document.body.dispatchEvent(new KeyboardEvent('keydown', { key: 'Delete', bubbles: true, cancelable: true })); n = elevFrames.length; }
+      finally { iv.style.display = wasD; elevFrames.length = 0; saved.forEach(f => elevFrames.push(f)); selectedDimId = null; _selDimDelete = null; }
+      if (n !== 1) throw new Error('the frame was deleted along with the dimension');
+    });
+
+    await ok('an export lays the wall out at least desktop size; a bigger screen is untouched', () => {
+      const saved = _elevExportFloor;
+      try {
+        _elevExportFloor = 0; drawElevAll(); const small = elevScale;
+        _elevExportFloor = 1; drawElevAll(); const exp = elevScale;
+        _elevExportFloor = 0; drawElevAll();
+        if (!(exp > small * 2)) throw new Error('export scale ' + exp + ' vs screen ' + small + ': the floor did not apply');
+      } finally { _elevExportFloor = saved; drawElevAll(); }
     });
     host.remove();
     return out;
