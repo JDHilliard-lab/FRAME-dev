@@ -1950,6 +1950,20 @@ run but passes alone is usually load timing: rerun before chasing it.
   screen is untouched (the designer's choice). On SCREEN the iPad still draws ticks relatively
   bigger (screen matches print by design); folding the panels brings it close to desktop.
 - **THE LETTER LEGEND DEFAULTS TO 200pt (`IG_LEGEND_W_DEFAULT`)**, install and breaker pages.
+- **iPHONE: PORTRAIT TO WORK, LANDSCAPE TO LOOK (19.23, `_phoneApply`, `_phoneBuild`).** A touch
+  screen under `PHONE_MAX_W` (600) wide or `PHONE_MAX_H` (500) tall gets `html.phone` (+
+  `html.phone-land` sideways); iPads never qualify. NO SECOND COPY OF ANY VIEW: it is CSS on
+  those classes plus built elements (`#phoneTabBar`, `#phoneMoreBtn`, `#phoneDashBack`,
+  `#phoneMetaToggle`, `#phoneDeckBar`, `#phoneRailClose`, the controller's fold via
+  `_phonePadFold`, run from BOTH builders since their order differs). Items = list then
+  detail (`_phoneDashDetail`; row fields take no taps in the list; a Shift/Ctrl tap stays on
+  the list). Walls = chips / wall / tool strip / panel, every panel section `flex: none`
+  (a flex:1 section collapses to nothing in a scrolling panel). Deck = page / `#phoneDeckBar`
+  / tools, rail as an All pages sheet. Landscape hides menus on Walls and Deck only
+  (`[data-phone-view]`, set by `_phoneSyncTabs`), never Items. `#appShell` is `100dvh` on a
+  phone (100vh runs under Safari's toolbar) and carries the safe-area insets
+  (`viewport-fit=cover`). Hooks: `_syncHeaderForView` -> `_phoneSyncTabs`, `_dsRenderCenter` ->
+  `_phoneDeckBarSync`. A test harness that reloads a dirty page hangs on beforeunload.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
