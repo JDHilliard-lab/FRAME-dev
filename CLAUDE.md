@@ -1924,6 +1924,15 @@ run but passes alone is usually load timing: rerun before chasing it.
   incl. any inline `-resize` cursor). The dashboard preview column yields below
   `_dashColumnFits` without touching the saved choice (`_dashWantMode2`); the wall rail folds by
   the `.collapsed` CLASS (`toggleElevRail`), never an inline display, which the exports own.
+  **19.20:** keys are tap-to-latch OR hold-while-used (`_touchKeyDown/Up`, `_touchHeld`); a
+  touch on the controller is never "the second finger" (`_touchLive`). Row selection on the
+  dashboard reads the CLICK, so `_touchClickMods` replaces the trusted click after a touch
+  with one carrying latched keys (only while one is on). The joystick sends arrow keydowns
+  and folds its undo entries to one per push (`_touchStickFoldHistory`, by identity). The
+  dashboard table (`toggleDashTable`, read through `_dashTableFloor()`, never
+  `DASH_TABLE_MIN_W` directly) and the elevation sidebar (`toggleElevSidebar`) fold by class;
+  BOTH exports unfold the sidebar (`_elevSidebarUnfoldForExport`) so output never depends on
+  it. Touch screens get the form as tabs (`_dashTabsInit`, `data-dtab` tags, sections stay put).
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

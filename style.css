@@ -2953,13 +2953,60 @@ html.touch #nav-tabs-container, html.touch .draggable {
 .elev-wall-rail.collapsed > #nav-tabs-container, .elev-wall-rail.collapsed > .nav-add-tab { display: none; }
 .elev-wall-rail.collapsed .elev-rail-toggle svg { transform: rotate(180deg); }
 
-/* THE TOUCH KEY BAR (19.19, _touchKeysBuild): only built on a touch screen. Bottom-right,
- * clear of the toasts and next-step bar (bottom-centre); under every dialog. Finger-sized. */
-.touch-keys { position: fixed; right: 12px; bottom: 12px; z-index: 9000; display: flex; gap: 6px;
-    padding: 6px; background: var(--bg-panel); border: 1px solid var(--border-color);
-    border-radius: var(--r-8); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
-.touch-key { min-width: 52px; height: 38px; padding: 0 10px; font-size: var(--fs-70); font-weight: 700;
+/* THE TOUCH CONTROLLER (19.19 keys, 19.20 joystick, _touchKeysBuild): only built on a
+ * touch screen. Bottom-left by default (the left hand works it while the right drags);
+ * the grip moves it and _touchPadSet writes left/top. Under every dialog. touch-action
+ * none so holding a key or pushing the stick never scrolls or zooms the page. */
+.touch-keys { position: fixed; left: 12px; bottom: 12px; z-index: 9000; display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px 8px 6px; background: var(--bg-panel); border: 1px solid var(--border-color);
+    border-radius: var(--r-10); box-shadow: 0 6px 20px rgba(0,0,0,0.25); touch-action: none;
+    -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.touch-pad-grip { align-self: stretch; width: 14px; border-radius: var(--r-4); cursor: grab;
+    background-image: radial-gradient(circle, var(--text-muted) 1.2px, transparent 1.6px);
+    background-size: 6px 6px; background-position: center; opacity: 0.6; }
+.touch-stick { position: relative; flex: none; width: 92px; height: 92px; border-radius: 50%;
+    background: var(--bg-subpanel); border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.18); display: flex; align-items: center; justify-content: center; }
+.touch-stick::before { content: ''; position: absolute; inset: 14px; border-radius: 50%; border: 1px dashed var(--border-color); }
+.touch-stick-knob { position: relative; width: 40px; height: 40px; border-radius: 50%; background: var(--bg-input);
+    border: 1px solid var(--border-color); box-shadow: 0 2px 6px rgba(0,0,0,0.3); transition: transform 0.12s ease-out; }
+.touch-stick.pushed .touch-stick-knob { background: var(--ui-active); border-color: var(--ui-active); transition: none; }
+.touch-key-grid { display: grid; grid-template-columns: repeat(2, auto); gap: 6px; }
+.touch-key { min-width: 58px; height: 40px; padding: 0 10px; font-size: var(--fs-70); font-weight: 700;
     color: var(--text-main); background: var(--bg-subpanel); border: 1px solid var(--border-color);
     border-radius: var(--r-6); cursor: pointer; -webkit-user-select: none; user-select: none; }
 .touch-key.active { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
 .touch-key-del { color: var(--btn-danger); }
+
+/* PANELS FOLD AWAY (19.20): the dashboard item table (toggleDashTable) and the elevation
+ * wall panel (toggleElevSidebar). A pull tab centred on the panel's inner edge, inside
+ * the panel (the dashboard pane clips overflow). Folded, the panel is a strip holding
+ * only the tab, and the chevron turns to point back out. */
+.dash-left-pane, #view-elevation .elev-sidebar { position: relative; }
+.pane-fold-btn { position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 30;
+    display: flex; align-items: center; justify-content: center; width: 20px; height: 56px; padding: 0;
+    background: var(--bg-subpanel); border: 1px solid var(--border-color); border-right: none;
+    border-radius: var(--r-6) 0 0 var(--r-6); color: var(--text-muted); cursor: pointer; }
+.pane-fold-btn:hover { color: var(--text-strong); background: var(--bg-input); }
+html.touch .pane-fold-btn { width: 26px; height: 68px; }
+.dash-left-pane.collapsed { flex: 0 0 34px; min-width: 34px; }
+.dash-left-pane.collapsed > :not(#dashTableToggle) { display: none; }
+#view-elevation .elev-sidebar.collapsed { width: 34px; }
+#view-elevation .elev-sidebar.collapsed > :not(#elevSidebarToggle) { display: none; }
+.dash-left-pane.collapsed .pane-fold-btn, #view-elevation .elev-sidebar.collapsed .pane-fold-btn {
+    left: 0; right: 0; width: auto; border-right: 1px solid var(--border-color); border-radius: var(--r-6); margin: 0 3px; }
+.dash-left-pane.collapsed .pane-fold-btn svg, #view-elevation .elev-sidebar.collapsed .pane-fold-btn svg { transform: rotate(180deg); }
+
+/* THE FORM AS TABS (19.20, _dashTabsInit): touch screens only. A section shows when the
+ * current tab owns it (data-dtab); the item and notes headings give way to the tab
+ * strip, the mat heading stays (it carries the Mat / Float switch). */
+.dash-form-tabs { margin: 0 0 10px; }
+#dashRightPane.dash-tabbed[data-dtab-on="item"] [data-dtab]:not([data-dtab="item"]),
+#dashRightPane.dash-tabbed[data-dtab-on="frame"] [data-dtab]:not([data-dtab="frame"]),
+#dashRightPane.dash-tabbed[data-dtab-on="mat"] [data-dtab]:not([data-dtab="mat"]),
+#dashRightPane.dash-tabbed[data-dtab-on="notes"] [data-dtab]:not([data-dtab="notes"]) { display: none !important; }
+#dashRightPane.dash-tabbed .section-title[data-dtab="item"],
+#dashRightPane.dash-tabbed .section-title[data-dtab="notes"] { display: none !important; }
+#dashRightPane.dash-tabbed .collapsible-section { display: block; }
+/* With the table folded, the form takes the width the table gave up rather than leaving it empty. */
+#view-dashboard:has(> .dash-left-pane.collapsed) > .dash-right-pane { flex: 1 1 440px; }

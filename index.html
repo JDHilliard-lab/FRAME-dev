@@ -27,7 +27,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.19">
+    <link rel="stylesheet" href="style.css?v=19.20">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -106,6 +106,8 @@
 
         <div id="view-dashboard" class="view-container active">
             <div class="dash-left-pane">
+                <!-- 19.20: folds the item table to a strip so the preview column fits beside the form (toggleDashTable). -->
+                <button class="pane-fold-btn dash-table-toggle" id="dashTableToggle" type="button" onclick="toggleDashTable()" title="Fold the item list away" aria-expanded="true"><svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14"><path d="M15 6l-6 6 6 6"/></svg></button>
                 <div class="top-grey-section">
                     <div class="global-meta" style="padding: 8px 20px 6px;">
                         <div><label>Project Name</label><input type="text" id="g_projName" value="Project X"></div>
@@ -543,6 +545,8 @@
 
         <div id="view-elevation" class="view-container">
             <div class="elev-sidebar">
+                <!-- 19.20: folds the wall panel to a strip so the wall gets the width (toggleElevSidebar). -->
+                <button class="pane-fold-btn elev-sidebar-toggle" id="elevSidebarToggle" type="button" onclick="toggleElevSidebar()" title="Fold the wall panel away" aria-expanded="true"><svg class="svg-icon" viewBox="0 0 24 24" width="14" height="14"><path d="M15 6l-6 6 6 6"/></svg></button>
                 <div class="elev-sidebar-header">
                     <!-- RETURN BAR. Filled by _elevSyncReturnBtn only when you arrived here from a
                          deck page, so it is absent the rest of the time rather than parked
@@ -2202,9 +2206,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.19';</script>
-<script src="templates.js?v=19.19"></script>
-<script src="app.js?v=19.19"></script>
+<script>window.FRAME_HTML_VERSION = '19.20';</script>
+<script src="templates.js?v=19.20"></script>
+<script src="app.js?v=19.20"></script>
 
 </body>
 </html>
