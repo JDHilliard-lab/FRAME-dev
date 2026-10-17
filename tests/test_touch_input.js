@@ -46,6 +46,24 @@ check('both exports unfold a folded wall panel and fold it back', () => {
   if (APP.split('        _sbRestore();').length - 1 !== 2) throw new Error('an export does not restore the sidebar');
 });
 
+check('ADD TO HOME SCREEN: manifest, a crisp icon and the web-app tags', () => {
+  const man = JSON.parse(fs.readFileSync(path.join(root, 'manifest.webmanifest'), 'utf8'));
+  if (man.display !== 'standalone') throw new Error('manifest display is ' + man.display);
+  if (man.start_url !== './' || man.scope !== './') throw new Error('start_url/scope must be relative (two sites, one tree)');
+  ['icon-180.png', 'icon-512.png'].forEach(f => {
+    const b = fs.readFileSync(path.join(root, f));
+    if (b.readUInt32BE(0) !== 0x89504e47) throw new Error(f + ' is not a PNG');
+    const w = b.readUInt32BE(16), h = b.readUInt32BE(20);
+    if (w + 'x' + h !== f.slice(5, 8) + 'x' + f.slice(5, 8)) throw new Error(f + ' is ' + w + 'x' + h);
+  });
+  const H = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  ['rel="manifest" href="manifest.webmanifest"', 'rel="apple-touch-icon" href="icon-180.png"',
+   'name="apple-mobile-web-app-capable" content="yes"', 'name="apple-mobile-web-app-title"'].forEach(t => {
+    if (H.indexOf(t) < 0) throw new Error('index.html lacks ' + t);
+  });
+  if (H.indexOf('rel="apple-touch-icon" href="favicon.png"') >= 0) throw new Error('the 32px favicon is still the home-screen icon');
+});
+
 function inApp() {
   window.__touchDone = (async () => {
     const out = [];
@@ -453,6 +471,83 @@ function inApp() {
       toggleElevSidebar();
       if (sb.classList.contains('collapsed')) throw new Error('did not unfold');
       if (localStorage.getItem('elevSidebarCollapsed') !== '0') throw new Error('not remembered');
+    });
+    // ── 19.21 ──
+    await ok('EXACT BUG: on a touch screen the frame browser opens with no cursor in the search (no keyboard)', () => {
+      document.documentElement.classList.add('touch');
+      try {
+        openFrameBrowser();
+        const q = document.getElementById('fbSearch');
+        if (!q) throw new Error('browser did not open');
+        if (document.activeElement === q) throw new Error('THE BUG: the search box took focus and would raise the keyboard');
+        // The dialog redraws; focus must not be handed to the next control either.
+        const fb = document.getElementById('frameBrowser');
+        fb.className = fb.className + ' x'; fb.className = fb.className.replace(' x', '');
+        _modalOnOpen(fb);
+        const a = document.activeElement;
+        if (a && fb.contains(a) && ['INPUT', 'SELECT', 'TEXTAREA'].indexOf(a.tagName) >= 0) throw new Error('a redraw moved focus into a field (' + a.id + '), raising the keyboard or a picker');
+        _fbClose();
+      } finally { document.documentElement.classList.remove('touch'); }
+    });
+
+    await ok('with a mouse the search still takes focus (typing straight away)', () => {
+      openFrameBrowser();
+      const q = document.getElementById('fbSearch');
+      const was = document.activeElement === q;
+      _fbClose();
+      if (!was) throw new Error('desktop lost the type-to-search focus');
+    });
+
+    await ok('the frame browser always opens on All frames', () => {
+      _fbState.src = 'project';
+      openFrameBrowser();
+      const src = _fbState.src;
+      const lit = document.querySelector('#frameBrowser .fb-src.active');
+      _fbClose();
+      if (src !== 'all') throw new Error('opened on ' + src);
+      if (!lit || lit.getAttribute('data-fb-src') !== 'all') throw new Error('All frames not lit');
+    });
+
+    await ok('Add artwork: several selected frames take several pictures in letter order, files in name order', () => {
+      const files = _elevArtFileOrder([{ name: 'IMG_0102.jpg' }, { name: 'IMG_0012.jpg' }, { name: 'img_0013.JPG' }]).map(f => f.name);
+      if (files.join() !== 'IMG_0012.jpg,img_0013.JPG,IMG_0102.jpg') throw new Error('file order ' + files.join());
+      const saved = elevFrames.slice();
+      const A = { id: 'zA', letter: 'A', active: true, selected: true }, B = { id: 'zB', letter: 'B', active: true, selected: true }, C = { id: 'zC', letter: 'C', active: true, selected: false };
+      const AA = { id: 'zAA', letter: 'AA', active: true, selected: true };
+      elevFrames.length = 0; elevFrames.push(AA, B, C, A);   // stored out of letter order on purpose
+      B.selected = true; A.selected = true;
+      const order = _elevArtTargets().map(f => f.letter).join();
+      A.selected = false; B.selected = false; AA.selected = false;
+      const none = _elevArtTargets().length;
+      elevFrames.length = 0; elevFrames.push(C);
+      C.selected = false;
+      const lone = _elevArtTargets().map(f => f.letter).join();
+      elevFrames.length = 0; saved.forEach(f => elevFrames.push(f));
+      if (order !== 'A,B,AA') throw new Error('targets ' + order);
+      if (none !== 0) throw new Error('with nothing selected on a busy wall it guessed a frame');
+      if (lone !== 'C') throw new Error('a lone frame was not used without selecting');
+    });
+
+    await ok('Add artwork applies through the same path as a drop, one picture per frame, in order', () => {
+      const real = _elevApplyArtFile, got = [];
+      _elevApplyArtFile = (frame, file, done) => { got.push(frame.letter + '=' + file.name); if (done) done(); };
+      const lefts = [];
+      const rt = _toast; _toast = (t) => lefts.push(t);
+      try {
+        _elevAddArtworkFiles([{ letter: 'A' }, { letter: 'B' }], [{ name: '1.jpg' }, { name: '2.jpg' }, { name: '3.jpg' }]);
+      } finally { _elevApplyArtFile = real; _toast = rt; }
+      if (got.join() !== 'A=1.jpg,B=2.jpg') throw new Error('applied ' + got.join());
+      if (!lefts.length) throw new Error('left-over pictures were dropped silently');
+    });
+
+    await ok('the dock has the Add artwork button and nothing selected says why', () => {
+      const b = document.getElementById('elevArtBtn');
+      if (!b || b.getAttribute('onclick') !== 'elevAddArtwork()') throw new Error('no Add artwork button in the dock');
+      const saved = elevFrames.slice(); elevFrames.length = 0;
+      elevFrames.push({ letter: 'A', active: true }, { letter: 'B', active: true });
+      const msgs = []; const rt = _toast; _toast = (t) => msgs.push(t);
+      try { elevAddArtwork(); } finally { _toast = rt; elevFrames.length = 0; saved.forEach(f => elevFrames.push(f)); }
+      if (!msgs.length) throw new Error('no nudge when nothing is selected');
     });
     host.remove();
     return out;

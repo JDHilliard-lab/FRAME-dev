@@ -166,7 +166,10 @@ function inApp() {
     });
     const cardsIn = () => Array.from(document.querySelectorAll('#fbGrid .fb-frame')).map(el => el.getAttribute('data-fb-code'));
     ok('Project frames lists the frame on the row as In use', () => {
-      if (_fbState.src !== 'project') throw new Error('opened on ' + _fbState.src);
+      // 19.21: the browser always opens on All frames (the designer's ask); this check is
+      // about the Project frames list, so it goes there itself.
+      if (_fbState.src !== 'all') throw new Error('opened on ' + _fbState.src + ', not All frames');
+      _fbState.src = 'project'; _fbRender();
       if (cardsIn().indexOf('MICH-41-29') < 0) throw new Error('row frame not listed: ' + cardsIn().join(','));
       const card = document.querySelector('.fb-frame[data-fb-code="MICH-41-29"]');
       if (!card.querySelector('.fb-used')) throw new Error('no In use badge');

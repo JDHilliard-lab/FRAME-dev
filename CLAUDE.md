@@ -1933,6 +1933,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `DASH_TABLE_MIN_W` directly) and the elevation sidebar (`toggleElevSidebar`) fold by class;
   BOTH exports unfold the sidebar (`_elevSidebarUnfoldForExport`) so output never depends on
   it. Touch screens get the form as tabs (`_dashTabsInit`, `data-dtab` tags, sections stay put).
+  **19.21:** a field marked `data-touch-nofocus` is never auto-focused on a touch screen
+  (`_touchNoAutoFocus`, in `_modalOnOpen` and the frame browser): `_modalOnOpen` re-runs on
+  every redraw and would raise the keyboard, or walk focus onto the next control, each time.
+  `_elevApplyArtFile` is the ONE way a picture file reaches a wall frame (drop and the dock's
+  `elevAddArtwork`). Home-screen app: `manifest.webmanifest` (relative start_url/scope: two
+  sites, one tree), `icon-180.png`/`icon-512.png`; `_homeScreenTitle` names dev "FRAME dev".
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
