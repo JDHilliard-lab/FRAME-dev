@@ -55,6 +55,16 @@ check('Import offers New items from photos on every device', () => {
   if (APP.indexOf("{ label: 'New items from photos…', hint: 'one new item per picture', onClick: () => dashNewFromPhotos() }") < 0) throw new Error('not in the Import menu');
 });
 
+check('EXACT BUG: nothing sits under the iPhone status bar (camera, clock, battery)', () => {
+  // viewport-fit=cover lets the page run under it; every top edge must be padded by the inset.
+  if (CSS.indexOf('#appShell { padding-top: env(safe-area-inset-top, 0px); }') < 0) throw new Error('the header can slide under the status bar');
+  if (CSS.indexOf('.frame-modal { box-sizing: border-box; padding: env(safe-area-inset-top, 0px)') < 0) throw new Error('dialogs can sit under the status bar');
+  if (CSS.indexOf('html.phone #frameBrowser { padding: env(safe-area-inset-top, 0px)') < 0) throw new Error('the phone frame browser can sit under the status bar');
+  if (CSS.indexOf('html.phone #frameBrowser { padding: 0; }') >= 0) throw new Error('a zero-padding rule is back on the frame browser');
+  if (CSS.indexOf('padding: calc(10px + env(safe-area-inset-top, 0px)) 56px 8px 10px') < 0) throw new Error('the page sheet filter can sit under the status bar');
+  if (CSS.indexOf('top: calc(8px + env(safe-area-inset-top, 0px))') < 0) throw new Error('the page sheet X can sit under the status bar');
+});
+
 function inApp() {
   window.__phoneDone = (async () => {
     const out = [];

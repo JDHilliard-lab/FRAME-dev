@@ -3207,8 +3207,8 @@ html.phone #dsRail.phone-sheet [data-railcell] { width: 186px; zoom: var(--rail-
 
 /* Frame browser on a phone: full screen, lists in a drawer, filters folded, 3 across. */
 .fb-phone-btn { display: none; }
-html.phone #frameBrowser { padding: 0; }
-html.phone #frameBrowser .fb-card { position: relative; width: 100vw; height: 100dvh; border-radius: 0; border: none; }
+html.phone #frameBrowser { padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+html.phone #frameBrowser .fb-card { position: relative; width: 100%; height: 100%; border-radius: 0; border: none; }
 html.phone #frameBrowser .fb-side { display: none; }
 html.phone #frameBrowser .fb-card.side-open .fb-side { display: block; position: absolute; top: 0; bottom: 0; left: 0; width: 78%;
     z-index: 5; box-shadow: 8px 0 30px rgba(0,0,0,0.45); }
@@ -3236,7 +3236,7 @@ html.phone #frameBrowser .fb-star, html.phone #frameBrowser .fb-more { width: 22
 html.phone #frameBrowser .fb-star { top: 5px; }
 html.phone #frameBrowser .fb-more { top: 31px; }
 html.phone #frameBrowser .fb-used { left: 5px; top: 5px; }
-html.phone #frameBrowser .fb-foot { font-size: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); justify-content: flex-end; }
+html.phone #frameBrowser .fb-foot { font-size: 0; padding: 6px 8px; justify-content: flex-end; }
 
 /* ═══ iPHONE round three (19.25) ═══════════════════════════════════════════════════ */
 /* Frame swatches: the corner photo is pinned to the box. Safari does not resolve a
@@ -3303,15 +3303,24 @@ html.phone #alignModal > div { left: 8px !important; right: 8px !important; top:
 /* All pages: tighter gutters; the filter row sits at the very top (nothing shows above or
  * behind it) with the close button beside it. */
 html.phone #dsRail.phone-sheet { padding: 0 8px 12px !important; }
-html.phone #dsRail.phone-sheet > :first-child { top: 0 !important; margin: 0 -8px 6px !important; padding: 10px 56px 8px 10px !important;
+html.phone #dsRail.phone-sheet > :first-child { top: 0 !important; margin: 0 -8px 6px !important; padding: calc(10px + env(safe-area-inset-top, 0px)) 56px 8px 10px !important;
     background: var(--bg-panel) !important; }
 .phone-x { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border-radius: 50%;
     border: 1px solid var(--border-color); background: var(--bg-subpanel); color: var(--text-strong); cursor: pointer; }
 .phone-x .svg-icon { width: 18px; height: 18px; }
-html.phone.phone-sheet-open .phone-sheet-close.phone-x { display: flex; top: 8px; right: 10px; width: 36px; height: 36px; padding: 0; border-radius: 50%; border: 1px solid var(--border-color);
+html.phone.phone-sheet-open .phone-sheet-close.phone-x { display: flex; top: calc(8px + env(safe-area-inset-top, 0px)); right: calc(10px + env(safe-area-inset-right, 0px)); width: 36px; height: 36px; padding: 0; border-radius: 50%; border: 1px solid var(--border-color);
     background: var(--bg-subpanel); color: var(--text-strong); }
 
 /* The frame browser's close is the same round X. */
 html.phone #frameBrowser .fb-top .jump-esc { width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 0;
     display: flex; align-items: center; justify-content: center; }
 html.phone #frameBrowser .fb-top .jump-esc::after { content: '\2715'; font-size: 16px; line-height: 1; }
+
+/* SAFE AREA AT THE TOP (19.29). viewport-fit=cover (19.23) lets the page run under the
+ * iPhone's status bar (camera, clock, battery) in the home-screen app; only the bottom and
+ * sides were padded, so the header slid under it. The shell, every dialog and the phone's
+ * full-screen sheets keep clear of all four edges. env() is 0 on a desktop. */
+#appShell { padding-top: env(safe-area-inset-top, 0px); }
+.frame-modal { box-sizing: border-box; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
+html.phone .touch-keys { right: calc(8px + env(safe-area-inset-right, 0px)); }
+html.phone-land .phone-deckbar { bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }

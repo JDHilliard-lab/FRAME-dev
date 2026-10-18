@@ -2015,6 +2015,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   The item preview REDRAWS when the item screen opens (it was sized while hidden: cropped).
   Frame library vendors are an accordion, and an explicit open/close in `_fbOpenVendors` WINS
   over "the current list is open" (before, the vendor being viewed could never be closed).
+- **EVERY EDGE IS PADDED BY ITS SAFE-AREA INSET (19.29).** `viewport-fit=cover` lets the page run
+  under the iPhone status bar and home indicator. `#appShell` pads all four, `.frame-modal` pads
+  all four (the phone frame browser card is 100%, not 100vw/100dvh), and any phone sheet pinned
+  to the top adds `env(safe-area-inset-top)`. A new full-screen or top-pinned element must too.
+  Chrome can test it: `Emulation.setSafeAreaInsetsOverride`.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
