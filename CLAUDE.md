@@ -2020,6 +2020,16 @@ run but passes alone is usually load timing: rerun before chasing it.
   all four (the phone frame browser card is 100%, not 100vw/100dvh), and any phone sheet pinned
   to the top adds `env(safe-area-inset-top)`. A new full-screen or top-pinned element must too.
   Chrome can test it: `Emulation.setSafeAreaInsetsOverride`.
+- **PROJECT SALON HANGS ARE `asDrawn` PRESETS (19.30).** `SALON_PRESETS` also holds the Ford
+  Engineering Lab V7 hangs (`fel-<area>-<no>`, `src`, `asDrawn: true`): the project's own gaps,
+  any piece count up to the 12-letter cap. The 3"-gap and style-mix rules in `test_frame_sets`
+  apply to the HOUSE presets only; asDrawn ones must start at 0,0, never overlap and keep 1"+
+  gaps. The Frames menu lists them in their own section (house loops skip `asDrawn`).
+- **A SAVED PROJECT KEEPS ITS FOOTER FIELDS AND DECK TICKS (19.30).** `globalMeta.docCode /
+  docVersion / docLocation` carry the Project tab's code/version/location (they were never
+  saved). `seedDeckIncludeInputs` / `seedDeckPlanOrderInput` must run AFTER the editorial is
+  installed in every open path (`_readProjectText`, autosave restore, `_versionRestore`); they
+  ran before it, against the previous project's editorial.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
