@@ -34,6 +34,19 @@ check('the Walls panel on a phone is one scroll with every section its natural h
   if (CSS.indexOf('html.phone #view-elevation .elev-sidebar > * { flex: none !important; }') < 0) throw new Error('flex:1 sections collapse to nothing inside a scrolling panel');
 });
 
+check('the Project tab shows no page preview on a touch screen; a phone stacks one column', () => {
+  if (CSS.indexOf('html.touch #dsProjRight { display: none !important; }') < 0) throw new Error('preview not dropped on touch screens');
+  if (CSS.indexOf('html.phone #dsProjCols { flex-direction: column;') < 0) throw new Error('phone Project tab not one column');
+});
+check('the wall area holds off the browser pinch on touch screens', () => {
+  if (CSS.indexOf('html.touch #scrollArea { touch-action: none; }') < 0) throw new Error('no touch-action:none on the wall');
+  if (APP.indexOf("['gesturestart', 'gesturechange']") < 0) throw new Error('Safari gesture events not held off');
+});
+check('the frame browser on a phone is three across (five sideways)', () => {
+  if (CSS.indexOf('html.phone #frameBrowser .fb-grid { grid-template-columns: repeat(3, minmax(0, 1fr));') < 0) throw new Error('not 3 across');
+  if (CSS.indexOf('html.phone-land #frameBrowser .fb-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }') < 0) throw new Error('not 5 sideways');
+});
+
 function inApp() {
   window.__phoneDone = (async () => {
     const out = [];
@@ -65,8 +78,9 @@ function inApp() {
     });
 
     await ok('the bottom tab bar switches views and lights the current one', () => {
-      const tabs = document.querySelectorAll('#phoneTabBar .phone-tab');
-      if (tabs.length !== 3) throw new Error(tabs.length + ' tabs');
+      // Three VIEW tabs (19.24 added Controls beside them, which is not a view).
+      const tabs = document.querySelectorAll('#phoneTabBar .phone-tab[data-view]');
+      if (tabs.length !== 3) throw new Error(tabs.length + ' view tabs');
       document.querySelector('#phoneTabBar [data-view="elevation"]').click();
       if (currentView !== 'elevation') throw new Error('tab did not switch: ' + currentView);
       if (!document.querySelector('#phoneTabBar [data-view="elevation"]').classList.contains('active')) throw new Error('Walls not lit');
@@ -139,15 +153,97 @@ function inApp() {
       if (!document.getElementById('phoneMoreBtn')) throw new Error('no more button in the header');
     });
 
-    await ok('the controller starts folded on a phone and unfolds on its button', () => {
+    await ok('the controller starts hidden on a phone and the tab bar Controls shows it (19.24)', () => {
       _touchKeysBuild();
       _phoneBuild();
       const pad = document.getElementById('touchKeys');
-      const tg = pad && pad.querySelector('.touch-pad-toggle');
-      if (!tg) throw new Error('no fold button');
-      if (!pad.classList.contains('collapsed')) throw new Error('not folded to start');
-      tg.click();
-      if (pad.classList.contains('collapsed')) throw new Error('did not unfold');
+      const tab = document.getElementById('phoneTabPad');
+      if (!tab) throw new Error('no Controls button in the tab bar');
+      if (!pad.classList.contains('collapsed')) throw new Error('not hidden to start');
+      if (pad.querySelector('.touch-pad-toggle')) throw new Error('the floating fold button is back (it covered buttons)');
+      tab.click();
+      if (pad.classList.contains('collapsed') || !tab.classList.contains('active')) throw new Error('Controls did not show it');
+      tab.click();
+      if (!pad.classList.contains('collapsed') || tab.classList.contains('active')) throw new Error('Controls did not hide it');
+    });
+
+    await ok('Deck: Generate PDF and Approval live under one menu on a phone (19.24)', () => {
+      const mb = document.getElementById('phoneDeckMenuBtn');
+      if (!mb) throw new Error('no deck menu button');
+      const items = [];
+      const real = _frameMenu; _frameMenu = (a, list) => list.forEach(i => items.push(i));
+      try { openPhoneDeckMenu(mb); } finally { _frameMenu = real; }
+      const gen = items.find(i => i.label === 'Generate PDF...');
+      if (!gen) throw new Error('no Generate PDF in the menu');
+      let opened = false; const rg = _dsOpenGenerate; _dsOpenGenerate = () => { opened = true; };
+      try { gen.onClick(); } finally { _dsOpenGenerate = rg; }
+      if (!opened) throw new Error('Generate PDF item does not open the generator');
+      if (!items.find(i => i.label === 'Approval stamp')) throw new Error('no Approval in the menu');
+    });
+
+    await ok('All pages sheet: cells zoom to the phone width (19.24)', () => {
+      Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true });
+      _phoneRailSheet(true);
+      const z = parseFloat(document.getElementById('dsRail').style.getPropertyValue('--rail-zoom'));
+      _phoneRailSheet(false);
+      if (!(z > 1.8 && z < 2.1)) throw new Error('zoom ' + z + ' for a 390px phone');
+    });
+
+    await ok('Frame browser on a phone: lists in a drawer named after the list, filters folded, picking a list closes it (19.24)', async () => {
+      openFrameBrowser();
+      const menu = document.getElementById('fbMenuBtn'), flt = document.getElementById('fbFilterBtn');
+      if (!menu || !flt) throw new Error('phone buttons missing');
+      const card = document.querySelector('#frameBrowser .fb-card');
+      menu.click();
+      if (!card.classList.contains('side-open')) throw new Error('drawer did not open');
+      const src = document.querySelector('#fbSide .fb-src[data-fb-src="project"]');
+      src.click();
+      await new Promise(r => setTimeout(r, 20));
+      if (card.classList.contains('side-open')) throw new Error('picking a list left the drawer open');
+      if (document.getElementById('fbMenuLabel').textContent.indexOf('Project') < 0) throw new Error('label reads ' + document.getElementById('fbMenuLabel').textContent);
+      flt.click();
+      if (!document.getElementById('fbTop').classList.contains('filters-open')) throw new Error('Filters did not open');
+      _fbClose();
+    });
+
+    await ok('pinch on the wall zooms the wall, about the fingers, not the app (19.24)', () => {
+      switchView('elevation');
+      const ws = document.getElementById('scrollArea');
+      const z0 = elevZoomFactor;
+      const t = (id, x) => ({ identifier: id, clientX: x, clientY: 100, target: ws });
+      const fire = (type, touches, changed) => {
+        const ev = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperty(ev, 'touches', { value: touches });
+        Object.defineProperty(ev, 'changedTouches', { value: changed });
+        ws.dispatchEvent(ev); return ev;
+      };
+      fire('touchstart', [t(1, 100)], [t(1, 100)]);
+      fire('touchstart', [t(1, 100), t(2, 140)], [t(2, 140)]);
+      const mv = fire('touchmove', [t(1, 80), t(2, 160)], [t(1, 80), t(2, 160)]);
+      fire('touchend', [], [t(1, 80), t(2, 160)]);
+      const z = elevZoomFactor;
+      elevZoomFactor = z0; drawElevAll();
+      if (Math.abs(z - z0 * 2) > 0.01) throw new Error('fingers spread 2x, zoom went ' + z0 + ' -> ' + z);
+      if (!mv.defaultPrevented) throw new Error('the browser would zoom the whole app');
+      if (document.getElementById('zoomSlider').value !== String(Math.round(z * 10) / 10)) throw new Error('slider not following');
+      if (_touchPinch) throw new Error('pinch left open after the fingers lifted');
+    });
+
+    await ok('pinch outside the wall is left to the browser', () => {
+      const z0 = elevZoomFactor;
+      const el = document.getElementById('phoneTabBar');
+      const t = (id, x) => ({ identifier: id, clientX: x, clientY: 10, target: el });
+      const fire = (type, touches, changed) => {
+        const ev = new Event(type, { bubbles: true, cancelable: true });
+        Object.defineProperty(ev, 'touches', { value: touches });
+        Object.defineProperty(ev, 'changedTouches', { value: changed });
+        el.dispatchEvent(ev);
+      };
+      fire('touchstart', [t(1, 10)], [t(1, 10)]);
+      fire('touchstart', [t(1, 10), t(2, 50)], [t(2, 50)]);
+      fire('touchmove', [t(1, 0), t(2, 90)], [t(1, 0), t(2, 90)]);
+      fire('touchend', [], [t(1, 0), t(2, 90)]);
+      if (elevZoomFactor !== z0) throw new Error('a pinch on the tab bar zoomed the wall');
     });
 
     await ok('leaving phone size takes the classes off (an iPad rotating, a resize)', () => {

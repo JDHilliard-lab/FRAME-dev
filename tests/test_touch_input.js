@@ -23,7 +23,8 @@ check('the layer is installed at module scope, ahead of initMasterApp', () => {
   if (boot < 0 || at > boot) throw new Error('installed after boot');
 });
 check('touchmove is NOT passive (a drag must be able to stop the scroll)', () => {
-  if (APP.indexOf("addEventListener('touchmove', _touchMove, { capture: true, passive: false })") < 0)
+  // 19.24 wraps it so a pinch is routed first; still capture phase, still not passive.
+  if (APP.indexOf("addEventListener('touchmove', (e) => { if (_touchPinch) _touchPinchMove(e); else _touchMove(e); }, { capture: true, passive: false })") < 0)
     throw new Error('touchmove listener is passive or not in capture phase');
 });
 check('the CSS half: no double-tap zoom, no callout on surfaces, hover controls shown', () => {

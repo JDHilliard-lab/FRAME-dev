@@ -3029,7 +3029,7 @@ html.touch .pane-fold-btn { width: 26px; height: 68px; }
  * tab bar; content stops above it. */
 html.phone { --phone-tab-h: 56px; --phone-safe-b: env(safe-area-inset-bottom, 0px); }
 .phone-tabbar, .phone-mark, #phoneMoreBtn, .phone-backbar, .phone-meta-toggle, .phone-deckbar,
-.phone-sheet-close, .touch-pad-toggle { display: none; }
+.phone-sheet-close { display: none; }
 
 /* ── Shell ── */
 html.phone #appShell { height: 100dvh !important; padding-bottom: calc(var(--phone-tab-h) + var(--phone-safe-b)); box-sizing: border-box; }
@@ -3053,14 +3053,9 @@ html.phone .frame-toast-host { bottom: calc(var(--phone-tab-h) + var(--phone-saf
 /* Desktop/iPad fold tabs have no job on a phone; the layouts below replace them. */
 html.phone .pane-fold-btn, html.phone #elevRailToggle { display: none !important; }
 
-/* ── The controller: folded to a round button above the tab bar ── */
+/* ── The controller: above the tab bar, shown from the tab bar's Controls (19.24) ── */
 html.phone .touch-keys { left: auto; right: 10px; bottom: calc(var(--phone-tab-h) + var(--phone-safe-b) + 10px); top: auto;
     padding: 6px; gap: 6px; }
-html.phone .touch-pad-toggle, .touch-keys.collapsed .touch-pad-toggle { display: flex; }
-.touch-pad-toggle { align-items: center; justify-content: center; width: 40px; height: 40px; padding: 0; border-radius: 50%;
-    border: 1px solid var(--border-color); background: var(--bg-subpanel); color: var(--text-main); cursor: pointer; flex: none; }
-.touch-keys.collapsed { padding: 4px; border-radius: 50%; }
-.touch-keys.collapsed > :not(.touch-pad-toggle) { display: none; }
 html.phone .touch-stick { width: 104px; height: 104px; }
 html.phone .touch-stick::before { inset: 26px; }
 html.phone .touch-key { min-width: 50px; height: 36px; }
@@ -3182,3 +3177,64 @@ html.phone #view-elevation .elev-sidebar { --elev-col-template: 88px 46px 24px 3
  * the shell inside them. env() is 0 on a desktop, so nothing moves there. */
 #appShell { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); box-sizing: border-box; }
 html:not(.phone) #appShell { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* ═══ iPHONE / iPAD round two (19.24) ═══════════════════════════════════════════════ */
+/* Pinch to zoom the wall: the browser's own pinch (the whole app) is held off over it. */
+html.touch #scrollArea { touch-action: none; }
+
+/* The controller lives in the tab bar: no floating button; hidden until Controls. */
+.phone-tab-pad.active { color: var(--accent); }
+html.phone .touch-keys.collapsed { display: none; }
+html.phone .touch-keys { right: 8px; left: auto; }
+html.phone-land:not([data-phone-view="dashboard"]) .touch-keys { bottom: 10px; }
+
+/* Deck Studio header: Generate PDF and Approval live in the menu on a phone. */
+.phone-deck-menu { display: none; }
+html.phone .phone-deck-menu { display: flex; width: 38px !important; height: 34px; margin-left: auto; flex: none; }
+html.phone #dsGenerateBtn, html.phone #dsApprovedBtn { display: none !important; }
+html.phone #view-deck > div:first-child { flex-wrap: nowrap; }
+
+/* Project tab: no page preview on a touch screen (the rail and the page show it), and
+ * one column on a phone with the project fields first. */
+html.touch #dsProjRight { display: none !important; }
+html.phone #dsTabProject { padding: 10px !important; }
+html.phone #dsProjCols { flex-direction: column; gap: 14px !important; }
+html.phone #dsProjPreset, html.phone #dsProjLeft { flex: none !important; width: 100%; }
+html.phone #dsProjLeft { order: -1; }
+
+/* All pages sheet: cells at desktop size, zoomed to the sheet width. */
+html.phone #dsRail.phone-sheet [data-railcell] { width: 186px; zoom: var(--rail-zoom, 1); }
+html.phone #dsRail.phone-sheet .ds-insstrip { zoom: var(--rail-zoom, 1); width: 186px; }
+
+/* Frame browser on a phone: full screen, lists in a drawer, filters folded, 3 across. */
+.fb-phone-btn { display: none; }
+html.phone #frameBrowser { padding: 0; }
+html.phone #frameBrowser .fb-card { position: relative; width: 100vw; height: 100dvh; border-radius: 0; border: none; }
+html.phone #frameBrowser .fb-side { display: none; }
+html.phone #frameBrowser .fb-card.side-open .fb-side { display: block; position: absolute; top: 0; bottom: 0; left: 0; width: 78%;
+    z-index: 5; box-shadow: 8px 0 30px rgba(0,0,0,0.45); }
+html.phone .fb-phone-btn { display: flex; align-items: center; gap: 6px; height: 34px; padding: 0 10px; flex: none;
+    background: var(--bg-subpanel); border: 1px solid var(--border-color); border-radius: var(--r-6); color: var(--text-main);
+    font-size: var(--fs-70); font-weight: 700; cursor: pointer; }
+html.phone .fb-phone-btn.active { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
+html.phone .fb-menu-btn { max-width: 46%; }
+html.phone .fb-menu-btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+html.phone .fb-menu-btn .svg-icon { flex: none; width: 16px; height: 16px; }
+html.phone #frameBrowser .fb-top { padding: 8px; gap: 6px; }
+html.phone #frameBrowser .fb-top input { flex: 1 1 100%; order: 5; height: 34px; }
+html.phone #frameBrowser .fb-top select { display: none; }
+html.phone #frameBrowser .fb-top.filters-open select { display: block; flex: 1 1 45%; order: 6; height: 34px; }
+html.phone #frameBrowser .fb-top .jump-esc { margin-left: auto; height: 34px; font-size: 0; padding: 0 12px; }
+html.phone #frameBrowser .fb-top .jump-esc::after { content: 'Done'; font-size: var(--fs-70); }
+html.phone #frameBrowser .fb-head { padding: 6px 10px 2px; }
+html.phone #frameBrowser .fb-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; padding: 4px 8px 12px; }
+html.phone-land #frameBrowser .fb-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+html.phone #frameBrowser .fb-frame { padding: 3px; }
+html.phone #frameBrowser .fb-pic { height: auto; aspect-ratio: 3 / 4; }
+html.phone #frameBrowser .fb-code { font-size: var(--fs-55); margin-top: 3px; }
+html.phone #frameBrowser .fb-sub { display: none; }
+html.phone #frameBrowser .fb-star, html.phone #frameBrowser .fb-more { width: 22px; height: 22px; right: 5px; }
+html.phone #frameBrowser .fb-star { top: 5px; }
+html.phone #frameBrowser .fb-more { top: 31px; }
+html.phone #frameBrowser .fb-used { left: 5px; top: 5px; }
+html.phone #frameBrowser .fb-foot { font-size: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); justify-content: flex-end; }

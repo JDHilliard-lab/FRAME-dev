@@ -1964,6 +1964,17 @@ run but passes alone is usually load timing: rerun before chasing it.
   phone (100vh runs under Safari's toolbar) and carries the safe-area insets
   (`viewport-fit=cover`). Hooks: `_syncHeaderForView` -> `_phoneSyncTabs`, `_dsRenderCenter` ->
   `_phoneDeckBarSync`. A test harness that reloads a dirty page hangs on beforeunload.
+  **19.24:** PINCH ZOOMS THE WALL (`_touchPinchBegin/Move/End`, two fingers both inside
+  `#scrollArea`, elevation view): drives `elevZoomFactor` like the slider (0.5..3), anchored on
+  the fingers via workspace scroll, listeners on both touched elements (frames are rebuilt
+  mid-pinch); `html.touch #scrollArea { touch-action: none }` + Safari `gesturestart` held off
+  so the app never zooms. The phone controller is the tab bar's Controls (`#phoneTabPad`,
+  `_phonePadToggle`); NO floating fold button (it covered buttons). Deck header on a phone:
+  `#phoneDeckMenuBtn` holds Generate PDF / Approval / Preflight. All pages sheet zooms each
+  rail cell (`--rail-zoom`, `PHONE_RAIL_CELL_W`). Frame browser on a phone: `_fbPhoneChrome`
+  (built in `_fbBuildTop`, which rebuilds the row) puts lists in a drawer and folds filters;
+  3 across / 5 sideways. `#dsProjRight` (Project preview) is hidden on ANY touch screen.
+  Viewport has `maximum-scale=1` (stops iOS zooming into small inputs on focus).
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

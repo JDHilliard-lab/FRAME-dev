@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.23';
+const APP_VERSION = '19.24';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -15181,6 +15181,41 @@ function _fbBuildTop() {
     // A touch screen gets no cursor in the search box on open: focusing it raises the
     // iPad keyboard over the frames before anyone asked to type (19.21).
     if (!_touchNoAutoFocus(q)) { try { q.focus(); } catch (e) {} }
+    if (typeof _phoneOn !== 'undefined' && _phoneOn) _fbPhoneChrome(top, q);
+}
+// THE FRAME BROWSER ON A PHONE (19.24): the frames get the screen. The library list
+// (project, groupings, vendors) is a drawer behind a menu button that names the list
+// you are in; the five filters fold behind Filters; the grid is three across (five
+// turned sideways) with unlimited rows, for flipping through. Built inside _fbBuildTop
+// because that rebuilds the top row from scratch.
+function _fbPhoneChrome(top, q) {
+    const card = top.closest('.fb-card');
+    const menu = document.createElement('button');
+    menu.type = 'button'; menu.id = 'fbMenuBtn'; menu.className = 'fb-phone-btn fb-menu-btn';
+    menu.setAttribute('aria-label', 'Frame lists');
+    menu.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span id="fbMenuLabel"></span>';
+    menu.onclick = () => { if (card) card.classList.toggle('side-open'); };
+    top.insertBefore(menu, top.firstChild);
+    const flt = document.createElement('button');
+    flt.type = 'button'; flt.id = 'fbFilterBtn'; flt.className = 'fb-phone-btn';
+    flt.textContent = 'Filters';
+    flt.onclick = () => { const on = top.classList.toggle('filters-open'); flt.classList.toggle('active', on); };
+    top.insertBefore(flt, q.nextSibling);
+    const side = document.getElementById('fbSide');
+    if (side && !side._phoneWired) {
+        side._phoneWired = true;
+        // Picking a list closes the drawer (after the list's own click has run).
+        side.addEventListener('click', (e) => {
+            if (e.target.closest && e.target.closest('.fb-src')) setTimeout(() => { if (card) card.classList.remove('side-open'); }, 0);
+        });
+    }
+    _fbPhoneLabel();
+}
+function _fbPhoneLabel() {
+    const l = document.getElementById('fbMenuLabel');
+    if (!l) return;
+    const a = document.querySelector('#fbSide .fb-src.active span');
+    l.textContent = a ? a.textContent.replace(/^[\u25B8\u25BE] /, '') : 'Lists';
 }
 function _fbSideItem(host, src, label, count, extraCls) {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'fb-src' + (extraCls ? ' ' + extraCls : '') + (_fbState.src === src ? ' active' : '');
@@ -15200,6 +15235,7 @@ function _fbSideHead(host, text, action) {
     host.appendChild(h);
 }
 function _fbRender() {
+    try { setTimeout(_fbPhoneLabel, 0); } catch (e) {}
     const side = document.getElementById('fbSide'); if (!side) return;
     const all = _fbAll(), byCode = _fbByCode(all);
     // A source that no longer exists (deleted grouping) falls back to the project.
@@ -43953,6 +43989,7 @@ function _touchStart(e) {
     if (live.length !== 1) {
         // A second finger joins: let go of whatever one finger was doing.
         if (_touchG) _touchEnd(e, true);
+        if (live.length === 2) _touchPinchBegin(live);
         return;
     }
     _touchMarkHeldUsed();
@@ -44050,6 +44087,80 @@ function _touchEnd(e, cancelled) {
             _touchLastTap = { t: now, x: pt.clientX, y: pt.clientY, target: g.target };
         }
     }
+}
+
+// PINCH TO ZOOM THE WALL (19.24). Two fingers on the elevation workspace drive the
+// same zoom as the slider (elevZoomFactor, 0.5 to 3) and keep the spot between them
+// under the fingers; moving them together pans. The browser's own pinch, which zooms
+// the WHOLE app, is held off there (touch-action:none on #scrollArea in style.css, plus
+// Safari's gesture events). Listeners also go on both touched elements, since
+// drawElevAll rebuilds frames mid-pinch and a detached node's touches never reach window.
+const ELEV_PINCH_MIN = 0.5, ELEV_PINCH_MAX = 3;
+let _touchPinch = null;
+function _touchInWall(t) {
+    const el = t && t.target;
+    return !!(el && el.nodeType === 1 && el.closest && el.closest('#scrollArea'));
+}
+function _touchPinchBegin(live) {
+    if (_touchPinch || currentView !== 'elevation') return;
+    if (!_touchInWall(live[0]) || !_touchInWall(live[1])) return;
+    const ws = document.getElementById('scrollArea');
+    if (!ws) return;
+    const r = ws.getBoundingClientRect();
+    const a = live[0], b = live[1];
+    const mx = (a.clientX + b.clientX) / 2, my = (a.clientY + b.clientY) / 2;
+    _touchPinch = {
+        ids: [a.identifier, b.identifier], targets: [a.target, b.target],
+        d0: Math.max(1, Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY)),
+        z0: elevZoomFactor,
+        // The content point under the fingers, in the workspace's scrolled coordinates.
+        cx: mx - r.left + ws.scrollLeft, cy: my - r.top + ws.scrollTop
+    };
+    _touchPinch.targets.forEach(t => {
+        t.addEventListener('touchmove', _touchPinchMove, { passive: false });
+        t.addEventListener('touchend', _touchPinchEnd, { passive: true });
+        t.addEventListener('touchcancel', _touchPinchEnd, { passive: true });
+    });
+}
+function _touchPinchMove(e) {
+    const p = _touchPinch;
+    if (!p || !_touchFirst(e)) return;
+    let a = null, b = null;
+    for (let i = 0; i < e.touches.length; i++) {
+        const t = e.touches[i];
+        if (t.identifier === p.ids[0]) a = t; else if (t.identifier === p.ids[1]) b = t;
+    }
+    if (!a || !b) return;
+    if (e.cancelable) e.preventDefault();
+    const ws = document.getElementById('scrollArea');
+    if (!ws) return;
+    const d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+    const z = Math.max(ELEV_PINCH_MIN, Math.min(ELEV_PINCH_MAX, p.z0 * d / p.d0));
+    if (Math.abs(z - elevZoomFactor) > 0.005) {
+        elevZoomFactor = z;
+        const sl = document.getElementById('zoomSlider');
+        if (sl) sl.value = String(Math.round(z * 10) / 10);
+        try { drawElevAll(); } catch (er) {}
+    }
+    const r = ws.getBoundingClientRect(), k = elevZoomFactor / p.z0;
+    const mx = (a.clientX + b.clientX) / 2, my = (a.clientY + b.clientY) / 2;
+    ws.scrollLeft = p.cx * k - (mx - r.left);
+    ws.scrollTop = p.cy * k - (my - r.top);
+}
+function _touchPinchEnd(e) {
+    const p = _touchPinch;
+    if (!p || (e && !_touchFirst(e))) return;
+    if (e && e.touches) {
+        let n = 0;
+        for (let i = 0; i < e.touches.length; i++) if (p.ids.indexOf(e.touches[i].identifier) >= 0) n++;
+        if (n >= 2) return;
+    }
+    p.targets.forEach(t => {
+        t.removeEventListener('touchmove', _touchPinchMove, { passive: false });
+        t.removeEventListener('touchend', _touchPinchEnd, { passive: true });
+        t.removeEventListener('touchcancel', _touchPinchEnd, { passive: true });
+    });
+    _touchPinch = null;
 }
 
 function _touchSwallowCompat(e) {
@@ -44401,9 +44512,14 @@ function _touchInstall() {
     // Capture phase so no handler below can stopPropagation the layer out, and
     // not passive, because a drag has to preventDefault the scroll.
     window.addEventListener('touchstart', _touchStart, { capture: true, passive: true });
-    window.addEventListener('touchmove', _touchMove, { capture: true, passive: false });
-    window.addEventListener('touchend', _touchEndOk, { capture: true, passive: true });
-    window.addEventListener('touchcancel', _touchEndCancel, { capture: true, passive: true });
+    window.addEventListener('touchmove', (e) => { if (_touchPinch) _touchPinchMove(e); else _touchMove(e); }, { capture: true, passive: false });
+    window.addEventListener('touchend', (e) => { if (_touchPinch) _touchPinchEnd(e); _touchEndOk(e); }, { capture: true, passive: true });
+    window.addEventListener('touchcancel', (e) => { if (_touchPinch) _touchPinchEnd(e); _touchEndCancel(e); }, { capture: true, passive: true });
+    // Safari's own pinch gesture: never over the wall (it would zoom the whole app).
+    ['gesturestart', 'gesturechange'].forEach(type => document.addEventListener(type, (e) => {
+        const t = e.target;
+        if (t && t.closest && t.closest('#scrollArea') && e.cancelable) e.preventDefault();
+    }, { passive: false }));
     ['mousedown', 'mouseup', 'mousemove', 'dblclick'].forEach(type =>
         window.addEventListener(type, _touchSwallowCompat, true));
     window.addEventListener('click', _touchClickMods, true);
@@ -44480,7 +44596,30 @@ function _phoneBuild() {
         b.onclick = () => { try { switchView(v); } catch (e) {} };
         bar.appendChild(b);
     });
+    // THE CONTROLLER LIVES IN THE TAB BAR (19.24): a floating button covered buttons
+    // underneath it. Tap to show the joystick and keys above the bar, tap to hide.
+    const padTab = document.createElement('button');
+    padTab.type = 'button';
+    padTab.className = 'phone-tab phone-tab-pad';
+    padTab.id = 'phoneTabPad';
+    padTab.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>Controls</span>';
+    padTab.onclick = () => _phonePadToggle();
+    bar.appendChild(padTab);
     document.body.appendChild(bar);
+    // Deck Studio's header: Generate PDF and Approval go under one menu (19.24), so the
+    // tabs and the page get the room.
+    const dsHead = document.querySelector('#view-deck > div:first-child');
+    if (dsHead && !document.getElementById('phoneDeckMenuBtn')) {
+        const mb = document.createElement('button');
+        mb.id = 'phoneDeckMenuBtn';
+        mb.type = 'button';
+        mb.className = 'action-btn btn-secondary phone-deck-menu';
+        mb.title = 'Generate PDF, approval, preflight';
+        mb.setAttribute('aria-label', 'Deck menu');
+        mb.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+        mb.onclick = () => openPhoneDeckMenu(mb);
+        dsHead.appendChild(mb);
+    }
     // The mark beside the wordmark logo (the wordmark does not fit a phone header).
     const brand = document.querySelector('.nav-brand');
     if (brand && !brand.querySelector('.phone-mark')) {
@@ -44565,22 +44704,33 @@ function _phoneBuild() {
     _phoneSyncTabs();
     _phoneDeckBarSync();
 }
-// The controller folds to a button on a phone. Its own step, run from both builders,
-// because which of the two is built first differs between boot paths.
+// The controller starts hidden on a phone; the tab bar's Controls shows it. Its own
+// step, run from both builders, because which is built first differs between boot paths.
 function _phonePadFold() {
     const pad = document.getElementById('touchKeys');
-    if (pad && !pad.querySelector('.touch-pad-toggle')) {
-        const tg = document.createElement('button');
-        tg.type = 'button';
-        tg.className = 'touch-pad-toggle';
-        tg.title = 'Show or hide the controller';
-        tg.setAttribute('aria-label', 'Controller');
-        tg.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
-        tg.onclick = (e) => { e.stopPropagation(); pad.classList.toggle('collapsed'); };
-        tg.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
-        pad.insertBefore(tg, pad.firstChild);
-        if (_phoneOn) pad.classList.add('collapsed');
-    }
+    if (pad && _phoneOn && !pad._phoneFolded) { pad._phoneFolded = true; pad.classList.add('collapsed'); }
+    _phonePadSync();
+}
+function _phonePadToggle() {
+    const pad = document.getElementById('touchKeys');
+    if (!pad) return;
+    pad.classList.toggle('collapsed');
+    _phonePadSync();
+}
+function _phonePadSync() {
+    const pad = document.getElementById('touchKeys'), t = document.getElementById('phoneTabPad');
+    if (t) t.classList.toggle('active', !!(pad && !pad.classList.contains('collapsed')));
+}
+function openPhoneDeckMenu(anchor) {
+    const ap = document.getElementById('dsApprovedBtn');
+    _frameMenu(anchor, [
+        { label: 'Generate PDF...', onClick: () => _dsOpenGenerate() },
+        { label: 'Approval stamp', hint: (ap && ap.disabled) ? 'open a spec page first' : '', onClick: () => {
+            if (!ap || ap.disabled) { _toast('Open a spec page first', 'The approval stamp goes on one artwork page at a time.'); return; }
+            ap.click();
+        } },
+        { label: 'Preflight', hint: 'check the deck before exporting', onClick: () => _dsShowPreflight() }
+    ]);
 }
 function _phoneSyncTabs() {
     // Landscape view mode keys off the view (CSS: [data-phone-view]).
@@ -44628,9 +44778,20 @@ function _phoneDeckBarSync() {
         b.disabled = !total || (+b.dataset.step < 0 ? i <= 0 : i >= total - 1);
     });
 }
+// THE ALL PAGES SHEET SHOWS PAGES AS BIG AS THE PHONE ALLOWS (19.24). Each rail cell
+// (thumbnail, caption and its - / move / + controls) is drawn at its desktop size,
+// PHONE_RAIL_CELL_W wide, and zoomed to fill the sheet: the controls sit at the page's
+// edge instead of across a gap, and grow to finger size with it. Cached thumbnails are
+// rendered at 1.5x the full page, so the zoom stays sharp.
+const PHONE_RAIL_CELL_W = 186;
+function _phoneRailZoom() {
+    const w = (window.innerWidth || 390) - 32;
+    return Math.max(1, Math.min(4, w / PHONE_RAIL_CELL_W));
+}
 function _phoneRailSheet(open) {
     const rail = document.getElementById('dsRail');
     if (!rail) return;
+    if (open) rail.style.setProperty('--rail-zoom', _phoneRailZoom().toFixed(3));
     rail.classList.toggle('phone-sheet', !!open);
     document.documentElement.classList.toggle('phone-sheet-open', !!open);
 }
@@ -44878,7 +45039,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.23</strong> FRAME on iPhone. Hold the phone upright to work: Deck, Items and Walls are tabs along the bottom, Save and undo stay in the header and everything else is under the three-dot menu. Items is a list; tap one to open its settings, and All items takes you back. Walls shows the wall chips, the wall, the tools and then the frames, with the wall settings below. Deck shows one page at a time with a page bar and All pages. Turn the phone sideways to look: on Walls and Deck the menus go and the wall or page fills the screen. The controller folds to a round button bottom-right.<br><br><strong>19.22</strong> The joystick has four arrows round its rim: tap one for exactly one nudge, hold it to keep nudging (Shift on for big steps). Delete now removes a selected dimension (tap its number or line first; it shows a dashed box and its number ringed), and leaves frames alone while a dimension is selected. On a touch screen dimension lines and their delete buttons are easier to hit. The letter legend is 200pt wide by default. Elevations in PDFs and exports are laid out at least as large as on a desktop screen, so a deck made on an iPad prints its dimensions the same size as one made on the desktop.<br><br><strong>19.21</strong> On an iPad, use Safari's Share button, then <strong>Add to Home Screen</strong>: FRAME opens from its icon as its own full-screen app with no Safari toolbar. In the elevation dock, <strong>Add artwork</strong> (the picture button) puts a photo in the selected frame from the photo library, the camera or Files; select several frames to add several pictures at once, in letter order. The frame browser always opens on All frames, and on a touch screen it no longer brings up the keyboard until you tap the search box.<br><br><strong>19.20</strong> iPad: the key bar is now a controller (bottom-left; drag its dotted grip to move it). Its <strong>joystick</strong> nudges whatever is selected: push the knob the way it should go, a light push steps slowly and a full push moves faster, with Shift on for big steps; one push undoes in one go. The keys can be <strong>tapped</strong> to stay on or <strong>held</strong> with one hand while the other hand drags. With Shift or Ctrl on, tapping rows in the dashboard table selects a range or adds to the selection. The dashboard item list and the elevation wall panel fold away with the tab on their edge; with the list folded the dashboard picture gets its own column beside the form, and on a touch screen the form is four tabs (Item, Frame, Mat, Notes) so each fits without scrolling.<br><br><strong>19.19</strong> More for iPad. On a touch screen a small key bar sits bottom-right: <strong>Shift</strong>, <strong>Ctrl</strong> and <strong>Alt</strong> stay on once tapped (lit) and apply to every drag and tap until tapped off, and <strong>Delete</strong> deletes the selection like the Delete key. A finger that lands just beside a small resize corner or dimension handle picks the handle up. The wall list beside an elevation folds away with the arrow at its top, giving the wall more room (on any computer). On a narrow screen the dashboard keeps the picture above the form instead of in its own column, so the item table keeps its width; the column comes back when there is room.<br><br><strong>19.18</strong> FRAME works with a finger on iPad: drag frames, context blocks, glass, dimension lines, deck page boxes and floorplan pins by touch. In a scrolling list (the wall rail, the frame list) a swipe scrolls and a short press and hold picks the item up. Double-tap does what double-click does. Buttons that only appeared on mouse hover now show on a touch screen.<br><br><strong>19.17</strong> On deck pages, a frame with no picture in it shows a light grey opening instead of a black one (the drop shadow under the frame was showing through). Downloaded SVG and PNG elevations keep the clear opening for InDesign.<br><br><strong>19.16</strong> Group dimensions step out past the spacing dimensions: the overall width line sits above the row of spacing numbers and the height line left of any beside the group, so the two never run through each other. Drag a group line and it moves out from there.<br><br><strong>19.15</strong> Spacing dimensions place themselves: a number too wide for its gap now moves its line above or below the group (left or right for a vertical gap) to the nearest spot clear of every frame, and in a tight stack it sits over its gap inside the column. Drag one and it stays where you put it; Reset dimension positions hands it back. A line pulled out of the group always puts its number on the outside, away from the dashed extension lines. A set of frames gets one group dimension: pressing Group again on the same frames selects the one already there (a different set on the same wall still gets its own). Click a group dimension's number to select it, then press Delete to remove it.<br><br><strong>19.14</strong> Drop an image from another window onto a page in Deck Studio and it becomes that page’s background (pan, zoom or remove it in Page appearance); image boxes and spec-page frames still take their own drops. The Thank You page has two new sliders: <strong>Move contacts up / down</strong> and <strong>Name size</strong>. A new project’s cover has a 1.5pt rule between the client name and the heading that turns white on a dark page, and the starter deck no longer includes a moodboard page.<br><br>
+                body: `<strong>19.24</strong> Pinch with two fingers on a wall to zoom it (and drag two fingers to move around); the rest of the app no longer zooms with it. On iPhone the controller is the <strong>Controls</strong> button in the bottom bar instead of a floating button; Deck Studio's Generate PDF and Approval are in its menu button; All pages shows each page as wide as the phone; the frame browser fills the screen three across (five sideways) with the frame lists behind the menu button and the filters behind Filters. On iPhone and iPad the Project tab no longer shows a page preview, and on iPhone it is one column.<br><br><strong>19.23</strong> FRAME on iPhone. Hold the phone upright to work: Deck, Items and Walls are tabs along the bottom, Save and undo stay in the header and everything else is under the three-dot menu. Items is a list; tap one to open its settings, and All items takes you back. Walls shows the wall chips, the wall, the tools and then the frames, with the wall settings below. Deck shows one page at a time with a page bar and All pages. Turn the phone sideways to look: on Walls and Deck the menus go and the wall or page fills the screen. The controller folds to a round button bottom-right.<br><br><strong>19.22</strong> The joystick has four arrows round its rim: tap one for exactly one nudge, hold it to keep nudging (Shift on for big steps). Delete now removes a selected dimension (tap its number or line first; it shows a dashed box and its number ringed), and leaves frames alone while a dimension is selected. On a touch screen dimension lines and their delete buttons are easier to hit. The letter legend is 200pt wide by default. Elevations in PDFs and exports are laid out at least as large as on a desktop screen, so a deck made on an iPad prints its dimensions the same size as one made on the desktop.<br><br><strong>19.21</strong> On an iPad, use Safari's Share button, then <strong>Add to Home Screen</strong>: FRAME opens from its icon as its own full-screen app with no Safari toolbar. In the elevation dock, <strong>Add artwork</strong> (the picture button) puts a photo in the selected frame from the photo library, the camera or Files; select several frames to add several pictures at once, in letter order. The frame browser always opens on All frames, and on a touch screen it no longer brings up the keyboard until you tap the search box.<br><br><strong>19.20</strong> iPad: the key bar is now a controller (bottom-left; drag its dotted grip to move it). Its <strong>joystick</strong> nudges whatever is selected: push the knob the way it should go, a light push steps slowly and a full push moves faster, with Shift on for big steps; one push undoes in one go. The keys can be <strong>tapped</strong> to stay on or <strong>held</strong> with one hand while the other hand drags. With Shift or Ctrl on, tapping rows in the dashboard table selects a range or adds to the selection. The dashboard item list and the elevation wall panel fold away with the tab on their edge; with the list folded the dashboard picture gets its own column beside the form, and on a touch screen the form is four tabs (Item, Frame, Mat, Notes) so each fits without scrolling.<br><br><strong>19.19</strong> More for iPad. On a touch screen a small key bar sits bottom-right: <strong>Shift</strong>, <strong>Ctrl</strong> and <strong>Alt</strong> stay on once tapped (lit) and apply to every drag and tap until tapped off, and <strong>Delete</strong> deletes the selection like the Delete key. A finger that lands just beside a small resize corner or dimension handle picks the handle up. The wall list beside an elevation folds away with the arrow at its top, giving the wall more room (on any computer). On a narrow screen the dashboard keeps the picture above the form instead of in its own column, so the item table keeps its width; the column comes back when there is room.<br><br><strong>19.18</strong> FRAME works with a finger on iPad: drag frames, context blocks, glass, dimension lines, deck page boxes and floorplan pins by touch. In a scrolling list (the wall rail, the frame list) a swipe scrolls and a short press and hold picks the item up. Double-tap does what double-click does. Buttons that only appeared on mouse hover now show on a touch screen.<br><br><strong>19.17</strong> On deck pages, a frame with no picture in it shows a light grey opening instead of a black one (the drop shadow under the frame was showing through). Downloaded SVG and PNG elevations keep the clear opening for InDesign.<br><br><strong>19.16</strong> Group dimensions step out past the spacing dimensions: the overall width line sits above the row of spacing numbers and the height line left of any beside the group, so the two never run through each other. Drag a group line and it moves out from there.<br><br><strong>19.15</strong> Spacing dimensions place themselves: a number too wide for its gap now moves its line above or below the group (left or right for a vertical gap) to the nearest spot clear of every frame, and in a tight stack it sits over its gap inside the column. Drag one and it stays where you put it; Reset dimension positions hands it back. A line pulled out of the group always puts its number on the outside, away from the dashed extension lines. A set of frames gets one group dimension: pressing Group again on the same frames selects the one already there (a different set on the same wall still gets its own). Click a group dimension's number to select it, then press Delete to remove it.<br><br><strong>19.14</strong> Drop an image from another window onto a page in Deck Studio and it becomes that page’s background (pan, zoom or remove it in Page appearance); image boxes and spec-page frames still take their own drops. The Thank You page has two new sliders: <strong>Move contacts up / down</strong> and <strong>Name size</strong>. A new project’s cover has a 1.5pt rule between the client name and the heading that turns white on a dark page, and the starter deck no longer includes a moodboard page.<br><br>
 <strong>19.13</strong> The Thank You page starts empty. Open <strong>Edit contacts</strong> and pick your team with <strong>+ From directory</strong> (the company directory, now updated), or type someone in. <strong>Save as my default</strong> keeps that team on this computer, and every new project you start begins with it; <strong>Use my default</strong> puts it back on an existing project. Older projects keep the people they already printed.<br><br>
 <strong>19.12</strong> A framed picture in the Frame Dashboard preview shows what you can do with it when you hover: <strong>Replace</strong> and <strong>Remove</strong> in its corner, and a note that you can drag to pan or drop another image on it to swap it.<br><br>\n<strong>19.11</strong> The frame button in the Frame Dashboard shows the frame's corner the way the frame browser does: the whole corner photo on white, with Change underneath.<br><br>\n<strong>19.10</strong> A tighter Frame Dashboard panel. The frame is a square picture button (click it to change the frame) with Frame Code and Color / Texture beside it, and the frame's colour, width and vendor on the Frame heading. Artwork is added from the preview: click the empty opening or drag a picture onto it. The upload row in the panel is gone; once a piece has artwork, its zoom, Reset, 1:1 and Remove sit in one row under the sizes.<br><br>\n<strong>19.09</strong> Frames come from the library. New items start in <strong>MICH-132-29</strong>, a black moulding with a three-quarter inch face, instead of a flat black colour. In the Frame Dashboard the Library / Color switch, the colour picker, Sync Folder and the swatch upload are gone: the frame is one card showing its corner, code, colour, width and vendor, and clicking it opens the frame browser. Picking a frame also fills Color / Texture from the catalogue (never over words you typed). A frame no vendor lists can still be added with <strong>Custom swatch…</strong> in the frame browser. Older projects with colour frames still open and print as before.<br><br>\n<strong>19.08</strong> An empty opening shows an add-image icon instead of its size, on the wall and in the Frame Dashboard preview. In the dashboard, click it to upload the artwork. The size is still in the dashboard fields and the dimension guides.<br><br>\n<strong>19.07</strong> Frame effects in Settings fits on one screen: the sample frame and the sliders sit side by side, and each slider's explanation is behind a <strong>?</strong> instead of a line of text under it.<br><br>\n<strong>19.06</strong> Deck Studio's Project tab is shorter. Project name, code, location and version sit together at the top, and units, rounding and frame effects are one line that says what they are, with <strong>Units&hellip;</strong> and <strong>Frame effects&hellip;</strong> buttons into Settings (the gear in the header), where they are changed. Fixed: the page preview on the Project tab now shows a page's background image, colour and text colour, like the Pages tab; a cover with a picture showed on white before, even after Refresh preview.<br><br>\n<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
 <strong>19.04</strong> Deleting a wall asks about its pieces. When pieces hang on that wall and nowhere else, you choose <strong>Delete wall and pieces</strong> (they leave the Frame Dashboard and the presentation: the way to drop the options a client turned down) or <strong>Delete wall, keep pieces</strong> (as before: they stay in the Dashboard, and + Add Wall offers them to hang again). Pieces also shown on another wall are never deleted, and Ctrl+Z brings back the wall and its pieces together.<br><br><strong>19.03</strong> The frame you pick sets the product both ways. Picking a floater makes the item Framed Canvas (Floater), as before, and picking a regular moulding on a floater item now turns it back into Framed Art (it used to stay a floater, with its canvas inset and no mats). A floater counts by its lip width too, whatever its collection is called. Shadow boxes, frameless canvas, wallcovering and window film are left as you set them.<br><br><strong>19.02</strong> Floaters show their gap. The quarter inch between a floater's face and the canvas now draws as a dark slot instead of more moulding, on the Dashboard preview, the wall, PNG and SVG exports and spec pages, and the canvas casts its shadow into it. Settings, Frame effects has a new <strong>Floater gap</strong> slider for how dark it reads (the canvas used to borrow Frame onto mat). The three Cape Cod floaters (IM-310-715, 720 and 725) now carry their 5/8in face, so a new pick sets a 7/8in inset.<br><br><strong>19.01</strong> More frames turned round to face the right way: 46 Larson-Juhl floaters (Axom, Bauhaus II, Cranbrook, Eiffel, Gramercy, Metalia, Moderne, Olsen, Ravello, Shoji and Spencer II) now show the wall on the left and the floor along the bottom like every other floater, and Academie Silver 3in (LJ-733237) matches its gold and black siblings.<br><br><strong>19.00</strong> The frame browser has a <strong>Type</strong> filter: show only floaters, or only frames, across every vendor. Frame thumbnails are cropped consistently again: about 290 International Moulding and Framerica corners had kept far too much of the moulding and showed as thin slivers. Seven more mouldings that faced the wrong way (including IM-310-710) are turned round.<br><br><strong>18.99</strong> International Moulding and Framerica frames now face the same way as every other moulding: outer edge on the left, rabbet lip on the right. Many were mirror images, so the mockup drew the lip on the outside of the frame. The old Universal folder with two frames is gone; both are in Universal Arquati.<br><br><strong>18.98</strong> The frame library adds International Moulding (about 1,000 current mouldings in 153 collections, 37 of them floaters) and Framerica (336 mouldings in 91 finishes), each with its corner photo, sizes, colour family and, where the maker publishes one, its profile drawing. Deep shadowbox corners now show the frame face above the cut end instead of only raw wood.<br><br><strong>18.97</strong> More frame corners and profiles fit on one row of a group page before it wraps: the space between mouldings tightens first, then the pictures shrink, and only then does the strip go to two rows.<br><br><strong>18.96</strong> Frame corner photos all share one shape now. Thin Universal Arquati and Larson-Juhl mouldings showed as long skinny slivers in the frame browser and on spec pages; every corner is cropped to the same proportions as the Michelangelo ones, showing the cut end and a short run of the face.<br><br><strong>18.95</strong> The frame library adds Universal Arquati: about 1,050 current mouldings in 156 collections (Universal, Valucore and the Arquati lines), including 177 floaters, each with its corner photo, profile drawing, sizes, colour, profile type and style. Discontinued mouldings, fillets, liners and stretcher bars are left out.<br><br><strong>18.94</strong> Two spec page fixes. A picture dropped onto the dashboard preview or onto a frame on the wall kept the previous picture's proportions, so the dashboard and wall stretched it to fit while the spec page printed its true crop; every drop now records the new picture's size, and pieces affected before this correct themselves the next time they are shown. On a per-piece page, a long spec list (float-mounted paper adds four rows) now tightens its rows to stop above the frame corner and profile instead of running into them.<br><br><strong>18.93</strong> The Frame Recommendations page lays frames out on an even grid. With a count that does not divide by the columns (8 frames in 3 columns), the last column used to stretch its frames to fill the page; now every frame is the same size and the last column simply ends early.<br><br><strong>18.92</strong> The frame library adds Larson-Juhl: about 1,030 current mouldings in 156 collections, including 91 floaters, each with its corner photo, profile drawing, sizes, colour family, profile type and style. In the frame browser the Library now lists each vendor once (click it to open its collections), and there is a new <strong>Style</strong> filter (Contemporary, Modern, Classic and so on). Nielsen metal frames are left out because Larson-Juhl has no photos of them.<br><br><strong>18.91</strong> When a Group A/B/C page has too many mouldings for the frame corners and profiles to fit in one row beside the floorplan and elevation, they wrap into two rows in the same space, so the artwork, floorplan and elevation keep their size and place. Seven different mouldings now show every corner and profile.<br><br><strong>18.89</strong> On a Group A/B/C page with several mouldings, ticking Moulding profile no longer makes every frame corner disappear. The corners and profiles now shrink to fit beside the floorplan and elevation; if there is still not enough room, the profiles are left off and the corners kept, and a <strong>no room</strong> note appears beside Moulding profile under Show on page.<br><br><strong>18.88</strong> The frame library now has every Michelangelo collection that works as a frame in FRAME: Barnwood, Contemporary, Modern, Shadow Boxes and Traditional join Avant-Garde, Floaters and Ornate, about 1,240 mouldings in all, each with its corner photo, profile drawing, sizes, colour and profile name. Liners, fillets, rabbetless flat surfaces and stretchers are left out because they are not a frame on their own.<br><br><strong>18.87</strong> The frame library adds Michelangelo's ornate mouldings: all 59 current ones, each with its corner photo, profile drawing, sizes, colour and profile name. Their swatches repeat the ornament down the rail without a visible seam.<br><br><strong>18.86</strong> The frame library adds Michelangelo's floaters: 229 current floater frames for canvas, each with its corner photo, profile drawing, sizes and lip width. Picking one switches the item to Framed Canvas (Floater) and sets the inset from the lip, as before.<br><br><strong>18.85</strong> The frame library now has the whole Michelangelo Avant-Garde collection: 539 current mouldings, each with its corner photo, profile drawing, sizes, colour and profile name, so the frame browser can search and filter all of them.<br><br><strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>
