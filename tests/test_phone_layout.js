@@ -51,6 +51,10 @@ check('frame swatches on a phone pin the corner photo to the box (Safari drew it
   if (CSS.indexOf('html.phone #frameBrowser .fb-pic img { position: absolute; inset: 0; width: 100%; height: 100%;') < 0) throw new Error('swatch photo still sized by percentage max-height');
 });
 
+check('Import offers New items from photos on every device', () => {
+  if (APP.indexOf("{ label: 'New items from photos…', hint: 'one new item per picture', onClick: () => dashNewFromPhotos() }") < 0) throw new Error('not in the Import menu');
+});
+
 function inApp() {
   window.__phoneDone = (async () => {
     const out = [];
@@ -292,6 +296,100 @@ function inApp() {
         if (n2 !== FB_CHUNK * 2) throw new Error('scrolling added ' + (n2 - n1));
         if (n3 !== 300) throw new Error('rows ran out at ' + n3 + ' of 300');
       } finally { window.IntersectionObserver = realIO; }
+    });
+
+    // ── 19.26 ──
+    const tfire = (el, type, x, y, id) => {
+      const ev = new Event(type, { bubbles: true, cancelable: true });
+      const t = { identifier: id || 1, clientX: x, clientY: y, screenX: x, screenY: y, target: el };
+      Object.defineProperty(ev, 'touches', { value: type === 'touchend' ? [] : [t] });
+      Object.defineProperty(ev, 'changedTouches', { value: [t] });
+      el.dispatchEvent(ev); return ev;
+    };
+    const swipeOn = (el, dx, dy) => {
+      tfire(el, 'touchstart', 200, 300);
+      const m = tfire(el, 'touchmove', 200 + dx / 2, 300 + dy / 2);
+      tfire(el, 'touchmove', 200 + dx, 300 + dy);
+      tfire(el, 'touchend', 200 + dx, 300 + dy);
+      return m;
+    };
+
+    await ok('EXACT ASK: a sideways swipe across the empty wall flips to the next / previous wall', () => {
+      const w2 = _cloneData(elevations[0]); w2.id = _elevNewId(); w2.name = 'Wall B'; w2.frames = []; elevations.push(w2);
+      switchView('elevation', 0);
+      const wall = document.getElementById('wall');
+      const m = swipeOn(wall, -120, 6);
+      if (currentElevIndex !== 1) throw new Error('swipe left stayed on wall ' + currentElevIndex);
+      if (!m.defaultPrevented) throw new Error('the swipe was not held from the page');
+      swipeOn(document.getElementById('wall'), 120, 0);
+      if (currentElevIndex !== 0) throw new Error('swipe right went to ' + currentElevIndex);
+    });
+
+    await ok('a swipe that starts on a frame drags the frame and flips nothing', () => {
+      switchView('elevation', 0);
+      const el = document.createElement('div'); el.className = 'frame-vis'; document.getElementById('frame-layer').appendChild(el);
+      let pressed = 0; el.addEventListener('mousedown', () => pressed++);
+      swipeOn(el, -120, 0);
+      el.remove();
+      if (currentElevIndex !== 0) throw new Error('a drag on a frame flipped the wall');
+      if (pressed !== 1) throw new Error('the frame was pressed ' + pressed + ' times');
+    });
+
+    await ok('an up-down move on the wall is the ordinary gesture, and a tap is still a tap', () => {
+      switchView('elevation', 0);
+      const wall = document.getElementById('wall');
+      let downs = 0, ups = 0;
+      const d = () => downs++, u = () => ups++;
+      wall.addEventListener('mousedown', d); document.addEventListener('mouseup', u);
+      swipeOn(wall, 4, 120);
+      tfire(wall, 'touchstart', 50, 50); tfire(wall, 'touchend', 50, 50);
+      wall.removeEventListener('mousedown', d); document.removeEventListener('mouseup', u);
+      if (currentElevIndex !== 0) throw new Error('a vertical move flipped walls');
+      if (downs !== 2 || ups !== 2) throw new Error('presses ' + downs + ' / releases ' + ups + ' (want 2 / 2)');
+    });
+
+    await ok('no swipe while a drawing tool is armed (the measure tool draws by dragging)', () => {
+      switchView('elevation', 0);
+      lineToolActive = true;
+      try { swipeOn(document.getElementById('wall'), -120, 0); } finally { lineToolActive = false; }
+      if (currentElevIndex !== 0) throw new Error('flipped walls with the measure tool armed');
+      elevations.pop(); switchView('elevation', 0);
+    });
+
+    await ok('deck: a swipe across the page background flips the page; never on a floor plan page', () => {
+      switchView('deck');
+      const c = document.getElementById('dsCenter');
+      const cv = document.createElement('canvas'); c.appendChild(cv);
+      _dsPages = [{ kind: 'fixed', fixed: 'cover' }, { kind: 'fixed', fixed: 'slogan' }, { kind: 'floorplan', level: 0 }];
+      const real = _dsSelectPage; const went = [];
+      _dsSelectPage = (i) => { went.push(i); _dsIndex = i; };
+      try {
+        _dsIndex = 0; swipeOn(cv, -120, 0);
+        if (went.join() !== '1') throw new Error('swipe left went ' + went.join());
+        _dsIndex = 2; swipeOn(cv, 120, 0);
+        if (went.join() !== '1') throw new Error('a floor plan page flipped: ' + went.join());
+      } finally { _dsSelectPage = real; cv.remove(); }
+    });
+
+    // The project here has a GAP in its numbering on purpose (ART.9 from an earlier check):
+    // the first new item is minted as ART.10 and renumbered at once, which lost its picture.
+    await ok('EXACT ASK: photos become new items, each with its picture, and the first opens', async () => {
+      switchView('dashboard');
+      const before = dashProjectData.length;
+      const realP = processArtworkFile;
+      processArtworkFile = (f, cb) => cb('data:image/png;base64,' + f.name, f.name.replace('.jpg', ''), 800, 600);
+      let codes;
+      try {
+        codes = await new Promise(ok => _dashItemsFromFiles([{ name: 'a.jpg' }, { name: 'b.jpg' }], ok));
+      } finally { processArtworkFile = realP; }
+      if (dashProjectData.length !== before + 2) throw new Error((dashProjectData.length - before) + ' items made');
+      const rows = codes.map(c => dashProjectData.find(r => r.id === c));
+      if (!rows[0] || rows[0].artworkFile !== 'a' || rows[1].artworkFile !== 'b') throw new Error('pictures went ' + rows.map(r => r && r.artworkFile).join(',') + ' codes ' + codes.join(',') + ' all ' + dashProjectData.map(r => r.id + '=' + (r.artworkFile||'')).join(' '));
+      if (dashProjectData[dashSelectedRowIndex].id !== codes[0]) throw new Error('the first new item is not the one open');
+      // The finding marker is gone again: nothing temporary rides into the project file.
+      if (dashProjectData.some(r => Object.keys(r).some(k => k.indexOf('_photoNew') === 0))) throw new Error('a temporary marker was left on a row');
+      if (!document.getElementById('view-dashboard').classList.contains('phone-detail')) throw new Error('its settings did not open on the phone');
+      if (!document.getElementById('phoneSnapBtn')) throw new Error('no camera button on the phone');
     });
 
     await ok('leaving phone size takes the classes off (an iPad rotating, a resize)', () => {

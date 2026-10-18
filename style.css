@@ -3263,3 +3263,15 @@ html.phone-land .phone-deck-tools { display: none; }
 /* The panel's pinned header (Presentation layout, breaker) scrolls with the panel on a
  * phone: pinned, it covered the choices in a panel ~230px tall. */
 html.phone .ds-tools-sticky { position: static !important; }
+
+/* ═══ iPHONE round four (19.26) ════════════════════════════════════════════════════ */
+/* The camera button over the Items list: a new item straight from a photo. Only on the
+ * list screen (not an item's settings, not other views). */
+.phone-snap { display: none; }
+html.phone[data-phone-view="dashboard"] .phone-snap { display: flex; position: fixed; z-index: 9050;
+    right: 16px; bottom: calc(var(--phone-tab-h) + var(--phone-safe-b) + 16px);
+    width: 56px; height: 56px; align-items: center; justify-content: center; padding: 0;
+    border-radius: 50%; border: none; background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(0,0,0,0.35); cursor: pointer; }
+html.phone[data-phone-view="dashboard"] .phone-snap .svg-icon { width: 26px; height: 26px; }
+html.phone[data-phone-view="dashboard"]:has(#view-dashboard.phone-detail) .phone-snap,
+html.phone.phone-sheet-open .phone-snap { display: none; }

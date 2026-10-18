@@ -1983,6 +1983,23 @@ run but passes alone is usually load timing: rerun before chasing it.
   know it; it goes home when the phone class drops) and the page bar is ONE row above a
   page-sized `#dsCenter`. The tools panel's pinned header has class `.ds-tools-sticky`,
   unpinned on a phone.
+- **OFFLINE: `sw.js` (19.26, registered by `_swRegister`, https/localhost only; `?nosw` removes
+  it).** Navigation network-first (a release still arrives), versioned `?v=` files cache-first
+  and a newer page's versions adopted with the old ones PRUNED (page and app stay a pair for
+  `_checkBuildPairing`), everything else stale-while-revalidate capped at `RUNTIME_MAX`. Cache
+  names carry the SCOPE (dev and stable share an origin). It reads the versions out of the
+  page, so it needs no edit per release. Never caches POSTs or other sites (Google Fonts and
+  cdnjs excepted). `test_offline_sw.js` runs it against a fake Cache Storage.
+- **SWIPE TO FLIP (19.26, phone only, `_touchSwipeZone` / `_touchSwipeFlip`).** A touch on the
+  BACKGROUND of a wall (`#wall`, `#export-wrap`, `#scrollArea`) or deck page (`#dsCenter`,
+  `#dsLayoutCanvas`, a canvas) presses nothing until the first move: sideways = flip, else the
+  ordinary gesture from the start point, no move = a tap. Never with a drag-drawing tool armed
+  or on a floor plan page; an iPad keeps marquee.
+- **NEW ITEMS FROM PHOTOS (`dashNewFromPhotos`, `_dashItemsFromFiles`).** Finds its new rows by a
+  temporary marker stamped through `_fpAddCodes(..., {mark})`, NEVER by the returned code: the
+  settle inside the add renumbers (a gap in the numbering made ART.10 into ART.3 before the
+  picture loaded). The marker is deleted afterwards. Camera button `#phoneSnapBtn` on the phone
+  Items list; Import menu everywhere.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
