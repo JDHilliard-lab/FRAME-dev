@@ -392,6 +392,67 @@ function inApp() {
       if (!document.getElementById('phoneSnapBtn')) throw new Error('no camera button on the phone');
     });
 
+    // ── 19.28 ──
+    await ok('the header middle is the wall picker on Walls; its menu switches walls and adds one', () => {
+      const w2 = _cloneData(elevations[0]); w2.id = _elevNewId(); w2.name = 'Lobby North'; w2.frames = []; elevations.push(w2);
+      switchView('elevation', 0);
+      const b = document.querySelector('#phoneCtx .phone-ctx-btn');
+      if (!b || b.textContent.indexOf(elevations[0].name) < 0) throw new Error('header reads ' + (b && b.textContent));
+      const items = []; const real = _frameMenu; _frameMenu = (a, list) => list.forEach(i => items.push(i));
+      try { b.click(); } finally { _frameMenu = real; }
+      const lobby = items.find(i => i.label === 'Lobby North');
+      if (!lobby || !items.find(i => i.label === '+ Add Wall')) throw new Error('menu: ' + items.map(i => i.label).join(','));
+      lobby.onClick();
+      if (currentElevIndex !== 1) throw new Error('did not switch walls');
+      if (document.querySelector('#phoneCtx .phone-ctx-btn').textContent.indexOf('Lobby North') < 0) throw new Error('header did not follow the wall');
+      elevations.pop(); switchView('elevation', 0);
+    });
+
+    await ok('the item screen puts its way back in the header, and opening it redraws the preview', async () => {
+      switchView('dashboard');
+      let drew = 0; const real = updateDashVisualsFromDOM; updateDashVisualsFromDOM = () => { drew++; };
+      try { _phoneDashDetail(true); await new Promise(r => setTimeout(r, 40)); } finally { updateDashVisualsFromDOM = real; }
+      const b = document.querySelector('#phoneCtx .phone-ctx-btn.back');
+      if (!b) throw new Error('no back button in the header');
+      if (!drew) throw new Error('THE BUG: the preview was not redrawn once its screen was shown');
+      b.click();
+      if (document.getElementById('view-dashboard').classList.contains('phone-detail')) throw new Error('header back did not return');
+    });
+
+    await ok('Deck: Project, Pages and Templates live in the header menu', () => {
+      switchView('deck');
+      const items = []; const real = _frameMenu; _frameMenu = (a, list) => list.forEach(i => items.push(i));
+      try { openPhoneDeckMenu(document.getElementById('phoneDeckMenuBtn')); } finally { _frameMenu = real; }
+      ['Project', 'Pages', 'Templates', 'Generate PDF...'].forEach(l => { if (!items.find(i => i.label === l)) throw new Error('missing ' + l); });
+      const btn = document.getElementById('phoneDeckMenuBtn');
+      if (!btn || btn.parentNode !== document.getElementById('phoneMoreBtn').parentNode) throw new Error('the deck menu is not beside the more button');
+    });
+
+    await ok('the frame library opens one vendor at a time, and the open one closes on a tap', () => {
+      const realLib = dashLocalLibrary;
+      const mk = (code) => ({ code, file: 'x.jpg', width: 1 });
+      dashLocalLibrary = { framerica: { 'american-walnut': [mk('FA-1')], afromosia: [mk('FA-2')] }, michelangelo: { gold: [mk('MICH-1')] } };
+      Object.keys(_fbOpenVendors).forEach(k => delete _fbOpenVendors[k]);
+      const ven = (name) => [...document.querySelectorAll('#fbSide .fb-src.ven')].find(b => b.textContent.toLowerCase().indexOf(name) >= 0);
+      const cols = () => document.querySelectorAll('#fbSide .fb-src.col').length;
+      try {
+        openFrameBrowser();
+        ven('framerica').click();
+        if (cols() !== 2) throw new Error('Framerica opened with ' + cols() + ' collections listed');
+        ven('michelangelo').click();
+        const open = Object.keys(_fbOpenVendors).filter(k => _fbOpenVendors[k]);
+        if (open.join() !== 'michelangelo') throw new Error('open after Michelangelo: ' + open.join());
+        if (cols() !== 1) throw new Error('Framerica stayed expanded: ' + cols() + ' collections listed');
+        ven('michelangelo').click();
+        if (cols() !== 0) throw new Error('THE BUG: tapping the open vendor did not close it');
+      } finally { _fbClose(); dashLocalLibrary = realLib; }
+    });
+
+    await ok('the page sheet closes with an X icon, not a Done label', () => {
+      const x = document.getElementById('phoneRailClose');
+      if (!x || x.textContent.trim() || !x.querySelector('svg') || !x.classList.contains('phone-x')) throw new Error('close is ' + (x && x.outerHTML.slice(0, 80)));
+    });
+
     await ok('leaving phone size takes the classes off (an iPad rotating, a resize)', () => {
       screen(1180, 820, true); _phoneApply(false);
       if (R.classList.contains('phone') || R.classList.contains('phone-land')) throw new Error('classes left on: ' + R.className);

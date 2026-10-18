@@ -3204,7 +3204,6 @@ html.phone #dsProjLeft { order: -1; }
 
 /* All pages sheet: cells at desktop size, zoomed to the sheet width. */
 html.phone #dsRail.phone-sheet [data-railcell] { width: 186px; zoom: var(--rail-zoom, 1); }
-html.phone #dsRail.phone-sheet .ds-insstrip { zoom: var(--rail-zoom, 1); width: 186px; }
 
 /* Frame browser on a phone: full screen, lists in a drawer, filters folded, 3 across. */
 .fb-phone-btn { display: none; }
@@ -3275,3 +3274,44 @@ html.phone[data-phone-view="dashboard"] .phone-snap { display: flex; position: f
 html.phone[data-phone-view="dashboard"] .phone-snap .svg-icon { width: 26px; height: 26px; }
 html.phone[data-phone-view="dashboard"]:has(#view-dashboard.phone-detail) .phone-snap,
 html.phone.phone-sheet-open .phone-snap { display: none; }
+
+/* ═══ iPHONE round five (19.28) ════════════════════════════════════════════════════ */
+/* The header's middle is the view's own control (_phoneCtxSync): the wall picker, the way
+ * back from an item, the deck tab. The rows they replace go. */
+.phone-ctx { display: none; }
+html.phone .phone-ctx { display: flex; align-items: center; flex: 1 1 auto; min-width: 0; padding: 0 6px; }
+.phone-ctx-btn { display: flex; align-items: center; gap: 3px; min-width: 0; max-width: 100%; height: 34px; padding: 0 8px;
+    background: transparent; border: none; border-radius: var(--r-6); color: var(--text-strong); font-size: var(--fs-80); font-weight: 700; cursor: pointer; }
+.phone-ctx-btn span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.phone-ctx-btn .svg-icon { flex: none; width: 16px; height: 16px; }
+.phone-ctx-btn.back { color: var(--accent); padding-left: 2px; }
+.phone-ctx-title { font-size: var(--fs-80); font-weight: 700; color: var(--text-strong); padding: 0 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html.phone .app-top-nav > div[style*="margin-left: auto"] { margin-left: 0 !important; gap: 6px !important; }
+html.phone #saveMenuBtn { display: none !important; }
+html.phone #saveProjectBtn { border-radius: var(--r-4); }
+html.phone #view-deck > div:first-child { display: none !important; }
+html.phone .phone-deck-menu { display: none !important; }
+html.phone[data-phone-view="deck"] .phone-deck-menu { display: flex !important; width: 34px !important; margin-left: 0; }
+html.phone #view-elevation .elev-wall-rail, html.phone #view-elevation .elev-wall-rail.collapsed { display: none !important; }
+html.phone #phoneDashBack { display: none !important; }
+
+/* Align & space: a sheet over the bottom of the screen, not a box centred off its edge. */
+html.phone #alignModal > div { left: 8px !important; right: 8px !important; top: auto !important;
+    bottom: calc(var(--phone-tab-h) + var(--phone-safe-b) + 8px) !important; transform: none !important;
+    width: auto !important; max-height: 58dvh !important; overflow-y: auto !important; }
+
+/* All pages: tighter gutters; the filter row sits at the very top (nothing shows above or
+ * behind it) with the close button beside it. */
+html.phone #dsRail.phone-sheet { padding: 0 8px 12px !important; }
+html.phone #dsRail.phone-sheet > :first-child { top: 0 !important; margin: 0 -8px 6px !important; padding: 10px 56px 8px 10px !important;
+    background: var(--bg-panel) !important; }
+.phone-x { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border-radius: 50%;
+    border: 1px solid var(--border-color); background: var(--bg-subpanel); color: var(--text-strong); cursor: pointer; }
+.phone-x .svg-icon { width: 18px; height: 18px; }
+html.phone.phone-sheet-open .phone-sheet-close.phone-x { display: flex; top: 8px; right: 10px; width: 36px; height: 36px; padding: 0; border-radius: 50%; border: 1px solid var(--border-color);
+    background: var(--bg-subpanel); color: var(--text-strong); }
+
+/* The frame browser's close is the same round X. */
+html.phone #frameBrowser .fb-top .jump-esc { width: 36px; height: 36px; padding: 0; border-radius: 50%; font-size: 0;
+    display: flex; align-items: center; justify-content: center; }
+html.phone #frameBrowser .fb-top .jump-esc::after { content: '\2715'; font-size: 16px; line-height: 1; }

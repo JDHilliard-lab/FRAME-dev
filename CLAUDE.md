@@ -2007,6 +2007,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   picks (`swatchName === fCode`), never an upload (`swatchCustom`, set by
   `loadDashCustomSwatch`). A swatch is the corner's FACE, a tall cut with cross-faded ends: a
   short slice tiles down the rail as a visible repeat (FA-BW74-2003 was 31px and read as dots).
+- **THE PHONE HEADER'S MIDDLE IS THE VIEW'S CONTROL (19.28, `#phoneCtx`, `_phoneCtxSync`).** Walls:
+  the wall name opening `openPhoneWallMenu` (the chip row is hidden on a phone); an item: the
+  way back (`#phoneDashBack` hidden); Deck: the tab name, with `#phoneDeckMenuBtn` beside the
+  more button holding Project / Pages / Templates + Generate PDF / Approval / Preflight (the
+  deck's own tab row is hidden). Synced from `_phoneSyncTabs`, `_phoneDashDetail`, `_dsTab`.
+  The item preview REDRAWS when the item screen opens (it was sized while hidden: cropped).
+  Frame library vendors are an accordion, and an explicit open/close in `_fbOpenVendors` WINS
+  over "the current list is open" (before, the vendor being viewed could never be closed).
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
