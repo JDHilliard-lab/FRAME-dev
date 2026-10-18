@@ -2024,7 +2024,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   Engineering Lab V7 hangs (`fel-<area>-<no>`, `src`, `asDrawn: true`): the project's own gaps,
   any piece count up to the 12-letter cap. The 3"-gap and style-mix rules in `test_frame_sets`
   apply to the HOUSE presets only; asDrawn ones must start at 0,0, never overlap and keep 1"+
-  gaps. The Frames menu lists them in their own section (house loops skip `asDrawn`).
+  gaps.
+- **FRAME SETS ARE PICKED FROM PICTURES (19.31, `openFrameSetPicker`).** The floorplan item's
+  frames button opens a `.frame-modal` of drawn tiles (`_frameSetThumbSVG`, to scale; frame ink
+  from the moulding's catalogue colour via `_frameSetInk`, drawn at least ~1% of the drawing so
+  long rows read): Sets / Salon hangs / Ford Engineering Lab. asDrawn preset frames carry `f`, a
+  library code; `_fpApplyFrameSetNow` dresses each piece through `applySwatchToRow`
+  (`_salonFrameDress`) from `_libSwatchMemo`, which the picker warms on open; anything late is
+  dressed by `_salonFrameDressLater`, which RETAKES the top undo snapshot (one gesture, one entry).
 - **A SAVED PROJECT KEEPS ITS FOOTER FIELDS AND DECK TICKS (19.30).** `globalMeta.docCode /
   docVersion / docLocation` carry the Project tab's code/version/location (they were never
   saved). `seedDeckIncludeInputs` / `seedDeckPlanOrderInput` must run AFTER the editorial is

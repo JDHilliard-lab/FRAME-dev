@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.30';
+const APP_VERSION = '19.31';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -32006,117 +32006,119 @@ const SALON_PRESETS = [
     // SALON HANGS FROM A REAL PROJECT (19.30): every hang of four or more pieces in the Ford
     // Engineering Lab V7 installation guide, as built. `asDrawn` marks them: their gaps are
     // the project's own (3.5", 5", 7"...), not SET_GAP_IN, and they are offered in their
-    // own section of the Frames menu with any piece count. Sizes are each piece's overall
-    // dimensions; styles say only mat / no mat / float, the set tool's vocabulary.
+    // own section of the frame set picker with any piece count. Sizes are each piece's
+    // overall dimensions; styles say only mat / no mat / float, the set tool's vocabulary;
+    // `f` is the piece's library frame as built (applying the set dresses each piece in
+    // it, see _salonFrameDress), absent where the library has no such moulding.
     { key: 'fel-caf-001', n: 10, label: 'Cafe 001, long row of 10', src: 'Ford Engineering Lab FEL.CAF.001', asDrawn: true, frames: [
-        { x: 0, y: 17, w: 18, h: 18, s: 'plain' },
-        { x: 21, y: 24, w: 24, h: 18, s: 'mat' },
-        { x: 24, y: 3, w: 34, h: 18, s: 'plain' },
+        { x: 0, y: 17, w: 18, h: 18, s: 'plain', f: 'MICH-708-290' },
+        { x: 21, y: 24, w: 24, h: 18, s: 'mat', f: 'MICH-247-79' },
+        { x: 24, y: 3, w: 34, h: 18, s: 'plain', f: 'MICH-622-61' },
         { x: 61, y: 21, w: 24, h: 24, s: 'mat' },
-        { x: 61, y: 0, w: 24, h: 18, s: 'plain' },
-        { x: 89, y: 10.5, w: 24, h: 24, s: 'plain' },
-        { x: 117, y: 5.5, w: 28, h: 34, s: 'mat' },
+        { x: 61, y: 0, w: 24, h: 18, s: 'plain', f: 'MICH-708-290' },
+        { x: 89, y: 10.5, w: 24, h: 24, s: 'plain', f: 'MICH-340-20' },
+        { x: 117, y: 5.5, w: 28, h: 34, s: 'mat', f: 'MICH-432-29' },
         { x: 149, y: 10, w: 18, h: 18, s: 'plain' },
-        { x: 173, y: 24, w: 34, h: 18, s: 'float' },
-        { x: 170, y: 3, w: 24, h: 18, s: 'mat' } ] },   // 207in x 45in,
+        { x: 173, y: 24, w: 34, h: 18, s: 'float', f: 'MICH-708-290' },
+        { x: 170, y: 3, w: 24, h: 18, s: 'mat', f: 'MICH-247-79' } ] },   // 207in x 45in,
     { key: 'fel-caf-002', n: 6, label: 'Cafe 002, row of 6', src: 'Ford Engineering Lab FEL.CAF.002', asDrawn: true, frames: [
-        { x: 0, y: 3, w: 42, h: 30, s: 'mat' },
-        { x: 45, y: 20, w: 18, h: 18, s: 'plain' },
-        { x: 45, y: 0, w: 18, h: 18, s: 'float' },
-        { x: 66, y: 1, w: 28, h: 34, s: 'mat' },
-        { x: 97, y: 8, w: 18, h: 18, s: 'plain' },
-        { x: 118, y: 7, w: 26, h: 20, s: 'plain' } ] },   // 144in x 38in,
+        { x: 0, y: 3, w: 42, h: 30, s: 'mat', f: 'MICH-247-79' },
+        { x: 45, y: 20, w: 18, h: 18, s: 'plain', f: 'MICH-622-61' },
+        { x: 45, y: 0, w: 18, h: 18, s: 'float', f: 'MICH-622-61' },
+        { x: 66, y: 1, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 97, y: 8, w: 18, h: 18, s: 'plain', f: 'MICH-708-290' },
+        { x: 118, y: 7, w: 26, h: 20, s: 'plain', f: 'MICH-247-79' } ] },   // 144in x 38in,
     { key: 'fel-cor-003', n: 11, label: 'Corridor 003, long row of 11', src: 'Ford Engineering Lab FEL.COR.003', asDrawn: true, frames: [
-        { x: 0, y: 10, w: 18, h: 18, s: 'plain' },
-        { x: 25, y: 24.5, w: 34, h: 18, s: 'float' },
-        { x: 21, y: 3, w: 24, h: 18, s: 'plain' },
-        { x: 62.5, y: 10, w: 42, h: 30, s: 'plain' },
-        { x: 108.5, y: 8, w: 28, h: 34, s: 'mat' },
-        { x: 140, y: 23, w: 24, h: 24, s: 'plain' },
-        { x: 140, y: 0, w: 24, h: 18, s: 'plain' },
-        { x: 167.5, y: 8, w: 28, h: 34, s: 'mat' },
-        { x: 198, y: 26.5, w: 18, h: 18, s: 'plain' },
-        { x: 209.5, y: 2, w: 24, h: 18, s: 'mat' },
-        { x: 219, y: 23.5, w: 24, h: 18, s: 'float' } ] },   // 243in x 47in,
+        { x: 0, y: 10, w: 18, h: 18, s: 'plain', f: 'MICH-305-29' },
+        { x: 25, y: 24.5, w: 34, h: 18, s: 'float', f: 'MICH-622-61' },
+        { x: 21, y: 3, w: 24, h: 18, s: 'plain', f: 'MICH-247-79' },
+        { x: 62.5, y: 10, w: 42, h: 30, s: 'plain', f: 'MICH-432-29' },
+        { x: 108.5, y: 8, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 140, y: 23, w: 24, h: 24, s: 'plain', f: 'MICH-708-290' },
+        { x: 140, y: 0, w: 24, h: 18, s: 'plain', f: 'MICH-432-29' },
+        { x: 167.5, y: 8, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 198, y: 26.5, w: 18, h: 18, s: 'plain', f: 'MICH-708-290' },
+        { x: 209.5, y: 2, w: 24, h: 18, s: 'mat', f: 'MICH-622-61' },
+        { x: 219, y: 23.5, w: 24, h: 18, s: 'float', f: 'MICH-360-79' } ] },   // 243in x 47in,
     { key: 'fel-cor-006', n: 4, label: 'Corridor 006, cluster of 4', src: 'Ford Engineering Lab FEL.COR.006', asDrawn: true, frames: [
-        { x: 0, y: 0, w: 30, h: 42, s: 'mat' },
-        { x: 33, y: 22.5, w: 24, h: 18, s: 'plain' },
-        { x: 36, y: 1.5, w: 18, h: 18, s: 'plain' },
-        { x: 60, y: 0, w: 30, h: 42, s: 'mat' } ] },   // 90in x 42in,
+        { x: 0, y: 0, w: 30, h: 42, s: 'mat', f: 'MICH-622-61' },
+        { x: 33, y: 22.5, w: 24, h: 18, s: 'plain', f: 'MICH-622-61' },
+        { x: 36, y: 1.5, w: 18, h: 18, s: 'plain', f: 'MICH-305-29' },
+        { x: 60, y: 0, w: 30, h: 42, s: 'mat', f: 'MICH-432-29' } ] },   // 90in x 42in,
     { key: 'fel-cor-007', n: 6, label: 'Corridor 007, row of 6', src: 'Ford Engineering Lab FEL.COR.007', asDrawn: true, frames: [
-        { x: 0, y: 3.5, w: 42, h: 30, s: 'mat' },
-        { x: 45, y: 20.5, w: 18, h: 18, s: 'plain' },
-        { x: 45, y: 0, w: 18, h: 18, s: 'plain' },
-        { x: 66, y: 1, w: 28, h: 34, s: 'mat' },
-        { x: 98, y: 8, w: 18, h: 18, s: 'mat' },
-        { x: 120, y: 8.5, w: 26, h: 20, s: 'plain' } ] },   // 146in x 38.5in,
+        { x: 0, y: 3.5, w: 42, h: 30, s: 'mat', f: 'MICH-432-29' },
+        { x: 45, y: 20.5, w: 18, h: 18, s: 'plain', f: 'MICH-622-61' },
+        { x: 45, y: 0, w: 18, h: 18, s: 'plain', f: 'MICH-708-290' },
+        { x: 66, y: 1, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 98, y: 8, w: 18, h: 18, s: 'mat', f: 'MICH-708-290' },
+        { x: 120, y: 8.5, w: 26, h: 20, s: 'plain', f: 'MICH-622-61' } ] },   // 146in x 38.5in,
     { key: 'fel-cor-013', n: 6, label: 'Corridor 013, row of 6', src: 'Ford Engineering Lab FEL.COR.013', asDrawn: true, frames: [
         { x: 0, y: 5, w: 42, h: 30, s: 'plain' },
-        { x: 45, y: 21, w: 18, h: 18, s: 'plain' },
-        { x: 45, y: 1, w: 18, h: 18, s: 'plain' },
-        { x: 66, y: 3, w: 28, h: 34, s: 'mat' },
-        { x: 97, y: 22, w: 22, h: 18, s: 'plain' },
-        { x: 97, y: 0, w: 26, h: 20, s: 'mat' } ] },   // 123in x 40in,
+        { x: 45, y: 21, w: 18, h: 18, s: 'plain', f: 'MICH-432-29' },
+        { x: 45, y: 1, w: 18, h: 18, s: 'plain', f: 'MICH-305-29' },
+        { x: 66, y: 3, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 97, y: 22, w: 22, h: 18, s: 'plain', f: 'MICH-622-61' },
+        { x: 97, y: 0, w: 26, h: 20, s: 'mat', f: 'MICH-708-290' } ] },   // 123in x 40in,
     { key: 'fel-cor-015', n: 11, label: 'Corridor 015, long row of 11', src: 'Ford Engineering Lab FEL.COR.015', asDrawn: true, frames: [
-        { x: 0, y: 3, w: 24, h: 24, s: 'plain' },
-        { x: 17, y: 28, w: 18, h: 18, s: 'plain' },
-        { x: 38, y: 7, w: 28, h: 34, s: 'mat' },
-        { x: 70, y: 22, w: 24, h: 24, s: 'float' },
-        { x: 70, y: 0, w: 24, h: 18, s: 'plain' },
+        { x: 0, y: 3, w: 24, h: 24, s: 'plain', f: 'MICH-708-290' },
+        { x: 17, y: 28, w: 18, h: 18, s: 'plain', f: 'MICH-340-20' },
+        { x: 38, y: 7, w: 28, h: 34, s: 'mat', f: 'MICH-432-29' },
+        { x: 70, y: 22, w: 24, h: 24, s: 'float', f: 'MICH-622-61' },
+        { x: 70, y: 0, w: 24, h: 18, s: 'plain', f: 'MICH-708-290' },
         { x: 98, y: 10, w: 24, h: 30, s: 'plain' },
-        { x: 126, y: 10, w: 42, h: 30, s: 'mat' },
-        { x: 172, y: 22, w: 18, h: 24, s: 'plain' },
+        { x: 126, y: 10, w: 42, h: 30, s: 'mat', f: 'MICH-432-29' },
+        { x: 172, y: 22, w: 18, h: 24, s: 'plain', f: 'MICH-247-79' },
         { x: 172, y: 0, w: 18, h: 18, s: 'plain' },
-        { x: 193, y: 25, w: 34, h: 18, s: 'plain' },
-        { x: 193, y: 4, w: 24, h: 18, s: 'plain' } ] },   // 227in x 46in,
+        { x: 193, y: 25, w: 34, h: 18, s: 'plain', f: 'MICH-708-290' },
+        { x: 193, y: 4, w: 24, h: 18, s: 'plain', f: 'MICH-622-61' } ] },   // 227in x 46in,
     { key: 'fel-cor-024', n: 4, label: 'Corridor 024, cluster of 4', src: 'Ford Engineering Lab FEL.COR.024', asDrawn: true, frames: [
-        { x: 0, y: 0, w: 30, h: 42, s: 'mat' },
-        { x: 33, y: 23, w: 22, h: 18, s: 'plain' },
-        { x: 33, y: 3, w: 22, h: 18, s: 'plain' },
-        { x: 58, y: 0, w: 30, h: 42, s: 'mat' } ] },   // 88in x 42in,
+        { x: 0, y: 0, w: 30, h: 42, s: 'mat', f: 'MICH-622-61' },
+        { x: 33, y: 23, w: 22, h: 18, s: 'plain', f: 'MICH-432-29' },
+        { x: 33, y: 3, w: 22, h: 18, s: 'plain', f: 'MICH-340-20' },
+        { x: 58, y: 0, w: 30, h: 42, s: 'mat', f: 'MICH-432-29' } ] },   // 88in x 42in,
     { key: 'fel-cor-029', n: 4, label: 'Corridor 029, cluster of 4', src: 'Ford Engineering Lab FEL.COR.029', asDrawn: true, frames: [
-        { x: 0, y: 14, w: 26, h: 20, s: 'plain' },
-        { x: 28, y: 20, w: 18, h: 18, s: 'mat' },
-        { x: 28, y: 0, w: 22, h: 18, s: 'plain' },
-        { x: 52, y: 5, w: 34, h: 28, s: 'mat' } ] },   // 86in x 38in,
+        { x: 0, y: 14, w: 26, h: 20, s: 'plain', f: 'MICH-247-79' },
+        { x: 28, y: 20, w: 18, h: 18, s: 'mat', f: 'MICH-708-290' },
+        { x: 28, y: 0, w: 22, h: 18, s: 'plain', f: 'MICH-340-20' },
+        { x: 52, y: 5, w: 34, h: 28, s: 'mat', f: 'MICH-247-79' } ] },   // 86in x 38in,
     { key: 'fel-ent-001', n: 6, label: 'Entry 001, row of 6', src: 'Ford Engineering Lab FEL.ENT.001', asDrawn: true, frames: [
-        { x: 0, y: 12, w: 18, h: 24, s: 'float' },
-        { x: 24, y: 7, w: 28, h: 34, s: 'mat' },
-        { x: 58, y: 9, w: 42, h: 30, s: 'float' },
-        { x: 106, y: 26, w: 24, h: 24, s: 'mat' },
-        { x: 106, y: 0, w: 26, h: 20, s: 'plain' },
-        { x: 136, y: 12, w: 18, h: 24, s: 'plain' } ] },   // 154in x 50in,
+        { x: 0, y: 12, w: 18, h: 24, s: 'float', f: 'MICH-708-290' },
+        { x: 24, y: 7, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 58, y: 9, w: 42, h: 30, s: 'float', f: 'MICH-432-29' },
+        { x: 106, y: 26, w: 24, h: 24, s: 'mat', f: 'MICH-622-61' },
+        { x: 106, y: 0, w: 26, h: 20, s: 'plain', f: 'MICH-247-79' },
+        { x: 136, y: 12, w: 18, h: 24, s: 'plain', f: 'MICH-340-20' } ] },   // 154in x 50in,
     { key: 'fel-ent-002', n: 8, label: 'Entry 002, long row of 8', src: 'Ford Engineering Lab FEL.ENT.002', asDrawn: true, frames: [
-        { x: 8, y: 24, w: 18, h: 18, s: 'plain' },
-        { x: 0, y: 0, w: 24, h: 18, s: 'float' },
-        { x: 30, y: 5, w: 42, h: 34, s: 'mat' },
-        { x: 76, y: 1, w: 30, h: 40, s: 'plain' },
+        { x: 8, y: 24, w: 18, h: 18, s: 'plain', f: 'MICH-622-61' },
+        { x: 0, y: 0, w: 24, h: 18, s: 'float', f: 'MICH-708-290' },
+        { x: 30, y: 5, w: 42, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 76, y: 1, w: 30, h: 40, s: 'plain', f: 'MICH-340-20' },
         { x: 110, y: 10, w: 24, h: 24, s: 'plain' },
-        { x: 138, y: 5, w: 28, h: 34, s: 'plain' },
-        { x: 170, y: 23, w: 24, h: 18, s: 'float' },
-        { x: 173.5, y: 2, w: 12, h: 18, s: 'plain' } ] },   // 194in x 42in,
+        { x: 138, y: 5, w: 28, h: 34, s: 'plain', f: 'MICH-305-29' },
+        { x: 170, y: 23, w: 24, h: 18, s: 'float', f: 'MICH-622-61' },
+        { x: 173.5, y: 2, w: 12, h: 18, s: 'plain', f: 'MICH-432-29' } ] },   // 194in x 42in,
     { key: 'fel-hal-001', n: 7, label: 'Hallway 001, row of 7', src: 'Ford Engineering Lab FEL.HAL.001', asDrawn: true, frames: [
-        { x: 0, y: 9, w: 20, h: 26, s: 'plain' },
-        { x: 23, y: 4, w: 36, h: 36, s: 'plain' },
-        { x: 62, y: 5, w: 28, h: 34, s: 'mat' },
-        { x: 93, y: 12, w: 18, h: 22, s: 'mat' },
-        { x: 114, y: 23, w: 18, h: 18, s: 'plain' },
-        { x: 114, y: 0, w: 26, h: 20, s: 'mat' },
-        { x: 135, y: 23, w: 18, h: 18, s: 'plain' } ] },   // 153in x 41in,
+        { x: 0, y: 9, w: 20, h: 26, s: 'plain', f: 'MICH-247-79' },
+        { x: 23, y: 4, w: 36, h: 36, s: 'plain', f: 'MICH-622-61' },
+        { x: 62, y: 5, w: 28, h: 34, s: 'mat', f: 'MICH-708-290' },
+        { x: 93, y: 12, w: 18, h: 22, s: 'mat', f: 'MICH-432-29' },
+        { x: 114, y: 23, w: 18, h: 18, s: 'plain', f: 'MICH-622-61' },
+        { x: 114, y: 0, w: 26, h: 20, s: 'mat', f: 'MICH-247-79' },
+        { x: 135, y: 23, w: 18, h: 18, s: 'plain', f: 'MICH-432-29' } ] },   // 153in x 41in,
     { key: 'fel-hal-002', n: 6, label: 'Hallway 002, row of 6', src: 'Ford Engineering Lab FEL.HAL.002', asDrawn: true, frames: [
-        { x: 6, y: 27, w: 18, h: 18, s: 'plain' },
-        { x: 0, y: 0, w: 24, h: 24, s: 'float' },
-        { x: 28, y: 5, w: 28, h: 34, s: 'mat' },
-        { x: 60, y: 4, w: 36, h: 36, s: 'plain' },
-        { x: 100, y: 22, w: 26, h: 20, s: 'plain' },
-        { x: 100, y: 0, w: 18, h: 18, s: 'mat' } ] },   // 126in x 45in,
+        { x: 6, y: 27, w: 18, h: 18, s: 'plain', f: 'MICH-305-29' },
+        { x: 0, y: 0, w: 24, h: 24, s: 'float', f: 'MICH-708-290' },
+        { x: 28, y: 5, w: 28, h: 34, s: 'mat', f: 'MICH-247-79' },
+        { x: 60, y: 4, w: 36, h: 36, s: 'plain', f: 'MICH-432-29' },
+        { x: 100, y: 22, w: 26, h: 20, s: 'plain', f: 'MICH-247-79' },
+        { x: 100, y: 0, w: 18, h: 18, s: 'mat', f: 'MICH-708-290' } ] },   // 126in x 45in,
     { key: 'fel-hal-003', n: 6, label: 'Hallway 003, row of 6', src: 'Ford Engineering Lab FEL.HAL.003', asDrawn: true, frames: [
-        { x: 0, y: 13, w: 20, h: 26, s: 'float' },
-        { x: 24, y: 0, w: 38, h: 50, s: 'plain' },
-        { x: 66, y: 27, w: 18, h: 22, s: 'plain' },
-        { x: 66, y: 1, w: 18, h: 22, s: 'mat' },
-        { x: 88, y: 12, w: 34, h: 28, s: 'mat' },
-        { x: 126, y: 9, w: 28, h: 34, s: 'plain' } ] },   // 154in x 50in
+        { x: 0, y: 13, w: 20, h: 26, s: 'float', f: 'MICH-247-79' },
+        { x: 24, y: 0, w: 38, h: 50, s: 'plain', f: 'MICH-340-20' },
+        { x: 66, y: 27, w: 18, h: 22, s: 'plain', f: 'MICH-432-29' },
+        { x: 66, y: 1, w: 18, h: 22, s: 'mat', f: 'MICH-708-290' },
+        { x: 88, y: 12, w: 34, h: 28, s: 'mat', f: 'MICH-247-79' },
+        { x: 126, y: 9, w: 28, h: 34, s: 'plain', f: 'MICH-708-290' } ] },   // 154in x 50in
 ];
 function _salonPreset(key) { return SALON_PRESETS.find(p => p.key === key) || null; }
 // The layout for a set, in inches: [{x, y, w, h, s?}], x/y from the group's bottom-left.
@@ -32159,6 +32161,152 @@ function _applyFrameStyle(row, style) {
         row.sbPaperMargin = dashFmt(1.5 * k); row.sbPaperBorder = dashFmt(0.5 * k);
     }
 }
+// ── FRAMES THAT COME WITH A SET (19.31) ──────────────────────────────────────
+// A preset copied from a real project names each piece's library moulding (`f`).
+// Applying it dresses the piece in that frame through applySwatchToRow, the same path
+// a pick in the frame browser takes (so a floater moulding makes a floater canvas).
+// Swatches load asynchronously; the picker warms _libSwatchMemo as it opens so a click
+// normally dresses everything at once. Anything not yet loaded is dressed when it
+// arrives and folded into the SAME undo entry (the top snapshot is retaken).
+// The set is a starting point: select its pieces and bulk edit to change every frame.
+const _libSwatchMemo = {};
+function _salonPresetCodes() {
+    const out = {};
+    SALON_PRESETS.forEach(p => (p.frames || []).forEach(f => { if (f.f) out[f.f] = true; }));
+    return Object.keys(out);
+}
+function _salonSwatchWarm() {
+    let by = {}; try { by = _fbByCode(); } catch (e) { return Promise.resolve(); }
+    return Promise.all(_salonPresetCodes().map(c => {
+        const rec = by[_fbNorm(c)];
+        if (!rec || _libSwatchMemo[c]) return null;
+        return _libEntryToDataUrl(rec.item.file).then(u => { if (u) _libSwatchMemo[c] = u; }).catch(() => {});
+    }));
+}
+function _salonDressRow(r, rec, url) {
+    const idx = dashProjectData.indexOf(r);
+    if (idx < 0) return false;
+    return applySwatchToRow(idx, rec.collection, rec.item, url);
+}
+// Dresses what it can now; returns the rest as [row, rec, code] for _salonFrameDressLater.
+function _salonFrameDress(rows, lay) {
+    const pend = [];
+    let by = {}; try { by = _fbByCode(); } catch (e) { return pend; }
+    rows.forEach((r, i) => {
+        const code = lay[i] && lay[i].f;
+        const rec = code ? by[_fbNorm(code)] : null;
+        if (!rec) return;
+        if (_libSwatchMemo[code]) _salonDressRow(r, rec, _libSwatchMemo[code]);
+        else pend.push([r, rec, code]);
+    });
+    return pend;
+}
+function _salonFrameDressLater(pend) {
+    Promise.all(pend.map(([r, rec, code]) => _libEntryToDataUrl(rec.item.file).then(u => { if (u) _libSwatchMemo[code] = u; return u; }).catch(() => null)))
+        .then(() => {
+            let n = 0;
+            pend.forEach(([r, rec, code]) => {
+                if (!_libSwatchMemo[code] || !_salonDressRow(r, rec, _libSwatchMemo[code])) return;
+                n++;
+                const idx = dashProjectData.indexOf(r);
+                try { pushUpdatesToElevations(idx); } catch (e) {}
+            });
+            if (!n) return;
+            try { _invalidateFramesCache(); } catch (e) {}
+            try { renderDashTable(); } catch (e) {}
+            try { if (currentView === 'elevation') drawElevAll(); } catch (e) {}
+            // One gesture, one undo entry: retake the snapshot the apply just pushed.
+            try { if (undoStack.length) undoStack[undoStack.length - 1] = snapshotProjectState({ plans: true }); } catch (e) {}
+            if (typeof scheduleAutosave === 'function') scheduleAutosave();
+        });
+}
+
+// ── THE FRAME SET PICKER (19.31, openFrameSetPicker) ─────────────────────────
+// Choosing a set was a text menu of names; a designer picking an arrangement wants to
+// SEE it. A dialog of drawn thumbnails, three sections: the simple sets, the house salon
+// hangs, and the hangs copied from real projects. Each drawing is to scale: frame in the
+// moulding's colour, a mat as a white border, a float mount as paper on a backer, the
+// art as grey. The current set is ringed. Clicking one applies it (_fpApplyFrameSet).
+function _frameSetInk(code) {
+    let it = null;
+    try { const rec = code && _fbByCode()[_fbNorm(code)]; it = rec && rec.item; } catch (e) {}
+    const c = String((it && (it.color || it.family)) || '').toLowerCase();
+    if (/gold/.test(c) && !/black/.test(c)) return '#b08d3e';
+    if (/oak|maple|natural|honey|light wood/.test(c)) return '#b8864b';
+    if (/walnut|brown|mahogany|espresso/.test(c)) return '#5a3d2b';
+    if (/silver|steel|nickel|pewter/.test(c)) return '#8a8f94';
+    if (/white/.test(c)) return '#e9e9e9';
+    if (/woodgrain/.test(c)) return '#2b2420';
+    return '#161616';
+}
+function _frameSetThumbSVG(lay) {
+    const W = Math.max.apply(null, lay.map(f => f.x + f.w)), H = Math.max.apply(null, lay.map(f => f.y + f.h));
+    const pad = Math.max(W, H) * 0.07;
+    let rec = {}; try { rec = _fbByCode(); } catch (e) {}
+    const parts = lay.map(f => {
+        const it = f.f && rec[_fbNorm(f.f)] ? rec[_fbNorm(f.f)].item : null;
+        const floater = it && parseFloat(it.faceWidth) > 0;
+        // Drawn at least ~1% of the drawing's size, or a 245"-wide row draws hairline frames
+        // and the moulding colours (the point of a project hang) do not read.
+        const fw = Math.max(Math.max(W, H) * 0.011, Math.min(2.2, floater ? 0.5 : ((it && parseFloat(it.width)) || 1)), 0.6);
+        const x = f.x, y = H - f.y - f.h, w = f.w, h = f.h;
+        const ink = _frameSetInk(f.f);
+        const r = (x0, y0, w0, h0, fill, extra) => (w0 > 0 && h0 > 0) ? '<rect x="' + x0.toFixed(2) + '" y="' + y0.toFixed(2) + '" width="' + w0.toFixed(2) + '" height="' + h0.toFixed(2) + '" fill="' + fill + '"' + (extra || '') + '/>' : '';
+        let out = r(x, y, w, h, ink);
+        if (f.s === 'mat') {
+            const m = Math.min(3, Math.min(w, h) * 0.18);
+            out += r(x + fw, y + fw, w - 2 * fw, h - 2 * fw, '#ffffff') + r(x + fw + m, y + fw + m, w - 2 * (fw + m), h - 2 * (fw + m), '#c5c9cf');
+        } else if (f.s === 'float') {
+            const m = Math.min(2, Math.min(w, h) * 0.14);
+            out += r(x + fw, y + fw, w - 2 * fw, h - 2 * fw, '#f1f1f1') + r(x + fw + m, y + fw + m, w - 2 * (fw + m), h - 2 * (fw + m), '#ffffff', ' stroke="#d8d8d8" stroke-width="0.3"')
+                + r(x + fw + m + 0.8, y + fw + m + 0.8, w - 2 * (fw + m + 0.8), h - 2 * (fw + m + 0.8), '#c5c9cf');
+        } else {
+            out += r(x + fw, y + fw, w - 2 * fw, h - 2 * fw, floater ? '#2a2a2a' : '#c5c9cf');
+            if (floater) out += r(x + fw + 0.35, y + fw + 0.35, w - 2 * (fw + 0.35), h - 2 * (fw + 0.35), '#c5c9cf');
+        }
+        return out;
+    }).join('');
+    return '<svg viewBox="' + (-pad).toFixed(2) + ' ' + (-pad).toFixed(2) + ' ' + (W + 2 * pad).toFixed(2) + ' ' + (H + 2 * pad).toFixed(2) + '" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' + parts + '</svg>';
+}
+function openFrameSetPicker(g) {
+    if (!g) return;
+    const old = document.getElementById('frameSetPicker'); if (old) old.remove();
+    const cur = _fpGroupSet(g);
+    _salonSwatchWarm();
+    const ov = document.createElement('div');
+    ov.id = 'frameSetPicker'; ov.className = 'frame-modal'; ov.setAttribute('data-modal-backdrop', ''); ov.style.display = 'flex';
+    const card = document.createElement('div'); card.className = 'fsp-card';
+    const head = document.createElement('div'); head.className = 'fsp-head';
+    head.innerHTML = '<div><div class="fsp-title"></div><div class="fsp-sub">Pick an arrangement. Each piece can be changed after, one at a time or all together with Bulk Edit.</div></div>';
+    head.querySelector('.fsp-title').textContent = 'Frame set for ' + g.key;
+    const x = document.createElement('button'); x.type = 'button'; x.className = 'fsp-close phone-x'; x.setAttribute('data-modal-close', ''); x.setAttribute('aria-label', 'Close');
+    x.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    x.onclick = () => ov.remove();
+    head.appendChild(x);
+    card.appendChild(head);
+    const section = (title, tiles) => {
+        if (!tiles.length) return;
+        const h = document.createElement('div'); h.className = 'fsp-sec'; h.textContent = title; card.appendChild(h);
+        const grid = document.createElement('div'); grid.className = 'fsp-grid'; card.appendChild(grid);
+        tiles.forEach(t => {
+            const b = document.createElement('button'); b.type = 'button';
+            b.className = 'fsp-tile' + (t.on ? ' on' : '');
+            b.setAttribute('data-set', t.key || ('n' + t.n));
+            b.innerHTML = '<div class="fsp-pic">' + _frameSetThumbSVG(t.lay) + '</div><div class="fsp-name"></div><div class="fsp-hint"></div>';
+            b.querySelector('.fsp-name').textContent = t.label;
+            b.querySelector('.fsp-hint').textContent = t.n + (t.n === 1 ? ' piece' : ' pieces');
+            b.onclick = () => { ov.remove(); _fpApplyFrameSet(g.key, t.n, t.key || ''); };
+            grid.appendChild(b);
+        });
+    };
+    section('Sets', [1, 2, 3, 4].map(k => ({ n: k, key: '', label: FRAME_SET_SIMPLE[k].label, lay: _frameSetLayout(k, ''), on: !cur.preset && cur.n === k })));
+    section('Salon hangs', SALON_PRESETS.filter(p => !p.asDrawn).map(p => ({ n: p.n, key: p.key, label: p.label, lay: p.frames, on: cur.preset === p.key })));
+    section('Ford Engineering Lab', SALON_PRESETS.filter(p => p.asDrawn).map(p => ({ n: p.n, key: p.key, label: p.label, lay: p.frames, on: cur.preset === p.key })));
+    ov.appendChild(card);
+    document.body.appendChild(ov);
+    return ov;
+}
+
 // What set a placement is now: its piece count, and a salon preset if one was applied.
 function _fpGroupSet(g) {
     const n = (g && g.rows) ? g.rows.length : 1;
@@ -32219,6 +32367,9 @@ function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
         if (pre0) { const L = pre0[i]; r.extW = dashFmt(L.w * kIn); r.extH = dashFmt(L.h * kIn); _applyFrameStyle(r, L.s); r.salonPreset = presetKey; }
         else { delete r.salonPreset; if (!(parseFloat(r.extW) > 0) || !(parseFloat(r.extH) > 0)) { r.extW = dashFmt(S.size[0] * kIn); r.extH = dashFmt(S.size[1] * kIn); } }
     });
+    // A preset from a real project carries each piece's frame (19.31): dress them now,
+    // from swatches the picker preloaded, so the wall below is drawn in them.
+    const _pend = pre0 ? _salonFrameDress(rows, pre0) : [];
     const kOut = unitFactor(dashUnit, 'in');
     const lay = pre0 || _frameSetLayout(n, '', rows.map(r => [parseFloat(r.extW) * kOut, parseFloat(r.extH) * kOut]));
     _fpMockSetOnWall(key, rows, lay);
@@ -32228,6 +32379,7 @@ function _fpApplyFrameSetNow(key, rows0, n, presetKey) {
     if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
     if (typeof pushHistory === 'function') pushHistory();
     if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    if (_pend.length) _salonFrameDressLater(_pend);
     const label = presetKey ? ('salon hang, ' + _salonPreset(presetKey).label) : (FRAME_SET_SIMPLE[n] ? FRAME_SET_SIMPLE[n].label : n + ' set');
     _toast(key + ' is a ' + label.toLowerCase(), 'Mocked up on its wall in Elevations. Ctrl+Z undoes it.');
     try { _dsRefresh(); _dsRenderTools(); _dsRenderCenter(); } catch (e) {}
@@ -33189,21 +33341,8 @@ function _fpItemRow(g, desc) {
     frB.innerHTML = '<svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><rect x="7" y="8" width="10" height="8"/></svg><span class="fp-set-n">' + _set.n + '</span>';
     frB.style.cssText = 'width:' + FP_ITEM_COLS.frames + 'px; height:22px; padding:0 3px; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; gap:2px;';
     frB.title = 'Frames: ' + (_set.preset ? ('salon hang, ' + _salonPreset(_set.preset).label) : (FRAME_SET_SIMPLE[_set.n] ? FRAME_SET_SIMPLE[_set.n].label : _set.n + ' pieces')) + '. Click to change the set; it is mocked up on the wall in Elevations.';
-    frB.onclick = (e) => {
-        e.stopPropagation();
-        const items = [{ head: 'FRAME SET' }];
-        [1, 2, 3, 4].forEach(k => items.push({ label: FRAME_SET_SIMPLE[k].label, on: !_set.preset && _set.n === k, onClick: () => _fpApplyFrameSet(g.key, k, '') }));
-        [5, 7].forEach(k => {
-            items.push({ head: k + ' SET · SALON HANGS' });
-            SALON_PRESETS.filter(p => p.n === k && !p.asDrawn).forEach(p => items.push({ label: p.label, hint: k + ' pieces', on: _set.preset === p.key, onClick: () => _fpApplyFrameSet(g.key, k, p.key) }));
-        });
-        const _proj = SALON_PRESETS.filter(p => p.asDrawn);
-        if (_proj.length) {
-            items.push({ head: 'SALON HANGS · FORD ENGINEERING LAB' });
-            _proj.forEach(p => items.push({ label: p.label, hint: p.n + ' pieces', on: _set.preset === p.key, onClick: () => _fpApplyFrameSet(g.key, p.n, p.key) }));
-        }
-        _frameMenu(frB, items);
-    };
+    // The arrangements as pictures (19.31, openFrameSetPicker), not a list of names.
+    frB.onclick = (e) => { e.stopPropagation(); openFrameSetPicker(g); };
     row.appendChild(num); row.appendChild(code); row.appendChild(sel); row.appendChild(lnB); row.appendChild(frB);
     row.onclick = () => _dsFpArm(g.key);
     _fpWireItemDrag(row, g);
@@ -45491,7 +45630,7 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.30</strong> Fourteen salon hangs from the Ford Engineering Lab installation guide are now frame sets: on the floorplan Items list, click a code's frames button and pick from <strong>Salon hangs · Ford Engineering Lab</strong> (4 to 11 pieces, sized and spaced exactly as built). A saved project now keeps its document code, version and location (they print in every page footer), and reopens with its own include-page ticks and plan order rather than the previous project's.<br><br><strong>19.29</strong> iPhone: the top bar, dialogs, the frame browser and All pages no longer slide under the status bar (camera, clock and battery) in the home-screen app.<br><br><strong>19.28</strong> iPhone: the top bar now does more. On Walls it names the wall (tap to switch walls or add one), on an item it is the way back to the list, and on Deck a menu button beside the three dots holds Project, Pages, Templates, Generate PDF, Approval and Preflight, so each screen loses a row. The item preview no longer opens cropped and off-centre. Align and space opens as a sheet you can see in full. All pages is tighter, with the filter at the very top and a round X to close; the frame browser closes with the same X. In the frame library one vendor is open at a time, and tapping the open vendor closes it (on every device).<br><br><strong>19.27</strong> Frame FA-BW74-2003 (Framerica American Walnut): the vendor's PRODUCT HOLDER sticker is gone from its corner photo, and its frame no longer tiles as a row of dots (its swatch was a sliver of the moulding; it is now a long, seamless piece of the grain). Pieces already in that frame pick up the corrected look when the project opens, on their walls too; a swatch you uploaded yourself is never replaced.<br><br><strong>19.26</strong> FRAME now keeps a copy of itself on your device, so the home-screen app opens with no signal (a basement, a site with no reception) and opens faster everywhere; it still updates whenever there is signal. On iPhone: the round camera button on Items makes a new item straight from a photo (take one or pick several; each becomes its own item with the picture on it), and a sideways swipe across an empty part of a wall flips to the next wall, across a deck page to the next page. Swiping on a frame or a text box still moves it. Import has <strong>New items from photos</strong> on every device.<br><br><strong>19.25</strong> The frame browser builds a screenful of frames at a time and adds more as you scroll, so All frames opens straight away; on iPhone the frame swatches show the whole corner photo (they looked zoomed in). On iPhone, Deck Studio puts the page numbers, All pages and the tools in one row above the page, and the page area fits the page, leaving more room for the layout choices; the Presentation layout and breaker settings now scroll with the panel instead of covering the choices below them.<br><br><strong>19.24</strong> Pinch with two fingers on a wall to zoom it (and drag two fingers to move around); the rest of the app no longer zooms with it. On iPhone the controller is the <strong>Controls</strong> button in the bottom bar instead of a floating button; Deck Studio's Generate PDF and Approval are in its menu button; All pages shows each page as wide as the phone; the frame browser fills the screen three across (five sideways) with the frame lists behind the menu button and the filters behind Filters. On iPhone and iPad the Project tab no longer shows a page preview, and on iPhone it is one column.<br><br><strong>19.23</strong> FRAME on iPhone. Hold the phone upright to work: Deck, Items and Walls are tabs along the bottom, Save and undo stay in the header and everything else is under the three-dot menu. Items is a list; tap one to open its settings, and All items takes you back. Walls shows the wall chips, the wall, the tools and then the frames, with the wall settings below. Deck shows one page at a time with a page bar and All pages. Turn the phone sideways to look: on Walls and Deck the menus go and the wall or page fills the screen. The controller folds to a round button bottom-right.<br><br><strong>19.22</strong> The joystick has four arrows round its rim: tap one for exactly one nudge, hold it to keep nudging (Shift on for big steps). Delete now removes a selected dimension (tap its number or line first; it shows a dashed box and its number ringed), and leaves frames alone while a dimension is selected. On a touch screen dimension lines and their delete buttons are easier to hit. The letter legend is 200pt wide by default. Elevations in PDFs and exports are laid out at least as large as on a desktop screen, so a deck made on an iPad prints its dimensions the same size as one made on the desktop.<br><br><strong>19.21</strong> On an iPad, use Safari's Share button, then <strong>Add to Home Screen</strong>: FRAME opens from its icon as its own full-screen app with no Safari toolbar. In the elevation dock, <strong>Add artwork</strong> (the picture button) puts a photo in the selected frame from the photo library, the camera or Files; select several frames to add several pictures at once, in letter order. The frame browser always opens on All frames, and on a touch screen it no longer brings up the keyboard until you tap the search box.<br><br><strong>19.20</strong> iPad: the key bar is now a controller (bottom-left; drag its dotted grip to move it). Its <strong>joystick</strong> nudges whatever is selected: push the knob the way it should go, a light push steps slowly and a full push moves faster, with Shift on for big steps; one push undoes in one go. The keys can be <strong>tapped</strong> to stay on or <strong>held</strong> with one hand while the other hand drags. With Shift or Ctrl on, tapping rows in the dashboard table selects a range or adds to the selection. The dashboard item list and the elevation wall panel fold away with the tab on their edge; with the list folded the dashboard picture gets its own column beside the form, and on a touch screen the form is four tabs (Item, Frame, Mat, Notes) so each fits without scrolling.<br><br><strong>19.19</strong> More for iPad. On a touch screen a small key bar sits bottom-right: <strong>Shift</strong>, <strong>Ctrl</strong> and <strong>Alt</strong> stay on once tapped (lit) and apply to every drag and tap until tapped off, and <strong>Delete</strong> deletes the selection like the Delete key. A finger that lands just beside a small resize corner or dimension handle picks the handle up. The wall list beside an elevation folds away with the arrow at its top, giving the wall more room (on any computer). On a narrow screen the dashboard keeps the picture above the form instead of in its own column, so the item table keeps its width; the column comes back when there is room.<br><br><strong>19.18</strong> FRAME works with a finger on iPad: drag frames, context blocks, glass, dimension lines, deck page boxes and floorplan pins by touch. In a scrolling list (the wall rail, the frame list) a swipe scrolls and a short press and hold picks the item up. Double-tap does what double-click does. Buttons that only appeared on mouse hover now show on a touch screen.<br><br><strong>19.17</strong> On deck pages, a frame with no picture in it shows a light grey opening instead of a black one (the drop shadow under the frame was showing through). Downloaded SVG and PNG elevations keep the clear opening for InDesign.<br><br><strong>19.16</strong> Group dimensions step out past the spacing dimensions: the overall width line sits above the row of spacing numbers and the height line left of any beside the group, so the two never run through each other. Drag a group line and it moves out from there.<br><br><strong>19.15</strong> Spacing dimensions place themselves: a number too wide for its gap now moves its line above or below the group (left or right for a vertical gap) to the nearest spot clear of every frame, and in a tight stack it sits over its gap inside the column. Drag one and it stays where you put it; Reset dimension positions hands it back. A line pulled out of the group always puts its number on the outside, away from the dashed extension lines. A set of frames gets one group dimension: pressing Group again on the same frames selects the one already there (a different set on the same wall still gets its own). Click a group dimension's number to select it, then press Delete to remove it.<br><br><strong>19.14</strong> Drop an image from another window onto a page in Deck Studio and it becomes that page’s background (pan, zoom or remove it in Page appearance); image boxes and spec-page frames still take their own drops. The Thank You page has two new sliders: <strong>Move contacts up / down</strong> and <strong>Name size</strong>. A new project’s cover has a 1.5pt rule between the client name and the heading that turns white on a dark page, and the starter deck no longer includes a moodboard page.<br><br>
+                body: `<strong>19.31</strong> Frame sets are picked from pictures: the frames button on a floorplan item code opens a window of drawn arrangements (sets, salon hangs and the Ford Engineering Lab hangs), each to scale with its frames, mats and float mounts. The Ford hangs now come in their real mix of frames (oak, black woodgrain, black and gold, floaters); select the set and use Bulk Edit to change them all at once.<br><br><strong>19.30</strong> Fourteen salon hangs from the Ford Engineering Lab installation guide are now frame sets: on the floorplan Items list, click a code's frames button and pick from <strong>Salon hangs · Ford Engineering Lab</strong> (4 to 11 pieces, sized and spaced exactly as built). A saved project now keeps its document code, version and location (they print in every page footer), and reopens with its own include-page ticks and plan order rather than the previous project's.<br><br><strong>19.29</strong> iPhone: the top bar, dialogs, the frame browser and All pages no longer slide under the status bar (camera, clock and battery) in the home-screen app.<br><br><strong>19.28</strong> iPhone: the top bar now does more. On Walls it names the wall (tap to switch walls or add one), on an item it is the way back to the list, and on Deck a menu button beside the three dots holds Project, Pages, Templates, Generate PDF, Approval and Preflight, so each screen loses a row. The item preview no longer opens cropped and off-centre. Align and space opens as a sheet you can see in full. All pages is tighter, with the filter at the very top and a round X to close; the frame browser closes with the same X. In the frame library one vendor is open at a time, and tapping the open vendor closes it (on every device).<br><br><strong>19.27</strong> Frame FA-BW74-2003 (Framerica American Walnut): the vendor's PRODUCT HOLDER sticker is gone from its corner photo, and its frame no longer tiles as a row of dots (its swatch was a sliver of the moulding; it is now a long, seamless piece of the grain). Pieces already in that frame pick up the corrected look when the project opens, on their walls too; a swatch you uploaded yourself is never replaced.<br><br><strong>19.26</strong> FRAME now keeps a copy of itself on your device, so the home-screen app opens with no signal (a basement, a site with no reception) and opens faster everywhere; it still updates whenever there is signal. On iPhone: the round camera button on Items makes a new item straight from a photo (take one or pick several; each becomes its own item with the picture on it), and a sideways swipe across an empty part of a wall flips to the next wall, across a deck page to the next page. Swiping on a frame or a text box still moves it. Import has <strong>New items from photos</strong> on every device.<br><br><strong>19.25</strong> The frame browser builds a screenful of frames at a time and adds more as you scroll, so All frames opens straight away; on iPhone the frame swatches show the whole corner photo (they looked zoomed in). On iPhone, Deck Studio puts the page numbers, All pages and the tools in one row above the page, and the page area fits the page, leaving more room for the layout choices; the Presentation layout and breaker settings now scroll with the panel instead of covering the choices below them.<br><br><strong>19.24</strong> Pinch with two fingers on a wall to zoom it (and drag two fingers to move around); the rest of the app no longer zooms with it. On iPhone the controller is the <strong>Controls</strong> button in the bottom bar instead of a floating button; Deck Studio's Generate PDF and Approval are in its menu button; All pages shows each page as wide as the phone; the frame browser fills the screen three across (five sideways) with the frame lists behind the menu button and the filters behind Filters. On iPhone and iPad the Project tab no longer shows a page preview, and on iPhone it is one column.<br><br><strong>19.23</strong> FRAME on iPhone. Hold the phone upright to work: Deck, Items and Walls are tabs along the bottom, Save and undo stay in the header and everything else is under the three-dot menu. Items is a list; tap one to open its settings, and All items takes you back. Walls shows the wall chips, the wall, the tools and then the frames, with the wall settings below. Deck shows one page at a time with a page bar and All pages. Turn the phone sideways to look: on Walls and Deck the menus go and the wall or page fills the screen. The controller folds to a round button bottom-right.<br><br><strong>19.22</strong> The joystick has four arrows round its rim: tap one for exactly one nudge, hold it to keep nudging (Shift on for big steps). Delete now removes a selected dimension (tap its number or line first; it shows a dashed box and its number ringed), and leaves frames alone while a dimension is selected. On a touch screen dimension lines and their delete buttons are easier to hit. The letter legend is 200pt wide by default. Elevations in PDFs and exports are laid out at least as large as on a desktop screen, so a deck made on an iPad prints its dimensions the same size as one made on the desktop.<br><br><strong>19.21</strong> On an iPad, use Safari's Share button, then <strong>Add to Home Screen</strong>: FRAME opens from its icon as its own full-screen app with no Safari toolbar. In the elevation dock, <strong>Add artwork</strong> (the picture button) puts a photo in the selected frame from the photo library, the camera or Files; select several frames to add several pictures at once, in letter order. The frame browser always opens on All frames, and on a touch screen it no longer brings up the keyboard until you tap the search box.<br><br><strong>19.20</strong> iPad: the key bar is now a controller (bottom-left; drag its dotted grip to move it). Its <strong>joystick</strong> nudges whatever is selected: push the knob the way it should go, a light push steps slowly and a full push moves faster, with Shift on for big steps; one push undoes in one go. The keys can be <strong>tapped</strong> to stay on or <strong>held</strong> with one hand while the other hand drags. With Shift or Ctrl on, tapping rows in the dashboard table selects a range or adds to the selection. The dashboard item list and the elevation wall panel fold away with the tab on their edge; with the list folded the dashboard picture gets its own column beside the form, and on a touch screen the form is four tabs (Item, Frame, Mat, Notes) so each fits without scrolling.<br><br><strong>19.19</strong> More for iPad. On a touch screen a small key bar sits bottom-right: <strong>Shift</strong>, <strong>Ctrl</strong> and <strong>Alt</strong> stay on once tapped (lit) and apply to every drag and tap until tapped off, and <strong>Delete</strong> deletes the selection like the Delete key. A finger that lands just beside a small resize corner or dimension handle picks the handle up. The wall list beside an elevation folds away with the arrow at its top, giving the wall more room (on any computer). On a narrow screen the dashboard keeps the picture above the form instead of in its own column, so the item table keeps its width; the column comes back when there is room.<br><br><strong>19.18</strong> FRAME works with a finger on iPad: drag frames, context blocks, glass, dimension lines, deck page boxes and floorplan pins by touch. In a scrolling list (the wall rail, the frame list) a swipe scrolls and a short press and hold picks the item up. Double-tap does what double-click does. Buttons that only appeared on mouse hover now show on a touch screen.<br><br><strong>19.17</strong> On deck pages, a frame with no picture in it shows a light grey opening instead of a black one (the drop shadow under the frame was showing through). Downloaded SVG and PNG elevations keep the clear opening for InDesign.<br><br><strong>19.16</strong> Group dimensions step out past the spacing dimensions: the overall width line sits above the row of spacing numbers and the height line left of any beside the group, so the two never run through each other. Drag a group line and it moves out from there.<br><br><strong>19.15</strong> Spacing dimensions place themselves: a number too wide for its gap now moves its line above or below the group (left or right for a vertical gap) to the nearest spot clear of every frame, and in a tight stack it sits over its gap inside the column. Drag one and it stays where you put it; Reset dimension positions hands it back. A line pulled out of the group always puts its number on the outside, away from the dashed extension lines. A set of frames gets one group dimension: pressing Group again on the same frames selects the one already there (a different set on the same wall still gets its own). Click a group dimension's number to select it, then press Delete to remove it.<br><br><strong>19.14</strong> Drop an image from another window onto a page in Deck Studio and it becomes that page’s background (pan, zoom or remove it in Page appearance); image boxes and spec-page frames still take their own drops. The Thank You page has two new sliders: <strong>Move contacts up / down</strong> and <strong>Name size</strong>. A new project’s cover has a 1.5pt rule between the client name and the heading that turns white on a dark page, and the starter deck no longer includes a moodboard page.<br><br>
 <strong>19.13</strong> The Thank You page starts empty. Open <strong>Edit contacts</strong> and pick your team with <strong>+ From directory</strong> (the company directory, now updated), or type someone in. <strong>Save as my default</strong> keeps that team on this computer, and every new project you start begins with it; <strong>Use my default</strong> puts it back on an existing project. Older projects keep the people they already printed.<br><br>
 <strong>19.12</strong> A framed picture in the Frame Dashboard preview shows what you can do with it when you hover: <strong>Replace</strong> and <strong>Remove</strong> in its corner, and a note that you can drag to pan or drop another image on it to swap it.<br><br>\n<strong>19.11</strong> The frame button in the Frame Dashboard shows the frame's corner the way the frame browser does: the whole corner photo on white, with Change underneath.<br><br>\n<strong>19.10</strong> A tighter Frame Dashboard panel. The frame is a square picture button (click it to change the frame) with Frame Code and Color / Texture beside it, and the frame's colour, width and vendor on the Frame heading. Artwork is added from the preview: click the empty opening or drag a picture onto it. The upload row in the panel is gone; once a piece has artwork, its zoom, Reset, 1:1 and Remove sit in one row under the sizes.<br><br>\n<strong>19.09</strong> Frames come from the library. New items start in <strong>MICH-132-29</strong>, a black moulding with a three-quarter inch face, instead of a flat black colour. In the Frame Dashboard the Library / Color switch, the colour picker, Sync Folder and the swatch upload are gone: the frame is one card showing its corner, code, colour, width and vendor, and clicking it opens the frame browser. Picking a frame also fills Color / Texture from the catalogue (never over words you typed). A frame no vendor lists can still be added with <strong>Custom swatch…</strong> in the frame browser. Older projects with colour frames still open and print as before.<br><br>\n<strong>19.08</strong> An empty opening shows an add-image icon instead of its size, on the wall and in the Frame Dashboard preview. In the dashboard, click it to upload the artwork. The size is still in the dashboard fields and the dimension guides.<br><br>\n<strong>19.07</strong> Frame effects in Settings fits on one screen: the sample frame and the sliders sit side by side, and each slider's explanation is behind a <strong>?</strong> instead of a line of text under it.<br><br>\n<strong>19.06</strong> Deck Studio's Project tab is shorter. Project name, code, location and version sit together at the top, and units, rounding and frame effects are one line that says what they are, with <strong>Units&hellip;</strong> and <strong>Frame effects&hellip;</strong> buttons into Settings (the gear in the header), where they are changed. Fixed: the page preview on the Project tab now shows a page's background image, colour and text colour, like the Pages tab; a cover with a picture showed on white before, even after Refresh preview.<br><br>\n<strong>19.05</strong> Elevations get a tool bar beside the wall, like Deck Studio's: Select (V), Measure (M) and Context block (C), then Add frames, Sort A&ndash;Z, Align, Group dimension and Fit to wall, then Item codes and the keyboard shortcuts. The Art, Guides, Context and Glass tabs are bigger, with an icon and a count of what each holds. Frame shadows on the wall are now true to size (the drop shadow was drawn many inches wide), and the shadow inside the opening also falls on the artwork. Breaker and install pages cast the same drop shadow as spec pages when <strong>Also on deck pages</strong> is ticked in Frame effects.<br><br>
 <strong>19.04</strong> Deleting a wall asks about its pieces. When pieces hang on that wall and nowhere else, you choose <strong>Delete wall and pieces</strong> (they leave the Frame Dashboard and the presentation: the way to drop the options a client turned down) or <strong>Delete wall, keep pieces</strong> (as before: they stay in the Dashboard, and + Add Wall offers them to hang again). Pieces also shown on another wall are never deleted, and Ctrl+Z brings back the wall and its pieces together.<br><br><strong>19.03</strong> The frame you pick sets the product both ways. Picking a floater makes the item Framed Canvas (Floater), as before, and picking a regular moulding on a floater item now turns it back into Framed Art (it used to stay a floater, with its canvas inset and no mats). A floater counts by its lip width too, whatever its collection is called. Shadow boxes, frameless canvas, wallcovering and window film are left as you set them.<br><br><strong>19.02</strong> Floaters show their gap. The quarter inch between a floater's face and the canvas now draws as a dark slot instead of more moulding, on the Dashboard preview, the wall, PNG and SVG exports and spec pages, and the canvas casts its shadow into it. Settings, Frame effects has a new <strong>Floater gap</strong> slider for how dark it reads (the canvas used to borrow Frame onto mat). The three Cape Cod floaters (IM-310-715, 720 and 725) now carry their 5/8in face, so a new pick sets a 7/8in inset.<br><br><strong>19.01</strong> More frames turned round to face the right way: 46 Larson-Juhl floaters (Axom, Bauhaus II, Cranbrook, Eiffel, Gramercy, Metalia, Moderne, Olsen, Ravello, Shoji and Spencer II) now show the wall on the left and the floor along the bottom like every other floater, and Academie Silver 3in (LJ-733237) matches its gold and black siblings.<br><br><strong>19.00</strong> The frame browser has a <strong>Type</strong> filter: show only floaters, or only frames, across every vendor. Frame thumbnails are cropped consistently again: about 290 International Moulding and Framerica corners had kept far too much of the moulding and showed as thin slivers. Seven more mouldings that faced the wrong way (including IM-310-710) are turned round.<br><br><strong>18.99</strong> International Moulding and Framerica frames now face the same way as every other moulding: outer edge on the left, rabbet lip on the right. Many were mirror images, so the mockup drew the lip on the outside of the frame. The old Universal folder with two frames is gone; both are in Universal Arquati.<br><br><strong>18.98</strong> The frame library adds International Moulding (about 1,000 current mouldings in 153 collections, 37 of them floaters) and Framerica (336 mouldings in 91 finishes), each with its corner photo, sizes, colour family and, where the maker publishes one, its profile drawing. Deep shadowbox corners now show the frame face above the cut end instead of only raw wood.<br><br><strong>18.97</strong> More frame corners and profiles fit on one row of a group page before it wraps: the space between mouldings tightens first, then the pictures shrink, and only then does the strip go to two rows.<br><br><strong>18.96</strong> Frame corner photos all share one shape now. Thin Universal Arquati and Larson-Juhl mouldings showed as long skinny slivers in the frame browser and on spec pages; every corner is cropped to the same proportions as the Michelangelo ones, showing the cut end and a short run of the face.<br><br><strong>18.95</strong> The frame library adds Universal Arquati: about 1,050 current mouldings in 156 collections (Universal, Valucore and the Arquati lines), including 177 floaters, each with its corner photo, profile drawing, sizes, colour, profile type and style. Discontinued mouldings, fillets, liners and stretcher bars are left out.<br><br><strong>18.94</strong> Two spec page fixes. A picture dropped onto the dashboard preview or onto a frame on the wall kept the previous picture's proportions, so the dashboard and wall stretched it to fit while the spec page printed its true crop; every drop now records the new picture's size, and pieces affected before this correct themselves the next time they are shown. On a per-piece page, a long spec list (float-mounted paper adds four rows) now tightens its rows to stop above the frame corner and profile instead of running into them.<br><br><strong>18.93</strong> The Frame Recommendations page lays frames out on an even grid. With a count that does not divide by the columns (8 frames in 3 columns), the last column used to stretch its frames to fill the page; now every frame is the same size and the last column simply ends early.<br><br><strong>18.92</strong> The frame library adds Larson-Juhl: about 1,030 current mouldings in 156 collections, including 91 floaters, each with its corner photo, profile drawing, sizes, colour family, profile type and style. In the frame browser the Library now lists each vendor once (click it to open its collections), and there is a new <strong>Style</strong> filter (Contemporary, Modern, Classic and so on). Nielsen metal frames are left out because Larson-Juhl has no photos of them.<br><br><strong>18.91</strong> When a Group A/B/C page has too many mouldings for the frame corners and profiles to fit in one row beside the floorplan and elevation, they wrap into two rows in the same space, so the artwork, floorplan and elevation keep their size and place. Seven different mouldings now show every corner and profile.<br><br><strong>18.89</strong> On a Group A/B/C page with several mouldings, ticking Moulding profile no longer makes every frame corner disappear. The corners and profiles now shrink to fit beside the floorplan and elevation; if there is still not enough room, the profiles are left off and the corners kept, and a <strong>no room</strong> note appears beside Moulding profile under Show on page.<br><br><strong>18.88</strong> The frame library now has every Michelangelo collection that works as a frame in FRAME: Barnwood, Contemporary, Modern, Shadow Boxes and Traditional join Avant-Garde, Floaters and Ornate, about 1,240 mouldings in all, each with its corner photo, profile drawing, sizes, colour and profile name. Liners, fillets, rabbetless flat surfaces and stretchers are left out because they are not a frame on their own.<br><br><strong>18.87</strong> The frame library adds Michelangelo's ornate mouldings: all 59 current ones, each with its corner photo, profile drawing, sizes, colour and profile name. Their swatches repeat the ornament down the rail without a visible seam.<br><br><strong>18.86</strong> The frame library adds Michelangelo's floaters: 229 current floater frames for canvas, each with its corner photo, profile drawing, sizes and lip width. Picking one switches the item to Framed Canvas (Floater) and sets the inset from the lip, as before.<br><br><strong>18.85</strong> The frame library now has the whole Michelangelo Avant-Garde collection: 539 current mouldings, each with its corner photo, profile drawing, sizes, colour and profile name, so the frame browser can search and filter all of them.<br><br><strong>18.84</strong> Choosing a frame opens a frame browser: click the <strong>Frame</strong> box on the dashboard. Search by code, colour or profile, and filter by colour family, face width and profile shape, with the corner photo of each moulding. <strong>Project frames</strong> lists the frames already on an item plus a shortlist: star any frame to keep it handy for this project. Save frames you use together as a grouping under <strong>My groupings</strong>, and use <strong>Share with team</strong> to send one to whoever looks after the library, so it appears under <strong>Team groupings</strong> for everyone. The library also gains 109 Michelangelo Avant-Garde mouldings.<br><br><strong>18.83</strong> Copy and paste work between two FRAME tabs. In Deck Studio, copy boxes on a page in one project (Ctrl+C or Cmd+C) and paste them into a page in the other tab (Ctrl+V or Cmd+V): text, shapes, images and lines arrive in the same place on the page, images included.<br><br><strong>18.82</strong> Two projects can be open in two browser tabs at once without risking either one's unsaved work. Each tab now keeps its own backup (they used to share one, so a crash could bring back the other project). The start screen lists every unsaved backup by project name and age, with Continue and Delete; one that is still open in another tab is marked and not offered. Saving a project clears only that tab's backup. The newest five are kept, for a week.<br><br><strong>18.81</strong> Saved project files store each image once. An artwork used on its dashboard row and on wall frames, a shared swatch, and the first floor plan were each written in full every time they appeared; the file now keeps one copy and points to it, so files are smaller and open and save faster. Older project files open as before. Files saved from this version need this version or later.<br><br><strong>18.80</strong> PDFs build about three times faster and come out several times smaller (a 30-page test deck: 75 seconds and 49 MB before, about 22 seconds and 7 MB now), with pages that look the same. Every picture is now encoded at the size it prints at the chosen quality instead of the artwork's full resolution, each image is decoded once and reused, the wall elevations draw their frames and artwork at the size the drawing needs, and frame shadows and PNG floor plans are compressed instead of stored raw. Previews in Deck Studio get the same speed-up. The downloadable SVG keeps full resolution.<br><br><strong>18.79</strong> Contents page fixes. The template's own section lines (and, after applying the Contents template a second time, its placeholder boxes) were left on the page under the automatic ones, so lines doubled up and stayed with Rules off; they are cleared now, and applying the template again starts the page fresh. Introduction, Closing, a level and the other automatic sections can be renamed on the Contents panel. The name fields hold the real name, so you can add to it (Lobby before ART.1C) instead of retyping, and a renamed field has a reset arrow back to the automatic name.<br><br><strong>18.78</strong> Contents page: section titles stay on one line when they can, because the title column widens and the lines move over (only a title that still does not fit wraps). Pages after the last artwork (Thank You and so on) go under Closing instead of joining the last divider's section. On a dark background colour or gradient the contents sets itself in white with light rules, unless you picked a colour. The Contents panel adds Bold, Italic and All caps for titles, Bold and Italic for lines, a separate Numbers colour, Rules on or off with their colour, and Spacing: Grid (the template's rows) or Even.<br><br><strong>18.77</strong> On the Contents page, section titles are links too: to their divider, or to the first page listed under them. The Contents page panel sets the type of the section titles (Titles) and the lines (Lines) (font, size, colour), with Reset to template type to go back. A divider's section title can be renamed there like any line, and a renamed line or section has a <strong>Page</strong> button that writes the new name into that page's own heading, so the page and the contents match.<br><br><strong>18.76</strong> A Contents page too long for one page now continues on a second Contents page, added right after the first, at full type size, with nothing left off. A section too long for a column carries on with its title marked (continued). The extra page goes away by itself when the contents fits on one page again, and every page number after it updates.<br><br><strong>18.75</strong> The page rail numbers pages the way the PDF does, so a Frame Recommendations card that prints on two pages reads 7–8 and every page after it matches the Contents page. Typing a page number to move a page uses those numbers too. On the Contents page, artwork lines are named by where the pieces hang (Lobby: ART.1 – ART.5) and split where the location changes. Lines and section titles still reading as template placeholder text (Divider Page Heading, Section Heading, an untitled page) are marked in amber on the Contents panel and listed in Preflight.<br><br><strong>18.74</strong> Every line on the Contents page is a link. In the PDF it jumps to that page; in Deck Studio click a line to open that page.<br><br><strong>18.73</strong> Every page's panel in Deck Studio has an <strong>In contents</strong> tick while the deck has a Contents page, and layout pages also have <strong>Starts a section</strong>, so any page can head a section, not only dividers. A blank or untitled page you add now stays off the contents until you tick it in. Unticking a wall page or the first page of an Artwork line takes the whole line off. A wall whose name already starts with its code prints the name once.<br><br><strong>18.72</strong> Applying the Contents template to a page you already have now makes it a self-filling Contents page (it used to stay a Custom page showing the placeholder text). A page already set up that way fills itself in the next time you open the deck. Applying a Divider template to a page makes it a section start, the same as adding a new divider.<br><br><strong>18.71</strong> The Contents page writes itself. Add Contents (Full) or (Half) from the Templates tab and it lists the deck with real page numbers, in the template's look, and keeps up as you add, remove and reorder pages. A divider page starts a section, titled by its heading; with no dividers the sections are Introduction, one per floor level, and Closing. A run of spec pages is one Artwork line, and a wall page stands for the spec pages after it. On the Contents page's panel, untick a line to leave it out or type over it to rename it. A deck too long for the page sets smaller type. The PDF now prints this page as you see it (it used to print a plain list instead).<br><br><strong>18.70</strong> On a catalogue options sheet the Elevation thumbnail draws the frame solid, as the grey mockup, instead of faded. Salon and group options are unchanged. Also fixed: a selected page thumbnail in Deck Studio no longer shifts or crops its edges (the footer logo stayed in view only while the page was not selected).<br><br><strong>18.69</strong> Selecting a page in Deck Studio no longer flashes. Options sheets, cards, plan details, spec pages and floorplans used to blink to a blank page with just the title, in the middle and in the page rail, every time you clicked them. Now the page you last saw stays up until the fresh render is ready, and the rail keeps its thumbnail.<br><br><strong>18.68</strong> A selected page keeps its thumbnail in the page rail. Pages drawn as a picture (Timeline, Frame Recommendations, Contacts, floorplans, spec pages, plan details, options sheets) used to show their placeholder there, or go blank, until you picked another page.<br><br><strong>18.67</strong> The catalogue options sheet has an <strong>Options per page</strong> control in Deck Studio: Auto (which shows the number it picked) or 1 to 10, for every options sheet or just this placement, so you can try three or six on a page. A picked number is used exactly, the rest follow on the next page. Also fixed: a page drawn as a picture (options sheets, cards, plan details) no longer goes blank in the page rail while it is selected.<br><br><strong>18.66</strong> On the catalogue options sheet the frame corner, profile, floorplan and elevation now print at exactly the size and position they have on a per-piece spec page, because the sheet draws them with the same layout. The spec list fits between the title and those thumbnails and shrinks rather than running into them, and the mockups start clear of the whole left column.<br><br><strong>18.65</strong> The catalogue options sheet gets its own <strong>Show on page</strong> ticks in Deck Studio, like Group A/B/C: Frame corner, Moulding profile, Floorplan and Elevation, under the specs in the left column. Set them for every options sheet or just this placement. Frame corner and profile are on by default; the plan and wall are off because the breaker in front already carries them. Options pages also show a real preview in the page rail now instead of a placeholder.<br><br><strong>18.64</strong> Catalogue options of a <strong>single piece</strong> now print as an options sheet right after the breaker: the shared specs down the left, the framed mockups on the right coded ART.1.1, ART.1.2, ART.1.3 with each image code underneath, and the options' own spec pages are no longer printed. How many fit a page is automatic (about 1.8in across at the smallest, all at one scale); more than that splits evenly, and every page repeats the specs so a sheet pinned to a board still carries them. Untick <strong>All-options page</strong> to go back to one spec page per option. New options of a single piece are coded ART.1.1, no longer ART.1.1A.<br><br><strong>18.63</strong> In the Frame Dashboard the <strong>Img Code</strong> column widens to fit the longest code, so every code reads in full without scrolling inside the field. It refits as you type.<br><br>

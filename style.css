@@ -3324,3 +3324,24 @@ html.phone #frameBrowser .fb-top .jump-esc::after { content: '\2715'; font-size:
 .frame-modal { box-sizing: border-box; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
 html.phone .touch-keys { right: calc(8px + env(safe-area-inset-right, 0px)); }
 html.phone-land .phone-deckbar { bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+
+/* THE FRAME SET PICKER (19.31, openFrameSetPicker): the arrangements as drawings. */
+.fsp-card { width: min(1000px, 96vw); max-height: 88vh; overflow-y: auto; box-sizing: border-box; padding: 18px 20px 22px;
+    background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-10); box-shadow: 0 18px 60px rgba(0,0,0,0.45); }
+.fsp-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.fsp-title { font-size: var(--fs-105); font-weight: 700; color: var(--text-strong); }
+.fsp-sub { margin-top: 3px; font-size: var(--fs-70); color: var(--text-muted); }
+.fsp-close { flex: none; }
+.fsp-sec { margin: 16px 0 8px; font-size: var(--fs-60); font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); }
+.fsp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+.fsp-tile { display: flex; flex-direction: column; align-items: stretch; gap: 4px; padding: 8px; text-align: left; cursor: pointer;
+    background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--r-8); color: var(--text-main); }
+.fsp-tile:hover { border-color: var(--ui-active); }
+.fsp-tile.on { border-color: var(--ui-active); box-shadow: 0 0 0 2px var(--ui-active); }
+.fsp-pic { height: 112px; border-radius: var(--r-4); background: #eef0f3; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.fsp-pic svg { width: 100%; height: 100%; display: block; }
+.fsp-name { font-size: var(--fs-75); font-weight: 700; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fsp-hint { font-size: var(--fs-60); color: var(--text-muted); }
+html.phone .fsp-card { width: 100%; height: 100%; max-height: none; border-radius: 0; border: none; padding: 12px; }
+html.phone .fsp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+html.phone .fsp-pic { height: 90px; }
