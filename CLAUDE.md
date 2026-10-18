@@ -2000,6 +2000,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   settle inside the add renumbers (a gap in the numbering made ART.10 into ART.3 before the
   picture loaded). The marker is deleted afterwards. Camera button `#phoneSnapBtn` on the phone
   Items list; Import menu everywhere.
+- **A CORRECTED LIBRARY SWATCH NEEDS A LINE IN `LIB_SWATCH_REV` (19.27).** Picking a frame COPIES
+  its swatch into the project, so replacing a library image changes nothing for pieces already
+  in it. `_libSwatchUpgrade` (from the library load AND `_startScreenClose`, whichever is second)
+  re-copies a listed code into rows (and wall copies) whose `swatchRev` is older; only library
+  picks (`swatchName === fCode`), never an upload (`swatchCustom`, set by
+  `loadDashCustomSwatch`). A swatch is the corner's FACE, a tall cut with cross-faded ends: a
+  short slice tiles down the rail as a visible repeat (FA-BW74-2003 was 31px and read as dots).
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
