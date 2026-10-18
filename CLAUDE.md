@@ -2032,6 +2032,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   library code; `_fpApplyFrameSetNow` dresses each piece through `applySwatchToRow`
   (`_salonFrameDress`) from `_libSwatchMemo`, which the picker warms on open; anything late is
   dressed by `_salonFrameDressLater`, which RETAKES the top undo snapshot (one gesture, one entry).
+- **THE PHONE DECK'S TABS ARE A STRIP ABOVE THE TAB BAR (19.32, `#phoneDeckTabs`, `PHONE_DECK_TABS`,
+  `_phoneDeckTabsSync` from `_phoneCtxSync`).** Project / Pages / Templates + `#phoneDeckMenuBtn` (Generate PDF,
+  Approval, Preflight; `data-menu-up` makes `_frameMenu` open upward). Portrait Deck only; `--phone-sub-h` adds
+  its height to the shell's bottom padding. `#appShell` is PINNED (`position: fixed`, all four edges) on a phone:
+  as 100dvh it came out a safe-area short of the fixed bars (dead band). Pinning surfaced the All pages X
+  (`.phone-x` beat its `display:none`), now hidden unless `.phone-sheet-open`.
 - **A SAVED PROJECT KEEPS ITS FOOTER FIELDS AND DECK TICKS (19.30).** `globalMeta.docCode /
   docVersion / docLocation` carry the Project tab's code/version/location (they were never
   saved). `seedDeckIncludeInputs` / `seedDeckPlanOrderInput` must run AFTER the editorial is

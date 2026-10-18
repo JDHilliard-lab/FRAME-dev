@@ -3290,8 +3290,8 @@ html.phone .app-top-nav > div[style*="margin-left: auto"] { margin-left: 0 !impo
 html.phone #saveMenuBtn { display: none !important; }
 html.phone #saveProjectBtn { border-radius: var(--r-4); }
 html.phone #view-deck > div:first-child { display: none !important; }
-html.phone .phone-deck-menu { display: none !important; }
-html.phone[data-phone-view="deck"] .phone-deck-menu { display: flex !important; width: 34px !important; margin-left: 0; }
+
+
 html.phone #view-elevation .elev-wall-rail, html.phone #view-elevation .elev-wall-rail.collapsed { display: none !important; }
 html.phone #phoneDashBack { display: none !important; }
 
@@ -3345,3 +3345,31 @@ html.phone-land .phone-deckbar { bottom: calc(10px + env(safe-area-inset-bottom,
 html.phone .fsp-card { width: 100%; height: 100%; max-height: none; border-radius: 0; border: none; padding: 12px; }
 html.phone .fsp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 html.phone .fsp-pic { height: 90px; }
+
+/* ═══ iPHONE: the deck's tabs above the tab bar (19.32) ═══════════════════════════════ */
+/* Project / Pages / Templates plus the deck menu, pinned over the bottom bar on Deck. The
+ * app shell grows its bottom padding by the strip's height so nothing hides under it. */
+.phone-decktabs { display: none; }
+html.phone { --phone-sub-h: 0px; }
+html.phone[data-phone-view="deck"]:not(.phone-land) { --phone-sub-h: 44px; }
+html.phone[data-phone-view="deck"]:not(.phone-land) #appShell { padding-bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b)); }
+html.phone[data-phone-view="deck"]:not(.phone-land) .phone-decktabs { display: flex; position: fixed; left: 0; right: 0; z-index: 9001;
+    bottom: calc(var(--phone-tab-h) + var(--phone-safe-b)); height: var(--phone-sub-h); box-sizing: border-box;
+    align-items: center; gap: 6px; padding: 0 8px; background: var(--bg-nav); border-top: 1px solid var(--border-color); }
+html.phone.phone-sheet-open .phone-decktabs { display: none !important; }
+.phone-decktab { flex: 1 1 0; min-width: 0; height: 32px; padding: 0 6px; border: 1px solid var(--border-color); border-radius: var(--r-6);
+    background: var(--bg-subpanel); color: var(--text-muted); font-size: var(--fs-75); font-weight: 600; cursor: pointer;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.phone-decktab.active { background: var(--ui-active); border-color: var(--ui-active); color: #fff; }
+.phone-decktab-menu { flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 32px; padding: 0;
+    border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-subpanel); color: var(--text-strong); cursor: pointer; }
+.phone-decktab-menu .svg-icon { width: 18px; height: 18px; }
+html.phone[data-phone-view="deck"] .frame-toast-host { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 16px); }
+html.phone[data-phone-view="deck"]:not(.phone-land) .touch-keys { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 10px); }
+/* The app frame is pinned to the same edges as the bottom bars (19.32). As 100dvh it could
+ * come out a safe-area short of the screen (810 of 844 on an iPhone with a home bar), while
+ * the fixed bars sit on the real bottom: a dead band opened above them. */
+html.phone #appShell { position: fixed !important; top: 0; left: 0; right: 0; bottom: 0; height: auto !important; }
+/* The All pages close button exists only while the sheet is open (.phone-x, declared later,
+ * used to win over its display:none; it sat unseen below the frame until 19.32 pinned it). */
+html:not(.phone-sheet-open) .phone-sheet-close { display: none !important; }

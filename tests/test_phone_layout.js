@@ -30,6 +30,13 @@ check('the shell stops above the tab bar and uses the real screen height', () =>
   if (HTML.indexOf('<div id="appShell"') < 0) throw new Error('#appShell missing');
   if (HTML.indexOf('id="dsPagesRow"') < 0) throw new Error('#dsPagesRow missing');
 });
+check('EXACT BUG (19.32): the app frame is pinned to the same edges as the bottom bars, so no dead band opens above them', () => {
+  if (CSS.indexOf('html.phone #appShell { position: fixed !important; top: 0; left: 0; right: 0; bottom: 0; height: auto !important; }') < 0) throw new Error('the frame is not pinned (100dvh alone came out a safe-area short)');
+  if (CSS.indexOf('html:not(.phone-sheet-open) .phone-sheet-close { display: none !important; }') < 0) throw new Error('the All pages close button shows with the sheet shut');
+});
+check('the deck menu at the bottom opens upward', () => {
+  if (APP.indexOf("mb.dataset.menuUp = '1';") < 0 || APP.indexOf('anchor.dataset.menuUp') < 0) throw new Error('the deck menu opens down over the tab bar');
+});
 check('the Walls panel on a phone is one scroll with every section its natural height', () => {
   if (CSS.indexOf('html.phone #view-elevation .elev-sidebar > * { flex: none !important; }') < 0) throw new Error('flex:1 sections collapse to nothing inside a scrolling panel');
 });
@@ -429,13 +436,25 @@ function inApp() {
       if (document.getElementById('view-dashboard').classList.contains('phone-detail')) throw new Error('header back did not return');
     });
 
-    await ok('Deck: Project, Pages and Templates live in the header menu', () => {
+    await ok('EXACT ASK (19.32): Project, Pages and Templates sit in a strip above the tab bar, menu at its right', () => {
       switchView('deck');
+      const st = document.getElementById('phoneDeckTabs');
+      if (!st) throw new Error('no deck tab strip');
+      const tabs = Array.from(st.querySelectorAll('.phone-decktab')).map(b => b.textContent);
+      if (tabs.join('|') !== 'Project|Pages|Templates') throw new Error('tabs are ' + tabs.join('|'));
+      const mb = document.getElementById('phoneDeckMenuBtn');
+      if (!mb || mb.parentNode !== st || st.lastElementChild !== mb) throw new Error('the deck menu is not at the right end of the strip');
+      if (document.querySelector('.app-top-nav #phoneDeckMenuBtn')) throw new Error('the deck menu is still in the header');
       const items = []; const real = _frameMenu; _frameMenu = (a, list) => list.forEach(i => items.push(i));
-      try { openPhoneDeckMenu(document.getElementById('phoneDeckMenuBtn')); } finally { _frameMenu = real; }
-      ['Project', 'Pages', 'Templates', 'Generate PDF...'].forEach(l => { if (!items.find(i => i.label === l)) throw new Error('missing ' + l); });
-      const btn = document.getElementById('phoneDeckMenuBtn');
-      if (!btn || btn.parentNode !== document.getElementById('phoneMoreBtn').parentNode) throw new Error('the deck menu is not beside the more button');
+      try { openPhoneDeckMenu(mb); } finally { _frameMenu = real; }
+      if (items.find(i => i.label === 'Project' || i.label === 'Pages')) throw new Error('the menu still lists the tabs');
+      const calls = []; const rt = _dsTab; _dsTab = (w) => { calls.push(w); _dsActiveTab = w; };
+      try { st.querySelector('[data-dtab="project"]').click(); } finally { _dsTab = rt; }
+      if (calls[0] !== 'project') throw new Error('Project tab did not switch the deck tab');
+      if (!st.querySelector('[data-dtab="project"]').classList.contains('active')) throw new Error('Project tab not lit');
+      if (st.querySelector('[data-dtab="pages"]').classList.contains('active')) throw new Error('Pages still lit');
+      _dsTab('pages');
+      if (!st.querySelector('[data-dtab="pages"]').classList.contains('active')) throw new Error('the strip does not follow a tab change made elsewhere');
     });
 
     await ok('the frame library opens one vendor at a time, and the open one closes on a tap', () => {
