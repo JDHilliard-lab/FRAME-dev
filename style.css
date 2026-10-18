@@ -3238,3 +3238,28 @@ html.phone #frameBrowser .fb-star { top: 5px; }
 html.phone #frameBrowser .fb-more { top: 31px; }
 html.phone #frameBrowser .fb-used { left: 5px; top: 5px; }
 html.phone #frameBrowser .fb-foot { font-size: 0; padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); justify-content: flex-end; }
+
+/* ═══ iPHONE round three (19.25) ═══════════════════════════════════════════════════ */
+/* Frame swatches: the corner photo is pinned to the box. Safari does not resolve a
+ * percentage max-height against a box sized by aspect-ratio, so the photo drew at full
+ * width and showed a cropped middle (it looked zoomed in). */
+html.phone #frameBrowser .fb-pic { position: relative; }
+html.phone #frameBrowser .fb-pic img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; }
+.fb-sentinel { grid-column: 1 / -1; height: 1px; }
+
+/* Deck on a phone: ONE row above the page (page nav, All pages, the tools), and the page
+ * area sized to the page, so the layout choices below get the height. */
+html.phone .phone-deckbar { order: 1; gap: 4px; padding: 4px 6px; border-top: none; }
+html.phone #dsCenter { order: 2; height: calc((100vw - 16px) * 540 / 936 + 16px); }
+html.phone #dsTools { order: 3; }
+html.phone .phone-pg-btn { width: 34px; height: 34px; flex: none; }
+html.phone .phone-pg-num { min-width: 52px; flex: none; }
+html.phone .phone-pg-all { margin-left: 0; width: 34px; padding: 0; flex: none; display: flex; align-items: center; justify-content: center; }
+.phone-deck-tools { flex: 1 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; display: flex; }
+.phone-deck-tools::-webkit-scrollbar { display: none; }
+html.phone .phone-deck-tools #dsToolDock { flex-direction: row; flex-wrap: nowrap; padding: 0; border: none; box-shadow: none; background: transparent; }
+html.phone .phone-deck-tools #dsToolDock .ds-dock-btn { width: 34px; height: 34px; flex: none; }
+html.phone-land .phone-deck-tools { display: none; }
+/* The panel's pinned header (Presentation layout, breaker) scrolls with the panel on a
+ * phone: pinned, it covered the choices in a panel ~230px tall. */
+html.phone .ds-tools-sticky { position: static !important; }

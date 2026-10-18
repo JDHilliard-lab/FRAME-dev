@@ -47,6 +47,10 @@ check('the frame browser on a phone is three across (five sideways)', () => {
   if (CSS.indexOf('html.phone-land #frameBrowser .fb-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }') < 0) throw new Error('not 5 sideways');
 });
 
+check('frame swatches on a phone pin the corner photo to the box (Safari drew it cropped)', () => {
+  if (CSS.indexOf('html.phone #frameBrowser .fb-pic img { position: absolute; inset: 0; width: 100%; height: 100%;') < 0) throw new Error('swatch photo still sized by percentage max-height');
+});
+
 function inApp() {
   window.__phoneDone = (async () => {
     const out = [];
@@ -246,6 +250,50 @@ function inApp() {
       if (elevZoomFactor !== z0) throw new Error('a pinch on the tab bar zoomed the wall');
     });
 
+    // ── 19.25 ──
+    await ok('Deck on a phone: the tool dock rides in the page bar above the page, and goes home after', () => {
+      _dsDockPlace('left');
+      const dock = document.getElementById('dsToolDock');
+      if (dock.parentNode.id !== 'phoneDeckTools') throw new Error('dock is in ' + dock.parentNode.id);
+      if (dock.classList.contains('vert')) throw new Error('dock still vertical in the bar');
+      if (document.getElementById('dsDockLeftSlot').style.display !== 'none') throw new Error('the empty side slot still shows');
+    });
+
+    await ok('the breaker / layout header is unpinned on a phone (it covered the choices)', () => {
+      if (CSS_SRC.indexOf('html.phone .ds-tools-sticky { position: static !important; }') < 0) throw new Error('no phone unpin rule');
+      if (APP_SRC.indexOf("head.className = 'ds-tools-sticky';") < 0) throw new Error('the pinned header has no class to unpin');
+    });
+
+    await ok('the frame grid builds a screenful at a time and adds more on scroll (all frames lagged)', () => {
+      const obs = [];
+      const realIO = window.IntersectionObserver;
+      window.IntersectionObserver = function (cb) { this.cb = cb; this.els = []; obs.push(this); };
+      window.IntersectionObserver.prototype.observe = function (el) { this.els.push(el); };
+      window.IntersectionObserver.prototype.disconnect = function () {};
+      try {
+        _fbState.src = 'all';
+        const rec = (n) => ({ code: 'X-' + n, item: { code: 'X-' + n, corner: 'c.png' } });
+        const all = []; for (let i = 0; i < 300; i++) all.push(rec(i));
+        const byCode = {}; all.forEach(r => { byCode[r.code] = r; });
+        const realCards = _fbCards;
+        _fbCards = () => [{ head: 'All', cards: all.map(r => ({ code: r.code, rec: r })) }];
+        const grid = document.createElement('div'); grid.id = 'fbGrid'; document.body.appendChild(grid);
+        const foot = document.createElement('div'); foot.id = 'fbFoot'; document.body.appendChild(foot);
+        let n1, n2, n3;
+        try {
+          _fbRenderGrid(all, byCode);
+          n1 = grid.querySelectorAll('.fb-frame').length;
+          obs[0].cb([{ isIntersecting: true }]);
+          n2 = grid.querySelectorAll('.fb-frame').length;
+          obs[0].cb([{ isIntersecting: true }]); obs[0].cb([{ isIntersecting: true }]);
+          n3 = grid.querySelectorAll('.fb-frame').length;
+        } finally { _fbCards = realCards; grid.remove(); foot.remove(); }
+        if (n1 !== FB_CHUNK) throw new Error('first build made ' + n1 + ' cards');
+        if (n2 !== FB_CHUNK * 2) throw new Error('scrolling added ' + (n2 - n1));
+        if (n3 !== 300) throw new Error('rows ran out at ' + n3 + ' of 300');
+      } finally { window.IntersectionObserver = realIO; }
+    });
+
     await ok('leaving phone size takes the classes off (an iPad rotating, a resize)', () => {
       screen(1180, 820, true); _phoneApply(false);
       if (R.classList.contains('phone') || R.classList.contains('phone-land')) throw new Error('classes left on: ' + R.className);
@@ -265,7 +313,8 @@ global.window = window; global.document = window.document; global.navigator = wi
 const q = console.error, w = console.warn; console.error = () => {}; console.warn = () => {};
 (async () => {
   try {
-    window.eval(APP + NL + '_autosaveToldUser = true;' + NL + '(' + inApp.toString() + ')();');
+    window.APP_SRC = APP; window.CSS_SRC = CSS;
+    window.eval(APP + NL + '_autosaveToldUser = true; var APP_SRC = window.APP_SRC, CSS_SRC = window.CSS_SRC;' + NL + '(' + inApp.toString() + ')();');
     (await window.__phoneDone).forEach(r => results.push(r));
   } catch (e) { results.push({ label: 'eval', ok: false, err: e.message }); }
   console.error = q; console.warn = w;

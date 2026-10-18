@@ -1975,6 +1975,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   (built in `_fbBuildTop`, which rebuilds the row) puts lists in a drawer and folds filters;
   3 across / 5 sideways. `#dsProjRight` (Project preview) is hidden on ANY touch screen.
   Viewport has `maximum-scale=1` (stops iOS zooming into small inputs on focus).
+  **19.25:** the frame grid is built `FB_CHUNK` (120) cards at a time with an
+  IntersectionObserver sentinel (`_fbRenderGrid`; no IO = all at once, which is what jsdom
+  tests see); in-use codes are ONE set per render (`_fbUsedSet`). Phone swatch photos are
+  absolutely pinned (Safari ignores % max-height in an aspect-ratio box: it showed a crop).
+  On a phone the deck dock lives in `#phoneDeckTools` (both `_dsDockPlace` and `_dsDockSync`
+  know it; it goes home when the phone class drops) and the page bar is ONE row above a
+  page-sized `#dsCenter`. The tools panel's pinned header has class `.ds-tools-sticky`,
+  unpinned on a phone.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
