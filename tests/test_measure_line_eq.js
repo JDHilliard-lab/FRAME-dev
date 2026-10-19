@@ -29,6 +29,9 @@ global.window = window; global.document = window.document; global.navigator = wi
 const quiet = console.error; console.error = () => {}; const qlog = console.log; console.log = () => {};
 window.eval(APP + NL + [
   '_autosaveToldUser = true; scheduleAutosave = () => {};',
+  // A clock the test owns: two presses are a double-click by the clock, not by how
+  // busy the machine running the suite happens to be.
+  'let __now = 1e6; Date.now = () => __now;',
   'window.__fx = {',
   '  pushes: 0,',
   '  setup: function () {',
@@ -50,7 +53,7 @@ window.eval(APP + NL + [
   '  label: function (id) { const d = document.querySelector("[data-custom-line=\\"" + id + "\\"] .arch-label-new"); if (!d) return null;',
   '    let t = ""; d.childNodes.forEach(n => { if (n.nodeType === 3) t += n.textContent; }); return t.trim(); },',
   '  star: function (id) { return document.querySelector("[data-custom-line=\\"" + id + "\\"] .dim-eq-hint"); },',
-  '  age: function (ms) { _dimLastTap.t -= ms; },',
+  '  age: function (ms) { __now += ms; },',
   '  clone: function () { return _cloneData(elevations); },',
   '  tapMs: function () { return DIM_DOUBLE_TAP_MS; },',
   '  press: function (el) { el.dispatchEvent(new window.MouseEvent("mousedown", { bubbles: true, cancelable: true })); },',
