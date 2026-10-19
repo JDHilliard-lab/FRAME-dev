@@ -34,6 +34,14 @@ check('EXACT BUG (19.32): the app frame is pinned to the same edges as the botto
   if (CSS.indexOf('html.phone #appShell { position: fixed !important; top: 0; left: 0; right: 0; bottom: 0; height: auto !important; }') < 0) throw new Error('the frame is not pinned (100dvh alone came out a safe-area short)');
   if (CSS.indexOf('html:not(.phone-sheet-open) .phone-sheet-close { display: none !important; }') < 0) throw new Error('the All pages close button shows with the sheet shut');
 });
+check('EXACT ASK (19.33): the page toolbar is one row: Preview and Preflight move down, selection actions swap in for the page arrows', () => {
+  if (CSS.indexOf('html.phone .phone-deck-tools #dsBuildBtn, html.phone .phone-deck-tools #dsPreflightBtn { display: none !important; }') < 0) throw new Error('Preview/Preflight still in the top row');
+  if (CSS.indexOf('html.phone:not(.phone-ds-sel) .phone-deck-tools #dsSelGroup { display: none !important; }') < 0) throw new Error('selection actions show with nothing selected');
+  if (CSS.indexOf('html.phone.phone-ds-sel .phone-deckbar .phone-pg-btn, html.phone.phone-ds-sel .phone-deckbar .phone-pg-num { display: none !important; }') < 0) throw new Error('the page arrows do not give way to the selection');
+  if (CSS.indexOf('html.phone .phone-deck-tools { overflow: visible; }') < 0) throw new Error('the toolbar still scrolls');
+  const sync = APP.slice(APP.indexOf('function _dsSyncToolbar('), APP.indexOf(NL + 'function ', APP.indexOf('function _dsSyncToolbar(') + 10));
+  if (sync.indexOf("classList.toggle('phone-ds-sel', _anySel)") < 0) throw new Error('the selection class is not kept by the toolbar sync');
+});
 check('the deck menu at the bottom opens upward', () => {
   if (APP.indexOf("mb.dataset.menuUp = '1';") < 0 || APP.indexOf('anchor.dataset.menuUp') < 0) throw new Error('the deck menu opens down over the tab bar');
 });
@@ -440,7 +448,7 @@ function inApp() {
       switchView('deck');
       const st = document.getElementById('phoneDeckTabs');
       if (!st) throw new Error('no deck tab strip');
-      const tabs = Array.from(st.querySelectorAll('.phone-decktab')).map(b => b.textContent);
+      const tabs = Array.from(st.querySelectorAll('.phone-decktab')).map(b => b.title);
       if (tabs.join('|') !== 'Project|Pages|Templates') throw new Error('tabs are ' + tabs.join('|'));
       const mb = document.getElementById('phoneDeckMenuBtn');
       if (!mb || mb.parentNode !== st || st.lastElementChild !== mb) throw new Error('the deck menu is not at the right end of the strip');
@@ -448,6 +456,15 @@ function inApp() {
       const items = []; const real = _frameMenu; _frameMenu = (a, list) => list.forEach(i => items.push(i));
       try { openPhoneDeckMenu(mb); } finally { _frameMenu = real; }
       if (items.find(i => i.label === 'Project' || i.label === 'Pages')) throw new Error('the menu still lists the tabs');
+      if (items.find(i => i.label === 'Preflight')) throw new Error('Preflight is in the menu as well as the strip');
+      // 19.33: the tabs are icons, and the page tools that are not drawing sit beside them.
+      if (st.querySelector('.phone-decktab').textContent.trim()) throw new Error('the tabs are words again (they read as a second Page/Templates/Layers row)');
+      const tools = Array.from(st.querySelectorAll('.phone-decktab-tool')).map(b => b.id).join('|');
+      if (tools !== 'phoneDeckAll|phoneDeckPreview|phoneDeckPreflight') throw new Error('strip tools are ' + tools);
+      if (document.querySelector('#phoneDeckBar #phoneDeckAll')) throw new Error('All pages is still in the top row');
+      let pf = 0; const rp = _dsShowPreflight; _dsShowPreflight = () => { pf++; };
+      try { document.getElementById('phoneDeckPreflight').click(); } finally { _dsShowPreflight = rp; }
+      if (pf !== 1) throw new Error('the Preflight button does not run preflight');
       const calls = []; const rt = _dsTab; _dsTab = (w) => { calls.push(w); _dsActiveTab = w; };
       try { st.querySelector('[data-dtab="project"]').click(); } finally { _dsTab = rt; }
       if (calls[0] !== 'project') throw new Error('Project tab did not switch the deck tab');

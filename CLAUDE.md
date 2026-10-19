@@ -2038,6 +2038,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   its height to the shell's bottom padding. `#appShell` is PINNED (`position: fixed`, all four edges) on a phone:
   as 100dvh it came out a safe-area short of the fixed bars (dead band). Pinning surfaced the All pages X
   (`.phone-x` beat its `display:none`), now hidden unless `.phone-sheet-open`.
+  **19.33:** the strip is ICONS (`PHONE_DECK_TABS` carry svg) plus `PHONE_DECK_TOOLS` (All pages, Preview,
+  Preflight via `_phoneDeckToolRun`); the menu keeps Generate PDF + Approval only. The top row (`#phoneDeckBar`)
+  NEVER SCROLLS: Preview/Preflight are hidden there, and `_dsSyncToolbar` sets `html.phone-ds-sel` so the
+  selection group replaces the page arrows while something is selected.
 - **A SAVED PROJECT KEEPS ITS FOOTER FIELDS AND DECK TICKS (19.30).** `globalMeta.docCode /
   docVersion / docLocation` carry the Project tab's code/version/location (they were never
   saved). `seedDeckIncludeInputs` / `seedDeckPlanOrderInput` must run AFTER the editorial is

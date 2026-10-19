@@ -3373,3 +3373,21 @@ html.phone #appShell { position: fixed !important; top: 0; left: 0; right: 0; bo
 /* The All pages close button exists only while the sheet is open (.phone-x, declared later,
  * used to win over its display:none; it sat unseen below the frame until 19.32 pinned it). */
 html:not(.phone-sheet-open) .phone-sheet-close { display: none !important; }
+/* ═══ iPHONE: icon strip and a one-row toolbar (19.33) ═══════════════════════════════ */
+/* The strip is icons (it read as a second Page / Templates / Layers row) and carries the
+ * page tools that are not drawing: All pages, Preview, Preflight. The top row is the page
+ * arrows and the five drawing tools; with something selected the arrows give their place
+ * to the selection actions, so it never scrolls. */
+html.phone .phone-decktabs { justify-content: space-between; gap: 4px; }
+html.phone .phone-decktab, html.phone .phone-decktab-tool, html.phone .phone-decktab-menu {
+    flex: 1 1 0; max-width: 48px; min-width: 0; height: 34px; padding: 0; display: flex; align-items: center; justify-content: center;
+    border: 1px solid transparent; border-radius: var(--r-6); background: transparent; color: var(--text-muted); cursor: pointer; }
+html.phone .phone-decktab .svg-icon, html.phone .phone-decktab-tool .svg-icon, html.phone .phone-decktab-menu .svg-icon { width: 20px; height: 20px; }
+html.phone .phone-decktab.active { background: var(--bg-subpanel); border-color: var(--border-color); color: var(--accent); }
+html.phone .phone-decktab-menu { color: var(--text-strong); }
+.phone-decktab-sep { flex: none; width: 1px; height: 22px; background: var(--border-color); margin: 0 2px; }
+html.phone .phone-deck-tools { overflow: visible; }
+html.phone .phone-deck-tools #dsBuildBtn, html.phone .phone-deck-tools #dsPreflightBtn { display: none !important; }
+html.phone:not(.phone-ds-sel) .phone-deck-tools #dsSelGroup { display: none !important; }
+html.phone.phone-ds-sel .phone-deckbar .phone-pg-btn, html.phone.phone-ds-sel .phone-deckbar .phone-pg-num { display: none !important; }
+html.phone .phone-deck-tools #dsToolDock .ds-dock-sep { display: none !important; }
