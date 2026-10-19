@@ -2049,6 +2049,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   `#phoneWallsBar` (built from `.elev-cat-tabs`, buttons carry `data-elevtab` so `switchElevTab` lights them;
   the sidebar strip is hidden). `PHONE_DECK_TOOL_TABS` says which deck tab owns each tool; the others are
   `disabled` (a test harness must be on Pages before clicking Preflight / All pages).
+  **19.35:** the open view's `.phone-tab` shares the strip's `--bg-subpanel` (one shape). Camera is `phoneItemPhoto`
+  in the Items strip; NO floating buttons on a phone. The controller sets `--phone-pad-h` (`_phonePadSync`) and
+  the shell's bottom padding includes it, so it takes room instead of covering. `#shortcutsBtn` hidden on a phone.
+  **THE PHONE HAS ITS OWN TOUR (`FRAME_TOUR_PHONE`, picked by `_tourSteps()`)**: a phone hides most desktop tour
+  targets. A new phone control worth showing gets a step there; Help's Start here has `On iPhone and iPad`.
 - **A SAVED PROJECT KEEPS ITS FOOTER FIELDS AND DECK TICKS (19.30).** `globalMeta.docCode /
   docVersion / docLocation` carry the Project tab's code/version/location (they were never
   saved). `seedDeckIncludeInputs` / `seedDeckPlanOrderInput` must run AFTER the editorial is

@@ -3433,3 +3433,22 @@ html.phone[data-phone-view="dashboard"] .phone-snap { bottom: calc(var(--phone-t
 html.phone[data-phone-view="deck"][data-phone-deck="project"] { --pv: var(--pv-project); }
 html.phone[data-phone-view="deck"][data-phone-deck="templateEditor"] { --pv: var(--pv-tpl); }
 html.phone[data-phone-view="dashboard"] .phone-snap { background: var(--pv-items) !important; }
+
+/* ═══ iPHONE round eight (19.35) ════════════════════════════════════════════════════ */
+/* No keyboard on a phone, so no keyboard shortcuts button. */
+html.phone #shortcutsBtn { display: none !important; }
+/* The next-step bar sits above the icon strip, not on it. */
+html.phone .next-step { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 8px); }
+/* THE SELECTED VIEW'S TAB JOINS THE STRIP ABOVE IT: one grey shape from the strip down into
+ * the tab, so the bar reads as "this button opened that row". Controls has no strip and keeps
+ * the plain lit icon. */
+html.phone .phone-substrip { background: var(--bg-subpanel) !important; border-bottom: none !important; }
+html.phone:not(.phone-land) .phone-tabbar .phone-tab[data-view].active { background: var(--bg-subpanel);
+    margin-top: -1px; border-radius: 0 0 14px 14px; }
+html.phone .phone-substrip .phone-decktab.active { background: rgba(0, 0, 0, 0.22); }
+body.light-theme .phone-substrip .phone-decktab.active, html.phone body.light-theme .phone-substrip .phone-decktab.active { background: rgba(255, 255, 255, 0.7); }
+/* The controller's room: the frame's bottom padding grows by it while it is out. */
+html.phone { --phone-pad-h: 0px; }
+html.phone:not(.phone-land) #appShell { padding-bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-pad-h) + var(--phone-safe-b)) !important; }
+/* The tour card spans the phone, whatever side of its target it lands. */
+html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important; width: auto !important; max-width: none !important; box-sizing: border-box; }

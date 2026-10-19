@@ -49,6 +49,17 @@ check('EXACT ASK (19.34): each view has its colour (Deck blue, Items pink, Walls
   if (CSS.indexOf('html.phone #view-elevation .elev-cat-tabs { display: none !important; }') < 0) throw new Error('the Walls category tabs still show on a phone');
   if (HTML.indexOf('class="pane-header dash-toolbar"') < 0) throw new Error('the dashboard toolbar lost its class');
 });
+check('EXACT ASK (19.35): no keyboard shortcuts button on a phone, and nothing floats over the strips or the panel', () => {
+  if (CSS.indexOf('html.phone #shortcutsBtn { display: none !important; }') < 0) throw new Error('the keyboard shortcuts button shows on a phone');
+  if (CSS.indexOf('html.phone .next-step { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 8px); }') < 0) throw new Error('the next-step bar sits on the icon strip');
+  if (CSS.indexOf('var(--phone-sub-h) + var(--phone-pad-h) + var(--phone-safe-b)) !important; }') < 0) throw new Error('the controller covers the panel instead of taking its own room');
+  if (APP.indexOf("style.setProperty('--phone-pad-h'") < 0) throw new Error('the controller room is never measured');
+  if (APP.indexOf("snap.id = 'phoneSnapBtn'") >= 0) throw new Error('the floating camera button is still built');
+});
+check('EXACT ASK (19.35): the open view\'s tab joins the strip above it in one grey shape', () => {
+  if (CSS.indexOf('html.phone .phone-substrip { background: var(--bg-subpanel) !important;') < 0) throw new Error('the strip is not the tab grey');
+  if (CSS.indexOf('html.phone:not(.phone-land) .phone-tabbar .phone-tab[data-view].active { background: var(--bg-subpanel);') < 0) throw new Error('the open tab does not share the strip grey');
+});
 check('the deck menu at the bottom opens upward', () => {
   if (APP.indexOf("mb.dataset.menuUp = '1';") < 0 || APP.indexOf('anchor.dataset.menuUp') < 0) throw new Error('the deck menu opens down over the tab bar');
 });
@@ -422,7 +433,8 @@ function inApp() {
       // The finding marker is gone again: nothing temporary rides into the project file.
       if (dashProjectData.some(r => Object.keys(r).some(k => k.indexOf('_photoNew') === 0))) throw new Error('a temporary marker was left on a row');
       if (!document.getElementById('view-dashboard').classList.contains('phone-detail')) throw new Error('its settings did not open on the phone');
-      if (!document.getElementById('phoneSnapBtn')) throw new Error('no camera button on the phone');
+      if (!document.getElementById('phoneItemPhoto')) throw new Error('no camera button on the phone');
+      if (document.getElementById('phoneSnapBtn')) throw new Error('the floating camera button is back (it covered the list)');
     });
 
     // ── 19.28 ──
@@ -487,14 +499,14 @@ function inApp() {
       const st = document.getElementById('phoneItemsBar');
       if (!st) throw new Error('no Items strip');
       const ids = Array.from(st.querySelectorAll('button')).map(b => b.id).join('|');
-      if (ids !== 'phoneItemAdd|phoneItemDup|phoneItemDel|phoneItemEdit|phoneItemImport|phoneItemExport') throw new Error('strip is ' + ids);
+      if (ids !== 'phoneItemAdd|phoneItemPhoto|phoneItemDup|phoneItemDel|phoneItemEdit|phoneItemImport|phoneItemExport') throw new Error('strip is ' + ids);
       const calls = [];
       const ra = addDashRow, rd = duplicateDashRow, rx = deleteDashRow, rm = openDashMenu;
-      addDashRow = () => calls.push('add'); duplicateDashRow = () => calls.push('dup'); deleteDashRow = () => calls.push('del');
+      addDashRow = () => calls.push('add'); const rph = dashNewFromPhotos; dashNewFromPhotos = () => calls.push('photo'); duplicateDashRow = () => calls.push('dup'); deleteDashRow = () => calls.push('del');
       openDashMenu = (b, w) => calls.push(w + (b.dataset.menuUp ? '^' : ''));
       try { st.querySelectorAll('button').forEach(b => b.click()); }
-      finally { addDashRow = ra; duplicateDashRow = rd; deleteDashRow = rx; openDashMenu = rm; }
-      if (calls.join(',') !== 'add,dup,del,edit^,import^,export^') throw new Error('actions ran ' + calls.join(','));
+      finally { addDashRow = ra; dashNewFromPhotos = rph; duplicateDashRow = rd; deleteDashRow = rx; openDashMenu = rm; }
+      if (calls.join(',') !== 'add,photo,dup,del,edit^,import^,export^') throw new Error('actions ran ' + calls.join(','));
     });
 
     await ok('EXACT ASK (19.34): Walls gets Art / Guides / Context / Glass as icons that switch the panel', () => {
@@ -519,6 +531,29 @@ function inApp() {
         _dsTab('pages'); if (dis() !== '111') throw new Error('Pages should light every page tool: ' + dis());
         if (document.getElementById('phoneDeckTabs').dataset.mode !== 'pages') throw new Error('strip mode not pages');
       } finally { _dsTab = rt; }
+    });
+
+    await ok('EXACT ASK (19.35): the phone gets its own tour, every step finds its target, and walking it changes nothing', () => {
+      const before = undoStack.length;
+      startTour();
+      if (!_tour || _tour.steps !== FRAME_TOUR_PHONE) throw new Error('the phone got the desktop tour');
+      const lost = [];
+      for (let i = 0; i < FRAME_TOUR_PHONE.length; i++) {
+        _tourGo(i);
+        const s = FRAME_TOUR_PHONE[i];
+        // jsdom has no layout, so _tourTarget's size test fails here; existence is checked, sizes in Chrome.
+        if (s.target && ![].concat(s.target).some(q => document.querySelector(q))) lost.push(s.title);
+      }
+      endTour(true);
+      if (lost.length) throw new Error('steps with nothing to point at: ' + lost.join(', '));
+      if (undoStack.length !== before) throw new Error('the tour pushed an undo entry');
+      if (_tourStepsFor('dashboard').some(s => FRAME_TOUR.indexOf(s) >= 0)) throw new Error('Tour this screen gave a desktop step on the phone');
+    });
+    await ok('Help says how FRAME works on iPhone and iPad', () => {
+      const sec = HELP_REFERENCE_DATA.find(x => x.id === 'getting-started');
+      const e = sec && sec.entries.find(x => x.title === 'On iPhone and iPad');
+      if (!e) throw new Error('no iPhone and iPad entry in Start here');
+      ['Deck', 'Items', 'Walls', 'Controls', 'All pages', 'Preflight', 'Add to Home Screen'].forEach(w => { if (e.body.indexOf(w) < 0) throw new Error('it never mentions ' + w); });
     });
 
     await ok('the frame library opens one vendor at a time, and the open one closes on a tap', () => {
