@@ -665,11 +665,12 @@ const path = require('path');
       // now, which is the only place the extra height could come from.
       const b = fnBody('_drawInstallGuidePage');
       if (b.indexOf('const _igDrawTop = (left) =>') < 0) throw new Error('nothing decides whether the drawing may rise');
-      const uses = b.split('_igDrawTop(ex0)').length - 1;
-      if (uses !== 2) throw new Error(uses + ' layout branches ask; expected 2');
-      // Both must FIT against the raised top, or one of them rises and stays small.
-      if (b.indexOf('fitIn(aspect, SR.R - ex0, yBot - capH - eTop)') < 0) throw new Error('the elevation-only fit ignores the raised top');
-      if (b.indexOf('fitIn(aspect, SR.R - ex0, (yBot - capH) - eTop)') < 0) throw new Error('the plan-variant fit ignores the raised top');
+      // 19.36: both branches size through ONE fit, _igFitElev, which asks about the
+      // DRAWING's left edge (right-anchored), not the room's. The behaviour is pinned by
+      // test_install_elev_height.js; this keeps both branches on the one helper.
+      const uses = b.split('_igFitElev(aspect, ex0, yBot - capH)').length - 1;
+      if (uses !== 2) throw new Error(uses + ' layout branches use the shared fit; expected 2');
+      if (b.indexOf('_igDrawTop(SR.R - full[0])') < 0) throw new Error('the rise is decided by the room, not the drawing');
     });
 
     __check('it rises only when it MEASURABLY clears the title, never on an assumption', () => {

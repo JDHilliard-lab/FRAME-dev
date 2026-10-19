@@ -3452,3 +3452,8 @@ html.phone { --phone-pad-h: 0px; }
 html.phone:not(.phone-land) #appShell { padding-bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-pad-h) + var(--phone-safe-b)) !important; }
 /* The tour card spans the phone, whatever side of its target it lands. */
 html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important; width: auto !important; max-width: none !important; box-sizing: border-box; }
+
+/* A measure line that reads the same as another offers EQ (19.36). Editor-only: the
+   element carries data-export-skip, so nothing here reaches an export. */
+.dim-eq-hint { position: absolute; left: 100%; bottom: 100%; margin-left: -1px; margin-bottom: -9px; padding: 0 2px; font-size: 20px; font-weight: 700; line-height: 1; color: var(--selected); cursor: pointer; pointer-events: auto; z-index: 59; }
+.dim-eq-hint:hover { transform: scale(1.3); }
