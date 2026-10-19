@@ -1,3 +1,6 @@
 node_modules/
 # Screen recordings dropped in for bug reports. Large binaries, local only.
 .claude/references/
+# macOS folder metadata, and client PDFs dropped in for reference (never published).
+.DS_Store
+.github/PDFs/
