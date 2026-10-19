@@ -63,11 +63,15 @@ const path = require('path');
     if (!(p.img.x > p.line.x)) throw new Error('logo at ' + p.img.x + ' is not after the line at ' + p.line.x);
   });
 
-  await check('EXACT REQUEST: BEFORE puts the logo first, and the page number and line move over', async () => {
-    fx.prep(); fx.set({ place: 'before' });
+  // 19.40: the page number keeps its place; BEFORE means before the PROJECT TEXT.
+  await check('EXACT REQUEST: BEFORE puts the logo between the page number and the project line', async () => {
+    fx.prep(); fx.set();
+    const after = parts(fx.draw('dark'));
+    fx.set({ place: 'before' });
     const p = parts(fx.draw('dark'));
-    if (!(p.img.x < p.num.x && p.num.x < p.line.x)) throw new Error('order is img ' + p.img.x + ', number ' + p.num.x + ', line ' + p.line.x);
-    if (!(p.num.x >= p.img.x + 3 * 11)) throw new Error('the page number overlaps the logo');
+    if (Math.abs(p.num.x - after.num.x) > 0.01) throw new Error('the page number moved: ' + after.num.x + ' -> ' + p.num.x);
+    if (!(p.num.x < p.img.x && p.img.x < p.line.x)) throw new Error('order is number ' + p.num.x + ', img ' + p.img.x + ', line ' + p.line.x);
+    if (!(p.line.x >= p.img.x + 3 * 11 + 5)) throw new Error('the project line overlaps the logo');
   });
 
   await check('EXACT REQUEST: on a DARK page a dark logo prints in its white version', async () => {
@@ -82,10 +86,11 @@ const path = require('path');
     if (p.img.d.indexOf('PNGVERSION') < 0) throw new Error('printed ' + p.img.d.slice(0, 40));
   });
 
-  await check('"As uploaded" keeps a coloured logo\'s own colours on a dark page', async () => {
+  // 19.40: no White / As uploaded choice; a 19.39 file that stored 'asis' still goes white.
+  await check('on a dark page it is ALWAYS the white version (a stored 19.39 choice is ignored)', async () => {
     fx.prep(); fx.set({ onDark: 'asis' });
     const p = parts(fx.draw('light'));
-    if (p.img.d.indexOf('PNGVERSION') < 0) throw new Error('printed ' + p.img.d.slice(0, 40));
+    if (p.img.d.indexOf('WHITEVERSION') < 0) throw new Error('printed ' + p.img.d.slice(0, 40));
   });
 
   await check('EXACT BUG: an SVG logo never reaches the PDF writer as an SVG', async () => {

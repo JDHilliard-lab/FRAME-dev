@@ -23,7 +23,7 @@ const path = require('path');
 
   const block = `
     _autosaveToldUser = true;
-    window.__render = async (name, capW, capH) => {
+    window.__render = async (name, capW, capH, floorFrac) => {
       elevations = [{ id: 'w1', name: name, wallW: 60, wallH: 108, frames: [{ id: 'ART.16', letter: 'A', x: 15, y: 35, w: 30, h: 40, active: true, dimTo: [] }] }];
       dashProjectData = [{ id: 'ART.16', location: 'Corridor', level: 0, planPins: [{ lv: 0, x: 0.5, y: 0.5 }], planX: 0.5, planY: 0.5 }];
       // A plan, so the page takes the Elev + plan branch the Ford pages use: the left
@@ -32,7 +32,7 @@ const path = require('path');
       _loadImg = async () => ({ naturalWidth: 1600, naturalHeight: 1000, width: 1600, height: 1000, src: 'data:image/png;base64,AAAA' });
       editorialContent.installGuide = {}; editorialContent.pageFooters = {};
       _igNoCapture = false; for (const k in _igCapCache) delete _igCapCache[k];
-      _captureElevWithGuides = async () => ({ dataUrl: 'data:image/jpeg;base64,AAAA', w: capW, h: capH, vec: [] });
+      _captureElevWithGuides = async () => ({ dataUrl: 'data:image/jpeg;base64,AAAA', w: capW, h: capH, vec: [], floorFrac: floorFrac });
       const rec = new CanvasPdfRec(936, 540);
       const imgs = [], texts = [];
       const oImg = rec.addImage, oText = rec.text;
@@ -79,6 +79,22 @@ const path = require('path');
     const im = elev(r);
     const hit = r.texts.filter(t => t.y < 140 && t.s.trim()).find(t => t.x < im.x + im.w && t.x + t.w > im.x && t.y > im.y && t.y - 30 < im.y + im.h);
     if (hit) throw new Error('"' + hit.s + '" overlaps the drawing');
+  });
+
+  // 19.40: the drawing runs a little past the floor (ticks, leaders); its FLOOR, not its
+  // bottom edge, sits on the floor plan's bottom line.
+  await check('EXACT REQUEST: the wall\'s floor lines up with the bottom of the floor plan', async () => {
+    const r = await window.__render('ART.16 | Corridor', 300, 800, 0.97);
+    if (r.imgs.length < 2) throw new Error('expected the plan and the elevation, got ' + r.imgs.length + ' images');
+    const plan = r.imgs[0], el = r.imgs[r.imgs.length - 1];
+    const planBottom = plan.y + plan.h, floor = el.y + el.h * 0.97;
+    if (Math.abs(floor - planBottom) > 0.5) throw new Error('floor at ' + floor.toFixed(2) + ', plan bottom at ' + planBottom.toFixed(2));
+  });
+
+  await check('a capture that does not report its floor is placed as before (bottom on the line)', async () => {
+    const r = await window.__render('ART.16 | Corridor', 300, 800);
+    const plan = r.imgs[0], el = r.imgs[r.imgs.length - 1];
+    if (Math.abs((el.y + el.h) - (plan.y + plan.h)) > 0.5) throw new Error('moved without a floor to go by');
   });
 
   const failed = results.filter(r => !r.ok);
