@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.33">
+    <link rel="stylesheet" href="style.css?v=19.34">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -129,7 +129,7 @@
                         <div><label>Attn:</label><input type="text" id="g_attn" value="PM"></div>
                         <div><label>Delivery</label><input type="text" id="g_delivery" value="TBD"></div>
                     </div>
-                    <div class="pane-header" style="border-top: 1px solid var(--border-color); border-bottom: none; padding: 6px 20px;">
+                    <div class="pane-header dash-toolbar" style="border-top: 1px solid var(--border-color); border-bottom: none; padding: 6px 20px;">
                         <!-- 18.52: THREE BUTTONS AND THREE MENUS. Thirteen equal-weight buttons in two rows
                              made the one you use most (+ Add Item) look like everything else. The rarer jobs
                              are grouped by what they do (openDashMenu): Edit, Import, Export. -->
@@ -2219,9 +2219,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.33';</script>
-<script src="templates.js?v=19.33"></script>
-<script src="app.js?v=19.33"></script>
+<script>window.FRAME_HTML_VERSION = '19.34';</script>
+<script src="templates.js?v=19.34"></script>
+<script src="app.js?v=19.34"></script>
 
 </body>
 </html>

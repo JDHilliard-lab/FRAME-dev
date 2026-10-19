@@ -3349,14 +3349,16 @@ html.phone .fsp-pic { height: 90px; }
 /* ═══ iPHONE: the deck's tabs above the tab bar (19.32) ═══════════════════════════════ */
 /* Project / Pages / Templates plus the deck menu, pinned over the bottom bar on Deck. The
  * app shell grows its bottom padding by the strip's height so nothing hides under it. */
-.phone-decktabs { display: none; }
+.phone-substrip { display: none; }
 html.phone { --phone-sub-h: 0px; }
-html.phone[data-phone-view="deck"]:not(.phone-land) { --phone-sub-h: 44px; }
-html.phone[data-phone-view="deck"]:not(.phone-land) #appShell { padding-bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b)); }
-html.phone[data-phone-view="deck"]:not(.phone-land) .phone-decktabs { display: flex; position: fixed; left: 0; right: 0; z-index: 9001;
+html.phone:not(.phone-land) { --phone-sub-h: 44px; }
+html.phone:not(.phone-land) #appShell { padding-bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b)); }
+html.phone[data-phone-view="deck"]:not(.phone-land) #phoneDeckTabs,
+html.phone[data-phone-view="dashboard"]:not(.phone-land) #phoneItemsBar,
+html.phone[data-phone-view="elevation"]:not(.phone-land) #phoneWallsBar { display: flex; position: fixed; left: 0; right: 0; z-index: 9001;
     bottom: calc(var(--phone-tab-h) + var(--phone-safe-b)); height: var(--phone-sub-h); box-sizing: border-box;
     align-items: center; gap: 6px; padding: 0 8px; background: var(--bg-nav); border-top: 1px solid var(--border-color); }
-html.phone.phone-sheet-open .phone-decktabs { display: none !important; }
+html.phone.phone-sheet-open .phone-substrip { display: none !important; }
 .phone-decktab { flex: 1 1 0; min-width: 0; height: 32px; padding: 0 6px; border: 1px solid var(--border-color); border-radius: var(--r-6);
     background: var(--bg-subpanel); color: var(--text-muted); font-size: var(--fs-75); font-weight: 600; cursor: pointer;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -3364,8 +3366,8 @@ html.phone.phone-sheet-open .phone-decktabs { display: none !important; }
 .phone-decktab-menu { flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 32px; padding: 0;
     border: 1px solid var(--border-color); border-radius: var(--r-6); background: var(--bg-subpanel); color: var(--text-strong); cursor: pointer; }
 .phone-decktab-menu .svg-icon { width: 18px; height: 18px; }
-html.phone[data-phone-view="deck"] .frame-toast-host { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 16px); }
-html.phone[data-phone-view="deck"]:not(.phone-land) .touch-keys { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 10px); }
+html.phone .frame-toast-host { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 16px); }
+html.phone:not(.phone-land) .touch-keys { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 10px); }
 /* The app frame is pinned to the same edges as the bottom bars (19.32). As 100dvh it could
  * come out a safe-area short of the screen (810 of 844 on an iPhone with a home bar), while
  * the fixed bars sit on the real bottom: a dead band opened above them. */
@@ -3378,7 +3380,7 @@ html:not(.phone-sheet-open) .phone-sheet-close { display: none !important; }
  * page tools that are not drawing: All pages, Preview, Preflight. The top row is the page
  * arrows and the five drawing tools; with something selected the arrows give their place
  * to the selection actions, so it never scrolls. */
-html.phone .phone-decktabs { justify-content: space-between; gap: 4px; }
+html.phone .phone-substrip { justify-content: space-between; gap: 4px; }
 html.phone .phone-decktab, html.phone .phone-decktab-tool, html.phone .phone-decktab-menu {
     flex: 1 1 0; max-width: 48px; min-width: 0; height: 34px; padding: 0; display: flex; align-items: center; justify-content: center;
     border: 1px solid transparent; border-radius: var(--r-6); background: transparent; color: var(--text-muted); cursor: pointer; }
@@ -3391,3 +3393,43 @@ html.phone .phone-deck-tools #dsBuildBtn, html.phone .phone-deck-tools #dsPrefli
 html.phone:not(.phone-ds-sel) .phone-deck-tools #dsSelGroup { display: none !important; }
 html.phone.phone-ds-sel .phone-deckbar .phone-pg-btn, html.phone.phone-ds-sel .phone-deckbar .phone-pg-num { display: none !important; }
 html.phone .phone-deck-tools #dsToolDock .ds-dock-sep { display: none !important; }
+
+/* ═══ iPHONE: a colour per view, a strip per view (19.34) ═══════════════════════════════ */
+/* Deck blue, Items pink, Walls yellow, Controls grey. The tab bar's icons always wear their
+ * colour; the header takes the colour of the view you are on. Items and Walls get the same
+ * icon strip over the tab bar as Deck (their button rows and category tabs go). In Deck each
+ * tab has its own colour, and the tools that belong to it light up in it; the rest grey out. */
+html.phone { --pv-deck: #3a86ff; --pv-items: #ff5fa2; --pv-walls: #f5b82e; --pv-ctl: #8a8f98;
+    --pv-project: #8a8f98; --pv-pages: #3a86ff; --pv-tpl: #a77bff; --pv: var(--pv-deck); }
+html.phone[data-phone-view="dashboard"] { --pv: var(--pv-items); }
+html.phone[data-phone-view="elevation"] { --pv: var(--pv-walls); }
+.phone-tab[data-view="deck"] { --tc: var(--pv-deck); }
+.phone-tab[data-view="dashboard"] { --tc: var(--pv-items); }
+.phone-tab[data-view="elevation"] { --tc: var(--pv-walls); }
+.phone-tab-pad { --tc: var(--pv-ctl); }
+html.phone .phone-tab .svg-icon { color: var(--tc); opacity: 0.7; }
+html.phone .phone-tab.active { color: var(--tc); }
+html.phone .phone-tab.active .svg-icon { opacity: 1; }
+html.phone .app-top-nav { box-shadow: inset 0 -2px 0 var(--pv); }
+html.phone .phone-ctx-title, html.phone .phone-ctx-btn { color: var(--pv); }
+html.phone .phone-ctx-btn.back { color: var(--pv); }
+/* Strip buttons: --sc is the colour they light up in. */
+#phoneItemsBar { --sc: var(--pv-items); }
+#phoneWallsBar { --sc: var(--pv-walls); }
+#phoneDeckTabs[data-mode="project"] { --sc: var(--pv-project); }
+#phoneDeckTabs[data-mode="pages"] { --sc: var(--pv-pages); }
+#phoneDeckTabs[data-mode="templateEditor"] { --sc: var(--pv-tpl); }
+#phoneDeckTabs [data-dtab="project"] { --tc: var(--pv-project); }
+#phoneDeckTabs [data-dtab="pages"] { --tc: var(--pv-pages); }
+#phoneDeckTabs [data-dtab="templateEditor"] { --tc: var(--pv-tpl); }
+html.phone .phone-substrip .phone-decktab.active { color: var(--tc, var(--sc)); border-color: var(--tc, var(--sc)); background: var(--bg-subpanel); }
+html.phone .phone-substrip .phone-decktab-tool { color: var(--sc); }
+html.phone .phone-substrip .phone-decktab-tool:disabled { color: var(--text-muted); opacity: 0.3; cursor: default; }
+html.phone #phoneWallsBar .phone-decktab { color: var(--text-muted); }
+html.phone #phoneWallsBar .phone-decktab.active { color: var(--sc); border-color: var(--sc); }
+html.phone #view-dashboard .dash-toolbar { display: none !important; }
+html.phone #view-elevation .elev-cat-tabs { display: none !important; }
+html.phone[data-phone-view="dashboard"] .phone-snap { bottom: calc(var(--phone-tab-h) + var(--phone-sub-h) + var(--phone-safe-b) + 16px) !important; }
+html.phone[data-phone-view="deck"][data-phone-deck="project"] { --pv: var(--pv-project); }
+html.phone[data-phone-view="deck"][data-phone-deck="templateEditor"] { --pv: var(--pv-tpl); }
+html.phone[data-phone-view="dashboard"] .phone-snap { background: var(--pv-items) !important; }

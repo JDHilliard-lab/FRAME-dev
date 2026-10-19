@@ -42,6 +42,13 @@ check('EXACT ASK (19.33): the page toolbar is one row: Preview and Preflight mov
   const sync = APP.slice(APP.indexOf('function _dsSyncToolbar('), APP.indexOf(NL + 'function ', APP.indexOf('function _dsSyncToolbar(') + 10));
   if (sync.indexOf("classList.toggle('phone-ds-sel', _anySel)") < 0) throw new Error('the selection class is not kept by the toolbar sync');
 });
+check('EXACT ASK (19.34): each view has its colour (Deck blue, Items pink, Walls yellow, Controls grey) and the header wears it', () => {
+  ['--pv-deck: #3a86ff', '--pv-items: #ff5fa2', '--pv-walls: #f5b82e', '--pv-ctl: #8a8f98'].forEach(k => { if (CSS.indexOf(k) < 0) throw new Error('missing ' + k); });
+  if (CSS.indexOf('html.phone .app-top-nav { box-shadow: inset 0 -2px 0 var(--pv); }') < 0) throw new Error('the header does not take the view colour');
+  if (CSS.indexOf('html.phone #view-dashboard .dash-toolbar { display: none !important; }') < 0) throw new Error('the Items button rows still show on a phone');
+  if (CSS.indexOf('html.phone #view-elevation .elev-cat-tabs { display: none !important; }') < 0) throw new Error('the Walls category tabs still show on a phone');
+  if (HTML.indexOf('class="pane-header dash-toolbar"') < 0) throw new Error('the dashboard toolbar lost its class');
+});
 check('the deck menu at the bottom opens upward', () => {
   if (APP.indexOf("mb.dataset.menuUp = '1';") < 0 || APP.indexOf('anchor.dataset.menuUp') < 0) throw new Error('the deck menu opens down over the tab bar');
 });
@@ -161,6 +168,7 @@ function inApp() {
     });
 
     await ok('Deck: All pages opens the page list as a sheet; Done closes it', () => {
+      _dsActiveTab = 'pages'; _phoneDeckTabsSync();   // All pages belongs to Pages (19.34)
       document.getElementById('phoneDeckAll').click();
       const rail = document.getElementById('dsRail');
       if (!rail.classList.contains('phone-sheet') || !R.classList.contains('phone-sheet-open')) throw new Error('sheet did not open');
@@ -463,6 +471,7 @@ function inApp() {
       if (tools !== 'phoneDeckAll|phoneDeckPreview|phoneDeckPreflight') throw new Error('strip tools are ' + tools);
       if (document.querySelector('#phoneDeckBar #phoneDeckAll')) throw new Error('All pages is still in the top row');
       let pf = 0; const rp = _dsShowPreflight; _dsShowPreflight = () => { pf++; };
+      _dsActiveTab = 'pages'; _phoneDeckTabsSync();   // Preflight belongs to Pages (19.34)
       try { document.getElementById('phoneDeckPreflight').click(); } finally { _dsShowPreflight = rp; }
       if (pf !== 1) throw new Error('the Preflight button does not run preflight');
       const calls = []; const rt = _dsTab; _dsTab = (w) => { calls.push(w); _dsActiveTab = w; };
@@ -472,6 +481,44 @@ function inApp() {
       if (st.querySelector('[data-dtab="pages"]').classList.contains('active')) throw new Error('Pages still lit');
       _dsTab('pages');
       if (!st.querySelector('[data-dtab="pages"]').classList.contains('active')) throw new Error('the strip does not follow a tab change made elsewhere');
+    });
+
+    await ok('EXACT ASK (19.34): Items gets an icon strip that runs the real toolbar actions; Edit/Import/Export open upward', () => {
+      const st = document.getElementById('phoneItemsBar');
+      if (!st) throw new Error('no Items strip');
+      const ids = Array.from(st.querySelectorAll('button')).map(b => b.id).join('|');
+      if (ids !== 'phoneItemAdd|phoneItemDup|phoneItemDel|phoneItemEdit|phoneItemImport|phoneItemExport') throw new Error('strip is ' + ids);
+      const calls = [];
+      const ra = addDashRow, rd = duplicateDashRow, rx = deleteDashRow, rm = openDashMenu;
+      addDashRow = () => calls.push('add'); duplicateDashRow = () => calls.push('dup'); deleteDashRow = () => calls.push('del');
+      openDashMenu = (b, w) => calls.push(w + (b.dataset.menuUp ? '^' : ''));
+      try { st.querySelectorAll('button').forEach(b => b.click()); }
+      finally { addDashRow = ra; duplicateDashRow = rd; deleteDashRow = rx; openDashMenu = rm; }
+      if (calls.join(',') !== 'add,dup,del,edit^,import^,export^') throw new Error('actions ran ' + calls.join(','));
+    });
+
+    await ok('EXACT ASK (19.34): Walls gets Art / Guides / Context / Glass as icons that switch the panel', () => {
+      const st = document.getElementById('phoneWallsBar');
+      if (!st) throw new Error('no Walls strip');
+      const keys = Array.from(st.querySelectorAll('button')).map(b => b.getAttribute('data-elevtab')).join('|');
+      if (keys !== 'art|guides|context|glass') throw new Error('tabs are ' + keys);
+      document.getElementById('phoneWallTab-guides').click();
+      if (_elevSidebarTab !== 'guides') throw new Error('the icon did not switch the tab');
+      if (!document.getElementById('phoneWallTab-guides').classList.contains('active') || document.getElementById('phoneWallTab-art').classList.contains('active')) throw new Error('the strip does not light the open tab');
+      switchElevTab('art');
+      if (!document.getElementById('phoneWallTab-art').classList.contains('active')) throw new Error('the strip does not follow a tab change made elsewhere');
+    });
+
+    await ok('EXACT ASK (19.34): in Deck, the tools of the tab you are on light up; the others grey out', () => {
+      const dis = () => ['phoneDeckAll', 'phoneDeckPreview', 'phoneDeckPreflight'].map(id => document.getElementById(id).disabled ? 0 : 1).join('');
+      const rt = _dsTab; _dsTab = (w) => { _dsActiveTab = w; _phoneCtxSync(); };
+      try {
+        _dsTab('project'); if (dis() !== '000') throw new Error('Project leaves page tools on: ' + dis());
+        if (document.documentElement.getAttribute('data-phone-deck') !== 'project') throw new Error('header colour does not follow Project');
+        _dsTab('templateEditor'); if (dis() !== '100') throw new Error('Templates should keep only All pages: ' + dis());
+        _dsTab('pages'); if (dis() !== '111') throw new Error('Pages should light every page tool: ' + dis());
+        if (document.getElementById('phoneDeckTabs').dataset.mode !== 'pages') throw new Error('strip mode not pages');
+      } finally { _dsTab = rt; }
     });
 
     await ok('the frame library opens one vendor at a time, and the open one closes on a tap', () => {

@@ -2042,6 +2042,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   Preflight via `_phoneDeckToolRun`); the menu keeps Generate PDF + Approval only. The top row (`#phoneDeckBar`)
   NEVER SCROLLS: Preview/Preflight are hidden there, and `_dsSyncToolbar` sets `html.phone-ds-sel` so the
   selection group replaces the page arrows while something is selected.
+  **19.34: A COLOUR AND A STRIP PER VIEW.** `--pv-deck/items/walls/ctl` (blue, pink, yellow, grey); `--pv` follows
+  `data-phone-view` (and `data-phone-deck` inside Deck: Project grey, Pages blue, Templates purple) and paints
+  the header line + title. All three strips are `.phone-substrip`, shown by ID per view: `#phoneItemsBar`
+  (`PHONE_ITEMS_TOOLS`, calls the real toolbar functions; the `.dash-toolbar` row is hidden on a phone) and
+  `#phoneWallsBar` (built from `.elev-cat-tabs`, buttons carry `data-elevtab` so `switchElevTab` lights them;
+  the sidebar strip is hidden). `PHONE_DECK_TOOL_TABS` says which deck tab owns each tool; the others are
+  `disabled` (a test harness must be on Pages before clicking Preflight / All pages).
 - **A SAVED PROJECT KEEPS ITS FOOTER FIELDS AND DECK TICKS (19.30).** `globalMeta.docCode /
   docVersion / docLocation` carry the Project tab's code/version/location (they were never
   saved). `seedDeckIncludeInputs` / `seedDeckPlanOrderInput` must run AFTER the editorial is
