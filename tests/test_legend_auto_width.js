@@ -78,6 +78,15 @@ const path = require('path');
     if (Math.abs(lab.y - val.y) > 0.5) throw new Error('stacked at a 330pt column');
   });
 
+  // 19.39: the heading already starts with the code in Druk; the grey repeat under
+  // ELEVATION DETAIL on a one-piece wall is gone.
+  await check('EXACT REQUEST: a one-piece install page does not repeat the item code under the title', async () => {
+    const r = await window.__render('ARI.010.00012.1');
+    const bare = r.texts.filter(t => t.s.trim() === 'ART.40');
+    if (bare.length) throw new Error('the item code still prints on its own (' + bare.length + 'x)');
+    if (!r.texts.some(t => t.s.indexOf('ART.40') === 0 && t.s.indexOf('|') > 0)) throw new Error('the heading itself is missing, so the check proves nothing');
+  });
+
   const failed = results.filter(r => !r.ok);
   results.forEach(r => console.log((r.ok ? 'PASS ' : 'FAIL ') + r.label + (r.ok ? '' : ' :: ' + r.err)));
   console.log(failed.length ? (failed.length + ' FAILED') : 'ALL PASSED (' + results.length + ')');

@@ -69,8 +69,13 @@ const fs = require('fs');
       if (cached() !== 0) throw new Error('toggling wall dims left ' + cached() + ' stale snapshot(s)');
     });
 
+    // 19.39: a save with NOTHING changed no longer invalidates (pressing M re-saved and
+    // wiped every capture and preview). A real change still does, which is what this
+    // check is about; the no-op case is pinned in test_guides_persist_and_rebuilds.
     __check('every dimVisibility toggle routes through saveDimVisibility, so none can be missed', () => {
+      saveDimVisibility();
       seedCache();
+      dimVisibility.imageCode = !dimVisibility.imageCode;
       saveDimVisibility();
       if (cached() !== 0) throw new Error('saveDimVisibility did not invalidate; toggles that call only it would go stale');
       const S = window.__appSrc;

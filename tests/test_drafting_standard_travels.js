@@ -161,7 +161,7 @@ const path = require('path');
       if (body.indexOf('saveDimVisibility()') < 0) throw new Error('the toggle does not persist or invalidate the captures');
       if (body.indexOf('drawElevAll()') < 0) throw new Error('the wall is not redrawn');
       const sv = S.indexOf('function saveDimVisibility');
-      if (S.slice(sv, sv + 500).indexOf('_elevGuidesChanged()') < 0) throw new Error('saveDimVisibility stopped invalidating the captures');
+      if (S.slice(sv, S.indexOf('\\nfunction ', sv + 10)).indexOf('_elevGuidesChanged()') < 0) throw new Error('saveDimVisibility stopped invalidating the captures');
       // Wired in the UI, with state shown.
       if (H.indexOf('toggleSpacingEQ(this)') < 0) throw new Error('the EQ button is not in index.html');
       const sy = S.indexOf('function syncLayoutGuideButtonStates');
