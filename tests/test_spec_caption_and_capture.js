@@ -70,7 +70,11 @@ const path = require('path');
       });
       const i = S.indexOf('async function _captureElevWithGuides');
       const body = S.slice(i, S.indexOf('async function _drawInstallGuidePage', i));
-      if (body.indexOf("toDataURL('image/png')") >= 0) throw new Error('the capture emits a PNG data URL again');
+      // 19.43: the capture also carries the scale figure as its own small transparent PNG
+      // (drawn through _addPngImage); the PICTURE itself must stay JPEG.
+      if (body.indexOf("dataUrl: out.toDataURL('image/jpeg'") < 0) throw new Error('the capture emits a PNG data URL again');
+      if (body.split("toDataURL('image/png')").length - 1 > 1) throw new Error('a second PNG crept into the capture');
+      if (body.indexOf("person = { png: pc.toDataURL('image/png')") < 0) throw new Error('the only PNG must be the figure layer');
       if (body.indexOf("toDataURL('image/jpeg', _capQ.q)") < 0) throw new Error('the capture no longer emits a JPEG at the quality setting');
       // Every placement must agree on the format; a mismatch draws nothing at all.
       const j = S.indexOf('async function _drawInstallGuidePage');

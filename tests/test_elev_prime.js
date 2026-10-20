@@ -205,7 +205,10 @@ const path = require('path');
       const i = S.indexOf('async function _igElevCapture');
       if (i < 0) throw new Error('_igElevCapture is gone — the suppressors have no home');
       const body = S.slice(i, S.indexOf('\\n}', i));
-      if (body.indexOf('!_igNoCapture && !_elevPrimeActive') < 0) throw new Error('a page render can still capture mid-batch and fight the batch for the view');
+      // 19.43: the suppressor reads through _noCap, which drops the THUMBNAIL flag only
+      // while an export owns the captures; outside one a thumbnail still cannot capture.
+      if (body.indexOf('const _noCap = _igNoCapture && !_exporting;') < 0) throw new Error('the thumbnail suppressor is gone');
+      if (body.indexOf('!_noCap && !_elevPrimeActive') < 0) throw new Error('a page render can still capture mid-batch and fight the batch for the view');
       ['async function _drawInstallGuidePage', 'async function _drawFlatGraphicSpecPage'].forEach(sig => {
         const j = S.indexOf(sig);
         if (j < 0) throw new Error('cannot find ' + sig);

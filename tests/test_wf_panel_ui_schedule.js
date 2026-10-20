@@ -1035,7 +1035,10 @@ const path = require('path');
       // And the batch may have filled this very key on its way past.
       if (body.indexOf('cap = _igCapCache[capKey] || cap;') < 0) throw new Error('it does not re-read the cache after waiting');
       // The suppressor itself stays: a THUMBNAIL render must still not steal the view.
-      if (body.indexOf('!_igNoCapture && !_elevPrimeActive') < 0) throw new Error('the original guard was removed rather than preceded');
+      // 19.43: the suppressor reads through _noCap, which drops the THUMBNAIL flag only
+      // while an export owns the captures; outside one a thumbnail still cannot capture.
+      if (body.indexOf('const _noCap = _igNoCapture && !_exporting;') < 0) throw new Error('the thumbnail suppressor is gone');
+      if (body.indexOf('!_noCap && !_elevPrimeActive') < 0) throw new Error('the original guard was removed rather than preceded');
     });
 
     __check('the schedule prints in the same unit convention as the spec rows above it', () => {

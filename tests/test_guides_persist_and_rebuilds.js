@@ -34,8 +34,9 @@ const path = require('path');
       payload: () => JSON.stringify(_projectPayload()),
       open: (text) => _readProjectText(text),
       setGuidesField: (v) => { editorialContent.elevGuides = v; },
-      seedThumb: () => { _dsThumbCache['probe|key'] = 'data:x'; },
-      thumbAlive: () => !!_dsThumbCache['probe|key'],
+      // An INSTALL page's thumbnail: 19.43 refreshes only the pages that draw an elevation.
+      seedThumb: () => { window.__ed = window.__ed || { kind: 'spec', type: 'install', _install: true, _specTpl: 'installGuide', row: {}, elev: {}, title: 'W', _ovKey: 'elev:0' }; _dsPages = [window.__ed]; _dsIndex = 0; _dsThumbCache[_dsThumbCacheKey(window.__ed)] = 'data:x'; },
+      thumbAlive: () => !!_dsThumbCache[_dsThumbCacheKey(window.__ed)],
       saveDims: () => saveDimVisibility(),
       flipDim: (k) => { dimVisibility[k] = !dimVisibility[k]; },
       lineTool: (on) => toggleLineTool(on),

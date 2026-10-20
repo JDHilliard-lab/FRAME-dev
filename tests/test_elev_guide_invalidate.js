@@ -54,48 +54,75 @@ const fs = require('fs');
       if (cached() !== 0) throw new Error('the change applies deck-wide but ' + cached() + ' stale snapshot(s) survived — those elevations would still export the old drawing');
     });
 
-    // ── The exact inconsistency: dimVisibility toggles vs layer toggles ──
-    __check('EXACT BUG: a dimVisibility toggle (image code) invalidates the cache', () => {
-      seedCache();
-      dimVisibility = dimVisibility || {};
+    // ── 19.43: A GUIDE SHOWN OR HIDDEN KEEPS EVERY CAPTURE ──────────────────
+    // Captures now hold EVERY guide and each page shows the ones that are on (_capView),
+    // so a toggle must (1) keep the captures, (2) drop the thumbnails of the pages that
+    // draw an elevation so they redraw from them, (3) leave every other page's thumbnail
+    // alone, and (4) change what the page's view of a capture shows. The original bug
+    // these checks were written for (a toggle the cache key could not see, so the PDF
+    // reused a drawing with the wrong guides) is (4).
+    const elevDesc = { kind: 'spec', type: 'install', _install: true, _specTpl: 'installGuide', row: {}, elev: {}, title: 'W', _ovKey: 'elev:0' };
+    const coverDesc = { kind: 'fixed', fixed: 'cover', title: 'Cover' };
+    const seedThumbs = () => {
+      _dsPages = [coverDesc, elevDesc]; _dsIndex = 0;
+      _dsThumbCache = {}; _dsThumbCache[_dsThumbCacheKey(elevDesc)] = 'data:elev'; _dsThumbCache[_dsThumbCacheKey(coverDesc)] = 'data:cover';
+    };
+    const expectKept = (what) => {
+      if (cached() !== 3) throw new Error(what + ' threw away ' + (3 - cached()) + ' capture(s); they hold every guide now');
+      if (_dsThumbCache[_dsThumbCacheKey(elevDesc)]) throw new Error(what + ' left the elevation page on its old thumbnail');
+      if (!_dsThumbCache[_dsThumbCacheKey(coverDesc)]) throw new Error(what + ' rebuilt a page with no elevation on it');
+    };
+    __check('EXACT BUG: a dimVisibility toggle (image code) changes what the page shows', () => {
+      saveDimVisibility(); seedCache(); seedThumbs();
+      const before = _elevGuideVis().imgcode;
       toggleImageCodeVisibility(null);
-      if (cached() !== 0) throw new Error('the exact reported bug: toggling image code left ' + cached() + ' stale snapshot(s). It changes no layer display, so the capture cache key was identical and the PDF silently reused the old drawing');
+      if (_elevGuideVis().imgcode === before) throw new Error('the page view cannot see the image-code toggle, so the PDF would reuse the old drawing');
+      expectKept('toggling image code');
     });
 
-    __check('EXACT BUG: toggling wall dimensions invalidates the cache', () => {
-      seedCache();
-      dimVisibility = dimVisibility || {};
+    __check('EXACT BUG: toggling wall dimensions is seen by the page and keeps the captures', () => {
+      saveDimVisibility(); seedCache(); seedThumbs();
+      const before = _elevGuideVis()['arch-dim-layer'];
       toggleWallDims(null);
-      if (cached() !== 0) throw new Error('toggling wall dims left ' + cached() + ' stale snapshot(s)');
+      if (_elevGuideVis()['arch-dim-layer'] === before) throw new Error('the page view cannot see the wall-dims toggle');
+      expectKept('toggling wall dims');
     });
 
-    // 19.39: a save with NOTHING changed no longer invalidates (pressing M re-saved and
-    // wiped every capture and preview). A real change still does, which is what this
-    // check is about; the no-op case is pinned in test_guides_persist_and_rebuilds.
+    // 19.39: a save with NOTHING changed does nothing (pressing M re-saved and wiped every
+    // capture and preview); test_guides_persist_and_rebuilds pins that.
     __check('every dimVisibility toggle routes through saveDimVisibility, so none can be missed', () => {
-      saveDimVisibility();
-      seedCache();
+      saveDimVisibility(); seedCache(); seedThumbs();
       dimVisibility.imageCode = !dimVisibility.imageCode;
       saveDimVisibility();
-      if (cached() !== 0) throw new Error('saveDimVisibility did not invalidate; toggles that call only it would go stale');
+      expectKept('a dimVisibility change');
       const S = window.__appSrc;
       // Each of these must persist via saveDimVisibility rather than writing
-      // localStorage directly, or it would bypass the invalidation.
+      // localStorage directly, or it would bypass the refresh.
       ['toggleGroupBoxVisibility', 'toggleEdgeGapVisibility', 'toggleImageCodeVisibility', 'toggleCustomLinesVisibility', 'toggleWallDims'].forEach(fn => {
         const i = S.indexOf('function ' + fn);
         if (i < 0) throw new Error(fn + ' not found');
         const body = S.slice(i, i + 500);
-        if (body.indexOf('saveDimVisibility') < 0) throw new Error(fn + ' does not go through saveDimVisibility, so it would skip the invalidation');
+        if (body.indexOf('saveDimVisibility') < 0) throw new Error(fn + ' does not go through saveDimVisibility, so it would skip the refresh');
       });
     });
 
-    __check('a layer toggle invalidates too, so behaviour is consistent across all guide buttons', () => {
-      seedCache();
+    __check('EQ in place of numbers CHANGES the drawing, so it still recaptures', () => {
+      saveDimVisibility(); seedCache();
+      dimVisibility.spacingEQ = !dimVisibility.spacingEQ;
+      saveDimVisibility();
+      if (cached() !== 0) throw new Error('EQ changed what the dimensions say and ' + cached() + ' capture(s) kept the old numbers');
+      dimVisibility.spacingEQ = !dimVisibility.spacingEQ; saveDimVisibility();
+    });
+
+    __check('a layer toggle behaves the same way, so all guide buttons agree', () => {
+      seedCache(); seedThumbs();
       const layer = document.getElementById('label-layer');
       if (!layer) throw new Error('#label-layer missing from the markup');
       const btn = document.createElement('button');
+      const before = _elevGuideVis()['label-layer'];
       toggleElevLayer('label-layer', btn);
-      if (cached() !== 0) throw new Error('toggling a guide layer left ' + cached() + ' stale snapshot(s)');
+      if (_elevGuideVis()['label-layer'] === before) throw new Error('the page view cannot see the layer toggle');
+      expectKept('toggling a guide layer');
     });
 
     __check('label/dimension STYLING changes invalidate as well (size, colour, font are deck-wide)', () => {

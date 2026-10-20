@@ -1431,7 +1431,9 @@ const fs = require('fs');
       if (body.indexOf('drawElevAll(') >= 0) throw new Error('it redraws a hidden view, which measures zero');
       // But it MUST drop the caches, or the page keeps showing the capture taken without
       // the guide on it - which is the "and refresh the page" half of the complaint.
-      if (body.indexOf('_elevGuidesChanged()') < 0) throw new Error('the cached captures are never dropped');
+      // 19.43: the captures hold every guide now, so the page is refreshed from them
+      // (_elevGuideVisChanged) rather than by dropping them.
+      if (body.indexOf('_elevGuideVisChanged()') < 0) throw new Error('the cached captures are never dropped');
       // And the character still gets its first-show nudge, or it lands off the wall edge.
       if (body.indexOf('elevPersonPos.placed') < 0) throw new Error('the first-show position nudge was lost');
     });

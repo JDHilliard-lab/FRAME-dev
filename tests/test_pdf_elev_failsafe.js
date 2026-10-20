@@ -64,6 +64,8 @@ const path = require('path');
     };
     window.__good = () => ({ dataUrl: window.__JPG, w: 120, h: 80, vec: null });
     window.__setPrime = (on) => { _elevPrimeActive = on; };
+    window.__raiseNoCap = () => { _igNoCapture = true; };
+    window.__buildAllDuringExport = () => { let ran = false; const real = _dsQueueAllThumbs; _dsQueueAllThumbs = () => { ran = true; }; window._specPdfBusy = true; try { _dsBuildAllThumbs({ prime: false }); } finally { window._specPdfBusy = false; _dsQueueAllThumbs = real; } return ran; };
   `);
   console.error = quiet;
   const results = [];
@@ -99,6 +101,19 @@ const path = require('path');
     if (r.asked.length) throw new Error('a page printed its placeholder: ' + r.asked[0]);
     if (r.shown !== 1) throw new Error('not delivered');
     if (r.walls !== 2) throw new Error('only ' + r.walls + ' of 2 walls were captured');
+  });
+
+  // 19.43: a guide toggle schedules a quiet thumbnail rebuild; one that slipped in during
+  // Generate PDF raised the "background render" flag and the export's pages obeyed it.
+  await check('EXACT BUG: a thumbnail job raising its flag mid-export costs no page its drawing', async () => {
+    let n = 0;
+    const r = await window.__export(() => { n++; if (n === 1) window.__raiseNoCap(); return window.__good(); }, false);
+    if (r.asked.length) throw new Error('a page printed its placeholder: ' + r.asked[0]);
+    if (r.walls !== 2) throw new Error('only ' + r.walls + ' of 2 walls were captured');
+  });
+
+  await check('no background thumbnail build starts while an export runs', async () => {
+    if (window.__buildAllDuringExport()) throw new Error('a thumbnail build started during the export');
   });
 
   const failed = results.filter(r => !r.ok);
