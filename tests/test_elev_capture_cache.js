@@ -211,12 +211,11 @@ const path = require('path');
       const i = S.indexOf('async function _igElevCapture');
       if (i < 0) throw new Error('_igElevCapture is gone — the retry has no home');
       const body = S.slice(i, S.indexOf('\\n}', i));
-      const first = body.indexOf('cap = await _captureElevWithGuides(elevIdx);');
-      if (first < 0) throw new Error('the capture call is gone');
-      const second = body.indexOf('cap = await _captureElevWithGuides(elevIdx);', first + 10);
-      if (second < 0) throw new Error('no retry — a transient failure loses the drawing for that page');
-      const between = body.slice(first, second);
-      if (between.indexOf('if (!cap)') < 0) throw new Error('the retry is not conditional on the first attempt failing');
+      // 19.42: the retry is a LOOP (two attempts, three during an export), each only while
+      // the previous one came back empty. test_pdf_elev_failsafe drives it for real.
+      if (body.indexOf('cap = await _captureElevWithGuides(elevIdx);') < 0) throw new Error('the capture call is gone');
+      if (body.indexOf("const tries = _exporting ? 3 : 2;") < 0) throw new Error('no retry — a transient failure loses the drawing for that page');
+      if (body.indexOf('t < tries && !(cap && cap.dataUrl)') < 0) throw new Error('the retry is not conditional on the first attempt failing');
       // Nobody may bypass it by calling _captureElevWithGuides directly from a page
       // renderer — that is how the second copy would come back.
       ['async function _drawInstallGuidePage', 'async function _drawFlatGraphicSpecPage'].forEach(sig => {

@@ -1025,7 +1025,9 @@ const path = require('path');
       if (body.indexOf('_elevPrimeActive; i++') < 0) throw new Error('the wait is not a loop on the flag');
       // Bounded, so a stuck flag degrades to the old behaviour rather than hanging a
       // build with no way out.
-      if (body.indexOf('i < 60') < 0) throw new Error('the wait is unbounded');
+      // 19.42: longer during an export (it cancels the pass on the way in, so this is one
+      // wall), still bounded either way.
+      if (body.indexOf('i < (_exporting ? 600 : 60)') < 0) throw new Error('the wait is unbounded');
       // A cancel still gets out.
       if (body.slice(body.indexOf('&& _elevPrimeActive) {')).indexOf('_pdfCheckCancel') < 0) {
         throw new Error('Cancel cannot interrupt the wait');
