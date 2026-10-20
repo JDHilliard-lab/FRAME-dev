@@ -2060,6 +2060,27 @@ run but passes alone is usually load timing: rerun before chasing it.
   installed in every open path (`_readProjectText`, autosave restore, `_versionRestore`); they
   ran before it, against the previous project's editorial.
 
+- **ONE BREAKER PER WALL (19.44, `_breakerWallShare`, `_breakerWallOf`).** Units whose wall
+  (most members) is the same share one breaker: the FIRST in the shared `units` array earns it
+  (stateless, like the catalogue mockup), `br.units` lists the peers, `_breakerNameFor` joins
+  their codes (`ART.10AB / ART.11`), the key stays `elevgrp:<first unit key>`. Manual groups,
+  catalogue units and skipped flat-only units take no part. Memo hangs off the function.
+- **CODES THAT HANG AS ONE SET ARE SUGGESTED, NEVER REGROUPED (19.44).** `_codesSetSuggestions`
+  (same wall, same prefix, every piece hung only there, edge gap <= `CODE_SET_GAP_IN` 12" in
+  inches), shown in Preflight (warn, Make set / Keep apart / Wall) and on the wall
+  (`#wallSetHint`, `_elevSetHintSync`, top of `initElevControls`). `_codesJoinSet` (no history;
+  `_codesJoinSetNow` is the gesture) re-letters in code order via temp ids, then `_codesSettle`.
+  Keep apart = `editorialContent.codeSetsApart` (row-id lists), kept current by `applyIdRename`.
+  **A wall NAMED FOR EXACTLY ITS CODES follows them** (`_wallNamesFollowCodes`, wraps the
+  renumber in `_codesSettle` and the join; `_wallCodeHead` parses `ART.8A / 8B / 9 | Loc`);
+  any other name is never touched.
+- **PREFLIGHT WEARS ITS RESULT (19.44, `_pfBadgeSchedule` / `_pfBadgePaint`, `PF_BADGE_BTNS`).**
+  `data-pf` = err / warn / ok + `data-pf-n` count on every Preflight button; spelling never
+  colours it. Re-run debounced off `scheduleAutosave`, only while the deck view is showing
+  (stale otherwise, caught up by `_dsDockSync`); `_pfBadgeRunning` ignores the autosaves its own
+  page-list build triggers. **Preflight must stay READ-ONLY** (it runs in the background now):
+  `_dsSpellIgnoreList` no longer seeds `spellIgnore` (the guided tour test caught it).
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

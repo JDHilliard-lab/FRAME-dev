@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.43">
+    <link rel="stylesheet" href="style.css?v=19.44">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -655,6 +655,9 @@
                              on ART is correct. Without this line the only way to learn that
                              is to switch mode and watch the film move. -->
                         <div id="wallModeHint" style="font-size:var(--fs-60); color:var(--text-muted); line-height:1.4; margin-top:5px;"></div>
+                        <!-- Codes on this wall that hang as one set (19.44, _elevSetHintSync): the
+                             same suggestion Preflight lists, quiet, never a popup. -->
+                        <div id="wallSetHint" class="wall-set-hint" style="display:none"></div>
                         <!-- OPTIONS ARE MADE IN DECK STUDIO (17.89). The Catalogue mockup button and
                              the + LAYOUT / + SET row lived here; "+ Add option" on a page's Options
                              section now does all of it, including turning the wall into the
@@ -1068,7 +1071,7 @@
                         <option value="print">Print — maximum fidelity (largest)</option>
                     </select>
                     <div style="display:flex; gap:8px; align-items:center;">
-                        <button class="action-btn btn-secondary" style="width:auto; height:34px; padding:0 14px; font-size:var(--fs-70);" title="Scan the deck for missing artwork, pins, plan images, and empty frames" onclick="_dsShowPreflight()">Run Preflight</button>
+                        <button id="projPreflightBtn" class="action-btn btn-secondary" style="width:auto; height:34px; padding:0 14px; font-size:var(--fs-70);" title="Scan the deck for missing artwork, pins, plan images, and empty frames" onclick="_dsShowPreflight()">Run Preflight</button>
                         <button data-modal-close class="action-btn btn-secondary" style="width:auto; height:34px; padding:0 14px; font-size:var(--fs-70); margin-left:auto;" onclick="document.getElementById('dsGenerateModal').style.display='none'">Cancel</button>
                         <button class="action-btn" style="width:auto; height:34px; padding:0 18px; font-size:var(--fs-80); font-weight:700;" onclick="document.getElementById('dsGenerateModal').style.display='none'; applySpecPdfModal();">Generate</button>
                     </div>
@@ -2219,9 +2222,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.43';</script>
-<script src="templates.js?v=19.43"></script>
-<script src="app.js?v=19.43"></script>
+<script>window.FRAME_HTML_VERSION = '19.44';</script>
+<script src="templates.js?v=19.44"></script>
+<script src="app.js?v=19.44"></script>
 
 </body>
 </html>

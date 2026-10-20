@@ -79,7 +79,11 @@ const path = require('path');
       const uses = (S.match(/_breakerSkipUnit\\(/g) || []).length;
       // 18.32: the definition plus ONE caller. The export walks _deckPageList, so a
       // second caller would mean a second page list had grown back.
-      if (uses !== 2) throw new Error('expected the definition plus _deckPageList, found ' + uses + ' mentions');
+      // 19.44: plus _breakerWallShare, which asks it so a skipped flat-only unit never
+      // earns the wall's one breaker. It is a helper of _breakerElevFor, not a page list.
+      if (uses !== 3) throw new Error('expected the definition, _deckPageList and _breakerWallShare, found ' + uses + ' mentions');
+      const sh = S.indexOf('function _breakerWallShare');
+      if (sh < 0 || S.slice(sh, S.indexOf('\\n}', sh)).indexOf('_breakerSkipUnit(') < 0) throw new Error('the third mention is not _breakerWallShare');
       // The studio builder.
       const dpl = S.indexOf('function _deckPageList');
       if (dpl < 0) throw new Error('_deckPageList not found');
