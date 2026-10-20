@@ -78,9 +78,11 @@ const fs = require('fs');
       const body = S.slice(i, _end > 0 ? _end : i + 6000);
       if (body.indexOf('center-guide') < 0) throw new Error('wall-center guide missing from drawElevGuides');
       if (body.indexOf('hang-guide') < 0) throw new Error('hang-height guide missing from drawElevGuides');
-      // The hang block is gated on geometry only (it must fit on the wall) —
-      // not on any capture/breaker suppression flag.
-      if (!/if\\s*\\(hangVal < wallH\\)/.test(body)) throw new Error('hang-height should be gated on geometry alone; found an extra suppression condition');
+      // The hang block is gated on geometry (it must fit on the wall) and, since 19.44,
+      // on the WALL's own set-out switch (_elevHangOn: art on a shelf or over a credenza
+      // is not hung to the hang height). Never on a capture/breaker suppression flag.
+      if (body.indexOf('if (hangVal < wallH && _elevHangOn(_ge)) {') < 0) throw new Error('hang-height should be gated on geometry and the wall switch alone; found another condition');
+      if (/_igNoCapture|_elevPrimeActive|_thumbBusy/.test(body)) throw new Error('a capture suppression flag reached drawElevGuides');
     });
 
     __check('breaker and install-guide captures share one cache key per elevation state (no clean-vs-guides variants)', () => {

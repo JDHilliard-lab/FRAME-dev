@@ -1032,7 +1032,9 @@ const path = require('path');
       // not the fix: those are shared, so it would strip them from every framed-art
       // wall in the same deck.
       const i = S.indexOf('function drawElevGuides');
-      const body = S.slice(i, i + 6000);
+      // To the next function, not a fixed window (19.44's block centre lines pushed the
+      // AFF dimension past 6000 characters).
+      const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));
       const guard = body.indexOf('if (_isEgdWall(elevations[currentElevIndex])) {');
       if (guard < 0) throw new Error('THE BUG: drawElevGuides does not special-case an EGD wall');
       // It must return BEFORE any of the set-out guides are built.

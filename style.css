@@ -3479,3 +3479,10 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .wall-set-row + .wall-set-row { margin-top: 6px; }
 .wall-set-text { flex: 1 1 100%; font-size: var(--fs-65); line-height: 1.4; color: var(--text-main); }
 .wall-set-row .action-btn { width: auto; flex: 0 0 auto; height: 24px; padding: 0 10px; font-size: var(--fs-60); }
+
+/* THIS WALL set-out switches in the Guides tab (19.44, _elevWallGuidesSync). */
+.elev-wall-guides { margin-top: 8px; }
+.elev-wall-guides .ewg-row { display: flex; align-items: center; gap: 6px; font-size: var(--fs-65); color: var(--text-main); padding: 3px 0; cursor: pointer; }
+.elev-wall-guides .ewg-sub { font-size: var(--fs-60); color: var(--text-muted); margin: 6px 0 4px; }
+.elev-wall-guides .ewg-chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.elev-wall-guides .ewg-note { font-size: var(--fs-60); color: var(--text-muted); line-height: 1.4; margin-top: 4px; }

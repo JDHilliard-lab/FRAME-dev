@@ -780,7 +780,8 @@ const path = require('path');
 
     __check('the drawer takes the ink explicitly, so measure and draw cannot disagree', () => {
       const b = fnBody('_drawInstallNoteBox');
-      if (b.indexOf('maxH, fsScale, ink)') < 0) throw new Error('the drawer does not take an ink');
+      // 19.44: the wall rides after the ink (its notes depend on it).
+      if (b.indexOf('maxH, fsScale, ink, elev)') < 0) throw new Error('the drawer does not take an ink');
       if (b.indexOf('_nk.r') < 0) throw new Error('the heading does not print in the resolved ink');
       if (b.indexOf('_nk[0]') >= 0) throw new Error('the colour is being read as an array again');
     });

@@ -2081,6 +2081,23 @@ run but passes alone is usually load timing: rerun before chasing it.
   page-list build triggers. **Preflight must stay READ-ONLY** (it runs in the background now):
   `_dsSpellIgnoreList` no longer seeds `spellIgnore` (the guided tour test caught it).
 
+- **THE SET-OUT IS PER WALL (19.45, `_elevHangOn`, `_elevWallClOn`, `_elevBlockCLs`).** The Hang / CL
+  toggle stays deck-wide; `elev.hangGuide === false` drops hang line, AFF dim and target on that
+  wall; `block.cl` draws `.ctx-cl-guide` (a `center-guide`, dashed, label `_elevBlockCLLabel` =
+  "CL CREDENZA") in `#guide-layer`; the wall CL is on unless a block carries a CL, and
+  `elev.wallCL` true/false overrides (stored only when it differs from that default). UI is the
+  Guides tab's THIS WALL block (`#elevWallGuides`, `_elevWallGuidesSync`, top of
+  `initElevControls`) and a CL button per context row. **The notes follow the wall:**
+  `_installNoteLines(elev)`; the `aff` tick prints `_installNoteSetOut(elev)` (hang sentence, or
+  "dimensions shown" when off, plus a line per block CL); `group` is dropped when hang is off.
+  `elev` is threaded through `_installNoteFit` / `_installNoteBoxH` / `_drawInstallNoteBox` (an
+  argument, never a module flag: the renderer awaits). No `elev` = the deck-wide panel list.
+- **CANVAS ELEVATIONS DRAW CONTEXT BLOCKS (19.45, `_ctxDrawToCanvas`)**, after the frames (they
+  occlude), art via `_ctxArtSvg` with `_ctxInkHex()` and explicit width/height, rasterised by
+  `_loadImg`. That is the spec-page thumbnail path (`renderElevationToCanvas`).
+- **GROUP A/B/C ART IS RIGHT-ANCHORED (19.45)**: the as-hung branch of `_drawSpecSetPageBody` puts
+  the group's right edge on `regX + regW`, the elevation thumbnail's right edge.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.
