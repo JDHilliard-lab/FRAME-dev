@@ -23,7 +23,8 @@ const path = require('path');
 
   const block = `
     _autosaveToldUser = true;
-    window.__render = async (name, capW, capH, floorFrac) => {
+    window.__SR = () => _safeFrameRect(936, 540);
+    window.__render = async (name, capW, capH, floorFrac, wallRightFrac) => {
       elevations = [{ id: 'w1', name: name, wallW: 60, wallH: 108, frames: [{ id: 'ART.16', letter: 'A', x: 15, y: 35, w: 30, h: 40, active: true, dimTo: [] }] }];
       dashProjectData = [{ id: 'ART.16', location: 'Corridor', level: 0, planPins: [{ lv: 0, x: 0.5, y: 0.5 }], planX: 0.5, planY: 0.5 }];
       // A plan, so the page takes the Elev + plan branch the Ford pages use: the left
@@ -32,7 +33,7 @@ const path = require('path');
       _loadImg = async () => ({ naturalWidth: 1600, naturalHeight: 1000, width: 1600, height: 1000, src: 'data:image/png;base64,AAAA' });
       editorialContent.installGuide = {}; editorialContent.pageFooters = {};
       _igNoCapture = false; for (const k in _igCapCache) delete _igCapCache[k];
-      _captureElevWithGuides = async () => ({ dataUrl: 'data:image/jpeg;base64,AAAA', w: capW, h: capH, vec: [], floorFrac: floorFrac });
+      _captureElevWithGuides = async () => ({ dataUrl: 'data:image/jpeg;base64,AAAA', w: capW, h: capH, vec: [], floorFrac: floorFrac, wallRightFrac: wallRightFrac });
       const rec = new CanvasPdfRec(936, 540);
       const imgs = [], texts = [];
       const oImg = rec.addImage, oText = rec.text;
@@ -95,6 +96,31 @@ const path = require('path');
     const r = await window.__render('ART.16 | Corridor', 300, 800);
     const plan = r.imgs[0], el = r.imgs[r.imgs.length - 1];
     if (Math.abs((el.y + el.h) - (plan.y + plan.h)) > 0.5) throw new Error('moved without a floor to go by');
+  });
+
+  // 19.41: the RIGHT WALL, not the picture's edge, sits on the right safety guide, and the
+  // Elevation caption ends on that wall line.
+  // Drawn right-aligned, so the recorded x IS where the caption ends.
+  const caption = (r) => { const t = r.texts.find(t => t.s === 'Elevation'); if (!t) throw new Error('no Elevation caption'); return t.x; };
+  await check('EXACT REQUEST: the right wall lines up with the right safety guide', async () => {
+    const SR = window.__SR();
+    // 0.995: tick ends only (most walls); 0.985: a figure just past the wall (ART.10),
+    // which needs a slight shrink to fit its overhang in the margin.
+    for (const f of [0.995, 0.985]) {
+      const r = await window.__render('ART.1 | Small Banquette 104 - North', 1233, 600, 0.98, f);
+      const el = r.imgs[r.imgs.length - 1];
+      const wallR = el.x + el.w * f;
+      if (Math.abs(wallR - SR.R) > 0.5) throw new Error('wall at ' + wallR.toFixed(2) + ' (frac ' + f + '), guide at ' + SR.R.toFixed(2));
+      if (Math.abs(caption(r) - wallR) > 0.6) throw new Error('caption ends at ' + caption(r).toFixed(2) + ', wall at ' + wallR.toFixed(2));
+    }
+  });
+
+  await check('a figure standing well past the wall keeps the drawing on the page (no shift), caption still on the wall', async () => {
+    const SR = window.__SR();
+    const r = await window.__render('ART.1 | Small Banquette 104 - North', 1233, 600, 0.98, 0.8);
+    const el = r.imgs[r.imgs.length - 1];
+    if (el.x + el.w > SR.R + 0.5) throw new Error('the drawing was pushed past the guide by ' + (el.x + el.w - SR.R).toFixed(1) + 'pt');
+    if (Math.abs(caption(r) - (el.x + el.w * 0.8)) > 0.6) throw new Error('caption not on the wall line');
   });
 
   const failed = results.filter(r => !r.ok);

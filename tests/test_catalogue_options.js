@@ -888,8 +888,11 @@ const path = require('path');
       const b = fnBody('_drawInstallGuidePage');
       const centred = b.split('ex0 + ((SR.R - ex0) - ew) / 2').length - 1;
       if (centred > 0) throw new Error(centred + ' branches still centre the elevation');
-      const anchored = b.split('Math.max(ex0, SR.R - ew)').length - 1;
+      // 19.41: both branches place through ONE helper, which anchors right (and then
+      // stands the right wall on the guide); count the calls, and read the anchor there.
+      const anchored = b.split('_igPlaceElev(cap, ew0, eh0, ex0').length - 1;
       if (anchored !== 2) throw new Error(anchored + ' branches anchor right; expected 2');
+      if (fnBody('_igPlaceElev').indexOf('Math.max(ex0, SR.R - ew)') < 0) throw new Error('the shared placement no longer anchors right');
     });
 
     __check('the letter legend is THREE independent lines', () => {
