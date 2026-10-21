@@ -3527,3 +3527,7 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 /* My guides / All (19.53): two half-width switches on one row. */
 .elev-guides-master { display: flex; gap: 6px; margin-top: 6px; }
 .elev-guides-master > .action-btn { flex: 1 1 0; min-width: 0; width: auto; height: 26px; font-size: var(--fs-60); letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+/* FLOOR PLAN LINE TOOL (19.55): the tip under the loupe, and a selected line's end handles. */
+.fp-tip { position: fixed; z-index: 4000; pointer-events: none; max-width: 240px; padding: 6px 9px; border-radius: var(--r-6); background: rgba(20,20,22,0.92); color: #fff; font-size: var(--fs-65); line-height: 1.35; box-shadow: 0 3px 12px rgba(0,0,0,0.35); }
+.fp-line-end { width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: #fff; border: 2px solid var(--selected); box-sizing: border-box; cursor: move; z-index: 6; }

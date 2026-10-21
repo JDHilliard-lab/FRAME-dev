@@ -2172,6 +2172,17 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_elevGuideVis`, NOT in `_CAP_BASE_BOXES`); the layer starts `display:block`, and arming the
   Lines tool shows it.
 
+- **A FLOOR PLAN WALL LINE CAN BE MOVED (19.55, `_fpSelLine`, `_fpWallLinesPaint`, `_fpLineDragStart`,
+  `_fpLineNudge`).** The plan's lines are painted by ONE function from `_fpLinePaintCtx` (svg, wrap,
+  level, S), which is NOT gated on isConnected (the overlay is built before the page is attached;
+  a gate drew nothing). With no tool armed it adds `[data-fp-hit]` click targets on the STORED
+  segments (`_fpStoredSegs`; a diptych is one stored run) and, for the selected line, a highlight
+  and `.fp-line-end` handles. Drags apply from the mousedown state (no drift), one undo; arrows go
+  through a capture-phase keydown (floor plan page only), one undo per burst (`FP_LINE_NUDGE_MS`).
+  The rail's selected-page mirror CLONES these (no listeners): a probe must query `#dsCenter`.
+  The loupe draws `#dsFpLoupeMark` (the stroke as a square at the landing point, `_fpLineDrawW` x
+  `FP_LOUPE_ZOOM`, and the line while drawing) and `#dsFpTip` (`_fpLineTipText`); hide both together.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

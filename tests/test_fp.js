@@ -189,7 +189,8 @@ const fs = require('fs');
       // others. A call site that hardcodes its own number is how the preview starts
       // lying about the PDF, so each one is pinned by name.
       const sites = [
-        ['the Deck Studio centre (SVG)', "ln.setAttribute('stroke-opacity'"],
+        // 19.55: drawn by _fpWallLinesPaint (lines can be selected and moved), same alpha.
+        ['the Deck Studio centre (SVG)', "'stroke-opacity': String(FP_WALL_LINE_ALPHA)"],
         ['the rail thumbnail (HTML)', "opacity:' + FP_WALL_LINE_ALPHA"],
         ['the floorplan key page (doc.line)', '_fpDocLineAlpha(doc, FP_WALL_LINE_ALPHA)'],
         ['a canvas composite', 'x.globalAlpha = FP_WALL_LINE_ALPHA']
