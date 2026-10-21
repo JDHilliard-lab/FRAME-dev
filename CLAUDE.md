@@ -2098,6 +2098,17 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **GROUP A/B/C ART IS RIGHT-ANCHORED (19.45)**: the as-hung branch of `_drawSpecSetPageBody` puts
   the group's right edge on `regX + regW`, the elevation thumbnail's right edge.
 
+- **A THUMBNAIL ROW FOLLOWS THE BOX, NEVER THE DRAWING (19.46).** The floorplan square and the
+  frame strip take the elevation BOX's height: per-piece `_elevDrawn = {y: boxY0, h: boxH}` with
+  the box from `_specThumbBox` (4:3 at the template width, bottom on the template line); group
+  `_thumbBox.th = thH` (band height). A long wall draws shorter inside. `test_spec_thumb_size`.
+- **THE WALL IS ALWAYS IN THE CAPTURE CROP (19.46):** `boxes.wall` from `exportElevSVG`, first in
+  `_CAP_BASE_BOXES`. The wall outline is an op with no guide, so a crop that only reached the
+  wall through a spanning guide (the hang line) mis-scaled every hang-off wall.
+- **Canvas context art is weighted for the PRINTED size** (`ctxLinePx = cw / 260` in
+  `renderElevationToCanvas`), and loads through `_loadImgRaw` (`_loadImg`'s cache keys on
+  length + tail, identical for every block SVG).
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.
