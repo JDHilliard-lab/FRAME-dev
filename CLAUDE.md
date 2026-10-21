@@ -2151,6 +2151,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   wrap too), so a preview's own high z (element pages' z 8000 overlay) stays inside it. Anything
   new in the rail stays below `RAIL_BAR_Z`; `test_rail_bar_on_top` renders the rail and checks.
 
+- **PROJECT HANGS CARRY `proj` (19.51).** `asDrawn` presets are grouped into one picker section per
+  `p.proj` (absent = 'Ford Engineering Lab', the original set); Ford Salt Lake City is `slc-*`, made
+  from its install file (2 and 3 piece hangs too, incl. codes that hang together like 12 / 13 / 14).
+  Tests filter the Engineering Lab ones as `asDrawn && !proj`.
+- **NO CATEGORY READS AS A "?" (19.51, `.fp-cat-wrap` / `.fp-cat-q`).** The Items row's chip sits in a
+  wrapper so a "?" can overlay it (pointer-events none); `FP_ITEM_COLS.cat` is 50 for the CATEGORY head.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

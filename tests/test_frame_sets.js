@@ -86,7 +86,8 @@ check('EXACT ASK: each salon mixes mats, no mat, and float on deckled paper, in 
 
 // 19.30: THE FORD ENGINEERING LAB HANGS, as built in its V7 installation guide.
 check('EXACT ASK: the Ford Engineering Lab salon hangs are in the set library, as drawn', () => {
-  const ford = fx.presets.filter(p => p.asDrawn);
+  // 19.51: other projects' hangs carry `proj`; the Engineering Lab ones predate it.
+  const ford = fx.presets.filter(p => p.asDrawn && !p.proj);
   if (ford.length < 10) throw new Error('only ' + ford.length + ' project hangs');
   const want = ['fel-cor-003', 'fel-cor-015', 'fel-caf-001', 'fel-hal-001', 'fel-ent-002'];
   want.forEach(k => { if (!ford.find(p => p.key === k)) throw new Error('missing ' + k); });
@@ -113,6 +114,24 @@ check('EXACT ASK: the Ford Engineering Lab salon hangs are in the set library, a
   if (c3.n !== 11 || Math.abs(W - 245) > 3 || Math.abs(H - 47) > 2) throw new Error('fel-cor-003 is ' + c3.n + ' pieces, ' + W + ' x ' + H);
 });
 
+// 19.51: THE FORD SALT LAKE CITY HANGS, from its install file, in their own picker section.
+check('EXACT ASK: the Ford Utah frame sets are in the library, as drawn, with their frames', () => {
+  const slc = fx.presets.filter(p => p.asDrawn && p.proj === 'Ford Salt Lake City');
+  if (slc.length < 8) throw new Error('only ' + slc.length + ' Salt Lake City hangs');
+  ['slc-3', 'slc-12-14', 'slc-15', 'slc-37'].forEach(k => { if (!slc.find(p => p.key === k)) throw new Error('missing ' + k); });
+  slc.forEach(p => {
+    if (p.frames.length !== p.n || p.n < 2) throw new Error(p.key + ' has ' + p.frames.length + ' frames for n ' + p.n);
+    const x0 = Math.min.apply(null, p.frames.map(f => f.x)), y0 = Math.min.apply(null, p.frames.map(f => f.y));
+    if (x0 !== 0 || y0 !== 0) throw new Error(p.key + ' does not start at its bottom-left');
+    p.frames.forEach(f => { if (!(f.w > 0 && f.h > 0) || ['mat', 'plain', 'float'].indexOf(f.s) < 0 || !/^MICH-/.test(f.f || '')) throw new Error(p.key + ' frame ' + JSON.stringify(f)); });
+    gaps(p.frames).forEach(g => { if (g.overlap || g.gap < 1 - 1e-9) throw new Error(p.key + ': ' + g.i + '/' + g.j + ' gap ' + g.gap); });
+  });
+  // ART.12 / 13 / 14 as built: 29.75 + 48 (float) + 30 wide, 4in apart.
+  const t = slc.find(p => p.key === 'slc-12-14');
+  if (t.frames[1].s !== 'float' || t.frames[1].x !== 33.75 || t.frames[2].x !== 85.75) throw new Error('slc-12-14: ' + JSON.stringify(t.frames));
+  const labels = slc.map(p => p.label);
+  if (new Set(labels).size !== labels.length) throw new Error('two Salt Lake City hangs share a label');
+});
 check('a Ford hang applies like any set: lettered pieces on a wall in its shape', () => {
   fresh();
   fx.add('framed', 1);   // ART.1
@@ -166,6 +185,9 @@ check('EXACT ASK: the frames button opens a picker of drawn arrangements, not a 
   if (tiles.length !== want) throw new Error(tiles.length + ' tiles, want ' + want);
   tiles.forEach(t => { if (!t.querySelector('svg rect')) throw new Error('tile ' + t.getAttribute('data-set') + ' draws nothing'); });
   if (!doc.querySelector('#frameSetPicker [data-set="fel-hal-001"]')) throw new Error('no Hallway 001 tile');
+  // 19.51: one section per project.
+  if (!doc.querySelector('#frameSetPicker [data-set="slc-12-14"]')) throw new Error('no Ford Salt Lake City tile');
+  if ((doc.getElementById('frameSetPicker').textContent || '').indexOf('Ford Salt Lake City') < 0) throw new Error('no Ford Salt Lake City section');
   if (!doc.querySelector('#frameSetPicker .fsp-tile.on[data-set="n1"]')) throw new Error('the current set (single) is not ringed');
   if (!doc.querySelector('#frameSetPicker [data-modal-close]')) throw new Error('no close control');
   ov.remove();
@@ -236,12 +258,28 @@ check('EXACT ASK: the Items row is #, Item code, Cat, Line (a pen), Frames (a fr
   const t = doc.createElement('div'); doc.body.appendChild(t);
   fx.panel(t, { level: 0, kind: 'floorplan' });
   const head = Array.from(t.querySelectorAll('.fp-item-head span')).map(s => s.textContent).filter(Boolean).join('|');
-  if (head !== '#|Item code|Cat|Line|Frames') throw new Error('header: ' + head);
+  // 19.51: CAT reads CATEGORY now, in a column wide enough for it.
+  if (head !== '#|Item code|Category|Line|Frames') throw new Error('header: ' + head);
   const pen = t.querySelector('.fp-line-btn'), frm = t.querySelector('.fp-frames-btn');
   if (!pen || !pen.querySelector('svg path')) throw new Error('no pen button');
   if (!frm || !frm.querySelector('svg rect')) throw new Error('no frame button');
   if (t.querySelectorAll('select').length !== 2) throw new Error('row still carries a line-type select');   // type picker + category chip
   t.remove();
+});
+
+check('EXACT ASK: a code with no category shows a ? on its chip; one with a category does not', () => {
+  fresh();
+  fx.add('framed', 1);
+  const t = doc.createElement('div'); doc.body.appendChild(t);
+  fx.panel(t, { level: 0, kind: 'floorplan' });
+  if (t.querySelector('.fp-cat-q')) { t.remove(); throw new Error('a Framed Art code shows the ?'); }
+  fx.rows.forEach(r => { r.category = ''; });
+  t.innerHTML = ''; fx.panel(t, { level: 0, kind: 'floorplan' });
+  const q = t.querySelector('.fp-cat-wrap .fp-cat-q');
+  const sel = t.querySelector('.fp-cat-wrap select.fp-cat-chip');
+  t.remove();
+  if (!q || q.textContent !== '?') throw new Error('no ? on a code with no category');
+  if (!sel) throw new Error('the chip is not inside its wrapper');
 });
 
 check('EXACT ASK: the pen opens the line styles, Breaker included; picking one arms drawing', () => {

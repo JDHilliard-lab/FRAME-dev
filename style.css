@@ -3520,3 +3520,6 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
    with its content, and the sticky header stopped below it, so whatever scrolled up
    showed in that band between the tabs and the header. The space is a spacer now. */
 #dsToolsPageBody::before { content: ''; display: block; height: 16px; }
+
+/* A placement with no category shows a "?" on its chip (19.51, .fp-cat-q). */
+.fp-cat-q { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; color: #fff; font-size: var(--fs-75); font-weight: 800; line-height: 1; }
