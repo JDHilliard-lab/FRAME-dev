@@ -2109,6 +2109,25 @@ run but passes alone is usually load timing: rerun before chasing it.
   `renderElevationToCanvas`), and loads through `_loadImgRaw` (`_loadImg`'s cache keys on
   length + tail, identical for every block SVG).
 
+- **FREE LINES ARE `elev.marks` (19.47, `renderMarks`, `toggleMarkTool`, key L, `#markToolBtn`).**
+  `{id, a, b, arrow: none|end|both, dash, label}`; ends are measure-tool anchors (`stripAnchor` /
+  `resolveStoredAnchor`), so they follow frames and blocks and free ends are inches. Drawn in
+  `#mark-layer` (always shown, not a guide): the stroke is a `data-svg-passthrough` `<svg>` (vector,
+  angled), the LABEL is a plain text element (an svg `<text>` inside a passthrough is walked and
+  prints twice). Hit stroke, end handles and the `.mark-pop` strip are `data-export-skip`.
+  Registered in `annotationLayers`, the bounds list, `_CAP_BASE_BOXES` and `CAT_WALL_DEEP` (skipped on
+  the layout hop like customLines). One line then back to Select, selected. Delete/Escape branches sit
+  before the custom-line ones; the frame Delete returns while `selectedMark`.
+- **KEEP CLEAR (19.47, `_ctxAvoid`, `_elevClashes`, `renderClashMarks`).** `b.avoid` boolean wins, else
+  the preset's `avoid` (only the Keep clear library group): existing thermostats did not change.
+  Hatch kind `'avoid'` in `_ctxFillOps` (the DOM fill the export reuses) and in `_ctxDrawToCanvas`.
+  Clash marks are screen-only (`data-export-skip` + html2canvas-ignore); Preflight warns with a Wall
+  button (`it.wall` without `it.set`).
+- **NOTES FOR ONE PAGE LIVE ON THE WALL (19.47):** `elev.notesOff` ('std:key' / 'c:id') and
+  `elev.wallNote`, read by `_installNoteLines(elev)`; panel `_dsPageNotesInto` (from
+  `_dsInstallNotesInto`, wall = `elevations[desc._elevIdx]`). Both are EXCLUDED from
+  `_elevCaptureSignature` (text beside the drawing must not recapture every wall).
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

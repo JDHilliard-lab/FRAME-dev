@@ -3486,3 +3486,19 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .elev-wall-guides .ewg-sub { font-size: var(--fs-60); color: var(--text-muted); margin: 6px 0 4px; }
 .elev-wall-guides .ewg-chips { display: flex; flex-wrap: wrap; gap: 4px; }
 .elev-wall-guides .ewg-note { font-size: var(--fs-60); color: var(--text-muted); line-height: 1.4; margin-top: 4px; }
+
+/* FREE LINES (19.47, renderMarks): the settings strip under a selected line. */
+.mark-pop { width: max-content; max-width: 360px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 4px; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-6); box-shadow: 0 4px 14px rgba(0,0,0,0.25); white-space: nowrap; }
+.mark-pop .mark-pop-label { width: 140px; height: 22px; font-size: var(--fs-65); padding: 0 6px; box-sizing: border-box; }
+.mark-pop select { height: 22px; font-size: var(--fs-60); }
+.mark-pop .gz-btn { height: 22px; }
+/* KEEP CLEAR (19.47): a frame over a keep-clear block, on screen only. */
+.elev-clash { position: absolute; border: 2px dashed var(--btn-danger); background: rgba(211,47,47,0.12); pointer-events: none; z-index: 5; box-sizing: border-box; }
+.elev-clash-tag { position: absolute; left: 0; top: 100%; margin-top: 2px; white-space: nowrap; font-size: var(--fs-55); font-weight: 700; color: #fff; background: var(--btn-danger); padding: 1px 4px; border-radius: var(--r-2); }
+.wall-clash-text { color: var(--btn-danger); }
+/* THIS PAGE notes (19.47, _dsPageNotesInto). */
+.ds-pgnotes-head { display: flex; align-items: center; gap: 4px; font-size: var(--fs-55); font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; color: var(--text-muted); margin: 10px 0 4px; }
+.ds-pgnotes-row { display: flex; align-items: center; gap: 6px; font-size: var(--fs-60); color: var(--text-main); padding: 2px 4px; cursor: pointer; }
+.ds-pgnotes-row span { flex: 1 1 40px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ds-pgnotes-empty { font-size: var(--fs-55); color: var(--text-muted); }
+.ds-pgnotes-text { width: 100%; min-height: 40px; resize: vertical; box-sizing: border-box; font-size: var(--fs-60); line-height: 1.35; padding: 5px; margin-top: 4px; border: 1px solid var(--border-color); border-radius: var(--r-4); background: var(--bg-input); color: var(--text-main); }

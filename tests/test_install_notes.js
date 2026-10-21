@@ -565,7 +565,8 @@ const path = require('path');
       // opinion: the tick list says a note is ON and the page was the only other place
       // that knew. Nothing in the chip means nothing prints.
       const b = fnBody('_dsInstallNotesInto');
-      if (b.indexOf('_installNoteLines()') < 0) throw new Error('the panel does not resolve the printed lines');
+      // 19.47: resolved for the page's own wall, so per-page notes show too.
+      if (b.indexOf('_installNoteLines(_pgWall)') < 0) throw new Error('the panel does not resolve the printed lines');
       if (b.indexOf('Prints on the page') < 0) throw new Error('there is no preview of what prints');
       if (b.indexOf("background:#ffffff") < 0) throw new Error('the preview is not on white, so a pale ink would still look fine');
     });
