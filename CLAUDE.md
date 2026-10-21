@@ -2157,6 +2157,8 @@ run but passes alone is usually load timing: rerun before chasing it.
   Tests filter the Engineering Lab ones as `asDrawn && !proj`.
 - **NO CATEGORY READS AS A "?" (19.51, `.fp-cat-wrap` / `.fp-cat-q`).** The Items row's chip sits in a
   wrapper so a "?" can overlay it (pointer-events none); `FP_ITEM_COLS.cat` is 50 for the CATEGORY head.
+  19.52: the chip is a `FP_CAT_CHIP` (22px) square, the height of the line / frames buttons, so the
+  three share top and bottom and the row's 5px gap; it need not sit centred under its heading.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

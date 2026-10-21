@@ -3522,4 +3522,4 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 #dsToolsPageBody::before { content: ''; display: block; height: 16px; }
 
 /* A placement with no category shows a "?" on its chip (19.51, .fp-cat-q). */
-.fp-cat-q { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; color: #fff; font-size: var(--fs-75); font-weight: 800; line-height: 1; }
+.fp-cat-q { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; color: #fff; font-size: var(--fs-70); font-weight: 800; line-height: 1; }

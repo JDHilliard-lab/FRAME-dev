@@ -280,6 +280,10 @@ check('EXACT ASK: a code with no category shows a ? on its chip; one with a cate
   t.remove();
   if (!q || q.textContent !== '?') throw new Error('no ? on a code with no category');
   if (!sel) throw new Error('the chip is not inside its wrapper');
+  // 19.52: a square as tall as the line and frames buttons (22px), the select filling it.
+  const ws = q.parentElement.style;
+  if (ws.width !== '22px' || ws.height !== '22px') throw new Error('chip is not a 22px square: ' + ws.width + ' x ' + ws.height);
+  if (sel.style.height !== '100%') throw new Error('the select does not fill its square: ' + sel.style.height);
 });
 
 check('EXACT ASK: the pen opens the line styles, Breaker included; picking one arms drawing', () => {
