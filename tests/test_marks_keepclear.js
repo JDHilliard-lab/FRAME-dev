@@ -112,7 +112,11 @@ const path = require('path');
       if (S.slice(a, S.indexOf('];', a)).indexOf("'mark-layer'") < 0) throw new Error('not in annotationLayers (missing from the PDF)');
       const b = S.indexOf("'group-dim-layer','figure-dim-layer','glazing-dim-layer','context-layer'");
       if (S.slice(b, b + 200).indexOf("'mark-layer'") < 0) throw new Error('not in the artboard bounds (cropped off)');
-      if (_CAP_BASE_BOXES.indexOf('mark-layer') < 0) throw new Error('not in the capture crop');
+      // 19.53: free lines are a GUIDE (All guides off hides them), so the crop takes them only
+      // while they show, like every other guide.
+      if (!_ELEV_GUIDE_LAYERS.some(g => g[0] === 'mark-layer')) throw new Error('free lines are not a guide');
+      if (!('mark-layer' in _elevGuideVis())) throw new Error('pages cannot tell whether free lines show');
+      if (_CAP_BASE_BOXES.indexOf('mark-layer') >= 0) throw new Error('hidden free lines would still widen the crop');
       if (CAT_WALL_DEEP.indexOf('marks') < 0) throw new Error('catalogue options would not mirror them');
     });
 

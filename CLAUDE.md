@@ -2112,7 +2112,7 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **FREE LINES ARE `elev.marks` (19.47, `renderMarks`, `toggleMarkTool`, key L, `#markToolBtn`).**
   `{id, a, b, arrow: none|end|both, dash, label}`; ends are measure-tool anchors (`stripAnchor` /
   `resolveStoredAnchor`), so they follow frames and blocks and free ends are inches. Drawn in
-  `#mark-layer` (always shown, not a guide): the stroke is a `data-svg-passthrough` `<svg>` (vector,
+  `#mark-layer` (a guide since 19.53, Free lines button): the stroke is a `data-svg-passthrough` `<svg>` (vector,
   angled), the LABEL is a plain text element (an svg `<text>` inside a passthrough is walked and
   prints twice). Hit stroke, end handles and the `.mark-pop` strip are `data-export-skip`.
   Registered in `annotationLayers`, the bounds list, `_CAP_BASE_BOXES` and `CAT_WALL_DEEP` (skipped on
@@ -2159,6 +2159,15 @@ run but passes alone is usually load timing: rerun before chasing it.
   wrapper so a "?" can overlay it (pointer-events none); `FP_ITEM_COLS.cat` is 50 for the CATEGORY head.
   19.52: the chip is a `FP_CAT_CHIP` (22px) square, the height of the line / frames buttons, so the
   three share top and bottom and the row's 5px gap; it need not sit centred under its heading.
+
+- **TWO GUIDE MASTERS (19.53): `toggleMyElevGuides` (`#myGuidesToggle`) and `toggleAllElevGuides`
+  (`#allGuidesToggle`).** Turning guides off by EITHER remembers the state
+  (`editorialContent.elevGuidesMine`, `_elevGuidesRemember`); My guides on puts that back through
+  `_elevGuidesApply(st, true)` (the same apply the project-open restore uses, recorded); All on is
+  every guide. Labels say the next action (`_elevGuidesMasterSync`, from every toggle).
+  **Free lines are a guide now** (`mark-layer` in `_ELEV_GUIDE_LAYERS` + `#markLayerToggle`, in
+  `_elevGuideVis`, NOT in `_CAP_BASE_BOXES`); the layer starts `display:block`, and arming the
+  Lines tool shows it.
 
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop

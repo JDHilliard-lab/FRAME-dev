@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.52">
+    <link rel="stylesheet" href="style.css?v=19.53">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -769,6 +769,10 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 17 L17 3" stroke-width="1.6"/><path d="M2 14 L6 18 M5 11 L9 15 M8 8 L12 12 M11 5 L15 9" stroke-width="1.2"/></svg>
                                 <span class="lg-cap">Lines</span>
                             </button>
+                            <button class="layout-guide-btn toggle-status active" id="markLayerToggle" title="Free lines: show/hide the lines, centre lines and level lines drawn with the Lines tool" onclick="toggleElevLayer('mark-layer', this)">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 20 L19 5"/><path d="M12 5 h7 v7"/></svg>
+                                <span class="lg-cap">Free lines</span>
+                            </button>
                         </div>
                         </details>
                         <details class="lg-group" data-lg="labels" open><summary>Labels</summary>
@@ -822,10 +826,18 @@
                              one wall, not the deck: hang height, wall centre line, and a centre line
                              through a context block for art centred on furniture. -->
                         <div id="elevWallGuides" class="elev-wall-guides"></div>
-                        <button class="action-btn btn-secondary" id="allGuidesToggle" onclick="toggleAllElevGuides()" title="All guides on/off — flips every layout guide at once: labels, frame dims, spacing, person, hang guides, grid, centers, wall dims, group boxes, edge gaps, custom lines, image codes" style="width:100%; height:26px; margin-top:6px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:6px;">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
-                            All guides on / off
+                        <!-- TWO SWITCHES (19.53): MY GUIDES puts back exactly what was on (saved in the project);
+                             ALL turns every guide on or off. -->
+                        <div class="elev-guides-master">
+                        <button class="action-btn btn-secondary" id="myGuidesToggle" onclick="toggleMyElevGuides()" title="My guides on / off: hides every guide, then brings back exactly the ones you had on (remembered in the project)">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                            <span id="myGuidesLbl">My guides off</span>
                         </button>
+                        <button class="action-btn btn-secondary" id="allGuidesToggle" onclick="toggleAllElevGuides()" title="All guides on / off: every layout guide at once (labels, frame dims, spacing, person, hang guides, grid, centers, wall dims, group boxes, edge gaps, measure lines, free lines, image codes)">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+                            <span id="allGuidesLbl">All on</span>
+                        </button>
+                        </div>
                         <button class="action-btn btn-secondary" id="resetDimPosBtn" onclick="resetDimOffsets()" title="Reset any manually-dragged dimension lines back to their default positions" style="width:100%; height:26px; margin-top:6px; font-size:var(--fs-60); letter-spacing:0.3px; display:flex; align-items:center; justify-content:center; gap:6px;">
                             <svg class="svg-icon" viewBox="0 0 24 24" style="width:13px;height:13px;"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
                             RESET DIMENSION POSITIONS
@@ -977,7 +989,7 @@
                         <div id="od-layer" class="od-layer" style="z-index:32;"></div>
                         <div id="group-dim-layer" class="group-dim-layer" style="z-index:38;"></div>
                         <div id="custom-lines-layer" class="dim-layer" style="z-index:40;"></div>
-                        <div id="mark-layer" class="dim-layer" style="z-index:41;"></div>
+                        <div id="mark-layer" class="dim-layer" style="z-index:41; display:block;"></div>
                         <div id="label-layer" class="label-layer" style="z-index:42;"></div>
                         <!-- Scale-figure height dimension. Its own layer, ABOVE the
                              other dimension layers: inside #person-wrap it would be
@@ -2231,9 +2243,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.52';</script>
-<script src="templates.js?v=19.52"></script>
-<script src="app.js?v=19.52"></script>
+<script>window.FRAME_HTML_VERSION = '19.53';</script>
+<script src="templates.js?v=19.53"></script>
+<script src="app.js?v=19.53"></script>
 
 </body>
 </html>
