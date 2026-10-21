@@ -2145,6 +2145,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   sticky `.ds-tools-sticky` pins at the scrollport edge, and a padded top let scrolled content show
   in the band above it.
 
+- **THE RAIL'S PINNED BAR OUTRANKS THE RAIL (19.50, `#dsRailBar`, `RAIL_BAR_Z` = 20).** Cells' side
+  + / - buttons are z 7; at z 5 they scrolled over the bar and took the rebuild button's click
+  (added/removed pages). Every thumbnail box is `isolation:isolate` (and the selected-page mirror
+  wrap too), so a preview's own high z (element pages' z 8000 overlay) stays inside it. Anything
+  new in the rail stays below `RAIL_BAR_Z`; `test_rail_bar_on_top` renders the rail and checks.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.
