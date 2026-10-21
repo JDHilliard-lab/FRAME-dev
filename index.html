@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.48">
+    <link rel="stylesheet" href="style.css?v=19.49">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -1050,9 +1050,9 @@
             <div style="padding:12px 18px; border-bottom:1px solid var(--border-color); display:flex; align-items:center; gap:10px;">
                 <h3 style="margin:0; font-size:var(--fs-105); color:var(--text-strong);">Deck Studio</h3>
                 <div class="frame-tabs" style="margin-left:8px;">
-                    <button id="dsTabBtnProject" onclick="_dsTab('project')" class="frame-tab active">Project</button>
-                    <button id="dsTabBtnPages" onclick="_dsTab('pages')" class="frame-tab">Pages</button>
-                    <button id="dsTabBtnTemplates" onclick="_dsOpenTemplateEditor()" class="frame-tab">Templates</button>
+                    <button id="dsTabBtnProject" onclick="_dsTab('project')" class="frame-tab frame-tab-icon active" title="Project: name, client, units and which pages are in the deck" aria-label="Project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></button>
+                    <button id="dsTabBtnPages" onclick="_dsTab('pages')" class="frame-tab frame-tab-icon" title="Pages: every page of the deck, in order" aria-label="Pages"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="13" height="16" rx="1"/><path d="M4 7v13a1 1 0 0 0 1 1h11"/></svg></button>
+                    <button id="dsTabBtnTemplates" onclick="_dsOpenTemplateEditor()" class="frame-tab frame-tab-icon" title="Templates: edit the layout templates" aria-label="Templates"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M9 9v11"/></svg></button>
                     <button id="dsTabBtnStyles" onclick="_dsTab('styles')" class="frame-tab" style="display:none;">Styles</button>
                 </div>
                 <span style="flex:1;"></span>
@@ -1153,11 +1153,11 @@
                     <div id="dsDockRightSlot" class="ds-dock-slot ds-dock-slot-right" style="display:none;"></div>
                     <div id="dsTools" style="width:280px; flex-shrink:0; min-height:0; border-left:1px solid var(--border-color); display:flex; flex-direction:column;">
                         <div id="dsToolsSubTabBar" class="frame-tabs fit" style="flex-shrink:0; padding:10px 10px 0;">
-                            <button id="dsToolsBtnPage" onclick="_dsToolsTab('page')" class="frame-tab active">Page</button>
-                            <button id="dsToolsBtnTemplates" onclick="_dsToolsTab('templates')" class="frame-tab">Templates</button>
-                            <button id="dsToolsBtnLayers" onclick="_dsToolsTab('layers')" class="frame-tab">Layers</button>
+                            <button id="dsToolsBtnPage" onclick="_dsToolsTab('page')" class="frame-tab frame-tab-icon active" title="Page: settings for the selected page" aria-label="Page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg></button>
+                            <button id="dsToolsBtnTemplates" onclick="_dsToolsTab('templates')" class="frame-tab frame-tab-icon" title="Templates: apply a layout to this page" aria-label="Templates"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M9 9v11"/></svg></button>
+                            <button id="dsToolsBtnLayers" onclick="_dsToolsTab('layers')" class="frame-tab frame-tab-icon" title="Layers: everything on this page" aria-label="Layers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 8l10 5 10-5z"/><path d="M2 13l10 5 10-5"/><path d="M2 18l10 5 10-5" opacity="0.55"/></svg></button>
                         </div>
-                        <div id="dsToolsPageBody" style="flex:1; overflow-y:auto; padding:16px;"><!-- per-page tools --></div>
+                        <div id="dsToolsPageBody" style="flex:1; overflow-y:auto; padding:0 16px 16px;"><!-- per-page tools --></div>
                         <div id="dsToolsTemplatesBody" style="flex:1; min-height:0; display:none; flex-direction:column;"><!-- compact template browser --></div>
                         <div id="dsToolsLayersBody" style="flex:1; min-height:0; overflow-y:auto; padding:10px; display:none;"><!-- layers list --></div>
                     </div>
@@ -2231,9 +2231,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.48';</script>
-<script src="templates.js?v=19.48"></script>
-<script src="app.js?v=19.48"></script>
+<script>window.FRAME_HTML_VERSION = '19.49';</script>
+<script src="templates.js?v=19.49"></script>
+<script src="app.js?v=19.49"></script>
 
 </body>
 </html>

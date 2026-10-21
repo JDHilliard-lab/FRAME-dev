@@ -2138,6 +2138,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   `data-export-skip` children BEFORE `emitEl` and does not descend; emitEl alone skipped only
   the element, so a selected line's settings strip and the clash tag printed.
 
+- **DECK STUDIO TABS ARE ICONS (19.49, `.frame-tab-icon`).** `dsTabBtnProject/Pages/Templates` and
+  `dsToolsBtnPage/Templates/Layers` carry an svg (the `PHONE_DECK_TABS` glyphs, a page, layers) and
+  their name as `title` + `aria-label`; code only toggles `.active`, never their text.
+  **`#dsToolsPageBody` has NO top padding** (`padding:0 16px 16px` + a 16px `::before` spacer): the
+  sticky `.ds-tools-sticky` pins at the scrollport edge, and a padded top let scrolled content show
+  in the band above it.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.
