@@ -49,6 +49,33 @@ const path = require('path');
       toggleMyElevGuides();                  // mine back
       if (!L('guide-layer') || L('grid-layer')) throw new Error('not the selection');
     });
+    __check('EXACT BUG: All off, All on, All off, then My guides on still brings back MY selection', () => {
+      pick();
+      toggleAllElevGuides();   // All off (remembers the selection)
+      toggleAllElevGuides();   // All on  (everything)
+      toggleAllElevGuides();   // All off (must NOT remember "everything" as mine)
+      toggleMyElevGuides();    // My guides on
+      if (L('grid-layer') || L('label-layer') || L('od-layer')) throw new Error('My guides on brought back everything: the All on state overwrote the selection');
+      if (!L('guide-layer') || !L('mark-layer')) throw new Error('the selection did not come back');
+    });
+    __check('My guides off after All on keeps the earlier selection too', () => {
+      pick();
+      toggleMyElevGuides();    // off, remembers
+      toggleAllElevGuides();   // All on
+      toggleMyElevGuides();    // My guides off: everything was on by All, not by choice
+      toggleMyElevGuides();    // on
+      if (L('grid-layer')) throw new Error('grid came back');
+      if (!L('guide-layer')) throw new Error('selection lost');
+    });
+    __check('a guide switched by hand after All on IS the new selection', () => {
+      pick();
+      toggleAllElevGuides(); toggleAllElevGuides();          // off, then All on
+      toggleElevLayer('grid-layer', document.getElementById('gridToggle'));   // grid off by hand: a real choice
+      toggleMyElevGuides();    // off, remembers this hand-made state
+      toggleMyElevGuides();    // on
+      if (L('grid-layer')) throw new Error('grid back though it was switched off by hand');
+      if (!L('label-layer')) throw new Error('the hand-made selection (all but grid) was not remembered');
+    });
     __check('All on is still every guide', () => {
       _elevGuidesAllSet(false);
       toggleAllElevGuides();

@@ -2165,6 +2165,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   (`editorialContent.elevGuidesMine`, `_elevGuidesRemember`); My guides on puts that back through
   `_elevGuidesApply(st, true)` (the same apply the project-open restore uses, recorded); All on is
   every guide. Labels say the next action (`_elevGuidesMasterSync`, from every toggle).
+  **19.54: "everything" is never remembered** (`_elevGuidesFromAll`, set AFTER All on's own set,
+  cleared by any single-guide toggle and by My guides on), or All on then All off overwrote the
+  selection with every guide.
   **Free lines are a guide now** (`mark-layer` in `_ELEV_GUIDE_LAYERS` + `#markLayerToggle`, in
   `_elevGuideVis`, NOT in `_CAP_BASE_BOXES`); the layer starts `display:block`, and arming the
   Lines tool shows it.
