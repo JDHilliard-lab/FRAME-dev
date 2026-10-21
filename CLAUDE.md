@@ -2183,6 +2183,22 @@ run but passes alone is usually load timing: rerun before chasing it.
   The loupe draws `#dsFpLoupeMark` (the stroke as a square at the landing point, `_fpLineDrawW` x
   `FP_LOUPE_ZOOM`, and the line while drawing) and `#dsFpTip` (`_fpLineTipText`); hide both together.
 
+- **A LAYOUT SWITCH KEEPS THE PREVIEWS (19.56).** `switchMode` must NOT call `_dsClearBuiltAll` (it wiped
+  thumbnails AND the frame mockups: 16 to 23 s to come back to a layout). It parks the cache
+  (`_dsParkThumbs` / `_dsUnparkThumbs`, `_dsThumbParked`, valid only while `_dsParkedGen === _dsEditGen`,
+  gen set AFTER the switch's own push), clears only `_dsBuilt`. Thumbnail keys already carry layout + ticks.
+- **THE PAGE RAIL REBUILD IS CHEAP ONLY IF NOTHING IS RE-PARSED (19.56).** Chrome loads a `data:` <img>
+  synchronously on insert and parses markup character by character: cached thumbnails go through
+  `_dsThumbImgInto` (one kept <img> per data URL, `_dsRailGen` guards a second use in one rebuild),
+  markup previews (element pages, mocks) through `_dsHtmlInto` (kept by markup, swept when a rebuild
+  did not use them) after `_dsThumbSlim` swaps photos over `DS_SLIM_MIN` for a `_imgDownsized` copy.
+  Never `innerHTML = '<img src="' + dataUrl ...` in the rail or centre.
+- **A PREVIEW TAKES THE CANVAS (19.56, `_docImgSrc(doc, cnv, mime, q)`)**: a `CanvasPdfRec` gets the canvas,
+  jsPDF the encoded string (unchanged). Spec-page image sites go through it. `_loadImg` caches FILE
+  paths in `_imgUrlCache` (not `blob:`), apart from the 40-entry data-URL cache.
+- **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
+  self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.
