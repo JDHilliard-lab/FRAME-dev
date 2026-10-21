@@ -2128,6 +2128,16 @@ run but passes alone is usually load timing: rerun before chasing it.
   `_dsInstallNotesInto`, wall = `elevations[desc._elevIdx]`). Both are EXCLUDED from
   `_elevCaptureSignature` (text beside the drawing must not recapture every wall).
 
+- **LINE KINDS (19.48, `MARK_KINDS`, `markKind`, `openMarkKinds` flyout `#markKindList`).** `m.kind`:
+  `line` (absent = line), `cl` (one x-anchor, full height, label CL at the top inside the wall),
+  `clmid` (two x-anchors, CL at the midpoint), `level` (one y-anchor, full width). The non-line
+  kinds store ONLY anchors; `_markEnds(m)` derives the ends from the wall every draw. One-axis
+  snapping is `_markAxisAt` / `_markAxisTargets` (centres and edges of frames, blocks, wall;
+  `MARK_SNAP_PX`, a centre wins a near tie). L arms the last kind; picking a kind always arms.
+- **AN EXPORT-SKIPPED ELEMENT TAKES ITS SUBTREE WITH IT (19.48).** `exportElevSVG`'s `walk` skips
+  `data-export-skip` children BEFORE `emitEl` and does not descend; emitEl alone skipped only
+  the element, so a selected line's settings strip and the clash tag printed.
+
 ## Design principles used here
 - Prefer dynamic behaviour over manual controls: if a layout element won't fit, drop
   it automatically rather than exposing a control that can produce broken output.

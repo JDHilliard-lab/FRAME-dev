@@ -3502,3 +3502,11 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 .ds-pgnotes-row span { flex: 1 1 40px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ds-pgnotes-empty { font-size: var(--fs-55); color: var(--text-muted); }
 .ds-pgnotes-text { width: 100%; min-height: 40px; resize: vertical; box-sizing: border-box; font-size: var(--fs-60); line-height: 1.35; padding: 5px; margin-top: 4px; border: 1px solid var(--border-color); border-radius: var(--r-4); background: var(--bg-input); color: var(--text-main); }
+
+/* LINES flyout (19.48, openMarkKinds): the four kinds of free line. */
+.mark-kind-list { position: absolute; left: calc(100% + 10px); top: -6px; z-index: 200; width: 260px; box-sizing: border-box; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: var(--r-8); box-shadow: 0 10px 30px rgba(0,0,0,0.4); padding: 6px; }
+.mark-kind { display: block; width: 100%; text-align: left; padding: 6px 8px; border: none; border-radius: var(--r-6); background: transparent; color: var(--text-main); cursor: pointer; }
+.mark-kind:hover { background: var(--btn-hover); }
+.mark-kind.active { background: var(--bg-subpanel); box-shadow: inset 3px 0 0 var(--ui-active); }
+.mark-kind-name { display: block; font-size: var(--fs-70); font-weight: 700; }
+.mark-kind-help { display: block; font-size: var(--fs-60); color: var(--text-muted); line-height: 1.35; margin-top: 2px; white-space: normal; }
