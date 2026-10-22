@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.56">
+    <link rel="stylesheet" href="style.css?v=19.57">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -406,7 +406,7 @@
                                     </div>
                                     <div style="display:flex; gap:4px; margin-bottom:4px;">
                                         <input type="text" id="m1_color" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:var(--fs-65); height:22px; padding:2px 4px; min-width:0;">
-                                        <input type="color" id="m1_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()">
+                                        <input type="color" id="m1_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate({live:true})" onchange="syncDashAndCalculate()">
                                     </div>
                                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px;">
                                         <div class="mat-input-cell">
@@ -443,7 +443,7 @@
                                     </div>
                                     <div style="display:flex; gap:4px; margin-bottom:4px;">
                                         <input type="text" id="m2_color" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:var(--fs-65); height:22px; padding:2px 4px; min-width:0;">
-                                        <input type="color" id="m2_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()">
+                                        <input type="color" id="m2_colorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate({live:true})" onchange="syncDashAndCalculate()">
                                     </div>
                                     <input type="number" step="0.125" class="nano-input" id="m2" oninput="syncDashAndCalculate()" style="width:100%;" title="Mat 2 Reveal">
                                 </div>
@@ -483,12 +483,12 @@
                                         <div style="display:flex; align-items:center; gap:4px;">
                                             <span class="fm-label">Backer</span>
                                             <input type="text" id="sbBackerColorName" value="B 97 White" oninput="syncDashAndCalculate()" style="flex:1; font-size:var(--fs-65); height:22px; padding:2px 4px; min-width:0;">
-                                            <input type="color" id="sbBackerColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()" title="Backer color">
+                                            <input type="color" id="sbBackerColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate({live:true})" onchange="syncDashAndCalculate()" title="Backer color">
                                         </div>
                                         <div style="display:flex; align-items:center; gap:4px;">
                                             <span class="fm-label">Paper</span>
                                             <input type="text" id="m_paperType" value="Fine Art Paper" oninput="syncDashAndCalculate()" style="flex:1; font-size:var(--fs-65); height:22px; padding:2px 4px; min-width:0;" placeholder="e.g. Fine Art Paper, Digital Photo Print">
-                                            <input type="color" id="sbPaperColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate()" title="Paper tone (visual reference)">
+                                            <input type="color" id="sbPaperColorHex" class="color-swatch-flat" value="#ffffff" oninput="syncDashAndCalculate({live:true})" onchange="syncDashAndCalculate()" title="Paper tone (visual reference)">
                                         </div>
                                     </div>
 
@@ -2243,9 +2243,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.56';</script>
-<script src="templates.js?v=19.56"></script>
-<script src="app.js?v=19.56"></script>
+<script>window.FRAME_HTML_VERSION = '19.57';</script>
+<script src="templates.js?v=19.57"></script>
+<script src="app.js?v=19.57"></script>
 
 </body>
 </html>

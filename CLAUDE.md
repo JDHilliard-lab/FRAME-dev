@@ -2196,6 +2196,11 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **A PREVIEW TAKES THE CANVAS (19.56, `_docImgSrc(doc, cnv, mime, q)`)**: a `CanvasPdfRec` gets the canvas,
   jsPDF the encoded string (unchanged). Spec-page image sites go through it. `_loadImg` caches FILE
   paths in `_imgUrlCache` (not `blob:`), apart from the 40-entry data-URL cache.
+- **A COLOUR INPUT ON THE DASHBOARD SYNCS LIVE (19.57, `syncDashAndCalculate({live:true})`, `_dashLiveFlush`,
+  `DASH_LIVE_MS`).** A picker fires `input` every frame; a full sync rebuilds the item table (~120ms on 50 rows).
+  Live writes the row + preview only; table, walls, warnings follow once after the colour settles, or at once on
+  `change`. The pending pass tracks the ROW OBJECT, never the index; a full sync of another row flushes it first.
+  A new continuous control on the form (colour, slider) takes the live form plus an `onchange` settle.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
