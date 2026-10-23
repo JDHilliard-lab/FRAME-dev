@@ -126,7 +126,10 @@ const path = require('path');
     __check('a MANUAL group is left alone in both builders — it is the user instruction', () => {
       // One builder now (18.32); its non-breaker call site is guarded on _manual.
       const dpl = S.indexOf('function _deckPageList');
-      if (S.slice(dpl, dpl + 12000).indexOf('if (!u._manual) { const sp = _splitFlatUnits(u)') < 0) throw new Error('_deckPageList splits manual groups, or lost its split');
+      // 19.62: the non-breaker path, between landmarks; the split sits inside the !u._manual guard.
+      const f0 = S.indexOf('const _specPagesFor0 = (u) =>', dpl), body = S.slice(f0, S.indexOf('const installDescs', f0));
+      const g = body.indexOf('if (!u._manual) {'), sp = body.indexOf('_splitFlatUnits(u)');
+      if (f0 < 0 || g < 0 || sp < 0 || sp < g || body.indexOf('return [specUnit(u)];', sp) < 0) throw new Error('_deckPageList splits manual groups, or lost its split');
       __exportWalksStudio();
     });
 

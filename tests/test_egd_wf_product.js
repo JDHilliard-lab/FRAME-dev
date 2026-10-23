@@ -592,8 +592,9 @@ const path = require('path');
       // Wired into BOTH page paths — with breakers and without.
       const bp = S.indexOf('const _breakerPages = (u) =>');
       if (S.slice(bp, bp + 2600).indexOf('_splitFlatUnits(u)') < 0) throw new Error('the breaker path does not split');
-      const sp = S.indexOf('const specPagesFor = (u) =>');
-      if (S.slice(sp, sp + 900).indexOf('_splitFlatUnits(u)') < 0) throw new Error('the non-breaker path does not split');
+      // 19.62: between landmarks, not a character count (the set's own choice moved it down).
+      const sp = S.indexOf('const _specPagesFor0 = (u) =>');
+      if (sp < 0 || S.slice(sp, S.indexOf('const installDescs', sp)).indexOf('_splitFlatUnits(u)') < 0) throw new Error('the non-breaker path does not split');
     });
 
     __check('and the split produces one flat sheet per graphic, end to end', () => {

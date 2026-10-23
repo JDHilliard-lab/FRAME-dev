@@ -172,7 +172,8 @@ const fs = require('fs');
       if (s.slice(ea, s.indexOf('async function exportDashNativePNG', ea)).indexOf('const pages = _deckPageList();') < 0) throw new Error('the PDF export no longer walks _deckPageList');
       // ONE grouped spec page after the breaker in the studio list, not a page per member.
       const dpl = s.indexOf('function _deckPageList');
-      if (s.slice(dpl, dpl + 12000).indexOf('if (isGroupSpec) { const sp = _splitFlatUnits(u); if (sp) out.push.apply(out, sp); else out.push(specUnit(u)); }') < 0) throw new Error('the breaker path no longer emits the single grouped spec page');
+      // 19.62: the set, not the deck, decides group or per piece (grp); the deck's own mode is the default
+      if (s.slice(dpl, dpl + 16000).indexOf('if (grp) { const sp = _splitFlatUnits(u); if (sp) out.push.apply(out, sp); else out.push(specUnit(u, fixed)); }') < 0) throw new Error('the breaker path no longer emits the single grouped spec page');
     });
 
     // ── 3. "Make sure ALL pages end up getting a footer" ──

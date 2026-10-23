@@ -296,7 +296,8 @@ const fs = require('fs');
     __check('the as-hung options panel is gated on the flag, not on the setScale string', () => {
       const s = window.__appSrc;
       if (/globalTpl === 'setScale'/.test(s)) throw new Error('still gating the options block on a literal key, so setLegend gets no controls');
-      if (!/SPEC_TEMPLATES\\[globalTpl\\] && SPEC_TEMPLATES\\[globalTpl\\]\\.scale/.test(s)) throw new Error('no flag-based gate found');
+      // 19.62: gated on the PAGE's layout (_pgTpl), which may differ from the deck's
+      if (!/SPEC_TEMPLATES\\[_pgTpl\\] && SPEC_TEMPLATES\\[_pgTpl\\]\\.scale/.test(s)) throw new Error('no flag-based gate found');
     });
 
     __check('one grouped page per set, same as the other group layouts', () => {

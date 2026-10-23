@@ -1158,6 +1158,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   silently; e.g. `_dsAddStamp` is the approval stamp, the status stamp is
   `_dsAddStatusStamp`). `test_ds_tool_dock` fails on any duplicate top-level function. Grep a
   new name before using it.
+- **A SET MAY DIFFER FROM THE DECK (19.62, `unitPages`, `unitBreakers`, `_specUnitPagesOf`, `_specUnitBreakerOn`,
+  `setSpecUnitPages`, `setSpecUnitBreaker`, `_dsUnitPagesInto`).** Keyed `'spec:' + unit key` (renames follow via
+  `_renamePageKeys`), stored only when different from the deck, ignored in Install-guide mode. Units are grouped
+  whenever anything is per set (`unitsGrouped`). A page not in the deck's mode carries `_tplFixed` + `_specTpl`
+  (`_perPieceTplKey` / `_groupTplKey`, from `specTplMemory`); `_deckSpecTpl` honours it, and so must ANY new place
+  that resolves a page's layout (thumbnail key, `_dsPageElevIdx`, the panel branch and its `_pgTpl` gate). Breaker
+  sharing (19.44) runs over `brUnits`, only the sets whose breaker is on. Pages carry `_unitKey`
+  (`_specUnitKeyOf` falls back to the art group / manual group of the row).
 - **FRAME RECOMMENDATIONS NAMES ITSELF (19.61, `_frameRecTitle`, `_frameRecSub`, `setFrameRecText`).**
   `editorialContent.frameRec.title` / `.sub`, stored only when not the default (blank sub = none). Read by
   `_drawFrameRecPage`, the page list title and `_dsThumbCacheKey` (`|fr`); never a literal again.
