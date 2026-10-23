@@ -2201,6 +2201,22 @@ run but passes alone is usually load timing: rerun before chasing it.
   Live writes the row + preview only; table, walls, warnings follow once after the colour settles, or at once on
   `change`. The pending pass tracks the ROW OBJECT, never the index; a full sync of another row flushes it first.
   A new continuous control on the form (colour, slider) takes the live form plus an `onchange` settle.
+- **A PREVIEW DRAWS A FRAME AT THE SIZE IT IS SHOWN (19.58, `_specFrameDpi`, `_artSmall`).** The four spec-page
+  mockup sites ask `_specFrameDpi(doc, dIn, boxW, boxH)`: a `CanvasPdfRec` (which carries `_pxPerPt`, set by both
+  canvas renderers) gets the dpi its box needs plus `shadowScale` (= dpi / 96; `renderFrameToCanvas` scales every
+  `_fxSh` blur and offset by it through `_fxShR`, so shadows keep their size in inches); jsPDF keeps 96. Artwork for a
+  reduced frame (and every elevation thumbnail) comes from `_artSmall` (cover-sized canvas, cached, original when
+  not much bigger). A new spec-page mockup site must ask too (`test_layout_prebuild` counts four).
+- **THE OTHER LAYOUTS BUILD WHILE YOU PAUSE (19.58, `_dsBgRun`, `_dsBgTpl`, `_dsBgStop`, `_dsParkPut`).** After
+  `DS_IDLE_PREBUILD_MS` with an empty thumbnail queue, the other layouts' pages render into the PARKED set.
+  `_dsBgTpl` is the layout being built and is read ONLY where the page list and the resolver read the layout
+  (`_specTplResolve`, `specTplKey` in `_deckPageList`, the `_previewTpl` fallback); the project's specTemplate never
+  changes. Anything stops it and clears `_dsBgTpl` first: capture-phase pointerdown/keydown/wheel/touchstart,
+  `_thumbPump`, `_dsBuildAllThumbs`, `_dsRefresh`, `_deckPageList` (unless `_dsBgListing`), both canvas renderers
+  (unless `bg`), `pushHistory`. A stopped render is discarded by token. Its list skips `_tocSyncAll`, its pages number
+  from `_dsBgPages`, and its doc carries `_bgBuild` so `_noteStripFit` / `_noteTitleSlot` ignore it (pass `doc`).
+  It NEVER captures a wall (34 walls = 99 s with 5.5 s freezes); uncaptured install pages render incomplete and are
+  not kept. A NEW READ OF THE CURRENT LAYOUT in the render path must honour `_dsBgTpl` or the prebuild is wrong.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
