@@ -296,10 +296,12 @@ const path = require('path');
       if (body.indexOf("variants: 'breaker'") < 0) throw new Error('the breaker panel does not ask for the reduced variant set');
       if (body.indexOf('variants: true') >= 0) throw new Error('a breaker is being offered the full install-guide layout set');
       // It must come BEFORE the per-piece / group branches, or they claim the page.
-      const grp = S.indexOf('} else if (isGroupGlobal) {', i);
-      const man = S.indexOf('if (desc._manual) {', i);
+      // 19.62/19.63: the group branch follows the PAGE's layout and the manual branch is only a
+      // combined install page now; both landmarks are required (a lost one used to skip silently).
+      const grp = S.indexOf('} else if (isGroupGlobal ?', i);
+      const man = S.indexOf('if (desc._manual && desc._install) {', i);
       if (!(man > i)) throw new Error('the breaker branch must sit ahead of the _manual branch');
-      if (grp > 0 && !(grp > i)) throw new Error('the breaker branch must sit ahead of the group branch');
+      if (!(grp > i)) throw new Error('the breaker branch must sit ahead of the group branch');
     });
 
     __check('the note CONTENT is deck-wide and deliberately NOT part of _igCfg', () => {

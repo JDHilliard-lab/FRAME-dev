@@ -1166,6 +1166,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   that resolves a page's layout (thumbnail key, `_dsPageElevIdx`, the panel branch and its `_pgTpl` gate). Breaker
   sharing (19.44) runs over `brUnits`, only the sets whose breaker is on. Pages carry `_unitKey`
   (`_specUnitKeyOf` falls back to the art group / manual group of the row).
+- **A COMBINED PAGE IS A GROUP A/B/C PAGE (19.63, `manualGroups`, `_combineUnitWith`, `_combinedTitle`,
+  `_specSetKeysForCombine`, `unitArrange`, `_specUnitArrange`, `SPEC_SIDE_GAP_IN`).** A manual group (codes that
+  share a page) renders through `_groupTplKey()` with `_tplFixed`, titled `ART.4 / ART.5`, subheading letters to
+  codes; its old `layout` ('setRow'/'setRight') is ignored. Arrangement per set: `side` (one row, one scale, centres
+  level, 6in apart) or `hung` (wall positions); default side for a combined page, hung for a set; swapped into
+  `geo` in `_drawSpecSetPageBody`. The thumbnail key carries the arrangement and a combined page's codes. The
+  controls are in This set (`_dsUnitPagesInto`); the legacy `_dsManualSection` remains only for a combined install
+  page. A combined page takes no breaker.
 - **FRAME RECOMMENDATIONS NAMES ITSELF (19.61, `_frameRecTitle`, `_frameRecSub`, `setFrameRecText`).**
   `editorialContent.frameRec.title` / `.sub`, stored only when not the default (blank sub = none). Read by
   `_drawFrameRecPage`, the page list title and `_dsThumbCacheKey` (`|fr`); never a literal again.
