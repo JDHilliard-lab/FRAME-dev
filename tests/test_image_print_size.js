@@ -63,7 +63,7 @@ const path = require('path');
         if (!(line.w > r.w)) throw new Error('line work gets no extra headroom');
       });
       __check('every deck-page mockup and elevation thumbnail is sized before it is encoded', () => {
-        const n = S.split('_rasterFit(cnv, ').length - 1, m = S.split('_rasterFit(er.canvas, ').length - 1;
+        const n = S.split('_rasterFit(cnv, ').length - 1, m = S.split('_rasterFit(er.canvas, ').length - 1 + S.split('_rasterFit(ft.canvas, ').length - 1;   // ft: the row-height fit (19.60)
         if (n < 8) throw new Error(n + ' mockup sites (expected 8)');
         if (m < 5) throw new Error(m + ' elevation thumbnail sites (expected 5)');
         if (S.indexOf('flat.width = cnv.width; flat.height = cnv.height;') >= 0) throw new Error('a mockup is still flattened at full size');

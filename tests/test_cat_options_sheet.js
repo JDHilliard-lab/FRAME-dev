@@ -194,7 +194,11 @@ window.__res = (async function () {
   // 18.65: "make sure the size of the thumbnails on the all options pages are the same size
   // and layout as the per piece options ... and make sure nothing crashes into each other."
   const allOn = function () { SPEC_SLOT_KEYS.forEach(function (k) { _setCatSheetSlot(null, k, true); _setSpecSlot(null, k, true); }); };
-  const capPos = function (ops) { const o = {}; ops.filter(function (x) { return x.t === 'text'; }).forEach(function (x) { if (['Frame', 'Floorplan', 'Elevation', 'none'].indexOf(String(x.str)) >= 0) o[x.str + '@' + Math.round(x.x)] = Math.round(x.y * 10) / 10; }); return o; };
+  // 19.60: the Elevation caption sits on the wall's left line, which a crop can cut (the sheet's
+  // options leave its elevation less room than the per-piece page's artwork does), so that
+  // caption is compared by height only and the drawing itself by where it starts and its size.
+  const capPos = function (ops) { const o = {}; ops.filter(function (x) { return x.t === 'text'; }).forEach(function (x) { if (['Frame', 'Floorplan', 'Elevation', 'none'].indexOf(String(x.str)) >= 0) o[x.str + (x.str === 'Elevation' ? '' : '@' + Math.round(x.x))] = Math.round(x.y * 10) / 10; }); return o; };
+  const elevAt = async function (fn) { let at = null; const real = _specPlanRectAdd; _specPlanRectAdd = function (doc, x, y, w, h, lv, el) { if (el) at = [Math.round(x), Math.round(y), Math.round(h)].join(','); }; try { await fn(); } finally { _specPlanRectAdd = real; } return at; };
   await check('EXACT ASK: corner, profile, floorplan and elevation land exactly where the per-piece page puts them', async function () {
     build(3, 24, 32); allOn();
     const sheet = capPos(await draw(0));
@@ -204,6 +208,9 @@ window.__res = (async function () {
     const piece = capPos(rec.ops);
     if (!Object.keys(piece).length) throw new Error('the per-piece page drew no thumbnail captions');
     if (JSON.stringify(sheet) !== JSON.stringify(piece)) throw new Error('sheet ' + JSON.stringify(sheet) + ' vs per-piece ' + JSON.stringify(piece));
+    const eSheet = await elevAt(function () { return draw(0); });
+    const ePiece = await elevAt(function () { return _drawSpecPageTemplate(new CanvasPdfRec(936, 540), {}, 1, {}, r, 'frameSpecDetail', { PW: 936, PH: 540 }); });
+    if (!eSheet || eSheet !== ePiece) throw new Error('elevation drawing: sheet ' + eSheet + ' vs per-piece ' + ePiece + ' (x, y, height)');
   });
   await check('EXACT ASK: nothing collides: a long, differing spec list stops above the thumbnails, and the mockups stay right of the column', async function () {
     build(6, 32, 24); allOn();

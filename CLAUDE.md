@@ -2102,6 +2102,11 @@ run but passes alone is usually load timing: rerun before chasing it.
   frame strip take the elevation BOX's height: per-piece `_elevDrawn = {y: boxY0, h: boxH}` with
   the box from `_specThumbBox` (4:3 at the template width, bottom on the template line); group
   `_thumbBox.th = thH` (band height). A long wall draws shorter inside. `test_spec_thumb_size`.
+- **THE ELEVATION THUMBNAIL IS AS TALL AS THE ROW (19.60, `_elevThumbFit`, `_elevFocusFrac`,
+  `ELEV_THUMB_MAX_FRAC`).** Group and per-piece pages draw it at the row height (never fitted inside the box), as wide
+  as its aspect makes it, up to 0.34 of the safe width (per piece also up to the DRAWN artwork, `_artLeftX`); wider
+  is CROPPED around the page's pieces. `_drawGroupElevOutline` (now both pages', `opts` ink/lw/bbw) leaves the cut
+  side open (wall fractions outside 0..1). The group band packs leftward off the wider box; the strip shrinks.
 - **THE WALL IS ALWAYS IN THE CAPTURE CROP (19.46):** `boxes.wall` from `exportElevSVG`, first in
   `_CAP_BASE_BOXES`. The wall outline is an op with no guide, so a crop that only reached the
   wall through a spanning guide (the hang line) mis-scaled every hang-off wall.
