@@ -2204,7 +2204,8 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **A PREVIEW DRAWS A FRAME AT THE SIZE IT IS SHOWN (19.58, `_specFrameDpi`, `_artSmall`).** The four spec-page
   mockup sites ask `_specFrameDpi(doc, dIn, boxW, boxH)`: a `CanvasPdfRec` (which carries `_pxPerPt`, set by both
   canvas renderers) gets the dpi its box needs plus `shadowScale` (= dpi / 96; `renderFrameToCanvas` scales every
-  `_fxSh` blur and offset by it through `_fxShR`, so shadows keep their size in inches); jsPDF keeps 96. Artwork for a
+  `_fxSh` blur and offset by it through `_fxShR`, so shadows keep their size in inches). Since 19.59 jsPDF too, at
+  exactly what `_rasterFit` keeps (box x `_expR()` x 1.5); never above 96. Artwork for a
   reduced frame (and every elevation thumbnail) comes from `_artSmall` (cover-sized canvas, cached, original when
   not much bigger). A new spec-page mockup site must ask too (`test_layout_prebuild` counts four).
 - **THE OTHER LAYOUTS BUILD WHILE YOU PAUSE (19.58, `_dsBgRun`, `_dsBgTpl`, `_dsBgStop`, `_dsParkPut`).** After
@@ -2217,6 +2218,18 @@ run but passes alone is usually load timing: rerun before chasing it.
   from `_dsBgPages`, and its doc carries `_bgBuild` so `_noteStripFit` / `_noteTitleSlot` ignore it (pass `doc`).
   It NEVER captures a wall (34 walls = 99 s with 5.5 s freezes); uncaptured install pages render incomplete and are
   not kept. A NEW READ OF THE CURRENT LAYOUT in the render path must honour `_dsBgTpl` or the prebuild is wrong.
+- **THE OFFLINE WORKER NEVER HOLDS A RESPONSE FOR ITS CACHE (19.59, `storeRuntime`, `TRIM_EVERY`).** A new
+  library file is returned at once; the copy is stored behind it (`event.waitUntil`) and the runtime cache trimmed
+  on the first new file and every `TRIM_EVERY` after, down to `RUNTIME_MAX - TRIM_EVERY`, one trim at a time. It used
+  to await put + a full `keys()` trim per file, and a frame-browser scroll queued hundreds: picks hung 30 to 60 s.
+- **THE FRAME INDEX IS BUILT ONCE PER LIBRARY STATE (19.59, `_fbMemoFresh`, `_fbLibSig`).** `_fbAll()` and
+  `_fbByCode()` (no argument) return shared, read-only memos, rebuilt when `dashLocalLibrary` is replaced or its
+  collection/frame counts change. Never sort or mutate what they return.
+- **A FRAME PICK: ONLY THE LATEST LANDS (19.59, `_libPickSeq`, `LIB_PICK_SLOW_MS`).** `loadDashFromCustomLibrary`
+  drops an answer that is not the latest pick (or arrives for another item) and toasts Loading frame past 0.8 s.
+- **A SET'S FRAME FACTS APPLY BEFORE ITS PICTURE (19.59).** `applySwatchToRow(..., null)` writes code, width,
+  colour, product (floater), inset, depth, rabbet and leaves the swatch fields; `_salonFrameDress` calls it for every
+  pending row, so a floater is a floater while its swatch loads, and if it never does.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

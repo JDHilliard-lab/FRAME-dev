@@ -60,7 +60,7 @@ const path = require('path');
     _loadImg = async () => ({ width: 4000, height: 3000, naturalWidth: 4000, naturalHeight: 3000 });
 
     // ── 1. previews drawn at their size ──
-    __check('EXACT BUG: a preview draws a spec-page frame at the size it is shown, the PDF at 96 dpi', async () => {
+    __check('EXACT BUG: a preview draws a spec-page frame at the size it is shown, the PDF at the size it prints (19.59)', async () => {
       setup();
       const seen = [];
       const real = renderFrameToCanvas;
@@ -74,9 +74,12 @@ const path = require('path');
       if (!(f.dpi < 40)) throw new Error('a 48in frame on a thumbnail was drawn at ' + f.dpi + ' dpi (a ' + Math.round(48 * f.dpi) + ' px canvas)');
       if (Math.abs(f.k - f.dpi / 96) > 1e-9) throw new Error('shadows not scaled with it: ' + f.k);
       if (!f.art || f.art.width >= 4000) throw new Error('the full-size photo was drawn into a thumbnail');
+      // 19.59: the PDF draws at exactly what _rasterFit keeps (box x _expR() x 1.5), never above 96
       const pdfDoc = { addImage() {} };
-      if (_specFrameDpi(pdfDoc, { extW: 48, extH: 36 }, 300, 200).dpi !== 96) throw new Error('the PDF lost its 96 dpi');
-      if (_specFrameDpi(pdfDoc, { extW: 48, extH: 36 }, 300, 200).shadowScale) throw new Error('the PDF shadows were scaled');
+      const pd = _specFrameDpi(pdfDoc, { extW: 48, extH: 36 }, 300, 200);
+      const want = Math.min(300 / 48, 200 / 36) * _expR() * 1.5;
+      if (Math.abs(pd.dpi - want) > 1e-9 || Math.abs(pd.shadowScale - want / 96) > 1e-9) throw new Error('PDF mockup at ' + pd.dpi + ' dpi, wanted ' + want);
+      if (_specFrameDpi(pdfDoc, { extW: 4, extH: 4 }, 900, 400).dpi !== 96) throw new Error('a small piece in a big box went above 96 dpi');
     });
     __check('every spec-page frame mockup asks _specFrameDpi (group, as hung, stacked, per piece)', () => {
       const n = S.split('_specFrameDpi(doc, dInches').length - 1;

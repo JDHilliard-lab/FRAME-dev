@@ -139,6 +139,32 @@ const text = async (r) => (r && r !== 'passthrough' ? await r.text() : String(r)
     if (run.has(S + 'library/c0.png')) throw new Error('the cap dropped the newest instead of the oldest');
   });
 
+  // 19.59, "sometimes the switch is instant and sometimes it is delayed from 30-60 seconds":
+  // a new library file waited for the cache to be stored AND trimmed (keys() over ~1500
+  // entries, deletes one at a time) before the page got it, and a frame-browser scroll
+  // starts hundreds of those at once.
+  await check('EXACT BUG: a new library file is answered at once, not after the cache is stored and trimmed', async () => {
+    const w = makeWorld(S, filesFor('19.26'));
+    await w.install(); await w.activate();
+    const orig = w.caches.open;
+    w.caches.open = async (n) => {
+      const c = await orig(n);
+      const k = c.keys, p = c.put;
+      c.keys = async () => { await new Promise(r => setTimeout(r, 400)); return k(); };
+      c.put = async (a, b) => { await new Promise(r => setTimeout(r, 400)); return p(a, b); };
+      return c;
+    };
+    const u = S + 'library/michelangelo/a/swatch.png';
+    w.files[u] = 'SWATCH';
+    const t0 = Date.now();
+    const body = await text(await w.get(u));
+    const ms = Date.now() - t0;
+    if (body !== 'SWATCH') throw new Error('wrong body: ' + body);
+    if (ms > 150) throw new Error('the page waited ' + ms + 'ms for the cache');
+    await new Promise(r => setTimeout(r, 1000));
+    if (!w.stores.get('frame-run::' + S).has(u)) throw new Error('the copy was never stored');
+  });
+
   await check('dev and stable never share a cache (one origin, two folders)', async () => {
     const dev = makeWorld(S, filesFor('19.26'));
     const stab = makeWorld('https://x.github.io/FRAME/', {});

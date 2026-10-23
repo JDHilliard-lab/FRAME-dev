@@ -56,9 +56,27 @@ async function adoptVersion(html) {
     const keys = await cache.keys();
     await Promise.all(keys.map(k => (isVersioned(k.url) && want.indexOf(k.url) < 0) ? cache.delete(k) : null));
 }
+// THE TRIM IS OCCASIONAL AND NEVER IN THE WAY (19.59). It ran on EVERY new file and the
+// response waited for it: cache.keys() over ~1500 entries, then deletes one at a time. A
+// frame-browser scroll starts hundreds of fetches at once, each trimming the same cache,
+// and the swatch of the frame just clicked waited behind all of them (30 to 60 seconds).
+// Now the response goes back at once, the copy is stored behind it, and the cache is cut
+// back to TRIM_EVERY under the cap on the first new file and every TRIM_EVERY after, so
+// it never passes RUNTIME_MAX. One trim at a time.
+const TRIM_EVERY = 50;
+let _putsSinceTrim = TRIM_EVERY, _trimming = false;
 async function trimRuntime(cache) {
-    const keys = await cache.keys();
-    for (let i = 0; i < keys.length - RUNTIME_MAX; i++) await cache.delete(keys[i]);
+    if (_trimming) return;
+    _trimming = true;
+    try {
+        const keys = await cache.keys();
+        const over = keys.length - (RUNTIME_MAX - TRIM_EVERY);
+        if (over > 0) await Promise.all(keys.slice(0, over).map(k => cache.delete(k)));
+    } finally { _trimming = false; }
+}
+async function storeRuntime(cache, req, res) {
+    await putQuiet(cache, req, res);
+    if (++_putsSinceTrim >= TRIM_EVERY) { _putsSinceTrim = 0; await trimRuntime(cache); }
 }
 
 async function onInstall() {
@@ -99,14 +117,17 @@ async function onVersioned(req) {
     await putQuiet(cache, req, res.clone());
     return res;
 }
-async function onRuntime(req) {
+async function onRuntime(req, event) {
     const cache = await caches.open(RUNTIME);
     const shell = await (await caches.open(SHELL)).match(req);
     const hit = shell || await cache.match(req);
-    const update = fetch(req).then(async (res) => {
-        if (!shell) { await putQuiet(cache, req, res.clone()); await trimRuntime(cache); }
+    let stored = Promise.resolve();
+    // The copy is taken before the page reads the body, then stored behind the response.
+    const update = fetch(req).then((res) => {
+        if (!shell) stored = storeRuntime(cache, req, res.clone()).catch(() => {});
         return res;
     });
+    if (event && event.waitUntil) event.waitUntil(update.then(() => stored, () => {}));
     if (hit) { update.catch(() => {}); return hit; }
     return update;
 }
@@ -120,7 +141,7 @@ function onFetch(event) {
     if (sameScope && isVersioned(req.url)) { event.respondWith(onVersioned(req)); return; }
     // This site's own files, plus the fonts and CDN scripts the page loads.
     const cdn = /(^|\.)(fonts\.googleapis\.com|fonts\.gstatic\.com|cdnjs\.cloudflare\.com)$/.test(url.hostname);
-    if (sameScope || cdn) event.respondWith(onRuntime(req));
+    if (sameScope || cdn) event.respondWith(onRuntime(req, event));
 }
 
 self.addEventListener('install', (e) => e.waitUntil(onInstall()));
