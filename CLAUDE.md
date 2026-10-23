@@ -1158,6 +1158,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   silently; e.g. `_dsAddStamp` is the approval stamp, the status stamp is
   `_dsAddStatusStamp`). `test_ds_tool_dock` fails on any duplicate top-level function. Grep a
   new name before using it.
+- **FRAME RECOMMENDATIONS NAMES ITSELF (19.61, `_frameRecTitle`, `_frameRecSub`, `setFrameRecText`).**
+  `editorialContent.frameRec.title` / `.sub`, stored only when not the default (blank sub = none). Read by
+  `_drawFrameRecPage`, the page list title and `_dsThumbCacheKey` (`|fr`); never a literal again.
 - **THE THANK YOU PAGE PRINTS THE PROJECT'S OWN LIST (19.13).** `editorialContent.contacts`
   (pipe lines, print order) + `contactsHidden`; `contacts/contacts.json` is a DIRECTORY to pick
   from (`_loadRepoContacts`, `addContactFromDirectory`), never merged in. New projects start
