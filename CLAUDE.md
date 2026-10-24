@@ -1182,6 +1182,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Long walls show FIXED WINDOWS** (`_elevThumbFit`: fewest equal windows of the room's width, the one holding most
   of the page's pieces), so the per-piece room is the TEMPLATE's artwork box, never the drawn piece (else each page
   gets different windows). A cut side draws `_elevBreakLine` (zig-zag), never a wall end.
+- **ONE THUMBNAIL ROW HEIGHT FOR THE DECK (19.66, `_groupThumbRowH(PW, PH)`).** The Group A/B/C band height,
+  from the guides only; the group page's `thH` IS this function, and the per-piece `_specThumbBox(w, h, rowH)` caps
+  its box at it (still on the template's bottom line). ~79pt on the default guides. Change the band in one place.
 - **A SET MAY ASK FOR THE WHOLE WALL (19.65, `unitElevFit`, `_specUnitElevFit`, `setSpecUnitElevFit`,
   `_specUnitKeyOfRow`).** `_elevThumbFit(..., whole)` fits the entire wall to the room instead of a window; the
   drawing is then shorter than the row and bottom-aligned (`_thumbBox`/`_elevDrawn` keep the ROW height, so the

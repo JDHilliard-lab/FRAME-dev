@@ -90,6 +90,14 @@ const path = require('path');
         if (overlap(r.elev, r.plan)) throw new Error('the elevation runs over the floorplan');
       });
     });
+    // 19.66: "maybe I just need to make the per piece thumbnails the same size [as Group A/B/C]"
+    __check('EXACT REQUEST: per-piece thumbnails are the Group A/B/C size, and a 3:1 wall fits there whole', async () => {
+      const g = await row('setLegend', 600, 300), p = await row('frameSpecDetail', 600, 300);
+      if (Math.abs(g.plan.h - p.plan.h) > 0.01) throw new Error('group row ' + g.plan.h.toFixed(1) + ', per-piece row ' + p.plan.h.toFixed(1));
+      if (Math.abs(p.plan.h - _groupThumbRowH(936, 540)) > 0.01) throw new Error('not the shared row height');
+      const w3 = await row('frameSpecDetail', 900, 300);
+      if (Math.abs(w3.elev.w / w3.elev.h - 3) > 0.02) throw new Error('a 3:1 wall was split on a per-piece page: ' + (w3.elev.w / w3.elev.h).toFixed(2));
+    });
     // 19.65: "maybe I need an option to click split elevation this set"
     ['setLegend', 'frameSpecDetail'].forEach(tpl => {
       __check('EXACT REQUEST (' + tpl + '): Whole wall draws the full long wall, shorter, on the same bottom line', async () => {
