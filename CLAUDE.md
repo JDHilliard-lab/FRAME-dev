@@ -2269,6 +2269,10 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **A SET'S FRAME FACTS APPLY BEFORE ITS PICTURE (19.59).** `applySwatchToRow(..., null)` writes code, width,
   colour, product (floater), inset, depth, rabbet and leaves the swatch fields; `_salonFrameDress` calls it for every
   pending row, so a floater is a floater while its swatch loads, and if it never does.
+- **A SPEC THUMBNAIL FADES WHAT IS NOT ON THE PAGE (19.67).** `renderElevationToCanvas(elev, featured)` takes one row
+  id (per-piece) or a LIST (group page: `members.map(m => m.id)`, both sites in `_drawSpecSetPageBody`); empty
+  or null = every frame full. A split part's `members` are that part's, so the other half fades. Never pass
+  null from a group page again (`test_elev_thumb_fade`).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
