@@ -2273,6 +2273,20 @@ run but passes alone is usually load timing: rerun before chasing it.
   id (per-piece) or a LIST (group page: `members.map(m => m.id)`, both sites in `_drawSpecSetPageBody`); empty
   or null = every frame full. A split part's `members` are that part's, so the other half fades. Never pass
   null from a group page again (`test_elev_thumb_fade`).
+- **DECK READ-THROUGH FIXES (19.68).** Install legend adds an `item` line (`IG_LEG_LABELS.item`,
+  value = row id) when `_igLegNeedsItem`: a frame's letter is not its code's trailing letters, or a
+  letterless code shares the wall; `_igLegItem` feeds BOTH `_igLegKeys` (reserved height) and
+  `_legLines` (drawer). A one-member group page (`_loneLetter`: not a later split part, not manual)
+  draws no letter on the art or in the IMAGE CODES lists (`_deckMockHTML` follows). A code under a
+  frame goes through `_frameCodeSpan` (own frame + half the gap to same-baseline neighbours, inside
+  the art region) and `_frameCodeFit` (keep size and right edge, slide, then shrink to
+  `FRAME_CODE_FS_MIN`). A full-height CL (wall or block) is appended by `_elevAppendGuideAround`,
+  split around `.ctx-label` text measured by a Range (`_elevLabelGapsAt`); the top run keeps the CL
+  word, lower runs are shallow clones (pen/dash attributes kept so they print).
+  **The wall capture draws frame rasters at the size it keeps** (`_capFrameDpi(dIn, pos, _capK)`, max
+  `ELEV_FRAME_RASTER_DPI` 150, shadows scaled by dpi/150): 150 dpi + shrink was ~70% of an install
+  export (279 s -> 67 s on Ford). `_capK` 0 (SVG download) keeps 150. `_imgDownsized` keeps PNG only
+  when `_imageDataHasAlpha` says so.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
