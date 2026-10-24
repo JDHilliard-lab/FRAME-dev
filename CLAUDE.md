@@ -1182,6 +1182,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   **Long walls show FIXED WINDOWS** (`_elevThumbFit`: fewest equal windows of the room's width, the one holding most
   of the page's pieces), so the per-piece room is the TEMPLATE's artwork box, never the drawn piece (else each page
   gets different windows). A cut side draws `_elevBreakLine` (zig-zag), never a wall end.
+- **A SET MAY ASK FOR THE WHOLE WALL (19.65, `unitElevFit`, `_specUnitElevFit`, `setSpecUnitElevFit`,
+  `_specUnitKeyOfRow`).** `_elevThumbFit(..., whole)` fits the entire wall to the room instead of a window; the
+  drawing is then shorter than the row and bottom-aligned (`_thumbBox`/`_elevDrawn` keep the ROW height, so the
+  plan and strip do not follow it down). In the thumbnail key as `|ew`; control is This set's Long wall row.
 - **FRAME RECOMMENDATIONS NAMES ITSELF (19.61, `_frameRecTitle`, `_frameRecSub`, `setFrameRecText`).**
   `editorialContent.frameRec.title` / `.sub`, stored only when not the default (blank sub = none). Read by
   `_drawFrameRecPage`, the page list title and `_dsThumbCacheKey` (`|fr`); never a literal again.

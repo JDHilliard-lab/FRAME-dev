@@ -90,6 +90,41 @@ const path = require('path');
         if (overlap(r.elev, r.plan)) throw new Error('the elevation runs over the floorplan');
       });
     });
+    // 19.65: "maybe I need an option to click split elevation this set"
+    ['setLegend', 'frameSpecDetail'].forEach(tpl => {
+      __check('EXACT REQUEST (' + tpl + '): Whole wall draws the full long wall, shorter, on the same bottom line', async () => {
+        const split = await row(tpl, 3000, 300);
+        setSpecUnitElevFit('ART.1', 'whole');
+        if (!editorialContent.unitElevFit || editorialContent.unitElevFit['spec:ART.1'] !== 'whole') throw new Error('not stored');
+        // row() rebuilds editorialContent, so set it again inside a fresh fixture
+        setup(tpl); renderElevationToCanvas = fakeElev(3000, 300);
+        editorialContent.unitElevFit = { 'spec:ART.1': 'whole' };
+        let plan = null, elev = null;
+        const realSw = _specSwatchBox, realLink = _specPlanRectAdd;
+        _specSwatchBox = function (doc, x, y, bw, bh, cap) { if (cap === 'Floorplan') plan = { x, y, w: bw, h: bh }; return realSw.apply(this, arguments); };
+        _specPlanRectAdd = function (doc, x, y, rw, rh, lv, el) { if (el) elev = { x, y, w: rw, h: rh }; };
+        try {
+          const rec = new CanvasPdfRec(936, 540); rec._pxPerPt = 2;
+          if (tpl === 'setLegend') await _drawSpecSetPage(rec, {}, 3, {}, { rep: dashProjectData[0], members: dashProjectData, key: 'ART.1' }, 'setLegend', { PW: 936, PH: 540, M: 40 });
+          else await _drawSpecPageTemplate(rec, {}, 3, {}, dashProjectData[0], 'frameSpecDetail', { PW: 936, PH: 540, M: 40 });
+        } finally { _specSwatchBox = realSw; _specPlanRectAdd = realLink; }
+        if (Math.abs(elev.w / elev.h - 10) > 0.05) throw new Error('not the whole wall: ' + (elev.w / elev.h).toFixed(2) + ':1');
+        if (!(elev.h < plan.h - 1)) throw new Error('should be shorter than the row');
+        if (Math.abs((elev.y + elev.h) - (plan.y + plan.h)) > 0.01) throw new Error('not on the bottom line of the row');
+        if (Math.abs(elev.w - split.elev.w) > 0.5) throw new Error('took more room than the split one: ' + elev.w + ' vs ' + split.elev.w);
+      });
+    });
+    __check('the choice is in This set, keyed into the thumbnail, and Split clears it', () => {
+      setup('setLegend');
+      const d = _deckPageList().find(x => x.kind === 'spec');
+      const k0 = _dsThumbCacheKey(d);
+      setSpecUnitElevFit('ART.1', 'whole');
+      if (_dsThumbCacheKey(d) === k0) throw new Error('the thumbnail ignores it');
+      const host = document.createElement('div'); _dsUnitPagesInto(host, d);
+      if (!host.querySelector('#dsUnitElevFit') || host.textContent.indexOf('Whole wall') < 0) throw new Error('no control: ' + host.textContent);
+      setSpecUnitElevFit('ART.1', 'split');
+      if (editorialContent.unitElevFit) throw new Error('the default was stored');
+    });
     __check('the crop keeps the piece in view and leaves the cut side of the wall open', () => {
       const c = document.createElement('canvas'); c.width = 3000; c.height = 300;
       const er = { canvas: c, wIn: 300, hIn: 30, wallLeftFrac: 0, wallRightFrac: 1, wallTopFrac: 0 };
