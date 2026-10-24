@@ -1174,6 +1174,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   `geo` in `_drawSpecSetPageBody`. The thumbnail key carries the arrangement and a combined page's codes. The
   controls are in This set (`_dsUnitPagesInto`); the legacy `_dsManualSection` remains only for a combined install
   page. A combined page takes no breaker.
+- **BIG SETS (19.64).** The plan lists a set's letters through `_planLetters` (more than three: `_letterRun`
+  ranges, A–K). A group page holds `SPEC_SET_PAGE_MAX` (12; the renderer drops the rest), so `groupPages` in
+  `_deckPageList` splits a set into `_specUnitParts` pages (auto past 12; `unitSplit` 1..3 per set); part i is
+  `_ovKey` `<key>~i`, page key `spec:<key>~i` (`_deckPageKey`), `_letterFrom` offsets its letters, `_renamePageKeys`
+  carries `~i` keys. Arrangement and set settings read `unit.setKey`, never the part key.
+  **Long walls show FIXED WINDOWS** (`_elevThumbFit`: fewest equal windows of the room's width, the one holding most
+  of the page's pieces), so the per-piece room is the TEMPLATE's artwork box, never the drawn piece (else each page
+  gets different windows). A cut side draws `_elevBreakLine` (zig-zag), never a wall end.
 - **FRAME RECOMMENDATIONS NAMES ITSELF (19.61, `_frameRecTitle`, `_frameRecSub`, `setFrameRecText`).**
   `editorialContent.frameRec.title` / `.sub`, stored only when not the default (blank sub = none). Read by
   `_drawFrameRecPage`, the page list title and `_dsThumbCacheKey` (`|fr`); never a literal again.

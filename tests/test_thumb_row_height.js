@@ -74,10 +74,13 @@ const path = require('path');
 
     ['setLegend', 'frameSpecDetail'].forEach(tpl => {
       __check('EXACT REQUEST (' + tpl + '): a wide wall is drawn as tall as the floorplan beside it', async () => {
-        const r = await row(tpl, 750, 300);                      // ART.2: a 2.5:1 wall
+        // 19.64: a per-piece page's room is the template's (the same on every page, so every page
+        // of a wall shows the same windows): about 2:1 there, so its wide wall is 1.9:1.
+        const asp = tpl === 'setLegend' ? 2.5 : 1.9;
+        const r = await row(tpl, 300 * asp, 300);
         if (Math.abs(r.elev.h - r.plan.h) > 0.01) throw new Error('elevation ' + r.elev.h.toFixed(1) + ' tall, floorplan ' + r.plan.h.toFixed(1));
         if (Math.abs((r.elev.y + r.elev.h) - (r.plan.y + r.plan.h)) > 0.01) throw new Error('bottoms differ');
-        if (Math.abs(r.elev.w / r.elev.h - 2.5) > 0.02) throw new Error('drawn at ' + (r.elev.w / r.elev.h).toFixed(2) + ':1, not its own 2.5:1 (cropped or squashed)');
+        if (Math.abs(r.elev.w / r.elev.h - asp) > 0.02) throw new Error('drawn at ' + (r.elev.w / r.elev.h).toFixed(2) + ':1, not its own ' + asp + ':1 (cropped or squashed)');
       });
       __check(tpl + ': a wall too long for the room is cropped to it, still full height', async () => {
         const r = await row(tpl, 3000, 300);                     // 10:1 corridor
@@ -90,14 +93,16 @@ const path = require('path');
     __check('the crop keeps the piece in view and leaves the cut side of the wall open', () => {
       const c = document.createElement('canvas'); c.width = 3000; c.height = 300;
       const er = { canvas: c, wIn: 300, hIn: 30, wallLeftFrac: 0, wallRightFrac: 1, wallTopFrac: 0 };
-      const ft = _elevThumbFit(er, 100, 300, [0.8, 0.82]);
+      const ft = _elevThumbFit(er, 100, 300, [0.5, 0.52]);   // mid-wall: a window cut on both sides
       if (!ft.cropped || Math.abs(ft.w - 300) > 1e-9) throw new Error('not cropped to the room');
       const win = ft.canvas.width, sx = (0 - ft.er.wallLeftFrac) * win;   // where the crop starts on the wall
-      if (!(sx < 0.8 * 3000 && sx + win > 0.82 * 3000)) throw new Error('the piece is outside the crop');
+      if (!(sx < 0.5 * 3000 && sx + win > 0.52 * 3000)) throw new Error('the piece is outside the crop');
       if (!(ft.er.wallLeftFrac < 0) || !(ft.er.wallRightFrac > 1)) throw new Error('both wall ends should be cut here: ' + ft.er.wallLeftFrac + ' / ' + ft.er.wallRightFrac);
-      const calls = []; const doc = { setLineDashPattern() {}, setDrawColor() {}, setLineWidth() {}, rect() { calls.push('rect'); }, line(x1, y1, x2, y2) { calls.push(x1 === x2 ? 'side' : 'run'); } };
+      // 19.64: a cut side gets a break line (a vertical run with a zig-zag), never a wall end
+      const calls = []; const doc = { setLineDashPattern() {}, setDrawColor() {}, setLineWidth() {}, rect() { calls.push('rect'); }, line(x1, y1, x2, y2) { calls.push(x1 === x2 ? (y1 < -0.5 || y2 > 100.5 ? 'break' : 'side') : (y1 === y2 ? 'run' : 'zig')); } };
       _drawGroupElevOutline(doc, ft.er, 0, 0, 300, 100);
       if (calls.indexOf('rect') >= 0 || calls.indexOf('side') >= 0) throw new Error('drew a wall end where the wall was cut: ' + calls.join(','));
+      if (calls.filter(c => c === 'zig').length < 4 || calls.indexOf('break') < 0) throw new Error('no break line at the cuts: ' + calls.join(','));
       const ok = _elevThumbFit(er, 100, 1200, null);
       if (ok.cropped) throw new Error('cropped a wall that fits');
     });

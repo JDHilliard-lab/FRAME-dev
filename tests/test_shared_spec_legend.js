@@ -84,7 +84,8 @@ const fs = require('fs');
       const start = s.indexOf('async function _drawSpecSetPageBody');
       if (start < 0) throw new Error('_drawSpecSetPageBody not found');
       const body = s.slice(start, s.indexOf('\\nasync function ', start + 10));
-      if (!/const letters = _setLetters\\(members\\.length\\)/.test(body)) throw new Error('_drawSpecSetPageBody still has its own letters list');
+      // 19.64: offset for a split set's later part (G-K), still from _setLetters
+      if (!/const letters = _setLetters\\(/.test(body) || /const letters = \\[/.test(body)) throw new Error('_drawSpecSetPageBody still has its own letters list');
       if (/letters = \\['A', 'B', 'C', 'D', 'E', 'F'\\]/.test(body)) throw new Error('the 6-entry literal is still there');
     });
 

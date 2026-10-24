@@ -173,7 +173,8 @@ const fs = require('fs');
       // ONE grouped spec page after the breaker in the studio list, not a page per member.
       const dpl = s.indexOf('function _deckPageList');
       // 19.62: the set, not the deck, decides group or per piece (grp); the deck's own mode is the default
-      if (s.slice(dpl, dpl + 16000).indexOf('if (grp) { const sp = _splitFlatUnits(u); if (sp) out.push.apply(out, sp); else out.push(specUnit(u, fixed)); }') < 0) throw new Error('the breaker path no longer emits the single grouped spec page');
+      // 19.64: and a big set's group page may be several pages (groupPages)
+      if (s.slice(dpl, dpl + 16000).indexOf('if (grp) { const sp = _splitFlatUnits(u); if (sp) out.push.apply(out, sp); else out.push.apply(out, groupPages(u, fixed)); }') < 0) throw new Error('the breaker path no longer emits the single grouped spec page');
     });
 
     // ── 3. "Make sure ALL pages end up getting a footer" ──
