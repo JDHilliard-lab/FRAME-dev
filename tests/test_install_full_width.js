@@ -32,7 +32,7 @@ const path = require('path');
       editorialContent.installNotes = { keys: { verify: true }, list: [], edits: {} };
       editorialContent.pageFooters = {};
       _igNoCapture = false; for (const k in _igCapCache) delete _igCapCache[k];
-      _captureElevWithGuides = async () => ({ dataUrl: 'data:image/jpeg;base64,AAAA', w: 2800, h: 1000, vec: [], floorFrac: 0.97, wallRightFrac: 0.995 });
+      _captureElevWithGuides = async () => ({ dataUrl: 'data:image/jpeg;base64,AAAA', w: opts.capW || 2800, h: 1000, vec: [], floorFrac: 0.97, wallRightFrac: 0.995 });
       const rec = new CanvasPdfRec(936, 540);
       const imgs = [], texts = [];
       const oImg = rec.addImage, oText = rec.text;
@@ -76,10 +76,20 @@ const path = require('path');
     const r = await window.__render({ perPage: WIDE });
     const im = elev(r);
     if (im.x > SR.L + 0.5) throw new Error('drawing starts at ' + im.x.toFixed(1) + ', safety edge ' + SR.L.toFixed(1));
-    const wallR = im.x + im.w * 0.995;
-    if (Math.abs(wallR - SR.R) > 0.5) throw new Error('wall ends at ' + wallR.toFixed(1) + ', safety edge ' + SR.R.toFixed(1));
+    // 19.75: the WHOLE drawing (dimensions past the wall included) inside the guides.
+    if (Math.abs(im.x + im.w - SR.R) > 0.5) throw new Error('drawing ends at ' + (im.x + im.w).toFixed(1) + ', safety edge ' + SR.R.toFixed(1));
     const heading = r.texts.find(t => t.s.indexOf('TIMELINE') >= 0);
     if (!heading || !(im.y > heading.y)) throw new Error('the drawing is not under the title');
+  });
+  await check('nothing hangs past the safety guides, and spare height is split above and below', async () => {
+    const SR = window.__SR();
+    const r = await window.__render({ perPage: WIDE, capW: 4200 });   // a long wall: room to spare in height
+    const im = elev(r);
+    if (im.x < SR.L - 0.5 || im.x + im.w > SR.R + 0.5) throw new Error('outside the guides: ' + im.x.toFixed(1) + '..' + (im.x + im.w).toFixed(1));
+    const cap = r.texts.find(t => t.s === 'Elevation');
+    const below = (cap ? cap.y : SR.B) - (im.y + im.h);
+    if (!(im.y + im.h < SR.B - 20)) throw new Error('the drawing still sits on the bottom line');
+    if (!(below > 0 && below < 16)) throw new Error('the Elevation caption is ' + below.toFixed(1) + 'pt below the drawing, not under it');
   });
   await check('it is bigger than the same page with the notes column beside it', async () => {
     const wide = elev(await window.__render({ perPage: WIDE }));

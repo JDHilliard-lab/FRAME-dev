@@ -169,7 +169,7 @@ const path = require('path');
       // the wall (the top wall-width dim spans exactly the wall), so the image's
       // right edge IS the wall's right corner.
       const i = S.indexOf('async function _drawInstallGuidePage');
-      const body = S.slice(i, i + 40000);
+      const body = S.slice(i, S.indexOf('\\nfunction ', i + 10));   // landmark, not a char count (19.76)
       if (/drawCaption\\('Elevation', ex, /.test(body)) throw new Error('a caption is still left-aligned to the image edge, outside the wall dimension');
       // 19.41: things DO sit right of the wall (tick ends, a figure beside it), so the
       // image's right edge is not the wall's corner. The caption ends on the wall's right
