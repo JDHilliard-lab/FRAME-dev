@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.70">
+    <link rel="stylesheet" href="style.css?v=19.71">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -248,6 +248,7 @@
                                          sync with FRAME_PRODUCTS / FLAT_GRAPHIC_PRODUCTS in app.js. -->
                                     <option value="Wallcovering (EGD)">Wallcovering (EGD)</option>
                                     <option value="Window Film (WF)">Window Film (WF)</option>
+                                    <option value="Didactic Panel">Didactic Panel</option>
                                 </select>
                             </div>
                             <div><label>Location</label><input type="text" id="m_location" oninput="syncDashAndCalculate()"></div>
@@ -2243,9 +2244,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.70';</script>
-<script src="templates.js?v=19.70"></script>
-<script src="app.js?v=19.70"></script>
+<script>window.FRAME_HTML_VERSION = '19.71';</script>
+<script src="templates.js?v=19.71"></script>
+<script src="app.js?v=19.71"></script>
 
 </body>
 </html>

@@ -134,7 +134,7 @@ const path = require('path');
       // (behaviour pinned by test_flat_behind_framed_export).
       const loop = B.indexOf('for (const f of _capOrder)');
       if (loop < 0) throw new Error('the capture no longer walks the flat-first order');
-      const at = B.indexOf('if (_shadowAt < 0 && !_isFlatGraphic(f.product)) _shadowAt = backLayer.length');
+      const at = B.indexOf('if (_shadowAt < 0 && _elevLayerRank(f) > 0) _shadowAt = backLayer.length');   // 19.71: first piece above the graphic layer
       if (at < loop || at > B.indexOf('if (!f.active) continue', loop)) throw new Error('the insertion point is not taken as the first framed piece goes in');
     });
     __check('the switch is labelled for every deck page it covers', () => {

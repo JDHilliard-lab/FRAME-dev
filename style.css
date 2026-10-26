@@ -1974,6 +1974,22 @@ input.frame-item-id-inline {
     line-height: 1;
 }
 
+/* WALL LAYERS (19.71): the Art list grouped by layer, top first, as a layers panel. */
+.elev-layer-head {
+    display: flex; align-items: center; gap: 6px;
+    margin: 8px 0 2px; padding: 0 2px;
+    font-size: var(--fs-60); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+}
+.elev-layer-head .elev-layer-n { margin-left: auto; font-weight: 400; }
+/* The letter is the layer button: looks like the letter, with a hint of a control. */
+.frame-letter-large.elev-layer-btn {
+    background: none; border: 1px solid transparent; border-radius: var(--r-4);
+    padding: 1px 4px; cursor: pointer; font-family: inherit;
+}
+.frame-letter-large.elev-layer-btn:hover { border-color: var(--border-color); }
+
 /* Frame ID line (e.g. "(ART.001A)") sits on its own row below the top row.
  * Smaller and muted so it doesn't compete visually with the letter, but
  * still readable. */

@@ -86,7 +86,7 @@ const path = require('path');
     __check('both products are in the enum and the predicate matches exactly them', () => {
       [EGD, WF].forEach(p => { if (FRAME_PRODUCTS.indexOf(p) < 0) throw new Error(p + ' missing from FRAME_PRODUCTS'); });
       FRAME_PRODUCTS.forEach(p => {
-        const want = (p === EGD || p === WF);
+        const want = (p === EGD || p === WF || p === 'Didactic Panel');   // 19.71 added the panel
         if (_isFlatGraphic(p) !== want) throw new Error('_isFlatGraphic(' + p + ') = ' + _isFlatGraphic(p));
       });
       // Nonsense in, false out — not a crash.
@@ -794,7 +794,8 @@ const path = require('path');
       const i = S.indexOf('function drawElevAll');
       const body = S.slice(i, i + 12000);
       if (body.indexOf('const _drawOrder = elevFrames.map(') < 0) throw new Error('the frame loop still draws in raw array order');
-      if (!/_isFlatGraphic\\(a\\.f && a\\.f\\.product\\) \\? 0 : 1/.test(body)) throw new Error('flat graphics are not sorted to the front');
+      if (body.indexOf('.sort((a, b) => _elevLayerRank(a.f) - _elevLayerRank(b.f))') < 0) throw new Error('flat graphics are not sorted to the front');   // 19.71: by wall layer (wallcovering rank 0)
+      if (_elevLayerRank({ product: 'Wallcovering (EGD)' }) !== 0 || _elevLayerRank({ product: 'Framed Art' }) <= 0) throw new Error('the wallcovering is not the bottom layer');
       // Indices must survive the sort — makeElevDraggable and every dim lookup address
       // frames by their real index in elevFrames.
       if (body.indexOf('_drawOrder.forEach(({ f, idx })') < 0) throw new Error('the sort dropped the original indices, so drag and dims would address the wrong frame');
