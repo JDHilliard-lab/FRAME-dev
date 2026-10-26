@@ -176,7 +176,7 @@ const path = require('path');
       if (hAt < 0) throw new Error('the page never measures the note box');
       if (!(hAt < mAt)) throw new Error('the measurement must happen before the layout starts');
       if (body.indexOf('_igNoteBottom') < 0) throw new Error('nothing records where the note box ends');
-      const topAt = S.indexOf('const _igTop = ');
+      const topAt = S.indexOf('let _igTop = ');   // 19.72: let, a full-width page lowers it under its notes
       const topLine = S.slice(topAt, S.indexOf('\\n', topAt));
       if (topLine.indexOf('_igNoteBottom') < 0) throw new Error('the drawing top does not clear the note box, so a long note set would be drawn over: ' + topLine);
       if (topLine.indexOf('Math.max') < 0) throw new Error('the drawing top should take the LOWER of the title block and the note box, not just one');
@@ -248,12 +248,18 @@ const path = require('path');
       // that BOTH land ahead of every early return - that is what covers each exit.
       const calls = body.split('_drawInstallNoteBox(').length - 1;
       if (calls < 1) throw new Error('the box is never drawn');
-      if (calls > 2) throw new Error(calls + ' draw calls: the box is being repeated per exit again');
+      // THREE since 19.72 (right, left, and beside the title on a Full width page), still
+      // one per placement: every one of them must land ahead of the first early return.
+      if (calls > 3) throw new Error(calls + ' draw calls: the box is being repeated per exit again');
+      let at = -1;
+      for (let c = 0; c < calls; c++) { at = body.indexOf('_drawInstallNoteBox(', at + 1); if (firstReturn >= 0 && at > firstReturn) throw new Error('a note box is drawn after an early return'); }
       if (firstReturn >= 0) {
         const lastDraw = body.lastIndexOf('_drawInstallNoteBox(');
         if (!(lastDraw < firstReturn)) throw new Error('a note draw sits after an early return, so some pages would lose it');
       }
-      if (body.indexOf('if (!_igNoteLeft) {') < 0) throw new Error('the two draws are not one either/or on the side');
+      if (body.indexOf('if (!_igNoteLeft && !_igWide) {') < 0) throw new Error('the two draws are not one either/or on the side');
+      // 19.72: the third (Full width) is exclusive too: a wide page is never a left one.
+      if (body.indexOf("const _igNoteLeft = !_igWide && ") < 0) throw new Error('a full-width page could also draw a left column');
     });
 
     __check('a long note set reserves proportionally more room', () => {

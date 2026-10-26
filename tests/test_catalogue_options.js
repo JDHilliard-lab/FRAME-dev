@@ -946,7 +946,7 @@ const path = require('path');
       // with the title, because the band height is not known that early.
       const b = fnBody('_drawInstallGuidePage');
       if (b.indexOf('SR.L += (_igNoteW + IG_NOTE_GUTTER)') >= 0) throw new Error('a left column still takes its own slice of width');
-      if (b.indexOf('if (!_igNoteLeft) {') < 0) throw new Error('the up-front block still draws the left case');
+      if (b.indexOf('if (!_igNoteLeft && !_igWide) {') < 0) throw new Error('the up-front block still draws the left case');   // 19.72: and not the full-width case
       // And the deferred draw has to be AHEAD of every early return, which is the whole
       // reason the box was drawn up front in the first place.
       const atTop = b.indexOf('const _igTop =');

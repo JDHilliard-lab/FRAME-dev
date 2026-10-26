@@ -1385,7 +1385,7 @@ const fs = require('fs');
       if (A.indexOf('function _dsElevGuidesInto') < 0) throw new Error('there is no guide control in Deck Studio');
       // It is offered on the page that SHOWS the guides - the install/breaker panel.
       const ig = A.indexOf('function _dsInstallGuideControls');
-      if (A.slice(ig, ig + 1400).indexOf('_dsElevGuidesInto(body, desc)') < 0) {
+      if (A.slice(ig, A.indexOf('const secLbl', ig)).indexOf('_dsElevGuidesInto(body, desc)') < 0) {   // landmark, not a char count
         throw new Error('the guide control is not on the install/breaker panel');
       }
       // The character is FIRST in the list, because it is the one that sends people back.
