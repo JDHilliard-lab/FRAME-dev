@@ -1200,6 +1200,11 @@ body:has(> #nextStep) .frame-toast-host { bottom: 64px; }
 .frame-toast.leaving { opacity: 0; transform: translateY(6px); transition: opacity 0.18s, transform 0.18s; }
 .frame-toast-title { font-weight: 700; color: var(--text-strong); white-space: nowrap; }
 .frame-toast-body { color: var(--text-muted); }
+/* 19.74: a toast can carry actions (linked image changed: Update / Links). */
+.frame-toast-acts { display: flex; gap: 6px; margin-left: 4px; align-self: center; }
+.frame-toast-act { height: 22px; padding: 0 10px; font-size: var(--fs-60); font-weight: 700; border-radius: var(--r-4); cursor: pointer;
+    border: 1px solid var(--border-color); background: var(--bg-input); color: var(--text-main); }
+.frame-toast-act:first-child { background: var(--btn-primary); border-color: transparent; color: #fff; }
 @keyframes frame-toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
 /* ========================================= */
