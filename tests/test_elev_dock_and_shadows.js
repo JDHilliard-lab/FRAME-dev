@@ -126,10 +126,16 @@ const path = require('path');
       const B = S.slice(a, S.indexOf('// ── PERSON (back layer)', a));
       if (B.indexOf('const _wantShadow = !!_capK') < 0) throw new Error('the shadow is not limited to the PDF capture');
       if (B.indexOf('_frameShadowCanvas(dIn,') < 0) throw new Error('the capture does not draw the deck-page shadow');
-      const sp = B.indexOf('backLayer.splice(_shadowAt, 0, ..._shadows)');
+      const sp = B.indexOf('backLayer.splice(_shadowAt < 0 ? backLayer.length : _shadowAt, 0, ..._shadows)');
       if (sp < 0) throw new Error('shadows are not inserted under the frames');
       if (sp < B.lastIndexOf('xlink:href="\${dataUrl}"')) throw new Error('the splice runs before the frames are drawn');
-      if (B.indexOf('const _shadowAt = backLayer.length') > B.indexOf('for (const f of elevFrames)')) throw new Error('the insertion point is taken after frames went in');
+      // 19.69: frames go in flat graphics first, and the insertion point is the first
+      // framed piece, so shadows land on a wallcovering rather than under it
+      // (behaviour pinned by test_flat_behind_framed_export).
+      const loop = B.indexOf('for (const f of _capOrder)');
+      if (loop < 0) throw new Error('the capture no longer walks the flat-first order');
+      const at = B.indexOf('if (_shadowAt < 0 && !_isFlatGraphic(f.product)) _shadowAt = backLayer.length');
+      if (at < loop || at > B.indexOf('if (!f.active) continue', loop)) throw new Error('the insertion point is not taken as the first framed piece goes in');
     });
     __check('the switch is labelled for every deck page it covers', () => {
       if (S.indexOf('Also on deck pages: spec, breaker and install') < 0) throw new Error('label still says spec pages only');
