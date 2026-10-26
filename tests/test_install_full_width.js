@@ -44,6 +44,18 @@ const path = require('path');
     };
     // The panel, with the deck around it stubbed out.
     _dsRenderTools = () => {}; _dsRenderCenter = () => {}; _dsPriorityRerender = () => {}; _dsElevGuidesInto = () => {}; _dsPageElevIdx = () => -1;
+    // Through the REAL page list and dispatch, in Install-guide mode (19.75).
+    window.__viaDeck = async (perPage) => {
+      await window.__render({});                       // seeds the wall, rows, capture stub
+      editorialContent.specTemplate = 'installGuide';
+      editorialContent.installGuide = { noteSide: 'left', perPage: perPage || {} };
+      const desc = _deckPageList().find(d => d && d._install && d.elev && d.elev.name === 'TIMELINE WALL');
+      if (!desc) return null;
+      const rec = new CanvasPdfRec(936, 540); const imgs = [];
+      const oImg = rec.addImage; rec.addImage = function (d, f, x, y, w, h) { if (w > 50 && h > 50) imgs.push({ x, y, w, h }); return oImg.apply(this, arguments); };
+      await _drawDeckSpecPage(rec, desc, { PW: 936, PH: 540, M: 40, pageNum: 1, logos: {}, meta: {} });
+      return { key: desc._ovKey, imgs };
+    };
     window.__ig = () => editorialContent.installGuide;
     window.__setIG = (o) => { editorialContent.installGuide = o; };
     window.__cfg = (k) => _igCfg(k);
@@ -115,6 +127,15 @@ const path = require('path');
     rb.click();
     if (window.__ig().perPage['ig:TIMELINE WALL']) throw new Error('override kept');
     p.remove();
+  });
+  await check('EXACT BUG: an Install-guide page reads the settings its panel writes (This page only did nothing)', async () => {
+    const SR = window.__SR();
+    const probe = await window.__viaDeck({});
+    if (!probe) throw new Error('no install page for the wall');
+    const pp = {}; pp[probe.key] = { variant: 'elevWide' };     // the key the panel writes to
+    const r = await window.__viaDeck(pp);
+    const im = r.imgs[r.imgs.length - 1];
+    if (!im || im.x > SR.L + 0.5) throw new Error('the page ignored its own setting under ' + probe.key + ' (drawing at ' + (im && im.x.toFixed(1)) + ')');
   });
   await check('a breaker page can be Full width too', async () => {
     window.__setIG({ breakerVariant: 'elevWide' });
