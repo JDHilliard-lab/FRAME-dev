@@ -88,11 +88,11 @@ const path = require('path');
       const m = only();
       if (m.a.ref !== 'free' || Math.abs(_markEnds(m).pa.x - 100) > 1e-9) throw new Error(JSON.stringify(m.a));
     });
-    __check('the dock button opens the four kinds; picking one arms it and L re-arms it', () => {
+    __check('the dock button opens the five kinds; picking one arms it and L re-arms it', () => {
       setup();
       openMarkKinds({ stopPropagation() {} });
       const fly = document.getElementById('markKindList');
-      if (fly.style.display !== 'block' || fly.querySelectorAll('[data-mark-kind]').length !== 4) throw new Error('flyout not offering four kinds');
+      if (fly.style.display !== 'block' || fly.querySelectorAll('[data-mark-kind]').length !== 5) throw new Error('flyout not offering five kinds');   // 19.79 added Guide box
       fly.querySelector('[data-mark-kind="clmid"]').onclick({ stopPropagation() {} });
       if (!markToolActive || markKind !== 'clmid' || fly.style.display !== 'none') throw new Error('kind not armed');
       toggleMarkTool(false);
