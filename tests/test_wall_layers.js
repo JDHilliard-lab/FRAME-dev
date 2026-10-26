@@ -111,6 +111,36 @@ const path = require('path');
         seed(); elevations[0].frames = elevFrames = elevFrames.filter(f => f.product === 'Framed Art'); initElevControls();
         if (document.querySelector('#frame-controls .elev-layer-head')) throw new Error('headings on a one-layer wall');
       });
+      // 19.77, from the Ford timeline wall: "the framed artwork and didactic panels keep
+      // vanishing, flashing on and off ... it should not be able to select [the wallcovering]".
+      await __check('EXACT BUG: a hover highlight lifts a piece only within its layer, never over the layer above', async () => {
+        seed();
+        const el = (L) => document.querySelector('#frame-layer .frame-vis[data-frame-letter="' + L + '"]');
+        const lz = (L) => el(L).style.getPropertyValue('--lz');
+        if (!(+lz('C') < +lz('B') && +lz('B') < +lz('A'))) throw new Error('layer z: wc ' + lz('C') + ' framed ' + lz('B') + ' panel ' + lz('A'));
+        const css = window.__css;
+        if (css.indexOf('#frame-layer .frame-vis.selection-highlight,') < 0 || css.indexOf('z-index: calc(var(--lz, 10) + 5)') < 0) throw new Error('the highlight is not layer-relative');
+        if (+lz('C') + 5 >= +lz('B')) throw new Error('a highlighted wallcovering would still reach the framed layer');
+      });
+      await __check('EXACT ASK: the wallcovering is locked: a click on it selects nothing and starts no drag; Alt+click picks it', async () => {
+        seed();
+        const wcEl = document.querySelector('#frame-layer .frame-vis[data-frame-letter="C"]');
+        if (!wcEl.classList.contains('elev-locked')) throw new Error('not marked locked');
+        const fire = (t, o) => { const ev = new window.MouseEvent(t, Object.assign({ bubbles: true, cancelable: true, clientX: 5, clientY: 5, button: 0 }, o || {})); (t === 'mousedown' ? wcEl : document).dispatchEvent(ev); };
+        fire('mousedown'); fire('mouseup');
+        if (elevFrames[2].selected) throw new Error('a plain click selected the wallcovering');
+        if (document.onmousemove) throw new Error('a plain click armed a drag');
+        wcEl.dispatchEvent(new window.MouseEvent('mouseenter'));
+        if (wcEl.classList.contains('selection-highlight')) throw new Error('hovering it highlights it');
+        fire('mousedown', { altKey: true }); fire('mouseup', { altKey: true });
+        if (!document.querySelector('#frame-layer .frame-vis[data-frame-letter="C"]') ) throw new Error('lost');
+        if (!elevFrames[2].selected) throw new Error('Alt+click did not pick it');
+      });
+      await __check('framed art and panels stay pickable; window film is not locked', async () => {
+        seed();
+        if (!_elevPickable(elevFrames[0]) || !_elevPickable(elevFrames[1])) throw new Error('a panel or frame was locked');
+        if (!_elevPickable({ product: 'Window Film (WF)' })) throw new Error('window film locked');
+      });
       await __check('Didactic Panel is a flat product: listed, no bleed, its own application, not pinned by EGD wall mode', async () => {
         if (FRAME_PRODUCTS.indexOf('Didactic Panel') < 0 || !_isFlatGraphic('Didactic Panel')) throw new Error('not a flat product');
         const opts = Array.from(document.querySelectorAll('#m_product option')).map(o => o.value);
@@ -125,6 +155,7 @@ const path = require('path');
     })();
   `;
   try {
+    window.__css = fs.readFileSync(path.join(root, 'style.css'), 'utf8');
     window.eval('window.__appSrc = ' + JSON.stringify(src) + ';\n' + src + '\n' + testBlock);
     await window.__run;
   } catch (e) { console.error('LOAD/RUN FAILED:', e.message); process.exit(1); }

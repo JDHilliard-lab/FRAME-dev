@@ -1615,6 +1615,14 @@ body.dragging-frame .frame-vis:hover {
     outline-offset: 4px;
     z-index: 50;
 }
+/* WALL LAYERS (19.77): each piece stacks at its layer (--lz, set per frame), and a
+ * highlight lifts it WITHIN that layer. A flat z-index 50 put a hovered wallcovering over
+ * every frame and panel on the wall. */
+#frame-layer .frame-vis { z-index: var(--lz, 10); }
+#frame-layer .frame-vis.selection-highlight,
+body.dragging-frame #frame-layer .frame-vis:hover { z-index: calc(var(--lz, 10) + 5); }
+/* A wallcovering is locked: the wall, not an object. */
+#frame-layer .frame-vis.elev-locked { cursor: default; }
 .frame-vis-solid { border-style: solid; box-sizing: border-box; }
 .frame-vis-image { box-sizing: border-box; }
 
