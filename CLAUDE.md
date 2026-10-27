@@ -2307,6 +2307,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   id); `deleteMark` takes it along. `IG_PAGE_HIDE` / `setIgPageHide` store `perPage[ovKey].hideGuides` (page only,
   `_igHideN`), passed to `_capView(cap, hide)` by the install renderer (person also drops `figure-dim-layer` and
   its crop box), in `_dsThumbCacheKey` as `|hg`; panel `_igPageHideInto` lists what the Elevations tab shows.
+- **DETAIL PAGES AND OUTLINES (19.83).** `cfg.detail` (install-guide `elev:` pages, `_igSet` simple list) adds
+  descs `_igDetail/_igDetails` after the wall page, keys `spec:elev:<i>~d<n>`, drawn by `_drawInstallDetailPage`
+  (dispatched FIRST in `_drawInstallGuidePage`: no title, notes or legend; drawing at the safety height, caption +
+  footer). Count from `_igDetailPlan` (nominal 960x540, ends G 14in, vertical Gv 4in kept SMALL so a planned
+  window really fits), zoom `_igDetailZoom` = 1/numScale only: the numbers ZOOM WITH the drawing (holding them at overview size left them unreadable), also in `_dsPageCapJob`, windows `_capWindow(.., n)`. OUTLINES:
+  `#outline-layer` guide (`outlineToggle`, `renderPieceOutlines` in drawElevAll, every non-graphic piece, solid
+  `data-svg-pen` border), registered in `_ELEV_GUIDE_LAYERS`, `_elevGuideVis`, bounds, annotationLayers,
+  `IG_PAGE_HIDE`, `_DS_ELEV_GUIDES`. Install Layout is a `<select>` (`#igLayoutSel`, `selRow`).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

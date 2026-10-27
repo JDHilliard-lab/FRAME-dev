@@ -116,15 +116,17 @@ const path = require('path');
     await window.__render({});
     let p = window.__panel();
     const btn = (root, txt) => Array.from(root.querySelectorAll('button')).find(b => b.textContent === txt);
+    // 19.83: Layout is a dropdown (four buttons cut their names to "Elev + ...").
+    const pick = (root, v) => { const s = root.querySelector('#igLayoutSel'); s.value = v; s.onchange(); };
     btn(p, 'This page only').click();
-    btn(p, 'Full width').click();                       // commit: the panel rebuilds
+    pick(p, 'elevWide');                                // commit: the panel rebuilds
     const g = window.__ig();
     if (!(g.perPage['ig:TIMELINE WALL'] && g.perPage['ig:TIMELINE WALL'].variant === 'elevWide')) throw new Error('not stored for the page');
     if (g.variant) throw new Error('written deck-wide');
     p.remove(); p = window.__panel();
     const on = btn(p, 'This page only');
     if ((on.getAttribute('style') || '').indexOf('var(--ui-active)') < 0) throw new Error('the rebuilt panel is back on All install pages');
-    btn(p, 'Elev only').click();
+    pick(p, 'elevOnly');
     if (window.__ig().variant) throw new Error('the SECOND change went to every page');
     if (window.__ig().perPage['ig:TIMELINE WALL'].variant !== 'elevOnly') throw new Error('second change not on the page');
     p.remove();

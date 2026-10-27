@@ -38,7 +38,7 @@
          anything driven by a new CSS rule is simply absent. That is exactly how the
          gradient-painted dashes went missing on screen while still exporting fine
          from the JS side. -->
-    <link rel="stylesheet" href="style.css?v=19.82">
+    <link rel="stylesheet" href="style.css?v=19.83">
 </head>
 <body>
 <!-- BOOT COVER (18.17): the first thing painted, so the dashboard behind it never flashes
@@ -770,6 +770,10 @@
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 17 L17 3" stroke-width="1.6"/><path d="M2 14 L6 18 M5 11 L9 15 M8 8 L12 12 M11 5 L15 9" stroke-width="1.2"/></svg>
                                 <span class="lg-cap">Lines</span>
                             </button>
+                            <button class="layout-guide-btn toggle-status" id="outlineToggle" title="Outlines: a line in the dimension colour around every frame and panel, so their edges read on a busy wallcovering and the measurements tie to them" onclick="toggleElevLayer('outline-layer', this)">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" fill="none"/><rect x="8" y="8" width="8" height="8" fill="none" stroke-width="1"/></svg>
+                                <span class="lg-cap">Outlines</span>
+                            </button>
                             <button class="layout-guide-btn toggle-status active" id="markLayerToggle" title="Free lines: show/hide the lines, centre lines and level lines drawn with the Lines tool" onclick="toggleElevLayer('mark-layer', this)">
                                 <svg class="svg-icon" viewBox="0 0 24 24"><path d="M4 20 L19 5"/><path d="M12 5 h7 v7"/></svg>
                                 <span class="lg-cap">Free lines</span>
@@ -988,6 +992,7 @@
                         <div id="floor-ceiling-layer" class="dim-layer" style="z-index:36;"></div>
                         <div id="guide-layer" class="guide-layer" style="z-index:31;"></div>
                         <div id="od-layer" class="od-layer" style="z-index:32;"></div>
+                        <div id="outline-layer" class="dim-layer" style="z-index:33;"></div>
                         <div id="group-dim-layer" class="group-dim-layer" style="z-index:38;"></div>
                         <div id="custom-lines-layer" class="dim-layer" style="z-index:40;"></div>
                         <div id="mark-layer" class="dim-layer" style="z-index:41; display:block;"></div>
@@ -2244,9 +2249,9 @@
      FRAME_HTML_VERSION is what this file EXPECTS. app.js compares it with
      APP_VERSION at boot and says so if the two disagree, because the query
      string alone cannot help once a browser has already cached the pair. -->
-<script>window.FRAME_HTML_VERSION = '19.82';</script>
-<script src="templates.js?v=19.82"></script>
-<script src="app.js?v=19.82"></script>
+<script>window.FRAME_HTML_VERSION = '19.83';</script>
+<script src="templates.js?v=19.83"></script>
+<script src="app.js?v=19.83"></script>
 
 </body>
 </html>
