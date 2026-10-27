@@ -2315,6 +2315,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `#outline-layer` guide (`outlineToggle`, `renderPieceOutlines` in drawElevAll, every non-graphic piece, solid
   `data-svg-pen` border), registered in `_ELEV_GUIDE_LAYERS`, `_elevGuideVis`, bounds, annotationLayers,
   `IG_PAGE_HIDE`, `_DS_ELEV_GUIDES`. Install Layout is a `<select>` (`#igLayoutSel`, `selRow`).
+- **A PAGE FITS EACH DASHED LINE TO ITS LENGTH AND CUTS WITH THE NUMBERS IT SHOWS (19.84).** `_drawElevAnnOps`
+  passes every dashed line through `_dashFitLen(pat, printedLen)` (>= `ELEV_DASH_MIN_N` dashes, starts and ends on
+  a dash, never longer than the setting, solid under `ELEV_DASH_MIN_PT`). With knockout, a CAPTURE (`forCapture`)
+  is not cut at export: it emits `<rect data-knock>` per number inside its layer group, `_elevAnnOps` parses them
+  as `knock` ops (tagged `gl`), and `_knockOps` cuts lines at draw time with the knock ops that survived
+  `_capView`'s guide filter (`_capWindow` clips them like rects). Downloads still cut at export (`_knockSplitLine`).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

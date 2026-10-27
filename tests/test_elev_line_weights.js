@@ -257,7 +257,9 @@ const path = require('path');
       const b = __fakeDoc(); _drawElevAnnOps(b.doc, { w: 700, h: 400, ops: [op] }, 0, 0, 600, 343);
       const firstDash = (r) => (r.dashes.find(d => d.length) || []);
       if (!firstDash(a.rec).length) throw new Error('no dash pattern was ever set');
-      if (firstDash(a.rec).join(',') !== firstDash(b.rec).join(',')) throw new Error('dash runs differ by artboard: ' + firstDash(a.rec).join(',') + ' vs ' + firstDash(b.rec).join(','));
+      // 19.84: each line's dashes are fitted to its printed length (_dashFitLen), so the two
+      // differ by a trim; what must not happen is the run following k (here 2x apart).
+      [a, b].forEach(r => { const d0 = firstDash(r.rec)[0]; if (!(d0 <= 3 + 1e-9 && d0 > 2.7)) throw new Error('dash runs follow the artboard: ' + firstDash(a.rec).join(',') + ' vs ' + firstDash(b.rec).join(',')); });
       // Proportional to the stroke, which is what keeps 6,4 reading as dashes.
       const d = firstDash(a.rec);
       if (!(d[0] > d[1])) throw new Error('the 6,4 ratio was lost: ' + d.join(','));
