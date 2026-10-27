@@ -197,7 +197,7 @@ const path = require('path');
       // context-block drag now SHARE — a block that lines up with a frame on screen but
       // not in the model is worse than no snapping, so both pull from one pool.
       const i = S.indexOf('function _elevSnapTargets');
-      const body = S.slice(i, i + 5200);
+      const body = S.slice(i, S.indexOf('\\nfunction ', i + 20));
       if (body.indexOf('_glazingSeams(run)') < 0) throw new Error('seams are not in the snap target pool');
       if (body.indexOf("kind: 'glazing-seam'") < 0) throw new Error('seam targets are unlabelled, so a guide cannot say what it snapped to');
     });
@@ -207,7 +207,7 @@ const path = require('path');
       // context-block drag now SHARE — a block that lines up with a frame on screen but
       // not in the model is worse than no snapping, so both pull from one pool.
       const i = S.indexOf('function _elevSnapTargets');
-      const body = S.slice(i, i + 5200);
+      const body = S.slice(i, S.indexOf('\\nfunction ', i + 20));
       ["kind: 'glazing-left'", "kind: 'glazing-right'"].forEach(k => {
         if (body.indexOf(k) < 0) throw new Error('missing X target ' + k + ' — a film flush to the glass edge has nothing to snap to');
       });

@@ -213,7 +213,10 @@ const path = require('path');
       const body = S.slice(i, S.indexOf('\\n}', i));
       // 19.42: the retry is a LOOP (two attempts, three during an export), each only while
       // the previous one came back empty. test_pdf_elev_failsafe drives it for real.
-      if (body.indexOf('cap = await _captureElevWithGuides(elevIdx);') < 0) throw new Error('the capture call is gone');
+      // 19.80: through _captureElevZoomed, which sets the zoom around the one capture.
+      if (body.indexOf('cap = await _captureElevZoomed(elevIdx, z);') < 0) throw new Error('the capture call is gone');
+      const zf = S.slice(S.indexOf('async function _captureElevZoomed'), S.indexOf('async function _captureElevZoomed') + 400);
+      if (zf.indexOf('await _captureElevWithGuides(idx)') < 0) throw new Error('the capture call is gone');
       if (body.indexOf("const tries = _exporting ? 3 : 2;") < 0) throw new Error('no retry — a transient failure loses the drawing for that page');
       if (body.indexOf('t < tries && !(cap && cap.dataUrl)') < 0) throw new Error('the retry is not conditional on the first attempt failing');
       // Nobody may bypass it by calling _captureElevWithGuides directly from a page

@@ -1612,7 +1612,8 @@ const path = require('path');
     // ART.1C). The layout NAME must still print, through the one breaker-subtitle builder.
     __check('the breaker subtitle prints the layout name, through _catBreakerSub', () => {
       const b = fnBody('_drawInstallGuidePage');
-      if (b.indexOf('doc.text(isElev ? _catBreakerSub(arg)') < 0) throw new Error('the subtitle does not go through _catBreakerSub');
+      // 19.80: through _igSub, which _catBreakerSub builds.
+      if (b.indexOf("const _igSub = (isElev ? _catBreakerSub(arg)") < 0 || b.indexOf('doc.text(_igSub,') < 0) throw new Error('the subtitle does not go through _catBreakerSub');
       if (fnBody('_catBreakerSub').indexOf('_catLayoutLabel(elev)') < 0) throw new Error('the layout name no longer prints');
     });
 

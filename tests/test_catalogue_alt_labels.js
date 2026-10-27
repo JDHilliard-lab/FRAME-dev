@@ -105,8 +105,11 @@ const path = require('path');
 
     __check('the breaker MEASURES and DRAWS the same subtitle, so the drawing cannot rise into it', () => {
       const b = fnBody('_drawInstallGuidePage');
-      if (b.indexOf('getTextWidth(isElev ? _catBreakerSub(arg)') < 0) throw new Error('the measure does not use _catBreakerSub');
-      if (b.indexOf('doc.text(isElev ? _catBreakerSub(arg)') < 0) throw new Error('the draw does not use _catBreakerSub');
+      // 19.80: one string, _igSub (built by _catBreakerSub, plus "1 OF 3" on a split wall),
+      // is both measured and drawn.
+      if (b.indexOf("const _igSub = (isElev ? _catBreakerSub(arg)") < 0) throw new Error('the subtitle is not built by _catBreakerSub');
+      if (b.indexOf('getTextWidth(_igSub)') < 0) throw new Error('the measure does not use _catBreakerSub');
+      if (b.indexOf('doc.text(_igSub,') < 0) throw new Error('the draw does not use _catBreakerSub');
     });
 
     __check('the option page label: OPTION n, plus the alternate kind', () => {

@@ -1451,7 +1451,8 @@ const fs = require('fs');
       const i = A.indexOf('async function _dsBuildPage');
       const body = A.slice(i, i + 3000);
       if (body.indexOf('_elevPrimeCaptures([_pei])') >= 0) throw new Error('silent is still not passed to the prime');
-      if (body.indexOf('_elevPrimeCaptures([_pei], { silent: !!silent })') < 0) {
+      // 19.80: the job may carry a zoom ({idx, z}) for a wall split across pages.
+      if (body.indexOf('_elevPrimeCaptures([') < 0 || body.indexOf('_pei)], { silent: !!silent })') < 0) {
         throw new Error('the prime does not follow the build-s own silence');
       }
       // The prime itself has always honoured the flag - it was only never given it.

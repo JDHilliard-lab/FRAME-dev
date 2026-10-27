@@ -271,7 +271,7 @@ const path = require('path');
       if (S.indexOf('const capKey = _igCapKey(') < 0) throw new Error('the page renderer builds its own key, so priming fills entries nothing reads');
       const i = S.indexOf('function _elevPrimeJobs');
       const body = S.slice(i, S.indexOf('function _elevPrimeShow', i));
-      if (body.indexOf('_igCapKey(i)') < 0) throw new Error('the batch names its entries some other way');
+      if (body.indexOf('_igCapKey(i, z)') < 0) throw new Error('the batch names its entries some other way');
     });
 
     __check('the key reads no state that depends on which view is active', () => {

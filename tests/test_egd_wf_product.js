@@ -1058,7 +1058,7 @@ const path = require('path');
       // is for), and those dims only exist where the user asked for them frame by
       // frame — so they are not part of the automatic set-out being suppressed.
       const i = S.indexOf('function drawElevAll');
-      const body = S.slice(i, i + 40000);
+      const body = S.slice(i, S.indexOf('\\n}\\n', i));
       ['drawElevTargetedSpacing()', 'drawFloorCeilingDims()'].forEach(call => {
         const at = body.indexOf(call);
         if (at < 0) throw new Error(call + ' is gone');

@@ -3560,3 +3560,10 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 /* FLOOR PLAN LINE TOOL (19.55): the tip under the loupe, and a selected line's end handles. */
 .fp-tip { position: fixed; z-index: 4000; pointer-events: none; max-width: 240px; padding: 6px 9px; border-radius: var(--r-6); background: rgba(20,20,22,0.92); color: #fff; font-size: var(--fs-65); line-height: 1.35; box-shadow: 0 3px 12px rgba(0,0,0,0.35); }
 .fp-line-end { width: 11px; height: 11px; margin: -5.5px 0 0 -5.5px; border-radius: 50%; background: #fff; border: 2px solid var(--selected); box-sizing: border-box; cursor: move; z-index: 6; }
+
+/* NO WHITE BOXES BEHIND THE NUMBERS (19.80, elev.dimKnockout): the chip goes and the
+   lines under a number are masked instead (_dimKnockoutScreen), so a wallcovering shows
+   round the numbers. !important beats the inline white on free-line labels. */
+#wall.dim-knock .arch-label-new,
+#wall.dim-knock .mark-label,
+#wall.dim-knock .hang-dim-num { background: transparent !important; }

@@ -52,7 +52,9 @@ const path = require('path');
       if (/const targetW = 3200/.test(body)) throw new Error('THE BUG: still a hardcoded 3200px render width');
       if (/toDataURL\\('image\\/jpeg', 0\\.92\\)/.test(body)) throw new Error('THE BUG: still a hardcoded 0.92 JPEG quality');
       if (body.indexOf('_ELEV_CAP_QUALITY') < 0) throw new Error('the capture does not read the quality table');
-      if (body.indexOf('_capQ.w') < 0 || body.indexOf('_capQ.q') < 0) throw new Error('the capture does not use both the width and the quality');
+      // 19.80: the width through _elevCapTargetW (the preset's w, times a split wall's zoom).
+      const tw = S.slice(S.indexOf('function _elevCapTargetW'), S.indexOf('async function _captureElevZoomed'));
+      if (body.indexOf('_elevCapTargetW()') < 0 || tw.indexOf('q.w') < 0 || body.indexOf('_capQ.q') < 0) throw new Error('the capture does not use both the width and the quality');
     });
 
     __check('EXACT BUG: the elevation capture is a JPEG — a PNG one corrupted every breaker page', () => {

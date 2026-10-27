@@ -2287,6 +2287,19 @@ run but passes alone is usually load timing: rerun before chasing it.
   `ELEV_FRAME_RASTER_DPI` 150, shadows scaled by dpi/150): 150 dpi + shrink was ~70% of an install
   export (279 s -> 67 s on Ford). `_capK` 0 (SVG download) keeps 150. `_imgDownsized` keeps PNG only
   when `_imageDataHasAlpha` says so.
+- **WALLCOVERING COORDINATION (19.80).** SPACER is a mark kind (`kind:'spacer'`, `a` an edge point,
+  `axis` the edge's fixed axis, `dir`, `size` INCHES, `len` off a point): geometry `_markSpacerGeo`, rect
+  `_markRectOf` (box too). Anchors may be `ref:'mark', mid` (resolveAnchor / stripAnchor), so a measure line
+  follows a spacer; spacer/box edges are in `anchorPointsForSnap`, `_elevSnapPoint`, `_markAxisTargets` and
+  `_elevSnapTargets` (which skips a spacer hanging off the dragged piece, `_markOwner`). FLIP: a lift pin of
+  +-2 (`setDimLiftSide`, `L.lblSide`) is the designer's side: beats `data-lift-force`, lifts a number that
+  fits, keeps the label upright; `.dim-flip` / key F via `_selDimFlip`. Per wall `elev.gfxFade` (white wash
+  over the graphic layer in DOM, `_gfxWashSvg`, canvas) and `elev.dimKnockout` (no chip; export cuts
+  `<line>` strings under numbers with `_knockSplitLine`, screen masks lines in `_dimKnockoutScreen`).
+  A point on the graphic is its own leader band in `renderCustomLines` (it was the whole wallcovering).
+  SPLIT INSTALL PAGES: `cfg.parts` (Full width only, `_igPartsOf`), descs `_igPart/_igParts`, keys
+  `spec:elev:<i>~n`, one `_ovKey`. Captured at `_elevCaptureZoom` x (drawElevAll's fit, `_elevCapTargetW`,
+  key `_igCapKey(i, z)`, prime jobs `{idx, z}`), cut by `_capWindow` in gaps (`_igWindows`) at one scale (`envW`).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
