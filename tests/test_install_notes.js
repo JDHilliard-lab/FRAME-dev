@@ -170,7 +170,9 @@ const path = require('path');
       // empty. This used to assert the SR.B shrink; the invariant now is that the
       // drawing's top clears the box.
       const i = S.indexOf('async function _drawInstallGuidePage');
-      const body = S.slice(i, i + 4000);
+      // Landmark slice, not a character count (a dispatch line added at the top, 19.85,
+      // pushed the layout's first line past a fixed 4000).
+      const body = S.slice(i, S.indexOf('const M = SR.L', i) + 20);
       const hAt = body.indexOf('_installNoteBoxH');
       const mAt = body.indexOf('const M = SR.L');
       if (hAt < 0) throw new Error('the page never measures the note box');

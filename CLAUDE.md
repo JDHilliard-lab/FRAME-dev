@@ -2321,6 +2321,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   is not cut at export: it emits `<rect data-knock>` per number inside its layer group, `_elevAnnOps` parses them
   as `knock` ops (tagged `gl`), and `_knockOps` cuts lines at draw time with the knock ops that survived
   `_capView`'s guide filter (`_capWindow` clips them like rects). Downloads still cut at export (`_knockSplitLine`).
+- **FULL-BLEED CLOSE-UPS (19.85).** `perPage[ovKey].closeups = [{x, y, z}]` (one writer `setIgCloseups`, cleaned by
+  `_igCloseN`; x/y = drawing point at the page centre as 0..1 of the `_capView` drawing, z over "drawing height fills
+  the page"), one page each after the details: descs `_igClose/_igCloses`, keys `spec:elev:<i>~c<n>`, drawn by
+  `_drawInstallCloseupPage` (dispatched first; marks `_pdfFooterDrawn` so the sweep adds no footer; same capture zoom as
+  details). The page records `_igCloseGeo[pageKey]`; `_dsCloseupWire` (both spec branches of `_dsRenderCenter`) previews a
+  drag/wheel as a CSS transform on the picture (`.ds-closeup-pic` / the built `<img>`) and commits through the pure
+  `_igCloseAfter` (translate is NOT scaled: divide it by m). Panel `_igCloseupPanelInto` returns before the wall controls.
+  The floor plan key drops the set's own code from its letters (`_fpKeyEntries`), so ART.3 + ART.3A..I prints A–I.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
