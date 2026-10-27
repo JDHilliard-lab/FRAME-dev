@@ -2300,6 +2300,7 @@ run but passes alone is usually load timing: rerun before chasing it.
   SPLIT INSTALL PAGES: `cfg.parts` (Full width only, `_igPartsOf`), descs `_igPart/_igParts`, keys
   `spec:elev:<i>~n`, one `_ovKey`. Captured at `_elevCaptureZoom` x (drawElevAll's fit, `_elevCapTargetW`,
   key `_igCapKey(i, z)`, prime jobs `{idx, z}`), cut by `_capWindow` in gaps (`_igWindows`) at one scale (`envW`).
+- **A MEASURE END ON A SPACER OR GUIDE BOX IS A POINT (19.81).** `frameBand` in `renderCustomLines` bands a `ref:'mark'` anchor (and a graphic point) as the clicked point, so its leader starts there; frames and context blocks keep their whole-edge band (no dashes beside a printed edge).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

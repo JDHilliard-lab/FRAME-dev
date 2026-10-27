@@ -206,6 +206,22 @@ const path = require('path');
       if (Math.abs(num('left') - 40) > 0.05 || Math.abs(num('width') - 25) > 0.05) throw new Error('not from the point to the line: ' + st);
     });
 
+    __check('EXACT ASK (19.81): a measure line from a spacer, pulled aside, draws its leader from the point clicked on the spacer', () => {
+      seed();
+      const m = makeSpacer();                          // 3.25..24.75 wide, 43.1..44.1 tall, under panel J
+      const sa = stripAnchor(_elevSnapPoint(8, 43.1 - 0.4));   // the spacer's far (bottom) side at x 8
+      if (!sa || sa.ref !== 'mark') throw new Error('did not snap to the spacer: ' + JSON.stringify(sa));
+      const pa = { ref: 'frame', letter: 'J', xc: 'xf', xf: (8 - 3.25) / 21.5, yc: 'y0' };
+      elevations[0].customLines = [{ id: 'cl2', type: 'v', a: sa, b: pa, off: 5 }];   // number 5" right, still over the spacer
+      dimVisibility.customLines = true;
+      renderCustomLines();
+      const leaders = document.querySelectorAll('#custom-lines-layer .dim-leader');
+      if (leaders.length !== 1) throw new Error(leaders.length + ' leaders (want 1: the spacer end; the panel end is still beside the panel)');
+      const st = leaders[0].getAttribute('style');
+      const num = (k) => parseFloat((st.split(k + ':')[1] || '').trim());
+      if (Math.abs(num('left') - 8 * elevScale) > 0.05 || Math.abs(num('width') - 5 * elevScale) > 0.05) throw new Error('not from the clicked point to the line: ' + st);
+    });
+
     // ── A WALL ACROSS PAGES ──────────────────────────────────────────────────
     __check('the cuts fall in gaps between pieces, never through one, and the gap is on both pages', () => {
       seed();
