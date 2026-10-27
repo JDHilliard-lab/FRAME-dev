@@ -200,10 +200,11 @@ const path = require('path');
       dimVisibility.customLines = true;
       renderCustomLines();
       const leaders = document.querySelectorAll('#custom-lines-layer .dim-leader');
-      if (leaders.length !== 1) throw new Error(leaders.length + ' leaders (want 1: the graphic end; the panel end is still beside the panel)');
+      // 19.82: two (the panel end draws from its clicked point too, as a point-end line now does).
+      if (leaders.length !== 2) throw new Error(leaders.length + ' leaders (want 2: the graphic end and the panel end)');
       const st = leaders[0].getAttribute('style');
       const num = (k) => parseFloat((st.split(k + ':')[1] || '').trim());
-      if (Math.abs(num('left') - 40) > 0.05 || Math.abs(num('width') - 25) > 0.05) throw new Error('not from the point to the line: ' + st);
+      if (Math.abs(num('left') - 8 * elevScale) > 0.05 || Math.abs(num('width') - 5 * elevScale) > 0.05) throw new Error('not from the point to the line: ' + st);
     });
 
     __check('EXACT ASK (19.81): a measure line from a spacer, pulled aside, draws its leader from the point clicked on the spacer', () => {
@@ -216,7 +217,8 @@ const path = require('path');
       dimVisibility.customLines = true;
       renderCustomLines();
       const leaders = document.querySelectorAll('#custom-lines-layer .dim-leader');
-      if (leaders.length !== 1) throw new Error(leaders.length + ' leaders (want 1: the spacer end; the panel end is still beside the panel)');
+      // 19.82: both ends, the panel end from its clicked point too.
+      if (leaders.length !== 2) throw new Error(leaders.length + ' leaders (want 2: the spacer end and the panel end)');
       const st = leaders[0].getAttribute('style');
       const num = (k) => parseFloat((st.split(k + ':')[1] || '').trim());
       if (Math.abs(num('left') - 8 * elevScale) > 0.05 || Math.abs(num('width') - 5 * elevScale) > 0.05) throw new Error('not from the clicked point to the line: ' + st);

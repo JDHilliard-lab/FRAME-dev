@@ -2301,6 +2301,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   `spec:elev:<i>~n`, one `_ovKey`. Captured at `_elevCaptureZoom` x (drawElevAll's fit, `_elevCapTargetW`,
   key `_igCapKey(i, z)`, prime jobs `{idx, z}`), cut by `_capWindow` in gaps (`_igWindows`) at one scale (`envW`).
 - **A MEASURE END ON A SPACER OR GUIDE BOX IS A POINT (19.81).** `frameBand` in `renderCustomLines` bands a `ref:'mark'` anchor (and a graphic point) as the clicked point, so its leader starts there; frames and context blocks keep their whole-edge band (no dashes beside a printed edge).
+- **SPACER CALLOUTS AND PER-PAGE HIDES (19.82).** A measure line with ANY point end (`_customLinePointy`: mark ref or
+  gfx) bands BOTH ends as their clicked points, frame and context ends included; frame to frame keeps the edge rule.
+  `toggleSpacerDim` adds/removes a line with both ends on the spacer (found by its ends, `_markSpacerDims`, never an
+  id); `deleteMark` takes it along. `IG_PAGE_HIDE` / `setIgPageHide` store `perPage[ovKey].hideGuides` (page only,
+  `_igHideN`), passed to `_capView(cap, hide)` by the install renderer (person also drops `figure-dim-layer` and
+  its crop box), in `_dsThumbCacheKey` as `|hg`; panel `_igPageHideInto` lists what the Elevations tab shows.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
