@@ -2329,6 +2329,14 @@ run but passes alone is usually load timing: rerun before chasing it.
   drag/wheel as a CSS transform on the picture (`.ds-closeup-pic` / the built `<img>`) and commits through the pure
   `_igCloseAfter` (translate is NOT scaled: divide it by m). Panel `_igCloseupPanelInto` returns before the wall controls.
   The floor plan key drops the set's own code from its letters (`_fpKeyEntries`), so ART.3 + ART.3A..I prints A–I.
+- **`window.FRAME_API` IS THE DRIVER'S DOOR (19.86)**, for the planned deck-building agent and any headless
+  script. Each call WRAPS the UI's own function (`_placementMint`/`_placementHang`, `applyArtworkToRowIndex`, the
+  `_dsMasterToDeck` page recipe, `renderDeckPageCanvas`, `exportSpecPagePDF({returnPdf})`, `_projectFileText` /
+  `_readProjectText`); never give it rules of its own. Inches in and out, items by code, walls by `elev.id`,
+  pages by KEY. A call is ONE undo entry (`_apiFoldHistory`) and fails as `{error}`, never a modal or a hang
+  (decode an image before the intake, which answers a bad file with a modal and no callback). `returnPdf` skips
+  the save AND the missing-walls question. New pages default to the END of the deck. `test_frame_api` (jsdom);
+  canvas, images and the real PDF need headless Chrome.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
