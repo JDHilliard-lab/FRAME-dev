@@ -188,11 +188,12 @@ check('IMPORT: the Category column wins over the product, by label or key', () =
   if (rows[0].category !== 'canvas' || rows[1].category !== 'framed') throw new Error(rows.map(r => r.category).join());
 });
 
-check('CSV ROUND TRIP: export writes Category as the LAST column, and an import puts each row back in it', async () => {
+check('CSV ROUND TRIP: export writes Category after Arrangement (19.89 appended Vendor, Source URL), and an import puts each row back in it', async () => {
   fresh(); fx.add('canvas', 1); fx.add('egd', 1);
   const text = fx.csv();
   const header = text.split(String.fromCharCode(10)).find(l => l.indexOf('ITEM CODE') >= 0);
-  if (header.slice(-',Arrangement,Category'.length) !== ',Arrangement,Category') throw new Error('header ends ' + header.slice(-40));
+  const TAIL = ',Arrangement,Category,Vendor,Source URL';
+  if (header.slice(-TAIL.length) !== TAIL) throw new Error('header ends ' + header.slice(-50));
   fx.rows.forEach(r => { r.category = ''; });
   let said = null; window.showInfoModal = (t) => { said = t; };
   fx.imp({ target: { files: [new window.File([text], 'x.csv')], value: '' } });

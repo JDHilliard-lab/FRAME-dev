@@ -66,7 +66,7 @@ const EXPECT = {
   edit: [['Move To', 'openMoveToModal'], ['Bulk Edit', 'openBulkEditModal'], ['Duplicate as Series', 'openDuplicateSeriesModal'], ['Item codes', '_jumpToCodes'], ['Links', 'openLinksPanel'], ['Frame & mat samples', 'openProduction']],   // 19.74 added Links; 19.87 samples
   // 19.26: New items from photos joins Import (a new action goes in a menu, not a button).
   import: [['Import CSV', null], ['Bulk Images', 'openBulkReplaceModal'], ['New items from photos', 'dashNewFromPhotos']],
-  export: [['Export Database', 'exportDashCSV'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript']],
+  export: [['Export Database', 'exportDashCSV'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript'], ['Production pack', 'openProduction']],   // 19.89 production pack
 };
 const BTN = { edit: 'dashEditMenuBtn', import: 'dashImportMenuBtn', export: 'dashExportMenuBtn' };
 

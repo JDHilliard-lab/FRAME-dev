@@ -2347,6 +2347,11 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **IFS READINESS (19.88, `_readinessPreflight`).** Always: one `_imgCodeKey` on two `_artSig`s (reuse those two,
   never a new signature). IFS only: TBD in image code / `buildSpecStrings` values / notes, a catalogue placement with
   more than one option, footer `V<n>` vs the project file name's `V<n>`.
+- **VENDORS AND THE PACK (19.89, `r.vendorName`, `r.sourceUrl`, `setRowsProduction`, `_prodPackPlan`,
+  `_prodPackFiles`, `downloadProductionPack`).** Row fields outside the form survive sync (it copies unknown keys).
+  `_rowIsPurchase` (Sourced Object, FAO/FCM/FSO/FSL code, original/commission/sourced art type) NEVER goes on an RFI.
+  A per-vendor RFI is `buildDashCSVString({only})`, never a second CSV writer. `Vendor,Source URL` trail `Category`.
+  Contact sheet caption `_contactSheetCaption` = image code + `_WxH` at PRINT size, project unit, no extension.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
