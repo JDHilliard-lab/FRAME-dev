@@ -3567,3 +3567,7 @@ html.phone .frame-tour .tour-card { left: 8px !important; right: 8px !important;
 #wall.dim-knock .arch-label-new,
 #wall.dim-knock .mark-label,
 #wall.dim-knock .hang-dim-num { background: transparent !important; }
+
+/* 19.93: the dashboard budget chip turns amber past the budget or the selected piece’s allowance. */
+.dash-budget-chip { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.dash-budget-chip[data-over] { color: var(--warn); border-color: var(--warn); }

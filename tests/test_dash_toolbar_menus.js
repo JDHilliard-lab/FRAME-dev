@@ -37,7 +37,9 @@ const bar = addBtn && addBtn.closest('.pane-header');
 
 check('EXACT BUG: the toolbar is six controls, not thirteen', () => {
   if (!bar) throw new Error('toolbar not found');
-  const btns = bar.querySelectorAll('button');
+  // 19.93: the budget chip (#dashBudgetChip) is a READOUT that opens Pricing, not an action; it is
+  // not counted. Any other new button still fails here.
+  const btns = bar.querySelectorAll('button:not(#dashBudgetChip)');
   if (btns.length !== 6) throw new Error(btns.length + ' buttons in the toolbar, want 6');
 });
 

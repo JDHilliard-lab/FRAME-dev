@@ -2364,6 +2364,10 @@ run but passes alone is usually load timing: rerun before chasing it.
   cellStyle or openpyxl warns) and `_xlsxReadRows` (shared strings, columns by `r` ref); import reads columns BY NAME
   (`PRICE_IMPORT_COLS`), never Qty, and does not freeze a cached `cost x markup` Unit Sell into a hand price.
   Salesforce gets a CSV (`_salesforceLinesCSV`); no API (static site, no tokens).
+- **THE BUDGET SHOWS WHILE ART IS CHOSEN (19.93, `#dashBudgetChip`, `_dashBudgetInfo`, `_dashBudgetSync`).** One
+  chip in the item toolbar, built from `_priceTotals` / `_priceRow` (never its own sums): sell vs budget and the selected
+  piece vs its allowance, `data-over` amber. Refreshed by `_syncNavBadges` (every edit) and `loadDashDataIntoControls`
+  (selection). Screen only.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

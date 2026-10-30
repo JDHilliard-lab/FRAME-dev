@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.92';
+const APP_VERSION = '19.93';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -177,6 +177,7 @@ function _syncNavBadges() {
         tab.title = (NAV_STEP_TIPS[v] || '') + (b ? ' ' + b.tip : '');
     });
     try { _syncNextStep(); } catch (e) {}
+    try { _dashBudgetSync(); } catch (e) {}
 }
 
 // Debounced off scheduleAutosave, the hook nearly every edit already calls.
@@ -12779,6 +12780,7 @@ function loadDashDataIntoControls(data) {
     updateDashVisualsFromDOM();
     // Surface any constraint warnings for this row immediately on load.
     updateDashboardWarnings();
+    try { _dashBudgetSync(data); } catch (e) {}
 }
 
 // Update table from a table input. The fourth arg (`fromTable`) lets the caller
@@ -49333,7 +49335,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.92</strong> Contact sheets in the production pack show each picture at its print file's shape with the piece's own crop (as the deck shows it), not the source image as it came. The Vendors and Issues tabs keep their dropdowns on one line.<br><br>
+                body: `<strong>19.93</strong> The item toolbar shows the budget while you choose art: what the pieces sell for against the budget, how much is left, and the selected piece against its allowance. It turns amber when either is passed, appears once anything is priced or a budget is set, and a click opens Prices &amp; budget.<br><br>
+<strong>19.92</strong> Contact sheets in the production pack show each picture at its print file's shape with the piece's own crop (as the deck shows it), not the source image as it came. The Vendors and Issues tabs keep their dropdowns on one line.<br><br>
 <strong>19.91</strong> <strong>Prices &amp; budget</strong> (Frame Dashboard, Export menu, or the Pricing tab of the Production window). Each piece can carry a unit cost, a sell price (or cost times the project markup) and an allowance, with totals, margin, allowances, budget left and a total per area. Every price says where it came from and when: a price you type or import is a dated quote; an estimate comes from the <strong>Rate card</strong> (base plus per square foot by product, dated), and <strong>Update estimates</strong> refreshes estimates when rates change without touching a quote. Quotes older than 90 days are flagged. <strong>Export to Excel</strong> writes a real .xlsx with live formulas (lines, totals, budget left) and the rate card; edit it in Excel and <strong>Import prices</strong> reads it back by item code (an .xlsx or .csv, columns by name, so adding columns is fine). <strong>Salesforce CSV</strong> gives one quote line per piece for Salesforce's import. Prices never print in the deck, but they are saved in the project file, so think before sending the project file itself to a client.<br><br>
 <strong>19.90</strong> <strong>Issues</strong> (in the Production window). Each time the deck goes to the client or to production, <strong>Mark as issued</strong> (the label starts as the deck's version). FRAME keeps what every piece printed at that moment, and shows what has changed since any issue: pieces added or removed, and for each changed piece the field, what it was and what it is now (a new picture counts). Copy it into the client email, or download it as a spreadsheet; the production pack includes the changes since the latest issue.<br><br>
 <strong>19.89</strong> <strong>Production pack</strong> (Frame Dashboard, Export menu). Give each piece its vendor or seller on the new <strong>Vendors</strong> tab (or set every piece of one product at once), and a shop link for anything bought. <strong>Download production pack</strong> makes one ZIP: an RFI spreadsheet and a contact sheet PDF for each vendor with only that vendor's pieces, captioned image code_W x H at print size; a purchase tracker for sourced objects and originals (FAO, FCM, FSO codes), which never go on a vendor's RFI; and the sample request. The database CSV gains Vendor and Source URL columns at the end, and an import reads them back.<br><br>
@@ -60452,6 +60455,44 @@ async function importPricesFile(file) {
         + (res.unknown.length ? '<br><br>Not in this project (left alone): ' + _esc(res.unknown.join(', ')) : '') + '<br><br>Ctrl+Z undoes the import.');
     try { _prodShow(); } catch (e) {}
     return res;
+}
+// ── THE BUDGET ON THE DASHBOARD (19.93) ──
+// Art is chosen on the dashboard, so that is where the money shows: one chip in the item
+// toolbar with what the pieces sell for against the budget, and the selected piece against
+// its allowance. Hidden until something is priced or a budget is set; a click opens
+// Production > Pricing. Screen only: nothing here reaches a deck page.
+function _dashBudgetInfo(sel) {
+    const t = _priceTotals();
+    if (!t.priced && t.budget == null) return null;
+    let text = _money(t.sell), tip = 'Sell total ' + _money(t.sell) + ' (' + t.priced + ' priced';
+    tip += t.unpriced.length ? ', ' + t.unpriced.length + ' not priced yet)' : ')';
+    const over = t.budget != null && t.sell > t.budget;
+    if (t.budget != null) {
+        const left = t.budget - t.sell;
+        text += ' of ' + _money(t.budget) + ' · ' + _money(Math.abs(left)) + (left >= 0 ? ' left' : ' over');
+        tip += '. Budget ' + _money(t.budget) + '.';
+    } else { text += ' sell'; tip += '. No budget set.'; }
+    let pieceOver = false;
+    if (sel && sel.id && _deckSpecRows().indexOf(sel) >= 0) {
+        const p = _priceRow(sel);
+        if (p.sell != null || p.allow != null) {
+            text += ' · ' + sel.id + ' ' + (p.sell != null ? _money(p.sell) : 'not priced') + (p.allow != null ? ' / ' + _money(p.allow) : '');
+            tip += ' ' + sel.id + ': ' + (p.sell != null ? 'sells at ' + _money(p.sell) : 'not priced') + (p.allow != null ? ', allowance ' + _money(p.allow) : '') + (p.over ? ', OVER its allowance' : '') + '.';
+            pieceOver = p.over;
+        }
+    }
+    if (t.over.length) tip += ' ' + t.over.length + (t.over.length === 1 ? ' piece is' : ' pieces are') + ' over allowance.';
+    return { text: text, tip: tip + ' Click for Pricing.', over: over || pieceOver };
+}
+function _dashBudgetSync(sel) {
+    const el = document.getElementById('dashBudgetChip'); if (!el) return;
+    if (sel === undefined) sel = dashProjectData[dashSelectedRowIndex];
+    let info = null; try { info = _dashBudgetInfo(sel); } catch (e) {}
+    el.style.display = info ? '' : 'none';
+    if (!info) return;
+    el.textContent = info.text;
+    el.title = info.tip;
+    if (info.over) el.setAttribute('data-over', '1'); else el.removeAttribute('data-over');
 }
 function _prodPricingInto(body) {
     const pr = _pricing();
