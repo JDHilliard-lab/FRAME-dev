@@ -63,7 +63,7 @@ check('the CSV file input is still in the page (Import CSV clicks it)', () => {
 
 // Each menu item must call the function its old button called. Stub them, click.
 const EXPECT = {
-  edit: [['Move To', 'openMoveToModal'], ['Bulk Edit', 'openBulkEditModal'], ['Duplicate as Series', 'openDuplicateSeriesModal'], ['Item codes', '_jumpToCodes'], ['Links', 'openLinksPanel']],   // 19.74 added Links
+  edit: [['Move To', 'openMoveToModal'], ['Bulk Edit', 'openBulkEditModal'], ['Duplicate as Series', 'openDuplicateSeriesModal'], ['Item codes', '_jumpToCodes'], ['Links', 'openLinksPanel'], ['Frame & mat samples', 'openProduction']],   // 19.74 added Links; 19.87 samples
   // 19.26: New items from photos joins Import (a new action goes in a menu, not a button).
   import: [['Import CSV', null], ['Bulk Images', 'openBulkReplaceModal'], ['New items from photos', 'dashNewFromPhotos']],
   export: [['Export Database', 'exportDashCSV'], ['Batch PNGs', 'batchDownloadAllFrames'], ['InDesign Script', 'downloadInDesignScript']],

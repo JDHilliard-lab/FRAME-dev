@@ -2337,6 +2337,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   (decode an image before the intake, which answers a bad file with a modal and no callback). `returnPdf` skips
   the save AND the missing-walls question. New pages default to the END of the deck. `test_frame_api` (jsdom);
   canvas, images and the real PDF need headless Chrome.
+- **PRODUCTION IS ONE WINDOW WORKING FROM THE ROWS (19.87, `openProduction(tab)`, `PROD_TABS`, `_prodShow`).**
+  Everything after the deck (samples, vendors, pricing, issues) reads `_deckSpecRows()`; never a second item list.
+  **Samples:** codes are DERIVED (`_sampleItems`: `fCode` on rows `_rowTakesFrameSample`, mats via `_rowMatNames`
+  mirroring `buildSpecStrings`); only the verdict is stored, `editorialContent.samples['f:'|'m:' + code] = {st, use,
+  note, at}`, one writer `setSampleStatus` (prunes empties). `sampleReplace` swaps through `_salonFrameDress` (library)
+  or the typed code, pushes to wall copies, ONE undo. Preflight (`_samplePreflight`): rejected and still used = err;
+  IFS (`_deckIsIFS`, read off the footer version, no stage setting) and not approved = warn. Issues carry `prod`.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
