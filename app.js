@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.90';
+const APP_VERSION = '19.91';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -33625,6 +33625,7 @@ function openDashMenu(btn, which) {
             { label: 'InDesign Script', hint: 'AutoFrameSpecs.jsx', onClick: () => downloadInDesignScript() },
             { head: '' },
             { label: 'Production pack…', hint: 'RFI and contact sheet per vendor, purchases', onClick: () => openProduction('vendors') },
+            { label: 'Prices & budget…', hint: 'quote to Excel and Salesforce, import prices', onClick: () => openProduction('pricing') },
         ],
     };
     if (!menus[which]) return null;
@@ -49332,7 +49333,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.90</strong> <strong>Issues</strong> (in the Production window). Each time the deck goes to the client or to production, <strong>Mark as issued</strong> (the label starts as the deck's version). FRAME keeps what every piece printed at that moment, and shows what has changed since any issue: pieces added or removed, and for each changed piece the field, what it was and what it is now (a new picture counts). Copy it into the client email, or download it as a spreadsheet; the production pack includes the changes since the latest issue.<br><br>
+                body: `<strong>19.91</strong> <strong>Prices &amp; budget</strong> (Frame Dashboard, Export menu, or the Pricing tab of the Production window). Each piece can carry a unit cost, a sell price (or cost times the project markup) and an allowance, with totals, margin, allowances, budget left and a total per area. Every price says where it came from and when: a price you type or import is a dated quote; an estimate comes from the <strong>Rate card</strong> (base plus per square foot by product, dated), and <strong>Update estimates</strong> refreshes estimates when rates change without touching a quote. Quotes older than 90 days are flagged. <strong>Export to Excel</strong> writes a real .xlsx with live formulas (lines, totals, budget left) and the rate card; edit it in Excel and <strong>Import prices</strong> reads it back by item code (an .xlsx or .csv, columns by name, so adding columns is fine). <strong>Salesforce CSV</strong> gives one quote line per piece for Salesforce's import. Prices never print in the deck, but they are saved in the project file, so think before sending the project file itself to a client.<br><br>
+<strong>19.90</strong> <strong>Issues</strong> (in the Production window). Each time the deck goes to the client or to production, <strong>Mark as issued</strong> (the label starts as the deck's version). FRAME keeps what every piece printed at that moment, and shows what has changed since any issue: pieces added or removed, and for each changed piece the field, what it was and what it is now (a new picture counts). Copy it into the client email, or download it as a spreadsheet; the production pack includes the changes since the latest issue.<br><br>
 <strong>19.89</strong> <strong>Production pack</strong> (Frame Dashboard, Export menu). Give each piece its vendor or seller on the new <strong>Vendors</strong> tab (or set every piece of one product at once), and a shop link for anything bought. <strong>Download production pack</strong> makes one ZIP: an RFI spreadsheet and a contact sheet PDF for each vendor with only that vendor's pieces, captioned image code_W x H at print size; a purchase tracker for sourced objects and originals (FAO, FCM, FSO codes), which never go on a vendor's RFI; and the sample request. The database CSV gains Vendor and Source URL columns at the end, and an import reads them back.<br><br>
 <strong>19.88</strong> <strong>Preflight checks an IFS before it goes out.</strong> At any stage it flags one image code used on two different pictures (a recoloured file saved under its old code). Once the deck's version says IFS, it also flags anything still reading TBD (image code, a spec line, the notes), a catalogue placement still showing more than one option, and a footer version that does not match the project file's name.<br><br>
 <strong>19.87</strong> <strong>Frame &amp; mat samples</strong> (Frame Dashboard, Edit menu) lists every frame and mat on the pieces in your deck, with the pieces that use each one. Record what the client said about each sample: Not sent, Sent, Approved or Rejected, with a note. A rejected frame or mat still on a piece shows as a Preflight error, and <strong>Replace</strong> puts its replacement on every piece and wall at once (Ctrl+Z undoes it). Once the deck's version says IFS, Preflight also warns about any sample not approved yet. The same window writes the sample request for your framer: the codes still to send, quantities for the sets and addresses you enter, ready to copy into an email.<br><br>
@@ -60106,9 +60108,466 @@ function _prodIssuesInto(body) {
 }
 let _prodIssuePick = null;
 
+// ── PRICES AND THE BUDGET (19.91) ──────────────────────────────────────────────
+// Caesars' budget lived in an Excel the designers were linked to; the quote was the same
+// sheet with markups, then Salesforce. Here a piece carries its price, and every price
+// says where it came from and when, because prices move:
+//   r.unitCost  vendor cost per unit       r.costSrc 'quote' | 'estimate'    r.costAt date
+//   r.unitSell  sell per unit, only when set by hand (else cost x markup)
+//   r.allowance budget per unit (the PM's allowance for the placement)
+// An ESTIMATE comes from the project's dated rate card (pricing.rates); "Update
+// estimates" refreshes every estimate when rates change and NEVER touches a quote. A quote
+// older than PRICE_STALE_DAYS is flagged. Excel is the exchange both ways (.xlsx with live
+// formulas out, .xlsx or .csv in, matched by item code), and a quote-lines CSV goes to
+// Salesforce's import. Prices never reach a deck page; they do travel in the project file.
+const PRICE_STALE_DAYS = 90;
+const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance'];
+function _pricing() { return (editorialContent && editorialContent.pricing) || {}; }
+function _pricingSet(patch, quiet) {
+    const p = Object.assign({}, _pricing(), patch || {});
+    Object.keys(p).forEach(k => { if (p[k] === '' || p[k] == null) delete p[k]; });
+    if (Object.keys(p).length) editorialContent.pricing = p; else delete editorialContent.pricing;
+    if (!quiet) pushHistory();
+}
+function _priceNum(v) { const n = parseFloat(String(v == null ? '' : v).replace(/[$,\s]/g, '')); return isFinite(n) ? n : null; }
+function _priceMarkup() {
+    const n = _priceNum(_pricing().markup);
+    return n != null && n > 0 ? n : 1;
+}
+// What a catalogue option bills: nothing (it is a choice, not an order). A piece not yet on
+// a wall still prices as one, or the budget would read zero until the walls are drawn.
+function _priceQty(r) {
+    if (_catOptionRowIds()[r.id]) return 0;
+    const q = parseInt(r.qty, 10);
+    return q > 0 ? q : 1;
+}
+function _priceRow(r) {
+    const cost = _priceNum(r.unitCost), allow = _priceNum(r.allowance), hand = _priceNum(r.unitSell);
+    const mk = _priceMarkup();
+    const sell = hand != null ? hand : (cost != null ? Math.round(cost * mk * 100) / 100 : null);
+    const qty = _priceQty(r);
+    let age = null;
+    if (r.costSrc === 'quote' && r.costAt) { const t = Date.parse(r.costAt); if (isFinite(t)) age = Math.floor((Date.now() - t) / 86400000); }
+    return { cost: cost, sell: sell, allow: allow, qty: qty, markup: mk, hand: hand != null, src: r.costSrc || '', at: r.costAt || '', age: age, stale: age != null && age > PRICE_STALE_DAYS,
+        lineCost: cost != null ? cost * qty : 0, lineSell: sell != null ? sell * qty : 0, lineAllow: allow != null ? allow * qty : 0, over: allow != null && sell != null && sell > allow };
+}
+function _priceTotals() {
+    const rows = _deckSpecRows().filter(r => r && r.id);
+    const t = { cost: 0, sell: 0, allow: 0, priced: 0, unpriced: [], stale: [], over: [], byArea: {} };
+    rows.forEach(r => {
+        const p = _priceRow(r);
+        if (!p.qty) return;
+        t.cost += p.lineCost; t.sell += p.lineSell; t.allow += p.lineAllow;
+        if (p.sell == null) t.unpriced.push(r.id); else t.priced++;
+        if (p.stale) t.stale.push(r.id);
+        if (p.over) t.over.push(r.id);
+        const a = String(r.location || '').trim() || '(no location)';
+        const ar = t.byArea[a] || (t.byArea[a] = { qty: 0, sell: 0, allow: 0 });
+        ar.qty += p.qty; ar.sell += p.lineSell; ar.allow += p.lineAllow;
+    });
+    const b = _priceNum(_pricing().budget);
+    t.budget = b; t.margin = t.sell > 0 ? (t.sell - t.cost) / t.sell : null;
+    return t;
+}
+function _money(n) {
+    if (n == null || !isFinite(n)) return '';
+    const cur = _pricing().currency || 'USD';
+    try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: cur, maximumFractionDigits: 0 }).format(n); }
+    catch (e) { return '$' + Math.round(n).toLocaleString('en-US'); }
+}
+// ONE writer for a piece's price fields. A cost typed or imported is a QUOTE (dated today
+// unless a date came with it); `src: 'estimate'` is only the rate card's.
+function setRowPrice(id, patch, quiet) {
+    const r = dashProjectData.find(x => x && x.id === id); if (!r) return false;
+    const p = Object.assign({}, patch);
+    if ('unitCost' in p) {
+        const n = _priceNum(p.unitCost);
+        if (n == null) { delete r.unitCost; delete r.costSrc; delete r.costAt; }
+        else { r.unitCost = n; r.costSrc = p.costSrc || 'quote'; r.costAt = p.costAt || _todayIso(); }
+    }
+    ['unitSell', 'allowance'].forEach(k => { if (k in p) { const n = _priceNum(p[k]); if (n == null) delete r[k]; else r[k] = n; } });
+    if (!quiet) pushHistory();
+    return true;
+}
+// ── THE RATE CARD: an estimate before any vendor has quoted ──
+// Per product: a base price plus a price per square foot of the OVERALL size, and two
+// adders that change what a framer charges (float mount, a second mat). Dated, so an
+// estimate says which rates it came from. The studio's numbers are typed in once (or
+// imported) and can be kept on this computer as "my rate card" for the next project.
+// Never in the repository: the site is public.
+const RATE_CARD_KEY = 'frame_rate_card';
+function _rateCard() { return _pricing().rates || null; }
+function _rateFor(r) {
+    const rc = _rateCard(); if (!rc || !rc.list) return null;
+    return rc.list.find(x => x && x.product === r.product) || null;
+}
+function _estimateCost(r) {
+    const rate = _rateFor(r); if (!rate) return null;
+    const k = unitFactor(dashUnit, 'in');
+    const sqft = Math.max(0, (parseFloat(r.extW) || 0) * k) * Math.max(0, (parseFloat(r.extH) || 0) * k) / 144;
+    let c = (_priceNum(rate.base) || 0) + (_priceNum(rate.perSqFt) || 0) * sqft;
+    if (r.useFloatMount === true) c += _priceNum(rate.floatMount) || 0;
+    if (r.m1A !== false && r.m2A && parseFloat(r.m2) > 0 && !r.useFloatMount) c += _priceNum(rate.doubleMat) || 0;
+    return c > 0 ? Math.round(c * 100) / 100 : null;
+}
+// Refresh every ESTIMATE (and fill pieces with no price) from the rate card. Quotes stay.
+function updateEstimates() {
+    const rc = _rateCard(); if (!rc) return 0;
+    let n = 0;
+    _deckSpecRows().forEach(r => {
+        if (!r || !r.id || r.costSrc === 'quote') return;
+        const c = _estimateCost(r); if (c == null) return;
+        r.unitCost = c; r.costSrc = 'estimate'; r.costAt = rc.asOf || _todayIso(); n++;
+    });
+    if (n) pushHistory();
+    return n;
+}
+function setRateCard(list, asOf) {
+    const clean = (list || []).filter(x => x && x.product).map(x => {
+        const o = { product: x.product };
+        ['base', 'perSqFt', 'floatMount', 'doubleMat'].forEach(k => { const n = _priceNum(x[k]); if (n != null) o[k] = n; });
+        return o;
+    });
+    _pricingSet({ rates: clean.length ? { asOf: asOf || _todayIso(), list: clean } : null });
+}
+function _rateCardSaveLocal() { try { localStorage.setItem(RATE_CARD_KEY, JSON.stringify(_rateCard())); return true; } catch (e) { return false; } }
+function _rateCardLoadLocal() { try { const v = JSON.parse(localStorage.getItem(RATE_CARD_KEY) || 'null'); return v && v.list ? v : null; } catch (e) { return null; } }
+
+// ── EXCEL (.xlsx), written and read with the vendored JSZip ──
+function _xlsxCol(i) { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
+function _xmlEsc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ''); }
+// sheets: [{name, rows: [[cell]], widths: [n]}]; a cell is a string, a number, null, or
+// {f: 'formula', money: bool} / {v: number, money: bool} / {s: string, bold: bool}.
+async function _xlsxBlob(sheets, type) {
+    const zip = new JSZip();
+    const ws = sheets.map((sh, si) => {
+        let x = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">';
+        x += '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>';
+        if (sh.widths) x += '<cols>' + sh.widths.map((w, i) => '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + w + '" customWidth="1"/>').join('') + '</cols>';
+        x += '<sheetData>';
+        sh.rows.forEach((row, ri) => {
+            x += '<row r="' + (ri + 1) + '">';
+            row.forEach((c, ci) => {
+                if (c == null || c === '') return;
+                const ref = _xlsxCol(ci) + (ri + 1);
+                const o = (typeof c === 'object') ? c : (typeof c === 'number' ? { v: c } : { s: c });
+                const st = o.bold ? ' s="1"' : (o.money ? ' s="2"' : '');
+                if (o.f != null) x += '<c r="' + ref + '"' + st + '><f>' + _xmlEsc(o.f) + '</f></c>';
+                else if (o.v != null && isFinite(o.v)) x += '<c r="' + ref + '"' + st + '><v>' + o.v + '</v></c>';
+                else if (o.s != null) x += '<c r="' + ref + '" t="inlineStr"' + st + '><is><t xml:space="preserve">' + _xmlEsc(o.s) + '</t></is></c>';
+            });
+            x += '</row>';
+        });
+        x += '</sheetData></worksheet>';
+        zip.file('xl/worksheets/sheet' + (si + 1) + '.xml', x);
+        return sh;
+    });
+    zip.file('[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+        + ws.map((s, i) => '<Override PartName="/xl/worksheets/sheet' + (i + 1) + '.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join('') + '</Types>');
+    zip.file('_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>');
+    zip.file('xl/workbook.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'
+        + ws.map((s, i) => '<sheet name="' + _xmlEsc(String(s.name).slice(0, 31)) + '" sheetId="' + (i + 1) + '" r:id="rId' + (i + 1) + '"/>').join('') + '</sheets><calcPr fullCalcOnLoad="1"/></workbook>');
+    zip.file('xl/_rels/workbook.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+        + ws.map((s, i) => '<Relationship Id="rId' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' + (i + 1) + '.xml"/>').join('')
+        + '<Relationship Id="rId' + (ws.length + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>');
+    zip.file('xl/styles.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0.00"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>');
+    return zip.generateAsync({ type: type || 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+}
+// The first sheet of an .xlsx as an array of rows of strings (numbers as their text).
+async function _xlsxReadRows(buf) {
+    const zip = await JSZip.loadAsync(buf);
+    const P = new DOMParser();
+    const xml = async (p) => { const f = zip.file(p); return f ? P.parseFromString(await f.async('string'), 'application/xml') : null; };
+    const all = (doc, tag) => doc ? Array.prototype.slice.call(doc.getElementsByTagNameNS('*', tag)) : [];
+    const wb = await xml('xl/workbook.xml');
+    const first = all(wb, 'sheet')[0];
+    let target = 'worksheets/sheet1.xml';
+    if (first) {
+        const rid = first.getAttribute('r:id') || first.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id');
+        const rel = all(await xml('xl/_rels/workbook.xml.rels'), 'Relationship').find(x => x.getAttribute('Id') === rid);
+        if (rel) target = rel.getAttribute('Target').replace(/^\/?xl\//, '');
+    }
+    const ss = all(await xml('xl/sharedStrings.xml'), 'si').map(si => all(si, 't').map(t => t.textContent).join(''));
+    const sh = await xml('xl/' + target.replace(/^\//, ''));
+    if (!sh) throw new Error('no worksheet in this file');
+    const colIdx = (ref) => { const m = /^([A-Z]+)/.exec(ref || ''); if (!m) return -1; let n = 0; for (const ch of m[1]) n = n * 26 + (ch.charCodeAt(0) - 64); return n - 1; };
+    return all(sh, 'row').map(row => {
+        const out = [];
+        all(row, 'c').forEach((c, k) => {
+            const i = c.getAttribute('r') ? colIdx(c.getAttribute('r')) : k;
+            const t = c.getAttribute('t');
+            const v = all(c, 'v')[0];
+            let val = '';
+            if (t === 's') val = v ? (ss[parseInt(v.textContent, 10)] || '') : '';
+            else if (t === 'inlineStr') val = all(c, 't').map(x => x.textContent).join('');
+            else val = v ? v.textContent : '';
+            out[i] = val;
+        });
+        for (let i = 0; i < out.length; i++) if (out[i] == null) out[i] = '';
+        return out;
+    });
+}
+function _csvRows(text) {
+    const rows = []; let row = [], cur = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+        const ch = text[i];
+        if (q) { if (ch === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += ch; }
+        else if (ch === '"') q = true;
+        else if (ch === ',') { row.push(cur); cur = ''; }
+        else if (ch === '\n' || ch === '\r') { if (ch === '\r' && text[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = ''; }
+        else cur += ch;
+    }
+    if (cur !== '' || row.length) { row.push(cur); rows.push(row); }
+    return rows;
+}
+// The quote workbook. Columns are named so an import reads them back by NAME (moving or
+// adding columns in Excel is fine); totals and lines are formulas, so Excel stays live.
+const QUOTE_COLS = ['Item Code', 'Image Code', 'Product', 'Location', 'Description', 'Vendor', 'Qty', 'Unit Cost', 'Cost Source', 'Cost Date', 'Markup', 'Unit Sell', 'Line Sell', 'Allowance', 'Line Allowance', 'Over / Under'];
+function _quoteDescription(r) {
+    const k = unitFactor(dashUnit, 'in');
+    const parts = [];
+    try { const s = buildSpecStrings(r); if (s.application) parts.push(s.application); const fc = (s.lines || []).find(l => l.label === 'Frame Code'); if (fc) parts.push(fc.value); } catch (e) {}
+    parts.push(_fmtUnitNum((parseFloat(r.extW) || 0) * k, 'in') + '" x ' + _fmtUnitNum((parseFloat(r.extH) || 0) * k, 'in') + '" overall');
+    if (r.imageCode) parts.push(String(r.imageCode).trim());
+    return parts.join(', ');
+}
+function _quoteSheetRows() {
+    const rows = _deckSpecRows().filter(r => r && r.id && _priceQty(r));
+    const C = (name) => _xlsxCol(QUOTE_COLS.indexOf(name));
+    const out = [QUOTE_COLS.map(h => ({ s: h, bold: true }))];
+    rows.forEach((r, i) => {
+        const n = i + 2, p = _priceRow(r);
+        out.push([r.id, String(r.imageCode || ''), r.product || '', r.location || '', _quoteDescription(r), _rowVendor(r), p.qty,
+            p.cost != null ? { v: p.cost, money: true } : null, p.src, p.at, p.markup,
+            p.hand ? { v: p.sell, money: true } : { f: 'IF(' + C('Unit Cost') + n + '="","",' + C('Unit Cost') + n + '*' + C('Markup') + n + ')', money: true },
+            { f: 'IF(' + C('Unit Sell') + n + '="","",' + C('Unit Sell') + n + '*' + C('Qty') + n + ')', money: true },
+            p.allow != null ? { v: p.allow, money: true } : null,
+            { f: 'IF(' + C('Allowance') + n + '="","",' + C('Allowance') + n + '*' + C('Qty') + n + ')', money: true },
+            { f: 'IF(OR(' + C('Allowance') + n + '="",' + C('Unit Sell') + n + '=""),"",' + C('Line Allowance') + n + '-' + C('Line Sell') + n + ')', money: true }]);
+    });
+    const last = rows.length + 1, t = last + 2;
+    const sum = (name) => ({ f: 'SUM(' + C(name) + '2:' + C(name) + last + ')', money: true });
+    const tot = QUOTE_COLS.map(() => null);
+    tot[0] = { s: 'TOTAL', bold: true };
+    tot[QUOTE_COLS.indexOf('Qty')] = { f: 'SUM(' + C('Qty') + '2:' + C('Qty') + last + ')' };
+    tot[QUOTE_COLS.indexOf('Line Sell')] = sum('Line Sell');
+    tot[QUOTE_COLS.indexOf('Line Allowance')] = sum('Line Allowance');
+    tot[QUOTE_COLS.indexOf('Over / Under')] = sum('Over / Under');
+    out.push([]); out.push(tot);
+    const b = _priceNum(_pricing().budget);
+    if (b != null) { const br = QUOTE_COLS.map(() => null); br[0] = { s: 'BUDGET', bold: true }; br[QUOTE_COLS.indexOf('Line Sell')] = { v: b, money: true }; out.push(br);
+        const lr = QUOTE_COLS.map(() => null); lr[0] = { s: 'LEFT IN BUDGET', bold: true }; lr[QUOTE_COLS.indexOf('Line Sell')] = { f: C('Line Sell') + (t + 1) + '-' + C('Line Sell') + t, money: true }; out.push(lr); }
+    return out;
+}
+async function exportQuoteXlsx() {
+    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload FRAME and try again.'); return; }
+    const blob = await _xlsxBlob(_quoteSheets());
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = _prodStamp() + '.' + _prodProjectTag() + '.Quote.xlsx'; a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
+}
+function _quoteSheets() {
+    const rates = _rateCard();
+    const sheets = [{ name: 'Quote', rows: _quoteSheetRows(), widths: [11, 20, 22, 18, 60, 20, 6, 12, 11, 11, 8, 12, 13, 12, 14, 13] }];
+    if (rates) sheets.push({ name: 'Rate card', rows: [[{ s: 'Product', bold: true }, { s: 'Base', bold: true }, { s: 'Per sq ft', bold: true }, { s: 'Float mount', bold: true }, { s: 'Double mat', bold: true }, { s: 'As of ' + (rates.asOf || ''), bold: true }]]
+        .concat(rates.list.map(x => [x.product, x.base != null ? { v: x.base, money: true } : null, x.perSqFt != null ? { v: x.perSqFt, money: true } : null, x.floatMount != null ? { v: x.floatMount, money: true } : null, x.doubleMat != null ? { v: x.doubleMat, money: true } : null])), widths: [26, 10, 10, 12, 12, 16] });
+    return sheets;
+}
+// Quote lines for Salesforce's import (Data Import Wizard / CPQ line import): one line per
+// piece, plain columns, mapped once on the Salesforce side.
+function _salesforceLinesCSV() {
+    const q = (s) => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
+    let csv = ['Line Name', 'Product Code', 'Description', 'Quantity', 'Unit Cost', 'Sales Price', 'Total Price', 'Vendor', 'Location'].map(q).join(',') + '\n';
+    _deckSpecRows().filter(r => r && r.id && _priceQty(r)).forEach(r => {
+        const p = _priceRow(r);
+        csv += [r.id + ' ' + (r.product || ''), r.id, _quoteDescription(r), p.qty, p.cost != null ? p.cost.toFixed(2) : '', p.sell != null ? p.sell.toFixed(2) : '', p.sell != null ? (p.sell * p.qty).toFixed(2) : '', _rowVendor(r), r.location || ''].map(q).join(',') + '\n';
+    });
+    return csv;
+}
+// Read a sheet back: find the header row holding "Item Code", read the price columns by
+// name, write through setRowPrice. Qty is never read (it comes from the walls).
+const PRICE_IMPORT_COLS = {
+    unitCost: ['unit cost', 'cost', 'vendor cost'],
+    unitSell: ['unit sell', 'unit price', 'sell', 'sales price', 'sell price'],
+    allowance: ['allowance', 'budget', 'unit allowance'],
+    costAt: ['cost date', 'quote date', 'date quoted'],
+    costSrc: ['cost source', 'source'],
+    vendorName: ['vendor', 'vendor / seller']
+};
+function _priceImportRows(rows) {
+    const norm = (s) => String(s || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    const hi = rows.findIndex(r => r && r.some(c => norm(c) === 'item code'));
+    if (hi < 0) return { error: 'No "Item Code" column found.' };
+    const head = rows[hi].map(norm);
+    const col = {}; Object.keys(PRICE_IMPORT_COLS).forEach(k => { col[k] = head.findIndex(h => PRICE_IMPORT_COLS[k].indexOf(h) >= 0); });
+    // A computed column (Line Sell) is never an input; Unit Sell is read only when it was
+    // typed, so a formula's cached value of cost x markup is not frozen into a hand price.
+    const ci = head.indexOf('item code');
+    const byId = {}; dashProjectData.forEach(r => { if (r && r.id) byId[String(r.id).toLowerCase()] = r; });
+    const res = { updated: [], unknown: [] };
+    rows.slice(hi + 1).forEach(row => {
+        const id = String((row && row[ci]) || '').trim(); if (!id || /^(total|budget|left in budget)$/i.test(id)) return;
+        const r = byId[id.toLowerCase()]; if (!r) { res.unknown.push(id); return; }
+        const cell = (k) => col[k] >= 0 ? String(row[col[k]] == null ? '' : row[col[k]]).trim() : undefined;
+        const patch = {};
+        const cost = cell('unitCost');
+        if (cost !== undefined && _priceNum(cost) !== _priceNum(r.unitCost)) {
+            patch.unitCost = cost;
+            const src = cell('costSrc'); patch.costSrc = (src === 'estimate' || src === 'quote') ? src : 'quote';
+            const at = cell('costAt'); if (at) patch.costAt = /^\d+(\.\d+)?$/.test(at) ? _excelDate(parseFloat(at)) : at;
+        }
+        const sell = cell('unitSell');
+        if (sell !== undefined) {
+            const mk = _priceMarkup(), c = _priceNum(cost !== undefined ? cost : r.unitCost), s = _priceNum(sell);
+            const derived = (c != null && s != null && Math.abs(s - Math.round(c * mk * 100) / 100) < 0.005);
+            if (!derived && s !== _priceNum(r.unitSell)) patch.unitSell = sell;
+        }
+        const al = cell('allowance'); if (al !== undefined && _priceNum(al) !== _priceNum(r.allowance)) patch.allowance = al;
+        const v = cell('vendorName');
+        const changed = Object.keys(patch).length || (v !== undefined && v && v !== _rowVendor(r));
+        if (!changed) return;
+        setRowPrice(r.id, patch, true);
+        if (v !== undefined && v && v !== _rowVendor(r)) r.vendorName = v;
+        res.updated.push(r.id);
+    });
+    if (res.updated.length) pushHistory();
+    return res;
+}
+function _excelDate(n) { const d = new Date(Math.round((n - 25569) * 86400000)); return d.toISOString().slice(0, 10); }
+async function importPricesFile(file) {
+    let rows;
+    try {
+        if (/\.xlsx$/i.test(file.name)) rows = await _xlsxReadRows(await file.arrayBuffer());
+        else rows = _csvRows(await file.text());
+    } catch (e) { showInfoModal('Import prices', 'That file could not be read: ' + _esc(e && e.message || e) + '. Save it from Excel as .xlsx or .csv and try again.'); return null; }
+    const res = _priceImportRows(rows);
+    if (res.error) { showInfoModal('Import prices', res.error + ' Export a quote from FRAME first: its columns are the ones FRAME reads back.'); return res; }
+    showInfoModal('Prices imported', res.updated.length + ' piece' + (res.updated.length === 1 ? '' : 's') + ' updated.'
+        + (res.unknown.length ? '<br><br>Not in this project (left alone): ' + _esc(res.unknown.join(', ')) : '') + '<br><br>Ctrl+Z undoes the import.');
+    try { _prodShow(); } catch (e) {}
+    return res;
+}
+function _prodPricingInto(body) {
+    const pr = _pricing();
+    const intro = document.createElement('div'); intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:10px;';
+    intro.textContent = 'What each piece costs and sells for. A price typed or imported is a quote, dated; estimates come from the rate card and Update estimates refreshes them without touching a quote. Prices never print in the deck, but they are saved in the project file.';
+    body.appendChild(intro);
+    // Settings line.
+    const set = document.createElement('div'); set.style.cssText = 'display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:var(--fs-70); margin-bottom:10px;';
+    const num = (id, label, val, w, onSet, tip) => {
+        const l = document.createElement('label'); l.style.cssText = 'display:flex; gap:4px; align-items:center;'; l.textContent = label; if (tip) l.title = tip;
+        const i = document.createElement('input'); i.type = 'text'; i.id = id; i.value = val == null ? '' : val; i.style.cssText = 'width:' + w + 'px; height:24px;';
+        i.onchange = () => { onSet(i.value); _prodShow(); };
+        l.appendChild(i); set.appendChild(l); return i;
+    };
+    num('priceMarkup', 'Markup ×', pr.markup != null ? pr.markup : '', 50, v => _pricingSet({ markup: _priceNum(v) }), 'Sell = cost × markup, unless a sell price is typed');
+    num('priceBudget', 'Budget', pr.budget != null ? pr.budget : '', 90, v => _pricingSet({ budget: _priceNum(v) }), 'The client’s total budget for the project');
+    num('priceCurrency', 'Currency', pr.currency || 'USD', 50, v => _pricingSet({ currency: String(v || '').trim().toUpperCase() || null }));
+    body.appendChild(set);
+    // Totals.
+    const t = _priceTotals();
+    const tot = document.createElement('div'); tot.id = 'priceTotals'; tot.style.cssText = 'display:flex; gap:18px; flex-wrap:wrap; padding:10px 12px; border:1px solid var(--border-color); border-radius:var(--r-6); margin-bottom:10px; font-size:var(--fs-75);';
+    const stat = (label, val, warn) => { const d = document.createElement('div'); d.innerHTML = '<div style="color:var(--text-muted); font-size:var(--fs-60); text-transform:uppercase; letter-spacing:0.4px;">' + label + '</div><div style="font-weight:700;' + (warn ? ' color:var(--warn);' : '') + '">' + val + '</div>'; tot.appendChild(d); };
+    stat('Sell', _money(t.sell));
+    stat('Cost', _money(t.cost));
+    stat('Margin', t.margin == null ? '' : Math.round(t.margin * 100) + '%');
+    if (t.allow) stat('Allowances', _money(t.allow), t.sell > t.allow);
+    if (t.budget != null) stat(t.sell > t.budget ? 'Over budget' : 'Left in budget', _money(Math.abs(t.budget - t.sell)), t.sell > t.budget);
+    if (t.unpriced.length) stat('Not priced', t.unpriced.length + ' piece' + (t.unpriced.length === 1 ? '' : 's'), true);
+    if (t.stale.length) stat('Quotes over ' + PRICE_STALE_DAYS + ' days', String(t.stale.length), true);
+    body.appendChild(tot);
+    // Tools.
+    const tools = document.createElement('div'); tools.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;';
+    tools.appendChild(_prodBtn('Export to Excel', () => exportQuoteXlsx(), false, 'A .xlsx with live formulas: the quote, totals, budget and the rate card'));
+    tools.appendChild(_prodBtn('Import prices…', () => {
+        const f = document.createElement('input'); f.type = 'file'; f.accept = '.xlsx,.csv';
+        f.onchange = () => { if (f.files && f.files[0]) importPricesFile(f.files[0]); };
+        f.click();
+    }, true, 'Read Unit Cost, Unit Sell, Allowance and Vendor back from an .xlsx or .csv, matched by Item Code'));
+    tools.appendChild(_prodBtn('Salesforce CSV', () => {
+        const b = new Blob([_salesforceLinesCSV()], { type: 'text/csv;charset=utf-8;' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = _prodStamp() + '.' + _prodProjectTag() + '.Quote-lines.csv'; a.click();
+    }, true, 'Quote lines for Salesforce’s import: one line per piece'));
+    tools.appendChild(_prodBtn('Rate card…', () => openRateCard(), true, 'Estimate prices before a vendor quotes'));
+    if (_rateCard()) tools.appendChild(_prodBtn('Update estimates', () => {
+        const n = updateEstimates();
+        _toast(n ? 'Estimates updated' : 'Nothing to update', n ? n + ' piece' + (n === 1 ? '' : 's') + ' from the rate card of ' + (_rateCard().asOf || '') + '. Quotes were left alone.' : 'No piece takes an estimate from this rate card.');
+        _prodShow();
+    }, true, 'Refresh every estimate from the rate card; quotes are never touched'));
+    body.appendChild(tools);
+    // By area.
+    const areas = Object.keys(t.byArea);
+    if (areas.length > 1) {
+        const at = document.createElement('div'); at.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:8px;';
+        at.textContent = areas.map(a => a + ' ' + _money(t.byArea[a].sell) + (t.byArea[a].allow ? ' / ' + _money(t.byArea[a].allow) : '')).join('  ·  ');
+        body.appendChild(at);
+    }
+    const rows = _deckSpecRows().filter(r => r && r.id);
+    if (!rows.length) return;
+    const tbl = document.createElement('table'); tbl.id = 'priceTable';
+    tbl.style.cssText = 'width:100%; border-collapse:collapse; font-size:var(--fs-70);';
+    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;">Code</th><th style="padding:4px;">Product</th><th style="padding:4px;">Vendor</th><th style="padding:4px;">Qty</th><th style="padding:4px;">Unit cost</th><th style="padding:4px;">Source</th><th style="padding:4px;">Unit sell</th><th style="padding:4px;">Line</th><th style="padding:4px;">Allowance</th></tr></thead>';
+    const tb = document.createElement('tbody'); tbl.appendChild(tb);
+    rows.forEach(r => {
+        const p = _priceRow(r);
+        const tr = document.createElement('tr'); tr.setAttribute('data-price-row', r.id); tr.style.cssText = 'border-top:1px solid var(--border-color);';
+        const td = () => { const c = document.createElement('td'); c.style.cssText = 'padding:4px; vertical-align:middle;'; tr.appendChild(c); return c; };
+        const inp = (val, ph, onSet, tip) => { const i = document.createElement('input'); i.type = 'text'; i.value = val == null ? '' : val; i.placeholder = ph || ''; if (tip) i.title = tip; i.style.cssText = 'width:80px; height:24px;'; i.onchange = () => { onSet(i.value); _prodShow(); }; return i; };
+        td().innerHTML = '<b>' + _esc(r.id) + '</b>';
+        td().textContent = r.product || '';
+        td().textContent = _rowVendor(r);
+        td().textContent = p.qty ? String(p.qty) : 'option';
+        td().appendChild(inp(p.cost, '', v => setRowPrice(r.id, { unitCost: v })));
+        const sc = td();
+        sc.textContent = p.src ? (p.src === 'quote' ? 'Quote' : 'Estimate') + (p.at ? ' ' + p.at : '') : '';
+        if (p.stale) { sc.style.color = 'var(--warn)'; sc.title = 'This quote is ' + p.age + ' days old'; }
+        td().appendChild(inp(p.hand ? p.sell : '', p.sell != null ? _money(p.sell) : '', v => setRowPrice(r.id, { unitSell: v }), 'Leave blank for cost × markup'));
+        td().textContent = p.sell != null ? _money(p.lineSell) : '';
+        const ac = td(); ac.appendChild(inp(p.allow, '', v => setRowPrice(r.id, { allowance: v })));
+        if (p.over) { ac.title = 'Sells over its allowance'; ac.firstChild.style.borderColor = 'var(--warn)'; }
+        tb.appendChild(tr);
+    });
+    body.appendChild(tbl);
+}
+// The rate card editor: one line per product in the project (and any already on the card).
+function openRateCard() {
+    let m = document.getElementById('rateCardModal'); if (m) m.remove();
+    m = document.createElement('div'); m.id = 'rateCardModal';
+    m.className = 'frame-modal fm-nested'; m.style.display = 'flex';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:640px; max-width:94vw; max-height:88vh; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:10px; font-size:var(--fs-70);';
+    const rc = _rateCard() || _rateCardLoadLocal() || { list: [] };
+    card.innerHTML = '<h3 style="margin:0; font-size:var(--fs-95); color:var(--text-strong);">Rate card</h3><div style="color:var(--text-muted);">Estimate = base + per sq ft of the overall size, plus the adders. Used only for pieces no vendor has quoted. Date it, so every estimate says which rates it came from.</div>';
+    const prods = FRAME_PRODUCTS.slice();
+    const tbl = document.createElement('table'); tbl.id = 'rateCardTable'; tbl.style.cssText = 'border-collapse:collapse; width:100%;';
+    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th>Product</th><th>Base</th><th>Per sq ft</th><th>Float mount</th><th>Double mat</th></tr></thead>';
+    const tb = document.createElement('tbody'); tbl.appendChild(tb);
+    prods.forEach(pn => {
+        const cur = (rc.list || []).find(x => x.product === pn) || {};
+        const tr = document.createElement('tr'); tr.setAttribute('data-rate', pn);
+        tr.innerHTML = '<td style="padding:3px 4px;">' + _esc(pn) + '</td>' + ['base', 'perSqFt', 'floatMount', 'doubleMat'].map(k => '<td style="padding:3px 4px;"><input type="text" data-k="' + k + '" value="' + (cur[k] != null ? cur[k] : '') + '" style="width:70px; height:24px;"></td>').join('');
+        tb.appendChild(tr);
+    });
+    card.appendChild(tbl);
+    const dateRow = document.createElement('label'); dateRow.style.cssText = 'display:flex; gap:6px; align-items:center;'; dateRow.textContent = 'Rates as of';
+    const di = document.createElement('input'); di.type = 'date'; di.id = 'rateCardAsOf'; di.value = rc.asOf || _todayIso(); dateRow.appendChild(di); card.appendChild(dateRow);
+    const read = () => Array.prototype.map.call(tb.querySelectorAll('tr[data-rate]'), tr => {
+        const o = { product: tr.getAttribute('data-rate') };
+        tr.querySelectorAll('input[data-k]').forEach(i => { o[i.getAttribute('data-k')] = i.value; });
+        return o;
+    }).filter(o => ['base', 'perSqFt', 'floatMount', 'doubleMat'].some(k => _priceNum(o[k]) != null));
+    const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;';
+    const saveLocal = _prodBtn('Keep as my rate card', () => { setRateCard(read(), di.value); _rateCardSaveLocal(); _toast('Rate card kept', 'New projects on this computer can start from it.'); }, true, 'Save these rates on this computer for your next projects');
+    const cancel = _prodBtn('Cancel', () => m.remove(), true); cancel.setAttribute('data-modal-close', '');
+    const ok = _prodBtn('Save', () => { setRateCard(read(), di.value); m.remove(); _prodShow(); }, false);
+    foot.appendChild(saveLocal); foot.appendChild(cancel); foot.appendChild(ok);
+    card.appendChild(foot);
+    m.appendChild(card); document.body.appendChild(m);
+}
+
 const PROD_TABS = [
     ['samples', 'Samples', 'Frame and mat samples: what to order, and what the client approved'],
     ['vendors', 'Vendors', 'Who makes each piece, and the production pack: RFIs, contact sheets, purchases'],
+    ['pricing', 'Pricing', 'Costs, sell prices, allowances and the budget; Excel and Salesforce'],
     ['issues', 'Issues', 'What went out at each issue, and what has changed since']
 ];
 let _prodTab = 'samples';
@@ -60144,7 +60603,7 @@ function _prodShow() {
     const body = document.getElementById('productionBody'); if (!body) return;
     document.querySelectorAll('#productionTabs [data-prod-tab]').forEach(b => b.classList.toggle('active', b.getAttribute('data-prod-tab') === _prodTab));
     body.innerHTML = '';
-    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, issues: _prodIssuesInto }[_prodTab];
+    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto }[_prodTab];
     if (fn) fn(body);
 }
 function _prodBtn(label, onClick, secondary, tip) {

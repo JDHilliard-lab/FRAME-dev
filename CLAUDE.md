@@ -2355,6 +2355,15 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **ISSUES (19.90, `markIssued`, `_issueSnapshot`, `_issueDiff`, `editorialContent.issues`, max `ISSUE_KEEP`).** A
   record is TEXT ONLY: `buildSpecStrings` lines + image code, product, location, qty, vendor and `_artSig` (never a
   data URL; tested). Keyed by row id, so a renumber reads as removed + added. The pack adds the latest diff.
+- **PRICES (19.91, `setRowPrice`, `_priceRow`, `_priceTotals`, `editorialContent.pricing` = {markup, budget,
+  currency, rates}).** Row fields `unitCost` + `costSrc` ('quote'|'estimate') + `costAt`, `unitSell` (only when typed),
+  `allowance`. A typed or imported cost is a dated QUOTE; `updateEstimates` refreshes only estimates (tested: a quote
+  survives). Qty = walls, a piece on no wall prices as 1, a catalogue option as 0. Prices NEVER in deck renderers
+  (test reads `buildSpecStrings`, `_deckMockHTML`, `_drawDeckPage`). Rate card is per project + localStorage
+  `RATE_CARD_KEY`, never the repo (the site is public). Excel: `_xlsxBlob` (inlineStr, formulas, styles incl. a Normal
+  cellStyle or openpyxl warns) and `_xlsxReadRows` (shared strings, columns by `r` ref); import reads columns BY NAME
+  (`PRICE_IMPORT_COLS`), never Qty, and does not freeze a cached `cost x markup` Unit Sell into a hand price.
+  Salesforce gets a CSV (`_salesforceLinesCSV`); no API (static site, no tokens).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
