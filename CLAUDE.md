@@ -2344,6 +2344,9 @@ run but passes alone is usually load timing: rerun before chasing it.
   note, at}`, one writer `setSampleStatus` (prunes empties). `sampleReplace` swaps through `_salonFrameDress` (library)
   or the typed code, pushes to wall copies, ONE undo. Preflight (`_samplePreflight`): rejected and still used = err;
   IFS (`_deckIsIFS`, read off the footer version, no stage setting) and not approved = warn. Issues carry `prod`.
+- **IFS READINESS (19.88, `_readinessPreflight`).** Always: one `_imgCodeKey` on two `_artSig`s (reuse those two,
+  never a new signature). IFS only: TBD in image code / `buildSpecStrings` values / notes, a catalogue placement with
+  more than one option, footer `V<n>` vs the project file name's `V<n>`.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
