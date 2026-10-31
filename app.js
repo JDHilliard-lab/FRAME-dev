@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '20.01';
+const APP_VERSION = '20.02';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -26188,7 +26188,15 @@ function _dsOpenSelSettings(ev) {
             if (el && _elType(el) === 'text') { _dsOpenTextGearPopup({ kind: 'mb', i: _mbSelected }, cx, cy); return; }
         }
     } catch (e) {}
-    const a = _dsCurrentAnnot();
+    let a = _dsCurrentAnnot();
+    // A multi-selection of picture boxes opens ONE popup that edits them together (20.02).
+    if (!a) {
+        try {
+            const cur = _mbCurAnnList();
+            const k = cur && (_mbSelAnn || []).find(ix => cur.list[ix] && (cur.list[ix].type === 'shape' || cur.list[ix].type === 'image'));
+            if (k != null) { _dsOpenGearPopup(cur.key, k, cx, cy); return; }
+        } catch (e) {}
+    }
     if (!a) { _toast && _toast('Nothing selected', 'Click a text box, shape or arrow on the page first.'); return; }
     const ty = a.type || 'text';
     if (ty === 'arrow' || ty === 'elbow') _dsOpenArrowGearPopup(_dsSelKey, _dsSelIdx, cx, cy);
@@ -26620,7 +26628,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
             };
             const panModeI = (a.zoom || 1) > 1;
             box.onmousedown = panModeI
-                ? (e) => { const wasSel = sel; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
+                // Shift-click and a group drag work on a cropped picture too (20.02): this branch
+                // used to select it alone, so a moodboard could never be multi-selected.
+                ? (e) => { if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; } if (_dsAnnShiftToggle(e, i)) return; if (_dsAnnGroupDragStart(e, key, i, list)) return; const wasSel = sel; _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
                 : moveDownI;
             box.style.cursor = panModeI ? 'grab' : 'move';
             const handle = document.createElement('div');
@@ -26690,7 +26700,9 @@ function _dsRenderAnnots(page, desc, w, hh) {
             // A pixel of slack is rounding, not a crop; 1pt is something to drag.
             const panMode = !!(a.dataUrl && _panCR && (_panCR.slackX > 1 || _panCR.slackY > 1));
             box.onmousedown = panMode
-                ? (e) => { const wasSel = sel; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
+                // Shift-click and a group drag work on a cropped picture too (20.02): this branch
+                // used to select it alone, so a moodboard could never be multi-selected.
+                ? (e) => { if (a && a.locked) { e.preventDefault(); e.stopPropagation(); return; } if (_dsAnnShiftToggle(e, i)) return; if (_dsAnnGroupDragStart(e, key, i, list)) return; const wasSel = sel; _mbSelAnn = []; _dsSelKey = key; _dsSelIdx = i; _dsClearMbSel(); _dsSyncToolbar(); if (!wasSel) { _dsRenderCenter(); return; } _dsShapePanDown(e, key, i, bw, bh); }
                 : moveDown;
             box.style.cursor = panMode ? 'grab' : 'move';
             if (a.dataUrl) box.onwheel = (e) => { e.preventDefault(); a.zoom = _dsZoomRound(Math.max(1, Math.min(5, (a.zoom || 1) + (e.deltaY < 0 ? DS_ZOOM_STEP : -DS_ZOOM_STEP) * (e.shiftKey ? 4 : 1)))); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsRenderCenter(); };
@@ -28197,6 +28209,36 @@ function _dsMoveGrip(box, onDown) {
 }
 // Settings — bottom-left of a selected shape/image; opens the settings popup.
 const DS_SETTINGS_SIZE = 22;
+// The boxes a picture popup edits together (20.02): every selected shape or image box on
+// the page when the popup's own box is one of a multi-selection, else just that one.
+const DS_GEAR_LOOK = ['radius', 'showCaption', 'capSource', 'capAlign', 'capFont', 'capPt', 'fit', 'shadow', 'fill', 'stroke', 'strokeW'];
+function _dsGearGroup(key, i) {
+    const list = _dsAnnList(key) || [];
+    const sel = (typeof _mbSelAnn !== 'undefined' && Array.isArray(_mbSelAnn)) ? _mbSelAnn : [];
+    let cur = null; try { cur = _mbCurAnnList(); } catch (e) {}
+    if (sel.length < 2 || sel.indexOf(i) < 0 || !cur || cur.key !== key) return [i];
+    return sel.filter(k => list[k] && (list[k].type === 'shape' || list[k].type === 'image') && !list[k].locked);
+}
+function _dsGearLook(a) { const o = {}; DS_GEAR_LOOK.forEach(k => { o[k] = JSON.stringify(a[k]); }); return o; }
+// Copy what changed on `a` since `look0` onto the rest of the group. Only CHANGED fields: the
+// boxes keep everything else their own (a radius differing per box survives a caption edit).
+// A control that pushed its own undo step (the caption toggle, the size) has that step
+// RETAKEN with the whole group in it, so one Ctrl+Z undoes all the boxes together.
+function _dsGearGroupApply(a, look0, group, key, hist0) {
+    if (!group || group.length < 2) return 0;
+    const list = _dsAnnList(key) || [];
+    const changed = DS_GEAR_LOOK.filter(k => JSON.stringify(a[k]) !== look0[k]);
+    if (!changed.length) return 0;
+    let n = 0;
+    group.forEach(k => {
+        const b = list[k]; if (!b || b === a) return;
+        changed.forEach(f => { if (a[f] === undefined) delete b[f]; else b[f] = _cloneData(a[f]); });
+        if (b.showCaption && !b.caption) b.caption = 'Caption';
+        n++;
+    });
+    if (n && hist0 != null && undoStack.length > hist0) { try { undoStack[undoStack.length - 1] = snapshotProjectState({ plans: true }); } catch (e) {} }
+    return n;
+}
 function _dsGearButton(box, key, i) {
     const g = document.createElement('button');
     g.className = '_dsChrome';
@@ -28357,6 +28399,10 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     document.removeEventListener('mousedown', _dsGearPopupOutside);
     const a = (_dsAnnList(key) || [])[i]; if (!a) return;
     const isImg = a.type === 'image';
+    // 20.02: SEVERAL PICTURES SELECTED, ONE POPUP. Opened on one of a multi-selection, every
+    // look setting changed here is copied onto the other selected boxes (_dsGearGroupApply).
+    const group = _dsGearGroup(key, i);
+    const _look0 = _dsGearLook(a), _hist0 = undoStack.length;
     const pop = document.createElement('div'); pop.id = 'dsGearPopup';
     // WIDER AND SHORTER. At 236 every section was a header line above its controls,
     // which ran the popup the full height of the screen and still scrolled — and a
@@ -28372,11 +28418,12 @@ function _dsOpenGearPopup(key, i, cx, cy) {
     pop.onmousedown = (e) => e.stopPropagation();
     // Reopen at the SAME spot (cx+10 / cy-10 are undone here so the panel
     // doesn't creep across the screen on every settings change).
-    const refresh = () => { if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenGearPopup(key, i, parseFloat(pop.style.left) - 10, parseFloat(pop.style.top) + 10); };
+    const refresh = () => { _dsGearGroupApply(a, _look0, group, key, _hist0); if (typeof scheduleAutosave === 'function') scheduleAutosave(); _dsSyncToolbar(); _dsRenderCenter(); _dsRenderRail(); _dsOpenGearPopup(key, i, parseFloat(pop.style.left) - 10, parseFloat(pop.style.top) + 10); };
     // Drag-to-move header.
     const head = document.createElement('div');
     head.style.cssText = 'display:flex; align-items:center; justify-content:space-between; cursor:move; margin-bottom:8px; user-select:none;';
-    head.innerHTML = '<span style="font-weight:700; font-size:var(--fs-60); letter-spacing:0.4px; text-transform:uppercase;">' + (isImg ? 'Image box' : (a.shape === 'ellipse' ? 'Ellipse' : 'Rectangle')) + ' settings</span>';
+    head.innerHTML = '<span style="font-weight:700; font-size:var(--fs-60); letter-spacing:0.4px; text-transform:uppercase;">' + (group.length > 1 ? group.length + ' boxes selected' : (isImg ? 'Image box' : (a.shape === 'ellipse' ? 'Ellipse' : 'Rectangle')) + ' settings') + '</span>';
+    if (group.length > 1) head.title = 'Corners, caption, fit, shadow, fill and stroke changed here apply to all ' + group.length + ' selected boxes; the picture and caption text stay each box\u2019s own';
     const closeB = document.createElement('button'); closeB.textContent = '\u00d7'; closeB.style.cssText = 'border:none; background:transparent; color:var(--text-muted); font-size:14px; cursor:pointer; padding:0 2px;';
     closeB.title = 'Close';
     closeB.onclick = () => _dsCloseGearPopup();
@@ -28624,6 +28671,20 @@ function _dsOpenGearPopup(key, i, cx, cy) {
         capF.style.cssText = 'flex:1; height:22px; font-size:var(--fs-60); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4);';
         capF.onchange = () => { a.capFont = capF.value; refresh(); };
         cr2.appendChild(capF);
+        // Caption size (20.02), in points, default 9; one step is half a point. On the Font
+        // row, so the popup stays square (test_gear_code_copy).
+        const csz = cr2; cr2.title = 'Caption typeface and size in points';
+        const cur = () => (a.capPt > 0 ? a.capPt : CAP_PT_DEFAULT);
+        const setPt = (n) => { if (!(n > 0)) return; const v = Math.max(5, Math.min(24, Math.round(n * 2) / 2)); if (v === CAP_PT_DEFAULT) delete a.capPt; else a.capPt = v; if (typeof pushHistory === 'function') pushHistory(); refresh(); };
+        const sDn = document.createElement('button'); sDn.className = 'action-btn btn-secondary'; sDn.textContent = '\u2212'; sDn.title = 'Smaller caption'; sDn.setAttribute('data-cap-size', 'down'); sDn.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0; margin-left:6px;';
+        const sIn = document.createElement('input'); sIn.type = 'number'; sIn.min = '5'; sIn.max = '24'; sIn.step = '0.5'; sIn.value = cur(); sIn.setAttribute('data-cap-size', 'value');
+        sIn.title = 'Caption size in points';
+        sIn.style.cssText = 'width:40px; height:22px; margin-left:4px; text-align:center; font-size:var(--fs-65); background:var(--bg-input); color:var(--text-main); border:1px solid var(--border-color); border-radius:var(--r-4); padding:0 2px;';
+        sIn.onchange = () => setPt(parseFloat(sIn.value));
+        const sUp = document.createElement('button'); sUp.className = 'action-btn btn-secondary'; sUp.textContent = '+'; sUp.title = 'Bigger caption'; sUp.setAttribute('data-cap-size', 'up'); sUp.style.cssText = 'width:22px; height:22px; min-width:22px; padding:0;';
+        sDn.onclick = () => setPt(cur() - 0.5); sUp.onclick = () => setPt(cur() + 0.5);
+        const sU = document.createElement('span'); sU.textContent = 'pt'; sU.style.cssText = 'color:var(--text-muted); margin-left:4px;';
+        csz.appendChild(sDn); csz.appendChild(sIn); csz.appendChild(sUp); csz.appendChild(sU);
     }
     // How-to.
     pop.appendChild(_dsHowToDot('Scroll to zoom, drag inside to pan, move it by the grip at top-left. Double-click the caption to edit it.'));
@@ -28699,7 +28760,8 @@ function _dsAnnCaptionInto(page, box, a, key, i, w, hh) {
     const fam = _fontCss(a.capFont, 'serif');
     const byFile = a.capSource === 'filename';
     cap.textContent = _dsResolveCaptionText(a);
-    const capPx = byFile ? _capCodeFitPx(cap.textContent, Math.max(8, 0.0165 * hh), bw, fam) : Math.max(8, 0.0165 * hh);
+    const capBase = a.capPt > 0 ? Math.max(5, a.capPt / 540 * hh) : Math.max(8, 0.0165 * hh);
+    const capPx = byFile ? _capCodeFitPx(cap.textContent, capBase, bw, fam) : capBase;
     cap.style.cssText = 'position:absolute; left:' + ((a.x || 0) * w) + 'px; top:' + ((a.y || 0) * hh + bh + 4) + 'px; width:' + bw + 'px; text-align:' + align + '; font-size:' + capPx + 'px; font-style:italic;' + (byFile ? ' white-space:nowrap; display:flex; justify-content:' + (align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center') + ';' : '') + ' color:' + _dsDisplayInk('#8a8a8a', key) + '; font-family:' + fam + '; cursor:' + (byFile ? 'default' : 'text') + '; z-index:20;' + (byFile ? 'font-kerning:none;' : ' white-space:pre-wrap;font-kerning:none;');
     cap.title = byFile ? 'Caption follows the image\u2019s file name \u2014 change it in the gear popup\u2019s Caption section' : 'Double-click to edit the caption';
     if (byFile) { page.appendChild(cap); return; }
@@ -45011,13 +45073,14 @@ function _softShadowDataUrl(wPt, hPt, ell) {
     } catch (e) { return null; }
 }
 const CAP_CODE_MIN_PT = 6;
+const CAP_PT_DEFAULT = 9;   // a shape's caption, points on the 540pt page; `a.capPt` overrides (20.02)
 // The screen half of the same rule: the size (px) an image-code caption is drawn at so it
 // fits `boxW`, from `basePx` down to the same floor as the PDF, measured in the caption face.
 function _capCodeFitPx(text, basePx, boxW, fam) {
     let px = basePx;
     try {
         const cx = _richMeasureCtx(); if (!cx) return px;
-        const floor = basePx * CAP_CODE_MIN_PT / 9;
+        const floor = Math.min(basePx, basePx * CAP_CODE_MIN_PT / CAP_PT_DEFAULT);
         cx.font = 'italic ' + px + 'px ' + fam;
         while (px > floor && cx.measureText(text).width > boxW) { px -= basePx / 18; cx.font = 'italic ' + px + 'px ' + fam; }
     } catch (e) {}
@@ -45027,19 +45090,21 @@ function _drawAnnCaption(doc, a, x, y, pw, ph) {
     const capText = _dsResolveCaptionText(a);
     if (!a.showCaption || !capText.trim()) return;
     try {
-        doc.setFont(_font(_fontToken(a.capFont, 'serif')), 'italic'); doc.setFontSize(9); doc.setTextColor(138, 138, 138);
+        const fs0 = a.capPt > 0 ? a.capPt : CAP_PT_DEFAULT;
+        doc.setFont(_font(_fontToken(a.capFont, 'serif')), 'italic'); doc.setFontSize(fs0); doc.setTextColor(138, 138, 138);
         const align = a.capAlign || 'center';
         let tx = x; if (align === 'center') tx = x + pw / 2; else if (align === 'right') tx = x + pw;
         // AN IMAGE CODE IS NEVER BROKEN (20.01): it has no spaces, so splitTextToSize cut it
         // mid-code ("DMM.010.00"). One line, stepped down to fit the box, as on screen.
         if (a.capSource === 'filename') {
-            const t1 = capText.trim(); let fs = 9;
-            while (fs > CAP_CODE_MIN_PT && doc.getTextWidth(t1) > pw) { fs -= 0.5; doc.setFontSize(fs); }
-            doc.text(t1, tx, y + ph + 12, { align: align });
+            const t1 = capText.trim(); let fs = fs0;
+            const floor = Math.min(fs0, CAP_CODE_MIN_PT);
+            while (fs > floor && doc.getTextWidth(t1) > pw) { fs -= 0.5; doc.setFontSize(fs); }
+            doc.text(t1, tx, y + ph + 3 + fs0, { align: align });
             return;
         }
         const lines = doc.splitTextToSize(capText.trim(), pw);
-        doc.text(lines, tx, y + ph + 12, { align: align, maxWidth: pw });
+        doc.text(lines, tx, y + ph + 3 + fs0, { align: align, maxWidth: pw });
     } catch (e) {}
 }
 function _drawAnnotations(doc, key, PW, PH) {
@@ -49402,6 +49467,7 @@ const HELP_REFERENCE_DATA = [
         entries: [
             { title: 'Presentation type', body: `On the <strong>Project</strong> tab, pick <strong>Concept</strong>, <strong>Wireframe</strong>, <strong>Art Development</strong>, <strong>Final Spec</strong>, <strong>Install Guide</strong> or <strong>Catalogue</strong>. Each one sets which pages appear. <strong>Include pages</strong> switches individual pages on and off.` },
             { title: 'Pages', body: `The <strong>Pages</strong> tab shows every page in order; click one to edit it. Pages you insert can be dragged anywhere, or placed with the gap between two pages. Spec, floorplan and breaker pages follow the project's own order, and a note on each says where that order is set.` },
+            { title: 'Editing several pictures at once', body: `On a page, <span class="help-kbd">Shift+click</span> each picture (or drag a box around them), then open the settings. The popup says how many boxes are selected, and corners, caption on or off, caption source, alignment, font and <strong>Size</strong>, fit, shadow, fill and stroke changed there apply to all of them; each keeps its own picture and caption text. One Ctrl+Z undoes a change on all of them.` },
             { title: 'Spec pages', body: `Under <strong>SHOW ON PAGE</strong>, tick what the page carries: <strong>Frame corner</strong>, <strong>Moulding profile</strong>, <strong>Floorplan</strong> and <strong>Elevation</strong>. A ticked part you do not have yet keeps its space, so the page does not move while you fill it in. An unticked part is removed. It applies deck-wide by default, or to one page. Pieces print one per page, or grouped A/B/C with shared specs.` },
             { title: 'Breaker and install pages', body: `These carry a wall's dimensioned drawing with a letter legend, installation notes and, optionally, the plan. Notes are standard items you tick plus your own. <strong>Edit &hellip; in Elevations</strong> jumps to the wall, and a bar there brings you back to the same page. To change one page only, pick <strong>This page only</strong> under Apply changes to; it stays picked for that page, and <strong>Reset to all pages</strong> undoes the page's own settings. <strong>Full width</strong> runs a long wall across the whole page under the title, with the notes beside the title.` },
             { title: 'Headings', body: `Click a page's heading or subheading to change its type. The change applies to the whole deck unless you choose this page only.` },
@@ -49477,7 +49543,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
+                body: `<strong>20.02</strong> <b>Edit several pictures at once.</b> Shift+click pictures on a page (or drag a box around them) and open the settings: corners, captions on or off, caption source, alignment, font, fit, shadow, fill and stroke change on all of them together. Captions have a <b>Size</b> now, so a page of captions can all match. Shift+click also works on a picture cropped inside its box, which before selected it alone. Pictures placed by the deck agent have straight corners.<br><br>
+<strong>20.01</strong> Groundwork for building a deck from a brief: a driver that runs FRAME in the background (tools/frame-driver.js) and more of what it can ask FRAME to do (project fields, which standard pages print, filling the cover, removing an unused picture box, the contents page, the Thank You team). Two fixes it found in the PDF: a justified paragraph no longer stretches its last line when another paragraph follows, and an image code under a picture is never cut in half; it prints whole on one line, a little smaller if the box is narrow.<br><br>
 <strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
 <strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
 <strong>19.98</strong> <b>Budget sketch</b> on the floor plan. The add bar has a <b>Size</b> (the standard sizes from the budgeting guide, 11 x 14 to 40 x 50, both ways round) and a <b>Sketch</b> button: while it is on, every click on the plan drops a new piece of the chosen type and size right there, and an <b>Area</b> field names where they go. The pieces are priced by the rate card as they land, and a budget line under the bar shows the total against the budget. Esc or Sketch again stops. + Add code takes the size too.<br><br>
@@ -59709,6 +59776,8 @@ const FRAME_API = {
                 // 20.01: `fit: 'whole'` shrinks the box around the picture INSIDE its slot,
                 // centred (artwork is never cropped); `caption: 'code'` prints the image
                 // code under it, any other string prints that text.
+                // Square corners unless asked (20.02): the studio's moodboards are straight-edged.
+                a.radius = (src.radius != null && isFinite(+src.radius)) ? Math.max(0, +src.radius) : 0;
                 if (src.fit === 'whole') {
                     const w0 = a.w || 0.25, h0 = a.h || _dsShapeRatioH(w0, a.aspect), asp = a.aspect || 1;
                     let w = w0, h = _dsShapeRatioH(w0, asp);

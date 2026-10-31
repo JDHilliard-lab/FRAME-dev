@@ -90,7 +90,9 @@ async function serve() {
     }
     if (!ready) throw new Error('FRAME did not load');
     // Nobody is watching: no autosave warning modal, no start screen, no first-run tip.
-    await evaluate('(function(){ try { _autosaveToldUser = true; } catch (e) {} try { _startScreenClose(); } catch (e) {} try { localStorage.setItem("frameTourDone", "1"); } catch (e) {} return true; })()');
+    // The start screen opens a moment AFTER the API is there: wait for it, then close it, or
+    // it sits over the page and swallows every click a script sends.
+    await evaluate('(async function(){ try { _autosaveToldUser = true; } catch (e) {} try { localStorage.setItem("frameTourDone", "1"); } catch (e) {} for (let i = 0; i < 50 && !document.getElementById("startScreen"); i++) await new Promise(r => setTimeout(r, 100)); try { _startScreenClose(); } catch (e) {} return true; })()');
     await evaluate(DRV_PAGE);
     const project = arg('project');
     if (project) {

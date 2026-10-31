@@ -42,6 +42,41 @@ try {
         if (Math.abs(s0.h - s0.w * 936 / 540) > 0.002) throw new Error('not whole: ' + s0.w + ' x ' + s0.h);
         if (d.texts[1].text !== 'DRIVER TEST') throw new Error(JSON.stringify(d.texts));
     });
+    check('pictures the API places have square corners (the studio\u2019s moodboards are straight-edged)', () => {
+        const r = run(['eval', 'editorialContent.annotations[' + JSON.stringify(key) + '].map(a => a.dataUrl ? a.radius : null).filter(v => v !== null)']);
+        if (!r.length || r.some(v => v !== 0)) throw new Error(JSON.stringify(r));
+    });
+    check('EXACT ASK: Shift-click selects several cropped pictures, and ONE settings popup turns their captions on, sets one size and shows the code on all of them; one undo takes the size back on all', () => {
+        const img = { image: { $file: ICON } };
+        const p2 = run(['call', 'addPage', JSON.stringify([{ template: 'Moodboard (Alt)', images: { 0: img, 1: img, 2: img } }])]);
+        const js = `(async () => { try {
+          const key = ${JSON.stringify('')} || ${JSON.stringify(p2.key)};
+          switchView('deck'); await new Promise(r => setTimeout(r, 500)); _dsTab('pages'); await new Promise(r => setTimeout(r, 500));
+          _dsRestoreSel(key, 'layout'); _dsRenderCenter(); await new Promise(r => setTimeout(r, 600));
+          const list = editorialContent.annotations[key];
+          const c = document.getElementById('dsLayoutCanvas'); const R = c.getBoundingClientRect();
+          for (const i of [0, 1, 2]) { const a = list[i]; const x = R.left + (a.x + a.w / 2) * R.width, y = R.top + (a.y + a.h / 2) * R.height;
+            document.elementFromPoint(x, y).dispatchEvent(new MouseEvent('mousedown', { bubbles: true, clientX: x, clientY: y, shiftKey: true, button: 0 }));
+            document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, clientX: x, clientY: y, shiftKey: true })); await new Promise(r => setTimeout(r, 120)); }
+          const sel = _mbSelAnn.slice();
+          document.getElementById('dsSelSettings').click(); await new Promise(r => setTimeout(r, 250));
+          const pop = document.getElementById('dsGearPopup'); if (!pop) return { sel, err: 'no popup' };
+          const title = pop.querySelector('span').textContent;
+          Array.from(pop.querySelectorAll('button')).find(b => /Caption: off/.test(b.textContent)).click(); await new Promise(r => setTimeout(r, 250));
+          document.querySelector('#dsGearPopup [data-cap-size=up]').click(); await new Promise(r => setTimeout(r, 250));
+          document.querySelector('#dsGearPopup [data-cap-size=up]').click(); await new Promise(r => setTimeout(r, 250));
+          Array.from(document.querySelectorAll('#dsGearPopup button')).find(b => b.textContent === 'Code').click(); await new Promise(r => setTimeout(r, 250));
+          const after = list.slice(0, 3).map(a => [a.showCaption, a.capPt, a.capSource].join());
+          undo(); const undone = editorialContent.annotations[key].slice(0, 3).map(a => a.capPt);
+          return { sel, title, after, undone };
+        } catch (e) { return { err: e.stack }; } })()`;
+        const r = run(['eval', js]);
+        if (r.err) throw new Error(r.err);
+        if (r.sel.join() !== '0,1,2') throw new Error('Shift-click selected ' + JSON.stringify(r.sel));
+        if (r.title !== '3 boxes selected') throw new Error('popup: ' + r.title);
+        if (r.after.some(v => v !== 'true,10,filename')) throw new Error(JSON.stringify(r.after));
+        if (r.undone.some(v => v !== 9.5)) throw new Error('undo: ' + JSON.stringify(r.undone));
+    });
     check('render writes the page as a PNG drawn by FRAME', () => {
         const out = path.join(tmp, 'page.png');
         const r = run(['render', key, out]);

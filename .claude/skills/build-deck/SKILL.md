@@ -42,6 +42,8 @@ The cover, understanding, narrative, strategy and slogan pages are filled with `
 uncropped (ALWAYS for artwork; cover-crop only for texture/mood photography), `caption: "code"`
 prints the image code (no extension), any other caption string prints as given. `false`
 takes an unused slot off the page (never leave a grey box).
+Pictures go in with SQUARE corners (house moodboards are straight-edged); `radius: n` only if
+the user asks. Caption size: `capPt` is set by hand in FRAME, not by the agent.
 `describePage` gives each slot's position and size (fractions of the page): read it before
 filling, and put the most important piece in the biggest slot.
 

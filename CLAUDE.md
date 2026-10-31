@@ -2425,6 +2425,14 @@ run but passes alone is usually load timing: rerun before chasing it.
 - **AN IMAGE-CODE CAPTION IS ONE LINE (20.01, `_drawAnnCaption`, `_capCodeFitPx`, `CAP_CODE_MIN_PT`).** jsPDF's
   `splitTextToSize` cut a code with no spaces mid-code while `CanvasPdfRec` (which never breaks a word) showed it whole;
   a `capSource: 'filename'` caption steps down to fit the box (floor 6pt) in the PDF and on screen.
+- **SEVERAL PICTURES, ONE POPUP (20.02, `_dsGearGroup`, `_dsGearGroupApply`, `DS_GEAR_LOOK`).** Opened on a box in a
+  multi-selection (`_mbSelAnn`, this page, shapes/images, not locked), the picture popup copies every CHANGED look field
+  onto the others in its `refresh`; a control that pushed its own undo step has it retaken (one Ctrl+Z). The dock's
+  settings button opens it on a multi-selection. Caption size is `a.capPt` (points, default `CAP_PT_DEFAULT` 9, stored
+  only when different), read by `_drawAnnCaption` and the screen caption. BOTH pan-mode (cropped picture) mousedown
+  handlers run `_dsAnnShiftToggle` / `_dsAnnGroupDragStart` first, or a moodboard can never be multi-selected.
+  API image fills set `radius` 0 unless asked (straight-edged house moodboards). The driver waits for the start screen
+  before closing it (it opens after the API is ready and swallows clicks).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
