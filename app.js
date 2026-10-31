@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.93';
+const APP_VERSION = '19.94';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -13036,6 +13036,8 @@ function syncDashAndCalculate(opts) {
     }
 
     dashProjectData[dashSelectedRowIndex] = _assembledRow;
+    // the budget follows the size as it is typed (19.94), live pass included
+    if (!_bulkEditing) { try { _dashBudgetSync(_assembledRow); } catch (e) {} }
 
     if (opts && opts.live) {
         updateDashVisualsFromDOM();
@@ -49335,7 +49337,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.93</strong> The item toolbar shows the budget while you choose art: what the pieces sell for against the budget, how much is left, and the selected piece against its allowance. It turns amber when either is passed, appears once anything is priced or a budget is set, and a click opens Prices &amp; budget.<br><br>
+                body: `<strong>19.94</strong> The price follows the size. Estimates are worked out from the rate card and each piece&#8217;s overall size every time, so shrinking an oversized frame moves the budget on that keystroke. A quote remembers the size it was for: resize the piece and the estimate for the new size stands in, flagged to re-quote, and going back to the quoted size brings the quote back. The Update estimates button is gone, since there is nothing left to update.<br><br>
+<strong>19.93</strong> The item toolbar shows the budget while you choose art: what the pieces sell for against the budget, how much is left, and the selected piece against its allowance. It turns amber when either is passed, appears once anything is priced or a budget is set, and a click opens Prices &amp; budget.<br><br>
 <strong>19.92</strong> Contact sheets in the production pack show each picture at its print file's shape with the piece's own crop (as the deck shows it), not the source image as it came. The Vendors and Issues tabs keep their dropdowns on one line.<br><br>
 <strong>19.91</strong> <strong>Prices &amp; budget</strong> (Frame Dashboard, Export menu, or the Pricing tab of the Production window). Each piece can carry a unit cost, a sell price (or cost times the project markup) and an allowance, with totals, margin, allowances, budget left and a total per area. Every price says where it came from and when: a price you type or import is a dated quote; an estimate comes from the <strong>Rate card</strong> (base plus per square foot by product, dated), and <strong>Update estimates</strong> refreshes estimates when rates change without touching a quote. Quotes older than 90 days are flagged. <strong>Export to Excel</strong> writes a real .xlsx with live formulas (lines, totals, budget left) and the rate card; edit it in Excel and <strong>Import prices</strong> reads it back by item code (an .xlsx or .csv, columns by name, so adding columns is fine). <strong>Salesforce CSV</strong> gives one quote line per piece for Salesforce's import. Prices never print in the deck, but they are saved in the project file, so think before sending the project file itself to a client.<br><br>
 <strong>19.90</strong> <strong>Issues</strong> (in the Production window). Each time the deck goes to the client or to production, <strong>Mark as issued</strong> (the label starts as the deck's version). FRAME keeps what every piece printed at that moment, and shows what has changed since any issue: pieces added or removed, and for each changed piece the field, what it was and what it is now (a new picture counts). Copy it into the client email, or download it as a spreadsheet; the production pack includes the changes since the latest issue.<br><br>
@@ -60131,7 +60134,19 @@ let _prodIssuePick = null;
 // formulas out, .xlsx or .csv in, matched by item code), and a quote-lines CSV goes to
 // Salesforce's import. Prices never reach a deck page; they do travel in the project file.
 const PRICE_STALE_DAYS = 90;
-const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance'];
+const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance', 'priceFor'];
+// 19.94: THE PRICE FOLLOWS THE SIZE. An estimate is never a stored number: it is worked out
+// from the rate card and the piece's size every time it is read, so shrinking an oversized
+// frame moves the budget at once. A quote (or a typed sell) remembers the overall size it
+// was for (`priceFor`, inches, to a sixteenth); resize the piece and, when the rate card
+// covers it, the estimate for the NEW size stands in and the piece is flagged to re-quote.
+// With no rate card the quote stays, flagged.
+function _priceSizeKey(r) {
+    const k = unitFactor(dashUnit, 'in');
+    const q = (v) => Math.round((parseFloat(v) || 0) * k * 16) / 16;
+    return q(r.extW) + 'x' + q(r.extH);
+}
+function _priceSizeLabel(key) { return String(key || '').replace('x', ' x ') + ' in'; }
 function _pricing() { return (editorialContent && editorialContent.pricing) || {}; }
 function _pricingSet(patch, quiet) {
     const p = Object.assign({}, _pricing(), patch || {});
@@ -60152,18 +60167,26 @@ function _priceQty(r) {
     return q > 0 ? q : 1;
 }
 function _priceRow(r) {
-    const cost = _priceNum(r.unitCost), allow = _priceNum(r.allowance), hand = _priceNum(r.unitSell);
-    const mk = _priceMarkup();
+    const allow = _priceNum(r.allowance), mk = _priceMarkup();
+    let cost = _priceNum(r.unitCost), hand = _priceNum(r.unitSell), src = r.costSrc || '', at = r.costAt || '';
+    const est = _estimateCost(r);
+    const resized = !!(r.priceFor && (r.costSrc === 'quote' || hand != null) && r.priceFor !== _priceSizeKey(r));
+    if (src !== 'quote' || (resized && est != null)) {
+        // an estimate is always today's size on today's rate card; a resized quote yields to it
+        if (est != null) { cost = est; src = 'estimate'; const rc = _rateCard(); at = (rc && rc.asOf) || ''; }
+        if (resized && est != null) hand = null;
+    }
     const sell = hand != null ? hand : (cost != null ? Math.round(cost * mk * 100) / 100 : null);
     const qty = _priceQty(r);
     let age = null;
-    if (r.costSrc === 'quote' && r.costAt) { const t = Date.parse(r.costAt); if (isFinite(t)) age = Math.floor((Date.now() - t) / 86400000); }
-    return { cost: cost, sell: sell, allow: allow, qty: qty, markup: mk, hand: hand != null, src: r.costSrc || '', at: r.costAt || '', age: age, stale: age != null && age > PRICE_STALE_DAYS,
+    if (src === 'quote' && at) { const t = Date.parse(at); if (isFinite(t)) age = Math.floor((Date.now() - t) / 86400000); }
+    return { cost: cost, sell: sell, allow: allow, qty: qty, markup: mk, hand: hand != null, src: src, at: at, age: age, stale: age != null && age > PRICE_STALE_DAYS,
+        resized: resized, quotedFor: resized ? r.priceFor : '',
         lineCost: cost != null ? cost * qty : 0, lineSell: sell != null ? sell * qty : 0, lineAllow: allow != null ? allow * qty : 0, over: allow != null && sell != null && sell > allow };
 }
 function _priceTotals() {
     const rows = _deckSpecRows().filter(r => r && r.id);
-    const t = { cost: 0, sell: 0, allow: 0, priced: 0, unpriced: [], stale: [], over: [], byArea: {} };
+    const t = { cost: 0, sell: 0, allow: 0, priced: 0, unpriced: [], stale: [], over: [], resized: [], byArea: {} };
     rows.forEach(r => {
         const p = _priceRow(r);
         if (!p.qty) return;
@@ -60171,6 +60194,7 @@ function _priceTotals() {
         if (p.sell == null) t.unpriced.push(r.id); else t.priced++;
         if (p.stale) t.stale.push(r.id);
         if (p.over) t.over.push(r.id);
+        if (p.resized) t.resized.push(r.id);
         const a = String(r.location || '').trim() || '(no location)';
         const ar = t.byArea[a] || (t.byArea[a] = { qty: 0, sell: 0, allow: 0 });
         ar.qty += p.qty; ar.sell += p.lineSell; ar.allow += p.lineAllow;
@@ -60196,6 +60220,9 @@ function setRowPrice(id, patch, quiet) {
         else { r.unitCost = n; r.costSrc = p.costSrc || 'quote'; r.costAt = p.costAt || _todayIso(); }
     }
     ['unitSell', 'allowance'].forEach(k => { if (k in p) { const n = _priceNum(p[k]); if (n == null) delete r[k]; else r[k] = n; } });
+    // what size this price was for (19.94): set by a quote or a typed sell, cleared with both
+    if ((('unitCost' in p) && r.costSrc === 'quote') || (('unitSell' in p) && r.unitSell != null)) r.priceFor = _priceSizeKey(r);
+    if (r.costSrc !== 'quote' && r.unitSell == null) delete r.priceFor;
     if (!quiet) pushHistory();
     return true;
 }
@@ -60420,14 +60447,14 @@ function _priceImportRows(rows) {
         const cell = (k) => col[k] >= 0 ? String(row[col[k]] == null ? '' : row[col[k]]).trim() : undefined;
         const patch = {};
         const cost = cell('unitCost');
-        if (cost !== undefined && _priceNum(cost) !== _priceNum(r.unitCost)) {
+        if (cost !== undefined && _priceNum(cost) !== _priceRow(r).cost) {
             patch.unitCost = cost;
             const src = cell('costSrc'); patch.costSrc = (src === 'estimate' || src === 'quote') ? src : 'quote';
             const at = cell('costAt'); if (at) patch.costAt = /^\d+(\.\d+)?$/.test(at) ? _excelDate(parseFloat(at)) : at;
         }
         const sell = cell('unitSell');
         if (sell !== undefined) {
-            const mk = _priceMarkup(), c = _priceNum(cost !== undefined ? cost : r.unitCost), s = _priceNum(sell);
+            const mk = _priceMarkup(), c = _priceNum(cost !== undefined ? cost : _priceRow(r).cost), s = _priceNum(sell);
             const derived = (c != null && s != null && Math.abs(s - Math.round(c * mk * 100) / 100) < 0.005);
             if (!derived && s !== _priceNum(r.unitSell)) patch.unitSell = sell;
         }
@@ -60482,6 +60509,7 @@ function _dashBudgetInfo(sel) {
         }
     }
     if (t.over.length) tip += ' ' + t.over.length + (t.over.length === 1 ? ' piece is' : ' pieces are') + ' over allowance.';
+    if (t.resized.length) tip += ' ' + t.resized.length + ' resized since quoted (' + t.resized.join(', ') + '): re-quote.';
     return { text: text, tip: tip + ' Click for Pricing.', over: over || pieceOver };
 }
 function _dashBudgetSync(sel) {
@@ -60497,7 +60525,7 @@ function _dashBudgetSync(sel) {
 function _prodPricingInto(body) {
     const pr = _pricing();
     const intro = document.createElement('div'); intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:10px;';
-    intro.textContent = 'What each piece costs and sells for. A price typed or imported is a quote, dated; estimates come from the rate card and Update estimates refreshes them without touching a quote. Prices never print in the deck, but they are saved in the project file.';
+    intro.textContent = 'What each piece costs and sells for. A price typed or imported is a quote, dated, for the size the piece was then. Estimates come from the rate card and follow each piece’s size as you change it; a quoted piece that is resized is estimated at its new size and flagged to re-quote. Prices never print in the deck, but they are saved in the project file.';
     body.appendChild(intro);
     // Settings line.
     const set = document.createElement('div'); set.style.cssText = 'display:flex; gap:10px; align-items:center; flex-wrap:wrap; font-size:var(--fs-70); margin-bottom:10px;';
@@ -60522,6 +60550,7 @@ function _prodPricingInto(body) {
     if (t.budget != null) stat(t.sell > t.budget ? 'Over budget' : 'Left in budget', _money(Math.abs(t.budget - t.sell)), t.sell > t.budget);
     if (t.unpriced.length) stat('Not priced', t.unpriced.length + ' piece' + (t.unpriced.length === 1 ? '' : 's'), true);
     if (t.stale.length) stat('Quotes over ' + PRICE_STALE_DAYS + ' days', String(t.stale.length), true);
+    if (t.resized.length) stat('Resized since quoted', String(t.resized.length), true);
     body.appendChild(tot);
     // Tools.
     const tools = document.createElement('div'); tools.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;';
@@ -60536,11 +60565,7 @@ function _prodPricingInto(body) {
         const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = _prodStamp() + '.' + _prodProjectTag() + '.Quote-lines.csv'; a.click();
     }, true, 'Quote lines for Salesforce’s import: one line per piece'));
     tools.appendChild(_prodBtn('Rate card…', () => openRateCard(), true, 'Estimate prices before a vendor quotes'));
-    if (_rateCard()) tools.appendChild(_prodBtn('Update estimates', () => {
-        const n = updateEstimates();
-        _toast(n ? 'Estimates updated' : 'Nothing to update', n ? n + ' piece' + (n === 1 ? '' : 's') + ' from the rate card of ' + (_rateCard().asOf || '') + '. Quotes were left alone.' : 'No piece takes an estimate from this rate card.');
-        _prodShow();
-    }, true, 'Refresh every estimate from the rate card; quotes are never touched'));
+    // 19.94: no Update estimates button. Estimates are worked out from the size on every read.
     body.appendChild(tools);
     // By area.
     const areas = Object.keys(t.byArea);
@@ -60568,6 +60593,11 @@ function _prodPricingInto(body) {
         const sc = td();
         sc.textContent = p.src ? (p.src === 'quote' ? 'Quote' : 'Estimate') + (p.at ? ' ' + p.at : '') : '';
         if (p.stale) { sc.style.color = 'var(--warn)'; sc.title = 'This quote is ' + p.age + ' days old'; }
+        if (p.resized) {
+            sc.style.color = 'var(--warn)';
+            sc.textContent = (p.src === 'estimate' ? 'Estimate, re-quote' : 'Quote, resized');
+            sc.title = 'Priced at ' + _priceSizeLabel(p.quotedFor) + '; the piece is now ' + _priceSizeLabel(_priceSizeKey(r)) + '. ' + (p.src === 'estimate' ? 'The rate card estimate for the new size is used until it is re-quoted.' : 'No rate card covers it, so the old quote is still counted.');
+        }
         td().appendChild(inp(p.hand ? p.sell : '', p.sell != null ? _money(p.sell) : '', v => setRowPrice(r.id, { unitSell: v }), 'Leave blank for cost × markup'));
         td().textContent = p.sell != null ? _money(p.lineSell) : '';
         const ac = td(); ac.appendChild(inp(p.allow, '', v => setRowPrice(r.id, { allowance: v })));

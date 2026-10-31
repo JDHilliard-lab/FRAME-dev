@@ -2368,6 +2368,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   chip in the item toolbar, built from `_priceTotals` / `_priceRow` (never its own sums): sell vs budget and the selected
   piece vs its allowance, `data-over` amber. Refreshed by `_syncNavBadges` (every edit) and `loadDashDataIntoControls`
   (selection). Screen only.
+- **THE PRICE FOLLOWS THE SIZE (19.94, `_priceRow`, `_priceSizeKey`, `r.priceFor`).** An estimate is NEVER a
+  stored number: `_priceRow` works it out from the rate card and the current size on every read (a stored legacy
+  estimate is used only when the card no longer covers the product). A quote or a typed sell records `priceFor`
+  (overall size in inches to a sixteenth, `setRowPrice`); resized, the new size's estimate stands in (typed sell
+  ignored) and the piece is flagged `resized` (Pricing tab, chip tip); back at the quoted size the quote returns; no
+  rate card = quote kept, flagged. `syncDashAndCalculate` calls `_dashBudgetSync` on every keystroke (live pass too).
+  Import compares against `_priceRow(r).cost`, or a round-tripped estimate becomes a quote. No Update estimates button.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
