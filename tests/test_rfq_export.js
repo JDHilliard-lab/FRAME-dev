@@ -1,0 +1,187 @@
+// THE RFQ, THE RFI AND SALESFORCE (19.96). The team ran two Claude projects to turn FRAME's
+// specs back into spreadsheets: "RFQ -> Import Template" (Salesforce's Quote Import Template,
+// 11 columns, vendor codes, markup as a plain number, no special characters) and the
+// "RFQ/RFI Generator" (the 2026 quote template, columns A to AN, mount formulas, royalty by
+// image code, house markup 87.31% + royalty). FRAME writes both from the rows.
+const fs = require('fs');
+const path = require('path');
+const { JSDOM } = require('jsdom');
+const root = path.join(__dirname, '..');
+const APP = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+const TPL = fs.readFileSync(path.join(root, 'templates.js'), 'utf8');
+const HTML = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const NL = String.fromCharCode(10);
+
+const dom = new JSDOM(HTML, { url: 'https://example.com/', pretendToBeVisual: true, runScripts: 'outside-only' });
+const { window } = dom;
+window.HTMLCanvasElement.prototype.getContext = () => ({});
+window.fetch = () => Promise.reject(new Error('no network in test'));
+window.jspdf = { jsPDF: require(path.join(root, 'lib-jspdf.min.js')).jsPDF };
+window.JSZip = require(path.join(root, 'lib-jszip.min.js'));
+window.DOMParser = window.DOMParser;
+global.window = window; global.document = window.document; global.navigator = window.navigator;
+
+const body = [
+  '_autosaveToldUser = true;',
+  'var __modals = []; showInfoModal = function (t, b) { __modals.push(t + ": " + b); };',
+  '_toast = function () { return null; };',
+  'window.__res = (async function () {',
+  '  const out = [];',
+  '  const NL = String.fromCharCode(10);',
+  '  const check = async function (label, fn) { try { await fn(); out.push({ label: label, ok: true }); } catch (e) { out.push({ label: label, ok: false, err: e.message }); } };',
+  '  const mk = function (id, o) { return Object.assign(_cloneData(dashDefaultData), { id: id, category: "framed", qty: 1, location: "Lobby", extW: 24, extH: 36, fW: 1, m1T: 3, m1B: 3, m1L: 3, m1R: 3, bleed: 0.25, fCode: "MICH 132-29" }, o || {}); };',
+  '  const fresh = function () {',
+  '    editorialContent = _editorialDefaults(); dashUnit = "in";',
+  '    dashProjectData = [',
+  '      mk("ART.1", { imageCode: "GDC.010.00219.1.jpg", vendorName: "LT Artistic", location: "Lobby & Bar #2" }),',
+  '      mk("ART.2", { imageCode: "FNK.010.00376.1", vendorName: "Duggal", qty: 2 }),',
+  '      mk("ART.3", { imageCode: "PEN.000.00012", vendorName: "Acme Frames" }),',
+  '      mk("ART.4", { imageCode: "FAO.R.Blanca_Seclusion", product: "Sourced Object", vendorName: "Duggal" }),',
+  '      mk("EGD.1", { imageCode: "FWC.001.001.1", product: "Wallcovering (EGD)", extW: 120, extH: 96, bleed: 2, vendorName: "Tectonics" })];',
+  '    elevations = [{ id: "w0", name: "Elevation 1", wallW: 185, wallH: 108, personPos: { x: -60 }, frames: [] }];',
+  '    currentElevIndex = 0; elevFrames = elevations[0].frames;',
+  '    undoStack.length = 0; redoStack.length = 0; _isFirstHistoryPush = true; pushHistory(); __modals.length = 0;',
+  '  };',
+  '  const row = function (id) { return dashProjectData.find(function (r) { return r.id === id; }); };',
+  '  const near = function (a, b) { return Math.abs(a - b) < 0.006; };',
+  '',
+  '  await check("EXACT: royalty follows the image code (F 0%, PEN 10%, else 5%) and the house markup is 87.31% + royalty", async function () {',
+  '    fresh();',
+  '    ["ART.1", "ART.2", "ART.3"].forEach(function (id) { setRowPrice(id, { unitCost: 100 }, true); });',
+  '    const p1 = _priceRow(row("ART.1")), p2 = _priceRow(row("ART.2")), p3 = _priceRow(row("ART.3"));',
+  '    if (p1.royalty !== 0.05 || p2.royalty !== 0 || p3.royalty !== 0.10) throw new Error([p1.royalty, p2.royalty, p3.royalty].join());',
+  '    if (!near(p1.sell, 192.31) || !near(p2.sell, 187.31) || !near(p3.sell, 197.31)) throw new Error([p1.sell, p2.sell, p3.sell].join());',
+  '    _pricingSet({ markup: 2 }, true);',
+  '    if (!near(_priceRow(row("ART.1")).sell, 205)) throw new Error("a typed markup replaces 1.8731 but keeps the royalty: " + _priceRow(row("ART.1")).sell);',
+  '  });',
+  '',
+  '  await check("a royalty can be set per piece (client owns the image); the image code rate stores nothing; margin is after royalties", async function () {',
+  '    fresh(); setRowPrice("ART.1", { unitCost: 100 }, true);',
+  '    setRowPrice("ART.1", { royalty: "0" }, true);',
+  '    if (row("ART.1").royalty !== 0 || _priceRow(row("ART.1")).royalty !== 0) throw new Error("override " + row("ART.1").royalty);',
+  '    setRowPrice("ART.1", { royalty: "5%" }, true); if ("royalty" in row("ART.1")) throw new Error("the code rate was stored");',
+  '    setRowPrice("ART.1", { royalty: 7.5 }, true); if (row("ART.1").royalty !== 0.075) throw new Error("7.5 " + row("ART.1").royalty);',
+  '    setRowPrice("ART.1", { royalty: "" }, true); if ("royalty" in row("ART.1")) throw new Error("blank kept");',
+  '    const t = _priceTotals(), s = 192.31;',
+  '    if (!near(t.margin, (s - 100 - 0.05 * s) / s)) throw new Error("margin " + t.margin);',
+  '  });',
+  '',
+  '  await check("EXACT: the Salesforce CSV is the Import Template: 11 columns, vendor codes, markup a plain number, no special characters, inches, H before W", async function () {',
+  '    fresh(); setRowPrice("ART.1", { unitCost: 100 }, true); setRowPrice("ART.2", { unitCost: 200 }, true);',
+  '    const lines = _salesforceLinesCSV().trim().split(NL);',
+  '    if (lines[0] !== "\\"Product Code\\",\\"Quantity\\",\\"Unit Cost\\",\\"Revenue Markup\\",\\"Item Code\\",\\"Location\\",\\"Image Code / Title\\",\\"OAD Height\\",\\"OAD Width\\",\\"Custom Notes\\",\\"Vendor\\"") throw new Error(lines[0]);',
+  '    const cells = function (l) { return l.slice(1, -1).split("\\",\\""); };',
+  '    const a = cells(lines[1]), b = cells(lines[2]), c = cells(lines[3]), d = cells(lines[4]);',
+  '    if (a[0] !== "" || a[1] !== "1" || a[2] !== "100.00" || a[3] !== "92.31" || a[4] !== "ART.1") throw new Error(a.join("|"));',
+  '    if (a[5] !== "Lobby Bar 2") throw new Error("location " + a[5]);',
+  '    if (a[6] !== "GDC.010.00219.1") throw new Error("image code keeps an extension: " + a[6]);',
+  '    if (a[7] !== "36" || a[8] !== "24") throw new Error("OAD " + a[7] + " " + a[8]);',
+  '    if (a[10] !== "LT00" || b[10] !== "DG00" || c[10] !== "Acme Frames") throw new Error([a[10], b[10], c[10]].join());',
+  '    if (b[3] !== "87.31") throw new Error(b.join("|"));',
+  '    if (d[0] !== "FAO") throw new Error("art type product code " + d[0]);',
+  '    lines.slice(1).forEach(function (l) { cells(l).forEach(function (v) { if (/[^A-Za-z0-9 .\\/\\-]/.test(v)) throw new Error("special character in " + v); if (v !== v.trim() || v.indexOf("  ") >= 0) throw new Error("spacing in " + v); }); });',
+  '    dashUnit = "cm"; row("ART.1").extW = 60.96; row("ART.1").extH = 91.44;',
+  '    const a2 = cells(_salesforceLinesCSV().trim().split(NL)[1]); if (a2[7] !== "36" || a2[8] !== "24") throw new Error("cm " + a2[7]);',
+  '    dashUnit = "in";',
+  '  });',
+  '',
+  '  await check("vendor codes: every spelling on the Vendor codes sheet, and a code typed as itself", async function () {',
+  '    const want = { "Artistic Framing": "LT00", "LT Artistic": "LT00", "Colorific": "CC00", "Duggal": "DG00", "Rainier": "RR00", "Bruce White Gallery": "BW00", "Outdoor Image": "OI00", "Epic Art Decor": "EA00", "Tectonics": "TT00", "Northwood": "NW00", "nw00": "NW00", "Nobody": "" };',
+  '    Object.keys(want).forEach(function (k) { if (_vendorCode(k) !== want[k]) throw new Error(k + " -> " + _vendorCode(k)); });',
+  '  });',
+  '',
+  '  await check("EXACT: the RFQ is the quote template sheet: header, row 9 titles A to AN, mount formulas where they agree, house pricing, totals", async function () {',
+  '    fresh(); document.getElementById("g_projName").value = "The Cascades"; document.getElementById("g_client").value = "CHARD Developments";',
+  '    setRowPrice("ART.1", { unitCost: 100 }, true);',
+  '    row("ART.2").m2A = true; row("ART.2").m2 = 0.25;',
+  '    const sh = _rfqSheet("rfq");',
+  '    if (sh.name !== "QUOTE" || sh.freeze !== 9) throw new Error(sh.name + " " + sh.freeze);',
+  '    const bytes = await _xlsxBlob([sh], "uint8array");',
+  '    const zip = await JSZip.loadAsync(bytes); const x = await zip.file("xl/worksheets/sheet1.xml").async("string");',
+  '    const rows = await _xlsxReadRows(bytes);',
+  '    if (rows[0][2] !== "QUOTE" || rows[1][4] !== "The Cascades" || rows[5][4] !== "CHARD Developments") throw new Error(JSON.stringify(rows.slice(0, 6)));',
+  '    if (rows[8].length !== 40 || rows[8][7] !== "OAD W" || rows[8][39] !== "Extended Total (USD)" || rows[8][32] !== "Vendor") throw new Error(rows[8].join("|"));',
+  '    const r1 = rows[9];',
+  '    if (r1[1] !== "Standard Mount" || r1[3] !== "ART.1" || r1[6] !== "GDC.010.00219.1" || r1[25] !== "MICH 132-29") throw new Error(r1.join("|"));',
+  '    if (x.indexOf("<f>H10-2*AA10-T10-R10</f><v>16</v>") < 0) throw new Error("art width formula with its cached value");',
+  '    if (x.indexOf("<f>J10+0.5</f><v>16.5</v>") < 0) throw new Error("image width formula");',
+  '    if (x.indexOf("<f>87.31%+AJ10</f>") < 0 || x.indexOf("<f>AK10*AH10+AH10</f>") < 0 || x.indexOf("<f>AM10*C10</f>") < 0) throw new Error("pricing formulas");',
+  '    if (x.indexOf("IFERROR(((AM10-AH10)/AM10)-AJ10") < 0) throw new Error("margin check");',
+  '    if (r1[35] !== "0.05") throw new Error("royalty " + r1[35]);',
+  '    // a double mat is not in the template formula: FRAME writes its own number',
+  '    if (x.indexOf("<f>H11-2*AA11") >= 0) throw new Error("double mat kept a formula that is wrong for it");',
+  '    if (rows[10][9] !== "15.5") throw new Error("double mat art width " + rows[10][9]);',
+  '    // wallcovering: the overall size is the graphic, 2in bleed = H+4',
+  '    const egd = rows.find(function (r) { return r[3] === "EGD.1"; });',
+  '    if (egd[1] !== "EGD" || egd[25] !== "N/A" || egd[20] !== "N/A") throw new Error(egd.join("|"));',
+  '    if (x.indexOf("+4</f><v>124</v>") < 0) throw new Error("EGD image width");',
+  '    const tot = rows.find(function (r) { return r[1] === "Total Pieces"; });',
+  '    if (!tot || tot[2] !== "6") throw new Error("total pieces " + (tot && tot[2]));',
+  '    if (x.indexOf("*0.2</f>") < 0 || !rows.some(function (r) { return r[38] === "TOTAL"; })) throw new Error("shipping and total");',
+  '    if (!rows.some(function (r) { return r[29] === "All prices in USD"; })) throw new Error("notes block");',
+  '    if (!/^[0-9]{6}_CHARD_Developments_The_Cascades_RFQ[.]xlsx$/.test(_rfqFileName("rfq"))) throw new Error(_rfqFileName("rfq"));',
+  '  });',
+  '',
+  '  await check("a float mount with a white border, in a CAD project", async function () {',
+  '    fresh(); _pricingSet({ currency: "CAD" }, true);',
+  '    Object.assign(row("ART.1"), { useFloatMount: true, sbPaperMargin: 1.5, sbPaperBorder: 0.5, bleed: 0 });',
+  '    const rows = (_rfqSheet("rfq")).rows;',
+  '    const r = rows[9];',
+  '    if (r[1].s !== "Float w White Border" || r[16].v !== 1.5 || r[24].v !== 0.5) throw new Error(JSON.stringify([r[1], r[16], r[24]]));',
+  '    if (r[9].f !== "H10-2*AA10-T10-R10-Y10*2" || r[9].v !== 18) throw new Error(JSON.stringify(r[9]));',
+  '    if (r[11].f !== "J10") throw new Error("float has no bleed " + JSON.stringify(r[11]));',
+  '    if (!rows.some(function (x) { return x[29] === "Payment Terms: 50% Deposit / 50% CBD"; })) throw new Error("CAD notes");',
+  '    if (rows[8][38].s !== "Unit Price (CAD)") throw new Error(rows[8][38].s);',
+  '  });',
+  '',
+  '  await check("EXACT: the RFI has no prices, stops at Vendor, totals pieces only and leaves the purchases off", async function () {',
+  '    fresh(); setRowPrice("ART.1", { unitCost: 100 }, true);',
+  '    const sh = _rfqSheet("rfi"), rows = sh.rows;',
+  '    if (sh.name !== "RFI" || rows[0][2].s !== "RFI") throw new Error("label");',
+  '    if (rows[8].length !== 33 || rows[8][32].s !== "Vendor") throw new Error(rows[8].length);',
+  '    if (rows.some(function (r) { return r.length > 33; })) throw new Error("a pricing cell");',
+  '    if (rows.some(function (r) { return r[3] && r[3].s === "ART.4"; })) throw new Error("the sourced object went to a vendor");',
+  '    if (rows.some(function (r) { return r[38]; }) || rows.slice(0, 8).some(function (r) { return r[29]; })) throw new Error("totals or price notes on an RFI");',
+  '    if (!/_RFI[.]xlsx$/.test(_rfqFileName("rfi"))) throw new Error(_rfqFileName("rfi"));',
+  '  });',
+  '',
+  '  await check("the production pack carries each vendor RFI in the template layout", async function () {',
+  '    fresh();',
+  '    const files = await _prodPackFiles({ noPdf: true });',
+  '    const x = files.filter(function (f) { return f.kind === "xlsx"; }).map(function (f) { return f.name; });',
+  '    if (!x.some(function (n) { return /_Duggal_RFI[.]xlsx$/.test(n); }) || !x.some(function (n) { return /_Tectonics_RFI[.]xlsx$/.test(n); })) throw new Error(x.join());',
+  '    const d = files.find(function (f) { return /_Duggal_RFI[.]xlsx$/.test(f.name); });',
+  '    const rows = await _xlsxReadRows(d.data);',
+  '    const codes = rows.slice(9).map(function (r) { return r[3]; }).filter(Boolean);',
+  '    if (codes.join() !== "ART.2") throw new Error("Duggal RFI " + codes.join());',
+  '  });',
+  '',
+  '  await check("the Pricing tab offers RFQ, RFI and Salesforce, and a royalty per piece; the vendor list shows codes", async function () {',
+  '    fresh(); openProduction("pricing");',
+  '    const m = document.getElementById("productionModal");',
+  '    const labels = Array.prototype.map.call(m.querySelectorAll("button"), function (b) { return b.textContent; });',
+  '    ["RFQ", "RFI", "Salesforce CSV"].forEach(function (l) { if (labels.indexOf(l) < 0) throw new Error("no " + l + " in " + labels.join("|")); });',
+  '    if (m.querySelector("#priceTable thead").textContent.indexOf("Royalty") < 0) throw new Error("no royalty column");',
+  '    const ph = Array.prototype.map.call(m.querySelectorAll("#priceTable input"), function (i) { return i.placeholder; });',
+  '    if (ph.indexOf("10%") < 0) throw new Error("PEN placeholder " + ph.join());',
+  '    m.remove();',
+  '    openProduction("vendors");',
+  '    const opts = Array.prototype.map.call(document.querySelectorAll("#productionModal datalist option"), function (o) { return o.label; });',
+  '    if (opts.indexOf("Duggal  DG00") < 0) throw new Error(opts.join("|"));',
+  '    document.getElementById("productionModal").remove();',
+  '  });',
+  '  return out;',
+  '})();',
+].join(NL);
+const quiet = console.error; console.error = () => {};
+window.APP_SRC = APP;
+window.eval(TPL + NL + APP + NL + 'var APP_SRC = window.APP_SRC;' + NL + body);
+console.error = quiet;
+window.__res.then((results) => {
+  const failed = results.filter(r => !r.ok);
+  results.forEach(r => { if (!r.ok) console.log('FAIL: ' + r.label + ' — ' + r.err); });
+  console.log(NL + '--- Summary ---');
+  if (failed.length) console.log(failed.length + ' FAILURES');
+  else console.log('ALL PASSED (' + results.length + ')');
+  process.exit(0);
+});

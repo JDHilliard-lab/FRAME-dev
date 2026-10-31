@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.95';
+const APP_VERSION = '19.96';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -49193,7 +49193,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
             { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Edit</strong> &gt; <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
             { title: 'Bulk Images', body: `In the Frame Dashboard, under <strong>Import</strong>. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
-            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name.` },
+            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed.` },
             { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Export</strong> &gt; <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
@@ -49340,7 +49340,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.95</strong> Production has its own button in the Frame Dashboard toolbar. It opens samples, vendors, prices and the budget, and issues in one place, and once anything is priced it shows the budget itself. A number on it counts what needs a look (a rejected sample still in use, a quote out of date) and a click opens that tab. Samples left the Edit menu and Prices &amp; budget left the Export menu; Production pack stays under Export. Ctrl+K finds each Production tab, Help has an entry, and the tour stops at the button.<br><br>
+                body: `<strong>19.96</strong> Quotes come out in the company's own formats. On the Pricing tab, <b>RFQ</b> writes the 2026 quote template's front sheet (columns A to AN, the header, the mount formulas for art and image size, shipping and totals, file named YYMMDD_CLIENT_Project_RFQ.xlsx) and <b>RFI</b> writes the same sheet without prices, for vendors, leaving originals, commissions and found objects off. The production pack now carries each vendor's RFI in that layout too. <b>Salesforce CSV</b> now writes the Quote Import Template's 11 columns: vendor codes (Duggal DG00, Bruce White BW00 ...), markup as a plain number, no special characters. Prices follow the house formula: sell = cost x (1.8731 + the artist royalty), royalty 0% on an F image code, 10% on PEN, 5% otherwise, with a Royalty column for a piece the client owns. A Markup typed on the Pricing tab replaces the 1.8731, never the royalty, and the margin is after royalties.<br><br>
+<strong>19.95</strong> Production has its own button in the Frame Dashboard toolbar. It opens samples, vendors, prices and the budget, and issues in one place, and once anything is priced it shows the budget itself. A number on it counts what needs a look (a rejected sample still in use, a quote out of date) and a click opens that tab. Samples left the Edit menu and Prices &amp; budget left the Export menu; Production pack stays under Export. Ctrl+K finds each Production tab, Help has an entry, and the tour stops at the button.<br><br>
 <strong>19.94</strong> The price follows the size. Estimates are worked out from the rate card and each piece&#8217;s overall size every time, so shrinking an oversized frame moves the budget on that keystroke. A quote remembers the size it was for: resize the piece and the estimate for the new size stands in, flagged to re-quote, and going back to the quoted size brings the quote back. The Update estimates button is gone, since there is nothing left to update.<br><br>
 <strong>19.93</strong> The item toolbar shows the budget while you choose art: what the pieces sell for against the budget, how much is left, and the selected piece against its allowance. It turns amber when either is passed, appears once anything is priced or a budget is set, and a click opens Prices &amp; budget.<br><br>
 <strong>19.92</strong> Contact sheets in the production pack show each picture at its print file's shape with the piece's own crop (as the deck shows it), not the source image as it came. The Vendors and Issues tabs keep their dropdowns on one line.<br><br>
@@ -59787,7 +59788,7 @@ function _readinessPreflight() {
 // request. Purchases (_rowIsPurchase: a sourced object, or an FAO / FCM / FSO code) are
 // never sent to a print vendor; they go on the tracker.
 // The suggestions are the Vendor list Farmboy's Asana projects use; anything typed is fine.
-const VENDOR_SUGGEST = ['Bruce White Gallery', 'Duggal', 'Northwood', 'Colorific', 'Epic', 'LT Artistic', 'Rainier', 'The Framing Depot', 'Thomas Printworks', 'Ben Skinner', 'Artstall', 'Denbigh', 'WestKey', 'Quarterhorse', 'Kyle Bunting', 'Outdoor Image', 'Desi'];
+const VENDOR_SUGGEST = ['Bruce White Gallery', 'Duggal', 'Northwood', 'Colorific', 'Epic', 'LT Artistic', 'Rainier', 'Tectonics', 'The Framing Depot', 'Thomas Printworks', 'Ben Skinner', 'Artstall', 'Denbigh', 'WestKey', 'Quarterhorse', 'Kyle Bunting', 'Outdoor Image', 'Desi'];
 function _rowVendor(r) { return String((r && r.vendorName) || '').trim(); }
 function _rowIsPurchase(r) {
     if (!r) return false;
@@ -59917,6 +59918,12 @@ async function _prodPackFiles(opts) {
         const ids = {}; v.rows.forEach(r => { ids[r.id] = 1; });
         files.push({ name: tag + '.RFI.' + _prodSafe(v.name) + '.csv', kind: 'csv', data: buildDashCSVString({ only: r => !!ids[r.id] }) });
     });
+    // 19.96: each vendor's pieces again in the quote template's RFI layout
+    if (typeof JSZip !== 'undefined') for (const v of plan.vendors) {
+        const ids = {}; v.rows.forEach(r => { ids[r.id] = 1; });
+        const only = r => !!ids[r.id];
+        if (_rfqRows('rfi', only).length) files.push({ name: _rfqFileName('rfi').replace(/_RFI\.xlsx$/, '_' + _prodSafe(v.name) + '_RFI.xlsx'), kind: 'xlsx', data: await _xlsxBlob([_rfqSheet('rfi', only)], 'arraybuffer') });
+    }
     if (plan.unassigned.length) {
         const ids = {}; plan.unassigned.forEach(r => { ids[r.id] = 1; });
         files.push({ name: tag + '.RFI.NO-VENDOR.csv', kind: 'csv', data: buildDashCSVString({ only: r => !!ids[r.id] }) });
@@ -59954,7 +59961,7 @@ function _prodVendorsInto(body) {
     body.appendChild(intro);
     if (!rows.length) return;
     const dl = document.createElement('datalist'); dl.id = 'prodVendorList';
-    _vendorNames().forEach(n => { const o = document.createElement('option'); o.value = n; dl.appendChild(o); });
+    _vendorNames().forEach(n => { const o = document.createElement('option'); o.value = n; const c = _vendorCode(n); if (c) o.label = n + '  ' + c; dl.appendChild(o); });
     body.appendChild(dl);
     // Bulk: every piece of one product to one vendor.
     const bulk = document.createElement('div'); bulk.style.cssText = 'display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin-bottom:10px; font-size:var(--fs-70);';
@@ -60138,7 +60145,23 @@ let _prodIssuePick = null;
 // formulas out, .xlsx or .csv in, matched by item code), and a quote-lines CSV goes to
 // Salesforce's import. Prices never reach a deck page; they do travel in the project file.
 const PRICE_STALE_DAYS = 90;
-const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance', 'priceFor'];
+const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance', 'priceFor', 'royalty'];
+// 19.96: THE HOUSE FORMULA, from the 2026 quote template. Revenue markup = 87.31% + the
+// artist royalty, and unit price = cost x (1 + markup). Royalty follows the image code (an F
+// code is Farmboy's own: 0%; PEN 10%; anything else 5%) unless the piece says otherwise
+// (`r.royalty`, a fraction; a client who owns an image outright). A markup typed on the
+// Pricing tab replaces the 1.8731, never the royalty.
+const HOUSE_MARKUP = 1.8731;
+function _rowRoyaltyAuto(r) {
+    const c = String((r && r.imageCode) || '').trim().toUpperCase();
+    if (/^PEN([._\-\s]|$)/.test(c)) return 0.10;
+    if (/^F/.test(c)) return 0;
+    return 0.05;
+}
+function _rowRoyalty(r) {
+    const n = _priceNum(r && r.royalty);
+    return n != null && n >= 0 && n < 1 ? n : _rowRoyaltyAuto(r);
+}
 // 19.94: THE PRICE FOLLOWS THE SIZE. An estimate is never a stored number: it is worked out
 // from the rate card and the piece's size every time it is read, so shrinking an oversized
 // frame moves the budget at once. A quote (or a typed sell) remembers the overall size it
@@ -60161,7 +60184,7 @@ function _pricingSet(patch, quiet) {
 function _priceNum(v) { const n = parseFloat(String(v == null ? '' : v).replace(/[$,\s]/g, '')); return isFinite(n) ? n : null; }
 function _priceMarkup() {
     const n = _priceNum(_pricing().markup);
-    return n != null && n > 0 ? n : 1;
+    return n != null && n > 0 ? n : HOUSE_MARKUP;
 }
 // What a catalogue option bills: nothing (it is a choice, not an order). A piece not yet on
 // a wall still prices as one, or the budget would read zero until the walls are drawn.
@@ -60171,7 +60194,7 @@ function _priceQty(r) {
     return q > 0 ? q : 1;
 }
 function _priceRow(r) {
-    const allow = _priceNum(r.allowance), mk = _priceMarkup();
+    const roy = _rowRoyalty(r), allow = _priceNum(r.allowance), mk = _priceMarkup() + roy;
     let cost = _priceNum(r.unitCost), hand = _priceNum(r.unitSell), src = r.costSrc || '', at = r.costAt || '';
     const est = _estimateCost(r);
     const resized = !!(r.priceFor && (r.costSrc === 'quote' || hand != null) && r.priceFor !== _priceSizeKey(r));
@@ -60184,17 +60207,17 @@ function _priceRow(r) {
     const qty = _priceQty(r);
     let age = null;
     if (src === 'quote' && at) { const t = Date.parse(at); if (isFinite(t)) age = Math.floor((Date.now() - t) / 86400000); }
-    return { cost: cost, sell: sell, allow: allow, qty: qty, markup: mk, hand: hand != null, src: src, at: at, age: age, stale: age != null && age > PRICE_STALE_DAYS,
+    return { cost: cost, sell: sell, allow: allow, qty: qty, markup: mk, royalty: roy, hand: hand != null, src: src, at: at, age: age, stale: age != null && age > PRICE_STALE_DAYS,
         resized: resized, quotedFor: resized ? r.priceFor : '',
         lineCost: cost != null ? cost * qty : 0, lineSell: sell != null ? sell * qty : 0, lineAllow: allow != null ? allow * qty : 0, over: allow != null && sell != null && sell > allow };
 }
 function _priceTotals() {
     const rows = _deckSpecRows().filter(r => r && r.id);
-    const t = { cost: 0, sell: 0, allow: 0, priced: 0, unpriced: [], stale: [], over: [], resized: [], byArea: {} };
+    const t = { cost: 0, sell: 0, allow: 0, royalty: 0, priced: 0, unpriced: [], stale: [], over: [], resized: [], byArea: {} };
     rows.forEach(r => {
         const p = _priceRow(r);
         if (!p.qty) return;
-        t.cost += p.lineCost; t.sell += p.lineSell; t.allow += p.lineAllow;
+        t.cost += p.lineCost; t.sell += p.lineSell; t.allow += p.lineAllow; t.royalty += p.lineSell * p.royalty;
         if (p.sell == null) t.unpriced.push(r.id); else t.priced++;
         if (p.stale) t.stale.push(r.id);
         if (p.over) t.over.push(r.id);
@@ -60204,7 +60227,8 @@ function _priceTotals() {
         ar.qty += p.qty; ar.sell += p.lineSell; ar.allow += p.lineAllow;
     });
     const b = _priceNum(_pricing().budget);
-    t.budget = b; t.margin = t.sell > 0 ? (t.sell - t.cost) / t.sell : null;
+    // the template's Margin Check: what is left after cost AND the artists' royalties
+    t.budget = b; t.margin = t.sell > 0 ? (t.sell - t.cost - t.royalty) / t.sell : null;
     return t;
 }
 function _money(n) {
@@ -60224,6 +60248,12 @@ function setRowPrice(id, patch, quiet) {
         else { r.unitCost = n; r.costSrc = p.costSrc || 'quote'; r.costAt = p.costAt || _todayIso(); }
     }
     ['unitSell', 'allowance'].forEach(k => { if (k in p) { const n = _priceNum(p[k]); if (n == null) delete r[k]; else r[k] = n; } });
+    // royalty: typed as 5, 5% or 0.05; blank (or the image code's own rate) stores nothing
+    if ('royalty' in p) {
+        let n = _priceNum(p.royalty);
+        if (n != null && (n >= 1 || /%/.test(String(p.royalty)))) n = n / 100;
+        if (n == null || n < 0 || n >= 1 || Math.abs(n - _rowRoyaltyAuto(r)) < 1e-9) delete r.royalty; else r.royalty = Math.round(n * 10000) / 10000;
+    }
     // what size this price was for (19.94): set by a quote or a typed sell, cleared with both
     if ((('unitCost' in p) && r.costSrc === 'quote') || (('unitSell' in p) && r.unitSell != null)) r.priceFor = _priceSizeKey(r);
     if (r.costSrc !== 'quote' && r.unitSell == null) delete r.priceFor;
@@ -60277,13 +60307,17 @@ function _rateCardLoadLocal() { try { const v = JSON.parse(localStorage.getItem(
 // ── EXCEL (.xlsx), written and read with the vendored JSZip ──
 function _xlsxCol(i) { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
 function _xmlEsc(s) { return String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, ''); }
-// sheets: [{name, rows: [[cell]], widths: [n]}]; a cell is a string, a number, null, or
-// {f: 'formula', money: bool} / {v: number, money: bool} / {s: string, bold: bool}.
+// sheets: [{name, rows: [[cell]], widths: [n], freeze: rows}]; a cell is a string, a number,
+// null, or {f: 'formula', v: cached number, money: bool} / {v: number, money: bool} /
+// {s: string, bold: bool}. 19.96 grid styles for the RFQ: `border` (with money / pct),
+// `head` (bordered, bold, grey, wrapped), `title`, `pct`; a styled cell with no value is
+// written empty so the grid keeps its lines.
 async function _xlsxBlob(sheets, type) {
     const zip = new JSZip();
     const ws = sheets.map((sh, si) => {
         let x = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">';
-        x += '<sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>';
+        const fz = sh.freeze || 1;
+        x += '<sheetViews><sheetView workbookViewId="0"><pane ySplit="' + fz + '" topLeftCell="A' + (fz + 1) + '" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>';
         if (sh.widths) x += '<cols>' + sh.widths.map((w, i) => '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + w + '" customWidth="1"/>').join('') + '</cols>';
         x += '<sheetData>';
         sh.rows.forEach((row, ri) => {
@@ -60292,10 +60326,12 @@ async function _xlsxBlob(sheets, type) {
                 if (c == null || c === '') return;
                 const ref = _xlsxCol(ci) + (ri + 1);
                 const o = (typeof c === 'object') ? c : (typeof c === 'number' ? { v: c } : { s: c });
-                const st = o.bold ? ' s="1"' : (o.money ? ' s="2"' : '');
-                if (o.f != null) x += '<c r="' + ref + '"' + st + '><f>' + _xmlEsc(o.f) + '</f></c>';
+                const sn = o.title ? 7 : o.head ? 5 : o.border ? (o.money ? 4 : o.pct ? 6 : 3) : o.bold ? 1 : o.money ? 2 : o.pct ? 8 : 0;
+                const st = sn ? ' s="' + sn + '"' : '';
+                if (o.f != null) x += '<c r="' + ref + '"' + st + '><f>' + _xmlEsc(o.f) + '</f>' + (o.v != null && isFinite(o.v) ? '<v>' + o.v + '</v>' : '') + '</c>';
                 else if (o.v != null && isFinite(o.v)) x += '<c r="' + ref + '"' + st + '><v>' + o.v + '</v></c>';
-                else if (o.s != null) x += '<c r="' + ref + '" t="inlineStr"' + st + '><is><t xml:space="preserve">' + _xmlEsc(o.s) + '</t></is></c>';
+                else if (o.s != null && o.s !== '') x += '<c r="' + ref + '" t="inlineStr"' + st + '><is><t xml:space="preserve">' + _xmlEsc(o.s) + '</t></is></c>';
+                else if (sn) x += '<c r="' + ref + '"' + st + '/>';
             });
             x += '</row>';
         });
@@ -60311,7 +60347,7 @@ async function _xlsxBlob(sheets, type) {
     zip.file('xl/_rels/workbook.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
         + ws.map((s, i) => '<Relationship Id="rId' + (i + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet' + (i + 1) + '.xml"/>').join('')
         + '<Relationship Id="rId' + (ws.length + 1) + '" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>');
-    zip.file('xl/styles.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0.00"/></numFmts><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>');
+    zip.file('xl/styles.xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="&quot;$&quot;#,##0.00"/></numFmts><fonts count="3"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="18"/><name val="Calibri"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE7E6E6"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color auto="1"/></left><right style="thin"><color auto="1"/></right><top style="thin"><color auto="1"/></top><bottom style="thin"><color auto="1"/></bottom><diagonal/></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="9"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1" applyAlignment="1"><alignment vertical="center" wrapText="1"/></xf><xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="0" fontId="1" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="10" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1" applyAlignment="1"><alignment vertical="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="10" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>');
     return zip.generateAsync({ type: type || 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 }
 // The first sheet of an .xlsx as an array of rows of strings (numbers as their text).
@@ -60413,16 +60449,189 @@ function _quoteSheets() {
         .concat(rates.list.map(x => [x.product, x.base != null ? { v: x.base, money: true } : null, x.perSqFt != null ? { v: x.perSqFt, money: true } : null, x.floatMount != null ? { v: x.floatMount, money: true } : null, x.doubleMat != null ? { v: x.doubleMat, money: true } : null])), widths: [26, 10, 10, 12, 12, 16] });
     return sheets;
 }
-// Quote lines for Salesforce's import (Data Import Wizard / CPQ line import): one line per
-// piece, plain columns, mapped once on the Salesforce side.
+// ── SALESFORCE AND THE RFQ / RFI (19.96) ──
+// Two Claude projects the team ran by hand turned FRAME's specs back into spreadsheets: one
+// copied a quote into Salesforce's Quote Import Template, the other rebuilt the 2026 quote
+// template (RFQ, and the RFI without prices) from the spec PDF. Both are written from the
+// rows here, in those files' own columns.
+// Vendor codes: the "Vendor codes" sheet of the SF Import Template. A name matches on any
+// of its spellings (lower case, punctuation ignored); anything else goes out as typed.
+const VENDOR_CODES = [
+    { name: 'Artistic Framing', code: 'LT00', alias: ['lt artistic', 'lt', 'artistic framing', 'lt artistic framing'] },
+    { name: 'Colorific Imaging', code: 'CC00', alias: ['colorific', 'colorific imaging'] },
+    { name: 'Duggal', code: 'DG00', alias: ['duggal', 'duggal visual solutions'] },
+    { name: 'Rainier', code: 'RR00', alias: ['rainier'] },
+    { name: 'Bruce White Gallery', code: 'BW00', alias: ['bruce white', 'bruce white gallery', 'poster graphics'] },
+    { name: 'Outdoor Image', code: 'OI00', alias: ['outdoor image'] },
+    { name: 'Epic Art', code: 'EA00', alias: ['epic', 'epic art', 'epic art decor'] },
+    { name: 'Tectonics', code: 'TT00', alias: ['tectonics'] },
+    { name: 'Northwood', code: 'NW00', alias: ['northwood'] }
+];
+function _vendorCode(name) {
+    const k = String(name || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    if (!k) return '';
+    if (/^[a-z]{2}\d{2}$/.test(k.replace(/\s/g, ''))) return k.replace(/\s/g, '').toUpperCase();
+    const v = VENDOR_CODES.find(x => x.alias.indexOf(k) >= 0 || x.name.toLowerCase() === k);
+    return v ? v.code : '';
+}
+// An image code as the vendor and Salesforce see it: never an extension.
+function _rfqImageCode(r) {
+    return String((r && r.imageCode) || '').trim().replace(/\.(jpe?g|png|tiff?|gif|bmp|pdf|eps|psd|webp)$/i, '');
+}
+// The import tool's rules: no special characters but "/", single spaces, nothing trailing.
+function _sfClean(s) {
+    return String(s == null ? '' : s).replace(/["“”]/g, ' in ').replace(/[^A-Za-z0-9 .\/\-]+/g, ' ').replace(/\s+/g, ' ').trim();
+}
+const SF_IMPORT_COLS = ['Product Code', 'Quantity', 'Unit Cost', 'Revenue Markup', 'Item Code', 'Location', 'Image Code / Title', 'OAD Height', 'OAD Width', 'Custom Notes', 'Vendor'];
+// Product Code is the art type's Salesforce code where the image code names one (FAO, FCM,
+// FSO ...); a print's product is chosen in Salesforce, so it is left blank rather than guessed.
+const SF_ART_TYPE_CODES = ['FAO', 'FCM', 'FSO', 'FSL', 'FSU', 'FST'];
+function _sfProductCode(r) {
+    const m = /^([A-Z]{3})[._\-]/.exec(_rfqImageCode(r).toUpperCase());
+    return m && SF_ART_TYPE_CODES.indexOf(m[1]) >= 0 ? m[1] : '';
+}
+function _inNum(v) { return Math.round((parseFloat(v) || 0) * unitFactor(dashUnit, 'in') * 1000) / 1000; }
 function _salesforceLinesCSV() {
     const q = (s) => '"' + String(s == null ? '' : s).replace(/"/g, '""') + '"';
-    let csv = ['Line Name', 'Product Code', 'Description', 'Quantity', 'Unit Cost', 'Sales Price', 'Total Price', 'Vendor', 'Location'].map(q).join(',') + '\n';
+    let csv = SF_IMPORT_COLS.map(q).join(',') + '\n';
     _deckSpecRows().filter(r => r && r.id && _priceQty(r)).forEach(r => {
         const p = _priceRow(r);
-        csv += [r.id + ' ' + (r.product || ''), r.id, _quoteDescription(r), p.qty, p.cost != null ? p.cost.toFixed(2) : '', p.sell != null ? p.sell.toFixed(2) : '', p.sell != null ? (p.sell * p.qty).toFixed(2) : '', _rowVendor(r), r.location || ''].map(q).join(',') + '\n';
+        // a percentage as a plain number (145, never %145): the import tool cannot read "%"
+        const mk = (p.cost > 0 && p.sell != null) ? String(Math.round((p.sell / p.cost - 1) * 10000) / 100) : '';
+        const notes = [_quoteDescription(r), String(r.prodNotes || '').trim()].filter(Boolean).join('. ');
+        const v = _rowVendor(r);
+        csv += [_sfProductCode(r), p.qty, p.cost != null ? p.cost.toFixed(2) : '', mk, _sfClean(r.id), _sfClean(r.location), _sfClean(_rfqImageCode(r) || r.artworkTitle),
+            _inNum(r.extH), _inNum(r.extW), _sfClean(notes), _vendorCode(v) || _sfClean(v)].map(q).join(',') + '\n';
     });
     return csv;
+}
+// ── The RFQ / RFI workbook: the 2026 quote template's front sheet, columns A to AN ──
+// Sizes are inches. Art and image size (J to M) are the template's own formula for the
+// piece's mount wherever that formula gives FRAME's number, so the sheet stays live; where
+// FRAME knows better (a second mat, a float mount's paper margin, a bleed other than the
+// template's), the number is written instead. Pricing (AH to AN) is the house formula; an
+// RFI drops it and the purchases (originals, commissions, found objects), which no print
+// vendor makes.
+const RFQ_COLS = ['Level', 'Formula Note', 'Qty', 'Item Code', 'Product', 'Location', 'Image Code', 'OAD W', 'OAD H', 'Art Size W', 'Art Size H', 'Image Size W', 'Image Size H',
+    'Canvas Stretcher Depth', 'Canvas Image Wrap', 'Mat Code / Color', 'Mat Top', 'Mat Right', 'Mat Bottom', 'Mat Left', 'Glass', 'Paper Type', 'Paper Size W', 'Paper Size H', 'White Border',
+    'Frame Code / Color', 'Frame Width', 'Frame Height', 'Security Hardware', 'Substrate', 'Mount', 'Notes', 'Vendor',
+    'Vendor Unit Cost', 'Extended Cost', 'Artist Royalty', 'Revenue Markup', 'Margin Check', 'Unit Price (USD)', 'Extended Total (USD)'];
+function _rfqMount(r) {
+    if (_isFlatGraphic(r.product)) return 'egd';
+    if (r.product === 'Didactic Panel') return 'dibond';
+    if (r.product === 'Sourced Object') return 'object';
+    if (r.product === 'Framed Canvas (Floater)' || r.product === 'Frameless Canvas (Wrapped)') return 'canvas';
+    if (r.useFloatMount === true) return (parseFloat(r.sbPaperBorder) || 0) > 0 ? 'float_white' : 'float';
+    return 'standard';
+}
+const RFQ_MOUNT_LABEL = { standard: 'Standard Mount', float: 'Float Mount', float_white: 'Float w White Border', canvas: 'Canvas', egd: 'EGD', dibond: 'Printed Panel Product', object: 'Sourced Object' };
+function _rfqRows(docType, only) {
+    const rfi = docType === 'rfi';
+    return _deckSpecRows().filter(r => r && r.id && _priceQty(r) && !(rfi && _rowIsPurchase(r)) && (!only || only(r)));
+}
+function _rfqSheet(docType, only) {
+    const rfi = docType === 'rfi';
+    const last = rfi ? 33 : 40; // AG (Vendor) on an RFI, AN on an RFQ
+    const g = (id) => { const el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; };
+    const cur = (_pricing().currency || 'USD').toUpperCase();
+    const B = (v) => (v && typeof v === 'object') ? Object.assign({ border: true }, v) : (v == null || v === '' ? { border: true } : (typeof v === 'number' ? { v: v, border: true } : { s: String(v), border: true }));
+    const out = [];
+    const row = () => { const a = []; out.push(a); return a; };
+    // Header, rows 1 to 8.
+    const h1 = row(); h1[2] = { s: rfi ? 'RFI' : 'QUOTE', title: true };
+    const hdr = [['PROJECT', g('g_projName')], ['DESCRIPTION', rfi ? 'Request for Information' : (g('g_desc') && g('g_desc') !== 'Production Specs' ? g('g_desc') : 'Quotation')],
+        ['DATE', g('g_date') || _todayIso()], ['ISSUED BY', g('g_issued') && g('g_issued') !== 'Studio' ? g('g_issued') : 'Farmboy Fine Arts'],
+        ['CLIENT', g('g_client')], ['ATTN', g('g_attn')], ['EST. DELIVERY', g('g_delivery')]];
+    const notes = rfi ? [] : (cur === 'CAD'
+        ? ['Leadtime - Roll Out: 6-8 weeks production', 'Leadtime - MUR: 3-4 weeks production & delivery', 'Product Origin CAD', 'All prices in CAD', 'Quote valid for 45 days', 'Payment Terms: 50% Deposit / 50% CBD']
+        : ['Leadtime - Roll Out: 6-8 weeks production', 'Leadtime - MUR: 3-4 weeks production & delivery', 'Product Origin USA', 'All prices in ' + cur, 'Payment Terms: Due Upon Receipt']);
+    hdr.forEach((pair, i) => { const a = row(); a[3] = { s: pair[0], bold: true }; a[4] = pair[1]; if (notes[i]) a[29] = notes[i]; });
+    // Row 9: the column titles.
+    const h9 = row(); RFQ_COLS.slice(0, last).forEach((t, i) => { h9[i] = { s: rfi ? t.replace(' (USD)', '') : t.replace('(USD)', '(' + cur + ')'), head: true }; });
+    const rows = _rfqRows(docType, only);
+    const multi = (typeof levels !== 'undefined' && levels && levels.length > 1);
+    const near = (a, b) => Math.abs(a - b) < 0.001;
+    rows.forEach((r, i) => {
+        const n = 10 + i, a = row(), p = _priceRow(r), sz = _rowOpeningAndPrint(r), mt = _rfqMount(r);
+        const k = unitFactor(dashUnit, 'in'), I = (v) => Math.round((parseFloat(v) || 0) * k * 1000) / 1000;
+        const H = I(r.extW), V = I(r.extH), oW = I(sz.openW), oH = I(sz.openH), pW = I(sz.printW), pH = I(sz.printH);
+        const flat = mt === 'egd' || mt === 'dibond' || mt === 'object';
+        const canvas = mt === 'canvas', framed = r.product !== 'Frameless Canvas (Wrapped)' && !flat;
+        const floatM = mt === 'float' || mt === 'float_white';
+        const matsOn = !flat && !canvas && !floatM && r.m1A !== false;
+        const fw = framed ? I(r.fW) : 0;
+        const mT = matsOn ? I(r.m1T) : floatM ? I(r.sbPaperMargin) : 0, mR = matsOn ? I(r.m1R) : floatM ? I(r.sbPaperMargin) : 0;
+        const mB = matsOn ? I(r.m1B) : floatM ? I(r.sbPaperMargin) : 0, mL = matsOn ? I(r.m1L) : floatM ? I(r.sbPaperMargin) : 0;
+        const wb = mt === 'float_white' ? I(r.sbPaperBorder) : 0;
+        const cd = canvas ? I(r.canvasDepth) : 0;
+        const wrap = r.product === 'Frameless Canvas (Wrapped)' ? I(r.canvasWrap) : (canvas ? cd + 0.5 : 0);
+        // the template's formula where it agrees with FRAME, else FRAME's number
+        const F = (f, tv, fv) => B(near(tv, fv) ? { f: f, v: fv } : { v: fv });
+        let J, K, L, M;
+        if (mt === 'egd') { J = F('H' + n, H, oW); K = F('I' + n, V, oH); L = F('H' + n + '+4', H + 4, pW); M = F('I' + n + '+4', V + 4, pH); }
+        else if (mt === 'dibond') { J = B(oW); K = B(oH); L = F('J' + n + '+0.125*2', oW + 0.25, pW); M = F('I' + n + '+0.125*2', V + 0.25, pH); }
+        else if (mt === 'object') { J = B(oW); K = B(oH); L = B(pW); M = B(pH); }
+        else if (canvas) {
+            const tj = H - 2 * fw - 0.5, tk = V - 2 * fw - 0.5;
+            J = F('H' + n + '-2*AA' + n + '-2*0.25', tj, oW); K = F('I' + n + '-2*AA' + n + '-2*0.25', tk, oH);
+            L = F('J' + n + '+O' + n + '*2', oW + wrap * 2, pW); M = F('K' + n + '+O' + n + '*2', oH + wrap * 2, pH);
+        } else {
+            const tj = H - 2 * fw - mL - mR - wb * 2, tk = V - 2 * fw - mB - mT - wb * 2, wbF = wb ? '-Y' + n + '*2' : '';
+            J = F('H' + n + '-2*AA' + n + '-T' + n + '-R' + n + wbF, tj, oW); K = F('I' + n + '-2*AA' + n + '-S' + n + '-Q' + n + wbF, tk, oH);
+            const bl = mt === 'standard' ? 0.5 : 0;
+            L = F(bl ? 'J' + n + '+0.5' : 'J' + n, oW + bl, pW); M = F(bl ? 'K' + n + '+0.5' : 'K' + n, oH + bl, pH);
+        }
+        let lvName = '';
+        if (multi) { const lv = levels[_deckLvlOf(r.level)]; lvName = (lv && lv.name) || ''; }
+        const vName = _rowVendor(r);
+        a.push(B(lvName), B(RFQ_MOUNT_LABEL[mt]), B(p.qty), B(r.id), B(r.product || ''), B(r.location || ''), B(_rfqImageCode(r)), B(H), B(V), J, K, L, M,
+            B(cd), canvas && r.product !== 'Frameless Canvas (Wrapped)' ? B({ f: 'N' + n + '+0.5', v: cd + 0.5 }) : B(wrap),
+            B(matsOn ? (r.m1ColorName || '') : (floatM ? (r.sbBackerColorName || '') : (flat ? 0 : ''))), B(mT), B(mR), B(mB), B(mL),
+            B(canvas || flat || !framed ? 'N/A' : (r.glass || '')), B(flat ? '' : (r.paperType || '')), B(), B(), B(wb || ''),
+            B(framed ? (String(r.fCode || '').trim() || 'TBD') : 'N/A'), B(fw), B(framed ? I(r.fHeight) : 0),
+            B(mt === 'egd' ? 'N/A' : (r.hardware || '')), B(flat ? (r.material || '') : canvas ? 'Canvas' : (r.paperType || '')),
+            B(mt === 'egd' ? '' : (r.mount || RFQ_MOUNT_LABEL[mt])), B(String(r.prodNotes || '').trim()), B(vName));
+        if (!rfi) {
+            const mk = p.markup - 1; // the revenue markup over cost, royalty included
+            a.push(B(p.cost != null ? { v: p.cost, money: true } : { money: true }),
+                B({ f: 'C' + n + '*AH' + n, v: p.cost != null ? p.cost * p.qty : 0, money: true }),
+                B({ v: p.royalty, pct: true }),
+                B({ f: Math.round((mk - p.royalty) * 10000) / 100 + '%+AJ' + n, v: Math.round(mk * 10000) / 10000, pct: true }),
+                B({ f: 'IFERROR(((AM' + n + '-AH' + n + ')/AM' + n + ')-AJ' + n + ',"")', v: (p.sell && p.cost != null) ? (p.sell - p.cost) / p.sell - p.royalty : undefined, pct: true }),
+                p.hand ? B({ v: p.sell, money: true }) : B({ f: 'AK' + n + '*AH' + n + '+AH' + n, v: p.sell != null ? p.sell : 0, money: true }),
+                B({ f: 'AM' + n + '*C' + n, v: p.sell != null ? p.sell * p.qty : 0, money: true }));
+        }
+    });
+    const lastRow = 9 + rows.length, t = lastRow + 1;
+    const sumC = rows.reduce((s, r) => s + _priceQty(r), 0);
+    const tr = row(); tr[1] = { s: 'Total Pieces', bold: true }; tr[2] = { f: 'SUM(C10:C' + lastRow + ')', v: sumC, bold: true };
+    if (!rfi) {
+        const art = rows.reduce((s, r) => s + _priceRow(r).lineSell, 0), cost = rows.reduce((s, r) => s + _priceRow(r).lineCost, 0);
+        tr[33] = { s: 'Total Costs', bold: true }; tr[34] = { f: 'SUM(AI10:AI' + lastRow + ')', v: cost, money: true };
+        tr[38] = { s: 'Artwork Total', bold: true }; tr[39] = { f: 'SUM(AN10:AN' + lastRow + ')', v: art, money: true };
+        const sh = row(); sh[38] = { s: 'Shipping Estimate', bold: true }; sh[39] = { f: 'AN' + t + '*0.2', v: art * 0.2, money: true };
+        const sb = row(); sb[38] = { s: 'Subtotal', bold: true }; sb[39] = { f: 'SUM(AN' + t + ':AN' + (t + 1) + ')', v: art * 1.2, money: true };
+        const gt = row(); gt[38] = { s: 'TOTAL', bold: true }; gt[39] = { f: 'SUM(AN' + (t + 2) + ':AN' + (t + 2) + ')', v: art * 1.2, money: true };
+        const nt = row(); nt[38] = '*All amounts shown in ' + cur;
+    }
+    const widths = [10, 16, 6, 12, 20, 18, 20, 8, 8, 9, 9, 9, 9, 10, 10, 16, 7, 7, 7, 7, 14, 16, 9, 9, 9, 18, 9, 9, 18, 18, 18, 30, 18, 12, 12, 9, 10, 10, 13, 15];
+    return { name: rfi ? 'RFI' : 'QUOTE', rows: out, widths: widths.slice(0, last), freeze: 9 };
+}
+// YYMMDD_CLIENT_ProjectName_RFQ.xlsx: the client is the deck's document code when there is
+// one (the four-letter client code), else the client name.
+function _rfqFileName(docType) {
+    const g = (id) => { const el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; };
+    const safe = (s) => String(s || '').replace(/[^A-Za-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+    let code = ''; try { code = _deckFooterMeta().code || ''; } catch (e) {}
+    const client = safe(code || g('g_client')) || 'CLIENT', proj = safe(g('g_projName')) || 'Project';
+    return _prodStamp() + '_' + client + '_' + proj + '_' + (docType === 'rfi' ? 'RFI' : 'RFQ') + '.xlsx';
+}
+async function exportRfqXlsx(docType) {
+    if (typeof JSZip === 'undefined') { showInfoModal('Excel', 'The ZIP library did not load. Reload FRAME and try again.'); return; }
+    if (!_rfqRows(docType).length) { _toast('Nothing to send', docType === 'rfi' ? 'No pieces a print vendor makes are in the deck yet.' : 'There are no pieces in the deck yet.'); return; }
+    const blob = await _xlsxBlob([_rfqSheet(docType)]);
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = _rfqFileName(docType); a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
 }
 // Read a sheet back: find the header row holding "Item Code", read the price columns by
 // name, write through setRowPrice. Qty is never read (it comes from the walls).
@@ -60458,7 +60667,7 @@ function _priceImportRows(rows) {
         }
         const sell = cell('unitSell');
         if (sell !== undefined) {
-            const mk = _priceMarkup(), c = _priceNum(cost !== undefined ? cost : _priceRow(r).cost), s = _priceNum(sell);
+            const mk = _priceMarkup() + _rowRoyalty(r), c = _priceNum(cost !== undefined ? cost : _priceRow(r).cost), s = _priceNum(sell);
             const derived = (c != null && s != null && Math.abs(s - Math.round(c * mk * 100) / 100) < 0.005);
             if (!derived && s !== _priceNum(r.unitSell)) patch.unitSell = sell;
         }
@@ -60557,7 +60766,8 @@ function _prodPricingInto(body) {
         i.onchange = () => { onSet(i.value); _prodShow(); };
         l.appendChild(i); set.appendChild(l); return i;
     };
-    num('priceMarkup', 'Markup ×', pr.markup != null ? pr.markup : '', 50, v => _pricingSet({ markup: _priceNum(v) }), 'Sell = cost × markup, unless a sell price is typed');
+    const mkIn = num('priceMarkup', 'Markup ×', pr.markup != null ? pr.markup : '', 60, v => _pricingSet({ markup: _priceNum(v) }), 'Sell = cost × (markup + the artist royalty), unless a sell price is typed. Blank is the house markup, ' + HOUSE_MARKUP + ' (87.31%), from the 2026 quote template.');
+    mkIn.placeholder = String(HOUSE_MARKUP);
     num('priceBudget', 'Budget', pr.budget != null ? pr.budget : '', 90, v => _pricingSet({ budget: _priceNum(v) }), 'The client’s total budget for the project');
     num('priceCurrency', 'Currency', pr.currency || 'USD', 50, v => _pricingSet({ currency: String(v || '').trim().toUpperCase() || null }));
     body.appendChild(set);
@@ -60582,10 +60792,12 @@ function _prodPricingInto(body) {
         f.onchange = () => { if (f.files && f.files[0]) importPricesFile(f.files[0]); };
         f.click();
     }, true, 'Read Unit Cost, Unit Sell, Allowance and Vendor back from an .xlsx or .csv, matched by Item Code'));
+    tools.appendChild(_prodBtn('RFQ', () => exportRfqXlsx('rfq'), true, 'The quote in the 2026 quote template’s layout (.xlsx): every spec column, the house markup and royalty, shipping and totals'));
+    tools.appendChild(_prodBtn('RFI', () => exportRfqXlsx('rfi'), true, 'The same sheet with no prices, for vendors; originals, commissions and found objects are left off'));
     tools.appendChild(_prodBtn('Salesforce CSV', () => {
         const b = new Blob([_salesforceLinesCSV()], { type: 'text/csv;charset=utf-8;' });
-        const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = _prodStamp() + '.' + _prodProjectTag() + '.Quote-lines.csv'; a.click();
-    }, true, 'Quote lines for Salesforce’s import: one line per piece'));
+        const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = _prodStamp() + '_' + _prodProjectTag() + '_SF_Import.csv'; a.click();
+    }, true, 'The Salesforce Quote Import Template’s 11 columns, ready for the import tool: vendor codes, markup as a plain number, no special characters'));
     tools.appendChild(_prodBtn('Rate card…', () => openRateCard(), true, 'Estimate prices before a vendor quotes'));
     // 19.94: no Update estimates button. Estimates are worked out from the size on every read.
     body.appendChild(tools);
@@ -60600,7 +60812,7 @@ function _prodPricingInto(body) {
     if (!rows.length) return;
     const tbl = document.createElement('table'); tbl.id = 'priceTable';
     tbl.style.cssText = 'width:100%; border-collapse:collapse; font-size:var(--fs-70);';
-    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;">Code</th><th style="padding:4px;">Product</th><th style="padding:4px;">Vendor</th><th style="padding:4px;">Qty</th><th style="padding:4px;">Unit cost</th><th style="padding:4px;">Source</th><th style="padding:4px;">Unit sell</th><th style="padding:4px;">Line</th><th style="padding:4px;">Allowance</th></tr></thead>';
+    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;">Code</th><th style="padding:4px;">Product</th><th style="padding:4px;">Vendor</th><th style="padding:4px;">Qty</th><th style="padding:4px;">Unit cost</th><th style="padding:4px;">Source</th><th style="padding:4px;" title="Artist royalty: an F image code 0%, PEN 10%, anything else 5%. Type a rate for a piece the client owns outright.">Royalty</th><th style="padding:4px;">Unit sell</th><th style="padding:4px;">Line</th><th style="padding:4px;">Allowance</th></tr></thead>';
     const tb = document.createElement('tbody'); tbl.appendChild(tb);
     rows.forEach(r => {
         const p = _priceRow(r);
@@ -60620,7 +60832,9 @@ function _prodPricingInto(body) {
             sc.textContent = (p.src === 'estimate' ? 'Estimate, re-quote' : 'Quote, resized');
             sc.title = 'Priced at ' + _priceSizeLabel(p.quotedFor) + '; the piece is now ' + _priceSizeLabel(_priceSizeKey(r)) + '. ' + (p.src === 'estimate' ? 'The rate card estimate for the new size is used until it is re-quoted.' : 'No rate card covers it, so the old quote is still counted.');
         }
-        td().appendChild(inp(p.hand ? p.sell : '', p.sell != null ? _money(p.sell) : '', v => setRowPrice(r.id, { unitSell: v }), 'Leave blank for cost × markup'));
+        const ry = inp(r.royalty != null ? Math.round(r.royalty * 10000) / 100 + '%' : '', Math.round(_rowRoyaltyAuto(r) * 100) + '%', v => setRowPrice(r.id, { royalty: v }), 'Blank follows the image code');
+        ry.style.width = '48px'; td().appendChild(ry);
+        td().appendChild(inp(p.hand ? p.sell : '', p.sell != null ? _money(p.sell) : '', v => setRowPrice(r.id, { unitSell: v }), 'Leave blank for cost × (markup + royalty)'));
         td().textContent = p.sell != null ? _money(p.lineSell) : '';
         const ac = td(); ac.appendChild(inp(p.allow, '', v => setRowPrice(r.id, { allowance: v })));
         if (p.over) { ac.title = 'Sells over its allowance'; ac.firstChild.style.borderColor = 'var(--warn)'; }

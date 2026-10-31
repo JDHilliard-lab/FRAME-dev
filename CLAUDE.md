@@ -2377,6 +2377,15 @@ run but passes alone is usually load timing: rerun before chasing it.
   ignored) and the piece is flagged `resized` (Pricing tab, chip tip); back at the quoted size the quote returns; no
   rate card = quote kept, flagged. `syncDashAndCalculate` calls `_dashBudgetSync` on every keystroke (live pass too).
   Import compares against `_priceRow(r).cost`, or a round-tripped estimate becomes a quote. No Update estimates button.
+- **THE COMPANY'S OWN SHEETS (19.96, `_rfqSheet(docType, only)`, `_salesforceLinesCSV`, `_rowRoyalty`, `HOUSE_MARKUP`,
+  `VENDOR_CODES` / `_vendorCode`).** From the team's Claude projects (RFQ/RFI Generator, RFQ -> Import Template). Sell =
+  cost x (markup + royalty): markup is typed or `HOUSE_MARKUP` 1.8731 (template AK = 87.31% + AJ), royalty F 0 / PEN 0.10 /
+  else 0.05 or `r.royalty` (stored only when it differs). Margin is AFTER royalties. RFQ = template front sheet, rows 1-8
+  header, row 9 titles (`RFQ_COLS`, A to AN), data from row 10, `freeze: 9`; J to M are the template's mount formula ONLY
+  where it equals `_rowOpeningAndPrint` (else FRAME's number). RFI = A to AG, no purchases, Total Pieces only. SF CSV is the
+  Import Template's 11 columns (H before W, markup a plain number, `_sfClean`). Product Code only for an art-type prefix
+  (unknown mapping for prints: ask before guessing). `_xlsxBlob` cells take `border` / `head` / `title` / `pct` and a cached `v`
+  beside `f`. Test fixtures that are not about royalty use F image codes.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
