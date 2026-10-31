@@ -209,7 +209,13 @@ async function main() {
         let log = ''; try { log = fs.readFileSync(STATE.replace(/\.json$/, '') + '.log', 'utf8'); } catch (e) {}
         return out({ error: 'driver did not start', log: log.slice(-1500) });
     }
-    if (cmd === 'stop') return out(await post({ stop: true }));
+    if (cmd === 'stop') {
+        const r = await post({ stop: true });
+        // Answered before it exits: wait for it to be gone, so a `start` straight after
+        // does not find the old one still answering and step aside.
+        for (let i = 0; i < 100 && readState(); i++) await new Promise(res => setTimeout(res, 50));
+        return out(r);
+    }
     if (cmd === 'eval') return out(await post({ js: process.argv[3] || '' }));
     if (cmd === 'call') {
         let args = [];

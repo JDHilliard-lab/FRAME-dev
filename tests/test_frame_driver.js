@@ -60,7 +60,7 @@ try {
     check('stop ends Chrome and the driver', () => {
         const r = run(['stop']);
         if (!r.stopped) throw new Error(JSON.stringify(r));
-        for (let i = 0; i < 50 && fs.existsSync(env.FRAME_DRIVER_STATE); i++) execFileSync('sleep', ['0.1']);
+        // gone when stop RETURNS: a start straight after must not find the old one answering
         if (fs.existsSync(env.FRAME_DRIVER_STATE)) throw new Error('state file left behind');
     });
 } finally {
