@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.99';
+const APP_VERSION = '20.00';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -40647,7 +40647,7 @@ function _jumpEntries() {
         if (_catPlaces().length) out.push({ group: 'Views', title: 'Catalogue overview', sub: 'every placement and option', go: [{ kind: 'run', label: 'Open', run: openCatalogueOverview }], hay: 'catalogue overview options images missing' });
     } catch (e) {}
     // 19.95: Production is a window, not a view, but it is reached from anywhere here.
-    PROD_TABS.forEach(t => out.push({ group: 'Views', title: 'Production: ' + t[1], sub: t[2], go: [{ kind: 'run', label: 'Open', run: () => openProduction(t[0]) }], hay: 'production ' + t[1] + ' ' + t[2] + (t[0] === 'pricing' ? ' budget quote excel salesforce' : t[0] === 'shipping' ? ' commercial invoice customs border hs code' : '') }));
+    PROD_TABS.forEach(t => out.push({ group: 'Views', title: 'Production: ' + t[1], sub: t[2], go: [{ kind: 'run', label: 'Open', run: () => openProduction(t[0]) }], hay: 'production ' + t[1] + ' ' + t[2] + (t[0] === 'pricing' ? ' budget quote excel salesforce' : t[0] === 'shipping' ? ' commercial invoice customs border hs code' : t[0] === 'brand' ? ' residence inn springhill suites marriott ford retail signature email template standard items' : '') }));
     [['dashboard', '1  Frame Dashboard'], ['elevation', '2  Elevation'], ['deck', '3  Deck']].forEach(v => {
         out.push({ group: 'Views', title: v[1], sub: 'view', go: [{ kind: 'view', label: 'Open', view: v[0] }], hay: v[1] + ' view tab' });
     });
@@ -49305,7 +49305,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
             { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Edit</strong> &gt; <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
             { title: 'Bulk Images', body: `In the Frame Dashboard, under <strong>Import</strong>. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
-            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with five tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce), <strong>Issues</strong> (what changed since the deck last went out) and <strong>Shipping</strong> (commercial invoices across the Canada and USA border, lines from the pieces). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size. For a first budget from a bare floor plan, use <strong>Sketch</strong> on the plan's add bar: pick a type and a <strong>Size</strong>, and every click drops a priced piece.` },
+            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with six tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce), <strong>Issues</strong> (what changed since the deck last went out) and <strong>Shipping</strong> (commercial invoices across the Canada and USA border, lines from the pieces) and <strong>Brand standards</strong> (fixed-price Residence Inn, SpringHill Suites and Ford items added to the project in one click, and the client emails that go with them, filled from the project). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size. For a first budget from a bare floor plan, use <strong>Sketch</strong> on the plan's add bar: pick a type and a <strong>Size</strong>, and every click drops a priced piece.` },
             { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Export</strong> &gt; <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
@@ -49452,7 +49452,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
+                body: `<strong>20.00</strong> <b>Brand standards</b>, a sixth tab in Production, for Residence Inn, SpringHill Suites and Ford orders. Keep the fixed-price standard items in one list (brand, item, product, size, image code, cost, sell) and share it with the team as a file; it stays on this computer, never in the code. Add puts an item into the project as a piece at its size, image code and price, with a quantity for orders that hang on no wall. Below it, the client emails from the team's cheat sheet (RI / SHS first reply, custom size quote, PO received, Ford Retail Signature 2.0 contractor enquiry) fill themselves from the project: name, attention line, the order, totals, the card fee and the Ford rate. Copy email keeps the custom-size sentence bold when pasted into Outlook; Edit wording saves your own version.<br><br>
+<strong>19.99</strong> <b>Commercial invoices</b> for shipments between Canada and the USA, on a new <b>Shipping</b> tab in Production. Tick the pieces in the box (or add a vendor's pieces at once) and each becomes a line: description with its size and codes, HS code by product (originals 9701.21, prints framed or on canvas 4911.91, wallcovering 4814.90, window film 3919.90), quantity from the walls and value at cost or sell. Port of lading follows the route (Quebec to the USA by ground is Lacolle, Ontario is Windsor, back into Quebec is Champlain, into Ontario is Port Huron, any air is Montreal-Trudeau) unless you type one. Any line can be edited. Shippers and consignees saved to the address book, and the name you sign with, stay on this computer. Download PDF writes commercial_invoice_ followed by the invoice number.<br><br>
 <strong>19.98</strong> <b>Budget sketch</b> on the floor plan. The add bar has a <b>Size</b> (the standard sizes from the budgeting guide, 11 x 14 to 40 x 50, both ways round) and a <b>Sketch</b> button: while it is on, every click on the plan drops a new piece of the chosen type and size right there, and an <b>Area</b> field names where they go. The pieces are priced by the rate card as they land, and a budget line under the bar shows the total against the budget. Esc or Sketch again stops. + Add code takes the size too.<br><br>
 <strong>19.97</strong> The rate card has <b>add-ons</b>, from the studio's budgeting guide: premium frame (a Larson-Juhl or Universal Arquati moulding), non-glare glass (read off the Glass field, entered at 30x40 and scaled to each piece's area), moisture sealant (pieces in a bath, restroom, spa, pool or locker room, with a Sealant tick per piece on the Pricing tab), oversize (past 40x50) and a buffer percent on every estimate. Each one applies by itself from what the piece already says, and the Pricing tab lists what each piece took. Wallcovering and window film price per square foot alone: leave the base blank.<br><br>
 <strong>19.96</strong> Quotes come out in the company's own formats. On the Pricing tab, <b>RFQ</b> writes the 2026 quote template's front sheet (columns A to AN, the header, the mount formulas for art and image size, shipping and totals, file named YYMMDD_CLIENT_Project_RFQ.xlsx) and <b>RFI</b> writes the same sheet without prices, for vendors, leaving originals, commissions and found objects off. The production pack now carries each vendor's RFI in that layout too. <b>Salesforce CSV</b> now writes the Quote Import Template's 11 columns: vendor codes (Duggal DG00, Bruce White BW00 ...), markup as a plain number, no special characters. Prices follow the house formula: sell = cost x (1.8731 + the artist royalty), royalty 0% on an F image code, 10% on PEN, 5% otherwise, with a Royalty column for a piece the client owns. A Markup typed on the Pricing tab replaces the 1.8731, never the royalty, and the margin is after royalties.<br><br>
@@ -60306,7 +60307,10 @@ function _priceMarkup() {
 function _priceQty(r) {
     if (_catOptionRowIds()[r.id]) return 0;
     const q = parseInt(r.qty, 10);
-    return q > 0 ? q : 1;
+    if (q > 0) return q;
+    // 20.00: a brand-standard order hangs on no wall; its quantity is the order's
+    const o = parseInt(r.orderQty, 10);
+    return o > 0 ? o : 1;
 }
 function _priceRow(r) {
     const roy = _rowRoyalty(r), allow = _priceNum(r.allowance), mk = _priceMarkup() + roy;
@@ -61421,12 +61425,319 @@ function _prodShippingInto(body) {
     foot.appendChild(_prodBtn('Download PDF', () => downloadCommercialInvoice(sh.id), false, 'commercial_invoice_<number>.pdf'));
 }
 
+// ── BRAND STANDARDS (20.00) ──────────────────────────────────────────────────
+// From the team's BRAND STANDARDS project: Marriott Residence Inn / SpringHill Suites
+// brand-standard artwork and wallcovering, and Ford (Retail Signature 2.0, facilities).
+// Two halves. STANDARD ITEMS: a fixed-price list (brand, item, product, size, image code,
+// cost, sell) kept on THIS COMPUTER (`BS_ITEMS_KEY`) and passed round the team as a file,
+// never in the code: the site is public. Adding one to a project mints a piece through the
+// floor plan's own minter (`_fpAddCodes` with a marker), sized, coded and priced as a dated
+// quote with its fixed sell, carrying `stdItem` (the list item's id) so the emails can tell
+// a standard piece from a custom one. CLIENT EMAILS: the cheat-sheet replies as templates
+// with {tokens} filled from the project (`_bsMailCtx`); **bold** survives a rich copy into
+// Outlook. Amounts the emails quote (card fee, Ford's preliminary rate per sq ft) are
+// settings in the same file, so no number lives in the code either.
+const BS_ITEMS_KEY = 'frame_brand_items';
+const BS_SET_KEY = 'frame_brand_settings';
+const BS_ITEM_FIELDS = ['brand', 'name', 'product', 'w', 'h', 'imageCode', 'artType', 'cost', 'sell', 'note'];
+const BS_MAILS = [
+    { key: 'riReply', label: 'RI / SHS: first reply with pricing', subject: '{project}: brand-standard artwork pricing', body:
+        'Hi {attn},\n\nThank you for reaching out about brand-standard artwork for {project}. Pricing for the standard sizes:\n\n{items}\n\n'
+        + '**Pricing is for the standard sizes only; custom wall sizes must be custom-quoted.** If a wall differs from the standard, send its in-field dimensions and we will quote it.\n\n'
+        + 'To start production we need a PO with verified in-field dimensions and a 100% deposit. Please also send your tax-exempt certificate if the property has one.\n\n'
+        + 'Lead time is 4-6 weeks from PO and deposit, FOB Seattle, WA. Approvals are on digital references; we do not send physical strike-offs.\n\nBest,\n{signer}\nFarmboy Fine Arts' },
+    { key: 'riCustom', label: 'RI / SHS: custom size quote', subject: '{project}: custom size quote', body:
+        'Hi {attn},\n\nThank you for the dimensions. Here is the quote for the custom sizes at {project}:\n\n{custom}\n\nTotal: {custom_total}\n\n'
+        + 'Wallcovering is printed with bleed past the wall dimensions and trimmed on site. Please confirm the dimensions were measured in the field.\n\n'
+        + 'Once we have a PO with the verified dimensions and a 100% deposit, lead time is 4-6 weeks, FOB Seattle, WA.\n\nBest,\n{signer}\nFarmboy Fine Arts' },
+    { key: 'riPo', label: 'RI / SHS: PO received', subject: '{project}: PO received', body:
+        'Hi {attn},\n\nThank you, we have received the PO for {project}. The order:\n\n{order}\n\nTotal: {total}\n\n'
+        + 'Production starts once the 100% deposit is in. ACH is preferred; a credit card payment carries a {card_fee} fee, and a cheque should come by FedEx. '
+        + 'Please send your tax-exempt certificate if the property has one.\n\n'
+        + 'Lead time is 4-6 weeks, FOB Seattle, WA. We will send digital references for your approval before anything is printed.\n\nBest,\n{signer}\nFarmboy Fine Arts' },
+    { key: 'ford', label: 'Ford Retail Signature 2.0: contractor enquiry', subject: '{project}: Ford Retail Signature 2.0 graphics', body:
+        'Hi {attn},\n\nThank you for reaching out about the wallcovering, vinyl graphics and artwork for {project}. To quote, please send:\n\n'
+        + '- the floor plans\n- quantities\n- the install address\n- your timeline\n\n'
+        + 'We will have the quote back within 3-5 business days. If you need a number before then, budget {ford_rate} per square foot as a preliminary figure.\n\nBest,\n{signer}\nFarmboy Fine Arts' }
+];
+function _bsLoad() {
+    try { const v = JSON.parse(localStorage.getItem(BS_ITEMS_KEY) || '[]'); return Array.isArray(v) ? v.filter(x => x && x.id && x.name) : []; } catch (e) { return []; }
+}
+function _bsSettings() {
+    try { const v = JSON.parse(localStorage.getItem(BS_SET_KEY) || '{}'); return (v && typeof v === 'object' && !Array.isArray(v)) ? v : {}; } catch (e) { return {}; }
+}
+function _bsSaveSettings(patch) {
+    const s = Object.assign({}, _bsSettings(), patch || {});
+    Object.keys(s).forEach(k => { if (s[k] === '' || s[k] == null) delete s[k]; });
+    if (s.mails) { Object.keys(s.mails).forEach(k => { if (!s.mails[k]) delete s.mails[k]; }); if (!Object.keys(s.mails).length) delete s.mails; }
+    try { localStorage.setItem(BS_SET_KEY, JSON.stringify(s)); } catch (e) {}
+    return s;
+}
+// ONE writer for the list. Cleans each item to its fields, gives it an id, drops a nameless row.
+function setBrandItems(list) {
+    const seen = {};
+    const out = (list || []).map(x => {
+        const o = {};
+        BS_ITEM_FIELDS.forEach(k => { const v = x && x[k]; if (v != null && String(v).trim() !== '') o[k] = String(v).trim(); });
+        ['w', 'h', 'cost', 'sell'].forEach(k => { if (k in o) { const n = _priceNum(o[k]); if (n == null) delete o[k]; else o[k] = n; } });
+        let id = String((x && x.id) || '').trim();
+        if (!id || seen[id]) id = 'bs' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+        seen[id] = 1; o.id = id;
+        return o;
+    }).filter(o => o.name);
+    try { localStorage.setItem(BS_ITEMS_KEY, JSON.stringify(out)); } catch (e) {}
+    return out;
+}
+function _bsBrands(items) { const b = []; (items || _bsLoad()).forEach(x => { const k = x.brand || ''; if (k && b.indexOf(k) < 0) b.push(k); }); return b.sort(); }
+function _bsMoney(n) {
+    if (n == null || !isFinite(n)) return '';
+    const cur = _pricing().currency || 'USD';
+    const d = Math.round(n * 100) % 100 ? 2 : 0;
+    try { return new Intl.NumberFormat('en-US', { style: 'currency', currency: cur, minimumFractionDigits: d, maximumFractionDigits: d }).format(n); }
+    catch (e) { return '$' + n.toFixed(d); }
+}
+// The category a product mints under: one whose own product it is, else one of its prefix
+// (a flat graphic's), else the first artwork one; the product is then set on the row.
+function _bsCatFor(product) {
+    const cats = _artCats().filter(c => c && c.key);
+    let c = cats.find(x => _catCodeInfo(x.key).product === product);
+    if (!c && _isFlatGraphic(product)) c = cats.find(x => _isFlatGraphic(_catCodeInfo(x.key).product));
+    if (!c) c = cats.find(x => _catCodeInfo(x.key).prefix === 'ART');
+    return (c || cats[0] || {}).key || '';
+}
+// Add `qty` of a standard item as ONE piece (a brand order hangs on no wall, so its quantity
+// is `orderQty`, read by `_priceQty`). One undo entry. Returns the new piece's code.
+function addBrandItem(itemId, qty, location, quiet) {
+    const it = _bsLoad().find(x => x.id === itemId); if (!it) return null;
+    const product = FRAME_PRODUCTS.indexOf(it.product) >= 0 ? it.product : 'Framed Art';
+    const f = unitFactor('in', dashUnit);
+    const mark = { _bsNew: true, product: product, stdItem: it.id };
+    if (it.w > 0 && it.h > 0) { mark.extW = dashFmt(it.w * f); mark.extH = dashFmt(it.h * f); }
+    if (it.imageCode) mark.imageCode = it.imageCode;
+    if (it.artType) mark.artType = it.artType;
+    if (String(location || '').trim()) mark.location = String(location).trim();
+    const n = parseInt(qty, 10); if (n > 1) mark.orderQty = n;
+    _fpAddCodes(_bsCatFor(product), 1, { quiet: true, mark: mark });
+    const r = dashProjectData.find(x => x && x._bsNew);
+    if (!r) return null;
+    delete r._bsNew;
+    const p = {};
+    if (it.cost != null) p.unitCost = it.cost;
+    if (it.sell != null) p.unitSell = it.sell;
+    if (Object.keys(p).length) setRowPrice(r.id, p, true);
+    if (!quiet) {
+        if (typeof renderDashTable === 'function') renderDashTable();
+        if (typeof populateDashPushSelector === 'function') populateDashPushSelector();
+        pushHistory();
+        if (typeof scheduleAutosave === 'function') scheduleAutosave();
+    }
+    return r.id;
+}
+// What the emails are filled from.
+function _bsMailCtx(brand) {
+    const g = (id) => { const el = document.getElementById(id); return el ? String(el.value || '').trim() : ''; };
+    const set = _bsSettings();
+    const items = _bsLoad().filter(x => !brand || x.brand === brand);
+    const sz = (w, h) => (w > 0 && h > 0) ? w + ' x ' + h + ' in' : '';
+    const rows = _deckSpecRows().filter(r => r && r.id);
+    const line = (r) => {
+        const p = _priceRow(r), q = _priceQty(r) || 1;
+        const name = (r.stdItem && (_bsLoad().find(x => x.id === r.stdItem) || {}).name) || r.product || '';
+        return '- ' + r.id + ': ' + [name, sz(_inNum(r.extW), _inNum(r.extH)), String(r.location || '').trim()].filter(Boolean).join(', ')
+            + (q > 1 ? ', qty ' + q : '') + (p.sell != null ? ': ' + _bsMoney(p.sell) + (q > 1 ? ' each' : '') : ': to be quoted');
+    };
+    const custom = rows.filter(r => !r.stdItem);
+    const sum = (list) => list.reduce((a, r) => { const p = _priceRow(r); return a + (p.sell != null ? p.sell * (_priceQty(r) || 1) : 0); }, 0);
+    return {
+        attn: g('g_attn').split(/\s+/)[0] || '', client: g('g_client'), project: g('g_projName'), signer: _shipSigner(),
+        items: items.map(x => '- ' + [x.brand ? x.brand + ' ' + x.name : x.name, sz(x.w, x.h), x.product].filter(Boolean).join(', ') + (x.sell != null ? ': ' + _bsMoney(x.sell) : '')).join('\n'),
+        order: rows.map(line).join('\n'), custom: custom.map(line).join('\n'),
+        total: rows.length ? _bsMoney(sum(rows)) : '', custom_total: custom.length ? _bsMoney(sum(custom)) : '',
+        card_fee: set.cardFee || '', ford_rate: set.fordRate || '', today: _todayIso()
+    };
+}
+// A blank token stays visible as [token], so a gap is seen before the email goes.
+function _bsFill(text, ctx) {
+    return String(text || '').replace(/\{([a-z_]+)\}/g, (m, k) => (ctx[k] != null && String(ctx[k]) !== '') ? String(ctx[k]) : '[' + k.replace(/_/g, ' ') + ']');
+}
+function _bsMail(key) {
+    const t = BS_MAILS.find(x => x.key === key) || BS_MAILS[0];
+    const own = (_bsSettings().mails || {})[t.key] || {};
+    return { key: t.key, label: t.label, subject: own.subject || t.subject, body: own.body || t.body, own: !!(own.subject || own.body) };
+}
+function _bsPlain(text) { return String(text || '').replace(/\*\*([\s\S]*?)\*\*/g, '$1'); }
+function _bsHtml(text) {
+    return _esc(String(text || '')).replace(/\*\*([\s\S]*?)\*\*/g, '<b>$1</b>').split('\n').join('<br>');
+}
+// Copy with the bold kept where the clipboard takes HTML (Outlook), plain text otherwise.
+function _bsCopyMail(text) {
+    try {
+        if (navigator.clipboard && navigator.clipboard.write && typeof ClipboardItem !== 'undefined') {
+            const item = new ClipboardItem({ 'text/html': new Blob([_bsHtml(text)], { type: 'text/html' }), 'text/plain': new Blob([_bsPlain(text)], { type: 'text/plain' }) });
+            navigator.clipboard.write([item]).then(() => _toast('Email copied', 'Paste it into Outlook; the bold comes with it.'), () => _dsCopyText(_bsPlain(text)));
+            return;
+        }
+    } catch (e) {}
+    _dsCopyText(_bsPlain(text));
+}
+function _bsExportFile() {
+    const data = { type: 'frame-brand-standards', v: 1, items: _bsLoad(), settings: _bsSettings() };
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
+    a.download = _prodStamp() + '_brand_standards.json'; a.click();
+    setTimeout(() => { try { URL.revokeObjectURL(a.href); } catch (e) {} }, 4000);
+}
+// A team file REPLACES the list (it is the shared one) and merges its settings over mine.
+function _bsImportText(text) {
+    let d = null; try { d = JSON.parse(text); } catch (e) {}
+    if (!d || d.type !== 'frame-brand-standards' || !Array.isArray(d.items)) return null;
+    const items = setBrandItems(d.items);
+    if (d.settings && typeof d.settings === 'object') _bsSaveSettings(d.settings);
+    return items.length;
+}
+let _bsBrand = '', _bsMailKey = 'riReply', _bsEditing = false;
+function _prodBrandInto(body) {
+    const items = _bsLoad();
+    const brands = _bsBrands(items);
+    if (_bsBrand && brands.indexOf(_bsBrand) < 0) _bsBrand = '';
+    const head = (t) => { const d = document.createElement('div'); d.style.cssText = 'font-size:var(--fs-65); font-weight:700; text-transform:uppercase; letter-spacing:0.4px; margin:4px 0 6px;'; d.textContent = t; return d; };
+    const intro = document.createElement('div'); intro.style.cssText = 'font-size:var(--fs-70); color:var(--text-muted); margin-bottom:8px;';
+    intro.textContent = items.length
+        ? 'Fixed-price brand-standard items. Add one and it becomes a piece at its size, image code and price; the emails below fill themselves from the project.'
+        : 'No standard items on this computer yet. Open the list to type them, or import the team’s brand standards file.';
+    body.appendChild(intro);
+    const bar = document.createElement('div'); bar.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:8px;';
+    if (brands.length > 1) {
+        const sel = document.createElement('select'); sel.id = 'bsBrand'; sel.style.cssText = 'height:26px; width:auto;';
+        [['', 'All brands']].concat(brands.map(b => [b, b])).forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; sel.appendChild(o); });
+        sel.value = _bsBrand; sel.onchange = () => { _bsBrand = sel.value; _prodShow(); };
+        bar.appendChild(sel);
+    }
+    bar.appendChild(_prodBtn('Edit list…', () => openBrandItems(), true, 'Type or change the standard items, the card fee and the Ford rate'));
+    bar.appendChild(_prodBtn('Import file…', () => {
+        const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json';
+        inp.onchange = () => {
+            const f = inp.files && inp.files[0]; if (!f) return;
+            const rd = new FileReader();
+            rd.onload = () => { const n = _bsImportText(rd.result); if (n == null) showInfoModal('Brand standards', 'That file is not a FRAME brand standards file.'); else { _toast('Brand standards imported', n + ' item' + (n === 1 ? '' : 's') + ' on this computer now.'); _prodShow(); } };
+            rd.readAsText(f);
+        };
+        inp.click();
+    }, true, 'Load the team’s brand standards file: it replaces the list on this computer'));
+    if (items.length) bar.appendChild(_prodBtn('Export file', _bsExportFile, true, 'Save the list and settings as a file to share with the team'));
+    body.appendChild(bar);
+    const shown = items.filter(x => !_bsBrand || x.brand === _bsBrand);
+    if (shown.length) {
+        const tbl = document.createElement('table'); tbl.id = 'bsItems'; tbl.style.cssText = 'width:100%; border-collapse:collapse; font-size:var(--fs-70); margin-bottom:12px;';
+        tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;">Brand</th><th style="padding:4px;">Item</th><th style="padding:4px;">Size</th><th style="padding:4px;">Image code</th><th style="padding:4px;">Sell</th><th style="padding:4px;">In project</th><th style="padding:4px;"></th></tr></thead>';
+        const tb = document.createElement('tbody'); tbl.appendChild(tb);
+        shown.forEach(x => {
+            const tr = document.createElement('tr'); tr.setAttribute('data-bs-item', x.id); tr.style.cssText = 'border-top:1px solid var(--border-color);';
+            const used = dashProjectData.filter(r => r && r.stdItem === x.id).map(r => r.id);
+            tr.innerHTML = '<td style="padding:5px 4px;">' + _esc(x.brand || '') + '</td><td style="padding:5px 4px;"><b>' + _esc(x.name) + '</b><div style="color:var(--text-muted);">' + _esc(x.product || 'Framed Art') + '</div></td>'
+                + '<td style="padding:5px 4px;">' + (x.w > 0 && x.h > 0 ? x.w + ' x ' + x.h + ' in' : '') + '</td><td style="padding:5px 4px;">' + _esc(x.imageCode || '') + '</td>'
+                + '<td style="padding:5px 4px;">' + _esc(x.sell != null ? _bsMoney(x.sell) : (x.cost != null ? 'cost ' + _bsMoney(x.cost) : '')) + '</td><td style="padding:5px 4px;">' + _esc(used.join(', ')) + '</td>';
+            const td = document.createElement('td'); td.style.cssText = 'padding:5px 4px;';
+            const act = document.createElement('div'); act.style.cssText = 'display:flex; gap:4px; align-items:center; flex-wrap:nowrap;';
+            const q = document.createElement('input'); q.type = 'number'; q.min = '1'; q.value = '1'; q.title = 'Quantity'; q.style.cssText = 'width:48px; height:24px;'; q.setAttribute('data-bs-qty', '');
+            const loc = document.createElement('input'); loc.type = 'text'; loc.placeholder = 'Location'; loc.style.cssText = 'width:96px; height:24px;'; loc.setAttribute('data-bs-loc', '');
+            act.appendChild(q); act.appendChild(loc); td.appendChild(act);
+            act.appendChild(_prodBtn('Add', () => {
+                const id = addBrandItem(x.id, q.value, loc.value);
+                if (id) _toast('Added ' + id, x.name + '. Ctrl+Z undoes it.');
+                _prodShow();
+            }, false, 'Add to this project as a piece at this size and price'));
+            tr.appendChild(td); tb.appendChild(tr);
+        });
+        body.appendChild(tbl);
+    }
+    // The emails.
+    body.appendChild(head('Client email'));
+    const mrow = document.createElement('div'); mrow.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:6px;';
+    const ms = document.createElement('select'); ms.id = 'bsMail'; ms.style.cssText = 'height:26px; width:auto;';
+    BS_MAILS.forEach(t => { const o = document.createElement('option'); o.value = t.key; o.textContent = t.label; ms.appendChild(o); });
+    ms.value = _bsMailKey; ms.onchange = () => { _bsMailKey = ms.value; _bsEditing = false; _prodShow(); };
+    mrow.appendChild(ms);
+    body.appendChild(mrow);
+    const m = _bsMail(_bsMailKey), ctx = _bsMailCtx(_bsBrand);
+    const subj = document.createElement('input'); subj.type = 'text'; subj.id = 'bsMailSubject'; subj.style.cssText = 'width:100%; height:26px; margin-bottom:4px;';
+    const ta = document.createElement('textarea'); ta.id = 'bsMailBody'; ta.rows = 14; ta.style.cssText = 'width:100%; font-size:var(--fs-70); resize:vertical;';
+    if (_bsEditing) { subj.value = m.subject; ta.value = m.body; }
+    else { subj.value = _bsFill(m.subject, ctx); ta.value = _bsFill(m.body, ctx); }
+    body.appendChild(subj); body.appendChild(ta);
+    const note = document.createElement('div'); note.style.cssText = 'font-size:var(--fs-65); color:var(--text-muted); margin:4px 0;';
+    note.textContent = _bsEditing
+        ? 'Editing the wording. {attn} {client} {project} {items} {order} {custom} {total} {custom_total} {card_fee} {ford_rate} {signer} are filled in; **text** prints bold.'
+        : (/\[[a-z ]+\]/.test(ta.value) ? 'Words in [brackets] have nothing to fill them yet: the project name and attention line come from the Project tab, the fee and rate from Edit list, your name from the Shipping tab signer.' : 'Edit freely before you copy; the wording you save is kept on this computer.');
+    body.appendChild(note);
+    const btns = document.createElement('div'); btns.style.cssText = 'display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;';
+    if (_bsEditing) {
+        if (m.own) btns.appendChild(_prodBtn('Back to the standard wording', () => { const s = _bsSettings(); const ml = Object.assign({}, s.mails || {}); delete ml[m.key]; _bsSaveSettings({ mails: ml }); _bsEditing = false; _prodShow(); }, true));
+        btns.appendChild(_prodBtn('Cancel', () => { _bsEditing = false; _prodShow(); }, true));
+        btns.appendChild(_prodBtn('Save wording', () => { const s = _bsSettings(); const ml = Object.assign({}, s.mails || {}); ml[m.key] = { subject: subj.value, body: ta.value }; _bsSaveSettings({ mails: ml }); _bsEditing = false; _prodShow(); }, false, 'Keep this wording on this computer (and in an exported file)'));
+    } else {
+        btns.appendChild(_prodBtn('Edit wording', () => { _bsEditing = true; _prodShow(); }, true, 'Change the template itself, with its {tokens}'));
+        btns.appendChild(_prodBtn('Open in mail', () => {
+            const href = 'mailto:?subject=' + encodeURIComponent(subj.value) + '&body=' + encodeURIComponent(_bsPlain(ta.value));
+            const a = document.createElement('a'); a.href = href; a.click();
+        }, true, 'A new message in your mail app (plain text)'));
+        btns.appendChild(_prodBtn('Copy email', () => _bsCopyMail(ta.value), false, 'Copy the email, bold included, to paste into Outlook'));
+    }
+    body.appendChild(btns);
+}
+function openBrandItems() {
+    let m = document.getElementById('brandItemsModal'); if (m) m.remove();
+    m = document.createElement('div'); m.id = 'brandItemsModal';
+    m.className = 'frame-modal fm-nested'; m.style.display = 'flex';
+    const card = document.createElement('div');
+    card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:900px; max-width:96vw; max-height:88vh; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:10px; font-size:var(--fs-70);';
+    card.innerHTML = '<h3 style="margin:0; font-size:var(--fs-95); color:var(--text-strong);">Standard items</h3><div style="color:var(--text-muted);">Sizes in inches. Sell is the fixed client price; leave it blank and the house markup prices the cost. Kept on this computer; Export file on the Brand standards tab shares it with the team.</div>';
+    const cols = [['brand', 'Brand', 60], ['name', 'Item', 150], ['product', 'Product', 150], ['w', 'W', 44], ['h', 'H', 44], ['imageCode', 'Image code', 110], ['artType', 'Art type', 90], ['cost', 'Cost', 64], ['sell', 'Sell', 64], ['note', 'Note', 100]];
+    const tbl = document.createElement('table'); tbl.id = 'brandItemsTable'; tbl.style.cssText = 'border-collapse:collapse;';
+    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);">' + cols.map(c => '<th style="padding:2px 3px;">' + c[1] + '</th>').join('') + '<th></th></tr></thead>';
+    const tb = document.createElement('tbody'); tbl.appendChild(tb);
+    const addRow = (x) => {
+        const tr = document.createElement('tr'); tr.setAttribute('data-bs-edit', (x && x.id) || '');
+        cols.forEach(([k, , w]) => {
+            const td = document.createElement('td'); td.style.cssText = 'padding:2px 3px;';
+            let i;
+            if (k === 'product') { i = document.createElement('select'); FRAME_PRODUCTS.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = p; i.appendChild(o); }); i.value = (x && x.product) || 'Framed Art'; }
+            else { i = document.createElement('input'); i.type = 'text'; i.value = x && x[k] != null ? x[k] : ''; }
+            i.setAttribute('data-k', k); i.style.cssText = 'width:' + w + 'px; height:24px;';
+            td.appendChild(i); tr.appendChild(td);
+        });
+        const td = document.createElement('td');
+        const del = _prodBtn('×', () => tr.remove(), true, 'Remove this item'); td.appendChild(del); tr.appendChild(td);
+        tb.appendChild(tr);
+    };
+    _bsLoad().forEach(addRow);
+    if (!tb.children.length) addRow(null);
+    card.appendChild(tbl);
+    const addB = _prodBtn('+ Item', () => addRow({ brand: (_bsBrand || '') }), true); addB.style.alignSelf = 'flex-start'; card.appendChild(addB);
+    const set = _bsSettings();
+    const sRow = document.createElement('div'); sRow.style.cssText = 'display:flex; gap:14px; flex-wrap:wrap; align-items:center;';
+    const sIn = (id, label, val, tip) => { const l = document.createElement('label'); l.style.cssText = 'display:flex; gap:6px; align-items:center;'; l.title = tip; l.textContent = label; const i = document.createElement('input'); i.type = 'text'; i.id = id; i.value = val || ''; i.style.cssText = 'width:80px; height:24px;'; l.appendChild(i); sRow.appendChild(l); return i; };
+    const fee = sIn('bsCardFee', 'Credit card fee', set.cardFee, 'As the PO email should say it, e.g. 4%');
+    const rate = sIn('bsFordRate', 'Ford preliminary rate / sq ft', set.fordRate, 'As the Ford email should say it, e.g. $10');
+    card.appendChild(sRow);
+    const read = () => Array.prototype.map.call(tb.querySelectorAll('tr[data-bs-edit]'), tr => {
+        const o = { id: tr.getAttribute('data-bs-edit') };
+        tr.querySelectorAll('[data-k]').forEach(i => { o[i.getAttribute('data-k')] = i.value; });
+        return o;
+    });
+    const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; justify-content:flex-end;';
+    const cancel = _prodBtn('Cancel', () => m.remove(), true); cancel.setAttribute('data-modal-close', '');
+    const ok = _prodBtn('Save', () => { setBrandItems(read()); _bsSaveSettings({ cardFee: fee.value.trim(), fordRate: rate.value.trim() }); m.remove(); _prodShow(); }, false);
+    foot.appendChild(cancel); foot.appendChild(ok); card.appendChild(foot);
+    m.appendChild(card); document.body.appendChild(m);
+}
 const PROD_TABS = [
     ['samples', 'Samples', 'Frame and mat samples: what to order, and what the client approved'],
     ['vendors', 'Vendors', 'Who makes each piece, and the production pack: RFIs, contact sheets, purchases'],
     ['pricing', 'Pricing', 'Costs, sell prices, allowances and the budget; Excel and Salesforce'],
     ['issues', 'Issues', 'What went out at each issue, and what has changed since'],
-    ['shipping', 'Shipping', 'Commercial invoices for shipments between Canada and the USA']
+    ['shipping', 'Shipping', 'Commercial invoices for shipments between Canada and the USA'],
+    ['brand', 'Brand standards', 'Fixed-price RI / SHS and Ford items, and the client emails that go with them']
 ];
 let _prodTab = 'samples';
 function openProduction(tab) {
@@ -61461,7 +61772,7 @@ function _prodShow() {
     const body = document.getElementById('productionBody'); if (!body) return;
     document.querySelectorAll('#productionTabs [data-prod-tab]').forEach(b => b.classList.toggle('active', b.getAttribute('data-prod-tab') === _prodTab));
     body.innerHTML = '';
-    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto, shipping: _prodShippingInto }[_prodTab];
+    const fn = { samples: _prodSamplesInto, vendors: _prodVendorsInto, pricing: _prodPricingInto, issues: _prodIssuesInto, shipping: _prodShippingInto, brand: _prodBrandInto }[_prodTab];
     if (fn) fn(body);
 }
 function _prodBtn(label, onClick, secondary, tip) {

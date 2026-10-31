@@ -2404,6 +2404,13 @@ run but passes alone is usually load timing: rerun before chasing it.
   typed fields (`sh.lines[id]`, blank deletes; unticking a piece drops its override). Port = typed, else Talia's route
   table, else BLANK (never a guess). Address book and signer are localStorage (`SHIP_BOOK_KEY`, `SHIP_SIGNER_KEY`):
   no names or tax ids in the code. Lines print bare numbers; the currency is stated once.
+- **BRAND STANDARDS (20.00, Production > Brand standards, `_prodBrandInto`, `setBrandItems`, `addBrandItem`, `BS_MAILS`,
+  `_bsMailCtx`, `_bsFill`).** The fixed-price RI / SHS / Ford list lives on THIS COMPUTER (`BS_ITEMS_KEY`, settings incl.
+  card fee, Ford rate and saved wording in `BS_SET_KEY`) and travels as a `frame-brand-standards` file (import REPLACES the
+  list); never in the code or the project. `addBrandItem` mints through `_fpAddCodes` with the `_bsNew` marker (never the
+  returned code), prices through `setRowPrice` (cost = quote, sell = fixed), stamps `stdItem` (what `{custom}` leaves out)
+  and `orderQty`, which `_priceQty` reads only when the walls give 0. A blank token prints `[token]`, never ''. `**bold**`
+  is `<b>` in the rich copy (`_bsCopyMail`) and stripped in plain text and mailto.
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 
