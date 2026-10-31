@@ -2386,6 +2386,12 @@ run but passes alone is usually load timing: rerun before chasing it.
   Import Template's 11 columns (H before W, markup a plain number, `_sfClean`). Product Code only for an art-type prefix
   (unknown mapping for prints: ask before guessing). `_xlsxBlob` cells take `border` / `head` / `title` / `pct` and a cached `v`
   beside `f`. Test fixtures that are not about royalty use F image codes.
+- **RATE CARD ADD-ONS (19.97, `rates.addons`, `ADDON_KEYS`, `_rowAddons`, `_estimateCost`).** One set for every
+  product, each DERIVED from the piece: premium frame by code (`PREMIUM_FRAME_RE`, LJ- / UA-), non-glare off the Glass
+  field (`NON_GLARE_RE`; entered at 30x40, scaled by area), sealant from a humid location (`HUMID_LOC_RE`; `r.sealant`
+  stored only when it differs, the Pricing tab's tick), oversize past 40x50 either way, `buffer` % on the whole estimate.
+  Never on a flat graphic (per sq ft alone). `setRateCard(list, asOf, addons)`: undefined KEEPS the card's add-ons.
+  No amounts in the code (public site).
 - **Measuring speed:** drive Chrome over CDP (`Profiler.start` around a click) against the real Ford project;
   self time in a big anonymous loop with cheap helpers means native DOM work (parsing, sync image loads).
 

@@ -6,7 +6,7 @@
 // Update APP_VERSION on each release. APP_BUILD is derived from the URL (see
 // below) — the version pill turns orange on the dev site to make it obvious at a
 // glance which build you are looking at.
-const APP_VERSION = '19.96';
+const APP_VERSION = '19.97';
 const IDML_STYLE_SEED = [{"id":"sty_cover_title","name":"Cover Title","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_cover_title_centered","name":"Cover Title (Centered)","group":"Cover","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#ffffff","align":"center","caps":"upper","track":0.01},{"id":"sty_cover_location","name":"Cover Location","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_cover_project_code","name":"Cover Project Code","group":"Cover","font":"serif","size":0.0222,"bold":false,"italic":false,"color":"#ffffff","align":"right","caps":"none","track":0.0},{"id":"sty_toc_section_title","name":"TOC Section Title","group":"Table of Contents","font":"serif","size":0.0241,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_toc_entry","name":"TOC Entry","group":"Table of Contents","font":"serif","size":0.0185,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_section_heading","name":"Section Heading","group":"Header","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_header_one_xl","name":"Header One (XL)","group":"Header","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_paragraph_heading_right","name":"Paragraph Heading (Right)","group":"Header","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_body_copy_standard","name":"Body Copy (Standard)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_copy_large_+_bold","name":"Body Copy (Large + Bold)","group":"Body Copy","font":"serif","size":0.0185,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_body_copy_primary","name":"Body Copy (Primary)","group":"Body Copy","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"justify","caps":"none","track":0.0},{"id":"sty_body_description","name":"Body Description","group":"Body Text","font":"serif","size":0.0167,"bold":false,"italic":false,"color":"#333333","align":"left","caps":"none","track":0.0},{"id":"sty_body_subheading","name":"Body Subheading","group":"Body Text","font":"serif","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_spec_copy","name":"Spec Copy","group":"Spec Page","font":"serif","size":0.0148,"bold":false,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_spec_subject","name":"Spec Subject","group":"Spec Page","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.01},{"id":"sty_spec_notes","name":"Spec Notes","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#939597","align":"left","caps":"none","track":0.005},{"id":"sty_spec_static_caption","name":"Spec Static Caption","group":"Spec Page","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#999999","align":"left","caps":"none","track":0.0},{"id":"sty_image_code","name":"Image Code","group":"Captions","font":"serif","size":0.012,"bold":false,"italic":true,"color":"#7f7f7f","align":"right","caps":"none","track":0.01},{"id":"sty_caption_image_code","name":"Caption Image Code","group":"Captions","font":"serif","size":0.0111,"bold":false,"italic":false,"color":"#bfbfbf","align":"left","caps":"none","track":0.0},{"id":"sty_artist_name","name":"Artist Name","group":"Captions","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_artwork_title","name":"Artwork Title","group":"Captions","font":"serif","size":0.013,"bold":false,"italic":true,"color":"#222222","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_name","name":"Thank You \u2014 Name","group":"Thank You","font":"display","size":0.0417,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0},{"id":"sty_thank_you_\u2014_role","name":"Thank You \u2014 Role","group":"Thank You","font":"serif","size":0.0148,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_thank_you_\u2014_contact","name":"Thank You \u2014 Contact","group":"Thank You","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_subhead","name":"Subhead","group":"Subheadings","font":"display","size":0.0204,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.035},{"id":"sty_section_subheading_left","name":"Section Subheading (Left)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_section_subheading_right","name":"Section Subheading (Right)","group":"Subheadings","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#1a1a1a","align":"right","caps":"upper","track":0.01},{"id":"sty_section_subheading_serif","name":"Section Subheading (Serif)","group":"Subheadings","font":"serif","size":0.0139,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_subheading_white,_center","name":"Subheading (White, Center)","group":"Subheadings","font":"serif","size":0.013,"bold":false,"italic":false,"color":"#ffffff","align":"center","caps":"none","track":0.0},{"id":"sty_quote_\u2014_druk","name":"Quote \u2014 Druk","group":"Quotes","font":"display","size":0.0694,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.025},{"id":"sty_quote_\u2014_druk_alt","name":"Quote \u2014 Druk (Alt)","group":"Quotes","font":"display","size":0.0444,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif","name":"Quote \u2014 Serif","group":"Quotes","font":"serif","size":0.0417,"bold":false,"italic":false,"color":"#ffffff","align":"left","caps":"none","track":0.0},{"id":"sty_quote_\u2014_serif_white,_cap","name":"Quote \u2014 Serif (White, Caps)","group":"Quotes","font":"display","size":0.0333,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.01},{"id":"sty_display_keyword","name":"Display Keyword","group":"Keywords","font":"display","size":0.1111,"bold":true,"italic":false,"color":"#000000","align":"left","caps":"upper","track":0.01},{"id":"sty_keywords_full_page","name":"Keywords (Full Page)","group":"Keywords","font":"display","size":0.0556,"bold":true,"italic":false,"color":"#ffffff","align":"justify-all","caps":"none","track":0.02},{"id":"sty_brand_keyword","name":"Brand Keyword","group":"Keywords","font":"display","size":0.1852,"bold":true,"italic":false,"color":"#1a1a1a","align":"left","caps":"upper","track":0.01},{"id":"sty_moodboard_keyword","name":"Moodboard Keyword","group":"Keywords","font":"display","size":0.0833,"bold":true,"italic":false,"color":"#ffffff","align":"left","caps":"upper","track":0.0}];
 // The default fill for a placeholder shape, and the ONE definition of it. It was
 // written out nine times: the starter deck, the shape creator, the duplicate
@@ -49193,7 +49193,7 @@ const HELP_REFERENCE_DATA = [
             { title: 'Wallcovering and window film', body: `The size you type is the graphic. A 2" bleed is filled in for you (never over a number you typed). Window film can print as one file or <strong>split per panel</strong>, one file per pane of glass with bleed on every edge. See Context &amp; glass.` },
             { title: 'Bulk Edit', body: `Select several rows (Ctrl+click or Shift+click in the table), then <strong>Edit</strong> &gt; <strong>Bulk Edit…</strong>. Fields that differ across the rows are greyed out, and nothing changes until <strong>Apply to Selected</strong>.` },
             { title: 'Bulk Images', body: `In the Frame Dashboard, under <strong>Import</strong>. Choose revised image files named to match your pieces (by image code, item code or original file name) and each one replaces the matching piece's artwork.` },
-            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed.` },
+            { title: 'Production and the budget', body: `The <strong>Production</strong> button in the item toolbar opens one window with four tabs: <strong>Samples</strong> (every frame and mat in the deck and what the client approved), <strong>Vendors</strong> (who makes each piece, and the production pack), <strong>Pricing</strong> (cost, sell and allowance per piece, the budget, the rate card, Excel and Salesforce) and <strong>Issues</strong> (what changed since the deck last went out). Once anything is priced or a budget is set, the button shows the budget itself: what the pieces sell for, what is left, and the selected piece against its allowance. It turns amber when either is passed and moves as you change a size. A number on it means something needs a look, and a click opens that tab. Ctrl+K finds each tab by name. On Pricing, <strong>RFQ</strong> and <strong>RFI</strong> write the 2026 quote template (the RFI has no prices and leaves purchases off), and <strong>Salesforce CSV</strong> writes the Quote Import Template. Sell is cost times 1.8731 plus the artist royalty (0% on an F image code, 10% on PEN, 5% otherwise), unless a Markup or a sell price is typed. The <strong>Rate card</strong> estimates a piece before a vendor quotes: base plus per square foot by product, plus add-ons (premium frame, non-glare glass, moisture sealant, oversize, a buffer) that apply by themselves from the frame code, the Glass field, the location and the size.` },
             { title: 'PNGs and CSV', body: `The download icon exports the selected row as a PNG. <strong>Export</strong> &gt; <strong>Batch PNGs</strong> exports every row plus the CSV in one ZIP. The CSV round-trips: export it for the InDesign script or a colleague, and import it back to carry on.` }
         ]
     },
@@ -49340,7 +49340,8 @@ const HELP_REFERENCE_DATA = [
             },
             {
                 title: `What's new`,
-                body: `<strong>19.96</strong> Quotes come out in the company's own formats. On the Pricing tab, <b>RFQ</b> writes the 2026 quote template's front sheet (columns A to AN, the header, the mount formulas for art and image size, shipping and totals, file named YYMMDD_CLIENT_Project_RFQ.xlsx) and <b>RFI</b> writes the same sheet without prices, for vendors, leaving originals, commissions and found objects off. The production pack now carries each vendor's RFI in that layout too. <b>Salesforce CSV</b> now writes the Quote Import Template's 11 columns: vendor codes (Duggal DG00, Bruce White BW00 ...), markup as a plain number, no special characters. Prices follow the house formula: sell = cost x (1.8731 + the artist royalty), royalty 0% on an F image code, 10% on PEN, 5% otherwise, with a Royalty column for a piece the client owns. A Markup typed on the Pricing tab replaces the 1.8731, never the royalty, and the margin is after royalties.<br><br>
+                body: `<strong>19.97</strong> The rate card has <b>add-ons</b>, from the studio's budgeting guide: premium frame (a Larson-Juhl or Universal Arquati moulding), non-glare glass (read off the Glass field, entered at 30x40 and scaled to each piece's area), moisture sealant (pieces in a bath, restroom, spa, pool or locker room, with a Sealant tick per piece on the Pricing tab), oversize (past 40x50) and a buffer percent on every estimate. Each one applies by itself from what the piece already says, and the Pricing tab lists what each piece took. Wallcovering and window film price per square foot alone: leave the base blank.<br><br>
+<strong>19.96</strong> Quotes come out in the company's own formats. On the Pricing tab, <b>RFQ</b> writes the 2026 quote template's front sheet (columns A to AN, the header, the mount formulas for art and image size, shipping and totals, file named YYMMDD_CLIENT_Project_RFQ.xlsx) and <b>RFI</b> writes the same sheet without prices, for vendors, leaving originals, commissions and found objects off. The production pack now carries each vendor's RFI in that layout too. <b>Salesforce CSV</b> now writes the Quote Import Template's 11 columns: vendor codes (Duggal DG00, Bruce White BW00 ...), markup as a plain number, no special characters. Prices follow the house formula: sell = cost x (1.8731 + the artist royalty), royalty 0% on an F image code, 10% on PEN, 5% otherwise, with a Royalty column for a piece the client owns. A Markup typed on the Pricing tab replaces the 1.8731, never the royalty, and the margin is after royalties.<br><br>
 <strong>19.95</strong> Production has its own button in the Frame Dashboard toolbar. It opens samples, vendors, prices and the budget, and issues in one place, and once anything is priced it shows the budget itself. A number on it counts what needs a look (a rejected sample still in use, a quote out of date) and a click opens that tab. Samples left the Edit menu and Prices &amp; budget left the Export menu; Production pack stays under Export. Ctrl+K finds each Production tab, Help has an entry, and the tour stops at the button.<br><br>
 <strong>19.94</strong> The price follows the size. Estimates are worked out from the rate card and each piece&#8217;s overall size every time, so shrinking an oversized frame moves the budget on that keystroke. A quote remembers the size it was for: resize the piece and the estimate for the new size stands in, flagged to re-quote, and going back to the quoted size brings the quote back. The Update estimates button is gone, since there is nothing left to update.<br><br>
 <strong>19.93</strong> The item toolbar shows the budget while you choose art: what the pieces sell for against the budget, how much is left, and the selected piece against its allowance. It turns amber when either is passed, appears once anything is priced or a budget is set, and a click opens Prices &amp; budget.<br><br>
@@ -60145,7 +60146,7 @@ let _prodIssuePick = null;
 // formulas out, .xlsx or .csv in, matched by item code), and a quote-lines CSV goes to
 // Salesforce's import. Prices never reach a deck page; they do travel in the project file.
 const PRICE_STALE_DAYS = 90;
-const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance', 'priceFor', 'royalty'];
+const PRICE_FIELDS = ['unitCost', 'costSrc', 'costAt', 'unitSell', 'allowance', 'priceFor', 'royalty', 'sealant'];
 // 19.96: THE HOUSE FORMULA, from the 2026 quote template. Revenue markup = 87.31% + the
 // artist royalty, and unit price = cost x (1 + markup). Royalty follows the image code (an F
 // code is Farmboy's own: 0%; PEN 10%; anything else 5%) unless the piece says otherwise
@@ -60254,6 +60255,8 @@ function setRowPrice(id, patch, quiet) {
         if (n != null && (n >= 1 || /%/.test(String(p.royalty)))) n = n / 100;
         if (n == null || n < 0 || n >= 1 || Math.abs(n - _rowRoyaltyAuto(r)) < 1e-9) delete r.royalty; else r.royalty = Math.round(n * 10000) / 10000;
     }
+    // sealant (19.97): true/false, stored only when it differs from the location's answer
+    if ('sealant' in p) { if (p.sealant == null || !!p.sealant === _rowSealantAuto(r)) delete r.sealant; else r.sealant = !!p.sealant; }
     // what size this price was for (19.94): set by a quote or a typed sell, cleared with both
     if ((('unitCost' in p) && r.costSrc === 'quote') || (('unitSell' in p) && r.unitSell != null)) r.priceFor = _priceSizeKey(r);
     if (r.costSrc !== 'quote' && r.unitSell == null) delete r.priceFor;
@@ -60272,13 +60275,51 @@ function _rateFor(r) {
     const rc = _rateCard(); if (!rc || !rc.list) return null;
     return rc.list.find(x => x && x.product === r.product) || null;
 }
+// 19.97: THE ADD-ONS (from the studio's Budgeting & Estimating guide), one set for every
+// product, on the card as `rates.addons`. Each is worked out from what the piece already
+// says, never ticked by hand (sealant aside): a premium moulding is its frame code's maker
+// (`PREMIUM_FRAME_RE`: Larson-Juhl, Universal Arquati), non-glare is read off the Glass
+// field, oversize is past 40x50 either way round, sealant follows a humid location (a
+// piece can say otherwise: `r.sealant`, stored only when it differs). Non-glare is quoted
+// "on a 30x40", so it scales with the piece's area. `buffer` is a percent on the whole
+// estimate ("always add a buffer"). No amounts in the code: the site is public.
+const ADDON_KEYS = ['premiumFrame', 'nonGlare', 'sealant', 'oversize', 'buffer'];
+const PREMIUM_FRAME_RE = /^(LJ|UA)-/i;
+const NON_GLARE_RE = /non[\s-]*glare|anti[\s-]*(glare|reflect)|museum|optium|\bAR\b/i;
+const HUMID_LOC_RE = /bath|rest\s*room|wash\s*room|powder|shower|\bspa\b|pool|locker|sauna|steam|humid/i;
+const OVERSIZE_IN = [40, 50];
+const NON_GLARE_REF_SQFT = 30 * 40 / 144;
+function _rowSqFt(r) {
+    const k = unitFactor(dashUnit, 'in');
+    return Math.max(0, (parseFloat(r.extW) || 0) * k) * Math.max(0, (parseFloat(r.extH) || 0) * k) / 144;
+}
+function _rowFramed(r) { return !_isFlatGraphic(r.product) && r.product !== 'Frameless Canvas (Wrapped)' && r.product !== 'Sourced Object'; }
+function _rowSealantAuto(r) { return !_isFlatGraphic(r.product) && HUMID_LOC_RE.test(String(r.location || '')); }
+function _rowSealant(r) { return typeof r.sealant === 'boolean' ? r.sealant : _rowSealantAuto(r); }
+function _rowAddons(r) {
+    const k = unitFactor(dashUnit, 'in');
+    const w = (parseFloat(r.extW) || 0) * k, h = (parseFloat(r.extH) || 0) * k;
+    const out = [];
+    if (_rowFramed(r) && PREMIUM_FRAME_RE.test(String(r.fCode || '').trim())) out.push('premiumFrame');
+    if (_rowFramed(r) && !/canvas/i.test(r.product || '') && NON_GLARE_RE.test(String(r.glass || ''))) out.push('nonGlare');
+    if (_rowSealant(r)) out.push('sealant');
+    if (!_isFlatGraphic(r.product) && (Math.min(w, h) > OVERSIZE_IN[0] || Math.max(w, h) > OVERSIZE_IN[1])) out.push('oversize');
+    return out;
+}
+const ADDON_LABEL = { premiumFrame: 'Premium frame', nonGlare: 'Non-glare', sealant: 'Sealant', oversize: 'Oversize' };
 function _estimateCost(r) {
     const rate = _rateFor(r); if (!rate) return null;
-    const k = unitFactor(dashUnit, 'in');
-    const sqft = Math.max(0, (parseFloat(r.extW) || 0) * k) * Math.max(0, (parseFloat(r.extH) || 0) * k) / 144;
+    const sqft = _rowSqFt(r);
     let c = (_priceNum(rate.base) || 0) + (_priceNum(rate.perSqFt) || 0) * sqft;
     if (r.useFloatMount === true) c += _priceNum(rate.floatMount) || 0;
     if (r.m1A !== false && r.m2A && parseFloat(r.m2) > 0 && !r.useFloatMount) c += _priceNum(rate.doubleMat) || 0;
+    const ad = (_rateCard() || {}).addons || {};
+    _rowAddons(r).forEach(a => {
+        const n = _priceNum(ad[a]); if (n == null) return;
+        c += a === 'nonGlare' ? n * sqft / NON_GLARE_REF_SQFT : n;
+    });
+    const buf = _priceNum(ad.buffer);
+    if (buf != null && buf > 0 && c > 0) c *= 1 + buf / 100;
     return c > 0 ? Math.round(c * 100) / 100 : null;
 }
 // Refresh every ESTIMATE (and fill pieces with no price) from the rate card. Quotes stay.
@@ -60293,13 +60334,20 @@ function updateEstimates() {
     if (n) pushHistory();
     return n;
 }
-function setRateCard(list, asOf) {
+function setRateCard(list, asOf, addons) {
     const clean = (list || []).filter(x => x && x.product).map(x => {
         const o = { product: x.product };
         ['base', 'perSqFt', 'floatMount', 'doubleMat'].forEach(k => { const n = _priceNum(x[k]); if (n != null) o[k] = n; });
         return o;
     });
-    _pricingSet({ rates: clean.length ? { asOf: asOf || _todayIso(), list: clean } : null });
+    // addons: undefined keeps the card's own; an object replaces them
+    const src = addons === undefined ? ((_rateCard() || {}).addons || {}) : (addons || {});
+    const ad = {};
+    ADDON_KEYS.forEach(k => { const n = _priceNum(src[k]); if (n != null && n >= 0) ad[k] = n; });
+    const has = Object.keys(ad).length;
+    const rc = (clean.length || has) ? { asOf: asOf || _todayIso(), list: clean } : null;
+    if (rc && has) rc.addons = ad;
+    _pricingSet({ rates: rc });
 }
 function _rateCardSaveLocal() { try { localStorage.setItem(RATE_CARD_KEY, JSON.stringify(_rateCard())); return true; } catch (e) { return false; } }
 function _rateCardLoadLocal() { try { const v = JSON.parse(localStorage.getItem(RATE_CARD_KEY) || 'null'); return v && v.list ? v : null; } catch (e) { return null; } }
@@ -60446,7 +60494,8 @@ function _quoteSheets() {
     const rates = _rateCard();
     const sheets = [{ name: 'Quote', rows: _quoteSheetRows(), widths: [11, 20, 22, 18, 60, 20, 6, 12, 11, 11, 8, 12, 13, 12, 14, 13] }];
     if (rates) sheets.push({ name: 'Rate card', rows: [[{ s: 'Product', bold: true }, { s: 'Base', bold: true }, { s: 'Per sq ft', bold: true }, { s: 'Float mount', bold: true }, { s: 'Double mat', bold: true }, { s: 'As of ' + (rates.asOf || ''), bold: true }]]
-        .concat(rates.list.map(x => [x.product, x.base != null ? { v: x.base, money: true } : null, x.perSqFt != null ? { v: x.perSqFt, money: true } : null, x.floatMount != null ? { v: x.floatMount, money: true } : null, x.doubleMat != null ? { v: x.doubleMat, money: true } : null])), widths: [26, 10, 10, 12, 12, 16] });
+        .concat(rates.list.map(x => [x.product, x.base != null ? { v: x.base, money: true } : null, x.perSqFt != null ? { v: x.perSqFt, money: true } : null, x.floatMount != null ? { v: x.floatMount, money: true } : null, x.doubleMat != null ? { v: x.doubleMat, money: true } : null]))
+            .concat(rates.addons ? [[], [{ s: 'Add-ons, per piece', bold: true }]].concat(ADDON_KEYS.filter(k => rates.addons[k] != null).map(k => [k === 'buffer' ? 'Buffer %' : ADDON_LABEL[k] + (k === 'nonGlare' ? ' (at 30x40)' : k === 'oversize' ? ' (past 40x50)' : ''), k === 'buffer' ? rates.addons[k] : { v: rates.addons[k], money: true }])) : []), widths: [26, 10, 10, 12, 12, 16] });
     return sheets;
 }
 // ── SALESFORCE AND THE RFQ / RFI (19.96) ──
@@ -60812,7 +60861,7 @@ function _prodPricingInto(body) {
     if (!rows.length) return;
     const tbl = document.createElement('table'); tbl.id = 'priceTable';
     tbl.style.cssText = 'width:100%; border-collapse:collapse; font-size:var(--fs-70);';
-    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;">Code</th><th style="padding:4px;">Product</th><th style="padding:4px;">Vendor</th><th style="padding:4px;">Qty</th><th style="padding:4px;">Unit cost</th><th style="padding:4px;">Source</th><th style="padding:4px;" title="Artist royalty: an F image code 0%, PEN 10%, anything else 5%. Type a rate for a piece the client owns outright.">Royalty</th><th style="padding:4px;">Unit sell</th><th style="padding:4px;">Line</th><th style="padding:4px;">Allowance</th></tr></thead>';
+    tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th style="padding:4px;">Code</th><th style="padding:4px;">Product</th><th style="padding:4px;">Vendor</th><th style="padding:4px;">Qty</th><th style="padding:4px;">Unit cost</th><th style="padding:4px;">Source</th><th style="padding:4px;" title="Artist royalty: an F image code 0%, PEN 10%, anything else 5%. Type a rate for a piece the client owns outright.">Royalty</th><th style="padding:4px;" title="Rate card add-ons this piece takes in its estimate. Sealant follows the location; tick to change it.">Add-ons</th><th style="padding:4px;">Unit sell</th><th style="padding:4px;">Line</th><th style="padding:4px;">Allowance</th></tr></thead>';
     const tb = document.createElement('tbody'); tbl.appendChild(tb);
     rows.forEach(r => {
         const p = _priceRow(r);
@@ -60834,6 +60883,16 @@ function _prodPricingInto(body) {
         }
         const ry = inp(r.royalty != null ? Math.round(r.royalty * 10000) / 100 + '%' : '', Math.round(_rowRoyaltyAuto(r) * 100) + '%', v => setRowPrice(r.id, { royalty: v }), 'Blank follows the image code');
         ry.style.width = '48px'; td().appendChild(ry);
+        // 19.97: the add-ons the estimate takes; sealant is the one a piece can change
+        const adc = td(); adc.style.whiteSpace = 'nowrap';
+        if (!_isFlatGraphic(r.product)) {
+            const sl = document.createElement('label'); sl.style.cssText = 'display:inline-flex; gap:3px; align-items:center; margin-right:6px;'; sl.title = 'Moisture sealant. ' + (_rowSealantAuto(r) ? 'On because the location reads as humid.' : 'Off: the location does not read as humid.');
+            const cb = document.createElement('input'); cb.type = 'checkbox'; cb.setAttribute('data-sealant', r.id); cb.checked = _rowSealant(r);
+            cb.onchange = () => { setRowPrice(r.id, { sealant: cb.checked }); _prodShow(); };
+            sl.appendChild(cb); sl.appendChild(document.createTextNode('Sealant')); adc.appendChild(sl);
+        }
+        const others = _rowAddons(r).filter(a => a !== 'sealant').map(a => ADDON_LABEL[a]);
+        if (others.length) { const sp = document.createElement('span'); sp.style.color = 'var(--text-muted)'; sp.textContent = others.join(', '); adc.appendChild(sp); }
         td().appendChild(inp(p.hand ? p.sell : '', p.sell != null ? _money(p.sell) : '', v => setRowPrice(r.id, { unitSell: v }), 'Leave blank for cost × (markup + royalty)'));
         td().textContent = p.sell != null ? _money(p.lineSell) : '';
         const ac = td(); ac.appendChild(inp(p.allow, '', v => setRowPrice(r.id, { allowance: v })));
@@ -60850,7 +60909,7 @@ function openRateCard() {
     const card = document.createElement('div');
     card.style.cssText = 'background:var(--bg-panel); border:1px solid var(--border-color); border-radius:var(--r-8); box-shadow:0 15px 35px rgba(0,0,0,0.4); width:640px; max-width:94vw; max-height:88vh; overflow:auto; padding:18px; display:flex; flex-direction:column; gap:10px; font-size:var(--fs-70);';
     const rc = _rateCard() || _rateCardLoadLocal() || { list: [] };
-    card.innerHTML = '<h3 style="margin:0; font-size:var(--fs-95); color:var(--text-strong);">Rate card</h3><div style="color:var(--text-muted);">Estimate = base + per sq ft of the overall size, plus the adders. Used only for pieces no vendor has quoted. Date it, so every estimate says which rates it came from.</div>';
+    card.innerHTML = '<h3 style="margin:0; font-size:var(--fs-95); color:var(--text-strong);">Rate card</h3><div style="color:var(--text-muted);">Estimate = base + per sq ft of the overall size, plus the adders and add-ons. A wallcovering or window film is per sq ft alone (leave its base blank). Used only for pieces no vendor has quoted. Date it, so every estimate says which rates it came from.</div>';
     const prods = FRAME_PRODUCTS.slice();
     const tbl = document.createElement('table'); tbl.id = 'rateCardTable'; tbl.style.cssText = 'border-collapse:collapse; width:100%;';
     tbl.innerHTML = '<thead><tr style="text-align:left; color:var(--text-muted);"><th>Product</th><th>Base</th><th>Per sq ft</th><th>Float mount</th><th>Double mat</th></tr></thead>';
@@ -60862,6 +60921,22 @@ function openRateCard() {
         tb.appendChild(tr);
     });
     card.appendChild(tbl);
+    // 19.97: the add-ons, one set for every product; each applies only where the piece says so
+    const ad = rc.addons || {};
+    const adBox = document.createElement('div'); adBox.id = 'rateCardAddons'; adBox.style.cssText = 'display:flex; flex-direction:column; gap:4px;';
+    adBox.innerHTML = '<div style="font-weight:700; color:var(--text-strong); margin-top:4px;">Add-ons, per piece</div>';
+    [['premiumFrame', 'Premium frame', 'Added when the frame code is a Larson-Juhl (LJ-) or Universal Arquati (UA-) moulding'],
+     ['nonGlare', 'Non-glare glass, at 30x40', 'Added when the Glass field says non-glare, anti-reflective or museum; scaled by the piece’s area against a 30 x 40'],
+     ['sealant', 'Moisture sealant', 'Added when the location reads as humid (bath, restroom, spa, pool, shower, locker); a piece can be switched on the Pricing tab'],
+     ['oversize', 'Oversize, past 40x50', 'Added when the overall size is bigger than 40 x 50 either way round'],
+     ['buffer', 'Buffer %', 'A percentage on top of every estimate']].forEach(([k, label, tip]) => {
+        const l = document.createElement('label'); l.style.cssText = 'display:flex; gap:6px; align-items:center;'; l.title = tip;
+        const t = document.createElement('span'); t.textContent = label; t.style.cssText = 'width:170px;';
+        const i = document.createElement('input'); i.type = 'text'; i.setAttribute('data-addon', k); i.value = ad[k] != null ? ad[k] : ''; i.style.cssText = 'width:70px; height:24px;';
+        l.appendChild(t); l.appendChild(i); adBox.appendChild(l);
+    });
+    card.appendChild(adBox);
+    const readAddons = () => { const o = {}; adBox.querySelectorAll('input[data-addon]').forEach(i => { o[i.getAttribute('data-addon')] = i.value; }); return o; };
     const dateRow = document.createElement('label'); dateRow.style.cssText = 'display:flex; gap:6px; align-items:center;'; dateRow.textContent = 'Rates as of';
     const di = document.createElement('input'); di.type = 'date'; di.id = 'rateCardAsOf'; di.value = rc.asOf || _todayIso(); dateRow.appendChild(di); card.appendChild(dateRow);
     const read = () => Array.prototype.map.call(tb.querySelectorAll('tr[data-rate]'), tr => {
@@ -60870,9 +60945,9 @@ function openRateCard() {
         return o;
     }).filter(o => ['base', 'perSqFt', 'floatMount', 'doubleMat'].some(k => _priceNum(o[k]) != null));
     const foot = document.createElement('div'); foot.style.cssText = 'display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;';
-    const saveLocal = _prodBtn('Keep as my rate card', () => { setRateCard(read(), di.value); _rateCardSaveLocal(); _toast('Rate card kept', 'New projects on this computer can start from it.'); }, true, 'Save these rates on this computer for your next projects');
+    const saveLocal = _prodBtn('Keep as my rate card', () => { setRateCard(read(), di.value, readAddons()); _rateCardSaveLocal(); _toast('Rate card kept', 'New projects on this computer can start from it.'); }, true, 'Save these rates on this computer for your next projects');
     const cancel = _prodBtn('Cancel', () => m.remove(), true); cancel.setAttribute('data-modal-close', '');
-    const ok = _prodBtn('Save', () => { setRateCard(read(), di.value); m.remove(); _prodShow(); }, false);
+    const ok = _prodBtn('Save', () => { setRateCard(read(), di.value, readAddons()); m.remove(); _prodShow(); }, false);
     foot.appendChild(saveLocal); foot.appendChild(cancel); foot.appendChild(ok);
     card.appendChild(foot);
     m.appendChild(card); document.body.appendChild(m);
